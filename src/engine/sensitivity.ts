@@ -51,7 +51,15 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
   const relevant = rowsFeeding(m);
   const pointInputs: string[] = [];
   for (const r of m.rows) {
-    if (!relevant.has(r.id) || r.node) continue;
+    if (!relevant.has(r.id)) continue;
+    if (r.node) {
+      // A calculated row with a published range is varied as a whole.
+      if (r.range) {
+        swings.push(swing(r.id, r.label, "row", "estimate", r.range.low, r.range.high,
+          line(av, { [r.id]: r.range.low }), line(av, { [r.id]: r.range.high })));
+      }
+      continue;
+    }
     const range = inputRange(r, view);
     if (!hasRange(range)) { pointInputs.push(r.id); continue; }
     const low = pickValue(range, "low");

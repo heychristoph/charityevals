@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ModelView from "../components/ModelView.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
+import VariantList from "../components/VariantList.tsx";
 import { lib, rankable } from "../lib/data";
 
 export function getStaticPaths() {
@@ -10,9 +11,12 @@ export function getStaticPaths() {
 
 const model = lib.models.get(Astro.params.id!)!;
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
-const Writeup = writeups[`../../writeups/${model.id}.md`]?.Content;
+// Variants share their parent's write-up unless they have their own.
+const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
+const Writeup = writeupId ? writeups[`../../writeups/${writeupId}.md`].Content : undefined;
 const parent = model.extends ? lib.models.get(model.extends) : undefined;
-const variants = rankable.filter((m) => m.extends === model.id);
+const root = parent && model.kind === "variant" ? parent : model;
+const family = [root, ...rankable.filter((m) => m.extends === root.id && m.kind === "variant")];
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
@@ -24,6 +28,16 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       <header class="m-header">
         <h1>{model.name}</h1>
         {model.summary && <p class="dek">{model.summary}</p>}
+        {model.org?.donate && (
+          <div class="donate">
+            <a class="donate-button" href={model.org.donate} rel="noopener">Donate to {model.org.name}{model.org.donate_via && ` via ${model.org.donate_via}`}<span aria-hidden="true"> ↗</span></a>
+            <span class="small muted">
+              {model.org.donate_via
+                ? `Goes to ${model.org.donate_via}'s donation form, where you can direct your gift to ${model.org.name}.`
+                : `Goes to ${model.org.name}'s own donation page.`} charityevals takes nothing and isn't paid for listings.
+            </span>
+          </div>
+        )}
         <dl class="m-meta small">
           {model.org?.website && (
             <div><dt>Organisation</dt><dd><a href={model.org.website}>{model.org.name}</a></dd></div>
@@ -40,15 +54,20 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           {model.source?.published && <div><dt>Published</dt><dd>{fmtDate(model.source.published)}, retrieved {fmtDate(model.source.retrieved)}</dd></div>}
           {model.source?.license && <div><dt>Licence</dt><dd>{model.source.license}</dd></div>}
           {parent && <div><dt>Extends</dt><dd><a href={`/${parent.id}`}>{parent.name}</a>: inherits every row and overrides a few</dd></div>}
-          {variants.length > 0 && (
-            <div><dt>Variants</dt><dd>{variants.map((v, i) => <>{i > 0 && ", "}<a href={`/${v.id}`}>{v.name}</a></>)}</dd></div>
-          )}
+
           <div>
             <dt>Model file</dt>
             <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/models/${model.cause}/${model.id}.json`}>{model.id}.json</a> · <a href={`/${model.id}/history`}>change history</a></dd>
           </div>
         </dl>
       </header>
+      {family.length > 1 && (
+        <details class="family" open={family.length <= 8}>
+          <summary>{family.length} countries and programs in {root.source?.publisher ?? "the"} model</summary>
+          <p class="small muted">Same model, each with its own inputs. Multiples of GiveDirectly, under your assumptions.</p>
+          <VariantList client:load ids={family.map((m) => m.id)} current={model.id} />
+        </details>
+      )}
       <ModelView client:load id={model.id}>
         {Writeup && (
           <section class="writeup" aria-labelledby="writeup-title">
@@ -110,6 +129,55 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     font-size: 18px;
     color: var(--ink-2);
     max-width: var(--measure);
+  }
+  .family {
+    margin: calc(var(--s3) * -1) 0 var(--s6);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s3) var(--s4);
+  }
+  .family summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .family :global(.variant-list) {
+    list-style: none;
+    padding: 0;
+    margin: var(--s2) 0 0;
+    columns: 2 260px;
+    column-gap: var(--s6);
+  }
+  .family :global(.variant-list li) {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s3);
+    padding: 3px 0;
+    border-bottom: 1px solid var(--rule);
+    break-inside: avoid;
+  }
+  .family :global(.variant-list li.current a) {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .donate {
+    display: flex;
+    gap: var(--s2) var(--s4);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .donate-button {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--paper);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: var(--radius);
+  }
+  .donate-button:hover {
+    background: var(--blue-ink);
+    color: var(--paper);
   }
   .m-meta {
     display: grid;

@@ -99,7 +99,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
     }
 
     const rows: (RowPatch & Partial<ResolvedRow>)[] = parent
-      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, expected: _e, ...r }) => ({
+      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, expected: _e, range: _r, ...r }) => ({
           ...r,
           inheritedFrom: r.inheritedFrom ?? parent!.id,
           overridden: undefined,
@@ -112,6 +112,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
       // Switching an inherited row between input and formula drops the other side.
       if (patch.value !== undefined) delete merged.formula;
       if (patch.formula !== undefined) { delete merged.value; delete merged.kind; delete merged.published; }
+      if (patch.value !== undefined) delete merged.range;
       merged.overridden = Object.keys(patch).filter((k) => k !== "id" && k !== "expected");
       rows[i] = merged;
     }
@@ -241,7 +242,7 @@ export function compute(
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   for (const id of m.order) {
     const r = m.byId.get(id)!;
-    vals[id] = r.node ? evaluate(r.node, lookup) : inputs[id] ?? inputValue(r, view);
+    vals[id] = inputs[id] ?? (r.node ? evaluate(r.node, lookup) : inputValue(r, view));
   }
   return vals;
 }

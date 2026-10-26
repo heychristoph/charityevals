@@ -46,7 +46,7 @@ for (const m of lib.models.values()) {
     else matched++;
   }
   if (!m.output) { console.log(`${m.id}: template, ${matched} expected values reproduced`); continue; }
-  if (!existsSync(join(root, "writeups", `${m.id}.md`))) errors.push(`${m.id}: missing write-up writeups/${m.id}.md`);
+  if (m.kind === "charity" && !existsSync(join(root, "writeups", `${m.id}.md`))) errors.push(`${m.id}: missing write-up writeups/${m.id}.md`);
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");
   console.log(

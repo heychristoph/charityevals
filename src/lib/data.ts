@@ -14,5 +14,8 @@ export const lib = buildLibrary(
 
 if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib.errors.join("\n")}`);
 
-/** Ranked models: charities and their variants, not templates. */
+/** Models with a page: charities and their variants, not templates. */
 export const rankable = [...lib.models.values()].filter((m) => m.kind !== "template" && m.output);
+
+/** Models on the rankings: one row per charity; variants (other countries) live on its page. */
+export const ranked = rankable.filter((m) => m.kind === "charity");

@@ -36,6 +36,10 @@ const rowShape = {
   value: z.union([z.number(), Range]).optional(),
   /** Calculated rows: a formula over other rows, $assumptions and @facts. */
   formula: z.string().optional(),
+  /** A published uncertainty range for a calculated row (e.g. GiveWell's 25th–75th percentile of
+   * "years of effective coverage"). Sensitivity varies the row across it; the central value stays
+   * the formula's. */
+  range: z.object({ low: z.number(), high: z.number(), note: z.string().optional() }).strict().optional(),
   /** The source evaluator's value, when ours differs. The evaluator view uses it; the explainer
    * must say why we differ. */
   published: z.union([z.number(), Range]).optional(),
@@ -58,6 +62,8 @@ export const Row = z
       ctx.addIssue({ code: "custom", message: `row ${r.id}: input rows need a kind` });
     if (r.value !== undefined && !r.source && !r.explainer)
       ctx.addIssue({ code: "custom", message: `row ${r.id}: input rows need a source or an explainer` });
+    if (r.range !== undefined && r.formula === undefined)
+      ctx.addIssue({ code: "custom", message: `row ${r.id}: range is for calculated rows; give inputs a low/best/high value` });
     if (r.published !== undefined && (r.value === undefined || !r.explainer))
       ctx.addIssue({ code: "custom", message: `row ${r.id}: a published value needs our own value and an explainer saying why they differ` });
   });
@@ -80,7 +86,17 @@ export const Model = z
     kind: z.enum(["charity", "variant", "template"]),
     cause: Cause,
     extends: z.string().optional(),
-    org: z.object({ name: z.string(), website: z.string().url().optional() }).strict().optional(),
+    org: z
+      .object({
+        name: z.string(),
+        website: z.string().url().optional(),
+        /** Where to give: the charity's own donation page, or an evaluator's fund for it. */
+        donate: z.string().url().optional(),
+        /** Set when `donate` goes through an evaluator's form rather than the charity's own page. */
+        donate_via: z.string().optional(),
+      })
+      .strict()
+      .optional(),
     summary: z.string().optional(),
     source: z
       .object({

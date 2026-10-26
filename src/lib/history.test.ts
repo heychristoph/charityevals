@@ -11,7 +11,9 @@ const repo = join(import.meta.dirname, "../..");
 describe("model history", () => {
   it("recomputes the bottom line at each commit and lists changed rows", () => {
     const dir = mkdtempSync(join(tmpdir(), "ce-history-"));
-    for (const d of ["models", "facts", "assumptions"]) cpSync(join(repo, d), join(dir, d), { recursive: true });
+    for (const d of ["facts", "assumptions"]) cpSync(join(repo, d), join(dir, d), { recursive: true });
+    for (const f of ["animal-welfare/sinergia-animal.json", "global-health/givedirectly.json"])
+      cpSync(join(repo, "models", f), join(dir, "models", f));
     const g = (...args: string[]) =>
       execFileSync("git", args, { cwd: dir, env: { ...process.env, GIT_AUTHOR_NAME: "T", GIT_AUTHOR_EMAIL: "t@example.com", GIT_COMMITTER_NAME: "T", GIT_COMMITTER_EMAIL: "t@example.com" } });
     g("init", "-q");
