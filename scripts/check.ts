@@ -4,7 +4,7 @@
 //   npm run check -- <id>    one model, with its tornado
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, bottomLine } from "../src/engine/model";
+import { buildLibrary, assumptionValues, compute, bottomLine, comparable } from "../src/engine/model";
 import { sensitivity, flags } from "../src/engine/sensitivity";
 
 const root = join(import.meta.dirname, "..");
@@ -49,6 +49,10 @@ for (const m of lib.models.values()) {
   if (m.kind === "charity" && !existsSync(join(root, "writeups", `${m.id}.md`))) errors.push(`${m.id}: missing write-up writeups/${m.id}.md`);
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");
+  if (!comparable(lib, m)) {
+    console.log(`${m.id.padEnd(22)} ${fmt(vals[m.output.row])} ${m.output.unit}/$  [${fmt(s.jointLow)} – ${fmt(s.jointHigh)}]  not ranked (no exchange rate)  ${matched} expected values reproduced`);
+    continue;
+  }
   console.log(
     `${m.id.padEnd(22)} ${fmt(vals[m.output.row])} ${m.output.unit}/$  ` +
       `evaluator ${(se.central / benchEval).toFixed(1)}×  ` +

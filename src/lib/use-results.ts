@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { lib, ranked } from "./data";
-import { assumptionValues, bottomLine, type ResolvedModel, type View } from "../engine/model";
+import { assumptionValues, bottomLine, comparable, type ResolvedModel, type View } from "../engine/model";
 import { sensitivity, flags, rankFlips, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides, useView } from "./assumption-state";
 
@@ -37,7 +37,8 @@ export function useResultsFor(models: ResolvedModel[]) {
 function resultOf(m: ResolvedModel, av: Record<string, number>, view: View): Result {
   const benchModel = lib.models.get(lib.assumptions.common.benchmark)!;
   const viewOf = (x: ResolvedModel): View => (view === "evaluator" && x.evaluator ? "evaluator" : "charityevals");
-  const bench = bottomLine(lib, benchModel, av, {}, viewOf(benchModel)).common;
+  // Unconvertible units stay in their own unit: no division by the benchmark.
+  const bench = comparable(lib, m) ? bottomLine(lib, benchModel, av, {}, viewOf(benchModel)).common : 1;
   const v = viewOf(m);
   const s = sensitivity(lib, m, av, v);
   return { model: m, view: v, native: bottomLine(lib, m, av, {}, v).native, central: s.central / bench, low: s.jointLow / bench, high: s.jointHigh / bench, s, flags: flags(m, s) };
