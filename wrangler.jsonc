@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // A static site: no Worker script, Cloudflare serves the Astro build directly.
+  "name": "charityevals",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "charityevals.org", "custom_domain": true },
+    { "pattern": "www.charityevals.org", "custom_domain": true }
+  ]
+}
