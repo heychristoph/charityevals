@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/Base.astro";
+import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
+import { lib } from "../lib/data";
+import { formatValue } from "../lib/format";
+
+const groups = new Map<string, typeof lib.facts extends Map<string, infer F> ? F[] : never>();
+for (const f of lib.facts.values()) groups.set(f.group, [...(groups.get(f.group) ?? []), f]);
+const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.some((r) => r.factDeps.includes(key)) && !m.extends);
+---
+
+<Base title="Assumptions" active="assumptions">
+  <div class="page wrap">
+    <header class="intro">
+      <h1>Shared assumptions</h1>
+      <p class="dek">
+        Every model on the site reads these values. Most are value judgments rather than facts, and they decide most cross-cause comparisons. Your changes are saved in this browser and in the page address, so you can share a link to your set.
+      </p>
+    </header>
+    <AssumptionsPanel client:load compact={false} />
+
+    <section class="facts" aria-labelledby="facts-title">
+      <h2 id="facts-title">Shared facts</h2>
+      <p class="muted">
+        Data that more than one model needs, such as a country's child mortality rate, lives in one file per place so every model uses the same number. These are observations, not judgments, so they aren't adjustable here; corrections go through a pull request with a source.
+      </p>
+      {[...groups].map(([group, rows]) => (
+        <div class="fact-group">
+          <h3>{group}</h3>
+          <table>
+            {rows.map((f) => (
+              <tr id={`f-${f.key}`}>
+                <th scope="row">
+                  {f.label}
+                  <span class="small muted fact-meta">
+                    {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
+                    {" · used by "}
+                    {usedBy(f.key).map((m, i) => <>{i > 0 && ", "}<a href={`/${m.id}`}>{m.name}</a></>)}
+                    {" · "}<code>@{f.key}</code>
+                  </span>
+                </th>
+                <td class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+    </section>
+  </div>
+</Base>
+
+<style>
+  .wrap {
+    max-width: 820px;
+    padding-top: var(--s6);
+  }
+  .intro {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .dek {
+    font-size: 19px;
+    color: var(--ink-2);
+  }
+  .facts {
+    margin-top: var(--s7);
+    display: grid;
+    gap: var(--s3);
+  }
+  .fact-group h3 {
+    font-size: 18px;
+    margin: var(--s4) 0 var(--s2);
+  }
+  .facts table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .facts th {
+    text-align: left;
+    font-weight: 400;
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .facts td {
+    text-align: right;
+    font-weight: 600;
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .fact-meta {
+    display: block;
+  }
+  .facts tr:target {
+    background: var(--blue-wash);
+  }
+</style>

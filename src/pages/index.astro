@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import Rankings from "../components/Rankings.tsx";
+import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
+
+---
+
+<Base title="charityevals" active="rankings">
+  <div class="page layout">
+    <div class="main">
+      <header class="intro">
+        <h1>Which charities do the most good per dollar, on your assumptions?</h1>
+        <p class="dek">
+          Published cost-effectiveness analyses, rebuilt so every number has a source, a range and an explanation, and re-ranked live by the assumptions you set.
+        </p>
+      </header>
+      <Rankings client:load />
+    </div>
+    <aside class="side" aria-label="Assumptions">
+      <AssumptionsPanel client:load />
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--s7);
+    align-items: start;
+    padding-top: var(--s6);
+  }
+  .intro {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .dek {
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  @media (max-width: 1000px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: var(--s6);
+    }
+  }
+</style>
