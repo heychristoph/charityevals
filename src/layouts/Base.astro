@@ -4,14 +4,17 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
-  active?: "rankings" | "assumptions" | "method";
+  active?: "rankings" | "assumptions" | "method" | "about";
 }
 const { title, description = "Open cost-effectiveness analyses for charities. Every number has a source, a range and an explanation, and your own assumptions re-rank everything.", active } = Astro.props;
 const fullTitle = title === "charityevals" ? title : `${title} · charityevals`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
 const nav = [
   { id: "rankings", href: "/", label: "Rankings" },
   { id: "assumptions", href: "/assumptions", label: "Assumptions" },
   { id: "method", href: "/method", label: "Method" },
+  { id: "about", href: "/about", label: "About" },
 ];
 ---
 
@@ -22,6 +25,17 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="charityevals" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -36,7 +50,6 @@ const nav = [
           {nav.map((n) => (
             <a href={n.href} aria-current={active === n.id ? "page" : undefined}>{n.label}</a>
           ))}
-          <a href="https://github.com/heychristoph/charityevals">GitHub</a>
         </nav>
       </div>
     </header>
@@ -45,11 +58,17 @@ const nav = [
     </main>
     <footer class="site-footer">
       <div class="page foot">
+        <nav class="foot-links" aria-label="Site">
+          <a href="/about">About</a>
+          <a href="/method">Method</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/legal">Legal notice</a>
+          <a href="https://github.com/heychristoph/charityevals">GitHub</a>
+          <a href="mailto:hello@charityevals.org">hello@charityevals.org</a>
+        </nav>
         <p>
-          Models are re-implementations of published analyses, credited on each page. GiveWell and ACE have not reviewed or endorsed this site.
-        </p>
-        <p>
-          Code MIT. GiveWell-derived models CC BY-NC-SA 3.0 US. <a href="https://github.com/heychristoph/charityevals">Source and change history on GitHub</a>.
+          Models are re-implementations of published analyses, credited on each page. GiveWell and ACE have not reviewed or endorsed this site. Estimates are for research, not financial advice.
         </p>
       </div>
     </footer>
@@ -101,6 +120,15 @@ const nav = [
     margin-top: var(--s8);
     border-top: 1px solid var(--rule);
     background: var(--paper-2);
+  }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2) var(--s5);
+    font-size: 14px;
+  }
+  .foot-links a {
+    color: var(--ink-2);
   }
   .foot {
     padding-top: var(--s5);

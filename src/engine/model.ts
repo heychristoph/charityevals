@@ -31,7 +31,7 @@ export type Library = {
 };
 
 /** Model pages live at /<id>, so these ids are taken by the site's own pages. */
-export const RESERVED_IDS = new Set(["assumptions", "method", "facts", "history", "index", "404", "api"]);
+export const RESERVED_IDS = new Set(["assumptions", "method", "facts", "history", "index", "404", "api", "about", "privacy", "terms", "legal"]);
 
 /** charityevals: our model, with the visitor's assumptions and accounting choices.
  * evaluator: the source evaluator's model as published (where we have one). */

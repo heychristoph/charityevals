@@ -1,0 +1,52 @@
+---
+// Long-form text pages: about, privacy, terms, legal notice.
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  updated?: string;
+  active?: "about";
+}
+const { title, description, updated, active } = Astro.props;
+---
+
+<Base title={title} description={description} active={active}>
+  <article class="page prose wrap">
+    <h1>{title}</h1>
+    {updated && <p class="updated small muted">Last updated {updated}</p>}
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .wrap {
+    max-width: 760px;
+    padding-top: var(--s6);
+  }
+  h1 {
+    margin-bottom: var(--s2);
+  }
+  .updated {
+    margin-bottom: var(--s5);
+  }
+  .wrap :global(h2) {
+    font-size: 22px;
+    margin: var(--s6) 0 var(--s3);
+  }
+  .wrap :global(p + p),
+  .wrap :global(ul + p),
+  .wrap :global(p + ul) {
+    margin-top: var(--s3);
+  }
+  .wrap :global(ul) {
+    padding-left: 1.3em;
+    margin: 0;
+  }
+  .wrap :global(li + li) {
+    margin-top: var(--s1);
+  }
+  .wrap :global(address) {
+    font-style: normal;
+  }
+</style>
