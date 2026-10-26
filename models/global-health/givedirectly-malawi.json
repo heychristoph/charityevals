@@ -1,0 +1,109 @@
+{
+  "id": "givedirectly-malawi",
+  "name": "GiveDirectly (Malawi)",
+  "kind": "variant",
+  "cause": "global-health",
+  "extends": "givedirectly",
+  "summary": "Same model as GiveDirectly (Kenya), with GiveWell's Malawi inputs. Recipients are poorer, so the same transfer counts for more. Shows how a model inherits everything from a parent and overrides only what differs.",
+  "rows": [
+    {
+      "id": "transfer_per_household",
+      "value": 1000,
+      "source": {
+        "title": "GiveDirectly program data via GiveWell",
+        "cell": "New CEA!C5"
+      }
+    },
+    {
+      "id": "ppp_factor",
+      "formula": "@malawi.ppp_factor_2017",
+      "explainer": "From the shared Malawi facts. A dollar buys about 2.9 times as much in Malawi as in the US.",
+      "expected": 2.931586251
+    },
+    {
+      "id": "household_size",
+      "value": 4.5,
+      "source": {
+        "title": "GiveDirectly data via GiveWell",
+        "cell": "Baseline!C4"
+      }
+    },
+    {
+      "id": "baseline_consumption",
+      "value": {
+        "low": 399.4871269,
+        "best": 469.9848552,
+        "high": 540.4825835
+      },
+      "source": {
+        "title": "GiveWell baseline consumption estimate",
+        "cell": "Baseline!C36"
+      },
+      "explainer": "About $1.29 a day, well below Kenya. Range applies GiveWell's ±15% to the Malawi figure."
+    },
+    {
+      "id": "later_years_ratio",
+      "value": {
+        "low": 0.8163498696,
+        "best": 1.360583116,
+        "high": 1.904816362
+      },
+      "source": {
+        "title": "GiveWell Consumption tab",
+        "cell": "Consumption!C23"
+      },
+      "explainer": "Higher than Kenya because the invested share is larger relative to baseline consumption. Range applies GiveWell's ±40% to the Malawi figure."
+    },
+    {
+      "id": "ev_adj_spillovers",
+      "value": {
+        "low": 0.28,
+        "best": 0.7,
+        "high": 1.12
+      },
+      "source": {
+        "cell": "New CEA!C34"
+      },
+      "explainer": "Lower than Kenya: Malawi is further from the Egger et al. setting. Range applies GiveWell's ±60%."
+    },
+    {
+      "id": "under5_share",
+      "value": 0.1512502679,
+      "source": {
+        "title": "GiveWell Equivalence tab",
+        "cell": "Equivalence!C20/C41"
+      }
+    },
+    {
+      "id": "under5_mortality_country",
+      "label": "Under-five mortality rate, Malawi (2023)",
+      "formula": "@malawi.under5_mortality_2023",
+      "explainer": "National average, from the shared Malawi facts.",
+      "expected": 0.0400934
+    },
+    {
+      "id": "households",
+      "expected": 840
+    },
+    {
+      "id": "consumption_uov",
+      "expected": 6746.103174
+    },
+    {
+      "id": "spillover_uov",
+      "expected": 3984.842192
+    },
+    {
+      "id": "mortality_uov",
+      "expected": 1105.972826
+    },
+    {
+      "id": "uov_per_dollar",
+      "expected": 0.01278387165
+    },
+    {
+      "id": "multiple_of_cash",
+      "expected": 3.810393934
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: "rankings" | "assumptions" | "method";
+}
+const { title, description = "Open cost-effectiveness analyses for charities. Every number has a source, a range and an explanation, and your own assumptions re-rank everything.", active } = Astro.props;
+const fullTitle = title === "charityevals" ? title : `${title} · charityevals`;
+const nav = [
+  { id: "rankings", href: "/", label: "Rankings" },
+  { id: "assumptions", href: "/assumptions", label: "Assumptions" },
+  { id: "method", href: "/method", label: "Method" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#2f5fb3" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="page bar">
+        <a class="wordmark" href="/" aria-label="charityevals, home"><img src="/logo.svg" alt="charityevals" width="190" height="32" /></a>
+        <nav aria-label="Main">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={active === n.id ? "page" : undefined}>{n.label}</a>
+          ))}
+          <a href="https://github.com/heychristoph/charityevals">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="page foot">
+        <p>
+          Models are re-implementations of published analyses, credited on each page. GiveWell and ACE have not reviewed or endorsed this site.
+        </p>
+        <p>
+          Code MIT. GiveWell-derived models CC BY-NC-SA 3.0 US. <a href="https://github.com/heychristoph/charityevals">Source and change history on GitHub</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .bar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s5);
+    padding-top: var(--s4);
+    padding-bottom: var(--s4);
+    flex-wrap: wrap;
+  }
+  .wordmark {
+    display: block;
+    line-height: 0;
+    align-self: center;
+  }
+  .wordmark img {
+    height: 32px;
+    width: auto;
+  }
+  nav {
+    display: flex;
+    gap: var(--s5);
+    font-size: 15px;
+  }
+  nav a {
+    color: var(--ink-2);
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover {
+    color: var(--ink);
+  }
+  nav a[aria-current="page"] {
+    color: var(--ink);
+    border-bottom-color: var(--blue);
+  }
+  .site-footer {
+    margin-top: var(--s8);
+    border-top: 1px solid var(--rule);
+    background: var(--paper-2);
+  }
+  .foot {
+    padding-top: var(--s5);
+    padding-bottom: var(--s6);
+    display: grid;
+    gap: var(--s2);
+    font-size: 14px;
+    color: var(--ink-2);
+    max-width: var(--page);
+  }
+  @media (max-width: 640px) {
+    nav {
+      gap: var(--s4);
+    }
+  }
+</style>

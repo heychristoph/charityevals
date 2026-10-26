@@ -1,0 +1,39 @@
+# Checks for every pull request and every push to main: schema, formulas, reproduction of each
+# source's published numbers (`expected`), engine tests, types, and the site build.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # the history pages rebuild every past version of each model
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: package.json # engines.node
+          cache: npm
+
+      - run: npm ci
+      - name: Validate models
+        run: npm run check
+      - run: npm test
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Build site
+        run: npx astro build

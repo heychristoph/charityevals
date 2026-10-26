@@ -1,0 +1,478 @@
+{
+  "id": "sinergia-animal",
+  "name": "Sinergia Animal",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "org": {
+    "name": "Sinergia Animal",
+    "website": "https://www.sinergiaanimal.org"
+  },
+  "summary": "Corporate campaigns for farmed animals in Latin America and Southeast Asia: cage-free egg commitments, pig welfare commitments in Brazil, and replacing meat in institutional meals. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet for its 2025 recommendation, covering three programs (about 84% of programme spending).",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Sinergia Animal – 2025 Recommended Charity",
+    "url": "https://animalcharityevaluators.org/charity-review/sinergia-animal/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1BcZB3WeYarZC67MgFUjGKLWdLw2WVVZO8LitYcQb3fU/edit",
+    "published": "2025-03-01",
+    "retrieved": "2026-10-26",
+    "license": "Unclear: check ACE's terms before republishing"
+  },
+  "sections": [
+    {
+      "id": "cage_free",
+      "title": "Cage-free campaigns",
+      "explainer": "Commitments by 39 food companies to stop buying eggs from caged hens. Benefits last as long as commitments are honoured, discounted for other groups' share of the credit and for companies that renege."
+    },
+    {
+      "id": "meat_reduction",
+      "title": "Institutional meat reduction",
+      "explainer": "Nourishing Tomorrow: schools and other institutions in Argentina, Colombia and Indonesia replacing some meat meals. ACE assumes each commitment lasts a single year, likely an underestimate."
+    },
+    {
+      "id": "pig_welfare",
+      "title": "Pig welfare campaigns",
+      "explainer": "Commitments by 10 Brazilian pork producers to end gestation crates and some piglet mutilations."
+    },
+    {
+      "id": "costs",
+      "title": "Costs",
+      "explainer": "Each program's annual spending, scaled up by ACE to Sinergia's newer total budget."
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line",
+      "explainer": "Suffering averted per dollar across the three modelled programs. The remaining ~16% of programme spending (work with financial institutions) is unmodelled, not assumed to be zero or equal."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cf_commitments",
+      "section": "cage_free",
+      "label": "Corporate cage-free commitments won (2023)",
+      "format": "integer",
+      "value": 39,
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "cell": "Cage-free Campaigns CEA!B6"
+      },
+      "explainer": "Context only; the calculation works from hens covered, not the number of companies."
+    },
+    {
+      "id": "cf_hens_per_year_total",
+      "section": "cage_free",
+      "label": "Hens covered by those commitments, per year",
+      "format": "integer",
+      "value": 20685884,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE company-level estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1BiqnEWyWVy8ae-GdS62pqC-YxwRM9Bhdwq1IPtKrlvQ/edit",
+        "cell": "Cage-free Campaigns CEA!B7"
+      },
+      "explainer": "ACE's estimate from each company's egg volumes. Under shared credit (the default) only Sinergia's share counts; with full credit for shared outcomes, all of these hens do."
+    },
+    {
+      "id": "cf_hens_per_year_attributed",
+      "section": "cage_free",
+      "label": "Hens per year attributable to Sinergia",
+      "format": "integer",
+      "value": 7864022,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE company-level estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1BiqnEWyWVy8ae-GdS62pqC-YxwRM9Bhdwq1IPtKrlvQ/edit",
+        "cell": "Cage-free Campaigns CEA!B10"
+      },
+      "explainer": "ACE's estimate of the hens attributable to Sinergia, after discounting for other groups that campaigned on the same companies. ACE gives no range here, so attribution adds no uncertainty below, though it is a judgment call."
+    },
+    {
+      "id": "cf_attribution_share",
+      "section": "cage_free",
+      "label": "Sinergia's share of credit (implied)",
+      "format": "percent",
+      "formula": "cf_hens_per_year_attributed / cf_hens_per_year_total"
+    },
+    {
+      "id": "cf_hens_per_year",
+      "section": "cage_free",
+      "label": "Hens per year credited to Sinergia",
+      "format": "integer",
+      "formula": "if($full_credit, cf_hens_per_year_total, cf_hens_per_year_attributed)",
+      "expected": 7864022
+    },
+    {
+      "id": "cf_years",
+      "section": "cage_free",
+      "label": "Years the commitments last",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 15,
+        "high": 36
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Rethink Priorities, corporate campaigns for chicken welfare",
+        "url": "https://rethinkpriorities.org/publications/corporate-campaigns-affect-9-to-120-years-of-chicken-life-per-dollar-spent",
+        "cell": "Cage-free Campaigns CEA!B8"
+      },
+      "explainer": "How long the policy changes until it would have happened anyway. Rethink Priorities' 90% interval, the widest input in this model."
+    },
+    {
+      "id": "cf_hens_all_years",
+      "section": "cage_free",
+      "label": "Hen-years over the whole period (discounted)",
+      "format": "integer",
+      "formula": "pv_annuity_due(cf_hens_per_year, $discount_rate, cf_years)",
+      "expected": 90932653.11
+    },
+    {
+      "id": "cf_compliance",
+      "section": "cage_free",
+      "label": "Share of companies that keep their commitment",
+      "format": "percent",
+      "value": {
+        "low": 0.3793103448,
+        "best": 0.5341673675,
+        "high": 0.6890243902
+      },
+      "kind": "estimate",
+      "source": {
+        "cell": "Cage-free Campaigns CEA!B13:D13"
+      },
+      "explainer": "Low end: 22 of 58 companies followed through in one tracker. High end: 113 of 164 in another. Best guess is the midpoint."
+    },
+    {
+      "id": "cf_hens_impacted",
+      "section": "cage_free",
+      "label": "Hen-years improved",
+      "format": "integer",
+      "formula": "cf_hens_all_years * cf_compliance",
+      "expected": 48573255.93
+    },
+    {
+      "id": "cf_sads_per_hen",
+      "section": "cage_free",
+      "label": "SADs averted per hen-year moving from cage to aviary",
+      "unit": "SADs",
+      "format": "number",
+      "value": 17.49,
+      "kind": "estimate",
+      "source": {
+        "title": "Ambitious Impact SADs via ACE",
+        "cell": "SADs per animal!F4"
+      },
+      "explainer": "28.9 SADs for a battery-caged hen minus 11.5 for an aviary hen. ACE notes its SADs values have since been updated."
+    },
+    {
+      "id": "cf_sads",
+      "section": "cage_free",
+      "label": "SADs averted by cage-free campaigns",
+      "unit": "SADs",
+      "format": "integer",
+      "formula": "cf_hens_impacted * cf_sads_per_hen",
+      "expected": 849546246.3
+    },
+    {
+      "id": "mr_meals",
+      "section": "meat_reduction",
+      "label": "Meat meals replaced",
+      "format": "integer",
+      "value": 997510,
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "url": "https://docs.google.com/spreadsheets/d/1iqdjDP_e2ptumfvgryX0O5Me1Ty0QH-K1suGSDc1LZQ/edit",
+        "cell": "Meat reduction campaign CEA!B7"
+      },
+      "explainer": "Across 25 institutions, as reported by Sinergia. Context: the SADs row below is ACE's conversion of these meals."
+    },
+    {
+      "id": "mr_sads",
+      "section": "meat_reduction",
+      "label": "SADs averted by meals replaced",
+      "unit": "SADs",
+      "format": "integer",
+      "value": {
+        "low": 86972,
+        "best": 900203,
+        "high": 1713434
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE meals-to-SADs estimate",
+        "url": "https://docs.google.com/spreadsheets/d/1iqdjDP_e2ptumfvgryX0O5Me1Ty0QH-K1suGSDc1LZQ/edit",
+        "cell": "Meat reduction campaign CEA!B9:D9"
+      },
+      "explainer": "Fewer animals raised for the replaced meals, times the suffering in each animal's life. ACE calls the SADs-per-meal figures rough."
+    },
+    {
+      "id": "pig_sads_full",
+      "section": "pig_welfare",
+      "label": "SADs from all commitments, all years, before sharing credit",
+      "unit": "SADs",
+      "format": "integer",
+      "value": 713756752.8428571,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!AD3:AE12, divided by W3:W12"
+      },
+      "explainer": "About 0.85M sows and 18M piglets a year, over all years, discounted at 4%. ACE's sheet lists each producer's SADs after sharing credit; dividing by Sinergia's share gives the total. ACE computed years and per-animal SADs in that sheet, so they aren't separate inputs here yet."
+    },
+    {
+      "id": "pig_attribution_share",
+      "section": "pig_welfare",
+      "label": "Sinergia's share of credit",
+      "format": "percent",
+      "value": 0.7,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!W3:W12"
+      },
+      "explainer": "ACE's \"% of Sinergia's collaboration\": 70% for every producer counted. The other 30% is credited to other organisations."
+    },
+    {
+      "id": "pig_sads_attributed",
+      "section": "pig_welfare",
+      "label": "SADs credited to Sinergia",
+      "unit": "SADs",
+      "format": "integer",
+      "formula": "pig_sads_full * if($full_credit, 1, pig_attribution_share)",
+      "expected": 499629727
+    },
+    {
+      "id": "pig_compliance",
+      "section": "pig_welfare",
+      "label": "Share of producers that keep their commitment",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.575,
+        "high": 0.65
+      },
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "cell": "Pig welfare campaigns CEA!B14:D14"
+      },
+      "explainer": "Sinergia's own range. Best guess is the midpoint."
+    },
+    {
+      "id": "pig_sads",
+      "section": "pig_welfare",
+      "label": "SADs averted by pig welfare campaigns",
+      "unit": "SADs",
+      "format": "integer",
+      "formula": "pig_sads_attributed * pig_compliance",
+      "expected": 287287093
+    },
+    {
+      "id": "total_expenses_reported",
+      "section": "costs",
+      "label": "Total expenses in the year evaluated",
+      "format": "usd",
+      "value": 1343958,
+      "kind": "observed",
+      "source": {
+        "cell": "Cage-free Campaigns CEA!B21 (formula)"
+      },
+      "explainer": "The budget the program figures below were reported against."
+    },
+    {
+      "id": "total_expenses_new",
+      "section": "costs",
+      "label": "Total expenses, updated",
+      "format": "usd",
+      "value": 1578680,
+      "kind": "observed",
+      "source": {
+        "cell": "Cage-free Campaigns CEA!B21 (formula)"
+      },
+      "explainer": "ACE updated Sinergia's costs in early 2025 and scaled every program by the same ratio."
+    },
+    {
+      "id": "cost_scale",
+      "section": "costs",
+      "label": "Cost update ratio",
+      "format": "multiple",
+      "formula": "total_expenses_new / total_expenses_reported"
+    },
+    {
+      "id": "cf_cost_reported",
+      "section": "costs",
+      "label": "Cage-free spending, as reported",
+      "format": "usd",
+      "value": 773457,
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "cell": "Cage-free Campaigns CEA!B20"
+      },
+      "explainer": "Annual spending on the program."
+    },
+    {
+      "id": "mr_cost_reported",
+      "section": "costs",
+      "label": "Meat reduction spending, as reported",
+      "format": "usd",
+      "value": 248499,
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "cell": "Meat reduction campaign CEA!B12"
+      },
+      "explainer": "Annual spending on the program."
+    },
+    {
+      "id": "pig_cost_reported",
+      "section": "costs",
+      "label": "Pig welfare spending, as reported",
+      "format": "usd",
+      "value": 146413,
+      "kind": "observed",
+      "source": {
+        "title": "Sinergia Animal via ACE",
+        "cell": "Pig welfare campaigns CEA!B21"
+      },
+      "explainer": "Annual spending on the program."
+    },
+    {
+      "id": "cf_cost",
+      "section": "costs",
+      "label": "Cage-free spending",
+      "format": "usd",
+      "formula": "cf_cost_reported * cost_scale",
+      "expected": 908541.1127
+    },
+    {
+      "id": "mr_cost",
+      "section": "costs",
+      "label": "Meat reduction spending",
+      "format": "usd",
+      "formula": "mr_cost_reported * cost_scale",
+      "expected": 291899.3014
+    },
+    {
+      "id": "pig_cost",
+      "section": "costs",
+      "label": "Pig welfare spending",
+      "format": "usd",
+      "formula": "pig_cost_reported * cost_scale",
+      "expected": 171984.0016
+    },
+    {
+      "id": "cf_sads_per_dollar",
+      "section": "bottom",
+      "label": "Cage-free: SADs averted per dollar",
+      "unit": "SADs / $",
+      "format": "number",
+      "formula": "cf_sads / cf_cost",
+      "expected": 935.0663766
+    },
+    {
+      "id": "mr_sads_per_dollar",
+      "section": "bottom",
+      "label": "Meat reduction: SADs averted per dollar",
+      "unit": "SADs / $",
+      "format": "number",
+      "formula": "mr_sads / mr_cost",
+      "expected": 3.083950512
+    },
+    {
+      "id": "pig_sads_per_dollar",
+      "section": "bottom",
+      "label": "Pig welfare: SADs averted per dollar",
+      "unit": "SADs / $",
+      "format": "number",
+      "formula": "pig_sads / pig_cost",
+      "expected": 1670.42917
+    },
+    {
+      "id": "cost_total",
+      "section": "costs",
+      "label": "Spending on the three modelled programs",
+      "format": "usd",
+      "formula": "cf_cost + mr_cost + pig_cost"
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "bottom",
+      "label": "All modelled programs: SADs averted per dollar",
+      "unit": "SADs / $",
+      "format": "number",
+      "formula": "(cf_sads + mr_sads + pig_sads) / cost_total"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Campaigning is mostly people: researchers, campaigners and corporate negotiators. Advocacy nonprofits typically spend well over half their budget on staff. We haven't seen Sinergia's own breakdown, so this is a guess. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Campaigners and negotiators with these skills could earn considerably more in corporate communications, sales or consulting. Animal advocacy salaries are low even by nonprofit standards. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "unit": "SADs / $",
+      "format": "number",
+      "formula": "sads_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "sads_per_donor_dollar",
+    "unit": "sad",
+    "label": "SADs averted per dollar you give"
+  },
+  "evaluator": {
+    "name": "Animal Charity Evaluators",
+    "assumptions": {
+      "discount_rate": 0.04,
+      "count_salary_sacrifice": 0,
+      "full_credit": 0
+    }
+  }
+}
