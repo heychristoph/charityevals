@@ -5,6 +5,7 @@
 import type { Kind } from "./schema";
 import {
   bottomLine,
+  comparable,
   hasRange,
   inputRange,
   pickValue,
@@ -42,7 +43,9 @@ export type Sensitivity = {
 };
 
 export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, number>, view: View = "charityevals"): Sensitivity {
-  const line = (a: Record<string, number>, inputs: Record<string, number> = {}) => bottomLine(lib, m, a, inputs, view).common;
+  // Models in a unit with no exchange rate are analysed in their own unit.
+  const key = comparable(lib, m) ? "common" : "native";
+  const line = (a: Record<string, number>, inputs: Record<string, number> = {}) => bottomLine(lib, m, a, inputs, view)[key];
   const central = line(av);
   const swings: Swing[] = [];
   // Central values of assumptions in this view (the evaluator view pins some).
@@ -81,7 +84,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     const low = Math.min(pickValue(a.value, "low"), pinned[id]);
     const high = Math.max(pickValue(a.value, "high"), pinned[id]);
     const at = (v: number) => (view === "evaluator" && m.evaluator?.assumptions[id] !== undefined
-      ? bottomLine(lib, { ...m, evaluator: { ...m.evaluator, assumptions: { ...m.evaluator.assumptions, [id]: v } } }, av, {}, view).common
+      ? bottomLine(lib, { ...m, evaluator: { ...m.evaluator, assumptions: { ...m.evaluator.assumptions, [id]: v } } }, av, {}, view)[key]
       : line({ ...av, [id]: v }));
     swings.push(swing(id, a.label, "assumption", a.kind, low, high, at(low), at(high)));
   }
@@ -99,7 +102,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
       } else inputs[s.id] = v;
     }
     const mm = view === "evaluator" && m.evaluator ? { ...m, evaluator: { ...m.evaluator, assumptions: pins } } : m;
-    return bottomLine(lib, mm, a, inputs, view).common;
+    return bottomLine(lib, mm, a, inputs, view)[key];
   };
 
   const total = swings.reduce((t, s) => t + s.logSwing, 0);

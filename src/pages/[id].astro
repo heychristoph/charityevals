@@ -17,6 +17,15 @@ const Writeup = writeupId ? writeups[`../../writeups/${writeupId}.md`].Content :
 const parent = model.extends ? lib.models.get(model.extends) : undefined;
 const root = parent && model.kind === "variant" ? parent : model;
 const family = [root, ...rankable.filter((m) => m.extends === root.id && m.kind === "variant")];
+const RES_GROUPS = [
+  ["evaluation", "Evaluations"],
+  ["model", "Models and spreadsheets"],
+  ["study", "Studies and research"],
+  ["data", "Data and documents"],
+  ["charity", "From the charity"],
+  ["other", "Other sources"],
+] as const;
+const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: (model.resources ?? []).filter((r) => r.type === type) })).filter((g) => g.items.length);
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
@@ -76,6 +85,26 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </section>
         )}
       </ModelView>
+      {resources.length > 0 && (
+        <section class="resources" aria-labelledby="resources-title">
+          <h2 id="resources-title">Evidence and sources</h2>
+          <p class="muted small">Everything the evaluation links to, so you can check it yourself. Collected from {model.source?.publisher ?? "the evaluator"}'s review.</p>
+          {resources.map((g) => (
+            <div class="res-group">
+              <h3>{g.title} <span class="muted small num">{g.items.length}</span></h3>
+              <ul>
+                {g.items.slice(0, 8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a>{r.note && <span class="muted small"> · {r.note}</span>}</li>)}
+              </ul>
+              {g.items.length > 8 && (
+                <details>
+                  <summary class="small">Show {g.items.length - 8} more</summary>
+                  <ul>{g.items.slice(8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a></li>)}</ul>
+                </details>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
     </div>
     <aside class="side" aria-label="Assumptions">
       <AssumptionsPanel client:load />
@@ -129,6 +158,32 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     font-size: 18px;
     color: var(--ink-2);
     max-width: var(--measure);
+  }
+  .resources {
+    margin-top: var(--s7);
+    padding-top: var(--s5);
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: var(--s4);
+  }
+  .res-group h3 {
+    font-size: 17px;
+    margin-bottom: var(--s2);
+  }
+  .res-group ul {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 3px;
+    font-size: 15px;
+  }
+  .res-group a {
+    overflow-wrap: anywhere;
+  }
+  .res-group details summary {
+    cursor: pointer;
+    color: var(--blue);
+    margin: var(--s2) 0;
   }
   .family {
     margin: calc(var(--s3) * -1) 0 var(--s6);

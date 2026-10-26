@@ -2,7 +2,7 @@ import type React from "react";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
 import { lib } from "../lib/data";
-import { compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
+import { comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
 import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
@@ -35,6 +35,8 @@ function Formula({ text, model }: { text: string; model: ResolvedModel }) {
 
 function Tornado({ model }: { model: ResolvedModel }) {
   const r = useResultFor(model);
+  const cmp = comparable(lib, model);
+  const fmt = (v: number) => (cmp ? formatMultiple(v) : formatValue(v, Math.abs(v) < 0.1 ? "small" : "number"));
   const bench = r.s.central / r.central;
   const rows = r.s.swings.slice(0, 8);
   const lo = Math.min(r.low, ...rows.map((s) => Math.min(s.atLow, s.atHigh) / bench));
@@ -57,7 +59,7 @@ function Tornado({ model }: { model: ResolvedModel }) {
         <h2>What drives this result</h2>
         <p className="muted small">
           Each bar moves one input from the low to the high end of its range, holding the rest at their central values. Log scale,
-          as a multiple of GiveDirectly. Dashed line: central estimate.
+          {cmp ? " as a multiple of GiveDirectly." : ` in ${lib.assumptions.units[model.output!.unit].label} per dollar.`} Dashed line: central estimate.
         </p>
       </figcaption>
       <div className="t-chart" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
@@ -65,7 +67,7 @@ function Tornado({ model }: { model: ResolvedModel }) {
           <span />
           <div className="t-track">
             {decades.map((d) => (
-              <span key={d} className="t-tick num small" style={{ left: x(d) }}>{formatMultiple(d)}</span>
+              <span key={d} className="t-tick num small" style={{ left: x(d) }}>{fmt(d)}</span>
             ))}
           </div>
         </div>
@@ -83,8 +85,8 @@ function Tornado({ model }: { model: ResolvedModel }) {
                 {decades.map((d) => <span key={d} className="t-grid" style={{ left: x(d) }} />)}
                 <span className="t-bar" style={{ clipPath: clipSpan(xn(l), xn(h), "2px") }} />
                 <span className="t-central" style={{ left: x(r.central) }} />
-                <span className="t-end num small" style={{ left: x(l) }} data-side="left">{formatMultiple(l)}</span>
-                <span className="t-end num small" style={{ left: x(h) }} data-side="right">{formatMultiple(h)}</span>
+                <span className="t-end num small" style={{ left: x(l) }} data-side="left">{fmt(l)}</span>
+                <span className="t-end num small" style={{ left: x(h) }} data-side="right">{fmt(h)}</span>
               </div>
             </div>
           );
@@ -236,27 +238,40 @@ export default function ModelView({ id, children }: { id: string; children?: Rea
           </p>
         </div>
       )}
+      {comparable(lib, model) ? (
       <section className="bottom-line" aria-labelledby="bl-title">
-        <h2 id="bl-title" className="bl-title">
-          <span className="bl-figure num">{formatMultiple(r.central)}</span> as much good per dollar as GiveDirectly
-          {rank > 0 && <span className="muted bl-rank"> · rank {rank} of {results.length}</span>}
-        </h2>
-        <div className="bl-strip">
-          <div className="bl-axis" aria-hidden>
-            {TICKS.map((t) => <span key={t} className="bl-tick num small" style={{ left: pctStr(xFor(t, 100)) }}>{tickLabel(t)}</span>)}
+          <h2 id="bl-title" className="bl-title">
+            <span className="bl-figure num">{formatMultiple(r.central)}</span> as much good per dollar as GiveDirectly
+            {rank > 0 && <span className="muted bl-rank"> · rank {rank} of {results.length}</span>}
+          </h2>
+          <div className="bl-strip">
+            <div className="bl-axis" aria-hidden>
+              {TICKS.map((t) => <span key={t} className="bl-tick num small" style={{ left: pctStr(xFor(t, 100)) }}>{tickLabel(t)}</span>)}
+            </div>
+            <div className="bl-track" role="img" aria-label={`Central ${formatMultiple(r.central)}, joint low ${formatMultiple(r.low)}, joint high ${formatMultiple(r.high)}`}>
+              {TICKS.map((t) => <span key={t} className={`bl-grid ${t === 1 ? "one" : ""}`} style={{ left: pctStr(xFor(t, 100)) }} />)}
+              <span className="bl-bar" style={{ clipPath: clipSpan(xFor(r.low, 100), xFor(r.high, 100), "5px") }} />
+              <span className="bl-dot-layer" style={{ transform: `translateX(${pctStr(xFor(r.central, 100))})` }}><span className="bl-dot" /></span>
+            </div>
           </div>
-          <div className="bl-track" role="img" aria-label={`Central ${formatMultiple(r.central)}, joint low ${formatMultiple(r.low)}, joint high ${formatMultiple(r.high)}`}>
-            {TICKS.map((t) => <span key={t} className={`bl-grid ${t === 1 ? "one" : ""}`} style={{ left: pctStr(xFor(t, 100)) }} />)}
-            <span className="bl-bar" style={{ clipPath: clipSpan(xFor(r.low, 100), xFor(r.high, 100), "5px") }} />
-            <span className="bl-dot-layer" style={{ transform: `translateX(${pctStr(xFor(r.central, 100))})` }}><span className="bl-dot" /></span>
-          </div>
-        </div>
-        <p className="small muted">
-          Joint low {formatMultiple(r.low)}, joint high {formatMultiple(r.high)}. In its own unit:{" "}
-          <span className="num">{formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")}</span> {unit.label} per dollar.{" "}
-          <a href="#your-assumptions" className="jump">Change your assumptions</a>
-        </p>
-      </section>
+          <p className="small muted">
+            Joint low {formatMultiple(r.low)}, joint high {formatMultiple(r.high)}. In its own unit:{" "}
+            <span className="num">{formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")}</span> {unit.label} per dollar.{" "}
+            <a href="#your-assumptions" className="jump">Change your assumptions</a>
+          </p>
+        </section>
+      ) : (
+        <section className="bottom-line" aria-labelledby="bl-title">
+          <h2 id="bl-title" className="bl-title">
+            <span className="bl-figure num">{formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")}</span> {unit.label} per dollar
+          </h2>
+          <p className="small muted">
+            Range {formatValue(r.low, "number")} – {formatValue(r.high, "number")}. Not ranked against other charities: the evaluator reports
+            this in {unit.label}, and there is no defensible exchange rate between that and good done elsewhere.{" "}
+            <a href="#your-assumptions" className="jump">Change your assumptions</a>
+          </p>
+        </section>
+      )}
 
       {r.flags.length > 0 && (
         <section id="flags" className="flags" aria-label="Sensitivity flags">

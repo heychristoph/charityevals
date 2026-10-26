@@ -59,6 +59,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
   const assumptions = assumptionsParsed.data;
   const assumptionIds = new Set(assumptions.rows.map((r) => r.id));
   for (const [id, u] of Object.entries(assumptions.units)) {
+    if (!u.to_common) continue;
     try {
       for (const a of refs(parse(u.to_common)).assumptions)
         if (!assumptionIds.has(a)) errors.push(`assumptions: unit ${id} uses unknown $${a}`);
@@ -160,6 +161,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
     const model: ResolvedModel = {
       ...file,
       summary: file.summary ?? parent?.summary,
+      resources: [...(parent?.resources ?? []), ...file.resources].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i),
       source: file.source ?? parent?.source,
       org: file.org ?? parent?.org,
       sections,
@@ -247,9 +249,14 @@ export function compute(
   return vals;
 }
 
+/** Whether a model's result can be put on the common scale and ranked. */
+export function comparable(lib: Library, m: ResolvedModel): boolean {
+  return !!(m.output && lib.assumptions.units[m.output.unit]?.to_common);
+}
+
 export function toCommon(lib: Library, unit: string, av: Record<string, number>): number {
   const u = lib.assumptions.units[unit];
-  return u ? evaluate(parse(u.to_common), (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : NaN;
+  return u?.to_common ? evaluate(parse(u.to_common), (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : NaN;
 }
 
 /** The model's bottom line per dollar, in its own unit and in the common unit. */
@@ -271,7 +278,7 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
   if (m.output) {
     const u = lib.assumptions.units[m.output.unit];
-    if (u) refs(parse(u.to_common)).assumptions.forEach((a) => used.add(a));
+    if (u?.to_common) refs(parse(u.to_common)).assumptions.forEach((a) => used.add(a));
   }
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)

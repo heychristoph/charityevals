@@ -1,0 +1,931 @@
+{
+  "id": "friendship-bench",
+  "name": "Friendship Bench",
+  "kind": "charity",
+  "cause": "global-health",
+  "org": {
+    "name": "Friendship Bench",
+    "website": "https://www.friendshipbenchzimbabwe.org",
+    "donate": "https://www.friendshipbenchzimbabwe.org/donate"
+  },
+  "summary": "Lay health workers, often older women ('grandmothers'), deliver talk therapy for depression on park benches in Zimbabwe. A re-implementation of the Happier Lives Institute's wellbeing cost-effectiveness analysis (V4), which measures impact in wellbeing-adjusted life years (WELLBYs).",
+  "source": {
+    "publisher": "Happier Lives Institute",
+    "title": "The wellbeing cost-effectiveness of StrongMinds and Friendship Bench (Nov 2024 update)",
+    "url": "https://www.happierlivesinstitute.org/report/the-wellbeing-cost-effectiveness-of-strongminds-and-friendship-bench-combining-a-systematic-review-and-meta-analysis-with-charity-related-data-nov-2024-update/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+    "published": "2024-11-01",
+    "retrieved": "2026-10-26",
+    "license": "Unclear: check HLI's terms before republishing"
+  },
+  "evaluator": {
+    "name": "HLI",
+    "assumptions": {
+      "count_salary_sacrifice": 0,
+      "full_credit": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "ev_prior",
+      "title": "Evidence: FB prior"
+    },
+    {
+      "id": "ev_rct",
+      "title": "Evidence: FB RCTs"
+    },
+    {
+      "id": "ev_me",
+      "title": "Evidence: FB M&E"
+    },
+    {
+      "id": "combined",
+      "title": "Combined estimate"
+    },
+    {
+      "id": "cost",
+      "title": "Cost"
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line"
+    }
+  ],
+  "rows": [
+    {
+      "id": "prior_initial_effect_sds",
+      "section": "ev_prior",
+      "label": "Initial effect [SDs]",
+      "value": 0.588873,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B6"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_decay_rate_sds_per_year",
+      "section": "ev_prior",
+      "label": "Decay rate [SDs per year]",
+      "value": -0.1694006,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B7"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_effective_duration_years",
+      "section": "ev_prior",
+      "label": "Effective duration [years]",
+      "formula": "abs(prior_initial_effect_sds/prior_decay_rate_sds_per_year)",
+      "expected": 3.476215551
+    },
+    {
+      "id": "prior_total_effect_on_the_individual_sd_years",
+      "section": "ev_prior",
+      "label": "Total effect on the individual [SD-years]",
+      "formula": "prior_initial_effect_sds * prior_effective_duration_years * 0.5",
+      "expected": 1.02352474
+    },
+    {
+      "id": "prior_wellby_conversion",
+      "section": "ev_prior",
+      "label": "WELLBY conversion",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B10"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_total_effect_on_the_individual_wellbys",
+      "section": "ev_prior",
+      "label": "Total effect on the individual [WELLBYs]",
+      "formula": "prior_total_effect_on_the_individual_sd_years*prior_wellby_conversion",
+      "expected": 2.04704948
+    },
+    {
+      "id": "prior_time_adjustment_for_longterm_follow_ups",
+      "section": "ev_prior",
+      "label": "Time adjustment for longterm follow-ups",
+      "value": 1.544193,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B14"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_publication_bias",
+      "section": "ev_prior",
+      "label": "Publication bias",
+      "value": 0.6889437,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B15"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_range_restriction",
+      "section": "ev_prior",
+      "label": "Range restriction",
+      "value": 0.9234146,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B16"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_response_bias_adjustment",
+      "section": "ev_prior",
+      "label": "Response bias adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B17"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_total_internal_validity_adjustment",
+      "section": "ev_prior",
+      "label": "Total internal validity adjustment",
+      "formula": "prior_time_adjustment_for_longterm_follow_ups * prior_publication_bias * prior_range_restriction * prior_response_bias_adjustment",
+      "expected": 0.9823857391
+    },
+    {
+      "id": "prior_dosage_adjustment",
+      "section": "ev_prior",
+      "label": "Dosage adjustment",
+      "value": 0.3572076,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B20"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_other_moderators",
+      "section": "ev_prior",
+      "label": "Other moderators (e.g., expertise)",
+      "value": 0.8972826,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B21"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_adults_versus_minors",
+      "section": "ev_prior",
+      "label": "Adults versus minors",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B22"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_ngo_versus_average_implementer",
+      "section": "ev_prior",
+      "label": "NGO versus average implementer",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B23"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_completion_rate_adjustment",
+      "section": "ev_prior",
+      "label": "Completion rate adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B24"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_total_external_validity_adjustments",
+      "section": "ev_prior",
+      "label": "Total external validity adjustments",
+      "formula": "prior_dosage_adjustment*prior_other_moderators*prior_adults_versus_minors*prior_ngo_versus_average_implementer*prior_completion_rate_adjustment",
+      "expected": 0.3205161641
+    },
+    {
+      "id": "prior_overall_adjustment",
+      "section": "ev_prior",
+      "label": "Overall adjustment",
+      "formula": "prior_total_external_validity_adjustments*prior_total_internal_validity_adjustment",
+      "expected": 0.3148705087
+    },
+    {
+      "id": "prior_adjusted_total_effect_on_the_individual",
+      "section": "ev_prior",
+      "label": "Adjusted total effect on the individual (WELLBYs)",
+      "formula": "prior_total_effect_on_the_individual_wellbys*prior_overall_adjustment",
+      "expected": 0.6445555112
+    },
+    {
+      "id": "prior_number_of_household_members_total",
+      "section": "ev_prior",
+      "label": "Number of household members [total]",
+      "value": 3.91794860627178,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B30"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_spillover_ratio",
+      "section": "ev_prior",
+      "label": "Spillover ratio",
+      "value": 0.162400011974389,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B31"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "prior_non_recipient_effect_wellbys",
+      "section": "ev_prior",
+      "label": "Non-recipient effect [WELLBYs]",
+      "formula": "(prior_number_of_household_members_total-1)*prior_spillover_ratio*prior_adjusted_total_effect_on_the_individual",
+      "expected": 0.3054386711
+    },
+    {
+      "id": "prior_overall_effect_wellbys",
+      "section": "ev_prior",
+      "label": "Overall effect [WELLBYs]",
+      "formula": "prior_non_recipient_effect_wellbys+prior_adjusted_total_effect_on_the_individual",
+      "expected": 0.9499941822
+    },
+    {
+      "id": "prior_overall_weight",
+      "section": "ev_prior",
+      "label": "Overall Weight",
+      "value": 0.5014583,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B35"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB prior)."
+    },
+    {
+      "id": "rct_initial_effect_sds",
+      "section": "ev_rct",
+      "label": "Initial effect [SDs]",
+      "value": 0.526877,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C6"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_decay_rate_sds_per_year",
+      "section": "ev_rct",
+      "label": "Decay rate [SDs per year]",
+      "value": -0.1620274,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C7"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_effective_duration_years",
+      "section": "ev_rct",
+      "label": "Effective duration [years]",
+      "formula": "abs(rct_initial_effect_sds/rct_decay_rate_sds_per_year)",
+      "expected": 3.251777169
+    },
+    {
+      "id": "rct_total_effect_on_the_individual_sd_years",
+      "section": "ev_rct",
+      "label": "Total effect on the individual [SD-years]",
+      "formula": "rct_initial_effect_sds * rct_effective_duration_years * 0.5",
+      "expected": 0.8566432996
+    },
+    {
+      "id": "rct_wellby_conversion",
+      "section": "ev_rct",
+      "label": "WELLBY conversion",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C10"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_total_effect_on_the_individual_wellbys",
+      "section": "ev_rct",
+      "label": "Total effect on the individual [WELLBYs]",
+      "formula": "rct_total_effect_on_the_individual_sd_years*rct_wellby_conversion",
+      "expected": 1.713286599
+    },
+    {
+      "id": "rct_time_adjustment_for_longterm_follow_ups",
+      "section": "ev_rct",
+      "label": "Time adjustment for longterm follow-ups",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C14"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_publication_bias",
+      "section": "ev_rct",
+      "label": "Publication bias",
+      "value": 0.9222359,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C15"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_range_restriction",
+      "section": "ev_rct",
+      "label": "Range restriction",
+      "value": 0.88,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C16"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_response_bias_adjustment",
+      "section": "ev_rct",
+      "label": "Response bias adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C17"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_total_internal_validity_adjustment",
+      "section": "ev_rct",
+      "label": "Total internal validity adjustment",
+      "formula": "rct_time_adjustment_for_longterm_follow_ups * rct_publication_bias * rct_range_restriction * rct_response_bias_adjustment",
+      "expected": 0.811567592
+    },
+    {
+      "id": "rct_dosage_adjustment",
+      "section": "ev_rct",
+      "label": "Dosage adjustment",
+      "value": 0.3857604,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C20"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_other_moderators",
+      "section": "ev_rct",
+      "label": "Other moderators (e.g., expertise)",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C21"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_adults_versus_minors",
+      "section": "ev_rct",
+      "label": "Adults versus minors",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C22"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_ngo_versus_average_implementer",
+      "section": "ev_rct",
+      "label": "NGO versus average implementer",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C23"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_completion_rate_adjustment",
+      "section": "ev_rct",
+      "label": "Completion rate adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C24"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_total_external_validity_adjustments",
+      "section": "ev_rct",
+      "label": "Total external validity adjustments",
+      "formula": "rct_dosage_adjustment*rct_other_moderators*rct_adults_versus_minors*rct_ngo_versus_average_implementer*rct_completion_rate_adjustment",
+      "expected": 0.3857604
+    },
+    {
+      "id": "rct_overall_adjustment",
+      "section": "ev_rct",
+      "label": "Overall adjustment",
+      "formula": "rct_total_external_validity_adjustments*rct_total_internal_validity_adjustment",
+      "expected": 0.3130706389
+    },
+    {
+      "id": "rct_adjusted_total_effect_on_the_individual",
+      "section": "ev_rct",
+      "label": "Adjusted total effect on the individual (WELLBYs)",
+      "formula": "rct_total_effect_on_the_individual_wellbys*rct_overall_adjustment",
+      "expected": 0.5363797303
+    },
+    {
+      "id": "rct_number_of_household_members_total",
+      "section": "ev_rct",
+      "label": "Number of household members [total]",
+      "value": 3.91794860627178,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C30"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_spillover_ratio",
+      "section": "ev_rct",
+      "label": "Spillover ratio",
+      "value": 0.162400011974389,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C31"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "rct_non_recipient_effect_wellbys",
+      "section": "ev_rct",
+      "label": "Non-recipient effect [WELLBYs]",
+      "formula": "(rct_number_of_household_members_total-1)*rct_spillover_ratio*rct_adjusted_total_effect_on_the_individual",
+      "expected": 0.2541768849
+    },
+    {
+      "id": "rct_overall_effect_wellbys",
+      "section": "ev_rct",
+      "label": "Overall effect [WELLBYs]",
+      "formula": "rct_non_recipient_effect_wellbys+rct_adjusted_total_effect_on_the_individual",
+      "expected": 0.7905566152
+    },
+    {
+      "id": "rct_overall_weight",
+      "section": "ev_rct",
+      "label": "Overall Weight",
+      "value": 0.3738528,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "C35"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB RCTs)."
+    },
+    {
+      "id": "me_initial_effect_sds",
+      "section": "ev_me",
+      "label": "Initial effect [SDs]",
+      "value": 0.1169751,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D6"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_effective_duration_years",
+      "section": "ev_me",
+      "label": "Effective duration [years]",
+      "formula": "prior_effective_duration_years",
+      "expected": 3.476215551
+    },
+    {
+      "id": "me_total_effect_on_the_individual_sd_years",
+      "section": "ev_me",
+      "label": "Total effect on the individual [SD-years]",
+      "formula": "me_initial_effect_sds * me_effective_duration_years * 0.5",
+      "expected": 0.2033153308
+    },
+    {
+      "id": "me_wellby_conversion",
+      "section": "ev_me",
+      "label": "WELLBY conversion",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D10"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_total_effect_on_the_individual_wellbys",
+      "section": "ev_me",
+      "label": "Total effect on the individual [WELLBYs]",
+      "formula": "me_total_effect_on_the_individual_sd_years*me_wellby_conversion",
+      "expected": 0.4066306617
+    },
+    {
+      "id": "me_time_adjustment_for_longterm_follow_ups",
+      "section": "ev_me",
+      "label": "Time adjustment for longterm follow-ups",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D14"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_publication_bias",
+      "section": "ev_me",
+      "label": "Publication bias",
+      "value": 0.5071354,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D15"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_range_restriction",
+      "section": "ev_me",
+      "label": "Range restriction",
+      "value": 0.88,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D16"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_response_bias_adjustment",
+      "section": "ev_me",
+      "label": "Response bias adjustment",
+      "value": 0.85,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D17"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_total_internal_validity_adjustment",
+      "section": "ev_me",
+      "label": "Total internal validity adjustment",
+      "formula": "me_time_adjustment_for_longterm_follow_ups * me_publication_bias * me_range_restriction * me_response_bias_adjustment",
+      "expected": 0.3793372792
+    },
+    {
+      "id": "me_dosage_adjustment",
+      "section": "ev_me",
+      "label": "Dosage adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D20"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_other_moderators",
+      "section": "ev_me",
+      "label": "Other moderators (e.g., expertise)",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D21"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_adults_versus_minors",
+      "section": "ev_me",
+      "label": "Adults versus minors",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D22"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_ngo_versus_average_implementer",
+      "section": "ev_me",
+      "label": "NGO versus average implementer",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D23"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_completion_rate_adjustment",
+      "section": "ev_me",
+      "label": "Completion rate adjustment",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D24"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_total_external_validity_adjustments",
+      "section": "ev_me",
+      "label": "Total external validity adjustments",
+      "formula": "me_dosage_adjustment*me_other_moderators*me_adults_versus_minors*me_ngo_versus_average_implementer*me_completion_rate_adjustment",
+      "expected": 1
+    },
+    {
+      "id": "me_overall_adjustment",
+      "section": "ev_me",
+      "label": "Overall adjustment",
+      "formula": "me_total_external_validity_adjustments*me_total_internal_validity_adjustment",
+      "expected": 0.3793372792
+    },
+    {
+      "id": "me_adjusted_total_effect_on_the_individual",
+      "section": "ev_me",
+      "label": "Adjusted total effect on the individual (WELLBYs)",
+      "formula": "me_total_effect_on_the_individual_wellbys*me_overall_adjustment",
+      "expected": 0.1542501688
+    },
+    {
+      "id": "me_number_of_household_members_total",
+      "section": "ev_me",
+      "label": "Number of household members [total]",
+      "value": 3.91794860627178,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D30"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_spillover_ratio",
+      "section": "ev_me",
+      "label": "Spillover ratio",
+      "value": 0.162400011974389,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D31"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "me_non_recipient_effect_wellbys",
+      "section": "ev_me",
+      "label": "Non-recipient effect [WELLBYs]",
+      "formula": "(me_number_of_household_members_total-1)*me_spillover_ratio*me_adjusted_total_effect_on_the_individual",
+      "expected": 0.07309528157
+    },
+    {
+      "id": "me_overall_effect_wellbys",
+      "section": "ev_me",
+      "label": "Overall effect [WELLBYs]",
+      "formula": "me_non_recipient_effect_wellbys+me_adjusted_total_effect_on_the_individual",
+      "expected": 0.2273454504
+    },
+    {
+      "id": "me_overall_weight",
+      "section": "ev_me",
+      "label": "Overall Weight",
+      "value": 0.1246889,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI summary spreadsheet V4",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "D35"
+      },
+      "explainer": "HLI's estimate for this body of evidence (FB M&E)."
+    },
+    {
+      "id": "charity_effect",
+      "section": "combined",
+      "label": "Predicted effect per person treated, including household",
+      "unit": "WELLBYs",
+      "format": "number",
+      "formula": "prior_overall_effect_wellbys * prior_overall_weight + rct_overall_effect_wellbys * rct_overall_weight + me_overall_effect_wellbys * me_overall_weight / 1",
+      "expected": 0.8002817259
+    },
+    {
+      "id": "patients",
+      "section": "cost",
+      "label": "People treated",
+      "format": "integer",
+      "value": 214020.0,
+      "kind": "observed",
+      "source": {
+        "title": "Friendship Bench via HLI",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B38"
+      },
+      "explainer": "From the charity's reporting, via HLI."
+    },
+    {
+      "id": "expenses",
+      "section": "cost",
+      "label": "Expenses",
+      "format": "usd",
+      "value": 3530397.0,
+      "kind": "observed",
+      "source": {
+        "title": "Friendship Bench via HLI",
+        "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+        "cell": "B39"
+      },
+      "explainer": "From the charity's reporting, via HLI."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "cost",
+      "label": "Cost per person treated",
+      "format": "usd",
+      "formula": "expenses / patients",
+      "expected": 16.49564059
+    },
+    {
+      "id": "adjusted_cost",
+      "section": "cost",
+      "label": "Adjusted cost per person",
+      "format": "usd",
+      "formula": "cost_per_person",
+      "expected": 16.49564059
+    },
+    {
+      "id": "wellbys_per_1000",
+      "section": "bottom",
+      "label": "WELLBYs per $1,000",
+      "format": "number",
+      "formula": "charity_effect / adjusted_cost * 1000",
+      "expected": 48.51474069
+    },
+    {
+      "id": "cost_per_wellby",
+      "section": "bottom",
+      "label": "Cost per WELLBY",
+      "format": "usd",
+      "formula": "adjusted_cost / charity_effect",
+      "expected": 20.61229197
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "bottom",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "formula": "wellbys_per_1000 / 1000"
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar"
+  },
+  "resources": [
+    {
+      "title": "HLI report: StrongMinds and Friendship Bench (Nov 2024 update)",
+      "url": "https://www.happierlivesinstitute.org/report/the-wellbeing-cost-effectiveness-of-strongminds-and-friendship-bench-combining-a-systematic-review-and-meta-analysis-with-charity-related-data-nov-2024-update/",
+      "type": "evaluation"
+    },
+    {
+      "title": "HLI summary spreadsheet V4",
+      "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "HLI charity page",
+      "url": "https://www.happierlivesinstitute.org/charities/friendship/",
+      "type": "evaluation"
+    },
+    {
+      "title": "HLI 2025 giving season charities update",
+      "url": "https://www.happierlivesinstitute.org/report/2025-giving-season-charities-update-tis-the-season-to-be-giving/",
+      "type": "evaluation"
+    },
+    {
+      "title": "Converting measures of mental health and wellbeing into WELLBYs (HLI)",
+      "url": "https://www.happierlivesinstitute.org/report/converting-measures-of-mental-health-and-wellbeing-into-wellbys/",
+      "type": "study"
+    },
+    {
+      "title": "HLI analysis code and data (OSF)",
+      "url": "https://osf.io/mnqvz/",
+      "type": "model"
+    }
+  ]
+}

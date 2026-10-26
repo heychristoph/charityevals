@@ -110,6 +110,20 @@ export const Model = z
       })
       .strict()
       .optional(),
+    /** Everything a reader might want to check: the evaluator's review, its spreadsheets, the
+     * charity's reports, and the studies and data the analysis cites. */
+    resources: z
+      .array(
+        z
+          .object({
+            title: z.string(),
+            url: z.string().url(),
+            type: z.enum(["evaluation", "model", "data", "study", "charity", "other"]),
+            note: z.string().optional(),
+          })
+          .strict(),
+      )
+      .default([]),
     sections: z.array(Section).default([]),
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */
@@ -128,8 +142,10 @@ export const Unit = z
   .object({
     label: z.string(),
     short: z.string(),
-    /** Formula over $assumptions: how many common units one of this unit is worth. */
-    to_common: z.string(),
+    /** Formula over $assumptions: how many common units one of this unit is worth. Omitted for
+     * units nobody has a defensible exchange rate for (e.g. "people reached"): such models get a
+     * page and sensitivity in their own unit, but aren't ranked against others. */
+    to_common: z.string().optional(),
     explainer: z.string().optional(),
   })
   .strict();
