@@ -114,6 +114,7 @@ export default function Rankings() {
                 <span className="muted num">
                   {formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")} {unit.short} per dollar
                 </span>
+                {m.org?.donate && <a href={m.org.donate} rel="noopener" className="r-donate">Donate</a>}
                 {warns.length > 0 && (
                   <span className="r-flags">
                     <AlertTriangle size={14} aria-hidden />

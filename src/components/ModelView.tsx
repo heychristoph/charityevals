@@ -4,7 +4,7 @@ import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
 import { lib } from "../lib/data";
 import { compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
-import { useResults } from "../lib/use-results";
+import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
 import { Markdown } from "./AssumptionsPanel";
 import ViewToggle from "./ViewToggle";
@@ -34,8 +34,7 @@ function Formula({ text, model }: { text: string; model: ResolvedModel }) {
 }
 
 function Tornado({ model }: { model: ResolvedModel }) {
-  const { results } = useResults();
-  const r = results.find((x) => x.model.id === model.id)!;
+  const r = useResultFor(model);
   const bench = r.s.central / r.central;
   const rows = r.s.swings.slice(0, 8);
   const lo = Math.min(r.low, ...rows.map((s) => Math.min(s.atLow, s.atHigh) / bench));
@@ -111,6 +110,11 @@ function RowValue({ row, value, view, evaluatorName }: { row: ResolvedRow; value
   return (
     <>
       <span className="v-main num">{formatValue(value, row.format)}</span>
+      {row.range && (
+        <span className="v-range small muted num" title={row.range.note}>
+          {formatValue(row.range.low, row.format)} – {formatValue(row.range.high, row.format)}
+        </span>
+      )}
       {hasRange(range) && (
         <span className="v-range small muted num">
           {formatValue(pickValue(range, "low"), row.format)} – {formatValue(pickValue(range, "high"), row.format)}
@@ -197,8 +201,8 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
 export default function ModelView({ id, children }: { id: string; children?: React.ReactNode }) {
   const model = lib.models.get(id)!;
   const { results, av } = useResults();
-  const r = results.find((x) => x.model.id === id)!;
-  const rank = results.indexOf(r) + 1;
+  const r = useResultFor(model);
+  const rank = results.findIndex((x) => x.model.id === id) + 1;
   const values = useMemo(() => compute(lib, model, av, {}, r.view), [model, av, r.view]);
   const onPath = useMemo(() => rowsFeeding(model), [model]);
   const [open, setOpen] = useState<Set<string>>(new Set());
@@ -235,7 +239,7 @@ export default function ModelView({ id, children }: { id: string; children?: Rea
       <section className="bottom-line" aria-labelledby="bl-title">
         <h2 id="bl-title" className="bl-title">
           <span className="bl-figure num">{formatMultiple(r.central)}</span> as much good per dollar as GiveDirectly
-          <span className="muted bl-rank"> · rank {rank} of {results.length}</span>
+          {rank > 0 && <span className="muted bl-rank"> · rank {rank} of {results.length}</span>}
         </h2>
         <div className="bl-strip">
           <div className="bl-axis" aria-hidden>
