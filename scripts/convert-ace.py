@@ -26,6 +26,7 @@ p.add_argument("--id", required=True)
 p.add_argument("--name", required=True)
 p.add_argument("--website")
 p.add_argument("--donate")
+p.add_argument("--donate-via")
 p.add_argument("--review", required=True)
 p.add_argument("--sheet-url", required=True)
 p.add_argument("--published", required=True)
@@ -213,8 +214,12 @@ def ref_id(tab, addr, prefix, section):
 
 for n, tab in enumerate(tabs, 1):
     ws = F[tab]; hdr = header_row(ws); prefix = f"p{n}_"
-    title = next((text(ws[f"A{r}"].value) for r in range(1, hdr) if isinstance(text(ws[f"A{r}"].value), str)
-                  and "program" in text(ws[f"A{r}"].value).lower()), tab)
+    # Program name: a "Program ..." line near the header, else the first title line; tab names are cut at 31 characters.
+    near = [text(ws[f"A{r}"].value) for r in range(1, hdr + 4)]
+    above = [text(ws[f"A{r}"].value) for r in range(1, hdr)]
+    title = next((c for c in near if isinstance(c, str) and c.lower().startswith("program")), None) \
+        or next((c for c in above if isinstance(c, str) and "analysis of" in c.lower() and "program" in c.lower()), tab)
+    title = re.sub(r"^ACE's Cost-Efficiency Analysis of [^']+'s ", "", str(title))
     section = slug(f"p{n} {tab}")
     sections.append({"id": section, "title": str(title).strip().rstrip(".")})
     sad_row = None
@@ -290,7 +295,7 @@ sections += [{"id": "bottom", "title": "Bottom line", "explainer": f"{a.unit_lab
 names = ", ".join(t for *_, t in programs)
 model = {
     "id": a.id, "name": a.name, "kind": "charity", "cause": "animal-welfare",
-    "org": {k: v for k, v in {"name": a.name, "website": a.website, "donate": a.donate}.items() if v},
+    "org": {k: v for k, v in {"name": a.name, "website": a.website, "donate": a.donate, "donate_via": a.donate_via}.items() if v},
     "summary": (f"{a.what} A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet "
                 f"({len(programs)} program{'s' if len(programs) > 1 else ''} with {a.unit_label} estimates: {names}).").strip(),
     "source": {"publisher": "Animal Charity Evaluators", "title": f"{a.name} review", "url": a.review, "sheet": a.sheet_url,
@@ -301,5 +306,8 @@ model = {
     "evaluator": {"name": "ACE", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+# carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
+_prev = out / f"{a.id}.json"
+if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])
 (out / f"{a.id}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
 print(f"{a.id}: {len(rows_out)} rows, {sum('expected' in r for r in rows_out)} expected, programs: {names}")

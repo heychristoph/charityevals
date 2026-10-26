@@ -18,6 +18,10 @@ src/engine/                  formula language, model resolution (extends), compu
 src/pages, src/components    Astro site with React islands
 scripts/check.ts             validates models and proves they reproduce their sources
 scripts/sheet-dump.py        dumps a Google Sheet's formulas and values for importing
+scripts/import-givewell.sh   re-imports GiveWell's top charities (convert-givewell.py)
+scripts/import-ace.sh        re-imports ACE's recommended charities (convert-ace.py)
+scripts/convert-hli-psychotherapy.py  HLI's StrongMinds / Friendship Bench model
+scripts/import-resources.sh  refreshes each charity's evidence and sources list
 .claude/skills/import-cea/   Claude skill: turn a published CEA into a model
 ```
 

@@ -365,6 +365,9 @@ model = {
                                                       "life_value_multiplier": 1, "uov_per_ln_consumption": 1.4426950408889634}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+# carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
+_prev = out / f"{a.id}.json"
+if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])
 (out / f"{a.id}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
 print(f"{a.id}: {len(model['rows'])} rows, {sum('expected' in r for r in model['rows'])} expected")
 
