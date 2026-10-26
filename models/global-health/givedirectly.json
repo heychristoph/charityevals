@@ -1,0 +1,699 @@
+{
+  "id": "givedirectly",
+  "name": "GiveDirectly (Kenya)",
+  "kind": "charity",
+  "cause": "global-health",
+  "org": {
+    "name": "GiveDirectly",
+    "website": "https://www.givedirectly.org"
+  },
+  "summary": "Unconditional cash transfers of about $1,000 per household, sent by mobile money to poor households in East Africa. A faithful re-implementation of GiveWell's November 2024 model, Kenya column. GiveWell uses this program as the benchmark (\"1× cash\") for everything else it funds.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "GiveDirectly's Cash for Poverty Relief Program (November 2024)",
+    "url": "https://www.givewell.org/node/4417",
+    "sheet": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit?gid=1755045987",
+    "published": "2024-11-12",
+    "retrieved": "2026-10-26",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "sections": [
+    {
+      "id": "reach",
+      "title": "Program reach",
+      "explainer": "How many people a fixed donation reaches. The $1M donation is arbitrary; it cancels out in the per-dollar result."
+    },
+    {
+      "id": "consumption",
+      "title": "Consumption gains to recipients",
+      "explainer": "Recipients spend part of the transfer in year one and invest the rest, which pays off over the next nine years. Gains are valued on a log scale: a dollar is worth more to someone poorer."
+    },
+    {
+      "id": "spillovers",
+      "title": "Spillovers to non-recipients",
+      "explainer": "Cash spent locally raises neighbours' incomes too. Based on Egger et al. (2022), heavily discounted for doubts about how well it replicates."
+    },
+    {
+      "id": "mortality",
+      "title": "Mortality",
+      "explainer": "Preliminary evidence that cash reduces child deaths, halved for doubts about the study."
+    },
+    {
+      "id": "supplementary",
+      "title": "Supplementary adjustments",
+      "explainer": "Effects GiveWell doesn't model explicitly, each as a % of the modelled benefits."
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line"
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of GiveWell's model. With the default assumptions they change little for GiveDirectly, because most of its cost is the transfers themselves."
+    }
+  ],
+  "rows": [
+    {
+      "id": "donation",
+      "section": "reach",
+      "label": "Donation",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "judgment",
+      "explainer": "Arbitrary scale for the calculation. Any amount gives the same result per dollar.",
+      "source": {
+        "cell": "New CEA!B4"
+      }
+    },
+    {
+      "id": "transfer_per_household",
+      "section": "reach",
+      "label": "Transfer per household (nominal USD)",
+      "format": "usd",
+      "value": 865,
+      "kind": "observed",
+      "source": {
+        "title": "GiveDirectly program data via GiveWell",
+        "cell": "New CEA!B5"
+      },
+      "explainer": "Average one-time transfer in Kenya, from GiveDirectly's program data."
+    },
+    {
+      "id": "transfers_share_of_cost",
+      "section": "reach",
+      "label": "Transfers as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.7896,
+        "best": 0.84,
+        "high": 0.8904
+      },
+      "kind": "observed",
+      "source": {
+        "title": "GiveDirectly financials via GiveWell",
+        "cell": "New CEA!B6; Inputs!D5:F5"
+      },
+      "explainer": "The rest pays for targeting, enrolment, delivery and overhead. Range is GiveWell's own ±6% Monte Carlo bound."
+    },
+    {
+      "id": "households",
+      "section": "reach",
+      "label": "Households receiving a transfer",
+      "format": "number",
+      "formula": "donation * transfers_share_of_cost / transfer_per_household",
+      "expected": 971.0982659
+    },
+    {
+      "id": "ppp_factor",
+      "section": "reach",
+      "label": "PPP adjustment (2017 prices)",
+      "format": "number",
+      "explainer": "From the shared Kenya facts, so every model working in Kenya uses the same conversion. A dollar buys about 2.4 times as much in rural Kenya as in the US.",
+      "formula": "@kenya.ppp_factor_2017",
+      "expected": 2.368992384
+    },
+    {
+      "id": "transfer_per_household_ppp",
+      "section": "reach",
+      "label": "Transfer per household (PPP)",
+      "format": "usd",
+      "formula": "ppp_factor * transfer_per_household",
+      "expected": 2049.178413
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "Average household size",
+      "format": "number",
+      "value": 4.2,
+      "kind": "observed",
+      "source": {
+        "title": "GiveDirectly data via GiveWell",
+        "cell": "Baseline!B4"
+      },
+      "explainer": "Everyone in the household is assumed to share the transfer equally."
+    },
+    {
+      "id": "transfer_per_person_ppp",
+      "section": "reach",
+      "label": "Transfer per person (PPP)",
+      "format": "usd",
+      "formula": "transfer_per_household_ppp / household_size",
+      "expected": 487.899622
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "household_size * households",
+      "expected": 4078.612717
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "consumption",
+      "label": "Baseline annual consumption per person (PPP)",
+      "format": "usd",
+      "value": {
+        "low": 554.1711305,
+        "best": 651.9660358,
+        "high": 749.7609412
+      },
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell baseline consumption estimate",
+        "cell": "Baseline!B36; Inputs!D11:F11"
+      },
+      "explainer": "About $1.79 a day. Poorer recipients gain more from the same transfer, which is a large part of why GiveWell's 2024 update raised its estimate. Range is GiveWell's ±15%."
+    },
+    {
+      "id": "share_invested",
+      "section": "consumption",
+      "label": "Share of the transfer invested",
+      "format": "percent",
+      "value": 0.43,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, from GiveDirectly RCTs",
+        "cell": "New CEA!B15"
+      },
+      "explainer": "Spent on assets such as livestock, roofs and businesses rather than consumed in year one. Returns on it show up in years 2–10."
+    },
+    {
+      "id": "share_consumed_y1",
+      "section": "consumption",
+      "label": "Share consumed in year 1",
+      "format": "percent",
+      "formula": "1 - share_invested",
+      "expected": 0.57
+    },
+    {
+      "id": "y1_consumption_gain",
+      "section": "consumption",
+      "label": "Extra consumption per person in year 1 (PPP)",
+      "format": "usd",
+      "formula": "share_consumed_y1 * transfer_per_person_ppp",
+      "expected": 278.1027846
+    },
+    {
+      "id": "y1_pct_increase",
+      "section": "consumption",
+      "label": "Increase over baseline in year 1",
+      "format": "percent",
+      "formula": "y1_consumption_gain / baseline_consumption",
+      "expected": 0.4265602336
+    },
+    {
+      "id": "y1_ln_gain",
+      "section": "consumption",
+      "label": "Increase in ln(consumption) in year 1",
+      "format": "number",
+      "formula": "ln(1 + y1_pct_increase)",
+      "expected": 0.3552661155
+    },
+    {
+      "id": "y1_uov_per_person",
+      "section": "consumption",
+      "label": "Units of value per person, year 1",
+      "format": "number",
+      "formula": "y1_ln_gain * $uov_per_ln_consumption",
+      "expected": 0.5125406631
+    },
+    {
+      "id": "y1_uov",
+      "section": "consumption",
+      "label": "Units of value from year 1 consumption",
+      "format": "number",
+      "formula": "y1_uov_per_person * people_reached",
+      "expected": 2090.454866
+    },
+    {
+      "id": "later_years_ratio",
+      "section": "consumption",
+      "label": "Value of year 2–10 gains, relative to year 1",
+      "format": "percent",
+      "value": {
+        "low": 0.7382716495,
+        "best": 1.230452749,
+        "high": 1.722633849
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell Consumption tab",
+        "cell": "Consumption!B23; Inputs!D23:F23"
+      },
+      "explainer": "Returns on the invested 43%, decaying over nine years and discounted at 4% a year. GiveWell's best guess has gains fading faster than the Egger et al. long-run data suggest; with Egger persistence the bottom line rises by about 40%.\n\nRange is GiveWell's ±40%, its widest on any recipient input."
+    },
+    {
+      "id": "y1_10_uov",
+      "section": "consumption",
+      "label": "Units of value from years 1–10",
+      "format": "number",
+      "formula": "y1_uov * (1 + later_years_ratio)",
+      "expected": 4662.660804
+    },
+    {
+      "id": "distribution_adj_recipients",
+      "section": "consumption",
+      "label": "Distributional adjustment (richer recipients)",
+      "format": "percent",
+      "value": 0.9,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B25"
+      },
+      "explainer": "Gains are uneven: some go to recipients above the average baseline, who value them less on a log scale. GiveWell knocks 10% off."
+    },
+    {
+      "id": "consumption_uov",
+      "section": "consumption",
+      "label": "Recipient consumption benefits",
+      "unit": "units of value",
+      "format": "number",
+      "formula": "y1_10_uov * distribution_adj_recipients",
+      "expected": 4196.394723
+    },
+    {
+      "id": "egger_multiplier",
+      "section": "spillovers",
+      "label": "Egger et al. economic multiplier",
+      "format": "multiple",
+      "value": 2.5,
+      "kind": "observed",
+      "source": {
+        "title": "Egger et al. (2022), Econometrica",
+        "url": "https://doi.org/10.3982/ECTA17945"
+      },
+      "explainer": "Each $1 transferred in Western Kenya produced about $2.50 of local economic activity. Only significant at the 10% level."
+    },
+    {
+      "id": "double_counting_adj",
+      "section": "spillovers",
+      "label": "Share of the multiplier that isn't recipients' own gain",
+      "format": "percent",
+      "value": 0.7032,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell GE tab",
+        "cell": "GE!B7"
+      },
+      "explainer": "Part of the 2.5× is the recipients' own consumption, already counted above. This keeps only the share accruing to others."
+    },
+    {
+      "id": "iv_adj_spillovers",
+      "section": "spillovers",
+      "label": "Internal validity adjustment (spillovers)",
+      "format": "percent",
+      "value": {
+        "low": 0.27,
+        "best": 0.6,
+        "high": 0.93
+      },
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B33; Inputs!D33:F33"
+      },
+      "explainer": "Regresses a single, marginally significant study towards GiveWell's prior that spillovers are smaller. Range is GiveWell's own, and very wide."
+    },
+    {
+      "id": "ev_adj_spillovers",
+      "section": "spillovers",
+      "label": "External validity adjustment (spillovers)",
+      "format": "percent",
+      "value": {
+        "low": 0.32,
+        "best": 0.8,
+        "high": 1.28
+      },
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B34; Inputs!D34:F34"
+      },
+      "explainer": "How well the 2014–2017 Western Kenya result carries over to today's program. Above 100% means it could be stronger now."
+    },
+    {
+      "id": "distribution_adj_spillovers",
+      "section": "spillovers",
+      "label": "Distributional adjustment (richer non-recipients)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B35; Inputs!D35:F35"
+      },
+      "explainer": "Spillovers partly reach better-off traders and business owners, who value a dollar less."
+    },
+    {
+      "id": "spillover_ratio",
+      "section": "spillovers",
+      "label": "Spillover benefits as a share of recipient benefits",
+      "format": "percent",
+      "formula": "egger_multiplier * distribution_adj_spillovers * double_counting_adj * iv_adj_spillovers * ev_adj_spillovers",
+      "expected": 0.675072
+    },
+    {
+      "id": "spillover_uov",
+      "section": "spillovers",
+      "label": "Spillover benefits",
+      "unit": "units of value",
+      "format": "number",
+      "formula": "consumption_uov * spillover_ratio",
+      "expected": 2832.868579
+    },
+    {
+      "id": "under5_share",
+      "section": "mortality",
+      "label": "Share of people reached who are under five",
+      "format": "percent",
+      "value": 0.1287912678,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell Equivalence tab",
+        "cell": "Equivalence!B20/B41"
+      },
+      "explainer": "From GiveDirectly's household rosters."
+    },
+    {
+      "id": "under5_reached",
+      "section": "mortality",
+      "label": "Children under five reached",
+      "format": "integer",
+      "formula": "under5_share * people_reached",
+      "expected": 525.2897026
+    },
+    {
+      "id": "under5_mortality_country",
+      "section": "mortality",
+      "label": "Under-five mortality rate, Kenya (2023)",
+      "format": "percent",
+      "explainer": "National average, from the shared Kenya facts.",
+      "formula": "@kenya.under5_mortality_2023",
+      "expected": 0.0410984
+    },
+    {
+      "id": "under5_mortality_egger",
+      "section": "mortality",
+      "label": "Under-five mortality in the Egger et al. sample (2015–2017)",
+      "format": "percent",
+      "value": 0.057,
+      "kind": "observed",
+      "source": {
+        "cell": "New CEA!B44"
+      },
+      "explainer": "57 per 1,000. Compared with the national rate for the same years to estimate how much riskier GiveDirectly's target population is."
+    },
+    {
+      "id": "under5_mortality_unicef_2016",
+      "section": "mortality",
+      "label": "Under-five mortality, national (2016)",
+      "format": "percent",
+      "explainer": "National rate in the Egger et al. study period, from the shared Kenya facts.",
+      "formula": "@kenya.under5_mortality_2016",
+      "expected": 0.0462512
+    },
+    {
+      "id": "target_risk_adj",
+      "section": "mortality",
+      "label": "Extra risk in GiveDirectly's target population",
+      "format": "multiple",
+      "formula": "under5_mortality_egger / under5_mortality_unicef_2016",
+      "expected": 1.232400457
+    },
+    {
+      "id": "under5_mortality_target",
+      "section": "mortality",
+      "label": "Under-five mortality in the target population",
+      "format": "percent",
+      "formula": "under5_mortality_country * target_risk_adj",
+      "expected": 0.05064968693
+    },
+    {
+      "id": "mortality_reduction_raw",
+      "section": "mortality",
+      "label": "Reduction in under-five mortality from the transfer (unadjusted)",
+      "format": "percent",
+      "value": 0.45,
+      "kind": "observed",
+      "source": {
+        "title": "Preliminary results from the Egger et al. Kenya trial",
+        "cell": "New CEA!B48"
+      },
+      "explainer": "A 45% drop in all-cause child mortality. Preliminary and unpublished at the time."
+    },
+    {
+      "id": "iv_adj_mortality",
+      "section": "mortality",
+      "label": "Internal validity adjustment (mortality)",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B49; Inputs!D49:F49"
+      },
+      "explainer": "Halves the effect because one preliminary result this large is likely an overestimate. Range is GiveWell's own."
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "mortality",
+      "label": "Reduction in under-five mortality (adjusted)",
+      "format": "percent",
+      "formula": "mortality_reduction_raw * iv_adj_mortality",
+      "expected": 0.225
+    },
+    {
+      "id": "under5_deaths_averted",
+      "section": "mortality",
+      "label": "Under-five deaths averted",
+      "format": "number",
+      "formula": "under5_reached * under5_mortality_target * mortality_reduction",
+      "expected": 5.986295771
+    },
+    {
+      "id": "child_mortality_uov",
+      "section": "mortality",
+      "label": "Units of value from child deaths averted",
+      "format": "number",
+      "formula": "under5_deaths_averted * $uov_per_under5_death",
+      "expected": 694.4103094
+    },
+    {
+      "id": "adult_mortality_share",
+      "section": "mortality",
+      "label": "Adult mortality benefits, as a share of child benefits",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B54"
+      },
+      "explainer": "Cash plausibly reduces adult deaths too, but there is little data. GiveWell adds half the child benefit."
+    },
+    {
+      "id": "mortality_uov",
+      "section": "mortality",
+      "label": "Mortality benefits",
+      "unit": "units of value",
+      "format": "number",
+      "formula": "child_mortality_uov * (1 + adult_mortality_share)",
+      "expected": 1041.615464
+    },
+    {
+      "id": "adj_morbidity",
+      "section": "supplementary",
+      "label": "Reduced morbidity",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B59"
+      },
+      "explainer": "Fewer illnesses short of death."
+    },
+    {
+      "id": "adj_development",
+      "section": "supplementary",
+      "label": "Developmental effects",
+      "format": "percent",
+      "value": 0.05,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B60"
+      },
+      "explainer": "Long-run gains for children, e.g. from better nutrition."
+    },
+    {
+      "id": "adj_leverage",
+      "section": "supplementary",
+      "label": "Leverage and funging",
+      "format": "percent",
+      "value": 0.02,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B61"
+      },
+      "explainer": "Net effect of the donation drawing in, or displacing, other funders."
+    },
+    {
+      "id": "adj_fraud",
+      "section": "supplementary",
+      "label": "Risk of wastage or fraud",
+      "format": "percent",
+      "value": -0.02,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B62"
+      },
+      "explainer": "Transfers that are diverted or lost."
+    },
+    {
+      "id": "adj_fungibility",
+      "section": "supplementary",
+      "label": "Within-organisation fungibility",
+      "format": "percent",
+      "value": -0.05,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B63"
+      },
+      "explainer": "Money given for one country may free up GiveDirectly money for less cost-effective work."
+    },
+    {
+      "id": "adj_psych_spillovers",
+      "section": "supplementary",
+      "label": "Psychological spillovers",
+      "format": "percent",
+      "value": -0.02,
+      "kind": "judgment",
+      "source": {
+        "cell": "New CEA!B64"
+      },
+      "explainer": "Non-recipients may feel worse off by comparison."
+    },
+    {
+      "id": "adjustment_factor",
+      "section": "supplementary",
+      "label": "Total adjustment factor",
+      "format": "percent",
+      "formula": "1 + adj_morbidity + adj_development + adj_leverage + adj_fraud + adj_fungibility + adj_psych_spillovers",
+      "expected": 1.08
+    },
+    {
+      "id": "modelled_uov",
+      "section": "bottom",
+      "label": "Modelled benefits (consumption, spillovers, mortality)",
+      "unit": "units of value",
+      "format": "number",
+      "formula": "consumption_uov + spillover_uov + mortality_uov",
+      "expected": 8070.878766
+    },
+    {
+      "id": "total_uov",
+      "section": "bottom",
+      "label": "Total benefits",
+      "unit": "units of value",
+      "format": "number",
+      "formula": "modelled_uov * adjustment_factor",
+      "expected": 8716.549067
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "bottom",
+      "label": "Units of value per dollar",
+      "unit": "units of value / $",
+      "format": "small",
+      "formula": "total_uov / donation",
+      "expected": 0.008716549067
+    },
+    {
+      "id": "previous_cash_benchmark",
+      "section": "bottom",
+      "label": "GiveWell's previous estimate for cash (units of value / $)",
+      "format": "small",
+      "value": 0.003355,
+      "kind": "estimate",
+      "source": {
+        "cell": "New CEA!B28"
+      },
+      "explainer": "GiveWell still expresses everything as a multiple of this older figure (\"× cash\"). Kept so this model reproduces GiveWell's headline numbers."
+    },
+    {
+      "id": "multiple_of_cash",
+      "section": "bottom",
+      "label": "GiveWell headline: multiple of cash",
+      "format": "multiple",
+      "formula": "uov_per_dollar / previous_cash_benchmark",
+      "expected": 2.598077218
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.08,
+        "high": 0.12
+      },
+      "kind": "judgment",
+      "explainer": "About 16% of GiveDirectly's costs are not transfers (see the cost share above). We guess half of that is staff pay. GiveDirectly publishes audited financials that could pin this down; we haven't extracted them yet. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "How much less staff earn than they could elsewhere, as a share of what they'd earn. Field staff in Kenya are paid at or near local market rates; headquarters staff in tech, finance and operations likely take a larger cut. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "donation * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "donation / (donation + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "unit": "units of value / $",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "uov_per_under5_death": 116,
+      "count_salary_sacrifice": 0,
+      "full_credit": 0
+    }
+  }
+}

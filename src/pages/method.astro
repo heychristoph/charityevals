@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Method" active="method">
+  <article class="page prose wrap">
+    <h1>How this works</h1>
+
+    <h2>Models are files you can read</h2>
+    <p>
+      Each charity is one JSON file in a public git repository. A model is a list of rows, like a spreadsheet: inputs with a value, and calculated rows with a formula over other rows. Every input says what kind of number it is (<strong>observed</strong> from data, an <strong>estimate</strong> made elsewhere, or a <strong>judgment</strong>), where it comes from, and why it has the value it has. The file's git history is the model's changelog.
+    </p>
+    <p>
+      Models imported from an evaluator have to reproduce that evaluator's own numbers. Every calculated row records the value the original spreadsheet shows, and the build fails if the model drifts from it. Where we disagree with a source, we say so in an explainer or a separate variant rather than quietly changing its numbers.
+    </p>
+
+    <h2>Models can build on each other</h2>
+    <p>
+      A model can extend another and override only the rows that differ. GiveDirectly in Malawi extends GiveDirectly in Kenya and changes eight inputs; everything else, including the explanations, is shared. The same mechanism lets a new charity reuse the structure of a well-reviewed one, which keeps comparisons like for like.
+    </p>
+
+    <h2>Two views of every charity</h2>
+    <p>
+      Each model first reproduces its evaluator's analysis exactly, with their moral weights and accounting. That is the <strong>evaluator view</strong>. The <strong>charityevals view</strong> starts from the same model and applies your assumptions plus two accounting choices evaluators make differently. Where we disagree with an input, the page shows both values and says why.
+    </p>
+
+    <h2>Two accounting choices</h2>
+    <p>
+      <strong>Salary sacrifice.</strong> Staff who earn less than they could in comparable for-profit jobs are paying part of the cost of the work. We count that forgone salary as an in-kind donation, so your dollar is credited with its share of the impact, not all of it. Evaluators usually credit everything to cash.
+    </p>
+    <p>
+      <strong>Credit for shared outcomes.</strong> A corporate pledge usually follows several organisations' campaigns. By default each charity is credited with its estimated share, as ACE does. Switch to full credit to count the whole outcome for each organisation that was necessary to it. That inflates totals across charities but answers a different question: what would be lost without this one.
+    </p>
+
+    <h2>Shared facts and history</h2>
+    <p>
+      Data that several models need, such as a country's child mortality rate, lives in one shared file, so two models working in Kenya can't silently disagree about Kenya. Every change to a model is a git commit, and each charity's history page recomputes the result at every version.
+    </p>
+
+    <h2>Ranges, not simulations</h2>
+    <p>
+      Every input can carry a low, best and high value, taken from the source wherever it gives one. We report three numbers: the <strong>central</strong> estimate, with every input at its best guess, and a <strong>joint low</strong> and <strong>joint high</strong>, with every input at whichever end of its range lowers or raises the result. These bounds are deliberately pessimistic and optimistic, not a 90% interval. Rankings use the central estimate, the typical case.
+    </p>
+    <p>
+      The chart on each charity's page moves one input at a time from low to high. The longest bars are the numbers worth arguing about.
+    </p>
+
+    <h2>Comparing causes</h2>
+    <p>
+      Each cause keeps its own unit: GiveWell's units of value (one unit is doubling one person's consumption for a year), suffering-adjusted days for animals. To put them on one list we convert to GiveWell units using exchange rates you control, and express everything as a multiple of GiveDirectly. Those rates are judgments with no agreed answer. The site shows you which of them would change the ranking.
+    </p>
+
+    <h2>Flags</h2>
+    <p>
+      A model is flagged when its joint range spans more than 100×, when more than half of its uncertainty comes from judgment calls and shared assumptions, when inputs on the result's path have no range, or when the source analysis is more than 18 months old.
+    </p>
+
+    <h2>What this is not</h2>
+    <p>
+      Not an evaluator's recommendation, and not endorsed by GiveWell, Animal Charity Evaluators or any charity listed. Cost-effectiveness is one input to a giving decision; room for more funding, organisational strength and track record matter too and are not modelled here yet.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .wrap {
+    padding-top: var(--s6);
+  }
+  h1 {
+    margin-bottom: var(--s5);
+  }
+  h2 {
+    font-size: 22px;
+    margin: var(--s6) 0 var(--s3);
+  }
+</style>

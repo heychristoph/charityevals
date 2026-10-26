@@ -1,0 +1,165 @@
+{
+  "groups": [
+    {
+      "id": "accounting",
+      "title": "How impact is counted",
+      "explainer": "Accounting choices that apply to every charity. Evaluators make these choices differently, and each changes who gets credit for an outcome. The evaluator view uses each evaluator's own choice."
+    },
+    {
+      "id": "cross-cause",
+      "title": "Exchange rates between causes",
+      "explainer": "Every model reports in its own unit: GiveWell's units of value, suffering-adjusted days (SADs) for animals. To rank them on one list, each unit is converted to GiveWell units of value with the rates below. Change them and the ranking changes; that is the point."
+    },
+    {
+      "id": "moral-weights",
+      "title": "Moral weights",
+      "explainer": "How much good one thing is worth compared to another. These are value judgments, not facts, and they drive most cross-cause comparisons. Defaults follow the evaluator a model was imported from."
+    },
+    {
+      "id": "economics",
+      "title": "Economics",
+      "explainer": "Shared parameters such as how much less a benefit next year counts than one today."
+    }
+  ],
+  "rows": [
+    {
+      "id": "count_salary_sacrifice",
+      "section": "accounting",
+      "label": "Count staff salary sacrifice as a donation",
+      "format": "toggle",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Many nonprofit staff earn less than they could in comparable for-profit jobs. That gap is a donation in kind: the staff pay part of the cost of the impact. When this is on, the cost of the work is cash spending plus that forgone salary, so your dollar is credited with only its share of the impact.\n\nWhen it's off, as in GiveWell's and ACE's models, all of the impact is credited to cash donations. Each model estimates its own staff costs and pay gap, and says how."
+    },
+    {
+      "id": "full_credit",
+      "section": "accounting",
+      "label": "Give full credit for outcomes shared with other organisations",
+      "format": "toggle",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Most outcomes need several organisations: a corporate pledge follows campaigns by several groups. Off (the default, and ACE's approach) credits each charity with its estimated share. On credits each with the whole outcome, on the view that removing any necessary link would have stopped it.\n\nShares never add up across charities under full credit, so comparisons between charities that share outcomes get harder. Use it to see how much a ranking depends on the choice."
+    },
+    {
+      "id": "uov_per_daly",
+      "section": "cross-cause",
+      "label": "Units of value per human DALY averted",
+      "unit": "units of value / DALY",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Bridge from health to GiveWell's units. A rough derivation: GiveWell values an under-five death at 116 units, and a child death in sub-Saharan Africa costs roughly 55–65 years of life, so one year of healthy life is worth about 2 units.\n\nThis ignores GiveWell's age weighting and treats years lost to disability like years lost to death. Ours, not GiveWell's."
+    },
+    {
+      "id": "daly_per_sad",
+      "section": "cross-cause",
+      "label": "Human DALYs per suffering-adjusted day",
+      "unit": "DALY / SAD",
+      "format": "small",
+      "value": {
+        "low": 0.00027,
+        "best": 0.0011,
+        "high": 0.0027
+      },
+      "kind": "judgment",
+      "explainer": "Suffering-adjusted days (SADs), from Ambitious Impact, count days of animal suffering weighted by pain intensity and by a species' welfare range relative to humans. ACE uses them.\n\nWe read one SAD as one human-equivalent day of disabling-level pain and give that day a disability weight of 0.4 (0.1–1.0), so one SAD is 0.4 / 365 DALY. AIM doesn't publish an official SAD-to-DALY rate, so this is the least grounded number on the site and often decides whether animal charities rank above or below global health."
+    },
+    {
+      "id": "animal_moral_weight",
+      "section": "cross-cause",
+      "label": "Extra weight on animal suffering, beyond welfare ranges",
+      "unit": "×",
+      "format": "multiple",
+      "value": {
+        "low": 0.05,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "SADs already scale suffering by each species' welfare range. At 1 you take those welfare ranges at face value. Below 1 you discount animal suffering further, for example because you're unsure animals are sentient or because you give more weight to humans for other reasons."
+    },
+    {
+      "id": "uov_per_ln_consumption",
+      "section": "moral-weights",
+      "label": "Value of raising ln(consumption) by 1 for one person for one year",
+      "unit": "units of value",
+      "format": "number",
+      "value": {
+        "low": 1.082021281,
+        "best": 1.4426950408889634,
+        "high": 1.803368801
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell GiveDirectly CEA, Inputs tab",
+        "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit?gid=1755045987",
+        "cell": "New CEA!B20; Inputs!D20:F20"
+      },
+      "explainer": "GiveWell defines one unit of value as doubling one person's consumption for one year. Doubling raises ln(consumption) by ln 2, so one unit of ln(consumption) is worth 1/ln 2 ≈ 1.44 units.\n\nThe low and high ends are the ±25% uniform range GiveWell itself uses in its Monte Carlo inputs. Moving this moves the value of consumption gains relative to deaths averted."
+    },
+    {
+      "id": "uov_per_under5_death",
+      "section": "moral-weights",
+      "label": "Value of averting the death of a child under five",
+      "unit": "units of value",
+      "format": "number",
+      "value": {
+        "low": 70,
+        "best": 116,
+        "high": 160
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "GiveWell GiveDirectly CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit?gid=1755045987",
+        "cell": "New CEA!B52"
+      },
+      "explainer": "GiveWell's moral weight: averting one under-five death is worth as much as doubling consumption for 116 person-years. It comes from a mix of donor surveys, a survey of people in Ghana and Kenya, and staff judgment.\n\nGiveWell doesn't vary this in its own uncertainty analysis. The 70–160 range is ours, to show how much the ranking leans on it."
+    },
+    {
+      "id": "discount_rate",
+      "section": "economics",
+      "label": "Annual discount rate",
+      "unit": "per year",
+      "format": "percent",
+      "value": {
+        "low": 0.0,
+        "best": 0.04,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "How much less a benefit a year from now counts than one today, compounding. GiveWell and ACE both use 4%.\n\nUsed where a model discounts explicitly (ACE's cage-free campaigns). GiveWell's GiveDirectly model has the 4% built into its year 2–10 consumption ratio, so changing this doesn't affect it yet."
+    }
+  ],
+  "units": {
+    "uov": {
+      "label": "GiveWell units of value",
+      "short": "UoV",
+      "to_common": "1",
+      "explainer": "One unit = doubling one person's consumption for one year."
+    },
+    "sad": {
+      "label": "suffering-adjusted days averted",
+      "short": "SADs",
+      "to_common": "$daly_per_sad * $uov_per_daly * $animal_moral_weight",
+      "explainer": "Days of animal suffering averted, weighted by pain intensity and species welfare range (Ambitious Impact)."
+    }
+  },
+  "common": {
+    "unit": "uov",
+    "benchmark": "givedirectly",
+    "benchmark_label": "× GiveDirectly"
+  }
+}

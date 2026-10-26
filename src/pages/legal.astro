@@ -1,0 +1,25 @@
+---
+import Prose from "../layouts/Prose.astro";
+import { publisher, repo } from "../lib/site";
+---
+
+<Prose title="Legal notice" description="Who publishes charityevals and how to reach them.">
+  <h2>Published by</h2>
+  <address>
+    {publisher.name}<br />
+    {publisher.street}<br />
+    {publisher.postcode} {publisher.city}<br />
+    {publisher.country}
+  </address>
+
+  <h2>Contact</h2>
+  <p><a href={`mailto:${publisher.email}`}>{publisher.email}</a></p>
+
+  <h2>Responsible for content</h2>
+  <p>{publisher.name}, at the address above.</p>
+
+  <h2>Source and history</h2>
+  <p>
+    The site's code, models and every change to them are public at <a href={repo}>{repo.replace("https://", "")}</a>.
+  </p>
+</Prose>
