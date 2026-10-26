@@ -1,0 +1,30 @@
+---
+import Prose from "../layouts/Prose.astro";
+import { publisher, repo } from "../lib/site";
+---
+
+<Prose title="About" active="about" description="Who runs charityevals, why it exists and how to contribute.">
+  <p>
+    charityevals publishes cost-effectiveness analyses of charities as open, readable models. Each model shows every number it uses, where that number comes from and how much it could plausibly vary, and lets you change the value judgments that decide how charities compare.
+  </p>
+
+  <h2>Why</h2>
+  <p>
+    Charity evaluators publish excellent analyses, mostly as large spreadsheets that are hard to read and harder to compare across causes. Some causes, such as most of AI safety and much of animal welfare, have no charity-level analyses at all. This site rebuilds published analyses so they can be read, compared and challenged, and aims to fill gaps where no evaluator works.
+  </p>
+
+  <h2>Who</h2>
+  <p>
+    charityevals is an independent project run by {publisher.name} in {publisher.city}. It is not affiliated with GiveWell, Animal Charity Evaluators or any charity on the site, and receives no money from them. Where a model is based on an evaluator's work, its page credits the source and says where we differ.
+  </p>
+
+  <h2>Corrections and contributions</h2>
+  <p>
+    Every model is a file in a <a href={repo}>public repository</a>, and every change is visible in its history. If a number is wrong, open an issue or a pull request with a source, or email <a href={`mailto:${publisher.email}`}>{publisher.email}</a>. Corrections with a source are welcome from anyone, including the charities themselves.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    <a href={`mailto:${publisher.email}`}>{publisher.email}</a>. Postal address and other details are in the <a href="/legal">legal notice</a>.
+  </p>
+</Prose>
