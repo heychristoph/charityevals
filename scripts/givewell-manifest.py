@@ -62,8 +62,9 @@ CHARITY = [
     (r"vitamin A|Helen Keller|HKI", "helen-keller-intl"),
     (r"insecticide-treated net|\bITN\b|AMF", "against-malaria-foundation"),
     (r"value of the grant model for New Incentives|IDinsight", "idinsight"),
+    (r"Global Vaccines", "international-rescue-committee"),  # IRC's vaccination scoping, modelled on New Incentives
     (r"New Incentives|NI CEA", "new-incentives"),
-    (r"Global Vaccines|IRC|Malnutrition treatment CEA \(IRC", "international-rescue-committee"),
+    (r"IRC|Malnutrition treatment CEA \(IRC", "international-rescue-committee"),
     (r"Taimaka", "taimaka"),
     (r"ALIMA|combined protocol", "alima"),
     (r"Uduma", "uduma"),

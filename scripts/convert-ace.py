@@ -299,6 +299,21 @@ rows_out += [
 ]
 sections += [{"id": "bottom", "title": "Bottom line", "explainer": f"{a.unit_label} per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."},
              {"id": "donor", "title": "Your dollar's share", "explainer": "charityevals adjustments on top of ACE's model."}]
+# Credit shared with other organisations: ACE deducts other groups' contribution to an achievement. The
+# full-credit toggle counts the whole achievement instead (as Sinergia's model does), so each such input
+# keeps ACE's estimate in a "_shared" row and the row the formulas use is zero under full credit.
+ATTRIBUTION = re.compile(r"contribution (made )?by other (organi[sz]ations|charities|groups)", re.I)
+shared_rows = []
+for r in rows_out:
+    if "value" in r and ATTRIBUTION.search(r["label"]):
+        shared = {**r, "id": f"{r['id']}_shared", "label": f"{r['label']} (ACE's estimate)"}
+        best = r["value"]["best"] if isinstance(r["value"], dict) else r["value"]
+        for k in ("value", "kind", "source", "explainer"): r.pop(k, None)
+        r.update({"formula": f"if($full_credit, 0, {shared['id']})", "expected": best,
+                  "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."})
+        shared_rows.append(shared)
+rows_out = shared_rows + rows_out
+
 names = ", ".join(t for *_, t in programs)
 model = {
     "id": a.id, "name": a.name, "kind": "charity", "cause": "animal-welfare", "charity": a.charity or a.id, "owner": "ace",
