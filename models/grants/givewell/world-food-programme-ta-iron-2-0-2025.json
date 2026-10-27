@@ -21,7 +21,7 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "uov_per_daly": 2.3,
+   "uov_per_daly": 2.26,
    "uov_per_ln_consumption": 1.44
   }
  },
@@ -98,8 +98,8 @@
  ],
  "rows": [
   {
-   "id": "supp",
-   "label": "supp",
+   "id": "annual_anemia_ylds_years_lived_with_disability_per_100_000_p",
+   "label": "Annual anemia YLDs (years lived with disability) per 100,000 people, all ages, 2021, India",
    "section": "iron_fortification_cea",
    "value": 1272.0174,
    "kind": "estimate",
@@ -151,22 +151,23 @@
    }
   },
   {
-   "id": "anemia_val",
-   "label": "Anemia (val)",
+   "id": "r_2021",
+   "label": "2021",
    "section": "gbd_2021_anemia_yld_data",
+   "unit": "Rate",
+   "value": 1272.01738908328,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "GBD 2021 Anemia YLD Data!P11"
-   },
-   "formula": "@givewell.anemia_val",
-   "expected": 1272.01738908328
+   }
   },
   {
    "id": "adjustment_for_state_level_anemia_burden_bihar",
    "label": "Adjustment for state-level anemia burden (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "rate_per_100_000 / anemia_val - 1",
+   "formula": "rate_per_100_000 / r_2021 - 1",
    "expected": 0.1516613787,
    "format": "percent"
   },
@@ -174,7 +175,7 @@
    "id": "annual_anemia_ylds_per_100_000_people_all_ages_2021_adjusted",
    "label": "Annual anemia YLDs per 100,000 people, all ages, 2021, adjusted (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "supp * (1 + adjustment_for_future_anemia_trends_bihar) * (1 + adjustment_for_socioeconomic_status_of_beneficiaries_bihar) * (1 + adjustment_for_state_level_anemia_burden_bihar)",
+   "formula": "annual_anemia_ylds_years_lived_with_disability_per_100_000_p * (1 + adjustment_for_future_anemia_trends_bihar) * (1 + adjustment_for_socioeconomic_status_of_beneficiaries_bihar) * (1 + adjustment_for_state_level_anemia_burden_bihar)",
    "expected": 1245.193316
   },
   {
@@ -273,8 +274,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_2",
-   "label": "supp",
+   "id": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie",
+   "label": "Proportion of anemia YLDs attributed to dietary iron deficiency, all ages",
    "section": "iron_fortification_cea",
    "value": 0.6922853712,
    "kind": "estimate",
@@ -287,8 +288,8 @@
    "format": "percent"
   },
   {
-   "id": "weighted_average",
-   "label": "Weighted average",
+   "id": "additional_trials_included_in_givewell_s_meta_analysis_weigh",
+   "label": "Additional trials included in GiveWell's meta-analysis: Weighted average",
    "section": "iron_fortification_trials",
    "value": 0.6524914818,
    "kind": "estimate",
@@ -301,10 +302,10 @@
    "format": "percent"
   },
   {
-   "id": "supp_3",
-   "label": "supp",
+   "id": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_2",
+   "label": "Proportion of anemia YLDs attributed to dietary iron deficiency, trials included in GiveWell's meta-analysis",
    "section": "iron_fortification_cea",
-   "formula": "weighted_average",
+   "formula": "additional_trials_included_in_givewell_s_meta_analysis_weigh",
    "expected": 0.6524914818,
    "format": "percent"
   },
@@ -312,13 +313,13 @@
    "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr",
    "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency",
    "section": "iron_fortification_cea",
-   "formula": "supp_2 / supp_3 - 1",
+   "formula": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie / proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_2 - 1",
    "expected": 0.06098759988,
    "format": "percent"
   },
   {
-   "id": "philippines_study_weights",
-   "label": "Philippines (Study weights)",
+   "id": "studies_included_in_effect_of_rice_fortification_on_anemia_a",
+   "label": "Studies included in effect of rice fortification on anemia: Angeles‐Agdeppa 2008, Philippines (Study weights)",
    "section": "ev_adjustment",
    "value": 0.171,
    "kind": "estimate",
@@ -338,87 +339,94 @@
    "expected": 0.3333333333
   },
   {
-   "id": "both_sexes_value",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 0.24,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H16"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_2",
+   "expected": 0.24
   },
   {
-   "id": "both_sexes_value_2",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_2",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 91.07,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H18"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_8",
+   "expected": 91.07
   },
   {
-   "id": "both_sexes_value_3",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_3",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 2.26,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H20"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.26,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.26."
   },
   {
-   "id": "both_sexes_value_4",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_4",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 0.19,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H15"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value",
+   "expected": 0.19
   },
   {
-   "id": "both_sexes_value_5",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_5",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 312.74,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H17"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_11",
+   "expected": 312.74
   },
   {
-   "id": "both_sexes_value_6",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_6",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 0.19,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H19"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value",
+   "expected": 0.19
   },
   {
    "id": "r_180_anaemic_hb_120_g_l_children_aged_6_9_years_of_age_attend_2",
    "label": "180 anaemic (Hb < 120 g/L) children aged 6‐9 years of age attending San Joaquin Elementary School (Adjusment factor for inflammation exposure in children)",
    "section": "ev_adjustment",
-   "formula": "sum(both_sexes_value, both_sexes_value_2, both_sexes_value_3) / sum(both_sexes_value_4, both_sexes_value_5, both_sexes_value_6)",
+   "formula": "sum(ylds_years_lived_with_disability_value, ylds_years_lived_with_disability_value_2, ylds_years_lived_with_disability_value_3) / sum(ylds_years_lived_with_disability_value_4, ylds_years_lived_with_disability_value_5, ylds_years_lived_with_disability_value_6)",
    "expected": 0.2988311191
   },
   {
-   "id": "india_study_weights",
-   "label": "India (Study weights)",
+   "id": "studies_included_in_effect_of_rice_fortification_on_anemia_r",
+   "label": "Studies included in effect of rice fortification on anemia: Radhika 2011, India (Study weights)",
    "section": "ev_adjustment",
    "value": 0.075,
    "kind": "estimate",
@@ -438,21 +446,23 @@
    "expected": 0.1666666667
   },
   {
-   "id": "both_sexes_value_7",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_7",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 13.23,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H10"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_6",
+   "expected": 13.23
   },
   {
-   "id": "both_sexes_value_8",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_8",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
+   "unit": "Rate",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -462,33 +472,36 @@
    }
   },
   {
-   "id": "both_sexes_value_9",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_9",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 211.08,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H14"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_10",
+   "expected": 211.08
   },
   {
-   "id": "both_sexes_value_10",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_10",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 12.86,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H9"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_3",
+   "expected": 12.86
   },
   {
-   "id": "both_sexes_value_11",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_11",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
+   "unit": "Rate",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -498,27 +511,28 @@
    }
   },
   {
-   "id": "both_sexes_value_12",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_12",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 140.78,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H12"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_9",
+   "expected": 140.78
   },
   {
    "id": "r_140_school_children_aged_5_11_years_54_boys_and_86_girls_wit_2",
    "label": "140 school children aged 5–11 years (54 boys and 86 girls) with Hb ≥ 70 g/L (Adjusment factor for inflammation exposure in children)",
    "section": "ev_adjustment",
-   "formula": "sum(both_sexes_value_7, both_sexes_value_8, both_sexes_value_9) / sum(both_sexes_value_10, both_sexes_value_11, both_sexes_value_12)",
+   "formula": "sum(ylds_years_lived_with_disability_value_7, ylds_years_lived_with_disability_value_8, ylds_years_lived_with_disability_value_9) / sum(ylds_years_lived_with_disability_value_10, ylds_years_lived_with_disability_value_11, ylds_years_lived_with_disability_value_12)",
    "expected": 1.459971362
   },
   {
-   "id": "india_study_weights_2",
-   "label": "India (Study weights)",
+   "id": "studies_included_in_effect_of_rice_fortification_on_anemia_t",
+   "label": "Studies included in effect of rice fortification on anemia: Thankachan 2012, India (Study weights)",
    "section": "ev_adjustment",
    "value": 0.228,
    "kind": "estimate",
@@ -541,12 +555,12 @@
    "id": "r_258_children_aged_6_12_years_attending_4_primary_schools_adj",
    "label": "258 children aged 6–12 years attending 4 primary schools (Adjusment factor for inflammation exposure in children)",
    "section": "ev_adjustment",
-   "formula": "sum(both_sexes_value_7, both_sexes_value_8, both_sexes_value_9) / sum(both_sexes_value_10, both_sexes_value_11, both_sexes_value_12)",
+   "formula": "sum(ylds_years_lived_with_disability_value_7, ylds_years_lived_with_disability_value_8, ylds_years_lived_with_disability_value_9) / sum(ylds_years_lived_with_disability_value_10, ylds_years_lived_with_disability_value_11, ylds_years_lived_with_disability_value_12)",
    "expected": 1.459971362
   },
   {
-   "id": "indonesia_study_weights",
-   "label": "Indonesia (Study weights)",
+   "id": "studies_included_in_effect_of_rice_fortification_on_anemia_h",
+   "label": "Studies included in effect of rice fortification on anemia: Hardinsyah 2016, Indonesia (Study weights)",
    "section": "ev_adjustment",
    "value": 0.164,
    "kind": "estimate",
@@ -579,8 +593,8 @@
    "explainer": "Hot extrusion"
   },
   {
-   "id": "cambodia_study_weights",
-   "label": "Cambodia (Study weights)",
+   "id": "perignon_2016_c_study_weights",
+   "label": "Perignon 2016 (C) (Study weights)",
    "section": "ev_adjustment",
    "value": 0.161,
    "kind": "estimate",
@@ -600,33 +614,36 @@
    "expected": 0.3888888889
   },
   {
-   "id": "both_sexes_value_13",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_13",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 74.77,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H3"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_7",
+   "expected": 74.77
   },
   {
-   "id": "both_sexes_value_14",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_14",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 13.2,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H6"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_5",
+   "expected": 13.2
   },
   {
-   "id": "both_sexes_value_15",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_15",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
+   "unit": "Rate",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -636,33 +653,36 @@
    }
   },
   {
-   "id": "both_sexes_value_16",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_16",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 324.02,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H4"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_12",
+   "expected": 324.02
   },
   {
-   "id": "both_sexes_value_17",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_17",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
-   "value": 12.96,
-   "kind": "estimate",
+   "unit": "Rate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Source GBD 2019 data on infecti!H5"
-   }
+   },
+   "formula": "@givewell.ylds_years_lived_with_disability_value_4",
+   "expected": 12.96
   },
   {
-   "id": "both_sexes_value_18",
-   "label": "Both sexes (Value)",
+   "id": "ylds_years_lived_with_disability_value_18",
+   "label": "YLDs (Years Lived with Disability) (Value)",
    "section": "source_gbd_2019_data_on_infecti",
+   "unit": "Rate",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -675,12 +695,12 @@
    "id": "a_total_of_2440_schoolchildren_6_16_years_old_adjusment_fact",
    "label": "A total of 2440 schoolchildren (6–16 years old) (Adjusment factor for inflammation exposure in children)",
    "section": "ev_adjustment",
-   "formula": "sum(both_sexes_value_13, both_sexes_value_14, both_sexes_value_15) / sum(both_sexes_value_16, both_sexes_value_17, both_sexes_value_18)",
+   "formula": "sum(ylds_years_lived_with_disability_value_13, ylds_years_lived_with_disability_value_14, ylds_years_lived_with_disability_value_15) / sum(ylds_years_lived_with_disability_value_16, ylds_years_lived_with_disability_value_17, ylds_years_lived_with_disability_value_18)",
    "expected": 0.2610540685
   },
   {
-   "id": "bangladesh_study_weights",
-   "label": "Bangladesh (Study weights)",
+   "id": "studies_included_in_effect_of_rice_fortification_on_anemia_a_2",
+   "label": "Studies included in effect of rice fortification on anemia: Ara 2019, Bangladesh (Study weights)",
    "section": "ev_adjustment",
    "value": 0.203,
    "kind": "estimate",
@@ -713,17 +733,17 @@
    "explainer": "Hot extrusion"
   },
   {
-   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2",
    "label": "Inflammation exposure index rating (as a % of max score) in study population",
    "section": "ev_adjustment",
-   "formula": "sum(philippines_study_weights * r_180_anaemic_hb_120_g_l_children_aged_6_9_years_of_age_attend * r_180_anaemic_hb_120_g_l_children_aged_6_9_years_of_age_attend_2, india_study_weights * r_140_school_children_aged_5_11_years_54_boys_and_86_girls_wit * r_140_school_children_aged_5_11_years_54_boys_and_86_girls_wit_2, india_study_weights_2 * r_258_children_aged_6_12_years_attending_4_primary_schools_inf * r_258_children_aged_6_12_years_attending_4_primary_schools_adj, indonesia_study_weights * r_215_post_menarchal_anaemic_and_non_anaemic_adolescent_girls * r_215_post_menarchal_anaemic_and_non_anaemic_adolescent_girls_2, cambodia_study_weights * a_total_of_2440_schoolchildren_6_16_years_old_inflammation_e * a_total_of_2440_schoolchildren_6_16_years_old_adjusment_fact, bangladesh_study_weights * r_870_vulnerable_ultra_poor_women_of_reproductive_age_15_49_ye * r_870_vulnerable_ultra_poor_women_of_reproductive_age_15_49_ye_2)",
+   "formula": "sum(studies_included_in_effect_of_rice_fortification_on_anemia_a * r_180_anaemic_hb_120_g_l_children_aged_6_9_years_of_age_attend * r_180_anaemic_hb_120_g_l_children_aged_6_9_years_of_age_attend_2, studies_included_in_effect_of_rice_fortification_on_anemia_r * r_140_school_children_aged_5_11_years_54_boys_and_86_girls_wit * r_140_school_children_aged_5_11_years_54_boys_and_86_girls_wit_2, studies_included_in_effect_of_rice_fortification_on_anemia_t * r_258_children_aged_6_12_years_attending_4_primary_schools_inf * r_258_children_aged_6_12_years_attending_4_primary_schools_adj, studies_included_in_effect_of_rice_fortification_on_anemia_h * r_215_post_menarchal_anaemic_and_non_anaemic_adolescent_girls * r_215_post_menarchal_anaemic_and_non_anaemic_adolescent_girls_2, perignon_2016_c_study_weights * a_total_of_2440_schoolchildren_6_16_years_old_inflammation_e * a_total_of_2440_schoolchildren_6_16_years_old_adjusment_fact, studies_included_in_effect_of_rice_fortification_on_anemia_a_2 * r_870_vulnerable_ultra_poor_women_of_reproductive_age_15_49_ye * r_870_vulnerable_ultra_poor_women_of_reproductive_age_15_49_ye_2)",
    "expected": 0.1438068128
   },
   {
-   "id": "supp_4",
-   "label": "supp",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "label": "Inflammation exposure index rating (as a % of max score) in study population",
    "section": "iron_fortification_cea",
-   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2",
    "expected": 0.1438068128,
    "format": "percent"
   },
@@ -790,17 +810,17 @@
    "expected": 0.1
   },
   {
-   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
    "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "ev_adjustment",
    "formula": "of_program_beneficiaries_that_are_children_15 * inflammation_exposure_index_rating_as_a_of_max_score_for_chi + of_program_beneficiaries_that_are_adults_15 * inflammation_exposure_index_rating_as_a_of_max_score_for_adu",
    "expected": 0.1453312185
   },
   {
-   "id": "supp_5",
-   "label": "supp",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "iron_fortification_cea",
-   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
    "expected": 0.1453312185,
    "format": "percent"
   },
@@ -822,7 +842,7 @@
    "id": "adjustment_for_inflammation_in_program_compared_to_study_pop",
    "label": "Adjustment for inflammation in program compared to study population",
    "section": "iron_fortification_cea",
-   "formula": "(supp_4 / supp_5 - 1) * assumed_effect_of_inflammation_on_iron_absorption",
+   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud / inflammation_exposure_index_rating_as_a_of_max_score_in_prog - 1) * assumed_effect_of_inflammation_on_iron_absorption",
    "expected": -0.002097836435,
    "format": "percent"
   },
@@ -841,8 +861,8 @@
    "format": "percent"
   },
   {
-   "id": "effect_on_iron_intake_a62_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A62 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_62",
+   "label": "Iron (mg/kg) (28-42.5) (row 62)",
    "section": "effect_on_iron_intake",
    "value": 33.0,
    "kind": "estimate",
@@ -853,8 +873,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a66_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A66 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_66",
+   "label": "Iron (mg/kg) (28-42.5) (row 66)",
    "section": "effect_on_iron_intake",
    "value": 50.0,
    "kind": "estimate",
@@ -865,8 +885,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a69_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A69 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_69",
+   "label": "Iron (mg/kg) (28-42.5) (row 69)",
    "section": "effect_on_iron_intake",
    "value": 34.0,
    "kind": "estimate",
@@ -877,8 +897,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a70_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A70 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_70",
+   "label": "Iron (mg/kg) (28-42.5) (row 70)",
    "section": "effect_on_iron_intake",
    "value": 41.0,
    "kind": "estimate",
@@ -889,8 +909,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a72_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A72 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_72",
+   "label": "Iron (mg/kg) (28-42.5) (row 72)",
    "section": "effect_on_iron_intake",
    "value": 53.0,
    "kind": "estimate",
@@ -901,8 +921,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a74_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A74 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_74",
+   "label": "Iron (mg/kg) (28-42.5) (row 74)",
    "section": "effect_on_iron_intake",
    "value": 32.0,
    "kind": "estimate",
@@ -913,8 +933,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a78_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A78 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_78",
+   "label": "Iron (mg/kg) (28-42.5) (row 78)",
    "section": "effect_on_iron_intake",
    "value": 28.0,
    "kind": "estimate",
@@ -925,8 +945,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a80_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A80 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_80",
+   "label": "Iron (mg/kg) (28-42.5) (row 80)",
    "section": "effect_on_iron_intake",
    "value": 31.0,
    "kind": "estimate",
@@ -937,8 +957,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a83_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A83 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_83",
+   "label": "Iron (mg/kg) (28-42.5) (row 83)",
    "section": "effect_on_iron_intake",
    "value": 35.0,
    "kind": "estimate",
@@ -949,8 +969,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a84_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A84 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_84",
+   "label": "Iron (mg/kg) (28-42.5) (row 84)",
    "section": "effect_on_iron_intake",
    "value": 34.0,
    "kind": "estimate",
@@ -961,8 +981,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a88_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A88 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_88",
+   "label": "Iron (mg/kg) (28-42.5) (row 88)",
    "section": "effect_on_iron_intake",
    "value": 31.0,
    "kind": "estimate",
@@ -973,8 +993,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a93_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A93 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_93",
+   "label": "Iron (mg/kg) (28-42.5) (row 93)",
    "section": "effect_on_iron_intake",
    "value": 42.0,
    "kind": "estimate",
@@ -985,8 +1005,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a95_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A95 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_95",
+   "label": "Iron (mg/kg) (28-42.5) (row 95)",
    "section": "effect_on_iron_intake",
    "value": 30.0,
    "kind": "estimate",
@@ -997,8 +1017,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a97_iron_mg_kg_28_42_5",
-   "label": "Effect on iron intake!A97 (Iron (mg/kg) (28-42.5))",
+   "id": "iron_mg_kg_28_42_5_row_97",
+   "label": "Iron (mg/kg) (28-42.5) (row 97)",
    "section": "effect_on_iron_intake",
    "value": 56.0,
    "kind": "estimate",
@@ -1009,17 +1029,17 @@
    }
   },
   {
-   "id": "average_iron_content_in_rice_fortified_above_minimum_standar",
+   "id": "average_iron_content_in_rice_fortified_above_minimum_standar_2",
    "label": "Average iron content in rice fortified above minimum standard (mg/kg of rice)",
    "section": "effect_on_iron_intake",
-   "formula": "avg(effect_on_iron_intake_a62_iron_mg_kg_28_42_5, effect_on_iron_intake_a66_iron_mg_kg_28_42_5, effect_on_iron_intake_a69_iron_mg_kg_28_42_5, effect_on_iron_intake_a70_iron_mg_kg_28_42_5, effect_on_iron_intake_a72_iron_mg_kg_28_42_5, effect_on_iron_intake_a74_iron_mg_kg_28_42_5, effect_on_iron_intake_a78_iron_mg_kg_28_42_5, effect_on_iron_intake_a80_iron_mg_kg_28_42_5, effect_on_iron_intake_a83_iron_mg_kg_28_42_5, effect_on_iron_intake_a84_iron_mg_kg_28_42_5, effect_on_iron_intake_a88_iron_mg_kg_28_42_5, effect_on_iron_intake_a93_iron_mg_kg_28_42_5, effect_on_iron_intake_a95_iron_mg_kg_28_42_5, effect_on_iron_intake_a97_iron_mg_kg_28_42_5)",
+   "formula": "avg(iron_mg_kg_28_42_5_row_62, iron_mg_kg_28_42_5_row_66, iron_mg_kg_28_42_5_row_69, iron_mg_kg_28_42_5_row_70, iron_mg_kg_28_42_5_row_72, iron_mg_kg_28_42_5_row_74, iron_mg_kg_28_42_5_row_78, iron_mg_kg_28_42_5_row_80, iron_mg_kg_28_42_5_row_83, iron_mg_kg_28_42_5_row_84, iron_mg_kg_28_42_5_row_88, iron_mg_kg_28_42_5_row_93, iron_mg_kg_28_42_5_row_95, iron_mg_kg_28_42_5_row_97)",
    "expected": 37.85714286
   },
   {
-   "id": "supp_7",
-   "label": "supp",
+   "id": "average_iron_content_in_rice_fortified_above_minimum_standar",
+   "label": "Average iron content in rice fortified above minimum standard (mg/kg of rice)",
    "section": "iron_fortification_cea",
-   "formula": "average_iron_content_in_rice_fortified_above_minimum_standar",
+   "formula": "average_iron_content_in_rice_fortified_above_minimum_standar_2",
    "expected": 37.85714286
   },
   {
@@ -1136,16 +1156,16 @@
    "format": "percent"
   },
   {
-   "id": "supp_8",
-   "label": "supp",
+   "id": "increase_in_coverage_of_rice_fortified_above_minimum_standar",
+   "label": "Increase in coverage of rice fortified above minimum standard over the counterfactual thanks to WFP support, average over 3 years",
    "section": "iron_fortification_cea",
    "formula": "increase_in_rice_fortified_within_standards_with_wfp_support * of_fortified_rice_failing_quality_standards_due_to_under_for * skeptical_adjustment_givewell_s_best_guess",
    "expected": 0.0589,
    "format": "percent"
   },
   {
-   "id": "effect_on_iron_intake_a63",
-   "label": "Effect on iron intake!A63",
+   "id": "iron_mg_kg_28_42_5_row_63",
+   "label": "Iron (mg/kg) (28-42.5) (row 63)",
    "section": "effect_on_iron_intake",
    "value": 12.0,
    "kind": "estimate",
@@ -1156,8 +1176,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a64",
-   "label": "Effect on iron intake!A64",
+   "id": "iron_mg_kg_28_42_5_row_64",
+   "label": "Iron (mg/kg) (28-42.5) (row 64)",
    "section": "effect_on_iron_intake",
    "value": 16.0,
    "kind": "estimate",
@@ -1168,8 +1188,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a65",
-   "label": "Effect on iron intake!A65",
+   "id": "iron_mg_kg_28_42_5_row_65",
+   "label": "Iron (mg/kg) (28-42.5) (row 65)",
    "section": "effect_on_iron_intake",
    "value": 22.0,
    "kind": "estimate",
@@ -1180,8 +1200,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a67",
-   "label": "Effect on iron intake!A67",
+   "id": "iron_mg_kg_28_42_5_row_67",
+   "label": "Iron (mg/kg) (28-42.5) (row 67)",
    "section": "effect_on_iron_intake",
    "value": 7.0,
    "kind": "estimate",
@@ -1192,8 +1212,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a68",
-   "label": "Effect on iron intake!A68",
+   "id": "iron_mg_kg_28_42_5_row_68",
+   "label": "Iron (mg/kg) (28-42.5) (row 68)",
    "section": "effect_on_iron_intake",
    "value": 17.0,
    "kind": "estimate",
@@ -1204,8 +1224,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a71",
-   "label": "Effect on iron intake!A71",
+   "id": "iron_mg_kg_28_42_5_row_71",
+   "label": "Iron (mg/kg) (28-42.5) (row 71)",
    "section": "effect_on_iron_intake",
    "value": 22.0,
    "kind": "estimate",
@@ -1216,8 +1236,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a73",
-   "label": "Effect on iron intake!A73",
+   "id": "iron_mg_kg_28_42_5_row_73",
+   "label": "Iron (mg/kg) (28-42.5) (row 73)",
    "section": "effect_on_iron_intake",
    "value": 18.0,
    "kind": "estimate",
@@ -1228,8 +1248,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a75",
-   "label": "Effect on iron intake!A75",
+   "id": "iron_mg_kg_28_42_5_row_75",
+   "label": "Iron (mg/kg) (28-42.5) (row 75)",
    "section": "effect_on_iron_intake",
    "value": 12.0,
    "kind": "estimate",
@@ -1240,8 +1260,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a76",
-   "label": "Effect on iron intake!A76",
+   "id": "iron_mg_kg_28_42_5_row_76",
+   "label": "Iron (mg/kg) (28-42.5) (row 76)",
    "section": "effect_on_iron_intake",
    "value": 18.0,
    "kind": "estimate",
@@ -1252,8 +1272,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a77",
-   "label": "Effect on iron intake!A77",
+   "id": "iron_mg_kg_28_42_5_row_77",
+   "label": "Iron (mg/kg) (28-42.5) (row 77)",
    "section": "effect_on_iron_intake",
    "value": 20.0,
    "kind": "estimate",
@@ -1264,8 +1284,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a79",
-   "label": "Effect on iron intake!A79",
+   "id": "iron_mg_kg_28_42_5_row_79",
+   "label": "Iron (mg/kg) (28-42.5) (row 79)",
    "section": "effect_on_iron_intake",
    "value": 22.0,
    "kind": "estimate",
@@ -1276,8 +1296,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a81",
-   "label": "Effect on iron intake!A81",
+   "id": "iron_mg_kg_28_42_5_row_81",
+   "label": "Iron (mg/kg) (28-42.5) (row 81)",
    "section": "effect_on_iron_intake",
    "value": 26.0,
    "kind": "estimate",
@@ -1288,8 +1308,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a82",
-   "label": "Effect on iron intake!A82",
+   "id": "iron_mg_kg_28_42_5_row_82",
+   "label": "Iron (mg/kg) (28-42.5) (row 82)",
    "section": "effect_on_iron_intake",
    "value": 16.0,
    "kind": "estimate",
@@ -1300,8 +1320,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a85",
-   "label": "Effect on iron intake!A85",
+   "id": "iron_mg_kg_28_42_5_row_85",
+   "label": "Iron (mg/kg) (28-42.5) (row 85)",
    "section": "effect_on_iron_intake",
    "value": 25.0,
    "kind": "estimate",
@@ -1312,8 +1332,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a86",
-   "label": "Effect on iron intake!A86",
+   "id": "iron_mg_kg_28_42_5_row_86",
+   "label": "Iron (mg/kg) (28-42.5) (row 86)",
    "section": "effect_on_iron_intake",
    "value": 21.0,
    "kind": "estimate",
@@ -1324,8 +1344,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a87",
-   "label": "Effect on iron intake!A87",
+   "id": "iron_mg_kg_28_42_5_row_87",
+   "label": "Iron (mg/kg) (28-42.5) (row 87)",
    "section": "effect_on_iron_intake",
    "value": 24.0,
    "kind": "estimate",
@@ -1336,8 +1356,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a89",
-   "label": "Effect on iron intake!A89",
+   "id": "iron_mg_kg_28_42_5_row_89",
+   "label": "Iron (mg/kg) (28-42.5) (row 89)",
    "section": "effect_on_iron_intake",
    "value": 17.0,
    "kind": "estimate",
@@ -1348,8 +1368,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a90",
-   "label": "Effect on iron intake!A90",
+   "id": "iron_mg_kg_28_42_5_row_90",
+   "label": "Iron (mg/kg) (28-42.5) (row 90)",
    "section": "effect_on_iron_intake",
    "value": 23.0,
    "kind": "estimate",
@@ -1360,8 +1380,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a91",
-   "label": "Effect on iron intake!A91",
+   "id": "iron_mg_kg_28_42_5_row_91",
+   "label": "Iron (mg/kg) (28-42.5) (row 91)",
    "section": "effect_on_iron_intake",
    "value": 13.0,
    "kind": "estimate",
@@ -1372,8 +1392,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a92",
-   "label": "Effect on iron intake!A92",
+   "id": "iron_mg_kg_28_42_5_row_92",
+   "label": "Iron (mg/kg) (28-42.5) (row 92)",
    "section": "effect_on_iron_intake",
    "value": 16.0,
    "kind": "estimate",
@@ -1384,8 +1404,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a94",
-   "label": "Effect on iron intake!A94",
+   "id": "iron_mg_kg_28_42_5_row_94",
+   "label": "Iron (mg/kg) (28-42.5) (row 94)",
    "section": "effect_on_iron_intake",
    "value": 27.0,
    "kind": "estimate",
@@ -1396,8 +1416,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a96",
-   "label": "Effect on iron intake!A96",
+   "id": "iron_mg_kg_28_42_5_row_96",
+   "label": "Iron (mg/kg) (28-42.5) (row 96)",
    "section": "effect_on_iron_intake",
    "value": 14.0,
    "kind": "estimate",
@@ -1408,8 +1428,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a98",
-   "label": "Effect on iron intake!A98",
+   "id": "iron_mg_kg_28_42_5_row_98",
+   "label": "Iron (mg/kg) (28-42.5) (row 98)",
    "section": "effect_on_iron_intake",
    "value": 15.0,
    "kind": "estimate",
@@ -1420,8 +1440,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a99",
-   "label": "Effect on iron intake!A99",
+   "id": "iron_mg_kg_28_42_5_row_99",
+   "label": "Iron (mg/kg) (28-42.5) (row 99)",
    "section": "effect_on_iron_intake",
    "value": 19.0,
    "kind": "estimate",
@@ -1432,8 +1452,8 @@
    }
   },
   {
-   "id": "effect_on_iron_intake_a100",
-   "label": "Effect on iron intake!A100",
+   "id": "iron_mg_kg_28_42_5_row_100",
+   "label": "Iron (mg/kg) (28-42.5) (row 100)",
    "section": "effect_on_iron_intake",
    "value": 13.0,
    "kind": "estimate",
@@ -1447,28 +1467,28 @@
    "id": "average_iron_content_of_underfortified_rice_from_ni_data_fro",
    "label": "Average iron content of underfortified rice (from NI data from Madhya Pradesh)",
    "section": "effect_on_iron_intake",
-   "formula": "avg(effect_on_iron_intake_a63, effect_on_iron_intake_a64, effect_on_iron_intake_a65, effect_on_iron_intake_a67, effect_on_iron_intake_a68, effect_on_iron_intake_a71, effect_on_iron_intake_a73, effect_on_iron_intake_a75, effect_on_iron_intake_a76, effect_on_iron_intake_a77, effect_on_iron_intake_a79, effect_on_iron_intake_a81, effect_on_iron_intake_a82, effect_on_iron_intake_a85, effect_on_iron_intake_a86, effect_on_iron_intake_a87, effect_on_iron_intake_a89, effect_on_iron_intake_a90, effect_on_iron_intake_a91, effect_on_iron_intake_a92, effect_on_iron_intake_a94, effect_on_iron_intake_a96, effect_on_iron_intake_a98, effect_on_iron_intake_a99, effect_on_iron_intake_a100)",
+   "formula": "avg(iron_mg_kg_28_42_5_row_63, iron_mg_kg_28_42_5_row_64, iron_mg_kg_28_42_5_row_65, iron_mg_kg_28_42_5_row_67, iron_mg_kg_28_42_5_row_68, iron_mg_kg_28_42_5_row_71, iron_mg_kg_28_42_5_row_73, iron_mg_kg_28_42_5_row_75, iron_mg_kg_28_42_5_row_76, iron_mg_kg_28_42_5_row_77, iron_mg_kg_28_42_5_row_79, iron_mg_kg_28_42_5_row_81, iron_mg_kg_28_42_5_row_82, iron_mg_kg_28_42_5_row_85, iron_mg_kg_28_42_5_row_86, iron_mg_kg_28_42_5_row_87, iron_mg_kg_28_42_5_row_89, iron_mg_kg_28_42_5_row_90, iron_mg_kg_28_42_5_row_91, iron_mg_kg_28_42_5_row_92, iron_mg_kg_28_42_5_row_94, iron_mg_kg_28_42_5_row_96, iron_mg_kg_28_42_5_row_98, iron_mg_kg_28_42_5_row_99, iron_mg_kg_28_42_5_row_100)",
    "expected": 18.2
   },
   {
-   "id": "average_iron_content_in_rice_fortified_below_minimum_standar",
+   "id": "average_iron_content_in_rice_fortified_below_minimum_standar_2",
    "label": "Average iron content in rice fortified below minimum standard (mg/kg of rice)",
    "section": "effect_on_iron_intake",
    "formula": "average_iron_content_of_underfortified_rice_from_ni_data_fro",
    "expected": 18.2
   },
   {
-   "id": "supp_9",
-   "label": "supp",
+   "id": "average_iron_content_in_rice_fortified_below_minimum_standar",
+   "label": "Average iron content in rice fortified below minimum standard (mg/kg of rice)",
    "section": "iron_fortification_cea",
-   "formula": "average_iron_content_in_rice_fortified_below_minimum_standar",
+   "formula": "average_iron_content_in_rice_fortified_below_minimum_standar_2",
    "expected": 18.2
   },
   {
    "id": "increase_in_iron_ferric_pyrophosphate_in_adequately_fortifie",
    "label": "Increase in iron (ferric pyrophosphate) in adequately fortified rice (mg/kg of rice) over the counterfactual thanks to WFP support, average over 3 years",
    "section": "iron_fortification_cea",
-   "formula": "supp_7 * supp_8 - supp_9 * supp_8",
+   "formula": "average_iron_content_in_rice_fortified_above_minimum_standar * increase_in_coverage_of_rice_fortified_above_minimum_standar - average_iron_content_in_rice_fortified_below_minimum_standar * increase_in_coverage_of_rice_fortified_above_minimum_standar",
    "expected": 1.157805714
   },
   {
@@ -1507,31 +1527,31 @@
    "expected": 1.082779904
   },
   {
-   "id": "ferrous_sulphate_absorption_discount_factor_relative_to_nafe",
-   "label": "Ferrous sulphate (Absorption discount factor relative to NaFeEDTA)",
+   "id": "dad_2017_ferrous_sulphate_absorption_discount_factor_relativ",
+   "label": "Dad 2017, /, Ferrous sulphate (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
    "formula": "1 / 2.3",
    "expected": 0.4347826087
   },
   {
-   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
-   "label": "ferric pyrophosphate (Absorption discount factor relative to NaFeEDTA)",
+   "id": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
+   "label": "Additional iron intake due to WFP support (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferrous_sulphate_absorption_discount_factor_relative_to_nafe / 2",
+   "formula": "dad_2017_ferrous_sulphate_absorption_discount_factor_relativ / 2",
    "expected": 0.2173913043
   },
   {
-   "id": "supp_10",
-   "label": "supp",
+   "id": "adjustment_for_difference_in_absorption_between_ferric_pytop",
+   "label": "Adjustment for difference in absorption between ferric pytophosphate and NaFeEDTA",
    "section": "iron_fortification_cea",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
    "id": "total_additional_iron_intake_per_individual_per_week_due_to",
    "label": "Total additional iron intake per individual per week due to WFP's TA, NaFeEDTA-equivalent (mg)",
    "section": "iron_fortification_cea",
-   "formula": "increase_in_iron_intake_ferric_pyrophosphate_per_week_mg_due * supp_10",
+   "formula": "increase_in_iron_intake_ferric_pyrophosphate_per_week_mg_due * adjustment_for_difference_in_absorption_between_ferric_pytop",
    "expected": 0.2353869357
   },
   {
@@ -1559,7 +1579,7 @@
    "id": "ferrous_sulphate_and_ferric_pyrophosphate_absorption_discoun",
    "label": "Ferrous sulphate and ferric pyrophosphate (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "avg(ferrous_sulphate_absorption_discount_factor_relative_to_nafe, ferric_pyrophosphate_absorption_discount_factor_relative_to)",
+   "formula": "avg(dad_2017_ferrous_sulphate_absorption_discount_factor_relativ, additional_iron_intake_due_to_wfp_support_absorption_discoun)",
    "expected": 0.3260869565
   },
   {
@@ -1619,10 +1639,10 @@
    "expected": 90.48360656
   },
   {
-   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to_2",
+   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
    "label": "ferric pyrophosphate (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
@@ -1637,7 +1657,7 @@
    "id": "ferric_pyrophosphate",
    "label": "ferric pyrophosphate",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m * ferric_pyrophosphate_absorption_discount_factor_relative_to_2 * ferric_pyrophosphate_adjustment_for_noncompliance",
+   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m * ferric_pyrophosphate_absorption_discount_factor_relative_to * ferric_pyrophosphate_adjustment_for_noncompliance",
    "expected": 16.35245902
   },
   {
@@ -1696,10 +1716,10 @@
    "expected": 48.18493151
   },
   {
-   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to_3",
+   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to_2",
    "label": "ferric pyrophosphate (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
@@ -1720,7 +1740,7 @@
    "id": "ferric_pyrophosphate_2",
    "label": "ferric pyrophosphate",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m_2 * ferric_pyrophosphate_absorption_discount_factor_relative_to_3 * ferric_pyrophosphate_adjustment_for_noncompliance_2",
+   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m_2 * ferric_pyrophosphate_absorption_discount_factor_relative_to_2 * ferric_pyrophosphate_adjustment_for_noncompliance_2",
    "expected": 7.227739726
   },
   {
@@ -1768,7 +1788,7 @@
    "id": "compound_not_reported_we_assume_ferric_pyrophosphate_absorpt",
    "label": "[Compound not reported, we assume ferric pyrophosphate] (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
@@ -1835,10 +1855,10 @@
    "expected": 54.142
   },
   {
-   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to_4",
+   "id": "ferric_pyrophosphate_absorption_discount_factor_relative_to_3",
    "label": "ferric pyrophosphate (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
@@ -1853,7 +1873,7 @@
    "id": "ferric_pyrophosphate_3",
    "label": "ferric pyrophosphate",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m_3 * ferric_pyrophosphate_absorption_discount_factor_relative_to_4 * ferric_pyrophosphate_adjustment_for_noncompliance_3",
+   "formula": "ferric_pyrophosphate_total_additional_iron_intake_per_week_m_3 * ferric_pyrophosphate_absorption_discount_factor_relative_to_3 * ferric_pyrophosphate_adjustment_for_noncompliance_3",
    "expected": 8.953513449
   },
   {
@@ -1914,7 +1934,7 @@
    "id": "compound_not_reported_we_assume_ferric_pyrophosphate_absorpt_2",
    "label": "[Compound not reported, we assume ferric pyrophosphate] (Absorption discount factor relative to NaFeEDTA)",
    "section": "effect_on_iron_intake",
-   "formula": "ferric_pyrophosphate_absorption_discount_factor_relative_to",
+   "formula": "additional_iron_intake_due_to_wfp_support_absorption_discoun",
    "expected": 0.2173913043
   },
   {
@@ -1953,17 +1973,17 @@
    "format": "percent"
   },
   {
-   "id": "weighted_average_2",
+   "id": "weighted_average",
    "label": "Weighted average",
    "section": "effect_on_iron_intake",
    "formula": "sum(ferrous_sulphate_and_ferric_pyrophosphate * angeles_agdeppa_2008, ferric_pyrophosphate * radhika_2011, ferric_pyrophosphate_2 * thankachan_2012, compound_not_reported_we_assume_ferric_pyrophosphate * hardinsyah_2016, ferric_pyrophosphate_3 * perignon_2016_c, compound_not_reported_we_assume_ferric_pyrophosphate_2 * ara_2019) / sum(angeles_agdeppa_2008, radhika_2011, thankachan_2012, hardinsyah_2016, perignon_2016_c, ara_2019)",
    "expected": 14.16566819
   },
   {
-   "id": "supp_6",
-   "label": "supp",
+   "id": "adjustment_for_dose_in_program_settings_relative_to_trial_se",
+   "label": "Adjustment for dose in program settings (relative to trial settings)",
    "section": "iron_fortification_cea",
-   "formula": "total_additional_iron_intake_per_individual_per_week_due_to / weighted_average_2 - 1",
+   "formula": "total_additional_iron_intake_per_individual_per_week_due_to / weighted_average - 1",
    "expected": -0.9833832804,
    "format": "percent"
   },
@@ -2077,7 +2097,7 @@
    "id": "of_study_population_that_regularly_consumes_tea_with_meals_c",
    "label": "% of study population that regularly consumes tea with meals containing rice",
    "section": "ev_adjustment",
-   "formula": "bangladesh_study_weights * of_adults_15_regularly_consuming_tea_with_meals_containing_r + (1 - bangladesh_study_weights) * of_children_15_regularly_consuming_tea_with_or_without_meals",
+   "formula": "studies_included_in_effect_of_rice_fortification_on_anemia_a_2 * of_adults_15_regularly_consuming_tea_with_meals_containing_r + (1 - studies_included_in_effect_of_rice_fortification_on_anemia_a_2) * of_children_15_regularly_consuming_tea_with_or_without_meals",
    "expected": 0.1663133333,
    "format": "percent"
   },
@@ -2101,7 +2121,7 @@
    "id": "external_validity_adjustment",
    "label": "External validity adjustment",
    "section": "iron_fortification_cea",
-   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_fortification_implemented_at_scale) * (1 + supp_6 * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_fortification_duration_relative_to_trial_sett * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_cooking_methods) * (1 + adjustment_for_tea_and_phytic_acid_consumption) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_fortification_implemented_at_scale) * (1 + adjustment_for_dose_in_program_settings_relative_to_trial_se * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_fortification_duration_relative_to_trial_sett * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_cooking_methods) * (1 + adjustment_for_tea_and_phytic_acid_consumption) - 1",
    "expected": -0.9779129759,
    "format": "percent"
   },
@@ -2129,8 +2149,8 @@
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E51"
    },
-   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3.\n\nGiveWell, \"Moral Weights\" (May 2025)",
-   "formula": "$uov_per_daly",
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.26, and 2.3 here.\n\nGiveWell, \"Moral Weights\" (May 2025)",
+   "formula": "2.3 * $uov_per_daly / 2.26",
    "expected": 2.3
   },
   {
@@ -2174,8 +2194,8 @@
    "expected": 0.00101537986
   },
   {
-   "id": "supp_11",
-   "label": "supp",
+   "id": "proportion_of_children_0_to_14_with_dietary_iron_deficiency",
+   "label": "Proportion of children 0 to 14 with dietary iron deficiency, program settings",
    "section": "iron_fortification_cea",
    "value": 0.34905005,
    "kind": "estimate",
@@ -2205,7 +2225,7 @@
    "id": "number_of_children_0_to_14_years_old_consuming_iron_fortifie",
    "label": "Number of children 0 to 14 years old consuming iron-fortified wheat flour",
    "section": "iron_fortification_cea",
-   "formula": "people_years_of_support_bihar * supp_11 * proportion_of_population_that_is_0_to_14_years_old_program_s",
+   "formula": "people_years_of_support_bihar * proportion_of_children_0_to_14_with_dietary_iron_deficiency * proportion_of_population_that_is_0_to_14_years_old_program_s",
    "expected": 5209896.756
   },
   {
@@ -2480,8 +2500,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_12",
-   "label": "supp",
+   "id": "adjustment_for_proportion_of_reproductive_aged_women_with_di",
+   "label": "Adjustment for proportion of reproductive-aged women with dietary iron deficiency, relative to trial settings",
    "section": "iron_fortification_cea",
    "formula": "prevalence_of_dietary_iron_deficiency_among_reproductive_age * (1 + adjustment_for_future_anemia_trends_bihar) * assumed_effect_of_increased_iron_intake_on_anemia_prevalence / weighted_average_prevalence_of_dietary_iron_deficiency_among - 1",
    "expected": 0.06229208517,
@@ -2491,7 +2511,7 @@
    "id": "overall_external_validity_adjustment_for_neonatal_mortality",
    "label": "Overall external validity adjustment for neonatal mortality",
    "section": "iron_fortification_cea",
-   "formula": "(1 + external_validity_adjustment_accounting_for_iron_supplementa) * (1 + supp_12) - 1",
+   "formula": "(1 + external_validity_adjustment_accounting_for_iron_supplementa) * (1 + adjustment_for_proportion_of_reproductive_aged_women_with_di) - 1",
    "expected": 0.2428817396,
    "format": "percent"
   },
@@ -2539,8 +2559,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_13",
-   "label": "supp",
+   "id": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_3",
+   "label": "Proportion of anemia YLDs attributed to dietary iron deficiency, <20 year-olds",
    "section": "iron_supplementation_cea",
    "value": 0.6982196868,
    "kind": "estimate",
@@ -2678,8 +2698,8 @@
    "format": "percent"
   },
   {
-   "id": "not_available_weight_in_anemia_prevalence_analysis_in_low_et",
-   "label": "Not available (Weight in anemia prevalence analysis in Low et al. 2013)",
+   "id": "r_0_54_95_ci_0_46_to_0_64_weight_in_anemia_prevalence_analysis",
+   "label": "0.54 [95% CI 0.46 to 0.64] (Weight in anemia prevalence analysis in Low et al. 2013)",
    "section": "iron_supplementation_trials",
    "value": 0.0,
    "kind": "estimate",
@@ -2748,18 +2768,18 @@
    "format": "percent"
   },
   {
-   "id": "weighted_average_3",
+   "id": "weighted_average_2",
    "label": "Weighted average",
    "section": "iron_supplementation_trials",
-   "formula": "sum(low_et_al_2013_pg_e794_e796_table_1 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20, low_et_al_2013_pg_e794_e796_table_1_2 * r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201, low_et_al_2013_pg_e794_e796_table_1_3 * r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201_2, low_et_al_2013_pg_e794_e796_table_1_4 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_2, low_et_al_2013_pg_e794_e796_table_1_5 * not_available_weight_in_anemia_prevalence_analysis_in_low_et, low_et_al_2013_pg_e794_e796_table_1_6 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_3, low_et_al_2013_pg_e794_e796_table_1_7 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_4) / sum(r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20, r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201, r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201_2, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_2, not_available_weight_in_anemia_prevalence_analysis_in_low_et, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_3, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_4)",
+   "formula": "sum(low_et_al_2013_pg_e794_e796_table_1 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20, low_et_al_2013_pg_e794_e796_table_1_2 * r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201, low_et_al_2013_pg_e794_e796_table_1_3 * r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201_2, low_et_al_2013_pg_e794_e796_table_1_4 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_2, low_et_al_2013_pg_e794_e796_table_1_5 * r_0_54_95_ci_0_46_to_0_64_weight_in_anemia_prevalence_analysis, low_et_al_2013_pg_e794_e796_table_1_6 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_3, low_et_al_2013_pg_e794_e796_table_1_7 * r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_4) / sum(r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20, r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201, r_5_to_9_weight_in_anemia_prevalence_analysis_in_low_et_al_201_2, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_2, r_0_54_95_ci_0_46_to_0_64_weight_in_anemia_prevalence_analysis, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_3, r_5_to_14_weight_in_anemia_prevalence_analysis_in_low_et_al_20_4)",
    "expected": 0.5792468138,
    "format": "percent"
   },
   {
-   "id": "supp_14",
-   "label": "supp",
+   "id": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_4",
+   "label": "Proportion of anemia YLDs attributed to dietary iron deficiency, trials included in Low et al. 2013",
    "section": "iron_supplementation_cea",
-   "formula": "weighted_average_3",
+   "formula": "weighted_average_2",
    "expected": 0.5792468138,
    "format": "percent"
   },
@@ -2767,12 +2787,12 @@
    "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr_2",
    "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency",
    "section": "iron_supplementation_cea",
-   "formula": "supp_13 / supp_14 - 1",
+   "formula": "proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_3 / proportion_of_anemia_ylds_attributed_to_dietary_iron_deficie_4 - 1",
    "expected": 0.205392365,
    "format": "percent"
   },
   {
-   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_3",
    "label": "Inflammation exposure index rating (as a % of max score) in study population",
    "section": "iron_supplementation_cea",
    "source": {
@@ -2786,7 +2806,7 @@
    "expected": 0.511
   },
   {
-   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_3",
    "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "iron_supplementation_cea",
    "value": 0.222222222222222,
@@ -2817,7 +2837,7 @@
    "id": "adjustment_for_inflammation_in_program_compared_to_study_pop_2",
    "label": "Adjustment for inflammation in program compared to study population",
    "section": "iron_supplementation_cea",
-   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2 / inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2 - 1) * assumed_effect_of_inflammation_on_iron_absorption_2",
+   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud_3 / inflammation_exposure_index_rating_as_a_of_max_score_in_prog_3 - 1) * assumed_effect_of_inflammation_on_iron_absorption_2",
    "expected": 0.2599,
    "format": "percent"
   },
@@ -3062,8 +3082,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_15",
-   "label": "supp",
+   "id": "increase_in_productivity_from_iron_supplementation_in_people",
+   "label": "Increase in productivity from iron supplementation in people with anemia working manual labor jobs",
    "section": "iron_fortification_cea",
    "formula": "simple_mean_of_trial_estimates",
    "expected": 0.07338383838,
@@ -3081,13 +3101,13 @@
    "id": "increase_in_productivity_from_iron_fortification_in_people_w",
    "label": "Increase in productivity from iron fortification in people with anemia working manual labor jobs",
    "section": "iron_fortification_cea",
-   "formula": "supp_15 * adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
+   "formula": "increase_in_productivity_from_iron_supplementation_in_people * adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
    "expected": 0.0005158457579,
    "format": "percent"
   },
   {
-   "id": "supp_16",
-   "label": "supp",
+   "id": "percentage_of_beneficiaries_who_are_15_64_years_old_working",
+   "label": "Percentage of beneficiaries who are 15-64 years old (working age)",
    "section": "iron_fortification_cea",
    "value": 0.6625343689,
    "kind": "estimate",
@@ -3100,8 +3120,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_17",
-   "label": "supp",
+   "id": "percentage_of_beneficiaries_15_64_years_old_that_have_anemia",
+   "label": "Percentage of beneficiaries 15-64 years old that have anemia",
    "section": "iron_fortification_cea",
    "value": 0.4034776464,
    "kind": "estimate",
@@ -3117,7 +3137,7 @@
    "id": "percentage_of_beneficiaries_that_are_working_age_and_have_an_2",
    "label": "Percentage of beneficiaries that are working age and have anemia",
    "section": "iron_fortification_cea",
-   "formula": "supp_16 * supp_17",
+   "formula": "percentage_of_beneficiaries_who_are_15_64_years_old_working * percentage_of_beneficiaries_15_64_years_old_that_have_anemia",
    "expected": 0.2673178078,
    "format": "percent"
   },
@@ -3240,8 +3260,8 @@
    "format": "percent"
   },
   {
-   "id": "supp_18",
-   "label": "supp",
+   "id": "percentage_of_beneficiaries_who_are_working_age_employed_and",
+   "label": "Percentage of beneficiaries who are working age, employed, and have physically demanding jobs",
    "section": "iron_fortification_cea",
    "formula": "percentage_of_beneficiaries_who_are_employed_and_have_physic",
    "expected": 0.325772,
@@ -3251,7 +3271,7 @@
    "id": "percentage_of_beneficiaries_who_have_anemia_and_are_working",
    "label": "Percentage of beneficiaries who have anemia and are working-age, employed, and have physically demanding jobs",
    "section": "iron_fortification_cea",
-   "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an * supp_18",
+   "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an * percentage_of_beneficiaries_who_are_working_age_employed_and",
    "expected": 0.07402195835,
    "format": "percent"
   },
@@ -3442,9 +3462,10 @@
    "expected": 19068.20278
   },
   {
-   "id": "usd_total_inr",
-   "label": "USD (Total (INR))",
+   "id": "total_inr_row_14",
+   "label": "Total (INR) (row 14)",
    "section": "costs",
+   "unit": "USD",
    "value": 2810664.0,
    "kind": "estimate",
    "source": {
@@ -3457,7 +3478,7 @@
    "id": "program_cost_bihar",
    "label": "Program cost (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "usd_total_inr / 6 * 1.1",
+   "formula": "total_inr_row_14 / 6 * 1.1",
    "expected": 515288.4,
    "format": "usd"
   },

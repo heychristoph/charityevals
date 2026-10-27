@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [MiracleFeet Monitoring Grant - May 2023 - VOI [vet complete]](/miraclefeet) | GW | May 2023 | 3.4× GiveDirectly (GW: 8.9× cash) | 16 |
+| [MiracleFeet Monitoring Grant - May 2023 - VOI [vet complete]](/miraclefeet) | GW | May 2023 | 3.4× GiveDirectly (GW: 8.9× cash) | 15 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

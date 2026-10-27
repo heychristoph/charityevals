@@ -278,7 +278,7 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_3",
+   "id": "pneumococcal_meningitis_2",
    "label": "Pneumococcal meningitis",
    "section": "probability_of_death",
    "value": 1.0,
@@ -295,13 +295,13 @@
    "id": "pneumococcal_meningitis_under_5",
    "label": "Pneumococcal meningitis (Under 5)",
    "section": "probability_of_death",
-   "formula": "0.09629913681 / 100 * pneumococcal_meningitis_3",
+   "formula": "0.09629913681 / 100 * pneumococcal_meningitis_2",
    "expected": 0.0009629913681,
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_early_neonatal",
-   "label": "Pneumococcal meningitis (Early neonatal)",
+   "id": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_3",
+   "label": "GBD data, number of deaths by period: Pneumococcal meningitis (Early neonatal)",
    "section": "deaths_before_vaccine_administe",
    "value": 432.89,
    "kind": "estimate",
@@ -313,8 +313,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "pneumococcal_meningitis_late_neonatal",
-   "label": "Pneumococcal meningitis (Late neonatal)",
+   "id": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_4",
+   "label": "GBD data, number of deaths by period: Pneumococcal meningitis (Late neonatal)",
    "section": "deaths_before_vaccine_administe",
    "value": 472.72,
    "kind": "estimate",
@@ -326,8 +326,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "pneumococcal_meningitis_under_5_2",
-   "label": "Pneumococcal meningitis (Under 5)",
+   "id": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_5",
+   "label": "GBD data, number of deaths by period: Pneumococcal meningitis (Under 5)",
    "section": "deaths_before_vaccine_administe",
    "value": 7345.82,
    "kind": "estimate",
@@ -339,18 +339,18 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "pneumococcal_meningitis_neonatal",
-   "label": "Pneumococcal meningitis (% neonatal)",
+   "id": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_2",
+   "label": "GBD data, number of deaths by period: Pneumococcal meningitis (% neonatal)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "(pneumococcal_meningitis_early_neonatal + pneumococcal_meningitis_late_neonatal) / pneumococcal_meningitis_under_5_2",
+   "formula": "(gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_3 + gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_4) / gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_5",
    "expected": 0.1232823565,
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_discount",
-   "label": "Pneumococcal meningitis (Discount)",
+   "id": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis",
+   "label": "GBD data, number of deaths by period: Pneumococcal meningitis (Discount)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "pneumococcal_meningitis_neonatal * 1.1",
+   "formula": "gbd_data_number_of_deaths_by_period_pneumococcal_meningitis_2 * 1.1",
    "expected": 0.1356105921,
    "format": "percent"
   },
@@ -358,12 +358,12 @@
    "id": "pneumococcal_meningitis_of_under_5_deaths_that_occur_after_v",
    "label": "Pneumococcal meningitis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - pneumococcal_meningitis_discount",
+   "formula": "1 - gbd_data_number_of_deaths_by_period_pneumococcal_meningitis",
    "expected": 0.8643894079,
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_2",
+   "id": "pneumococcal_meningitis",
    "label": "Pneumococcal meningitis",
    "section": "probability_of_death",
    "formula": "pneumococcal_meningitis_under_5 * pneumococcal_meningitis_of_under_5_deaths_that_occur_after_v",
@@ -371,10 +371,10 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis",
-   "label": "Pneumococcal meningitis",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Pneumococcal meningitis",
    "section": "vaccine_efficacy_data",
-   "formula": "pneumococcal_meningitis_2",
+   "formula": "pneumococcal_meningitis",
    "expected": 0.0008323995384,
    "format": "percent"
   },
@@ -382,13 +382,13 @@
    "id": "pcv_vaccine_three_doses_probability_of_death_from_diseases_p_2",
    "label": "PCV vaccine (three doses) (Probability of death from diseases prevented by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "lower_respiratory_infections_s_pneumoniae + pneumococcal_meningitis",
+   "formula": "lower_respiratory_infections_s_pneumoniae + probability_of_death_from_vaccine_preventable_diseases_and_e",
    "expected": 0.007820385349,
    "format": "percent"
   },
   {
-   "id": "pcv3",
-   "label": "PCV3",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3",
+   "label": "2017 Nigeria vaccination coverage: PCV3",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -400,8 +400,8 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_2",
-   "label": "PCV3",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3_2",
+   "label": "2017 Nigeria vaccination coverage: PCV3",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -413,8 +413,8 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_3",
-   "label": "PCV3",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3_3",
+   "label": "2017 Nigeria vaccination coverage: PCV3",
    "section": "baseline_vaccination_coverage",
    "value": 0.36,
    "kind": "estimate",
@@ -426,8 +426,8 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_4",
-   "label": "PCV3",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3_4",
+   "label": "2017 Nigeria vaccination coverage: PCV3",
    "section": "baseline_vaccination_coverage",
    "value": 0.49,
    "kind": "estimate",
@@ -439,8 +439,8 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_5",
-   "label": "PCV3",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3_5",
+   "label": "2017 Nigeria vaccination coverage: PCV3",
    "section": "baseline_vaccination_coverage",
    "value": 0.53,
    "kind": "estimate",
@@ -452,10 +452,10 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_coverage_according_to_unicef_who_data",
-   "label": "PCV3 (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_pcv3_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: PCV3 (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(pcv3, pcv3_2, pcv3_3, pcv3_4, pcv3_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_pcv3, r_2017_nigeria_vaccination_coverage_pcv3_2, r_2017_nigeria_vaccination_coverage_pcv3_3, r_2017_nigeria_vaccination_coverage_pcv3_4, r_2017_nigeria_vaccination_coverage_pcv3_5)",
    "expected": 0.276,
    "format": "percent"
   },
@@ -496,8 +496,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp1",
-   "label": "DTP1",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1",
+   "label": "2017 Nigeria vaccination coverage: DTP1",
    "section": "baseline_vaccination_coverage",
    "value": 0.5,
    "kind": "estimate",
@@ -509,8 +509,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp1_2",
-   "label": "DTP1",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1_2",
+   "label": "2017 Nigeria vaccination coverage: DTP1",
    "section": "baseline_vaccination_coverage",
    "value": 0.48,
    "kind": "estimate",
@@ -522,8 +522,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp1_3",
-   "label": "DTP1",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1_3",
+   "label": "2017 Nigeria vaccination coverage: DTP1",
    "section": "baseline_vaccination_coverage",
    "value": 0.49,
    "kind": "estimate",
@@ -535,8 +535,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp1_4",
-   "label": "DTP1",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1_4",
+   "label": "2017 Nigeria vaccination coverage: DTP1",
    "section": "baseline_vaccination_coverage",
    "value": 0.62,
    "kind": "estimate",
@@ -548,8 +548,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp1_5",
-   "label": "DTP1",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1_5",
+   "label": "2017 Nigeria vaccination coverage: DTP1",
    "section": "baseline_vaccination_coverage",
    "value": 0.65,
    "kind": "estimate",
@@ -561,10 +561,10 @@
    "format": "percent"
   },
   {
-   "id": "dtp1_coverage_according_to_unicef_who_data",
-   "label": "DTP1 (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp1_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: DTP1 (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(dtp1, dtp1_2, dtp1_3, dtp1_4, dtp1_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_dtp1, r_2017_nigeria_vaccination_coverage_dtp1_2, r_2017_nigeria_vaccination_coverage_dtp1_3, r_2017_nigeria_vaccination_coverage_dtp1_4, r_2017_nigeria_vaccination_coverage_dtp1_5)",
    "expected": 0.548,
    "format": "percent"
   },
@@ -572,7 +572,7 @@
    "id": "pcv_vaccine_three_doses_coverage_according_to_unicef_who_dat",
    "label": "PCV vaccine (three doses) (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "pcv3_coverage_according_to_unicef_who_data + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (dtp1_coverage_according_to_unicef_who_data - pcv3_coverage_according_to_unicef_who_data)",
+   "formula": "r_2017_nigeria_vaccination_coverage_pcv3_coverage_according_to + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (r_2017_nigeria_vaccination_coverage_dtp1_coverage_according_to - r_2017_nigeria_vaccination_coverage_pcv3_coverage_according_to)",
    "expected": 0.4596,
    "format": "percent"
   },
@@ -607,8 +607,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_1",
-   "label": "Unavailable (< 1)",
+   "id": "unavailable_unavailable_1",
+   "label": "Unavailable, Unavailable (< 1)",
    "section": "deaths_before_vaccine_administe",
    "value": 5043.34,
    "kind": "estimate",
@@ -620,8 +620,8 @@
    "explainer": "Unavailable First dose at 6 weeks, use 0.15 times % < 1 year"
   },
   {
-   "id": "whooping_cough_under_5_2",
-   "label": "Whooping cough (Under 5)",
+   "id": "gbd_data_number_of_deaths_by_period_whooping_cough_under_5",
+   "label": "GBD data, number of deaths by period: Whooping cough (Under 5)",
    "section": "deaths_before_vaccine_administe",
    "value": 10640.75,
    "kind": "estimate",
@@ -636,7 +636,7 @@
    "id": "unavailable_1_year",
    "label": "Unavailable (% < 1 year)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "unavailable_1 / whooping_cough_under_5_2",
+   "formula": "unavailable_unavailable_1 / gbd_data_number_of_deaths_by_period_whooping_cough_under_5",
    "expected": 0.4739647111,
    "format": "percent"
   },
@@ -657,7 +657,7 @@
    "format": "percent"
   },
   {
-   "id": "whooping_cough_2",
+   "id": "whooping_cough",
    "label": "Whooping cough",
    "section": "probability_of_death",
    "formula": "whooping_cough_under_5 * whooping_cough_of_under_5_deaths_that_occur_after_vaccine_st",
@@ -665,10 +665,10 @@
    "format": "percent"
   },
   {
-   "id": "whooping_cough",
-   "label": "Whooping cough",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_2",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Whooping cough",
    "section": "vaccine_efficacy_data",
-   "formula": "whooping_cough_2",
+   "formula": "whooping_cough",
    "expected": 0.001295941889,
    "format": "percent"
   },
@@ -687,8 +687,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_1_2",
-   "label": "Unavailable (< 1)",
+   "id": "unavailable_unavailable_1_2",
+   "label": "Unavailable, Unavailable (< 1)",
    "section": "deaths_before_vaccine_administe",
    "value": 255.09,
    "kind": "estimate",
@@ -700,8 +700,8 @@
    "explainer": "Unavailable First dose at 6 weeks, use 0.15 times % < 1 year"
   },
   {
-   "id": "diphtheria_under_5_2",
-   "label": "Diphtheria (Under 5)",
+   "id": "gbd_data_number_of_deaths_by_period_diphtheria_under_5",
+   "label": "GBD data, number of deaths by period: Diphtheria (Under 5)",
    "section": "deaths_before_vaccine_administe",
    "value": 1627.75,
    "kind": "estimate",
@@ -716,7 +716,7 @@
    "id": "unavailable_1_year_2",
    "label": "Unavailable (% < 1 year)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "unavailable_1_2 / diphtheria_under_5_2",
+   "formula": "unavailable_unavailable_1_2 / gbd_data_number_of_deaths_by_period_diphtheria_under_5",
    "expected": 0.1567132545,
    "format": "percent"
   },
@@ -737,7 +737,7 @@
    "format": "percent"
   },
   {
-   "id": "diphtheria_2",
+   "id": "diphtheria",
    "label": "Diphtheria",
    "section": "probability_of_death",
    "formula": "diphtheria_under_5 * diphtheria_of_under_5_deaths_that_occur_after_vaccine_starte",
@@ -745,10 +745,10 @@
    "format": "percent"
   },
   {
-   "id": "diphtheria",
-   "label": "Diphtheria",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_3",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Diphtheria",
    "section": "vaccine_efficacy_data",
-   "formula": "diphtheria_2",
+   "formula": "diphtheria",
    "expected": 0.0002102252869,
    "format": "percent"
   },
@@ -767,8 +767,8 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_unavailable_2",
-   "label": "Tetanus (Unavailable)",
+   "id": "gbd_data_number_of_deaths_by_period_tetanus_unavailable_2",
+   "label": "GBD data, number of deaths by period: Tetanus (Unavailable)",
    "section": "deaths_before_vaccine_administe",
    "value": 846.59,
    "kind": "estimate",
@@ -780,8 +780,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "tetanus_unavailable_3",
-   "label": "Tetanus (Unavailable)",
+   "id": "gbd_data_number_of_deaths_by_period_tetanus_unavailable_3",
+   "label": "GBD data, number of deaths by period: Tetanus (Unavailable)",
    "section": "deaths_before_vaccine_administe",
    "value": 894.36,
    "kind": "estimate",
@@ -793,8 +793,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "tetanus_under_5_2",
-   "label": "Tetanus (Under 5)",
+   "id": "gbd_data_number_of_deaths_by_period_tetanus_under_5",
+   "label": "GBD data, number of deaths by period: Tetanus (Under 5)",
    "section": "deaths_before_vaccine_administe",
    "value": 2256.16,
    "kind": "estimate",
@@ -806,18 +806,18 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "tetanus_unavailable",
-   "label": "Tetanus (Unavailable)",
+   "id": "gbd_data_number_of_deaths_by_period_tetanus_unavailable",
+   "label": "GBD data, number of deaths by period: Tetanus (Unavailable)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "(tetanus_unavailable_2 + tetanus_unavailable_3) / tetanus_under_5_2",
+   "formula": "(gbd_data_number_of_deaths_by_period_tetanus_unavailable_2 + gbd_data_number_of_deaths_by_period_tetanus_unavailable_3) / gbd_data_number_of_deaths_by_period_tetanus_under_5",
    "expected": 0.7716429686,
    "format": "percent"
   },
   {
-   "id": "tetanus_discount",
-   "label": "Tetanus (Discount)",
+   "id": "gbd_data_number_of_deaths_by_period_tetanus_discount",
+   "label": "GBD data, number of deaths by period: Tetanus (Discount)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "tetanus_unavailable * 1.1",
+   "formula": "gbd_data_number_of_deaths_by_period_tetanus_unavailable * 1.1",
    "expected": 0.8488072654,
    "format": "percent"
   },
@@ -825,12 +825,12 @@
    "id": "tetanus_of_under_5_deaths_that_occur_after_vaccine_started",
    "label": "Tetanus (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - tetanus_discount",
+   "formula": "1 - gbd_data_number_of_deaths_by_period_tetanus_discount",
    "expected": 0.1511927346,
    "format": "percent"
   },
   {
-   "id": "tetanus_2",
+   "id": "tetanus",
    "label": "Tetanus",
    "section": "probability_of_death",
    "formula": "tetanus_under_5 * tetanus_of_under_5_deaths_that_occur_after_vaccine_started",
@@ -838,10 +838,10 @@
    "format": "percent"
   },
   {
-   "id": "tetanus",
-   "label": "Tetanus",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_4",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tetanus",
    "section": "vaccine_efficacy_data",
-   "formula": "tetanus_2",
+   "formula": "tetanus",
    "expected": 4.43066599e-05,
    "format": "percent"
   },
@@ -849,13 +849,13 @@
    "id": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_2",
    "label": "DTP vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "whooping_cough + diphtheria + tetanus",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_2 + probability_of_death_from_vaccine_preventable_diseases_and_e_3 + probability_of_death_from_vaccine_preventable_diseases_and_e_4",
    "expected": 0.001550473836,
    "format": "percent"
   },
   {
-   "id": "dtp3",
-   "label": "DTP3",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3",
+   "label": "2017 Nigeria vaccination coverage: DTP3",
    "section": "baseline_vaccination_coverage",
    "value": 0.43,
    "kind": "estimate",
@@ -867,8 +867,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp3_2",
-   "label": "DTP3",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3_2",
+   "label": "2017 Nigeria vaccination coverage: DTP3",
    "section": "baseline_vaccination_coverage",
    "value": 0.43,
    "kind": "estimate",
@@ -880,8 +880,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp3_3",
-   "label": "DTP3",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3_3",
+   "label": "2017 Nigeria vaccination coverage: DTP3",
    "section": "baseline_vaccination_coverage",
    "value": 0.42,
    "kind": "estimate",
@@ -893,8 +893,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp3_4",
-   "label": "DTP3",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3_4",
+   "label": "2017 Nigeria vaccination coverage: DTP3",
    "section": "baseline_vaccination_coverage",
    "value": 0.53,
    "kind": "estimate",
@@ -906,8 +906,8 @@
    "format": "percent"
   },
   {
-   "id": "dtp3_5",
-   "label": "DTP3",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3_5",
+   "label": "2017 Nigeria vaccination coverage: DTP3",
    "section": "baseline_vaccination_coverage",
    "value": 0.55,
    "kind": "estimate",
@@ -919,10 +919,10 @@
    "format": "percent"
   },
   {
-   "id": "dtp3_coverage_according_to_unicef_who_data",
-   "label": "DTP3 (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_dtp3_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: DTP3 (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(dtp3, dtp3_2, dtp3_3, dtp3_4, dtp3_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_dtp3, r_2017_nigeria_vaccination_coverage_dtp3_2, r_2017_nigeria_vaccination_coverage_dtp3_3, r_2017_nigeria_vaccination_coverage_dtp3_4, r_2017_nigeria_vaccination_coverage_dtp3_5)",
    "expected": 0.472,
    "format": "percent"
   },
@@ -930,7 +930,7 @@
    "id": "dtp_vaccine_3_doses_coverage_according_to_unicef_who_data_wi",
    "label": "DTP vaccine (3 doses) (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "dtp3_coverage_according_to_unicef_who_data + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (dtp1_coverage_according_to_unicef_who_data - dtp3_coverage_according_to_unicef_who_data)",
+   "formula": "r_2017_nigeria_vaccination_coverage_dtp3_coverage_according_to + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (r_2017_nigeria_vaccination_coverage_dtp1_coverage_according_to - r_2017_nigeria_vaccination_coverage_dtp3_coverage_according_to)",
    "expected": 0.5233,
    "format": "percent"
   },
@@ -1133,8 +1133,8 @@
    "format": "percent"
   },
   {
-   "id": "hib3",
-   "label": "HiB3",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3",
+   "label": "2017 Nigeria vaccination coverage: HiB3",
    "section": "baseline_vaccination_coverage",
    "value": 0.27,
    "kind": "estimate",
@@ -1146,8 +1146,8 @@
    "format": "percent"
   },
   {
-   "id": "hib3_2",
-   "label": "HiB3",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3_2",
+   "label": "2017 Nigeria vaccination coverage: HiB3",
    "section": "baseline_vaccination_coverage",
    "value": 0.43,
    "kind": "estimate",
@@ -1159,8 +1159,8 @@
    "format": "percent"
   },
   {
-   "id": "hib3_3",
-   "label": "HiB3",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3_3",
+   "label": "2017 Nigeria vaccination coverage: HiB3",
    "section": "baseline_vaccination_coverage",
    "value": 0.42,
    "kind": "estimate",
@@ -1172,8 +1172,8 @@
    "format": "percent"
   },
   {
-   "id": "hib3_4",
-   "label": "HiB3",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3_4",
+   "label": "2017 Nigeria vaccination coverage: HiB3",
    "section": "baseline_vaccination_coverage",
    "value": 0.53,
    "kind": "estimate",
@@ -1185,8 +1185,8 @@
    "format": "percent"
   },
   {
-   "id": "hib3_5",
-   "label": "HiB3",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3_5",
+   "label": "2017 Nigeria vaccination coverage: HiB3",
    "section": "baseline_vaccination_coverage",
    "value": 0.55,
    "kind": "estimate",
@@ -1198,10 +1198,10 @@
    "format": "percent"
   },
   {
-   "id": "hib3_coverage_according_to_unicef_who_data",
-   "label": "HiB3 (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_hib3_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: HiB3 (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(hib3, hib3_2, hib3_3, hib3_4, hib3_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_hib3, r_2017_nigeria_vaccination_coverage_hib3_2, r_2017_nigeria_vaccination_coverage_hib3_3, r_2017_nigeria_vaccination_coverage_hib3_4, r_2017_nigeria_vaccination_coverage_hib3_5)",
    "expected": 0.44,
    "format": "percent"
   },
@@ -1209,7 +1209,7 @@
    "id": "hib_vaccine_3_doses_coverage_according_to_unicef_who_data_wi",
    "label": "HiB vaccine (3 doses) (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "hib3_coverage_according_to_unicef_who_data + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (dtp1_coverage_according_to_unicef_who_data - hib3_coverage_according_to_unicef_who_data)",
+   "formula": "r_2017_nigeria_vaccination_coverage_hib3_coverage_according_to + percent_of_vaccine_efficacy_for_those_receiving_1_but_not_3 * (r_2017_nigeria_vaccination_coverage_dtp1_coverage_according_to - r_2017_nigeria_vaccination_coverage_hib3_coverage_according_to)",
    "expected": 0.5129,
    "format": "percent"
   },
@@ -1263,8 +1263,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_1_3",
-   "label": "Unavailable (< 1)",
+   "id": "unavailable_unavailable_1_3",
+   "label": "Unavailable, Unavailable (< 1)",
    "section": "deaths_before_vaccine_administe",
    "value": 5625.33,
    "kind": "estimate",
@@ -1276,8 +1276,8 @@
    "explainer": "Unavailable Given at 9 months, use 0.75 times % < 1 year"
   },
   {
-   "id": "measles_under_5_2",
-   "label": "Measles (Under 5)",
+   "id": "gbd_data_number_of_deaths_by_period_measles_under_5",
+   "label": "GBD data, number of deaths by period: Measles (Under 5)",
    "section": "deaths_before_vaccine_administe",
    "value": 20323.63,
    "kind": "estimate",
@@ -1292,7 +1292,7 @@
    "id": "unavailable_1_year_3",
    "label": "Unavailable (% < 1 year)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "unavailable_1_3 / measles_under_5_2",
+   "formula": "unavailable_unavailable_1_3 / gbd_data_number_of_deaths_by_period_measles_under_5",
    "expected": 0.2767876605,
    "format": "percent"
   },
@@ -1313,7 +1313,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_2",
+   "id": "measles",
    "label": "Measles",
    "section": "probability_of_death",
    "formula": "measles_under_5 * measles_of_under_5_deaths_that_occur_after_vaccine_started",
@@ -1321,24 +1321,24 @@
    "format": "percent"
   },
   {
-   "id": "measles",
-   "label": "Measles",
-   "section": "vaccine_efficacy_data",
-   "formula": "measles_2",
-   "expected": 0.00212867806,
-   "format": "percent"
-  },
-  {
-   "id": "measles_vaccine_probability_of_death_from_diseases_prevented_2",
-   "label": "Measles vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_5",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Measles",
    "section": "vaccine_efficacy_data",
    "formula": "measles",
    "expected": 0.00212867806,
    "format": "percent"
   },
   {
-   "id": "mcv1",
-   "label": "MCV1",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_3",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Probability of death from diseases prevented by vaccine)",
+   "section": "vaccine_efficacy_data",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_5",
+   "expected": 0.00212867806,
+   "format": "percent"
+  },
+  {
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1",
+   "label": "2017 Nigeria vaccination coverage: MCV1",
    "section": "baseline_vaccination_coverage",
    "value": 0.43,
    "kind": "estimate",
@@ -1350,8 +1350,8 @@
    "format": "percent"
   },
   {
-   "id": "mcv1_2",
-   "label": "MCV1",
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1_2",
+   "label": "2017 Nigeria vaccination coverage: MCV1",
    "section": "baseline_vaccination_coverage",
    "value": 0.44,
    "kind": "estimate",
@@ -1363,8 +1363,8 @@
    "format": "percent"
   },
   {
-   "id": "mcv1_3",
-   "label": "MCV1",
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1_3",
+   "label": "2017 Nigeria vaccination coverage: MCV1",
    "section": "baseline_vaccination_coverage",
    "value": 0.42,
    "kind": "estimate",
@@ -1376,8 +1376,8 @@
    "format": "percent"
   },
   {
-   "id": "mcv1_4",
-   "label": "MCV1",
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1_4",
+   "label": "2017 Nigeria vaccination coverage: MCV1",
    "section": "baseline_vaccination_coverage",
    "value": 0.51,
    "kind": "estimate",
@@ -1389,8 +1389,8 @@
    "format": "percent"
   },
   {
-   "id": "mcv1_5",
-   "label": "MCV1",
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1_5",
+   "label": "2017 Nigeria vaccination coverage: MCV1",
    "section": "baseline_vaccination_coverage",
    "value": 0.54,
    "kind": "estimate",
@@ -1402,32 +1402,32 @@
    "format": "percent"
   },
   {
-   "id": "mcv1_coverage_according_to_unicef_who_data",
-   "label": "MCV1 (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_mcv1_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: MCV1 (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(mcv1, mcv1_2, mcv1_3, mcv1_4, mcv1_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_mcv1, r_2017_nigeria_vaccination_coverage_mcv1_2, r_2017_nigeria_vaccination_coverage_mcv1_3, r_2017_nigeria_vaccination_coverage_mcv1_4, r_2017_nigeria_vaccination_coverage_mcv1_5)",
    "expected": 0.468,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_coverage_according_to_unicef_who_data_with_a",
-   "label": "Measles vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
+   "id": "r_2017_nigeria_vaccination_coverage_measles_vaccine_coverage_a",
+   "label": "2017 Nigeria vaccination coverage: Measles vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "mcv1_coverage_according_to_unicef_who_data",
+   "formula": "r_2017_nigeria_vaccination_coverage_mcv1_coverage_according_to",
    "expected": 0.468,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_baseline_vaccination_coverage",
-   "label": "Measles vaccine (Baseline vaccination coverage)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_4",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Baseline vaccination coverage)",
    "section": "vaccine_efficacy_data",
-   "formula": "measles_vaccine_coverage_according_to_unicef_who_data_with_a",
+   "formula": "r_2017_nigeria_vaccination_coverage_measles_vaccine_coverage_a",
    "expected": 0.468,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_vaccine_efficacy_ve",
-   "label": "Measles vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Vaccine efficacy (VE))",
    "section": "vaccine_efficacy_data",
    "value": 0.85,
    "kind": "estimate",
@@ -1438,17 +1438,17 @@
    }
   },
   {
-   "id": "measles_vaccine_relative_risk_rr_equals_1_ve",
-   "label": "Measles vaccine (Relative risk (RR, equals 1 - VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_5",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Relative risk (RR, equals 1 - VE))",
    "section": "vaccine_efficacy_data",
-   "formula": "1 - measles_vaccine_vaccine_efficacy_ve",
+   "formula": "1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
    "expected": 0.15
   },
   {
-   "id": "measles_vaccine_probability_of_death_from_diseases_prevented",
-   "label": "Measles vaccine (Probability of death from diseases prevented by disease among unvaccinated)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Probability of death from diseases prevented by disease among unvacc",
    "section": "vaccine_efficacy_data",
-   "formula": "measles_vaccine_probability_of_death_from_diseases_prevented_2 / (measles_vaccine_baseline_vaccination_coverage * measles_vaccine_relative_risk_rr_equals_1_ve + (1 - measles_vaccine_baseline_vaccination_coverage))",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_3 / (weighted_vaccine_efficacy_risk_reduction_and_new_incentives_4 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_5 + (1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_4))",
    "expected": 0.003534835702,
    "format": "percent"
   },
@@ -1467,8 +1467,8 @@
    "format": "percent"
   },
   {
-   "id": "ignoring",
-   "label": "Ignoring",
+   "id": "gbd_data_number_of_deaths_by_period_ignoring_ignoring_ignori",
+   "label": "GBD data, number of deaths by period: Ignoring, Ignoring, Ignoring, Ignoring, Ignoring, Ignoring",
    "section": "deaths_before_vaccine_administe",
    "value": 0.0,
    "kind": "estimate",
@@ -1484,12 +1484,12 @@
    "id": "tuberculosis_of_under_5_deaths_that_occur_after_vaccine_star",
    "label": "Tuberculosis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - ignoring",
+   "formula": "1 - gbd_data_number_of_deaths_by_period_ignoring_ignoring_ignori",
    "expected": 1.0,
    "format": "percent"
   },
   {
-   "id": "tuberculosis_2",
+   "id": "tuberculosis",
    "label": "Tuberculosis",
    "section": "probability_of_death",
    "formula": "tuberculosis_under_5 * tuberculosis_of_under_5_deaths_that_occur_after_vaccine_star",
@@ -1497,24 +1497,24 @@
    "format": "percent"
   },
   {
-   "id": "tuberculosis",
-   "label": "Tuberculosis",
-   "section": "vaccine_efficacy_data",
-   "formula": "tuberculosis_2",
-   "expected": 0.001478135779,
-   "format": "percent"
-  },
-  {
-   "id": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_2",
-   "label": "BCG vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_6",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tuberculosis",
    "section": "vaccine_efficacy_data",
    "formula": "tuberculosis",
    "expected": 0.001478135779,
    "format": "percent"
   },
   {
-   "id": "bcg",
-   "label": "BCG",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_8",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Probability of death from diseases prevented by vaccine)",
+   "section": "vaccine_efficacy_data",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_6",
+   "expected": 0.001478135779,
+   "format": "percent"
+  },
+  {
+   "id": "r_2017_nigeria_vaccination_coverage_bcg",
+   "label": "2017 Nigeria vaccination coverage: BCG",
    "section": "baseline_vaccination_coverage",
    "value": 0.51,
    "kind": "estimate",
@@ -1526,8 +1526,8 @@
    "format": "percent"
   },
   {
-   "id": "bcg_2",
-   "label": "BCG",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_2",
+   "label": "2017 Nigeria vaccination coverage: BCG",
    "section": "baseline_vaccination_coverage",
    "value": 0.51,
    "kind": "estimate",
@@ -1539,8 +1539,8 @@
    "format": "percent"
   },
   {
-   "id": "bcg_3",
-   "label": "BCG",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_3",
+   "label": "2017 Nigeria vaccination coverage: BCG",
    "section": "baseline_vaccination_coverage",
    "value": 0.53,
    "kind": "estimate",
@@ -1552,8 +1552,8 @@
    "format": "percent"
   },
   {
-   "id": "bcg_4",
-   "label": "BCG",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_4",
+   "label": "2017 Nigeria vaccination coverage: BCG",
    "section": "baseline_vaccination_coverage",
    "value": 0.64,
    "kind": "estimate",
@@ -1565,8 +1565,8 @@
    "format": "percent"
   },
   {
-   "id": "bcg_5",
-   "label": "BCG",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_5",
+   "label": "2017 Nigeria vaccination coverage: BCG",
    "section": "baseline_vaccination_coverage",
    "value": 0.67,
    "kind": "estimate",
@@ -1578,32 +1578,32 @@
    "format": "percent"
   },
   {
-   "id": "bcg_coverage_according_to_unicef_who_data",
-   "label": "BCG (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_coverage_according_to",
+   "label": "2017 Nigeria vaccination coverage: BCG (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(bcg, bcg_2, bcg_3, bcg_4, bcg_5)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_bcg, r_2017_nigeria_vaccination_coverage_bcg_2, r_2017_nigeria_vaccination_coverage_bcg_3, r_2017_nigeria_vaccination_coverage_bcg_4, r_2017_nigeria_vaccination_coverage_bcg_5)",
    "expected": 0.572,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_coverage_according_to_unicef_who_data_with_adjus",
-   "label": "BCG vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_vaccine_coverage_accor",
+   "label": "2017 Nigeria vaccination coverage: BCG vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "bcg_coverage_according_to_unicef_who_data",
+   "formula": "r_2017_nigeria_vaccination_coverage_bcg_coverage_according_to",
    "expected": 0.572,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_baseline_vaccination_coverage",
-   "label": "BCG vaccine (Baseline vaccination coverage)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_9",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Baseline vaccination coverage)",
    "section": "vaccine_efficacy_data",
-   "formula": "bcg_vaccine_coverage_according_to_unicef_who_data_with_adjus",
+   "formula": "r_2017_nigeria_vaccination_coverage_bcg_vaccine_coverage_accor",
    "expected": 0.572,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_vaccine_efficacy_ve",
-   "label": "BCG vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_11",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Vaccine efficacy (VE))",
    "section": "vaccine_efficacy_data",
    "value": 0.85,
    "kind": "estimate",
@@ -1614,17 +1614,17 @@
    }
   },
   {
-   "id": "bcg_vaccine_relative_risk_rr_equals_1_ve",
-   "label": "BCG vaccine (Relative risk (RR, equals 1 - VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_10",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Relative risk (RR, equals 1 - VE))",
    "section": "vaccine_efficacy_data",
-   "formula": "1 - bcg_vaccine_vaccine_efficacy_ve",
+   "formula": "1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_11",
    "expected": 0.15
   },
   {
-   "id": "bcg_vaccine_probability_of_death_from_diseases_prevented_by",
-   "label": "BCG vaccine (Probability of death from diseases prevented by disease among unvaccinated)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Probability of death from diseases prevented by disease among unvaccinat",
    "section": "vaccine_efficacy_data",
-   "formula": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_2 / (bcg_vaccine_baseline_vaccination_coverage * bcg_vaccine_relative_risk_rr_equals_1_ve + (1 - bcg_vaccine_baseline_vaccination_coverage))",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_8 / (weighted_vaccine_efficacy_risk_reduction_and_new_incentives_9 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_10 + (1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_9))",
    "expected": 0.002876869947,
    "format": "percent"
   },
@@ -1666,8 +1666,8 @@
    "format": "percent"
   },
   {
-   "id": "diarrhea_ignoring_2",
-   "label": "Diarrhea (Ignoring)",
+   "id": "gbd_data_number_of_deaths_by_period_diarrhea_ignoring_2",
+   "label": "GBD data, number of deaths by period: Diarrhea (Ignoring)",
    "section": "deaths_before_vaccine_administe",
    "value": 1934.3,
    "kind": "estimate",
@@ -1679,8 +1679,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "diarrhea_ignoring_3",
-   "label": "Diarrhea (Ignoring)",
+   "id": "gbd_data_number_of_deaths_by_period_diarrhea_ignoring_3",
+   "label": "GBD data, number of deaths by period: Diarrhea (Ignoring)",
    "section": "deaths_before_vaccine_administe",
    "value": 3654.73,
    "kind": "estimate",
@@ -1692,8 +1692,8 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "diarrhea_ignoring_4",
-   "label": "Diarrhea (Ignoring)",
+   "id": "gbd_data_number_of_deaths_by_period_diarrhea_ignoring_4",
+   "label": "GBD data, number of deaths by period: Diarrhea (Ignoring)",
    "section": "deaths_before_vaccine_administe",
    "value": 104266.88,
    "kind": "estimate",
@@ -1705,18 +1705,18 @@
    "explainer": "First dose at 6 weeks, use neonatal share plus 10%"
   },
   {
-   "id": "diarrhea_ignoring",
-   "label": "Diarrhea (Ignoring)",
+   "id": "gbd_data_number_of_deaths_by_period_diarrhea_ignoring",
+   "label": "GBD data, number of deaths by period: Diarrhea (Ignoring)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "(diarrhea_ignoring_2 + diarrhea_ignoring_3) / diarrhea_ignoring_4",
+   "formula": "(gbd_data_number_of_deaths_by_period_diarrhea_ignoring_2 + gbd_data_number_of_deaths_by_period_diarrhea_ignoring_3) / gbd_data_number_of_deaths_by_period_diarrhea_ignoring_4",
    "expected": 0.05360311923,
    "format": "percent"
   },
   {
-   "id": "diarrhea_discount",
-   "label": "Diarrhea (Discount)",
+   "id": "gbd_data_number_of_deaths_by_period_diarrhea_discount",
+   "label": "GBD data, number of deaths by period: Diarrhea (Discount)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "diarrhea_ignoring * 1.1",
+   "formula": "gbd_data_number_of_deaths_by_period_diarrhea_ignoring * 1.1",
    "expected": 0.05896343115,
    "format": "percent"
   },
@@ -1724,7 +1724,7 @@
    "id": "diarrhea_rotavirus_of_under_5_deaths_that_occur_after_vaccin",
    "label": "Diarrhea (rotavirus) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - diarrhea_discount",
+   "formula": "1 - gbd_data_number_of_deaths_by_period_diarrhea_discount",
    "expected": 0.9410365689,
    "format": "percent"
   },
@@ -1737,24 +1737,24 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus",
-   "label": "Rotavirus",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_7",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Rotavirus",
    "section": "vaccine_efficacy_data",
    "formula": "diarrhea_rotavirus",
    "expected": 0.003537187028,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_2",
-   "label": "Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_13",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "rotavirus",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_7",
    "expected": 0.003537187028,
    "format": "percent"
   },
   {
-   "id": "rotavirus_2",
-   "label": "Rotavirus",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -1766,8 +1766,8 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_3",
-   "label": "Rotavirus",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_2",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -1779,8 +1779,8 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_4",
-   "label": "Rotavirus",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_3",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -1792,8 +1792,8 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_5",
-   "label": "Rotavirus",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_4",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -1805,8 +1805,8 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_6",
-   "label": "Rotavirus",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_5",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus",
    "section": "baseline_vaccination_coverage",
    "value": 0.0,
    "kind": "estimate",
@@ -1818,32 +1818,32 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_coverage_according_to_unicef_who_data",
-   "label": "Rotavirus (Coverage according to UNICEF/WHO data)",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_coverage_accordi",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus (Coverage according to UNICEF/WHO data)",
    "section": "baseline_vaccination_coverage",
-   "formula": "avg(rotavirus_2, rotavirus_3, rotavirus_4, rotavirus_5, rotavirus_6)",
+   "formula": "avg(r_2017_nigeria_vaccination_coverage_rotavirus, r_2017_nigeria_vaccination_coverage_rotavirus_2, r_2017_nigeria_vaccination_coverage_rotavirus_3, r_2017_nigeria_vaccination_coverage_rotavirus_4, r_2017_nigeria_vaccination_coverage_rotavirus_5)",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_coverage_according_to_unicef_who_data_with",
-   "label": "Rotavirus vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_coverage",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus vaccine (Coverage according to UNICEF/WHO data, with adjustments for partial vaccination)",
    "section": "baseline_vaccination_coverage",
-   "formula": "rotavirus_coverage_according_to_unicef_who_data",
+   "formula": "r_2017_nigeria_vaccination_coverage_rotavirus_coverage_accordi",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_baseline_vaccination_coverage",
-   "label": "Rotavirus vaccine (Baseline vaccination coverage)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_14",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Baseline vaccination coverage)",
    "section": "vaccine_efficacy_data",
-   "formula": "rotavirus_vaccine_coverage_according_to_unicef_who_data_with",
+   "formula": "r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_coverage",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_vaccine_efficacy_ve",
-   "label": "Rotavirus vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_16",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Vaccine efficacy (VE))",
    "section": "vaccine_efficacy_data",
    "value": 0.46,
    "kind": "estimate",
@@ -1854,17 +1854,17 @@
    }
   },
   {
-   "id": "rotavirus_vaccine_relative_risk_rr_equals_1_ve",
-   "label": "Rotavirus vaccine (Relative risk (RR, equals 1 - VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_15",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Relative risk (RR, equals 1 - VE))",
    "section": "vaccine_efficacy_data",
-   "formula": "1 - rotavirus_vaccine_vaccine_efficacy_ve",
+   "formula": "1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_16",
    "expected": 0.54
   },
   {
-   "id": "rotavirus_vaccine_probability_of_death_from_diseases_prevent",
-   "label": "Rotavirus vaccine (Probability of death from diseases prevented by disease among unvaccinated)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Probability of death from diseases prevented by disease among unva",
    "section": "vaccine_efficacy_data",
-   "formula": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_2 / (rotavirus_vaccine_baseline_vaccination_coverage * rotavirus_vaccine_relative_risk_rr_equals_1_ve + (1 - rotavirus_vaccine_baseline_vaccination_coverage))",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_13 / (weighted_vaccine_efficacy_risk_reduction_and_new_incentives_14 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_15 + (1 - weighted_vaccine_efficacy_risk_reduction_and_new_incentives_14))",
    "expected": 0.003537187028,
    "format": "percent"
   },
@@ -1872,7 +1872,7 @@
    "id": "pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d",
    "label": "PCV vaccine (three doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "pcv_vaccine_three_doses_probability_of_death_from_diseases_p / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "pcv_vaccine_three_doses_probability_of_death_from_diseases_p / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.4405646157,
    "format": "percent"
   },
@@ -1880,7 +1880,7 @@
    "id": "dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death",
    "label": "DTP vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.1143104492,
    "format": "percent"
   },
@@ -1888,46 +1888,46 @@
    "id": "hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death",
    "label": "HiB vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "vaccine_efficacy_data",
-   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.03405467243,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr",
-   "label": "Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_17",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by ",
    "section": "vaccine_efficacy_data",
-   "formula": "measles_vaccine_probability_of_death_from_diseases_prevented / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2 / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.146053022,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d",
-   "label": "BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_18",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vacc",
    "section": "vaccine_efficacy_data",
-   "formula": "bcg_vaccine_probability_of_death_from_diseases_prevented_by / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7 / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.1188670663,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths",
-   "label": "Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_19",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted b",
    "section": "vaccine_efficacy_data",
-   "formula": "rotavirus_vaccine_probability_of_death_from_diseases_prevent / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, measles_vaccine_probability_of_death_from_diseases_prevented, bcg_vaccine_probability_of_death_from_diseases_prevented_by, rotavirus_vaccine_probability_of_death_from_diseases_prevent)",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12 / sum(pcv_vaccine_three_doses_probability_of_death_from_diseases_p, dtp_vaccine_3_doses_probability_of_death_from_diseases_preve, hib_vaccine_3_doses_probability_of_death_from_diseases_preve, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_2, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_7, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_12)",
    "expected": 0.1461501745,
    "format": "percent"
   },
   {
-   "id": "weighted_rr",
-   "label": "Weighted RR",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Weighted RR",
    "section": "vaccine_efficacy_data",
-   "formula": "sum(pcv_vaccine_three_doses_relative_risk_rr_equals_1_ve * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d, dtp_vaccine_3_doses_relative_risk_rr_equals_1_ve * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death, hib_vaccine_3_doses_relative_risk_rr_equals_1_ve * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death, measles_vaccine_relative_risk_rr_equals_1_ve * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr, bcg_vaccine_relative_risk_rr_equals_1_ve * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d, rotavirus_vaccine_relative_risk_rr_equals_1_ve * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths)",
+   "formula": "sum(pcv_vaccine_three_doses_relative_risk_rr_equals_1_ve * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d, dtp_vaccine_3_doses_relative_risk_rr_equals_1_ve * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death, hib_vaccine_3_doses_relative_risk_rr_equals_1_ve * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_5 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_17, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_10 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_18, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_15 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_19)",
    "expected": 0.328115759
   },
   {
    "id": "relative_risk_for_vaccine_preventable_disease_from_meta_anal_2",
    "label": "Relative risk for vaccine-preventable disease from meta-analyses",
    "section": "cea_main",
-   "formula": "weighted_rr",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives",
    "expected": 0.328115759
   },
   {
@@ -1978,7 +1978,7 @@
    "id": "nigerian_seroconversion_study_fowotade_et_al_2015_implied_ad",
    "label": "Nigerian seroconversion study (Fowotade et al. 2015) (Implied Adjustment Factor (Relative to Effect Size in CEA))",
    "section": "biomarkers_adjustment",
-   "formula": "0.69 / measles_vaccine_vaccine_efficacy_ve",
+   "formula": "0.69 / weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
    "expected": 0.8117647059
   },
   {
@@ -1997,7 +1997,7 @@
    "id": "meta_analysis_with_africa_specific_effect_uzicanin_and_zimme",
    "label": "Meta-analysis with Africa-specific effect (Uzicanin and Zimmerman 2011) (Implied Adjustment Factor (Relative to Effect Size in CEA))",
    "section": "biomarkers_adjustment",
-   "formula": "0.73 / measles_vaccine_vaccine_efficacy_ve",
+   "formula": "0.73 / weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
    "expected": 0.8588235294
   },
   {
@@ -2056,8 +2056,8 @@
    "expected": 0.7
   },
   {
-   "id": "weighted_average_2",
-   "label": "Weighted average",
+   "id": "poor_biomarkers_results_driven_by_weighted_average",
+   "label": "Poor biomarkers results driven by:: Weighted average",
    "section": "biomarkers_adjustment",
    "formula": "sum(issues_unlikely_to_lead_to_vaccine_efficacy_concerns_in_new * issues_unlikely_to_lead_to_vaccine_efficacy_concerns_in_new_2, issues_likely_to_lead_to_vaccine_efficacy_concerns_in_new_in * issues_likely_to_lead_to_vaccine_efficacy_concerns_in_new_in_2)",
    "expected": 0.51
@@ -2066,7 +2066,7 @@
    "id": "biomarkers_best_guess_taken_from_table_above_implied_adjustm",
    "label": "Biomarkers best guess (taken from table above) (Implied Adjustment Factor (Relative to Effect Size in CEA))",
    "section": "biomarkers_adjustment",
-   "formula": "weighted_average_2",
+   "formula": "poor_biomarkers_results_driven_by_weighted_average",
    "expected": 0.51
   },
   {
@@ -2082,17 +2082,17 @@
    }
   },
   {
-   "id": "weighted_average",
-   "label": "Weighted average",
+   "id": "best_guess_on_biomarkers_adjustment_when_incorporating_addit",
+   "label": "Best guess on biomarkers adjustment when incorporating additional evidence: Weighted average",
    "section": "biomarkers_adjustment",
    "formula": "sum(meta_analysis_we_use_for_main_effect_of_measles_vaccine_in_c * meta_analysis_we_use_for_main_effect_of_measles_vaccine_in_c_2, nigerian_seroconversion_study_fowotade_et_al_2015_implied_ad * nigerian_seroconversion_study_fowotade_et_al_2015_weight, meta_analysis_with_africa_specific_effect_uzicanin_and_zimme * meta_analysis_with_africa_specific_effect_uzicanin_and_zimme_2, biomarkers_best_guess_taken_from_table_above_implied_adjustm * biomarkers_best_guess_taken_from_table_above_weight)",
    "expected": 0.7541764706
   },
   {
-   "id": "measles_adjustment",
-   "label": "Measles adjustment",
+   "id": "best_guess_on_how_to_apply_to_other_vaccines_besides_measles",
+   "label": "Best guess on how to apply to other vaccines besides measles: Measles adjustment",
    "section": "biomarkers_adjustment",
-   "formula": "weighted_average",
+   "formula": "best_guess_on_biomarkers_adjustment_when_incorporating_addit",
    "expected": 0.7541764706
   },
   {
@@ -2117,17 +2117,17 @@
    "format": "percent"
   },
   {
-   "id": "non_measles_adjustment",
-   "label": "Non-measles adjustment",
+   "id": "best_guess_on_how_to_apply_to_other_vaccines_besides_measles_2",
+   "label": "Best guess on how to apply to other vaccines besides measles: Non-measles adjustment",
    "section": "biomarkers_adjustment",
-   "formula": "1 - (1 - measles_adjustment) * percent_of_adjustment_that_applies_to_non_measles_vaccines",
+   "formula": "1 - (1 - best_guess_on_how_to_apply_to_other_vaccines_besides_measles) * percent_of_adjustment_that_applies_to_non_measles_vaccines",
    "expected": 0.8156323529
   },
   {
    "id": "biomarkers_adjustment_factor",
    "label": "Biomarkers adjustment factor",
    "section": "biomarkers_adjustment",
-   "formula": "contribution_of_measles_to_cea * measles_adjustment + contribution_of_other_vaccines_to_cea * non_measles_adjustment",
+   "formula": "contribution_of_measles_to_cea * best_guess_on_how_to_apply_to_other_vaccines_besides_measles + contribution_of_other_vaccines_to_cea * best_guess_on_how_to_apply_to_other_vaccines_besides_measles_2",
    "expected": 0.8064139706
   },
   {
@@ -2138,8 +2138,8 @@
    "expected": 0.8064139706
   },
   {
-   "id": "adjustment_factor",
-   "label": "Adjustment factor",
+   "id": "calculations_for_all_cause_mortality_adjustment_factor",
+   "label": "Calculations for all-cause mortality: Adjustment factor",
    "section": "all_cause_mortality",
    "value": 1.33,
    "kind": "estimate",
@@ -2153,7 +2153,7 @@
    "id": "adjustment_for_all_cause_mortality_effect",
    "label": "Adjustment for all-cause mortality effect",
    "section": "cea_main",
-   "formula": "adjustment_factor",
+   "formula": "calculations_for_all_cause_mortality_adjustment_factor",
    "expected": 1.33
   },
   {
@@ -2181,7 +2181,7 @@
    "id": "total",
    "label": "Total",
    "section": "probability_of_death",
-   "formula": "sum(lower_respiratory_infections_s_pneumoniae_2, lower_respiratory_infections_hib_2, pneumococcal_meningitis_2, whooping_cough_2, diphtheria_2, tetanus_2, h_influenzae_type_b_meningitis_2, measles_2, tuberculosis_2, diarrhea_rotavirus)",
+   "formula": "sum(lower_respiratory_infections_s_pneumoniae_2, lower_respiratory_infections_hib_2, pneumococcal_meningitis, whooping_cough, diphtheria, tetanus, h_influenzae_type_b_meningitis_2, measles, tuberculosis, diarrhea_rotavirus)",
    "expected": 0.01699242272,
    "format": "percent"
   },
@@ -2239,47 +2239,47 @@
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_vaccine_efficacy_ve_2",
-   "label": "Measles vaccine (Vaccine efficacy (VE))",
+   "id": "r_2017_nigeria_vaccination_coverage_measles_vaccine_vaccine_ef",
+   "label": "2017 Nigeria vaccination coverage: Measles vaccine (Vaccine efficacy (VE))",
    "section": "baseline_vaccination_coverage",
-   "formula": "measles_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
    "expected": 0.85
   },
   {
-   "id": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_2",
-   "label": "Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "r_2017_nigeria_vaccination_coverage_measles_vaccine_percent_of",
+   "label": "2017 Nigeria vaccination coverage: Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "baseline_vaccination_coverage",
-   "formula": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_17",
    "expected": 0.146053022,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_vaccine_efficacy_ve_2",
-   "label": "BCG vaccine (Vaccine efficacy (VE))",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_vaccine_vaccine_effica",
+   "label": "2017 Nigeria vaccination coverage: BCG vaccine (Vaccine efficacy (VE))",
    "section": "baseline_vaccination_coverage",
-   "formula": "bcg_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_11",
    "expected": 0.85
   },
   {
-   "id": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_2",
-   "label": "BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "r_2017_nigeria_vaccination_coverage_bcg_vaccine_percent_of_all",
+   "label": "2017 Nigeria vaccination coverage: BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "baseline_vaccination_coverage",
-   "formula": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_18",
    "expected": 0.1188670663,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_vaccine_efficacy_ve_2",
-   "label": "Rotavirus vaccine (Vaccine efficacy (VE))",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_vaccine",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus vaccine (Vaccine efficacy (VE))",
    "section": "baseline_vaccination_coverage",
-   "formula": "rotavirus_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_16",
    "expected": 0.46
   },
   {
-   "id": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_2",
-   "label": "Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_percent",
+   "label": "2017 Nigeria vaccination coverage: Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "baseline_vaccination_coverage",
-   "formula": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_19",
    "expected": 0.1461501745,
    "format": "percent"
   },
@@ -2287,14 +2287,14 @@
    "id": "ve_weighted_by_coverage",
    "label": "VE weighted by coverage",
    "section": "baseline_vaccination_coverage",
-   "formula": "sum(pcv_vaccine_three_doses_vaccine_efficacy_ve_2 * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d_2 * pcv_vaccine_three_doses_coverage_according_to_unicef_who_dat, dtp_vaccine_3_doses_vaccine_efficacy_ve_2 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2 * dtp_vaccine_3_doses_coverage_according_to_unicef_who_data_wi, hib_vaccine_3_doses_vaccine_efficacy_ve_2 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2 * hib_vaccine_3_doses_coverage_according_to_unicef_who_data_wi, measles_vaccine_vaccine_efficacy_ve_2 * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_2 * measles_vaccine_coverage_according_to_unicef_who_data_with_a, bcg_vaccine_vaccine_efficacy_ve_2 * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_2 * bcg_vaccine_coverage_according_to_unicef_who_data_with_adjus, rotavirus_vaccine_vaccine_efficacy_ve_2 * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_2 * rotavirus_vaccine_coverage_according_to_unicef_who_data_with)",
+   "formula": "sum(pcv_vaccine_three_doses_vaccine_efficacy_ve_2 * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d_2 * pcv_vaccine_three_doses_coverage_according_to_unicef_who_dat, dtp_vaccine_3_doses_vaccine_efficacy_ve_2 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2 * dtp_vaccine_3_doses_coverage_according_to_unicef_who_data_wi, hib_vaccine_3_doses_vaccine_efficacy_ve_2 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2 * hib_vaccine_3_doses_coverage_according_to_unicef_who_data_wi, r_2017_nigeria_vaccination_coverage_measles_vaccine_vaccine_ef * r_2017_nigeria_vaccination_coverage_measles_vaccine_percent_of * r_2017_nigeria_vaccination_coverage_measles_vaccine_coverage_a, r_2017_nigeria_vaccination_coverage_bcg_vaccine_vaccine_effica * r_2017_nigeria_vaccination_coverage_bcg_vaccine_percent_of_all * r_2017_nigeria_vaccination_coverage_bcg_vaccine_coverage_accor, r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_vaccine * r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_percent * r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_coverage)",
    "expected": 0.297903807
   },
   {
    "id": "ve_with_100_coverage",
    "label": "VE with 100% coverage",
    "section": "baseline_vaccination_coverage",
-   "formula": "sum(pcv_vaccine_three_doses_vaccine_efficacy_ve_2 * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d_2, dtp_vaccine_3_doses_vaccine_efficacy_ve_2 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, hib_vaccine_3_doses_vaccine_efficacy_ve_2 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, measles_vaccine_vaccine_efficacy_ve_2 * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_2, bcg_vaccine_vaccine_efficacy_ve_2 * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_2, rotavirus_vaccine_vaccine_efficacy_ve_2 * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_2)",
+   "formula": "sum(pcv_vaccine_three_doses_vaccine_efficacy_ve_2 * pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d_2, dtp_vaccine_3_doses_vaccine_efficacy_ve_2 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, hib_vaccine_3_doses_vaccine_efficacy_ve_2 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, r_2017_nigeria_vaccination_coverage_measles_vaccine_vaccine_ef * r_2017_nigeria_vaccination_coverage_measles_vaccine_percent_of, r_2017_nigeria_vaccination_coverage_bcg_vaccine_vaccine_effica * r_2017_nigeria_vaccination_coverage_bcg_vaccine_percent_of_all, r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_vaccine * r_2017_nigeria_vaccination_coverage_rotavirus_vaccine_percent)",
    "expected": 0.671884241
   },
   {
@@ -2431,7 +2431,7 @@
    "id": "measles_vaccine",
    "label": "Measles vaccine",
    "section": "partial_vaccination",
-   "formula": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_17",
    "expected": 0.146053022,
    "format": "percent"
   },
@@ -2451,7 +2451,7 @@
    "id": "bcg_vaccine",
    "label": "BCG vaccine",
    "section": "partial_vaccination",
-   "formula": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_18",
    "expected": 0.1188670663,
    "format": "percent"
   },
@@ -2471,7 +2471,7 @@
    "id": "rotavirus_vaccine_2_doses",
    "label": "Rotavirus vaccine (2 doses)",
    "section": "partial_vaccination",
-   "formula": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_19",
    "expected": 0.1461501745,
    "format": "percent"
   },
@@ -2490,8 +2490,8 @@
    "expected": 1.114519908
   },
   {
-   "id": "has_scar",
-   "label": "Has scar",
+   "id": "scar_vs_truth_bcg_scar_has_scar",
+   "label": "Scar vs. truth: BCG scar, Has scar",
    "section": "self_report_bias_calculations",
    "formula": "41 + 22",
    "expected": 63.0
@@ -2510,10 +2510,10 @@
    "format": "percent"
   },
   {
-   "id": "has_scar_yes",
-   "label": "Has scar (Yes)",
+   "id": "scar_vs_truth_bcg_scar_has_scar_yes",
+   "label": "Scar vs. truth: BCG scar, Has scar (Yes)",
    "section": "self_report_bias_calculations",
-   "formula": "has_scar * percent_who_are_identified_as_having_a_scar_who_do_have_a_sc",
+   "formula": "scar_vs_truth_bcg_scar_has_scar * percent_who_are_identified_as_having_a_scar_who_do_have_a_sc",
    "expected": 59.85
   },
   {
@@ -2543,15 +2543,15 @@
    "format": "percent"
   },
   {
-   "id": "self_report_bias_calculations_d26_yes",
-   "label": "Self-report bias calculations!D26 (Yes)",
+   "id": "yes_row_26",
+   "label": "Yes (row 26)",
    "section": "self_report_bias_calculations",
-   "formula": "has_scar_yes / percent_who_receive_bcg_who_scar_in_treatment_group / percent_who_scar_who_have_scar_detected",
+   "formula": "scar_vs_truth_bcg_scar_has_scar_yes / percent_who_receive_bcg_who_scar_in_treatment_group / percent_who_scar_who_have_scar_detected",
    "expected": 68.55670103
   },
   {
-   "id": "has_scar_2",
-   "label": "Has scar",
+   "id": "scar_vs_truth_bcg_scar_has_scar_2",
+   "label": "Scar vs. truth: BCG scar, Has scar",
    "section": "self_report_bias_calculations",
    "value": 41.0,
    "kind": "estimate",
@@ -2563,10 +2563,10 @@
    "explainer": "fixed This estimate comes from the effect on BCG scarring measured in the RCT by IDinsight.\n\nSee the \"Self-reporting bias\" section here: https://www.givewell.org/international/technical/programs/new-incentives#Vaccination_rates"
   },
   {
-   "id": "has_scar_yes_2",
-   "label": "Has scar (Yes)",
+   "id": "scar_vs_truth_bcg_scar_has_scar_yes_2",
+   "label": "Scar vs. truth: BCG scar, Has scar (Yes)",
    "section": "self_report_bias_calculations",
-   "formula": "has_scar_2 * percent_who_are_identified_as_having_a_scar_who_do_have_a_sc",
+   "formula": "scar_vs_truth_bcg_scar_has_scar_2 * percent_who_are_identified_as_having_a_scar_who_do_have_a_sc",
    "expected": 38.95
   },
   {
@@ -2583,24 +2583,24 @@
    "format": "percent"
   },
   {
-   "id": "self_report_bias_calculations_d14_yes",
-   "label": "Self-report bias calculations!D14 (Yes)",
+   "id": "yes_row_14",
+   "label": "Yes (row 14)",
    "section": "self_report_bias_calculations",
-   "formula": "has_scar_yes_2 / percent_who_receive_bcg_who_scar_in_control_group / percent_who_scar_who_have_scar_detected",
+   "formula": "scar_vs_truth_bcg_scar_has_scar_yes_2 / percent_who_receive_bcg_who_scar_in_control_group / percent_who_scar_who_have_scar_detected",
    "expected": 48.08641975
   },
   {
-   "id": "true_te",
-   "label": "True TE",
+   "id": "scar_vs_truth_true_te",
+   "label": "Scar vs. truth: True TE",
    "section": "self_report_bias_calculations",
-   "formula": "self_report_bias_calculations_d26_yes - self_report_bias_calculations_d14_yes",
+   "formula": "yes_row_26 - yes_row_14",
    "expected": 20.47028128
   },
   {
    "id": "estimated_true_effect_size_based_on_bcg_scar",
    "label": "Estimated true effect size based on BCG scar",
    "section": "cea_main",
-   "formula": "true_te / 100",
+   "formula": "scar_vs_truth_true_te / 100",
    "expected": 0.2047028128
   },
   {
@@ -2745,15 +2745,15 @@
    "expected": 1.145299145
   },
   {
-   "id": "total_adjustment_5_14_years",
-   "label": "Total adjustment (5-14 years)",
+   "id": "effect_across_age_groups_total_adjustment_5_14_years",
+   "label": "Effect across age groups: Total adjustment (5-14 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "discount_factor_with_discount_rate_of_0_5_5_14_years * adjustment_for_moral_weights_for_older_age_groups_5_14_years",
    "expected": 1.092298532
   },
   {
-   "id": "cohort_5_14_years",
-   "label": "Cohort (5-14 years)",
+   "id": "effect_across_age_groups_cohort_5_14_years",
+   "label": "Effect across age groups: Cohort (5-14 years)",
    "section": "deaths_at_older_age_groups",
    "value": 1000.0,
    "kind": "estimate",
@@ -2823,23 +2823,23 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_5_14_years_2",
-   "label": "Pneumococcal meningitis (5-14 years)",
-   "section": "probability_of_death",
-   "formula": "0.00694 / 100 * pneumococcal_meningitis_3",
-   "expected": 6.94e-05,
-   "format": "percent"
-  },
-  {
    "id": "pneumococcal_meningitis_5_14_years",
    "label": "Pneumococcal meningitis (5-14 years)",
-   "section": "deaths_at_older_age_groups",
-   "formula": "pneumococcal_meningitis_5_14_years_2",
+   "section": "probability_of_death",
+   "formula": "0.00694 / 100 * pneumococcal_meningitis_2",
    "expected": 6.94e-05,
    "format": "percent"
   },
   {
-   "id": "whooping_cough_5_14_years_2",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_9",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Pneumococcal meningitis (5-14 years)",
+   "section": "deaths_at_older_age_groups",
+   "formula": "pneumococcal_meningitis_5_14_years",
+   "expected": 6.94e-05,
+   "format": "percent"
+  },
+  {
+   "id": "whooping_cough_5_14_years",
    "label": "Whooping cough (5-14 years)",
    "section": "probability_of_death",
    "value": 9.89e-05,
@@ -2853,15 +2853,15 @@
    "format": "percent"
   },
   {
-   "id": "whooping_cough_5_14_years",
-   "label": "Whooping cough (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_10",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Whooping cough (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_5_14_years_2",
+   "formula": "whooping_cough_5_14_years",
    "expected": 9.89e-05,
    "format": "percent"
   },
   {
-   "id": "diphtheria_5_14_years_2",
+   "id": "diphtheria_5_14_years",
    "label": "Diphtheria (5-14 years)",
    "section": "probability_of_death",
    "value": 2.82e-05,
@@ -2875,15 +2875,15 @@
    "format": "percent"
   },
   {
-   "id": "diphtheria_5_14_years",
-   "label": "Diphtheria (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_11",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Diphtheria (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "diphtheria_5_14_years_2",
+   "formula": "diphtheria_5_14_years",
    "expected": 2.82e-05,
    "format": "percent"
   },
   {
-   "id": "tetanus_5_14_years_2",
+   "id": "tetanus_5_14_years",
    "label": "Tetanus (5-14 years)",
    "section": "probability_of_death",
    "value": 2.99e-05,
@@ -2897,10 +2897,10 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_5_14_years",
-   "label": "Tetanus (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_12",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tetanus (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tetanus_5_14_years_2",
+   "formula": "tetanus_5_14_years",
    "expected": 2.99e-05,
    "format": "percent"
   },
@@ -2921,7 +2921,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_5_14_years_2",
+   "id": "measles_5_14_years",
    "label": "Measles (5-14 years)",
    "section": "probability_of_death",
    "value": 0.0004329899324,
@@ -2935,15 +2935,15 @@
    "format": "percent"
   },
   {
-   "id": "measles_5_14_years",
-   "label": "Measles (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_13",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Measles (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_5_14_years_2",
+   "formula": "measles_5_14_years",
    "expected": 0.0004329899324,
    "format": "percent"
   },
   {
-   "id": "tuberculosis_5_14_years_2",
+   "id": "tuberculosis_5_14_years",
    "label": "Tuberculosis (5-14 years)",
    "section": "probability_of_death",
    "value": 0.0001977328385,
@@ -2957,10 +2957,10 @@
    "format": "percent"
   },
   {
-   "id": "tuberculosis_5_14_years",
-   "label": "Tuberculosis (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_14",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tuberculosis (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_5_14_years_2",
+   "formula": "tuberculosis_5_14_years",
    "expected": 0.0001977328385,
    "format": "percent"
   },
@@ -2986,18 +2986,18 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_5_14_years",
-   "label": "Rotavirus (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_15",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Rotavirus (5-14 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "diarrhea_rotavirus_5_14_years",
    "expected": 0.0001538049611,
    "format": "percent"
   },
   {
-   "id": "total_5_14_years",
-   "label": "Total (5-14 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_8",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Total (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(lower_respiratory_infections_s_pneumoniae_5_14_years, lower_respiratory_infections_hib_5_14_years, pneumococcal_meningitis_5_14_years, whooping_cough_5_14_years, diphtheria_5_14_years, tetanus_5_14_years, h_influenzae_type_b_meningitis_5_14_years, measles_5_14_years, tuberculosis_5_14_years, rotavirus_5_14_years)",
+   "formula": "sum(lower_respiratory_infections_s_pneumoniae_5_14_years, lower_respiratory_infections_hib_5_14_years, probability_of_death_from_vaccine_preventable_diseases_and_e_9, probability_of_death_from_vaccine_preventable_diseases_and_e_10, probability_of_death_from_vaccine_preventable_diseases_and_e_11, probability_of_death_from_vaccine_preventable_diseases_and_e_12, h_influenzae_type_b_meningitis_5_14_years, probability_of_death_from_vaccine_preventable_diseases_and_e_13, probability_of_death_from_vaccine_preventable_diseases_and_e_14, probability_of_death_from_vaccine_preventable_diseases_and_e_15)",
    "expected": 0.001365519206,
    "format": "percent"
   },
@@ -3005,7 +3005,7 @@
    "id": "probability_of_death_from_vaccine_preventable_disease_5_14_y",
    "label": "Probability of death from vaccine-preventable disease (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_5_14_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.001365519206,
    "format": "percent"
   },
@@ -3050,7 +3050,7 @@
    "id": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve",
    "label": "PCV vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "lower_respiratory_infections_s_pneumoniae_5_14_years + pneumococcal_meningitis_5_14_years",
+   "formula": "lower_respiratory_infections_s_pneumoniae_5_14_years + probability_of_death_from_vaccine_preventable_diseases_and_e_9",
    "expected": 0.0003956893714,
    "format": "percent"
   },
@@ -3058,7 +3058,7 @@
    "id": "pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death",
    "label": "PCV vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve / total_5_14_years",
+   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.2897721027,
    "format": "percent"
   },
@@ -3073,7 +3073,7 @@
    "id": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_3",
    "label": "DTP vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_5_14_years + diphtheria_5_14_years + tetanus_5_14_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_10 + probability_of_death_from_vaccine_preventable_diseases_and_e_11 + probability_of_death_from_vaccine_preventable_diseases_and_e_12",
    "expected": 0.000157,
    "format": "percent"
   },
@@ -3081,7 +3081,7 @@
    "id": "dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3",
    "label": "DTP vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / total_5_14_years",
+   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.1149745821,
    "format": "percent"
   },
@@ -3104,91 +3104,91 @@
    "id": "hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3",
    "label": "HiB vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / total_5_14_years",
+   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.02072625714,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_vaccine_efficacy_ve_3",
-   "label": "Measles vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_21",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Vaccine efficacy (VE))",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_6",
    "expected": 0.85
   },
   {
-   "id": "measles_vaccine_probability_of_death_from_diseases_prevented_3",
-   "label": "Measles vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_23",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_5_14_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_13",
    "expected": 0.0004329899324,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_3",
-   "label": "Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_22",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by ",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_vaccine_probability_of_death_from_diseases_prevented_3 / total_5_14_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_23 / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.3170881308,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_vaccine_efficacy_ve_3",
-   "label": "BCG vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_24",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Vaccine efficacy (VE))",
    "section": "deaths_at_older_age_groups",
-   "formula": "bcg_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_11",
    "expected": 0.85
   },
   {
-   "id": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_3",
-   "label": "BCG vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_26",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_5_14_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_14",
    "expected": 0.0001977328385,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_3",
-   "label": "BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_25",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vacc",
    "section": "deaths_at_older_age_groups",
-   "formula": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_3 / total_5_14_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_26 / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.1448041431,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_vaccine_efficacy_ve_3",
-   "label": "Rotavirus vaccine (Vaccine efficacy (VE))",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_27",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Vaccine efficacy (VE))",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_vaccine_vaccine_efficacy_ve",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_16",
    "expected": 0.46
   },
   {
-   "id": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_3",
-   "label": "Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_29",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_5_14_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_15",
    "expected": 0.0001538049611,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_3",
-   "label": "Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_28",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted b",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_3 / total_5_14_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_29 / probability_of_death_from_vaccine_preventable_diseases_and_e_8",
    "expected": 0.1126347842,
    "format": "percent"
   },
   {
-   "id": "weighted_ve_5_14_years",
-   "label": "Weighted VE (5-14 years)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_20",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Weighted VE (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, measles_vaccine_vaccine_efficacy_ve_3 * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_3, bcg_vaccine_vaccine_efficacy_ve_3 * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_3, rotavirus_vaccine_vaccine_efficacy_ve_3 * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_3)",
+   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_21 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_22, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_24 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_25, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_27 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_28)",
    "expected": 0.7260624329
   },
   {
    "id": "vaccine_efficacy_weighted_by_probability_of_death_5_14_years",
    "label": "Vaccine efficacy weighted by probability of death (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "weighted_ve_5_14_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_20",
    "expected": 0.7260624329
   },
   {
@@ -3270,14 +3270,14 @@
    "id": "deaths_averted_in_cohort_5_14_years",
    "label": "Deaths averted in cohort (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "cohort_5_14_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_5_14_ye) * ni_effect_size_5_14_years",
+   "formula": "effect_across_age_groups_cohort_5_14_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_5_14_ye) * ni_effect_size_5_14_years",
    "expected": 0.3142700919
   },
   {
    "id": "total_discounted_deaths_averted_in_cohort_5_14_years",
    "label": "Total discounted deaths averted in cohort (5-14 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_adjustment_5_14_years * deaths_averted_in_cohort_5_14_years",
+   "formula": "effect_across_age_groups_total_adjustment_5_14_years * deaths_averted_in_cohort_5_14_years",
    "expected": 0.34327676
   },
   {
@@ -3315,15 +3315,15 @@
    "expected": 0.8888888889
   },
   {
-   "id": "total_adjustment_15_49_years",
-   "label": "Total adjustment (15-49 years)",
+   "id": "effect_across_age_groups_total_adjustment_15_49_years",
+   "label": "Effect across age groups: Total adjustment (15-49 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "discount_factor_with_discount_rate_of_0_5_15_49_years * adjustment_for_moral_weights_for_older_age_groups_15_49_year",
    "expected": 0.7577631842
   },
   {
-   "id": "cohort_15_49_years",
-   "label": "Cohort (15-49 years)",
+   "id": "effect_across_age_groups_cohort_15_49_years",
+   "label": "Effect across age groups: Cohort (15-49 years)",
    "section": "deaths_at_older_age_groups",
    "value": 1000.0,
    "kind": "estimate",
@@ -3386,23 +3386,23 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_15_49_years_2",
-   "label": "Pneumococcal meningitis (15-49 years)",
-   "section": "probability_of_death",
-   "formula": "0.02710964256 / 100 * pneumococcal_meningitis_3",
-   "expected": 0.0002710964256,
-   "format": "percent"
-  },
-  {
    "id": "pneumococcal_meningitis_15_49_years",
    "label": "Pneumococcal meningitis (15-49 years)",
-   "section": "deaths_at_older_age_groups",
-   "formula": "pneumococcal_meningitis_15_49_years_2",
+   "section": "probability_of_death",
+   "formula": "0.02710964256 / 100 * pneumococcal_meningitis_2",
    "expected": 0.0002710964256,
    "format": "percent"
   },
   {
-   "id": "whooping_cough_15_49_years_2",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_17",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Pneumococcal meningitis (15-49 years)",
+   "section": "deaths_at_older_age_groups",
+   "formula": "pneumococcal_meningitis_15_49_years",
+   "expected": 0.0002710964256,
+   "format": "percent"
+  },
+  {
+   "id": "whooping_cough_15_49_years",
    "label": "Whooping cough (15-49 years)",
    "section": "probability_of_death",
    "value": 2.32e-05,
@@ -3416,15 +3416,15 @@
    "format": "percent"
   },
   {
-   "id": "whooping_cough_15_49_years",
-   "label": "Whooping cough (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_18",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Whooping cough (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_15_49_years_2",
+   "formula": "whooping_cough_15_49_years",
    "expected": 2.32e-05,
    "format": "percent"
   },
   {
-   "id": "diphtheria_15_49_years_2",
+   "id": "diphtheria_15_49_years",
    "label": "Diphtheria (15-49 years)",
    "section": "probability_of_death",
    "value": 1.51e-05,
@@ -3438,15 +3438,15 @@
    "format": "percent"
   },
   {
-   "id": "diphtheria_15_49_years",
-   "label": "Diphtheria (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_19",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Diphtheria (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "diphtheria_15_49_years_2",
+   "formula": "diphtheria_15_49_years",
    "expected": 1.51e-05,
    "format": "percent"
   },
   {
-   "id": "tetanus_15_49_years_2",
+   "id": "tetanus_15_49_years",
    "label": "Tetanus (15-49 years)",
    "section": "probability_of_death",
    "value": 0.0001540813705,
@@ -3460,10 +3460,10 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_15_49_years",
-   "label": "Tetanus (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_20",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tetanus (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tetanus_15_49_years_2",
+   "formula": "tetanus_15_49_years",
    "expected": 0.0001540813705,
    "format": "percent"
   },
@@ -3484,7 +3484,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_15_49_years_2",
+   "id": "measles_15_49_years",
    "label": "Measles (15-49 years)",
    "section": "probability_of_death",
    "value": 7.24e-05,
@@ -3498,15 +3498,15 @@
    "format": "percent"
   },
   {
-   "id": "measles_15_49_years",
-   "label": "Measles (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_21",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Measles (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_15_49_years_2",
+   "formula": "measles_15_49_years",
    "expected": 7.24e-05,
    "format": "percent"
   },
   {
-   "id": "tuberculosis_15_49_years_2",
+   "id": "tuberculosis_15_49_years",
    "label": "Tuberculosis (15-49 years)",
    "section": "probability_of_death",
    "value": 0.006636925413,
@@ -3520,10 +3520,10 @@
    "format": "percent"
   },
   {
-   "id": "tuberculosis_15_49_years",
-   "label": "Tuberculosis (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_22",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tuberculosis (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_15_49_years_2",
+   "formula": "tuberculosis_15_49_years",
    "expected": 0.006636925413,
    "format": "percent"
   },
@@ -3549,18 +3549,18 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_15_49_years",
-   "label": "Rotavirus (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_23",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Rotavirus (15-49 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "diarrhea_rotavirus_15_49_years",
    "expected": 0.0008120407449,
    "format": "percent"
   },
   {
-   "id": "total_15_49_years",
-   "label": "Total (15-49 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_16",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Total (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(lower_respiratory_infections_s_pneumoniae_15_49_years, lower_respiratory_infections_hib_15_49_years, pneumococcal_meningitis_15_49_years, whooping_cough_15_49_years, diphtheria_15_49_years, tetanus_15_49_years, h_influenzae_type_b_meningitis_15_49_years, measles_15_49_years, tuberculosis_15_49_years, rotavirus_15_49_years)",
+   "formula": "sum(lower_respiratory_infections_s_pneumoniae_15_49_years, lower_respiratory_infections_hib_15_49_years, probability_of_death_from_vaccine_preventable_diseases_and_e_17, probability_of_death_from_vaccine_preventable_diseases_and_e_18, probability_of_death_from_vaccine_preventable_diseases_and_e_19, probability_of_death_from_vaccine_preventable_diseases_and_e_20, h_influenzae_type_b_meningitis_15_49_years, probability_of_death_from_vaccine_preventable_diseases_and_e_21, probability_of_death_from_vaccine_preventable_diseases_and_e_22, probability_of_death_from_vaccine_preventable_diseases_and_e_23)",
    "expected": 0.00940255029,
    "format": "percent"
   },
@@ -3568,7 +3568,7 @@
    "id": "probability_of_death_from_vaccine_preventable_disease_15_49",
    "label": "Probability of death from vaccine-preventable disease (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_15_49_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.00940255029,
    "format": "percent"
   },
@@ -3591,7 +3591,7 @@
    "id": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_2",
    "label": "PCV vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "lower_respiratory_infections_s_pneumoniae_15_49_years + pneumococcal_meningitis_15_49_years",
+   "formula": "lower_respiratory_infections_s_pneumoniae_15_49_years + probability_of_death_from_vaccine_preventable_diseases_and_e_17",
    "expected": 0.001597539559,
    "format": "percent"
   },
@@ -3599,7 +3599,7 @@
    "id": "pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2",
    "label": "PCV vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_2 / total_15_49_years",
+   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_2 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.1699049205,
    "format": "percent"
   },
@@ -3607,7 +3607,7 @@
    "id": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_4",
    "label": "DTP vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_15_49_years + diphtheria_15_49_years + tetanus_15_49_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_18 + probability_of_death_from_vaccine_preventable_diseases_and_e_19 + probability_of_death_from_vaccine_preventable_diseases_and_e_20",
    "expected": 0.0001923813705,
    "format": "percent"
   },
@@ -3615,7 +3615,7 @@
    "id": "dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4",
    "label": "DTP vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_4 / total_15_49_years",
+   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_4 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.02046055214,
    "format": "percent"
   },
@@ -3631,70 +3631,70 @@
    "id": "hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4",
    "label": "HiB vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_4 / total_15_49_years",
+   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_4 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.009706217917,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_probability_of_death_from_diseases_prevented_4",
-   "label": "Measles vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_32",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_15_49_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_21",
    "expected": 7.24e-05,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_4",
-   "label": "Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_31",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by ",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_vaccine_probability_of_death_from_diseases_prevented_4 / total_15_49_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_32 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.007700038582,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_4",
-   "label": "BCG vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_34",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_15_49_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_22",
    "expected": 0.006636925413,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_4",
-   "label": "BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_33",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vacc",
    "section": "deaths_at_older_age_groups",
-   "formula": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_4 / total_15_49_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_34 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.7058643887,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_4",
-   "label": "Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_36",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_15_49_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_23",
    "expected": 0.0008120407449,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_4",
-   "label": "Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_35",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted b",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_4 / total_15_49_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_36 / probability_of_death_from_vaccine_preventable_diseases_and_e_16",
    "expected": 0.08636388212,
    "format": "percent"
   },
   {
-   "id": "weighted_ve_15_49_years",
-   "label": "Weighted VE (15-49 years)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_30",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Weighted VE (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4, measles_vaccine_vaccine_efficacy_ve_3 * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_4, bcg_vaccine_vaccine_efficacy_ve_3 * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_4, rotavirus_vaccine_vaccine_efficacy_ve_3 * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_4)",
+   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_2, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_4, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_21 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_31, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_24 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_33, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_27 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_35)",
    "expected": 0.7699479654
   },
   {
    "id": "vaccine_efficacy_weighted_by_probability_of_death_15_49_year",
    "label": "Vaccine efficacy weighted by probability of death (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "weighted_ve_15_49_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_30",
    "expected": 0.7699479654
   },
   {
@@ -3769,14 +3769,14 @@
    "id": "deaths_averted_in_cohort_15_49_years",
    "label": "Deaths averted in cohort (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "cohort_15_49_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated_3 * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_15_49_y) * ni_effect_size_15_49_years",
+   "formula": "effect_across_age_groups_cohort_15_49_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated_3 * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_15_49_y) * ni_effect_size_15_49_years",
    "expected": 1.054969568
   },
   {
    "id": "total_discounted_deaths_averted_in_cohort_15_49_years",
    "label": "Total discounted deaths averted in cohort (15-49 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_adjustment_15_49_years * deaths_averted_in_cohort_15_49_years",
+   "formula": "effect_across_age_groups_total_adjustment_15_49_years * deaths_averted_in_cohort_15_49_years",
    "expected": 0.7994170991
   },
   {
@@ -3814,15 +3814,15 @@
    "expected": 0.358974359
   },
   {
-   "id": "total_adjustment_50_to_74_years",
-   "label": "Total adjustment (50 to 74 years)",
+   "id": "effect_across_age_groups_total_adjustment_50_to_74_years",
+   "label": "Effect across age groups: Total adjustment (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "discount_factor_with_discount_rate_of_0_5_50_to_74_years * adjustment_for_moral_weights_for_older_age_groups_50_to_74_y",
    "expected": 0.2634921006
   },
   {
-   "id": "cohort_50_to_74_years",
-   "label": "Cohort (50 to 74 years)",
+   "id": "effect_across_age_groups_cohort_50_to_74_years",
+   "label": "Effect across age groups: Cohort (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
    "value": 1000.0,
    "kind": "estimate",
@@ -3885,23 +3885,23 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_50_to_74_years_2",
-   "label": "Pneumococcal meningitis (50 to 74 years)",
-   "section": "probability_of_death",
-   "formula": "0.07171001634 / 100 * pneumococcal_meningitis_3",
-   "expected": 0.0007171001634,
-   "format": "percent"
-  },
-  {
    "id": "pneumococcal_meningitis_50_to_74_years",
    "label": "Pneumococcal meningitis (50 to 74 years)",
-   "section": "deaths_at_older_age_groups",
-   "formula": "pneumococcal_meningitis_50_to_74_years_2",
+   "section": "probability_of_death",
+   "formula": "0.07171001634 / 100 * pneumococcal_meningitis_2",
    "expected": 0.0007171001634,
    "format": "percent"
   },
   {
-   "id": "whooping_cough_50_to_74_years_2",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_25",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Pneumococcal meningitis (50 to 74 years)",
+   "section": "deaths_at_older_age_groups",
+   "formula": "pneumococcal_meningitis_50_to_74_years",
+   "expected": 0.0007171001634,
+   "format": "percent"
+  },
+  {
+   "id": "whooping_cough_50_to_74_years",
    "label": "Whooping cough (50 to 74 years)",
    "section": "probability_of_death",
    "value": 8.93e-06,
@@ -3915,15 +3915,15 @@
    "format": "percent"
   },
   {
-   "id": "whooping_cough_50_to_74_years",
-   "label": "Whooping cough (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_26",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Whooping cough (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_50_to_74_years_2",
+   "formula": "whooping_cough_50_to_74_years",
    "expected": 8.93e-06,
    "format": "percent"
   },
   {
-   "id": "diphtheria_50_to_74_years_2",
+   "id": "diphtheria_50_to_74_years",
    "label": "Diphtheria (50 to 74 years)",
    "section": "probability_of_death",
    "value": 1e-05,
@@ -3937,15 +3937,15 @@
    "format": "percent"
   },
   {
-   "id": "diphtheria_50_to_74_years",
-   "label": "Diphtheria (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_27",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Diphtheria (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "diphtheria_50_to_74_years_2",
+   "formula": "diphtheria_50_to_74_years",
    "expected": 1e-05,
    "format": "percent"
   },
   {
-   "id": "tetanus_50_to_74_years_2",
+   "id": "tetanus_50_to_74_years",
    "label": "Tetanus (50 to 74 years)",
    "section": "probability_of_death",
    "value": 0.0004899072638,
@@ -3959,10 +3959,10 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_50_to_74_years",
-   "label": "Tetanus (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_28",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tetanus (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tetanus_50_to_74_years_2",
+   "formula": "tetanus_50_to_74_years",
    "expected": 0.0004899072638,
    "format": "percent"
   },
@@ -3983,7 +3983,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_50_to_74_years_2",
+   "id": "measles_50_to_74_years",
    "label": "Measles (50 to 74 years)",
    "section": "probability_of_death",
    "value": 6.85e-06,
@@ -3997,15 +3997,15 @@
    "format": "percent"
   },
   {
-   "id": "measles_50_to_74_years",
-   "label": "Measles (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_29",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Measles (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_50_to_74_years_2",
+   "formula": "measles_50_to_74_years",
    "expected": 6.85e-06,
    "format": "percent"
   },
   {
-   "id": "tuberculosis_50_to_74_years_2",
+   "id": "tuberculosis_50_to_74_years",
    "label": "Tuberculosis (50 to 74 years)",
    "section": "probability_of_death",
    "value": 0.02870386783,
@@ -4019,10 +4019,10 @@
    "format": "percent"
   },
   {
-   "id": "tuberculosis_50_to_74_years",
-   "label": "Tuberculosis (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_30",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Tuberculosis (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_50_to_74_years_2",
+   "formula": "tuberculosis_50_to_74_years",
    "expected": 0.02870386783,
    "format": "percent"
   },
@@ -4048,18 +4048,18 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_50_to_74_years",
-   "label": "Rotavirus (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_31",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Rotavirus (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
    "formula": "diarrhea_rotavirus_50_to_74_years",
    "expected": 0.004885775373,
    "format": "percent"
   },
   {
-   "id": "total_50_to_74_years",
-   "label": "Total (50 to 74 years)",
+   "id": "probability_of_death_from_vaccine_preventable_diseases_and_e_24",
+   "label": "Probability of death from vaccine-preventable diseases and etiologies (from \"Probability o: Total (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(lower_respiratory_infections_s_pneumoniae_50_to_74_years, lower_respiratory_infections_hib_50_to_74_years, pneumococcal_meningitis_50_to_74_years, whooping_cough_50_to_74_years, diphtheria_50_to_74_years, tetanus_50_to_74_years, h_influenzae_type_b_meningitis_50_to_74_years, measles_50_to_74_years, tuberculosis_50_to_74_years, rotavirus_50_to_74_years)",
+   "formula": "sum(lower_respiratory_infections_s_pneumoniae_50_to_74_years, lower_respiratory_infections_hib_50_to_74_years, probability_of_death_from_vaccine_preventable_diseases_and_e_25, probability_of_death_from_vaccine_preventable_diseases_and_e_26, probability_of_death_from_vaccine_preventable_diseases_and_e_27, probability_of_death_from_vaccine_preventable_diseases_and_e_28, h_influenzae_type_b_meningitis_50_to_74_years, probability_of_death_from_vaccine_preventable_diseases_and_e_29, probability_of_death_from_vaccine_preventable_diseases_and_e_30, probability_of_death_from_vaccine_preventable_diseases_and_e_31)",
    "expected": 0.04642951789,
    "format": "percent"
   },
@@ -4067,7 +4067,7 @@
    "id": "probability_of_death_from_vaccine_preventable_disease_50_to",
    "label": "Probability of death from vaccine-preventable disease (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_50_to_74_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.04642951789,
    "format": "percent"
   },
@@ -4090,7 +4090,7 @@
    "id": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_3",
    "label": "PCV vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "lower_respiratory_infections_s_pneumoniae_50_to_74_years + pneumococcal_meningitis_50_to_74_years",
+   "formula": "lower_respiratory_infections_s_pneumoniae_50_to_74_years + probability_of_death_from_vaccine_preventable_diseases_and_e_25",
    "expected": 0.0116656736,
    "format": "percent"
   },
@@ -4098,7 +4098,7 @@
    "id": "pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3",
    "label": "PCV vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / total_50_to_74_years",
+   "formula": "pcv_vaccine_3_doses_probability_of_death_from_diseases_preve_3 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.2512555401,
    "format": "percent"
   },
@@ -4106,7 +4106,7 @@
    "id": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_5",
    "label": "DTP vaccine (3 doses) (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "whooping_cough_50_to_74_years + diphtheria_50_to_74_years + tetanus_50_to_74_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_26 + probability_of_death_from_vaccine_preventable_diseases_and_e_27 + probability_of_death_from_vaccine_preventable_diseases_and_e_28",
    "expected": 0.0005088372638,
    "format": "percent"
   },
@@ -4114,7 +4114,7 @@
    "id": "dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5",
    "label": "DTP vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_5 / total_50_to_74_years",
+   "formula": "dtp_vaccine_3_doses_probability_of_death_from_diseases_preve_5 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.01095934842,
    "format": "percent"
   },
@@ -4130,70 +4130,70 @@
    "id": "hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5",
    "label": "HiB vaccine (3 doses) (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_5 / total_50_to_74_years",
+   "formula": "hib_vaccine_3_doses_probability_of_death_from_diseases_preve_5 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.01418308574,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_probability_of_death_from_diseases_prevented_5",
-   "label": "Measles vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_39",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_50_to_74_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_29",
    "expected": 6.85e-06,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_5",
-   "label": "Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_38",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Measles vaccine (Percent of all vaccine-preventable deaths from diseases targeted by ",
    "section": "deaths_at_older_age_groups",
-   "formula": "measles_vaccine_probability_of_death_from_diseases_prevented_5 / total_50_to_74_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_39 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.000147535454,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_5",
-   "label": "BCG vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_41",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "tuberculosis_50_to_74_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_30",
    "expected": 0.02870386783,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_5",
-   "label": "BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_40",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: BCG vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vacc",
    "section": "deaths_at_older_age_groups",
-   "formula": "bcg_vaccine_probability_of_death_from_diseases_prevented_by_5 / total_50_to_74_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_41 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.6182245505,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_5",
-   "label": "Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_43",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Probability of death from diseases prevented by vaccine)",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_50_to_74_years",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_and_e_31",
    "expected": 0.004885775373,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_5",
-   "label": "Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted by vaccine)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_42",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Rotavirus vaccine (Percent of all vaccine-preventable deaths from diseases targeted b",
    "section": "deaths_at_older_age_groups",
-   "formula": "rotavirus_vaccine_probability_of_death_from_diseases_prevent_5 / total_50_to_74_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_43 / probability_of_death_from_vaccine_preventable_diseases_and_e_24",
    "expected": 0.1052299398,
    "format": "percent"
   },
   {
-   "id": "weighted_ve_50_to_74_years",
-   "label": "Weighted VE (50 to 74 years)",
+   "id": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_37",
+   "label": "Weighted vaccine efficacy, risk reduction, and New Incentives effect size: Weighted VE (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5, measles_vaccine_vaccine_efficacy_ve_3 * measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr_5, bcg_vaccine_vaccine_efficacy_ve_3 * bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d_5, rotavirus_vaccine_vaccine_efficacy_ve_3 * rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths_5)",
+   "formula": "sum(pcv_vaccine_3_doses_vaccine_efficacy_ve * pcv_vaccine_3_doses_percent_of_all_vaccine_preventable_death_3, dtp_vaccine_3_doses_vaccine_efficacy_ve_3 * dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5, hib_vaccine_3_doses_vaccine_efficacy_ve_3 * hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death_5, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_21 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_38, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_24 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_40, weighted_vaccine_efficacy_risk_reduction_and_new_incentives_27 * weighted_vaccine_efficacy_risk_reduction_and_new_incentives_42)",
    "expected": 0.7405862416
   },
   {
    "id": "vaccine_efficacy_weighted_by_probability_of_death_50_to_74_y",
    "label": "Vaccine efficacy weighted by probability of death (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "weighted_ve_50_to_74_years",
+   "formula": "weighted_vaccine_efficacy_risk_reduction_and_new_incentives_37",
    "expected": 0.7405862416
   },
   {
@@ -4268,14 +4268,14 @@
    "id": "deaths_averted_in_cohort_50_to_74_years",
    "label": "Deaths averted in cohort (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "cohort_50_to_74_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated_5 * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_50_to_7) * ni_effect_size_50_to_74_years",
+   "formula": "effect_across_age_groups_cohort_50_to_74_years * mortality_from_vaccine_preventable_diseases_for_unvaccinated_5 * (1 - vaccine_rr_weighted_by_probability_of_death_adjusted_50_to_7) * ni_effect_size_50_to_74_years",
    "expected": 1.372155562
   },
   {
    "id": "total_discounted_deaths_averted_in_cohort_50_to_74_years",
    "label": "Total discounted deaths averted in cohort (50 to 74 years)",
    "section": "deaths_at_older_age_groups",
-   "formula": "total_adjustment_50_to_74_years * deaths_averted_in_cohort_50_to_74_years",
+   "formula": "effect_across_age_groups_total_adjustment_50_to_74_years * deaths_averted_in_cohort_50_to_74_years",
    "expected": 0.3615521515
   },
   {
@@ -4336,7 +4336,7 @@
    "id": "percent_of_infants_who_would_have_been_vaccinated_without_ne",
    "label": "Percent of infants who would have been vaccinated without New Incentives",
    "section": "cea_main",
-   "formula": "self_report_bias_calculations_d14_yes / 100",
+   "formula": "yes_row_14 / 100",
    "expected": 0.4808641975
   },
   {
@@ -4492,23 +4492,23 @@
    "format": "usd"
   },
   {
-   "id": "government_spending_2",
-   "label": "Government spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_2",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged; cha: Government spending",
    "section": "leveragefunging",
    "formula": "expenditure_causally_upstream_of_our_donation",
    "expected": 25242.16986,
    "format": "usd"
   },
   {
-   "id": "government_spending",
-   "label": "Government spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged): Government spending",
    "section": "leveragefunging",
-   "formula": "government_spending_2 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_2 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": 778.8827661
   },
   {
-   "id": "gavi_spending_2",
-   "label": "GAVI spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_4",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged; cha: GAVI spending",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -4519,10 +4519,10 @@
    }
   },
   {
-   "id": "gavi_spending",
-   "label": "GAVI spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_3",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged): GAVI spending",
    "section": "leveragefunging",
-   "formula": "gavi_spending_2 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_4 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": 0.0
   },
   {
@@ -4579,10 +4579,10 @@
    "expected": 0.004987689957
   },
   {
-   "id": "government_spending_3",
-   "label": "Government spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_5",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged): Government spending",
    "section": "leveragefunging",
-   "formula": "-government_spending_2 * government_spending_units_of_value_per_dollar",
+   "formula": "-r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_2 * government_spending_units_of_value_per_dollar",
    "expected": -125.9001171
   },
   {
@@ -4599,24 +4599,24 @@
    "format": "usd"
   },
   {
-   "id": "gavi_spending_4",
-   "label": "GAVI spending",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): GAVI spending",
    "section": "leveragefunging",
    "formula": "1 / gavi_spending_cost_per_under_5_death_averted_equivalent * average",
    "expected": 0.01796636086
   },
   {
-   "id": "gavi_spending_3",
-   "label": "GAVI spending",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_6",
+   "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged): GAVI spending",
    "section": "leveragefunging",
-   "formula": "-gavi_spending_2 * gavi_spending_4",
+   "formula": "-r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
    "id": "r_1_government_costs_would_replace_philanthropic_costs_2",
    "label": "1) Government costs would replace philanthropic costs",
    "section": "leveragefunging",
-   "formula": "sum(government_spending, gavi_spending, government_spending_3, gavi_spending_3)",
+   "formula": "sum(r_1_government_costs_would_replace_philanthropic_costs_i_e_cha, r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_3, r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_5, r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_6)",
    "expected": 652.982649
   },
   {
@@ -4627,7 +4627,7 @@
    "expected": 125.9001171
   },
   {
-   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha",
+   "id": "r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_7",
    "label": "1) Government costs would replace philanthropic costs (i.e. charity is getting funged)",
    "section": "leveragefunging",
    "value": 0.1,
@@ -4640,8 +4640,8 @@
    "format": "percent"
   },
   {
-   "id": "government_spending_5",
-   "label": "Government spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_2",
+   "label": "2) Government financial costs would stay the same (no leverage nor funging; charity is not: Government spending",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -4652,15 +4652,15 @@
    }
   },
   {
-   "id": "government_spending_4",
-   "label": "Government spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage",
+   "label": "2) Government financial costs would stay the same (no leverage nor funding): Government spending",
    "section": "leveragefunging",
-   "formula": "government_spending_5 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_2_government_financial_costs_would_stay_the_same_no_leverage_2 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": 0.0
   },
   {
-   "id": "gavi_spending_6",
-   "label": "GAVI spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_4",
+   "label": "2) Government financial costs would stay the same (no leverage nor funging; charity is not: GAVI spending",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -4671,31 +4671,31 @@
    }
   },
   {
-   "id": "gavi_spending_5",
-   "label": "GAVI spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_3",
+   "label": "2) Government financial costs would stay the same (no leverage nor funding): GAVI spending",
    "section": "leveragefunging",
-   "formula": "gavi_spending_6 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_2_government_financial_costs_would_stay_the_same_no_leverage_4 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": 0.0
   },
   {
-   "id": "government_spending_6",
-   "label": "Government spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_5",
+   "label": "2) Government financial costs would stay the same (no leverage nor funding): Government spending",
    "section": "leveragefunging",
-   "formula": "-government_spending_5 * government_spending_units_of_value_per_dollar",
+   "formula": "-r_2_government_financial_costs_would_stay_the_same_no_leverage_2 * government_spending_units_of_value_per_dollar",
    "expected": 0.0
   },
   {
-   "id": "gavi_spending_7",
-   "label": "GAVI spending",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_6",
+   "label": "2) Government financial costs would stay the same (no leverage nor funding): GAVI spending",
    "section": "leveragefunging",
-   "formula": "-gavi_spending_6 * gavi_spending_4",
+   "formula": "-r_2_government_financial_costs_would_stay_the_same_no_leverage_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
    "id": "r_2_government_financial_costs_would_stay_the_same_2",
    "label": "2) Government financial costs would stay the same",
    "section": "leveragefunging",
-   "formula": "sum(government_spending_4, gavi_spending_5, government_spending_6, gavi_spending_7)",
+   "formula": "sum(r_2_government_financial_costs_would_stay_the_same_no_leverage, r_2_government_financial_costs_would_stay_the_same_no_leverage_3, r_2_government_financial_costs_would_stay_the_same_no_leverage_5, r_2_government_financial_costs_would_stay_the_same_no_leverage_6)",
    "expected": 0.0
   },
   {
@@ -4706,7 +4706,7 @@
    "expected": 778.8827661
   },
   {
-   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage",
+   "id": "r_2_government_financial_costs_would_stay_the_same_no_leverage_7",
    "label": "2) Government financial costs would stay the same (no leverage nor funging)",
    "section": "leveragefunging",
    "value": 0.0,
@@ -4719,54 +4719,54 @@
    "format": "percent"
   },
   {
-   "id": "government_spending_8",
-   "label": "Government spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_2",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging; charity is causing governm: Government spending",
    "section": "leveragefunging",
    "formula": "-total_marginal_costs_to_government_per_cohort_i_e_from_addit",
    "expected": -4372.34574,
    "format": "usd"
   },
   {
-   "id": "government_spending_7",
-   "label": "Government spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging): Government spending",
    "section": "leveragefunging",
-   "formula": "government_spending_8 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_2 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": -134.9148969
   },
   {
-   "id": "gavi_spending_9",
-   "label": "GAVI spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_4",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging; charity is causing governm: GAVI spending",
    "section": "leveragefunging",
    "formula": "-total_marginal_costs_to_gavi_per_cohort_i_e_from_additional",
    "expected": -1407.266967,
    "format": "usd"
   },
   {
-   "id": "gavi_spending_8",
-   "label": "GAVI spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_3",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging): GAVI spending",
    "section": "leveragefunging",
-   "formula": "gavi_spending_9 * total_units_of_value_per_dollar_spent_before_leveraging_and",
+   "formula": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_4 * total_units_of_value_per_dollar_spent_before_leveraging_and",
    "expected": -43.42320784
   },
   {
-   "id": "government_spending_9",
-   "label": "Government spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_5",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging): Government spending",
    "section": "leveragefunging",
-   "formula": "-government_spending_8 * government_spending_units_of_value_per_dollar",
+   "formula": "-r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_2 * government_spending_units_of_value_per_dollar",
    "expected": 21.80790493
   },
   {
-   "id": "gavi_spending_10",
-   "label": "GAVI spending",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_6",
+   "label": "3) Distributions would go unfunded (i.e. charity is leveraging): GAVI spending",
    "section": "leveragefunging",
-   "formula": "-gavi_spending_9 * gavi_spending_4",
+   "formula": "-r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 25.28346615
   },
   {
    "id": "r_3_distributions_would_go_unfunded_2",
    "label": "3) Distributions would go unfunded",
    "section": "leveragefunging",
-   "formula": "sum(government_spending_7, gavi_spending_8, government_spending_9, gavi_spending_10)",
+   "formula": "sum(r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging, r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_3, r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_5, r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_6)",
    "expected": -131.2467337
   },
   {
@@ -4777,25 +4777,25 @@
    "expected": 910.1294997
   },
   {
-   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging",
+   "id": "r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_7",
    "label": "3) Distributions would go unfunded (i.e. charity is leveraging)",
    "section": "leveragefunging",
-   "formula": "1 - r_1_government_costs_would_replace_philanthropic_costs_i_e_cha - r_2_government_financial_costs_would_stay_the_same_no_leverage",
+   "formula": "1 - r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_7 - r_2_government_financial_costs_would_stay_the_same_no_leverage_7",
    "expected": 0.9,
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_philanthropic_spending_overall",
+   "label": "Net units of value created by philanthropic spending: Overall",
    "section": "leveragefunging",
-   "formula": "sum(r_1_government_costs_would_replace_philanthropic_costs * r_1_government_costs_would_replace_philanthropic_costs_i_e_cha, r_2_government_financial_costs_would_stay_the_same * r_2_government_financial_costs_would_stay_the_same_no_leverage, r_3_distributions_would_go_unfunded * r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging)",
+   "formula": "sum(r_1_government_costs_would_replace_philanthropic_costs * r_1_government_costs_would_replace_philanthropic_costs_i_e_cha_7, r_2_government_financial_costs_would_stay_the_same * r_2_government_financial_costs_would_stay_the_same_no_leverage_7, r_3_distributions_would_go_unfunded * r_3_distributions_would_go_unfunded_i_e_charity_is_leveraging_7)",
    "expected": 831.7065615
   },
   {
    "id": "change_in_units_of_value",
    "label": "% change in units of value",
    "section": "leveragefunging",
-   "formula": "overall / total_units_of_value_generated_by_the_intervention_before_ac - 1",
+   "formula": "net_units_of_value_created_by_philanthropic_spending_overall / total_units_of_value_generated_by_the_intervention_before_ac - 1",
    "expected": -0.1311236656,
    "format": "percent"
   },

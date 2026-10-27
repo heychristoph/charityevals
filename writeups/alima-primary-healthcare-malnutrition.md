@@ -14,7 +14,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 | [BOTEC of ALIMA's Primary Healthcare and Malnutrition Treatment Program in North Cameroon (June 2025)](/alima) | GW | June 2025 | 3.1× GiveDirectly (GW: 8.0× cash) | 146 |
 | [Malnutrition treatment CEA (ALIMA Chad - 2024 renewal)](/alima/alima-malnutrition-treatment-chad-2024-renewal) | GW | February 2024 | 1.8× GiveDirectly (GW: 4.6× cash) | 268 |
 | [Malnutrition treatment CEA (ALIMA Chad 2021 with updated model)](/alima/alima-malnutrition-treatment-chad-2021-with) | GW | May 2021 | 3.4× GiveDirectly (GW: 9.0× cash) | 177 |
-| [Malnutrition treatment CEA (combined protocol ALIMA, Niger and Nigeria)](/alima/alima-malnutrition-treatment-combined) | GW | May 2021 | 4.2× GiveDirectly (GW: 11× cash) | 562 |
+| [Malnutrition treatment CEA (combined protocol ALIMA, Niger and Nigeria)](/alima/alima-malnutrition-treatment-combined) | GW | May 2021 | 4.2× GiveDirectly (GW: 11× cash) | 557 |
 | [Simplified Mirriah Niger ALIMA operational CEA](/alima/alima-mirriah-niger-operational) | GW | December 2020 | 3.5× GiveDirectly (GW: 9.0× cash) | 132 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.

@@ -60,7 +60,8 @@ main = F[a.tab]
 LABEL, UNIT, TYPE = "E", "F", "G"
 
 def label(tab, row):
-    ws = F[tab]
+    # Cached values, not formulas: some labels are themselves formulas pulling another row's label.
+    ws = V[tab]
     for col in ("E", "D", "C", "B", "A"):
         v = text(ws[f"{col}{row}"].value)
         if isinstance(v, str) and v.strip() and not v.startswith("="): return v.strip()

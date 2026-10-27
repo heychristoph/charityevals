@@ -66,7 +66,12 @@ def without_styles(path):
     return tmp
 
 
-MARKER = re.compile(r"^(input|inputs|calc|calculation|output|feed|number|uov|uov ?/ ?\$|xcash|x cash|x benchmark|%|\$|usd|years?|people|deaths?|ratio|rate|count|-|n/a|#|x)$", re.I)
+# Columns GiveWell's sheets keep between a row's description and its values: the row's type...
+MARKER = re.compile(r"^(input|inputs|calc|calculation|output|feed|supp|main|val|number|-|n/a|#|x|tbd|source|note|notes)$", re.I)
+# ...and its unit, which becomes the row's `unit` rather than its label.
+UNIT = re.compile(r"^(%|\$|₦|£|€|usd|ppt|pp|uov|uov ?/ ?\$|uov per \$|xcash|x cash|x benchmark|years?|people|persons?|children|deaths?|"
+                  r"ratio|rate|count|days?|weeks?|months?|kg|g|mg|km|hours?|per \$?[\d,.]+ ?[km]?|per (person|child|year|capita))$", re.I)
+SHEET_ERROR = re.compile(r"^#(value|ref|n/a|div/0|name|num|null|error)[!?]?$", re.I)
 
 
 class Sheet:
@@ -95,26 +100,44 @@ class Sheet:
     def val(self, sh, c):
         return self.V[sh][c].value
 
-    def text_left(self, sh, r, col):
-        """The row's label: the nearest text to the left of the cell, skipping the type and unit
-        markers GiveWell's sheets keep between label and values ("input", "calc", "UoV", "%")."""
+    def cell_text(self, sh, r, c, depth=0):
+        """A cell's value. A label Google computed with its own functions exports as #NAME?: then the
+        text Google cached as the IFERROR fallback, or the label it points at (HYPERLINK(url, label) or a
+        plain reference to another label cell)."""
+        v = self.V[sh].cell(r, c).value
+        if not (isinstance(v, str) and SHEET_ERROR.match(v.strip())) or depth > 4:
+            return v
+        raw = self.F[sh].cell(r, c).value
+        raw = getattr(raw, "text", raw)
+        if not isinstance(raw, str): return None
+        m = re.search(r',\s*"((?:[^"]|"")*)"\s*\)\s*$', raw)
+        if m: return m.group(1).replace('""', '"')
+        m = re.search(r"HYPERLINK\(.*,\s*((?:'[^']+'|[A-Za-z0-9_ ]+)!\$?[A-Z]{1,3}\$?\d+|\$?[A-Z]{1,3}\$?\d+)\s*\)\s*$", raw, re.I) \
+            or re.fullmatch(r"=\s*((?:'[^']+'|[A-Za-z0-9_ ]+)!\$?[A-Z]{1,3}\$?\d+|\$?[A-Z]{1,3}\$?\d+)\s*", raw)
+        if m:
+            tab, ref = parse_ref(m.group(1), sh)
+            if tab in self.F.sheetnames:
+                cc, rr, _, _ = range_boundaries(ref)
+                return self.cell_text(tab, rr, cc, depth + 1)
+        return None
+
+    def title_above(self, sh, r, col, limit=40):
+        """The nearest heading above a cell in its column: text of three words or more on a row with no
+        numbers (a value in a list, like a country name next to its data, isn't a heading)."""
         ws = self.V[sh]
-        fallback = None
-        for cc in range(col - 1, 0, -1):
-            v = ws.cell(r, cc).value
-            if isinstance(v, str) and v.strip() and not v.strip().startswith("="):
-                t = v.strip()
-                if MARKER.match(t):
-                    fallback = fallback or t; continue
-                return t
-        return fallback
+        for rr in range(r - 1, max(0, r - limit), -1):
+            v = ws.cell(rr, col).value
+            if isinstance(v, str) and len(v.split()) >= 3 and not v.startswith("=") and not re.match(r"\s*(source|sources|note|notes)\b", v, re.I) \
+                    and not self.numeric_cols(sh, rr):
+                return re.sub(r"\s+", " ", v).strip()[:90]
+        return None
 
     def text_above(self, sh, r, col, limit=60):
         ws = self.V[sh]
         for rr in range(r - 1, max(0, r - limit), -1):
             v = ws.cell(rr, col).value
-            if isinstance(v, str) and v.strip() and len(v) < 80 and not MARKER.match(v.strip()):
-                return v.strip()
+            if isinstance(v, str) and v.strip() and len(v) < 80 and not MARKER.match(v.strip()) and not UNIT.match(v.strip()):
+                return re.sub(r"\s+", " ", v).strip()
         return None
 
     def note_right(self, sh, r, col):
@@ -156,11 +179,44 @@ class Converter:
         return self.sections[sh]
 
     def label_for(self, sh, r, col):
-        lab = self.b.text_left(sh, r, col) or f"{sh}!{get_column_letter(col)}{r}"
+        """A readable label and unit for a cell, from its row and table.
+
+        The label zone is the run of text to the left of the value, back to the last number before
+        it (years count as text: they're keys in data tables). Type and unit columns are set aside;
+        the nearest descriptive text (three words or more) is the label. A row with no description,
+        like a record in a data table, is labelled by its key fields joined, with the table's title
+        in front. A column header is added when the row has values in several columns."""
+        ws = self.b.V[sh]
+        zone, started = [], False
+        for c in range(col - 1, 0, -1):
+            v = self.b.cell_text(sh, r, c)
+            if isinstance(v, (int, float)) and not isinstance(v, bool) and float(v).is_integer() and 1900 <= v <= 2100:
+                v = str(int(v))
+            if isinstance(v, str):
+                t = re.sub(r"\s+", " ", v).strip()
+                # "-" and "n/a" are empty cells in other columns, not part of the label.
+                if t and t not in ("-", "–", "n/a", "N/A") and not t.startswith("="): zone.append((c, t)); started = True
+            elif num(v) is not None and started:
+                break
+        zone.reverse()
+        units = [t for _, t in zone if UNIT.match(t)]
+        desc = [(c, t) for c, t in zone if not MARKER.match(t) and not UNIT.match(t)]
+        long = [(c, t) for c, t in desc if len(t.split()) >= 3 or len(t) >= 24]
+        if long:
+            lab = long[-1][1]
+        elif desc:
+            lab = ", ".join(t for _, t in desc[-6:])
+            title = self.b.title_above(sh, r, desc[0][0])
+            if title and title.lower() not in lab.lower(): lab = f"{title}: {lab}"
+        else:
+            # Nothing in the row: name the cell by the table it sits in and its column.
+            parts = [p for p in (self.b.title_above(sh, r, col), self.b.text_above(sh, r, col)) if p]
+            lab = " – ".join(dict.fromkeys(parts)) or f"Cell {get_column_letter(col)}{r} on {sh}"
+            if parts: return f"{lab} (row {r})"[:160], (units[0] if units else None)
         if len(self.b.numeric_cols(sh, r)) > 1:
             head = self.b.text_above(sh, r, col)  # e.g. the location a column is about
-            if head and head != lab: lab = f"{lab} ({head})"
-        return re.sub(r"\s+", " ", lab)[:160]
+            if head and head.lower() not in lab.lower(): lab = f"{lab} ({head})"
+        return lab[:160], (units[0] if units else None)
 
     def new_id(self, label):
         base = slug(label); i = base; k = 2
@@ -250,8 +306,9 @@ class Converter:
         if key in self.rows: return self.rows[key]
         if len(self.rows) >= MAX_ROWS: raise Unsupported("row limit")
         ws = self.b.F[sh]; cell = ws[coord]; r, col = cell.row, cell.column
-        label = self.label_for(sh, r, col)
+        label, unit = self.label_for(sh, r, col)
         row = {"id": self.new_id(label), "label": label, "section": self.section_for(sh)}
+        if unit: row["unit"] = unit
         self.rows[key] = row  # registered first so cycles terminate
         raw = self.b.raw(sh, coord); v = num(self.b.val(sh, coord))
         cellname = f"{sh}!{coord}"

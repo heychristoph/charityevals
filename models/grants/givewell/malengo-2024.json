@@ -21,9 +21,9 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "discount_rate": 0.04,
    "uov_per_ln_consumption": 1.44,
-   "life_value_multiplier": 1
+   "life_value_multiplier": 1,
+   "discount_rate": 0.065
   }
  },
  "resources": [
@@ -118,18 +118,18 @@
    "expected": 0.022
   },
   {
-   "id": "discount_rate_best_guess",
-   "label": "Discount rate (Best-guess)",
+   "id": "direct_effects_income_gains_from_migrating_discount_rate_bes",
+   "label": "Direct effects: income gains from migrating: Discount rate (Best-guess)",
    "section": "botec",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!D17"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
+   "format": "percent"
   },
   {
    "id": "working_lifespan_duration_of_benefits_years_best_guess",
@@ -235,8 +235,8 @@
    "format": "percent"
   },
   {
-   "id": "ppp_adjustment_best_guess",
-   "label": "PPP adjustment (Best-guess)",
+   "id": "direct_effects_income_gains_from_migrating_ppp_adjustment_be",
+   "label": "Direct effects: income gains from migrating: PPP adjustment (Best-guess)",
    "section": "botec",
    "formula": "implied_ppp_adjustment",
    "expected": 0.4172201957,
@@ -246,7 +246,7 @@
    "id": "income_for_those_who_migrate_ppp_adjusted_best_guess",
    "label": "Income for those who migrate, PPP adjusted (Best-guess)",
    "section": "botec",
-   "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * ppp_adjustment_best_guess",
+   "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * direct_effects_income_gains_from_migrating_ppp_adjustment_be",
    "expected": 16688.80783,
    "format": "usd"
   },
@@ -294,7 +294,7 @@
    "id": "units_of_value_in_first_year_of_those_that_migrate_direct_be",
    "label": "Units of value in first year of those that migrate, direct (Best-guess)",
    "section": "botec",
-   "formula": "(ln(income_for_those_who_migrate_ppp_adjusted_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + discount_rate_best_guess) ^ average_number_of_years_between_malengo_programme_and_long_t",
+   "formula": "(ln(income_for_those_who_migrate_ppp_adjusted_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
    "expected": 2.511062286
   },
   {
@@ -449,7 +449,7 @@
    "id": "total_present_discounted_units_of_direct_value_per_person_th",
    "label": "Total present-discounted units of direct value per person that migrates (Best-guess)",
    "section": "botec",
-   "formula": "pv(discount_rate_best_guess, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_migrate_given_res)",
+   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_migrate_given_res)",
    "expected": 163.4210876
   },
   {
@@ -575,7 +575,7 @@
    "id": "units_of_value_in_first_year_of_those_that_migrate_indirect",
    "label": "Units of value in first year of those that migrate, indirect (Best-guess)",
    "section": "botec",
-   "formula": "(ln(remittance_per_household_best_guess + baseline_consumption_per_person_in_remittance_household_best) - ln(baseline_consumption_per_person_in_remittance_household_best)) * number_of_households_receiving_remittances_best_guess * units_of_value_per_ln_inc_increase_best_guess / (1 + discount_rate_best_guess) ^ average_number_of_years_between_malengo_programme_and_long_t",
+   "formula": "(ln(remittance_per_household_best_guess + baseline_consumption_per_person_in_remittance_household_best) - ln(baseline_consumption_per_person_in_remittance_household_best)) * number_of_households_receiving_remittances_best_guess * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
    "expected": 5.132726393
   },
   {
@@ -589,7 +589,7 @@
    "id": "total_present_discounted_units_of_indirect_value_per_person",
    "label": "Total present-discounted units of indirect value per person that migrates (Best-guess)",
    "section": "botec",
-   "formula": "pv(discount_rate_best_guess, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_given_resource_sharing_in_house)",
+   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_given_resource_sharing_in_house)",
    "expected": 126.8709989
   },
   {
@@ -641,18 +641,18 @@
    "expected": 40.0
   },
   {
-   "id": "discount_rate_old_best_guess",
-   "label": "Discount rate (Old best guess)",
+   "id": "direct_effects_income_gains_from_migrating_discount_rate_old",
+   "label": "Direct effects: income gains from migrating: Discount rate (Old best guess)",
    "section": "botec",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!B17"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
+   "format": "percent"
   },
   {
    "id": "life_expectancy_at_birth_in_uganda_old_best_guess",
@@ -690,7 +690,7 @@
    "id": "units_of_value_from_mortality_among_those_that_migrate_best",
    "label": "Units of value from mortality among those that migrate (Best-guess)",
    "section": "botec",
-   "formula": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best / (1 + discount_rate_old_best_guess) ^ average_number_of_years_between_malengo_programme_and_mortal * of_participants_that_get_a_job_in_germany_best_guess",
+   "formula": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best / (1 + direct_effects_income_gains_from_migrating_discount_rate_old) ^ average_number_of_years_between_malengo_programme_and_mortal * of_participants_that_get_a_job_in_germany_best_guess",
    "expected": 3.292277151
   },
   {
@@ -711,7 +711,7 @@
    "id": "units_of_value_in_first_year_of_those_that_return_direct_bes",
    "label": "Units of value in first year of those that return, direct (Best-guess)",
    "section": "botec",
-   "formula": "(ln(income_for_those_who_return_to_uganda_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + discount_rate_best_guess) ^ average_number_of_years_between_malengo_programme_and_long_t",
+   "formula": "(ln(income_for_those_who_return_to_uganda_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
    "expected": 0.8203916976
   },
   {
@@ -791,7 +791,7 @@
    "id": "total_present_discounted_units_of_direct_value_per_person_th_2",
    "label": "Total present-discounted units of direct value per person that returns (Best-guess)",
    "section": "botec",
-   "formula": "pv(discount_rate_best_guess, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_return_given_reso)",
+   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_return_given_reso)",
    "expected": 37.99408041
   },
   {
@@ -827,15 +827,15 @@
    "id": "discount_rate_for_future_cohorts_old_best_guess",
    "label": "Discount rate for future cohorts (Old best guess)",
    "section": "botec",
-   "value": 0.065,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!B59"
    },
-   "explainer": "We use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.065
   },
   {
    "id": "years_into_the_future_truncated_at_100_years_cohort_1",
@@ -950,15 +950,15 @@
    "id": "discount_rate_for_future_cohorts_best_guess",
    "label": "Discount rate for future cohorts (Best-guess)",
    "section": "botec",
-   "value": 0.065,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!D59"
    },
-   "explainer": "We use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.065
   },
   {
    "id": "average_time_between_cohorts_years",
@@ -1247,8 +1247,8 @@
    "expected": 285.2858501
   },
   {
-   "id": "botec_b4_old_best_guess",
-   "label": "BOTEC!B4 (Old best guess)",
+   "id": "old_best_guess_row_4",
+   "label": "Old best guess (row 4)",
    "section": "botec",
    "value": 12520.0,
    "kind": "estimate",
@@ -1260,8 +1260,8 @@
    "format": "usd"
   },
   {
-   "id": "botec_b5_old_best_guess",
-   "label": "BOTEC!B5 (Old best guess)",
+   "id": "old_best_guess_row_5",
+   "label": "Old best guess (row 5)",
    "section": "botec",
    "value": 0.35,
    "kind": "estimate",
@@ -1276,7 +1276,7 @@
    "id": "program_cost_per_person_old_best_guess",
    "label": "Program cost per person (Old best guess)",
    "section": "botec",
-   "formula": "botec_b4_old_best_guess / (1 - botec_b5_old_best_guess)",
+   "formula": "old_best_guess_row_4 / (1 - old_best_guess_row_5)",
    "expected": 19261.53846,
    "format": "usd"
   },
@@ -1288,9 +1288,10 @@
    "expected": 0.01481116634
   },
   {
-   "id": "x_cash",
-   "label": "x cash",
+   "id": "cell_b69_on_botec",
+   "label": "Cell B69 on BOTEC",
    "section": "botec",
+   "unit": "x cash",
    "formula": "units_of_value_per / 0.00335",
    "expected": 4.421243683
   },
@@ -1310,7 +1311,7 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "x_cash * cash_benchmark"
+   "formula": "cell_b69_on_botec * cash_benchmark"
   }
  ],
  "output": {

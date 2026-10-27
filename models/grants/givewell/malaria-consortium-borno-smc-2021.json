@@ -22,8 +22,7 @@
    "count_salary_sacrifice": 0,
    "full_credit": 0,
    "life_value_multiplier": 1,
-   "uov_per_ln_consumption": 1.0,
-   "discount_rate": 0.04
+   "uov_per_ln_consumption": 1.0
   }
  },
  "resources": [
@@ -730,8 +729,8 @@
    "expected": 1685.223369
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "malaria_consortium",
    "value": 0.0,
    "kind": "estimate",
@@ -743,8 +742,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "malaria_consortium",
    "value": 0.0,
    "kind": "estimate",
@@ -772,7 +771,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "malaria_consortium",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -824,8 +823,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "malaria_consortium",
    "value": 0.0,
    "kind": "estimate",
@@ -837,8 +836,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "malaria_consortium",
    "value": 0.05,
    "kind": "estimate",
@@ -853,7 +852,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "malaria_consortium",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -873,8 +872,8 @@
    "expected": 5795.247975
   },
   {
-   "id": "malaria_morbidity",
-   "label": "Malaria morbidity",
+   "id": "adjustments_for_excluded_effects_malaria_morbidity",
+   "label": "Adjustments for excluded effects: Malaria morbidity",
    "section": "malaria_consortium",
    "value": 0.09,
    "kind": "estimate",
@@ -929,8 +928,8 @@
    "format": "percent"
   },
   {
-   "id": "drug_resistance",
-   "label": "Drug resistance",
+   "id": "adjustments_for_excluded_effects_drug_resistance",
+   "label": "Adjustments for excluded effects: Drug resistance",
    "section": "malaria_consortium",
    "value": -0.04,
    "kind": "estimate",
@@ -957,8 +956,8 @@
    "format": "percent"
   },
   {
-   "id": "subnational_adjustments_not_specified",
-   "label": "Subnational adjustments (Not specified)",
+   "id": "effect_on_fertility_subnational_adjustments_not_specified",
+   "label": "Effect on fertility: Subnational adjustments (Not specified)",
    "section": "malaria_consortium",
    "value": 0.032,
    "kind": "estimate",
@@ -1043,7 +1042,7 @@
    "id": "total_adjustment_factor_for_excluded_effects_not_specified",
    "label": "Total adjustment factor for excluded effects (Not specified)",
    "section": "malaria_consortium",
-   "formula": "1 + sum(malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, rebound_effects_decreased_immunity_development, drug_resistance, treatment_costs_averted_from_prevention_not_specified, subnational_adjustments_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified, counterfactual_mortality_rates_not_specified, serious_adverse_events_due_to_side_effects_of_treatment_not, failure_to_ingest_first_day_of_treatment_of_smc_not_specifie, adjustment_for_impact_relative_to_the_counterfactual_to_be_m)",
+   "formula": "1 + sum(adjustments_for_excluded_effects_malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, rebound_effects_decreased_immunity_development, adjustments_for_excluded_effects_drug_resistance, treatment_costs_averted_from_prevention_not_specified, effect_on_fertility_subnational_adjustments_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified, counterfactual_mortality_rates_not_specified, serious_adverse_events_due_to_side_effects_of_treatment_not, failure_to_ingest_first_day_of_treatment_of_smc_not_specifie, adjustment_for_impact_relative_to_the_counterfactual_to_be_m)",
    "expected": 1.0337,
    "format": "percent"
   },
@@ -1055,8 +1054,8 @@
    "expected": 5990.547832
   },
   {
-   "id": "philanthropic_actors_not_specified",
-   "label": "Philanthropic actors (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_philanthr",
+   "label": "Total expenditure attributable to different actors:: Philanthropic actors (Not specified)",
    "section": "malaria_consortium",
    "formula": "donation_to_malaria_consortium_arbitrary_size_nigeria",
    "expected": 100000.0,
@@ -1066,7 +1065,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
    "label": "Scenario 1: Government costs would replace philanthropic costs (Not specified)",
    "section": "malaria_consortium",
-   "formula": "philanthropic_actors_not_specified",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 100000.0,
    "format": "usd"
   },
@@ -1361,8 +1360,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_not_specified",
-   "label": "Domestic government (Not specified)",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government (Not specified)",
    "section": "malaria_consortium",
    "formula": "value_assigned_to_averting_the_death_of_an_individual_under_3 / weighted_average_of_80_health_10_education_10_social_securit",
    "expected": 0.004962190749
@@ -1371,7 +1370,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_5",
    "label": "Scenario 1: Government costs would replace philanthropic costs (Not specified)",
    "section": "malaria_consortium",
-   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * domestic_government_not_specified",
+   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": -496.2190749
   },
   {
@@ -1405,7 +1404,7 @@
    "id": "scenario_2_global_fund_and_or_pmi_costs_would_replace_malari_4",
    "label": "Scenario 2: Global Fund and/or PMI costs would replace Malaria Consortium costs (Not specified)",
    "section": "malaria_consortium",
-   "formula": "philanthropic_actors_not_specified",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 100000.0,
    "format": "usd"
   },
@@ -1490,7 +1489,7 @@
    "id": "scenario_3_government_financial_costs_would_stay_the_same_no_3",
    "label": "Scenario 3: Government financial costs would stay the same (Not specified)",
    "section": "malaria_consortium",
-   "formula": "-scenario_3_government_financial_costs_would_stay_the_same_no_2 * domestic_government_not_specified",
+   "formula": "-scenario_3_government_financial_costs_would_stay_the_same_no_2 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
@@ -1534,26 +1533,26 @@
    "format": "percent"
   },
   {
-   "id": "domestic_government_not_specified_3",
-   "label": "Domestic government (Not specified)",
+   "id": "cost_per_treatment_breakdown_domestic_government_not_specifi",
+   "label": "Cost per treatment breakdown:: Domestic government (Not specified)",
    "section": "malaria_consortium",
    "formula": "cost_per_equivalent_child_treated_with_all_4_cycles_of_smc_n * percentage_of_total_program_costs_covered_by_domestic_govern",
    "expected": 0.7911933148,
    "format": "usd"
   },
   {
-   "id": "philanthropic_actors_not_specified_2",
-   "label": "Philanthropic actors (Not specified)",
+   "id": "cost_per_treatment_breakdown_philanthropic_actors_not_specif",
+   "label": "Cost per treatment breakdown:: Philanthropic actors (Not specified)",
    "section": "malaria_consortium",
    "formula": "cost_per_equivalent_child_treated_with_all_4_cycles_of_smc_n * percentage_of_total_program_costs_covered_by_malaria_consort",
    "expected": 6.353336314,
    "format": "usd"
   },
   {
-   "id": "domestic_government_not_specified_2",
-   "label": "Domestic government (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government (Not specified)",
    "section": "malaria_consortium",
-   "formula": "domestic_government_not_specified_3 / philanthropic_actors_not_specified_2 * philanthropic_actors_not_specified",
+   "formula": "cost_per_treatment_breakdown_domestic_government_not_specifi / cost_per_treatment_breakdown_philanthropic_actors_not_specif * total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 12453.19429,
    "format": "usd"
   },
@@ -1561,7 +1560,7 @@
    "id": "scenario_4_distributions_would_go_unfunded_not_specified_2",
    "label": "Scenario 4: Distributions would go unfunded (Not specified)",
    "section": "malaria_consortium",
-   "formula": "-domestic_government_not_specified_2",
+   "formula": "-total_expenditure_attributable_to_different_actors_domestic",
    "expected": -12453.19429,
    "format": "usd"
   },
@@ -1576,7 +1575,7 @@
    "id": "scenario_4_distributions_would_go_unfunded_not_specified_3",
    "label": "Scenario 4: Distributions would go unfunded (Not specified)",
    "section": "malaria_consortium",
-   "formula": "-scenario_4_distributions_would_go_unfunded_not_specified_2 * domestic_government_not_specified",
+   "formula": "-scenario_4_distributions_would_go_unfunded_not_specified_2 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 61.79512548
   },
   {
@@ -1602,8 +1601,8 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_philanthropic_spending_overall",
+   "label": "Net units of value created by philanthropic spending: Overall",
    "section": "malaria_consortium",
    "formula": "sum(scenario_1_government_costs_would_replace_philanthropic_cost * scenario_1_government_costs_would_replace_philanthropic_cost_6, scenario_2_global_fund_and_or_pmi_costs_would_replace_malari * scenario_2_global_fund_and_or_pmi_would_replace_malaria_cons, scenario_3_government_financial_costs_would_stay_the_same * scenario_3_government_financial_costs_would_stay_the_same_no_4, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_not_specified_4)",
    "expected": 3503.585037
@@ -1612,14 +1611,14 @@
    "id": "total_units_of_value_generated_after_accounting_for_leverage",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "malaria_consortium",
-   "formula": "overall",
+   "formula": "net_units_of_value_created_by_philanthropic_spending_overall",
    "expected": 3503.585037
   },
   {
    "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
    "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
    "section": "malaria_consortium",
-   "formula": "total_units_of_value_generated_after_accounting_for_leverage / philanthropic_actors_not_specified",
+   "formula": "total_units_of_value_generated_after_accounting_for_leverage / total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 0.03503585037
   },
   {
@@ -1755,8 +1754,8 @@
    "format": "percent"
   },
   {
-   "id": "temporal_uncertainty_givewell_2020",
-   "label": "Temporal uncertainty (GiveWell 2020)",
+   "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
+   "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
    "value": 0.014,
    "kind": "estimate",
@@ -1797,7 +1796,7 @@
    "id": "overall_discount_rate_givewell_2020",
    "label": "Overall discount rate (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
+   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, derived_value_assignments_temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
    "expected": 0.04,
    "format": "percent"
   },
@@ -1810,13 +1809,12 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate",
-   "label": "Discount rate",
+   "id": "present_value_of_transfer_discount_rate",
+   "label": "Present value of transfer: Discount rate",
    "section": "givedirectly",
-   "formula": "$discount_rate",
+   "formula": "overall_discount_rate_active",
    "expected": 0.04,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "format": "percent"
   },
   {
    "id": "duration_of_investment_benefits_in_years",
@@ -1834,7 +1832,7 @@
    "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
    "label": "Present value of ln(consumption) increase in the last year of expected benefits",
    "section": "givedirectly",
-   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + discount_rate) ^ duration_of_investment_benefits_in_years",
+   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + present_value_of_transfer_discount_rate) ^ duration_of_investment_benefits_in_years",
    "expected": 0.05639659538
   },
   {
@@ -1856,7 +1854,7 @@
    "id": "present_value_of_future_increases_in_ln_consumption_per_pers",
    "label": "Present value of future increases in ln(consumption) per person (excluding the last year of expected benefits)",
    "section": "givedirectly",
-   "formula": "pv(discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
+   "formula": "pv(present_value_of_transfer_discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
    "expected": 0.2127120349
   },
   {

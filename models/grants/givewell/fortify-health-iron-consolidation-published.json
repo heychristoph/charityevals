@@ -20,8 +20,7 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0,
-   "discount_rate": 0.025
+   "full_credit": 0
   }
  },
  "resources": [
@@ -189,27 +188,26 @@
    "expected": 0.0001558555175
   },
   {
-   "id": "discount_rate_large_effects_only_anemia_cognitive_malaria",
-   "label": "Discount rate (Large effects only (anemia, cognitive, malaria))",
+   "id": "salmon_indicates_less_subjective_inputs_discount_rate_large",
+   "label": "Salmon indicates less subjective inputs: Discount rate (Large effects only (anemia, cognitive, malaria))",
    "section": "parameters",
+   "value": 0.025,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
     "cell": "Parameters!B6"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.025.\n\nGiveWell CEA, Nov 2016. Cell C6 of Parameters sheet",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.025
+   "explainer": "GiveWell CEA, Nov 2016. Cell C6 of Parameters sheet",
+   "format": "percent"
   },
   {
-   "id": "discount_rate_yes",
-   "label": "Discount rate (Yes)",
+   "id": "cognitive_benefits_for_children_ages_3_12_discount_rate_yes",
+   "label": "Cognitive benefits for children, ages 3-12: Discount rate (Yes)",
    "section": "model",
-   "formula": "$discount_rate",
+   "formula": "salmon_indicates_less_subjective_inputs_discount_rate_large",
    "expected": 0.025,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.025."
+   "format": "percent"
   },
   {
    "id": "average_number_of_years_between_entering_fortification_progr",
@@ -255,7 +253,7 @@
    "id": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
    "label": "Present value of sum of average lifetime income benefits (including non-beneficiaries) (Yes)",
    "section": "model",
-   "formula": "average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + discount_rate_yes) ^ (average_number_of_years_between_entering_fortifictaion_progr + duration_of_long_term_benefits_of_fortification_in_years_yes)) / (1 - 1 / (1 + discount_rate_yes)) - average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + discount_rate_yes) ^ average_number_of_years_between_entering_fortifictaion_progr) / (1 - 1 / (1 + discount_rate_yes))",
+   "formula": "average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ (average_number_of_years_between_entering_fortifictaion_progr + duration_of_long_term_benefits_of_fortification_in_years_yes)) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes)) - average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ average_number_of_years_between_entering_fortifictaion_progr) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes))",
    "expected": 0.002486193701
   },
   {
@@ -1167,8 +1165,8 @@
    "format": "percent"
   },
   {
-   "id": "replicability_adustment_large_effects_only_anemia_cognitive",
-   "label": "Replicability adustment (Large effects only (anemia, cognitive, malaria))",
+   "id": "moderate_severe_anemia_calculations_replicability_adustment",
+   "label": "Moderate/Severe anemia calculations: Replicability adustment (Large effects only (anemia, cognitive, malaria))",
    "section": "calculations",
    "value": 0.9,
    "kind": "estimate",
@@ -1198,7 +1196,7 @@
    "id": "deaths_averted_per_protected_child_under_5_under_smc_includi_2",
    "label": "Deaths averted per protected child under 5 under SMC (including replicability and external validity adjustments, and accounting for decline in malaria mortality",
    "section": "calculations",
-   "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef * (1 - risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff) * fraction_of_annual_malaria_burden_occurring_in_smc_period_la * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction * replicability_adustment_large_effects_only_anemia_cognitive * external_validity_adjustment_large_effects_only_anemia_cogni / 1000",
+   "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef * (1 - risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff) * fraction_of_annual_malaria_burden_occurring_in_smc_period_la * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction * moderate_severe_anemia_calculations_replicability_adustment * external_validity_adjustment_large_effects_only_anemia_cogni / 1000",
    "expected": 9.040572e-05
   },
   {

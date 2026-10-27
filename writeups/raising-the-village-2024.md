@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Raising the Village BOTEC 2024](/raising-the-village) | GW | November 2024 | 4.6× GiveDirectly (GW: 12× cash) | 60 |
+| [Raising the Village BOTEC 2024](/raising-the-village) | GW | November 2024 | 4.6× GiveDirectly (GW: 12× cash) | 56 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

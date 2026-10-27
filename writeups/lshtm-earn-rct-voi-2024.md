@@ -12,7 +12,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [EARN RCT VoI BOTEC [2024]](/lshtm) | GW | May 2024 | 4.9× GiveDirectly (GW: 13× cash) | 96 |
-| [Eyeglasses for workers CEA [2024]](/lshtm/lshtm-eyeglasses-workers-2024) | GW | May 2024 | 5.9× GiveDirectly (GW: 15× cash) | 25 |
+| [Eyeglasses for workers CEA [2024]](/lshtm/lshtm-eyeglasses-workers-2024) | GW | May 2024 | 5.9× GiveDirectly (GW: 15× cash) | 24 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

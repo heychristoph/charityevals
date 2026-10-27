@@ -649,8 +649,8 @@
    "expected": 5594.68792
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "units_of_value_with_different_e",
    "value": 0.0,
    "kind": "estimate",
@@ -662,8 +662,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "units_of_value_with_different_e",
    "value": 0.0,
    "kind": "estimate",
@@ -691,7 +691,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "units_of_value_with_different_e",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -743,8 +743,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "units_of_value_with_different_e",
    "value": 0.0,
    "kind": "estimate",
@@ -756,8 +756,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "units_of_value_with_different_e",
    "value": 0.05,
    "kind": "estimate",
@@ -772,7 +772,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "units_of_value_with_different_e",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -792,8 +792,8 @@
    "expected": 14728.80998
   },
   {
-   "id": "malaria_morbidity",
-   "label": "Malaria morbidity",
+   "id": "supplemental_intervention_level_adjustments_malaria_morbidit",
+   "label": "Supplemental intervention-level adjustments: Malaria morbidity",
    "section": "units_of_value_with_different_e",
    "value": 0.09,
    "kind": "estimate",
@@ -844,8 +844,8 @@
    "format": "percent"
   },
   {
-   "id": "subnational_adjustments_not_specified",
-   "label": "Subnational adjustments (Not specified)",
+   "id": "effect_on_fertility_subnational_adjustments_not_specified",
+   "label": "Effect on fertility: Subnational adjustments (Not specified)",
    "section": "units_of_value_with_different_e",
    "value": 0.032,
    "kind": "estimate",
@@ -912,7 +912,7 @@
    "id": "total_adjustment_factor_not_specified",
    "label": "Total adjustment factor (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "1 + sum(malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, treatment_costs_averted_from_prevention_not_specified, subnational_adjustments_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified, counterfactual_mortality_rates_not_specified, serious_adverse_events_due_to_side_effects_of_treatment_not, wasted_vaccine_doses_not_specified)",
+   "formula": "1 + sum(supplemental_intervention_level_adjustments_malaria_morbidit, short_term_anemia_effects, investment_of_income_increases, treatment_costs_averted_from_prevention_not_specified, effect_on_fertility_subnational_adjustments_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified, counterfactual_mortality_rates_not_specified, serious_adverse_events_due_to_side_effects_of_treatment_not, wasted_vaccine_doses_not_specified)",
    "expected": 1.25,
    "format": "percent"
   },
@@ -1000,18 +1000,18 @@
    "format": "percent"
   },
   {
-   "id": "philanthropic_actors_not_specified_2",
-   "label": "Philanthropic actors (Not specified)",
+   "id": "cost_per_child_year_of_protection_breakdown_philanthropic_ac",
+   "label": "Cost per child year of protection breakdown:: Philanthropic actors (Not specified)",
    "section": "units_of_value_with_different_e",
    "formula": "cost_to_philanthropic_actors_per_annual_child_year_of_protec",
    "expected": 2.675227394,
    "format": "usd"
   },
   {
-   "id": "philanthropic_actors_not_specified",
-   "label": "Philanthropic actors (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_philanthr",
+   "label": "Total expenditure attributable to different actors:: Philanthropic actors (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "philanthropic_actors_not_specified_2 * total_children_treated_due_to_philanthropic_funding_publishe",
+   "formula": "cost_per_child_year_of_protection_breakdown_philanthropic_ac * total_children_treated_due_to_philanthropic_funding_publishe",
    "expected": 267522.7394,
    "format": "usd"
   },
@@ -1019,7 +1019,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
    "label": "Scenario 1: Government costs would replace philanthropic costs (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "philanthropic_actors_not_specified",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 267522.7394,
    "format": "usd"
   },
@@ -1046,8 +1046,8 @@
    "expected": 3613.029882
   },
   {
-   "id": "domestic_government_not_specified",
-   "label": "Domestic government (Not specified)",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government (Not specified)",
    "section": "units_of_value_with_different_e",
    "value": 0.0051,
    "kind": "estimate",
@@ -1062,7 +1062,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_5",
    "label": "Scenario 1: Government costs would replace philanthropic costs",
    "section": "units_of_value_with_different_e",
-   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * domestic_government_not_specified",
+   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": -1364.365971
   },
   {
@@ -1096,7 +1096,7 @@
    "id": "scenario_2_gavi_would_replace_philanthropic_costs_not_specif_2",
    "label": "Scenario 2: Gavi would replace philanthropic costs (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "philanthropic_actors_not_specified",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 267522.7394,
    "format": "usd"
   },
@@ -1108,8 +1108,8 @@
    "expected": 3613.029882
   },
   {
-   "id": "gavi_not_specified",
-   "label": "Gavi (Not specified)",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Gavi (Not specified)",
    "section": "units_of_value_with_different_e",
    "value": 0.007,
    "kind": "estimate",
@@ -1123,7 +1123,7 @@
    "id": "scenario_2_gavi_would_replace_philanthropic_costs_3",
    "label": "Scenario 2: Gavi would replace philanthropic costs",
    "section": "units_of_value_with_different_e",
-   "formula": "-scenario_2_gavi_would_replace_philanthropic_costs_not_specif_2 * gavi_not_specified",
+   "formula": "-scenario_2_gavi_would_replace_philanthropic_costs_not_specif_2 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": -1872.659176
   },
   {
@@ -1177,7 +1177,7 @@
    "id": "scenario_3_government_financial_costs_would_stay_the_same_3",
    "label": "Scenario 3: Government financial costs would stay the same",
    "section": "units_of_value_with_different_e",
-   "formula": "-scenario_3_government_financial_costs_would_stay_the_same_no_2 * domestic_government_not_specified",
+   "formula": "-scenario_3_government_financial_costs_would_stay_the_same_no_2 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
@@ -1208,24 +1208,24 @@
    "format": "percent"
   },
   {
-   "id": "domestic_government_not_specified_3",
-   "label": "Domestic government (Not specified)",
+   "id": "cost_per_child_year_of_protection_breakdown_domestic_governm",
+   "label": "Cost per child year of protection breakdown:: Domestic government (Not specified)",
    "section": "units_of_value_with_different_e",
    "formula": "cost_to_government_per_annual_year_of_child_protection_publi",
    "expected": 2.457,
    "format": "usd"
   },
   {
-   "id": "domestic_government_not_specified_2",
-   "label": "Domestic government (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "domestic_government_not_specified_3 * total_children_treated_due_to_philanthropic_funding_publishe",
+   "formula": "cost_per_child_year_of_protection_breakdown_domestic_governm * total_children_treated_due_to_philanthropic_funding_publishe",
    "expected": 245700.0,
    "format": "usd"
   },
   {
-   "id": "gavi_supported_doses_not_specified",
-   "label": "Gavi-supported doses (Not specified)",
+   "id": "cost_per_child_year_of_protection_breakdown_gavi_supported_d",
+   "label": "Cost per child year of protection breakdown:: Gavi-supported doses (Not specified)",
    "section": "units_of_value_with_different_e",
    "formula": "cost_of_gavi_supported_doses_per_annual_year_of_child_protec",
    "expected": 8.5,
@@ -1235,7 +1235,7 @@
    "id": "vaccine_supported_doses_not_specified",
    "label": "Vaccine supported doses (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "gavi_supported_doses_not_specified * total_children_treated_due_to_philanthropic_funding_publishe",
+   "formula": "cost_per_child_year_of_protection_breakdown_gavi_supported_d * total_children_treated_due_to_philanthropic_funding_publishe",
    "expected": 850000.0,
    "format": "usd"
   },
@@ -1243,7 +1243,7 @@
    "id": "scenario_4_distributions_would_go_unfunded_not_specified_2",
    "label": "Scenario 4: Distributions would go unfunded (Not specified)",
    "section": "units_of_value_with_different_e",
-   "formula": "-sum(domestic_government_not_specified_2, vaccine_supported_doses_not_specified)",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_domestic, vaccine_supported_doses_not_specified)",
    "expected": -1095700.0,
    "format": "usd"
   },
@@ -1258,7 +1258,7 @@
    "id": "scenario_4_distributions_would_go_unfunded_3",
    "label": "Scenario 4: Distributions would go unfunded",
    "section": "units_of_value_with_different_e",
-   "formula": "domestic_government_not_specified_2 * domestic_government_not_specified + vaccine_supported_doses_not_specified * gavi_not_specified",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic * counterfactual_value_of_spending_from_non_philanthropic_acto + vaccine_supported_doses_not_specified * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 7203.07
   },
   {
@@ -1284,8 +1284,8 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_philanthropic_spending_overall",
+   "label": "Net units of value created by philanthropic spending: Overall",
    "section": "units_of_value_with_different_e",
    "formula": "sum(scenario_1_government_costs_would_replace_philanthropic_cost * scenario_1_government_costs_would_replace_philanthropic_cost_6, scenario_2_gavi_would_replace_philanthropic_costs * scenario_2_gavi_would_replace_philanthropic_costs_not_specif_3, scenario_3_government_financial_costs_would_stay_the_same * scenario_3_government_financial_costs_would_stay_the_same_no_3, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_not_specified_3)",
    "expected": 9807.649982
@@ -1294,14 +1294,14 @@
    "id": "total_units_of_value_generated_after_accounting_for_leverage",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "units_of_value_with_different_e",
-   "formula": "overall",
+   "formula": "net_units_of_value_created_by_philanthropic_spending_overall",
    "expected": 9807.649982
   },
   {
    "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
    "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
    "section": "units_of_value_with_different_e",
-   "formula": "total_units_of_value_generated_after_accounting_for_leverage / philanthropic_actors_not_specified",
+   "formula": "total_units_of_value_generated_after_accounting_for_leverage / total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 0.03666099563
   },
   {

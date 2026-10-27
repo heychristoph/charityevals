@@ -22,7 +22,6 @@
    "count_salary_sacrifice": 0,
    "full_credit": 0,
    "uov_per_daly": 2.3,
-   "discount_rate": 0.04,
    "uov_per_ln_consumption": 1.44
   }
  },
@@ -59,104 +58,104 @@
  ],
  "rows": [
   {
-   "id": "counterfactual_b107_ylds_per_100_000",
-   "label": "Counterfactual!B107 (YLDs per 100,000)",
+   "id": "gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s",
+   "label": "GBD dietary iron deficiency YLDs per 100,000 (all ages, both sexes): 2017",
    "section": "counterfactual",
-   "value": 858.958909417387,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B107"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_bo_2",
+   "expected": 858.958909417387
   },
   {
-   "id": "counterfactual_b103_ylds_per_100_000",
-   "label": "Counterfactual!B103 (YLDs per 100,000)",
+   "id": "gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s_2",
+   "label": "GBD dietary iron deficiency YLDs per 100,000 (all ages, both sexes): 2013",
    "section": "counterfactual",
-   "value": 1002.81376976844,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B103"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s",
+   "expected": 1002.81376976844
   },
   {
-   "id": "r_2013_2017_nipi",
-   "label": "2013-2017 (NIPI)",
+   "id": "trends_ylds_per_100_000_per_year_2013_2017_nipi",
+   "label": "Trends (YLDs per 100,000 per year): 2013-2017 (NIPI)",
    "section": "counterfactual",
-   "formula": "(counterfactual_b107_ylds_per_100_000 - counterfactual_b103_ylds_per_100_000) / 4",
+   "formula": "(gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s - gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s_2) / 4",
    "expected": -35.96371509
   },
   {
-   "id": "counterfactual_b128_ylds_per_100_000",
-   "label": "Counterfactual!B128 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2018",
+   "label": "Trends (YLDs per 100,000 per year): 2018",
    "section": "counterfactual",
-   "formula": "counterfactual_b107_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "gbd_dietary_iron_deficiency_ylds_per_100_000_all_ages_both_s + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 822.9951943
   },
   {
-   "id": "counterfactual_b129_ylds_per_100_000",
-   "label": "Counterfactual!B129 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2019",
+   "label": "Trends (YLDs per 100,000 per year): 2019",
    "section": "counterfactual",
-   "formula": "counterfactual_b128_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2018 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 787.0314792
   },
   {
-   "id": "counterfactual_b130_ylds_per_100_000",
-   "label": "Counterfactual!B130 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2020",
+   "label": "Trends (YLDs per 100,000 per year): 2020",
    "section": "counterfactual",
-   "formula": "counterfactual_b129_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2019 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 751.0677642
   },
   {
-   "id": "counterfactual_b131_ylds_per_100_000",
-   "label": "Counterfactual!B131 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2021",
+   "label": "Trends (YLDs per 100,000 per year): 2021",
    "section": "counterfactual",
-   "formula": "counterfactual_b130_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2020 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 715.1040491
   },
   {
-   "id": "counterfactual_b132_ylds_per_100_000",
-   "label": "Counterfactual!B132 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2022",
+   "label": "Trends (YLDs per 100,000 per year): 2022",
    "section": "counterfactual",
-   "formula": "counterfactual_b131_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2021 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 679.140334
   },
   {
-   "id": "counterfactual_b133_ylds_per_100_000",
-   "label": "Counterfactual!B133 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2023",
+   "label": "Trends (YLDs per 100,000 per year): 2023",
    "section": "counterfactual",
-   "formula": "counterfactual_b132_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2022 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 643.1766189
   },
   {
-   "id": "counterfactual_b134_ylds_per_100_000",
-   "label": "Counterfactual!B134 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2024",
+   "label": "Trends (YLDs per 100,000 per year): 2024",
    "section": "counterfactual",
-   "formula": "counterfactual_b133_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2023 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 607.2129038
   },
   {
-   "id": "counterfactual_b135_ylds_per_100_000",
-   "label": "Counterfactual!B135 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2025",
+   "label": "Trends (YLDs per 100,000 per year): 2025",
    "section": "counterfactual",
-   "formula": "counterfactual_b134_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2024 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 571.2491887
   },
   {
-   "id": "counterfactual_b136_ylds_per_100_000",
-   "label": "Counterfactual!B136 (YLDs per 100,000)",
+   "id": "trends_ylds_per_100_000_per_year_2026",
+   "label": "Trends (YLDs per 100,000 per year): 2026",
    "section": "counterfactual",
-   "formula": "counterfactual_b135_ylds_per_100_000 + r_2013_2017_nipi",
+   "formula": "trends_ylds_per_100_000_per_year_2025 + trends_ylds_per_100_000_per_year_2013_2017_nipi",
    "expected": 535.2854736
   },
   {
-   "id": "average_2021_2026_3",
-   "label": "Average 2021-2026",
+   "id": "trends_ylds_per_100_000_per_year_average_2021_2026",
+   "label": "Trends (YLDs per 100,000 per year): Average 2021-2026",
    "section": "counterfactual",
-   "formula": "(0.5 * counterfactual_b131_ylds_per_100_000 + counterfactual_b132_ylds_per_100_000 + counterfactual_b133_ylds_per_100_000 + counterfactual_b134_ylds_per_100_000 + counterfactual_b135_ylds_per_100_000 + 0.5 * counterfactual_b136_ylds_per_100_000) / 5",
+   "formula": "(0.5 * trends_ylds_per_100_000_per_year_2021 + trends_ylds_per_100_000_per_year_2022 + trends_ylds_per_100_000_per_year_2023 + trends_ylds_per_100_000_per_year_2024 + trends_ylds_per_100_000_per_year_2025 + 0.5 * trends_ylds_per_100_000_per_year_2026) / 5",
    "expected": 625.1947613
   },
   {
@@ -271,15 +270,15 @@
    "format": "percent"
   },
   {
-   "id": "average_2021_2026_2",
-   "label": "Average 2021-2026",
+   "id": "ses_adjusted_dietary_iron_deficiency_ylds_per_100_000_averag_2",
+   "label": "SES-adjusted dietary iron deficiency YLDs per 100,000: Average 2021-2026",
    "section": "counterfactual",
-   "formula": "average_2021_2026_3 * ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat",
+   "formula": "trends_ylds_per_100_000_per_year_average_2021_2026 * ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat",
    "expected": 575.7185992
   },
   {
-   "id": "maharashtra_projected_number_of_mills",
-   "label": "Maharashtra (Projected number of mills)",
+   "id": "adjusting_for_state_differences_maharashtra_projected_number",
+   "label": "Adjusting for state differences: Maharashtra (Projected number of mills)",
    "section": "counterfactual",
    "value": 15.0,
    "kind": "estimate",
@@ -290,39 +289,39 @@
    }
   },
   {
-   "id": "maharashtra_women_with_any_anemia",
-   "label": "Maharashtra (Women with any anemia)",
+   "id": "adjusting_for_state_differences_maharashtra_women_with_any_a",
+   "label": "Adjusting for state differences: Maharashtra (Women with any anemia)",
    "section": "counterfactual",
+   "value": 48.0,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!C190"
-   },
-   "formula": "@givewell.maharashtra_women_with_any_anemia",
-   "expected": 48.0
+   }
   },
   {
-   "id": "maharashtra_men_with_any_anemia",
-   "label": "Maharashtra (Men with any anemia)",
+   "id": "adjusting_for_state_differences_maharashtra_men_with_any_ane",
+   "label": "Adjusting for state differences: Maharashtra (Men with any anemia)",
    "section": "counterfactual",
+   "value": 17.6,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!D190"
-   },
-   "formula": "@givewell.maharashtra_men_with_any_anemia",
-   "expected": 17.6
+   }
   },
   {
-   "id": "maharashtra_average_adult",
-   "label": "Maharashtra (Average adult)",
+   "id": "adjusting_for_state_differences_maharashtra_average_adult",
+   "label": "Adjusting for state differences: Maharashtra (Average adult)",
    "section": "counterfactual",
-   "formula": "0.485 * maharashtra_women_with_any_anemia + 0.515 * maharashtra_men_with_any_anemia",
+   "formula": "0.485 * adjusting_for_state_differences_maharashtra_women_with_any_a + 0.515 * adjusting_for_state_differences_maharashtra_men_with_any_ane",
    "expected": 32.344
   },
   {
-   "id": "west_bengal_projected_number_of_mills",
-   "label": "West Bengal (Projected number of mills)",
+   "id": "adjusting_for_state_differences_west_bengal_projected_number",
+   "label": "Adjusting for state differences: West Bengal (Projected number of mills)",
    "section": "counterfactual",
    "value": 5.0,
    "kind": "estimate",
@@ -333,87 +332,87 @@
    }
   },
   {
-   "id": "west_bengal_women_with_any_anemia",
-   "label": "West Bengal (Women with any anemia)",
+   "id": "adjusting_for_state_differences_west_bengal_women_with_any_a",
+   "label": "Adjusting for state differences: West Bengal (Women with any anemia)",
    "section": "counterfactual",
+   "value": 62.5,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!C191"
-   },
-   "formula": "@givewell.west_bengal_women_with_any_anemia",
-   "expected": 62.5
+   }
   },
   {
-   "id": "west_bengal_men_with_any_anemia",
-   "label": "West Bengal (Men with any anemia)",
+   "id": "adjusting_for_state_differences_west_bengal_men_with_any_ane",
+   "label": "Adjusting for state differences: West Bengal (Men with any anemia)",
    "section": "counterfactual",
+   "value": 30.3,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!D191"
-   },
-   "formula": "@givewell.west_bengal_men_with_any_anemia",
-   "expected": 30.3
+   }
   },
   {
-   "id": "west_bengal_average_adult",
-   "label": "West Bengal (Average adult)",
+   "id": "adjusting_for_state_differences_west_bengal_average_adult",
+   "label": "Adjusting for state differences: West Bengal (Average adult)",
    "section": "counterfactual",
-   "formula": "0.485 * west_bengal_women_with_any_anemia + 0.515 * west_bengal_men_with_any_anemia",
+   "formula": "0.485 * adjusting_for_state_differences_west_bengal_women_with_any_a + 0.515 * adjusting_for_state_differences_west_bengal_men_with_any_ane",
    "expected": 45.917
   },
   {
    "id": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal",
    "label": "Weighted average anemia rate for Maharashtra and West Bengal (Average adult)",
    "section": "counterfactual",
-   "formula": "(maharashtra_projected_number_of_mills * maharashtra_average_adult + west_bengal_projected_number_of_mills * west_bengal_average_adult) / (maharashtra_projected_number_of_mills + west_bengal_projected_number_of_mills)",
+   "formula": "(adjusting_for_state_differences_maharashtra_projected_number * adjusting_for_state_differences_maharashtra_average_adult + adjusting_for_state_differences_west_bengal_projected_number * adjusting_for_state_differences_west_bengal_average_adult) / (adjusting_for_state_differences_maharashtra_projected_number + adjusting_for_state_differences_west_bengal_projected_number)",
    "expected": 35.73725
   },
   {
-   "id": "india_women_with_any_anemia",
-   "label": "India (Women with any anemia)",
+   "id": "adjusting_for_state_differences_india_women_with_any_anemia",
+   "label": "Adjusting for state differences: India (Women with any anemia)",
    "section": "counterfactual",
+   "value": 53.1,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!C192"
-   },
-   "formula": "@givewell_india.india_women_with_any_anemia",
-   "expected": 53.1
+   }
   },
   {
-   "id": "india_men_with_any_anemia",
-   "label": "India (Men with any anemia)",
+   "id": "adjusting_for_state_differences_india_men_with_any_anemia",
+   "label": "Adjusting for state differences: India (Men with any anemia)",
    "section": "counterfactual",
+   "value": 23.3,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!D192"
-   },
-   "formula": "@givewell_india.india_men_with_any_anemia",
-   "expected": 23.3
+   }
   },
   {
-   "id": "india_average_adult",
-   "label": "India (Average adult)",
+   "id": "adjusting_for_state_differences_india_average_adult",
+   "label": "Adjusting for state differences: India (Average adult)",
    "section": "counterfactual",
-   "formula": "0.485 * india_women_with_any_anemia + 0.515 * india_men_with_any_anemia",
+   "formula": "0.485 * adjusting_for_state_differences_india_women_with_any_anemia + 0.515 * adjusting_for_state_differences_india_men_with_any_anemia",
    "expected": 37.753
   },
   {
    "id": "ratio_of_anemia_in_fortify_health_states_compared_to_whole_c",
    "label": "Ratio of anemia in Fortify Health states compared to whole country (Average adult)",
    "section": "counterfactual",
-   "formula": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal / india_average_adult",
+   "formula": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal / adjusting_for_state_differences_india_average_adult",
    "expected": 0.9466068922,
    "format": "percent"
   },
   {
-   "id": "average_2021_2026",
-   "label": "Average 2021-2026",
+   "id": "ses_adjusted_dietary_iron_deficiency_ylds_per_100_000_averag",
+   "label": "SES-adjusted dietary iron deficiency YLDs per 100,000: Average 2021-2026",
    "section": "counterfactual",
-   "formula": "average_2021_2026_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c",
+   "formula": "ses_adjusted_dietary_iron_deficiency_ylds_per_100_000_averag_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c",
    "expected": 544.979194
   },
   {
@@ -432,7 +431,7 @@
    "id": "annual_ylds_per_person_attributed_to_dietary_iron_deficiency",
    "label": "Annual YLDs per person attributed to dietary iron deficiency in India (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "average_2021_2026 / 100000 * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
+   "formula": "ses_adjusted_dietary_iron_deficiency_ylds_per_100_000_averag / 100000 * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
    "expected": 0.00544979194
   },
   {
@@ -502,18 +501,17 @@
    "expected": 0.006768641589
   },
   {
-   "id": "discount_rate_3_year_grant_2022_2025",
-   "label": "Discount rate (3-year grant (2022-2025))",
+   "id": "cognitive_benefits_in_children_discount_rate_3_year_grant_20",
+   "label": "Cognitive benefits in children: Discount rate (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "FH (India) Iron fortification!B33"
    },
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04."
+   "format": "percent"
   },
   {
    "id": "mean_number_of_years_between_supplementation_and_initial_con",
@@ -669,104 +667,104 @@
    "format": "percent"
   },
   {
-   "id": "counterfactual_b32_0_4_years",
-   "label": "Counterfactual!B32 (0-4 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2017 (0-4 years)",
    "section": "counterfactual",
-   "value": 0.297793274648,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B32"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017",
+   "expected": 0.297793274648
   },
   {
-   "id": "counterfactual_b28_0_4_years",
-   "label": "Counterfactual!B28 (0-4 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2013 (0-4 years)",
    "section": "counterfactual",
-   "value": 0.339656475826,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B28"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013",
+   "expected": 0.339656475826
   },
   {
-   "id": "r_2013_2017_nipi_0_4_years",
-   "label": "2013-2017 (NIPI) (0-4 years)",
+   "id": "trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
+   "label": "Trends (ppt change per year): 2013-2017 (NIPI) (0-4 years)",
    "section": "counterfactual",
-   "formula": "(counterfactual_b32_0_4_years - counterfactual_b28_0_4_years) / 4",
+   "formula": "(gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017 - gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013) / 4",
    "expected": -0.01046580029
   },
   {
-   "id": "counterfactual_b53_0_4_years",
-   "label": "Counterfactual!B53 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2018_0_4_years",
+   "label": "Trends (ppt change per year): 2018 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b32_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017 + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2873274744
   },
   {
-   "id": "counterfactual_b54_0_4_years",
-   "label": "Counterfactual!B54 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2019_0_4_years",
+   "label": "Trends (ppt change per year): 2019 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b53_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2018_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2768616741
   },
   {
-   "id": "counterfactual_b55_0_4_years",
-   "label": "Counterfactual!B55 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2020_0_4_years",
+   "label": "Trends (ppt change per year): 2020 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b54_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2019_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2663958738
   },
   {
-   "id": "counterfactual_b56_0_4_years",
-   "label": "Counterfactual!B56 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2021_0_4_years",
+   "label": "Trends (ppt change per year): 2021 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b55_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2020_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2559300735
   },
   {
-   "id": "counterfactual_b57_0_4_years",
-   "label": "Counterfactual!B57 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2022_0_4_years",
+   "label": "Trends (ppt change per year): 2022 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b56_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2021_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2454642732
   },
   {
-   "id": "counterfactual_b58_0_4_years",
-   "label": "Counterfactual!B58 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2023_0_4_years",
+   "label": "Trends (ppt change per year): 2023 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b57_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2022_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2349984729
   },
   {
-   "id": "counterfactual_b59_0_4_years",
-   "label": "Counterfactual!B59 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2024_0_4_years",
+   "label": "Trends (ppt change per year): 2024 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b58_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2023_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2245326726
   },
   {
-   "id": "counterfactual_b60_0_4_years",
-   "label": "Counterfactual!B60 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2025_0_4_years",
+   "label": "Trends (ppt change per year): 2025 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b59_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2024_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.2140668723
   },
   {
-   "id": "counterfactual_b61_0_4_years",
-   "label": "Counterfactual!B61 (0-4 years)",
+   "id": "trends_ppt_change_per_year_2026_0_4_years",
+   "label": "Trends (ppt change per year): 2026 (0-4 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_b60_0_4_years + r_2013_2017_nipi_0_4_years",
+   "formula": "trends_ppt_change_per_year_2025_0_4_years + trends_ppt_change_per_year_2013_2017_nipi_0_4_years",
    "expected": 0.203601072
   },
   {
    "id": "average_july_2021_july_2026_0_4_years",
    "label": "Average July 2021 - July 2026 (0-4 years)",
    "section": "counterfactual",
-   "formula": "(0.5 * counterfactual_b56_0_4_years + counterfactual_b57_0_4_years + counterfactual_b58_0_4_years + counterfactual_b59_0_4_years + counterfactual_b60_0_4_years + 0.5 * counterfactual_b61_0_4_years) / 5",
+   "formula": "(0.5 * trends_ppt_change_per_year_2021_0_4_years + trends_ppt_change_per_year_2022_0_4_years + trends_ppt_change_per_year_2023_0_4_years + trends_ppt_change_per_year_2024_0_4_years + trends_ppt_change_per_year_2025_0_4_years + 0.5 * trends_ppt_change_per_year_2026_0_4_years) / 5",
    "expected": 0.2297655727
   },
   {
@@ -806,8 +804,8 @@
    "expected": 58.9
   },
   {
-   "id": "average_anemia_rate_in_top_three_quintiles_children",
-   "label": "Average anemia rate in top three quintiles (Children)",
+   "id": "average_anemia_rate_in_top_three_quintiles_residence_urban",
+   "label": "Average anemia rate in top three quintiles (Residence : Urban)",
    "section": "counterfactual",
    "formula": "avg(wealth_quintile_highest_children_with_any_anemia, wealth_quintile_fourth_children_with_any_anemia, wealth_quintile_middle_children_with_any_anemia)",
    "expected": 55.03333333
@@ -826,205 +824,205 @@
   },
   {
    "id": "ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat_2",
-   "label": "Ratio of anemia rate in top three quintiles to whole population (Children)",
+   "label": "Ratio of anemia rate in top three quintiles to whole population (Residence : Urban)",
    "section": "counterfactual",
-   "formula": "average_anemia_rate_in_top_three_quintiles_children / total_children_with_any_anemia",
+   "formula": "average_anemia_rate_in_top_three_quintiles_residence_urban / total_children_with_any_anemia",
    "expected": 0.9407407407,
    "format": "percent"
   },
   {
-   "id": "average_2021_2026_0_4_years_2",
-   "label": "Average 2021-2026 (0-4 years)",
+   "id": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average",
+   "label": "SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (0-4 years)",
    "section": "counterfactual",
    "formula": "average_july_2021_july_2026_0_4_years * ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat_2",
    "expected": 0.2161498351
   },
   {
-   "id": "maharashtra_children_with_any_anemia",
-   "label": "Maharashtra (Children with any anemia)",
+   "id": "adjusting_for_state_differences_maharashtra_children_with_an",
+   "label": "Adjusting for state differences: Maharashtra (Children with any anemia)",
    "section": "counterfactual",
+   "value": 53.8,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B190"
-   },
-   "formula": "@givewell.maharashtra_children_with_any_anemia",
-   "expected": 53.8
+   }
   },
   {
-   "id": "west_bengal_children_with_any_anemia",
-   "label": "West Bengal (Children with any anemia)",
+   "id": "adjusting_for_state_differences_west_bengal_children_with_an",
+   "label": "Adjusting for state differences: West Bengal (Children with any anemia)",
    "section": "counterfactual",
+   "value": 54.2,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B191"
-   },
-   "formula": "@givewell.west_bengal_children_with_any_anemia",
-   "expected": 54.2
+   }
   },
   {
    "id": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal_2",
    "label": "Weighted average anemia rate for Maharashtra and West Bengal (Children with any anemia)",
    "section": "counterfactual",
-   "formula": "(maharashtra_projected_number_of_mills * maharashtra_children_with_any_anemia + west_bengal_projected_number_of_mills * west_bengal_children_with_any_anemia) / (maharashtra_projected_number_of_mills + west_bengal_projected_number_of_mills)",
+   "formula": "(adjusting_for_state_differences_maharashtra_projected_number * adjusting_for_state_differences_maharashtra_children_with_an + adjusting_for_state_differences_west_bengal_projected_number * adjusting_for_state_differences_west_bengal_children_with_an) / (adjusting_for_state_differences_maharashtra_projected_number + adjusting_for_state_differences_west_bengal_projected_number)",
    "expected": 53.9
   },
   {
-   "id": "india_children_with_any_anemia",
-   "label": "India (Children with any anemia)",
+   "id": "adjusting_for_state_differences_india_children_with_any_anem",
+   "label": "Adjusting for state differences: India (Children with any anemia)",
    "section": "counterfactual",
+   "value": 58.5,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!B192"
-   },
-   "formula": "@givewell_india.india_children_with_any_anemia",
-   "expected": 58.5
+   }
   },
   {
    "id": "ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
    "label": "Ratio of anemia in Fortify Health states compared to whole country (Children with any anemia)",
    "section": "counterfactual",
-   "formula": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal_2 / india_children_with_any_anemia",
+   "formula": "weighted_average_anemia_rate_for_maharashtra_and_west_bengal_2 / adjusting_for_state_differences_india_children_with_any_anem",
    "expected": 0.9213675214,
    "format": "percent"
   },
   {
-   "id": "average_2021_2026_0_4_years",
-   "label": "Average 2021-2026 (0-4 years)",
+   "id": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra",
+   "label": "State and SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (0-4 years)",
    "section": "counterfactual",
-   "formula": "average_2021_2026_0_4_years_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
+   "formula": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
    "expected": 0.1991534378
   },
   {
    "id": "proportion_of_children_under_5_with_dietary_iron_deficiency",
    "label": "Proportion of children under 5 with dietary iron deficiency (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "average_2021_2026_0_4_years * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
+   "formula": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
    "expected": 0.1991534378,
    "format": "percent"
   },
   {
-   "id": "counterfactual_c32_5_14_years",
-   "label": "Counterfactual!C32 (5-14 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_2",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2017 (5-14 years)",
    "section": "counterfactual",
-   "value": 0.255822890467,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!C32"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2_5",
+   "expected": 0.255822890467
   },
   {
-   "id": "counterfactual_c28_5_14_years",
-   "label": "Counterfactual!C28 (5-14 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013_2",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2013 (5-14 years)",
    "section": "counterfactual",
-   "value": 0.278261636173,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!C28"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2_3",
+   "expected": 0.278261636173
   },
   {
-   "id": "r_2013_2017_nipi_5_14_years",
-   "label": "2013-2017 (NIPI) (5-14 years)",
+   "id": "trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
+   "label": "Trends (ppt change per year): 2013-2017 (NIPI) (5-14 years)",
    "section": "counterfactual",
-   "formula": "(counterfactual_c32_5_14_years - counterfactual_c28_5_14_years) / 4",
+   "formula": "(gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_2 - gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013_2) / 4",
    "expected": -0.005609686426
   },
   {
-   "id": "counterfactual_c53_5_14_years",
-   "label": "Counterfactual!C53 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2018_5_14_years",
+   "label": "Trends (ppt change per year): 2018 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c32_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_2 + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.250213204
   },
   {
-   "id": "counterfactual_c54_5_14_years",
-   "label": "Counterfactual!C54 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2019_5_14_years",
+   "label": "Trends (ppt change per year): 2019 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c53_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2018_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2446035176
   },
   {
-   "id": "counterfactual_c55_5_14_years",
-   "label": "Counterfactual!C55 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2020_5_14_years",
+   "label": "Trends (ppt change per year): 2020 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c54_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2019_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2389938312
   },
   {
-   "id": "counterfactual_c56_5_14_years",
-   "label": "Counterfactual!C56 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2021_5_14_years",
+   "label": "Trends (ppt change per year): 2021 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c55_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2020_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2333841448
   },
   {
-   "id": "counterfactual_c57_5_14_years",
-   "label": "Counterfactual!C57 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2022_5_14_years",
+   "label": "Trends (ppt change per year): 2022 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c56_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2021_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2277744583
   },
   {
-   "id": "counterfactual_c58_5_14_years",
-   "label": "Counterfactual!C58 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2023_5_14_years",
+   "label": "Trends (ppt change per year): 2023 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c57_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2022_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2221647719
   },
   {
-   "id": "counterfactual_c59_5_14_years",
-   "label": "Counterfactual!C59 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2024_5_14_years",
+   "label": "Trends (ppt change per year): 2024 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c58_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2023_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2165550855
   },
   {
-   "id": "counterfactual_c60_5_14_years",
-   "label": "Counterfactual!C60 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2025_5_14_years",
+   "label": "Trends (ppt change per year): 2025 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c59_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2024_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2109453991
   },
   {
-   "id": "counterfactual_c61_5_14_years",
-   "label": "Counterfactual!C61 (5-14 years)",
+   "id": "trends_ppt_change_per_year_2026_5_14_years",
+   "label": "Trends (ppt change per year): 2026 (5-14 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_c60_5_14_years + r_2013_2017_nipi_5_14_years",
+   "formula": "trends_ppt_change_per_year_2025_5_14_years + trends_ppt_change_per_year_2013_2017_nipi_5_14_years",
    "expected": 0.2053357126
   },
   {
    "id": "average_july_2021_july_2026_5_14_years",
    "label": "Average July 2021 - July 2026 (5-14 years)",
    "section": "counterfactual",
-   "formula": "(0.5 * counterfactual_c56_5_14_years + counterfactual_c57_5_14_years + counterfactual_c58_5_14_years + counterfactual_c59_5_14_years + counterfactual_c60_5_14_years + 0.5 * counterfactual_c61_5_14_years) / 5",
+   "formula": "(0.5 * trends_ppt_change_per_year_2021_5_14_years + trends_ppt_change_per_year_2022_5_14_years + trends_ppt_change_per_year_2023_5_14_years + trends_ppt_change_per_year_2024_5_14_years + trends_ppt_change_per_year_2025_5_14_years + 0.5 * trends_ppt_change_per_year_2026_5_14_years) / 5",
    "expected": 0.2193599287
   },
   {
-   "id": "average_2021_2026_5_14_years_2",
-   "label": "Average 2021-2026 (5-14 years)",
+   "id": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average_2",
+   "label": "SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (5-14 years)",
    "section": "counterfactual",
    "formula": "average_july_2021_july_2026_5_14_years * ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat_2",
    "expected": 0.2063608218
   },
   {
-   "id": "average_2021_2026_5_14_years",
-   "label": "Average 2021-2026 (5-14 years)",
+   "id": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra_2",
+   "label": "State and SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (5-14 years)",
    "section": "counterfactual",
-   "formula": "average_2021_2026_5_14_years_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
+   "formula": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
    "expected": 0.1901341589
   },
   {
    "id": "proportion_of_children_5_to_14_with_dietary_iron_deficiency",
    "label": "Proportion of children 5 to 14 with dietary iron deficiency (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "average_2021_2026_5_14_years * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
+   "formula": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra_2 * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
    "expected": 0.1901341589,
    "format": "percent"
   },
@@ -1055,7 +1053,7 @@
    "id": "present_value_of_lifetime_benefits_3_year_grant_2022_2025",
    "label": "Present value of lifetime benefits (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "pv(discount_rate_3_year_grant_2022_2025, mean_number_of_years_between_supplementation_and_initial_con + median_duration_of_consumption_benefits_3_year_grant_2022_20, -mean_increase_in_annual_ln_consumption_3_year_grant_2022_202) - pv(discount_rate_3_year_grant_2022_2025, mean_number_of_years_between_supplementation_and_initial_con, -mean_increase_in_annual_ln_consumption_3_year_grant_2022_202)",
+   "formula": "pv(cognitive_benefits_in_children_discount_rate_3_year_grant_20, mean_number_of_years_between_supplementation_and_initial_con + median_duration_of_consumption_benefits_3_year_grant_2022_20, -mean_increase_in_annual_ln_consumption_3_year_grant_2022_202) - pv(cognitive_benefits_in_children_discount_rate_3_year_grant_20, mean_number_of_years_between_supplementation_and_initial_con, -mean_increase_in_annual_ln_consumption_3_year_grant_2022_202)",
    "expected": 0.0005674116447
   },
   {
@@ -1087,125 +1085,125 @@
    "format": "percent"
   },
   {
-   "id": "counterfactual_d32_15_49_years",
-   "label": "Counterfactual!D32 (15-49 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_3",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2017 (15-49 years)",
    "section": "counterfactual",
-   "value": 0.290713838936,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!D32"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2_4",
+   "expected": 0.290713838936
   },
   {
-   "id": "counterfactual_d28_15_49_years",
-   "label": "Counterfactual!D28 (15-49 years)",
+   "id": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013_3",
+   "label": "GBD dietary iron deficiency prevalence data (both sexes): 2013 (15-49 years)",
    "section": "counterfactual",
-   "value": 0.30137633783,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit",
     "cell": "Counterfactual!D28"
-   }
+   },
+   "formula": "@givewell.gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2_2",
+   "expected": 0.30137633783
   },
   {
-   "id": "r_2013_2017_nipi_15_49_years",
-   "label": "2013-2017 (NIPI) (15-49 years)",
+   "id": "trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
+   "label": "Trends (ppt change per year): 2013-2017 (NIPI) (15-49 years)",
    "section": "counterfactual",
-   "formula": "(counterfactual_d32_15_49_years - counterfactual_d28_15_49_years) / 4",
+   "formula": "(gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_3 - gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2013_3) / 4",
    "expected": -0.002665624724
   },
   {
-   "id": "counterfactual_d53_15_49_years",
-   "label": "Counterfactual!D53 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2018_15_49_years",
+   "label": "Trends (ppt change per year): 2018 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d32_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "gbd_dietary_iron_deficiency_prevalence_data_both_sexes_2017_3 + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2880482142
   },
   {
-   "id": "counterfactual_d54_15_49_years",
-   "label": "Counterfactual!D54 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2019_15_49_years",
+   "label": "Trends (ppt change per year): 2019 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d53_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2018_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2853825895
   },
   {
-   "id": "counterfactual_d55_15_49_years",
-   "label": "Counterfactual!D55 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2020_15_49_years",
+   "label": "Trends (ppt change per year): 2020 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d54_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2019_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2827169648
   },
   {
-   "id": "counterfactual_d56_15_49_years",
-   "label": "Counterfactual!D56 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2021_15_49_years",
+   "label": "Trends (ppt change per year): 2021 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d55_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2020_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.28005134
   },
   {
-   "id": "counterfactual_d57_15_49_years",
-   "label": "Counterfactual!D57 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2022_15_49_years",
+   "label": "Trends (ppt change per year): 2022 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d56_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2021_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2773857153
   },
   {
-   "id": "counterfactual_d58_15_49_years",
-   "label": "Counterfactual!D58 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2023_15_49_years",
+   "label": "Trends (ppt change per year): 2023 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d57_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2022_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2747200906
   },
   {
-   "id": "counterfactual_d59_15_49_years",
-   "label": "Counterfactual!D59 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2024_15_49_years",
+   "label": "Trends (ppt change per year): 2024 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d58_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2023_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2720544659
   },
   {
-   "id": "counterfactual_d60_15_49_years",
-   "label": "Counterfactual!D60 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2025_15_49_years",
+   "label": "Trends (ppt change per year): 2025 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d59_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2024_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2693888411
   },
   {
-   "id": "counterfactual_d61_15_49_years",
-   "label": "Counterfactual!D61 (15-49 years)",
+   "id": "trends_ppt_change_per_year_2026_15_49_years",
+   "label": "Trends (ppt change per year): 2026 (15-49 years)",
    "section": "counterfactual",
-   "formula": "counterfactual_d60_15_49_years + r_2013_2017_nipi_15_49_years",
+   "formula": "trends_ppt_change_per_year_2025_15_49_years + trends_ppt_change_per_year_2013_2017_nipi_15_49_years",
    "expected": 0.2667232164
   },
   {
    "id": "average_july_2021_july_2026_15_49_years",
    "label": "Average July 2021 - July 2026 (15-49 years)",
    "section": "counterfactual",
-   "formula": "(0.5 * counterfactual_d56_15_49_years + counterfactual_d57_15_49_years + counterfactual_d58_15_49_years + counterfactual_d59_15_49_years + counterfactual_d60_15_49_years + 0.5 * counterfactual_d61_15_49_years) / 5",
+   "formula": "(0.5 * trends_ppt_change_per_year_2021_15_49_years + trends_ppt_change_per_year_2022_15_49_years + trends_ppt_change_per_year_2023_15_49_years + trends_ppt_change_per_year_2024_15_49_years + trends_ppt_change_per_year_2025_15_49_years + 0.5 * trends_ppt_change_per_year_2026_15_49_years) / 5",
    "expected": 0.2733872782
   },
   {
-   "id": "average_2021_2026_15_49_years_2",
-   "label": "Average 2021-2026 (15-49 years)",
+   "id": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average_3",
+   "label": "SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (15-49 years)",
    "section": "counterfactual",
    "formula": "average_july_2021_july_2026_15_49_years * ratio_of_anemia_rate_in_top_three_quintiles_to_whole_populat",
    "expected": 0.2517521748
   },
   {
-   "id": "average_2021_2026_15_49_years",
-   "label": "Average 2021-2026 (15-49 years)",
+   "id": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra_3",
+   "label": "State and SES-adjusted dietary iron deficiency prevalence rate: Average 2021-2026 (15-49 years)",
    "section": "counterfactual",
-   "formula": "average_2021_2026_15_49_years_2 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c",
+   "formula": "ses_adjusted_dietary_iron_deficiency_prevalence_rate_average_3 * ratio_of_anemia_in_fortify_health_states_compared_to_whole_c",
    "expected": 0.2383103438
   },
   {
    "id": "proportion_of_working_age_adults_that_have_dietary_iron_defi",
    "label": "Proportion of working-age adults that have dietary iron deficiency (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "average_2021_2026_15_49_years * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
+   "formula": "state_and_ses_adjusted_dietary_iron_deficiency_prevalence_ra_3 * adjustment_for_decline_in_anemia_and_iron_deficiency_from_3",
    "expected": 0.2383103438,
    "format": "percent"
   },
@@ -1407,8 +1405,8 @@
    }
   },
   {
-   "id": "r_3_year_average",
-   "label": "3-year average",
+   "id": "r_3_year_grant_2022_2025_3_year_average",
+   "label": "3-year grant (2022-2025): 3-year average",
    "section": "annual_cost_per_person",
    "formula": "sum(total_budget_usd_millions_year_1_2022_2023, total_budget_usd_millions_year_2_2023_2024, total_budget_usd_millions_year_3_2024_2025) * 1000000 / sum(number_of_beneficiaries_accounting_for_wastage_year_1_2022_2, number_of_beneficiaries_accounting_for_wastage_year_2_2023_2, number_of_beneficiaries_accounting_for_wastage_year_3_2024_2)",
    "expected": 0.6844736997,
@@ -1418,7 +1416,7 @@
    "id": "annual_cost_per_person_nominal_usd_3_year_grant_2022_2025",
    "label": "Annual cost per person (nominal USD) (3-year grant (2022-2025))",
    "section": "fh_india_iron_fortification",
-   "formula": "r_3_year_average",
+   "formula": "r_3_year_grant_2022_2025_3_year_average",
    "expected": 0.6844736997,
    "format": "usd"
   },

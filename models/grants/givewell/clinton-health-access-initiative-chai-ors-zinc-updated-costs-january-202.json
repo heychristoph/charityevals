@@ -352,8 +352,8 @@
    "format": "percent"
   },
   {
-   "id": "optimism_adjustment_program_costs_during_rct_period_2024",
-   "label": "Optimism adjustment (Program costs during RCT period; 2024)",
+   "id": "under_5_ors_uptake_optimism_adjustment_program_costs_during",
+   "label": "Under-5 ORS uptake: Optimism adjustment (Program costs during RCT period; 2024)",
    "section": "cea",
    "formula": "share_of_children_reached_in_wagner_et_al_2019_program_costs",
    "expected": 0.605,
@@ -363,7 +363,7 @@
    "id": "share_of_children_reached_in_rct_program_program_costs_durin",
    "label": "Share of children reached in RCT/program (Program costs during RCT period; 2024)",
    "section": "cea",
-   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri * optimism_adjustment_program_costs_during_rct_period_2024",
+   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri * under_5_ors_uptake_optimism_adjustment_program_costs_during",
    "expected": 0.605,
    "format": "percent"
   },
@@ -1081,8 +1081,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted",
+   "label": "Medical costs averted: DALYs averted",
    "section": "cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children * estimated_morbidity_reduction * (total_5_population_program_costs_during_rct_period_2024 / 100000)",
    "expected": 130491.8331
@@ -1111,7 +1111,7 @@
    "id": "units_of_values_from_costs_averted",
    "label": "Units of values from costs averted",
    "section": "cea",
-   "formula": "dalys_averted * units_of_value_costs_averted_per_daly_averted * subjective_adjustment_for_units_of_value_costs_averted_compa",
+   "formula": "medical_costs_averted_dalys_averted * units_of_value_costs_averted_per_daly_averted * subjective_adjustment_for_units_of_value_costs_averted_compa",
    "expected": 18703.8294
   },
   {
@@ -1144,8 +1144,8 @@
    "format": "percent"
   },
   {
-   "id": "excluded_effects_estimated_cost_effectiveness_of_program_dur",
-   "label": "Excluded effects (Estimated cost-effectiveness of program during RCT period)",
+   "id": "additional_upside_and_downside_adjustments_excluded_effects",
+   "label": "Additional upside and downside adjustments: Excluded effects (Estimated cost-effectiveness of program during RCT period)",
    "section": "simple_cea",
    "formula": "1 + total_adjustment_factor_for_excluded_effects",
    "expected": 1.004724438
@@ -1227,8 +1227,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo",
-   "label": "NGO",
+   "id": "total_expenditure_attributable_to_different_actors_ngo",
+   "label": "Total expenditure attributable to different actors:: NGO",
    "section": "cea",
    "formula": "cost_to_ngo_program_costs_during_rct_period_2024",
    "expected": 4402150.0,
@@ -1251,7 +1251,7 @@
    "id": "other_philanthropic_actors_3",
    "label": "Other philanthropic actors",
    "section": "cea",
-   "formula": "-sum(ngo) * scenario_2_other_philanthropic_actors_would_replace_philanth_2",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo) * scenario_2_other_philanthropic_actors_would_replace_philanth_2",
    "expected": -4402150.0,
    "format": "usd"
   },
@@ -1313,7 +1313,7 @@
    "id": "government_financial_costs_2",
    "label": "Government financial costs",
    "section": "cea",
-   "formula": "-sum(ngo) * scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo) * scenario_1_government_costs_would_replace_philanthropic_cost_2",
    "expected": -3521720.0,
    "format": "usd"
   },
@@ -1377,8 +1377,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government",
-   "label": "Domestic government",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government",
    "section": "cea",
    "formula": "cost_to_government_program_costs_during_rct_period_2024",
    "expected": 0.0,
@@ -1388,7 +1388,7 @@
    "id": "government_in_kind_costs_4",
    "label": "Government in-kind costs",
    "section": "cea",
-   "formula": "domestic_government",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1400,8 +1400,8 @@
    "expected": 0.0
   },
   {
-   "id": "total",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total",
+   "label": "Expected $ crowded in (out): Total",
    "section": "cea",
    "formula": "sum(other_philanthropic_actors, government_financial_costs, government_in_kind_costs)",
    "expected": -396193.5,
@@ -1434,8 +1434,8 @@
    "expected": 0.0154
   },
   {
-   "id": "domestic_government_2",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government",
    "section": "cea",
    "value": 0.0056,
    "kind": "estimate",
@@ -1449,21 +1449,21 @@
    "id": "government_financial_costs_5",
    "label": "Government financial costs",
    "section": "cea",
-   "formula": "domestic_government_2",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_5",
    "label": "Government in-kind costs",
    "section": "cea",
-   "formula": "domestic_government_2",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "cea",
-   "formula": "product(total, units_of_value_generated_per_dollar_spent) - sum(other_philanthropic_actors_6 * other_philanthropic_actors, government_financial_costs_5 * government_financial_costs, government_in_kind_costs_5 * government_in_kind_costs)",
+   "formula": "product(expected_crowded_in_out_total, units_of_value_generated_per_dollar_spent) - sum(other_philanthropic_actors_6 * other_philanthropic_actors, government_financial_costs_5 * government_financial_costs, government_in_kind_costs_5 * government_in_kind_costs)",
    "expected": -18126.47141
   },
   {
@@ -1560,8 +1560,8 @@
    "format": "percent"
   },
   {
-   "id": "optimism_adjustment_program_costs_during_rct_period_2024_2",
-   "label": "Optimism adjustment (Program costs during RCT period; 2024)",
+   "id": "under_5_ors_uptake_optimism_adjustment_program_costs_during_2",
+   "label": "Under-5 ORS uptake: Optimism adjustment (Program costs during RCT period; 2024)",
    "section": "no_leverage_cea",
    "formula": "share_of_children_reached_in_wagner_et_al_2019_program_costs_2",
    "expected": 0.605,
@@ -1571,7 +1571,7 @@
    "id": "share_of_children_reached_in_rct_program_program_costs_durin_2",
    "label": "Share of children reached in RCT/program (Program costs during RCT period; 2024)",
    "section": "no_leverage_cea",
-   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri_2 * optimism_adjustment_program_costs_during_rct_period_2024_2",
+   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri_2 * under_5_ors_uptake_optimism_adjustment_program_costs_during_2",
    "expected": 0.605,
    "format": "percent"
   },
@@ -1899,8 +1899,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted_2",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted_2",
+   "label": "Medical costs averted: DALYs averted",
    "section": "no_leverage_cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_2 * estimated_morbidity_reduction_2 * (total_5_population_program_costs_during_rct_period_2024_3 / 100000)",
    "expected": 130491.8331
@@ -1929,7 +1929,7 @@
    "id": "units_of_values_from_costs_averted_2",
    "label": "Units of values from costs averted",
    "section": "no_leverage_cea",
-   "formula": "dalys_averted_2 * units_of_value_costs_averted_per_daly_averted_2 * subjective_adjustment_for_units_of_value_costs_averted_compa_2",
+   "formula": "medical_costs_averted_dalys_averted_2 * units_of_value_costs_averted_per_daly_averted_2 * subjective_adjustment_for_units_of_value_costs_averted_compa_2",
    "expected": 18703.8294
   },
   {
@@ -2038,8 +2038,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo_2",
-   "label": "NGO",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_2",
+   "label": "Total expenditure attributable to different actors:: NGO",
    "section": "no_leverage_cea",
    "formula": "cost_to_ngo_program_costs_during_rct_period_2024_2",
    "expected": 4402150.0,
@@ -2062,7 +2062,7 @@
    "id": "other_philanthropic_actors_10",
    "label": "Other philanthropic actors",
    "section": "no_leverage_cea",
-   "formula": "-sum(ngo_2) * scenario_2_other_philanthropic_actors_would_replace_philanth_4",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_2) * scenario_2_other_philanthropic_actors_would_replace_philanth_4",
    "expected": -4402150.0,
    "format": "usd"
   },
@@ -2124,7 +2124,7 @@
    "id": "government_financial_costs_7",
    "label": "Government financial costs",
    "section": "no_leverage_cea",
-   "formula": "-sum(ngo_2) * scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_2) * scenario_1_government_costs_would_replace_philanthropic_cost_4",
    "expected": -3521720.0,
    "format": "usd"
   },
@@ -2188,8 +2188,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_3",
-   "label": "Domestic government",
+   "id": "total_expenditure_attributable_to_different_actors_domestic_2",
+   "label": "Total expenditure attributable to different actors:: Domestic government",
    "section": "no_leverage_cea",
    "formula": "cost_to_government_program_costs_during_rct_period_2024_2",
    "expected": 0.0,
@@ -2199,7 +2199,7 @@
    "id": "government_in_kind_costs_9",
    "label": "Government in-kind costs",
    "section": "no_leverage_cea",
-   "formula": "domestic_government_3",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic_2",
    "expected": 0.0,
    "format": "usd"
   },
@@ -2211,8 +2211,8 @@
    "expected": 0.0
   },
   {
-   "id": "total_2",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total_2",
+   "label": "Expected $ crowded in (out): Total",
    "section": "no_leverage_cea",
    "formula": "sum(other_philanthropic_actors_8, government_financial_costs_6, government_in_kind_costs_6)",
    "expected": -396193.5,
@@ -2245,8 +2245,8 @@
    "expected": 0.0154
   },
   {
-   "id": "domestic_government_4",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government",
    "section": "no_leverage_cea",
    "value": 0.0056,
    "kind": "estimate",
@@ -2260,21 +2260,21 @@
    "id": "government_financial_costs_10",
    "label": "Government financial costs",
    "section": "no_leverage_cea",
-   "formula": "domestic_government_4",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_10",
    "label": "Government in-kind costs",
    "section": "no_leverage_cea",
-   "formula": "domestic_government_4",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging_2",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "no_leverage_cea",
-   "formula": "product(total_2, units_of_value_generated_per_dollar_spent_2) - sum(other_philanthropic_actors_13 * other_philanthropic_actors_8, government_financial_costs_10 * government_financial_costs_6, government_in_kind_costs_10 * government_in_kind_costs_6)",
+   "formula": "product(expected_crowded_in_out_total_2, units_of_value_generated_per_dollar_spent_2) - sum(other_philanthropic_actors_13 * other_philanthropic_actors_8, government_financial_costs_10 * government_financial_costs_6, government_in_kind_costs_10 * government_in_kind_costs_6)",
    "expected": -18126.47141
   },
   {
@@ -2385,8 +2385,8 @@
    "format": "percent"
   },
   {
-   "id": "optimism_adjustment_program_costs_during_rct_period_2024_3",
-   "label": "Optimism adjustment (Program costs during RCT period; 2024)",
+   "id": "under_5_ors_uptake_optimism_adjustment_program_costs_during_3",
+   "label": "Under-5 ORS uptake: Optimism adjustment (Program costs during RCT period; 2024)",
    "section": "no_funging_cea",
    "formula": "share_of_children_reached_in_wagner_et_al_2019_program_costs_3",
    "expected": 0.605,
@@ -2396,7 +2396,7 @@
    "id": "share_of_children_reached_in_rct_program_program_costs_durin_3",
    "label": "Share of children reached in RCT/program (Program costs during RCT period; 2024)",
    "section": "no_funging_cea",
-   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri_3 * optimism_adjustment_program_costs_during_rct_period_2024_3",
+   "formula": "share_of_children_targeted_in_rct_program_program_costs_duri_3 * under_5_ors_uptake_optimism_adjustment_program_costs_during_3",
    "expected": 0.605,
    "format": "percent"
   },
@@ -2724,8 +2724,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted_3",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted_3",
+   "label": "Medical costs averted: DALYs averted",
    "section": "no_funging_cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_3 * estimated_morbidity_reduction_3 * (total_5_population_program_costs_during_rct_period_2024_5 / 100000)",
    "expected": 130491.8331
@@ -2754,7 +2754,7 @@
    "id": "units_of_values_from_costs_averted_3",
    "label": "Units of values from costs averted",
    "section": "no_funging_cea",
-   "formula": "dalys_averted_3 * units_of_value_costs_averted_per_daly_averted_3 * subjective_adjustment_for_units_of_value_costs_averted_compa_3",
+   "formula": "medical_costs_averted_dalys_averted_3 * units_of_value_costs_averted_per_daly_averted_3 * subjective_adjustment_for_units_of_value_costs_averted_compa_3",
    "expected": 18703.8294
   },
   {
@@ -2863,8 +2863,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo_3",
-   "label": "NGO",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_3",
+   "label": "Total expenditure attributable to different actors:: NGO",
    "section": "no_funging_cea",
    "formula": "cost_to_ngo_program_costs_during_rct_period_2024_3",
    "expected": 4402150.0,
@@ -2887,7 +2887,7 @@
    "id": "other_philanthropic_actors_17",
    "label": "Other philanthropic actors",
    "section": "no_funging_cea",
-   "formula": "-sum(ngo_3) * scenario_2_other_philanthropic_actors_would_replace_philanth_6",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_3) * scenario_2_other_philanthropic_actors_would_replace_philanth_6",
    "expected": -4402150.0,
    "format": "usd"
   },
@@ -2949,7 +2949,7 @@
    "id": "government_financial_costs_12",
    "label": "Government financial costs",
    "section": "no_funging_cea",
-   "formula": "-sum(ngo_3) * scenario_1_government_costs_would_replace_philanthropic_cost_6",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_3) * scenario_1_government_costs_would_replace_philanthropic_cost_6",
    "expected": -3521720.0,
    "format": "usd"
   },
@@ -3013,8 +3013,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_5",
-   "label": "Domestic government",
+   "id": "total_expenditure_attributable_to_different_actors_domestic_3",
+   "label": "Total expenditure attributable to different actors:: Domestic government",
    "section": "no_funging_cea",
    "formula": "cost_to_government_program_costs_during_rct_period_2024_3",
    "expected": 0.0,
@@ -3024,7 +3024,7 @@
    "id": "government_in_kind_costs_14",
    "label": "Government in-kind costs",
    "section": "no_funging_cea",
-   "formula": "domestic_government_5",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic_3",
    "expected": 0.0,
    "format": "usd"
   },
@@ -3036,8 +3036,8 @@
    "expected": 0.0
   },
   {
-   "id": "total_3",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total_3",
+   "label": "Expected $ crowded in (out): Total",
    "section": "no_funging_cea",
    "formula": "sum(other_philanthropic_actors_15, government_financial_costs_11, government_in_kind_costs_11)",
    "expected": 0.0,
@@ -3070,8 +3070,8 @@
    "expected": 0.0154
   },
   {
-   "id": "domestic_government_6",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_3",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government",
    "section": "no_funging_cea",
    "value": 0.0056,
    "kind": "estimate",
@@ -3085,21 +3085,21 @@
    "id": "government_financial_costs_15",
    "label": "Government financial costs",
    "section": "no_funging_cea",
-   "formula": "domestic_government_6",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_15",
    "label": "Government in-kind costs",
    "section": "no_funging_cea",
-   "formula": "domestic_government_6",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging_3",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "no_funging_cea",
-   "formula": "product(total_3, units_of_value_generated_per_dollar_spent_3) - sum(other_philanthropic_actors_20 * other_philanthropic_actors_15, government_financial_costs_15 * government_financial_costs_11, government_in_kind_costs_15 * government_in_kind_costs_11)",
+   "formula": "product(expected_crowded_in_out_total_3, units_of_value_generated_per_dollar_spent_3) - sum(other_philanthropic_actors_20 * other_philanthropic_actors_15, government_financial_costs_15 * government_financial_costs_11, government_in_kind_costs_15 * government_in_kind_costs_11)",
    "expected": 0.0
   },
   {
@@ -3148,7 +3148,7 @@
    "id": "additional_benefits_and_adjustments_estimated_cost_effective",
    "label": "Additional benefits and adjustments (Estimated cost-effectiveness of program during RCT period)",
    "section": "simple_cea",
-   "formula": "1 / child_mortality_benefits_estimated_cost_effectiveness_of_pro * excluded_effects_estimated_cost_effectiveness_of_program_dur * downstream_costs_to_government_incurred_as_a_result_of_fundi * chance_that_other_funders_fund_similar_programs_without_us_f",
+   "formula": "1 / child_mortality_benefits_estimated_cost_effectiveness_of_pro * additional_upside_and_downside_adjustments_excluded_effects * downstream_costs_to_government_incurred_as_a_result_of_fundi * chance_that_other_funders_fund_similar_programs_without_us_f",
    "expected": 1.031519864
   },
   {

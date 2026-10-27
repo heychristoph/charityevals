@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CHAI, mSupply BOTEC and VOI, 2025 (GiveWell copy)](/clinton-health-access-initiative) | GW | March 2026 | 10× GiveDirectly (GW: 27× cash) | 163, 12 kept fixed |
+| [CHAI, mSupply BOTEC and VOI, 2025 (GiveWell copy)](/clinton-health-access-initiative) | GW | March 2026 | 10× GiveDirectly (GW: 27× cash) | 160, 12 kept fixed |
 | [MSupply RCT CEA - April 2026](/clinton-health-access-initiative/clinton-health-access-initiative-msupply-rct-april-2026) | GW | March 2026 | 0.32× GiveDirectly (GW: 0.83× cash) | 56, 5 kept fixed |
 | [CEA of Malaria RDT Procurement [CHAI, Nigeria] (July 2025)](/clinton-health-access-initiative/clinton-health-access-initiative-malaria-rdt-procurement-chai-nigeria) | GW | July 2025 | 5.2× GiveDirectly (GW: 14× cash) | 127, 1 kept fixed |
 | [Simple CEA/BOTEC of CHAI TSUs, April 2025](/clinton-health-access-initiative/clinton-health-access-initiative-chai-tsus-april-2025) | GW | April 2025 | 10× GiveDirectly (GW: 26× cash) | 38 |

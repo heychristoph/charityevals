@@ -49,8 +49,8 @@
  ],
  "rows": [
   {
-   "id": "philanthropic_actors",
-   "label": "Philanthropic actors",
+   "id": "total_expenditure_attributable_to_different_actors_philanthr",
+   "label": "Total expenditure attributable to different actors:: Philanthropic actors",
    "section": "bridges",
    "value": 3000000.0,
    "kind": "estimate",
@@ -277,10 +277,10 @@
    "format": "percent"
   },
   {
-   "id": "domestic_government",
-   "label": "Domestic government",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government",
    "section": "bridges",
-   "formula": "philanthropic_actors * (1 - percent_costs_paid_by_b2p) / percent_costs_paid_by_b2p",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr * (1 - percent_costs_paid_by_b2p) / percent_costs_paid_by_b2p",
    "expected": 2000000.0,
    "format": "usd"
   },
@@ -288,7 +288,7 @@
    "id": "government_multilaterals_2",
    "label": "Government/multilaterals",
    "section": "bridges",
-   "formula": "-domestic_government",
+   "formula": "-total_expenditure_attributable_to_different_actors_domestic",
    "expected": -2000000.0,
    "format": "usd"
   },
@@ -321,8 +321,8 @@
    "expected": 0.0
   },
   {
-   "id": "domestic_government_2",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_other_actors_units_of",
+   "label": "Counterfactual value of spending from other actors (units of value per dollar): Domestic government",
    "section": "bridges",
    "value": 0.0036095,
    "kind": "estimate",
@@ -337,7 +337,7 @@
    "id": "government_multilaterals_3",
    "label": "Government/multilaterals",
    "section": "bridges",
-   "formula": "-government_multilaterals_2 * domestic_government_2",
+   "formula": "-government_multilaterals_2 * counterfactual_value_of_spending_from_other_actors_units_of",
    "expected": 7219.0
   },
   {
@@ -371,7 +371,7 @@
    "id": "scenario_1_bridges_not_built",
    "label": "Scenario 1: Bridges not built",
    "section": "bridges",
-   "formula": "philanthropic_actors * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_1_bridges_not_built_2",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_1_bridges_not_built_2",
    "expected": 15528.79535
   },
   {
@@ -413,7 +413,7 @@
    "id": "other_philanthropic_actor_5",
    "label": "Other philanthropic actor",
    "section": "bridges",
-   "formula": "philanthropic_actors",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 3000000.0,
    "format": "usd"
   },
@@ -428,7 +428,7 @@
    "id": "government_multilaterals_6",
    "label": "Government/multilaterals",
    "section": "bridges",
-   "formula": "-government_multilaterals_5 * domestic_government_2",
+   "formula": "-government_multilaterals_5 * counterfactual_value_of_spending_from_other_actors_units_of",
    "expected": 0.0
   },
   {
@@ -449,7 +449,7 @@
    "id": "scenario_2_bridges_built",
    "label": "Scenario 2: Bridges built",
    "section": "bridges",
-   "formula": "philanthropic_actors * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_2_bridges_built_2",
+   "formula": "total_expenditure_attributable_to_different_actors_philanthr * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_2_bridges_built_2",
    "expected": 10828.5
   },
   {
@@ -461,8 +461,8 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_givewell_s_spending_overall",
+   "label": "Net units of value created by GiveWell's spending: Overall",
    "section": "bridges",
    "formula": "sum(scenario_1_bridges_not_built * scenario_1_bridges_not_built_3, scenario_2_bridges_built * scenario_2_bridges_built_3)",
    "expected": 14118.70674
@@ -471,7 +471,7 @@
    "id": "units_of_value_per",
    "label": "Units of value per $",
    "section": "bridges",
-   "formula": "overall / philanthropic_actors",
+   "formula": "net_units_of_value_created_by_givewell_s_spending_overall / total_expenditure_attributable_to_different_actors_philanthr",
    "expected": 0.004706235581
   },
   {

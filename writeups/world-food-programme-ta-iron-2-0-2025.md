@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [World Food Programme (TA) Iron CEA 2.0, 2025](/world-food-programme) | GW | March 2025 | 4.5× GiveDirectly (GW: 12× cash) | 164, 15 kept fixed |
+| [World Food Programme (TA) Iron CEA 2.0, 2025](/world-food-programme) | GW | March 2025 | 4.5× GiveDirectly (GW: 12× cash) | 177, 15 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

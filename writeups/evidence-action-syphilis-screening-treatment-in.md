@@ -19,7 +19,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 | [In-line Chlorination CEA (Evidence Action, India), 2023](/evidence-action/evidence-action-in-line-chlorination-india-2023) | GW | September 2023 | 8.3× GiveDirectly (GW: 22× cash) | 6069, 159 kept fixed |
 | [India Water Pilot Expansion BOTEC, 2023](/evidence-action/evidence-action-india-water-pilot-expansion-2023) | GW | July 2023 | 4.2× GiveDirectly (GW: 11× cash) | 24 |
 | [Cost-effectiveness of January 2023 Deworm the World Renewal Grant](/evidence-action/evidence-action-cost-effectiveness-january-2023-deworm) | GW | January 2023 | 6.0× GiveDirectly (GW: 16× cash) | 2 |
-| [Evidence Action IFA supplementation CEA [2022]](/evidence-action/evidence-action-ifa-supplementation-2022) | GW | August 2022 | 4.4× GiveDirectly (GW: 11× cash) | 329 |
+| [Evidence Action IFA supplementation CEA [2022]](/evidence-action/evidence-action-ifa-supplementation-2022) | GW | August 2022 | 4.4× GiveDirectly (GW: 11× cash) | 328 |
 | [Maternal syphilis cost-effectiveness analysis for Zambia and Cameroon](/evidence-action/evidence-action-maternal-syphilis-zambia-cameroon) | GW | July 2022 | 11× GiveDirectly (GW: 29× cash) | 119 |
 | [Water quality cost-effectiveness analysis [Nov 2022]](/evidence-action/evidence-action-water-quality-nov-2022) | GW | July 2022 | 3.2× GiveDirectly (GW: 8.5× cash) | 355, 7 kept fixed |
 | [Water quality CEA (ILC and DSW) with lower medical costs averted](/evidence-action/evidence-action-water-quality-ilc-dsw-with-lower) | GW | January 2022 | 1.9× GiveDirectly (GW: 5.0× cash) | 580, 17 kept fixed |
@@ -28,9 +28,9 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 | [Cost-effectiveness analysis of Dispensers for Safe Water based on larger effects of chlorination, 2020](/evidence-action/evidence-action-dispensers-safe-water-based-on-larger) | GW | September 2020 | 0.71× GiveDirectly (GW: 1.8× cash) | 20 |
 | [Syphilis screen and treat in pregnant women cost-effectiveness analysis](/evidence-action/evidence-action-syphilis-screen-treat-in-pregnant-women) | GW | August 2020 | 0.65× GiveDirectly | 22, 1 kept fixed |
 | [CEA of Evidence Action technical assistance to Liberia for syphilis screening and treatment](/evidence-action/evidence-action-technical-assistance-to-liberia) | GW | August 2020 | 4.6× GiveDirectly (GW: 12× cash) | 538, 20 kept fixed |
-| [Phase 2 IFA model (with updated iron supplementation model)](/evidence-action/evidence-action-phase-2-ifa-model-with-updated-iron) | GW | December 2018 | 0.38× GiveDirectly (GW: 0.99× cash) | 125, 1 kept fixed |
+| [Phase 2 IFA model (with updated iron supplementation model)](/evidence-action/evidence-action-phase-2-ifa-model-with-updated-iron) | GW | December 2018 | 0.38× GiveDirectly (GW: 0.99× cash) | 133, 1 kept fixed |
 | [Rough cost-effectiveness analysis of Evidence Action Beta](/evidence-action/evidence-action-rough-beta) | GW | July 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 65, 6 kept fixed |
-| [IFA CEA for EvAc Beta India grant](/evidence-action/evidence-action-ifa-evac-beta-india) | GW | March 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 55, 1 kept fixed |
+| [IFA CEA for EvAc Beta India grant](/evidence-action/evidence-action-ifa-evac-beta-india) | GW | March 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 63, 1 kept fixed |
 | [Evidence Action India BOTEC](/evidence-action/evidence-action-india) | GW | March 2018 | 4.8× GiveDirectly (GW: 13× cash) | 14 |
 | [Quick NLS CEA calcs](/evidence-action/evidence-action-quick-nls-calcs) | GW | December 2016 | 1.9× GiveDirectly (GW: 4.9× cash) | 3 |
 
