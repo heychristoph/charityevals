@@ -8,6 +8,7 @@ import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
 import { Markdown } from "./AssumptionsPanel";
 import ViewToggle from "./ViewToggle";
+import { oneIn } from "../lib/comparables";
 import Derivation, { type Choice } from "./Derivation";
 import { TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import "./model.css";
@@ -69,8 +70,7 @@ function Tornado({ model }: { model: ResolvedModel }) {
       <figcaption id="tornado-caption">
         <h2>What drives this result</h2>
         <p className="muted small">
-          Each bar moves one input from the low to the high end of its range, holding the rest at their central values. {log ? "Log" : "Linear"} scale,
-          {cmp ? " as a multiple of GiveDirectly." : ` in ${lib.assumptions.units[model.output!.unit].label} per dollar.`} Dashed line: central estimate.
+          Each bar: the result as one input moves across its range. {log ? "Log" : "Linear"} scale{cmp ? ", × GiveDirectly" : ""}.
         </p>
       </figcaption>
       <div className="t-chart" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
@@ -109,8 +109,7 @@ function Tornado({ model }: { model: ResolvedModel }) {
           <span className="kind-dot kind-judgment" /> judgment or shared assumption
         </p>
         <p>
-          Shows the {rows.length} inputs that move the result most. Ranges come from the source where it gives them; explainers say
-          when a range is ours.{model.source && <> Source: charityevals model of {model.source.publisher}, {model.source.title}.</>}
+          The {rows.length} inputs that move the result most.
         </p>
       </div>
     </figure>
@@ -123,6 +122,7 @@ function RowValue({ row, value, view, evaluatorName }: { row: ResolvedRow; value
   return (
     <>
       <span className="v-main num">{formatValue(value, row.format)}</span>
+      {oneIn(row.label, value) && <span className="v-odds small muted">{oneIn(row.label, value)}</span>}
       {row.range && (
         <span className="v-range small muted num" title={row.range.note}>
           {formatValue(row.range.low, row.format)} – {formatValue(row.range.high, row.format)}
@@ -223,17 +223,31 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
   const values = useMemo(() => compute(lib, model, av, {}, r.view), [model, av, r.view]);
   const onPath = useMemo(() => rowsFeeding(model), [model]);
   const [open, setOpen] = useState<Set<string>>(new Set());
+  // The full table is long (up to thousands of rows), so it opens on request or when a link points
+  // at one of its rows; the derivation above is the reading path.
+  const [tableShown, setTableShown] = useState(false);
+  const [scrollTo, setScrollTo] = useState<string>();
   const unit = lib.assumptions.units[model.output!.unit];
 
   useEffect(() => {
     const openHash = () => {
       const h = decodeURIComponent(location.hash);
-      if (h.startsWith("#row-")) setOpen((o) => new Set(o).add(h.slice(5)));
+      if (h.startsWith("#row-")) {
+        setTableShown(true);
+        setOpen((o) => new Set(o).add(h.slice(5)));
+        setScrollTo(h.slice(1));
+      }
     };
     openHash();
     window.addEventListener("hashchange", openHash);
     return () => window.removeEventListener("hashchange", openHash);
   }, []);
+
+  useEffect(() => {
+    if (!scrollTo) return;
+    document.getElementById(scrollTo)?.scrollIntoView({ block: "center" });
+    setScrollTo(undefined);
+  }, [scrollTo, tableShown]);
 
   const toggle = (rid: string) => setOpen((o) => {
     const n = new Set(o);
@@ -247,9 +261,7 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
         <div className="view-bar">
           <ViewToggle evaluatorName={model.evaluator.name} />
           <p className="view-note">
-            {r.view === "evaluator"
-              ? `${model.evaluator.name}'s model as published: their moral weights and accounting, with our exchange rates between causes so it can be compared.`
-              : `Our model: ${model.evaluator.name}'s analysis plus your assumptions and our accounting adjustments (salary sacrifice, credit for shared outcomes).`}
+            {r.view === "evaluator" ? `As ${model.evaluator.name} published it.` : `${model.evaluator.name}'s analysis, with your assumptions.`}
           </p>
         </div>
       )}
@@ -270,8 +282,9 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
             </div>
           </div>
           <p className="small muted">
-            Joint low {formatMultiple(r.low)}, joint high {formatMultiple(r.high)}. In its own unit:{" "}
-            <span className="num">{formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")}</span> {unit.label} per dollar.{" "}
+            <span title={`${formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")} ${unit.label} per dollar`}>
+              Plausible range {formatMultiple(r.low)} to {formatMultiple(r.high)}.
+            </span>{" "}
             <a href="#your-assumptions" className="jump">Change your assumptions</a>
           </p>
         </section>
@@ -281,8 +294,7 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
             <span className="bl-figure num">{formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")}</span> {unit.label} per dollar
           </h2>
           <p className="small muted">
-            Range {formatValue(r.low, "number")} – {formatValue(r.high, "number")}. Not ranked against other charities: the evaluator reports
-            this in {unit.label}, and there is no defensible exchange rate between that and good done elsewhere.{" "}
+            Range {formatValue(r.low, "number")} to {formatValue(r.high, "number")}. Not ranked: there's no exchange rate between {unit.label} and other good done.{" "}
             <a href="#your-assumptions" className="jump">Change your assumptions</a>
           </p>
         </section>
@@ -311,14 +323,21 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
         <div className="mt-head">
           <h2 id="model-table-title">The model, row by row</h2>
           <div className="mt-actions small">
-            <button type="button" className="link-button" onClick={() => setOpen(new Set(model.rows.map((x) => x.id)))}>Expand all</button>
-            <button type="button" className="link-button" onClick={() => setOpen(new Set())}>Collapse all</button>
+            {tableShown ? (
+              <>
+                <button type="button" className="link-button" onClick={() => setOpen(new Set(model.rows.map((x) => x.id)))}>Expand all</button>
+                <button type="button" className="link-button" onClick={() => setOpen(new Set())}>Collapse all</button>
+                <button type="button" className="link-button" onClick={() => setTableShown(false)}>Hide table</button>
+              </>
+            ) : (
+              <button type="button" className="link-button" aria-expanded={false} onClick={() => setTableShown(true)}>
+                Show all {model.rows.length.toLocaleString("en-US")} rows
+              </button>
+            )}
           </div>
         </div>
-        <p className="muted small">
-          Click any row for its explanation, source and formula. Formulas link to the rows they use. Values update with your assumptions.
-        </p>
-        <table className="m-table">
+        <p className="muted small">Every number with its source, explanation and formula.</p>
+        {tableShown && <table className="m-table">
           <colgroup><col /><col className="c-value" /><col className="c-kind" /></colgroup>
           <thead className="visually-hidden">
             <tr><th scope="col">Row</th><th scope="col">Value</th><th scope="col">Kind</th></tr>
@@ -341,7 +360,7 @@ export default function ModelView({ id, raw, choices = [], children }: { id: str
               </tbody>
             );
           })}
-        </table>
+        </table>}
       </section>
     </div>
   );

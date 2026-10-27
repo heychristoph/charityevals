@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { AlertTriangle } from "lucide-react";
 import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
-import { formatMultiple, formatValue } from "../lib/format";
+import { formatMultiple } from "../lib/format";
 import { DOMAIN, TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import ViewToggle from "./ViewToggle";
 import "./rankings.css";
@@ -49,14 +49,12 @@ export default function Rankings() {
       <div className="view-bar">
         <ViewToggle />
         <p className="view-note">
-          {view === "evaluator"
-            ? "Each charity as its evaluators published it (GiveWell, ACE, HLI), compared with our exchange rates between causes."
-            : "Our models: the evaluators' analyses plus your assumptions and our accounting adjustments."}
+          {view === "evaluator" ? "As the evaluators published them." : "The evaluators' analyses, with your assumptions."}
         </p>
       </div>
       <figcaption id="rankings-caption" className="rankings-caption">
-        <strong>Good done per dollar, as a multiple of GiveDirectly</strong>
-        <span className="muted"> · each evaluator's central estimate (dot) with joint low to joint high (bar), log scale. Where several evaluators model a charity, the row sits at their geometric mean.</span>
+        <strong>Good done per dollar, × GiveDirectly</strong>
+        <span className="muted"> · dot: best estimate, bar: plausible range</span>
       </figcaption>
 
       <div className="r-axis" aria-hidden>
@@ -119,20 +117,13 @@ export default function Rankings() {
               </div>
 
               <div className="r-foot small">
-                <span className="muted num">
-                  {r.models.map((x, k) => {
-                    const unit = lib.assumptions.units[x.model.output!.unit];
-                    return `${multi ? owners[k].short + ": " : ""}${formatValue(x.native, Math.abs(x.native) < 0.1 ? "small" : "number")} ${unit.short} per dollar`;
-                  }).join(" · ")}
-                </span>
                 {c.donate && <a href={c.donate} rel="noopener" className="r-donate">Donate</a>}
                 {warns.length > 0 && (
-                  <span className="r-flags">
+                  <a className="r-flags" href={`/${c.id}#flags`} title={warns.join(", ")}>
                     <AlertTriangle size={14} aria-hidden />
-                    <a href={`/${c.id}#flags`}>
-                      {warns.length} {warns.length === 1 ? "flag" : "flags"}: {warns.join(", ")}
-                    </a>
-                  </span>
+                    {warns.length} {warns.length === 1 ? "caveat" : "caveats"}
+                    <span className="visually-hidden">: {warns.join(", ")}</span>
+                  </a>
                 )}
               </div>
             </li>

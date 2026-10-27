@@ -55,6 +55,20 @@ import Base from "../layouts/Base.astro";
       A model is flagged when its joint range spans more than 100×, when more than half of its uncertainty comes from judgment calls and shared assumptions, when inputs on the result's path have no range, or when the source analysis is more than 18 months old.
     </p>
 
+    <h2 id="imported-models">Imported models</h2>
+    <p>
+      Most models are evaluators' spreadsheets imported whole: every public model GiveWell links from its grant pages, plus
+      HLI's and ACE's (the <a href="https://github.com/heychristoph/charityevals/tree/main/inventory">inventory</a> lists
+      what we found and why anything was left out). Each sheet is traced from its bottom line, every cell it depends on
+      becomes a row, and each calculated row must reproduce the sheet's own value. A few formulas the engine can't express
+      are kept as fixed numbers, with the original formula shown.
+    </p>
+    <p>
+      Moral weights, the discount rate and the values of consumption and of a year of healthy life are then tied to the
+      shared assumptions, and statistics several sheets share live once as shared facts. Other judgment calls stay as the
+      evaluator set them, and spreadsheets without ranges give no uncertainty beyond the shared assumptions.
+    </p>
+
     <h2>What this is not</h2>
     <p>
       Not an evaluator's recommendation, and not endorsed by GiveWell, Animal Charity Evaluators or any charity listed. Cost-effectiveness is one input to a giving decision; room for more funding, organisational strength and track record matter too and are not modelled here yet.
