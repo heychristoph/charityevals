@@ -1,8 +1,9 @@
 // The site is static: Cloudflare serves dist/ directly. This Worker only runs for /api/* (see
-// run_worker_first in wrangler.jsonc) and handles one thing: the "suggest a charity" form, emailed
-// to hello@charityevals.org. The SUGGESTIONS binding can only send to that address.
+// run_worker_first in wrangler.jsonc) and handles one thing: the "suggest a charity" form. It is sent
+// through Email Routing, which only delivers to the account's verified destination addresses: the
+// secret SUGGEST_TO, the inbox hello@charityevals.org forwards to.
 
-const TO = "hello@charityevals.org";
+const CONTACT = "hello@charityevals.org";
 const FROM = { email: "forms@charityevals.org", name: "charityevals suggestions" };
 const MAX_BODY = 20_000;
 const MIN_FILL_MS = 3_000; // bots post instantly; people take longer than this to fill the form in
@@ -55,9 +56,13 @@ async function suggest(request: Request, env: Env): Promise<Response> {
     "",
     fields.why || "(no note)",
   ];
+  if (!env.SUGGEST_TO) {
+    console.error("SUGGEST_TO is not set: run `wrangler secret put SUGGEST_TO`");
+    return reply(503, { ok: false, error: `The form isn't set up yet. Please email ${CONTACT} instead.` });
+  }
   try {
     await env.SUGGESTIONS.send({
-      to: TO,
+      to: env.SUGGEST_TO,
       from: FROM,
       subject: `Charity suggestion: ${fields.charity.slice(0, 120)}`,
       text: lines.join("\n"),
@@ -66,7 +71,7 @@ async function suggest(request: Request, env: Env): Promise<Response> {
     });
   } catch (e) {
     console.error("suggestion email failed", (e as { code?: string }).code, (e as Error).message);
-    return reply(502, { ok: false, error: `It didn't send. Please email ${TO} instead.` });
+    return reply(502, { ok: false, error: `It didn't send. Please email ${CONTACT} instead.` });
   }
   return reply(200, { ok: true });
 }
