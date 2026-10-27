@@ -1,7 +1,7 @@
 ---
 // A model's change history, rebuilt from git at build time.
 import Base from "../layouts/Base.astro";
-import { lib, modelUrl } from "../lib/data";
+import { lib, modelUrl, modelFile } from "../lib/data";
 import { modelHistory } from "../lib/history";
 import { formatMultiple } from "../lib/format";
 
@@ -9,7 +9,7 @@ interface Props {
   modelId: string;
 }
 const model = lib.models.get(Astro.props.modelId)!;
-const fileOf = (id: string) => `models/${lib.models.get(id)!.cause}/${id}.json`;
+const fileOf = (id: string) => modelFile(lib.models.get(id)!);
 const files = [...model.chain.map(fileOf), `writeups/${model.id}.md`];
 const entries = modelHistory(__REPO_ROOT__, model, files);
 const newestFirst = [...entries].reverse();

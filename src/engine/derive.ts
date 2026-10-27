@@ -48,6 +48,31 @@ export function resolveAlias(m: ResolvedModel, rowId: string): { id: string; via
   return { id, via };
 }
 
+const PREC: Record<string, number> = { "=": 0, "<>": 0, "<": 0, ">": 0, "<=": 0, ">=": 0, "+": 1, "-": 1, "*": 2, "/": 2, "^": 4 };
+
+/** Whether an operand needs parentheses to keep its meaning, by its parent's operator and its side:
+ * a ÷ (b × c) and a − (b + c) need them, a × b × c doesn't, and neither does b × c on the left of ÷;
+ * the left side of a power does, (a × b)^c. */
+export function needsParens(n: Node, parent: string | undefined, right: boolean): boolean {
+  if (n.type !== "bin" || !parent) return false;
+  const p = PREC[n.op], q = PREC[parent];
+  return p < q || (p === q && (right ? parent === "-" || parent === "/" : parent === "^"));
+}
+
+/** A formula as text with the same grouping the derivation shows; parses back to the same formula. */
+export function formulaText(n: Node, parent?: string, right = false): string {
+  switch (n.type) {
+    case "num": return String(n.value);
+    case "ref": return n.scope === "assumption" ? `$${n.name}` : n.scope === "fact" ? `@${n.name}` : n.name;
+    case "neg": return `-${formulaText(n.arg, "*", true)}`;
+    case "call": return `${n.fn}(${n.args.map((a) => formulaText(a)).join(", ")})`;
+    case "bin": {
+      const s = `${formulaText(n.left, n.op)} ${n.op} ${formulaText(n.right, n.op, true)}`;
+      return needsParens(n, parent, right) ? `(${s})` : s;
+    }
+  }
+}
+
 export function refsIn(n: Node, out: Ref[] = []): Ref[] {
   if (n.type === "ref") out.push({ scope: n.scope, id: n.name });
   else if (n.type === "neg") refsIn(n.arg, out);

@@ -4,7 +4,7 @@
 // shared assumption stay live, the rest is folded into numbers. The islands compute identical results
 // under any assumptions without shipping tens of megabytes. A bulk model's own page
 // passes its full rows to the island (bulkRaw).
-import { buildLibrary, comparable, modelsOf, type Library, type ResolvedModel } from "../engine/model";
+import { buildLibrary, comparable, currentModelsOf, modelsOf, type Library, type ResolvedModel } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
 
@@ -45,6 +45,11 @@ export function modelUrl(lib: Library, m: ResolvedModel): string {
   return primaryOf(lib, m.charity)?.id === m.id ? `/${m.charity}` : `/${m.charity}/${m.id}`;
 }
 
+/** The model's file in the repo: bulk imports live under models/grants/<owner>/. */
+export function modelFile(m: ResolvedModel): string {
+  return m.bulk ? `models/grants/${m.owner}/${m.id}.json` : `models/${m.cause}/${m.id}.json`;
+}
+
 export function historyUrl(lib: Library, m: ResolvedModel): string {
   return `${modelUrl(lib, m)}/history`;
 }
@@ -57,5 +62,6 @@ export const unrankedCharities = [...lib.charities.values()].filter(
   (c) => modelsOf(lib, c.id).length > 0 && !modelsOf(lib, c.id).some((m) => comparable(lib, m)),
 );
 
-/** One comparable main model per ranked charity, for rank-flip checks. */
-export const ranked = rankedCharities.map((c) => modelsOf(lib, c.id).find((m) => comparable(lib, m))!);
+/** Each ranked charity's models that set its place on the rankings (one per evaluator), for
+ * rank-flip checks. */
+export const rankedGroups = rankedCharities.map((c) => currentModelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => m.id));

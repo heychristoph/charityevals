@@ -37,29 +37,39 @@ function Formula({ text, model }: { text: string; model: ResolvedModel }) {
 function Tornado({ model }: { model: ResolvedModel }) {
   const r = useResultFor(model);
   const cmp = comparable(lib, model);
-  const fmt = (v: number) => (cmp ? formatMultiple(v) : formatValue(v, Math.abs(v) < 0.1 ? "small" : "number"));
+  const fmt = (v: number) => (cmp ? formatMultiple(v) : v === 0 ? "0" : formatValue(v, Math.abs(v) < 0.1 ? "small" : "number"));
   const bench = r.s.central / r.central;
   const rows = r.s.swings.slice(0, 8);
   const lo = Math.min(r.low, ...rows.map((s) => Math.min(s.atLow, s.atHigh) / bench));
   const hi = Math.max(r.high, ...rows.map((s) => Math.max(s.atLow, s.atHigh) / bench));
-  const [a, b] = [Math.log10(lo) - 0.05, Math.log10(hi) + 0.05];
-  const xn = (v: number) => ((Math.log10(v) - a) / (b - a)) * 100;
+  // Log scale when every value is positive. Some unranked models (animals spared per dollar) run
+  // negative at their low end, and a log scale can't show those: they get a linear scale instead.
+  const log = lo > 0 && hi > 0;
+  const [a, b] = log ? [Math.log10(lo) - 0.05, Math.log10(hi) + 0.05] : [lo - (hi - lo) * 0.05, hi + (hi - lo) * 0.05 || 1];
+  const xn = (v: number) => (((log ? Math.log10(v) : v) - a) / (b - a)) * 100;
   const x = (v: number) => pctStr(xn(v));
-  // Gridlines at each power of ten, plus 2× and 5× steps when the range spans little more than a decade.
-  const steps = b - a < 1.5 ? [1, 2, 5] : [1];
   const decades: number[] = [];
-  for (let d = Math.floor(a); d <= Math.ceil(b); d++)
-    for (const m of steps) {
-      const v = m * 10 ** d;
-      if (Math.log10(v) >= a && Math.log10(v) <= b) decades.push(v);
-    }
+  if (log) {
+    // Gridlines at each power of ten, plus 2× and 5× steps when the range spans little more than a decade.
+    const steps = b - a < 1.5 ? [1, 2, 5] : [1];
+    for (let d = Math.floor(a); d <= Math.ceil(b); d++)
+      for (const m of steps) {
+        const v = m * 10 ** d;
+        if (Math.log10(v) >= a && Math.log10(v) <= b) decades.push(v);
+      }
+  } else {
+    // Round steps (1, 2 or 5 times a power of ten), about five across, always including zero when in range.
+    const raw = (b - a) / 5, p = 10 ** Math.floor(Math.log10(raw));
+    const step = [1, 2, 5, 10].map((m) => m * p).find((s) => s >= raw)!;
+    for (let v = Math.ceil(a / step) * step; v <= b; v += step) decades.push(Math.abs(v) < step / 1e6 ? 0 : v);
+  }
 
   return (
     <figure className="tornado" aria-labelledby="tornado-caption">
       <figcaption id="tornado-caption">
         <h2>What drives this result</h2>
         <p className="muted small">
-          Each bar moves one input from the low to the high end of its range, holding the rest at their central values. Log scale,
+          Each bar moves one input from the low to the high end of its range, holding the rest at their central values. {log ? "Log" : "Linear"} scale,
           {cmp ? " as a multiple of GiveDirectly." : ` in ${lib.assumptions.units[model.output!.unit].label} per dollar.`} Dashed line: central estimate.
         </p>
       </figcaption>
