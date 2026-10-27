@@ -959,8 +959,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted",
+   "label": "Medical costs averted: DALYs averted",
    "section": "cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children * estimated_morbidity_reduction",
    "expected": 2150.431303
@@ -995,7 +995,7 @@
    "id": "units_of_values_from_costs_averted",
    "label": "Units of values from costs averted",
    "section": "cea",
-   "formula": "dalys_averted * units_of_value_costs_averted_per_daly_averted * subjective_adjustment_for_units_of_value_costs_averted_compa",
+   "formula": "medical_costs_averted_dalys_averted * units_of_value_costs_averted_per_daly_averted * subjective_adjustment_for_units_of_value_costs_averted_compa",
    "expected": 308.2284868
   },
   {
@@ -1006,8 +1006,8 @@
    "expected": 4685.841133
   },
   {
-   "id": "development_effects_low_sdi",
-   "label": "Development effects (Low SDI)",
+   "id": "benefit_streams_of_total_development_effects_low_sdi",
+   "label": "Benefit streams (% of total): Development effects (Low SDI)",
    "section": "simple_cea",
    "formula": "units_of_value_from_development_effects_generated_by_hypothe / total_units_of_value_generated",
    "expected": 0.07158241233,
@@ -1025,7 +1025,7 @@
    "id": "child_mortality_benefits_low_sdi",
    "label": "Child mortality benefits (Low SDI)",
    "section": "simple_cea",
-   "formula": "1 - sum(development_effects_low_sdi, medical_costs_averted_low_sdi)",
+   "formula": "1 - sum(benefit_streams_of_total_development_effects_low_sdi, medical_costs_averted_low_sdi)",
    "expected": 0.8626388986,
    "format": "percent"
   },
@@ -1044,8 +1044,8 @@
    "format": "percent"
   },
   {
-   "id": "excluded_effects_low_sdi",
-   "label": "Excluded effects (Low SDI)",
+   "id": "additional_upside_and_downside_adjustments_excluded_effects",
+   "label": "Additional upside and downside adjustments: Excluded effects (Low SDI)",
    "section": "simple_cea",
    "formula": "1 + total_adjustment_factor_for_excluded_effects",
    "expected": 1.011415788
@@ -1135,8 +1135,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo_low_sdi",
-   "label": "NGO (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_low_s",
+   "label": "Total expenditure attributable to different actors:: NGO (Low SDI)",
    "section": "inputs",
    "formula": "cost_to_ngo_low_sdi",
    "expected": 178473.5667,
@@ -1159,7 +1159,7 @@
    "id": "other_philanthropic_actors_4",
    "label": "Other philanthropic actors",
    "section": "inputs",
-   "formula": "-sum(ngo_low_sdi) * scenario_2_other_philanthropic_actors_would_replace_philanth_2",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s) * scenario_2_other_philanthropic_actors_would_replace_philanth_2",
    "expected": -178473.5667,
    "format": "usd"
   },
@@ -1229,7 +1229,7 @@
    "id": "government_financial_costs_3",
    "label": "Government financial costs",
    "section": "inputs",
-   "formula": "-sum(ngo_low_sdi) * scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s) * scenario_1_government_costs_would_replace_philanthropic_cost_2",
    "expected": -142778.8533,
    "format": "usd"
   },
@@ -1301,8 +1301,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_low_sdi",
-   "label": "Domestic government (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government (Low SDI)",
    "section": "inputs",
    "formula": "cost_to_government_low_sdi",
    "expected": 178473.5667,
@@ -1312,7 +1312,7 @@
    "id": "government_in_kind_costs_5",
    "label": "Government in-kind costs",
    "section": "inputs",
-   "formula": "domestic_government_low_sdi",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic",
    "expected": 178473.5667,
    "format": "usd"
   },
@@ -1332,8 +1332,8 @@
    "format": "usd"
   },
   {
-   "id": "total",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total",
+   "label": "Expected $ crowded in (out): Total",
    "section": "cea",
    "formula": "sum(other_philanthropic_actors, government_financial_costs, government_in_kind_costs)",
    "expected": 144563.589,
@@ -1366,8 +1366,8 @@
    "expected": 0.0215
   },
   {
-   "id": "domestic_government",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government",
    "section": "inputs",
    "value": 0.0056,
    "kind": "estimate",
@@ -1381,21 +1381,21 @@
    "id": "government_financial_costs_6",
    "label": "Government financial costs",
    "section": "cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_6",
    "label": "Government in-kind costs",
    "section": "cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "cea",
-   "formula": "product(total, units_of_value_generated_per_dollar_spent) - sum(other_philanthropic_actors_6 * other_philanthropic_actors, government_financial_costs_6 * government_financial_costs, government_in_kind_costs_6 * government_in_kind_costs)",
+   "formula": "product(expected_crowded_in_out_total, units_of_value_generated_per_dollar_spent) - sum(other_philanthropic_actors_6 * other_philanthropic_actors, government_financial_costs_6 * government_financial_costs, government_in_kind_costs_6 * government_in_kind_costs)",
    "expected": 1251.760537
   },
   {
@@ -1773,8 +1773,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted_2",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted_2",
+   "label": "Medical costs averted: DALYs averted",
    "section": "no_leveraging_cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_2 * estimated_morbidity_reduction_2",
    "expected": 2150.431303
@@ -1809,7 +1809,7 @@
    "id": "units_of_values_from_costs_averted_2",
    "label": "Units of values from costs averted",
    "section": "no_leveraging_cea",
-   "formula": "dalys_averted_2 * units_of_value_costs_averted_per_daly_averted_2 * subjective_adjustment_for_units_of_value_costs_averted_compa_2",
+   "formula": "medical_costs_averted_dalys_averted_2 * units_of_value_costs_averted_per_daly_averted_2 * subjective_adjustment_for_units_of_value_costs_averted_compa_2",
    "expected": 308.2284868
   },
   {
@@ -2072,8 +2072,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo_low_sdi_2",
-   "label": "NGO (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_low_s_2",
+   "label": "Total expenditure attributable to different actors:: NGO (Low SDI)",
    "section": "no_leveraging_inputs",
    "formula": "cost_to_ngo_low_sdi_2",
    "expected": 178473.5667,
@@ -2096,7 +2096,7 @@
    "id": "other_philanthropic_actors_11",
    "label": "Other philanthropic actors",
    "section": "no_leveraging_inputs",
-   "formula": "-sum(ngo_low_sdi_2) * scenario_2_other_philanthropic_actors_would_replace_philanth_4",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s_2) * scenario_2_other_philanthropic_actors_would_replace_philanth_4",
    "expected": -178473.5667,
    "format": "usd"
   },
@@ -2166,7 +2166,7 @@
    "id": "government_financial_costs_9",
    "label": "Government financial costs",
    "section": "no_leveraging_inputs",
-   "formula": "-sum(ngo_low_sdi_2) * scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s_2) * scenario_1_government_costs_would_replace_philanthropic_cost_4",
    "expected": -142778.8533,
    "format": "usd"
   },
@@ -2238,8 +2238,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_low_sdi_2",
-   "label": "Domestic government (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_domestic_2",
+   "label": "Total expenditure attributable to different actors:: Domestic government (Low SDI)",
    "section": "no_leveraging_inputs",
    "formula": "cost_to_government_low_sdi_2",
    "expected": 0.0,
@@ -2249,7 +2249,7 @@
    "id": "government_in_kind_costs_11",
    "label": "Government in-kind costs",
    "section": "no_leveraging_inputs",
-   "formula": "domestic_government_low_sdi_2",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic_2",
    "expected": 0.0,
    "format": "usd"
   },
@@ -2269,8 +2269,8 @@
    "format": "usd"
   },
   {
-   "id": "total_2",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total_2",
+   "label": "Expected $ crowded in (out): Total",
    "section": "no_leveraging_cea",
    "formula": "sum(other_philanthropic_actors_8, government_financial_costs_7, government_in_kind_costs_7)",
    "expected": -16062.621,
@@ -2294,21 +2294,21 @@
    "id": "government_financial_costs_12",
    "label": "Government financial costs",
    "section": "no_leveraging_cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_12",
    "label": "Government in-kind costs",
    "section": "no_leveraging_cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging_2",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "no_leveraging_cea",
-   "formula": "product(total_2, units_of_value_generated_per_dollar_spent_2) - sum(other_philanthropic_actors_13 * other_philanthropic_actors_8, government_financial_costs_12 * government_financial_costs_7, government_in_kind_costs_12 * government_in_kind_costs_7)",
+   "formula": "product(expected_crowded_in_out_total_2, units_of_value_generated_per_dollar_spent_2) - sum(other_philanthropic_actors_13 * other_philanthropic_actors_8, government_financial_costs_12 * government_financial_costs_7, government_in_kind_costs_12 * government_in_kind_costs_7)",
    "expected": -194.7028702
   },
   {
@@ -2700,8 +2700,8 @@
    "format": "percent"
   },
   {
-   "id": "dalys_averted_3",
-   "label": "DALYs averted",
+   "id": "medical_costs_averted_dalys_averted_3",
+   "label": "Medical costs averted: DALYs averted",
    "section": "no_funging_cea",
    "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_3 * estimated_morbidity_reduction_3",
    "expected": 2150.431303
@@ -2736,7 +2736,7 @@
    "id": "units_of_values_from_costs_averted_3",
    "label": "Units of values from costs averted",
    "section": "no_funging_cea",
-   "formula": "dalys_averted_3 * units_of_value_costs_averted_per_daly_averted_3 * subjective_adjustment_for_units_of_value_costs_averted_compa_3",
+   "formula": "medical_costs_averted_dalys_averted_3 * units_of_value_costs_averted_per_daly_averted_3 * subjective_adjustment_for_units_of_value_costs_averted_compa_3",
    "expected": 308.2284868
   },
   {
@@ -3000,8 +3000,8 @@
    "format": "percent"
   },
   {
-   "id": "ngo_low_sdi_3",
-   "label": "NGO (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_low_s_3",
+   "label": "Total expenditure attributable to different actors:: NGO (Low SDI)",
    "section": "no_funging_inputs",
    "formula": "cost_to_ngo_low_sdi",
    "expected": 178473.5667,
@@ -3024,7 +3024,7 @@
    "id": "other_philanthropic_actors_17",
    "label": "Other philanthropic actors",
    "section": "no_funging_inputs",
-   "formula": "-sum(ngo_low_sdi_3) * scenario_2_other_philanthropic_actors_would_replace_philanth_6",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s_3) * scenario_2_other_philanthropic_actors_would_replace_philanth_6",
    "expected": -178473.5667,
    "format": "usd"
   },
@@ -3094,7 +3094,7 @@
    "id": "government_financial_costs_15",
    "label": "Government financial costs",
    "section": "no_funging_inputs",
-   "formula": "-sum(ngo_low_sdi_3) * scenario_1_government_costs_would_replace_philanthropic_cost_6",
+   "formula": "-sum(total_expenditure_attributable_to_different_actors_ngo_low_s_3) * scenario_1_government_costs_would_replace_philanthropic_cost_6",
    "expected": -142778.8533,
    "format": "usd"
   },
@@ -3166,8 +3166,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government_low_sdi_3",
-   "label": "Domestic government (Low SDI)",
+   "id": "total_expenditure_attributable_to_different_actors_domestic_3",
+   "label": "Total expenditure attributable to different actors:: Domestic government (Low SDI)",
    "section": "no_funging_inputs",
    "formula": "cost_to_government_low_sdi",
    "expected": 178473.5667,
@@ -3177,7 +3177,7 @@
    "id": "government_in_kind_costs_17",
    "label": "Government in-kind costs",
    "section": "no_funging_inputs",
-   "formula": "domestic_government_low_sdi_3",
+   "formula": "total_expenditure_attributable_to_different_actors_domestic_3",
    "expected": 178473.5667,
    "format": "usd"
   },
@@ -3197,8 +3197,8 @@
    "format": "usd"
   },
   {
-   "id": "total_3",
-   "label": "Total",
+   "id": "expected_crowded_in_out_total_3",
+   "label": "Expected $ crowded in (out): Total",
    "section": "no_funging_cea",
    "formula": "sum(other_philanthropic_actors_14, government_financial_costs_13, government_in_kind_costs_13)",
    "expected": 178473.5667,
@@ -3222,21 +3222,21 @@
    "id": "government_financial_costs_18",
    "label": "Government financial costs",
    "section": "no_funging_cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "government_in_kind_costs_18",
    "label": "Government in-kind costs",
    "section": "no_funging_cea",
-   "formula": "domestic_government",
+   "formula": "counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0056
   },
   {
    "id": "additional_benefit_loss_from_leverage_funging_3",
    "label": "Additional benefit (loss) from leverage/funging",
    "section": "no_funging_cea",
-   "formula": "product(total_3, units_of_value_generated_per_dollar_spent_3) - sum(other_philanthropic_actors_19 * other_philanthropic_actors_14, government_financial_costs_18 * government_financial_costs_13, government_in_kind_costs_18 * government_in_kind_costs_13)",
+   "formula": "product(expected_crowded_in_out_total_3, units_of_value_generated_per_dollar_spent_3) - sum(other_philanthropic_actors_19 * other_philanthropic_actors_14, government_financial_costs_18 * government_financial_costs_13, government_in_kind_costs_18 * government_in_kind_costs_13)",
    "expected": 1370.214878
   },
   {
@@ -3285,7 +3285,7 @@
    "id": "additional_benefits_and_adjustments_low_sdi",
    "label": "Additional benefits and adjustments (Low SDI)",
    "section": "simple_cea",
-   "formula": "1 / child_mortality_benefits_low_sdi * excluded_effects_low_sdi * downstream_costs_to_government_incurred_as_a_result_of_fundi * chance_that_other_funders_fund_similar_programs_with_us_fung",
+   "formula": "1 / child_mortality_benefits_low_sdi * additional_upside_and_downside_adjustments_excluded_effects * downstream_costs_to_government_incurred_as_a_result_of_fundi * chance_that_other_funders_fund_similar_programs_with_us_fung",
    "expected": 0.9046983032
   },
   {

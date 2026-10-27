@@ -11,8 +11,8 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [VoI BOTEC for IRC mini incubator [June 27, 2024]](/international-rescue-committee) | GW | September 2024 | 3.8× GiveDirectly (GW: 9.9× cash) | 30 |
-| [Malnutrition treatment CEA (IRC standard protocol), 2023](/international-rescue-committee/international-rescue-committee-malnutrition-treatment-irc-standard) | GW | January 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 714 |
+| [VoI BOTEC for IRC mini incubator [June 27, 2024]](/international-rescue-committee) | GW | September 2024 | 3.8× GiveDirectly (GW: 9.9× cash) | 27 |
+| [Malnutrition treatment CEA (IRC standard protocol), 2023](/international-rescue-committee/international-rescue-committee-malnutrition-treatment-irc-standard) | GW | January 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 713 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

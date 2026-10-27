@@ -20,8 +20,7 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0,
-   "discount_rate": 0.04
+   "full_credit": 0
   }
  },
  "resources": [
@@ -57,18 +56,18 @@
  ],
  "rows": [
   {
-   "id": "discount_rate_8x_bar_for_future_opportunities",
-   "label": "Discount rate (8x bar for future opportunities)",
+   "id": "what_this_is_simple_voi_botec_for_5_year_follow_up_replicati",
+   "label": "What this is: Simple VOI BOTEC for 5-year follow-up + replication RCT of Raising the Villa: Discount rate (8x bar for future opportunities)",
    "section": "voi",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
     "cell": "VOI!B12"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "See GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial",
@@ -269,22 +268,22 @@
    "id": "present_discounted_expected_value_of_increase_in_units_of_va",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (8x bar for future opportunities)",
    "section": "voi",
-   "formula": "pv(discount_rate_8x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial, -expected_increase_in_units_of_value_from_pilot_trial_per_yea)",
+   "formula": "pv(what_this_is_simple_voi_botec_for_5_year_follow_up_replicati, how_long_we_would_fund_program_if_above_bar_after_the_trial, -expected_increase_in_units_of_value_from_pilot_trial_per_yea)",
    "expected": 250429.5877
   },
   {
-   "id": "discount_rate_best_guess",
-   "label": "Discount rate (Best Guess)",
+   "id": "consumption_smoothing_value_discount_rate_best_guess",
+   "label": "Consumption smoothing value: Discount rate (Best Guess)",
    "section": "direct_delivery_botec",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
     "cell": "Direct delivery BOTEC!B32"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "See GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
+   "format": "percent"
   },
   {
    "id": "duration_of_rtv_s_effects_years_best_guess",
@@ -407,7 +406,7 @@
    "id": "present_value_of_future_log_consumption_increases_best_guess",
    "label": "Present value of future log consumption increases (Best Guess)",
    "section": "direct_delivery_botec",
-   "formula": "pv(discount_rate_best_guess, duration_of_investment_benefits_years_best_guess, -annual_increase_in_log_consumption_from_asset_returns_best_g)",
+   "formula": "pv(consumption_smoothing_value_discount_rate_best_guess, duration_of_investment_benefits_years_best_guess, -annual_increase_in_log_consumption_from_asset_returns_best_g)",
    "expected": 0.03392784347
   },
   {
@@ -481,8 +480,8 @@
    "format": "percent"
   },
   {
-   "id": "external_validity_best_guess",
-   "label": "External validity (Best Guess)",
+   "id": "consumption_smoothing_value_external_validity_best_guess",
+   "label": "Consumption smoothing value: External validity (Best Guess)",
    "section": "direct_delivery_botec",
    "value": -0.2,
    "kind": "estimate",
@@ -526,7 +525,7 @@
    "id": "log_consumption_increases_per_person_per_year_of_rtv_effects",
    "label": "Log consumption increases per person per year of RTV effects (adjusted) (Best Guess)",
    "section": "direct_delivery_botec",
-   "formula": "log_consumption_increases_per_person_per_year_of_rtv_effects_2 * (1 + internal_validity_unpublished_results_of_a_single_study_best) * (1 + external_validity_best_guess) * (1 + development_effects_co_benefits_best_guess) * (1 + spillovers_to_untreated_villages_best_guess)",
+   "formula": "log_consumption_increases_per_person_per_year_of_rtv_effects_2 * (1 + internal_validity_unpublished_results_of_a_single_study_best) * (1 + consumption_smoothing_value_external_validity_best_guess) * (1 + development_effects_co_benefits_best_guess) * (1 + spillovers_to_untreated_villages_best_guess)",
    "expected": 0.2012412676
   },
   {
@@ -550,8 +549,8 @@
    "expected": 0.2897874253
   },
   {
-   "id": "household_multiplier_best_guess",
-   "label": "Household multiplier (Best Guess)",
+   "id": "consumption_smoothing_value_household_multiplier_best_guess",
+   "label": "Consumption smoothing value: Household multiplier (Best Guess)",
    "section": "direct_delivery_botec",
    "value": 5.0,
    "kind": "estimate",
@@ -566,14 +565,14 @@
    "id": "units_of_value_per_household_per_year_of_rtv_effects_best_gu",
    "label": "Units of value per household per year of RTV effects (Best Guess)",
    "section": "direct_delivery_botec",
-   "formula": "units_of_value_per_person_per_year_of_rtv_effects_adjusted_b * household_multiplier_best_guess",
+   "formula": "units_of_value_per_person_per_year_of_rtv_effects_adjusted_b * consumption_smoothing_value_household_multiplier_best_guess",
    "expected": 1.448937127
   },
   {
    "id": "units_of_value_per_household_across_duration_of_rtv_effects",
    "label": "Units of value per household across duration of RTV effects (Best Guess)",
    "section": "direct_delivery_botec",
-   "formula": "pv(discount_rate_best_guess, duration_of_rtv_s_effects_years_best_guess, -units_of_value_per_household_per_year_of_rtv_effects_best_gu)",
+   "formula": "pv(consumption_smoothing_value_discount_rate_best_guess, duration_of_rtv_s_effects_years_best_guess, -units_of_value_per_household_per_year_of_rtv_effects_best_gu)",
    "expected": 4.020932428
   },
   {
@@ -682,18 +681,18 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate_10x_bar_for_future_opportunities",
-   "label": "Discount rate (10x bar for future opportunities)",
+   "id": "what_this_is_simple_voi_botec_for_5_year_follow_up_replicati_2",
+   "label": "What this is: Simple VOI BOTEC for 5-year follow-up + replication RCT of Raising the Villa: Discount rate (10x bar for future opportunities)",
    "section": "voi",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
     "cell": "VOI!C12"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "See GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_2",
@@ -809,7 +808,7 @@
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_2",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (10x bar for future opportunities)",
    "section": "voi",
-   "formula": "pv(discount_rate_10x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_2, -expected_increase_in_units_of_value_from_pilot_trial_per_yea_2)",
+   "formula": "pv(what_this_is_simple_voi_botec_for_5_year_follow_up_replicati_2, how_long_we_would_fund_program_if_above_bar_after_the_trial_2, -expected_increase_in_units_of_value_from_pilot_trial_per_yea_2)",
    "expected": 200343.6702
   },
   {
@@ -884,18 +883,18 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate_12x_bar_for_future_opportunities",
-   "label": "Discount rate (12x bar for future opportunities)",
+   "id": "what_this_is_simple_voi_botec_for_5_year_follow_up_replicati_3",
+   "label": "What this is: Simple VOI BOTEC for 5-year follow-up + replication RCT of Raising the Villa: Discount rate (12x bar for future opportunities)",
    "section": "voi",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
     "cell": "VOI!D12"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "See GiveWell, Cost-effectiveness analysis - Moral weights and discount rate, 2023",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_3",
@@ -1011,7 +1010,7 @@
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_3",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (12x bar for future opportunities)",
    "section": "voi",
-   "formula": "pv(discount_rate_12x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_3, -expected_increase_in_units_of_value_from_pilot_trial_per_yea_3)",
+   "formula": "pv(what_this_is_simple_voi_botec_for_5_year_follow_up_replicati_3, how_long_we_would_fund_program_if_above_bar_after_the_trial_3, -expected_increase_in_units_of_value_from_pilot_trial_per_yea_3)",
    "expected": 75128.87631
   },
   {
@@ -1135,8 +1134,8 @@
    "format": "percent"
   },
   {
-   "id": "downside_adjustment",
-   "label": "Downside adjustment",
+   "id": "ad_hoc_adjustments_downside_adjustment",
+   "label": "Ad hoc adjustments: Downside adjustment",
    "section": "voi",
    "formula": "sum(risk_that_we_learn_this_is_above_below_our_bar_and_are_wrong, risk_that_study_is_funded_without_us_in_a_few_years, benefit_from_influencing_other_funders_value_to_broader_rese)",
    "expected": -0.2,
@@ -1146,7 +1145,7 @@
    "id": "cost_effectiveness_x_cash",
    "label": "Cost-effectiveness (x cash)",
    "section": "voi",
-   "formula": "weighted_cost_effectiveness_from_value_of_information_and_pr * (1 + downside_adjustment)",
+   "formula": "weighted_cost_effectiveness_from_value_of_information_and_pr * (1 + ad_hoc_adjustments_downside_adjustment)",
    "expected": 11.97450767
   },
   {

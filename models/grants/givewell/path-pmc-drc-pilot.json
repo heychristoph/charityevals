@@ -1037,7 +1037,7 @@
   },
   {
    "id": "total_expected_number_of_pmc_doses_given_in_intervention_sce",
-   "label": "Total expected number of PMC doses given in intervention scenario (Total)",
+   "label": "Total expected number of PMC doses given in intervention scenario",
    "section": "increase_in_pmc_doses_given",
    "formula": "sum(expected_number_of_pmc_doses_covered_by_pilot_grant_total, expected_number_of_pmc_doses_covered_by_other_philanthropic)",
    "expected": 17319366.41
@@ -1251,7 +1251,7 @@
   },
   {
    "id": "total_expected_number_of_pmc_doses_given_in_counterfactual_s",
-   "label": "Total expected number of PMC doses given in counterfactual scenario (Total)",
+   "label": "Total expected number of PMC doses given in counterfactual scenario",
    "section": "increase_in_pmc_doses_given",
    "formula": "sum(expected_number_of_pmc_doses_covered_by_other_philanthropic_12)",
    "expected": 10705581.97
@@ -1697,8 +1697,8 @@
    "expected": 515082.9623
   },
   {
-   "id": "transmission_effects",
-   "label": "Transmission effects",
+   "id": "units_of_value_generated_transmission_effects",
+   "label": "Units of value generated: Transmission effects",
    "section": "summary",
    "formula": "total_units_of_value_from_mortality_reduction_among_untreate / total_units_of_value_from_mortality_reduction_among_treated_2 + 1",
    "expected": 1.005496965,
@@ -1816,8 +1816,8 @@
    "expected": 58600.48417
   },
   {
-   "id": "malaria_morbidity",
-   "label": "Malaria morbidity",
+   "id": "adjustments_for_excluded_effects_malaria_morbidity",
+   "label": "Adjustments for excluded effects: Malaria morbidity",
    "section": "supplemental_calculations",
    "value": 0.09,
    "kind": "estimate",
@@ -1881,8 +1881,8 @@
    "format": "percent"
   },
   {
-   "id": "subnational_adjustments",
-   "label": "Subnational adjustments",
+   "id": "effect_on_fertility_subnational_adjustments",
+   "label": "Effect on fertility: Subnational adjustments",
    "section": "supplemental_calculations",
    "value": 0.032,
    "kind": "estimate",
@@ -1949,7 +1949,7 @@
    "id": "total_adjustment_factor_for_excluded_effects_2",
    "label": "Total adjustment factor for excluded effects",
    "section": "supplemental_calculations",
-   "formula": "1 + sum(malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, counterfactual_mortality_rates, serious_adverse_events_due_to_side_effects_of_treatment, failure_to_ingest_drug)",
+   "formula": "1 + sum(adjustments_for_excluded_effects_malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, effect_on_fertility_subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, counterfactual_mortality_rates, serious_adverse_events_due_to_side_effects_of_treatment, failure_to_ingest_drug)",
    "expected": 1.225,
    "format": "percent"
   },
@@ -1970,8 +1970,8 @@
    "format": "percent"
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "supplemental_calculations",
    "value": 0.0,
    "kind": "estimate",
@@ -1984,8 +1984,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "supplemental_calculations",
    "value": 0.0,
    "kind": "estimate",
@@ -2015,7 +2015,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "supplemental_calculations",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -2070,8 +2070,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_for_pmc_pilot_being_used_for_intended_pu",
+   "label": "Confidence in funds for PMC pilot being used for intended purpose: Non-funding bottlenecks",
    "section": "supplemental_calculations",
    "value": 0.0,
    "kind": "estimate",
@@ -2084,8 +2084,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_for_pmc_pilot_being_used_for_intended_pu_2",
+   "label": "Confidence in funds for PMC pilot being used for intended purpose: Within-org fungibility",
    "section": "supplemental_calculations",
    "value": 0.0,
    "kind": "estimate",
@@ -2101,7 +2101,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "supplemental_calculations",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_for_pmc_pilot_being_used_for_intended_pu, confidence_in_funds_for_pmc_pilot_being_used_for_intended_pu_2)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -2122,8 +2122,8 @@
    "format": "percent"
   },
   {
-   "id": "downside_adjustments",
-   "label": "Downside adjustments",
+   "id": "units_of_value_generated_downside_adjustments",
+   "label": "Units of value generated: Downside adjustments",
    "section": "summary",
    "formula": "total_downside_adjustment_factor",
    "expected": 0.95,
@@ -2201,8 +2201,8 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_other_actors_units_of",
+   "label": "Counterfactual value of spending from other actors (units of value per dollar): Domestic government",
    "section": "detailed_cea",
    "value": 0.0051,
    "kind": "estimate",
@@ -2217,7 +2217,7 @@
    "id": "units_of_value_from_crowding_in_government_funds",
    "label": "Units of value from crowding in government funds",
    "section": "detailed_cea",
-   "formula": "total_cost_to_government_compared_to_counterfactual * domestic_government * -1",
+   "formula": "total_cost_to_government_compared_to_counterfactual * counterfactual_value_of_spending_from_other_actors_units_of * -1",
    "expected": -33730.3006
   },
   {
@@ -2238,7 +2238,7 @@
    "id": "total_units_of_value_generated_after_adjustments",
    "label": "Total units of value generated after adjustments",
    "section": "summary",
-   "formula": "(total_units_of_value_from_mortality_reduction_among_treated * transmission_effects + total_units_of_value_from_economic_benefits_per_unit_reducti) * other_excluded_effects * downside_adjustments + total_units_of_value_from_leveraging_spending_from_other_act",
+   "formula": "(total_units_of_value_from_mortality_reduction_among_treated * units_of_value_generated_transmission_effects + total_units_of_value_from_economic_benefits_per_unit_reducti) * other_excluded_effects * units_of_value_generated_downside_adjustments + total_units_of_value_from_leveraging_spending_from_other_act",
    "expected": 501121.3174
   },
   {

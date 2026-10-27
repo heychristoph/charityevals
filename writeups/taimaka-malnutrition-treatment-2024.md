@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Taimaka malnutrition treatment CEA, 2024](/taimaka) | GW | November 2024 | 3.4× GiveDirectly (GW: 8.8× cash) | 214 |
+| [Taimaka malnutrition treatment CEA, 2024](/taimaka) | GW | November 2024 | 3.4× GiveDirectly (GW: 8.8× cash) | 208 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

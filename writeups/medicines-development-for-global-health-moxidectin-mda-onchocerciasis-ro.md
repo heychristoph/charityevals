@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Moxidectin MDA for onchocerciasis rough CEA [September 2024]](/medicines-development-for-global-health) | GW | June 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 58 |
+| [Moxidectin MDA for onchocerciasis rough CEA [September 2024]](/medicines-development-for-global-health) | GW | June 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 57 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

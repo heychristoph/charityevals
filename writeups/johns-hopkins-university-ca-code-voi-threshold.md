@@ -11,8 +11,8 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CA CODE VoI threshold BOTEC](/johns-hopkins-university) | GW | August 2025 | 4.0× GiveDirectly (GW: 10× cash) | 38 |
-| [CHoBI7 Bangladesh VOI CEA](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | GW | March 2025 | 3.5× GiveDirectly (GW: 9.2× cash) | 83 |
+| [CA CODE VoI threshold BOTEC](/johns-hopkins-university) | GW | August 2025 | 4.0× GiveDirectly (GW: 10× cash) | 34 |
+| [CHoBI7 Bangladesh VOI CEA](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | GW | March 2025 | 3.5× GiveDirectly (GW: 9.2× cash) | 79 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

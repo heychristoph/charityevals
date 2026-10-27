@@ -3259,8 +3259,8 @@
    "expected": 349.5655532
   },
   {
-   "id": "total_alive",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - total_dead_from_all_causes_including_from_all_previous_perio_2",
    "expected": 9650.434447
@@ -3336,7 +3336,7 @@
    "id": "cost_of_cash_transfers",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1, attend_visit_2, attend_visit_3, attend_visit_4) * transfer_per_visit_1_4_naira + total_alive * vaccination_rate_with_the_program_mcv1 * transfer_for_visit_5_measles_naira) / exchange_rate_naira_per_usd",
+   "formula": "(sum(attend_visit_1, attend_visit_2, attend_visit_3, attend_visit_4) * transfer_per_visit_1_4_naira + visit_5_measles_total_alive * vaccination_rate_with_the_program_mcv1 * transfer_for_visit_5_measles_naira) / exchange_rate_naira_per_usd",
    "expected": 30755.05236,
    "format": "usd"
   },
@@ -3354,8 +3354,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1 * administrative_cost_per_woman",
    "expected": 60384.96,
@@ -3365,7 +3365,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive * vaccination_rate_with_the_program_mcv1 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju",
+   "formula": "visit_5_measles_total_alive * vaccination_rate_with_the_program_mcv1 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju",
    "expected": 0.2093063426
   },
   {
@@ -3517,8 +3517,8 @@
    "expected": 355.4327084
   },
   {
-   "id": "total_alive_2",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_2",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - total_dead_from_all_causes_including_from_all_previous_perio_5",
    "expected": 9644.567292
@@ -3527,7 +3527,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_2",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_2 * vaccination_rate_without_the_program_mcv1 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju",
+   "formula": "visit_5_measles_total_alive_2 * vaccination_rate_without_the_program_mcv1 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju",
    "expected": 0.1446685094
   },
   {
@@ -3552,16 +3552,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers, administrative_costs, costs_to_the_government_of_additional_vaccines_and_clinic_lo)",
+   "formula": "sum(cost_of_cash_transfers, with_the_program_administrative_costs, costs_to_the_government_of_additional_vaccines_and_clinic_lo)",
    "expected": 91140.01236,
    "format": "usd"
   },
   {
-   "id": "total_dead_3",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_5",
    "expected": 355.4327084
@@ -3656,7 +3656,7 @@
    "id": "expected_all_cause_mortality_7",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_2 - total_alive_2 * (1 - weekly_mortality_risk_1_12_months_7) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_2) * (1 - weekly_mortality_risk_12mo_5yo) ^ (average_age_at_sia_in_weeks - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_2 - visit_5_measles_total_alive_2 * (1 - weekly_mortality_risk_1_12_months_7) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_2) * (1 - weekly_mortality_risk_12mo_5yo) ^ (average_age_at_sia_in_weeks - 12 * 4.345)",
    "expected": 183.7680442
   },
   {
@@ -3705,12 +3705,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_8",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_3 + expected_all_cause_mortality_reduced_due_to_pcv_7",
+   "formula": "visit_5_measles_total_dead + expected_all_cause_mortality_reduced_due_to_pcv_7",
    "expected": 535.3879332
   },
   {
-   "id": "total_dead_2",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_2",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_8",
    "expected": 535.3879332
@@ -3753,14 +3753,14 @@
    "id": "alive_received_measles_vaccine_and_immunized",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_2 * vaccination_rate_without_the_program_mcv1 * adjusted_mcv1_vaccine_efficacy",
+   "formula": "visit_5_measles_total_alive_2 * vaccination_rate_without_the_program_mcv1 * adjusted_mcv1_vaccine_efficacy",
    "expected": 1056.080118
   },
   {
    "id": "alive_and_susceptible_to_measles",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_2 - alive_received_measles_vaccine_and_immunized",
+   "formula": "visit_5_measles_total_alive_2 - alive_received_measles_vaccine_and_immunized",
    "expected": 8588.487173
   },
   {
@@ -3865,7 +3865,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_15",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - total_dead_3 - due_to_measles",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - visit_5_measles_total_dead - due_to_measles",
    "expected": 9586.595003
   },
   {
@@ -3890,8 +3890,8 @@
    "expected": 7334.511878
   },
   {
-   "id": "sia_coverage",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -3899,7 +3899,7 @@
     "cell": "New Incentives!C191"
    },
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -3919,7 +3919,7 @@
    "id": "vaccinated_and_immunized_by_sia",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia * sia_coverage * adjusted_sia_mcv1_vaccine_efficacy",
+   "formula": "alive_and_susceptible_immediately_before_sia * routine_mcv1_measles_vaccine_sia_coverage * adjusted_sia_mcv1_vaccine_efficacy",
    "expected": 4905.321544
   },
   {
@@ -3979,8 +3979,8 @@
    "expected": 7035.421733
   },
   {
-   "id": "total_alive_3",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia + alive_and_immune_to_measles_after_sia",
    "expected": 9464.612067
@@ -4011,7 +4011,7 @@
    "id": "expected_all_cause_mortality_8",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_3 - total_alive_3 * (1 - weekly_mortality_risk_12mo_5yo_2) ^ number_of_weeks_between_sia_and_5yo",
+   "formula": "distribute_these_deaths_among_groups_total_alive - distribute_these_deaths_among_groups_total_alive * (1 - weekly_mortality_risk_12mo_5yo_2) ^ number_of_weeks_between_sia_and_5yo",
    "expected": 503.1039537
   },
   {
@@ -4047,12 +4047,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_7",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_2 + expected_all_cause_mortality_reduced_due_to_program_s_effect_2",
+   "formula": "distribute_these_deaths_among_groups_total_dead_2 + expected_all_cause_mortality_reduced_due_to_program_s_effect_2",
    "expected": 1036.033312
   },
   {
-   "id": "total_dead",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_7",
    "expected": 1036.033312
@@ -4091,7 +4091,7 @@
    "id": "expected_all_cause_mortality_9",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive - total_alive * (1 - weekly_mortality_risk_1_12_months_8) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_2) * (1 - weekly_mortality_risk_12mo_5yo_3) ^ (average_age_at_sia_in_weeks_3 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive - visit_5_measles_total_alive * (1 - weekly_mortality_risk_1_12_months_8) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_2) * (1 - weekly_mortality_risk_12mo_5yo_3) ^ (average_age_at_sia_in_weeks_3 - 12 * 4.345)",
    "expected": 183.8798372
   },
   {
@@ -4476,14 +4476,14 @@
    "id": "alive_received_a_vaccine_and_immunized",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive * vaccination_rate_with_the_program_mcv1 * adjusted_mcv1_vaccine_efficacy",
+   "formula": "visit_5_measles_total_alive * vaccination_rate_with_the_program_mcv1 * adjusted_mcv1_vaccine_efficacy",
    "expected": 1527.936301
   },
   {
    "id": "alive_and_susceptible_to_measles_2",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive - alive_received_a_vaccine_and_immunized",
+   "formula": "visit_5_measles_total_alive - alive_received_a_vaccine_and_immunized",
    "expected": 8122.498146
   },
   {
@@ -4522,8 +4522,8 @@
    "expected": 521.0796811
   },
   {
-   "id": "total_dead_5",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_4",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_10",
    "expected": 521.0796811
@@ -4602,7 +4602,7 @@
    "id": "vaccinated_and_immunized_by_sia_2",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_2 * sia_coverage * adjusted_sia_mcv1_vaccine_efficacy",
+   "formula": "alive_and_susceptible_immediately_before_sia_2 * routine_mcv1_measles_vaccine_sia_coverage * adjusted_sia_mcv1_vaccine_efficacy",
    "expected": 4641.820971
   },
   {
@@ -4662,8 +4662,8 @@
    "expected": 7180.219503
   },
   {
-   "id": "total_alive_4",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_2",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_2 + alive_and_immune_to_measles_after_sia_2",
    "expected": 9478.920319
@@ -4694,7 +4694,7 @@
    "id": "expected_all_cause_mortality_10",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_4 - total_alive_4 * (1 - weekly_mortality_risk_12mo_5yo_4) ^ number_of_weeks_between_sia_and_5yo_2",
+   "formula": "distribute_these_deaths_among_groups_total_alive_2 - distribute_these_deaths_among_groups_total_alive_2 * (1 - weekly_mortality_risk_12mo_5yo_4) ^ number_of_weeks_between_sia_and_5yo_2",
    "expected": 503.8645277
   },
   {
@@ -4737,7 +4737,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_23",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - total_dead_3 - due_to_tuberculosis_7",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - visit_5_measles_total_dead - due_to_tuberculosis_7",
    "expected": 9619.134299
   },
   {
@@ -4849,7 +4849,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_25",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - total_dead_3 - due_to_rotavirus_7",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju - visit_5_measles_total_dead - due_to_rotavirus_7",
    "expected": 9592.224134
   },
   {
@@ -5108,12 +5108,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_9",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_5 + expected_all_cause_mortality_reduced_due_to_program_s_effect_4",
+   "formula": "distribute_these_deaths_among_groups_total_dead_4 + expected_all_cause_mortality_reduced_due_to_program_s_effect_4",
    "expected": 1011.020193
   },
   {
-   "id": "total_dead_4",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_3",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_9",
    "expected": 1011.020193
@@ -5122,7 +5122,7 @@
    "id": "under_5_deaths_averted_by_the_program",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead - total_dead_4",
+   "formula": "distribute_these_deaths_among_groups_total_dead - distribute_these_deaths_among_groups_total_dead_3",
    "expected": 25.01311967
   },
   {
@@ -5242,7 +5242,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_less",
    "label": "Cost per equivalent outcome to an under-5 death averted (less subjective input)",
    "section": "new_incentives",
-   "formula": "total_cost / total_benefit_equivalent_under_5_deaths_averted_per_cohort",
+   "formula": "with_the_program_total_cost / total_benefit_equivalent_under_5_deaths_averted_per_cohort",
    "expected": 3373.213667,
    "format": "usd"
   },
@@ -8449,8 +8449,8 @@
    "expected": 349.5655532
   },
   {
-   "id": "total_alive_5",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_3",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - total_dead_from_all_causes_including_from_all_previous_perio_12",
    "expected": 9650.434447
@@ -8526,7 +8526,7 @@
    "id": "cost_of_cash_transfers_2",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_3, attend_visit_2_3, attend_visit_3_3, attend_visit_4_3) * transfer_per_visit_1_4_naira_2 + total_alive_5 * vaccination_rate_with_the_program_mcv1_2 * transfer_for_visit_5_measles_naira_2) / exchange_rate_naira_per_usd_2",
+   "formula": "(sum(attend_visit_1_3, attend_visit_2_3, attend_visit_3_3, attend_visit_4_3) * transfer_per_visit_1_4_naira_2 + visit_5_measles_total_alive_3 * vaccination_rate_with_the_program_mcv1_2 * transfer_for_visit_5_measles_naira_2) / exchange_rate_naira_per_usd_2",
    "expected": 30755.05236,
    "format": "usd"
   },
@@ -8544,8 +8544,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_2",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_2",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_3 * administrative_cost_per_woman_2",
    "expected": 60384.96,
@@ -8555,7 +8555,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_3",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_5 * vaccination_rate_with_the_program_mcv1_2 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3",
+   "formula": "visit_5_measles_total_alive_3 * vaccination_rate_with_the_program_mcv1_2 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3",
    "expected": 0.2093063426
   },
   {
@@ -8707,8 +8707,8 @@
    "expected": 355.4327084
   },
   {
-   "id": "total_alive_6",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_4",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - total_dead_from_all_causes_including_from_all_previous_perio_15",
    "expected": 9644.567292
@@ -8717,7 +8717,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_4",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_6 * vaccination_rate_without_the_program_mcv1_2 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3",
+   "formula": "visit_5_measles_total_alive_4 * vaccination_rate_without_the_program_mcv1_2 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3",
    "expected": 0.1446685094
   },
   {
@@ -8742,16 +8742,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_2",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_2",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_2, administrative_costs_2, costs_to_the_government_of_additional_vaccines_and_clinic_lo_2)",
+   "formula": "sum(cost_of_cash_transfers_2, with_the_program_administrative_costs_2, costs_to_the_government_of_additional_vaccines_and_clinic_lo_2)",
    "expected": 91140.01236,
    "format": "usd"
   },
   {
-   "id": "total_dead_8",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_2",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_15",
    "expected": 355.4327084
@@ -8846,7 +8846,7 @@
    "id": "expected_all_cause_mortality_17",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_6 - total_alive_6 * (1 - weekly_mortality_risk_1_12_months_15) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_4) * (1 - weekly_mortality_risk_12mo_5yo_5) ^ (average_age_at_sia_in_weeks_5 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_4 - visit_5_measles_total_alive_4 * (1 - weekly_mortality_risk_1_12_months_15) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_4) * (1 - weekly_mortality_risk_12mo_5yo_5) ^ (average_age_at_sia_in_weeks_5 - 12 * 4.345)",
    "expected": 183.7680442
   },
   {
@@ -8895,12 +8895,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_18",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_8 + expected_all_cause_mortality_reduced_due_to_pcv_17",
+   "formula": "visit_5_measles_total_dead_2 + expected_all_cause_mortality_reduced_due_to_pcv_17",
    "expected": 535.3879332
   },
   {
-   "id": "total_dead_7",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_6",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_18",
    "expected": 535.3879332
@@ -8943,14 +8943,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_2",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_6 * vaccination_rate_without_the_program_mcv1_2 * adjusted_mcv1_vaccine_efficacy_2",
+   "formula": "visit_5_measles_total_alive_4 * vaccination_rate_without_the_program_mcv1_2 * adjusted_mcv1_vaccine_efficacy_2",
    "expected": 1056.080118
   },
   {
    "id": "alive_and_susceptible_to_measles_3",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_6 - alive_received_measles_vaccine_and_immunized_2",
+   "formula": "visit_5_measles_total_alive_4 - alive_received_measles_vaccine_and_immunized_2",
    "expected": 8588.487173
   },
   {
@@ -9055,7 +9055,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_43",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - total_dead_8 - due_to_measles_5",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - visit_5_measles_total_dead_2 - due_to_measles_5",
    "expected": 9586.595003
   },
   {
@@ -9080,8 +9080,8 @@
    "expected": 7334.511878
   },
   {
-   "id": "sia_coverage_2",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_2",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -9089,7 +9089,7 @@
     "cell": "New Incentives!D191"
    },
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -9130,7 +9130,7 @@
    "id": "vaccinated_and_immunized_by_sia_3",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_3 * sia_coverage_2 * adjusted_sia_mcv1_vaccine_efficacy_2",
+   "formula": "alive_and_susceptible_immediately_before_sia_3 * routine_mcv1_measles_vaccine_sia_coverage_2 * adjusted_sia_mcv1_vaccine_efficacy_2",
    "expected": 4905.321544
   },
   {
@@ -9190,8 +9190,8 @@
    "expected": 7035.421733
   },
   {
-   "id": "total_alive_7",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_3",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_3 + alive_and_immune_to_measles_after_sia_3",
    "expected": 9464.612067
@@ -9222,7 +9222,7 @@
    "id": "expected_all_cause_mortality_18",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_7 - total_alive_7 * (1 - weekly_mortality_risk_12mo_5yo_6) ^ number_of_weeks_between_sia_and_5yo_3",
+   "formula": "distribute_these_deaths_among_groups_total_alive_3 - distribute_these_deaths_among_groups_total_alive_3 * (1 - weekly_mortality_risk_12mo_5yo_6) ^ number_of_weeks_between_sia_and_5yo_3",
    "expected": 503.1039537
   },
   {
@@ -9258,12 +9258,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_17",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_7 + expected_all_cause_mortality_reduced_due_to_program_s_effect_6",
+   "formula": "distribute_these_deaths_among_groups_total_dead_6 + expected_all_cause_mortality_reduced_due_to_program_s_effect_6",
    "expected": 1036.033312
   },
   {
-   "id": "total_dead_6",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_5",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_17",
    "expected": 1036.033312
@@ -9302,7 +9302,7 @@
    "id": "expected_all_cause_mortality_19",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_5 - total_alive_5 * (1 - weekly_mortality_risk_1_12_months_16) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_4) * (1 - weekly_mortality_risk_12mo_5yo_7) ^ (average_age_at_sia_in_weeks_7 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_3 - visit_5_measles_total_alive_3 * (1 - weekly_mortality_risk_1_12_months_16) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_4) * (1 - weekly_mortality_risk_12mo_5yo_7) ^ (average_age_at_sia_in_weeks_7 - 12 * 4.345)",
    "expected": 183.8798372
   },
   {
@@ -9687,14 +9687,14 @@
    "id": "alive_received_a_vaccine_and_immunized_2",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_5 * vaccination_rate_with_the_program_mcv1_2 * adjusted_mcv1_vaccine_efficacy_2",
+   "formula": "visit_5_measles_total_alive_3 * vaccination_rate_with_the_program_mcv1_2 * adjusted_mcv1_vaccine_efficacy_2",
    "expected": 1527.936301
   },
   {
    "id": "alive_and_susceptible_to_measles_4",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_5 - alive_received_a_vaccine_and_immunized_2",
+   "formula": "visit_5_measles_total_alive_3 - alive_received_a_vaccine_and_immunized_2",
    "expected": 8122.498146
   },
   {
@@ -9733,8 +9733,8 @@
    "expected": 521.0796811
   },
   {
-   "id": "total_dead_10",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_8",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_20",
    "expected": 521.0796811
@@ -9813,7 +9813,7 @@
    "id": "vaccinated_and_immunized_by_sia_4",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_4 * sia_coverage_2 * adjusted_sia_mcv1_vaccine_efficacy_2",
+   "formula": "alive_and_susceptible_immediately_before_sia_4 * routine_mcv1_measles_vaccine_sia_coverage_2 * adjusted_sia_mcv1_vaccine_efficacy_2",
    "expected": 4641.820971
   },
   {
@@ -9873,8 +9873,8 @@
    "expected": 7180.219503
   },
   {
-   "id": "total_alive_8",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_4",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_4 + alive_and_immune_to_measles_after_sia_4",
    "expected": 9478.920319
@@ -9905,7 +9905,7 @@
    "id": "expected_all_cause_mortality_20",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_8 - total_alive_8 * (1 - weekly_mortality_risk_12mo_5yo_8) ^ number_of_weeks_between_sia_and_5yo_4",
+   "formula": "distribute_these_deaths_among_groups_total_alive_4 - distribute_these_deaths_among_groups_total_alive_4 * (1 - weekly_mortality_risk_12mo_5yo_8) ^ number_of_weeks_between_sia_and_5yo_4",
    "expected": 503.8645277
   },
   {
@@ -9948,7 +9948,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_51",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - total_dead_8 - due_to_tuberculosis_17",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - visit_5_measles_total_dead_2 - due_to_tuberculosis_17",
    "expected": 9619.134299
   },
   {
@@ -10060,7 +10060,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_53",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - total_dead_8 - due_to_rotavirus_17",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_3 - visit_5_measles_total_dead_2 - due_to_rotavirus_17",
    "expected": 9592.224134
   },
   {
@@ -10319,12 +10319,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_19",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_10 + expected_all_cause_mortality_reduced_due_to_program_s_effect_8",
+   "formula": "distribute_these_deaths_among_groups_total_dead_8 + expected_all_cause_mortality_reduced_due_to_program_s_effect_8",
    "expected": 1011.020193
   },
   {
-   "id": "total_dead_9",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_7",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_19",
    "expected": 1011.020193
@@ -10333,7 +10333,7 @@
    "id": "under_5_deaths_averted_by_the_program_2",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_6 - total_dead_9",
+   "formula": "distribute_these_deaths_among_groups_total_dead_5 - distribute_these_deaths_among_groups_total_dead_7",
    "expected": 25.01311967
   },
   {
@@ -10453,7 +10453,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_chel",
    "label": "Cost per equivalent outcome to an under-5 death averted (Chelsea)",
    "section": "new_incentives",
-   "formula": "total_cost_2 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_2",
+   "formula": "with_the_program_total_cost_2 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_2",
    "expected": 3536.239115,
    "format": "usd"
   },
@@ -13691,8 +13691,8 @@
    "expected": 351.1033585
   },
   {
-   "id": "total_alive_9",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_5",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - total_dead_from_all_causes_including_from_all_previous_perio_22",
    "expected": 9648.896642
@@ -13770,7 +13770,7 @@
    "id": "cost_of_cash_transfers_3",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_5, attend_visit_2_5, attend_visit_3_5, attend_visit_4_5) * transfer_per_visit_1_4_naira_3 + total_alive_9 * vaccination_rate_with_the_program_mcv1_3 * transfer_for_visit_5_measles_naira_3) / exchange_rate_naira_per_usd_3",
+   "formula": "(sum(attend_visit_1_5, attend_visit_2_5, attend_visit_3_5, attend_visit_4_5) * transfer_per_visit_1_4_naira_3 + visit_5_measles_total_alive_5 * vaccination_rate_with_the_program_mcv1_3 * transfer_for_visit_5_measles_naira_3) / exchange_rate_naira_per_usd_3",
    "expected": 30752.68661,
    "format": "usd"
   },
@@ -13789,8 +13789,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_3",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_3",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_5 * administrative_cost_per_woman_3",
    "expected": 60384.96,
@@ -13800,7 +13800,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_5",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_9 * vaccination_rate_with_the_program_mcv1_3 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4",
+   "formula": "visit_5_measles_total_alive_5 * vaccination_rate_with_the_program_mcv1_3 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4",
    "expected": 0.2092729895
   },
   {
@@ -13952,8 +13952,8 @@
    "expected": 356.0512634
   },
   {
-   "id": "total_alive_10",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_6",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - total_dead_from_all_causes_including_from_all_previous_perio_25",
    "expected": 9643.948737
@@ -13962,7 +13962,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_6",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_10 * vaccination_rate_without_the_program_mcv1_3 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4",
+   "formula": "visit_5_measles_total_alive_6 * vaccination_rate_without_the_program_mcv1_3 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4",
    "expected": 0.144659231
   },
   {
@@ -13988,16 +13988,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_3",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_3",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_3, administrative_costs_3, costs_to_the_government_of_additional_vaccines_and_clinic_lo_3)",
+   "formula": "sum(cost_of_cash_transfers_3, with_the_program_administrative_costs_3, costs_to_the_government_of_additional_vaccines_and_clinic_lo_3)",
    "expected": 91137.64661,
    "format": "usd"
   },
   {
-   "id": "total_dead_13",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_3",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_25",
    "expected": 356.0512634
@@ -14093,7 +14093,7 @@
    "id": "expected_all_cause_mortality_27",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_10 - total_alive_10 * (1 - weekly_mortality_risk_1_12_months_23) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_6) * (1 - weekly_mortality_risk_12mo_5yo_9) ^ (average_age_at_sia_in_weeks_9 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_6 - visit_5_measles_total_alive_6 * (1 - weekly_mortality_risk_1_12_months_23) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_6) * (1 - weekly_mortality_risk_12mo_5yo_9) ^ (average_age_at_sia_in_weeks_9 - 12 * 4.345)",
    "expected": 183.7562582
   },
   {
@@ -14143,12 +14143,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_28",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_13 + expected_all_cause_mortality_reduced_due_to_pcv_27",
+   "formula": "visit_5_measles_total_dead_3 + expected_all_cause_mortality_reduced_due_to_pcv_27",
    "expected": 536.7574617
   },
   {
-   "id": "total_dead_12",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_10",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_28",
    "expected": 536.7574617
@@ -14193,14 +14193,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_3",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_10 * vaccination_rate_without_the_program_mcv1_3 * adjusted_mcv1_vaccine_efficacy_3",
+   "formula": "visit_5_measles_total_alive_6 * vaccination_rate_without_the_program_mcv1_3 * adjusted_mcv1_vaccine_efficacy_3",
    "expected": 1056.012387
   },
   {
    "id": "alive_and_susceptible_to_measles_5",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_10 - alive_received_measles_vaccine_and_immunized_3",
+   "formula": "visit_5_measles_total_alive_6 - alive_received_measles_vaccine_and_immunized_3",
    "expected": 8587.93635
   },
   {
@@ -14306,7 +14306,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_71",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - total_dead_13 - due_to_measles_9",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - visit_5_measles_total_dead_3 - due_to_measles_9",
    "expected": 9585.980166
   },
   {
@@ -14331,8 +14331,8 @@
    "expected": 7333.450575
   },
   {
-   "id": "sia_coverage_3",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_3",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -14341,7 +14341,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations.",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -14384,7 +14384,7 @@
    "id": "vaccinated_and_immunized_by_sia_5",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_5 * sia_coverage_3 * adjusted_sia_mcv1_vaccine_efficacy_3",
+   "formula": "alive_and_susceptible_immediately_before_sia_5 * routine_mcv1_measles_vaccine_sia_coverage_3 * adjusted_sia_mcv1_vaccine_efficacy_3",
    "expected": 4904.611745
   },
   {
@@ -14444,8 +14444,8 @@
    "expected": 7034.403708
   },
   {
-   "id": "total_alive_11",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_5",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_5 + alive_and_immune_to_measles_after_sia_5",
    "expected": 9463.242538
@@ -14476,7 +14476,7 @@
    "id": "expected_all_cause_mortality_28",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_11 - total_alive_11 * (1 - weekly_mortality_risk_12mo_5yo_10) ^ number_of_weeks_between_sia_and_5yo_5",
+   "formula": "distribute_these_deaths_among_groups_total_alive_5 - distribute_these_deaths_among_groups_total_alive_5 * (1 - weekly_mortality_risk_12mo_5yo_10) ^ number_of_weeks_between_sia_and_5yo_5",
    "expected": 503.0311546
   },
   {
@@ -14512,12 +14512,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_27",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_12 + expected_all_cause_mortality_reduced_due_to_program_s_effect_10",
+   "formula": "distribute_these_deaths_among_groups_total_dead_10 + expected_all_cause_mortality_reduced_due_to_program_s_effect_10",
    "expected": 1037.822041
   },
   {
-   "id": "total_dead_11",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_9",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_27",
    "expected": 1037.822041
@@ -14556,7 +14556,7 @@
    "id": "expected_all_cause_mortality_29",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_9 - total_alive_9 * (1 - weekly_mortality_risk_1_12_months_24) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_6) * (1 - weekly_mortality_risk_12mo_5yo_11) ^ (average_age_at_sia_in_weeks_11 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_5 - visit_5_measles_total_alive_5 * (1 - weekly_mortality_risk_1_12_months_24) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_6) * (1 - weekly_mortality_risk_12mo_5yo_11) ^ (average_age_at_sia_in_weeks_11 - 12 * 4.345)",
    "expected": 183.8505358
   },
   {
@@ -14942,14 +14942,14 @@
    "id": "alive_received_a_vaccine_and_immunized_3",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_9 * vaccination_rate_with_the_program_mcv1_3 * adjusted_mcv1_vaccine_efficacy_3",
+   "formula": "visit_5_measles_total_alive_5 * vaccination_rate_with_the_program_mcv1_3 * adjusted_mcv1_vaccine_efficacy_3",
    "expected": 1527.692823
   },
   {
    "id": "alive_and_susceptible_to_measles_6",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_9 - alive_received_a_vaccine_and_immunized_3",
+   "formula": "visit_5_measles_total_alive_5 - alive_received_a_vaccine_and_immunized_3",
    "expected": 8121.203818
   },
   {
@@ -14988,8 +14988,8 @@
    "expected": 524.4446957
   },
   {
-   "id": "total_dead_15",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_12",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_30",
    "expected": 524.4446957
@@ -15068,7 +15068,7 @@
    "id": "vaccinated_and_immunized_by_sia_6",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_6 * sia_coverage_3 * adjusted_sia_mcv1_vaccine_efficacy_3",
+   "formula": "alive_and_susceptible_immediately_before_sia_6 * routine_mcv1_measles_vaccine_sia_coverage_3 * adjusted_sia_mcv1_vaccine_efficacy_3",
    "expected": 4640.173126
   },
   {
@@ -15128,8 +15128,8 @@
    "expected": 7177.670527
   },
   {
-   "id": "total_alive_12",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_6",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_6 + alive_and_immune_to_measles_after_sia_6",
    "expected": 9475.555304
@@ -15160,7 +15160,7 @@
    "id": "expected_all_cause_mortality_30",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_12 - total_alive_12 * (1 - weekly_mortality_risk_12mo_5yo_12) ^ number_of_weeks_between_sia_and_5yo_6",
+   "formula": "distribute_these_deaths_among_groups_total_alive_6 - distribute_these_deaths_among_groups_total_alive_6 * (1 - weekly_mortality_risk_12mo_5yo_12) ^ number_of_weeks_between_sia_and_5yo_6",
    "expected": 503.6856559
   },
   {
@@ -15203,7 +15203,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_79",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - total_dead_13 - due_to_tuberculosis_27",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - visit_5_measles_total_dead_3 - due_to_tuberculosis_27",
    "expected": 9623.275378
   },
   {
@@ -15315,7 +15315,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_81",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - total_dead_13 - due_to_rotavirus_27",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_4 - visit_5_measles_total_dead_3 - due_to_rotavirus_27",
    "expected": 9590.83277
   },
   {
@@ -15574,12 +15574,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_29",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_15 + expected_all_cause_mortality_reduced_due_to_program_s_effect_12",
+   "formula": "distribute_these_deaths_among_groups_total_dead_12 + expected_all_cause_mortality_reduced_due_to_program_s_effect_12",
    "expected": 1016.661135
   },
   {
-   "id": "total_dead_14",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_11",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_29",
    "expected": 1016.661135
@@ -15588,7 +15588,7 @@
    "id": "under_5_deaths_averted_by_the_program_3",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_11 - total_dead_14",
+   "formula": "distribute_these_deaths_among_groups_total_dead_9 - distribute_these_deaths_among_groups_total_dead_11",
    "expected": 21.16090653
   },
   {
@@ -15709,7 +15709,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_inpu",
    "label": "Cost per equivalent outcome to an under-5 death averted (input to be updated by more data)",
    "section": "new_incentives",
-   "formula": "total_cost_3 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_3",
+   "formula": "with_the_program_total_cost_3 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_3",
    "expected": 4186.602114,
    "format": "usd"
   },
@@ -18913,8 +18913,8 @@
    "expected": 349.5655532
   },
   {
-   "id": "total_alive_13",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_7",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - total_dead_from_all_causes_including_from_all_previous_perio_32",
    "expected": 9650.434447
@@ -18992,7 +18992,7 @@
    "id": "cost_of_cash_transfers_4",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_7, attend_visit_2_7, attend_visit_3_7, attend_visit_4_7) * transfer_per_visit_1_4_naira_4 + total_alive_13 * vaccination_rate_with_the_program_mcv1_4 * transfer_for_visit_5_measles_naira_4) / exchange_rate_naira_per_usd_4",
+   "formula": "(sum(attend_visit_1_7, attend_visit_2_7, attend_visit_3_7, attend_visit_4_7) * transfer_per_visit_1_4_naira_4 + visit_5_measles_total_alive_7 * vaccination_rate_with_the_program_mcv1_4 * transfer_for_visit_5_measles_naira_4) / exchange_rate_naira_per_usd_4",
    "expected": 30755.05236,
    "format": "usd"
   },
@@ -19011,8 +19011,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_4",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_4",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_7 * administrative_cost_per_woman_4",
    "expected": 60384.96,
@@ -19022,7 +19022,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_7",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_13 * vaccination_rate_with_the_program_mcv1_4 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2",
+   "formula": "visit_5_measles_total_alive_7 * vaccination_rate_with_the_program_mcv1_4 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2",
    "expected": 0.2093063426
   },
   {
@@ -19174,8 +19174,8 @@
    "expected": 355.4327084
   },
   {
-   "id": "total_alive_14",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_8",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - total_dead_from_all_causes_including_from_all_previous_perio_35",
    "expected": 9644.567292
@@ -19184,7 +19184,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_8",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_14 * vaccination_rate_without_the_program_mcv1_4 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2",
+   "formula": "visit_5_measles_total_alive_8 * vaccination_rate_without_the_program_mcv1_4 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2",
    "expected": 0.1446685094
   },
   {
@@ -19210,16 +19210,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_4",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_4",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_4, administrative_costs_4, costs_to_the_government_of_additional_vaccines_and_clinic_lo_4)",
+   "formula": "sum(cost_of_cash_transfers_4, with_the_program_administrative_costs_4, costs_to_the_government_of_additional_vaccines_and_clinic_lo_4)",
    "expected": 91140.01236,
    "format": "usd"
   },
   {
-   "id": "total_dead_18",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_4",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_35",
    "expected": 355.4327084
@@ -19315,7 +19315,7 @@
    "id": "expected_all_cause_mortality_37",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_14 - total_alive_14 * (1 - weekly_mortality_risk_1_12_months_31) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_8) * (1 - weekly_mortality_risk_12mo_5yo_13) ^ (average_age_at_sia_in_weeks_13 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_8 - visit_5_measles_total_alive_8 * (1 - weekly_mortality_risk_1_12_months_31) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_8) * (1 - weekly_mortality_risk_12mo_5yo_13) ^ (average_age_at_sia_in_weeks_13 - 12 * 4.345)",
    "expected": 183.7680442
   },
   {
@@ -19365,12 +19365,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_38",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_18 + expected_all_cause_mortality_reduced_due_to_pcv_37",
+   "formula": "visit_5_measles_total_dead_4 + expected_all_cause_mortality_reduced_due_to_pcv_37",
    "expected": 535.3879332
   },
   {
-   "id": "total_dead_17",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_14",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_38",
    "expected": 535.3879332
@@ -19415,14 +19415,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_4",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_14 * vaccination_rate_without_the_program_mcv1_4 * adjusted_mcv1_vaccine_efficacy_4",
+   "formula": "visit_5_measles_total_alive_8 * vaccination_rate_without_the_program_mcv1_4 * adjusted_mcv1_vaccine_efficacy_4",
    "expected": 1056.080118
   },
   {
    "id": "alive_and_susceptible_to_measles_7",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_14 - alive_received_measles_vaccine_and_immunized_4",
+   "formula": "visit_5_measles_total_alive_8 - alive_received_measles_vaccine_and_immunized_4",
    "expected": 8588.487173
   },
   {
@@ -19528,7 +19528,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_99",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - total_dead_18 - due_to_measles_13",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - visit_5_measles_total_dead_4 - due_to_measles_13",
    "expected": 9586.595003
   },
   {
@@ -19553,8 +19553,8 @@
    "expected": 7334.511878
   },
   {
-   "id": "sia_coverage_4",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_4",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -19563,7 +19563,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -19606,7 +19606,7 @@
    "id": "vaccinated_and_immunized_by_sia_7",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_7 * sia_coverage_4 * adjusted_sia_mcv1_vaccine_efficacy_4",
+   "formula": "alive_and_susceptible_immediately_before_sia_7 * routine_mcv1_measles_vaccine_sia_coverage_4 * adjusted_sia_mcv1_vaccine_efficacy_4",
    "expected": 4905.321544
   },
   {
@@ -19666,8 +19666,8 @@
    "expected": 7035.421733
   },
   {
-   "id": "total_alive_15",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_7",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_7 + alive_and_immune_to_measles_after_sia_7",
    "expected": 9464.612067
@@ -19698,7 +19698,7 @@
    "id": "expected_all_cause_mortality_38",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_15 - total_alive_15 * (1 - weekly_mortality_risk_12mo_5yo_14) ^ number_of_weeks_between_sia_and_5yo_7",
+   "formula": "distribute_these_deaths_among_groups_total_alive_7 - distribute_these_deaths_among_groups_total_alive_7 * (1 - weekly_mortality_risk_12mo_5yo_14) ^ number_of_weeks_between_sia_and_5yo_7",
    "expected": 503.1039537
   },
   {
@@ -19734,12 +19734,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_37",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_17 + expected_all_cause_mortality_reduced_due_to_program_s_effect_14",
+   "formula": "distribute_these_deaths_among_groups_total_dead_14 + expected_all_cause_mortality_reduced_due_to_program_s_effect_14",
    "expected": 1036.033312
   },
   {
-   "id": "total_dead_16",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_13",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_37",
    "expected": 1036.033312
@@ -19778,7 +19778,7 @@
    "id": "expected_all_cause_mortality_39",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_13 - total_alive_13 * (1 - weekly_mortality_risk_1_12_months_32) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_8) * (1 - weekly_mortality_risk_12mo_5yo_15) ^ (average_age_at_sia_in_weeks_15 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_7 - visit_5_measles_total_alive_7 * (1 - weekly_mortality_risk_1_12_months_32) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_8) * (1 - weekly_mortality_risk_12mo_5yo_15) ^ (average_age_at_sia_in_weeks_15 - 12 * 4.345)",
    "expected": 183.8798372
   },
   {
@@ -20164,14 +20164,14 @@
    "id": "alive_received_a_vaccine_and_immunized_4",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_13 * vaccination_rate_with_the_program_mcv1_4 * adjusted_mcv1_vaccine_efficacy_4",
+   "formula": "visit_5_measles_total_alive_7 * vaccination_rate_with_the_program_mcv1_4 * adjusted_mcv1_vaccine_efficacy_4",
    "expected": 1527.936301
   },
   {
    "id": "alive_and_susceptible_to_measles_8",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_13 - alive_received_a_vaccine_and_immunized_4",
+   "formula": "visit_5_measles_total_alive_7 - alive_received_a_vaccine_and_immunized_4",
    "expected": 8122.498146
   },
   {
@@ -20210,8 +20210,8 @@
    "expected": 521.0796811
   },
   {
-   "id": "total_dead_20",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_16",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_40",
    "expected": 521.0796811
@@ -20290,7 +20290,7 @@
    "id": "vaccinated_and_immunized_by_sia_8",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_8 * sia_coverage_4 * adjusted_sia_mcv1_vaccine_efficacy_4",
+   "formula": "alive_and_susceptible_immediately_before_sia_8 * routine_mcv1_measles_vaccine_sia_coverage_4 * adjusted_sia_mcv1_vaccine_efficacy_4",
    "expected": 4641.820971
   },
   {
@@ -20350,8 +20350,8 @@
    "expected": 7180.219503
   },
   {
-   "id": "total_alive_16",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_8",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_8 + alive_and_immune_to_measles_after_sia_8",
    "expected": 9478.920319
@@ -20382,7 +20382,7 @@
    "id": "expected_all_cause_mortality_40",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_16 - total_alive_16 * (1 - weekly_mortality_risk_12mo_5yo_16) ^ number_of_weeks_between_sia_and_5yo_8",
+   "formula": "distribute_these_deaths_among_groups_total_alive_8 - distribute_these_deaths_among_groups_total_alive_8 * (1 - weekly_mortality_risk_12mo_5yo_16) ^ number_of_weeks_between_sia_and_5yo_8",
    "expected": 503.8645277
   },
   {
@@ -20425,7 +20425,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_107",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - total_dead_18 - due_to_tuberculosis_37",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - visit_5_measles_total_dead_4 - due_to_tuberculosis_37",
    "expected": 9619.134299
   },
   {
@@ -20537,7 +20537,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_109",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - total_dead_18 - due_to_rotavirus_37",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_2 - visit_5_measles_total_dead_4 - due_to_rotavirus_37",
    "expected": 9592.224134
   },
   {
@@ -20796,12 +20796,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_39",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_20 + expected_all_cause_mortality_reduced_due_to_program_s_effect_16",
+   "formula": "distribute_these_deaths_among_groups_total_dead_16 + expected_all_cause_mortality_reduced_due_to_program_s_effect_16",
    "expected": 1011.020193
   },
   {
-   "id": "total_dead_19",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_15",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_39",
    "expected": 1011.020193
@@ -20810,7 +20810,7 @@
    "id": "under_5_deaths_averted_by_the_program_4",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_16 - total_dead_19",
+   "formula": "distribute_these_deaths_among_groups_total_dead_13 - distribute_these_deaths_among_groups_total_dead_15",
    "expected": 25.01311967
   },
   {
@@ -20931,7 +20931,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_elie",
    "label": "Cost per equivalent outcome to an under-5 death averted (Elie)",
    "section": "new_incentives",
-   "formula": "total_cost_4 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_4",
+   "formula": "with_the_program_total_cost_4 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_4",
    "expected": 3513.216511,
    "format": "usd"
   },
@@ -24169,8 +24169,8 @@
    "expected": 351.0548626
   },
   {
-   "id": "total_alive_17",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_9",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - total_dead_from_all_causes_including_from_all_previous_perio_42",
    "expected": 9648.945137
@@ -24248,7 +24248,7 @@
    "id": "cost_of_cash_transfers_5",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_9, attend_visit_2_9, attend_visit_3_9, attend_visit_4_9) * transfer_per_visit_1_4_naira_5 + total_alive_17 * vaccination_rate_with_the_program_mcv1_5 * transfer_for_visit_5_measles_naira_5) / exchange_rate_naira_per_usd_5",
+   "formula": "(sum(attend_visit_1_9, attend_visit_2_9, attend_visit_3_9, attend_visit_4_9) * transfer_per_visit_1_4_naira_5 + visit_5_measles_total_alive_9 * vaccination_rate_with_the_program_mcv1_5 * transfer_for_visit_5_measles_naira_5) / exchange_rate_naira_per_usd_5",
    "expected": 30752.76757,
    "format": "usd"
   },
@@ -24267,8 +24267,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_5",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_5",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_9 * administrative_cost_per_woman_5",
    "expected": 60384.96,
@@ -24278,7 +24278,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_9",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_17 * vaccination_rate_with_the_program_mcv1_5 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5",
+   "formula": "visit_5_measles_total_alive_9 * vaccination_rate_with_the_program_mcv1_5 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5",
    "expected": 0.2092740413
   },
   {
@@ -24430,8 +24430,8 @@
    "expected": 356.0512634
   },
   {
-   "id": "total_alive_18",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_10",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - total_dead_from_all_causes_including_from_all_previous_perio_45",
    "expected": 9643.948737
@@ -24440,7 +24440,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_10",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_18 * vaccination_rate_without_the_program_mcv1_5 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5",
+   "formula": "visit_5_measles_total_alive_10 * vaccination_rate_without_the_program_mcv1_5 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5",
    "expected": 0.144659231
   },
   {
@@ -24466,16 +24466,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_5",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_5",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_5, administrative_costs_5, costs_to_the_government_of_additional_vaccines_and_clinic_lo_5)",
+   "formula": "sum(cost_of_cash_transfers_5, with_the_program_administrative_costs_5, costs_to_the_government_of_additional_vaccines_and_clinic_lo_5)",
    "expected": 91137.72757,
    "format": "usd"
   },
   {
-   "id": "total_dead_23",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_5",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_45",
    "expected": 356.0512634
@@ -24571,7 +24571,7 @@
    "id": "expected_all_cause_mortality_47",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_18 - total_alive_18 * (1 - weekly_mortality_risk_1_12_months_39) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_10) * (1 - weekly_mortality_risk_12mo_5yo_17) ^ (average_age_at_sia_in_weeks_17 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_10 - visit_5_measles_total_alive_10 * (1 - weekly_mortality_risk_1_12_months_39) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_10) * (1 - weekly_mortality_risk_12mo_5yo_17) ^ (average_age_at_sia_in_weeks_17 - 12 * 4.345)",
    "expected": 183.7562582
   },
   {
@@ -24621,12 +24621,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_48",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_23 + expected_all_cause_mortality_reduced_due_to_pcv_47",
+   "formula": "visit_5_measles_total_dead_5 + expected_all_cause_mortality_reduced_due_to_pcv_47",
    "expected": 536.7574617
   },
   {
-   "id": "total_dead_22",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_18",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_48",
    "expected": 536.7574617
@@ -24671,14 +24671,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_5",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_18 * vaccination_rate_without_the_program_mcv1_5 * adjusted_mcv1_vaccine_efficacy_5",
+   "formula": "visit_5_measles_total_alive_10 * vaccination_rate_without_the_program_mcv1_5 * adjusted_mcv1_vaccine_efficacy_5",
    "expected": 1056.012387
   },
   {
    "id": "alive_and_susceptible_to_measles_9",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_18 - alive_received_measles_vaccine_and_immunized_5",
+   "formula": "visit_5_measles_total_alive_10 - alive_received_measles_vaccine_and_immunized_5",
    "expected": 8587.93635
   },
   {
@@ -24784,7 +24784,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_127",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - total_dead_23 - due_to_measles_17",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - visit_5_measles_total_dead_5 - due_to_measles_17",
    "expected": 9585.980166
   },
   {
@@ -24809,8 +24809,8 @@
    "expected": 7333.450575
   },
   {
-   "id": "sia_coverage_5",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_5",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -24819,7 +24819,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -24862,7 +24862,7 @@
    "id": "vaccinated_and_immunized_by_sia_9",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_9 * sia_coverage_5 * adjusted_sia_mcv1_vaccine_efficacy_5",
+   "formula": "alive_and_susceptible_immediately_before_sia_9 * routine_mcv1_measles_vaccine_sia_coverage_5 * adjusted_sia_mcv1_vaccine_efficacy_5",
    "expected": 4904.611745
   },
   {
@@ -24922,8 +24922,8 @@
    "expected": 7034.403708
   },
   {
-   "id": "total_alive_19",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_9",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_9 + alive_and_immune_to_measles_after_sia_9",
    "expected": 9463.242538
@@ -24954,7 +24954,7 @@
    "id": "expected_all_cause_mortality_48",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_19 - total_alive_19 * (1 - weekly_mortality_risk_12mo_5yo_18) ^ number_of_weeks_between_sia_and_5yo_9",
+   "formula": "distribute_these_deaths_among_groups_total_alive_9 - distribute_these_deaths_among_groups_total_alive_9 * (1 - weekly_mortality_risk_12mo_5yo_18) ^ number_of_weeks_between_sia_and_5yo_9",
    "expected": 503.0311546
   },
   {
@@ -24990,12 +24990,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_47",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_22 + expected_all_cause_mortality_reduced_due_to_program_s_effect_18",
+   "formula": "distribute_these_deaths_among_groups_total_dead_18 + expected_all_cause_mortality_reduced_due_to_program_s_effect_18",
    "expected": 1037.822041
   },
   {
-   "id": "total_dead_21",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_17",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_47",
    "expected": 1037.822041
@@ -25034,7 +25034,7 @@
    "id": "expected_all_cause_mortality_49",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_17 - total_alive_17 * (1 - weekly_mortality_risk_1_12_months_40) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_10) * (1 - weekly_mortality_risk_12mo_5yo_19) ^ (average_age_at_sia_in_weeks_19 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_9 - visit_5_measles_total_alive_9 * (1 - weekly_mortality_risk_1_12_months_40) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_10) * (1 - weekly_mortality_risk_12mo_5yo_19) ^ (average_age_at_sia_in_weeks_19 - 12 * 4.345)",
    "expected": 183.8514599
   },
   {
@@ -25420,14 +25420,14 @@
    "id": "alive_received_a_vaccine_and_immunized_5",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_17 * vaccination_rate_with_the_program_mcv1_5 * adjusted_mcv1_vaccine_efficacy_5",
+   "formula": "visit_5_measles_total_alive_9 * vaccination_rate_with_the_program_mcv1_5 * adjusted_mcv1_vaccine_efficacy_5",
    "expected": 1527.700501
   },
   {
    "id": "alive_and_susceptible_to_measles_10",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_17 - alive_received_a_vaccine_and_immunized_5",
+   "formula": "visit_5_measles_total_alive_9 - alive_received_a_vaccine_and_immunized_5",
    "expected": 8121.244636
   },
   {
@@ -25466,8 +25466,8 @@
    "expected": 524.3308606
   },
   {
-   "id": "total_dead_25",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_20",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_50",
    "expected": 524.3308606
@@ -25546,7 +25546,7 @@
    "id": "vaccinated_and_immunized_by_sia_10",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_10 * sia_coverage_5 * adjusted_sia_mcv1_vaccine_efficacy_5",
+   "formula": "alive_and_susceptible_immediately_before_sia_10 * routine_mcv1_measles_vaccine_sia_coverage_5 * adjusted_sia_mcv1_vaccine_efficacy_5",
    "expected": 4640.228871
   },
   {
@@ -25606,8 +25606,8 @@
    "expected": 7177.756756
   },
   {
-   "id": "total_alive_20",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_10",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_10 + alive_and_immune_to_measles_after_sia_10",
    "expected": 9475.669139
@@ -25638,7 +25638,7 @@
    "id": "expected_all_cause_mortality_50",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_20 - total_alive_20 * (1 - weekly_mortality_risk_12mo_5yo_20) ^ number_of_weeks_between_sia_and_5yo_10",
+   "formula": "distribute_these_deaths_among_groups_total_alive_10 - distribute_these_deaths_among_groups_total_alive_10 * (1 - weekly_mortality_risk_12mo_5yo_20) ^ number_of_weeks_between_sia_and_5yo_10",
    "expected": 503.691707
   },
   {
@@ -25681,7 +25681,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_135",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - total_dead_23 - due_to_tuberculosis_47",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - visit_5_measles_total_dead_5 - due_to_tuberculosis_47",
    "expected": 9623.443379
   },
   {
@@ -25793,7 +25793,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_137",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - total_dead_23 - due_to_rotavirus_47",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_5 - visit_5_measles_total_dead_5 - due_to_rotavirus_47",
    "expected": 9590.83277
   },
   {
@@ -26052,12 +26052,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_49",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_25 + expected_all_cause_mortality_reduced_due_to_program_s_effect_20",
+   "formula": "distribute_these_deaths_among_groups_total_dead_20 + expected_all_cause_mortality_reduced_due_to_program_s_effect_20",
    "expected": 1016.346335
   },
   {
-   "id": "total_dead_24",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_19",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_49",
    "expected": 1016.346335
@@ -26066,7 +26066,7 @@
    "id": "under_5_deaths_averted_by_the_program_5",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_21 - total_dead_24",
+   "formula": "distribute_these_deaths_among_groups_total_dead_17 - distribute_these_deaths_among_groups_total_dead_19",
    "expected": 21.47570652
   },
   {
@@ -26187,7 +26187,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_isab",
    "label": "Cost per equivalent outcome to an under-5 death averted (Isabel)",
    "section": "new_incentives",
-   "formula": "total_cost_5 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_5",
+   "formula": "with_the_program_total_cost_5 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_5",
    "expected": 3934.365335,
    "format": "usd"
   },
@@ -29425,8 +29425,8 @@
    "expected": 350.8657672
   },
   {
-   "id": "total_alive_21",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_11",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - total_dead_from_all_causes_including_from_all_previous_perio_52",
    "expected": 9649.134233
@@ -29504,7 +29504,7 @@
    "id": "cost_of_cash_transfers_6",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_11, attend_visit_2_11, attend_visit_3_11, attend_visit_4_11) * transfer_per_visit_1_4_naira_6 + total_alive_21 * vaccination_rate_with_the_program_mcv1_6 * transfer_for_visit_5_measles_naira_6) / exchange_rate_naira_per_usd_6",
+   "formula": "(sum(attend_visit_1_11, attend_visit_2_11, attend_visit_3_11, attend_visit_4_11) * transfer_per_visit_1_4_naira_6 + visit_5_measles_total_alive_11 * vaccination_rate_with_the_program_mcv1_6 * transfer_for_visit_5_measles_naira_6) / exchange_rate_naira_per_usd_6",
    "expected": 30753.06264,
    "format": "usd"
   },
@@ -29523,8 +29523,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_6",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_6",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_11 * administrative_cost_per_woman_6",
    "expected": 60384.96,
@@ -29534,7 +29534,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_11",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_21 * vaccination_rate_with_the_program_mcv1_6 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6",
+   "formula": "visit_5_measles_total_alive_11 * vaccination_rate_with_the_program_mcv1_6 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6",
    "expected": 0.2092781425
   },
   {
@@ -29686,8 +29686,8 @@
    "expected": 356.0512634
   },
   {
-   "id": "total_alive_22",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_12",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - total_dead_from_all_causes_including_from_all_previous_perio_55",
    "expected": 9643.948737
@@ -29696,7 +29696,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_12",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_22 * vaccination_rate_without_the_program_mcv1_6 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6",
+   "formula": "visit_5_measles_total_alive_12 * vaccination_rate_without_the_program_mcv1_6 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6",
    "expected": 0.144659231
   },
   {
@@ -29722,16 +29722,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_6",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_6",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_6, administrative_costs_6, costs_to_the_government_of_additional_vaccines_and_clinic_lo_6)",
+   "formula": "sum(cost_of_cash_transfers_6, with_the_program_administrative_costs_6, costs_to_the_government_of_additional_vaccines_and_clinic_lo_6)",
    "expected": 91138.02264,
    "format": "usd"
   },
   {
-   "id": "total_dead_28",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_6",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_55",
    "expected": 356.0512634
@@ -29827,7 +29827,7 @@
    "id": "expected_all_cause_mortality_57",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_22 - total_alive_22 * (1 - weekly_mortality_risk_1_12_months_47) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_12) * (1 - weekly_mortality_risk_12mo_5yo_21) ^ (average_age_at_sia_in_weeks_21 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_12 - visit_5_measles_total_alive_12 * (1 - weekly_mortality_risk_1_12_months_47) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_12) * (1 - weekly_mortality_risk_12mo_5yo_21) ^ (average_age_at_sia_in_weeks_21 - 12 * 4.345)",
    "expected": 183.7562582
   },
   {
@@ -29877,12 +29877,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_58",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_28 + expected_all_cause_mortality_reduced_due_to_pcv_57",
+   "formula": "visit_5_measles_total_dead_6 + expected_all_cause_mortality_reduced_due_to_pcv_57",
    "expected": 536.7574617
   },
   {
-   "id": "total_dead_27",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_22",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_58",
    "expected": 536.7574617
@@ -29927,14 +29927,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_6",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_22 * vaccination_rate_without_the_program_mcv1_6 * adjusted_mcv1_vaccine_efficacy_6",
+   "formula": "visit_5_measles_total_alive_12 * vaccination_rate_without_the_program_mcv1_6 * adjusted_mcv1_vaccine_efficacy_6",
    "expected": 1056.012387
   },
   {
    "id": "alive_and_susceptible_to_measles_11",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_22 - alive_received_measles_vaccine_and_immunized_6",
+   "formula": "visit_5_measles_total_alive_12 - alive_received_measles_vaccine_and_immunized_6",
    "expected": 8587.93635
   },
   {
@@ -30040,7 +30040,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_155",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - total_dead_28 - due_to_measles_21",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - visit_5_measles_total_dead_6 - due_to_measles_21",
    "expected": 9585.980166
   },
   {
@@ -30065,8 +30065,8 @@
    "expected": 7333.450575
   },
   {
-   "id": "sia_coverage_6",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_6",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -30075,7 +30075,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -30118,7 +30118,7 @@
    "id": "vaccinated_and_immunized_by_sia_11",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_11 * sia_coverage_6 * adjusted_sia_mcv1_vaccine_efficacy_6",
+   "formula": "alive_and_susceptible_immediately_before_sia_11 * routine_mcv1_measles_vaccine_sia_coverage_6 * adjusted_sia_mcv1_vaccine_efficacy_6",
    "expected": 4904.611745
   },
   {
@@ -30178,8 +30178,8 @@
    "expected": 7034.403708
   },
   {
-   "id": "total_alive_23",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_11",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_11 + alive_and_immune_to_measles_after_sia_11",
    "expected": 9463.242538
@@ -30210,7 +30210,7 @@
    "id": "expected_all_cause_mortality_58",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_23 - total_alive_23 * (1 - weekly_mortality_risk_12mo_5yo_22) ^ number_of_weeks_between_sia_and_5yo_11",
+   "formula": "distribute_these_deaths_among_groups_total_alive_11 - distribute_these_deaths_among_groups_total_alive_11 * (1 - weekly_mortality_risk_12mo_5yo_22) ^ number_of_weeks_between_sia_and_5yo_11",
    "expected": 503.0311546
   },
   {
@@ -30246,12 +30246,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_57",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_27 + expected_all_cause_mortality_reduced_due_to_program_s_effect_22",
+   "formula": "distribute_these_deaths_among_groups_total_dead_22 + expected_all_cause_mortality_reduced_due_to_program_s_effect_22",
    "expected": 1037.822041
   },
   {
-   "id": "total_dead_26",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_21",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_57",
    "expected": 1037.822041
@@ -30290,7 +30290,7 @@
    "id": "expected_all_cause_mortality_59",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_21 - total_alive_21 * (1 - weekly_mortality_risk_1_12_months_48) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_12) * (1 - weekly_mortality_risk_12mo_5yo_23) ^ (average_age_at_sia_in_weeks_23 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_11 - visit_5_measles_total_alive_11 * (1 - weekly_mortality_risk_1_12_months_48) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_12) * (1 - weekly_mortality_risk_12mo_5yo_23) ^ (average_age_at_sia_in_weeks_23 - 12 * 4.345)",
    "expected": 183.8550629
   },
   {
@@ -30676,14 +30676,14 @@
    "id": "alive_received_a_vaccine_and_immunized_6",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_21 * vaccination_rate_with_the_program_mcv1_6 * adjusted_mcv1_vaccine_efficacy_6",
+   "formula": "visit_5_measles_total_alive_11 * vaccination_rate_with_the_program_mcv1_6 * adjusted_mcv1_vaccine_efficacy_6",
    "expected": 1527.730441
   },
   {
    "id": "alive_and_susceptible_to_measles_12",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_21 - alive_received_a_vaccine_and_immunized_6",
+   "formula": "visit_5_measles_total_alive_11 - alive_received_a_vaccine_and_immunized_6",
    "expected": 8121.403792
   },
   {
@@ -30722,8 +30722,8 @@
    "expected": 524.0040933
   },
   {
-   "id": "total_dead_30",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_24",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_60",
    "expected": 524.0040933
@@ -30802,7 +30802,7 @@
    "id": "vaccinated_and_immunized_by_sia_12",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_12 * sia_coverage_6 * adjusted_sia_mcv1_vaccine_efficacy_6",
+   "formula": "alive_and_susceptible_immediately_before_sia_12 * routine_mcv1_measles_vaccine_sia_coverage_6 * adjusted_sia_mcv1_vaccine_efficacy_6",
    "expected": 4640.388888
   },
   {
@@ -30862,8 +30862,8 @@
    "expected": 7178.00428
   },
   {
-   "id": "total_alive_24",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_12",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_12 + alive_and_immune_to_measles_after_sia_12",
    "expected": 9475.995907
@@ -30894,7 +30894,7 @@
    "id": "expected_all_cause_mortality_60",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_24 - total_alive_24 * (1 - weekly_mortality_risk_12mo_5yo_24) ^ number_of_weeks_between_sia_and_5yo_12",
+   "formula": "distribute_these_deaths_among_groups_total_alive_12 - distribute_these_deaths_among_groups_total_alive_12 * (1 - weekly_mortality_risk_12mo_5yo_24) ^ number_of_weeks_between_sia_and_5yo_12",
    "expected": 503.7090767
   },
   {
@@ -30937,7 +30937,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_163",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - total_dead_28 - due_to_tuberculosis_57",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - visit_5_measles_total_dead_6 - due_to_tuberculosis_57",
    "expected": 9623.611377
   },
   {
@@ -31049,7 +31049,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_165",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - total_dead_28 - due_to_rotavirus_57",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_6 - visit_5_measles_total_dead_6 - due_to_rotavirus_57",
    "expected": 9591.608936
   },
   {
@@ -31308,12 +31308,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_59",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_30 + expected_all_cause_mortality_reduced_due_to_program_s_effect_24",
+   "formula": "distribute_these_deaths_among_groups_total_dead_24 + expected_all_cause_mortality_reduced_due_to_program_s_effect_24",
    "expected": 1015.637027
   },
   {
-   "id": "total_dead_29",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_23",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_59",
    "expected": 1015.637027
@@ -31322,7 +31322,7 @@
    "id": "under_5_deaths_averted_by_the_program_6",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_26 - total_dead_29",
+   "formula": "distribute_these_deaths_among_groups_total_dead_21 - distribute_these_deaths_among_groups_total_dead_23",
    "expected": 22.18501483
   },
   {
@@ -31443,7 +31443,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_jame",
    "label": "Cost per equivalent outcome to an under-5 death averted (James)",
    "section": "new_incentives",
-   "formula": "total_cost_6 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_6",
+   "formula": "with_the_program_total_cost_6 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_6",
    "expected": 3931.57368,
    "format": "usd"
   },
@@ -34687,8 +34687,8 @@
    "expected": 351.832923
   },
   {
-   "id": "total_alive_25",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_13",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - total_dead_from_all_causes_including_from_all_previous_perio_62",
    "expected": 9648.167077
@@ -34766,7 +34766,7 @@
    "id": "cost_of_cash_transfers_7",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_13, attend_visit_2_13, attend_visit_3_13, attend_visit_4_13) * transfer_per_visit_1_4_naira_7 + total_alive_25 * vaccination_rate_with_the_program_mcv1_7 * transfer_for_visit_5_measles_naira_7) / exchange_rate_naira_per_usd_7",
+   "formula": "(sum(attend_visit_1_13, attend_visit_2_13, attend_visit_3_13, attend_visit_4_13) * transfer_per_visit_1_4_naira_7 + visit_5_measles_total_alive_13 * vaccination_rate_with_the_program_mcv1_7 * transfer_for_visit_5_measles_naira_7) / exchange_rate_naira_per_usd_7",
    "expected": 30751.46836,
    "format": "usd"
   },
@@ -34785,8 +34785,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_7",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_7",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_13 * administrative_cost_per_woman_7",
    "expected": 60384.96,
@@ -34796,7 +34796,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_13",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_25 * vaccination_rate_with_the_program_mcv1_7 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7",
+   "formula": "visit_5_measles_total_alive_13 * vaccination_rate_with_the_program_mcv1_7 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7",
    "expected": 0.2092571661
   },
   {
@@ -34948,8 +34948,8 @@
    "expected": 356.0512634
   },
   {
-   "id": "total_alive_26",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_14",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - total_dead_from_all_causes_including_from_all_previous_perio_65",
    "expected": 9643.948737
@@ -34958,7 +34958,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_14",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_26 * vaccination_rate_without_the_program_mcv1_7 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7",
+   "formula": "visit_5_measles_total_alive_14 * vaccination_rate_without_the_program_mcv1_7 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7",
    "expected": 0.144659231
   },
   {
@@ -34984,16 +34984,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_7",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_7",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_7, administrative_costs_7, costs_to_the_government_of_additional_vaccines_and_clinic_lo_7)",
+   "formula": "sum(cost_of_cash_transfers_7, with_the_program_administrative_costs_7, costs_to_the_government_of_additional_vaccines_and_clinic_lo_7)",
    "expected": 91136.42836,
    "format": "usd"
   },
   {
-   "id": "total_dead_33",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_7",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_65",
    "expected": 356.0512634
@@ -35089,7 +35089,7 @@
    "id": "expected_all_cause_mortality_67",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_26 - total_alive_26 * (1 - weekly_mortality_risk_1_12_months_55) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_14) * (1 - weekly_mortality_risk_12mo_5yo_25) ^ (average_age_at_sia_in_weeks_25 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_14 - visit_5_measles_total_alive_14 * (1 - weekly_mortality_risk_1_12_months_55) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_14) * (1 - weekly_mortality_risk_12mo_5yo_25) ^ (average_age_at_sia_in_weeks_25 - 12 * 4.345)",
    "expected": 183.7562582
   },
   {
@@ -35139,12 +35139,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_68",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_33 + expected_all_cause_mortality_reduced_due_to_pcv_67",
+   "formula": "visit_5_measles_total_dead_7 + expected_all_cause_mortality_reduced_due_to_pcv_67",
    "expected": 536.7574617
   },
   {
-   "id": "total_dead_32",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_26",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_68",
    "expected": 536.7574617
@@ -35189,14 +35189,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_7",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_26 * vaccination_rate_without_the_program_mcv1_7 * adjusted_mcv1_vaccine_efficacy_7",
+   "formula": "visit_5_measles_total_alive_14 * vaccination_rate_without_the_program_mcv1_7 * adjusted_mcv1_vaccine_efficacy_7",
    "expected": 1056.012387
   },
   {
    "id": "alive_and_susceptible_to_measles_13",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_26 - alive_received_measles_vaccine_and_immunized_7",
+   "formula": "visit_5_measles_total_alive_14 - alive_received_measles_vaccine_and_immunized_7",
    "expected": 8587.93635
   },
   {
@@ -35302,7 +35302,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_183",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - total_dead_33 - due_to_measles_25",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - visit_5_measles_total_dead_7 - due_to_measles_25",
    "expected": 9585.980166
   },
   {
@@ -35327,8 +35327,8 @@
    "expected": 7333.450575
   },
   {
-   "id": "sia_coverage_7",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_7",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -35337,7 +35337,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -35380,7 +35380,7 @@
    "id": "vaccinated_and_immunized_by_sia_13",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_13 * sia_coverage_7 * adjusted_sia_mcv1_vaccine_efficacy_7",
+   "formula": "alive_and_susceptible_immediately_before_sia_13 * routine_mcv1_measles_vaccine_sia_coverage_7 * adjusted_sia_mcv1_vaccine_efficacy_7",
    "expected": 4904.611745
   },
   {
@@ -35440,8 +35440,8 @@
    "expected": 7034.403708
   },
   {
-   "id": "total_alive_27",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_13",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_13 + alive_and_immune_to_measles_after_sia_13",
    "expected": 9463.242538
@@ -35472,7 +35472,7 @@
    "id": "expected_all_cause_mortality_68",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_27 - total_alive_27 * (1 - weekly_mortality_risk_12mo_5yo_26) ^ number_of_weeks_between_sia_and_5yo_13",
+   "formula": "distribute_these_deaths_among_groups_total_alive_13 - distribute_these_deaths_among_groups_total_alive_13 * (1 - weekly_mortality_risk_12mo_5yo_26) ^ number_of_weeks_between_sia_and_5yo_13",
    "expected": 503.0311546
   },
   {
@@ -35508,12 +35508,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_67",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_32 + expected_all_cause_mortality_reduced_due_to_program_s_effect_26",
+   "formula": "distribute_these_deaths_among_groups_total_dead_26 + expected_all_cause_mortality_reduced_due_to_program_s_effect_26",
    "expected": 1037.822041
   },
   {
-   "id": "total_dead_31",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_25",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_67",
    "expected": 1037.822041
@@ -35552,7 +35552,7 @@
    "id": "expected_all_cause_mortality_69",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_25 - total_alive_25 * (1 - weekly_mortality_risk_1_12_months_56) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_14) * (1 - weekly_mortality_risk_12mo_5yo_27) ^ (average_age_at_sia_in_weeks_27 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_13 - visit_5_measles_total_alive_13 * (1 - weekly_mortality_risk_1_12_months_56) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_14) * (1 - weekly_mortality_risk_12mo_5yo_27) ^ (average_age_at_sia_in_weeks_27 - 12 * 4.345)",
    "expected": 183.8366347
   },
   {
@@ -35938,14 +35938,14 @@
    "id": "alive_received_a_vaccine_and_immunized_7",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_25 * vaccination_rate_with_the_program_mcv1_7 * adjusted_mcv1_vaccine_efficacy_7",
+   "formula": "visit_5_measles_total_alive_13 * vaccination_rate_with_the_program_mcv1_7 * adjusted_mcv1_vaccine_efficacy_7",
    "expected": 1527.577313
   },
   {
    "id": "alive_and_susceptible_to_measles_14",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_25 - alive_received_a_vaccine_and_immunized_7",
+   "formula": "visit_5_measles_total_alive_13 - alive_received_a_vaccine_and_immunized_7",
    "expected": 8120.589764
   },
   {
@@ -35984,8 +35984,8 @@
    "expected": 526.1485009
   },
   {
-   "id": "total_dead_35",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_28",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_70",
    "expected": 526.1485009
@@ -36064,7 +36064,7 @@
    "id": "vaccinated_and_immunized_by_sia_14",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_14 * sia_coverage_7 * adjusted_sia_mcv1_vaccine_efficacy_7",
+   "formula": "alive_and_susceptible_immediately_before_sia_14 * routine_mcv1_measles_vaccine_sia_coverage_7 * adjusted_sia_mcv1_vaccine_efficacy_7",
    "expected": 4639.338773
   },
   {
@@ -36124,8 +36124,8 @@
    "expected": 7176.379906
   },
   {
-   "id": "total_alive_28",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_14",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_14 + alive_and_immune_to_measles_after_sia_14",
    "expected": 9473.851499
@@ -36156,7 +36156,7 @@
    "id": "expected_all_cause_mortality_70",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_28 - total_alive_28 * (1 - weekly_mortality_risk_12mo_5yo_28) ^ number_of_weeks_between_sia_and_5yo_14",
+   "formula": "distribute_these_deaths_among_groups_total_alive_14 - distribute_these_deaths_among_groups_total_alive_14 * (1 - weekly_mortality_risk_12mo_5yo_28) ^ number_of_weeks_between_sia_and_5yo_14",
    "expected": 503.5950879
   },
   {
@@ -36199,7 +36199,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_191",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - total_dead_33 - due_to_tuberculosis_67",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - visit_5_measles_total_dead_7 - due_to_tuberculosis_67",
    "expected": 9640.543482
   },
   {
@@ -36311,7 +36311,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_193",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - total_dead_33 - due_to_rotavirus_67",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_7 - visit_5_measles_total_dead_7 - due_to_rotavirus_67",
    "expected": 9590.83277
   },
   {
@@ -36570,12 +36570,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_69",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_35 + expected_all_cause_mortality_reduced_due_to_program_s_effect_28",
+   "formula": "distribute_these_deaths_among_groups_total_dead_28 + expected_all_cause_mortality_reduced_due_to_program_s_effect_28",
    "expected": 1021.30964
   },
   {
-   "id": "total_dead_34",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_27",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_69",
    "expected": 1021.30964
@@ -36584,7 +36584,7 @@
    "id": "under_5_deaths_averted_by_the_program_7",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_31 - total_dead_34",
+   "formula": "distribute_these_deaths_among_groups_total_dead_25 - distribute_these_deaths_among_groups_total_dead_27",
    "expected": 16.51240097
   },
   {
@@ -36705,7 +36705,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_josh",
    "label": "Cost per equivalent outcome to an under-5 death averted (Josh)",
    "section": "new_incentives",
-   "formula": "total_cost_7 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_7",
+   "formula": "with_the_program_total_cost_7 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_7",
    "expected": 4972.574796,
    "format": "usd"
   },
@@ -39943,8 +39943,8 @@
    "expected": 350.8852195
   },
   {
-   "id": "total_alive_29",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_15",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - total_dead_from_all_causes_including_from_all_previous_perio_72",
    "expected": 9649.114781
@@ -40022,7 +40022,7 @@
    "id": "cost_of_cash_transfers_8",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_15, attend_visit_2_15, attend_visit_3_15, attend_visit_4_15) * transfer_per_visit_1_4_naira_8 + total_alive_29 * vaccination_rate_with_the_program_mcv1_8 * transfer_for_visit_5_measles_naira_8) / exchange_rate_naira_per_usd_8",
+   "formula": "(sum(attend_visit_1_15, attend_visit_2_15, attend_visit_3_15, attend_visit_4_15) * transfer_per_visit_1_4_naira_8 + visit_5_measles_total_alive_15 * vaccination_rate_with_the_program_mcv1_8 * transfer_for_visit_5_measles_naira_8) / exchange_rate_naira_per_usd_8",
    "expected": 30753.05082,
    "format": "usd"
   },
@@ -40041,8 +40041,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_8",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_8",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_15 * administrative_cost_per_woman_8",
    "expected": 60384.96,
@@ -40052,7 +40052,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_15",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_29 * vaccination_rate_with_the_program_mcv1_8 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8",
+   "formula": "visit_5_measles_total_alive_15 * vaccination_rate_with_the_program_mcv1_8 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8",
    "expected": 0.2092777207
   },
   {
@@ -40204,8 +40204,8 @@
    "expected": 356.0512634
   },
   {
-   "id": "total_alive_30",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_16",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - total_dead_from_all_causes_including_from_all_previous_perio_75",
    "expected": 9643.948737
@@ -40214,7 +40214,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_16",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_30 * vaccination_rate_without_the_program_mcv1_8 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8",
+   "formula": "visit_5_measles_total_alive_16 * vaccination_rate_without_the_program_mcv1_8 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8",
    "expected": 0.144659231
   },
   {
@@ -40240,16 +40240,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_8",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_8",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_8, administrative_costs_8, costs_to_the_government_of_additional_vaccines_and_clinic_lo_8)",
+   "formula": "sum(cost_of_cash_transfers_8, with_the_program_administrative_costs_8, costs_to_the_government_of_additional_vaccines_and_clinic_lo_8)",
    "expected": 91138.01082,
    "format": "usd"
   },
   {
-   "id": "total_dead_38",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_8",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_75",
    "expected": 356.0512634
@@ -40345,7 +40345,7 @@
    "id": "expected_all_cause_mortality_77",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_30 - total_alive_30 * (1 - weekly_mortality_risk_1_12_months_63) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_16) * (1 - weekly_mortality_risk_12mo_5yo_29) ^ (average_age_at_sia_in_weeks_29 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_16 - visit_5_measles_total_alive_16 * (1 - weekly_mortality_risk_1_12_months_63) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_16) * (1 - weekly_mortality_risk_12mo_5yo_29) ^ (average_age_at_sia_in_weeks_29 - 12 * 4.345)",
    "expected": 183.7562582
   },
   {
@@ -40395,12 +40395,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_78",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_38 + expected_all_cause_mortality_reduced_due_to_pcv_77",
+   "formula": "visit_5_measles_total_dead_8 + expected_all_cause_mortality_reduced_due_to_pcv_77",
    "expected": 536.7574617
   },
   {
-   "id": "total_dead_37",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_30",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_78",
    "expected": 536.7574617
@@ -40445,14 +40445,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_8",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_30 * vaccination_rate_without_the_program_mcv1_8 * adjusted_mcv1_vaccine_efficacy_8",
+   "formula": "visit_5_measles_total_alive_16 * vaccination_rate_without_the_program_mcv1_8 * adjusted_mcv1_vaccine_efficacy_8",
    "expected": 1056.012387
   },
   {
    "id": "alive_and_susceptible_to_measles_15",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_30 - alive_received_measles_vaccine_and_immunized_8",
+   "formula": "visit_5_measles_total_alive_16 - alive_received_measles_vaccine_and_immunized_8",
    "expected": 8587.93635
   },
   {
@@ -40558,7 +40558,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_211",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - total_dead_38 - due_to_measles_29",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - visit_5_measles_total_dead_8 - due_to_measles_29",
    "expected": 9585.980166
   },
   {
@@ -40583,8 +40583,8 @@
    "expected": 7333.450575
   },
   {
-   "id": "sia_coverage_8",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_8",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -40593,7 +40593,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -40636,7 +40636,7 @@
    "id": "vaccinated_and_immunized_by_sia_15",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_15 * sia_coverage_8 * adjusted_sia_mcv1_vaccine_efficacy_8",
+   "formula": "alive_and_susceptible_immediately_before_sia_15 * routine_mcv1_measles_vaccine_sia_coverage_8 * adjusted_sia_mcv1_vaccine_efficacy_8",
    "expected": 4904.611745
   },
   {
@@ -40696,8 +40696,8 @@
    "expected": 7034.403708
   },
   {
-   "id": "total_alive_31",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_15",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_15 + alive_and_immune_to_measles_after_sia_15",
    "expected": 9463.242538
@@ -40728,7 +40728,7 @@
    "id": "expected_all_cause_mortality_78",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_31 - total_alive_31 * (1 - weekly_mortality_risk_12mo_5yo_30) ^ number_of_weeks_between_sia_and_5yo_15",
+   "formula": "distribute_these_deaths_among_groups_total_alive_15 - distribute_these_deaths_among_groups_total_alive_15 * (1 - weekly_mortality_risk_12mo_5yo_30) ^ number_of_weeks_between_sia_and_5yo_15",
    "expected": 503.0311546
   },
   {
@@ -40764,12 +40764,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_77",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_37 + expected_all_cause_mortality_reduced_due_to_program_s_effect_30",
+   "formula": "distribute_these_deaths_among_groups_total_dead_30 + expected_all_cause_mortality_reduced_due_to_program_s_effect_30",
    "expected": 1037.822041
   },
   {
-   "id": "total_dead_36",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_29",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_77",
    "expected": 1037.822041
@@ -40808,7 +40808,7 @@
    "id": "expected_all_cause_mortality_79",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_29 - total_alive_29 * (1 - weekly_mortality_risk_1_12_months_64) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_16) * (1 - weekly_mortality_risk_12mo_5yo_31) ^ (average_age_at_sia_in_weeks_31 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_15 - visit_5_measles_total_alive_15 * (1 - weekly_mortality_risk_1_12_months_64) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_16) * (1 - weekly_mortality_risk_12mo_5yo_31) ^ (average_age_at_sia_in_weeks_31 - 12 * 4.345)",
    "expected": 183.8546923
   },
   {
@@ -41194,14 +41194,14 @@
    "id": "alive_received_a_vaccine_and_immunized_8",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_29 * vaccination_rate_with_the_program_mcv1_8 * adjusted_mcv1_vaccine_efficacy_8",
+   "formula": "visit_5_measles_total_alive_15 * vaccination_rate_with_the_program_mcv1_8 * adjusted_mcv1_vaccine_efficacy_8",
    "expected": 1527.727361
   },
   {
    "id": "alive_and_susceptible_to_measles_16",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_29 - alive_received_a_vaccine_and_immunized_8",
+   "formula": "visit_5_measles_total_alive_15 - alive_received_a_vaccine_and_immunized_8",
    "expected": 8121.38742
   },
   {
@@ -41240,8 +41240,8 @@
    "expected": 523.9343867
   },
   {
-   "id": "total_dead_40",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_32",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_80",
    "expected": 523.9343867
@@ -41320,7 +41320,7 @@
    "id": "vaccinated_and_immunized_by_sia_16",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_16 * sia_coverage_8 * adjusted_sia_mcv1_vaccine_efficacy_8",
+   "formula": "alive_and_susceptible_immediately_before_sia_16 * routine_mcv1_measles_vaccine_sia_coverage_8 * adjusted_sia_mcv1_vaccine_efficacy_8",
    "expected": 4640.423024
   },
   {
@@ -41380,8 +41380,8 @@
    "expected": 7178.057083
   },
   {
-   "id": "total_alive_32",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_16",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_16 + alive_and_immune_to_measles_after_sia_16",
    "expected": 9476.065613
@@ -41412,7 +41412,7 @@
    "id": "expected_all_cause_mortality_80",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_32 - total_alive_32 * (1 - weekly_mortality_risk_12mo_5yo_32) ^ number_of_weeks_between_sia_and_5yo_16",
+   "formula": "distribute_these_deaths_among_groups_total_alive_16 - distribute_these_deaths_among_groups_total_alive_16 * (1 - weekly_mortality_risk_12mo_5yo_32) ^ number_of_weeks_between_sia_and_5yo_16",
    "expected": 503.7127821
   },
   {
@@ -41455,7 +41455,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_219",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - total_dead_38 - due_to_tuberculosis_77",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - visit_5_measles_total_dead_8 - due_to_tuberculosis_77",
    "expected": 9618.097054
   },
   {
@@ -41567,7 +41567,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_221",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - total_dead_38 - due_to_rotavirus_77",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_8 - visit_5_measles_total_dead_8 - due_to_rotavirus_77",
    "expected": 9590.83277
   },
   {
@@ -41826,12 +41826,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_79",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_40 + expected_all_cause_mortality_reduced_due_to_program_s_effect_32",
+   "formula": "distribute_these_deaths_among_groups_total_dead_32 + expected_all_cause_mortality_reduced_due_to_program_s_effect_32",
    "expected": 1015.261645
   },
   {
-   "id": "total_dead_39",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_31",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_79",
    "expected": 1015.261645
@@ -41840,7 +41840,7 @@
    "id": "under_5_deaths_averted_by_the_program_8",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_36 - total_dead_39",
+   "formula": "distribute_these_deaths_among_groups_total_dead_29 - distribute_these_deaths_among_groups_total_dead_31",
    "expected": 22.56039645
   },
   {
@@ -41961,7 +41961,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_subj",
    "label": "Cost per equivalent outcome to an under-5 death averted (subjective input)",
    "section": "new_incentives",
-   "formula": "total_cost_8 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_8",
+   "formula": "with_the_program_total_cost_8 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_8",
    "expected": 3833.135446,
    "format": "usd"
   },
@@ -45199,8 +45199,8 @@
    "expected": 349.5655532
   },
   {
-   "id": "total_alive_33",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_17",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - total_dead_from_all_causes_including_from_all_previous_perio_82",
    "expected": 9650.434447
@@ -45278,7 +45278,7 @@
    "id": "cost_of_cash_transfers_9",
    "label": "Cost of cash transfers",
    "section": "new_incentives",
-   "formula": "(sum(attend_visit_1_17, attend_visit_2_17, attend_visit_3_17, attend_visit_4_17) * transfer_per_visit_1_4_naira_9 + total_alive_33 * vaccination_rate_with_the_program_mcv1_9 * transfer_for_visit_5_measles_naira_9) / exchange_rate_naira_per_usd_9",
+   "formula": "(sum(attend_visit_1_17, attend_visit_2_17, attend_visit_3_17, attend_visit_4_17) * transfer_per_visit_1_4_naira_9 + visit_5_measles_total_alive_17 * vaccination_rate_with_the_program_mcv1_9 * transfer_for_visit_5_measles_naira_9) / exchange_rate_naira_per_usd_9",
    "expected": 30755.05236,
    "format": "usd"
   },
@@ -45297,8 +45297,8 @@
    "format": "usd"
   },
   {
-   "id": "administrative_costs_9",
-   "label": "Administrative costs",
+   "id": "with_the_program_administrative_costs_9",
+   "label": "With the program: Administrative costs",
    "section": "new_incentives",
    "formula": "attend_visit_1_17 * administrative_cost_per_woman_9",
    "expected": 60384.96,
@@ -45308,7 +45308,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_17",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_33 * vaccination_rate_with_the_program_mcv1_9 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9",
+   "formula": "visit_5_measles_total_alive_17 * vaccination_rate_with_the_program_mcv1_9 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9",
    "expected": 0.2093063426
   },
   {
@@ -45460,8 +45460,8 @@
    "expected": 355.4327084
   },
   {
-   "id": "total_alive_34",
-   "label": "Total alive",
+   "id": "visit_5_measles_total_alive_18",
+   "label": "Visit 5 (Measles): Total alive",
    "section": "new_incentives",
    "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - total_dead_from_all_causes_including_from_all_previous_perio_85",
    "expected": 9644.567292
@@ -45470,7 +45470,7 @@
    "id": "average_attendance_at_visit_5_per_woman_in_cohort_18",
    "label": "Average attendance at visit 5 per woman in cohort",
    "section": "new_incentives",
-   "formula": "total_alive_34 * vaccination_rate_without_the_program_mcv1_9 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9",
+   "formula": "visit_5_measles_total_alive_18 * vaccination_rate_without_the_program_mcv1_9 / suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9",
    "expected": 0.1446685094
   },
   {
@@ -45496,16 +45496,16 @@
    "format": "usd"
   },
   {
-   "id": "total_cost_9",
-   "label": "TOTAL COST",
+   "id": "with_the_program_total_cost_9",
+   "label": "With the program: TOTAL COST",
    "section": "new_incentives",
-   "formula": "sum(cost_of_cash_transfers_9, administrative_costs_9, costs_to_the_government_of_additional_vaccines_and_clinic_lo_9)",
+   "formula": "sum(cost_of_cash_transfers_9, with_the_program_administrative_costs_9, costs_to_the_government_of_additional_vaccines_and_clinic_lo_9)",
    "expected": 91140.01236,
    "format": "usd"
   },
   {
-   "id": "total_dead_43",
-   "label": "Total dead",
+   "id": "visit_5_measles_total_dead_9",
+   "label": "Visit 5 (Measles): Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_85",
    "expected": 355.4327084
@@ -45601,7 +45601,7 @@
    "id": "expected_all_cause_mortality_87",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_34 - total_alive_34 * (1 - weekly_mortality_risk_1_12_months_71) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_18) * (1 - weekly_mortality_risk_12mo_5yo_33) ^ (average_age_at_sia_in_weeks_33 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_18 - visit_5_measles_total_alive_18 * (1 - weekly_mortality_risk_1_12_months_71) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_without_program_2020_18) * (1 - weekly_mortality_risk_12mo_5yo_33) ^ (average_age_at_sia_in_weeks_33 - 12 * 4.345)",
    "expected": 183.7680442
   },
   {
@@ -45651,12 +45651,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_88",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_43 + expected_all_cause_mortality_reduced_due_to_pcv_87",
+   "formula": "visit_5_measles_total_dead_9 + expected_all_cause_mortality_reduced_due_to_pcv_87",
    "expected": 535.3879332
   },
   {
-   "id": "total_dead_42",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_34",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_88",
    "expected": 535.3879332
@@ -45701,14 +45701,14 @@
    "id": "alive_received_measles_vaccine_and_immunized_9",
    "label": "Alive, received measles vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_34 * vaccination_rate_without_the_program_mcv1_9 * adjusted_mcv1_vaccine_efficacy_9",
+   "formula": "visit_5_measles_total_alive_18 * vaccination_rate_without_the_program_mcv1_9 * adjusted_mcv1_vaccine_efficacy_9",
    "expected": 1056.080118
   },
   {
    "id": "alive_and_susceptible_to_measles_17",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_34 - alive_received_measles_vaccine_and_immunized_9",
+   "formula": "visit_5_measles_total_alive_18 - alive_received_measles_vaccine_and_immunized_9",
    "expected": 8588.487173
   },
   {
@@ -45814,7 +45814,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_239",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - total_dead_43 - due_to_measles_33",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - visit_5_measles_total_dead_9 - due_to_measles_33",
    "expected": 9586.595003
   },
   {
@@ -45839,8 +45839,8 @@
    "expected": 7334.511878
   },
   {
-   "id": "sia_coverage_9",
-   "label": "SIA coverage",
+   "id": "routine_mcv1_measles_vaccine_sia_coverage_9",
+   "label": "Routine MCV1 (Measles vaccine): SIA coverage",
    "section": "new_incentives",
    "source": {
     "title": "Source spreadsheet",
@@ -45849,7 +45849,7 @@
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
    "format": "percent",
-   "formula": "@givewell.sia_coverage",
+   "formula": "@givewell.routine_mcv1_measles_vaccine_sia_coverage",
    "expected": 0.76
   },
   {
@@ -45892,7 +45892,7 @@
    "id": "vaccinated_and_immunized_by_sia_17",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_17 * sia_coverage_9 * adjusted_sia_mcv1_vaccine_efficacy_9",
+   "formula": "alive_and_susceptible_immediately_before_sia_17 * routine_mcv1_measles_vaccine_sia_coverage_9 * adjusted_sia_mcv1_vaccine_efficacy_9",
    "expected": 4905.321544
   },
   {
@@ -45952,8 +45952,8 @@
    "expected": 7035.421733
   },
   {
-   "id": "total_alive_35",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_17",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_17 + alive_and_immune_to_measles_after_sia_17",
    "expected": 9464.612067
@@ -45984,7 +45984,7 @@
    "id": "expected_all_cause_mortality_88",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_35 - total_alive_35 * (1 - weekly_mortality_risk_12mo_5yo_34) ^ number_of_weeks_between_sia_and_5yo_17",
+   "formula": "distribute_these_deaths_among_groups_total_alive_17 - distribute_these_deaths_among_groups_total_alive_17 * (1 - weekly_mortality_risk_12mo_5yo_34) ^ number_of_weeks_between_sia_and_5yo_17",
    "expected": 503.1039537
   },
   {
@@ -46020,12 +46020,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_87",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_42 + expected_all_cause_mortality_reduced_due_to_program_s_effect_34",
+   "formula": "distribute_these_deaths_among_groups_total_dead_34 + expected_all_cause_mortality_reduced_due_to_program_s_effect_34",
    "expected": 1036.033312
   },
   {
-   "id": "total_dead_41",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_33",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_87",
    "expected": 1036.033312
@@ -46064,7 +46064,7 @@
    "id": "expected_all_cause_mortality_89",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_33 - total_alive_33 * (1 - weekly_mortality_risk_1_12_months_72) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_18) * (1 - weekly_mortality_risk_12mo_5yo_35) ^ (average_age_at_sia_in_weeks_35 - 12 * 4.345)",
+   "formula": "visit_5_measles_total_alive_17 - visit_5_measles_total_alive_17 * (1 - weekly_mortality_risk_1_12_months_72) ^ (12 * 4.345 - average_age_at_visit_5_in_weeks_with_program_2020_18) * (1 - weekly_mortality_risk_12mo_5yo_35) ^ (average_age_at_sia_in_weeks_35 - 12 * 4.345)",
    "expected": 183.8798372
   },
   {
@@ -46450,14 +46450,14 @@
    "id": "alive_received_a_vaccine_and_immunized_9",
    "label": "Alive, received a vaccine, and immunized",
    "section": "new_incentives",
-   "formula": "total_alive_33 * vaccination_rate_with_the_program_mcv1_9 * adjusted_mcv1_vaccine_efficacy_9",
+   "formula": "visit_5_measles_total_alive_17 * vaccination_rate_with_the_program_mcv1_9 * adjusted_mcv1_vaccine_efficacy_9",
    "expected": 1527.936301
   },
   {
    "id": "alive_and_susceptible_to_measles_18",
    "label": "Alive and susceptible to measles",
    "section": "new_incentives",
-   "formula": "total_alive_33 - alive_received_a_vaccine_and_immunized_9",
+   "formula": "visit_5_measles_total_alive_17 - alive_received_a_vaccine_and_immunized_9",
    "expected": 8122.498146
   },
   {
@@ -46496,8 +46496,8 @@
    "expected": 521.0796811
   },
   {
-   "id": "total_dead_45",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_36",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_90",
    "expected": 521.0796811
@@ -46576,7 +46576,7 @@
    "id": "vaccinated_and_immunized_by_sia_18",
    "label": "Vaccinated and immunized by SIA",
    "section": "new_incentives",
-   "formula": "alive_and_susceptible_immediately_before_sia_18 * sia_coverage_9 * adjusted_sia_mcv1_vaccine_efficacy_9",
+   "formula": "alive_and_susceptible_immediately_before_sia_18 * routine_mcv1_measles_vaccine_sia_coverage_9 * adjusted_sia_mcv1_vaccine_efficacy_9",
    "expected": 4639.009259
   },
   {
@@ -46636,8 +46636,8 @@
    "expected": 7175.870195
   },
   {
-   "id": "total_alive_36",
-   "label": "Total alive",
+   "id": "distribute_these_deaths_among_groups_total_alive_18",
+   "label": "Distribute these deaths among groups: Total alive",
    "section": "new_incentives",
    "formula": "alive_and_susceptible_immediately_after_sia_18 + alive_and_immune_to_measles_after_sia_18",
    "expected": 9473.178609
@@ -46668,7 +46668,7 @@
    "id": "expected_all_cause_mortality_90",
    "label": "Expected all-cause mortality",
    "section": "new_incentives",
-   "formula": "total_alive_36 - total_alive_36 * (1 - weekly_mortality_risk_12mo_5yo_36) ^ number_of_weeks_between_sia_and_5yo_18",
+   "formula": "distribute_these_deaths_among_groups_total_alive_18 - distribute_these_deaths_among_groups_total_alive_18 * (1 - weekly_mortality_risk_12mo_5yo_36) ^ number_of_weeks_between_sia_and_5yo_18",
    "expected": 503.5593195
   },
   {
@@ -46711,7 +46711,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_247",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - total_dead_43 - due_to_tuberculosis_87",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - visit_5_measles_total_dead_9 - due_to_tuberculosis_87",
    "expected": 9619.134299
   },
   {
@@ -46823,7 +46823,7 @@
    "id": "total_alive_before_accounting_for_deaths_from_other_causes_249",
    "label": "Total alive before accounting for deaths from other causes",
    "section": "new_incentives",
-   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - total_dead_43 - due_to_rotavirus_87",
+   "formula": "suppose_a_cohort_of_this_size_is_eligible_for_the_program_ju_9 - visit_5_measles_total_dead_9 - due_to_rotavirus_87",
    "expected": 9592.224134
   },
   {
@@ -47082,12 +47082,12 @@
    "id": "total_dead_from_all_causes_including_from_all_previous_perio_89",
    "label": "Total dead from all causes, including from all previous periods",
    "section": "new_incentives",
-   "formula": "total_dead_45 + expected_all_cause_mortality_reduced_due_to_program_s_effect_36",
+   "formula": "distribute_these_deaths_among_groups_total_dead_36 + expected_all_cause_mortality_reduced_due_to_program_s_effect_36",
    "expected": 1010.591215
   },
   {
-   "id": "total_dead_44",
-   "label": "Total dead",
+   "id": "distribute_these_deaths_among_groups_total_dead_35",
+   "label": "Distribute these deaths among groups: Total dead",
    "section": "new_incentives",
    "formula": "total_dead_from_all_causes_including_from_all_previous_perio_89",
    "expected": 1010.591215
@@ -47096,7 +47096,7 @@
    "id": "under_5_deaths_averted_by_the_program_9",
    "label": "Under-5 deaths averted by the program",
    "section": "new_incentives",
-   "formula": "total_dead_41 - total_dead_44",
+   "formula": "distribute_these_deaths_among_groups_total_dead_33 - distribute_these_deaths_among_groups_total_dead_35",
    "expected": 25.44209798
   },
   {
@@ -47215,7 +47215,7 @@
    "id": "cost_per_equivalent_outcome_to_an_under_5_death_averted_impt",
    "label": "Cost per equivalent outcome to an under-5 death averted (imptnt uncertain input)",
    "section": "new_incentives",
-   "formula": "total_cost_9 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_9",
+   "formula": "with_the_program_total_cost_9 / total_benefit_equivalent_under_5_deaths_averted_per_cohort_9",
    "expected": 2642.501722,
    "format": "usd"
   },

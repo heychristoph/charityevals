@@ -20,8 +20,7 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0,
-   "discount_rate": 0.04
+   "full_credit": 0
   }
  },
  "resources": [
@@ -61,18 +60,17 @@
  ],
  "rows": [
   {
-   "id": "discount_rate_best_guess",
-   "label": "Discount rate (Best guess)",
+   "id": "potential_value_generated_if_the_government_decided_to_scale",
+   "label": "Potential value generated if the government decided to scale the program up: Discount rate (Best guess)",
    "section": "leverage",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
     "cell": "Leverage!B16"
    },
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04."
+   "format": "percent"
   },
   {
    "id": "how_long_the_program_would_be_delivered_if_the_bangladeshi_g",
@@ -87,8 +85,8 @@
    }
   },
   {
-   "id": "best_guess_cost_effectiveness_of_the_program_in_bangladesh_b",
-   "label": "Best guess cost-effectiveness of the program in Bangladesh (Best guess)",
+   "id": "best_guess_cost_effectiveness_of_the_program_in_bangladesh",
+   "label": "Best guess cost-effectiveness of the program in Bangladesh",
    "section": "leverage",
    "value": 2.92004,
    "kind": "estimate",
@@ -115,7 +113,7 @@
    "id": "marginal_cost_effectiveness_per_diverted_from_other_programs",
    "label": "Marginal cost-effectiveness per $ diverted from other programs to CHoBI7 (xcash)",
    "section": "leverage",
-   "formula": "best_guess_cost_effectiveness_of_the_program_in_bangladesh_b - best_guess_cost_effectiveness_of_programs_the_bangladeshi_go",
+   "formula": "best_guess_cost_effectiveness_of_the_program_in_bangladesh - best_guess_cost_effectiveness_of_programs_the_bangladeshi_go",
    "expected": 1.603219441
   },
   {
@@ -242,7 +240,7 @@
   },
   {
    "id": "estimated_cost_to_the_bangladeshi_government_per_person_serv",
-   "label": "Estimated cost to the Bangladeshi government per person served by the program, best guess (Best guess)",
+   "label": "Estimated cost to the Bangladeshi government per person served by the program, best guess",
    "section": "leverage",
    "value": 1.51111,
    "kind": "estimate",
@@ -301,7 +299,7 @@
    "id": "present_discounted_units_of_value_generated_if_the_banglades",
    "label": "Present-discounted units of value generated if the Bangladeshi government delivered the program for 10 years",
    "section": "leverage",
-   "formula": "pv(discount_rate_best_guess, how_long_the_program_would_be_delivered_if_the_bangladeshi_g, -total_units_of_value_per_year_generated_if_the_bangladeshi_g)",
+   "formula": "pv(potential_value_generated_if_the_government_decided_to_scale, how_long_the_program_would_be_delivered_if_the_bangladeshi_g, -total_units_of_value_per_year_generated_if_the_bangladeshi_g)",
    "expected": 371939.4696
   },
   {
@@ -484,18 +482,18 @@
    "expected": 6.505471133
   },
   {
-   "id": "discount_rate_8x_bar_for_future_opportunities",
-   "label": "Discount rate (8x bar for future opportunities)",
+   "id": "what_this_is_value_of_information_cea_for_the_chobi7_program",
+   "label": "What this is: Value of information CEA for the CHoBI7 program: Discount rate (8x bar for future opportunities)",
    "section": "value_of_information_main",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
     "cell": "Value of information (main)!B11"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell's moral weights and discount rate",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "GiveWell's moral weights and discount rate",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial",
@@ -645,14 +643,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (8x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year / (1 + discount_rate_8x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_8x_bar_f",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program) ^ how_long_would_we_have_to_wait_to_see_results_years_8x_bar_f",
    "expected": 2453.711335
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_2",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (8x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_8x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial, -discounted_expected_increase_in_units_of_value_from_pilot_tr)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program, how_long_we_would_fund_program_if_above_bar_after_the_trial, -discounted_expected_increase_in_units_of_value_from_pilot_tr)",
    "expected": 19901.79691
   },
   {
@@ -835,14 +833,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr_2",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (8x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_2 / (1 + discount_rate_8x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_8x_bar_f_2",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_2 / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program) ^ how_long_would_we_have_to_wait_to_see_results_years_8x_bar_f_2",
    "expected": 622.6043867
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_3",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (8x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_8x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_2, -discounted_expected_increase_in_units_of_value_from_pilot_tr_2)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program, how_long_we_would_fund_program_if_above_bar_after_the_trial_2, -discounted_expected_increase_in_units_of_value_from_pilot_tr_2)",
    "expected": 5049.879292
   },
   {
@@ -1007,18 +1005,18 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate_10x_bar_for_future_opportunities",
-   "label": "Discount rate (10x bar for future opportunities)",
+   "id": "what_this_is_value_of_information_cea_for_the_chobi7_program_2",
+   "label": "What this is: Value of information CEA for the CHoBI7 program: Discount rate (10x bar for future opportunities)",
    "section": "value_of_information_main",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
     "cell": "Value of information (main)!C11"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell's moral weights and discount rate",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "GiveWell's moral weights and discount rate",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_3",
@@ -1147,14 +1145,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr_3",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (10x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_3 / (1 + discount_rate_10x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_10x_bar",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_3 / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program_2) ^ how_long_would_we_have_to_wait_to_see_results_years_10x_bar",
    "expected": 1635.807557
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_5",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (10x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_10x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_3, -discounted_expected_increase_in_units_of_value_from_pilot_tr_3)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program_2, how_long_we_would_fund_program_if_above_bar_after_the_trial_3, -discounted_expected_increase_in_units_of_value_from_pilot_tr_3)",
    "expected": 13267.86461
   },
   {
@@ -1272,14 +1270,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr_4",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (10x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_4 / (1 + discount_rate_10x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_10x_bar_2",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_4 / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program_2) ^ how_long_would_we_have_to_wait_to_see_results_years_10x_bar_2",
    "expected": 830.1391823
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_6",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (10x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_10x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_4, -discounted_expected_increase_in_units_of_value_from_pilot_tr_4)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program_2, how_long_we_would_fund_program_if_above_bar_after_the_trial_4, -discounted_expected_increase_in_units_of_value_from_pilot_tr_4)",
    "expected": 6733.17239
   },
   {
@@ -1380,18 +1378,18 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate_12x_bar_for_future_opportunities",
-   "label": "Discount rate (12x bar for future opportunities)",
+   "id": "what_this_is_value_of_information_cea_for_the_chobi7_program_3",
+   "label": "What this is: Value of information CEA for the CHoBI7 program: Discount rate (12x bar for future opportunities)",
    "section": "value_of_information_main",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
     "cell": "Value of information (main)!D11"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell's moral weights and discount rate",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "GiveWell's moral weights and discount rate",
+   "format": "percent"
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_5",
@@ -1520,14 +1518,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr_5",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (12x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_5 / (1 + discount_rate_12x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_12x_bar",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_5 / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program_3) ^ how_long_would_we_have_to_wait_to_see_results_years_12x_bar",
    "expected": 817.9037784
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_8",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (12x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_12x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_5, -discounted_expected_increase_in_units_of_value_from_pilot_tr_5)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program_3, how_long_we_would_fund_program_if_above_bar_after_the_trial_5, -discounted_expected_increase_in_units_of_value_from_pilot_tr_5)",
    "expected": 6633.932305
   },
   {
@@ -1645,14 +1643,14 @@
    "id": "discounted_expected_increase_in_units_of_value_from_pilot_tr_6",
    "label": "Discounted expected increase in units of value from pilot/trial in year 1 (12x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_6 / (1 + discount_rate_12x_bar_for_future_opportunities) ^ how_long_would_we_have_to_wait_to_see_results_years_12x_bar_2",
+   "formula": "expected_increase_in_units_of_value_from_pilot_trial_in_year_6 / (1 + what_this_is_value_of_information_cea_for_the_chobi7_program_3) ^ how_long_would_we_have_to_wait_to_see_results_years_12x_bar_2",
    "expected": 415.0695911
   },
   {
    "id": "present_discounted_expected_value_of_increase_in_units_of_va_9",
    "label": "Present-discounted expected value of increase in units of value from pilot/trial (pre adjustments) (12x bar for future opportunities)",
    "section": "value_of_information_main",
-   "formula": "pv(discount_rate_12x_bar_for_future_opportunities, how_long_we_would_fund_program_if_above_bar_after_the_trial_6, -discounted_expected_increase_in_units_of_value_from_pilot_tr_6)",
+   "formula": "pv(what_this_is_value_of_information_cea_for_the_chobi7_program_3, how_long_we_would_fund_program_if_above_bar_after_the_trial_6, -discounted_expected_increase_in_units_of_value_from_pilot_tr_6)",
    "expected": 3366.586195
   },
   {

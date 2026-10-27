@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Desalination kiosks in Bangladesh BOTEC, 2024](/yale-research-initiative-on-innovation-and-scale) | GW | July 2024 | 7.1× GiveDirectly (GW: 18× cash) | 64 |
+| [Desalination kiosks in Bangladesh BOTEC, 2024](/yale-research-initiative-on-innovation-and-scale) | GW | July 2024 | 7.1× GiveDirectly (GW: 18× cash) | 63 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

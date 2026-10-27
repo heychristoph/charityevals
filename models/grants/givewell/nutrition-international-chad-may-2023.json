@@ -21,8 +21,7 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "life_value_multiplier": 1,
-   "discount_rate": 0.04
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -101,8 +100,8 @@
    "expected": 118.7325895
   },
   {
-   "id": "grant_size",
-   "label": "Grant size",
+   "id": "vitamin_a_supplementation_vas_nutrition_international_chad_m",
+   "label": "Vitamin A supplementation (VAS) - Nutrition International [Chad, May 2023]: Grant size",
    "section": "simple_cost_effectiveness_analy",
    "value": 6000000.0,
    "kind": "estimate",
@@ -135,8 +134,8 @@
    "format": "usd"
   },
   {
-   "id": "nutrition_international",
-   "label": "Nutrition International",
+   "id": "cost_per_treatment_breakdown_nutrition_international",
+   "label": "Cost per treatment breakdown:: Nutrition International",
    "section": "nutrition_international_full_ce",
    "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter * cost_per_child_covered_per_supplementation_round",
    "expected": 1.155,
@@ -158,7 +157,7 @@
    "id": "cost_per_child_receiving_vas_due_to_nutrition_international",
    "label": "Cost per child receiving VAS due to Nutrition International's program (Best guess)",
    "section": "simple_cost_effectiveness_analy",
-   "formula": "nutrition_international * supplementation_rounds_per_year",
+   "formula": "cost_per_treatment_breakdown_nutrition_international * supplementation_rounds_per_year",
    "expected": 2.31,
    "format": "usd"
   },
@@ -166,12 +165,12 @@
    "id": "number_of_children_reached_from_grant_to_nutrition_internati",
    "label": "Number of children reached from grant to Nutrition International",
    "section": "simple_cost_effectiveness_analy",
-   "formula": "grant_size / cost_per_child_receiving_vas_due_to_nutrition_international",
+   "formula": "vitamin_a_supplementation_vas_nutrition_international_chad_m / cost_per_child_receiving_vas_due_to_nutrition_international",
    "expected": 2597402.597
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "nutrition_international_full_ce",
    "value": 0.15,
    "kind": "estimate",
@@ -183,8 +182,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -212,7 +211,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.15,
    "format": "percent"
   },
@@ -322,7 +321,7 @@
    "id": "cost_per_child_death_averted",
    "label": "Cost per child death averted",
    "section": "simple_cost_effectiveness_analy",
-   "formula": "grant_size / (number_of_children_reached_from_grant_to_nutrition_internati * (1 - percentage_of_those_children_who_would_have_received_vas_wit) * annual_mortality_rate_among_children_who_would_not_receive_v * effect_of_vas_on_child_mortality_best_guess)",
+   "formula": "vitamin_a_supplementation_vas_nutrition_international_chad_m / (number_of_children_reached_from_grant_to_nutrition_internati * (1 - percentage_of_those_children_who_would_have_received_vas_wit) * annual_mortality_rate_among_children_who_would_not_receive_v * effect_of_vas_on_child_mortality_best_guess)",
    "expected": 1288.883633,
    "format": "usd"
   },
@@ -507,8 +506,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -520,8 +519,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "nutrition_international_full_ce",
    "value": 0.02,
    "kind": "estimate",
@@ -536,7 +535,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -591,8 +590,8 @@
    "format": "percent"
   },
   {
-   "id": "vision_benefits",
-   "label": "Vision benefits",
+   "id": "supplemental_intervention_level_adjustments_vision_benefits",
+   "label": "Supplemental intervention-level adjustments: Vision benefits",
    "section": "nutrition_international_full_ce",
    "value": 0.09,
    "kind": "estimate",
@@ -663,7 +662,7 @@
    "id": "total_adjustment_factor",
    "label": "Total adjustment factor",
    "section": "nutrition_international_full_ce",
-   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, investment_of_income_increases, vision_benefits, benefits_from_other_programs_supported_by_our_funding_e_g_de, interaction_between_vas_and_vaccines, treatment_costs_averted_from_prevention, marginal_funding_goes_to_lower_priority_areas)",
+   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, investment_of_income_increases, supplemental_intervention_level_adjustments_vision_benefits, benefits_from_other_programs_supported_by_our_funding_e_g_de, interaction_between_vas_and_vaccines, treatment_costs_averted_from_prevention, marginal_funding_goes_to_lower_priority_areas)",
    "expected": 1.665,
    "format": "percent"
   },
@@ -725,31 +724,31 @@
    "expected": 0.0
   },
   {
-   "id": "nutrition_international_2",
-   "label": "Nutrition International",
+   "id": "total_expenditure_attributable_to_different_actors_nutrition",
+   "label": "Total expenditure attributable to different actors:: Nutrition International",
    "section": "nutrition_international_full_ce",
    "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter * total_amount_spent_on_hypothetical_program_by_all_contributo",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_2",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "nutrition_international_2",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "government_financial_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 9075.832317
   },
   {
-   "id": "government_in_kind_2",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm_2",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government in-kind",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -761,10 +760,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "government_in_kind_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1136,8 +1135,8 @@
    "format": "percent"
   },
   {
-   "id": "temporal_uncertainty_givewell_2020",
-   "label": "Temporal uncertainty (GiveWell 2020)",
+   "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
+   "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
    "value": 0.014,
    "kind": "estimate",
@@ -1178,7 +1177,7 @@
    "id": "overall_discount_rate_givewell_2020",
    "label": "Overall discount rate (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
+   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, derived_value_assignments_temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
    "expected": 0.04,
    "format": "percent"
   },
@@ -1191,13 +1190,12 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate",
-   "label": "Discount rate",
+   "id": "present_value_of_transfer_discount_rate",
+   "label": "Present value of transfer: Discount rate",
    "section": "givedirectly",
-   "formula": "$discount_rate",
+   "formula": "overall_discount_rate_active",
    "expected": 0.04,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "format": "percent"
   },
   {
    "id": "duration_of_investment_benefits_in_years",
@@ -1215,7 +1213,7 @@
    "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
    "label": "Present value of ln(consumption) increase in the last year of expected benefits",
    "section": "givedirectly",
-   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + discount_rate) ^ duration_of_investment_benefits_in_years",
+   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + present_value_of_transfer_discount_rate) ^ duration_of_investment_benefits_in_years",
    "expected": 0.05639659538
   },
   {
@@ -1237,7 +1235,7 @@
    "id": "present_value_of_future_increases_in_ln_consumption_per_pers",
    "label": "Present value of future increases in ln(consumption) per person (excluding the last year of expected benefits)",
    "section": "givedirectly",
-   "formula": "pv(discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
+   "formula": "pv(present_value_of_transfer_discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
    "expected": 0.2127120349
   },
   {
@@ -1513,38 +1511,38 @@
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_4",
-   "label": "Government financial",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Government financial",
    "section": "nutrition_international_full_ce",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_3",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_3",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_financial_2 * government_financial_4",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": -507.1038557
   },
   {
-   "id": "in_kind_government",
-   "label": "In-kind government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): In-kind government",
    "section": "nutrition_international_full_ce",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_in_kind_3",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_in_kind_2 * in_kind_government",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm_2 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0
   },
   {
    "id": "scenario_1_government_costs_would_replace_ni_s_costs_2",
    "label": "Scenario 1: Government costs would replace NI's costs",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(other_philanthropic_actors, government_financial, government_in_kind, other_philanthropic_actors_3, government_financial_3, government_in_kind_3)",
+   "formula": "sum(other_philanthropic_actors, scenario_1_government_costs_would_replace_philanthropic_cost, scenario_1_government_costs_would_replace_philanthropic_cost_2, other_philanthropic_actors_3, scenario_1_government_costs_would_replace_philanthropic_cost_3, scenario_1_government_costs_would_replace_philanthropic_cost_4)",
    "expected": 8568.728462
   },
   {
@@ -1571,7 +1569,7 @@
    "id": "other_philanthropic_actors_5",
    "label": "Other philanthropic actors",
    "section": "nutrition_international_full_ce",
-   "formula": "nutrition_international_2",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition",
    "expected": 100000.0,
    "format": "usd"
   },
@@ -1583,8 +1581,8 @@
    "expected": 9075.832317
   },
   {
-   "id": "government_financial_6",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_4",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -1596,15 +1594,15 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_5",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_3",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "government_financial_6 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_4 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_5",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -1616,10 +1614,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_4",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_5",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "government_in_kind_5 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1630,24 +1628,24 @@
    "expected": -563.9073842
   },
   {
-   "id": "government_financial_7",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_7",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_financial_6 * government_financial_4",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_6",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_8",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_in_kind_5 * in_kind_government",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0
   },
   {
    "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_2",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(other_philanthropic_actors_4, government_financial_5, government_in_kind_4, other_philanthropic_actors_6, government_financial_7, government_in_kind_6)",
+   "formula": "sum(other_philanthropic_actors_4, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_3, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_5, other_philanthropic_actors_6, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_7, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_8)",
    "expected": 8511.924933
   },
   {
@@ -1658,7 +1656,7 @@
    "expected": 563.9073842
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_3",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "nutrition_international_full_ce",
    "value": 0.4,
@@ -1692,8 +1690,8 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_9",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "nutrition_international_full_ce",
    "value": 0.0,
    "kind": "estimate",
@@ -1705,10 +1703,10 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_8",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "government_financial_9 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1725,8 +1723,8 @@
    "format": "percent"
   },
   {
-   "id": "in_kind_government_2",
-   "label": "In-kind government",
+   "id": "total_expenditure_attributable_to_different_actors_in_kind_g",
+   "label": "Total expenditure attributable to different actors:: In-kind government",
    "section": "nutrition_international_full_ce",
    "formula": "in_kind_government_costs_as_a_percentage_of_total_costs * total_amount_spent_on_hypothetical_program_by_all_contributo",
    "expected": 42857.14286,
@@ -1767,8 +1765,8 @@
    "format": "percent"
   },
   {
-   "id": "government_financial_10",
-   "label": "Government financial",
+   "id": "total_expenditure_attributable_to_different_actors_governmen",
+   "label": "Total expenditure attributable to different actors:: Government financial",
    "section": "nutrition_international_full_ce",
    "formula": "government_financial_costs_as_a_percentage_of_total_costs * total_amount_spent_on_hypothetical_program_by_all_contributo",
    "expected": 0.0,
@@ -1778,31 +1776,31 @@
    "id": "expenditure_causally_upstream_of_our_donation",
    "label": "Expenditure causally upstream of our donation",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(nutrition_international_2, other_philanthropic_actors_9, government_financial_10)",
+   "formula": "sum(total_expenditure_attributable_to_different_actors_nutrition, other_philanthropic_actors_9, total_expenditure_attributable_to_different_actors_governmen)",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(other_philanthropic_actors_9, government_financial_10) / expenditure_causally_upstream_of_our_donation",
+   "formula": "sum(other_philanthropic_actors_9, total_expenditure_attributable_to_different_actors_governmen) / expenditure_causally_upstream_of_our_donation",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "government_in_kind_8",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-in_kind_government_2 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3)",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7)",
    "expected": -42857.14286,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_7",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "government_in_kind_8 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": -3889.642422
   },
   {
@@ -1813,24 +1811,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_11",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_financial_9 * government_financial_4",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_9",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_in_kind_8 * in_kind_government",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 217.3302239
   },
   {
    "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_2",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(other_philanthropic_actors_7, government_financial_8, government_in_kind_7, other_philanthropic_actors_10, government_financial_11, government_in_kind_9)",
+   "formula": "sum(other_philanthropic_actors_7, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5, other_philanthropic_actors_10, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9)",
    "expected": -3672.312198
   },
   {
@@ -1841,10 +1839,10 @@
    "expected": 12748.14452
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "nutrition_international_full_ce",
-   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_3, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_3)",
+   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_3, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9)",
    "expected": 0.5,
    "format": "percent"
   },
@@ -1864,33 +1862,33 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_13",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_2",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_financial_10",
+   "formula": "-total_expenditure_attributable_to_different_actors_governmen",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_12",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "government_financial_13 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_financ_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_11",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_2",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-in_kind_government_2",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g",
    "expected": -42857.14286,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_10",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "government_in_kind_11 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_in_kin_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": -3889.642422
   },
   {
@@ -1901,24 +1899,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_14",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_3",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_financial_13 * government_financial_4",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_financ_2 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_12",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_3",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "nutrition_international_full_ce",
-   "formula": "-government_in_kind_11 * in_kind_government",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_in_kin_2 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 217.3302239
   },
   {
    "id": "scenario_4_distributions_would_go_unfunded_2",
    "label": "Scenario 4: Distributions would go unfunded",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(other_philanthropic_actors_11, government_financial_12, government_in_kind_10, other_philanthropic_actors_13, government_financial_14, government_in_kind_12)",
+   "formula": "sum(other_philanthropic_actors_11, scenario_4_distributions_would_go_unfunded_government_financ, scenario_4_distributions_would_go_unfunded_government_in_kin, other_philanthropic_actors_13, scenario_4_distributions_would_go_unfunded_government_financ_3, scenario_4_distributions_would_go_unfunded_government_in_kin_3)",
    "expected": -3672.312198
   },
   {
@@ -1942,17 +1940,17 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_ni_s_spending_overall",
+   "label": "Net units of value created by NI's spending: Overall",
    "section": "nutrition_international_full_ce",
-   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs * scenario_1_government_costs_would_replace_ni_s_costs_3, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_3, scenario_3_other_actors_upstream_costs_would_stay_the_same_d * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_3)",
+   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs * scenario_1_government_costs_would_replace_ni_s_costs_3, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9, scenario_3_other_actors_upstream_costs_would_stay_the_same_d * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_3)",
    "expected": 6650.345597
   },
   {
    "id": "total_units_of_value_generated_after_accounting_for_leverage",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "nutrition_international_full_ce",
-   "formula": "overall",
+   "formula": "net_units_of_value_created_by_ni_s_spending_overall",
    "expected": 6650.345597
   },
   {
@@ -2005,7 +2003,7 @@
    "id": "cost_per_child_covered_per_supplementation_round_2",
    "label": "Cost per child covered per supplementation round",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "nutrition_international",
+   "formula": "cost_per_treatment_breakdown_nutrition_international",
    "expected": 1.155,
    "format": "usd"
   },
@@ -2177,8 +2175,8 @@
    "expected": 784.790897
   },
   {
-   "id": "double_treatment_2",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment_2",
+   "label": "Risk of wastage: Double treatment",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.15,
    "kind": "estimate",
@@ -2190,8 +2188,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods_2",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods_2",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2219,7 +2217,7 @@
    "id": "total_adjustment_for_risk_of_wastage_2",
    "label": "Total adjustment for risk of wastage",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(double_treatment_2, ineffective_goods_2, goods_purchased_and_left_in_storage_until_they_expire_cash_d_2)",
+   "formula": "sum(risk_of_wastage_double_treatment_2, risk_of_wastage_ineffective_goods_2, goods_purchased_and_left_in_storage_until_they_expire_cash_d_2)",
    "expected": 0.15,
    "format": "percent"
   },
@@ -2271,8 +2269,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks_2",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund_2",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2284,8 +2282,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility_2",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o_2",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.02,
    "kind": "estimate",
@@ -2300,7 +2298,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte_2",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(change_of_priorities_2, non_funding_bottlenecks_2, within_org_fungibility_2)",
+   "formula": "sum(change_of_priorities_2, confidence_in_funds_being_used_for_intended_purpose_non_fund_2, confidence_in_funds_being_used_for_intended_purpose_within_o_2)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -2362,8 +2360,8 @@
    "format": "percent"
   },
   {
-   "id": "vision_benefits_2",
-   "label": "Vision benefits",
+   "id": "supplemental_intervention_level_adjustments_vision_benefits_2",
+   "label": "Supplemental intervention-level adjustments: Vision benefits",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.09,
    "kind": "estimate",
@@ -2434,7 +2432,7 @@
    "id": "total_adjustment_factor_4",
    "label": "Total adjustment factor",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid_2, short_term_anemia_effects_2, investment_of_income_increases_2, vision_benefits_2, benefits_from_other_programs_supported_by_our_funding_e_g_de_2, interaction_between_vas_and_vaccines_2, treatment_costs_averted_from_prevention_2, marginal_funding_goes_to_lower_priority_areas_2)",
+   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid_2, short_term_anemia_effects_2, investment_of_income_increases_2, supplemental_intervention_level_adjustments_vision_benefits_2, benefits_from_other_programs_supported_by_our_funding_e_g_de_2, interaction_between_vas_and_vaccines_2, treatment_costs_averted_from_prevention_2, marginal_funding_goes_to_lower_priority_areas_2)",
    "expected": 1.665,
    "format": "percent"
   },
@@ -2473,31 +2471,31 @@
    "expected": 0.0
   },
   {
-   "id": "nutrition_international_3",
-   "label": "Nutrition International",
+   "id": "total_expenditure_attributable_to_different_actors_nutrition_2",
+   "label": "Total expenditure attributable to different actors:: Nutrition International",
    "section": "no_leveraging_nutrition_interna",
    "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_2 * total_amount_spent_on_hypothetical_program_by_all_contributo_2",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_16",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm_3",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "nutrition_international_3",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition_2",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_15",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_5",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_financial_16 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm_3 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 12965.47474
   },
   {
-   "id": "government_in_kind_14",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm_4",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2509,10 +2507,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_13",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_6",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_in_kind_14 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm_4 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
@@ -2530,38 +2528,38 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_18",
-   "label": "Government financial",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_3",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Government financial",
    "section": "no_leveraging_nutrition_interna",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_17",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_7",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_financial_16 * government_financial_18",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm_3 * counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": -507.1038557
   },
   {
-   "id": "in_kind_government_3",
-   "label": "In-kind government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_4",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): In-kind government",
    "section": "no_leveraging_nutrition_interna",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_in_kind_15",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_8",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_in_kind_14 * in_kind_government_3",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm_4 * counterfactual_value_of_spending_from_non_philanthropic_acto_4",
    "expected": 0.0
   },
   {
    "id": "scenario_1_government_costs_would_replace_ni_s_costs_5",
    "label": "Scenario 1: Government costs would replace NI's costs",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(other_philanthropic_actors_14, government_financial_15, government_in_kind_13, other_philanthropic_actors_16, government_financial_17, government_in_kind_15)",
+   "formula": "sum(other_philanthropic_actors_14, scenario_1_government_costs_would_replace_philanthropic_cost_5, scenario_1_government_costs_would_replace_philanthropic_cost_6, other_philanthropic_actors_16, scenario_1_government_costs_would_replace_philanthropic_cost_7, scenario_1_government_costs_would_replace_philanthropic_cost_8)",
    "expected": 12458.37088
   },
   {
@@ -2588,7 +2586,7 @@
    "id": "other_philanthropic_actors_18",
    "label": "Other philanthropic actors",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "nutrition_international_3",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition_2",
    "expected": 100000.0,
    "format": "usd"
   },
@@ -2600,8 +2598,8 @@
    "expected": 12965.47474
   },
   {
-   "id": "government_financial_20",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_13",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2613,15 +2611,15 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_19",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_12",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_financial_20 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_13 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_17",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_15",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2633,10 +2631,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_16",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_14",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_in_kind_17 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_15 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
@@ -2647,35 +2645,35 @@
    "expected": -563.9073842
   },
   {
-   "id": "government_financial_21",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_16",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_financial_20 * government_financial_18",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_13 * counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_18",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_17",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_in_kind_17 * in_kind_government_3",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_15 * counterfactual_value_of_spending_from_non_philanthropic_acto_4",
    "expected": 0.0
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_5",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_11",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(other_philanthropic_actors_17, government_financial_19, government_in_kind_16, other_philanthropic_actors_19, government_financial_21, government_in_kind_18)",
+   "formula": "sum(other_philanthropic_actors_17, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_12, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_14, other_philanthropic_actors_19, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_16, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_17)",
    "expected": 12401.56735
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_4",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_10",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_2 * total_units_of_value_generated_after_supplemental_interventi_2 - scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_5",
+   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_2 * total_units_of_value_generated_after_supplemental_interventi_2 - scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_11",
    "expected": 563.9073842
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_18",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.4,
@@ -2709,8 +2707,8 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_23",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_14",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_leveraging_nutrition_interna",
    "value": 0.0,
    "kind": "estimate",
@@ -2722,10 +2720,10 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_22",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_13",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_financial_23 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_14 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
@@ -2742,8 +2740,8 @@
    "format": "percent"
   },
   {
-   "id": "in_kind_government_4",
-   "label": "In-kind government",
+   "id": "total_expenditure_attributable_to_different_actors_in_kind_g_2",
+   "label": "Total expenditure attributable to different actors:: In-kind government",
    "section": "no_leveraging_nutrition_interna",
    "formula": "in_kind_government_costs_as_a_percentage_of_total_costs_2 * total_amount_spent_on_hypothetical_program_by_all_contributo_2",
    "expected": 0.0,
@@ -2784,8 +2782,8 @@
    "format": "percent"
   },
   {
-   "id": "government_financial_24",
-   "label": "Government financial",
+   "id": "total_expenditure_attributable_to_different_actors_governmen_2",
+   "label": "Total expenditure attributable to different actors:: Government financial",
    "section": "no_leveraging_nutrition_interna",
    "formula": "government_financial_costs_as_a_percentage_of_total_costs_2 * total_amount_spent_on_hypothetical_program_by_all_contributo_2",
    "expected": 0.0,
@@ -2795,31 +2793,31 @@
    "id": "expenditure_causally_upstream_of_our_donation_2",
    "label": "Expenditure causally upstream of our donation",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(nutrition_international_3, other_philanthropic_actors_22, government_financial_24)",
+   "formula": "sum(total_expenditure_attributable_to_different_actors_nutrition_2, other_philanthropic_actors_22, total_expenditure_attributable_to_different_actors_governmen_2)",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_17",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(other_philanthropic_actors_22, government_financial_24) / expenditure_causally_upstream_of_our_donation_2",
+   "formula": "sum(other_philanthropic_actors_22, total_expenditure_attributable_to_different_actors_governmen_2) / expenditure_causally_upstream_of_our_donation_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "government_in_kind_20",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_16",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-in_kind_government_4 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7)",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g_2 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_17)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_19",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_15",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_in_kind_20 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_16 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
@@ -2830,38 +2828,38 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_25",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_18",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_financial_23 * government_financial_18",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_14 * counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_21",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_19",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_in_kind_20 * in_kind_government_3",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_16 * counterfactual_value_of_spending_from_non_philanthropic_acto_4",
    "expected": 0.0
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_12",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(other_philanthropic_actors_20, government_financial_22, government_in_kind_19, other_philanthropic_actors_23, government_financial_25, government_in_kind_21)",
+   "formula": "sum(other_philanthropic_actors_20, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_13, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_15, other_philanthropic_actors_23, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_18, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_19)",
    "expected": 0.0
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_11",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_2 * total_units_of_value_generated_after_supplemental_interventi_2 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6",
+   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_2 * total_units_of_value_generated_after_supplemental_interventi_2 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_12",
    "expected": 12965.47474
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_20",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_6, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6)",
+   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_6, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_18)",
    "expected": 0.5,
    "format": "percent"
   },
@@ -2881,33 +2879,33 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_27",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_5",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_financial_24",
+   "formula": "-total_expenditure_attributable_to_different_actors_governmen_2",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_26",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_4",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_financial_27 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_financ_5 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_23",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_5",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-in_kind_government_4",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g_2",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_22",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_4",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "government_in_kind_23 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_in_kin_5 * units_of_value_generated_per_dollar_spent_after_supplemental_2",
    "expected": 0.0
   },
   {
@@ -2918,24 +2916,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_28",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_6",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_financial_27 * government_financial_18",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_financ_5 * counterfactual_value_of_spending_from_non_philanthropic_acto_3",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_24",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_6",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "-government_in_kind_23 * in_kind_government_3",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_in_kin_5 * counterfactual_value_of_spending_from_non_philanthropic_acto_4",
    "expected": 0.0
   },
   {
    "id": "scenario_4_distributions_would_go_unfunded_5",
    "label": "Scenario 4: Distributions would go unfunded",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(other_philanthropic_actors_24, government_financial_26, government_in_kind_22, other_philanthropic_actors_26, government_financial_28, government_in_kind_24)",
+   "formula": "sum(other_philanthropic_actors_24, scenario_4_distributions_would_go_unfunded_government_financ_4, scenario_4_distributions_would_go_unfunded_government_in_kin_4, other_philanthropic_actors_26, scenario_4_distributions_would_go_unfunded_government_financ_6, scenario_4_distributions_would_go_unfunded_government_in_kin_6)",
    "expected": 0.0
   },
   {
@@ -2959,17 +2957,17 @@
    "format": "percent"
   },
   {
-   "id": "overall_2",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_ni_s_spending_overall_2",
+   "label": "Net units of value created by NI's spending: Overall",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs_4 * scenario_1_government_costs_would_replace_ni_s_costs_6, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_4 * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_6, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5 * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8, scenario_4_distributions_would_go_unfunded_4 * scenario_4_distributions_would_go_unfunded_6)",
+   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs_4 * scenario_1_government_costs_would_replace_ni_s_costs_6, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_10 * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_18, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_11 * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_20, scenario_4_distributions_would_go_unfunded_4 * scenario_4_distributions_would_go_unfunded_6)",
    "expected": 6759.010709
   },
   {
    "id": "total_units_of_value_generated_after_accounting_for_leverage_2",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "no_leveraging_nutrition_interna",
-   "formula": "overall_2",
+   "formula": "net_units_of_value_created_by_ni_s_spending_overall_2",
    "expected": 6759.010709
   },
   {
@@ -3210,8 +3208,8 @@
    "expected": 784.790897
   },
   {
-   "id": "double_treatment_3",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment_3",
+   "label": "Risk of wastage: Double treatment",
    "section": "no_funging_nutrition_internatio",
    "value": 0.15,
    "kind": "estimate",
@@ -3223,8 +3221,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods_3",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods_3",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3252,7 +3250,7 @@
    "id": "total_adjustment_for_risk_of_wastage_3",
    "label": "Total adjustment for risk of wastage",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(double_treatment_3, ineffective_goods_3, goods_purchased_and_left_in_storage_until_they_expire_cash_d_3)",
+   "formula": "sum(risk_of_wastage_double_treatment_3, risk_of_wastage_ineffective_goods_3, goods_purchased_and_left_in_storage_until_they_expire_cash_d_3)",
    "expected": 0.15,
    "format": "percent"
   },
@@ -3304,8 +3302,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks_3",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund_3",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3317,8 +3315,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility_3",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o_3",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "no_funging_nutrition_internatio",
    "value": 0.02,
    "kind": "estimate",
@@ -3333,7 +3331,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte_3",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(change_of_priorities_3, non_funding_bottlenecks_3, within_org_fungibility_3)",
+   "formula": "sum(change_of_priorities_3, confidence_in_funds_being_used_for_intended_purpose_non_fund_3, confidence_in_funds_being_used_for_intended_purpose_within_o_3)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -3395,8 +3393,8 @@
    "format": "percent"
   },
   {
-   "id": "vision_benefits_3",
-   "label": "Vision benefits",
+   "id": "supplemental_intervention_level_adjustments_vision_benefits_3",
+   "label": "Supplemental intervention-level adjustments: Vision benefits",
    "section": "no_funging_nutrition_internatio",
    "value": 0.09,
    "kind": "estimate",
@@ -3467,7 +3465,7 @@
    "id": "total_adjustment_factor_6",
    "label": "Total adjustment factor",
    "section": "no_funging_nutrition_internatio",
-   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid_3, short_term_anemia_effects_3, investment_of_income_increases_3, vision_benefits_3, benefits_from_other_programs_supported_by_our_funding_e_g_de_3, interaction_between_vas_and_vaccines_3, treatment_costs_averted_from_prevention_3, marginal_funding_goes_to_lower_priority_areas_3)",
+   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid_3, short_term_anemia_effects_3, investment_of_income_increases_3, supplemental_intervention_level_adjustments_vision_benefits_3, benefits_from_other_programs_supported_by_our_funding_e_g_de_3, interaction_between_vas_and_vaccines_3, treatment_costs_averted_from_prevention_3, marginal_funding_goes_to_lower_priority_areas_3)",
    "expected": 1.665,
    "format": "percent"
   },
@@ -3506,31 +3504,31 @@
    "expected": 0.0
   },
   {
-   "id": "nutrition_international_4",
-   "label": "Nutrition International",
+   "id": "total_expenditure_attributable_to_different_actors_nutrition_3",
+   "label": "Total expenditure attributable to different actors:: Nutrition International",
    "section": "no_funging_nutrition_internatio",
    "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_3 * total_amount_spent_on_hypothetical_program_by_all_contributo_3",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_30",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm_5",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "nutrition_international_4",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition_3",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_29",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_9",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_financial_30 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm_5 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 9075.832317
   },
   {
-   "id": "government_in_kind_26",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_ni_s_costs_governm_6",
+   "label": "Scenario 1: Government costs would replace NI's costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3542,10 +3540,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_25",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_10",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_in_kind_26 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_1_government_costs_would_replace_ni_s_costs_governm_6 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 0.0
   },
   {
@@ -3563,38 +3561,38 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_32",
-   "label": "Government financial",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_5",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Government financial",
    "section": "no_funging_nutrition_internatio",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_31",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_11",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_financial_30 * government_financial_32",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm_5 * counterfactual_value_of_spending_from_non_philanthropic_acto_5",
    "expected": -507.1038557
   },
   {
-   "id": "in_kind_government_5",
-   "label": "In-kind government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_6",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): In-kind government",
    "section": "no_funging_nutrition_internatio",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_in_kind_27",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_12",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_in_kind_26 * in_kind_government_5",
+   "formula": "-scenario_1_government_costs_would_replace_ni_s_costs_governm_6 * counterfactual_value_of_spending_from_non_philanthropic_acto_6",
    "expected": 0.0
   },
   {
    "id": "scenario_1_government_costs_would_replace_ni_s_costs_8",
    "label": "Scenario 1: Government costs would replace NI's costs",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(other_philanthropic_actors_27, government_financial_29, government_in_kind_25, other_philanthropic_actors_29, government_financial_31, government_in_kind_27)",
+   "formula": "sum(other_philanthropic_actors_27, scenario_1_government_costs_would_replace_philanthropic_cost_9, scenario_1_government_costs_would_replace_philanthropic_cost_10, other_philanthropic_actors_29, scenario_1_government_costs_would_replace_philanthropic_cost_11, scenario_1_government_costs_would_replace_philanthropic_cost_12)",
    "expected": 8568.728462
   },
   {
@@ -3621,7 +3619,7 @@
    "id": "other_philanthropic_actors_31",
    "label": "Other philanthropic actors",
    "section": "no_funging_nutrition_internatio",
-   "formula": "nutrition_international_4",
+   "formula": "total_expenditure_attributable_to_different_actors_nutrition_3",
    "expected": 100000.0,
    "format": "usd"
   },
@@ -3633,8 +3631,8 @@
    "expected": 9075.832317
   },
   {
-   "id": "government_financial_34",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_22",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3646,15 +3644,15 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_33",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_21",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_financial_34 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_22 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_29",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_24",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3666,10 +3664,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_28",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_23",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_in_kind_29 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_24 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 0.0
   },
   {
@@ -3680,35 +3678,35 @@
    "expected": -563.9073842
   },
   {
-   "id": "government_financial_35",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_25",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_financial_34 * government_financial_32",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_22 * counterfactual_value_of_spending_from_non_philanthropic_acto_5",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_30",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_26",
+   "label": "Scenario 2: Other philanthropic actors would replace NI's costs: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_in_kind_29 * in_kind_government_5",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_24 * counterfactual_value_of_spending_from_non_philanthropic_acto_6",
    "expected": 0.0
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_8",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_20",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(other_philanthropic_actors_30, government_financial_33, government_in_kind_28, other_philanthropic_actors_32, government_financial_35, government_in_kind_30)",
+   "formula": "sum(other_philanthropic_actors_30, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_21, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_23, other_philanthropic_actors_32, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_25, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_26)",
    "expected": 8511.924933
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_7",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_19",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_funging_nutrition_internatio",
-   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_3 * total_units_of_value_generated_after_supplemental_interventi_3 - scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_8",
+   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_3 * total_units_of_value_generated_after_supplemental_interventi_3 - scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_20",
    "expected": 563.9073842
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_27",
    "label": "Scenario 2: Other philanthropic actors would replace NI's costs",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
@@ -3741,8 +3739,8 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_37",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_24",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_funging_nutrition_internatio",
    "value": 0.0,
    "kind": "estimate",
@@ -3754,10 +3752,10 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_36",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_23",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_financial_37 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_24 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 0.0
   },
   {
@@ -3774,8 +3772,8 @@
    "format": "percent"
   },
   {
-   "id": "in_kind_government_6",
-   "label": "In-kind government",
+   "id": "total_expenditure_attributable_to_different_actors_in_kind_g_3",
+   "label": "Total expenditure attributable to different actors:: In-kind government",
    "section": "no_funging_nutrition_internatio",
    "formula": "in_kind_government_costs_as_a_percentage_of_total_costs_3 * total_amount_spent_on_hypothetical_program_by_all_contributo_3",
    "expected": 42857.14286,
@@ -3816,8 +3814,8 @@
    "format": "percent"
   },
   {
-   "id": "government_financial_38",
-   "label": "Government financial",
+   "id": "total_expenditure_attributable_to_different_actors_governmen_3",
+   "label": "Total expenditure attributable to different actors:: Government financial",
    "section": "no_funging_nutrition_internatio",
    "formula": "government_financial_costs_as_a_percentage_of_total_costs_3 * total_amount_spent_on_hypothetical_program_by_all_contributo_3",
    "expected": 0.0,
@@ -3827,31 +3825,31 @@
    "id": "expenditure_causally_upstream_of_our_donation_3",
    "label": "Expenditure causally upstream of our donation",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(nutrition_international_4, other_philanthropic_actors_35, government_financial_38)",
+   "formula": "sum(total_expenditure_attributable_to_different_actors_nutrition_3, other_philanthropic_actors_35, total_expenditure_attributable_to_different_actors_governmen_3)",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_11",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_27",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(other_philanthropic_actors_35, government_financial_38) / expenditure_causally_upstream_of_our_donation_3",
+   "formula": "sum(other_philanthropic_actors_35, total_expenditure_attributable_to_different_actors_governmen_3) / expenditure_causally_upstream_of_our_donation_3",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "government_in_kind_32",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_26",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-in_kind_government_6 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_11)",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g_3 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_27)",
    "expected": -42857.14286,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_31",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_25",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_in_kind_32 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_26 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": -3889.642422
   },
   {
@@ -3862,38 +3860,38 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_39",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_28",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_financial_37 * government_financial_32",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_24 * counterfactual_value_of_spending_from_non_philanthropic_acto_5",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_33",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_29",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_in_kind_32 * in_kind_government_5",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_26 * counterfactual_value_of_spending_from_non_philanthropic_acto_6",
    "expected": 217.3302239
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_22",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(other_philanthropic_actors_33, government_financial_36, government_in_kind_31, other_philanthropic_actors_36, government_financial_39, government_in_kind_33)",
+   "formula": "sum(other_philanthropic_actors_33, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_23, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_25, other_philanthropic_actors_36, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_28, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_29)",
    "expected": -3672.312198
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_21",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_funging_nutrition_internatio",
-   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_3 * total_units_of_value_generated_after_supplemental_interventi_3 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10",
+   "formula": "percentage_of_total_program_costs_covered_by_nutrition_inter_3 * total_units_of_value_generated_after_supplemental_interventi_3 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_22",
    "expected": 12748.14452
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_12",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_30",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "no_funging_nutrition_internatio",
-   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_9, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9)",
+   "formula": "1 - sum(scenario_1_government_costs_would_replace_ni_s_costs_9, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_27)",
    "expected": 1.0,
    "format": "percent"
   },
@@ -3913,33 +3911,33 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_41",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_8",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_financial_38",
+   "formula": "-total_expenditure_attributable_to_different_actors_governmen_3",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "government_financial_40",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_7",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_financial_41 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_financ_8 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_35",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_8",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-in_kind_government_6",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g_3",
    "expected": -42857.14286,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_34",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_7",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "government_in_kind_35 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_in_kin_8 * units_of_value_generated_per_dollar_spent_after_supplemental_3",
    "expected": -3889.642422
   },
   {
@@ -3950,24 +3948,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_42",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_9",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_financial_41 * government_financial_32",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_financ_8 * counterfactual_value_of_spending_from_non_philanthropic_acto_5",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_36",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_9",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "no_funging_nutrition_internatio",
-   "formula": "-government_in_kind_35 * in_kind_government_5",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_in_kin_8 * counterfactual_value_of_spending_from_non_philanthropic_acto_6",
    "expected": 217.3302239
   },
   {
    "id": "scenario_4_distributions_would_go_unfunded_8",
    "label": "Scenario 4: Distributions would go unfunded",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(other_philanthropic_actors_37, government_financial_40, government_in_kind_34, other_philanthropic_actors_39, government_financial_42, government_in_kind_36)",
+   "formula": "sum(other_philanthropic_actors_37, scenario_4_distributions_would_go_unfunded_government_financ_7, scenario_4_distributions_would_go_unfunded_government_in_kin_7, other_philanthropic_actors_39, scenario_4_distributions_would_go_unfunded_government_financ_9, scenario_4_distributions_would_go_unfunded_government_in_kin_9)",
    "expected": -3672.312198
   },
   {
@@ -3991,17 +3989,17 @@
    "format": "percent"
   },
   {
-   "id": "overall_3",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_ni_s_spending_overall_3",
+   "label": "Net units of value created by NI's spending: Overall",
    "section": "no_funging_nutrition_internatio",
-   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs_7 * scenario_1_government_costs_would_replace_ni_s_costs_9, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_7 * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_9, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9 * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_12, scenario_4_distributions_would_go_unfunded_7 * scenario_4_distributions_would_go_unfunded_9)",
+   "formula": "sum(scenario_1_government_costs_would_replace_ni_s_costs_7 * scenario_1_government_costs_would_replace_ni_s_costs_9, scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_19 * scenario_2_other_philanthropic_actors_would_replace_ni_s_cos_27, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_21 * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_30, scenario_4_distributions_would_go_unfunded_7 * scenario_4_distributions_would_go_unfunded_9)",
    "expected": 12748.14452
   },
   {
    "id": "total_units_of_value_generated_after_accounting_for_leverage_3",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "no_funging_nutrition_internatio",
-   "formula": "overall_3",
+   "formula": "net_units_of_value_created_by_ni_s_spending_overall_3",
    "expected": 12748.14452
   },
   {

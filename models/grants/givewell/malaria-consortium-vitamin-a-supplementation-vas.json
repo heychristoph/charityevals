@@ -60,6 +60,7 @@
    "id": "grant_size_overall",
    "label": "Grant size (Overall)",
    "section": "inputs",
+   "unit": "$",
    "value": 1000000.0,
    "kind": "estimate",
    "source": {
@@ -73,6 +74,7 @@
    "id": "grant_size",
    "label": "Grant size",
    "section": "simple_cea",
+   "unit": "$",
    "formula": "grant_size_overall",
    "expected": 1000000.0,
    "format": "usd"
@@ -81,6 +83,7 @@
    "id": "cost_per_person_under_age_five_reached_ref",
    "label": "Cost per person under age five reached (#REF!)",
    "section": "simple_cea",
+   "unit": "$",
    "value": 15.88305790030524,
    "kind": "estimate",
    "source": {
@@ -110,9 +113,10 @@
    }
   },
   {
-   "id": "ref",
-   "label": "#REF!",
+   "id": "malaria_attributable_mortality_rate_among_people_under_five",
+   "label": "Malaria-attributable mortality rate among people under five (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.0016864815830363849,
    "kind": "estimate",
    "source": {
@@ -126,6 +130,7 @@
    "id": "effect_of_llin_distributions_on_deaths_related_to_malaria_re",
    "label": "Effect of LLIN distributions on deaths related to malaria (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.24035450614334178,
    "kind": "estimate",
    "source": {
@@ -139,13 +144,14 @@
    "id": "number_of_deaths_averted_among_people_under_age_five_ref",
    "label": "Number of deaths averted among people under age five (#REF!)",
    "section": "simple_cea",
-   "formula": "number_of_people_under_age_five_reached_ref * years_of_effective_coverage_provided_by_nets_ref * ref * effect_of_llin_distributions_on_deaths_related_to_malaria_re",
+   "formula": "number_of_people_under_age_five_reached_ref * years_of_effective_coverage_provided_by_nets_ref * malaria_attributable_mortality_rate_among_people_under_five * effect_of_llin_distributions_on_deaths_related_to_malaria_re",
    "expected": 52.23407906
   },
   {
    "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w_2",
    "label": "Value assigned to averting a death of a person under age 5 with vitamin A supplementation",
    "section": "inputs",
+   "unit": "UoV",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1FMx18d6pMuTWI_miwMy5WW5wPOk0n7n3I9bseYrGkGQ/edit",
@@ -159,6 +165,7 @@
    "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w",
    "label": "Value assigned to averting a death of a person under age 5 with vitamin A supplementation",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w_2",
    "expected": 118.73259
   },
@@ -166,6 +173,7 @@
    "id": "moral_value_of_averting_the_death_of_a_person_under_age_five",
    "label": "Moral value of averting the death of a person under age five",
    "section": "simple_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w",
    "expected": 118.73259
   },
@@ -173,6 +181,7 @@
    "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
    "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "inputs",
+   "unit": "UoV",
    "value": 0.0033545,
    "kind": "estimate",
    "source": {
@@ -185,6 +194,7 @@
    "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
    "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
    "expected": 0.0033545
   },
@@ -192,6 +202,7 @@
    "id": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire",
    "label": "Initial cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#REF!)",
    "section": "simple_cea",
+   "unit": "xcash",
    "formula": "number_of_deaths_averted_among_people_under_age_five_ref * moral_value_of_averting_the_death_of_a_person_under_age_five / grant_size / value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
    "expected": 1.848826201
   },
@@ -199,6 +210,7 @@
    "id": "mortalities_averted_for_people_over_age_five_ref",
    "label": "Mortalities averted for people over age five (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.09054784573840267,
    "kind": "estimate",
    "source": {
@@ -212,6 +224,7 @@
    "id": "developmental_benefits_long_term_income_increases_ref",
    "label": "Developmental benefits (long-term income increases) (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.23387846157205294,
    "kind": "estimate",
    "source": {
@@ -225,6 +238,7 @@
    "id": "additional_benefits_ref",
    "label": "Additional benefits (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.37067337948395224,
    "kind": "estimate",
    "source": {
@@ -238,6 +252,7 @@
    "id": "mortalities_averted_for_people_under_age_five_ref",
    "label": "Mortalities averted for people under age five (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "1 - sum(mortalities_averted_for_people_over_age_five_ref, developmental_benefits_long_term_income_increases_ref, additional_benefits_ref)",
    "expected": 0.3049003132,
    "format": "percent"
@@ -246,6 +261,7 @@
    "id": "total_downside_adjustment_ref",
    "label": "Total downside adjustment (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": -0.09760000000000013,
    "kind": "estimate",
    "source": {
@@ -259,6 +275,7 @@
    "id": "adjustment_for_leverage_and_funging_ref",
    "label": "Adjustment for leverage and funging (#REF!)",
    "section": "simple_cea",
+   "unit": "%",
    "value": 0.08714372699236503,
    "kind": "estimate",
    "source": {
@@ -272,6 +289,7 @@
    "id": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
    "label": "Final cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#REF!)",
    "section": "simple_cea",
+   "unit": "xcash",
    "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire / mortalities_averted_for_people_under_age_five_ref * (1 + total_downside_adjustment_ref) * (1 + adjustment_for_leverage_and_funging_ref)",
    "expected": 5.948730137
   },

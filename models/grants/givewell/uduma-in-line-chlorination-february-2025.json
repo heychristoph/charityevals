@@ -98,8 +98,8 @@
  ],
  "rows": [
   {
-   "id": "installation_costs_mali",
-   "label": "Installation costs (Mali)",
+   "id": "costs_covered_by_givewell_installation_costs_mali",
+   "label": "Costs covered by GiveWell: Installation costs (Mali)",
    "section": "uduma_costs",
    "value": 901429.0,
    "kind": "estimate",
@@ -315,7 +315,7 @@
    "id": "total_givewell_costs_10_year_program_window_mali",
    "label": "Total: GiveWell costs (10 year program window) (Mali)",
    "section": "uduma_costs",
-   "formula": "sum(installation_costs_mali, monitoring_and_evaluation_costs_10_year_program_window_mali, r_15_of_opex_costs_10_year_program_window_mali)",
+   "formula": "sum(costs_covered_by_givewell_installation_costs_mali, monitoring_and_evaluation_costs_10_year_program_window_mali, r_15_of_opex_costs_10_year_program_window_mali)",
    "expected": 2302139.693,
    "format": "usd"
   },
@@ -323,6 +323,7 @@
    "id": "grant_size_givewell_costs_over_10_years_mali",
    "label": "Grant size (GiveWell costs over 10 years) (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "$",
    "formula": "total_givewell_costs_10_year_program_window_mali",
    "expected": 2302139.693,
    "format": "usd"
@@ -448,8 +449,8 @@
    "format": "usd"
   },
   {
-   "id": "mali_population_under_five_2021_gbd",
-   "label": "Mali (Population under five, 2021 (GBD))",
+   "id": "percent_of_population_that_is_under_5_mali_population_under",
+   "label": "Percent of population that is under 5: Mali (Population under five, 2021 (GBD))",
    "section": "baseline_mortality",
    "value": 4580380.25,
    "kind": "estimate",
@@ -460,8 +461,8 @@
    }
   },
   {
-   "id": "mali_total_population_2021_gbd",
-   "label": "Mali (Total population, 2021 (GBD))",
+   "id": "percent_of_population_that_is_under_5_mali_total_population",
+   "label": "Percent of population that is under 5: Mali (Total population, 2021 (GBD))",
    "section": "baseline_mortality",
    "value": 24104148.77,
    "kind": "estimate",
@@ -472,10 +473,10 @@
    }
   },
   {
-   "id": "mali_percentage",
-   "label": "Mali (Percentage)",
+   "id": "percent_of_population_that_is_under_5_mali_percentage",
+   "label": "Percent of population that is under 5: Mali (Percentage)",
    "section": "baseline_mortality",
-   "formula": "mali_population_under_five_2021_gbd / mali_total_population_2021_gbd",
+   "formula": "percent_of_population_that_is_under_5_mali_population_under / percent_of_population_that_is_under_5_mali_total_population",
    "expected": 0.1900245594,
    "format": "percent"
   },
@@ -483,7 +484,7 @@
    "id": "percent_of_population_that_is_under_5_mali",
    "label": "Percent of population that is under 5 (Mali)",
    "section": "uduma_cea",
-   "formula": "mali_percentage",
+   "formula": "percent_of_population_that_is_under_5_mali_percentage",
    "expected": 0.1900245594,
    "format": "percent"
   },
@@ -499,6 +500,7 @@
    "id": "annual_cost_per_child_under_five_targeted_by_the_program_mal",
    "label": "Annual cost per child under five targeted by the program (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "$",
    "formula": "annual_cost_per_under_5_child_served",
    "expected": 7.798236916,
    "format": "usd"
@@ -524,8 +526,8 @@
    }
   },
   {
-   "id": "adherence_adjusted_mali",
-   "label": "Adherence, adjusted (Mali)",
+   "id": "estimate_based_on_pickering_et_al_2019_adherence_adjusted_ma",
+   "label": "Estimate based on Pickering et al. 2019: Adherence, adjusted (Mali)",
    "section": "adherence_adjustments",
    "formula": "adherence_in_pickering_et_al_2019_free_chlorine_rate_of_samp * adjustment_for_point_of_collection_vs_household_level_testin",
    "expected": 0.656,
@@ -574,7 +576,7 @@
    "id": "total_adherence_rates_for_ilc_from_previous_studies_mali",
    "label": "Total adherence rates for ILC from previous studies (Mali)",
    "section": "adherence_adjustments",
-   "formula": "sum(adherence_adjusted_mali * weight_assigned_to_pickering_et_al_2019_estimate_mali, of_households_testing_positive_for_fcr_mali * weight_asigned_to_kenya_pilot_2022_estimate_mali) / sum(weight_assigned_to_pickering_et_al_2019_estimate_mali, weight_asigned_to_kenya_pilot_2022_estimate_mali)",
+   "formula": "sum(estimate_based_on_pickering_et_al_2019_adherence_adjusted_ma * weight_assigned_to_pickering_et_al_2019_estimate_mali, of_households_testing_positive_for_fcr_mali * weight_asigned_to_kenya_pilot_2022_estimate_mali) / sum(weight_assigned_to_pickering_et_al_2019_estimate_mali, weight_asigned_to_kenya_pilot_2022_estimate_mali)",
    "expected": 0.668,
    "format": "percent"
   },
@@ -894,7 +896,7 @@
   },
   {
    "id": "kenya_only_water_treatment_due_to_dsw_implementation_during",
-   "label": "[Kenya only] Water treatment due to DSW implementation during DHS survey (pp) (Kenya)",
+   "label": "[Kenya only] Water treatment due to DSW implementation during DHS survey (pp)",
    "section": "adherence_adjustments",
    "formula": "1 / (0.75 * 48) * increase_in_water_treatment_as_a_result_of_dispensers_pp_mal",
    "expected": 0.008685645626,
@@ -945,7 +947,7 @@
   },
   {
    "id": "kenya_only_weight_assigned_to_kremer_et_al_control_group_fol",
-   "label": "[Kenya only] Weight assigned to Kremer et al control group follow-up estimate (Kenya)",
+   "label": "[Kenya only] Weight assigned to Kremer et al control group follow-up estimate",
    "section": "adherence_adjustments",
    "value": 2.0,
    "kind": "estimate",
@@ -1378,6 +1380,7 @@
    "id": "increase_in_the_proportion_of_targeted_children_drinking_tre",
    "label": "Increase in the proportion of targeted children drinking treated water as a result of the program (pp) (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "increase_in_chlorination_rates_as_a_result_of_implementing_i",
    "expected": 0.4935578994,
    "format": "percent"
@@ -1386,6 +1389,7 @@
    "id": "annual_cost_per_additional_child_drinking_treated_water_as_a",
    "label": "Annual cost per additional child drinking treated water as a result of the program (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "$",
    "formula": "sum(annual_cost_per_child_under_five_targeted_by_the_program_mal / increase_in_the_proportion_of_targeted_children_drinking_tre)",
    "expected": 15.80004479,
    "format": "usd"
@@ -1398,8 +1402,8 @@
    "expected": 145704.6309
   },
   {
-   "id": "mali_under_5_mortality_rate_2022_gbd",
-   "label": "Mali (Under-5 mortality rate, 2022 (GBD))",
+   "id": "mortality_rate_national_estimates_mali_under_5_mortality_rat",
+   "label": "Mortality rate (national estimates): Mali (Under-5 mortality rate, 2022 (GBD))",
    "section": "baseline_mortality",
    "value": 2125.0473434753,
    "kind": "estimate",
@@ -1410,16 +1414,16 @@
    }
   },
   {
-   "id": "mali_annualized_rate_2022",
-   "label": "Mali (Annualized rate, 2022)",
+   "id": "mortality_rate_national_estimates_mali_annualized_rate_2022",
+   "label": "Mortality rate (national estimates): Mali (Annualized rate, 2022)",
    "section": "baseline_mortality",
-   "formula": "mali_under_5_mortality_rate_2022_gbd / 100000",
+   "formula": "mortality_rate_national_estimates_mali_under_5_mortality_rat / 100000",
    "expected": 0.02125047343,
    "format": "percent"
   },
   {
-   "id": "mali_adjustment_for_all_cause_mortality_in_different_data_so",
-   "label": "Mali (Adjustment for all-cause mortality in different data sources)",
+   "id": "mortality_rate_national_estimates_mali_adjustment_for_all_ca",
+   "label": "Mortality rate (national estimates): Mali (Adjustment for all-cause mortality in different data sources)",
    "section": "baseline_mortality",
    "value": 0.0,
    "kind": "estimate",
@@ -1431,10 +1435,10 @@
    "format": "percent"
   },
   {
-   "id": "mali",
-   "label": "Mali",
+   "id": "mortality_rate_national_estimates_mali",
+   "label": "Mortality rate (national estimates): Mali",
    "section": "baseline_mortality",
-   "formula": "sum(mali_annualized_rate_2022 * (1 + mali_adjustment_for_all_cause_mortality_in_different_data_so))",
+   "formula": "sum(mortality_rate_national_estimates_mali_annualized_rate_2022 * (1 + mortality_rate_national_estimates_mali_adjustment_for_all_ca))",
    "expected": 0.02125047343,
    "format": "percent"
   },
@@ -1442,7 +1446,7 @@
    "id": "annual_all_cause_mortality_in_children_under_5_mali",
    "label": "Annual all-cause mortality in children under 5 (Mali)",
    "section": "uduma_cea",
-   "formula": "mali",
+   "formula": "mortality_rate_national_estimates_mali",
    "expected": 0.02125047343,
    "format": "percent"
   },
@@ -1450,6 +1454,7 @@
    "id": "annual_all_cause_mortality_rate_among_children_under_five_ma",
    "label": "Annual all-cause mortality rate among children under five (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "annual_all_cause_mortality_in_children_under_5_mali",
    "expected": 0.02125047343,
    "format": "percent"
@@ -1553,8 +1558,8 @@
    "expected": 1.058511414
   },
   {
-   "id": "no_control_deaths",
-   "label": "no (Control deaths)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_5",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Control deaths)",
    "section": "mortality_effect",
    "value": 1.0,
    "kind": "estimate",
@@ -1566,8 +1571,8 @@
    "explainer": "Personal communication from Thomas Clasen; published here with permission."
   },
   {
-   "id": "no_treatment_deaths",
-   "label": "no (Treatment deaths)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_6",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Treatment deaths)",
    "section": "mortality_effect",
    "value": 2.0,
    "kind": "estimate",
@@ -1579,8 +1584,8 @@
    "explainer": "Personal communication from Thomas Clasen; published here with permission."
   },
   {
-   "id": "no_control_n",
-   "label": "no (Control n)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_7",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Control n)",
    "section": "mortality_effect",
    "value": 1484.0,
    "kind": "estimate",
@@ -1591,8 +1596,8 @@
    }
   },
   {
-   "id": "no_treatment_n",
-   "label": "no (Treatment n)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_8",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Treatment n)",
    "section": "mortality_effect",
    "value": 1507.0,
    "kind": "estimate",
@@ -1603,22 +1608,22 @@
    }
   },
   {
-   "id": "no_se_of_ln_rr",
-   "label": "no (SE of ln(RR))",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_4",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (SE of ln(RR))",
    "section": "mortality_effect",
-   "formula": "sqrt(1 / no_control_deaths + 1 / no_treatment_deaths - 1 / no_control_n - 1 / no_treatment_n)",
+   "formula": "sqrt(1 / we_began_with_all_13_trials_of_water_quality_interventions_r_5 + 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_6 - 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_7 - 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_8)",
    "expected": 1.224198748
   },
   {
-   "id": "no_1_variance_weight",
-   "label": "no (1/variance weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_3",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (1/variance weight)",
    "section": "mortality_effect",
-   "formula": "1 / no_se_of_ln_rr ^ 2",
+   "formula": "1 / we_began_with_all_13_trials_of_water_quality_interventions_r_4 ^ 2",
    "expected": 0.667261608
   },
   {
-   "id": "no_similarity_weight",
-   "label": "no (Similarity weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_9",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Similarity weight)",
    "section": "mortality_effect",
    "value": 1.0,
    "kind": "estimate",
@@ -1629,10 +1634,10 @@
    }
   },
   {
-   "id": "no_total_weight",
-   "label": "no (Total weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_2",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Total weight)",
    "section": "mortality_effect",
-   "formula": "no_1_variance_weight * no_similarity_weight",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_3 * we_began_with_all_13_trials_of_water_quality_interventions_r_9",
    "expected": 0.667261608
   },
   {
@@ -1722,8 +1727,8 @@
    "expected": 14.74173012
   },
   {
-   "id": "no_control_deaths_2",
-   "label": "no (Control deaths)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_13",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Control deaths)",
    "section": "mortality_effect",
    "value": 73.0,
    "kind": "estimate",
@@ -1735,8 +1740,8 @@
    "explainer": "Supplementary table S7, Null et al. 2018.\nhttps://doi.org/10.1016/S2214-109X(18)30005-6"
   },
   {
-   "id": "no_treatment_deaths_2",
-   "label": "no (Treatment deaths)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_14",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Treatment deaths)",
    "section": "mortality_effect",
    "value": 30.0,
    "kind": "estimate",
@@ -1748,8 +1753,8 @@
    "explainer": "Supplementary table S7, Null et al. 2018.\nhttps://doi.org/10.1016/S2214-109X(18)30005-6"
   },
   {
-   "id": "no_control_n_2",
-   "label": "no (Control n)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_15",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Control n)",
    "section": "mortality_effect",
    "value": 1895.0,
    "kind": "estimate",
@@ -1761,8 +1766,8 @@
    "explainer": "Supplementary table S7, Null et al. 2018.\nhttps://doi.org/10.1016/S2214-109X(18)30005-6"
   },
   {
-   "id": "no_treatment_n_2",
-   "label": "no (Treatment n)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_16",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Treatment n)",
    "section": "mortality_effect",
    "value": 888.0,
    "kind": "estimate",
@@ -1774,22 +1779,22 @@
    "explainer": "Supplementary table S7, Null et al. 2018.\nhttps://doi.org/10.1016/S2214-109X(18)30005-6"
   },
   {
-   "id": "no_se_of_ln_rr_2",
-   "label": "no (SE of ln(RR))",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_12",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (SE of ln(RR))",
    "section": "mortality_effect",
-   "formula": "sqrt(1 / no_control_deaths_2 + 1 / no_treatment_deaths_2 - 1 / no_control_n_2 - 1 / no_treatment_n_2)",
+   "formula": "sqrt(1 / we_began_with_all_13_trials_of_water_quality_interventions_r_13 + 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_14 - 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_15 - 1 / we_began_with_all_13_trials_of_water_quality_interventions_r_16)",
    "expected": 0.2130214376
   },
   {
-   "id": "no_1_variance_weight_2",
-   "label": "no (1/variance weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_11",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (1/variance weight)",
    "section": "mortality_effect",
-   "formula": "1 / no_se_of_ln_rr_2 ^ 2",
+   "formula": "1 / we_began_with_all_13_trials_of_water_quality_interventions_r_12 ^ 2",
    "expected": 22.03704597
   },
   {
-   "id": "no_similarity_weight_2",
-   "label": "no (Similarity weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_17",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Similarity weight)",
    "section": "mortality_effect",
    "value": 1.0,
    "kind": "estimate",
@@ -1800,10 +1805,10 @@
    }
   },
   {
-   "id": "no_total_weight_2",
-   "label": "no (Total weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_10",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Total weight)",
    "section": "mortality_effect",
-   "formula": "no_1_variance_weight_2 * no_similarity_weight_2",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_11 * we_began_with_all_13_trials_of_water_quality_interventions_r_17",
    "expected": 22.03704597
   },
   {
@@ -1896,29 +1901,29 @@
    "id": "safe_storage_vessel_weight",
    "label": "Safe storage vessel (% weight)",
    "section": "mortality_effect",
-   "formula": "safe_storage_vessel_total_weight / sum(safe_storage_vessel_total_weight, no_total_weight, safe_storage_vessel_total_weight_2, no_total_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph)",
+   "formula": "safe_storage_vessel_total_weight / sum(safe_storage_vessel_total_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_2, safe_storage_vessel_total_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_10, handwashing_infant_play_space_and_education_to_prevent_geoph)",
    "expected": 0.02053813472,
    "format": "percent"
   },
   {
-   "id": "no_mortality_rr",
-   "label": "no (Mortality RR)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_19",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (Mortality RR)",
    "section": "mortality_effect",
-   "formula": "no_treatment_deaths / no_treatment_n / (no_control_deaths / no_control_n)",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_6 / we_began_with_all_13_trials_of_water_quality_interventions_r_8 / (we_began_with_all_13_trials_of_water_quality_interventions_r_5 / we_began_with_all_13_trials_of_water_quality_interventions_r_7)",
    "expected": 1.96947578
   },
   {
-   "id": "no_ln_mortality_rr",
-   "label": "no (ln(Mortality RR))",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_18",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (ln(Mortality RR))",
    "section": "mortality_effect",
-   "formula": "ln(no_mortality_rr)",
+   "formula": "ln(we_began_with_all_13_trials_of_water_quality_interventions_r_19)",
    "expected": 0.6777674057
   },
   {
-   "id": "no_weight",
-   "label": "no (% weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_20",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Boisson 2013, Chlorination, no (% weight)",
    "section": "mortality_effect",
-   "formula": "no_total_weight / sum(safe_storage_vessel_total_weight, no_total_weight, safe_storage_vessel_total_weight_2, no_total_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph)",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_2 / sum(safe_storage_vessel_total_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_2, safe_storage_vessel_total_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_10, handwashing_infant_play_space_and_education_to_prevent_geoph)",
    "expected": 0.0129467747,
    "format": "percent"
   },
@@ -1940,29 +1945,29 @@
    "id": "safe_storage_vessel_weight_2",
    "label": "Safe storage vessel (% weight)",
    "section": "mortality_effect",
-   "formula": "safe_storage_vessel_total_weight_2 / sum(safe_storage_vessel_total_weight, no_total_weight, safe_storage_vessel_total_weight_2, no_total_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph)",
+   "formula": "safe_storage_vessel_total_weight_2 / sum(safe_storage_vessel_total_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_2, safe_storage_vessel_total_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_10, handwashing_infant_play_space_and_education_to_prevent_geoph)",
    "expected": 0.2860315298,
    "format": "percent"
   },
   {
-   "id": "no_mortality_rr_2",
-   "label": "no (Mortality RR)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_22",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (Mortality RR)",
    "section": "mortality_effect",
-   "formula": "no_treatment_deaths_2 / no_treatment_n_2 / (no_control_deaths_2 / no_control_n_2)",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_14 / we_began_with_all_13_trials_of_water_quality_interventions_r_16 / (we_began_with_all_13_trials_of_water_quality_interventions_r_13 / we_began_with_all_13_trials_of_water_quality_interventions_r_15)",
    "expected": 0.8769900037
   },
   {
-   "id": "no_ln_mortality_rr_2",
-   "label": "no (ln(Mortality RR))",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_21",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (ln(Mortality RR))",
    "section": "mortality_effect",
-   "formula": "ln(no_mortality_rr_2)",
+   "formula": "ln(we_began_with_all_13_trials_of_water_quality_interventions_r_22)",
    "expected": -0.131259685
   },
   {
-   "id": "no_weight_2",
-   "label": "no (% weight)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r_23",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Null 2018, Chlorination, no (% weight)",
    "section": "mortality_effect",
-   "formula": "no_total_weight_2 / sum(safe_storage_vessel_total_weight, no_total_weight, safe_storage_vessel_total_weight_2, no_total_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph)",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_10 / sum(safe_storage_vessel_total_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_2, safe_storage_vessel_total_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_10, handwashing_infant_play_space_and_education_to_prevent_geoph)",
    "expected": 0.4275814251,
    "format": "percent"
   },
@@ -1984,43 +1989,43 @@
    "id": "handwashing_infant_play_space_and_education_to_prevent_geoph_11",
    "label": "Handwashing, infant play space and education to prevent geophagia, education on hygienic prep of complementary food, education on safe disposal of feces (% weig",
    "section": "mortality_effect",
-   "formula": "handwashing_infant_play_space_and_education_to_prevent_geoph / sum(safe_storage_vessel_total_weight, no_total_weight, safe_storage_vessel_total_weight_2, no_total_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph)",
+   "formula": "handwashing_infant_play_space_and_education_to_prevent_geoph / sum(safe_storage_vessel_total_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_2, safe_storage_vessel_total_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_10, handwashing_infant_play_space_and_education_to_prevent_geoph)",
    "expected": 0.2529021356,
    "format": "percent"
   },
   {
-   "id": "pooled_ln_rr",
-   "label": "Pooled ln(RR)",
+   "id": "we_began_with_all_13_trials_of_water_quality_interventions_r",
+   "label": "We began with all 13 trials of water quality interventions reporting under-5 all-cause mor: Pooled ln(RR)",
    "section": "mortality_effect",
-   "formula": "sum(safe_storage_vessel_ln_mortality_rr * safe_storage_vessel_weight, no_ln_mortality_rr * no_weight, safe_storage_vessel_ln_mortality_rr_2 * safe_storage_vessel_weight_2, no_ln_mortality_rr_2 * no_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph_9 * handwashing_infant_play_space_and_education_to_prevent_geoph_11) / sum(safe_storage_vessel_weight, no_weight, safe_storage_vessel_weight_2, no_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph_11)",
+   "formula": "sum(safe_storage_vessel_ln_mortality_rr * safe_storage_vessel_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_18 * we_began_with_all_13_trials_of_water_quality_interventions_r_20, safe_storage_vessel_ln_mortality_rr_2 * safe_storage_vessel_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_21 * we_began_with_all_13_trials_of_water_quality_interventions_r_23, handwashing_infant_play_space_and_education_to_prevent_geoph_9 * handwashing_infant_play_space_and_education_to_prevent_geoph_11) / sum(safe_storage_vessel_weight, we_began_with_all_13_trials_of_water_quality_interventions_r_20, safe_storage_vessel_weight_2, we_began_with_all_13_trials_of_water_quality_interventions_r_23, handwashing_infant_play_space_and_education_to_prevent_geoph_11)",
    "expected": -0.1225006851
   },
   {
    "id": "pooled_relative_risk",
    "label": "Pooled relative risk",
    "section": "mortality_effect",
-   "formula": "exp(pooled_ln_rr)",
+   "formula": "exp(we_began_with_all_13_trials_of_water_quality_interventions_r)",
    "expected": 0.8847052989
   },
   {
-   "id": "no_data_intervention_chlorine_coverage",
-   "label": "(no data) (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_reller_2003",
+   "label": "Kremer et al. trial water/chlorine treatment data: Reller 2003, (no data) (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
    "formula": "avg(0.36, 0.44)",
    "expected": 0.4,
    "format": "percent"
   },
   {
-   "id": "no_data_adjusted_study_weight",
-   "label": "(no data) (Adjusted study weight)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_reller_2003_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Reller 2003, (no data) (Adjusted study weight)",
    "section": "adherence_adjustments",
    "formula": "safe_storage_vessel_weight",
    "expected": 0.02053813472,
    "format": "percent"
   },
   {
-   "id": "boisson_2013_intervention_chlorine_coverage",
-   "label": "Boisson 2013 (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_boisson_201",
+   "label": "Kremer et al. trial water/chlorine treatment data: Boisson 2013 (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
    "value": 0.32,
    "kind": "estimate",
@@ -2033,73 +2038,73 @@
    "format": "percent"
   },
   {
-   "id": "boisson_2013_adjusted_study_weight",
-   "label": "Boisson 2013 (Adjusted study weight)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Boisson 2013 (Adjusted study weight)",
    "section": "adherence_adjustments",
-   "formula": "no_weight",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_20",
    "expected": 0.0129467747,
    "format": "percent"
   },
   {
-   "id": "luby_2018_intervention_chlorine_coverage",
-   "label": "Luby 2018 (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_i",
+   "label": "Kremer et al. trial water/chlorine treatment data: Luby 2018 (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
    "formula": "avg(0.78, 0.84)",
    "expected": 0.81,
    "format": "percent"
   },
   {
-   "id": "luby_2018_adjusted_study_weight",
-   "label": "Luby 2018 (Adjusted study weight)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a",
+   "label": "Kremer et al. trial water/chlorine treatment data: Luby 2018 (Adjusted study weight)",
    "section": "adherence_adjustments",
    "formula": "safe_storage_vessel_weight_2",
    "expected": 0.2860315298,
    "format": "percent"
   },
   {
-   "id": "null_2018_intervention_chlorine_coverage",
-   "label": "Null 2018 (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_null_2018_i",
+   "label": "Kremer et al. trial water/chlorine treatment data: Null 2018 (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
    "formula": "avg(0.39, 0.23)",
    "expected": 0.31,
    "format": "percent"
   },
   {
-   "id": "null_2018_adjusted_study_weight",
-   "label": "Null 2018 (Adjusted study weight)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a",
+   "label": "Kremer et al. trial water/chlorine treatment data: Null 2018 (Adjusted study weight)",
    "section": "adherence_adjustments",
-   "formula": "no_weight_2",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_23",
    "expected": 0.4275814251,
    "format": "percent"
   },
   {
-   "id": "humphrey_2019_adjustment_for_self_report_bias",
-   "label": "Humphrey 2019 (Adjustment for self-report bias)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Humphrey 2019 (Adjustment for self-report bias)",
    "section": "adherence_adjustments",
    "formula": "avg(adjustment_for_self_report_bias_dhs_kenya, adjustment_for_self_report_bias_dhs_uganda, adjustment_for_self_report_bias_dhs_no_data)",
    "expected": 0.6666666667
   },
   {
-   "id": "humphrey_2019_intervention_chlorine_coverage",
-   "label": "Humphrey 2019 (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20",
+   "label": "Kremer et al. trial water/chlorine treatment data: Humphrey 2019 (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
-   "formula": "avg(0.58, 0.87 * humphrey_2019_adjustment_for_self_report_bias)",
+   "formula": "avg(0.58, 0.87 * kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_2)",
    "expected": 0.58,
    "format": "percent"
   },
   {
-   "id": "humphrey_2019_adjusted_study_weight",
-   "label": "Humphrey 2019 (Adjusted study weight)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_3",
+   "label": "Kremer et al. trial water/chlorine treatment data: Humphrey 2019 (Adjusted study weight)",
    "section": "adherence_adjustments",
    "formula": "handwashing_infant_play_space_and_education_to_prevent_geoph_11",
    "expected": 0.2529021356,
    "format": "percent"
   },
   {
-   "id": "weighted_average_intervention_chlorine_coverage",
-   "label": "Weighted average (Intervention chlorine coverage)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av",
+   "label": "Kremer et al. trial water/chlorine treatment data: Weighted average (Intervention chlorine coverage)",
    "section": "adherence_adjustments",
-   "formula": "sum(no_data_intervention_chlorine_coverage * no_data_adjusted_study_weight, boisson_2013_intervention_chlorine_coverage * boisson_2013_adjusted_study_weight, luby_2018_intervention_chlorine_coverage * luby_2018_adjusted_study_weight, null_2018_intervention_chlorine_coverage * null_2018_adjusted_study_weight, humphrey_2019_intervention_chlorine_coverage * humphrey_2019_adjusted_study_weight)",
+   "formula": "sum(kremer_et_al_trial_water_chlorine_treatment_data_reller_2003 * kremer_et_al_trial_water_chlorine_treatment_data_reller_2003_2, kremer_et_al_trial_water_chlorine_treatment_data_boisson_201 * kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_2, kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_i * kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_null_2018_i * kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20 * kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_3)",
    "expected": 0.5232772414,
    "format": "percent"
   },
@@ -2107,13 +2112,13 @@
    "id": "intervention_chlorine_coverage_minus_counterfactual_chlorine",
    "label": "Intervention chlorine coverage (minus counterfactual chlorine coverage)",
    "section": "adherence_adjustments",
-   "formula": "weighted_average_intervention_chlorine_coverage",
+   "formula": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av",
    "expected": 0.5232772414,
    "format": "percent"
   },
   {
-   "id": "boisson_2013_no_data",
-   "label": "Boisson 2013 ((no data))",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_3",
+   "label": "Kremer et al. trial water/chlorine treatment data: Boisson 2013 ((no data))",
    "section": "adherence_adjustments",
    "value": 0.44,
    "kind": "estimate",
@@ -2126,16 +2131,16 @@
    "format": "percent"
   },
   {
-   "id": "luby_2018_no_data",
-   "label": "Luby 2018 ((no data))",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_n",
+   "label": "Kremer et al. trial water/chlorine treatment data: Luby 2018 ((no data))",
    "section": "adherence_adjustments",
    "formula": "4 / 1382",
    "expected": 0.002894356006,
    "format": "percent"
   },
   {
-   "id": "null_2018_no_data",
-   "label": "Null 2018 ((no data))",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_null_2018_n",
+   "label": "Kremer et al. trial water/chlorine treatment data: Null 2018 ((no data))",
    "section": "adherence_adjustments",
    "value": 0.13,
    "kind": "estimate",
@@ -2148,18 +2153,18 @@
    "format": "percent"
   },
   {
-   "id": "humphrey_2019_no_data",
-   "label": "Humphrey 2019 ((no data))",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_4",
+   "label": "Kremer et al. trial water/chlorine treatment data: Humphrey 2019 ((no data))",
    "section": "adherence_adjustments",
    "formula": "90 / 667",
    "expected": 0.1349325337,
    "format": "percent"
   },
   {
-   "id": "weighted_average_no_data",
-   "label": "Weighted average ((no data))",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Weighted average ((no data))",
    "section": "adherence_adjustments",
-   "formula": "sum(boisson_2013_no_data * boisson_2013_adjusted_study_weight, luby_2018_no_data * luby_2018_adjusted_study_weight, null_2018_no_data * null_2018_adjusted_study_weight, humphrey_2019_no_data * humphrey_2019_adjusted_study_weight)",
+   "formula": "sum(kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_3 * kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_2, kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_n * kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_null_2018_n * kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_4 * kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_3)",
    "expected": 0.09623476916,
    "format": "percent"
   },
@@ -2167,13 +2172,13 @@
    "id": "of_households_self_reporting_treating_water_at_baseline",
    "label": "% of households self-reporting treating water at baseline",
    "section": "adherence_adjustments",
-   "formula": "weighted_average_no_data",
+   "formula": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av_2",
    "expected": 0.09623476916,
    "format": "percent"
   },
   {
-   "id": "boisson_2013_adjustment_for_self_report_bias",
-   "label": "Boisson 2013 (Adjustment for self-report bias)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_4",
+   "label": "Kremer et al. trial water/chlorine treatment data: Boisson 2013 (Adjustment for self-report bias)",
    "section": "adherence_adjustments",
    "formula": "avg(adjustment_for_self_report_bias_dhs_kenya, adjustment_for_self_report_bias_dhs_uganda, adjustment_for_self_report_bias_dhs_no_data)",
    "expected": 0.6666666667
@@ -2244,24 +2249,24 @@
    "expected": 0.942575406
   },
   {
-   "id": "null_2018_adjustment_for_self_report_bias",
-   "label": "Null 2018 (Adjustment for self-report bias)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Null 2018 (Adjustment for self-report bias)",
    "section": "adherence_adjustments",
    "formula": "avg(adjustment_for_self_report_bias_kenya, adjustment_for_self_report_bias_dsw_data_kenya, adjustment_for_self_report_bias_dsw_data_uganda, adjustment_for_self_report_bias_dsw_data_no_data)",
    "expected": 0.743524471
   },
   {
-   "id": "luby_2018_adjustment_for_self_report_bias",
-   "label": "Luby 2018 (Adjustment for self-report bias)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a_2",
+   "label": "Kremer et al. trial water/chlorine treatment data: Luby 2018 (Adjustment for self-report bias)",
    "section": "adherence_adjustments",
-   "formula": "null_2018_adjustment_for_self_report_bias",
+   "formula": "kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a_2",
    "expected": 0.743524471
   },
   {
-   "id": "weighted_average_adjustment_for_self_report_bias",
-   "label": "Weighted average (Adjustment for self-report bias)",
+   "id": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av_3",
+   "label": "Kremer et al. trial water/chlorine treatment data: Weighted average (Adjustment for self-report bias)",
    "section": "adherence_adjustments",
-   "formula": "sum(boisson_2013_adjustment_for_self_report_bias * boisson_2013_adjusted_study_weight, luby_2018_adjustment_for_self_report_bias * luby_2018_adjusted_study_weight, null_2018_adjustment_for_self_report_bias * null_2018_adjusted_study_weight, humphrey_2019_adjustment_for_self_report_bias * humphrey_2019_adjusted_study_weight)",
+   "formula": "sum(kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_4 * kremer_et_al_trial_water_chlorine_treatment_data_boisson_201_2, kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a_2 * kremer_et_al_trial_water_chlorine_treatment_data_luby_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a_2 * kremer_et_al_trial_water_chlorine_treatment_data_null_2018_a, kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_2 * kremer_et_al_trial_water_chlorine_treatment_data_humphrey_20_3)",
    "expected": 0.7078213017,
    "format": "percent"
   },
@@ -2269,7 +2274,7 @@
    "id": "adjustment_for_self_report_bias",
    "label": "Adjustment for self-report bias",
    "section": "adherence_adjustments",
-   "formula": "weighted_average_adjustment_for_self_report_bias",
+   "formula": "kremer_et_al_trial_water_chlorine_treatment_data_weighted_av_3",
    "expected": 0.7078213017
   },
   {
@@ -2462,6 +2467,7 @@
    "id": "effect_of_chlorination_on_under_five_all_cause_mortality_amo",
    "label": "Effect of chlorination on under-five all-cause mortality among children treated, from RCTs",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "(1 - pooled_relative_risk) / increase_in_water_treatment_as_a_result_of_intervention_pp",
    "expected": 0.2448057112,
    "format": "percent"
@@ -2522,32 +2528,32 @@
    "format": "percent"
   },
   {
-   "id": "no_original_mortality_rr",
-   "label": "no (Original mortality RR)",
+   "id": "bundled_intervention_adjustment_boisson_2013_chlorination_no_2",
+   "label": "Bundled intervention adjustment: Boisson 2013, Chlorination, no (Original mortality RR)",
    "section": "internal_validity_adjustments",
-   "formula": "no_mortality_rr",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_19",
    "expected": 1.96947578
   },
   {
-   "id": "no_overall_contribution_of_additional_mechanism_to_effect_si",
-   "label": "no (Overall contribution of additional mechanism to effect size)",
+   "id": "bundled_intervention_adjustment_boisson_2013_chlorination_no_3",
+   "label": "Bundled intervention adjustment: Boisson 2013, Chlorination, no (Overall contribution of additional mechanism to effect size)",
    "section": "internal_validity_adjustments",
    "formula": "0 * 0",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "no_adjusted_mortality_rr",
-   "label": "no (Adjusted mortality RR)",
+   "id": "bundled_intervention_adjustment_boisson_2013_chlorination_no",
+   "label": "Bundled intervention adjustment: Boisson 2013, Chlorination, no (Adjusted mortality RR)",
    "section": "internal_validity_adjustments",
-   "formula": "1 - (1 - no_original_mortality_rr) * (1 - no_overall_contribution_of_additional_mechanism_to_effect_si)",
+   "formula": "1 - (1 - bundled_intervention_adjustment_boisson_2013_chlorination_no_2) * (1 - bundled_intervention_adjustment_boisson_2013_chlorination_no_3)",
    "expected": 1.96947578
   },
   {
-   "id": "no_study_weight",
-   "label": "no (Study weight)",
+   "id": "bundled_intervention_adjustment_boisson_2013_chlorination_no_4",
+   "label": "Bundled intervention adjustment: Boisson 2013, Chlorination, no (Study weight)",
    "section": "internal_validity_adjustments",
-   "formula": "no_weight",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_20",
    "expected": 0.0129467747,
    "format": "percent"
   },
@@ -2606,32 +2612,32 @@
    "format": "percent"
   },
   {
-   "id": "no_original_mortality_rr_2",
-   "label": "no (Original mortality RR)",
+   "id": "bundled_intervention_adjustment_null_2018_chlorination_no_or",
+   "label": "Bundled intervention adjustment: Null 2018, Chlorination, no (Original mortality RR)",
    "section": "internal_validity_adjustments",
-   "formula": "no_mortality_rr_2",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_22",
    "expected": 0.8769900037
   },
   {
-   "id": "no_overall_contribution_of_additional_mechanism_to_effect_si_2",
-   "label": "no (Overall contribution of additional mechanism to effect size)",
+   "id": "bundled_intervention_adjustment_null_2018_chlorination_no_ov",
+   "label": "Bundled intervention adjustment: Null 2018, Chlorination, no (Overall contribution of additional mechanism to effect size)",
    "section": "internal_validity_adjustments",
    "formula": "0 * 0",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "no_adjusted_mortality_rr_2",
-   "label": "no (Adjusted mortality RR)",
+   "id": "bundled_intervention_adjustment_null_2018_chlorination_no_ad",
+   "label": "Bundled intervention adjustment: Null 2018, Chlorination, no (Adjusted mortality RR)",
    "section": "internal_validity_adjustments",
-   "formula": "1 - (1 - no_original_mortality_rr_2) * (1 - no_overall_contribution_of_additional_mechanism_to_effect_si_2)",
+   "formula": "1 - (1 - bundled_intervention_adjustment_null_2018_chlorination_no_or) * (1 - bundled_intervention_adjustment_null_2018_chlorination_no_ov)",
    "expected": 0.8769900037
   },
   {
-   "id": "no_study_weight_2",
-   "label": "no (Study weight)",
+   "id": "bundled_intervention_adjustment_null_2018_chlorination_no_st",
+   "label": "Bundled intervention adjustment: Null 2018, Chlorination, no (Study weight)",
    "section": "internal_validity_adjustments",
-   "formula": "no_weight_2",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_23",
    "expected": 0.4275814251,
    "format": "percent"
   },
@@ -2693,7 +2699,7 @@
    "id": "pooled_effect_size_estimate_adjusted_for_bundled_treatments",
    "label": "Pooled effect size estimate, adjusted for bundled treatments",
    "section": "internal_validity_adjustments",
-   "formula": "sum(safe_storage_vessel_adjusted_mortality_rr * safe_storage_vessel_study_weight, no_adjusted_mortality_rr * no_study_weight, safe_storage_vessel_adjusted_mortality_rr_2 * safe_storage_vessel_study_weight_2, no_adjusted_mortality_rr_2 * no_study_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph_12 * handwashing_infant_play_space_and_education_to_prevent_geoph_17) / sum(safe_storage_vessel_study_weight, no_study_weight, safe_storage_vessel_study_weight_2, no_study_weight_2, handwashing_infant_play_space_and_education_to_prevent_geoph_17)",
+   "formula": "sum(safe_storage_vessel_adjusted_mortality_rr * safe_storage_vessel_study_weight, bundled_intervention_adjustment_boisson_2013_chlorination_no * bundled_intervention_adjustment_boisson_2013_chlorination_no_4, safe_storage_vessel_adjusted_mortality_rr_2 * safe_storage_vessel_study_weight_2, bundled_intervention_adjustment_null_2018_chlorination_no_ad * bundled_intervention_adjustment_null_2018_chlorination_no_st, handwashing_infant_play_space_and_education_to_prevent_geoph_12 * handwashing_infant_play_space_and_education_to_prevent_geoph_17) / sum(safe_storage_vessel_study_weight, bundled_intervention_adjustment_boisson_2013_chlorination_no_4, safe_storage_vessel_study_weight_2, bundled_intervention_adjustment_null_2018_chlorination_no_st, handwashing_infant_play_space_and_education_to_prevent_geoph_17)",
    "expected": 0.9134209085
   },
   {
@@ -2735,14 +2741,16 @@
    "id": "internal_validity_adjustment",
    "label": "Internal validity adjustment",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "internal_validity_adjustment_under_5_mortality_ref - 1",
    "expected": -0.2490627003,
    "format": "percent"
   },
   {
-   "id": "past_estimate_value",
-   "label": "Past estimate (Value)",
+   "id": "gbd_2019_raw_estimates_for_uduma_countries_of_operation_ente",
+   "label": "GBD 2019 raw estimates (for Uduma countries of operation): Enteric infections, Both, Under 5, Mali, Past estimate, 2019 (Value)",
    "section": "water_linked_mortality",
+   "unit": "Deaths",
    "value": 10389.6116563078,
    "kind": "estimate",
    "source": {
@@ -2753,9 +2761,10 @@
    "explainer": "GBD 2019"
   },
   {
-   "id": "past_estimate_value_2",
-   "label": "Past estimate (Value)",
+   "id": "gbd_2019_raw_estimates_for_uduma_countries_of_operation_all",
+   "label": "GBD 2019 raw estimates (for Uduma countries of operation): All causes, Both, Under 5, Mali, Past estimate, 2019 (Value)",
    "section": "water_linked_mortality",
+   "unit": "Deaths",
    "value": 109642.622536445,
    "kind": "estimate",
    "source": {
@@ -2769,7 +2778,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_enteric_inf",
    "label": "Percent of total under 5 mortality attributed to enteric infections in 2019 (GBD 2019 estimates) (Mali)",
    "section": "water_linked_mortality",
-   "formula": "past_estimate_value / past_estimate_value_2",
+   "formula": "gbd_2019_raw_estimates_for_uduma_countries_of_operation_ente / gbd_2019_raw_estimates_for_uduma_countries_of_operation_all",
    "expected": 0.09475887585,
    "format": "percent"
   },
@@ -2787,9 +2796,10 @@
    "format": "percent"
   },
   {
-   "id": "enteric_infections_val",
-   "label": "Enteric infections (val)",
+   "id": "mali_both_under_5_enteric_infections_2022_overall_best_estim",
+   "label": "Mali, Both, Under 5, Enteric infections, 2022 (Overall best estimate)",
    "section": "water_linked_mortality",
+   "unit": "Deaths",
    "value": 6706.656324,
    "kind": "estimate",
    "source": {
@@ -2799,9 +2809,10 @@
    }
   },
   {
-   "id": "all_causes_val",
-   "label": "All causes (val)",
+   "id": "mali_both_under_5_all_causes_2022_overall_best_estimate",
+   "label": "Mali, Both, Under 5, All causes, 2022 (Overall best estimate)",
    "section": "water_linked_mortality",
+   "unit": "Deaths",
    "value": 100525.4418,
    "kind": "estimate",
    "source": {
@@ -2814,7 +2825,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_enteric_inf_2",
    "label": "Percent of total under 5 mortality attributed to enteric infections in 2022 (GBD 2021 estimates) (Mali)",
    "section": "water_linked_mortality",
-   "formula": "enteric_infections_val / all_causes_val",
+   "formula": "mali_both_under_5_enteric_infections_2022_overall_best_estim / mali_both_under_5_all_causes_2022_overall_best_estimate",
    "expected": 0.06671600944,
    "format": "percent"
   },
@@ -2832,9 +2843,10 @@
    "format": "percent"
   },
   {
-   "id": "ca_code",
-   "label": "CA CODE",
+   "id": "under_5_years",
+   "label": "Under 5 years",
    "section": "water_linked_mortality",
+   "unit": "%",
    "value": 0.11448,
    "kind": "estimate",
    "source": {
@@ -2848,7 +2860,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_diarrhea_in",
    "label": "Percent of total under 5 mortality attributed to diarrhea in 2021 (IGME estimates) (Mali)",
    "section": "water_linked_mortality",
-   "formula": "ca_code",
+   "formula": "under_5_years",
    "expected": 0.11448,
    "format": "percent"
   },
@@ -2874,8 +2886,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2001_2002_under_5_deaths_attributed_to_enteric_infections_gb",
-   "label": "2001-2002 (% under 5 deaths attributed to enteric infections (GBD 2019))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_2",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Reller 2003, Guatemala, 2001-2002 (% under 5 deaths attributed to enteric infectio",
    "section": "water_linked_mortality",
    "value": 0.1624941045,
    "kind": "estimate",
@@ -2901,8 +2913,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2001_2002_under_5_deaths_attributed_to_enteric_infections_gb_2",
-   "label": "2001-2002 (% under 5 deaths attributed to enteric infections (GBD 2021))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_3",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Reller 2003, Guatemala, 2001-2002 (% under 5 deaths attributed to enteric infectio",
    "section": "water_linked_mortality",
    "value": 0.1786845889,
    "kind": "estimate",
@@ -2928,8 +2940,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2001_2002_under_5_deaths_attributed_to_diarrhea_igme",
-   "label": "2001-2002 (% under 5 deaths attributed to diarrhea (IGME))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_4",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Reller 2003, Guatemala, 2001-2002 (% under 5 deaths attributed to diarrhea (IGME))",
    "section": "water_linked_mortality",
    "value": 0.11398,
    "kind": "estimate",
@@ -2955,24 +2967,24 @@
    "format": "percent"
   },
   {
-   "id": "r_2001_2002_overall_best_estimate",
-   "label": "2001-2002 (Overall best estimate)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Reller 2003, Guatemala, 2001-2002 (Overall best estimate)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2001_2002_under_5_deaths_attributed_to_enteric_infections_gb * weight_assigned_to_each_source_under_5_deaths_attributed_to, r_2001_2002_under_5_deaths_attributed_to_enteric_infections_gb_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, r_2001_2002_under_5_deaths_attributed_to_diarrhea_igme * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to, calculations_for_adjustment_by_total_deaths_attributed_to_en_3 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, calculations_for_adjustment_by_total_deaths_attributed_to_en_4 * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
    "expected": 0.1435799121,
    "format": "percent"
   },
   {
-   "id": "r_2001_2002_weight_in_meta_analysis",
-   "label": "2001-2002 (Weight in meta-analysis)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_5",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Reller 2003, Guatemala, 2001-2002 (Weight in meta-analysis)",
    "section": "water_linked_mortality",
    "formula": "safe_storage_vessel_weight",
    "expected": 0.02053813472,
    "format": "percent"
   },
   {
-   "id": "r_2010_2011_under_5_deaths_attributed_to_enteric_infections_gb",
-   "label": "2010-2011 (% under 5 deaths attributed to enteric infections (GBD 2019))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_7",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Boisson 2013, India, 2010-2011 (% under 5 deaths attributed to enteric infections ",
    "section": "water_linked_mortality",
    "value": 0.1108883375,
    "kind": "estimate",
@@ -2985,8 +2997,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2010_2011_under_5_deaths_attributed_to_enteric_infections_gb_2",
-   "label": "2010-2011 (% under 5 deaths attributed to enteric infections (GBD 2021))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_8",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Boisson 2013, India, 2010-2011 (% under 5 deaths attributed to enteric infections ",
    "section": "water_linked_mortality",
    "value": 0.1286611562,
    "kind": "estimate",
@@ -2999,8 +3011,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2010_2011_under_5_deaths_attributed_to_diarrhea_igme",
-   "label": "2010-2011 (% under 5 deaths attributed to diarrhea (IGME))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_9",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Boisson 2013, India, 2010-2011 (% under 5 deaths attributed to diarrhea (IGME))",
    "section": "water_linked_mortality",
    "value": 0.084365,
    "kind": "estimate",
@@ -3013,24 +3025,24 @@
    "format": "percent"
   },
   {
-   "id": "r_2010_2011_overall_best_estimate",
-   "label": "2010-2011 (Overall best estimate)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_6",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Boisson 2013, India, 2010-2011 (Overall best estimate)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2010_2011_under_5_deaths_attributed_to_enteric_infections_gb * weight_assigned_to_each_source_under_5_deaths_attributed_to, r_2010_2011_under_5_deaths_attributed_to_enteric_infections_gb_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, r_2010_2011_under_5_deaths_attributed_to_diarrhea_igme * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en_7 * weight_assigned_to_each_source_under_5_deaths_attributed_to, calculations_for_adjustment_by_total_deaths_attributed_to_en_8 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, calculations_for_adjustment_by_total_deaths_attributed_to_en_9 * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
    "expected": 0.1034916989,
    "format": "percent"
   },
   {
-   "id": "r_2010_2011_weight_in_meta_analysis",
-   "label": "2010-2011 (Weight in meta-analysis)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_10",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Boisson 2013, India, 2010-2011 (Weight in meta-analysis)",
    "section": "water_linked_mortality",
-   "formula": "no_weight",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_20",
    "expected": 0.0129467747,
    "format": "percent"
   },
   {
-   "id": "r_2013_2014_under_5_deaths_attributed_to_enteric_infections_gb",
-   "label": "2013-2014 (% under 5 deaths attributed to enteric infections (GBD 2019))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_12",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Luby 2018, Bangladesh, 2013-2014 (% under 5 deaths attributed to enteric infection",
    "section": "water_linked_mortality",
    "value": 0.051885721,
    "kind": "estimate",
@@ -3043,8 +3055,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2014_under_5_deaths_attributed_to_enteric_infections_gb_2",
-   "label": "2013-2014 (% under 5 deaths attributed to enteric infections (GBD 2021))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_13",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Luby 2018, Bangladesh, 2013-2014 (% under 5 deaths attributed to enteric infection",
    "section": "water_linked_mortality",
    "value": 0.05901184679,
    "kind": "estimate",
@@ -3057,8 +3069,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2014_under_5_deaths_attributed_to_diarrhea_igme",
-   "label": "2013-2014 (% under 5 deaths attributed to diarrhea (IGME))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_14",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Luby 2018, Bangladesh, 2013-2014 (% under 5 deaths attributed to diarrhea (IGME))",
    "section": "water_linked_mortality",
    "value": 0.063945,
    "kind": "estimate",
@@ -3071,24 +3083,24 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2014_overall_best_estimate",
-   "label": "2013-2014 (Overall best estimate)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_11",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Luby 2018, Bangladesh, 2013-2014 (Overall best estimate)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2013_2014_under_5_deaths_attributed_to_enteric_infections_gb * weight_assigned_to_each_source_under_5_deaths_attributed_to, r_2013_2014_under_5_deaths_attributed_to_enteric_infections_gb_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, r_2013_2014_under_5_deaths_attributed_to_diarrhea_igme * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en_12 * weight_assigned_to_each_source_under_5_deaths_attributed_to, calculations_for_adjustment_by_total_deaths_attributed_to_en_13 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, calculations_for_adjustment_by_total_deaths_attributed_to_en_14 * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
    "expected": 0.06026698201,
    "format": "percent"
   },
   {
-   "id": "r_2013_2014_weight_in_meta_analysis",
-   "label": "2013-2014 (Weight in meta-analysis)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_15",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Luby 2018, Bangladesh, 2013-2014 (Weight in meta-analysis)",
    "section": "water_linked_mortality",
    "formula": "safe_storage_vessel_weight_2",
    "expected": 0.2860315298,
    "format": "percent"
   },
   {
-   "id": "r_2014_2016_under_5_deaths_attributed_to_enteric_infections_gb",
-   "label": "2014-2016 (% under 5 deaths attributed to enteric infections (GBD 2019))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_17",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Null 2018, Kenya, 2014-2016 (% under 5 deaths attributed to enteric infections (GB",
    "section": "water_linked_mortality",
    "value": 0.191857031,
    "kind": "estimate",
@@ -3101,8 +3113,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2014_2016_under_5_deaths_attributed_to_enteric_infections_gb_2",
-   "label": "2014-2016 (% under 5 deaths attributed to enteric infections (GBD 2021))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_18",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Null 2018, Kenya, 2014-2016 (% under 5 deaths attributed to enteric infections (GB",
    "section": "water_linked_mortality",
    "value": 0.1633283994,
    "kind": "estimate",
@@ -3115,8 +3127,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2014_2016_under_5_deaths_attributed_to_diarrhea_igme",
-   "label": "2014-2016 (% under 5 deaths attributed to diarrhea (IGME))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_19",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Null 2018, Kenya, 2014-2016 (% under 5 deaths attributed to diarrhea (IGME))",
    "section": "water_linked_mortality",
    "value": 0.08147,
    "kind": "estimate",
@@ -3129,24 +3141,24 @@
    "format": "percent"
   },
   {
-   "id": "r_2014_2016_overall_best_estimate",
-   "label": "2014-2016 (Overall best estimate)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_16",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Null 2018, Kenya, 2014-2016 (Overall best estimate)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2014_2016_under_5_deaths_attributed_to_enteric_infections_gb * weight_assigned_to_each_source_under_5_deaths_attributed_to, r_2014_2016_under_5_deaths_attributed_to_enteric_infections_gb_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, r_2014_2016_under_5_deaths_attributed_to_diarrhea_igme * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en_17 * weight_assigned_to_each_source_under_5_deaths_attributed_to, calculations_for_adjustment_by_total_deaths_attributed_to_en_18 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, calculations_for_adjustment_by_total_deaths_attributed_to_en_19 * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
    "expected": 0.1272490671,
    "format": "percent"
   },
   {
-   "id": "r_2014_2016_weight_in_meta_analysis",
-   "label": "2014-2016 (Weight in meta-analysis)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_20",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Null 2018, Kenya, 2014-2016 (Weight in meta-analysis)",
    "section": "water_linked_mortality",
-   "formula": "no_weight_2",
+   "formula": "we_began_with_all_13_trials_of_water_quality_interventions_r_23",
    "expected": 0.4275814251,
    "format": "percent"
   },
   {
-   "id": "r_2013_2016_under_5_deaths_attributed_to_enteric_infections_gb",
-   "label": "2013-2016 (% under 5 deaths attributed to enteric infections (GBD 2019))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_22",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Humphrey 2019, Zimbabwe, 2013-2016 (% under 5 deaths attributed to enteric infecti",
    "section": "water_linked_mortality",
    "value": 0.057726903,
    "kind": "estimate",
@@ -3159,8 +3171,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2016_under_5_deaths_attributed_to_enteric_infections_gb_2",
-   "label": "2013-2016 (% under 5 deaths attributed to enteric infections (GBD 2021))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_23",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Humphrey 2019, Zimbabwe, 2013-2016 (% under 5 deaths attributed to enteric infecti",
    "section": "water_linked_mortality",
    "value": 0.09577027771,
    "kind": "estimate",
@@ -3173,8 +3185,8 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2016_under_5_deaths_attributed_to_diarrhea_igme",
-   "label": "2013-2016 (% under 5 deaths attributed to diarrhea (IGME))",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_24",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Humphrey 2019, Zimbabwe, 2013-2016 (% under 5 deaths attributed to diarrhea (IGME)",
    "section": "water_linked_mortality",
    "value": 0.08269,
    "kind": "estimate",
@@ -3187,16 +3199,16 @@
    "format": "percent"
   },
   {
-   "id": "r_2013_2016_overall_best_estimate",
-   "label": "2013-2016 (Overall best estimate)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_21",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Humphrey 2019, Zimbabwe, 2013-2016 (Overall best estimate)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2013_2016_under_5_deaths_attributed_to_enteric_infections_gb * weight_assigned_to_each_source_under_5_deaths_attributed_to, r_2013_2016_under_5_deaths_attributed_to_enteric_infections_gb_2 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, r_2013_2016_under_5_deaths_attributed_to_diarrhea_igme * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en_22 * weight_assigned_to_each_source_under_5_deaths_attributed_to, calculations_for_adjustment_by_total_deaths_attributed_to_en_23 * weight_assigned_to_each_source_under_5_deaths_attributed_to_2, calculations_for_adjustment_by_total_deaths_attributed_to_en_24 * weight_assigned_to_each_source_under_5_deaths_attributed_to_3)",
    "expected": 0.08276276516,
    "format": "percent"
   },
   {
-   "id": "r_2013_2016_weight_in_meta_analysis",
-   "label": "2013-2016 (Weight in meta-analysis)",
+   "id": "calculations_for_adjustment_by_total_deaths_attributed_to_en_25",
+   "label": "Calculations for adjustment by total deaths attributed to enteric infections: Humphrey 2019, Zimbabwe, 2013-2016 (Weight in meta-analysis)",
    "section": "water_linked_mortality",
    "formula": "handwashing_infant_play_space_and_education_to_prevent_geoph_11",
    "expected": 0.2529021356,
@@ -3206,7 +3218,7 @@
    "id": "weighted_average_of_all_sources_updated",
    "label": "Weighted average of all sources (updated)",
    "section": "water_linked_mortality",
-   "formula": "sum(r_2001_2002_overall_best_estimate * r_2001_2002_weight_in_meta_analysis, r_2010_2011_overall_best_estimate * r_2010_2011_weight_in_meta_analysis, r_2013_2014_overall_best_estimate * r_2013_2014_weight_in_meta_analysis, r_2014_2016_overall_best_estimate * r_2014_2016_weight_in_meta_analysis, r_2013_2016_overall_best_estimate * r_2013_2016_weight_in_meta_analysis)",
+   "formula": "sum(calculations_for_adjustment_by_total_deaths_attributed_to_en * calculations_for_adjustment_by_total_deaths_attributed_to_en_5, calculations_for_adjustment_by_total_deaths_attributed_to_en_6 * calculations_for_adjustment_by_total_deaths_attributed_to_en_10, calculations_for_adjustment_by_total_deaths_attributed_to_en_11 * calculations_for_adjustment_by_total_deaths_attributed_to_en_15, calculations_for_adjustment_by_total_deaths_attributed_to_en_16 * calculations_for_adjustment_by_total_deaths_attributed_to_en_20, calculations_for_adjustment_by_total_deaths_attributed_to_en_21 * calculations_for_adjustment_by_total_deaths_attributed_to_en_25)",
    "expected": 0.09686722185,
    "format": "percent"
   },
@@ -3228,6 +3240,7 @@
    "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality",
    "label": "Adjustment for proportion of deaths linked to water quality in program vs RCT contexts (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "adjustment_for_proportion_of_deaths_linked_to_water_quality_2 - 1",
    "expected": -0.0155050368,
    "format": "percent"
@@ -3236,6 +3249,7 @@
    "id": "effect_of_chlorination_on_under_five_all_cause_mortality_adj",
    "label": "Effect of chlorination on under-five all-cause mortality, adjusted (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "min(sum(effect_of_chlorination_on_under_five_all_cause_mortality_amo * (1 + internal_validity_adjustment) * (1 + adjustment_for_proportion_of_deaths_linked_to_water_quality)))",
    "expected": 0.1809833908,
    "format": "percent"
@@ -3248,8 +3262,8 @@
    "expected": 560.3774951
   },
   {
-   "id": "moral_weight_early_neonatal",
-   "label": "Moral weight (Early Neonatal)",
+   "id": "low_sdi_countries_moral_weight_early_neonatal",
+   "label": "Low SDI countries: Moral weight (Early Neonatal)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -3261,9 +3275,10 @@
    "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "past_estimate_value_2022",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_0_to_6_days_early_neonatal_value_2022",
+   "label": "0 to 6 days (early neonatal) (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 120.7567673,
    "kind": "estimate",
    "source": {
@@ -3273,9 +3288,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_2",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_7_to_27_days_late_neonatal_value_2022",
+   "label": "7 to 27 days (late neonatal) (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 128.3307278,
    "kind": "estimate",
    "source": {
@@ -3285,9 +3301,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_3",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_28_to_364_days_post_neonatal_value_2022",
+   "label": "28 to 364 days (post neonatal) (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 3058.164769,
    "kind": "estimate",
    "source": {
@@ -3297,9 +3314,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_4",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_1_to_4_value_2022",
+   "label": "1 to 4 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 3399.40406,
    "kind": "estimate",
    "source": {
@@ -3312,13 +3330,13 @@
    "id": "in_each_age_bracket_early_neonatal",
    "label": "% in each age bracket (Early Neonatal)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022 / sum(past_estimate_value_2022, past_estimate_value_2022_2, past_estimate_value_2022_3, past_estimate_value_2022_4)",
+   "formula": "r_0_to_6_days_early_neonatal_value_2022 / sum(r_0_to_6_days_early_neonatal_value_2022, r_7_to_27_days_late_neonatal_value_2022, r_28_to_364_days_post_neonatal_value_2022, r_1_to_4_value_2022)",
    "expected": 0.01800550997,
    "format": "percent"
   },
   {
-   "id": "moral_weight_late_neonatal",
-   "label": "Moral weight (Late Neonatal)",
+   "id": "low_sdi_countries_moral_weight_late_neonatal",
+   "label": "Low SDI countries: Moral weight (Late Neonatal)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -3333,13 +3351,13 @@
    "id": "in_each_age_bracket_late_neonatal",
    "label": "% in each age bracket (Late Neonatal)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_2 / sum(past_estimate_value_2022, past_estimate_value_2022_2, past_estimate_value_2022_3, past_estimate_value_2022_4)",
+   "formula": "r_7_to_27_days_late_neonatal_value_2022 / sum(r_0_to_6_days_early_neonatal_value_2022, r_7_to_27_days_late_neonatal_value_2022, r_28_to_364_days_post_neonatal_value_2022, r_1_to_4_value_2022)",
    "expected": 0.01913482988,
    "format": "percent"
   },
   {
-   "id": "moral_weight_post_neonatal",
-   "label": "Moral weight (Post Neonatal)",
+   "id": "low_sdi_countries_moral_weight_post_neonatal",
+   "label": "Low SDI countries: Moral weight (Post Neonatal)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -3354,13 +3372,13 @@
    "id": "in_each_age_bracket_post_neonatal",
    "label": "% in each age bracket (Post Neonatal)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_3 / sum(past_estimate_value_2022, past_estimate_value_2022_2, past_estimate_value_2022_3, past_estimate_value_2022_4)",
+   "formula": "r_28_to_364_days_post_neonatal_value_2022 / sum(r_0_to_6_days_early_neonatal_value_2022, r_7_to_27_days_late_neonatal_value_2022, r_28_to_364_days_post_neonatal_value_2022, r_1_to_4_value_2022)",
    "expected": 0.4559894859,
    "format": "percent"
   },
   {
-   "id": "moral_weight_1_to_4",
-   "label": "Moral weight (1 to 4)",
+   "id": "low_sdi_countries_moral_weight_1_to_4",
+   "label": "Low SDI countries: Moral weight (1 to 4)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -3375,7 +3393,7 @@
    "id": "in_each_age_bracket_1_to_4",
    "label": "% in each age bracket (1 to 4)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_4 / sum(past_estimate_value_2022, past_estimate_value_2022_2, past_estimate_value_2022_3, past_estimate_value_2022_4)",
+   "formula": "r_1_to_4_value_2022 / sum(r_0_to_6_days_early_neonatal_value_2022, r_7_to_27_days_late_neonatal_value_2022, r_28_to_364_days_post_neonatal_value_2022, r_1_to_4_value_2022)",
    "expected": 0.5068701743,
    "format": "percent"
   },
@@ -3383,7 +3401,7 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
    "label": "Value assigned to averting the death of an individual under 5",
    "section": "moral_weights",
-   "formula": "sum(moral_weight_early_neonatal * in_each_age_bracket_early_neonatal, moral_weight_late_neonatal * in_each_age_bracket_late_neonatal, moral_weight_post_neonatal * in_each_age_bracket_post_neonatal, moral_weight_1_to_4 * in_each_age_bracket_1_to_4)",
+   "formula": "sum(low_sdi_countries_moral_weight_early_neonatal * in_each_age_bracket_early_neonatal, low_sdi_countries_moral_weight_late_neonatal * in_each_age_bracket_late_neonatal, low_sdi_countries_moral_weight_post_neonatal * in_each_age_bracket_post_neonatal, low_sdi_countries_moral_weight_1_to_4 * in_each_age_bracket_1_to_4)",
    "expected": 113.5648682
   },
   {
@@ -3404,6 +3422,7 @@
    "id": "moral_weight_placed_on_averting_the_death_of_a_child_under_a",
    "label": "Moral weight placed on averting the death of a child under age five (adjusted for age profile of population) (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "UoV",
    "formula": "moral_weight_per_under_5_death_averted_mali",
    "expected": 113.5648682
   },
@@ -3431,6 +3450,7 @@
    "id": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire",
    "label": "Initial cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (Mali)",
    "section": "uduma_simple_cea",
+   "unit": "xcash",
    "formula": "sum(number_of_deaths_averted_among_children_under_five_mali * moral_weight_placed_on_averting_the_death_of_a_child_under_a / grant_size_givewell_costs_over_10_years_mali) / units_of_value_per_generated_by_givedirectly_s_program",
    "expected": 8.240637751
   },
@@ -3464,8 +3484,8 @@
    "expected": 1.047973509
   },
   {
-   "id": "adherence_adjustment",
-   "label": "Adherence adjustment",
+   "id": "external_validity_adjustments_adherence_adjustment",
+   "label": "External validity adjustments: Adherence adjustment",
    "section": "external_validity_adjustments",
    "formula": "overall_adherence_adjustment_mali",
    "expected": 1.047973509
@@ -3474,7 +3494,7 @@
    "id": "external_validity_adjustment_mortality",
    "label": "External validity adjustment (mortality)",
    "section": "external_validity_adjustments",
-   "formula": "product(adjustment_for_proportion_of_deaths_linked_to_water_quality_2, adherence_adjustment)",
+   "formula": "product(adjustment_for_proportion_of_deaths_linked_to_water_quality_2, external_validity_adjustments_adherence_adjustment)",
    "expected": 1.031724642
   },
   {
@@ -3523,8 +3543,8 @@
    "format": "percent"
   },
   {
-   "id": "mali_mortality_rate_5_19_2022_gbd",
-   "label": "Mali (Mortality rate, 5-19, 2022 (GBD))",
+   "id": "mortality_rate_national_estimates_mali_mortality_rate_5_19_2",
+   "label": "Mortality rate (national estimates): Mali (Mortality rate, 5-19, 2022 (GBD))",
    "section": "baseline_mortality",
    "value": 123.99505906658,
    "kind": "estimate",
@@ -3535,15 +3555,15 @@
    }
   },
   {
-   "id": "mali_population_aged_5_19_2021_gbd",
-   "label": "Mali (Population aged 5-19, 2021 (GBD))",
+   "id": "over_five_mortality_mali_population_aged_5_19_2021_gbd",
+   "label": "Over five mortality: Mali (Population aged 5-19, 2021 (GBD))",
    "section": "baseline_mortality",
    "formula": "6995406.9 + 2657295.3",
    "expected": 9652702.2
   },
   {
-   "id": "mali_mortality_rate_20_2022_gbd",
-   "label": "Mali (Mortality rate, 20+, 2022 (GBD))",
+   "id": "mortality_rate_national_estimates_mali_mortality_rate_20_202",
+   "label": "Mortality rate (national estimates): Mali (Mortality rate, 20+, 2022 (GBD))",
    "section": "baseline_mortality",
    "value": 810.67750395974,
    "kind": "estimate",
@@ -3554,24 +3574,24 @@
    }
   },
   {
-   "id": "mali_population_aged_20_2021_gbd",
-   "label": "Mali (Population aged 20+, 2021 (GBD))",
+   "id": "over_five_mortality_mali_population_aged_20_2021_gbd",
+   "label": "Over five mortality: Mali (Population aged 20+, 2021 (GBD))",
    "section": "baseline_mortality",
    "formula": "2156158.23 + 7714908.08",
    "expected": 9871066.31
   },
   {
-   "id": "mali_annual_mortality_rate",
-   "label": "Mali (Annual mortality rate)",
+   "id": "mortality_rate_national_estimates_mali_annual_mortality_rate",
+   "label": "Mortality rate (national estimates): Mali (Annual mortality rate)",
    "section": "baseline_mortality",
-   "formula": "sum(mali_mortality_rate_5_19_2022_gbd * mali_population_aged_5_19_2021_gbd, mali_mortality_rate_20_2022_gbd * mali_population_aged_20_2021_gbd) / sum(mali_population_aged_5_19_2021_gbd, mali_population_aged_20_2021_gbd)",
+   "formula": "sum(mortality_rate_national_estimates_mali_mortality_rate_5_19_2 * over_five_mortality_mali_population_aged_5_19_2021_gbd, mortality_rate_national_estimates_mali_mortality_rate_20_202 * over_five_mortality_mali_population_aged_20_2021_gbd) / sum(over_five_mortality_mali_population_aged_5_19_2021_gbd, over_five_mortality_mali_population_aged_20_2021_gbd)",
    "expected": 471.1763906
   },
   {
-   "id": "mali_percentage_2",
-   "label": "Mali (Percentage)",
+   "id": "mortality_rate_national_estimates_mali_percentage",
+   "label": "Mortality rate (national estimates): Mali (Percentage)",
    "section": "baseline_mortality",
-   "formula": "mali_annual_mortality_rate / 100000",
+   "formula": "mortality_rate_national_estimates_mali_annual_mortality_rate / 100000",
    "expected": 0.004711763906,
    "format": "percent"
   },
@@ -3579,7 +3599,7 @@
    "id": "annual_all_cause_mortality_in_over_5s_mali",
    "label": "Annual all-cause mortality in over 5s (Mali)",
    "section": "uduma_cea",
-   "formula": "mali_percentage_2",
+   "formula": "mortality_rate_national_estimates_mali_percentage",
    "expected": 0.004711763906,
    "format": "percent"
   },
@@ -3591,9 +3611,10 @@
    "expected": 0.8847052989
   },
   {
-   "id": "past_estimate_value_3",
-   "label": "Past estimate (Value)",
+   "id": "r_5_to_14_value",
+   "label": "5 to 14 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 1422.3600010528,
    "kind": "estimate",
    "source": {
@@ -3606,13 +3627,14 @@
    "id": "age_5_14_mortality_attributed_to_enteric_infections_in_2022",
    "label": "Age 5-14 mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_3",
+   "formula": "r_5_to_14_value",
    "expected": 1422.360001
   },
   {
-   "id": "past_estimate_value_4",
-   "label": "Past estimate (Value)",
+   "id": "r_15_to_49_value",
+   "label": "15 to 49 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 1720.38409297686,
    "kind": "estimate",
    "source": {
@@ -3625,13 +3647,14 @@
    "id": "age_15_49_mortality_attributed_to_enteric_infections_in_2022",
    "label": "Age 15-49 mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_4",
+   "formula": "r_15_to_49_value",
    "expected": 1720.384093
   },
   {
-   "id": "past_estimate_value_5",
-   "label": "Past estimate (Value)",
+   "id": "r_50_to_69_value",
+   "label": "50 to 69 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 1565.0439108443,
    "kind": "estimate",
    "source": {
@@ -3644,13 +3667,14 @@
    "id": "age_50_69_mortality_attributed_to_enteric_infections_in_2022",
    "label": "Age 50-69 mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_5",
+   "formula": "r_50_to_69_value",
    "expected": 1565.043911
   },
   {
-   "id": "past_estimate_value_6",
-   "label": "Past estimate (Value)",
+   "id": "r_70_and_above_value",
+   "label": "70 and above (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 1727.71663697246,
    "kind": "estimate",
    "source": {
@@ -3663,7 +3687,7 @@
    "id": "age_70_mortality_attributed_to_enteric_infections_in_2022_ma",
    "label": "Age 70+ mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_6",
+   "formula": "r_70_and_above_value",
    "expected": 1727.716637
   },
   {
@@ -3674,9 +3698,10 @@
    "expected": 6435.504642
   },
   {
-   "id": "past_estimate_value_7",
-   "label": "Past estimate (Value)",
+   "id": "r_5_to_14_value_2",
+   "label": "5 to 14 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 8593.24207926531,
    "kind": "estimate",
    "source": {
@@ -3689,13 +3714,14 @@
    "id": "total_mortality_5_14_in_2022_mali",
    "label": "Total mortality 5-14 in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_7",
+   "formula": "r_5_to_14_value_2",
    "expected": 8593.242079
   },
   {
-   "id": "past_estimate_value_8",
-   "label": "Past estimate (Value)",
+   "id": "r_15_to_49_value_2",
+   "label": "15 to 49 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 28678.1414454254,
    "kind": "estimate",
    "source": {
@@ -3708,13 +3734,14 @@
    "id": "total_mortality_15_49_in_2022_mali",
    "label": "Total mortality 15-49 in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_8",
+   "formula": "r_15_to_49_value_2",
    "expected": 28678.14145
   },
   {
-   "id": "past_estimate_value_9",
-   "label": "Past estimate (Value)",
+   "id": "r_50_to_69_value_2",
+   "label": "50 to 69 (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 29893.549101666,
    "kind": "estimate",
    "source": {
@@ -3727,13 +3754,14 @@
    "id": "total_mortality_50_69_in_2022_mali",
    "label": "Total mortality 50-69 in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_9",
+   "formula": "r_50_to_69_value_2",
    "expected": 29893.5491
   },
   {
-   "id": "past_estimate_value_10",
-   "label": "Past estimate (Value)",
+   "id": "r_70_and_above_value_2",
+   "label": "70 and above (Value)",
    "section": "over_5_mortality_scaling",
+   "unit": "Deaths",
    "value": 28457.1262837721,
    "kind": "estimate",
    "source": {
@@ -3746,7 +3774,7 @@
    "id": "total_mortality_70_in_2022_mali",
    "label": "Total mortality 70+ in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "past_estimate_value_10",
+   "formula": "r_70_and_above_value_2",
    "expected": 28457.12628
   },
   {
@@ -3768,7 +3796,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_enteric_inf_3",
    "label": "Percent of total under-5 mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "enteric_infections_val / all_causes_val",
+   "formula": "mali_both_under_5_enteric_infections_2022_overall_best_estim / mali_both_under_5_all_causes_2022_overall_best_estimate",
    "expected": 0.06671600944,
    "format": "percent"
   },
@@ -3871,8 +3899,8 @@
    "expected": 0.9
   },
   {
-   "id": "adherence_adjustment_2",
-   "label": "Adherence adjustment",
+   "id": "external_validity_adjustments_adherence_adjustment_2",
+   "label": "External validity adjustments: Adherence adjustment",
    "section": "external_validity_adjustments",
    "formula": "overall_adherence_adjustment_mali",
    "expected": 1.047973509
@@ -3881,7 +3909,7 @@
    "id": "external_validity_adjustment_morbidity",
    "label": "External validity adjustment (morbidity)",
    "section": "external_validity_adjustments",
-   "formula": "product(adherence_adjustment_2)",
+   "formula": "product(external_validity_adjustments_adherence_adjustment_2)",
    "expected": 1.047973509
   },
   {
@@ -3979,8 +4007,8 @@
    "expected": 27.13718946
   },
   {
-   "id": "moral_weight_5_to_9",
-   "label": "Moral weight (5 to 9)",
+   "id": "low_sdi_countries_moral_weight_5_to_9",
+   "label": "Low SDI countries: Moral weight (5 to 9)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -3992,9 +4020,10 @@
    "explainer": "GiveWell's moral weight, 134.3 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "past_estimate_value_2022_5",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_5_to_9_value_2022",
+   "label": "5 to 9 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 1009.87234,
    "kind": "estimate",
    "source": {
@@ -4004,9 +4033,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_6",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_10_to_14_value_2022",
+   "label": "10 to 14 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 412.4876606,
    "kind": "estimate",
    "source": {
@@ -4016,9 +4046,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_7",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_15_to_19_value_2022",
+   "label": "15 to 19 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 287.2004166,
    "kind": "estimate",
    "source": {
@@ -4028,9 +4059,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_8",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_20_to_24_value_2022",
+   "label": "20 to 24 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 270.995829,
    "kind": "estimate",
    "source": {
@@ -4040,9 +4072,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_9",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_25_to_29_value_2022",
+   "label": "25 to 29 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 255.7841059,
    "kind": "estimate",
    "source": {
@@ -4052,9 +4085,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_10",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_30_to_34_value_2022",
+   "label": "30 to 34 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 218.9355665,
    "kind": "estimate",
    "source": {
@@ -4064,9 +4098,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_11",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_35_to_39_value_2022",
+   "label": "35 to 39 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 217.0586018,
    "kind": "estimate",
    "source": {
@@ -4076,9 +4111,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_12",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_40_to_44_value_2022",
+   "label": "40 to 44 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 220.8619098,
    "kind": "estimate",
    "source": {
@@ -4088,9 +4124,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_13",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_45_to_49_value_2022",
+   "label": "45 to 49 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 249.5476634,
    "kind": "estimate",
    "source": {
@@ -4100,9 +4137,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_14",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_50_to_54_value_2022",
+   "label": "50 to 54 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 292.1925085,
    "kind": "estimate",
    "source": {
@@ -4112,9 +4150,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_15",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_55_to_59_value_2022",
+   "label": "55 to 59 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 375.7470333,
    "kind": "estimate",
    "source": {
@@ -4124,9 +4163,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_16",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_60_to_64_value_2022",
+   "label": "60 to 64 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 445.8496676,
    "kind": "estimate",
    "source": {
@@ -4136,9 +4176,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_17",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_65_to_69_value_2022",
+   "label": "65 to 69 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 451.2547014,
    "kind": "estimate",
    "source": {
@@ -4148,9 +4189,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_18",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_70_to_74_value_2022",
+   "label": "70 to 74 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 515.8862202,
    "kind": "estimate",
    "source": {
@@ -4160,9 +4202,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_19",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_75_to_79_value_2022",
+   "label": "75 to 79 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 485.3704752,
    "kind": "estimate",
    "source": {
@@ -4172,9 +4215,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_20",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_80_to_84_value_2022",
+   "label": "80 to 84 (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 391.8603331,
    "kind": "estimate",
    "source": {
@@ -4184,9 +4228,10 @@
    }
   },
   {
-   "id": "past_estimate_value_2022_21",
-   "label": "Past estimate (Value (2022))",
+   "id": "r_85_plus_past_estimate_value_2022",
+   "label": "85 plus, Past estimate (Value (2022))",
    "section": "moral_weights",
+   "unit": "Deaths",
    "value": 334.5996085,
    "kind": "estimate",
    "source": {
@@ -4199,13 +4244,13 @@
    "id": "in_each_age_bracket_5_to_9",
    "label": "% in each age bracket (5 to 9)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_5 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_5_to_9_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.1569220125,
    "format": "percent"
   },
   {
-   "id": "moral_weight_10_to_14",
-   "label": "Moral weight (10 to 14)",
+   "id": "low_sdi_countries_moral_weight_10_to_14",
+   "label": "Low SDI countries: Moral weight (10 to 14)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4220,13 +4265,13 @@
    "id": "in_each_age_bracket_10_to_14",
    "label": "% in each age bracket (10 to 14)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_6 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_10_to_14_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.06409562009,
    "format": "percent"
   },
   {
-   "id": "moral_weight_15_to_19",
-   "label": "Moral weight (15 to 19)",
+   "id": "low_sdi_countries_moral_weight_15_to_19",
+   "label": "Low SDI countries: Moral weight (15 to 19)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4241,13 +4286,13 @@
    "id": "in_each_age_bracket_15_to_19",
    "label": "% in each age bracket (15 to 19)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_7 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_15_to_19_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.04462748962,
    "format": "percent"
   },
   {
-   "id": "moral_weight_20_to_24",
-   "label": "Moral weight (20 to 24)",
+   "id": "low_sdi_countries_moral_weight_20_to_24",
+   "label": "Low SDI countries: Moral weight (20 to 24)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4262,13 +4307,13 @@
    "id": "in_each_age_bracket_20_to_24",
    "label": "% in each age bracket (20 to 24)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_8 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_20_to_24_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.04210949166,
    "format": "percent"
   },
   {
-   "id": "moral_weight_25_to_29",
-   "label": "Moral weight (25 to 29)",
+   "id": "low_sdi_countries_moral_weight_25_to_29",
+   "label": "Low SDI countries: Moral weight (25 to 29)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4283,13 +4328,13 @@
    "id": "in_each_age_bracket_25_to_29",
    "label": "% in each age bracket (25 to 29)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_9 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_25_to_29_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.03974577289,
    "format": "percent"
   },
   {
-   "id": "moral_weight_30_to_34",
-   "label": "Moral weight (30 to 34)",
+   "id": "low_sdi_countries_moral_weight_30_to_34",
+   "label": "Low SDI countries: Moral weight (30 to 34)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4304,13 +4349,13 @@
    "id": "in_each_age_bracket_30_to_34",
    "label": "% in each age bracket (30 to 34)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_10 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_30_to_34_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.03401995317,
    "format": "percent"
   },
   {
-   "id": "moral_weight_35_to_39",
-   "label": "Moral weight (35 to 39)",
+   "id": "low_sdi_countries_moral_weight_35_to_39",
+   "label": "Low SDI countries: Moral weight (35 to 39)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4325,13 +4370,13 @@
    "id": "in_each_age_bracket_35_to_39",
    "label": "% in each age bracket (35 to 39)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_11 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_35_to_39_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.03372829543,
    "format": "percent"
   },
   {
-   "id": "moral_weight_40_to_44",
-   "label": "Moral weight (40 to 44)",
+   "id": "low_sdi_countries_moral_weight_40_to_44",
+   "label": "Low SDI countries: Moral weight (40 to 44)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4346,13 +4391,13 @@
    "id": "in_each_age_bracket_40_to_44",
    "label": "% in each age bracket (40 to 44)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_12 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_40_to_44_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.03431928374,
    "format": "percent"
   },
   {
-   "id": "moral_weight_45_to_49",
-   "label": "Moral weight (45 to 49)",
+   "id": "low_sdi_countries_moral_weight_45_to_49",
+   "label": "Low SDI countries: Moral weight (45 to 49)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4367,13 +4412,13 @@
    "id": "in_each_age_bracket_45_to_49",
    "label": "% in each age bracket (45 to 49)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_13 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_45_to_49_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.03877670475,
    "format": "percent"
   },
   {
-   "id": "moral_weight_50_to_54",
-   "label": "Moral weight (50 to 54)",
+   "id": "low_sdi_countries_moral_weight_50_to_54",
+   "label": "Low SDI countries: Moral weight (50 to 54)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4388,13 +4433,13 @@
    "id": "in_each_age_bracket_50_to_54",
    "label": "% in each age bracket (50 to 54)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_14 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_50_to_54_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.04540320065,
    "format": "percent"
   },
   {
-   "id": "moral_weight_55_to_59",
-   "label": "Moral weight (55 to 59)",
+   "id": "low_sdi_countries_moral_weight_55_to_59",
+   "label": "Low SDI countries: Moral weight (55 to 59)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4409,13 +4454,13 @@
    "id": "in_each_age_bracket_55_to_59",
    "label": "% in each age bracket (55 to 59)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_15 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_55_to_59_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.05838656861,
    "format": "percent"
   },
   {
-   "id": "moral_weight_60_to_64",
-   "label": "Moral weight (60 to 64)",
+   "id": "low_sdi_countries_moral_weight_60_to_64",
+   "label": "Low SDI countries: Moral weight (60 to 64)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4430,13 +4475,13 @@
    "id": "in_each_age_bracket_60_to_64",
    "label": "% in each age bracket (60 to 64)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_16 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_60_to_64_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.06927967462,
    "format": "percent"
   },
   {
-   "id": "moral_weight_65_to_69",
-   "label": "Moral weight (65 to 69)",
+   "id": "low_sdi_countries_moral_weight_65_to_69",
+   "label": "Low SDI countries: Moral weight (65 to 69)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4451,13 +4496,13 @@
    "id": "in_each_age_bracket_65_to_69",
    "label": "% in each age bracket (65 to 69)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_17 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_65_to_69_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.07011955185,
    "format": "percent"
   },
   {
-   "id": "moral_weight_70_to_74",
-   "label": "Moral weight (70 to 74)",
+   "id": "low_sdi_countries_moral_weight_70_to_74",
+   "label": "Low SDI countries: Moral weight (70 to 74)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4472,13 +4517,13 @@
    "id": "in_each_age_bracket_70_to_74",
    "label": "% in each age bracket (70 to 74)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_18 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_70_to_74_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.08016251234,
    "format": "percent"
   },
   {
-   "id": "moral_weight_75_to_79",
-   "label": "Moral weight (75 to 79)",
+   "id": "low_sdi_countries_moral_weight_75_to_79",
+   "label": "Low SDI countries: Moral weight (75 to 79)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4493,13 +4538,13 @@
    "id": "in_each_age_bracket_75_to_79",
    "label": "% in each age bracket (75 to 79)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_19 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_75_to_79_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.07542073268,
    "format": "percent"
   },
   {
-   "id": "moral_weight_80_to_84",
-   "label": "Moral weight (80 to 84)",
+   "id": "low_sdi_countries_moral_weight_80_to_84",
+   "label": "Low SDI countries: Moral weight (80 to 84)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4514,13 +4559,13 @@
    "id": "in_each_age_bracket_80_to_84",
    "label": "% in each age bracket (80 to 84)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_20 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_80_to_84_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.06089038155,
    "format": "percent"
   },
   {
-   "id": "moral_weight_85_plus",
-   "label": "Moral weight (85 plus)",
+   "id": "low_sdi_countries_moral_weight_85_plus",
+   "label": "Low SDI countries: Moral weight (85 plus)",
    "section": "moral_weights",
    "source": {
     "title": "Source spreadsheet",
@@ -4535,7 +4580,7 @@
    "id": "in_each_age_bracket_85_plus",
    "label": "% in each age bracket (85 plus)",
    "section": "moral_weights",
-   "formula": "past_estimate_value_2022_21 / sum(past_estimate_value_2022_5, past_estimate_value_2022_6, past_estimate_value_2022_7, past_estimate_value_2022_8, past_estimate_value_2022_9, past_estimate_value_2022_10, past_estimate_value_2022_11, past_estimate_value_2022_12, past_estimate_value_2022_13, past_estimate_value_2022_14, past_estimate_value_2022_15, past_estimate_value_2022_16, past_estimate_value_2022_17, past_estimate_value_2022_18, past_estimate_value_2022_19, past_estimate_value_2022_20, past_estimate_value_2022_21)",
+   "formula": "r_85_plus_past_estimate_value_2022 / sum(r_5_to_9_value_2022, r_10_to_14_value_2022, r_15_to_19_value_2022, r_20_to_24_value_2022, r_25_to_29_value_2022, r_30_to_34_value_2022, r_35_to_39_value_2022, r_40_to_44_value_2022, r_45_to_49_value_2022, r_50_to_54_value_2022, r_55_to_59_value_2022, r_60_to_64_value_2022, r_65_to_69_value_2022, r_70_to_74_value_2022, r_75_to_79_value_2022, r_80_to_84_value_2022, r_85_plus_past_estimate_value_2022)",
    "expected": 0.05199275382,
    "format": "percent"
   },
@@ -4543,7 +4588,7 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_over_5",
    "label": "Value assigned to averting the death of an individual over 5",
    "section": "moral_weights",
-   "formula": "sum(moral_weight_5_to_9 * in_each_age_bracket_5_to_9, moral_weight_10_to_14 * in_each_age_bracket_10_to_14, moral_weight_15_to_19 * in_each_age_bracket_15_to_19, moral_weight_20_to_24 * in_each_age_bracket_20_to_24, moral_weight_25_to_29 * in_each_age_bracket_25_to_29, moral_weight_30_to_34 * in_each_age_bracket_30_to_34, moral_weight_35_to_39 * in_each_age_bracket_35_to_39, moral_weight_40_to_44 * in_each_age_bracket_40_to_44, moral_weight_45_to_49 * in_each_age_bracket_45_to_49, moral_weight_50_to_54 * in_each_age_bracket_50_to_54, moral_weight_55_to_59 * in_each_age_bracket_55_to_59, moral_weight_60_to_64 * in_each_age_bracket_60_to_64, moral_weight_65_to_69 * in_each_age_bracket_65_to_69, moral_weight_70_to_74 * in_each_age_bracket_70_to_74, moral_weight_75_to_79 * in_each_age_bracket_75_to_79, moral_weight_80_to_84 * in_each_age_bracket_80_to_84, moral_weight_85_plus * in_each_age_bracket_85_plus)",
+   "formula": "sum(low_sdi_countries_moral_weight_5_to_9 * in_each_age_bracket_5_to_9, low_sdi_countries_moral_weight_10_to_14 * in_each_age_bracket_10_to_14, low_sdi_countries_moral_weight_15_to_19 * in_each_age_bracket_15_to_19, low_sdi_countries_moral_weight_20_to_24 * in_each_age_bracket_20_to_24, low_sdi_countries_moral_weight_25_to_29 * in_each_age_bracket_25_to_29, low_sdi_countries_moral_weight_30_to_34 * in_each_age_bracket_30_to_34, low_sdi_countries_moral_weight_35_to_39 * in_each_age_bracket_35_to_39, low_sdi_countries_moral_weight_40_to_44 * in_each_age_bracket_40_to_44, low_sdi_countries_moral_weight_45_to_49 * in_each_age_bracket_45_to_49, low_sdi_countries_moral_weight_50_to_54 * in_each_age_bracket_50_to_54, low_sdi_countries_moral_weight_55_to_59 * in_each_age_bracket_55_to_59, low_sdi_countries_moral_weight_60_to_64 * in_each_age_bracket_60_to_64, low_sdi_countries_moral_weight_65_to_69 * in_each_age_bracket_65_to_69, low_sdi_countries_moral_weight_70_to_74 * in_each_age_bracket_70_to_74, low_sdi_countries_moral_weight_75_to_79 * in_each_age_bracket_75_to_79, low_sdi_countries_moral_weight_80_to_84 * in_each_age_bracket_80_to_84, low_sdi_countries_moral_weight_85_plus * in_each_age_bracket_85_plus)",
    "expected": 73.01882853
   },
   {
@@ -4681,8 +4726,8 @@
    "expected": 1015.899751
   },
   {
-   "id": "mali_population_aged_5_14_2021_gbd",
-   "label": "Mali (Population aged 5-14, 2021 (GBD))",
+   "id": "r_5_14_year_old_deaths_averted_mali_population_aged_5_14_2021",
+   "label": "5 - 14 year old deaths averted: Mali (Population aged 5-14, 2021 (GBD))",
    "section": "baseline_mortality",
    "value": 6995406.9,
    "kind": "estimate",
@@ -4693,10 +4738,10 @@
    }
   },
   {
-   "id": "mali_implied_share_of_population_aged_5_14_2021_gbd",
-   "label": "Mali (Implied share of population aged 5-14, 2021 (GBD))",
+   "id": "r_5_14_year_old_deaths_averted_mali_implied_share_of_populatio",
+   "label": "5 - 14 year old deaths averted: Mali (Implied share of population aged 5-14, 2021 (GBD))",
    "section": "baseline_mortality",
-   "formula": "mali_population_aged_5_14_2021_gbd / mali_total_population_2021_gbd",
+   "formula": "r_5_14_year_old_deaths_averted_mali_population_aged_5_14_2021 / percent_of_population_that_is_under_5_mali_total_population",
    "expected": 0.2902158864,
    "format": "percent"
   },
@@ -4704,13 +4749,13 @@
    "id": "percent_of_population_that_is_aged_5_14_2021_mali",
    "label": "Percent of population that is aged 5 - 14, 2021 (Mali)",
    "section": "baseline_mortality",
-   "formula": "mali_implied_share_of_population_aged_5_14_2021_gbd",
+   "formula": "r_5_14_year_old_deaths_averted_mali_implied_share_of_populatio",
    "expected": 0.2902158864,
    "format": "percent"
   },
   {
-   "id": "mali_mortality_rate_5_14_2022_gbd",
-   "label": "Mali (Mortality rate, 5-14, 2022 (GBD))",
+   "id": "r_5_14_year_old_deaths_averted_mali_mortality_rate_5_14_2022_g",
+   "label": "5 - 14 year old deaths averted: Mali (Mortality rate, 5-14, 2022 (GBD))",
    "section": "baseline_mortality",
    "formula": "sum(118.55 / 100000)",
    "expected": 0.0011855,
@@ -4720,7 +4765,7 @@
    "id": "annual_all_cause_mortality_in_5_14_year_olds_2022_mali",
    "label": "Annual all-cause mortality in 5 - 14 year olds, 2022 (Mali)",
    "section": "baseline_mortality",
-   "formula": "mali_mortality_rate_5_14_2022_gbd",
+   "formula": "r_5_14_year_old_deaths_averted_mali_mortality_rate_5_14_2022_g",
    "expected": 0.0011855,
    "format": "percent"
   },
@@ -4809,7 +4854,7 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_aged_5",
    "label": "Value assigned to averting the death of an individual aged 5 - 14 (Mali)",
    "section": "moral_weights",
-   "formula": "sum(moral_weight_5_to_9 * in_each_age_bracket_5_14_year_olds_only_5_to_9, moral_weight_10_to_14 * in_each_age_bracket_5_14_year_olds_only_10_to_14)",
+   "formula": "sum(low_sdi_countries_moral_weight_5_to_9 * in_each_age_bracket_5_14_year_olds_only_5_to_9, low_sdi_countries_moral_weight_10_to_14 * in_each_age_bracket_5_14_year_olds_only_10_to_14)",
    "expected": 133.9519972
   },
   {
@@ -4865,13 +4910,14 @@
    "id": "deaths_averted_among_children_under_age_five_ref",
    "label": "Deaths averted among children under age five (#REF!)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "percent_of_cost_effectiveness_coming_from_under_5_mortality",
    "expected": 0.5598812282,
    "format": "percent"
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "uduma_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -4883,8 +4929,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "uduma_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -4912,7 +4958,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "uduma_cea",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -4964,8 +5010,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "uduma_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -4977,8 +5023,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "uduma_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -4993,7 +5039,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "uduma_cea",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -5009,6 +5055,7 @@
    "id": "adjustment_for_grantee_level_factors",
    "label": "Adjustment for grantee-level factors",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "adjustment_for_program_specific_downsides - 1",
    "expected": 0.0,
    "format": "percent"
@@ -5051,6 +5098,7 @@
    "id": "adjustments_for_additional_program_benefits_and_downsides",
    "label": "Adjustments for additional program benefits and downsides",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "total_adjustment_factor_for_other_effects_ref - 1",
    "expected": 0.25,
    "format": "percent"
@@ -5346,6 +5394,7 @@
    "id": "adjustment_for_diverting_other_actors_funding_into_the_progr",
    "label": "Adjustment for diverting other actors' funding into the program (leverage) and out of the program (funging) (#REF!)",
    "section": "uduma_simple_cea",
+   "unit": "%",
    "formula": "overall_adjustment_for_leverage_and_funging",
    "expected": -0.2740562309,
    "format": "percent"
@@ -5354,6 +5403,7 @@
    "id": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
    "label": "Final cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#REF!)",
    "section": "uduma_simple_cea",
+   "unit": "xcash",
    "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire / deaths_averted_among_children_under_age_five_ref * (1 + adjustment_for_grantee_level_factors) * (1 + adjustments_for_additional_program_benefits_and_downsides) * (1 + adjustment_for_diverting_other_actors_funding_into_the_progr)",
    "expected": 13.35604617
   },

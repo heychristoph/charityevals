@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Suvita CEA [March 2023]](/suvita) | GW | April 2023 | 10× GiveDirectly (GW: 26× cash) | 149, 22 kept fixed |
+| [Suvita CEA [March 2023]](/suvita) | GW | April 2023 | 10× GiveDirectly (GW: 26× cash) | 150, 22 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

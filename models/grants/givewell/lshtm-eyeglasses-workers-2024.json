@@ -71,18 +71,18 @@
    "expected": 1.44
   },
   {
-   "id": "discount_rate_workers_in_rural_bangladesh",
-   "label": "Discount rate (Workers in rural Bangladesh)",
+   "id": "income_to_household_consumption_discount_rate_workers_in_rur",
+   "label": "Income to household consumption: Discount rate (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1927D9p4BeTgqVhgdobQ-sLIr7qkKZ6_n6XTQRXLiUR4/edit",
     "cell": "CEA including simple CEA!B34"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nStandard GW input",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
+   "explainer": "Standard GW input",
+   "format": "percent"
   },
   {
    "id": "discount_rate",
@@ -91,7 +91,7 @@
    "formula": "$discount_rate",
    "expected": 0.04,
    "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
   },
   {
    "id": "how_long_glasses_are_used_for_years_workers_in_rural_banglad",
@@ -261,8 +261,8 @@
    "format": "percent"
   },
   {
-   "id": "household_size_workers_in_rural_bangladesh",
-   "label": "Household Size (Workers in rural Bangladesh)",
+   "id": "income_to_household_consumption_household_size_workers_in_ru",
+   "label": "Income to household consumption: Household Size (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
    "value": 4.3,
    "kind": "estimate",
@@ -284,7 +284,7 @@
    "id": "present_value_of_benefit_over_glasses_lifespan_in_ln_income",
    "label": "Present value of benefit over glasses lifespan, in ln(income), recipient only (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
-   "formula": "pv(discount_rate_workers_in_rural_bangladesh, how_long_glasses_are_used_for_years_workers_in_rural_banglad, -increase_in_ln_income_workers_in_rural_bangladesh)",
+   "formula": "pv(income_to_household_consumption_discount_rate_workers_in_rur, how_long_glasses_are_used_for_years_workers_in_rural_banglad, -increase_in_ln_income_workers_in_rural_bangladesh)",
    "expected": 0.08628966904
   },
   {
@@ -304,7 +304,7 @@
    "id": "present_value_of_total_lifetime_benefit_in_ln_income_recipie",
    "label": "Present value of total lifetime benefit in ln(income), recipient household (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
-   "formula": "household_size_workers_in_rural_bangladesh * present_value_of_benefit_over_glasses_lifespan_in_ln_income * proportion_of_household_income_resulting_from_eyeglass_recip",
+   "formula": "income_to_household_consumption_household_size_workers_in_ru * present_value_of_benefit_over_glasses_lifespan_in_ln_income * proportion_of_household_income_resulting_from_eyeglass_recip",
    "expected": 0.2226273461
   },
   {
@@ -376,8 +376,8 @@
    "format": "percent"
   },
   {
-   "id": "hypothetical_donation_workers_in_rural_bangladesh",
-   "label": "Hypothetical donation (Workers in rural Bangladesh)",
+   "id": "eyeglasses_for_workers_hypothetical_donation_workers_in_rura",
+   "label": "Eyeglasses for workers: Hypothetical donation (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
    "value": 100000.0,
    "kind": "estimate",
@@ -393,7 +393,7 @@
    "id": "total_recipients_per_hypothetical_donation_workers_in_rural",
    "label": "Total recipients per hypothetical donation (Workers in rural Bangladesh)",
    "section": "cea_including_simple_cea",
-   "formula": "hypothetical_donation_workers_in_rural_bangladesh / glasses_including_delivery_and_vision_exam_usd_workers_in_ru",
+   "formula": "eyeglasses_for_workers_hypothetical_donation_workers_in_rura / glasses_including_delivery_and_vision_exam_usd_workers_in_ru",
    "expected": 14285.71429
   },
   {
@@ -479,8 +479,8 @@
    "format": "percent"
   },
   {
-   "id": "increased_consumption",
-   "label": "Increased consumption",
+   "id": "benefit_streams_as_of_total_increased_consumption",
+   "label": "Benefit streams (as % of total): Increased consumption",
    "section": "cea_including_simple_cea",
    "formula": "percentage_of_value_from_increasing_ln_consumption_workers_i",
    "expected": 0.8954158194,
@@ -503,7 +503,7 @@
    "id": "final_cost_effectiveness_estimate",
    "label": "Final cost-effectiveness estimate",
    "section": "cea_including_simple_cea",
-   "formula": "initial_cost_effectiveness_estimate / increased_consumption * (100 / 100 + additional_upside_and_downside_adjustments)",
+   "formula": "initial_cost_effectiveness_estimate / benefit_streams_as_of_total_increased_consumption * (100 / 100 + additional_upside_and_downside_adjustments)",
    "expected": 15.26769204
   },
   {

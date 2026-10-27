@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [J-PAL vouchers option value CEA, 2024](/j-pal) | GW | October 2024 | 7.3× GiveDirectly (GW: 19× cash) | 78 |
+| [J-PAL vouchers option value CEA, 2024](/j-pal) | GW | October 2024 | 7.3× GiveDirectly (GW: 19× cash) | 75 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

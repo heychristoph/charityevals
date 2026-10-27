@@ -21,8 +21,7 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "life_value_multiplier": 1,
-   "discount_rate": 0.04
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -62,8 +61,8 @@
  ],
  "rows": [
   {
-   "id": "grant_size",
-   "label": "Grant size",
+   "id": "number_of_people_covered_grant_size",
+   "label": "Number of people covered: Grant size",
    "section": "amf",
    "value": 17554061.0,
    "kind": "estimate",
@@ -78,7 +77,7 @@
    "id": "size_of_grant_to_amf_for_llin_campaigns_in_drc",
    "label": "Size of grant to AMF for LLIN campaigns in DRC",
    "section": "simple_amf_drc_cea",
-   "formula": "grant_size",
+   "formula": "number_of_people_covered_grant_size",
    "expected": 17554061.0,
    "format": "usd"
   },
@@ -556,8 +555,8 @@
    "format": "percent"
   },
   {
-   "id": "temporal_uncertainty_givewell_2020",
-   "label": "Temporal uncertainty (GiveWell 2020)",
+   "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
+   "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
    "value": 0.014,
    "kind": "estimate",
@@ -598,7 +597,7 @@
    "id": "overall_discount_rate_givewell_2020",
    "label": "Overall discount rate (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
+   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, derived_value_assignments_temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
    "expected": 0.04,
    "format": "percent"
   },
@@ -611,13 +610,12 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate",
-   "label": "Discount rate",
+   "id": "present_value_of_transfer_discount_rate",
+   "label": "Present value of transfer: Discount rate",
    "section": "givedirectly",
-   "formula": "$discount_rate",
+   "formula": "overall_discount_rate_active",
    "expected": 0.04,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "format": "percent"
   },
   {
    "id": "duration_of_investment_benefits_in_years",
@@ -635,7 +633,7 @@
    "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
    "label": "Present value of ln(consumption) increase in the last year of expected benefits",
    "section": "givedirectly",
-   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + discount_rate) ^ duration_of_investment_benefits_in_years",
+   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + present_value_of_transfer_discount_rate) ^ duration_of_investment_benefits_in_years",
    "expected": 0.05639659538
   },
   {
@@ -657,7 +655,7 @@
    "id": "present_value_of_future_increases_in_ln_consumption_per_pers",
    "label": "Present value of future increases in ln(consumption) per person (excluding the last year of expected benefits)",
    "section": "givedirectly",
-   "formula": "pv(discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
+   "formula": "pv(present_value_of_transfer_discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
    "expected": 0.2127120349
   },
   {
@@ -779,8 +777,8 @@
    "expected": 343.9842022
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -793,8 +791,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -824,7 +822,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "givedirectly",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.03,
    "format": "percent"
   },
@@ -879,8 +877,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -893,8 +891,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "givedirectly",
    "value": 0.05,
    "kind": "estimate",
@@ -910,7 +908,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "givedirectly",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.05,
    "format": "percent"
   },
@@ -937,8 +935,8 @@
    "format": "percent"
   },
   {
-   "id": "developmental_effects",
-   "label": "Developmental effects",
+   "id": "supplemental_intervention_level_adjustments_developmental_ef",
+   "label": "Supplemental intervention-level adjustments: Developmental effects",
    "section": "givedirectly",
    "value": 0.05,
    "kind": "estimate",
@@ -951,8 +949,8 @@
    "format": "percent"
   },
   {
-   "id": "reduced_morbidity",
-   "label": "Reduced morbidity",
+   "id": "supplemental_intervention_level_adjustments_reduced_morbidit",
+   "label": "Supplemental intervention-level adjustments: Reduced morbidity",
    "section": "givedirectly",
    "value": 0.04,
    "kind": "estimate",
@@ -982,7 +980,7 @@
    "id": "total_adjustment_factor_2",
    "label": "Total adjustment factor",
    "section": "givedirectly",
-   "formula": "1 + sum(changes_in_ppp_and_exchange_rates, developmental_effects, reduced_morbidity, child_mortality_effects)",
+   "formula": "1 + sum(changes_in_ppp_and_exchange_rates, supplemental_intervention_level_adjustments_developmental_ef, supplemental_intervention_level_adjustments_reduced_morbidit, child_mortality_effects)",
    "expected": 1.06,
    "format": "percent"
   },
@@ -1038,7 +1036,7 @@
    "id": "total_spending_by_all_contributors",
    "label": "Total spending by all contributors",
    "section": "amf",
-   "formula": "grant_size / percentage_of_total_costs_covered_by_amf",
+   "formula": "number_of_people_covered_grant_size / percentage_of_total_costs_covered_by_amf",
    "expected": 34835810.47,
    "format": "usd"
   },
@@ -1333,8 +1331,8 @@
    "format": "percent"
   },
   {
-   "id": "malaria_morbidity",
-   "label": "Malaria morbidity",
+   "id": "supplemental_intervention_level_adjustments_malaria_morbidit",
+   "label": "Supplemental intervention-level adjustments: Malaria morbidity",
    "section": "amf",
    "value": 0.09,
    "kind": "estimate",
@@ -1431,8 +1429,8 @@
    "format": "percent"
   },
   {
-   "id": "subnational_adjustments",
-   "label": "Subnational adjustments",
+   "id": "effect_on_fertility_subnational_adjustments",
+   "label": "Effect on fertility: Subnational adjustments",
    "section": "amf",
    "value": 0.024,
    "kind": "estimate",
@@ -1489,7 +1487,7 @@
    "id": "adjustment_for_additional_program_benefits_and_downsides",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "simple_amf_drc_cea",
-   "formula": "sum(malaria_morbidity, short_term_anemia_effects, prevention_of_diseases_other_than_malaria_e_g_dengue_yellow, prevention_of_stillbirths, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, mosquito_insecticide_resistance_in_trials_underlying_our_est, differences_in_mosquito_species)",
+   "formula": "sum(supplemental_intervention_level_adjustments_malaria_morbidit, short_term_anemia_effects, prevention_of_diseases_other_than_malaria_e_g_dengue_yellow, prevention_of_stillbirths, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, effect_on_fertility_subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, mosquito_insecticide_resistance_in_trials_underlying_our_est, differences_in_mosquito_species)",
    "expected": 0.479,
    "format": "percent"
   },
@@ -1541,8 +1539,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks_2",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund_2",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "amf",
    "value": 0.0,
    "kind": "estimate",
@@ -1554,8 +1552,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility_2",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o_2",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "amf",
    "value": 0.0,
    "kind": "estimate",
@@ -1570,7 +1568,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte_2",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "amf",
-   "formula": "sum(change_of_priorities_2, non_funding_bottlenecks_2, within_org_fungibility_2)",
+   "formula": "sum(change_of_priorities_2, confidence_in_funds_being_used_for_intended_purpose_non_fund_2, confidence_in_funds_being_used_for_intended_purpose_within_o_2)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -1654,7 +1652,7 @@
    "id": "total_adjustment_factor_4",
    "label": "Total adjustment factor",
    "section": "amf",
-   "formula": "1 + sum(malaria_morbidity, short_term_anemia_effects, prevention_of_diseases_other_than_malaria_e_g_dengue_yellow, prevention_of_stillbirths, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, mosquito_insecticide_resistance_in_trials_underlying_our_est, differences_in_mosquito_species)",
+   "formula": "1 + sum(supplemental_intervention_level_adjustments_malaria_morbidit, short_term_anemia_effects, prevention_of_diseases_other_than_malaria_e_g_dengue_yellow, prevention_of_stillbirths, investment_of_income_increases, rebound_effects_decreased_immunity_development, treatment_costs_averted_from_prevention, effect_on_fertility_subnational_adjustments, marginal_funding_goes_to_lower_priority_areas, mosquito_insecticide_resistance_in_trials_underlying_our_est, differences_in_mosquito_species)",
    "expected": 1.479,
    "format": "percent"
   },

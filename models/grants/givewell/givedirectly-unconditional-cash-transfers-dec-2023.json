@@ -108,12 +108,13 @@
    "id": "discount_rate_for_future_benefits_2",
    "label": "Discount rate for future benefits",
    "section": "inputs",
+   "unit": "%",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
     "cell": "Inputs!H26"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGW analysis GW's moral weights and discount rate",
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGW analysis GW's moral weights and discount rate",
    "format": "percent",
    "formula": "$discount_rate",
    "expected": 0.04
@@ -122,10 +123,11 @@
    "id": "discount_rate_for_future_benefits",
    "label": "Discount rate for future benefits",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "$discount_rate",
    "expected": 0.04,
    "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
   },
   {
    "id": "years_of_investment_benefits_2",
@@ -148,24 +150,24 @@
    "expected": 10.0
   },
   {
-   "id": "nom_2",
-   "label": "nom. $",
+   "id": "baseline_annual_consumption_per_capita_2",
+   "label": "Baseline annual consumption per capita",
    "section": "inputs",
-   "value": 285.92,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
     "cell": "Inputs!H20"
    },
    "explainer": "GW analysis GW's 2016 cost-effectiveness analysis, sheet \"Parameters\"",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita",
+   "expected": 285.92
   },
   {
-   "id": "nom",
-   "label": "nom. $",
+   "id": "baseline_annual_consumption_per_capita",
+   "label": "Baseline annual consumption per capita",
    "section": "main_calcs",
-   "formula": "nom_2",
+   "formula": "baseline_annual_consumption_per_capita_2",
    "expected": 285.92,
    "format": "usd"
   },
@@ -173,6 +175,7 @@
    "id": "size_of_cash_transfer_per_household_2",
    "label": "Size of cash transfer per household",
    "section": "inputs",
+   "unit": "$",
    "value": 1000.0,
    "kind": "estimate",
    "source": {
@@ -187,6 +190,7 @@
    "id": "size_of_cash_transfer_per_household",
    "label": "Size of cash transfer per household",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "size_of_cash_transfer_per_household_2",
    "expected": 1000.0,
    "format": "usd"
@@ -195,6 +199,7 @@
    "id": "size_of_cash_transfer_per_person",
    "label": "Size of cash transfer per person",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "size_of_cash_transfer_per_household / people_per_household",
    "expected": 212.7659574,
    "format": "usd"
@@ -203,6 +208,7 @@
    "id": "percentage_of_transfers_invested_2",
    "label": "Percentage of transfers invested",
    "section": "inputs",
+   "unit": "%",
    "value": 0.39,
    "kind": "estimate",
    "source": {
@@ -217,6 +223,7 @@
    "id": "percentage_of_transfers_invested",
    "label": "Percentage of transfers invested",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "percentage_of_transfers_invested_2",
    "expected": 0.39,
    "format": "percent"
@@ -225,6 +232,7 @@
    "id": "amount_invested_per_person",
    "label": "Amount invested per person",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "size_of_cash_transfer_per_person * percentage_of_transfers_invested",
    "expected": 82.9787234,
    "format": "usd"
@@ -233,6 +241,7 @@
    "id": "return_on_investment_2",
    "label": "Return on investment",
    "section": "inputs",
+   "unit": "%",
    "value": 0.1,
    "kind": "estimate",
    "source": {
@@ -247,36 +256,38 @@
    "id": "return_on_investment",
    "label": "Return on investment",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "return_on_investment_2",
    "expected": 0.1,
    "format": "percent"
   },
   {
-   "id": "nom_3",
-   "label": "nom. $",
+   "id": "annual_increase_in_consumption_per_person_from_investment_re",
+   "label": "Annual increase in consumption per person from investment returns",
    "section": "main_calcs",
    "formula": "amount_invested_per_person * return_on_investment",
    "expected": 8.29787234,
    "format": "usd"
   },
   {
-   "id": "ln_7",
-   "label": "ln($)",
+   "id": "annual_increase_in_ln_consumption_per_person_from_investment",
+   "label": "Annual increase in ln(consumption) per person from investment returns",
    "section": "main_calcs",
-   "formula": "ln(nom + nom_3) - ln(nom)",
+   "formula": "ln(baseline_annual_consumption_per_capita + annual_increase_in_consumption_per_person_from_investment_re) - ln(baseline_annual_consumption_per_capita)",
    "expected": 0.02860850386
   },
   {
-   "id": "ln_6",
-   "label": "ln($)",
+   "id": "present_value_of_future_increases_in_ln_consumption_per_pers",
+   "label": "Present value of future increases in ln(consumption) per person (excluding the last year of expected benefits)",
    "section": "main_calcs",
-   "formula": "pv(discount_rate_for_future_benefits, years_of_investment_benefits - 1, -ln_7)",
+   "formula": "pv(discount_rate_for_future_benefits, years_of_investment_benefits - 1, -annual_increase_in_ln_consumption_per_person_from_investment)",
    "expected": 0.2127137131
   },
   {
    "id": "percent_of_investment_returned_when_benefits_end_2",
    "label": "Percent of investment returned when benefits end",
    "section": "inputs",
+   "unit": "%",
    "value": 0.2,
    "kind": "estimate",
    "source": {
@@ -291,28 +302,30 @@
    "id": "percent_of_investment_returned_when_benefits_end",
    "label": "Percent of investment returned when benefits end",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "percent_of_investment_returned_when_benefits_end_2",
    "expected": 0.2,
    "format": "percent"
   },
   {
-   "id": "ln_8",
-   "label": "ln($)",
+   "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
+   "label": "Present value of ln(consumption) increase in the last year of expected benefits",
    "section": "main_calcs",
-   "formula": "(ln(nom + amount_invested_per_person * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(nom)) / (1 + discount_rate_for_future_benefits) ^ years_of_investment_benefits",
+   "formula": "(ln(baseline_annual_consumption_per_capita + amount_invested_per_person * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita)) / (1 + discount_rate_for_future_benefits) ^ years_of_investment_benefits",
    "expected": 0.05639702837
   },
   {
-   "id": "ln_5",
-   "label": "ln($)",
+   "id": "present_value_of_all_future_increases_in_ln_consumption_per",
+   "label": "Present value of all future increases in ln(consumption) per person",
    "section": "main_calcs",
-   "formula": "ln_6 + ln_8",
+   "formula": "present_value_of_future_increases_in_ln_consumption_per_pers + present_value_of_ln_consumption_increase_in_the_last_year_of",
    "expected": 0.2691107414
   },
   {
    "id": "percentage_of_transfers_not_invested",
    "label": "Percentage of transfers not invested",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "1 - percentage_of_transfers_invested",
    "expected": 0.61,
    "format": "percent"
@@ -321,28 +334,30 @@
    "id": "increase_in_short_term_consumption_per_person_from_funds_tra",
    "label": "Increase in short-term consumption per person from funds transferred",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "size_of_cash_transfer_per_person * percentage_of_transfers_not_invested",
    "expected": 129.787234,
    "format": "usd"
   },
   {
-   "id": "ln_9",
-   "label": "ln($)",
+   "id": "short_term_increase_in_ln_consumption_per_person_from_funds",
+   "label": "Short-term increase in ln(consumption) per person from funds transferred",
    "section": "main_calcs",
-   "formula": "ln(nom + increase_in_short_term_consumption_per_person_from_funds_tra) - ln(nom)",
+   "formula": "ln(baseline_annual_consumption_per_capita + increase_in_short_term_consumption_per_person_from_funds_tra) - ln(baseline_annual_consumption_per_capita)",
    "expected": 0.3742691968
   },
   {
-   "id": "ln_4",
-   "label": "ln($)",
+   "id": "total_present_value_of_cash_transfer_per_person_in_terms_of",
+   "label": "Total present value of cash transfer per person in terms of increases in ln(consumption)",
    "section": "main_calcs",
-   "formula": "ln_5 + ln_9",
+   "formula": "present_value_of_all_future_increases_in_ln_consumption_per + short_term_increase_in_ln_consumption_per_person_from_funds",
    "expected": 0.6433799382
   },
   {
    "id": "discount_to_the_benefits_of_cash_from_potential_negative_spi_2",
    "label": "Discount to the benefits of cash from potential negative spillover effects on consumption",
    "section": "inputs",
+   "unit": "%",
    "value": -0.05,
    "kind": "estimate",
    "source": {
@@ -357,28 +372,30 @@
    "id": "discount_to_the_benefits_of_cash_from_potential_negative_spi",
    "label": "Discount to the benefits of cash from potential negative spillover effects on consumption",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "discount_to_the_benefits_of_cash_from_potential_negative_spi_2",
    "expected": -0.05,
    "format": "percent"
   },
   {
-   "id": "ln_3",
-   "label": "ln($)",
+   "id": "total_present_value_of_cash_transfer_per_person_accounting_f",
+   "label": "Total present value of cash transfer per person, accounting for spillovers",
    "section": "main_calcs",
-   "formula": "ln_4 * (1 + discount_to_the_benefits_of_cash_from_potential_negative_spi)",
+   "formula": "total_present_value_of_cash_transfer_per_person_in_terms_of * (1 + discount_to_the_benefits_of_cash_from_potential_negative_spi)",
    "expected": 0.6112109413
   },
   {
-   "id": "ln_2",
-   "label": "ln($)",
+   "id": "total_units_of_increase_in_ln_consumption_per_household",
+   "label": "Total units of increase in ln(consumption) per household",
    "section": "main_calcs",
-   "formula": "people_per_household * ln_3",
+   "formula": "people_per_household * total_present_value_of_cash_transfer_per_person_accounting_f",
    "expected": 2.872691424
   },
   {
    "id": "grant_size_2",
    "label": "Grant size",
    "section": "inputs",
+   "unit": "$",
    "value": 1000000.0,
    "kind": "estimate",
    "source": {
@@ -393,6 +410,7 @@
    "id": "grant_size",
    "label": "Grant size",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "grant_size_2",
    "expected": 1000000.0,
    "format": "usd"
@@ -401,6 +419,7 @@
    "id": "proportion_of_total_costs_transferred_to_households_2",
    "label": "Proportion of total costs transferred to households",
    "section": "inputs",
+   "unit": "%",
    "value": 0.83,
    "kind": "estimate",
    "source": {
@@ -415,6 +434,7 @@
    "id": "proportion_of_total_costs_transferred_to_households",
    "label": "Proportion of total costs transferred to households",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "proportion_of_total_costs_transferred_to_households_2",
    "expected": 0.83,
    "format": "percent"
@@ -423,6 +443,7 @@
    "id": "total_funding_transferred_to_households",
    "label": "Total funding transferred to households",
    "section": "main_calcs",
+   "unit": "$",
    "formula": "grant_size * proportion_of_total_costs_transferred_to_households",
    "expected": 830000.0,
    "format": "usd"
@@ -435,16 +456,17 @@
    "expected": 830.0
   },
   {
-   "id": "ln",
-   "label": "ln($)",
+   "id": "total_units_of_increase_in_ln_consumption",
+   "label": "Total units of increase in ln(consumption)",
    "section": "main_calcs",
-   "formula": "ln_2 * number_of_transfers_made",
+   "formula": "total_units_of_increase_in_ln_consumption_per_household * number_of_transfers_made",
    "expected": 2384.333882
   },
   {
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",
    "label": "Value assigned to doubling consumption for one person for one year",
    "section": "inputs",
+   "unit": "UoV",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
@@ -458,6 +480,7 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "inputs",
+   "unit": "UoV",
    "formula": "value_assigned_to_doubling_consumption_for_one_person_for_on / ln(2)",
    "expected": 1.442695041
   },
@@ -472,13 +495,14 @@
    "id": "total_units_of_value_generated",
    "label": "Total units of value generated",
    "section": "main_calcs",
-   "formula": "ln * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "formula": "total_units_of_increase_in_ln_consumption * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 3439.866667
   },
   {
    "id": "double_treatment_2",
    "label": "Double treatment",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -493,6 +517,7 @@
    "id": "double_treatment",
    "label": "Double treatment",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "double_treatment_2",
    "expected": 0.0,
    "format": "percent"
@@ -501,6 +526,7 @@
    "id": "ineffective_goods_2",
    "label": "Ineffective goods",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -515,6 +541,7 @@
    "id": "ineffective_goods",
    "label": "Ineffective goods",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "ineffective_goods_2",
    "expected": 0.0,
    "format": "percent"
@@ -523,6 +550,7 @@
    "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
    "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "inputs",
+   "unit": "%",
    "value": -0.03,
    "kind": "estimate",
    "source": {
@@ -537,6 +565,7 @@
    "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d",
    "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
    "expected": -0.03,
    "format": "percent"
@@ -545,6 +574,7 @@
    "id": "total_adjusment_for_risk_of_wastage",
    "label": "Total adjusment for risk of wastage",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": -0.03,
    "format": "percent"
@@ -553,6 +583,7 @@
    "id": "misappropriation_without_monitoring_results_2",
    "label": "Misappropriation without monitoring results",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -567,6 +598,7 @@
    "id": "misappropriation_without_monitoring_results",
    "label": "Misappropriation without monitoring results",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "misappropriation_without_monitoring_results_2",
    "expected": 0.0,
    "format": "percent"
@@ -575,6 +607,7 @@
    "id": "false_monitoring_results",
    "label": "False monitoring results",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -589,6 +622,7 @@
    "id": "misappropriation_without_monitoring_results_3",
    "label": "Misappropriation without monitoring results",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "false_monitoring_results",
    "expected": 0.0,
    "format": "percent"
@@ -597,6 +631,7 @@
    "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
    "label": "Total adjustment for quality of monitoring and evaluation",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "sum(misappropriation_without_monitoring_results, misappropriation_without_monitoring_results_3)",
    "expected": 0.0,
    "format": "percent"
@@ -605,6 +640,7 @@
    "id": "change_of_priorities_2",
    "label": "Change of priorities",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -619,6 +655,7 @@
    "id": "change_of_priorities",
    "label": "Change of priorities",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "change_of_priorities_2",
    "expected": 0.0,
    "format": "percent"
@@ -627,6 +664,7 @@
    "id": "non_funding_bottlenecks_2",
    "label": "Non-funding bottlenecks",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -641,6 +679,7 @@
    "id": "non_funding_bottlenecks",
    "label": "Non-funding bottlenecks",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "non_funding_bottlenecks_2",
    "expected": 0.0,
    "format": "percent"
@@ -649,6 +688,7 @@
    "id": "within_org_fungibility_2",
    "label": "Within-org fungibility",
    "section": "inputs",
+   "unit": "%",
    "value": -0.05,
    "kind": "estimate",
    "source": {
@@ -663,6 +703,7 @@
    "id": "within_org_fungibility",
    "label": "Within-org fungibility",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "within_org_fungibility_2",
    "expected": -0.05,
    "format": "percent"
@@ -671,6 +712,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
    "expected": -0.05,
    "format": "percent"
@@ -679,6 +721,7 @@
    "id": "total_supplemental_charity_level_adjustment",
    "label": "Total supplemental charity-level adjustment",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "sum(total_adjusment_for_risk_of_wastage, total_adjustment_for_quality_of_monitoring_and_evaluation, total_adjustment_for_confidence_in_funds_being_used_for_inte)",
    "expected": -0.08,
    "format": "percent"
@@ -687,6 +730,7 @@
    "id": "changes_in_purchasing_power_parity_ppp_and_exchange_rates",
    "label": "Changes in purchasing power parity (PPP) and exchange rates",
    "section": "inputs",
+   "unit": "%",
    "value": -0.07,
    "kind": "estimate",
    "source": {
@@ -701,6 +745,7 @@
    "id": "developmental_effects",
    "label": "Developmental effects",
    "section": "inputs",
+   "unit": "%",
    "value": 0.05,
    "kind": "estimate",
    "source": {
@@ -715,6 +760,7 @@
    "id": "reduced_morbidity",
    "label": "Reduced morbidity",
    "section": "inputs",
+   "unit": "%",
    "value": 0.04,
    "kind": "estimate",
    "source": {
@@ -729,6 +775,7 @@
    "id": "child_mortality_effects",
    "label": "Child mortality effects",
    "section": "inputs",
+   "unit": "%",
    "value": 0.04,
    "kind": "estimate",
    "source": {
@@ -743,6 +790,7 @@
    "id": "total_supplemental_intervention_level_adjustment",
    "label": "Total supplemental intervention-level adjustment",
    "section": "main_calcs",
+   "unit": "%",
    "formula": "sum(changes_in_purchasing_power_parity_ppp_and_exchange_rates, developmental_effects, reduced_morbidity, child_mortality_effects)",
    "expected": 0.06,
    "format": "percent"
@@ -751,6 +799,7 @@
    "id": "total_units_of_value_generated_after_accounting_for_all_adju",
    "label": "Total units of value generated, after accounting for all adjustments",
    "section": "main_calcs",
+   "unit": "UoV",
    "formula": "total_units_of_value_generated * (1 + total_supplemental_charity_level_adjustment) * (1 + total_supplemental_intervention_level_adjustment)",
    "expected": 3354.557974
   },
@@ -758,6 +807,7 @@
    "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
    "label": "Units of value generated per philanthropic dollar spent, after accounting for all adjustments",
    "section": "main_calcs",
+   "unit": "UoV / $",
    "formula": "total_units_of_value_generated_after_accounting_for_all_adju / grant_size",
    "expected": 0.003354557974
   }

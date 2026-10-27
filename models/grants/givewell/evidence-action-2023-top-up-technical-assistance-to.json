@@ -657,8 +657,8 @@
    "expected": -1083476.0
   },
   {
-   "id": "new_budget",
-   "label": "New budget",
+   "id": "projected_spend_variance_originally_budgeted_projected_spend",
+   "label": "Projected spend, variance, Originally budgeted, Projected spend, variance, New budget",
    "section": "cost_analysis_march_2024",
    "value": -67065.0,
    "kind": "estimate",
@@ -684,7 +684,7 @@
    "id": "add_overruns_from_y2_y3",
    "label": "Add overruns from Y2-Y3",
    "section": "cost_analysis_march_2024",
-   "formula": "new_budget + global_personnel_and_fringe_variance_between_budgeted_and_sp",
+   "formula": "projected_spend_variance_originally_budgeted_projected_spend + global_personnel_and_fringe_variance_between_budgeted_and_sp",
    "expected": -100931.0
   },
   {
@@ -851,7 +851,7 @@
    "expected": 2046825.0
   },
   {
-   "id": "trend_5",
+   "id": "trend",
    "label": "Trend",
    "section": "benefits",
    "value": 2021.0,
@@ -863,31 +863,31 @@
    }
   },
   {
-   "id": "trend_4",
-   "label": "Trend",
+   "id": "trend_2021",
+   "label": "Trend, 2021",
    "section": "benefits",
-   "formula": "trend_5 + 1",
+   "formula": "trend + 1",
    "expected": 2022.0
   },
   {
-   "id": "trend_3",
-   "label": "Trend",
+   "id": "trend_2021_2022",
+   "label": "Trend, 2021, 2022",
    "section": "benefits",
-   "formula": "trend_4 + 1",
+   "formula": "trend_2021 + 1",
    "expected": 2023.0
   },
   {
-   "id": "trend_2",
-   "label": "Trend",
+   "id": "trend_2021_2022_2023",
+   "label": "Trend, 2021, 2022, 2023",
    "section": "benefits",
-   "formula": "trend_3 + 1",
+   "formula": "trend_2021_2022 + 1",
    "expected": 2024.0
   },
   {
-   "id": "trend",
-   "label": "Trend",
+   "id": "trend_2021_2022_2023_2024",
+   "label": "Trend, 2021, 2022, 2023, 2024",
    "section": "benefits",
-   "formula": "trend_2 + 1",
+   "formula": "trend_2021_2022_2023 + 1",
    "expected": 2025.0
   },
   {
@@ -904,38 +904,38 @@
    "explainer": "Modeling how many years it will take to replace all HIV tests with dual HIV/syphilis tests, including the first year of the program."
   },
   {
-   "id": "trend_6",
-   "label": "Trend",
+   "id": "trend_2021_2022_2023_2024_2025",
+   "label": "Trend, 2021, 2022, 2023, 2024, 2025",
    "section": "benefits",
-   "formula": "trend + 1",
+   "formula": "trend_2021_2022_2023_2024 + 1",
    "expected": 2026.0
   },
   {
-   "id": "trend_7",
-   "label": "Trend",
+   "id": "r_2021_2022_2023_2024_2025_2026",
+   "label": "2021, 2022, 2023, 2024, 2025, 2026",
    "section": "benefits",
-   "formula": "trend_6 + 1",
+   "formula": "trend_2021_2022_2023_2024_2025 + 1",
    "expected": 2027.0
   },
   {
-   "id": "trend_8",
-   "label": "Trend",
+   "id": "r_2022_2023_2024_2025_2026_2027",
+   "label": "2022, 2023, 2024, 2025, 2026, 2027",
    "section": "benefits",
-   "formula": "trend_7 + 1",
+   "formula": "r_2021_2022_2023_2024_2025_2026 + 1",
    "expected": 2028.0
   },
   {
-   "id": "trend_9",
-   "label": "Trend",
+   "id": "r_2023_2024_2025_2026_2027_2028",
+   "label": "2023, 2024, 2025, 2026, 2027, 2028",
    "section": "benefits",
-   "formula": "trend_8 + 1",
+   "formula": "r_2022_2023_2024_2025_2026_2027 + 1",
    "expected": 2029.0
   },
   {
-   "id": "trend_10",
-   "label": "Trend",
+   "id": "r_2024_2025_2026_2027_2028_2029",
+   "label": "2024, 2025, 2026, 2027, 2028, 2029",
    "section": "benefits",
-   "formula": "trend_9 + 1",
+   "formula": "r_2023_2024_2025_2026_2027_2028 + 1",
    "expected": 2030.0
   },
   {
@@ -1022,7 +1022,7 @@
    "id": "number_of_pregnant_women_getting_screened_for_hiv",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_10 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (r_2024_2025_2026_2027_2028_2029 - 2019)",
    "expected": 202416.8158
   },
   {
@@ -1036,14 +1036,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_6",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_10 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, 0 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully)",
+   "formula": "if(r_2024_2025_2026_2027_2028_2029 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, 0 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully)",
    "expected": 192295.975
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_2",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_9 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (r_2023_2024_2025_2026_2027_2028 - 2019)",
    "expected": 198253.4925
   },
   {
@@ -1057,14 +1057,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_5",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_9 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_6 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_2)",
+   "formula": "if(r_2023_2024_2025_2026_2027_2028 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_6 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_2)",
    "expected": 188340.8178
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_3",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_8 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (r_2022_2023_2024_2025_2026_2027 - 2019)",
    "expected": 194175.8007
   },
   {
@@ -1078,14 +1078,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_4",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_8 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_5 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_3)",
+   "formula": "if(r_2022_2023_2024_2025_2026_2027 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_5 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_3)",
    "expected": 184467.0106
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_4",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_7 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (r_2021_2022_2023_2024_2025_2026 - 2019)",
    "expected": 190181.9791
   },
   {
@@ -1099,14 +1099,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_3",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_7 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_4 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_4)",
+   "formula": "if(r_2021_2022_2023_2024_2025_2026 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_4 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_4)",
    "expected": 180672.8801
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_5",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_6 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2021_2022_2023_2024_2025 - 2019)",
    "expected": 186270.3027
   },
   {
@@ -1120,14 +1120,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_2",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_6 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_3 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_5)",
+   "formula": "if(trend_2021_2022_2023_2024_2025 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_3 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_5)",
    "expected": 176956.7876
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_6",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2021_2022_2023_2024 - 2019)",
    "expected": 182439.082
   },
   {
@@ -1141,7 +1141,7 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_2 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_6)",
+   "formula": "if(trend_2021_2022_2023_2024 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_2 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_6)",
    "expected": 173317.1279
   },
   {
@@ -1187,35 +1187,35 @@
    "id": "treatment_rate_among_women_who_test_positive_intervention_5",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_5 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_5 - 2020), 0)",
+   "formula": "if(trend < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend - 2020), 0)",
    "expected": 0.43
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_4",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_4 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_4 - 2020), treatment_rate_among_women_who_test_positive_intervention_5)",
+   "formula": "if(trend_2021 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2021 - 2020), treatment_rate_among_women_who_test_positive_intervention_5)",
    "expected": 0.46
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_3",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_3 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_3 - 2020), treatment_rate_among_women_who_test_positive_intervention_4)",
+   "formula": "if(trend_2021_2022 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2021_2022 - 2020), treatment_rate_among_women_who_test_positive_intervention_4)",
    "expected": 0.49
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_2",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_2 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2 - 2020), treatment_rate_among_women_who_test_positive_intervention_3)",
+   "formula": "if(trend_2021_2022_2023 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2021_2022_2023 - 2020), treatment_rate_among_women_who_test_positive_intervention_3)",
    "expected": 0.52
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend - 2020), treatment_rate_among_women_who_test_positive_intervention_2)",
+   "formula": "if(trend_2021_2022_2023_2024 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2021_2022_2023_2024 - 2020), treatment_rate_among_women_who_test_positive_intervention_2)",
    "expected": 0.55
   },
   {
@@ -1276,7 +1276,7 @@
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2021_2022_2023_2024 - 2019)",
    "expected": 242543.8279
   },
   {
@@ -1323,7 +1323,7 @@
    "id": "percent_of_anc_attendees_who_are_screened_for_syphilis_count",
    "label": "Percent of ANC attendees who are screened for syphilis - counterfactual",
    "section": "benefits",
-   "formula": "baseline_percent_of_antenatal_care_attendees_who_are_screene + counterfactual_percentage_point_increase_in_screening_rate_e * (trend - 2019)",
+   "formula": "baseline_percent_of_antenatal_care_attendees_who_are_screene + counterfactual_percentage_point_increase_in_screening_rate_e * (trend_2021_2022_2023_2024 - 2019)",
    "expected": 0.196
   },
   {
@@ -1350,7 +1350,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_2021_2022_2023_2024 - 2020)",
    "expected": 0.4
   },
   {
@@ -1652,7 +1652,7 @@
     "url": "https://docs.google.com/spreadsheets/d/1CzcdhfViB1dTDraOT5sFBMxWYV3gYbZ0EBH0tw75UyA/edit",
     "cell": "Assumptions!C56"
    },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.\n\nSee here for our reasoning for not discounting the benefits.",
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.\n\nSee here for our reasoning for not discounting the benefits.",
    "formula": "$discount_rate",
    "expected": 0.0
   },
@@ -1662,7 +1662,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_2",
@@ -1672,38 +1672,38 @@
    "expected": 431.0953878
   },
   {
-   "id": "discount_factor",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years) ^ (trend - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years) ^ (trend_2021_2022_2023_2024 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_2 * discount_factor",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_2 * present_value_of_impact_for_first_ten_years_of_benefits_disc",
    "expected": 431.0953878
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_6",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_6 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_6 - 2020), treatment_rate_among_women_who_test_positive_intervention)",
+   "formula": "if(trend_2021_2022_2023_2024_2025 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_2021_2022_2023_2024_2025 - 2020), treatment_rate_among_women_who_test_positive_intervention)",
    "expected": 0.55
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_2",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_6 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2021_2022_2023_2024_2025 - 2019)",
    "expected": 247637.2483
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_7",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2021_2022_2023 - 2019)",
    "expected": 178686.6621
   },
   {
@@ -1717,14 +1717,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_10",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_2 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_7)",
+   "formula": "if(trend_2021_2022_2023 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_7)",
    "expected": 169752.329
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_8",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_3 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2021_2022 - 2019)",
    "expected": 175011.4222
   },
   {
@@ -1738,14 +1738,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_9",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_3 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_10 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_8)",
+   "formula": "if(trend_2021_2022 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_10 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_8)",
    "expected": 166260.8511
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_9",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_4 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_2021 - 2019)",
    "expected": 171411.775
   },
   {
@@ -1759,14 +1759,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_8",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_4 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_9 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_9)",
+   "formula": "if(trend_2021 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_9 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_9)",
    "expected": 93430.53251
   },
   {
    "id": "number_of_pregnant_women_getting_screened_for_hiv_10",
    "label": "Number of pregnant women getting screened for HIV",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend_5 - 2019)",
+   "formula": "number_of_pregnant_women_in_all_anc_clinics_who_get_screened * (1 + percent_change_in_number_of_women_getting_screened_for_hiv_e) ^ (trend - 2019)",
    "expected": 167886.1655
   },
   {
@@ -1780,14 +1780,14 @@
    "id": "number_of_women_getting_screened_for_syphilis_intervention_7",
    "label": "Number of women getting screened for syphilis - intervention",
    "section": "benefits",
-   "formula": "if(trend_5 < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_8 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_10)",
+   "formula": "if(trend < 2020 + year_of_program_in_which_full_scale_up_will_be_achieved_best, number_of_women_getting_screened_for_syphilis_intervention_8 / (1 + percentage_increase_in_number_of_syphilis_screenings_each_ye), expected_number_of_syphilis_screenings_if_program_were_fully_10)",
    "expected": 52503.42667
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_3",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_5 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend - 2019)",
    "expected": 223196.4379
   },
   {
@@ -1815,7 +1815,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual_2",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_6 - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_2021_2022_2023_2024_2025 - 2020)",
    "expected": 0.4
   },
   {
@@ -1866,7 +1866,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_6",
@@ -1876,38 +1876,38 @@
    "expected": 418.1931591
   },
   {
-   "id": "discount_factor_2",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc_2",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_2) ^ (trend_6 - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_2) ^ (trend_2021_2022_2023_2024_2025 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_5",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_6 * discount_factor_2",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_6 * present_value_of_impact_for_first_ten_years_of_benefits_disc_2",
    "expected": 418.1931591
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_7",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_7 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_7 - 2020), treatment_rate_among_women_who_test_positive_intervention_6)",
+   "formula": "if(r_2021_2022_2023_2024_2025_2026 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (r_2021_2022_2023_2024_2025_2026 - 2020), treatment_rate_among_women_who_test_positive_intervention_6)",
    "expected": 0.55
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_4",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_7 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (r_2021_2022_2023_2024_2025_2026 - 2019)",
    "expected": 252837.6306
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_5",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_4 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2021 - 2019)",
    "expected": 227883.5631
   },
   {
@@ -1935,7 +1935,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual_3",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_7 - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (r_2021_2022_2023_2024_2025_2026 - 2020)",
    "expected": 0.4
   },
   {
@@ -1986,7 +1986,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_10",
@@ -1996,38 +1996,38 @@
    "expected": 327.1277358
   },
   {
-   "id": "discount_factor_3",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc_3",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_3) ^ (trend_7 - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_3) ^ (r_2021_2022_2023_2024_2025_2026 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_9",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_10 * discount_factor_3",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_10 * present_value_of_impact_for_first_ten_years_of_benefits_disc_3",
    "expected": 327.1277358
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_8",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_8 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_8 - 2020), treatment_rate_among_women_who_test_positive_intervention_7)",
+   "formula": "if(r_2022_2023_2024_2025_2026_2027 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (r_2022_2023_2024_2025_2026_2027 - 2020), treatment_rate_among_women_who_test_positive_intervention_7)",
    "expected": 0.55
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_6",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_8 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (r_2022_2023_2024_2025_2026_2027 - 2019)",
    "expected": 258147.2208
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_7",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_3 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2021_2022 - 2019)",
    "expected": 232669.1179
   },
   {
@@ -2055,7 +2055,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual_4",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_8 - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (r_2022_2023_2024_2025_2026_2027 - 2020)",
    "expected": 0.4
   },
   {
@@ -2106,7 +2106,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_14",
@@ -2116,38 +2116,38 @@
    "expected": 156.3175259
   },
   {
-   "id": "discount_factor_4",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc_4",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_4) ^ (trend_8 - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_4) ^ (r_2022_2023_2024_2025_2026_2027 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_13",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_14 * discount_factor_4",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_14 * present_value_of_impact_for_first_ten_years_of_benefits_disc_4",
    "expected": 156.3175259
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_9",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_9 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_9 - 2020), treatment_rate_among_women_who_test_positive_intervention_8)",
+   "formula": "if(r_2023_2024_2025_2026_2027_2028 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (r_2023_2024_2025_2026_2027_2028 - 2020), treatment_rate_among_women_who_test_positive_intervention_8)",
    "expected": 0.55
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_8",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_9 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (r_2023_2024_2025_2026_2027_2028 - 2019)",
    "expected": 263568.3124
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_9",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_2021_2022_2023 - 2019)",
    "expected": 237555.1694
   },
   {
@@ -2175,7 +2175,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual_5",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_9 - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (r_2023_2024_2025_2026_2027_2028 - 2020)",
    "expected": 0.4
   },
   {
@@ -2226,7 +2226,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_18",
@@ -2236,31 +2236,31 @@
    "expected": 159.600194
   },
   {
-   "id": "discount_factor_5",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc_5",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_5) ^ (trend_9 - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_5) ^ (r_2023_2024_2025_2026_2027_2028 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_17",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_18 * discount_factor_5",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_18 * present_value_of_impact_for_first_ten_years_of_benefits_disc_5",
    "expected": 159.600194
   },
   {
    "id": "treatment_rate_among_women_who_test_positive_intervention_10",
    "label": "Treatment rate among women who test positive - intervention",
    "section": "benefits",
-   "formula": "if(trend_10 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (trend_10 - 2020), treatment_rate_among_women_who_test_positive_intervention_9)",
+   "formula": "if(r_2024_2025_2026_2027_2028_2029 < 2021 + number_of_years_treatment_rate_will_grow_best_guess, percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_with_evid * (r_2024_2025_2026_2027_2028_2029 - 2020), treatment_rate_among_women_who_test_positive_intervention_9)",
    "expected": 0.55
   },
   {
    "id": "number_of_pregnant_women_attending_at_least_one_anc_visit_10",
    "label": "Number of pregnant women attending at least one ANC visit",
    "section": "benefits",
-   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (trend_10 - 2019)",
+   "formula": "number_of_pregnant_women_attending_at_least_1_anc_visit_in_2 * (1 + percent_change_in_number_of_women_pregnant_year_over_year_be) ^ (r_2024_2025_2026_2027_2028_2029 - 2019)",
    "expected": 269103.247
   },
   {
@@ -2288,7 +2288,7 @@
    "id": "treatment_rate_among_women_who_test_positive_counterfactual_6",
    "label": "Treatment rate among women who test positive - counterfactual",
    "section": "benefits",
-   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (trend_10 - 2020)",
+   "formula": "percentage_of_patients_testing_positive_for_syphilis_who_are + annual_percentage_point_increase_in_treatment_rate_in_counte * (r_2024_2025_2026_2027_2028_2029 - 2020)",
    "expected": 0.4
   },
   {
@@ -2339,7 +2339,7 @@
    "section": "benefits",
    "formula": "$discount_rate",
    "expected": 0.0,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_22",
@@ -2349,17 +2349,17 @@
    "expected": 162.9517981
   },
   {
-   "id": "discount_factor_6",
-   "label": "Discount factor",
+   "id": "present_value_of_impact_for_first_ten_years_of_benefits_disc_6",
+   "label": "Present value of impact for first ten years of benefits: Discount factor",
    "section": "benefits",
-   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_6) ^ (trend_10 - 2020)",
+   "formula": "1 / (1 + discount_rate_for_benefits_in_first_10_years_6) ^ (r_2024_2025_2026_2027_2028_2029 - 2020)",
    "expected": 1.0
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_21",
    "label": "Stillbirths and miscarriages averted due to treatment",
    "section": "benefits",
-   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_22 * discount_factor_6",
+   "formula": "stillbirths_and_miscarriages_averted_due_to_treatment_22 * present_value_of_impact_for_first_ten_years_of_benefits_disc_6",
    "expected": 162.9517981
   },
   {
@@ -2477,7 +2477,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_2 * discount_factor",
+   "formula": "neonatal_deaths_averted_due_to_treatment_2 * present_value_of_impact_for_first_ten_years_of_benefits_disc",
    "expected": 202.075963
   },
   {
@@ -2505,7 +2505,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment_5",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_6 * discount_factor_2",
+   "formula": "neonatal_deaths_averted_due_to_treatment_6 * present_value_of_impact_for_first_ten_years_of_benefits_disc_2",
    "expected": 196.0280433
   },
   {
@@ -2533,7 +2533,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment_9",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_10 * discount_factor_3",
+   "formula": "neonatal_deaths_averted_due_to_treatment_10 * present_value_of_impact_for_first_ten_years_of_benefits_disc_3",
    "expected": 153.3411261
   },
   {
@@ -2561,7 +2561,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment_13",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_14 * discount_factor_4",
+   "formula": "neonatal_deaths_averted_due_to_treatment_14 * present_value_of_impact_for_first_ten_years_of_benefits_disc_4",
    "expected": 73.27384028
   },
   {
@@ -2589,7 +2589,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment_17",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_18 * discount_factor_5",
+   "formula": "neonatal_deaths_averted_due_to_treatment_18 * present_value_of_impact_for_first_ten_years_of_benefits_disc_5",
    "expected": 74.81259093
   },
   {
@@ -2617,7 +2617,7 @@
    "id": "neonatal_deaths_averted_due_to_treatment_21",
    "label": "Neonatal deaths averted due to treatment",
    "section": "benefits",
-   "formula": "neonatal_deaths_averted_due_to_treatment_22 * discount_factor_6",
+   "formula": "neonatal_deaths_averted_due_to_treatment_22 * present_value_of_impact_for_first_ten_years_of_benefits_disc_6",
    "expected": 76.38365534
   },
   {
@@ -2716,7 +2716,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_2 * discount_factor",
+   "formula": "congenital_syphilis_averted_due_to_treatment_2 * present_value_of_impact_for_first_ten_years_of_benefits_disc",
    "expected": 507.5529743
   },
   {
@@ -2744,7 +2744,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment_5",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_6 * discount_factor_2",
+   "formula": "congenital_syphilis_averted_due_to_treatment_6 * present_value_of_impact_for_first_ten_years_of_benefits_disc_2",
    "expected": 492.362451
   },
   {
@@ -2772,7 +2772,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment_9",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_10 * discount_factor_3",
+   "formula": "congenital_syphilis_averted_due_to_treatment_10 * present_value_of_impact_for_first_ten_years_of_benefits_disc_3",
    "expected": 385.1459792
   },
   {
@@ -2800,7 +2800,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment_13",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_14 * discount_factor_4",
+   "formula": "congenital_syphilis_averted_due_to_treatment_14 * present_value_of_impact_for_first_ten_years_of_benefits_disc_4",
    "expected": 184.0414615
   },
   {
@@ -2828,7 +2828,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment_17",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_18 * discount_factor_5",
+   "formula": "congenital_syphilis_averted_due_to_treatment_18 * present_value_of_impact_for_first_ten_years_of_benefits_disc_5",
    "expected": 187.9063322
   },
   {
@@ -2856,7 +2856,7 @@
    "id": "congenital_syphilis_averted_due_to_treatment_21",
    "label": "Congenital syphilis averted due to treatment",
    "section": "benefits",
-   "formula": "congenital_syphilis_averted_due_to_treatment_22 * discount_factor_6",
+   "formula": "congenital_syphilis_averted_due_to_treatment_22 * present_value_of_impact_for_first_ten_years_of_benefits_disc_6",
    "expected": 191.8523652
   },
   {
@@ -2941,7 +2941,7 @@
    "id": "low_birth_weights_averted_due_to_treatment",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_2 * discount_factor",
+   "formula": "low_birth_weights_averted_due_to_treatment_2 * present_value_of_impact_for_first_ten_years_of_benefits_disc",
    "expected": 159.03214
   },
   {
@@ -2969,7 +2969,7 @@
    "id": "low_birth_weights_averted_due_to_treatment_5",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_6 * discount_factor_2",
+   "formula": "low_birth_weights_averted_due_to_treatment_6 * present_value_of_impact_for_first_ten_years_of_benefits_disc_2",
    "expected": 154.2724764
   },
   {
@@ -2997,7 +2997,7 @@
    "id": "low_birth_weights_averted_due_to_treatment_9",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_10 * discount_factor_3",
+   "formula": "low_birth_weights_averted_due_to_treatment_10 * present_value_of_impact_for_first_ten_years_of_benefits_disc_3",
    "expected": 120.6782196
   },
   {
@@ -3025,7 +3025,7 @@
    "id": "low_birth_weights_averted_due_to_treatment_13",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_14 * discount_factor_4",
+   "formula": "low_birth_weights_averted_due_to_treatment_14 * present_value_of_impact_for_first_ten_years_of_benefits_disc_4",
    "expected": 57.66591658
   },
   {
@@ -3053,7 +3053,7 @@
    "id": "low_birth_weights_averted_due_to_treatment_17",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_18 * discount_factor_5",
+   "formula": "low_birth_weights_averted_due_to_treatment_18 * present_value_of_impact_for_first_ten_years_of_benefits_disc_5",
    "expected": 58.87690083
   },
   {
@@ -3081,7 +3081,7 @@
    "id": "low_birth_weights_averted_due_to_treatment_21",
    "label": "Low birth weights averted due to treatment",
    "section": "benefits",
-   "formula": "low_birth_weights_averted_due_to_treatment_22 * discount_factor_6",
+   "formula": "low_birth_weights_averted_due_to_treatment_22 * present_value_of_impact_for_first_ten_years_of_benefits_disc_6",
    "expected": 60.11331574
   },
   {

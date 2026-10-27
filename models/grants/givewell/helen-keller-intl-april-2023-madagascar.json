@@ -21,8 +21,7 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "life_value_multiplier": 1,
-   "discount_rate": 0.04
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -286,8 +285,8 @@
    "format": "percent"
   },
   {
-   "id": "double_treatment",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
    "section": "helen_keller_international",
    "value": 0.44,
    "kind": "estimate",
@@ -300,8 +299,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -329,7 +328,7 @@
    "id": "total_adjustment_for_risk_of_wastage",
    "label": "Total adjustment for risk of wastage",
    "section": "helen_keller_international",
-   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
    "expected": 0.44,
    "format": "percent"
   },
@@ -381,8 +380,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -394,8 +393,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "helen_keller_international",
    "value": 0.05,
    "kind": "estimate",
@@ -410,7 +409,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "helen_keller_international",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.05,
    "format": "percent"
   },
@@ -562,8 +561,8 @@
    "format": "percent"
   },
   {
-   "id": "vision_benefits",
-   "label": "Vision benefits",
+   "id": "supplemental_intervention_level_adjustments_vision_benefits",
+   "label": "Supplemental intervention-level adjustments: Vision benefits",
    "section": "helen_keller_international",
    "value": 0.09,
    "kind": "estimate",
@@ -593,7 +592,7 @@
    "id": "adjustment_for_averting_non_fatal_illness",
    "label": "Adjustment for averting non-fatal illness",
    "section": "simple_hki_madagascar_cea_for",
-   "formula": "sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, vision_benefits, treatment_costs_averted_from_prevention_not_specified)",
+   "formula": "sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, supplemental_intervention_level_adjustments_vision_benefits, treatment_costs_averted_from_prevention_not_specified)",
    "expected": 0.44,
    "format": "percent"
   },
@@ -715,7 +714,7 @@
    "id": "total_adjustment_factor_not_specified",
    "label": "Total adjustment factor (Not specified)",
    "section": "helen_keller_international",
-   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, investment_of_income_increases, vision_benefits, benefits_from_other_programs_supported_by_our_funding_e_g_de, interaction_between_vas_and_vaccines, treatment_costs_averted_from_prevention_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified)",
+   "formula": "1 + sum(short_term_consequences_of_reduced_infectious_disease_morbid, short_term_anemia_effects, investment_of_income_increases, supplemental_intervention_level_adjustments_vision_benefits, benefits_from_other_programs_supported_by_our_funding_e_g_de, interaction_between_vas_and_vaccines, treatment_costs_averted_from_prevention_not_specified, marginal_funding_goes_to_lower_priority_areas_not_specified)",
    "expected": 1.835,
    "format": "percent"
   },
@@ -782,23 +781,23 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_not_specified",
-   "label": "Government financial (Not specified)",
+   "id": "scenario_1_government_costs_would_replace_hki_s_costs_govern",
+   "label": "Scenario 1: Government costs would replace HKI's costs: Government financial (Not specified)",
    "section": "helen_keller_international",
    "formula": "helen_keller_international_not_specified",
    "expected": 100000.0,
    "format": "usd"
   },
   {
-   "id": "government_financial",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "helen_keller_international",
-   "formula": "government_financial_not_specified * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_1_government_costs_would_replace_hki_s_costs_govern * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 3479.738118
   },
   {
-   "id": "government_in_kind_not_specified",
-   "label": "Government in-kind (Not specified)",
+   "id": "scenario_1_government_costs_would_replace_hki_s_costs_govern_2",
+   "label": "Scenario 1: Government costs would replace HKI's costs: Government in-kind (Not specified)",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -810,10 +809,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "government_in_kind_not_specified * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_1_government_costs_would_replace_hki_s_costs_govern_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1199,8 +1198,8 @@
    "format": "percent"
   },
   {
-   "id": "temporal_uncertainty_givewell_2020",
-   "label": "Temporal uncertainty (GiveWell 2020)",
+   "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
+   "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
    "value": 0.014,
    "kind": "estimate",
@@ -1241,7 +1240,7 @@
    "id": "overall_discount_rate_givewell_2020",
    "label": "Overall discount rate (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
+   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, derived_value_assignments_temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
    "expected": 0.04,
    "format": "percent"
   },
@@ -1254,13 +1253,12 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate",
-   "label": "Discount rate",
+   "id": "present_value_of_transfer_discount_rate",
+   "label": "Present value of transfer: Discount rate",
    "section": "givedirectly",
-   "formula": "$discount_rate",
+   "formula": "overall_discount_rate_active",
    "expected": 0.04,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "format": "percent"
   },
   {
    "id": "duration_of_investment_benefits_in_years",
@@ -1278,7 +1276,7 @@
    "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
    "label": "Present value of ln(consumption) increase in the last year of expected benefits",
    "section": "givedirectly",
-   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + discount_rate) ^ duration_of_investment_benefits_in_years",
+   "formula": "(ln(baseline_annual_consumption_per_capita_in_nominal_usd + amount_invested_nominal_usd * (return_on_investment + percent_of_investment_returned_when_benefits_end)) - ln(baseline_annual_consumption_per_capita_in_nominal_usd)) / (1 + present_value_of_transfer_discount_rate) ^ duration_of_investment_benefits_in_years",
    "expected": 0.05639659538
   },
   {
@@ -1300,7 +1298,7 @@
    "id": "present_value_of_future_increases_in_ln_consumption_per_pers",
    "label": "Present value of future increases in ln(consumption) per person (excluding the last year of expected benefits)",
    "section": "givedirectly",
-   "formula": "pv(discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
+   "formula": "pv(present_value_of_transfer_discount_rate, duration_of_investment_benefits_in_years - 1, -future_annual_increase_in_ln_consumption_per_person_from_ret)",
    "expected": 0.2127120349
   },
   {
@@ -1576,38 +1574,38 @@
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_not_specified_2",
-   "label": "Government financial (Not specified)",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Government financial (Not specified)",
    "section": "helen_keller_international",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_financial_2",
-   "label": "Government financial",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_3",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government financial",
    "section": "helen_keller_international",
-   "formula": "-government_financial_not_specified * government_financial_not_specified_2",
+   "formula": "-scenario_1_government_costs_would_replace_hki_s_costs_govern * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": -507.1038557
   },
   {
-   "id": "in_kind_government_not_specified",
-   "label": "In-kind government (Not specified)",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): In-kind government (Not specified)",
    "section": "helen_keller_international",
    "formula": "counterfactual_value_of_government_costs_spent_on_malaria_va",
    "expected": 0.005071038557
   },
   {
-   "id": "government_in_kind_2",
-   "label": "Government in-kind",
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "label": "Scenario 1: Government costs would replace philanthropic costs: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-government_in_kind_not_specified * in_kind_government_not_specified",
+   "formula": "-scenario_1_government_costs_would_replace_hki_s_costs_govern_2 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0
   },
   {
    "id": "scenario_1_government_costs_would_replace_hki_s_costs_2",
    "label": "Scenario 1: Government costs would replace HKI's costs",
    "section": "helen_keller_international",
-   "formula": "sum(donated_vitamin_a_capsules, other_philanthropic_actors, government_financial, government_in_kind, donated_vitamin_a_capsules_2, other_philanthropic_actors_2, government_financial_2, government_in_kind_2)",
+   "formula": "sum(donated_vitamin_a_capsules, other_philanthropic_actors, scenario_1_government_costs_would_replace_philanthropic_cost, scenario_1_government_costs_would_replace_philanthropic_cost_2, donated_vitamin_a_capsules_2, other_philanthropic_actors_2, scenario_1_government_costs_would_replace_philanthropic_cost_3, scenario_1_government_costs_would_replace_philanthropic_cost_4)",
    "expected": 2972.634262
   },
   {
@@ -1667,8 +1665,8 @@
    "expected": 3479.738118
   },
   {
-   "id": "government_financial_4",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_4",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government financial",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -1680,15 +1678,15 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_3",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_3",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government financial",
    "section": "helen_keller_international",
-   "formula": "government_financial_4 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_4 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_4",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_6",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government in-kind",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -1700,10 +1698,10 @@
    "format": "usd"
   },
   {
-   "id": "government_in_kind_3",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_5",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "government_in_kind_4 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_6 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1721,24 +1719,24 @@
    "expected": -563.9073842
   },
   {
-   "id": "government_financial_5",
-   "label": "Government financial",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_7",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government financial",
    "section": "helen_keller_international",
-   "formula": "-government_financial_4 * government_financial_not_specified_2",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_hki_s_co_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_5",
-   "label": "Government in-kind",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_8",
+   "label": "Scenario 2: Other philanthropic actors would replace HKI's costs: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-government_in_kind_4 * in_kind_government_not_specified",
+   "formula": "-scenario_2_other_philanthropic_actors_would_replace_hki_s_co_6 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 0.0
   },
   {
    "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_2",
    "label": "Scenario 2: Other philanthropic actors would replace HKI's costs",
    "section": "helen_keller_international",
-   "formula": "sum(donated_vitamin_a_capsules_3, other_philanthropic_actors_3, government_financial_3, government_in_kind_3, donated_vitamin_a_capsules_5, other_philanthropic_actors_5, government_financial_5, government_in_kind_5)",
+   "formula": "sum(donated_vitamin_a_capsules_3, other_philanthropic_actors_3, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_3, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_5, donated_vitamin_a_capsules_5, other_philanthropic_actors_5, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_7, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_8)",
    "expected": 2915.830734
   },
   {
@@ -1749,7 +1747,7 @@
    "expected": 563.9073842
   },
   {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_3",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_hki_s_co_9",
    "label": "Scenario 2: Other philanthropic actors would replace HKI's costs (Not specified)",
    "section": "helen_keller_international",
    "value": 0.2,
@@ -1819,8 +1817,8 @@
    "format": "percent"
   },
   {
-   "id": "government_financial_not_specified_3",
-   "label": "Government financial (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_governmen",
+   "label": "Total expenditure attributable to different actors:: Government financial (Not specified)",
    "section": "helen_keller_international",
    "formula": "government_financial_costs_as_a_percentage_of_total_costs_ma * total_amount_spent_on_hypothetical_program_by_all_contributo",
    "expected": 5345.440548,
@@ -1830,7 +1828,7 @@
    "id": "expenditure_causally_upstream_of_our_donation_not_specified",
    "label": "Expenditure causally upstream of our donation (Not specified)",
    "section": "helen_keller_international",
-   "formula": "sum(helen_keller_international_not_specified, other_philanthropic_actors_not_specified_2, government_financial_not_specified_3)",
+   "formula": "sum(helen_keller_international_not_specified, other_philanthropic_actors_not_specified_2, total_expenditure_attributable_to_different_actors_governmen)",
    "expected": 105345.4405,
    "format": "usd"
   },
@@ -1838,7 +1836,7 @@
    "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Not specified)",
    "section": "helen_keller_international",
-   "formula": "sum(other_philanthropic_actors_not_specified_2, government_financial_not_specified_3) / expenditure_causally_upstream_of_our_donation_not_specified",
+   "formula": "sum(other_philanthropic_actors_not_specified_2, total_expenditure_attributable_to_different_actors_governmen) / expenditure_causally_upstream_of_our_donation_not_specified",
    "expected": 0.05074202092,
    "format": "percent"
   },
@@ -1878,8 +1876,8 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_7",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "helen_keller_international",
    "value": 0.0,
    "kind": "estimate",
@@ -1891,10 +1889,10 @@
    "format": "usd"
   },
   {
-   "id": "government_financial_6",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "helen_keller_international",
-   "formula": "government_financial_7 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": 0.0
   },
   {
@@ -1911,26 +1909,26 @@
    "format": "percent"
   },
   {
-   "id": "in_kind_government_not_specified_2",
-   "label": "In-kind government (Not specified)",
+   "id": "total_expenditure_attributable_to_different_actors_in_kind_g",
+   "label": "Total expenditure attributable to different actors:: In-kind government (Not specified)",
    "section": "helen_keller_international",
    "formula": "in_kind_government_costs_as_a_percentage_of_total_costs_mada * total_amount_spent_on_hypothetical_program_by_all_contributo",
    "expected": 50141.23951,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_7",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-in_kind_government_not_specified_2 * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3)",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g * (1 - scenario_3_other_actors_upstream_costs_would_stay_the_same_d_3)",
    "expected": -47596.97169,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_6",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "government_in_kind_7 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": -1656.249967
   },
   {
@@ -1948,24 +1946,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_8",
-   "label": "Government financial",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government financial",
    "section": "helen_keller_international",
-   "formula": "-government_financial_7 * government_financial_not_specified_2",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_5 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
-   "id": "government_in_kind_8",
-   "label": "Government in-kind",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrin: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-government_in_kind_7 * in_kind_government_not_specified",
+   "formula": "-scenario_3_other_actors_upstream_costs_would_stay_the_same_d_7 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 241.3660786
   },
   {
    "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_2",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "helen_keller_international",
-   "formula": "sum(donated_vitamin_a_capsules_6, other_philanthropic_actors_6, government_financial_6, government_in_kind_6, donated_vitamin_a_capsules_8, other_philanthropic_actors_8, government_financial_8, government_in_kind_8)",
+   "formula": "sum(donated_vitamin_a_capsules_6, other_philanthropic_actors_6, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_6, donated_vitamin_a_capsules_8, other_philanthropic_actors_8, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_8, scenario_3_other_actors_upstream_costs_would_stay_the_same_d_9)",
    "expected": -1737.363122
   },
   {
@@ -1976,10 +1974,10 @@
    "expected": 5217.10124
   },
   {
-   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10",
    "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Not specified)",
    "section": "helen_keller_international",
-   "formula": "1 - sum(scenario_1_government_costs_would_replace_hki_s_costs_not_sp, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_3)",
+   "formula": "1 - sum(scenario_1_government_costs_would_replace_hki_s_costs_not_sp, scenario_2_other_philanthropic_actors_would_replace_hki_s_co_9)",
    "expected": 0.75,
    "format": "percent"
   },
@@ -2014,33 +2012,33 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_10",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_2",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "helen_keller_international",
-   "formula": "-government_financial_not_specified_3",
+   "formula": "-total_expenditure_attributable_to_different_actors_governmen",
    "expected": -5345.440548,
    "format": "usd"
   },
   {
-   "id": "government_financial_9",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "helen_keller_international",
-   "formula": "government_financial_10 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_financ_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": -186.0073323
   },
   {
-   "id": "government_in_kind_10",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_2",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-in_kind_government_not_specified_2",
+   "formula": "-total_expenditure_attributable_to_different_actors_in_kind_g",
    "expected": -50141.23951,
    "format": "usd"
   },
   {
-   "id": "government_in_kind_9",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "government_in_kind_10 * units_of_value_generated_per_dollar_spent_after_supplemental",
+   "formula": "scenario_4_distributions_would_go_unfunded_government_in_kin_2 * units_of_value_generated_per_dollar_spent_after_supplemental",
    "expected": -1744.783824
   },
   {
@@ -2058,24 +2056,24 @@
    "expected": 0.0
   },
   {
-   "id": "government_financial_11",
-   "label": "Government financial",
+   "id": "scenario_4_distributions_would_go_unfunded_government_financ_3",
+   "label": "Scenario 4: Distributions would go unfunded: Government financial",
    "section": "helen_keller_international",
-   "formula": "-government_financial_10 * government_financial_not_specified_2",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_financ_2 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 27.10693512
   },
   {
-   "id": "government_in_kind_11",
-   "label": "Government in-kind",
+   "id": "scenario_4_distributions_would_go_unfunded_government_in_kin_3",
+   "label": "Scenario 4: Distributions would go unfunded: Government in-kind",
    "section": "helen_keller_international",
-   "formula": "-government_in_kind_10 * in_kind_government_not_specified",
+   "formula": "-scenario_4_distributions_would_go_unfunded_government_in_kin_2 * counterfactual_value_of_spending_from_non_philanthropic_acto_2",
    "expected": 254.2681589
   },
   {
    "id": "scenario_4_distributions_would_go_unfunded_2",
    "label": "Scenario 4: Distributions would go unfunded",
    "section": "helen_keller_international",
-   "formula": "sum(donated_vitamin_a_capsules_9, other_philanthropic_actors_9, government_financial_9, government_in_kind_9, donated_vitamin_a_capsules_11, other_philanthropic_actors_11, government_financial_11, government_in_kind_11)",
+   "formula": "sum(donated_vitamin_a_capsules_9, other_philanthropic_actors_9, scenario_4_distributions_would_go_unfunded_government_financ, scenario_4_distributions_would_go_unfunded_government_in_kin, donated_vitamin_a_capsules_11, other_philanthropic_actors_11, scenario_4_distributions_would_go_unfunded_government_financ_3, scenario_4_distributions_would_go_unfunded_government_in_kin_3)",
    "expected": -1989.133232
   },
   {
@@ -2099,17 +2097,17 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_hki_s_spending_overall",
+   "label": "Net units of value created by HKI's spending: Overall",
    "section": "helen_keller_international",
-   "formula": "sum(scenario_1_government_costs_would_replace_hki_s_costs * scenario_1_government_costs_would_replace_hki_s_costs_not_sp, scenario_2_other_philanthropic_actors_would_replace_hki_s_co * scenario_2_other_philanthropic_actors_would_replace_hki_s_co_3, scenario_3_other_actors_upstream_costs_would_stay_the_same_d * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_4, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_not_specified)",
+   "formula": "sum(scenario_1_government_costs_would_replace_hki_s_costs * scenario_1_government_costs_would_replace_hki_s_costs_not_sp, scenario_2_other_philanthropic_actors_would_replace_hki_s_co * scenario_2_other_philanthropic_actors_would_replace_hki_s_co_9, scenario_3_other_actors_upstream_costs_would_stay_the_same_d * scenario_3_other_actors_upstream_costs_would_stay_the_same_d_10, scenario_4_distributions_would_go_unfunded * scenario_4_distributions_would_go_unfunded_not_specified)",
    "expected": 4050.9626
   },
   {
    "id": "total_units_of_value_generated_after_accounting_for_leverage",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "helen_keller_international",
-   "formula": "overall",
+   "formula": "net_units_of_value_created_by_hki_s_spending_overall",
    "expected": 4050.9626
   },
   {
@@ -2120,8 +2118,8 @@
    "expected": 0.040509626
   },
   {
-   "id": "double_treatment_2",
-   "label": "Double treatment",
+   "id": "risk_of_wastage_double_treatment_2",
+   "label": "Risk of wastage: Double treatment",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -2134,8 +2132,8 @@
    "format": "percent"
   },
   {
-   "id": "ineffective_goods_2",
-   "label": "Ineffective goods",
+   "id": "risk_of_wastage_ineffective_goods_2",
+   "label": "Risk of wastage: Ineffective goods",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -2165,7 +2163,7 @@
    "id": "total_adjustment_for_risk_of_wastage_2",
    "label": "Total adjustment for risk of wastage",
    "section": "givedirectly",
-   "formula": "sum(double_treatment_2, ineffective_goods_2, goods_purchased_and_left_in_storage_until_they_expire_cash_d_2)",
+   "formula": "sum(risk_of_wastage_double_treatment_2, risk_of_wastage_ineffective_goods_2, goods_purchased_and_left_in_storage_until_they_expire_cash_d_2)",
    "expected": 0.03,
    "format": "percent"
   },
@@ -2220,8 +2218,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks_2",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund_2",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "givedirectly",
    "value": 0.0,
    "kind": "estimate",
@@ -2234,8 +2232,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility_2",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o_2",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "givedirectly",
    "value": 0.05,
    "kind": "estimate",
@@ -2251,7 +2249,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte_2",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "givedirectly",
-   "formula": "sum(change_of_priorities_2, non_funding_bottlenecks_2, within_org_fungibility_2)",
+   "formula": "sum(change_of_priorities_2, confidence_in_funds_being_used_for_intended_purpose_non_fund_2, confidence_in_funds_being_used_for_intended_purpose_within_o_2)",
    "expected": 0.05,
    "format": "percent"
   },
@@ -2278,8 +2276,8 @@
    "format": "percent"
   },
   {
-   "id": "developmental_effects",
-   "label": "Developmental effects",
+   "id": "supplemental_intervention_level_adjustments_developmental_ef",
+   "label": "Supplemental intervention-level adjustments: Developmental effects",
    "section": "givedirectly",
    "value": 0.05,
    "kind": "estimate",
@@ -2292,8 +2290,8 @@
    "format": "percent"
   },
   {
-   "id": "reduced_morbidity",
-   "label": "Reduced morbidity",
+   "id": "supplemental_intervention_level_adjustments_reduced_morbidit",
+   "label": "Supplemental intervention-level adjustments: Reduced morbidity",
    "section": "givedirectly",
    "value": 0.04,
    "kind": "estimate",
@@ -2323,7 +2321,7 @@
    "id": "total_adjustment_factor_3",
    "label": "Total adjustment factor",
    "section": "givedirectly",
-   "formula": "1 + sum(changes_in_ppp_and_exchange_rates, developmental_effects, reduced_morbidity, child_mortality_effects)",
+   "formula": "1 + sum(changes_in_ppp_and_exchange_rates, supplemental_intervention_level_adjustments_developmental_ef, supplemental_intervention_level_adjustments_reduced_morbidit, child_mortality_effects)",
    "expected": 1.06,
    "format": "percent"
   },

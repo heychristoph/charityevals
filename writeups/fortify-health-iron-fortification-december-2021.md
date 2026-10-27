@@ -11,13 +11,13 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Fortify Health iron fortification CEA [December 2021]](/fortify-health) | GW | December 2021 | 1.8× GiveDirectly (GW: 4.6× cash) | 113 |
+| [Fortify Health iron fortification CEA [December 2021]](/fortify-health) | GW | December 2021 | 1.8× GiveDirectly (GW: 4.6× cash) | 111 |
 | [Fortify Health Value of Information BOTEC [December 2021]](/fortify-health/fortify-health-value-information-december-2021) | GW | December 2021 | 4.9× GiveDirectly (GW: 13× cash) | 1, 1 kept fixed |
 | [Iron Fortification CEA [moral weights updated Feb 2021]](/fortify-health/fortify-health-iron-fortification-moral-weights) | GW | July 2021 | 4.3× GiveDirectly | 24 |
 | [Iron fortification impact on perinatal maternal mortality BOTEC](/fortify-health/fortify-health-iron-fortification-impact-on-perinatal) | GW | August 2019 | 0.15× GiveDirectly (GW: 0.39× cash) | 6 |
-| [Steady-state Fortify Health iron fortification CEA [June 2019]](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | 4.8× GiveDirectly | 183, 3 kept fixed |
-| [Fortify Health Value of Incubation Grants [June 2019]](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | 5.0× GiveDirectly (GW: 13× cash) | 229, 6 kept fixed |
-| [Iron CEA Fortify Health consolidation_Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | 5.6× GiveDirectly (GW: 15× cash) | 112, 7 kept fixed |
+| [Steady-state Fortify Health iron fortification CEA [June 2019]](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | 4.8× GiveDirectly | 182, 3 kept fixed |
+| [Fortify Health Value of Incubation Grants [June 2019]](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | 5.0× GiveDirectly (GW: 13× cash) | 228, 6 kept fixed |
+| [Iron CEA Fortify Health consolidation_Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | 5.6× GiveDirectly (GW: 15× cash) | 111, 7 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 

@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CEA of Nutrition International's rice fortification program, 2024](/nutrition-international) | GW | September 2024 | 4.2× GiveDirectly (GW: 11× cash) | 230, 17 kept fixed |
+| [CEA of Nutrition International's rice fortification program, 2024](/nutrition-international) | GW | September 2024 | 4.2× GiveDirectly (GW: 11× cash) | 243, 17 kept fixed |
 | [[Copy for 2024 Chad renewal grant] GiveWell, CEA of vitamin A supplementation, 2024 v1](/nutrition-international/nutrition-international-2024-chad-renewal-vitamin-a) | GW | September 2024 | 2.3× GiveDirectly (GW: 5.9× cash) | 9 |
 | [Nutrition International cost-effectiveness analysis — Chad [May 2023]](/nutrition-international/nutrition-international-chad-may-2023) | GW | May 2023 | 7.9× GiveDirectly (GW: 21× cash) | 272, 22 kept fixed |
 

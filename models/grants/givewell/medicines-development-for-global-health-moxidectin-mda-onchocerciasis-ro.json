@@ -21,7 +21,6 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "discount_rate": 0.04,
    "uov_per_daly": 2.3
   }
  },
@@ -65,8 +64,8 @@
    "expected": 243.0
   },
   {
-   "id": "daly_trends_b7_dalys_due_to_onchocerciasis_with_mda_modeled",
-   "label": "DALY trends!B7 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
+   "id": "r_2030_dalys_due_to_onchocerciasis_with_mda_modeled_in_thousan",
+   "label": "2030 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
    "section": "daly_trends",
    "value": 750.0,
    "kind": "estimate",
@@ -77,8 +76,8 @@
    }
   },
   {
-   "id": "daly_trends_b4_dalys_due_to_onchocerciasis_with_mda_modeled",
-   "label": "DALY trends!B4 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
+   "id": "r_2015_dalys_due_to_onchocerciasis_with_mda_modeled_in_thousan",
+   "label": "2015 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
    "section": "daly_trends",
    "value": 1800.0,
    "kind": "estimate",
@@ -89,8 +88,8 @@
    }
   },
   {
-   "id": "daly_trends_a7",
-   "label": "DALY trends!A7",
+   "id": "cell_a7_on_daly_trends",
+   "label": "Cell A7 on DALY trends",
    "section": "daly_trends",
    "value": 2030.0,
    "kind": "estimate",
@@ -101,8 +100,8 @@
    }
   },
   {
-   "id": "daly_trends_a4",
-   "label": "DALY trends!A4",
+   "id": "cell_a4_on_daly_trends",
+   "label": "Cell A4 on DALY trends",
    "section": "daly_trends",
    "value": 2015.0,
    "kind": "estimate",
@@ -116,7 +115,7 @@
    "id": "compound_annual_growth_rate_2015_2030_dalys_due_to_onchocerc",
    "label": "Compound annual growth rate, 2015-2030 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
    "section": "daly_trends",
-   "formula": "(daly_trends_b7_dalys_due_to_onchocerciasis_with_mda_modeled / daly_trends_b4_dalys_due_to_onchocerciasis_with_mda_modeled) ^ (1 / (daly_trends_a7 - daly_trends_a4)) - 1",
+   "formula": "(r_2030_dalys_due_to_onchocerciasis_with_mda_modeled_in_thousan / r_2015_dalys_due_to_onchocerciasis_with_mda_modeled_in_thousan) ^ (1 / (cell_a7_on_daly_trends - cell_a4_on_daly_trends)) - 1",
    "expected": -0.0566940281,
    "format": "percent"
   },
@@ -173,22 +172,21 @@
    "expected": 3.65576433
   },
   {
-   "id": "discount_rate",
-   "label": "Discount rate",
+   "id": "r_2_year_speed_up_discount_rate",
+   "label": "2 year speed up: Discount rate",
    "section": "year_on_year_differences_in_dal",
+   "value": 0.04,
+   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
     "cell": "Year on year differences in DAL!B18"
    },
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04,
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04."
+   "format": "percent"
   },
   {
-   "id": "year_on_year_differences_in_dal_b1",
-   "label": "Year on year differences in DAL!B1",
+   "id": "cell_b1_on_year_on_year_differences_in_dal",
+   "label": "Cell B1 on Year on year differences in DAL",
    "section": "year_on_year_differences_in_dal",
    "value": 2031.0,
    "kind": "estimate",
@@ -202,7 +200,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_2",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea / (1 + discount_rate) ^ (year_on_year_differences_in_dal_b1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea / (1 + r_2_year_speed_up_discount_rate) ^ (cell_b1_on_year_on_year_differences_in_dal - 2024)",
    "expected": 2.778080435
   },
   {
@@ -227,8 +225,8 @@
    "expected": 3.393505917
   },
   {
-   "id": "year_on_year_differences_in_dal_c1",
-   "label": "Year on year differences in DAL!C1",
+   "id": "r_2031",
+   "label": "2031",
    "section": "year_on_year_differences_in_dal",
    "value": 2032.0,
    "kind": "estimate",
@@ -242,7 +240,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_3",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_2 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_c1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_2 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031 - 2024)",
    "expected": 2.479601534
   },
   {
@@ -267,8 +265,8 @@
    "expected": 3.150061484
   },
   {
-   "id": "year_on_year_differences_in_dal_d1",
-   "label": "Year on year differences in DAL!D1",
+   "id": "r_2031_2032",
+   "label": "2031, 2032",
    "section": "year_on_year_differences_in_dal",
    "value": 2033.0,
    "kind": "estimate",
@@ -283,7 +281,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_4",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_3 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_d1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_3 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031_2032 - 2024)",
    "expected": 2.213191415
   },
   {
@@ -308,8 +306,8 @@
    "expected": 2.924081348
   },
   {
-   "id": "year_on_year_differences_in_dal_e1",
-   "label": "Year on year differences in DAL!E1",
+   "id": "r_2031_2032_2033",
+   "label": "2031, 2032, 2033",
    "section": "year_on_year_differences_in_dal",
    "value": 2034.0,
    "kind": "estimate",
@@ -324,7 +322,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_5",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_4 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_e1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_4 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031_2032_2033 - 2024)",
    "expected": 1.975404585
   },
   {
@@ -349,8 +347,8 @@
    "expected": 2.714312647
   },
   {
-   "id": "year_on_year_differences_in_dal_f1",
-   "label": "Year on year differences in DAL!F1",
+   "id": "r_2031_2032_2033_2034",
+   "label": "2031, 2032, 2033, 2034",
    "section": "year_on_year_differences_in_dal",
    "value": 2035.0,
    "kind": "estimate",
@@ -365,7 +363,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_6",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_5 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_f1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_5 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031_2032_2033_2034 - 2024)",
    "expected": 1.763165738
   },
   {
@@ -390,8 +388,8 @@
    "expected": 2.519592402
   },
   {
-   "id": "year_on_year_differences_in_dal_g1",
-   "label": "Year on year differences in DAL!G1",
+   "id": "r_2031_2032_2033_2034_2035",
+   "label": "2031, 2032, 2033, 2034, 2035",
    "section": "year_on_year_differences_in_dal",
    "value": 2036.0,
    "kind": "estimate",
@@ -406,7 +404,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_7",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_6 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_g1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_6 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031_2032_2033_2034_2035 - 2024)",
    "expected": 1.573729981
   },
   {
@@ -431,8 +429,8 @@
    "expected": 2.338841062
   },
   {
-   "id": "year_on_year_differences_in_dal_h1",
-   "label": "Year on year differences in DAL!H1",
+   "id": "r_2031_2032_2033_2034_2035_2036",
+   "label": "2031, 2032, 2033, 2034, 2035, 2036",
    "section": "year_on_year_differences_in_dal",
    "value": 2037.0,
    "kind": "estimate",
@@ -447,7 +445,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_8",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_7 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_h1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_7 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2031_2032_2033_2034_2035_2036 - 2024)",
    "expected": 1.404647333
   },
   {
@@ -472,8 +470,8 @@
    "expected": 2.17105652
   },
   {
-   "id": "year_on_year_differences_in_dal_i1",
-   "label": "Year on year differences in DAL!I1",
+   "id": "r_2032_2033_2034_2035_2036_2037",
+   "label": "2032, 2033, 2034, 2035, 2036, 2037",
    "section": "year_on_year_differences_in_dal",
    "value": 2038.0,
    "kind": "estimate",
@@ -488,7 +486,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_9",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_8 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_i1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_8 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2032_2033_2034_2035_2036_2037 - 2024)",
    "expected": 1.253731044
   },
   {
@@ -513,8 +511,8 @@
    "expected": 2.01530856
   },
   {
-   "id": "year_on_year_differences_in_dal_j1",
-   "label": "Year on year differences in DAL!J1",
+   "id": "r_2033_2034_2035_2036_2037_2038",
+   "label": "2033, 2034, 2035, 2036, 2037, 2038",
    "section": "year_on_year_differences_in_dal",
    "value": 2039.0,
    "kind": "estimate",
@@ -529,7 +527,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_10",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_9 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_j1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_9 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2033_2034_2035_2036_2037_2038 - 2024)",
    "expected": 1.119029305
   },
   {
@@ -554,8 +552,8 @@
    "expected": 1.870733698
   },
   {
-   "id": "year_on_year_differences_in_dal_k1",
-   "label": "Year on year differences in DAL!K1",
+   "id": "r_2034_2035_2036_2037_2038_2039",
+   "label": "2034, 2035, 2036, 2037, 2038, 2039",
    "section": "year_on_year_differences_in_dal",
    "value": 2040.0,
    "kind": "estimate",
@@ -570,7 +568,7 @@
    "id": "present_value_of_difference_in_dalys_when_beginning_moxidect_11",
    "label": "Present value of difference in DALYs when beginning moxidectin in 2031 instead of 2032, thousands",
    "section": "year_on_year_differences_in_dal",
-   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_10 / (1 + discount_rate) ^ (year_on_year_differences_in_dal_k1 - 2024)",
+   "formula": "difference_in_dalys_when_beginning_moxidectin_in_2031_instea_10 / (1 + r_2_year_speed_up_discount_rate) ^ (r_2034_2035_2036_2037_2038_2039 - 2024)",
    "expected": 0.9988000159
   },
   {

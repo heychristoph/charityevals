@@ -191,8 +191,8 @@
    "expected": 0.4253335959
   },
   {
-   "id": "sp_dyn_cbrt_in",
-   "label": "SP.DYN.CBRT.IN",
+   "id": "birth_rate_crude_per_1_000_people",
+   "label": "Birth rate, crude (per 1,000 people)",
    "section": "source_world_bank_birth_rates",
    "value": 41.161,
    "kind": "estimate",
@@ -206,7 +206,7 @@
    "id": "birth_rates_per_1000_people_chad",
    "label": "Birth.rates.per.1000.people (Chad)",
    "section": "transposed_inputs_by_country",
-   "formula": "sp_dyn_cbrt_in",
+   "formula": "birth_rate_crude_per_1_000_people",
    "expected": 41.161
   },
   {
@@ -278,8 +278,8 @@
    "expected": 4112.995003
   },
   {
-   "id": "sh_sta_mmrt",
-   "label": "SH.STA.MMRT",
+   "id": "maternal_mortality_ratio_modeled_estimate_per_100_000_live_b",
+   "label": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
    "section": "source_world_bank_maternal_mort",
    "value": 1140.0,
    "kind": "estimate",
@@ -293,7 +293,7 @@
    "id": "maternal_mortality_deaths_per_live_birth_chad",
    "label": "Maternal.mortality.deaths.per.live.birth (Chad)",
    "section": "transposed_inputs_by_country",
-   "formula": "sh_sta_mmrt / 100000",
+   "formula": "maternal_mortality_ratio_modeled_estimate_per_100_000_live_b / 100000",
    "expected": 0.0114
   },
   {
@@ -572,8 +572,8 @@
    "format": "percent"
   },
   {
-   "id": "non_funding_bottlenecks",
-   "label": "Non-funding bottlenecks",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
    "section": "cea_summary",
    "value": 0.0,
    "kind": "estimate",
@@ -585,8 +585,8 @@
    "format": "percent"
   },
   {
-   "id": "within_org_fungibility",
-   "label": "Within-org fungibility",
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
    "section": "cea_summary",
    "value": 0.05,
    "kind": "estimate",
@@ -601,7 +601,7 @@
    "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
    "label": "Total adjustment for confidence in funds being used for intended purpose",
    "section": "cea_summary",
-   "formula": "sum(change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
    "expected": 0.07,
    "format": "percent"
   },
@@ -729,8 +729,8 @@
    "format": "usd"
   },
   {
-   "id": "ngo_implementer",
-   "label": "NGO Implementer",
+   "id": "cost_per_treatment_breakdown_ngo_implementer",
+   "label": "Cost per treatment breakdown:: NGO Implementer",
    "section": "cea_summary",
    "formula": "inflation_adjusted_costs_per_person_ngo_implementer_chad",
    "expected": 1.955823249,
@@ -899,26 +899,26 @@
    "format": "usd"
   },
   {
-   "id": "domestic_government",
-   "label": "Domestic government",
+   "id": "cost_per_treatment_breakdown_domestic_government",
+   "label": "Cost per treatment breakdown:: Domestic government",
    "section": "cea_summary",
    "formula": "cost_per_person_chad",
    "expected": 0.5695547224,
    "format": "usd"
   },
   {
-   "id": "total_costs",
-   "label": "Total costs",
+   "id": "cost_per_treatment_breakdown_total_costs",
+   "label": "Cost per treatment breakdown:: Total costs",
    "section": "cea_summary",
-   "formula": "sum(ngo_implementer, other_philanthropic_actors, domestic_government)",
+   "formula": "sum(cost_per_treatment_breakdown_ngo_implementer, other_philanthropic_actors, cost_per_treatment_breakdown_domestic_government)",
    "expected": 2.525377971,
    "format": "usd"
   },
   {
-   "id": "ngo_implementer_2",
-   "label": "NGO Implementer",
+   "id": "total_expenditure_attributable_to_different_actors_ngo_imple",
+   "label": "Total expenditure attributable to different actors:: NGO Implementer",
    "section": "cea_summary",
-   "formula": "ngo_implementer * intervention_area_population_chad",
+   "formula": "cost_per_treatment_breakdown_ngo_implementer * intervention_area_population_chad",
    "expected": 195582.3249,
    "format": "usd"
   },
@@ -926,7 +926,7 @@
    "id": "other_philanthropic_actors_2",
    "label": "Other philanthropic actors",
    "section": "cea_summary",
-   "formula": "other_philanthropic_actors / ngo_implementer * ngo_implementer_2",
+   "formula": "other_philanthropic_actors / cost_per_treatment_breakdown_ngo_implementer * total_expenditure_attributable_to_different_actors_ngo_imple",
    "expected": 0.0,
    "format": "usd"
   },
@@ -934,7 +934,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
    "label": "Scenario 1: Government costs would replace philanthropic costs",
    "section": "cea_summary",
-   "formula": "sum(ngo_implementer_2, other_philanthropic_actors_2)",
+   "formula": "sum(total_expenditure_attributable_to_different_actors_ngo_imple, other_philanthropic_actors_2)",
    "expected": 195582.3249,
    "format": "usd"
   },
@@ -955,8 +955,8 @@
    "format": "usd"
   },
   {
-   "id": "total_costs_chad",
-   "label": "Total costs (Chad)",
+   "id": "treatment_effects_of_pla_total_costs_chad",
+   "label": "Treatment effects of PLA: Total costs (Chad)",
    "section": "cea_summary",
    "formula": "annual_cost_per_person_in_intervention_area_chad * intervention_area_population_chad",
    "expected": 252537.7971,
@@ -966,7 +966,7 @@
    "id": "units_of_value_generated_per_dollar_spent_before_accounting",
    "label": "Units of value generated per dollar spent, before accounting for leverage/funging",
    "section": "cea_summary",
-   "formula": "total_units_of_value_generated_before_accounting_for_leverag / total_costs_chad",
+   "formula": "total_units_of_value_generated_before_accounting_for_leverag / treatment_effects_of_pla_total_costs_chad",
    "expected": 0.03264416595
   },
   {
@@ -977,8 +977,8 @@
    "expected": 6384.621871
   },
   {
-   "id": "domestic_government_2",
-   "label": "Domestic government",
+   "id": "counterfactual_value_of_spending_from_non_philanthropic_acto",
+   "label": "Counterfactual value of spending from non-philanthropic actors (units of value per dollar): Domestic government",
    "section": "cea_summary",
    "value": 0.00507,
    "kind": "estimate",
@@ -992,7 +992,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost_5",
    "label": "Scenario 1: Government costs would replace philanthropic costs",
    "section": "cea_summary",
-   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * domestic_government_2",
+   "formula": "-scenario_1_government_costs_would_replace_philanthropic_cost_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": -991.6023872
   },
   {
@@ -1006,7 +1006,7 @@
    "id": "scenario_1_government_costs_would_replace_philanthropic_cost",
    "label": "Scenario 1: Government costs would replace philanthropic costs",
    "section": "cea_summary",
-   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (ngo_implementer / total_costs) - scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (cost_per_treatment_breakdown_ngo_implementer / cost_per_treatment_breakdown_total_costs) - scenario_1_government_costs_would_replace_philanthropic_cost_2",
    "expected": 991.6023872
   },
   {
@@ -1046,7 +1046,7 @@
    "id": "scenario_2_government_financial_costs_would_stay_the_same_5",
    "label": "Scenario 2: Government financial costs would stay the same",
    "section": "cea_summary",
-   "formula": "-scenario_2_government_financial_costs_would_stay_the_same_4 * domestic_government_2",
+   "formula": "-scenario_2_government_financial_costs_would_stay_the_same_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 0.0
   },
   {
@@ -1060,7 +1060,7 @@
    "id": "scenario_2_government_financial_costs_would_stay_the_same",
    "label": "Scenario 2: Government financial costs would stay the same",
    "section": "cea_summary",
-   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (ngo_implementer / total_costs) - scenario_2_government_financial_costs_would_stay_the_same_2",
+   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (cost_per_treatment_breakdown_ngo_implementer / cost_per_treatment_breakdown_total_costs) - scenario_2_government_financial_costs_would_stay_the_same_2",
    "expected": 6384.621871
   },
   {
@@ -1077,10 +1077,10 @@
    "format": "percent"
   },
   {
-   "id": "domestic_government_3",
-   "label": "Domestic government",
+   "id": "total_expenditure_attributable_to_different_actors_domestic",
+   "label": "Total expenditure attributable to different actors:: Domestic government",
    "section": "cea_summary",
-   "formula": "domestic_government / ngo_implementer * ngo_implementer_2",
+   "formula": "cost_per_treatment_breakdown_domestic_government / cost_per_treatment_breakdown_ngo_implementer * total_expenditure_attributable_to_different_actors_ngo_imple",
    "expected": 56955.47224,
    "format": "usd"
   },
@@ -1088,7 +1088,7 @@
    "id": "scenario_3_distributions_would_go_unfunded_4",
    "label": "Scenario 3: Distributions would go unfunded",
    "section": "cea_summary",
-   "formula": "-domestic_government_3",
+   "formula": "-total_expenditure_attributable_to_different_actors_domestic",
    "expected": -56955.47224,
    "format": "usd"
   },
@@ -1103,7 +1103,7 @@
    "id": "scenario_3_distributions_would_go_unfunded_5",
    "label": "Scenario 3: Distributions would go unfunded",
    "section": "cea_summary",
-   "formula": "-scenario_3_distributions_would_go_unfunded_4 * domestic_government_2",
+   "formula": "-scenario_3_distributions_would_go_unfunded_4 * counterfactual_value_of_spending_from_non_philanthropic_acto",
    "expected": 288.7642443
   },
   {
@@ -1117,7 +1117,7 @@
    "id": "scenario_3_distributions_would_go_unfunded",
    "label": "Scenario 3: Distributions would go unfunded",
    "section": "cea_summary",
-   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (ngo_implementer / total_costs) - scenario_3_distributions_would_go_unfunded_2",
+   "formula": "total_units_of_value_generated_before_accounting_for_leverag * (cost_per_treatment_breakdown_ngo_implementer / cost_per_treatment_breakdown_total_costs) - scenario_3_distributions_would_go_unfunded_2",
    "expected": 7955.121514
   },
   {
@@ -1129,8 +1129,8 @@
    "format": "percent"
   },
   {
-   "id": "overall",
-   "label": "Overall",
+   "id": "net_units_of_value_created_by_philanthropic_spending_overall",
+   "label": "Net units of value created by philanthropic spending: Overall",
    "section": "cea_summary",
    "formula": "sum(scenario_1_government_costs_would_replace_philanthropic_cost * scenario_1_government_costs_would_replace_philanthropic_cost_6, scenario_2_government_financial_costs_would_stay_the_same * scenario_2_government_financial_costs_would_stay_the_same_6, scenario_3_distributions_would_go_unfunded * scenario_3_distributions_would_go_unfunded_6)",
    "expected": 7955.121514
@@ -1139,14 +1139,14 @@
    "id": "total_units_of_value_generated_after_accounting_for_leverage",
    "label": "Total units of value generated, after accounting for leverage/funging",
    "section": "cea_summary",
-   "formula": "overall",
+   "formula": "net_units_of_value_created_by_philanthropic_spending_overall",
    "expected": 7955.121514
   },
   {
    "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
    "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
    "section": "cea_summary",
-   "formula": "total_units_of_value_generated_after_accounting_for_leverage / sum(ngo_implementer_2, other_philanthropic_actors_2)",
+   "formula": "total_units_of_value_generated_after_accounting_for_leverage / sum(total_expenditure_attributable_to_different_actors_ngo_imple, other_philanthropic_actors_2)",
    "expected": 0.04067403084
   },
   {

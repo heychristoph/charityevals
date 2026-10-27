@@ -82,8 +82,8 @@
  ],
  "rows": [
   {
-   "id": "xbenchmark_chad_2",
-   "label": "xbenchmark (Chad)",
+   "id": "initial_cost_effectiveness_in_terms_of_multiples_of_our_benc",
+   "label": "Initial cost-effectiveness in terms of multiples of our benchmark (Chad)",
    "section": "simple_cea",
    "value": 5.916590746,
    "kind": "estimate",
@@ -98,6 +98,7 @@
    "id": "percentage_of_total_costs_covered_by_the_grantee_chad_2",
    "label": "Percentage of total costs covered by the grantee (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.957403,
    "kind": "estimate",
    "source": {
@@ -111,6 +112,7 @@
    "id": "percentage_of_total_costs_covered_by_the_grantee_chad",
    "label": "Percentage of total costs covered by the grantee (Chad)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "percentage_of_total_costs_covered_by_the_grantee_chad_2",
    "expected": 0.957403,
    "format": "percent"
@@ -119,6 +121,7 @@
    "id": "total_spending_by_all_contributors_chad",
    "label": "Total spending by all contributors (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "value": 288279857.1,
    "kind": "estimate",
    "source": {
@@ -133,6 +136,7 @@
    "id": "total_spending_contributed_by_grantee_chad",
    "label": "Total spending contributed by grantee (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "percentage_of_total_costs_covered_by_the_grantee_chad * total_spending_by_all_contributors_chad",
    "expected": 276000000.0,
    "format": "usd"
@@ -141,6 +145,7 @@
    "id": "percentage_of_total_costs_covered_by_other_philanthropic_act_2",
    "label": "Percentage of total costs covered by other philanthropic actors (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -154,6 +159,7 @@
    "id": "percentage_of_total_costs_covered_by_other_philanthropic_act",
    "label": "Percentage of total costs covered by other philanthropic actors (Chad)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "percentage_of_total_costs_covered_by_other_philanthropic_act_2",
    "expected": 0.0,
    "format": "percent"
@@ -162,6 +168,7 @@
    "id": "total_spending_contributed_by_other_philanthropic_actors_cha",
    "label": "Total spending contributed by other philanthropic actors (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "percentage_of_total_costs_covered_by_other_philanthropic_act * total_spending_by_all_contributors_chad",
    "expected": 0.0,
    "format": "usd"
@@ -170,6 +177,7 @@
    "id": "total_spending_causally_upstream_of_donations_to_grantee_cha",
    "label": "Total spending causally upstream of donations to grantee (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "sum(total_spending_contributed_by_grantee_chad, total_spending_contributed_by_other_philanthropic_actors_cha)",
    "expected": 276000000.0,
    "format": "usd"
@@ -178,6 +186,7 @@
    "id": "total_cost_per_insecticide_treated_net_itn_distributed_chad_2",
    "label": "Total cost per insecticide-treated net (ITN) distributed (Chad)",
    "section": "inputs",
+   "unit": "$",
    "value": 4.89,
    "kind": "estimate",
    "source": {
@@ -191,6 +200,7 @@
    "id": "total_cost_per_insecticide_treated_net_itn_distributed_chad",
    "label": "Total cost per insecticide-treated net (ITN) distributed (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "total_cost_per_insecticide_treated_net_itn_distributed_chad_2",
    "expected": 4.89,
    "format": "usd"
@@ -199,6 +209,7 @@
    "id": "upstream_costs_per_itn_distributed_chad",
    "label": "Upstream costs per ITN distributed (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "total_spending_causally_upstream_of_donations_to_grantee_cha / total_spending_by_all_contributors_chad * total_cost_per_insecticide_treated_net_itn_distributed_chad",
    "expected": 4.68170067,
    "format": "usd"
@@ -237,22 +248,22 @@
    "expected": 106115284.8
   },
   {
-   "id": "r_5_years",
-   "label": "<5 years",
+   "id": "population_chad_both_5_years_2021",
+   "label": "Population, Chad, Both, <5 years, 2021",
    "section": "gbd_estimates",
-   "value": 3635515.15536799,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
     "cell": "GBD estimates!H436"
-   }
+   },
+   "formula": "@givewell_chad.population_chad_both_5_years_2021",
+   "expected": 3635515.15536799
   },
   {
    "id": "population_under_age_5_chad_2",
    "label": "Population under age 5 (Chad)",
    "section": "inputs",
-   "formula": "r_5_years",
+   "formula": "population_chad_both_5_years_2021",
    "expected": 3635515.155
   },
   {
@@ -263,22 +274,22 @@
    "expected": 3635515.155
   },
   {
-   "id": "all_ages",
-   "label": "All ages",
+   "id": "population_chad_both_all_ages_2021",
+   "label": "Population, Chad, Both, All ages, 2021",
    "section": "gbd_estimates",
-   "value": 17749358.6297912,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
     "cell": "GBD estimates!H471"
-   }
+   },
+   "formula": "@givewell_chad.population_chad_both_all_ages_2021",
+   "expected": 17749358.6297912
   },
   {
    "id": "total_population_chad_2",
    "label": "Total population (Chad)",
    "section": "inputs",
-   "formula": "all_ages",
+   "formula": "population_chad_both_all_ages_2021",
    "expected": 17749358.63
   },
   {
@@ -307,6 +318,7 @@
    "id": "annual_malaria_mortality_rate_among_1_59_month_olds_chad",
    "label": "Annual malaria mortality rate among 1-59-month-olds (Chad)",
    "section": "malaria_mortality",
+   "unit": "%",
    "value": 0.00263528145,
    "kind": "estimate",
    "source": {
@@ -318,9 +330,10 @@
    "format": "percent"
   },
   {
-   "id": "supp",
-   "label": "supp",
+   "id": "annual_malaria_mortality_rate_among_1_59_month_olds",
+   "label": "Annual malaria mortality rate among 1-59-month-olds",
    "section": "main_cea",
+   "unit": "%",
    "formula": "annual_malaria_mortality_rate_among_1_59_month_olds_chad",
    "expected": 0.00263528145,
    "format": "percent"
@@ -341,14 +354,16 @@
    "id": "total_malaria_attributable_mortality_rate_among_1_59_month_o_4",
    "label": "Total malaria-attributable mortality rate among 1-59-month-olds (including direct and indirect malaria deaths)",
    "section": "main_cea",
-   "formula": "supp * (1 + indirect_malaria_deaths_per_direct_malaria_death)",
+   "unit": "%",
+   "formula": "annual_malaria_mortality_rate_among_1_59_month_olds * (1 + indirect_malaria_deaths_per_direct_malaria_death)",
    "expected": 0.003952922175,
    "format": "percent"
   },
   {
-   "id": "ppt_chad_2",
-   "label": "ppt (Chad)",
+   "id": "malaria_attributable_mortality_reduction_as_a_result_of_seas",
+   "label": "Malaria-attributable mortality reduction as a result of seasonal malaria chemoprevention (SMC) (Chad)",
    "section": "malaria_mortality",
+   "unit": "ppt",
    "value": 0.0015615,
    "kind": "estimate",
    "source": {
@@ -363,6 +378,7 @@
    "id": "proportion_of_deaths_averted_by_smc_that_are_already_capture_2",
    "label": "Proportion of deaths averted by SMC that are already captured by GBD mortality estimates",
    "section": "inputs",
+   "unit": "%",
    "value": 0.75,
    "kind": "estimate",
    "source": {
@@ -376,23 +392,26 @@
    "id": "proportion_of_deaths_averted_by_smc_that_are_already_capture",
    "label": "Proportion of deaths averted by SMC that are already captured by GBD mortality estimates",
    "section": "malaria_mortality",
+   "unit": "%",
    "formula": "proportion_of_deaths_averted_by_smc_that_are_already_capture_2",
    "expected": 0.75,
    "format": "percent"
   },
   {
-   "id": "ppt_chad",
-   "label": "ppt (Chad)",
+   "id": "malaria_attributable_mortality_reduction_among_children_targ_2",
+   "label": "Malaria-attributable mortality reduction among children targeted with seasonal malaria chemoprevention (SMC) that is not already accounted for in our mortality ",
    "section": "malaria_mortality",
-   "formula": "ppt_chad_2 * (1 - proportion_of_deaths_averted_by_smc_that_are_already_capture)",
+   "unit": "ppt",
+   "formula": "malaria_attributable_mortality_reduction_as_a_result_of_seas * (1 - proportion_of_deaths_averted_by_smc_that_are_already_capture)",
    "expected": 0.000390375,
    "format": "percent"
   },
   {
-   "id": "supp_2",
-   "label": "supp",
+   "id": "malaria_attributable_mortality_reduction_among_children_targ",
+   "label": "Malaria-attributable mortality reduction among children targeted with seasonal malaria chemoprevention (SMC) that is not already accounted for in our mortality ",
    "section": "main_cea",
-   "formula": "ppt_chad",
+   "unit": "ppt",
+   "formula": "malaria_attributable_mortality_reduction_among_children_targ_2",
    "expected": 0.000390375,
    "format": "percent"
   },
@@ -400,7 +419,8 @@
    "id": "total_malaria_attributable_mortality_rate_among_1_59_month_o_3",
    "label": "Total malaria-attributable mortality rate among 1-59-month-olds (adjusted for SMC)",
    "section": "main_cea",
-   "formula": "total_malaria_attributable_mortality_rate_among_1_59_month_o_4 - supp_2",
+   "unit": "%",
+   "formula": "total_malaria_attributable_mortality_rate_among_1_59_month_o_4 - malaria_attributable_mortality_reduction_among_children_targ",
    "expected": 0.003562547175,
    "format": "percent"
   },
@@ -408,6 +428,7 @@
    "id": "adjustment_for_malaria_attributable_mortality_averted_by_mal_2",
    "label": "Adjustment for malaria-attributable mortality averted by malaria vaccines",
    "section": "inputs",
+   "unit": "%",
    "value": -0.024504,
    "kind": "estimate",
    "source": {
@@ -421,6 +442,7 @@
    "id": "adjustment_for_malaria_attributable_mortality_averted_by_mal",
    "label": "Adjustment for malaria-attributable mortality averted by malaria vaccines",
    "section": "main_cea",
+   "unit": "%",
    "formula": "adjustment_for_malaria_attributable_mortality_averted_by_mal_2",
    "expected": -0.024504,
    "format": "percent"
@@ -429,6 +451,7 @@
    "id": "total_malaria_attributable_mortality_rate_among_1_59_month_o_2",
    "label": "Total malaria-attributable mortality rate among 1-59-month-olds (adjusted for SMC and vaccines)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "total_malaria_attributable_mortality_rate_among_1_59_month_o_3 * (1 + adjustment_for_malaria_attributable_mortality_averted_by_mal)",
    "expected": 0.003475250519,
    "format": "percent"
@@ -437,6 +460,7 @@
    "id": "reduction_in_malaria_incidence_for_children_under_age_5_rece_2",
    "label": "Reduction in malaria incidence for children under age 5 receiving nets found in the Pryce et al. 2018 meta-analysis",
    "section": "inputs",
+   "unit": "%",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -450,6 +474,7 @@
    "id": "reduction_in_malaria_incidence_for_children_under_age_5_rece",
    "label": "Reduction in malaria incidence for children under age 5 receiving nets found in the Pryce et al. 2018 meta-analysis",
    "section": "main_cea",
+   "unit": "%",
    "formula": "reduction_in_malaria_incidence_for_children_under_age_5_rece_2",
    "expected": 0.45,
    "format": "percent"
@@ -458,6 +483,7 @@
    "id": "proportion_of_people_sleeping_under_ctns_in_the_treatment_gr_2",
    "label": "Proportion of people sleeping under CTNs in the treatment groups of the trials from the Pryce et al. 2018 meta-analysis",
    "section": "inputs",
+   "unit": "%",
    "value": 0.71894,
    "kind": "estimate",
    "source": {
@@ -471,6 +497,7 @@
    "id": "proportion_of_people_sleeping_under_ctns_in_the_treatment_gr",
    "label": "Proportion of people sleeping under CTNs in the treatment groups of the trials from the Pryce et al. 2018 meta-analysis",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_sleeping_under_ctns_in_the_treatment_gr_2",
    "expected": 0.71894,
    "format": "percent"
@@ -479,6 +506,7 @@
    "id": "percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d_2",
    "label": "Percentage of nets remaining in use one year after the CTN distributions in trials from the Pryce et al. 2018 meta-analysis",
    "section": "inputs",
+   "unit": "%",
    "value": 1.0,
    "kind": "estimate",
    "source": {
@@ -492,6 +520,7 @@
    "id": "percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d",
    "label": "Percentage of nets remaining in use one year after the CTN distributions in trials from the Pryce et al. 2018 meta-analysis",
    "section": "coverage",
+   "unit": "%",
    "formula": "percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d_2",
    "expected": 1.0,
    "format": "percent"
@@ -500,6 +529,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_2",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 1st year following a distribution (Ghana)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0296035052775,
    "kind": "estimate",
    "source": {
@@ -513,6 +543,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 1st year following a distribution (Ghana)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_severely_damag_2",
    "expected": 0.02960350528,
    "format": "percent"
@@ -521,6 +552,7 @@
    "id": "proportion_of_physical_protective_effect_retained_by_severel_2",
    "label": "Proportion of physical protective effect retained by severely damaged ITNs",
    "section": "inputs",
+   "unit": "%",
    "value": 0.1,
    "kind": "estimate",
    "source": {
@@ -534,6 +566,7 @@
    "id": "proportion_of_physical_protective_effect_retained_by_severel",
    "label": "Proportion of physical protective effect retained by severely damaged ITNs",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_physical_protective_effect_retained_by_severel_2",
    "expected": 0.1,
    "format": "percent"
@@ -542,6 +575,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_2",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 1st year following a distribution (Ghana)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.074047,
    "kind": "estimate",
    "source": {
@@ -555,6 +589,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 1st year following a distribution (Ghana)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_moderately_dam_2",
    "expected": 0.074047,
    "format": "percent"
@@ -563,6 +598,7 @@
    "id": "proportion_of_physical_protective_effect_retained_by_moderat_2",
    "label": "Proportion of physical protective effect retained by moderately damaged ITNs",
    "section": "inputs",
+   "unit": "%",
    "value": 0.5,
    "kind": "estimate",
    "source": {
@@ -576,6 +612,7 @@
    "id": "proportion_of_physical_protective_effect_retained_by_moderat",
    "label": "Proportion of physical protective effect retained by moderately damaged ITNs",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_physical_protective_effect_retained_by_moderat_2",
    "expected": 0.5,
    "format": "percent"
@@ -584,6 +621,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_2",
    "label": "Average proportion of surviving ITNs that are in good condition in the 1st year following a distribution (Ghana)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.8963736342942,
    "kind": "estimate",
    "source": {
@@ -597,6 +635,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit",
    "label": "Average proportion of surviving ITNs that are in good condition in the 1st year following a distribution (Ghana)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_in_good_condit_2",
    "expected": 0.8963736343,
    "format": "percent"
@@ -605,6 +644,7 @@
    "id": "proportion_of_physical_protective_effect_retained_by_itns_in_2",
    "label": "Proportion of physical protective effect retained by ITNs in good condition",
    "section": "inputs",
+   "unit": "%",
    "value": 0.9,
    "kind": "estimate",
    "source": {
@@ -618,14 +658,16 @@
    "id": "proportion_of_physical_protective_effect_retained_by_itns_in",
    "label": "Proportion of physical protective effect retained by ITNs in good condition",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_physical_protective_effect_retained_by_itns_in_2",
    "expected": 0.9,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_full_physical_protection_provided_by_newly_2",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly_3",
    "label": "Proportion of the full physical protection provided by newly distributed ITNs remaining in the 1st year following a distribution (Ghana)",
    "section": "durability",
+   "unit": "%",
    "formula": "sum(average_proportion_of_surviving_itns_that_are_severely_damag * proportion_of_physical_protective_effect_retained_by_severel, average_proportion_of_surviving_itns_that_are_moderately_dam * proportion_of_physical_protective_effect_retained_by_moderat, average_proportion_of_surviving_itns_that_are_in_good_condit * proportion_of_physical_protective_effect_retained_by_itns_in)",
    "expected": 0.8467201214,
    "format": "percent"
@@ -634,7 +676,8 @@
    "id": "average_proportion_of_the_full_physical_protection_provided",
    "label": "Average proportion of the full physical protection provided by newly distributed ITNs remaining in the 1st year following a distribution",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_2",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_3",
    "expected": 0.8467201214,
    "format": "percent"
   },
@@ -642,6 +685,7 @@
    "id": "physical_decay_rate_of_ctns_from_the_pryce_et_al_2018_trials_2",
    "label": "Physical decay rate of CTNs from the Pryce et al. 2018 trials compared to distributed ITNs",
    "section": "inputs",
+   "unit": "%",
    "formula": "2 / 3",
    "expected": 0.6666666667,
    "format": "percent"
@@ -650,31 +694,35 @@
    "id": "physical_decay_rate_of_ctns_from_the_pryce_et_al_2018_trials",
    "label": "Physical decay rate of CTNs from the Pryce et al. 2018 trials compared to distributed ITNs",
    "section": "durability",
+   "unit": "%",
    "formula": "physical_decay_rate_of_ctns_from_the_pryce_et_al_2018_trials_2",
    "expected": 0.6666666667,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_full_physical_protection_provided_by_newly",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly_2",
    "label": "Proportion of the full physical protection provided by newly distributed CTNs from the Pryce et al. 2018 trials remaining in the 1st year of the trials",
    "section": "durability",
+   "unit": "%",
    "formula": "1 - (1 - average_proportion_of_the_full_physical_protection_provided) * physical_decay_rate_of_ctns_from_the_pryce_et_al_2018_trials",
    "expected": 0.8978134143,
    "format": "percent"
   },
   {
-   "id": "supp_4",
-   "label": "supp",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly",
+   "label": "Proportion of the full physical protection provided by newly distributed CTNs from the Pryce et al. 2018 trials remaining in the 1st year of the trials",
    "section": "coverage",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_2",
    "expected": 0.8978134143,
    "format": "percent"
   },
   {
-   "id": "ppt_2",
-   "label": "ppt",
+   "id": "effective_net_coverage_rate_for_the_treatment_groups",
+   "label": "Effective net coverage rate for the treatment groups",
    "section": "coverage",
-   "formula": "proportion_of_people_sleeping_under_ctns_in_the_treatment_gr * percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d * supp_4",
+   "unit": "ppt",
+   "formula": "proportion_of_people_sleeping_under_ctns_in_the_treatment_gr * percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d * proportion_of_the_full_physical_protection_provided_by_newly",
    "expected": 0.645473976,
    "format": "percent"
   },
@@ -682,6 +730,7 @@
    "id": "proportion_of_people_sleeping_under_ctns_in_the_control_grou_2",
    "label": "Proportion of people sleeping under CTNs in the control groups of the trials from the Pryce et al. 2018 meta-analysis",
    "section": "inputs",
+   "unit": "%",
    "value": 0.05,
    "kind": "estimate",
    "source": {
@@ -695,6 +744,7 @@
    "id": "proportion_of_people_sleeping_under_ctns_in_the_control_grou",
    "label": "Proportion of people sleeping under CTNs in the control groups of the trials from the Pryce et al. 2018 meta-analysis",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_sleeping_under_ctns_in_the_control_grou_2",
    "expected": 0.05,
    "format": "percent"
@@ -703,23 +753,26 @@
    "id": "effective_net_coverage_rate_for_the_control_groups",
    "label": "Effective net coverage rate for the control groups",
    "section": "coverage",
-   "formula": "proportion_of_people_sleeping_under_ctns_in_the_control_grou * percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d * supp_4",
+   "unit": "%",
+   "formula": "proportion_of_people_sleeping_under_ctns_in_the_control_grou * percentage_of_nets_remaining_in_use_one_year_after_the_ctn_d * proportion_of_the_full_physical_protection_provided_by_newly",
    "expected": 0.04489067071,
    "format": "percent"
   },
   {
-   "id": "ppt",
-   "label": "ppt",
+   "id": "difference_in_effective_coverage_between_the_treatment_group_2",
+   "label": "Difference in effective coverage between the treatment groups and the control groups of the Pryce et al. 2018 meta-analysis trials",
    "section": "coverage",
-   "formula": "ppt_2 - effective_net_coverage_rate_for_the_control_groups",
+   "unit": "ppt",
+   "formula": "effective_net_coverage_rate_for_the_treatment_groups - effective_net_coverage_rate_for_the_control_groups",
    "expected": 0.6005833053,
    "format": "percent"
   },
   {
-   "id": "supp_3",
-   "label": "supp",
+   "id": "difference_in_effective_coverage_between_the_treatment_group",
+   "label": "Difference in effective coverage between the treatment groups and the control groups of the Pryce et al. 2018 meta-analysis trials",
    "section": "main_cea",
-   "formula": "ppt",
+   "unit": "ppt",
+   "formula": "difference_in_effective_coverage_between_the_treatment_group_2",
    "expected": 0.6005833053,
    "format": "percent"
   },
@@ -727,7 +780,8 @@
    "id": "implied_reduction_in_malaria_incidence_for_people_under_age",
    "label": "Implied reduction in malaria incidence for people under age 5 with full effective ITN coverage",
    "section": "main_cea",
-   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_rece / supp_3",
+   "unit": "%",
+   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_rece / difference_in_effective_coverage_between_the_treatment_group",
    "expected": 0.7492715765,
    "format": "percent"
   },
@@ -735,6 +789,7 @@
    "id": "internal_validity_adjustment_2",
    "label": "Internal validity adjustment",
    "section": "inputs",
+   "unit": "%",
    "value": -0.05,
    "kind": "estimate",
    "source": {
@@ -748,6 +803,7 @@
    "id": "internal_validity_adjustment",
    "label": "Internal validity adjustment",
    "section": "main_cea",
+   "unit": "%",
    "formula": "internal_validity_adjustment_2",
    "expected": -0.05,
    "format": "percent"
@@ -756,6 +812,7 @@
    "id": "external_validity_adjustment_2",
    "label": "External validity adjustment",
    "section": "inputs",
+   "unit": "%",
    "value": -0.05,
    "kind": "estimate",
    "source": {
@@ -769,6 +826,7 @@
    "id": "external_validity_adjustment",
    "label": "External validity adjustment",
    "section": "main_cea",
+   "unit": "%",
    "formula": "external_validity_adjustment_2",
    "expected": -0.05,
    "format": "percent"
@@ -777,6 +835,7 @@
    "id": "expected_reduction_in_malaria_incidence_for_people_under_age",
    "label": "Expected reduction in malaria incidence for people under age 5 with full effective ITN coverage",
    "section": "main_cea",
+   "unit": "%",
    "formula": "implied_reduction_in_malaria_incidence_for_people_under_age * (1 + internal_validity_adjustment) * (1 + external_validity_adjustment)",
    "expected": 0.6762175978,
    "format": "percent"
@@ -785,6 +844,7 @@
    "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
    "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "inputs",
+   "unit": "%",
    "value": 1.0,
    "kind": "estimate",
    "source": {
@@ -798,6 +858,7 @@
    "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "main_cea",
+   "unit": "%",
    "formula": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
    "expected": 1.0,
    "format": "percent"
@@ -806,6 +867,7 @@
    "id": "expected_reduction_in_malaria_mortality_for_people_under_age",
    "label": "Expected reduction in malaria mortality for people under age 5 with full effective ITN coverage",
    "section": "main_cea",
+   "unit": "%",
    "formula": "expected_reduction_in_malaria_incidence_for_people_under_age * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 0.6762175978,
    "format": "percent"
@@ -814,6 +876,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_4",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 1st year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0709080687696,
    "kind": "estimate",
    "source": {
@@ -827,6 +890,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_3",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 1st year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_severely_damag_4",
    "expected": 0.07090806877,
    "format": "percent"
@@ -835,6 +899,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_4",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 1st year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0708721050875,
    "kind": "estimate",
    "source": {
@@ -848,6 +913,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_3",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 1st year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_moderately_dam_4",
    "expected": 0.07087210509,
    "format": "percent"
@@ -856,6 +922,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_4",
    "label": "Average proportion of surviving ITNs that are in good condition in the 1st year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.8582198261429,
    "kind": "estimate",
    "source": {
@@ -869,14 +936,16 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_3",
    "label": "Average proportion of surviving ITNs that are in good condition in the 1st year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_in_good_condit_4",
    "expected": 0.8582198261,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_full_physical_protection_provided_by_newly_3",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly_4",
    "label": "Proportion of the full physical protection provided by newly distributed ITNs remaining in the 1st year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "sum(average_proportion_of_surviving_itns_that_are_severely_damag_3 * proportion_of_physical_protective_effect_retained_by_severel, average_proportion_of_surviving_itns_that_are_moderately_dam_3 * proportion_of_physical_protective_effect_retained_by_moderat, average_proportion_of_surviving_itns_that_are_in_good_condit_3 * proportion_of_physical_protective_effect_retained_by_itns_in)",
    "expected": 0.8149247029,
    "format": "percent"
@@ -885,6 +954,7 @@
    "id": "proportion_of_the_protective_effect_of_itns_that_would_remai_2",
    "label": "Proportion of the protective effect of ITNs that would remain in the absence of the chemical content of the net",
    "section": "inputs",
+   "unit": "%",
    "value": 0.3,
    "kind": "estimate",
    "source": {
@@ -899,6 +969,7 @@
    "id": "proportion_of_the_protective_effect_of_itns_that_would_remai",
    "label": "Proportion of the protective effect of ITNs that would remain in the absence of the chemical content of the net",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_itns_that_would_remai_2",
    "expected": 0.3,
    "format": "percent"
@@ -907,6 +978,7 @@
    "id": "proportion_of_the_protective_effect_of_nets_that_is_solely_a",
    "label": "Proportion of the protective effect of nets that is solely attributable to the physical barrier of the net, in the absence of physical or chemical decay",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_itns_that_would_remai",
    "expected": 0.3,
    "format": "percent"
@@ -915,6 +987,7 @@
    "id": "proportion_of_the_protective_effect_of_itns_that_would_remai_4",
    "label": "Proportion of the protective effect of ITNs that would remain in the absence of the physical barrier created by the net",
    "section": "inputs",
+   "unit": "%",
    "value": 0.15,
    "kind": "estimate",
    "source": {
@@ -928,6 +1001,7 @@
    "id": "proportion_of_the_protective_effect_of_itns_that_would_remai_3",
    "label": "Proportion of the protective effect of ITNs that would remain in the absence of the physical barrier created by the net",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_itns_that_would_remai_4",
    "expected": 0.15,
    "format": "percent"
@@ -936,6 +1010,7 @@
    "id": "proportion_of_the_protective_effect_of_nets_that_is_solely_a_2",
    "label": "Proportion of the protective effect of nets that is solely attributable to the insecticide content of the net, in the absence of physical or chemical decay",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_itns_that_would_remai_3",
    "expected": 0.15,
    "format": "percent"
@@ -944,6 +1019,7 @@
    "id": "proportion_of_the_protective_effect_of_nets_that_is_jointly",
    "label": "Proportion of the protective effect of nets that is jointly attributable to the physical barrier and insecticide content of the net, in the absence of physical ",
    "section": "durability",
+   "unit": "%",
    "formula": "1 - sum(proportion_of_the_protective_effect_of_nets_that_is_solely_a, proportion_of_the_protective_effect_of_nets_that_is_solely_a_2)",
    "expected": 0.55,
    "format": "percent"
@@ -952,39 +1028,44 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 1st year following a distribution (Chad)",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_3 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_3 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
    "expected": 0.8426859975,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_2",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 1st year following a distribution (Chad)",
+   "section": "durability",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu",
+   "expected": 0.2901168544,
    "format": "percent"
   },
   {
    "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 1st year following a distribution (Chad)",
-   "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_3 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu",
-   "expected": 0.2901168544,
-   "format": "percent"
-  },
-  {
-   "id": "supp_chad",
-   "label": "supp (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_2",
    "expected": 0.2901168544,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_2",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_4",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 1st year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 / proportion_of_the_full_protection_provided_by_newly_distribu",
    "expected": 0.1780022457,
    "format": "percent"
   },
   {
-   "id": "supp_chad_2",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_3",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 1st year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_2",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_4",
    "expected": 0.1780022457,
    "format": "percent"
   },
@@ -992,6 +1073,7 @@
    "id": "projected_mosquito_mortality_rate_in_pyrethroid_bioassays",
    "label": "Projected mosquito mortality rate in pyrethroid bioassays",
    "section": "inputs",
+   "unit": "%",
    "value": 0.334526,
    "kind": "estimate",
    "source": {
@@ -1005,6 +1087,7 @@
    "id": "projected_mosquito_mortality_rate_in_pyrethroid_bioassays_ch",
    "label": "Projected mosquito mortality rate in pyrethroid bioassays (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "projected_mosquito_mortality_rate_in_pyrethroid_bioassays",
    "expected": 0.334526,
    "format": "percent"
@@ -1013,23 +1096,26 @@
    "id": "percentage_loss_in_mosquito_mortality_as_measured_in_pyrethr",
    "label": "Percentage loss in mosquito mortality as measured in pyrethroid bioassays (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "projected_mosquito_mortality_rate_in_pyrethroid_bioassays_ch - 1",
    "expected": -0.665474,
    "format": "percent"
   },
   {
-   "id": "pp",
-   "label": "pp",
+   "id": "percentage_point_decline_in_insecticide_efficacy_per_percent_2",
+   "label": "Percentage point decline in insecticide efficacy per percentage point decline in mosquito mortality measured in pyrethroid bioassays",
    "section": "inputs",
+   "unit": "pp",
    "formula": "if(projected_mosquito_mortality_rate_in_pyrethroid_bioassays < 0.2, 0.75, if(projected_mosquito_mortality_rate_in_pyrethroid_bioassays < 0.45, 0.6, if(projected_mosquito_mortality_rate_in_pyrethroid_bioassays < 0.7, 0.45, 0.3))) / 100",
    "expected": 0.006,
    "format": "percent"
   },
   {
-   "id": "pp_chad",
-   "label": "pp (Chad)",
+   "id": "percentage_point_decline_in_insecticide_efficacy_per_percent",
+   "label": "Percentage point decline in insecticide efficacy per percentage point decline in mosquito mortality measured in pyrethroid bioassays (Chad)",
    "section": "insecticide_resistance",
-   "formula": "pp",
+   "unit": "pp",
+   "formula": "percentage_point_decline_in_insecticide_efficacy_per_percent_2",
    "expected": 0.006,
    "format": "percent"
   },
@@ -1037,23 +1123,26 @@
    "id": "percentage_loss_in_effectiveness_of_pyrethroid_insecticides",
    "label": "Percentage loss in effectiveness of pyrethroid insecticides on ITNs (Chad)",
    "section": "insecticide_resistance",
-   "formula": "percentage_loss_in_mosquito_mortality_as_measured_in_pyrethr * pp_chad * 100",
+   "unit": "%",
+   "formula": "percentage_loss_in_mosquito_mortality_as_measured_in_pyrethr * percentage_point_decline_in_insecticide_efficacy_per_percent * 100",
    "expected": -0.3992844,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_2",
+   "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 1st year following a ",
+   "section": "durability",
+   "unit": "%",
+   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a_2, proportion_of_the_protective_effect_of_itns_that_is_solely_a_4)",
+   "expected": 0.5318808998,
    "format": "percent"
   },
   {
    "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly",
    "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 1st year following a ",
-   "section": "durability",
-   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a, proportion_of_the_protective_effect_of_itns_that_is_solely_a_2)",
-   "expected": 0.5318808998,
-   "format": "percent"
-  },
-  {
-   "id": "supp_chad_3",
-   "label": "supp (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly_2",
    "expected": 0.5318808998,
    "format": "percent"
   },
@@ -1061,7 +1150,8 @@
    "id": "insecticide_resistance_adjustment_for_standard_itns_in_the_1",
    "label": "Insecticide resistance adjustment for standard ITNs in the 1st year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "supp_chad + supp_chad_2 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + supp_chad_3 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a + proportion_of_the_protective_effect_of_itns_that_is_solely_a_3 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + proportion_of_the_protective_effect_of_itns_that_is_jointly * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
    "expected": -0.2834452658,
    "format": "percent"
   },
@@ -1069,6 +1159,7 @@
    "id": "projected_mosquito_mortality_rate_found_in_bioassays_of_pyre_2",
    "label": "Projected mosquito mortality rate found in bioassays of pyrethroid plus PBO",
    "section": "inputs",
+   "unit": "%",
    "value": 0.823884,
    "kind": "estimate",
    "source": {
@@ -1082,6 +1173,7 @@
    "id": "projected_mosquito_mortality_rate_found_in_bioassays_of_pyre",
    "label": "Projected mosquito mortality rate found in bioassays of pyrethroid plus PBO (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "projected_mosquito_mortality_rate_found_in_bioassays_of_pyre_2",
    "expected": 0.823884,
    "format": "percent"
@@ -1090,6 +1182,7 @@
    "id": "initial_proportion_of_resistance_that_remains_when_using_pbo",
    "label": "Initial proportion of resistance that remains when using PBO (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "(1 - projected_mosquito_mortality_rate_found_in_bioassays_of_pyre) / (1 - projected_mosquito_mortality_rate_in_pyrethroid_bioassays_ch)",
    "expected": 0.2646474543,
    "format": "percent"
@@ -1098,6 +1191,7 @@
    "id": "adjustment_for_pbo_washout_in_the_1st_year_following_a_distr_2",
    "label": "Adjustment for PBO washout in the 1st year following a distribution",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -1111,6 +1205,7 @@
    "id": "adjustment_for_pbo_washout_in_the_1st_year_following_a_distr",
    "label": "Adjustment for PBO washout in the 1st year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "adjustment_for_pbo_washout_in_the_1st_year_following_a_distr_2",
    "expected": 0.0,
    "format": "percent"
@@ -1119,6 +1214,7 @@
    "id": "insecticide_resistance_adjustment_for_pbo_nets_in_the_1st_ye",
    "label": "Insecticide resistance adjustment for PBO nets in the 1st year following a distribution (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_standard_itns_in_the_1 * (1 - (1 - initial_proportion_of_resistance_that_remains_when_using_pbo) * (1 + adjustment_for_pbo_washout_in_the_1st_year_following_a_distr))",
    "expected": -0.07501306804,
    "format": "percent"
@@ -1127,6 +1223,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_6",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 2nd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.2908735693403,
    "kind": "estimate",
    "source": {
@@ -1140,6 +1237,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_5",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 2nd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_severely_damag_6",
    "expected": 0.2908735693,
    "format": "percent"
@@ -1148,6 +1246,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_6",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 2nd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.163703801932,
    "kind": "estimate",
    "source": {
@@ -1161,6 +1260,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_5",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 2nd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_moderately_dam_6",
    "expected": 0.1637038019,
    "format": "percent"
@@ -1169,6 +1269,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_6",
    "label": "Average proportion of surviving ITNs that are in good condition in the 2nd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.5454226287277,
    "kind": "estimate",
    "source": {
@@ -1182,14 +1283,16 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_5",
    "label": "Average proportion of surviving ITNs that are in good condition in the 2nd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_in_good_condit_6",
    "expected": 0.5454226287,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_full_physical_protection_provided_by_newly_4",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly_5",
    "label": "Proportion of the full physical protection provided by newly distributed ITNs remaining in the 2nd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "sum(average_proportion_of_surviving_itns_that_are_severely_damag_5 * proportion_of_physical_protective_effect_retained_by_severel, average_proportion_of_surviving_itns_that_are_moderately_dam_5 * proportion_of_physical_protective_effect_retained_by_moderat, average_proportion_of_surviving_itns_that_are_in_good_condit_5 * proportion_of_physical_protective_effect_retained_by_itns_in)",
    "expected": 0.6018196238,
    "format": "percent"
@@ -1198,55 +1301,62 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu_2",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 2nd year following a distribution (Chad)",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
    "expected": 0.6615466802,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_3",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_6",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 2nd year following a distribution (Chad)",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_4 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu_2",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu_2",
    "expected": 0.2729148109,
    "format": "percent"
   },
   {
-   "id": "supp_chad_4",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_5",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 2nd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_3",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_6",
    "expected": 0.2729148109,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_4",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_8",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 2nd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 / proportion_of_the_full_protection_provided_by_newly_distribu_2",
    "expected": 0.2267413691,
    "format": "percent"
   },
   {
-   "id": "supp_chad_5",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_7",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 2nd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_4",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_8",
    "expected": 0.2267413691,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_2",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_4",
    "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 2nd year following a ",
    "section": "durability",
-   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a_3, proportion_of_the_protective_effect_of_itns_that_is_solely_a_4)",
+   "unit": "%",
+   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a_6, proportion_of_the_protective_effect_of_itns_that_is_solely_a_8)",
    "expected": 0.50034382,
    "format": "percent"
   },
   {
-   "id": "supp_chad_6",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_3",
+   "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 2nd year following a ",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly_2",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly_4",
    "expected": 0.50034382,
    "format": "percent"
   },
@@ -1254,7 +1364,8 @@
    "id": "insecticide_resistance_adjustment_for_standard_itns_in_the_2",
    "label": "Insecticide resistance adjustment for standard ITNs in the 2nd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "supp_chad_4 + supp_chad_5 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + supp_chad_6 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_5 + proportion_of_the_protective_effect_of_itns_that_is_solely_a_7 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + proportion_of_the_protective_effect_of_itns_that_is_jointly_3 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
    "expected": -0.2903137735,
    "format": "percent"
   },
@@ -1262,6 +1373,7 @@
    "id": "adjustment_for_pbo_washout_in_the_2nd_year_following_a_distr_2",
    "label": "Adjustment for PBO washout in the 2nd year following a distribution",
    "section": "inputs",
+   "unit": "%",
    "value": -0.2,
    "kind": "estimate",
    "source": {
@@ -1275,6 +1387,7 @@
    "id": "adjustment_for_pbo_washout_in_the_2nd_year_following_a_distr",
    "label": "Adjustment for PBO washout in the 2nd year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "adjustment_for_pbo_washout_in_the_2nd_year_following_a_distr_2",
    "expected": -0.2,
    "format": "percent"
@@ -1283,6 +1396,7 @@
    "id": "insecticide_resistance_adjustment_for_pbo_nets_in_the_2nd_ye",
    "label": "Insecticide resistance adjustment for PBO nets in the 2nd year following a distribution (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_standard_itns_in_the_2 * (1 - (1 - initial_proportion_of_resistance_that_remains_when_using_pbo) * (1 + adjustment_for_pbo_washout_in_the_2nd_year_following_a_distr))",
    "expected": -0.1195273956,
    "format": "percent"
@@ -1291,6 +1405,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_8",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 3rd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.5220992449707,
    "kind": "estimate",
    "source": {
@@ -1304,6 +1419,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_severely_damag_7",
    "label": "Average proportion of surviving ITNs that are severely damaged in the 3rd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_severely_damag_8",
    "expected": 0.522099245,
    "format": "percent"
@@ -1312,6 +1428,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_8",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 3rd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.1662162518195,
    "kind": "estimate",
    "source": {
@@ -1325,6 +1442,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_moderately_dam_7",
    "label": "Average proportion of surviving ITNs that are moderately damaged in the 3rd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_moderately_dam_8",
    "expected": 0.1662162518,
    "format": "percent"
@@ -1333,6 +1451,7 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_8",
    "label": "Average proportion of surviving ITNs that are in good condition in the 3rd year following a distribution (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.3116845032098,
    "kind": "estimate",
    "source": {
@@ -1346,14 +1465,16 @@
    "id": "average_proportion_of_surviving_itns_that_are_in_good_condit_7",
    "label": "Average proportion of surviving ITNs that are in good condition in the 3rd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "average_proportion_of_surviving_itns_that_are_in_good_condit_8",
    "expected": 0.3116845032,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_full_physical_protection_provided_by_newly_5",
+   "id": "proportion_of_the_full_physical_protection_provided_by_newly_6",
    "label": "Proportion of the full physical protection provided by newly distributed ITNs remaining in the 3rd year following a distribution (Chad)",
    "section": "durability",
+   "unit": "%",
    "formula": "sum(average_proportion_of_surviving_itns_that_are_severely_damag_7 * proportion_of_physical_protective_effect_retained_by_severel, average_proportion_of_surviving_itns_that_are_moderately_dam_7 * proportion_of_physical_protective_effect_retained_by_moderat, average_proportion_of_surviving_itns_that_are_in_good_condit_7 * proportion_of_physical_protective_effect_retained_by_itns_in)",
    "expected": 0.4158341033,
    "format": "percent"
@@ -1362,55 +1483,62 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu_3",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 3rd year following a distribution (Chad)",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_6 * proportion_of_the_protective_effect_of_nets_that_is_solely_a + proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 + proportion_of_the_full_physical_protection_provided_by_newly_6 * proportion_of_the_protective_effect_of_nets_that_is_jointly",
    "expected": 0.5034589878,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_5",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_10",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 3rd year following a distribution",
    "section": "durability",
-   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_5 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu_3",
+   "unit": "%",
+   "formula": "proportion_of_the_full_physical_protection_provided_by_newly_6 * proportion_of_the_protective_effect_of_nets_that_is_solely_a / proportion_of_the_full_protection_provided_by_newly_distribu_3",
    "expected": 0.2477862825,
    "format": "percent"
   },
   {
-   "id": "supp_chad_7",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_9",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the physical barrier of the net in the 3rd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_5",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_10",
    "expected": 0.2477862825,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_6",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_12",
    "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 3rd year following a distribution",
    "section": "durability",
+   "unit": "%",
    "formula": "proportion_of_the_protective_effect_of_nets_that_is_solely_a_2 / proportion_of_the_full_protection_provided_by_newly_distribu_3",
    "expected": 0.2979388662,
    "format": "percent"
   },
   {
-   "id": "supp_chad_8",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_11",
+   "label": "Proportion of the protective effect of ITNs that is solely attributable to the insecticide content of the net in the 3rd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_6",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_12",
    "expected": 0.2979388662,
    "format": "percent"
   },
   {
-   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_3",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_6",
    "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 3rd year following a ",
    "section": "durability",
-   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a_5, proportion_of_the_protective_effect_of_itns_that_is_solely_a_6)",
+   "unit": "%",
+   "formula": "1 - sum(proportion_of_the_protective_effect_of_itns_that_is_solely_a_10, proportion_of_the_protective_effect_of_itns_that_is_solely_a_12)",
    "expected": 0.4542748513,
    "format": "percent"
   },
   {
-   "id": "supp_chad_9",
-   "label": "supp (Chad)",
+   "id": "proportion_of_the_protective_effect_of_itns_that_is_jointly_5",
+   "label": "Proportion of the protective effect of ITNs that is jointly attributable to the physical barrier and insecticide content of the net in the 3rd year following a ",
    "section": "insecticide_resistance",
-   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly_3",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_jointly_6",
    "expected": 0.4542748513,
    "format": "percent"
   },
@@ -1418,7 +1546,8 @@
    "id": "insecticide_resistance_adjustment_for_standard_itns_in_the_3",
    "label": "Insecticide resistance adjustment for standard ITNs in the 3rd year following a distribution (Chad)",
    "section": "insecticide_resistance",
-   "formula": "supp_chad_7 + supp_chad_8 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + supp_chad_9 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
+   "unit": "%",
+   "formula": "proportion_of_the_protective_effect_of_itns_that_is_solely_a_9 + proportion_of_the_protective_effect_of_itns_that_is_solely_a_11 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) + proportion_of_the_protective_effect_of_itns_that_is_jointly_5 * (1 + percentage_loss_in_effectiveness_of_pyrethroid_insecticides) - 1",
    "expected": -0.3003472029,
    "format": "percent"
   },
@@ -1426,6 +1555,7 @@
    "id": "adjustment_for_pbo_washout_in_the_3rd_year_following_a_distr_2",
    "label": "Adjustment for PBO washout in the 3rd year following a distribution",
    "section": "inputs",
+   "unit": "%",
    "value": -0.4,
    "kind": "estimate",
    "source": {
@@ -1439,6 +1569,7 @@
    "id": "adjustment_for_pbo_washout_in_the_3rd_year_following_a_distr",
    "label": "Adjustment for PBO washout in the 3rd year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "adjustment_for_pbo_washout_in_the_3rd_year_following_a_distr_2",
    "expected": -0.4,
    "format": "percent"
@@ -1447,6 +1578,7 @@
    "id": "insecticide_resistance_adjustment_for_pbo_nets_in_the_3rd_ye",
    "label": "Insecticide resistance adjustment for PBO nets in the 3rd year following a distribution (Chad)",
    "section": "insecticide_resistance",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_standard_itns_in_the_3 * (1 - (1 - initial_proportion_of_resistance_that_remains_when_using_pbo) * (1 + adjustment_for_pbo_washout_in_the_3rd_year_following_a_distr))",
    "expected": -0.1678305547,
    "format": "percent"
@@ -1455,6 +1587,7 @@
    "id": "baseline_proportion_of_people_under_age_5_represented_by_gbd_2",
    "label": "Baseline proportion of people under age 5 represented by GBD burden estimates sleeping under nets",
    "section": "inputs",
+   "unit": "%",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -1468,6 +1601,7 @@
    "id": "baseline_proportion_of_people_under_age_5_represented_by_gbd",
    "label": "Baseline proportion of people under age 5 represented by GBD burden estimates sleeping under nets",
    "section": "main_cea",
+   "unit": "%",
    "formula": "baseline_proportion_of_people_under_age_5_represented_by_gbd_2",
    "expected": 0.44971,
    "format": "percent"
@@ -1476,6 +1610,7 @@
    "id": "expected_reduction_in_malaria_attributable_mortality_among_t",
    "label": "Expected reduction in malaria-attributable mortality among the population represented by GBD burden estimates as a result of ITN use",
    "section": "main_cea",
+   "unit": "%",
    "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * (1 + avg(insecticide_resistance_adjustment_for_pbo_nets_in_the_1st_ye, insecticide_resistance_adjustment_for_pbo_nets_in_the_2nd_ye, insecticide_resistance_adjustment_for_pbo_nets_in_the_3rd_ye)) * baseline_proportion_of_people_under_age_5_represented_by_gbd",
    "expected": 0.2673692543,
    "format": "percent"
@@ -1484,6 +1619,7 @@
    "id": "total_malaria_attributable_mortality_rate_among_1_59_month_o",
    "label": "Total malaria-attributable mortality rate among 1-59-month-olds in the absence of ITNs",
    "section": "main_cea",
+   "unit": "%",
    "formula": "total_malaria_attributable_mortality_rate_among_1_59_month_o_2 / (1 - expected_reduction_in_malaria_attributable_mortality_among_t)",
    "expected": 0.004743522627,
    "format": "percent"
@@ -1499,6 +1635,7 @@
    "id": "proportion_of_distributed_itns_that_are_used_chad_2",
    "label": "Proportion of distributed ITNs that are used (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.68011,
    "kind": "estimate",
    "source": {
@@ -1512,6 +1649,7 @@
    "id": "proportion_of_distributed_itns_that_are_used_chad",
    "label": "Proportion of distributed ITNs that are used (Chad)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "proportion_of_distributed_itns_that_are_used_chad_2",
    "expected": 0.68011,
    "format": "percent"
@@ -1546,14 +1684,16 @@
    "id": "proportion_of_target_population_sleeping_under_distributed_i",
    "label": "Proportion of target population sleeping under distributed ITNs immediately following a distribution (Chad)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "people_sleeping_under_distributed_itns_immediately_following / people_in_the_target_population_chad",
    "expected": 0.6566839889,
    "format": "percent"
   },
   {
-   "id": "chad_2",
-   "label": "-% (Chad)",
+   "id": "adjustment_for_higher_itn_use_among_people_under_age_5_chad_2",
+   "label": "Adjustment for higher ITN use among people under age 5 (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.12381,
    "kind": "estimate",
    "source": {
@@ -1564,26 +1704,29 @@
    "format": "percent"
   },
   {
-   "id": "chad",
-   "label": "-% (Chad)",
+   "id": "adjustment_for_higher_itn_use_among_people_under_age_5_chad",
+   "label": "Adjustment for higher ITN use among people under age 5 (Chad)",
    "section": "main_cea",
-   "formula": "chad_2",
+   "unit": "%",
+   "formula": "adjustment_for_higher_itn_use_among_people_under_age_5_chad_2",
    "expected": 0.12381,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_people_under_age_5_in_the_target_population_sl_2",
+   "label": "Proportion of people under age 5 in the target population sleeping under distributed ITNs immediately following a distribution (Chad)",
+   "section": "main_cea",
+   "unit": "%",
+   "formula": "proportion_of_target_population_sleeping_under_distributed_i * (1 + adjustment_for_higher_itn_use_among_people_under_age_5_chad)",
+   "expected": 0.7379880336,
    "format": "percent"
   },
   {
    "id": "proportion_of_people_under_age_5_in_the_target_population_sl",
    "label": "Proportion of people under age 5 in the target population sleeping under distributed ITNs immediately following a distribution (Chad)",
-   "section": "main_cea",
-   "formula": "proportion_of_target_population_sleeping_under_distributed_i * (1 + chad)",
-   "expected": 0.7379880336,
-   "format": "percent"
-  },
-  {
-   "id": "main_chad",
-   "label": "main (Chad)",
    "section": "coverage",
-   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl_2",
    "expected": 0.7379880336,
    "format": "percent"
   },
@@ -1591,6 +1734,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri_2",
    "label": "Average proportion of distributed ITNs remaining in use during the 1st year after an ITN distribution",
    "section": "inputs",
+   "unit": "%",
    "value": 0.85671651758,
    "kind": "estimate",
    "source": {
@@ -1604,6 +1748,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri",
    "label": "Average proportion of distributed ITNs remaining in use during the 1st year after an ITN distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "average_proportion_of_distributed_itns_remaining_in_use_duri_2",
    "expected": 0.8567165176,
    "format": "percent"
@@ -1612,7 +1757,8 @@
    "id": "proportion_of_people_under_age_5_sleeping_under_distributed",
    "label": "Proportion of people under age 5 sleeping under distributed ITNs in the 1st year following a distribution (Chad)",
    "section": "coverage",
-   "formula": "main_chad * average_proportion_of_distributed_itns_remaining_in_use_duri",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl * average_proportion_of_distributed_itns_remaining_in_use_duri",
    "expected": 0.6322465381,
    "format": "percent"
   },
@@ -1620,6 +1766,7 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu_4",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 1st year following a distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_the_full_protection_provided_by_newly_distribu",
    "expected": 0.8426859975,
    "format": "percent"
@@ -1628,6 +1775,7 @@
    "id": "effective_itn_coverage_rate_achieved_by_the_distribution_amo",
    "label": "Effective ITN coverage rate achieved by the distribution among people under age 5 in the 1st year following the distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_sleeping_under_distributed * proportion_of_the_full_protection_provided_by_newly_distribu_4",
    "expected": 0.5327853046,
    "format": "percent"
@@ -1636,14 +1784,16 @@
    "id": "proportion_of_people_under_age_5_in_the_target_population_no",
    "label": "Proportion of people under age 5 in the target population not sleeping under distributed ITNs in the 1st year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "1 - proportion_of_people_under_age_5_sleeping_under_distributed",
    "expected": 0.3677534619,
    "format": "percent"
   },
   {
-   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
    "label": "Effective ITN coverage rate among people under age 5 in the absence of a distribution",
    "section": "coverage",
+   "unit": "%",
    "value": 0.179325516,
    "kind": "estimate",
    "source": {
@@ -1658,7 +1808,8 @@
    "id": "effective_itn_coverage_rate_among_people_under_age_5_not_sle",
    "label": "Effective ITN coverage rate among people under age 5 not sleeping under distributed ITNs",
    "section": "coverage",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
    "expected": 0.179325516,
    "format": "percent"
   },
@@ -1666,31 +1817,35 @@
    "id": "effective_itn_coverage_rate_from_non_distribution_sources_am",
    "label": "Effective ITN coverage rate from non-distribution sources among people under age 5 in the 1st year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_in_the_target_population_no * effective_itn_coverage_rate_among_people_under_age_5_not_sle",
    "expected": 0.0659475793,
    "format": "percent"
   },
   {
-   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
    "label": "Effective ITN coverage rate among people under age 5 in the 1st year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "sum(effective_itn_coverage_rate_achieved_by_the_distribution_amo, effective_itn_coverage_rate_from_non_distribution_sources_am)",
    "expected": 0.5987328839,
    "format": "percent"
   },
   {
-   "id": "supp_5",
-   "label": "supp",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the",
+   "label": "Effective ITN coverage rate among people under age 5 in the 1st year following a distribution",
    "section": "main_cea",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
    "expected": 0.5987328839,
    "format": "percent"
   },
   {
-   "id": "supp_chad_10",
-   "label": "supp (Chad)",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_4",
+   "label": "Effective ITN coverage rate among people under age 5 in the absence of a distribution (Chad)",
    "section": "main_cea",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
    "expected": 0.179325516,
    "format": "percent"
   },
@@ -1698,6 +1853,7 @@
    "id": "adjustment_for_itns_from_routine_channels_disproportionally_2",
    "label": "Adjustment for ITNs from routine channels disproportionally covering very young children (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": -0.099322,
    "kind": "estimate",
    "source": {
@@ -1711,6 +1867,7 @@
    "id": "adjustment_for_itns_from_routine_channels_disproportionally",
    "label": "Adjustment for ITNs from routine channels disproportionally covering very young children",
    "section": "main_cea",
+   "unit": "%",
    "formula": "adjustment_for_itns_from_routine_channels_disproportionally_2",
    "expected": -0.099322,
    "format": "percent"
@@ -1719,6 +1876,7 @@
    "id": "adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam_2",
    "label": "Adjustment for the effect of the grant being to speed up campaigns (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -1733,23 +1891,26 @@
    "id": "adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam",
    "label": "Adjustment for the effect of the grant being to speed up campaigns",
    "section": "main_cea",
+   "unit": "%",
    "formula": "adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "ppt_4",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age_2",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 1st year following a distribution",
    "section": "main_cea",
-   "formula": "(supp_5 - supp_chad_10) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
+   "unit": "ppt",
+   "formula": "(effective_itn_coverage_rate_among_people_under_age_5_in_the - effective_itn_coverage_rate_among_people_under_age_5_in_the_4) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
    "expected": 0.3777509894,
    "format": "percent"
   },
   {
-   "id": "ppt_3",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 1st year following a distribution",
    "section": "main_cea",
-   "formula": "ppt_4",
+   "unit": "ppt",
+   "formula": "increase_in_effective_coverage_achieved_for_people_under_age_2",
    "expected": 0.3777509894,
    "format": "percent"
   },
@@ -1757,6 +1918,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th_2",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 1st year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "value": -0.06050548858,
    "kind": "estimate",
    "source": {
@@ -1771,6 +1933,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 1st year following a distribution",
    "section": "main_cea",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_distributed_itns_in_th_2",
    "expected": -0.06050548858,
    "format": "percent"
@@ -1779,15 +1942,17 @@
    "id": "expected_reduction_in_malaria_mortality_for_people_under_age_2",
    "label": "Expected reduction in malaria mortality for people under age 5 in the 1st year following a distribution",
    "section": "main_cea",
-   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * ppt_3 * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th)",
+   "unit": "%",
+   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * increase_in_effective_coverage_achieved_for_people_under_age * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th)",
    "expected": 0.2399862317,
    "format": "percent"
   },
   {
-   "id": "main_chad_2",
-   "label": "main (Chad)",
+   "id": "proportion_of_people_under_age_5_in_the_target_population_sl_3",
+   "label": "Proportion of people under age 5 in the target population sleeping under distributed ITNs immediately following a distribution (Chad)",
    "section": "coverage",
-   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl_2",
    "expected": 0.7379880336,
    "format": "percent"
   },
@@ -1795,6 +1960,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri_4",
    "label": "Average proportion of distributed ITNs remaining in use during the 2nd year after an ITN distribution",
    "section": "inputs",
+   "unit": "%",
    "value": 0.70113944148,
    "kind": "estimate",
    "source": {
@@ -1808,6 +1974,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri_3",
    "label": "Average proportion of distributed ITNs remaining in use during the 2nd year after an ITN distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "average_proportion_of_distributed_itns_remaining_in_use_duri_4",
    "expected": 0.7011394415,
    "format": "percent"
@@ -1816,7 +1983,8 @@
    "id": "proportion_of_people_under_age_5_sleeping_under_distributed_2",
    "label": "Proportion of people under age 5 sleeping under distributed ITNs in the 2nd year following a distribution (Chad)",
    "section": "coverage",
-   "formula": "main_chad_2 * average_proportion_of_distributed_itns_remaining_in_use_duri_3",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl_3 * average_proportion_of_distributed_itns_remaining_in_use_duri_3",
    "expected": 0.5174325177,
    "format": "percent"
   },
@@ -1824,6 +1992,7 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu_5",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 2nd year following a distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_the_full_protection_provided_by_newly_distribu_2",
    "expected": 0.6615466802,
    "format": "percent"
@@ -1832,6 +2001,7 @@
    "id": "effective_itn_coverage_rate_achieved_by_the_distribution_amo_2",
    "label": "Effective ITN coverage rate achieved by the distribution among people under age 5 in the 2nd year following the distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_sleeping_under_distributed_2 * proportion_of_the_full_protection_provided_by_newly_distribu_5",
    "expected": 0.3423057643,
    "format": "percent"
@@ -1840,6 +2010,7 @@
    "id": "proportion_of_people_under_age_5_in_the_target_population_no_2",
    "label": "Proportion of people under age 5 in the target population not sleeping under distributed ITNs in the 2nd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "1 - proportion_of_people_under_age_5_sleeping_under_distributed_2",
    "expected": 0.4825674823,
    "format": "percent"
@@ -1848,7 +2019,8 @@
    "id": "effective_itn_coverage_rate_among_people_under_age_5_not_sle_2",
    "label": "Effective ITN coverage rate among people under age 5 not sleeping under distributed ITNs",
    "section": "coverage",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
    "expected": 0.179325516,
    "format": "percent"
   },
@@ -1856,39 +2028,44 @@
    "id": "effective_itn_coverage_rate_from_non_distribution_sources_am_2",
    "label": "Effective ITN coverage rate from non-distribution sources among people under age 5 in the 2nd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_in_the_target_population_no_2 * effective_itn_coverage_rate_among_people_under_age_5_not_sle_2",
    "expected": 0.08653666276,
    "format": "percent"
   },
   {
-   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_6",
    "label": "Effective ITN coverage rate among people under age 5 in the 2nd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "sum(effective_itn_coverage_rate_achieved_by_the_distribution_amo_2, effective_itn_coverage_rate_from_non_distribution_sources_am_2)",
    "expected": 0.428842427,
    "format": "percent"
   },
   {
-   "id": "supp_6",
-   "label": "supp",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_5",
+   "label": "Effective ITN coverage rate among people under age 5 in the 2nd year following a distribution",
    "section": "main_cea",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_6",
    "expected": 0.428842427,
    "format": "percent"
   },
   {
-   "id": "ppt_6",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age_4",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 2nd year following the distribution",
    "section": "main_cea",
-   "formula": "(supp_6 - supp_chad_10) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
+   "unit": "ppt",
+   "formula": "(effective_itn_coverage_rate_among_people_under_age_5_in_the_5 - effective_itn_coverage_rate_among_people_under_age_5_in_the_4) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
    "expected": 0.2247343924,
    "format": "percent"
   },
   {
-   "id": "ppt_5",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age_3",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 2nd year following the distribution",
    "section": "main_cea",
-   "formula": "ppt_6",
+   "unit": "ppt",
+   "formula": "increase_in_effective_coverage_achieved_for_people_under_age_4",
    "expected": 0.2247343924,
    "format": "percent"
   },
@@ -1896,6 +2073,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th_4",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 2nd year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "value": -0.07920150614,
    "kind": "estimate",
    "source": {
@@ -1910,6 +2088,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th_3",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 2nd year following a distribution",
    "section": "main_cea",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_distributed_itns_in_th_4",
    "expected": -0.07920150614,
    "format": "percent"
@@ -1918,15 +2097,17 @@
    "id": "expected_reduction_in_malaria_mortality_for_people_under_age_3",
    "label": "Expected reduction in malaria mortality for people under age 5 in the 2nd year following a distribution",
    "section": "main_cea",
-   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * ppt_5 * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th_3)",
+   "unit": "%",
+   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * increase_in_effective_coverage_achieved_for_people_under_age_3 * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th_3)",
    "expected": 0.1399331495,
    "format": "percent"
   },
   {
-   "id": "main_chad_3",
-   "label": "main (Chad)",
+   "id": "proportion_of_people_under_age_5_in_the_target_population_sl_4",
+   "label": "Proportion of people under age 5 in the target population sleeping under distributed ITNs immediately following a distribution (Chad)",
    "section": "coverage",
-   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl_2",
    "expected": 0.7379880336,
    "format": "percent"
   },
@@ -1934,6 +2115,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri_6",
    "label": "Average proportion of distributed ITNs remaining in use during the 3rd year after an ITN distribution",
    "section": "inputs",
+   "unit": "%",
    "value": 0.56230150132,
    "kind": "estimate",
    "source": {
@@ -1947,6 +2129,7 @@
    "id": "average_proportion_of_distributed_itns_remaining_in_use_duri_5",
    "label": "Average proportion of distributed ITNs remaining in use during the 3rd year after an ITN distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "average_proportion_of_distributed_itns_remaining_in_use_duri_6",
    "expected": 0.5623015013,
    "format": "percent"
@@ -1955,7 +2138,8 @@
    "id": "proportion_of_people_under_age_5_sleeping_under_distributed_3",
    "label": "Proportion of people under age 5 sleeping under distributed ITNs in the 3rd year following a distribution (Chad)",
    "section": "coverage",
-   "formula": "main_chad_3 * average_proportion_of_distributed_itns_remaining_in_use_duri_5",
+   "unit": "%",
+   "formula": "proportion_of_people_under_age_5_in_the_target_population_sl_4 * average_proportion_of_distributed_itns_remaining_in_use_duri_5",
    "expected": 0.4149717792,
    "format": "percent"
   },
@@ -1963,6 +2147,7 @@
    "id": "proportion_of_the_full_protection_provided_by_newly_distribu_6",
    "label": "Proportion of the full protection provided by newly distributed ITNs remaining in the 3rd year following a distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_the_full_protection_provided_by_newly_distribu_3",
    "expected": 0.5034589878,
    "format": "percent"
@@ -1971,6 +2156,7 @@
    "id": "effective_itn_coverage_rate_achieved_by_the_distribution_amo_3",
    "label": "Effective ITN coverage rate achieved by the distribution among people under age 5 in the 3rd year following the distribution (Chad)",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_sleeping_under_distributed_3 * proportion_of_the_full_protection_provided_by_newly_distribu_6",
    "expected": 0.2089212719,
    "format": "percent"
@@ -1979,6 +2165,7 @@
    "id": "proportion_of_people_under_age_5_in_the_target_population_no_3",
    "label": "Proportion of people under age 5 in the target population not sleeping under distributed ITNs in the 3rd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "1 - proportion_of_people_under_age_5_sleeping_under_distributed_3",
    "expected": 0.5850282208,
    "format": "percent"
@@ -1987,7 +2174,8 @@
    "id": "effective_itn_coverage_rate_among_people_under_age_5_not_sle_3",
    "label": "Effective ITN coverage rate among people under age 5 not sleeping under distributed ITNs",
    "section": "coverage",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_2",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_3",
    "expected": 0.179325516,
    "format": "percent"
   },
@@ -1995,39 +2183,44 @@
    "id": "effective_itn_coverage_rate_from_non_distribution_sources_am_3",
    "label": "Effective ITN coverage rate from non-distribution sources among people under age 5 in the 3rd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "proportion_of_people_under_age_5_in_the_target_population_no_3 * effective_itn_coverage_rate_among_people_under_age_5_not_sle_3",
    "expected": 0.1049104875,
    "format": "percent"
   },
   {
-   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_4",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_8",
    "label": "Effective ITN coverage rate among people under age 5 in the 3rd year following a distribution",
    "section": "coverage",
+   "unit": "%",
    "formula": "sum(effective_itn_coverage_rate_achieved_by_the_distribution_amo_3, effective_itn_coverage_rate_from_non_distribution_sources_am_3)",
    "expected": 0.3138317595,
    "format": "percent"
   },
   {
-   "id": "supp_7",
-   "label": "supp",
+   "id": "effective_itn_coverage_rate_among_people_under_age_5_in_the_7",
+   "label": "Effective ITN coverage rate among people under age 5 in the 3rd year following a distribution",
    "section": "main_cea",
-   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_4",
+   "unit": "%",
+   "formula": "effective_itn_coverage_rate_among_people_under_age_5_in_the_8",
    "expected": 0.3138317595,
    "format": "percent"
   },
   {
-   "id": "ppt_8",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age_6",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 3rd year following the distribution",
    "section": "main_cea",
-   "formula": "(supp_7 - supp_chad_10) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
+   "unit": "ppt",
+   "formula": "(effective_itn_coverage_rate_among_people_under_age_5_in_the_7 - effective_itn_coverage_rate_among_people_under_age_5_in_the_4) * (1 + adjustment_for_itns_from_routine_channels_disproportionally) * (1 + adjustment_for_the_effect_of_the_grant_being_to_speed_up_cam)",
    "expected": 0.1211468144,
    "format": "percent"
   },
   {
-   "id": "ppt_7",
-   "label": "ppt",
+   "id": "increase_in_effective_coverage_achieved_for_people_under_age_5",
+   "label": "Increase in effective coverage achieved for people under age 5 in the 3rd year following the distribution",
    "section": "main_cea",
-   "formula": "ppt_8",
+   "unit": "ppt",
+   "formula": "increase_in_effective_coverage_achieved_for_people_under_age_6",
    "expected": 0.1211468144,
    "format": "percent"
   },
@@ -2035,6 +2228,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th_6",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 3rd year following a distribution",
    "section": "insecticide_resistance",
+   "unit": "%",
    "value": -0.09948883299,
    "kind": "estimate",
    "source": {
@@ -2049,6 +2243,7 @@
    "id": "insecticide_resistance_adjustment_for_distributed_itns_in_th_5",
    "label": "Insecticide resistance adjustment for distributed ITNs in the 3rd year following a distribution",
    "section": "main_cea",
+   "unit": "%",
    "formula": "insecticide_resistance_adjustment_for_distributed_itns_in_th_6",
    "expected": -0.09948883299,
    "format": "percent"
@@ -2057,7 +2252,8 @@
    "id": "expected_reduction_in_malaria_mortality_for_people_under_age_4",
    "label": "Expected reduction in malaria mortality for people under age 5 in the 3rd year following a distribution",
    "section": "main_cea",
-   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * ppt_7 * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th_5)",
+   "unit": "%",
+   "formula": "expected_reduction_in_malaria_mortality_for_people_under_age * increase_in_effective_coverage_achieved_for_people_under_age_5 * (1 + insecticide_resistance_adjustment_for_distributed_itns_in_th_5)",
    "expected": 0.07377132265,
    "format": "percent"
   },
@@ -2065,6 +2261,7 @@
    "id": "expected_annual_reduction_in_malaria_mortality_for_people_un",
    "label": "Expected annual reduction in malaria mortality for people under age 5 in the 3-year period following a distribution",
    "section": "main_cea",
+   "unit": "%",
    "formula": "avg(expected_reduction_in_malaria_mortality_for_people_under_age_2, expected_reduction_in_malaria_mortality_for_people_under_age_3, expected_reduction_in_malaria_mortality_for_people_under_age_4)",
    "expected": 0.1512302346,
    "format": "percent"
@@ -2077,9 +2274,10 @@
    "expected": 46775.89394
   },
   {
-   "id": "malaria",
-   "label": "Malaria",
+   "id": "chad_both_all_ages_malaria_2021",
+   "label": "Chad, Both, All ages, Malaria, 2021",
    "section": "gbd_estimates",
+   "unit": "Deaths",
    "value": 8798.15584,
    "kind": "estimate",
    "source": {
@@ -2093,7 +2291,7 @@
    "id": "total_malaria_deaths_per_year_across_all_age_groups_accordin_2",
    "label": "Total malaria deaths per year across all age groups according to GBD",
    "section": "inputs",
-   "formula": "malaria",
+   "formula": "chad_both_all_ages_malaria_2021",
    "expected": 8798.15584
   },
   {
@@ -2104,9 +2302,10 @@
    "expected": 8798.15584
   },
   {
-   "id": "malaria_val",
-   "label": "Malaria (val)",
+   "id": "chad_both_5_years_malaria_2021",
+   "label": "Chad, Both, <5 years, Malaria, 2021",
    "section": "gbd_estimates",
+   "unit": "Deaths",
    "value": 5530.91313080975,
    "kind": "estimate",
    "source": {
@@ -2120,7 +2319,7 @@
    "id": "malaria_deaths_among_people_under_age_5_per_year_according_t_2",
    "label": "Malaria deaths among people under age 5 per year according to GBD",
    "section": "inputs",
-   "formula": "malaria_val",
+   "formula": "chad_both_5_years_malaria_2021",
    "expected": 5530.913131
   },
   {
@@ -2138,7 +2337,7 @@
    "expected": 3267.242709
   },
   {
-   "id": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_2",
+   "id": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_3",
    "label": "Malaria deaths among people age 5 and older per malaria death among people under age 5 according to GBD 2021 (Chad)",
    "section": "malaria_mortality",
    "formula": "malaria_deaths_among_people_age_5_and_older_according_to_gbd / malaria_deaths_among_people_under_age_5_per_year_according_t",
@@ -2148,6 +2347,7 @@
    "id": "weight_placed_on_gbd_2023_s_location_specific_estimates_of_m_2",
    "label": "Weight placed on GBD 2023's location-specific estimates of malaria mortality for people age 5 and older (-%)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.5,
    "kind": "estimate",
    "source": {
@@ -2161,6 +2361,7 @@
    "id": "weight_placed_on_gbd_2023_s_location_specific_estimates_of_m",
    "label": "Weight placed on GBD 2023's location-specific estimates of malaria mortality for people age 5 and older (-%)",
    "section": "malaria_mortality",
+   "unit": "%",
    "formula": "weight_placed_on_gbd_2023_s_location_specific_estimates_of_m_2",
    "expected": 0.5,
    "format": "percent"
@@ -2188,6 +2389,7 @@
    "id": "weight_placed_on_gbd_2023_s_global_estimates_of_malaria_mort_2",
    "label": "Weight placed on GBD 2023's global estimates of malaria mortality for people age 5 and older (-%)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.25,
    "kind": "estimate",
    "source": {
@@ -2201,6 +2403,7 @@
    "id": "weight_placed_on_gbd_2023_s_global_estimates_of_malaria_mort",
    "label": "Weight placed on GBD 2023's global estimates of malaria mortality for people age 5 and older (-%)",
    "section": "malaria_mortality",
+   "unit": "%",
    "formula": "weight_placed_on_gbd_2023_s_global_estimates_of_malaria_mort_2",
    "expected": 0.25,
    "format": "percent"
@@ -2228,6 +2431,7 @@
    "id": "weight_placed_on_who_s_estimates_of_malaria_mortality_for_pe_2",
    "label": "Weight placed on WHO's estimates of malaria mortality for people age 5 and older (-%)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.25,
    "kind": "estimate",
    "source": {
@@ -2241,28 +2445,30 @@
    "id": "weight_placed_on_who_s_estimates_of_malaria_mortality_for_pe",
    "label": "Weight placed on WHO's estimates of malaria mortality for people age 5 and older (-%)",
    "section": "malaria_mortality",
+   "unit": "%",
    "formula": "weight_placed_on_who_s_estimates_of_malaria_mortality_for_pe_2",
    "expected": 0.25,
    "format": "percent"
   },
   {
-   "id": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat",
+   "id": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_2",
    "label": "Malaria deaths among people age 5 and older per malaria death among people under age 5 (Chad)",
    "section": "malaria_mortality",
-   "formula": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_2 * weight_placed_on_gbd_2023_s_location_specific_estimates_of_m + global_malaria_deaths_among_people_age_5_and_older_per_malar * weight_placed_on_gbd_2023_s_global_estimates_of_malaria_mort + global_malaria_deaths_among_people_age_5_and_older_per_malar_3 * weight_placed_on_who_s_estimates_of_malaria_mortality_for_pe",
+   "formula": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_3 * weight_placed_on_gbd_2023_s_location_specific_estimates_of_m + global_malaria_deaths_among_people_age_5_and_older_per_malar * weight_placed_on_gbd_2023_s_global_estimates_of_malaria_mort + global_malaria_deaths_among_people_age_5_and_older_per_malar_3 * weight_placed_on_who_s_estimates_of_malaria_mortality_for_pe",
    "expected": 0.5342043305
   },
   {
-   "id": "supp_8",
-   "label": "supp",
+   "id": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat",
+   "label": "Malaria deaths among people age 5 and older per malaria death among people under age 5",
    "section": "main_cea",
-   "formula": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat",
+   "formula": "malaria_deaths_among_people_age_5_and_older_per_malaria_deat_2",
    "expected": 0.5342043305
   },
   {
    "id": "relative_efficacy_of_itns_for_reducing_mortality_of_people_a_2",
    "label": "Relative efficacy of ITNs for reducing mortality of people age 5 and older",
    "section": "inputs",
+   "unit": "%",
    "value": 1.0,
    "kind": "estimate",
    "source": {
@@ -2276,6 +2482,7 @@
    "id": "relative_efficacy_of_itns_for_reducing_mortality_of_people_a",
    "label": "Relative efficacy of ITNs for reducing mortality of people age 5 and older",
    "section": "main_cea",
+   "unit": "%",
    "formula": "relative_efficacy_of_itns_for_reducing_mortality_of_people_a_2",
    "expected": 1.0,
    "format": "percent"
@@ -2284,7 +2491,7 @@
    "id": "total_deaths_averted_among_people_age_5_and_older_2",
    "label": "Total deaths averted among people age 5 and older",
    "section": "main_cea",
-   "formula": "total_deaths_averted_among_people_under_age_5 * supp_8 * relative_efficacy_of_itns_for_reducing_mortality_of_people_a",
+   "formula": "total_deaths_averted_among_people_under_age_5 * malaria_deaths_among_people_age_5_and_older_per_malaria_deat * relative_efficacy_of_itns_for_reducing_mortality_of_people_a",
    "expected": 24987.88511
   },
   {
@@ -2298,6 +2505,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_3",
    "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "inputs",
+   "unit": "UoV",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -2311,6 +2519,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
    "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_3",
    "expected": 73.1914
   },
@@ -2318,6 +2527,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a",
    "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
    "expected": 73.1914
   },
@@ -2325,6 +2535,7 @@
    "id": "units_of_value_from_5_and_over_deaths_averted_before_final_a",
    "label": "Units of value from 5-and-over deaths averted (before final adjustments)",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "total_deaths_averted_among_people_age_5_and_older * value_assigned_to_averting_a_malaria_attributable_death_of_a",
    "expected": 1828898.294
   },
@@ -2339,6 +2550,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_6",
    "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "inputs",
+   "unit": "UoV",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -2352,6 +2564,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_5",
    "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_6",
    "expected": 116.25262
   },
@@ -2359,6 +2572,7 @@
    "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_4",
    "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_5",
    "expected": 116.25262
   },
@@ -2366,6 +2580,7 @@
    "id": "units_of_value_from_under_5_deaths_averted_before_final_adju",
    "label": "Units of value from under-5 deaths averted (before final adjustments)",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "total_deaths_averted_among_people_under_age_5_2 * value_assigned_to_averting_a_malaria_attributable_death_of_a_4",
    "expected": 5437820.223
   },
@@ -2373,34 +2588,38 @@
    "id": "adjustment_to_account_for_mortalities_averted_among_people_a",
    "label": "Adjustment to account for mortalities averted among people age 5 and older (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "units_of_value_from_5_and_over_deaths_averted_before_final_a / units_of_value_from_under_5_deaths_averted_before_final_adju",
    "expected": 0.3363293046,
    "format": "percent"
   },
   {
-   "id": "per_100k_2",
-   "label": "per 100k",
+   "id": "malaria_incidence_among_people_under_age_5_2",
+   "label": "Malaria incidence among people under age 5",
    "section": "inputs",
-   "value": 22099.69987,
-   "kind": "estimate",
+   "unit": "per 100k",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
     "cell": "Inputs!I170"
    },
-   "explainer": "See here for our estimated malaria incidence for Chad: https://docs.google.com/spreadsheets/d/1M8oDu73Yce2dxgyjPLvlDVpL-E7p1sof1nuhBQ3f2Co/edit#gid=430906804&range=45:45"
+   "explainer": "See here for our estimated malaria incidence for Chad: https://docs.google.com/spreadsheets/d/1M8oDu73Yce2dxgyjPLvlDVpL-E7p1sof1nuhBQ3f2Co/edit#gid=430906804&range=45:45",
+   "formula": "@givewell.malaria_incidence_among_people_under_age_5",
+   "expected": 22099.69987
   },
   {
-   "id": "per_100k",
-   "label": "per 100k",
+   "id": "malaria_incidence_among_people_under_age_5",
+   "label": "Malaria incidence among people under age 5",
    "section": "main_cea",
-   "formula": "per_100k_2",
+   "unit": "per 100k",
+   "formula": "malaria_incidence_among_people_under_age_5_2",
    "expected": 22099.69987
   },
   {
    "id": "expected_reduction_in_malaria_incidence_among_the_population",
    "label": "Expected reduction in malaria incidence among the population represented by GBD burden estimates as a result of ITN use",
    "section": "main_cea",
+   "unit": "%",
    "formula": "expected_reduction_in_malaria_attributable_mortality_among_t / ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 0.2673692543,
    "format": "percent"
@@ -2409,6 +2628,7 @@
    "id": "adjustment_for_malaria_incidence_in_targeted_subnational_are_2",
    "label": "Adjustment for malaria incidence in targeted subnational areas (DRC)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2422,6 +2642,7 @@
    "id": "adjustment_for_malaria_incidence_in_targeted_subnational_are",
    "label": "Adjustment for malaria incidence in targeted subnational areas (DRC)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "adjustment_for_malaria_incidence_in_targeted_subnational_are_2",
    "expected": 0.0,
    "format": "percent"
@@ -2430,7 +2651,8 @@
    "id": "malaria_incidence_among_people_under_age_5_in_the_absence_of",
    "label": "Malaria incidence among people under age 5 in the absence of a distribution",
    "section": "main_cea",
-   "formula": "per_100k / 100000 / (1 - expected_reduction_in_malaria_incidence_among_the_population) * (1 + adjustment_for_malaria_incidence_in_targeted_subnational_are)",
+   "unit": "%",
+   "formula": "malaria_incidence_among_people_under_age_5 / 100000 / (1 - expected_reduction_in_malaria_incidence_among_the_population) * (1 + adjustment_for_malaria_incidence_in_targeted_subnational_are)",
    "expected": 0.3016485453,
    "format": "percent"
   },
@@ -2445,6 +2667,7 @@
    "id": "reduction_in_malaria_incidence_among_people_under_age_5",
    "label": "Reduction in malaria incidence among people under age 5",
    "section": "main_cea",
+   "unit": "%",
    "formula": "avg(expected_reduction_in_malaria_mortality_for_people_under_age_2, expected_reduction_in_malaria_mortality_for_people_under_age_3, expected_reduction_in_malaria_mortality_for_people_under_age_4) / ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 0.1512302346,
    "format": "percent"
@@ -2457,22 +2680,22 @@
    "expected": 2974557.407
   },
   {
-   "id": "r_5_14_years",
-   "label": "5-14 years",
+   "id": "population_chad_both_5_14_years_2021",
+   "label": "Population, Chad, Both, 5-14 years, 2021",
    "section": "gbd_estimates",
-   "value": 5379381.70123979,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
     "cell": "GBD estimates!H456"
-   }
+   },
+   "formula": "@givewell_chad.population_chad_both_5_14_years_2021",
+   "expected": 5379381.70123979
   },
   {
    "id": "population_age_5_14_chad_2",
    "label": "Population age 5-14 (Chad)",
    "section": "inputs",
-   "formula": "r_5_14_years",
+   "formula": "population_chad_both_5_14_years_2021",
    "expected": 5379381.701
   },
   {
@@ -2498,30 +2721,33 @@
    "expected": 32160859.06
   },
   {
-   "id": "per_100k_4",
-   "label": "per 100k",
+   "id": "malaria_incidence_among_people_age_5_to_14_2",
+   "label": "Malaria incidence among people age 5 to 14",
    "section": "inputs",
-   "value": 22099.69987,
-   "kind": "estimate",
+   "unit": "per 100k",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
     "cell": "Inputs!I171"
    },
-   "explainer": "See here for our estimated malaria incidence for Chad: https://docs.google.com/spreadsheets/d/1M8oDu73Yce2dxgyjPLvlDVpL-E7p1sof1nuhBQ3f2Co/edit#gid=430906804&range=45:45"
+   "explainer": "See here for our estimated malaria incidence for Chad: https://docs.google.com/spreadsheets/d/1M8oDu73Yce2dxgyjPLvlDVpL-E7p1sof1nuhBQ3f2Co/edit#gid=430906804&range=45:45",
+   "formula": "@givewell.malaria_incidence_among_people_age_5_to_14",
+   "expected": 22099.69987
   },
   {
-   "id": "per_100k_3",
-   "label": "per 100k",
+   "id": "malaria_incidence_among_people_age_5_to_14",
+   "label": "Malaria incidence among people age 5 to 14",
    "section": "main_cea",
-   "formula": "per_100k_4",
+   "unit": "per 100k",
+   "formula": "malaria_incidence_among_people_age_5_to_14_2",
    "expected": 22099.69987
   },
   {
    "id": "malaria_incidence_among_people_age_5_to_14_in_the_absence_of",
    "label": "Malaria incidence among people age 5 to 14 in the absence of a distribution",
    "section": "main_cea",
-   "formula": "per_100k_3 / 100000 / (1 - expected_reduction_in_malaria_incidence_among_the_population) * (1 + adjustment_for_malaria_incidence_in_targeted_subnational_are)",
+   "unit": "%",
+   "formula": "malaria_incidence_among_people_age_5_to_14 / 100000 / (1 - expected_reduction_in_malaria_incidence_among_the_population) * (1 + adjustment_for_malaria_incidence_in_targeted_subnational_are)",
    "expected": 0.3016485453,
    "format": "percent"
   },
@@ -2536,6 +2762,7 @@
    "id": "reduction_in_malaria_incidence_among_people_age_5_to_14",
    "label": "Reduction in malaria incidence among people age 5 to 14",
    "section": "main_cea",
+   "unit": "%",
    "formula": "avg(expected_reduction_in_malaria_mortality_for_people_under_age_2, expected_reduction_in_malaria_mortality_for_people_under_age_3, expected_reduction_in_malaria_mortality_for_people_under_age_4) / ratio_of_the_reduction_in_malaria_mortality_to_the_reduction * relative_efficacy_of_itns_for_reducing_mortality_of_people_a",
    "expected": 0.1512302346,
    "format": "percent"
@@ -2555,8 +2782,8 @@
    "expected": 7375936.303
   },
   {
-   "id": "ln_2",
-   "label": "ln($)",
+   "id": "present_value_of_individual_lifetime_benefits_per_malaria_ca",
+   "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
    "section": "main_cea",
    "value": 0.08054428131,
    "kind": "estimate",
@@ -2587,16 +2814,17 @@
    "expected": 2.0
   },
   {
-   "id": "ln",
-   "label": "ln($)",
+   "id": "present_value_of_total_lifetime_benefits_per_malaria_case_av",
+   "label": "Present value of total lifetime benefits per malaria case averted among people under age 15",
    "section": "main_cea",
-   "formula": "ln_2 * multiplier_for_resource_sharing_within_households",
+   "formula": "present_value_of_individual_lifetime_benefits_per_malaria_ca * multiplier_for_resource_sharing_within_households",
    "expected": 0.1610885626
   },
   {
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",
    "label": "Value assigned to doubling consumption for one person for one year",
    "section": "inputs",
+   "unit": "UoV",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -2610,6 +2838,7 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "inputs",
+   "unit": "UoV",
    "formula": "value_assigned_to_doubling_consumption_for_one_person_for_on / ln(2)",
    "expected": 1.442695041
   },
@@ -2617,6 +2846,7 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "expected": 1.442695041
   },
@@ -2624,13 +2854,15 @@
    "id": "value_of_increased_income_through_averting_a_case_of_malaria",
    "label": "Value of increased income through averting a case of malaria in a person under age 15",
    "section": "main_cea",
-   "formula": "ln * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "unit": "UoV",
+   "formula": "present_value_of_total_lifetime_benefits_per_malaria_case_av * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 0.2324016704
   },
   {
    "id": "units_of_value_from_long_term_income_increases_before_final",
    "label": "Units of value from long-term income increases (before final adjustments)",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "total_malaria_cases_averted_among_people_under_age_15 * value_of_increased_income_through_averting_a_case_of_malaria",
    "expected": 1714179.918
   },
@@ -2638,6 +2870,7 @@
    "id": "adjustment_to_account_for_developmental_benefits_long_term_i",
    "label": "Adjustment to account for developmental benefits (long-term income increases) (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "units_of_value_from_long_term_income_increases_before_final / sum(units_of_value_from_under_5_deaths_averted_before_final_adju, units_of_value_from_5_and_over_deaths_averted_before_final_a)",
    "expected": 0.2358946358,
    "format": "percent"
@@ -2646,6 +2879,7 @@
    "id": "mortalities_averted_for_people_age_five_and_older_chad",
    "label": "Mortalities averted for people age five and older (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "adjustment_to_account_for_mortalities_averted_among_people_a / ((1 + adjustment_to_account_for_mortalities_averted_among_people_a) * (1 + adjustment_to_account_for_developmental_benefits_long_term_i))",
    "expected": 0.2036431329,
    "format": "percent"
@@ -2654,6 +2888,7 @@
    "id": "developmental_benefits_long_term_income_increases_chad",
    "label": "Developmental benefits (long-term income increases) (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "adjustment_to_account_for_developmental_benefits_long_term_i / (1 + adjustment_to_account_for_developmental_benefits_long_term_i)",
    "expected": 0.1908695361,
    "format": "percent"
@@ -2662,6 +2897,7 @@
    "id": "mortalities_averted_for_people_under_age_five_chad",
    "label": "Mortalities averted for people under age five (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "1 - sum(mortalities_averted_for_people_age_five_and_older_chad, developmental_benefits_long_term_income_increases_chad)",
    "expected": 0.605487331,
    "format": "percent"
@@ -2670,6 +2906,7 @@
    "id": "malaria_morbidity_2",
    "label": "Malaria morbidity",
    "section": "inputs",
+   "unit": "%",
    "value": 0.09,
    "kind": "estimate",
    "source": {
@@ -2683,6 +2920,7 @@
    "id": "malaria_morbidity",
    "label": "Malaria morbidity",
    "section": "main_cea",
+   "unit": "%",
    "formula": "malaria_morbidity_2",
    "expected": 0.09,
    "format": "percent"
@@ -2691,6 +2929,7 @@
    "id": "short_term_anemia_effects_2",
    "label": "Short-term anemia effects",
    "section": "inputs",
+   "unit": "%",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -2704,6 +2943,7 @@
    "id": "short_term_anemia_effects",
    "label": "Short-term anemia effects",
    "section": "main_cea",
+   "unit": "%",
    "formula": "short_term_anemia_effects_2",
    "expected": 0.09,
    "format": "percent"
@@ -2712,6 +2952,7 @@
    "id": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow_2",
    "label": "Prevention of diseases other than malaria (e.g. dengue, yellow fever, zika, encephalitis)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.02,
    "kind": "estimate",
    "source": {
@@ -2725,6 +2966,7 @@
    "id": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow",
    "label": "Prevention of diseases other than malaria (e.g. dengue, yellow fever, zika, encephalitis)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow_2",
    "expected": 0.02,
    "format": "percent"
@@ -2733,6 +2975,7 @@
    "id": "prevention_of_stillbirths_2",
    "label": "Prevention of stillbirths",
    "section": "inputs",
+   "unit": "%",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ud2BUyRTxOMK2DgI8XM0SeDQLjv7snCacluPpkoaB-0/edit",
@@ -2746,6 +2989,7 @@
    "id": "prevention_of_stillbirths",
    "label": "Prevention of stillbirths",
    "section": "main_cea",
+   "unit": "%",
    "formula": "prevention_of_stillbirths_2",
    "expected": 0.09,
    "format": "percent"
@@ -2754,6 +2998,7 @@
    "id": "investment_of_income_increases_2",
    "label": "Investment of income increases",
    "section": "inputs",
+   "unit": "%",
    "value": 0.025,
    "kind": "estimate",
    "source": {
@@ -2767,6 +3012,7 @@
    "id": "investment_of_income_increases",
    "label": "Investment of income increases",
    "section": "main_cea",
+   "unit": "%",
    "formula": "investment_of_income_increases_2",
    "expected": 0.025,
    "format": "percent"
@@ -2775,6 +3021,7 @@
    "id": "treatment_costs_averted_from_prevention_2",
    "label": "Treatment costs averted from prevention",
    "section": "inputs",
+   "unit": "%",
    "value": 0.2,
    "kind": "estimate",
    "source": {
@@ -2788,6 +3035,7 @@
    "id": "treatment_costs_averted_from_prevention",
    "label": "Treatment costs averted from prevention",
    "section": "main_cea",
+   "unit": "%",
    "formula": "treatment_costs_averted_from_prevention_2",
    "expected": 0.2,
    "format": "percent"
@@ -2796,6 +3044,7 @@
    "id": "rebound_effects_decreased_immunity_development_2",
    "label": "Rebound effects / decreased immunity development",
    "section": "inputs",
+   "unit": "%",
    "value": -0.04,
    "kind": "estimate",
    "source": {
@@ -2809,6 +3058,7 @@
    "id": "rebound_effects_decreased_immunity_development",
    "label": "Rebound effects / decreased immunity development",
    "section": "main_cea",
+   "unit": "%",
    "formula": "rebound_effects_decreased_immunity_development_2",
    "expected": -0.04,
    "format": "percent"
@@ -2817,6 +3067,7 @@
    "id": "subnational_adjustments_2",
    "label": "Subnational adjustments",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2830,6 +3081,7 @@
    "id": "subnational_adjustments",
    "label": "Subnational adjustments",
    "section": "main_cea",
+   "unit": "%",
    "formula": "subnational_adjustments_2",
    "expected": 0.0,
    "format": "percent"
@@ -2838,6 +3090,7 @@
    "id": "mosquito_insecticide_resistance_in_trials_underlying_our_est_2",
    "label": "Mosquito insecticide resistance in trials underlying our estimates",
    "section": "inputs",
+   "unit": "%",
    "value": 0.05,
    "kind": "estimate",
    "source": {
@@ -2851,6 +3104,7 @@
    "id": "mosquito_insecticide_resistance_in_trials_underlying_our_est",
    "label": "Mosquito insecticide resistance in trials underlying our estimates",
    "section": "main_cea",
+   "unit": "%",
    "formula": "mosquito_insecticide_resistance_in_trials_underlying_our_est_2",
    "expected": 0.05,
    "format": "percent"
@@ -2859,6 +3113,7 @@
    "id": "differences_in_mosquito_species_2",
    "label": "Differences in mosquito species",
    "section": "inputs",
+   "unit": "%",
    "value": -0.02,
    "kind": "estimate",
    "source": {
@@ -2872,6 +3127,7 @@
    "id": "differences_in_mosquito_species",
    "label": "Differences in mosquito species",
    "section": "main_cea",
+   "unit": "%",
    "formula": "differences_in_mosquito_species_2",
    "expected": -0.02,
    "format": "percent"
@@ -2880,6 +3136,7 @@
    "id": "marginal_funding_going_to_lower_priority_areas_2",
    "label": "Marginal funding going to lower priority areas",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2894,6 +3151,7 @@
    "id": "marginal_funding_going_to_lower_priority_areas",
    "label": "Marginal funding going to lower priority areas",
    "section": "main_cea",
+   "unit": "%",
    "formula": "marginal_funding_going_to_lower_priority_areas_2",
    "expected": 0.0,
    "format": "percent"
@@ -2902,6 +3160,7 @@
    "id": "total_supplemental_intervention_level_adjustment",
    "label": "Total supplemental intervention-level adjustment",
    "section": "main_cea",
+   "unit": "%",
    "formula": "sum(malaria_morbidity, short_term_anemia_effects, prevention_of_diseases_other_than_malaria_e_g_dengue_yellow, prevention_of_stillbirths, investment_of_income_increases, treatment_costs_averted_from_prevention, rebound_effects_decreased_immunity_development, subnational_adjustments, mosquito_insecticide_resistance_in_trials_underlying_our_est, differences_in_mosquito_species, marginal_funding_going_to_lower_priority_areas)",
    "expected": 0.505,
    "format": "percent"
@@ -2910,6 +3169,7 @@
    "id": "adjustment_for_additional_program_benefits_and_downsides_cha",
    "label": "Adjustment for additional program benefits and downsides (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "total_supplemental_intervention_level_adjustment",
    "expected": 0.505,
    "format": "percent"
@@ -2918,6 +3178,7 @@
    "id": "double_treatment_2",
    "label": "Double treatment",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2931,6 +3192,7 @@
    "id": "double_treatment",
    "label": "Double treatment",
    "section": "main_cea",
+   "unit": "%",
    "formula": "double_treatment_2",
    "expected": 0.0,
    "format": "percent"
@@ -2939,6 +3201,7 @@
    "id": "ineffective_goods_2",
    "label": "Ineffective goods",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2952,6 +3215,7 @@
    "id": "ineffective_goods",
    "label": "Ineffective goods",
    "section": "main_cea",
+   "unit": "%",
    "formula": "ineffective_goods_2",
    "expected": 0.0,
    "format": "percent"
@@ -2960,6 +3224,7 @@
    "id": "change_of_priorities_2",
    "label": "Change of priorities",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2973,6 +3238,7 @@
    "id": "change_of_priorities",
    "label": "Change of priorities",
    "section": "main_cea",
+   "unit": "%",
    "formula": "change_of_priorities_2",
    "expected": 0.0,
    "format": "percent"
@@ -2981,6 +3247,7 @@
    "id": "non_funding_bottlenecks_2",
    "label": "Non-funding bottlenecks",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -2994,6 +3261,7 @@
    "id": "non_funding_bottlenecks",
    "label": "Non-funding bottlenecks",
    "section": "main_cea",
+   "unit": "%",
    "formula": "non_funding_bottlenecks_2",
    "expected": 0.0,
    "format": "percent"
@@ -3002,6 +3270,7 @@
    "id": "within_org_fungibility_2",
    "label": "Within-org fungibility",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3015,6 +3284,7 @@
    "id": "within_org_fungibility",
    "label": "Within-org fungibility",
    "section": "main_cea",
+   "unit": "%",
    "formula": "within_org_fungibility_2",
    "expected": 0.0,
    "format": "percent"
@@ -3023,6 +3293,7 @@
    "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
    "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3036,6 +3307,7 @@
    "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d",
    "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "main_cea",
+   "unit": "%",
    "formula": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
    "expected": 0.0,
    "format": "percent"
@@ -3044,6 +3316,7 @@
    "id": "incomplete_or_unrepresentative_monitoring_results_2",
    "label": "Incomplete or unrepresentative monitoring results",
    "section": "inputs",
+   "unit": "%",
    "value": -0.02,
    "kind": "estimate",
    "source": {
@@ -3057,6 +3330,7 @@
    "id": "incomplete_or_unrepresentative_monitoring_results",
    "label": "Incomplete or unrepresentative monitoring results",
    "section": "main_cea",
+   "unit": "%",
    "formula": "incomplete_or_unrepresentative_monitoring_results_2",
    "expected": -0.02,
    "format": "percent"
@@ -3065,6 +3339,7 @@
    "id": "biased_monitoring_results_2",
    "label": "Biased monitoring results",
    "section": "inputs",
+   "unit": "%",
    "value": -0.02,
    "kind": "estimate",
    "source": {
@@ -3078,6 +3353,7 @@
    "id": "biased_monitoring_results",
    "label": "Biased monitoring results",
    "section": "main_cea",
+   "unit": "%",
    "formula": "biased_monitoring_results_2",
    "expected": -0.02,
    "format": "percent"
@@ -3086,6 +3362,7 @@
    "id": "total_supplemental_grantee_level_adjustment",
    "label": "Total supplemental grantee-level adjustment",
    "section": "main_cea",
+   "unit": "%",
    "formula": "sum(double_treatment, ineffective_goods, change_of_priorities, non_funding_bottlenecks, within_org_fungibility, goods_purchased_and_left_in_storage_until_they_expire_cash_d, incomplete_or_unrepresentative_monitoring_results, biased_monitoring_results)",
    "expected": -0.04,
    "format": "percent"
@@ -3094,6 +3371,7 @@
    "id": "adjustment_for_grantee_level_factors_chad",
    "label": "Adjustment for grantee-level factors (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "total_supplemental_grantee_level_adjustment",
    "expected": -0.04,
    "format": "percent"
@@ -3102,6 +3380,7 @@
    "id": "percentage_of_total_costs_covered_by_domestic_governments_ch_2",
    "label": "Percentage of total costs covered by domestic governments (Chad)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.042597,
    "kind": "estimate",
    "source": {
@@ -3115,38 +3394,43 @@
    "id": "percentage_of_total_costs_covered_by_domestic_governments_ch",
    "label": "Percentage of total costs covered by domestic governments (Chad)",
    "section": "main_cea",
+   "unit": "%",
    "formula": "percentage_of_total_costs_covered_by_domestic_governments_ch_2",
    "expected": 0.042597,
    "format": "percent"
   },
   {
-   "id": "total_spending_contributed_by_domestic_governments_chad",
+   "id": "total_spending_contributed_by_domestic_governments_chad_2",
    "label": "Total spending contributed by domestic governments (Chad)",
    "section": "main_cea",
+   "unit": "$",
    "formula": "percentage_of_total_costs_covered_by_domestic_governments_ch * total_spending_by_all_contributors_chad",
    "expected": 12279857.07,
    "format": "usd"
   },
   {
-   "id": "main_chad_4",
-   "label": "main (Chad)",
+   "id": "total_spending_contributed_by_domestic_governments_chad",
+   "label": "Total spending contributed by domestic governments (Chad)",
    "section": "leveragefunging",
-   "formula": "total_spending_contributed_by_domestic_governments_chad",
+   "unit": "$",
+   "formula": "total_spending_contributed_by_domestic_governments_chad_2",
    "expected": 12279857.07,
    "format": "usd"
   },
   {
-   "id": "main_chad_5",
-   "label": "main (Chad)",
+   "id": "total_spending_contributed_by_other_philanthropic_actors_cha_2",
+   "label": "Total spending contributed by other philanthropic actors (Chad)",
    "section": "leveragefunging",
+   "unit": "$",
    "formula": "total_spending_contributed_by_other_philanthropic_actors_cha",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "main_chad_6",
-   "label": "main (Chad)",
+   "id": "total_spending_causally_upstream_of_donations_to_grantee_cha_2",
+   "label": "Total spending causally upstream of donations to grantee (Chad)",
    "section": "leveragefunging",
+   "unit": "$",
    "formula": "total_spending_causally_upstream_of_donations_to_grantee_cha",
    "expected": 276000000.0,
    "format": "usd"
@@ -3155,7 +3439,8 @@
    "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre",
    "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Chad)",
    "section": "leveragefunging",
-   "formula": "main_chad_5 / main_chad_6",
+   "unit": "%",
+   "formula": "total_spending_contributed_by_other_philanthropic_actors_cha_2 / total_spending_causally_upstream_of_donations_to_grantee_cha_2",
    "expected": 0.0,
    "format": "percent"
   },
@@ -3163,7 +3448,8 @@
    "id": "amount_of_spending_domestic_governments_would_shift_away_fro",
    "label": "Amount of spending domestic governments would shift away from the grantee program",
    "section": "leveragefunging",
-   "formula": "main_chad_4 * (1 - scenario_3_other_upstream_costs_would_stay_the_same_downstre)",
+   "unit": "$",
+   "formula": "total_spending_contributed_by_domestic_governments_chad * (1 - scenario_3_other_upstream_costs_would_stay_the_same_downstre)",
    "expected": 12279857.07,
    "format": "usd"
   },
@@ -3171,6 +3457,7 @@
    "id": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
    "label": "Counterfactual value per dollar spent by domestic governments on malaria programs",
    "section": "inputs",
+   "unit": "UoV",
    "value": 0.005057,
    "kind": "estimate",
    "source": {
@@ -3183,6 +3470,7 @@
    "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
    "label": "Counterfactual value per dollar spent by domestic governments on malaria programs",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
    "expected": 0.005057
   },
@@ -3190,6 +3478,7 @@
    "id": "value_generated_by_shifting_spending_toward_programs_domesti",
    "label": "Value generated by shifting spending toward programs domestic governments would otherwise have supported",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_domestic_governments_would_shift_away_fro * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 62099.23721
   },
@@ -3197,6 +3486,7 @@
    "id": "value_lost_by_shifting_government_spending_away_from_the_gra",
    "label": "Value lost by shifting government spending away from the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3209,6 +3499,7 @@
    "id": "net_value_generated_by_shifting_government_spending_away_fro",
    "label": "Net value generated by shifting government spending away from the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "value_generated_by_shifting_spending_toward_programs_domesti - value_lost_by_shifting_government_spending_away_from_the_gra",
    "expected": 62099.23721
   },
@@ -3216,6 +3507,7 @@
    "id": "change_in_value_generated_by_the_grantee_program_if_this_sce",
    "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "-net_value_generated_by_shifting_government_spending_away_fro",
    "expected": -62099.23721
   },
@@ -3223,6 +3515,7 @@
    "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_3",
    "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3236,6 +3529,7 @@
    "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
    "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_3",
    "expected": 0.0,
    "format": "percent"
@@ -3244,6 +3538,7 @@
    "id": "probability_of_this_scenario_representing_the_true_counterfa",
    "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
    "expected": 0.0,
    "format": "percent"
@@ -3252,6 +3547,7 @@
    "id": "expected_change_in_value_generated_by_the_program",
    "label": "Expected change in value generated by the program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce * probability_of_this_scenario_representing_the_true_counterfa",
    "expected": 0.0
   },
@@ -3259,7 +3555,8 @@
    "id": "amount_of_spending_domestic_governments_would_shift_away_fro_2",
    "label": "Amount of spending domestic governments would shift away from the grantee program",
    "section": "leveragefunging",
-   "formula": "main_chad_4",
+   "unit": "$",
+   "formula": "total_spending_contributed_by_domestic_governments_chad",
    "expected": 12279857.07,
    "format": "usd"
   },
@@ -3267,6 +3564,7 @@
    "id": "value_generated_by_shifting_spending_to_programs_domestic_go",
    "label": "Value generated by shifting spending to programs domestic governments would otherwise have funded",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_domestic_governments_would_shift_away_fro_2 * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 62099.23721
   },
@@ -3274,6 +3572,7 @@
    "id": "value_lost_by_shifting_government_spending_away_from_the_gra_2",
    "label": "Value lost by shifting government spending away from the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3286,6 +3585,7 @@
    "id": "net_value_generated_by_shifting_government_spending_away_fro_2",
    "label": "Net value generated by shifting government spending away from the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "value_generated_by_shifting_spending_to_programs_domestic_go - value_lost_by_shifting_government_spending_away_from_the_gra_2",
    "expected": 62099.23721
   },
@@ -3293,6 +3593,7 @@
    "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_2",
    "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "-net_value_generated_by_shifting_government_spending_away_fro_2",
    "expected": -62099.23721
   },
@@ -3300,6 +3601,7 @@
    "id": "scenario_1_domestic_governments_would_replace_philanthropic_2",
    "label": "Scenario 1: Domestic governments would replace philanthropic costs",
    "section": "inputs",
+   "unit": "%",
    "value": 0.0,
    "kind": "estimate",
    "source": {
@@ -3313,6 +3615,7 @@
    "id": "scenario_1_domestic_governments_would_replace_philanthropic",
    "label": "Scenario 1: Domestic governments would replace philanthropic costs (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_1_domestic_governments_would_replace_philanthropic_2",
    "expected": 0.0,
    "format": "percent"
@@ -3321,6 +3624,7 @@
    "id": "scenario_2_global_fund_and_or_pmi_would_replace_philanthropi_2",
    "label": "Scenario 2: Global Fund and/or PMI would replace philanthropic costs",
    "section": "inputs",
+   "unit": "%",
    "value": 0.25,
    "kind": "estimate",
    "source": {
@@ -3334,6 +3638,7 @@
    "id": "scenario_2_global_fund_and_or_pmi_would_replace_philanthropi",
    "label": "Scenario 2: Global Fund and/or PMI would replace philanthropic costs (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_2_global_fund_and_or_pmi_would_replace_philanthropi_2",
    "expected": 0.25,
    "format": "percent"
@@ -3342,6 +3647,7 @@
    "id": "scenario_4_distributions_would_go_unfunded_chad",
    "label": "Scenario 4: Distributions would go unfunded (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "1 - sum(scenario_1_domestic_governments_would_replace_philanthropic, scenario_2_global_fund_and_or_pmi_would_replace_philanthropi, scenario_3_other_upstream_costs_would_stay_the_same_downstre_2)",
    "expected": 0.75,
    "format": "percent"
@@ -3350,6 +3656,7 @@
    "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
    "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_4_distributions_would_go_unfunded_chad",
    "expected": 0.75,
    "format": "percent"
@@ -3358,6 +3665,7 @@
    "id": "expected_change_in_value_generated_by_the_program_2",
    "label": "Expected change in value generated by the program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_2 * probability_of_this_scenario_representing_the_true_counterfa_2",
    "expected": -46574.42791
   },
@@ -3365,13 +3673,15 @@
    "id": "change_in_value_generated_as_a_result_of_crowding_funding_in",
    "label": "Change in value generated as a result of crowding funding into the program (leverage)",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "sum(expected_change_in_value_generated_by_the_program, expected_change_in_value_generated_by_the_program_2)",
    "expected": -46574.42791
   },
   {
-   "id": "main_chad_7",
-   "label": "main (Chad)",
+   "id": "total_spending_contributed_by_grantee_chad_2",
+   "label": "Total spending contributed by grantee (Chad)",
    "section": "leveragefunging",
+   "unit": "$",
    "formula": "total_spending_contributed_by_grantee_chad",
    "expected": 276000000.0,
    "format": "usd"
@@ -3380,6 +3690,7 @@
    "id": "total_units_of_value_from_all_outcomes_before_final_adjustme",
    "label": "Total units of value from all outcomes (before final adjustments)",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "sum(units_of_value_from_under_5_deaths_averted_before_final_adju, units_of_value_from_5_and_over_deaths_averted_before_final_a, units_of_value_from_long_term_income_increases_before_final)",
    "expected": 8980898.435
   },
@@ -3387,36 +3698,41 @@
    "id": "total_spending_contributed_by_grantee",
    "label": "Total spending contributed by grantee",
    "section": "main_cea",
+   "unit": "$",
    "formula": "total_spending_contributed_by_grantee_chad",
    "expected": 276000000.0,
    "format": "usd"
   },
   {
-   "id": "units_of_value_generated_per_dollar_spent_before_final_adjus",
+   "id": "units_of_value_generated_per_dollar_spent_before_final_adjus_2",
    "label": "Units of value generated per dollar spent (before final adjustments)",
    "section": "main_cea",
+   "unit": "UoV",
    "formula": "total_units_of_value_from_all_outcomes_before_final_adjustme / total_spending_contributed_by_grantee",
    "expected": 0.03253948708
   },
   {
-   "id": "main_chad_8",
-   "label": "main (Chad)",
+   "id": "units_of_value_generated_per_dollar_spent_before_final_adjus",
+   "label": "Units of value generated per dollar spent (before final adjustments) (Chad)",
    "section": "leveragefunging",
-   "formula": "units_of_value_generated_per_dollar_spent_before_final_adjus",
+   "unit": "UoV",
+   "formula": "units_of_value_generated_per_dollar_spent_before_final_adjus_2",
    "expected": 0.03253948708
   },
   {
-   "id": "main_chad_9",
-   "label": "main (Chad)",
+   "id": "total_supplemental_grantee_level_adjustment_chad",
+   "label": "Total supplemental grantee-level adjustment (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "total_supplemental_grantee_level_adjustment",
    "expected": -0.04,
    "format": "percent"
   },
   {
-   "id": "main_chad_10",
-   "label": "main (Chad)",
+   "id": "total_supplemental_intervention_level_adjustment_chad",
+   "label": "Total supplemental intervention-level adjustment (Chad)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "total_supplemental_intervention_level_adjustment",
    "expected": 0.505,
    "format": "percent"
@@ -3425,20 +3741,23 @@
    "id": "units_of_value_generated_per_dollar_donated_to_grantee_after",
    "label": "Units of value generated per dollar donated to grantee (after supplemental adjustments) (Chad)",
    "section": "leveragefunging",
-   "formula": "main_chad_8 * (1 + main_chad_9) * (1 + main_chad_10)",
+   "unit": "UoV",
+   "formula": "units_of_value_generated_per_dollar_spent_before_final_adjus * (1 + total_supplemental_grantee_level_adjustment_chad) * (1 + total_supplemental_intervention_level_adjustment_chad)",
    "expected": 0.04701305094
   },
   {
    "id": "total_value_generated_by_grantee_spending_before_adjusting_f",
    "label": "Total value generated by grantee spending before adjusting for leverage and funging",
    "section": "leveragefunging",
-   "formula": "main_chad_7 * units_of_value_generated_per_dollar_donated_to_grantee_after",
+   "unit": "UoV",
+   "formula": "total_spending_contributed_by_grantee_chad_2 * units_of_value_generated_per_dollar_donated_to_grantee_after",
    "expected": 12975602.06
   },
   {
    "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
    "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "change_in_value_generated_as_a_result_of_crowding_funding_in / total_value_generated_by_grantee_spending_before_adjusting_f",
    "expected": -0.003589384731,
    "format": "percent"
@@ -3447,6 +3766,7 @@
    "id": "adjustment_for_leverage_chad",
    "label": "Adjustment for leverage (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "adjustment_for_the_possibility_of_crowding_funding_into_the",
    "expected": -0.003589384731,
    "format": "percent"
@@ -3455,7 +3775,8 @@
    "id": "amount_of_spending_domestic_governments_would_shift_to_the_g",
    "label": "Amount of spending domestic governments would shift to the grantee program",
    "section": "leveragefunging",
-   "formula": "main_chad_7",
+   "unit": "$",
+   "formula": "total_spending_contributed_by_grantee_chad_2",
    "expected": 276000000.0,
    "format": "usd"
   },
@@ -3463,6 +3784,7 @@
    "id": "value_generated_by_shifting_government_spending_to_the_grant",
    "label": "Value generated by shifting government spending to the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * units_of_value_generated_per_dollar_donated_to_grantee_after",
    "expected": 12975602.06
   },
@@ -3470,6 +3792,7 @@
    "id": "value_lost_by_shifting_spending_away_from_programs_domestic",
    "label": "Value lost by shifting spending away from programs domestic governments would otherwise have funded",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 1395732.0
   },
@@ -3477,6 +3800,7 @@
    "id": "net_value_generated_by_shifting_government_spending_to_the_g",
    "label": "Net value generated by shifting government spending to the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "value_generated_by_shifting_government_spending_to_the_grant - value_lost_by_shifting_spending_away_from_programs_domestic",
    "expected": 11579870.06
   },
@@ -3484,6 +3808,7 @@
    "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_3",
    "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "-net_value_generated_by_shifting_government_spending_to_the_g",
    "expected": -11579870.06
   },
@@ -3491,6 +3816,7 @@
    "id": "probability_of_this_scenario_representing_the_true_counterfa_3",
    "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_1_domestic_governments_would_replace_philanthropic",
    "expected": 0.0,
    "format": "percent"
@@ -3499,6 +3825,7 @@
    "id": "expected_change_in_value_generated_by_the_grantee_program",
    "label": "Expected change in value generated by the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_3 * probability_of_this_scenario_representing_the_true_counterfa_3",
    "expected": 0.0
   },
@@ -3506,7 +3833,8 @@
    "id": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to",
    "label": "Amount of spending the Global Fund and/or PMI would shift to the grantee program",
    "section": "leveragefunging",
-   "formula": "main_chad_7",
+   "unit": "$",
+   "formula": "total_spending_contributed_by_grantee_chad_2",
    "expected": 276000000.0,
    "format": "usd"
   },
@@ -3514,6 +3842,7 @@
    "id": "value_generated_by_shifting_global_fund_and_or_pmi_spending",
    "label": "Value generated by shifting Global Fund and/or PMI spending to the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * units_of_value_generated_per_dollar_donated_to_grantee_after",
    "expected": 12975602.06
   },
@@ -3521,6 +3850,7 @@
    "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
    "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "inputs",
+   "unit": "UoV",
    "value": 0.015433,
    "kind": "estimate",
    "source": {
@@ -3533,6 +3863,7 @@
    "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
    "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
    "expected": 0.015433
   },
@@ -3540,6 +3871,7 @@
    "id": "value_lost_by_shifting_spending_away_from_programs_the_globa",
    "label": "Value lost by shifting spending away from programs the Global Fund and/or PMI would otherwise have funded",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * counterfactual_value_per_dollar_spent_by_the_global_fund_or",
    "expected": 4259508.0
   },
@@ -3547,6 +3879,7 @@
    "id": "net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
    "label": "Net value generated by shifting Global Fund and/or PMI spending to the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "value_generated_by_shifting_global_fund_and_or_pmi_spending - value_lost_by_shifting_spending_away_from_programs_the_globa",
    "expected": 8716094.059
   },
@@ -3554,6 +3887,7 @@
    "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_4",
    "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "-net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
    "expected": -8716094.059
   },
@@ -3561,6 +3895,7 @@
    "id": "probability_of_this_scenario_representing_the_true_counterfa_4",
    "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "scenario_2_global_fund_and_or_pmi_would_replace_philanthropi",
    "expected": 0.25,
    "format": "percent"
@@ -3569,6 +3904,7 @@
    "id": "expected_change_in_value_generated_by_the_grantee_program_2",
    "label": "Expected change in value generated by the grantee program",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_4 * probability_of_this_scenario_representing_the_true_counterfa_4",
    "expected": -2179023.515
   },
@@ -3576,6 +3912,7 @@
    "id": "change_in_value_generated_as_a_result_of_crowding_funding_ou",
    "label": "Change in value generated as a result of crowding funding out of the program (funging)",
    "section": "leveragefunging",
+   "unit": "UoV",
    "formula": "sum(expected_change_in_value_generated_by_the_grantee_program, expected_change_in_value_generated_by_the_grantee_program_2)",
    "expected": -2179023.515
   },
@@ -3583,6 +3920,7 @@
    "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
    "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
    "section": "leveragefunging",
+   "unit": "%",
    "formula": "change_in_value_generated_as_a_result_of_crowding_funding_ou / total_value_generated_by_grantee_spending_before_adjusting_f",
    "expected": -0.167932363,
    "format": "percent"
@@ -3591,15 +3929,16 @@
    "id": "adjustment_for_funging_chad",
    "label": "Adjustment for funging (Chad)",
    "section": "simple_cea",
+   "unit": "%",
    "formula": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
    "expected": -0.167932363,
    "format": "percent"
   },
   {
-   "id": "xbenchmark_chad",
-   "label": "xbenchmark (Chad)",
+   "id": "final_cost_effectiveness_in_terms_of_multiples_of_our_benchm",
+   "label": "Final cost-effectiveness in terms of multiples of our benchmark (Chad)",
    "section": "simple_cea",
-   "formula": "xbenchmark_chad_2 / mortalities_averted_for_people_under_age_five_chad * (1 + adjustment_for_additional_program_benefits_and_downsides_cha) * (1 + adjustment_for_grantee_level_factors_chad) * (1 + sum(adjustment_for_leverage_chad, adjustment_for_funging_chad))",
+   "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_our_benc / mortalities_averted_for_people_under_age_five_chad * (1 + adjustment_for_additional_program_benefits_and_downsides_cha) * (1 + adjustment_for_grantee_level_factors_chad) * (1 + sum(adjustment_for_leverage_chad, adjustment_for_funging_chad))",
    "expected": 11.69648357
   },
   {
@@ -3618,7 +3957,7 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "xbenchmark_chad * cash_benchmark"
+   "formula": "final_cost_effectiveness_in_terms_of_multiples_of_our_benchm * cash_benchmark"
   }
  ],
  "output": {

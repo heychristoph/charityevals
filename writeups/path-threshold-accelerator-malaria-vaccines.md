@@ -11,7 +11,7 @@ This page reproduces the evaluator's own spreadsheet. Its moral weights, discoun
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Threshold CEA: PATH Accelerator Grant for Malaria Vaccines [January 2025]](/path) | GW | January 2024 | 3.9× GiveDirectly (GW: 10× cash) | 144, 1 kept fixed |
+| [Threshold CEA: PATH Accelerator Grant for Malaria Vaccines [January 2025]](/path) | GW | January 2024 | 3.9× GiveDirectly (GW: 10× cash) | 145, 1 kept fixed |
 | [PMC RTSS Threshold BOTEC, 2023](/path/path-pmc-rtss-threshold-2023) | GW | February 2023 | 4.2× GiveDirectly (GW: 11× cash) | 94, 2 kept fixed |
 | [PMC DRC pilot grant cost-effectiveness analysis](/path/path-pmc-drc-pilot) | GW | November 2022 | 9.2× GiveDirectly (GW: 24× cash) | 139, 21 kept fixed |
 | [RTS,S for pilot comparison areas CEA - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | GW | January 2022 | 5.3× GiveDirectly (GW: 14× cash) | 225, 17 kept fixed |

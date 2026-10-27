@@ -22,7 +22,6 @@
    "count_salary_sacrifice": 0,
    "full_credit": 0,
    "uov_per_daly": 2.3,
-   "discount_rate": 0.04,
    "uov_per_ln_consumption": 1.0
   }
  },
@@ -155,8 +154,8 @@
    "format": "percent"
   },
   {
-   "id": "temporal_uncertainty_givewell_2020",
-   "label": "Temporal uncertainty (GiveWell 2020)",
+   "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
+   "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
    "section": "moral_weights",
    "value": 0.014,
    "kind": "estimate",
@@ -197,7 +196,7 @@
    "id": "overall_discount_rate_givewell_2020",
    "label": "Overall discount rate (GiveWell 2020)",
    "section": "moral_weights",
-   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
+   "formula": "sum(improving_circumstances_over_time_givewell_2020, compounding_non_monetary_benefits_givewell_2020, derived_value_assignments_temporal_uncertainty_givewell_2020, pure_time_preference_donors_givewell_2020, pure_time_preference_program_participants_givewell_2020)",
    "expected": 0.04,
    "format": "percent"
   },
@@ -210,13 +209,12 @@
    "format": "percent"
   },
   {
-   "id": "discount_rate_preferred",
-   "label": "Discount rate (Preferred)",
+   "id": "cognitive_benefits_in_children_discount_rate_preferred",
+   "label": "Cognitive benefits in children: Discount rate (Preferred)",
    "section": "iron_fortification",
-   "formula": "$discount_rate",
+   "formula": "overall_discount_rate_active",
    "expected": 0.04,
-   "format": "percent",
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
+   "format": "percent"
   },
   {
    "id": "mean_number_of_years_between_supplementation_and_initial_con",
@@ -403,7 +401,7 @@
    "id": "present_value_of_lifetime_benefits_preferred",
    "label": "Present value of lifetime benefits (Preferred)",
    "section": "iron_fortification",
-   "formula": "pv(discount_rate_preferred, mean_number_of_years_between_supplementation_and_initial_con + median_duration_of_consumption_benefits_preferred, -mean_increase_in_annual_ln_consumption_preferred) - pv(discount_rate_preferred, mean_number_of_years_between_supplementation_and_initial_con, -mean_increase_in_annual_ln_consumption_preferred)",
+   "formula": "pv(cognitive_benefits_in_children_discount_rate_preferred, mean_number_of_years_between_supplementation_and_initial_con + median_duration_of_consumption_benefits_preferred, -mean_increase_in_annual_ln_consumption_preferred) - pv(cognitive_benefits_in_children_discount_rate_preferred, mean_number_of_years_between_supplementation_and_initial_con, -mean_increase_in_annual_ln_consumption_preferred)",
    "expected": 0.0007123116448
   },
   {
