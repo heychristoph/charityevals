@@ -23,6 +23,7 @@ import openpyxl
 p = argparse.ArgumentParser()
 p.add_argument("xlsx")
 p.add_argument("--id", required=True)
+p.add_argument("--charity", default=None, help="charity id; defaults to --id")
 p.add_argument("--name", required=True)
 p.add_argument("--website")
 p.add_argument("--donate")
@@ -294,8 +295,7 @@ sections += [{"id": "bottom", "title": "Bottom line", "explainer": f"{a.unit_lab
              {"id": "donor", "title": "Your dollar's share", "explainer": "charityevals adjustments on top of ACE's model."}]
 names = ", ".join(t for *_, t in programs)
 model = {
-    "id": a.id, "name": a.name, "kind": "charity", "cause": "animal-welfare",
-    "org": {k: v for k, v in {"name": a.name, "website": a.website, "donate": a.donate, "donate_via": a.donate_via}.items() if v},
+    "id": a.id, "name": a.name, "kind": "charity", "cause": "animal-welfare", "charity": a.charity or a.id, "owner": "ace",
     "summary": (f"{a.what} A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet "
                 f"({len(programs)} program{'s' if len(programs) > 1 else ''} with {a.unit_label} estimates: {names}).").strip(),
     "source": {"publisher": "Animal Charity Evaluators", "title": f"{a.name} review", "url": a.review, "sheet": a.sheet_url,
@@ -306,6 +306,10 @@ model = {
     "evaluator": {"name": "ACE", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+cpath = Path("charities") / f"{a.charity or a.id}.json"
+crec = json.loads(cpath.read_text()) if cpath.exists() else {"id": a.charity or a.id, "name": a.name, "cause": "animal-welfare"}
+crec.update({k: v for k, v in {"website": a.website, "donate": a.donate, "donate_via": a.donate_via}.items() if v})
+cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
 # carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
 _prev = out / f"{a.id}.json"
 if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])

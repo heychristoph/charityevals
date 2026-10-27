@@ -9,7 +9,10 @@ exchange rates live in one file, and visitors can change them in the browser to 
 ## Layout
 
 ```
-models/<cause>/<id>.json     one model per charity (or variant); its page is /<id>
+charities/<id>.json          a charity: name, website, donate link; its page is /<id>
+owners.json                  who makes models: GiveWell, ACE, HLI, charityevals
+models/<cause>/<id>.json     a model of one charity by one owner (several per charity allowed),
+                             or a country/program variant of one
 writeups/<id>.md             one-page evaluation shown on the charity's page
 assumptions/default.json     moral weights, exchange rates, accounting toggles, units
 brand/final/                 logo masters (colour, black, white, symbol); brand/concepts/ holds earlier rounds
@@ -31,6 +34,10 @@ A model is an ordered list of rows. Input rows have a `value` (a number or `{low
 a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over other row ids and
 `$assumptions`, e.g. `y1_uov_per_person * people_reached` or `y1_ln_gain * $uov_per_ln_consumption`.
 
+- **Charities and owners:** each model names its `charity` and its `owner`. A charity can have
+  models from several owners (AMF has GiveWell's and HLI's); the rankings show one row per
+  charity with a dot per owner, placed at their geometric mean, and the charity page has a tab
+  per owner. The first owner in `owners.json` with a model is the charity's main page.
 - **Inheritance:** `"extends": "givedirectly"` copies every row of the parent; the child lists only
   the rows it changes. See `models/global-health/givedirectly-malawi.json`.
 - **Reproduction:** `expected` on a row holds the value the original spreadsheet shows.

@@ -1,5 +1,5 @@
 import { parse, refs, evaluate, type Node, type Scope } from "./expr";
-import { Model, Row, Assumptions, Facts, type ModelFile, type RowPatch, type Range } from "./schema";
+import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
 
 export type ResolvedRow = Row & {
   /** Id of the model this row was first defined in, when that isn't this model. */
@@ -12,7 +12,9 @@ export type ResolvedRow = Row & {
   factDeps: string[];
 };
 
-export type ResolvedModel = Omit<ModelFile, "rows"> & {
+export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
+  charity: string;
+  owner: string;
   rows: ResolvedRow[];
   byId: Map<string, ResolvedRow>;
   /** Row ids in an order where every row comes after the rows its formula uses. */
@@ -25,6 +27,8 @@ export type FactRow = Row & { key: string; group: string };
 
 export type Library = {
   models: Map<string, ResolvedModel>;
+  charities: Map<string, Charity>;
+  owners: Map<string, Owner>;
   assumptions: Assumptions;
   facts: Map<string, FactRow>;
   errors: string[];
@@ -37,8 +41,28 @@ export const RESERVED_IDS = new Set(["assumptions", "method", "facts", "history"
  * evaluator: the source evaluator's model as published (where we have one). */
 export type View = "charityevals" | "evaluator";
 
-export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawFacts: unknown[] = []): Library {
+export function buildLibrary(
+  rawModels: unknown[],
+  rawAssumptions: unknown,
+  rawFacts: unknown[] = [],
+  rawCharities: unknown[] = [],
+  rawOwners: unknown[] = [],
+): Library {
   const errors: string[] = [];
+  const parseAll = <T,>(raws: unknown[], schema: { safeParse: (x: unknown) => { success: boolean; data?: T; error?: { issues: { path: PropertyKey[]; message: string }[] } } }, what: string) => {
+    const out = new Map<string, T>();
+    for (const raw of raws) {
+      const r = schema.safeParse(raw);
+      const id = (raw as { id?: string })?.id ?? "?";
+      if (!r.success) { errors.push(`${what} ${id}: ${r.error!.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`); continue; }
+      if (out.has(id)) errors.push(`${what} ${id}: duplicate id`);
+      out.set(id, r.data as T);
+    }
+    return out;
+  };
+  const charities = parseAll<Charity>(rawCharities, Charity, "charity");
+  const owners = parseAll<Owner>(rawOwners, Owner, "owner");
+  for (const c of charities.values()) if (RESERVED_IDS.has(c.id)) errors.push(`charity ${c.id}: id is taken by a site page`);
   const facts = new Map<string, FactRow>();
   for (const raw of rawFacts) {
     const parsed = Facts.safeParse(raw);
@@ -54,7 +78,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
   const assumptionsParsed = Assumptions.safeParse(rawAssumptions);
   if (!assumptionsParsed.success) {
     errors.push(`assumptions: ${assumptionsParsed.error.message}`);
-    return { models: new Map(), assumptions: { groups: [], rows: [], units: {}, common: { unit: "", benchmark: "", benchmark_label: "" } }, facts, errors };
+    return { models: new Map(), charities, owners, assumptions: { groups: [], rows: [], units: {}, common: { unit: "", benchmark: "", benchmark_label: "" } }, facts, errors };
   }
   const assumptions = assumptionsParsed.data;
   const assumptionIds = new Set(assumptions.rows.map((r) => r.id));
@@ -77,7 +101,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
       continue;
     }
     if (files.has(parsed.data.id)) errors.push(`${parsed.data.id}: duplicate model id`);
-    if (RESERVED_IDS.has(parsed.data.id)) errors.push(`${parsed.data.id}: id is taken by a site page`);
+    if (parsed.data.id === "history") errors.push(`${parsed.data.id}: id is taken by a site page`);
     for (const a of Object.keys(parsed.data.evaluator?.assumptions ?? {}))
       if (!assumptionIds.has(a)) errors.push(`${parsed.data.id}: evaluator pins unknown assumption $${a}`);
     files.set(parsed.data.id, parsed.data);
@@ -163,7 +187,8 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
       summary: file.summary ?? parent?.summary,
       resources: [...(parent?.resources ?? []), ...file.resources].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i),
       source: file.source ?? parent?.source,
-      org: file.org ?? parent?.org,
+      charity: file.charity ?? parent?.charity ?? "",
+      owner: file.owner ?? parent?.owner ?? "",
       sections,
       output,
       evaluator: file.evaluator ?? parent?.evaluator,
@@ -172,6 +197,12 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
       order: topoOrder(id, resolved, byId, errors),
       chain: [id, ...(parent?.chain ?? [])],
     };
+    if (rawCharities.length) {
+      if (!model.charity) errors.push(`${id}: no charity`);
+      else if (!charities.has(model.charity)) errors.push(`${id}: unknown charity ${model.charity}`);
+      if (!model.owner) errors.push(`${id}: no owner`);
+      else if (!owners.has(model.owner)) errors.push(`${id}: unknown owner ${model.owner}`);
+    }
     resolving.delete(id);
     models.set(id, model);
     return model;
@@ -179,7 +210,7 @@ export function buildLibrary(rawModels: unknown[], rawAssumptions: unknown, rawF
 
   for (const id of files.keys()) resolve(id);
   if (!models.has(assumptions.common.benchmark)) errors.push(`assumptions: benchmark model ${assumptions.common.benchmark} doesn't exist`);
-  return { models, assumptions, facts, errors };
+  return { models, charities, owners, assumptions, facts, errors };
 }
 
 function topoOrder(id: string, rows: ResolvedRow[], byId: Map<string, ResolvedRow>, errors: string[]): string[] {
@@ -285,6 +316,14 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
     for (const [id] of Object.entries(m.evaluator.assumptions))
       if (lib.assumptions.rows.find((r) => r.id === id)?.format === "toggle") used.delete(id);
   return [...used];
+}
+
+/** A charity's main models (not variants), one per owner, in the owners' order. */
+export function modelsOf(lib: Library, charity: string): ResolvedModel[] {
+  const order = [...lib.owners.keys()];
+  return [...lib.models.values()]
+    .filter((m) => m.charity === charity && m.kind === "charity" && m.output)
+    .sort((a, b) => order.indexOf(a.owner) - order.indexOf(b.owner));
 }
 
 /** Shared facts this model reads. */

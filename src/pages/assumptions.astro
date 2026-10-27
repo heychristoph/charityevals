@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
-import { lib } from "../lib/data";
+import { lib, modelUrl } from "../lib/data";
 import { formatValue } from "../lib/format";
 
 const groups = new Map<string, typeof lib.facts extends Map<string, infer F> ? F[] : never>();
@@ -35,7 +35,7 @@ const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.so
                   <span class="small muted fact-meta">
                     {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
                     {" · used by "}
-                    {usedBy(f.key).map((m, i) => <>{i > 0 && ", "}<a href={`/${m.id}`}>{m.name}</a></>)}
+                    {usedBy(f.key).map((m, i) => <>{i > 0 && ", "}<a href={modelUrl(lib, m)}>{m.name}</a></>)}
                     {" · "}<code>@{f.key}</code>
                   </span>
                 </th>

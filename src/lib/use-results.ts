@@ -1,6 +1,7 @@
 import { useMemo } from "react";
-import { lib, ranked } from "./data";
-import { assumptionValues, bottomLine, comparable, type ResolvedModel, type View } from "../engine/model";
+import { lib, ranked, rankedCharities } from "./data";
+import { assumptionValues, bottomLine, comparable, modelsOf, type ResolvedModel, type View } from "../engine/model";
+import type { Charity } from "../engine/schema";
 import { sensitivity, flags, rankFlips, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides, useView } from "./assumption-state";
 
@@ -16,6 +17,19 @@ export type Result = {
   /** The view this result was computed in: a model without an evaluator falls back to ours. */
   view: View;
 };
+
+/** A charity on the rankings: every evaluator's model of it, and where the row sits. */
+export type CharityResult = {
+  charity: Charity;
+  models: Result[];
+  /** Geometric mean of the evaluators' central estimates: the row's position. */
+  central: number;
+  /** Lowest joint low and highest joint high across evaluators. */
+  low: number;
+  high: number;
+};
+
+const geomean = (xs: number[]) => Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length);
 
 export function useAssumptionValues() {
   const overrides = useOverrides();
@@ -55,25 +69,19 @@ export function useResults() {
   const av = useAssumptionValues();
   const view = useView();
   return useMemo(() => {
-    const benchModel = lib.models.get(lib.assumptions.common.benchmark)!;
-    const viewOf = (m: ResolvedModel): View => (view === "evaluator" && m.evaluator ? "evaluator" : "charityevals");
-    const bench = bottomLine(lib, benchModel, av, {}, viewOf(benchModel)).common;
-    const results: Result[] = ranked.map((m) => {
-      const v = viewOf(m);
-      const s = sensitivity(lib, m, av, v);
+    const results: CharityResult[] = rankedCharities.map((c) => {
+      const models = modelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => resultOf(m, av, view));
+      const positive = models.map((r) => r.central).filter((x) => x > 0);
       return {
-        model: m,
-        view: v,
-        native: bottomLine(lib, m, av, {}, v).native,
-        central: s.central / bench,
-        low: s.jointLow / bench,
-        high: s.jointHigh / bench,
-        s,
-        flags: flags(m, s),
+        charity: c,
+        models,
+        central: positive.length ? geomean(positive) : 0,
+        low: Math.min(...models.map((r) => r.low)),
+        high: Math.max(...models.map((r) => r.high)),
       };
     });
     results.sort((a, b) => b.central - a.central);
     const flips = view === "evaluator" ? [] : rankFlips(lib, ranked.map((m) => m.id), av);
-    return { av, bench, results, flips, view };
+    return { av, results, flips, view };
   }, [av, view]);
 }

@@ -24,6 +24,7 @@ from openpyxl.utils import column_index_from_string, get_column_letter
 p = argparse.ArgumentParser()
 p.add_argument("xlsx")
 p.add_argument("--id", required=True)
+p.add_argument("--charity", required=True, help="charity id (charities/<id>.json); several models can share one")
 p.add_argument("--name", required=True)
 p.add_argument("--org", default=None)
 p.add_argument("--website", default=None)
@@ -353,8 +354,7 @@ secs = [s for s in base.sections if any(r.get("section") == s["id"] for r in bas
 summary = a.summary or (f"{a.what} A re-implementation of GiveWell's model. GiveWell models {len(cols)} locations; "
                         f"this page shows {cols[a.base_col]}, the median location by cost-effectiveness. The others are listed below.").strip()
 model = {
-    "id": a.id, "name": a.name, "kind": "charity", "cause": "global-health",
-    "org": {k: v for k, v in {"name": a.org or a.name, "website": a.website, "donate": a.donate, "donate_via": a.donate_via}.items() if v},
+    "id": a.id, "name": a.name, "kind": "charity", "cause": "global-health", "charity": a.charity, "owner": "givewell",
     "summary": summary,
     "source": {"publisher": "GiveWell", "title": a.title, "url": a.page_url, "sheet": a.sheet_url,
                "published": a.published, "retrieved": "2026-10-26", "license": "CC BY-NC-SA 3.0 US"},
@@ -365,6 +365,11 @@ model = {
                                                       "life_value_multiplier": 1, "uov_per_ln_consumption": 1.4426950408889634}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+# the charity record: created if missing, its contact details updated from the arguments
+cpath = Path("charities") / f"{a.charity}.json"
+crec = json.loads(cpath.read_text()) if cpath.exists() else {"id": a.charity, "name": a.org or a.name, "cause": "global-health"}
+crec.update({k: v for k, v in {"website": a.website, "donate": a.donate, "donate_via": a.donate_via}.items() if v})
+cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
 # carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
 _prev = out / f"{a.id}.json"
 if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])

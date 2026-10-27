@@ -1,15 +1,20 @@
 ---
+// One model's page. /<charity> shows the charity's main model; /<charity>/<model> any other
+// (another evaluator's model, or a country variant).
 import Base from "../layouts/Base.astro";
-import ModelView from "../components/ModelView.tsx";
-import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
-import VariantList from "../components/VariantList.tsx";
-import { lib, rankable } from "../lib/data";
+import ModelView from "./ModelView.tsx";
+import AssumptionsPanel from "./AssumptionsPanel.tsx";
+import VariantList from "./VariantList.tsx";
+import { lib, rankable, modelUrl, historyUrl } from "../lib/data";
+import { modelsOf } from "../engine/model";
 
-export function getStaticPaths() {
-  return rankable.map((m) => ({ params: { id: m.id } }));
+interface Props {
+  modelId: string;
 }
-
-const model = lib.models.get(Astro.params.id!)!;
+const model = lib.models.get(Astro.props.modelId)!;
+const charity = lib.charities.get(model.charity)!;
+const owner = lib.owners.get(model.owner)!;
+const siblings = modelsOf(lib, charity.id);
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
 // Variants share their parent's write-up unless they have their own.
 const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
@@ -25,31 +30,43 @@ const RES_GROUPS = [
   ["charity", "From the charity"],
   ["other", "Other sources"],
 ] as const;
-const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: (model.resources ?? []).filter((r) => r.type === type) })).filter((g) => g.items.length);
+const allResources = [...(charity.resources ?? []), ...(model.resources ?? [])].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
+const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
-<Base title={model.name} description={model.summary} active="rankings">
+<Base title={siblings.length > 1 || model.kind === "variant" ? `${model.name} (${owner.short})` : charity.name} description={model.summary ?? charity.summary} active="rankings">
   <div class="page layout" style={`--cause: var(--cause-${model.cause})`}>
     <div class="main">
-      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[model.cause]}</nav>
+      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
-        <h1>{model.name}</h1>
+        <h1>{charity.name}</h1>
+        {siblings.length > 1 && (
+          <nav class="owners" aria-label="Models of this charity">
+            <span class="small muted">Models:</span>
+            {siblings.map((m) => {
+              const o = lib.owners.get(m.owner)!;
+              const here = m.id === model.id || m.id === model.extends;
+              return <a href={modelUrl(lib, m)} aria-current={here ? "page" : undefined} class:list={["owner-tab", { here }]}>{o.name}</a>;
+            })}
+          </nav>
+        )}
+        <p class="model-name"><strong>{model.name}</strong> <span class="muted">· model by <a href={owner.url}>{owner.name}</a></span></p>
         {model.summary && <p class="dek">{model.summary}</p>}
-        {model.org?.donate && (
+        {charity.donate && (
           <div class="donate">
-            <a class="donate-button" href={model.org.donate} rel="noopener">Donate to {model.org.name}{model.org.donate_via && ` via ${model.org.donate_via}`}<span aria-hidden="true"> ↗</span></a>
+            <a class="donate-button" href={charity.donate} rel="noopener">Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
             <span class="small muted">
-              {model.org.donate_via
-                ? `Goes to ${model.org.donate_via}'s donation form, where you can direct your gift to ${model.org.name}.`
-                : `Goes to ${model.org.name}'s own donation page.`} charityevals takes nothing and isn't paid for listings.
+              {charity.donate_via
+                ? `Goes to ${charity.donate_via}'s donation form, where you can direct your gift to ${charity.name}.`
+                : `Goes to ${charity.name}'s own donation page.`} charityevals takes nothing and isn't paid for listings.
             </span>
           </div>
         )}
         <dl class="m-meta small">
-          {model.org?.website && (
-            <div><dt>Organisation</dt><dd><a href={model.org.website}>{model.org.name}</a></dd></div>
+          {charity.website && (
+            <div><dt>Organisation</dt><dd><a href={charity.website}>{charity.name}</a></dd></div>
           )}
           {model.source && (
             <div>
@@ -62,17 +79,17 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           )}
           {model.source?.published && <div><dt>Published</dt><dd>{fmtDate(model.source.published)}, retrieved {fmtDate(model.source.retrieved)}</dd></div>}
           {model.source?.license && <div><dt>Licence</dt><dd>{model.source.license}</dd></div>}
-          {parent && <div><dt>Extends</dt><dd><a href={`/${parent.id}`}>{parent.name}</a>: inherits every row and overrides a few</dd></div>}
+          {parent && <div><dt>Extends</dt><dd><a href={modelUrl(lib, parent)}>{parent.name}</a>: inherits every row and overrides a few</dd></div>}
 
           <div>
             <dt>Model file</dt>
-            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/models/${model.cause}/${model.id}.json`}>{model.id}.json</a> · <a href={`/${model.id}/history`}>change history</a></dd>
+            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/models/${model.cause}/${model.id}.json`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
           </div>
         </dl>
       </header>
       {family.length > 1 && (
         <details class="family" open={family.length <= 8}>
-          <summary>{family.length} countries and programs in {root.source?.publisher ?? "the"} model</summary>
+          <summary>{family.length} countries and programs in {owner.name}'s model</summary>
           <p class="small muted">Same model, each with its own inputs. Multiples of GiveDirectly, under your assumptions.</p>
           <VariantList client:load ids={family.map((m) => m.id)} current={model.id} />
         </details>
@@ -184,6 +201,27 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     cursor: pointer;
     color: var(--blue);
     margin: var(--s2) 0;
+  }
+  .owners {
+    display: flex;
+    gap: var(--s2);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .owner-tab {
+    padding: 4px 12px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .owner-tab.here {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--paper);
+  }
+  .model-name {
+    font-size: 16px;
   }
   .family {
     margin: calc(var(--s3) * -1) 0 var(--s6);

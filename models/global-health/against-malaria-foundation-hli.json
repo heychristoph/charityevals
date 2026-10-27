@@ -1,0 +1,286 @@
+{
+  "id": "against-malaria-foundation-hli",
+  "name": "AMF bed nets, wellbeing analysis",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "against-malaria-foundation",
+  "owner": "hli",
+  "summary": "The Happier Lives Institute's analysis of AMF in wellbeing terms (WELLBYs). Its result depends heavily on a philosophical choice HLI leaves open: the neutral point above which a life counts as good. HLI found AMF less cost-effective than StrongMinds under almost all views it considered.",
+  "source": {
+    "publisher": "Happier Lives Institute",
+    "title": "The elephant in the bednet: the importance of philosophy when choosing between extending and improving lives",
+    "url": "https://forum.effectivealtruism.org/posts/JgqEqsa6iAtqGLYmw/the-elephant-in-the-bednet-the-importance-of-philosophy-when-1",
+    "sheet": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+    "published": "2022-11-01",
+    "retrieved": "2026-10-27",
+    "license": "Unclear: check HLI's terms before republishing"
+  },
+  "evaluator": {
+    "name": "HLI",
+    "assumptions": {
+      "count_salary_sacrifice": 0,
+      "full_credit": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "saving",
+      "title": "Value of the lives saved",
+      "explainer": "Deaths averted, each worth the wellbeing of the years saved, plus grief averted for the family."
+    },
+    {
+      "id": "improving",
+      "title": "Better health and income"
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line"
+    }
+  ],
+  "rows": [
+    {
+      "id": "deaths_averted_per_1000",
+      "section": "saving",
+      "label": "Deaths averted per $1,000 (from GiveWell's AMF model)",
+      "format": "number",
+      "value": 0.3353490491,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "GiveWell Numbers!B8"
+      },
+      "explainer": "Under-five and over-five deaths averted per $1,000, which HLI takes from its copy of GiveWell's 2022 AMF model. GiveWell's current model (the other model of this charity) gives a different figure; HLI's analysis predates it."
+    },
+    {
+      "id": "avg_age_at_death",
+      "section": "saving",
+      "label": "Average age of those saved",
+      "unit": "years",
+      "format": "number",
+      "value": 20.2418933,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Inputs to AMF CEA!C13"
+      },
+      "explainer": "Deaths averted weighted between under-fives (average age 1.5) and over-fives (46.1)."
+    },
+    {
+      "id": "life_expectancy",
+      "section": "saving",
+      "label": "Life expectancy used",
+      "unit": "years",
+      "format": "number",
+      "value": 59,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "GiveWell Numbers!B12"
+      },
+      "explainer": "Average life expectancy in AMF's countries, from GiveWell's model."
+    },
+    {
+      "id": "years_saved",
+      "section": "saving",
+      "label": "Years of life saved per death averted",
+      "format": "number",
+      "formula": "life_expectancy - avg_age_at_death",
+      "expected": 38.7581067
+    },
+    {
+      "id": "avg_life_satisfaction",
+      "section": "saving",
+      "label": "Average life satisfaction in AMF's countries (0–10)",
+      "format": "number",
+      "value": 4.465714286,
+      "kind": "observed",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "GiveWell Numbers!B11"
+      },
+      "explainer": "From the Gallup World Poll, as used by HLI."
+    },
+    {
+      "id": "neutral_point",
+      "section": "saving",
+      "label": "Neutral point on the 0–10 life-satisfaction scale",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 2,
+        "high": 5.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "AMF SWB CEA!P14:P19"
+      },
+      "explainer": "The level of life satisfaction at which life is neither good nor bad for the person living it. Below it, extra years count as bad; above it, good. HLI shows results for 0 to 5 and picks none; the best guess of 2 is ours, close to the value some survey respondents report. This single choice moves AMF's result more than any other input."
+    },
+    {
+      "id": "net_wellbeing",
+      "section": "saving",
+      "label": "Life satisfaction above the neutral point",
+      "format": "number",
+      "formula": "avg_life_satisfaction - neutral_point",
+      "expected": 2.465714286
+    },
+    {
+      "id": "wellbys_from_years",
+      "section": "saving",
+      "label": "WELLBYs from the years of life saved",
+      "format": "number",
+      "formula": "years_saved * net_wellbeing",
+      "expected": 95.56641737
+    },
+    {
+      "id": "ls_growth",
+      "section": "saving",
+      "label": "Yearly rise in life satisfaction over time",
+      "format": "number",
+      "value": 0.03964421,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Inputs to AMF CEA!C19"
+      },
+      "explainer": "Life satisfaction in these countries has been rising; later years of a life saved are expected to be better."
+    },
+    {
+      "id": "wellbys_from_growth",
+      "section": "saving",
+      "label": "WELLBYs from rising life satisfaction",
+      "format": "number",
+      "formula": "ls_growth * years_saved * years_saved * 0.5",
+      "expected": 29.77658446
+    },
+    {
+      "id": "grief_effect",
+      "section": "saving",
+      "label": "Effect of a child's death on a family member's life satisfaction",
+      "format": "number",
+      "value": -0.72,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Inputs to AMF CEA!C3"
+      },
+      "explainer": "From Oswald and Powdthavee, via HLI."
+    },
+    {
+      "id": "grief_years",
+      "section": "saving",
+      "label": "Years the grief lasts",
+      "format": "number",
+      "value": 5.0,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Inputs to AMF CEA!C4"
+      },
+      "explainer": "HLI's estimate of how long the effect of bereavement lasts."
+    },
+    {
+      "id": "grieving_household",
+      "section": "saving",
+      "label": "Other household members",
+      "format": "number",
+      "value": 4.031428571,
+      "kind": "observed",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Inputs to AMF CEA!C5"
+      },
+      "explainer": "Average household size in AMF's countries minus one, from GiveWell's model."
+    },
+    {
+      "id": "wellbys_from_grief",
+      "section": "saving",
+      "label": "WELLBYs from grief averted",
+      "format": "number",
+      "formula": "abs(0.5 * grief_effect * grief_years) * grieving_household",
+      "expected": 7.256571429
+    },
+    {
+      "id": "wellbys_per_life",
+      "section": "saving",
+      "label": "WELLBYs per life saved",
+      "format": "number",
+      "formula": "wellbys_from_grief + wellbys_from_years + wellbys_from_growth",
+      "expected": 132.5995733
+    },
+    {
+      "id": "wellbys_saving_per_1000",
+      "section": "saving",
+      "label": "WELLBYs from saving lives per $1,000",
+      "format": "number",
+      "formula": "deaths_averted_per_1000 * wellbys_per_life",
+      "expected": 44.46714081
+    },
+    {
+      "id": "wellbys_improving_per_1000",
+      "section": "improving",
+      "label": "WELLBYs from better health and income per $1,000",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 29.97007981,
+        "high": 29.97007981
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, AMF wellbeing CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+        "cell": "Improving (Upper B)!B103"
+      },
+      "explainer": "Less malaria illness and higher later incomes, including community spillovers at 75% net coverage. This is HLI's upper bound; its lower-bound tab is broken in the published sheet (#REF!), so the range runs down to HLI's 'just life saving' version, which leaves it out."
+    },
+    {
+      "id": "wellbys_per_1000",
+      "section": "bottom",
+      "label": "WELLBYs per $1,000",
+      "format": "number",
+      "formula": "wellbys_saving_per_1000 + wellbys_improving_per_1000",
+      "expected": 74.43722062
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "bottom",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "formula": "wellbys_per_1000 / 1000"
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar"
+  },
+  "resources": [
+    {
+      "title": "HLI: The elephant in the bednet (2022)",
+      "url": "https://forum.effectivealtruism.org/posts/JgqEqsa6iAtqGLYmw/the-elephant-in-the-bednet-the-importance-of-philosophy-when-1",
+      "type": "evaluation"
+    },
+    {
+      "title": "HLI's AMF wellbeing spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "HLI's companion AMF spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1NMAU-a1X4vqjodjI6kf8KnUyCJaK9uyNvXWj5VetDZw/edit",
+      "type": "model"
+    }
+  ]
+}

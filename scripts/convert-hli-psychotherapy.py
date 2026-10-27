@@ -96,8 +96,7 @@ for cid, c in CHARITIES.items():
     ]
     sections += [{"id": "combined", "title": "Combined estimate"}, {"id": "cost", "title": "Cost"}, {"id": "bottom", "title": "Bottom line"}]
     model = {
-        "id": cid, "name": c["name"], "kind": "charity", "cause": "global-health",
-        "org": {k: v for k, v in {"name": c["name"], "website": c["website"], "donate": c.get("donate")}.items() if v},
+        "id": cid, "name": c["name"], "kind": "charity", "cause": "global-health", "charity": cid, "owner": "hli",
         "summary": f"{c['what']} A re-implementation of the Happier Lives Institute's wellbeing cost-effectiveness analysis (V4), "
                    "which measures impact in wellbeing-adjusted life years (WELLBYs).",
         "source": {"publisher": "Happier Lives Institute", "title": "The wellbeing cost-effectiveness of StrongMinds and Friendship Bench (Nov 2024 update)",
@@ -115,5 +114,9 @@ for cid, c in CHARITIES.items():
             {"title": "HLI analysis code and data (OSF)", "url": "https://osf.io/mnqvz/", "type": "model"},
         ],
     }
+    cpath = Path("charities", f"{cid}.json")
+    crec = json.loads(cpath.read_text()) if cpath.exists() else {"id": cid, "name": c["name"], "cause": "global-health"}
+    crec.update({k: v for k, v in {"website": c["website"], "donate": c.get("donate")}.items() if v})
+    cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
     Path(a.out, f"{cid}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
     print(cid, len(rows), "rows")

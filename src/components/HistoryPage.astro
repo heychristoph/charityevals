@@ -1,14 +1,14 @@
 ---
-import Base from "../../layouts/Base.astro";
-import { lib, rankable } from "../../lib/data";
-import { modelHistory } from "../../lib/history";
-import { formatMultiple } from "../../lib/format";
+// A model's change history, rebuilt from git at build time.
+import Base from "../layouts/Base.astro";
+import { lib, modelUrl } from "../lib/data";
+import { modelHistory } from "../lib/history";
+import { formatMultiple } from "../lib/format";
 
-export function getStaticPaths() {
-  return rankable.map((m) => ({ params: { id: m.id } }));
+interface Props {
+  modelId: string;
 }
-
-const model = lib.models.get(Astro.params.id!)!;
+const model = lib.models.get(Astro.props.modelId)!;
 const fileOf = (id: string) => `models/${lib.models.get(id)!.cause}/${id}.json`;
 const files = [...model.chain.map(fileOf), `writeups/${model.id}.md`];
 const entries = modelHistory(__REPO_ROOT__, model, files);
@@ -28,7 +28,7 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
 
 <Base title={`${model.name}: history`} description={`How the ${model.name} assessment has changed, version by version.`} active="rankings">
   <div class="page wrap" style={`--cause: var(--cause-${model.cause})`}>
-    <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={`/${model.id}`}>{model.name}</a> / History</nav>
+    <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={modelUrl(lib, model)}>{model.name}</a> / History</nav>
     <h1>How this assessment has changed</h1>
     <p class="dek">
       Every change to the model, its parent models, the shared assumptions or the shared facts is a commit. For each one we rebuild the site's data as it was then and recompute the result with default assumptions.
@@ -71,7 +71,7 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
                 <table class="changes small">
                   {e.changes.slice(0, 25).map((c) => (
                     <tr>
-                      <th scope="row"><a href={`/${model.id}#row-${c.id}`}>{c.label}</a></th>
+                      <th scope="row"><a href={`${modelUrl(lib, model)}#row-${c.id}`}>{c.label}</a></th>
                       <td class="num before">{c.before}</td>
                       <td class="arrow" aria-hidden>→</td>
                       <td class="num">{c.after}</td>
