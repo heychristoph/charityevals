@@ -1,4 +1,5 @@
 import { setView, useView } from "../lib/assumption-state";
+import { track } from "../lib/analytics";
 
 /** Switch between our model and the source evaluator's model as published. */
 export default function ViewToggle({ evaluatorName }: { evaluatorName?: string }) {
@@ -17,7 +18,10 @@ export default function ViewToggle({ evaluatorName }: { evaluatorName?: string }
           aria-checked={view === o.id}
           className={view === o.id ? "on" : ""}
           title={o.hint}
-          onClick={() => setView(o.id)}
+          onClick={() => {
+            if (view !== o.id) track("view_toggle", { key: o.id });
+            setView(o.id);
+          }}
         >
           {o.label}
         </button>
