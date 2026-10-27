@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.04
   }
  },
  "resources": [
@@ -51,15 +52,15 @@
    "id": "discount_rate_8x_bar_for_future_opportunities",
    "label": "Discount rate (8x bar for future opportunities)",
    "section": "main_voi",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1o7TQqmhZz7f7jt57kea65kWRaiO92t6Y6G8OB4tlFFU/edit",
     "cell": "Main VoI!B10"
    },
-   "explainer": "See GiveWell's moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell's moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial",
@@ -197,8 +198,8 @@
    "format": "percent"
   },
   {
-   "id": "r_14_calculation",
-   "label": ">14 (Calculation)",
+   "id": "r_14_assumption",
+   "label": ">14 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b69_annual_rfmf_per_bucket",
    "expected": 0.0,
@@ -208,7 +209,7 @@
    "id": "r_14_expected_rfmf_amount_now_on_other_side_of_the_bar",
    "label": ">14 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "r_14_annual_rfmf_per_bucket * r_14_10x_bar_for_future_opportunities * r_14_probability_that_the_change_is_in_the_decision_relevant_d * r_14_calculation",
+   "formula": "r_14_annual_rfmf_per_bucket * r_14_10x_bar_for_future_opportunities * r_14_probability_that_the_change_is_in_the_decision_relevant_d * r_14_assumption",
    "expected": 0.0,
    "format": "usd"
   },
@@ -294,8 +295,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f46_calculation",
-   "label": "Main VoI!F46 (Calculation)",
+   "id": "main_voi_f46_assumption",
+   "label": "Main VoI!F46 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b70_annual_rfmf_per_bucket",
    "expected": 0.0,
@@ -305,7 +306,7 @@
    "id": "main_voi_g46_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G46 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b46_annual_rfmf_per_bucket * main_voi_c46_10x_bar_for_future_opportunities * main_voi_d46_probability_that_the_change_is_in_the_decision * main_voi_f46_calculation",
+   "formula": "main_voi_b46_annual_rfmf_per_bucket * main_voi_c46_10x_bar_for_future_opportunities * main_voi_d46_probability_that_the_change_is_in_the_decision * main_voi_f46_assumption",
    "expected": 0.0,
    "format": "usd"
   },
@@ -391,8 +392,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f47_calculation",
-   "label": "Main VoI!F47 (Calculation)",
+   "id": "main_voi_f47_assumption",
+   "label": "Main VoI!F47 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b72_annual_rfmf_per_bucket",
    "expected": 0.33,
@@ -402,7 +403,7 @@
    "id": "main_voi_g47_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G47 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b47_annual_rfmf_per_bucket * main_voi_c47_10x_bar_for_future_opportunities * main_voi_d47_probability_that_the_change_is_in_the_decision * main_voi_f47_calculation",
+   "formula": "main_voi_b47_annual_rfmf_per_bucket * main_voi_c47_10x_bar_for_future_opportunities * main_voi_d47_probability_that_the_change_is_in_the_decision * main_voi_f47_assumption",
    "expected": 6.9832125,
    "format": "usd"
   },
@@ -488,8 +489,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f48_calculation",
-   "label": "Main VoI!F48 (Calculation)",
+   "id": "main_voi_f48_assumption",
+   "label": "Main VoI!F48 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b73_annual_rfmf_per_bucket",
    "expected": 0.6,
@@ -499,7 +500,7 @@
    "id": "main_voi_g48_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G48 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b48_annual_rfmf_per_bucket * main_voi_c48_10x_bar_for_future_opportunities * main_voi_d48_probability_that_the_change_is_in_the_decision * main_voi_f48_calculation",
+   "formula": "main_voi_b48_annual_rfmf_per_bucket * main_voi_c48_10x_bar_for_future_opportunities * main_voi_d48_probability_that_the_change_is_in_the_decision * main_voi_f48_assumption",
    "expected": 2.2275,
    "format": "usd"
   },
@@ -585,8 +586,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f49_calculation",
-   "label": "Main VoI!F49 (Calculation)",
+   "id": "main_voi_f49_assumption",
+   "label": "Main VoI!F49 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b75_annual_rfmf_per_bucket",
    "expected": 0.6,
@@ -596,7 +597,7 @@
    "id": "main_voi_g49_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G49 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b49_annual_rfmf_per_bucket * main_voi_c49_10x_bar_for_future_opportunities * main_voi_d49_probability_that_the_change_is_in_the_decision * main_voi_f49_calculation",
+   "formula": "main_voi_b49_annual_rfmf_per_bucket * main_voi_c49_10x_bar_for_future_opportunities * main_voi_d49_probability_that_the_change_is_in_the_decision * main_voi_f49_assumption",
    "expected": 7.776,
    "format": "usd"
   },
@@ -682,8 +683,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f50_calculation",
-   "label": "Main VoI!F50 (Calculation)",
+   "id": "main_voi_f50_assumption",
+   "label": "Main VoI!F50 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b81_annual_rfmf_per_bucket",
    "expected": 0.05,
@@ -693,7 +694,7 @@
    "id": "main_voi_g50_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G50 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b50_annual_rfmf_per_bucket * main_voi_c50_10x_bar_for_future_opportunities * main_voi_d50_probability_that_the_change_is_in_the_decision * main_voi_f50_calculation",
+   "formula": "main_voi_b50_annual_rfmf_per_bucket * main_voi_c50_10x_bar_for_future_opportunities * main_voi_d50_probability_that_the_change_is_in_the_decision * main_voi_f50_assumption",
    "expected": 0.043875,
    "format": "usd"
   },
@@ -778,15 +779,15 @@
    "id": "discount_rate_10x_bar_for_future_opportunities",
    "label": "Discount rate (10x bar for future opportunities)",
    "section": "main_voi",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1o7TQqmhZz7f7jt57kea65kWRaiO92t6Y6G8OB4tlFFU/edit",
     "cell": "Main VoI!C10"
    },
-   "explainer": "See GiveWell's moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell's moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_2",
@@ -860,8 +861,8 @@
    "format": "percent"
   },
   {
-   "id": "r_14_calculation_2",
-   "label": ">14 (Calculation)",
+   "id": "r_14_assumption_2",
+   "label": ">14 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b71_annual_rfmf_per_bucket",
    "expected": 0.2,
@@ -871,7 +872,7 @@
    "id": "r_14_expected_rfmf_amount_now_on_other_side_of_the_bar_2",
    "label": ">14 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "r_14_annual_room_for_more_funding_rfmf_per_bucket * r_14_10x_bar_for_future_opportunities_2 * r_14_probability_that_the_change_is_in_the_decision_relevant_d_2 * r_14_calculation_2",
+   "formula": "r_14_annual_room_for_more_funding_rfmf_per_bucket * r_14_10x_bar_for_future_opportunities_2 * r_14_probability_that_the_change_is_in_the_decision_relevant_d_2 * r_14_assumption_2",
    "expected": 2.43,
    "format": "usd"
   },
@@ -923,8 +924,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f37_calculation",
-   "label": "Main VoI!F37 (Calculation)",
+   "id": "main_voi_f37_assumption",
+   "label": "Main VoI!F37 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b72_annual_rfmf_per_bucket",
    "expected": 0.33,
@@ -934,7 +935,7 @@
    "id": "main_voi_g37_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G37 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b37_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c37_10x_bar_for_future_opportunities * main_voi_d37_probability_that_the_change_is_in_the_decision * main_voi_f37_calculation",
+   "formula": "main_voi_b37_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c37_10x_bar_for_future_opportunities * main_voi_d37_probability_that_the_change_is_in_the_decision * main_voi_f37_assumption",
    "expected": 0.1782,
    "format": "usd"
   },
@@ -986,8 +987,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f38_calculation",
-   "label": "Main VoI!F38 (Calculation)",
+   "id": "main_voi_f38_assumption",
+   "label": "Main VoI!F38 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b73_annual_rfmf_per_bucket",
    "expected": 0.6,
@@ -997,7 +998,7 @@
    "id": "main_voi_g38_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G38 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b38_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c38_10x_bar_for_future_opportunities * main_voi_d38_probability_that_the_change_is_in_the_decision * main_voi_f38_calculation",
+   "formula": "main_voi_b38_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c38_10x_bar_for_future_opportunities * main_voi_d38_probability_that_the_change_is_in_the_decision * main_voi_f38_assumption",
    "expected": 12.69675,
    "format": "usd"
   },
@@ -1049,8 +1050,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f39_calculation",
-   "label": "Main VoI!F39 (Calculation)",
+   "id": "main_voi_f39_assumption",
+   "label": "Main VoI!F39 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b75_annual_rfmf_per_bucket",
    "expected": 0.6,
@@ -1060,7 +1061,7 @@
    "id": "main_voi_g39_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G39 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b39_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c39_10x_bar_for_future_opportunities * main_voi_d39_probability_that_the_change_is_in_the_decision * main_voi_f39_calculation",
+   "formula": "main_voi_b39_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c39_10x_bar_for_future_opportunities * main_voi_d39_probability_that_the_change_is_in_the_decision * main_voi_f39_assumption",
    "expected": 2.2275,
    "format": "usd"
   },
@@ -1125,8 +1126,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f40_calculation",
-   "label": "Main VoI!F40 (Calculation)",
+   "id": "main_voi_f40_assumption",
+   "label": "Main VoI!F40 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b78_annual_rfmf_per_bucket",
    "expected": 0.25,
@@ -1136,7 +1137,7 @@
    "id": "main_voi_g40_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G40 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b40_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c40_10x_bar_for_future_opportunities * main_voi_d40_probability_that_the_change_is_in_the_decision * main_voi_f40_calculation",
+   "formula": "main_voi_b40_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c40_10x_bar_for_future_opportunities * main_voi_d40_probability_that_the_change_is_in_the_decision * main_voi_f40_assumption",
    "expected": 3.24,
    "format": "usd"
   },
@@ -1188,8 +1189,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f41_calculation",
-   "label": "Main VoI!F41 (Calculation)",
+   "id": "main_voi_f41_assumption",
+   "label": "Main VoI!F41 (Assumption)",
    "section": "main_voi",
    "formula": "0",
    "expected": 0.0
@@ -1198,7 +1199,7 @@
    "id": "main_voi_g41_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G41 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b41_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c41_10x_bar_for_future_opportunities * main_voi_d41_probability_that_the_change_is_in_the_decision * main_voi_f41_calculation",
+   "formula": "main_voi_b41_annual_room_for_more_funding_rfmf_per_bucket * main_voi_c41_10x_bar_for_future_opportunities * main_voi_d41_probability_that_the_change_is_in_the_decision * main_voi_f41_assumption",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1270,15 +1271,15 @@
    "id": "discount_rate_12x_bar_for_future_opportunities",
    "label": "Discount rate (12x bar for future opportunities)",
    "section": "main_voi",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1o7TQqmhZz7f7jt57kea65kWRaiO92t6Y6G8OB4tlFFU/edit",
     "cell": "Main VoI!D10"
    },
-   "explainer": "See GiveWell's moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSee GiveWell's moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_trial_3",
@@ -1355,8 +1356,8 @@
    "format": "percent"
   },
   {
-   "id": "r_14_calculation_3",
-   "label": ">14 (Calculation)",
+   "id": "r_14_assumption_3",
+   "label": ">14 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b72_annual_rfmf_per_bucket",
    "expected": 0.33,
@@ -1366,7 +1367,7 @@
    "id": "r_14_expected_rfmf_amount_now_on_other_side_of_the_bar_3",
    "label": ">14 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "r_14_annual_rfmf_per_bucket_2 * r_14_10x_bar_for_future_opportunities_3 * r_14_probability_that_the_change_is_in_the_decision_relevant_d_3 * r_14_calculation_3",
+   "formula": "r_14_annual_rfmf_per_bucket_2 * r_14_10x_bar_for_future_opportunities_3 * r_14_probability_that_the_change_is_in_the_decision_relevant_d_3 * r_14_assumption_3",
    "expected": 4.0095,
    "format": "usd"
   },
@@ -1426,8 +1427,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f55_calculation",
-   "label": "Main VoI!F55 (Calculation)",
+   "id": "main_voi_f55_assumption",
+   "label": "Main VoI!F55 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b73_annual_rfmf_per_bucket",
    "expected": 0.6,
@@ -1437,7 +1438,7 @@
    "id": "main_voi_g55_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G55 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b55_annual_rfmf_per_bucket * main_voi_c55_10x_bar_for_future_opportunities * main_voi_d55_probability_that_the_change_is_in_the_decision * main_voi_f55_calculation",
+   "formula": "main_voi_b55_annual_rfmf_per_bucket * main_voi_c55_10x_bar_for_future_opportunities * main_voi_d55_probability_that_the_change_is_in_the_decision * main_voi_f55_assumption",
    "expected": 0.324,
    "format": "usd"
   },
@@ -1510,8 +1511,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f56_calculation",
-   "label": "Main VoI!F56 (Calculation)",
+   "id": "main_voi_f56_assumption",
+   "label": "Main VoI!F56 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b74_annual_rfmf_per_bucket",
    "expected": 0.8,
@@ -1521,7 +1522,7 @@
    "id": "main_voi_g56_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G56 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b56_annual_rfmf_per_bucket * main_voi_c56_10x_bar_for_future_opportunities * main_voi_d56_probability_that_the_change_is_in_the_decision * main_voi_f56_calculation",
+   "formula": "main_voi_b56_annual_rfmf_per_bucket * main_voi_c56_10x_bar_for_future_opportunities * main_voi_d56_probability_that_the_change_is_in_the_decision * main_voi_f56_assumption",
    "expected": 16.929,
    "format": "usd"
   },
@@ -1594,8 +1595,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f57_calculation",
-   "label": "Main VoI!F57 (Calculation)",
+   "id": "main_voi_f57_assumption",
+   "label": "Main VoI!F57 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b77_annual_rfmf_per_bucket",
    "expected": 0.35,
@@ -1605,7 +1606,7 @@
    "id": "main_voi_g57_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G57 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b57_annual_rfmf_per_bucket * main_voi_c57_10x_bar_for_future_opportunities * main_voi_d57_probability_that_the_change_is_in_the_decision * main_voi_f57_calculation",
+   "formula": "main_voi_b57_annual_rfmf_per_bucket * main_voi_c57_10x_bar_for_future_opportunities * main_voi_d57_probability_that_the_change_is_in_the_decision * main_voi_f57_assumption",
    "expected": 1.299375,
    "format": "usd"
   },
@@ -1678,8 +1679,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f58_calculation",
-   "label": "Main VoI!F58 (Calculation)",
+   "id": "main_voi_f58_assumption",
+   "label": "Main VoI!F58 (Assumption)",
    "section": "main_voi",
    "formula": "main_voi_b82_annual_rfmf_per_bucket",
    "expected": 0.03,
@@ -1689,7 +1690,7 @@
    "id": "main_voi_g58_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G58 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b58_annual_rfmf_per_bucket * main_voi_c58_10x_bar_for_future_opportunities * main_voi_d58_probability_that_the_change_is_in_the_decision * main_voi_f58_calculation",
+   "formula": "main_voi_b58_annual_rfmf_per_bucket * main_voi_c58_10x_bar_for_future_opportunities * main_voi_d58_probability_that_the_change_is_in_the_decision * main_voi_f58_assumption",
    "expected": 0.3888,
    "format": "usd"
   },
@@ -1749,8 +1750,8 @@
    "format": "percent"
   },
   {
-   "id": "main_voi_f59_calculation",
-   "label": "Main VoI!F59 (Calculation)",
+   "id": "main_voi_f59_assumption",
+   "label": "Main VoI!F59 (Assumption)",
    "section": "main_voi",
    "value": 0.0,
    "kind": "estimate",
@@ -1765,7 +1766,7 @@
    "id": "main_voi_g59_expected_rfmf_amount_now_on_other_side_of_the_b",
    "label": "Main VoI!G59 (Expected RFMF amount now on other side of the bar)",
    "section": "main_voi",
-   "formula": "main_voi_b59_annual_rfmf_per_bucket * main_voi_c59_10x_bar_for_future_opportunities * main_voi_d59_probability_that_the_change_is_in_the_decision * main_voi_f59_calculation",
+   "formula": "main_voi_b59_annual_rfmf_per_bucket * main_voi_c59_10x_bar_for_future_opportunities * main_voi_d59_probability_that_the_change_is_in_the_decision * main_voi_f59_assumption",
    "expected": 0.0,
    "format": "usd"
   },

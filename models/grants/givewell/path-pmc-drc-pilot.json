@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -299,8 +300,8 @@
    "expected": 2.904501289
   },
   {
-   "id": "total_year",
-   "label": "Total (Year)",
+   "id": "total",
+   "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 1.0,
    "kind": "estimate",
@@ -331,7 +332,7 @@
   },
   {
    "id": "path_s_estimate_of_number_of_infants_reached_based_on_epi_co",
-   "label": "PATH's estimate of number of infants reached, based on EPI coverage - expected (Year)",
+   "label": "PATH's estimate of number of infants reached, based on EPI coverage - expected",
    "section": "increase_in_pmc_doses_given",
    "value": 83292.0,
    "kind": "estimate",
@@ -390,14 +391,14 @@
   },
   {
    "id": "expected_number_of_infants_targeted_conditional_on_funding_a",
-   "label": "Expected number of infants targeted, conditional on funding available (Year)",
+   "label": "Expected number of infants targeted, conditional on funding available",
    "section": "increase_in_pmc_doses_given",
    "formula": "path_s_estimate_of_number_of_infants_reached_based_on_epi_co / path_s_estimate_of_epi_coverage_average",
    "expected": 93063.68715
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_year",
-   "label": "Likelihood of funding for PMC program in each year (Year)",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year",
+   "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 1.0,
    "kind": "estimate",
@@ -410,21 +411,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_year",
-   "label": "Expected number of infants targeted each year (Year)",
+   "id": "expected_number_of_infants_targeted_each_year",
+   "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a * likelihood_of_funding_for_pmc_program_in_each_year_year",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a * likelihood_of_funding_for_pmc_program_in_each_year",
    "expected": 93063.68715
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_year",
-   "label": "Expected number of PMC doses covered by pilot grant (Year)",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant",
+   "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_year <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_year, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year, 0 / 100)",
    "expected": 270303.5993
   },
   {
-   "id": "total",
+   "id": "total_2",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 2.0,
@@ -455,7 +456,7 @@
    "expected": 313872.6257
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_2",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 1.0,
@@ -469,21 +470,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year",
+   "id": "expected_number_of_infants_targeted_each_year_2",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_2 * likelihood_of_funding_for_pmc_program_in_each_year",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_2 * likelihood_of_funding_for_pmc_program_in_each_year_2",
    "expected": 313872.6257
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_2",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_2 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_2, 0 / 100)",
    "expected": 911643.446
   },
   {
-   "id": "total_2",
+   "id": "total_3",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 3.0,
@@ -514,7 +515,7 @@
    "expected": 1094131.844
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_2",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_3",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -528,21 +529,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_2",
+   "id": "expected_number_of_infants_targeted_each_year_3",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_3 * likelihood_of_funding_for_pmc_program_in_each_year_2",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_3 * likelihood_of_funding_for_pmc_program_in_each_year_3",
    "expected": 437652.7374
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_2",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_3",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_2 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_2, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_3 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_3, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_3",
+   "id": "total_4",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 4.0,
@@ -573,7 +574,7 @@
    "expected": 1654839.106
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_3",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_4",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -587,21 +588,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_3",
+   "id": "expected_number_of_infants_targeted_each_year_4",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_4 * likelihood_of_funding_for_pmc_program_in_each_year_3",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_4 * likelihood_of_funding_for_pmc_program_in_each_year_4",
    "expected": 661935.6425
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_3",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_4",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_3 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_3, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_4 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_4, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_4",
+   "id": "total_5",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 5.0,
@@ -632,7 +633,7 @@
    "expected": 1709449.162
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_4",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_5",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -646,21 +647,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_4",
+   "id": "expected_number_of_infants_targeted_each_year_5",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_5 * likelihood_of_funding_for_pmc_program_in_each_year_4",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_5 * likelihood_of_funding_for_pmc_program_in_each_year_5",
    "expected": 683779.6648
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_4",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_5",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_4 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_4, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_5 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_5, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_5",
+   "id": "total_6",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 6.0,
@@ -707,7 +708,7 @@
    "expected": 1765860.984
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_5",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_6",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -721,21 +722,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_5",
+   "id": "expected_number_of_infants_targeted_each_year_6",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_6 * likelihood_of_funding_for_pmc_program_in_each_year_5",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_6 * likelihood_of_funding_for_pmc_program_in_each_year_6",
    "expected": 706344.3937
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_5",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_6",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_5 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_5, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_6 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_6, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_6",
+   "id": "total_7",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 7.0,
@@ -761,7 +762,7 @@
    "expected": 1824134.397
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_6",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_7",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -775,21 +776,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_6",
+   "id": "expected_number_of_infants_targeted_each_year_7",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_7 * likelihood_of_funding_for_pmc_program_in_each_year_6",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_7 * likelihood_of_funding_for_pmc_program_in_each_year_7",
    "expected": 729653.7587
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_6",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_7",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_6 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_6, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_7 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_7, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_7",
+   "id": "total_8",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 8.0,
@@ -815,7 +816,7 @@
    "expected": 1884330.832
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_7",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_8",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -829,21 +830,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_7",
+   "id": "expected_number_of_infants_targeted_each_year_8",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_8 * likelihood_of_funding_for_pmc_program_in_each_year_7",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_8 * likelihood_of_funding_for_pmc_program_in_each_year_8",
    "expected": 753732.3328
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_7",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_8",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_7 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_7, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_8 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_8, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_8",
+   "id": "total_9",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 9.0,
@@ -869,7 +870,7 @@
    "expected": 1946513.749
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_8",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_9",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -883,21 +884,21 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_8",
+   "id": "expected_number_of_infants_targeted_each_year_9",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_9 * likelihood_of_funding_for_pmc_program_in_each_year_8",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_9 * likelihood_of_funding_for_pmc_program_in_each_year_9",
    "expected": 778605.4998
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_8",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_9",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_8 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_8, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_9 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_9, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "total_9",
+   "id": "total_10",
    "label": "Total",
    "section": "increase_in_pmc_doses_given",
    "value": 10.0,
@@ -923,7 +924,7 @@
    "expected": 2010748.703
   },
   {
-   "id": "likelihood_of_funding_for_pmc_program_in_each_year_9",
+   "id": "likelihood_of_funding_for_pmc_program_in_each_year_10",
    "label": "Likelihood of funding for PMC program in each year",
    "section": "increase_in_pmc_doses_given",
    "value": 0.4,
@@ -937,94 +938,94 @@
    "format": "percent"
   },
   {
-   "id": "expected_number_of_infants_targeted_each_year_9",
+   "id": "expected_number_of_infants_targeted_each_year_10",
    "label": "Expected number of infants targeted each year",
    "section": "increase_in_pmc_doses_given",
-   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_10 * likelihood_of_funding_for_pmc_program_in_each_year_9",
+   "formula": "expected_number_of_infants_targeted_conditional_on_funding_a_10 * likelihood_of_funding_for_pmc_program_in_each_year_10",
    "expected": 804299.4812
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_9",
+   "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_10",
    "label": "Expected number of PMC doses covered by pilot grant",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_9 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_9, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_10 <= givewell_grant_period_years, expected_number_of_infants_targeted_each_year_10, 0 / 100)",
    "expected": 0.0
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_pilot_grant_total",
    "label": "Expected number of PMC doses covered by pilot grant (Total)",
    "section": "increase_in_pmc_doses_given",
-   "formula": "sum(expected_number_of_pmc_doses_covered_by_pilot_grant_year, expected_number_of_pmc_doses_covered_by_pilot_grant, expected_number_of_pmc_doses_covered_by_pilot_grant_2, expected_number_of_pmc_doses_covered_by_pilot_grant_3, expected_number_of_pmc_doses_covered_by_pilot_grant_4, expected_number_of_pmc_doses_covered_by_pilot_grant_5, expected_number_of_pmc_doses_covered_by_pilot_grant_6, expected_number_of_pmc_doses_covered_by_pilot_grant_7, expected_number_of_pmc_doses_covered_by_pilot_grant_8, expected_number_of_pmc_doses_covered_by_pilot_grant_9)",
+   "formula": "sum(expected_number_of_pmc_doses_covered_by_pilot_grant, expected_number_of_pmc_doses_covered_by_pilot_grant_2, expected_number_of_pmc_doses_covered_by_pilot_grant_3, expected_number_of_pmc_doses_covered_by_pilot_grant_4, expected_number_of_pmc_doses_covered_by_pilot_grant_5, expected_number_of_pmc_doses_covered_by_pilot_grant_6, expected_number_of_pmc_doses_covered_by_pilot_grant_7, expected_number_of_pmc_doses_covered_by_pilot_grant_8, expected_number_of_pmc_doses_covered_by_pilot_grant_9, expected_number_of_pmc_doses_covered_by_pilot_grant_10)",
    "expected": 1181947.045
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_2",
-   "label": "Expected number of PMC doses covered by other philanthropic funders and/or government (Year)",
-   "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_year > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_year, 0 / 100)",
-   "expected": 0.0
-  },
-  {
-   "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_3",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
    "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total > givewell_grant_period_years, expected_number_of_infants_targeted_each_year, 0 / 100)",
    "expected": 0.0
   },
   {
-   "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_4",
+   "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_3",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
    "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_2 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_2, 0 / 100)",
+   "expected": 0.0
+  },
+  {
+   "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_4",
+   "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
+   "section": "increase_in_pmc_doses_given",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_3 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_3, 0 / 100)",
    "expected": 1271162.94
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_5",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_3 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_3, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_4 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_4, 0 / 100)",
    "expected": 1922592.927
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_6",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_4 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_4, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_5 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_5, 0 / 100)",
    "expected": 1986038.918
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_7",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_5 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_5, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_6 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_6, 0 / 100)",
    "expected": 2051578.202
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_8",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_6 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_6, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_7 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_7, 0 / 100)",
    "expected": 2119280.283
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_9",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_7 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_7, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_8 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_8, 0 / 100)",
    "expected": 2189216.532
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_10",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_8 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_8, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_9 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_9, 0 / 100)",
    "expected": 2261460.678
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_11",
    "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
-   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_9 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_9, 0 / 100)",
+   "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * if(total_10 > givewell_grant_period_years, expected_number_of_infants_targeted_each_year_10, 0 / 100)",
    "expected": 2336088.88
   },
   {
@@ -1043,7 +1044,7 @@
   },
   {
    "id": "expected_number_of_infants_targeted_each_year_by_other_phila",
-   "label": "Expected number of infants targeted each year by other philanthropic funders (Year)",
+   "label": "Expected number of infants targeted each year by other philanthropic funders",
    "section": "increase_in_pmc_doses_given",
    "value": 0.0,
    "kind": "estimate",
@@ -1056,7 +1057,7 @@
   },
   {
    "id": "expected_number_of_pmc_doses_covered_by_other_philanthropic_13",
-   "label": "Expected number of PMC doses covered by other philanthropic funders and/or government (Year)",
+   "label": "Expected number of PMC doses covered by other philanthropic funders and/or government",
    "section": "increase_in_pmc_doses_given",
    "formula": "average_number_of_pmc_doses_delivered_to_each_targeted_infan * expected_number_of_infants_targeted_each_year_by_other_phila",
    "expected": 0.0
@@ -1511,14 +1512,14 @@
    "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death_2",
    "label": "Ratio of indirect malaria deaths per direct malaria death",
    "section": "detailed_cea",
-   "value": 0.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
     "cell": "Detailed CEA!B69"
    },
-   "explainer": "From our SMC CEA"
+   "explainer": "From our SMC CEA",
+   "formula": "@givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
+   "expected": 0.5
   },
   {
    "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
@@ -1538,14 +1539,14 @@
    "id": "units_of_value_per_postneonatal_1_12_months_of_age_death_ave",
    "label": "Units of value per postneonatal (1-12 months of age) death averted",
    "section": "detailed_cea",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
     "cell": "Detailed CEA!B71"
    },
-   "explainer": "See our calculations for 2020 moral weights for under-1 and over-1 deaths from malaria."
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nSee our calculations for 2020 moral weights for under-1 and over-1 deaths from malaria.",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "units_of_value_per_postneonatal_death_averted",
@@ -1672,14 +1673,14 @@
    "id": "units_of_value_assigned_to_averting_the_death_of_an_individu",
    "label": "Units of value assigned to averting the death of an individual over 1 year old from malaria",
    "section": "detailed_cea",
-   "value": 113.25,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
     "cell": "Detailed CEA!B75"
    },
-   "explainer": "See our calculations for 2020 moral weights for under-1 and over-1 deaths from malaria."
+   "explainer": "GiveWell's moral weight, 113.25 units of value, times your multiplier on the value of a life.\n\nSee our calculations for 2020 moral weights for under-1 and over-1 deaths from malaria.",
+   "formula": "113.25 * $life_value_multiplier",
+   "expected": 113.25
   },
   {
    "id": "total_units_of_value_from_mortality_reduction_among_untreate",
@@ -1831,14 +1832,14 @@
    "id": "short_term_anemia_effects",
    "label": "Short-term anemia effects",
    "section": "supplemental_calculations",
-   "value": 0.09,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
     "cell": "Supplemental calculations!B19"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.short_term_anemia_effects",
+   "expected": 0.09
   },
   {
    "id": "investment_of_income_increases",

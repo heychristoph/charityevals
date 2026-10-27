@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 2.3
   }
  },
  "resources": [
@@ -258,16 +259,16 @@
    "format": "usd"
   },
   {
-   "id": "input_bihar",
-   "label": "input (Bihar)",
+   "id": "grant_size_bihar",
+   "label": "Grant size (Bihar)",
    "section": "iron_supplementation_cea",
    "formula": "sum(bihar_state_implementation_costs_total, bihar_other_allocated_costs_total) + idinsight_budget_for_baseline_surveys * (sum(bihar_state_implementation_costs_total, bihar_other_allocated_costs_total) / sum(bihar_state_implementation_costs_total, bihar_other_allocated_costs_total, uttar_pradesh_state_implementation_costs_total, uttar_pradesh_other_allocated_costs_total))",
    "expected": 4029538.978,
    "format": "usd"
   },
   {
-   "id": "input_bihar_2",
-   "label": "input (Bihar)",
+   "id": "percentage_of_total_costs_covered_by_the_grantee_bihar",
+   "label": "Percentage of total costs covered by the grantee (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 1.0,
    "kind": "estimate",
@@ -280,8 +281,8 @@
    "format": "percent"
   },
   {
-   "id": "input_bihar_3",
-   "label": "input (Bihar)",
+   "id": "annual_cost_per_person_consuming_ifa_supplements_bihar",
+   "label": "Annual cost per person consuming IFA supplements (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.81,
    "kind": "estimate",
@@ -294,15 +295,15 @@
    "format": "usd"
   },
   {
-   "id": "calc_bihar_3",
-   "label": "calc (Bihar)",
+   "id": "number_of_individuals_consuming_ifa_supplements_per_year_bih",
+   "label": "Number of individuals consuming IFA supplements per year (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "input_bihar / (input_bihar_2 * input_bihar_3)",
+   "formula": "grant_size_bihar / (percentage_of_total_costs_covered_by_the_grantee_bihar * annual_cost_per_person_consuming_ifa_supplements_bihar)",
    "expected": 4974739.48
   },
   {
-   "id": "input_bihar_4",
-   "label": "input (Bihar)",
+   "id": "risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
+   "label": "Risk ratio for anemia, supplementation with iron, Low et al. 2013 (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -314,16 +315,16 @@
    "explainer": "Low et al. 2013"
   },
   {
-   "id": "calc_bihar_5",
-   "label": "calc (Bihar)",
+   "id": "reduction_in_anemia_prevalence_bihar",
+   "label": "Reduction in anemia prevalence (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "1 - input_bihar_4",
+   "formula": "1 - risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
    "expected": 0.5,
    "format": "percent"
   },
   {
-   "id": "input_bihar_5",
-   "label": "input (Bihar)",
+   "id": "internal_validity_adjustment_bihar",
+   "label": "Internal validity adjustment (Bihar)",
    "section": "iron_supplementation_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -652,16 +653,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_bihar_7",
-   "label": "calc (Bihar)",
+   "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr",
+   "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency (Bihar)",
    "section": "iron_supplementation_cea",
    "formula": "supp_bihar_2 / supp_bihar_3 - 1",
    "expected": 0.1750568955,
    "format": "percent"
   },
   {
-   "id": "input_bihar_6",
-   "label": "input (Bihar)",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "label": "Inflammation exposure index rating (as a % of max score) in study population (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.511,
    "kind": "estimate",
@@ -674,8 +675,8 @@
    "format": "percent"
   },
   {
-   "id": "input_bihar_7",
-   "label": "input (Bihar)",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "label": "Inflammation exposure index rating (as a % of max score) in program population (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.222222222222222,
    "kind": "estimate",
@@ -688,8 +689,8 @@
    "format": "percent"
   },
   {
-   "id": "input_bihar_8",
-   "label": "input (Bihar)",
+   "id": "assumed_effect_of_inflammation_on_iron_absorption_bihar",
+   "label": "Assumed effect of inflammation on iron absorption (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.2,
    "kind": "estimate",
@@ -702,16 +703,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_bihar_8",
-   "label": "calc (Bihar)",
+   "id": "adjustment_for_inflammation_in_program_compared_to_study_pop",
+   "label": "Adjustment for inflammation in program compared to study population (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "(input_bihar_6 / input_bihar_7 - 1) * input_bihar_8",
+   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud / inflammation_exposure_index_rating_as_a_of_max_score_in_prog - 1) * assumed_effect_of_inflammation_on_iron_absorption_bihar",
    "expected": 0.2599,
    "format": "percent"
   },
   {
-   "id": "input_bihar_9",
-   "label": "input (Bihar)",
+   "id": "bioavailability_adjusted_iron_intake_relative_to_trial_setti",
+   "label": "Bioavailability-adjusted iron intake (relative to trial settings) (Bihar)",
    "section": "iron_supplementation_cea",
    "value": -0.82,
    "kind": "estimate",
@@ -724,8 +725,8 @@
    "format": "percent"
   },
   {
-   "id": "input_bihar_10",
-   "label": "input (Bihar)",
+   "id": "assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
+   "label": "Assumed effect of increased iron intake on anemia prevalence (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -738,59 +739,59 @@
    "format": "percent"
   },
   {
-   "id": "calc_bihar_9",
-   "label": "calc (Bihar)",
+   "id": "adjustment_for_weekly_iron_doseage_relative_to_trials_bihar",
+   "label": "Adjustment for weekly iron doseage, relative to trials (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "input_bihar_9 * input_bihar_10",
+   "formula": "bioavailability_adjusted_iron_intake_relative_to_trial_setti * assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
    "expected": -0.41,
    "format": "percent"
   },
   {
-   "id": "calc_bihar_6",
-   "label": "calc (Bihar)",
+   "id": "external_validity_adjustment_bihar",
+   "label": "External validity adjustment (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "(1 + calc_bihar_7) * (1 + calc_bihar_8) * (1 + calc_bihar_9) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_weekly_iron_doseage_relative_to_trials_bihar) - 1",
    "expected": -0.1265320323,
    "format": "percent"
   },
   {
-   "id": "calc_bihar_4",
-   "label": "calc (Bihar)",
+   "id": "adjusted_reduction_in_anemia_from_iron_supplementation_bihar",
+   "label": "Adjusted reduction in anemia from iron supplementation (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_5 * (1 + input_bihar_5) * (1 + calc_bihar_6)",
+   "formula": "reduction_in_anemia_prevalence_bihar * (1 + internal_validity_adjustment_bihar) * (1 + external_validity_adjustment_bihar)",
    "expected": 0.3930605855,
    "format": "percent"
   },
   {
-   "id": "calc_bihar_2",
-   "label": "calc (Bihar)",
+   "id": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_bi",
+   "label": "Annual anemia YLDs (all ages) averted by iron fortification (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "supp_bihar * (calc_bihar_3 / 100000) * calc_bihar_4",
+   "formula": "supp_bihar * (number_of_individuals_consuming_ifa_supplements_per_year_bih / 100000) * adjusted_reduction_in_anemia_from_iron_supplementation_bihar",
    "expected": 31308.69748
   },
   {
-   "id": "input_bihar_11",
-   "label": "input (Bihar)",
+   "id": "units_of_value_assigned_to_1_yld_averted_bihar",
+   "label": "Units of value assigned to 1 YLD averted (Bihar)",
    "section": "iron_supplementation_cea",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
     "cell": "Iron supplementation CEA!E36"
    },
-   "explainer": "GW moral weights and discount rate"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3.\n\nGW moral weights and discount rate",
+   "formula": "$uov_per_daly",
+   "expected": 2.3
   },
   {
-   "id": "calc_bihar",
-   "label": "calc (Bihar)",
+   "id": "units_of_value_from_anemia_ylds_averted_bihar",
+   "label": "Units of value from anemia YLDs averted (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_2 * input_bihar_11",
+   "formula": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_bi * units_of_value_assigned_to_1_yld_averted_bihar",
    "expected": 72010.00419
   },
   {
-   "id": "calc_bihar_13",
-   "label": "calc (Bihar)",
+   "id": "present_value_of_individual_lifetime_benefits_per_person_wit",
+   "label": "Present value of individual lifetime benefits per person with dietary iron deficiency among people under age 15 (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.03024032761,
    "kind": "estimate",
@@ -802,8 +803,8 @@
    "explainer": "Calculated in the source sheet as `=pv(E44,E46,-E45,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "input_bihar_12",
-   "label": "input (Bihar)",
+   "id": "multiplier_for_resource_sharing_within_households_bihar",
+   "label": "Multiplier for resource sharing within households (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 2.0,
    "kind": "estimate",
@@ -814,10 +815,10 @@
    }
   },
   {
-   "id": "calc_bihar_12",
-   "label": "calc (Bihar)",
+   "id": "present_value_of_total_lifetime_benefits_per_person_with_die",
+   "label": "Present value of total lifetime benefits per person with dietary iron deficiency among people under age 15 (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_13 * input_bihar_12",
+   "formula": "present_value_of_individual_lifetime_benefits_per_person_wit * multiplier_for_resource_sharing_within_households_bihar",
    "expected": 0.06048065522
   },
   {
@@ -835,8 +836,8 @@
    "format": "percent"
   },
   {
-   "id": "feed_bihar",
-   "label": "feed (Bihar)",
+   "id": "proportion_of_population_that_is_0_to_14_years_old_program_s",
+   "label": "Proportion of population that is 0 to 14 years old, program settings (Bihar)",
    "section": "iron_supplementation_cea",
    "value": 0.2704749426,
    "kind": "estimate",
@@ -849,36 +850,36 @@
    "format": "percent"
   },
   {
-   "id": "calc_bihar_14",
-   "label": "calc (Bihar)",
+   "id": "number_of_children_0_to_14_years_old_consuming_iron_suppleme",
+   "label": "Number of children 0 to 14 years old consuming iron supplements per year (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_3 * supp_bihar_4 * feed_bihar",
+   "formula": "number_of_individuals_consuming_ifa_supplements_per_year_bih * supp_bihar_4 * proportion_of_population_that_is_0_to_14_years_old_program_s",
    "expected": 549466.7607
   },
   {
-   "id": "calc_bihar_11",
-   "label": "calc (Bihar)",
+   "id": "total_present_value_of_units_of_increase_in_units_of_annual",
+   "label": "Total present value of units of increase in units of annual ln(income) among people under age 15 (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_12 * calc_bihar_14",
+   "formula": "present_value_of_total_lifetime_benefits_per_person_with_die * number_of_children_0_to_14_years_old_consuming_iron_suppleme",
    "expected": 33232.10971
   },
   {
-   "id": "input_bihar_13",
-   "label": "input (Bihar)",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Bihar)",
    "section": "iron_supplementation_cea",
    "formula": "1 / ln(2)",
    "expected": 1.442695041
   },
   {
-   "id": "calc_bihar_10",
-   "label": "calc (Bihar)",
+   "id": "total_units_of_value_from_development_benefits_in_0_to_14_ye",
+   "label": "Total units of value from development benefits in 0 to 14 year-olds (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc_bihar_11 * input_bihar_13",
+   "formula": "total_present_value_of_units_of_increase_in_units_of_annual * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 47943.79988
   },
   {
-   "id": "input_bihar_14",
-   "label": "input (Bihar)",
+   "id": "total_downside_adjustment_factor_bihar",
+   "label": "Total downside adjustment factor (Bihar)",
    "section": "iron_supplementation_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -890,8 +891,8 @@
    "format": "percent"
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "benefits_of_increased_physical_work_capacity_and_reductions",
+   "label": "Benefits of increased physical work capacity and reductions in neonatal mortality",
    "section": "iron_supplementation_cea",
    "value": 0.02,
    "kind": "estimate",
@@ -903,8 +904,8 @@
    "format": "percent"
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "benefits_of_folic_acid",
+   "label": "Benefits of folic acid",
    "section": "iron_supplementation_cea",
    "value": 0.02,
    "kind": "estimate",
@@ -916,8 +917,8 @@
    "format": "percent"
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "medical_costs_averted",
+   "label": "Medical costs averted",
    "section": "iron_supplementation_cea",
    "value": 0.05,
    "kind": "estimate",
@@ -929,24 +930,24 @@
    "format": "percent"
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "total_units_of_value",
+   "label": "Total units of value",
    "section": "iron_supplementation_cea",
-   "formula": "sum(calc_bihar, calc_bihar_10) * (1 + sum(input_bihar_14, input, input_2, input_3))",
+   "formula": "sum(units_of_value_from_anemia_ylds_averted_bihar, total_units_of_value_from_development_benefits_in_0_to_14_ye) * (1 + sum(total_downside_adjustment_factor_bihar, benefits_of_increased_physical_work_capacity_and_reductions, benefits_of_folic_acid, medical_costs_averted))",
    "expected": 118754.266
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "units_of_value_per_dollar",
+   "label": "Units of value per dollar",
    "section": "iron_supplementation_cea",
-   "formula": "calc_3 / input_bihar",
+   "formula": "total_units_of_value / grant_size_bihar",
    "expected": 0.02947093121
   },
   {
    "id": "program_units_of_value_per_dollar_before_leverage_and_fungin",
    "label": "Program (units of value per dollar before leverage and funging) (Bihar)",
    "section": "leverage_and_funging",
-   "formula": "calc_2",
+   "formula": "units_of_value_per_dollar",
    "expected": 0.02947093121
   },
   {
@@ -1114,8 +1115,8 @@
    "expected": 17.27614705
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "cost_effectiveness_multiples_of_cash_transfers_after_leverag",
+   "label": "Cost-effectiveness, multiples of cash transfers, after leverage and funging",
    "section": "iron_supplementation_cea",
    "formula": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
    "expected": 17.27614705
@@ -1124,7 +1125,7 @@
    "id": "final_cost_effectiveness_estimates_copied_from_below_bihar",
    "label": "Final cost-effectiveness estimates (copied from below) (Bihar)",
    "section": "iron_supplementation_cea",
-   "formula": "calc",
+   "formula": "cost_effectiveness_multiples_of_cash_transfers_after_leverag",
    "expected": 17.27614705
   },
   {

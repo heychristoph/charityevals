@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.04,
+   "uov_per_daly": 2.3
   }
  },
  "resources": [
@@ -87,8 +89,8 @@
    }
   },
   {
-   "id": "daly_trends_a7_year",
-   "label": "DALY trends!A7 (Year)",
+   "id": "daly_trends_a7",
+   "label": "DALY trends!A7",
    "section": "daly_trends",
    "value": 2030.0,
    "kind": "estimate",
@@ -99,8 +101,8 @@
    }
   },
   {
-   "id": "daly_trends_a4_year",
-   "label": "DALY trends!A4 (Year)",
+   "id": "daly_trends_a4",
+   "label": "DALY trends!A4",
    "section": "daly_trends",
    "value": 2015.0,
    "kind": "estimate",
@@ -114,7 +116,7 @@
    "id": "compound_annual_growth_rate_2015_2030_dalys_due_to_onchocerc",
    "label": "Compound annual growth rate, 2015-2030 (DALYs due to onchocerciasis with MDA (modeled), in thousands)",
    "section": "daly_trends",
-   "formula": "(daly_trends_b7_dalys_due_to_onchocerciasis_with_mda_modeled / daly_trends_b4_dalys_due_to_onchocerciasis_with_mda_modeled) ^ (1 / (daly_trends_a7_year - daly_trends_a4_year)) - 1",
+   "formula": "(daly_trends_b7_dalys_due_to_onchocerciasis_with_mda_modeled / daly_trends_b4_dalys_due_to_onchocerciasis_with_mda_modeled) ^ (1 / (daly_trends_a7 - daly_trends_a4)) - 1",
    "expected": -0.0566940281,
    "format": "percent"
   },
@@ -174,14 +176,15 @@
    "id": "discount_rate",
    "label": "Discount rate",
    "section": "year_on_year_differences_in_dal",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
     "cell": "Year on year differences in DAL!B18"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04."
   },
   {
    "id": "year_on_year_differences_in_dal_b1",
@@ -608,13 +611,14 @@
    "id": "units_of_value_per_daly_averted_1_year_speed_up",
    "label": "Units of value per DALY averted (1 year speed up)",
    "section": "botec",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
     "cell": "BOTEC!B11"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
    "id": "of_hyperendemic_and_very_hyperendemic_areas_where_ivermectin",

@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_ln_consumption": 1.44,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -649,14 +651,14 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C104"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_2",
@@ -3322,13 +3324,13 @@
    "id": "exchange_rate_naira_per_usd",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C198"
-   }
+   },
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers",
@@ -3891,14 +3893,14 @@
    "id": "sia_coverage",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C191"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "adjusted_sia_mcv1_vaccine_efficacy",
@@ -5127,14 +5129,14 @@
    "id": "baseline_annual_consumption_per_capita",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C199"
    },
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd",
@@ -5200,25 +5202,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (less subjective input)",
    "section": "new_incentives",
-   "value": 0.38,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C20"
-   }
+   },
+   "formula": "0.38 * $uov_per_ln_consumption / 1.44",
+   "expected": 0.38,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44, and 0.38 here."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat",
    "label": "Value assigned to averting the death of an under-5 — Immunization (less subjective input)",
    "section": "new_incentives",
-   "value": 8.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!C19"
-   }
+   },
+   "formula": "8 * $life_value_multiplier",
+   "expected": 8.0,
+   "explainer": "GiveWell's moral weight, 8 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival",
@@ -5871,14 +5875,14 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_4",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D104"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_9",
@@ -8510,13 +8514,13 @@
    "id": "exchange_rate_naira_per_usd_2",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D198"
-   }
+   },
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_2",
@@ -9079,14 +9083,14 @@
    "id": "sia_coverage_2",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D191"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy",
@@ -10336,14 +10340,14 @@
    "id": "baseline_annual_consumption_per_capita_2",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D199"
    },
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_2",
@@ -10409,25 +10413,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Chelsea)",
    "section": "new_incentives",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D20"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_2",
    "label": "Value assigned to averting the death of an under-5 — Immunization (Chelsea)",
    "section": "new_incentives",
-   "value": 80.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!D19"
-   }
+   },
+   "formula": "80 * $life_value_multiplier",
+   "expected": 80.0,
+   "explainer": "GiveWell's moral weight, 80 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_2",
@@ -11093,15 +11099,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_7",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries.",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_16",
@@ -13751,14 +13757,14 @@
    "id": "exchange_rate_naira_per_usd_3",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_3",
@@ -14328,15 +14334,15 @@
    "id": "sia_coverage_3",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations.",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_2",
@@ -15589,15 +15595,15 @@
    "id": "baseline_annual_consumption_per_capita_3",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_3",
@@ -15663,25 +15669,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_3",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (input to be updated by more data)",
    "section": "new_incentives",
-   "value": 0.72,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E20"
-   }
+   },
+   "formula": "0.72 * $uov_per_ln_consumption / 1.44",
+   "expected": 0.72,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44, and 0.72 here."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_3",
    "label": "Value assigned to averting the death of an under-5 — Immunization (input to be updated by more data)",
    "section": "new_incentives",
-   "value": 50.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!E19"
-   }
+   },
+   "formula": "50 * $life_value_multiplier",
+   "expected": 50.0,
+   "explainer": "GiveWell's moral weight, 50 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_3",
@@ -16335,15 +16343,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_10",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_23",
@@ -18971,14 +18979,14 @@
    "id": "exchange_rate_naira_per_usd_4",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_4",
@@ -19548,15 +19556,15 @@
    "id": "sia_coverage_4",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_3",
@@ -20809,15 +20817,15 @@
    "id": "baseline_annual_consumption_per_capita_4",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_4",
@@ -20883,25 +20891,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_4",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Elie)",
    "section": "new_incentives",
-   "value": 0.33,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F20"
-   }
+   },
+   "formula": "0.33 * $uov_per_ln_consumption / 1.44",
+   "expected": 0.33,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44, and 0.33 here."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_4",
    "label": "Value assigned to averting the death of an under-5 — Immunization (Elie)",
    "section": "new_incentives",
-   "value": 15.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!F19"
-   }
+   },
+   "formula": "15 * $life_value_multiplier",
+   "expected": 15.0,
+   "explainer": "GiveWell's moral weight, 15 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_4",
@@ -21567,15 +21577,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_13",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract https://www.ncbi.nlm.nih.gov/pubmed/17276779",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_30",
@@ -24225,14 +24235,14 @@
    "id": "exchange_rate_naira_per_usd_5",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_5",
@@ -24802,15 +24812,15 @@
    "id": "sia_coverage_5",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_4",
@@ -26063,15 +26073,15 @@
    "id": "baseline_annual_consumption_per_capita_5",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_5",
@@ -26137,25 +26147,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_5",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Isabel)",
    "section": "new_incentives",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G20"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_5",
    "label": "Value assigned to averting the death of an under-5 — Immunization (Isabel)",
    "section": "new_incentives",
-   "value": 36.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!G19"
-   }
+   },
+   "formula": "36 * $life_value_multiplier",
+   "expected": 36.0,
+   "explainer": "GiveWell's moral weight, 36 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_5",
@@ -26821,15 +26833,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_16",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract https://www.ncbi.nlm.nih.gov/pubmed/17276779",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_37",
@@ -29479,14 +29491,14 @@
    "id": "exchange_rate_naira_per_usd_6",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_6",
@@ -30056,15 +30068,15 @@
    "id": "sia_coverage_6",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_5",
@@ -31317,15 +31329,15 @@
    "id": "baseline_annual_consumption_per_capita_6",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_6",
@@ -31391,25 +31403,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_6",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (James)",
    "section": "new_incentives",
-   "value": 0.72,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H20"
-   }
+   },
+   "formula": "0.72 * $uov_per_ln_consumption / 1.44",
+   "expected": 0.72,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44, and 0.72 here."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_6",
    "label": "Value assigned to averting the death of an under-5 — Immunization (James)",
    "section": "new_incentives",
-   "value": 30.52,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!H19"
-   }
+   },
+   "formula": "30.52 * $life_value_multiplier",
+   "expected": 30.52,
+   "explainer": "GiveWell's moral weight, 30.52 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_6",
@@ -32081,15 +32095,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_19",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract https://www.ncbi.nlm.nih.gov/pubmed/17276779",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_44",
@@ -34739,14 +34753,14 @@
    "id": "exchange_rate_naira_per_usd_7",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_7",
@@ -35316,15 +35330,15 @@
    "id": "sia_coverage_7",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_6",
@@ -36577,15 +36591,15 @@
    "id": "baseline_annual_consumption_per_capita_7",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_7",
@@ -36651,25 +36665,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_7",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Josh)",
    "section": "new_incentives",
-   "value": 0.43,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I20"
-   }
+   },
+   "formula": "0.43 * $uov_per_ln_consumption / 1.44",
+   "expected": 0.43,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44, and 0.43 here."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_7",
    "label": "Value assigned to averting the death of an under-5 — Immunization (Josh)",
    "section": "new_incentives",
-   "value": 10.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!I19"
-   }
+   },
+   "formula": "10 * $life_value_multiplier",
+   "expected": 10.0,
+   "explainer": "GiveWell's moral weight, 10 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_7",
@@ -37335,15 +37351,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_22",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract https://www.ncbi.nlm.nih.gov/pubmed/17276779",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_51",
@@ -39993,14 +40009,14 @@
    "id": "exchange_rate_naira_per_usd_8",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_8",
@@ -40570,15 +40586,15 @@
    "id": "sia_coverage_8",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_7",
@@ -41831,15 +41847,15 @@
    "id": "baseline_annual_consumption_per_capita_8",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_8",
@@ -41905,25 +41921,27 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_8",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (subjective input)",
    "section": "new_incentives",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J20"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_under_5_immunizat_8",
    "label": "Value assigned to averting the death of an under-5 — Immunization (subjective input)",
    "section": "new_incentives",
-   "value": 50.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!J19"
-   }
+   },
+   "formula": "50 * $life_value_multiplier",
+   "expected": 50.0,
+   "explainer": "GiveWell's moral weight, 50 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "total_consumption_benefit_for_the_cohort_in_units_of_equival_8",
@@ -42589,15 +42607,15 @@
    "id": "efficacy_of_3_doses_of_pcv_against_all_cause_mortality_25",
    "label": "Efficacy of 3 doses of PCV against all-cause mortality",
    "section": "new_incentives",
-   "value": 0.16,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!K104"
    },
    "explainer": "Cutts et al. 2005, an RCT of PCV efficacy in the Gambia found a 16% (per-protocol) reduction in all-cause mortality in infants under 30mo treated with 3 doses of PCV compared to placebo. See Table 5, p. 1144. This study was not designed to be powered to find a significant effect on mortality, but regardless found a barely-significant effect on mortality. We have not examined this study closely. We have not conducted a review searching for other evidence of PCV effectiveness. Cutts et al. 2005 is the source of efficacy evidence cited (p. 391) by Sinha et al. 2007, a cost-effectiveness analysis of adding PCV to the immunization schedule in Gavi-eligible countries. http://www.thelancet.com/journals/lancet/article/PIIS0140-6736(05)71876-6/abstract https://www.ncbi.nlm.nih.gov/pubmed/17276779",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.efficacy_of_3_doses_of_pcv_against_all_cause_mortality",
+   "expected": 0.16
   },
   {
    "id": "efficacy_of_1_dose_of_pcv_against_all_cause_mortality_58",
@@ -45247,14 +45265,14 @@
    "id": "exchange_rate_naira_per_usd_9",
    "label": "Exchange rate, Naira per USD",
    "section": "new_incentives",
-   "value": 300.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!K198"
    },
-   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t"
+   "explainer": "In email received July 28, 2017: \"The budget assumes an exchange rate of 300 Naira/ USD. New Incentives believes that it can get higher exchange rates but needs to make projections based on the minimum rate it can likely receive. This has implications on the CEA model. New Incentives maintains a weighted exchange rate accounting system and will provide this data to GiveWell so that there is full transparency regarding the costs of the program in USD. Note that the assumption of 300 Naira/ USD is a conservative estimate based on 2016/17 data, however, it is difficult for anyone to predict exchange rate fluctuations in the next 2.5 years.\" In email received 03/08/2017, New Incentives wrote: \"Our current exchange rate for USD to Naira transfers is 415 NGN/USD. Would it make sense to increase the rate of 300 NGN/USD assumed in the current CEA model? We have medium confidence in our ability t",
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
   },
   {
    "id": "cost_of_cash_transfers_9",
@@ -45824,15 +45842,15 @@
    "id": "sia_coverage_9",
    "label": "SIA coverage",
    "section": "new_incentives",
-   "value": 0.76,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!K191"
    },
    "explainer": "The 2016 national SIA in Nigeria included a coverage survey finding 84% coverage. See the \"Retrospective Summary of Measles SIAs\" excel file linked to at the bottom of the WHO immunization surveillance front page. While we place higher confidence in SIA coverage surveys than in routinely reported SIA coverage, we remain not confident in the accuracy of SIA coverage surveys. We suspect that SIA coverage varies by region and might be much lower in areas where New Incentives works, and in particular in the North West. We have arbitrarily reduced the survey-reported coverage estimate in response to our expectations. http://www.who.int/immunization/monitoring_surveillance/data/en/",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.sia_coverage",
+   "expected": 0.76
   },
   {
    "id": "sia_vaccine_efficacy_8",
@@ -47085,15 +47103,15 @@
    "id": "baseline_annual_consumption_per_capita_9",
    "label": "Baseline annual consumption per capita",
    "section": "new_incentives",
-   "value": 657.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hQb7m6tLyMmhwmU_I2MsuWbr2bpRH8oVbVzJ5K1zYsE/edit",
     "cell": "New Incentives!K199"
    },
    "explainer": "We are highly uncertain about per capita annual consumption in the population enrolled in the New Incentives program. We do not necessarily expect to learn more about this parameter from the program. In 2016, we attempted to estimate the baseline consumption of women in the New Incentives program (CCTs for facility delivery) at that time. We wrote: New Incentives collects some income data from enrollees (see \"Income Statistics and Use/Spending of Cash Transfers\" accessed 08/23/2016), however NI notes that data quality is low (low number of responses) because many women do not work during pregnancy and many do not know the income of their husbands. Of those who responded, the average mother's salary was $1.24 USD/day and the average partner's salary was $4.46/day. We take these values as some evidence that NI recipients have per capita consumption similar to the median in Nigeria (see bel",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
   },
   {
    "id": "baseline_annual_consumption_per_capita_usd_9",

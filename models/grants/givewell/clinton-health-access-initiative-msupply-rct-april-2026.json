@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -132,14 +133,14 @@
    "id": "moral_weights_early_neonatal",
    "label": "Moral weights (Early Neonatal)",
    "section": "moral_weights",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
     "cell": "Moral weights!B2"
    },
-   "explainer": "measure location"
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life.\n\nmeasure location",
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_7_27_days",
@@ -153,14 +154,14 @@
    "id": "moral_weights_late_neonatal",
    "label": "Moral weights (Late Neonatal)",
    "section": "moral_weights",
-   "value": 84.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
     "cell": "Moral weights!C2"
    },
-   "explainer": "measure location cause"
+   "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life.\n\nmeasure location cause",
+   "formula": "84.5 * $life_value_multiplier",
+   "expected": 84.5
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_6_11_months",
@@ -174,14 +175,14 @@
    "id": "moral_weights_post_neonatal",
    "label": "Moral weights (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
     "cell": "Moral weights!D2"
    },
-   "explainer": "measure location cause metric"
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_12_23_months",
@@ -195,14 +196,14 @@
    "id": "moral_weights_1_to_4",
    "label": "Moral weights (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
     "cell": "Moral weights!E2"
    },
-   "explainer": "measure location cause metric year"
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric year",
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3
   },
   {
    "id": "value_of_preventing_an_under_5_death_laos_7_27_days",
@@ -340,24 +341,24 @@
    "expected": 0.9251424005
   },
   {
-   "id": "laos_rct",
-   "label": "$ (Laos RCT)",
+   "id": "direct_program_costs_laos_rct_2",
+   "label": "Direct program costs (Laos RCT)",
    "section": "lf",
    "formula": "direct_program_costs_laos_rct",
    "expected": 2069027.0,
    "format": "usd"
   },
   {
-   "id": "calc_laos_rct_6",
-   "label": "calc (Laos RCT)",
+   "id": "total_spending_contributed_by_grantee_laos_rct",
+   "label": "Total spending contributed by grantee (Laos RCT)",
    "section": "lf",
-   "formula": "laos_rct",
+   "formula": "direct_program_costs_laos_rct_2",
    "expected": 2069027.0,
    "format": "usd"
   },
   {
-   "id": "input_laos_rct",
-   "label": "input (Laos RCT)",
+   "id": "scenario_1_domestic_governments_would_replace_philanthropic",
+   "label": "Scenario 1: Domestic governments would replace philanthropic costs (Laos RCT)",
    "section": "lf",
    "value": 0.5,
    "kind": "estimate",
@@ -369,30 +370,30 @@
    "format": "percent"
   },
   {
-   "id": "calc_laos_rct_5",
-   "label": "calc (Laos RCT)",
+   "id": "amount_of_spending_domestic_governments_would_shift_to_the_g",
+   "label": "Amount of spending domestic governments would shift to the grantee program (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_6 * input_laos_rct",
+   "formula": "total_spending_contributed_by_grantee_laos_rct * scenario_1_domestic_governments_would_replace_philanthropic",
    "expected": 1034513.5,
    "format": "usd"
   },
   {
-   "id": "calc_laos_rct_7",
-   "label": "calc (Laos RCT)",
+   "id": "units_of_value_generated_per_dollar_donated_to_grantee_laos",
+   "label": "Units of value generated per dollar donated to grantee (Laos RCT)",
    "section": "lf",
    "formula": "units_of_value_per_after_initial_adjustments_laos_rct",
    "expected": 0.003080724194
   },
   {
-   "id": "calc_laos_rct_4",
-   "label": "calc (Laos RCT)",
+   "id": "value_generated_by_shifting_government_spending_to_the_grant",
+   "label": "Value generated by shifting government spending to the grantee program (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_5 * calc_laos_rct_7",
+   "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * units_of_value_generated_per_dollar_donated_to_grantee_laos",
    "expected": 3187.050768
   },
   {
-   "id": "input_laos_rct_2",
-   "label": "input (Laos RCT)",
+   "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
+   "label": "Counterfactual value per dollar spent by domestic governments (Laos RCT)",
    "section": "lf",
    "value": 0.005057,
    "kind": "estimate",
@@ -403,29 +404,29 @@
    }
   },
   {
-   "id": "calc_laos_rct_8",
-   "label": "calc (Laos RCT)",
+   "id": "value_lost_by_shifting_spending_away_from_programs_domestic",
+   "label": "Value lost by shifting spending away from programs domestic governments would otherwise have funded (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_5 * input_laos_rct_2",
+   "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 5231.53477
   },
   {
-   "id": "calc_laos_rct_3",
-   "label": "calc (Laos RCT)",
+   "id": "net_value_generated_by_shifting_government_spending_to_the_g",
+   "label": "Net value generated by shifting government spending to the grantee program (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_4 - calc_laos_rct_8",
+   "formula": "value_generated_by_shifting_government_spending_to_the_grant - value_lost_by_shifting_spending_away_from_programs_domestic",
    "expected": -2044.484001
   },
   {
-   "id": "calc_laos_rct_2",
-   "label": "calc (Laos RCT)",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual (Laos RCT)",
    "section": "lf",
-   "formula": "-calc_laos_rct_3",
+   "formula": "-net_value_generated_by_shifting_government_spending_to_the_g",
    "expected": 2044.484001
   },
   {
-   "id": "laos_rct_2",
-   "label": "% (Laos RCT)",
+   "id": "scenario_1_domestic_governments_would_replace_philanthropic_2",
+   "label": "Scenario 1: Domestic governments would replace philanthropic costs (Laos RCT)",
    "section": "lf",
    "value": 0.1,
    "kind": "estimate",
@@ -437,23 +438,23 @@
    "format": "percent"
   },
   {
-   "id": "feed_laos_rct",
-   "label": "feed (Laos RCT)",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa",
+   "label": "Probability of this scenario representing the true counterfactual (Laos RCT)",
    "section": "lf",
-   "formula": "laos_rct_2",
+   "formula": "scenario_1_domestic_governments_would_replace_philanthropic_2",
    "expected": 0.1,
    "format": "percent"
   },
   {
-   "id": "calc_laos_rct",
-   "label": "calc (Laos RCT)",
+   "id": "expected_change_in_value_generated_by_the_grantee_program_la",
+   "label": "Expected change in value generated by the grantee program (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_2 * feed_laos_rct",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce * probability_of_this_scenario_representing_the_true_counterfa",
    "expected": 204.4484001
   },
   {
-   "id": "input_laos_rct_3",
-   "label": "input (Laos RCT)",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs (Laos RCT)",
    "section": "lf",
    "value": 0.75,
    "kind": "estimate",
@@ -465,23 +466,23 @@
    "format": "percent"
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "amount_of_spending_other_philanthropic_actors_would_shift_to",
+   "label": "Amount of spending other philanthropic actors would shift to the grantee program",
    "section": "lf",
-   "formula": "calc_laos_rct_6 * input_laos_rct_3",
+   "formula": "total_spending_contributed_by_grantee_laos_rct * scenario_2_other_philanthropic_actors_would_replace_philanth",
    "expected": 1551770.25,
    "format": "usd"
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "value_generated_by_shifting_other_philanthropic_actors_spend",
+   "label": "Value generated by shifting other philanthropic actors' spending to the grantee program",
    "section": "lf",
-   "formula": "calc_7 * calc_laos_rct_7",
+   "formula": "amount_of_spending_other_philanthropic_actors_would_shift_to * units_of_value_generated_per_dollar_donated_to_grantee_laos",
    "expected": 4780.576152
   },
   {
-   "id": "input_laos_rct_4",
-   "label": "input (Laos RCT)",
+   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
+   "label": "Counterfactual value per dollar spent by the Global Fund or PMI (used to proxy other philanthropic actors) (Laos RCT)",
    "section": "lf",
    "value": 0.015433,
    "kind": "estimate",
@@ -492,29 +493,29 @@
    }
   },
   {
-   "id": "calc_8",
-   "label": "calc",
+   "id": "value_lost_by_shifting_spending_away_from_programs_that_othe",
+   "label": "Value lost by shifting spending away from programs that other philanthropic actors would otherwise have funded",
    "section": "lf",
-   "formula": "calc_7 * input_laos_rct_4",
+   "formula": "amount_of_spending_other_philanthropic_actors_would_shift_to * counterfactual_value_per_dollar_spent_by_the_global_fund_or",
    "expected": 23948.47027
   },
   {
-   "id": "calc_5",
-   "label": "calc",
+   "id": "net_value_generated_by_shifting_other_philanthropic_actors_s",
+   "label": "Net value generated by shifting other philanthropic actors' spending to the grantee program",
    "section": "lf",
-   "formula": "calc_6 - calc_8",
+   "formula": "value_generated_by_shifting_other_philanthropic_actors_spend - value_lost_by_shifting_spending_away_from_programs_that_othe",
    "expected": -19167.89412
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_2",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "lf",
-   "formula": "-calc_5",
+   "formula": "-net_value_generated_by_shifting_other_philanthropic_actors_s",
    "expected": 19167.89412
   },
   {
-   "id": "laos_rct_3",
-   "label": "% (Laos RCT)",
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_2",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs (Laos RCT)",
    "section": "lf",
    "value": 0.1,
    "kind": "estimate",
@@ -526,23 +527,23 @@
    "format": "percent"
   },
   {
-   "id": "feed",
-   "label": "feed",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "lf",
-   "formula": "laos_rct_3",
+   "formula": "scenario_2_other_philanthropic_actors_would_replace_philanth_2",
    "expected": 0.1,
    "format": "percent"
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "expected_change_in_value_generated_by_the_grantee_program",
+   "label": "Expected change in value generated by the grantee program",
    "section": "lf",
-   "formula": "calc_4 * feed",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_2 * probability_of_this_scenario_representing_the_true_counterfa_2",
    "expected": 1916.789412
   },
   {
-   "id": "laos_rct_4",
-   "label": "% (Laos RCT)",
+   "id": "percentage_of_total_costs_covered_by_the_grantee_laos_rct",
+   "label": "Percentage of total costs covered by the grantee (Laos RCT)",
    "section": "lf",
    "value": 0.7,
    "kind": "estimate",
@@ -554,16 +555,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_laos_rct_10",
-   "label": "calc (Laos RCT)",
+   "id": "total_spending_by_all_contributors_laos_rct",
+   "label": "Total spending by all contributors (Laos RCT)",
    "section": "lf",
-   "formula": "laos_rct / laos_rct_4",
+   "formula": "direct_program_costs_laos_rct_2 / percentage_of_total_costs_covered_by_the_grantee_laos_rct",
    "expected": 2955752.857,
    "format": "usd"
   },
   {
-   "id": "laos_rct_5",
-   "label": "% (Laos RCT)",
+   "id": "percentage_of_total_costs_covered_by_domestic_governments_la",
+   "label": "Percentage of total costs covered by domestic governments (Laos RCT)",
    "section": "lf",
    "value": 0.25,
    "kind": "estimate",
@@ -575,16 +576,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_laos_rct_9",
-   "label": "calc (Laos RCT)",
+   "id": "total_spending_contributed_by_domestic_governments_laos_rct",
+   "label": "Total spending contributed by domestic governments (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_10 * laos_rct_5",
+   "formula": "total_spending_by_all_contributors_laos_rct * percentage_of_total_costs_covered_by_domestic_governments_la",
    "expected": 738938.2143,
    "format": "usd"
   },
   {
-   "id": "laos_rct_6",
-   "label": "% (Laos RCT)",
+   "id": "percentage_of_total_costs_covered_by_other_philanthropic_act",
+   "label": "Percentage of total costs covered by other philanthropic actors (Laos RCT)",
    "section": "lf",
    "value": 0.05,
    "kind": "estimate",
@@ -596,47 +597,47 @@
    "format": "percent"
   },
   {
-   "id": "calc_laos_rct_12",
-   "label": "calc (Laos RCT)",
+   "id": "total_spending_contributed_by_other_philanthropic_actors_lao",
+   "label": "Total spending contributed by other philanthropic actors (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_10 * laos_rct_6",
+   "formula": "total_spending_by_all_contributors_laos_rct * percentage_of_total_costs_covered_by_other_philanthropic_act",
    "expected": 147787.6429,
    "format": "usd"
   },
   {
-   "id": "calc_laos_rct_13",
-   "label": "calc (Laos RCT)",
+   "id": "total_spending_causally_upstream_of_donations_to_grantee_lao",
+   "label": "Total spending causally upstream of donations to grantee (Laos RCT)",
    "section": "lf",
-   "formula": "sum(calc_laos_rct_6, calc_laos_rct_12)",
+   "formula": "sum(total_spending_contributed_by_grantee_laos_rct, total_spending_contributed_by_other_philanthropic_actors_lao)",
    "expected": 2216814.643,
    "format": "usd"
   },
   {
-   "id": "calc_laos_rct_11",
-   "label": "calc (Laos RCT)",
+   "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre",
+   "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Laos RCT)",
    "section": "lf",
-   "formula": "calc_laos_rct_12 / calc_laos_rct_13",
+   "formula": "total_spending_contributed_by_other_philanthropic_actors_lao / total_spending_causally_upstream_of_donations_to_grantee_lao",
    "expected": 0.06666666667,
    "format": "percent"
   },
   {
-   "id": "calc_13",
-   "label": "calc",
+   "id": "amount_of_spending_domestic_governments_would_shift_away_fro",
+   "label": "Amount of spending domestic governments would shift away from the grantee program",
    "section": "lf",
-   "formula": "calc_laos_rct_9 * (1 - calc_laos_rct_11)",
+   "formula": "total_spending_contributed_by_domestic_governments_laos_rct * (1 - scenario_3_other_upstream_costs_would_stay_the_same_downstre)",
    "expected": 689675.6667,
    "format": "usd"
   },
   {
-   "id": "calc_12",
-   "label": "calc",
+   "id": "value_generated_by_shifting_spending_toward_programs_domesti",
+   "label": "Value generated by shifting spending toward programs domestic governments would otherwise have supported",
    "section": "lf",
-   "formula": "calc_13 * input_laos_rct_2",
+   "formula": "amount_of_spending_domestic_governments_would_shift_away_fro * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 3487.689846
   },
   {
-   "id": "calc_14",
-   "label": "calc",
+   "id": "value_lost_by_shifting_government_spending_away_from_the_gra",
+   "label": "Value lost by shifting government spending away from the grantee program",
    "section": "lf",
    "value": 0.0,
    "kind": "estimate",
@@ -647,22 +648,22 @@
    }
   },
   {
-   "id": "calc_11",
-   "label": "calc",
+   "id": "net_value_generated_by_shifting_government_spending_away_fro",
+   "label": "Net value generated by shifting government spending away from the grantee program",
    "section": "lf",
-   "formula": "calc_12 - calc_14",
+   "formula": "value_generated_by_shifting_spending_toward_programs_domesti - value_lost_by_shifting_government_spending_away_from_the_gra",
    "expected": 3487.689846
   },
   {
-   "id": "calc_10",
-   "label": "calc",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_3",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "lf",
-   "formula": "-calc_11",
+   "formula": "-net_value_generated_by_shifting_government_spending_away_fro",
    "expected": -3487.689846
   },
   {
-   "id": "laos_rct_7",
-   "label": "% (Laos RCT)",
+   "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
+   "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Laos RCT)",
    "section": "lf",
    "value": 0.8,
    "kind": "estimate",
@@ -674,38 +675,38 @@
    "format": "percent"
   },
   {
-   "id": "feed_2",
-   "label": "feed",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_3",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "lf",
-   "formula": "laos_rct_7",
+   "formula": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
    "expected": 0.8,
    "format": "percent"
   },
   {
-   "id": "calc_9",
-   "label": "calc",
+   "id": "expected_change_in_value_generated_by_the_program",
+   "label": "Expected change in value generated by the program",
    "section": "lf",
-   "formula": "calc_10 * feed_2",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_3 * probability_of_this_scenario_representing_the_true_counterfa_3",
    "expected": -2790.151877
   },
   {
-   "id": "calc_19",
-   "label": "calc",
+   "id": "amount_of_spending_domestic_governments_would_shift_away_fro_2",
+   "label": "Amount of spending domestic governments would shift away from the grantee program",
    "section": "lf",
-   "formula": "calc_laos_rct_9",
+   "formula": "total_spending_contributed_by_domestic_governments_laos_rct",
    "expected": 738938.2143,
    "format": "usd"
   },
   {
-   "id": "calc_18",
-   "label": "calc",
+   "id": "value_generated_by_shifting_spending_to_programs_domestic_go",
+   "label": "Value generated by shifting spending to programs domestic governments would otherwise have funded",
    "section": "lf",
-   "formula": "calc_19 * input_laos_rct_2",
+   "formula": "amount_of_spending_domestic_governments_would_shift_away_fro_2 * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 3736.81055
   },
   {
-   "id": "calc_20",
-   "label": "calc",
+   "id": "value_lost_by_shifting_government_spending_away_from_the_gra_2",
+   "label": "Value lost by shifting government spending away from the grantee program",
    "section": "lf",
    "value": 0.0,
    "kind": "estimate",
@@ -716,61 +717,61 @@
    }
   },
   {
-   "id": "calc_17",
-   "label": "calc",
+   "id": "net_value_generated_by_shifting_government_spending_away_fro_2",
+   "label": "Net value generated by shifting government spending away from the grantee program",
    "section": "lf",
-   "formula": "calc_18 - calc_20",
+   "formula": "value_generated_by_shifting_spending_to_programs_domestic_go - value_lost_by_shifting_government_spending_away_from_the_gra_2",
    "expected": 3736.81055
   },
   {
-   "id": "calc_16",
-   "label": "calc",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_4",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
    "section": "lf",
-   "formula": "-calc_17",
+   "formula": "-net_value_generated_by_shifting_government_spending_away_fro_2",
    "expected": -3736.81055
   },
   {
-   "id": "laos_rct_8",
-   "label": "% (Laos RCT)",
+   "id": "scenario_4_distributions_would_go_unfunded_laos_rct",
+   "label": "Scenario 4: Distributions would go unfunded (Laos RCT)",
    "section": "lf",
-   "formula": "1 - sum(laos_rct_2, laos_rct_3, laos_rct_7)",
+   "formula": "1 - sum(scenario_1_domestic_governments_would_replace_philanthropic_2, scenario_2_other_philanthropic_actors_would_replace_philanth_2, scenario_3_other_upstream_costs_would_stay_the_same_downstre_2)",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "feed_3",
-   "label": "feed",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_4",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "lf",
-   "formula": "laos_rct_8",
+   "formula": "scenario_4_distributions_would_go_unfunded_laos_rct",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "calc_15",
-   "label": "calc",
+   "id": "expected_change_in_value_generated_by_the_program_2",
+   "label": "Expected change in value generated by the program",
    "section": "lf",
-   "formula": "calc_16 * feed_3",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_4 * probability_of_this_scenario_representing_the_true_counterfa_4",
    "expected": 0.0
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "total_expected_change_in_value_generated_as_a_result_of_leve",
+   "label": "Total expected change in value generated as a result of leverage and funging",
    "section": "lf",
-   "formula": "sum(calc_laos_rct, calc_3, calc_9, calc_15)",
+   "formula": "sum(expected_change_in_value_generated_by_the_grantee_program_la, expected_change_in_value_generated_by_the_grantee_program, expected_change_in_value_generated_by_the_program, expected_change_in_value_generated_by_the_program_2)",
    "expected": -668.9140653
   },
   {
-   "id": "calc_21",
-   "label": "calc",
+   "id": "total_value_generated_by_grantee_spending_before_adjusting_f",
+   "label": "Total value generated by grantee spending before adjusting for leverage and funging",
    "section": "lf",
-   "formula": "calc_laos_rct_6 * calc_laos_rct_7",
+   "formula": "total_spending_contributed_by_grantee_laos_rct * units_of_value_generated_per_dollar_donated_to_grantee_laos",
    "expected": 6374.101536
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "adjustment_for_leverage_and_funging",
+   "label": "Adjustment for leverage and funging",
    "section": "lf",
-   "formula": "calc_2 / calc_21",
+   "formula": "total_expected_change_in_value_generated_as_a_result_of_leve / total_value_generated_by_grantee_spending_before_adjusting_f",
    "expected": -0.1049424866,
    "format": "percent"
   },
@@ -778,7 +779,7 @@
    "id": "leverage_and_funging_adjustment_laos_rct",
    "label": "Leverage and funging adjustment (Laos RCT)",
    "section": "cea",
-   "formula": "calc",
+   "formula": "adjustment_for_leverage_and_funging",
    "expected": -0.1049424866,
    "format": "percent"
   },

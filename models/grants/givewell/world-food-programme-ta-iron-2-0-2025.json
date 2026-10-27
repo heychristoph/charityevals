@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 2.3,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -109,8 +111,8 @@
    "explainer": "Calculated in the source sheet as `=IFERROR(__xludf.DUMMYFUNCTION(\"filter('GBD 2021 anemia estimates'!J4:J1082,'GBD 2021 anemia estimates'!C4:C1082=\"\"All causes\"\", 'GBD 2021 anemia estimates'!E4:E1082=\"\"All ages\"\",'GBD 2021 anemia estimates'!F4:F1082=D1,'GBD 2021 anemia estimates'!G4:G1082=\"\"YLDs\"\",'GBD 2021 anemia estim\"&\"ates'!H4:H1082=\"\"Rate (per 100,000)\"\")\"),1272.0174)`; kept as a fixed number here (operator &).\n\n\"GBD 2021 estimates\" sheet"
   },
   {
-   "id": "input_bihar",
-   "label": "input (Bihar)",
+   "id": "adjustment_for_future_anemia_trends_bihar",
+   "label": "Adjustment for future anemia trends (Bihar)",
    "section": "iron_fortification_cea",
    "value": -0.15,
    "kind": "estimate",
@@ -123,8 +125,8 @@
    "format": "percent"
   },
   {
-   "id": "input_bihar_2",
-   "label": "input (Bihar)",
+   "id": "adjustment_for_socioeconomic_status_of_beneficiaries_bihar",
+   "label": "Adjustment for socioeconomic status of beneficiaries (Bihar)",
    "section": "iron_fortification_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -149,30 +151,30 @@
    }
   },
   {
-   "id": "rate_val",
-   "label": "Rate (val)",
+   "id": "anemia_val",
+   "label": "Anemia (val)",
    "section": "gbd_2021_anemia_yld_data",
-   "value": 1272.01738908328,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "GBD 2021 Anemia YLD Data!P11"
-   }
+   },
+   "formula": "@givewell.anemia_val",
+   "expected": 1272.01738908328
   },
   {
-   "id": "calc_bihar_4",
-   "label": "calc (Bihar)",
+   "id": "adjustment_for_state_level_anemia_burden_bihar",
+   "label": "Adjustment for state-level anemia burden (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "rate_per_100_000 / rate_val - 1",
+   "formula": "rate_per_100_000 / anemia_val - 1",
    "expected": 0.1516613787,
    "format": "percent"
   },
   {
-   "id": "calc_bihar_3",
-   "label": "calc (Bihar)",
+   "id": "annual_anemia_ylds_per_100_000_people_all_ages_2021_adjusted",
+   "label": "Annual anemia YLDs per 100,000 people, all ages, 2021, adjusted (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "supp * (1 + input_bihar) * (1 + input_bihar_2) * (1 + calc_bihar_4)",
+   "formula": "supp * (1 + adjustment_for_future_anemia_trends_bihar) * (1 + adjustment_for_socioeconomic_status_of_beneficiaries_bihar) * (1 + adjustment_for_state_level_anemia_burden_bihar)",
    "expected": 1245.193316
   },
   {
@@ -229,15 +231,15 @@
    }
   },
   {
-   "id": "calc_bihar_5",
-   "label": "calc (Bihar)",
+   "id": "people_years_of_support_bihar",
+   "label": "People-years of support (Bihar)",
    "section": "iron_fortification_cea",
    "formula": "total_beneficiaries_in_bihar_per_year * years_of_implementation",
    "expected": 55184152.24
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "risk_ratio_for_anemia_rice_fortification_with_iron_from_give",
+   "label": "Risk ratio for anemia, rice fortification with iron (from GiveWell's meta-analysis)",
    "section": "iron_fortification_cea",
    "value": 0.71,
    "kind": "estimate",
@@ -249,16 +251,16 @@
    "explainer": "GiveWell, \"Meta-analysis of fortified rice impact on anemia in RCTs\" (2023)"
   },
   {
-   "id": "calc_5",
-   "label": "calc",
+   "id": "reduction_in_anemia_prevalence_from_iron_fortification",
+   "label": "Reduction in anemia prevalence from iron fortification",
    "section": "iron_fortification_cea",
-   "formula": "1 - input",
+   "formula": "1 - risk_ratio_for_anemia_rice_fortification_with_iron_from_give",
    "expected": 0.29,
    "format": "percent"
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
    "section": "iron_fortification_cea",
    "value": -0.25,
    "kind": "estimate",
@@ -307,8 +309,8 @@
    "format": "percent"
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr",
+   "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency",
    "section": "iron_fortification_cea",
    "formula": "supp_2 / supp_3 - 1",
    "expected": 0.06098759988,
@@ -803,8 +805,8 @@
    "format": "percent"
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "assumed_effect_of_inflammation_on_iron_absorption",
+   "label": "Assumed effect of inflammation on iron absorption",
    "section": "iron_fortification_cea",
    "value": 0.2,
    "kind": "estimate",
@@ -817,16 +819,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_8",
-   "label": "calc",
+   "id": "adjustment_for_inflammation_in_program_compared_to_study_pop",
+   "label": "Adjustment for inflammation in program compared to study population",
    "section": "iron_fortification_cea",
-   "formula": "(supp_4 / supp_5 - 1) * input_3",
+   "formula": "(supp_4 / supp_5 - 1) * assumed_effect_of_inflammation_on_iron_absorption",
    "expected": -0.002097836435,
    "format": "percent"
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "adjustment_for_fortification_implemented_at_scale",
+   "label": "Adjustment for fortification implemented at scale",
    "section": "iron_fortification_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -1044,7 +1046,7 @@
   },
   {
    "id": "coverage_of_adequately_fortified_rice_without_support_givewe_2",
-   "label": "Coverage of adequately fortified rice, without support (GiveWell's best guess) (Calc)",
+   "label": "Coverage of adequately fortified rice, without support (GiveWell's best guess) (Assumption)",
    "section": "effect_on_iron_intake",
    "value": 0.27,
    "kind": "estimate",
@@ -1463,8 +1465,8 @@
    "expected": 18.2
   },
   {
-   "id": "calc_11",
-   "label": "calc",
+   "id": "increase_in_iron_ferric_pyrophosphate_in_adequately_fortifie",
+   "label": "Increase in iron (ferric pyrophosphate) in adequately fortified rice (mg/kg of rice) over the counterfactual thanks to WFP support, average over 3 years",
    "section": "iron_fortification_cea",
    "formula": "supp_7 * supp_8 - supp_9 * supp_8",
    "expected": 1.157805714
@@ -1491,17 +1493,17 @@
    "expected": 133.6
   },
   {
-   "id": "calc_12",
-   "label": "calc",
+   "id": "estimated_fortified_rice_consumption_per_person_per_day_kg",
+   "label": "Estimated fortified rice consumption, per person, per day (kg)",
    "section": "iron_fortification_cea",
    "formula": "fortified_rice_consumption_per_person_per_day_grams / 1000",
    "expected": 0.1336
   },
   {
-   "id": "calc_10",
-   "label": "calc",
+   "id": "increase_in_iron_intake_ferric_pyrophosphate_per_week_mg_due",
+   "label": "Increase in iron intake (ferric pyrophosphate) per week (mg) due to WFP support",
    "section": "iron_fortification_cea",
-   "formula": "calc_11 * calc_12 * 7",
+   "formula": "increase_in_iron_ferric_pyrophosphate_in_adequately_fortifie * estimated_fortified_rice_consumption_per_person_per_day_kg * 7",
    "expected": 1.082779904
   },
   {
@@ -1526,10 +1528,10 @@
    "expected": 0.2173913043
   },
   {
-   "id": "calc_9",
-   "label": "calc",
+   "id": "total_additional_iron_intake_per_individual_per_week_due_to",
+   "label": "Total additional iron intake per individual per week due to WFP's TA, NaFeEDTA-equivalent (mg)",
    "section": "iron_fortification_cea",
-   "formula": "calc_10 * supp_10",
+   "formula": "increase_in_iron_intake_ferric_pyrophosphate_per_week_mg_due * supp_10",
    "expected": 0.2353869357
   },
   {
@@ -1961,13 +1963,13 @@
    "id": "supp_6",
    "label": "supp",
    "section": "iron_fortification_cea",
-   "formula": "calc_9 / weighted_average_2 - 1",
+   "formula": "total_additional_iron_intake_per_individual_per_week_due_to / weighted_average_2 - 1",
    "expected": -0.9833832804,
    "format": "percent"
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
+   "label": "Assumed effect of increased iron intake on anemia prevalence",
    "section": "iron_fortification_cea",
    "value": 1.0,
    "kind": "estimate",
@@ -1980,16 +1982,16 @@
    "format": "percent"
   },
   {
-   "id": "input_6",
-   "label": "input",
+   "id": "adjustment_for_fortification_duration_relative_to_trial_sett",
+   "label": "Adjustment for fortification duration (relative to trial settings)",
    "section": "iron_fortification_cea",
    "formula": "1 / 0.4 - 1",
    "expected": 1.5,
    "format": "percent"
   },
   {
-   "id": "calc_13",
-   "label": "calc",
+   "id": "adjustment_for_cooking_methods",
+   "label": "Adjustment for cooking methods",
    "section": "iron_fortification_cea",
    "formula": "avg(avg(0.8, 1), avg(0.55, 1)) - 1",
    "expected": -0.1625,
@@ -2088,59 +2090,59 @@
    "format": "percent"
   },
   {
-   "id": "calc_14",
-   "label": "calc",
+   "id": "adjustment_for_tea_and_phytic_acid_consumption",
+   "label": "Adjustment for tea and phytic acid consumption",
    "section": "iron_fortification_cea",
    "formula": "(adjustment_for_tea_consumption_in_program_compared_to_study - 1) * 2",
    "expected": -0.2504875864,
    "format": "percent"
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
    "section": "iron_fortification_cea",
-   "formula": "(1 + calc_7) * (1 + calc_8) * (1 + input_4) * (1 + supp_6 * input_5) * (1 + input_6 * input_5) * (1 + calc_13) * (1 + calc_14) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_fortification_implemented_at_scale) * (1 + supp_6 * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_fortification_duration_relative_to_trial_sett * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_cooking_methods) * (1 + adjustment_for_tea_and_phytic_acid_consumption) - 1",
    "expected": -0.9779129759,
    "format": "percent"
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "adjusted_reduction_in_anemia_from_iron_fortification",
+   "label": "Adjusted reduction in anemia from iron fortification",
    "section": "iron_fortification_cea",
-   "formula": "calc_5 * (1 + input_2) * (1 + calc_6)",
+   "formula": "reduction_in_anemia_prevalence_from_iron_fortification * (1 + internal_validity_adjustment) * (1 + external_validity_adjustment)",
    "expected": 0.004803927732,
    "format": "percent"
   },
   {
-   "id": "calc_bihar_2",
-   "label": "calc (Bihar)",
+   "id": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_bi",
+   "label": "Annual anemia YLDs (all ages) averted by iron fortification (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "calc_bihar_3 * (calc_bihar_5 / 100000) * calc_4",
+   "formula": "annual_anemia_ylds_per_100_000_people_all_ages_2021_adjusted * (people_years_of_support_bihar / 100000) * adjusted_reduction_in_anemia_from_iron_fortification",
    "expected": 3301.015939
   },
   {
-   "id": "input_7",
-   "label": "input",
+   "id": "units_of_value_assigned_to_1_yld_averted",
+   "label": "Units of value assigned to 1 YLD averted",
    "section": "iron_fortification_cea",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E51"
    },
-   "explainer": "GiveWell, \"Moral Weights\" (May 2025)"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3.\n\nGiveWell, \"Moral Weights\" (May 2025)",
+   "formula": "$uov_per_daly",
+   "expected": 2.3
   },
   {
-   "id": "calc_bihar",
-   "label": "calc (Bihar)",
+   "id": "total_units_of_value_from_anemia_ylds_averted_bihar",
+   "label": "Total units of value from anemia YLDs averted (Bihar)",
    "section": "iron_fortification_cea",
-   "formula": "calc_bihar_2 * input_7",
+   "formula": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_bi * units_of_value_assigned_to_1_yld_averted",
    "expected": 7592.336659
   },
   {
-   "id": "calc_18",
-   "label": "calc",
+   "id": "present_value_of_individual_lifetime_benefits_per_person_wit",
+   "label": "Present value of individual lifetime benefits per person with dietary iron deficiency among people under age 15",
    "section": "iron_fortification_cea",
    "value": 0.0005076899299,
    "kind": "estimate",
@@ -2152,8 +2154,8 @@
    "explainer": "Calculated in the source sheet as `=pv(E71,E73,-E72,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "input_8",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households",
+   "label": "Multiplier for resource sharing within households",
    "section": "iron_fortification_cea",
    "value": 2.0,
    "kind": "estimate",
@@ -2165,10 +2167,10 @@
    "explainer": "GiveWell, \"Estimating multiplier for benefits experienced by other household members\" (2018)"
   },
   {
-   "id": "calc_17",
-   "label": "calc",
+   "id": "present_value_of_total_lifetime_benefits_per_person_with_die",
+   "label": "Present value of total lifetime benefits per person with dietary iron deficiency among people under age 15",
    "section": "iron_fortification_cea",
-   "formula": "calc_18 * input_8",
+   "formula": "present_value_of_individual_lifetime_benefits_per_person_wit * multiplier_for_resource_sharing_within_households",
    "expected": 0.00101537986
   },
   {
@@ -2186,8 +2188,8 @@
    "format": "percent"
   },
   {
-   "id": "feed",
-   "label": "feed",
+   "id": "proportion_of_population_that_is_0_to_14_years_old_program_s",
+   "label": "Proportion of population that is 0 to 14 years old, program settings",
    "section": "iron_fortification_cea",
    "value": 0.2704749426,
    "kind": "estimate",
@@ -2200,71 +2202,71 @@
    "format": "percent"
   },
   {
-   "id": "calc_19",
-   "label": "calc",
+   "id": "number_of_children_0_to_14_years_old_consuming_iron_fortifie",
+   "label": "Number of children 0 to 14 years old consuming iron-fortified wheat flour",
    "section": "iron_fortification_cea",
-   "formula": "calc_bihar_5 * supp_11 * feed",
+   "formula": "people_years_of_support_bihar * supp_11 * proportion_of_population_that_is_0_to_14_years_old_program_s",
    "expected": 5209896.756
   },
   {
-   "id": "calc_16",
-   "label": "calc",
+   "id": "total_present_value_of_units_of_increase_in_units_of_annual",
+   "label": "Total present value of units of increase in units of annual ln(income) among people under age 15",
    "section": "iron_fortification_cea",
-   "formula": "calc_17 * calc_19",
+   "formula": "present_value_of_total_lifetime_benefits_per_person_with_die * number_of_children_0_to_14_years_old_consuming_iron_fortifie",
    "expected": 5290.024238
   },
   {
-   "id": "input_9",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "iron_fortification_cea",
    "formula": "1 / ln(2)",
    "expected": 1.442695041
   },
   {
-   "id": "calc_15",
-   "label": "calc",
+   "id": "total_units_of_value_from_development_benefits_in_0_to_14_ye",
+   "label": "Total units of value from development benefits in 0 to 14 year-olds",
    "section": "iron_fortification_cea",
-   "formula": "calc_16 * input_9",
+   "formula": "total_present_value_of_units_of_increase_in_units_of_annual * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 7631.891734
   },
   {
-   "id": "input_10",
-   "label": "input",
+   "id": "annual_birth_rate_per_1000",
+   "label": "Annual birth rate, per 1000",
    "section": "iron_fortification_cea",
-   "value": 16.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E85"
    },
-   "explainer": "World Bank Group, \"Birth rate, crude (per 1,000 people) - India (1960-2023)\""
+   "explainer": "World Bank Group, \"Birth rate, crude (per 1,000 people) - India (1960-2023)\"",
+   "formula": "@givewell.annual_birth_rate_per_1000",
+   "expected": 16.0
   },
   {
-   "id": "input_11",
-   "label": "input",
+   "id": "neonatal_mortality_rate_first_28_days",
+   "label": "Neonatal mortality rate (first 28 days)",
    "section": "iron_fortification_cea",
    "formula": "27935.25 / 365 * 28 / 100000",
    "expected": 0.02142978082,
    "format": "percent"
   },
   {
-   "id": "input_12",
-   "label": "input",
+   "id": "impact_of_iron_supplementation_on_neonatal_mortality_reducti_2",
+   "label": "Impact of iron supplementation on neonatal mortality, % reduction",
    "section": "iron_fortification_cea",
-   "value": 0.26,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E87"
    },
    "explainer": "GW iron supplementation and fortification intervention report (unpublished)",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.impact_of_iron_supplementation_on_neonatal_mortality_reducti",
+   "expected": 0.26
   },
   {
-   "id": "input_13",
-   "label": "input",
+   "id": "percentage_of_women_who_take_iron_and_folic_acid_supplements_2",
+   "label": "Percentage of women who take iron and folic acid supplements during pregnancy for at least 100 days",
    "section": "iron_fortification_cea",
    "value": 0.44,
    "kind": "estimate",
@@ -2277,8 +2279,8 @@
    "format": "percent"
   },
   {
-   "id": "input_14",
-   "label": "input",
+   "id": "adjustment_for_self_report_and_social_desirability_bias",
+   "label": "Adjustment for self-report and social desirability bias",
    "section": "iron_fortification_cea",
    "value": -0.25,
    "kind": "estimate",
@@ -2290,16 +2292,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_26",
-   "label": "calc",
+   "id": "percentage_of_women_who_take_iron_and_folic_acid_supplements",
+   "label": "Percentage of women who take iron and folic acid supplements during pregnancy for at least 100 days, after adjustment",
    "section": "iron_fortification_cea",
-   "formula": "input_13 * (1 + input_14)",
+   "formula": "percentage_of_women_who_take_iron_and_folic_acid_supplements_2 * (1 + adjustment_for_self_report_and_social_desirability_bias)",
    "expected": 0.33,
    "format": "percent"
   },
   {
-   "id": "input_15",
-   "label": "input",
+   "id": "internal_validity_adjustment_for_use_of_post_hoc_subgroup",
+   "label": "Internal validity adjustment for use of post-hoc subgroup",
    "section": "iron_fortification_cea",
    "value": -0.3,
    "kind": "estimate",
@@ -2312,8 +2314,8 @@
    "format": "percent"
   },
   {
-   "id": "input_16",
-   "label": "input",
+   "id": "internal_validity_adjustment_for_lack_of_clear_causal_mechan",
+   "label": "Internal validity adjustment for lack of clear causal mechanism",
    "section": "iron_fortification_cea",
    "value": -0.3,
    "kind": "estimate",
@@ -2326,16 +2328,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_27",
-   "label": "calc",
+   "id": "overall_internal_validity_adjustment_for_neonatal_mortality",
+   "label": "Overall internal validity adjustment for neonatal mortality",
    "section": "iron_fortification_cea",
-   "formula": "(1 + input_15) * (1 + input_16) - 1",
+   "formula": "(1 + internal_validity_adjustment_for_use_of_post_hoc_subgroup) * (1 + internal_validity_adjustment_for_lack_of_clear_causal_mechan) - 1",
    "expected": -0.51,
    "format": "percent"
   },
   {
-   "id": "input_17",
-   "label": "input",
+   "id": "external_validity_adjustment_accounting_for_iron_supplementa",
+   "label": "External validity adjustment accounting for iron supplementation in the control group of Huda et al. 2022",
    "section": "iron_fortification_cea",
    "value": 0.17,
    "kind": "estimate",
@@ -2481,29 +2483,29 @@
    "id": "supp_12",
    "label": "supp",
    "section": "iron_fortification_cea",
-   "formula": "prevalence_of_dietary_iron_deficiency_among_reproductive_age * (1 + input_bihar) * input_5 / weighted_average_prevalence_of_dietary_iron_deficiency_among - 1",
+   "formula": "prevalence_of_dietary_iron_deficiency_among_reproductive_age * (1 + adjustment_for_future_anemia_trends_bihar) * assumed_effect_of_increased_iron_intake_on_anemia_prevalence / weighted_average_prevalence_of_dietary_iron_deficiency_among - 1",
    "expected": 0.06229208517,
    "format": "percent"
   },
   {
-   "id": "calc_28",
-   "label": "calc",
+   "id": "overall_external_validity_adjustment_for_neonatal_mortality",
+   "label": "Overall external validity adjustment for neonatal mortality",
    "section": "iron_fortification_cea",
-   "formula": "(1 + input_17) * (1 + supp_12) - 1",
+   "formula": "(1 + external_validity_adjustment_accounting_for_iron_supplementa) * (1 + supp_12) - 1",
    "expected": 0.2428817396,
    "format": "percent"
   },
   {
-   "id": "calc_25",
-   "label": "calc",
+   "id": "impact_of_iron_supplementation_on_neonatal_mortality_reducti",
+   "label": "Impact of iron supplementation on neonatal mortality, % reduction after internal & external validity adjustments",
    "section": "iron_fortification_cea",
-   "formula": "input_12 * (1 - calc_26) * (1 + calc_27) * (1 + calc_28)",
+   "formula": "impact_of_iron_supplementation_on_neonatal_mortality_reducti_2 * (1 - percentage_of_women_who_take_iron_and_folic_acid_supplements) * (1 + overall_internal_validity_adjustment_for_neonatal_mortality) * (1 + overall_external_validity_adjustment_for_neonatal_mortality)",
    "expected": 0.1060898995,
    "format": "percent"
   },
   {
-   "id": "input_18",
-   "label": "input",
+   "id": "risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
+   "label": "Risk ratio for anemia, supplementation with iron, Low et al. 2013",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -2515,16 +2517,16 @@
    "explainer": "Low et al. 2013"
   },
   {
-   "id": "calc_31",
-   "label": "calc",
+   "id": "reduction_in_anemia_prevalence",
+   "label": "Reduction in anemia prevalence",
    "section": "iron_supplementation_cea",
-   "formula": "1 - input_18",
+   "formula": "1 - risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
    "expected": 0.5,
    "format": "percent"
   },
   {
-   "id": "input_19",
-   "label": "input",
+   "id": "internal_validity_adjustment_2",
+   "label": "Internal validity adjustment",
    "section": "iron_supplementation_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -2762,30 +2764,30 @@
    "format": "percent"
   },
   {
-   "id": "calc_33",
-   "label": "calc",
+   "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr_2",
+   "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency",
    "section": "iron_supplementation_cea",
    "formula": "supp_13 / supp_14 - 1",
    "expected": 0.205392365,
    "format": "percent"
   },
   {
-   "id": "input_20",
-   "label": "input",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2",
+   "label": "Inflammation exposure index rating (as a % of max score) in study population",
    "section": "iron_supplementation_cea",
-   "value": 0.511,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron supplementation CEA!D25"
    },
    "explainer": "GW inflammation index analysis",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "expected": 0.511
   },
   {
-   "id": "input_21",
-   "label": "input",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
+   "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "iron_supplementation_cea",
    "value": 0.222222222222222,
    "kind": "estimate",
@@ -2798,8 +2800,8 @@
    "format": "percent"
   },
   {
-   "id": "input_22",
-   "label": "input",
+   "id": "assumed_effect_of_inflammation_on_iron_absorption_2",
+   "label": "Assumed effect of inflammation on iron absorption",
    "section": "iron_supplementation_cea",
    "value": 0.2,
    "kind": "estimate",
@@ -2812,16 +2814,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_34",
-   "label": "calc",
+   "id": "adjustment_for_inflammation_in_program_compared_to_study_pop_2",
+   "label": "Adjustment for inflammation in program compared to study population",
    "section": "iron_supplementation_cea",
-   "formula": "(input_20 / input_21 - 1) * input_22",
+   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2 / inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2 - 1) * assumed_effect_of_inflammation_on_iron_absorption_2",
    "expected": 0.2599,
    "format": "percent"
   },
   {
-   "id": "input_23",
-   "label": "input",
+   "id": "bioavailability_adjusted_iron_intake_relative_to_trial_setti",
+   "label": "Bioavailability-adjusted iron intake (relative to trial settings)",
    "section": "iron_supplementation_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -2834,8 +2836,8 @@
    "format": "percent"
   },
   {
-   "id": "input_24",
-   "label": "input",
+   "id": "assumed_effect_of_increased_iron_intake_on_anemia_prevalence_2",
+   "label": "Assumed effect of increased iron intake on anemia prevalence",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -2848,62 +2850,62 @@
    "format": "percent"
   },
   {
-   "id": "calc_35",
-   "label": "calc",
+   "id": "adjustment_for_weekly_iron_doseage_relative_to_trials",
+   "label": "Adjustment for weekly iron doseage, relative to trials",
    "section": "iron_supplementation_cea",
-   "formula": "input_23 * input_24",
+   "formula": "bioavailability_adjusted_iron_intake_relative_to_trial_setti * assumed_effect_of_increased_iron_intake_on_anemia_prevalence_2",
    "expected": -0.1,
    "format": "percent"
   },
   {
-   "id": "calc_32",
-   "label": "calc",
+   "id": "external_validity_adjustment_2",
+   "label": "External validity adjustment",
    "section": "iron_supplementation_cea",
-   "formula": "(1 + calc_33) * (1 + calc_34) * (1 + calc_35) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr_2) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop_2) * (1 + adjustment_for_weekly_iron_doseage_relative_to_trials) - 1",
    "expected": 0.3668064566,
    "format": "percent"
   },
   {
-   "id": "calc_30",
-   "label": "calc",
+   "id": "adjusted_reduction_in_anemia_from_iron_supplementation",
+   "label": "Adjusted reduction in anemia from iron supplementation",
    "section": "iron_supplementation_cea",
-   "formula": "calc_31 * (1 + input_19) * (1 + calc_32)",
+   "formula": "reduction_in_anemia_prevalence * (1 + internal_validity_adjustment_2) * (1 + external_validity_adjustment_2)",
    "expected": 0.6150629055,
    "format": "percent"
   },
   {
-   "id": "calc_29",
-   "label": "calc",
+   "id": "adjustment_for_lower_effectiveness_of_iron_fortification_vs",
+   "label": "Adjustment for lower effectiveness of iron fortification vs. supplementation",
    "section": "iron_fortification_cea",
-   "formula": "calc_4 / (calc_30 / (1 + calc_35))",
+   "formula": "adjusted_reduction_in_anemia_from_iron_fortification / (adjusted_reduction_in_anemia_from_iron_supplementation / (1 + adjustment_for_weekly_iron_doseage_relative_to_trials))",
    "expected": 0.007029419137,
    "format": "percent"
   },
   {
-   "id": "calc_24",
-   "label": "calc",
+   "id": "reduction_in_neonatal_mortality_iron_fortification",
+   "label": "% reduction in neonatal mortality, iron fortification",
    "section": "iron_fortification_cea",
-   "formula": "calc_25 * calc_29",
+   "formula": "impact_of_iron_supplementation_on_neonatal_mortality_reducti * adjustment_for_lower_effectiveness_of_iron_fortification_vs",
    "expected": 0.0007457503701,
    "format": "percent"
   },
   {
-   "id": "calc_23",
-   "label": "calc",
+   "id": "deaths_averted_per_100_000_beneficiaries_general_population",
+   "label": "Deaths averted per 100,000 beneficiaries (general population)",
    "section": "iron_fortification_cea",
-   "formula": "input_10 * input_11 * calc_24 * 100",
+   "formula": "annual_birth_rate_per_1000 * neonatal_mortality_rate_first_28_days * reduction_in_neonatal_mortality_iron_fortification * 100",
    "expected": 0.02557002717
   },
   {
-   "id": "calc_22",
-   "label": "calc",
+   "id": "deaths_averted_per_beneficiary_year",
+   "label": "Deaths averted per beneficiary-year",
    "section": "iron_fortification_cea",
-   "formula": "calc_23 / 100000",
+   "formula": "deaths_averted_per_100_000_beneficiaries_general_population / 100000",
    "expected": 2.557002717e-07
   },
   {
-   "id": "input_25",
-   "label": "input",
+   "id": "units_of_value_from_averting_one_neonatal_death",
+   "label": "Units of value from averting one neonatal death",
    "section": "iron_fortification_cea",
    "value": 84.0,
    "kind": "estimate",
@@ -2915,31 +2917,31 @@
    "explainer": "GiveWell, \"Moral Weights\" (May 2025)"
   },
   {
-   "id": "calc_21",
-   "label": "calc",
+   "id": "units_of_value_from_averting_neonatal_deaths_per_beneficiary",
+   "label": "Units of value from averting neonatal deaths, per beneficiary-year",
    "section": "iron_fortification_cea",
-   "formula": "calc_22 * input_25",
+   "formula": "deaths_averted_per_beneficiary_year * units_of_value_from_averting_one_neonatal_death",
    "expected": 2.147882282e-05
   },
   {
-   "id": "calc_20",
-   "label": "calc",
+   "id": "total_units_of_value_from_averting_neonatal_deaths",
+   "label": "Total units of value from averting neonatal deaths",
    "section": "iron_fortification_cea",
-   "formula": "calc_21 * calc_bihar_5",
+   "formula": "units_of_value_from_averting_neonatal_deaths_per_beneficiary * people_years_of_support_bihar",
    "expected": 1185.290628
   },
   {
    "id": "basta_soekirman_and_karyadi_1979_productivity_increase_in_ta",
    "label": "Basta, Soekirman, and Karyadi 1979, productivity increase in tappers with anemia",
    "section": "work_capacity_supplementary_cal",
-   "value": 0.15,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Work capacity supplementary cal!B4"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.basta_soekirman_and_karyadi_1979_productivity_increase_in_ta",
+   "expected": 0.15
   },
   {
    "id": "percent_of_trial_participants_that_were_tappers",
@@ -3005,14 +3007,14 @@
    "id": "edgerton_et_al_1979_prevalence_of_anemia",
    "label": "Edgerton et al. 1979, prevalence of anemia",
    "section": "work_capacity_supplementary_cal",
-   "value": 0.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Work capacity supplementary cal!B14"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.edgerton_et_al_1979_prevalence_of_anemia",
+   "expected": 0.6
   },
   {
    "id": "edgerton_et_al_1979",
@@ -3068,18 +3070,18 @@
    "format": "percent"
   },
   {
-   "id": "feed_2",
-   "label": "feed",
+   "id": "adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
+   "label": "Adjustment for lower effectiveness of iron fortification vs. supplementation",
    "section": "iron_fortification_cea",
-   "formula": "calc_29",
+   "formula": "adjustment_for_lower_effectiveness_of_iron_fortification_vs",
    "expected": 0.007029419137,
    "format": "percent"
   },
   {
-   "id": "calc_40",
-   "label": "calc",
+   "id": "increase_in_productivity_from_iron_fortification_in_people_w",
+   "label": "Increase in productivity from iron fortification in people with anemia working manual labor jobs",
    "section": "iron_fortification_cea",
-   "formula": "supp_15 * feed_2",
+   "formula": "supp_15 * adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
    "expected": 0.0005158457579,
    "format": "percent"
   },
@@ -3112,18 +3114,18 @@
    "format": "percent"
   },
   {
-   "id": "calc_43",
-   "label": "calc",
+   "id": "percentage_of_beneficiaries_that_are_working_age_and_have_an_2",
+   "label": "Percentage of beneficiaries that are working age and have anemia",
    "section": "iron_fortification_cea",
    "formula": "supp_16 * supp_17",
    "expected": 0.2673178078,
    "format": "percent"
   },
   {
-   "id": "calc_42",
-   "label": "calc",
+   "id": "percentage_of_beneficiaries_that_are_working_age_and_have_an",
+   "label": "Percentage of beneficiaries that are working age and have anemia, adjusted for future trends",
    "section": "iron_fortification_cea",
-   "formula": "calc_43 * (1 + input_bihar) * input_5",
+   "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an_2 * (1 + adjustment_for_future_anemia_trends_bihar) * assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
    "expected": 0.2272201366,
    "format": "percent"
   },
@@ -3246,16 +3248,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_41",
-   "label": "calc",
+   "id": "percentage_of_beneficiaries_who_have_anemia_and_are_working",
+   "label": "Percentage of beneficiaries who have anemia and are working-age, employed, and have physically demanding jobs",
    "section": "iron_fortification_cea",
-   "formula": "calc_42 * supp_18",
+   "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an * supp_18",
    "expected": 0.07402195835,
    "format": "percent"
   },
   {
-   "id": "input_26",
-   "label": "input",
+   "id": "degree_to_which_increased_productivity_would_flow_through_to",
+   "label": "Degree to which increased productivity would flow through to higher income",
    "section": "iron_fortification_cea",
    "value": 0.3,
    "kind": "estimate",
@@ -3268,8 +3270,8 @@
    "format": "percent"
   },
   {
-   "id": "input_27",
-   "label": "input",
+   "id": "internal_validity_adjustment_3",
+   "label": "Internal validity adjustment",
    "section": "iron_fortification_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -3281,16 +3283,16 @@
    "format": "percent"
   },
   {
-   "id": "input_28",
-   "label": "input",
+   "id": "external_validity_adjustment_3",
+   "label": "External validity adjustment",
    "section": "iron_fortification_cea",
    "formula": "1.1 * 1.05 - 1",
    "expected": 0.155,
    "format": "percent"
   },
   {
-   "id": "input_29",
-   "label": "input",
+   "id": "double_counting_adjustment",
+   "label": "Double counting adjustment",
    "section": "iron_fortification_cea",
    "value": -0.5,
    "kind": "estimate",
@@ -3302,29 +3304,29 @@
    "format": "percent"
   },
   {
-   "id": "calc_39",
-   "label": "calc",
+   "id": "average_increase_in_income_per_beneficiary",
+   "label": "Average increase in income per beneficiary",
    "section": "iron_fortification_cea",
-   "formula": "calc_40 * calc_41 * input_26 * (1 + input_27) * (1 + input_28) * (1 + input_29)",
+   "formula": "increase_in_productivity_from_iron_fortification_in_people_w * percentage_of_beneficiaries_who_have_anemia_and_are_working * degree_to_which_increased_productivity_would_flow_through_to * (1 + internal_validity_adjustment_3) * (1 + external_validity_adjustment_3) * (1 + double_counting_adjustment)",
    "expected": 5.292290371e-06,
    "format": "percent"
   },
   {
-   "id": "input_30",
-   "label": "input",
+   "id": "average_household_size",
+   "label": "Average household size",
    "section": "iron_fortification_cea",
-   "value": 4.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E120"
    },
-   "explainer": "2019-21 India National Family Health Survey (NFHS-5)"
+   "explainer": "2019-21 India National Family Health Survey (NFHS-5)",
+   "formula": "@givewell.average_household_size",
+   "expected": 4.4
   },
   {
-   "id": "input_31",
-   "label": "input",
+   "id": "proportion_of_household_income_generated_by_adult_consuming",
+   "label": "Proportion of household income generated by adult consuming iron-fortified foods",
    "section": "iron_fortification_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -3336,49 +3338,49 @@
    "format": "percent"
   },
   {
-   "id": "calc_44",
-   "label": "calc",
+   "id": "multiplier_for_resource_sharing",
+   "label": "Multiplier for resource sharing",
    "section": "iron_fortification_cea",
-   "formula": "input_30 * input_31",
+   "formula": "average_household_size * proportion_of_household_income_generated_by_adult_consuming",
    "expected": 2.2
   },
   {
-   "id": "calc_38",
-   "label": "calc",
+   "id": "increase_in_annual_ln_consumption",
+   "label": "Increase in annual ln(consumption)",
    "section": "iron_fortification_cea",
-   "formula": "ln(1 + calc_39 * calc_44) - ln(1)",
+   "formula": "ln(1 + average_increase_in_income_per_beneficiary * multiplier_for_resource_sharing) - ln(1)",
    "expected": 1.164297104e-05
   },
   {
-   "id": "input_32",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "iron_fortification_cea",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
     "cell": "Iron fortification CEA!E124"
    },
-   "explainer": "GW's moral weights and discount rate"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGW's moral weights and discount rate",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
-   "id": "calc_37",
-   "label": "calc",
+   "id": "units_of_value_per_beneficiary",
+   "label": "Units of value per beneficiary",
    "section": "iron_fortification_cea",
-   "formula": "calc_38 * input_32",
+   "formula": "increase_in_annual_ln_consumption * value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "expected": 1.676587829e-05
   },
   {
-   "id": "calc_36",
-   "label": "calc",
+   "id": "total_units_of_value_from_increased_physical_work_capacity",
+   "label": "Total units of value from increased physical work capacity",
    "section": "iron_fortification_cea",
-   "formula": "calc_37 * calc_bihar_5",
+   "formula": "units_of_value_per_beneficiary * people_years_of_support_bihar",
    "expected": 925.2107802
   },
   {
-   "id": "input_33",
-   "label": "input",
+   "id": "risk_of_wastage_and_ineffective_fortification",
+   "label": "Risk of wastage and ineffective fortification",
    "section": "iron_fortification_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -3391,8 +3393,8 @@
    "format": "percent"
   },
   {
-   "id": "input_34",
-   "label": "input",
+   "id": "cognitive_benefits_in_adults",
+   "label": "Cognitive benefits in adults",
    "section": "iron_fortification_cea",
    "value": 0.1,
    "kind": "estimate",
@@ -3405,8 +3407,8 @@
    "format": "percent"
   },
   {
-   "id": "input_35",
-   "label": "input",
+   "id": "benefits_of_other_micronutrients",
+   "label": "Benefits of other micronutrients",
    "section": "iron_fortification_cea",
    "value": 0.05,
    "kind": "estimate",
@@ -3419,8 +3421,8 @@
    "format": "percent"
   },
   {
-   "id": "input_36",
-   "label": "input",
+   "id": "medical_costs_averted",
+   "label": "Medical costs averted",
    "section": "iron_fortification_cea",
    "value": 0.05,
    "kind": "estimate",
@@ -3433,10 +3435,10 @@
    "format": "percent"
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "total_units_of_value",
+   "label": "Total units of value",
    "section": "iron_fortification_cea",
-   "formula": "sum(calc_bihar, calc_15, calc_20, calc_36) * (1 + sum(input_33, input_34, input_35, input_36))",
+   "formula": "sum(total_units_of_value_from_anemia_ylds_averted_bihar, total_units_of_value_from_development_benefits_in_0_to_14_ye, total_units_of_value_from_averting_neonatal_deaths, total_units_of_value_from_increased_physical_work_capacity) * (1 + sum(risk_of_wastage_and_ineffective_fortification, cognitive_benefits_in_adults, benefits_of_other_micronutrients, medical_costs_averted))",
    "expected": 19068.20278
   },
   {
@@ -3452,23 +3454,23 @@
    }
   },
   {
-   "id": "input_bihar_3",
-   "label": "input (Bihar)",
+   "id": "program_cost_bihar",
+   "label": "Program cost (Bihar)",
    "section": "iron_fortification_cea",
    "formula": "usd_total_inr / 6 * 1.1",
    "expected": 515288.4,
    "format": "usd"
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "units_of_value_per_dollar",
+   "label": "Units of value per dollar",
    "section": "iron_fortification_cea",
-   "formula": "calc_3 / input_bihar_3",
+   "formula": "total_units_of_value / program_cost_bihar",
    "expected": 0.03700491372
   },
   {
-   "id": "input_37",
-   "label": "input",
+   "id": "units_of_value_per_dollar_givedirectly",
+   "label": "Units of value per dollar, GiveDirectly",
    "section": "iron_fortification_cea",
    "value": 0.0033545,
    "kind": "estimate",
@@ -3480,15 +3482,15 @@
    "explainer": "2023 GiveWell cost-effectiveness analysis – version 4 (public)"
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "cost_effectiveness_multiples_of_cash_transfers_before_adjust",
+   "label": "Cost-effectiveness, multiples of cash transfers, before adjustment for behavioural activities and long term benefits",
    "section": "iron_fortification_cea",
-   "formula": "calc_2 / input_37",
+   "formula": "units_of_value_per_dollar / units_of_value_per_dollar_givedirectly",
    "expected": 11.03142457
   },
   {
-   "id": "input_38",
-   "label": "input",
+   "id": "adjustment_for_behavioral_activities",
+   "label": "Adjustment for behavioral activities",
    "section": "iron_fortification_cea",
    "value": 0.15,
    "kind": "estimate",
@@ -3501,8 +3503,8 @@
    "format": "percent"
   },
   {
-   "id": "input_39",
-   "label": "input",
+   "id": "adjustment_for_long_term_benefits",
+   "label": "Adjustment for long term benefits",
    "section": "iron_fortification_cea",
    "value": 0.15,
    "kind": "estimate",
@@ -3515,8 +3517,8 @@
    "format": "percent"
   },
   {
-   "id": "input_40",
-   "label": "input",
+   "id": "adjustment_for_funging",
+   "label": "Adjustment for funging",
    "section": "iron_fortification_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -3528,8 +3530,8 @@
    "format": "percent"
   },
   {
-   "id": "input_41",
-   "label": "input",
+   "id": "adjustment_for_leverage",
+   "label": "Adjustment for leverage",
    "section": "iron_fortification_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -3544,7 +3546,7 @@
    "id": "cost_effectiveness_multiples_of_cash_transfers_after_adjustm",
    "label": "Cost-effectiveness, multiples of cash transfers, after adjustments",
    "section": "iron_fortification_cea",
-   "formula": "calc * (1 + input_38) * (1 + input_39) * (1 + input_40) * (1 + input_41)",
+   "formula": "cost_effectiveness_multiples_of_cash_transfers_before_adjust * (1 + adjustment_for_behavioral_activities) * (1 + adjustment_for_long_term_benefits) * (1 + adjustment_for_funging) * (1 + adjustment_for_leverage)",
    "expected": 11.81713778
   },
   {

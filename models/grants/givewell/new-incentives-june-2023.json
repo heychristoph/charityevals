@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "discount_rate": 0.005
   }
  },
  "resources": [
@@ -75,13 +77,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_3",
    "label": "Value assigned to averting the death of an individual under 5 from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 116.252615789931,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "Moral weights and discount rate!C8"
-   }
+   },
+   "formula": "116.252615789931 * $life_value_multiplier",
+   "expected": 116.252615789931,
+   "explainer": "GiveWell's moral weight, 116.252615789931 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
@@ -579,14 +582,14 @@
    "id": "baseline_annual_consumption_per_capita_in_nominal_usd",
    "label": "Baseline annual consumption per capita (in nominal USD)",
    "section": "givedirectly",
-   "value": 285.92228810603416,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "GiveDirectly!B19"
    },
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_in_nominal_usd",
+   "expected": 285.92228810603416
   },
   {
    "id": "total_size_of_transfer_per_household_nominal_usd",
@@ -605,13 +608,13 @@
    "id": "average_household_size",
    "label": "Average household size",
    "section": "givedirectly",
-   "value": 4.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "GiveDirectly!B8"
-   }
+   },
+   "formula": "@givewell.average_household_size_2",
+   "expected": 4.7
   },
   {
    "id": "size_of_transfer_per_person_nominal_usd",
@@ -1299,14 +1302,15 @@
    "id": "discount_rate_for_future_averted_deaths_true",
    "label": "Discount rate for future averted deaths (TRUE)",
    "section": "new_incentives_full_cea",
-   "value": 0.005,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "New Incentives full CEA!C124"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.005,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.005."
   },
   {
    "id": "discounted_deaths_averted_in_cohort_true",
@@ -1319,13 +1323,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_14_y_2",
    "label": "Value assigned to averting the death of an individual 5-14 years old from vaccine-preventable diseases (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 133.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "Moral weights and discount rate!C12"
-   }
+   },
+   "formula": "133.7 * $life_value_multiplier",
+   "expected": 133.7,
+   "explainer": "GiveWell's moral weight, 133.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_14_y",
@@ -1453,13 +1458,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_15_49_2",
    "label": "Value assigned to averting the death of an individual 15-49 years old from vaccine-preventable diseases (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 103.585714285714,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "Moral weights and discount rate!C13"
-   }
+   },
+   "formula": "103.585714285714 * $life_value_multiplier",
+   "expected": 103.585714285714,
+   "explainer": "GiveWell's moral weight, 103.585714285714 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_15_49",
@@ -1587,13 +1593,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_50_74_2",
    "label": "Value assigned to averting the death of an individual 50-74 years old from vaccine-preventable diseases (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 42.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "Moral weights and discount rate!C14"
-   }
+   },
+   "formula": "42.44 * $life_value_multiplier",
+   "expected": 42.44,
+   "explainer": "GiveWell's moral weight, 42.44 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_50_74",
@@ -2434,13 +2441,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_3",
    "label": "Value assigned to averting the death of an individual 5 or older from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 73.1914046254006,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "Moral weights and discount rate!C9"
-   }
+   },
+   "formula": "73.1914046254006 * $life_value_multiplier",
+   "expected": 73.1914046254006,
+   "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
@@ -3586,14 +3594,15 @@
    "id": "discount_rate_for_future_averted_deaths_true_2",
    "label": "Discount rate for future averted deaths (TRUE)",
    "section": "no_leveraging_new_incentives",
-   "value": 0.005,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "No leveraging_New Incentives!C124"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.005,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.005."
   },
   {
    "id": "discounted_deaths_averted_in_cohort_true_3",
@@ -5382,14 +5391,15 @@
    "id": "discount_rate_for_future_averted_deaths_true_3",
    "label": "Discount rate for future averted deaths (TRUE)",
    "section": "no_funging_new_incentives",
-   "value": 0.005,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
     "cell": "No funging_New Incentives!C124"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.005,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.005."
   },
   {
    "id": "discounted_deaths_averted_in_cohort_true_5",

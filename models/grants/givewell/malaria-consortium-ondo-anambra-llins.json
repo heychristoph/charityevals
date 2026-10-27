@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_ln_consumption": 1.0
   }
  },
  "resources": [
@@ -479,13 +481,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
    "label": "Value assigned to averting the death of an individual under 5 from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 116.9,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Moral weights and discount rate!C8"
-   }
+   },
+   "formula": "116.9 * $life_value_multiplier",
+   "expected": 116.9,
+   "explainer": "GiveWell's moral weight, 116.9 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -505,13 +508,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
    "label": "Value assigned to averting the death of an individual 5 or older from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 83.1,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Moral weights and discount rate!C9"
-   }
+   },
+   "formula": "83.1 * $life_value_multiplier",
+   "expected": 83.1,
+   "explainer": "GiveWell's moral weight, 83.1 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -563,14 +567,14 @@
    "id": "relative_efficacy_of_llins_for_reducing_mortality_of_individ",
    "label": "Relative efficacy of LLINs for reducing mortality of individuals age 5+",
    "section": "malaria_consortium_llins",
-   "value": 0.8,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Malaria Consortium (LLINs)!B74"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.relative_efficacy_of_llins_for_reducing_mortality_of_individ",
+   "expected": 0.8
   },
   {
    "id": "total_number_of_age_5_deaths_averted",
@@ -610,14 +614,14 @@
    "id": "reduction_in_malaria_incidence_for_children_under_5_from_pry",
    "label": "Reduction in malaria incidence for children under 5 (from Pryce et al. 2018 meta-analysis)",
    "section": "malaria_consortium_llins",
-   "value": 0.45,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Malaria Consortium (LLINs)!B89"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_for_children_under_5_from_pry",
+   "expected": 0.45
   },
   {
    "id": "expected_reduction_in_malaria_prevalence_in_current_day_dist",
@@ -639,14 +643,14 @@
    "id": "expected_increase_in_malaria_prevalence_in_the_absence_of_an",
    "label": "Expected increase in malaria prevalence in the absence of an LLIN distribution",
    "section": "malaria_consortium_llins",
-   "value": 0.2,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Malaria Consortium (LLINs)!B97"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.expected_increase_in_malaria_prevalence_in_the_absence_of_an",
+   "expected": 0.2
   },
   {
    "id": "counterfactual_malaria_prevalence_in_malaria_consortium_cont",
@@ -1385,13 +1389,14 @@
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on_2",
    "label": "Value assigned to doubling consumption for one person for one year (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 1.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
     "cell": "Moral weights and discount rate!C5"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.0,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1."
   },
   {
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",

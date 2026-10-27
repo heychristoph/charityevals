@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -476,14 +477,14 @@
    "id": "likelihood_of_maternal_syphilis_case_resulting_in_stillbirth_2",
    "label": "Likelihood of maternal syphilis case resulting in stillbirth or miscarriage",
    "section": "treatment_effects",
-   "value": 0.256,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mR8KHlwSg1F8Zh-FC96Hec1a7jlF2QVmPBHoP7v6owo/edit",
     "cell": "Treatment effects!C3"
    },
-   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222."
+   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222.",
+   "formula": "@givewell.likelihood_of_maternal_syphilis_case_resulting_in_stillbirth",
+   "expected": 0.256
   },
   {
    "id": "adjustment_for_performance_of_tests_used_in_the_studies",
@@ -645,13 +646,14 @@
    "id": "units_of_value_averting_neonatal_death",
    "label": "Units of value - averting neonatal death",
    "section": "main_cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mR8KHlwSg1F8Zh-FC96Hec1a7jlF2QVmPBHoP7v6owo/edit",
     "cell": "Main CEA!C90"
-   }
+   },
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0,
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_averting_neonatal_death_zambia",
@@ -1410,13 +1412,14 @@
    "id": "units_of_value_averting_neonatal_death_2",
    "label": "Units of value - averting neonatal death",
    "section": "main_cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1mR8KHlwSg1F8Zh-FC96Hec1a7jlF2QVmPBHoP7v6owo/edit",
     "cell": "Main CEA!D90"
-   }
+   },
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0,
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_averting_neonatal_death_cameroon",

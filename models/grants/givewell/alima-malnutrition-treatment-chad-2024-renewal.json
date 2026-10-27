@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -1843,13 +1844,13 @@
    "id": "mortality_ratio_for_children_6_59_months_with_untreated_mam",
    "label": "Mortality ratio for children 6-59 months with untreated MAM compared to non-malnourished and treated malnourished children (Chad - Ngouri)",
    "section": "alima_untreated_mortality",
-   "value": 2.58,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1iPcb9GW5wuRf4rfUc8ppIVtjBfxl59eh-LJcTcYNo5E/edit",
     "cell": "ALIMA Untreated mortality!B42"
-   }
+   },
+   "formula": "@givewell_chad.mortality_ratio_for_children_6_59_months_with_untreated_mam",
+   "expected": 2.58
   },
   {
    "id": "prevalence_of_untreated_sam_in_children_6_59_months_chad_ngo_2",
@@ -1879,13 +1880,13 @@
    "id": "mortality_ratio_for_children_6_59_months_with_untreated_sam",
    "label": "Mortality ratio for children 6-59 months with untreated SAM compared to non-malnourished and treated malnourished children (Chad - Ngouri)",
    "section": "alima_untreated_mortality",
-   "value": 7.01,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1iPcb9GW5wuRf4rfUc8ppIVtjBfxl59eh-LJcTcYNo5E/edit",
     "cell": "ALIMA Untreated mortality!B43"
-   }
+   },
+   "formula": "@givewell_chad.mortality_ratio_for_children_6_59_months_with_untreated_sam",
+   "expected": 7.01
   },
   {
    "id": "mortality_ratio_for_children_6_59_months_with_untreated_acut",
@@ -2110,13 +2111,14 @@
    "id": "age_specific_moral_weights_post_neonatal",
    "label": "Age-specific moral weights (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1iPcb9GW5wuRf4rfUc8ppIVtjBfxl59eh-LJcTcYNo5E/edit",
     "cell": "Moral weights!F9"
-   }
+   },
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7,
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "proportion_of_6_59_month_admissions_occurring_6_11_months_n",
@@ -2138,13 +2140,14 @@
    "id": "age_specific_moral_weights_1_to_4",
    "label": "Age-specific moral weights (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1iPcb9GW5wuRf4rfUc8ppIVtjBfxl59eh-LJcTcYNo5E/edit",
     "cell": "Moral weights!G9"
-   }
+   },
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3,
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "of_children_admitted_for_malnutrition_treatment_in_each_age_2",

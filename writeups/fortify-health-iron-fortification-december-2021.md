@@ -5,28 +5,28 @@ Works with flour mills in India to fortify wheat flour with iron, folic acid and
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Fortify Health iron fortification CEA [December 2021]](/fortify-health) | GW | December 2021 | 1.8× GiveDirectly (GW: 4.6× cash) | 88 |
+| [Fortify Health iron fortification CEA [December 2021]](/fortify-health) | GW | December 2021 | 1.8× GiveDirectly (GW: 4.6× cash) | 113 |
 | [Fortify Health Value of Information BOTEC [December 2021]](/fortify-health/fortify-health-value-information-december-2021) | GW | December 2021 | 4.9× GiveDirectly (GW: 13× cash) | 1, 1 kept fixed |
-| [Iron Fortification CEA [moral weights updated Feb 2021]](/fortify-health/fortify-health-iron-fortification-moral-weights) | GW | July 2021 | 4.3× GiveDirectly | 22 |
-| [Iron fortification impact on perinatal maternal mortality BOTEC](/fortify-health/fortify-health-iron-fortification-impact-on-perinatal) | GW | August 2019 | 0.15× GiveDirectly (GW: 0.39× cash) | 5 |
-| [Steady-state Fortify Health iron fortification CEA [June 2019]](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | 4.8× GiveDirectly | 159, 3 kept fixed |
-| [Fortify Health Value of Incubation Grants [June 2019]](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | 5.0× GiveDirectly (GW: 13× cash) | 205, 6 kept fixed |
-| [Iron CEA Fortify Health consolidation_Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | 5.6× GiveDirectly (GW: 15× cash) | 111, 7 kept fixed |
+| [Iron Fortification CEA [moral weights updated Feb 2021]](/fortify-health/fortify-health-iron-fortification-moral-weights) | GW | July 2021 | 4.3× GiveDirectly | 24 |
+| [Iron fortification impact on perinatal maternal mortality BOTEC](/fortify-health/fortify-health-iron-fortification-impact-on-perinatal) | GW | August 2019 | 0.15× GiveDirectly (GW: 0.39× cash) | 6 |
+| [Steady-state Fortify Health iron fortification CEA [June 2019]](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | 4.8× GiveDirectly | 183, 3 kept fixed |
+| [Fortify Health Value of Incubation Grants [June 2019]](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | 5.0× GiveDirectly (GW: 13× cash) | 229, 6 kept fixed |
+| [Iron CEA Fortify Health consolidation_Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | 5.6× GiveDirectly (GW: 15× cash) | 112, 7 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

@@ -5,27 +5,27 @@ Runs mobile conditional cash transfers and health programs in Pakistan and elsew
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CEA of IRD breastfeeding promotion pilot - March 2024](/ird-global) | GW | March 2024 | 4.9× GiveDirectly (GW: 13× cash) | 158, 2 kept fixed |
+| [CEA of IRD breastfeeding promotion pilot - March 2024](/ird-global) | GW | March 2024 | 4.9× GiveDirectly (GW: 13× cash) | 163, 2 kept fixed |
 | [IRD operational funding threshold analysis BOTEC, 2023](/ird-global/ird-global-operational-funding-threshold-2023) | GW | April 2023 | 3.9× GiveDirectly (GW: 10× cash) | 1, 1 kept fixed |
-| [2023 Cost-effectiveness analysis of IRD's ZM and mCCT program in Sindh](/ird-global/ird-global-2023-zm-mcct-in-sindh) | GW | February 2023 | 3.5× GiveDirectly (GW: 9.0× cash) | 588, 1 kept fixed |
-| [IRD's ZM and mCCTs program value of information BOTEC](/ird-global/ird-global-zm-mccts-value-information) | GW | February 2023 | 12× GiveDirectly (GW: 32× cash) | 108, 2 kept fixed |
+| [2023 Cost-effectiveness analysis of IRD's ZM and mCCT program in Sindh](/ird-global/ird-global-2023-zm-mcct-in-sindh) | GW | February 2023 | 3.5× GiveDirectly (GW: 9.0× cash) | 598, 1 kept fixed |
+| [IRD's ZM and mCCTs program value of information BOTEC](/ird-global/ird-global-zm-mccts-value-information) | GW | February 2023 | 12× GiveDirectly (GW: 32× cash) | 109, 2 kept fixed |
 | [IRD mCCT Value of information for evaluation BOTEC](/ird-global/ird-global-mcct-value-information-evaluation) | GW | November 2021 | 6.1× GiveDirectly (GW: 16× cash) | 86 |
-| [Cost-effectiveness analysis of IRD’s mCCT program in high-risk Sindh districts, 2021](/ird-global/ird-global-mcct-in-high-risk-sindh-districts-2021) | GW | June 2021 | 2.5× GiveDirectly (GW: 6.4× cash) | 391, 1 kept fixed |
+| [Cost-effectiveness analysis of IRD’s mCCT program in high-risk Sindh districts, 2021](/ird-global/ird-global-mcct-in-high-risk-sindh-districts-2021) | GW | June 2021 | 2.5× GiveDirectly (GW: 6.4× cash) | 401, 1 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

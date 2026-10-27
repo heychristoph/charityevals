@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -67,14 +69,15 @@
    "id": "discount_rate_best_guess",
    "label": "Discount rate (Best guess)",
    "section": "leverage",
-   "value": 0.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
     "cell": "Leverage!B24"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0."
   },
   {
    "id": "number_of_years_affected_best_guess",
@@ -255,13 +258,14 @@
    "id": "moral_value_per_under_5_death_averted_bangladesh",
    "label": "Moral value per under-5 death averted (Bangladesh)",
    "section": "desal_kiosks",
-   "value": 113.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
     "cell": "Desal kiosks!B21"
-   }
+   },
+   "formula": "113 * $life_value_multiplier",
+   "expected": 113.0,
+   "explainer": "GiveWell's moral weight, 113 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "grant_size_bangladesh",
@@ -614,8 +618,8 @@
    "format": "percent"
   },
   {
-   "id": "rate_val",
-   "label": "Rate (val)",
+   "id": "all_causes_val",
+   "label": "All causes (val)",
    "section": "source",
    "value": 551.185729258901,
    "kind": "estimate",
@@ -629,7 +633,7 @@
    "id": "annual_mortality_rate_2021_age_5_per_100k",
    "label": "Annual mortality rate, 2021, age <5 (per 100k)",
    "section": "source",
-   "formula": "rate_val",
+   "formula": "all_causes_val",
    "expected": 551.1857293
   },
   {
@@ -709,13 +713,14 @@
    "id": "moral_value_per_over_5_death_averted_bangladesh",
    "label": "Moral value per over-5 death averted (Bangladesh)",
    "section": "desal_kiosks",
-   "value": 44.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
     "cell": "Desal kiosks!B31"
-   }
+   },
+   "formula": "44 * $life_value_multiplier",
+   "expected": 44.0,
+   "explainer": "GiveWell's moral weight, 44 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "percent_of_population_that_is_o5_bangladesh",
@@ -726,8 +731,8 @@
    "format": "percent"
   },
   {
-   "id": "rate_val_2",
-   "label": "Rate (val)",
+   "id": "all_causes_val_2",
+   "label": "All causes (val)",
    "section": "source",
    "value": 70.4947565317947,
    "kind": "estimate",
@@ -741,12 +746,12 @@
    "id": "annual_mortality_rate_2021_age_5_14_per_100k",
    "label": "Annual mortality rate, 2021, age 5-14 (per 100k)",
    "section": "source",
-   "formula": "rate_val_2",
+   "formula": "all_causes_val_2",
    "expected": 70.49475653
   },
   {
-   "id": "rate_val_3",
-   "label": "Rate (val)",
+   "id": "all_causes_val_3",
+   "label": "All causes (val)",
    "section": "source",
    "value": 155.541178516103,
    "kind": "estimate",
@@ -760,12 +765,12 @@
    "id": "annual_mortality_rate_2021_age_15_49_per_100k",
    "label": "Annual mortality rate, 2021, age 15-49 (per 100k)",
    "section": "source",
-   "formula": "rate_val_3",
+   "formula": "all_causes_val_3",
    "expected": 155.5411785
   },
   {
-   "id": "rate_val_4",
-   "label": "Rate (val)",
+   "id": "all_causes_val_4",
+   "label": "All causes (val)",
    "section": "source",
    "value": 1636.71367110702,
    "kind": "estimate",
@@ -779,12 +784,12 @@
    "id": "annual_mortality_rate_2021_age_50_74_per_100k",
    "label": "Annual mortality rate, 2021, age 50-74 (per 100k)",
    "section": "source",
-   "formula": "rate_val_4",
+   "formula": "all_causes_val_4",
    "expected": 1636.713671
   },
   {
-   "id": "rate_val_5",
-   "label": "Rate (val)",
+   "id": "all_causes_val_5",
+   "label": "All causes (val)",
    "section": "source",
    "value": 10052.6822162428,
    "kind": "estimate",
@@ -798,7 +803,7 @@
    "id": "annual_mortality_rate_2021_age_75_per_100k",
    "label": "Annual mortality rate, 2021, age 75+ (per 100k)",
    "section": "source",
-   "formula": "rate_val_5",
+   "formula": "all_causes_val_5",
    "expected": 10052.68222
   },
   {

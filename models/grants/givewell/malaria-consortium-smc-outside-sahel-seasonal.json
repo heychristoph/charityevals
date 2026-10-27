@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_ln_consumption": 1.0
   }
  },
  "resources": [
@@ -69,8 +71,8 @@
  ],
  "rows": [
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_children_under_age_5_targ_2",
+   "label": "Reduction in malaria incidence for children under age 5 targeted for SMC found in GiveWell's adjusted version of the Meremikwu et al. 2012 meta-analysis",
    "section": "inputs",
    "value": 0.75,
    "kind": "estimate",
@@ -82,16 +84,16 @@
    "format": "percent"
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_children_under_age_5_targ",
+   "label": "Reduction in malaria incidence for children under age 5 targeted for SMC found in GiveWell's adjusted version of the Meremikwu et al. 2012 meta-analysis",
    "section": "main_cea",
-   "formula": "input_2",
+   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_targ_2",
    "expected": 0.75,
    "format": "percent"
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "estimated_proportion_of_children_targeted_for_smc_in_trials_2",
+   "label": "Estimated proportion of children targeted for SMC in trials that received SMC",
    "section": "inputs",
    "value": 0.8977,
    "kind": "estimate",
@@ -103,24 +105,24 @@
    "format": "percent"
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "estimated_proportion_of_children_targeted_for_smc_in_trials",
+   "label": "Estimated proportion of children targeted for SMC in trials that received SMC",
    "section": "main_cea",
-   "formula": "input_4",
+   "formula": "estimated_proportion_of_children_targeted_for_smc_in_trials_2",
    "expected": 0.8977,
    "format": "percent"
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "implied_reduction_in_malaria_incidence_among_children_under",
+   "label": "Implied reduction in malaria incidence among children under age 5 receiving SMC",
    "section": "main_cea",
-   "formula": "input / input_3",
+   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_targ / estimated_proportion_of_children_targeted_for_smc_in_trials",
    "expected": 0.8354684193,
    "format": "percent"
   },
   {
-   "id": "input_6",
-   "label": "input",
+   "id": "internal_validity_adjustment_2",
+   "label": "Internal validity adjustment",
    "section": "inputs",
    "value": -0.05,
    "kind": "estimate",
@@ -132,16 +134,16 @@
    "format": "percent"
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
    "section": "main_cea",
-   "formula": "input_6",
+   "formula": "internal_validity_adjustment_2",
    "expected": -0.05,
    "format": "percent"
   },
   {
-   "id": "input_8",
-   "label": "input",
+   "id": "external_validity_adjustment_2",
+   "label": "External validity adjustment",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -153,16 +155,16 @@
    "format": "percent"
   },
   {
-   "id": "input_7",
-   "label": "input",
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
    "section": "main_cea",
-   "formula": "input_8",
+   "formula": "external_validity_adjustment_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "adjustment_for_lower_effectiveness_outside_the_sahel_region_2",
+   "label": "Adjustment for lower effectiveness outside the Sahel region of Africa (Nampula)",
    "section": "inputs",
    "value": -0.1955888,
    "kind": "estimate",
@@ -174,24 +176,24 @@
    "format": "percent"
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "adjustment_for_lower_effectiveness_outside_the_sahel_region",
+   "label": "Adjustment for lower effectiveness outside the Sahel region of Africa (Nampula)",
    "section": "main_cea",
-   "formula": "row_4",
+   "formula": "adjustment_for_lower_effectiveness_outside_the_sahel_region_2",
    "expected": -0.1955888,
    "format": "percent"
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "expected_reduction_in_malaria_incidence_among_children_under",
+   "label": "Expected reduction in malaria incidence among children under age 5 receiving SMC (Nampula)",
    "section": "main_cea",
-   "formula": "calc * (1 + input_5) * (1 + input_7) * (1 + row_3)",
+   "formula": "implied_reduction_in_malaria_incidence_among_children_under * (1 + internal_validity_adjustment) * (1 + external_validity_adjustment) * (1 + adjustment_for_lower_effectiveness_outside_the_sahel_region)",
    "expected": 0.638457146,
    "format": "percent"
   },
   {
-   "id": "input_10",
-   "label": "input",
+   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
+   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "inputs",
    "value": 1.0,
    "kind": "estimate",
@@ -203,23 +205,23 @@
    "format": "percent"
   },
   {
-   "id": "input_9",
-   "label": "input",
+   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
+   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "main_cea",
-   "formula": "input_10",
+   "formula": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
    "expected": 1.0,
    "format": "percent"
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "expected_reduction_in_malaria_mortality_among_children_under",
+   "label": "Expected reduction in malaria mortality among children under age 5 receiving SMC (Nampula)",
    "section": "main_cea",
-   "formula": "row_2 * input_9",
+   "formula": "expected_reduction_in_malaria_incidence_among_children_under * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 0.638457146,
    "format": "percent"
   },
   {
-   "id": "value_nampula_4",
+   "id": "value_nampula_7",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
    "value": 16295696.53,
@@ -233,8 +235,8 @@
    "format": "usd"
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "percentage_of_total_costs_covered_by_the_grantee_nampula_2",
+   "label": "Percentage of total costs covered by the grantee (Nampula)",
    "section": "inputs",
    "value": 0.8943595,
    "kind": "estimate",
@@ -247,24 +249,24 @@
    "format": "percent"
   },
   {
-   "id": "nampula",
-   "label": "- (Nampula)",
+   "id": "percentage_of_total_costs_covered_by_the_grantee_nampula",
+   "label": "Percentage of total costs covered by the grantee (Nampula)",
    "section": "main_cea",
-   "formula": "row_5",
+   "formula": "percentage_of_total_costs_covered_by_the_grantee_nampula_2",
    "expected": 0.8943595,
    "format": "percent"
   },
   {
-   "id": "value_nampula_3",
+   "id": "value_nampula_6",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_nampula_4 * nampula",
+   "formula": "value_nampula_7 * percentage_of_total_costs_covered_by_the_grantee_nampula",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "row_6",
-   "label": "-",
+   "id": "percentage_of_total_costs_covered_by_other_philanthropic_act_2",
+   "label": "Percentage of total costs covered by other philanthropic actors (Nampula)",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -277,32 +279,32 @@
    "format": "percent"
   },
   {
-   "id": "nampula_2",
-   "label": "- (Nampula)",
+   "id": "percentage_of_total_costs_covered_by_other_philanthropic_act",
+   "label": "Percentage of total costs covered by other philanthropic actors (Nampula)",
    "section": "main_cea",
-   "formula": "row_6",
+   "formula": "percentage_of_total_costs_covered_by_other_philanthropic_act_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "value_nampula_7",
+   "id": "value_nampula_10",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_nampula_4 * nampula_2",
+   "formula": "value_nampula_7 * percentage_of_total_costs_covered_by_other_philanthropic_act",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "value_nampula_6",
+   "id": "value_nampula_9",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "sum(value_nampula_3, value_nampula_7)",
+   "formula": "sum(value_nampula_6, value_nampula_10)",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "cost_per_seasonal_malaria_chemoprevention_smc_cycle_administ_2",
+   "label": "Cost per seasonal malaria chemoprevention (SMC) cycle administered (Nampula)",
    "section": "inputs",
    "value": 1.81008,
    "kind": "estimate",
@@ -315,16 +317,16 @@
    "format": "usd"
   },
   {
-   "id": "nampula_4",
-   "label": "- (Nampula)",
+   "id": "cost_per_seasonal_malaria_chemoprevention_smc_cycle_administ",
+   "label": "Cost per seasonal malaria chemoprevention (SMC) cycle administered (Nampula)",
    "section": "main_cea",
-   "formula": "row_7",
+   "formula": "cost_per_seasonal_malaria_chemoprevention_smc_cycle_administ_2",
    "expected": 1.81008,
    "format": "usd"
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "number_of_smc_cycles_per_year_nampula_2",
+   "label": "Number of SMC cycles per year (Nampula)",
    "section": "inputs",
    "value": 4.0,
    "kind": "estimate",
@@ -335,38 +337,38 @@
    }
   },
   {
-   "id": "nampula_5",
-   "label": "- (Nampula)",
+   "id": "number_of_smc_cycles_per_year_nampula",
+   "label": "Number of SMC cycles per year (Nampula)",
    "section": "main_cea",
-   "formula": "row_8",
+   "formula": "number_of_smc_cycles_per_year_nampula_2",
    "expected": 4.0
   },
   {
-   "id": "nampula_3",
-   "label": "- (Nampula)",
+   "id": "total_cost_per_child_treated_with_all_cycles_of_smc_in_a_yea",
+   "label": "Total cost per child treated with all cycles of SMC in a year (Nampula)",
    "section": "main_cea",
-   "formula": "nampula_4 * nampula_5",
+   "formula": "cost_per_seasonal_malaria_chemoprevention_smc_cycle_administ * number_of_smc_cycles_per_year_nampula",
    "expected": 7.24032,
+   "format": "usd"
+  },
+  {
+   "id": "value_nampula_8",
+   "label": "#VALUE! (Nampula)",
+   "section": "main_cea",
+   "formula": "value_nampula_9 / value_nampula_7 * total_cost_per_child_treated_with_all_cycles_of_smc_in_a_yea",
+   "expected": 6.475448975,
    "format": "usd"
   },
   {
    "id": "value_nampula_5",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_nampula_6 / value_nampula_4 * nampula_3",
-   "expected": 6.475448975,
-   "format": "usd"
-  },
-  {
-   "id": "value_nampula_2",
-   "label": "#VALUE! (Nampula)",
-   "section": "main_cea",
-   "formula": "value_nampula_3 / value_nampula_5",
+   "formula": "value_nampula_6 / value_nampula_8",
    "expected": 2250687.336
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "malaria_mortalities_per_year_among_people_under_age_5_nampul_2",
+   "label": "Malaria mortalities per year among people under age 5 (Nampula)",
    "section": "inputs",
    "value": 3006.92809,
    "kind": "estimate",
@@ -378,15 +380,15 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "nampula_6",
-   "label": "- (Nampula)",
+   "id": "malaria_mortalities_per_year_among_people_under_age_5_nampul",
+   "label": "Malaria mortalities per year among people under age 5 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_14",
+   "formula": "malaria_mortalities_per_year_among_people_under_age_5_nampul_2",
    "expected": 3006.92809
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "early_neonatal_malaria_mortalities_per_year_babies_under_7_d_2",
+   "label": "Early neonatal malaria mortalities per year (babies under 7 days old) (Nampula)",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -398,15 +400,15 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "nampula_7",
-   "label": "- (Nampula)",
+   "id": "early_neonatal_malaria_mortalities_per_year_babies_under_7_d",
+   "label": "Early neonatal malaria mortalities per year (babies under 7 days old) (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_15",
+   "formula": "early_neonatal_malaria_mortalities_per_year_babies_under_7_d_2",
    "expected": 0.0
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "late_neonatal_malaria_mortalities_per_year_babies_between_7_2",
+   "label": "Late neonatal malaria mortalities per year (babies between 7 and 27 days old) (Nampula)",
    "section": "inputs",
    "value": 119.56005,
    "kind": "estimate",
@@ -418,15 +420,15 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "nampula_8",
-   "label": "- (Nampula)",
+   "id": "late_neonatal_malaria_mortalities_per_year_babies_between_7",
+   "label": "Late neonatal malaria mortalities per year (babies between 7 and 27 days old) (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_16",
+   "formula": "late_neonatal_malaria_mortalities_per_year_babies_between_7_2",
    "expected": 119.56005
   },
   {
-   "id": "row_18",
-   "label": "-",
+   "id": "post_neonatal_malaria_mortalities_per_year_babies_between_28_2",
+   "label": "Post-neonatal malaria mortalities per year (babies between 28 and 364 days old) (Nampula)",
    "section": "inputs",
    "value": 1570.00564,
    "kind": "estimate",
@@ -438,15 +440,15 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "nampula_9",
-   "label": "- (Nampula)",
+   "id": "post_neonatal_malaria_mortalities_per_year_babies_between_28",
+   "label": "Post-neonatal malaria mortalities per year (babies between 28 and 364 days old) (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_18",
+   "formula": "post_neonatal_malaria_mortalities_per_year_babies_between_28_2",
    "expected": 1570.00564
   },
   {
-   "id": "input_12",
-   "label": "input",
+   "id": "number_of_post_neonatal_months_of_life_in_which_children_are_2",
+   "label": "Number of post-neonatal months of life in which children are under 3 months old",
    "section": "inputs",
    "value": 2.0,
    "kind": "estimate",
@@ -457,15 +459,15 @@
    }
   },
   {
-   "id": "input_11",
-   "label": "input",
+   "id": "number_of_post_neonatal_months_of_life_in_which_children_are",
+   "label": "Number of post-neonatal months of life in which children are under 3 months old",
    "section": "counterfactual_malaria",
-   "formula": "input_12",
+   "formula": "number_of_post_neonatal_months_of_life_in_which_children_are_2",
    "expected": 2.0
   },
   {
-   "id": "input_14",
-   "label": "input",
+   "id": "number_of_post_neonatal_months_of_life_in_which_children_are_4",
+   "label": "Number of post-neonatal months of life in which children are under 1 year old",
    "section": "inputs",
    "value": 11.0,
    "kind": "estimate",
@@ -476,37 +478,37 @@
    }
   },
   {
-   "id": "input_13",
-   "label": "input",
+   "id": "number_of_post_neonatal_months_of_life_in_which_children_are_3",
+   "label": "Number of post-neonatal months of life in which children are under 1 year old",
    "section": "counterfactual_malaria",
-   "formula": "input_14",
+   "formula": "number_of_post_neonatal_months_of_life_in_which_children_are_4",
    "expected": 11.0
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "proportion_of_post_neonatal_malaria_mortalities_that_are_amo",
+   "label": "Proportion of post-neonatal malaria mortalities that are among 1-2-month-olds",
    "section": "counterfactual_malaria",
-   "formula": "input_11 / input_13",
+   "formula": "number_of_post_neonatal_months_of_life_in_which_children_are / number_of_post_neonatal_months_of_life_in_which_children_are_3",
    "expected": 0.1818181818,
    "format": "percent"
   },
   {
-   "id": "row_17",
-   "label": "-",
+   "id": "estimated_malaria_mortalities_per_year_among_1_2_month_olds",
+   "label": "Estimated malaria mortalities per year among 1-2-month-olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "nampula_9 * calc_2",
+   "formula": "post_neonatal_malaria_mortalities_per_year_babies_between_28 * proportion_of_post_neonatal_malaria_mortalities_that_are_amo",
    "expected": 285.4555709
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "total_malaria_mortalities_per_year_among_3_59_month_olds_nam",
+   "label": "Total malaria mortalities per year among 3-59-month-olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "nampula_6 - sum(nampula_7, nampula_8, row_17)",
+   "formula": "malaria_mortalities_per_year_among_people_under_age_5_nampul - sum(early_neonatal_malaria_mortalities_per_year_babies_under_7_d, late_neonatal_malaria_mortalities_per_year_babies_between_7, estimated_malaria_mortalities_per_year_among_1_2_month_olds)",
    "expected": 2601.912469
   },
   {
-   "id": "row_22",
-   "label": "-",
+   "id": "per_100k_nampula_2",
+   "label": "per 100k (Nampula)",
    "section": "inputs",
    "value": 304.75977,
    "kind": "estimate",
@@ -518,22 +520,22 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "row_21",
-   "label": "-",
+   "id": "per_100k_nampula",
+   "label": "per 100k (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_22",
+   "formula": "per_100k_nampula_2",
    "expected": 304.75977
   },
   {
-   "id": "row_20",
-   "label": "-",
+   "id": "implied_population_of_people_under_age_5_nampula",
+   "label": "Implied population of people under age 5 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "nampula_6 / row_21 * 100000",
+   "formula": "malaria_mortalities_per_year_among_people_under_age_5_nampul / per_100k_nampula * 100000",
    "expected": 986655.1907
   },
   {
-   "id": "input_16",
-   "label": "input",
+   "id": "total_number_of_months_of_life_in_which_children_are_under_5_2",
+   "label": "Total number of months of life in which children are under 5 years old",
    "section": "inputs",
    "value": 60.0,
    "kind": "estimate",
@@ -544,15 +546,15 @@
    }
   },
   {
-   "id": "input_15",
-   "label": "input",
+   "id": "total_number_of_months_of_life_in_which_children_are_under_5",
+   "label": "Total number of months of life in which children are under 5 years old",
    "section": "counterfactual_malaria",
-   "formula": "input_16",
+   "formula": "total_number_of_months_of_life_in_which_children_are_under_5_2",
    "expected": 60.0
   },
   {
-   "id": "input_18",
-   "label": "input",
+   "id": "number_of_months_of_life_in_which_children_are_under_3_month_2",
+   "label": "Number of months of life in which children are under 3 months old",
    "section": "inputs",
    "value": 3.0,
    "kind": "estimate",
@@ -563,38 +565,38 @@
    }
   },
   {
-   "id": "input_17",
-   "label": "input",
+   "id": "number_of_months_of_life_in_which_children_are_under_3_month",
+   "label": "Number of months of life in which children are under 3 months old",
    "section": "counterfactual_malaria",
-   "formula": "input_18",
+   "formula": "number_of_months_of_life_in_which_children_are_under_3_month_2",
    "expected": 3.0
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "proportion_of_people_under_age_5_who_are_3_59_month_olds",
+   "label": "Proportion of people under age 5 who are 3-59-month-olds",
    "section": "counterfactual_malaria",
-   "formula": "(input_15 - input_17) / input_15",
+   "formula": "(total_number_of_months_of_life_in_which_children_are_under_5 - number_of_months_of_life_in_which_children_are_under_3_month) / total_number_of_months_of_life_in_which_children_are_under_5",
    "expected": 0.95,
    "format": "percent"
   },
   {
-   "id": "row_19",
-   "label": "-",
+   "id": "estimated_population_of_3_59_month_olds_nampula",
+   "label": "Estimated population of 3-59-month olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_20 * calc_3",
+   "formula": "implied_population_of_people_under_age_5_nampula * proportion_of_people_under_age_5_who_are_3_59_month_olds",
    "expected": 937322.4312
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "unadjusted_annual_malaria_mortality_rate_among_3_59_month_ol",
+   "label": "Unadjusted annual malaria mortality rate among 3-59-month-olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_13 / row_19",
+   "formula": "total_malaria_mortalities_per_year_among_3_59_month_olds_nam / estimated_population_of_3_59_month_olds_nampula",
    "expected": 0.002775899074,
    "format": "percent"
   },
   {
-   "id": "row_24",
-   "label": "-",
+   "id": "adjustment_for_malaria_averted_by_itn_distributions_not_acco_2",
+   "label": "Adjustment for malaria averted by ITN distributions not accounted for in GBD 2019 (Nampula)",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -606,179 +608,180 @@
    "format": "percent"
   },
   {
-   "id": "row_23",
-   "label": "-",
+   "id": "adjustment_for_malaria_averted_by_itn_distributions_not_acco",
+   "label": "Adjustment for malaria averted by ITN distributions not accounted for in GBD 2019 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_24",
+   "formula": "adjustment_for_malaria_averted_by_itn_distributions_not_acco_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "annual_malaria_mortality_rate_among_3_59_month_olds_nampula",
+   "label": "Annual malaria mortality rate among 3-59-month-olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_12 * (1 + row_23)",
+   "formula": "unadjusted_annual_malaria_mortality_rate_among_3_59_month_ol * (1 + adjustment_for_malaria_averted_by_itn_distributions_not_acco)",
    "expected": 0.002775899074,
    "format": "percent"
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "supp_nampula",
+   "label": "supp (Nampula)",
    "section": "main_cea",
-   "formula": "row_11",
+   "formula": "annual_malaria_mortality_rate_among_3_59_month_olds_nampula",
    "expected": 0.002775899074,
    "format": "percent"
   },
   {
-   "id": "input_20",
-   "label": "input",
+   "id": "indirect_malaria_deaths_per_direct_malaria_death_2",
+   "label": "Indirect malaria deaths per direct malaria death",
    "section": "inputs",
-   "value": 0.75,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H51"
-   }
-  },
-  {
-   "id": "input_19",
-   "label": "input",
-   "section": "main_cea",
-   "formula": "input_20",
+   },
+   "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
    "expected": 0.75
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "indirect_malaria_deaths_per_direct_malaria_death",
+   "label": "Indirect malaria deaths per direct malaria death",
    "section": "main_cea",
-   "formula": "row_10 * (1 + input_19)",
+   "formula": "indirect_malaria_deaths_per_direct_malaria_death_2",
+   "expected": 0.75
+  },
+  {
+   "id": "total_malaria_attributable_mortality_rate_including_direct_a",
+   "label": "Total malaria-attributable mortality rate (including direct and indirect malaria deaths) (Nampula)",
+   "section": "main_cea",
+   "formula": "supp_nampula * (1 + indirect_malaria_deaths_per_direct_malaria_death)",
    "expected": 0.00485782338,
    "format": "percent"
   },
   {
-   "id": "value_9",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_4",
+   "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_nampula_2 * row_9",
+   "formula": "value_nampula_5 * total_malaria_attributable_mortality_rate_including_direct_a",
    "expected": 10933.44156
   },
   {
-   "id": "row_26",
-   "label": "-",
+   "id": "proportion_of_annual_malaria_mortality_that_occurs_during_th_2",
+   "label": "Proportion of annual malaria mortality that occurs during the SMC season (Nampula)",
    "section": "inputs",
    "formula": "avg(33 / 100, 70 / 100)",
    "expected": 0.515,
    "format": "percent"
   },
   {
-   "id": "row_25",
-   "label": "-",
+   "id": "proportion_of_annual_malaria_mortality_that_occurs_during_th",
+   "label": "Proportion of annual malaria mortality that occurs during the SMC season (Nampula)",
    "section": "main_cea",
-   "formula": "row_26",
+   "formula": "proportion_of_annual_malaria_mortality_that_occurs_during_th_2",
    "expected": 0.515,
    "format": "percent"
   },
   {
-   "id": "value_8",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_3",
+   "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_9 * row_25",
+   "formula": "value_nampula_4 * proportion_of_annual_malaria_mortality_that_occurs_during_th",
    "expected": 5630.722403
   },
   {
-   "id": "value_7",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_2",
+   "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "row * value_8",
+   "formula": "expected_reduction_in_malaria_mortality_among_children_under * value_nampula_3",
    "expected": 3594.974956
   },
   {
    "id": "value_6",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_7",
+   "formula": "value_nampula_2",
    "expected": 3594.974956
   },
   {
-   "id": "input_22",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
+   "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "inputs",
-   "value": 116.25262,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H73"
-   }
+   },
+   "formula": "116.25262 * $life_value_multiplier",
+   "expected": 116.25262,
+   "explainer": "GiveWell's moral weight, 116.25262 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "input_21",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a",
+   "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "main_cea",
-   "formula": "input_22",
+   "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
    "expected": 116.25262
   },
   {
    "id": "value_5",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_6 * input_21",
+   "formula": "value_6 * value_assigned_to_averting_a_malaria_attributable_death_of_a",
    "expected": 417925.2574
   },
   {
-   "id": "input_24",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_population_too_old_2",
+   "label": "Reduction in malaria incidence among the population too old to be eligible for SMC found in Cisse et al. 2016",
    "section": "inputs",
-   "value": 0.26,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H56"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_among_the_population_too_old",
+   "expected": 0.26
   },
   {
-   "id": "input_23",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_population_too_old",
+   "label": "Reduction in malaria incidence among the population too old to be eligible for SMC found in Cisse et al. 2016",
    "section": "main_cea",
-   "formula": "input_24",
+   "formula": "reduction_in_malaria_incidence_among_the_population_too_old_2",
    "expected": 0.26,
    "format": "percent"
   },
   {
-   "id": "input_26",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_smc_eligible_popula_2",
+   "label": "Reduction in malaria incidence among the SMC-eligible population found in Cisse et al. 2016",
    "section": "inputs",
-   "value": 0.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H55"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_among_the_smc_eligible_popula",
+   "expected": 0.6
   },
   {
-   "id": "input_25",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_smc_eligible_popula",
+   "label": "Reduction in malaria incidence among the SMC-eligible population found in Cisse et al. 2016",
    "section": "main_cea",
-   "formula": "input_26",
+   "formula": "reduction_in_malaria_incidence_among_the_smc_eligible_popula_2",
    "expected": 0.6,
    "format": "percent"
   },
   {
-   "id": "calc_5",
-   "label": "calc",
+   "id": "implied_proportion_of_the_protective_effect_of_smc_received",
+   "label": "Implied proportion of the protective effect of SMC received by the population too old to be eligible for SMC",
    "section": "main_cea",
-   "formula": "input_23 / input_25",
+   "formula": "reduction_in_malaria_incidence_among_the_population_too_old / reduction_in_malaria_incidence_among_the_smc_eligible_popula",
    "expected": 0.4333333333,
    "format": "percent"
   },
   {
-   "id": "input_28",
-   "label": "input",
+   "id": "adjustment_for_differences_in_program_coverage_and_transmiss_2",
+   "label": "Adjustment for differences in program coverage and transmission intensity in the populations studied by the Cisse et al. 2016 trial and the populations targeted",
    "section": "inputs",
    "value": -0.6912579,
    "kind": "estimate",
@@ -790,48 +793,48 @@
    "format": "percent"
   },
   {
-   "id": "input_27",
-   "label": "input",
+   "id": "adjustment_for_differences_in_program_coverage_and_transmiss",
+   "label": "Adjustment for differences in program coverage and transmission intensity in the populations studied by the Cisse et al. 2016 trial and the populations targeted",
    "section": "main_cea",
-   "formula": "input_28",
+   "formula": "adjustment_for_differences_in_program_coverage_and_transmiss_2",
    "expected": -0.6912579,
    "format": "percent"
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "expected_proportion_of_the_protective_effect_of_smc_received",
+   "label": "Expected proportion of the protective effect of SMC received by the population too old to be eligible for SMC",
    "section": "main_cea",
-   "formula": "calc_5 * (1 + input_27)",
+   "formula": "implied_proportion_of_the_protective_effect_of_smc_received * (1 + adjustment_for_differences_in_program_coverage_and_transmiss)",
    "expected": 0.1337882433,
    "format": "percent"
   },
   {
-   "id": "row_28",
-   "label": "-",
+   "id": "expected_reduction_in_malaria_incidence_among_people_over_ag",
+   "label": "Expected reduction in malaria incidence among people over age 5",
    "section": "main_cea",
-   "formula": "row * calc_4",
+   "formula": "expected_reduction_in_malaria_mortality_among_children_under * expected_proportion_of_the_protective_effect_of_smc_received",
    "expected": 0.08541806001,
    "format": "percent"
   },
   {
-   "id": "feed",
-   "label": "feed",
+   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_3",
+   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "main_cea",
-   "formula": "input_9",
+   "formula": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 1.0,
    "format": "percent"
   },
   {
-   "id": "row_27",
-   "label": "-",
+   "id": "expected_reduction_in_malaria_mortality_among_people_over_ag",
+   "label": "Expected reduction in malaria mortality among people over age 5",
    "section": "main_cea",
-   "formula": "row_28 * feed",
+   "formula": "expected_reduction_in_malaria_incidence_among_people_over_ag * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_3",
    "expected": 0.08541806001,
    "format": "percent"
   },
   {
-   "id": "row_33",
-   "label": "-",
+   "id": "total_malaria_mortalities_per_year_nampula_2",
+   "label": "Total malaria mortalities per year (Nampula)",
    "section": "inputs",
    "value": 6890.0,
    "kind": "estimate",
@@ -843,83 +846,84 @@
    "explainer": "https://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0"
   },
   {
-   "id": "row_32",
-   "label": "-",
+   "id": "total_malaria_mortalities_per_year_nampula",
+   "label": "Total malaria mortalities per year (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_33",
+   "formula": "total_malaria_mortalities_per_year_nampula_2",
    "expected": 6890.0
   },
   {
-   "id": "row_31",
-   "label": "-",
+   "id": "malaria_mortalities_per_year_among_people_over_age_5_nampula",
+   "label": "Malaria mortalities per year among people over age 5 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_32 - nampula_6",
+   "formula": "total_malaria_mortalities_per_year_nampula - malaria_mortalities_per_year_among_people_under_age_5_nampul",
    "expected": 3883.07191
   },
   {
-   "id": "row_30",
-   "label": "-",
+   "id": "malaria_mortalities_among_people_over_age_5_per_malaria_mort",
+   "label": "Malaria mortalities among people over age 5 per malaria mortality among 3-59-month-olds (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_31 / row_13",
+   "formula": "malaria_mortalities_per_year_among_people_over_age_5_nampula / total_malaria_mortalities_per_year_among_3_59_month_olds_nam",
    "expected": 1.492391445
   },
   {
-   "id": "row_29",
-   "label": "-",
+   "id": "supp",
+   "label": "supp",
    "section": "main_cea",
-   "formula": "row_30",
+   "formula": "malaria_mortalities_among_people_over_age_5_per_malaria_mort",
    "expected": 1.492391445
   },
   {
-   "id": "value_13",
-   "label": "#VALUE! (-)",
+   "id": "value_10",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_8 * row_29",
+   "formula": "value_nampula_3 * supp",
    "expected": 8403.241945
   },
   {
-   "id": "value_12",
-   "label": "#VALUE! (-)",
+   "id": "value_9",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "row_27 * value_13",
+   "formula": "expected_reduction_in_malaria_mortality_among_people_over_ag * value_10",
    "expected": 717.7886247
   },
   {
-   "id": "value_11",
-   "label": "#VALUE! (-)",
+   "id": "value_8",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_12",
+   "formula": "value_9",
    "expected": 717.7886247
   },
   {
-   "id": "input_30",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_4",
+   "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "inputs",
-   "value": 73.1914,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H74"
-   }
+   },
+   "formula": "73.1914 * $life_value_multiplier",
+   "expected": 73.1914,
+   "explainer": "GiveWell's moral weight, 73.1914 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "input_29",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_3",
+   "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "main_cea",
-   "formula": "input_30",
+   "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_4",
    "expected": 73.1914
   },
   {
-   "id": "value_10",
-   "label": "#VALUE! (-)",
+   "id": "value_7",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_11 * input_29",
+   "formula": "value_8 * value_assigned_to_averting_a_malaria_attributable_death_of_a_3",
    "expected": 52535.95435
   },
   {
-   "id": "row_38",
-   "label": "-",
+   "id": "per_100k_nampula_4",
+   "label": "per 100k (Nampula)",
    "section": "inputs",
    "value": 36327.33,
    "kind": "estimate",
@@ -931,54 +935,54 @@
    "explainer": "See supplemental information here:\n\nhttps://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0\n\nOur supplemental information spreadsheet draws from Malaria Atlas Project data, which only reports malaria prevalence estimates for 2 to 10 year-olds. For this analysis, we assume that these malaria prevalence estimates apply to 1-14 year-olds."
   },
   {
-   "id": "row_37",
-   "label": "-",
+   "id": "per_100k_nampula_3",
+   "label": "per 100k (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_38",
+   "formula": "per_100k_nampula_4",
    "expected": 36327.33
   },
   {
-   "id": "row_39",
-   "label": "-",
+   "id": "adjustment_for_malaria_averted_by_itn_distributions_not_acco_3",
+   "label": "Adjustment for malaria averted by ITN distributions not accounted for in GBD 2019 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_24",
+   "formula": "adjustment_for_malaria_averted_by_itn_distributions_not_acco_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_36",
-   "label": "-",
+   "id": "adjusted_malaria_incidence_among_people_age_1_to_4_nampula",
+   "label": "Adjusted malaria incidence among people age 1 to 4 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_37 / 100000 * (1 + row_39)",
+   "formula": "per_100k_nampula_3 / 100000 * (1 + adjustment_for_malaria_averted_by_itn_distributions_not_acco_3)",
    "expected": 0.3632733,
    "format": "percent"
   },
   {
-   "id": "row_35",
-   "label": "-",
+   "id": "supp_2",
+   "label": "supp",
    "section": "main_cea",
-   "formula": "row_36",
+   "formula": "adjusted_malaria_incidence_among_people_age_1_to_4_nampula",
    "expected": 0.3632733,
    "format": "percent"
   },
   {
-   "id": "row_34",
-   "label": "-",
+   "id": "ppt",
+   "label": "ppt",
    "section": "main_cea",
-   "formula": "row_2 * row_25 * row_35",
+   "formula": "expected_reduction_in_malaria_incidence_among_children_under * proportion_of_annual_malaria_mortality_that_occurs_during_th * supp_2",
    "expected": 0.1194462337,
    "format": "percent"
   },
   {
-   "id": "value_16",
-   "label": "#VALUE! (-)",
+   "id": "value_13",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_nampula_2 * row_34",
+   "formula": "value_nampula_5 * ppt",
    "expected": 268836.1254
   },
   {
-   "id": "row_44",
-   "label": "-",
+   "id": "per_100k_nampula_6",
+   "label": "per 100k (Nampula)",
    "section": "inputs",
    "value": 36327.33,
    "kind": "estimate",
@@ -990,39 +994,39 @@
    "explainer": "See supplemental information here:\n\nhttps://docs.google.com/spreadsheets/d/1f6TlKJwK5EdciP_cEitTJMZ8Ba3HwGQrXvgdPMLfrlA/edit#gid=0\n\nOur supplemental information spreadsheet draws from Malaria Atlas Project data, which only reports malaria prevalence estimates for 2 to 10 year-olds. For this analysis, we assume that these malaria prevalence estimates apply to 1-14 year-olds."
   },
   {
-   "id": "row_43",
-   "label": "-",
+   "id": "per_100k_nampula_5",
+   "label": "per 100k (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_44",
+   "formula": "per_100k_nampula_6",
    "expected": 36327.33
   },
   {
-   "id": "row_42",
-   "label": "-",
+   "id": "adjusted_malaria_incidence_among_people_age_5_to_14_nampula",
+   "label": "Adjusted malaria incidence among people age 5 to 14 (Nampula)",
    "section": "counterfactual_malaria",
-   "formula": "row_43 / 100000 * (1 + row_39)",
+   "formula": "per_100k_nampula_5 / 100000 * (1 + adjustment_for_malaria_averted_by_itn_distributions_not_acco_3)",
    "expected": 0.3632733,
    "format": "percent"
   },
   {
-   "id": "row_41",
-   "label": "-",
+   "id": "supp_3",
+   "label": "supp",
    "section": "main_cea",
-   "formula": "row_42",
+   "formula": "adjusted_malaria_incidence_among_people_age_5_to_14_nampula",
    "expected": 0.3632733,
    "format": "percent"
   },
   {
-   "id": "row_40",
-   "label": "-",
+   "id": "ppt_2",
+   "label": "ppt",
    "section": "main_cea",
-   "formula": "row_28 * row_25 * row_41",
+   "formula": "expected_reduction_in_malaria_incidence_among_people_over_ag * proportion_of_annual_malaria_mortality_that_occurs_during_th * supp_3",
    "expected": 0.01598050178,
    "format": "percent"
   },
   {
-   "id": "number",
-   "label": "Number",
+   "id": "population",
+   "label": "Population",
    "section": "gbd_estimates",
    "value": 8658112.544,
    "kind": "estimate",
@@ -1033,22 +1037,22 @@
    }
   },
   {
-   "id": "row_47",
-   "label": "-",
+   "id": "national_population_age_5_to_14_nampula",
+   "label": "National population age 5 to 14 (Nampula)",
    "section": "inputs",
-   "formula": "number",
+   "formula": "population",
    "expected": 8658112.544
   },
   {
-   "id": "row_46",
-   "label": "-",
+   "id": "national_population_age_5_to_14",
+   "label": "National population age 5 to 14",
    "section": "main_cea",
-   "formula": "row_47",
+   "formula": "national_population_age_5_to_14_nampula",
    "expected": 8658112.544
   },
   {
-   "id": "number_2",
-   "label": "Number",
+   "id": "population_2",
+   "label": "Population",
    "section": "gbd_estimates",
    "value": 4037237.425,
    "kind": "estimate",
@@ -1059,50 +1063,50 @@
    }
   },
   {
-   "id": "row_49",
-   "label": "-",
+   "id": "national_population_age_1_to_4_nampula",
+   "label": "National population age 1 to 4 (Nampula)",
    "section": "inputs",
-   "formula": "number_2",
+   "formula": "population_2",
    "expected": 4037237.425
   },
   {
-   "id": "row_48",
-   "label": "-",
+   "id": "national_population_age_1_to_4",
+   "label": "National population age 1 to 4",
    "section": "main_cea",
-   "formula": "row_49",
+   "formula": "national_population_age_1_to_4_nampula",
    "expected": 4037237.425
   },
   {
-   "id": "row_45",
-   "label": "-",
+   "id": "number_of_5_14_year_olds_exposed_to_spillover_effects_per_pe",
+   "label": "Number of 5-14-year-olds exposed to spillover effects per person targeted to receive SMC",
    "section": "main_cea",
-   "formula": "row_46 / row_48",
+   "formula": "national_population_age_5_to_14 / national_population_age_1_to_4",
    "expected": 2.144563629
   },
   {
-   "id": "value_18",
-   "label": "#VALUE! (-)",
+   "id": "value_15",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_nampula_2 * row_45",
+   "formula": "value_nampula_5 * number_of_5_14_year_olds_exposed_to_spillover_effects_per_pe",
    "expected": 4826742.2
   },
   {
-   "id": "value_17",
-   "label": "#VALUE! (-)",
+   "id": "value_14",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "row_40 * value_18",
+   "formula": "ppt_2 * value_15",
    "expected": 77133.76232
   },
   {
-   "id": "value_15",
-   "label": "#VALUE! (-)",
+   "id": "value_12",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "sum(value_16, value_17)",
+   "formula": "sum(value_13, value_14)",
    "expected": 345969.8878
   },
   {
-   "id": "calc_8",
-   "label": "calc",
+   "id": "ln_2",
+   "label": "ln($)",
    "section": "main_cea",
    "value": 0.08111004275,
    "kind": "estimate",
@@ -1114,8 +1118,8 @@
    "explainer": "Calculated in the source sheet as `=pv(H87,H89,-H88,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "input_32",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households_2",
+   "label": "Multiplier for resource sharing within households",
    "section": "inputs",
    "value": 2.0,
    "kind": "estimate",
@@ -1126,69 +1130,70 @@
    }
   },
   {
-   "id": "input_31",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households",
+   "label": "Multiplier for resource sharing within households",
    "section": "main_cea",
-   "formula": "input_32",
+   "formula": "multiplier_for_resource_sharing_within_households_2",
    "expected": 2.0
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "ln",
+   "label": "ln($)",
    "section": "main_cea",
-   "formula": "calc_8 * input_31",
+   "formula": "ln_2 * multiplier_for_resource_sharing_within_households",
    "expected": 0.1622200855
   },
   {
-   "id": "input_35",
-   "label": "input",
+   "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",
+   "label": "Value assigned to doubling consumption for one person for one year",
    "section": "inputs",
-   "value": 1.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H75"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.0,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1."
   },
   {
-   "id": "input_34",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "inputs",
-   "formula": "input_35 / ln(2)",
+   "formula": "value_assigned_to_doubling_consumption_for_one_person_for_on / ln(2)",
    "expected": 1.442695041
   },
   {
-   "id": "input_33",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "main_cea",
-   "formula": "input_34",
+   "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "expected": 1.442695041
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "value_of_increased_income_through_averting_a_case_of_malaria",
+   "label": "Value of increased income through averting a case of malaria in a person under age 15",
    "section": "main_cea",
-   "formula": "calc_7 * input_33",
+   "formula": "ln * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 0.2340341129
   },
   {
-   "id": "value_14",
-   "label": "#VALUE! (-)",
+   "id": "value_11",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_15 * calc_6",
+   "formula": "value_12 * value_of_increased_income_through_averting_a_case_of_malaria",
    "expected": 80968.75576
   },
   {
    "id": "value_4",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "sum(value_5, value_10, value_14)",
+   "formula": "sum(value_5, value_7, value_11)",
    "expected": 551429.9675
   },
   {
-   "id": "input_37",
-   "label": "input",
+   "id": "double_treatment_2",
+   "label": "Double treatment",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1200,16 +1205,16 @@
    "format": "percent"
   },
   {
-   "id": "input_36",
-   "label": "input",
+   "id": "double_treatment",
+   "label": "Double treatment",
    "section": "main_cea",
-   "formula": "input_37",
+   "formula": "double_treatment_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_39",
-   "label": "input",
+   "id": "ineffective_goods_2",
+   "label": "Ineffective goods",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1221,16 +1226,16 @@
    "format": "percent"
   },
   {
-   "id": "input_38",
-   "label": "input",
+   "id": "ineffective_goods",
+   "label": "Ineffective goods",
    "section": "main_cea",
-   "formula": "input_39",
+   "formula": "ineffective_goods_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_41",
-   "label": "input",
+   "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
+   "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1242,16 +1247,16 @@
    "format": "percent"
   },
   {
-   "id": "input_40",
-   "label": "input",
+   "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d",
+   "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "main_cea",
-   "formula": "input_41",
+   "formula": "goods_purchased_and_left_in_storage_until_they_expire_cash_d_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_43",
-   "label": "input",
+   "id": "misappropriation_without_monitoring_results_2",
+   "label": "Misappropriation without monitoring results",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1263,16 +1268,16 @@
    "format": "percent"
   },
   {
-   "id": "input_42",
-   "label": "input",
+   "id": "misappropriation_without_monitoring_results",
+   "label": "Misappropriation without monitoring results",
    "section": "main_cea",
-   "formula": "input_43",
+   "formula": "misappropriation_without_monitoring_results_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_45",
-   "label": "input",
+   "id": "false_monitoring_results_2",
+   "label": "False monitoring results",
    "section": "inputs",
    "value": -0.02,
    "kind": "estimate",
@@ -1284,16 +1289,16 @@
    "format": "percent"
   },
   {
-   "id": "input_44",
-   "label": "input",
+   "id": "false_monitoring_results",
+   "label": "False monitoring results",
    "section": "main_cea",
-   "formula": "input_45",
+   "formula": "false_monitoring_results_2",
    "expected": -0.02,
    "format": "percent"
   },
   {
-   "id": "input_47",
-   "label": "input",
+   "id": "change_of_priorities_2",
+   "label": "Change of priorities",
    "section": "inputs",
    "value": -0.01,
    "kind": "estimate",
@@ -1305,16 +1310,16 @@
    "format": "percent"
   },
   {
-   "id": "input_46",
-   "label": "input",
+   "id": "change_of_priorities",
+   "label": "Change of priorities",
    "section": "main_cea",
-   "formula": "input_47",
+   "formula": "change_of_priorities_2",
    "expected": -0.01,
    "format": "percent"
   },
   {
-   "id": "input_49",
-   "label": "input",
+   "id": "non_funding_bottlenecks_2",
+   "label": "Non-funding bottlenecks",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1326,16 +1331,16 @@
    "format": "percent"
   },
   {
-   "id": "input_48",
-   "label": "input",
+   "id": "non_funding_bottlenecks",
+   "label": "Non-funding bottlenecks",
    "section": "main_cea",
-   "formula": "input_49",
+   "formula": "non_funding_bottlenecks_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_51",
-   "label": "input",
+   "id": "within_org_fungibility_2",
+   "label": "Within-org fungibility",
    "section": "inputs",
    "value": -0.05,
    "kind": "estimate",
@@ -1347,24 +1352,24 @@
    "format": "percent"
   },
   {
-   "id": "input_50",
-   "label": "input",
+   "id": "within_org_fungibility",
+   "label": "Within-org fungibility",
    "section": "main_cea",
-   "formula": "input_51",
+   "formula": "within_org_fungibility_2",
    "expected": -0.05,
    "format": "percent"
   },
   {
-   "id": "row_50",
-   "label": "-",
+   "id": "total_supplemental_grantee_level_adjustment",
+   "label": "Total supplemental grantee-level adjustment",
    "section": "main_cea",
-   "formula": "sum(input_36, input_38, input_40, input_42, input_44, input_46, input_48, input_50)",
+   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d, misappropriation_without_monitoring_results, false_monitoring_results, change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
    "expected": -0.08,
    "format": "percent"
   },
   {
-   "id": "input_53",
-   "label": "input",
+   "id": "malaria_morbidity_2",
+   "label": "Malaria morbidity",
    "section": "inputs",
    "value": 0.09,
    "kind": "estimate",
@@ -1376,37 +1381,37 @@
    "format": "percent"
   },
   {
-   "id": "input_52",
-   "label": "input",
+   "id": "malaria_morbidity",
+   "label": "Malaria morbidity",
    "section": "main_cea",
-   "formula": "input_53",
+   "formula": "malaria_morbidity_2",
    "expected": 0.09,
    "format": "percent"
   },
   {
-   "id": "input_55",
-   "label": "input",
+   "id": "short_term_anemia_effects_2",
+   "label": "Short-term anemia effects",
    "section": "inputs",
-   "value": 0.09,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1En0GheYjHNE69a9bOAedDvnbqN75Pk9dd1NzS7xYMqA/edit",
     "cell": "Inputs!H100"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.short_term_anemia_effects",
+   "expected": 0.09
   },
   {
-   "id": "input_54",
-   "label": "input",
+   "id": "short_term_anemia_effects",
+   "label": "Short-term anemia effects",
    "section": "main_cea",
-   "formula": "input_55",
+   "formula": "short_term_anemia_effects_2",
    "expected": 0.09,
    "format": "percent"
   },
   {
-   "id": "input_57",
-   "label": "input",
+   "id": "investment_of_income_increases_2",
+   "label": "Investment of income increases",
    "section": "inputs",
    "value": 0.05,
    "kind": "estimate",
@@ -1418,16 +1423,16 @@
    "format": "percent"
   },
   {
-   "id": "input_56",
-   "label": "input",
+   "id": "investment_of_income_increases",
+   "label": "Investment of income increases",
    "section": "main_cea",
-   "formula": "input_57",
+   "formula": "investment_of_income_increases_2",
    "expected": 0.05,
    "format": "percent"
   },
   {
-   "id": "input_59",
-   "label": "input",
+   "id": "treatment_costs_averted_from_prevention_2",
+   "label": "Treatment costs averted from prevention",
    "section": "inputs",
    "value": 0.2,
    "kind": "estimate",
@@ -1439,16 +1444,16 @@
    "format": "percent"
   },
   {
-   "id": "input_58",
-   "label": "input",
+   "id": "treatment_costs_averted_from_prevention",
+   "label": "Treatment costs averted from prevention",
    "section": "main_cea",
-   "formula": "input_59",
+   "formula": "treatment_costs_averted_from_prevention_2",
    "expected": 0.2,
    "format": "percent"
   },
   {
-   "id": "input_61",
-   "label": "input",
+   "id": "serious_adverse_events_due_to_side_effects_of_treatment_2",
+   "label": "Serious adverse events due to side effects of treatment",
    "section": "inputs",
    "value": -0.006,
    "kind": "estimate",
@@ -1460,16 +1465,16 @@
    "format": "percent"
   },
   {
-   "id": "input_60",
-   "label": "input",
+   "id": "serious_adverse_events_due_to_side_effects_of_treatment",
+   "label": "Serious adverse events due to side effects of treatment",
    "section": "main_cea",
-   "formula": "input_61",
+   "formula": "serious_adverse_events_due_to_side_effects_of_treatment_2",
    "expected": -0.006,
    "format": "percent"
   },
   {
-   "id": "input_63",
-   "label": "input",
+   "id": "failure_to_ingest_first_day_of_treatment_of_smc_2",
+   "label": "Failure to ingest first day of treatment of SMC",
    "section": "inputs",
    "value": -0.035,
    "kind": "estimate",
@@ -1481,16 +1486,16 @@
    "format": "percent"
   },
   {
-   "id": "input_62",
-   "label": "input",
+   "id": "failure_to_ingest_first_day_of_treatment_of_smc",
+   "label": "Failure to ingest first day of treatment of SMC",
    "section": "main_cea",
-   "formula": "input_63",
+   "formula": "failure_to_ingest_first_day_of_treatment_of_smc_2",
    "expected": -0.035,
    "format": "percent"
   },
   {
-   "id": "input_65",
-   "label": "input",
+   "id": "rebound_effects_decreased_immunity_development_2",
+   "label": "Rebound effects / decreased immunity development",
    "section": "inputs",
    "value": -0.04,
    "kind": "estimate",
@@ -1502,16 +1507,16 @@
    "format": "percent"
   },
   {
-   "id": "input_64",
-   "label": "input",
+   "id": "rebound_effects_decreased_immunity_development",
+   "label": "Rebound effects / decreased immunity development",
    "section": "main_cea",
-   "formula": "input_65",
+   "formula": "rebound_effects_decreased_immunity_development_2",
    "expected": -0.04,
    "format": "percent"
   },
   {
-   "id": "input_67",
-   "label": "input",
+   "id": "subnational_adjustments_2",
+   "label": "Subnational adjustments",
    "section": "inputs",
    "value": 0.032,
    "kind": "estimate",
@@ -1523,16 +1528,16 @@
    "format": "percent"
   },
   {
-   "id": "input_66",
-   "label": "input",
+   "id": "subnational_adjustments",
+   "label": "Subnational adjustments",
    "section": "main_cea",
-   "formula": "input_67",
+   "formula": "subnational_adjustments_2",
    "expected": 0.032,
    "format": "percent"
   },
   {
-   "id": "row_53",
-   "label": "-",
+   "id": "drug_resistance_2",
+   "label": "Drug resistance",
    "section": "inputs",
    "value": -0.1,
    "kind": "estimate",
@@ -1545,16 +1550,16 @@
    "format": "percent"
   },
   {
-   "id": "row_52",
-   "label": "-",
+   "id": "drug_resistance",
+   "label": "Drug resistance",
    "section": "main_cea",
-   "formula": "row_53",
+   "formula": "drug_resistance_2",
    "expected": -0.1,
    "format": "percent"
   },
   {
-   "id": "row_55",
-   "label": "-",
+   "id": "marginal_funding_goes_to_lower_priority_areas_2",
+   "label": "Marginal funding goes to lower priority areas",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1567,92 +1572,92 @@
    "format": "percent"
   },
   {
-   "id": "row_54",
-   "label": "-",
+   "id": "marginal_funding_goes_to_lower_priority_areas",
+   "label": "Marginal funding goes to lower priority areas",
    "section": "main_cea",
-   "formula": "row_55",
+   "formula": "marginal_funding_goes_to_lower_priority_areas_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_51",
-   "label": "-",
+   "id": "total_supplemental_intervention_level_adjustment",
+   "label": "Total supplemental intervention-level adjustment",
    "section": "main_cea",
-   "formula": "sum(input_52, input_54, input_56, input_58, input_60, input_62, input_64, input_66, row_52, row_54)",
+   "formula": "sum(malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, treatment_costs_averted_from_prevention, serious_adverse_events_due_to_side_effects_of_treatment, failure_to_ingest_first_day_of_treatment_of_smc, rebound_effects_decreased_immunity_development, subnational_adjustments, drug_resistance, marginal_funding_goes_to_lower_priority_areas)",
    "expected": 0.281,
    "format": "percent"
   },
   {
-   "id": "value_27",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_11",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_nampula_3",
+   "formula": "value_nampula_6",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "value_26",
-   "label": "#VALUE! (-)",
+   "id": "value_23",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_27",
+   "formula": "value_nampula_11",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "value_31",
-   "label": "#VALUE! (-)",
+   "id": "value_25",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_nampula_3",
+   "formula": "value_nampula_6",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "value_30",
-   "label": "#VALUE! (-)",
+   "id": "value_24",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_4 / value_31",
+   "formula": "value_4 / value_25",
    "expected": 0.03783600824
   },
   {
-   "id": "value_29",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_13",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_30",
+   "formula": "value_24",
    "expected": 0.03783600824
   },
   {
-   "id": "row_56",
-   "label": "-",
+   "id": "main_nampula",
+   "label": "main (Nampula)",
    "section": "leveragefunging",
-   "formula": "row_50",
+   "formula": "total_supplemental_grantee_level_adjustment",
    "expected": -0.08,
    "format": "percent"
   },
   {
-   "id": "row_57",
-   "label": "-",
+   "id": "main_nampula_2",
+   "label": "main (Nampula)",
    "section": "leveragefunging",
-   "formula": "row_51",
+   "formula": "total_supplemental_intervention_level_adjustment",
    "expected": 0.281,
    "format": "percent"
   },
   {
-   "id": "value_28",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_12",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_29 * (1 + row_56) * (1 + row_57)",
+   "formula": "value_nampula_13 * (1 + main_nampula) * (1 + main_nampula_2)",
    "expected": 0.04459049244
   },
   {
-   "id": "value_25",
-   "label": "#VALUE! (-)",
+   "id": "value_22",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_26 * value_28",
+   "formula": "value_23 * value_nampula_12",
    "expected": 649871.2453
   },
   {
-   "id": "input_69",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
+   "label": "Counterfactual value per dollar spent by domestic governments",
    "section": "inputs",
    "value": 0.005057,
    "kind": "estimate",
@@ -1663,36 +1668,36 @@
    }
   },
   {
-   "id": "input_68",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
+   "label": "Counterfactual value per dollar spent by domestic governments",
    "section": "leveragefunging",
-   "formula": "input_69",
+   "formula": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
    "expected": 0.005057
   },
   {
-   "id": "value_32",
-   "label": "#VALUE! (-)",
+   "id": "value_26",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_26 * input_68",
+   "formula": "value_23 * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 73701.78503
   },
   {
-   "id": "value_24",
-   "label": "#VALUE! (-)",
+   "id": "value_21",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_25 - value_32",
+   "formula": "value_22 - value_26",
    "expected": 576169.4603
   },
   {
-   "id": "value_23",
-   "label": "#VALUE! (-)",
+   "id": "value_20",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "-value_24",
+   "formula": "-value_21",
    "expected": -576169.4603
   },
   {
-   "id": "row_60",
-   "label": "-",
+   "id": "scenario_1_domestic_governments_would_replace_the_grantee_s_2",
+   "label": "Scenario 1: Domestic governments would replace the grantee's costs",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1704,46 +1709,46 @@
    "format": "percent"
   },
   {
-   "id": "row_59",
-   "label": "-",
+   "id": "scenario_1_domestic_governments_would_replace_the_grantee_s",
+   "label": "Scenario 1: Domestic governments would replace the grantee's costs (Nampula)",
    "section": "leveragefunging",
-   "formula": "row_60",
+   "formula": "scenario_1_domestic_governments_would_replace_the_grantee_s_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_58",
-   "label": "-",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
-   "formula": "row_59",
+   "formula": "scenario_1_domestic_governments_would_replace_the_grantee_s",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "value_22",
-   "label": "#VALUE! (-)",
+   "id": "value_19",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_23 * row_58",
+   "formula": "value_20 * probability_of_this_scenario_representing_the_true_counterfa",
    "expected": 0.0
   },
   {
-   "id": "value_37",
-   "label": "#VALUE! (-)",
+   "id": "value_31",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_27",
+   "formula": "value_nampula_11",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "value_36",
-   "label": "#VALUE! (-)",
+   "id": "value_30",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_37 * value_28",
+   "formula": "value_31 * value_nampula_12",
    "expected": 649871.2453
   },
   {
-   "id": "input_71",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
+   "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "inputs",
    "value": 0.015433,
    "kind": "estimate",
@@ -1754,36 +1759,36 @@
    }
   },
   {
-   "id": "input_70",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
+   "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "leveragefunging",
-   "formula": "input_71",
+   "formula": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
    "expected": 0.015433
   },
   {
-   "id": "value_38",
-   "label": "#VALUE! (-)",
+   "id": "value_32",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_37 * input_70",
+   "formula": "value_31 * counterfactual_value_per_dollar_spent_by_the_global_fund_or",
    "expected": 224923.7984
   },
   {
-   "id": "value_35",
-   "label": "#VALUE! (-)",
+   "id": "value_29",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_36 - value_38",
+   "formula": "value_30 - value_32",
    "expected": 424947.447
   },
   {
-   "id": "value_34",
-   "label": "#VALUE! (-)",
+   "id": "value_28",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "-value_35",
+   "formula": "-value_29",
    "expected": -424947.447
   },
   {
-   "id": "row_63",
-   "label": "-",
+   "id": "scenario_2_global_fund_and_or_pmi_would_replace_the_grantee_2",
+   "label": "Scenario 2: Global Fund and/or PMI would replace the grantee's costs",
    "section": "inputs",
    "value": 0.2,
    "kind": "estimate",
@@ -1796,31 +1801,31 @@
    "format": "percent"
   },
   {
-   "id": "row_62",
-   "label": "-",
+   "id": "scenario_2_global_fund_and_or_pmi_would_replace_the_grantee",
+   "label": "Scenario 2: Global Fund and/or PMI would replace the grantee's costs (Nampula)",
    "section": "leveragefunging",
-   "formula": "row_63",
+   "formula": "scenario_2_global_fund_and_or_pmi_would_replace_the_grantee_2",
    "expected": 0.2,
    "format": "percent"
   },
   {
-   "id": "row_61",
-   "label": "-",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
-   "formula": "row_62",
+   "formula": "scenario_2_global_fund_and_or_pmi_would_replace_the_grantee",
    "expected": 0.2,
    "format": "percent"
   },
   {
-   "id": "value_33",
-   "label": "#VALUE! (-)",
+   "id": "value_27",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_34 * row_61",
+   "formula": "value_28 * probability_of_this_scenario_representing_the_true_counterfa_2",
    "expected": -84989.4894
   },
   {
-   "id": "row_64",
-   "label": "-",
+   "id": "percentage_of_total_costs_covered_by_domestic_governments_na_2",
+   "label": "Percentage of total costs covered by domestic governments (Nampula)",
    "section": "inputs",
    "value": 0.1056405,
    "kind": "estimate",
@@ -1833,71 +1838,71 @@
    "format": "percent"
   },
   {
-   "id": "nampula_10",
-   "label": "- (Nampula)",
+   "id": "percentage_of_total_costs_covered_by_domestic_governments_na",
+   "label": "Percentage of total costs covered by domestic governments (Nampula)",
    "section": "main_cea",
-   "formula": "row_64",
+   "formula": "percentage_of_total_costs_covered_by_domestic_governments_na_2",
    "expected": 0.1056405,
    "format": "percent"
   },
   {
-   "id": "value_nampula_8",
+   "id": "value_nampula_15",
    "label": "#VALUE! (Nampula)",
    "section": "main_cea",
-   "formula": "value_nampula_4 * nampula_10",
+   "formula": "value_nampula_7 * percentage_of_total_costs_covered_by_domestic_governments_na",
    "expected": 1721485.529,
    "format": "usd"
   },
   {
-   "id": "value_44",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_14",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_nampula_8",
+   "formula": "value_nampula_15",
    "expected": 1721485.529,
    "format": "usd"
   },
   {
-   "id": "value_46",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_17",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_nampula_7",
+   "formula": "value_nampula_10",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "value_47",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_18",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_nampula_6",
+   "formula": "value_nampula_9",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
-   "id": "value_45",
-   "label": "#VALUE! (-)",
+   "id": "value_nampula_16",
+   "label": "#VALUE! (Nampula)",
    "section": "leveragefunging",
-   "formula": "value_46 / value_47",
+   "formula": "value_nampula_17 / value_nampula_18",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "value_43",
-   "label": "#VALUE! (-)",
+   "id": "value_37",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_44 * (1 - value_45)",
+   "formula": "value_nampula_14 * (1 - value_nampula_16)",
    "expected": 1721485.529,
    "format": "usd"
   },
   {
-   "id": "value_42",
-   "label": "#VALUE! (-)",
+   "id": "value_36",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_43 * input_68",
+   "formula": "value_37 * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 8705.552321
   },
   {
-   "id": "row_65",
-   "label": "-",
+   "id": "value_lost_by_shifting_government_spending_away_from_the_gra",
+   "label": "Value lost by shifting government spending away from the grantee program",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -1908,22 +1913,22 @@
    }
   },
   {
-   "id": "value_41",
-   "label": "#VALUE! (-)",
+   "id": "value_35",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_42 - row_65",
+   "formula": "value_36 - value_lost_by_shifting_government_spending_away_from_the_gra",
    "expected": 8705.552321
   },
   {
-   "id": "value_40",
-   "label": "#VALUE! (-)",
+   "id": "value_34",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "-value_41",
+   "formula": "-value_35",
    "expected": -8705.552321
   },
   {
-   "id": "row_68",
-   "label": "-",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_2",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program)",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1935,46 +1940,46 @@
    "format": "percent"
   },
   {
-   "id": "row_67",
-   "label": "-",
+   "id": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d",
+   "label": "Scenario 3: Other actors' upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Nampula)",
    "section": "leveragefunging",
-   "formula": "row_68",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_66",
-   "label": "-",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_3",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
-   "formula": "row_67",
+   "formula": "scenario_3_other_actors_upstream_costs_would_stay_the_same_d",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "value_39",
-   "label": "#VALUE! (-)",
+   "id": "value_33",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_40 * row_66",
+   "formula": "value_34 * probability_of_this_scenario_representing_the_true_counterfa_3",
    "expected": 0.0
   },
   {
-   "id": "value_52",
-   "label": "#VALUE! (-)",
+   "id": "value_42",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_44",
+   "formula": "value_nampula_14",
    "expected": 1721485.529,
    "format": "usd"
   },
   {
-   "id": "value_51",
-   "label": "#VALUE! (-)",
+   "id": "value_41",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_52 * input_68",
+   "formula": "value_42 * counterfactual_value_per_dollar_spent_by_domestic_government",
    "expected": 8705.552321
   },
   {
-   "id": "row_69",
-   "label": "-",
+   "id": "value_lost_by_shifting_government_spending_away_from_the_gra_2",
+   "label": "Value lost by shifting government spending away from the grantee program",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -1985,97 +1990,97 @@
    }
   },
   {
-   "id": "value_50",
-   "label": "#VALUE! (-)",
+   "id": "value_40",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_51 - row_69",
+   "formula": "value_41 - value_lost_by_shifting_government_spending_away_from_the_gra_2",
    "expected": 8705.552321
   },
   {
-   "id": "value_49",
-   "label": "#VALUE! (-)",
+   "id": "value_39",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "-value_50",
+   "formula": "-value_40",
    "expected": -8705.552321
   },
   {
-   "id": "row_71",
-   "label": "-",
+   "id": "scenario_4_distributions_would_go_unfunded_nampula",
+   "label": "Scenario 4: Distributions would go unfunded (Nampula)",
    "section": "leveragefunging",
-   "formula": "1 - sum(row_59, row_62, row_67)",
+   "formula": "1 - sum(scenario_1_domestic_governments_would_replace_the_grantee_s, scenario_2_global_fund_and_or_pmi_would_replace_the_grantee, scenario_3_other_actors_upstream_costs_would_stay_the_same_d)",
    "expected": 0.8,
    "format": "percent"
   },
   {
-   "id": "row_70",
-   "label": "-",
+   "id": "probability_of_this_scenario_representing_the_true_counterfa_4",
+   "label": "Probability of this scenario representing the true counterfactual",
    "section": "leveragefunging",
-   "formula": "row_71",
+   "formula": "scenario_4_distributions_would_go_unfunded_nampula",
    "expected": 0.8,
    "format": "percent"
   },
   {
-   "id": "value_48",
-   "label": "#VALUE! (-)",
+   "id": "value_38",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_49 * row_70",
+   "formula": "value_39 * probability_of_this_scenario_representing_the_true_counterfa_4",
    "expected": -6964.441857
   },
   {
-   "id": "value_21",
-   "label": "#VALUE! (-)",
+   "id": "value_18",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "sum(value_22, value_33, value_39, value_48)",
+   "formula": "sum(value_19, value_27, value_33, value_38)",
    "expected": -91953.93125
   },
   {
-   "id": "value_53",
-   "label": "#VALUE! (-)",
+   "id": "value_43",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_27 * value_28",
+   "formula": "value_nampula_11 * value_nampula_12",
    "expected": 649871.2453
   },
   {
-   "id": "value_20",
-   "label": "#VALUE! (-)",
+   "id": "value_17",
+   "label": "#VALUE!",
    "section": "leveragefunging",
-   "formula": "value_21 / value_53",
+   "formula": "value_18 / value_43",
    "expected": -0.1414956146,
    "format": "percent"
   },
   {
-   "id": "value_19",
-   "label": "#VALUE! (-)",
+   "id": "value_16",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_20",
+   "formula": "value_17",
    "expected": -0.1414956146,
    "format": "percent"
   },
   {
    "id": "value_3",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_4 * (1 + row_50) * (1 + row_51) * (1 + value_19)",
+   "formula": "value_4 * (1 + total_supplemental_grantee_level_adjustment) * (1 + total_supplemental_intervention_level_adjustment) * (1 + value_16)",
    "expected": 557917.3141
   },
   {
-   "id": "value_54",
-   "label": "#VALUE! (-)",
+   "id": "value_44",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_nampula_3",
+   "formula": "value_nampula_6",
    "expected": 14574211.0,
    "format": "usd"
   },
   {
    "id": "value_2",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_3 / value_54",
+   "formula": "value_3 / value_44",
    "expected": 0.0382811333
   },
   {
-   "id": "input_73",
-   "label": "input",
+   "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
+   "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "inputs",
    "value": 0.0033545,
    "kind": "estimate",
@@ -2086,17 +2091,17 @@
    }
   },
   {
-   "id": "input_72",
-   "label": "input",
+   "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
+   "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "main_cea",
-   "formula": "input_73",
+   "formula": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
    "expected": 0.0033545
   },
   {
    "id": "value",
-   "label": "#VALUE! (-)",
+   "label": "#VALUE!",
    "section": "main_cea",
-   "formula": "value_2 / input_72",
+   "formula": "value_2 / value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
    "expected": 11.41187459
   },
   {

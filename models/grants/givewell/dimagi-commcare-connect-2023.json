@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -284,14 +286,14 @@
    "id": "value_assigned_to_averting_the_death_of_a_6_to_59_month_old",
    "label": "Value assigned to averting the death of a 6- to 59-month-old child (VAS) (Nigeria)",
    "section": "commcare_connect_botec",
-   "value": 119.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1EGbktwOSmRr9nshBJy9Vr_E0eTkyTDyXqPvHMSzZTGs/edit",
     "cell": "CommCare Connect BOTEC!B32"
    },
-   "explainer": "GiveWell's moral weights"
+   "explainer": "GiveWell's moral weight, 119 units of value, times your multiplier on the value of a life.\n\nGiveWell's moral weights",
+   "formula": "119 * $life_value_multiplier",
+   "expected": 119.0
   },
   {
    "id": "total_units_of_value_from_mortality_reduction_nigeria",
@@ -416,14 +418,14 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "commcare_connect_botec",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1EGbktwOSmRr9nshBJy9Vr_E0eTkyTDyXqPvHMSzZTGs/edit",
     "cell": "CommCare Connect BOTEC!B64"
    },
-   "explainer": "GiveWell's moral weights"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGiveWell's moral weights",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
    "id": "marginal_increase_in_total_number_of_children_dewormed_per_y",
@@ -843,14 +845,14 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person",
    "section": "commcare_connect_botec",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1EGbktwOSmRr9nshBJy9Vr_E0eTkyTDyXqPvHMSzZTGs/edit",
     "cell": "CommCare Connect BOTEC!B106"
    },
-   "explainer": "GiveWell's moral weights"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGiveWell's moral weights",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
    "id": "total_units_of_value_generated_2",

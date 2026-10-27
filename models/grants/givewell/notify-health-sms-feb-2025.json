@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "discount_rate": 0.005
   }
  },
  "resources": [
@@ -955,8 +957,8 @@
    "format": "percent"
   },
   {
-   "id": "number_value",
-   "label": "Number (Value)",
+   "id": "early_neonatal_value",
+   "label": "Early Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 19392.2334,
    "kind": "estimate",
@@ -970,12 +972,12 @@
    "id": "early_neonatal_0_to_6_days",
    "label": "Early neonatal (0 to 6 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value",
+   "formula": "early_neonatal_value",
    "expected": 19392.2334
   },
   {
-   "id": "number_value_2",
-   "label": "Number (Value)",
+   "id": "late_neonatal_value",
+   "label": "Late Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 9913.113528,
    "kind": "estimate",
@@ -989,12 +991,12 @@
    "id": "late_neonatal_7_to_27_days",
    "label": "Late neonatal (7 to 27 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_2",
+   "formula": "late_neonatal_value",
    "expected": 9913.113528
   },
   {
-   "id": "number_value_3",
-   "label": "Number (Value)",
+   "id": "under_5_value",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 100224.1986,
    "kind": "estimate",
@@ -1008,7 +1010,7 @@
    "id": "under_5_years",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_3",
+   "formula": "under_5_value",
    "expected": 100224.1986
   },
   {
@@ -1099,8 +1101,8 @@
    "format": "percent"
   },
   {
-   "id": "number_value_4",
-   "label": "Number (Value)",
+   "id": "early_neonatal_value_2",
+   "label": "Early Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 1756.696812,
    "kind": "estimate",
@@ -1114,12 +1116,12 @@
    "id": "early_neonatal_0_to_6_days_2",
    "label": "Early neonatal (0 to 6 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_4",
+   "formula": "early_neonatal_value_2",
    "expected": 1756.696812
   },
   {
-   "id": "number_value_5",
-   "label": "Number (Value)",
+   "id": "late_neonatal_value_2",
+   "label": "Late Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 1167.155425,
    "kind": "estimate",
@@ -1133,12 +1135,12 @@
    "id": "late_neonatal_7_to_27_days_2",
    "label": "Late neonatal (7 to 27 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_5",
+   "formula": "late_neonatal_value_2",
    "expected": 1167.155425
   },
   {
-   "id": "number_value_6",
-   "label": "Number (Value)",
+   "id": "under_5_value_2",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 24800.12775,
    "kind": "estimate",
@@ -1152,7 +1154,7 @@
    "id": "under_5_years_2",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_6",
+   "formula": "under_5_value_2",
    "expected": 24800.12775
   },
   {
@@ -1282,8 +1284,8 @@
    "explainer": "Calculated in the source sheet as `=IFERROR(__xludf.DUMMYFUNCTION(\"SUM(FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=\"\"Pertussis\"\",'Source GBD data'!$D$3:$D$48=\"\"Early Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=\"\"Pertussis\"\",'Source GBD\"&\" data'!$D$3:$D$48=\"\"Late Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Sour`; kept as a fixed number here (operator &)."
   },
   {
-   "id": "number_value_7",
-   "label": "Number (Value)",
+   "id": "under_5_value_3",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 7910.124475,
    "kind": "estimate",
@@ -1297,7 +1299,7 @@
    "id": "under_5_years_3",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_7",
+   "formula": "under_5_value_3",
    "expected": 7910.124475
   },
   {
@@ -1359,8 +1361,8 @@
    "explainer": "Calculated in the source sheet as `=IFERROR(__xludf.DUMMYFUNCTION(\"SUM(FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=$A$29,'Source GBD data'!$D$3:$D$48=\"\"Early Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=$A$29,'Source GBD data'!$D$3:$D$4\"&\"8=\"\"Late Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$`; kept as a fixed number here (operator &)."
   },
   {
-   "id": "number_value_8",
-   "label": "Number (Value)",
+   "id": "under_5_value_4",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 1702.477769,
    "kind": "estimate",
@@ -1374,7 +1376,7 @@
    "id": "under_5_years_4",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_8",
+   "formula": "under_5_value_4",
    "expected": 1702.477769
   },
   {
@@ -1423,8 +1425,8 @@
    "format": "percent"
   },
   {
-   "id": "number_value_9",
-   "label": "Number (Value)",
+   "id": "early_neonatal_value_3",
+   "label": "Early Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 486.8581443,
    "kind": "estimate",
@@ -1438,12 +1440,12 @@
    "id": "early_neonatal_0_to_6_days_3",
    "label": "Early neonatal (0 to 6 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_9",
+   "formula": "early_neonatal_value_3",
    "expected": 486.8581443
   },
   {
-   "id": "number_value_10",
-   "label": "Number (Value)",
+   "id": "late_neonatal_value_3",
+   "label": "Late Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 285.2395733,
    "kind": "estimate",
@@ -1457,12 +1459,12 @@
    "id": "late_neonatal_7_to_27_days_3",
    "label": "Late neonatal (7 to 27 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_10",
+   "formula": "late_neonatal_value_3",
    "expected": 285.2395733
   },
   {
-   "id": "number_value_11",
-   "label": "Number (Value)",
+   "id": "under_5_value_5",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 922.6269362,
    "kind": "estimate",
@@ -1476,7 +1478,7 @@
    "id": "under_5_years_5",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_11",
+   "formula": "under_5_value_5",
    "expected": 922.6269362
   },
   {
@@ -1538,8 +1540,8 @@
    "explainer": "Calculated in the source sheet as `=IFERROR(__xludf.DUMMYFUNCTION(\"SUM(FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=$A$47,'Source GBD data'!$D$3:$D$48=\"\"Early Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$3:$B$48=$A$47,'Source GBD data'!$D$3:$D$4\"&\"8=\"\"Late Neonatal\"\",'Source GBD data'!$A$3:$A$48=B$1),FILTER('Source GBD data'!$H$3:$H$48,'Source GBD data'!$B$`; kept as a fixed number here (operator &)."
   },
   {
-   "id": "number_value_12",
-   "label": "Number (Value)",
+   "id": "under_5_value_6",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 5194.375804,
    "kind": "estimate",
@@ -1553,7 +1555,7 @@
    "id": "under_5_years_6",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_12",
+   "formula": "under_5_value_6",
    "expected": 5194.375804
   },
   {
@@ -1602,8 +1604,8 @@
    "format": "percent"
   },
   {
-   "id": "number_value_13",
-   "label": "Number (Value)",
+   "id": "under_5_value_7",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 40012.71104,
    "kind": "estimate",
@@ -1617,12 +1619,12 @@
    "id": "under_5_years_7",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_13",
+   "formula": "under_5_value_7",
    "expected": 40012.71104
   },
   {
-   "id": "number_value_14",
-   "label": "Number (Value)",
+   "id": "under_5_value_8",
+   "label": "Under 5 (Value)",
    "section": "source_gbd_data",
    "value": 97592.76361,
    "kind": "estimate",
@@ -1636,7 +1638,7 @@
    "id": "under_5_years_8",
    "label": "Under 5 years",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_14",
+   "formula": "under_5_value_8",
    "expected": 97592.76361
   },
   {
@@ -1648,8 +1650,8 @@
    "format": "percent"
   },
   {
-   "id": "number_value_15",
-   "label": "Number (Value)",
+   "id": "early_neonatal_value_4",
+   "label": "Early Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 1141.903065,
    "kind": "estimate",
@@ -1663,12 +1665,12 @@
    "id": "early_neonatal_0_to_6_days_4",
    "label": "Early neonatal (0 to 6 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_15",
+   "formula": "early_neonatal_value_4",
    "expected": 1141.903065
   },
   {
-   "id": "number_value_16",
-   "label": "Number (Value)",
+   "id": "late_neonatal_value_4",
+   "label": "Late Neonatal (Value)",
    "section": "source_gbd_data",
    "value": 1313.497189,
    "kind": "estimate",
@@ -1682,7 +1684,7 @@
    "id": "late_neonatal_7_to_27_days_4",
    "label": "Late neonatal (7 to 27 days)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "number_value_16",
+   "formula": "late_neonatal_value_4",
    "expected": 1313.497189
   },
   {
@@ -1734,8 +1736,8 @@
    "format": "percent"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "bcg_nigeria_2",
+   "label": "BCG (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.535,
    "kind": "estimate",
@@ -2056,10 +2058,10 @@
    "format": "percent"
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "bcg_nigeria",
+   "label": "BCG (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_4 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "bcg_nigeria_2 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.5271721284,
    "format": "percent"
   },
@@ -2077,8 +2079,8 @@
    "format": "percent"
   },
   {
-   "id": "nigeria",
-   "label": "- (Nigeria)",
+   "id": "bcg_nigeria_4",
+   "label": "BCG (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_bcg",
    "expected": 0.741,
@@ -2394,18 +2396,18 @@
    "format": "percent"
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "bcg_nigeria_3",
+   "label": "BCG (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "bcg_nigeria_4 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.7356668771,
    "format": "percent"
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "bcg",
+   "label": "BCG",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_3, row_5)",
+   "formula": "avg(bcg_nigeria, bcg_nigeria_3)",
    "expected": 0.6314195028,
    "format": "percent"
   },
@@ -2424,7 +2426,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_3",
+   "id": "bcg_vaccine_4",
    "label": "BCG vaccine",
    "section": "vaccine_efficacy_data",
    "value": 0.0,
@@ -2438,10 +2440,10 @@
    "format": "percent"
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "bcg_vaccine_5",
+   "label": "BCG vaccine",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_2",
+   "formula": "bcg",
    "expected": 0.6314195028,
    "format": "percent"
   },
@@ -2449,7 +2451,7 @@
    "id": "bcg_vaccine_nigeria_3",
    "label": "BCG vaccine (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_7",
+   "formula": "bcg_vaccine_5",
    "expected": 0.6314195028,
    "format": "percent"
   },
@@ -2457,7 +2459,7 @@
    "id": "bcg_vaccine_nigeria_2",
    "label": "BCG vaccine (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "bcg_vaccine_3 / (bcg_vaccine_nigeria_3 * 0 + (1 - bcg_vaccine_nigeria_3))",
+   "formula": "bcg_vaccine_4 / (bcg_vaccine_nigeria_3 * 0 + (1 - bcg_vaccine_nigeria_3))",
    "expected": 0.0,
    "format": "percent"
   },
@@ -2499,32 +2501,32 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_2",
-   "label": "- (Nigeria)",
+   "id": "pcv1_nigeria_2",
+   "label": "PCV1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_pcv1",
    "expected": 0.691,
    "format": "percent"
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "pcv1_nigeria",
+   "label": "PCV1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_2 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "pcv1_nigeria_2 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.686026737,
    "format": "percent"
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "bcg_nigeria_5",
+   "label": "BCG (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_3 / row_5",
+   "formula": "bcg_nigeria / bcg_nigeria_3",
    "expected": 0.7165908169,
    "format": "percent"
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "measles1_nigeria_3",
+   "label": "Measles1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.417,
    "kind": "estimate",
@@ -2536,10 +2538,10 @@
    "format": "percent"
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "measles1_nigeria_2",
+   "label": "Measles1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_16 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "measles1_nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.4108986496,
    "format": "percent"
   },
@@ -2557,32 +2559,32 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_3",
-   "label": "- (Nigeria)",
+   "id": "measles1_nigeria_5",
+   "label": "Measles1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_measles1",
    "expected": 0.603,
    "format": "percent"
   },
   {
-   "id": "row_17",
-   "label": "-",
+   "id": "measles1_nigeria_4",
+   "label": "Measles1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "measles1_nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.5986600903,
    "format": "percent"
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "measles1_nigeria",
+   "label": "Measles1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_15 / row_17",
+   "formula": "measles1_nigeria_2 / measles1_nigeria_4",
    "expected": 0.6863638587,
    "format": "percent"
   },
   {
-   "id": "row_20",
-   "label": "-",
+   "id": "measles2_nigeria_3",
+   "label": "Measles2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.0,
    "kind": "estimate",
@@ -2594,10 +2596,10 @@
    "format": "percent"
   },
   {
-   "id": "row_19",
-   "label": "-",
+   "id": "measles2_nigeria_2",
+   "label": "Measles2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_20 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "measles2_nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.0,
    "format": "percent"
   },
@@ -2615,32 +2617,32 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_4",
-   "label": "- (Nigeria)",
+   "id": "measles2_nigeria_5",
+   "label": "Measles2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_measles2",
    "expected": 0.375,
    "format": "percent"
   },
   {
-   "id": "row_21",
-   "label": "-",
+   "id": "measles2_nigeria_4",
+   "label": "Measles2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_4 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "measles2_nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.3723010512,
    "format": "percent"
   },
   {
-   "id": "row_18",
-   "label": "-",
+   "id": "measles2_nigeria",
+   "label": "Measles2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_19 / row_21",
+   "formula": "measles2_nigeria_2 / measles2_nigeria_4",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_24",
-   "label": "-",
+   "id": "penta1_nigeria_3",
+   "label": "Penta1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.487,
    "kind": "estimate",
@@ -2652,10 +2654,10 @@
    "format": "percent"
   },
   {
-   "id": "row_23",
-   "label": "-",
+   "id": "penta1_nigeria_2",
+   "label": "Penta1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_24 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "penta1_nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.4798744421,
    "format": "percent"
   },
@@ -2673,32 +2675,32 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_5",
-   "label": "- (Nigeria)",
+   "id": "penta1_nigeria_5",
+   "label": "Penta1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_penta1",
    "expected": 0.703,
    "format": "percent"
   },
   {
-   "id": "row_25",
-   "label": "-",
+   "id": "penta1_nigeria_4",
+   "label": "Penta1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "penta1_nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.6979403706,
    "format": "percent"
   },
   {
-   "id": "row_22",
-   "label": "-",
+   "id": "penta1_nigeria",
+   "label": "Penta1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_23 / row_25",
+   "formula": "penta1_nigeria_2 / penta1_nigeria_4",
    "expected": 0.6875579381,
    "format": "percent"
   },
   {
-   "id": "row_28",
-   "label": "-",
+   "id": "penta2_nigeria_3",
+   "label": "Penta2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.399,
    "kind": "estimate",
@@ -2710,10 +2712,10 @@
    "format": "percent"
   },
   {
-   "id": "row_27",
-   "label": "-",
+   "id": "penta2_nigeria_2",
+   "label": "Penta2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_28 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "penta2_nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.3931620173,
    "format": "percent"
   },
@@ -2731,32 +2733,32 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_6",
-   "label": "- (Nigeria)",
+   "id": "penta2_nigeria_5",
+   "label": "Penta2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_penta2",
    "expected": 0.646,
    "format": "percent"
   },
   {
-   "id": "row_29",
-   "label": "-",
+   "id": "penta2_nigeria_4",
+   "label": "Penta2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_6 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "penta2_nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.6413506108,
    "format": "percent"
   },
   {
-   "id": "row_26",
-   "label": "-",
+   "id": "penta2_nigeria",
+   "label": "Penta2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_27 / row_29",
+   "formula": "penta2_nigeria_2 / penta2_nigeria_4",
    "expected": 0.6130219737,
    "format": "percent"
   },
   {
-   "id": "row_32",
-   "label": "-",
+   "id": "penta3_nigeria_3",
+   "label": "Penta3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.333,
    "kind": "estimate",
@@ -2768,10 +2770,10 @@
    "format": "percent"
   },
   {
-   "id": "row_31",
-   "label": "-",
+   "id": "penta3_nigeria_2",
+   "label": "Penta3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_32 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
+   "formula": "penta3_nigeria_3 * (1 + adjustment_for_self_report_bias_for_mics_2017)",
    "expected": 0.3281276986,
    "format": "percent"
   },
@@ -2789,50 +2791,50 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_7",
-   "label": "- (Nigeria)",
+   "id": "penta3_nigeria_5",
+   "label": "Penta3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_penta3",
    "expected": 0.566,
    "format": "percent"
   },
   {
-   "id": "row_33",
-   "label": "-",
+   "id": "penta3_nigeria_4",
+   "label": "Penta3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_7 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "penta3_nigeria_5 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.5619263866,
    "format": "percent"
   },
   {
-   "id": "row_30",
-   "label": "-",
+   "id": "penta3_nigeria",
+   "label": "Penta3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_31 / row_33",
+   "formula": "penta3_nigeria_2 / penta3_nigeria_4",
    "expected": 0.5839336014,
    "format": "percent"
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "average_across_vaccines_nigeria",
+   "label": "Average across vaccines (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_13, row_14, row_18, row_22, row_26, row_30)",
+   "formula": "avg(bcg_nigeria_5, measles1_nigeria, measles2_nigeria, penta1_nigeria, penta2_nigeria, penta3_nigeria)",
    "expected": 0.5479113648,
    "format": "percent"
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "pcv1_nigeria_3",
+   "label": "PCV1 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_10 * row_12",
+   "formula": "pcv1_nigeria * average_across_vaccines_nigeria",
    "expected": 0.3758818457,
    "format": "percent"
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "pcv1",
+   "label": "PCV1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_10, row_11)",
+   "formula": "avg(pcv1_nigeria, pcv1_nigeria_3)",
    "expected": 0.5309542914,
    "format": "percent"
   },
@@ -2872,34 +2874,34 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_8",
-   "label": "- (Nigeria)",
+   "id": "pcv2_nigeria_2",
+   "label": "PCV2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_pcv2",
    "expected": 0.626,
    "format": "percent"
   },
   {
-   "id": "row_35",
-   "label": "-",
+   "id": "pcv2_nigeria",
+   "label": "PCV2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_8 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "pcv2_nigeria_2 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.6214945548,
    "format": "percent"
   },
   {
-   "id": "row_36",
-   "label": "-",
+   "id": "pcv2_nigeria_3",
+   "label": "PCV2 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_35 * row_12",
+   "formula": "pcv2_nigeria * average_across_vaccines_nigeria",
    "expected": 0.3405239297,
    "format": "percent"
   },
   {
-   "id": "row_34",
-   "label": "-",
+   "id": "pcv2",
+   "label": "PCV2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_35, row_36)",
+   "formula": "avg(pcv2_nigeria, pcv2_nigeria_3)",
    "expected": 0.4810092422,
    "format": "percent"
   },
@@ -2939,34 +2941,34 @@
    "format": "percent"
   },
   {
-   "id": "nigeria_9",
-   "label": "- (Nigeria)",
+   "id": "pcv3_nigeria_2",
+   "label": "PCV3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "nigeria_pcv3",
    "expected": 0.547,
    "format": "percent"
   },
   {
-   "id": "row_38",
-   "label": "-",
+   "id": "pcv3_nigeria",
+   "label": "PCV3 (Nigeria)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "nigeria_9 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
+   "formula": "pcv3_nigeria_2 * (1 + adjustment_for_self_report_bias_for_mics_2021)",
    "expected": 0.5430631333,
    "format": "percent"
   },
   {
-   "id": "row_39",
-   "label": "-",
+   "id": "pcv3_2",
+   "label": "PCV3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_38 * row_12",
+   "formula": "pcv3_nigeria * average_across_vaccines_nigeria",
    "expected": 0.2975504625,
    "format": "percent"
   },
   {
-   "id": "row_37",
-   "label": "-",
+   "id": "pcv3",
+   "label": "PCV3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_38, row_39)",
+   "formula": "avg(pcv3_nigeria, pcv3_2)",
    "expected": 0.4203067979,
    "format": "percent"
   },
@@ -2992,10 +2994,10 @@
    "format": "percent"
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "pcv_vaccine_3_doses",
+   "label": "PCV vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_9 * pcv_doses + row_34 * pcv + row_37 * pcv_3",
+   "formula": "pcv1 * pcv_doses + pcv2 * pcv + pcv3 * pcv_3",
    "expected": 0.492419765,
    "format": "percent"
   },
@@ -3003,7 +3005,7 @@
    "id": "pcv_vaccine_3_doses_nigeria_3",
    "label": "PCV vaccine (3 doses) (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_8",
+   "formula": "pcv_vaccine_3_doses",
    "expected": 0.492419765,
    "format": "percent"
   },
@@ -3067,10 +3069,10 @@
    "format": "percent"
   },
   {
-   "id": "row_41",
-   "label": "-",
+   "id": "penta1",
+   "label": "Penta1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_23, row_25)",
+   "formula": "avg(penta1_nigeria_2, penta1_nigeria_4)",
    "expected": 0.5889074064,
    "format": "percent"
   },
@@ -3097,10 +3099,10 @@
    "format": "percent"
   },
   {
-   "id": "row_42",
-   "label": "-",
+   "id": "penta2",
+   "label": "Penta2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_27, row_29)",
+   "formula": "avg(penta2_nigeria_2, penta2_nigeria_4)",
    "expected": 0.5172563141,
    "format": "percent"
   },
@@ -3127,10 +3129,10 @@
    "format": "percent"
   },
   {
-   "id": "row_43",
-   "label": "-",
+   "id": "penta3",
+   "label": "Penta3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_31, row_33)",
+   "formula": "avg(penta3_nigeria_2, penta3_nigeria_4)",
    "expected": 0.4450270426,
    "format": "percent"
   },
@@ -3156,10 +3158,10 @@
    "format": "percent"
   },
   {
-   "id": "row_40",
-   "label": "-",
+   "id": "dtp_vaccine_3_doses",
+   "label": "DTP vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_41 * penta_doses + row_42 * penta + row_43 * penta_3",
+   "formula": "penta1 * penta_doses + penta2 * penta + penta3 * penta_3",
    "expected": 0.5351112692,
    "format": "percent"
   },
@@ -3167,7 +3169,7 @@
    "id": "dtp_vaccine_3_doses_nigeria_3",
    "label": "DTP vaccine (3 doses) (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_40",
+   "formula": "dtp_vaccine_3_doses",
    "expected": 0.5351112692,
    "format": "percent"
   },
@@ -3223,10 +3225,10 @@
    "format": "percent"
   },
   {
-   "id": "row_44",
-   "label": "-",
+   "id": "hib_vaccine_3_doses",
+   "label": "HiB vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_41 * penta_doses + row_42 * penta + row_43 * penta_3",
+   "formula": "penta1 * penta_doses + penta2 * penta + penta3 * penta_3",
    "expected": 0.5351112692,
    "format": "percent"
   },
@@ -3234,7 +3236,7 @@
    "id": "hib_vaccine_3_doses_nigeria_3",
    "label": "HiB vaccine (3 doses) (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_44",
+   "formula": "hib_vaccine_3_doses",
    "expected": 0.5351112692,
    "format": "percent"
   },
@@ -3282,10 +3284,10 @@
    "format": "percent"
   },
   {
-   "id": "row_46",
-   "label": "-",
+   "id": "measles1",
+   "label": "Measles1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_15, row_17)",
+   "formula": "avg(measles1_nigeria_2, measles1_nigeria_4)",
    "expected": 0.50477937,
    "format": "percent"
   },
@@ -3333,10 +3335,10 @@
    "format": "percent"
   },
   {
-   "id": "row_47",
-   "label": "-",
+   "id": "measles2",
+   "label": "Measles2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "avg(row_19, row_21)",
+   "formula": "avg(measles2_nigeria_2, measles2_nigeria_4)",
    "expected": 0.1861505256,
    "format": "percent"
   },
@@ -3362,10 +3364,10 @@
    "format": "percent"
   },
   {
-   "id": "row_45",
-   "label": "-",
+   "id": "measles_vaccine_2_doses",
+   "label": "Measles vaccine (2 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_46 * measles_doses + row_47 * measles_2",
+   "formula": "measles1 * measles_doses + measles2 * measles_2",
    "expected": 0.4870777675,
    "format": "percent"
   },
@@ -3373,7 +3375,7 @@
    "id": "measles_vaccine_2_doses_nigeria_3",
    "label": "Measles vaccine (2 doses) (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_45",
+   "formula": "measles_vaccine_2_doses",
    "expected": 0.4870777675,
    "format": "percent"
   },
@@ -3422,8 +3424,8 @@
    "format": "percent"
   },
   {
-   "id": "row_48",
-   "label": "-",
+   "id": "rotavirus_vaccine",
+   "label": "Rotavirus vaccine",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.0,
    "kind": "estimate",
@@ -3438,7 +3440,7 @@
    "id": "rotavirus_vaccine_nigeria_3",
    "label": "Rotavirus vaccine (Nigeria)",
    "section": "vaccine_efficacy_data",
-   "formula": "row_48",
+   "formula": "rotavirus_vaccine",
    "expected": 0.0,
    "format": "percent"
   },
@@ -3478,15 +3480,15 @@
    "format": "percent"
   },
   {
-   "id": "row_6",
-   "label": "-",
+   "id": "bcg_vaccine_3",
+   "label": "BCG vaccine",
    "section": "vaccination_coverage_at_time_of",
    "formula": "bcg_vaccine_nigeria",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "bcg_vaccine_4",
+   "id": "bcg_vaccine_6",
    "label": "BCG vaccine",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.0,
@@ -3500,9 +3502,9 @@
   },
   {
    "id": "bcg_vaccine_2",
-   "label": "BCG vaccine (-)",
+   "label": "BCG vaccine",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_6 * bcg_vaccine_4",
+   "formula": "bcg_vaccine_3 * bcg_vaccine_6",
    "expected": 0.0
   },
   {
@@ -3514,25 +3516,25 @@
    "format": "percent"
   },
   {
-   "id": "row_49",
-   "label": "-",
+   "id": "pcv_vaccine_3_doses_3",
+   "label": "PCV vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "pcv_vaccine_3_doses_nigeria_6",
    "expected": 0.4599598503,
    "format": "percent"
   },
   {
-   "id": "pcv_vaccine_3_doses_2",
-   "label": "PCV vaccine (3 doses) (-)",
+   "id": "pcv_vaccine_3_doses_4",
+   "label": "PCV vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "pcv_vaccine_3_doses_nigeria_5",
    "expected": 0.58
   },
   {
-   "id": "pcv_vaccine_3_doses",
-   "label": "PCV vaccine (3 doses) (-)",
+   "id": "pcv_vaccine_3_doses_2",
+   "label": "PCV vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_49 * pcv_vaccine_3_doses_2",
+   "formula": "pcv_vaccine_3_doses_3 * pcv_vaccine_3_doses_4",
    "expected": 0.2667767131
   },
   {
@@ -3544,25 +3546,25 @@
    "format": "percent"
   },
   {
-   "id": "row_50",
-   "label": "-",
+   "id": "dtp_vaccine_3_doses_3",
+   "label": "DTP vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "dtp_vaccine_3_doses_nigeria_6",
    "expected": 0.1379861057,
    "format": "percent"
   },
   {
-   "id": "dtp_vaccine_3_doses_2",
-   "label": "DTP vaccine (3 doses) (-)",
+   "id": "dtp_vaccine_3_doses_4",
+   "label": "DTP vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "dtp_vaccine_3_doses_nigeria_5",
    "expected": 0.84
   },
   {
-   "id": "dtp_vaccine_3_doses",
-   "label": "DTP vaccine (3 doses) (-)",
+   "id": "dtp_vaccine_3_doses_2",
+   "label": "DTP vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_50 * dtp_vaccine_3_doses_2",
+   "formula": "dtp_vaccine_3_doses_3 * dtp_vaccine_3_doses_4",
    "expected": 0.1159083287
   },
   {
@@ -3574,25 +3576,25 @@
    "format": "percent"
   },
   {
-   "id": "row_51",
-   "label": "-",
+   "id": "hib_vaccine_3_doses_3",
+   "label": "HiB vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "hib_vaccine_3_doses_nigeria_6",
    "expected": 0.03580347646,
    "format": "percent"
   },
   {
-   "id": "hib_vaccine_3_doses_2",
-   "label": "HiB vaccine (3 doses) (-)",
+   "id": "hib_vaccine_3_doses_4",
+   "label": "HiB vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "hib_vaccine_3_doses_nigeria_5",
    "expected": 0.82
   },
   {
-   "id": "hib_vaccine_3_doses",
-   "label": "HiB vaccine (3 doses) (-)",
+   "id": "hib_vaccine_3_doses_2",
+   "label": "HiB vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_51 * hib_vaccine_3_doses_2",
+   "formula": "hib_vaccine_3_doses_3 * hib_vaccine_3_doses_4",
    "expected": 0.0293588507
   },
   {
@@ -3604,25 +3606,25 @@
    "format": "percent"
   },
   {
-   "id": "row_52",
-   "label": "-",
+   "id": "measles_vaccine_2_doses_3",
+   "label": "Measles vaccine (2 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "measles_vaccine_2_doses_nigeria_6",
    "expected": 0.06031382843,
    "format": "percent"
   },
   {
-   "id": "measles_vaccine_2_doses_2",
-   "label": "Measles vaccine (2 doses) (-)",
+   "id": "measles_vaccine_2_doses_4",
+   "label": "Measles vaccine (2 doses)",
    "section": "vaccination_coverage_at_time_of",
    "formula": "measles_vaccine_2_doses_nigeria_5",
    "expected": 0.9
   },
   {
-   "id": "measles_vaccine_2_doses",
-   "label": "Measles vaccine (2 doses) (-)",
+   "id": "measles_vaccine_2_doses_2",
+   "label": "Measles vaccine (2 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_52 * measles_vaccine_2_doses_2",
+   "formula": "measles_vaccine_2_doses_3 * measles_vaccine_2_doses_4",
    "expected": 0.05428244559
   },
   {
@@ -3634,113 +3636,113 @@
    "format": "percent"
   },
   {
-   "id": "row_53",
-   "label": "-",
+   "id": "rotavirus_vaccine_3",
+   "label": "Rotavirus vaccine",
    "section": "vaccination_coverage_at_time_of",
    "formula": "rotavirus_vaccine_nigeria_6",
    "expected": 0.3059367392,
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_2",
-   "label": "Rotavirus vaccine (-)",
+   "id": "rotavirus_vaccine_4",
+   "label": "Rotavirus vaccine",
    "section": "vaccination_coverage_at_time_of",
    "formula": "rotavirus_vaccine_nigeria_5",
    "expected": 0.46
   },
   {
-   "id": "rotavirus_vaccine",
-   "label": "Rotavirus vaccine (-)",
+   "id": "rotavirus_vaccine_2",
+   "label": "Rotavirus vaccine",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "row_53 * rotavirus_vaccine_2",
+   "formula": "rotavirus_vaccine_3 * rotavirus_vaccine_4",
    "expected": 0.1407309
   },
   {
    "id": "bcg_vaccine",
-   "label": "BCG vaccine (-)",
+   "label": "BCG vaccine",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "bcg_vaccine_2 / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "bcg_vaccine_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.0
   },
   {
-   "id": "bcg_2",
+   "id": "bcg_3",
    "label": "BCG",
    "section": "vaccination_coverage_at_time_of",
    "formula": "bcg_vaccine",
    "expected": 0.0
   },
   {
-   "id": "bcg",
+   "id": "bcg_2",
    "label": "BCG",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "bcg_2",
+   "formula": "bcg_3",
    "expected": 0.0
   },
   {
-   "id": "measles_vaccine_2_doses_3",
-   "label": "Measles vaccine (2 doses) (-)",
+   "id": "measles_vaccine_2_doses_5",
+   "label": "Measles vaccine (2 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "measles_vaccine_2_doses / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "measles_vaccine_2_doses_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.08941899078
+  },
+  {
+   "id": "measles1_3",
+   "label": "Measles1",
+   "section": "vaccination_coverage_at_time_of",
+   "formula": "measles_vaccine_2_doses_5 * measles_doses",
+   "expected": 0.08445126907
   },
   {
    "id": "measles1_2",
    "label": "Measles1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "measles_vaccine_2_doses_3 * measles_doses",
+   "formula": "measles1_3",
    "expected": 0.08445126907
   },
   {
-   "id": "measles1",
-   "label": "Measles1",
+   "id": "measles2_3",
+   "label": "Measles2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "measles1_2",
-   "expected": 0.08445126907
+   "formula": "measles_vaccine_2_doses_5 * measles_2",
+   "expected": 0.00496772171
   },
   {
    "id": "measles2_2",
    "label": "Measles2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "measles_vaccine_2_doses_3 * measles_2",
+   "formula": "measles2_3",
    "expected": 0.00496772171
   },
   {
-   "id": "measles2",
-   "label": "Measles2",
+   "id": "dtp_vaccine_3_doses_5",
+   "label": "DTP vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "measles2_2",
-   "expected": 0.00496772171
-  },
-  {
-   "id": "dtp_vaccine_3_doses_3",
-   "label": "DTP vaccine (3 doses) (-)",
-   "section": "vaccination_coverage_at_time_of",
-   "formula": "dtp_vaccine_3_doses / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "dtp_vaccine_3_doses_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.1909347611
   },
   {
    "id": "dtp1",
    "label": "DTP1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "dtp_vaccine_3_doses_3 * penta_doses",
+   "formula": "dtp_vaccine_3_doses_5 * penta_doses",
    "expected": 0.06682716638
   },
   {
-   "id": "hib_vaccine_3_doses_3",
-   "label": "HiB vaccine (3 doses) (-)",
+   "id": "hib_vaccine_3_doses_5",
+   "label": "HiB vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "hib_vaccine_3_doses / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "hib_vaccine_3_doses_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.04836257415
   },
   {
    "id": "hib1",
    "label": "HiB1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "hib_vaccine_3_doses_3 * penta_doses",
+   "formula": "hib_vaccine_3_doses_5 * penta_doses",
    "expected": 0.01692690095
   },
   {
-   "id": "penta1",
+   "id": "penta1_2",
    "label": "Penta1",
    "section": "vaccination_coverage_at_time_of",
    "formula": "dtp1 + hib1",
@@ -3750,18 +3752,18 @@
    "id": "dtp2",
    "label": "DTP2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "dtp_vaccine_3_doses_3 * penta",
+   "formula": "dtp_vaccine_3_doses_5 * penta",
    "expected": 0.1050141186
   },
   {
    "id": "hib2",
    "label": "HiB2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "hib_vaccine_3_doses_3 * penta",
+   "formula": "hib_vaccine_3_doses_5 * penta",
    "expected": 0.02659941578
   },
   {
-   "id": "penta2",
+   "id": "penta2_2",
    "label": "Penta2",
    "section": "vaccination_coverage_at_time_of",
    "formula": "dtp2 + hib2",
@@ -3771,75 +3773,75 @@
    "id": "dtp3",
    "label": "DTP3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "dtp_vaccine_3_doses_3 * penta_3",
+   "formula": "dtp_vaccine_3_doses_5 * penta_3",
    "expected": 0.01909347611
   },
   {
    "id": "hib3",
    "label": "HiB3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "hib_vaccine_3_doses_3 * penta_3",
+   "formula": "hib_vaccine_3_doses_5 * penta_3",
    "expected": 0.004836257415
   },
   {
-   "id": "penta3",
+   "id": "penta3_2",
    "label": "Penta3",
    "section": "vaccination_coverage_at_time_of",
    "formula": "dtp3 + hib3",
    "expected": 0.02392973352
   },
   {
-   "id": "pcv_vaccine_3_doses_3",
-   "label": "PCV vaccine (3 doses) (-)",
+   "id": "pcv_vaccine_3_doses_5",
+   "label": "PCV vaccine (3 doses)",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv_vaccine_3_doses / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "pcv_vaccine_3_doses_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.4394589115
+  },
+  {
+   "id": "pcv1_3",
+   "label": "PCV1",
+   "section": "vaccination_coverage_at_time_of",
+   "formula": "pcv_vaccine_3_doses_5 * pcv_doses",
+   "expected": 0.153810619
   },
   {
    "id": "pcv1_2",
    "label": "PCV1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv_vaccine_3_doses_3 * pcv_doses",
+   "formula": "pcv1_3",
    "expected": 0.153810619
   },
   {
-   "id": "pcv1",
-   "label": "PCV1",
+   "id": "pcv2_3",
+   "label": "PCV2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv1_2",
-   "expected": 0.153810619
+   "formula": "pcv_vaccine_3_doses_5 * pcv",
+   "expected": 0.2417024013
   },
   {
    "id": "pcv2_2",
    "label": "PCV2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv_vaccine_3_doses_3 * pcv",
+   "formula": "pcv2_3",
    "expected": 0.2417024013
   },
   {
-   "id": "pcv2",
-   "label": "PCV2",
-   "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv2_2",
-   "expected": 0.2417024013
-  },
-  {
-   "id": "pcv3_2",
+   "id": "pcv3_4",
    "label": "PCV3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv_vaccine_3_doses_3 * pcv_3",
+   "formula": "pcv_vaccine_3_doses_5 * pcv_3",
    "expected": 0.04394589115
   },
   {
-   "id": "pcv3",
+   "id": "pcv3_3",
    "label": "PCV3",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "pcv3_2",
+   "formula": "pcv3_4",
    "expected": 0.04394589115
   },
   {
    "id": "rota1",
-   "label": "Rota1 (-)",
+   "label": "Rota1",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.0,
    "kind": "estimate",
@@ -3851,10 +3853,10 @@
    "format": "percent"
   },
   {
-   "id": "rotavirus_vaccine_3",
-   "label": "Rotavirus vaccine (-)",
+   "id": "rotavirus_vaccine_5",
+   "label": "Rotavirus vaccine",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "rotavirus_vaccine / sum(pcv_vaccine_3_doses, dtp_vaccine_3_doses, hib_vaccine_3_doses, measles_vaccine_2_doses, bcg_vaccine_2, rotavirus_vaccine)",
+   "formula": "rotavirus_vaccine_2 / sum(pcv_vaccine_3_doses_2, dtp_vaccine_3_doses_2, hib_vaccine_3_doses_2, measles_vaccine_2_doses_2, bcg_vaccine_2, rotavirus_vaccine_2)",
    "expected": 0.2318247624
   },
   {
@@ -3883,7 +3885,7 @@
    "id": "rota1_3",
    "label": "Rota1",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "rotavirus_vaccine_3 * rota_doses",
+   "formula": "rotavirus_vaccine_5 * rota_doses",
    "expected": 0.1970510481
   },
   {
@@ -3895,7 +3897,7 @@
   },
   {
    "id": "rota2",
-   "label": "Rota2 (-)",
+   "label": "Rota2",
    "section": "vaccination_coverage_at_time_of",
    "value": 0.0,
    "kind": "estimate",
@@ -3931,7 +3933,7 @@
    "id": "rota2_3",
    "label": "Rota2",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "rotavirus_vaccine_3 * rota",
+   "formula": "rotavirus_vaccine_5 * rota",
    "expected": 0.03477371437
   },
   {
@@ -3942,10 +3944,10 @@
    "expected": 0.03477371437
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "aggregated_baseline_coverage_at_time_of_ihme_data_weighted_b",
+   "label": "Aggregated baseline coverage at time of IHME data, weighted by each dose's contribution to under 5 mortality reduction",
    "section": "vaccination_coverage_at_time_of",
-   "formula": "sum(row_2 * bcg, row_46 * measles1, row_47 * measles2, row_41 * penta1, row_42 * penta2, row_43 * penta3, row_9 * pcv1, row_34 * pcv2, row_37 * pcv3, rota1 * rota1_2, rota2 * rota2_2)",
+   "formula": "sum(bcg * bcg_2, measles1 * measles1_2, measles2 * measles2_2, penta1 * penta1_2, penta2 * penta2_2, penta3 * penta3_2, pcv1 * pcv1_2, pcv2 * pcv2_2, pcv3 * pcv3_3, rota1 * rota1_2, rota2 * rota2_2)",
    "expected": 0.3880029571,
    "format": "percent"
   },
@@ -3953,7 +3955,7 @@
    "id": "percent_vaccinated_during_time_of_ihme_data_bcg_dropoff",
    "label": "Percent vaccinated during time of IHME data (BCG dropoff)",
    "section": "full_cea_main",
-   "formula": "row",
+   "formula": "aggregated_baseline_coverage_at_time_of_ihme_data_weighted_b",
    "expected": 0.3880029571,
    "format": "percent"
   },
@@ -4049,13 +4051,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under",
    "label": "Value assigned to averting the death of an individual under 5 from vaccine-preventable diseases",
    "section": "full_cea_main",
-   "value": 116.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
     "cell": "Full CEA - Main!B68"
-   }
+   },
+   "formula": "116 * $life_value_multiplier",
+   "expected": 116.0,
+   "explainer": "GiveWell's moral weight, 116 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "moral_weight_of_averting_the_death_of_a_person_under_age_fiv",
@@ -4428,14 +4431,15 @@
    "id": "discount_rate_for_future_averted_deaths",
    "label": "Discount rate for future averted deaths",
    "section": "full_cea_main",
-   "value": 0.005,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
     "cell": "Full CEA - Main!B73"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.005,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.005."
   },
   {
    "id": "discounted_deaths_averted_in_cohort",
@@ -4448,13 +4452,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_14_y",
    "label": "Value assigned to averting the death of an individual 5-14 years old from vaccine-preventable diseases",
    "section": "full_cea_main",
-   "value": 134.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
     "cell": "Full CEA - Main!B86"
-   }
+   },
+   "formula": "134 * $life_value_multiplier",
+   "expected": 134.0,
+   "explainer": "GiveWell's moral weight, 134 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_from_mortality_reduction_individuals_5_14_yea",
@@ -4788,13 +4793,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_15_49",
    "label": "Value assigned to averting the death of an individual 15-49 years old from vaccine-preventable diseases",
    "section": "full_cea_main",
-   "value": 104.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
     "cell": "Full CEA - Main!B100"
-   }
+   },
+   "formula": "104 * $life_value_multiplier",
+   "expected": 104.0,
+   "explainer": "GiveWell's moral weight, 104 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_from_mortality_reduction_individuals_15_49_ye",
@@ -5128,13 +5134,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_50_74",
    "label": "Value assigned to averting the death of an individual 50-74 years old from vaccine-preventable diseases",
    "section": "full_cea_main",
-   "value": 42.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
     "cell": "Full CEA - Main!B114"
-   }
+   },
+   "formula": "42 * $life_value_multiplier",
+   "expected": 42.0,
+   "explainer": "GiveWell's moral weight, 42 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_from_mortality_reduction_individuals_50_74_ye",
@@ -5784,7 +5791,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_4",
+   "id": "bcg_5",
    "label": "BCG",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.51,
@@ -5797,7 +5804,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_5",
+   "id": "bcg_6",
    "label": "BCG",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.53,
@@ -5810,7 +5817,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_6",
+   "id": "bcg_7",
    "label": "BCG",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.64,
@@ -5823,7 +5830,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_7",
+   "id": "bcg_8",
    "label": "BCG",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.67,
@@ -5836,7 +5843,7 @@
    "format": "percent"
   },
   {
-   "id": "bcg_8",
+   "id": "bcg_9",
    "label": "BCG",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.67,
@@ -5849,10 +5856,10 @@
    "format": "percent"
   },
   {
-   "id": "bcg_3",
+   "id": "bcg_4",
    "label": "BCG",
    "section": "government_and_gavi_costs",
-   "formula": "avg(bcg_4, bcg_5, bcg_6, bcg_7, bcg_8)",
+   "formula": "avg(bcg_5, bcg_6, bcg_7, bcg_8, bcg_9)",
    "expected": 0.604,
    "format": "percent"
   },
@@ -6149,7 +6156,7 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_4",
+   "id": "pcv3_6",
    "label": "PCV3",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.0,
@@ -6162,7 +6169,7 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_5",
+   "id": "pcv3_7",
    "label": "PCV3",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.36,
@@ -6175,7 +6182,7 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_6",
+   "id": "pcv3_8",
    "label": "PCV3",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.49,
@@ -6188,7 +6195,7 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_7",
+   "id": "pcv3_9",
    "label": "PCV3",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.53,
@@ -6201,7 +6208,7 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_8",
+   "id": "pcv3_10",
    "label": "PCV3",
    "section": "baseline_vaccine_coverage_and_p",
    "value": 0.55,
@@ -6214,10 +6221,10 @@
    "format": "percent"
   },
   {
-   "id": "pcv3_3",
+   "id": "pcv3_5",
    "label": "PCV3",
    "section": "government_and_gavi_costs",
-   "formula": "avg(pcv3_4, pcv3_5, pcv3_6, pcv3_7, pcv3_8)",
+   "formula": "avg(pcv3_6, pcv3_7, pcv3_8, pcv3_9, pcv3_10)",
    "expected": 0.386,
    "format": "percent"
   },
@@ -6225,7 +6232,7 @@
    "id": "average",
    "label": "Average",
    "section": "government_and_gavi_costs",
-   "formula": "avg(bcg_3, dtp1_2, dtp3_2, mcv1, hib3_2, pcv3_3)",
+   "formula": "avg(bcg_4, dtp1_2, dtp3_2, mcv1, hib3_2, pcv3_5)",
    "expected": 0.509,
    "format": "percent"
   },

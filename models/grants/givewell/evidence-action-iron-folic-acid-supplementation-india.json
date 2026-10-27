@@ -20,7 +20,10 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 2.3,
+   "discount_rate": 0.04,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -76,8 +79,8 @@
  ],
  "rows": [
   {
-   "id": "global_personnel_usd",
-   "label": "Global Personnel (USD)",
+   "id": "global_personnel_aug_dec_2022",
+   "label": "Global Personnel (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 176297.0,
    "kind": "estimate",
@@ -89,8 +92,8 @@
    "format": "usd"
   },
   {
-   "id": "global_team_activities_usd",
-   "label": "Global Team Activities (USD)",
+   "id": "global_team_activities_aug_dec_2022",
+   "label": "Global Team Activities (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 54118.0,
    "kind": "estimate",
@@ -102,16 +105,16 @@
    "format": "usd"
   },
   {
-   "id": "global_subtotal_usd",
-   "label": "GLOBAL SUBTOTAL (USD)",
+   "id": "global_subtotal_aug_dec_2022",
+   "label": "GLOBAL SUBTOTAL (Aug - Dec 2022)",
    "section": "source_budget",
-   "formula": "global_personnel_usd + global_team_activities_usd",
+   "formula": "global_personnel_aug_dec_2022 + global_team_activities_aug_dec_2022",
    "expected": 230415.0,
    "format": "usd"
   },
   {
-   "id": "india_personnel_usd",
-   "label": "India Personnel (USD)",
+   "id": "india_personnel_aug_dec_2022",
+   "label": "India Personnel (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 351730.0,
    "kind": "estimate",
@@ -123,8 +126,8 @@
    "format": "usd"
   },
   {
-   "id": "india_program_activities_usd",
-   "label": "India Program Activities (USD)",
+   "id": "india_program_activities_aug_dec_2022",
+   "label": "India Program Activities (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 138889.6,
    "kind": "estimate",
@@ -137,7 +140,7 @@
   },
   {
    "id": "india_monitoring_and_evaluation_including_coverage_validatio",
-   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (USD)",
+   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 230472.0,
    "kind": "estimate",
@@ -149,8 +152,8 @@
    "format": "usd"
   },
   {
-   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_usd",
-   "label": "Shared Direct Costs and Goods & Services Tax and Fee (USD)",
+   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_aug_d",
+   "label": "Shared Direct Costs and Goods & Services Tax and Fee (Aug - Dec 2022)",
    "section": "source_budget",
    "value": 161481.6,
    "kind": "estimate",
@@ -162,32 +165,32 @@
    "format": "usd"
   },
   {
-   "id": "india_subtotal_usd",
-   "label": "INDIA SUBTOTAL (USD)",
+   "id": "india_subtotal_aug_dec_2022",
+   "label": "INDIA SUBTOTAL (Aug - Dec 2022)",
    "section": "source_budget",
-   "formula": "sum(india_personnel_usd, india_program_activities_usd, india_monitoring_and_evaluation_including_coverage_validatio, shared_direct_costs_and_goods_and_services_tax_and_fee_usd)",
+   "formula": "sum(india_personnel_aug_dec_2022, india_program_activities_aug_dec_2022, india_monitoring_and_evaluation_including_coverage_validatio, shared_direct_costs_and_goods_and_services_tax_and_fee_aug_d)",
    "expected": 882573.2,
    "format": "usd"
   },
   {
-   "id": "global_indirect_expenses_usd",
-   "label": "Global Indirect Expenses (USD)",
+   "id": "global_indirect_expenses_aug_dec_2022",
+   "label": "Global Indirect Expenses (Aug - Dec 2022)",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd, india_subtotal_usd) * 0.18",
+   "formula": "sum(global_subtotal_aug_dec_2022, india_subtotal_aug_dec_2022) * 0.18",
    "expected": 200337.876,
    "format": "usd"
   },
   {
-   "id": "total_usd",
-   "label": "TOTAL (USD)",
+   "id": "total_aug_dec_2022",
+   "label": "TOTAL (Aug - Dec 2022)",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd, india_subtotal_usd, global_indirect_expenses_usd)",
+   "formula": "sum(global_subtotal_aug_dec_2022, india_subtotal_aug_dec_2022, global_indirect_expenses_aug_dec_2022)",
    "expected": 1313326.076,
    "format": "usd"
   },
   {
-   "id": "global_personnel_usd_2",
-   "label": "Global Personnel (USD)",
+   "id": "global_personnel",
+   "label": "Global Personnel",
    "section": "source_budget",
    "value": 324306.0,
    "kind": "estimate",
@@ -199,8 +202,8 @@
    "format": "usd"
   },
   {
-   "id": "global_team_activities_usd_2",
-   "label": "Global Team Activities (USD)",
+   "id": "global_team_activities",
+   "label": "Global Team Activities",
    "section": "source_budget",
    "value": 74993.0,
    "kind": "estimate",
@@ -212,16 +215,16 @@
    "format": "usd"
   },
   {
-   "id": "global_subtotal_usd_2",
-   "label": "GLOBAL SUBTOTAL (USD)",
+   "id": "global_subtotal",
+   "label": "GLOBAL SUBTOTAL",
    "section": "source_budget",
-   "formula": "global_personnel_usd_2 + global_team_activities_usd_2",
+   "formula": "global_personnel + global_team_activities",
    "expected": 399299.0,
    "format": "usd"
   },
   {
-   "id": "india_personnel_usd_2",
-   "label": "India Personnel (USD)",
+   "id": "india_personnel",
+   "label": "India Personnel",
    "section": "source_budget",
    "value": 767524.0,
    "kind": "estimate",
@@ -233,8 +236,8 @@
    "format": "usd"
   },
   {
-   "id": "india_program_activities_usd_2",
-   "label": "India Program Activities (USD)",
+   "id": "india_program_activities",
+   "label": "India Program Activities",
    "section": "source_budget",
    "value": 355667.0,
    "kind": "estimate",
@@ -247,41 +250,41 @@
   },
   {
    "id": "india_monitoring_and_evaluation_including_coverage_validatio_2",
-   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (USD)",
+   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots)",
    "section": "source_budget",
    "formula": "1610.4 + 317416",
    "expected": 319026.4,
    "format": "usd"
   },
   {
-   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_usd_2",
-   "label": "Shared Direct Costs and Goods & Services Tax and Fee (USD)",
+   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee",
+   "label": "Shared Direct Costs and Goods & Services Tax and Fee",
    "section": "source_budget",
    "formula": "351087.2 + 4630",
    "expected": 355717.2,
    "format": "usd"
   },
   {
-   "id": "india_subtotal_usd_2",
-   "label": "INDIA SUBTOTAL (USD)",
+   "id": "india_subtotal",
+   "label": "INDIA SUBTOTAL",
    "section": "source_budget",
-   "formula": "sum(india_personnel_usd_2, india_program_activities_usd_2, india_monitoring_and_evaluation_including_coverage_validatio_2, shared_direct_costs_and_goods_and_services_tax_and_fee_usd_2)",
+   "formula": "sum(india_personnel, india_program_activities, india_monitoring_and_evaluation_including_coverage_validatio_2, shared_direct_costs_and_goods_and_services_tax_and_fee)",
    "expected": 1797934.6,
    "format": "usd"
   },
   {
-   "id": "global_indirect_expenses_usd_2",
-   "label": "Global Indirect Expenses (USD)",
+   "id": "global_indirect_expenses",
+   "label": "Global Indirect Expenses",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_2, india_subtotal_usd_2) * 0.18",
+   "formula": "sum(global_subtotal, india_subtotal) * 0.18",
    "expected": 395502.048,
    "format": "usd"
   },
   {
-   "id": "total_usd_2",
-   "label": "TOTAL (USD)",
+   "id": "total",
+   "label": "TOTAL",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_2, india_subtotal_usd_2, global_indirect_expenses_usd_2)",
+   "formula": "sum(global_subtotal, india_subtotal, global_indirect_expenses)",
    "expected": 2592735.648,
    "format": "usd"
   },
@@ -289,13 +292,13 @@
    "id": "ifa_budget_y1",
    "label": "IFA Budget (Y1)",
    "section": "cost_per_person",
-   "formula": "total_usd + total_usd_2 * (7 / 12)",
+   "formula": "total_aug_dec_2022 + total * (7 / 12)",
    "expected": 2825755.204,
    "format": "usd"
   },
   {
-   "id": "global_personnel_usd_3",
-   "label": "Global Personnel (USD)",
+   "id": "global_personnel_2",
+   "label": "Global Personnel",
    "section": "source_budget",
    "value": 340521.0,
    "kind": "estimate",
@@ -307,8 +310,8 @@
    "format": "usd"
   },
   {
-   "id": "global_team_activities_usd_3",
-   "label": "Global Team Activities (USD)",
+   "id": "global_team_activities_2",
+   "label": "Global Team Activities",
    "section": "source_budget",
    "value": 78742.0,
    "kind": "estimate",
@@ -320,16 +323,16 @@
    "format": "usd"
   },
   {
-   "id": "global_subtotal_usd_3",
-   "label": "GLOBAL SUBTOTAL (USD)",
+   "id": "global_subtotal_2",
+   "label": "GLOBAL SUBTOTAL",
    "section": "source_budget",
-   "formula": "global_personnel_usd_3 + global_team_activities_usd_3",
+   "formula": "global_personnel_2 + global_team_activities_2",
    "expected": 419263.0,
    "format": "usd"
   },
   {
-   "id": "india_personnel_usd_3",
-   "label": "India Personnel (USD)",
+   "id": "india_personnel_2",
+   "label": "India Personnel",
    "section": "source_budget",
    "value": 788955.0,
    "kind": "estimate",
@@ -341,8 +344,8 @@
    "format": "usd"
   },
   {
-   "id": "india_program_activities_usd_3",
-   "label": "India Program Activities (USD)",
+   "id": "india_program_activities_2",
+   "label": "India Program Activities",
    "section": "source_budget",
    "value": 384882.0,
    "kind": "estimate",
@@ -355,15 +358,15 @@
   },
   {
    "id": "india_monitoring_and_evaluation_including_coverage_validatio_3",
-   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (USD)",
+   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots)",
    "section": "source_budget",
    "formula": "257832.8 + 103976",
    "expected": 361808.8,
    "format": "usd"
   },
   {
-   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_usd_3",
-   "label": "Shared Direct Costs and Goods & Services Tax and Fee (USD)",
+   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_2",
+   "label": "Shared Direct Costs and Goods & Services Tax and Fee",
    "section": "source_budget",
    "value": 394256.80000000005,
    "kind": "estimate",
@@ -375,26 +378,26 @@
    "format": "usd"
   },
   {
-   "id": "india_subtotal_usd_3",
-   "label": "INDIA SUBTOTAL (USD)",
+   "id": "india_subtotal_2",
+   "label": "INDIA SUBTOTAL",
    "section": "source_budget",
-   "formula": "sum(india_personnel_usd_3, india_program_activities_usd_3, india_monitoring_and_evaluation_including_coverage_validatio_3, shared_direct_costs_and_goods_and_services_tax_and_fee_usd_3)",
+   "formula": "sum(india_personnel_2, india_program_activities_2, india_monitoring_and_evaluation_including_coverage_validatio_3, shared_direct_costs_and_goods_and_services_tax_and_fee_2)",
    "expected": 1929902.6,
    "format": "usd"
   },
   {
-   "id": "global_indirect_expenses_usd_3",
-   "label": "Global Indirect Expenses (USD)",
+   "id": "global_indirect_expenses_2",
+   "label": "Global Indirect Expenses",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_3, india_subtotal_usd_3) * 0.18",
+   "formula": "sum(global_subtotal_2, india_subtotal_2) * 0.18",
    "expected": 422849.808,
    "format": "usd"
   },
   {
-   "id": "total_usd_3",
-   "label": "TOTAL (USD)",
+   "id": "total_2",
+   "label": "TOTAL",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_3, india_subtotal_usd_3, global_indirect_expenses_usd_3)",
+   "formula": "sum(global_subtotal_2, india_subtotal_2, global_indirect_expenses_2)",
    "expected": 2772015.408,
    "format": "usd"
   },
@@ -402,13 +405,13 @@
    "id": "ifa_budget_y2",
    "label": "IFA Budget (Y2)",
    "section": "cost_per_person",
-   "formula": "total_usd_2 * (5 / 12) + total_usd_3 * (7 / 12)",
+   "formula": "total * (5 / 12) + total_2 * (7 / 12)",
    "expected": 2697315.508,
    "format": "usd"
   },
   {
-   "id": "global_personnel_usd_4",
-   "label": "Global Personnel (USD)",
+   "id": "global_personnel_3",
+   "label": "Global Personnel",
    "section": "source_budget",
    "value": 357547.0,
    "kind": "estimate",
@@ -420,8 +423,8 @@
    "format": "usd"
   },
   {
-   "id": "global_team_activities_usd_4",
-   "label": "Global Team Activities (USD)",
+   "id": "global_team_activities_3",
+   "label": "Global Team Activities",
    "section": "source_budget",
    "value": 82678.0,
    "kind": "estimate",
@@ -433,16 +436,16 @@
    "format": "usd"
   },
   {
-   "id": "global_subtotal_usd_4",
-   "label": "GLOBAL SUBTOTAL (USD)",
+   "id": "global_subtotal_3",
+   "label": "GLOBAL SUBTOTAL",
    "section": "source_budget",
-   "formula": "global_personnel_usd_4 + global_team_activities_usd_4",
+   "formula": "global_personnel_3 + global_team_activities_3",
    "expected": 440225.0,
    "format": "usd"
   },
   {
-   "id": "india_personnel_usd_4",
-   "label": "India Personnel (USD)",
+   "id": "india_personnel_3",
+   "label": "India Personnel",
    "section": "source_budget",
    "value": 828403.2000000001,
    "kind": "estimate",
@@ -454,8 +457,8 @@
    "format": "usd"
   },
   {
-   "id": "india_program_activities_usd_4",
-   "label": "India Program Activities (USD)",
+   "id": "india_program_activities_3",
+   "label": "India Program Activities",
    "section": "source_budget",
    "value": 416130.4,
    "kind": "estimate",
@@ -468,41 +471,41 @@
   },
   {
    "id": "india_monitoring_and_evaluation_including_coverage_validatio_4",
-   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (USD)",
+   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots)",
    "section": "source_budget",
    "formula": "1775.2 + 173664",
    "expected": 175439.2,
    "format": "usd"
   },
   {
-   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_usd_4",
-   "label": "Shared Direct Costs and Goods & Services Tax and Fee (USD)",
+   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_3",
+   "label": "Shared Direct Costs and Goods & Services Tax and Fee",
    "section": "source_budget",
    "formula": "387074.4 + 3682",
    "expected": 390756.4,
    "format": "usd"
   },
   {
-   "id": "india_subtotal_usd_4",
-   "label": "INDIA SUBTOTAL (USD)",
+   "id": "india_subtotal_3",
+   "label": "INDIA SUBTOTAL",
    "section": "source_budget",
-   "formula": "sum(india_personnel_usd_4, india_program_activities_usd_4, india_monitoring_and_evaluation_including_coverage_validatio_4, shared_direct_costs_and_goods_and_services_tax_and_fee_usd_4)",
+   "formula": "sum(india_personnel_3, india_program_activities_3, india_monitoring_and_evaluation_including_coverage_validatio_4, shared_direct_costs_and_goods_and_services_tax_and_fee_3)",
    "expected": 1810729.2,
    "format": "usd"
   },
   {
-   "id": "global_indirect_expenses_usd_4",
-   "label": "Global Indirect Expenses (USD)",
+   "id": "global_indirect_expenses_3",
+   "label": "Global Indirect Expenses",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_4, india_subtotal_usd_4) * 0.18",
+   "formula": "sum(global_subtotal_3, india_subtotal_3) * 0.18",
    "expected": 405171.756,
    "format": "usd"
   },
   {
-   "id": "total_usd_4",
-   "label": "TOTAL (USD)",
+   "id": "total_3",
+   "label": "TOTAL",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_4, india_subtotal_usd_4, global_indirect_expenses_usd_4)",
+   "formula": "sum(global_subtotal_3, india_subtotal_3, global_indirect_expenses_3)",
    "expected": 2656125.956,
    "format": "usd"
   },
@@ -510,13 +513,13 @@
    "id": "ifa_budget_y3",
    "label": "IFA Budget (Y3)",
    "section": "cost_per_person",
-   "formula": "total_usd_3 * (5 / 12) + total_usd_4 * (7 / 12)",
+   "formula": "total_2 * (5 / 12) + total_3 * (7 / 12)",
    "expected": 2704413.228,
    "format": "usd"
   },
   {
-   "id": "global_personnel_usd_5",
-   "label": "Global Personnel (USD)",
+   "id": "global_personnel_jan_jul_2026",
+   "label": "Global Personnel (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 218997.0,
    "kind": "estimate",
@@ -528,8 +531,8 @@
    "format": "usd"
   },
   {
-   "id": "global_team_activities_usd_5",
-   "label": "Global Team Activities (USD)",
+   "id": "global_team_activities_jan_jul_2026",
+   "label": "Global Team Activities (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 50641.0,
    "kind": "estimate",
@@ -541,16 +544,16 @@
    "format": "usd"
   },
   {
-   "id": "global_subtotal_usd_5",
-   "label": "GLOBAL SUBTOTAL (USD)",
+   "id": "global_subtotal_jan_jul_2026",
+   "label": "GLOBAL SUBTOTAL (Jan - Jul 2026)",
    "section": "source_budget",
-   "formula": "global_personnel_usd_5 + global_team_activities_usd_5",
+   "formula": "global_personnel_jan_jul_2026 + global_team_activities_jan_jul_2026",
    "expected": 269638.0,
    "format": "usd"
   },
   {
-   "id": "india_personnel_usd_5",
-   "label": "India Personnel (USD)",
+   "id": "india_personnel_jan_jul_2026",
+   "label": "India Personnel (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 507397.0,
    "kind": "estimate",
@@ -562,8 +565,8 @@
    "format": "usd"
   },
   {
-   "id": "india_program_activities_usd_5",
-   "label": "India Program Activities (USD)",
+   "id": "india_program_activities_jan_jul_2026",
+   "label": "India Program Activities (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 254880.0,
    "kind": "estimate",
@@ -576,7 +579,7 @@
   },
   {
    "id": "india_monitoring_and_evaluation_including_coverage_validatio_5",
-   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (USD)",
+   "label": "India Monitoring & Evaluation (including coverage validation surveys and private school pilots) (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 1087.2,
    "kind": "estimate",
@@ -588,8 +591,8 @@
    "format": "usd"
   },
   {
-   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_usd_5",
-   "label": "Shared Direct Costs and Goods & Services Tax and Fee (USD)",
+   "id": "shared_direct_costs_and_goods_and_services_tax_and_fee_jan_j",
+   "label": "Shared Direct Costs and Goods & Services Tax and Fee (Jan - Jul 2026)",
    "section": "source_budget",
    "value": 197903.2,
    "kind": "estimate",
@@ -601,26 +604,26 @@
    "format": "usd"
   },
   {
-   "id": "india_subtotal_usd_5",
-   "label": "INDIA SUBTOTAL (USD)",
+   "id": "india_subtotal_jan_jul_2026",
+   "label": "INDIA SUBTOTAL (Jan - Jul 2026)",
    "section": "source_budget",
-   "formula": "sum(india_personnel_usd_5, india_program_activities_usd_5, india_monitoring_and_evaluation_including_coverage_validatio_5, shared_direct_costs_and_goods_and_services_tax_and_fee_usd_5)",
+   "formula": "sum(india_personnel_jan_jul_2026, india_program_activities_jan_jul_2026, india_monitoring_and_evaluation_including_coverage_validatio_5, shared_direct_costs_and_goods_and_services_tax_and_fee_jan_j)",
    "expected": 961267.4,
    "format": "usd"
   },
   {
-   "id": "global_indirect_expenses_usd_5",
-   "label": "Global Indirect Expenses (USD)",
+   "id": "global_indirect_expenses_jan_jul_2026",
+   "label": "Global Indirect Expenses (Jan - Jul 2026)",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_5, india_subtotal_usd_5) * 0.18",
+   "formula": "sum(global_subtotal_jan_jul_2026, india_subtotal_jan_jul_2026) * 0.18",
    "expected": 221562.972,
    "format": "usd"
   },
   {
-   "id": "total_usd_5",
-   "label": "TOTAL (USD)",
+   "id": "total_jan_jul_2026",
+   "label": "TOTAL (Jan - Jul 2026)",
    "section": "source_budget",
-   "formula": "sum(global_subtotal_usd_5, india_subtotal_usd_5, global_indirect_expenses_usd_5)",
+   "formula": "sum(global_subtotal_jan_jul_2026, india_subtotal_jan_jul_2026, global_indirect_expenses_jan_jul_2026)",
    "expected": 1452468.372,
    "format": "usd"
   },
@@ -628,7 +631,7 @@
    "id": "ifa_budget_y4",
    "label": "IFA Budget (Y4)",
    "section": "cost_per_person",
-   "formula": "total_usd_4 * (5 / 12) + total_usd_5",
+   "formula": "total_3 * (5 / 12) + total_jan_jul_2026",
    "expected": 2559187.52,
    "format": "usd"
   },
@@ -636,7 +639,7 @@
    "id": "ifa_budget_y5",
    "label": "IFA Budget (Y5)",
    "section": "cost_per_person",
-   "formula": "total_usd_5 * (12 / 7)",
+   "formula": "total_jan_jul_2026 * (12 / 7)",
    "expected": 2489945.781,
    "format": "usd"
   },
@@ -902,25 +905,25 @@
    "id": "population_in_millions",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 506.03,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!D3"
-   }
+   },
+   "formula": "@givewell.population_in_millions_9",
+   "expected": 506.03
   },
   {
    "id": "population_in_millions_2",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 510.82,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!C3"
-   }
+   },
+   "formula": "@givewell.population_in_millions_10",
+   "expected": 510.82
   },
   {
    "id": "percent_decline_per_year",
@@ -1029,13 +1032,13 @@
    "id": "population_in_millions_3",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 501.07,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!E3"
-   }
+   },
+   "formula": "@givewell.population_in_millions_8",
+   "expected": 501.07
   },
   {
    "id": "percent_decline_per_year_2",
@@ -1144,13 +1147,13 @@
    "id": "population_in_millions_4",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 495.8,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!F3"
-   }
+   },
+   "formula": "@givewell.population_in_millions_7",
+   "expected": 495.8
   },
   {
    "id": "percent_decline_per_year_3",
@@ -1259,14 +1262,14 @@
    "id": "population_in_millions_5",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 490.13,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!G3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions_6",
+   "expected": 490.13
   },
   {
    "id": "percent_decline_per_year_4",
@@ -1375,14 +1378,14 @@
    "id": "population_in_millions_6",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 484.06,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!H3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions_5",
+   "expected": 484.06
   },
   {
    "id": "percent_decline_per_year_5",
@@ -1491,14 +1494,14 @@
    "id": "population_in_millions_7",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 477.57,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!I3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions_4",
+   "expected": 477.57
   },
   {
    "id": "percent_decline_per_year_6",
@@ -1607,14 +1610,14 @@
    "id": "population_in_millions_8",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 470.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!J3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions_3",
+   "expected": 470.7
   },
   {
    "id": "percent_decline_per_year_7",
@@ -1755,14 +1758,14 @@
    "id": "population_in_millions_9",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 463.52,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!K3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions_2",
+   "expected": 463.52
   },
   {
    "id": "percent_decline_per_year_8",
@@ -1863,14 +1866,14 @@
    "id": "population_in_millions_10",
    "label": "Population (in millions)",
    "section": "source_population_decline",
-   "value": 456.12,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Source Population decline!L3"
    },
-   "explainer": "Source: http://ihmeuw.org/5svp"
+   "explainer": "Source: http://ihmeuw.org/5svp",
+   "formula": "@givewell.population_in_millions",
+   "expected": 456.12
   },
   {
    "id": "percent_decline_per_year_9",
@@ -2484,13 +2487,14 @@
    "id": "value_assigned_to_1_yld_averted_low",
    "label": "Value assigned to 1 YLD averted (Low)",
    "section": "iron_supplementation",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Iron supplementation!C28"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
    "id": "units_of_value_per_person_low",
@@ -2503,14 +2507,15 @@
    "id": "discount_rate_low",
    "label": "Discount rate (Low)",
    "section": "iron_supplementation",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Iron supplementation!C58"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04."
   },
   {
    "id": "mean_number_of_years_between_supplementation_and_initial_con",
@@ -3090,13 +3095,14 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Low)",
    "section": "iron_supplementation",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Iron supplementation!C60"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "units_of_value_from_cognitive_benefits_in_children_per_benef",
@@ -3513,13 +3519,14 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "iron_supplementation",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1fYwHmD1L-ycANwu2KrJqlxk2F726uDQjn84-ADaLw-I/edit",
     "cell": "Iron supplementation!C81"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "units_of_value_per_beneficiary",

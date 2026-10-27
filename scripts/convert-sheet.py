@@ -66,6 +66,9 @@ def without_styles(path):
     return tmp
 
 
+MARKER = re.compile(r"^(input|inputs|calc|calculation|output|feed|number|uov|uov ?/ ?\$|xcash|x cash|x benchmark|%|\$|usd|years?|people|deaths?|ratio|rate|count|-|n/a|#|x)$", re.I)
+
+
 class Sheet:
     def __init__(self, path):
         try:
@@ -93,19 +96,24 @@ class Sheet:
         return self.V[sh][c].value
 
     def text_left(self, sh, r, col):
-        """The row's label: the nearest text to the left of the cell."""
+        """The row's label: the nearest text to the left of the cell, skipping the type and unit
+        markers GiveWell's sheets keep between label and values ("input", "calc", "UoV", "%")."""
         ws = self.V[sh]
+        fallback = None
         for cc in range(col - 1, 0, -1):
             v = ws.cell(r, cc).value
             if isinstance(v, str) and v.strip() and not v.strip().startswith("="):
-                return v.strip()
-        return None
+                t = v.strip()
+                if MARKER.match(t):
+                    fallback = fallback or t; continue
+                return t
+        return fallback
 
     def text_above(self, sh, r, col, limit=60):
         ws = self.V[sh]
         for rr in range(r - 1, max(0, r - limit), -1):
             v = ws.cell(rr, col).value
-            if isinstance(v, str) and v.strip() and len(v) < 80:
+            if isinstance(v, str) and v.strip() and len(v) < 80 and not MARKER.match(v.strip()):
                 return v.strip()
         return None
 
@@ -150,7 +158,7 @@ class Converter:
     def label_for(self, sh, r, col):
         lab = self.b.text_left(sh, r, col) or f"{sh}!{get_column_letter(col)}{r}"
         if len(self.b.numeric_cols(sh, r)) > 1:
-            head = self.b.text_above(sh, r, col)
+            head = self.b.text_above(sh, r, col)  # e.g. the location a column is about
             if head and head != lab: lab = f"{lab} ({head})"
         return re.sub(r"\s+", " ", lab)[:160]
 

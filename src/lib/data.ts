@@ -1,7 +1,8 @@
 // Loads every model and the shared assumptions at build time. Both the static pages and the
 // React islands import this. Bulk imports (models/grants/) are the exception: the server loads them in
-// full, the browser gets one-row stand-ins with the same bottom line (generated/bulk-summaries.json),
-// so the islands compute identical numbers without shipping tens of megabytes. A bulk model's own page
+// full, the browser gets them partially evaluated (generated/bulk-summaries.json): rows that read a
+// shared assumption stay live, the rest is folded into numbers. The islands compute identical results
+// under any assumptions without shipping tens of megabytes. A bulk model's own page
 // passes its full rows to the island (bulkRaw).
 import { buildLibrary, comparable, modelsOf, type Library, type ResolvedModel } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
@@ -14,10 +15,13 @@ const factFiles = import.meta.glob<{ default: unknown }>("../../facts/*.json", {
 const charityFiles = import.meta.glob<{ default: unknown }>("../../charities/*.json", { eager: true });
 import owners from "../../owners.json";
 
+/** The facts files as written, for rebuilding a single model in the browser (see ModelView). */
+export const rawFacts = Object.values(factFiles).map((f) => f.default);
+
 export const lib = buildLibrary(
   [...Object.values(files).map((f) => f.default), ...bulk],
   assumptions,
-  Object.values(factFiles).map((f) => f.default),
+  rawFacts,
   Object.values(charityFiles).map((f) => f.default),
   owners,
 );

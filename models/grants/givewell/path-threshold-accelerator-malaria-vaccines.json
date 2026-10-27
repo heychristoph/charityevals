@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -76,28 +77,28 @@
  ],
  "rows": [
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
+   "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
    "section": "inputs",
-   "value": 116.25262,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H69"
    },
-   "explainer": "GW value judgment GW's moral weights and discount rate"
-  },
-  {
-   "id": "input",
-   "label": "input",
-   "section": "cea",
-   "formula": "input_2",
+   "explainer": "GiveWell's moral weight, 116.25262 units of value, times your multiplier on the value of a life.\n\nGW value judgment GW's moral weights and discount rate",
+   "formula": "116.25262 * $life_value_multiplier",
    "expected": 116.25262
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a",
+   "label": "Value assigned to averting a malaria-attributable death of a person under age 5",
+   "section": "cea",
+   "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
+   "expected": 116.25262
+  },
+  {
+   "id": "percentage_of_children_that_receive_four_doses_relative_to_t_2",
+   "label": "Percentage of children that receive four doses (relative to those who receive only three)",
    "section": "inputs",
    "value": 0.6,
    "kind": "estimate",
@@ -110,16 +111,16 @@
    "format": "percent"
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "percentage_of_children_that_receive_four_doses_relative_to_t",
+   "label": "Percentage of children that receive four doses (relative to those who receive only three)",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_4",
+   "formula": "percentage_of_children_that_receive_four_doses_relative_to_t_2",
    "expected": 0.6,
    "format": "percent"
   },
   {
-   "id": "input_6",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_children_under_age_5_who",
+   "label": "Reduction in malaria incidence for children under age 5 who receive four doses of the vaccine (ITT effect)",
    "section": "inputs",
    "value": 0.363,
    "kind": "estimate",
@@ -132,16 +133,16 @@
    "format": "percent"
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "reduction_in_malaria_mortality_for_children_receiving_four_d",
+   "label": "Reduction in malaria mortality for children receiving four doses",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_6",
+   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_who",
    "expected": 0.363,
    "format": "percent"
   },
   {
-   "id": "input_8",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_children_under_age_5_who_2",
+   "label": "Reduction in malaria incidence for children under age 5 who receive three doses of the vaccine (ITT effect)",
    "section": "inputs",
    "value": 0.283,
    "kind": "estimate",
@@ -154,24 +155,24 @@
    "format": "percent"
   },
   {
-   "id": "input_7",
-   "label": "input",
+   "id": "reduction_in_malaria_mortality_for_children_receiving_three",
+   "label": "Reduction in malaria mortality for children receiving three doses",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_8",
+   "formula": "reduction_in_malaria_incidence_for_children_under_age_5_who_2",
    "expected": 0.283,
    "format": "percent"
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "effect_of_vaccination_on_mortality_before_adjustments",
+   "label": "Effect of vaccination on mortality, before adjustments",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_3 * input_5 + (1 - input_3) * input_7",
+   "formula": "percentage_of_children_that_receive_four_doses_relative_to_t * reduction_in_malaria_mortality_for_children_receiving_four_d + (1 - percentage_of_children_that_receive_four_doses_relative_to_t) * reduction_in_malaria_mortality_for_children_receiving_three",
    "expected": 0.331,
    "format": "percent"
   },
   {
-   "id": "input_10",
-   "label": "input",
+   "id": "internal_validity_adjustment_2",
+   "label": "Internal validity adjustment",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -184,16 +185,16 @@
    "format": "percent"
   },
   {
-   "id": "input_9",
-   "label": "input",
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_10",
+   "formula": "internal_validity_adjustment_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "input_12",
-   "label": "input",
+   "id": "external_validity_adjustment_2",
+   "label": "External validity adjustment",
    "section": "inputs",
    "value": -0.05,
    "kind": "estimate",
@@ -206,16 +207,16 @@
    "format": "percent"
   },
   {
-   "id": "input_11",
-   "label": "input",
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_12",
+   "formula": "external_validity_adjustment_2",
    "expected": -0.05,
    "format": "percent"
   },
   {
-   "id": "input_14",
-   "label": "input",
+   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
+   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "inputs",
    "value": 1.0,
    "kind": "estimate",
@@ -228,18 +229,18 @@
    "format": "percent"
   },
   {
-   "id": "input_13",
-   "label": "input",
+   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
+   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_14",
+   "formula": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction_2",
    "expected": 1.0,
    "format": "percent"
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "effect_of_vaccination_on_malaria_mortality_after_adjustments",
+   "label": "Effect of vaccination on malaria mortality, after adjustments",
    "section": "effect_on_malaria_mortality",
-   "formula": "calc_4 * (1 + input_9) * (1 + input_11) * input_13",
+   "formula": "effect_of_vaccination_on_mortality_before_adjustments * (1 + internal_validity_adjustment) * (1 + external_validity_adjustment) * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
    "expected": 0.31445,
    "format": "percent"
   },
@@ -247,13 +248,13 @@
    "id": "supp",
    "label": "supp",
    "section": "cea",
-   "formula": "calc_3",
+   "formula": "effect_of_vaccination_on_malaria_mortality_after_adjustments",
    "expected": 0.31445,
    "format": "percent"
   },
   {
-   "id": "number_val",
-   "label": "Number (val)",
+   "id": "malaria_val",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 16395.36949,
    "kind": "estimate",
@@ -265,8 +266,8 @@
    "explainer": "Deaths India Both <5 years Malaria"
   },
   {
-   "id": "number_val_2",
-   "label": "Number (val)",
+   "id": "malaria_val_2",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 683.0121005,
    "kind": "estimate",
@@ -278,15 +279,15 @@
    "explainer": "Deaths Liberia Both <5 years Malaria"
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "malaria_mortalities_per_year_among_people_under_1_month_burk",
+   "label": "Malaria mortalities per year among people under 1 month (Burkina Faso)",
    "section": "inputs",
-   "formula": "number_val_2",
+   "formula": "malaria_val_2",
    "expected": 683.0121005
   },
   {
-   "id": "number_val_3",
-   "label": "Number (val)",
+   "id": "malaria_val_3",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 5135.61437,
    "kind": "estimate",
@@ -298,73 +299,73 @@
    "explainer": "Deaths Lesotho Both <5 years Malaria"
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "malaria_mortalities_per_year_among_people_aged_1_12_months_b",
+   "label": "Malaria mortalities per year among people aged 1-12 months (Burkina Faso)",
    "section": "inputs",
-   "formula": "number_val_3",
+   "formula": "malaria_val_3",
    "expected": 5135.61437
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "malaria_mortalities_per_year_among_people_aged_1_4_burkina_f_2",
+   "label": "Malaria mortalities per year among people aged 1-4 (Burkina Faso)",
    "section": "inputs",
-   "formula": "number_val - sum(row_8, row_9)",
+   "formula": "malaria_val - sum(malaria_mortalities_per_year_among_people_under_1_month_burk, malaria_mortalities_per_year_among_people_aged_1_12_months_b)",
    "expected": 10576.74302
   },
   {
-   "id": "burkina_faso",
-   "label": "- (Burkina Faso)",
+   "id": "malaria_mortalities_per_year_among_people_aged_1_4_burkina_f",
+   "label": "Malaria mortalities per year among people aged 1-4 (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_7",
+   "formula": "malaria_mortalities_per_year_among_people_aged_1_4_burkina_f_2",
    "expected": 10576.74302
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "share_of_children_under_12_months_that_are_5_months_and_olde",
+   "label": "Share of children under 12 months that are 5 months and older",
    "section": "effect_on_malaria_mortality",
    "formula": "7 / 12",
    "expected": 0.5833333333,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_2",
-   "label": "- (Burkina Faso)",
+   "id": "malaria_mortalities_per_year_among_people_under_1_month_burk_2",
+   "label": "Malaria mortalities per year among people under 1 month (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_8",
+   "formula": "malaria_mortalities_per_year_among_people_under_1_month_burk",
    "expected": 683.0121005
   },
   {
-   "id": "burkina_faso_3",
-   "label": "- (Burkina Faso)",
+   "id": "malaria_mortalities_per_year_among_people_aged_1_12_months_b_2",
+   "label": "Malaria mortalities per year among people aged 1-12 months (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_9",
+   "formula": "malaria_mortalities_per_year_among_people_aged_1_12_months_b",
    "expected": 5135.61437
   },
   {
-   "id": "calc_5",
-   "label": "calc (-)",
+   "id": "annual_malaria_deaths_that_occur_in_5_59_months_old_burkina",
+   "label": "Annual malaria deaths that occur in 5-59 months old (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "burkina_faso + calc_6 * sum(burkina_faso_2, burkina_faso_3)",
+   "formula": "malaria_mortalities_per_year_among_people_aged_1_4_burkina_f + share_of_children_under_12_months_that_are_5_months_and_olde * sum(malaria_mortalities_per_year_among_people_under_1_month_burk_2, malaria_mortalities_per_year_among_people_aged_1_12_months_b_2)",
    "expected": 13970.94179
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "share_of_children_under_5_years_that_are_5_months_and_older",
+   "label": "Share of children under 5 years that are 5 months and older",
    "section": "effect_on_malaria_mortality",
-   "formula": "(4 + calc_6) / 5",
+   "formula": "(4 + share_of_children_under_12_months_that_are_5_months_and_olde) / 5",
    "expected": 0.9166666667,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_4",
-   "label": "- (Burkina Faso)",
+   "id": "annual_malaria_deaths_among_people_under_age_5_burkina_faso",
+   "label": "Annual malaria deaths among people under age 5 (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "sum(burkina_faso_2, burkina_faso_3, burkina_faso)",
+   "formula": "sum(malaria_mortalities_per_year_among_people_under_1_month_burk_2, malaria_mortalities_per_year_among_people_aged_1_12_months_b_2, malaria_mortalities_per_year_among_people_aged_1_4_burkina_f)",
    "expected": 16395.36949
   },
   {
-   "id": "rate_val",
-   "label": "Rate (val)",
+   "id": "malaria_val_4",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 405.3286161,
    "kind": "estimate",
@@ -376,64 +377,64 @@
    "explainer": "Incidence Kenya Both 1-4 years Malaria"
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "per_100k_burkina_faso_2",
+   "label": "per 100k (Burkina Faso)",
    "section": "inputs",
-   "formula": "rate_val",
+   "formula": "malaria_val_4",
    "expected": 405.3286161
   },
   {
-   "id": "burkina_faso_5",
-   "label": "- (Burkina Faso)",
+   "id": "per_100k_burkina_faso",
+   "label": "per 100k (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_12",
+   "formula": "per_100k_burkina_faso_2",
    "expected": 405.3286161
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "implied_population_of_people_under_age_5_burkina_faso",
+   "label": "Implied population of people under age 5 (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "burkina_faso_4 / burkina_faso_5 * 100000",
+   "formula": "annual_malaria_deaths_among_people_under_age_5_burkina_faso / per_100k_burkina_faso * 100000",
    "expected": 4044957.311
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "estimated_population_of_5_59_month_olds_burkina_faso",
+   "label": "Estimated population of 5-59-month olds (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "calc_7 * row_11",
+   "formula": "share_of_children_under_5_years_that_are_5_months_and_older * implied_population_of_people_under_age_5_burkina_faso",
    "expected": 3707877.535
   },
   {
-   "id": "input_16",
-   "label": "input",
+   "id": "indirect_malaria_deaths_per_direct_malaria_death_2",
+   "label": "Indirect malaria deaths per direct malaria death",
    "section": "inputs",
-   "value": 0.75,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H48"
    },
-   "explainer": "GW guesstimate"
-  },
-  {
-   "id": "input_15",
-   "label": "input",
-   "section": "effect_on_malaria_mortality",
-   "formula": "input_16",
+   "explainer": "GW guesstimate",
+   "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
    "expected": 0.75
   },
   {
-   "id": "row_6",
-   "label": "-",
+   "id": "indirect_malaria_deaths_per_direct_malaria_death",
+   "label": "Indirect malaria deaths per direct malaria death",
    "section": "effect_on_malaria_mortality",
-   "formula": "calc_5 / row_10 * (1 + input_15)",
+   "formula": "indirect_malaria_deaths_per_direct_malaria_death_2",
+   "expected": 0.75
+  },
+  {
+   "id": "estimated_malaria_attributable_mortality_rate_among_5_59_mon_2",
+   "label": "Estimated malaria-attributable mortality rate among 5-59-month olds (before SMC adjustments) (Burkina Faso)",
+   "section": "effect_on_malaria_mortality",
+   "formula": "annual_malaria_deaths_that_occur_in_5_59_months_old_burkina / estimated_population_of_5_59_month_olds_burkina_faso * (1 + indirect_malaria_deaths_per_direct_malaria_death)",
    "expected": 0.006593839173,
    "format": "percent"
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "proportion_of_children_targeted_for_vaccination_who_are_alre_2",
+   "label": "Proportion of children targeted for vaccination who are already covered by SMC (Burkina Faso)",
    "section": "inputs",
    "value": 0.95,
    "kind": "estimate",
@@ -446,16 +447,16 @@
    "format": "percent"
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "proportion_of_children_targeted_for_vaccination_who_are_alre",
+   "label": "Proportion of children targeted for vaccination who are already covered by SMC (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_15",
+   "formula": "proportion_of_children_targeted_for_vaccination_who_are_alre_2",
    "expected": 0.95,
    "format": "percent"
   },
   {
-   "id": "row_17",
-   "label": "-",
+   "id": "per_1k_burkina_faso_2",
+   "label": "per 1k (Burkina Faso)",
    "section": "inputs",
    "value": 2.7,
    "kind": "estimate",
@@ -467,39 +468,39 @@
    "explainer": "GW Analysis GW Cross-Cutting parameters (internal)"
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "per_1k_burkina_faso",
+   "label": "per 1k (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_17",
+   "formula": "per_1k_burkina_faso_2",
    "expected": 2.7
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "ppt_burkina_faso",
+   "label": "ppt (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_14 * row_16 / 1000",
+   "formula": "proportion_of_children_targeted_for_vaccination_who_are_alre * per_1k_burkina_faso / 1000",
    "expected": 0.002565,
    "format": "percent"
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "estimated_malaria_attributable_mortality_rate_among_5_59_mon",
+   "label": "Estimated malaria-attributable mortality rate among 5-59-month olds (after SMC adjustments) (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_6 - row_13",
+   "formula": "estimated_malaria_attributable_mortality_rate_among_5_59_mon_2 - ppt_burkina_faso",
    "expected": 0.004028839173,
    "format": "percent"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "supp_burkina_faso",
+   "label": "supp (Burkina Faso)",
    "section": "cea",
-   "formula": "row_5",
+   "formula": "estimated_malaria_attributable_mortality_rate_among_5_59_mon",
    "expected": 0.004028839173,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_7",
-   "label": "- (Burkina Faso)",
+   "id": "r_2024_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2024 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.48,
    "kind": "estimate",
@@ -512,8 +513,8 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_8",
-   "label": "- (Burkina Faso)",
+   "id": "r_2024_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2024 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.4,
    "kind": "estimate",
@@ -526,16 +527,16 @@
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_7 - burkina_faso_8",
+   "formula": "r_2024_coverage_rate_if_a_grant_is_made_burkina_faso - r_2024_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.08,
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_2",
-   "label": "input (Burkina Faso)",
+   "id": "annual_births_in_areas_of_medium_to_high_malaria_transmissio",
+   "label": "Annual births in areas of medium-to-high malaria transmission (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 831036.0,
    "kind": "estimate",
@@ -547,15 +548,15 @@
    "explainer": "PATH, estimates of target populations, November 10, 2023 (unpublished)"
   },
   {
-   "id": "burkina_faso_6",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_1_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 1 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 66482.88
   },
   {
-   "id": "burkina_faso_10",
-   "label": "- (Burkina Faso)",
+   "id": "r_2025_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2025 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.61,
    "kind": "estimate",
@@ -568,8 +569,8 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_11",
-   "label": "- (Burkina Faso)",
+   "id": "r_2025_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2025 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.56,
    "kind": "estimate",
@@ -582,23 +583,23 @@
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_3",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso_2",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_10 - burkina_faso_11",
+   "formula": "r_2025_coverage_rate_if_a_grant_is_made_burkina_faso - r_2025_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.05,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_9",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_2_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 2 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso_3 * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso_2 * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 41551.8
   },
   {
-   "id": "burkina_faso_13",
-   "label": "- (Burkina Faso)",
+   "id": "r_2026_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2026 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.63,
    "kind": "estimate",
@@ -611,8 +612,8 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_14",
-   "label": "- (Burkina Faso)",
+   "id": "r_2026_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2026 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.6,
    "kind": "estimate",
@@ -625,23 +626,23 @@
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_4",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso_3",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_13 - burkina_faso_14",
+   "formula": "r_2026_coverage_rate_if_a_grant_is_made_burkina_faso - r_2026_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.03,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_12",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_3_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 3 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso_4 * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso_3 * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 24931.08
   },
   {
-   "id": "burkina_faso_16",
-   "label": "- (Burkina Faso)",
+   "id": "r_2027_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2027 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.64,
    "kind": "estimate",
@@ -654,8 +655,8 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_17",
-   "label": "- (Burkina Faso)",
+   "id": "r_2027_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2027 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.64,
    "kind": "estimate",
@@ -668,23 +669,23 @@
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_5",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso_4",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_16 - burkina_faso_17",
+   "formula": "r_2027_coverage_rate_if_a_grant_is_made_burkina_faso - r_2027_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_15",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_4_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 4 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso_5 * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso_4 * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 0.0
   },
   {
-   "id": "burkina_faso_20",
-   "label": "- (Burkina Faso)",
+   "id": "r_2028_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2028 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.67,
    "kind": "estimate",
@@ -697,31 +698,31 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_19",
-   "label": "- (Burkina Faso)",
+   "id": "r_2028_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2028 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_20",
+   "formula": "r_2028_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.67,
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_6",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso_5",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_19 - burkina_faso_20",
+   "formula": "r_2028_coverage_rate_if_a_grant_is_made_burkina_faso - r_2028_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_18",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_5_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 5 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso_6 * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso_5 * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 0.0
   },
   {
-   "id": "burkina_faso_23",
-   "label": "- (Burkina Faso)",
+   "id": "r_2029_coverage_rate_if_a_grant_is_not_made_burkina_faso",
+   "label": "2029 coverage rate if a grant is not made (Burkina Faso)",
    "section": "children_vaccinated",
    "value": 0.7,
    "kind": "estimate",
@@ -734,45 +735,45 @@
    "format": "percent"
   },
   {
-   "id": "burkina_faso_22",
-   "label": "- (Burkina Faso)",
+   "id": "r_2029_coverage_rate_if_a_grant_is_made_burkina_faso",
+   "label": "2029 coverage rate if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_23",
+   "formula": "r_2029_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.7,
    "format": "percent"
   },
   {
-   "id": "input_burkina_faso_7",
-   "label": "input (Burkina Faso)",
+   "id": "ppts_burkina_faso_6",
+   "label": "ppts (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "burkina_faso_22 - burkina_faso_23",
+   "formula": "r_2029_coverage_rate_if_a_grant_is_made_burkina_faso - r_2029_coverage_rate_if_a_grant_is_not_made_burkina_faso",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_21",
-   "label": "- (Burkina Faso)",
+   "id": "additional_children_vaccinated_in_year_6_if_a_grant_is_made",
+   "label": "Additional children vaccinated in year 6 if a grant is made (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "input_burkina_faso_7 * input_burkina_faso_2",
+   "formula": "ppts_burkina_faso_6 * annual_births_in_areas_of_medium_to_high_malaria_transmissio",
    "expected": 0.0
   },
   {
-   "id": "calc_burkina_faso",
-   "label": "calc (Burkina Faso)",
+   "id": "total_additional_children_vaccinated_if_we_make_the_grant_bu_2",
+   "label": "Total additional children vaccinated if we make the grant (Burkina Faso)",
    "section": "children_vaccinated",
-   "formula": "sum(burkina_faso_6, burkina_faso_9, burkina_faso_12, burkina_faso_15, burkina_faso_18, burkina_faso_21)",
+   "formula": "sum(additional_children_vaccinated_in_year_1_if_a_grant_is_made, additional_children_vaccinated_in_year_2_if_a_grant_is_made, additional_children_vaccinated_in_year_3_if_a_grant_is_made, additional_children_vaccinated_in_year_4_if_a_grant_is_made, additional_children_vaccinated_in_year_5_if_a_grant_is_made, additional_children_vaccinated_in_year_6_if_a_grant_is_made)",
    "expected": 132965.76
   },
   {
-   "id": "calc_8",
-   "label": "calc (-)",
+   "id": "total_additional_children_vaccinated_if_we_make_the_grant_bu",
+   "label": "Total additional children vaccinated if we make the grant (Burkina Faso)",
    "section": "cea",
-   "formula": "calc_burkina_faso",
+   "formula": "total_additional_children_vaccinated_if_we_make_the_grant_bu_2",
    "expected": 132965.76
   },
   {
-   "id": "input_18",
-   "label": "input",
+   "id": "numbers_of_years_of_protection_provided_by_full_vaccination_2",
+   "label": "Numbers of years of protection provided by full vaccination schedule",
    "section": "inputs",
    "value": 4.0,
    "kind": "estimate",
@@ -784,29 +785,29 @@
    "explainer": "GW analysis RTS,S Clinical Partnership 2015"
   },
   {
-   "id": "input_17",
-   "label": "input",
+   "id": "numbers_of_years_of_protection_provided_by_full_vaccination",
+   "label": "Numbers of years of protection provided by full vaccination schedule",
    "section": "cea",
-   "formula": "input_18",
+   "formula": "numbers_of_years_of_protection_provided_by_full_vaccination_2",
    "expected": 4.0
   },
   {
-   "id": "calc_2",
-   "label": "calc (-)",
+   "id": "malaria_deaths_averted_in_people_aged_5_59_months_burkina_fa",
+   "label": "Malaria deaths averted in people aged 5-59 months (Burkina Faso)",
    "section": "cea",
-   "formula": "supp * row_4 * calc_8 * input_17",
+   "formula": "supp * supp_burkina_faso * total_additional_children_vaccinated_if_we_make_the_grant_bu * numbers_of_years_of_protection_provided_by_full_vaccination",
    "expected": 673.80052
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "units_of_value_generated_via_deaths_averted_in_the_treated_p",
+   "label": "Units of value generated via deaths averted in the treated population (Burkina Faso)",
    "section": "cea",
-   "formula": "input * calc_2",
+   "formula": "value_assigned_to_averting_a_malaria_attributable_death_of_a * malaria_deaths_averted_in_people_aged_5_59_months_burkina_fa",
    "expected": 78331.07581
   },
   {
-   "id": "row_19",
-   "label": "-",
+   "id": "rough_share_of_total_grant_allocated_to_each_country_burkina_2",
+   "label": "Rough share of total grant allocated to each country (Burkina Faso)",
    "section": "inputs",
    "value": 0.15,
    "kind": "estimate",
@@ -819,23 +820,23 @@
    "format": "percent"
   },
   {
-   "id": "row_18",
-   "label": "-",
+   "id": "rough_share_of_total_grant_allocated_to_each_country_burkina",
+   "label": "Rough share of total grant allocated to each country (Burkina Faso)",
    "section": "costs",
-   "formula": "row_19",
+   "formula": "rough_share_of_total_grant_allocated_to_each_country_burkina_2",
    "expected": 0.15,
    "format": "percent"
   },
   {
-   "id": "burkina_faso_24",
-   "label": "- (Burkina Faso)",
+   "id": "total_additional_children_vaccinated_if_we_make_the_grant_bu_3",
+   "label": "Total additional children vaccinated if we make the grant (Burkina Faso)",
    "section": "costs",
-   "formula": "calc_burkina_faso",
+   "formula": "total_additional_children_vaccinated_if_we_make_the_grant_bu_2",
    "expected": 132965.76
   },
   {
-   "id": "input_20",
-   "label": "input",
+   "id": "grant_size_2",
+   "label": "Grant size",
    "section": "inputs",
    "value": 18200000.0,
    "kind": "estimate",
@@ -848,39 +849,39 @@
    "format": "usd"
   },
   {
-   "id": "input_19",
-   "label": "input",
+   "id": "grant_size",
+   "label": "Grant size",
    "section": "costs",
-   "formula": "input_20",
+   "formula": "grant_size_2",
    "expected": 18200000.0,
    "format": "usd"
   },
   {
-   "id": "calc_9",
-   "label": "calc (-)",
+   "id": "costs_per_child_vaccinated_path_burkina_faso",
+   "label": "Costs per child vaccinated, PATH (Burkina Faso)",
    "section": "costs",
-   "formula": "row_18 / burkina_faso_24 * input_19",
+   "formula": "rough_share_of_total_grant_allocated_to_each_country_burkina / total_additional_children_vaccinated_if_we_make_the_grant_bu_3 * grant_size",
    "expected": 20.53160152,
    "format": "usd"
   },
   {
-   "id": "supp_2",
-   "label": "supp (-)",
+   "id": "supp_burkina_faso_2",
+   "label": "supp (Burkina Faso)",
    "section": "cea",
-   "formula": "calc_9",
+   "formula": "costs_per_child_vaccinated_path_burkina_faso",
    "expected": 20.53160152,
    "format": "usd"
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "units_of_value_generated_per_dollar_before_final_adjustments",
+   "label": "Units of value generated per dollar (before final adjustments) (Burkina Faso)",
    "section": "cea",
-   "formula": "row_3 / (calc_8 * supp_2)",
+   "formula": "units_of_value_generated_via_deaths_averted_in_the_treated_p / (total_additional_children_vaccinated_if_we_make_the_grant_bu * supp_burkina_faso_2)",
    "expected": 0.02869270176
   },
   {
-   "id": "input_21",
-   "label": "input",
+   "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
+   "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "inputs",
    "value": 0.0033545,
    "kind": "estimate",
@@ -892,67 +893,67 @@
    "explainer": "GW analysis GW's GiveDirectly CEA"
   },
   {
-   "id": "calc",
-   "label": "calc (-)",
+   "id": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire",
+   "label": "Initial cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (Burkina Faso)",
    "section": "cea",
-   "formula": "row_2 / input_21",
+   "formula": "units_of_value_generated_per_dollar_before_final_adjustments / value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
    "expected": 8.55349583
   },
   {
-   "id": "input_23",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_population_too_old",
+   "label": "Reduction in malaria incidence among the population too old to be eligible for SMC found in Cisse et al. 2016",
    "section": "inputs",
-   "value": 0.26,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H52"
    },
    "explainer": "Cisse et al. 2016",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_among_the_population_too_old",
+   "expected": 0.26
   },
   {
-   "id": "input_22",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_untreated_population_in_c",
+   "label": "Reduction in malaria incidence for untreated population in Cisse et al. 2016",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_23",
+   "formula": "reduction_in_malaria_incidence_among_the_population_too_old",
    "expected": 0.26,
    "format": "percent"
   },
   {
-   "id": "input_25",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_among_the_smc_eligible_popula",
+   "label": "Reduction in malaria incidence among the SMC-eligible population found in Cisse et al. 2016",
    "section": "inputs",
-   "value": 0.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H51"
    },
    "explainer": "Cisse et al. 2016",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_among_the_smc_eligible_popula",
+   "expected": 0.6
   },
   {
-   "id": "input_24",
-   "label": "input",
+   "id": "reduction_in_malaria_incidence_for_treated_population_in_cis",
+   "label": "Reduction in malaria incidence for treated population in Cisse et al. 2016",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_25",
+   "formula": "reduction_in_malaria_incidence_among_the_smc_eligible_popula",
    "expected": 0.6,
    "format": "percent"
   },
   {
-   "id": "calc_11",
-   "label": "calc",
+   "id": "unadjusted_expected_reduction_in_malaria_cases_in_untreated",
+   "label": "Unadjusted expected reduction in malaria cases in untreated population as a percentage of the reduction in the treated population",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_22 / input_24",
+   "formula": "reduction_in_malaria_incidence_for_untreated_population_in_c / reduction_in_malaria_incidence_for_treated_population_in_cis",
    "expected": 0.4333333333,
    "format": "percent"
   },
   {
-   "id": "number_val_4",
-   "label": "Number (val)",
+   "id": "malaria_val_5",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 26304.7468,
    "kind": "estimate",
@@ -964,37 +965,37 @@
    "explainer": "Deaths Madagascar Both <5 years Malaria"
   },
   {
-   "id": "row_24",
-   "label": "-",
+   "id": "total_malaria_mortalities_per_year_burkina_faso_2",
+   "label": "Total malaria mortalities per year (Burkina Faso)",
    "section": "inputs",
-   "formula": "number_val_4",
+   "formula": "malaria_val_5",
    "expected": 26304.7468
   },
   {
-   "id": "burkina_faso_25",
-   "label": "- (Burkina Faso)",
+   "id": "total_malaria_mortalities_per_year_burkina_faso",
+   "label": "Total malaria mortalities per year (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_24",
+   "formula": "total_malaria_mortalities_per_year_burkina_faso_2",
    "expected": 26304.7468
   },
   {
-   "id": "row_23",
-   "label": "-",
+   "id": "ratio_of_malaria_deaths_at_all_ages_to_malaria_deaths_in_5_t",
+   "label": "Ratio of malaria deaths at all ages to malaria deaths in 5- to 59-month olds (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "burkina_faso_25 / calc_5",
+   "formula": "total_malaria_mortalities_per_year_burkina_faso / annual_malaria_deaths_that_occur_in_5_59_months_old_burkina",
    "expected": 1.882818438,
    "format": "percent"
   },
   {
-   "id": "row_22",
-   "label": "-",
+   "id": "malaria_attributable_deaths_averted_in_untreated_population_2",
+   "label": "Malaria-attributable deaths averted in untreated population per death averted in treated population (before adjustments) (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "calc_11 * (row_23 - 1)",
+   "formula": "unadjusted_expected_reduction_in_malaria_cases_in_untreated * (ratio_of_malaria_deaths_at_all_ages_to_malaria_deaths_in_5_t - 1)",
    "expected": 0.3825546563
   },
   {
-   "id": "input_27",
-   "label": "input",
+   "id": "adjustment_for_differences_in_program_coverage_and_transmiss_2",
+   "label": "Adjustment for differences in program coverage and transmission intensity in the populations studied by the Cisse et al. 2016 trial and the populations targeted",
    "section": "inputs",
    "value": -0.6912579,
    "kind": "estimate",
@@ -1007,44 +1008,44 @@
    "format": "percent"
   },
   {
-   "id": "input_26",
-   "label": "input",
+   "id": "adjustment_for_differences_in_program_coverage_and_transmiss",
+   "label": "Adjustment for differences in program coverage and transmission intensity in the populations studied by the Cisse et al. 2016 trial and the populations targeted",
    "section": "effect_on_malaria_mortality",
-   "formula": "input_27",
+   "formula": "adjustment_for_differences_in_program_coverage_and_transmiss_2",
    "expected": -0.6912579,
    "format": "percent"
   },
   {
-   "id": "row_21",
-   "label": "-",
+   "id": "malaria_attributable_deaths_averted_in_untreated_population",
+   "label": "Malaria-attributable deaths averted in untreated population per death averted in treated population (after adjustments) (Burkina Faso)",
    "section": "effect_on_malaria_mortality",
-   "formula": "row_22 * (1 + input_26)",
+   "formula": "malaria_attributable_deaths_averted_in_untreated_population_2 * (1 + adjustment_for_differences_in_program_coverage_and_transmiss)",
    "expected": 0.1181107279
   },
   {
-   "id": "input_28",
-   "label": "input",
+   "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_3",
+   "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older",
    "section": "inputs",
-   "value": 73.1914,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H70"
    },
-   "explainer": "GW value judgment GW's moral weights and discount rate"
+   "explainer": "GiveWell's moral weight, 73.1914 units of value, times your multiplier on the value of a life.\n\nGW value judgment GW's moral weights and discount rate",
+   "formula": "73.1914 * $life_value_multiplier",
+   "expected": 73.1914
   },
   {
-   "id": "row_20",
-   "label": "-",
+   "id": "adjustment_to_account_for_mortalities_averted_among_people_a",
+   "label": "Adjustment to account for mortalities averted among people age 5 and older (Burkina Faso)",
    "section": "cea",
-   "formula": "calc_2 * row_21 * input_28 / row_3",
+   "formula": "malaria_deaths_averted_in_people_aged_5_59_months_burkina_fa * malaria_attributable_deaths_averted_in_untreated_population * value_assigned_to_averting_a_malaria_attributable_death_of_a_3 / units_of_value_generated_via_deaths_averted_in_the_treated_p",
    "expected": 0.07436124479,
    "format": "percent"
   },
   {
-   "id": "calc_13",
-   "label": "calc",
+   "id": "ln_2",
+   "label": "ln($)",
    "section": "income_increases",
    "value": 0.08266140743,
    "kind": "estimate",
@@ -1056,8 +1057,8 @@
    "explainer": "Calculated in the source sheet as `=pv(H34,H36,-H35,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "input_30",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households_2",
+   "label": "Multiplier for resource sharing within households",
    "section": "inputs",
    "value": 2.0,
    "kind": "estimate",
@@ -1069,22 +1070,22 @@
    "explainer": "GW analysis GW's analysis on estimating multiplier for benefits experienced by other household members"
   },
   {
-   "id": "input_29",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households",
+   "label": "Multiplier for resource sharing within households",
    "section": "income_increases",
-   "formula": "input_30",
+   "formula": "multiplier_for_resource_sharing_within_households_2",
    "expected": 2.0
   },
   {
-   "id": "calc_12",
-   "label": "calc",
+   "id": "ln",
+   "label": "ln($)",
    "section": "income_increases",
-   "formula": "calc_13 * input_29",
+   "formula": "ln_2 * multiplier_for_resource_sharing_within_households",
    "expected": 0.1653228149
   },
   {
-   "id": "rate_val_2",
-   "label": "Rate (val)",
+   "id": "malaria_val_6",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 60060.98378,
    "kind": "estimate",
@@ -1095,141 +1096,141 @@
    }
   },
   {
-   "id": "row_31",
-   "label": "-",
+   "id": "per_100k_burkina_faso_4",
+   "label": "per 100k (Burkina Faso)",
    "section": "inputs",
-   "formula": "rate_val_2",
+   "formula": "malaria_val_6",
    "expected": 60060.98378
   },
   {
-   "id": "burkina_faso_27",
-   "label": "- (Burkina Faso)",
+   "id": "per_100k_burkina_faso_3",
+   "label": "per 100k (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_31",
+   "formula": "per_100k_burkina_faso_4",
    "expected": 60060.98378
   },
   {
-   "id": "burkina_faso_26",
-   "label": "- (Burkina Faso)",
+   "id": "malaria_incidence_among_people_age_1_to_4_percentage_burkina",
+   "label": "Malaria incidence among people age 1 to 4 (percentage) (Burkina Faso)",
    "section": "income_increases",
-   "formula": "burkina_faso_27 / 100000",
+   "formula": "per_100k_burkina_faso_3 / 100000",
    "expected": 0.6006098378,
    "format": "percent"
   },
   {
-   "id": "supp_3",
+   "id": "supp_2",
    "label": "supp",
    "section": "income_increases",
-   "formula": "calc_3",
+   "formula": "effect_of_vaccination_on_malaria_mortality_after_adjustments",
    "expected": 0.31445,
    "format": "percent"
   },
   {
-   "id": "row_30",
-   "label": "-",
+   "id": "ppt_burkina_faso_2",
+   "label": "ppt (Burkina Faso)",
    "section": "income_increases",
-   "formula": "burkina_faso_26 * supp_3",
+   "formula": "malaria_incidence_among_people_age_1_to_4_percentage_burkina * supp_2",
    "expected": 0.1888617635,
    "format": "percent"
   },
   {
-   "id": "row_32",
-   "label": "-",
+   "id": "total_additional_children_vaccinated_if_we_make_the_grant_bu_4",
+   "label": "Total additional children vaccinated if we make the grant (Burkina Faso)",
    "section": "income_increases",
-   "formula": "calc_burkina_faso",
+   "formula": "total_additional_children_vaccinated_if_we_make_the_grant_bu_2",
    "expected": 132965.76
   },
   {
-   "id": "input_31",
-   "label": "input",
+   "id": "numbers_of_years_of_protection_provided_by_full_vaccination_3",
+   "label": "Numbers of years of protection provided by full vaccination schedule",
    "section": "income_increases",
-   "formula": "input_18",
+   "formula": "numbers_of_years_of_protection_provided_by_full_vaccination_2",
    "expected": 4.0
   },
   {
-   "id": "row_29",
-   "label": "-",
+   "id": "malaria_cases_averted_among_people_under_age_5_burkina_faso",
+   "label": "Malaria cases averted among people under age 5 (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_30 * row_32 * input_31",
+   "formula": "ppt_burkina_faso_2 * total_additional_children_vaccinated_if_we_make_the_grant_bu_4 * numbers_of_years_of_protection_provided_by_full_vaccination_3",
    "expected": 100448.5917
   },
   {
-   "id": "row_28",
-   "label": "-",
+   "id": "ln_burkina_faso_2",
+   "label": "ln($) (Burkina Faso)",
    "section": "income_increases",
-   "formula": "calc_12 * row_29",
+   "formula": "ln * malaria_cases_averted_among_people_under_age_5_burkina_faso",
    "expected": 16606.44392
   },
   {
-   "id": "number",
-   "label": "Number",
+   "id": "population",
+   "label": "Population",
    "section": "gbd_estimates",
-   "value": 6348445.622,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "GBD estimates!H262"
-   }
+   },
+   "formula": "@givewell.population_4",
+   "expected": 6348445.622
   },
   {
-   "id": "row_38",
-   "label": "-",
+   "id": "national_population_age_5_to_14_burkina_faso_2",
+   "label": "National population age 5 to 14 (Burkina Faso)",
    "section": "inputs",
-   "formula": "number",
+   "formula": "population",
    "expected": 6348445.622
   },
   {
-   "id": "row_37",
-   "label": "-",
+   "id": "national_population_age_5_to_14_burkina_faso",
+   "label": "National population age 5 to 14 (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_38",
+   "formula": "national_population_age_5_to_14_burkina_faso_2",
    "expected": 6348445.622
   },
   {
-   "id": "number_2",
-   "label": "Number",
+   "id": "population_2",
+   "label": "Population",
    "section": "gbd_estimates",
-   "value": 3159819.734,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "GBD estimates!H242"
    },
-   "explainer": "Deaths Uganda Both 7-27 days Malaria"
+   "explainer": "Deaths Uganda Both 7-27 days Malaria",
+   "formula": "@givewell.population",
+   "expected": 3159819.734
   },
   {
-   "id": "row_40",
-   "label": "-",
+   "id": "national_population_age_1_to_4_burkina_faso_2",
+   "label": "National population age 1 to 4 (Burkina Faso)",
    "section": "inputs",
-   "formula": "number_2",
+   "formula": "population_2",
    "expected": 3159819.734
   },
   {
-   "id": "row_39",
-   "label": "-",
+   "id": "national_population_age_1_to_4_burkina_faso",
+   "label": "National population age 1 to 4 (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_40",
+   "formula": "national_population_age_1_to_4_burkina_faso_2",
    "expected": 3159819.734
   },
   {
-   "id": "row_36",
-   "label": "-",
+   "id": "number_of_5_14_year_olds_exposed_to_spillover_effects_per_pe",
+   "label": "Number of 5-14-year-olds exposed to spillover effects per person targeted to for vaccination (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_37 / row_39",
+   "formula": "national_population_age_5_to_14_burkina_faso / national_population_age_1_to_4_burkina_faso",
    "expected": 2.009116392
   },
   {
-   "id": "row_35",
-   "label": "-",
+   "id": "total_5_14_year_olds_exposed_to_spillover_effects_from_vacci",
+   "label": "Total 5-14-year-olds exposed to spillover effects from vaccinations (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_36 * row_32",
+   "formula": "number_of_5_14_year_olds_exposed_to_spillover_effects_per_pe * total_additional_children_vaccinated_if_we_make_the_grant_bu_4",
    "expected": 267143.6879
   },
   {
-   "id": "rate_val_3",
-   "label": "Rate (val)",
+   "id": "malaria_val_7",
+   "label": "Malaria (val)",
    "section": "gbd_estimates",
    "value": 24693.60871,
    "kind": "estimate",
@@ -1240,105 +1241,105 @@
    }
   },
   {
-   "id": "row_42",
-   "label": "-",
+   "id": "per_100k_burkina_faso_6",
+   "label": "per 100k (Burkina Faso)",
    "section": "inputs",
-   "formula": "rate_val_3",
+   "formula": "malaria_val_7",
    "expected": 24693.60871
   },
   {
-   "id": "burkina_faso_29",
-   "label": "- (Burkina Faso)",
+   "id": "per_100k_burkina_faso_5",
+   "label": "per 100k (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_42",
+   "formula": "per_100k_burkina_faso_6",
    "expected": 24693.60871
   },
   {
-   "id": "burkina_faso_28",
-   "label": "- (Burkina Faso)",
+   "id": "malaria_incidence_among_people_age_5_to_14_percentage_burkin",
+   "label": "Malaria incidence among people age 5 to 14 (percentage) (Burkina Faso)",
    "section": "income_increases",
-   "formula": "burkina_faso_29 / 100000",
+   "formula": "per_100k_burkina_faso_5 / 100000",
    "expected": 0.2469360871,
    "format": "percent"
   },
   {
-   "id": "supp_4",
+   "id": "supp_3",
    "label": "supp",
    "section": "income_increases",
-   "formula": "calc_11",
+   "formula": "unadjusted_expected_reduction_in_malaria_cases_in_untreated",
    "expected": 0.4333333333,
    "format": "percent"
   },
   {
-   "id": "input_32",
-   "label": "input",
+   "id": "adjustment_for_differences_in_program_coverage_and_transmiss_3",
+   "label": "Adjustment for differences in program coverage and transmission intensity in the populations studied by the Cisse et al. 2016 trial and the populations targeted",
    "section": "income_increases",
-   "formula": "input_27",
+   "formula": "adjustment_for_differences_in_program_coverage_and_transmiss_2",
    "expected": -0.6912579,
    "format": "percent"
   },
   {
-   "id": "row_41",
-   "label": "-",
+   "id": "ppt_burkina_faso_3",
+   "label": "ppt (Burkina Faso)",
    "section": "income_increases",
-   "formula": "burkina_faso_28 * supp_3 * supp_4 * (1 + input_32)",
+   "formula": "malaria_incidence_among_people_age_5_to_14_percentage_burkin * supp_2 * supp_3 * (1 + adjustment_for_differences_in_program_coverage_and_transmiss_3)",
    "expected": 0.01038853034,
    "format": "percent"
   },
   {
-   "id": "row_34",
-   "label": "-",
+   "id": "malaria_cases_averted_among_people_age_5_to_14_burkina_faso",
+   "label": "Malaria cases averted among people age 5 to 14 (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_35 * row_41 * input_31",
+   "formula": "total_5_14_year_olds_exposed_to_spillover_effects_from_vacci * ppt_burkina_faso_3 * numbers_of_years_of_protection_provided_by_full_vaccination_3",
    "expected": 11100.92123
   },
   {
-   "id": "row_33",
-   "label": "-",
+   "id": "ln_burkina_faso_3",
+   "label": "ln($) (Burkina Faso)",
    "section": "income_increases",
-   "formula": "calc_12 * row_34",
+   "formula": "ln * malaria_cases_averted_among_people_age_5_to_14_burkina_faso",
    "expected": 1835.235545
   },
   {
-   "id": "row_27",
-   "label": "-",
+   "id": "ln_burkina_faso",
+   "label": "ln($) (Burkina Faso)",
    "section": "income_increases",
-   "formula": "sum(row_28, row_33)",
+   "formula": "sum(ln_burkina_faso_2, ln_burkina_faso_3)",
    "expected": 18441.67947
   },
   {
-   "id": "input_33",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "inputs",
    "formula": "1 / ln(2)",
    "expected": 1.442695041
   },
   {
-   "id": "row_26",
-   "label": "-",
+   "id": "units_of_value_for_long_term_income_increases_burkina_faso",
+   "label": "Units of value for long-term income increases (Burkina Faso)",
    "section": "income_increases",
-   "formula": "row_27 * input_33",
+   "formula": "ln_burkina_faso * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 26605.71952
   },
   {
-   "id": "row_25",
-   "label": "-",
+   "id": "adjustment_to_account_for_developmental_benefits_long_term_i",
+   "label": "Adjustment to account for developmental benefits (long-term income increases) (Burkina Faso)",
    "section": "cea",
-   "formula": "row_26 / row_3",
+   "formula": "units_of_value_for_long_term_income_increases_burkina_faso / units_of_value_generated_via_deaths_averted_in_the_treated_p",
    "expected": 0.3396572719,
    "format": "percent"
   },
   {
-   "id": "calc_10",
-   "label": "calc (-)",
+   "id": "mortality_reduction_in_the_vaccinated_population_burkina_fas",
+   "label": "Mortality reduction in the vaccinated population (Burkina Faso)",
    "section": "cea",
-   "formula": "1 / (1 + sum(row_20, row_25))",
+   "formula": "1 / (1 + sum(adjustment_to_account_for_mortalities_averted_among_people_a, adjustment_to_account_for_developmental_benefits_long_term_i))",
    "expected": 0.7072043175,
    "format": "percent"
   },
   {
-   "id": "input_34",
-   "label": "input",
+   "id": "malaria_morbidity",
+   "label": "Malaria morbidity",
    "section": "inputs",
    "value": 0.09,
    "kind": "estimate",
@@ -1351,22 +1352,22 @@
    "format": "percent"
   },
   {
-   "id": "input_35",
-   "label": "input",
+   "id": "short_term_anemia_effects",
+   "label": "Short-term anemia effects",
    "section": "inputs",
-   "value": 0.09,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
     "cell": "Inputs!H95"
    },
    "explainer": "GW guesstimate GW's supplemental intervention-level adjustments",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.short_term_anemia_effects",
+   "expected": 0.09
   },
   {
-   "id": "input_36",
-   "label": "input",
+   "id": "investment_of_income_increases",
+   "label": "Investment of income increases",
    "section": "inputs",
    "value": 0.05,
    "kind": "estimate",
@@ -1379,8 +1380,8 @@
    "format": "percent"
   },
   {
-   "id": "input_37",
-   "label": "input",
+   "id": "treatment_costs_averted_from_prevention",
+   "label": "Treatment costs averted from prevention",
    "section": "inputs",
    "value": 0.2,
    "kind": "estimate",
@@ -1393,8 +1394,8 @@
    "format": "percent"
   },
   {
-   "id": "input_38",
-   "label": "input",
+   "id": "serious_adverse_events_due_to_side_effects_of_treatment",
+   "label": "Serious adverse events due to side effects of treatment",
    "section": "inputs",
    "value": -0.006,
    "kind": "estimate",
@@ -1407,8 +1408,8 @@
    "format": "percent"
   },
   {
-   "id": "input_39",
-   "label": "input",
+   "id": "rebound_effects_decreased_immunity_development",
+   "label": "Rebound effects / decreased immunity development",
    "section": "inputs",
    "value": -0.04,
    "kind": "estimate",
@@ -1421,8 +1422,8 @@
    "format": "percent"
   },
   {
-   "id": "input_40",
-   "label": "input",
+   "id": "subnational_adjustments",
+   "label": "Subnational adjustments",
    "section": "inputs",
    "value": 0.032,
    "kind": "estimate",
@@ -1435,8 +1436,8 @@
    "format": "percent"
   },
   {
-   "id": "input_41",
-   "label": "input",
+   "id": "marginal_funding_goes_to_lower_priority_areas",
+   "label": "Marginal funding goes to lower priority areas",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1449,16 +1450,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_14",
-   "label": "calc",
+   "id": "adjustment_for_additional_program_benefits_and_downsides",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "cea",
-   "formula": "sum(input_34, input_35, input_36, input_37, input_38, input_39, input_40, input_41)",
+   "formula": "sum(malaria_morbidity, short_term_anemia_effects, investment_of_income_increases, treatment_costs_averted_from_prevention, serious_adverse_events_due_to_side_effects_of_treatment, rebound_effects_decreased_immunity_development, subnational_adjustments, marginal_funding_goes_to_lower_priority_areas)",
    "expected": 0.416,
    "format": "percent"
   },
   {
-   "id": "input_42",
-   "label": "input",
+   "id": "double_treatment",
+   "label": "Double treatment",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1471,8 +1472,8 @@
    "format": "percent"
   },
   {
-   "id": "input_43",
-   "label": "input",
+   "id": "ineffective_goods",
+   "label": "Ineffective goods",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1485,8 +1486,8 @@
    "format": "percent"
   },
   {
-   "id": "input_44",
-   "label": "input",
+   "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d",
+   "label": "Goods purchased and left in storage until they expire / cash doesn't receive recipients or is taken back from them inappropriately",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1499,8 +1500,8 @@
    "format": "percent"
   },
   {
-   "id": "input_45",
-   "label": "input",
+   "id": "misappropriation_without_monitoring_results",
+   "label": "Misappropriation without monitoring results",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1513,8 +1514,8 @@
    "format": "percent"
   },
   {
-   "id": "input_46",
-   "label": "input",
+   "id": "false_monitoring_results",
+   "label": "False monitoring results",
    "section": "inputs",
    "value": -0.02,
    "kind": "estimate",
@@ -1527,8 +1528,8 @@
    "format": "percent"
   },
   {
-   "id": "input_47",
-   "label": "input",
+   "id": "change_of_priorities",
+   "label": "Change of priorities",
    "section": "inputs",
    "value": -0.02,
    "kind": "estimate",
@@ -1541,8 +1542,8 @@
    "format": "percent"
   },
   {
-   "id": "input_48",
-   "label": "input",
+   "id": "non_funding_bottlenecks",
+   "label": "Non-funding bottlenecks",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1555,8 +1556,8 @@
    "format": "percent"
   },
   {
-   "id": "input_49",
-   "label": "input",
+   "id": "within_org_fungibility",
+   "label": "Within-org fungibility",
    "section": "inputs",
    "value": -0.05,
    "kind": "estimate",
@@ -1569,41 +1570,41 @@
    "format": "percent"
   },
   {
-   "id": "calc_15",
-   "label": "calc",
+   "id": "adjustment_for_charity_level_factors",
+   "label": "Adjustment for charity-level factors",
    "section": "cea",
-   "formula": "sum(input_42, input_43, input_44, input_45, input_46, input_47, input_48, input_49)",
+   "formula": "sum(double_treatment, ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d, misappropriation_without_monitoring_results, false_monitoring_results, change_of_priorities, non_funding_bottlenecks, within_org_fungibility)",
    "expected": -0.09,
    "format": "percent"
   },
   {
-   "id": "input_50",
-   "label": "input",
+   "id": "grant_size_3",
+   "label": "Grant size",
    "section": "leveragefunging",
-   "formula": "input_20",
+   "formula": "grant_size_2",
    "expected": 18200000.0,
    "format": "usd"
   },
   {
-   "id": "row_46",
-   "label": "-",
+   "id": "supp_burkina_faso_4",
+   "label": "supp (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_18",
+   "formula": "rough_share_of_total_grant_allocated_to_each_country_burkina",
    "expected": 0.15,
    "format": "percent"
   },
   {
-   "id": "row_48",
-   "label": "-",
+   "id": "main_burkina_faso",
+   "label": "main (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_2",
+   "formula": "units_of_value_generated_per_dollar_before_final_adjustments",
    "expected": 0.02869270176
   },
   {
-   "id": "row_49",
-   "label": "-",
+   "id": "main_burkina_faso_2",
+   "label": "main (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "sum(row_20, row_25)",
+   "formula": "sum(adjustment_to_account_for_mortalities_averted_among_people_a, adjustment_to_account_for_developmental_benefits_long_term_i)",
    "expected": 0.4140185167,
    "format": "percent"
   },
@@ -1611,7 +1612,7 @@
    "id": "main",
    "label": "main",
    "section": "leveragefunging",
-   "formula": "calc_15",
+   "formula": "adjustment_for_charity_level_factors",
    "expected": -0.09,
    "format": "percent"
   },
@@ -1619,20 +1620,20 @@
    "id": "main_2",
    "label": "main",
    "section": "leveragefunging",
-   "formula": "calc_14",
+   "formula": "adjustment_for_additional_program_benefits_and_downsides",
    "expected": 0.416,
    "format": "percent"
   },
   {
-   "id": "row_47",
-   "label": "-",
+   "id": "units_of_value_generated_per_dollar_donated_to_grantee_after",
+   "label": "Units of value generated per dollar donated to grantee (after supplemental adjustments) (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_48 * (1 + row_49) * (1 + main) * (1 + main_2)",
+   "formula": "main_burkina_faso * (1 + main_burkina_faso_2) * (1 + main) * (1 + main_2)",
    "expected": 0.05227947125
   },
   {
-   "id": "input_52",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
+   "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "inputs",
    "value": 0.015433,
    "kind": "estimate",
@@ -1644,15 +1645,15 @@
    "explainer": "GW analysis GW's analysis of the counterfactual value of Global Fund spending"
   },
   {
-   "id": "input_51",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
+   "label": "Counterfactual value per dollar spent by the Global Fund or PMI",
    "section": "leveragefunging",
-   "formula": "input_52",
+   "formula": "counterfactual_value_per_dollar_spent_by_the_global_fund_or_2",
    "expected": 0.015433
   },
   {
-   "id": "input_53",
-   "label": "input",
+   "id": "scenario_2_other_actor_s_would_replace_the_grantee_s_costs",
+   "label": "Scenario 2: Other actor(s) would replace the grantee's costs",
    "section": "leveragefunging",
    "value": 0.2,
    "kind": "estimate",
@@ -1664,38 +1665,38 @@
    "format": "percent"
   },
   {
-   "id": "row_45",
-   "label": "-",
+   "id": "the_global_fund_and_or_pmi_would_fund_the_program_funging_bu",
+   "label": "The Global Fund and/or PMI would fund the program (funging) (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "-(input_50 * row_46) * (row_47 - input_51) * input_53",
+   "formula": "-(grant_size_3 * supp_burkina_faso_4) * (units_of_value_generated_per_dollar_donated_to_grantee_after - counterfactual_value_per_dollar_spent_by_the_global_fund_or) * scenario_2_other_actor_s_would_replace_the_grantee_s_costs",
    "expected": -20118.1733
   },
   {
-   "id": "calc_16",
-   "label": "calc",
+   "id": "scenario_4_distributions_would_go_unfunded",
+   "label": "Scenario 4: Distributions would go unfunded",
    "section": "leveragefunging",
-   "formula": "1 - sum(input_53)",
+   "formula": "1 - sum(scenario_2_other_actor_s_would_replace_the_grantee_s_costs)",
    "expected": 0.8,
    "format": "percent"
   },
   {
-   "id": "input_54",
-   "label": "input",
+   "id": "percentage_of_children_that_receive_four_doses_relative_to_t_3",
+   "label": "Percentage of children that receive four doses (relative to those who receive only three)",
    "section": "costs",
-   "formula": "input_4",
+   "formula": "percentage_of_children_that_receive_four_doses_relative_to_t_2",
    "expected": 0.6,
    "format": "percent"
   },
   {
-   "id": "calc_17",
-   "label": "calc",
+   "id": "average_number_of_doses_received_by_each_child_who_receives",
+   "label": "Average number of doses received by each child who receives at least 3 doses",
    "section": "costs",
-   "formula": "3 + input_54",
+   "formula": "3 + percentage_of_children_that_receive_four_doses_relative_to_t_3",
    "expected": 3.6
   },
   {
-   "id": "row_57",
-   "label": "-",
+   "id": "cost_per_dose_of_vaccine_burkina_faso_2",
+   "label": "Cost per dose of vaccine (Burkina Faso)",
    "section": "inputs",
    "value": 9.81,
    "kind": "estimate",
@@ -1708,40 +1709,40 @@
    "format": "usd"
   },
   {
-   "id": "row_56",
-   "label": "-",
+   "id": "cost_per_dose_of_vaccine_burkina_faso",
+   "label": "Cost per dose of vaccine (Burkina Faso)",
    "section": "costs",
-   "formula": "row_57",
+   "formula": "cost_per_dose_of_vaccine_burkina_faso_2",
    "expected": 9.81,
    "format": "usd"
   },
   {
-   "id": "row_55",
-   "label": "-",
+   "id": "total_vaccine_costs_per_child_vaccinated_burkina_faso",
+   "label": "Total vaccine costs per child vaccinated (Burkina Faso)",
    "section": "costs",
-   "formula": "calc_17 * row_56",
+   "formula": "average_number_of_doses_received_by_each_child_who_receives * cost_per_dose_of_vaccine_burkina_faso",
    "expected": 35.316,
    "format": "usd"
   },
   {
-   "id": "row_60",
-   "label": "-",
+   "id": "cost_per_dose_paid_by_countries_with_gavi_initial_self_finan_2",
+   "label": "Cost per dose paid by countries with Gavi initial self-financing status (Burkina Faso)",
    "section": "inputs",
    "formula": "min(0.2)",
    "expected": 0.2,
    "format": "usd"
   },
   {
-   "id": "row_59",
-   "label": "-",
+   "id": "cost_per_dose_paid_by_countries_with_gavi_initial_self_finan",
+   "label": "Cost per dose paid by countries with Gavi initial self-financing status (Burkina Faso)",
    "section": "costs",
-   "formula": "row_60",
+   "formula": "cost_per_dose_paid_by_countries_with_gavi_initial_self_finan_2",
    "expected": 0.2,
    "format": "usd"
   },
   {
-   "id": "row_62",
-   "label": "-",
+   "id": "cost_per_dose_paid_by_countries_with_gavi_accelerated_transi_2",
+   "label": "Cost per dose paid by countries with Gavi accelerated transition status (Burkina Faso)",
    "section": "inputs",
    "value": 0.0,
    "kind": "estimate",
@@ -1754,96 +1755,96 @@
    "format": "percent"
   },
   {
-   "id": "row_61",
-   "label": "-",
+   "id": "cost_per_dose_paid_by_countries_with_gavi_accelerated_transi",
+   "label": "Cost per dose paid by countries with Gavi accelerated transition status (Burkina Faso)",
    "section": "costs",
-   "formula": "row_62",
+   "formula": "cost_per_dose_paid_by_countries_with_gavi_accelerated_transi_2",
    "expected": 0.0,
    "format": "percent"
   },
   {
-   "id": "row_58",
-   "label": "-",
+   "id": "vaccine_costs_per_child_vaccinated_borne_by_domestic_governm",
+   "label": "Vaccine costs per child vaccinated borne by domestic governments (Burkina Faso)",
    "section": "costs",
-   "formula": "row_59 * calc_17 + row_61 * row_56 * calc_17",
+   "formula": "cost_per_dose_paid_by_countries_with_gavi_initial_self_finan * average_number_of_doses_received_by_each_child_who_receives + cost_per_dose_paid_by_countries_with_gavi_accelerated_transi * cost_per_dose_of_vaccine_burkina_faso * average_number_of_doses_received_by_each_child_who_receives",
    "expected": 0.72,
    "format": "usd"
   },
   {
-   "id": "row_54",
-   "label": "-",
+   "id": "cost_per_child_vaccinated_gavi_burkina_faso",
+   "label": "Cost per child vaccinated , Gavi (Burkina Faso)",
    "section": "costs",
-   "formula": "row_55 - row_58",
+   "formula": "total_vaccine_costs_per_child_vaccinated_burkina_faso - vaccine_costs_per_child_vaccinated_borne_by_domestic_governm",
    "expected": 34.596,
    "format": "usd"
   },
   {
-   "id": "input_56",
-   "label": "input",
+   "id": "cost_per_child_vaccinated_domestic_governments_excluding_vac_2",
+   "label": "Cost per child vaccinated, domestic governments (excluding vaccine costs)",
    "section": "inputs",
    "formula": "avg(7.5, 9)",
    "expected": 8.25,
    "format": "usd"
   },
   {
-   "id": "input_55",
-   "label": "input",
+   "id": "cost_per_child_vaccinated_domestic_governments_excluding_vac",
+   "label": "Cost per child vaccinated, domestic governments (excluding vaccine costs)",
    "section": "costs",
-   "formula": "input_56",
+   "formula": "cost_per_child_vaccinated_domestic_governments_excluding_vac_2",
    "expected": 8.25,
    "format": "usd"
   },
   {
-   "id": "row_63",
-   "label": "-",
+   "id": "costs_per_child_vaccinated_domestic_governments_including_co",
+   "label": "Costs per child vaccinated, domestic governments (including co-financing vaccines) (Burkina Faso)",
    "section": "costs",
-   "formula": "input_55 + row_58",
+   "formula": "cost_per_child_vaccinated_domestic_governments_excluding_vac + vaccine_costs_per_child_vaccinated_borne_by_domestic_governm",
    "expected": 8.97,
    "format": "usd"
   },
   {
-   "id": "row_53",
-   "label": "-",
+   "id": "total_annual_costs_per_child_all_actors_burkina_faso",
+   "label": "Total annual costs per child, all actors (Burkina Faso)",
    "section": "costs",
-   "formula": "row_54 + row_63 + calc_9",
+   "formula": "cost_per_child_vaccinated_gavi_burkina_faso + costs_per_child_vaccinated_domestic_governments_including_co + costs_per_child_vaccinated_path_burkina_faso",
    "expected": 64.09760152,
    "format": "usd"
   },
   {
-   "id": "row_52",
-   "label": "-",
+   "id": "percentage_of_total_costs_borne_by_grantee_burkina_faso",
+   "label": "Percentage of total costs borne by grantee (Burkina Faso)",
    "section": "costs",
-   "formula": "calc_9 / row_53",
+   "formula": "costs_per_child_vaccinated_path_burkina_faso / total_annual_costs_per_child_all_actors_burkina_faso",
    "expected": 0.3203177815,
    "format": "percent"
   },
   {
-   "id": "row_51",
-   "label": "-",
+   "id": "supp_burkina_faso_5",
+   "label": "supp (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_52",
+   "formula": "percentage_of_total_costs_borne_by_grantee_burkina_faso",
    "expected": 0.3203177815,
    "format": "percent"
   },
   {
-   "id": "row_65",
-   "label": "-",
+   "id": "percentage_of_total_costs_borne_by_domestic_governments_burk",
+   "label": "Percentage of total costs borne by domestic governments (Burkina Faso)",
    "section": "costs",
-   "formula": "row_63 / row_53",
+   "formula": "costs_per_child_vaccinated_domestic_governments_including_co / total_annual_costs_per_child_all_actors_burkina_faso",
    "expected": 0.1399428339,
    "format": "percent"
   },
   {
-   "id": "row_64",
-   "label": "-",
+   "id": "supp_burkina_faso_6",
+   "label": "supp (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_65",
+   "formula": "percentage_of_total_costs_borne_by_domestic_governments_burk",
    "expected": 0.1399428339,
    "format": "percent"
   },
   {
-   "id": "input_58",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
+   "label": "Counterfactual value per dollar spent by domestic governments",
    "section": "inputs",
    "value": 0.0051,
    "kind": "estimate",
@@ -1855,31 +1856,31 @@
    "explainer": "GW analysis GW's analysis of the counterfactual value of other actors' spending"
   },
   {
-   "id": "input_57",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
+   "label": "Counterfactual value per dollar spent by domestic governments",
    "section": "leveragefunging",
-   "formula": "input_58",
+   "formula": "counterfactual_value_per_dollar_spent_by_domestic_government_2",
    "expected": 0.0051
   },
   {
-   "id": "row_67",
-   "label": "-",
+   "id": "percentage_of_total_costs_borne_by_gavi_burkina_faso",
+   "label": "Percentage of total costs borne by Gavi (Burkina Faso)",
    "section": "costs",
-   "formula": "row_54 / row_53",
+   "formula": "cost_per_child_vaccinated_gavi_burkina_faso / total_annual_costs_per_child_all_actors_burkina_faso",
    "expected": 0.5397393846,
    "format": "percent"
   },
   {
-   "id": "row_66",
-   "label": "-",
+   "id": "supp_burkina_faso_7",
+   "label": "supp (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_67",
+   "formula": "percentage_of_total_costs_borne_by_gavi_burkina_faso",
    "expected": 0.5397393846,
    "format": "percent"
   },
   {
-   "id": "input_60",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_gavi_2",
+   "label": "Counterfactual value per dollar spent by Gavi",
    "section": "inputs",
    "value": 0.007,
    "kind": "estimate",
@@ -1891,54 +1892,54 @@
    "explainer": "GW analysis GW's analysis of the counterfactual value of other actors' spending"
   },
   {
-   "id": "input_59",
-   "label": "input",
+   "id": "counterfactual_value_per_dollar_spent_by_gavi",
+   "label": "Counterfactual value per dollar spent by Gavi",
    "section": "leveragefunging",
-   "formula": "input_60",
+   "formula": "counterfactual_value_per_dollar_spent_by_gavi_2",
    "expected": 0.007
   },
   {
-   "id": "row_50",
-   "label": "-",
+   "id": "nobody_would_fund_the_program_leverage_burkina_faso",
+   "label": "Nobody would fund the program (leverage) (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "-calc_16 * row_46 * input_50 / row_51 * (row_64 * input_57 + row_66 * input_59)",
+   "formula": "-scenario_4_distributions_would_go_unfunded * supp_burkina_faso_4 * grant_size_3 / supp_burkina_faso_5 * (supp_burkina_faso_6 * counterfactual_value_per_dollar_spent_by_domestic_government + supp_burkina_faso_7 * counterfactual_value_per_dollar_spent_by_gavi)",
    "expected": -30626.69492
   },
   {
-   "id": "row_44",
-   "label": "-",
+   "id": "total_change_in_value_burkina_faso",
+   "label": "Total change in value (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "sum(row_45, row_50)",
+   "formula": "sum(the_global_fund_and_or_pmi_would_fund_the_program_funging_bu, nobody_would_fund_the_program_leverage_burkina_faso)",
    "expected": -50744.86822
   },
   {
-   "id": "row_43",
-   "label": "-",
+   "id": "adjustment_for_leverage_and_funging_burkina_faso",
+   "label": "Adjustment for leverage and funging (Burkina Faso)",
    "section": "leveragefunging",
-   "formula": "row_44 / (input_50 * row_46 * row_47)",
+   "formula": "total_change_in_value_burkina_faso / (grant_size_3 * supp_burkina_faso_4 * units_of_value_generated_per_dollar_donated_to_grantee_after)",
    "expected": -0.3555480454,
    "format": "percent"
   },
   {
-   "id": "supp_5",
-   "label": "supp (-)",
+   "id": "supp_burkina_faso_3",
+   "label": "supp (Burkina Faso)",
    "section": "cea",
-   "formula": "row_43",
+   "formula": "adjustment_for_leverage_and_funging_burkina_faso",
    "expected": -0.3555480454,
    "format": "percent"
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
+   "label": "Final cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (Burkina Faso)",
    "section": "cea",
-   "formula": "calc / calc_10 * (1 + calc_14) * (1 + calc_15) * (1 + supp_5)",
+   "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire / mortality_reduction_in_the_vaccinated_population_burkina_fas * (1 + adjustment_for_additional_program_benefits_and_downsides) * (1 + adjustment_for_charity_level_factors) * (1 + supp_burkina_faso_3)",
    "expected": 10.0437047
   },
   {
-   "id": "feed_burkina_faso",
-   "label": "feed (Burkina Faso)",
+   "id": "final_cost_effectiveness_estimate_pulled_from_below_for_visi",
+   "label": "Final cost-effectiveness estimate (pulled from below for visibility) (Burkina Faso)",
    "section": "cea",
-   "formula": "row",
+   "formula": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
    "expected": 10.0437047
   },
   {
@@ -1957,7 +1958,7 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "feed_burkina_faso * cash_benchmark"
+   "formula": "final_cost_effectiveness_estimate_pulled_from_below_for_visi * cash_benchmark"
   }
  ],
  "output": {

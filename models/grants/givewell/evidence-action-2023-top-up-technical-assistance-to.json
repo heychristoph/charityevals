@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -1437,14 +1439,14 @@
    "id": "likelihood_of_maternal_syphilis_case_resulting_in_stillbirth_2",
    "label": "Likelihood of maternal syphilis case resulting in stillbirth or miscarriage",
    "section": "treatment_effects",
-   "value": 0.256,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1CzcdhfViB1dTDraOT5sFBMxWYV3gYbZ0EBH0tw75UyA/edit",
     "cell": "Treatment effects!C3"
    },
-   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222."
+   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222.",
+   "formula": "@givewell.likelihood_of_maternal_syphilis_case_resulting_in_stillbirth",
+   "expected": 0.256
   },
   {
    "id": "percent_of_reactive_non_treponemal_tests_that_are_probable_a_2",
@@ -1645,21 +1647,22 @@
    "id": "discount_rate_for_benefits_in_first_10_years_best_guess",
    "label": "Discount rate for benefits in first 10 years (Best guess)",
    "section": "assumptions",
-   "value": 0.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1CzcdhfViB1dTDraOT5sFBMxWYV3gYbZ0EBH0tw75UyA/edit",
     "cell": "Assumptions!C56"
    },
-   "explainer": "See here for our reasoning for not discounting the benefits."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.\n\nSee here for our reasoning for not discounting the benefits.",
+   "formula": "$discount_rate",
+   "expected": 0.0
   },
   {
    "id": "discount_rate_for_benefits_in_first_10_years",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_2",
@@ -1861,8 +1864,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_2",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_6",
@@ -1980,8 +1984,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_3",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_10",
@@ -2099,8 +2104,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_4",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_14",
@@ -2218,8 +2224,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_5",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_18",
@@ -2330,8 +2337,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_6",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_22",
@@ -2365,14 +2373,14 @@
    "id": "proportion_of_combined_outcome_of_stillbirths_and_miscarriag",
    "label": "Proportion of combined outcome of \"stillbirths and miscarriages\" that are miscarriages",
    "section": "results_top_up",
-   "value": 0.52,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1CzcdhfViB1dTDraOT5sFBMxWYV3gYbZ0EBH0tw75UyA/edit",
     "cell": "Results Top-up!B17"
    },
-   "explainer": "The literature reports on the combined outcome of \"stillbirths and miscarriages.\" See here for our estimate of the proportion of this combined outcome that are actually miscarriages."
+   "explainer": "The literature reports on the combined outcome of \"stillbirths and miscarriages.\" See here for our estimate of the proportion of this combined outcome that are actually miscarriages.",
+   "formula": "@givewell.proportion_of_combined_outcome_of_stillbirths_and_miscarriag",
+   "expected": 0.52
   },
   {
    "id": "units_of_value_averting_miscarriage",
@@ -2623,13 +2631,14 @@
    "id": "units_of_value_averting_neonatal_death",
    "label": "Units of value - averting neonatal death",
    "section": "results_top_up",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1CzcdhfViB1dTDraOT5sFBMxWYV3gYbZ0EBH0tw75UyA/edit",
     "cell": "Results Top-up!B19"
-   }
+   },
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6,
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "likelihood_of_maternal_syphilis_case_resulting_in_congenital_2",
@@ -3198,7 +3207,7 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_3",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs_march_2024",
    "formula": "additional_women_screened_for_syphilis * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 83092.83318
@@ -3212,7 +3221,7 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_4",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs_march_2024",
    "formula": "additional_women_screened_for_syphilis_2 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 53907.95846
@@ -3226,7 +3235,7 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_5",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs_march_2024",
    "formula": "additional_women_screened_for_syphilis_3 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
@@ -3240,7 +3249,7 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_6",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs_march_2024",
    "formula": "additional_women_screened_for_syphilis_4 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
@@ -3254,7 +3263,7 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_7",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs_march_2024",
    "formula": "additional_women_screened_for_syphilis_5 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
@@ -3288,35 +3297,35 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_3",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs_march_2024",
    "formula": "dual_hiv_syphilis_rapid_tests_3 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 24927.84995
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_4",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs_march_2024",
    "formula": "dual_hiv_syphilis_rapid_tests_4 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 16172.38754
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_5",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs_march_2024",
    "formula": "dual_hiv_syphilis_rapid_tests_5 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_6",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs_march_2024",
    "formula": "dual_hiv_syphilis_rapid_tests_6 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_7",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs_march_2024",
    "formula": "dual_hiv_syphilis_rapid_tests_7 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0

@@ -5,32 +5,32 @@ Scales proven programs: Deworm the World, Dispensers for Safe Water, in-line chl
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CEA for Evidence Action Syphilis Screening and Treatment in Pregnancy in Zambia foreign aid gap filling grants (March 2025)](/evidence-action) | GW | March 2025 | 12× GiveDirectly (GW: 30× cash) | 54 |
-| [IFA in Bihar and Uttar Pradesh BOTEC [July 2024]](/evidence-action/evidence-action-ifa-in-bihar-uttar-pradesh-july-2024) | GW | February 2025 | 6.6× GiveDirectly (GW: 17× cash) | 58, 11 kept fixed |
-| [CEA of 2023 top-up grant - Evidence Action technical assistance to Liberia for syphilis screening and treatment](/evidence-action/evidence-action-2023-top-up-technical-assistance-to) | GW | April 2024 | 6.2× GiveDirectly (GW: 16× cash) | 310 |
-| [Cost-effectiveness analysis for Deworm the World [2024 renewal]](/evidence-action/evidence-action-deworm-world-2024-renewal) | GW | March 2024 | 13× GiveDirectly (GW: 34× cash) | 58, 1 kept fixed |
-| [Iron and folic acid supplementation CEA, India [Feb 2023]](/evidence-action/evidence-action-iron-folic-acid-supplementation-india) | GW | January 2024 | 5.2× GiveDirectly (GW: 14× cash) | 322, 3 kept fixed |
-| [In-line Chlorination CEA (Evidence Action, India), 2023](/evidence-action/evidence-action-in-line-chlorination-india-2023) | GW | September 2023 | 8.3× GiveDirectly (GW: 22× cash) | 6047, 159 kept fixed |
-| [India Water Pilot Expansion BOTEC, 2023](/evidence-action/evidence-action-india-water-pilot-expansion-2023) | GW | July 2023 | 4.2× GiveDirectly (GW: 11× cash) | 23 |
+| [CEA for Evidence Action Syphilis Screening and Treatment in Pregnancy in Zambia foreign aid gap filling grants (March 2025)](/evidence-action) | GW | March 2025 | 12× GiveDirectly (GW: 30× cash) | 56 |
+| [IFA in Bihar and Uttar Pradesh BOTEC [July 2024]](/evidence-action/evidence-action-ifa-in-bihar-uttar-pradesh-july-2024) | GW | February 2025 | 6.6× GiveDirectly (GW: 17× cash) | 59, 11 kept fixed |
+| [CEA of 2023 top-up grant - Evidence Action technical assistance to Liberia for syphilis screening and treatment](/evidence-action/evidence-action-2023-top-up-technical-assistance-to) | GW | April 2024 | 6.2× GiveDirectly (GW: 16× cash) | 314 |
+| [Cost-effectiveness analysis for Deworm the World [2024 renewal]](/evidence-action/evidence-action-deworm-world-2024-renewal) | GW | March 2024 | 13× GiveDirectly (GW: 34× cash) | 60, 1 kept fixed |
+| [Iron and folic acid supplementation CEA, India [Feb 2023]](/evidence-action/evidence-action-iron-folic-acid-supplementation-india) | GW | January 2024 | 5.2× GiveDirectly (GW: 14× cash) | 336, 3 kept fixed |
+| [In-line Chlorination CEA (Evidence Action, India), 2023](/evidence-action/evidence-action-in-line-chlorination-india-2023) | GW | September 2023 | 8.3× GiveDirectly (GW: 22× cash) | 6069, 159 kept fixed |
+| [India Water Pilot Expansion BOTEC, 2023](/evidence-action/evidence-action-india-water-pilot-expansion-2023) | GW | July 2023 | 4.2× GiveDirectly (GW: 11× cash) | 24 |
 | [Cost-effectiveness of January 2023 Deworm the World Renewal Grant](/evidence-action/evidence-action-cost-effectiveness-january-2023-deworm) | GW | January 2023 | 6.0× GiveDirectly (GW: 16× cash) | 2 |
-| [Evidence Action IFA supplementation CEA [2022]](/evidence-action/evidence-action-ifa-supplementation-2022) | GW | August 2022 | 4.4× GiveDirectly (GW: 11× cash) | 313 |
-| [Maternal syphilis cost-effectiveness analysis for Zambia and Cameroon](/evidence-action/evidence-action-maternal-syphilis-zambia-cameroon) | GW | July 2022 | 11× GiveDirectly (GW: 29× cash) | 116 |
-| [Water quality cost-effectiveness analysis [Nov 2022]](/evidence-action/evidence-action-water-quality-nov-2022) | GW | July 2022 | 3.2× GiveDirectly (GW: 8.5× cash) | 300, 7 kept fixed |
-| [Water quality CEA (ILC and DSW) with lower medical costs averted](/evidence-action/evidence-action-water-quality-ilc-dsw-with-lower) | GW | January 2022 | 1.9× GiveDirectly (GW: 5.0× cash) | 424, 17 kept fixed |
-| [Water quality CEA (ILC and DSW)](/evidence-action/evidence-action-water-quality-ilc-dsw) | GW | January 2022 | 2.5× GiveDirectly (GW: 6.6× cash) | 544, 17 kept fixed |
+| [Evidence Action IFA supplementation CEA [2022]](/evidence-action/evidence-action-ifa-supplementation-2022) | GW | August 2022 | 4.4× GiveDirectly (GW: 11× cash) | 329 |
+| [Maternal syphilis cost-effectiveness analysis for Zambia and Cameroon](/evidence-action/evidence-action-maternal-syphilis-zambia-cameroon) | GW | July 2022 | 11× GiveDirectly (GW: 29× cash) | 119 |
+| [Water quality cost-effectiveness analysis [Nov 2022]](/evidence-action/evidence-action-water-quality-nov-2022) | GW | July 2022 | 3.2× GiveDirectly (GW: 8.5× cash) | 355, 7 kept fixed |
+| [Water quality CEA (ILC and DSW) with lower medical costs averted](/evidence-action/evidence-action-water-quality-ilc-dsw-with-lower) | GW | January 2022 | 1.9× GiveDirectly (GW: 5.0× cash) | 580, 17 kept fixed |
+| [Water quality CEA (ILC and DSW)](/evidence-action/evidence-action-water-quality-ilc-dsw) | GW | January 2022 | 2.5× GiveDirectly (GW: 6.6× cash) | 703, 17 kept fixed |
 | [Evidence Action Accelerator Renewal BOTEC (November 2021)](/evidence-action/evidence-action-accelerator-renewal-november-2021) | GW | December 2021 | 9.1× GiveDirectly (GW: 24× cash) | 1, 1 kept fixed |
-| [Cost-effectiveness analysis of Dispensers for Safe Water based on larger effects of chlorination, 2020](/evidence-action/evidence-action-dispensers-safe-water-based-on-larger) | GW | September 2020 | 0.71× GiveDirectly (GW: 1.8× cash) | 19 |
+| [Cost-effectiveness analysis of Dispensers for Safe Water based on larger effects of chlorination, 2020](/evidence-action/evidence-action-dispensers-safe-water-based-on-larger) | GW | September 2020 | 0.71× GiveDirectly (GW: 1.8× cash) | 20 |
 | [Syphilis screen and treat in pregnant women cost-effectiveness analysis](/evidence-action/evidence-action-syphilis-screen-treat-in-pregnant-women) | GW | August 2020 | 0.65× GiveDirectly | 22, 1 kept fixed |
-| [CEA of Evidence Action technical assistance to Liberia for syphilis screening and treatment](/evidence-action/evidence-action-technical-assistance-to-liberia) | GW | August 2020 | 4.6× GiveDirectly (GW: 12× cash) | 534, 20 kept fixed |
-| [Phase 2 IFA model (with updated iron supplementation model)](/evidence-action/evidence-action-phase-2-ifa-model-with-updated-iron) | GW | December 2018 | 0.38× GiveDirectly (GW: 0.99× cash) | 112, 1 kept fixed |
+| [CEA of Evidence Action technical assistance to Liberia for syphilis screening and treatment](/evidence-action/evidence-action-technical-assistance-to-liberia) | GW | August 2020 | 4.6× GiveDirectly (GW: 12× cash) | 538, 20 kept fixed |
+| [Phase 2 IFA model (with updated iron supplementation model)](/evidence-action/evidence-action-phase-2-ifa-model-with-updated-iron) | GW | December 2018 | 0.38× GiveDirectly (GW: 0.99× cash) | 125, 1 kept fixed |
 | [Rough cost-effectiveness analysis of Evidence Action Beta](/evidence-action/evidence-action-rough-beta) | GW | July 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 65, 6 kept fixed |
-| [IFA CEA for EvAc Beta India grant](/evidence-action/evidence-action-ifa-evac-beta-india) | GW | March 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 42, 1 kept fixed |
+| [IFA CEA for EvAc Beta India grant](/evidence-action/evidence-action-ifa-evac-beta-india) | GW | March 2018 | 3.4× GiveDirectly (GW: 8.7× cash) | 55, 1 kept fixed |
 | [Evidence Action India BOTEC](/evidence-action/evidence-action-india) | GW | March 2018 | 4.8× GiveDirectly (GW: 13× cash) | 14 |
 | [Quick NLS CEA calcs](/evidence-action/evidence-action-quick-nls-calcs) | GW | December 2016 | 1.9× GiveDirectly (GW: 4.9× cash) | 3 |
 
@@ -38,10 +38,10 @@ Grants, renewals and research grants each came with their own spreadsheet, so a 
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

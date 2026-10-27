@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -248,14 +249,14 @@
    "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
    "label": "Ratio of indirect malaria deaths per direct malaria death",
    "section": "units_of_value_with_different_e",
-   "value": 0.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Units of value with different e!B70"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
+   "expected": 0.5
   },
   {
    "id": "malaria_attributable_deaths_in_target_population_per_1_000_c",
@@ -290,13 +291,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
    "label": "Value assigned to averting the death of an individual under 5 from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 116.252615789931,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Moral weights and discount rate!C8"
-   }
+   },
+   "formula": "116.252615789931 * $life_value_multiplier",
+   "expected": 116.252615789931,
+   "explainer": "GiveWell's moral weight, 116.252615789931 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -316,27 +318,27 @@
    "id": "reduction_in_malaria_incidence_for_untreated_population_in_c",
    "label": "Reduction in malaria incidence for untreated population in Cisse et al. 2016",
    "section": "units_of_value_with_different_e",
-   "value": 0.26,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Units of value with different e!B82"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_for_untreated_population_in_c",
+   "expected": 0.26
   },
   {
    "id": "reduction_in_malaria_incidence_for_treated_population_in_cis",
    "label": "Reduction in malaria incidence for treated population in Cisse et al. 2016",
    "section": "units_of_value_with_different_e",
-   "value": 0.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Units of value with different e!B81"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.reduction_in_malaria_incidence_for_treated_population_in_cis",
+   "expected": 0.6
   },
   {
    "id": "unadjusted_expected_reduction_in_malaria_cases_in_untreated",
@@ -432,13 +434,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
    "label": "Value assigned to averting the death of an individual 5 or older from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 73.1914046254006,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Moral weights and discount rate!C9"
-   }
+   },
+   "formula": "73.1914046254006 * $life_value_multiplier",
+   "expected": 73.1914046254006,
+   "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -805,14 +808,14 @@
    "id": "short_term_anemia_effects",
    "label": "Short-term anemia effects",
    "section": "units_of_value_with_different_e",
-   "value": 0.09,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
     "cell": "Units of value with different e!B175"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.short_term_anemia_effects",
+   "expected": 0.09
   },
   {
    "id": "investment_of_income_increases",

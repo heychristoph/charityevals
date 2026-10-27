@@ -20,7 +20,11 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 1.0,
+   "discount_rate": 0.04,
+   "uov_per_ln_consumption": 0.4,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -134,8 +138,8 @@
    "format": "usd"
   },
   {
-   "id": "cost_for_ta_calculation",
-   "label": "Cost for TA (Calculation)",
+   "id": "cost_for_ta_assumption",
+   "label": "Cost for TA (Assumption)",
    "section": "beta_ifa_cea",
    "formula": "costs_of_ta_including_relevant_overhead_annual_for_2_states",
    "expected": 2401730.0,
@@ -495,41 +499,41 @@
    "expected": 862186.2
   },
   {
-   "id": "population_targeted_calculation",
-   "label": "Population targeted (Calculation)",
+   "id": "population_targeted_assumption",
+   "label": "Population targeted (Assumption)",
    "section": "beta_ifa_cea",
    "formula": "number_of_kids_targeted_in_relevant_region_total",
    "expected": 28739540.0
   },
   {
-   "id": "coverage_with_ta_calculation",
-   "label": "Coverage with TA (Calculation)",
+   "id": "coverage_with_ta_assumption",
+   "label": "Coverage with TA (Assumption)",
    "section": "beta_ifa_cea",
    "formula": "coverage_with_ta + increase_in_coverage_per_year_with_ta_in_percentage_points",
    "expected": 0.3997365758,
    "format": "percent"
   },
   {
-   "id": "coverage_without_ta_calculation",
-   "label": "Coverage without TA (Calculation)",
+   "id": "coverage_without_ta_assumption",
+   "label": "Coverage without TA (Assumption)",
    "section": "beta_ifa_cea",
    "formula": "coverage_without_ta + increase_in_coverage_per_year_without_ta_in_percentage_point",
    "expected": 0.3397365758,
    "format": "percent"
   },
   {
-   "id": "coverage_increase_due_to_ta_calculation",
-   "label": "Coverage increase due to TA (Calculation)",
+   "id": "coverage_increase_due_to_ta_assumption",
+   "label": "Coverage increase due to TA (Assumption)",
    "section": "beta_ifa_cea",
-   "formula": "coverage_with_ta_calculation - coverage_without_ta_calculation",
+   "formula": "coverage_with_ta_assumption - coverage_without_ta_assumption",
    "expected": 0.06,
    "format": "percent"
   },
   {
-   "id": "increase_in_person_years_of_coverage_due_to_ta_calculation",
-   "label": "Increase in person-years of coverage due to TA (Calculation)",
+   "id": "increase_in_person_years_of_coverage_due_to_ta_assumption",
+   "label": "Increase in person-years of coverage due to TA (Assumption)",
    "section": "beta_ifa_cea",
-   "formula": "population_targeted_calculation * coverage_increase_due_to_ta_calculation",
+   "formula": "population_targeted_assumption * coverage_increase_due_to_ta_assumption",
    "expected": 1724372.4
   },
   {
@@ -543,7 +547,7 @@
    "id": "coverage_with_ta_2",
    "label": "Coverage with TA",
    "section": "beta_ifa_cea",
-   "formula": "coverage_with_ta_calculation + increase_in_coverage_per_year_with_ta_in_percentage_points",
+   "formula": "coverage_with_ta_assumption + increase_in_coverage_per_year_with_ta_in_percentage_points",
    "expected": 0.4597365758,
    "format": "percent"
   },
@@ -551,7 +555,7 @@
    "id": "coverage_without_ta_2",
    "label": "Coverage without TA",
    "section": "beta_ifa_cea",
-   "formula": "coverage_without_ta_calculation + increase_in_coverage_per_year_without_ta_in_percentage_point",
+   "formula": "coverage_without_ta_assumption + increase_in_coverage_per_year_without_ta_in_percentage_point",
    "expected": 0.3697365758,
    "format": "percent"
   },
@@ -688,7 +692,7 @@
    "id": "cost_per_person_year_of_coverage_due_to_ta",
    "label": "Cost per person-year of coverage due to TA",
    "section": "beta_ifa_cea",
-   "formula": "sum(cost_for_ta, cost_for_ta_calculation, cost_for_ta_2, cost_for_ta_3, cost_for_ta_4, cost_for_ta_5) / sum(increase_in_person_years_of_coverage_due_to_ta, increase_in_person_years_of_coverage_due_to_ta_calculation, increase_in_person_years_of_coverage_due_to_ta_2, increase_in_person_years_of_coverage_due_to_ta_3, increase_in_person_years_of_coverage_due_to_ta_4, increase_in_person_years_of_coverage_due_to_ta_5)",
+   "formula": "sum(cost_for_ta, cost_for_ta_assumption, cost_for_ta_2, cost_for_ta_3, cost_for_ta_4, cost_for_ta_5) / sum(increase_in_person_years_of_coverage_due_to_ta, increase_in_person_years_of_coverage_due_to_ta_assumption, increase_in_person_years_of_coverage_due_to_ta_2, increase_in_person_years_of_coverage_due_to_ta_3, increase_in_person_years_of_coverage_due_to_ta_4, increase_in_person_years_of_coverage_due_to_ta_5)",
    "expected": 0.7958937077,
    "format": "usd"
   },
@@ -797,40 +801,40 @@
    "id": "number_prevalent_cases_mild_anemia",
    "label": "Number (Prevalent cases mild anemia)",
    "section": "supplementary_data",
-   "value": 215706218.1,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Supplementary data!B3"
    },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284"
+   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+   "formula": "@givewell.number_prevalent_cases_mild_anemia",
+   "expected": 215706218.1
   },
   {
    "id": "number_prevalent_cases_moderate_anemia",
    "label": "Number (Prevalent cases moderate anemia)",
    "section": "supplementary_data",
-   "value": 212827806.1,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Supplementary data!C3"
    },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284"
+   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+   "formula": "@givewell.number_prevalent_cases_moderate_anemia",
+   "expected": 212827806.1
   },
   {
    "id": "number_prevalent_cases_severe_anemia",
    "label": "Number (Prevalent cases severe anemia)",
    "section": "supplementary_data",
-   "value": 18525569.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Supplementary data!D3"
    },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284"
+   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+   "formula": "@givewell.number_prevalent_cases_severe_anemia",
+   "expected": 18525569.5
   },
   {
    "id": "proportion_prevalent_cases_mild_anemia",
@@ -909,14 +913,14 @@
    "id": "yld_burden_of_a_year_of_mild_anemia",
    "label": "YLD burden of a year of mild anemia",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.004,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B18"
    },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Chris has some additional thoughts on DALY weights for anemia here. Further thoughts on DALY weights for anemia here: https://docs.google.com/document/d/10m2ZcYfmjjl3fFU-6kw6bXyjFz-YV57HKz3eULw309o/edit#heading=h.gi5pd1pem8ui"
+   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Chris has some additional thoughts on DALY weights for anemia here. Further thoughts on DALY weights for anemia here: https://docs.google.com/document/d/10m2ZcYfmjjl3fFU-6kw6bXyjFz-YV57HKz3eULw309o/edit#heading=h.gi5pd1pem8ui",
+   "formula": "@givewell.yld_burden_of_a_year_of_mild_anemia",
+   "expected": 0.004
   },
   {
    "id": "mild_anemia_ylds_averted_in_cohort",
@@ -953,14 +957,14 @@
    "id": "yld_burden_of_a_year_of_moderate_anemia",
    "label": "YLD burden of a year of moderate anemia",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.052,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B19"
    },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2."
+   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
+   "formula": "@givewell.yld_burden_of_a_year_of_moderate_anemia",
+   "expected": 0.052
   },
   {
    "id": "moderate_anemia_ylds_averted_in_cohort",
@@ -997,14 +1001,14 @@
    "id": "yld_burden_of_a_year_of_severe_anemia",
    "label": "YLD burden of a year of severe anemia",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.149,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B20"
    },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2."
+   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
+   "formula": "@givewell.yld_burden_of_a_year_of_severe_anemia",
+   "expected": 0.149
   },
   {
    "id": "severe_anemia_ylds_averted_in_cohort",
@@ -1046,14 +1050,14 @@
    "id": "value_of_1_yld",
    "label": "Value of 1 YLD",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 1.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B81"
    },
-   "explainer": "Arbitrary starting point"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 1.\n\nArbitrary starting point",
+   "formula": "$uov_per_daly",
+   "expected": 1.0
   },
   {
    "id": "anemia_cases_averted",
@@ -1066,15 +1070,15 @@
    "id": "discount_rate",
    "label": "Discount rate",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B46"
    },
-   "explainer": "Roughly the median in V1 of the 2018 CEA",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nRoughly the median in V1 of the 2018 CEA",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "average_number_of_years_between_entering_fortification_progr",
@@ -1106,14 +1110,14 @@
    "id": "change_in_intelligence_quotient_from_short_term_supplementat",
    "label": "Change in intelligence quotient from short-term supplementation for anemic individuals (in standard deviations)",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.33,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B34"
    },
-   "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)"
+   "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)",
+   "formula": "@givewell.change_in_intelligence_quotient_from_short_term_supplementat",
+   "expected": 0.33
   },
   {
    "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
@@ -1191,15 +1195,15 @@
    "id": "proportion_of_population_in_each_year_cohort_between_ages_3",
    "label": "Proportion of population in each year cohort between ages 3-12",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.65,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B31"
    },
    "explainer": "Guesstimate based on demographic info used by Evidence Action. I would guess there are more beneficiaries in the 5-9 range than 15-19",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.proportion_of_population_in_each_year_cohort_between_ages_3",
+   "expected": 0.65
   },
   {
    "id": "proportion_of_children_with_anemia_at_baseline",
@@ -1277,14 +1281,14 @@
    "id": "value_of_doubling_consumption_for_one_person_for_one_year",
    "label": "Value of doubling consumption for one person for one year",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B82"
    },
-   "explainer": "Extrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita."
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 0.4.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 0.4
   },
   {
    "id": "value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
@@ -1390,14 +1394,14 @@
    "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
    "label": "Ratio of indirect malaria deaths per direct malaria death",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 0.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B58"
    },
-   "explainer": "See the equivalent input in our SMC CEA for more details"
+   "explainer": "See the equivalent input in our SMC CEA for more details",
+   "formula": "@givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
+   "expected": 0.5
   },
   {
    "id": "expected_additional_malaria_attributable_deaths_in_cohort_2",
@@ -1417,14 +1421,14 @@
    "id": "value_of_averting_one_death",
    "label": "Value of averting one death`",
    "section": "iron_cea_ta_cost_per_person",
-   "value": 30.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B83"
    },
-   "explainer": "Roughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line"
+   "explainer": "GiveWell's moral weight, 30 units of value, times your multiplier on the value of a life.\n\nRoughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line",
+   "formula": "30 * $life_value_multiplier",
+   "expected": 30.0
   },
   {
    "id": "increases_in_malaria_risk",
