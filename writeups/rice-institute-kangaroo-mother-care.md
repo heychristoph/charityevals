@@ -5,23 +5,23 @@ Research institute in India; runs kangaroo mother care programs in Uttar Pradesh
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Kangaroo Mother Care BOTEC](/rice-institute) | GW | November 2022 | 10× GiveDirectly (GW: 26× cash) | 13 |
-| [KMC with r.i.c.e. in Uttar Pradesh BOTEC, 2023](/rice-institute/rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023) | GW | November 2022 | 6.5× GiveDirectly (GW: 17× cash) | 21, 1 kept fixed |
+| [Kangaroo Mother Care BOTEC](/rice-institute) | GW | November 2022 | 10× GiveDirectly (GW: 26× cash) | 14 |
+| [KMC with r.i.c.e. in Uttar Pradesh BOTEC, 2023](/rice-institute/rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023) | GW | November 2022 | 6.5× GiveDirectly (GW: 17× cash) | 22, 1 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

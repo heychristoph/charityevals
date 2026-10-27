@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -1994,14 +1995,14 @@
    "id": "moral_weight_postneonatal_mortality",
    "label": "Moral weight - postneonatal mortality",
    "section": "simple_cea",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
     "cell": "Simple CEA!B20"
    },
-   "explainer": "50 / 200 8-22x"
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n50 / 200 8-22x",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "baseline_all_cause_neonatal_mortality_for_sindh_pakistan_pil_3",
@@ -2544,14 +2545,14 @@
    "id": "moral_weight_neonatal_mortality",
    "label": "Moral weight - neonatal mortality",
    "section": "simple_cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
     "cell": "Simple CEA!B15"
    },
-   "explainer": "40 / 180 11–16x"
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n40 / 180 11–16x",
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0
   },
   {
    "id": "grant_size_usd_pilot_lower",
@@ -2833,13 +2834,13 @@
    "id": "smc_mortality",
    "label": "SMC (Mortality)",
    "section": "development_effects",
-   "value": 4.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
     "cell": "Development effects!F7"
-   }
+   },
+   "formula": "@givewell.smc_mortality",
+   "expected": 4.0
   },
   {
    "id": "smc_morbidity",
@@ -3000,14 +3001,14 @@
    "id": "units_of_value_per_postneonatal_death_averted_pilot_best_gue",
    "label": "Units of value per postneonatal death averted (Pilot - Best Guess)",
    "section": "main_cea",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
     "cell": "Main CEA!B48"
    },
-   "explainer": "2020 GiveWell Moral Weights, p. 9"
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "adjusted_postneonatal_deaths_averted_with_hypothetical_donat",
@@ -3027,14 +3028,14 @@
    "id": "units_of_value_per_neonatal_death_averted_pilot_best_guess",
    "label": "Units of value per neonatal death averted (Pilot - Best Guess)",
    "section": "main_cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
     "cell": "Main CEA!B50"
    },
-   "explainer": "2020 GiveWell Moral Weights, p. 9"
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0
   },
   {
    "id": "adjusted_neonatal_deaths_averted_with_hypothetical_donation",

@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -55,13 +56,14 @@
    "id": "value_assigned_to_averting_a_neonatal_death_lower_cost_estim",
    "label": "Value assigned to averting a neonatal death (Lower cost estimate)",
    "section": "kmc",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1e2AoW8EBNJLUymWAqEdbcdb1aa3dfIFdL3xT2Jb99O8/edit",
     "cell": "KMC!B17"
-   }
+   },
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0,
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "hypothetical_donation_lower_cost_estimate",
@@ -85,8 +87,8 @@
    "format": "usd"
   },
   {
-   "id": "number_of_low_birth_weight_babies_per_hospital_per_year",
-   "label": "Number of low birth weight babies per hospital per year (-)",
+   "id": "number_of_low_birth_weight_babies_per_hospital_per_year_proj",
+   "label": "Number of low birth weight babies per hospital per year (Projected cost of expanding to 12 additional hospitals)",
    "section": "costs",
    "value": 60.0,
    "kind": "estimate",
@@ -109,17 +111,17 @@
    }
   },
   {
-   "id": "years_that_treatment_and_equipment_will_last_at_hospital",
-   "label": "Years that treatment and equipment will last at hospital (-)",
+   "id": "years_that_treatment_and_equipment_will_last_at_hospital_pro",
+   "label": "Years that treatment and equipment will last at hospital (Projected cost of expanding to 12 additional hospitals)",
    "section": "costs",
    "formula": "years_that_treatment_and_equipment_will_last_at_hospital_hig",
    "expected": 3.0
   },
   {
-   "id": "cost_per_child_treated_with_kmc_from_fixed_costs",
-   "label": "Cost per child treated with KMC, from fixed costs (-)",
+   "id": "cost_per_child_treated_with_kmc_from_fixed_costs_projected_c",
+   "label": "Cost per child treated with KMC, from fixed costs (Projected cost of expanding to 12 additional hospitals)",
    "section": "costs",
-   "formula": "fixed_cost_for_each_hospital_in_usd_projected_cost_of_expand / (number_of_low_birth_weight_babies_per_hospital_per_year * years_that_treatment_and_equipment_will_last_at_hospital)",
+   "formula": "fixed_cost_for_each_hospital_in_usd_projected_cost_of_expand / (number_of_low_birth_weight_babies_per_hospital_per_year_proj * years_that_treatment_and_equipment_will_last_at_hospital_pro)",
    "expected": 49.16666667,
    "format": "usd"
   },
@@ -138,17 +140,17 @@
   },
   {
    "id": "additional_per_patient_cost_garments_consumables_parent_educ",
-   "label": "Additional per-patient cost (garments, consumables, parent education lit) (-)",
+   "label": "Additional per-patient cost (garments, consumables, parent education lit) (Projected cost of expanding to 12 additional hospitals)",
    "section": "costs",
    "formula": "additional_per_patient_cost_garments_consumables_parent_educ_2",
    "expected": 3.63,
    "format": "usd"
   },
   {
-   "id": "total_per_patient_cost_of_kmc",
-   "label": "Total per-patient cost of KMC (-)",
+   "id": "total_per_patient_cost_of_kmc_projected_cost_of_expanding_to",
+   "label": "Total per-patient cost of KMC (Projected cost of expanding to 12 additional hospitals)",
    "section": "costs",
-   "formula": "cost_per_child_treated_with_kmc_from_fixed_costs + additional_per_patient_cost_garments_consumables_parent_educ",
+   "formula": "cost_per_child_treated_with_kmc_from_fixed_costs_projected_c + additional_per_patient_cost_garments_consumables_parent_educ",
    "expected": 52.79666667,
    "format": "usd"
   },
@@ -156,7 +158,7 @@
    "id": "total_per_patient_cost_of_kmc_lower_cost_estimate",
    "label": "Total per-patient cost of KMC (Lower cost estimate)",
    "section": "kmc",
-   "formula": "total_per_patient_cost_of_kmc",
+   "formula": "total_per_patient_cost_of_kmc_projected_cost_of_expanding_to",
    "expected": 52.79666667,
    "format": "usd"
   },

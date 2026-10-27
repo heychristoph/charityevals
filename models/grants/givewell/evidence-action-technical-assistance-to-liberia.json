@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -1362,7 +1364,7 @@
   },
   {
    "id": "contingent_funding_for_direct_observation_survey_2",
-   "label": "Contingent Funding for Direct Observation Survey (-)",
+   "label": "Contingent Funding for Direct Observation Survey",
    "section": "costs",
    "formula": "225000",
    "expected": 225000.0
@@ -1381,35 +1383,35 @@
   },
   {
    "id": "benzathine_penicillin_procurement_3",
-   "label": "Benzathine penicillin procurement (-)",
+   "label": "Benzathine penicillin procurement",
    "section": "costs",
    "formula": "benzathine_penicillin_procurement_unit_costs",
    "expected": 11220.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_5",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_3) * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 3366.0
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_5",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "number_of_women_getting_screened_for_syphilis_intervention_3 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 116382.5958
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_6",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_5 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 34914.77874
   },
   {
    "id": "printing_training_materials_job_aides_reporting_tools_3",
-   "label": "Printing (training materials, job aides, reporting tools) (-)",
+   "label": "Printing (training materials, job aides, reporting tools)",
    "section": "costs",
    "value": 10000.0,
    "kind": "estimate",
@@ -1421,7 +1423,7 @@
   },
   {
    "id": "health_provider_training_and_mentorship_3",
-   "label": "Health provider training and mentorship (-)",
+   "label": "Health provider training and mentorship",
    "section": "costs",
    "value": 110000.0,
    "kind": "estimate",
@@ -1433,28 +1435,28 @@
   },
   {
    "id": "stakeholder_meetings_3",
-   "label": "Stakeholder meetings (-)",
+   "label": "Stakeholder meetings",
    "section": "costs",
    "formula": "stakeholder_meetings_unit_costs",
    "expected": 5000.0
   },
   {
    "id": "senior_manager_monitoring_and_learning_global_staff_3",
-   "label": "Senior Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Senior Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "senior_manager_monitoring_and_learning_global_staff_unit_cos * 0.3 / 2 + senior_manager_monitoring_and_learning_global_staff_unit_cos * 0.15 / 2",
    "expected": 22950.0
   },
   {
    "id": "manager_monitoring_and_learning_global_staff_3",
-   "label": "Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "manager_monitoring_and_learning_global_staff_unit_costs * 0.5 / 2 + manager_monitoring_and_learning_global_staff_unit_costs * 0.33 / 2",
    "expected": 33200.0
   },
   {
    "id": "estimated_3",
-   "label": "estimated (-)",
+   "label": "estimated",
    "section": "costs",
    "value": 70000.0,
    "kind": "estimate",
@@ -1466,21 +1468,21 @@
   },
   {
    "id": "m_and_e_flexible_funding_3",
-   "label": "M&E Flexible Funding (-)",
+   "label": "M&E Flexible Funding",
    "section": "costs",
    "formula": "sum(senior_manager_monitoring_and_learning_global_staff_3, manager_monitoring_and_learning_global_staff_3, estimated_3) * m_and_e_flexible_funding_estimated",
    "expected": 18922.5
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_3",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_3, costs_from_procurement_supply_management_and_wastage_5, dual_hiv_syphilis_rapid_tests_5, costs_from_procurement_supply_management_and_wastage_6, printing_training_materials_job_aides_reporting_tools_3, health_provider_training_and_mentorship_3, stakeholder_meetings_3, senior_manager_monitoring_and_learning_global_staff_3, manager_monitoring_and_learning_global_staff_3, estimated_3, m_and_e_flexible_funding_3) - sum(dual_hiv_syphilis_rapid_tests_5, costs_from_procurement_supply_management_and_wastage_6)",
    "expected": 284658.5
   },
   {
    "id": "regional_f_and_a_support_3",
-   "label": "Regional F&A support (-)",
+   "label": "Regional F&A support",
    "section": "costs",
    "value": 31703.0,
    "kind": "estimate",
@@ -1492,14 +1494,14 @@
   },
   {
    "id": "idc_18_3",
-   "label": "IDC @ 18% (-)",
+   "label": "IDC @ 18%",
    "section": "costs",
    "formula": "(personnel_sub_total_3 + travel_sub_total_3 + operations_sub_total_3 + programmatic_costs_covered_by_ea_sub_total_3 + regional_f_and_a_support_3) * 0.18",
    "expected": 116182.17
   },
   {
    "id": "total_costs_to_ea_3",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_3, travel_sub_total_3, operations_sub_total_3, contingent_funding_for_direct_observation_survey_2, programmatic_costs_covered_by_ea_sub_total_3, regional_f_and_a_support_3, idc_18_3)",
    "expected": 986638.67
@@ -1630,42 +1632,42 @@
   },
   {
    "id": "contingent_funding_for_direct_observation_survey_3",
-   "label": "Contingent Funding for Direct Observation Survey (-)",
+   "label": "Contingent Funding for Direct Observation Survey",
    "section": "costs",
    "formula": "225000",
    "expected": 225000.0
   },
   {
    "id": "benzathine_penicillin_procurement_4",
-   "label": "Benzathine penicillin procurement (-)",
+   "label": "Benzathine penicillin procurement",
    "section": "costs",
    "formula": "benzathine_penicillin_procurement_unit_costs",
    "expected": 11220.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_7",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_4) * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 3366.0
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_6",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "number_of_women_getting_screened_for_syphilis_intervention_4 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 118826.6303
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_8",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_6 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 35647.98909
   },
   {
    "id": "printing_training_materials_job_aides_reporting_tools_4",
-   "label": "Printing (training materials, job aides, reporting tools) (-)",
+   "label": "Printing (training materials, job aides, reporting tools)",
    "section": "costs",
    "value": 2000.0,
    "kind": "estimate",
@@ -1677,7 +1679,7 @@
   },
   {
    "id": "health_provider_training_and_mentorship_4",
-   "label": "Health provider training and mentorship (-)",
+   "label": "Health provider training and mentorship",
    "section": "costs",
    "value": 50000.0,
    "kind": "estimate",
@@ -1689,28 +1691,28 @@
   },
   {
    "id": "stakeholder_meetings_4",
-   "label": "Stakeholder meetings (-)",
+   "label": "Stakeholder meetings",
    "section": "costs",
    "formula": "stakeholder_meetings_unit_costs",
    "expected": 5000.0
   },
   {
    "id": "senior_manager_monitoring_and_learning_global_staff_4",
-   "label": "Senior Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Senior Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "senior_manager_monitoring_and_learning_global_staff_unit_cos * 0.15",
    "expected": 15300.0
   },
   {
    "id": "manager_monitoring_and_learning_global_staff_4",
-   "label": "Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "manager_monitoring_and_learning_global_staff_unit_costs * 0.33",
    "expected": 26400.0
   },
   {
    "id": "estimated_4",
-   "label": "estimated (-)",
+   "label": "estimated",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -1722,21 +1724,21 @@
   },
   {
    "id": "m_and_e_flexible_funding_4",
-   "label": "M&E Flexible Funding (-)",
+   "label": "M&E Flexible Funding",
    "section": "costs",
    "formula": "sum(senior_manager_monitoring_and_learning_global_staff_4, manager_monitoring_and_learning_global_staff_4, estimated_4) * m_and_e_flexible_funding_estimated",
    "expected": 6255.0
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_4",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_4, costs_from_procurement_supply_management_and_wastage_7, dual_hiv_syphilis_rapid_tests_6, costs_from_procurement_supply_management_and_wastage_8, printing_training_materials_job_aides_reporting_tools_4, health_provider_training_and_mentorship_4, stakeholder_meetings_4, senior_manager_monitoring_and_learning_global_staff_4, manager_monitoring_and_learning_global_staff_4, estimated_4, m_and_e_flexible_funding_4) - sum(dual_hiv_syphilis_rapid_tests_6, costs_from_procurement_supply_management_and_wastage_8)",
    "expected": 119541.0
   },
   {
    "id": "regional_f_and_a_support_4",
-   "label": "Regional F&A support (-)",
+   "label": "Regional F&A support",
    "section": "costs",
    "value": 19594.0,
    "kind": "estimate",
@@ -1748,14 +1750,14 @@
   },
   {
    "id": "idc_18_4",
-   "label": "IDC @ 18% (-)",
+   "label": "IDC @ 18%",
    "section": "costs",
    "formula": "(personnel_sub_total_4 + travel_sub_total_4 + operations_sub_total_4 + programmatic_costs_covered_by_ea_sub_total_4 + regional_f_and_a_support_4) * 0.18",
    "expected": 82485.9
   },
   {
    "id": "total_costs_to_ea_4",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_4, travel_sub_total_4, operations_sub_total_4, contingent_funding_for_direct_observation_survey_3, programmatic_costs_covered_by_ea_sub_total_4, regional_f_and_a_support_4, idc_18_4)",
    "expected": 765740.9
@@ -1886,70 +1888,70 @@
   },
   {
    "id": "benzathine_penicillin_procurement_5",
-   "label": "Benzathine penicillin procurement (-)",
+   "label": "Benzathine penicillin procurement",
    "section": "costs",
    "formula": "benzathine_penicillin_procurement_unit_costs",
    "expected": 11220.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_9",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_5) * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 3366.0
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_7",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "number_of_women_getting_screened_for_syphilis_intervention_5 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 121321.9895
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_10",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_7 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 36396.59686
   },
   {
    "id": "printing_training_materials_job_aides_reporting_tools_5",
-   "label": "Printing (training materials, job aides, reporting tools) (-)",
+   "label": "Printing (training materials, job aides, reporting tools)",
    "section": "costs",
    "formula": "2000",
    "expected": 2000.0
   },
   {
    "id": "health_provider_training_and_mentorship_5",
-   "label": "Health provider training and mentorship (-)",
+   "label": "Health provider training and mentorship",
    "section": "costs",
    "formula": "50000",
    "expected": 50000.0
   },
   {
    "id": "stakeholder_meetings_5",
-   "label": "Stakeholder meetings (-)",
+   "label": "Stakeholder meetings",
    "section": "costs",
    "formula": "stakeholder_meetings_unit_costs",
    "expected": 5000.0
   },
   {
    "id": "senior_manager_monitoring_and_learning_global_staff_5",
-   "label": "Senior Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Senior Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "senior_manager_monitoring_and_learning_global_staff_unit_cos * 0.15",
    "expected": 15300.0
   },
   {
    "id": "manager_monitoring_and_learning_global_staff_5",
-   "label": "Manager, Monitoring and Learning (Global Staff) (-)",
+   "label": "Manager, Monitoring and Learning (Global Staff)",
    "section": "costs",
    "formula": "manager_monitoring_and_learning_global_staff_unit_costs * 0.33",
    "expected": 26400.0
   },
   {
    "id": "estimated_5",
-   "label": "estimated (-)",
+   "label": "estimated",
    "section": "costs",
    "value": 70000.0,
    "kind": "estimate",
@@ -1961,42 +1963,42 @@
   },
   {
    "id": "m_and_e_flexible_funding_5",
-   "label": "M&E Flexible Funding (-)",
+   "label": "M&E Flexible Funding",
    "section": "costs",
    "formula": "sum(senior_manager_monitoring_and_learning_global_staff_5, manager_monitoring_and_learning_global_staff_5, estimated_5) * m_and_e_flexible_funding_estimated",
    "expected": 16755.0
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_5",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(benzathine_penicillin_procurement_5, costs_from_procurement_supply_management_and_wastage_9, dual_hiv_syphilis_rapid_tests_7, costs_from_procurement_supply_management_and_wastage_10, printing_training_materials_job_aides_reporting_tools_5, health_provider_training_and_mentorship_5, stakeholder_meetings_5, senior_manager_monitoring_and_learning_global_staff_5, manager_monitoring_and_learning_global_staff_5, estimated_5, m_and_e_flexible_funding_5) - sum(dual_hiv_syphilis_rapid_tests_7, costs_from_procurement_supply_management_and_wastage_10)",
    "expected": 200041.0
   },
   {
    "id": "regional_f_and_a_support_5",
-   "label": "Regional F&A support (-)",
+   "label": "Regional F&A support",
    "section": "costs",
    "formula": "23458",
    "expected": 23458.0
   },
   {
    "id": "idc_18_5",
-   "label": "IDC @ 18% (-)",
+   "label": "IDC @ 18%",
    "section": "costs",
    "formula": "(personnel_sub_total_5 + travel_sub_total_5 + operations_sub_total_5 + programmatic_costs_covered_by_ea_sub_total_5 + regional_f_and_a_support_5) * 0.18",
    "expected": 97671.42
   },
   {
    "id": "total_costs_to_ea_5",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_5, travel_sub_total_5, operations_sub_total_5, programmatic_costs_covered_by_ea_sub_total_5, regional_f_and_a_support_5, idc_18_5)",
    "expected": 640290.42
   },
   {
    "id": "personnel_sub_total_6",
-   "label": "Personnel sub-total (-)",
+   "label": "Personnel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2009,7 +2011,7 @@
   },
   {
    "id": "travel_sub_total_6",
-   "label": "Travel sub-total (-)",
+   "label": "Travel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2022,7 +2024,7 @@
   },
   {
    "id": "operations_sub_total_6",
-   "label": "Operations sub-total (-)",
+   "label": "Operations sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2035,7 +2037,7 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_11",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2144,35 +2146,35 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_8",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "additional_women_screened_for_syphilis * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 83092.83318
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_12",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_8 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 24927.84995
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_6",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(costs_from_procurement_supply_management_and_wastage_11, dual_hiv_syphilis_rapid_tests_8, costs_from_procurement_supply_management_and_wastage_12) - sum(dual_hiv_syphilis_rapid_tests_8, costs_from_procurement_supply_management_and_wastage_12)",
    "expected": 0.0
   },
   {
    "id": "total_costs_to_ea_6",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_6, travel_sub_total_6, operations_sub_total_6, programmatic_costs_covered_by_ea_sub_total_6)",
    "expected": 0.0
   },
   {
    "id": "personnel_sub_total_7",
-   "label": "Personnel sub-total (-)",
+   "label": "Personnel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2185,7 +2187,7 @@
   },
   {
    "id": "travel_sub_total_7",
-   "label": "Travel sub-total (-)",
+   "label": "Travel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2198,7 +2200,7 @@
   },
   {
    "id": "operations_sub_total_7",
-   "label": "Operations sub-total (-)",
+   "label": "Operations sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2211,7 +2213,7 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_13",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2266,35 +2268,35 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_9",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "additional_women_screened_for_syphilis_2 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 53907.95846
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_14",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_9 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 16172.38754
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_7",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(costs_from_procurement_supply_management_and_wastage_13, dual_hiv_syphilis_rapid_tests_9, costs_from_procurement_supply_management_and_wastage_14) - sum(dual_hiv_syphilis_rapid_tests_9, costs_from_procurement_supply_management_and_wastage_14)",
    "expected": 0.0
   },
   {
    "id": "total_costs_to_ea_7",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_7, travel_sub_total_7, operations_sub_total_7, programmatic_costs_covered_by_ea_sub_total_7)",
    "expected": 0.0
   },
   {
    "id": "personnel_sub_total_8",
-   "label": "Personnel sub-total (-)",
+   "label": "Personnel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2307,7 +2309,7 @@
   },
   {
    "id": "travel_sub_total_8",
-   "label": "Travel sub-total (-)",
+   "label": "Travel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2320,7 +2322,7 @@
   },
   {
    "id": "operations_sub_total_8",
-   "label": "Operations sub-total (-)",
+   "label": "Operations sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2333,7 +2335,7 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_15",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2388,35 +2390,35 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_10",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "additional_women_screened_for_syphilis_3 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_16",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_10 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_8",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(costs_from_procurement_supply_management_and_wastage_15, dual_hiv_syphilis_rapid_tests_10, costs_from_procurement_supply_management_and_wastage_16) - sum(dual_hiv_syphilis_rapid_tests_10, costs_from_procurement_supply_management_and_wastage_16)",
    "expected": 0.0
   },
   {
    "id": "total_costs_to_ea_8",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_8, travel_sub_total_8, operations_sub_total_8, programmatic_costs_covered_by_ea_sub_total_8)",
    "expected": 0.0
   },
   {
    "id": "personnel_sub_total_9",
-   "label": "Personnel sub-total (-)",
+   "label": "Personnel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2429,7 +2431,7 @@
   },
   {
    "id": "travel_sub_total_9",
-   "label": "Travel sub-total (-)",
+   "label": "Travel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2442,7 +2444,7 @@
   },
   {
    "id": "operations_sub_total_9",
-   "label": "Operations sub-total (-)",
+   "label": "Operations sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2455,7 +2457,7 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_17",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2510,35 +2512,35 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_11",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "additional_women_screened_for_syphilis_4 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_18",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_11 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_9",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(costs_from_procurement_supply_management_and_wastage_17, dual_hiv_syphilis_rapid_tests_11, costs_from_procurement_supply_management_and_wastage_18) - sum(dual_hiv_syphilis_rapid_tests_11, costs_from_procurement_supply_management_and_wastage_18)",
    "expected": 0.0
   },
   {
    "id": "total_costs_to_ea_9",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_9, travel_sub_total_9, operations_sub_total_9, programmatic_costs_covered_by_ea_sub_total_9)",
    "expected": 0.0
   },
   {
    "id": "personnel_sub_total_10",
-   "label": "Personnel sub-total (-)",
+   "label": "Personnel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2551,7 +2553,7 @@
   },
   {
    "id": "travel_sub_total_10",
-   "label": "Travel sub-total (-)",
+   "label": "Travel sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2564,7 +2566,7 @@
   },
   {
    "id": "operations_sub_total_10",
-   "label": "Operations sub-total (-)",
+   "label": "Operations sub-total",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2577,7 +2579,7 @@
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_19",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "value": 0.0,
    "kind": "estimate",
@@ -2632,28 +2634,28 @@
   },
   {
    "id": "dual_hiv_syphilis_rapid_tests_12",
-   "label": "Dual HIV/syphilis rapid tests (-)",
+   "label": "Dual HIV/syphilis rapid tests",
    "section": "costs",
    "formula": "additional_women_screened_for_syphilis_5 * cost_of_dual_rapid_test_attributable_to_syphilis_usd",
    "expected": 0.0
   },
   {
    "id": "costs_from_procurement_supply_management_and_wastage_20",
-   "label": "Costs from procurement, supply management, and wastage (-)",
+   "label": "Costs from procurement, supply management, and wastage",
    "section": "costs",
    "formula": "dual_hiv_syphilis_rapid_tests_12 * assumed_costs_of_procurement_supply_management_and_wastage_o",
    "expected": 0.0
   },
   {
    "id": "programmatic_costs_covered_by_ea_sub_total_10",
-   "label": "Programmatic costs covered by EA sub-total (-)",
+   "label": "Programmatic costs covered by EA sub-total",
    "section": "costs",
    "formula": "sum(costs_from_procurement_supply_management_and_wastage_19, dual_hiv_syphilis_rapid_tests_12, costs_from_procurement_supply_management_and_wastage_20) - sum(dual_hiv_syphilis_rapid_tests_12, costs_from_procurement_supply_management_and_wastage_20)",
    "expected": 0.0
   },
   {
    "id": "total_costs_to_ea_10",
-   "label": "Total costs to EA (-)",
+   "label": "Total costs to EA",
    "section": "costs",
    "formula": "sum(personnel_sub_total_10, travel_sub_total_10, operations_sub_total_10, programmatic_costs_covered_by_ea_sub_total_10)",
    "expected": 0.0
@@ -2878,14 +2880,14 @@
    "id": "likelihood_of_maternal_syphilis_case_resulting_in_stillbirth_2",
    "label": "Likelihood of maternal syphilis case resulting in stillbirth or miscarriage",
    "section": "treatment_effects",
-   "value": 0.256,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit",
     "cell": "Treatment effects!C3"
    },
-   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222."
+   "explainer": "Based on the most recent estimates presented in the meta-analysis conducted by Gomez et al. 2013. See Figure 3, Pg. 222.",
+   "formula": "@givewell.likelihood_of_maternal_syphilis_case_resulting_in_stillbirth",
+   "expected": 0.256
   },
   {
    "id": "percent_of_reactive_non_treponemal_tests_that_are_probable_a_2",
@@ -3086,21 +3088,22 @@
    "id": "discount_rate_for_benefits_in_first_10_years_best_guess",
    "label": "Discount rate for benefits in first 10 years (Best guess)",
    "section": "assumptions",
-   "value": 0.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit",
     "cell": "Assumptions!C56"
    },
-   "explainer": "See here for our reasoning for not discounting the benefits."
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.\n\nSee here for our reasoning for not discounting the benefits.",
+   "formula": "$discount_rate",
+   "expected": 0.0
   },
   {
    "id": "discount_rate_for_benefits_in_first_10_years",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_2",
@@ -3197,8 +3200,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_2",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_6",
@@ -3295,8 +3299,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_3",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_10",
@@ -3393,8 +3398,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_4",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_14",
@@ -3491,8 +3497,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_5",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_18",
@@ -3575,8 +3582,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_6",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_22",
@@ -3659,8 +3667,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_7",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_26",
@@ -3743,8 +3752,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_8",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_30",
@@ -3827,8 +3837,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_9",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_34",
@@ -3911,8 +3922,9 @@
    "id": "discount_rate_for_benefits_in_first_10_years_10",
    "label": "Discount rate for benefits in first 10 years",
    "section": "benefits",
-   "formula": "discount_rate_for_benefits_in_first_10_years_best_guess",
-   "expected": 0.0
+   "formula": "$discount_rate",
+   "expected": 0.0,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0."
   },
   {
    "id": "stillbirths_and_miscarriages_averted_due_to_treatment_38",
@@ -3946,14 +3958,14 @@
    "id": "proportion_of_combined_outcome_of_stillbirths_and_miscarriag",
    "label": "Proportion of combined outcome of \"stillbirths and miscarriages\" that are miscarriages",
    "section": "results",
-   "value": 0.52,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit",
     "cell": "Results!B17"
    },
-   "explainer": "The literature reports on the combined outcome of \"stillbirths and miscarriages.\" See here for our estimate of the proportion of this combined outcome that are actually miscarriages."
+   "explainer": "The literature reports on the combined outcome of \"stillbirths and miscarriages.\" See here for our estimate of the proportion of this combined outcome that are actually miscarriages.",
+   "formula": "@givewell.proportion_of_combined_outcome_of_stillbirths_and_miscarriag",
+   "expected": 0.52
   },
   {
    "id": "units_of_value_averting_miscarriage",
@@ -4316,13 +4328,14 @@
    "id": "units_of_value_averting_neonatal_death",
    "label": "Units of value - averting neonatal death",
    "section": "results",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit",
     "cell": "Results!B19"
-   }
+   },
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6,
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "likelihood_of_maternal_syphilis_case_resulting_in_congenital_2",

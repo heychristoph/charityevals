@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -67,13 +68,14 @@
    "id": "value_assigned_to_averting_a_neonatal_death_best_guess",
    "label": "Value assigned to averting a neonatal death (Best guess)",
    "section": "cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QcyzAN88TVMfKNQ4Bd1gTV_WOOSaYTzINYH1bm-7mfo/edit",
     "cell": "CEA!B20"
-   }
+   },
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0,
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "moral_weight_neonatal_mortality",
@@ -96,18 +98,18 @@
    "format": "usd"
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
    "formula": "adjusted_budget_16_contingency_and_inflation_adjustment",
    "expected": 84343.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_2",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment - row",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment - funds_raised_allocation_chronological",
    "expected": 0.0,
    "format": "usd"
   },
@@ -146,26 +148,26 @@
    "format": "usd"
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "funds_raised_for_2025 - row",
+   "formula": "funds_raised_for_2025 - funds_raised_allocation_chronological",
    "expected": 823657.0,
    "format": "usd"
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_2",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_3 > 0, min(row_3, adjusted_budget_16_contingency_and_inflation_adjustment_2), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation > 0, min(funds_raised_remaining_after_allocation, adjusted_budget_16_contingency_and_inflation_adjustment_2), 0)",
    "expected": 90128.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_3",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_2",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_2 - row_2",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_2 - funds_raised_allocation_chronological_2",
    "expected": 0.0,
    "format": "usd"
   },
@@ -183,26 +185,26 @@
    "format": "usd"
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_2",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_3 - row_2",
+   "formula": "funds_raised_remaining_after_allocation - funds_raised_allocation_chronological_2",
    "expected": 733529.0,
    "format": "usd"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_3",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_5 > 0, min(row_5, adjusted_budget_16_contingency_and_inflation_adjustment_3), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_2 > 0, min(funds_raised_remaining_after_allocation_2, adjusted_budget_16_contingency_and_inflation_adjustment_3), 0)",
    "expected": 95913.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_4",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_3",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_3 - row_4",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_3 - funds_raised_allocation_chronological_3",
    "expected": 0.0,
    "format": "usd"
   },
@@ -220,26 +222,26 @@
    "format": "usd"
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_3",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_5 - row_4",
+   "formula": "funds_raised_remaining_after_allocation_2 - funds_raised_allocation_chronological_3",
    "expected": 637616.0,
    "format": "usd"
   },
   {
-   "id": "row_6",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_4",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_7 > 0, min(row_7, adjusted_budget_16_contingency_and_inflation_adjustment_4), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_3 > 0, min(funds_raised_remaining_after_allocation_3, adjusted_budget_16_contingency_and_inflation_adjustment_4), 0)",
    "expected": 101698.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_5",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_4",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_4 - row_6",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_4 - funds_raised_allocation_chronological_4",
    "expected": 0.0,
    "format": "usd"
   },
@@ -257,26 +259,26 @@
    "format": "usd"
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_4",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_7 - row_6",
+   "formula": "funds_raised_remaining_after_allocation_3 - funds_raised_allocation_chronological_4",
    "expected": 535918.0,
    "format": "usd"
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_5",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_9 > 0, min(row_9, adjusted_budget_16_contingency_and_inflation_adjustment_5), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_4 > 0, min(funds_raised_remaining_after_allocation_4, adjusted_budget_16_contingency_and_inflation_adjustment_5), 0)",
    "expected": 107483.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_6",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_5",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_5 - row_8",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_5 - funds_raised_allocation_chronological_5",
    "expected": 0.0,
    "format": "usd"
   },
@@ -294,26 +296,26 @@
    "format": "usd"
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_5",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_9 - row_8",
+   "formula": "funds_raised_remaining_after_allocation_4 - funds_raised_allocation_chronological_5",
    "expected": 428435.0,
    "format": "usd"
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_6",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_11 > 0, min(row_11, adjusted_budget_16_contingency_and_inflation_adjustment_6), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_5 > 0, min(funds_raised_remaining_after_allocation_5, adjusted_budget_16_contingency_and_inflation_adjustment_6), 0)",
    "expected": 113268.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_7",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_6",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_6 - row_10",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_6 - funds_raised_allocation_chronological_6",
    "expected": 0.0,
    "format": "usd"
   },
@@ -331,26 +333,26 @@
    "format": "usd"
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_6",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_11 - row_10",
+   "formula": "funds_raised_remaining_after_allocation_5 - funds_raised_allocation_chronological_6",
    "expected": 315167.0,
    "format": "usd"
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_7",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_13 > 0, min(row_13, adjusted_budget_16_contingency_and_inflation_adjustment_7), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_6 > 0, min(funds_raised_remaining_after_allocation_6, adjusted_budget_16_contingency_and_inflation_adjustment_7), 0)",
    "expected": 119053.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_8",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_7",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_7 - row_12",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_7 - funds_raised_allocation_chronological_7",
    "expected": 0.0,
    "format": "usd"
   },
@@ -368,26 +370,26 @@
    "format": "usd"
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_7",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_13 - row_12",
+   "formula": "funds_raised_remaining_after_allocation_6 - funds_raised_allocation_chronological_7",
    "expected": 196114.0,
    "format": "usd"
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_8",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_15 > 0, min(row_15, adjusted_budget_16_contingency_and_inflation_adjustment_8), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_7 > 0, min(funds_raised_remaining_after_allocation_7, adjusted_budget_16_contingency_and_inflation_adjustment_8), 0)",
    "expected": 124838.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_9",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_8",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_8 - row_14",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_8 - funds_raised_allocation_chronological_8",
    "expected": 0.0,
    "format": "usd"
   },
@@ -405,26 +407,26 @@
    "format": "usd"
   },
   {
-   "id": "row_17",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_8",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_15 - row_14",
+   "formula": "funds_raised_remaining_after_allocation_7 - funds_raised_allocation_chronological_8",
    "expected": 71276.0,
    "format": "usd"
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_9",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_17 > 0, min(row_17, adjusted_budget_16_contingency_and_inflation_adjustment_9), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_8 > 0, min(funds_raised_remaining_after_allocation_8, adjusted_budget_16_contingency_and_inflation_adjustment_9), 0)",
    "expected": 71276.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_10",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_9",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_9 - row_16",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_9 - funds_raised_allocation_chronological_9",
    "expected": 59347.0,
    "format": "usd"
   },
@@ -442,26 +444,26 @@
    "format": "usd"
   },
   {
-   "id": "row_19",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_9",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_17 - row_16",
+   "formula": "funds_raised_remaining_after_allocation_8 - funds_raised_allocation_chronological_9",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_18",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_10",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_19 > 0, min(row_19, adjusted_budget_16_contingency_and_inflation_adjustment_10), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_9 > 0, min(funds_raised_remaining_after_allocation_9, adjusted_budget_16_contingency_and_inflation_adjustment_10), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_11",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_10",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_10 - row_18",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_10 - funds_raised_allocation_chronological_10",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -479,26 +481,26 @@
    "format": "usd"
   },
   {
-   "id": "row_21",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_10",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_19 - row_18",
+   "formula": "funds_raised_remaining_after_allocation_9 - funds_raised_allocation_chronological_10",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_20",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_11",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_21 > 0, min(row_21, adjusted_budget_16_contingency_and_inflation_adjustment_11), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_10 > 0, min(funds_raised_remaining_after_allocation_10, adjusted_budget_16_contingency_and_inflation_adjustment_11), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_12",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_11",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_11 - row_20",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_11 - funds_raised_allocation_chronological_11",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -516,26 +518,26 @@
    "format": "usd"
   },
   {
-   "id": "row_23",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_11",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_21 - row_20",
+   "formula": "funds_raised_remaining_after_allocation_10 - funds_raised_allocation_chronological_11",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_22",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_12",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_23 > 0, min(row_23, adjusted_budget_16_contingency_and_inflation_adjustment_12), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_11 > 0, min(funds_raised_remaining_after_allocation_11, adjusted_budget_16_contingency_and_inflation_adjustment_12), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_13",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_12",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_12 - row_22",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_12 - funds_raised_allocation_chronological_12",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -553,26 +555,26 @@
    "format": "usd"
   },
   {
-   "id": "row_25",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_12",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_23 - row_22",
+   "formula": "funds_raised_remaining_after_allocation_11 - funds_raised_allocation_chronological_12",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_24",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_13",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_25 > 0, min(row_25, adjusted_budget_16_contingency_and_inflation_adjustment_13), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_12 > 0, min(funds_raised_remaining_after_allocation_12, adjusted_budget_16_contingency_and_inflation_adjustment_13), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_14",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_13",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_13 - row_24",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_13 - funds_raised_allocation_chronological_13",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -590,26 +592,26 @@
    "format": "usd"
   },
   {
-   "id": "row_27",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_13",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_25 - row_24",
+   "formula": "funds_raised_remaining_after_allocation_12 - funds_raised_allocation_chronological_13",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_26",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_14",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_27 > 0, min(row_27, adjusted_budget_16_contingency_and_inflation_adjustment_14), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_13 > 0, min(funds_raised_remaining_after_allocation_13, adjusted_budget_16_contingency_and_inflation_adjustment_14), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_15",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_14",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_14 - row_26",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_14 - funds_raised_allocation_chronological_14",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -627,26 +629,26 @@
    "format": "usd"
   },
   {
-   "id": "row_29",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_14",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_27 - row_26",
+   "formula": "funds_raised_remaining_after_allocation_13 - funds_raised_allocation_chronological_14",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_28",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_15",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_29 > 0, min(row_29, adjusted_budget_16_contingency_and_inflation_adjustment_15), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_14 > 0, min(funds_raised_remaining_after_allocation_14, adjusted_budget_16_contingency_and_inflation_adjustment_15), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_16",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_15",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_15 - row_28",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_15 - funds_raised_allocation_chronological_15",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -664,26 +666,26 @@
    "format": "usd"
   },
   {
-   "id": "row_31",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_15",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_29 - row_28",
+   "formula": "funds_raised_remaining_after_allocation_14 - funds_raised_allocation_chronological_15",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_30",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_16",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_31 > 0, min(row_31, adjusted_budget_16_contingency_and_inflation_adjustment_16), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_15 > 0, min(funds_raised_remaining_after_allocation_15, adjusted_budget_16_contingency_and_inflation_adjustment_16), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_17",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_16",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_16 - row_30",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_16 - funds_raised_allocation_chronological_16",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -701,26 +703,26 @@
    "format": "usd"
   },
   {
-   "id": "row_33",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_16",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_31 - row_30",
+   "formula": "funds_raised_remaining_after_allocation_15 - funds_raised_allocation_chronological_16",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_32",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_17",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_33 > 0, min(row_33, adjusted_budget_16_contingency_and_inflation_adjustment_17), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_16 > 0, min(funds_raised_remaining_after_allocation_16, adjusted_budget_16_contingency_and_inflation_adjustment_17), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_18",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_17",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_17 - row_32",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_17 - funds_raised_allocation_chronological_17",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -738,26 +740,26 @@
    "format": "usd"
   },
   {
-   "id": "row_35",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_17",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_33 - row_32",
+   "formula": "funds_raised_remaining_after_allocation_16 - funds_raised_allocation_chronological_17",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_34",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_18",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_35 > 0, min(row_35, adjusted_budget_16_contingency_and_inflation_adjustment_18), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_17 > 0, min(funds_raised_remaining_after_allocation_17, adjusted_budget_16_contingency_and_inflation_adjustment_18), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_19",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_18",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_18 - row_34",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_18 - funds_raised_allocation_chronological_18",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -775,26 +777,26 @@
    "format": "usd"
   },
   {
-   "id": "row_37",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_18",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_35 - row_34",
+   "formula": "funds_raised_remaining_after_allocation_17 - funds_raised_allocation_chronological_18",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_36",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_19",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_37 > 0, min(row_37, adjusted_budget_16_contingency_and_inflation_adjustment_19), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_18 > 0, min(funds_raised_remaining_after_allocation_18, adjusted_budget_16_contingency_and_inflation_adjustment_19), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_20",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_19",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_19 - row_36",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_19 - funds_raised_allocation_chronological_19",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -812,26 +814,26 @@
    "format": "usd"
   },
   {
-   "id": "row_39",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_19",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_37 - row_36",
+   "formula": "funds_raised_remaining_after_allocation_18 - funds_raised_allocation_chronological_19",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_38",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_20",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_39 > 0, min(row_39, adjusted_budget_16_contingency_and_inflation_adjustment_20), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_19 > 0, min(funds_raised_remaining_after_allocation_19, adjusted_budget_16_contingency_and_inflation_adjustment_20), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_21",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_20",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_20 - row_38",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_20 - funds_raised_allocation_chronological_20",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -849,26 +851,26 @@
    "format": "usd"
   },
   {
-   "id": "row_41",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_20",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_39 - row_38",
+   "formula": "funds_raised_remaining_after_allocation_19 - funds_raised_allocation_chronological_20",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_40",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_21",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_41 > 0, min(row_41, adjusted_budget_16_contingency_and_inflation_adjustment_21), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_20 > 0, min(funds_raised_remaining_after_allocation_20, adjusted_budget_16_contingency_and_inflation_adjustment_21), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_22",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_21",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_21 - row_40",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_21 - funds_raised_allocation_chronological_21",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -886,26 +888,26 @@
    "format": "usd"
   },
   {
-   "id": "row_43",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_21",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_41 - row_40",
+   "formula": "funds_raised_remaining_after_allocation_20 - funds_raised_allocation_chronological_21",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_42",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_22",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_43 > 0, min(row_43, adjusted_budget_16_contingency_and_inflation_adjustment_22), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_21 > 0, min(funds_raised_remaining_after_allocation_21, adjusted_budget_16_contingency_and_inflation_adjustment_22), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_23",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_22",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_22 - row_42",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_22 - funds_raised_allocation_chronological_22",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -923,26 +925,26 @@
    "format": "usd"
   },
   {
-   "id": "row_45",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_22",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_43 - row_42",
+   "formula": "funds_raised_remaining_after_allocation_21 - funds_raised_allocation_chronological_22",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_44",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_23",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_45 > 0, min(row_45, adjusted_budget_16_contingency_and_inflation_adjustment_23), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_22 > 0, min(funds_raised_remaining_after_allocation_22, adjusted_budget_16_contingency_and_inflation_adjustment_23), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_24",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_23",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_23 - row_44",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_23 - funds_raised_allocation_chronological_23",
    "expected": 127816.0,
    "format": "usd"
   },
@@ -960,34 +962,34 @@
    "format": "usd"
   },
   {
-   "id": "row_47",
-   "label": "-",
+   "id": "funds_raised_remaining_after_allocation_23",
+   "label": "Funds raised remaining after allocation",
    "section": "budget",
-   "formula": "row_45 - row_44",
+   "formula": "funds_raised_remaining_after_allocation_22 - funds_raised_allocation_chronological_23",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "row_46",
-   "label": "-",
+   "id": "funds_raised_allocation_chronological_24",
+   "label": "Funds raised allocation (chronological)",
    "section": "budget",
-   "formula": "if(row_47 > 0, min(row_47, adjusted_budget_16_contingency_and_inflation_adjustment_24), 0)",
+   "formula": "if(funds_raised_remaining_after_allocation_23 > 0, min(funds_raised_remaining_after_allocation_23, adjusted_budget_16_contingency_and_inflation_adjustment_24), 0)",
    "expected": 0.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised_25",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_24",
+   "label": "Excluding funds raised",
    "section": "budget",
-   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_24 - row_46",
+   "formula": "adjusted_budget_16_contingency_and_inflation_adjustment_24 - funds_raised_allocation_chronological_24",
    "expected": 127816.0,
    "format": "usd"
   },
   {
-   "id": "excluding_funds_raised",
-   "label": "Excluding funds raised (-)",
+   "id": "excluding_funds_raised_total",
+   "label": "Excluding funds raised (Total)",
    "section": "budget",
-   "formula": "sum(excluding_funds_raised_2, excluding_funds_raised_3, excluding_funds_raised_4, excluding_funds_raised_5, excluding_funds_raised_6, excluding_funds_raised_7, excluding_funds_raised_8, excluding_funds_raised_9, excluding_funds_raised_10, excluding_funds_raised_11, excluding_funds_raised_12, excluding_funds_raised_13, excluding_funds_raised_14, excluding_funds_raised_15, excluding_funds_raised_16, excluding_funds_raised_17, excluding_funds_raised_18, excluding_funds_raised_19, excluding_funds_raised_20, excluding_funds_raised_21, excluding_funds_raised_22, excluding_funds_raised_23, excluding_funds_raised_24, excluding_funds_raised_25)",
+   "formula": "sum(excluding_funds_raised, excluding_funds_raised_2, excluding_funds_raised_3, excluding_funds_raised_4, excluding_funds_raised_5, excluding_funds_raised_6, excluding_funds_raised_7, excluding_funds_raised_8, excluding_funds_raised_9, excluding_funds_raised_10, excluding_funds_raised_11, excluding_funds_raised_12, excluding_funds_raised_13, excluding_funds_raised_14, excluding_funds_raised_15, excluding_funds_raised_16, excluding_funds_raised_17, excluding_funds_raised_18, excluding_funds_raised_19, excluding_funds_raised_20, excluding_funds_raised_21, excluding_funds_raised_22, excluding_funds_raised_23, excluding_funds_raised_24)",
    "expected": 1976587.0,
    "format": "usd"
   },
@@ -995,7 +997,7 @@
    "id": "grant_size_best_guess",
    "label": "Grant size (Best guess)",
    "section": "cea",
-   "formula": "excluding_funds_raised",
+   "formula": "excluding_funds_raised_total",
    "expected": 1976587.0,
    "format": "usd"
   },
@@ -1008,8 +1010,8 @@
    "format": "usd"
   },
   {
-   "id": "cost_per_infant_covered",
-   "label": "Cost per infant covered (-)",
+   "id": "cost_per_infant_covered_total",
+   "label": "Cost per infant covered (Total)",
    "section": "budget",
    "value": 85.26568151,
    "kind": "estimate",
@@ -1025,7 +1027,7 @@
    "id": "total_per_patient_cost_of_kangaroo_care_kc_best_guess",
    "label": "Total per-patient cost of kangaroo care (KC) (Best guess)",
    "section": "cea",
-   "formula": "cost_per_infant_covered",
+   "formula": "cost_per_infant_covered_total",
    "expected": 85.26568151,
    "format": "usd"
   },

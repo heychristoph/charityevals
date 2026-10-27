@@ -5,30 +5,30 @@ Works with governments to lower the cost and improve the delivery of medicines, 
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CHAI, mSupply BOTEC and VOI, 2025 (GiveWell copy)](/clinton-health-access-initiative) | GW | March 2026 | 10× GiveDirectly (GW: 27× cash) | 160, 12 kept fixed |
-| [MSupply RCT CEA - April 2026](/clinton-health-access-initiative/clinton-health-access-initiative-msupply-rct-april-2026) | GW | March 2026 | 0.32× GiveDirectly (GW: 0.83× cash) | 52, 5 kept fixed |
-| [CEA of Malaria RDT Procurement [CHAI, Nigeria] (July 2025)](/clinton-health-access-initiative/clinton-health-access-initiative-malaria-rdt-procurement-chai-nigeria) | GW | July 2025 | 5.2× GiveDirectly (GW: 14× cash) | 126, 1 kept fixed |
+| [CHAI, mSupply BOTEC and VOI, 2025 (GiveWell copy)](/clinton-health-access-initiative) | GW | March 2026 | 10× GiveDirectly (GW: 27× cash) | 163, 12 kept fixed |
+| [MSupply RCT CEA - April 2026](/clinton-health-access-initiative/clinton-health-access-initiative-msupply-rct-april-2026) | GW | March 2026 | 0.32× GiveDirectly (GW: 0.83× cash) | 56, 5 kept fixed |
+| [CEA of Malaria RDT Procurement [CHAI, Nigeria] (July 2025)](/clinton-health-access-initiative/clinton-health-access-initiative-malaria-rdt-procurement-chai-nigeria) | GW | July 2025 | 5.2× GiveDirectly (GW: 14× cash) | 127, 1 kept fixed |
 | [Simple CEA/BOTEC of CHAI TSUs, April 2025](/clinton-health-access-initiative/clinton-health-access-initiative-chai-tsus-april-2025) | GW | April 2025 | 10× GiveDirectly (GW: 26× cash) | 38 |
 | [CHAI PPM grant BOTEC, 2024](/clinton-health-access-initiative/clinton-health-access-initiative-chai-ppm-2024) | GW | October 2024 | 6.1× GiveDirectly (GW: 16× cash) | 1, 1 kept fixed |
-| [CEA of a community-based TB HCM program in India](/clinton-health-access-initiative/clinton-health-access-initiative-a-community-based-tb-hcm-in-india) | GW | June 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 372 |
-| [CHAI ORS/Zinc CEA - updated costs January 2024](/clinton-health-access-initiative/clinton-health-access-initiative-chai-ors-zinc-updated-costs-january-202) | GW | September 2023 | 6.0× GiveDirectly (GW: 16× cash) | 202, 7 kept fixed |
-| [CHAI ORS/Zinc CEA - public version](/clinton-health-access-initiative/clinton-health-access-initiative-chai-ors-zinc) | GW | September 2023 | 6.4× GiveDirectly (GW: 17× cash) | 202, 7 kept fixed |
+| [CEA of a community-based TB HCM program in India](/clinton-health-access-initiative/clinton-health-access-initiative-a-community-based-tb-hcm-in-india) | GW | June 2024 | 2.9× GiveDirectly (GW: 7.6× cash) | 375 |
+| [CHAI ORS/Zinc CEA - updated costs January 2024](/clinton-health-access-initiative/clinton-health-access-initiative-chai-ors-zinc-updated-costs-january-202) | GW | September 2023 | 6.0× GiveDirectly (GW: 16× cash) | 214, 7 kept fixed |
+| [CHAI ORS/Zinc CEA - public version](/clinton-health-access-initiative/clinton-health-access-initiative-chai-ors-zinc) | GW | September 2023 | 6.4× GiveDirectly (GW: 17× cash) | 214, 7 kept fixed |
 | [CHAI Incubator threshold analysis BOTEC](/clinton-health-access-initiative/clinton-health-access-initiative-chai-incubator-threshold) | GW | August 2022 | 3.8× GiveDirectly (GW: 9.8× cash) | 1, 1 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

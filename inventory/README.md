@@ -22,6 +22,10 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   `scripts/import-givewell-grants.py` downloads each sheet and runs `scripts/convert-sheet.py` on it.
   The converter traces the bottom line through every cell it depends on, and each calculated row must
   reproduce the sheet's value; `npm run check` enforces this.
+- **Linked like the hand-built models:** `scripts/link-parameters.py` ties each sheet's moral weights,
+  discount rate and values of consumption and of a DALY to the shared assumptions; the sheet's own
+  values go into the model's evaluator settings. Statistics several sheets share (mortality, population,
+  prevalence) live once in `facts/givewell*.json`.
 - **Fixed numbers:** formulas the engine can't express are kept as fixed numbers with the original
   formula on the row. These are mostly array formulas, text, conditional sums and IMPORTRANGE.
   Lookups with fixed keys (INDEX, MATCH, FILTER) are resolved to the cell they point at, so they stay

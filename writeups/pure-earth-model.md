@@ -5,13 +5,13 @@ Works to reduce lead and mercury pollution, including lead in cosmetics and spic
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Pure Earth BOTEC](/pure-earth) | GW | July 2021 | 6.9× GiveDirectly (GW: 18× cash) | 76, 2 kept fixed |
+| [Pure Earth BOTEC](/pure-earth) | GW | July 2021 | 6.9× GiveDirectly (GW: 18× cash) | 77, 2 kept fixed |
 | [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | 14× GiveDirectly | 27 |
 | [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | 14× GiveDirectly | 25 |
 
@@ -19,10 +19,10 @@ Grants, renewals and research grants each came with their own spreadsheet, so a 
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

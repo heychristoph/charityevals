@@ -5,25 +5,25 @@ Global health organisation working on malaria vaccines, perennial malaria chemop
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Threshold CEA: PATH Accelerator Grant for Malaria Vaccines [January 2025]](/path) | GW | January 2024 | 3.9× GiveDirectly (GW: 10× cash) | 136, 1 kept fixed |
-| [PMC RTSS Threshold BOTEC, 2023](/path/path-pmc-rtss-threshold-2023) | GW | February 2023 | 4.2× GiveDirectly (GW: 11× cash) | 88, 2 kept fixed |
-| [PMC DRC pilot grant cost-effectiveness analysis](/path/path-pmc-drc-pilot) | GW | November 2022 | 9.2× GiveDirectly (GW: 24× cash) | 135, 21 kept fixed |
-| [RTS,S for pilot comparison areas CEA - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | GW | January 2022 | 5.3× GiveDirectly (GW: 14× cash) | 213, 17 kept fixed |
+| [Threshold CEA: PATH Accelerator Grant for Malaria Vaccines [January 2025]](/path) | GW | January 2024 | 3.9× GiveDirectly (GW: 10× cash) | 144, 1 kept fixed |
+| [PMC RTSS Threshold BOTEC, 2023](/path/path-pmc-rtss-threshold-2023) | GW | February 2023 | 4.2× GiveDirectly (GW: 11× cash) | 94, 2 kept fixed |
+| [PMC DRC pilot grant cost-effectiveness analysis](/path/path-pmc-drc-pilot) | GW | November 2022 | 9.2× GiveDirectly (GW: 24× cash) | 139, 21 kept fixed |
+| [RTS,S for pilot comparison areas CEA - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | GW | January 2022 | 5.3× GiveDirectly (GW: 14× cash) | 225, 17 kept fixed |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

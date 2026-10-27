@@ -20,7 +20,10 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "discount_rate": 0.005,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -199,14 +202,14 @@
    "id": "number_of_visits_possible_high_coverage_districts",
    "label": "Number of visits possible (High coverage districts)",
    "section": "costs",
-   "value": 6.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Costs!B12"
    },
-   "explainer": "Birth, 6 weeks, 10 weeks, 14 weeks, 9 months, 15 months"
+   "explainer": "Birth, 6 weeks, 10 weeks, 14 weeks, 9 months, 15 months",
+   "formula": "@givewell.number_of_visits_possible_high_coverage_districts",
+   "expected": 6.0
   },
   {
    "id": "bcg_high_coverage",
@@ -513,7 +516,7 @@
    "expected": 0.99
   },
   {
-   "id": "penta_1_high_incentive_2",
+   "id": "penta_1_high_incentive_3",
    "label": "Penta-1 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.0131564911804862,
@@ -525,7 +528,7 @@
    }
   },
   {
-   "id": "penta_1_high_incentive_3",
+   "id": "penta_1_high_incentive_4",
    "label": "Penta-1 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.944942887966656,
@@ -537,10 +540,10 @@
    }
   },
   {
-   "id": "penta_1",
-   "label": "Penta-1 (-)",
+   "id": "penta_1_high_incentive_2",
+   "label": "Penta-1 (High incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_1_high_incentive_2 / (1 - penta_1_high_incentive_3) / penta_1_high_incentive",
+   "formula": "penta_1_high_incentive_3 / (1 - penta_1_high_incentive_4) / penta_1_high_incentive",
    "expected": 0.1027788359,
    "format": "percent"
   },
@@ -548,7 +551,7 @@
    "id": "bcg_weight_5",
    "label": "BCG (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - bcg_weight_3) * penta_1 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - bcg_weight_3) * penta_1_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
@@ -614,7 +617,7 @@
    "expected": 0.784905
   },
   {
-   "id": "penta_1_low_incentive_2",
+   "id": "penta_1_low_incentive_3",
    "label": "Penta-1 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.00962212614602875,
@@ -626,7 +629,7 @@
    }
   },
   {
-   "id": "penta_1_low_incentive_3",
+   "id": "penta_1_low_incentive_4",
    "label": "Penta-1 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.944942887966656,
@@ -638,10 +641,10 @@
    }
   },
   {
-   "id": "penta_1_2",
-   "label": "Penta-1 (-)",
+   "id": "penta_1_low_incentive_2",
+   "label": "Penta-1 (Low incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_1_low_incentive_2 / (1 - penta_1_low_incentive_3) / penta_1_low_incentive",
+   "formula": "penta_1_low_incentive_3 / (1 - penta_1_low_incentive_4) / penta_1_low_incentive",
    "expected": 0.2255048654,
    "format": "percent"
   },
@@ -649,7 +652,7 @@
    "id": "bcg",
    "label": "BCG",
    "section": "effect_size_mccts",
-   "formula": "(1 - bcg_weight_6) * penta_1_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - bcg_weight_6) * penta_1_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
@@ -845,7 +848,7 @@
    "id": "penta_1_weight_5",
    "label": "Penta-1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_1_weight_3) * penta_1 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_1_weight_3) * penta_1_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
@@ -856,21 +859,21 @@
    "expected": 0.823772
   },
   {
-   "id": "penta_1_3",
+   "id": "penta_1",
    "label": "Penta-1",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_1_weight_6) * penta_1_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_1_weight_6) * penta_1_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "penta_1_5",
+   "id": "penta_1_3",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "formula": "penta_1_weight_3",
    "expected": 0.823772
   },
   {
-   "id": "penta_1_7",
+   "id": "penta_1_5",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "value": 0.21,
@@ -882,7 +885,7 @@
    }
   },
   {
-   "id": "penta_1_8",
+   "id": "penta_1_6",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "value": 0.54,
@@ -894,7 +897,7 @@
    }
   },
   {
-   "id": "penta_1_9",
+   "id": "penta_1_7",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "value": 1.4,
@@ -907,25 +910,25 @@
    "format": "usd"
   },
   {
-   "id": "penta_1_6",
+   "id": "penta_1_4",
    "label": "Penta-1",
    "section": "effect_size_mccts",
-   "formula": "penta_1_7 / (1 - penta_1_8) / penta_1_9 * all_adjustments",
+   "formula": "penta_1_5 / (1 - penta_1_6) / penta_1_7 * all_adjustments",
    "expected": 0.3756521739,
    "format": "percent"
   },
   {
-   "id": "penta_1_4",
+   "id": "penta_1_2",
    "label": "Penta-1",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_1_5) * penta_1_6 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_1_3) * penta_1_4 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
    "id": "penta_1_weight_4",
    "label": "Penta-1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_1_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_1_3 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_1_4",
+   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_1_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_1 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_1_2",
    "expected": 0.0
   },
   {
@@ -987,7 +990,7 @@
    "expected": 0.734423
   },
   {
-   "id": "penta_2_high_incentive_2",
+   "id": "penta_2_high_incentive_3",
    "label": "Penta-2 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.031338874106697,
@@ -999,7 +1002,7 @@
    }
   },
   {
-   "id": "penta_2_high_incentive_3",
+   "id": "penta_2_high_incentive_4",
    "label": "Penta-2 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.854313058844978,
@@ -1011,10 +1014,10 @@
    }
   },
   {
-   "id": "penta_2",
-   "label": "Penta-2 (-)",
+   "id": "penta_2_high_incentive_2",
+   "label": "Penta-2 (High incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_2_high_incentive_2 / (1 - penta_2_high_incentive_3) / penta_2_high_incentive",
+   "formula": "penta_2_high_incentive_3 / (1 - penta_2_high_incentive_4) / penta_2_high_incentive",
    "expected": 0.09252089124,
    "format": "percent"
   },
@@ -1022,7 +1025,7 @@
    "id": "penta_2_weight_5",
    "label": "Penta-2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_2_weight_3) * penta_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_2_weight_3) * penta_2_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
@@ -1033,7 +1036,7 @@
    "expected": 0.734423
   },
   {
-   "id": "penta_2_low_incentive_2",
+   "id": "penta_2_low_incentive_3",
    "label": "Penta-2 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.0174369639513097,
@@ -1045,7 +1048,7 @@
    }
   },
   {
-   "id": "penta_2_low_incentive_3",
+   "id": "penta_2_low_incentive_4",
    "label": "Penta-2 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.854313058844978,
@@ -1057,43 +1060,43 @@
    }
   },
   {
-   "id": "penta_2_3",
-   "label": "Penta-2 (-)",
+   "id": "penta_2_low_incentive_2",
+   "label": "Penta-2 (Low incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_2_low_incentive_2 / (1 - penta_2_low_incentive_3) / penta_2_low_incentive",
+   "formula": "penta_2_low_incentive_3 / (1 - penta_2_low_incentive_4) / penta_2_low_incentive",
    "expected": 0.1544359992,
    "format": "percent"
   },
   {
-   "id": "penta_2_2",
+   "id": "penta_2",
    "label": "Penta-2",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_2_weight_6) * penta_2_3 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_2_weight_6) * penta_2_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "penta_2_5",
+   "id": "penta_2_3",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "formula": "penta_2_weight_3",
    "expected": 0.734423
   },
   {
-   "id": "penta_2_7",
+   "id": "penta_2_5",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "formula": "avg(0.27, 0.27)",
    "expected": 0.27
   },
   {
-   "id": "penta_2_8",
+   "id": "penta_2_6",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "formula": "avg(0.4, 0.36)",
    "expected": 0.38
   },
   {
-   "id": "penta_2_9",
+   "id": "penta_2_7",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "value": 1.4,
@@ -1106,25 +1109,25 @@
    "format": "usd"
   },
   {
-   "id": "penta_2_6",
+   "id": "penta_2_4",
    "label": "Penta-2",
    "section": "effect_size_mccts",
-   "formula": "penta_2_7 / (1 - penta_2_8) / penta_2_9 * all_adjustments",
+   "formula": "penta_2_5 / (1 - penta_2_6) / penta_2_7 * all_adjustments",
    "expected": 0.3583410138,
    "format": "percent"
   },
   {
-   "id": "penta_2_4",
+   "id": "penta_2_2",
    "label": "Penta-2",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_2_5) * penta_2_6 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_2_3) * penta_2_4 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
    "id": "penta_2_weight_4",
    "label": "Penta-2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_2_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_2_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_2_4",
+   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_2_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_2_2",
    "expected": 0.0
   },
   {
@@ -1186,7 +1189,7 @@
    "expected": 0.658441
   },
   {
-   "id": "penta_3_high_incentive_2",
+   "id": "penta_3_high_incentive_3",
    "label": "Penta-3 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.0398151349288304,
@@ -1198,7 +1201,7 @@
    }
   },
   {
-   "id": "penta_3_high_incentive_3",
+   "id": "penta_3_high_incentive_4",
    "label": "Penta-3 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.759802346321764,
@@ -1210,10 +1213,10 @@
    }
   },
   {
-   "id": "penta_3",
-   "label": "Penta-3 (-)",
+   "id": "penta_3_high_incentive_2",
+   "label": "Penta-3 (High incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_3_high_incentive_2 / (1 - penta_3_high_incentive_3) / penta_3_high_incentive",
+   "formula": "penta_3_high_incentive_3 / (1 - penta_3_high_incentive_4) / penta_3_high_incentive",
    "expected": 0.07129457326,
    "format": "percent"
   },
@@ -1221,7 +1224,7 @@
    "id": "penta_3_weight_5",
    "label": "Penta-3 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_3_weight_3) * penta_3 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_3_weight_3) * penta_3_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
@@ -1232,7 +1235,7 @@
    "expected": 0.658441
   },
   {
-   "id": "penta_3_low_incentive_2",
+   "id": "penta_3_low_incentive_3",
    "label": "Penta-3 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.0207779202971321,
@@ -1244,7 +1247,7 @@
    }
   },
   {
-   "id": "penta_3_low_incentive_3",
+   "id": "penta_3_low_incentive_4",
    "label": "Penta-3 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.759802346321764,
@@ -1256,43 +1259,43 @@
    }
   },
   {
-   "id": "penta_3_3",
-   "label": "Penta-3 (-)",
+   "id": "penta_3_low_incentive_2",
+   "label": "Penta-3 (Low incentive)",
    "section": "effect_size_mccts",
-   "formula": "penta_3_low_incentive_2 / (1 - penta_3_low_incentive_3) / penta_3_low_incentive",
+   "formula": "penta_3_low_incentive_3 / (1 - penta_3_low_incentive_4) / penta_3_low_incentive",
    "expected": 0.1116173257,
    "format": "percent"
   },
   {
-   "id": "penta_3_2",
+   "id": "penta_3",
    "label": "Penta-3",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_3_weight_6) * penta_3_3 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_3_weight_6) * penta_3_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "penta_3_5",
+   "id": "penta_3_3",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "formula": "penta_3_weight_3",
    "expected": 0.658441
   },
   {
-   "id": "penta_3_7",
+   "id": "penta_3_5",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "formula": "avg(0.27, 0.25)",
    "expected": 0.26
   },
   {
-   "id": "penta_3_8",
+   "id": "penta_3_6",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "formula": "avg(0.3, 0.27)",
    "expected": 0.285
   },
   {
-   "id": "penta_3_9",
+   "id": "penta_3_7",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "value": 1.4,
@@ -1305,25 +1308,25 @@
    "format": "usd"
   },
   {
-   "id": "penta_3_6",
+   "id": "penta_3_4",
    "label": "Penta-3",
    "section": "effect_size_mccts",
-   "formula": "penta_3_7 / (1 - penta_3_8) / penta_3_9 * all_adjustments",
+   "formula": "penta_3_5 / (1 - penta_3_6) / penta_3_7 * all_adjustments",
    "expected": 0.2992207792,
    "format": "percent"
   },
   {
-   "id": "penta_3_4",
+   "id": "penta_3_2",
    "label": "Penta-3",
    "section": "effect_size_mccts",
-   "formula": "(1 - penta_3_5) * penta_3_6 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - penta_3_3) * penta_3_4 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
    "id": "penta_3_weight_4",
    "label": "Penta-3 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_3_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_3_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_3_4",
+   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * penta_3_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * penta_3 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * penta_3_2",
    "expected": 0.0
   },
   {
@@ -1369,7 +1372,7 @@
    "expected": 0.464611
   },
   {
-   "id": "measles_1_high_incentive_2",
+   "id": "measles_1_high_incentive_3",
    "label": "Measles 1 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.0605758353072492,
@@ -1381,7 +1384,7 @@
    }
   },
   {
-   "id": "measles_1_high_incentive_3",
+   "id": "measles_1_high_incentive_4",
    "label": "Measles 1 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.640297615906412,
@@ -1393,10 +1396,10 @@
    }
   },
   {
-   "id": "measles_1",
-   "label": "Measles 1 (-)",
+   "id": "measles_1_high_incentive_2",
+   "label": "Measles 1 (High incentive)",
    "section": "effect_size_mccts",
-   "formula": "measles_1_high_incentive_2 / (1 - measles_1_high_incentive_3) / measles_1_high_incentive",
+   "formula": "measles_1_high_incentive_3 / (1 - measles_1_high_incentive_4) / measles_1_high_incentive",
    "expected": 0.06237238214,
    "format": "percent"
   },
@@ -1404,18 +1407,18 @@
    "id": "measles_1_weight_5",
    "label": "Measles 1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_1_weight_3) * measles_1 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_1_weight_3) * measles_1_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "measles_1_3",
+   "id": "measles_1_2",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "formula": "mcv1_high_coverage_districts * coverage_adjustment_for_those_without_a_cell_phone_high_cove",
    "expected": 0.464611
   },
   {
-   "id": "measles_1_low_incentive_2",
+   "id": "measles_1_low_incentive_3",
    "label": "Measles 1 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.0172958685138509,
@@ -1427,7 +1430,7 @@
    }
   },
   {
-   "id": "measles_1_low_incentive_3",
+   "id": "measles_1_low_incentive_4",
    "label": "Measles 1 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.640297615906412,
@@ -1439,29 +1442,29 @@
    }
   },
   {
-   "id": "measles_1_4",
-   "label": "Measles 1 (-)",
+   "id": "measles_1_low_incentive_2",
+   "label": "Measles 1 (Low incentive)",
    "section": "effect_size_mccts",
-   "formula": "measles_1_low_incentive_2 / (1 - measles_1_low_incentive_3) / measles_1_low_incentive",
+   "formula": "measles_1_low_incentive_3 / (1 - measles_1_low_incentive_4) / measles_1_low_incentive",
    "expected": 0.05342647848,
    "format": "percent"
   },
   {
-   "id": "measles_1_2",
+   "id": "measles_1",
    "label": "Measles 1",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_1_3) * measles_1_4 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_1_2) * measles_1_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "measles_1_6",
+   "id": "measles_1_4",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "formula": "measles_1_weight_3",
    "expected": 0.464611
   },
   {
-   "id": "measles_1_8",
+   "id": "measles_1_6",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "value": 0.14,
@@ -1473,7 +1476,7 @@
    }
   },
   {
-   "id": "measles_1_9",
+   "id": "measles_1_7",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "value": 0.59,
@@ -1485,7 +1488,7 @@
    }
   },
   {
-   "id": "measles_1_10",
+   "id": "measles_1_8",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "value": 5.5,
@@ -1498,25 +1501,25 @@
    "format": "usd"
   },
   {
-   "id": "measles_1_7",
+   "id": "measles_1_5",
    "label": "Measles 1",
    "section": "effect_size_mccts",
-   "formula": "measles_1_8 / (1 - measles_1_9) / measles_1_10 * all_adjustments",
+   "formula": "measles_1_6 / (1 - measles_1_7) / measles_1_8 * all_adjustments",
    "expected": 0.0715210643,
    "format": "percent"
   },
   {
-   "id": "measles_1_5",
+   "id": "measles_1_3",
    "label": "Measles 1",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_1_6) * measles_1_7 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_1_4) * measles_1_5 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
    "id": "measles_1_weight_4",
    "label": "Measles 1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * measles_1_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * measles_1_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * measles_1_5",
+   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * measles_1_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * measles_1 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * measles_1_3",
    "expected": 0.0
   },
   {
@@ -1562,7 +1565,7 @@
    "expected": 0.109576
   },
   {
-   "id": "measles_2_high_incentive_2",
+   "id": "measles_2_high_incentive_3",
    "label": "Measles 2 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.0834874714598291,
@@ -1574,7 +1577,7 @@
    }
   },
   {
-   "id": "measles_2_high_incentive_3",
+   "id": "measles_2_high_incentive_4",
    "label": "Measles 2 (High incentive)",
    "section": "effect_size_mccts",
    "value": 0.434569314711149,
@@ -1586,10 +1589,10 @@
    }
   },
   {
-   "id": "measles_2",
-   "label": "Measles 2 (-)",
+   "id": "measles_2_high_incentive_2",
+   "label": "Measles 2 (High incentive)",
    "section": "effect_size_mccts",
-   "formula": "measles_2_high_incentive_2 / (1 - measles_2_high_incentive_3) / measles_2_high_incentive",
+   "formula": "measles_2_high_incentive_3 / (1 - measles_2_high_incentive_4) / measles_2_high_incentive",
    "expected": 0.05468625338,
    "format": "percent"
   },
@@ -1597,18 +1600,18 @@
    "id": "measles_2_weight_5",
    "label": "Measles 2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_2_weight_3) * measles_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_2_weight_3) * measles_2_high_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "measles_2_3",
+   "id": "measles_2_2",
    "label": "Measles 2",
    "section": "effect_size_mccts",
    "formula": "mcv2_high_coverage_districts * coverage_adjustment_for_those_without_a_cell_phone_high_cove",
    "expected": 0.109576
   },
   {
-   "id": "measles_2_low_incentive_2",
+   "id": "measles_2_low_incentive_3",
    "label": "Measles 2 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.0459500543948496,
@@ -1620,7 +1623,7 @@
    }
   },
   {
-   "id": "measles_2_low_incentive_3",
+   "id": "measles_2_low_incentive_4",
    "label": "Measles 2 (Low incentive)",
    "section": "effect_size_mccts",
    "value": 0.434569314711149,
@@ -1632,39 +1635,39 @@
    }
   },
   {
-   "id": "measles_2_4",
-   "label": "Measles 2 (-)",
+   "id": "measles_2_low_incentive_2",
+   "label": "Measles 2 (Low incentive)",
    "section": "effect_size_mccts",
-   "formula": "measles_2_low_incentive_2 / (1 - measles_2_low_incentive_3) / measles_2_low_incentive",
+   "formula": "measles_2_low_incentive_3 / (1 - measles_2_low_incentive_4) / measles_2_low_incentive",
    "expected": 0.09029509244,
    "format": "percent"
   },
   {
-   "id": "measles_2_2",
+   "id": "measles_2",
    "label": "Measles 2",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_2_3) * measles_2_4 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_2_2) * measles_2_low_incentive_2 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
-   "id": "measles_2_6",
+   "id": "measles_2_4",
    "label": "Measles 2",
    "section": "effect_size_mccts",
    "formula": "measles_2_weight_3",
    "expected": 0.109576
   },
   {
-   "id": "measles_2_5",
+   "id": "measles_2_3",
    "label": "Measles 2",
    "section": "effect_size_mccts",
-   "formula": "(1 - measles_2_6) * measles_1_7 * incentive_amount_per_visit_current_usd_high_coverage_distric",
+   "formula": "(1 - measles_2_4) * measles_1_5 * incentive_amount_per_visit_current_usd_high_coverage_distric",
    "expected": 0.0
   },
   {
    "id": "measles_2_weight_4",
    "label": "Measles 2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * measles_2_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * measles_2_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * measles_2_5",
+   "formula": "weight_on_benchmark_1_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale * external_validity_spending_power_in_pakistan_during_trial_vs * external_validity_lower_quality_implementation_at_scale_high * external_validity_weaker_effect_from_covid_high_coverage_dis * internal_validity_high_coverage_districts * measles_2_weight_5 + weight_on_benchmark_2_high_coverage_districts * external_validity_better_advertising_for_incentive_at_scale_2 * external_validity_spending_power_in_pakistan_during_trial_vs_2 * external_validity_lower_quality_implementation_at_scale_high_2 * external_validity_weaker_effect_from_covid_high_coverage_dis_2 * internal_validity_high_coverage_districts_2 * measles_2 + weight_on_benchmark_3_high_coverage_districts * adjustment_for_spending_power_north_west_nigeria_during_new * adjustment_for_lower_effect_of_mobile_vs_direct_cash_transfe * adjustment_for_encashment_rate_high_coverage_districts * external_validity_weaker_effect_from_covid_high_coverage_dis_3 * measles_2_3",
    "expected": 0.0
   },
   {
@@ -2130,8 +2133,8 @@
    "format": "percent"
   },
   {
-   "id": "lower_respiratory_infections_s_pneumoniae_3",
-   "label": "Lower respiratory infections (S.Pneumoniae) (-)",
+   "id": "lower_respiratory_infections_s_pneumoniae_discount",
+   "label": "Lower respiratory infections (S.Pneumoniae) (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "lower_respiratory_infections_s_pneumoniae_neonatal * 1.1",
    "expected": 0.3575704279,
@@ -2141,7 +2144,7 @@
    "id": "lower_respiratory_infections_s_pneumoniae_of_under_5_deaths",
    "label": "Lower respiratory infections (S.Pneumoniae) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - lower_respiratory_infections_s_pneumoniae_3",
+   "formula": "1 - lower_respiratory_infections_s_pneumoniae_discount",
    "expected": 0.6424295721,
    "format": "percent"
   },
@@ -2231,8 +2234,8 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_4",
-   "label": "Pneumococcal meningitis (-)",
+   "id": "pneumococcal_meningitis_discount",
+   "label": "Pneumococcal meningitis (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "pneumococcal_meningitis_neonatal * 1.1",
    "expected": 0.1214728981,
@@ -2242,7 +2245,7 @@
    "id": "pneumococcal_meningitis_of_under_5_deaths_that_occur_after_v",
    "label": "Pneumococcal meningitis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - pneumococcal_meningitis_4",
+   "formula": "1 - pneumococcal_meningitis_discount",
    "expected": 0.8785271019,
    "format": "percent"
   },
@@ -2703,8 +2706,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year * 0.15",
    "expected": 0.06020475328,
@@ -2714,7 +2717,7 @@
    "id": "whooping_cough_of_under_5_deaths_that_occur_after_vaccine_st",
    "label": "Whooping cough (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable",
+   "formula": "1 - unavailable_discount",
    "expected": 0.9397952467,
    "format": "percent"
   },
@@ -2783,8 +2786,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_2",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount_2",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year_2 * 0.15",
    "expected": 0.04179305284,
@@ -2794,7 +2797,7 @@
    "id": "diphtheria_of_under_5_deaths_that_occur_after_vaccine_starte",
    "label": "Diphtheria (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable_2",
+   "formula": "1 - unavailable_discount_2",
    "expected": 0.9582069472,
    "format": "percent"
   },
@@ -2876,8 +2879,8 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_3",
-   "label": "Tetanus (-)",
+   "id": "tetanus_discount",
+   "label": "Tetanus (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "tetanus_unavailable * 1.1",
    "expected": 0.8651365386,
@@ -2887,7 +2890,7 @@
    "id": "tetanus_of_under_5_deaths_that_occur_after_vaccine_started",
    "label": "Tetanus (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - tetanus_3",
+   "formula": "1 - tetanus_discount",
    "expected": 0.1348634614,
    "format": "percent"
   },
@@ -3030,10 +3033,10 @@
    "format": "percent"
   },
   {
-   "id": "lower_respiratory_infections_hib_3",
-   "label": "Lower respiratory infections (HiB) (-)",
+   "id": "lower_respiratory_infections_hib_discount",
+   "label": "Lower respiratory infections (HiB) (Discount)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "lower_respiratory_infections_s_pneumoniae_3",
+   "formula": "lower_respiratory_infections_s_pneumoniae_discount",
    "expected": 0.3575704279,
    "format": "percent"
   },
@@ -3041,7 +3044,7 @@
    "id": "lower_respiratory_infections_hib_of_under_5_deaths_that_occu",
    "label": "Lower respiratory infections (HiB) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - lower_respiratory_infections_hib_3",
+   "formula": "1 - lower_respiratory_infections_hib_discount",
    "expected": 0.6424295721,
    "format": "percent"
   },
@@ -3131,8 +3134,8 @@
    "format": "percent"
   },
   {
-   "id": "h_influenzae_type_b_meningitis_4",
-   "label": "H influenzae type B meningitis (-)",
+   "id": "h_influenzae_type_b_meningitis_discount",
+   "label": "H influenzae type B meningitis (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "h_influenzae_type_b_meningitis_unavailable * 1.1",
    "expected": 0.1203191726,
@@ -3142,7 +3145,7 @@
    "id": "h_influenzae_type_b_meningitis_of_under_5_deaths_that_occur",
    "label": "H influenzae type B meningitis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - h_influenzae_type_b_meningitis_4",
+   "formula": "1 - h_influenzae_type_b_meningitis_discount",
    "expected": 0.8796808274,
    "format": "percent"
   },
@@ -3426,8 +3429,8 @@
    "format": "percent"
   },
   {
-   "id": "diarrhea",
-   "label": "Diarrhea (-)",
+   "id": "diarrhea_discount",
+   "label": "Diarrhea (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "diarrhea_ignoring * 1.1",
    "expected": 0.08903411553,
@@ -3437,7 +3440,7 @@
    "id": "diarrhea_rotavirus_of_under_5_deaths_that_occur_after_vaccin",
    "label": "Diarrhea (rotavirus) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - diarrhea",
+   "formula": "1 - diarrhea_discount",
    "expected": 0.9109658845,
    "format": "percent"
   },
@@ -3697,8 +3700,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_3",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount_3",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year_3 * 0.75",
    "expected": 0.1631374263,
@@ -3708,7 +3711,7 @@
    "id": "measles_of_under_5_deaths_that_occur_after_vaccine_started",
    "label": "Measles (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable_3",
+   "formula": "1 - unavailable_discount_3",
    "expected": 0.8368625737,
    "format": "percent"
   },
@@ -4391,7 +4394,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_1_11",
+   "id": "penta_1_9",
    "label": "Penta-1",
    "section": "effect_size_zm",
    "value": 0.00873275663457429,
@@ -4403,7 +4406,7 @@
    }
   },
   {
-   "id": "penta_1_12",
+   "id": "penta_1_10",
    "label": "Penta-1",
    "section": "effect_size_zm",
    "value": 0.936210131332082,
@@ -4415,10 +4418,10 @@
    }
   },
   {
-   "id": "penta_1_10",
+   "id": "penta_1_8",
    "label": "Penta-1",
    "section": "effect_size_zm",
-   "formula": "penta_1_11 / (1 - penta_1_12)",
+   "formula": "penta_1_9 / (1 - penta_1_10)",
    "expected": 0.1368988025,
    "format": "percent"
   },
@@ -4426,18 +4429,18 @@
    "id": "penta_1_high_coverage_districts_2",
    "label": "Penta-1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(avg(pcv1_high_coverage_districts_2, dtp1_high_coverage_districts_2, hib1_high_coverage_districts_2) - penta_1_10) / (1 - penta_1_10)",
+   "formula": "(avg(pcv1_high_coverage_districts_2, dtp1_high_coverage_districts_2, hib1_high_coverage_districts_2) - penta_1_8) / (1 - penta_1_8)",
    "expected": 0.8184477087
   },
   {
    "id": "penta_1_high_coverage_districts",
    "label": "Penta-1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(1 - penta_1_high_coverage_districts_2) * penta_1_10",
+   "formula": "(1 - penta_1_high_coverage_districts_2) * penta_1_8",
    "expected": 0.02485429127
   },
   {
-   "id": "penta_1_13",
+   "id": "penta_1_11",
    "label": "Penta-1",
    "section": "vaccine_efficacy_and_deaths_amo",
    "formula": "(pcv_vaccine_3_doses_3 + dtp_vaccine_3_doses_3 + hib_vaccine_3_doses_3) * percent_of_full_vaccine_efficacy_from_1_dose + rotavirus_vaccine_2_doses_3 * percent_of_full_vaccine_efficacy_from_1_dose_2",
@@ -4448,7 +4451,7 @@
    "id": "penta_1_high_coverage_districts_3",
    "label": "Penta-1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "penta_1_13",
+   "formula": "penta_1_11",
    "expected": 0.2845484413,
    "format": "percent"
   },
@@ -4490,7 +4493,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_2_11",
+   "id": "penta_2_9",
    "label": "Penta-2",
    "section": "effect_size_zm",
    "value": 0.0312986748549855,
@@ -4502,7 +4505,7 @@
    }
   },
   {
-   "id": "penta_2_12",
+   "id": "penta_2_10",
    "label": "Penta-2",
    "section": "effect_size_zm",
    "value": 0.823014383989993,
@@ -4514,10 +4517,10 @@
    }
   },
   {
-   "id": "penta_2_10",
+   "id": "penta_2_8",
    "label": "Penta-2",
    "section": "effect_size_zm",
-   "formula": "penta_2_11 / (1 - penta_2_12)",
+   "formula": "penta_2_9 / (1 - penta_2_10)",
    "expected": 0.1768430427,
    "format": "percent"
   },
@@ -4525,18 +4528,18 @@
    "id": "penta_2_high_coverage_districts_2",
    "label": "Penta-2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(avg(pcv2_high_coverage_districts_2, dtp2_high_coverage_districts_2, hib2_high_coverage_districts_2) - penta_2_10) / (1 - penta_2_10)",
+   "formula": "(avg(pcv2_high_coverage_districts_2, dtp2_high_coverage_districts_2, hib2_high_coverage_districts_2) - penta_2_8) / (1 - penta_2_8)",
    "expected": 0.6985204367
   },
   {
    "id": "penta_2_high_coverage_districts",
    "label": "Penta-2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(1 - penta_2_high_coverage_districts_2) * penta_2_10",
+   "formula": "(1 - penta_2_high_coverage_districts_2) * penta_2_8",
    "expected": 0.05331456329
   },
   {
-   "id": "penta_2_13",
+   "id": "penta_2_11",
    "label": "Penta-2",
    "section": "vaccine_efficacy_and_deaths_amo",
    "formula": "(pcv_vaccine_3_doses_3 + dtp_vaccine_3_doses_3 + hib_vaccine_3_doses_3) * (percent_of_full_vaccine_efficacy_from_2_doses - percent_of_full_vaccine_efficacy_from_1_dose) + rotavirus_vaccine_2_doses_3 * (percent_of_full_vacine_efficacy_from_2_doses - percent_of_full_vaccine_efficacy_from_1_dose_2)",
@@ -4547,7 +4550,7 @@
    "id": "penta_2_high_coverage_districts_3",
    "label": "Penta-2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "penta_2_13",
+   "formula": "penta_2_11",
    "expected": 0.321695868,
    "format": "percent"
   },
@@ -4589,7 +4592,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_3_11",
+   "id": "penta_3_9",
    "label": "Penta-3",
    "section": "effect_size_zm",
    "value": 0.0431044101116328,
@@ -4601,7 +4604,7 @@
    }
   },
   {
-   "id": "penta_3_12",
+   "id": "penta_3_10",
    "label": "Penta-3",
    "section": "effect_size_zm",
    "value": 0.716697936210131,
@@ -4613,10 +4616,10 @@
    }
   },
   {
-   "id": "penta_3_10",
+   "id": "penta_3_8",
    "label": "Penta-3",
    "section": "effect_size_zm",
-   "formula": "penta_3_11 / (1 - penta_3_12)",
+   "formula": "penta_3_9 / (1 - penta_3_10)",
    "expected": 0.1521500039,
    "format": "percent"
   },
@@ -4624,18 +4627,18 @@
    "id": "penta_3_high_coverage_districts_2",
    "label": "Penta-3 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(avg(pcv3_high_coverage_districts_2, dtp3_high_coverage_districts_2, hib3_high_coverage_districts_2) - penta_3_10) / (1 - penta_3_10)",
+   "formula": "(avg(pcv3_high_coverage_districts_2, dtp3_high_coverage_districts_2, hib3_high_coverage_districts_2) - penta_3_8) / (1 - penta_3_8)",
    "expected": 0.6115845945
   },
   {
    "id": "penta_3_high_coverage_districts",
    "label": "Penta-3 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(1 - penta_3_high_coverage_districts_2) * penta_3_10",
+   "formula": "(1 - penta_3_high_coverage_districts_2) * penta_3_8",
    "expected": 0.05909740546
   },
   {
-   "id": "penta_3_13",
+   "id": "penta_3_11",
    "label": "Penta-3",
    "section": "vaccine_efficacy_and_deaths_amo",
    "formula": "(pcv_vaccine_3_doses_3 + dtp_vaccine_3_doses_3 + hib_vaccine_3_doses_3) * (percent_of_full_vaccine_efficacy_from_3_doses - percent_of_full_vaccine_efficacy_from_2_doses)",
@@ -4646,7 +4649,7 @@
    "id": "penta_3_high_coverage_districts_3",
    "label": "Penta-3 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "penta_3_13",
+   "formula": "penta_3_11",
    "expected": 0.02595481484,
    "format": "percent"
   },
@@ -4672,7 +4675,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_1_12",
+   "id": "measles_1_10",
    "label": "Measles 1",
    "section": "effect_size_zm",
    "value": 0.0330430818226104,
@@ -4684,7 +4687,7 @@
    }
   },
   {
-   "id": "measles_1_13",
+   "id": "measles_1_11",
    "label": "Measles 1",
    "section": "effect_size_zm",
    "value": 0.607254534083802,
@@ -4696,10 +4699,10 @@
    }
   },
   {
-   "id": "measles_1_11",
+   "id": "measles_1_9",
    "label": "Measles 1",
    "section": "effect_size_zm",
-   "formula": "measles_1_12 / (1 - measles_1_13)",
+   "formula": "measles_1_10 / (1 - measles_1_11)",
    "expected": 0.08413357935,
    "format": "percent"
   },
@@ -4707,18 +4710,18 @@
    "id": "measles_1_high_coverage_districts_2",
    "label": "Measles 1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(mcv1_high_coverage_districts_2 - measles_1_11) / (1 - measles_1_11)",
+   "formula": "(mcv1_high_coverage_districts_2 - measles_1_9) / (1 - measles_1_9)",
    "expected": 0.4274558078
   },
   {
    "id": "measles_1_high_coverage_districts",
    "label": "Measles 1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(1 - measles_1_high_coverage_districts_2) * measles_1_11",
+   "formula": "(1 - measles_1_high_coverage_districts_2) * measles_1_9",
    "expected": 0.04817019223
   },
   {
-   "id": "measles_1_14",
+   "id": "measles_1_12",
    "label": "Measles 1",
    "section": "vaccine_efficacy_and_deaths_amo",
    "formula": "measles_vaccine_2_doses_3 * percent_of_full_vaccine_efficacy_from_1_dose_2",
@@ -4729,7 +4732,7 @@
    "id": "measles_1_high_coverage_districts_3",
    "label": "Measles 1 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "measles_1_14",
+   "formula": "measles_1_12",
    "expected": 0.05828039006,
    "format": "percent"
   },
@@ -4755,7 +4758,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_2_8",
+   "id": "measles_2_6",
    "label": "Measles 2",
    "section": "effect_size_zm",
    "value": 0.0405730670563652,
@@ -4767,7 +4770,7 @@
    }
   },
   {
-   "id": "measles_2_9",
+   "id": "measles_2_7",
    "label": "Measles 2",
    "section": "effect_size_zm",
    "value": 0.393996247654784,
@@ -4779,10 +4782,10 @@
    }
   },
   {
-   "id": "measles_2_7",
+   "id": "measles_2_5",
    "label": "Measles 2",
    "section": "effect_size_zm",
-   "formula": "measles_2_8 / (1 - measles_2_9)",
+   "formula": "measles_2_6 / (1 - measles_2_7)",
    "expected": 0.0669518413,
    "format": "percent"
   },
@@ -4790,18 +4793,18 @@
    "id": "measles_2_high_coverage_districts_2",
    "label": "Measles 2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(mcv2_high_coverage_districts_2 - measles_2_7) / (1 - measles_2_7)",
+   "formula": "(mcv2_high_coverage_districts_2 - measles_2_5) / (1 - measles_2_5)",
    "expected": 0.04846712174
   },
   {
    "id": "measles_2_high_coverage_districts",
    "label": "Measles 2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "(1 - measles_2_high_coverage_districts_2) * measles_2_7",
+   "formula": "(1 - measles_2_high_coverage_districts_2) * measles_2_5",
    "expected": 0.06370687826
   },
   {
-   "id": "measles_2_10",
+   "id": "measles_2_8",
    "label": "Measles 2",
    "section": "vaccine_efficacy_and_deaths_amo",
    "formula": "measles_vaccine_2_doses_3 * (percent_of_full_vacine_efficacy_from_2_doses - percent_of_full_vaccine_efficacy_from_1_dose_2)",
@@ -4812,7 +4815,7 @@
    "id": "measles_2_high_coverage_districts_3",
    "label": "Measles 2 (High coverage districts)",
    "section": "effect_size_zm",
-   "formula": "measles_2_10",
+   "formula": "measles_2_8",
    "expected": 0.02742606591,
    "format": "percent"
   },
@@ -4916,7 +4919,7 @@
    "id": "penta_1_weight_7",
    "label": "Penta-1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "penta_1_13",
+   "formula": "penta_1_11",
    "expected": 0.2845484413,
    "format": "percent"
   },
@@ -4924,7 +4927,7 @@
    "id": "penta_2_weight_7",
    "label": "Penta-2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "penta_2_13",
+   "formula": "penta_2_11",
    "expected": 0.321695868,
    "format": "percent"
   },
@@ -4932,7 +4935,7 @@
    "id": "penta_3_weight_7",
    "label": "Penta-3 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "penta_3_13",
+   "formula": "penta_3_11",
    "expected": 0.02595481484,
    "format": "percent"
   },
@@ -4940,7 +4943,7 @@
    "id": "measles_1_weight_6",
    "label": "Measles 1 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "measles_1_14",
+   "formula": "measles_1_12",
    "expected": 0.05828039006,
    "format": "percent"
   },
@@ -4948,7 +4951,7 @@
    "id": "measles_2_weight_6",
    "label": "Measles 2 (Weight)",
    "section": "effect_size_mccts",
-   "formula": "measles_2_10",
+   "formula": "measles_2_8",
    "expected": 0.02742606591,
    "format": "percent"
   },
@@ -4982,7 +4985,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_1_14",
+   "id": "penta_1_12",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "formula": "penta_1_weight_7",
@@ -4990,7 +4993,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_2_14",
+   "id": "penta_2_12",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "formula": "penta_2_weight_7",
@@ -4998,7 +5001,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_3_14",
+   "id": "penta_3_12",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "formula": "penta_3_weight_7",
@@ -5006,7 +5009,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_1_15",
+   "id": "measles_1_13",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "formula": "measles_1_weight_6",
@@ -5014,7 +5017,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_2_11",
+   "id": "measles_2_9",
    "label": "Measles 2",
    "section": "effect_size_mccts",
    "formula": "measles_2_weight_6",
@@ -5025,7 +5028,7 @@
    "id": "weighted_avg",
    "label": "Weighted avg.",
    "section": "effect_size_mccts",
-   "formula": "sum(bcg * bcg_15, penta_1_3 * penta_1_14, penta_2_2 * penta_2_14, penta_3_2 * penta_3_14, measles_1_2 * measles_1_15, measles_2_2 * measles_2_11)",
+   "formula": "sum(bcg * bcg_15, penta_1 * penta_1_12, penta_2 * penta_2_12, penta_3 * penta_3_12, measles_1 * measles_1_13, measles_2 * measles_2_9)",
    "expected": 0.0
   },
   {
@@ -5051,7 +5054,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_1_15",
+   "id": "penta_1_13",
    "label": "Penta-1",
    "section": "effect_size_mccts",
    "formula": "penta_1_weight_7",
@@ -5059,7 +5062,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_2_15",
+   "id": "penta_2_13",
    "label": "Penta-2",
    "section": "effect_size_mccts",
    "formula": "penta_2_weight_7",
@@ -5067,7 +5070,7 @@
    "format": "percent"
   },
   {
-   "id": "penta_3_15",
+   "id": "penta_3_13",
    "label": "Penta-3",
    "section": "effect_size_mccts",
    "formula": "penta_3_weight_7",
@@ -5075,7 +5078,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_1_16",
+   "id": "measles_1_14",
    "label": "Measles 1",
    "section": "effect_size_mccts",
    "formula": "measles_1_weight_6",
@@ -5083,7 +5086,7 @@
    "format": "percent"
   },
   {
-   "id": "measles_2_12",
+   "id": "measles_2_10",
    "label": "Measles 2",
    "section": "effect_size_mccts",
    "formula": "measles_2_weight_6",
@@ -5094,7 +5097,7 @@
    "id": "weighted_avg_2",
    "label": "Weighted avg.",
    "section": "effect_size_mccts",
-   "formula": "sum(bcg_2 * bcg_16, penta_1_4 * penta_1_15, penta_2_4 * penta_2_15, penta_3_4 * penta_3_15, measles_1_5 * measles_1_16, measles_2_5 * measles_2_12)",
+   "formula": "sum(bcg_2 * bcg_16, penta_1_2 * penta_1_13, penta_2_2 * penta_2_13, penta_3_2 * penta_3_13, measles_1_3 * measles_1_14, measles_2_3 * measles_2_10)",
    "expected": 0.0
   },
   {
@@ -5165,13 +5168,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under",
    "label": "Value assigned to averting the death of an individual under 5",
    "section": "moral_weights",
-   "value": 117.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Moral weights!B2"
-   }
+   },
+   "formula": "117 * $life_value_multiplier",
+   "expected": 117.0,
+   "explainer": "GiveWell's moral weight, 117 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_from_child_deaths_averted_in_the_cohort_high",
@@ -5646,14 +5650,15 @@
    "id": "discount_rate_for_future_averted_deaths_high_coverage_distri",
    "label": "Discount rate for future averted deaths (High coverage districts)",
    "section": "deaths_at_older_age_groups",
-   "value": 0.005,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Deaths at older age groups!B2"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.005,
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.005.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.005."
   },
   {
    "id": "discounted_deaths_averted_in_cohort_high_coverage_districts",
@@ -5666,13 +5671,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
    "label": "Value assigned to averting the death of an individual under 5-14",
    "section": "moral_weights",
-   "value": 134.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Moral weights!B3"
-   }
+   },
+   "formula": "134 * $life_value_multiplier",
+   "expected": 134.0,
+   "explainer": "GiveWell's moral weight, 134 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_14_y",
@@ -6119,13 +6125,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_3",
    "label": "Value assigned to averting the death of an individual under 15-49",
    "section": "moral_weights",
-   "value": 104.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Moral weights!B4"
-   }
+   },
+   "formula": "104 * $life_value_multiplier",
+   "expected": 104.0,
+   "explainer": "GiveWell's moral weight, 104 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_15_49",
@@ -6572,13 +6579,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_4",
    "label": "Value assigned to averting the death of an individual under 50-74",
    "section": "moral_weights",
-   "value": 42.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Moral weights!B5"
-   }
+   },
+   "formula": "42 * $life_value_multiplier",
+   "expected": 42.0,
+   "explainer": "GiveWell's moral weight, 42 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_50_74",
@@ -6675,40 +6683,40 @@
    "id": "total_increase_in_ln_consumption_per_person_per_transfer_hig",
    "label": "Total increase in ln(consumption) per person per transfer (High coverage districts)",
    "section": "consumption_benefits",
-   "value": 0.00614257,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Consumption benefits!B3"
    },
-   "explainer": "From New Incentives CEA"
+   "explainer": "From New Incentives CEA",
+   "formula": "@givewell.total_increase_in_ln_consumption_per_person_per_transfer_hig",
+   "expected": 0.00614257
   },
   {
    "id": "household_size_high_coverage_districts",
    "label": "Household size (High coverage districts)",
    "section": "consumption_benefits",
-   "value": 4.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Consumption benefits!B4"
    },
-   "explainer": "Default value from GiveDirectly"
+   "explainer": "Default value from GiveDirectly",
+   "formula": "@givewell.household_size_high_coverage_districts",
+   "expected": 4.7
   },
   {
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (High coverage districts)",
    "section": "consumption_benefits",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Consumption benefits!B5"
    },
-   "explainer": "Moral weights"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nMoral weights",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
    "id": "units_of_value_from_consumption_per_person_receiving_incenti_2",
@@ -6737,15 +6745,15 @@
    "id": "new_incentives_incentive_size_current_usd_high_coverage_dist",
    "label": "New Incentives incentive size (current USD) (High coverage districts)",
    "section": "consumption_benefits",
-   "value": 11.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rL6ofJ9Foyt388U9UWE7SAndhxkEoPD87IuQzIcyUsw/edit",
     "cell": "Consumption benefits!B7"
    },
    "explainer": "From New Incentives CEA",
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.new_incentives_incentive_size_current_usd_high_coverage_dist",
+   "expected": 11.04
   },
   {
    "id": "adjustment_for_spending_power_north_west_nigeria_during_new_2",

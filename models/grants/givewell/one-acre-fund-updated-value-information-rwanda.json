@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -534,14 +535,14 @@
    "id": "exchange_rate_grevillea",
    "label": "Exchange Rate (Grevillea)",
    "section": "kenya",
-   "value": 108.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1lIEYkle23H4kA9orEyHh6zEYv3xwG__0shWUaMmGyLI/edit",
     "cell": "Kenya!C6"
    },
-   "explainer": "Unit Price (Local)"
+   "explainer": "Unit Price (Local)",
+   "formula": "@givewell.exchange_rate_grevillea",
+   "expected": 108.0
   },
   {
    "id": "unit_price_usd_tree",
@@ -6535,13 +6536,14 @@
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Costs: 3 year base, benefits: 15 years)",
    "section": "cost_effectiveness_analysis",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1lIEYkle23H4kA9orEyHh6zEYv3xwG__0shWUaMmGyLI/edit",
     "cell": "Cost-effectiveness analysis!B23"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
    "id": "units_of_value_generated_by_the_program_costs_3_year_base_be",

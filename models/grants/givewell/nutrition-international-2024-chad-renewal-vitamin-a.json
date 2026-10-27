@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -56,8 +57,8 @@
  ],
  "rows": [
   {
-   "id": "input",
-   "label": "input",
+   "id": "grant_size",
+   "label": "Grant size",
    "section": "simple_cea",
    "value": 1000000.0,
    "kind": "estimate",
@@ -69,8 +70,8 @@
    "format": "usd"
   },
   {
-   "id": "row_6",
-   "label": "-",
+   "id": "cost_per_person_under_age_five_reached_value",
+   "label": "Cost per person under age five reached (#VALUE!)",
    "section": "simple_cea",
    "value": 2.6726772939999996,
    "kind": "estimate",
@@ -82,8 +83,8 @@
    "format": "usd"
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "grant_size_2",
+   "label": "Grant size",
    "section": "simple_cea",
    "value": 0.0,
    "kind": "estimate",
@@ -95,15 +96,15 @@
    "format": "usd"
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "number_of_people_under_age_five_reached_value",
+   "label": "Number of people under age five reached (#VALUE!)",
    "section": "simple_cea",
-   "formula": "iferror(input / row_6, input_2 / row_6)",
+   "formula": "iferror(grant_size / cost_per_person_under_age_five_reached_value, grant_size_2 / cost_per_person_under_age_five_reached_value)",
    "expected": 374156.6564
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "proportion_of_reached_children_who_would_have_received_vas_i",
+   "label": "Proportion of reached children who would have received VAS in the absence of the program (#VALUE!)",
    "section": "simple_cea",
    "value": 0.3,
    "kind": "estimate",
@@ -115,15 +116,15 @@
    "format": "percent"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "number_of_additional_children_receiving_vas_as_a_result_of_t",
+   "label": "Number of additional children receiving VAS as a result of the program (#VALUE!)",
    "section": "simple_cea",
-   "formula": "row_5 * (1 - row_7)",
+   "formula": "number_of_people_under_age_five_reached_value * (1 - proportion_of_reached_children_who_would_have_received_vas_i)",
    "expected": 261909.6595
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "mortality_rate_among_people_under_age_five_value",
+   "label": "Mortality rate among people under age five (#VALUE!)",
    "section": "simple_cea",
    "value": 0.01261876794412436,
    "kind": "estimate",
@@ -135,8 +136,8 @@
    "format": "percent"
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "effect_of_vas_on_under_five_mortality_value",
+   "label": "Effect of VAS on under-five mortality (#VALUE!)",
    "section": "simple_cea",
    "value": 0.048641725091067546,
    "kind": "estimate",
@@ -148,27 +149,28 @@
    "format": "percent"
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "number_of_deaths_averted_among_people_under_age_five_value",
+   "label": "Number of deaths averted among people under age five (#VALUE!)",
    "section": "simple_cea",
-   "formula": "row_4 * row_8 * row_9",
+   "formula": "number_of_additional_children_receiving_vas_as_a_result_of_t * mortality_rate_among_people_under_age_five_value * effect_of_vas_on_under_five_mortality_value",
    "expected": 160.7597931
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "moral_value_of_averting_the_death_of_a_person_under_age_five",
+   "label": "Moral value of averting the death of a person under age five",
    "section": "simple_cea",
-   "value": 118.73259,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1TtGkGLQiOUfYTKWuz1LGv6RoC0qgFHCnJZCnkyhQWew/edit",
     "cell": "Simple CEA!H89"
-   }
+   },
+   "formula": "118.73259 * $life_value_multiplier",
+   "expected": 118.73259,
+   "explainer": "GiveWell's moral weight, 118.73259 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
+   "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "inputs",
    "value": 0.0033545,
    "kind": "estimate",
@@ -179,22 +181,22 @@
    }
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
+   "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
    "section": "main_cea",
-   "formula": "input_5",
+   "formula": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi_2",
    "expected": 0.0033545
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire",
+   "label": "Initial cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#VALUE!)",
    "section": "simple_cea",
-   "formula": "iferror(row_3 * input_3 / input / input_4, row_3 * input_3 / input_2 / input_4)",
+   "formula": "iferror(number_of_deaths_averted_among_people_under_age_five_value * moral_value_of_averting_the_death_of_a_person_under_age_five / grant_size / value_generated_per_dollar_donated_to_givedirectly_s_uncondi, number_of_deaths_averted_among_people_under_age_five_value * moral_value_of_averting_the_death_of_a_person_under_age_five / grant_size_2 / value_generated_per_dollar_donated_to_givedirectly_s_uncondi)",
    "expected": 5.690095874
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "adjustment_to_account_for_developmental_benefits_long_term_i",
+   "label": "Adjustment to account for developmental benefits (long-term income increases) (#VALUE!)",
    "section": "simple_cea",
    "value": 0.24517600000000003,
    "kind": "estimate",
@@ -206,24 +208,24 @@
    "format": "percent"
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "developmental_benefits_long_term_income_increases_value",
+   "label": "Developmental benefits (long-term income increases) (#VALUE!)",
    "section": "simple_cea",
-   "formula": "row_12 / (1 * (1 + row_12))",
+   "formula": "adjustment_to_account_for_developmental_benefits_long_term_i / (1 * (1 + adjustment_to_account_for_developmental_benefits_long_term_i))",
    "expected": 0.1969006791,
    "format": "percent"
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "mortalities_averted_for_people_under_age_five_value",
+   "label": "Mortalities averted for people under age five (#VALUE!)",
    "section": "simple_cea",
-   "formula": "1 - row_11",
+   "formula": "1 - developmental_benefits_long_term_income_increases_value",
    "expected": 0.8030993209,
    "format": "percent"
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "adjustment_for_grantee_level_factors_value",
+   "label": "Adjustment for grantee-level factors (#VALUE!)",
    "section": "simple_cea",
    "value": -0.21999999999999997,
    "kind": "estimate",
@@ -235,8 +237,8 @@
    "format": "percent"
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_val",
+   "label": "Adjustment for additional program benefits and downsides (#VALUE!)",
    "section": "simple_cea",
    "value": 0.565,
    "kind": "estimate",
@@ -248,8 +250,8 @@
    "format": "percent"
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "adjustment_for_leverage_value",
+   "label": "Adjustment for leverage (#VALUE!)",
    "section": "simple_cea",
    "value": -0.05458995323054706,
    "kind": "estimate",
@@ -261,8 +263,8 @@
    "format": "percent"
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "adjustment_for_funging_value",
+   "label": "Adjustment for funging (#VALUE!)",
    "section": "simple_cea",
    "value": -0.2581587681881198,
    "kind": "estimate",
@@ -274,10 +276,10 @@
    "format": "percent"
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
+   "label": "Final cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#VALUE!)",
    "section": "simple_cea",
-   "formula": "row_2 / row_10 * (1 + row_13) * (1 + row_14) * (1 + sum(row_15, row_16))",
+   "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire / mortalities_averted_for_people_under_age_five_value * (1 + adjustment_for_grantee_level_factors_value) * (1 + adjustment_for_additional_program_benefits_and_downsides_val) * (1 + sum(adjustment_for_leverage_value, adjustment_for_funging_value))",
    "expected": 5.943945605
   },
   {
@@ -296,7 +298,7 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "row * cash_benchmark"
+   "formula": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect * cash_benchmark"
   }
  ],
  "output": {

@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.3
   }
  },
  "resources": [
@@ -5210,13 +5212,13 @@
    "id": "average_household_size",
    "label": "Average household size",
    "section": "vouchers",
-   "value": 4.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Vouchers!B3"
-   }
+   },
+   "formula": "@givewell.average_household_size_2",
+   "expected": 4.7
   },
   {
    "id": "percent_of_target_population_that_is_under_5",
@@ -7679,17 +7681,18 @@
    "id": "moral_weights_early_neonatal",
    "label": "Moral weights (Early Neonatal)",
    "section": "moral_weights",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!D17"
-   }
+   },
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6,
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "number",
-   "label": "Number",
+   "id": "enteric_infections",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 8133.941,
    "kind": "estimate",
@@ -7700,8 +7703,8 @@
    }
   },
   {
-   "id": "number_2",
-   "label": "Number",
+   "id": "enteric_infections_2",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 17651.42,
    "kind": "estimate",
@@ -7712,8 +7715,8 @@
    }
   },
   {
-   "id": "number_3",
-   "label": "Number",
+   "id": "enteric_infections_3",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 164229.5,
    "kind": "estimate",
@@ -7724,8 +7727,8 @@
    }
   },
   {
-   "id": "number_4",
-   "label": "Number",
+   "id": "enteric_infections_4",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 197379.4,
    "kind": "estimate",
@@ -7739,7 +7742,7 @@
    "id": "in_each_age_bracket_early_neonatal",
    "label": "% in each age bracket (Early Neonatal)",
    "section": "moral_weights",
-   "formula": "number / sum(number, number_2, number_3, number_4)",
+   "formula": "enteric_infections / sum(enteric_infections, enteric_infections_2, enteric_infections_3, enteric_infections_4)",
    "expected": 0.02099654491,
    "format": "percent"
   },
@@ -7747,19 +7750,20 @@
    "id": "moral_weights_late_neonatal",
    "label": "Moral weights (Late Neonatal)",
    "section": "moral_weights",
-   "value": 84.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!E17"
-   }
+   },
+   "formula": "84.5 * $life_value_multiplier",
+   "expected": 84.5,
+   "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_late_neonatal",
    "label": "% in each age bracket (Late Neonatal)",
    "section": "moral_weights",
-   "formula": "number_2 / sum(number, number_2, number_3, number_4)",
+   "formula": "enteric_infections_2 / sum(enteric_infections, enteric_infections_2, enteric_infections_3, enteric_infections_4)",
    "expected": 0.04556448501,
    "format": "percent"
   },
@@ -7767,19 +7771,20 @@
    "id": "moral_weights_post_neonatal",
    "label": "Moral weights (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!F17"
-   }
+   },
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7,
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_post_neonatal",
    "label": "% in each age bracket (Post Neonatal)",
    "section": "moral_weights",
-   "formula": "number_3 / sum(number, number_2, number_3, number_4)",
+   "formula": "enteric_infections_3 / sum(enteric_infections, enteric_infections_2, enteric_infections_3, enteric_infections_4)",
    "expected": 0.4239337454,
    "format": "percent"
   },
@@ -7787,19 +7792,20 @@
    "id": "moral_weights_1_to_4",
    "label": "Moral weights (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!G17"
-   }
+   },
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3,
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_1_to_4",
    "label": "% in each age bracket (1 to 4)",
    "section": "moral_weights",
-   "formula": "number_4 / sum(number, number_2, number_3, number_4)",
+   "formula": "enteric_infections_4 / sum(enteric_infections, enteric_infections_2, enteric_infections_3, enteric_infections_4)",
    "expected": 0.5095052247,
    "format": "percent"
   },
@@ -8098,15 +8104,15 @@
    "id": "percent_of_all_cause_mortality_caused_by_enteric_infections",
    "label": "Percent of all-cause mortality caused by enteric infections, Kenya 2019",
    "section": "internal_validity_adjustment",
-   "value": 0.1735,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Internal validity adjustment!B19"
    },
    "explainer": "GBD Results Tool\nhttp://ghdx.healthdata.org/gbd-results-tool?params=gbd-api-2019-permalink/11b40fcd1310c26df2a69d3ddf14ce5a",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell_kenya.percent_of_all_cause_mortality_caused_by_enteric_infections",
+   "expected": 0.1735
   },
   {
    "id": "reduction_in_diarrhea_morbidity_caused_by_in_line_chlorinati",
@@ -8217,17 +8223,18 @@
    "id": "moral_weights_5_to_9",
    "label": "Moral weights (5 to 9)",
    "section": "moral_weights",
-   "value": 134.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!H49"
-   }
+   },
+   "formula": "134.3 * $life_value_multiplier",
+   "expected": 134.3,
+   "explainer": "GiveWell's moral weight, 134.3 units of value, times your multiplier on the value of a life."
   },
   {
-   "id": "number_5",
-   "label": "Number",
+   "id": "enteric_infections_5",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 37602.75,
    "kind": "estimate",
@@ -8238,8 +8245,8 @@
    }
   },
   {
-   "id": "number_6",
-   "label": "Number",
+   "id": "enteric_infections_6",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 19410.88,
    "kind": "estimate",
@@ -8250,8 +8257,8 @@
    }
   },
   {
-   "id": "number_7",
-   "label": "Number",
+   "id": "enteric_infections_7",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 15742.04,
    "kind": "estimate",
@@ -8262,8 +8269,8 @@
    }
   },
   {
-   "id": "number_8",
-   "label": "Number",
+   "id": "enteric_infections_8",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 13370.06,
    "kind": "estimate",
@@ -8274,8 +8281,8 @@
    }
   },
   {
-   "id": "number_9",
-   "label": "Number",
+   "id": "enteric_infections_9",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 10943.04,
    "kind": "estimate",
@@ -8286,8 +8293,8 @@
    }
   },
   {
-   "id": "number_10",
-   "label": "Number",
+   "id": "enteric_infections_10",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 10166.97,
    "kind": "estimate",
@@ -8298,8 +8305,8 @@
    }
   },
   {
-   "id": "number_11",
-   "label": "Number",
+   "id": "enteric_infections_11",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 10461.39,
    "kind": "estimate",
@@ -8310,8 +8317,8 @@
    }
   },
   {
-   "id": "number_12",
-   "label": "Number",
+   "id": "enteric_infections_12",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 11154.71,
    "kind": "estimate",
@@ -8322,8 +8329,8 @@
    }
   },
   {
-   "id": "number_13",
-   "label": "Number",
+   "id": "enteric_infections_13",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 12551.32,
    "kind": "estimate",
@@ -8334,8 +8341,8 @@
    }
   },
   {
-   "id": "number_14",
-   "label": "Number",
+   "id": "enteric_infections_14",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 14976.49,
    "kind": "estimate",
@@ -8346,8 +8353,8 @@
    }
   },
   {
-   "id": "number_15",
-   "label": "Number",
+   "id": "enteric_infections_15",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 18019.18,
    "kind": "estimate",
@@ -8358,8 +8365,8 @@
    }
   },
   {
-   "id": "number_16",
-   "label": "Number",
+   "id": "enteric_infections_16",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 24878.28,
    "kind": "estimate",
@@ -8370,8 +8377,8 @@
    }
   },
   {
-   "id": "number_17",
-   "label": "Number",
+   "id": "enteric_infections_17",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 29609.69,
    "kind": "estimate",
@@ -8382,8 +8389,8 @@
    }
   },
   {
-   "id": "number_18",
-   "label": "Number",
+   "id": "enteric_infections_18",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 36204.68,
    "kind": "estimate",
@@ -8394,8 +8401,8 @@
    }
   },
   {
-   "id": "number_19",
-   "label": "Number",
+   "id": "enteric_infections_19",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 38449.48,
    "kind": "estimate",
@@ -8406,8 +8413,8 @@
    }
   },
   {
-   "id": "number_20",
-   "label": "Number",
+   "id": "enteric_infections_20",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 39130.41,
    "kind": "estimate",
@@ -8418,8 +8425,8 @@
    }
   },
   {
-   "id": "number_21",
-   "label": "Number",
+   "id": "enteric_infections_21",
+   "label": "Enteric infections",
    "section": "moral_weights",
    "value": 41633.39,
    "kind": "estimate",
@@ -8433,7 +8440,7 @@
    "id": "in_each_age_bracket_5_to_9",
    "label": "% in each age bracket (5 to 9)",
    "section": "moral_weights",
-   "formula": "number_5 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_5 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.09784617292,
    "format": "percent"
   },
@@ -8441,19 +8448,20 @@
    "id": "moral_weights_10_to_14",
    "label": "Moral weights (10 to 14)",
    "section": "moral_weights",
-   "value": 133.1,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!I49"
-   }
+   },
+   "formula": "133.1 * $life_value_multiplier",
+   "expected": 133.1,
+   "explainer": "GiveWell's moral weight, 133.1 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_10_to_14",
    "label": "% in each age bracket (10 to 14)",
    "section": "moral_weights",
-   "formula": "number_6 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_6 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.05050908035,
    "format": "percent"
   },
@@ -8461,19 +8469,20 @@
    "id": "moral_weights_15_to_19",
    "label": "Moral weights (15 to 19)",
    "section": "moral_weights",
-   "value": 126.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!J49"
-   }
+   },
+   "formula": "126.3 * $life_value_multiplier",
+   "expected": 126.3,
+   "explainer": "GiveWell's moral weight, 126.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_15_to_19",
    "label": "% in each age bracket (15 to 19)",
    "section": "moral_weights",
-   "formula": "number_7 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_7 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.04096238621,
    "format": "percent"
   },
@@ -8481,19 +8490,20 @@
    "id": "moral_weights_20_to_24",
    "label": "Moral weights (20 to 24)",
    "section": "moral_weights",
-   "value": 118.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!K49"
-   }
+   },
+   "formula": "118 * $life_value_multiplier",
+   "expected": 118.0,
+   "explainer": "GiveWell's moral weight, 118 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_20_to_24",
    "label": "% in each age bracket (20 to 24)",
    "section": "moral_weights",
-   "formula": "number_8 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_8 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.03479025344,
    "format": "percent"
   },
@@ -8501,19 +8511,20 @@
    "id": "moral_weights_25_to_29",
    "label": "Moral weights (25 to 29)",
    "section": "moral_weights",
-   "value": 112.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!L49"
-   }
+   },
+   "formula": "112.7 * $life_value_multiplier",
+   "expected": 112.7,
+   "explainer": "GiveWell's moral weight, 112.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_25_to_29",
    "label": "% in each age bracket (25 to 29)",
    "section": "moral_weights",
-   "formula": "number_9 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_9 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.02847490101,
    "format": "percent"
   },
@@ -8521,19 +8532,20 @@
    "id": "moral_weights_30_to_34",
    "label": "Moral weights (30 to 34)",
    "section": "moral_weights",
-   "value": 106.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!M49"
-   }
+   },
+   "formula": "106.3 * $life_value_multiplier",
+   "expected": 106.3,
+   "explainer": "GiveWell's moral weight, 106.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_30_to_34",
    "label": "% in each age bracket (30 to 34)",
    "section": "moral_weights",
-   "formula": "number_10 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_10 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.02645548809,
    "format": "percent"
   },
@@ -8541,19 +8553,20 @@
    "id": "moral_weights_35_to_39",
    "label": "Moral weights (35 to 39)",
    "section": "moral_weights",
-   "value": 99.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!N49"
-   }
+   },
+   "formula": "99.7 * $life_value_multiplier",
+   "expected": 99.7,
+   "explainer": "GiveWell's moral weight, 99.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_35_to_39",
    "label": "% in each age bracket (35 to 39)",
    "section": "moral_weights",
-   "formula": "number_11 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_11 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.02722159882,
    "format": "percent"
   },
@@ -8561,19 +8574,20 @@
    "id": "moral_weights_40_to_44",
    "label": "Moral weights (40 to 44)",
    "section": "moral_weights",
-   "value": 86.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!O49"
-   }
+   },
+   "formula": "86.4 * $life_value_multiplier",
+   "expected": 86.4,
+   "explainer": "GiveWell's moral weight, 86.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_40_to_44",
    "label": "% in each age bracket (40 to 44)",
    "section": "moral_weights",
-   "formula": "number_12 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_12 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.02902568784,
    "format": "percent"
   },
@@ -8581,19 +8595,20 @@
    "id": "moral_weights_45_to_49",
    "label": "Moral weights (45 to 49)",
    "section": "moral_weights",
-   "value": 75.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!P49"
-   }
+   },
+   "formula": "75.7 * $life_value_multiplier",
+   "expected": 75.7,
+   "explainer": "GiveWell's moral weight, 75.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_45_to_49",
    "label": "% in each age bracket (45 to 49)",
    "section": "moral_weights",
-   "formula": "number_13 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_13 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.03265980885,
    "format": "percent"
   },
@@ -8601,19 +8616,20 @@
    "id": "moral_weights_50_to_54",
    "label": "Moral weights (50 to 54)",
    "section": "moral_weights",
-   "value": 65.2,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!Q49"
-   }
+   },
+   "formula": "65.2 * $life_value_multiplier",
+   "expected": 65.2,
+   "explainer": "GiveWell's moral weight, 65.2 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_50_to_54",
    "label": "% in each age bracket (50 to 54)",
    "section": "moral_weights",
-   "formula": "number_14 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_14 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.03897034739,
    "format": "percent"
   },
@@ -8621,19 +8637,20 @@
    "id": "moral_weights_55_to_59",
    "label": "Moral weights (55 to 59)",
    "section": "moral_weights",
-   "value": 54.8,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!R49"
-   }
+   },
+   "formula": "54.8 * $life_value_multiplier",
+   "expected": 54.8,
+   "explainer": "GiveWell's moral weight, 54.8 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_55_to_59",
    "label": "% in each age bracket (55 to 59)",
    "section": "moral_weights",
-   "formula": "number_15 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_15 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.04688773566,
    "format": "percent"
   },
@@ -8641,19 +8658,20 @@
    "id": "moral_weights_60_to_64",
    "label": "Moral weights (60 to 64)",
    "section": "moral_weights",
-   "value": 39.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!S49"
-   }
+   },
+   "formula": "39.6 * $life_value_multiplier",
+   "expected": 39.6,
+   "explainer": "GiveWell's moral weight, 39.6 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_60_to_64",
    "label": "% in each age bracket (60 to 64)",
    "section": "moral_weights",
-   "formula": "number_16 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_16 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.06473581019,
    "format": "percent"
   },
@@ -8661,19 +8679,20 @@
    "id": "moral_weights_65_to_69",
    "label": "Moral weights (65 to 69)",
    "section": "moral_weights",
-   "value": 31.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!T49"
-   }
+   },
+   "formula": "31.4 * $life_value_multiplier",
+   "expected": 31.4,
+   "explainer": "GiveWell's moral weight, 31.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_65_to_69",
    "label": "% in each age bracket (65 to 69)",
    "section": "moral_weights",
-   "formula": "number_17 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_17 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.07704741935,
    "format": "percent"
   },
@@ -8681,19 +8700,20 @@
    "id": "moral_weights_70_to_74",
    "label": "Moral weights (70 to 74)",
    "section": "moral_weights",
-   "value": 21.2,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!U49"
-   }
+   },
+   "formula": "21.2 * $life_value_multiplier",
+   "expected": 21.2,
+   "explainer": "GiveWell's moral weight, 21.2 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_70_to_74",
    "label": "% in each age bracket (70 to 74)",
    "section": "moral_weights",
-   "formula": "number_18 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_18 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.09420825285,
    "format": "percent"
   },
@@ -8701,19 +8721,20 @@
    "id": "moral_weights_75_to_79",
    "label": "Moral weights (75 to 79)",
    "section": "moral_weights",
-   "value": 16.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!V49"
-   }
+   },
+   "formula": "16.5 * $life_value_multiplier",
+   "expected": 16.5,
+   "explainer": "GiveWell's moral weight, 16.5 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_75_to_79",
    "label": "% in each age bracket (75 to 79)",
    "section": "moral_weights",
-   "formula": "number_19 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_19 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.1000494503,
    "format": "percent"
   },
@@ -8721,19 +8742,20 @@
    "id": "moral_weights_80_to_84",
    "label": "Moral weights (80 to 84)",
    "section": "moral_weights",
-   "value": 12.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!W49"
-   }
+   },
+   "formula": "12.4 * $life_value_multiplier",
+   "expected": 12.4,
+   "explainer": "GiveWell's moral weight, 12.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_80_to_84",
    "label": "% in each age bracket (80 to 84)",
    "section": "moral_weights",
-   "formula": "number_20 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_20 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.1018212993,
    "format": "percent"
   },
@@ -8741,19 +8763,20 @@
    "id": "moral_weights_85_plus",
    "label": "Moral weights (85 plus)",
    "section": "moral_weights",
-   "value": 12.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!X49"
-   }
+   },
+   "formula": "12.4 * $life_value_multiplier",
+   "expected": 12.4,
+   "explainer": "GiveWell's moral weight, 12.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_85_plus",
    "label": "% in each age bracket (85 plus)",
    "section": "moral_weights",
-   "formula": "number_21 / sum(number_5, number_6, number_7, number_8, number_9, number_10, number_11, number_12, number_13, number_14, number_15, number_16, number_17, number_18, number_19, number_20, number_21)",
+   "formula": "enteric_infections_21 / sum(enteric_infections_5, enteric_infections_6, enteric_infections_7, enteric_infections_8, enteric_infections_9, enteric_infections_10, enteric_infections_11, enteric_infections_12, enteric_infections_13, enteric_infections_14, enteric_infections_15, enteric_infections_16, enteric_infections_17, enteric_infections_18, enteric_infections_19, enteric_infections_20, enteric_infections_21)",
    "expected": 0.1083343074,
    "format": "percent"
   },
@@ -8825,13 +8848,13 @@
    "id": "effect_size_in_blinded_vs_unblinded_trials_with_objective_ou",
    "label": "Effect size in blinded vs. unblinded trials with objective outcome (mortality)",
    "section": "morbidity_effect_size",
-   "value": 0.92,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Morbidity effect size!B4"
-   }
+   },
+   "formula": "@givewell.effect_size_in_blinded_vs_unblinded_trials_with_objective_ou",
+   "expected": 0.92
   },
   {
    "id": "adjustment_for_self_report_bias_2",
@@ -8905,13 +8928,14 @@
    "id": "value_of_averting_one_year_of_life_lost_to_disease_disabilit",
    "label": "Value of averting one year of life lost to disease/disability (YLD)",
    "section": "moral_weights",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1ssm_DfUz48fpfdOEELlCAtIcFQJvLxBhwZbCiVFOyRg/edit",
     "cell": "Moral weights!B13"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
    "id": "moral_value_per_yld_averted",

@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.3
   }
  },
  "resources": [
@@ -318,8 +320,8 @@
    "format": "usd"
   },
   {
-   "id": "mali_2",
-   "label": "- (Mali)",
+   "id": "grant_size_givewell_costs_over_10_years_mali",
+   "label": "Grant size (GiveWell costs over 10 years) (Mali)",
    "section": "uduma_simple_cea",
    "formula": "total_givewell_costs_10_year_program_window_mali",
    "expected": 2302139.693,
@@ -494,8 +496,8 @@
    "format": "usd"
   },
   {
-   "id": "mali_4",
-   "label": "- (Mali)",
+   "id": "annual_cost_per_child_under_five_targeted_by_the_program_mal",
+   "label": "Annual cost per child under five targeted by the program (Mali)",
    "section": "uduma_simple_cea",
    "formula": "annual_cost_per_under_5_child_served",
    "expected": 7.798236916,
@@ -1373,26 +1375,26 @@
    "format": "percent"
   },
   {
-   "id": "mali_5",
-   "label": "- (Mali)",
+   "id": "increase_in_the_proportion_of_targeted_children_drinking_tre",
+   "label": "Increase in the proportion of targeted children drinking treated water as a result of the program (pp) (Mali)",
    "section": "uduma_simple_cea",
    "formula": "increase_in_chlorination_rates_as_a_result_of_implementing_i",
    "expected": 0.4935578994,
    "format": "percent"
   },
   {
-   "id": "mali_3",
-   "label": "- (Mali)",
+   "id": "annual_cost_per_additional_child_drinking_treated_water_as_a",
+   "label": "Annual cost per additional child drinking treated water as a result of the program (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "sum(mali_4 / mali_5)",
+   "formula": "sum(annual_cost_per_child_under_five_targeted_by_the_program_mal / increase_in_the_proportion_of_targeted_children_drinking_tre)",
    "expected": 15.80004479,
    "format": "usd"
   },
   {
-   "id": "mali",
-   "label": "- (Mali)",
+   "id": "additional_children_drinking_treated_water_as_a_result_of_th",
+   "label": "Additional children drinking treated water as a result of the program (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "sum(mali_2 / mali_3)",
+   "formula": "sum(grant_size_givewell_costs_over_10_years_mali / annual_cost_per_additional_child_drinking_treated_water_as_a)",
    "expected": 145704.6309
   },
   {
@@ -1429,7 +1431,7 @@
    "format": "percent"
   },
   {
-   "id": "mali_7",
+   "id": "mali",
    "label": "Mali",
    "section": "baseline_mortality",
    "formula": "sum(mali_annualized_rate_2022 * (1 + mali_adjustment_for_all_cause_mortality_in_different_data_so))",
@@ -1440,13 +1442,13 @@
    "id": "annual_all_cause_mortality_in_children_under_5_mali",
    "label": "Annual all-cause mortality in children under 5 (Mali)",
    "section": "uduma_cea",
-   "formula": "mali_7",
+   "formula": "mali",
    "expected": 0.02125047343,
    "format": "percent"
   },
   {
-   "id": "mali_6",
-   "label": "- (Mali)",
+   "id": "annual_all_cause_mortality_rate_among_children_under_five_ma",
+   "label": "Annual all-cause mortality rate among children under five (Mali)",
    "section": "uduma_simple_cea",
    "formula": "annual_all_cause_mortality_in_children_under_5_mali",
    "expected": 0.02125047343,
@@ -2457,8 +2459,8 @@
    "format": "percent"
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "effect_of_chlorination_on_under_five_all_cause_mortality_amo",
+   "label": "Effect of chlorination on under-five all-cause mortality among children treated, from RCTs",
    "section": "uduma_simple_cea",
    "formula": "(1 - pooled_relative_risk) / increase_in_water_treatment_as_a_result_of_intervention_pp",
    "expected": 0.2448057112,
@@ -2730,8 +2732,8 @@
    "expected": 0.7509372997
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
    "section": "uduma_simple_cea",
    "formula": "internal_validity_adjustment_under_5_mortality_ref - 1",
    "expected": -0.2490627003,
@@ -2785,8 +2787,8 @@
    "format": "percent"
   },
   {
-   "id": "number_val",
-   "label": "Number (val)",
+   "id": "enteric_infections_val",
+   "label": "Enteric infections (val)",
    "section": "water_linked_mortality",
    "value": 6706.656324,
    "kind": "estimate",
@@ -2797,8 +2799,8 @@
    }
   },
   {
-   "id": "number_val_2",
-   "label": "Number (val)",
+   "id": "all_causes_val",
+   "label": "All causes (val)",
    "section": "water_linked_mortality",
    "value": 100525.4418,
    "kind": "estimate",
@@ -2812,7 +2814,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_enteric_inf_2",
    "label": "Percent of total under 5 mortality attributed to enteric infections in 2022 (GBD 2021 estimates) (Mali)",
    "section": "water_linked_mortality",
-   "formula": "number_val / number_val_2",
+   "formula": "enteric_infections_val / all_causes_val",
    "expected": 0.06671600944,
    "format": "percent"
   },
@@ -2830,8 +2832,8 @@
    "format": "percent"
   },
   {
-   "id": "row_6",
-   "label": "%",
+   "id": "ca_code",
+   "label": "CA CODE",
    "section": "water_linked_mortality",
    "value": 0.11448,
    "kind": "estimate",
@@ -2846,7 +2848,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_diarrhea_in",
    "label": "Percent of total under 5 mortality attributed to diarrhea in 2021 (IGME estimates) (Mali)",
    "section": "water_linked_mortality",
-   "formula": "row_6",
+   "formula": "ca_code",
    "expected": 0.11448,
    "format": "percent"
   },
@@ -3209,53 +3211,54 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality_2",
+   "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality_3",
    "label": "Adjustment for proportion of deaths linked to water quality in Kremer et al. vs program contexts (Mali)",
    "section": "water_linked_mortality",
    "formula": "overall_best_estimate_of_under_5_mortality_attributable_to_w / weighted_average_of_all_sources_updated",
    "expected": 0.9844949632
   },
   {
-   "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality",
+   "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality_2",
    "label": "Adjustment for proportion of deaths linked to water quality in Kremer et al. vs program contexts",
    "section": "external_validity_adjustments",
-   "formula": "adjustment_for_proportion_of_deaths_linked_to_water_quality_2",
+   "formula": "adjustment_for_proportion_of_deaths_linked_to_water_quality_3",
    "expected": 0.9844949632
   },
   {
-   "id": "row_5",
-   "label": "-",
+   "id": "adjustment_for_proportion_of_deaths_linked_to_water_quality",
+   "label": "Adjustment for proportion of deaths linked to water quality in program vs RCT contexts (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "adjustment_for_proportion_of_deaths_linked_to_water_quality - 1",
+   "formula": "adjustment_for_proportion_of_deaths_linked_to_water_quality_2 - 1",
    "expected": -0.0155050368,
    "format": "percent"
   },
   {
-   "id": "row_4",
-   "label": "-",
+   "id": "effect_of_chlorination_on_under_five_all_cause_mortality_adj",
+   "label": "Effect of chlorination on under-five all-cause mortality, adjusted (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "min(sum(input * (1 + input_2) * (1 + row_5)))",
+   "formula": "min(sum(effect_of_chlorination_on_under_five_all_cause_mortality_amo * (1 + internal_validity_adjustment) * (1 + adjustment_for_proportion_of_deaths_linked_to_water_quality)))",
    "expected": 0.1809833908,
    "format": "percent"
   },
   {
-   "id": "row_3",
-   "label": "-",
+   "id": "number_of_deaths_averted_among_children_under_five_mali",
+   "label": "Number of deaths averted among children under five (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "sum(mali * mali_6 * row_4)",
+   "formula": "sum(additional_children_drinking_treated_water_as_a_result_of_th * annual_all_cause_mortality_rate_among_children_under_five_ma * effect_of_chlorination_on_under_five_all_cause_mortality_adj)",
    "expected": 560.3774951
   },
   {
    "id": "moral_weight_early_neonatal",
    "label": "Moral weight (Early Neonatal)",
    "section": "moral_weights",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!D25"
-   }
+   },
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6,
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "past_estimate_value_2022",
@@ -3317,13 +3320,14 @@
    "id": "moral_weight_late_neonatal",
    "label": "Moral weight (Late Neonatal)",
    "section": "moral_weights",
-   "value": 84.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!E25"
-   }
+   },
+   "formula": "84.5 * $life_value_multiplier",
+   "expected": 84.5,
+   "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_late_neonatal",
@@ -3337,13 +3341,14 @@
    "id": "moral_weight_post_neonatal",
    "label": "Moral weight (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!F25"
-   }
+   },
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7,
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_post_neonatal",
@@ -3357,13 +3362,14 @@
    "id": "moral_weight_1_to_4",
    "label": "Moral weight (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!G25"
-   }
+   },
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3,
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_1_to_4",
@@ -3395,8 +3401,8 @@
    "expected": 113.5648682
   },
   {
-   "id": "row_7",
-   "label": "-",
+   "id": "moral_weight_placed_on_averting_the_death_of_a_child_under_a",
+   "label": "Moral weight placed on averting the death of a child under age five (adjusted for age profile of population) (Mali)",
    "section": "uduma_simple_cea",
    "formula": "moral_weight_per_under_5_death_averted_mali",
    "expected": 113.5648682
@@ -3422,10 +3428,10 @@
    "expected": 0.00335453394
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire",
+   "label": "Initial cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (Mali)",
    "section": "uduma_simple_cea",
-   "formula": "sum(row_3 * row_7 / mali_2) / units_of_value_per_generated_by_givedirectly_s_program",
+   "formula": "sum(number_of_deaths_averted_among_children_under_five_mali * moral_weight_placed_on_averting_the_death_of_a_child_under_a / grant_size_givewell_costs_over_10_years_mali) / units_of_value_per_generated_by_givedirectly_s_program",
    "expected": 8.240637751
   },
   {
@@ -3468,7 +3474,7 @@
    "id": "external_validity_adjustment_mortality",
    "label": "External validity adjustment (mortality)",
    "section": "external_validity_adjustments",
-   "formula": "product(adjustment_for_proportion_of_deaths_linked_to_water_quality, adherence_adjustment)",
+   "formula": "product(adjustment_for_proportion_of_deaths_linked_to_water_quality_2, adherence_adjustment)",
    "expected": 1.031724642
   },
   {
@@ -3762,7 +3768,7 @@
    "id": "percent_of_total_under_5_mortality_attributed_to_enteric_inf_3",
    "label": "Percent of total under-5 mortality attributed to enteric infections in 2022 (Mali)",
    "section": "over_5_mortality_scaling",
-   "formula": "number_val / number_val_2",
+   "formula": "enteric_infections_val / all_causes_val",
    "expected": 0.06671600944,
    "format": "percent"
   },
@@ -3816,13 +3822,13 @@
    "id": "effect_size_in_blinded_vs_unblinded_trials_with_objective_ou",
    "label": "Effect size in blinded vs. unblinded trials with objective outcome (mortality)",
    "section": "morbidity_effect",
-   "value": 0.92,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Morbidity effect!B3"
-   }
+   },
+   "formula": "@givewell.effect_size_in_blinded_vs_unblinded_trials_with_objective_ou",
+   "expected": 0.92
   },
   {
    "id": "adjustment_for_self_report_bias_2",
@@ -3976,13 +3982,14 @@
    "id": "moral_weight_5_to_9",
    "label": "Moral weight (5 to 9)",
    "section": "moral_weights",
-   "value": 134.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!H46"
-   }
+   },
+   "formula": "134.3 * $life_value_multiplier",
+   "expected": 134.3,
+   "explainer": "GiveWell's moral weight, 134.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "past_estimate_value_2022_5",
@@ -4200,13 +4207,14 @@
    "id": "moral_weight_10_to_14",
    "label": "Moral weight (10 to 14)",
    "section": "moral_weights",
-   "value": 133.1,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!I46"
-   }
+   },
+   "formula": "133.1 * $life_value_multiplier",
+   "expected": 133.1,
+   "explainer": "GiveWell's moral weight, 133.1 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_10_to_14",
@@ -4220,13 +4228,14 @@
    "id": "moral_weight_15_to_19",
    "label": "Moral weight (15 to 19)",
    "section": "moral_weights",
-   "value": 126.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!J46"
-   }
+   },
+   "formula": "126.3 * $life_value_multiplier",
+   "expected": 126.3,
+   "explainer": "GiveWell's moral weight, 126.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_15_to_19",
@@ -4240,13 +4249,14 @@
    "id": "moral_weight_20_to_24",
    "label": "Moral weight (20 to 24)",
    "section": "moral_weights",
-   "value": 118.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!K46"
-   }
+   },
+   "formula": "118 * $life_value_multiplier",
+   "expected": 118.0,
+   "explainer": "GiveWell's moral weight, 118 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_20_to_24",
@@ -4260,13 +4270,14 @@
    "id": "moral_weight_25_to_29",
    "label": "Moral weight (25 to 29)",
    "section": "moral_weights",
-   "value": 112.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!L46"
-   }
+   },
+   "formula": "112.7 * $life_value_multiplier",
+   "expected": 112.7,
+   "explainer": "GiveWell's moral weight, 112.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_25_to_29",
@@ -4280,13 +4291,14 @@
    "id": "moral_weight_30_to_34",
    "label": "Moral weight (30 to 34)",
    "section": "moral_weights",
-   "value": 106.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!M46"
-   }
+   },
+   "formula": "106.3 * $life_value_multiplier",
+   "expected": 106.3,
+   "explainer": "GiveWell's moral weight, 106.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_30_to_34",
@@ -4300,13 +4312,14 @@
    "id": "moral_weight_35_to_39",
    "label": "Moral weight (35 to 39)",
    "section": "moral_weights",
-   "value": 99.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!N46"
-   }
+   },
+   "formula": "99.7 * $life_value_multiplier",
+   "expected": 99.7,
+   "explainer": "GiveWell's moral weight, 99.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_35_to_39",
@@ -4320,13 +4333,14 @@
    "id": "moral_weight_40_to_44",
    "label": "Moral weight (40 to 44)",
    "section": "moral_weights",
-   "value": 86.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!O46"
-   }
+   },
+   "formula": "86.4 * $life_value_multiplier",
+   "expected": 86.4,
+   "explainer": "GiveWell's moral weight, 86.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_40_to_44",
@@ -4340,13 +4354,14 @@
    "id": "moral_weight_45_to_49",
    "label": "Moral weight (45 to 49)",
    "section": "moral_weights",
-   "value": 75.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!P46"
-   }
+   },
+   "formula": "75.7 * $life_value_multiplier",
+   "expected": 75.7,
+   "explainer": "GiveWell's moral weight, 75.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_45_to_49",
@@ -4360,13 +4375,14 @@
    "id": "moral_weight_50_to_54",
    "label": "Moral weight (50 to 54)",
    "section": "moral_weights",
-   "value": 65.2,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!Q46"
-   }
+   },
+   "formula": "65.2 * $life_value_multiplier",
+   "expected": 65.2,
+   "explainer": "GiveWell's moral weight, 65.2 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_50_to_54",
@@ -4380,13 +4396,14 @@
    "id": "moral_weight_55_to_59",
    "label": "Moral weight (55 to 59)",
    "section": "moral_weights",
-   "value": 54.8,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!R46"
-   }
+   },
+   "formula": "54.8 * $life_value_multiplier",
+   "expected": 54.8,
+   "explainer": "GiveWell's moral weight, 54.8 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_55_to_59",
@@ -4400,13 +4417,14 @@
    "id": "moral_weight_60_to_64",
    "label": "Moral weight (60 to 64)",
    "section": "moral_weights",
-   "value": 39.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!S46"
-   }
+   },
+   "formula": "39.6 * $life_value_multiplier",
+   "expected": 39.6,
+   "explainer": "GiveWell's moral weight, 39.6 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_60_to_64",
@@ -4420,13 +4438,14 @@
    "id": "moral_weight_65_to_69",
    "label": "Moral weight (65 to 69)",
    "section": "moral_weights",
-   "value": 31.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!T46"
-   }
+   },
+   "formula": "31.4 * $life_value_multiplier",
+   "expected": 31.4,
+   "explainer": "GiveWell's moral weight, 31.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_65_to_69",
@@ -4440,13 +4459,14 @@
    "id": "moral_weight_70_to_74",
    "label": "Moral weight (70 to 74)",
    "section": "moral_weights",
-   "value": 21.2,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!U46"
-   }
+   },
+   "formula": "21.2 * $life_value_multiplier",
+   "expected": 21.2,
+   "explainer": "GiveWell's moral weight, 21.2 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_70_to_74",
@@ -4460,13 +4480,14 @@
    "id": "moral_weight_75_to_79",
    "label": "Moral weight (75 to 79)",
    "section": "moral_weights",
-   "value": 16.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!V46"
-   }
+   },
+   "formula": "16.5 * $life_value_multiplier",
+   "expected": 16.5,
+   "explainer": "GiveWell's moral weight, 16.5 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_75_to_79",
@@ -4480,13 +4501,14 @@
    "id": "moral_weight_80_to_84",
    "label": "Moral weight (80 to 84)",
    "section": "moral_weights",
-   "value": 12.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!W46"
-   }
+   },
+   "formula": "12.4 * $life_value_multiplier",
+   "expected": 12.4,
+   "explainer": "GiveWell's moral weight, 12.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_80_to_84",
@@ -4500,13 +4522,14 @@
    "id": "moral_weight_85_plus",
    "label": "Moral weight (85 plus)",
    "section": "moral_weights",
-   "value": 12.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!X46"
-   }
+   },
+   "formula": "12.4 * $life_value_multiplier",
+   "expected": 12.4,
+   "explainer": "GiveWell's moral weight, 12.4 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "in_each_age_bracket_85_plus",
@@ -4574,13 +4597,14 @@
    "id": "value_of_averting_one_year_of_life_lost_to_disease_disabilit",
    "label": "Value of averting one year of life lost to disease/disability (YLD)",
    "section": "moral_weights",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
     "cell": "Moral weights!B16"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
    "id": "moral_weight_per_yld_averted_mali",
@@ -4838,8 +4862,8 @@
    "format": "percent"
   },
   {
-   "id": "ref",
-   "label": "- (#REF!)",
+   "id": "deaths_averted_among_children_under_age_five_ref",
+   "label": "Deaths averted among children under age five (#REF!)",
    "section": "uduma_simple_cea",
    "formula": "percent_of_cost_effectiveness_coming_from_under_5_mortality",
    "expected": 0.5598812282,
@@ -4982,8 +5006,8 @@
    "format": "percent"
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "adjustment_for_grantee_level_factors",
+   "label": "Adjustment for grantee-level factors",
    "section": "uduma_simple_cea",
    "formula": "adjustment_for_program_specific_downsides - 1",
    "expected": 0.0,
@@ -5024,8 +5048,8 @@
    "format": "percent"
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "adjustments_for_additional_program_benefits_and_downsides",
+   "label": "Adjustments for additional program benefits and downsides",
    "section": "uduma_simple_cea",
    "formula": "total_adjustment_factor_for_other_effects_ref - 1",
    "expected": 0.25,
@@ -5048,8 +5072,8 @@
    "format": "usd"
   },
   {
-   "id": "row_15",
-   "label": "-",
+   "id": "amount_of_spending_other_actors_would_shift_away_from_the_gr",
+   "label": "Amount of spending other actors would shift away from the grantee program (Mali)",
    "section": "leveragefunging",
    "formula": "total_spending_contributed_by_other_philanthropic_actors_mal",
    "expected": 2449600.012,
@@ -5068,15 +5092,15 @@
    }
   },
   {
-   "id": "row_14",
-   "label": "-",
+   "id": "value_generated_by_shifting_spending_to_programs_other_actor",
+   "label": "Value generated by shifting spending to programs other actors would otherwise have funded (Mali)",
    "section": "leveragefunging",
-   "formula": "row_15 * other_philanthropic_actors",
+   "formula": "amount_of_spending_other_actors_would_shift_away_from_the_gr * other_philanthropic_actors",
    "expected": 17191.7828
   },
   {
-   "id": "row_16",
-   "label": "-",
+   "id": "value_lost_by_shifting_other_actors_spending_away_from_the_g",
+   "label": "Value lost by shifting other actors' spending away from the grantee program (Mali)",
    "section": "leveragefunging",
    "value": 0.0,
    "kind": "estimate",
@@ -5087,17 +5111,17 @@
    }
   },
   {
-   "id": "row_13",
-   "label": "-",
+   "id": "net_value_generated_by_shifting_other_actors_spending_away_f",
+   "label": "Net value generated by shifting other actors' spending away from the grantee program (Mali)",
    "section": "leveragefunging",
-   "formula": "row_14 - row_16",
+   "formula": "value_generated_by_shifting_spending_to_programs_other_actor - value_lost_by_shifting_other_actors_spending_away_from_the_g",
    "expected": 17191.7828
   },
   {
-   "id": "row_12",
-   "label": "-",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual (Mali)",
    "section": "leveragefunging",
-   "formula": "-row_13",
+   "formula": "-net_value_generated_by_shifting_other_actors_spending_away_f",
    "expected": -17191.7828
   },
   {
@@ -5123,24 +5147,24 @@
   },
   {
    "id": "probability_of_this_scenario_representing_the_true_counterfa",
-   "label": "Probability of this scenario representing the true counterfactual (-)",
+   "label": "Probability of this scenario representing the true counterfactual (Mali)",
    "section": "leveragefunging",
    "formula": "scenario_2_the_program_would_go_unfunded_mali",
    "expected": 0.8,
    "format": "percent"
   },
   {
-   "id": "row_11",
-   "label": "-",
+   "id": "expected_change_in_value_generated_by_the_program_mali",
+   "label": "Expected change in value generated by the program (Mali)",
    "section": "leveragefunging",
-   "formula": "row_12 * probability_of_this_scenario_representing_the_true_counterfa",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce * probability_of_this_scenario_representing_the_true_counterfa",
    "expected": -13753.42624
   },
   {
-   "id": "row_10",
-   "label": "-",
+   "id": "change_in_value_generated_as_a_result_of_crowding_funding_in",
+   "label": "Change in value generated as a result of crowding funding into the program (leverage) (Mali)",
    "section": "leveragefunging",
-   "formula": "row_11",
+   "formula": "expected_change_in_value_generated_by_the_program_mali",
    "expected": -13753.42624
   },
   {
@@ -5207,24 +5231,24 @@
    "expected": 617.1732867
   },
   {
-   "id": "mali_8",
-   "label": "- (Mali)",
+   "id": "units_of_value_generated_per_dollar_donated_to_grantee_after",
+   "label": "Units of value generated per dollar donated to grantee (after supplemental adjustments) (Mali)",
    "section": "leveragefunging",
    "formula": "units_of_value_per_10_000_donated_prior_to_leverage_and_fung / 10000",
    "expected": 0.06171732867
   },
   {
-   "id": "row_17",
-   "label": "-",
+   "id": "total_value_generated_by_grantee_spending_before_adjusting_f",
+   "label": "Total value generated by grantee spending before adjusting for leverage and funging (Mali)",
    "section": "leveragefunging",
-   "formula": "total_spending_contributed_by_givewell_mali * mali_8",
+   "formula": "total_spending_contributed_by_givewell_mali * units_of_value_generated_per_dollar_donated_to_grantee_after",
    "expected": 142081.9121
   },
   {
-   "id": "row_9",
-   "label": "-",
+   "id": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
+   "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
    "section": "leveragefunging",
-   "formula": "row_10 / row_17",
+   "formula": "change_in_value_generated_as_a_result_of_crowding_funding_in / total_value_generated_by_grantee_spending_before_adjusting_f",
    "expected": -0.09679927614,
    "format": "percent"
   },
@@ -5232,73 +5256,73 @@
    "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
    "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
    "section": "uduma_cea",
-   "formula": "row_9",
+   "formula": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
    "expected": -0.09679927614,
    "format": "percent"
   },
   {
-   "id": "row_24",
-   "label": "-",
+   "id": "amount_of_spending_philanthropic_actors_would_shift_to_the_p",
+   "label": "Amount of spending philanthropic actors would shift to the program (Mali)",
    "section": "leveragefunging",
    "formula": "total_spending_contributed_by_givewell_mali",
    "expected": 2302139.693,
    "format": "usd"
   },
   {
-   "id": "row_23",
-   "label": "-",
+   "id": "value_generated_by_shifting_spending_to_the_grantee_program",
+   "label": "Value generated by shifting spending to the grantee program (Mali)",
    "section": "leveragefunging",
-   "formula": "row_24 * mali_8",
+   "formula": "amount_of_spending_philanthropic_actors_would_shift_to_the_p * units_of_value_generated_per_dollar_donated_to_grantee_after",
    "expected": 142081.9121
   },
   {
-   "id": "row_25",
-   "label": "-",
+   "id": "value_lost_by_shifting_spending_away_from_programs_other_phi",
+   "label": "Value lost by shifting spending away from programs other philanthropic actors would otherwise have funded (Mali)",
    "section": "leveragefunging",
-   "formula": "row_24 * other_philanthropic_actors",
+   "formula": "amount_of_spending_philanthropic_actors_would_shift_to_the_p * other_philanthropic_actors",
    "expected": 16156.8768
   },
   {
-   "id": "row_22",
-   "label": "-",
+   "id": "net_value_generated_by_shifting_spending_to_the_grantee_prog",
+   "label": "Net value generated by shifting spending to the grantee program (Mali)",
    "section": "leveragefunging",
-   "formula": "row_23 - row_25",
+   "formula": "value_generated_by_shifting_spending_to_the_grantee_program - value_lost_by_shifting_spending_away_from_programs_other_phi",
    "expected": 125925.0353
   },
   {
-   "id": "row_21",
-   "label": "-",
+   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_2",
+   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual (Mali)",
    "section": "leveragefunging",
-   "formula": "-row_22",
+   "formula": "-net_value_generated_by_shifting_spending_to_the_grantee_prog",
    "expected": -125925.0353
   },
   {
    "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
-   "label": "Probability of this scenario representing the true counterfactual (-)",
+   "label": "Probability of this scenario representing the true counterfactual (Mali)",
    "section": "leveragefunging",
    "formula": "scenario_1_other_philanthropic_actors_would_replace_givewell",
    "expected": 0.2,
    "format": "percent"
   },
   {
-   "id": "row_20",
-   "label": "-",
+   "id": "expected_change_in_value_generated_by_the_grantee_program_ma",
+   "label": "Expected change in value generated by the grantee program (Mali)",
    "section": "leveragefunging",
-   "formula": "row_21 * probability_of_this_scenario_representing_the_true_counterfa_2",
+   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_2 * probability_of_this_scenario_representing_the_true_counterfa_2",
    "expected": -25185.00706
   },
   {
-   "id": "row_19",
-   "label": "-",
+   "id": "change_in_value_generated_as_a_result_of_crowding_funding_ou",
+   "label": "Change in value generated as a result of crowding funding out of the program (funging)",
    "section": "leveragefunging",
-   "formula": "row_20",
+   "formula": "expected_change_in_value_generated_by_the_grantee_program_ma",
    "expected": -25185.00706
   },
   {
-   "id": "row_18",
-   "label": "-",
+   "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
+   "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
    "section": "leveragefunging",
-   "formula": "row_19 / row_17",
+   "formula": "change_in_value_generated_as_a_result_of_crowding_funding_ou / total_value_generated_by_grantee_spending_before_adjusting_f",
    "expected": -0.1772569547,
    "format": "percent"
   },
@@ -5306,7 +5330,7 @@
    "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
    "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
    "section": "uduma_cea",
-   "formula": "row_18",
+   "formula": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
    "expected": -0.1772569547,
    "format": "percent"
   },
@@ -5319,18 +5343,18 @@
    "format": "percent"
   },
   {
-   "id": "row_8",
-   "label": "-",
+   "id": "adjustment_for_diverting_other_actors_funding_into_the_progr",
+   "label": "Adjustment for diverting other actors' funding into the program (leverage) and out of the program (funging) (#REF!)",
    "section": "uduma_simple_cea",
    "formula": "overall_adjustment_for_leverage_and_funging",
    "expected": -0.2740562309,
    "format": "percent"
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
+   "label": "Final cost-effectiveness in terms of multiples of GiveDirectly's unconditional cash transfer program (#REF!)",
    "section": "uduma_simple_cea",
-   "formula": "row_2 / ref * (1 + input_3) * (1 + input_4) * (1 + row_8)",
+   "formula": "initial_cost_effectiveness_in_terms_of_multiples_of_givedire / deaths_averted_among_children_under_age_five_ref * (1 + adjustment_for_grantee_level_factors) * (1 + adjustments_for_additional_program_benefits_and_downsides) * (1 + adjustment_for_diverting_other_actors_funding_into_the_progr)",
    "expected": 13.35604617
   },
   {
@@ -5349,7 +5373,7 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "row * cash_benchmark"
+   "formula": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect * cash_benchmark"
   }
  ],
  "output": {

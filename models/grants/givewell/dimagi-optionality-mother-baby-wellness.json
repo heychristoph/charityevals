@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.04,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -67,15 +69,15 @@
    "id": "discount_rate_8x_bar_for_future_opportunities",
    "label": "Discount rate (8x bar for future opportunities)",
    "section": "optionality",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "Optionality!B22"
    },
-   "explainer": "GiveWell moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_pilot",
@@ -305,14 +307,14 @@
    "id": "units_of_value_per_neonatal_death_averted_nigeria_dimagi",
    "label": "Units of value per neonatal death averted (Nigeria (Dimagi))",
    "section": "cea",
-   "value": 84.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "CEA!C41"
    },
-   "explainer": "2020 GiveWell Moral Weights, p. 9"
+   "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
+   "formula": "84 * $life_value_multiplier",
+   "expected": 84.0
   },
   {
    "id": "hypothetical_donation_usd_nigeria_dimagi",
@@ -884,14 +886,14 @@
    "id": "units_of_value_per_post_neonatal_death_averted_nigeria_dimag",
    "label": "Units of value per post neonatal death averted (Nigeria (Dimagi))",
    "section": "cea",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "CEA!C39"
    },
-   "explainer": "2020 GiveWell Moral Weights, p. 9"
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "baseline_all_cause_post_neonatal_mortality_for_low_sdi_count",
@@ -1597,13 +1599,13 @@
    "id": "smc_mortality",
    "label": "SMC (Mortality)",
    "section": "development_effects",
-   "value": 4.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "Development effects!F7"
-   }
+   },
+   "formula": "@givewell.smc_mortality",
+   "expected": 4.0
   },
   {
    "id": "smc_morbidity",
@@ -1876,15 +1878,15 @@
    "id": "discount_rate_10x_bar_for_future_opportunities",
    "label": "Discount rate (10x bar for future opportunities)",
    "section": "optionality",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "Optionality!C22"
    },
-   "explainer": "GiveWell moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_pilot_2",
@@ -2167,15 +2169,15 @@
    "id": "discount_rate_12x_bar_for_future_opportunities",
    "label": "Discount rate (12x bar for future opportunities)",
    "section": "optionality",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
     "cell": "Optionality!D22"
    },
-   "explainer": "GiveWell moral weights",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weights",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "how_long_we_would_fund_program_if_above_bar_after_the_pilot_3",

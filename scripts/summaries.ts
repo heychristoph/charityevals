@@ -1,14 +1,15 @@
-// Writes generated/bulk-summaries.json: a one-row stand-in for every bulk-imported model.
+// Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model.
 //   npx tsx scripts/summaries.ts           write
 //   npx tsx scripts/summaries.ts --check   fail if the file is out of date (npm run check runs this)
-// Bulk models (models/grants/) are tens of megabytes of rows, and none of them reads a shared
-// assumption, so their bottom line doesn't change with the visitor's settings. The browser gets these
-// stand-ins (bottom line and joint range); pages render the full model on the server and hand a
-// model's own page its full rows.
+// Bulk models (models/grants/) are tens of megabytes of rows, too much for the browser. Each stand-in
+// is the model partially evaluated: every row that depends on a shared assumption (moral weights,
+// discount rate, DALY value...) or on a ranged input stays a live formula; everything else, which can't
+// change, is folded into its value. The browser computes the same bottom line and the same ranges as the
+// full model under any assumptions. Pages render the full model on the server, and a model's own page
+// hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, bottomLine } from "../src/engine/model";
-import { sensitivity } from "../src/engine/sensitivity";
+import { buildLibrary, assumptionValues, compute } from "../src/engine/model";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
@@ -30,25 +31,39 @@ export function summaries(): unknown[] {
   const av = assumptionValues(lib.assumptions);
   return raws.map((raw) => {
     const m = lib.models.get(raw.id)!;
-    if (m.rows.some((r) => r.assumptionDeps.length || r.factDeps.length)) throw new Error(`${m.id}: bulk models can't read assumptions or facts`);
-    // Sensitivity reports common units; the stand-in row holds the model's own unit.
-    const s = sensitivity(lib, m, av);
-    const { native: best, common } = bottomLine(lib, m, av);
-    const toNative = common ? best / common : 1;
-    const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
-    // Only the model's own input ranges belong in the stand-in; exchange-rate ranges are applied again
-    // on top of it, as they are for the full model.
-    const ranged = m.rows.some((r) => typeof r.value === "object" || r.range);
-    if (ranged && lib.assumptions.units[m.output!.unit]?.to_common) throw new Error(`${m.id}: ranged bulk models in convertible units need a joint range without the exchange rate`);
-    const low = ranged ? Math.min(s.jointLow * toNative, best) : best, high = ranged ? Math.max(s.jointHigh * toNative, best) : best;
-    return {
-      ...meta,
-      rows: [{
-        id: m.output!.row, label: m.output!.label, kind: "estimate",
-        value: low === high ? best : { low, best, high },
-        explainer: "Summary of the full model, which this page renders on the server.",
-      }],
+    const values = compute(lib, m, av);
+    // Live: reads an assumption or a ranged input, directly or through other rows.
+    const live = new Set<string>();
+    for (const id of m.order) {
+      const r = m.byId.get(id)!;
+      if (r.assumptionDeps.length || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
+    }
+    const keep: string[] = [];
+    const seen = new Set<string>();
+    const visit = (id: string) => {
+      if (seen.has(id)) return;
+      seen.add(id);
+      if (live.has(id)) m.byId.get(id)!.deps.forEach(visit);
+      keep.push(id);
     };
+    visit(m.output!.row);
+    const byId = new Map((raw.rows as { id: string }[]).map((r) => [r.id, r]));
+    const rows = m.order.filter((id) => seen.has(id)).map((id) => {
+      const r = byId.get(id) as Record<string, unknown>;
+      // Labels only for the bottom line: nothing in the browser shows a summary's other rows.
+      const label = id === m.output!.row ? r.label : "";
+      if (live.has(id)) {
+        const { explainer: _e, source: _s, expected: _x, section: _c, format: _f, ...rest } = r;
+        return { ...rest, label, ...("value" in rest ? { explainer: "Input." } : {}) };
+      }
+      return { id, label, value: values[id], kind: "estimate", explainer: "Folded." };
+    });
+    // Short ids: the browser never shows them. The bottom line keeps its own, for links and history.
+    const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));
+    const rename = (f: string) => f.replace(/(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => short.get(w) ?? w);
+    const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}) }));
+    const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
+    return { ...meta, rows: compact };
   });
 }
 

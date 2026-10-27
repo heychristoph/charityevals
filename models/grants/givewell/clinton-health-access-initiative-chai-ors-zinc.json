@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 0.43
   }
  },
  "resources": [
@@ -140,14 +142,14 @@
    "id": "moral_weights_early_neonatal",
    "label": "Moral weights (Early Neonatal)",
    "section": "moral_weights",
-   "value": 83.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Moral weights!B2"
    },
-   "explainer": "measure location"
+   "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life.\n\nmeasure location",
+   "formula": "83.6 * $life_value_multiplier",
+   "expected": 83.6
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_7_27_days",
@@ -161,14 +163,14 @@
    "id": "moral_weights_late_neonatal",
    "label": "Moral weights (Late Neonatal)",
    "section": "moral_weights",
-   "value": 84.5,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Moral weights!C2"
    },
-   "explainer": "measure location cause"
+   "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life.\n\nmeasure location cause",
+   "formula": "84.5 * $life_value_multiplier",
+   "expected": 84.5
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_28_364_days",
@@ -182,14 +184,14 @@
    "id": "moral_weights_post_neonatal",
    "label": "Moral weights (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Moral weights!D2"
    },
-   "explainer": "measure location cause metric"
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric",
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7
   },
   {
    "id": "of_deaths_in_each_age_bracket_under_5_1_4_years",
@@ -203,14 +205,14 @@
    "id": "moral_weights_1_to_4",
    "label": "Moral weights (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Moral weights!E2"
    },
-   "explainer": "measure location cause metric year"
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric year",
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3
   },
   {
    "id": "value_of_preventing_an_under_5_death_from_diarrhea_nigeria",
@@ -253,14 +255,14 @@
    "id": "total_5_population_bauchi_gbd2019",
    "label": "Total <5 population, Bauchi (GBD2019)",
    "section": "supplementary",
-   "value": 1679356.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Supplementary!B3"
    },
-   "explainer": "Available at GeoPoDe: https://geopode.world/NGA/population"
+   "explainer": "Available at GeoPoDe: https://geopode.world/NGA/population",
+   "formula": "@givewell.total_5_population_bauchi_gbd2019",
+   "expected": 1679356.0
   },
   {
    "id": "total_5_population_bauchi_adjustment_for_fluctuations_in_bur",
@@ -430,13 +432,13 @@
    "id": "number_of_under_5_deaths_related_to_diarrheal_disease_bauchi_2",
    "label": "Number of under-5 deaths related to diarrheal disease, Bauchi (GBD2019)",
    "section": "supplementary",
-   "value": 10840.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Supplementary!B4"
-   }
+   },
+   "formula": "@givewell.number_of_under_5_deaths_related_to_diarrheal_disease_bauchi",
+   "expected": 10840.0
   },
   {
    "id": "number_of_under_5_deaths_related_to_diarrheal_disease_bauchi_3",
@@ -789,14 +791,14 @@
    "id": "ors_zinc_provision_mortality",
    "label": "ORS/Zinc provision (Mortality)",
    "section": "development_effects",
-   "value": 3.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Development effects!F8"
    },
-   "explainer": "Based on compelling evidence suggesting a moderate effect size (10 - 20% reduction)\n\nThis is estimated by multiplying 'Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc' by 'Effective reduction in mortality from ORS coverage, after IV/EV adjustments' and taking that as the share of 'Under-5 all-cause mortality rate per 1,000'. See 'CEA' tab. For low SDI countries, our estimate is that mortality would be reduced by around 18%."
+   "explainer": "Based on compelling evidence suggesting a moderate effect size (10 - 20% reduction)\n\nThis is estimated by multiplying 'Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc' by 'Effective reduction in mortality from ORS coverage, after IV/EV adjustments' and taking that as the share of 'Under-5 all-cause mortality rate per 1,000'. See 'CEA' tab. For low SDI countries, our estimate is that mortality would be reduced by around 18%.",
+   "formula": "@givewell.ors_zinc_provision_mortality",
+   "expected": 3.0
   },
   {
    "id": "weight_mortality",
@@ -936,13 +938,13 @@
    "id": "smc_mortality",
    "label": "SMC (Mortality)",
    "section": "development_effects",
-   "value": 4.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Development effects!F7"
-   }
+   },
+   "formula": "@givewell.smc_mortality",
+   "expected": 4.0
   },
   {
    "id": "smc_morbidity",
@@ -1033,13 +1035,13 @@
    "id": "diarrheal_diseases_dalys_per_100_000_under_5_children_bauchi_2",
    "label": "Diarrheal diseases - DALYs per 100,000 under 5 children, Bauchi (GBD2019)",
    "section": "supplementary",
-   "value": 67666.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "Supplementary!B5"
-   }
+   },
+   "formula": "@givewell.diarrheal_diseases_dalys_per_100_000_under_5_children_bauchi",
+   "expected": 67666.7
   },
   {
    "id": "diarrheal_diseases_dalys_per_100_000_under_5_children_bauchi_3",
@@ -1094,14 +1096,14 @@
    "id": "units_of_value_costs_averted_per_daly_averted",
    "label": "Units of value (costs averted) per DALY averted",
    "section": "cea",
-   "value": 0.43,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "CEA!B80"
    },
-   "explainer": "Based on GiveWell work here"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 0.43.\n\nBased on GiveWell work here",
+   "formula": "$uov_per_daly",
+   "expected": 0.43
   },
   {
    "id": "subjective_adjustment_for_units_of_value_costs_averted_compa",
@@ -1912,14 +1914,14 @@
    "id": "units_of_value_costs_averted_per_daly_averted_2",
    "label": "Units of value (costs averted) per DALY averted",
    "section": "no_leverage_cea",
-   "value": 0.43,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "No_leverage_CEA!B80"
    },
-   "explainer": "Based on GiveWell work here"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 0.43.\n\nBased on GiveWell work here",
+   "formula": "$uov_per_daly",
+   "expected": 0.43
   },
   {
    "id": "subjective_adjustment_for_units_of_value_costs_averted_compa_2",
@@ -2737,14 +2739,14 @@
    "id": "units_of_value_costs_averted_per_daly_averted_3",
    "label": "Units of value (costs averted) per DALY averted",
    "section": "no_funging_cea",
-   "value": 0.43,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1QEV70C-r6k_UoQGlmMd71RVocYRaH2McT4fMbbsIO0o/edit",
     "cell": "No_funging_CEA!B80"
    },
-   "explainer": "Based on GiveWell work here"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 0.43.\n\nBased on GiveWell work here",
+   "formula": "$uov_per_daly",
+   "expected": 0.43
   },
   {
    "id": "subjective_adjustment_for_units_of_value_costs_averted_compa_3",

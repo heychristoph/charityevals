@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -245,8 +246,8 @@
    "format": "percent"
   },
   {
-   "id": "lower_respiratory_infections_s_pneumoniae_3",
-   "label": "Lower respiratory infections (S.Pneumoniae) (-)",
+   "id": "lower_respiratory_infections_s_pneumoniae_discount",
+   "label": "Lower respiratory infections (S.Pneumoniae) (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "lower_respiratory_infections_s_pneumoniae_neonatal * 1.1",
    "expected": 0.340897986,
@@ -256,7 +257,7 @@
    "id": "lower_respiratory_infections_s_pneumoniae_of_under_5_deaths",
    "label": "Lower respiratory infections (S.Pneumoniae) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - lower_respiratory_infections_s_pneumoniae_3",
+   "formula": "1 - lower_respiratory_infections_s_pneumoniae_discount",
    "expected": 0.659102014,
    "format": "percent"
   },
@@ -346,8 +347,8 @@
    "format": "percent"
   },
   {
-   "id": "pneumococcal_meningitis_4",
-   "label": "Pneumococcal meningitis (-)",
+   "id": "pneumococcal_meningitis_discount",
+   "label": "Pneumococcal meningitis (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "pneumococcal_meningitis_neonatal * 1.1",
    "expected": 0.1356105921,
@@ -357,7 +358,7 @@
    "id": "pneumococcal_meningitis_of_under_5_deaths_that_occur_after_v",
    "label": "Pneumococcal meningitis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - pneumococcal_meningitis_4",
+   "formula": "1 - pneumococcal_meningitis_discount",
    "expected": 0.8643894079,
    "format": "percent"
   },
@@ -640,8 +641,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year * 0.15",
    "expected": 0.07109470667,
@@ -651,7 +652,7 @@
    "id": "whooping_cough_of_under_5_deaths_that_occur_after_vaccine_st",
    "label": "Whooping cough (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable",
+   "formula": "1 - unavailable_discount",
    "expected": 0.9289052933,
    "format": "percent"
   },
@@ -720,8 +721,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_2",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount_2",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year_2 * 0.15",
    "expected": 0.02350698817,
@@ -731,7 +732,7 @@
    "id": "diphtheria_of_under_5_deaths_that_occur_after_vaccine_starte",
    "label": "Diphtheria (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable_2",
+   "formula": "1 - unavailable_discount_2",
    "expected": 0.9764930118,
    "format": "percent"
   },
@@ -813,8 +814,8 @@
    "format": "percent"
   },
   {
-   "id": "tetanus_3",
-   "label": "Tetanus (-)",
+   "id": "tetanus_discount",
+   "label": "Tetanus (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "tetanus_unavailable * 1.1",
    "expected": 0.8488072654,
@@ -824,7 +825,7 @@
    "id": "tetanus_of_under_5_deaths_that_occur_after_vaccine_started",
    "label": "Tetanus (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - tetanus_3",
+   "formula": "1 - tetanus_discount",
    "expected": 0.1511927346,
    "format": "percent"
   },
@@ -991,10 +992,10 @@
    "format": "percent"
   },
   {
-   "id": "lower_respiratory_infections_hib_3",
-   "label": "Lower respiratory infections (HiB) (-)",
+   "id": "lower_respiratory_infections_hib_discount",
+   "label": "Lower respiratory infections (HiB) (Discount)",
    "section": "deaths_before_vaccine_administe",
-   "formula": "lower_respiratory_infections_s_pneumoniae_3",
+   "formula": "lower_respiratory_infections_s_pneumoniae_discount",
    "expected": 0.340897986,
    "format": "percent"
   },
@@ -1002,7 +1003,7 @@
    "id": "lower_respiratory_infections_hib_of_under_5_deaths_that_occu",
    "label": "Lower respiratory infections (HiB) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - lower_respiratory_infections_hib_3",
+   "formula": "1 - lower_respiratory_infections_hib_discount",
    "expected": 0.659102014,
    "format": "percent"
   },
@@ -1092,8 +1093,8 @@
    "format": "percent"
   },
   {
-   "id": "h_influenzae_type_b_meningitis_4",
-   "label": "H influenzae type B meningitis (-)",
+   "id": "h_influenzae_type_b_meningitis_discount",
+   "label": "H influenzae type B meningitis (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "h_influenzae_type_b_meningitis_unavailable * 1.1",
    "expected": 0.115622622,
@@ -1103,7 +1104,7 @@
    "id": "h_influenzae_type_b_meningitis_of_under_5_deaths_that_occur",
    "label": "H influenzae type B meningitis (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - h_influenzae_type_b_meningitis_4",
+   "formula": "1 - h_influenzae_type_b_meningitis_discount",
    "expected": 0.884377378,
    "format": "percent"
   },
@@ -1296,8 +1297,8 @@
    "format": "percent"
   },
   {
-   "id": "unavailable_3",
-   "label": "Unavailable (-)",
+   "id": "unavailable_discount_3",
+   "label": "Unavailable (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "unavailable_1_year_3 * 0.75",
    "expected": 0.2075907454,
@@ -1307,7 +1308,7 @@
    "id": "measles_of_under_5_deaths_that_occur_after_vaccine_started",
    "label": "Measles (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - unavailable_3",
+   "formula": "1 - unavailable_discount_3",
    "expected": 0.7924092546,
    "format": "percent"
   },
@@ -1712,8 +1713,8 @@
    "format": "percent"
   },
   {
-   "id": "diarrhea",
-   "label": "Diarrhea (-)",
+   "id": "diarrhea_discount",
+   "label": "Diarrhea (Discount)",
    "section": "deaths_before_vaccine_administe",
    "formula": "diarrhea_ignoring * 1.1",
    "expected": 0.05896343115,
@@ -1723,7 +1724,7 @@
    "id": "diarrhea_rotavirus_of_under_5_deaths_that_occur_after_vaccin",
    "label": "Diarrhea (rotavirus) (% of under 5 deaths that occur after vaccine started)",
    "section": "probability_of_death",
-   "formula": "1 - diarrhea",
+   "formula": "1 - diarrhea_discount",
    "expected": 0.9410365689,
    "format": "percent"
   },
@@ -2055,8 +2056,8 @@
    "expected": 0.7
   },
   {
-   "id": "row_2",
-   "label": "-",
+   "id": "weighted_average_2",
+   "label": "Weighted average",
    "section": "biomarkers_adjustment",
    "formula": "sum(issues_unlikely_to_lead_to_vaccine_efficacy_concerns_in_new * issues_unlikely_to_lead_to_vaccine_efficacy_concerns_in_new_2, issues_likely_to_lead_to_vaccine_efficacy_concerns_in_new_in * issues_likely_to_lead_to_vaccine_efficacy_concerns_in_new_in_2)",
    "expected": 0.51
@@ -2065,7 +2066,7 @@
    "id": "biomarkers_best_guess_taken_from_table_above_implied_adjustm",
    "label": "Biomarkers best guess (taken from table above) (Implied Adjustment Factor (Relative to Effect Size in CEA))",
    "section": "biomarkers_adjustment",
-   "formula": "row_2",
+   "formula": "weighted_average_2",
    "expected": 0.51
   },
   {
@@ -2081,8 +2082,8 @@
    }
   },
   {
-   "id": "row",
-   "label": "-",
+   "id": "weighted_average",
+   "label": "Weighted average",
    "section": "biomarkers_adjustment",
    "formula": "sum(meta_analysis_we_use_for_main_effect_of_measles_vaccine_in_c * meta_analysis_we_use_for_main_effect_of_measles_vaccine_in_c_2, nigerian_seroconversion_study_fowotade_et_al_2015_implied_ad * nigerian_seroconversion_study_fowotade_et_al_2015_weight, meta_analysis_with_africa_specific_effect_uzicanin_and_zimme * meta_analysis_with_africa_specific_effect_uzicanin_and_zimme_2, biomarkers_best_guess_taken_from_table_above_implied_adjustm * biomarkers_best_guess_taken_from_table_above_weight)",
    "expected": 0.7541764706
@@ -2091,7 +2092,7 @@
    "id": "measles_adjustment",
    "label": "Measles adjustment",
    "section": "biomarkers_adjustment",
-   "formula": "row",
+   "formula": "weighted_average",
    "expected": 0.7541764706
   },
   {
@@ -2368,7 +2369,7 @@
   },
   {
    "id": "pcv_vaccine_3_doses",
-   "label": "PCV vaccine (3 doses) (%)",
+   "label": "PCV vaccine (3 doses)",
    "section": "partial_vaccination",
    "formula": "pcv_vaccine_three_doses_percent_of_all_vaccine_preventable_d",
    "expected": 0.4405646157,
@@ -2388,7 +2389,7 @@
   },
   {
    "id": "dpt_vaccine_3_doses",
-   "label": "DPT vaccine (3 doses) (%)",
+   "label": "DPT vaccine (3 doses)",
    "section": "partial_vaccination",
    "formula": "dtp_vaccine_3_doses_percent_of_all_vaccine_preventable_death",
    "expected": 0.1143104492,
@@ -2408,7 +2409,7 @@
   },
   {
    "id": "hib_vaccine_3_doses",
-   "label": "HiB vaccine (3 doses) (%)",
+   "label": "HiB vaccine (3 doses)",
    "section": "partial_vaccination",
    "formula": "hib_vaccine_3_doses_percent_of_all_vaccine_preventable_death",
    "expected": 0.03405467243,
@@ -2428,7 +2429,7 @@
   },
   {
    "id": "measles_vaccine",
-   "label": "Measles vaccine (%)",
+   "label": "Measles vaccine",
    "section": "partial_vaccination",
    "formula": "measles_vaccine_percent_of_all_vaccine_preventable_deaths_fr",
    "expected": 0.146053022,
@@ -2448,7 +2449,7 @@
   },
   {
    "id": "bcg_vaccine",
-   "label": "BCG vaccine (%)",
+   "label": "BCG vaccine",
    "section": "partial_vaccination",
    "formula": "bcg_vaccine_percent_of_all_vaccine_preventable_deaths_from_d",
    "expected": 0.1188670663,
@@ -2468,7 +2469,7 @@
   },
   {
    "id": "rotavirus_vaccine_2_doses",
-   "label": "Rotavirus vaccine (2 doses) (%)",
+   "label": "Rotavirus vaccine (2 doses)",
    "section": "partial_vaccination",
    "formula": "rotavirus_vaccine_percent_of_all_vaccine_preventable_deaths",
    "expected": 0.1461501745,
@@ -2686,13 +2687,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under",
    "label": "Value assigned to averting the death of an individual under 5",
    "section": "moral_weights",
-   "value": 117.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B2"
-   }
+   },
+   "formula": "117 * $life_value_multiplier",
+   "expected": 117.0,
+   "explainer": "GiveWell's moral weight, 117 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "units_of_value_from_child_deaths_averted_in_the_cohort",
@@ -2712,13 +2714,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
    "label": "Value assigned to averting the death of an individual under 5-14",
    "section": "moral_weights",
-   "value": 134.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B3"
-   }
+   },
+   "formula": "134 * $life_value_multiplier",
+   "expected": 134.0,
+   "explainer": "GiveWell's moral weight, 134 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_of_averting_the_death_of_an_individual_in_this_age_gro",
@@ -3288,13 +3291,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_3",
    "label": "Value assigned to averting the death of an individual under 15-49",
    "section": "moral_weights",
-   "value": 104.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B4"
-   }
+   },
+   "formula": "104 * $life_value_multiplier",
+   "expected": 104.0,
+   "explainer": "GiveWell's moral weight, 104 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_of_averting_the_death_of_an_individual_in_this_age_gro_3",
@@ -3786,13 +3790,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_4",
    "label": "Value assigned to averting the death of an individual under 50-74",
    "section": "moral_weights",
-   "value": 42.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B5"
-   }
+   },
+   "formula": "42 * $life_value_multiplier",
+   "expected": 42.0,
+   "explainer": "GiveWell's moral weight, 42 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_of_averting_the_death_of_an_individual_in_this_age_gro_4",
@@ -4537,25 +4542,27 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_5",
    "label": "Value assigned to averting the death of an individual under 5 from malaria",
    "section": "moral_weights",
-   "value": 117.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B9"
-   }
+   },
+   "formula": "117 * $life_value_multiplier",
+   "expected": 117.0,
+   "explainer": "GiveWell's moral weight, 117 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_a_6_to_59_month_old",
    "label": "Value assigned to averting the death of a 6- to 59-month-old child (VAS)",
    "section": "moral_weights",
-   "value": 118.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1KcSf7UtHdVKrOs-7FMXmo6wAqzuGVacUxg5CBigVY3c/edit",
     "cell": "Moral weights!B10"
-   }
+   },
+   "formula": "118 * $life_value_multiplier",
+   "expected": 118.0,
+   "explainer": "GiveWell's moral weight, 118 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "average",

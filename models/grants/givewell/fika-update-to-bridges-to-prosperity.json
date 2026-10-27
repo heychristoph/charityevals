@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -49,7 +50,7 @@
  "rows": [
   {
    "id": "philanthropic_actors",
-   "label": "Philanthropic actors (-)",
+   "label": "Philanthropic actors",
    "section": "bridges",
    "value": 3000000.0,
    "kind": "estimate",
@@ -63,7 +64,7 @@
   },
   {
    "id": "present_value_of_lifetime_benefits_from_intervention_in_term",
-   "label": "Present value of lifetime benefits from intervention (in terms of increases in ln(household income)) (-)",
+   "label": "Present value of lifetime benefits from intervention (in terms of increases in ln(household income)) (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 2.928635824,
    "kind": "estimate",
@@ -75,8 +76,8 @@
    "explainer": "Calculated in the source sheet as `=pv(B36,B37,-B34,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "multiplier_for_resource_sharing_within_households",
-   "label": "Multiplier for resource sharing within households (-)",
+   "id": "multiplier_for_resource_sharing_within_households_brooks_and",
+   "label": "Multiplier for resource sharing within households (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 4.2,
    "kind": "estimate",
@@ -88,8 +89,8 @@
    "explainer": "Average household size for baseline survey in Rwanda. We haven't looked at other countries. “In baseline data collection, the average size of households surveyed was 4.7 people.” Thomas et al. 2021"
   },
   {
-   "id": "internal_validity_adjustment_bridges",
-   "label": "Internal validity adjustment — Bridges (-)",
+   "id": "internal_validity_adjustment_bridges_brooks_and_donovan_2019",
+   "label": "Internal validity adjustment — Bridges (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 0.85,
    "kind": "estimate",
@@ -102,8 +103,8 @@
    "format": "percent"
   },
   {
-   "id": "external_validity_adjustment_bridges",
-   "label": "External validity adjustment — Bridges (-)",
+   "id": "external_validity_adjustment_bridges_brooks_and_donovan_2019",
+   "label": "External validity adjustment — Bridges (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 0.7,
    "kind": "estimate",
@@ -117,26 +118,27 @@
   },
   {
    "id": "adjusted_long_term_benefits_per_person_receiving_interventio",
-   "label": "Adjusted long-term benefits per person receiving intervention in terms of ln(consumption) (-)",
+   "label": "Adjusted long-term benefits per person receiving intervention in terms of ln(consumption) (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "formula": "present_value_of_lifetime_benefits_from_intervention_in_term * multiplier_for_resource_sharing_within_households * internal_validity_adjustment_bridges * external_validity_adjustment_bridges",
+   "formula": "present_value_of_lifetime_benefits_from_intervention_in_term * multiplier_for_resource_sharing_within_households_brooks_and * internal_validity_adjustment_bridges_brooks_and_donovan_2019 * external_validity_adjustment_bridges_brooks_and_donovan_2019",
    "expected": 7.318660923
   },
   {
    "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
-   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (-)",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1EsWfGApbof1klPiMT7lYcPXH0fAKTUsoLeJ_-I5yU0Y/edit",
     "cell": "Bridges!B45"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44."
   },
   {
-   "id": "units_of_value_from_intervention",
-   "label": "Units of value from intervention (-)",
+   "id": "units_of_value_from_intervention_brooks_and_donovan_2019_nic",
+   "label": "Units of value from intervention (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "formula": "adjusted_long_term_benefits_per_person_receiving_interventio * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 10.53887173
@@ -170,8 +172,8 @@
    "format": "usd"
   },
   {
-   "id": "households_affected_by_each_bridge",
-   "label": "Households affected by each bridge (-)",
+   "id": "households_affected_by_each_bridge_brooks_and_donovan_2019_n",
+   "label": "Households affected by each bridge (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 40.2,
    "kind": "estimate",
@@ -183,37 +185,37 @@
    "explainer": "Calculation for columns C - E. Source for column B in cell note in cell B9. Households per village in Nicaragua comes from Brooks and Donovan 2019, p. 72.\n\n\"On average, there are 33.5 households per village...\" Brooks and Donovan 2019, p. 72.\n\nThe range of households in the study sample is 24 to 80.\n\n\"The number of households identified in each village varied widely, from a maximum of 80 to a minimum of 24, with an average\nhousehold size of 4.2.\" Brooks and Donovan 2019, pp. 9-10.\n\nWe do not know whether there were additional villages nearby that may have also benefited from the bridge but were not included in the study sample.\n\nAs a rough guess, we estimate there were 20% more households that were not surveyed but experienced similar income effects from bridges. This is highly speculative.\n\nAs a result, our baseline estimate for Nicaragua is 33.5*1.2.\n\nHouseholds affected per bridge is "
   },
   {
-   "id": "bridge_cost_per_household",
-   "label": "Bridge cost per household (-)",
+   "id": "bridge_cost_per_household_brooks_and_donovan_2019_nicaragua",
+   "label": "Bridge cost per household (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "formula": "cost_per_bridge_brooks_and_donovan_2019_nicaragua / households_affected_by_each_bridge",
+   "formula": "cost_per_bridge_brooks_and_donovan_2019_nicaragua / households_affected_by_each_bridge_brooks_and_donovan_2019_n",
    "expected": 2189.054726,
    "format": "usd"
   },
   {
    "id": "total_number_of_households_covered_in_one_year_with_hypothet",
-   "label": "Total number of households covered in one year with hypothetical donation ($100,000) (-)",
+   "label": "Total number of households covered in one year with hypothetical donation ($100,000) (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "formula": "arbitrary_donation_size_brooks_and_donovan_2019_nicaragua / bridge_cost_per_household",
+   "formula": "arbitrary_donation_size_brooks_and_donovan_2019_nicaragua / bridge_cost_per_household_brooks_and_donovan_2019_nicaragua",
    "expected": 45.68181818
   },
   {
    "id": "total_units_of_value_generated_with_hypothetical_donation_10",
-   "label": "Total units of value generated with hypothetical donation ($100,000) (before accounting for leverage and funging) (-)",
+   "label": "Total units of value generated with hypothetical donation ($100,000) (before accounting for leverage and funging) (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "formula": "units_of_value_from_intervention * total_number_of_households_covered_in_one_year_with_hypothet",
+   "formula": "units_of_value_from_intervention_brooks_and_donovan_2019_nic * total_number_of_households_covered_in_one_year_with_hypothet",
    "expected": 481.4348222
   },
   {
-   "id": "units_of_value_per_3",
-   "label": "Units of value per $ (-)",
+   "id": "units_of_value_per_brooks_and_donovan_2019_nicaragua_2",
+   "label": "Units of value per $ (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "formula": "total_units_of_value_generated_with_hypothetical_donation_10 / arbitrary_donation_size_brooks_and_donovan_2019_nicaragua",
    "expected": 0.004814348222
   },
   {
-   "id": "better_access_to_healthcare_education_government_services",
-   "label": "Better access to healthcare, education, government services (-)",
+   "id": "better_access_to_healthcare_education_government_services_br",
+   "label": "Better access to healthcare, education, government services (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 0.1,
    "kind": "estimate",
@@ -226,8 +228,8 @@
    "format": "percent"
   },
   {
-   "id": "offsetting_effects_on_workers_in_migration_destinations",
-   "label": "Offsetting effects on workers in migration destinations (-)",
+   "id": "offsetting_effects_on_workers_in_migration_destinations_broo",
+   "label": "Offsetting effects on workers in migration destinations (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": -0.05,
    "kind": "estimate",
@@ -240,8 +242,8 @@
    "format": "percent"
   },
   {
-   "id": "downside_adjustments",
-   "label": "Downside adjustments (-)",
+   "id": "downside_adjustments_brooks_and_donovan_2019_nicaragua",
+   "label": "Downside adjustments (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": -0.1,
    "kind": "estimate",
@@ -254,15 +256,15 @@
    "format": "percent"
   },
   {
-   "id": "units_of_value_per_2",
-   "label": "Units of value per $ (-)",
+   "id": "units_of_value_per_brooks_and_donovan_2019_nicaragua",
+   "label": "Units of value per $ (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
-   "formula": "units_of_value_per_3 * (1 + sum(better_access_to_healthcare_education_government_services, offsetting_effects_on_workers_in_migration_destinations)) * (1 + downside_adjustments)",
+   "formula": "units_of_value_per_brooks_and_donovan_2019_nicaragua_2 * (1 + sum(better_access_to_healthcare_education_government_services_br, offsetting_effects_on_workers_in_migration_destinations_broo)) * (1 + downside_adjustments_brooks_and_donovan_2019_nicaragua)",
    "expected": 0.00454955907
   },
   {
    "id": "percent_costs_paid_by_b2p",
-   "label": "Percent costs paid by B2P (-)",
+   "label": "Percent costs paid by B2P",
    "section": "bridges",
    "value": 0.6,
    "kind": "estimate",
@@ -294,7 +296,7 @@
    "id": "government_multilaterals",
    "label": "Government/multilaterals",
    "section": "bridges",
-   "formula": "government_multilaterals_2 * units_of_value_per_2",
+   "formula": "government_multilaterals_2 * units_of_value_per_brooks_and_donovan_2019_nicaragua",
    "expected": -9099.11814
   },
   {
@@ -315,7 +317,7 @@
    "id": "other_philanthropic_actor",
    "label": "Other philanthropic actor",
    "section": "bridges",
-   "formula": "other_philanthropic_actor_2 * units_of_value_per_2",
+   "formula": "other_philanthropic_actor_2 * units_of_value_per_brooks_and_donovan_2019_nicaragua",
    "expected": 0.0
   },
   {
@@ -369,7 +371,7 @@
    "id": "scenario_1_bridges_not_built",
    "label": "Scenario 1: Bridges not built",
    "section": "bridges",
-   "formula": "philanthropic_actors * units_of_value_per_2 - scenario_1_bridges_not_built_2",
+   "formula": "philanthropic_actors * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_1_bridges_not_built_2",
    "expected": 15528.79535
   },
   {
@@ -404,7 +406,7 @@
    "id": "government_multilaterals_4",
    "label": "Government/multilaterals",
    "section": "bridges",
-   "formula": "government_multilaterals_5 * units_of_value_per_2",
+   "formula": "government_multilaterals_5 * units_of_value_per_brooks_and_donovan_2019_nicaragua",
    "expected": 0.0
   },
   {
@@ -419,7 +421,7 @@
    "id": "other_philanthropic_actor_4",
    "label": "Other philanthropic actor",
    "section": "bridges",
-   "formula": "other_philanthropic_actor_5 * units_of_value_per_2",
+   "formula": "other_philanthropic_actor_5 * units_of_value_per_brooks_and_donovan_2019_nicaragua",
    "expected": 13648.67721
   },
   {
@@ -447,7 +449,7 @@
    "id": "scenario_2_bridges_built",
    "label": "Scenario 2: Bridges built",
    "section": "bridges",
-   "formula": "philanthropic_actors * units_of_value_per_2 - scenario_2_bridges_built_2",
+   "formula": "philanthropic_actors * units_of_value_per_brooks_and_donovan_2019_nicaragua - scenario_2_bridges_built_2",
    "expected": 10828.5
   },
   {
@@ -473,8 +475,8 @@
    "expected": 0.004706235581
   },
   {
-   "id": "units_of_value_per_dollar_givedirectly",
-   "label": "Units of value per dollar, GiveDirectly (-)",
+   "id": "units_of_value_per_dollar_givedirectly_brooks_and_donovan_20",
+   "label": "Units of value per dollar, GiveDirectly (Brooks and Donovan 2019 (Nicaragua))",
    "section": "bridges",
    "value": 0.0034398420219798162,
    "kind": "estimate",
@@ -489,7 +491,7 @@
    "id": "x_cash_after_leveraging_and_funging",
    "label": "x cash after leveraging and funging",
    "section": "bridges",
-   "formula": "units_of_value_per / units_of_value_per_dollar_givedirectly",
+   "formula": "units_of_value_per / units_of_value_per_dollar_givedirectly_brooks_and_donovan_20",
    "expected": 1.36815457
   },
   {

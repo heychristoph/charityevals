@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1,
+   "discount_rate": 0.04
   }
  },
  "resources": [
@@ -447,13 +449,14 @@
    "id": "value_assigned_to_averting_the_death_of_a_6_to_59_month_old_2",
    "label": "Value assigned to averting the death of a 6- to 59-month-old child (VAS) (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 118.732589546845,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1r6xUPGyF64bFXLFWrUcdBpyk_SGDXhuxNi24ucxDlxs/edit",
     "cell": "Moral weights and discount rate!C10"
-   }
+   },
+   "formula": "118.732589546845 * $life_value_multiplier",
+   "expected": 118.732589546845,
+   "explainer": "GiveWell's moral weight, 118.732589546845 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_a_6_to_59_month_old",
@@ -831,13 +834,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_3",
    "label": "Value assigned to averting the death of an individual under 5 from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 116.252615789931,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1r6xUPGyF64bFXLFWrUcdBpyk_SGDXhuxNi24ucxDlxs/edit",
     "cell": "Moral weights and discount rate!C8"
-   }
+   },
+   "formula": "116.252615789931 * $life_value_multiplier",
+   "expected": 116.252615789931,
+   "explainer": "GiveWell's moral weight, 116.252615789931 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
@@ -892,13 +896,14 @@
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_3",
    "label": "Value assigned to averting the death of an individual 5 or older from malaria (GiveWell 2020)",
    "section": "moral_weights_and_discount_rate",
-   "value": 73.1914046254006,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1r6xUPGyF64bFXLFWrUcdBpyk_SGDXhuxNi24ucxDlxs/edit",
     "cell": "Moral weights and discount rate!C9"
-   }
+   },
+   "formula": "73.1914046254006 * $life_value_multiplier",
+   "expected": 73.1914046254006,
+   "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
@@ -1078,14 +1083,14 @@
    "id": "baseline_annual_consumption_per_capita_in_nominal_usd",
    "label": "Baseline annual consumption per capita (in nominal USD)",
    "section": "givedirectly",
-   "value": 285.92228810603416,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1r6xUPGyF64bFXLFWrUcdBpyk_SGDXhuxNi24ucxDlxs/edit",
     "cell": "GiveDirectly!B19"
    },
-   "format": "usd"
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_in_nominal_usd",
+   "expected": 285.92228810603416
   },
   {
    "id": "total_size_of_transfer_per_household_nominal_usd",
@@ -1104,13 +1109,13 @@
    "id": "average_household_size",
    "label": "Average household size",
    "section": "givedirectly",
-   "value": 4.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1r6xUPGyF64bFXLFWrUcdBpyk_SGDXhuxNi24ucxDlxs/edit",
     "cell": "GiveDirectly!B8"
-   }
+   },
+   "formula": "@givewell.average_household_size_2",
+   "expected": 4.7
   },
   {
    "id": "size_of_transfer_per_person_nominal_usd",
@@ -1252,9 +1257,10 @@
    "id": "discount_rate",
    "label": "Discount rate",
    "section": "givedirectly",
-   "formula": "overall_discount_rate_active",
+   "formula": "$discount_rate",
    "expected": 0.04,
-   "format": "percent"
+   "format": "percent",
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
   },
   {
    "id": "duration_of_investment_benefits_in_years",

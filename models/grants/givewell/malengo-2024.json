@@ -20,7 +20,10 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.04,
+   "uov_per_ln_consumption": 1.44,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -118,15 +121,15 @@
    "id": "discount_rate_best_guess",
    "label": "Discount rate (Best-guess)",
    "section": "botec",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!D17"
    },
-   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weight GiveWell, Moral weights and discount rate",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "working_lifespan_duration_of_benefits_years_best_guess",
@@ -265,14 +268,14 @@
    "id": "units_of_value_per_ln_inc_increase_best_guess",
    "label": "Units of value per ln inc increase (Best-guess)",
    "section": "botec",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!D16"
    },
-   "explainer": "GiveWell moral weights GiveWell, Moral weights and discount rate"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGiveWell moral weights GiveWell, Moral weights and discount rate",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
    "id": "average_number_of_years_between_malengo_programme_and_long_t",
@@ -628,28 +631,28 @@
    "id": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best",
    "label": "Moral weight of averting the death of a 60-64 year-old (Best-guess)",
    "section": "botec",
-   "value": 40.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!D44"
    },
-   "explainer": "Rough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)"
+   "explainer": "GiveWell's moral weight, 40 units of value, times your multiplier on the value of a life.\n\nRough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)",
+   "formula": "40 * $life_value_multiplier",
+   "expected": 40.0
   },
   {
    "id": "discount_rate_old_best_guess",
    "label": "Discount rate (Old best guess)",
    "section": "botec",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
     "cell": "BOTEC!B17"
    },
-   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nGiveWell moral weight GiveWell, Moral weights and discount rate",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
    "id": "life_expectancy_at_birth_in_uganda_old_best_guess",

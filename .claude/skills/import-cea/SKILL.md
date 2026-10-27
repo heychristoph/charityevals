@@ -31,7 +31,7 @@ is a leaf (copy its value, cite the cell) or worth modelling.
 
 ## 2b. Or convert it in bulk
 
-For a quick, faithful import without hooks into the shared assumptions, run the generic converter:
+For a quick, faithful import, run the generic converter:
 
 ```bash
 python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>
@@ -43,9 +43,15 @@ Constants become inputs, formulas become formulas with `expected`, and lookups w
 formula in its explainer. `bottom` says how to read the cell: `xcash`, `uov`, `uov_per:<n>` or
 `wellby_per:<n>`. Guesstimate models go through `scripts/convert-guesstimate.py`.
 
+Then link it like a hand-built model: `scripts/link-parameters.py` turns moral weights into
+`v * $life_value_multiplier`, links ln-consumption values, DALY values and the discount rate to their
+assumptions (the sheet's values go into `evaluator.assumptions`, so the evaluator view still matches),
+and moves statistics several sheets share into `facts/givewell*.json`. Extend its patterns when a new
+evaluator labels these differently: nothing user-adjustable should stay a bare constant.
+
 Bulk models live in `models/grants/` and are marked `bulk: true`. After adding any:
 
-- run `npx tsx scripts/summaries.ts`: the browser gets one-row summaries of them;
+- run `npx tsx scripts/summaries.ts`: the browser gets them partially evaluated, with only the rows that depend on assumptions kept live;
 - run `npx tsx scripts/bulk-writeups.ts`: a generated write-up for charities with no other model;
 - record them in `inventory/`.
 

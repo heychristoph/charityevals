@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "life_value_multiplier": 1
   }
  },
  "resources": [
@@ -850,15 +851,15 @@
    "id": "r_36_47_mortality_rate",
    "label": "36-47 (Mortality rate)",
    "section": "irc_untreated_mortality",
-   "value": 0.015,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "IRC Untreated mortality!H63"
    },
    "explainer": "36-47",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.f_36_47_mortality_rate_4",
+   "expected": 0.015
   },
   {
    "id": "r_48_59_mortality_rate",
@@ -1135,15 +1136,15 @@
    "id": "r_24_35_mortality_rate_2",
    "label": "24-35 (Mortality rate)",
    "section": "irc_untreated_mortality",
-   "value": 0.02,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "IRC Untreated mortality!B62"
    },
    "explainer": "24-35 24-35 24-35",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.f_24_35_mortality_rate_3",
+   "expected": 0.02
   },
   {
    "id": "r_24_35_mortality_rate_3",
@@ -1184,15 +1185,15 @@
    "id": "r_36_47_mortality_rate_2",
    "label": "36-47 (Mortality rate)",
    "section": "irc_untreated_mortality",
-   "value": 0.015,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "IRC Untreated mortality!B63"
    },
    "explainer": "36-47 36-47 36-47",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.f_36_47_mortality_rate_4",
+   "expected": 0.015
   },
   {
    "id": "r_36_47_mortality_rate_3",
@@ -1233,15 +1234,15 @@
    "id": "r_48_59_mortality_rate_2",
    "label": "48-59 (Mortality rate)",
    "section": "irc_untreated_mortality",
-   "value": 0.014,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "IRC Untreated mortality!B64"
    },
    "explainer": "48-59 48-59 48-59",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.f_48_59_mortality_rate_3",
+   "expected": 0.014
   },
   {
    "id": "r_48_59_mortality_rate_3",
@@ -2011,13 +2012,14 @@
    "id": "age_specific_moral_weights_post_neonatal",
    "label": "Age-specific moral weights (Post Neonatal)",
    "section": "moral_weights",
-   "value": 100.7,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "Moral weights!F8"
-   }
+   },
+   "formula": "100.7 * $life_value_multiplier",
+   "expected": 100.7,
+   "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "admissions_6_23_months_drc",
@@ -2237,13 +2239,14 @@
    "id": "age_specific_moral_weights_1_to_4",
    "label": "Age-specific moral weights (1 to 4)",
    "section": "moral_weights",
-   "value": 127.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
     "cell": "Moral weights!G8"
-   }
+   },
+   "formula": "127.3 * $life_value_multiplier",
+   "expected": 127.3,
+   "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life."
   },
   {
    "id": "of_children_admitted_for_malnutrition_treatment_in_each_age_2",

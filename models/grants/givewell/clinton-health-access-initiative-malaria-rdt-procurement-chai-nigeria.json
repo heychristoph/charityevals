@@ -20,7 +20,8 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "discount_rate": 0.04
   }
  },
  "resources": [
@@ -81,8 +82,8 @@
    "format": "usd"
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "cost_per_mrdt_unadjusted",
+   "label": "Cost per mRDT, unadjusted",
    "section": "main",
    "value": 0.26,
    "kind": "estimate",
@@ -95,8 +96,8 @@
    "format": "usd"
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "adjustment_for_wastage_inefficiencies",
+   "label": "Adjustment for wastage/inefficiencies",
    "section": "main",
    "value": 0.15,
    "kind": "estimate",
@@ -109,10 +110,10 @@
    "format": "percent"
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "cost_per_mrdt_adjusted",
+   "label": "Cost per mRDT, adjusted",
    "section": "main",
-   "formula": "input * (1 + input_2)",
+   "formula": "cost_per_mrdt_unadjusted * (1 + adjustment_for_wastage_inefficiencies)",
    "expected": 0.299,
    "format": "usd"
   },
@@ -120,7 +121,7 @@
    "id": "number_of_people_with_fevers_reached_with_mrdts",
    "label": "Number of people with fevers reached with mRDTs",
    "section": "simple_botec",
-   "formula": "grant_size / calc / 1.08",
+   "formula": "grant_size / cost_per_mrdt_adjusted / 1.08",
    "expected": 2607456.955
   },
   {
@@ -136,16 +137,16 @@
    }
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "among_children_under_5_2",
+   "label": "... among children under 5",
    "section": "main",
    "formula": "past_estimate / 100000",
    "expected": 0.25212744,
    "format": "percent"
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "adjustment_for_higher_malaria_prevalence_in_treatment_seekin",
+   "label": "Adjustment for higher malaria prevalence in treatment-seeking population",
    "section": "main",
    "value": 0.5,
    "kind": "estimate",
@@ -158,8 +159,8 @@
    "format": "percent"
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "of_children_under_5",
+   "label": "% of children under 5",
    "section": "main",
    "value": 0.14,
    "kind": "estimate",
@@ -172,8 +173,8 @@
    "format": "percent"
   },
   {
-   "id": "input_6",
-   "label": "input",
+   "id": "total_grant_budget",
+   "label": "Total grant budget",
    "section": "main",
    "value": 842000.0,
    "kind": "estimate",
@@ -186,37 +187,37 @@
    "format": "usd"
   },
   {
-   "id": "calc_5",
-   "label": "calc",
+   "id": "budget_for_rdts",
+   "label": "Budget for RDTs",
    "section": "main",
-   "formula": "input_6 / 1.08",
+   "formula": "total_grant_budget / 1.08",
    "expected": 779629.6296,
    "format": "usd"
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "total_number_of_fever_cases_reached_with_mrdts",
+   "label": "Total number of fever cases reached with mRDTs",
    "section": "main",
-   "formula": "calc_5 / calc",
+   "formula": "budget_for_rdts / cost_per_mrdt_adjusted",
    "expected": 2607456.955
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "number_of_children_under_5",
+   "label": "number of children under 5",
    "section": "main",
-   "formula": "input_5 * calc_4",
+   "formula": "of_children_under_5 * total_number_of_fever_cases_reached_with_mrdts",
    "expected": 365043.9737
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "among_children_under_5",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "input_3 * (1 + input_4) * calc_3",
+   "formula": "among_children_under_5_2 * (1 + adjustment_for_higher_malaria_prevalence_in_treatment_seekin) * number_of_children_under_5",
    "expected": 138056.4039
   },
   {
-   "id": "input_7",
-   "label": "input",
+   "id": "among_people_over_the_age_of_14",
+   "label": "... among people over the age of 14",
    "section": "main",
    "value": 0.205041078,
    "kind": "estimate",
@@ -229,8 +230,8 @@
    "format": "percent"
   },
   {
-   "id": "input_8",
-   "label": "input",
+   "id": "of_children_aged_5_14",
+   "label": "% of children aged 5-14",
    "section": "main",
    "value": 0.11,
    "kind": "estimate",
@@ -243,39 +244,39 @@
    "format": "percent"
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "number_of_children_aged_5_14",
+   "label": "number of children aged 5-14",
    "section": "main",
-   "formula": "input_8 * calc_4",
+   "formula": "of_children_aged_5_14 * total_number_of_fever_cases_reached_with_mrdts",
    "expected": 286820.2651
   },
   {
-   "id": "calc_9",
-   "label": "calc",
+   "id": "of_people_over_the_age_of_14",
+   "label": "% of people over the age of 14",
    "section": "main",
-   "formula": "1 - sum(input_5, input_8)",
+   "formula": "1 - sum(of_children_under_5, of_children_aged_5_14)",
    "expected": 0.75,
    "format": "percent"
   },
   {
-   "id": "calc_8",
-   "label": "calc",
+   "id": "number_of_people_over_the_age_of_14",
+   "label": "number of people over the age of 14",
    "section": "main",
-   "formula": "calc_9 * calc_4",
+   "formula": "of_people_over_the_age_of_14 * total_number_of_fever_cases_reached_with_mrdts",
    "expected": 1955592.716
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "among_people_over_the_age_of_5",
+   "label": "... among people over the age of 5",
    "section": "main",
-   "formula": "input_7 * (1 + input_4) * sum(calc_7, calc_8)",
+   "formula": "among_people_over_the_age_of_14 * (1 + adjustment_for_higher_malaria_prevalence_in_treatment_seekin) * sum(number_of_children_aged_5_14, number_of_people_over_the_age_of_14)",
    "expected": 689680.1626
   },
   {
    "id": "percentage_of_those_reached_that_actually_have_malaria",
    "label": "Percentage of those reached that actually have malaria",
    "section": "simple_botec",
-   "formula": "(calc_2 + calc_6) / calc_4",
+   "formula": "(among_children_under_5 + among_people_over_the_age_of_5) / total_number_of_fever_cases_reached_with_mrdts",
    "expected": 0.317449753,
    "format": "percent"
   },
@@ -294,8 +295,8 @@
    "expected": 1779720.389
   },
   {
-   "id": "input_10",
-   "label": "input",
+   "id": "rate_of_antibiotic_prescribing_to_patients_with_negative_mrd",
+   "label": "Rate of antibiotic prescribing to patients with negative mRDT",
    "section": "main",
    "value": 0.69,
    "kind": "estimate",
@@ -308,16 +309,16 @@
    "format": "percent"
   },
   {
-   "id": "input_9",
-   "label": "input",
+   "id": "rate_of_non_malaria_febrile_illness_treatment",
+   "label": "Rate of non-malaria febrile illness treatment",
    "section": "main",
-   "formula": "input_10",
+   "formula": "rate_of_antibiotic_prescribing_to_patients_with_negative_mrd",
    "expected": 0.69,
    "format": "percent"
   },
   {
-   "id": "input_12",
-   "label": "input",
+   "id": "rate_of_presumptive_treatment_of_febrile_cases_with_antibiot",
+   "label": "Rate of presumptive treatment of febrile cases with antibiotics",
    "section": "main",
    "value": 0.4,
    "kind": "estimate",
@@ -330,10 +331,10 @@
    "format": "percent"
   },
   {
-   "id": "input_11",
-   "label": "input",
+   "id": "rate_of_non_malaria_febrile_illness_treatment_2",
+   "label": "Rate of non-malaria febrile illness treatment",
    "section": "main",
-   "formula": "input_12",
+   "formula": "rate_of_presumptive_treatment_of_febrile_cases_with_antibiot",
    "expected": 0.4,
    "format": "percent"
   },
@@ -341,13 +342,13 @@
    "id": "percentage_point_increase_in_correct_treatment_with_mrdts_fo",
    "label": "Percentage point increase in correct treatment with mRDTs (For non-malaria cases...)",
    "section": "simple_botec",
-   "formula": "input_9 - input_11",
+   "formula": "rate_of_non_malaria_febrile_illness_treatment - rate_of_non_malaria_febrile_illness_treatment_2",
    "expected": 0.29,
    "format": "percent"
   },
   {
-   "id": "input_13",
-   "label": "input",
+   "id": "efficacy_of_non_malaria_febrile_illness_treatment_relative_m",
+   "label": "Efficacy of non-malaria febrile illness treatment (relative mortality reduction)",
    "section": "main",
    "value": 0.1,
    "kind": "estimate",
@@ -363,13 +364,13 @@
    "id": "efficacy_of_treatment_for_non_malaria_cases",
    "label": "Efficacy of treatment (For non-malaria cases...)",
    "section": "simple_botec",
-   "formula": "input_13",
+   "formula": "efficacy_of_non_malaria_febrile_illness_treatment_relative_m",
    "expected": 0.1,
    "format": "percent"
   },
   {
-   "id": "calc_10",
-   "label": "calc",
+   "id": "cfr_among_under_5s",
+   "label": "CFR among under 5s",
    "section": "main",
    "value": 0.0025,
    "kind": "estimate",
@@ -385,7 +386,7 @@
    "id": "case_fatality_rate_for_non_malaria_cases",
    "label": "Case fatality rate (For non-malaria cases...)",
    "section": "simple_botec",
-   "formula": "calc_10",
+   "formula": "cfr_among_under_5s",
    "expected": 0.0025,
    "format": "percent"
   },
@@ -397,16 +398,16 @@
    "expected": 129.0297282
   },
   {
-   "id": "input_14",
-   "label": "input",
+   "id": "rate_of_act_treatment_for_patients_with_positive_mrdt",
+   "label": "Rate of ACT treatment for patients with positive mRDT",
    "section": "main",
    "formula": "avg(0.44, 0.44, 0.65, 0.66, 0.69, 0.74, 0.76, 0.76, 0.77, 0.77, 0.78, 0.79, 0.81, 0.85, 0.85, 0.87, 0.89, 0.93, 0.94, 0.98, 0.98, 0.98, 1, 1)",
    "expected": 0.8054166667,
    "format": "percent"
   },
   {
-   "id": "input_15",
-   "label": "input",
+   "id": "rate_of_presumptive_treatment_of_febrile_cases_with_acts",
+   "label": "Rate of presumptive treatment of febrile cases with ACTs",
    "section": "main",
    "value": 0.7,
    "kind": "estimate",
@@ -422,13 +423,13 @@
    "id": "percentage_point_increase_in_correct_treatment_with_mrdts_fo_2",
    "label": "Percentage point increase in correct treatment with mRDTs (For malaria cases...)",
    "section": "simple_botec",
-   "formula": "input_14 - input_15",
+   "formula": "rate_of_act_treatment_for_patients_with_positive_mrdt - rate_of_presumptive_treatment_of_febrile_cases_with_acts",
    "expected": 0.1054166667,
    "format": "percent"
   },
   {
-   "id": "input_16",
-   "label": "input",
+   "id": "estimated_effectiveness_of_acts_used_in_program_for_malaria",
+   "label": "Estimated effectiveness of ACTs used in program, for malaria cases",
    "section": "main",
    "value": 0.84,
    "kind": "estimate",
@@ -444,7 +445,7 @@
    "id": "efficacy_of_treatment_for_malaria_cases",
    "label": "Efficacy of treatment (For malaria cases...)",
    "section": "simple_botec",
-   "formula": "input_16",
+   "formula": "estimated_effectiveness_of_acts_used_in_program_for_malaria",
    "expected": 0.84,
    "format": "percent"
   },
@@ -495,16 +496,16 @@
    "format": "percent"
   },
   {
-   "id": "input_17",
-   "label": "input",
+   "id": "among_children_under_5_5",
+   "label": "... among children under 5",
    "section": "main",
    "formula": "ihme_nigeria",
    "expected": 0.00416674549,
    "format": "percent"
   },
   {
-   "id": "input_18",
-   "label": "input",
+   "id": "weight_on_ihme_estimates",
+   "label": "Weight on IHME estimates",
    "section": "main",
    "value": 0.7,
    "kind": "estimate",
@@ -539,24 +540,24 @@
    "format": "percent"
   },
   {
-   "id": "input_19",
-   "label": "input",
+   "id": "among_children_under_5_6",
+   "label": "... among children under 5",
    "section": "main",
    "formula": "who_west_africa",
    "expected": 0.004548540376,
    "format": "percent"
   },
   {
-   "id": "input_20",
-   "label": "input",
+   "id": "weight_on_who_estimates",
+   "label": "Weight on WHO estimates",
    "section": "main",
-   "formula": "1 - input_18",
+   "formula": "1 - weight_on_ihme_estimates",
    "expected": 0.3,
    "format": "percent"
   },
   {
-   "id": "input_21",
-   "label": "input",
+   "id": "adjustment_for_indirect_deaths",
+   "label": "Adjustment for indirect deaths",
    "section": "main",
    "value": 0.5,
    "kind": "estimate",
@@ -568,16 +569,16 @@
    "explainer": "GiveWell guesstimate. We think that malaria control interventions have a larger impact on all-cause mortality than on malaria-specific mortality. For example, malaria can increase the risk of mortality associated with malnutrition or other infectious diseases. We're very uncertain what the exact magnitude of this adjustment should be. For our ITN CEA we use 0.75 as our baseline (more on that here). For malaria treatment, like ACTs, we think this value should be less than 0.75 because 1) prevention stops infections before they can weaken health status, while treatment acts after someone is already compromised and 2) in more recent analyses, we've found that indirect death adjustments for ITNs/SMC tend to be lower than 0.75 when factoring in the share of deaths due to malaria."
   },
   {
-   "id": "calc_12",
-   "label": "calc",
+   "id": "among_children_under_5_4",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "(input_17 * input_18 + input_19 * input_20) * (1 + input_21)",
+   "formula": "(among_children_under_5_5 * weight_on_ihme_estimates + among_children_under_5_6 * weight_on_who_estimates) * (1 + adjustment_for_indirect_deaths)",
    "expected": 0.006421925933,
    "format": "percent"
   },
   {
-   "id": "input_22",
-   "label": "input",
+   "id": "share_of_malaria_cases_with_access_to_effective_treatment",
+   "label": "Share of malaria cases with access to effective treatment",
    "section": "main",
    "value": 0.4756,
    "kind": "estimate",
@@ -590,8 +591,8 @@
    "format": "percent"
   },
   {
-   "id": "input_23",
-   "label": "input",
+   "id": "average_efficacy_of_real_world_acts",
+   "label": "Average efficacy of real-world ACTs",
    "section": "main",
    "value": 0.75,
    "kind": "estimate",
@@ -604,10 +605,10 @@
    "format": "percent"
   },
   {
-   "id": "calc_11",
-   "label": "calc",
+   "id": "among_children_under_5_3",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_12 / (1 - input_22 * input_23)",
+   "formula": "among_children_under_5_4 / (1 - share_of_malaria_cases_with_access_to_effective_treatment * average_efficacy_of_real_world_acts)",
    "expected": 0.009982785533,
    "format": "percent"
   },
@@ -658,8 +659,8 @@
    "format": "percent"
   },
   {
-   "id": "input_24",
-   "label": "input",
+   "id": "among_people_over_5_3",
+   "label": "... among people over 5",
    "section": "main",
    "formula": "ihme_nigeria_2",
    "expected": 0.00247017228,
@@ -688,26 +689,26 @@
    "format": "percent"
   },
   {
-   "id": "input_25",
-   "label": "input",
+   "id": "among_people_over_5_4",
+   "label": "... among people over 5",
    "section": "main",
    "formula": "who_west_africa_2",
    "expected": 0.00132336417,
    "format": "percent"
   },
   {
-   "id": "calc_14",
-   "label": "calc",
+   "id": "among_people_over_5_2",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "(input_24 * input_18 + input_25 * input_20) * (1 + input_21)",
+   "formula": "(among_people_over_5_3 * weight_on_ihme_estimates + among_people_over_5_4 * weight_on_who_estimates) * (1 + adjustment_for_indirect_deaths)",
    "expected": 0.003189194771,
    "format": "percent"
   },
   {
-   "id": "calc_13",
-   "label": "calc",
+   "id": "among_people_over_5",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_14 / (1 - input_22 * input_23)",
+   "formula": "among_people_over_5_2 / (1 - share_of_malaria_cases_with_access_to_effective_treatment * average_efficacy_of_real_world_acts)",
    "expected": 0.004957554439,
    "format": "percent"
   },
@@ -715,7 +716,7 @@
    "id": "case_fatality_rate_for_malaria_cases",
    "label": "Case fatality rate (For malaria cases...)",
    "section": "simple_botec",
-   "formula": "sum(calc_11 * calc_2, calc_13 * calc_6) / sum(calc_2, calc_6)",
+   "formula": "sum(among_children_under_5_3 * among_children_under_5, among_people_over_5 * among_people_over_the_age_of_5) / sum(among_children_under_5, among_people_over_the_age_of_5)",
    "expected": 0.005795701939,
    "format": "percent"
   },
@@ -734,8 +735,8 @@
    "expected": 553.8319203
   },
   {
-   "id": "input_26",
-   "label": "input",
+   "id": "children_under_5",
+   "label": "... children under 5",
    "section": "main",
    "value": 116.252615789931,
    "kind": "estimate",
@@ -747,15 +748,15 @@
    "explainer": "Source: GiveWell's moral weights and discount rate. See more on how we derive these figures here."
   },
   {
-   "id": "calc_18",
-   "label": "calc",
+   "id": "among_children_under_5_10",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_3 - calc_2",
+   "formula": "number_of_children_under_5 - among_children_under_5",
    "expected": 226987.5699
   },
   {
-   "id": "input_27",
-   "label": "input",
+   "id": "efficacy_of_non_malaria_febrile_illness_treatment_relative_m_2",
+   "label": "Efficacy of non-malaria febrile illness treatment (relative mortality reduction)",
    "section": "main",
    "value": 0.1,
    "kind": "estimate",
@@ -768,29 +769,29 @@
    "format": "percent"
   },
   {
-   "id": "calc_17",
-   "label": "calc",
+   "id": "among_children_under_5_9",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_18 * calc_10 * input_9 * input_27",
+   "formula": "among_children_under_5_10 * cfr_among_under_5s * rate_of_non_malaria_febrile_illness_treatment * efficacy_of_non_malaria_febrile_illness_treatment_relative_m_2",
    "expected": 39.1553558
   },
   {
-   "id": "calc_19",
-   "label": "calc",
+   "id": "among_children_under_5_11",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_18 * calc_10 * input_11 * input_13",
+   "formula": "among_children_under_5_10 * cfr_among_under_5s * rate_of_non_malaria_febrile_illness_treatment_2 * efficacy_of_non_malaria_febrile_illness_treatment_relative_m",
    "expected": 22.69875699
   },
   {
-   "id": "among_children_under_5",
+   "id": "among_children_under_5_8",
    "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_17 - calc_19",
+   "formula": "among_children_under_5_9 - among_children_under_5_11",
    "expected": 16.45659881
   },
   {
-   "id": "input_28",
-   "label": "input",
+   "id": "estimated_effectiveness_of_acts_used_in_program_for_treating",
+   "label": "Estimated effectiveness of ACTs used in program, for treating malaria cases",
    "section": "main",
    "value": 0.84,
    "kind": "estimate",
@@ -803,43 +804,43 @@
    "format": "percent"
   },
   {
-   "id": "calc_21",
-   "label": "calc",
+   "id": "among_children_under_5_13",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_2 * calc_11 * input_14 * input_28",
+   "formula": "among_children_under_5 * among_children_under_5_3 * rate_of_act_treatment_for_patients_with_positive_mrdt * estimated_effectiveness_of_acts_used_in_program_for_treating",
    "expected": 932.4127338
   },
   {
-   "id": "calc_22",
-   "label": "calc",
+   "id": "among_children_under_5_14",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_2 * calc_11 * input_15 * input_16",
+   "formula": "among_children_under_5 * among_children_under_5_3 * rate_of_presumptive_treatment_of_febrile_cases_with_acts * estimated_effectiveness_of_acts_used_in_program_for_malaria",
    "expected": 810.3742332
   },
   {
-   "id": "calc_20",
-   "label": "calc",
+   "id": "among_children_under_5_12",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "calc_21 - calc_22",
+   "formula": "among_children_under_5_13 - among_children_under_5_14",
    "expected": 122.0385006
   },
   {
-   "id": "calc_16",
-   "label": "calc",
+   "id": "among_children_under_5_7",
+   "label": "... among children under 5",
    "section": "main",
-   "formula": "among_children_under_5 + calc_20",
+   "formula": "among_children_under_5_8 + among_children_under_5_12",
    "expected": 138.4950994
   },
   {
-   "id": "calc_15",
-   "label": "calc",
+   "id": "total_units_of_value_for_under_5_deaths_averted",
+   "label": "Total units of value for under 5 deaths averted",
    "section": "main",
-   "formula": "input_26 * calc_16",
+   "formula": "children_under_5 * among_children_under_5_7",
    "expected": 16100.41758
   },
   {
-   "id": "input_29",
-   "label": "input",
+   "id": "people_over_the_age_of_5",
+   "label": "... people over the age of 5",
    "section": "main",
    "value": 73.1914046254006,
    "kind": "estimate",
@@ -851,15 +852,15 @@
    "explainer": "Source: GiveWell's moral weights and discount rate. See more on how we derive these figures here."
   },
   {
-   "id": "calc_26",
-   "label": "calc",
+   "id": "among_people_over_5_8",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "sum(calc_7, calc_8) - calc_6",
+   "formula": "sum(number_of_children_aged_5_14, number_of_people_over_the_age_of_14) - among_people_over_the_age_of_5",
    "expected": 1552732.819
   },
   {
-   "id": "calc_27",
-   "label": "calc",
+   "id": "cfr_among_over_5s",
+   "label": "CFR among over 5s",
    "section": "main",
    "value": 0.0025,
    "kind": "estimate",
@@ -872,66 +873,66 @@
    "format": "percent"
   },
   {
-   "id": "calc_25",
-   "label": "calc",
+   "id": "among_people_over_5_7",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_26 * calc_27 * input_9 * input_27",
+   "formula": "among_people_over_5_8 * cfr_among_over_5s * rate_of_non_malaria_febrile_illness_treatment * efficacy_of_non_malaria_febrile_illness_treatment_relative_m_2",
    "expected": 267.8464113
   },
   {
-   "id": "calc_28",
-   "label": "calc",
+   "id": "among_people_over_5_9",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_26 * calc_27 * input_11 * input_13",
+   "formula": "among_people_over_5_8 * cfr_among_over_5s * rate_of_non_malaria_febrile_illness_treatment_2 * efficacy_of_non_malaria_febrile_illness_treatment_relative_m",
    "expected": 155.2732819
   },
   {
-   "id": "among_people_over_5",
+   "id": "among_people_over_5_6",
    "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_25 - calc_28",
+   "formula": "among_people_over_5_7 - among_people_over_5_9",
    "expected": 112.5731294
   },
   {
-   "id": "calc_30",
-   "label": "calc",
+   "id": "among_people_over_5_11",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_6 * calc_13 * input_14 * input_28",
+   "formula": "among_people_over_the_age_of_5 * among_people_over_5 * rate_of_act_treatment_for_patients_with_positive_mrdt * estimated_effectiveness_of_acts_used_in_program_for_treating",
    "expected": 2313.210339
   },
   {
-   "id": "calc_31",
-   "label": "calc",
+   "id": "among_people_over_5_12",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_6 * calc_13 * input_15 * input_16",
+   "formula": "among_people_over_the_age_of_5 * among_people_over_5 * rate_of_presumptive_treatment_of_febrile_cases_with_acts * estimated_effectiveness_of_acts_used_in_program_for_malaria",
    "expected": 2010.446648
   },
   {
-   "id": "calc_29",
-   "label": "calc",
+   "id": "among_people_over_5_10",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "calc_30 - calc_31",
+   "formula": "among_people_over_5_11 - among_people_over_5_12",
    "expected": 302.7636916
   },
   {
-   "id": "calc_24",
-   "label": "calc",
+   "id": "among_people_over_5_5",
+   "label": "... among people over 5",
    "section": "main",
-   "formula": "among_people_over_5 + calc_29",
+   "formula": "among_people_over_5_6 + among_people_over_5_10",
    "expected": 415.3368209
   },
   {
-   "id": "calc_23",
-   "label": "calc",
+   "id": "total_units_of_value_for_over_5_deaths_averted",
+   "label": "Total units of value for over 5 deaths averted",
    "section": "main",
-   "formula": "input_29 * calc_24",
+   "formula": "people_over_the_age_of_5 * among_people_over_5_5",
    "expected": 30399.08532
   },
   {
    "id": "average_units_of_value_per_death_averted",
    "label": "Average units of value per death averted",
    "section": "simple_botec",
-   "formula": "sum(calc_15, calc_23) / sum(calc_16, calc_24)",
+   "formula": "sum(total_units_of_value_for_under_5_deaths_averted, total_units_of_value_for_over_5_deaths_averted) / sum(among_children_under_5_7, among_people_over_5_5)",
    "expected": 83.9595935
   },
   {
@@ -942,36 +943,36 @@
    "expected": 16.46297893
   },
   {
-   "id": "input_30",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "main",
    "formula": "1 / ln(2)",
    "expected": 1.442695041
   },
   {
-   "id": "feed",
-   "label": "feed",
+   "id": "number_of_cases_counterfactually_treated_among_children_unde",
+   "label": "Number of cases counterfactually treated among children under 5",
    "section": "main",
-   "formula": "(input_14 - input_15) * calc_2",
+   "formula": "(rate_of_act_treatment_for_patients_with_positive_mrdt - rate_of_presumptive_treatment_of_febrile_cases_with_acts) * among_children_under_5",
    "expected": 14553.44591
   },
   {
-   "id": "input_31",
-   "label": "input",
+   "id": "discount_rate_for_future_benefits",
+   "label": "Discount rate for future benefits",
    "section": "main",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1rReve_909lnjR47kUbezN5gtEsA7S53K3V-CL2EAzXI/edit",
     "cell": "Main!C135"
    },
-   "explainer": "Source: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here.",
-   "format": "percent"
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nSource: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here.",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.04
   },
   {
-   "id": "input_32",
-   "label": "input",
+   "id": "expected_number_of_years_long_term_benefits_of_receivign_pro",
+   "label": "Expected number of years long-term benefits of receivign proper treatment will last",
    "section": "main",
    "value": 40.0,
    "kind": "estimate",
@@ -983,8 +984,8 @@
    "explainer": "Source: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here."
   },
   {
-   "id": "input_33",
-   "label": "input",
+   "id": "increase_in_annual_income_per_malaria_case_averted_among_peo",
+   "label": "Increase in annual income per malaria case averted among people under age 15",
    "section": "main",
    "value": 0.0058088,
    "kind": "estimate",
@@ -997,15 +998,15 @@
    "format": "percent"
   },
   {
-   "id": "calc_39",
-   "label": "calc",
+   "id": "adjusted_increase_in_ln_income_per_malaria_case_averted_amon",
+   "label": "Adjusted increase in ln(income) per malaria case averted among people under age 15",
    "section": "main",
-   "formula": "ln(1 + input_33) - ln(1)",
+   "formula": "ln(1 + increase_in_annual_income_per_malaria_case_averted_among_peo) - ln(1)",
    "expected": 0.005791993972
   },
   {
-   "id": "input_34",
-   "label": "input",
+   "id": "average_number_of_years_between_getting_treated_and_the_begi",
+   "label": "Average number of years between getting treated and the beginning of long-term benefits",
    "section": "main",
    "value": 10.0,
    "kind": "estimate",
@@ -1017,22 +1018,22 @@
    "explainer": "Source: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here."
   },
   {
-   "id": "calc_38",
-   "label": "calc",
+   "id": "discounted_increase_in_ln_income_per_malaria_case_averted_am",
+   "label": "Discounted increase in ln(income) per malaria case averted among people under age 15",
    "section": "main",
-   "formula": "calc_39 / (1 + input_31) ^ input_34",
+   "formula": "adjusted_increase_in_ln_income_per_malaria_case_averted_amon / (1 + discount_rate_for_future_benefits) ^ average_number_of_years_between_getting_treated_and_the_begi",
    "expected": 0.003912863593
   },
   {
-   "id": "calc_37",
-   "label": "calc",
+   "id": "present_value_of_individual_lifetime_benefits_per_malaria_ca",
+   "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
    "section": "main",
-   "formula": "pv(input_31, input_32, -calc_38, 0, 1)",
+   "formula": "pv(discount_rate_for_future_benefits, expected_number_of_years_long_term_benefits_of_receivign_pro, -discounted_increase_in_ln_income_per_malaria_case_averted_am, 0, 1)",
    "expected": 0.08054428131
   },
   {
-   "id": "input_35",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households",
+   "label": "Multiplier for resource sharing within households",
    "section": "main",
    "value": 2.0,
    "kind": "estimate",
@@ -1044,52 +1045,52 @@
    "explainer": "Source: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here."
   },
   {
-   "id": "calc_36",
-   "label": "calc",
+   "id": "present_value_of_total_lifetime_benefits_per_malaria_case_av",
+   "label": "Present value of total lifetime benefits per malaria case averted among people under age 15",
    "section": "main",
-   "formula": "calc_37 * input_35",
+   "formula": "present_value_of_individual_lifetime_benefits_per_malaria_ca * multiplier_for_resource_sharing_within_households",
    "expected": 0.1610885626
   },
   {
-   "id": "calc_35",
-   "label": "calc",
+   "id": "present_value_of_increase_in_units_of_annual_ln_income_among",
+   "label": "Present value of increase in units of annual ln(income) among people under age 5",
    "section": "main",
-   "formula": "feed * calc_36",
+   "formula": "number_of_cases_counterfactually_treated_among_children_unde * present_value_of_total_lifetime_benefits_per_malaria_case_av",
    "expected": 2344.393683
   },
   {
-   "id": "feed_2",
-   "label": "feed",
+   "id": "number_of_cases_counterfactually_treated_among_children_aged",
+   "label": "Number of cases counterfactually treated among children aged 5-14",
    "section": "main",
-   "formula": "calc_7 * input_7 * (1 + input_4) * (input_14 - input_15)",
+   "formula": "number_of_children_aged_5_14 * among_people_over_the_age_of_14 * (1 + adjustment_for_higher_malaria_prevalence_in_treatment_seekin) * (rate_of_act_treatment_for_patients_with_positive_mrdt - rate_of_presumptive_treatment_of_febrile_cases_with_acts)",
    "expected": 9299.321184
   },
   {
-   "id": "calc_40",
-   "label": "calc",
+   "id": "present_value_of_increase_in_units_of_annual_ln_income_among_2",
+   "label": "Present value of increase in units of annual ln(income) among people age 5 to 14",
    "section": "main",
-   "formula": "feed_2 * calc_36",
+   "formula": "number_of_cases_counterfactually_treated_among_children_aged * present_value_of_total_lifetime_benefits_per_malaria_case_av",
    "expected": 1498.014283
   },
   {
-   "id": "calc_34",
-   "label": "calc",
+   "id": "total_present_value_of_increase_in_units_of_annual_ln_income",
+   "label": "Total present value of increase in units of annual ln(income) among people under age 15",
    "section": "main",
-   "formula": "sum(calc_35, calc_40)",
+   "formula": "sum(present_value_of_increase_in_units_of_annual_ln_income_among, present_value_of_increase_in_units_of_annual_ln_income_among_2)",
    "expected": 3842.407966
   },
   {
-   "id": "calc_33",
-   "label": "calc",
+   "id": "units_of_value_for_long_term_income_increases",
+   "label": "Units of value for long-term income increases",
    "section": "main",
-   "formula": "input_30 * calc_34",
+   "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for * total_present_value_of_increase_in_units_of_annual_ln_income",
    "expected": 5543.422917
   },
   {
-   "id": "calc_32",
-   "label": "calc",
+   "id": "adjustment_for_income_effects",
+   "label": "Adjustment for income effects",
    "section": "main",
-   "formula": "calc_33 / sum(calc_15, calc_23)",
+   "formula": "units_of_value_for_long_term_income_increases / sum(total_units_of_value_for_under_5_deaths_averted, total_units_of_value_for_over_5_deaths_averted)",
    "expected": 0.1192146705,
    "format": "percent"
   },
@@ -1472,8 +1473,8 @@
    }
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_26",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_ind_3",
+   "label": "Adjustment for additional program benefits and downsides (individual countries >>)",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1485,8 +1486,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_27",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_26",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1498,8 +1499,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_28",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_27",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1511,8 +1512,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_29",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_28",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1524,8 +1525,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_30",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_29",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1537,8 +1538,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_31",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_30",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1550,8 +1551,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_32",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_31",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1563,8 +1564,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_33",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_32",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1576,8 +1577,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_34",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_33",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1589,8 +1590,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_35",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_34",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1602,8 +1603,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_36",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_35",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1615,8 +1616,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_37",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_36",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1628,8 +1629,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_38",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_37",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1641,8 +1642,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_39",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_38",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1654,8 +1655,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_40",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_39",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1667,8 +1668,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_41",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_40",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1680,8 +1681,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_42",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_41",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1693,8 +1694,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_43",
-   "label": "Adjustment for additional program benefits and downsides (-)",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_42",
+   "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
    "kind": "estimate",
@@ -1706,7 +1707,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_44",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_43",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1719,7 +1720,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_45",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_44",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1732,7 +1733,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_46",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_45",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1745,7 +1746,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_47",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_46",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1758,7 +1759,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_48",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_47",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1771,7 +1772,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_49",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_48",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1784,7 +1785,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_50",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_49",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1797,7 +1798,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_51",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_50",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1810,7 +1811,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_52",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_51",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1823,7 +1824,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_53",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_52",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.67,
@@ -1839,7 +1840,7 @@
    "id": "adjustment_for_additional_program_benefits_and_downsides_ave_3",
    "label": "Adjustment for additional program benefits and downsides (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_additional_program_benefits_and_downsides_26, adjustment_for_additional_program_benefits_and_downsides_27, adjustment_for_additional_program_benefits_and_downsides_28, adjustment_for_additional_program_benefits_and_downsides_29, adjustment_for_additional_program_benefits_and_downsides_30, adjustment_for_additional_program_benefits_and_downsides_31, adjustment_for_additional_program_benefits_and_downsides_32, adjustment_for_additional_program_benefits_and_downsides_33, adjustment_for_additional_program_benefits_and_downsides_34, adjustment_for_additional_program_benefits_and_downsides_35, adjustment_for_additional_program_benefits_and_downsides_36, adjustment_for_additional_program_benefits_and_downsides_37, adjustment_for_additional_program_benefits_and_downsides_38, adjustment_for_additional_program_benefits_and_downsides_39, adjustment_for_additional_program_benefits_and_downsides_40, adjustment_for_additional_program_benefits_and_downsides_41, adjustment_for_additional_program_benefits_and_downsides_42, adjustment_for_additional_program_benefits_and_downsides_43, adjustment_for_additional_program_benefits_and_downsides_44, adjustment_for_additional_program_benefits_and_downsides_45, adjustment_for_additional_program_benefits_and_downsides_46, adjustment_for_additional_program_benefits_and_downsides_47, adjustment_for_additional_program_benefits_and_downsides_48, adjustment_for_additional_program_benefits_and_downsides_49, adjustment_for_additional_program_benefits_and_downsides_50, adjustment_for_additional_program_benefits_and_downsides_51, adjustment_for_additional_program_benefits_and_downsides_52, adjustment_for_additional_program_benefits_and_downsides_53)",
+   "formula": "avg(adjustment_for_additional_program_benefits_and_downsides_ind_3, adjustment_for_additional_program_benefits_and_downsides_26, adjustment_for_additional_program_benefits_and_downsides_27, adjustment_for_additional_program_benefits_and_downsides_28, adjustment_for_additional_program_benefits_and_downsides_29, adjustment_for_additional_program_benefits_and_downsides_30, adjustment_for_additional_program_benefits_and_downsides_31, adjustment_for_additional_program_benefits_and_downsides_32, adjustment_for_additional_program_benefits_and_downsides_33, adjustment_for_additional_program_benefits_and_downsides_34, adjustment_for_additional_program_benefits_and_downsides_35, adjustment_for_additional_program_benefits_and_downsides_36, adjustment_for_additional_program_benefits_and_downsides_37, adjustment_for_additional_program_benefits_and_downsides_38, adjustment_for_additional_program_benefits_and_downsides_39, adjustment_for_additional_program_benefits_and_downsides_40, adjustment_for_additional_program_benefits_and_downsides_41, adjustment_for_additional_program_benefits_and_downsides_42, adjustment_for_additional_program_benefits_and_downsides_43, adjustment_for_additional_program_benefits_and_downsides_44, adjustment_for_additional_program_benefits_and_downsides_45, adjustment_for_additional_program_benefits_and_downsides_46, adjustment_for_additional_program_benefits_and_downsides_47, adjustment_for_additional_program_benefits_and_downsides_48, adjustment_for_additional_program_benefits_and_downsides_49, adjustment_for_additional_program_benefits_and_downsides_50, adjustment_for_additional_program_benefits_and_downsides_51, adjustment_for_additional_program_benefits_and_downsides_52)",
    "expected": 0.67,
    "format": "percent"
   },
@@ -1851,7 +1852,7 @@
    "expected": 0.1
   },
   {
-   "id": "adjustment_for_additional_program_benefits_and_downsides_54",
+   "id": "adjustment_for_additional_program_benefits_and_downsides_53",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
    "value": 0.33,
@@ -1879,7 +1880,7 @@
    "id": "adjustment_for_additional_program_benefits_and_downsides",
    "label": "Adjustment for additional program benefits and downsides",
    "section": "gw_adjustments",
-   "formula": "adjustment_for_additional_program_benefits_and_downsides_ave * itns + adjustment_for_additional_program_benefits_and_downsides_ave_2 * smc + adjustment_for_additional_program_benefits_and_downsides_ave_3 * vas + adjustment_for_additional_program_benefits_and_downsides_54 * new_incentives",
+   "formula": "adjustment_for_additional_program_benefits_and_downsides_ave * itns + adjustment_for_additional_program_benefits_and_downsides_ave_2 * smc + adjustment_for_additional_program_benefits_and_downsides_ave_3 * vas + adjustment_for_additional_program_benefits_and_downsides_53 * new_incentives",
    "expected": 0.3918541667,
    "format": "percent"
   },
@@ -2018,8 +2019,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_9",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_individual_countries_2",
+   "label": "Adjustment for leverage (individual countries >>)",
    "section": "gw_adjustments",
    "value": 0.0,
    "kind": "estimate",
@@ -2031,8 +2032,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_10",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_9",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2044,8 +2045,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_11",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_10",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
    "kind": "estimate",
@@ -2057,8 +2058,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_12",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_11",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2070,8 +2071,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_13",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_12",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
    "kind": "estimate",
@@ -2083,8 +2084,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_14",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_13",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2096,8 +2097,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_15",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_14",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2109,8 +2110,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_16",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_15",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2122,8 +2123,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_17",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_16",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2135,8 +2136,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_18",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_17",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2148,8 +2149,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_19",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_18",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": 0.0,
    "kind": "estimate",
@@ -2161,8 +2162,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_20",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_19",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2174,8 +2175,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_21",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_20",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2187,8 +2188,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_22",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_21",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": 0.0,
    "kind": "estimate",
@@ -2200,8 +2201,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_23",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_22",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2213,8 +2214,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_24",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_23",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": 0.0,
    "kind": "estimate",
@@ -2226,8 +2227,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_25",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_24",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": 0.0,
    "kind": "estimate",
@@ -2239,8 +2240,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_26",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_25",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2255,13 +2256,13 @@
    "id": "adjustment_for_leverage_average_2",
    "label": "Adjustment for leverage (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_leverage_9, adjustment_for_leverage_10, adjustment_for_leverage_11, adjustment_for_leverage_12, adjustment_for_leverage_13, adjustment_for_leverage_14, adjustment_for_leverage_15, adjustment_for_leverage_16, adjustment_for_leverage_17, adjustment_for_leverage_18, adjustment_for_leverage_19, adjustment_for_leverage_20, adjustment_for_leverage_21, adjustment_for_leverage_22, adjustment_for_leverage_23, adjustment_for_leverage_24, adjustment_for_leverage_25, adjustment_for_leverage_26)",
+   "formula": "avg(adjustment_for_leverage_individual_countries_2, adjustment_for_leverage_9, adjustment_for_leverage_10, adjustment_for_leverage_11, adjustment_for_leverage_12, adjustment_for_leverage_13, adjustment_for_leverage_14, adjustment_for_leverage_15, adjustment_for_leverage_16, adjustment_for_leverage_17, adjustment_for_leverage_18, adjustment_for_leverage_19, adjustment_for_leverage_20, adjustment_for_leverage_21, adjustment_for_leverage_22, adjustment_for_leverage_23, adjustment_for_leverage_24, adjustment_for_leverage_25)",
    "expected": -0.008333333333,
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_27",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_individual_countries_3",
+   "label": "Adjustment for leverage (individual countries >>)",
    "section": "gw_adjustments",
    "value": -0.02,
    "kind": "estimate",
@@ -2273,8 +2274,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_28",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_26",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
    "kind": "estimate",
@@ -2286,8 +2287,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_29",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_27",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -2299,8 +2300,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_30",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_28",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -2312,8 +2313,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_31",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_29",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -2325,8 +2326,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_32",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_30",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -2338,8 +2339,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_33",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_31",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -2351,8 +2352,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_34",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_32",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2364,8 +2365,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_35",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_33",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -2377,8 +2378,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_36",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_34",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
    "kind": "estimate",
@@ -2390,8 +2391,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_37",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_35",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.11,
    "kind": "estimate",
@@ -2403,8 +2404,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_38",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_36",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.2,
    "kind": "estimate",
@@ -2416,8 +2417,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_39",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_37",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.05,
    "kind": "estimate",
@@ -2429,8 +2430,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_40",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_38",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -2442,8 +2443,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_41",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_39",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -2455,8 +2456,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_42",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_40",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.13,
    "kind": "estimate",
@@ -2468,8 +2469,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_43",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_41",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -2481,8 +2482,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_44",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_42",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.15,
    "kind": "estimate",
@@ -2494,7 +2495,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_45",
+   "id": "adjustment_for_leverage_43",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.11,
@@ -2507,7 +2508,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_46",
+   "id": "adjustment_for_leverage_44",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
@@ -2520,7 +2521,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_47",
+   "id": "adjustment_for_leverage_45",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
@@ -2533,7 +2534,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_48",
+   "id": "adjustment_for_leverage_46",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.2,
@@ -2546,7 +2547,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_49",
+   "id": "adjustment_for_leverage_47",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
@@ -2559,7 +2560,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_50",
+   "id": "adjustment_for_leverage_48",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
@@ -2572,7 +2573,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_51",
+   "id": "adjustment_for_leverage_49",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.05,
@@ -2585,7 +2586,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_52",
+   "id": "adjustment_for_leverage_50",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.01,
@@ -2598,7 +2599,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_53",
+   "id": "adjustment_for_leverage_51",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
@@ -2611,7 +2612,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_54",
+   "id": "adjustment_for_leverage_52",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
@@ -2627,13 +2628,13 @@
    "id": "adjustment_for_leverage_average_3",
    "label": "Adjustment for leverage (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_leverage_27, adjustment_for_leverage_28, adjustment_for_leverage_29, adjustment_for_leverage_30, adjustment_for_leverage_31, adjustment_for_leverage_32, adjustment_for_leverage_33, adjustment_for_leverage_34, adjustment_for_leverage_35, adjustment_for_leverage_36, adjustment_for_leverage_37, adjustment_for_leverage_38, adjustment_for_leverage_39, adjustment_for_leverage_40, adjustment_for_leverage_41, adjustment_for_leverage_42, adjustment_for_leverage_43, adjustment_for_leverage_44, adjustment_for_leverage_45, adjustment_for_leverage_46, adjustment_for_leverage_47, adjustment_for_leverage_48, adjustment_for_leverage_49, adjustment_for_leverage_50, adjustment_for_leverage_51, adjustment_for_leverage_52, adjustment_for_leverage_53, adjustment_for_leverage_54)",
+   "formula": "avg(adjustment_for_leverage_individual_countries_3, adjustment_for_leverage_26, adjustment_for_leverage_27, adjustment_for_leverage_28, adjustment_for_leverage_29, adjustment_for_leverage_30, adjustment_for_leverage_31, adjustment_for_leverage_32, adjustment_for_leverage_33, adjustment_for_leverage_34, adjustment_for_leverage_35, adjustment_for_leverage_36, adjustment_for_leverage_37, adjustment_for_leverage_38, adjustment_for_leverage_39, adjustment_for_leverage_40, adjustment_for_leverage_41, adjustment_for_leverage_42, adjustment_for_leverage_43, adjustment_for_leverage_44, adjustment_for_leverage_45, adjustment_for_leverage_46, adjustment_for_leverage_47, adjustment_for_leverage_48, adjustment_for_leverage_49, adjustment_for_leverage_50, adjustment_for_leverage_51, adjustment_for_leverage_52)",
    "expected": -0.06392857143,
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_55",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_individual_countries_4",
+   "label": "Adjustment for leverage (individual countries >>)",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -2645,8 +2646,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_56",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_53",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
    "kind": "estimate",
@@ -2658,8 +2659,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_57",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_54",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -2671,8 +2672,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_58",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_55",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -2684,8 +2685,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_59",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_56",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.07,
    "kind": "estimate",
@@ -2697,8 +2698,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_60",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_57",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
    "kind": "estimate",
@@ -2710,8 +2711,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_61",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_58",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.05,
    "kind": "estimate",
@@ -2723,8 +2724,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_62",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_59",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -2736,8 +2737,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_63",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_60",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -2749,8 +2750,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_64",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_61",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -2762,8 +2763,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_65",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_62",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
    "kind": "estimate",
@@ -2775,8 +2776,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_66",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_63",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.14,
    "kind": "estimate",
@@ -2788,8 +2789,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_67",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_64",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.14,
    "kind": "estimate",
@@ -2801,8 +2802,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_68",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_65",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.12,
    "kind": "estimate",
@@ -2814,8 +2815,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_69",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_66",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -2827,8 +2828,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_70",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_67",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.12,
    "kind": "estimate",
@@ -2840,8 +2841,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_71",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_68",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -2853,8 +2854,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_72",
-   "label": "Adjustment for leverage (-)",
+   "id": "adjustment_for_leverage_69",
+   "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.13,
    "kind": "estimate",
@@ -2866,7 +2867,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_73",
+   "id": "adjustment_for_leverage_70",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.02,
@@ -2879,7 +2880,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_74",
+   "id": "adjustment_for_leverage_71",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
@@ -2892,7 +2893,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_75",
+   "id": "adjustment_for_leverage_72",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.08,
@@ -2905,7 +2906,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_76",
+   "id": "adjustment_for_leverage_73",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
@@ -2918,7 +2919,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_77",
+   "id": "adjustment_for_leverage_74",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
@@ -2931,7 +2932,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_78",
+   "id": "adjustment_for_leverage_75",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.1,
@@ -2944,7 +2945,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_79",
+   "id": "adjustment_for_leverage_76",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.13,
@@ -2957,7 +2958,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_80",
+   "id": "adjustment_for_leverage_77",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.2,
@@ -2970,7 +2971,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_81",
+   "id": "adjustment_for_leverage_78",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.13,
@@ -2983,7 +2984,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_82",
+   "id": "adjustment_for_leverage_79",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.12,
@@ -2996,7 +2997,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_83",
+   "id": "adjustment_for_leverage_80",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.09,
@@ -3009,7 +3010,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_84",
+   "id": "adjustment_for_leverage_81",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.18,
@@ -3022,7 +3023,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_85",
+   "id": "adjustment_for_leverage_82",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.15,
@@ -3035,7 +3036,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_86",
+   "id": "adjustment_for_leverage_83",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.16,
@@ -3048,7 +3049,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_87",
+   "id": "adjustment_for_leverage_84",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.21,
@@ -3061,7 +3062,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_88",
+   "id": "adjustment_for_leverage_85",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.13,
@@ -3074,7 +3075,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_89",
+   "id": "adjustment_for_leverage_86",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.11,
@@ -3087,7 +3088,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_90",
+   "id": "adjustment_for_leverage_87",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.06,
@@ -3100,7 +3101,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_leverage_91",
+   "id": "adjustment_for_leverage_88",
    "label": "Adjustment for leverage",
    "section": "gw_adjustments",
    "value": -0.07,
@@ -3116,7 +3117,7 @@
    "id": "adjustment_for_leverage_average_4",
    "label": "Adjustment for leverage (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_leverage_55, adjustment_for_leverage_56, adjustment_for_leverage_57, adjustment_for_leverage_58, adjustment_for_leverage_59, adjustment_for_leverage_60, adjustment_for_leverage_61, adjustment_for_leverage_62, adjustment_for_leverage_63, adjustment_for_leverage_64, adjustment_for_leverage_65, adjustment_for_leverage_66, adjustment_for_leverage_67, adjustment_for_leverage_68, adjustment_for_leverage_69, adjustment_for_leverage_70, adjustment_for_leverage_71, adjustment_for_leverage_72, adjustment_for_leverage_73, adjustment_for_leverage_74, adjustment_for_leverage_75, adjustment_for_leverage_76, adjustment_for_leverage_77, adjustment_for_leverage_78, adjustment_for_leverage_79, adjustment_for_leverage_80, adjustment_for_leverage_81, adjustment_for_leverage_82, adjustment_for_leverage_83, adjustment_for_leverage_84, adjustment_for_leverage_85, adjustment_for_leverage_86, adjustment_for_leverage_87, adjustment_for_leverage_88, adjustment_for_leverage_89, adjustment_for_leverage_90, adjustment_for_leverage_91)",
+   "formula": "avg(adjustment_for_leverage_individual_countries_4, adjustment_for_leverage_53, adjustment_for_leverage_54, adjustment_for_leverage_55, adjustment_for_leverage_56, adjustment_for_leverage_57, adjustment_for_leverage_58, adjustment_for_leverage_59, adjustment_for_leverage_60, adjustment_for_leverage_61, adjustment_for_leverage_62, adjustment_for_leverage_63, adjustment_for_leverage_64, adjustment_for_leverage_65, adjustment_for_leverage_66, adjustment_for_leverage_67, adjustment_for_leverage_68, adjustment_for_leverage_69, adjustment_for_leverage_70, adjustment_for_leverage_71, adjustment_for_leverage_72, adjustment_for_leverage_73, adjustment_for_leverage_74, adjustment_for_leverage_75, adjustment_for_leverage_76, adjustment_for_leverage_77, adjustment_for_leverage_78, adjustment_for_leverage_79, adjustment_for_leverage_80, adjustment_for_leverage_81, adjustment_for_leverage_82, adjustment_for_leverage_83, adjustment_for_leverage_84, adjustment_for_leverage_85, adjustment_for_leverage_86, adjustment_for_leverage_87, adjustment_for_leverage_88)",
    "expected": -0.09918918919,
    "format": "percent"
   },
@@ -3249,8 +3250,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_9",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_individual_countries_2",
+   "label": "Adjustment for funging (individual countries >>)",
    "section": "gw_adjustments",
    "value": -0.43,
    "kind": "estimate",
@@ -3262,8 +3263,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_10",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_9",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.26,
    "kind": "estimate",
@@ -3275,8 +3276,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_11",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_10",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
    "kind": "estimate",
@@ -3288,8 +3289,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_12",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_11",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -3301,8 +3302,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_13",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_12",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -3314,8 +3315,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_14",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_13",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -3327,8 +3328,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_15",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_14",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.13,
    "kind": "estimate",
@@ -3340,8 +3341,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_16",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_15",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.16,
    "kind": "estimate",
@@ -3353,8 +3354,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_17",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_16",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -3366,8 +3367,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_18",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_17",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
    "kind": "estimate",
@@ -3379,8 +3380,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_19",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_18",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.17,
    "kind": "estimate",
@@ -3392,8 +3393,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_20",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_19",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -3405,8 +3406,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_21",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_20",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.17,
    "kind": "estimate",
@@ -3418,8 +3419,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_22",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_21",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.17,
    "kind": "estimate",
@@ -3431,8 +3432,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_23",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_22",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.15,
    "kind": "estimate",
@@ -3444,8 +3445,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_24",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_23",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.17,
    "kind": "estimate",
@@ -3457,8 +3458,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_25",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_24",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.51,
    "kind": "estimate",
@@ -3470,8 +3471,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_26",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_25",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.19,
    "kind": "estimate",
@@ -3486,13 +3487,13 @@
    "id": "adjustment_for_funging_average_2",
    "label": "Adjustment for funging (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_funging_9, adjustment_for_funging_10, adjustment_for_funging_11, adjustment_for_funging_12, adjustment_for_funging_13, adjustment_for_funging_14, adjustment_for_funging_15, adjustment_for_funging_16, adjustment_for_funging_17, adjustment_for_funging_18, adjustment_for_funging_19, adjustment_for_funging_20, adjustment_for_funging_21, adjustment_for_funging_22, adjustment_for_funging_23, adjustment_for_funging_24, adjustment_for_funging_25, adjustment_for_funging_26)",
+   "formula": "avg(adjustment_for_funging_individual_countries_2, adjustment_for_funging_9, adjustment_for_funging_10, adjustment_for_funging_11, adjustment_for_funging_12, adjustment_for_funging_13, adjustment_for_funging_14, adjustment_for_funging_15, adjustment_for_funging_16, adjustment_for_funging_17, adjustment_for_funging_18, adjustment_for_funging_19, adjustment_for_funging_20, adjustment_for_funging_21, adjustment_for_funging_22, adjustment_for_funging_23, adjustment_for_funging_24, adjustment_for_funging_25)",
    "expected": -0.1705555556,
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_27",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_individual_countries_3",
+   "label": "Adjustment for funging (individual countries >>)",
    "section": "gw_adjustments",
    "value": -0.27,
    "kind": "estimate",
@@ -3504,8 +3505,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_28",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_26",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.33,
    "kind": "estimate",
@@ -3517,8 +3518,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_29",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_27",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.35,
    "kind": "estimate",
@@ -3530,8 +3531,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_30",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_28",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.18,
    "kind": "estimate",
@@ -3543,8 +3544,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_31",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_29",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.37,
    "kind": "estimate",
@@ -3556,8 +3557,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_32",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_30",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.27,
    "kind": "estimate",
@@ -3569,8 +3570,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_33",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_31",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.21,
    "kind": "estimate",
@@ -3582,8 +3583,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_34",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_32",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.34,
    "kind": "estimate",
@@ -3595,8 +3596,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_35",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_33",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.29,
    "kind": "estimate",
@@ -3608,8 +3609,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_36",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_34",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.24,
    "kind": "estimate",
@@ -3621,8 +3622,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_37",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_35",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.19,
    "kind": "estimate",
@@ -3634,8 +3635,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_38",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_36",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.13,
    "kind": "estimate",
@@ -3647,8 +3648,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_39",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_37",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.22,
    "kind": "estimate",
@@ -3660,8 +3661,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_40",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_38",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.19,
    "kind": "estimate",
@@ -3673,8 +3674,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_41",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_39",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.23,
    "kind": "estimate",
@@ -3686,8 +3687,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_42",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_40",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.18,
    "kind": "estimate",
@@ -3699,8 +3700,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_43",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_41",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.2,
    "kind": "estimate",
@@ -3712,8 +3713,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_44",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_42",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.16,
    "kind": "estimate",
@@ -3725,7 +3726,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_45",
+   "id": "adjustment_for_funging_43",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.18,
@@ -3738,7 +3739,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_46",
+   "id": "adjustment_for_funging_44",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.23,
@@ -3751,7 +3752,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_47",
+   "id": "adjustment_for_funging_45",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.19,
@@ -3764,7 +3765,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_48",
+   "id": "adjustment_for_funging_46",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.13,
@@ -3777,7 +3778,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_49",
+   "id": "adjustment_for_funging_47",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.21,
@@ -3790,7 +3791,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_50",
+   "id": "adjustment_for_funging_48",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.24,
@@ -3803,7 +3804,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_51",
+   "id": "adjustment_for_funging_49",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.24,
@@ -3816,7 +3817,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_52",
+   "id": "adjustment_for_funging_50",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.46,
@@ -3829,7 +3830,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_53",
+   "id": "adjustment_for_funging_51",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.35,
@@ -3842,7 +3843,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_54",
+   "id": "adjustment_for_funging_52",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.33,
@@ -3858,13 +3859,13 @@
    "id": "adjustment_for_funging_average_3",
    "label": "Adjustment for funging (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_funging_27, adjustment_for_funging_28, adjustment_for_funging_29, adjustment_for_funging_30, adjustment_for_funging_31, adjustment_for_funging_32, adjustment_for_funging_33, adjustment_for_funging_34, adjustment_for_funging_35, adjustment_for_funging_36, adjustment_for_funging_37, adjustment_for_funging_38, adjustment_for_funging_39, adjustment_for_funging_40, adjustment_for_funging_41, adjustment_for_funging_42, adjustment_for_funging_43, adjustment_for_funging_44, adjustment_for_funging_45, adjustment_for_funging_46, adjustment_for_funging_47, adjustment_for_funging_48, adjustment_for_funging_49, adjustment_for_funging_50, adjustment_for_funging_51, adjustment_for_funging_52, adjustment_for_funging_53, adjustment_for_funging_54)",
+   "formula": "avg(adjustment_for_funging_individual_countries_3, adjustment_for_funging_26, adjustment_for_funging_27, adjustment_for_funging_28, adjustment_for_funging_29, adjustment_for_funging_30, adjustment_for_funging_31, adjustment_for_funging_32, adjustment_for_funging_33, adjustment_for_funging_34, adjustment_for_funging_35, adjustment_for_funging_36, adjustment_for_funging_37, adjustment_for_funging_38, adjustment_for_funging_39, adjustment_for_funging_40, adjustment_for_funging_41, adjustment_for_funging_42, adjustment_for_funging_43, adjustment_for_funging_44, adjustment_for_funging_45, adjustment_for_funging_46, adjustment_for_funging_47, adjustment_for_funging_48, adjustment_for_funging_49, adjustment_for_funging_50, adjustment_for_funging_51, adjustment_for_funging_52)",
    "expected": -0.2467857143,
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_55",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_individual_countries_4",
+   "label": "Adjustment for funging (individual countries >>)",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -3876,8 +3877,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_56",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_53",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -3889,8 +3890,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_57",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_54",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -3902,8 +3903,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_58",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_55",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -3915,8 +3916,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_59",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_56",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -3928,8 +3929,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_60",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_57",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.09,
    "kind": "estimate",
@@ -3941,8 +3942,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_61",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_58",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -3954,8 +3955,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_62",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_59",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -3967,8 +3968,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_63",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_60",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.1,
    "kind": "estimate",
@@ -3980,8 +3981,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_64",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_61",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -3993,8 +3994,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_65",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_62",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
    "kind": "estimate",
@@ -4006,8 +4007,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_66",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_63",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.03,
    "kind": "estimate",
@@ -4019,8 +4020,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_67",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_64",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.04,
    "kind": "estimate",
@@ -4032,8 +4033,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_68",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_65",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.06,
    "kind": "estimate",
@@ -4045,8 +4046,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_69",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_66",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
    "kind": "estimate",
@@ -4058,8 +4059,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_70",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_67",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
    "kind": "estimate",
@@ -4071,8 +4072,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_71",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_68",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.01,
    "kind": "estimate",
@@ -4084,8 +4085,8 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_72",
-   "label": "Adjustment for funging (-)",
+   "id": "adjustment_for_funging_69",
+   "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.05,
    "kind": "estimate",
@@ -4097,7 +4098,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_73",
+   "id": "adjustment_for_funging_70",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.08,
@@ -4110,7 +4111,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_74",
+   "id": "adjustment_for_funging_71",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.02,
@@ -4123,7 +4124,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_75",
+   "id": "adjustment_for_funging_72",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.02,
@@ -4136,7 +4137,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_76",
+   "id": "adjustment_for_funging_73",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.06,
@@ -4149,7 +4150,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_77",
+   "id": "adjustment_for_funging_74",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.01,
@@ -4162,7 +4163,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_78",
+   "id": "adjustment_for_funging_75",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.02,
@@ -4175,7 +4176,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_79",
+   "id": "adjustment_for_funging_76",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.05,
@@ -4188,7 +4189,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_80",
+   "id": "adjustment_for_funging_77",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.06,
@@ -4201,7 +4202,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_81",
+   "id": "adjustment_for_funging_78",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.03,
@@ -4214,7 +4215,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_82",
+   "id": "adjustment_for_funging_79",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
@@ -4227,7 +4228,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_83",
+   "id": "adjustment_for_funging_80",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.09,
@@ -4240,7 +4241,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_84",
+   "id": "adjustment_for_funging_81",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.07,
@@ -4253,7 +4254,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_85",
+   "id": "adjustment_for_funging_82",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.06,
@@ -4266,7 +4267,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_86",
+   "id": "adjustment_for_funging_83",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": 0.02,
@@ -4279,7 +4280,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_87",
+   "id": "adjustment_for_funging_84",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.04,
@@ -4292,7 +4293,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_88",
+   "id": "adjustment_for_funging_85",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.05,
@@ -4305,7 +4306,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_89",
+   "id": "adjustment_for_funging_86",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.02,
@@ -4318,7 +4319,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_90",
+   "id": "adjustment_for_funging_87",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
@@ -4331,7 +4332,7 @@
    "format": "percent"
   },
   {
-   "id": "adjustment_for_funging_91",
+   "id": "adjustment_for_funging_88",
    "label": "Adjustment for funging",
    "section": "gw_adjustments",
    "value": -0.08,
@@ -4347,7 +4348,7 @@
    "id": "adjustment_for_funging_average_4",
    "label": "Adjustment for funging (average)",
    "section": "gw_adjustments",
-   "formula": "avg(adjustment_for_funging_55, adjustment_for_funging_56, adjustment_for_funging_57, adjustment_for_funging_58, adjustment_for_funging_59, adjustment_for_funging_60, adjustment_for_funging_61, adjustment_for_funging_62, adjustment_for_funging_63, adjustment_for_funging_64, adjustment_for_funging_65, adjustment_for_funging_66, adjustment_for_funging_67, adjustment_for_funging_68, adjustment_for_funging_69, adjustment_for_funging_70, adjustment_for_funging_71, adjustment_for_funging_72, adjustment_for_funging_73, adjustment_for_funging_74, adjustment_for_funging_75, adjustment_for_funging_76, adjustment_for_funging_77, adjustment_for_funging_78, adjustment_for_funging_79, adjustment_for_funging_80, adjustment_for_funging_81, adjustment_for_funging_82, adjustment_for_funging_83, adjustment_for_funging_84, adjustment_for_funging_85, adjustment_for_funging_86, adjustment_for_funging_87, adjustment_for_funging_88, adjustment_for_funging_89, adjustment_for_funging_90, adjustment_for_funging_91)",
+   "formula": "avg(adjustment_for_funging_individual_countries_4, adjustment_for_funging_53, adjustment_for_funging_54, adjustment_for_funging_55, adjustment_for_funging_56, adjustment_for_funging_57, adjustment_for_funging_58, adjustment_for_funging_59, adjustment_for_funging_60, adjustment_for_funging_61, adjustment_for_funging_62, adjustment_for_funging_63, adjustment_for_funging_64, adjustment_for_funging_65, adjustment_for_funging_66, adjustment_for_funging_67, adjustment_for_funging_68, adjustment_for_funging_69, adjustment_for_funging_70, adjustment_for_funging_71, adjustment_for_funging_72, adjustment_for_funging_73, adjustment_for_funging_74, adjustment_for_funging_75, adjustment_for_funging_76, adjustment_for_funging_77, adjustment_for_funging_78, adjustment_for_funging_79, adjustment_for_funging_80, adjustment_for_funging_81, adjustment_for_funging_82, adjustment_for_funging_83, adjustment_for_funging_84, adjustment_for_funging_85, adjustment_for_funging_86, adjustment_for_funging_87, adjustment_for_funging_88)",
    "expected": -0.04702702703,
    "format": "percent"
   },
@@ -4371,12 +4372,12 @@
    "id": "total_acts_used_no_mrdts",
    "label": "Total ACTs used (no mRDTs)",
    "section": "act_stock_savings",
-   "formula": "calc_4 * input_15",
+   "formula": "total_number_of_fever_cases_reached_with_mrdts * rate_of_presumptive_treatment_of_febrile_cases_with_acts",
    "expected": 1825219.869
   },
   {
-   "id": "input_36",
-   "label": "input",
+   "id": "rate_of_act_treatment_for_patients_with_negative_mrdt",
+   "label": "Rate of ACT treatment for patients with negative mRDT",
    "section": "main",
    "formula": "1 - avg(0.27, 0.47, 0.49, 0.5, 0.54, 0.56, 0.57, 0.65, 0.65, 0.7, 0.76, 0.77, 0.77, 0.77, 0.81, 0.82, 0.85, 0.87, 0.9, 0.9, 0.92, 0.95, 0.96, 0.97, 0.97, 0.99, 0.99, 0.99, 1)",
    "expected": 0.2289655172,
@@ -4386,7 +4387,7 @@
    "id": "total_acts_used_w_mrdts",
    "label": "Total ACTs used (w mRDTs)",
    "section": "act_stock_savings",
-   "formula": "(calc_2 + calc_6) * input_14 + (calc_18 + calc_26) * input_36",
+   "formula": "(among_children_under_5 + among_people_over_the_age_of_5) * rate_of_act_treatment_for_patients_with_positive_mrdt + (among_children_under_5_10 + among_people_over_5_8) * rate_of_act_treatment_for_patients_with_negative_mrdt",
    "expected": 1074167.426
   },
   {
@@ -4486,15 +4487,15 @@
    "id": "implied_adjustment_for_act_stocks_preserved",
    "label": "Implied adjustment for ACT stocks preserved",
    "section": "act_stock_savings",
-   "formula": "total_units_of_value_generated / sum(calc_15, calc_23)",
+   "formula": "total_units_of_value_generated / sum(total_units_of_value_for_under_5_deaths_averted, total_units_of_value_for_over_5_deaths_averted)",
    "expected": 0.1496460531,
    "format": "percent"
   },
   {
-   "id": "children_under_5",
+   "id": "children_under_5_2",
    "label": "... children under 5",
    "section": "act_stock_savings",
-   "formula": "input_26",
+   "formula": "children_under_5",
    "expected": 116.2526158
   },
   {
@@ -4523,14 +4524,14 @@
    "id": "under_5_5",
    "label": "...under 5",
    "section": "act_stock_savings",
-   "formula": "calc_2 / 8",
+   "formula": "among_children_under_5 / 8",
    "expected": 17257.05048
   },
   {
    "id": "under_5_6",
    "label": "...under 5",
    "section": "act_stock_savings",
-   "formula": "calc_11",
+   "formula": "among_children_under_5_3",
    "expected": 0.009982785533,
    "format": "percent"
   },
@@ -4538,7 +4539,7 @@
    "id": "share_of_true_malaria_cases_who_receive_acts_when_they_are_i",
    "label": "Share of true malaria cases who receive ACTs when they are in stock",
    "section": "act_stock_savings",
-   "formula": "input_14",
+   "formula": "rate_of_act_treatment_for_patients_with_positive_mrdt",
    "expected": 0.8054166667,
    "format": "percent"
   },
@@ -4546,7 +4547,7 @@
    "id": "act_effectiveness",
    "label": "ACT effectiveness",
    "section": "act_stock_savings",
-   "formula": "input_16",
+   "formula": "estimated_effectiveness_of_acts_used_in_program_for_malaria",
    "expected": 0.84,
    "format": "percent"
   },
@@ -4565,31 +4566,31 @@
    "expected": 7.193902434
   },
   {
-   "id": "total_units_of_value_for_under_5_deaths_averted",
+   "id": "total_units_of_value_for_under_5_deaths_averted_2",
    "label": "Total units of value for under 5 deaths averted",
    "section": "act_stock_savings",
-   "formula": "children_under_5 * under_5_3",
+   "formula": "children_under_5_2 * under_5_3",
    "expected": 836.3099757
   },
   {
-   "id": "people_over_the_age_of_5",
+   "id": "people_over_the_age_of_5_2",
    "label": "... people over the age of 5",
    "section": "act_stock_savings",
-   "formula": "input_29",
+   "formula": "people_over_the_age_of_5",
    "expected": 73.19140463
   },
   {
    "id": "over_5_7",
    "label": "...over 5",
    "section": "act_stock_savings",
-   "formula": "calc_6 / 8",
+   "formula": "among_people_over_the_age_of_5 / 8",
    "expected": 86210.02032
   },
   {
    "id": "over_5_8",
    "label": "...over 5",
    "section": "act_stock_savings",
-   "formula": "calc_13",
+   "formula": "among_people_over_5",
    "expected": 0.004957554439,
    "format": "percent"
   },
@@ -4608,17 +4609,17 @@
    "expected": 17.84725678
   },
   {
-   "id": "total_units_of_value_for_over_5_deaths_averted",
+   "id": "total_units_of_value_for_over_5_deaths_averted_2",
    "label": "Total units of value for over 5 deaths averted",
    "section": "act_stock_savings",
-   "formula": "people_over_the_age_of_5 * over_5_5",
+   "formula": "people_over_the_age_of_5_2 * over_5_5",
    "expected": 1306.265793
   },
   {
    "id": "implied_adjustment_for_act_stocks_preserved_2",
    "label": "Implied adjustment for ACT stocks preserved",
    "section": "act_stock_savings",
-   "formula": "sum(total_units_of_value_for_under_5_deaths_averted, total_units_of_value_for_over_5_deaths_averted) / sum(calc_15, calc_23)",
+   "formula": "sum(total_units_of_value_for_under_5_deaths_averted_2, total_units_of_value_for_over_5_deaths_averted_2) / sum(total_units_of_value_for_under_5_deaths_averted, total_units_of_value_for_over_5_deaths_averted)",
    "expected": 0.04607739083,
    "format": "percent"
   },
@@ -4634,7 +4635,7 @@
    "id": "final_cost_effectiveness_estimate",
    "label": "Final cost-effectiveness estimate",
    "section": "simple_botec",
-   "formula": "initial_cost_effectiveness_estimate * (1 + calc_32) * (1 + supp) * (1 + supp_2) * (1 + supp_3) * (1 + supp_4) * (1 + supp_5)",
+   "formula": "initial_cost_effectiveness_estimate * (1 + adjustment_for_income_effects) * (1 + supp) * (1 + supp_2) * (1 + supp_3) * (1 + supp_4) * (1 + supp_5)",
    "expected": 13.63073897
   },
   {

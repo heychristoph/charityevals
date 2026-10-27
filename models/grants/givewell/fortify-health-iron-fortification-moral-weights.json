@@ -20,7 +20,10 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 2.3,
+   "discount_rate": 0.04,
+   "uov_per_ln_consumption": 1.0
   }
  },
  "resources": [
@@ -109,13 +112,14 @@
    "id": "value_assigned_to_1_yld_averted_preferred",
    "label": "Value assigned to 1 YLD averted (Preferred)",
    "section": "iron_fortification",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hCNU1us4gavfFUduatVFr2u20V7YxMDdnc8ty9lTeRM/edit",
     "cell": "Iron Fortification!C12"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
    "id": "units_of_value_per_beneficiary_preferred",
@@ -209,9 +213,10 @@
    "id": "discount_rate_preferred",
    "label": "Discount rate (Preferred)",
    "section": "iron_fortification",
-   "formula": "overall_discount_rate_active",
+   "formula": "$discount_rate",
    "expected": 0.04,
-   "format": "percent"
+   "format": "percent",
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04.\n\nLinked to the shared discount rate; GiveWell's sheet adds up its components to 0.04."
   },
   {
    "id": "mean_number_of_years_between_supplementation_and_initial_con",
@@ -405,13 +410,14 @@
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on_2",
    "label": "Value assigned to doubling consumption for one person for one year (GiveWell 2020)",
    "section": "moral_weights",
-   "value": 1.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1hCNU1us4gavfFUduatVFr2u20V7YxMDdnc8ty9lTeRM/edit",
     "cell": "Moral weights!C5"
-   }
+   },
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.0,
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1."
   },
   {
    "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",

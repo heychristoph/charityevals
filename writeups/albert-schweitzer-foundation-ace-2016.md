@@ -3,7 +3,7 @@
 
 Corporate campaigns and legal work for farmed animal welfare, mainly in Germany and Europe. Animal Charity Evaluators published one public model of its work. The most recent, from November 2016, puts it at **11 animals spared per dollar** as the evaluator published it, with our default exchange rates between units.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
@@ -19,6 +19,6 @@ The Guesstimate model was converted cell by cell. Its inputs are 90% intervals, 
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - Only the ranges ACE gave are varied; correlations between them aren't modelled.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.

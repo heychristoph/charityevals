@@ -20,7 +20,9 @@
   "name": "GiveWell",
   "assumptions": {
    "count_salary_sacrifice": 0,
-   "full_credit": 0
+   "full_credit": 0,
+   "uov_per_daly": 2.3,
+   "uov_per_ln_consumption": 1.44
   }
  },
  "resources": [
@@ -157,22 +159,22 @@
    }
   },
   {
-   "id": "rate_val",
-   "label": "Rate (val)",
+   "id": "anemia_val",
+   "label": "Anemia (val)",
    "section": "gbd_2021_anemia_yld_data",
-   "value": 1272.01738908328,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "GBD 2021 Anemia YLD Data!P11"
-   }
+   },
+   "formula": "@givewell.anemia_val",
+   "expected": 1272.01738908328
   },
   {
    "id": "adjustment_for_state_level_anemia_burden_west_bengal",
    "label": "Adjustment for state-level anemia burden (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "rate_per_100_000 / rate_val - 1",
+   "formula": "rate_per_100_000 / anemia_val - 1",
    "expected": 0.2349398786,
    "format": "percent"
   },
@@ -248,8 +250,8 @@
    "expected": 1890514.0
   },
   {
-   "id": "total_usd",
-   "label": "- (Total (USD))",
+   "id": "evaluation_pre_post_test_process_tracing_idinsight_total_usd",
+   "label": "Evaluation (Pre-Post Test, Process Tracing) - IDinsight (Total (USD))",
    "section": "ni_cost",
    "value": 555306.0,
    "kind": "estimate",
@@ -275,7 +277,7 @@
    "id": "evaluation_pre_post_test_process_tracing_idinsight",
    "label": "Evaluation (Pre-Post Test, Process Tracing) - IDinsight",
    "section": "ni_cost",
-   "formula": "total_usd + total_direct_costs_total_usd",
+   "formula": "evaluation_pre_post_test_process_tracing_idinsight_total_usd + total_direct_costs_total_usd",
    "expected": 1219479.0
   },
   {
@@ -298,8 +300,8 @@
    "expected": 72409.0
   },
   {
-   "id": "total_usd_2",
-   "label": "- (Total (USD))",
+   "id": "studies_to_produce_quality_fortified_rice_and_fortified_rice_2",
+   "label": "Studies to produce quality fortified rice and fortified rice kernels (Total (USD))",
    "section": "ni_cost",
    "value": 120682.0,
    "kind": "estimate",
@@ -313,7 +315,7 @@
    "id": "studies_to_produce_quality_fortified_rice_and_fortified_rice",
    "label": "Studies to produce quality fortified rice and fortified rice kernels",
    "section": "ni_cost",
-   "formula": "total_usd_2",
+   "formula": "studies_to_produce_quality_fortified_rice_and_fortified_rice_2",
    "expected": 120682.0
   },
   {
@@ -428,8 +430,8 @@
    "expected": 5470533.9
   },
   {
-   "id": "input_west_bengal",
-   "label": "input (West Bengal)",
+   "id": "program_cost_west_bengal_2",
+   "label": "Program cost (West Bengal)",
    "section": "iron_fortification_cea",
    "formula": "(grand_total_total_usd - evaluation_pre_post_test_process_tracing_idinsight * 1.15) * (program_implementation_in_west_bengal / sum(program_implementation_in_west_bengal, funding_gaps_in_program_implementation_in_madhya_pradesh))",
    "expected": 2430969.421,
@@ -439,7 +441,7 @@
    "id": "program_cost_west_bengal",
    "label": "Program cost (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_west_bengal",
+   "formula": "program_cost_west_bengal_2",
    "expected": 2430969.421,
    "format": "usd"
   },
@@ -503,17 +505,17 @@
    }
   },
   {
-   "id": "calc_west_bengal",
-   "label": "calc (West Bengal)",
+   "id": "number_of_people_years_of_support_west_bengal_2",
+   "label": "Number of people-years of support (West Bengal)",
    "section": "iron_fortification_cea",
    "formula": "total_beneficiaries_in_west_bengal_per_year * years_of_program_implementation",
    "expected": 170535641.0
   },
   {
-   "id": "input_west_bengal_2",
-   "label": "input (West Bengal)",
+   "id": "annual_cost_per_person_consuming_iron_fortified_rice_nafeedt",
+   "label": "Annual cost per person consuming iron-fortified rice (NaFeEDTA) (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "input_west_bengal / calc_west_bengal",
+   "formula": "program_cost_west_bengal_2 / number_of_people_years_of_support_west_bengal_2",
    "expected": 0.01425490534,
    "format": "usd"
   },
@@ -521,7 +523,7 @@
    "id": "annual_cost_per_person_west_bengal",
    "label": "Annual cost per person (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_west_bengal_2",
+   "formula": "annual_cost_per_person_consuming_iron_fortified_rice_nafeedt",
    "expected": 0.01425490534,
    "format": "usd"
   },
@@ -540,8 +542,8 @@
    "expected": 2143107.777
   },
   {
-   "id": "input_west_bengal_3",
-   "label": "input (West Bengal)",
+   "id": "risk_ratio_for_anemia_rice_fortification_with_iron_givewell",
+   "label": "Risk ratio for anemia, rice fortification with iron, GiveWell's meta-analysis (West Bengal)",
    "section": "iron_fortification_cea",
    "value": 0.71,
    "kind": "estimate",
@@ -553,10 +555,10 @@
    "explainer": "https://www.google.com/url?q=https://docs.google.com/document/d/1InuhgERhIBF2izj-j8_HN3ClkGGi5uG9fT30rSO45YM/edit?usp%3Dsharing&sa=D&source=editors&ust=1728656840395808&usg=AOvVaw1p7SYm85YgkrRUMLnrDH9d"
   },
   {
-   "id": "calc_west_bengal_2",
-   "label": "calc (West Bengal)",
+   "id": "reduction_in_anemia_prevalence_from_iron_fortification_west",
+   "label": "Reduction in anemia prevalence from iron fortification (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "1 - input_west_bengal_3",
+   "formula": "1 - risk_ratio_for_anemia_rice_fortification_with_iron_givewell",
    "expected": 0.29,
    "format": "percent"
   },
@@ -564,13 +566,13 @@
    "id": "reduction_in_anemia_prevalence_from_iron_fortification_trial",
    "label": "Reduction in anemia prevalence from iron fortification trials (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_west_bengal_2",
+   "formula": "reduction_in_anemia_prevalence_from_iron_fortification_west",
    "expected": 0.29,
    "format": "percent"
   },
   {
-   "id": "input_west_bengal_4",
-   "label": "input (West Bengal)",
+   "id": "internal_validity_adjustment_west_bengal_2",
+   "label": "Internal validity adjustment (West Bengal)",
    "section": "iron_fortification_cea",
    "value": -0.25,
    "kind": "estimate",
@@ -586,7 +588,7 @@
    "id": "internal_validity_adjustment_west_bengal",
    "label": "Internal validity adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_west_bengal_4",
+   "formula": "internal_validity_adjustment_west_bengal_2",
    "expected": -0.25,
    "format": "percent"
   },
@@ -627,8 +629,8 @@
    "format": "percent"
   },
   {
-   "id": "calc_west_bengal_3",
-   "label": "calc (West Bengal)",
+   "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr",
+   "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency (West Bengal)",
    "section": "iron_fortification_cea",
    "formula": "supp_west_bengal_2 / supp_west_bengal_3 - 1",
    "expected": 0.06098759988,
@@ -1108,23 +1110,23 @@
    "expected": 0.1
   },
   {
-   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
    "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "ni_ev",
    "formula": "of_program_beneficiaries_that_are_children_15 * inflammation_exposure_index_rating_as_a_of_max_score_for_chi + of_program_beneficiaries_that_are_adults_15 * inflammation_exposure_index_rating_as_a_of_max_score_for_adu",
    "expected": 0.1453312185
   },
   {
-   "id": "input_west_bengal_5",
-   "label": "input (West Bengal)",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "label": "Inflammation exposure index rating (as a % of max score) in program population (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
+   "formula": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_2",
    "expected": 0.1453312185,
    "format": "percent"
   },
   {
-   "id": "input_west_bengal_6",
-   "label": "input (West Bengal)",
+   "id": "assumed_effect_of_inflammation_on_iron_absorption_west_benga",
+   "label": "Assumed effect of inflammation on iron absorption (West Bengal)",
    "section": "iron_fortification_cea",
    "value": 0.2,
    "kind": "estimate",
@@ -1137,16 +1139,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_west_bengal_4",
-   "label": "calc (West Bengal)",
+   "id": "adjustment_for_inflammation_in_program_compared_to_study_pop",
+   "label": "Adjustment for inflammation in program compared to study population (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "(supp_west_bengal_4 / input_west_bengal_5 - 1) * input_west_bengal_6",
+   "formula": "(supp_west_bengal_4 / inflammation_exposure_index_rating_as_a_of_max_score_in_prog - 1) * assumed_effect_of_inflammation_on_iron_absorption_west_benga",
    "expected": -0.002097836435,
    "format": "percent"
   },
   {
-   "id": "input_west_bengal_7",
-   "label": "input (West Bengal)",
+   "id": "adjustment_for_fortification_implemented_at_scale_west_benga",
+   "label": "Adjustment for fortification implemented at scale (West Bengal)",
    "section": "iron_fortification_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -1167,8 +1169,8 @@
    "format": "percent"
   },
   {
-   "id": "input_west_bengal_8",
-   "label": "input (West Bengal)",
+   "id": "assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
+   "label": "Assumed effect of increased iron intake on anemia prevalence (West Bengal)",
    "section": "iron_fortification_cea",
    "value": 1.0,
    "kind": "estimate",
@@ -2149,7 +2151,7 @@
    "id": "external_validity_adjustment_west_bengal",
    "label": "External validity adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "(1 + calc_west_bengal_3) * (1 + calc_west_bengal_4) * (1 + input_west_bengal_7) * (1 + fortification_duration_adjustment_relative_to_trial_settings * input_west_bengal_8) * (1 + adjustment_for_cooking_methods_west_bengal) * (1 + adjustment_for_tea_and_phytic_acid_consumption_west_bengal) * (1 + dose_adjustment_for_program_settings_relative_to_trial_setti * input_west_bengal_8) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_fortification_implemented_at_scale_west_benga) * (1 + fortification_duration_adjustment_relative_to_trial_settings * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_cooking_methods_west_bengal) * (1 + adjustment_for_tea_and_phytic_acid_consumption_west_bengal) * (1 + dose_adjustment_for_program_settings_relative_to_trial_setti * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) - 1",
    "expected": -0.9715517641,
    "format": "percent"
   },
@@ -2172,17 +2174,18 @@
    "id": "units_of_value_assigned_to_1_yld_averted_west_bengal",
    "label": "Units of value assigned to 1 YLD averted (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Simple iron fortification CEA!B16"
-   }
+   },
+   "formula": "$uov_per_daly",
+   "expected": 2.3,
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3."
   },
   {
-   "id": "input",
-   "label": "input",
+   "id": "units_of_value_per_dollar_givedirectly",
+   "label": "Units of value per dollar, GiveDirectly",
    "section": "iron_fortification_cea",
    "value": 0.0033545,
    "kind": "estimate",
@@ -2197,7 +2200,7 @@
    "id": "cost_effectiveness_from_anemia_morbidity_averted_only_west_b",
    "label": "Cost-effectiveness from anemia morbidity averted only (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_we * units_of_value_assigned_to_1_yld_averted_west_bengal / program_cost_west_bengal / input",
+   "formula": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_we * units_of_value_assigned_to_1_yld_averted_west_bengal / program_cost_west_bengal / units_of_value_per_dollar_givedirectly",
    "expected": 3.740065067
   },
   {
@@ -2223,8 +2226,8 @@
    "format": "percent"
   },
   {
-   "id": "feed",
-   "label": "feed",
+   "id": "proportion_of_population_that_is_0_to_14_years_old_program_s",
+   "label": "Proportion of population that is 0 to 14 years old, program settings",
    "section": "iron_fortification_cea",
    "value": 0.2704749426,
    "kind": "estimate",
@@ -2254,12 +2257,12 @@
    "id": "total_present_value_of_units_of_increase_in_units_of_annual",
    "label": "Total present value of units of increase in units of annual ln(income) among people under age 15 (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "number_of_people_years_of_support_west_bengal * proportion_of_children_in_current_programs_who_would_benefit * feed * present_value_of_total_lifetime_benefits_per_person_with_die",
+   "formula": "number_of_people_years_of_support_west_bengal * proportion_of_children_in_current_programs_who_would_benefit * proportion_of_population_that_is_0_to_14_years_old_program_s * present_value_of_total_lifetime_benefits_per_person_with_die",
    "expected": 21093.78139
   },
   {
-   "id": "input_2",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "iron_fortification_cea",
    "formula": "1 / ln(2)",
    "expected": 1.442695041
@@ -2268,39 +2271,39 @@
    "id": "units_of_value_assigned_to_increasing_ln_income_for_one_pers",
    "label": "Units of value assigned to increasing ln(income) for one person for one year (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_2",
+   "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 1.442695041
   },
   {
    "id": "cost_effectiveness_from_development_effects_only_west_bengal",
    "label": "Cost-effectiveness from development effects only (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "total_present_value_of_units_of_increase_in_units_of_annual * units_of_value_assigned_to_increasing_ln_income_for_one_pers / program_cost_west_bengal / input",
+   "formula": "total_present_value_of_units_of_increase_in_units_of_annual * units_of_value_assigned_to_increasing_ln_income_for_one_pers / program_cost_west_bengal / units_of_value_per_dollar_givedirectly",
    "expected": 3.73182859
   },
   {
-   "id": "input_3",
-   "label": "input",
+   "id": "annual_birth_rate_per_1000",
+   "label": "Annual birth rate, per 1000",
    "section": "iron_fortification_cea",
-   "value": 16.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron fortification CEA!E85"
    },
-   "explainer": "World Bank estimate"
+   "explainer": "World Bank estimate",
+   "formula": "@givewell.annual_birth_rate_per_1000",
+   "expected": 16.0
   },
   {
    "id": "annual_birth_rate_per_1_000_individuals_west_bengal",
    "label": "Annual birth rate, per 1,000 individuals (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_3",
+   "formula": "annual_birth_rate_per_1000",
    "expected": 16.0
   },
   {
-   "id": "input_4",
-   "label": "input",
+   "id": "neonatal_mortality_rate_first_28_days",
+   "label": "Neonatal mortality rate (first 28 days)",
    "section": "iron_fortification_cea",
    "formula": "27935.25 / 365 * 28 / 100000",
    "expected": 0.02142978082,
@@ -2310,35 +2313,35 @@
    "id": "neonatal_mortality_rate_west_bengal",
    "label": "Neonatal mortality rate (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_4",
+   "formula": "neonatal_mortality_rate_first_28_days",
    "expected": 0.02142978082,
    "format": "percent"
   },
   {
-   "id": "input_5",
-   "label": "input",
+   "id": "impact_of_iron_supplementation_on_neonatal_mortality_reducti_2",
+   "label": "Impact of iron supplementation on neonatal mortality, % reduction",
    "section": "iron_fortification_cea",
-   "value": 0.26,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron fortification CEA!E87"
    },
    "explainer": "GW iron supplementation and fortification intervention report",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.impact_of_iron_supplementation_on_neonatal_mortality_reducti",
+   "expected": 0.26
   },
   {
    "id": "impact_of_iron_supplementation_on_neonatal_mortality_reducti",
    "label": "Impact of iron supplementation on neonatal mortality, % reduction (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_5",
+   "formula": "impact_of_iron_supplementation_on_neonatal_mortality_reducti_2",
    "expected": 0.26,
    "format": "percent"
   },
   {
-   "id": "input_6",
-   "label": "input",
+   "id": "internal_validity_adjustment_for_use_of_post_hoc_subgroup",
+   "label": "Internal validity adjustment for use of post-hoc subgroup",
    "section": "iron_fortification_cea",
    "value": -0.3,
    "kind": "estimate",
@@ -2351,8 +2354,8 @@
    "format": "percent"
   },
   {
-   "id": "input_7",
-   "label": "input",
+   "id": "internal_validity_adjustment_for_lack_of_clear_causal_mechan",
+   "label": "Internal validity adjustment for lack of clear causal mechanism",
    "section": "iron_fortification_cea",
    "value": -0.3,
    "kind": "estimate",
@@ -2365,24 +2368,24 @@
    "format": "percent"
   },
   {
-   "id": "calc",
-   "label": "calc",
+   "id": "overall_internal_validity_adjustment_for_neonatal_mortality",
+   "label": "Overall internal validity adjustment for neonatal mortality",
    "section": "iron_fortification_cea",
-   "formula": "(1 + input_6) * (1 + input_7) - 1",
+   "formula": "(1 + internal_validity_adjustment_for_use_of_post_hoc_subgroup) * (1 + internal_validity_adjustment_for_lack_of_clear_causal_mechan) - 1",
    "expected": -0.51,
    "format": "percent"
   },
   {
-   "id": "internal_validity_adjustment_west_bengal_2",
+   "id": "internal_validity_adjustment_west_bengal_3",
    "label": "Internal validity adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc",
+   "formula": "overall_internal_validity_adjustment_for_neonatal_mortality",
    "expected": -0.51,
    "format": "percent"
   },
   {
-   "id": "input_8",
-   "label": "input",
+   "id": "external_validity_adjustment_accounting_for_iron_supplementa",
+   "label": "External validity adjustment accounting for iron supplementation in the control group of Huda et al. 2022",
    "section": "iron_fortification_cea",
    "value": 0.17,
    "kind": "estimate",
@@ -2528,15 +2531,15 @@
    "id": "supp_2",
    "label": "supp",
    "section": "iron_fortification_cea",
-   "formula": "prevalence_of_dietary_iron_deficiency_among_reproductive_age * (1 + adjustment_for_future_anemia_trends_west_bengal) * input_west_bengal_8 / weighted_average_prevalence_of_dietary_iron_deficiency_among - 1",
+   "formula": "prevalence_of_dietary_iron_deficiency_among_reproductive_age * (1 + adjustment_for_future_anemia_trends_west_bengal) * assumed_effect_of_increased_iron_intake_on_anemia_prevalence / weighted_average_prevalence_of_dietary_iron_deficiency_among - 1",
    "expected": -0.0001956845487,
    "format": "percent"
   },
   {
-   "id": "calc_2",
-   "label": "calc",
+   "id": "overall_external_validity_adjustment_for_neonatal_mortality",
+   "label": "Overall external validity adjustment for neonatal mortality",
    "section": "iron_fortification_cea",
-   "formula": "(1 + input_8) * (1 + supp_2) - 1",
+   "formula": "(1 + external_validity_adjustment_accounting_for_iron_supplementa) * (1 + supp_2) - 1",
    "expected": 0.1697710491,
    "format": "percent"
   },
@@ -2544,13 +2547,13 @@
    "id": "external_validity_adjustment_west_bengal_2",
    "label": "External validity adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_2",
+   "formula": "overall_external_validity_adjustment_for_neonatal_mortality",
    "expected": 0.1697710491,
    "format": "percent"
   },
   {
-   "id": "input_9",
-   "label": "input",
+   "id": "percentage_of_women_who_take_iron_and_folic_acid_supplements_2",
+   "label": "Percentage of women who take iron and folic acid supplements during pregnancy for at least 100 days",
    "section": "iron_fortification_cea",
    "value": 0.44,
    "kind": "estimate",
@@ -2563,8 +2566,8 @@
    "format": "percent"
   },
   {
-   "id": "input_10",
-   "label": "input",
+   "id": "adjustment_for_self_report_and_social_desirability_bias",
+   "label": "Adjustment for self-report and social desirability bias",
    "section": "iron_fortification_cea",
    "value": -0.25,
    "kind": "estimate",
@@ -2577,10 +2580,10 @@
    "format": "percent"
   },
   {
-   "id": "calc_3",
-   "label": "calc",
+   "id": "percentage_of_women_who_take_iron_and_folic_acid_supplements",
+   "label": "Percentage of women who take iron and folic acid supplements during pregnancy for at least 100 days, after adjustment",
    "section": "iron_fortification_cea",
-   "formula": "input_9 * (1 + input_10)",
+   "formula": "percentage_of_women_who_take_iron_and_folic_acid_supplements_2 * (1 + adjustment_for_self_report_and_social_desirability_bias)",
    "expected": 0.33,
    "format": "percent"
   },
@@ -2588,37 +2591,37 @@
    "id": "of_women_regularly_taking_iron_supplements_in_pregnancy_west",
    "label": "% of women regularly taking iron supplements in pregnancy (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_3",
+   "formula": "percentage_of_women_who_take_iron_and_folic_acid_supplements",
    "expected": 0.33,
    "format": "percent"
   },
   {
-   "id": "input_west_bengal_9",
-   "label": "input (West Bengal)",
+   "id": "dose_adjustment_for_program_settings_relative_to_trial_setti_2",
+   "label": "Dose adjustment for program settings relative to trial settings (West Bengal)",
    "section": "iron_fortification_cea",
    "formula": "total_additional_iron_intake_per_individual_per_week_nafeedt_2 / average - 1",
    "expected": -0.9785975532,
    "format": "percent"
   },
   {
-   "id": "calc_west_bengal_6",
-   "label": "calc (West Bengal)",
+   "id": "external_validity_adjustment_west_bengal_3",
+   "label": "External validity adjustment (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "(1 + calc_west_bengal_3) * (1 + calc_west_bengal_4) * (1 + input_west_bengal_7) * (1 + input_west_bengal_9 * input_west_bengal_8) * (1 + fortification_duration_adjustment_relative_to_trial_settings * input_west_bengal_8) * (1 + adjustment_for_cooking_methods_west_bengal) * (1 + adjustment_for_tea_and_phytic_acid_consumption_west_bengal) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop) * (1 + adjustment_for_fortification_implemented_at_scale_west_benga) * (1 + dose_adjustment_for_program_settings_relative_to_trial_setti_2 * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + fortification_duration_adjustment_relative_to_trial_settings * assumed_effect_of_increased_iron_intake_on_anemia_prevalence) * (1 + adjustment_for_cooking_methods_west_bengal) * (1 + adjustment_for_tea_and_phytic_acid_consumption_west_bengal) - 1",
    "expected": -0.9715517641,
    "format": "percent"
   },
   {
-   "id": "calc_west_bengal_5",
-   "label": "calc (West Bengal)",
+   "id": "adjusted_reduction_in_anemia_from_iron_fortification_west_be_2",
+   "label": "Adjusted reduction in anemia from iron fortification (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "calc_west_bengal_2 * (1 + input_west_bengal_4) * (1 + calc_west_bengal_6)",
+   "formula": "reduction_in_anemia_prevalence_from_iron_fortification_west * (1 + internal_validity_adjustment_west_bengal_2) * (1 + external_validity_adjustment_west_bengal_3)",
    "expected": 0.006187491307,
    "format": "percent"
   },
   {
-   "id": "input_11",
-   "label": "input",
+   "id": "risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
+   "label": "Risk ratio for anemia, supplementation with iron, Low et al. 2013",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -2630,16 +2633,16 @@
    "explainer": "Low et al. 2013"
   },
   {
-   "id": "calc_6",
-   "label": "calc",
+   "id": "reduction_in_anemia_prevalence",
+   "label": "Reduction in anemia prevalence",
    "section": "iron_supplementation_cea",
-   "formula": "1 - input_11",
+   "formula": "1 - risk_ratio_for_anemia_supplementation_with_iron_low_et_al_20",
    "expected": 0.5,
    "format": "percent"
   },
   {
-   "id": "input_12",
-   "label": "input",
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
    "section": "iron_supplementation_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -2877,30 +2880,30 @@
    "format": "percent"
   },
   {
-   "id": "calc_8",
-   "label": "calc",
+   "id": "adjustment_for_differences_in_proportion_of_anemia_ylds_attr_2",
+   "label": "Adjustment for differences in proportion of anemia YLDs attributed to dietary iron deficiency",
    "section": "iron_supplementation_cea",
    "formula": "supp_3 / supp_4 - 1",
    "expected": 0.205392365,
    "format": "percent"
   },
   {
-   "id": "input_13",
-   "label": "input",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2",
+   "label": "Inflammation exposure index rating (as a % of max score) in study population",
    "section": "iron_supplementation_cea",
-   "value": 0.511,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron supplementation CEA!D25"
    },
    "explainer": "GW inflammation index analysis",
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
+   "expected": 0.511
   },
   {
-   "id": "input_14",
-   "label": "input",
+   "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog_3",
+   "label": "Inflammation exposure index rating (as a % of max score) in program population",
    "section": "iron_supplementation_cea",
    "value": 0.222222222222222,
    "kind": "estimate",
@@ -2913,8 +2916,8 @@
    "format": "percent"
   },
   {
-   "id": "input_15",
-   "label": "input",
+   "id": "assumed_effect_of_inflammation_on_iron_absorption",
+   "label": "Assumed effect of inflammation on iron absorption",
    "section": "iron_supplementation_cea",
    "value": 0.2,
    "kind": "estimate",
@@ -2927,16 +2930,16 @@
    "format": "percent"
   },
   {
-   "id": "calc_9",
-   "label": "calc",
+   "id": "adjustment_for_inflammation_in_program_compared_to_study_pop_2",
+   "label": "Adjustment for inflammation in program compared to study population",
    "section": "iron_supplementation_cea",
-   "formula": "(input_13 / input_14 - 1) * input_15",
+   "formula": "(inflammation_exposure_index_rating_as_a_of_max_score_in_stud_2 / inflammation_exposure_index_rating_as_a_of_max_score_in_prog_3 - 1) * assumed_effect_of_inflammation_on_iron_absorption",
    "expected": 0.2599,
    "format": "percent"
   },
   {
-   "id": "input_16",
-   "label": "input",
+   "id": "bioavailability_adjusted_iron_intake_relative_to_trial_setti",
+   "label": "Bioavailability-adjusted iron intake (relative to trial settings)",
    "section": "iron_supplementation_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -2949,8 +2952,8 @@
    "format": "percent"
   },
   {
-   "id": "input_17",
-   "label": "input",
+   "id": "assumed_effect_of_increased_iron_intake_on_anemia_prevalence_2",
+   "label": "Assumed effect of increased iron intake on anemia prevalence",
    "section": "iron_supplementation_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -2963,34 +2966,34 @@
    "format": "percent"
   },
   {
-   "id": "calc_10",
-   "label": "calc",
+   "id": "adjustment_for_weekly_iron_doseage_relative_to_trials",
+   "label": "Adjustment for weekly iron doseage, relative to trials",
    "section": "iron_supplementation_cea",
-   "formula": "input_16 * input_17",
+   "formula": "bioavailability_adjusted_iron_intake_relative_to_trial_setti * assumed_effect_of_increased_iron_intake_on_anemia_prevalence_2",
    "expected": -0.1,
    "format": "percent"
   },
   {
-   "id": "calc_7",
-   "label": "calc",
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
    "section": "iron_supplementation_cea",
-   "formula": "(1 + calc_8) * (1 + calc_9) * (1 + calc_10) - 1",
+   "formula": "(1 + adjustment_for_differences_in_proportion_of_anemia_ylds_attr_2) * (1 + adjustment_for_inflammation_in_program_compared_to_study_pop_2) * (1 + adjustment_for_weekly_iron_doseage_relative_to_trials) - 1",
    "expected": 0.3668064566,
    "format": "percent"
   },
   {
-   "id": "calc_5",
-   "label": "calc",
+   "id": "adjusted_reduction_in_anemia_from_iron_supplementation",
+   "label": "Adjusted reduction in anemia from iron supplementation",
    "section": "iron_supplementation_cea",
-   "formula": "calc_6 * (1 + input_12) * (1 + calc_7)",
+   "formula": "reduction_in_anemia_prevalence * (1 + internal_validity_adjustment) * (1 + external_validity_adjustment)",
    "expected": 0.6150629055,
    "format": "percent"
   },
   {
-   "id": "calc_4",
-   "label": "calc",
+   "id": "adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
+   "label": "Adjustment for lower effectiveness of iron fortification vs. supplementation",
    "section": "iron_fortification_cea",
-   "formula": "calc_west_bengal_5 / (calc_5 / (1 + calc_10))",
+   "formula": "adjusted_reduction_in_anemia_from_iron_fortification_west_be_2 / (adjusted_reduction_in_anemia_from_iron_supplementation / (1 + adjustment_for_weekly_iron_doseage_relative_to_trials))",
    "expected": 0.009053939242,
    "format": "percent"
   },
@@ -2998,7 +3001,7 @@
    "id": "adjustment_for_lower_effectiveness_of_iron_fortification_vs",
    "label": "Adjustment for lower effectiveness of iron fortification vs. supplementation (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_4 - 1",
+   "formula": "adjustment_for_lower_effectiveness_of_iron_fortification_vs_2 - 1",
    "expected": -0.9909460608,
    "format": "percent"
   },
@@ -3006,12 +3009,12 @@
    "id": "neonatal_deaths_averted_west_bengal",
    "label": "Neonatal deaths averted (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "annual_birth_rate_per_1_000_individuals_west_bengal * neonatal_mortality_rate_west_bengal * impact_of_iron_supplementation_on_neonatal_mortality_reducti * (1 + internal_validity_adjustment_west_bengal_2) * (1 + external_validity_adjustment_west_bengal_2) * (1 - of_women_regularly_taking_iron_supplements_in_pregnancy_west) * (1 + adjustment_for_lower_effectiveness_of_iron_fortification_vs) / 1000 * number_of_people_years_of_support_west_bengal",
+   "formula": "annual_birth_rate_per_1_000_individuals_west_bengal * neonatal_mortality_rate_west_bengal * impact_of_iron_supplementation_on_neonatal_mortality_reducti * (1 + internal_validity_adjustment_west_bengal_3) * (1 + external_validity_adjustment_west_bengal_2) * (1 - of_women_regularly_taking_iron_supplements_in_pregnancy_west) * (1 + adjustment_for_lower_effectiveness_of_iron_fortification_vs) / 1000 * number_of_people_years_of_support_west_bengal",
    "expected": 52.86102075
   },
   {
-   "id": "input_18",
-   "label": "input",
+   "id": "units_of_value_from_averting_one_neonatal_death",
+   "label": "Units of value from averting one neonatal death",
    "section": "iron_fortification_cea",
    "value": 84.0,
    "kind": "estimate",
@@ -3026,28 +3029,28 @@
    "id": "units_of_value_assigned_to_averting_a_neonatal_death_west_be",
    "label": "Units of value assigned to averting a neonatal death (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_18",
+   "formula": "units_of_value_from_averting_one_neonatal_death",
    "expected": 84.0
   },
   {
    "id": "cost_effectiveness_from_neonatal_deaths_averted_only_west_be",
    "label": "Cost-effectiveness from neonatal deaths averted only (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "neonatal_deaths_averted_west_bengal * units_of_value_assigned_to_averting_a_neonatal_death_west_be / program_cost_west_bengal / input",
+   "formula": "neonatal_deaths_averted_west_bengal * units_of_value_assigned_to_averting_a_neonatal_death_west_be / program_cost_west_bengal / units_of_value_per_dollar_givedirectly",
    "expected": 0.5445121051
   },
   {
    "id": "basta_soekirman_and_karyadi_1979_productivity_increase_in_ta",
    "label": "Basta, Soekirman, and Karyadi 1979, productivity increase in tappers with anemia",
    "section": "work_capacity_supplementary_cal",
-   "value": 0.15,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Work capacity supplementary cal!B4"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.basta_soekirman_and_karyadi_1979_productivity_increase_in_ta",
+   "expected": 0.15
   },
   {
    "id": "percent_of_trial_participants_that_were_tappers_approximate",
@@ -3113,14 +3116,14 @@
    "id": "edgerton_et_al_1979_prevalence_of_anemia",
    "label": "Edgerton et al. 1979, prevalence of anemia",
    "section": "work_capacity_supplementary_cal",
-   "value": 0.6,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Work capacity supplementary cal!B14"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "@givewell.edgerton_et_al_1979_prevalence_of_anemia",
+   "expected": 0.6
   },
   {
    "id": "edgerton_et_al_1979",
@@ -3176,18 +3179,18 @@
    "format": "percent"
   },
   {
-   "id": "feed_2",
-   "label": "feed",
+   "id": "adjustment_for_lower_effectiveness_of_iron_fortification_vs_3",
+   "label": "Adjustment for lower effectiveness of iron fortification vs. supplementation",
    "section": "iron_fortification_cea",
-   "formula": "calc_4",
+   "formula": "adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
    "expected": 0.009053939242,
    "format": "percent"
   },
   {
-   "id": "calc_11",
-   "label": "calc",
+   "id": "increase_in_productivity_from_iron_fortification_in_people_w_2",
+   "label": "Increase in productivity from iron fortification in people with anemia working manual labor jobs",
    "section": "iron_fortification_cea",
-   "formula": "supp_5 * feed_2",
+   "formula": "supp_5 * adjustment_for_lower_effectiveness_of_iron_fortification_vs_3",
    "expected": 0.0006644128141,
    "format": "percent"
   },
@@ -3195,7 +3198,7 @@
    "id": "increase_in_productivity_from_iron_fortification_in_people_w",
    "label": "Increase in productivity from iron fortification in people with anemia working manual labor jobs (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_11",
+   "formula": "increase_in_productivity_from_iron_fortification_in_people_w_2",
    "expected": 0.0006644128141,
    "format": "percent"
   },
@@ -3228,8 +3231,8 @@
    "format": "percent"
   },
   {
-   "id": "calc_13",
-   "label": "calc",
+   "id": "percentage_of_beneficiaries_that_are_working_age_and_have_an_2",
+   "label": "Percentage of beneficiaries that are working age and have anemia",
    "section": "iron_fortification_cea",
    "formula": "supp_6 * supp_7",
    "expected": 0.2673178078,
@@ -3239,7 +3242,7 @@
    "id": "percentage_of_beneficiaries_that_are_working_age_and_have_an",
    "label": "Percentage of beneficiaries that are working age and have anemia, adjusted for future trends",
    "section": "iron_fortification_cea",
-   "formula": "calc_13 * (1 + adjustment_for_future_anemia_trends_west_bengal) * input_west_bengal_8",
+   "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an_2 * (1 + adjustment_for_future_anemia_trends_west_bengal) * assumed_effect_of_increased_iron_intake_on_anemia_prevalence",
    "expected": 0.2138542463,
    "format": "percent"
   },
@@ -3362,8 +3365,8 @@
    "format": "percent"
   },
   {
-   "id": "calc_12",
-   "label": "calc",
+   "id": "percentage_of_beneficiaries_who_have_anemia_are_working_age",
+   "label": "Percentage of beneficiaries who have anemia, are working-age, are employed, and have physically demanding jobs",
    "section": "iron_fortification_cea",
    "formula": "percentage_of_beneficiaries_that_are_working_age_and_have_an * supp_8",
    "expected": 0.06966772551,
@@ -3373,13 +3376,13 @@
    "id": "percentage_of_beneficiaries_that_are_working_age_have_anemia",
    "label": "Percentage of beneficiaries that are working age, have anemia, and have physically demanding jobs (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_12",
+   "formula": "percentage_of_beneficiaries_who_have_anemia_are_working_age",
    "expected": 0.06966772551,
    "format": "percent"
   },
   {
-   "id": "input_19",
-   "label": "input",
+   "id": "degree_to_which_increased_productivity_would_flow_through_to_2",
+   "label": "Degree to which increased productivity would flow through to higher income",
    "section": "iron_fortification_cea",
    "value": 0.3,
    "kind": "estimate",
@@ -3395,13 +3398,13 @@
    "id": "degree_to_which_increased_productivity_would_flow_through_to",
    "label": "Degree to which increased productivity would flow through to higher income (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_19",
+   "formula": "degree_to_which_increased_productivity_would_flow_through_to_2",
    "expected": 0.3,
    "format": "percent"
   },
   {
-   "id": "input_20",
-   "label": "input",
+   "id": "internal_validity_adjustment_2",
+   "label": "Internal validity adjustment",
    "section": "iron_fortification_cea",
    "value": -0.2,
    "kind": "estimate",
@@ -3417,29 +3420,29 @@
    "id": "internal_validity_adjusment_west_bengal",
    "label": "Internal validity adjusment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_20",
+   "formula": "internal_validity_adjustment_2",
    "expected": -0.2,
    "format": "percent"
   },
   {
-   "id": "input_21",
-   "label": "input",
+   "id": "external_validity_adjustment_2",
+   "label": "External validity adjustment",
    "section": "iron_fortification_cea",
    "formula": "1.1 * 1.05 - 1",
    "expected": 0.155,
    "format": "percent"
   },
   {
-   "id": "external_validity_adjustment_west_bengal_3",
+   "id": "external_validity_adjustment_west_bengal_4",
    "label": "External validity adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_21",
+   "formula": "external_validity_adjustment_2",
    "expected": 0.155,
    "format": "percent"
   },
   {
-   "id": "input_22",
-   "label": "input",
+   "id": "double_counting_adjustment",
+   "label": "Double counting adjustment",
    "section": "iron_fortification_cea",
    "value": -0.5,
    "kind": "estimate",
@@ -3455,7 +3458,7 @@
    "id": "double_counting_adjustment_west_bengal",
    "label": "Double-counting adjustment (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_22",
+   "formula": "double_counting_adjustment",
    "expected": -0.5,
    "format": "percent"
   },
@@ -3463,26 +3466,26 @@
    "id": "average_increase_in_income_per_beneficiary_west_bengal",
    "label": "Average increase in income per beneficiary (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "increase_in_productivity_from_iron_fortification_in_people_w * percentage_of_beneficiaries_that_are_working_age_have_anemia * degree_to_which_increased_productivity_would_flow_through_to * (1 + internal_validity_adjusment_west_bengal) * (1 + external_validity_adjustment_west_bengal_3) * (1 + double_counting_adjustment_west_bengal)",
+   "formula": "increase_in_productivity_from_iron_fortification_in_people_w * percentage_of_beneficiaries_that_are_working_age_have_anemia * degree_to_which_increased_productivity_would_flow_through_to * (1 + internal_validity_adjusment_west_bengal) * (1 + external_validity_adjustment_west_bengal_4) * (1 + double_counting_adjustment_west_bengal)",
    "expected": 6.415534756e-06,
    "format": "percent"
   },
   {
-   "id": "input_23",
-   "label": "input",
+   "id": "average_household_size",
+   "label": "Average household size",
    "section": "iron_fortification_cea",
-   "value": 4.4,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron fortification CEA!E122"
    },
-   "explainer": "2019-21 India National Family Health Survey (NFHS-5)"
+   "explainer": "2019-21 India National Family Health Survey (NFHS-5)",
+   "formula": "@givewell.average_household_size",
+   "expected": 4.4
   },
   {
-   "id": "input_24",
-   "label": "input",
+   "id": "proportion_of_household_income_coming_from_adults_who_consum",
+   "label": "Proportion of household income coming from adults who consume iron-fortified foods",
    "section": "iron_fortification_cea",
    "value": 0.5,
    "kind": "estimate",
@@ -3495,49 +3498,49 @@
    "format": "percent"
   },
   {
-   "id": "calc_14",
-   "label": "calc",
+   "id": "multiplier_for_resource_sharing",
+   "label": "Multiplier for resource sharing",
    "section": "iron_fortification_cea",
-   "formula": "input_23 * input_24",
+   "formula": "average_household_size * proportion_of_household_income_coming_from_adults_who_consum",
    "expected": 2.2
   },
   {
    "id": "multiplier_for_resource_sharing_west_bengal",
    "label": "Multiplier for resource sharing (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "calc_14",
+   "formula": "multiplier_for_resource_sharing",
    "expected": 2.2
   },
   {
-   "id": "input_25",
-   "label": "input",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_3",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
    "section": "iron_fortification_cea",
-   "value": 1.44,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron fortification CEA!E126"
    },
-   "explainer": "GW's moral weights and discount rate"
+   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGW's moral weights and discount rate",
+   "formula": "$uov_per_ln_consumption",
+   "expected": 1.44
   },
   {
-   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
    "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "input_25",
+   "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_3",
    "expected": 1.44
   },
   {
    "id": "cost_effectiveness_from_increased_physical_work_capacity_onl",
    "label": "Cost-effectiveness from increased physical work capacity only (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "(ln(1 + average_increase_in_income_per_beneficiary_west_bengal * multiplier_for_resource_sharing_west_bengal) - ln(1)) * value_assigned_to_increasing_ln_consumption_by_one_unit_for * number_of_people_years_of_support_west_bengal / program_cost_west_bengal / input",
+   "formula": "(ln(1 + average_increase_in_income_per_beneficiary_west_bengal * multiplier_for_resource_sharing_west_bengal) - ln(1)) * value_assigned_to_increasing_ln_consumption_by_one_unit_for_2 * number_of_people_years_of_support_west_bengal / program_cost_west_bengal / units_of_value_per_dollar_givedirectly",
    "expected": 0.4250331818
   },
   {
-   "id": "input_26",
-   "label": "input",
+   "id": "risk_of_wastage_and_ineffective_fortification",
+   "label": "Risk of wastage and ineffective fortification",
    "section": "iron_fortification_cea",
    "value": -0.1,
    "kind": "estimate",
@@ -3550,8 +3553,8 @@
    "format": "percent"
   },
   {
-   "id": "input_27",
-   "label": "input",
+   "id": "cognitive_benefits_in_adults",
+   "label": "Cognitive benefits in adults",
    "section": "iron_fortification_cea",
    "value": 0.1,
    "kind": "estimate",
@@ -3564,8 +3567,8 @@
    "format": "percent"
   },
   {
-   "id": "input_28",
-   "label": "input",
+   "id": "benefits_of_other_micronutrients",
+   "label": "Benefits of other micronutrients",
    "section": "iron_fortification_cea",
    "value": 0.05,
    "kind": "estimate",
@@ -3578,8 +3581,8 @@
    "format": "percent"
   },
   {
-   "id": "input_29",
-   "label": "input",
+   "id": "medical_costs_averted",
+   "label": "Medical costs averted",
    "section": "iron_fortification_cea",
    "value": 0.05,
    "kind": "estimate",
@@ -3595,7 +3598,7 @@
    "id": "supplemental_adjustments_west_bengal",
    "label": "Supplemental adjustments (West Bengal)",
    "section": "simple_iron_fortification_cea",
-   "formula": "sum(input_26, input_27, input_28, input_29)",
+   "formula": "sum(risk_of_wastage_and_ineffective_fortification, cognitive_benefits_in_adults, benefits_of_other_micronutrients, medical_costs_averted)",
    "expected": 0.1,
    "format": "percent"
   },
@@ -3659,35 +3662,35 @@
    "format": "percent"
   },
   {
-   "id": "calc_west_bengal_8",
-   "label": "calc (West Bengal)",
+   "id": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_we_2",
+   "label": "Annual anemia YLDs (all ages) averted by iron fortification (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "annual_anemia_years_lived_with_disability_ylds_per_100_000_p * (calc_west_bengal / 100000) * calc_west_bengal_5",
+   "formula": "annual_anemia_years_lived_with_disability_ylds_per_100_000_p * (number_of_people_years_of_support_west_bengal_2 / 100000) * adjusted_reduction_in_anemia_from_iron_fortification_west_be_2",
    "expected": 13260.46074
   },
   {
-   "id": "input_west_bengal_10",
-   "label": "input (West Bengal)",
+   "id": "units_of_value_assigned_to_1_yld_averted_west_bengal_2",
+   "label": "Units of value assigned to 1 YLD averted (West Bengal)",
    "section": "iron_fortification_cea",
-   "value": 2.3,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
     "cell": "Iron fortification CEA!E51"
    },
-   "explainer": "GW moral weights and discount rate"
+   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3.\n\nGW moral weights and discount rate",
+   "formula": "$uov_per_daly",
+   "expected": 2.3
   },
   {
-   "id": "calc_west_bengal_7",
-   "label": "calc (West Bengal)",
+   "id": "units_of_value_from_anemia_ylds_averted_west_bengal",
+   "label": "Units of value from anemia YLDs averted (West Bengal)",
    "section": "iron_fortification_cea",
-   "formula": "calc_west_bengal_8 * input_west_bengal_10",
+   "formula": "annual_anemia_ylds_all_ages_averted_by_iron_fortification_we_2 * units_of_value_assigned_to_1_yld_averted_west_bengal_2",
    "expected": 30499.0597
   },
   {
-   "id": "calc_19",
-   "label": "calc",
+   "id": "present_value_of_individual_lifetime_benefits_per_person_wit",
+   "label": "Present value of individual lifetime benefits per person with dietary iron deficiency among people under age 15",
    "section": "iron_fortification_cea",
    "value": 0.0006550803089,
    "kind": "estimate",
@@ -3699,8 +3702,8 @@
    "explainer": "Calculated in the source sheet as `=pv(E71,E73,-E72,,1)`; kept as a fixed number here (text in arithmetic)."
   },
   {
-   "id": "input_30",
-   "label": "input",
+   "id": "multiplier_for_resource_sharing_within_households",
+   "label": "Multiplier for resource sharing within households",
    "section": "iron_fortification_cea",
    "value": 2.0,
    "kind": "estimate",
@@ -3712,118 +3715,118 @@
    "explainer": "GW's analysis on estimating multiplier for benefits experienced by other household members"
   },
   {
-   "id": "calc_18",
-   "label": "calc",
+   "id": "present_value_of_total_lifetime_benefits_per_person_with_die_2",
+   "label": "Present value of total lifetime benefits per person with dietary iron deficiency among people under age 15",
    "section": "iron_fortification_cea",
-   "formula": "calc_19 * input_30",
+   "formula": "present_value_of_individual_lifetime_benefits_per_person_wit * multiplier_for_resource_sharing_within_households",
    "expected": 0.001310160618
   },
   {
-   "id": "calc_20",
-   "label": "calc",
+   "id": "number_of_children_0_to_14_years_old_consuming_iron_fortifie",
+   "label": "Number of children 0 to 14 years old consuming iron-fortified wheat flour per year",
    "section": "iron_fortification_cea",
-   "formula": "calc_west_bengal * supp * feed",
+   "formula": "number_of_people_years_of_support_west_bengal_2 * supp * proportion_of_population_that_is_0_to_14_years_old_program_s",
    "expected": 16100149.17
   },
   {
-   "id": "calc_17",
-   "label": "calc",
+   "id": "total_present_value_of_units_of_increase_in_units_of_annual_2",
+   "label": "Total present value of units of increase in units of annual ln(income) among people under age 15",
    "section": "iron_fortification_cea",
-   "formula": "calc_18 * calc_20",
+   "formula": "present_value_of_total_lifetime_benefits_per_person_with_die_2 * number_of_children_0_to_14_years_old_consuming_iron_fortifie",
    "expected": 21093.78139
   },
   {
-   "id": "calc_16",
-   "label": "calc",
+   "id": "total_units_of_value_from_development_benefits_in_0_to_14_ye",
+   "label": "Total units of value from development benefits in 0 to 14 year-olds",
    "section": "iron_fortification_cea",
-   "formula": "calc_17 * input_2",
+   "formula": "total_present_value_of_units_of_increase_in_units_of_annual_2 * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
    "expected": 30431.8938
   },
   {
-   "id": "calc_26",
-   "label": "calc",
+   "id": "reduction_after_internal_and_external_validity_adjustments",
+   "label": "% reduction after internal and external validity adjustments",
    "section": "iron_fortification_cea",
-   "formula": "input_5 * (1 - calc_3) * (1 + calc) * (1 + calc_2)",
+   "formula": "impact_of_iron_supplementation_on_neonatal_mortality_reducti_2 * (1 - percentage_of_women_who_take_iron_and_folic_acid_supplements) * (1 + overall_internal_validity_adjustment_for_neonatal_mortality) * (1 + overall_external_validity_adjustment_for_neonatal_mortality)",
    "expected": 0.09984931721,
    "format": "percent"
   },
   {
-   "id": "calc_25",
-   "label": "calc",
+   "id": "reduction_in_neonatal_mortality_iron_fortification",
+   "label": "% reduction in neonatal mortality, iron fortification",
    "section": "iron_fortification_cea",
-   "formula": "calc_26 * calc_4",
+   "formula": "reduction_after_internal_and_external_validity_adjustments * adjustment_for_lower_effectiveness_of_iron_fortification_vs_2",
    "expected": 0.0009040296513,
    "format": "percent"
   },
   {
-   "id": "calc_24",
-   "label": "calc",
+   "id": "deaths_averted_per_100_000_beneficiaries_general_population",
+   "label": "Deaths averted per 100,000 beneficiaries (general population)",
    "section": "iron_fortification_cea",
-   "formula": "input_3 * input_4 * calc_25 * 100",
+   "formula": "annual_birth_rate_per_1000 * neonatal_mortality_rate_first_28_days * reduction_in_neonatal_mortality_iron_fortification * 100",
    "expected": 0.03099705166
   },
   {
-   "id": "calc_23",
-   "label": "calc",
+   "id": "deaths_averted_per_beneficiary_year",
+   "label": "Deaths averted per beneficiary-year",
    "section": "iron_fortification_cea",
-   "formula": "calc_24 / 100000",
+   "formula": "deaths_averted_per_100_000_beneficiaries_general_population / 100000",
    "expected": 3.099705166e-07
   },
   {
-   "id": "calc_22",
-   "label": "calc",
+   "id": "units_of_value_per_beneficiary",
+   "label": "Units of value per beneficiary",
    "section": "iron_fortification_cea",
-   "formula": "calc_23 * input_18",
+   "formula": "deaths_averted_per_beneficiary_year * units_of_value_from_averting_one_neonatal_death",
    "expected": 2.603752339e-05
   },
   {
-   "id": "calc_21",
-   "label": "calc",
+   "id": "units_of_value_from_averting_neonatal_deaths",
+   "label": "Units of value from averting neonatal deaths",
    "section": "iron_fortification_cea",
-   "formula": "calc_22 * calc_west_bengal",
+   "formula": "units_of_value_per_beneficiary * number_of_people_years_of_support_west_bengal_2",
    "expected": 4440.325743
   },
   {
-   "id": "calc_30",
-   "label": "calc",
+   "id": "average_increase_in_income_per_beneficiary",
+   "label": "Average increase in income per beneficiary",
    "section": "iron_fortification_cea",
-   "formula": "calc_11 * calc_12 * input_19 * (1 + input_20) * (1 + input_21) * (1 + input_22)",
+   "formula": "increase_in_productivity_from_iron_fortification_in_people_w_2 * percentage_of_beneficiaries_who_have_anemia_are_working_age * degree_to_which_increased_productivity_would_flow_through_to_2 * (1 + internal_validity_adjustment_2) * (1 + external_validity_adjustment_2) * (1 + double_counting_adjustment)",
    "expected": 6.415534756e-06,
    "format": "percent"
   },
   {
-   "id": "calc_29",
-   "label": "calc",
+   "id": "increase_in_annual_ln_consumption",
+   "label": "Increase in annual ln(consumption)",
    "section": "iron_fortification_cea",
-   "formula": "ln(1 + calc_30 * calc_14) - ln(1)",
+   "formula": "ln(1 + average_increase_in_income_per_beneficiary * multiplier_for_resource_sharing) - ln(1)",
    "expected": 1.411407686e-05
   },
   {
-   "id": "calc_28",
-   "label": "calc",
+   "id": "units_of_value_per_beneficiary_per_year",
+   "label": "Units of value per beneficiary per year",
    "section": "iron_fortification_cea",
-   "formula": "calc_29 * input_25",
+   "formula": "increase_in_annual_ln_consumption * value_assigned_to_increasing_ln_consumption_by_one_unit_for_3",
    "expected": 2.032427068e-05
   },
   {
-   "id": "calc_27",
-   "label": "calc",
+   "id": "units_of_value_from_increased_physical_work_capacity",
+   "label": "Units of value from increased physical work capacity",
    "section": "iron_fortification_cea",
-   "formula": "calc_28 * calc_west_bengal",
+   "formula": "units_of_value_per_beneficiary_per_year * number_of_people_years_of_support_west_bengal_2",
    "expected": 3466.012529
   },
   {
-   "id": "calc_15",
-   "label": "calc",
+   "id": "total_units_of_value",
+   "label": "Total units of value",
    "section": "iron_fortification_cea",
-   "formula": "sum(calc_west_bengal_7, calc_16, calc_21, calc_27) * (1 + sum(input_26, input_27, input_28, input_29))",
+   "formula": "sum(units_of_value_from_anemia_ylds_averted_west_bengal, total_units_of_value_from_development_benefits_in_0_to_14_ye, units_of_value_from_averting_neonatal_deaths, units_of_value_from_increased_physical_work_capacity) * (1 + sum(risk_of_wastage_and_ineffective_fortification, cognitive_benefits_in_adults, benefits_of_other_micronutrients, medical_costs_averted))",
    "expected": 75721.02094
   },
   {
    "id": "adjustment_for_leverage_2",
    "label": "Adjustment for leverage",
    "section": "iron_fortification_cea",
-   "formula": "input_west_bengal / 2 * 0.005 / (calc_15 * (1 + adjustment_for_behavioural_activities_2)) * -1",
+   "formula": "program_cost_west_bengal_2 / 2 * 0.005 / (total_units_of_value * (1 + adjustment_for_behavioural_activities_2)) * -1",
    "expected": -0.0697919292,
    "format": "percent"
   },

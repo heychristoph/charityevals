@@ -5,26 +5,26 @@ A medical NGO running primary health care and malnutrition treatment in West and
 
 GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about 2.6× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look 2.6 times smaller.
 
-This page reproduces the evaluator's own spreadsheet. We haven't yet written our own evaluation of this charity, so there is no charityevals view: the numbers are the evaluator's.
+This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.
 
 ## The models
 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [BOTEC of ALIMA's Primary Healthcare and Malnutrition Treatment Program in North Cameroon (June 2025)](/alima) | GW | June 2025 | 3.1× GiveDirectly (GW: 8.0× cash) | 144 |
-| [Malnutrition treatment CEA (ALIMA Chad - 2024 renewal)](/alima/alima-malnutrition-treatment-chad-2024-renewal) | GW | February 2024 | 1.8× GiveDirectly (GW: 4.6× cash) | 264 |
-| [Malnutrition treatment CEA (ALIMA Chad 2021 with updated model)](/alima/alima-malnutrition-treatment-chad-2021-with) | GW | May 2021 | 3.4× GiveDirectly (GW: 9.0× cash) | 173 |
-| [Malnutrition treatment CEA (combined protocol ALIMA, Niger and Nigeria)](/alima/alima-malnutrition-treatment-combined) | GW | May 2021 | 4.2× GiveDirectly (GW: 11× cash) | 547 |
-| [Simplified Mirriah Niger ALIMA operational CEA](/alima/alima-mirriah-niger-operational) | GW | December 2020 | 3.5× GiveDirectly (GW: 9.0× cash) | 130 |
+| [BOTEC of ALIMA's Primary Healthcare and Malnutrition Treatment Program in North Cameroon (June 2025)](/alima) | GW | June 2025 | 3.1× GiveDirectly (GW: 8.0× cash) | 146 |
+| [Malnutrition treatment CEA (ALIMA Chad - 2024 renewal)](/alima/alima-malnutrition-treatment-chad-2024-renewal) | GW | February 2024 | 1.8× GiveDirectly (GW: 4.6× cash) | 268 |
+| [Malnutrition treatment CEA (ALIMA Chad 2021 with updated model)](/alima/alima-malnutrition-treatment-chad-2021-with) | GW | May 2021 | 3.4× GiveDirectly (GW: 9.0× cash) | 177 |
+| [Malnutrition treatment CEA (combined protocol ALIMA, Niger and Nigeria)](/alima/alima-malnutrition-treatment-combined) | GW | May 2021 | 4.2× GiveDirectly (GW: 11× cash) | 562 |
+| [Simplified Mirriah Niger ALIMA operational CEA](/alima/alima-mirriah-niger-operational) | GW | December 2020 | 3.5× GiveDirectly (GW: 9.0× cash) | 132 |
 
 Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.
 
 ## How this was imported
 
-Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. A few formulas our formula language can't express (lookups such as INDEX and MATCH, or text) are kept as fixed numbers, with the original formula shown on the row.
+Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. Each calculated row must reproduce the sheet's own value, so the import proves itself. Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.
 
 ## What's not here yet
 
-- The evaluator's moral weights and discount rates are fixed in these models, so changing your assumptions doesn't move them.
+- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.
 - The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them.
 - A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.
