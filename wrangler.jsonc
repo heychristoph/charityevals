@@ -12,8 +12,10 @@
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
   },
-  // Suggestions go to one fixed address; the binding can't send anywhere else.
-  "send_email": [{ "name": "SUGGESTIONS", "destination_address": "hello@charityevals.org" }],
+  // Suggestions are sent through Email Routing (free), which only delivers to verified destination
+  // addresses on the account. The recipient is the secret SUGGEST_TO (`wrangler secret put
+  // SUGGEST_TO`), the inbox hello@charityevals.org forwards to, so it isn't in this public repo.
+  "send_email": [{ "name": "SUGGESTIONS" }],
   "routes": [
     { "pattern": "charityevals.org", "custom_domain": true },
     { "pattern": "www.charityevals.org", "custom_domain": true }
