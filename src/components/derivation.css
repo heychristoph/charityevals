@@ -1,0 +1,321 @@
+/* How the number is built: a derivation read like a worked calculation. Each number is a ledger entry
+   (label, value, leverage) set on a hairline; operators sit between them in the serif. */
+
+.derivation {
+  margin-top: var(--s7);
+}
+.derivation h2 {
+  margin: 0 0 var(--s2);
+}
+.dv-intro {
+  margin: 0 0 var(--s4);
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+
+/* Evaluator toggle: tabs in the nav idiom (Slate at rest, Ink with a blue underline when current). */
+.dv-owners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--s4);
+}
+.dv-owner {
+  font: inherit;
+  font-size: 16px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: var(--s2) 0 6px;
+  color: var(--blue);
+  cursor: pointer;
+  display: inline-flex;
+  gap: var(--s2);
+  align-items: baseline;
+}
+.dv-owner:hover {
+  color: var(--blue-ink);
+}
+.dv-owner[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--blue);
+  cursor: default;
+}
+.dv-owner-val {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.dv-owner[aria-selected="true"] .dv-owner-val {
+  color: var(--cause);
+}
+.dv-switched {
+  margin: 0 0 var(--s3);
+}
+.dv-loading {
+  min-height: 120px;
+}
+
+/* A step: "Label = value", then its formula. */
+.dv-step {
+  padding-bottom: var(--s3);
+}
+.dv-head {
+  margin: 0 0 var(--s3);
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 72ch;
+}
+.dv-head-label {
+  color: var(--ink);
+  font-weight: 600;
+}
+.dv-eqsign {
+  color: var(--ink-3);
+}
+.dv-head-val {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+.dv-step:not(.dv-nested) > .dv-head .dv-head-val {
+  color: var(--cause);
+  font-size: 20px;
+}
+
+/* Opened steps hang off their parent on a hairline and settle into place. The first frame is already
+   readable, so a paused or skipped animation never hides the step. */
+.dv-nested {
+  margin: var(--s2) 0 var(--s2) 7px;
+  padding: var(--s3) 0 0 var(--s5);
+  border-left: 1px solid var(--rule-strong);
+  animation: dv-open 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes dv-open {
+  from {
+    transform: translateY(-8px);
+  }
+}
+
+/* The equation: terms and operators on one baseline, wrapping like prose. */
+.dv-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s2) var(--s3);
+}
+.dv-group,
+.dv-arg {
+  display: contents;
+}
+.dv-op,
+.dv-paren,
+.dv-fn,
+.dv-const {
+  font-family: var(--serif);
+  color: var(--ink-3);
+  font-size: 22px;
+  line-height: 1;
+  padding-bottom: 30px;
+}
+.dv-fn {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding-bottom: 33px;
+}
+.dv-const {
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 600;
+}
+.dv-comma {
+  margin-left: -8px;
+}
+
+/* A term: label, value, leverage, on a hairline. Calculated terms are buttons; inputs link to their row. */
+.dv-term {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 2px;
+  min-width: 128px;
+  max-width: 240px;
+  padding: 0 0 var(--s2);
+  border: 0;
+  border-bottom: 1px solid var(--rule-strong);
+  background: none;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  text-decoration: none;
+}
+.dv-label {
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dv-label .kind-dot {
+  margin-right: 5px;
+}
+.dv-val {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.dv-lev {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.dv-lev-track {
+  flex: 0 0 48px;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.dv-lev-bar {
+  display: block;
+  height: 100%;
+  background: var(--ink-2);
+  border-radius: 2px;
+  transition: width 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dv-lev-bar.neg {
+  background: var(--ink-3);
+}
+.dv-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--blue);
+  margin-top: 2px;
+}
+.dv-chev {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dv-opens {
+  cursor: pointer;
+}
+.dv-opens:hover .dv-more,
+.dv-leaf:hover .dv-more {
+  color: var(--blue-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.dv-opens:hover {
+  border-bottom-color: var(--blue);
+}
+.dv-opens.open {
+  border-bottom: 2px solid var(--blue);
+  padding-bottom: calc(var(--s2) - 1px);
+}
+.dv-opens.open .dv-chev {
+  transform: rotate(90deg);
+}
+.dv-leaf .dv-more {
+  color: var(--ink-3);
+}
+.dv-leaf:hover .dv-more {
+  color: var(--blue);
+}
+.dv-assumption .dv-more {
+  color: var(--warn);
+}
+.dv-assumption .dv-val {
+  color: var(--warn);
+}
+
+/* Sums: where the value comes from. */
+.dv-shares {
+  max-width: 820px;
+}
+.dv-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 3px;
+  overflow: hidden;
+  gap: 2px;
+  margin-bottom: var(--s3);
+}
+.dv-bar span {
+  min-width: 2px;
+  transition: width 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dv-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dv-parts > li {
+  display: grid;
+  grid-template-columns: 10px 44px minmax(0, 1fr);
+  gap: var(--s3);
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+.dv-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.dv-share {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* In a list of shares a single term reads as one line: label, value, leverage. */
+.dv-parts .dv-eq > .dv-term {
+  flex: 1;
+  max-width: none;
+  border-bottom: 0;
+  padding: var(--s2) 0;
+  grid-template-columns: minmax(0, 1fr) 76px 148px;
+  grid-template-rows: auto auto;
+  grid-template-areas: "label val lev" "more val lev";
+  column-gap: var(--s4);
+  align-items: center;
+}
+.dv-parts .dv-term .dv-label { grid-area: label; }
+.dv-parts .dv-term .dv-val { grid-area: val; font-size: 17px; text-align: right; }
+.dv-parts .dv-term .dv-lev { grid-area: lev; }
+.dv-parts .dv-term .dv-more { grid-area: more; margin-top: 0; }
+.dv-parts .dv-opens.open {
+  border-bottom: 0;
+  padding-bottom: var(--s2);
+}
+.dv-parts .dv-opens.open .dv-more {
+  color: var(--ink);
+}
+.dv-shares > .link-button {
+  margin-top: var(--s2);
+}
+
+@media (max-width: 760px) {
+  .dv-term {
+    max-width: none;
+    min-width: 0;
+    flex: 1 1 140px;
+  }
+  .dv-nested {
+    padding-left: var(--s3);
+    margin-left: 3px;
+  }
+  .dv-parts > li {
+    grid-template-columns: 10px 40px minmax(0, 1fr);
+    gap: var(--s2);
+  }
+  .dv-parts .dv-eq > .dv-term {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "label val" "lev lev" "more more";
+  }
+}

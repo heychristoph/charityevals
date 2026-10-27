@@ -38,17 +38,15 @@ export function summaries(): unknown[] {
       const r = m.byId.get(id)!;
       if (r.assumptionDeps.length || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
     }
-    const keep: string[] = [];
     const seen = new Set<string>();
     const visit = (id: string) => {
       if (seen.has(id)) return;
       seen.add(id);
       if (live.has(id)) m.byId.get(id)!.deps.forEach(visit);
-      keep.push(id);
     };
     visit(m.output!.row);
     const byId = new Map((raw.rows as { id: string }[]).map((r) => [r.id, r]));
-    const rows = m.order.filter((id) => seen.has(id)).map((id) => {
+    const rows: Record<string, unknown>[] = m.order.filter((id) => seen.has(id)).map((id) => {
       const r = byId.get(id) as Record<string, unknown>;
       // Labels only for the bottom line: nothing in the browser shows a summary's other rows.
       const label = id === m.output!.row ? r.label : "";

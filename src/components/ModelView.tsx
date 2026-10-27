@@ -8,6 +8,7 @@ import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
 import { Markdown } from "./AssumptionsPanel";
 import ViewToggle from "./ViewToggle";
+import Derivation, { type Choice } from "./Derivation";
 import { TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import "./model.css";
 
@@ -200,7 +201,7 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
   );
 }
 
-export default function ModelView({ id, raw, children }: { id: string; raw?: unknown; children?: React.ReactNode }) {
+export default function ModelView({ id, raw, choices = [], children }: { id: string; raw?: unknown; choices?: Choice[]; children?: React.ReactNode }) {
   // Bulk models reach the browser as one-row summaries; their page passes the full file instead.
   const model = useMemo(
     () => (raw ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()]).models.get(id)! : lib.models.get(id)!),
@@ -289,6 +290,8 @@ export default function ModelView({ id, raw, children }: { id: string; raw?: unk
           </ul>
         </section>
       )}
+
+      <Derivation model={model} choices={choices} />
 
       {children}
 
