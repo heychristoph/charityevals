@@ -65,10 +65,23 @@ export function summaries(): unknown[] {
   });
 }
 
-const text = JSON.stringify(summaries()) + "\n";
+/** Same structure and strings, numbers equal to 1 part in 10^12. Exact text would fail across Node
+ * versions: V8 releases differ in the last bit of Math.exp, Math.log and **, so a file written on
+ * Node 22 and regenerated on Node 24 (as CI does) differs in a few final digits. */
+function same(a: unknown, b: unknown): boolean {
+  if (typeof a === "number" && typeof b === "number") return a === b || Math.abs(a - b) <= 1e-12 * Math.max(Math.abs(a), Math.abs(b));
+  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((x, i) => same(x, b[i]));
+  if (a && b && typeof a === "object" && typeof b === "object") {
+    const ka = Object.keys(a), kb = Object.keys(b);
+    return ka.length === kb.length && ka.every((k) => same((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]));
+  }
+  return a === b;
+}
+
+const fresh = summaries();
 if (process.argv.includes("--check")) {
-  if (!existsSync(out) || readFileSync(out, "utf8") !== text) {
+  if (!existsSync(out) || !same(JSON.parse(readFileSync(out, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
     console.error("generated/bulk-summaries.json is out of date: run npx tsx scripts/summaries.ts");
     process.exit(1);
   }
-} else writeFileSync(out, text);
+} else writeFileSync(out, JSON.stringify(fresh) + "\n");
