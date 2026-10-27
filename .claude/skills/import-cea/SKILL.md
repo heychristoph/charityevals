@@ -29,6 +29,29 @@ Each line is one row with every cell's formula (`f`) and cached value (`v`). Rea
 fully; follow cross-tab references (`Baseline!B22`) only far enough to decide whether that input
 is a leaf (copy its value, cite the cell) or worth modelling.
 
+## 2b. Or convert it in bulk
+
+For a quick, faithful import without hooks into the shared assumptions, run the generic converter:
+
+```bash
+python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>
+```
+
+It traces the bottom-line cell (`spec.cell`, or found by its label) through every cell it depends on.
+Constants become inputs, formulas become formulas with `expected`, and lookups with fixed keys
+(INDEX, MATCH, FILTER) resolve to their cell. Anything else stays a fixed number with the original
+formula in its explainer. `bottom` says how to read the cell: `xcash`, `uov`, `uov_per:<n>` or
+`wellby_per:<n>`. Guesstimate models go through `scripts/convert-guesstimate.py`.
+
+Bulk models live in `models/grants/` and are marked `bulk: true`. After adding any:
+
+- run `npx tsx scripts/summaries.ts`: the browser gets one-row summaries of them;
+- run `npx tsx scripts/bulk-writeups.ts`: a generated write-up for charities with no other model;
+- record them in `inventory/`.
+
+GiveWell's grant sheets are imported this way by `scripts/import-givewell-grants.py`. A hand-built
+model (the steps below) always outranks a bulk one as a charity's main model.
+
 ## 3. Write the model
 
 Every model has a `charity` (an id in `charities/`) and an `owner` (an id in `owners.json`). If the

@@ -318,12 +318,20 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   return [...used];
 }
 
-/** A charity's main models (not variants), one per owner, in the owners' order. */
+/** A charity's models: by owner (owners.json order); within an owner, hand-built models before bulk
+ * imports, then newest first. The first model of each owner is that owner's current view. */
 export function modelsOf(lib: Library, charity: string): ResolvedModel[] {
   const order = [...lib.owners.keys()];
+  const date = (m: ResolvedModel) => m.source?.published ?? "";
   return [...lib.models.values()]
     .filter((m) => m.charity === charity && m.kind === "charity" && m.output)
-    .sort((a, b) => order.indexOf(a.owner) - order.indexOf(b.owner));
+    .sort((a, b) => order.indexOf(a.owner) - order.indexOf(b.owner) || Number(!!a.bulk) - Number(!!b.bulk) || date(b).localeCompare(date(a)));
+}
+
+/** Each owner's current model of a charity: the first of theirs in modelsOf order. */
+export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] {
+  const seen = new Set<string>();
+  return modelsOf(lib, charity).filter((m) => !seen.has(m.owner) && seen.add(m.owner));
 }
 
 /** Shared facts this model reads. */

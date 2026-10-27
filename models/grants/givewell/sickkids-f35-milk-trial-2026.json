@@ -1,0 +1,281 @@
+{
+ "id": "sickkids-f35-milk-trial-2026",
+ "name": "F35 milk trial BOTEC, 2026",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "sickkids",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"F35 milk trial BOTEC, 2026\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "GiveWell, F35 milk trial BOTEC, 2026 (public)",
+  "url": "https://www.givewell.org/research/grants/Hospital-for-Sick-Children-RCT-of-F35-Therapeutic-Milk-for-Inpatient-Severe-Acute-Malnutrition-February-2026",
+  "sheet": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+  "published": "2026-02-18",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "GiveWell, F35 milk trial BOTEC, 2026 (public)",
+   "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (Hospital for Sick Children RCT of F35 Therapeutic Milk for Inpatient Severe Acute Malnutrition February 2026)",
+   "url": "https://www.givewell.org/research/grants/Hospital-for-Sick-Children-RCT-of-F35-Therapeutic-Milk-for-Inpatient-Severe-Acute-Malnutrition-February-2026",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "sheet1",
+   "title": "Sheet1"
+  }
+ ],
+ "rows": [
+  {
+   "id": "annual_number_of_children_under_5_with_sam_globally",
+   "label": "Annual number of children under 5 with SAM, globally",
+   "section": "sheet1",
+   "value": 19000000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B3"
+   },
+   "explainer": "\"Severe acute malnutrition affects an estimated 19 million children under 5 years of age worldwide and is estimated to account for approximately 400,000 child deaths each year.\"\nhttps://www.who.int/tools/elena/interventions/sam-identification-inpatient"
+  },
+  {
+   "id": "percentage_of_children_with_sam_that_require_inpatient_treat",
+   "label": "Percentage of children with SAM that require inpatient treatment",
+   "section": "sheet1",
+   "formula": "(15 / 100 + 20 / 100) / 2",
+   "expected": 0.175,
+   "format": "percent"
+  },
+  {
+   "id": "annual_number_of_children_with_sam_requiring_inpatient_treat",
+   "label": "Annual number of children with SAM requiring inpatient treatment",
+   "section": "sheet1",
+   "formula": "annual_number_of_children_under_5_with_sam_globally * percentage_of_children_with_sam_that_require_inpatient_treat",
+   "expected": 3325000.0
+  },
+  {
+   "id": "percentage_of_sicker_children_who_would_potentially_benefit",
+   "label": "Percentage of \"sicker children\" who would potentially benefit from F75 -> F35",
+   "section": "sheet1",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B6"
+   },
+   "explainer": "Email from Robert Bandsma, Lead Researcher, November 15, 2025",
+   "format": "percent"
+  },
+  {
+   "id": "percentage_of_children_who_would_be_able_to_access_inpatient",
+   "label": "Percentage of children who would be able to access inpatient care",
+   "section": "sheet1",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B7"
+   },
+   "explainer": "Guess of the percentage of children with complicated SAM that can access inpatient treatment based on discussion with Claude and Gemini. They did not provide useful citations so this is very uncertain.",
+   "format": "percent"
+  },
+  {
+   "id": "annual_number_of_children_with_sam_who_might_benefit",
+   "label": "Annual number of children with SAM who might benefit",
+   "section": "sheet1",
+   "formula": "annual_number_of_children_with_sam_requiring_inpatient_treat * percentage_of_sicker_children_who_would_potentially_benefit * percentage_of_children_who_would_be_able_to_access_inpatient",
+   "expected": 332500.0
+  },
+  {
+   "id": "reduction_in_mortality_rate_if_the_intervention_is_successfu",
+   "label": "Reduction in mortality rate if the intervention is successful",
+   "section": "sheet1",
+   "value": 0.037,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B11"
+   },
+   "explainer": "CHAIN's trial proposal describes sample size calculations. They assume an absolute reduction of 3.7 pp.\n\n\"If F35 treatment would reduce absolute risk of 14-day mortality by 3.7%, i.e., a relative rate reduction of 26.5% compared to standard of care, with planned interim analyses as detailed above, the estimated average sample size would be 1211 for a power of 73.4%, where 39% of trials would require less than 750 patients and 53.4% of trials would require less than 1000.\"\n\nCHAIN, Reduced calorie feeds in the early management of ill severely malnourished children: A randomized phase III clinical trial (unpublished)",
+   "format": "percent"
+  },
+  {
+   "id": "deaths_averted_per_year_if_the_intervention_is_successful_an",
+   "label": "Deaths averted per year if the intervention is successful and widely adopted",
+   "section": "sheet1",
+   "formula": "annual_number_of_children_with_sam_who_might_benefit * reduction_in_mortality_rate_if_the_intervention_is_successfu",
+   "expected": 12302.5
+  },
+  {
+   "id": "funding_accelerates_this_research_by_x_years",
+   "label": "Funding accelerates this research by x years",
+   "section": "sheet1",
+   "value": 3.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B13"
+   },
+   "explainer": "GiveWell guess\nThis assumes that another similar trial would occur 3 years later, without our involvement. This is just a guess, but it seems reasonable based on the high importance of the question and the typical pace of progress in global health research."
+  },
+  {
+   "id": "total_deaths_averted_by_funding_trial_if_successful_and_wide",
+   "label": "Total deaths averted by funding trial, if successful and widely adopted",
+   "section": "sheet1",
+   "formula": "deaths_averted_per_year_if_the_intervention_is_successful_an * funding_accelerates_this_research_by_x_years",
+   "expected": 36907.5
+  },
+  {
+   "id": "probability_the_trial_fails_for_logistical_reasons",
+   "label": "Probability the trial fails for logistical reasons",
+   "section": "sheet1",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B16"
+   },
+   "explainer": "GiveWell guess",
+   "format": "percent"
+  },
+  {
+   "id": "probability_f35_is_found_to_cause_significantly_less_mortali",
+   "label": "Probability F35 is found to cause significantly less mortality than F75",
+   "section": "sheet1",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B17"
+   },
+   "explainer": "GiveWell guess, based on our assessment of the trial design and the reasonableness of its hypothesis",
+   "format": "percent"
+  },
+  {
+   "id": "probability_who_updates_guidance_if_f35_is_significantly_bet",
+   "label": "Probability WHO updates guidance if F35 is significantly better",
+   "section": "sheet1",
+   "value": 0.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B18"
+   },
+   "explainer": "GiveWell guess, based on our assessment of how well trial design and settings meet WHO standards",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_incomplete_adoption_of_who_guidance",
+   "label": "Adjustment for incomplete adoption of WHO guidance",
+   "section": "sheet1",
+   "value": 0.6,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B19"
+   },
+   "explainer": "GiveWell guess",
+   "format": "percent"
+  },
+  {
+   "id": "probability_someone_else_would_provide_this_funding_if_givew",
+   "label": "Probability someone else would provide this funding if GiveWell didn't",
+   "section": "sheet1",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B20"
+   },
+   "explainer": "GiveWell guess based on our assessment that this is an important research question and other funders seem eager to fund it.\n\nOur calculations implicitly assume that another funder's counterfactual cost-effectiveness is 0, which is unlikely to be true. However, we have not bothered to account for that inaccuracy since it would almost certainly raise cost-effectiveness, which is already above our bar for funding.",
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment",
+   "label": "Total adjustment",
+   "section": "sheet1",
+   "formula": "(1 - probability_the_trial_fails_for_logistical_reasons) * probability_f35_is_found_to_cause_significantly_less_mortali * probability_who_updates_guidance_if_f35_is_significantly_bet * adjustment_for_incomplete_adoption_of_who_guidance * (1 - probability_someone_else_would_provide_this_funding_if_givew) - 1",
+   "expected": -0.9622,
+   "format": "percent"
+  },
+  {
+   "id": "deaths_averted_by_funding_trial_after_adjustments",
+   "label": "Deaths averted by funding trial, after adjustments",
+   "section": "sheet1",
+   "formula": "total_deaths_averted_by_funding_trial_if_successful_and_wide * (1 + total_adjustment)",
+   "expected": 1395.1035
+  },
+  {
+   "id": "moral_weight_of_averting_a_death_due_to_malnutrition",
+   "label": "Moral weight of averting a death due to malnutrition",
+   "section": "sheet1",
+   "value": 118.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B24"
+   },
+   "explainer": "This value is taken from our 2024 investigation into Taimaka's malnutrition treatment program and is based on the proportion of children at different ages admitted for treatment in that program. Age group proportions could be slightly different in programs affected by this trial, which could have a minor impact on overall cost-effectiveness.\n(See https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit?gid=1362437801#gid=1362437801&range=B9)\n\nAlso see https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/moral-weights for an explanation of GiveWell's moral weights."
+  },
+  {
+   "id": "units_of_value_from_the_intervention",
+   "label": "Units of value from the intervention",
+   "section": "sheet1",
+   "formula": "deaths_averted_by_funding_trial_after_adjustments * moral_weight_of_averting_a_death_due_to_malnutrition",
+   "expected": 164622.213
+  },
+  {
+   "id": "cost_to_givewell",
+   "label": "Cost to GiveWell",
+   "section": "sheet1",
+   "value": 1155627.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
+    "cell": "Sheet1!B2"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_per_dollar_from_the_intervention",
+   "label": "Units of value per dollar from the intervention",
+   "section": "sheet1",
+   "formula": "units_of_value_from_the_intervention / cost_to_givewell",
+   "expected": 0.1424527231
+  }
+ ],
+ "output": {
+  "row": "units_of_value_per_dollar_from_the_intervention",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

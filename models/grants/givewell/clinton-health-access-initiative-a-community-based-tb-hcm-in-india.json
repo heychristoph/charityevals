@@ -1,0 +1,4510 @@
+{
+ "id": "clinton-health-access-initiative-a-community-based-tb-hcm-in-india",
+ "name": "CEA of a community-based TB HCM program in India",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "clinton-health-access-initiative",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"CEA of a community-based TB HCM program in India\", linked from 2 of its grant pages. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "GiveWell's CEA of a community-based TB HCM program in India (public)",
+  "url": "https://www.givewell.org/research/grants/clinton-health-access-initiative-chai-program-performance-management-grant-october-2024",
+  "sheet": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+  "published": "2024-06-04",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "GiveWell's CEA of a community-based TB HCM program in India (public)",
+   "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (clinton health access initiative chai program performance management grant october 2024)",
+   "url": "https://www.givewell.org/research/grants/clinton-health-access-initiative-chai-program-performance-management-grant-october-2024",
+   "type": "evaluation"
+  },
+  {
+   "title": "GiveWell grant page (clinton health access initiative tuberculosis household contact management june 2024)",
+   "url": "https://www.givewell.org/research/grants/clinton-health-access-initiative-tuberculosis-household-contact-management-june-2024",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "simple_cea",
+   "title": "Simple CEA"
+  },
+  {
+   "id": "full_cea",
+   "title": "Full CEA"
+  },
+  {
+   "id": "symptom_based_screening",
+   "title": "Symptom-based screening"
+  },
+  {
+   "id": "counterfactual_tpt_coverage",
+   "title": "Counterfactual TPT coverage"
+  },
+  {
+   "id": "cfr_estimation",
+   "title": "CFR estimation"
+  },
+  {
+   "id": "who_estimates",
+   "title": "WHO estimates"
+  },
+  {
+   "id": "moral_weights",
+   "title": "Moral weights"
+  },
+  {
+   "id": "unit_cost_inputs",
+   "title": "Unit Cost Inputs"
+  },
+  {
+   "id": "age_of_death_due_to_respiratory",
+   "title": "Age of death due to respiratory"
+  },
+  {
+   "id": "additional_benefits",
+   "title": "Additional benefits"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "average_number_of_5_age_group_per_hh_26_districts",
+   "label": "Average number of <5 age group per HH (26 districts)",
+   "section": "full_cea",
+   "value": 0.56,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C59"
+   },
+   "explainer": "Estimates from implementer, based on NHFS (2019-21) data"
+  },
+  {
+   "id": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept",
+   "label": "Individuals diagnosed with pulmonary TB (5+ years, drug susceptible only) in Y1 (26 districts)",
+   "section": "full_cea",
+   "value": 112341.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C50"
+   },
+   "explainer": "Estimates from implementer"
+  },
+  {
+   "id": "discount_factor_for_patients_coming_from_same_household_26_d",
+   "label": "Discount factor for patients coming from same household (26 districts)",
+   "section": "full_cea",
+   "value": 0.011,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C55"
+   },
+   "explainer": "Programmatic data from an earlier TPT program in India",
+   "format": "percent"
+  },
+  {
+   "id": "unique_household_in_y1_26_districts",
+   "label": "Unique household in Y1 (26 districts)",
+   "section": "full_cea",
+   "formula": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept * (1 - discount_factor_for_patients_coming_from_same_household_26_d)",
+   "expected": 111105.249
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y1_26",
+   "label": "<5 age group HHC population (Target for intervention) in Y1 (26 districts)",
+   "section": "full_cea",
+   "formula": "roundup(average_number_of_5_age_group_per_hh_26_districts * unique_household_in_y1_26_districts, 0)",
+   "expected": 62219.0
+  },
+  {
+   "id": "average_number_of_5_age_group_per_hh_47_districts",
+   "label": "Average number of <5 age group per HH (47 districts)",
+   "section": "full_cea",
+   "value": 0.49,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D59"
+   },
+   "explainer": "Estimates from implementer, based on NHFS (2019-21) data"
+  },
+  {
+   "id": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept_2",
+   "label": "Individuals diagnosed with pulmonary TB (5+ years, drug susceptible only) in Y1 (47 districts)",
+   "section": "full_cea",
+   "formula": "303538",
+   "expected": 303538.0
+  },
+  {
+   "id": "discount_factor_for_patients_coming_from_same_household_47_d",
+   "label": "Discount factor for patients coming from same household (47 districts)",
+   "section": "full_cea",
+   "value": 0.011,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D55"
+   },
+   "explainer": "Programmatic data from an earlier TPT program in India",
+   "format": "percent"
+  },
+  {
+   "id": "unique_household_in_y1_47_districts",
+   "label": "Unique household in Y1 (47 districts)",
+   "section": "full_cea",
+   "formula": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept_2 * (1 - discount_factor_for_patients_coming_from_same_household_47_d)",
+   "expected": 300199.082
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y1_47",
+   "label": "<5 age group HHC population (Target for intervention) in Y1 (47 districts)",
+   "section": "full_cea",
+   "formula": "roundup(average_number_of_5_age_group_per_hh_47_districts * unique_household_in_y1_47_districts, 0)",
+   "expected": 147098.0
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y1_agg",
+   "label": "<5 age group HHC population (Target for intervention) in Y1 (Aggregated across 73 districts)",
+   "section": "full_cea",
+   "formula": "r_5_age_group_hhc_population_target_for_intervention_in_y1_26 + r_5_age_group_hhc_population_target_for_intervention_in_y1_47",
+   "expected": 209317.0
+  },
+  {
+   "id": "yoy_change_in_number_of_tb_cases_diagnosed_and_notified_26_d",
+   "label": "YoY change in number of TB cases diagnosed and notified (26 districts)",
+   "section": "full_cea",
+   "value": 0.01,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C51"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "index_patients_in_y2_26_districts",
+   "label": "Index patients in Y2 (26 districts)",
+   "section": "full_cea",
+   "formula": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept * (1 + yoy_change_in_number_of_tb_cases_diagnosed_and_notified_26_d)",
+   "expected": 113464.41
+  },
+  {
+   "id": "unique_household_in_y2_26_districts",
+   "label": "Unique household in Y2 (26 districts)",
+   "section": "full_cea",
+   "formula": "index_patients_in_y2_26_districts * (1 - discount_factor_for_patients_coming_from_same_household_26_d)",
+   "expected": 112216.3015
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y2_26",
+   "label": "<5 age group HHC population (Target for intervention) in Y2 (26 districts)",
+   "section": "full_cea",
+   "formula": "roundup(average_number_of_5_age_group_per_hh_26_districts * unique_household_in_y2_26_districts, 0)",
+   "expected": 62842.0
+  },
+  {
+   "id": "yoy_change_in_number_of_tb_cases_diagnosed_and_notified_47_d",
+   "label": "YoY change in number of TB cases diagnosed and notified (47 districts)",
+   "section": "full_cea",
+   "value": 0.01,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D51"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "index_patients_in_y2_47_districts",
+   "label": "Index patients in Y2 (47 districts)",
+   "section": "full_cea",
+   "formula": "individuals_diagnosed_with_pulmonary_tb_5_years_drug_suscept_2 * (1 + yoy_change_in_number_of_tb_cases_diagnosed_and_notified_47_d)",
+   "expected": 306573.38
+  },
+  {
+   "id": "unique_household_in_y2_47_districts",
+   "label": "Unique household in Y2 (47 districts)",
+   "section": "full_cea",
+   "formula": "index_patients_in_y2_47_districts * (1 - discount_factor_for_patients_coming_from_same_household_47_d)",
+   "expected": 303201.0728
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y2_47",
+   "label": "<5 age group HHC population (Target for intervention) in Y2 (47 districts)",
+   "section": "full_cea",
+   "formula": "roundup(average_number_of_5_age_group_per_hh_47_districts * unique_household_in_y2_47_districts, 0)",
+   "expected": 148569.0
+  },
+  {
+   "id": "r_5_age_group_hhc_population_target_for_intervention_in_y2_agg",
+   "label": "<5 age group HHC population (Target for intervention) in Y2 (Aggregated across 73 districts)",
+   "section": "full_cea",
+   "formula": "r_5_age_group_hhc_population_target_for_intervention_in_y2_26 + r_5_age_group_hhc_population_target_for_intervention_in_y2_47",
+   "expected": 211411.0
+  },
+  {
+   "id": "number_of_under_5_household_contacts_in_target_population_ov",
+   "label": "Number of under-5 household contacts in target population over 2-year implementation period",
+   "section": "simple_cea",
+   "formula": "sum(r_5_age_group_hhc_population_target_for_intervention_in_y1_agg, r_5_age_group_hhc_population_target_for_intervention_in_y2_agg)",
+   "expected": 420728.0
+  },
+  {
+   "id": "households_reached_in_y1_2",
+   "label": "Households reached in Y1",
+   "section": "full_cea",
+   "value": 0.55,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C63"
+   },
+   "explainer": "Estimate from implementer, with GiveWell adjustment",
+   "format": "percent"
+  },
+  {
+   "id": "households_reached_in_y1_3",
+   "label": "Households reached in Y1",
+   "section": "full_cea",
+   "value": 0.55,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D63"
+   },
+   "explainer": "Estimate from implementer, with GiveWell adjustment",
+   "format": "percent"
+  },
+  {
+   "id": "households_reached_in_y1",
+   "label": "Households reached in Y1",
+   "section": "full_cea",
+   "formula": "(households_reached_in_y1_2 * r_5_age_group_hhc_population_target_for_intervention_in_y1_26 + households_reached_in_y1_3 * r_5_age_group_hhc_population_target_for_intervention_in_y1_47) / sum(r_5_age_group_hhc_population_target_for_intervention_in_y1_26, r_5_age_group_hhc_population_target_for_intervention_in_y1_47)",
+   "expected": 0.55,
+   "format": "percent"
+  },
+  {
+   "id": "households_reached_in_y2_2",
+   "label": "Households reached in Y2",
+   "section": "full_cea",
+   "value": 0.65,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C64"
+   },
+   "explainer": "Estimate from implementer, with GiveWell adjustment",
+   "format": "percent"
+  },
+  {
+   "id": "households_reached_in_y2_3",
+   "label": "Households reached in Y2",
+   "section": "full_cea",
+   "value": 0.65,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D64"
+   },
+   "explainer": "Estimate from implementer, with GiveWell adjustment",
+   "format": "percent"
+  },
+  {
+   "id": "households_reached_in_y2",
+   "label": "Households reached in Y2",
+   "section": "full_cea",
+   "formula": "(households_reached_in_y2_2 * r_5_age_group_hhc_population_target_for_intervention_in_y2_26 + households_reached_in_y2_3 * r_5_age_group_hhc_population_target_for_intervention_in_y2_47) / sum(r_5_age_group_hhc_population_target_for_intervention_in_y2_26, r_5_age_group_hhc_population_target_for_intervention_in_y2_47)",
+   "expected": 0.65,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_contacts_reached",
+   "label": "Share of contacts reached",
+   "section": "simple_cea",
+   "formula": "sum(households_reached_in_y1 * r_5_age_group_hhc_population_target_for_intervention_in_y1_agg, households_reached_in_y2 * r_5_age_group_hhc_population_target_for_intervention_in_y2_agg) / sum(r_5_age_group_hhc_population_target_for_intervention_in_y1_agg, r_5_age_group_hhc_population_target_for_intervention_in_y2_agg)",
+   "expected": 0.6002488544,
+   "format": "percent"
+  },
+  {
+   "id": "estimated_tpt_participation_rate_percentage_who_will_initiat_2",
+   "label": "Estimated TPT participation rate (percentage who will initiate treatment) among those offered TPT",
+   "section": "full_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C108"
+   },
+   "explainer": "Guess based on previous studies of community-based HCM programs and an implementer's estimates based off a previous HCM program in India",
+   "format": "percent"
+  },
+  {
+   "id": "r_5_reached_in_y1",
+   "label": "<5 reached in Y1",
+   "section": "full_cea",
+   "formula": "roundup(r_5_age_group_hhc_population_target_for_intervention_in_y1_26 * households_reached_in_y1_2, 0)",
+   "expected": 34221.0
+  },
+  {
+   "id": "r_5_reached_in_y2",
+   "label": "<5 reached in Y2",
+   "section": "full_cea",
+   "formula": "roundup(r_5_age_group_hhc_population_target_for_intervention_in_y2_26 * households_reached_in_y2_2, 0)",
+   "expected": 40848.0
+  },
+  {
+   "id": "total_5_reached",
+   "label": "Total <5 reached",
+   "section": "full_cea",
+   "formula": "sum(r_5_reached_in_y1, r_5_reached_in_y2)",
+   "expected": 75069.0
+  },
+  {
+   "id": "of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms",
+   "label": "% of <5 HHCs screened positive for TB disease based on symptoms at health worker's household visit",
+   "section": "full_cea",
+   "value": 0.051,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C86"
+   },
+   "explainer": "Programmatic data from an earlier TPT program in India",
+   "format": "percent"
+  },
+  {
+   "id": "number_screened_positive",
+   "label": "Number screened positive",
+   "section": "full_cea",
+   "formula": "total_5_reached * of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms",
+   "expected": 3828.519
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_at_point_of_screening_2",
+   "label": "% of <5 HHCs with (non-active) TB infection at point of screening",
+   "section": "full_cea",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C78"
+   },
+   "explainer": "Based off Fox et al 2013 and Martinez et al 2020 meta-analyses",
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_at_point_of_screening_3",
+   "label": "% of <5 HHCs with (non-active) TB infection at point of screening",
+   "section": "full_cea",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D78"
+   },
+   "explainer": "Based off Fox et al 2013 and Martinez et al 2020 meta-analyses",
+   "format": "percent"
+  },
+  {
+   "id": "r_5_reached_in_y1_2",
+   "label": "<5 reached in Y1",
+   "section": "full_cea",
+   "formula": "roundup(r_5_age_group_hhc_population_target_for_intervention_in_y1_47 * households_reached_in_y1_3, 0)",
+   "expected": 80904.0
+  },
+  {
+   "id": "r_5_reached_in_y2_2",
+   "label": "<5 reached in Y2",
+   "section": "full_cea",
+   "formula": "roundup(r_5_age_group_hhc_population_target_for_intervention_in_y2_47 * households_reached_in_y2_3, 0)",
+   "expected": 96570.0
+  },
+  {
+   "id": "total_5_reached_2",
+   "label": "Total <5 reached",
+   "section": "full_cea",
+   "formula": "sum(r_5_reached_in_y1_2, r_5_reached_in_y2_2)",
+   "expected": 177474.0
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_at_point_of_screening",
+   "label": "% of <5 HHCs with (non-active) TB infection at point of screening",
+   "section": "full_cea",
+   "formula": "(of_5_hhcs_with_non_active_tb_infection_at_point_of_screening_2 * total_5_reached + of_5_hhcs_with_non_active_tb_infection_at_point_of_screening_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "with_non_active_tb_infection_at_time_of_screening_value",
+   "label": "% with (non-active) TB infection at time of screening (Value)",
+   "section": "symptom_based_screening",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_at_point_of_screening",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "guess_see_note_has_tb_infection",
+   "label": "Guess - see note (Has TB infection)",
+   "section": "symptom_based_screening",
+   "formula": "with_non_active_tb_infection_at_time_of_screening_value",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_at_point_of_screening_2",
+   "label": "% of <5 HHCs with TB disease at point of screening",
+   "section": "full_cea",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C75"
+   },
+   "explainer": "Based off Fox et al 2013 and Martinez et al 2020 meta-analyses",
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_at_point_of_screening_3",
+   "label": "% of <5 HHCs with TB disease at point of screening",
+   "section": "full_cea",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D75"
+   },
+   "explainer": "Based off Fox et al 2013 and Martinez et al 2020 meta-analyses",
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_at_point_of_screening",
+   "label": "% of <5 HHCs with TB disease at point of screening",
+   "section": "full_cea",
+   "formula": "(of_5_hhcs_with_tb_disease_at_point_of_screening_2 * total_5_reached + of_5_hhcs_with_tb_disease_at_point_of_screening_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.02,
+   "format": "percent"
+  },
+  {
+   "id": "with_tb_disease_at_time_of_screening",
+   "label": "% with TB disease at time of screening",
+   "section": "symptom_based_screening",
+   "formula": "of_5_hhcs_with_tb_disease_at_point_of_screening",
+   "expected": 0.02,
+   "format": "percent"
+  },
+  {
+   "id": "guess_see_note_has_tb_disease",
+   "label": "Guess - see note (Has TB disease)",
+   "section": "symptom_based_screening",
+   "formula": "with_tb_disease_at_time_of_screening",
+   "expected": 0.02,
+   "format": "percent"
+  },
+  {
+   "id": "guess_see_note_doesn_t_have_tb_disease",
+   "label": "Guess - see note (Doesn't have TB disease)",
+   "section": "symptom_based_screening",
+   "formula": "1 - guess_see_note_has_tb_disease",
+   "expected": 0.98,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_3",
+   "label": "% of <5 HHCs screened positive for TB disease based on symptoms at health worker's household visit",
+   "section": "full_cea",
+   "value": 0.051,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D86"
+   },
+   "explainer": "Programmatic data from an earlier TPT program in India",
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_2",
+   "label": "% of <5 HHCs screened positive for TB disease based on symptoms at health worker's household visit",
+   "section": "full_cea",
+   "formula": "(of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms * total_5_reached + of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.051,
+   "format": "percent"
+  },
+  {
+   "id": "screening_positive",
+   "label": "% screening positive",
+   "section": "symptom_based_screening",
+   "formula": "of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_2",
+   "expected": 0.051,
+   "format": "percent"
+  },
+  {
+   "id": "screen_positive",
+   "label": "Screen positive",
+   "section": "symptom_based_screening",
+   "formula": "screening_positive",
+   "expected": 0.051,
+   "format": "percent"
+  },
+  {
+   "id": "screen_negative",
+   "label": "Screen negative",
+   "section": "symptom_based_screening",
+   "formula": "1 - screen_positive",
+   "expected": 0.949,
+   "format": "percent"
+  },
+  {
+   "id": "sensitivity_for_tb_disease_value",
+   "label": "Sensitivity (for TB disease) (Value)",
+   "section": "symptom_based_screening",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Symptom-based screening!B9"
+   },
+   "explainer": "Guess - see note",
+   "format": "percent"
+  },
+  {
+   "id": "screen_positive_has_tb_disease",
+   "label": "Screen positive (Has TB disease)",
+   "section": "symptom_based_screening",
+   "formula": "guess_see_note_has_tb_disease * sensitivity_for_tb_disease_value",
+   "expected": 0.016,
+   "format": "percent"
+  },
+  {
+   "id": "screen_negative_has_tb_disease",
+   "label": "Screen negative (Has TB disease)",
+   "section": "symptom_based_screening",
+   "formula": "guess_see_note_has_tb_disease - screen_positive_has_tb_disease",
+   "expected": 0.004,
+   "format": "percent"
+  },
+  {
+   "id": "screen_negative_doesn_t_have_tb_disease",
+   "label": "Screen negative (Doesn't have TB disease)",
+   "section": "symptom_based_screening",
+   "formula": "screen_negative - screen_negative_has_tb_disease",
+   "expected": 0.945,
+   "format": "percent"
+  },
+  {
+   "id": "screen_negative_has_tb_infection",
+   "label": "Screen negative (Has TB infection)",
+   "section": "symptom_based_screening",
+   "formula": "guess_see_note_has_tb_infection / guess_see_note_doesn_t_have_tb_disease * screen_negative_doesn_t_have_tb_disease",
+   "expected": 0.2892857143,
+   "format": "percent"
+  },
+  {
+   "id": "screen_positive_has_tb_infection",
+   "label": "Screen positive (Has TB infection)",
+   "section": "symptom_based_screening",
+   "formula": "guess_see_note_has_tb_infection - screen_negative_has_tb_infection",
+   "expected": 0.01071428571,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_among_those_screening",
+   "label": "% of <5 HHCs with (non-active) TB infection, among those screening positive",
+   "section": "symptom_based_screening",
+   "formula": "screen_positive_has_tb_infection / screen_positive",
+   "expected": 0.2100840336,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_conditional_on_positi",
+   "label": "% of <5 HHCs with (non-active) TB infection, conditional on positive symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_among_those_screening",
+   "expected": 0.2100840336,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_positive_number_with_non_active_tb_infect",
+   "label": "Of those screening positive, number with (non-active) TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_positive * of_5_hhcs_with_non_active_tb_infection_conditional_on_positi",
+   "expected": 804.3107143
+  },
+  {
+   "id": "estimated_tpt_participation_rate_percentage_who_will_initiat_3",
+   "label": "Estimated TPT participation rate (percentage who will initiate treatment) among those offered TPT",
+   "section": "full_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D108"
+   },
+   "explainer": "Guess based on previous studies of community-based HCM programs and an implementer's estimates based off a previous HCM program in India",
+   "format": "percent"
+  },
+  {
+   "id": "number_screened_positive_2",
+   "label": "Number screened positive",
+   "section": "full_cea",
+   "formula": "total_5_reached_2 * of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_3",
+   "expected": 9051.174
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_conditional_on_positi_2",
+   "label": "% of <5 HHCs with (non-active) TB infection, conditional on positive symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_among_those_screening",
+   "expected": 0.2100840336,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_positive_number_with_non_active_tb_infect_2",
+   "label": "Of those screening positive, number with (non-active) TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_positive_2 * of_5_hhcs_with_non_active_tb_infection_conditional_on_positi_2",
+   "expected": 1901.507143
+  },
+  {
+   "id": "estimated_tpt_participation_rate_percentage_who_will_initiat",
+   "label": "Estimated TPT participation rate (percentage who will initiate treatment) among those offered TPT",
+   "section": "full_cea",
+   "formula": "(estimated_tpt_participation_rate_percentage_who_will_initiat_2 * of_those_screening_positive_number_with_non_active_tb_infect + estimated_tpt_participation_rate_percentage_who_will_initiat_3 * of_those_screening_positive_number_with_non_active_tb_infect_2) / sum(of_those_screening_positive_number_with_non_active_tb_infect, of_those_screening_positive_number_with_non_active_tb_infect_2)",
+   "expected": 0.8,
+   "format": "percent"
+  },
+  {
+   "id": "tpt_initiations_by_under_5_household_contacts_hhcs_of_bacter",
+   "label": "TPT initiations by under-5 household contacts (HHCs) of bacteriologically confirmed PTB index patients in districts not supported by a Global Fund-supported pro",
+   "section": "counterfactual_tpt_coverage",
+   "value": 4817.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B2"
+   },
+   "explainer": "Estimates provided by experts with extensive implementation experience"
+  },
+  {
+   "id": "number_of_eligible_under_5_hhcs_of_bacteriologically_and_cli",
+   "label": "Number of eligible under-5 HHCs of bacteriologically and clinically confirmed PTB index cases in districts not supported by a Global Fund-supported project whic",
+   "section": "counterfactual_tpt_coverage",
+   "value": 62063.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B3"
+   },
+   "explainer": "Estimates provided by experts with extensive implementation experience \"Eligible\" children are HHCs under 5 that screen negative for TB disease based on symptoms during the health worker's household visit, or who screen positive for TB disease and then test negative after being referred to a facility."
+  },
+  {
+   "id": "tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir",
+   "label": "TPT initiations for under-5 HHCs of bacteriologically confirmed PTB index patients as % of eligible under-5 HHCs of all PTB index cases in districts not support",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "tpt_initiations_by_under_5_household_contacts_hhcs_of_bacter / number_of_eligible_under_5_hhcs_of_bacteriologically_and_cli",
+   "expected": 0.07761468186,
+   "format": "percent"
+  },
+  {
+   "id": "tpt_initiations_by_hhcs_of_bacteriologically_confirmed_ptb_i",
+   "label": "TPT initiations by HHCs of bacteriologically confirmed PTB index patients",
+   "section": "counterfactual_tpt_coverage",
+   "value": 812311.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B5"
+   },
+   "explainer": "India TB Report 2023, Figure 5.2, p.53 We use national estimates in the absence of state-specific estimates"
+  },
+  {
+   "id": "tpt_initiations_by_hhcs_of_clinically_confirmed_ptb_index_pa",
+   "label": "TPT initiations by HHCs of clinically confirmed PTB index patients",
+   "section": "counterfactual_tpt_coverage",
+   "value": 369085.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B6"
+   },
+   "explainer": "India TB Report 2023, Figure 5.2, p.53 We use national estimates in the absence of state-specific estimates"
+  },
+  {
+   "id": "adjustment_to_include_tpt_initiations_for_under_5_hhcs_of_cl",
+   "label": "Adjustment to include TPT initiations for under-5 HHCs of clinically diagnosed PTB index patients",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "sum(tpt_initiations_by_hhcs_of_bacteriologically_confirmed_ptb_i, tpt_initiations_by_hhcs_of_clinically_confirmed_ptb_index_pa) / tpt_initiations_by_hhcs_of_bacteriologically_confirmed_ptb_i - 1",
+   "expected": 0.4543641536,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_targeted_districts_that_were_supported_by_a_gl",
+   "label": "Proportion of targeted districts that were supported by a Global Fund-supported project which we believe temporarily boosted TPT initiation rates (Bihar)",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "7 / 26",
+   "expected": 0.2692307692,
+   "format": "percent"
+  },
+  {
+   "id": "upward_adjustment_to_coverage_in_districts_that_received_sup",
+   "label": "Upward adjustment to coverage in districts that received support from the Global-Fund-supported project, relative to districts that did not receive support from",
+   "section": "counterfactual_tpt_coverage",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B9"
+   },
+   "explainer": "Assumption Based on conversations with implementer, our best guess is that following the conclusion of the Global Fund-supported project, TPT coverage in districts supported by this project will revert mostly but not completely to the level in districts that were not supported by this project. We assume TPT coverage will be 20% higher in districts that received support from this project compared to those that did not.",
+   "format": "percent"
+  },
+  {
+   "id": "r_2022_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt",
+   "label": "2022 TPT initiation rate for under-5 HHCs of all notified PTB index patients, with higher coverage in districts that received support from the Global Fund-suppo",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir * (1 + adjustment_to_include_tpt_initiations_for_under_5_hhcs_of_cl) * (1 - proportion_of_targeted_districts_that_were_supported_by_a_gl) + tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir * (1 + adjustment_to_include_tpt_initiations_for_under_5_hhcs_of_cl) * proportion_of_targeted_districts_that_were_supported_by_a_gl * (1 + upward_adjustment_to_coverage_in_districts_that_received_sup)",
+   "expected": 0.1189581655,
+   "format": "percent"
+  },
+  {
+   "id": "tpt_initiation_rate_annual_growth_rate_bihar",
+   "label": "TPT initiation rate annual growth rate (Bihar)",
+   "section": "counterfactual_tpt_coverage",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!B11"
+   },
+   "explainer": "Assumption Implementer staff informed us that their best guess, given knowledge of timing of current programming and TPT coverage data quality, is a growth rate of 5-10% per year. We've adjusted these estimates upwards to put some weight on the possibility that the growth in TPT coverage reported in the 2023 India TB Report (p. 53, Figure 5.2) continues (note that Figure 5.2 includes all HHCs, not just under-5 HHCs, and the rapid increase may reflect expansion of TPT to the over-5 HHC group). We assume a faster growth rate for Bihar than Uttar Pradesh because of Bihar's lower starting point and potential for catch-up.",
+   "format": "percent"
+  },
+  {
+   "id": "r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt",
+   "label": "2025 TPT initiation rate for under-5 HHCs of all notified PTB index patients (Bihar)",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "r_2022_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt * (1 + tpt_initiation_rate_annual_growth_rate_bihar) ^ 3",
+   "expected": 0.2613510897,
+   "format": "percent"
+  },
+  {
+   "id": "r_2026_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt",
+   "label": "2026 TPT initiation rate for under-5 HHCs of all notified PTB index patients (Bihar)",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt * (1 + tpt_initiation_rate_annual_growth_rate_bihar)",
+   "expected": 0.3397564166,
+   "format": "percent"
+  },
+  {
+   "id": "counterfactual_in_the_absence_of_this_program_tpt_coverage_r_2",
+   "label": "Counterfactual (in the absence of this program) TPT coverage rate, as a percent of those eligible for TPT",
+   "section": "full_cea",
+   "formula": "avg(r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt, r_2026_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt)",
+   "expected": 0.3005537531,
+   "format": "percent"
+  },
+  {
+   "id": "number_screened_negative",
+   "label": "Number screened negative",
+   "section": "full_cea",
+   "formula": "total_5_reached * (1 - of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms)",
+   "expected": 71240.481
+  },
+  {
+   "id": "tpt_initiations_by_under_5_household_contacts_hhcs_of_bacter_2",
+   "label": "TPT initiations by under-5 household contacts (HHCs) of bacteriologically confirmed PTB index patients in districts not supported by a Global Fund-supported pro",
+   "section": "counterfactual_tpt_coverage",
+   "value": 36389.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!C2"
+   },
+   "explainer": "Estimates provided by experts with extensive implementation experience"
+  },
+  {
+   "id": "number_of_eligible_under_5_hhcs_of_bacteriologically_and_cli_2",
+   "label": "Number of eligible under-5 HHCs of bacteriologically and clinically confirmed PTB index cases in districts not supported by a Global Fund-supported project whic",
+   "section": "counterfactual_tpt_coverage",
+   "value": 159022.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!C3"
+   },
+   "explainer": "Estimates provided by experts with extensive implementation experience \"Eligible\" children are HHCs under 5 that screen negative for TB disease based on symptoms during the health worker's household visit, or who screen positive for TB disease and then test negative after being referred to a facility."
+  },
+  {
+   "id": "tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir_2",
+   "label": "TPT initiations for under-5 HHCs of bacteriologically confirmed PTB index patients as % of eligible under-5 HHCs of all PTB index cases in districts not support",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "tpt_initiations_by_under_5_household_contacts_hhcs_of_bacter_2 / number_of_eligible_under_5_hhcs_of_bacteriologically_and_cli_2",
+   "expected": 0.2288299732,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_targeted_districts_that_were_supported_by_a_gl_2",
+   "label": "Proportion of targeted districts that were supported by a Global Fund-supported project which we believe temporarily boosted TPT initiation rates (Uttar Pradesh",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "15 / 47",
+   "expected": 0.3191489362,
+   "format": "percent"
+  },
+  {
+   "id": "upward_adjustment_to_coverage_in_districts_that_received_sup_2",
+   "label": "Upward adjustment to coverage in districts that received support from the Global-Fund-supported project, relative to districts that did not receive support from",
+   "section": "counterfactual_tpt_coverage",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!C9"
+   },
+   "explainer": "Assumption Based on conversations with implementer, our best guess is that following the conclusion of the Global Fund-supported project, TPT coverage in districts supported by this project will revert mostly but not completely to the level in districts that were not supported by this project. We assume TPT coverage will be 20% higher in districts that received support from this project compared to those that did not.",
+   "format": "percent"
+  },
+  {
+   "id": "r_2022_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2",
+   "label": "2022 TPT initiation rate for under-5 HHCs of all notified PTB index patients, with higher coverage in districts that received support from the Global Fund-suppo",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir_2 * (1 + adjustment_to_include_tpt_initiations_for_under_5_hhcs_of_cl) * (1 - proportion_of_targeted_districts_that_were_supported_by_a_gl_2) + tpt_initiations_for_under_5_hhcs_of_bacteriologically_confir_2 * (1 + adjustment_to_include_tpt_initiations_for_under_5_hhcs_of_cl) * proportion_of_targeted_districts_that_were_supported_by_a_gl_2 * (1 + upward_adjustment_to_coverage_in_districts_that_received_sup_2)",
+   "expected": 0.3540447982,
+   "format": "percent"
+  },
+  {
+   "id": "tpt_initiation_rate_annual_growth_rate_uttar_pradesh",
+   "label": "TPT initiation rate annual growth rate (Uttar Pradesh)",
+   "section": "counterfactual_tpt_coverage",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Counterfactual TPT coverage!C11"
+   },
+   "explainer": "Assumption Implementer staff informed us that their best guess, given knowledge of timing of current programming and TPT coverage data quality, is a growth rate of 5-10% per year. We've adjusted these estimates upwards to put some weight on the possibility that the growth in TPT coverage reported in the 2023 India TB Report (p. 53, Figure 5.2) continues (note that Figure 5.2 includes all HHCs, not just under-5 HHCs, and the rapid increase may reflect expansion of TPT to the over-5 HHC group). We assume a faster growth rate for Bihar than Uttar Pradesh because of Bihar's lower starting point and potential for catch-up.",
+   "format": "percent"
+  },
+  {
+   "id": "r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2",
+   "label": "2025 TPT initiation rate for under-5 HHCs of all notified PTB index patients (Uttar Pradesh)",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "r_2022_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2 * (1 + tpt_initiation_rate_annual_growth_rate_uttar_pradesh) ^ 3",
+   "expected": 0.4712336264,
+   "format": "percent"
+  },
+  {
+   "id": "r_2026_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2",
+   "label": "2026 TPT initiation rate for under-5 HHCs of all notified PTB index patients (Uttar Pradesh)",
+   "section": "counterfactual_tpt_coverage",
+   "formula": "r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2 * (1 + tpt_initiation_rate_annual_growth_rate_uttar_pradesh)",
+   "expected": 0.5183569891,
+   "format": "percent"
+  },
+  {
+   "id": "counterfactual_in_the_absence_of_this_program_tpt_coverage_r_3",
+   "label": "Counterfactual (in the absence of this program) TPT coverage rate, as a percent of those eligible for TPT",
+   "section": "full_cea",
+   "formula": "avg(r_2025_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2, r_2026_tpt_initiation_rate_for_under_5_hhcs_of_all_notified_pt_2)",
+   "expected": 0.4947953077,
+   "format": "percent"
+  },
+  {
+   "id": "number_screened_negative_2",
+   "label": "Number screened negative",
+   "section": "full_cea",
+   "formula": "total_5_reached_2 * (1 - of_5_hhcs_screened_positive_for_tb_disease_based_on_symptoms_3)",
+   "expected": 168422.826
+  },
+  {
+   "id": "counterfactual_in_the_absence_of_this_program_tpt_coverage_r",
+   "label": "Counterfactual (in the absence of this program) TPT coverage rate, as a percent of those eligible for TPT",
+   "section": "full_cea",
+   "formula": "(counterfactual_in_the_absence_of_this_program_tpt_coverage_r_2 * number_screened_negative + counterfactual_in_the_absence_of_this_program_tpt_coverage_r_3 * number_screened_negative_2) / sum(number_screened_negative, number_screened_negative_2)",
+   "expected": 0.4370565493,
+   "format": "percent"
+  },
+  {
+   "id": "among_under_5_contacts_reached_increase_in_tpt_initiation_ra",
+   "label": "Among under-5 contacts reached, increase in TPT initiation rate (percentage points)",
+   "section": "simple_cea",
+   "formula": "estimated_tpt_participation_rate_percentage_who_will_initiat - counterfactual_in_the_absence_of_this_program_tpt_coverage_r",
+   "expected": 0.3629434507,
+   "format": "percent"
+  },
+  {
+   "id": "population_level_increase_in_tpt_initiation_for_under_5_chil",
+   "label": "Population-level increase in TPT initiation for under-5 child contacts (percentage points)",
+   "section": "simple_cea",
+   "formula": "share_of_contacts_reached * among_under_5_contacts_reached_increase_in_tpt_initiation_ra",
+   "expected": 0.2178563905,
+   "format": "percent"
+  },
+  {
+   "id": "prevalence_of_tb_infection",
+   "label": "Prevalence of TB infection",
+   "section": "simple_cea",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_at_point_of_screening",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "risk_of_progression_to_tb_disease_among_5s_with_tb_infection_2",
+   "label": "Risk of progression to TB disease among <5s with TB infection",
+   "section": "full_cea",
+   "value": 0.19,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C82"
+   },
+   "explainer": "Martinez et al 2020 meta-analysis",
+   "format": "percent"
+  },
+  {
+   "id": "risk_of_progression_to_tb_disease_among_5s_with_tb_infection_3",
+   "label": "Risk of progression to TB disease among <5s with TB infection",
+   "section": "full_cea",
+   "value": 0.19,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D82"
+   },
+   "explainer": "Martinez et al 2020 meta-analysis",
+   "format": "percent"
+  },
+  {
+   "id": "risk_of_progression_to_tb_disease_among_5s_with_tb_infection",
+   "label": "Risk of progression to TB disease among <5s with TB infection",
+   "section": "full_cea",
+   "formula": "(risk_of_progression_to_tb_disease_among_5s_with_tb_infection_2 * total_5_reached + risk_of_progression_to_tb_disease_among_5s_with_tb_infection_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.19,
+   "format": "percent"
+  },
+  {
+   "id": "risk_of_progression_from_infection_to_disease_in_absence_of",
+   "label": "Risk of progression from infection to disease in absence of TPT",
+   "section": "simple_cea",
+   "formula": "risk_of_progression_to_tb_disease_among_5s_with_tb_infection",
+   "expected": 0.19,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tpt_in_preventing_tb_disease_2",
+   "label": "Efficacy of TPT in preventing TB disease",
+   "section": "full_cea",
+   "formula": "59 / 100 * 1.1",
+   "expected": 0.649,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tpt_in_preventing_tb_disease_3",
+   "label": "Efficacy of TPT in preventing TB disease",
+   "section": "full_cea",
+   "formula": "59 / 100 * 1.1",
+   "expected": 0.649,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tpt_in_preventing_tb_disease",
+   "label": "Efficacy of TPT in preventing TB disease",
+   "section": "full_cea",
+   "formula": "(efficacy_of_tpt_in_preventing_tb_disease_2 * total_5_reached + efficacy_of_tpt_in_preventing_tb_disease_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.649,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_adherence_to_tpt_compared_to_study_2",
+   "label": "Adjustment factor for adherence to TPT compared to study",
+   "section": "full_cea",
+   "value": 1.06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C167"
+   },
+   "explainer": "Based off studies comparing completion rates for short-course TPT regimens vs longer regimens which use only isoniazid",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_adherence_to_tpt_compared_to_study_3",
+   "label": "Adjustment factor for adherence to TPT compared to study",
+   "section": "full_cea",
+   "value": 1.06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D167"
+   },
+   "explainer": "Based off studies comparing completion rates for short-course TPT regimens vs longer regimens which use only isoniazid",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_adherence_to_tpt_compared_to_study",
+   "label": "Adjustment factor for adherence to TPT compared to study",
+   "section": "full_cea",
+   "formula": "(adjustment_factor_for_adherence_to_tpt_compared_to_study_2 * total_5_reached + adjustment_factor_for_adherence_to_tpt_compared_to_study_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 1.06,
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_2",
+   "label": "Internal validity adjustment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C168"
+   },
+   "explainer": "See cell note",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_3",
+   "label": "Internal validity adjustment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D168"
+   },
+   "explainer": "See cell note",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
+   "section": "full_cea",
+   "formula": "(internal_validity_adjustment_2 * total_5_reached + internal_validity_adjustment_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.9,
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_2",
+   "label": "External validity adjustment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C169"
+   },
+   "explainer": "See cell note",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_3",
+   "label": "External validity adjustment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D169"
+   },
+   "explainer": "See cell note",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
+   "section": "full_cea",
+   "formula": "(external_validity_adjustment_2 * total_5_reached + external_validity_adjustment_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.9,
+   "format": "percent"
+  },
+  {
+   "id": "effectiveness_of_tpt_in_preventing_progression_from_infectio",
+   "label": "Effectiveness of TPT in preventing progression from infection to disease",
+   "section": "simple_cea",
+   "formula": "efficacy_of_tpt_in_preventing_tb_disease * adjustment_factor_for_adherence_to_tpt_compared_to_study * internal_validity_adjustment * external_validity_adjustment",
+   "expected": 0.5572314,
+   "format": "percent"
+  },
+  {
+   "id": "cases_of_tb_disease_averted",
+   "label": "Cases of TB disease averted",
+   "section": "simple_cea",
+   "formula": "number_of_under_5_household_contacts_in_target_population_ov * population_level_increase_in_tpt_initiation_for_under_5_chil * prevalence_of_tb_infection * risk_of_progression_from_infection_to_disease_in_absence_of * effectiveness_of_tpt_in_preventing_progression_from_infectio",
+   "expected": 2911.267796
+  },
+  {
+   "id": "age_0_1",
+   "label": "Age 0-1",
+   "section": "cfr_estimation",
+   "formula": "15 / (15 + 35)",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "age_1_2",
+   "label": "Age 1-2",
+   "section": "cfr_estimation",
+   "formula": "3.5 / (3.5 + 21.5)",
+   "expected": 0.14,
+   "format": "percent"
+  },
+  {
+   "id": "age_2_5",
+   "label": "Age 2-5",
+   "section": "cfr_estimation",
+   "formula": "0.5 / (0.5 + 5)",
+   "expected": 0.09090909091,
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_proportion_of_cases_tbm_and_mtb",
+   "label": "Pre-BCG proportion of cases (TBM and MTB)",
+   "section": "cfr_estimation",
+   "formula": "sum(age_0_1 + age_1_2 + age_2_5 * 3) / 5",
+   "expected": 0.1425454545,
+   "format": "percent"
+  },
+  {
+   "id": "tb_risk_reduction_conferred_by_bcg_tbm_and_mtb",
+   "label": "TB risk reduction conferred by BCG (TBM and MTB)",
+   "section": "cfr_estimation",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "CFR estimation!B6"
+   },
+   "explainer": "We have not considered the internal and external validity of these meta-analytic estimates.",
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied",
+   "label": "Pre-BCG proportion of cases with BCG risk reduction applied (TBM and MTB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_proportion_of_cases_tbm_and_mtb * (1 - tb_risk_reduction_conferred_by_bcg_tbm_and_mtb)",
+   "expected": 0.02138181818,
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_proportion_of_cases_other_tb",
+   "label": "Pre-BCG proportion of cases (Other TB)",
+   "section": "cfr_estimation",
+   "formula": "1 - pre_bcg_proportion_of_cases_tbm_and_mtb",
+   "expected": 0.8574545455,
+   "format": "percent"
+  },
+  {
+   "id": "tb_risk_reduction_conferred_by_bcg_other_tb",
+   "label": "TB risk reduction conferred by BCG (Other TB)",
+   "section": "cfr_estimation",
+   "value": 0.54,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "CFR estimation!C6"
+   },
+   "explainer": "We have not considered the internal and external validity of these meta-analytic estimates.",
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied_2",
+   "label": "Pre-BCG proportion of cases with BCG risk reduction applied (Other TB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_proportion_of_cases_other_tb * (1 - tb_risk_reduction_conferred_by_bcg_other_tb)",
+   "expected": 0.3944290909,
+   "format": "percent"
+  },
+  {
+   "id": "post_bcg_proportion_of_cases_tbm_and_mtb",
+   "label": "Post-BCG proportion of cases (TBM and MTB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied / sum(pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied, pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied_2)",
+   "expected": 0.05142197502,
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_untreated_cfr_tbm_and_mtb",
+   "label": "Pre-BCG untreated CFR (TBM and MTB)",
+   "section": "cfr_estimation",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "CFR estimation!B5"
+   },
+   "explainer": "We did not conduct a systematic search for the CFR for TBM and MTB but were informed by external and internal contacts that a value of 90% seemed reasonable. Assuming that the vast majority of these cases are fatal unless treated",
+   "format": "percent"
+  },
+  {
+   "id": "post_bcg_untreated_cfr_tbm_and_mtb",
+   "label": "Post-BCG untreated CFR (TBM and MTB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_untreated_cfr_tbm_and_mtb * 0.9",
+   "expected": 0.81
+  },
+  {
+   "id": "post_bcg_proportion_of_cases_other_tb",
+   "label": "Post-BCG proportion of cases (Other TB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied_2 / sum(pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied, pre_bcg_proportion_of_cases_with_bcg_risk_reduction_applied_2)",
+   "expected": 0.948578025,
+   "format": "percent"
+  },
+  {
+   "id": "pre_bcg_untreated_cfr_other_tb",
+   "label": "Pre-BCG untreated CFR (Other TB)",
+   "section": "cfr_estimation",
+   "formula": "(0.436 - pre_bcg_proportion_of_cases_tbm_and_mtb * pre_bcg_untreated_cfr_tbm_and_mtb) / pre_bcg_proportion_of_cases_other_tb",
+   "expected": 0.3588634436,
+   "format": "percent"
+  },
+  {
+   "id": "post_bcg_untreated_cfr_other_tb",
+   "label": "Post-BCG untreated CFR (Other TB)",
+   "section": "cfr_estimation",
+   "formula": "pre_bcg_untreated_cfr_other_tb * 0.9",
+   "expected": 0.3229770992
+  },
+  {
+   "id": "post_bcg_untreated_cfr_all_tb",
+   "label": "Post-BCG untreated CFR (All TB)",
+   "section": "cfr_estimation",
+   "formula": "post_bcg_proportion_of_cases_tbm_and_mtb * post_bcg_untreated_cfr_tbm_and_mtb + post_bcg_proportion_of_cases_other_tb * post_bcg_untreated_cfr_other_tb",
+   "expected": 0.3480207787,
+   "format": "percent"
+  },
+  {
+   "id": "untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2",
+   "label": "Untreated case fatality ratio (as % of patients with TB disease)",
+   "section": "full_cea",
+   "formula": "post_bcg_untreated_cfr_all_tb",
+   "expected": 0.3480207787,
+   "format": "percent"
+  },
+  {
+   "id": "untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3",
+   "label": "Untreated case fatality ratio (as % of patients with TB disease)",
+   "section": "full_cea",
+   "formula": "post_bcg_untreated_cfr_all_tb",
+   "expected": 0.3480207787,
+   "format": "percent"
+  },
+  {
+   "id": "untreated_case_fatality_ratio_as_of_patients_with_tb_disease",
+   "label": "Untreated case fatality ratio (as % of patients with TB disease)",
+   "section": "full_cea",
+   "formula": "(untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2 * total_5_reached + untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.3480207787,
+   "format": "percent"
+  },
+  {
+   "id": "case_fatality_ratio_for_tb_disease_in_absence_of_tb_treatmen",
+   "label": "Case fatality ratio for TB disease in absence of TB treatment",
+   "section": "simple_cea",
+   "formula": "untreated_case_fatality_ratio_as_of_patients_with_tb_disease",
+   "expected": 0.3480207787,
+   "format": "percent"
+  },
+  {
+   "id": "sea_newrel_m04",
+   "label": "SEA (newrel_m04)",
+   "section": "who_estimates",
+   "value": 20145.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "WHO estimates!H3"
+   }
+  },
+  {
+   "id": "sea_newrel_f04",
+   "label": "SEA (newrel_f04)",
+   "section": "who_estimates",
+   "value": 12219.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "WHO estimates!I3"
+   }
+  },
+  {
+   "id": "sea_total_0_4_notifications",
+   "label": "SEA (TOTAL 0-4 notifications)",
+   "section": "who_estimates",
+   "formula": "sum(sea_newrel_m04, sea_newrel_f04)",
+   "expected": 32364.0
+  },
+  {
+   "id": "all_best",
+   "label": "all (best)",
+   "section": "who_estimates",
+   "value": 64000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "WHO estimates!K8"
+   }
+  },
+  {
+   "id": "all_best_2",
+   "label": "all (best)",
+   "section": "who_estimates",
+   "value": 76000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "WHO estimates!K9"
+   }
+  },
+  {
+   "id": "sea_0_4_incidence",
+   "label": "SEA (0-4 incidence)",
+   "section": "who_estimates",
+   "formula": "all_best + all_best_2",
+   "expected": 140000.0
+  },
+  {
+   "id": "sea_case_detection_ratio",
+   "label": "SEA (% case detection ratio)",
+   "section": "who_estimates",
+   "formula": "sea_total_0_4_notifications / sea_0_4_incidence",
+   "expected": 0.2311714286,
+   "format": "percent"
+  },
+  {
+   "id": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2",
+   "label": "% Current rate of TB treatment for HHCs with TB disease",
+   "section": "full_cea",
+   "formula": "sea_case_detection_ratio * 1.3",
+   "expected": 0.3005228571,
+   "format": "percent"
+  },
+  {
+   "id": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3",
+   "label": "% Current rate of TB treatment for HHCs with TB disease",
+   "section": "full_cea",
+   "formula": "sea_case_detection_ratio * 1.3",
+   "expected": 0.3005228571,
+   "format": "percent"
+  },
+  {
+   "id": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease",
+   "label": "% Current rate of TB treatment for HHCs with TB disease",
+   "section": "full_cea",
+   "formula": "(current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2 * number_screened_positive + current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3 * number_screened_positive_2) / sum(number_screened_positive, number_screened_positive_2)",
+   "expected": 0.3005228571,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tb_treatment_in_successfully_treating_tb_disease_2",
+   "label": "Efficacy of TB treatment in successfully treating TB disease",
+   "section": "full_cea",
+   "value": 0.87,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C171"
+   },
+   "explainer": "Based off India TB Reports (2022/2023) and WHO (2022)",
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tb_treatment_in_successfully_treating_tb_disease_3",
+   "label": "Efficacy of TB treatment in successfully treating TB disease",
+   "section": "full_cea",
+   "value": 0.87,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D171"
+   },
+   "explainer": "Based off India TB Reports (2022/2023) and WHO (2022)",
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_tb_treatment_in_successfully_treating_tb_disease",
+   "label": "Efficacy of TB treatment in successfully treating TB disease",
+   "section": "full_cea",
+   "formula": "(efficacy_of_tb_treatment_in_successfully_treating_tb_disease_2 * total_5_reached + efficacy_of_tb_treatment_in_successfully_treating_tb_disease_3 * total_5_reached_2) / sum(total_5_reached, total_5_reached_2)",
+   "expected": 0.87,
+   "format": "percent"
+  },
+  {
+   "id": "overall_case_fatality_ratio_accounting_for_tb_treatment_rate",
+   "label": "Overall case fatality ratio, accounting for TB treatment rate",
+   "section": "simple_cea",
+   "formula": "case_fatality_ratio_for_tb_disease_in_absence_of_tb_treatmen * (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease) + case_fatality_ratio_for_tb_disease_in_absence_of_tb_treatmen * (1 - efficacy_of_tb_treatment_in_successfully_treating_tb_disease) * current_rate_of_tb_treatment_for_hhcs_with_tb_disease",
+   "expected": 0.2570290458,
+   "format": "percent"
+  },
+  {
+   "id": "deaths_averted_via_prevention_of_disease_progression",
+   "label": "Deaths averted via prevention of disease progression",
+   "section": "simple_cea",
+   "formula": "cases_of_tb_disease_averted * overall_case_fatality_ratio_accounting_for_tb_treatment_rate",
+   "expected": 748.2803835
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_among_those_screening_negative",
+   "label": "% of <5 HHCs with TB disease, among those screening negative",
+   "section": "symptom_based_screening",
+   "formula": "screen_negative_has_tb_disease / screen_negative",
+   "expected": 0.004214963119,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_conditional_on_negative_symptom_sc",
+   "label": "% of <5 HHCs with TB disease, conditional on negative symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_tb_disease_among_those_screening_negative",
+   "expected": 0.004214963119,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_negative_number_with_tb_disease",
+   "label": "Of those screening negative, number with TB disease",
+   "section": "full_cea",
+   "formula": "number_screened_negative * of_5_hhcs_with_tb_disease_conditional_on_negative_symptom_sc",
+   "expected": 300.276
+  },
+  {
+   "id": "among_those_with_tb_disease_who_are_provided_tb_treatment",
+   "label": "Among those with TB disease, % who are provided TB treatment",
+   "section": "full_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C105"
+   },
+   "explainer": "Based off TB test sensitivity estimates, with upward adjustment for false negatives that get treated via clinical diagnosis",
+   "format": "percent"
+  },
+  {
+   "id": "estimated_tb_treatment_participation_rate_among_those_offere",
+   "label": "Estimated TB treatment participation rate among those offered TB treatment",
+   "section": "full_cea",
+   "value": 0.87,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C134"
+   },
+   "explainer": "Based off MacPherson et al 2014 meta-analysis of pre-treatment loss to follow-up in TB patients",
+   "format": "percent"
+  },
+  {
+   "id": "estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of",
+   "label": "Estimated % of <5s with TB disease who seek care in absence of intervention",
+   "section": "full_cea",
+   "formula": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2 / (among_those_with_tb_disease_who_are_provided_tb_treatment * estimated_tb_treatment_participation_rate_among_those_offere)",
+   "expected": 0.4317857143,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_among_those_screening_positive",
+   "label": "% of <5 HHCs with TB disease, among those screening positive",
+   "section": "symptom_based_screening",
+   "formula": "screen_positive_has_tb_disease / screen_positive",
+   "expected": 0.3137254902,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_conditional_on_positive_symptom_sc",
+   "label": "% of <5 HHCs with TB disease, conditional on positive symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_tb_disease_among_those_screening_positive",
+   "expected": 0.3137254902,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_positive_number_with_tb_disease",
+   "label": "Of those screening positive, number with TB disease",
+   "section": "full_cea",
+   "formula": "number_screened_positive * of_5_hhcs_with_tb_disease_conditional_on_positive_symptom_sc",
+   "expected": 1201.104
+  },
+  {
+   "id": "of_those_screening_positive_successfully_referred_to_a_healt",
+   "label": "Of those screening positive, % successfully referred to a health facility and tested for TB disease",
+   "section": "full_cea",
+   "formula": "avg(0.71, 0.8)",
+   "expected": 0.755,
+   "format": "percent"
+  },
+  {
+   "id": "number_offered_tb_treatment",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_tb_disease * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of * among_those_with_tb_disease_who_are_provided_tb_treatment + of_those_screening_positive_number_with_tb_disease * of_those_screening_positive_successfully_referred_to_a_healt * among_those_with_tb_disease_who_are_provided_tb_treatment",
+   "expected": 829.1907257
+  },
+  {
+   "id": "number_initiating_tb_treatment",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment * estimated_tb_treatment_participation_rate_among_those_offere",
+   "expected": 721.3959314
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_tb_disease + of_those_screening_positive_number_with_tb_disease) * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2",
+   "expected": 451.1990073
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen",
+   "label": "# of additional HHCs <5 with TB disease enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment - number_initiating_tb_treatment_in_counterfactual",
+   "expected": 270.1969241
+  },
+  {
+   "id": "deaths_averted_through_increased_tb_treatment_uptake_for_tho",
+   "label": "Deaths averted through increased TB treatment uptake for those with TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2 * efficacy_of_tb_treatment_in_successfully_treating_tb_disease_2 * internal_validity_adjustment_2 * external_validity_adjustment_2",
+   "expected": 66.26586122
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_among_those_screening_2",
+   "label": "% of <5 HHCs with (non-active) TB infection, among those screening negative",
+   "section": "symptom_based_screening",
+   "formula": "screen_negative_has_tb_infection / screen_negative",
+   "expected": 0.3048321541,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_conditional_on_negati",
+   "label": "% of <5 HHCs with (non-active) TB infection, conditional on negative symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_among_those_screening_2",
+   "expected": 0.3048321541,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_negative_number_with_non_active_tb_infect",
+   "label": "Of those screening negative, number with (non-active) TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_negative * of_5_hhcs_with_non_active_tb_infection_conditional_on_negati",
+   "expected": 21716.38929
+  },
+  {
+   "id": "among_those_who_don_t_have_tb_disease_who_are_not_provided_t",
+   "label": "Among those who don't have TB disease, % who are not provided TB treatment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C104"
+   },
+   "explainer": "Based off TB test specificity estimates, with downward adjustment for false positives in clinical diagnosis",
+   "format": "percent"
+  },
+  {
+   "id": "number_offered_tb_treatment_2",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect * 0 + of_those_screening_positive_number_with_non_active_tb_infect * of_those_screening_positive_successfully_referred_to_a_healt * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t)",
+   "expected": 60.72545893
+  },
+  {
+   "id": "number_initiating_tb_treatment_2",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment_2 * estimated_tb_treatment_participation_rate_among_those_offere",
+   "expected": 52.83114927
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual_2",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect * 0 + of_those_screening_positive_number_with_non_active_tb_infect * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t) * estimated_tb_treatment_participation_rate_among_those_offere",
+   "expected": 30.21421924
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm",
+   "label": "# of additional HHCs <5 with TB infection enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment_2 - number_initiating_tb_treatment_in_counterfactual_2",
+   "expected": 22.61693003
+  },
+  {
+   "id": "deaths_averted_through_increased_tb_treatment_uptake_for_tho_2",
+   "label": "Deaths averted through increased TB treatment uptake for those with (non-active) TB infection (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm * risk_of_progression_to_tb_disease_among_5s_with_tb_infection_2 * (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2 * internal_validity_adjustment_2 * external_validity_adjustment_2",
+   "expected": 0.8473268649
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tb_treatment_uptake_r",
+   "label": "Total deaths averted through increased TB treatment uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "sum(deaths_averted_through_increased_tb_treatment_uptake_for_tho, deaths_averted_through_increased_tb_treatment_uptake_for_tho_2)",
+   "expected": 67.11318809
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_conditional_on_negative_symptom_sc_2",
+   "label": "% of <5 HHCs with TB disease, conditional on negative symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_tb_disease_among_those_screening_negative",
+   "expected": 0.004214963119,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_negative_number_with_tb_disease_2",
+   "label": "Of those screening negative, number with TB disease",
+   "section": "full_cea",
+   "formula": "number_screened_negative_2 * of_5_hhcs_with_tb_disease_conditional_on_negative_symptom_sc_2",
+   "expected": 709.896
+  },
+  {
+   "id": "among_those_with_tb_disease_who_are_provided_tb_treatment_2",
+   "label": "Among those with TB disease, % who are provided TB treatment",
+   "section": "full_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D105"
+   },
+   "explainer": "Based off TB test sensitivity estimates, with upward adjustment for false negatives that get treated via clinical diagnosis",
+   "format": "percent"
+  },
+  {
+   "id": "estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "label": "Estimated TB treatment participation rate among those offered TB treatment",
+   "section": "full_cea",
+   "value": 0.87,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D134"
+   },
+   "explainer": "Based off MacPherson et al 2014 meta-analysis of pre-treatment loss to follow-up in TB patients",
+   "format": "percent"
+  },
+  {
+   "id": "estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2",
+   "label": "Estimated % of <5s with TB disease who seek care in absence of intervention",
+   "section": "full_cea",
+   "formula": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3 / (among_those_with_tb_disease_who_are_provided_tb_treatment_2 * estimated_tb_treatment_participation_rate_among_those_offere_2)",
+   "expected": 0.4317857143,
+   "format": "percent"
+  },
+  {
+   "id": "of_5_hhcs_with_tb_disease_conditional_on_positive_symptom_sc_2",
+   "label": "% of <5 HHCs with TB disease, conditional on positive symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_tb_disease_among_those_screening_positive",
+   "expected": 0.3137254902,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_positive_number_with_tb_disease_2",
+   "label": "Of those screening positive, number with TB disease",
+   "section": "full_cea",
+   "formula": "number_screened_positive_2 * of_5_hhcs_with_tb_disease_conditional_on_positive_symptom_sc_2",
+   "expected": 2839.584
+  },
+  {
+   "id": "of_those_screening_positive_successfully_referred_to_a_healt_2",
+   "label": "Of those screening positive, % successfully referred to a health facility and tested for TB disease",
+   "section": "full_cea",
+   "formula": "avg(0.71, 0.8)",
+   "expected": 0.755,
+   "format": "percent"
+  },
+  {
+   "id": "number_offered_tb_treatment_3",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_tb_disease_2 * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2 * among_those_with_tb_disease_who_are_provided_tb_treatment_2 + of_those_screening_positive_number_with_tb_disease_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * among_those_with_tb_disease_who_are_provided_tb_treatment_2",
+   "expected": 1960.327097
+  },
+  {
+   "id": "number_initiating_tb_treatment_3",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment_3 * estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "expected": 1705.484575
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual_3",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_tb_disease_2 + of_those_screening_positive_number_with_tb_disease_2) * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3",
+   "expected": 1066.699871
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen_2",
+   "label": "# of additional HHCs <5 with TB disease enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment_3 - number_initiating_tb_treatment_in_counterfactual_3",
+   "expected": 638.7847035
+  },
+  {
+   "id": "deaths_averted_through_increased_tb_treatment_uptake_for_tho_3",
+   "label": "Deaths averted through increased TB treatment uptake for those with TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen_2 * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3 * efficacy_of_tb_treatment_in_successfully_treating_tb_disease_3 * internal_validity_adjustment_3 * external_validity_adjustment_3",
+   "expected": 156.6621036
+  },
+  {
+   "id": "of_5_hhcs_with_non_active_tb_infection_conditional_on_negati_2",
+   "label": "% of <5 HHCs with (non-active) TB infection, conditional on negative symptom screening",
+   "section": "full_cea",
+   "formula": "of_5_hhcs_with_non_active_tb_infection_among_those_screening_2",
+   "expected": 0.3048321541,
+   "format": "percent"
+  },
+  {
+   "id": "of_those_screening_negative_number_with_non_active_tb_infect_2",
+   "label": "Of those screening negative, number with (non-active) TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_negative_2 * of_5_hhcs_with_non_active_tb_infection_conditional_on_negati_2",
+   "expected": 51340.69286
+  },
+  {
+   "id": "among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2",
+   "label": "Among those who don't have TB disease, % who are not provided TB treatment",
+   "section": "full_cea",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D104"
+   },
+   "explainer": "Based off TB test specificity estimates, with downward adjustment for false positives in clinical diagnosis",
+   "format": "percent"
+  },
+  {
+   "id": "number_offered_tb_treatment_4",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect_2 * 0 + of_those_screening_positive_number_with_non_active_tb_infect_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2)",
+   "expected": 143.5637893
+  },
+  {
+   "id": "number_initiating_tb_treatment_4",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment_4 * estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "expected": 124.9004967
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual_4",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect_2 * 0 + of_those_screening_positive_number_with_non_active_tb_infect_2 * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2 * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2) * estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "expected": 71.43079493
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm_2",
+   "label": "# of additional HHCs <5 with TB infection enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment_4 - number_initiating_tb_treatment_in_counterfactual_4",
+   "expected": 53.46970175
+  },
+  {
+   "id": "deaths_averted_through_increased_tb_treatment_uptake_for_tho_4",
+   "label": "Deaths averted through increased TB treatment uptake for those with (non-active) TB infection (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm_2 * risk_of_progression_to_tb_disease_among_5s_with_tb_infection_3 * (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3 * internal_validity_adjustment_3 * external_validity_adjustment_3",
+   "expected": 2.00320356
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tb_treatment_uptake_r_2",
+   "label": "Total deaths averted through increased TB treatment uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "sum(deaths_averted_through_increased_tb_treatment_uptake_for_tho_3, deaths_averted_through_increased_tb_treatment_uptake_for_tho_4)",
+   "expected": 158.6653072
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tb_treatment_uptake",
+   "label": "Total deaths averted through increased TB treatment uptake",
+   "section": "full_cea",
+   "formula": "total_deaths_averted_through_increased_tb_treatment_uptake_r + total_deaths_averted_through_increased_tb_treatment_uptake_r_2",
+   "expected": 225.7784952
+  },
+  {
+   "id": "number_offered_tpt",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect + of_those_screening_positive_number_with_non_active_tb_infect * of_those_screening_positive_successfully_referred_to_a_healt * among_those_who_don_t_have_tb_disease_who_are_not_provided_t",
+   "expected": 22262.91842
+  },
+  {
+   "id": "number_initiating_tpt",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt * estimated_tpt_participation_rate_percentage_who_will_initiat_2",
+   "expected": 17810.33473
+  },
+  {
+   "id": "number_initiating_tpt_in_counterfactual",
+   "label": "Number initiating TPT in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_non_active_tb_infect + of_those_screening_positive_number_with_non_active_tb_infect * among_those_who_don_t_have_tb_disease_who_are_not_provided_t) * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_2",
+   "expected": 6744.507047
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tpt_due_t",
+   "label": "# of additional HHCs <5 with TB infection enrolled on TPT due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tpt - number_initiating_tpt_in_counterfactual",
+   "expected": 11065.82769
+  },
+  {
+   "id": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th",
+   "label": "TB disease cases averted through increased TPT uptake for those with (non-active) TB infection (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tpt_due_t * risk_of_progression_to_tb_disease_among_5s_with_tb_infection_2 * efficacy_of_tpt_in_preventing_tb_disease_2 * adjustment_factor_for_adherence_to_tpt_compared_to_study_2 * internal_validity_adjustment_2 * external_validity_adjustment_2",
+   "expected": 1171.583064
+  },
+  {
+   "id": "deaths_averted_among_cases_who_would_have_received_tb_treatm",
+   "label": "Deaths averted among cases who would have received TB treatment if infection progressed to TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2 * (1 - efficacy_of_tb_treatment_in_successfully_treating_tb_disease_2) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2",
+   "expected": 15.92938911
+  },
+  {
+   "id": "deaths_averted_among_those_who_would_not_have_received_tb_tr",
+   "label": "Deaths averted among those who would not have received TB treatment if infection progressed to TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th * (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2",
+   "expected": 285.2014879
+  },
+  {
+   "id": "total_deaths_averted_from_averting_tb_disease_cases_through",
+   "label": "Total deaths averted from averting TB disease cases through increased TPT uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "deaths_averted_among_cases_who_would_have_received_tb_treatm + deaths_averted_among_those_who_would_not_have_received_tb_tr",
+   "expected": 301.130877
+  },
+  {
+   "id": "number_offered_tpt_2",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_tb_disease + of_those_screening_positive_number_with_tb_disease * of_those_screening_positive_successfully_referred_to_a_healt * (1 - among_those_with_tb_disease_who_are_provided_tb_treatment)",
+   "expected": 481.642704
+  },
+  {
+   "id": "number_initiating_tpt_2",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt_2 * estimated_tpt_participation_rate_percentage_who_will_initiat_2",
+   "expected": 385.3141632
+  },
+  {
+   "id": "number_initiating_tpt_in_counterfactual_2",
+   "label": "Number initiating TPT in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_tb_disease + of_those_screening_positive_number_with_tb_disease * (1 - among_those_with_tb_disease_who_are_provided_tb_treatment)) * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_2",
+   "expected": 162.4483418
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tpt_due_to",
+   "label": "# of additional HHCs <5 with TB disease enrolled on TPT due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tpt_2 - number_initiating_tpt_in_counterfactual_2",
+   "expected": 222.8658214
+  },
+  {
+   "id": "efficacy_of_3hp_tpt_in_succesfully_treating_tb_disease",
+   "label": "Efficacy of 3HP TPT in succesfully treating TB disease",
+   "section": "full_cea",
+   "formula": "efficacy_of_tb_treatment_in_successfully_treating_tb_disease_2 * 0.1",
+   "expected": 0.087,
+   "format": "percent"
+  },
+  {
+   "id": "deaths_averted_through_increased_treatment_of_tb_disease_cas",
+   "label": "Deaths averted through increased treatment of TB disease cases with TPT (among those who screen or test negative) (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tpt_due_to * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_2 * efficacy_of_3hp_tpt_in_succesfully_treating_tb_disease * internal_validity_adjustment_2 * external_validity_adjustment_2",
+   "expected": 5.46578968
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tpt_uptake_ref",
+   "label": "Total deaths averted through increased TPT uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "sum(total_deaths_averted_from_averting_tb_disease_cases_through, deaths_averted_through_increased_treatment_of_tb_disease_cas)",
+   "expected": 306.5966667
+  },
+  {
+   "id": "number_offered_tpt_3",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_non_active_tb_infect_2 + of_those_screening_positive_number_with_non_active_tb_infect_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2",
+   "expected": 52632.76696
+  },
+  {
+   "id": "number_initiating_tpt_3",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt_3 * estimated_tpt_participation_rate_percentage_who_will_initiat_3",
+   "expected": 42106.21357
+  },
+  {
+   "id": "number_initiating_tpt_in_counterfactual_3",
+   "label": "Number initiating TPT in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_non_active_tb_infect_2 + of_those_screening_positive_number_with_non_active_tb_infect_2 * among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2) * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_3",
+   "expected": 26249.90505
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tpt_due_t_2",
+   "label": "# of additional HHCs <5 with TB infection enrolled on TPT due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tpt_3 - number_initiating_tpt_in_counterfactual_3",
+   "expected": 15856.30852
+  },
+  {
+   "id": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2",
+   "label": "TB disease cases averted through increased TPT uptake for those with (non-active) TB infection (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_infection_enrolled_on_tpt_due_t_2 * risk_of_progression_to_tb_disease_among_5s_with_tb_infection_3 * efficacy_of_tpt_in_preventing_tb_disease_3 * adjustment_factor_for_adherence_to_tpt_compared_to_study_3 * internal_validity_adjustment_3 * external_validity_adjustment_3",
+   "expected": 1678.770269
+  },
+  {
+   "id": "deaths_averted_among_cases_who_would_have_received_tb_treatm_2",
+   "label": "Deaths averted among cases who would have received TB treatment if infection progressed to TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2 * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3 * (1 - efficacy_of_tb_treatment_in_successfully_treating_tb_disease_3) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3",
+   "expected": 22.82534261
+  },
+  {
+   "id": "deaths_averted_among_those_who_would_not_have_received_tb_tr_2",
+   "label": "Deaths averted among those who would not have received TB treatment if infection progressed to TB disease (#REF!)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2 * (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3) * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3",
+   "expected": 408.6673776
+  },
+  {
+   "id": "total_deaths_averted_from_averting_tb_disease_cases_through_2",
+   "label": "Total deaths averted from averting TB disease cases through increased TPT uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "deaths_averted_among_cases_who_would_have_received_tb_treatm_2 + deaths_averted_among_those_who_would_not_have_received_tb_tr_2",
+   "expected": 431.4927202
+  },
+  {
+   "id": "number_offered_tpt_4",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_with_tb_disease_2 + of_those_screening_positive_number_with_tb_disease_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * (1 - among_those_with_tb_disease_who_are_provided_tb_treatment_2)",
+   "expected": 1138.673184
+  },
+  {
+   "id": "number_initiating_tpt_4",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt_4 * estimated_tpt_participation_rate_percentage_who_will_initiat_3",
+   "expected": 910.9385472
+  },
+  {
+   "id": "number_initiating_tpt_in_counterfactual_4",
+   "label": "Number initiating TPT in counterfactual",
+   "section": "full_cea",
+   "formula": "(of_those_screening_negative_number_with_tb_disease_2 + of_those_screening_positive_number_with_tb_disease_2 * (1 - among_those_with_tb_disease_who_are_provided_tb_treatment_2)) * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_3",
+   "expected": 632.2557776
+  },
+  {
+   "id": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tpt_due_to_2",
+   "label": "# of additional HHCs <5 with TB disease enrolled on TPT due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tpt_4 - number_initiating_tpt_in_counterfactual_4",
+   "expected": 278.6827696
+  },
+  {
+   "id": "efficacy_of_3hp_tpt_in_succesfully_treating_tb_disease_2",
+   "label": "Efficacy of 3HP TPT in succesfully treating TB disease",
+   "section": "full_cea",
+   "formula": "efficacy_of_tb_treatment_in_successfully_treating_tb_disease_3 * 0.1",
+   "expected": 0.087,
+   "format": "percent"
+  },
+  {
+   "id": "deaths_averted_through_increased_treatment_of_tb_disease_cas_2",
+   "label": "Deaths averted through increased treatment of TB disease cases with TPT (among those who screen or test negative) (#REF!)",
+   "section": "full_cea",
+   "formula": "of_additional_hhcs_5_with_tb_disease_enrolled_on_tpt_due_to_2 * untreated_case_fatality_ratio_as_of_patients_with_tb_disease_3 * efficacy_of_3hp_tpt_in_succesfully_treating_tb_disease_2 * internal_validity_adjustment_3 * external_validity_adjustment_3",
+   "expected": 6.834701689
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tpt_uptake_ref_2",
+   "label": "Total deaths averted through increased TPT uptake (#REF!)",
+   "section": "full_cea",
+   "formula": "sum(total_deaths_averted_from_averting_tb_disease_cases_through_2, deaths_averted_through_increased_treatment_of_tb_disease_cas_2)",
+   "expected": 438.3274219
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tpt_uptake",
+   "label": "Total deaths averted through increased TPT uptake",
+   "section": "full_cea",
+   "formula": "total_deaths_averted_through_increased_tpt_uptake_ref + total_deaths_averted_through_increased_tpt_uptake_ref_2",
+   "expected": 744.9240886
+  },
+  {
+   "id": "total_deaths_averted_through_increased_tb_treatment_uptake_a",
+   "label": "Total deaths averted through increased TB treatment uptake, as % of deaths averted through increased TPT uptake",
+   "section": "full_cea",
+   "formula": "total_deaths_averted_through_increased_tb_treatment_uptake / total_deaths_averted_through_increased_tpt_uptake",
+   "expected": 0.303089266,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_deaths_averted_via_increased_treatment_of_tb",
+   "label": "Adjustment for deaths averted via increased treatment of TB disease",
+   "section": "simple_cea",
+   "formula": "total_deaths_averted_through_increased_tb_treatment_uptake_a",
+   "expected": 0.303089266,
+   "format": "percent"
+  },
+  {
+   "id": "total_number_of_under_5_deaths_directly_averted_bihar_and_up",
+   "label": "Total number of under-5 deaths directly averted (Bihar & UP best guess)",
+   "section": "simple_cea",
+   "formula": "deaths_averted_via_prevention_of_disease_progression * (1 + adjustment_for_deaths_averted_via_increased_treatment_of_tb)",
+   "expected": 975.0761356
+  },
+  {
+   "id": "averting_a_death_by_age_post_neonatal",
+   "label": "Averting a death by age (Post Neonatal)",
+   "section": "moral_weights",
+   "value": 100.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Moral weights!F2"
+   }
+  },
+  {
+   "id": "averting_a_death_by_age_1_to_4",
+   "label": "Averting a death by age (1 to 4)",
+   "section": "moral_weights",
+   "value": 127.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Moral weights!G2"
+   }
+  },
+  {
+   "id": "moral_value_per_death_averted_for_children_5",
+   "label": "Moral value per death averted for children <5",
+   "section": "full_cea",
+   "formula": "avg(averting_a_death_by_age_post_neonatal, averting_a_death_by_age_1_to_4)",
+   "expected": 114.0
+  },
+  {
+   "id": "moral_weight_for_averted_deaths",
+   "label": "Moral weight for averted deaths",
+   "section": "simple_cea",
+   "formula": "moral_value_per_death_averted_for_children_5",
+   "expected": 114.0
+  },
+  {
+   "id": "of_those_screening_negative_number_without_tb_infection",
+   "label": "Of those screening negative, number without TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_negative - of_those_screening_negative_number_with_non_active_tb_infect - of_those_screening_negative_number_with_tb_disease",
+   "expected": 49223.81571
+  },
+  {
+   "id": "of_those_screening_positive_number_without_tb_infection",
+   "label": "Of those screening positive, number without TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_positive - of_those_screening_positive_number_with_non_active_tb_infect - of_those_screening_positive_number_with_tb_disease",
+   "expected": 1823.104286
+  },
+  {
+   "id": "number_offered_tpt_5",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection + of_those_screening_positive_number_without_tb_infection * of_those_screening_positive_successfully_referred_to_a_healt * among_those_who_don_t_have_tb_disease_who_are_not_provided_t",
+   "expected": 50462.61508
+  },
+  {
+   "id": "number_initiating_tpt_5",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt_5 * estimated_tpt_participation_rate_percentage_who_will_initiat_2",
+   "expected": 40370.09206
+  },
+  {
+   "id": "total_of_hhcs_5_enrolled_on_tpt",
+   "label": "Total # of HHCs <5 enrolled on TPT",
+   "section": "full_cea",
+   "formula": "sum(number_initiating_tpt, number_initiating_tpt_2, number_initiating_tpt_5)",
+   "expected": 58565.74096
+  },
+  {
+   "id": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_10_15_kg_dosage",
+   "label": "Pediatric 3HP (pRPT 150mg DT + INH 100mg DT) 10-15 KG dosage",
+   "section": "unit_cost_inputs",
+   "formula": "4.39",
+   "expected": 4.39,
+   "format": "usd"
+  },
+  {
+   "id": "unit_cost_of_pediatric_tpt_regimen_for_those_in_10_15_kg_wei",
+   "label": "Unit cost of pediatric TPT regimen for those in 10-15 kg weight band (26 districts)",
+   "section": "full_cea",
+   "formula": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_10_15_kg_dosage",
+   "expected": 4.39,
+   "format": "usd"
+  },
+  {
+   "id": "proportion_of_5_population_assumed_in_10_15_kg_weight_band_2",
+   "label": "Proportion of <5 population assumed in 10-15 kg weight band (26 districts)",
+   "section": "full_cea",
+   "value": 0.65,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C10"
+   },
+   "explainer": "Assumption based on WHO weight-for-age growth charts",
+   "format": "percent"
+  },
+  {
+   "id": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_16_23_kg_dosage",
+   "label": "Pediatric 3HP (pRPT 150mg DT + INH 100mg DT) 16-23 KG dosage",
+   "section": "unit_cost_inputs",
+   "formula": "6.77",
+   "expected": 6.77,
+   "format": "usd"
+  },
+  {
+   "id": "unit_cost_of_pediatric_tpt_regimen_for_those_in_16_23_kg_wei",
+   "label": "Unit cost of pediatric TPT regimen for those in 16-23 kg weight band (26 districts)",
+   "section": "full_cea",
+   "formula": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_16_23_kg_dosage",
+   "expected": 6.77,
+   "format": "usd"
+  },
+  {
+   "id": "proportion_of_5_population_assumed_in_16_23_kg_weight_band_2",
+   "label": "Proportion of <5 population assumed in 16-23 kg weight band (26 districts)",
+   "section": "full_cea",
+   "formula": "1 - proportion_of_5_population_assumed_in_10_15_kg_weight_band_2",
+   "expected": 0.35,
+   "format": "percent"
+  },
+  {
+   "id": "average_unit_cost_of_pediatric_3hp_regimen_for_children_5_26",
+   "label": "Average unit cost of pediatric 3HP regimen for children <5 (26 districts)",
+   "section": "full_cea",
+   "formula": "unit_cost_of_pediatric_tpt_regimen_for_those_in_10_15_kg_wei * proportion_of_5_population_assumed_in_10_15_kg_weight_band_2 + unit_cost_of_pediatric_tpt_regimen_for_those_in_16_23_kg_wei * proportion_of_5_population_assumed_in_16_23_kg_weight_band_2",
+   "expected": 5.223,
+   "format": "usd"
+  },
+  {
+   "id": "total_tpt_cost_to_implementer_26_districts",
+   "label": "Total TPT cost to implementer (26 districts)",
+   "section": "full_cea",
+   "formula": "total_of_hhcs_5_enrolled_on_tpt * average_unit_cost_of_pediatric_3hp_regimen_for_children_5_26 * 1.15",
+   "expected": 351772.1948,
+   "format": "usd"
+  },
+  {
+   "id": "non_commodity_cost_to_implementer_26_districts",
+   "label": "Non-commodity cost to implementer (26 districts)",
+   "section": "full_cea",
+   "formula": "2799585",
+   "expected": 2799585.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_intervention_cost_to_implementer_26_districts",
+   "label": "Total intervention cost to implementer (26 districts)",
+   "section": "full_cea",
+   "formula": "total_tpt_cost_to_implementer_26_districts + non_commodity_cost_to_implementer_26_districts",
+   "expected": 3151357.195,
+   "format": "usd"
+  },
+  {
+   "id": "of_those_screening_negative_number_without_tb_infection_2",
+   "label": "Of those screening negative, number without TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_negative_2 - of_those_screening_negative_number_with_non_active_tb_infect_2 - of_those_screening_negative_number_with_tb_disease_2",
+   "expected": 116372.2371
+  },
+  {
+   "id": "of_those_screening_positive_number_without_tb_infection_2",
+   "label": "Of those screening positive, number without TB infection",
+   "section": "full_cea",
+   "formula": "number_screened_positive_2 - of_those_screening_positive_number_with_non_active_tb_infect_2 - of_those_screening_positive_number_with_tb_disease_2",
+   "expected": 4310.082857
+  },
+  {
+   "id": "number_offered_tpt_6",
+   "label": "Number offered TPT",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection_2 + of_those_screening_positive_number_without_tb_infection_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2",
+   "expected": 119300.9384
+  },
+  {
+   "id": "number_initiating_tpt_6",
+   "label": "Number initiating TPT",
+   "section": "full_cea",
+   "formula": "number_offered_tpt_6 * estimated_tpt_participation_rate_percentage_who_will_initiat_3",
+   "expected": 95440.75076
+  },
+  {
+   "id": "total_of_hhcs_5_enrolled_on_tpt_2",
+   "label": "Total # of HHCs <5 enrolled on TPT",
+   "section": "full_cea",
+   "formula": "sum(number_initiating_tpt_3, number_initiating_tpt_4, number_initiating_tpt_6)",
+   "expected": 138457.9029
+  },
+  {
+   "id": "unit_cost_of_pediatric_tpt_regimen_for_those_in_10_15_kg_wei_2",
+   "label": "Unit cost of pediatric TPT regimen for those in 10-15 kg weight band (47 districts)",
+   "section": "full_cea",
+   "formula": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_10_15_kg_dosage",
+   "expected": 4.39,
+   "format": "usd"
+  },
+  {
+   "id": "proportion_of_5_population_assumed_in_10_15_kg_weight_band_4",
+   "label": "Proportion of <5 population assumed in 10-15 kg weight band (47 districts)",
+   "section": "full_cea",
+   "value": 0.65,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D10"
+   },
+   "explainer": "Assumption based on WHO weight-for-age growth charts",
+   "format": "percent"
+  },
+  {
+   "id": "unit_cost_of_pediatric_tpt_regimen_for_those_in_16_23_kg_wei_2",
+   "label": "Unit cost of pediatric TPT regimen for those in 16-23 kg weight band (47 districts)",
+   "section": "full_cea",
+   "formula": "pediatric_3hp_prpt_150mg_dt_inh_100mg_dt_16_23_kg_dosage",
+   "expected": 6.77,
+   "format": "usd"
+  },
+  {
+   "id": "proportion_of_5_population_assumed_in_16_23_kg_weight_band_4",
+   "label": "Proportion of <5 population assumed in 16-23 kg weight band (47 districts)",
+   "section": "full_cea",
+   "formula": "1 - proportion_of_5_population_assumed_in_10_15_kg_weight_band_4",
+   "expected": 0.35,
+   "format": "percent"
+  },
+  {
+   "id": "average_unit_cost_of_pediatric_3hp_regimen_for_children_5_47",
+   "label": "Average unit cost of pediatric 3HP regimen for children <5 (47 districts)",
+   "section": "full_cea",
+   "formula": "unit_cost_of_pediatric_tpt_regimen_for_those_in_10_15_kg_wei_2 * proportion_of_5_population_assumed_in_10_15_kg_weight_band_4 + unit_cost_of_pediatric_tpt_regimen_for_those_in_16_23_kg_wei_2 * proportion_of_5_population_assumed_in_16_23_kg_weight_band_4",
+   "expected": 5.223,
+   "format": "usd"
+  },
+  {
+   "id": "total_tpt_cost_to_implementer_47_districts",
+   "label": "Total TPT cost to implementer (47 districts)",
+   "section": "full_cea",
+   "formula": "total_of_hhcs_5_enrolled_on_tpt_2 * average_unit_cost_of_pediatric_3hp_regimen_for_children_5_47 * 1.15",
+   "expected": 831640.4707,
+   "format": "usd"
+  },
+  {
+   "id": "non_commodity_cost_to_implementer_47_districts",
+   "label": "Non-commodity cost to implementer (47 districts)",
+   "section": "full_cea",
+   "formula": "4778209",
+   "expected": 4778209.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_intervention_cost_to_implementer_47_districts",
+   "label": "Total intervention cost to implementer (47 districts)",
+   "section": "full_cea",
+   "formula": "total_tpt_cost_to_implementer_47_districts + non_commodity_cost_to_implementer_47_districts",
+   "expected": 5609849.471,
+   "format": "usd"
+  },
+  {
+   "id": "total_intervention_cost_to_implementer_aggregated_across_73",
+   "label": "Total intervention cost to implementer (Aggregated across 73 districts)",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_26_districts + total_intervention_cost_to_implementer_47_districts",
+   "expected": 8761206.665,
+   "format": "usd"
+  },
+  {
+   "id": "total_5_reached_3",
+   "label": "Total <5 reached",
+   "section": "full_cea",
+   "formula": "total_5_reached + total_5_reached_2",
+   "expected": 252543.0
+  },
+  {
+   "id": "cost_per_child_reached_excl_non_implementer_costs_aggregated",
+   "label": "Cost per child reached, excl. non-implementer costs (Aggregated across 73 districts)",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_aggregated_across_73 / total_5_reached_3",
+   "expected": 34.69194025,
+   "format": "usd"
+  },
+  {
+   "id": "cost_per_under_5_child_reached",
+   "label": "Cost per under-5 child reached",
+   "section": "simple_cea",
+   "formula": "cost_per_child_reached_excl_non_implementer_costs_aggregated",
+   "expected": 34.69194025,
+   "format": "usd"
+  },
+  {
+   "id": "total_grant_amount",
+   "label": "Total grant amount",
+   "section": "simple_cea",
+   "formula": "number_of_under_5_household_contacts_in_target_population_ov * share_of_contacts_reached * cost_per_under_5_child_reached",
+   "expected": 8761154.628,
+   "format": "usd"
+  },
+  {
+   "id": "initial_cost_effectiveness_estimate_multiples_of_cash",
+   "label": "Initial cost-effectiveness estimate (multiples of cash)",
+   "section": "simple_cea",
+   "formula": "total_number_of_under_5_deaths_directly_averted_bihar_and_up * moral_weight_for_averted_deaths / total_grant_amount / 0.00335",
+   "expected": 3.787365567
+  },
+  {
+   "id": "total_under_5_deaths_directly_averted_ref",
+   "label": "TOTAL UNDER-5 DEATHS DIRECTLY AVERTED (#REF!)",
+   "section": "full_cea",
+   "formula": "total_deaths_averted_through_increased_tpt_uptake_ref + total_deaths_averted_through_increased_tb_treatment_uptake_r",
+   "expected": 373.7098548
+  },
+  {
+   "id": "moral_value_per_death_averted_for_children_5_ref",
+   "label": "Moral value per death averted for children <5 (#REF!)",
+   "section": "full_cea",
+   "formula": "moral_value_per_death_averted_for_children_5",
+   "expected": 114.0
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_ref",
+   "label": "Total units of value of death averted (#REF!)",
+   "section": "full_cea",
+   "formula": "total_under_5_deaths_directly_averted_ref * moral_value_per_death_averted_for_children_5_ref",
+   "expected": 42602.92344
+  },
+  {
+   "id": "ratio_of_value_generated_from_income_increases_to_value_gene",
+   "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (",
+   "section": "full_cea",
+   "value": 0.31,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C206"
+   },
+   "explainer": "See cell note"
+  },
+  {
+   "id": "adjustment_for_income_increases_generated_by_tb_u5_hcm_compa",
+   "label": "Adjustment for income increases generated by TB U5 HCM compared to SMC (#REF!)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C207"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec",
+   "label": "Estimate of total units of value from TB U5 HCM income effects (#REF!)",
+   "section": "full_cea",
+   "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa) * total_units_of_value_of_death_averted_ref",
+   "expected": 13206.90627
+  },
+  {
+   "id": "averting_one_year_lived_with_disability_yld",
+   "label": "Averting one year lived with disability (YLD)",
+   "section": "moral_weights",
+   "value": 2.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Moral weights!B4"
+   }
+  },
+  {
+   "id": "moral_value_of_a_yld_averted_ref",
+   "label": "Moral value of a YLD averted (#REF!)",
+   "section": "full_cea",
+   "formula": "averting_one_year_lived_with_disability_yld",
+   "expected": 2.3
+  },
+  {
+   "id": "disability_weight_ref",
+   "label": "Disability weight (#REF!)",
+   "section": "full_cea",
+   "value": 0.333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C212"
+   },
+   "explainer": "Global Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis"
+  },
+  {
+   "id": "average_duration_of_tb_symptoms_in_children_in_years_ref",
+   "label": "Average duration of TB symptoms in children (in years) (#REF!)",
+   "section": "full_cea",
+   "formula": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2 * 0.25 + (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2) * 1.5",
+   "expected": 1.124346429
+  },
+  {
+   "id": "years_lived_with_disability_ylds_averted_ref",
+   "label": "Years lived with disability (YLDs) averted (#REF!)",
+   "section": "full_cea",
+   "formula": "disability_weight_ref * average_duration_of_tb_symptoms_in_children_in_years_ref * tb_disease_cases_averted_through_increased_tpt_uptake_for_th + disability_weight_ref * (1.5 - 0.25) * of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen",
+   "expected": 551.1187926
+  },
+  {
+   "id": "total_units_of_value_from_morbidity_benefits_ref",
+   "label": "Total units of value from morbidity benefits (#REF!)",
+   "section": "full_cea",
+   "formula": "moral_value_of_a_yld_averted_ref * years_lived_with_disability_ylds_averted_ref",
+   "expected": 1267.573223
+  },
+  {
+   "id": "estimated_units_of_value_from_post_tb_sequelae_morbidity_and",
+   "label": "Estimated units of value from post-TB sequelae morbidity and death averted relative to direct-TB morbidity and death averted (#REF!)",
+   "section": "full_cea",
+   "formula": "0.94 * 0.8",
+   "expected": 0.752
+  },
+  {
+   "id": "annual_discount_rate_for_value_generated_by_improved_health",
+   "label": "Annual discount rate for value generated by improved health in the future (#REF!)",
+   "section": "full_cea",
+   "value": 0.014,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C221"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "number_average_age",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(5, 9)",
+   "expected": 7.0
+  },
+  {
+   "id": "number_val",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 148.168079,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N4"
+   }
+  },
+  {
+   "id": "number_average_age_2",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(10, 14)",
+   "expected": 12.0
+  },
+  {
+   "id": "number_val_2",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 316.913985,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N5"
+   }
+  },
+  {
+   "id": "number_average_age_3",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(15, 19)",
+   "expected": 17.0
+  },
+  {
+   "id": "number_val_3",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 1001.18388,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N6"
+   }
+  },
+  {
+   "id": "number_average_age_4",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(20, 24)",
+   "expected": 22.0
+  },
+  {
+   "id": "number_val_4",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 1573.44225,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N7"
+   }
+  },
+  {
+   "id": "number_average_age_5",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(25, 29)",
+   "expected": 27.0
+  },
+  {
+   "id": "number_val_5",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 2100.43722,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N8"
+   }
+  },
+  {
+   "id": "number_average_age_6",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(30, 34)",
+   "expected": 32.0
+  },
+  {
+   "id": "number_val_6",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 3595.97889,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N9"
+   }
+  },
+  {
+   "id": "number_average_age_7",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(35, 39)",
+   "expected": 37.0
+  },
+  {
+   "id": "number_val_7",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 6107.98456,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N10"
+   }
+  },
+  {
+   "id": "number_average_age_8",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(40, 44)",
+   "expected": 42.0
+  },
+  {
+   "id": "number_val_8",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 11690.996,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N11"
+   }
+  },
+  {
+   "id": "number_average_age_9",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(45, 49)",
+   "expected": 47.0
+  },
+  {
+   "id": "number_val_9",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 20303.4474,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N12"
+   }
+  },
+  {
+   "id": "number_average_age_10",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(50, 54)",
+   "expected": 52.0
+  },
+  {
+   "id": "number_val_10",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 37968.6649,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N13"
+   }
+  },
+  {
+   "id": "number_average_age_11",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(55, 59)",
+   "expected": 57.0
+  },
+  {
+   "id": "number_val_11",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 72772.6689,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N14"
+   }
+  },
+  {
+   "id": "number_average_age_12",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(60, 64)",
+   "expected": 62.0
+  },
+  {
+   "id": "number_val_12",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 114868.422,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N15"
+   }
+  },
+  {
+   "id": "number_average_age_13",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(65, 69)",
+   "expected": 67.0
+  },
+  {
+   "id": "number_val_13",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 172242.118,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N16"
+   }
+  },
+  {
+   "id": "number_average_age_14",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(70, 74)",
+   "expected": 72.0
+  },
+  {
+   "id": "number_val_14",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 240701.732,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N17"
+   }
+  },
+  {
+   "id": "number_average_age_15",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(75, 79)",
+   "expected": 77.0
+  },
+  {
+   "id": "number_val_15",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 230351.604,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N18"
+   }
+  },
+  {
+   "id": "number_average_age_16",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(80, 84)",
+   "expected": 82.0
+  },
+  {
+   "id": "number_val_16",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 224670.914,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N19"
+   }
+  },
+  {
+   "id": "number_average_age_17",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(85, 89)",
+   "expected": 87.0
+  },
+  {
+   "id": "number_val_17",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 127038.149,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N20"
+   }
+  },
+  {
+   "id": "number_average_age_18",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(90, 94)",
+   "expected": 92.0
+  },
+  {
+   "id": "number_val_18",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 49451.8275,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N21"
+   }
+  },
+  {
+   "id": "number_average_age_19",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(5, 9)",
+   "expected": 7.0
+  },
+  {
+   "id": "number_val_19",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 6636.42036,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N23"
+   }
+  },
+  {
+   "id": "number_average_age_20",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(10, 14)",
+   "expected": 12.0
+  },
+  {
+   "id": "number_val_20",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 8381.44246,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N24"
+   }
+  },
+  {
+   "id": "number_average_age_21",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(15, 19)",
+   "expected": 17.0
+  },
+  {
+   "id": "number_val_21",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 13846.2262,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N25"
+   }
+  },
+  {
+   "id": "number_average_age_22",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(20, 24)",
+   "expected": 22.0
+  },
+  {
+   "id": "number_val_22",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 21540.5187,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N26"
+   }
+  },
+  {
+   "id": "number_average_age_23",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(25, 29)",
+   "expected": 27.0
+  },
+  {
+   "id": "number_val_23",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 33627.2748,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N27"
+   }
+  },
+  {
+   "id": "number_average_age_24",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(30, 34)",
+   "expected": 32.0
+  },
+  {
+   "id": "number_val_24",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 51211.6881,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N28"
+   }
+  },
+  {
+   "id": "number_average_age_25",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(35, 39)",
+   "expected": 37.0
+  },
+  {
+   "id": "number_val_25",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 68712.8771,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N29"
+   }
+  },
+  {
+   "id": "number_average_age_26",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(40, 44)",
+   "expected": 42.0
+  },
+  {
+   "id": "number_val_26",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 94427.4829,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N30"
+   }
+  },
+  {
+   "id": "number_average_age_27",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(45, 49)",
+   "expected": 47.0
+  },
+  {
+   "id": "number_val_27",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 112339.399,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N31"
+   }
+  },
+  {
+   "id": "number_average_age_28",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(50, 54)",
+   "expected": 52.0
+  },
+  {
+   "id": "number_val_28",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 132932.546,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N32"
+   }
+  },
+  {
+   "id": "number_average_age_29",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(55, 59)",
+   "expected": 57.0
+  },
+  {
+   "id": "number_val_29",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 169998.448,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N33"
+   }
+  },
+  {
+   "id": "number_average_age_30",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(60, 64)",
+   "expected": 62.0
+  },
+  {
+   "id": "number_val_30",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 227649.078,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N34"
+   }
+  },
+  {
+   "id": "number_average_age_31",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(65, 69)",
+   "expected": 67.0
+  },
+  {
+   "id": "number_val_31",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 293759.297,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N35"
+   }
+  },
+  {
+   "id": "number_average_age_32",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(70, 74)",
+   "expected": 72.0
+  },
+  {
+   "id": "number_val_32",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 332828.631,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N36"
+   }
+  },
+  {
+   "id": "number_average_age_33",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(75, 79)",
+   "expected": 77.0
+  },
+  {
+   "id": "number_val_33",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 281918.472,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N37"
+   }
+  },
+  {
+   "id": "number_average_age_34",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(80, 84)",
+   "expected": 82.0
+  },
+  {
+   "id": "number_val_34",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 254850.11,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N38"
+   }
+  },
+  {
+   "id": "number_average_age_35",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(85, 89)",
+   "expected": 87.0
+  },
+  {
+   "id": "number_val_35",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 158572.935,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N39"
+   }
+  },
+  {
+   "id": "number_average_age_36",
+   "label": "Number (average age)",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "avg(90, 94)",
+   "expected": 92.0
+  },
+  {
+   "id": "number_val_36",
+   "label": "Number (val)",
+   "section": "age_of_death_due_to_respiratory",
+   "value": 88824.7028,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Age of death due to respiratory!N40"
+   }
+  },
+  {
+   "id": "average_age_of_death_for_all_respiratory_diseases_excluding",
+   "label": "Average age of death for all respiratory diseases, excluding deaths amongst under 5s:",
+   "section": "age_of_death_due_to_respiratory",
+   "formula": "sum(number_average_age * number_val, number_average_age_2 * number_val_2, number_average_age_3 * number_val_3, number_average_age_4 * number_val_4, number_average_age_5 * number_val_5, number_average_age_6 * number_val_6, number_average_age_7 * number_val_7, number_average_age_8 * number_val_8, number_average_age_9 * number_val_9, number_average_age_10 * number_val_10, number_average_age_11 * number_val_11, number_average_age_12 * number_val_12, number_average_age_13 * number_val_13, number_average_age_14 * number_val_14, number_average_age_15 * number_val_15, number_average_age_16 * number_val_16, number_average_age_17 * number_val_17, number_average_age_18 * number_val_18, number_average_age_19 * number_val_19, number_average_age_20 * number_val_20, number_average_age_21 * number_val_21, number_average_age_22 * number_val_22, number_average_age_23 * number_val_23, number_average_age_24 * number_val_24, number_average_age_25 * number_val_25, number_average_age_26 * number_val_26, number_average_age_27 * number_val_27, number_average_age_28 * number_val_28, number_average_age_29 * number_val_29, number_average_age_30 * number_val_30, number_average_age_31 * number_val_31, number_average_age_32 * number_val_32, number_average_age_33 * number_val_33, number_average_age_34 * number_val_34, number_average_age_35 * number_val_35, number_average_age_36 * number_val_36) / sum(number_val, number_val_2, number_val_3, number_val_4, number_val_5, number_val_6, number_val_7, number_val_8, number_val_9, number_val_10, number_val_11, number_val_12, number_val_13, number_val_14, number_val_15, number_val_16, number_val_17, number_val_18, number_val_19, number_val_20, number_val_21, number_val_22, number_val_23, number_val_24, number_val_25, number_val_26, number_val_27, number_val_28, number_val_29, number_val_30, number_val_31, number_val_32, number_val_33, number_val_34, number_val_35, number_val_36)",
+   "expected": 68.11276175
+  },
+  {
+   "id": "average_age_at_which_long_term_morbidity_and_mortality_occur",
+   "label": "Average age at which long-term morbidity and mortality occurs (#REF!)",
+   "section": "full_cea",
+   "formula": "average_age_of_death_for_all_respiratory_diseases_excluding - 10",
+   "expected": 58.11276175
+  },
+  {
+   "id": "average_age_of_children_for_whom_tb_disease_is_averted_ref",
+   "label": "Average age of children for whom TB disease is averted (#REF!)",
+   "section": "full_cea",
+   "value": 2.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C222"
+   },
+   "explainer": "Assuming this is at the midpoint of the targeted age range (<5 years)"
+  },
+  {
+   "id": "number_of_years_between_current_age_and_age_of_averted_post",
+   "label": "Number of years between current age and age of averted post-TB death (#REF!)",
+   "section": "full_cea",
+   "formula": "average_age_at_which_long_term_morbidity_and_mortality_occur - average_age_of_children_for_whom_tb_disease_is_averted_ref",
+   "expected": 55.61276175
+  },
+  {
+   "id": "present_value_of_units_of_value_from_averted_post_tb_sequela",
+   "label": "Present value of units of value from averted post-TB sequelae (#REF!)",
+   "section": "full_cea",
+   "formula": "estimated_units_of_value_from_post_tb_sequelae_morbidity_and * (total_units_of_value_from_morbidity_benefits_ref + total_units_of_value_of_death_averted_ref) * (1 / (1 + annual_discount_rate_for_value_generated_by_improved_health)) ^ number_of_years_between_current_age_and_age_of_averted_post",
+   "expected": 15226.60351
+  },
+  {
+   "id": "upward_adjustment_used_to_account_for_cost_of_illness_in_top",
+   "label": "Upward adjustment used to account for cost of illness in Top Charities CEAs (#REF!)",
+   "section": "full_cea",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C229"
+   },
+   "explainer": "Approach used for GiveWell top charities that focus on averting deaths of children under-5",
+   "format": "percent"
+  },
+  {
+   "id": "costs_for_childhood_tb_as_a_ratio_of_costs_for_childhood_mal",
+   "label": "Costs for childhood TB as a ratio of costs for childhood malaria (#REF!)",
+   "section": "full_cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C230"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_costs_averted_ref",
+   "label": "Total units of value from costs averted (#REF!)",
+   "section": "full_cea",
+   "formula": "(total_units_of_value_of_death_averted_ref + estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec) * upward_adjustment_used_to_account_for_cost_of_illness_in_top * costs_for_childhood_tb_as_a_ratio_of_costs_for_childhood_mal",
+   "expected": 11161.96594
+  },
+  {
+   "id": "adjustment_factor_for_lower_average_moral_weight",
+   "label": "Adjustment factor for lower average moral weight",
+   "section": "additional_benefits",
+   "formula": "86 / moral_value_per_death_averted_for_children_5",
+   "expected": 0.7543859649,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_larger_number_of_contacts_in_age_categ",
+   "label": "Adjustment factor for larger number of contacts in age category",
+   "section": "additional_benefits",
+   "formula": "(4.8 - 2) / 1",
+   "expected": 2.8,
+   "format": "percent"
+  },
+  {
+   "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
+   "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (",
+   "section": "full_cea",
+   "value": 0.31,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D206"
+   },
+   "explainer": "See cell note"
+  },
+  {
+   "id": "adjustment_for_income_increases_generated_by_tb_u5_hcm_compa_2",
+   "label": "Adjustment for income increases generated by TB U5 HCM compared to SMC (#REF!)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D207"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "total_under_5_deaths_directly_averted_ref_2",
+   "label": "TOTAL UNDER-5 DEATHS DIRECTLY AVERTED (#REF!)",
+   "section": "full_cea",
+   "formula": "total_deaths_averted_through_increased_tpt_uptake_ref_2 + total_deaths_averted_through_increased_tb_treatment_uptake_r_2",
+   "expected": 596.9927291
+  },
+  {
+   "id": "moral_value_per_death_averted_for_children_5_ref_2",
+   "label": "Moral value per death averted for children <5 (#REF!)",
+   "section": "full_cea",
+   "formula": "moral_value_per_death_averted_for_children_5",
+   "expected": 114.0
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_ref_2",
+   "label": "Total units of value of death averted (#REF!)",
+   "section": "full_cea",
+   "formula": "total_under_5_deaths_directly_averted_ref_2 * moral_value_per_death_averted_for_children_5_ref_2",
+   "expected": 68057.17111
+  },
+  {
+   "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3",
+   "label": "Estimate of total units of value from TB U5 HCM income effects (#REF!)",
+   "section": "full_cea",
+   "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2 * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa_2) * total_units_of_value_of_death_averted_ref_2",
+   "expected": 21097.72305
+  },
+  {
+   "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_2",
+   "label": "Estimate of total units of value from TB U5 HCM income effects",
+   "section": "full_cea",
+   "formula": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec + estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3",
+   "expected": 34304.62931
+  },
+  {
+   "id": "total_under_5_deaths_directly_averted",
+   "label": "TOTAL UNDER-5 DEATHS DIRECTLY AVERTED",
+   "section": "full_cea",
+   "formula": "total_under_5_deaths_directly_averted_ref + total_under_5_deaths_directly_averted_ref_2",
+   "expected": 970.7025838
+  },
+  {
+   "id": "total_units_of_value_of_death_averted",
+   "label": "Total units of value of death averted",
+   "section": "full_cea",
+   "formula": "moral_value_per_death_averted_for_children_5 * total_under_5_deaths_directly_averted",
+   "expected": 110660.0946
+  },
+  {
+   "id": "moral_value_of_a_yld_averted_ref_2",
+   "label": "Moral value of a YLD averted (#REF!)",
+   "section": "full_cea",
+   "formula": "averting_one_year_lived_with_disability_yld",
+   "expected": 2.3
+  },
+  {
+   "id": "disability_weight_ref_2",
+   "label": "Disability weight (#REF!)",
+   "section": "full_cea",
+   "value": 0.333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D212"
+   },
+   "explainer": "Global Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis"
+  },
+  {
+   "id": "average_duration_of_tb_symptoms_in_children_in_years_ref_2",
+   "label": "Average duration of TB symptoms in children (in years) (#REF!)",
+   "section": "full_cea",
+   "formula": "current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3 * 0.25 + (1 - current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3) * 1.5",
+   "expected": 1.124346429
+  },
+  {
+   "id": "years_lived_with_disability_ylds_averted_ref_2",
+   "label": "Years lived with disability (YLDs) averted (#REF!)",
+   "section": "full_cea",
+   "formula": "disability_weight_ref_2 * average_duration_of_tb_symptoms_in_children_in_years_ref_2 * tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2 + disability_weight_ref_2 * (1.5 - 0.25) * of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen_2",
+   "expected": 894.4380784
+  },
+  {
+   "id": "total_units_of_value_from_morbidity_benefits_ref_2",
+   "label": "Total units of value from morbidity benefits (#REF!)",
+   "section": "full_cea",
+   "formula": "moral_value_of_a_yld_averted_ref_2 * years_lived_with_disability_ylds_averted_ref_2",
+   "expected": 2057.20758
+  },
+  {
+   "id": "total_units_of_value_from_morbidity_benefits",
+   "label": "Total units of value from morbidity benefits",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_morbidity_benefits_ref + total_units_of_value_from_morbidity_benefits_ref_2",
+   "expected": 3324.780803
+  },
+  {
+   "id": "estimated_units_of_value_from_post_tb_sequelae_morbidity_and_2",
+   "label": "Estimated units of value from post-TB sequelae morbidity and death averted relative to direct-TB morbidity and death averted (#REF!)",
+   "section": "full_cea",
+   "formula": "0.94 * 0.8",
+   "expected": 0.752
+  },
+  {
+   "id": "annual_discount_rate_for_value_generated_by_improved_health_2",
+   "label": "Annual discount rate for value generated by improved health in the future (#REF!)",
+   "section": "full_cea",
+   "value": 0.014,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D221"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "average_age_at_which_long_term_morbidity_and_mortality_occur_2",
+   "label": "Average age at which long-term morbidity and mortality occurs (#REF!)",
+   "section": "full_cea",
+   "formula": "average_age_of_death_for_all_respiratory_diseases_excluding - 10",
+   "expected": 58.11276175
+  },
+  {
+   "id": "average_age_of_children_for_whom_tb_disease_is_averted_ref_2",
+   "label": "Average age of children for whom TB disease is averted (#REF!)",
+   "section": "full_cea",
+   "value": 2.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D222"
+   },
+   "explainer": "Assuming this is at the midpoint of the targeted age range (<5 years)"
+  },
+  {
+   "id": "number_of_years_between_current_age_and_age_of_averted_post_2",
+   "label": "Number of years between current age and age of averted post-TB death (#REF!)",
+   "section": "full_cea",
+   "formula": "average_age_at_which_long_term_morbidity_and_mortality_occur_2 - average_age_of_children_for_whom_tb_disease_is_averted_ref_2",
+   "expected": 55.61276175
+  },
+  {
+   "id": "present_value_of_units_of_value_from_averted_post_tb_sequela_3",
+   "label": "Present value of units of value from averted post-TB sequelae (#REF!)",
+   "section": "full_cea",
+   "formula": "estimated_units_of_value_from_post_tb_sequelae_morbidity_and_2 * (total_units_of_value_from_morbidity_benefits_ref_2 + total_units_of_value_of_death_averted_ref_2) * (1 / (1 + annual_discount_rate_for_value_generated_by_improved_health_2)) ^ number_of_years_between_current_age_and_age_of_averted_post_2",
+   "expected": 24335.34894
+  },
+  {
+   "id": "present_value_of_units_of_value_from_averted_post_tb_sequela_2",
+   "label": "Present value of units of value from averted post-TB sequelae",
+   "section": "full_cea",
+   "formula": "present_value_of_units_of_value_from_averted_post_tb_sequela + present_value_of_units_of_value_from_averted_post_tb_sequela_3",
+   "expected": 39561.95244
+  },
+  {
+   "id": "upward_adjustment_used_to_account_for_cost_of_illness_in_top_2",
+   "label": "Upward adjustment used to account for cost of illness in Top Charities CEAs (#REF!)",
+   "section": "full_cea",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D229"
+   },
+   "explainer": "Approach used for GiveWell top charities that focus on averting deaths of children under-5",
+   "format": "percent"
+  },
+  {
+   "id": "costs_for_childhood_tb_as_a_ratio_of_costs_for_childhood_mal_2",
+   "label": "Costs for childhood TB as a ratio of costs for childhood malaria (#REF!)",
+   "section": "full_cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D230"
+   },
+   "explainer": "Assumption",
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_costs_averted_ref_2",
+   "label": "Total units of value from costs averted (#REF!)",
+   "section": "full_cea",
+   "formula": "(total_units_of_value_of_death_averted_ref_2 + estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3) * upward_adjustment_used_to_account_for_cost_of_illness_in_top_2 * costs_for_childhood_tb_as_a_ratio_of_costs_for_childhood_mal_2",
+   "expected": 17830.97883
+  },
+  {
+   "id": "total_units_of_value_from_costs_averted",
+   "label": "Total units of value from costs averted",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_costs_averted_ref + total_units_of_value_from_costs_averted_ref_2",
+   "expected": 28992.94477
+  },
+  {
+   "id": "modelled_benefits_for_contacts_5_years_of_age_total_units_of",
+   "label": "Modelled benefits for contacts <5 years of age (total units of value generated)",
+   "section": "additional_benefits",
+   "formula": "sum(total_units_of_value_of_death_averted, estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_2, total_units_of_value_from_morbidity_benefits, present_value_of_units_of_value_from_averted_post_tb_sequela_2, total_units_of_value_from_costs_averted)",
+   "expected": 216844.4019
+  },
+  {
+   "id": "adjustment_factor_for_long_term_income_effects_being_minimal",
+   "label": "Adjustment factor for long-term income effects being minimal if averted TB occurs after age 5",
+   "section": "additional_benefits",
+   "formula": "1 - estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_2 / modelled_benefits_for_contacts_5_years_of_age_total_units_of",
+   "expected": 0.8418007151,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_smaller_effect_from_facility_based_tpt",
+   "label": "Adjustment factor for smaller effect from facility-based TPT initiation",
+   "section": "additional_benefits",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Additional benefits!B6"
+   },
+   "explainer": "We guess that 80% of the benefits for under-5 are generated through initiation of TPT at the household rather than at the facility, and 20% from screening at the household",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_higher_counterfactual_tb_treatment_cov",
+   "label": "Adjustment factor for higher counterfactual TB treatment coverage",
+   "section": "additional_benefits",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Additional benefits!B7"
+   },
+   "explainer": "Guess - TB treatment rates are higher for adults than for young children, so preventing TB is less important for adults than children in terms of preventing deaths",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_transmission_effects",
+   "label": "Adjustment factor for transmission effects",
+   "section": "additional_benefits",
+   "value": 2.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Additional benefits!B8"
+   },
+   "explainer": "We assume that each new case of TB disease generates 1 additional secondary case. This is roughly consistent with the range of 'R' estimates from studies reported here (Figure 4). We have not looked into whether R would be significantly lower for household contacts. This is not counted as a benefit for under-5 children because our impression is that transmission of TB by young children is relatively small.",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_factor_for_averted_tb_deaths_being_temporarily_de",
+   "label": "Adjustment factor for averted TB deaths being temporarily delayed rather than genuinely averted",
+   "section": "additional_benefits",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Additional benefits!B9"
+   },
+   "explainer": "Guess - this is probably more of an issue for adults than for young children, because TB mortality profile in adults does not seem to decline quickly as they age, compared to children in the 0-5 age bucket (see Menzies et al 2021, Figure 1). So even if you avert TB disease and death over the program period, the same individual might be at relatively high risk of dying from TB in a subsequent year.",
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_factor",
+   "label": "Total adjustment factor",
+   "section": "additional_benefits",
+   "formula": "product(adjustment_factor_for_lower_average_moral_weight, adjustment_factor_for_larger_number_of_contacts_in_age_categ, adjustment_factor_for_long_term_income_effects_being_minimal, adjustment_factor_for_smaller_effect_from_facility_based_tpt, adjustment_factor_for_higher_counterfactual_tb_treatment_cov, adjustment_factor_for_transmission_effects, adjustment_factor_for_averted_tb_deaths_being_temporarily_de)",
+   "expected": 0.07112477621,
+   "format": "percent"
+  },
+  {
+   "id": "benefits_for_over_5_hhcs_as_of_benefits_to_under_5_hhcs_ref",
+   "label": "Benefits for over-5 HHCs as % of benefits to under-5 HHCs (#REF!)",
+   "section": "full_cea",
+   "formula": "total_adjustment_factor",
+   "expected": 0.07112477621,
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_benefits_for_over_5_hhcs_ref",
+   "label": "Total units of value from benefits for over-5 HHCs (#REF!)",
+   "section": "full_cea",
+   "formula": "benefits_for_over_5_hhcs_as_of_benefits_to_under_5_hhcs_ref * sum(total_units_of_value_of_death_averted_ref, estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec, total_units_of_value_from_morbidity_benefits_ref, present_value_of_units_of_value_from_averted_post_tb_sequela, total_units_of_value_from_costs_averted_ref)",
+   "expected": 5936.498607
+  },
+  {
+   "id": "total_units_of_value_before_leverage_and_funging_2",
+   "label": "Total units of value, before leverage and funging",
+   "section": "full_cea",
+   "formula": "sum(total_units_of_value_of_death_averted_ref, estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec, total_units_of_value_from_morbidity_benefits_ref, present_value_of_units_of_value_from_averted_post_tb_sequela, total_units_of_value_from_costs_averted_ref, total_units_of_value_from_benefits_for_over_5_hhcs_ref)",
+   "expected": 89402.47099
+  },
+  {
+   "id": "benefits_for_over_5_hhcs_as_of_benefits_to_under_5_hhcs_ref_2",
+   "label": "Benefits for over-5 HHCs as % of benefits to under-5 HHCs (#REF!)",
+   "section": "full_cea",
+   "formula": "total_adjustment_factor",
+   "expected": 0.07112477621,
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_benefits_for_over_5_hhcs_ref_2",
+   "label": "Total units of value from benefits for over-5 HHCs (#REF!)",
+   "section": "full_cea",
+   "formula": "benefits_for_over_5_hhcs_as_of_benefits_to_under_5_hhcs_ref_2 * sum(total_units_of_value_of_death_averted_ref_2, estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3, total_units_of_value_from_morbidity_benefits_ref_2, present_value_of_units_of_value_from_averted_post_tb_sequela_3, total_units_of_value_from_costs_averted_ref_2)",
+   "expected": 9486.51095
+  },
+  {
+   "id": "total_units_of_value_before_leverage_and_funging_3",
+   "label": "Total units of value, before leverage and funging",
+   "section": "full_cea",
+   "formula": "sum(total_units_of_value_of_death_averted_ref_2, estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3, total_units_of_value_from_morbidity_benefits_ref_2, present_value_of_units_of_value_from_averted_post_tb_sequela_3, total_units_of_value_from_costs_averted_ref_2, total_units_of_value_from_benefits_for_over_5_hhcs_ref_2)",
+   "expected": 142864.9405
+  },
+  {
+   "id": "total_units_of_value_before_leverage_and_funging",
+   "label": "Total units of value, before leverage and funging",
+   "section": "full_cea",
+   "formula": "total_units_of_value_before_leverage_and_funging_2 + total_units_of_value_before_leverage_and_funging_3",
+   "expected": 232267.4114
+  },
+  {
+   "id": "direct_mortality_benefits",
+   "label": "Direct mortality benefits",
+   "section": "simple_cea",
+   "formula": "total_number_of_under_5_deaths_directly_averted_bihar_and_up * moral_weight_for_averted_deaths / total_units_of_value_before_leverage_and_funging",
+   "expected": 0.47858061,
+   "format": "percent"
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu_2",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!B257"
+   },
+   "explainer": "Guess based on impression that the Indian government generally pays for full scale-up of programs",
+   "format": "percent"
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_1_government_funding_would_replace_philanthropic_fu_2",
+   "expected": 1.0,
+   "format": "percent"
+  },
+  {
+   "id": "government",
+   "label": "Government",
+   "section": "full_cea",
+   "formula": "0.0056",
+   "expected": 0.0056
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_per_usd_ref",
+   "label": "Total units of value of death averted per USD (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_ref / total_intervention_cost_to_implementer_26_districts",
+   "expected": 0.0135189129
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_per_100k_ref",
+   "label": "Total units of value of death averted per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_per_usd_ref * 10 ^ 5",
+   "expected": 1351.89129
+  },
+  {
+   "id": "total_units_of_value_from_income_effects_per_100k_ref",
+   "label": "Total units of value from income effects per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec / total_intervention_cost_to_implementer_26_districts * 10 ^ 5",
+   "expected": 419.0863
+  },
+  {
+   "id": "total_units_of_value_from_morbidity_effects_per_100k_ref",
+   "label": "Total units of value from morbidity effects per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_morbidity_benefits_ref / total_intervention_cost_to_implementer_26_districts * 10 ^ 5",
+   "expected": 40.22308944
+  },
+  {
+   "id": "total_units_of_value_from_averted_post_tb_sequelae_per_100k",
+   "label": "Total units of value from averted post-TB sequelae per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "present_value_of_units_of_value_from_averted_post_tb_sequela / total_intervention_cost_to_implementer_26_districts * 10 ^ 5",
+   "expected": 483.1760592
+  },
+  {
+   "id": "total_units_of_value_from_costs_averted_per_100k_ref",
+   "label": "Total units of value from costs averted per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_costs_averted_ref / total_intervention_cost_to_implementer_26_districts * 10 ^ 5",
+   "expected": 354.1955181
+  },
+  {
+   "id": "total_units_of_value_from_benefits_for_over_5_hhcs_per_100k",
+   "label": "Total units of value from benefits for over-5 HHCs per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_benefits_for_over_5_hhcs_ref / total_intervention_cost_to_implementer_26_districts * 10 ^ 5",
+   "expected": 188.3791091
+  },
+  {
+   "id": "total_units_of_value_from_implementer_program_per_100k_fundi",
+   "label": "Total units of value from implementer program per $100k funding to implementer, before leverage and funging adjustments",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_per_100k_ref + total_units_of_value_from_income_effects_per_100k_ref + total_units_of_value_from_morbidity_effects_per_100k_ref + total_units_of_value_from_averted_post_tb_sequelae_per_100k + total_units_of_value_from_costs_averted_per_100k_ref + total_units_of_value_from_benefits_for_over_5_hhcs_per_100k",
+   "expected": 2836.951366
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_26_districts * scenario_1_government_funding_would_replace_philanthropic_fu * (government - total_units_of_value_from_implementer_program_per_100k_fundi / 100000)",
+   "expected": -71754.8707
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu_4",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!B252"
+   },
+   "explainer": "Guess based on information contained in the Indian government's Global Fund request",
+   "format": "percent"
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu_3",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_1_government_funding_would_replace_philanthropic_fu_4",
+   "expected": 0.0,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this * scenario_1_government_funding_would_replace_philanthropic_fu_3",
+   "expected": 0.0
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant_2",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!B258"
+   },
+   "explainer": "Guess based on impression that the relevant funders typically fund smaller-scale pilots than what we have modelled here",
+   "format": "percent"
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_2_other_international_funders_would_replace_philant_2",
+   "expected": 0.5,
+   "format": "percent"
+  },
+  {
+   "id": "other_international_funders",
+   "label": "Other international funders",
+   "section": "full_cea",
+   "value": 0.015432999999999999,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C248"
+   },
+   "explainer": "Assumption"
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this_2",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_26_districts * scenario_2_other_international_funders_would_replace_philant * (other_international_funders - total_units_of_value_from_implementer_program_per_100k_fundi / 100000)",
+   "expected": -20383.7877
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant_4",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!B253"
+   },
+   "explainer": "Guess based on conversations with other large funders of TB programs in India",
+   "format": "percent"
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant_3",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_2_other_international_funders_would_replace_philant_4",
+   "expected": 0.1,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program_2",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this_2 * scenario_2_other_international_funders_would_replace_philant_3",
+   "expected": -2038.37877
+  },
+  {
+   "id": "total_tpt_costs_to_government_26_districts",
+   "label": "Total TPT costs to government (26 districts)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C20"
+   },
+   "explainer": "Assumption",
+   "format": "usd"
+  },
+  {
+   "id": "government_tpt_costs_averted_through_tpt_initiation_at_home",
+   "label": "Government TPT costs averted through TPT initiation at home (26 districts)",
+   "section": "full_cea",
+   "formula": "number_screened_negative * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_2 * average_unit_cost_of_pediatric_3hp_regimen_for_children_5_26",
+   "expected": 111832.7551,
+   "format": "usd"
+  },
+  {
+   "id": "treatment_for_rifampicin_sensitive_tb_inh_50_rif_75_z_150_fd",
+   "label": "Treatment for rifampicin-sensitive TB (INH 50 + RIF 75 + Z 150 FDC DT followed by INH 50 + RIF 75 FDC DT)",
+   "section": "unit_cost_inputs",
+   "value": 30.24,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Unit Cost Inputs!B14"
+   },
+   "explainer": "Cost per child patient calculations performed by implementer using GDF catalog.\nCalculation details: \n- Using 12-15kg average weight band: RHZ FDC DT 56daysx3tabs + RH FDC 112daysx3tabs: \n- RHZ FDC DT 168tabsx$0.075=12.6 + RH FDC DT 336tabsx$0.052=17.64 \n- Total=$12.6+$17.64= $30.24",
+   "format": "usd"
+  },
+  {
+   "id": "unit_cost_of_tb_treatment_for_ages_0_15_26_districts",
+   "label": "Unit cost of TB treatment for ages 0-15 (26 districts)",
+   "section": "full_cea",
+   "formula": "treatment_for_rifampicin_sensitive_tb_inh_50_rif_75_z_150_fd",
+   "expected": 30.24,
+   "format": "usd"
+  },
+  {
+   "id": "number_offered_tb_treatment_5",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection * 0 + of_those_screening_positive_number_without_tb_infection * of_those_screening_positive_successfully_referred_to_a_healt * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t)",
+   "expected": 137.6443736
+  },
+  {
+   "id": "number_initiating_tb_treatment_5",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment_5 * estimated_tb_treatment_participation_rate_among_those_offere",
+   "expected": 119.750605
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual_5",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection * 0 + of_those_screening_positive_number_without_tb_infection * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t) * estimated_tb_treatment_participation_rate_among_those_offere",
+   "expected": 68.4855636
+  },
+  {
+   "id": "of_additional_hhcs_5_without_tb_infection_enrolled_on_tb_tre",
+   "label": "# of additional HHCs <5 without TB infection enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment_5 - number_initiating_tb_treatment_in_counterfactual_5",
+   "expected": 51.26504141
+  },
+  {
+   "id": "total_of_additional_hhcs_5_enrolled_on_tb_treatment_due_to_t",
+   "label": "Total # of additional HHCs <5 enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "sum(of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm, of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen, of_additional_hhcs_5_without_tb_infection_enrolled_on_tb_tre)",
+   "expected": 344.0788956
+  },
+  {
+   "id": "xpert_mtb_rif_cartridge",
+   "label": "Xpert MTB/RIF cartridge",
+   "section": "unit_cost_inputs",
+   "value": 7.97,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Unit Cost Inputs!B19"
+   },
+   "explainer": "https://www.theglobalfund.org/media/13442/operational_2023-10-cepheid-genexpert-tb-testing_briefingnote_en.pdf",
+   "format": "usd"
+  },
+  {
+   "id": "truenat_mtb_cartridge",
+   "label": "Truenat MTB cartridge",
+   "section": "unit_cost_inputs",
+   "value": 7.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Unit Cost Inputs!B20"
+   },
+   "explainer": "https://www.stoptb.org/news/stop-tb-partnership-usaid-and-global-fund-negotiate-landmark-deal-bringing-down-price-of-rapid",
+   "format": "usd"
+  },
+  {
+   "id": "unit_cost_of_testing_commodities_26_districts",
+   "label": "Unit cost of testing commodities (26 districts)",
+   "section": "full_cea",
+   "formula": "avg(xpert_mtb_rif_cartridge, truenat_mtb_cartridge) * 1.25",
+   "expected": 9.91875,
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_commodity_costs_due_to_increased_c",
+   "label": "Additional facility-based commodity costs due to increased care-seeking of household contacts (HHCs) with symptoms (26 districts)",
+   "section": "full_cea",
+   "formula": "unit_cost_of_tb_treatment_for_ages_0_15_26_districts * total_of_additional_hhcs_5_enrolled_on_tb_treatment_due_to_t + unit_cost_of_testing_commodities_26_districts * (number_screened_positive * (of_those_screening_positive_successfully_referred_to_a_healt - estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of))",
+   "expected": 22678.72479,
+   "format": "usd"
+  },
+  {
+   "id": "facility_based_costs_averted_due_to_fewer_tb_infections_prog",
+   "label": "Facility-based costs averted due to fewer TB infections progressing to TB disease (26 districts)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of * unit_cost_of_testing_commodities_26_districts + tb_disease_cases_averted_through_increased_tpt_uptake_for_th * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_2 * unit_cost_of_tb_treatment_for_ages_0_15_26_districts",
+   "expected": 15664.75183,
+   "format": "usd"
+  },
+  {
+   "id": "net_additional_facility_based_costs_26_districts",
+   "label": "Net additional facility-based costs (26 districts)",
+   "section": "full_cea",
+   "formula": "additional_facility_based_commodity_costs_due_to_increased_c - facility_based_costs_averted_due_to_fewer_tb_infections_prog",
+   "expected": 7013.972962,
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_costs_covered_by_government_or_pri",
+   "label": "Additional facility-based costs covered by government or private facilities (26 districts)",
+   "section": "full_cea",
+   "formula": "net_additional_facility_based_costs_26_districts * 0.8",
+   "expected": 5611.178369,
+   "format": "usd"
+  },
+  {
+   "id": "non_commodity_cost_to_government_26_districts",
+   "label": "Non-commodity cost to government (26 districts)",
+   "section": "full_cea",
+   "formula": "non_commodity_cost_to_implementer_26_districts * 0.2",
+   "expected": 559917.0,
+   "format": "usd"
+  },
+  {
+   "id": "value_of_government_costs_downstream_of_implementer_program",
+   "label": "Value of government costs downstream of implementer program (additional spending on tests & drugs, plus additional time for health workers)",
+   "section": "full_cea",
+   "formula": "(total_tpt_costs_to_government_26_districts - government_tpt_costs_averted_through_tpt_initiation_at_home + additional_facility_based_costs_covered_by_government_or_pri + non_commodity_cost_to_government_26_districts) * government",
+   "expected": 2540.69437
+  },
+  {
+   "id": "total_tpt_cost_to_other_international_funders_26_districts",
+   "label": "Total TPT cost to other international funders (26 districts)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!C19"
+   },
+   "explainer": "Assumption",
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_costs_covered_by_international_fun",
+   "label": "Additional facility-based costs covered by international funders (26 districts)",
+   "section": "full_cea",
+   "formula": "net_additional_facility_based_costs_26_districts - additional_facility_based_costs_covered_by_government_or_pri",
+   "expected": 1402.794592,
+   "format": "usd"
+  },
+  {
+   "id": "value_of_global_fund_costs_downstream_of_implementer_program",
+   "label": "Value of Global Fund costs downstream of implementer program (additional spending on tests & drugs)",
+   "section": "full_cea",
+   "formula": "(total_tpt_cost_to_other_international_funders_26_districts + additional_facility_based_costs_covered_by_international_fun) * other_international_funders",
+   "expected": 21.64932894
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this_3",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "sum(value_of_government_costs_downstream_of_implementer_program, value_of_global_fund_costs_downstream_of_implementer_program) * -1",
+   "expected": -2562.343699
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded_2",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "full_cea",
+   "formula": "100 / 100 - scenario_1_government_funding_would_replace_philanthropic_fu_4 - scenario_2_other_international_funders_would_replace_philant_4",
+   "expected": 0.9,
+   "format": "percent"
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "full_cea",
+   "formula": "scenario_3_program_would_go_unfunded_2",
+   "expected": 0.9,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program_3",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this_3 * scenario_3_program_would_go_unfunded",
+   "expected": -2306.109329
+  },
+  {
+   "id": "total_units_of_value_after_accounting_for_leverage_and_fungi_2",
+   "label": "Total units of value after accounting for leverage and funging",
+   "section": "full_cea",
+   "formula": "total_units_of_value_before_leverage_and_funging_2 + expected_change_in_value_generated_by_implementer_program + expected_change_in_value_generated_by_implementer_program_2 + expected_change_in_value_generated_by_implementer_program_3",
+   "expected": 85057.98289
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu_5",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_1_government_funding_would_replace_philanthropic_fu_2",
+   "expected": 1.0,
+   "format": "percent"
+  },
+  {
+   "id": "government_2",
+   "label": "Government",
+   "section": "full_cea",
+   "formula": "0.0056",
+   "expected": 0.0056
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_per_usd_ref_2",
+   "label": "Total units of value of death averted per USD (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_ref_2 / total_intervention_cost_to_implementer_47_districts",
+   "expected": 0.01213172857
+  },
+  {
+   "id": "total_units_of_value_of_death_averted_per_100k_ref_2",
+   "label": "Total units of value of death averted per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_per_usd_ref_2 * 10 ^ 5",
+   "expected": 1213.172857
+  },
+  {
+   "id": "total_units_of_value_from_income_effects_per_100k_ref_2",
+   "label": "Total units of value from income effects per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3 / total_intervention_cost_to_implementer_47_districts * 10 ^ 5",
+   "expected": 376.0835858
+  },
+  {
+   "id": "total_units_of_value_from_morbidity_effects_per_100k_ref_2",
+   "label": "Total units of value from morbidity effects per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_morbidity_benefits_ref_2 / total_intervention_cost_to_implementer_47_districts * 10 ^ 5",
+   "expected": 36.67135083
+  },
+  {
+   "id": "total_units_of_value_from_averted_post_tb_sequelae_per_100k_2",
+   "label": "Total units of value from averted post-TB sequelae per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "present_value_of_units_of_value_from_averted_post_tb_sequela_3 / total_intervention_cost_to_implementer_47_districts * 10 ^ 5",
+   "expected": 433.7968258
+  },
+  {
+   "id": "total_units_of_value_from_costs_averted_per_100k_ref_2",
+   "label": "Total units of value from costs averted per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_costs_averted_ref_2 / total_intervention_cost_to_implementer_47_districts * 10 ^ 5",
+   "expected": 317.8512886
+  },
+  {
+   "id": "total_units_of_value_from_benefits_for_over_5_hhcs_per_100k_2",
+   "label": "Total units of value from benefits for over-5 HHCs per $100k (#REF!)",
+   "section": "full_cea",
+   "formula": "total_units_of_value_from_benefits_for_over_5_hhcs_ref_2 / total_intervention_cost_to_implementer_47_districts * 10 ^ 5",
+   "expected": 169.1045544
+  },
+  {
+   "id": "total_units_of_value_from_implementer_program_per_100k_fundi_2",
+   "label": "Total units of value from implementer program per $100k funding to implementer, before leverage and funging adjustments",
+   "section": "full_cea",
+   "formula": "total_units_of_value_of_death_averted_per_100k_ref_2 + total_units_of_value_from_income_effects_per_100k_ref_2 + total_units_of_value_from_morbidity_effects_per_100k_ref_2 + total_units_of_value_from_averted_post_tb_sequelae_per_100k_2 + total_units_of_value_from_costs_averted_per_100k_ref_2 + total_units_of_value_from_benefits_for_over_5_hhcs_per_100k_2",
+   "expected": 2546.680463
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this_4",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_47_districts * scenario_1_government_funding_would_replace_philanthropic_fu_5 * (government_2 - total_units_of_value_from_implementer_program_per_100k_fundi_2 / 100000)",
+   "expected": -111449.7834
+  },
+  {
+   "id": "scenario_1_government_funding_would_replace_philanthropic_fu_6",
+   "label": "Scenario 1: Government funding would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_1_government_funding_would_replace_philanthropic_fu_4",
+   "expected": 0.0,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program_4",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this_4 * scenario_1_government_funding_would_replace_philanthropic_fu_6",
+   "expected": 0.0
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant_5",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_2_other_international_funders_would_replace_philant_2",
+   "expected": 0.5,
+   "format": "percent"
+  },
+  {
+   "id": "other_international_funders_2",
+   "label": "Other international funders",
+   "section": "full_cea",
+   "value": 0.015432999999999999,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D248"
+   },
+   "explainer": "Assumption"
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this_5",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "total_intervention_cost_to_implementer_47_districts * scenario_2_other_international_funders_would_replace_philant_5 * (other_international_funders_2 - total_units_of_value_from_implementer_program_per_100k_fundi_2 / 100000)",
+   "expected": -28144.06679
+  },
+  {
+   "id": "scenario_2_other_international_funders_would_replace_philant_6",
+   "label": "Scenario 2: Other international funders would replace philanthropic funding",
+   "section": "full_cea",
+   "formula": "scenario_2_other_international_funders_would_replace_philant_4",
+   "expected": 0.1,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program_5",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this_5 * scenario_2_other_international_funders_would_replace_philant_6",
+   "expected": -2814.406679
+  },
+  {
+   "id": "total_tpt_costs_to_government_47_districts",
+   "label": "Total TPT costs to government (47 districts)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D20"
+   },
+   "explainer": "Assumption",
+   "format": "usd"
+  },
+  {
+   "id": "government_tpt_costs_averted_through_tpt_initiation_at_home_2",
+   "label": "Government TPT costs averted through TPT initiation at home (47 districts)",
+   "section": "full_cea",
+   "formula": "number_screened_negative_2 * counterfactual_in_the_absence_of_this_program_tpt_coverage_r_3 * average_unit_cost_of_pediatric_3hp_regimen_for_children_5_47",
+   "expected": 435257.7859,
+   "format": "usd"
+  },
+  {
+   "id": "unit_cost_of_tb_treatment_for_ages_0_15_47_districts",
+   "label": "Unit cost of TB treatment for ages 0-15 (47 districts)",
+   "section": "full_cea",
+   "formula": "treatment_for_rifampicin_sensitive_tb_inh_50_rif_75_z_150_fd",
+   "expected": 30.24,
+   "format": "usd"
+  },
+  {
+   "id": "number_offered_tb_treatment_6",
+   "label": "Number offered TB treatment",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection_2 * 0 + of_those_screening_positive_number_without_tb_infection_2 * of_those_screening_positive_successfully_referred_to_a_healt_2 * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2)",
+   "expected": 325.4112557
+  },
+  {
+   "id": "number_initiating_tb_treatment_6",
+   "label": "Number initiating TB treatment",
+   "section": "full_cea",
+   "formula": "number_offered_tb_treatment_6 * estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "expected": 283.1077925
+  },
+  {
+   "id": "number_initiating_tb_treatment_in_counterfactual_6",
+   "label": "Number initiating TB treatment in counterfactual",
+   "section": "full_cea",
+   "formula": "of_those_screening_negative_number_without_tb_infection_2 * 0 + of_those_screening_positive_number_without_tb_infection_2 * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2 * (1 - among_those_who_don_t_have_tb_disease_who_are_not_provided_t_2) * estimated_tb_treatment_participation_rate_among_those_offere_2",
+   "expected": 161.9098018
+  },
+  {
+   "id": "of_additional_hhcs_5_without_tb_infection_enrolled_on_tb_tre_2",
+   "label": "# of additional HHCs <5 without TB infection enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "number_initiating_tb_treatment_6 - number_initiating_tb_treatment_in_counterfactual_6",
+   "expected": 121.1979906
+  },
+  {
+   "id": "total_of_additional_hhcs_5_enrolled_on_tb_treatment_due_to_t_2",
+   "label": "Total # of additional HHCs <5 enrolled on TB treatment due to this program",
+   "section": "full_cea",
+   "formula": "sum(of_additional_hhcs_5_with_tb_infection_enrolled_on_tb_treatm_2, of_additional_hhcs_5_with_tb_disease_enrolled_on_tb_treatmen_2, of_additional_hhcs_5_without_tb_infection_enrolled_on_tb_tre_2)",
+   "expected": 813.4523959
+  },
+  {
+   "id": "unit_cost_of_testing_commodities_47_districts",
+   "label": "Unit cost of testing commodities (47 districts)",
+   "section": "full_cea",
+   "formula": "avg(xpert_mtb_rif_cartridge, truenat_mtb_cartridge) * 1.25",
+   "expected": 9.91875,
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_commodity_costs_due_to_increased_c_2",
+   "label": "Additional facility-based commodity costs due to increased care-seeking of household contacts (HHCs) with symptoms (47 districts)",
+   "section": "full_cea",
+   "formula": "unit_cost_of_tb_treatment_for_ages_0_15_47_districts * total_of_additional_hhcs_5_enrolled_on_tb_treatment_due_to_t_2 + unit_cost_of_testing_commodities_47_districts * (number_screened_positive_2 * (of_those_screening_positive_successfully_referred_to_a_healt_2 - estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2))",
+   "expected": 53615.79351,
+   "format": "usd"
+  },
+  {
+   "id": "facility_based_costs_averted_due_to_fewer_tb_infections_prog_2",
+   "label": "Facility-based costs averted due to fewer TB infections progressing to TB disease (47 districts)",
+   "section": "full_cea",
+   "formula": "tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2 * estimated_of_5s_with_tb_disease_who_seek_care_in_absence_of_2 * unit_cost_of_testing_commodities_47_districts + tb_disease_cases_averted_through_increased_tpt_uptake_for_th_2 * current_rate_of_tb_treatment_for_hhcs_with_tb_disease_3 * unit_cost_of_tb_treatment_for_ages_0_15_47_districts",
+   "expected": 22446.14184,
+   "format": "usd"
+  },
+  {
+   "id": "net_additional_facility_based_costs_47_districts",
+   "label": "Net additional facility-based costs (47 districts)",
+   "section": "full_cea",
+   "formula": "additional_facility_based_commodity_costs_due_to_increased_c_2 - facility_based_costs_averted_due_to_fewer_tb_infections_prog_2",
+   "expected": 31169.65167,
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_costs_covered_by_government_or_pri_2",
+   "label": "Additional facility-based costs covered by government or private facilities (47 districts)",
+   "section": "full_cea",
+   "formula": "net_additional_facility_based_costs_47_districts * 0.8",
+   "expected": 24935.72134,
+   "format": "usd"
+  },
+  {
+   "id": "non_commodity_cost_to_government_47_districts",
+   "label": "Non-commodity cost to government (47 districts)",
+   "section": "full_cea",
+   "formula": "non_commodity_cost_to_implementer_47_districts * 0.2",
+   "expected": 955641.8,
+   "format": "usd"
+  },
+  {
+   "id": "value_of_government_costs_downstream_of_implementer_program_2",
+   "label": "Value of government costs downstream of implementer program (additional spending on tests & drugs, plus additional time for health workers)",
+   "section": "full_cea",
+   "formula": "(total_tpt_costs_to_government_47_districts - government_tpt_costs_averted_through_tpt_initiation_at_home_2 + additional_facility_based_costs_covered_by_government_or_pri_2 + non_commodity_cost_to_government_47_districts) * government_2",
+   "expected": 3053.790519
+  },
+  {
+   "id": "total_tpt_cost_to_other_international_funders_47_districts",
+   "label": "Total TPT cost to other international funders (47 districts)",
+   "section": "full_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
+    "cell": "Full CEA!D19"
+   },
+   "explainer": "Assumption",
+   "format": "usd"
+  },
+  {
+   "id": "additional_facility_based_costs_covered_by_international_fun_2",
+   "label": "Additional facility-based costs covered by international funders (47 districts)",
+   "section": "full_cea",
+   "formula": "net_additional_facility_based_costs_47_districts - additional_facility_based_costs_covered_by_government_or_pri_2",
+   "expected": 6233.930334,
+   "format": "usd"
+  },
+  {
+   "id": "value_of_global_fund_costs_downstream_of_implementer_program_2",
+   "label": "Value of Global Fund costs downstream of implementer program (additional spending on tests & drugs)",
+   "section": "full_cea",
+   "formula": "(total_tpt_cost_to_other_international_funders_47_districts + additional_facility_based_costs_covered_by_international_fun_2) * other_international_funders_2",
+   "expected": 96.20824685
+  },
+  {
+   "id": "change_in_value_generated_by_the_implementer_program_if_this_6",
+   "label": "Change in value generated by the implementer program if this scenario represented the true counterfactual",
+   "section": "full_cea",
+   "formula": "sum(value_of_government_costs_downstream_of_implementer_program_2, value_of_global_fund_costs_downstream_of_implementer_program_2) * -1",
+   "expected": -3149.998766
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded_3",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "full_cea",
+   "formula": "scenario_3_program_would_go_unfunded_2",
+   "expected": 0.9,
+   "format": "percent"
+  },
+  {
+   "id": "expected_change_in_value_generated_by_implementer_program_6",
+   "label": "Expected change in value generated by implementer program",
+   "section": "full_cea",
+   "formula": "change_in_value_generated_by_the_implementer_program_if_this_6 * scenario_3_program_would_go_unfunded_3",
+   "expected": -2834.998889
+  },
+  {
+   "id": "total_units_of_value_after_accounting_for_leverage_and_fungi_3",
+   "label": "Total units of value after accounting for leverage and funging",
+   "section": "full_cea",
+   "formula": "total_units_of_value_before_leverage_and_funging_3 + expected_change_in_value_generated_by_implementer_program_4 + expected_change_in_value_generated_by_implementer_program_5 + expected_change_in_value_generated_by_implementer_program_6",
+   "expected": 137215.5349
+  },
+  {
+   "id": "total_units_of_value_after_accounting_for_leverage_and_fungi",
+   "label": "Total units of value after accounting for leverage and funging",
+   "section": "full_cea",
+   "formula": "total_units_of_value_after_accounting_for_leverage_and_fungi_2 + total_units_of_value_after_accounting_for_leverage_and_fungi_3",
+   "expected": 222273.5178
+  },
+  {
+   "id": "adjustment_for_downstream_costs_to_others_and_risk_of_replac",
+   "label": "Adjustment for downstream costs to others and risk of replacing funding from other funders",
+   "section": "simple_cea",
+   "formula": "total_units_of_value_after_accounting_for_leverage_and_fungi / total_units_of_value_before_leverage_and_funging - 1",
+   "expected": -0.04302753281,
+   "format": "percent"
+  },
+  {
+   "id": "final_cost_effectiveness_multiples_of_cash",
+   "label": "Final cost-effectiveness (multiples of cash)",
+   "section": "simple_cea",
+   "formula": "initial_cost_effectiveness_estimate_multiples_of_cash / direct_mortality_benefits * (1 + adjustment_for_downstream_costs_to_others_and_risk_of_replac)",
+   "expected": 7.573237391
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "final_cost_effectiveness_multiples_of_cash * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

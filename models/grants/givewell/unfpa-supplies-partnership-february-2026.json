@@ -1,0 +1,824 @@
+{
+ "id": "unfpa-supplies-partnership-february-2026",
+ "name": "UNFPA Supplies Partnership - CEA - February 2026",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "unfpa",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"UNFPA Supplies Partnership - CEA - February 2026\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
+  "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
+  "sheet": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+  "published": "2026-02-20",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
+   "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (UNFPA Supplies Partnership Reproductive Health Commodity Procurement February 2026)",
+   "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "simple_cea",
+   "title": "Simple CEA"
+  },
+  {
+   "id": "cea",
+   "title": "CEA"
+  },
+  {
+   "id": "leveragefunging",
+   "title": "LeverageFunging"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "units_of_value_per_cyp_best_guess",
+   "label": "Units of value per CYP (Best guess)",
+   "section": "cea",
+   "value": 0.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B25"
+   },
+   "explainer": "GiveWell's estimate of the value of one year of modern contraception use (0.7 units of value)"
+  },
+  {
+   "id": "units_of_value_per_couple_year_of_protection",
+   "label": "Units of value per couple-year of protection",
+   "section": "simple_cea",
+   "formula": "units_of_value_per_cyp_best_guess",
+   "expected": 0.7
+  },
+  {
+   "id": "share_of_commodities_funding_going_to_family_planning_commod",
+   "label": "Share of commodities funding going to family planning commodities (Best guess)",
+   "section": "cea",
+   "formula": "0.91 * avg(0.93, 0.955)",
+   "expected": 0.857675,
+   "format": "percent"
+  },
+  {
+   "id": "amount_of_grant_going_to_matched_fund_best_guess",
+   "label": "Amount of grant going to matched fund (Best guess)",
+   "section": "cea",
+   "formula": "(952514 + 952514) * share_of_commodities_funding_going_to_family_planning_commod",
+   "expected": 1633894.89,
+   "format": "usd"
+  },
+  {
+   "id": "match_proportion_best_guess",
+   "label": "Match proportion (Best guess)",
+   "section": "cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B8"
+   },
+   "explainer": "As of 2026, the match is $1 for every $1 of increased or maintained domestic government funding, per UNFPA. UNFPA Supplies Partnership, Annual Report 2025, slide 15.",
+   "format": "percent"
+  },
+  {
+   "id": "matched_funding_by_domestic_governments_best_guess",
+   "label": "Matched funding by domestic governments (Best guess)",
+   "section": "cea",
+   "formula": "amount_of_grant_going_to_matched_fund_best_guess * match_proportion_best_guess",
+   "expected": 1633894.89,
+   "format": "usd"
+  },
+  {
+   "id": "amount_of_grant_going_to_commodities_best_guess",
+   "label": "Amount of grant going to commodities (Best guess)",
+   "section": "cea",
+   "formula": "3503354 + 3503354",
+   "expected": 7006708.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_grant_amount_going_specifically_to_family_planning_com",
+   "label": "Total grant amount going specifically to family planning commodities (Best guess)",
+   "section": "cea",
+   "formula": "amount_of_grant_going_to_commodities_best_guess * share_of_commodities_funding_going_to_family_planning_commod",
+   "expected": 6009478.284,
+   "format": "usd"
+  },
+  {
+   "id": "grant_amount_going_to_family_planning_commodities",
+   "label": "Grant amount going to family planning commodities",
+   "section": "simple_cea",
+   "formula": "total_grant_amount_going_specifically_to_family_planning_com",
+   "expected": 6009478.284,
+   "format": "usd"
+  },
+  {
+   "id": "amount_going_to_family_planning_commodities_including_fundin",
+   "label": "Amount going to family planning commodities, including funding matched by governments",
+   "section": "simple_cea",
+   "formula": "matched_funding_by_domestic_governments_best_guess + grant_amount_going_to_family_planning_commodities",
+   "expected": 7643373.174,
+   "format": "usd"
+  },
+  {
+   "id": "cost_per_couple_year_of_protection_cyp_best_guess",
+   "label": "Cost per couple-year of protection (CYP) (Best guess)",
+   "section": "cea",
+   "value": 2.49,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B12"
+   },
+   "explainer": "UNFPA's estimated 2025 average commodity cost per couple-year of protection, shared by UNFPA (unpublished; the 2025 figure is provisional pending final spend/CYP data).",
+   "format": "usd"
+  },
+  {
+   "id": "cost_couple_year_of_protection_cyp",
+   "label": "Cost / couple-year of protection (CYP)",
+   "section": "simple_cea",
+   "formula": "cost_per_couple_year_of_protection_cyp_best_guess",
+   "expected": 2.49,
+   "format": "usd"
+  },
+  {
+   "id": "couple_years_of_protection_covered_by_grant_and_matched_fund",
+   "label": "Couple-years of protection covered by grant and matched funding",
+   "section": "simple_cea",
+   "formula": "amount_going_to_family_planning_commodities_including_fundin / cost_couple_year_of_protection_cyp",
+   "expected": 3069627.781
+  },
+  {
+   "id": "adjustment_for_supply_chain_leakage_best_guess",
+   "label": "Adjustment for supply chain leakage (Best guess)",
+   "section": "cea",
+   "value": -0.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B17"
+   },
+   "explainer": "Guess. This could include commodities being damaged, not being delivered correctly to facilities for use, nationally procured commodities going into private sector and being sold, etc.",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_supply_chain_leakage",
+   "label": "Adjustment for supply chain leakage",
+   "section": "simple_cea",
+   "formula": "adjustment_for_supply_chain_leakage_best_guess",
+   "expected": -0.25,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_expiry_best_guess",
+   "label": "Adjustment for expiry (Best guess)",
+   "section": "cea",
+   "value": -0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B18"
+   },
+   "explainer": "Guess. There is data at higher levels indicating expiry rates are very low, but we are less certain about the possibility of this as commodities move through the distribution chain. \nThis could be because commodities are going to places where there isn't demand and expiring, or because existing modern contraception users are switching methods and there is lower demand for the previously preferred method.",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_expiry",
+   "label": "Adjustment for expiry",
+   "section": "simple_cea",
+   "formula": "adjustment_for_expiry_best_guess",
+   "expected": -0.1,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_people_switching_from_private_to_public_secto_2",
+   "label": "Adjustment for people switching from private to public sector (Best guess)",
+   "section": "cea",
+   "value": -0.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B19"
+   },
+   "explainer": "Guess.",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_people_switching_from_private_to_public_secto",
+   "label": "Adjustment for people switching from private to public sector",
+   "section": "simple_cea",
+   "formula": "adjustment_for_people_switching_from_private_to_public_secto_2",
+   "expected": -0.25,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
+   "label": "Adjustment for uncertainty around CYP estimates (Best guess)",
+   "section": "cea",
+   "value": -0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B20"
+   },
+   "explainer": "Guess. Couple-years of protection (CYP) conversion factors are implictly (and explicitly in some cases) intended to capture effects such as methods not being used correctly, early stopping of some methods (long-acting reversible contraceptives), and overlapping method use. We explicitly apply a -10% adjustment for higher than average failure rates of contraception methods in the units of value per CYP we estimate: \"We assume that women who take up modern contraception due to GiveWell-funded programs have 10% higher failure rates when using modern contraceptives relative to the typical user of modern contraception. This adjustment is meant to capture that the women who take up due to our programs are likely to be more inexperienced using modern contraception than the average user.\" \nHowever, we have not fully vetted the extent to which CYP conversion factors are accounting for overlapping",
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_uncertainty_around_cyp_estimates",
+   "label": "Adjustment for uncertainty around CYP estimates",
+   "section": "simple_cea",
+   "formula": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
+   "expected": -0.1,
+   "format": "percent"
+  },
+  {
+   "id": "couple_years_of_protection_covered_by_grant_after_adjustment",
+   "label": "Couple-years of protection covered by grant, after adjustments (Best guess)",
+   "section": "simple_cea",
+   "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund * (1 + adjustment_for_supply_chain_leakage) * (1 + adjustment_for_expiry) * (1 + adjustment_for_people_switching_from_private_to_public_secto) * (1 + adjustment_for_uncertainty_around_cyp_estimates)",
+   "expected": 1398599.158
+  },
+  {
+   "id": "grant_to_unfpa_supplies_best_guess",
+   "label": "Grant to UNFPA Supplies (Best guess)",
+   "section": "cea",
+   "value": 10000000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B3"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "grant_size",
+   "label": "Grant size",
+   "section": "simple_cea",
+   "formula": "grant_to_unfpa_supplies_best_guess",
+   "expected": 10000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "initial_cost_effectiveness_estimate",
+   "label": "Initial cost-effectiveness estimate",
+   "section": "simple_cea",
+   "formula": "units_of_value_per_couple_year_of_protection * couple_years_of_protection_covered_by_grant_after_adjustment / grant_size / 0.00333",
+   "expected": 29.39998229
+  },
+  {
+   "id": "best_guess",
+   "label": "$ (Best guess)",
+   "section": "leveragefunging",
+   "formula": "grant_to_unfpa_supplies_best_guess",
+   "expected": 10000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "calc_best_guess_5",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "best_guess",
+   "expected": 10000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "input_best_guess",
+   "label": "input (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H37"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "calc_best_guess_4",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_5 * input_best_guess",
+   "expected": 8000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "couple_years_of_protection_covered_by_grant_and_matched_fund_2",
+   "label": "Couple-years of protection covered by grant and matched funding (Best guess)",
+   "section": "cea",
+   "formula": "(total_grant_amount_going_specifically_to_family_planning_com + matched_funding_by_domestic_governments_best_guess) / cost_per_couple_year_of_protection_cyp_best_guess",
+   "expected": 3069627.781
+  },
+  {
+   "id": "couple_years_of_protection_generated_by_funding_as_of_unfund_2",
+   "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, prior to adjustments (Best guess)",
+   "section": "cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "CEA!B16"
+   },
+   "explainer": "Assumes commodities procured against forecast unfunded demand are used; rows 17–20 adjust downward.",
+   "format": "percent"
+  },
+  {
+   "id": "couple_years_of_protection_generated_by_funding_as_of_unfund",
+   "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, after adjustments (Best guess)",
+   "section": "cea",
+   "formula": "couple_years_of_protection_generated_by_funding_as_of_unfund_2 * (1 + adjustment_for_supply_chain_leakage_best_guess) * (1 + adjustment_for_expiry_best_guess) * (1 + adjustment_for_people_switching_from_private_to_public_secto_2) * (1 + adjustment_for_uncertainty_around_cyp_estimates_best_guess)",
+   "expected": 0.455625,
+   "format": "percent"
+  },
+  {
+   "id": "additional_number_of_cyps_best_guess",
+   "label": "Additional number of CYPs (Best guess)",
+   "section": "cea",
+   "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund_2 * couple_years_of_protection_generated_by_funding_as_of_unfund",
+   "expected": 1398599.158
+  },
+  {
+   "id": "total_units_of_value_generated_before_leverage_adjustment_be",
+   "label": "Total units of value generated, before leverage adjustment (Best guess)",
+   "section": "cea",
+   "formula": "additional_number_of_cyps_best_guess * units_of_value_per_cyp_best_guess",
+   "expected": 979019.4103
+  },
+  {
+   "id": "units_of_value_per_of_funding_best_guess",
+   "label": "Units of value per $ of funding (Best guess)",
+   "section": "cea",
+   "formula": "total_units_of_value_generated_before_leverage_adjustment_be / grant_to_unfpa_supplies_best_guess",
+   "expected": 0.09790194103
+  },
+  {
+   "id": "calc_best_guess_6",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "units_of_value_per_of_funding_best_guess",
+   "expected": 0.09790194103
+  },
+  {
+   "id": "calc_best_guess_3",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_4 * calc_best_guess_6",
+   "expected": 783215.5282
+  },
+  {
+   "id": "input_best_guess_2",
+   "label": "input (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.005057,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H48"
+   }
+  },
+  {
+   "id": "calc_best_guess_7",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_4 * input_best_guess_2",
+   "expected": 40456.0
+  },
+  {
+   "id": "calc_best_guess_2",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_3 - calc_best_guess_7",
+   "expected": 742759.5282
+  },
+  {
+   "id": "calc_best_guess",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "-calc_best_guess_2",
+   "expected": -742759.5282
+  },
+  {
+   "id": "best_guess_2",
+   "label": "% (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H31"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "feed_best_guess",
+   "label": "feed (Best guess)",
+   "section": "leveragefunging",
+   "formula": "best_guess_2",
+   "expected": 0.15,
+   "format": "percent"
+  },
+  {
+   "id": "calc_3",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess * feed_best_guess",
+   "expected": -111413.9292
+  },
+  {
+   "id": "input_best_guess_3",
+   "label": "input (Best guess)",
+   "section": "leveragefunging",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H38"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "calc_8",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_5 * input_best_guess_3",
+   "expected": 10000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "calc_7",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_8 * calc_best_guess_6",
+   "expected": 979019.4103
+  },
+  {
+   "id": "input_best_guess_4",
+   "label": "input (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.015433,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H49"
+   }
+  },
+  {
+   "id": "calc_9",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_8 * input_best_guess_4",
+   "expected": 154330.0
+  },
+  {
+   "id": "calc_6",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_7 - calc_9",
+   "expected": 824689.4103
+  },
+  {
+   "id": "calc_5",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "-calc_6",
+   "expected": -824689.4103
+  },
+  {
+   "id": "best_guess_3",
+   "label": "% (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H32"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "feed",
+   "label": "feed",
+   "section": "leveragefunging",
+   "formula": "best_guess_3",
+   "expected": 0.15,
+   "format": "percent"
+  },
+  {
+   "id": "calc_4",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_5 * feed",
+   "expected": -123703.4115
+  },
+  {
+   "id": "best_guess_4",
+   "label": "$ (Best guess)",
+   "section": "leveragefunging",
+   "value": 8.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H9"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "best_guess_5",
+   "label": "$ (Best guess)",
+   "section": "leveragefunging",
+   "formula": "matched_funding_by_domestic_governments_best_guess",
+   "expected": 1633894.89,
+   "format": "usd"
+  },
+  {
+   "id": "calc_best_guess_8",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "best_guess_4 * couple_years_of_protection_covered_by_grant_and_matched_fund_2 + best_guess_5",
+   "expected": 27725731.03,
+   "format": "usd"
+  },
+  {
+   "id": "calc_best_guess_10",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H21"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "calc_best_guess_11",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "sum(calc_best_guess_5, calc_best_guess_10)",
+   "expected": 10000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "calc_best_guess_9",
+   "label": "calc (Best guess)",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_10 / calc_best_guess_11",
+   "expected": 0.0,
+   "format": "percent"
+  },
+  {
+   "id": "calc_14",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_8 * (1 - calc_best_guess_9)",
+   "expected": 27725731.03,
+   "format": "usd"
+  },
+  {
+   "id": "calc_13",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_14 * input_best_guess_2",
+   "expected": 140209.0218
+  },
+  {
+   "id": "calc_15",
+   "label": "calc",
+   "section": "leveragefunging",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H77"
+   }
+  },
+  {
+   "id": "calc_12",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_13 - calc_15",
+   "expected": 140209.0218
+  },
+  {
+   "id": "calc_11",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "-calc_12",
+   "expected": -140209.0218
+  },
+  {
+   "id": "best_guess_6",
+   "label": "% (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H33"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "feed_2",
+   "label": "feed",
+   "section": "leveragefunging",
+   "formula": "best_guess_6",
+   "expected": 0.5,
+   "format": "percent"
+  },
+  {
+   "id": "calc_10",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_11 * feed_2",
+   "expected": -70104.5109
+  },
+  {
+   "id": "input_best_guess_5",
+   "label": "input (Best guess)",
+   "section": "leveragefunging",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H40"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "calc_20",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_8 * (1 - input_best_guess_5)",
+   "expected": 27725731.03,
+   "format": "usd"
+  },
+  {
+   "id": "calc_19",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_20 * input_best_guess_2",
+   "expected": 140209.0218
+  },
+  {
+   "id": "calc_21",
+   "label": "calc",
+   "section": "leveragefunging",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "cell": "LeverageFunging!H87"
+   }
+  },
+  {
+   "id": "calc_18",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_19 - calc_21",
+   "expected": 140209.0218
+  },
+  {
+   "id": "calc_17",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "-calc_18",
+   "expected": -140209.0218
+  },
+  {
+   "id": "best_guess_7",
+   "label": "% (Best guess)",
+   "section": "leveragefunging",
+   "formula": "1 - sum(best_guess_2, best_guess_3, best_guess_6)",
+   "expected": 0.2,
+   "format": "percent"
+  },
+  {
+   "id": "feed_3",
+   "label": "feed",
+   "section": "leveragefunging",
+   "formula": "best_guess_7",
+   "expected": 0.2,
+   "format": "percent"
+  },
+  {
+   "id": "calc_16",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_17 * feed_3",
+   "expected": -28041.80436
+  },
+  {
+   "id": "calc_2",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "sum(calc_3, calc_4, calc_10, calc_16)",
+   "expected": -333263.656
+  },
+  {
+   "id": "calc_22",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_best_guess_5 * calc_best_guess_6",
+   "expected": 979019.4103
+  },
+  {
+   "id": "calc",
+   "label": "calc",
+   "section": "leveragefunging",
+   "formula": "calc_2 / calc_22",
+   "expected": -0.3404055655,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_leverage_and_funging_best_guess",
+   "label": "Adjustment for leverage and funging (Best guess)",
+   "section": "cea",
+   "formula": "calc",
+   "expected": -0.3404055655,
+   "format": "percent"
+  },
+  {
+   "id": "adjustment_for_leverage_and_funging",
+   "label": "Adjustment for leverage and funging",
+   "section": "simple_cea",
+   "formula": "adjustment_for_leverage_and_funging_best_guess",
+   "expected": -0.3404055655,
+   "format": "percent"
+  },
+  {
+   "id": "final_cost_effectiveness_after_all_adjustments",
+   "label": "Final cost-effectiveness (after all adjustments)",
+   "section": "simple_cea",
+   "formula": "initial_cost_effectiveness_estimate * (1 + adjustment_for_leverage_and_funging)",
+   "expected": 19.39206469
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "final_cost_effectiveness_after_all_adjustments * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

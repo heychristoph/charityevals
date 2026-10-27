@@ -1,0 +1,149 @@
+{
+ "id": "fortify-health-iron-fortification-impact-on-perinatal",
+ "name": "Iron fortification impact on perinatal maternal mortality BOTEC",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "fortify-health",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"Iron fortification impact on perinatal maternal mortality BOTEC\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "Iron fortification impact on perinatal maternal mortality BOTEC",
+  "url": "https://www.givewell.org/research/incubation-grants/fortify-health/august-2019-grant",
+  "sheet": "https://docs.google.com/spreadsheets/d/1xmGM7OYAb8g0zOMyzl5_oawstBkttZ10PHWJPI0WIvM/edit",
+  "published": "2019-08-01",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "Iron fortification impact on perinatal maternal mortality BOTEC",
+   "url": "https://docs.google.com/spreadsheets/d/1xmGM7OYAb8g0zOMyzl5_oawstBkttZ10PHWJPI0WIvM/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (august 2019 grant)",
+   "url": "https://www.givewell.org/research/incubation-grants/fortify-health/august-2019-grant",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "sheet1",
+   "title": "Sheet1"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "risk_of_pregnancy_and_postpartum_mortality_in_ssa_in_2017_an_2",
+   "label": "Risk of pregnancy and postpartum mortality in SSA in 2017 (annual risk averaged over all beneficiaries)",
+   "section": "sheet1",
+   "value": 8.75e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1xmGM7OYAb8g0zOMyzl5_oawstBkttZ10PHWJPI0WIvM/edit",
+    "cell": "Sheet1!B8"
+   },
+   "explainer": "Total population (all ages, both sexes) deaths for “maternal disorders” in Sub-Saharan Africa according to the Global Burden of Disease Results Tool = 8.75 per 100,000. This is broader than what we're specifically examining but can serve as an upper bound. GBD Results Tool"
+  },
+  {
+   "id": "risk_of_pregnancy_and_postpartum_mortality_in_ssa_in_2017_an",
+   "label": "Risk of pregnancy and postpartum mortality in SSA in 2017 (annual risk averaged over all beneficiaries)",
+   "section": "sheet1",
+   "formula": "risk_of_pregnancy_and_postpartum_mortality_in_ssa_in_2017_an_2",
+   "expected": 8.75e-05
+  },
+  {
+   "id": "reduction_in_mortality_by_5",
+   "label": "Reduction in mortality by 5%",
+   "section": "sheet1",
+   "formula": "risk_of_pregnancy_and_postpartum_mortality_in_ssa_in_2017_an * 0.05",
+   "expected": 4.375e-06
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
+   "label": "Value assigned to averting the death of an individual 5 or older",
+   "section": "sheet1",
+   "value": 85.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1xmGM7OYAb8g0zOMyzl5_oawstBkttZ10PHWJPI0WIvM/edit",
+    "cell": "Sheet1!B25"
+   },
+   "explainer": "From our main CEA, \"Moral weights\" sheet, cell B7. 2019 GiveWell Cost-effectiveness Analysis"
+  },
+  {
+   "id": "units_of_value_per_beneficiary",
+   "label": "Units of value per beneficiary",
+   "section": "sheet1",
+   "formula": "reduction_in_mortality_by_5 * value_assigned_to_averting_the_death_of_an_individual_5_or_o",
+   "expected": 0.000371875
+  },
+  {
+   "id": "annual_cost_of_intervention_per_beneficiary_iron_fortificati",
+   "label": "Annual cost of intervention per beneficiary (iron fortification)",
+   "section": "sheet1",
+   "value": 0.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1xmGM7OYAb8g0zOMyzl5_oawstBkttZ10PHWJPI0WIvM/edit",
+    "cell": "Sheet1!B27"
+   },
+   "explainer": "From our Fortify Health iron fortification CEA, \"Model\" sheet, row 14 Fortify Health iron fortification cost-effectiveness analysis",
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_per_10_000",
+   "label": "Units of value per $10,000",
+   "section": "sheet1",
+   "formula": "units_of_value_per_beneficiary / annual_cost_of_intervention_per_beneficiary_iron_fortificati * 10000",
+   "expected": 14.875
+  },
+  {
+   "id": "how_many_times_cash",
+   "label": "How many times cash?",
+   "section": "sheet1",
+   "formula": "units_of_value_per_10_000 / 38",
+   "expected": 0.3914473684
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "how_many_times_cash * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}
