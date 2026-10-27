@@ -26,7 +26,7 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
   pts.map((e, i) => { const v = get(e); return v === undefined ? "" : `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`; }).join(" ");
 ---
 
-<Base title={`${model.name}: history`} description={`How the ${model.name} assessment has changed, version by version.`} active="rankings">
+<Base noindex title={`${model.name}: history`} description={`How the ${model.name} assessment has changed, version by version.`} active="rankings">
   <div class="page wrap" style={`--cause: var(--cause-${model.cause})`}>
     <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={modelUrl(lib, model)}>{model.name}</a> / History</nav>
     <h1>How this assessment has changed</h1>

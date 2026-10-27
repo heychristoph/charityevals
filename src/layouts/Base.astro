@@ -1,15 +1,23 @@
 ---
 import "../styles/global.css";
+import serifFont from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url";
+import sansFont from "@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url";
+import { canonicalPath, jsonLd, siteSchema } from "../lib/seo";
 
 interface Props {
   title: string;
   description?: string;
   active?: "rankings" | "assumptions" | "method" | "about";
+  /** Keep the page out of search results (its links are still followed). */
+  noindex?: boolean;
+  /** schema.org nodes for this page, added to the site's own (WebSite, Organization). */
+  schema?: object[];
 }
-const { title, description = "Open cost-effectiveness analyses for charities. Every number has a source, a range and an explanation, and your own assumptions re-rank everything.", active } = Astro.props;
-const fullTitle = title === "charityevals" ? title : `${title} · charityevals`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const { title, description = "Open cost-effectiveness analyses for charities. Every number has a source, a range and an explanation, and your own assumptions re-rank everything.", active, noindex = false, schema = [] } = Astro.props;
+const fullTitle = title.includes("charityevals") ? title : `${title} · charityevals`;
+const canonical = new URL(canonicalPath(Astro.url.pathname), Astro.site);
 const ogImage = new URL("/og.png", Astro.site);
+const structured = jsonLd([...siteSchema(), ...schema]);
 const nav = [
   { id: "rankings", href: "/", label: "Rankings" },
   { id: "assumptions", href: "/assumptions", label: "Assumptions" },
@@ -25,17 +33,25 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href={sansFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="charityevals" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="charityevals: charity cost-effectiveness analyses where every number has a source, a range and an explanation." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={structured} />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
