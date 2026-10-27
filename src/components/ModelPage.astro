@@ -5,7 +5,8 @@ import Base from "../layouts/Base.astro";
 import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
-import { lib, rankable, modelUrl, historyUrl, bulkRaw, modelFile } from "../lib/data";
+import { lib, rankable, modelUrl, historyUrl, modelFile } from "../lib/data";
+import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
 
 interface Props {
@@ -46,10 +47,11 @@ const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welf
 // "About this model").
 const firstSentence = (s?: string) => s?.match(/^.*?[.!?](\s|$)/)?.[0].trim() ?? s;
 const dek = charity.summary ?? firstSentence(model.summary);
+const meta = modelMeta(model);
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
-<Base title={siblings.length > 1 || model.kind === "variant" ? `${model.name} (${owner.short})` : charity.name} description={model.summary ?? charity.summary} active="rankings">
+<Base title={meta.title} description={meta.description} schema={modelSchema(model, meta.description)} active="rankings">
   <div class="page layout" style={`--cause: var(--cause-${model.cause})`}>
     <div class="main">
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
@@ -120,15 +122,28 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <VariantList client:load ids={siblings.map((m) => m.id)} current={model.id} dated />
         </details>
       )}
-      <ModelView client:load id={model.id} raw={model.bulk ? bulkRaw(model.id) : undefined} choices={choices}>
-        {Writeup && (
-          <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
-            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-            <div class="writeup-body"><Writeup /></div>
-            <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
-          </section>
-        )}
-      </ModelView>
+      {/* A bulk model hydrates once its full file has loaded (client:model), rather than carrying it as a prop. */}
+      {model.bulk ? (
+        <ModelView client:model={model.id} id={model.id} bulk choices={choices}>
+          {Writeup && (
+            <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
+              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+              <div class="writeup-body"><Writeup /></div>
+              <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
+            </section>
+          )}
+        </ModelView>
+      ) : (
+        <ModelView client:load id={model.id} choices={choices}>
+          {Writeup && (
+            <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
+              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+              <div class="writeup-body"><Writeup /></div>
+              <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
+            </section>
+          )}
+        </ModelView>
+      )}
       {resources.length > 0 && (
         <details class="resources">
           <summary><h2 id="resources-title">Evidence and sources <span class="muted num">{allResources.length}</span></h2></summary>
