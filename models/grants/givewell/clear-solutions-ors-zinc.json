@@ -1,0 +1,3322 @@
+{
+ "id": "clear-solutions-ors-zinc",
+ "name": "ORS/Zinc CEA",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "clear-solutions",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"ORS/Zinc CEA\", linked from 2 of its grant pages. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "ORS/Zinc CEA (public)",
+  "url": "https://www.givewell.org/research/grants/Clear-Solutions-Evaluation-of-Oral-Rehydration-Solution-and-Zinc-Distribution-Pilot-in-Chad-July-2025",
+  "sheet": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+  "published": "2024-05-14",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "ORS/Zinc CEA (public)",
+   "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (Clear Solutions Evaluation of Oral Rehydration Solution and Zinc Distribution Pilot in Chad July 2025)",
+   "url": "https://www.givewell.org/research/grants/Clear-Solutions-Evaluation-of-Oral-Rehydration-Solution-and-Zinc-Distribution-Pilot-in-Chad-July-2025",
+   "type": "evaluation"
+  },
+  {
+   "title": "GiveWell grant page (wageningen university sierra leone rct 2024)",
+   "url": "https://www.givewell.org/research/grants/wageningen-university-sierra-leone-rct-2024",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "simple_cea",
+   "title": "Simple CEA"
+  },
+  {
+   "id": "cea",
+   "title": "CEA"
+  },
+  {
+   "id": "development_effects",
+   "title": "Development effects"
+  },
+  {
+   "id": "no_leveraging_cea",
+   "title": "No leveraging_CEA"
+  },
+  {
+   "id": "inputs",
+   "title": "Inputs"
+  },
+  {
+   "id": "no_leveraging_inputs",
+   "title": "No leveraging_Inputs"
+  },
+  {
+   "id": "no_funging_cea",
+   "title": "No funging_CEA"
+  },
+  {
+   "id": "no_funging_inputs",
+   "title": "No funging_Inputs"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia",
+   "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
+   "section": "cea",
+   "value": 111.8141889,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B72"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A72,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "moral_weight_for_each_death_averted_based_on_age_distributio",
+   "label": "Moral weight for each death averted based on age distribution of diarrheal mortality (Low SDI)",
+   "section": "simple_cea",
+   "formula": "value_from_u5_death_averted_based_on_age_distribution_of_dia",
+   "expected": 111.8141889
+  },
+  {
+   "id": "number_of_children_in_households_eligible_to_receive_free_or",
+   "label": "Number of children in households eligible to receive free ORS and zinc (Low SDI)",
+   "section": "simple_cea",
+   "value": 100000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Simple CEA!B5"
+   },
+   "explainer": "Arbitrary"
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_counterfactual_low",
+   "label": "Share of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "cea",
+   "value": 0.44,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B7"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A7,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_counterfactual",
+   "label": "Share of children not treated for diarrhea in counterfactual (Low SDI)",
+   "section": "cea",
+   "formula": "1 - share_of_children_treated_for_diarrhea_in_counterfactual_low",
+   "expected": 0.56,
+   "format": "percent"
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in_2",
+   "label": "Reduction in number of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "cea",
+   "value": 0.3986959288,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B10"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A10,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_ors_usage_low_sdi",
+   "label": "Internal validity (ORS usage) (Low SDI)",
+   "section": "cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B11"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A11,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "external_validity_ors_usage_low_sdi",
+   "label": "External validity (ORS usage) (Low SDI)",
+   "section": "cea",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B12"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A12,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in",
+   "label": "Reduction in number of children not treated for diarrhea in intervention, after IV/EV adjustments (Low SDI)",
+   "section": "cea",
+   "formula": "product(reduction_in_number_of_children_not_treated_for_diarrhea_in_2, internal_validity_ors_usage_low_sdi, external_validity_ors_usage_low_sdi)",
+   "expected": 0.2711132316,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_intervention_l",
+   "label": "Share of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "cea",
+   "formula": "share_of_children_not_treated_for_diarrhea_in_counterfactual * (1 - reduction_in_number_of_children_not_treated_for_diarrhea_in)",
+   "expected": 0.4081765903,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_intervention_low_s",
+   "label": "Share of children treated for diarrhea in intervention (Low SDI)",
+   "section": "cea",
+   "formula": "1 - share_of_children_not_treated_for_diarrhea_in_intervention_l",
+   "expected": 0.5918234097,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_children_using_ors_zinc_for_diarrhea_in_intervent",
+   "label": "Percent of children using ORS/zinc for diarrhea in intervention (Low SDI)",
+   "section": "simple_cea",
+   "formula": "share_of_children_treated_for_diarrhea_in_intervention_low_s",
+   "expected": 0.5918234097,
+   "format": "percent"
+  },
+  {
+   "id": "oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi",
+   "label": "Oral Rehydration Salts (ORS) 1x 1L Packet (USD, 2021) (Low SDI)",
+   "section": "cea",
+   "value": 0.07428,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B25"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A25,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "zinc_tablets_20_mg_usd_2021_low_sdi",
+   "label": "Zinc tablets, 20 mg (USD, 2021) (Low SDI)",
+   "section": "cea",
+   "value": 0.0133,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B27"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A27,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "usd_inflation_2021_to_2023_low_sdi",
+   "label": "USD inflation, 2021 to 2023 (Low SDI)",
+   "section": "cea",
+   "value": 0.12,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B28"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A28,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 2 months to 6 months old (Low SDI)",
+   "section": "cea",
+   "formula": "(3 * oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi + 5 * zinc_tablets_20_mg_usd_2021_low_sdi) * (1 + usd_inflation_2021_to_2023_low_sdi)",
+   "expected": 0.3240608,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_28_364_days_low_sdi",
+   "label": "Average diarrhea episodes per year, 28-364 days (Low SDI)",
+   "section": "cea",
+   "value": 2.491448294,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B33"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A33,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjustment_for_non_commodity_costs_low_sdi",
+   "label": "Adjustment for non-commodity costs (Low SDI)",
+   "section": "cea",
+   "value": 2.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B35"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A35,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_2_months_to_6_months_old_low",
+   "label": "Cost per child reached per year, 2 months to 6 months old (Low SDI)",
+   "section": "cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon * average_diarrhea_episodes_per_year_28_364_days_low_sdi * adjustment_for_non_commodity_costs_low_sdi",
+   "expected": 1.816606636,
+   "format": "usd"
+  },
+  {
+   "id": "ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi",
+   "label": "ORS+Zinc Co-Pack (2x 1L ORS+10 tabs Zinc) (USD, 2021) (Low SDI)",
+   "section": "cea",
+   "value": 0.57,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B26"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A26,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 6 months to 5 years old (Low SDI)",
+   "section": "cea",
+   "formula": "sum(oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi, ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi) * (1 + usd_inflation_2021_to_2023_low_sdi)",
+   "expected": 0.7215936,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_1_4_years_low_sdi",
+   "label": "Average diarrhea episodes per year, 1-4 years (Low SDI)",
+   "section": "cea",
+   "value": 1.7307472,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B34"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A34,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_6_months_to_5_years_old_low",
+   "label": "Cost per child reached per year, 6 months to 5 years old (Low SDI)",
+   "section": "cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea * average_diarrhea_episodes_per_year_1_4_years_low_sdi * adjustment_for_non_commodity_costs_low_sdi",
+   "expected": 2.810016231,
+   "format": "usd"
+  },
+  {
+   "id": "weighted_average_of_cost_per_child_reached_low_sdi",
+   "label": "Weighted average of cost per child reached (Low SDI)",
+   "section": "cea",
+   "formula": "cost_per_child_reached_per_year_2_months_to_6_months_old_low * (4 / 58) + cost_per_child_reached_per_year_6_months_to_5_years_old_low * (54 / 58)",
+   "expected": 2.741505225,
+   "format": "usd"
+  },
+  {
+   "id": "adjustment_for_leakage_additional_doses_low_sdi",
+   "label": "Adjustment for leakage/additional doses (Low SDI)",
+   "section": "cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B41"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A41,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjusted_cost_per_child_reached_low_sdi",
+   "label": "Adjusted cost per child reached (Low SDI)",
+   "section": "cea",
+   "formula": "weighted_average_of_cost_per_child_reached_low_sdi * (1 + adjustment_for_leakage_additional_doses_low_sdi)",
+   "expected": 3.015655747,
+   "format": "usd"
+  },
+  {
+   "id": "cost_to_ngo_per_child_provided_with_ors_and_zinc_low_sdi",
+   "label": "Cost to NGO per child provided with ORS and zinc (Low SDI)",
+   "section": "simple_cea",
+   "formula": "adjusted_cost_per_child_reached_low_sdi",
+   "expected": 3.015655747,
+   "format": "usd"
+  },
+  {
+   "id": "grant_size_low_sdi",
+   "label": "Grant size (Low SDI)",
+   "section": "simple_cea",
+   "formula": "number_of_children_in_households_eligible_to_receive_free_or * percent_of_children_using_ors_zinc_for_diarrhea_in_intervent * cost_to_ngo_per_child_provided_with_ors_and_zinc_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "percentage_point_increase_in_number_receiving_ors_low_sdi",
+   "label": "Percentage point increase in number receiving ORS (Low SDI)",
+   "section": "simple_cea",
+   "formula": "(share_of_children_treated_for_diarrhea_in_intervention_low_s - share_of_children_treated_for_diarrhea_in_counterfactual_low) * 100",
+   "expected": 15.18234097
+  },
+  {
+   "id": "number_of_under_5_all_cause_deaths_low_sdi",
+   "label": "Number of under-5 all-cause deaths (Low SDI)",
+   "section": "cea",
+   "value": 2671479.77,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B52"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A52,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_5_population_low_sdi",
+   "label": "Total <5 population (Low SDI)",
+   "section": "cea",
+   "value": 170855355.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B51"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A51,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "under_5_all_cause_mortality_rate_per_1_000_low_sdi",
+   "label": "Under-5 all-cause mortality rate per 1,000 (Low SDI)",
+   "section": "cea",
+   "formula": "number_of_under_5_all_cause_deaths_low_sdi / total_5_population_low_sdi * 1000",
+   "expected": 15.63591475
+  },
+  {
+   "id": "of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi",
+   "label": "% of all under-5 mortality due to diarrheal diseases (Low SDI)",
+   "section": "cea",
+   "value": 0.1259,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B55"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A55,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u",
+   "label": "Effective direct under-5 diarrhea mortality rate per 1,000 under-5 year olds (Low SDI)",
+   "section": "cea",
+   "formula": "under_5_all_cause_mortality_rate_per_1_000_low_sdi * of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi",
+   "expected": 1.968561667
+  },
+  {
+   "id": "indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar",
+   "label": "# indirect deaths due to diarrhea averted for each direct diarrhea death averted (Low SDI)",
+   "section": "cea",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B57"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A57,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_2",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s (Low SDI)",
+   "section": "cea",
+   "formula": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u + effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u * indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar",
+   "expected": 2.9528425
+  },
+  {
+   "id": "estimated_diarrhea_mortality_reduction_for_under_5s_covered",
+   "label": "Estimated diarrhea mortality reduction for under-5s covered by the intervention",
+   "section": "cea",
+   "value": 0.93,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B62"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A62,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_mortality_reduction",
+   "label": "Internal validity adjustment (mortality reduction)",
+   "section": "cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B63"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A63,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_mortality_reduction",
+   "label": "External validity adjustment (mortality reduction)",
+   "section": "cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B64"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A64,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_reduction_in_mortality_from_ors_coverage_after_iv",
+   "label": "Effective reduction in mortality from ORS coverage, after IV/EV adjustments",
+   "section": "cea",
+   "formula": "estimated_diarrhea_mortality_reduction_for_under_5s_covered * internal_validity_adjustment_mortality_reduction * external_validity_adjustment_mortality_reduction",
+   "expected": 0.5952,
+   "format": "percent"
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc (Low SDI)",
+   "section": "cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_2 / (share_of_children_not_treated_for_diarrhea_in_counterfactual + share_of_children_treated_for_diarrhea_in_counterfactual_low * (1 - effective_reduction_in_mortality_from_ors_coverage_after_iv))",
+   "expected": 4.000534472
+  },
+  {
+   "id": "mortality_rate_among_those_who_do_not_receive_ors_low_sdi",
+   "label": "Mortality rate among those who do not receive ORS (Low SDI)",
+   "section": "simple_cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0 / 1000",
+   "expected": 0.004000534472,
+   "format": "percent"
+  },
+  {
+   "id": "reduction_in_mortality_rate_due_to_ors_low_sdi",
+   "label": "Reduction in mortality rate due to ORS (Low SDI)",
+   "section": "simple_cea",
+   "formula": "effective_reduction_in_mortality_from_ors_coverage_after_iv",
+   "expected": 0.5952,
+   "format": "percent"
+  },
+  {
+   "id": "number_of_deaths_averted_low_sdi",
+   "label": "Number of deaths averted (Low SDI)",
+   "section": "simple_cea",
+   "formula": "number_of_children_in_households_eligible_to_receive_free_or * (percentage_point_increase_in_number_receiving_ors_low_sdi / 100) * mortality_rate_among_those_who_do_not_receive_ors_low_sdi * reduction_in_mortality_rate_due_to_ors_low_sdi",
+   "expected": 36.15094714
+  },
+  {
+   "id": "death_averted_low_sdi",
+   "label": "$ / death averted (Low SDI)",
+   "section": "simple_cea",
+   "formula": "grant_size_low_sdi / number_of_deaths_averted_low_sdi",
+   "expected": 4936.898775,
+   "format": "usd"
+  },
+  {
+   "id": "initial_cost_effectiveness_estimate_low_sdi",
+   "label": "Initial cost-effectiveness estimate (Low SDI)",
+   "section": "simple_cea",
+   "formula": "moral_weight_for_each_death_averted_based_on_age_distributio / death_averted_low_sdi / 0.00335",
+   "expected": 6.760796879
+  },
+  {
+   "id": "ors_zinc_provision_direct_evidence",
+   "label": "ORS/Zinc provision (Direct evidence)",
+   "section": "development_effects",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!C8"
+   },
+   "explainer": "We have not found any studies directly estimating the effect of ORS/zinc usage on economic outcomes."
+  },
+  {
+   "id": "weight_direct_evidence",
+   "label": "Weight (Direct evidence)",
+   "section": "development_effects",
+   "value": 0.35,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!C6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_cognitive_effects",
+   "label": "ORS/Zinc provision (Cognitive effects)",
+   "section": "development_effects",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!D8"
+   },
+   "explainer": "Based on no substantial evidence of effect. We have not found any studies directly linking ORS/zinc usage to cognitive outcomes."
+  },
+  {
+   "id": "weight_cognitive_effects",
+   "label": "Weight (Cognitive effects)",
+   "section": "development_effects",
+   "value": 0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!D6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_growth",
+   "label": "ORS/Zinc provision (Growth)",
+   "section": "development_effects",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!E8"
+   },
+   "explainer": "Based on no substantial evidence of effect. We have not found any studies directly linking ORS/zinc usage to anthropometric outcomes."
+  },
+  {
+   "id": "weight_growth",
+   "label": "Weight (Growth)",
+   "section": "development_effects",
+   "value": 0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!E6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_mortality",
+   "label": "ORS/Zinc provision (Mortality)",
+   "section": "development_effects",
+   "value": 3.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!F8"
+   },
+   "explainer": "Based on compelling evidence suggesting a moderate effect size (10 - 20% reduction)\n\nThis is estimated by multiplying 'Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc' by 'Effective reduction in mortality from ORS coverage, after IV/EV adjustments' and taking that as the share of 'Under-5 all-cause mortality rate per 1,000'. See 'CEA' tab. For low SDI countries, our estimate is that mortality would be reduced by around 18%."
+  },
+  {
+   "id": "weight_mortality",
+   "label": "Weight (Mortality)",
+   "section": "development_effects",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!F6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_morbidity",
+   "label": "ORS/Zinc provision (Morbidity)",
+   "section": "development_effects",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!G8"
+   },
+   "explainer": "Based on uncertain estimates suggesting a small effect size (<200 YLDs per 100,000 person-years).  This effect is due to zinc usage, rather than ORS. See tab 'Supplementary', cells C13 and D13."
+  },
+  {
+   "id": "weight_morbidity",
+   "label": "Weight (Morbidity)",
+   "section": "development_effects",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!G6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_anemia",
+   "label": "ORS/Zinc provision (Anemia)",
+   "section": "development_effects",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!H8"
+   },
+   "explainer": "We have not found any studies directly linking ORS/zinc usage to child anemia."
+  },
+  {
+   "id": "weight_anemia",
+   "label": "Weight (Anemia)",
+   "section": "development_effects",
+   "value": 0.075,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!H6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_biological_plausibility",
+   "label": "ORS/Zinc provision (Biological plausibility)",
+   "section": "development_effects",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!I8"
+   },
+   "explainer": "We think this intervention has low plausibility, and a meaningful effect seems neither likely nor unlikely."
+  },
+  {
+   "id": "weight_biological_plausibility",
+   "label": "Weight (Biological plausibility)",
+   "section": "development_effects",
+   "value": 0.075,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!I6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ors_zinc_provision_weighted_average",
+   "label": "ORS/Zinc provision (Weighted average)",
+   "section": "development_effects",
+   "formula": "sum(ors_zinc_provision_direct_evidence * weight_direct_evidence, ors_zinc_provision_cognitive_effects * weight_cognitive_effects, ors_zinc_provision_growth * weight_growth, ors_zinc_provision_mortality * weight_mortality, ors_zinc_provision_morbidity * weight_morbidity, ors_zinc_provision_anemia * weight_anemia, ors_zinc_provision_biological_plausibility * weight_biological_plausibility)",
+   "expected": 0.475
+  },
+  {
+   "id": "smc_direct_evidence",
+   "label": "SMC (Direct evidence)",
+   "section": "development_effects",
+   "value": 2.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!C7"
+   }
+  },
+  {
+   "id": "smc_cognitive_effects",
+   "label": "SMC (Cognitive effects)",
+   "section": "development_effects",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!D7"
+   }
+  },
+  {
+   "id": "smc_growth",
+   "label": "SMC (Growth)",
+   "section": "development_effects",
+   "value": 2.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!E7"
+   }
+  },
+  {
+   "id": "smc_mortality",
+   "label": "SMC (Mortality)",
+   "section": "development_effects",
+   "value": 4.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!F7"
+   }
+  },
+  {
+   "id": "smc_morbidity",
+   "label": "SMC (Morbidity)",
+   "section": "development_effects",
+   "value": 3.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!G7"
+   }
+  },
+  {
+   "id": "smc_anemia",
+   "label": "SMC (Anemia)",
+   "section": "development_effects",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!H7"
+   }
+  },
+  {
+   "id": "smc_biological_plausibility",
+   "label": "SMC (Biological plausibility)",
+   "section": "development_effects",
+   "value": 3.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Development effects!I7"
+   }
+  },
+  {
+   "id": "smc_weighted_average",
+   "label": "SMC (Weighted average)",
+   "section": "development_effects",
+   "formula": "sum(smc_direct_evidence * weight_direct_evidence, smc_cognitive_effects * weight_cognitive_effects, smc_growth * weight_growth, smc_mortality * weight_mortality, smc_morbidity * weight_morbidity, smc_anemia * weight_anemia, smc_biological_plausibility * weight_biological_plausibility)",
+   "expected": 2.15
+  },
+  {
+   "id": "development_effects_of_ors_zinc_provision_vs_smc",
+   "label": "Development effects of ORS/zinc provision vs SMC",
+   "section": "development_effects",
+   "formula": "ors_zinc_provision_weighted_average / smc_weighted_average",
+   "expected": 0.2209302326,
+   "format": "percent"
+  },
+  {
+   "id": "units_of_value_from_development_effects_from_ors_zinc_usage",
+   "label": "Units of value from development effects from ORS/zinc usage, compared to SMC (before internal and external adjustments)",
+   "section": "cea",
+   "formula": "development_effects_of_ors_zinc_provision_vs_smc",
+   "expected": 0.2209302326
+  },
+  {
+   "id": "units_of_value_from_development_effects_per_treatment_year_o",
+   "label": "Units of value from development effects per treatment-year of SMC, Nigeria",
+   "section": "cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B80"
+   }
+  },
+  {
+   "id": "units_of_value_from_ors_zinc_usage_per_treatment_year_based",
+   "label": "Units of value from ORS/zinc usage per treatment-year (based on SMC U5 intervention)",
+   "section": "cea",
+   "formula": "units_of_value_from_development_effects_from_ors_zinc_usage * units_of_value_from_development_effects_per_treatment_year_o",
+   "expected": 0.02209302326
+  },
+  {
+   "id": "child_population_targeted_low_sdi",
+   "label": "Child population targeted (Low SDI)",
+   "section": "cea",
+   "value": 100000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B4"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A4,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_intervention_low",
+   "label": "Number of children treated for diarrhea in intervention (Low SDI)",
+   "section": "cea",
+   "formula": "child_population_targeted_low_sdi * share_of_children_treated_for_diarrhea_in_intervention_low_s",
+   "expected": 59182.34097
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_counterfactual_lo",
+   "label": "Number of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "cea",
+   "formula": "child_population_targeted_low_sdi * share_of_children_treated_for_diarrhea_in_counterfactual_low",
+   "expected": 44000.0
+  },
+  {
+   "id": "number_of_new_children_treated_in_intervention_low_sdi",
+   "label": "Number of new children treated in intervention (Low SDI)",
+   "section": "cea",
+   "formula": "number_of_children_treated_for_diarrhea_in_intervention_low - number_of_children_treated_for_diarrhea_in_counterfactual_lo",
+   "expected": 15182.34097
+  },
+  {
+   "id": "units_of_value_from_development_effects_generated_by_hypothe",
+   "label": "Units of value from development effects generated by hypothetical donation",
+   "section": "cea",
+   "formula": "units_of_value_from_ors_zinc_usage_per_treatment_year_based * number_of_new_children_treated_in_intervention_low_sdi",
+   "expected": 335.4238121
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg",
+   "label": "Total under-5 diarrhea deaths in absence of program for marginal people treated",
+   "section": "cea",
+   "formula": "number_of_new_children_treated_in_intervention_low_sdi * (total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0 / 1000)",
+   "expected": 60.7374784
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_averted_due_to_program",
+   "label": "Total under-5 diarrhea deaths averted due to program",
+   "section": "cea",
+   "formula": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg * effective_reduction_in_mortality_from_ors_coverage_after_iv",
+   "expected": 36.15094714
+  },
+  {
+   "id": "total_value_from_mortality_averted",
+   "label": "Total value from mortality averted",
+   "section": "cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program * value_from_u5_death_averted_based_on_age_distribution_of_dia",
+   "expected": 4042.188834
+  },
+  {
+   "id": "diarrheal_diseases_dalys_per_100_000_under_5_children",
+   "label": "Diarrheal diseases - DALYs per 100,000 under 5 children",
+   "section": "cea",
+   "value": 17564.92,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B85"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A85,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program",
+   "label": "Total under-5 diarrhea deaths in absence of program",
+   "section": "cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_2 / 1000 * child_population_targeted_low_sdi",
+   "expected": 295.28425
+  },
+  {
+   "id": "estimated_morbidity_reduction",
+   "label": "Estimated morbidity reduction",
+   "section": "cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program / total_under_5_diarrhea_deaths_in_absence_of_program",
+   "expected": 0.1224276173,
+   "format": "percent"
+  },
+  {
+   "id": "dalys_averted",
+   "label": "DALYs averted",
+   "section": "cea",
+   "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children * estimated_morbidity_reduction",
+   "expected": 2150.431303
+  },
+  {
+   "id": "units_of_value_costs_averted_per_daly_averted",
+   "label": "Units of value (costs averted) per DALY averted",
+   "section": "cea",
+   "value": 0.43,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B89"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A89,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "subjective_adjustment_for_units_of_value_costs_averted_compa",
+   "label": "Subjective adjustment for units of value (costs averted) compared with malaria interventions",
+   "section": "cea",
+   "value": 0.3333333333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B90"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A90,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "units_of_values_from_costs_averted",
+   "label": "Units of values from costs averted",
+   "section": "cea",
+   "formula": "dalys_averted * units_of_value_costs_averted_per_daly_averted * subjective_adjustment_for_units_of_value_costs_averted_compa",
+   "expected": 308.2284868
+  },
+  {
+   "id": "total_units_of_value_generated",
+   "label": "Total units of value generated",
+   "section": "cea",
+   "formula": "total_value_from_mortality_averted + units_of_value_from_development_effects_generated_by_hypothe + units_of_values_from_costs_averted",
+   "expected": 4685.841133
+  },
+  {
+   "id": "development_effects_low_sdi",
+   "label": "Development effects (Low SDI)",
+   "section": "simple_cea",
+   "formula": "units_of_value_from_development_effects_generated_by_hypothe / total_units_of_value_generated",
+   "expected": 0.07158241233,
+   "format": "percent"
+  },
+  {
+   "id": "medical_costs_averted_low_sdi",
+   "label": "Medical costs averted (Low SDI)",
+   "section": "simple_cea",
+   "formula": "units_of_values_from_costs_averted / total_units_of_value_generated",
+   "expected": 0.06577868904,
+   "format": "percent"
+  },
+  {
+   "id": "child_mortality_benefits_low_sdi",
+   "label": "Child mortality benefits (Low SDI)",
+   "section": "simple_cea",
+   "formula": "1 - sum(development_effects_low_sdi, medical_costs_averted_low_sdi)",
+   "expected": 0.8626388986,
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_factor_for_excluded_effects",
+   "label": "Total adjustment factor for excluded effects",
+   "section": "cea",
+   "value": 0.01141578841,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B101"
+   },
+   "explainer": "Calculated in the source sheet as `=SUM('Adjustments for excluded effect'!$I:$I)`; kept as a fixed number here (whole-column range).",
+   "format": "percent"
+  },
+  {
+   "id": "excluded_effects_low_sdi",
+   "label": "Excluded effects (Low SDI)",
+   "section": "simple_cea",
+   "formula": "1 + total_adjustment_factor_for_excluded_effects",
+   "expected": 1.011415788
+  },
+  {
+   "id": "total_units_of_value_generated_2",
+   "label": "Total units of value generated",
+   "section": "cea",
+   "formula": "total_units_of_value_generated * (1 + total_adjustment_factor_for_excluded_effects)",
+   "expected": 4739.333704
+  },
+  {
+   "id": "cost_to_ngo_low_sdi",
+   "label": "Cost to NGO (Low SDI)",
+   "section": "cea",
+   "formula": "adjusted_cost_per_child_reached_low_sdi * number_of_children_treated_for_diarrhea_in_intervention_low",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "additional_costs_paid_by_government_to_scale_up_ors_zinc_as",
+   "label": "Additional costs paid by government to scale up ORS/Zinc, as a % of core charity's costs (Low SDI)",
+   "section": "cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "CEA!B46"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A46,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A46,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A46,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "cost_to_government_low_sdi",
+   "label": "Cost to government (Low SDI)",
+   "section": "cea",
+   "formula": "cost_to_ngo_low_sdi * additional_costs_paid_by_government_to_scale_up_ors_zinc_as",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "total_cost_of_all_support_low_sdi",
+   "label": "Total cost of all support (Low SDI)",
+   "section": "cea",
+   "formula": "cost_to_government_low_sdi + cost_to_ngo_low_sdi",
+   "expected": 356947.1333,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "inputs",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B56"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_3",
+   "label": "Other philanthropic actors",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C67"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "inputs",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B57"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ngo_low_sdi",
+   "label": "NGO (Low SDI)",
+   "section": "inputs",
+   "formula": "cost_to_ngo_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_2",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B62"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_4",
+   "label": "Other philanthropic actors",
+   "section": "inputs",
+   "formula": "-sum(ngo_low_sdi) * scenario_2_other_philanthropic_actors_would_replace_philanth_2",
+   "expected": -178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "inputs",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B58"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_low_sdi",
+   "label": "Other philanthropic actors (Low SDI)",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C43"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_5",
+   "label": "Other philanthropic actors",
+   "section": "inputs",
+   "formula": "other_philanthropic_actors_low_sdi",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_2",
+   "label": "Other philanthropic actors",
+   "section": "inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost * other_philanthropic_actors_3 + scenario_2_other_philanthropic_actors_would_replace_philanth * other_philanthropic_actors_4 + scenario_3_program_would_go_unfunded * other_philanthropic_actors_5",
+   "expected": -8923.678333
+  },
+  {
+   "id": "other_philanthropic_actors",
+   "label": "Other philanthropic actors",
+   "section": "cea",
+   "formula": "other_philanthropic_actors_2",
+   "expected": -8923.678333,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "inputs",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B61"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "government_financial_costs_3",
+   "label": "Government financial costs",
+   "section": "inputs",
+   "formula": "-sum(ngo_low_sdi) * scenario_1_government_costs_would_replace_philanthropic_cost_2",
+   "expected": -142778.8533,
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_4",
+   "label": "Government financial costs",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C73"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_5",
+   "label": "Government financial costs",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C78"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_2",
+   "label": "Government financial costs",
+   "section": "inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost * government_financial_costs_3 + scenario_2_other_philanthropic_actors_would_replace_philanth * government_financial_costs_4 + scenario_3_program_would_go_unfunded * government_financial_costs_5",
+   "expected": -7138.942667
+  },
+  {
+   "id": "government_financial_costs",
+   "label": "Government financial costs",
+   "section": "cea",
+   "formula": "government_financial_costs_2",
+   "expected": -7138.942667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_3",
+   "label": "Government in-kind costs",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C69"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_4",
+   "label": "Government in-kind costs",
+   "section": "inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!C74"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "domestic_government_low_sdi",
+   "label": "Domestic government (Low SDI)",
+   "section": "inputs",
+   "formula": "cost_to_government_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_5",
+   "label": "Government in-kind costs",
+   "section": "inputs",
+   "formula": "domestic_government_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_2",
+   "label": "Government in-kind costs",
+   "section": "inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost * government_in_kind_costs_3 + scenario_2_other_philanthropic_actors_would_replace_philanth * government_in_kind_costs_4 + scenario_3_program_would_go_unfunded * government_in_kind_costs_5",
+   "expected": 160626.21
+  },
+  {
+   "id": "government_in_kind_costs",
+   "label": "Government in-kind costs",
+   "section": "cea",
+   "formula": "government_in_kind_costs_2",
+   "expected": 160626.21,
+   "format": "usd"
+  },
+  {
+   "id": "total",
+   "label": "Total",
+   "section": "cea",
+   "formula": "sum(other_philanthropic_actors, government_financial_costs, government_in_kind_costs)",
+   "expected": 144563.589,
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_generated_per_dollar_spent",
+   "label": "Units of value generated per dollar spent",
+   "section": "cea",
+   "formula": "total_units_of_value_generated_2 / total_cost_of_all_support_low_sdi",
+   "expected": 0.01327741075
+  },
+  {
+   "id": "other_philanthropic_actors_7",
+   "label": "Other philanthropic actors",
+   "section": "inputs",
+   "value": 0.0215,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B53"
+   }
+  },
+  {
+   "id": "other_philanthropic_actors_6",
+   "label": "Other philanthropic actors",
+   "section": "cea",
+   "formula": "other_philanthropic_actors_7",
+   "expected": 0.0215
+  },
+  {
+   "id": "domestic_government",
+   "label": "Domestic government",
+   "section": "inputs",
+   "value": 0.0056,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "Inputs!B52"
+   }
+  },
+  {
+   "id": "government_financial_costs_6",
+   "label": "Government financial costs",
+   "section": "cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "government_in_kind_costs_6",
+   "label": "Government in-kind costs",
+   "section": "cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "additional_benefit_loss_from_leverage_funging",
+   "label": "Additional benefit (loss) from leverage/funging",
+   "section": "cea",
+   "formula": "product(total, units_of_value_generated_per_dollar_spent) - sum(other_philanthropic_actors_6 * other_philanthropic_actors, government_financial_costs_6 * government_financial_costs, government_in_kind_costs_6 * government_in_kind_costs)",
+   "expected": 1251.760537
+  },
+  {
+   "id": "total_value_of_outcomes_after_leverage_funging",
+   "label": "Total value of outcomes (after leverage/funging)",
+   "section": "cea",
+   "formula": "total_units_of_value_generated_2 * (cost_to_ngo_low_sdi / total_cost_of_all_support_low_sdi) + additional_benefit_loss_from_leverage_funging",
+   "expected": 3621.427389
+  },
+  {
+   "id": "total_units_of_value_generated_by_philanthropic_spending_aft",
+   "label": "Total units of value generated by philanthropic spending, after accounting for leverage/funging",
+   "section": "cea",
+   "formula": "total_value_of_outcomes_after_leverage_funging",
+   "expected": 3621.427389
+  },
+  {
+   "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+   "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
+   "section": "cea",
+   "formula": "total_units_of_value_generated_by_philanthropic_spending_aft / cost_to_ngo_low_sdi",
+   "expected": 0.02029111345
+  },
+  {
+   "id": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
+   "label": "Cost-effectiveness in multiples of cash transfers, after all adjustments",
+   "section": "cea",
+   "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte / (335 / 100000)",
+   "expected": 6.057048791
+  },
+  {
+   "id": "child_population_targeted_low_sdi_2",
+   "label": "Child population targeted (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 100000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B4"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A4,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_counterfactual_low_2",
+   "label": "Share of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.44,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B7"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A7,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_counterfactual_2",
+   "label": "Share of children not treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "1 - share_of_children_treated_for_diarrhea_in_counterfactual_low_2",
+   "expected": 0.56,
+   "format": "percent"
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in_4",
+   "label": "Reduction in number of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.3986959288,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B10"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A10,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_ors_usage_low_sdi_2",
+   "label": "Internal validity (ORS usage) (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B11"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A11,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "external_validity_ors_usage_low_sdi_2",
+   "label": "External validity (ORS usage) (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B12"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A12,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in_3",
+   "label": "Reduction in number of children not treated for diarrhea in intervention, after IV/EV adjustments (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "product(reduction_in_number_of_children_not_treated_for_diarrhea_in_4, internal_validity_ors_usage_low_sdi_2, external_validity_ors_usage_low_sdi_2)",
+   "expected": 0.2711132316,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_intervention_l_2",
+   "label": "Share of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "share_of_children_not_treated_for_diarrhea_in_counterfactual_2 * (1 - reduction_in_number_of_children_not_treated_for_diarrhea_in_3)",
+   "expected": 0.4081765903,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_intervention_low_s_2",
+   "label": "Share of children treated for diarrhea in intervention (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "1 - share_of_children_not_treated_for_diarrhea_in_intervention_l_2",
+   "expected": 0.5918234097,
+   "format": "percent"
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_intervention_low_2",
+   "label": "Number of children treated for diarrhea in intervention (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "child_population_targeted_low_sdi_2 * share_of_children_treated_for_diarrhea_in_intervention_low_s_2",
+   "expected": 59182.34097
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_counterfactual_lo_2",
+   "label": "Number of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "child_population_targeted_low_sdi_2 * share_of_children_treated_for_diarrhea_in_counterfactual_low_2",
+   "expected": 44000.0
+  },
+  {
+   "id": "number_of_new_children_treated_in_intervention_low_sdi_2",
+   "label": "Number of new children treated in intervention (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "number_of_children_treated_for_diarrhea_in_intervention_low_2 - number_of_children_treated_for_diarrhea_in_counterfactual_lo_2",
+   "expected": 15182.34097
+  },
+  {
+   "id": "number_of_under_5_all_cause_deaths_low_sdi_2",
+   "label": "Number of under-5 all-cause deaths (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 2671479.77,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B52"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A52,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_5_population_low_sdi_2",
+   "label": "Total <5 population (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 170855355.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B51"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A51,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "under_5_all_cause_mortality_rate_per_1_000_low_sdi_2",
+   "label": "Under-5 all-cause mortality rate per 1,000 (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "number_of_under_5_all_cause_deaths_low_sdi_2 / total_5_population_low_sdi_2 * 1000",
+   "expected": 15.63591475
+  },
+  {
+   "id": "of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi_2",
+   "label": "% of all under-5 mortality due to diarrheal diseases (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.1259,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B55"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A55,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_2",
+   "label": "Effective direct under-5 diarrhea mortality rate per 1,000 under-5 year olds (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "under_5_all_cause_mortality_rate_per_1_000_low_sdi_2 * of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi_2",
+   "expected": 1.968561667
+  },
+  {
+   "id": "indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar_2",
+   "label": "# indirect deaths due to diarrhea averted for each direct diarrhea death averted (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B57"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A57,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_4",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_2 + effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_2 * indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar_2",
+   "expected": 2.9528425
+  },
+  {
+   "id": "estimated_diarrhea_mortality_reduction_for_under_5s_covered_2",
+   "label": "Estimated diarrhea mortality reduction for under-5s covered by the intervention",
+   "section": "no_leveraging_cea",
+   "value": 0.93,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B62"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A62,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_mortality_reduction_2",
+   "label": "Internal validity adjustment (mortality reduction)",
+   "section": "no_leveraging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B63"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A63,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_mortality_reduction_2",
+   "label": "External validity adjustment (mortality reduction)",
+   "section": "no_leveraging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B64"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A64,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_reduction_in_mortality_from_ors_coverage_after_iv_2",
+   "label": "Effective reduction in mortality from ORS coverage, after IV/EV adjustments",
+   "section": "no_leveraging_cea",
+   "formula": "estimated_diarrhea_mortality_reduction_for_under_5s_covered_2 * internal_validity_adjustment_mortality_reduction_2 * external_validity_adjustment_mortality_reduction_2",
+   "expected": 0.5952,
+   "format": "percent"
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_3",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_4 / (share_of_children_not_treated_for_diarrhea_in_counterfactual_2 + share_of_children_treated_for_diarrhea_in_counterfactual_low_2 * (1 - effective_reduction_in_mortality_from_ors_coverage_after_iv_2))",
+   "expected": 4.000534472
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg_2",
+   "label": "Total under-5 diarrhea deaths in absence of program for marginal people treated",
+   "section": "no_leveraging_cea",
+   "formula": "number_of_new_children_treated_in_intervention_low_sdi_2 * (total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_3 / 1000)",
+   "expected": 60.7374784
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_averted_due_to_program_2",
+   "label": "Total under-5 diarrhea deaths averted due to program",
+   "section": "no_leveraging_cea",
+   "formula": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg_2 * effective_reduction_in_mortality_from_ors_coverage_after_iv_2",
+   "expected": 36.15094714
+  },
+  {
+   "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia_2",
+   "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
+   "section": "no_leveraging_cea",
+   "value": 111.8141889,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B72"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A72,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_value_from_mortality_averted_2",
+   "label": "Total value from mortality averted",
+   "section": "no_leveraging_cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program_2 * value_from_u5_death_averted_based_on_age_distribution_of_dia_2",
+   "expected": 4042.188834
+  },
+  {
+   "id": "units_of_value_from_development_effects_from_ors_zinc_usage_2",
+   "label": "Units of value from development effects from ORS/zinc usage, compared to SMC (before internal and external adjustments)",
+   "section": "no_leveraging_cea",
+   "formula": "development_effects_of_ors_zinc_provision_vs_smc",
+   "expected": 0.2209302326
+  },
+  {
+   "id": "units_of_value_from_development_effects_per_treatment_year_o_2",
+   "label": "Units of value from development effects per treatment-year of SMC, Nigeria",
+   "section": "no_leveraging_cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B80"
+   }
+  },
+  {
+   "id": "units_of_value_from_ors_zinc_usage_per_treatment_year_based_2",
+   "label": "Units of value from ORS/zinc usage per treatment-year (based on SMC U5 intervention)",
+   "section": "no_leveraging_cea",
+   "formula": "units_of_value_from_development_effects_from_ors_zinc_usage_2 * units_of_value_from_development_effects_per_treatment_year_o_2",
+   "expected": 0.02209302326
+  },
+  {
+   "id": "units_of_value_from_development_effects_generated_by_hypothe_2",
+   "label": "Units of value from development effects generated by hypothetical donation",
+   "section": "no_leveraging_cea",
+   "formula": "units_of_value_from_ors_zinc_usage_per_treatment_year_based_2 * number_of_new_children_treated_in_intervention_low_sdi_2",
+   "expected": 335.4238121
+  },
+  {
+   "id": "diarrheal_diseases_dalys_per_100_000_under_5_children_2",
+   "label": "Diarrheal diseases - DALYs per 100,000 under 5 children",
+   "section": "no_leveraging_cea",
+   "value": 17564.92,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B85"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A85,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program_2",
+   "label": "Total under-5 diarrhea deaths in absence of program",
+   "section": "no_leveraging_cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_4 / 1000 * child_population_targeted_low_sdi_2",
+   "expected": 295.28425
+  },
+  {
+   "id": "estimated_morbidity_reduction_2",
+   "label": "Estimated morbidity reduction",
+   "section": "no_leveraging_cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program_2 / total_under_5_diarrhea_deaths_in_absence_of_program_2",
+   "expected": 0.1224276173,
+   "format": "percent"
+  },
+  {
+   "id": "dalys_averted_2",
+   "label": "DALYs averted",
+   "section": "no_leveraging_cea",
+   "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_2 * estimated_morbidity_reduction_2",
+   "expected": 2150.431303
+  },
+  {
+   "id": "units_of_value_costs_averted_per_daly_averted_2",
+   "label": "Units of value (costs averted) per DALY averted",
+   "section": "no_leveraging_cea",
+   "value": 0.43,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B89"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A89,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "subjective_adjustment_for_units_of_value_costs_averted_compa_2",
+   "label": "Subjective adjustment for units of value (costs averted) compared with malaria interventions",
+   "section": "no_leveraging_cea",
+   "value": 0.3333333333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B90"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A90,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "units_of_values_from_costs_averted_2",
+   "label": "Units of values from costs averted",
+   "section": "no_leveraging_cea",
+   "formula": "dalys_averted_2 * units_of_value_costs_averted_per_daly_averted_2 * subjective_adjustment_for_units_of_value_costs_averted_compa_2",
+   "expected": 308.2284868
+  },
+  {
+   "id": "total_units_of_value_generated_4",
+   "label": "Total units of value generated",
+   "section": "no_leveraging_cea",
+   "formula": "total_value_from_mortality_averted_2 + units_of_value_from_development_effects_generated_by_hypothe_2 + units_of_values_from_costs_averted_2",
+   "expected": 4685.841133
+  },
+  {
+   "id": "total_adjustment_factor_for_excluded_effects_2",
+   "label": "Total adjustment factor for excluded effects",
+   "section": "no_leveraging_cea",
+   "value": 0.01141578841,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B101"
+   },
+   "explainer": "Calculated in the source sheet as `=SUM('Adjustments for excluded effect'!$I:$I)`; kept as a fixed number here (whole-column range).",
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_generated_3",
+   "label": "Total units of value generated",
+   "section": "no_leveraging_cea",
+   "formula": "total_units_of_value_generated_4 * (1 + total_adjustment_factor_for_excluded_effects_2)",
+   "expected": 4739.333704
+  },
+  {
+   "id": "oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_2",
+   "label": "Oral Rehydration Salts (ORS) 1x 1L Packet (USD, 2021) (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.07428,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B25"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A25,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "zinc_tablets_20_mg_usd_2021_low_sdi_2",
+   "label": "Zinc tablets, 20 mg (USD, 2021) (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.0133,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B27"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A27,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "usd_inflation_2021_to_2023_low_sdi_2",
+   "label": "USD inflation, 2021 to 2023 (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.12,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B28"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A28,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon_2",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 2 months to 6 months old (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "(3 * oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_2 + 5 * zinc_tablets_20_mg_usd_2021_low_sdi_2) * (1 + usd_inflation_2021_to_2023_low_sdi_2)",
+   "expected": 0.3240608,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_28_364_days_low_sdi_2",
+   "label": "Average diarrhea episodes per year, 28-364 days (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 2.491448294,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B33"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A33,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjustment_for_non_commodity_costs_low_sdi_2",
+   "label": "Adjustment for non-commodity costs (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 2.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B35"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A35,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_2_months_to_6_months_old_low_2",
+   "label": "Cost per child reached per year, 2 months to 6 months old (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon_2 * average_diarrhea_episodes_per_year_28_364_days_low_sdi_2 * adjustment_for_non_commodity_costs_low_sdi_2",
+   "expected": 1.816606636,
+   "format": "usd"
+  },
+  {
+   "id": "ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi_2",
+   "label": "ORS+Zinc Co-Pack (2x 1L ORS+10 tabs Zinc) (USD, 2021) (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.57,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B26"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A26,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea_2",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 6 months to 5 years old (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "sum(oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_2, ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi_2) * (1 + usd_inflation_2021_to_2023_low_sdi_2)",
+   "expected": 0.7215936,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_1_4_years_low_sdi_2",
+   "label": "Average diarrhea episodes per year, 1-4 years (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 1.7307472,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B34"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A34,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_6_months_to_5_years_old_low_2",
+   "label": "Cost per child reached per year, 6 months to 5 years old (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea_2 * average_diarrhea_episodes_per_year_1_4_years_low_sdi_2 * adjustment_for_non_commodity_costs_low_sdi_2",
+   "expected": 2.810016231,
+   "format": "usd"
+  },
+  {
+   "id": "weighted_average_of_cost_per_child_reached_low_sdi_2",
+   "label": "Weighted average of cost per child reached (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "cost_per_child_reached_per_year_2_months_to_6_months_old_low_2 * (4 / 58) + cost_per_child_reached_per_year_6_months_to_5_years_old_low_2 * (54 / 58)",
+   "expected": 2.741505225,
+   "format": "usd"
+  },
+  {
+   "id": "adjustment_for_leakage_additional_doses_low_sdi_2",
+   "label": "Adjustment for leakage/additional doses (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B41"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A41,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjusted_cost_per_child_reached_low_sdi_2",
+   "label": "Adjusted cost per child reached (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "weighted_average_of_cost_per_child_reached_low_sdi_2 * (1 + adjustment_for_leakage_additional_doses_low_sdi_2)",
+   "expected": 3.015655747,
+   "format": "usd"
+  },
+  {
+   "id": "cost_to_ngo_low_sdi_2",
+   "label": "Cost to NGO (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "adjusted_cost_per_child_reached_low_sdi_2 * number_of_children_treated_for_diarrhea_in_intervention_low_2",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "additional_costs_paid_by_government_to_scale_up_ors_zinc_as_2",
+   "label": "Additional costs paid by government to scale up ORS/Zinc, as a % of core charity's costs (Low SDI)",
+   "section": "no_leveraging_cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_CEA!B46"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "cost_to_government_low_sdi_2",
+   "label": "Cost to government (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "cost_to_ngo_low_sdi_2 * additional_costs_paid_by_government_to_scale_up_ors_zinc_as_2",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_cost_of_all_support_low_sdi_2",
+   "label": "Total cost of all support (Low SDI)",
+   "section": "no_leveraging_cea",
+   "formula": "cost_to_government_low_sdi_2 + cost_to_ngo_low_sdi_2",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_3",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!B56"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_10",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C67"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_3",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!B57"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ngo_low_sdi_2",
+   "label": "NGO (Low SDI)",
+   "section": "no_leveraging_inputs",
+   "formula": "cost_to_ngo_low_sdi_2",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_4",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "no_leveraging_inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!B62"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_11",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_inputs",
+   "formula": "-sum(ngo_low_sdi_2) * scenario_2_other_philanthropic_actors_would_replace_philanth_4",
+   "expected": -178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded_2",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "no_leveraging_inputs",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!B58"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_low_sdi_2",
+   "label": "Other philanthropic actors (Low SDI)",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C43"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_12",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_inputs",
+   "formula": "other_philanthropic_actors_low_sdi_2",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_9",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_3 * other_philanthropic_actors_10 + scenario_2_other_philanthropic_actors_would_replace_philanth_3 * other_philanthropic_actors_11 + scenario_3_program_would_go_unfunded_2 * other_philanthropic_actors_12",
+   "expected": -8923.678333
+  },
+  {
+   "id": "other_philanthropic_actors_8",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_cea",
+   "formula": "other_philanthropic_actors_9",
+   "expected": -8923.678333,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!B61"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "government_financial_costs_9",
+   "label": "Government financial costs",
+   "section": "no_leveraging_inputs",
+   "formula": "-sum(ngo_low_sdi_2) * scenario_1_government_costs_would_replace_philanthropic_cost_4",
+   "expected": -142778.8533,
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_10",
+   "label": "Government financial costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C73"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_11",
+   "label": "Government financial costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C78"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_8",
+   "label": "Government financial costs",
+   "section": "no_leveraging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_3 * government_financial_costs_9 + scenario_2_other_philanthropic_actors_would_replace_philanth_3 * government_financial_costs_10 + scenario_3_program_would_go_unfunded_2 * government_financial_costs_11",
+   "expected": -7138.942667
+  },
+  {
+   "id": "government_financial_costs_7",
+   "label": "Government financial costs",
+   "section": "no_leveraging_cea",
+   "formula": "government_financial_costs_8",
+   "expected": -7138.942667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_9",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C69"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_10",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No leveraging_Inputs!C74"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "domestic_government_low_sdi_2",
+   "label": "Domestic government (Low SDI)",
+   "section": "no_leveraging_inputs",
+   "formula": "cost_to_government_low_sdi_2",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_11",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_inputs",
+   "formula": "domestic_government_low_sdi_2",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_8",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_3 * government_in_kind_costs_9 + scenario_2_other_philanthropic_actors_would_replace_philanth_3 * government_in_kind_costs_10 + scenario_3_program_would_go_unfunded_2 * government_in_kind_costs_11",
+   "expected": 0.0
+  },
+  {
+   "id": "government_in_kind_costs_7",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_cea",
+   "formula": "government_in_kind_costs_8",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_2",
+   "label": "Total",
+   "section": "no_leveraging_cea",
+   "formula": "sum(other_philanthropic_actors_8, government_financial_costs_7, government_in_kind_costs_7)",
+   "expected": -16062.621,
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_generated_per_dollar_spent_2",
+   "label": "Units of value generated per dollar spent",
+   "section": "no_leveraging_cea",
+   "formula": "total_units_of_value_generated_3 / total_cost_of_all_support_low_sdi_2",
+   "expected": 0.02655482149
+  },
+  {
+   "id": "other_philanthropic_actors_13",
+   "label": "Other philanthropic actors",
+   "section": "no_leveraging_cea",
+   "formula": "other_philanthropic_actors_7",
+   "expected": 0.0215
+  },
+  {
+   "id": "government_financial_costs_12",
+   "label": "Government financial costs",
+   "section": "no_leveraging_cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "government_in_kind_costs_12",
+   "label": "Government in-kind costs",
+   "section": "no_leveraging_cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "additional_benefit_loss_from_leverage_funging_2",
+   "label": "Additional benefit (loss) from leverage/funging",
+   "section": "no_leveraging_cea",
+   "formula": "product(total_2, units_of_value_generated_per_dollar_spent_2) - sum(other_philanthropic_actors_13 * other_philanthropic_actors_8, government_financial_costs_12 * government_financial_costs_7, government_in_kind_costs_12 * government_in_kind_costs_7)",
+   "expected": -194.7028702
+  },
+  {
+   "id": "total_value_of_outcomes_after_leverage_funging_2",
+   "label": "Total value of outcomes (after leverage/funging)",
+   "section": "no_leveraging_cea",
+   "formula": "total_units_of_value_generated_3 * (cost_to_ngo_low_sdi_2 / total_cost_of_all_support_low_sdi_2) + additional_benefit_loss_from_leverage_funging_2",
+   "expected": 4544.630833
+  },
+  {
+   "id": "total_units_of_value_generated_by_philanthropic_spending_aft_2",
+   "label": "Total units of value generated by philanthropic spending, after accounting for leverage/funging",
+   "section": "no_leveraging_cea",
+   "formula": "total_value_of_outcomes_after_leverage_funging_2",
+   "expected": 4544.630833
+  },
+  {
+   "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte_2",
+   "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
+   "section": "no_leveraging_cea",
+   "formula": "total_units_of_value_generated_by_philanthropic_spending_aft_2 / cost_to_ngo_low_sdi_2",
+   "expected": 0.02546388756
+  },
+  {
+   "id": "cost_effectiveness_in_multiples_of_cash_transfers_after_all_2",
+   "label": "Cost-effectiveness in multiples of cash transfers, after all adjustments",
+   "section": "no_leveraging_cea",
+   "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte_2 / (335 / 100000)",
+   "expected": 7.601160465
+  },
+  {
+   "id": "change_in_cost_effectiveness_from_adding_downstream_costs",
+   "label": "Change in cost-effectiveness from adding downstream costs",
+   "section": "no_leveraging_cea",
+   "formula": "cost_effectiveness_in_multiples_of_cash_transfers_after_all / cost_effectiveness_in_multiples_of_cash_transfers_after_all_2",
+   "expected": 0.7968584296
+  },
+  {
+   "id": "downstream_costs_to_government_incurred_as_a_result_of_fundi",
+   "label": "Downstream costs to government incurred as a result of funding to NGO (leveraging) (Low SDI)",
+   "section": "simple_cea",
+   "formula": "change_in_cost_effectiveness_from_adding_downstream_costs",
+   "expected": 0.7968584296
+  },
+  {
+   "id": "child_population_targeted_low_sdi_3",
+   "label": "Child population targeted (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 100000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B4"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A4,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A4,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_counterfactual_low_3",
+   "label": "Share of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.44,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B7"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A7,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A7,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_counterfactual_3",
+   "label": "Share of children not treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "1 - share_of_children_treated_for_diarrhea_in_counterfactual_low_3",
+   "expected": 0.56,
+   "format": "percent"
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in_6",
+   "label": "Reduction in number of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.3986959288,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B10"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A10,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A10,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_ors_usage_low_sdi_3",
+   "label": "Internal validity (ORS usage) (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B11"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A11,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A11,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "external_validity_ors_usage_low_sdi_3",
+   "label": "External validity (ORS usage) (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B12"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A12,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A12,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "reduction_in_number_of_children_not_treated_for_diarrhea_in_5",
+   "label": "Reduction in number of children not treated for diarrhea in intervention, after IV/EV adjustments (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "product(reduction_in_number_of_children_not_treated_for_diarrhea_in_6, internal_validity_ors_usage_low_sdi_3, external_validity_ors_usage_low_sdi_3)",
+   "expected": 0.2711132316,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_not_treated_for_diarrhea_in_intervention_l_3",
+   "label": "Share of children not treated for diarrhea in intervention (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "share_of_children_not_treated_for_diarrhea_in_counterfactual_3 * (1 - reduction_in_number_of_children_not_treated_for_diarrhea_in_5)",
+   "expected": 0.4081765903,
+   "format": "percent"
+  },
+  {
+   "id": "share_of_children_treated_for_diarrhea_in_intervention_low_s_3",
+   "label": "Share of children treated for diarrhea in intervention (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "1 - share_of_children_not_treated_for_diarrhea_in_intervention_l_3",
+   "expected": 0.5918234097,
+   "format": "percent"
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_intervention_low_3",
+   "label": "Number of children treated for diarrhea in intervention (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "child_population_targeted_low_sdi_3 * share_of_children_treated_for_diarrhea_in_intervention_low_s_3",
+   "expected": 59182.34097
+  },
+  {
+   "id": "number_of_children_treated_for_diarrhea_in_counterfactual_lo_3",
+   "label": "Number of children treated for diarrhea in counterfactual (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "child_population_targeted_low_sdi_3 * share_of_children_treated_for_diarrhea_in_counterfactual_low_3",
+   "expected": 44000.0
+  },
+  {
+   "id": "number_of_new_children_treated_in_intervention_low_sdi_3",
+   "label": "Number of new children treated in intervention (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "number_of_children_treated_for_diarrhea_in_intervention_low_3 - number_of_children_treated_for_diarrhea_in_counterfactual_lo_3",
+   "expected": 15182.34097
+  },
+  {
+   "id": "number_of_under_5_all_cause_deaths_low_sdi_3",
+   "label": "Number of under-5 all-cause deaths (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 2671479.77,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B52"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A52,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A52,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_5_population_low_sdi_3",
+   "label": "Total <5 population (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 170855355.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B51"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A51,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A51,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "under_5_all_cause_mortality_rate_per_1_000_low_sdi_3",
+   "label": "Under-5 all-cause mortality rate per 1,000 (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "number_of_under_5_all_cause_deaths_low_sdi_3 / total_5_population_low_sdi_3 * 1000",
+   "expected": 15.63591475
+  },
+  {
+   "id": "of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi_3",
+   "label": "% of all under-5 mortality due to diarrheal diseases (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.1259,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B55"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A55,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A55,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_3",
+   "label": "Effective direct under-5 diarrhea mortality rate per 1,000 under-5 year olds (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "under_5_all_cause_mortality_rate_per_1_000_low_sdi_3 * of_all_under_5_mortality_due_to_diarrheal_diseases_low_sdi_3",
+   "expected": 1.968561667
+  },
+  {
+   "id": "indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar_3",
+   "label": "# indirect deaths due to diarrhea averted for each direct diarrhea death averted (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B57"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A57,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A57,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_6",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_3 + effective_direct_under_5_diarrhea_mortality_rate_per_1_000_u_3 * indirect_deaths_due_to_diarrhea_averted_for_each_direct_diar_3",
+   "expected": 2.9528425
+  },
+  {
+   "id": "estimated_diarrhea_mortality_reduction_for_under_5s_covered_3",
+   "label": "Estimated diarrhea mortality reduction for under-5s covered by the intervention",
+   "section": "no_funging_cea",
+   "value": 0.93,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B62"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A62,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A62,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_mortality_reduction_3",
+   "label": "Internal validity adjustment (mortality reduction)",
+   "section": "no_funging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B63"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A63,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A63,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_mortality_reduction_3",
+   "label": "External validity adjustment (mortality reduction)",
+   "section": "no_funging_cea",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B64"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A64,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A64,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "effective_reduction_in_mortality_from_ors_coverage_after_iv_3",
+   "label": "Effective reduction in mortality from ORS coverage, after IV/EV adjustments",
+   "section": "no_funging_cea",
+   "formula": "estimated_diarrhea_mortality_reduction_for_under_5s_covered_3 * internal_validity_adjustment_mortality_reduction_3 * external_validity_adjustment_mortality_reduction_3",
+   "expected": 0.5952,
+   "format": "percent"
+  },
+  {
+   "id": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_5",
+   "label": "Total direct and indirect under-5 diarrhea mortality per 1,000 under-5s not receiving ORS with zinc (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_6 / (share_of_children_not_treated_for_diarrhea_in_counterfactual_3 + share_of_children_treated_for_diarrhea_in_counterfactual_low_3 * (1 - effective_reduction_in_mortality_from_ors_coverage_after_iv_3))",
+   "expected": 4.000534472
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg_3",
+   "label": "Total under-5 diarrhea deaths in absence of program for marginal people treated",
+   "section": "no_funging_cea",
+   "formula": "number_of_new_children_treated_in_intervention_low_sdi_3 * (total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_5 / 1000)",
+   "expected": 60.7374784
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_averted_due_to_program_3",
+   "label": "Total under-5 diarrhea deaths averted due to program",
+   "section": "no_funging_cea",
+   "formula": "total_under_5_diarrhea_deaths_in_absence_of_program_for_marg_3 * effective_reduction_in_mortality_from_ors_coverage_after_iv_3",
+   "expected": 36.15094714
+  },
+  {
+   "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia_3",
+   "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
+   "section": "no_funging_cea",
+   "value": 111.8141889,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B72"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A72,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A72,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_value_from_mortality_averted_3",
+   "label": "Total value from mortality averted",
+   "section": "no_funging_cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program_3 * value_from_u5_death_averted_based_on_age_distribution_of_dia_3",
+   "expected": 4042.188834
+  },
+  {
+   "id": "units_of_value_from_development_effects_from_ors_zinc_usage_3",
+   "label": "Units of value from development effects from ORS/zinc usage, compared to SMC (before internal and external adjustments)",
+   "section": "no_funging_cea",
+   "formula": "development_effects_of_ors_zinc_provision_vs_smc",
+   "expected": 0.2209302326
+  },
+  {
+   "id": "units_of_value_from_development_effects_per_treatment_year_o_3",
+   "label": "Units of value from development effects per treatment-year of SMC, Nigeria",
+   "section": "no_funging_cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B80"
+   }
+  },
+  {
+   "id": "units_of_value_from_ors_zinc_usage_per_treatment_year_based_3",
+   "label": "Units of value from ORS/zinc usage per treatment-year (based on SMC U5 intervention)",
+   "section": "no_funging_cea",
+   "formula": "units_of_value_from_development_effects_from_ors_zinc_usage_3 * units_of_value_from_development_effects_per_treatment_year_o_3",
+   "expected": 0.02209302326
+  },
+  {
+   "id": "units_of_value_from_development_effects_generated_by_hypothe_3",
+   "label": "Units of value from development effects generated by hypothetical donation",
+   "section": "no_funging_cea",
+   "formula": "units_of_value_from_ors_zinc_usage_per_treatment_year_based_3 * number_of_new_children_treated_in_intervention_low_sdi_3",
+   "expected": 335.4238121
+  },
+  {
+   "id": "diarrheal_diseases_dalys_per_100_000_under_5_children_3",
+   "label": "Diarrheal diseases - DALYs per 100,000 under 5 children",
+   "section": "no_funging_cea",
+   "value": 17564.92,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B85"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A85,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A85,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "total_under_5_diarrhea_deaths_in_absence_of_program_3",
+   "label": "Total under-5 diarrhea deaths in absence of program",
+   "section": "no_funging_cea",
+   "formula": "total_direct_and_indirect_under_5_diarrhea_mortality_per_1_0_6 / 1000 * child_population_targeted_low_sdi_3",
+   "expected": 295.28425
+  },
+  {
+   "id": "estimated_morbidity_reduction_3",
+   "label": "Estimated morbidity reduction",
+   "section": "no_funging_cea",
+   "formula": "total_under_5_diarrhea_deaths_averted_due_to_program_3 / total_under_5_diarrhea_deaths_in_absence_of_program_3",
+   "expected": 0.1224276173,
+   "format": "percent"
+  },
+  {
+   "id": "dalys_averted_3",
+   "label": "DALYs averted",
+   "section": "no_funging_cea",
+   "formula": "diarrheal_diseases_dalys_per_100_000_under_5_children_3 * estimated_morbidity_reduction_3",
+   "expected": 2150.431303
+  },
+  {
+   "id": "units_of_value_costs_averted_per_daly_averted_3",
+   "label": "Units of value (costs averted) per DALY averted",
+   "section": "no_funging_cea",
+   "value": 0.43,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B89"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A89,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A89,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "subjective_adjustment_for_units_of_value_costs_averted_compa_3",
+   "label": "Subjective adjustment for units of value (costs averted) compared with malaria interventions",
+   "section": "no_funging_cea",
+   "value": 0.3333333333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B90"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A90,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A90,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "units_of_values_from_costs_averted_3",
+   "label": "Units of values from costs averted",
+   "section": "no_funging_cea",
+   "formula": "dalys_averted_3 * units_of_value_costs_averted_per_daly_averted_3 * subjective_adjustment_for_units_of_value_costs_averted_compa_3",
+   "expected": 308.2284868
+  },
+  {
+   "id": "total_units_of_value_generated_6",
+   "label": "Total units of value generated",
+   "section": "no_funging_cea",
+   "formula": "total_value_from_mortality_averted_3 + units_of_value_from_development_effects_generated_by_hypothe_3 + units_of_values_from_costs_averted_3",
+   "expected": 4685.841133
+  },
+  {
+   "id": "total_adjustment_factor_for_excluded_effects_3",
+   "label": "Total adjustment factor for excluded effects",
+   "section": "no_funging_cea",
+   "value": 0.01141578841,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B101"
+   },
+   "explainer": "Calculated in the source sheet as `=SUM('Adjustments for excluded effect'!$I:$I)`; kept as a fixed number here (whole-column range).",
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_generated_5",
+   "label": "Total units of value generated",
+   "section": "no_funging_cea",
+   "formula": "total_units_of_value_generated_6 * (1 + total_adjustment_factor_for_excluded_effects_3)",
+   "expected": 4739.333704
+  },
+  {
+   "id": "oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_3",
+   "label": "Oral Rehydration Salts (ORS) 1x 1L Packet (USD, 2021) (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.07428,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B25"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A25,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A25,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "zinc_tablets_20_mg_usd_2021_low_sdi_3",
+   "label": "Zinc tablets, 20 mg (USD, 2021) (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.0133,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B27"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A27,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A27,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "usd_inflation_2021_to_2023_low_sdi_3",
+   "label": "USD inflation, 2021 to 2023 (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.12,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B28"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A28,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A28,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon_3",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 2 months to 6 months old (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "(3 * oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_3 + 5 * zinc_tablets_20_mg_usd_2021_low_sdi_3) * (1 + usd_inflation_2021_to_2023_low_sdi_3)",
+   "expected": 0.3240608,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_28_364_days_low_sdi_3",
+   "label": "Average diarrhea episodes per year, 28-364 days (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 2.491448294,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B33"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A33,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A33,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjustment_for_non_commodity_costs_low_sdi_3",
+   "label": "Adjustment for non-commodity costs (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 2.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B35"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A35,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A35,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_2_months_to_6_months_old_low_3",
+   "label": "Cost per child reached per year, 2 months to 6 months old (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_2_months_to_6_mon_3 * average_diarrhea_episodes_per_year_28_364_days_low_sdi_3 * adjustment_for_non_commodity_costs_low_sdi_3",
+   "expected": 1.816606636,
+   "format": "usd"
+  },
+  {
+   "id": "ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi_3",
+   "label": "ORS+Zinc Co-Pack (2x 1L ORS+10 tabs Zinc) (USD, 2021) (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.57,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B26"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A26,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A26,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "usd"
+  },
+  {
+   "id": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea_3",
+   "label": "Cost for ORS/Zinc course per diarrhea case, 6 months to 5 years old (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "sum(oral_rehydration_salts_ors_1x_1l_packet_usd_2021_low_sdi_3, ors_zinc_co_pack_2x_1l_ors_10_tabs_zinc_usd_2021_low_sdi_3) * (1 + usd_inflation_2021_to_2023_low_sdi_3)",
+   "expected": 0.7215936,
+   "format": "usd"
+  },
+  {
+   "id": "average_diarrhea_episodes_per_year_1_4_years_low_sdi_3",
+   "label": "Average diarrhea episodes per year, 1-4 years (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 1.7307472,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B34"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A34,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A34,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "cost_per_child_reached_per_year_6_months_to_5_years_old_low_3",
+   "label": "Cost per child reached per year, 6 months to 5 years old (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "cost_for_ors_zinc_course_per_diarrhea_case_6_months_to_5_yea_3 * average_diarrhea_episodes_per_year_1_4_years_low_sdi_3 * adjustment_for_non_commodity_costs_low_sdi_3",
+   "expected": 2.810016231,
+   "format": "usd"
+  },
+  {
+   "id": "weighted_average_of_cost_per_child_reached_low_sdi_3",
+   "label": "Weighted average of cost per child reached (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "cost_per_child_reached_per_year_2_months_to_6_months_old_low_3 * (4 / 58) + cost_per_child_reached_per_year_6_months_to_5_years_old_low_3 * (54 / 58)",
+   "expected": 2.741505225,
+   "format": "usd"
+  },
+  {
+   "id": "adjustment_for_leakage_additional_doses_low_sdi_3",
+   "label": "Adjustment for leakage/additional doses (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B41"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A41,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A41,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK())."
+  },
+  {
+   "id": "adjusted_cost_per_child_reached_low_sdi_3",
+   "label": "Adjusted cost per child reached (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "weighted_average_of_cost_per_child_reached_low_sdi_3 * (1 + adjustment_for_leakage_additional_doses_low_sdi_3)",
+   "expected": 3.015655747,
+   "format": "usd"
+  },
+  {
+   "id": "cost_to_ngo_low_sdi_3",
+   "label": "Cost to NGO (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "adjusted_cost_per_child_reached_low_sdi_3 * number_of_children_treated_for_diarrhea_in_intervention_low_3",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "additional_costs_paid_by_government_to_scale_up_ors_zinc_as_3",
+   "label": "Additional costs paid by government to scale up ORS/Zinc, as a % of core charity's costs (Low SDI)",
+   "section": "no_funging_cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_CEA!B46"
+   },
+   "explainer": "Calculated in the source sheet as `=IF(ISBLANK(INDEX(Inputs!$B:$B,MATCH($A46,Inputs!$A:$A,0))), INDEX(Inputs!$C:$D, MATCH($A46,Inputs!$A:$A,0), MATCH(B$1,Inputs!$C$1:$D$1,0)), INDEX(Inputs!$B:$B,MATCH($A46,Inputs!$A:$A,0)))`; kept as a fixed number here (ISBLANK()).",
+   "format": "percent"
+  },
+  {
+   "id": "cost_to_government_low_sdi_3",
+   "label": "Cost to government (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "cost_to_ngo_low_sdi_3 * additional_costs_paid_by_government_to_scale_up_ors_zinc_as_3",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "total_cost_of_all_support_low_sdi_3",
+   "label": "Total cost of all support (Low SDI)",
+   "section": "no_funging_cea",
+   "formula": "cost_to_government_low_sdi_3 + cost_to_ngo_low_sdi_3",
+   "expected": 356947.1333,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_5",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!B56"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_16",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C67"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_5",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!B57"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "ngo_low_sdi_3",
+   "label": "NGO (Low SDI)",
+   "section": "no_funging_inputs",
+   "formula": "cost_to_ngo_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_2_other_philanthropic_actors_would_replace_philanth_6",
+   "label": "Scenario 2: Other philanthropic actors would replace philanthropic costs",
+   "section": "no_funging_inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!B62"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_17",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_inputs",
+   "formula": "-sum(ngo_low_sdi_3) * scenario_2_other_philanthropic_actors_would_replace_philanth_6",
+   "expected": -178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_3_program_would_go_unfunded_3",
+   "label": "Scenario 3: Program would go unfunded",
+   "section": "no_funging_inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!B58"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "other_philanthropic_actors_low_sdi_3",
+   "label": "Other philanthropic actors (Low SDI)",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C43"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_18",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_inputs",
+   "formula": "other_philanthropic_actors_low_sdi_3",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "other_philanthropic_actors_15",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_5 * other_philanthropic_actors_16 + scenario_2_other_philanthropic_actors_would_replace_philanth_5 * other_philanthropic_actors_17 + scenario_3_program_would_go_unfunded_3 * other_philanthropic_actors_18",
+   "expected": 0.0
+  },
+  {
+   "id": "other_philanthropic_actors_14",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_cea",
+   "formula": "other_philanthropic_actors_15",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "scenario_1_government_costs_would_replace_philanthropic_cost_6",
+   "label": "Scenario 1: Government costs would replace philanthropic costs",
+   "section": "no_funging_inputs",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!B61"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "government_financial_costs_15",
+   "label": "Government financial costs",
+   "section": "no_funging_inputs",
+   "formula": "-sum(ngo_low_sdi_3) * scenario_1_government_costs_would_replace_philanthropic_cost_6",
+   "expected": -142778.8533,
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_16",
+   "label": "Government financial costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C73"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_17",
+   "label": "Government financial costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C78"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_financial_costs_14",
+   "label": "Government financial costs",
+   "section": "no_funging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_5 * government_financial_costs_15 + scenario_2_other_philanthropic_actors_would_replace_philanth_5 * government_financial_costs_16 + scenario_3_program_would_go_unfunded_3 * government_financial_costs_17",
+   "expected": 0.0
+  },
+  {
+   "id": "government_financial_costs_13",
+   "label": "Government financial costs",
+   "section": "no_funging_cea",
+   "formula": "government_financial_costs_14",
+   "expected": 0.0,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_15",
+   "label": "Government in-kind costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C69"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_16",
+   "label": "Government in-kind costs",
+   "section": "no_funging_inputs",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+    "cell": "No funging_Inputs!C74"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "domestic_government_low_sdi_3",
+   "label": "Domestic government (Low SDI)",
+   "section": "no_funging_inputs",
+   "formula": "cost_to_government_low_sdi",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_17",
+   "label": "Government in-kind costs",
+   "section": "no_funging_inputs",
+   "formula": "domestic_government_low_sdi_3",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "government_in_kind_costs_14",
+   "label": "Government in-kind costs",
+   "section": "no_funging_inputs",
+   "formula": "scenario_1_government_costs_would_replace_philanthropic_cost_5 * government_in_kind_costs_15 + scenario_2_other_philanthropic_actors_would_replace_philanth_5 * government_in_kind_costs_16 + scenario_3_program_would_go_unfunded_3 * government_in_kind_costs_17",
+   "expected": 178473.5667
+  },
+  {
+   "id": "government_in_kind_costs_13",
+   "label": "Government in-kind costs",
+   "section": "no_funging_cea",
+   "formula": "government_in_kind_costs_14",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "total_3",
+   "label": "Total",
+   "section": "no_funging_cea",
+   "formula": "sum(other_philanthropic_actors_14, government_financial_costs_13, government_in_kind_costs_13)",
+   "expected": 178473.5667,
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_generated_per_dollar_spent_3",
+   "label": "Units of value generated per dollar spent",
+   "section": "no_funging_cea",
+   "formula": "total_units_of_value_generated_5 / total_cost_of_all_support_low_sdi_3",
+   "expected": 0.01327741075
+  },
+  {
+   "id": "other_philanthropic_actors_19",
+   "label": "Other philanthropic actors",
+   "section": "no_funging_cea",
+   "formula": "other_philanthropic_actors_7",
+   "expected": 0.0215
+  },
+  {
+   "id": "government_financial_costs_18",
+   "label": "Government financial costs",
+   "section": "no_funging_cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "government_in_kind_costs_18",
+   "label": "Government in-kind costs",
+   "section": "no_funging_cea",
+   "formula": "domestic_government",
+   "expected": 0.0056
+  },
+  {
+   "id": "additional_benefit_loss_from_leverage_funging_3",
+   "label": "Additional benefit (loss) from leverage/funging",
+   "section": "no_funging_cea",
+   "formula": "product(total_3, units_of_value_generated_per_dollar_spent_3) - sum(other_philanthropic_actors_19 * other_philanthropic_actors_14, government_financial_costs_18 * government_financial_costs_13, government_in_kind_costs_18 * government_in_kind_costs_13)",
+   "expected": 1370.214878
+  },
+  {
+   "id": "total_value_of_outcomes_after_leverage_funging_3",
+   "label": "Total value of outcomes (after leverage/funging)",
+   "section": "no_funging_cea",
+   "formula": "total_units_of_value_generated_5 * (cost_to_ngo_low_sdi_3 / total_cost_of_all_support_low_sdi_3) + additional_benefit_loss_from_leverage_funging_3",
+   "expected": 3739.88173
+  },
+  {
+   "id": "total_units_of_value_generated_by_philanthropic_spending_aft_3",
+   "label": "Total units of value generated by philanthropic spending, after accounting for leverage/funging",
+   "section": "no_funging_cea",
+   "formula": "total_value_of_outcomes_after_leverage_funging_3",
+   "expected": 3739.88173
+  },
+  {
+   "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte_3",
+   "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
+   "section": "no_funging_cea",
+   "formula": "total_units_of_value_generated_by_philanthropic_spending_aft_3 / cost_to_ngo_low_sdi_3",
+   "expected": 0.02095482149
+  },
+  {
+   "id": "cost_effectiveness_in_multiples_of_cash_transfers_after_all_3",
+   "label": "Cost-effectiveness in multiples of cash transfers, after all adjustments",
+   "section": "no_funging_cea",
+   "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte_3 / (335 / 100000)",
+   "expected": 6.255170594
+  },
+  {
+   "id": "change_in_cost_effectiveness_from_removing_funging",
+   "label": "Change in cost-effectiveness from removing funging",
+   "section": "no_funging_cea",
+   "formula": "cost_effectiveness_in_multiples_of_cash_transfers_after_all / cost_effectiveness_in_multiples_of_cash_transfers_after_all_3",
+   "expected": 0.9683267146
+  },
+  {
+   "id": "chance_that_other_funders_fund_similar_programs_with_us_fung",
+   "label": "Chance that other funders fund similar programs with us (funging) (Low SDI)",
+   "section": "simple_cea",
+   "formula": "change_in_cost_effectiveness_from_removing_funging",
+   "expected": 0.9683267146
+  },
+  {
+   "id": "additional_benefits_and_adjustments_low_sdi",
+   "label": "Additional benefits and adjustments (Low SDI)",
+   "section": "simple_cea",
+   "formula": "1 / child_mortality_benefits_low_sdi * excluded_effects_low_sdi * downstream_costs_to_government_incurred_as_a_result_of_fundi * chance_that_other_funders_fund_similar_programs_with_us_fung",
+   "expected": 0.9046983032
+  },
+  {
+   "id": "final_cost_effectiveness_after_all_adjustments_low_sdi",
+   "label": "Final cost-effectiveness (after all adjustments) (Low SDI)",
+   "section": "simple_cea",
+   "formula": "initial_cost_effectiveness_estimate_low_sdi * additional_benefits_and_adjustments_low_sdi",
+   "expected": 6.116481465
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "final_cost_effectiveness_after_all_adjustments_low_sdi * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

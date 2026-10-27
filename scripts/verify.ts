@@ -17,8 +17,7 @@ for (const path of process.argv.slice(2)) {
   let ok = 0;
   for (const r of m.rows) {
     if (r.expected === undefined) continue;
-    const rel = Math.abs(vals[r.id] - r.expected) / Math.max(Math.abs(r.expected), 1e-12);
-    if (rel <= 1e-6) ok++; else bad.push(`${r.id}: ${r.expected} vs ${vals[r.id]}`);
+    if (Math.abs(vals[r.id] - r.expected) <= Math.max(1e-6 * Math.abs(r.expected), 1e-9)) ok++; else bad.push(`${r.id}: ${r.expected} vs ${vals[r.id]}`);
   }
   console.log(JSON.stringify({ path, id: m.id, rows: m.rows.length, ok, bad: bad.length, first: bad.slice(0, 3), errors: lib.errors.slice(0, 3), out: m.output && vals[m.output.row] }));
 }

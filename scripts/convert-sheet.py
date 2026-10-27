@@ -26,7 +26,7 @@ from openpyxl.utils import column_index_from_string, get_column_letter, range_bo
 # GiveWell's value of a dollar given to GiveDirectly, in units of value. Multiples of cash ("x cash")
 # convert to units of value through it.
 CASH_UOV = 0.00335
-MAX_ROWS = 6000
+MAX_ROWS = 15000
 
 LIST_FNS = {"SUM", "AVERAGE", "MIN", "MAX", "PRODUCT", "MEDIAN", "GEOMEAN", "AND", "OR"}
 SIMPLE = {"LN": "ln", "LOG10": "log10", "EXP": "exp", "ABS": "abs", "SQRT": "sqrt", "IF": "if", "IFERROR": "iferror",
@@ -50,9 +50,29 @@ def num(v):
     return None
 
 
+def without_styles(path):
+    """A copy of the workbook without cell styles, filters, conditional formats and validations. Some
+    Google exports contain ones openpyxl refuses to load; none of them affect values or formulas."""
+    import tempfile, zipfile
+    tmp = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False).name
+    with zipfile.ZipFile(path) as zin, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename.startswith("xl/worksheets/sheet"):
+                data = re.sub(rb'(<c [^>]*?) s="\d+"', rb"\1", data)
+                for tag in (rb"autoFilter", rb"conditionalFormatting", rb"dataValidations", rb"extLst"):
+                    data = re.sub(rb"<" + tag + rb"\b[^>]*/>|<" + tag + rb"\b.*?</" + tag + rb">", b"", data, flags=re.S)
+            zout.writestr(item, data)
+    return tmp
+
+
 class Sheet:
     def __init__(self, path):
-        self.F = openpyxl.load_workbook(path)
+        try:
+            self.F = openpyxl.load_workbook(path)
+        except (ValueError, IndexError):
+            path = without_styles(path)
+            self.F = openpyxl.load_workbook(path)
         self.V = openpyxl.load_workbook(path, data_only=True)
         self.names = {}
         try:
@@ -149,6 +169,67 @@ class Converter:
         if raw is None and v is None: return None
         return self.visit(sh, coord)["id"]
 
+    def grid(self, sh, rng):
+        """A range's bounds, with whole columns or rows cut to the tab's used area (for lookups)."""
+        if sh not in self.b.F.sheetnames: raise Unsupported(f"unknown tab {sh}")
+        ws = self.b.V[sh]
+        if ":" not in rng:
+            c1, r1, _, _ = range_boundaries(rng); return c1, r1, c1, r1
+        c1, r1, c2, r2 = range_boundaries(rng)
+        return c1 or 1, r1 or 1, c2 or ws.max_column, r2 or ws.max_row
+
+    def static(self, node):
+        """The value of a lookup key: a literal, or a cell's value as the sheet has it."""
+        if node[0] in ("str", "num"): return node[1]
+        if node[0] == "range" and ":" not in node[2]: return self.b.val(node[1], node[2])
+        low = self.lower(node)
+        if low[0] == "num": return low[1]
+        raise Unsupported("lookup key isn't fixed")
+
+    def lookup(self, name, args):
+        """MATCH and INDEX with fixed keys resolve to the cell they point at, keeping the dependency."""
+        if name == "MATCH":
+            if len(args) > 2 and not (args[2][0] == "num" and args[2][1] == 0): raise Unsupported("MATCH that isn't exact")
+            if args[1][0] != "range": raise Unsupported("MATCH over an expression")
+            key = self.static(args[0]); sh = args[1][1]
+            c1, r1, c2, r2 = self.grid(sh, args[1][2])
+            cells = [(c, r) for r in range(r1, r2 + 1) for c in range(c1, c2 + 1)]
+            norm = lambda v: v.strip().lower() if isinstance(v, str) else num(v)
+            for i, (c, r) in enumerate(cells):
+                if norm(self.b.val(sh, f"{get_column_letter(c)}{r}")) == norm(key): return ("num", float(i + 1))
+            raise Unsupported("MATCH finds nothing")
+        if name == "FILTER":
+            # FILTER(values, keys1 = k1, keys2 = k2, ...) used as a lookup: exactly one row may match.
+            if args[0][0] != "range": raise Unsupported("FILTER over an expression")
+            sh = args[0][1]; c1, r1, c2, r2 = self.grid(sh, args[0][2])
+            if c1 != c2: raise Unsupported("FILTER returning several columns")
+            conds = []
+            for a in args[1:]:
+                if not (a[0] == "bin" and a[1] == "=" and a[2][0] == "range"): raise Unsupported("FILTER condition isn't range = key")
+                kc1, kr1, kc2, kr2 = self.grid(a[2][1], a[2][2])
+                if kc1 != kc2 or kr2 - kr1 != r2 - r1: raise Unsupported("FILTER ranges differ")
+                conds.append((a[2][1], kc1, kr1, self.static(a[3])))
+            norm = lambda v: v.strip().lower() if isinstance(v, str) else num(v)
+            hits = [i for i in range(r2 - r1 + 1)
+                    if all(norm(self.b.val(ksh, f"{get_column_letter(kc)}{kr + i}")) == norm(key) for ksh, kc, kr, key in conds)]
+            if len(hits) != 1: raise Unsupported(f"FILTER matches {len(hits)} rows")
+            return ("cell", sh, f"{get_column_letter(c1)}{r1 + hits[0]}")
+        if args[0][0] != "range": raise Unsupported("INDEX over an expression")
+        sh = args[0][1]; c1, r1, c2, r2 = self.grid(sh, args[0][2])
+        pos = []
+        for a in args[1:3]:
+            if a[0] == "empty": pos.append(0); continue
+            v = self.lower(a) if a[0] != "num" else a
+            if v[0] != "num": raise Unsupported("INDEX position isn't fixed")
+            pos.append(int(v[1]))
+        while len(pos) < 2: pos.append(0)
+        r, c = pos
+        if c2 == c1 and r == 0 and c > 0: r, c = c, 0  # single column: one position is the row
+        if r2 == r1 and r > 0 and c == 0 and c2 > c1: r, c = 1, r  # single row: one position is the column
+        r, c = r or 1, c or 1
+        if r1 + r - 1 > r2 or c1 + c - 1 > c2: raise Unsupported("INDEX outside its range")
+        return ("cell", sh, f"{get_column_letter(c1 + c - 1)}{r1 + r - 1}")
+
     def range_cells(self, sh, rng):
         if ":" not in rng: return [(sh, rng)]
         c1, r1, c2, r2 = range_boundaries(rng)
@@ -214,7 +295,11 @@ class Converter:
                 args = []
                 if not (peek() and peek().type == Token.FUNC and peek().subtype == Token.CLOSE):
                     while True:
-                        args.append(expr(0))
+                        nx = peek()
+                        if nx and ((nx.type == Token.SEP and nx.subtype == Token.ARG) or (nx.type == Token.FUNC and nx.subtype == Token.CLOSE)):
+                            args.append(("empty",))  # an omitted argument, as in INDEX(range,,col)
+                        else:
+                            args.append(expr(0))
                         s = peek()
                         if s and s.type == Token.SEP and s.subtype == Token.ARG: p[0] += 1; continue
                         break
@@ -224,12 +309,13 @@ class Converter:
             if t.type == Token.OPERAND:
                 if t.subtype == Token.NUMBER: return ("num", float(t.value))
                 if t.subtype == Token.LOGICAL: return ("num", 1.0 if t.value.upper() == "TRUE" else 0.0)
+                if t.subtype == Token.TEXT: return ("str", t.value[1:-1].replace('""', '"'))
                 if t.subtype == Token.RANGE:
                     v = t.value
                     if v.upper() in self.b.names: v = self.b.names[v.upper()]
                     if v.upper() in ("TRUE", "FALSE"): return ("num", 1.0 if v.upper() == "TRUE" else 0.0)
                     s2, rng = parse_ref(v, sh)
-                    if not re.fullmatch(r"[A-Z]{1,3}\d+(:[A-Z]{1,3}\d+)?", rng): raise Unsupported(f"reference {v}")
+                    if not re.fullmatch(r"[A-Z]{1,3}\d+(:[A-Z]{1,3}\d+)?|[A-Z]{1,3}:[A-Z]{1,3}|\d+:\d+", rng): raise Unsupported(f"reference {v}")
                     return ("range", s2, rng)
                 raise Unsupported(f"{t.subtype.lower()} operand")
             raise Unsupported(f"token {t.value}")
@@ -272,6 +358,7 @@ class Converter:
         """Rewrite spreadsheet calls into engine calls over scalar nodes."""
         k = node[0]
         if k == "num" or k == "cell": return node
+        if k in ("str", "empty"): raise Unsupported("text in arithmetic")
         if k == "range": return self.lower(self.scalar(node))
         if k == "neg": return ("neg", self.lower(node[1]))
         if k == "bin": return ("bin", node[1], self.lower(node[2]), self.lower(node[3]))
@@ -313,6 +400,7 @@ class Converter:
         if name == "POWER" and len(args) == 2: return ("bin", "^", self.lower(args[0]), self.lower(args[1]))
         if name == "IFERROR" and len(args) == 1: args = [args[0], ("num", 0.0)]
         if name == "IF" and len(args) == 2: args = [*args, ("num", 0.0)]
+        if name in ("MATCH", "INDEX", "FILTER"): return self.lookup(name, args)
         if name in SIMPLE: return ("fn", SIMPLE[name], [self.lower(self.scalar(a)) for a in args])
         raise Unsupported(f"{name}()")
 
@@ -452,6 +540,8 @@ def build(book, spec):
     conv = Converter(book, url)
     if spec.get("cell"):
         sh, coord = parse_ref(spec["cell"], book.F.sheetnames[0]); kind = spec.get("bottom", "native")
+        if sh not in book.F.sheetnames:  # tab names in hand-written specs may be cut short
+            sh = next(n for n in book.F.sheetnames if n.startswith(sh))
     else:
         found = find_bottom(book)
         if not found: raise SystemExit(f"{spec['id']}: no bottom line found; pass a cell")
@@ -467,14 +557,19 @@ def build(book, spec):
                      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."})
         rows.append({"id": "uov_per_dollar", "label": "Units of value per dollar", "section": "bottom_line", "formula": f"{bottom['id']} * cash_benchmark"})
         out = {"row": "uov_per_dollar", "unit": "uov", "label": "Units of value per dollar"}
+    elif re.fullmatch(r"(uov|wellby)_per:\d+", kind):
+        unit, per = kind.split("_per:")
+        label = {"uov": "Units of value per dollar", "wellby": "WELLBYs per dollar"}[unit]
+        rows.append({"id": f"{unit}_per_dollar", "label": label, "section": "bottom_line", "formula": f"{bottom['id']} / {per}"})
+        out = {"row": f"{unit}_per_dollar", "unit": unit, "label": label}
     elif kind == "native":
         out = {"row": bottom["id"], "unit": spec["unit"], "label": spec["label"]}
     sections = [{"id": v, "title": k} for k, v in conv.sections.items()]
-    if kind == "xcash": sections.append({"id": "bottom_line", "title": "Bottom line"})
+    if kind == "xcash" or "_per:" in kind: sections.append({"id": "bottom_line", "title": "Bottom line"})
     # The bottom line first in its tab reads better than last; keep the traced order otherwise (precedents first).
     model = {k: spec[k] for k in ("id", "name") if k in spec}
     model.update({"kind": spec.get("kind", "charity"), "cause": spec.get("cause", "global-health"), "charity": spec["charity"],
-                  "owner": spec["owner"]})
+                  "owner": spec["owner"], "bulk": True})
     for k in ("summary", "source", "evaluator"):
         if k in spec: model[k] = spec[k]
     model["resources"] = spec.get("resources", [])

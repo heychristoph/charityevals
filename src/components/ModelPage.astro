@@ -5,8 +5,8 @@ import Base from "../layouts/Base.astro";
 import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
-import { lib, rankable, modelUrl, historyUrl } from "../lib/data";
-import { modelsOf } from "../engine/model";
+import { lib, rankable, modelUrl, historyUrl, bulkRaw } from "../lib/data";
+import { modelsOf, currentModelsOf } from "../engine/model";
 
 interface Props {
   modelId: string;
@@ -15,6 +15,9 @@ const model = lib.models.get(Astro.props.modelId)!;
 const charity = lib.charities.get(model.charity)!;
 const owner = lib.owners.get(model.owner)!;
 const siblings = modelsOf(lib, charity.id);
+// One tab per evaluator (their current model); every model, current or older, in the list below.
+const current = currentModelsOf(lib, charity.id);
+const modelFile = model.bulk ? `models/grants/${model.owner}/${model.id}.json` : `models/${model.cause}/${model.id}.json`;
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
 // Variants share their parent's write-up unless they have their own.
 const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
@@ -42,12 +45,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
         <h1>{charity.name}</h1>
-        {siblings.length > 1 && (
-          <nav class="owners" aria-label="Models of this charity">
+        {current.length > 1 && (
+          <nav class="owners" aria-label="Evaluators of this charity">
             <span class="small muted">Models:</span>
-            {siblings.map((m) => {
+            {current.map((m) => {
               const o = lib.owners.get(m.owner)!;
-              const here = m.id === model.id || m.id === model.extends;
+              const here = m.owner === model.owner;
               return <a href={modelUrl(lib, m)} aria-current={here ? "page" : undefined} class:list={["owner-tab", { here }]}>{o.name}</a>;
             })}
           </nav>
@@ -83,7 +86,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
 
           <div>
             <dt>Model file</dt>
-            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/models/${model.cause}/${model.id}.json`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
+            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/${modelFile}`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
           </div>
         </dl>
       </header>
@@ -94,7 +97,18 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <VariantList client:load ids={family.map((m) => m.id)} current={model.id} />
         </details>
       )}
-      <ModelView client:load id={model.id}>
+      {siblings.length > 1 && model.kind !== "variant" && (
+        <details class="family" open={siblings.length <= 6}>
+          <summary>All {siblings.length} models of {charity.name}</summary>
+          <p class="small muted">
+            Every public model we found, newest first per evaluator: grant decisions, renewals and research
+            grants each came with their own. The rankings use each evaluator's current one. Multiples of
+            GiveDirectly, under your assumptions.
+          </p>
+          <VariantList client:load ids={siblings.map((m) => m.id)} current={model.id} dated />
+        </details>
+      )}
+      <ModelView client:load id={model.id} raw={model.bulk ? bulkRaw(model.id) : undefined}>
         {Writeup && (
           <section class="writeup" aria-labelledby="writeup-title">
             <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
@@ -247,6 +261,9 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     padding: 3px 0;
     border-bottom: 1px solid var(--rule);
     break-inside: avoid;
+  }
+  .family :global(.variant-list li a) {
+    flex: 1;
   }
   .family :global(.variant-list li.current a) {
     color: var(--ink);

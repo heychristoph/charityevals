@@ -1,0 +1,191 @@
+{
+ "id": "world-health-organization-rough-who-gdg-march-2025",
+ "name": "Rough WHO GDG BOTEC, March 2025",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "world-health-organization",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"Rough WHO GDG BOTEC, March 2025\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "GiveWell, Rough WHO GDG BOTEC, March 2025 (public)",
+  "url": "https://www.givewell.org/research/grants/who-malaria-guidelines-development-group-guidelines-review-and-update-grant-february-2025",
+  "sheet": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+  "published": "2025-02-12",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "GiveWell, Rough WHO GDG BOTEC, March 2025 (public)",
+   "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (who malaria guidelines development group guidelines review and update grant february 2025)",
+   "url": "https://www.givewell.org/research/grants/who-malaria-guidelines-development-group-guidelines-review-and-update-grant-february-2025",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "sld",
+   "title": "SLD"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "value_per_death_averted",
+   "label": "Value per death averted",
+   "section": "sld",
+   "value": 50.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B10"
+   },
+   "explainer": "GiveWell's moral weights"
+  },
+  {
+   "id": "how_many_more_hospitalizations_per_year_in_a_high_resistance",
+   "label": "How many more hospitalizations per year in a high resistance scenario?",
+   "section": "sld",
+   "value": 360000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B4"
+   },
+   "explainer": "WHO antimalarial resistance report"
+  },
+  {
+   "id": "of_hospitalizations_that_result_in_death",
+   "label": "% of hospitalizations that result in death",
+   "section": "sld",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B5"
+   },
+   "explainer": "Guess. Our assumption is this should be much higher than annual mortality risk in general pop",
+   "format": "percent"
+  },
+  {
+   "id": "excess_malaria_deaths_per_year_in_high_resistance_scenario",
+   "label": "Excess malaria deaths per year in high resistance scenario",
+   "section": "sld",
+   "formula": "how_many_more_hospitalizations_per_year_in_a_high_resistance * of_hospitalizations_that_result_in_death",
+   "expected": 18000.0
+  },
+  {
+   "id": "how_much_does_sld_primaquine_reduce_the_risk_of_a_high_resis",
+   "label": "How much does SLD primaquine reduce the risk of a high resistance scenario?",
+   "section": "sld",
+   "value": 0.01,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B7"
+   },
+   "explainer": "Guess",
+   "format": "percent"
+  },
+  {
+   "id": "expected_deaths_averted_per_year_from_rolling_out_sld_primaq",
+   "label": "Expected deaths averted per year from rolling out SLD primaquine",
+   "section": "sld",
+   "formula": "excess_malaria_deaths_per_year_in_high_resistance_scenario * how_much_does_sld_primaquine_reduce_the_risk_of_a_high_resis",
+   "expected": 180.0
+  },
+  {
+   "id": "probability_this_grant_expedites_guidelines_by_3_years",
+   "label": "Probability this grant expedites guidelines by 3 years",
+   "section": "sld",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B3"
+   },
+   "explainer": "Guess",
+   "format": "percent"
+  },
+  {
+   "id": "expected_deaths_averted_through_this_grant",
+   "label": "Expected deaths averted through this grant",
+   "section": "sld",
+   "formula": "expected_deaths_averted_per_year_from_rolling_out_sld_primaq * probability_this_grant_expedites_guidelines_by_3_years * 3",
+   "expected": 270.0
+  },
+  {
+   "id": "cost_of_funding_guidelines_review",
+   "label": "Cost of funding guidelines review",
+   "section": "sld",
+   "value": 200000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
+    "cell": "SLD!B2"
+   },
+   "explainer": "WHO GDG budget (unpublished)",
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_per",
+   "label": "Units of value per $",
+   "section": "sld",
+   "formula": "value_per_death_averted * expected_deaths_averted_through_this_grant / cost_of_funding_guidelines_review",
+   "expected": 0.0675
+  },
+  {
+   "id": "cost_effectiveness_x_cash",
+   "label": "Cost-effectiveness (x cash)",
+   "section": "sld",
+   "formula": "units_of_value_per / 0.003355",
+   "expected": 20.11922504
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "cost_effectiveness_x_cash * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

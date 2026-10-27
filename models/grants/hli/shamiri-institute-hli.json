@@ -1,0 +1,290 @@
+{
+ "id": "shamiri-institute-hli",
+ "name": "Shamiri Institute: group interventions for adolescent mental health in Kenya (HLI)",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "shamiri-institute",
+ "owner": "hli",
+ "bulk": true,
+ "summary": "A re-implementation of the Happier Lives Institute's spreadsheet, traced cell by cell from its bottom line (WELLBYs per $1,000). Calculated rows reproduce the sheet's values.",
+ "source": {
+  "publisher": "Happier Lives Institute",
+  "title": "[PUBLIC] Shamiri CEA",
+  "url": "https://www.happierlivesinstitute.org/report/the-wellbeing-cost-effectiveness-of-the-shamiri-institute/",
+  "sheet": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+  "published": "2026-02-27",
+  "retrieved": "2026-10-27",
+  "license": "Unclear: check HLI's terms before republishing"
+ },
+ "evaluator": {
+  "name": "HLI",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "HLI report",
+   "url": "https://www.happierlivesinstitute.org/report/the-wellbeing-cost-effectiveness-of-the-shamiri-institute/",
+   "type": "evaluation"
+  },
+  {
+   "title": "[PUBLIC] Shamiri CEA",
+   "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  }
+ ],
+ "sections": [
+  {
+   "id": "analysis",
+   "title": "Analysis"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "time_adjustment_for_longterm_follow_ups_model_1_effect_of_sh",
+   "label": "Time adjustment for longterm follow-ups (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 1.544193,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B10"
+   },
+   "explainer": "adjustment factor Account for 50% of the impact of extreme follow-ups. From psychotherapy V4"
+  },
+  {
+   "id": "initial_effect_model_1_effect_of_shamiri_based_on_direct_evi",
+   "label": "Initial effect (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 0.3752,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B6"
+   },
+   "explainer": "Data, analysed in R"
+  },
+  {
+   "id": "decay_model_1_effect_of_shamiri_based_on_direct_evidence",
+   "label": "Decay (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": -0.1694006,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B7"
+   },
+   "explainer": "Data, analysed in R"
+  },
+  {
+   "id": "duration_model_1_effect_of_shamiri_based_on_direct_evidence",
+   "label": "Duration (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "abs(initial_effect_model_1_effect_of_shamiri_based_on_direct_evi / decay_model_1_effect_of_shamiri_based_on_direct_evidence)",
+   "expected": 2.214868188
+  },
+  {
+   "id": "total_effect_model_1_effect_of_shamiri_based_on_direct_evide",
+   "label": "Total effect (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "initial_effect_model_1_effect_of_shamiri_based_on_direct_evi * duration_model_1_effect_of_shamiri_based_on_direct_evidence * 0.5",
+   "expected": 0.4155092721
+  },
+  {
+   "id": "total_effect_adjusted_for_longterm_follow_ups_model_1_effect",
+   "label": "Total effect (adjusted for longterm follow-ups) (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "time_adjustment_for_longterm_follow_ups_model_1_effect_of_sh * total_effect_model_1_effect_of_shamiri_based_on_direct_evide",
+   "expected": 0.6416265094
+  },
+  {
+   "id": "ratio_for_converting_from_sd_years_to_wellbys_model_1_effect",
+   "label": "Ratio for converting from SD-years to WELLBYs (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 2.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B15"
+   },
+   "explainer": "ratio Gallup World Poll 2005-2024 data"
+  },
+  {
+   "id": "total_effect_in_wellbys_model_1_effect_of_shamiri_based_on_d",
+   "label": "Total effect in WELLBYs (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "total_effect_adjusted_for_longterm_follow_ups_model_1_effect * ratio_for_converting_from_sd_years_to_wellbys_model_1_effect",
+   "expected": 1.283253019
+  },
+  {
+   "id": "spillover_ratio_model_1_effect_of_shamiri_based_on_direct_ev",
+   "label": "Spillover ratio (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 0.1624,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B18"
+   },
+   "explainer": "From psychotherapy V4",
+   "format": "percent"
+  },
+  {
+   "id": "number_of_non_recipients_affected_by_spillovers_per_househol",
+   "label": "Number of non-recipients affected by spillovers per household (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 3.2305195908399114,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B19"
+   },
+   "explainer": "people From household size spreadsheet based on UNPD data."
+  },
+  {
+   "id": "overall_effect_model_1_effect_of_shamiri_based_on_direct_evi",
+   "label": "Overall effect (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "total_effect_in_wellbys_model_1_effect_of_shamiri_based_on_d + total_effect_in_wellbys_model_1_effect_of_shamiri_based_on_d * spillover_ratio_model_1_effect_of_shamiri_based_on_direct_ev * number_of_non_recipients_affected_by_spillovers_per_househol",
+   "expected": 1.956494239
+  },
+  {
+   "id": "range_restriction_model_1_effect_of_shamiri_based_on_direct",
+   "label": "Range restriction (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 0.88,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B25"
+   },
+   "explainer": "adjustment factor Adjust if people are selected based on high mental health scores. From psychotherapy V4"
+  },
+  {
+   "id": "attrition_adjustment_model_1_effect_of_shamiri_based_on_dire",
+   "label": "Attrition adjustment (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "1 - 0.5 * 0.25",
+   "expected": 0.875
+  },
+  {
+   "id": "sessions_in_practice_model_1_effect_of_shamiri_based_on_dire",
+   "label": "Sessions in practice (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 3.45,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B3"
+   },
+   "explainer": "sessions Data from Shamiri"
+  },
+  {
+   "id": "average_sessions_in_studies_model_1_effect_of_shamiri_based",
+   "label": "Average sessions in studies (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 4.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B4"
+   },
+   "explainer": "sessions Data, analysed in R"
+  },
+  {
+   "id": "dosage_adjustment_model_1_effect_of_shamiri_based_on_direct",
+   "label": "Dosage adjustment (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "ln(sessions_in_practice_model_1_effect_of_shamiri_based_on_dire + 1) / ln(average_sessions_in_studies_model_1_effect_of_shamiri_based + 1)",
+   "expected": 0.9275934689
+  },
+  {
+   "id": "control_group_adjustment_model_1_effect_of_shamiri_based_on",
+   "label": "Control group adjustment (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 1.29,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B30"
+   },
+   "explainer": "adjustment factor Calculates from psychotherapy prior meta-analysis. Some new models for the Shamiri analysis From psychotherapy V4"
+  },
+  {
+   "id": "population_adjustment_model_1_effect_of_shamiri_based_on_dir",
+   "label": "Population adjustment (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 0.438,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B31"
+   },
+   "explainer": "adjustment factor For the adjustment based on the number of clinical persons, where we assume that the effect is just on the clinical persons:\n\nGet information from Shamiri about those that have depression OR anxiety\n\nFor the adjustment based on the prior, use the general population moderation in the meta-analysis. Table G17. From Osborn et al. (2022)\n\nFrom psychotherapy V4 Assume that the effect is only on clinical persons."
+  },
+  {
+   "id": "total_adjustment_model_1_effect_of_shamiri_based_on_direct_e",
+   "label": "Total adjustment (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "product(range_restriction_model_1_effect_of_shamiri_based_on_direct, attrition_adjustment_model_1_effect_of_shamiri_based_on_dire, dosage_adjustment_model_1_effect_of_shamiri_based_on_direct, control_group_adjustment_model_1_effect_of_shamiri_based_on, population_adjustment_model_1_effect_of_shamiri_based_on_dir)",
+   "expected": 0.4035638236
+  },
+  {
+   "id": "adjusted_overall_effect_model_1_effect_of_shamiri_based_on_d",
+   "label": "Adjusted overall effect (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "overall_effect_model_1_effect_of_shamiri_based_on_direct_evi * total_adjustment_model_1_effect_of_shamiri_based_on_direct_e",
+   "expected": 0.789570296
+  },
+  {
+   "id": "cost_per_person_treated_2024_model_1_effect_of_shamiri_based",
+   "label": "Cost per person treated 2024 (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "value": 23.98,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1KOjtLJK0Z4QYXjrNkmNuGpMn8yAWuEaoOuWkI9OgCws/edit",
+    "cell": "Analysis!B35"
+   },
+   "explainer": "See cost notes. Information from Shamiri",
+   "format": "usd"
+  },
+  {
+   "id": "wellbys_per_1_000_2024_model_1_effect_of_shamiri_based_on_di",
+   "label": "WELLBYs per $1,000 (2024) (Model 1: Effect of Shamiri based on direct evidence)",
+   "section": "analysis",
+   "formula": "adjusted_overall_effect_model_1_effect_of_shamiri_based_on_d / cost_per_person_treated_2024_model_1_effect_of_shamiri_based * 1000",
+   "expected": 32.92620083
+  },
+  {
+   "id": "wellby_per_dollar",
+   "label": "WELLBYs per dollar",
+   "section": "bottom_line",
+   "formula": "wellbys_per_1_000_2024_model_1_effect_of_shamiri_based_on_di / 1000"
+  }
+ ],
+ "output": {
+  "row": "wellby_per_dollar",
+  "unit": "wellby",
+  "label": "WELLBYs per dollar"
+ }
+}

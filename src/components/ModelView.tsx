@@ -2,7 +2,7 @@ import type React from "react";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
 import { lib, modelUrl } from "../lib/data";
-import { comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
+import { buildLibrary, comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
 import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
@@ -200,8 +200,12 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
   );
 }
 
-export default function ModelView({ id, children }: { id: string; children?: React.ReactNode }) {
-  const model = lib.models.get(id)!;
+export default function ModelView({ id, raw, children }: { id: string; raw?: unknown; children?: React.ReactNode }) {
+  // Bulk models reach the browser as one-row summaries; their page passes the full file instead.
+  const model = useMemo(
+    () => (raw ? buildLibrary([raw], lib.assumptions, [], [...lib.charities.values()], [...lib.owners.values()]).models.get(id)! : lib.models.get(id)!),
+    [id, raw],
+  );
   const { results, av } = useResults();
   const r = useResultFor(model);
   const rank = model.kind === "charity" ? results.findIndex((x) => x.charity.id === model.charity) + 1 : 0;
@@ -228,7 +232,12 @@ export default function ModelView({ id, children }: { id: string; children?: Rea
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      {model.evaluator && (
+      {model.bulk ? (
+        <p className="view-note">
+          {model.evaluator?.name ?? "The evaluator"}'s spreadsheet as published, traced cell by cell. It has no hooks into the shared
+          assumptions yet, so your settings don't change it.
+        </p>
+      ) : model.evaluator && (
         <div className="view-bar">
           <ViewToggle evaluatorName={model.evaluator.name} />
           <p className="view-note">

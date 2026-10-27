@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { lib, ranked, rankedCharities } from "./data";
-import { assumptionValues, bottomLine, comparable, modelsOf, type ResolvedModel, type View } from "../engine/model";
+import { assumptionValues, bottomLine, comparable, currentModelsOf, type ResolvedModel, type View } from "../engine/model";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, rankFlips, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides, useView } from "./assumption-state";
@@ -70,7 +70,7 @@ export function useResults() {
   const view = useView();
   return useMemo(() => {
     const results: CharityResult[] = rankedCharities.map((c) => {
-      const models = modelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => resultOf(m, av, view));
+      const models = currentModelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => resultOf(m, av, view));
       const positive = models.map((r) => r.central).filter((x) => x > 0);
       return {
         charity: c,

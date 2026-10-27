@@ -149,6 +149,9 @@ export const Model = z
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */
     output: z.object({ row: z.string(), unit: z.string(), label: z.string() }).strict().optional(),
+    /** Imported by a generic converter (scripts/convert-sheet.py, convert-guesstimate.py): every
+     * number is the evaluator's, traced from their sheet, with no hooks into shared assumptions. */
+    bulk: z.boolean().optional(),
     /** How to reproduce the evaluator's own model: the assumption values it used. In the
      * evaluator view these replace the visitor's (exchange rates between causes stay theirs). */
     evaluator: z
