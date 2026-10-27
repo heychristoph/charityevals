@@ -1,7 +1,7 @@
 import type React from "react";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
-import { lib } from "../lib/data";
+import { lib, modelUrl } from "../lib/data";
 import { comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
 import { useResults, useResultFor } from "../lib/use-results";
@@ -188,7 +188,7 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
             )}
             {row.inheritedFrom && (
               <div className="small muted">
-                Defined in <a href={`/${row.inheritedFrom}#row-${row.id}`}>{lib.models.get(row.inheritedFrom)?.name}</a>
+                Defined in <a href={`${modelUrl(lib, lib.models.get(row.inheritedFrom)!)}#row-${row.id}`}>{lib.models.get(row.inheritedFrom)?.name}</a>
                 {row.overridden?.length ? `; this model changes its ${row.overridden.join(", ")}.` : "."}
               </div>
             )}
@@ -204,7 +204,7 @@ export default function ModelView({ id, children }: { id: string; children?: Rea
   const model = lib.models.get(id)!;
   const { results, av } = useResults();
   const r = useResultFor(model);
-  const rank = results.findIndex((x) => x.model.id === id) + 1;
+  const rank = model.kind === "charity" ? results.findIndex((x) => x.charity.id === model.charity) + 1 : 0;
   const values = useMemo(() => compute(lib, model, av, {}, r.view), [model, av, r.view]);
   const onPath = useMemo(() => rowsFeeding(model), [model]);
   const [open, setOpen] = useState<Set<string>>(new Set());

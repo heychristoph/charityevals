@@ -77,6 +77,45 @@ export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
 
 export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
 
+export const Resource = z
+  .object({
+    title: z.string(),
+    url: z.string().url(),
+    type: z.enum(["evaluation", "model", "data", "study", "charity", "other"]),
+    note: z.string().optional(),
+  })
+  .strict();
+
+/** Who made a model: an evaluator whose analysis we reproduce, or charityevals itself. */
+export const Owner = z
+  .object({
+    id: z.string().regex(/^[a-z0-9-]+$/),
+    name: z.string(),
+    short: z.string(),
+    url: z.string().url(),
+    kind: z.enum(["evaluator", "charityevals"]),
+    about: z.string().optional(),
+  })
+  .strict();
+export type Owner = z.infer<typeof Owner>;
+
+/** A charity: the organisation itself. Any number of models, by different owners, can point to it. */
+export const Charity = z
+  .object({
+    id: z.string().regex(/^[a-z0-9-]+$/),
+    name: z.string(),
+    cause: z.enum(["global-health", "animal-welfare", "ai-safety"]),
+    website: z.string().url().optional(),
+    /** Where to give: the charity's own donation page, or an evaluator's form for it. */
+    donate: z.string().url().optional(),
+    /** Set when `donate` goes through an evaluator's form rather than the charity's own page. */
+    donate_via: z.string().optional(),
+    summary: z.string().optional(),
+    resources: z.array(Resource).default([]),
+  })
+  .strict();
+export type Charity = z.infer<typeof Charity>;
+
 export const Model = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/),
@@ -86,17 +125,10 @@ export const Model = z
     kind: z.enum(["charity", "variant", "template"]),
     cause: Cause,
     extends: z.string().optional(),
-    org: z
-      .object({
-        name: z.string(),
-        website: z.string().url().optional(),
-        /** Where to give: the charity's own donation page, or an evaluator's fund for it. */
-        donate: z.string().url().optional(),
-        /** Set when `donate` goes through an evaluator's form rather than the charity's own page. */
-        donate_via: z.string().optional(),
-      })
-      .strict()
-      .optional(),
+    /** The charity this model is about (inherited by variants). */
+    charity: z.string().optional(),
+    /** Who made the model: an id in owners.json (inherited by variants). */
+    owner: z.string().optional(),
     summary: z.string().optional(),
     source: z
       .object({
@@ -112,18 +144,7 @@ export const Model = z
       .optional(),
     /** Everything a reader might want to check: the evaluator's review, its spreadsheets, the
      * charity's reports, and the studies and data the analysis cites. */
-    resources: z
-      .array(
-        z
-          .object({
-            title: z.string(),
-            url: z.string().url(),
-            type: z.enum(["evaluation", "model", "data", "study", "charity", "other"]),
-            note: z.string().optional(),
-          })
-          .strict(),
-      )
-      .default([]),
+    resources: z.array(Resource).default([]),
     sections: z.array(Section).default([]),
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */

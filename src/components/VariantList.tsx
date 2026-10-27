@@ -1,4 +1,4 @@
-import { lib } from "../lib/data";
+import { lib, modelUrl } from "../lib/data";
 import { useResultsFor } from "../lib/use-results";
 import { formatMultiple } from "../lib/format";
 
@@ -10,7 +10,7 @@ export default function VariantList({ ids, current }: { ids: string[]; current: 
     <ol className="variant-list">
       {rows.map(({ model, central }) => (
         <li key={model.id} className={model.id === current ? "current" : ""}>
-          <a href={`/${model.id}`}>{model.name}</a>
+          <a href={modelUrl(lib, model)}>{model.name}</a>
           <span className="num">{formatMultiple(central)}</span>
         </li>
       ))}

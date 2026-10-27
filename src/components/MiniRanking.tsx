@@ -8,9 +8,9 @@ export default function MiniRanking() {
   return (
     <ol className="mini-ranking small" aria-label="Current ranking">
       {results.map((r, i) => (
-        <li key={r.model.id} style={{ ["--cause" as string]: `var(--cause-${r.model.cause})` }}>
+        <li key={r.charity.id} style={{ ["--cause" as string]: `var(--cause-${r.charity.cause})` }}>
           <span className="num muted">{i + 1}</span>
-          <span className="mini-name">{r.model.name}</span>
+          <span className="mini-name">{r.charity.name}</span>
           <span className="num mini-value">{formatMultiple(r.central)}</span>
         </li>
       ))}

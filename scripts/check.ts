@@ -22,6 +22,8 @@ const lib = buildLibrary(
   jsonFiles(join(root, "models")).map(read),
   read(join(root, "assumptions/default.json")),
   jsonFiles(join(root, "facts")).map(read),
+  jsonFiles(join(root, "charities")).map(read),
+  read(join(root, "owners.json")),
 );
 const errors = [...lib.errors];
 const av = assumptionValues(lib.assumptions);

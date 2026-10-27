@@ -31,6 +31,13 @@ is a leaf (copy its value, cite the cell) or worth modelling.
 
 ## 3. Write the model
 
+Every model has a `charity` (an id in `charities/`) and an `owner` (an id in `owners.json`). If the
+charity already exists, for example because another evaluator models it, point the new model at
+it with a new model id such as `<charity>-<owner>`; never make a second charity record. Create the
+charity record (name, cause, website, donate link) only if it's missing. Add an owner to
+`owners.json` if the evaluator is new.
+
+
 Read `src/engine/schema.ts` and one existing model first (`models/global-health/givedirectly.json`
 is the reference). Then:
 

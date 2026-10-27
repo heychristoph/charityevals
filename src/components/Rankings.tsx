@@ -41,7 +41,7 @@ function useFlip(order: string) {
 
 export default function Rankings() {
   const { results, flips, view } = useResults();
-  const flipRef = useFlip(results.map((r) => r.model.id).join());
+  const flipRef = useFlip(results.map((r) => r.charity.id).join());
   const label = lib.assumptions.common.benchmark_label;
 
   return (
@@ -50,13 +50,13 @@ export default function Rankings() {
         <ViewToggle />
         <p className="view-note">
           {view === "evaluator"
-            ? "Each charity as its evaluator published it (GiveWell, Animal Charity Evaluators), compared with our exchange rates between causes."
+            ? "Each charity as its evaluators published it (GiveWell, ACE, HLI), compared with our exchange rates between causes."
             : "Our models: the evaluators' analyses plus your assumptions and our accounting adjustments."}
         </p>
       </div>
       <figcaption id="rankings-caption" className="rankings-caption">
         <strong>Good done per dollar, as a multiple of GiveDirectly</strong>
-        <span className="muted"> · central estimate (dot) with joint low to joint high (bar), log scale</span>
+        <span className="muted"> · each evaluator's central estimate (dot) with joint low to joint high (bar), log scale. Where several evaluators model a charity, the row sits at their geometric mean.</span>
       </figcaption>
 
       <div className="r-axis" aria-hidden>
@@ -71,26 +71,30 @@ export default function Rankings() {
 
       <ol className="r-list">
         {results.map((r, i) => {
-          const m = r.model;
-          const unit = lib.assumptions.units[m.output!.unit];
-          const warns = r.flags.filter((f) => f.level === "warn");
+          const c = r.charity;
+          const multi = r.models.length > 1;
+          const warns = [...new Set(r.models.flatMap((x) => x.flags.filter((f) => f.level === "warn").map((f) => f.short)))];
+          const owners = r.models.map((x) => lib.owners.get(x.model.owner)!);
           const clampedLow = r.low < DOMAIN[0];
           const clampedHigh = r.high > DOMAIN[1];
           return (
-            <li key={m.id} ref={flipRef(m.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${m.cause})` }}>
+            <li key={c.id} ref={flipRef(c.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${c.cause})` }}>
               <div className="r-name">
                 <span className="r-rank num">{i + 1}</span>
                 <div>
-                  <a href={`/${m.id}`} className="r-link">{m.name}</a>
+                  <a href={`/${c.id}`} className="r-link">{c.name}</a>
                   <div className="r-meta small">
-                    <span className="r-cause">{CAUSE_LABEL[m.cause]}</span>
-                    {m.kind === "variant" && <span className="muted"> · variant</span>}
-                    <span className="muted"> · {r.view === "evaluator" ? `as published by ${m.evaluator?.name}` : `from ${m.source?.publisher}`}</span>
+                    <span className="r-cause">{CAUSE_LABEL[c.cause]}</span>
+                    <span className="muted"> · {owners.map((o) => o.short).join(", ")}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="r-track" role="img" aria-label={`${m.name}: ${formatMultiple(r.central)}${label}, range ${formatMultiple(r.low)} to ${formatMultiple(r.high)}`}>
+              <div
+                className="r-track"
+                role="img"
+                aria-label={`${c.name}: ${r.models.map((x, k) => `${owners[k].name} ${formatMultiple(x.central)}`).join(", ")}${label}; range ${formatMultiple(r.low)} to ${formatMultiple(r.high)}`}
+              >
                 {TICKS.map((t) => (
                   <span key={t} className={`r-grid ${t === 1 ? "r-grid-one" : ""}`} style={{ left: pct(t) }} />
                 ))}
@@ -98,28 +102,35 @@ export default function Rankings() {
                   className="r-bar"
                   style={{ clipPath: clipSpan(xFor(r.low, 100), xFor(r.high, 100), clampedLow || clampedHigh ? `${clampedLow ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedLow ? 0 : 4}px` : "4px") }}
                 />
-                <span className="r-dot-layer" style={{ transform: `translateX(${pct(r.central)})` }}>
-                  <span className="r-dot" />
-                </span>
+                {r.models.map((x, k) => (
+                  <span key={x.model.id} className="r-dot-layer" style={{ transform: `translateX(${pct(x.central)})`, top: multi ? `${k % 2 ? 9 : -9}px` : undefined }}>
+                    <span className={`r-dot ${multi ? "r-dot-owner" : ""}`} title={`${owners[k].name}: ${formatMultiple(x.central)}`}>
+                      {multi && <span className="r-dot-label">{owners[k].short}</span>}
+                    </span>
+                  </span>
+                ))}
               </div>
 
               <div className="r-value">
                 <span className="r-central num">{formatMultiple(r.central)}</span>
                 <span className="r-range small muted num">
-                  {formatMultiple(r.low)}–{formatMultiple(r.high)}
+                  {multi ? `${r.models.length} evaluators` : `${formatMultiple(r.low)}–${formatMultiple(r.high)}`}
                 </span>
               </div>
 
               <div className="r-foot small">
                 <span className="muted num">
-                  {formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number")} {unit.short} per dollar
+                  {r.models.map((x, k) => {
+                    const unit = lib.assumptions.units[x.model.output!.unit];
+                    return `${multi ? owners[k].short + ": " : ""}${formatValue(x.native, Math.abs(x.native) < 0.1 ? "small" : "number")} ${unit.short} per dollar`;
+                  }).join(" · ")}
                 </span>
-                {m.org?.donate && <a href={m.org.donate} rel="noopener" className="r-donate">Donate</a>}
+                {c.donate && <a href={c.donate} rel="noopener" className="r-donate">Donate</a>}
                 {warns.length > 0 && (
                   <span className="r-flags">
                     <AlertTriangle size={14} aria-hidden />
-                    <a href={`/${m.id}#flags`}>
-                      {warns.length} {warns.length === 1 ? "flag" : "flags"}: {warns.map((w) => w.short).join(", ")}
+                    <a href={`/${c.id}#flags`}>
+                      {warns.length} {warns.length === 1 ? "flag" : "flags"}: {warns.join(", ")}
                     </a>
                   </span>
                 )}

@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rankings from "../components/Rankings.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
-import { lib, unranked, ranked, rankable } from "../lib/data";
+import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "../lib/data";
 
 ---
 
@@ -16,18 +16,19 @@ import { lib, unranked, ranked, rankable } from "../lib/data";
         </p>
       </header>
       <Rankings client:load />
-      {unranked.length > 0 && (
+      {unrankedCharities.length > 0 && (
         <section class="unranked" aria-labelledby="unranked-title">
           <h2 id="unranked-title">Evaluated, not ranked</h2>
           <p class="muted small">Their evaluators report results in units nobody can convert into good done elsewhere, so they have pages but no place on the list.</p>
           <ul>
-            {unranked.map((m) => (
-              <li><a href={`/${m.id}`}>{m.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {m.source?.publisher}</span></li>
-            ))}
+            {unrankedCharities.map((c) => {
+              const m = primaryOf(lib, c.id)!;
+              return <li><a href={`/${c.id}`}>{c.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {lib.owners.get(m.owner)!.name}</span></li>;
+            })}
           </ul>
         </section>
       )}
-      <p class="count small muted">{ranked.length} charities ranked, {rankable.length - ranked.length - unranked.length} more country and program variants on their charities' pages.</p>
+      <p class="count small muted">{rankedCharities.length} charities ranked from {rankable.filter((m) => m.kind === "charity").length} evaluator models, plus {rankable.filter((m) => m.kind === "variant").length} country and program variants on their charities' pages.</p>
     </div>
     <aside class="side" aria-label="Assumptions">
       <AssumptionsPanel client:load />
