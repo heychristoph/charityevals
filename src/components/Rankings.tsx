@@ -117,7 +117,7 @@ export default function Rankings() {
               </div>
 
               <div className="r-foot small">
-                {c.donate && <a href={c.donate} rel="noopener" className="r-donate">Donate</a>}
+                {c.donate && <a href={c.donate} rel="noopener" className="r-donate" data-track="donate" data-charity={c.id}>Donate</a>}
                 {warns.length > 0 && (
                   <a className="r-flags" href={`/${c.id}#flags`} title={warns.join(", ")}>
                     <AlertTriangle size={14} aria-hidden />
