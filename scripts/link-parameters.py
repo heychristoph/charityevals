@@ -28,6 +28,8 @@ FACTS = Path("facts")
 LIFE = re.compile(r"(value|units? of value|\buov\b|moral (value|weights?)).*\b(deaths?|lives?)\b|\bmoral weights?\b|value assigned to averting (the |a |one )?(\S+ )?death", re.I)
 LIFE_NOT = re.compile(r"efficacy|probability|\brate\b|risk|reduction|percent|%|per \$|per dollar|cost per|total|units of value from|averted per|per \d", re.I)
 LN = re.compile(r"\bln\b|doublings? (of )?(consumption|income)", re.I)
+DOUBLING = re.compile(r"doubl", re.I)
+LN2 = 0.6931471805599453
 LN_NOT = re.compile(r"per dollar|per \$|total|from|per person|per child|per household|treatment|increase in ln|effect", re.I)
 DALY = re.compile(r"\b(yld|daly|year lived with disab|years? of life lost to disease)", re.I)
 DALY_ONLY = re.compile(r"value|averting|\buov\b|units? of value", re.I)
@@ -75,9 +77,13 @@ def link_assumptions(m):
             elif DISC.search(lab) and 0 <= v <= 0.15: cat[r["id"]] = "disc"
         elif "formula" in r and r["formula"] != "$discount_rate" and DISC.search(lab) and isinstance(r.get("expected"), (int, float)) and 0 <= r["expected"] <= 0.15:
             cat[r["id"]] = "disc"
+    # Some sheets value a doubling of consumption rather than one unit of ln(consumption): a doubling is
+    # ln(2) units, so its value per ln unit is v / ln(2). Compare and link both in ln units.
+    per_doubling = {r["id"] for r in rows if cat.get(r["id"]) == "ln" and DOUBLING.search(r["label"])}
+    in_ln = lambda r: (r.get("value", r.get("expected")) / LN2) if r["id"] in per_doubling else r.get("value", r.get("expected"))
     common = {}
     for k in ("ln", "daly", "disc"):
-        vals = [r.get("value", r.get("expected")) for r in rows if cat.get(r["id"]) == k]
+        vals = [round(in_ln(r), 12) for r in rows if cat.get(r["id"]) == k]
         if vals: common[k] = collections.Counter(vals).most_common(1)[0][0]
     ev = m.setdefault("evaluator", {"name": "GiveWell", "assumptions": {}})["assumptions"]
     n = 0
@@ -91,8 +97,14 @@ def link_assumptions(m):
         elif k in ("ln", "daly"):
             a = {"ln": "uov_per_ln_consumption", "daly": "uov_per_daly"}[k]
             E = ev.get(a, common[k])  # an earlier run's value stays: rows linked then depend on it
-            f = f"${a}" if v == E else f"{num(v)} * ${a} / {num(E)}"
-            link(r, f, f"Linked to the shared assumption `{a}`; GiveWell's sheet uses {num(E)}{'' if v == E else f', and {num(v)} here'}.")
+            w = round(in_ln(r), 12) if k == "ln" else v
+            f = f"${a}" if w == E else f"{num(w)} * ${a} / {num(E)}"
+            if r["id"] in per_doubling:
+                f = f"{f} * {num(LN2)}"
+                note = f"A doubling of consumption, valued through the shared `{a}` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses {num(v)} per doubling."
+            else:
+                note = f"Linked to the shared assumption `{a}`; GiveWell's sheet uses {num(E)}{'' if w == E else f', and {num(v)} here'}."
+            link(r, f, note)
             ev[a] = E
         elif k == "disc":
             if v != ev.get("discount_rate", common["disc"]): continue
