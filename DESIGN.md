@@ -263,6 +263,18 @@ Below 1000px only: a sticky, one-line-per-charity list (rank, name in cause ink,
 ### Tornado chart
 One row per input that moves the result: a label (with its kind mark) linking to the table row, a cause-tinted bar between the result at the input's low and high, a 1.5px dashed Ink line at the central result, and end values in Slate. A kind legend sits in the caption.
 
+### Derivation ("How the number is built")
+The bottom line read as a worked calculation, generated from any model's formulas. Each step is a
+"Label = value" line followed by its formula, laid out as an equation: terms are ledger entries (14px
+Slate label, 20px serif value, a 48px leverage track with "result +x%" for a 10% rise) set on a Strong
+Hairline, with serif Pewter operators between them. Calculated terms are buttons ("How it's calculated"
+in Ledger Blue; an open term gets a 2px blue underline) that unfold their own step beneath, hanging on a
+1px Strong Hairline. Inputs link to their table row; shared assumptions are Judgment Amber and link to
+their slider. Sums render as "where the value comes from": a 12px segmented bar in cause-ink tints,
+then one hairline-divided line per part (share, label, value, leverage), six shown and the rest behind
+a link button. When several evaluators model a charity, tabs in the nav idiom swap the derivation in
+place, each tab carrying its evaluator's multiple.
+
 ### Model table
 Fixed-layout, zebra-free table with hairline row dividers and Strong Hairline section rules. Inputs are 600 weight, formulas Slate, off-path rows Pewter, the final output framed by 2px Ink rules. Rows expand via a chevron to a Mist Paper detail with explainer, source and a formula block (Paper, Hairline border) in which shared assumptions are named in Judgment Amber.
 

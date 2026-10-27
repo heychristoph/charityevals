@@ -17,6 +17,11 @@ const owner = lib.owners.get(model.owner)!;
 const siblings = modelsOf(lib, charity.id);
 // One tab per evaluator (their current model); every model, current or older, in the list below.
 const current = currentModelsOf(lib, charity.id);
+// The derivation's evaluator toggle: each evaluator's current model, with this page's model standing in
+// for its own evaluator.
+const choices = (model.kind === "variant" ? [] : current)
+  .map((m) => (m.owner === model.owner ? model : m))
+  .map((m) => ({ id: m.id, owner: m.owner, bulk: !!m.bulk }));
 const modelFile = model.bulk ? `models/grants/${model.owner}/${model.id}.json` : `models/${model.cause}/${model.id}.json`;
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
 // Variants share their parent's write-up unless they have their own.
@@ -108,7 +113,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <VariantList client:load ids={siblings.map((m) => m.id)} current={model.id} dated />
         </details>
       )}
-      <ModelView client:load id={model.id} raw={model.bulk ? bulkRaw(model.id) : undefined}>
+      <ModelView client:load id={model.id} raw={model.bulk ? bulkRaw(model.id) : undefined} choices={choices}>
         {Writeup && (
           <section class="writeup" aria-labelledby="writeup-title">
             <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
