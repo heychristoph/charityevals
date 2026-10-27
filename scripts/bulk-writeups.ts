@@ -49,18 +49,12 @@ for (const c of lib.charities.values()) {
   const guess = models.filter((m) => m.source?.sheet?.includes("guesstimate"));
   const lines = [
     MARK,
-    "## Summary",
-    "",
-    `${c.summary ?? c.name} ${owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work. ` +
-      `The most recent, from ${month(main.source?.published)}, puts it at **${result(main)}** as the evaluator published it, with our default exchange rates between units.`,
+    `${c.summary ?? c.name} ${owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
+      `the most recent, from ${month(main.source?.published)}, puts it at **${result(main)}**.`,
     "",
     ...(main.byId.has("cash_benchmark")
-      ? [`GiveWell states its results as multiples of a cash benchmark, a fixed value per dollar given away. GiveDirectly itself now scores about ${fmt(bench / CASH)}× that benchmark in GiveWell's own model, so on this site, which compares everything with GiveDirectly, GiveWell's multiples look ${fmt(bench / CASH)} times smaller.`, ""]
+      ? [`GiveWell states results as multiples of its cash benchmark. GiveDirectly itself scores about ${fmt(bench / CASH)}× that benchmark in GiveWell's own model, so GiveWell's multiples look ${fmt(bench / CASH)} times smaller here, where everything is compared with GiveDirectly.`, ""]
       : []),
-    "This page reproduces the evaluator's own spreadsheet. Its moral weights, discount rate and value of health are tied to the shared assumptions, so the charityevals view moves with yours; the evaluator view shows the sheet exactly as published. We haven't yet written our own evaluation of this charity.",
-    "",
-    "## The models",
-    "",
     "| Model | By | Date | Result | Cells reproduced |",
     "| --- | --- | --- | --- | --- |",
     ...models.map((m) => {
@@ -68,33 +62,9 @@ for (const c of lib.charities.values()) {
       return `| [${m.name.replace(/\|/g, "/")}](${url(m)}) | ${lib.owners.get(m.owner)!.short} | ${month(m.source?.published)} | ${result(m)} | ${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""} |`;
     }),
     "",
-    "Grants, renewals and research grants each came with their own spreadsheet, so a charity can have several models of the same program, years apart. The rankings use the most recent.",
-    "",
-    "## How this was imported",
+    `We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).`,
     "",
   ];
-  if (sheets.length)
-    lines.push(
-      "Each spreadsheet was traced from its bottom line: every cell the result depends on became a row, constants as inputs and formulas as formulas. " +
-        "Each calculated row must reproduce the sheet's own value, so the import proves itself. " +
-        "Moral weights, the discount rate and the value of consumption and of a DALY then link to the shared assumptions, and statistics several sheets share (mortality, population, prevalence) move to shared facts. " +
-        "A few formulas our formula language can't express (array formulas, text, conditional sums) are kept as fixed numbers, with the original formula shown on the row.",
-      "",
-    );
-  if (guess.length)
-    lines.push(
-      "The Guesstimate model was converted cell by cell. Its inputs are 90% intervals, used here as low and high values with the median as the best guess. " +
-        "Guesstimate itself shows Monte Carlo means, which run higher when inputs are skewed, so the central figure here is lower than Guesstimate's.",
-      "",
-    );
-  lines.push(
-    "## What's not here yet",
-    "",
-    "- Only parameters the sheets label clearly are tied to the shared assumptions (moral weights, discount rate, value of consumption and of a DALY); other judgment calls stay as the evaluator set them.",
-    sheets.length ? "- The spreadsheets give point estimates, so there are no uncertainty ranges or tornado chart for them." : "- Only the ranges ACE gave are varied; correlations between them aren't modelled.",
-    "- A hand-written evaluation: what the program does, what the evidence says and where the model is most uncertain.",
-    "",
-  );
   writeFileSync(file, lines.join("\n"));
   written++;
 }

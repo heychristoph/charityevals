@@ -7,6 +7,7 @@ import { leverage, needsParens, resolveAlias, stepOf, valueOf, type Ref } from "
 import { useAssumptionValues, useResultsFor } from "../lib/use-results";
 import { useView } from "../lib/assumption-state";
 import { formatMultiple, formatValue } from "../lib/format";
+import { oneIn } from "../lib/comparables";
 import "./derivation.css";
 
 /** One evaluator's current model of this charity, as offered by the toggle. */
@@ -70,6 +71,7 @@ function Term({ ctx, refn, open, onToggle }: { ctx: Ctx; refn: Ref; open: boolea
   const row = ref.scope === "row" ? m.byId.get(ref.id) : undefined;
   const opens = !!row?.node;
   const label = labelOf(m, refn.scope === "row" ? { scope: "row", id: refn.id } : refn);
+  const odds = oneIn(label, v);
   const body = (
     <>
       <span className="dv-label">
@@ -77,7 +79,7 @@ function Term({ ctx, refn, open, onToggle }: { ctx: Ctx; refn: Ref; open: boolea
         {row && !row.node && row.kind && <span className={`kind-dot kind-${row.kind}`} aria-hidden />}
         {label}
       </span>
-      <span className="dv-val num">{show(m, ref, v)}</span>
+      <span className="dv-val num">{show(m, ref, v)}{odds && <span className="dv-odds"> {odds}</span>}</span>
       <Leverage e={e} />
     </>
   );
@@ -226,8 +228,7 @@ export default function Derivation({ model, choices }: { model: ResolvedModel; c
     <section className="derivation" aria-labelledby="dv-title" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
       <h2 id="dv-title">How the number is built</h2>
       <p className="dv-intro">
-        Start from the result and open any calculated number to see the formula behind it. Under each number: how much the
-        result would move if that number were 10% higher.
+        Open any number to see how it's calculated. The bar under each shows how much it moves the result.
       </p>
       {choices.length > 1 && (
         <div className="dv-owners" role="tablist" aria-label="Evaluator">
