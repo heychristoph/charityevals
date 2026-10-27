@@ -5,7 +5,7 @@ import Base from "../layouts/Base.astro";
 import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
-import { lib, rankable, modelUrl, historyUrl, bulkRaw } from "../lib/data";
+import { lib, rankable, modelUrl, historyUrl, bulkRaw, modelFile } from "../lib/data";
 import { modelsOf, currentModelsOf } from "../engine/model";
 
 interface Props {
@@ -22,7 +22,7 @@ const current = currentModelsOf(lib, charity.id);
 const choices = (model.kind === "variant" ? [] : current)
   .map((m) => (m.owner === model.owner ? model : m))
   .map((m) => ({ id: m.id, owner: m.owner, bulk: !!m.bulk }));
-const modelFile = model.bulk ? `models/grants/${model.owner}/${model.id}.json` : `models/${model.cause}/${model.id}.json`;
+const file = modelFile(model);
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
 // Variants share their parent's write-up unless they have their own.
 const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
@@ -91,7 +91,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
 
           <div>
             <dt>Model file</dt>
-            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/${modelFile}`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
+            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/${file}`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
           </div>
         </dl>
       </header>

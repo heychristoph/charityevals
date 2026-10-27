@@ -129,6 +129,9 @@ export const Model = z
     charity: z.string().optional(),
     /** Who made the model: an id in owners.json (inherited by variants). */
     owner: z.string().optional(),
+    /** Legacy: models before charities/ and owners.json named their organisation here. Accepted (and
+     * ignored) so the history pages can still read those commits. */
+    org: z.unknown().optional(),
     summary: z.string().optional(),
     source: z
       .object({

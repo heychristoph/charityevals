@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { lib, ranked, rankedCharities } from "./data";
+import { lib, rankedCharities, rankedGroups } from "./data";
 import { assumptionValues, bottomLine, comparable, currentModelsOf, type ResolvedModel, type View } from "../engine/model";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, rankFlips, type Sensitivity, type Flag } from "../engine/sensitivity";
@@ -81,7 +81,7 @@ export function useResults() {
       };
     });
     results.sort((a, b) => b.central - a.central);
-    const flips = view === "evaluator" ? [] : rankFlips(lib, ranked.map((m) => m.id), av);
+    const flips = view === "evaluator" ? [] : rankFlips(lib, rankedGroups, av);
     return { av, results, flips, view };
   }, [av, view]);
 }

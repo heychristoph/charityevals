@@ -253,7 +253,13 @@ for n, tab in enumerate(tabs, 1):
         if ch == "/" and depth == 0: cut = i
     if cut is None:
         print(f"  {tab}: SADs-per-dollar row isn't something/cost ({raw}); program not counted"); continue
-    den = raw[cut + 1:].strip()
+    # The denominator ends at the next top-level operator: in "papers / expenditure * 1000000" the cost
+    # is "expenditure", and "* 1000000" scales the quotient (papers per $1M), not the cost.
+    tail, depth, end = raw[cut + 1:], 0, None
+    for i, ch in enumerate(tail):
+        depth += ch == "("; depth -= ch == ")"
+        if depth == 0 and ch in "*+-" and tail[:i].strip(): end = i; break
+    den = (tail if end is None else tail[:end]).strip()
     m = re.fullmatch(r"\$?B\$?(\d+)", den)
     if m:
         cost_id = by_cell[(tab, f"B{m.group(1)}")]

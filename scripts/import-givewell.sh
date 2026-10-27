@@ -11,7 +11,17 @@ PAGE="https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-
 
 run() { # file id name org sheet-id base-col website donate donate-via what title charity
   curl -sL "https://docs.google.com/spreadsheets/d/$5/export?format=xlsx" -o "$TMP/$1.xlsx"
-  rm -f models/global-health/"$2".json models/global-health/"$2"-*.json
+  # Remove only this GiveWell model and its country variants (files that extend it): other evaluators'
+  # models of the same charity share the id prefix (e.g. against-malaria-foundation-hli).
+  "$PY" -I - "$2" <<'PY'
+import json, sys
+from pathlib import Path
+base = sys.argv[1]
+for p in Path("models/global-health").glob(f"{base}*.json"):
+    m = json.loads(p.read_text())
+    if m.get("id") == base or m.get("extends") == base:
+        p.unlink()
+PY
   "$PY" -I scripts/convert-givewell.py "$TMP/$1.xlsx" --id "$2" --charity "${12}" --name "$3" --org "$4" \
     --sheet-url "https://docs.google.com/spreadsheets/d/$5/edit" --page-url "$PAGE" \
     --title "${11}" --published 2026-09-01 --base-col "$6" \

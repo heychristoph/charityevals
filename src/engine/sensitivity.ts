@@ -156,12 +156,18 @@ export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Fla
 }
 
 /** For each shared assumption, whether moving it to its low or high end reorders the given models. */
-export function rankFlips(lib: Library, ids: string[], av: Record<string, number>, view: View = "charityevals") {
+/** Assumptions whose low or high end changes the ranking. `groups` lists each ranked charity's
+ * models; a charity sits at the geometric mean of its models' positive results, as on the rankings. */
+export function rankFlips(lib: Library, groups: string[][], av: Record<string, number>, view: View = "charityevals") {
+  const position = (ids: string[], a: Record<string, number>) => {
+    const xs = ids.map((id) => bottomLine(lib, lib.models.get(id)!, a, {}, view).common).filter((x) => x > 0);
+    return xs.length ? Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length) : 0;
+  };
   const order = (a: Record<string, number>) =>
-    ids
-      .map((id) => ({ id, v: bottomLine(lib, lib.models.get(id)!, a, {}, view).common }))
+    groups
+      .map((ids, i) => ({ i, v: position(ids, a) }))
       .sort((x, y) => y.v - x.v)
-      .map((x) => x.id)
+      .map((x) => x.i)
       .join(",");
   const base = order(av);
   return lib.assumptions.rows

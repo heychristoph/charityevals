@@ -36,7 +36,7 @@ CELL = {
     # Exports openpyxl only reads with styles and filters stripped (convert-sheet.py does that).
     "17ivGP0KATv3": ("Results!B44", "xcash"),
     "1CzcdhfViB1d": ("'Results Top-up'!B39", "xcash"),
-    "1Nl5bhaB3HoR": ("Results!B62", "xcash"),
+    "1Nl5bhaB3HoR": ("Results!B62", "usd_per_daly"),  # US dollars per DALY saved, not a multiple of cash
 }
 NOT_PUBLIC = {"1VS9JXrnQVcK": "the sheet now asks for sign-in"}
 # Linked as models but not cost-effectiveness estimates of a program: inputs, benchmarks, tables.

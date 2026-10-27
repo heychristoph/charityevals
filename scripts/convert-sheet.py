@@ -14,7 +14,7 @@ same happens when a translated formula doesn't reproduce the sheet's value.
 The spec (one JSON object, or a list of them for several models from one sheet) says what to build:
     {"id": "...", "name": "...", "charity": "...", "owner": "givewell", "cause": "global-health",
      "cell": "'Main CEA'!H52"            # optional: bottom-line cell; otherwise found by label
-     "bottom": "xcash" | "uov" | "native", "unit": "...", "label": "...",
+     "bottom": "xcash" | "uov" | "uov_per:<n>" | "wellby_per:<n>" | "usd_per_daly" | "native", "unit": "...", "label": "...",
      "source": {...}, "summary": "...", "resources": [...], "evaluator": {...}}
 """
 import argparse, json, math, re, sys
@@ -622,6 +622,11 @@ def build(book, spec):
                      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."})
         rows.append({"id": "uov_per_dollar", "label": "Units of value per dollar", "section": "bottom_line", "formula": f"{bottom['id']} * cash_benchmark"})
         out = {"row": "uov_per_dollar", "unit": "uov", "label": "Units of value per dollar"}
+    elif kind == "usd_per_daly":
+        # A cost per DALY averted: its reciprocal is DALYs per dollar, which converts to units of value
+        # through the shared DALY exchange rate.
+        rows.append({"id": "dalys_per_dollar", "label": "DALYs averted per dollar", "section": "bottom_line", "formula": f"1 / {bottom['id']}"})
+        out = {"row": "dalys_per_dollar", "unit": "daly", "label": "DALYs averted per dollar"}
     elif re.fullmatch(r"(uov|wellby)_per:\d+", kind):
         unit, per = kind.split("_per:")
         label = {"uov": "Units of value per dollar", "wellby": "WELLBYs per dollar"}[unit]
@@ -630,7 +635,7 @@ def build(book, spec):
     elif kind == "native":
         out = {"row": bottom["id"], "unit": spec["unit"], "label": spec["label"]}
     sections = [{"id": v, "title": k} for k, v in conv.sections.items()]
-    if kind == "xcash" or "_per:" in kind: sections.append({"id": "bottom_line", "title": "Bottom line"})
+    if kind in ("xcash", "usd_per_daly") or "_per:" in kind: sections.append({"id": "bottom_line", "title": "Bottom line"})
     # The bottom line first in its tab reads better than last; keep the traced order otherwise (precedents first).
     model = {k: spec[k] for k in ("id", "name") if k in spec}
     model.update({"kind": spec.get("kind", "charity"), "cause": spec.get("cause", "global-health"), "charity": spec["charity"],

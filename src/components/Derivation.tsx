@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { lib, modelUrl, rawFacts } from "../lib/data";
 import { buildLibrary, comparable, compute, type ResolvedModel, type View } from "../engine/model";
 import type { Node } from "../engine/expr";
-import { leverage, resolveAlias, stepOf, valueOf, type Ref } from "../engine/derive";
+import { leverage, needsParens, resolveAlias, stepOf, valueOf, type Ref } from "../engine/derive";
 import { useAssumptionValues, useResultsFor } from "../lib/use-results";
 import { useView } from "../lib/assumption-state";
 import { formatMultiple, formatValue } from "../lib/format";
@@ -27,7 +27,6 @@ const FN: Record<string, string> = {
   rounddown: "round down", pv: "present value", pv_annuity_due: "present value", and: "all of", or: "any of", not: "not",
 };
 const OP: Record<string, string> = { "*": "×", "/": "÷", "+": "+", "-": "−", "^": "^", "=": "=", "<>": "≠", "<": "<", ">": ">", "<=": "≤", ">=": "≥" };
-const PREC: Record<string, number> = { "=": 0, "<>": 0, "<": 0, ">": 0, "<=": 0, ">=": 0, "+": 1, "-": 1, "*": 2, "/": 2, "^": 4 };
 
 const fmtNum = (x: number) => formatValue(x, Math.abs(x) > 0 && Math.abs(x) < 0.001 ? "small" : "number");
 
@@ -101,31 +100,29 @@ function Term({ ctx, refn, open, onToggle }: { ctx: Ctx; refn: Ref; open: boolea
 
 /** A formula as an equation of terms, with the operators between them. */
 function Equation({ ctx, node, opened, toggle }: { ctx: Ctx; node: Node; opened: string[]; toggle: (k: string) => void }) {
-  const render = (n: Node, parent: number, right = false): ReactNode => {
+  const render = (n: Node, parent?: string, right = false): ReactNode => {
     switch (n.type) {
       case "num": return <span className="dv-const num">{fmtNum(n.value)}</span>;
       case "ref": {
         const key = `${n.scope}:${n.name}`;
         return <Term ctx={ctx} refn={{ scope: n.scope, id: n.name }} open={opened.includes(key)} onToggle={() => toggle(key)} />;
       }
-      case "neg": return <><span className="dv-op">−</span>{render(n.arg, 3)}</>;
+      case "neg": return <><span className="dv-op">−</span>{render(n.arg, "*", true)}</>;
       case "call":
         return (
           <span className="dv-group">
             <span className="dv-fn">{FN[n.fn] ?? n.fn}</span><span className="dv-paren">(</span>
-            {n.args.map((a, i) => <span key={i} className="dv-arg">{i > 0 && <span className="dv-op dv-comma">,</span>}{render(a, 0)}</span>)}
+            {n.args.map((a, i) => <span key={i} className="dv-arg">{i > 0 && <span className="dv-op dv-comma">,</span>}{render(a)}</span>)}
             <span className="dv-paren">)</span>
           </span>
         );
       case "bin": {
-        const p = PREC[n.op];
-        const wrap = p < parent || (right && p === parent && (n.op === "-" || n.op === "/"));
-        const inner = <>{render(n.left, p)}<span className="dv-op">{OP[n.op]}</span>{render(n.right, n.op === "^" ? p : p, true)}</>;
-        return wrap ? <span className="dv-group"><span className="dv-paren">(</span>{inner}<span className="dv-paren">)</span></span> : inner;
+        const inner = <>{render(n.left, n.op)}<span className="dv-op">{OP[n.op]}</span>{render(n.right, n.op, true)}</>;
+        return needsParens(n, parent, right) ? <span className="dv-group"><span className="dv-paren">(</span>{inner}<span className="dv-paren">)</span></span> : inner;
       }
     }
   };
-  return <div className="dv-eq">{render(node, 0)}</div>;
+  return <div className="dv-eq">{render(node)}</div>;
 }
 
 /** A sum, as the shares it's made of: where the value comes from. */
