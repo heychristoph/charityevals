@@ -23,11 +23,15 @@ import json, re, collections
 from pathlib import Path
 
 MODELS = Path("models/grants/givewell")
+DEFAULTS = {r["id"]: (r["value"]["best"] if isinstance(r["value"], dict) else r["value"])
+            for r in json.loads(Path("assumptions/default.json").read_text())["rows"]}
 FACTS = Path("facts")
 
 LIFE = re.compile(r"(value|units? of value|\buov\b|moral (value|weights?)).*\b(deaths?|lives?)\b|\bmoral weights?\b|value assigned to averting (the |a |one )?(\S+ )?death", re.I)
 LIFE_NOT = re.compile(r"efficacy|probability|\brate\b|risk|reduction|percent|%|per \$|per dollar|cost per|total|units of value from|averted per|per \d", re.I)
-LN = re.compile(r"\bln\b|doublings? (of )?(consumption|income)", re.I)
+# A value per unit of ln(consumption), or a value of doubling consumption ("doublings of consumption"
+# alone is a quantity a program produces, not a value).
+LN = re.compile(r"\bln\b|(value|assigned|worth).*doubl(e|ing) (consumption|income)", re.I)
 DOUBLING = re.compile(r"doubl", re.I)
 LN2 = 0.6931471805599453
 LN_NOT = re.compile(r"per dollar|per \$|total|from|per person|per child|per household|treatment|increase in ln|effect", re.I)
@@ -86,6 +90,12 @@ def link_assumptions(m):
         vals = [round(in_ln(r), 12) for r in rows if cat.get(r["id"]) == k]
         if vals: common[k] = collections.Counter(vals).most_common(1)[0][0]
     ev = m.setdefault("evaluator", {"name": "GiveWell", "assumptions": {}})["assumptions"]
+    # Older sheets use an older value scale (a doubled income-year worth 0.4, a death 30): linking their
+    # values absolutely to today's assumptions would mix scales within one sheet. Those link relative
+    # to the shared default instead: at default assumptions they keep their own numbers, and a change
+    # to an assumption scales them by the same proportion.
+    E_ln = ev.get("uov_per_ln_consumption", common.get("ln"))
+    legacy = E_ln is not None and abs(E_ln - DEFAULTS["uov_per_ln_consumption"]) / DEFAULTS["uov_per_ln_consumption"] > 0.02
     n = 0
     for r in rows:
         k = cat.get(r["id"])
@@ -96,6 +106,12 @@ def link_assumptions(m):
             ev["life_value_multiplier"] = 1
         elif k in ("ln", "daly"):
             a = {"ln": "uov_per_ln_consumption", "daly": "uov_per_daly"}[k]
+            if legacy:
+                D = DEFAULTS[a]
+                link(r, f"{num(v)} * ${a} / {num(D)}", f"From an older GiveWell value scale ({num(v)} here); it moves in proportion to the shared `{a}`.")
+                ev[a] = D
+                n += 1
+                continue
             E = ev.get(a, common[k])  # an earlier run's value stays: rows linked then depend on it
             w = round(in_ln(r), 12) if k == "ln" else v
             f = f"${a}" if w == E else f"{num(w)} * ${a} / {num(E)}"
@@ -118,6 +134,44 @@ def link_assumptions(m):
     return n
 
 
+IDENT = re.compile(r"(?<![$@\w.])([a-z_][a-z0-9_]*)\b(?!\s*\()")
+DIVISOR = re.compile(r"/\s*\(?\s*([a-z_][a-z0-9_]*)\b(?!\s*\()")
+CASH_LABEL = re.compile(r"givedirectly|cash transfer|benchmark|\bgd\b", re.I)
+MULTIPLE = re.compile(r"multiple|\bx\b|times|cost.?effectiveness", re.I)
+
+
+def live_benchmark(m):
+    """A sheet that computes GiveDirectly's value from linked assumptions makes its multiple of cash
+    move against them (a higher value of consumption raises GiveDirectly's value and lowers the
+    multiple). Units of value are the multiple times that live benchmark, so scale the fixed
+    conversion by it: uov = multiple x cash_benchmark x B / B_at_import. In the evaluator view
+    B = B_at_import and nothing changes."""
+    rows = {r["id"]: r for r in m["rows"]}
+    if "cash_benchmark" not in rows or "uov_per_dollar" not in rows: return False
+    deps = {i: [x for x in IDENT.findall(r.get("formula", "")) if x in rows] for i, r in rows.items()}
+    memo = {}
+    def live(i, seen=frozenset()):
+        if i not in memo:
+            memo[i] = False if i in seen else ("$" in rows[i].get("formula", "") or any(live(d, seen | {i}) for d in deps[i]))
+        return memo[i]
+    bottom = IDENT.findall(rows["uov_per_dollar"]["formula"])[0]
+    anc, stack = set(), [bottom]
+    while stack:
+        i = stack.pop()
+        if i not in anc: anc.add(i); stack += deps[i]
+    found = {d for i in anc for d in DIVISOR.findall(rows[i].get("formula", ""))
+             if d in rows and live(d) and "expected" in rows[d] and CASH_LABEL.search(rows[d]["label"]) and not MULTIPLE.search(rows[d]["label"])}
+    if len(found) != 1: return False
+    b = found.pop()
+    f = f"{bottom} * cash_benchmark * {b} / {num(rows[b]['expected'])}"
+    if rows["uov_per_dollar"]["formula"] == f: return False
+    rows["uov_per_dollar"]["formula"] = f
+    rows["uov_per_dollar"]["explainer"] = (f"The sheet's multiple of cash, converted at GiveWell's benchmark and scaled by how the sheet's own "
+                                           f"GiveDirectly value ({rows[b]['label']}) moves with your assumptions, so that the multiple's "
+                                           f"denominator doesn't push the result the wrong way.")
+    return True
+
+
 def country_of(label):
     for c in COUNTRIES:
         if re.search(rf"\b{re.escape(c)}\b", label): return COUNTRY_ID.get(c, slug(c)), c.replace("DRC", "Democratic Republic of the Congo")
@@ -132,6 +186,7 @@ def main():
             if r.get("formula", "").startswith("@givewell") and "expected" in r:
                 r["value"] = r.pop("expected"); r.pop("formula"); r["kind"] = "estimate"
     linked = {p: link_assumptions(m) for p, m in models.items()}
+    rescaled = sum(live_benchmark(m) for m in models.values())
     # Facts: same label and value in two or more models.
     seen = collections.defaultdict(list)
     for p, m in models.items():
@@ -166,6 +221,7 @@ def main():
     for p, m in models.items():
         p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
     print(f"{sum(1 for n in linked.values() if n)} of {len(models)} models linked to assumptions ({sum(linked.values())} rows);",
+          f"{rescaled} rescaled by a live cash benchmark;",
           f"{sum(len(f['rows']) for f in files.values())} shared facts in {len(files)} files")
 
 

@@ -21,9 +21,9 @@
   "assumptions": {
    "count_salary_sacrifice": 0,
    "full_credit": 0,
-   "uov_per_daly": 1.0,
+   "uov_per_daly": 2,
    "discount_rate": 0.04,
-   "uov_per_ln_consumption": 0.577078016356,
+   "uov_per_ln_consumption": 1.4426950408889634,
    "life_value_multiplier": 1
   }
  },
@@ -1055,8 +1055,8 @@
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B81"
    },
-   "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 1.\n\nArbitrary starting point",
-   "formula": "$uov_per_daly",
+   "explainer": "From an older GiveWell value scale (1 here); it moves in proportion to the shared `uov_per_daly`.\n\nArbitrary starting point",
+   "formula": "1 * $uov_per_daly / 2",
    "expected": 1.0
   },
   {
@@ -1286,8 +1286,8 @@
     "url": "https://docs.google.com/spreadsheets/d/1RjNoh81_J_ziTjucdNIlklwmzWs-_H5cl4UHSmkvdQU/edit",
     "cell": "Iron CEA, TA cost per person!B82"
    },
-   "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 0.4 per doubling.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
-   "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+   "explainer": "From an older GiveWell value scale (0.4 here); it moves in proportion to the shared `uov_per_ln_consumption`.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
+   "formula": "0.4 * $uov_per_ln_consumption / 1.4426950408889634",
    "expected": 0.4
   },
   {
@@ -1721,7 +1721,8 @@
    "id": "uov_per_dollar",
    "label": "Units of value per dollar",
    "section": "bottom_line",
-   "formula": "implied_cost_effectiveness_relative_to_cash_including_govt_s * cash_benchmark"
+   "formula": "implied_cost_effectiveness_relative_to_cash_including_govt_s * cash_benchmark * units_of_value_per_10_000_from_givedirectly / 14.56649821",
+   "explainer": "The sheet's multiple of cash, converted at GiveWell's benchmark and scaled by how the sheet's own GiveDirectly value (Units of value per 10,000 from GiveDirectly) moves with your assumptions, so that the multiple's denominator doesn't push the result the wrong way."
   }
  ],
  "output": {
