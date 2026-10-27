@@ -1,7 +1,7 @@
 import type React from "react";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
-import { lib, modelUrl, rawFacts } from "../lib/data";
+import { lib, modelUrl, rawFacts, bulkRaw } from "../lib/data";
 import { buildLibrary, comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
 import { useResults, useResultFor } from "../lib/use-results";
@@ -211,8 +211,10 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
   );
 }
 
-export default function ModelView({ id, raw, choices = [], children }: { id: string; raw?: unknown; choices?: Choice[]; children?: React.ReactNode }) {
-  // Bulk models reach the browser as one-row summaries; their page passes the full file instead.
+export default function ModelView({ id, bulk = false, choices = [], children }: { id: string; bulk?: boolean; choices?: Choice[]; children?: React.ReactNode }) {
+  // Bulk models reach the browser as one-row summaries; their page loads the full file before
+  // hydrating (client:model, lib/model-directive.ts).
+  const raw = bulk ? bulkRaw(id) : undefined;
   const model = useMemo(
     () => (raw ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()]).models.get(id)! : lib.models.get(id)!),
     [id, raw],
