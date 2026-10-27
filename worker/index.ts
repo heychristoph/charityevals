@@ -14,8 +14,10 @@ function validate(form: FormData): { fields?: Fields; error?: string; spam?: boo
   const get = (k: string) => String(form.get(k) ?? "").trim();
   // Honeypot: a field people never see. Anything in it is a bot.
   if (get("company_url")) return { spam: true };
+  // The page script stamps when the form was opened; without JavaScript there's no stamp, and the
+  // honeypot alone has to do. A stamp that says the form was filled in instantly is a bot.
   const started = Number(get("started"));
-  if (!started || Date.now() - started < MIN_FILL_MS || Date.now() - started > 86_400_000) return { spam: true };
+  if (started && Date.now() - started < MIN_FILL_MS) return { spam: true };
   const fields = { charity: get("charity"), website: get("website"), why: get("why"), email: get("email") };
   if (fields.charity.length < 2 || fields.charity.length > 200) return { error: "Please give the charity's name." };
   if (fields.website && (!/^https?:\/\/\S+\.\S+/i.test(fields.website) || fields.website.length > 300))
