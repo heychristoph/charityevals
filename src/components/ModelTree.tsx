@@ -87,6 +87,12 @@ function show(m: ResolvedModel, n: TreeNode): string {
   return f && f !== "number" && f !== "small" && f !== "toggle" ? formatValue(n.value, f) : fmtNum(n.value);
 }
 
+/** The row with a published range this node stands for: the row the formula names, a row it passed
+ * through on the way, or the row it ends at. */
+function rangedRowOf(u: Uncertainty, n: TreeNode): string | undefined {
+  return [n.named, ...n.via, n.rowId].find((id): id is string => !!id && u.ranged.has(id));
+}
+
 /** What the bars measure: the result's change if a number were 10% higher, or the share of the
  * result's uncertainty that comes through a number (its leverage times how well it's known). */
 export type Metric = "spread" | "lever";
@@ -95,7 +101,9 @@ export type Metric = "spread" | "lever";
  * squared, times the variance of its own logarithm. */
 function spreadShare(u: Uncertainty, n: TreeNode): number {
   if (!u.rootVar || n.e === undefined) return 0;
-  const v = n.type === "assumption" || n.type === "fact" ? u.leafVar(n.type, n.refId!)
+  const ranged = rangedRowOf(u, n);
+  const v = ranged ? u.rowVar(ranged)
+    : n.type === "assumption" || n.type === "fact" ? u.leafVar(n.type, n.refId!)
     : n.rowId ? u.rowVar(n.rowId)
     : n.expr ? u.exprVar(n.expr)
     : 0;
@@ -241,6 +249,11 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const branch = isBranch(n);
   const id = domId(n.key);
   const label = labelOf(m, n);
+  const spread = ctx.metric === "spread";
+  // Below a row whose own published range stands for its uncertainty, parts add none of their own.
+  const rangedRow = rangedRowOf(ctx.u, n);
+  const ranged = !!rangedRow;
+  const below = under ?? (ranged ? label : undefined);
   const kids = isOpen && branch ? childrenOf(m, n, look) : [];
   // The parts with the most leverage, kept in formula order; the rest behind "n more".
   const ranked = [...kids].sort((a, b) => (spread && (under || ranged) ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
@@ -251,11 +264,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const odds = oneIn(label, n.value);
   const e = n.e;
   const root = depth === 1;
-  const spread = ctx.metric === "spread";
-  // Below a row whose own published range stands for its uncertainty, parts add none of their own.
   const share = spread && !under ? ctx.weight(n) : 0;
-  const ranged = !!n.rowId && ctx.u.ranged.has(n.rowId);
-  const below = under ?? (ranged ? label : undefined);
   const formula = isOpen ? formulaOf(m, n) : undefined;
   const fxOpen = !!formula && ctx.fx.has(n.key);
   const lines = isOpen ? detailLines(ctx, n, parentLabel) : [];
@@ -428,7 +437,7 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
     const keys = ["r"];
     let n = root;
     // Following the uncertainty stops at a row whose published range stands for it.
-    for (let i = 0; i < 40 && n.expr && !(metric === "spread" && n.rowId && u.ranged.has(n.rowId)); i++) {
+    for (let i = 0; i < 40 && n.expr && !(metric === "spread" && rangedRowOf(u, n)); i++) {
       const kids = childrenOf(model, n, look).filter((k) => k.type !== "const");
       if (!kids.length) break;
       n = kids.reduce((b, k) => (weight(k) > weight(b) ? k : b));
