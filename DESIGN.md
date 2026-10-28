@@ -282,8 +282,19 @@ holds the model's source, spreadsheet, file and history links, each once. Under 
 visitor's assumptions move the result away from the evaluator's own, one Slate line says so and offers a
 "Reset to <evaluator>'s assumptions" link button (and "Use your assumptions" to come back).
 
-### Model table
-Fixed-layout, zebra-free table with hairline row dividers and Strong Hairline section rules. Inputs are 600 weight, formulas Slate, off-path rows Pewter, the final output framed by 2px Ink rules. Rows expand via a chevron to a Mist Paper detail with explainer, source and a formula block (Paper, Hairline border) in which shared assumptions are named in Judgment Amber.
+### Model tree ("How the pieces fit together")
+The whole model as an outline tree (ARIA tree, arrow-key navigation), the bottom line at the top framed by
+2px Ink rules with its value in the serif and cause ink. Each row is a ledger line on a hairline: chevron, the
+operator joining it to its parent (serif Pewter × ÷ + −; words like "if"/"then" in 14px sans), the plain label,
+a kind tag for leaves (your assumption in Judgment Amber, shared fact, the evaluator's observed/estimate/
+judgment with its kind dot), the value in a fixed right column, and a leverage bar (8px, cause ink mixed 55%
+into white; hollow when the effect is negative) with "+x%" for a 10% rise, through that branch. Children hang
+on 1px Strong Hairline rails with elbows. Only the six parts with the most leverage show, in formula order,
+behind a "Show n more parts" row. Rows that only pass a number along are skipped. An open node shows a Mist
+Paper detail (explainer, source, range, where the evaluator differs); the raw formula sits behind a small
+"formula" text button. Tools above: "Follow the biggest lever" (opens the highest-leverage chain), "Collapse
+all", and a search field; rows the bottom line doesn't use open as a separate Mist Paper card. In a column under 600px the
+value and bar drop beneath the label and deep branches stop indenting.
 
 ### Motion
 State changes animate over 420ms with `cubic-bezier(0.16, 1, 0.3, 1)`: interval and tornado bars animate their clip-path, central dots move by transform on a full-width layer, and ranking rows slide to their new rank by a FLIP translate. Chevrons rotate 90° over 200ms. Reduced-motion preferences disable all of it.

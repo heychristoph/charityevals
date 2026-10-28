@@ -1,0 +1,536 @@
+/* How the pieces fit together: the model as an outline tree. Each row is a ledger line (chevron,
+   operator, label, value, leverage bar) on a hairline; children hang from their parent's chevron on
+   Strong Hairline rails. Values and bars sit in fixed right-hand columns at every depth, so a reader
+   can scan down them like a table. */
+
+.model-tree {
+  display: grid;
+  gap: var(--s3);
+  container: tree / inline-size;
+}
+.model-tree h2 {
+  margin: 0;
+}
+.tn-intro {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+
+/* Tools: link buttons and a quiet search field. */
+.tn-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3) var(--s5);
+  margin-top: var(--s2);
+}
+.tn-actions {
+  display: flex;
+  gap: var(--s4);
+}
+.tn-search {
+  position: relative;
+  flex: 0 1 300px;
+}
+.tn-search-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.tn-search input {
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-hairline, 2px);
+  padding: 6px 10px 6px 30px;
+}
+.tn-search input::placeholder {
+  color: var(--ink-3);
+}
+.tn-search input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--blue);
+}
+.tn-results {
+  list-style: none;
+  margin: 0;
+  padding: var(--s2) var(--s3);
+  background: var(--paper-2);
+  border-radius: 3px;
+  display: grid;
+  gap: var(--s1);
+}
+
+/* A row the bottom line doesn't use, shown apart from the tree. */
+.tn-orphan {
+  background: var(--paper-2);
+  border-radius: 3px;
+  padding: var(--s3) var(--s4);
+  display: grid;
+  gap: var(--s1);
+}
+.tn-orphan:focus {
+  outline: none;
+}
+.tn-orphan-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  align-items: baseline;
+}
+.tn-orphan-head p {
+  margin: 0;
+}
+.tn-orphan .tn-detail {
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+.link-button svg {
+  vertical-align: -2px;
+}
+
+/* Column heads, aligned with the value and leverage columns of every row. */
+.tn-cols,
+.tn-row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 132px 176px;
+  column-gap: var(--s2);
+}
+.tn-cols {
+  color: var(--ink-3);
+  font-size: 13px;
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--rule-strong);
+  margin-top: var(--s2);
+}
+.tn-cols > span:nth-child(2) {
+  grid-column: 3;
+  text-align: right;
+}
+.tn-cols > span:nth-child(3) {
+  grid-column: 4;
+  padding-left: var(--s3);
+}
+
+.tn-tree,
+.tn-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tn-item {
+  position: relative;
+}
+.tn-item:focus {
+  outline: none;
+}
+.tn-item:focus-visible > .tn-row {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+  border-radius: 2px;
+}
+
+.tn-row {
+  align-items: baseline;
+  padding: 8px 0 7px;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background-color 160ms ease-out;
+}
+.tn-row:hover {
+  background: color-mix(in srgb, var(--paper-2) 70%, transparent);
+}
+.tn-row:hover .tn-label,
+.tn-row:hover .tn-chev {
+  color: var(--blue);
+}
+.tn-twist {
+  display: flex;
+  align-self: start;
+  justify-content: center;
+  padding-top: 4px;
+  color: var(--ink-3);
+}
+.tn-chev {
+  transition: transform 0.2s ease-out;
+}
+.tn-row.open .tn-chev {
+  transform: rotate(90deg);
+}
+.tn-leafmark {
+  width: 5px;
+  height: 5px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--rule-strong);
+}
+
+.tn-name {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  line-height: 1.4;
+}
+.tn-text {
+  min-width: 0;
+}
+.tn-op {
+  flex: none;
+  display: inline-block;
+  min-width: 1.35em;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1;
+  color: var(--ink-3);
+}
+/* Words that join parts ("if", "then", "else") are set small in the sans. */
+.tn-op.tn-op-word {
+  min-width: 0;
+  margin-right: 6px;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.tn-root > .tn-row .tn-op {
+  display: none;
+}
+.tn-label {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.tn-row:not(.open) .tn-label {
+  color: var(--ink);
+}
+.tn-how {
+  color: var(--ink-3);
+  font-size: 14px;
+}
+.tn-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: var(--s2);
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.tn-tag-a,
+.tn-tag-judgment {
+  color: var(--warn);
+}
+.tn-tag .kind-dot {
+  vertical-align: 0;
+}
+
+.tn-val {
+  text-align: right;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.tn-row:has(.tn-chev) .tn-val {
+  color: var(--ink-2);
+}
+.tn-t-input .tn-val,
+.tn-t-assumption .tn-val,
+.tn-t-fact .tn-val {
+  font-weight: 600;
+}
+.tn-odds {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.tn-t-const .tn-label {
+  color: var(--ink-2);
+}
+.tn-t-const .tn-val {
+  font-family: var(--serif);
+  color: var(--ink-2);
+}
+
+/* Leverage: a cause-tinted bar on a fixed track, |elasticity| 1 filling it; negative ones hollow. */
+.tn-lev {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: var(--s2);
+  padding-left: var(--s3);
+  align-self: center;
+}
+.tn-track {
+  height: 8px;
+  background: var(--paper-2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tn-bar {
+  display: block;
+  height: 100%;
+  min-width: 1px;
+  background: color-mix(in srgb, var(--cause) 55%, white);
+  border-radius: 2px;
+  transition: width 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tn-bar.neg {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--cause) 70%, white);
+}
+.tn-pct {
+  text-align: right;
+  font-size: 14px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* The bottom line: framed by 2px ink rules like the table's output row used to be. */
+.tn-root > .tn-row {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding: 10px 0 9px;
+}
+.tn-root > .tn-row .tn-label {
+  font-weight: 600;
+}
+.tn-root > .tn-row .tn-val {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cause);
+}
+.tn-root > .tn-row .tn-bar {
+  background: var(--cause);
+}
+
+/* Children hang from the parent's chevron on rails, with an elbow to each row. */
+.tn-group {
+  margin-left: 8px;
+}
+.tn-group > .tn-item {
+  padding-left: 14px;
+}
+.tn-group > .tn-item::before,
+.tn-group > .tn-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+}
+.tn-group > .tn-item::before {
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--rule-strong);
+}
+.tn-group > .tn-item:last-child::before {
+  bottom: auto;
+  height: 21px;
+}
+.tn-group > .tn-item::after {
+  top: 21px;
+  width: 12px;
+  border-top: 1px solid var(--rule-strong);
+}
+/* Newly opened parts settle into place from an already readable first frame. */
+.tn-group {
+  animation: tn-open 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes tn-open {
+  from {
+    transform: translateY(-6px);
+  }
+}
+
+.tn-moreitem .tn-row {
+  border-bottom-style: dashed;
+}
+.tn-more {
+  color: var(--blue);
+}
+.tn-row:hover .tn-more {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.tn-more-note {
+  color: var(--ink-3);
+}
+
+/* Under an open node: what it is and where it comes from, on Mist Paper. */
+.tn-detail {
+  margin: 0 0 var(--s1) 26px;
+  padding: var(--s2) var(--s3) var(--s3);
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: var(--s2);
+  max-width: calc(var(--measure) + 2 * var(--s3));
+  color: var(--ink-2);
+  cursor: auto;
+}
+.tn-detail p,
+.tn-explainer p {
+  margin: 0;
+}
+.tn-explainer {
+  display: grid;
+  gap: var(--s2);
+  color: var(--ink);
+}
+.tn-differs {
+  color: var(--warn);
+}
+.tn-source svg {
+  vertical-align: -1px;
+}
+.tn-formula {
+  display: grid;
+  gap: var(--s1);
+}
+.tn-formula-label {
+  color: var(--ink-2);
+}
+
+/* The quiet way to the raw formula: a small text button after the label of an open node. */
+.tn-fx {
+  font: inherit;
+  font-size: 13px;
+  background: none;
+  border: 0;
+  padding: 0 2px;
+  margin-left: var(--s2);
+  color: var(--blue);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tn-fx:hover {
+  color: var(--blue-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+/* A revealed row: a brief blue wash, then back to paper. */
+.tn-flash > .tn-row {
+  animation: tn-flash 1600ms ease-out;
+}
+@keyframes tn-flash {
+  0%,
+  40% {
+    background: var(--blue-wash);
+  }
+}
+
+.tn-notes {
+  display: grid;
+  gap: var(--s2);
+  max-width: var(--measure);
+  margin-top: var(--s2);
+}
+.tn-notes p {
+  margin: 0;
+}
+.tn-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+}
+
+/* The formula block, shared with the detail under each node. */
+.formula {
+  display: block;
+  font-size: 14px;
+  line-height: 1.7;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: var(--s2) var(--s3);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.formula .ref {
+  font-family: var(--sans);
+  font-size: 15px;
+}
+.formula .ref-a {
+  color: var(--kind-judgment);
+}
+.formula .ref-f {
+  color: var(--ink-2);
+}
+
+/* A middling column: narrower value and bar columns leave the label room. */
+@container tree (max-width: 760px) {
+  .tn-cols,
+  .tn-row {
+    grid-template-columns: 18px minmax(0, 1fr) 96px 136px;
+  }
+  .tn-lev {
+    grid-template-columns: minmax(0, 1fr) 46px;
+  }
+}
+
+/* Narrow column (phones, or a squeezed main column): the label gets its own line, value and bar beneath. */
+@container tree (max-width: 600px) {
+  .tn-cols {
+    display: none;
+  }
+  /* Name on its own line; value and bar beneath it. */
+  .tn-row {
+    grid-template-columns: 18px minmax(0, 1fr) minmax(0, 1.1fr);
+    row-gap: 4px;
+  }
+  .tn-name {
+    grid-column: 2 / 4;
+  }
+  .tn-val {
+    grid-column: 2;
+    text-align: left;
+  }
+  .tn-odds {
+    display: inline;
+  }
+  .tn-lev {
+    grid-column: 3;
+    padding-left: 0;
+    grid-template-columns: minmax(0, 1fr) 46px;
+  }
+  .tn-group > .tn-item {
+    padding-left: 10px;
+  }
+  .tn-group {
+    margin-left: 6px;
+  }
+  /* Below the third level each step indents only a few pixels, so a long chain keeps its labels
+     readable; the rails still show the nesting, without elbows. */
+  .tn-group[data-deep] {
+    margin-left: 0;
+  }
+  .tn-group[data-deep] > .tn-item {
+    padding-left: 4px;
+  }
+  .tn-group[data-deep] > .tn-item::after {
+    display: none;
+  }
+  .tn-detail {
+    margin-left: 0;
+  }
+  .tn-search {
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tn-group,
+  .tn-flash > .tn-row {
+    animation: none;
+  }
+  .tn-bar,
+  .tn-chev {
+    transition: none;
+  }
+}
