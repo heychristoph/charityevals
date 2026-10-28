@@ -65,23 +65,36 @@ export function useResultFor(m: ResolvedModel): Result {
   return useMemo(() => resultOf(m, av, view), [m, av, view]);
 }
 
+// Every island on a page (the rankings, the side panel's mini ranking, a model page's rank) asks for
+// the same rankings. They are a pure function of the shared overrides and view, so the last one
+// computed is kept here and reused: one computation per change instead of one per island.
+let shared: { overrides: object; view: View; value: ReturnType<typeof computeResults> } | undefined;
+
 export function useResults() {
+  const overrides = useOverrides();
   const av = useAssumptionValues();
   const view = useView();
   return useMemo(() => {
-    const results: CharityResult[] = rankedCharities.map((c) => {
-      const models = currentModelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => resultOf(m, av, view));
-      const positive = models.map((r) => r.central).filter((x) => x > 0);
-      return {
-        charity: c,
-        models,
-        central: positive.length ? geomean(positive) : 0,
-        low: Math.min(...models.map((r) => r.low)),
-        high: Math.max(...models.map((r) => r.high)),
-      };
-    });
-    results.sort((a, b) => b.central - a.central);
-    const flips = view === "evaluator" ? [] : rankFlips(lib, rankedGroups, av);
-    return { av, results, flips, view };
-  }, [av, view]);
+    if (shared?.overrides === overrides && shared.view === view) return shared.value;
+    const value = computeResults(av, view);
+    shared = { overrides, view, value };
+    return value;
+  }, [overrides, av, view]);
+}
+
+function computeResults(av: Record<string, number>, view: View) {
+  const results: CharityResult[] = rankedCharities.map((c) => {
+    const models = currentModelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => resultOf(m, av, view));
+    const positive = models.map((r) => r.central).filter((x) => x > 0);
+    return {
+      charity: c,
+      models,
+      central: positive.length ? geomean(positive) : 0,
+      low: Math.min(...models.map((r) => r.low)),
+      high: Math.max(...models.map((r) => r.high)),
+    };
+  });
+  results.sort((a, b) => b.central - a.central);
+  const flips = view === "evaluator" ? [] : rankFlips(lib, rankedGroups, av);
+  return { av, results, flips, view };
 }
