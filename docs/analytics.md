@@ -49,6 +49,7 @@ fields at the end, never reorder.
 | Event (`blob1`) | `blob8` key | `blob9` detail | `double1` |
 | --- | --- | --- | --- |
 | `page_view` | | | |
+| `session_start` | | | (sent once on "Accept", with the page it happened on; not a view) |
 | `donate_click` | `charity_page` or `rankings` | | |
 | `assumption_change` | assumption id | `higher`, `lower`, `default`, `on`, `off` | new value (sent 1.5 s after the slider settles) |
 | `assumption_reset` | | | how many were changed |
@@ -121,13 +122,15 @@ GROUP BY assumption
 ```
 
 Funnel, view to donate (consenting visitors only, per session): of the sessions that viewed a charity's
-page, how many clicked a donate link in the same session.
+page, how many clicked a donate link in the same session. A visitor who accepts on a charity page starts
+their session with `session_start` on that page (its view was sent before they had an id), so it counts
+as a view here.
 
 ```sql
 SELECT count() AS sessions_viewing_a_charity, countIf(donates > 0) AS of_which_clicked_donate
 FROM (
   SELECT blob7 AS session,
-         countIf(blob1 = 'page_view' AND blob3 != '') AS views,
+         countIf(blob1 IN ('page_view', 'session_start') AND blob3 != '') AS views,
          countIf(blob1 = 'donate_click') AS donates
   FROM charityevals_events
   WHERE blob5 = 'consent' AND blob7 != '' AND timestamp > NOW() - INTERVAL '30' DAY
@@ -142,7 +145,7 @@ For one charity, count sessions that viewed it and sessions that then clicked it
 SELECT countIf(views > 0) AS viewed, countIf(views > 0 AND donates > 0) AS viewed_and_donated
 FROM (
   SELECT blob7 AS session,
-         countIf(blob1 = 'page_view' AND blob3 = 'givedirectly') AS views,
+         countIf(blob1 IN ('page_view', 'session_start') AND blob3 = 'givedirectly') AS views,
          countIf(blob1 = 'donate_click' AND blob3 = 'givedirectly') AS donates
   FROM charityevals_events
   WHERE blob5 = 'consent' AND blob7 != ''

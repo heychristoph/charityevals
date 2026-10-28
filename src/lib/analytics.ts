@@ -41,8 +41,12 @@ const store = (s: "local" | "session") => {
   }
 };
 
+/** The choice made on this page: it holds even when storage is blocked or full. */
+let chosen: Consent;
+
 export function getConsent(): Consent {
   if (typeof window === "undefined") return undefined;
+  if (chosen) return chosen;
   try {
     const c = JSON.parse(store("local")?.getItem(CONSENT_KEY) ?? "null") as { analytics: boolean; at: number } | null;
     if (!c || typeof c.at !== "number" || Date.now() - c.at > CONSENT_MAX_AGE) return undefined;
@@ -59,17 +63,26 @@ export function privacySignal(): boolean {
 }
 
 export function setConsent(analytics: boolean) {
-  const local = store("local");
-  try {
-    local?.setItem(CONSENT_KEY, JSON.stringify({ analytics, at: Date.now() }));
-    if (!analytics) {
-      local?.removeItem(VISITOR_KEY);
-      store("session")?.removeItem(SESSION_KEY);
+  const was = getConsent();
+  // In memory first, so the choice takes effect even if saving it fails.
+  chosen = analytics ? "granted" : "denied";
+  const attempt = (f: () => void) => {
+    try {
+      f();
+    } catch {
+      /* storage blocked or full: the in-memory choice still holds for this page */
     }
-  } catch {
-    /* storage blocked: the choice holds for this page only */
+  };
+  attempt(() => store("local")?.setItem(CONSENT_KEY, JSON.stringify({ analytics, at: Date.now() })));
+  if (!analytics) {
+    // Each id is removed on its own, whatever happened to the write above.
+    attempt(() => store("local")?.removeItem(VISITOR_KEY));
+    attempt(() => store("session")?.removeItem(SESSION_KEY));
   }
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: analytics }));
+  // The page's anonymous view can't be tied to the new session, so start the session here, with this
+  // page's context. It's its own event, so view counts don't count this page twice.
+  if (analytics && was !== "granted") track("session_start");
 }
 
 function randomId(): string {
