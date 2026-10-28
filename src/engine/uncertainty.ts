@@ -44,8 +44,10 @@ export type Driver = {
   source: Source;
   /** True when the spread is the evaluator's (or the assumption's) own range, false for a default. */
   published: boolean;
-  /** Half the log-width of the range: ln(high / low) / 2. */
+  /** Half the log-width of the range: ln(high / low) / 2. For a number whose central value is zero
+   * (a 0% discount rate), half the range's absolute width, with `absolute` set. */
   spread: number;
+  absolute?: boolean;
   low: number;
   high: number;
   /** % change in the result for a 1% change in this number, over every path. */
@@ -74,14 +76,17 @@ export type Uncertainty = {
 const H = 0.01;
 
 /** A range's log half-width, and the range, for a value with an optional published range. */
-function spreadOf(v: number, published: { low: number; high: number } | undefined, factor: number): { spread: number; low: number; high: number } | undefined {
-  if (!Number.isFinite(v) || v === 0) return undefined;
+function spreadOf(v: number, published: { low: number; high: number } | undefined, factor: number): { spread: number; low: number; high: number; absolute?: boolean } | undefined {
+  if (!Number.isFinite(v)) return undefined;
   if (published) {
     const { low, high } = published;
+    // Zero has no relative scale: measure the range in its own units instead.
+    if (v === 0) return high > low ? { spread: (high - low) / 2, low, high, absolute: true } : undefined;
     if (low > 0 && high > 0 && v > 0) return { spread: Math.log(high / low) / 2, low, high };
     // A range through zero or below it: its width relative to the value.
     return { spread: Math.abs(high - low) / 2 / Math.abs(v), low, high };
   }
+  if (v === 0) return undefined;
   // Proportions stay at or under 1.
   const low = v / factor, high = v > 0 && v <= 1 ? Math.min(1, v * factor) : v * factor;
   return { spread: Math.abs(Math.log(high / low)) / 2, low: Math.min(low, high), high: Math.max(low, high) };
@@ -141,7 +146,8 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   const leafVar = (scope: Scope, name: string) => (leaves.get(`${scope}:${name}`)?.spread ?? 0) ** 2;
 
-  // Each formula's elasticity to each number it names, by nudging that number 1%.
+  // Each formula's elasticity to each number it names, by nudging that number 1%. A number at zero is
+  // nudged by 1% of its range instead, giving the change in ln(formula) per unit of it.
   const local = (expr: Node, base: number): { scope: Scope; name: string; e: number }[] => {
     if (!base || !Number.isFinite(base)) return [];
     const r = refs(expr);
@@ -149,14 +155,17 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     const each = (scope: Scope, names: Set<string>) => {
       for (const name of names) {
         const v = leafVals(scope, name);
-        if (!v || !Number.isFinite(v)) continue;
+        if (!Number.isFinite(v)) continue;
+        const leaf = v === 0 ? leaves.get(`${scope}:${name}`) : undefined;
+        if (v === 0 && !leaf?.absolute) continue;
+        const step = leaf?.absolute ? (leaf.high - leaf.low) * H : v * H;
         let after: number;
         try {
-          after = evaluate(expr, (s, n) => (s === scope && n === name ? v * (1 + H) : leafVals(s, n)));
+          after = evaluate(expr, (s, n) => (s === scope && n === name ? v + step : leafVals(s, n)));
         } catch {
           continue;
         }
-        const e = (after - base) / base / H;
+        const e = (after - base) / base / (leaf?.absolute ? step : H);
         if (Number.isFinite(e) && e !== 0) out.push({ scope, name, e });
       }
     };

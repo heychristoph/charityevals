@@ -23,7 +23,8 @@ const model = {
     { id: "unused", label: "Context", value: 3, kind: "observed", explainer: "x" },
     { id: "reach", label: "Share reached", value: 0.5, kind: "estimate", explainer: "x" },
     { id: "coverage", label: "Coverage", formula: "reach * 2", range: { low: 0.5, high: 2 } },
-    { id: "good", label: "Good done", formula: "people * effect * validity * coverage" },
+    { id: "rate", label: "Rate", value: { low: 0, best: 0, high: 0.08 }, kind: "estimate", explainer: "x" },
+    { id: "good", label: "Good done", formula: "people * effect * validity * coverage / (1 + rate)" },
     { id: "per_dollar", label: "Good per dollar", formula: "good / cost" },
   ],
 };
@@ -75,8 +76,16 @@ describe("uncertainty", () => {
     expect(u.rowVar("coverage")).toBeCloseTo(by("coverage").spread ** 2);
   });
 
+  it("keeps a published range whose central value is zero, measured in its own units", () => {
+    expect(by("rate")).toMatchObject({ absolute: true, published: true });
+    expect(by("rate").spread).toBeCloseTo(0.04);
+    // d ln(result) / d rate at 0 is about −1.
+    expect(by("rate").elasticity).toBeCloseTo(-1, 1);
+    expect(by("rate").share).toBeGreaterThan(0);
+  });
+
   it("gives the tree a variance for every row", () => {
-    expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2, 2);
+    expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2 + (by("rate").elasticity * by("rate").spread) ** 2, 2);
     expect(u.rootVar).toBeGreaterThan(u.rowVar("good"));
   });
 
