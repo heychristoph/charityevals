@@ -26,6 +26,10 @@ scripts/import-ace.sh        re-imports ACE's recommended charities (convert-ace
 scripts/convert-hli-psychotherapy.py  HLI's StrongMinds / Friendship Bench model
 scripts/import-resources.sh  refreshes each charity's evidence and sources list
 .claude/skills/import-cea/   Claude skill: turn a published CEA into a model
+.claude/skills/build-cea/    Claude skill: build charityevals' own CEA of any charity from public evidence
+.claude/skills/audit-cea/    Claude skill: independent audit of a model (sources, double counting, sensitivity)
+scripts/audit-model.ts       mechanical audit: template lint, tornado, reference class
+evaluation/                  blind tests of build-cea against evaluator models (docs/eval-skills.md)
 ```
 
 ## Models
@@ -52,14 +56,15 @@ a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over ot
 - **History:** `/<id>/history` rebuilds the library at every commit that touched the model, its
   parents, assumptions or facts, and shows how the result and each row changed.
 - **Units:** each model reports per dollar in its own unit (`uov`, `sad`). `assumptions/default.json`
-  defines how each unit converts to the common unit, via assumptions the visitor controls.
+  defines how each unit converts to the common unit, via assumptions the visitor controls. Every
+  charity is ranked, so a new unit needs an exchange rate (`npm run check` fails without one).
 
 ## Sensitivity
 
 No Monte Carlo. Each result has a central value (all inputs at best), a joint low and joint high
 (each input at whichever end lowers or raises the result), and a one-at-a-time tornado. Flags:
-joint spread over 100×, more than half the uncertainty from judgment, inputs without ranges,
-source older than 18 months, and assumptions that reorder the ranking.
+joint spread over 100×, more than half the uncertainty from judgment, inputs without ranges and
+source older than 18 months.
 
 ## Commands
 

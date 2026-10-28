@@ -63,6 +63,15 @@ export function privacySignal(): boolean {
   return n.globalPrivacyControl === true || n.doNotTrack === "1";
 }
 
+/**
+ * Whether to ask on page load: no choice yet, and the browser doesn't already ask not to be tracked.
+ * A Global Privacy Control or Do Not Track signal counts as "Decline" without a dialog (no events are
+ * sent, see `collecting`); such a visitor can still accept from the privacy page.
+ */
+export function shouldAsk(): boolean {
+  return getConsent() === undefined && !privacySignal();
+}
+
 export function setConsent(analytics: boolean) {
   const was = getConsent();
   // In memory first, so the choice takes effect even if saving it fails.
