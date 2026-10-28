@@ -3,6 +3,7 @@ import "../styles/global.css";
 import serifFont from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url";
 import sansFont from "@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url";
 import { canonicalPath, documentTitle, jsonLd, siteSchema } from "../lib/seo";
+import Consent from "../components/Consent.astro";
 
 interface Props {
   title: string;
@@ -80,6 +81,7 @@ const nav = [
           <a href="/about">About</a>
           <a href="/method">Method</a>
           <a href="/privacy">Privacy</a>
+          <button type="button" data-consent-open>Privacy settings</button>
           <a href="/terms">Terms</a>
           <a href="/legal">Legal notice</a>
           <a href="https://github.com/heychristoph/charityevals">GitHub</a>
@@ -90,6 +92,7 @@ const nav = [
         </p>
       </div>
     </footer>
+    <Consent />
   </body>
 </html>
 

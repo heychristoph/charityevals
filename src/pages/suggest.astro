@@ -44,6 +44,8 @@ import { publisher } from "../lib/site";
 </Prose>
 
 <script>
+  import { track } from "../lib/analytics";
+
   const form = document.getElementById("suggest-form") as HTMLFormElement;
   const sent = document.getElementById("sent")!;
   const error = document.getElementById("error")!;
@@ -66,6 +68,8 @@ import { publisher } from "../lib/site";
       if (!body.ok) throw new Error(body.error);
       form.hidden = true;
       sent.hidden = false;
+      // That a suggestion was sent, never what it said.
+      track("suggestion_sent");
     } catch (err) {
       error.textContent = (err as Error).message || "It didn't send. Please email hello@charityevals.org instead.";
       error.hidden = false;

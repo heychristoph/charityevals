@@ -1,7 +1,10 @@
 // The site is static: Cloudflare serves dist/ directly. This Worker only runs for /api/* (see
-// run_worker_first in wrangler.jsonc) and handles one thing: the "suggest a charity" form. It is sent
-// through Email Routing, which only delivers to the account's verified destination addresses: the
-// secret SUGGEST_TO, the inbox hello@charityevals.org forwards to.
+// run_worker_first in wrangler.jsonc) and handles two things: the "suggest a charity" form, sent
+// through Email Routing, which only delivers to the account's verified destination addresses (the
+// secret SUGGEST_TO, the inbox hello@charityevals.org forwards to); and visitor analytics events,
+// written to Workers Analytics Engine (worker/events.ts, docs/analytics.md).
+
+import { toDataPoint } from "./events";
 
 const CONTACT = "hello@charityevals.org";
 const FROM = { email: "forms@charityevals.org", name: "charityevals suggestions" };
@@ -78,10 +81,40 @@ async function suggest(request: Request, env: Env): Promise<Response> {
   return reply(200, { ok: true });
 }
 
+const MAX_EVENT_BODY = 2_000;
+const BOT = /bot|crawl|spider|slurp|headless|lighthouse|preview|monitor/i;
+
+/**
+ * POST /api/event: one analytics event from src/lib/analytics.ts. Always answers 204 with no body, so
+ * the page learns nothing and never waits. The request's IP address and user agent are not recorded;
+ * the user agent is only read to drop crawlers.
+ */
+async function event(request: Request, env: Env): Promise<Response> {
+  const done = new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: { Allow: "POST" } });
+  // Same-site only: browsers mark cross-site requests, and nobody else's page should write here.
+  const site = request.headers.get("Sec-Fetch-Site");
+  if (site && site !== "same-origin") return done;
+  if (BOT.test(request.headers.get("User-Agent") ?? "")) return done;
+  const text = await request.text();
+  if (text.length > MAX_EVENT_BODY) return done;
+  let body: unknown;
+  try {
+    body = JSON.parse(text);
+  } catch {
+    return done;
+  }
+  const point = toDataPoint(body, (request.cf as { country?: string } | undefined)?.country);
+  // Not awaited: the runtime writes it in the background.
+  if (point) env.EVENTS?.writeDataPoint(point);
+  return done;
+}
+
 export default {
   async fetch(request, env): Promise<Response> {
     const { pathname } = new URL(request.url);
     if (pathname === "/api/suggest") return suggest(request, env);
+    if (pathname === "/api/event") return event(request, env);
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
