@@ -240,7 +240,7 @@
       "id": "p1_annual_discount_rate",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Annual discount rate (across total years of impact)",
-      "formula": "1 - ((1 / (1 + 0.014)) ^ p1_companies_expected_implementation_date * (1 - (1 / (1 + 0.014)) ^ (p1_companies_expected_implementation_date_if_not_fo - p1_companies_expected_implementation_date + 1)) / ((1 - 1 / (1 + 0.014)) * (p1_companies_expected_implementation_date_if_not_fo - p1_companies_expected_implementation_date + 1)))",
+      "formula": "1 - ((1 / (1 + max($discount_rate, 0.000001))) ^ p1_companies_expected_implementation_date * (1 - (1 / (1 + max($discount_rate, 0.000001))) ^ (p1_companies_expected_implementation_date_if_not_fo - p1_companies_expected_implementation_date + 1)) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * (p1_companies_expected_implementation_date_if_not_fo - p1_companies_expected_implementation_date + 1)))",
       "expected": 0.2143532189
     },
     {
@@ -381,7 +381,7 @@
       "id": "p1_annual_discount_rate_2",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Annual discount rate (across total years of impact)",
-      "formula": "1 - ((1 / (1 + 0.014)) ^ p1_company_s_expected_implementation_date * (1 - (1 / (1 + 0.014)) ^ (p1_company_s_expected_introduction_of_these_welfare - p1_company_s_expected_implementation_date + 1)) / ((1 - 1 / (1 + 0.014)) * (p1_company_s_expected_introduction_of_these_welfare - p1_company_s_expected_implementation_date + 1)))",
+      "formula": "1 - ((1 / (1 + max($discount_rate, 0.000001))) ^ p1_company_s_expected_implementation_date * (1 - (1 / (1 + max($discount_rate, 0.000001))) ^ (p1_company_s_expected_introduction_of_these_welfare - p1_company_s_expected_implementation_date + 1)) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * (p1_company_s_expected_introduction_of_these_welfare - p1_company_s_expected_implementation_date + 1)))",
       "expected": 0.2143532189
     },
     {
@@ -562,7 +562,7 @@
       "id": "p2_annual_discount_rate",
       "section": "p2_cage_free_eggs_cea",
       "label": "Annual discount rate (across total years of impact)",
-      "formula": "1 - ((1 / (1 + 0.014)) ^ p2_company_s_expected_implementation_date * (1 - (1 / (1 + 0.014)) ^ (p2_company_s_expected_introduction_of_these_welfare - p2_company_s_expected_implementation_date + 1)) / ((1 - 1 / (1 + 0.014)) * (p2_company_s_expected_introduction_of_these_welfare - p2_company_s_expected_implementation_date + 1)))",
+      "formula": "1 - ((1 / (1 + max($discount_rate, 0.000001))) ^ p2_company_s_expected_implementation_date * (1 - (1 / (1 + max($discount_rate, 0.000001))) ^ (p2_company_s_expected_introduction_of_these_welfare - p2_company_s_expected_implementation_date + 1)) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * (p2_company_s_expected_introduction_of_these_welfare - p2_company_s_expected_implementation_date + 1)))",
       "expected": 0.1078537508
     },
     {
@@ -703,7 +703,7 @@
       "id": "p2_annual_discount_rate_2",
       "section": "p2_cage_free_eggs_cea",
       "label": "Annual discount rate (across total years of impact)",
-      "formula": "1 - ((1 / (1 + 0.014)) ^ p2_companies_expected_implementation_date * (1 - (1 / (1 + 0.014)) ^ (p2_companies_expected_implementation_date_if_not_fo - p2_companies_expected_implementation_date + 1)) / ((1 - 1 / (1 + 0.014)) * (p2_companies_expected_implementation_date_if_not_fo - p2_companies_expected_implementation_date + 1)))",
+      "formula": "1 - ((1 / (1 + max($discount_rate, 0.000001))) ^ p2_companies_expected_implementation_date * (1 - (1 / (1 + max($discount_rate, 0.000001))) ^ (p2_companies_expected_implementation_date_if_not_fo - p2_companies_expected_implementation_date + 1)) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * (p2_companies_expected_implementation_date_if_not_fo - p2_companies_expected_implementation_date + 1)))",
       "expected": 0.03742412629
     },
     {
@@ -839,7 +839,7 @@
       "id": "p2_annual_discount_rate_3",
       "section": "p2_cage_free_eggs_cea",
       "label": "Annual discount rate (across total years of impact)",
-      "formula": "1 - ((1 / (1 + 0.014)) ^ p2_companies_expected_implementation_date_2 * (1 - (1 / (1 + 0.014)) ^ (p2_companies_expected_implementation_date_if_not_fo_2 - p2_companies_expected_implementation_date_2 + 1)) / ((1 - 1 / (1 + 0.014)) * (p2_companies_expected_implementation_date_if_not_fo_2 - p2_companies_expected_implementation_date_2 + 1)))",
+      "formula": "1 - ((1 / (1 + max($discount_rate, 0.000001))) ^ p2_companies_expected_implementation_date_2 * (1 - (1 / (1 + max($discount_rate, 0.000001))) ^ (p2_companies_expected_implementation_date_if_not_fo_2 - p2_companies_expected_implementation_date_2 + 1)) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * (p2_companies_expected_implementation_date_if_not_fo_2 - p2_companies_expected_implementation_date_2 + 1)))",
       "expected": 0.05403261896
     },
     {
@@ -967,7 +967,8 @@
     "name": "ACE",
     "assumptions": {
       "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "full_credit": 0,
+      "discount_rate": 0.014
     }
   },
   "resources": [

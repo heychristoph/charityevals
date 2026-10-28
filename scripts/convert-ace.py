@@ -299,6 +299,17 @@ rows_out += [
 ]
 sections += [{"id": "bottom", "title": "Bottom line", "explainer": f"{a.unit_label} per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."},
              {"id": "donor", "title": "Your dollar's share", "explainer": "charityevals adjustments on top of ACE's model."}]
+# Discounting: ACE writes its annual discount rate into formulas as "(1 + 0.014)". Those use the shared
+# $discount_rate instead (floored just above zero: the annuity factors divide by the rate's effect and
+# are 0/0 at exactly 0%), with ACE's rate pinned in the evaluator view. Rates applied inside Google's NPV
+# are kept as fixed numbers above and can't follow the setting.
+INLINE_RATE = re.compile(r"\(\s*1\s*\+\s*(0\.0\d+)\s*\)")
+ace_rate = None
+for r in rows_out:
+    if "formula" in r and INLINE_RATE.search(r["formula"]):
+        ace_rate = float(INLINE_RATE.search(r["formula"]).group(1))
+        r["formula"] = INLINE_RATE.sub("(1 + max($discount_rate, 0.000001))", r["formula"])
+
 # Credit shared with other organisations: ACE deducts other groups' contribution to an achievement. The
 # full-credit toggle counts the whole achievement instead (as Sinergia's model does), so each such input
 # keeps ACE's estimate in a "_shared" row and the row the formulas use is zero under full credit.
@@ -324,7 +335,8 @@ model = {
     "sections": [s for s in sections if any(r.get("section") == s["id"] for r in rows_out)],
     "rows": rows_out,
     "output": {"row": "sads_per_donor_dollar", "unit": a.unit, "label": f"{a.unit_label} per dollar you give"},
-    "evaluator": {"name": "ACE", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
+    "evaluator": {"name": "ACE", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0,
+                                                 **({"discount_rate": ace_rate} if ace_rate is not None else {})}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 cpath = Path("charities") / f"{a.charity or a.id}.json"

@@ -38,7 +38,7 @@ async function suggest(request: Request, env: Env): Promise<Response> {
   const reply = (status: number, body: { ok: boolean; error?: string }) =>
     wantsJson
       ? Response.json(body, { status })
-      : Response.redirect(new URL(body.ok ? "/suggest/?sent=1" : `/suggest/?error=${encodeURIComponent(body.error ?? "")}`, request.url).toString(), 303);
+      : Response.redirect(new URL(body.ok ? "/suggest?sent=1" : `/suggest?error=${encodeURIComponent(body.error ?? "")}`, request.url).toString(), 303);
 
   if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: { Allow: "POST" } });
   if (Number(request.headers.get("Content-Length") ?? 0) > MAX_BODY) return reply(413, { ok: false, error: "That's too long to send." });
