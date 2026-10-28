@@ -7,7 +7,7 @@ import { formatValue } from "../lib/format";
 import { assumptionComparable } from "../lib/comparables";
 import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides, useView } from "../lib/assumption-state";
-import { track, trackAssumption } from "../lib/analytics";
+import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import "./assumptions.css";
 
@@ -169,6 +169,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             {copied ? <Check size={14} aria-hidden /> : <Link2 size={14} aria-hidden />} {copied ? "Copied" : "Copy link"}
           </button>
           <button type="button" className="link-button" disabled={!changedCount} onClick={() => {
+            cancelAssumptionEvents();
             track("assumption_reset", { value: changedCount });
             resetAssumptions();
           }}>
