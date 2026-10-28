@@ -59,7 +59,7 @@ fields at the end, never reorder.
 | `derivation_open` | | | depth (1 = a term of the bottom line) |
 | `table_open` | | | rows in the table |
 | `suggestion_sent` | | | |
-| `outbound_click` | host name | `source`, `spreadsheet`, `resource-<type>` or `link` | |
+| `outbound_click` | host name | `source`, `spreadsheet`, `model-file`, `history`, `charity`, `resource-<type>` or `link` | |
 
 ## Querying
 
