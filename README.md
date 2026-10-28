@@ -42,9 +42,10 @@ a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over ot
   the rows it changes. See `models/global-health/givedirectly-malawi.json`.
 - **Reproduction:** `expected` on a row holds the value the original spreadsheet shows.
   `npm run check` fails if the model doesn't reproduce it.
-- **Two views:** every model reproduces its source evaluator's numbers in the *evaluator view*
-  (their moral weights and accounting, pinned in `evaluator`). The *charityevals view* adds the
-  visitor's assumptions and our adjustments; where we disagree with an input, `published` keeps
+- **Evaluator's assumptions:** every model is its evaluator's, and reproduces their numbers under
+  their own moral weights and accounting (pinned in `evaluator`). The site computes with the
+  visitor's shared assumptions; where those move a result, the model page says so and offers a reset
+  to the evaluator's own (the *evaluator view*). Where we disagree with an input, `published` keeps
   the evaluator's value.
 - **Accounting toggles:** staff salary sacrifice counted as an in-kind donation, and shared vs full
   credit for outcomes several organisations contribute to.

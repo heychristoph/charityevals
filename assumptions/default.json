@@ -8,24 +8,25 @@
     {
       "id": "cross-cause",
       "title": "Exchange rates between causes",
-      "explainer": "Every model reports in its own unit: GiveWell's units of value, suffering-adjusted days (SADs) for animals. Animal models counted in other units (animals spared, people reached, research papers) are first converted into SADs. To rank them all on one list, each unit is then converted to GiveWell units of value with the rates below. Change them and the ranking changes; that is the point."
+      "explainer": "Charities do different kinds of good: raising incomes, adding years of healthy life, sparing animals pain, making people more satisfied with their lives. To rank them on one list, everything is counted in one yardstick: the good of doubling one person's income for a year. (GiveWell calls this a \"unit of value\"; one unit is one year of doubled income.) The rates below convert a year of healthy life, a day of an animal's pain and a gain in life satisfaction into that yardstick. Animal analyses that count animals spared, people reached or research papers are first converted into days of an animal's pain. Change them and the ranking changes; that is the point."
     },
     {
       "id": "moral-weights",
       "title": "Moral weights",
-      "explainer": "How much good one thing is worth compared to another. These are value judgments, not facts, and they drive most cross-cause comparisons. Defaults follow the evaluator a model was imported from."
+      "explainer": "How much one kind of good counts against another, such as saving a life against raising incomes. These are value judgments, not facts. Defaults follow the evaluator a model was imported from."
     },
     {
       "id": "economics",
-      "title": "Economics",
-      "explainer": "Shared parameters such as how much less a benefit next year counts than one today."
+      "title": "Timing",
+      "explainer": "How much less good done in the future counts than the same good done today."
     }
   ],
   "rows": [
     {
       "id": "count_salary_sacrifice",
       "section": "accounting",
-      "label": "Count staff salary sacrifice as a donation",
+      "label": "Count staff's below-market pay as a donation",
+      "technical": "Salary sacrifice",
       "format": "toggle",
       "value": {
         "low": 0,
@@ -38,7 +39,8 @@
     {
       "id": "full_credit",
       "section": "accounting",
-      "label": "Give full credit for outcomes shared with other organisations",
+      "label": "Give each charity full credit for outcomes it shares with others",
+      "technical": "Full counterfactual credit",
       "format": "toggle",
       "value": {
         "low": 0,
@@ -51,7 +53,8 @@
     {
       "id": "uov_per_daly",
       "section": "cross-cause",
-      "label": "Units of value per human DALY averted",
+      "label": "A year of healthy life, in years of doubled income",
+      "technical": "Units of value per DALY (disability-adjusted life year) averted",
       "unit": "units of value / DALY",
       "format": "number",
       "value": {
@@ -60,26 +63,28 @@
         "high": 4
       },
       "kind": "judgment",
-      "explainer": "Bridge from health to GiveWell's units. A rough derivation: GiveWell values an under-five death at 116 units, and a child death in sub-Saharan Africa costs roughly 55–65 years of life, so one year of healthy life is worth about 2 units.\n\nThis ignores GiveWell's age weighting and treats years lost to disability like years lost to death. Ours, not GiveWell's."
+      "explainer": "How many years of doubling one person's income a year of healthy life is worth. It lets health programmes, which add healthy years, sit on the same list as everything else.\n\nA rough derivation: GiveWell values preventing a young child's death at about 116 years of doubled income, and that death costs roughly 55–65 years of life in sub-Saharan Africa, so one healthy year is worth about 2. This ignores GiveWell's weighting by age and treats a year lived with illness like a year lost to death. The number and its 1–4 range are ours, not GiveWell's."
     },
     {
       "id": "daly_per_sad",
       "section": "cross-cause",
-      "label": "Human DALYs per suffering-adjusted day",
+      "label": "A day of disabling pain, as a share of a year of healthy life",
+      "technical": "DALYs per suffering-adjusted day (SAD)",
       "unit": "DALY / SAD",
-      "format": "small",
+      "format": "percent",
       "value": {
         "low": 0.00027,
         "best": 0.0011,
         "high": 0.0027
       },
       "kind": "judgment",
-      "explainer": "Suffering-adjusted days (SADs), from Ambitious Impact, count days of animal suffering weighted by pain intensity and by a species' welfare range relative to humans. ACE uses them.\n\nWe read one SAD as one human-equivalent day of disabling-level pain and give that day a disability weight of 0.4 (0.1–1.0), so one SAD is 0.4 / 365 DALY. AIM doesn't publish an official SAD-to-DALY rate, so this is the least grounded number on the site and often decides whether animal charities rank above or below global health."
+      "explainer": "Animal charities measure the suffering they prevent in days of pain, adjusted for how intense the pain is and for how much each species can suffer compared with a person. (Ambitious Impact calls these suffering-adjusted days; ACE uses them.) After that adjustment, one such day is as bad as one day of a person's disabling pain.\n\nThis setting says how bad a day of disabling pain is. By default it costs as much as losing 0.4 of a day of healthy life (range 0.1 to a full day), which is 0.11% of a healthy year. Nobody publishes an official rate, so this is the least grounded number on the site, and it often decides whether animal charities rank above or below global health."
     },
     {
       "id": "uov_per_wellby",
       "section": "cross-cause",
-      "label": "Units of value per WELLBY",
+      "label": "One more point of life satisfaction for a year, in years of doubled income",
+      "technical": "Units of value per WELLBY (wellbeing-adjusted life year)",
       "unit": "units of value / WELLBY",
       "format": "number",
       "value": {
@@ -88,12 +93,13 @@
         "high": 3
       },
       "kind": "judgment",
-      "explainer": "Bridge between the Happier Lives Institute's wellbeing measure and GiveWell's units. HLI estimates GiveDirectly produces 7.55 WELLBYs per $1,000; GiveWell's model gives 8.7 units of value per $1,000. Setting both equal gives about 1.15 units of value per WELLBY, so GiveDirectly scores the same either way.\n\nThat calibration assumes the two evaluators measure GiveDirectly's good equally well, which is contested: GiveWell has been sceptical of some WELLBY estimates, HLI of some income-based ones. The wide range is ours."
+      "explainer": "The Happier Lives Institute measures good done as gains in life satisfaction on a 0–10 scale. This says how many years of doubled income one point more, for one person for one year, is worth.\n\nThe default makes both evaluators agree on GiveDirectly: HLI estimates 7.55 points-for-a-year per $1,000 given, GiveWell 8.7 years of doubled income per $1,000, so one point is worth about 1.15. That assumes both measure GiveDirectly's good equally well, which is contested: GiveWell has been sceptical of some life-satisfaction estimates, HLI of some income-based ones. The wide range is ours."
     },
     {
       "id": "animal_moral_weight",
       "section": "cross-cause",
-      "label": "Extra weight on animal suffering, beyond welfare ranges",
+      "label": "Weight on animal suffering, beyond each species' capacity to suffer",
+      "technical": "Moral weight on welfare ranges",
       "unit": "×",
       "format": "multiple",
       "value": {
@@ -102,12 +108,13 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "SADs already scale suffering by each species' welfare range. At 1 you take those welfare ranges at face value. Below 1 you discount animal suffering further, for example because you're unsure animals are sentient or because you give more weight to humans for other reasons."
+      "explainer": "Animal suffering is already scaled by how much each species can suffer compared with a person (its \"welfare range\"). At 1 you take those estimates at face value. Below 1 you count animal suffering for less still, for example because you're unsure animals feel pain the way people do, or because you give people more weight for other reasons."
     },
     {
       "id": "sads_per_animal_spared",
       "section": "cross-cause",
-      "label": "Suffering-adjusted days per farmed animal spared",
+      "label": "Days of disabling pain spared per farmed animal not raised",
+      "technical": "Suffering-adjusted days (SADs) per animal spared",
       "unit": "SADs / animal",
       "format": "number",
       "value": {
@@ -121,12 +128,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1opvB9PLqI8DQJkdwilu64EJAGRHKzGy0aYABdnykpMw/edit",
         "note": "@ace.dvf_sads_per_meal / @ace.dvf_animals_spared_per_meal; cross-check: @ace.ace2016_years_suffering_per_leaflet, @ace.caged_hen_sads_per_year"
       },
-      "explainer": "Converts ACE's older headline unit, farmed animals spared from factory farming, into suffering-adjusted days (SADs), so models that count animals spared rank with the rest.\n\nThe default is ACE's own ratio for diet change (2024): 2.58 SADs and 0.115 animals spared per meat meal replaced, so about 22 SADs per animal spared. A cross-check from ACE's 2016 models: an animal spared there stands for about 100 days of factory-farmed life, which at Ambitious Impact's 28.9 SADs per year in a battery cage is about 8 SADs.\n\nThe range runs from 4, half that cross-check, for mixes of small, short-lived animals, to 45, beyond the ratio of ACE's own bounds (8 to 41). ACE's 2016 models also count welfare reforms as \"equivalent animals spared\", so the same rate applies to them."
+      "explainer": "Some animal analyses, including all of ACE's from 2014 to 2017, count farmed animals spared a life in factory farming rather than days of pain. This setting converts one into the other, so those charities rank with the rest. A day here is, as elsewhere, a day of an animal's pain as bad as a day of a person's disabling pain.\n\nThe default is ACE's own ratio for diet change (2024): each meat meal replaced spares 0.115 animals and 2.58 such days, so about 22 days per animal spared. A cross-check: in ACE's 2016 models an animal spared stands for about 100 days of factory-farmed life, which at Ambitious Impact's rate for a battery-caged hen (28.9 days a year) is about 8.\n\nThe range runs from 4, half that cross-check, for mixes of small, short-lived animals, to 45, beyond the ratio of ACE's own bounds (8 to 41). ACE's 2016 models also count welfare reforms as \"equivalent animals spared\", so the same rate applies to them."
     },
     {
       "id": "animals_spared_per_person_reached",
       "section": "cross-cause",
-      "label": "Farmed animals spared per person reached by diet-change outreach",
+      "label": "Farmed animals spared per person a diet-change program reaches",
+      "technical": "Animals spared per person reached",
       "unit": "animals / person",
       "format": "number",
       "value": {
@@ -140,12 +148,13 @@
         "url": "https://www.getguesstimate.com/models/7338",
         "note": "@ace.ace2016_animals_spared_per_video_view, @ace.ace2016_animals_spared_per_leaflet, @ace.ace2016_animals_spared_per_pledge_participant"
       },
-      "explainer": "Converts people reached into animals spared, which then convert into SADs at the rate above. Reach says nothing by itself about behaviour, so this carries the whole judgment about how many people change their diet, by how much and for how long.\n\nACE's 2016 models give reference points that already allow for people lapsing: about 0.02 animals spared per social media video watched to the end, about 1 per leaflet (ACE later cautioned that the leafleting studies were weak) and about 6 per participant in a week-long vegan pledge. Lapsing is common: Faunalytics (2014) found that about 84% of people who adopt a vegetarian or vegan diet abandon it.\n\nThe default weights those reference points by the reach of the one model reported in people reached, Good Food Fund: about 84% of it is online views and online competition entrants, counted like video views, and 16% is people in its cooking network, counted like a leaflet. That gives about 0.18. The range runs from 0.01, below everyone counting as a passing view, to 1.5, everyone counting as more engaged than a leaflet."
+      "explainer": "Some programs report only how many people they reached. This setting says how many farmed animals that spares, which then converts into days of pain at the rate above. Reach says nothing by itself about behaviour, so this carries the whole judgment about how many people change their diet, by how much and for how long.\n\nACE's 2016 models give reference points that already allow for people lapsing: about 0.02 animals spared per social media video watched to the end, about 1 per leaflet (ACE later cautioned that the leafleting studies were weak) and about 6 per participant in a week-long vegan pledge. Lapsing is common: Faunalytics (2014) found that about 84% of people who adopt a vegetarian or vegan diet abandon it.\n\nThe default weights those reference points by the reach of the one charity reported this way, Good Food Fund: about 84% of it is online views and online competition entrants, counted like video views, and 16% is people in its cooking network, counted like a leaflet. That gives about 0.18. The range runs from 0.01, below everyone counting as a passing view, to 1.5, everyone counting as more engaged than a leaflet."
     },
     {
       "id": "sads_per_paper",
       "section": "cross-cause",
-      "label": "Suffering-adjusted days per peer-reviewed paper on wild animal welfare",
+      "label": "Days of disabling pain eventually spared per research paper on wild animal welfare",
+      "technical": "Suffering-adjusted days (SADs) per peer-reviewed paper",
       "unit": "SADs / paper",
       "format": "number",
       "value": {
@@ -154,12 +163,13 @@
         "high": 10000000
       },
       "kind": "judgment",
-      "explainer": "**A wide judgment call, not a published estimate.** Research on wild animal welfare does good only through what it later makes possible, and nobody, ACE included, has quantified that. Set this to your own view.\n\nThe default is a rough Fermi estimate. Interventions the field enables eventually reach 1 billion wild animals a year (more humane pest control, say), averting 0.5 SADs per animal each year, and arrive 10 years sooner because the field exists. The field succeeds with a 1 in 10 chance, and one paper earns 1/5,000 of its credit. 1 billion × 0.5 × 10 × 0.1 ÷ 5,000 = 100,000 SADs per paper.\n\nAny of those factors could be 10 times higher or lower, so the range runs from 1,000 to 10 million SADs per paper."
+      "explainer": "**A wide judgment call, not a published estimate.** Research on wild animals' welfare does good only through what it later makes possible, and nobody, ACE included, has put a number on that. Set this to your own view.\n\nThe default is a rough back-of-the-envelope estimate. Ways of helping that the field makes possible eventually reach 1 billion wild animals a year (more humane pest control, say), sparing each half a day of pain a year, and arrive 10 years sooner because the field exists. The field succeeds with a 1 in 10 chance, and one paper earns 1/5,000 of its credit. 1 billion × 0.5 × 10 × 0.1 ÷ 5,000 = 100,000 days per paper.\n\nAny of those factors could be 10 times higher or lower, so the range runs from 1,000 to 10 million."
     },
     {
       "id": "uov_per_ln_consumption",
       "section": "moral-weights",
-      "label": "Value of raising ln(consumption) by 1 for one person for one year",
+      "label": "Weight on raising incomes, compared with health and lives",
+      "technical": "Units of value per unit of ln(consumption)",
       "unit": "units of value",
       "format": "number",
       "value": {
@@ -173,12 +183,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit?gid=1755045987",
         "cell": "New CEA!B20; Inputs!D20:F20"
       },
-      "explainer": "GiveWell defines one unit of value as doubling one person's consumption for one year. Doubling raises ln(consumption) by ln 2, so one unit of ln(consumption) is worth 1/ln 2 ≈ 1.44 units.\n\nThe low and high ends are the ±25% uniform range GiveWell itself uses in its Monte Carlo inputs. Moving this moves the value of consumption gains relative to deaths averted."
+      "explainer": "How much income gains count against everything else. Income gains are valued by how much they multiply someone's income, so doubling a poor person's income counts the same as doubling a rich person's. The default, 1.44, is GiveWell's: at that weight, doubling one person's income for a year is worth exactly one year of doubled income, the yardstick everything else is measured in.\n\nRaise it and income programmes such as cash transfers count for more against saving lives and adding healthy years; lower it and they count for less. The low and high ends are the ±25% range GiveWell itself uses."
     },
     {
       "id": "life_value_multiplier",
       "section": "moral-weights",
-      "label": "Value of saving a life, relative to GiveWell's moral weights",
+      "label": "Saving a life compared with raising incomes, relative to GiveWell",
+      "technical": "Life value multiplier on GiveWell's moral weights",
       "unit": "×",
       "format": "multiple",
       "value": {
@@ -191,12 +202,13 @@
         "title": "GiveWell moral weights",
         "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
       },
-      "explainer": "GiveWell values averting a child's death at about 116 times the value of doubling one person's consumption for a year, with similar weights for other ages. They come from donor surveys, a survey of people in Ghana and Kenya, and staff judgment.\n\nThis multiplies all of GiveWell's life values at once. At 1 you use GiveWell's weights; above 1 saving lives counts for more relative to raising incomes, below 1 for less. The 0.6–1.4 range is ours."
+      "explainer": "GiveWell counts preventing a young child's death as worth about 116 years of doubled income, with similar weights for other ages. Those weights come from donor surveys, a survey of people in Ghana and Kenya, and staff judgment.\n\nThis multiplies all of them at once. At 1 you use GiveWell's weights; above 1 saving lives counts for more against raising incomes, below 1 for less. The 0.6–1.4 range is ours."
     },
     {
       "id": "discount_rate",
       "section": "economics",
-      "label": "Annual discount rate",
+      "label": "How much less good done a year from now counts",
+      "technical": "Annual discount rate",
       "unit": "per year",
       "format": "percent",
       "value": {
@@ -205,7 +217,7 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much less a benefit a year from now counts than one today, compounding. GiveWell and ACE both use 4%.\n\nUsed where a model discounts explicitly (ACE's cage-free campaigns). GiveWell's GiveDirectly model has the 4% built into its year 2–10 consumption ratio, so changing this doesn't affect it yet."
+      "explainer": "How much less a benefit a year from now counts than the same benefit today, compounding each year. GiveWell and ACE both use 4%.\n\nIt applies where a model discounts explicitly (ACE's cage-free campaigns). GiveWell's GiveDirectly model has the 4% built into its later-years income figures, so changing this doesn't affect it yet."
     }
   ],
   "units": {

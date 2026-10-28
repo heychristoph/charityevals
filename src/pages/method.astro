@@ -1,5 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import { lib } from "../lib/data";
+
+const rates = lib.assumptions.rows.filter((r) => r.section === "cross-cause");
 ---
 
 <Base title="Method: how the models work" description="Each charity is one JSON file in a public git repository. Models imported from an evaluator have to reproduce that evaluator's own numbers." active="method">
@@ -47,7 +50,13 @@ import Base from "../layouts/Base.astro";
 
     <h2>Comparing causes</h2>
     <p>
-      Each cause keeps its own unit: GiveWell's units of value (one unit is doubling one person's consumption for a year), suffering-adjusted days for animals. Animal models that count something else (animals spared, people reached, research papers) are first converted into suffering-adjusted days. To put everything on one list we convert to GiveWell units using exchange rates you control, and express it as a multiple of GiveDirectly. Those rates are judgments with no agreed answer; each one's default and its source are on the assumptions page.
+      Each evaluator counts good its own way: GiveWell in years of doubled income (what it calls a "unit of value": the good of doubling one person's income for a year), health analyses in years of healthy life, animal analyses in days of pain (or in animals spared, people reached or research papers, which we first convert into days of pain), the Happier Lives Institute in life satisfaction. To put them on one list we count everything in years of doubled income, using exchange rates you control, and show each charity as a multiple of GiveDirectly. Those rates are judgments with no agreed answer:
+    </p>
+    <ul>
+      {rates.map((r) => <li><a href={`/assumptions#a-${r.id}`}>{r.label}</a></li>)}
+    </ul>
+    <p>
+      Each one's default and its source are on the assumptions page.
     </p>
 
     <h2>Flags</h2>
@@ -64,8 +73,8 @@ import Base from "../layouts/Base.astro";
       are kept as fixed numbers, with the original formula shown.
     </p>
     <p>
-      Moral weights, the discount rate and the values of consumption and of a year of healthy life are then tied to the
-      shared assumptions, and statistics several sheets share live once as shared facts. Other judgment calls stay as the
+      Moral weights, the discount rate, the weight on raising incomes and the value of a year of healthy life are then
+      tied to the shared assumptions, and statistics several sheets share live once as shared facts. Other judgment calls stay as the
       evaluator set them, and spreadsheets without ranges give no uncertainty beyond the shared assumptions.
     </p>
 
