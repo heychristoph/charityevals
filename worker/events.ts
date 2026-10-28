@@ -7,6 +7,7 @@
 
 export const EVENTS = [
   "page_view",
+  "session_start",
   "donate_click",
   "assumption_change",
   "assumption_reset",
