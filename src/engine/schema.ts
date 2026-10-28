@@ -15,6 +15,12 @@ export const Source = z
     /** Cell or range in the original spreadsheet, e.g. "New CEA!B23". */
     cell: z.string().optional(),
     note: z.string().optional(),
+    /** When the page was read (YYYY-MM-DD). Required for inputs of charityevals' own models. */
+    retrieved: z.string().optional(),
+    /** Page, table or section in the document where the number appears. */
+    page: z.string().optional(),
+    /** The sentence or table cell the number is read from, verbatim (short). */
+    quote: z.string().optional(),
   })
   .strict();
 
@@ -77,6 +83,10 @@ export type RowPatch = z.infer<typeof RowPatch>;
 
 export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
 
+/** Intervention families for charityevals' own models (the build-cea skill). Each prescribes a row
+ * structure, so models of the same family can be compared row by row. */
+export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta"]);
+
 export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
 
 export const Resource = z
@@ -127,6 +137,8 @@ export const Model = z
     kind: z.enum(["charity", "variant", "template"]),
     cause: Cause,
     extends: z.string().optional(),
+    /** For charityevals' own models: the build-cea template family the model follows. */
+    template: TemplateFamily.optional(),
     /** The charity this model is about (inherited by variants). */
     charity: z.string().optional(),
     /** Who made the model: an id in owners.json (inherited by variants). */
