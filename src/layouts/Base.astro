@@ -81,18 +81,14 @@ const nav = [
           <a href="/about">About</a>
           <a href="/method">Method</a>
           <a href="/privacy">Privacy</a>
-          <button type="button" data-consent-open>Privacy settings</button>
           <a href="/terms">Terms</a>
           <a href="/legal">Legal notice</a>
           <a href="https://github.com/heychristoph/charityevals">GitHub</a>
           <a href="mailto:hello@charityevals.org">hello@charityevals.org</a>
         </nav>
-        <p>
-          Models are re-implementations of published analyses, credited on each page. GiveWell and ACE have not reviewed or endorsed this site. Estimates are for research, not financial advice.
-        </p>
       </div>
     </footer>
-    <Consent />
+    <Consent ask={canonicalPath(Astro.url.pathname) !== "/privacy"} />
   </body>
 </html>
 
@@ -148,8 +144,15 @@ const nav = [
     gap: var(--s2) var(--s5);
     font-size: 14px;
   }
+  /* Like the header nav: quiet Slate links, Ink on hover, no underline. */
   .foot-links a {
     color: var(--ink-2);
+    text-decoration: none;
+  }
+  .foot-links a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: currentColor;
   }
   .foot {
     padding-top: var(--s5);
