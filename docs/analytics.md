@@ -60,7 +60,8 @@ fields at the end, never reorder.
 | `evaluator_tab` | evaluator id | `page` or `other` | |
 | `derivation_open` | | | depth (1 = a term of the bottom line) |
 | `table_open` | | | rows in the table (retired: the table became the tree) |
-| `tree_open` | | `lever` when following the biggest lever | depth opened (1 = the bottom line) |
+| `tree_open` | | `lever` or `spread` when following the biggest lever or uncertainty | depth opened (1 = the bottom line) |
+| `tree_metric` | `spread` or `lever`: what the tree's bars show | | |
 | `suggestion_sent` | | | |
 | `outbound_click` | host name | `source`, `spreadsheet`, `model-file`, `history`, `charity`, `resource-<type>` or `link` | |
 

@@ -62,7 +62,7 @@ a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over ot
 ## Sensitivity
 
 No Monte Carlo. Each result has a central value (all inputs at best), a joint low and joint high
-(each input at whichever end lowers or raises the result), and a one-at-a-time tornado. Flags:
+(each input at whichever end lowers or raises the result), a one-at-a-time sensitivity, and on model pages a breakdown of where the uncertainty comes from (default ranges by input type where none is published). Flags:
 joint spread over 100×, more than half the uncertainty from judgment, inputs without ranges and
 source older than 18 months.
 
