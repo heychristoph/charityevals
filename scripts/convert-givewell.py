@@ -403,6 +403,9 @@ for col, name in cols.items():
         b = Builder(col).build()
         ci_ranges(b)
         link_moral_weights(b.rows.values())
+        # Same discount linking as the base, so the patch comparison below sees equal formulas and the
+        # variant inherits the linked one instead of overriding it with a constant.
+        link_discount(list(b.rows.values()), {})
     except Exception as e:
         print(f"  skip {name} ({col}): {e}"); continue
     base_by_label = {}
