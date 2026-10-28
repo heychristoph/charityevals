@@ -1,0 +1,435 @@
+{
+  "id": "sociedade-vegetariana-brasileira",
+  "name": "Sociedade Vegetariana Brasileira",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "charity": "sociedade-vegetariana-brasileira",
+  "owner": "ace",
+  "summary": "Works with Brazilian schools and public institutions to replace some meat meals with plant-based ones. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet (1 program with SADs averted estimates: Institutional Meat reduction CE).",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Sociedade Vegetariana Brasileira review",
+    "url": "https://animalcharityevaluators.org/charity-review/sociedade-vegetariana-brasileira-svb/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1wIFA3Fo9bgXn9Fc7nTT7ia_WpRNQBcneDrH-bXUhPyk/edit",
+    "published": "2025-11-04",
+    "retrieved": "2026-10-26",
+    "license": "Unclear: check ACE's terms before republishing"
+  },
+  "sections": [
+    {
+      "id": "p1_institutional_meat_reduction_ce",
+      "title": "Program 1. Institutional meat reduction"
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line",
+      "explainer": "SADs averted per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model."
+    }
+  ],
+  "rows": [
+    {
+      "id": "p1_annual_meals_replaced_h5",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Annual meals replaced H5",
+      "value": 2474256,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Annual meals replaced!H5"
+      },
+      "explainer": "From ACE's spreadsheet, cell Annual meals replaced!H5."
+    },
+    {
+      "id": "p1_meals_replaced_across_all_institutions_in_2024",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Meals replaced across all institutions in 2024",
+      "formula": "p1_annual_meals_replaced_h5",
+      "expected": 2474256
+    },
+    {
+      "id": "p1_years_of_impact",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Years of impact",
+      "value": {
+        "low": 3.0,
+        "best": 5.477225575,
+        "high": 10.0
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Institutional Meat reduction CE!B7:D7"
+      },
+      "explainer": "ACE's best guess is the midpoint of its bounds; the range is ACE's."
+    },
+    {
+      "id": "p1_annual_discount",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Annual discount (1.4%)",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p1_years_of_impact) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p1_years_of_impact)",
+      "expected": 0.969582538
+    },
+    {
+      "id": "p1_of_expenses_on_this_program_that_will_come_from",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "% of expenses on this program that will come from future years",
+      "formula": "(6.25 * (p1_years_of_impact - 1)) / (100 + 6.25 * (p1_years_of_impact - 1))",
+      "expected": 0.2186441497
+    },
+    {
+      "id": "p1_meals_replaced_across_all_institutions_for_all_y",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Meals replaced across all institutions for all years with annual discount",
+      "formula": "p1_meals_replaced_across_all_institutions_in_2024 * p1_years_of_impact * p1_annual_discount * (1 - p1_of_expenses_on_this_program_that_will_come_from)",
+      "expected": 10266890.09
+    },
+    {
+      "id": "p1_animals_spared_per_meal_replaced",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Animals spared per meal replaced",
+      "value": 0.104,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Institutional Meat reduction CE!B14"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p1_sads_averted_per_meal_replaced",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "SADs averted per meal replaced",
+      "value": 0.084,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Institutional Meat reduction CE!B15"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p1_total_animals_spared_by_program_1",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Total animals spared by program 1",
+      "formula": "p1_meals_replaced_across_all_institutions_for_all_y * p1_animals_spared_per_meal_replaced",
+      "expected": 1067756.57
+    },
+    {
+      "id": "p1_total_sads_averted_by_program_1",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Total SADs averted by program 1",
+      "formula": "p1_meals_replaced_across_all_institutions_for_all_y * p1_sads_averted_per_meal_replaced",
+      "expected": 862418.768
+    },
+    {
+      "id": "p1_program_1_expenditures_total",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Program 1 expenditures total (USD)",
+      "formula": "110000 * (0.4 + 0.2)",
+      "expected": 66000
+    },
+    {
+      "id": "p1_program_1_expenditures_total_including_operation",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Program 1 expenditures total including operational costs (USD)",
+      "formula": "(582878 / 434812) * p1_program_1_expenditures_total",
+      "expected": 88474.8995
+    },
+    {
+      "id": "p1_meals_replaced",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Meals replaced/$",
+      "formula": "p1_meals_replaced_across_all_institutions_for_all_y / p1_program_1_expenditures_total_including_operation",
+      "expected": 116.0429698
+    },
+    {
+      "id": "p1_animals_spared",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "Animals spared/$",
+      "formula": "p1_total_animals_spared_by_program_1 / p1_program_1_expenditures_total_including_operation",
+      "expected": 12.06846886
+    },
+    {
+      "id": "p1_sads_averted",
+      "section": "p1_institutional_meat_reduction_ce",
+      "label": "SADs averted/$",
+      "formula": "p1_total_sads_averted_by_program_1 / p1_program_1_expenditures_total_including_operation",
+      "expected": 9.747609467
+    },
+    {
+      "id": "sads_total",
+      "section": "bottom",
+      "label": "SADs averted, all modelled programs",
+      "format": "integer",
+      "formula": "p1_sads_averted * p1_program_1_expenditures_total_including_operation"
+    },
+    {
+      "id": "cost_total",
+      "section": "bottom",
+      "label": "Spending on the modelled programs",
+      "format": "usd",
+      "formula": "p1_program_1_expenditures_total_including_operation"
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "bottom",
+      "label": "All modelled programs: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_total / cost_total"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "format": "number",
+      "formula": "sads_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "sads_per_donor_dollar",
+    "unit": "sad",
+    "label": "SADs averted per dollar you give"
+  },
+  "evaluator": {
+    "name": "ACE",
+    "assumptions": {
+      "count_salary_sacrifice": 0,
+      "full_credit": 0,
+      "discount_rate": 0.014
+    }
+  },
+  "resources": [
+    {
+      "title": "ACE charity review",
+      "url": "https://animalcharityevaluators.org/charity-review/sociedade-vegetariana-brasileira-svb/",
+      "type": "evaluation",
+      "note": "The full evaluation."
+    },
+    {
+      "title": "ACE’s cost-effectiveness spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1wIFA3Fo9bgXn9Fc7nTT7ia_WpRNQBcneDrH-bXUhPyk/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "See SVB’s Financial and Future Plans",
+      "url": "https://docs.google.com/spreadsheets/d/1_uZICEq98bhvG9DeZOFSwvPTdSv3o0jb8BJphvk8mh4/edit",
+      "type": "data"
+    },
+    {
+      "title": "Ambitious Impact’s SADs",
+      "url": "https://www.charityentrepreneurship.com/post/sads-suffering-adjusted-days-an-improved-animal-welfare-measurement-tool",
+      "type": "other"
+    },
+    {
+      "title": "Our World in Data (2023a)",
+      "url": "https://ourworldindata.org/grapher/cattle-livestock-count-heads",
+      "type": "data"
+    },
+    {
+      "title": "Our World in Data (2023b)",
+      "url": "https://ourworldindata.org/grapher/poultry-livestock-count",
+      "type": "data"
+    },
+    {
+      "title": "Our World in Data (2023c)",
+      "url": "https://ourworldindata.org/grapher/pig-livestock-count-heads",
+      "type": "data"
+    },
+    {
+      "title": "Fleck (2024)",
+      "url": "https://www.statista.com/chart/19122/biggest-exporters-of-beef/",
+      "type": "data"
+    },
+    {
+      "title": "Shahbandeh (2025)",
+      "url": "https://www.statista.com/statistics/751000/export-of-poultry-meat-leading-exporter/",
+      "type": "data"
+    },
+    {
+      "title": "Freedom House (2025)",
+      "url": "https://freedomhouse.org/country/brazil",
+      "type": "other"
+    },
+    {
+      "title": "Secretaria de comunicação social (2024)",
+      "url": "https://www.gov.br/secom/en/latest-news/2024/10/brazil-approves-2018food-on-the-plate2019-plan",
+      "type": "other"
+    },
+    {
+      "title": "Cattafesta & Salaroli (2024)",
+      "url": "https://doi.org/10.36311/jhgd.v34.15748",
+      "type": "study"
+    },
+    {
+      "title": "Family agriculture (2025)",
+      "url": "https://www.gov.br/planalto/en/international-agenda/cop30/cop30-will-include-food-sourced-from-family-farming",
+      "type": "other"
+    },
+    {
+      "title": "Fialho de Oliveira et al (2023)",
+      "url": "https://www.ibanet.org/plant-based-food-brazil",
+      "type": "other"
+    },
+    {
+      "title": "SVB (2025)",
+      "url": "https://svb.org.br/pesquisa-datafolha-revela-que-7-dos-brasileiros-se-consideram-veganos/",
+      "type": "charity"
+    },
+    {
+      "title": "Mildford & Kildal (2019)",
+      "url": "https://www.mdpi.com/2071-1050/11/10/2741",
+      "type": "other"
+    },
+    {
+      "title": "Marodin (2021)",
+      "url": "https://edepot.wur.nl/566903",
+      "type": "other"
+    },
+    {
+      "title": "SVB (2022)",
+      "url": "https://svb.org.br/2650-brazilians-reduce-meat-consumption-establishments-adapt-themselves-reveal-ipec-intelligence-in-research-and-consultant-in-portuguese/",
+      "type": "charity"
+    },
+    {
+      "title": "GFI (2018)",
+      "url": "https://gfi.org/blog/brazil-plant-based-market/",
+      "type": "other"
+    },
+    {
+      "title": "Flores & Bryant (2023)",
+      "url": "https://bryantresearch.co.uk/wp-content/uploads/2023/05/INSTITUTIONAL-CHANGE.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Big Food Dossier (2024)",
+      "url": "https://naoengulaessa.org.br/wp-content/uploads/2025/03/big-food-dossier-v2-summary.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Ferreira et al. (2023)",
+      "url": "https://www.scielo.br/j/csp/a/GwjkPvSRCnTG9cZj4K9vhFx/?lang=en",
+      "type": "other"
+    },
+    {
+      "title": "Key et al. (2021)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7613518/",
+      "type": "study"
+    },
+    {
+      "title": "Viroli et al. (2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10675717/",
+      "type": "study"
+    },
+    {
+      "title": "Suri & Ray (2023)",
+      "url": "https://doi.org/10.1177/09754253231193130",
+      "type": "study"
+    },
+    {
+      "title": "Sabaté & Soret (2014)",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0002916523048992",
+      "type": "study"
+    },
+    {
+      "title": "CONSEA (2023)",
+      "url": "https://www.digicomply.com/food-regulatory-bodies-standards-and-authorities/conselho-nacional-de-seguran%C3%A7a-alimentar-e-nutricional-consea",
+      "type": "other"
+    },
+    {
+      "title": "Santarelli et al. (2018)",
+      "url": "https://foodfoundation.org.uk/sites/default/files/2021-10/Learning-from-Brazilian-Food-and-Nutrition-Security-Policies_final_clean_rev_FF.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Maluf (2025)",
+      "url": "https://www.ids.ac.uk/opinions/consea-back-in-operation-again/",
+      "type": "other"
+    },
+    {
+      "title": "Verdelio (2023)",
+      "url": "https://agenciabrasil.ebc.com.br/en/politica/noticia/2023-02/government-reinstalls-national-council-food-security",
+      "type": "other"
+    },
+    {
+      "title": "VegFestUK (2024)",
+      "url": "https://www.vegfest.co.uk/2024/01/10/over-4000-people-making-significant-changes-after-visiting-a-vegfest-in-2023/",
+      "type": "other"
+    },
+    {
+      "title": "Faunalytics (2016)",
+      "url": "https://faunalytics.org/veg-fest-effectiveness-case-study-twin-cities/",
+      "type": "study"
+    },
+    {
+      "title": "Schyns & Schilling (2013)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1048984312000872",
+      "type": "study"
+    },
+    {
+      "title": "Waldman et al. (2012)",
+      "url": "https://journals.sagepub.com/doi/10.1177/0149206312460679",
+      "type": "study"
+    },
+    {
+      "title": "Gorski et al. (2018)",
+      "url": "https://www.researchgate.net/publication/329782573_'Nobody's_paying_me_to_cry'_The_causes_of_activist_burnout_in_United_States_animal_rights_activists",
+      "type": "study"
+    },
+    {
+      "title": "Harter et al. (2002",
+      "url": "https://psycnet.apa.org/record/2002-12397-006",
+      "type": "study"
+    },
+    {
+      "title": "https://www.scarletspark.org/",
+      "url": "https://www.scarletspark.org/",
+      "type": "other"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+---
+import HistoryPage from "../../../components/HistoryPage.astro";
+import { lib, rankable, primaryOf } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return rankable.filter((m) => primaryOf(lib, m.charity)?.id !== m.id).map((m) => ({ params: { charity: m.charity, model: m.id } }));
+}
+---
+
+<HistoryPage modelId={Astro.params.model!} />

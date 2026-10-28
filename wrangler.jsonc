@@ -1,13 +1,21 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  // A static site: no Worker script, Cloudflare serves the Astro build directly.
+  // A static site: Cloudflare serves the Astro build directly. The Worker only runs for /api/*, which
+  // is the "suggest a charity" form (worker/index.ts).
   "name": "charityevals",
+  "main": "worker/index.ts",
   "account_id": "7c6c4c53ba700e67460bb6724cd7108c",
   "compatibility_date": "2026-10-26",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
   },
+  // Suggestions are sent through Email Routing (free), which only delivers to verified destination
+  // addresses on the account. The recipient is the secret SUGGEST_TO (`wrangler secret put
+  // SUGGEST_TO`), the inbox hello@charityevals.org forwards to, so it isn't in this public repo.
+  "send_email": [{ "name": "SUGGESTIONS" }],
   "routes": [
     { "pattern": "charityevals.org", "custom_domain": true },
     { "pattern": "www.charityevals.org", "custom_domain": true }

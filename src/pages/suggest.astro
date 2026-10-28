@@ -1,0 +1,158 @@
+---
+// "Suggest a charity": posts to /api/suggest (worker/index.ts), which emails hello@charityevals.org.
+// Works without JavaScript (the Worker redirects back here with ?sent=1 or ?error=); with it, the
+// form submits in place.
+import Prose from "../layouts/Prose.astro";
+import { publisher } from "../lib/site";
+---
+
+<Prose title="Suggest a charity" active="" description="Tell us about a charity you'd like to see evaluated here.">
+  <p>
+    Know a charity that should be here? Tell us which one, and if you know of an evaluation or a cost-effectiveness
+    estimate for it, where to find it.
+  </p>
+
+  <p class="status ok" id="sent" hidden>Thanks, that's sent. We read every suggestion.</p>
+  <p class="status err" id="error" role="alert" hidden></p>
+
+  <form class="suggest" method="post" action="/api/suggest" id="suggest-form">
+    <label>
+      <span>Charity</span>
+      <input name="charity" required minlength="2" maxlength="200" autocomplete="off" />
+    </label>
+    <label>
+      <span>Website <em>optional</em></span>
+      <input name="website" type="url" maxlength="300" placeholder="https://" />
+    </label>
+    <label>
+      <span>Why, or where to find an evaluation <em>optional</em></span>
+      <textarea name="why" rows="5" maxlength="4000"></textarea>
+    </label>
+    <label>
+      <span>Your email <em>optional, only to reply</em></span>
+      <input name="email" type="email" maxlength="200" autocomplete="email" />
+    </label>
+    <!-- Spam traps: a field people don't see, and the time the form was opened. -->
+    <label class="trap" aria-hidden="true">Company website <input name="company_url" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="started" value="" />
+    <button type="submit" class="send">Send suggestion</button>
+  </form>
+
+  <p class="small muted">
+    Your suggestion is emailed to {publisher.email}; nothing is stored on this site. You can also write to that address directly.
+  </p>
+</Prose>
+
+<script>
+  const form = document.getElementById("suggest-form") as HTMLFormElement;
+  const sent = document.getElementById("sent")!;
+  const error = document.getElementById("error")!;
+  const started = form.querySelector<HTMLInputElement>('input[name="started"]')!;
+  started.value = String(Date.now());
+
+  const params = new URLSearchParams(location.search);
+  if (params.has("sent")) { sent.hidden = false; form.hidden = true; }
+  if (params.get("error")) { error.textContent = params.get("error"); error.hidden = false; }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const button = form.querySelector("button")!;
+    button.disabled = true;
+    button.textContent = "Sending…";
+    error.hidden = true;
+    try {
+      const r = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+      const body = (await r.json()) as { ok: boolean; error?: string };
+      if (!body.ok) throw new Error(body.error);
+      form.hidden = true;
+      sent.hidden = false;
+    } catch (err) {
+      error.textContent = (err as Error).message || "It didn't send. Please email hello@charityevals.org instead.";
+      error.hidden = false;
+      button.disabled = false;
+      button.textContent = "Send suggestion";
+    }
+  });
+</script>
+
+<style>
+  .suggest {
+    display: grid;
+    gap: var(--s4);
+    max-width: 560px;
+    margin: var(--s5) 0;
+  }
+  label {
+    display: grid;
+    gap: 6px;
+  }
+  label span {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  label em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--ink-3);
+    margin-left: 6px;
+  }
+  input,
+  textarea {
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+    padding: 9px 11px;
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 1px;
+    border-color: var(--blue);
+  }
+  .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  /* The system has no filled buttons: the action is a link-styled button in Ledger Blue. */
+  .send {
+    justify-self: start;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--blue);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent);
+    text-underline-offset: 0.18em;
+  }
+  .send:hover {
+    color: var(--blue-ink);
+    text-decoration-color: currentColor;
+  }
+  .send:disabled {
+    color: var(--ink-3);
+    cursor: default;
+  }
+  .status {
+    padding: var(--s3) var(--s4);
+    border-radius: 3px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+  }
+  .status.err {
+    color: var(--warn);
+  }
+</style>

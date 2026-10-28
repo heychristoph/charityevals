@@ -77,6 +77,20 @@
       "explainer": "Suffering-adjusted days (SADs), from Ambitious Impact, count days of animal suffering weighted by pain intensity and by a species' welfare range relative to humans. ACE uses them.\n\nWe read one SAD as one human-equivalent day of disabling-level pain and give that day a disability weight of 0.4 (0.1–1.0), so one SAD is 0.4 / 365 DALY. AIM doesn't publish an official SAD-to-DALY rate, so this is the least grounded number on the site and often decides whether animal charities rank above or below global health."
     },
     {
+      "id": "uov_per_wellby",
+      "section": "cross-cause",
+      "label": "Units of value per WELLBY",
+      "unit": "units of value / WELLBY",
+      "format": "number",
+      "value": {
+        "low": 0.4,
+        "best": 1.15,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Bridge between the Happier Lives Institute's wellbeing measure and GiveWell's units. HLI estimates GiveDirectly produces 7.55 WELLBYs per $1,000; GiveWell's model gives 8.7 units of value per $1,000. Setting both equal gives about 1.15 units of value per WELLBY, so GiveDirectly scores the same either way.\n\nThat calibration assumes the two evaluators measure GiveDirectly's good equally well, which is contested: GiveWell has been sceptical of some WELLBY estimates, HLI of some income-based ones. The wide range is ours."
+    },
+    {
       "id": "animal_moral_weight",
       "section": "cross-cause",
       "label": "Extra weight on animal suffering, beyond welfare ranges",
@@ -110,23 +124,22 @@
       "explainer": "GiveWell defines one unit of value as doubling one person's consumption for one year. Doubling raises ln(consumption) by ln 2, so one unit of ln(consumption) is worth 1/ln 2 ≈ 1.44 units.\n\nThe low and high ends are the ±25% uniform range GiveWell itself uses in its Monte Carlo inputs. Moving this moves the value of consumption gains relative to deaths averted."
     },
     {
-      "id": "uov_per_under5_death",
+      "id": "life_value_multiplier",
       "section": "moral-weights",
-      "label": "Value of averting the death of a child under five",
-      "unit": "units of value",
-      "format": "number",
+      "label": "Value of saving a life, relative to GiveWell's moral weights",
+      "unit": "×",
+      "format": "multiple",
       "value": {
-        "low": 70,
-        "best": 116,
-        "high": 160
+        "low": 0.6,
+        "best": 1,
+        "high": 1.4
       },
       "kind": "judgment",
       "source": {
-        "title": "GiveWell GiveDirectly CEA",
-        "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit?gid=1755045987",
-        "cell": "New CEA!B52"
+        "title": "GiveWell moral weights",
+        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
       },
-      "explainer": "GiveWell's moral weight: averting one under-five death is worth as much as doubling consumption for 116 person-years. It comes from a mix of donor surveys, a survey of people in Ghana and Kenya, and staff judgment.\n\nGiveWell doesn't vary this in its own uncertainty analysis. The 70–160 range is ours, to show how much the ranking leans on it."
+      "explainer": "GiveWell values averting a child's death at about 116 times the value of doubling one person's consumption for a year, with similar weights for other ages. They come from donor surveys, a survey of people in Ghana and Kenya, and staff judgment.\n\nThis multiplies all of GiveWell's life values at once. At 1 you use GiveWell's weights; above 1 saving lives counts for more relative to raising incomes, below 1 for less. The 0.6–1.4 range is ours."
     },
     {
       "id": "discount_rate",
@@ -155,6 +168,33 @@
       "short": "SADs",
       "to_common": "$daly_per_sad * $uov_per_daly * $animal_moral_weight",
       "explainer": "Days of animal suffering averted, weighted by pain intensity and species welfare range (Ambitious Impact)."
+    },
+    "people_reached": {
+      "label": "people reached",
+      "short": "people",
+      "explainer": "People who saw or took part in a program. Says nothing about changes in behaviour, so it isn't converted into good done."
+    },
+    "paper": {
+      "label": "peer-reviewed papers",
+      "short": "papers",
+      "explainer": "Peer-reviewed research papers produced. Research value depends on what it enables later, which nobody has quantified for this field."
+    },
+    "wellby": {
+      "label": "wellbeing-adjusted life years",
+      "short": "WELLBYs",
+      "to_common": "$uov_per_wellby",
+      "explainer": "One point of life satisfaction (0–10) for one person for one year. Used by the Happier Lives Institute."
+    },
+    "animals_spared": {
+      "label": "animals spared",
+      "short": "animals",
+      "explainer": "Farmed animals spared from life in factory farming, ACE's 2014–2017 headline unit. It counts animals of every species alike and isn't weighted by suffering, so it isn't converted into good done."
+    },
+    "daly": {
+      "label": "DALYs averted",
+      "short": "DALYs",
+      "to_common": "$uov_per_daly",
+      "explainer": "Disability-adjusted life years averted. Converted into units of value with the shared DALY exchange rate."
     }
   },
   "common": {

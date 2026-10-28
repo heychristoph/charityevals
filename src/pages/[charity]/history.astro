@@ -1,0 +1,10 @@
+---
+import HistoryPage from "../../components/HistoryPage.astro";
+import { lib, primaryOf } from "../../lib/data";
+
+export function getStaticPaths() {
+  return [...lib.charities.values()].filter((c) => primaryOf(lib, c.id)).map((c) => ({ params: { charity: c.id } }));
+}
+---
+
+<HistoryPage modelId={primaryOf(lib, Astro.params.charity!)!.id} />

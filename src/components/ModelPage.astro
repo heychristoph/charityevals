@@ -1,0 +1,374 @@
+---
+// One model's page. /<charity> shows the charity's main model; /<charity>/<model> any other
+// (another evaluator's model, or a country variant).
+import Base from "../layouts/Base.astro";
+import ModelView from "./ModelView.tsx";
+import AssumptionsPanel from "./AssumptionsPanel.tsx";
+import VariantList from "./VariantList.tsx";
+import { lib, rankable, modelUrl, historyUrl, bulkRaw, modelFile } from "../lib/data";
+import { modelsOf, currentModelsOf } from "../engine/model";
+
+interface Props {
+  modelId: string;
+}
+const model = lib.models.get(Astro.props.modelId)!;
+const charity = lib.charities.get(model.charity)!;
+const owner = lib.owners.get(model.owner)!;
+const siblings = modelsOf(lib, charity.id);
+// One tab per evaluator (their current model); every model, current or older, in the list below.
+const current = currentModelsOf(lib, charity.id);
+// The derivation's evaluator toggle: each evaluator's current model, with this page's model standing in
+// for its own evaluator.
+const choices = (model.kind === "variant" ? [] : current)
+  .map((m) => (m.owner === model.owner ? model : m))
+  .map((m) => ({ id: m.id, owner: m.owner, bulk: !!m.bulk }));
+const file = modelFile(model);
+const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
+// Variants share their parent's write-up unless they have their own.
+const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
+const Writeup = writeupId ? writeups[`../../writeups/${writeupId}.md`].Content : undefined;
+const parent = model.extends ? lib.models.get(model.extends) : undefined;
+const root = parent && model.kind === "variant" ? parent : model;
+const family = [root, ...rankable.filter((m) => m.extends === root.id && m.kind === "variant")];
+const RES_GROUPS = [
+  ["evaluation", "Evaluations"],
+  ["model", "Models and spreadsheets"],
+  ["study", "Studies and research"],
+  ["data", "Data and documents"],
+  ["charity", "From the charity"],
+  ["other", "Other sources"],
+] as const;
+const allResources = [...(charity.resources ?? []), ...(model.resources ?? [])].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
+const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
+const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
+// Bulk imports carry a generated summary about the import; the charity's own one-liner reads better.
+// One sentence: the charity's own line, else the model summary's first sentence (the rest is under
+// "About this model").
+const firstSentence = (s?: string) => s?.match(/^.*?[.!?](\s|$)/)?.[0].trim() ?? s;
+const dek = charity.summary ?? firstSentence(model.summary);
+const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
+---
+
+<Base title={siblings.length > 1 || model.kind === "variant" ? `${model.name} (${owner.short})` : charity.name} description={model.summary ?? charity.summary} active="rankings">
+  <div class="page layout" style={`--cause: var(--cause-${model.cause})`}>
+    <div class="main">
+      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
+      <header class="m-header">
+        <h1>{charity.name}</h1>
+        {current.length > 1 && (
+          <nav class="owners" aria-label="Evaluators of this charity">
+            <span class="small muted">Models:</span>
+            {current.map((m) => {
+              const o = lib.owners.get(m.owner)!;
+              const here = m.owner === model.owner;
+              return <a href={modelUrl(lib, m)} aria-current={here ? "page" : undefined} class:list={["owner-tab", { here }]}>{o.name}</a>;
+            })}
+          </nav>
+        )}
+        {dek && <p class="dek">{dek}</p>}
+        <p class="m-source small">
+          <strong>{model.name}</strong>
+          <span class="muted"> · by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}</span>
+          {model.source && <> · <a href={model.source.url}>source</a></>}
+          {model.source?.sheet && <> · <a href={model.source.sheet}>spreadsheet</a></>}
+          {" · "}<a href={historyUrl(lib, model)}>history</a>
+        </p>
+        {charity.donate && (
+          <div class="donate">
+            <a class="donate-button" href={charity.donate} rel="noopener">Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
+            <span class="small muted">{charity.donate_via ? `Through ${charity.donate_via}'s form. ` : ""}We take nothing and aren't paid for listings.</span>
+          </div>
+        )}
+        <details class="m-about small">
+          <summary>About this model</summary>
+        <dl class="m-meta">
+          {charity.website && (
+            <div><dt>Organisation</dt><dd><a href={charity.website}>{charity.name}</a></dd></div>
+          )}
+          {model.source && (
+            <div>
+              <dt>Based on</dt>
+              <dd>
+                <a href={model.source.url}>{model.source.publisher}, {model.source.title}</a>
+                {model.source.sheet && <> (<a href={model.source.sheet}>spreadsheet</a>)</>}
+              </dd>
+            </div>
+          )}
+          {model.source?.published && <div><dt>Published</dt><dd>{fmtDate(model.source.published)}, retrieved {fmtDate(model.source.retrieved)}</dd></div>}
+          {model.source?.license && <div><dt>Licence</dt><dd>{model.source.license}</dd></div>}
+          {parent && <div><dt>Extends</dt><dd><a href={modelUrl(lib, parent)}>{parent.name}</a>: inherits every row and overrides a few</dd></div>}
+
+          <div>
+            <dt>Model file</dt>
+            <dd><a href={`https://github.com/heychristoph/charityevals/blob/main/${file}`}>{model.id}.json</a> · <a href={historyUrl(lib, model)}>change history</a></dd>
+          </div>
+        </dl>
+          {model.summary && dek !== model.summary && <p>{model.summary}</p>}
+        </details>
+      </header>
+      {family.length > 1 && (
+        <details class="family" open={family.length <= 8}>
+          <summary>{family.length} countries and programs in {owner.name}'s model</summary>
+          <p class="small muted">Same model, different inputs. × GiveDirectly, on your assumptions.</p>
+          <VariantList client:load ids={family.map((m) => m.id)} current={model.id} />
+        </details>
+      )}
+      {siblings.length > 1 && model.kind !== "variant" && (
+        <details class="family" open={siblings.length <= 6}>
+          <summary>All {siblings.length} models of {charity.name}</summary>
+          <p class="small muted">Newest first per evaluator; the rankings use the newest. × GiveDirectly, on your assumptions.</p>
+          <VariantList client:load ids={siblings.map((m) => m.id)} current={model.id} dated />
+        </details>
+      )}
+      <ModelView client:load id={model.id} raw={model.bulk ? bulkRaw(model.id) : undefined} choices={choices}>
+        {Writeup && (
+          <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            <div class="writeup-body"><Writeup /></div>
+            <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
+          </section>
+        )}
+      </ModelView>
+      {resources.length > 0 && (
+        <details class="resources">
+          <summary><h2 id="resources-title">Evidence and sources <span class="muted num">{allResources.length}</span></h2></summary>
+          <p class="muted small">Everything the evaluation links to, to check it yourself.</p>
+          {resources.map((g) => (
+            <div class="res-group">
+              <h3>{g.title} <span class="muted small num">{g.items.length}</span></h3>
+              <ul>
+                {g.items.slice(0, 8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a>{r.note && <span class="muted small"> · {r.note}</span>}</li>)}
+              </ul>
+              {g.items.length > 8 && (
+                <details>
+                  <summary class="small">Show {g.items.length - 8} more</summary>
+                  <ul>{g.items.slice(8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a></li>)}</ul>
+                </details>
+              )}
+            </div>
+          ))}
+        </details>
+      )}
+    </div>
+    <aside class="side" aria-label="Assumptions">
+      <AssumptionsPanel client:load />
+    </aside>
+  </div>
+</Base>
+
+<script>
+  // Long write-ups show their first section; the rest opens on request. Without JavaScript, all of it shows.
+  for (const sec of document.querySelectorAll<HTMLElement>(".writeup[data-collapsible]")) {
+    const body = sec.querySelector<HTMLElement>(".writeup-body")!;
+    const more = sec.querySelector<HTMLButtonElement>(".writeup-more")!;
+    if (body.scrollHeight < 520) continue;
+    sec.classList.add("collapsed");
+    more.hidden = false;
+    more.addEventListener("click", () => {
+      sec.classList.remove("collapsed");
+      more.hidden = true;
+    });
+  }
+</script>
+
+<style>
+  .writeup.collapsed .writeup-body {
+    max-height: 340px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  }
+  .writeup-more {
+    margin-top: var(--s2);
+  }
+  .m-source {
+    margin: var(--s2) 0 0;
+    color: var(--ink-2);
+  }
+  .m-about {
+    margin-top: var(--s2);
+  }
+  .m-about summary,
+  .resources summary {
+    cursor: pointer;
+    color: var(--blue);
+  }
+  .m-about summary:hover {
+    color: var(--blue-ink);
+  }
+  .resources summary h2 {
+    display: inline;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--s7);
+    align-items: start;
+    padding-top: var(--s5);
+  }
+  .writeup {
+    max-width: var(--measure);
+    padding: var(--s5) 0 var(--s2);
+    border-top: 1px solid var(--rule);
+  }
+  .writeup-title {
+    font-size: 26px;
+    margin-bottom: var(--s3);
+  }
+  .writeup :global(h2) {
+    font-size: 20px;
+    margin: var(--s5) 0 var(--s2);
+  }
+  .writeup :global(p),
+  .writeup :global(ul),
+  .writeup :global(ol) {
+    margin: 0 0 var(--s3);
+  }
+  .writeup :global(ul),
+  .writeup :global(ol) {
+    padding-left: 1.3em;
+  }
+  .writeup :global(li + li) {
+    margin-top: var(--s1);
+  }
+  .crumbs {
+    color: var(--ink-2);
+    margin-bottom: var(--s3);
+  }
+  .m-header {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .dek {
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: var(--measure);
+  }
+  .resources {
+    margin-top: var(--s7);
+    padding-top: var(--s5);
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: var(--s4);
+  }
+  .res-group h3 {
+    font-size: 17px;
+    margin-bottom: var(--s2);
+  }
+  .res-group ul {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 3px;
+    font-size: 15px;
+  }
+  .res-group a {
+    overflow-wrap: anywhere;
+  }
+  .res-group details summary {
+    cursor: pointer;
+    color: var(--blue);
+    margin: var(--s2) 0;
+  }
+  .owners {
+    display: flex;
+    gap: var(--s2);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .owner-tab {
+    padding: 4px 12px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .owner-tab.here {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--paper);
+  }
+  .model-name {
+    font-size: 16px;
+  }
+  .family {
+    margin: calc(var(--s3) * -1) 0 var(--s6);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s3) var(--s4);
+  }
+  .family summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .family :global(.variant-list) {
+    list-style: none;
+    padding: 0;
+    margin: var(--s2) 0 0;
+    columns: 2 260px;
+    column-gap: var(--s6);
+  }
+  .family :global(.variant-list li) {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s3);
+    padding: 3px 0;
+    border-bottom: 1px solid var(--rule);
+    break-inside: avoid;
+  }
+  .family :global(.variant-list li a) {
+    flex: 1;
+  }
+  .family :global(.variant-list li.current a) {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .donate {
+    display: flex;
+    gap: var(--s2) var(--s4);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .donate-button {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--paper);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: var(--radius);
+  }
+  .donate-button:hover {
+    background: var(--blue-ink);
+    color: var(--paper);
+  }
+  .m-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--s1) var(--s4);
+    margin: var(--s2) 0 0;
+  }
+  .m-meta div {
+    display: contents;
+  }
+  .m-meta dt {
+    color: var(--ink-2);
+  }
+  .m-meta dd {
+    margin: 0;
+  }
+  @media (max-width: 1000px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .m-meta {
+      grid-template-columns: 1fr;
+    }
+    .m-meta dd {
+      margin-bottom: var(--s2);
+    }
+  }
+</style>

@@ -1,0 +1,1603 @@
+{
+ "id": "alima-mirriah-niger-operational",
+ "name": "Simplified Mirriah Niger ALIMA operational CEA",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "alima",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"Simplified Mirriah Niger ALIMA operational CEA\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "Simplified Mirriah Niger ALIMA operational CEA (public)",
+  "url": "https://www.givewell.org/research/incubation-grants/ALIMA-malnutrition-Niger-June-2021",
+  "sheet": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+  "published": "2020-12-30",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0,
+   "life_value_multiplier": 1
+  }
+ },
+ "resources": [
+  {
+   "title": "Simplified Mirriah Niger ALIMA operational CEA (public)",
+   "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (ALIMA malnutrition Niger June 2021)",
+   "url": "https://www.givewell.org/research/incubation-grants/ALIMA-malnutrition-Niger-June-2021",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "simplified_cea",
+   "title": "Simplified CEA"
+  },
+  {
+   "id": "cea",
+   "title": "CEA"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "number_of_mam_cases_treated_alima",
+   "label": "Number of MAM cases treated - ALIMA",
+   "section": "cea",
+   "formula": "(1 - 0.4) * 2466",
+   "expected": 1479.6
+  },
+  {
+   "id": "number_of_children_treated_mam_alima_supported_treatment",
+   "label": "Number of children treated: MAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_mam_cases_treated_alima",
+   "expected": 1479.6
+  },
+  {
+   "id": "annual_mortality_rate_among_well_nourished_children",
+   "label": "Annual mortality rate among well-nourished children",
+   "section": "cea",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B35"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "hazard_ratio_for_mam_compared_to_well_nourished_children_fro",
+   "label": "Hazard ratio for MAM compared to well-nourished children from historical studies",
+   "section": "cea",
+   "value": 3.38,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B37"
+   }
+  },
+  {
+   "id": "adjustment_to_sam_mam_hazard_ratio_to_account_for_measured_s",
+   "label": "Adjustment to SAM / MAM hazard ratio to account for measured socioeconomic confounding",
+   "section": "cea",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B38"
+   }
+  },
+  {
+   "id": "adjustment_to_sam_mam_hazard_ratio_to_account_for_unmeasured",
+   "label": "Adjustment to SAM / MAM hazard ratio to account for unmeasured socioeconomic confounding",
+   "section": "cea",
+   "value": 0.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B39"
+   }
+  },
+  {
+   "id": "adjustment_to_sam_mam_hazard_ratio_to_account_for_larger_dec",
+   "label": "Adjustment to SAM / MAM hazard ratio to account for larger decreases in mortality among non-malnourished population",
+   "section": "cea",
+   "value": 1.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B41"
+   }
+  },
+  {
+   "id": "adjusted_hazard_ratio_for_mam_compared_to_well_nourished_chi",
+   "label": "Adjusted hazard ratio for MAM compared to well-nourished children",
+   "section": "cea",
+   "formula": "hazard_ratio_for_mam_compared_to_well_nourished_children_fro * adjustment_to_sam_mam_hazard_ratio_to_account_for_measured_s * adjustment_to_sam_mam_hazard_ratio_to_account_for_unmeasured * adjustment_to_sam_mam_hazard_ratio_to_account_for_larger_dec",
+   "expected": 2.21221
+  },
+  {
+   "id": "annual_percent_mortality_of_children_with_mam_no_interventio",
+   "label": "Annual percent mortality of children with MAM; no intervention",
+   "section": "cea",
+   "formula": "annual_mortality_rate_among_well_nourished_children * adjusted_hazard_ratio_for_mam_compared_to_well_nourished_chi",
+   "expected": 0.0442442,
+   "format": "percent"
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_mam_alima_support",
+   "label": "Baseline probability of death (no treatment): MAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_percent_mortality_of_children_with_mam_no_interventio",
+   "expected": 0.0442442,
+   "format": "percent"
+  },
+  {
+   "id": "baseline_nonmalnourished_alima_supported_treatment",
+   "label": "Baseline - nonmalnourished (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_mortality_rate_among_well_nourished_children",
+   "expected": 0.02,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_treated_population_discharged_as_recovered",
+   "label": "Percent of treated population discharged as recovered",
+   "section": "cea",
+   "value": 0.891,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B56"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_mam",
+   "label": "Efficacy of treatment: MAM",
+   "section": "simplified_cea",
+   "formula": "percent_of_treated_population_discharged_as_recovered",
+   "expected": 0.891,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_mam_alima_supported_treatment",
+   "label": "Efficacy of treatment: MAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_mam_alima_supported_treatment * (baseline_probability_of_death_no_treatment_mam_alima_support - baseline_nonmalnourished_alima_supported_treatment) * efficacy_of_treatment_mam",
+   "expected": 31.96170102
+  },
+  {
+   "id": "total_number_of_sam_cases_treated_alima",
+   "label": "Total number of SAM cases treated - ALIMA",
+   "section": "cea",
+   "formula": "8937 - number_of_mam_cases_treated_alima",
+   "expected": 7457.4
+  },
+  {
+   "id": "of_sam_cases_requiring_inpatient_treatment",
+   "label": "Of SAM cases, % requiring inpatient treatment",
+   "section": "cea",
+   "value": 0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B6"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "number_of_uncomplicated_sam_cases_treated_alima",
+   "label": "Number of uncomplicated SAM cases treated - ALIMA",
+   "section": "cea",
+   "formula": "total_number_of_sam_cases_treated_alima * (1 - of_sam_cases_requiring_inpatient_treatment)",
+   "expected": 6338.79
+  },
+  {
+   "id": "number_of_children_treated_uncomplicated_sam_alima_supported",
+   "label": "Number of children treated: Uncomplicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_uncomplicated_sam_cases_treated_alima",
+   "expected": 6338.79
+  },
+  {
+   "id": "hazard_ratio_for_sam_compared_to_well_nourished_children_fro",
+   "label": "Hazard ratio for SAM compared to well-nourished children from historical studies",
+   "section": "cea",
+   "value": 11.63,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B36"
+   }
+  },
+  {
+   "id": "adjustment_to_sam_hazard_ratio_to_account_for_elevated_morta",
+   "label": "Adjustment to SAM hazard ratio to account for elevated mortality in baseline complicated SAM cases",
+   "section": "cea",
+   "formula": "1 - 0.093",
+   "expected": 0.907
+  },
+  {
+   "id": "adjusted_hazard_ratio_for_sam_compared_to_well_nourished_chi",
+   "label": "Adjusted hazard ratio for SAM compared to well-nourished children",
+   "section": "cea",
+   "formula": "hazard_ratio_for_sam_compared_to_well_nourished_children_fro * adjustment_to_sam_mam_hazard_ratio_to_account_for_measured_s * adjustment_to_sam_mam_hazard_ratio_to_account_for_unmeasured * adjustment_to_sam_hazard_ratio_to_account_for_elevated_morta * adjustment_to_sam_mam_hazard_ratio_to_account_for_larger_dec",
+   "expected": 6.903934345
+  },
+  {
+   "id": "annual_percent_mortality_of_children_with_uncomplicated_sam",
+   "label": "Annual percent mortality of children with uncomplicated SAM; no intervention",
+   "section": "cea",
+   "formula": "adjusted_hazard_ratio_for_sam_compared_to_well_nourished_chi * annual_mortality_rate_among_well_nourished_children",
+   "expected": 0.1380786869,
+   "format": "percent"
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_uncomplicated_sam",
+   "label": "Baseline probability of death (no treatment): Uncomplicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_percent_mortality_of_children_with_uncomplicated_sam",
+   "expected": 0.1380786869,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_treated_population_discharged_as_recovered_2",
+   "label": "Percent of treated population discharged as recovered",
+   "section": "cea",
+   "value": 0.929,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B52"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_uncomplicated_sam_alima_supported_trea_2",
+   "label": "Efficacy of treatment: Uncomplicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "percent_of_treated_population_discharged_as_recovered_2",
+   "expected": 0.929,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_uncomplicated_sam_alima_supported_trea",
+   "label": "Efficacy of treatment: Uncomplicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_uncomplicated_sam_alima_supported * (baseline_probability_of_death_no_treatment_uncomplicated_sam - baseline_nonmalnourished_alima_supported_treatment) * efficacy_of_treatment_uncomplicated_sam_alima_supported_trea_2",
+   "expected": 695.3342038
+  },
+  {
+   "id": "number_of_complicated_sam_cases_treated_alima",
+   "label": "Number of complicated SAM cases treated - ALIMA",
+   "section": "cea",
+   "formula": "total_number_of_sam_cases_treated_alima * of_sam_cases_requiring_inpatient_treatment",
+   "expected": 1118.61
+  },
+  {
+   "id": "number_of_children_treated_complicated_sam_alima_supported_t",
+   "label": "Number of children treated: Complicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_complicated_sam_cases_treated_alima",
+   "expected": 1118.61
+  },
+  {
+   "id": "mortality_rates_untreated_complicated_sam",
+   "label": "Mortality rates, untreated complicated SAM",
+   "section": "cea",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B62"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_complicated_sam_a",
+   "label": "Baseline probability of death (no treatment): Complicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "mortality_rates_untreated_complicated_sam",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "mortality_rates_treated_complicated_sam_alima_support",
+   "label": "Mortality rates, treated complicated SAM - ALIMA support",
+   "section": "cea",
+   "formula": "0.063",
+   "expected": 0.063,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_complicated_sam_alima_supported_treatm_2",
+   "label": "Efficacy of treatment: Complicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "1 - mortality_rates_treated_complicated_sam_alima_support / mortality_rates_untreated_complicated_sam",
+   "expected": 0.79,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_complicated_sam_alima_supported_treatm",
+   "label": "Efficacy of treatment: Complicated SAM (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_complicated_sam_alima_supported_t * baseline_probability_of_death_no_treatment_complicated_sam_a * efficacy_of_treatment_complicated_sam_alima_supported_treatm_2",
+   "expected": 265.11057
+  },
+  {
+   "id": "efficacy_of_treatment_total_alima_supported_treatment",
+   "label": "Efficacy of treatment: Total (ALIMA-supported treatment)",
+   "section": "simplified_cea",
+   "formula": "sum(efficacy_of_treatment_mam_alima_supported_treatment, efficacy_of_treatment_uncomplicated_sam_alima_supported_trea, efficacy_of_treatment_complicated_sam_alima_supported_treatm)",
+   "expected": 992.4064748
+  },
+  {
+   "id": "proportion_of_uncomplicated_mam_population_treated_with_gove",
+   "label": "Proportion of uncomplicated MAM population treated with government-only services",
+   "section": "cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B15"
+   }
+  },
+  {
+   "id": "number_of_mam_cases_treated_government_only",
+   "label": "Number of MAM cases treated - Government only",
+   "section": "cea",
+   "formula": "number_of_mam_cases_treated_alima * proportion_of_uncomplicated_mam_population_treated_with_gove",
+   "expected": 0.0
+  },
+  {
+   "id": "number_of_children_treated_mam_government_only_treatment",
+   "label": "Number of children treated: MAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_mam_cases_treated_government_only",
+   "expected": 0.0
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_mam_government_on",
+   "label": "Baseline probability of death (no treatment): MAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_percent_mortality_of_children_with_mam_no_interventio",
+   "expected": 0.0442442,
+   "format": "percent"
+  },
+  {
+   "id": "baseline_nonmalnourished_government_only_treatment",
+   "label": "Baseline - nonmalnourished (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_mortality_rate_among_well_nourished_children",
+   "expected": 0.02,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_mam_government_only_treatment",
+   "label": "Efficacy of treatment: MAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_mam_government_only_treatment * (baseline_probability_of_death_no_treatment_mam_government_on - baseline_nonmalnourished_government_only_treatment) * 0",
+   "expected": 0.0
+  },
+  {
+   "id": "proportion_of_uncomplicated_sam_population_treated_with_gove",
+   "label": "Proportion of uncomplicated SAM population treated with government-only services",
+   "section": "cea",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B16"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "number_of_initial_uncomplicated_sam_cases_treated_government",
+   "label": "Number of initial uncomplicated SAM cases treated - government only",
+   "section": "cea",
+   "formula": "number_of_uncomplicated_sam_cases_treated_alima * proportion_of_uncomplicated_sam_population_treated_with_gove",
+   "expected": 3169.395
+  },
+  {
+   "id": "number_of_children_treated_uncomplicated_sam_government_only",
+   "label": "Number of children treated: Uncomplicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_initial_uncomplicated_sam_cases_treated_government",
+   "expected": 3169.395
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_uncomplicated_sam_2",
+   "label": "Baseline probability of death (no treatment): Uncomplicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "annual_percent_mortality_of_children_with_uncomplicated_sam",
+   "expected": 0.1380786869,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_treated_population_discharged_as_recovered_3",
+   "label": "Percent of treated population discharged as recovered",
+   "section": "cea",
+   "formula": "percent_of_treated_population_discharged_as_recovered_2 * 2 / 3",
+   "expected": 0.6193333333,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_uncomplicated_sam_government_only_trea_2",
+   "label": "Efficacy of treatment: Uncomplicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "percent_of_treated_population_discharged_as_recovered_3",
+   "expected": 0.6193333333,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_uncomplicated_sam_government_only_trea",
+   "label": "Efficacy of treatment: Uncomplicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_uncomplicated_sam_government_only * (baseline_probability_of_death_no_treatment_uncomplicated_sam_2 - baseline_nonmalnourished_government_only_treatment) * efficacy_of_treatment_uncomplicated_sam_government_only_trea_2",
+   "expected": 231.7780679
+  },
+  {
+   "id": "proportion_of_complicated_sam_population_treated_with_govern",
+   "label": "Proportion of complicated SAM population treated with government-only CMAM services compared to ALIMA-supported",
+   "section": "cea",
+   "value": 0.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B17"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "number_of_initial_complicated_sam_cases_treated_government_o",
+   "label": "Number of initial complicated SAM cases treated - government only",
+   "section": "cea",
+   "formula": "proportion_of_complicated_sam_population_treated_with_govern * number_of_complicated_sam_cases_treated_alima",
+   "expected": 783.027
+  },
+  {
+   "id": "number_of_children_treated_complicated_sam_government_only_t",
+   "label": "Number of children treated: Complicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_initial_complicated_sam_cases_treated_government_o",
+   "expected": 783.027
+  },
+  {
+   "id": "baseline_probability_of_death_no_treatment_complicated_sam_g",
+   "label": "Baseline probability of death (no treatment): Complicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "mortality_rates_untreated_complicated_sam",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "mortality_rates_treated_complicated_sam_government_only",
+   "label": "Mortality rates, treated complicated SAM - government only",
+   "section": "cea",
+   "formula": "mortality_rates_untreated_complicated_sam - (mortality_rates_untreated_complicated_sam - mortality_rates_treated_complicated_sam_alima_support) * 0.5",
+   "expected": 0.1815,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_complicated_sam_government_only_treatm_2",
+   "label": "Efficacy of treatment: Complicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "1 - mortality_rates_treated_complicated_sam_government_only / mortality_rates_untreated_complicated_sam",
+   "expected": 0.395,
+   "format": "percent"
+  },
+  {
+   "id": "efficacy_of_treatment_complicated_sam_government_only_treatm",
+   "label": "Efficacy of treatment: Complicated SAM (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "number_of_children_treated_complicated_sam_government_only_t * baseline_probability_of_death_no_treatment_complicated_sam_g * efficacy_of_treatment_complicated_sam_government_only_treatm_2",
+   "expected": 92.7886995
+  },
+  {
+   "id": "efficacy_of_treatment_total_government_only_treatment",
+   "label": "Efficacy of treatment: Total (Government-only treatment)",
+   "section": "simplified_cea",
+   "formula": "sum(efficacy_of_treatment_mam_government_only_treatment, efficacy_of_treatment_uncomplicated_sam_government_only_trea, efficacy_of_treatment_complicated_sam_government_only_treatm)",
+   "expected": 324.5667674
+  },
+  {
+   "id": "deaths_averted_by_alima_s_program",
+   "label": "Deaths averted by ALIMA's program",
+   "section": "simplified_cea",
+   "formula": "efficacy_of_treatment_total_alima_supported_treatment - efficacy_of_treatment_total_government_only_treatment",
+   "expected": 667.8397074
+  },
+  {
+   "id": "value_per_death_averted",
+   "label": "Value per death averted",
+   "section": "simplified_cea",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "Simplified CEA!B32"
+   },
+   "formula": "112 * $life_value_multiplier",
+   "expected": 112.0,
+   "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+  },
+  {
+   "id": "percent_of_those_treated_who_experience_sam_mam_again_at_som",
+   "label": "Percent of those treated who experience SAM/MAM again at some point during early childhood",
+   "section": "cea",
+   "formula": "0.15 * (35 / 12)",
+   "expected": 0.4375,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_mam_children_whose_deaths_are_averted_in_first_ye",
+   "label": "Percent of MAM children whose deaths are averted in first year who ultimately die of malnutrition",
+   "section": "cea",
+   "formula": "percent_of_those_treated_who_experience_sam_mam_again_at_som * annual_percent_mortality_of_children_with_mam_no_interventio",
+   "expected": 0.0193568375,
+   "format": "percent"
+  },
+  {
+   "id": "untreated_mam_cases",
+   "label": "Untreated MAM cases",
+   "section": "cea",
+   "formula": "number_of_mam_cases_treated_alima - number_of_mam_cases_treated_government_only",
+   "expected": 1479.6
+  },
+  {
+   "id": "expected_number_of_mam_deaths_without_treatment_in_first_yea",
+   "label": "Expected number of MAM deaths without treatment in first year",
+   "section": "cea",
+   "formula": "untreated_mam_cases * annual_percent_mortality_of_children_with_mam_no_interventio",
+   "expected": 65.46371832
+  },
+  {
+   "id": "percent_of_treated_population_that_does_not_recover_defaults",
+   "label": "Percent of treated population that does not recover (defaults / does not respond / dies)",
+   "section": "cea",
+   "formula": "1 - percent_of_treated_population_discharged_as_recovered",
+   "expected": 0.109,
+   "format": "percent"
+  },
+  {
+   "id": "expected_number_of_mam_deaths_alima",
+   "label": "Expected number of MAM deaths ALIMA",
+   "section": "cea",
+   "formula": "percent_of_treated_population_that_does_not_recover_defaults * annual_percent_mortality_of_children_with_mam_no_interventio * number_of_mam_cases_treated_alima + percent_of_treated_population_discharged_as_recovered * annual_mortality_rate_among_well_nourished_children * number_of_mam_cases_treated_alima",
+   "expected": 33.5020173
+  },
+  {
+   "id": "total_mam_deaths_averted_by_alima",
+   "label": "Total MAM deaths averted by ALIMA",
+   "section": "cea",
+   "formula": "expected_number_of_mam_deaths_without_treatment_in_first_yea - expected_number_of_mam_deaths_alima",
+   "expected": 31.96170102
+  },
+  {
+   "id": "internal_validity_adjustment",
+   "label": "Internal validity adjustment",
+   "section": "cea",
+   "value": 0.75,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B85"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment",
+   "label": "External validity adjustment",
+   "section": "cea",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B86"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_mam_deaths_averted_after_adjustments",
+   "label": "Total MAM deaths averted after adjustments",
+   "section": "cea",
+   "formula": "total_mam_deaths_averted_by_alima * internal_validity_adjustment * external_validity_adjustment",
+   "expected": 20.3755844
+  },
+  {
+   "id": "adjusted_mam_deaths_averted_by_program",
+   "label": "Adjusted MAM deaths averted by program",
+   "section": "cea",
+   "formula": "(1 - percent_of_mam_children_whose_deaths_are_averted_in_first_ye) * total_mam_deaths_averted_after_adjustments",
+   "expected": 19.98117753
+  },
+  {
+   "id": "percent_of_sam_children_whose_deaths_are_averted_in_first_ye",
+   "label": "Percent of SAM children whose deaths are averted in first year who ultimately die of malnutrition",
+   "section": "cea",
+   "formula": "percent_of_those_treated_who_experience_sam_mam_again_at_som * annual_percent_mortality_of_children_with_uncomplicated_sam",
+   "expected": 0.06040942552,
+   "format": "percent"
+  },
+  {
+   "id": "untreated_uncomplicated_sam_cases",
+   "label": "Untreated uncomplicated SAM cases",
+   "section": "cea",
+   "formula": "number_of_uncomplicated_sam_cases_treated_alima - number_of_initial_uncomplicated_sam_cases_treated_government",
+   "expected": 3169.395
+  },
+  {
+   "id": "expected_number_of_uncomplicated_sam_deaths_among_untreated",
+   "label": "Expected number of uncomplicated SAM deaths among untreated",
+   "section": "cea",
+   "formula": "untreated_uncomplicated_sam_cases * annual_percent_mortality_of_children_with_uncomplicated_sam",
+   "expected": 437.6258999
+  },
+  {
+   "id": "untreated_complicated_sam_cases",
+   "label": "Untreated complicated SAM cases",
+   "section": "cea",
+   "formula": "number_of_complicated_sam_cases_treated_alima - number_of_initial_complicated_sam_cases_treated_government_o",
+   "expected": 335.583
+  },
+  {
+   "id": "expected_number_of_complicated_sam_deaths_among_untreated",
+   "label": "Expected number of complicated SAM deaths among untreated",
+   "section": "cea",
+   "formula": "untreated_complicated_sam_cases * mortality_rates_untreated_complicated_sam",
+   "expected": 100.6749
+  },
+  {
+   "id": "percent_of_treated_population_that_does_not_recover_defaults_2",
+   "label": "Percent of treated population that does not recover (defaults / does not respond / hospitalized / dies)",
+   "section": "cea",
+   "formula": "1 - percent_of_treated_population_discharged_as_recovered_3",
+   "expected": 0.3806666667,
+   "format": "percent"
+  },
+  {
+   "id": "expected_number_of_uncomplicated_sam_deaths_among_those_trea",
+   "label": "Expected number of uncomplicated SAM deaths among those treated by government",
+   "section": "cea",
+   "formula": "percent_of_treated_population_that_does_not_recover_defaults_2 * annual_percent_mortality_of_children_with_uncomplicated_sam * number_of_initial_uncomplicated_sam_cases_treated_government + annual_mortality_rate_among_well_nourished_children * number_of_initial_uncomplicated_sam_cases_treated_government * percent_of_treated_population_discharged_as_recovered_3",
+   "expected": 205.8478319
+  },
+  {
+   "id": "expected_number_of_complicated_sam_deaths_among_those_treate",
+   "label": "Expected number of complicated SAM deaths among those treated by government",
+   "section": "cea",
+   "formula": "mortality_rates_treated_complicated_sam_government_only * number_of_initial_complicated_sam_cases_treated_government_o",
+   "expected": 142.1194005
+  },
+  {
+   "id": "percent_of_treated_population_that_does_not_recover_defaults_3",
+   "label": "Percent of treated population that does not recover (defaults / does not respond / hospitalized / dies)",
+   "section": "cea",
+   "formula": "1 - percent_of_treated_population_discharged_as_recovered_2",
+   "expected": 0.071,
+   "format": "percent"
+  },
+  {
+   "id": "expected_number_of_uncomplicated_sam_deaths_alima",
+   "label": "Expected number of uncomplicated SAM deaths ALIMA",
+   "section": "cea",
+   "formula": "percent_of_treated_population_that_does_not_recover_defaults_3 * annual_percent_mortality_of_children_with_uncomplicated_sam * number_of_uncomplicated_sam_cases_treated_alima + percent_of_treated_population_discharged_as_recovered_2 * annual_mortality_rate_among_well_nourished_children * number_of_uncomplicated_sam_cases_treated_alima",
+   "expected": 179.917596
+  },
+  {
+   "id": "expected_complicated_sam_deaths_alima",
+   "label": "Expected complicated SAM deaths ALIMA",
+   "section": "cea",
+   "formula": "mortality_rates_treated_complicated_sam_alima_support * number_of_complicated_sam_cases_treated_alima",
+   "expected": 70.47243
+  },
+  {
+   "id": "total_sam_deaths_uncomplicated_and_complicated_averted_by_al",
+   "label": "Total SAM deaths (uncomplicated and complicated) averted by ALIMA",
+   "section": "cea",
+   "formula": "sum(expected_number_of_uncomplicated_sam_deaths_among_untreated, expected_number_of_complicated_sam_deaths_among_untreated, expected_number_of_uncomplicated_sam_deaths_among_those_trea, expected_number_of_complicated_sam_deaths_among_those_treate) - sum(expected_number_of_uncomplicated_sam_deaths_alima, expected_complicated_sam_deaths_alima)",
+   "expected": 635.8780063
+  },
+  {
+   "id": "total_sam_deaths_averted_after_adjustments",
+   "label": "Total SAM deaths averted after adjustments",
+   "section": "cea",
+   "formula": "total_sam_deaths_uncomplicated_and_complicated_averted_by_al * internal_validity_adjustment * external_validity_adjustment",
+   "expected": 405.372229
+  },
+  {
+   "id": "adjusted_sam_deaths_averted_by_the_program",
+   "label": "Adjusted SAM deaths averted by the program",
+   "section": "cea",
+   "formula": "(1 - percent_of_sam_children_whose_deaths_are_averted_in_first_ye) * total_sam_deaths_averted_after_adjustments",
+   "expected": 380.8839256
+  },
+  {
+   "id": "total_adjusted_deaths_averted_by_program",
+   "label": "Total adjusted deaths averted by program",
+   "section": "cea",
+   "formula": "sum(adjusted_mam_deaths_averted_by_program, adjusted_sam_deaths_averted_by_the_program)",
+   "expected": 400.8651031
+  },
+  {
+   "id": "total_deaths_government_only_counterfactual",
+   "label": "Total deaths government only counterfactual",
+   "section": "cea",
+   "formula": "sum(expected_number_of_mam_deaths_without_treatment_in_first_yea, expected_number_of_uncomplicated_sam_deaths_among_untreated, expected_number_of_complicated_sam_deaths_among_untreated, expected_number_of_uncomplicated_sam_deaths_among_those_trea, expected_number_of_complicated_sam_deaths_among_those_treate)",
+   "expected": 951.7317506
+  },
+  {
+   "id": "total_deaths_with_alima",
+   "label": "Total deaths with ALIMA",
+   "section": "cea",
+   "formula": "sum(expected_number_of_mam_deaths_alima, expected_number_of_uncomplicated_sam_deaths_alima, expected_complicated_sam_deaths_alima)",
+   "expected": 283.8920433
+  },
+  {
+   "id": "total_deaths_averted_by_alima",
+   "label": "Total deaths averted by ALIMA",
+   "section": "cea",
+   "formula": "total_deaths_government_only_counterfactual - total_deaths_with_alima",
+   "expected": 667.8397074
+  },
+  {
+   "id": "adjustments_iv_ev_relapse",
+   "label": "Adjustments (IV, EV, relapse)",
+   "section": "simplified_cea",
+   "formula": "total_adjusted_deaths_averted_by_program / total_deaths_averted_by_alima",
+   "expected": 0.6002414931,
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_deaths_averted_by_alima_s_program",
+   "label": "Total units of value from deaths averted by ALIMA's program",
+   "section": "simplified_cea",
+   "formula": "deaths_averted_by_alima_s_program * value_per_death_averted * adjustments_iv_ev_relapse",
+   "expected": 44896.89155
+  },
+  {
+   "id": "total_children_requiring_hospitalization_pediatric_emergency",
+   "label": "Total children requiring hospitalization (pediatric emergency and complicated SAM)",
+   "section": "cea",
+   "value": 2500.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B5"
+   }
+  },
+  {
+   "id": "pediatric_emergency_inpatient",
+   "label": "Pediatric emergency - inpatient",
+   "section": "cea",
+   "formula": "total_children_requiring_hospitalization_pediatric_emergency - number_of_complicated_sam_cases_treated_alima",
+   "expected": 1381.39
+  },
+  {
+   "id": "children_served_inpatient_pediatric_emergencies_government_o",
+   "label": "Children served, inpatient pediatric emergencies, government only",
+   "section": "cea",
+   "formula": "pediatric_emergency_inpatient * 0.5",
+   "expected": 690.695
+  },
+  {
+   "id": "estimated_increase_in_mortality_odds_ratio_from_an_additiona",
+   "label": "Estimated increase in mortality odds ratio from an additional patient per doctor",
+   "section": "cea",
+   "value": 1.07,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B128"
+   }
+  },
+  {
+   "id": "total_children_with_pediatric_emergencies_served_inpatient_a",
+   "label": "Total children with pediatric emergencies served - inpatient and outpatient",
+   "section": "cea",
+   "value": 5430.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B109"
+   }
+  },
+  {
+   "id": "pediatric_emergency_outpatient",
+   "label": "Pediatric emergency - outpatient",
+   "section": "cea",
+   "formula": "total_children_with_pediatric_emergencies_served_inpatient_a - pediatric_emergency_inpatient",
+   "expected": 4048.61
+  },
+  {
+   "id": "children_served_outpatient_pediatric_emergencies_government",
+   "label": "Children served, outpatient pediatric emergencies, government only",
+   "section": "cea",
+   "formula": "pediatric_emergency_outpatient * 0.5",
+   "expected": 2024.305
+  },
+  {
+   "id": "days_in_14_month_grant_period",
+   "label": "Days in 14 month grant period",
+   "section": "cea",
+   "formula": "14 * 30.4",
+   "expected": 425.6
+  },
+  {
+   "id": "ministry_of_health_doctors_per_facility",
+   "label": "Ministry of Health doctors per facility",
+   "section": "cea",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B123"
+   }
+  },
+  {
+   "id": "patient_day_doctor_ratio_without_alima",
+   "label": "Patient/day:doctor ratio without ALIMA",
+   "section": "cea",
+   "formula": "sum(children_served_outpatient_pediatric_emergencies_government, children_served_inpatient_pediatric_emergencies_government_o) / days_in_14_month_grant_period / ministry_of_health_doctors_per_facility",
+   "expected": 6.379229323
+  },
+  {
+   "id": "alima_befen_doctors_per_facility",
+   "label": "ALIMA / BEFEN doctors per facility",
+   "section": "cea",
+   "value": 5.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B122"
+   }
+  },
+  {
+   "id": "patient_day_doctor_ratio_with_alima",
+   "label": "Patient/day:doctor ratio with ALIMA",
+   "section": "cea",
+   "formula": "total_children_with_pediatric_emergencies_served_inpatient_a / days_in_14_month_grant_period / sum(alima_befen_doctors_per_facility, ministry_of_health_doctors_per_facility)",
+   "expected": 2.126409774
+  },
+  {
+   "id": "increase_in_patients_day_per_doctor_without_alima",
+   "label": "Increase in patients/day per doctor without ALIMA",
+   "section": "cea",
+   "formula": "patient_day_doctor_ratio_without_alima - patient_day_doctor_ratio_with_alima",
+   "expected": 4.252819549
+  },
+  {
+   "id": "inpatient_mortality_rate_with_alima_support",
+   "label": "Inpatient mortality rate with ALIMA support",
+   "section": "cea",
+   "formula": "(0.034 + 0.021) / 2",
+   "expected": 0.0275,
+   "format": "percent"
+  },
+  {
+   "id": "inpatient_mortality_rate_with_goverment_only_care",
+   "label": "Inpatient mortality rate with goverment-only care",
+   "section": "cea",
+   "formula": "estimated_increase_in_mortality_odds_ratio_from_an_additiona ^ increase_in_patients_day_per_doctor_without_alima * inpatient_mortality_rate_with_alima_support",
+   "expected": 0.03666879158,
+   "format": "percent"
+  },
+  {
+   "id": "inpatient_deaths_receive_government_only_care",
+   "label": "Inpatient deaths, receive government only care",
+   "section": "cea",
+   "formula": "children_served_inpatient_pediatric_emergencies_government_o * inpatient_mortality_rate_with_goverment_only_care",
+   "expected": 25.326951
+  },
+  {
+   "id": "hazard_ratio_of_no_care_vs_government_only_care_for_pediatri",
+   "label": "Hazard ratio of no care vs. government only care for pediatric emergencies",
+   "section": "cea",
+   "value": 2.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B133"
+   }
+  },
+  {
+   "id": "inpatient_mortality_without_care",
+   "label": "Inpatient mortality without care",
+   "section": "cea",
+   "formula": "inpatient_mortality_rate_with_goverment_only_care * hazard_ratio_of_no_care_vs_government_only_care_for_pediatri",
+   "expected": 0.09167197894,
+   "format": "percent"
+  },
+  {
+   "id": "inpatient_deaths_don_t_receive_care",
+   "label": "Inpatient deaths, don't receive care",
+   "section": "cea",
+   "formula": "(pediatric_emergency_inpatient - children_served_inpatient_pediatric_emergencies_government_o) * inpatient_mortality_without_care",
+   "expected": 63.3173775
+  },
+  {
+   "id": "outpatient_mortality_rate_with_alima_support",
+   "label": "Outpatient mortality rate with ALIMA support",
+   "section": "cea",
+   "formula": "0.25 * inpatient_mortality_rate_with_alima_support",
+   "expected": 0.006875,
+   "format": "percent"
+  },
+  {
+   "id": "outpatient_mortality_rate_with_government_only_care",
+   "label": "Outpatient mortality rate with government-only care",
+   "section": "cea",
+   "formula": "estimated_increase_in_mortality_odds_ratio_from_an_additiona ^ increase_in_patients_day_per_doctor_without_alima * outpatient_mortality_rate_with_alima_support",
+   "expected": 0.009167197894,
+   "format": "percent"
+  },
+  {
+   "id": "outpatient_deaths_receive_government_care",
+   "label": "Outpatient deaths, receive government care",
+   "section": "cea",
+   "formula": "children_served_outpatient_pediatric_emergencies_government * outpatient_mortality_rate_with_government_only_care",
+   "expected": 18.55720453
+  },
+  {
+   "id": "outpatient_mortality_without_care",
+   "label": "Outpatient mortality without care",
+   "section": "cea",
+   "formula": "hazard_ratio_of_no_care_vs_government_only_care_for_pediatri * outpatient_mortality_rate_with_government_only_care",
+   "expected": 0.02291799474,
+   "format": "percent"
+  },
+  {
+   "id": "outpatient_deaths_don_t_receive_care",
+   "label": "Outpatient deaths, don't receive care",
+   "section": "cea",
+   "formula": "outpatient_mortality_without_care * (pediatric_emergency_outpatient - children_served_outpatient_pediatric_emergencies_government)",
+   "expected": 46.39301133
+  },
+  {
+   "id": "total_deaths_government_counterfactual",
+   "label": "Total deaths government counterfactual",
+   "section": "cea",
+   "formula": "sum(inpatient_deaths_receive_government_only_care, inpatient_deaths_don_t_receive_care, outpatient_deaths_receive_government_care, outpatient_deaths_don_t_receive_care)",
+   "expected": 153.5945444
+  },
+  {
+   "id": "inpatient_deaths_with_alima",
+   "label": "Inpatient deaths with ALIMA",
+   "section": "cea",
+   "formula": "inpatient_mortality_rate_with_alima_support * pediatric_emergency_inpatient",
+   "expected": 37.988225
+  },
+  {
+   "id": "outpatient_deaths_with_alima",
+   "label": "Outpatient deaths with ALIMA",
+   "section": "cea",
+   "formula": "outpatient_mortality_rate_with_alima_support * pediatric_emergency_outpatient",
+   "expected": 27.83419375
+  },
+  {
+   "id": "total_deaths_alima",
+   "label": "Total deaths ALIMA",
+   "section": "cea",
+   "formula": "sum(inpatient_deaths_with_alima, outpatient_deaths_with_alima)",
+   "expected": 65.82241875
+  },
+  {
+   "id": "deaths_averted_with_alima_support",
+   "label": "Deaths averted with ALIMA support",
+   "section": "cea",
+   "formula": "total_deaths_government_counterfactual - total_deaths_alima",
+   "expected": 87.77212561
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_a_child_under_5_year",
+   "label": "Value assigned to averting the death of a child under 5 years old",
+   "section": "cea",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B103"
+   },
+   "formula": "112 * $life_value_multiplier",
+   "expected": 112.0,
+   "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+  },
+  {
+   "id": "units_of_value_from_pediatric_emergency_deaths_averted",
+   "label": "Units of value from pediatric emergency deaths averted",
+   "section": "cea",
+   "formula": "deaths_averted_with_alima_support * value_assigned_to_averting_the_death_of_a_child_under_5_year",
+   "expected": 9830.478069
+  },
+  {
+   "id": "total_units_of_value_from_mortality_reduction_vs_government",
+   "label": "Total units of value from mortality reduction vs government only treatment",
+   "section": "cea",
+   "formula": "total_adjusted_deaths_averted_by_program * value_assigned_to_averting_the_death_of_a_child_under_5_year",
+   "expected": 44896.89155
+  },
+  {
+   "id": "total_value_from_deaths_averted_malnutrition_and_pediatric_e",
+   "label": "Total value from deaths averted - malnutrition and pediatric emergencies",
+   "section": "cea",
+   "formula": "sum(units_of_value_from_pediatric_emergency_deaths_averted, total_units_of_value_from_mortality_reduction_vs_government)",
+   "expected": 54727.36961
+  },
+  {
+   "id": "estimated_percentage_of_total_benefits_of_treatment_that_com",
+   "label": "Estimated percentage of total benefits of treatment that come from development effects",
+   "section": "cea",
+   "value": 0.28,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B157"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_mortality_reduction_and_developmen",
+   "label": "Total units of value from mortality reduction and development benefits",
+   "section": "cea",
+   "formula": "total_value_from_deaths_averted_malnutrition_and_pediatric_e / (1 - estimated_percentage_of_total_benefits_of_treatment_that_com)",
+   "expected": 76010.23558
+  },
+  {
+   "id": "units_of_value_from_development_benefits_with_hypothetical_d",
+   "label": "Units of value from development benefits with hypothetical donation ($100,000)",
+   "section": "cea",
+   "formula": "total_units_of_value_from_mortality_reduction_and_developmen - total_value_from_deaths_averted_malnutrition_and_pediatric_e",
+   "expected": 21282.86596
+  },
+  {
+   "id": "total_units_of_value_from_developmental_benefits",
+   "label": "Total units of value from developmental benefits",
+   "section": "simplified_cea",
+   "formula": "sum(units_of_value_from_development_benefits_with_hypothetical_d)",
+   "expected": 21282.86596
+  },
+  {
+   "id": "total_units_of_value_from_deaths_from_pediatric_emergencies",
+   "label": "Total units of value from deaths from pediatric emergencies averted",
+   "section": "simplified_cea",
+   "formula": "units_of_value_from_pediatric_emergency_deaths_averted",
+   "expected": 9830.478069
+  },
+  {
+   "id": "cost_in_euros",
+   "label": "Cost in Euros",
+   "section": "cea",
+   "value": 1330000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B163"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "euro_to_u_s_dollar",
+   "label": "Euro to U.S. dollar",
+   "section": "cea",
+   "value": 1.21,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B164"
+   }
+  },
+  {
+   "id": "total_cost_in_u_s_dollars_of_grant",
+   "label": "Total cost in U.S. dollars of grant",
+   "section": "cea",
+   "formula": "cost_in_euros * euro_to_u_s_dollar",
+   "expected": 1609300.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_program_cost",
+   "label": "Total program cost",
+   "section": "cea",
+   "formula": "total_cost_in_u_s_dollars_of_grant",
+   "expected": 1609300.0,
+   "format": "usd"
+  },
+  {
+   "id": "additional_benefits_development_effects_and_pediatric_emerge",
+   "label": "Additional benefits: development effects and pediatric emergencies: Total cost",
+   "section": "simplified_cea",
+   "formula": "total_program_cost",
+   "expected": 1609300.0,
+   "format": "usd"
+  },
+  {
+   "id": "initial_cost_effectiveness",
+   "label": "Initial cost-effectiveness",
+   "section": "simplified_cea",
+   "formula": "(total_units_of_value_from_deaths_averted_by_alima_s_program + total_units_of_value_from_developmental_benefits + total_units_of_value_from_deaths_from_pediatric_emergencies) / additional_benefits_development_effects_and_pediatric_emerge * 100000 / 344",
+   "expected": 13.73019245
+  },
+  {
+   "id": "risk_of_wastage_double_treatment",
+   "label": "Risk of wastage: Double treatment",
+   "section": "cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B189"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "risk_of_wastage_ineffective_goods",
+   "label": "Risk of wastage: Ineffective goods",
+   "section": "cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B190"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "goods_purchased_and_left_in_storage_until_they_expire_cash_d",
+   "label": "Goods purchased and left in storage until they expire / Cash doesn't reach recipients or is taken back from them inappropriately",
+   "section": "cea",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B191"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_for_risk_of_wastage",
+   "label": "Total adjustment for risk of wastage",
+   "section": "cea",
+   "formula": "sum(risk_of_wastage_double_treatment, risk_of_wastage_ineffective_goods, goods_purchased_and_left_in_storage_until_they_expire_cash_d)",
+   "expected": 0.05,
+   "format": "percent"
+  },
+  {
+   "id": "misappropriation_without_monitoring_results",
+   "label": "Misappropriation without monitoring results",
+   "section": "cea",
+   "value": 0.08,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B195"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "false_monitoring_results",
+   "label": "False monitoring results",
+   "section": "cea",
+   "value": 0.03,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B196"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
+   "label": "Total adjustment for quality of monitoring and evaluation",
+   "section": "cea",
+   "formula": "sum(misappropriation_without_monitoring_results, false_monitoring_results)",
+   "expected": 0.11,
+   "format": "percent"
+  },
+  {
+   "id": "change_of_priorities",
+   "label": "Change of priorities",
+   "section": "cea",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B200"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
+   "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
+   "section": "cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B201"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
+   "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
+   "section": "cea",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B202"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
+   "label": "Total adjustment for confidence in funds being used for intended purpose",
+   "section": "cea",
+   "formula": "sum(change_of_priorities, confidence_in_funds_being_used_for_intended_purpose_non_fund, confidence_in_funds_being_used_for_intended_purpose_within_o)",
+   "expected": 0.1,
+   "format": "percent"
+  },
+  {
+   "id": "total_downside_adjustment_factor",
+   "label": "Total downside adjustment factor",
+   "section": "cea",
+   "formula": "1 - sum(total_adjustment_for_risk_of_wastage, total_adjustment_for_quality_of_monitoring_and_evaluation, total_adjustment_for_confidence_in_funds_being_used_for_inte)",
+   "expected": 0.74,
+   "format": "percent"
+  },
+  {
+   "id": "additional_benefits_development_effects_and_pediatric_emerge_2",
+   "label": "Additional benefits: development effects and pediatric emergencies: Downside adjustment",
+   "section": "simplified_cea",
+   "formula": "total_downside_adjustment_factor",
+   "expected": 0.74,
+   "format": "percent"
+  },
+  {
+   "id": "adjustments_for_excluded_effects_malnutrition_morbidity",
+   "label": "Adjustments for excluded effects: Malnutrition morbidity",
+   "section": "cea",
+   "value": 0.09,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B216"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "investment_of_income_increases",
+   "label": "Investment of income increases",
+   "section": "cea",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B217"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "adjustments_for_excluded_effects_drug_resistance",
+   "label": "Adjustments for excluded effects: Drug resistance",
+   "section": "cea",
+   "value": -0.04,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B218"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "marginal_funding_goes_to_lower_priority_areas",
+   "label": "Marginal funding goes to lower priority areas",
+   "section": "cea",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B220"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "treatment_costs_averted_from_prevention",
+   "label": "Treatment costs averted from prevention",
+   "section": "cea",
+   "value": 0.06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B221"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "averted_morbidity_and_maternal_mortality_resulting_from_stun",
+   "label": "Averted morbidity and maternal mortality resulting from stunting",
+   "section": "cea",
+   "value": 0.01,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B222"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "morbidity_due_to_increased_risk_of_overweight_and_obesity_fr",
+   "label": "Morbidity due to increased risk of overweight and obesity from antibiotic and RUTF exposure",
+   "section": "cea",
+   "value": -0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B223"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "averted_longterm_morbidity_due_to_sam_from_mam_treatment",
+   "label": "Averted longterm morbidity due to SAM from MAM treatment",
+   "section": "cea",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B224"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "total_adjustment_factor_for_excluded_effects",
+   "label": "Total adjustment factor for excluded effects",
+   "section": "cea",
+   "formula": "sum(1, adjustments_for_excluded_effects_malnutrition_morbidity, investment_of_income_increases, adjustments_for_excluded_effects_drug_resistance, marginal_funding_goes_to_lower_priority_areas, treatment_costs_averted_from_prevention, averted_morbidity_and_maternal_mortality_resulting_from_stun, morbidity_due_to_increased_risk_of_overweight_and_obesity_fr, averted_longterm_morbidity_due_to_sam_from_mam_treatment)",
+   "expected": 1.17,
+   "format": "percent"
+  },
+  {
+   "id": "inclusion_exclusion_adjustment",
+   "label": "Inclusion/exclusion adjustment",
+   "section": "simplified_cea",
+   "formula": "total_adjustment_factor_for_excluded_effects",
+   "expected": 1.17,
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value",
+   "label": "Total units of value",
+   "section": "cea",
+   "formula": "total_units_of_value_from_mortality_reduction_and_developmen",
+   "expected": 76010.23558
+  },
+  {
+   "id": "initial_units_of_value_from_100_000k_donation_before_account",
+   "label": "Initial units of value from 100,000K donation before accounting for downside adjustments etc.",
+   "section": "cea",
+   "formula": "total_units_of_value / total_program_cost * 100000",
+   "expected": 4723.186204
+  },
+  {
+   "id": "total_units_of_value_after_downside_adjustment",
+   "label": "Total units of value after downside adjustment",
+   "section": "cea",
+   "formula": "total_downside_adjustment_factor * initial_units_of_value_from_100_000k_donation_before_account",
+   "expected": 3495.157791
+  },
+  {
+   "id": "total_units_of_value_after_adjustments_for_excluded_effects",
+   "label": "Total units of value after adjustments for excluded effects",
+   "section": "cea",
+   "formula": "total_units_of_value_after_downside_adjustment * total_adjustment_factor_for_excluded_effects",
+   "expected": 4089.334615
+  },
+  {
+   "id": "ratio_of_additional_government_spending_to_cmam_program_spen",
+   "label": "Ratio of additional government spending to CMAM program spending",
+   "section": "cea",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B232"
+   }
+  },
+  {
+   "id": "counterfactual_value_of_government_spending_units_of_value_p",
+   "label": "Counterfactual value of government spending (units of value per dollar)",
+   "section": "cea",
+   "value": 0.00496,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B233"
+   }
+  },
+  {
+   "id": "total_counterfactual_value_of_government_spending",
+   "label": "Total counterfactual value of government spending",
+   "section": "cea",
+   "formula": "ratio_of_additional_government_spending_to_cmam_program_spen * counterfactual_value_of_government_spending_units_of_value_p * total_cost_in_u_s_dollars_of_grant",
+   "expected": 159.64256
+  },
+  {
+   "id": "total_units_of_value_after_accounting_for_counterfactual_gov",
+   "label": "Total units of value after accounting for counterfactual government spending",
+   "section": "cea",
+   "formula": "total_units_of_value_after_adjustments_for_excluded_effects - total_counterfactual_value_of_government_spending",
+   "expected": 3929.692055
+  },
+  {
+   "id": "counterfactual_value_of_unicef_spending_units_of_value_per_d",
+   "label": "Counterfactual value of UNICEF spending (units of value per dollar)",
+   "section": "cea",
+   "value": 0.00584,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
+    "cell": "CEA!B239"
+   }
+  },
+  {
+   "id": "total_children_treated_for_malnutrition_alima_support",
+   "label": "Total children treated for malnutrition - ALIMA support",
+   "section": "cea",
+   "formula": "sum(number_of_complicated_sam_cases_treated_alima, number_of_uncomplicated_sam_cases_treated_alima, number_of_mam_cases_treated_alima)",
+   "expected": 8937.0
+  },
+  {
+   "id": "ratio_of_additional_unicef_spending_to_cmam_program_spending",
+   "label": "Ratio of additional UNICEF spending to CMAM program spending",
+   "section": "cea",
+   "formula": "1 / 3 * (sum(untreated_mam_cases, untreated_uncomplicated_sam_cases, untreated_complicated_sam_cases) / total_children_treated_for_malnutrition_alima_support)",
+   "expected": 0.1859154079
+  },
+  {
+   "id": "total_inpatient_treated_by_alima",
+   "label": "Total inpatient treated by ALIMA",
+   "section": "cea",
+   "formula": "total_children_requiring_hospitalization_pediatric_emergency",
+   "expected": 2500.0
+  },
+  {
+   "id": "inpatient_to_outpatient_cost_ratio",
+   "label": "Inpatient to outpatient cost ratio",
+   "section": "cea",
+   "formula": "134.57 / 75.5",
+   "expected": 1.782384106,
+   "format": "percent"
+  },
+  {
+   "id": "total_outpatient_treated_by_alima",
+   "label": "Total outpatient treated by ALIMA",
+   "section": "cea",
+   "formula": "sum(pediatric_emergency_outpatient, number_of_uncomplicated_sam_cases_treated_alima, number_of_mam_cases_treated_alima)",
+   "expected": 11867.0
+  },
+  {
+   "id": "cost_per_outpatient",
+   "label": "Cost per outpatient",
+   "section": "cea",
+   "formula": "total_cost_in_u_s_dollars_of_grant / (total_inpatient_treated_by_alima * inpatient_to_outpatient_cost_ratio + total_outpatient_treated_by_alima)",
+   "expected": 98.59118529,
+   "format": "usd"
+  },
+  {
+   "id": "total_cmam_cost",
+   "label": "Total CMAM cost",
+   "section": "cea",
+   "formula": "cost_per_outpatient * sum(number_of_mam_cases_treated_alima, number_of_uncomplicated_sam_cases_treated_alima)",
+   "expected": 770824.3372,
+   "format": "usd"
+  },
+  {
+   "id": "total_counterfactual_value_of_unicef_spending_from_100k_dona",
+   "label": "Total counterfactual value of UNICEF spending from 100K donation",
+   "section": "cea",
+   "formula": "counterfactual_value_of_unicef_spending_units_of_value_per_d * ratio_of_additional_unicef_spending_to_cmam_program_spending * total_cmam_cost",
+   "expected": 836.9194268
+  },
+  {
+   "id": "total_units_of_value_from_hypothetical_100k_caregivers_train",
+   "label": "Total units of value from hypothetical 100K caregivers trained after accounting for unicef counterfactual value",
+   "section": "cea",
+   "formula": "total_units_of_value_after_accounting_for_counterfactual_gov - total_counterfactual_value_of_unicef_spending_from_100k_dona",
+   "expected": 3092.772628
+  },
+  {
+   "id": "leveraging_funging_adjustment",
+   "label": "Leveraging/funging adjustment",
+   "section": "simplified_cea",
+   "formula": "total_units_of_value_from_hypothetical_100k_caregivers_train / total_units_of_value_after_adjustments_for_excluded_effects",
+   "expected": 0.7563021663,
+   "format": "percent"
+  },
+  {
+   "id": "cost_effectiveness_after_adjustments",
+   "label": "Cost-effectiveness after adjustments",
+   "section": "simplified_cea",
+   "formula": "initial_cost_effectiveness * additional_benefits_development_effects_and_pediatric_emerge_2 * inclusion_exclusion_adjustment * leveraging_funging_adjustment",
+   "expected": 8.990618106
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "cost_effectiveness_after_adjustments * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}
