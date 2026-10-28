@@ -41,7 +41,8 @@ const store = (s: "local" | "session") => {
   }
 };
 
-/** The choice made on this page: it holds even when storage is blocked or full. */
+/** A choice made on this page that couldn't be saved (storage blocked or full). When saving works,
+ * the stored choice, shared by every tab, is the source of truth and this stays empty. */
 let chosen: Consent;
 
 export function getConsent(): Consent {
@@ -73,7 +74,14 @@ export function setConsent(analytics: boolean) {
       /* storage blocked or full: the in-memory choice still holds for this page */
     }
   };
-  attempt(() => store("local")?.setItem(CONSENT_KEY, JSON.stringify({ analytics, at: Date.now() })));
+  let saved = false;
+  attempt(() => {
+    const local = store("local");
+    if (!local) return;
+    local.setItem(CONSENT_KEY, JSON.stringify({ analytics, at: Date.now() }));
+    saved = true;
+  });
+  if (saved) chosen = undefined;
   if (!analytics) {
     // Each id is removed on its own, whatever happened to the write above.
     attempt(() => store("local")?.removeItem(VISITOR_KEY));
@@ -165,6 +173,10 @@ export function initAnalytics() {
   const ref = document.referrer ? new URL(document.referrer).hostname : "";
   track("page_view", {}, { referrer: ref && ref !== location.hostname ? ref : undefined });
   window.addEventListener("pagehide", flush);
+  // A choice made in another tab replaces whatever this tab holds in memory.
+  window.addEventListener("storage", (e) => {
+    if (e.key === CONSENT_KEY || e.key === null) chosen = undefined;
+  });
 
   document.addEventListener(
     "click",
