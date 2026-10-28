@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rankings from "../components/Rankings.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
+import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "../lib/data";
 
 ---
 
@@ -11,10 +12,23 @@ import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
       <header class="intro">
         <h1>Which charities do the most good per dollar, on your assumptions?</h1>
         <p class="dek">
-          Published cost-effectiveness analyses, rebuilt so every number has a source, a range and an explanation, and re-ranked live by the assumptions you set.
+          Evaluators' cost-effectiveness analyses, rebuilt so every number has a source and re-ranked by your assumptions.
         </p>
       </header>
       <Rankings client:load />
+      {unrankedCharities.length > 0 && (
+        <section class="unranked" aria-labelledby="unranked-title">
+          <h2 id="unranked-title">Evaluated, not ranked</h2>
+          <p class="muted small">Reported in units with no exchange rate to the others, such as papers published.</p>
+          <ul>
+            {unrankedCharities.map((c) => {
+              const m = primaryOf(lib, c.id)!;
+              return <li><a href={`/${c.id}`}>{c.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {lib.owners.get(m.owner)!.name}</span></li>;
+            })}
+          </ul>
+        </section>
+      )}
+      <p class="count small muted">{rankedCharities.length} charities, {rankable.length} models. <a href="/suggest">Suggest a charity</a></p>
     </div>
     <aside class="side" aria-label="Assumptions">
       <AssumptionsPanel client:load />
@@ -40,6 +54,20 @@ import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
     line-height: 1.5;
     color: var(--ink-2);
     max-width: 62ch;
+  }
+  .unranked {
+    margin-top: var(--s6);
+  }
+  .unranked h2 {
+    font-size: 20px;
+    margin-bottom: var(--s2);
+  }
+  .unranked ul {
+    margin: var(--s2) 0 0;
+    padding-left: 1.1em;
+  }
+  .count {
+    margin-top: var(--s5);
   }
   @media (max-width: 1000px) {
     .layout {

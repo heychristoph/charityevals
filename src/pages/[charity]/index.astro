@@ -1,0 +1,11 @@
+---
+import ModelPage from "../../components/ModelPage.astro";
+import { lib, primaryOf } from "../../lib/data";
+
+export function getStaticPaths() {
+  return [...lib.charities.values()].filter((c) => primaryOf(lib, c.id)).map((c) => ({ params: { charity: c.id } }));
+}
+const model = primaryOf(lib, Astro.params.charity!)!;
+---
+
+<ModelPage modelId={model.id} />

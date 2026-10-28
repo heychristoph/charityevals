@@ -1,0 +1,778 @@
+{
+ "id": "fika-bridges-to-prosperity-value-information",
+ "name": "Bridges to Prosperity Value of Information BOTEC (May 2022)",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "fika",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"Bridges to Prosperity Value of Information BOTEC (May 2022)\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "Bridges to Prosperity Value of Information BOTEC (May 2022) (public)",
+  "url": "https://www.givewell.org/research/grants/bridges-to-prosperity-trailbridge-building-rwanda-may-2022",
+  "sheet": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+  "published": "2022-05-12",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0,
+   "discount_rate": 0.05
+  }
+ },
+ "resources": [
+  {
+   "title": "Bridges to Prosperity Value of Information BOTEC (May 2022) (public)",
+   "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (bridges to prosperity trailbridge building rwanda may 2022)",
+   "url": "https://www.givewell.org/research/grants/bridges-to-prosperity-trailbridge-building-rwanda-may-2022",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "main",
+   "title": "Main"
+  },
+  {
+   "id": "probability_of_positive_update",
+   "title": "Probability of positive update"
+  },
+  {
+   "id": "room_for_more_funding",
+   "title": "Room for more funding"
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line"
+  }
+ ],
+ "rows": [
+  {
+   "id": "discount_rate_for_opportunities_getting_worse_over_time",
+   "label": "Discount rate for opportunities getting worse over time",
+   "section": "main",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B11"
+   },
+   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.05.\n\nThis assumes that cost effectiveness of opportunities decays over 10-year period. Using similar value to other value of information BOTECs.",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.05
+  },
+  {
+   "id": "how_long_we_would_fund_bridges_to_prosperity_if_it_met_our_b",
+   "label": "How long we would fund Bridges to Prosperity if it met our bar",
+   "section": "main",
+   "value": 10.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B8"
+   },
+   "explainer": "Guess. Using similar value to other value of information BOTECs"
+  },
+  {
+   "id": "probability_of_positive_update_if_somebody_funded_bridges_an",
+   "label": "Probability of positive update if somebody funded bridges and additional survey",
+   "section": "probability_of_positive_update",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Probability of positive update!B3"
+   },
+   "explainer": "Rough guess",
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_positie_update_with_our_funding",
+   "label": "Probability of positie update with our funding",
+   "section": "probability_of_positive_update",
+   "formula": "probability_of_positive_update_if_somebody_funded_bridges_an",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_with_our_funding_for_rct_improvement_2",
+   "label": "Probability of scenario (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_positie_update_with_our_funding",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_with_our_funding_for_rct_improvement_3",
+   "label": "Probability of scenario (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_scenario_with_our_funding_for_rct_improvement_2",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_with_our_funding_for_rct_improvement",
+   "label": "Probability of scenario (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "1 - sum(probability_of_scenario_with_our_funding_for_rct_improvement_2, probability_of_scenario_with_our_funding_for_rct_improvement_3)",
+   "expected": 0.4,
+   "format": "percent"
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_with_our_funding",
+   "label": "Best guess on CE under this scenario (x cash) (With our funding for RCT improvements)",
+   "section": "main",
+   "value": 4.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!C18"
+   },
+   "explainer": "Taking the midpoint of the range."
+  },
+  {
+   "id": "cost_effectiveness_of_counterfactual_opportunity",
+   "label": "Cost-effectiveness of counterfactual opportunity",
+   "section": "main",
+   "value": 6.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B9"
+   },
+   "explainer": "Guess. Expected cost-effectiveness of counterfactual use of funds in 2025. Using similar value to other value of information BOTECs."
+  },
+  {
+   "id": "units_of_value_per_dollar_givedirectly",
+   "label": "Units of value per dollar, GiveDirectly",
+   "section": "main",
+   "value": 0.00344,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B10"
+   },
+   "explainer": "Top charities cost-effectiveness analysis"
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_with_ou",
+   "label": "Expected annual funding to B2P under this scenario (m) (With our funding for RCT improvements)",
+   "section": "main",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!C17"
+   },
+   "explainer": "Given we expect our cost-effectiveness bar to be 6x in 2025, we guess we would not fund opportunities in the 3x-6x range",
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario",
+   "label": "Increase in units of value from evaluation in this scenario per year (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_with_our_funding - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_with_ou * 1000000",
+   "expected": 0.0
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_with_our_funding_2",
+   "label": "Best guess on CE under this scenario (x cash) (With our funding for RCT improvements)",
+   "section": "main",
+   "value": 8.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!C24"
+   },
+   "explainer": "Taking midpoint of a range from 6x-10x."
+  },
+  {
+   "id": "b2p_s_estimate_of_trailbridges_from_2020_2070",
+   "label": "B2P's estimate of trailbridges from 2020-2070",
+   "section": "room_for_more_funding",
+   "value": 100000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B5"
+   },
+   "explainer": "Bridges to Prosperity, Strategic plan 2020-2025 appendix"
+  },
+  {
+   "id": "bridges_per_year",
+   "label": "Bridges per year",
+   "section": "room_for_more_funding",
+   "formula": "b2p_s_estimate_of_trailbridges_from_2020_2070 / (2070 - 2020)",
+   "expected": 2000.0
+  },
+  {
+   "id": "discount_for_fewer_bridges_in_earlier_years",
+   "label": "Discount for fewer bridges in earlier years",
+   "section": "room_for_more_funding",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B7"
+   },
+   "explainer": "Strategic plan assumes there's a ramp up from 2020 to 2035, so bridges per year lower during these years. Parameter is rough.",
+   "format": "percent"
+  },
+  {
+   "id": "bridges_per_year_2025_2035",
+   "label": "Bridges per year, 2025-2035",
+   "section": "room_for_more_funding",
+   "formula": "bridges_per_year * discount_for_fewer_bridges_in_earlier_years",
+   "expected": 1000.0
+  },
+  {
+   "id": "cost_per_bridge",
+   "label": "Cost per bridge",
+   "section": "room_for_more_funding",
+   "value": 70000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B9"
+   },
+   "explainer": "B2P told us that 70% of bridge building costs are paid by B2P and 30% by the government and that all maintenance costs are covered by the government. Bridge costs are about $100k, so B2P costs are about $70k. \"I’ve attached a spreadsheet (Remaining Research Bridge Budget Analysis) with an average estimated bridge cost of $104k. Maintenance is the full responsibility of the District and they budget about $400/year for maintenance... Referencing the spreadsheet above (Remaining Research Bridge Budget analysis) you’ll see on average 70% paid by B2P and 30% paid by District for the upfront build of the bridge. All maintenance costs are covered bythe District.\" Christina Barstow, Bridges to Prosperity, response to questions from GiveWell, May 3, 2022",
+   "format": "usd"
+  },
+  {
+   "id": "total_annual_cost_for_bridges_2025_2035",
+   "label": "Total annual cost for bridges, 2025-2035",
+   "section": "room_for_more_funding",
+   "formula": "bridges_per_year_2025_2035 * cost_per_bridge",
+   "expected": 70000000.0,
+   "format": "usd"
+  },
+  {
+   "id": "of_gap_where_we_d_expect_results_to_generalize",
+   "label": "% of gap where we'd expect results to generalize",
+   "section": "room_for_more_funding",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B11"
+   },
+   "explainer": "We assume results from Rwanda might provide less of an update in other countries. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "of_gap_that_would_be_filled_by_other_funders",
+   "label": "% of gap that would be filled by other funders",
+   "section": "room_for_more_funding",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B12"
+   },
+   "explainer": "We assume other funders besides GiveWell would step in to fund some of this growth. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "of_gap_that_would_meet_bar_for_cost_effectiveness",
+   "label": "% of gap that would meet bar for cost-effectiveness",
+   "section": "room_for_more_funding",
+   "value": 0.75,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B13"
+   },
+   "explainer": "We assume that some share of these bridges would be in areas with lower cost-effectiveness. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "total_annual_rfmf_for_bridges_2025_2035",
+   "label": "Total annual RFMF for bridges, 2025-2035",
+   "section": "room_for_more_funding",
+   "formula": "total_annual_cost_for_bridges_2025_2035 * of_gap_where_we_d_expect_results_to_generalize * (1 - of_gap_that_would_be_filled_by_other_funders) * of_gap_that_would_meet_bar_for_cost_effectiveness",
+   "expected": 13125000.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_funding_opportunity_fy_2023_2025",
+   "label": "Total funding opportunity FY 2023-2025",
+   "section": "room_for_more_funding",
+   "value": 47360000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B18"
+   },
+   "explainer": "See \"Total Funding Opportunity\" in this spreadsheet",
+   "format": "usd"
+  },
+  {
+   "id": "total_funding_opportunity_fy_2023_2025_per_year",
+   "label": "Total funding opportunity FY 2023-2025 per year",
+   "section": "room_for_more_funding",
+   "formula": "total_funding_opportunity_fy_2023_2025 / 3",
+   "expected": 15786666.67,
+   "format": "usd"
+  },
+  {
+   "id": "of_gap_where_we_d_expect_results_to_generalize_2",
+   "label": "% of gap where we'd expect results to generalize",
+   "section": "room_for_more_funding",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B20"
+   },
+   "explainer": "Assuming this is higher than above, since these opportunities are almost exclusively in East Africa. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "of_gap_filled_by_other_funders",
+   "label": "% of gap filled by other funders",
+   "section": "room_for_more_funding",
+   "value": 0.25,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B21"
+   },
+   "explainer": "Assuming this is lower than above, since these are based on gaps that are still outstanding. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "of_gap_that_would_meet_bar_for_cost_effectiveness_2",
+   "label": "% of gap that would meet bar for cost-effectiveness",
+   "section": "room_for_more_funding",
+   "value": 0.75,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B22"
+   },
+   "explainer": "We assume that some share of these bridges would be in areas with lower cost-effectiveness. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "upward_adjustment_for_growth_in_future_opportunities_2025_20",
+   "label": "Upward adjustment for growth in future opportunities, 2025-2035",
+   "section": "room_for_more_funding",
+   "value": 1.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Room for more funding!B23"
+   },
+   "explainer": "If B2P is able to keep scaling, then there should be more opportunities in the future. Parameter is speculative.",
+   "format": "percent"
+  },
+  {
+   "id": "total_annual_rfmf_for_bridges_2025_2035_2",
+   "label": "Total annual RFMF for bridges, 2025-2035",
+   "section": "room_for_more_funding",
+   "formula": "total_funding_opportunity_fy_2023_2025_per_year * of_gap_where_we_d_expect_results_to_generalize_2 * (1 - of_gap_filled_by_other_funders) * of_gap_that_would_meet_bar_for_cost_effectiveness_2 * upward_adjustment_for_growth_in_future_opportunities_2025_20",
+   "expected": 10656000.0,
+   "format": "usd"
+  },
+  {
+   "id": "best_guess_on_annual_rfmf_2025_2035",
+   "label": "Best guess on annual RFMF, 2025-2035",
+   "section": "room_for_more_funding",
+   "formula": "avg(total_annual_rfmf_for_bridges_2025_2035, total_annual_rfmf_for_bridges_2025_2035_2)",
+   "expected": 11890500.0,
+   "format": "usd"
+  },
+  {
+   "id": "expected_annual_givewell_funding_to_b2p_if_if_somebody_funde",
+   "label": "Expected annual GiveWell funding to B2P if if somebody funded bridges and additional survey",
+   "section": "probability_of_positive_update",
+   "formula": "best_guess_on_annual_rfmf_2025_2035 / 1000000",
+   "expected": 11.8905,
+   "format": "usd"
+  },
+  {
+   "id": "probability_of_positie_update_with_our_funding_2",
+   "label": "Probability of positie update with our funding",
+   "section": "probability_of_positive_update",
+   "formula": "expected_annual_givewell_funding_to_b2p_if_if_somebody_funde",
+   "expected": 11.8905,
+   "format": "usd"
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_with_ou_2",
+   "label": "Expected annual funding to B2P under this scenario (m) (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_positie_update_with_our_funding_2",
+   "expected": 11.8905,
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario_2",
+   "label": "Increase in units of value from evaluation in this scenario (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_with_our_funding_2 - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_with_ou_2 * 1000000",
+   "expected": 81806.64
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_with_our_funding_3",
+   "label": "Best guess on CE under this scenario (x cash) (With our funding for RCT improvements)",
+   "section": "main",
+   "value": 1.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!C30"
+   },
+   "explainer": "Taking midpoint of a range from 0x-3x."
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_with_ou_3",
+   "label": "Expected annual funding to B2P under this scenario (m) (With our funding for RCT improvements)",
+   "section": "main",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!C29"
+   },
+   "explainer": "Given we expect our cost-effectiveness bar to be 6x in 2025, we guess we would not fund opportunities in the <3x range",
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario_3",
+   "label": "Increase in units of value from evaluation in this scenario (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_with_our_funding_3 - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_with_ou_3 * 1000000",
+   "expected": 0.0
+  },
+  {
+   "id": "total_increase_in_units_of_value_from_evaluation_per_year_wi",
+   "label": "Total increase in units of value from evaluation per year (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_scenario_with_our_funding_for_rct_improvement * increase_in_units_of_value_from_evaluation_in_this_scenario + probability_of_scenario_with_our_funding_for_rct_improvement_2 * increase_in_units_of_value_from_evaluation_in_this_scenario_2 + probability_of_scenario_with_our_funding_for_rct_improvement_3 * increase_in_units_of_value_from_evaluation_in_this_scenario_3",
+   "expected": 24541.992
+  },
+  {
+   "id": "present_discounted_value_of_increase_in_units_of_value_from",
+   "label": "Present-discounted value of increase in units of value from evaluation (With our funding for RCT improvements)",
+   "section": "main",
+   "formula": "pv(discount_rate_for_opportunities_getting_worse_over_time, how_long_we_would_fund_bridges_to_prosperity_if_it_met_our_b, -total_increase_in_units_of_value_from_evaluation_per_year_wi)",
+   "expected": 189506.7569
+  },
+  {
+   "id": "probability_of_positive_update_if_nobody_funded_bridges_and",
+   "label": "Probability of positive update if nobody funded bridges and additional survey",
+   "section": "probability_of_positive_update",
+   "value": 0.225,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Probability of positive update!B2"
+   },
+   "explainer": "Rough guess",
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_someone_else_funding_bridges_and_additional_s",
+   "label": "Probability of someone else funding bridges and additional survey",
+   "section": "probability_of_positive_update",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Probability of positive update!B4"
+   },
+   "explainer": "Rough guess",
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_positive_update_without_our_funding",
+   "label": "Probability of positive update without our funding",
+   "section": "probability_of_positive_update",
+   "formula": "probability_of_positive_update_if_nobody_funded_bridges_and * (1 - probability_of_someone_else_funding_bridges_and_additional_s) + probability_of_positive_update_if_somebody_funded_bridges_an * probability_of_someone_else_funding_bridges_and_additional_s",
+   "expected": 0.2475,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_without_our_funding_for_rct_improvem_2",
+   "label": "Probability of scenario (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_positive_update_without_our_funding",
+   "expected": 0.2475,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_without_our_funding_for_rct_improvem_3",
+   "label": "Probability of scenario (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_scenario_without_our_funding_for_rct_improvem_2",
+   "expected": 0.2475,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_scenario_without_our_funding_for_rct_improvem",
+   "label": "Probability of scenario (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "1 - sum(probability_of_scenario_without_our_funding_for_rct_improvem_2, probability_of_scenario_without_our_funding_for_rct_improvem_3)",
+   "expected": 0.505,
+   "format": "percent"
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_without_our_fund",
+   "label": "Best guess on CE under this scenario (x cash) (Without our funding for RCT improvements)",
+   "section": "main",
+   "value": 4.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B18"
+   },
+   "explainer": "Taking the midpoint of the range."
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_without",
+   "label": "Expected annual funding to B2P under this scenario (m) (Without our funding for RCT improvements)",
+   "section": "main",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B17"
+   },
+   "explainer": "Given we expect our cost-effectiveness bar to be 6x in 2025, we guess we would not fund opportunities in the 3x-6x range",
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario_4",
+   "label": "Increase in units of value from evaluation in this scenario per year (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_without_our_fund - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_without * 1000000",
+   "expected": 0.0
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_without_our_fund_2",
+   "label": "Best guess on CE under this scenario (x cash) (Without our funding for RCT improvements)",
+   "section": "main",
+   "value": 8.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B24"
+   },
+   "explainer": "Taking midpoint of a range from 6x-10x."
+  },
+  {
+   "id": "expected_annual_givewell_funding_to_b2p_if_nobody_funded_bri",
+   "label": "Expected annual GiveWell funding to B2P if nobody funded bridges and additional survey (m)",
+   "section": "probability_of_positive_update",
+   "value": 9.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Probability of positive update!B8"
+   },
+   "explainer": "Rough guess",
+   "format": "usd"
+  },
+  {
+   "id": "probability_of_someone_else_funding_bridges_and_additional_s_2",
+   "label": "Probability of someone else funding bridges and additional survey",
+   "section": "probability_of_positive_update",
+   "formula": "probability_of_someone_else_funding_bridges_and_additional_s",
+   "expected": 0.3,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_positive_update_without_our_funding_2",
+   "label": "Probability of positive update without our funding",
+   "section": "probability_of_positive_update",
+   "formula": "expected_annual_givewell_funding_to_b2p_if_nobody_funded_bri * (1 - probability_of_someone_else_funding_bridges_and_additional_s_2) + expected_annual_givewell_funding_to_b2p_if_if_somebody_funde * probability_of_someone_else_funding_bridges_and_additional_s_2",
+   "expected": 9.86715,
+   "format": "usd"
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_without_2",
+   "label": "Expected annual funding to B2P under this scenario (m) (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_positive_update_without_our_funding_2",
+   "expected": 9.86715,
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario_5",
+   "label": "Increase in units of value from evaluation in this scenario (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_without_our_fund_2 - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_without_2 * 1000000",
+   "expected": 67885.992
+  },
+  {
+   "id": "best_guess_on_ce_under_this_scenario_x_cash_without_our_fund_3",
+   "label": "Best guess on CE under this scenario (x cash) (Without our funding for RCT improvements)",
+   "section": "main",
+   "value": 1.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B30"
+   },
+   "explainer": "Taking midpoint of a range from 0x-3x."
+  },
+  {
+   "id": "expected_annual_funding_to_b2p_under_this_scenario_m_without_3",
+   "label": "Expected annual funding to B2P under this scenario (m) (Without our funding for RCT improvements)",
+   "section": "main",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B29"
+   },
+   "explainer": "Given we expect our cost-effectiveness bar to be 6x in 2025, we guess we would not fund opportunities in the <3x range",
+   "format": "usd"
+  },
+  {
+   "id": "increase_in_units_of_value_from_evaluation_in_this_scenario_6",
+   "label": "Increase in units of value from evaluation in this scenario (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "(best_guess_on_ce_under_this_scenario_x_cash_without_our_fund_3 - cost_effectiveness_of_counterfactual_opportunity) * units_of_value_per_dollar_givedirectly * expected_annual_funding_to_b2p_under_this_scenario_m_without_3 * 1000000",
+   "expected": 0.0
+  },
+  {
+   "id": "total_increase_in_units_of_value_from_evaluation_per_year_wi_2",
+   "label": "Total increase in units of value from evaluation per year (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "probability_of_scenario_without_our_funding_for_rct_improvem * increase_in_units_of_value_from_evaluation_in_this_scenario_4 + probability_of_scenario_without_our_funding_for_rct_improvem_2 * increase_in_units_of_value_from_evaluation_in_this_scenario_5 + probability_of_scenario_without_our_funding_for_rct_improvem_3 * increase_in_units_of_value_from_evaluation_in_this_scenario_6",
+   "expected": 16801.78302
+  },
+  {
+   "id": "present_discounted_value_of_increase_in_units_of_value_from_2",
+   "label": "Present-discounted value of increase in units of value from evaluation (Without our funding for RCT improvements)",
+   "section": "main",
+   "formula": "pv(discount_rate_for_opportunities_getting_worse_over_time, how_long_we_would_fund_bridges_to_prosperity_if_it_met_our_b, -total_increase_in_units_of_value_from_evaluation_per_year_wi_2)",
+   "expected": 129738.9148
+  },
+  {
+   "id": "total_units_of_value_from_value_of_information",
+   "label": "Total units of value from value of information",
+   "section": "main",
+   "formula": "present_discounted_value_of_increase_in_units_of_value_from - present_discounted_value_of_increase_in_units_of_value_from_2",
+   "expected": 59767.84204
+  },
+  {
+   "id": "current_best_guess_on_cost_effectiveness_of_b2p_bridge_build",
+   "label": "Current best guess on cost-effectiveness of B2P bridge building (x cash)",
+   "section": "main",
+   "value": 4.4,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B39"
+   },
+   "explainer": "See our BOTEC here."
+  },
+  {
+   "id": "cost_to_go_from_50_bridges_to_100_bridges_millions",
+   "label": "Cost to go from 50 bridges to 100 bridges (millions)",
+   "section": "main",
+   "value": 3.39,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1Ay6zbPv_a-NZ_8w7UrhwrwpEPYn2BQEQJzkGn6qWfI8/edit",
+    "cell": "Main!B4"
+   },
+   "explainer": "Bridges to Prosperity, Remaining research bridge budget analysis, 2022.",
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_from_bridge_building",
+   "label": "Units of value from bridge building",
+   "section": "main",
+   "formula": "current_best_guess_on_cost_effectiveness_of_b2p_bridge_build * units_of_value_per_dollar_givedirectly * cost_to_go_from_50_bridges_to_100_bridges_millions * 1000000",
+   "expected": 51311.04
+  },
+  {
+   "id": "total_units_of_value_from_value_of_information_and_bridge_bu",
+   "label": "Total units of value from value of information and bridge building",
+   "section": "main",
+   "formula": "total_units_of_value_from_value_of_information + units_of_value_from_bridge_building",
+   "expected": 111078.882
+  },
+  {
+   "id": "what_this_is_value_of_information_botec_for_potential_grant",
+   "label": "What this is: Value of information BOTEC for potential grant to Bridges to Prosperity (B2P: Total (millions)",
+   "section": "main",
+   "formula": "sum(cost_to_go_from_50_bridges_to_100_bridges_millions)",
+   "expected": 3.39,
+   "format": "usd"
+  },
+  {
+   "id": "cost_effectiveness_from_value_of_information_and_bridge_buil",
+   "label": "Cost-effectiveness from value of information and bridge building (x cash)",
+   "section": "main",
+   "formula": "total_units_of_value_from_value_of_information_and_bridge_bu / (what_this_is_value_of_information_botec_for_potential_grant * 1000000) / units_of_value_per_dollar_givedirectly",
+   "expected": 9.525183683
+  },
+  {
+   "id": "cash_benchmark",
+   "label": "Units of value per dollar given to GiveDirectly",
+   "section": "bottom_line",
+   "value": 0.00335,
+   "kind": "estimate",
+   "source": {
+    "title": "GiveWell, cost-effectiveness benchmark",
+    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+   },
+   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+  },
+  {
+   "id": "uov_per_dollar",
+   "label": "Units of value per dollar",
+   "section": "bottom_line",
+   "formula": "cost_effectiveness_from_value_of_information_and_bridge_buil * cash_benchmark"
+  }
+ ],
+ "output": {
+  "row": "uov_per_dollar",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

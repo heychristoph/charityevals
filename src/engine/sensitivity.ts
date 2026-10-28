@@ -5,6 +5,7 @@
 import type { Kind } from "./schema";
 import {
   bottomLine,
+  comparable,
   hasRange,
   inputRange,
   pickValue,
@@ -42,7 +43,9 @@ export type Sensitivity = {
 };
 
 export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, number>, view: View = "charityevals"): Sensitivity {
-  const line = (a: Record<string, number>, inputs: Record<string, number> = {}) => bottomLine(lib, m, a, inputs, view).common;
+  // Models in a unit with no exchange rate are analysed in their own unit.
+  const key = comparable(lib, m) ? "common" : "native";
+  const line = (a: Record<string, number>, inputs: Record<string, number> = {}) => bottomLine(lib, m, a, inputs, view)[key];
   const central = line(av);
   const swings: Swing[] = [];
   // Central values of assumptions in this view (the evaluator view pins some).
@@ -51,7 +54,15 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
   const relevant = rowsFeeding(m);
   const pointInputs: string[] = [];
   for (const r of m.rows) {
-    if (!relevant.has(r.id) || r.node) continue;
+    if (!relevant.has(r.id)) continue;
+    if (r.node) {
+      // A calculated row with a published range is varied as a whole.
+      if (r.range) {
+        swings.push(swing(r.id, r.label, "row", "estimate", r.range.low, r.range.high,
+          line(av, { [r.id]: r.range.low }), line(av, { [r.id]: r.range.high })));
+      }
+      continue;
+    }
     const range = inputRange(r, view);
     if (!hasRange(range)) { pointInputs.push(r.id); continue; }
     const low = pickValue(range, "low");
@@ -73,7 +84,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     const low = Math.min(pickValue(a.value, "low"), pinned[id]);
     const high = Math.max(pickValue(a.value, "high"), pinned[id]);
     const at = (v: number) => (view === "evaluator" && m.evaluator?.assumptions[id] !== undefined
-      ? bottomLine(lib, { ...m, evaluator: { ...m.evaluator, assumptions: { ...m.evaluator.assumptions, [id]: v } } }, av, {}, view).common
+      ? bottomLine(lib, { ...m, evaluator: { ...m.evaluator, assumptions: { ...m.evaluator.assumptions, [id]: v } } }, av, {}, view)[key]
       : line({ ...av, [id]: v }));
     swings.push(swing(id, a.label, "assumption", a.kind, low, high, at(low), at(high)));
   }
@@ -91,7 +102,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
       } else inputs[s.id] = v;
     }
     const mm = view === "evaluator" && m.evaluator ? { ...m, evaluator: { ...m.evaluator, assumptions: pins } } : m;
-    return bottomLine(lib, mm, a, inputs, view).common;
+    return bottomLine(lib, mm, a, inputs, view)[key];
   };
 
   const total = swings.reduce((t, s) => t + s.logSwing, 0);
@@ -145,12 +156,18 @@ export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Fla
 }
 
 /** For each shared assumption, whether moving it to its low or high end reorders the given models. */
-export function rankFlips(lib: Library, ids: string[], av: Record<string, number>, view: View = "charityevals") {
+/** Assumptions whose low or high end changes the ranking. `groups` lists each ranked charity's
+ * models; a charity sits at the geometric mean of its models' positive results, as on the rankings. */
+export function rankFlips(lib: Library, groups: string[][], av: Record<string, number>, view: View = "charityevals") {
+  const position = (ids: string[], a: Record<string, number>) => {
+    const xs = ids.map((id) => bottomLine(lib, lib.models.get(id)!, a, {}, view).common).filter((x) => x > 0);
+    return xs.length ? Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length) : 0;
+  };
   const order = (a: Record<string, number>) =>
-    ids
-      .map((id) => ({ id, v: bottomLine(lib, lib.models.get(id)!, a, {}, view).common }))
+    groups
+      .map((ids, i) => ({ i, v: position(ids, a) }))
       .sort((x, y) => y.v - x.v)
-      .map((x) => x.id)
+      .map((x) => x.i)
       .join(",");
   const base = order(av);
   return lib.assumptions.rows

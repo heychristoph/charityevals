@@ -29,7 +29,43 @@ Each line is one row with every cell's formula (`f`) and cached value (`v`). Rea
 fully; follow cross-tab references (`Baseline!B22`) only far enough to decide whether that input
 is a leaf (copy its value, cite the cell) or worth modelling.
 
+## 2b. Or convert it in bulk
+
+For a quick, faithful import, run the generic converter:
+
+```bash
+python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>
+```
+
+It traces the bottom-line cell (`spec.cell`, or found by its label) through every cell it depends on.
+Constants become inputs, formulas become formulas with `expected`, and lookups with fixed keys
+(INDEX, MATCH, FILTER) resolve to their cell. Anything else stays a fixed number with the original
+formula in its explainer. `bottom` says how to read the cell: `xcash`, `uov`, `uov_per:<n>` or
+`wellby_per:<n>`. Guesstimate models go through `scripts/convert-guesstimate.py`.
+
+Then link it like a hand-built model: `scripts/link-parameters.py` turns moral weights into
+`v * $life_value_multiplier`, links ln-consumption values, DALY values and the discount rate to their
+assumptions (the sheet's values go into `evaluator.assumptions`, so the evaluator view still matches),
+and moves statistics several sheets share into `facts/givewell*.json`. Extend its patterns when a new
+evaluator labels these differently: nothing user-adjustable should stay a bare constant.
+
+Bulk models live in `models/grants/` and are marked `bulk: true`. After adding any:
+
+- run `npx tsx scripts/summaries.ts`: the browser gets them partially evaluated, with only the rows that depend on assumptions kept live;
+- run `npx tsx scripts/bulk-writeups.ts`: a generated write-up for charities with no other model;
+- record them in `inventory/`.
+
+GiveWell's grant sheets are imported this way by `scripts/import-givewell-grants.py`. A hand-built
+model (the steps below) always outranks a bulk one as a charity's main model.
+
 ## 3. Write the model
+
+Every model has a `charity` (an id in `charities/`) and an `owner` (an id in `owners.json`). If the
+charity already exists, for example because another evaluator models it, point the new model at
+it with a new model id such as `<charity>-<owner>`; never make a second charity record. Create the
+charity record (name, cause, website, donate link) only if it's missing. Add an owner to
+`owners.json` if the evaluator is new.
+
 
 Read `src/engine/schema.ts` and one existing model first (`models/global-health/givedirectly.json`
 is the reference). Then:

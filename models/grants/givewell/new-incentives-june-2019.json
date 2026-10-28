@@ -1,0 +1,1152 @@
+{
+ "id": "new-incentives-june-2019",
+ "name": "New Incentives CEA BOTEC - June 2019",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "new-incentives",
+ "owner": "givewell",
+ "bulk": true,
+ "summary": "GiveWell's spreadsheet \"New Incentives CEA BOTEC - June 2019\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+ "source": {
+  "publisher": "GiveWell",
+  "title": "New Incentives CEA BOTEC - June 2019",
+  "url": "https://www.givewell.org/research/incubation-grants/IDinsight-new-incentives-august-2019",
+  "sheet": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+  "published": "2019-08-01",
+  "retrieved": "2026-10-27",
+  "license": "CC BY-NC-SA 3.0 US"
+ },
+ "evaluator": {
+  "name": "GiveWell",
+  "assumptions": {
+   "count_salary_sacrifice": 0,
+   "full_credit": 0
+  }
+ },
+ "resources": [
+  {
+   "title": "New Incentives CEA BOTEC - June 2019",
+   "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+   "type": "model",
+   "note": "The spreadsheet this page reproduces."
+  },
+  {
+   "title": "GiveWell grant page (IDinsight new incentives august 2019)",
+   "url": "https://www.givewell.org/research/incubation-grants/IDinsight-new-incentives-august-2019",
+   "type": "evaluation"
+  }
+ ],
+ "sections": [
+  {
+   "id": "new_incentives",
+   "title": "New Incentives"
+  },
+  {
+   "id": "user_inputs",
+   "title": "User inputs"
+  },
+  {
+   "id": "ihme_data",
+   "title": "IHME Data"
+  },
+  {
+   "id": "moral_weights",
+   "title": "Moral weights"
+  }
+ ],
+ "rows": [
+  {
+   "id": "average_percentage_point_increase_in_vaccination_rates_from",
+   "label": "Average percentage point increase in vaccination rates from NI RCT",
+   "section": "user_inputs",
+   "value": 0.04,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B7"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_adjustment_on_the_rct_effect",
+   "label": "Internal Validity Adjustment on the RCT effect",
+   "section": "user_inputs",
+   "value": 0.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B8"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_adjustment_on_the_rct_effect",
+   "label": "External Validity Adjustment on the RCT effect",
+   "section": "user_inputs",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B9"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "expected_percentage_point_increase_in_vaccination_rates_attr_2",
+   "label": "Expected percentage point increase in vaccination rates attributable to New Incentives (after adjustments)",
+   "section": "user_inputs",
+   "formula": "average_percentage_point_increase_in_vaccination_rates_from * internal_validity_adjustment_on_the_rct_effect * external_validity_adjustment_on_the_rct_effect",
+   "expected": 0.0288,
+   "format": "percent"
+  },
+  {
+   "id": "expected_percentage_point_increase_in_vaccination_rates_attr",
+   "label": "Expected percentage point increase in vaccination rates attributable to New Incentives (after adjustments)",
+   "section": "new_incentives",
+   "formula": "expected_percentage_point_increase_in_vaccination_rates_attr_2",
+   "expected": 0.0288,
+   "format": "percent"
+  },
+  {
+   "id": "average_baseline_vaccination_coverage_rate_for_each_incentiv",
+   "label": "Average baseline vaccination coverage rate for each incentivized vaccination",
+   "section": "new_incentives",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B3"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "percentage_reduction_in_unvaccinated_population_attributable",
+   "label": "Percentage reduction in unvaccinated population attributable to New Incentives",
+   "section": "new_incentives",
+   "formula": "expected_percentage_point_increase_in_vaccination_rates_attr / (1 - average_baseline_vaccination_coverage_rate_for_each_incentiv)",
+   "expected": 0.036,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_2",
+   "label": "Proportion of vaccine-preventable deaths averted per reduction in unvaccinated population (assumed vaccine efficacy) - under 5",
+   "section": "user_inputs",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B11"
+   }
+  },
+  {
+   "id": "proportion_of_vaccine_preventable_deaths_averted_per_reducti",
+   "label": "Proportion of vaccine-preventable deaths averted per reduction in unvaccinated population (assumed vaccine efficacy) - under 5",
+   "section": "new_incentives",
+   "formula": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_2",
+   "expected": 0.85,
+   "format": "percent"
+  },
+  {
+   "id": "expected_percentage_reduction_in_vaccine_preventable_deaths",
+   "label": "Expected percentage reduction in vaccine-preventable deaths attributable to New Incentives - under 5",
+   "section": "new_incentives",
+   "formula": "percentage_reduction_in_unvaccinated_population_attributable * proportion_of_vaccine_preventable_deaths_averted_per_reducti",
+   "expected": 0.0306,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000215286012713602,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H3"
+   }
+  },
+  {
+   "id": "probability_of_death_2",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000293047546423799,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H7"
+   }
+  },
+  {
+   "id": "probability_of_death_3",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00147813577912732,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H11"
+   }
+  },
+  {
+   "id": "probability_of_death_4",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000843082144026163,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H15"
+   }
+  },
+  {
+   "id": "probability_of_death_5",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00139512811292373,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H19"
+   }
+  },
+  {
+   "id": "probability_of_death_6",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 3.53766863688521e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H23"
+   }
+  },
+  {
+   "id": "probability_of_death_7",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.0200043067799417,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H27"
+   }
+  },
+  {
+   "id": "probability_of_death_8",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00268633669735984,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H31"
+   }
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_ni_2",
+   "label": "Probability of death from vaccine-preventable diseases in Nigeria, under-5",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death, probability_of_death_2, probability_of_death_3, probability_of_death_4, probability_of_death_5, probability_of_death_6, probability_of_death_7, probability_of_death_8)",
+   "expected": 0.02695069976,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_ni",
+   "label": "Probability of death from vaccine-preventable diseases in Nigeria, under-5",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_in_ni_2",
+   "expected": 0.02695069976,
+   "format": "percent"
+  },
+  {
+   "id": "the_mortality_rate_in_northern_nigeria_is_what_percent_of_th_2",
+   "label": "The mortality rate in northern Nigeria is what percent of the average rate in Nigeria?",
+   "section": "user_inputs",
+   "value": 1.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B10"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "the_mortality_rate_in_northern_nigeria_is_what_percent_of_th",
+   "label": "The mortality rate in northern Nigeria is what percent of the average rate in Nigeria?",
+   "section": "new_incentives",
+   "formula": "the_mortality_rate_in_northern_nigeria_is_what_percent_of_th_2",
+   "expected": 1.3,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_no",
+   "label": "Probability of death from vaccine-preventable diseases in northern Nigeria, under-5",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_in_ni * the_mortality_rate_in_northern_nigeria_is_what_percent_of_th",
+   "expected": 0.03503590969,
+   "format": "percent"
+  },
+  {
+   "id": "arbitrary_cohort_size",
+   "label": "Arbitrary cohort size",
+   "section": "new_incentives",
+   "value": 1000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B11"
+   }
+  },
+  {
+   "id": "expected_vaccine_preventable_deaths_averted_per_1_000_popula",
+   "label": "Expected vaccine-preventable deaths averted per 1,000 population attributable to New Incentives - under 5",
+   "section": "new_incentives",
+   "formula": "expected_percentage_reduction_in_vaccine_preventable_deaths * probability_of_death_from_vaccine_preventable_diseases_in_no * arbitrary_cohort_size",
+   "expected": 1.072098836
+  },
+  {
+   "id": "probability_of_death_from_pneumonia_in_nigeria_under_5_2",
+   "label": "Probability of death from pneumonia in Nigeria, under-5",
+   "section": "ihme_data",
+   "formula": "probability_of_death_7",
+   "expected": 0.02000430678,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_pneumonia_in_nigeria_under_5",
+   "label": "Probability of death from pneumonia in Nigeria, under-5",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_pneumonia_in_nigeria_under_5_2",
+   "expected": 0.02000430678,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_pneumonia_in_northern_nigeria_unde",
+   "label": "Probability of death from pneumonia in northern Nigeria, under-5",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_pneumonia_in_nigeria_under_5 * the_mortality_rate_in_northern_nigeria_is_what_percent_of_th",
+   "expected": 0.02600559881,
+   "format": "percent"
+  },
+  {
+   "id": "disease_spillovers_incentivized_vaccines_reduce_pneumonia_de_2",
+   "label": "Disease spillovers - incentivized vaccines reduce pneumonia deaths by what proportion of the increase in vaccination coverage for under-5s?",
+   "section": "user_inputs",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B13"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "disease_spillovers_incentivized_vaccines_reduce_pneumonia_de",
+   "label": "Disease spillovers - incentivized vaccines reduce pneumonia deaths by what proportion of the increase in vaccination coverage for under-5s?",
+   "section": "new_incentives",
+   "formula": "disease_spillovers_incentivized_vaccines_reduce_pneumonia_de_2",
+   "expected": 0.1,
+   "format": "percent"
+  },
+  {
+   "id": "expected_pneumonia_deaths_averted_per_1_000_population_attri",
+   "label": "Expected pneumonia deaths averted per 1,000 population attributable to New Incentives - under 5",
+   "section": "new_incentives",
+   "formula": "arbitrary_cohort_size * probability_of_death_from_pneumonia_in_northern_nigeria_unde * disease_spillovers_incentivized_vaccines_reduce_pneumonia_de * expected_percentage_reduction_in_vaccine_preventable_deaths",
+   "expected": 0.07957713237
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_an_individual_under_2",
+   "label": "Value assigned to averting the death of an individual under 5 — AMF (Active)",
+   "section": "moral_weights",
+   "value": 47.22104173,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "Moral weights!B6"
+   },
+   "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic)."
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_an_individual_under",
+   "label": "Value assigned to averting the death of an individual under 5 — AMF",
+   "section": "new_incentives",
+   "formula": "value_assigned_to_averting_the_death_of_an_individual_under_2",
+   "expected": 47.22104173
+  },
+  {
+   "id": "total_units_of_value_from_new_incentives_under_5_mortality_p",
+   "label": "Total units of value from New Incentives - under 5 mortality (per 1,000 population of eligibles)",
+   "section": "new_incentives",
+   "formula": "(expected_vaccine_preventable_deaths_averted_per_1_000_popula + expected_pneumonia_deaths_averted_per_1_000_population_attri) * value_assigned_to_averting_the_death_of_an_individual_under",
+   "expected": 54.38333898
+  },
+  {
+   "id": "arbitrary_cohort_size_2",
+   "label": "Arbitrary cohort size",
+   "section": "new_incentives",
+   "value": 1000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B25"
+   }
+  },
+  {
+   "id": "probability_of_death_9",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000615640323358858,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H28"
+   }
+  },
+  {
+   "id": "probability_of_death_10",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00250272289372221,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H29"
+   }
+  },
+  {
+   "id": "probability_of_death_11",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.0206576857192169,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H30"
+   }
+  },
+  {
+   "id": "probability_of_death_from_pneumonia_in_nigeria_ages_5_74",
+   "label": "Probability of death from pneumonia in Nigeria, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_9, probability_of_death_10, probability_of_death_11)",
+   "expected": 0.02377604894,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_12",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 2.81719575097247e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H4"
+   }
+  },
+  {
+   "id": "probability_of_death_13",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 1.51041528627952e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H5"
+   }
+  },
+  {
+   "id": "probability_of_death_14",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 1.00366235308095e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H6"
+   }
+  },
+  {
+   "id": "probability_of_death_from_diptheria_ages_5_74",
+   "label": "Probability of death from diptheria, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_12, probability_of_death_13, probability_of_death_14)",
+   "expected": 5.33127339e-05,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_15",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 2.98785807263143e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H8"
+   }
+  },
+  {
+   "id": "probability_of_death_16",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000154081370524107,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H9"
+   }
+  },
+  {
+   "id": "probability_of_death_17",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000489907263774524,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H10"
+   }
+  },
+  {
+   "id": "probability_of_death_from_tetanus_ages_5_74",
+   "label": "Probability of death from tetanus, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_15, probability_of_death_16, probability_of_death_17)",
+   "expected": 0.000673867215,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_18",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000197732838474105,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H12"
+   }
+  },
+  {
+   "id": "probability_of_death_19",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00663692541309144,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H13"
+   }
+  },
+  {
+   "id": "probability_of_death_20",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.028703867831094,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H14"
+   }
+  },
+  {
+   "id": "probability_of_death_from_tuberculosis_ages_5_74",
+   "label": "Probability of death from tuberculosis, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_18, probability_of_death_19, probability_of_death_20)",
+   "expected": 0.03553852608,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_21",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 8.93899316467841e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H16"
+   }
+  },
+  {
+   "id": "probability_of_death_22",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00014710468428791,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H17"
+   }
+  },
+  {
+   "id": "probability_of_death_23",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000352575106067314,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H18"
+   }
+  },
+  {
+   "id": "probability_of_death_from_hib_meningitis_ages_5_74",
+   "label": "Probability of death from HIB meningitis, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_21, probability_of_death_22, probability_of_death_23)",
+   "expected": 0.000589069722,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_24",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 9.88804235254022e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H20"
+   }
+  },
+  {
+   "id": "probability_of_death_25",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 2.32401239908541e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H21"
+   }
+  },
+  {
+   "id": "probability_of_death_26",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 8.9320802859328e-06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H22"
+   }
+  },
+  {
+   "id": "probability_of_death_from_pertussis_ages_5_74",
+   "label": "Probability of death from pertussis, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_24, probability_of_death_25, probability_of_death_26)",
+   "expected": 0.0001310526278,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_27",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 7.18366491414409e-06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H24"
+   }
+  },
+  {
+   "id": "probability_of_death_28",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00035655713817728,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H25"
+   }
+  },
+  {
+   "id": "probability_of_death_29",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.00117372522466754,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H26"
+   }
+  },
+  {
+   "id": "probability_of_death_from_hepatitis_b_ages_5_74",
+   "label": "Probability of death from hepatitis B, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_27, probability_of_death_28, probability_of_death_29)",
+   "expected": 0.001537466028,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_30",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 0.000432989932378113,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H32"
+   }
+  },
+  {
+   "id": "probability_of_death_31",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 7.235104841623e-05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H33"
+   }
+  },
+  {
+   "id": "probability_of_death_32",
+   "label": "Probability of death",
+   "section": "ihme_data",
+   "value": 6.85352891728962e-06,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "IHME Data!H34"
+   }
+  },
+  {
+   "id": "probability_of_death_from_measles_ages_5_74",
+   "label": "Probability of death from measles, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_30, probability_of_death_31, probability_of_death_32)",
+   "expected": 0.0005121945097,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_other_vaccine_preventable_diseases",
+   "label": "Probability of death from other vaccine-preventable diseases in Nigeria, ages 5-74",
+   "section": "ihme_data",
+   "formula": "sum(probability_of_death_from_diptheria_ages_5_74, probability_of_death_from_tetanus_ages_5_74, probability_of_death_from_tuberculosis_ages_5_74, probability_of_death_from_hib_meningitis_ages_5_74, probability_of_death_from_pertussis_ages_5_74, probability_of_death_from_hepatitis_b_ages_5_74, probability_of_death_from_measles_ages_5_74)",
+   "expected": 0.03903548892,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_ni_4",
+   "label": "Probability of death from vaccine-preventable diseases in Nigeria, ages 5-74",
+   "section": "ihme_data",
+   "formula": "probability_of_death_from_pneumonia_in_nigeria_ages_5_74 + probability_of_death_from_other_vaccine_preventable_diseases",
+   "expected": 0.06281153786,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_ni_3",
+   "label": "Probability of death from vaccine-preventable diseases in Nigeria, ages 5-74",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_in_ni_4",
+   "expected": 0.06281153786,
+   "format": "percent"
+  },
+  {
+   "id": "probability_of_death_from_vaccine_preventable_diseases_in_no_2",
+   "label": "Probability of death from vaccine-preventable diseases in northern Nigeria, over-5",
+   "section": "new_incentives",
+   "formula": "probability_of_death_from_vaccine_preventable_diseases_in_ni_3 * the_mortality_rate_in_northern_nigeria_is_what_percent_of_th",
+   "expected": 0.08165499921,
+   "format": "percent"
+  },
+  {
+   "id": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_4",
+   "label": "Proportion of vaccine-preventable deaths averted per reduction in unvaccinated population (assumed vaccine efficacy) - over 5",
+   "section": "user_inputs",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B12"
+   }
+  },
+  {
+   "id": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_3",
+   "label": "Proportion of vaccine-preventable deaths averted per reduction in unvaccinated population (assumed vaccine efficacy) - over 5",
+   "section": "new_incentives",
+   "formula": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_4",
+   "expected": 0.1,
+   "format": "percent"
+  },
+  {
+   "id": "expected_percentage_reduction_in_vaccine_preventable_deaths_2",
+   "label": "Expected percentage reduction in vaccine-preventable deaths attributable to New Incentives - over 5",
+   "section": "new_incentives",
+   "formula": "proportion_of_vaccine_preventable_deaths_averted_per_reducti_3 * percentage_reduction_in_unvaccinated_population_attributable",
+   "expected": 0.0036,
+   "format": "percent"
+  },
+  {
+   "id": "expected_vaccine_preventable_deaths_averted_per_1_000_popula_2",
+   "label": "Expected vaccine-preventable deaths averted per 1,000 population attributable to New Incentives - over 5",
+   "section": "new_incentives",
+   "formula": "arbitrary_cohort_size_2 * probability_of_death_from_vaccine_preventable_diseases_in_no_2 * expected_percentage_reduction_in_vaccine_preventable_deaths_2",
+   "expected": 0.2939579972
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
+   "label": "Value assigned to averting the death of an individual 5 or older (Active)",
+   "section": "moral_weights",
+   "value": 85.33605342,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "Moral weights!B7"
+   },
+   "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic)."
+  },
+  {
+   "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
+   "label": "Value assigned to averting the death of an individual 5 or older",
+   "section": "new_incentives",
+   "formula": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
+   "expected": 85.33605342
+  },
+  {
+   "id": "total_units_of_value_from_new_incentives_over_5_mortality_pe",
+   "label": "Total units of value from New Incentives - over 5 mortality (per 1,000 population of eligibles)",
+   "section": "new_incentives",
+   "formula": "expected_vaccine_preventable_deaths_averted_per_1_000_popula_2 * value_assigned_to_averting_the_death_of_an_individual_5_or_o",
+   "expected": 25.08521535
+  },
+  {
+   "id": "developmental_benefits_are_what_percent_of_under_5_mortality_2",
+   "label": "Developmental benefits are what percent of under-5 mortality benefits?",
+   "section": "user_inputs",
+   "value": 0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B14"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "developmental_benefits_are_what_percent_of_under_5_mortality",
+   "label": "Developmental benefits are what percent of under-5 mortality benefits?",
+   "section": "new_incentives",
+   "formula": "developmental_benefits_are_what_percent_of_under_5_mortality_2",
+   "expected": 0.2,
+   "format": "percent"
+  },
+  {
+   "id": "total_units_of_value_from_new_incentives_developmental_benef",
+   "label": "Total units of value from New Incentives - developmental benefits (per 1,000 population of eligibles)",
+   "section": "new_incentives",
+   "formula": "total_units_of_value_from_new_incentives_under_5_mortality_p * developmental_benefits_are_what_percent_of_under_5_mortality",
+   "expected": 10.8766678
+  },
+  {
+   "id": "arbitrary_cohort_size_3",
+   "label": "Arbitrary cohort size",
+   "section": "new_incentives",
+   "value": 1000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B49"
+   }
+  },
+  {
+   "id": "percent_of_vaccination_always_takers_enrolled_in_new_incenti_2",
+   "label": "Percent of vaccination always-takers enrolled in New Incentives' program",
+   "section": "user_inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B19"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_vaccination_always_takers_enrolled_in_new_incenti",
+   "label": "Percent of vaccination always-takers enrolled in New Incentives' program",
+   "section": "new_incentives",
+   "formula": "percent_of_vaccination_always_takers_enrolled_in_new_incenti_2",
+   "expected": 1.0,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_those_induced_to_vaccinate_enrolled_in_new_incent_2",
+   "label": "Percent of those induced to vaccinate enrolled in New Incentives' program",
+   "section": "user_inputs",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "User inputs!B18"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_those_induced_to_vaccinate_enrolled_in_new_incent",
+   "label": "Percent of those induced to vaccinate enrolled in New Incentives' program",
+   "section": "new_incentives",
+   "formula": "percent_of_those_induced_to_vaccinate_enrolled_in_new_incent_2",
+   "expected": 1.0,
+   "format": "percent"
+  },
+  {
+   "id": "percent_of_cohort_that_receives_the_transfer",
+   "label": "Percent of cohort that receives the transfer",
+   "section": "new_incentives",
+   "formula": "average_baseline_vaccination_coverage_rate_for_each_incentiv * percent_of_vaccination_always_takers_enrolled_in_new_incenti + expected_percentage_point_increase_in_vaccination_rates_attr * percent_of_those_induced_to_vaccinate_enrolled_in_new_incent",
+   "expected": 0.2288,
+   "format": "percent"
+  },
+  {
+   "id": "baseline_annual_consumption_per_capita",
+   "label": "Baseline annual consumption per capita",
+   "section": "new_incentives",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B36"
+   },
+   "format": "usd",
+   "formula": "@givewell.baseline_annual_consumption_per_capita_2",
+   "expected": 657.45
+  },
+  {
+   "id": "transfer_per_visit_1_4_naira",
+   "label": "Transfer per visit 1-4, Naira",
+   "section": "new_incentives",
+   "value": 500.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B38"
+   }
+  },
+  {
+   "id": "exchange_rate_naira_per_usd",
+   "label": "Exchange rate, Naira per USD",
+   "section": "new_incentives",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B35"
+   },
+   "formula": "@givewell.exchange_rate_naira_per_usd",
+   "expected": 300.0
+  },
+  {
+   "id": "transfer_per_visit_1_4_usd",
+   "label": "Transfer per visit 1-4, USD",
+   "section": "new_incentives",
+   "formula": "transfer_per_visit_1_4_naira / exchange_rate_naira_per_usd",
+   "expected": 1.666666667,
+   "format": "usd"
+  },
+  {
+   "id": "transfer_for_visit_5_measles_naira",
+   "label": "Transfer for visit 5 (measles), Naira",
+   "section": "new_incentives",
+   "value": 2000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B39"
+   }
+  },
+  {
+   "id": "transfer_for_visit_5_measles_usd",
+   "label": "Transfer for visit 5 (measles), USD",
+   "section": "new_incentives",
+   "formula": "transfer_for_visit_5_measles_naira / exchange_rate_naira_per_usd",
+   "expected": 6.666666667,
+   "format": "usd"
+  },
+  {
+   "id": "total_transfer_amount_for_5_visits_usd",
+   "label": "Total transfer amount for 5 visits, USD",
+   "section": "new_incentives",
+   "formula": "4 * transfer_per_visit_1_4_usd + transfer_for_visit_5_measles_usd",
+   "expected": 13.33333333,
+   "format": "usd"
+  },
+  {
+   "id": "cost_of_each_clinic_visit_to_the_mother",
+   "label": "Cost of each clinic visit to the mother",
+   "section": "new_incentives",
+   "formula": "2 * 100 / exchange_rate_naira_per_usd",
+   "expected": 0.6666666667,
+   "format": "usd"
+  },
+  {
+   "id": "transfer_amount_less_transportation_costs_usd",
+   "label": "Transfer amount less transportation costs, USD",
+   "section": "new_incentives",
+   "formula": "total_transfer_amount_for_5_visits_usd - 5 * cost_of_each_clinic_visit_to_the_mother",
+   "expected": 10.0,
+   "format": "usd"
+  },
+  {
+   "id": "average_household_size",
+   "label": "Average household size",
+   "section": "new_incentives",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B44"
+   },
+   "formula": "@givewell.average_household_size_3",
+   "expected": 5.0
+  },
+  {
+   "id": "expected_consumption_benefit_per_person_usd",
+   "label": "Expected consumption benefit per person, USD",
+   "section": "new_incentives",
+   "formula": "transfer_amount_less_transportation_costs_usd / average_household_size",
+   "expected": 2.0,
+   "format": "usd"
+  },
+  {
+   "id": "total_increase_in_ln_consumption_per_person_from_the_transfe",
+   "label": "Total increase in ln(consumption) per person from the transfer",
+   "section": "new_incentives",
+   "formula": "ln(baseline_annual_consumption_per_capita + expected_consumption_benefit_per_person_usd) - ln(baseline_annual_consumption_per_capita)",
+   "expected": 0.003037438739
+  },
+  {
+   "id": "total_consumption_benefits_for_each_household_in_terms_of_ln",
+   "label": "Total consumption benefits for each household in terms of ln(consumption)",
+   "section": "new_incentives",
+   "formula": "total_increase_in_ln_consumption_per_person_from_the_transfe * average_household_size",
+   "expected": 0.01518719369
+  },
+  {
+   "id": "value_assigned_to_doubling_consumption_for_one_person_for_on",
+   "label": "Value assigned to doubling consumption for one person for one year (Active)",
+   "section": "moral_weights",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "Moral weights!B3"
+   },
+   "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic)."
+  },
+  {
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (Active)",
+   "section": "moral_weights",
+   "formula": "value_assigned_to_doubling_consumption_for_one_person_for_on / ln(2)",
+   "expected": 1.442695041
+  },
+  {
+   "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
+   "section": "new_incentives",
+   "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
+   "expected": 1.442695041
+  },
+  {
+   "id": "total_units_of_value_from_new_incentives_consumption_per_1_0",
+   "label": "Total units of value from New Incentives - consumption (per 1,000 population of eligibles)",
+   "section": "new_incentives",
+   "formula": "arbitrary_cohort_size_3 * percent_of_cohort_that_receives_the_transfer * total_consumption_benefits_for_each_household_in_terms_of_ln * value_assigned_to_increasing_ln_consumption_by_one_unit_for",
+   "expected": 5.01311989
+  },
+  {
+   "id": "arbitrary_cohort_size_4",
+   "label": "Arbitrary cohort size",
+   "section": "new_incentives",
+   "value": 1000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B57"
+   }
+  },
+  {
+   "id": "cost_of_the_program_per_enrolled_infant_nominal_usd",
+   "label": "Cost of the program per enrolled infant (nominal USD)",
+   "section": "new_incentives",
+   "value": 29.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1p0RtlofPa9RPLsf5-VdULtLaYPxgfjot17EhGWHZ9yw/edit",
+    "cell": "New Incentives!B54"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "cost_of_the_program_per_1_000_eligibles_nominal_usd",
+   "label": "Cost of the program per 1,000 eligibles (nominal USD)",
+   "section": "new_incentives",
+   "formula": "arbitrary_cohort_size_4 * average_baseline_vaccination_coverage_rate_for_each_incentiv * percent_of_vaccination_always_takers_enrolled_in_new_incenti * cost_of_the_program_per_enrolled_infant_nominal_usd + arbitrary_cohort_size_4 * expected_percentage_point_increase_in_vaccination_rates_attr * percent_of_those_induced_to_vaccinate_enrolled_in_new_incent * cost_of_the_program_per_enrolled_infant_nominal_usd",
+   "expected": 6635.2,
+   "format": "usd"
+  },
+  {
+   "id": "units_of_value_per_dollar_donated",
+   "label": "Units of value per dollar donated",
+   "section": "new_incentives",
+   "formula": "sum(total_units_of_value_from_new_incentives_under_5_mortality_p, total_units_of_value_from_new_incentives_over_5_mortality_pe, total_units_of_value_from_new_incentives_developmental_benef, total_units_of_value_from_new_incentives_consumption_per_1_0) / cost_of_the_program_per_1_000_eligibles_nominal_usd",
+   "expected": 0.01437158518
+  }
+ ],
+ "output": {
+  "row": "units_of_value_per_dollar_donated",
+  "unit": "uov",
+  "label": "Units of value per dollar"
+ }
+}

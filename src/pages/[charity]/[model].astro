@@ -1,0 +1,11 @@
+---
+import ModelPage from "../../components/ModelPage.astro";
+import { lib, rankable, primaryOf } from "../../lib/data";
+
+// Every model that isn't its charity's main one: other evaluators' models and country variants.
+export function getStaticPaths() {
+  return rankable.filter((m) => primaryOf(lib, m.charity)?.id !== m.id).map((m) => ({ params: { charity: m.charity, model: m.id } }));
+}
+---
+
+<ModelPage modelId={Astro.params.model!} />

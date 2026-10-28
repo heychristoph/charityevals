@@ -1,0 +1,658 @@
+{
+  "id": "shrimp-welfare-project",
+  "name": "Shrimp Welfare Project",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "charity": "shrimp-welfare-project",
+  "owner": "ace",
+  "summary": "Gets shrimp producers to stun shrimp before slaughter, and works with farms on welfare improvements. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet (2 programs with SADs averted estimates: Program 1 HSI CEA, Program 2 SSFI CEA).",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Shrimp Welfare Project review",
+    "url": "https://animalcharityevaluators.org/charity-review/shrimp-welfare-project/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1ZMSPjCga107ObiFOG1y7PlHeM_7r60b95wgGuRRUDiE/edit",
+    "published": "2025-11-04",
+    "retrieved": "2026-10-26",
+    "license": "Unclear: check ACE's terms before republishing"
+  },
+  "sections": [
+    {
+      "id": "p1_program_1_hsi_cea",
+      "title": "Program 1. Humane Slaughter Initiative"
+    },
+    {
+      "id": "p2_program_2_ssfi_cea",
+      "title": "Program 2. Sustainable Shrimp Farmers of India"
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line",
+      "explainer": "SADs averted per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model."
+    }
+  ],
+  "rows": [
+    {
+      "id": "p1_total_number_of_shrimps_produced_annually_covere",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Total number of shrimps produced annually covered by the commitments",
+      "value": 1740000000.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 1 HSI CEA!B10"
+      },
+      "explainer": "This only includes shrimps that make it to slaughter. The pre-mortality rates are unknown.\n\nACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_likelihood_of_stunners_being_deployed",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Likelihood of stunners being deployed",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 1.0
+      },
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 1 HSI CEA!B11"
+      },
+      "explainer": "Based on the track record of stunner deployment so far. So far no stunners that were committed to were not implemented, but there have been 2 cases of either a delay or a redirection of the stunners.\n\nACE's input, source type: Charity's data. Range: ACE's bounds."
+    },
+    {
+      "id": "p1_duration_of_impact",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Duration of impact [years]",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Program 1 HSI CEA!B12"
+      },
+      "explainer": "Based on the stunners' lifespan of 10 years. There is a likelihood that producers will purchase or receive a stunner, especially if they are under a public commitment.\n\nACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p1_total_number_of_shrimps_stunned_thanks_to_swp_s",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Total number of shrimps stunned thanks to SWP's work",
+      "formula": "p1_total_number_of_shrimps_produced_annually_covere * p1_likelihood_of_stunners_being_deployed * p1_duration_of_impact",
+      "expected": 15660000000
+    },
+    {
+      "id": "p1_sads_averted_per_shrimp_stunned",
+      "section": "p1_program_1_hsi_cea",
+      "label": "SADs averted per shrimp stunned",
+      "value": 0.00452,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Program 1 HSI CEA!B13"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p1_the_total_number_of_sads_averted_thanks_to_swp_s",
+      "section": "p1_program_1_hsi_cea",
+      "label": "The total number of SADs averted thanks to SWP's work",
+      "formula": "p1_total_number_of_shrimps_stunned_thanks_to_swp_s * p1_sads_averted_per_shrimp_stunned",
+      "expected": 70783200
+    },
+    {
+      "id": "p1_shrimp_suffering_during_slaughter_averted",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Shrimp suffering during slaughter averted (SADs)",
+      "formula": "p1_the_total_number_of_sads_averted_thanks_to_swp_s",
+      "expected": 70783200
+    },
+    {
+      "id": "p1_number_of_stunner_commitments_secured_in_2024",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Number of stunner commitments secured in 2024",
+      "value": 9.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 1 HSI CEA!B9"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_efficacy_of_electrical_stunning_in_shrimp",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Efficacy of electrical stunning in shrimp",
+      "value": 0.9,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (external))",
+        "cell": "Program 1 HSI CEA!B18"
+      },
+      "explainer": "This could either be if some shrimps are not stunned at all by the machine, or if they are but aren't rendered unconscious, either because of the technology or the implementation.\nCurrent estimate based on external consultations with experts.\n\nACE's input, source type: Estimate (external)."
+    },
+    {
+      "id": "p1_annual_discount",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Annual discount",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p1_duration_of_impact) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p1_duration_of_impact)",
+      "expected": 0.9401029593
+    },
+    {
+      "id": "p1_number_of_shrimps_covered_annually",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Number of shrimps covered annually",
+      "value": 520000000.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 1 HSI CEA!B24"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_of_swp_s_contribution",
+      "section": "p1_program_1_hsi_cea",
+      "label": "% of SWP's contribution",
+      "value": 0.5,
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (ACE's guess)",
+        "cell": "Program 1 HSI CEA!B25"
+      },
+      "explainer": "This is ACE's guess based on SWP's description of the work done by them and other orgs\n\nACE's input, source type: ACE's guess."
+    },
+    {
+      "id": "p1_of_swp_s_contribution_2",
+      "section": "p1_program_1_hsi_cea",
+      "label": "% of SWP's contribution",
+      "value": 0.5,
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (ACE's guess)",
+        "cell": "Program 1 HSI CEA!B28"
+      },
+      "explainer": "This is ACE's guess based on SWP's description of the work done by them and other orgs\n\nACE's input, source type: ACE's guess."
+    },
+    {
+      "id": "p1_of_swp_s_contribution_3",
+      "section": "p1_program_1_hsi_cea",
+      "label": "% of SWP's contribution",
+      "value": 0.5,
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (ACE's guess)",
+        "cell": "Program 1 HSI CEA!B31"
+      },
+      "explainer": "This is ACE's guess based on SWP's description of the work done by them and other orgs\n\nACE's input, source type: ACE's guess."
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_expenditur",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1: Humane Slaughter Initiative expenditures annually (USD)",
+      "formula": "479783 * 1.2781",
+      "expected": 613210.6523
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_additional",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1: Humane Slaughter Initiative additional future expenditures towards implementation and monitoring",
+      "formula": "3168 * p1_duration_of_impact * p1_number_of_stunner_commitments_secured_in_2024",
+      "expected": 285120
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_expenditur_2",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1: Humane Slaughter Initiative expenditures annual + future (USD)",
+      "formula": "sum(p1_program_1_humane_slaughter_initiative_expenditur, p1_program_1_humane_slaughter_initiative_additional)",
+      "expected": 898330.6523
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_expenditur_3",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1: Humane Slaughter Initiative expenditures annually including future and operational costs (USD)",
+      "formula": "p1_program_1_humane_slaughter_initiative_expenditur_2 * (703286 / 421264)",
+      "expected": 1499732.641
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_cost_benef",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1 Humane Slaughter Initiative cost-benefit [SADs averted/$]",
+      "formula": "p1_shrimp_suffering_during_slaughter_averted / p1_program_1_humane_slaughter_initiative_expenditur_3",
+      "expected": 47.19721241
+    },
+    {
+      "id": "p1_program_1_humane_slaughter_initiative_cost_benef_2",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Program 1 Humane Slaughter Initiative cost-benefit [shrimps stunned/$]",
+      "formula": "p1_total_number_of_shrimps_stunned_thanks_to_swp_s / p1_program_1_humane_slaughter_initiative_expenditur_3",
+      "expected": 10441.86115
+    },
+    {
+      "id": "p2_sads_per_shrimp_impacted_by_sludge_removal",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "SADs per shrimp impacted by sludge removal",
+      "value": 0.22035,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Program 2 SSFI CEA!B23"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p2_number_of_shrimps_affected_by_sludge_removal_in",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of shrimps affected by sludge removal in 2024",
+      "value": 35986698.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B18"
+      },
+      "explainer": "This is SWP's data from their pilot. It is close to the rough calculation based on acreage\n\nACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_duration_of_impact_of_the_sludge_removal",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Duration of impact of the sludge removal (years)",
+      "value": {
+        "low": 1.0,
+        "best": 2.0,
+        "high": 2.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (Charity's guess)",
+        "cell": "Program 2 SSFI CEA!B16"
+      },
+      "explainer": "SWP: \"We believe it typically takes at least two years or more for significant sludge accumulation, although this depends heavily on the number of cycles, feeding patterns, and other farm practices.\"\n\nACE's input, source type: Charity's guess. Range: ACE's bounds."
+    },
+    {
+      "id": "p2_annual_discount",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Annual discount",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p2_duration_of_impact_of_the_sludge_removal) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p2_duration_of_impact_of_the_sludge_removal)",
+      "expected": 0.9930966469
+    },
+    {
+      "id": "p2_number_of_shrimps_affected_by_sludge_removal_for",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of shrimps affected by sludge removal for the whole duration of impact with discounts",
+      "formula": "p2_number_of_shrimps_affected_by_sludge_removal_in * p2_duration_of_impact_of_the_sludge_removal * p2_annual_discount",
+      "expected": 71476538.24
+    },
+    {
+      "id": "p2_total_sads_averted_by_sludge_removal",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Total SADs averted by sludge removal",
+      "formula": "p2_sads_per_shrimp_impacted_by_sludge_removal * p2_number_of_shrimps_affected_by_sludge_removal_for",
+      "expected": 15749855.2
+    },
+    {
+      "id": "p2_sads_per_shrimp_not_farmed_due_to_lower_stocking",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "SADs per shrimp not farmed due to lower stocking density",
+      "value": 0.33276,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Program 2 SSFI CEA!B24"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p2_number_of_shrimps_not_being_farmed_due_to_lower_2",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of shrimps not being farmed due to lower density",
+      "value": 16800702.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B19"
+      },
+      "explainer": "This is SWP's data from the pilot based on their own stocking density measurements\n\nACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_duration_of_impact_of_the_stocking_density_decre",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Duration of impact of the stocking density decrease (years)",
+      "value": 1.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B17"
+      },
+      "explainer": "The duration of impact for the stocking density depends on the farmers keeping it lower. They might be incentivised to do that based on the lower mortality that SWP observed.\nIn this case, stocking density was measured throughout the year and is not assumed to have longer lasting impact beyond the 1 year, because farmers are less incentivised to keep the numbers lower\n\nACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_number_of_shrimps_not_being_farmed_due_to_lower",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of shrimps not being farmed due to lower density for the whole duration of impact with discounts",
+      "formula": "p2_number_of_shrimps_not_being_farmed_due_to_lower_2 * p2_annual_discount * p2_duration_of_impact_of_the_stocking_density_decre",
+      "expected": 16684720.82
+    },
+    {
+      "id": "p2_total_sads_averted_due_to_lower_stocking_density",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Total SADs averted due to lower stocking density",
+      "formula": "p2_sads_per_shrimp_not_farmed_due_to_lower_stocking * p2_number_of_shrimps_not_being_farmed_due_to_lower",
+      "expected": 5552007.701
+    },
+    {
+      "id": "p2_shrimp_suffering_averted_total",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Shrimp suffering averted total (SADs)",
+      "formula": "p2_total_sads_averted_by_sludge_removal + p2_total_sads_averted_due_to_lower_stocking_density",
+      "expected": 21301862.9
+    },
+    {
+      "id": "p2_shrimp_suffering_averted_through_sludge_removal",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Shrimp suffering averted through sludge removal (SADs)",
+      "formula": "p2_total_sads_averted_by_sludge_removal",
+      "expected": 15749855.2
+    },
+    {
+      "id": "p2_shrimp_suffering_averted_through_decreased_stock",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Shrimp suffering averted through decreased stocking density (SADs)",
+      "formula": "p2_total_sads_averted_due_to_lower_stocking_density",
+      "expected": 5552007.701
+    },
+    {
+      "id": "p2_number_of_farmers_recruited_in_2024",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of farmers recruited in 2024",
+      "value": 38.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B10"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_total_acreage",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Total acreage",
+      "value": 100.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B11"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_average_number_of_shrimps_farmed_per_acre",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Average number of shrimps farmed per acre",
+      "value": 135000.0,
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (Charity's guess)",
+        "cell": "Program 2 SSFI CEA!B12"
+      },
+      "explainer": "ACE's input, source type: Charity's guess."
+    },
+    {
+      "id": "p2_number_of_stockings_annually",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of stockings annually",
+      "value": 3.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Program 2 SSFI CEA!B13"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p2_days_of_impact_per_year",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Days of impact per year",
+      "value": 270.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Program 2 SSFI CEA!B14"
+      },
+      "explainer": "This accounts for days between harvests without shrimps in the pond.\nSWP: \"Average cycle lasts for a little over three months ideally, but depending upon the ‘crop performance’ (taking into account diseases, growth, and mortality) and market price, either partial or full harvest decisions are taken. After each harvest, there could be a break to treat or replace water for about a week.\"\n\nACE's input, source type: Estimate (ACE)."
+    },
+    {
+      "id": "p2_total_number_of_shrimps_affected_annually",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Total number of shrimps affected annually",
+      "formula": "p2_total_acreage * p2_average_number_of_shrimps_farmed_per_acre * p2_number_of_stockings_annually",
+      "expected": 40500000
+    },
+    {
+      "id": "p2_number_of_shrimps_affected_total_with_discounts",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Number of shrimps affected total with discounts for the expected duration of impact",
+      "formula": "p2_number_of_shrimps_not_being_farmed_due_to_lower + p2_number_of_shrimps_affected_by_sludge_removal_for",
+      "expected": 88161259.06
+    },
+    {
+      "id": "p2_program_1_expenditures_annually",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Program 1 (Program Name) expenditures annually (USD)",
+      "formula": "33435 * 1.2781",
+      "expected": 42733.2735
+    },
+    {
+      "id": "p2_program_1_expenditures_annually_including_operat",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Program 1 (Program Name) expenditures annually including operational costs (USD)",
+      "formula": "p2_program_1_expenditures_annually * (703286 / 421264)",
+      "expected": 71341.75478
+    },
+    {
+      "id": "p2_program_2_sustainable_shrimp_farmers_of_india_co",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Program 2: Sustainable Shrimp Farmers of India cost-benefit [SADs averted/$]",
+      "formula": "p2_shrimp_suffering_averted_total / p2_program_1_expenditures_annually_including_operat",
+      "expected": 298.5889956
+    },
+    {
+      "id": "p2_program_2_sustainable_shrimp_farmers_of_india_co_2",
+      "section": "p2_program_2_ssfi_cea",
+      "label": "Program 2: Sustainable Shrimp Farmers of India cost-benefit [shrimps affected/$]",
+      "formula": "p2_number_of_shrimps_affected_total_with_discounts / p2_program_1_expenditures_annually_including_operat",
+      "expected": 1235.75961
+    },
+    {
+      "id": "sads_total",
+      "section": "bottom",
+      "label": "SADs averted, all modelled programs",
+      "format": "integer",
+      "formula": "p1_program_1_humane_slaughter_initiative_cost_benef * p1_program_1_humane_slaughter_initiative_expenditur_3 + p2_program_2_sustainable_shrimp_farmers_of_india_co * p2_program_1_expenditures_annually_including_operat"
+    },
+    {
+      "id": "cost_total",
+      "section": "bottom",
+      "label": "Spending on the modelled programs",
+      "format": "usd",
+      "formula": "p1_program_1_humane_slaughter_initiative_expenditur_3 + p2_program_1_expenditures_annually_including_operat"
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "bottom",
+      "label": "All modelled programs: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_total / cost_total"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "format": "number",
+      "formula": "sads_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "sads_per_donor_dollar",
+    "unit": "sad",
+    "label": "SADs averted per dollar you give"
+  },
+  "evaluator": {
+    "name": "ACE",
+    "assumptions": {
+      "count_salary_sacrifice": 0,
+      "full_credit": 0,
+      "discount_rate": 0.014
+    }
+  },
+  "resources": [
+    {
+      "title": "ACE charity review",
+      "url": "https://animalcharityevaluators.org/charity-review/shrimp-welfare-project/",
+      "type": "evaluation",
+      "note": "The full evaluation."
+    },
+    {
+      "title": "ACE’s cost-effectiveness spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1ZMSPjCga107ObiFOG1y7PlHeM_7r60b95wgGuRRUDiE/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "Aquaculture Magazine (2025)",
+      "url": "https://aquaculturemag.com/2025/04/28/global-scenario-of-shrimp-industry-present-status-and-future-prospects/",
+      "type": "other"
+    },
+    {
+      "title": "Global Seafood Alliance (2023)",
+      "url": "https://www.globalseafood.org/advocate/annual-farmed-shrimp-production-survey-a-slight-decrease-in-production-reduction-in-2023-with-hopes-for-renewed-growth-in-2024/",
+      "type": "other"
+    },
+    {
+      "title": "FAO (2025)",
+      "url": "https://openknowledge.fao.org/items/66c84da1-d43a-4224-aa76-cdd7a492018c",
+      "type": "data"
+    },
+    {
+      "title": "Crustacean Compassion (2025)",
+      "url": "https://www.crustaceancompassion.org/the-snapshot-2024",
+      "type": "other"
+    },
+    {
+      "title": "Shrimp Welfare Project (2024)",
+      "url": "https://www.shrimpwelfareproject.org/blog/tackling-hydrogen-sulphide-levels-in-serepalems-shrimp-farms",
+      "type": "charity"
+    },
+    {
+      "title": "Maji (2024)",
+      "url": "https://www.researchgate.net/publication/379973513_Hydrogen_Sulphide_effect_in_Shrimp_Culture",
+      "type": "study"
+    },
+    {
+      "title": "Suo et al. (2017)",
+      "url": "https://www.researchgate.net/publication/313594065_Response_of_gut_health_and_microbiota_to_sulfide_exposure_in_Pacific_white_shrimp_Litopenaeus_vannamei",
+      "type": "study"
+    },
+    {
+      "title": "Horowitz & Horowitz (2000)",
+      "url": "https://www.globalseafood.org/advocate/sludge-an-obstacle-to-shrimp-health/",
+      "type": "other"
+    },
+    {
+      "title": "Arnott et al. (1998)",
+      "url": "https://journals.biologists.com/jeb/article-abstract/201/11/1771/7750/Tail-Flip-Mechanism-and-Size-Dependent-Kinematics",
+      "type": "study"
+    },
+    {
+      "title": "Barr et al. (2008)",
+      "url": "https://doi.org/10.1016/j.anbehav.2007.07.004",
+      "type": "study"
+    },
+    {
+      "title": "Taylor et al. (2004)",
+      "url": "https://doi.org/10.1016/j.aquaculture.2003.09.034",
+      "type": "study"
+    },
+    {
+      "title": "McKay et al. (2023)",
+      "url": "https://rethinkpriorities.org/research-area/welfare-considerations-for-farmed-shrimp/",
+      "type": "study"
+    },
+    {
+      "title": "Birch (2017)",
+      "url": "https://www.wellbeingintlstudiesrepository.org/cgi/viewcontent.cgi?article=1200&context=animsent",
+      "type": "other"
+    },
+    {
+      "title": "Legislation.gov.uk (2022)",
+      "url": "https://www.legislation.gov.uk/ukpga/2022/22",
+      "type": "other"
+    },
+    {
+      "title": "Schyns & Schilling (2013)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1048984312000872",
+      "type": "study"
+    },
+    {
+      "title": "Waldman et al. (2012)",
+      "url": "https://journals.sagepub.com/doi/10.1177/0149206312460679",
+      "type": "study"
+    },
+    {
+      "title": "Gorski et al. (2018)",
+      "url": "https://www.researchgate.net/publication/329782573_'Nobody's_paying_me_to_cry'_The_causes_of_activist_burnout_in_United_States_animal_rights_activists",
+      "type": "study"
+    },
+    {
+      "title": "Harter et al. (2002",
+      "url": "https://psycnet.apa.org/record/2002-12397-006",
+      "type": "study"
+    },
+    {
+      "title": "https://www.scarletspark.org/",
+      "url": "https://www.scarletspark.org/",
+      "type": "other"
+    }
+  ]
+}

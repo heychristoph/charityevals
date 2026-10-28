@@ -69,6 +69,12 @@ describe("models", () => {
     expect(compute(lib, m, av).out).toBe(6);
     expect(compute(lib, m, av, {}, "evaluator").out).toBe(8);
   });
+  it("reads models from before charities and owners existed (history pages read old commits)", () => {
+    const legacy = { ...base, id: "old", org: { name: "Old Org", website: "https://example.org" } };
+    const lib = buildLibrary([base, legacy], assumptions);
+    expect(lib.errors).toEqual([]);
+    expect(lib.models.has("old")).toBe(true);
+  });
   it("reads shared facts and rejects unknown ones", () => {
     const facts = [{ id: "kenya", label: "Kenya", rows: [{ id: "ppp", label: "PPP", value: 2, kind: "observed", explainer: "x" }] }];
     const m2 = { ...base, id: "f", rows: [{ id: "out", label: "Out", formula: "@kenya.ppp * 5 + @kenya.nope" }] };

@@ -39,8 +39,17 @@ function jsonFilesWorking(root: string, dir: string): unknown[] {
   return walk(dir).map((p) => JSON.parse(readFileSync(join(root, p), "utf8")));
 }
 
-/** The library as it was at a commit, or in the working copy when sha is null. */
+const libraryCache = new Map<string, Library | undefined>();
+
+/** The library as it was at a commit, or in the working copy when sha is null. Cached: every
+ * history page asks for the same commits. */
 function libraryAt(root: string, sha: string | null): Library | undefined {
+  const key = `${root}@${sha ?? "working"}`;
+  if (!libraryCache.has(key)) libraryCache.set(key, loadLibrary(root, sha));
+  return libraryCache.get(key);
+}
+
+function loadLibrary(root: string, sha: string | null): Library | undefined {
   try {
     if (sha === null)
       return buildLibrary(

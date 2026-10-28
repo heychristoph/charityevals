@@ -1,0 +1,684 @@
+{
+  "id": "dansk-vegetarisk-forening",
+  "name": "Dansk Vegetarisk Forening",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "charity": "dansk-vegetarisk-forening",
+  "owner": "ace",
+  "summary": "Trains chefs and influences Danish public funding towards plant-based food. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet (1 program with SADs averted estimates: Chefs Education CEA).",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Dansk Vegetarisk Forening review",
+    "url": "https://animalcharityevaluators.org/charity-review/dansk-vegetarisk-forening/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1opvB9PLqI8DQJkdwilu64EJAGRHKzGy0aYABdnykpMw/edit",
+    "published": "2024-11-12",
+    "retrieved": "2026-10-26",
+    "license": "Unclear: check ACE's terms before republishing"
+  },
+  "sections": [
+    {
+      "id": "p1_chefs_education_cea",
+      "title": "Program 1: New chef's education case study"
+    },
+    {
+      "id": "p2_influencing_funding_cea",
+      "title": "Program 2: Policy work - Influencing funding"
+    },
+    {
+      "id": "bottom",
+      "title": "Bottom line",
+      "explainer": "SADs averted per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model."
+    }
+  ],
+  "rows": [
+    {
+      "id": "p1_chefs_trained_per_year",
+      "section": "p1_chefs_education_cea",
+      "label": "Chefs trained per year",
+      "value": 50.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Chefs Education CEA!B6"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_plant_based_meals_prepared_by_each_chef_per_year",
+      "section": "p1_chefs_education_cea",
+      "label": "Plant-based meals prepared by each chef per year",
+      "value": 5000.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Chefs Education CEA!B7"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_years_of_impact",
+      "section": "p1_chefs_education_cea",
+      "label": "Years of impact",
+      "value": 10.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Chefs Education CEA!B8"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_total_number_of_additional_plant_based_meals_pre",
+      "section": "p1_chefs_education_cea",
+      "label": "Total number of additional plant-based meals prepared by all chefs for all years",
+      "formula": "p1_chefs_trained_per_year * p1_plant_based_meals_prepared_by_each_chef_per_year * p1_years_of_impact",
+      "expected": 2500000
+    },
+    {
+      "id": "p1_of_meals_replaced",
+      "section": "p1_chefs_education_cea",
+      "label": "% of meals replaced",
+      "value": {
+        "low": 40.0,
+        "best": 60.0,
+        "high": 80.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE (Charity's guess)",
+        "cell": "Chefs Education CEA!B10"
+      },
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+    },
+    {
+      "id": "p1_total_number_of_plant_based_meals_replaced_in_al",
+      "section": "p1_chefs_education_cea",
+      "label": "Total number of plant-based meals replaced in all years",
+      "formula": "p1_total_number_of_additional_plant_based_meals_pre * p1_of_meals_replaced / 100",
+      "expected": 1500000
+    },
+    {
+      "id": "p1_total_number_of_plant_based_meals_replaced_by_al",
+      "section": "p1_chefs_education_cea",
+      "label": "Total number of plant-based meals replaced by all chefs per year",
+      "formula": "p1_total_number_of_plant_based_meals_replaced_in_al / p1_years_of_impact",
+      "expected": 150000
+    },
+    {
+      "id": "p1_average_number_of_animals_spared_per_meal_replac",
+      "section": "p1_chefs_education_cea",
+      "label": "Average number of animals spared per meal replaced",
+      "value": {
+        "low": 0.1,
+        "best": 0.115,
+        "high": 0.13
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Chefs Education CEA!B13:D13"
+      },
+      "explainer": "ACE's best guess is the midpoint of its bounds; the range is ACE's."
+    },
+    {
+      "id": "p1_average_sads_averted_per_meal_swapped",
+      "section": "p1_chefs_education_cea",
+      "label": "Average SADs averted per meal swapped",
+      "value": {
+        "low": 1.05,
+        "best": 2.58,
+        "high": 4.11
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (ACE))",
+        "cell": "Chefs Education CEA!B14",
+        "url": "https://docs.google.com/spreadsheets/d/1aih91kFSwOc09TJl34gJxmJY6WHOZfwHtwML2OfS9Rg/edit?gid=0#gid=0"
+      },
+      "explainer": "ACE's input, source type: Estimate (ACE). Range: ACE's bounds."
+    },
+    {
+      "id": "p1_animals_spared_by_campaign_1_1",
+      "section": "p1_chefs_education_cea",
+      "label": "Animals spared by campaign 1.1 (without discounts)",
+      "formula": "p1_total_number_of_plant_based_meals_replaced_in_al * p1_average_number_of_animals_spared_per_meal_replac",
+      "expected": 172500
+    },
+    {
+      "id": "p1_sads_averted_by_campaign_1_1",
+      "section": "p1_chefs_education_cea",
+      "label": "SADs averted by campaign 1.1 (without discounts)",
+      "formula": "p1_total_number_of_plant_based_meals_replaced_in_al * p1_average_sads_averted_per_meal_swapped",
+      "expected": 3870000
+    },
+    {
+      "id": "p1_general_annual_discount_rate",
+      "section": "p1_chefs_education_cea",
+      "label": "General annual discount rate (in %)",
+      "value": 4.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Estimate (external))",
+        "cell": "Chefs Education CEA!B18",
+        "url": "https://docs.google.com/spreadsheets/d/18ROI6dRdKsNfXg5gIyBa1_7eYOjowfbw5n65zkrLnvc/edit?gid=1362437801#gid=1362437801"
+      },
+      "explainer": "ACE's input, source type: Estimate (external)."
+    },
+    {
+      "id": "p1_total_number_of_additional_plant_based_meals_swa",
+      "section": "p1_chefs_education_cea",
+      "label": "Total number of additional plant-based meals swapped in all years (with 4% discount)",
+      "value": 1265299.742,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Chefs Education CEA!B19"
+      },
+      "explainer": "ACE computes this with a Google Sheets function (such as NPV over the years of impact). The value is copied from the sheet, so changing the inputs above doesn't change it yet."
+    },
+    {
+      "id": "p1_discount_for_involvement_of_others",
+      "section": "p1_chefs_education_cea",
+      "label": "Discount for involvement of others (in %)",
+      "value": 70.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Chefs Education CEA!B20"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_meals_swapped_in_all_years",
+      "section": "p1_chefs_education_cea",
+      "label": "Meals swapped in all years (with all discounts)",
+      "formula": "p1_total_number_of_additional_plant_based_meals_swa * (1 - p1_discount_for_involvement_of_others / 100)",
+      "expected": 379589.9225
+    },
+    {
+      "id": "p1_animals_spared",
+      "section": "p1_chefs_education_cea",
+      "label": "Animals spared (with all discounts)",
+      "formula": "p1_meals_swapped_in_all_years * p1_average_number_of_animals_spared_per_meal_replac",
+      "expected": 43652.84108
+    },
+    {
+      "id": "p1_sads_averted",
+      "section": "p1_chefs_education_cea",
+      "label": "SADs averted (with all discounts)",
+      "formula": "p1_meals_swapped_in_all_years * p1_average_sads_averted_per_meal_swapped",
+      "expected": 979342
+    },
+    {
+      "id": "p1_expenditures_in_2023",
+      "section": "p1_chefs_education_cea",
+      "label": "Expenditures in 2023 (DKK)",
+      "value": 300000.0,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (Charity's data)",
+        "cell": "Chefs Education CEA!B26"
+      },
+      "explainer": "ACE's input, source type: Charity's data."
+    },
+    {
+      "id": "p1_expenditures_in_2023_2",
+      "section": "p1_chefs_education_cea",
+      "label": "Expenditures in 2023 (USD)",
+      "formula": "p1_expenditures_in_2023 * 0.1452",
+      "expected": 43560
+    },
+    {
+      "id": "p1_expenditures_in_2023_3",
+      "section": "p1_chefs_education_cea",
+      "label": "[New Cost] Expenditures in 2023 (USD)",
+      "formula": "p1_expenditures_in_2023_2 + (p1_expenditures_in_2023_2 / 1325656) * (1657070 - 1325656)",
+      "expected": 54450
+    },
+    {
+      "id": "p1_new_chef_s_education_animal_suffering_cost_benef",
+      "section": "p1_chefs_education_cea",
+      "label": "New Chef's education. Animal suffering cost-benefit [Meals replaced/$]",
+      "formula": "p1_meals_swapped_in_all_years / p1_expenditures_in_2023_3",
+      "expected": 6.971348438
+    },
+    {
+      "id": "p1_new_chef_s_education_animal_suffering_cost_benef_2",
+      "section": "p1_chefs_education_cea",
+      "label": "New Chef's education. Animal suffering cost-benefit [Animals spared/$]",
+      "formula": "p1_animals_spared / p1_expenditures_in_2023_3",
+      "expected": 0.8017050704
+    },
+    {
+      "id": "p1_new_chef_s_education_animal_suffering_cost_benef_3",
+      "section": "p1_chefs_education_cea",
+      "label": "New Chef's education. Animal suffering cost-benefit [SADs/$]",
+      "formula": "p1_sads_averted / p1_expenditures_in_2023_3",
+      "expected": 17.98607897
+    },
+    {
+      "id": "p2_amount_of_funding_influenced_by_work_in_2023",
+      "section": "p2_influencing_funding_cea",
+      "label": "Amount of funding influenced (DKK) by work in 2023",
+      "value": 95000000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (Note that 60 million DKK out of the 95 million were confirmed in 2024, although the key work towards it took place in 2023.)",
+        "cell": "Influencing funding CEA!B6"
+      },
+      "explainer": "ACE's input, source type: Note that 60 million DKK out of the 95 million were confirmed in 2024, although the key work towards it took place in 2023.."
+    },
+    {
+      "id": "p2_amount_of_funding_influenced_by_work_in_2023_2",
+      "section": "p2_influencing_funding_cea",
+      "label": "Amount of funding influenced (USD) by work in 2023 (without discounts)",
+      "formula": "p2_amount_of_funding_influenced_by_work_in_2023 * 0.1452",
+      "expected": 13794000
+    },
+    {
+      "id": "p2_discount_for_involvement_of_other_ngos",
+      "section": "p2_influencing_funding_cea",
+      "label": "Discount for involvement of other NGOs (%)",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Influencing funding CEA!B9"
+      },
+      "explainer": "ACE's input."
+    },
+    {
+      "id": "p2_amount_of_funding_influenced_by_work_in_2023_3",
+      "section": "p2_influencing_funding_cea",
+      "label": "Amount of funding influenced (USD) by work in 2023 (with discounts)",
+      "formula": "p2_amount_of_funding_influenced_by_work_in_2023_2 * (1 - p2_discount_for_involvement_of_other_ngos / 100)",
+      "expected": 12414600
+    },
+    {
+      "id": "p2_program_2_expenditures_in_2023",
+      "section": "p2_influencing_funding_cea",
+      "label": "Program 2 (influencing funding) expenditures in 2023 (DKK)",
+      "value": 500000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Influencing funding CEA!B13"
+      },
+      "explainer": "ACE's input."
+    },
+    {
+      "id": "p2_program_2_expenditures_in_2023_2",
+      "section": "p2_influencing_funding_cea",
+      "label": "Program 2 (influencing funding) expenditures in 2023 (USD)",
+      "formula": "p2_program_2_expenditures_in_2023 * 0.1452",
+      "expected": 72600
+    },
+    {
+      "id": "p2_program_2_expenditures_in_2023_3",
+      "section": "p2_influencing_funding_cea",
+      "label": "[New Cost] Program 2 (influencing funding) expenditures in 2023 (USD)",
+      "formula": "p2_program_2_expenditures_in_2023_2 + (p2_program_2_expenditures_in_2023_2 / 1325656) * (1657070 - 1325656)",
+      "expected": 90750
+    },
+    {
+      "id": "p2_program_2_expenditures_in_2022",
+      "section": "p2_influencing_funding_cea",
+      "label": "[New Cost] Program 2 (influencing funding) expenditures in 2022 (USD)",
+      "value": 90750.0,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "Influencing funding CEA!B16"
+      },
+      "explainer": "ACE's input."
+    },
+    {
+      "id": "p2_program_2_expenditures_in_2022_2023",
+      "section": "p2_influencing_funding_cea",
+      "label": "[New Cost] Program 2 (influencing funding) expenditures in 2022-2023 (USD)",
+      "formula": "sum(p2_program_2_expenditures_in_2023_3, p2_program_2_expenditures_in_2022)",
+      "expected": 181500
+    },
+    {
+      "id": "p2_program_2_monetary_value_cost_benefit",
+      "section": "p2_influencing_funding_cea",
+      "label": "Program 2 (influencing funding) monetary value cost-benefit [$/$]",
+      "formula": "p2_amount_of_funding_influenced_by_work_in_2023_3 / p2_program_2_expenditures_in_2022_2023",
+      "expected": 68.4
+    },
+    {
+      "id": "sads_total",
+      "section": "bottom",
+      "label": "SADs averted, all modelled programs",
+      "format": "integer",
+      "formula": "p1_new_chef_s_education_animal_suffering_cost_benef_3 * p1_expenditures_in_2023_3"
+    },
+    {
+      "id": "cost_total",
+      "section": "bottom",
+      "label": "Spending on the modelled programs",
+      "format": "usd",
+      "formula": "p1_expenditures_in_2023_3"
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "bottom",
+      "label": "All modelled programs: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_total / cost_total"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "format": "number",
+      "formula": "sads_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "sads_per_donor_dollar",
+    "unit": "sad",
+    "label": "SADs averted per dollar you give"
+  },
+  "evaluator": {
+    "name": "ACE",
+    "assumptions": {
+      "count_salary_sacrifice": 0,
+      "full_credit": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "ACE charity review",
+      "url": "https://animalcharityevaluators.org/charity-review/dansk-vegetarisk-forening/",
+      "type": "evaluation",
+      "note": "The full evaluation."
+    },
+    {
+      "title": "ACE’s cost-effectiveness spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1opvB9PLqI8DQJkdwilu64EJAGRHKzGy0aYABdnykpMw/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "theory of change table",
+      "url": "https://docs.google.com/document/d/10na2295ztwkh2lKYUtZLhiWy0pt21C8bHGYbsSlGPh0/edit",
+      "type": "evaluation"
+    },
+    {
+      "title": "Danish Network for Plant Proteins",
+      "url": "https://vegetarisk.dk/planteproteiner/",
+      "type": "charity"
+    },
+    {
+      "title": "Organic Denmark",
+      "url": "https://www.organicdenmark.com/",
+      "type": "other"
+    },
+    {
+      "title": "From Feed to Food 2",
+      "url": "https://www.dn.dk/media/106715/foder-til-foede-ii-rapport-web.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Our World in Data",
+      "url": "https://ourworldindata.org/animal-welfare",
+      "type": "data"
+    },
+    {
+      "title": "National Action Plan for Plant-Based Foods",
+      "url": "https://assets.fsnforum.fao.org/public/contributions/2024/2023-Danish-Action-Plan-for-Plant-based-Foods.pdf",
+      "type": "data"
+    },
+    {
+      "title": "strategy of the grant program",
+      "url": "https://plantefonden.lbst.dk/Media/638460037022291625/Strategy_Plant-Based_Food_Grant.pdf",
+      "type": "study"
+    },
+    {
+      "title": "World Resources Institute Food Service Playbook",
+      "url": "https://www.wri.org/research/food-service-playbook-promoting-sustainable-food-choices",
+      "type": "other"
+    },
+    {
+      "title": "reference list",
+      "url": "https://docs.google.com/document/d/19by-78kvdRRUnwF-9IdfBSwAeoFfMuNRRLB4FwETqNo/edit?usp=drive_link",
+      "type": "evaluation"
+    },
+    {
+      "title": "Our World in Data (2023)",
+      "url": "https://ourworldindata.org/meat-production",
+      "type": "data"
+    },
+    {
+      "title": "FAOI (n.d.)",
+      "url": "https://data.mercyforanimals.org/",
+      "type": "data"
+    },
+    {
+      "title": "spreadsheet for DVF",
+      "url": "https://docs.google.com/spreadsheets/d/1VU3_6bbbnIoTovFPB_a6ufTHEkHtOu05dHvmskll5fM/edit",
+      "type": "data"
+    },
+    {
+      "title": "Mason (2024)",
+      "url": "https://www.issuelab.org/resources/43293/43293.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Ambitious Impact’s",
+      "url": "https://www.ambitiousimpact.com/",
+      "type": "other"
+    },
+    {
+      "title": "Suffering-Adjusted Days (SADs)",
+      "url": "https://www.charityentrepreneurship.com/post/sads-suffering-adjusted-days-an-improved-animal-welfare-measurement-tool",
+      "type": "other"
+    },
+    {
+      "title": "Rethink Priorities’ ‘Welfare Ranges’ report",
+      "url": "https://rethinkpriorities.org/publications/welfare-range-estimates",
+      "type": "study"
+    },
+    {
+      "title": "Meier et al. (2021)",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3903160",
+      "type": "study"
+    },
+    {
+      "title": "Flores & Bryant (2023)",
+      "url": "https://bryantresearch.co.uk/insight-items/institutionalchange/",
+      "type": "other"
+    },
+    {
+      "title": "Bryant Research (2024)",
+      "url": "https://bryantresearch.co.uk/insight-items/institutional-change-protein-transition/",
+      "type": "other"
+    },
+    {
+      "title": "Better Food Foundation (2023)",
+      "url": "https://www.betterfoodfoundation.org/reports-publications/serving-up-plants-by-default/",
+      "type": "other"
+    },
+    {
+      "title": "European Commission (2023)",
+      "url": "https://europa.eu/eurobarometer/api/deliverable/download/file?deliverableId=88313",
+      "type": "other"
+    },
+    {
+      "title": "Malan (2022)",
+      "url": "https://doi.org/10.1086/720450",
+      "type": "study"
+    },
+    {
+      "title": "Parkin & Atwood (2022)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0272494421001742",
+      "type": "study"
+    },
+    {
+      "title": "Pechey et al. (2022)",
+      "url": "https://ijbnpa.biomedcentral.com/articles/10.1186/s12966-021-01239-z",
+      "type": "other"
+    },
+    {
+      "title": "Ólafsson (2024)",
+      "url": "https://faunalytics.org/tactics-in-practice-the-science-of-plant-based-defaults-and-nudges/",
+      "type": "study"
+    },
+    {
+      "title": "Ginn & Sparkman (2024)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0272494423002748?dgcid=author",
+      "type": "study"
+    },
+    {
+      "title": "Council of Nonprofits (2015)",
+      "url": "https://www.councilofnonprofits.org/files/media/documents/2023/a-network-approach-to-capacity-building.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Tallberg et al. (2015)",
+      "url": "https://www.cambridge.org/core/journals/british-journal-of-political-science/article/abs/ngo-influence-in-international-organizations-information-access-and-exchange/39F06F8698C4A9A10F8E593E019F1DB8",
+      "type": "study"
+    },
+    {
+      "title": "Danish Agriculture and Food Council (2023)",
+      "url": "https://branschinfo-kott.se/media/cwkegpjz/lf-facts-and-figures-2023.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Heerwagen et al. (2013)",
+      "url": "https://doi.org/10.3390/ani3020499",
+      "type": "study"
+    },
+    {
+      "title": "Denver et al. (2023)",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0959652623024149",
+      "type": "study"
+    },
+    {
+      "title": "Staudigel & Trubnikov (2022)",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/1467-8489.12472",
+      "type": "study"
+    },
+    {
+      "title": "Prag & Henriksen (2020)",
+      "url": "https://doi.org/10.3390/su12198228",
+      "type": "study"
+    },
+    {
+      "title": "Kortleve et al. (2024)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38561459/",
+      "type": "study"
+    },
+    {
+      "title": "Tyler (2020)",
+      "url": "https://faunalytics.org/follow-the-money-part-1-current-trends-in-plant-based-investment/",
+      "type": "study"
+    },
+    {
+      "title": "Aschemann-Witzel et al. (2023)",
+      "url": "https://doi.org/10.1016/j.techfore.2023.122906",
+      "type": "study"
+    },
+    {
+      "title": "Animal Ask (2022)",
+      "url": "https://www.animalask.org/post/subsidies-which-reforms-can-help-animals",
+      "type": "study"
+    },
+    {
+      "title": "Bryant (2024)",
+      "url": "https://bryantresearch.co.uk/insight-items/importance-of-price-taste/",
+      "type": "other"
+    },
+    {
+      "title": "Reipurth et al (2019)",
+      "url": "https://doi.org/10.1016/j.foodqual.2018.10.012",
+      "type": "study"
+    },
+    {
+      "title": "Animal Ask (2022)",
+      "url": "https://www.animalask.org/post/the-challenges-with-measuring-the-impact-of-lobbying",
+      "type": "study"
+    },
+    {
+      "title": "Mendez et al. (2023)",
+      "url": "https://rethinkpriorities.org/publications/inconsistent-evidence-for-price-substitution",
+      "type": "study"
+    },
+    {
+      "title": "Peacock (2023)",
+      "url": "https://rethinkpriorities.org/publications/price-taste-and-convenience-competitive-plant-based-meat-would-not-currently-replace-meat",
+      "type": "study"
+    },
+    {
+      "title": "Schyns & Schilling (2013)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1048984312000872",
+      "type": "study"
+    },
+    {
+      "title": "Waldman et al. (2012)",
+      "url": "https://journals.sagepub.com/doi/10.1177/0149206312460679",
+      "type": "study"
+    },
+    {
+      "title": "Gorski et al. (2018)",
+      "url": "https://www.researchgate.net/publication/329782573_'Nobody's_paying_me_to_cry'_The_causes_of_activist_burnout_in_United_States_animal_rights_activists",
+      "type": "study"
+    },
+    {
+      "title": "Harter et al. (2002)",
+      "url": "https://psycnet.apa.org/record/2002-12397-006",
+      "type": "study"
+    },
+    {
+      "title": "Scarlet Spark",
+      "url": "https://www.scarletspark.org/",
+      "type": "other"
+    }
+  ]
+}

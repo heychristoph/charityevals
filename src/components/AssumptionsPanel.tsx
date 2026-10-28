@@ -4,6 +4,8 @@ import MiniRanking from "./MiniRanking";
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
 import { formatValue } from "../lib/format";
+import { assumptionComparable } from "../lib/comparables";
+import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides, useView } from "../lib/assumption-state";
 import type { Row } from "../engine/schema";
 import "./assumptions.css";
@@ -38,6 +40,8 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
   const best = pickValue(row.value);
   const scale = scaleFor(row);
   const changed = Math.abs(value - best) > Math.abs(best) * 1e-9;
+  const av = useAssumptionValues();
+  const comparable = assumptionComparable(row.id, value, av);
   return (
     <div className={`assumption ${changed ? "changed" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
@@ -60,6 +64,7 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
         <span>{formatValue(scale.low, row.format)}</span>
         <span>{formatValue(scale.high, row.format)}</span>
       </div>
+      {comparable && <p className="comparable" aria-live="polite">{comparable}</p>}
       {changed && (
         <button type="button" className="link-button small reset-one" onClick={() => setAssumption(row.id, undefined, best)}>
           <RotateCcw size={13} aria-hidden /> Back to default ({formatValue(best, row.format)})
