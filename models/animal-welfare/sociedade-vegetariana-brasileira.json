@@ -71,7 +71,7 @@
       "id": "p1_annual_discount",
       "section": "p1_institutional_meat_reduction_ce",
       "label": "Annual discount (1.4%)",
-      "formula": "(1 - (1 / (1 + 0.014)) ^ p1_years_of_impact) / ((1 - 1 / (1 + 0.014)) * p1_years_of_impact)",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p1_years_of_impact) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p1_years_of_impact)",
       "expected": 0.969582538
     },
     {
@@ -239,7 +239,8 @@
     "name": "ACE",
     "assumptions": {
       "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "full_credit": 0,
+      "discount_rate": 0.014
     }
   },
   "resources": [
