@@ -14,6 +14,7 @@ const bulk: unknown[] = import.meta.env.SSR ? Object.values(bulkFiles).map((f) =
 const factFiles = import.meta.glob<{ default: unknown }>("../../facts/*.json", { eager: true });
 const charityFiles = import.meta.glob<{ default: unknown }>("../../charities/*.json", { eager: true });
 import owners from "../../owners.json";
+import { repo } from "./site";
 
 /** The facts files as written, for rebuilding a single model in the browser (see ModelView). */
 export const rawFacts = Object.values(factFiles).map((f) => f.default);
@@ -52,8 +53,9 @@ export function modelFile(m: ResolvedModel): string {
   return m.bulk ? `models/grants/${m.owner}/${m.id}.json` : `models/${m.cause}/${m.id}.json`;
 }
 
-export function historyUrl(lib: Library, m: ResolvedModel): string {
-  return `${modelUrl(lib, m)}/history`;
+/** The model's change history: the repository's commits that touched its file, and only those. */
+export function historyUrl(m: ResolvedModel): string {
+  return `${repo}/commits/main/${modelFile(m)}`;
 }
 
 /** Charities on the rankings: those with at least one model in a comparable unit. */

@@ -1,6 +1,7 @@
 // Familiar comparisons for numbers people find hard to picture: exchange rates between units, moral
 // weights, discount rates and small probabilities, restated in things people can imagine (a doubled
 // income, hours of healthy life, "1 in 30"). They're computed from the visitor's current settings.
+// The common yardstick is GiveWell's: doubling one person's income for a year.
 
 /** GiveWell's value of averting the death of a child under five from malaria, in units of value. */
 const CHILD_LIFE_UOV = 116.25;
@@ -28,10 +29,16 @@ export function assumptionComparable(id: string, v: number, av: Record<string, n
       return `A year of healthy life counts as much as doubling ${n} ${plural(n, "person's income", "people's incomes")} for a year.`;
     }
     case "daly_per_sad": {
+      // v is the share of a healthy year lost to one day of disabling pain. Animal suffering is
+      // counted in days that are, after species and intensity weights, as bad as such a day.
       const hours = v * 365 * 24;
-      return hours >= 1
-        ? `One day of an animal's suffering counts like losing ${round(hours)} hours of a person's healthy life.`
-        : `One day of an animal's suffering counts like losing ${round(hours * 60)} minutes of a person's healthy life.`;
+      const lost = hours >= 1 ? `${round(hours)} ${plural(round(hours), "hour", "hours")}` : `${round(hours * 60)} ${plural(round(hours * 60), "minute", "minutes")}`;
+      const perDay = v * (av.uov_per_daly ?? 2) * (av.animal_moral_weight ?? 1);
+      const days = perDay > 0 ? round(d / perDay) : undefined;
+      return (
+        `A day of disabling pain counts like losing ${lost} of healthy life.` +
+        (days ? ` So sparing animals suffering as bad as ${days} ${plural(days, "day", "days")} of a person's disabling pain counts as much as doubling one person's income for a year.` : "")
+      );
     }
     case "uov_per_wellby": {
       const n = round(v / d);
@@ -39,12 +46,12 @@ export function assumptionComparable(id: string, v: number, av: Record<string, n
     }
     case "animal_moral_weight":
       return v >= 0.995
-        ? "Animal suffering counts in full, at the weight its welfare range implies."
-        : `Animal suffering counts at about 1/${round(1 / v)} of the weight its welfare range implies.`;
+        ? "Animal suffering counts in full, scaled only by how much each species can suffer compared with a person."
+        : `Animal suffering counts for about 1/${round(1 / v)} of what each species' capacity to suffer implies.`;
     case "discount_rate": {
       if (v <= 0) return "Good done in 10 years counts the same as good done today.";
-      const today = 100 / (1 + v) ** 10;
-      return `$100 of good done 10 years from now counts as $${Math.round(today)} today; value halves every ${round(Math.LN2 / Math.log(1 + v))} years.`;
+      const share = 100 / (1 + v) ** 10;
+      return `Good done 10 years from now counts for ${Math.round(share)}% of the same good done today; its weight halves every ${round(Math.LN2 / Math.log(1 + v))} years.`;
     }
   }
   return undefined;
