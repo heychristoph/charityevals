@@ -8,7 +8,7 @@
     {
       "id": "cross-cause",
       "title": "Exchange rates between causes",
-      "explainer": "Every model reports in its own unit: GiveWell's units of value, suffering-adjusted days (SADs) for animals. To rank them on one list, each unit is converted to GiveWell units of value with the rates below. Change them and the ranking changes; that is the point."
+      "explainer": "Every model reports in its own unit: GiveWell's units of value, suffering-adjusted days (SADs) for animals. Animal models counted in other units (animals spared, people reached, research papers) are first converted into SADs. To rank them all on one list, each unit is then converted to GiveWell units of value with the rates below. Change them and the ranking changes; that is the point."
     },
     {
       "id": "moral-weights",
@@ -105,6 +105,58 @@
       "explainer": "SADs already scale suffering by each species' welfare range. At 1 you take those welfare ranges at face value. Below 1 you discount animal suffering further, for example because you're unsure animals are sentient or because you give more weight to humans for other reasons."
     },
     {
+      "id": "sads_per_animal_spared",
+      "section": "cross-cause",
+      "label": "Suffering-adjusted days per farmed animal spared",
+      "unit": "SADs / animal",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 22.4,
+        "high": 45
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE, Dansk Vegetarisk Forening cost-effectiveness sheet (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1opvB9PLqI8DQJkdwilu64EJAGRHKzGy0aYABdnykpMw/edit",
+        "note": "@ace.dvf_sads_per_meal / @ace.dvf_animals_spared_per_meal; cross-check: @ace.ace2016_years_suffering_per_leaflet, @ace.caged_hen_sads_per_year"
+      },
+      "explainer": "Converts ACE's older headline unit, farmed animals spared from factory farming, into suffering-adjusted days (SADs), so models that count animals spared rank with the rest.\n\nThe default is ACE's own ratio for diet change (2024): 2.58 SADs and 0.115 animals spared per meat meal replaced, so about 22 SADs per animal spared. A cross-check from ACE's 2016 models: an animal spared there stands for about 100 days of factory-farmed life, which at Ambitious Impact's 28.9 SADs per year in a battery cage is about 8 SADs.\n\nThe range runs from 4, half that cross-check, for mixes of small, short-lived animals, to 45, beyond the ratio of ACE's own bounds (8 to 41). ACE's 2016 models also count welfare reforms as \"equivalent animals spared\", so the same rate applies to them."
+    },
+    {
+      "id": "animals_spared_per_person_reached",
+      "section": "cross-cause",
+      "label": "Farmed animals spared per person reached by diet-change outreach",
+      "unit": "animals / person",
+      "format": "number",
+      "value": {
+        "low": 0.01,
+        "best": 0.18,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE's 2016 Guesstimate models (leaflets, pledges, social media)",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "note": "@ace.ace2016_animals_spared_per_video_view, @ace.ace2016_animals_spared_per_leaflet, @ace.ace2016_animals_spared_per_pledge_participant"
+      },
+      "explainer": "Converts people reached into animals spared, which then convert into SADs at the rate above. Reach says nothing by itself about behaviour, so this carries the whole judgment about how many people change their diet, by how much and for how long.\n\nACE's 2016 models give reference points that already allow for people lapsing: about 0.02 animals spared per social media video watched to the end, about 1 per leaflet (ACE later cautioned that the leafleting studies were weak) and about 6 per participant in a week-long vegan pledge. Lapsing is common: Faunalytics (2014) found that about 84% of people who adopt a vegetarian or vegan diet abandon it.\n\nThe default weights those reference points by the reach of the one model reported in people reached, Good Food Fund: about 84% of it is online views and online competition entrants, counted like video views, and 16% is people in its cooking network, counted like a leaflet. That gives about 0.18. The range runs from 0.01, below everyone counting as a passing view, to 1.5, everyone counting as more engaged than a leaflet."
+    },
+    {
+      "id": "sads_per_paper",
+      "section": "cross-cause",
+      "label": "Suffering-adjusted days per peer-reviewed paper on wild animal welfare",
+      "unit": "SADs / paper",
+      "format": "number",
+      "value": {
+        "low": 1000,
+        "best": 100000,
+        "high": 10000000
+      },
+      "kind": "judgment",
+      "explainer": "**A wide judgment call, not a published estimate.** Research on wild animal welfare does good only through what it later makes possible, and nobody, ACE included, has quantified that. Set this to your own view.\n\nThe default is a rough Fermi estimate. Interventions the field enables eventually reach 1 billion wild animals a year (more humane pest control, say), averting 0.5 SADs per animal each year, and arrive 10 years sooner because the field exists. The field succeeds with a 1 in 10 chance, and one paper earns 1/5,000 of its credit. 1 billion × 0.5 × 10 × 0.1 ÷ 5,000 = 100,000 SADs per paper.\n\nAny of those factors could be 10 times higher or lower, so the range runs from 1,000 to 10 million SADs per paper."
+    },
+    {
       "id": "uov_per_ln_consumption",
       "section": "moral-weights",
       "label": "Value of raising ln(consumption) by 1 for one person for one year",
@@ -172,12 +224,14 @@
     "people_reached": {
       "label": "people reached",
       "short": "people",
-      "explainer": "People who saw or took part in a program. Says nothing about changes in behaviour, so it isn't converted into good done."
+      "to_common": "$animals_spared_per_person_reached * $sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight",
+      "explainer": "People who saw or took part in a diet-change program. Converted into animals spared with the shared rate per person reached, then into SADs."
     },
     "paper": {
       "label": "peer-reviewed papers",
       "short": "papers",
-      "explainer": "Peer-reviewed research papers produced. Research value depends on what it enables later, which nobody has quantified for this field."
+      "to_common": "$sads_per_paper * $daly_per_sad * $uov_per_daly * $animal_moral_weight",
+      "explainer": "Peer-reviewed research papers on wild animal welfare. Converted into SADs with a shared, deliberately wide judgment call about what one paper eventually makes possible."
     },
     "wellby": {
       "label": "wellbeing-adjusted life years",
@@ -188,7 +242,8 @@
     "animals_spared": {
       "label": "animals spared",
       "short": "animals",
-      "explainer": "Farmed animals spared from life in factory farming, ACE's 2014–2017 headline unit. It counts animals of every species alike and isn't weighted by suffering, so it isn't converted into good done."
+      "to_common": "$sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight",
+      "explainer": "Farmed animals spared from life in factory farming, ACE's 2014–2017 headline unit. It counts animals of every species alike, so it is converted into SADs with the shared rate of SADs per animal spared, then like any SAD."
     },
     "daly": {
       "label": "DALYs averted",

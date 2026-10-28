@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { lib, rankedCharities, rankedGroups } from "./data";
+import { lib, rankedCharities } from "./data";
 import { assumptionValues, bottomLine, comparable, currentModelsOf, type ResolvedModel, type View } from "../engine/model";
 import type { Charity } from "../engine/schema";
-import { sensitivity, flags, rankFlips, type Sensitivity, type Flag } from "../engine/sensitivity";
+import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides, useView } from "./assumption-state";
 
 export type Result = {
@@ -95,6 +95,5 @@ function computeResults(av: Record<string, number>, view: View) {
     };
   });
   results.sort((a, b) => b.central - a.central);
-  const flips = view === "evaluator" ? [] : rankFlips(lib, rankedGroups, av);
-  return { av, results, flips, view };
+  return { av, results, view };
 }
