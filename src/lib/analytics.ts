@@ -87,6 +87,8 @@ export function setConsent(analytics: boolean) {
     attempt(() => store("local")?.removeItem(VISITOR_KEY));
     attempt(() => store("session")?.removeItem(SESSION_KEY));
   }
+  // Changes made under the previous choice aren't sent under the new one.
+  if (getConsent() !== was) cancelAssumptionEvents();
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: analytics }));
   // The page's anonymous view can't be tied to the new session, so start the session here, with this
   // page's context. It's its own event, so view counts don't count this page twice.
@@ -115,12 +117,16 @@ function pageContext(): { charity?: string; model?: string } {
   return { charity: el?.dataset.trackCharity, model: el?.dataset.trackModel };
 }
 
+/** Whether events may be sent under this choice: not after "Decline", nor, before a choice, when the
+ * browser asks not to be tracked. */
+const collecting = (consent: Consent) => consent === "granted" || (consent === undefined && !privacySignal());
+
 /** Sends one event, if the visitor's choice allows it. Never throws, never waits. */
 export function track(name: string, props: Props = {}, extra: { referrer?: string } = {}) {
   if (typeof window === "undefined") return;
   try {
     const consent = getConsent();
-    if (consent === "denied" || (consent === undefined && privacySignal())) return;
+    if (!collecting(consent)) return;
     const granted = consent === "granted";
     const ctx = pageContext();
     const body = {
@@ -152,8 +158,14 @@ const timers = new Map<string, { t: ReturnType<typeof setTimeout>; send: () => v
  */
 export function trackAssumption(id: string, value: number, defaultValue: number, toggle = false) {
   clearTimeout(timers.get(id)?.t);
+  timers.delete(id);
+  // A change is sent under the choice in force when it was made: none while collection is off, and
+  // none if the choice changes before it's sent (see setConsent).
+  const consent = getConsent();
+  if (!collecting(consent)) return;
   const send = () => {
     timers.delete(id);
+    if (getConsent() !== consent) return;
     const detail = toggle ? (value >= 0.5 ? "on" : "off") : value > defaultValue ? "higher" : value < defaultValue ? "lower" : "default";
     track("assumption_change", { key: id, detail, value });
   };
@@ -183,6 +195,7 @@ export function initAnalytics() {
   window.addEventListener("storage", (e) => {
     if (e.key !== CONSENT_KEY && e.key !== null) return;
     chosen = undefined;
+    cancelAssumptionEvents();
     // Withdrawn elsewhere (or storage cleared): this tab's session id goes too, so a later "Accept" here
     // starts a fresh session that can't be linked to the earlier one.
     if (getConsent() !== "granted") {
