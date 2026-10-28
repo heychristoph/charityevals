@@ -214,7 +214,7 @@ Responsive behaviour:
 - **At 760px and below:** ranking rows reflow to name and figure on one line, the strip full-width beneath, notes below that; the tornado drops to one column; the kind column hides.
 
 ### Named Rules
-**The One Scale Rule.** Every comparison strip uses the same fixed log scale, 0.1× to 10,000× GiveDirectly, with ticks at each power of ten. A bar means the same length on every page. Out-of-range values are clamped and marked by a square end. Only the tornado, which compares inputs within one model, uses its own fitted domain.
+**The One Scale Rule.** Every comparison strip uses the same fixed log scale, 0.1× to 10,000× GiveDirectly, with ticks at each power of ten. A bar means the same length on every page. Out-of-range values are clamped and marked by a square end. Only within-model charts fit their own domain.
 
 **The Ranking First Rule.** On the ranking page, the ranked interval chart follows the title and dek directly. There is no hero above it.
 
@@ -260,8 +260,14 @@ Rank number in Pewter, serif charity name, cause label in its ink, the interval 
 ### MiniRanking
 Below 1000px only: a sticky, one-line-per-charity list (rank, name in cause ink, multiple) pinned to the top of the assumptions panel on 94% Mist Paper with a 6px backdrop blur and a hairline beneath.
 
-### Tornado chart
-One row per input that moves the result: a label (with its kind mark) linking to the table row, a cause-tinted bar between the result at the input's low and high, a 1.5px dashed Ink line at the central result, and end values in Slate. A kind legend sits in the caption.
+### Where the uncertainty comes from
+Replaces the tornado. A 12px split bar of the result's uncertainty by source (the evaluator's judgment
+calls in Judgment Amber, your assumptions in Ledger Blue, estimates in Slate, measured data in Strong
+Hairline) with a legend of shares, then the eight inputs carrying most of it: label linking to the tree
+row or slider, a 13px line naming its source and its range (published, or the default assumed by type),
+an 8px bar scaled to the largest share, and the share. A note states the default ranges and that the
+rankings' low and high use published ranges only. The model tree's bars switch between this share
+(Judgment Amber) and the result's change if a number were 10% higher.
 
 ### Derivation ("How the number is built")
 The bottom line read as a worked calculation, generated from any model's formulas. Each step is a
@@ -314,7 +320,7 @@ State changes animate over 420ms with `cubic-bezier(0.16, 1, 0.3, 1)`: interval 
 ### Don't:
 - **Don't** colour an input kind, flag or interactive element with a cause ink.
 - **Don't** introduce a second interactive colour or a filled button.
-- **Don't** give a chart its own scale when it compares charities; only within-model charts like the tornado fit their own domain.
+- **Don't** give a chart its own scale when it compares charities; only within-model charts fit their own domain.
 - **Don't** present a result as a lone big number or stat block without its interval.
 - **Don't** set labels in uppercase, small caps or tracked-out type.
 - **Don't** put a hero, feature grid or card mosaic above or around the ranking.
