@@ -146,7 +146,7 @@ export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Fla
   const spread = s.jointHigh / s.jointLow;
   if (spread > 100) out.push({ level: "warn", short: "wide range", text: `Joint low to joint high spans ${Math.round(spread).toLocaleString("en-US")}×` });
   if (s.judgmentShare > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `${Math.round(s.judgmentShare * 100)}% of the uncertainty comes from judgment calls and shared assumptions` });
-  if (s.pointInputs.length) out.push({ level: "info", short: "point inputs", text: `${s.pointInputs.length} inputs on the result's path have no range, so they add no uncertainty here` });
+  if (s.pointInputs.length) out.push({ level: "info", short: "point inputs", text: `${s.pointInputs.length} inputs on the result's path have no published range, so this range leaves them out; where the uncertainty comes from, below, assumes one for each` });
   const published = m.source?.published ? new Date(m.source.published) : undefined;
   if (published) {
     const months = (today.getFullYear() - published.getFullYear()) * 12 + today.getMonth() - published.getMonth();

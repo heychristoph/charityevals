@@ -11,6 +11,7 @@ import type { Node } from "../engine/expr";
 import { childrenOf, lookupFor, pathTo, rootOf, shapeOf, type TreeNode } from "../engine/tree";
 import { formulaText } from "../engine/derive";
 import { rowsFeeding } from "../engine/sensitivity";
+import type { Uncertainty } from "../engine/uncertainty";
 import { useAssumptionValues } from "../lib/use-results";
 import { formatValue } from "../lib/format";
 import { oneIn } from "../lib/comparables";
@@ -86,6 +87,33 @@ function show(m: ResolvedModel, n: TreeNode): string {
   return f && f !== "number" && f !== "small" && f !== "toggle" ? formatValue(n.value, f) : fmtNum(n.value);
 }
 
+/** The row with a published range this node stands for: the row the formula names, a row it passed
+ * through on the way, or the row it ends at. */
+function rangedRowOf(u: Uncertainty, n: TreeNode): string | undefined {
+  return [n.named, ...n.via, n.rowId].find((id): id is string => !!id && u.ranged.has(id));
+}
+
+/** What the bars measure: the result's change if a number were 10% higher, or the share of the
+ * result's uncertainty that comes through a number (its leverage times how well it's known). */
+export type Metric = "spread" | "lever";
+
+/** Share of the bottom line's uncertainty coming through this node: the result's derivative with
+ * respect to it through this branch, squared, times its variance, both in its own units, so a node
+ * whose value is zero still shows what it carries. */
+function spreadShare(u: Uncertainty, n: TreeNode): number {
+  if (!u.total || !u.result || n.g === undefined) return 0;
+  const ranged = rangedRowOf(u, n);
+  const v = ranged ? u.rowAbsVar(ranged)
+    : n.type === "assumption" || n.type === "fact" ? u.leafAbsVar(n.type, n.refId!)
+    : n.rowId ? u.rowAbsVar(n.rowId)
+    : n.expr ? u.exprAbsVar(n.expr)
+    : 0;
+  // (change in ln(result) through this branch)² × this number's variance, out of the whole.
+  return Math.min(1, ((n.g / u.result) ** 2 * v) / u.total);
+}
+
+const shareText = (x: number) => (x < 0.005 ? "<1%" : `${Math.round(x * 100)}%`);
+
 /** "+6.2%": the bottom line's change if this number were 10% higher. */
 function leverText(e: number | undefined): string {
   if (e === undefined) return "—";
@@ -103,6 +131,10 @@ type Ctx = {
   all: Set<string>;
   focus: string;
   flash?: string;
+  metric: Metric;
+  u: Uncertainty;
+  /** The bar's length, 0–1, under the current metric. */
+  weight: (n: TreeNode) => number;
   toggle: (n: TreeNode, depth: number) => void;
   showAll: (key: string) => void;
   fx: Set<string>;
@@ -213,22 +245,28 @@ function Detail({ ctx, n, id, lines, formula }: { ctx: Ctx; n: TreeNode; id: str
   );
 }
 
-function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode; depth: number; pos: number; size: number; parentLabel?: string }) {
+function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: TreeNode; depth: number; pos: number; size: number; parentLabel?: string; under?: string }) {
   const { m, look, open, all } = ctx;
   const isOpen = open.has(n.key);
   const branch = isBranch(n);
   const id = domId(n.key);
   const label = labelOf(m, n);
+  const spread = ctx.metric === "spread";
+  // Below a row whose own published range stands for its uncertainty, parts add none of their own.
+  const rangedRow = rangedRowOf(ctx.u, n);
+  const ranged = !!rangedRow;
+  const below = under ?? (ranged ? label : undefined);
   const kids = isOpen && branch ? childrenOf(m, n, look) : [];
   // The parts with the most leverage, kept in formula order; the rest behind "n more".
-  const ranked = [...kids].sort((a, b) => Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0));
+  const ranked = [...kids].sort((a, b) => (spread && (under || ranged) ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
   const shown = all.has(n.key) || kids.length <= CAP + 1 ? kids : kids.filter((k) => ranked.indexOf(k) < CAP);
   const hidden = kids.filter((k) => !shown.includes(k));
-  const hiddenLever = hidden.reduce((s, k) => s + Math.abs(k.e ?? 0), 0);
+  const hiddenWeight = hidden.reduce((s, k) => s + (spread && !(under || ranged) ? ctx.weight(k) : Math.abs(k.e ?? 0)), 0);
   const how = n.expr ? shapeOf(n.expr).how : undefined;
   const odds = oneIn(label, n.value);
   const e = n.e;
   const root = depth === 1;
+  const share = spread && !under ? ctx.weight(n) : 0;
   const formula = isOpen ? formulaOf(m, n) : undefined;
   const fxOpen = !!formula && ctx.fx.has(n.key);
   const lines = isOpen ? detailLines(ctx, n, parentLabel) : [];
@@ -274,20 +312,30 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
         <span
           id={`${id}-e`}
           className="tn-lev"
-          title={e === undefined ? "No measurable effect at this value." : `If this number were 10% higher, the bottom line would move about ${leverText(e)}${root ? "" : " through this branch"}.`}
+          title={spread
+            ? under ? `Counted in the published range of “${under}”.`
+            : `${shareText(share)} of the uncertainty in the bottom line comes${root ? "" : " through this branch"}: how much it moves the result, times how well it's known${ranged ? " (from its published range)" : ""}.`
+            : e === undefined ? "No measurable effect at this value." : `If this number were 10% higher, the bottom line would move about ${leverText(e)}${root ? "" : " through this branch"}.`}
         >
-          {n.type !== "const" && (
+          {n.type !== "const" && (spread ? (
+            <>
+              <span className="tn-track" aria-hidden><span className="tn-bar tn-bar-spread" style={{ width: `${share * 100}%` }} /></span>
+              <span className="tn-pct num">{under
+                ? <><span className="visually-hidden">, counted in the range above</span><span aria-hidden>in range</span></>
+                : <><span className="visually-hidden">, share of the uncertainty </span>{shareText(share)}</>}</span>
+            </>
+          ) : (
             <>
               <span className="tn-track" aria-hidden><span className={`tn-bar ${e !== undefined && e < 0 ? "neg" : ""}`} style={{ width: `${Math.min(Math.abs(e ?? 0), 1) * 100}%` }} /></span>
               <span className="tn-pct num"><span className="visually-hidden">, if 10% higher the result moves </span>{leverText(e)}</span>
             </>
-          )}
+          ))}
         </span>
       </div>
       {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} formula={fxOpen ? formula : undefined} />}
       {isOpen && branch && (
         <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
-          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} />)}
+          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} under={below} />)}
           {hidden.length > 0 && (
             <li
               role="treeitem"
@@ -305,7 +353,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
                 <span className="tn-twist" aria-hidden />
                 <span className="tn-name tn-more">
                   Show {hidden.length} more {hidden.length === 1 ? "part" : "parts"}
-                  <span className="tn-more-note"> · together they move the result {leverText(hiddenLever).replace(/^[+−]/, "")} or less</span>
+                  <span className="tn-more-note"> · {spread && !(under || ranged) ? `together ${shareText(hiddenWeight)} of the uncertainty or less` : `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less`}</span>
                 </span>
               </div>
             </li>
@@ -326,7 +374,7 @@ function matches(m: ResolvedModel, q: string, used: Set<string>) {
     .slice(0, 8);
 }
 
-export default function ModelTree({ model, values, view }: { model: ResolvedModel; values: Record<string, number>; view: View }) {
+export default function ModelTree({ model, values, view, u }: { model: ResolvedModel; values: Record<string, number>; view: View; u: Uncertainty }) {
   const av = useAssumptionValues();
   const look = useMemo(() => lookupFor(lib, model, values, av, view), [model, values, av, view]);
   const root = useMemo(() => rootOf(model, look), [model, look]);
@@ -338,6 +386,8 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
   const [orphan, setOrphan] = useState<string>();
   const [q, setQ] = useState("");
   const [fx, setFx] = useState<Set<string>>(() => new Set());
+  const [metric, setMetric] = useState<Metric>("spread");
+  const weight = (n: TreeNode) => (metric === "spread" ? spreadShare(u, n) : Math.abs(n.e ?? 0));
   const toggleFx = (key: string) => setFx((f) => {
     const x = new Set(f);
     x.has(key) ? x.delete(key) : x.add(key);
@@ -388,20 +438,21 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
   const followLever = () => {
     const keys = ["r"];
     let n = root;
-    for (let i = 0; i < 40 && n.expr; i++) {
+    // Following the uncertainty stops at a row whose published range stands for it.
+    for (let i = 0; i < 40 && n.expr && !(metric === "spread" && rangedRowOf(u, n)); i++) {
       const kids = childrenOf(model, n, look).filter((k) => k.type !== "const");
       if (!kids.length) break;
-      n = kids.reduce((b, k) => (Math.abs(k.e ?? 0) > Math.abs(b.e ?? 0) ? k : b));
+      n = kids.reduce((b, k) => (weight(k) > weight(b) ? k : b));
       keys.push(n.key);
     }
-    track("tree_open", { value: keys.length, detail: "lever" });
+    track("tree_open", { value: keys.length, detail: metric === "spread" ? "spread" : "lever" });
     setOpen((o) => new Set([...o, ...keys]));
     setFocus(n.key);
     setFlash(n.key);
     setPending(n.key);
   };
 
-  // Links to a row (#row-<id>) from the tornado, the derivation, formulas and the history page.
+  // Links to a row (#row-<id>) from the uncertainty list, the derivation, formulas and the history page.
   const revealLatest = useRef(reveal);
   revealLatest.current = reveal;
   useEffect(() => {
@@ -500,7 +551,7 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
     }
   };
 
-  const ctx: Ctx = { m: model, look, view, open, all, focus, flash, toggle, showAll, setFocus, fx, toggleFx };
+  const ctx: Ctx = { m: model, look, view, open, all, focus, flash, metric, u, weight, toggle, showAll, setFocus, fx, toggleFx };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 
@@ -509,12 +560,20 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
       <h2 id="tree-title">How the pieces fit together</h2>
       <p className="tn-intro">
         The bottom line at the top; under each number, the numbers it's made from and how they combine. Open any of them.
-        The bar shows how much the bottom line moves if that number were 10% higher.
       </p>
+      <div className="tn-metric small" role="radiogroup" aria-label="What the bars show">
+        <span className="muted">Bars show</span>
+        {([["spread", "Share of the uncertainty"], ["lever", "Result if 10% higher"]] as const).map(([k, label]) => (
+          <button key={k} type="button" role="radio" aria-checked={metric === k} className={`tn-metric-opt ${metric === k ? "on" : ""}`}
+            onClick={() => { setMetric(k); track("tree_metric", { key: k }); }}>
+            {label}
+          </button>
+        ))}
+      </div>
 
       <div className="tn-tools">
         <div className="tn-actions small">
-          <button type="button" className="link-button" onClick={followLever}>Follow the biggest lever</button>
+          <button type="button" className="link-button" onClick={followLever}>{metric === "spread" ? "Follow the biggest uncertainty" : "Follow the biggest lever"}</button>
           <button type="button" className="link-button" disabled={open.size <= 1 && !orphan} onClick={() => { setOpen(new Set(["r"])); setAll(new Set()); setOrphan(undefined); setFocus("r"); }}>Collapse all</button>
         </div>
         <div className="tn-search" role="search">
@@ -559,7 +618,7 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
       <div className="tn-cols small" aria-hidden>
         <span />
         <span>Value</span>
-        <span>Result if 10% higher</span>
+        <span>{metric === "spread" ? "Share of the uncertainty" : "Result if 10% higher"}</span>
       </div>
       <ul ref={tree} role="tree" aria-labelledby="tree-title" className="tn-tree" onKeyDown={onKey}>
         <Item ctx={ctx} n={root} depth={1} pos={1} size={1} />
@@ -571,7 +630,9 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
           <span><span className="kind-dot kind-judgment" aria-hidden /> judgment or your assumption</span>
         </p>
         <p>
-          Bars measure each number through its own branch; a number used in several places moves the result through each.
+          {metric === "spread"
+            ? `Share of the uncertainty: how much a number moves the result, times how loosely it's known, out of the same total as where the uncertainty comes from, above.${u.conversionShare >= 0.005 ? ` The other ${shareText(u.conversionShare)} comes from converting this result into the common unit (your exchange rates), outside this tree.` : ""}`
+            : "Bars measure each number through its own branch; a number used in several places moves the result through each."}
           The {rowCount} rows are in <a href={`https://github.com/heychristoph/charityevals/blob/main/${modelFile(model)}`}>the model file</a>.
         </p>
       </div>

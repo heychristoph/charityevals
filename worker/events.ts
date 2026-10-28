@@ -17,6 +17,7 @@ export const EVENTS = [
   "derivation_open",
   "table_open",
   "tree_open",
+  "tree_metric",
   "suggestion_sent",
   "outbound_click",
 ] as const;

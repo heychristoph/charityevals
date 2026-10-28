@@ -91,6 +91,16 @@ export function partElasticity(expr: Node, part: Node, look: Lookup): number | u
   return Number.isFinite(e) ? Math.round(e * 1000) / 1000 : undefined;
 }
 
+/** Derivative of a formula with respect to one of its parts, holding the rest: a 1% nudge, or a tiny
+ * absolute one when the part is zero. Undefined when either isn't a number. */
+export function partDerivative(expr: Node, part: Node, look: Lookup): number | undefined {
+  const base = safe(expr, look), v = safe(part, look);
+  if (!Number.isFinite(base) || !Number.isFinite(v)) return undefined;
+  const step = v !== 0 ? Math.abs(v) * 0.01 : 1e-6;
+  const d = (safe(replace(expr, part, { type: "num", value: v + step }), look) - base) / step;
+  return Number.isFinite(d) ? d : undefined;
+}
+
 export const valueOfNode = safe;
 
 /** What a reference ends at once rows that only pass another number along are skipped: a row whose
@@ -163,24 +173,27 @@ export type TreeNode = {
   value: number;
   /** % change in the bottom line for a 1% change in this number, through this branch. */
   e?: number;
+  /** Change in the bottom line per unit change in this number, through this branch. Unlike `e`, it
+   * exists when this number or its formula is zero. */
+  g?: number;
 };
 
 /** The root: the model's output row. */
 export function rootOf(m: ResolvedModel, look: Lookup): TreeNode {
-  return nodeFor(m, { type: "ref", scope: "row", name: m.output!.row }, "r", undefined, look, 1);
+  return nodeFor(m, { type: "ref", scope: "row", name: m.output!.row }, "r", undefined, look, 1, 1);
 }
 
-function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined, look: Lookup, e: number | undefined): TreeNode {
+function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined, look: Lookup, e: number | undefined, g?: number): TreeNode {
   const value = safe(n, look);
-  if (n.type === "num") return { key, op, type: "const", via: [], value, e };
-  if (n.type === "ref" && n.scope !== "row") return { key, op, type: n.scope, refId: n.name, via: [], value, e };
+  if (n.type === "num") return { key, op, type: "const", via: [], value, e, g };
+  if (n.type === "ref" && n.scope !== "row") return { key, op, type: n.scope, refId: n.name, via: [], value, e, g };
   if (n.type === "ref") {
     const t = passThrough(m, n.name, look);
-    if (t.scope !== "row") return { key, op, type: t.scope, refId: t.id, named: n.name, via: t.via, value, e };
+    if (t.scope !== "row") return { key, op, type: t.scope, refId: t.id, named: n.name, via: t.via, value, e, g };
     const node = m.byId.get(t.id)?.node;
-    return { key, op, type: node ? "row" : "input", rowId: t.id, named: n.name, via: t.via, expr: node, value, e };
+    return { key, op, type: node ? "row" : "input", rowId: t.id, named: n.name, via: t.via, expr: node, value, e, g };
   }
-  return { key, op, type: "expr", expr: n, via: [], value, e };
+  return { key, op, type: "expr", expr: n, via: [], value, e, g };
 }
 
 /** A node's parts, each with its leverage on the bottom line through this branch (chain rule). */
@@ -189,7 +202,8 @@ export function childrenOf(m: ResolvedModel, node: TreeNode, look: Lookup): Tree
   const expr = node.expr;
   return shapeOf(expr).parts.map((p, i) => {
     const local = node.e === undefined ? undefined : partElasticity(expr, p.node, look);
-    return nodeFor(m, p.node, `${node.key}.${i}`, p.op, look, local === undefined || node.e === undefined ? undefined : node.e * local);
+    const d = node.g === undefined ? undefined : partDerivative(expr, p.node, look);
+    return nodeFor(m, p.node, `${node.key}.${i}`, p.op, look, local === undefined || node.e === undefined ? undefined : node.e * local, d === undefined || node.g === undefined ? undefined : node.g * d);
   });
 }
 
