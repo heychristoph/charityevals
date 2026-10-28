@@ -8,6 +8,7 @@ import { useAssumptionValues, useResultsFor } from "../lib/use-results";
 import { useView } from "../lib/assumption-state";
 import { formatMultiple, formatValue } from "../lib/format";
 import { oneIn } from "../lib/comparables";
+import { track } from "../lib/analytics";
 import "./derivation.css";
 
 /** One evaluator's current model of this charity, as offered by the toggle. */
@@ -169,7 +170,11 @@ function Unfold({ ctx, rowId, depth }: { ctx: Ctx; rowId: string; depth: number 
   const { id, via } = resolveAlias(ctx.m, rowId);
   const step = stepOf(ctx.m, id);
   const [opened, setOpened] = useState<string[]>([]);
-  const toggle = (k: string) => setOpened((o) => (o.includes(k) ? o.filter((x) => x !== k) : [...o, k]));
+  const toggle = (k: string) => {
+    // How deep readers go, not what they open.
+    if (!opened.includes(k)) track("derivation_open", { value: depth + 1 });
+    setOpened((o) => (o.includes(k) ? o.filter((x) => x !== k) : [...o, k]));
+  };
   if (step.type === "input") return null;
   const children = opened.filter((k) => k.startsWith("row:")).map((k) => k.slice(4));
   const r = ctx.m.byId.get(id)!;
@@ -236,7 +241,10 @@ export default function Derivation({ model, choices }: { model: ResolvedModel; c
             const r = results.find((x) => x.model.id === c.id);
             const cm = lib.models.get(c.id);
             return (
-              <button key={c.id} type="button" role="tab" aria-selected={c.id === sel} className="dv-owner" onClick={() => setSel(c.id)}>
+              <button key={c.id} type="button" role="tab" aria-selected={c.id === sel} className="dv-owner" onClick={() => {
+                if (c.id !== sel) track("evaluator_tab", { key: c.owner, detail: c.id === model.id ? "page" : "other" });
+                setSel(c.id);
+              }}>
                 {owner(c.owner)}
                 {r && cm && <span className="num dv-owner-val">{comparable(lib, cm) ? formatMultiple(r.central) : "not ranked"}</span>}
               </button>

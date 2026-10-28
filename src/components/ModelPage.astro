@@ -50,7 +50,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
 ---
 
 <Base title={siblings.length > 1 || model.kind === "variant" ? `${model.name} (${owner.short})` : charity.name} description={model.summary ?? charity.summary} active="rankings">
-  <div class="page layout" style={`--cause: var(--cause-${model.cause})`}>
+  <div class="page layout" style={`--cause: var(--cause-${model.cause})`} data-track-charity={charity.id} data-track-model={model.id}>
     <div class="main">
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
@@ -69,13 +69,13 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         <p class="m-source small">
           <strong>{model.name}</strong>
           <span class="muted"> · by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}</span>
-          {model.source && <> · <a href={model.source.url}>source</a></>}
-          {model.source?.sheet && <> · <a href={model.source.sheet}>spreadsheet</a></>}
+          {model.source && <> · <a href={model.source.url} data-track-kind="source">source</a></>}
+          {model.source?.sheet && <> · <a href={model.source.sheet} data-track-kind="spreadsheet">spreadsheet</a></>}
           {" · "}<a href={historyUrl(lib, model)}>history</a>
         </p>
         {charity.donate && (
           <div class="donate">
-            <a class="donate-button" href={charity.donate} rel="noopener">Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
+            <a class="donate-button" href={charity.donate} rel="noopener" data-track="donate" data-charity={charity.id}>Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
             <span class="small muted">{charity.donate_via ? `Through ${charity.donate_via}'s form. ` : ""}We take nothing and aren't paid for listings.</span>
           </div>
         )}
@@ -137,12 +137,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             <div class="res-group">
               <h3>{g.title} <span class="muted small num">{g.items.length}</span></h3>
               <ul>
-                {g.items.slice(0, 8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a>{r.note && <span class="muted small"> · {r.note}</span>}</li>)}
+                {g.items.slice(0, 8).map((r) => <li><a href={r.url} rel="noopener" data-track-kind={`resource-${g.type}`}>{r.title}</a>{r.note && <span class="muted small"> · {r.note}</span>}</li>)}
               </ul>
               {g.items.length > 8 && (
                 <details>
                   <summary class="small">Show {g.items.length - 8} more</summary>
-                  <ul>{g.items.slice(8).map((r) => <li><a href={r.url} rel="noopener">{r.title}</a></li>)}</ul>
+                  <ul>{g.items.slice(8).map((r) => <li><a href={r.url} rel="noopener" data-track-kind={`resource-${g.type}`}>{r.title}</a></li>)}</ul>
                 </details>
               )}
             </div>

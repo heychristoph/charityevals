@@ -7,6 +7,7 @@ import { formatValue } from "../lib/format";
 import { assumptionComparable } from "../lib/comparables";
 import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides, useView } from "../lib/assumption-state";
+import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import "./assumptions.css";
 
@@ -56,7 +57,11 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
           min={0}
           max={STEPS}
           value={scale.toStep(value)}
-          onChange={(e) => setAssumption(row.id, scale.fromStep(Number(e.target.value)), best)}
+          onChange={(e) => {
+            const v = scale.fromStep(Number(e.target.value));
+            setAssumption(row.id, v, best);
+            trackAssumption(row.id, v, best);
+          }}
           aria-valuetext={formatValue(value, row.format)}
         />
       </div>
@@ -66,7 +71,10 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
       </div>
       {comparable && <p className="comparable" aria-live="polite">{comparable}</p>}
       {changed && (
-        <button type="button" className="link-button small reset-one" onClick={() => setAssumption(row.id, undefined, best)}>
+        <button type="button" className="link-button small reset-one" onClick={() => {
+          setAssumption(row.id, undefined, best);
+          trackAssumption(row.id, best, best);
+        }}>
           <RotateCcw size={13} aria-hidden /> Back to default ({formatValue(best, row.format)})
         </button>
       )}
@@ -97,7 +105,10 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
           aria-checked={on}
           aria-labelledby={`l-${row.id}`}
           className="switch"
-          onClick={() => setAssumption(row.id, on ? 0 : 1, best)}
+          onClick={() => {
+            setAssumption(row.id, on ? 0 : 1, best);
+            trackAssumption(row.id, on ? 0 : 1, best, true);
+          }}
         >
           <span className="switch-knob" />
           <span className="switch-text">{on ? "On" : "Off"}</span>
@@ -150,13 +161,18 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             className="link-button"
             onClick={() => {
               navigator.clipboard?.writeText(window.location.href);
+              track("link_copy", { value: changedCount });
               setCopied(true);
               setTimeout(() => setCopied(false), 1600);
             }}
           >
             {copied ? <Check size={14} aria-hidden /> : <Link2 size={14} aria-hidden />} {copied ? "Copied" : "Copy link"}
           </button>
-          <button type="button" className="link-button" disabled={!changedCount} onClick={resetAssumptions}>
+          <button type="button" className="link-button" disabled={!changedCount} onClick={() => {
+            cancelAssumptionEvents();
+            track("assumption_reset", { value: changedCount });
+            resetAssumptions();
+          }}>
             <RotateCcw size={14} aria-hidden /> Reset{changedCount ? ` (${changedCount})` : ""}
           </button>
         </div>
