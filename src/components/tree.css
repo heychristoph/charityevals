@@ -6,6 +6,7 @@
 .model-tree {
   display: grid;
   gap: var(--s3);
+  container: tree / inline-size;
 }
 .model-tree h2 {
   margin: 0;
@@ -462,7 +463,19 @@
   color: var(--ink-2);
 }
 
-@media (max-width: 760px) {
+/* A middling column: narrower value and bar columns leave the label room. */
+@container tree (max-width: 760px) {
+  .tn-cols,
+  .tn-row {
+    grid-template-columns: 18px minmax(0, 1fr) 96px 136px;
+  }
+  .tn-lev {
+    grid-template-columns: minmax(0, 1fr) 46px;
+  }
+}
+
+/* Narrow column (phones, or a squeezed main column): the label gets its own line, value and bar beneath. */
+@container tree (max-width: 600px) {
   .tn-cols {
     display: none;
   }

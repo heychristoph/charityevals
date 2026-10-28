@@ -293,7 +293,7 @@ on 1px Strong Hairline rails with elbows. Only the six parts with the most lever
 behind a "Show n more parts" row. Rows that only pass a number along are skipped. An open node shows a Mist
 Paper detail (explainer, source, range, where the evaluator differs); the raw formula sits behind a small
 "formula" text button. Tools above: "Follow the biggest lever" (opens the highest-leverage chain), "Collapse
-all", and a search field; rows the bottom line doesn't use open as a separate Mist Paper card. Under 760px the
+all", and a search field; rows the bottom line doesn't use open as a separate Mist Paper card. In a column under 600px the
 value and bar drop beneath the label and deep branches stop indenting.
 
 ### Motion
