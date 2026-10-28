@@ -65,6 +65,14 @@ describe("lint", () => {
   it("flags an adjustment that never reaches the result", () => {
     expect(codes(withRow(base(), "total_adj", { formula: "counterfactual_adj * attribution_share * implementation_adj" }))).toContain("unapplied:evidence_adj");
   });
+  it("accepts a canonical adjustment kept as a summary of branch adjustments", () => {
+    const raw = withRow(base(), "total_adj", { formula: "a_evidence_adj * counterfactual_adj * attribution_share * implementation_adj" });
+    const rows = [...(raw.rows as Record<string, unknown>[])];
+    rows.splice(rows.findIndex((r) => r.id === "total_adj"), 0, { id: "a_evidence_adj", section: "adjustments", label: "Evidence adjustment, branch A", value: { low: 0.5, best: 0.7, high: 0.9 }, kind: "judgment", explainer: "Branch A's own evidence adjustment, with a rationale long enough to pass the lint check." });
+    const found = codes({ ...raw, rows });
+    expect(found).not.toContain("unapplied:evidence_adj");
+    expect(codes(withRow(base(), "total_adj", { formula: "counterfactual_adj * attribution_share * implementation_adj" }))).toContain("unapplied:evidence_adj");
+  });
   it("flags out-of-bounds canonical values", () => {
     expect(codes(withRow(base(), "counterfactual_adj", { value: 1.4 }))).toContain("bounds:counterfactual_adj");
   });

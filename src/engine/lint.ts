@@ -92,7 +92,15 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   if (output && m.byId.has(output)) {
     // The adjustments and the cost must actually reach the bottom line.
     for (const r of ["cost_total", "evidence_adj", "counterfactual_adj", "attribution_share", "total_adj", "donor_cost_share", ...(m.byId.has("implementation_adj") ? ["implementation_adj"] : []), ...(m.byId.has("leverage_funging_adj") ? ["leverage_funging_adj"] : []), ...(m.byId.has("unmodelled_benefits_adj") ? ["unmodelled_benefits_adj"] : [])])
-      if (m.byId.has(r) && !path.has(r)) add("high", "unapplied", `${r} is computed but never reaches the bottom line`, `Use ${r} in the chain that leads to ${output}.`, r);
+      if (m.byId.has(r) && !path.has(r)) {
+        // Multi-branch models (templates.md convention 4) apply branch-level adjustments
+        // (`<branch>_counterfactual_adj`) and keep the canonical row as a weighted average for
+        // reading only. That is fine as long as every branch's own adjustment reaches the result.
+        const branches = m.rows.filter((x) => x.id.endsWith(`_${r}`) && x.id !== r);
+        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id)))
+          add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches.", r);
+        else add("high", "unapplied", `${r} is computed but never reaches the bottom line`, `Use ${r} in the chain that leads to ${output}, or (multi-branch models) apply a <branch>_${r} row in every branch.`, r);
+      }
     const perDollar = m.byId.get(ids.perDollar);
     if (perDollar && !upstream(m, ids.perDollar).has("cost_total")) add("high", "per-dollar", `${ids.perDollar} doesn't divide by cost_total`, `${ids.perDollar} = outcome_total / cost_total.`, ids.perDollar);
     const out = m.byId.get(output);
