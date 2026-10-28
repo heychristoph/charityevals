@@ -16,6 +16,7 @@ export const EVENTS = [
   "evaluator_tab",
   "derivation_open",
   "table_open",
+  "tree_open",
   "suggestion_sent",
   "outbound_click",
 ] as const;

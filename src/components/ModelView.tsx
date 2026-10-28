@@ -1,40 +1,15 @@
 import type React from "react";
-import { Fragment, useEffect, useMemo, useState } from "react";
-import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
-import { lib, modelUrl, rawFacts, bulkRaw } from "../lib/data";
-import { buildLibrary, comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
-import { rowsFeeding } from "../engine/sensitivity";
+import { useMemo } from "react";
+import { AlertTriangle, Info } from "lucide-react";
+import { lib, rawFacts, bulkRaw } from "../lib/data";
+import { buildLibrary, comparable, compute, type ResolvedModel } from "../engine/model";
 import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
-import { Markdown } from "./AssumptionsPanel";
 import ViewToggle from "./ViewToggle";
-import { oneIn } from "../lib/comparables";
-import { track } from "../lib/analytics";
 import Derivation, { type Choice } from "./Derivation";
+import ModelTree from "./ModelTree";
 import { TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import "./model.css";
-
-const KIND_LABEL = { observed: "Observed", estimate: "Estimate", judgment: "Judgment" } as const;
-
-function Formula({ text, model }: { text: string; model: ResolvedModel }) {
-  const parts = text.split(/(@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*|\$?[a-z_][a-z0-9_]*)/gi);
-  return (
-    <code className="formula">
-      {parts.map((p, i) => {
-        if (p.startsWith("@")) {
-          const f = lib.facts.get(p.slice(1));
-          return f ? <a key={i} href={`/assumptions#f-${f.key}`} title={`Shared fact: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
-        }
-        if (p.startsWith("$")) {
-          const a = lib.assumptions.rows.find((r) => r.id === p.slice(1));
-          return a ? <a key={i} href={`#a-${a.id}`} title={a.label} className="ref ref-a">{a.label}</a> : p;
-        }
-        const r = model.byId.get(p);
-        return r ? <a key={i} href={`#row-${r.id}`} title={r.label} className="ref">{r.label}</a> : <Fragment key={i}>{p}</Fragment>;
-      })}
-    </code>
-  );
-}
 
 function Tornado({ model }: { model: ResolvedModel }) {
   const r = useResultFor(model);
@@ -117,101 +92,6 @@ function Tornado({ model }: { model: ResolvedModel }) {
   );
 }
 
-function RowValue({ row, value, view, evaluatorName }: { row: ResolvedRow; value: number; view: View; evaluatorName?: string }) {
-  const range = inputRange(row, view);
-  const other = view === "evaluator" ? row.value : row.published;
-  return (
-    <>
-      <span className="v-main num">{formatValue(value, row.format)}</span>
-      {oneIn(row.label, value) && <span className="v-odds small muted">{oneIn(row.label, value)}</span>}
-      {row.range && (
-        <span className="v-range small muted num" title={row.range.note}>
-          {formatValue(row.range.low, row.format)} – {formatValue(row.range.high, row.format)}
-        </span>
-      )}
-      {hasRange(range) && (
-        <span className="v-range small muted num">
-          {formatValue(pickValue(range, "low"), row.format)} – {formatValue(pickValue(range, "high"), row.format)}
-        </span>
-      )}
-      {row.published !== undefined && (
-        <span className="v-other small num">
-          {view === "evaluator" ? "charityevals" : evaluatorName ?? "Evaluator"}: {formatValue(pickValue(other), row.format)}
-        </span>
-      )}
-    </>
-  );
-}
-
-function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
-  row: ResolvedRow; model: ResolvedModel; value: number; open: boolean; onToggle: () => void; onPath: boolean; view: View;
-}) {
-  const factOnly = row.formula && /^@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*$/i.test(row.formula.trim()) ? lib.facts.get(row.formula.trim().slice(1)) : undefined;
-  const ours = !model.evaluator ? false : row.assumptionDeps.some((a) => ["count_salary_sacrifice", "full_credit"].includes(a)) || row.section === "donor";
-  const isOutput = model.output?.row === row.id;
-  const detailId = `detail-${row.id}`;
-  return (
-    <>
-      <tr id={`row-${row.id}`} className={`m-row ${row.node ? "is-formula" : "is-input"} ${isOutput ? "is-output" : ""} ${onPath ? "" : "off-path"} ${open ? "open" : ""}`}>
-        <th scope="row">
-          <button type="button" className="row-toggle" aria-expanded={open} aria-controls={detailId} onClick={onToggle}>
-            <ChevronRight size={15} className="chev" aria-hidden />
-            <span>{row.label}</span>
-          </button>
-          {row.overridden?.length ? <span className="tag tag-override" title={`Changed here: ${row.overridden.join(", ")}`}>overridden</span> : null}
-          {factOnly && <span className="tag tag-fact" title={`Shared fact: ${factOnly.group}`}>shared fact</span>}
-          {row.published !== undefined && <span className="tag tag-differs" title={`We differ from ${model.evaluator?.name ?? "the evaluator"}`}>differs from {model.evaluator?.name ?? "evaluator"}</span>}
-          {ours && row.section === "donor" && row.value !== undefined && <span className="tag tag-ours">charityevals</span>}
-        </th>
-        <td className="m-value"><RowValue row={row} value={value} view={view} evaluatorName={model.evaluator?.name} /></td>
-        <td className="m-kind">
-          {row.kind ? <span className={`kind kind-${row.kind}`}>{KIND_LABEL[row.kind]}</span> : <span className="kind kind-calc">Calculated</span>}
-        </td>
-      </tr>
-      <tr id={detailId} className="m-detail" hidden={!open}>
-        <td colSpan={3}>
-          <div className="detail">
-            {row.formula && (
-              <div className="detail-block">
-                <span className="detail-label small">Formula</span>
-                <Formula text={row.formula} model={model} />
-              </div>
-            )}
-            {row.explainer && <div className="detail-text"><Markdown text={row.explainer} /></div>}
-            {factOnly && (
-              <div className="small muted">
-                Shared fact from <a href={`/assumptions#f-${factOnly.key}`}>{factOnly.group}</a>: every model that needs it reads the same value.
-                {factOnly.source?.title && <> Source: {factOnly.source.url ? <a href={factOnly.source.url}>{factOnly.source.title}</a> : factOnly.source.title}.</>}
-              </div>
-            )}
-            {row.source && (
-              <div className="detail-source small muted">
-                Source:{" "}
-                {row.source.url ? (
-                  <a href={row.source.url}>{row.source.title ?? row.source.url} <ExternalLink size={12} aria-hidden /></a>
-                ) : row.source.title}
-                {row.source.cell && <>{row.source.title || row.source.url ? ", " : ""}cell <code>{row.source.cell}</code>{model.source?.sheet && <> in <a href={model.source.sheet}>the original sheet</a></>}</>}
-              </div>
-            )}
-            {row.expected !== undefined && (
-              <div className="small muted">
-                The source reports <span className="num">{formatValue(row.expected, row.format)}</span>; this model reproduces it.
-              </div>
-            )}
-            {row.inheritedFrom && (
-              <div className="small muted">
-                Defined in <a href={`${modelUrl(lib, lib.models.get(row.inheritedFrom)!)}#row-${row.id}`}>{lib.models.get(row.inheritedFrom)?.name}</a>
-                {row.overridden?.length ? `; this model changes its ${row.overridden.join(", ")}.` : "."}
-              </div>
-            )}
-            {!onPath && <div className="small muted">Context only: the bottom line doesn't use this row.</div>}
-          </div>
-        </td>
-      </tr>
-    </>
-  );
-}
-
 export default function ModelView({ id, bulk = false, choices = [], children }: { id: string; bulk?: boolean; choices?: Choice[]; children?: React.ReactNode }) {
   // Bulk models reach the browser as one-row summaries; their page loads the full file before
   // hydrating (client:model, lib/model-directive.ts).
@@ -224,39 +104,7 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
   const r = useResultFor(model);
   const rank = model.kind === "charity" ? results.findIndex((x) => x.charity.id === model.charity) + 1 : 0;
   const values = useMemo(() => compute(lib, model, av, {}, r.view), [model, av, r.view]);
-  const onPath = useMemo(() => rowsFeeding(model), [model]);
-  const [open, setOpen] = useState<Set<string>>(new Set());
-  // The full table is long (up to thousands of rows), so it opens on request or when a link points
-  // at one of its rows; the derivation above is the reading path.
-  const [tableShown, setTableShown] = useState(false);
-  const [scrollTo, setScrollTo] = useState<string>();
   const unit = lib.assumptions.units[model.output!.unit];
-
-  useEffect(() => {
-    const openHash = () => {
-      const h = decodeURIComponent(location.hash);
-      if (h.startsWith("#row-")) {
-        setTableShown(true);
-        setOpen((o) => new Set(o).add(h.slice(5)));
-        setScrollTo(h.slice(1));
-      }
-    };
-    openHash();
-    window.addEventListener("hashchange", openHash);
-    return () => window.removeEventListener("hashchange", openHash);
-  }, []);
-
-  useEffect(() => {
-    if (!scrollTo) return;
-    document.getElementById(scrollTo)?.scrollIntoView({ block: "center" });
-    setScrollTo(undefined);
-  }, [scrollTo, tableShown]);
-
-  const toggle = (rid: string) => setOpen((o) => {
-    const n = new Set(o);
-    n.has(rid) ? n.delete(rid) : n.add(rid);
-    return n;
-  });
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
@@ -322,52 +170,7 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
 
       <Tornado model={model} />
 
-      <section className="model-table" aria-labelledby="model-table-title">
-        <div className="mt-head">
-          <h2 id="model-table-title">The model, row by row</h2>
-          <div className="mt-actions small">
-            {tableShown ? (
-              <>
-                <button type="button" className="link-button" onClick={() => setOpen(new Set(model.rows.map((x) => x.id)))}>Expand all</button>
-                <button type="button" className="link-button" onClick={() => setOpen(new Set())}>Collapse all</button>
-                <button type="button" className="link-button" onClick={() => setTableShown(false)}>Hide table</button>
-              </>
-            ) : (
-              <button type="button" className="link-button" aria-expanded={false} onClick={() => {
-                track("table_open", { value: model.rows.length });
-                setTableShown(true);
-              }}>
-                Show all {model.rows.length.toLocaleString("en-US")} rows
-              </button>
-            )}
-          </div>
-        </div>
-        <p className="muted small">Every number with its source, explanation and formula.</p>
-        {tableShown && <table className="m-table">
-          <colgroup><col /><col className="c-value" /><col className="c-kind" /></colgroup>
-          <thead className="visually-hidden">
-            <tr><th scope="col">Row</th><th scope="col">Value</th><th scope="col">Kind</th></tr>
-          </thead>
-          {model.sections.map((sec) => {
-            const rows = model.rows.filter((x) => x.section === sec.id);
-            if (!rows.length) return null;
-            return (
-              <tbody key={sec.id}>
-                <tr className="m-section">
-                  <th colSpan={3} scope="rowgroup">
-                    <h3>{sec.title}</h3>
-                    {sec.explainer && <p className="muted small">{sec.explainer}</p>}
-                  </th>
-                </tr>
-                {rows.map((row) => (
-                  <ModelRow key={row.id} row={row} model={model} value={values[row.id]} open={open.has(row.id)}
-                    onToggle={() => toggle(row.id)} onPath={onPath.has(row.id)} view={r.view} />
-                ))}
-              </tbody>
-            );
-          })}
-        </table>}
-      </section>
+      <ModelTree model={model} values={values} view={r.view} />
     </div>
   );
 }
