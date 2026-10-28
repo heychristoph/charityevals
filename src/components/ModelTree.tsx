@@ -165,6 +165,16 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
       lines.push(<p key="p" className="tn-differs">{view === "evaluator" ? "charityevals uses" : `${evaluator ?? "The evaluator"} uses`} <span className="num">{formatValue(pickValue(other), row.format)}</span> here.</p>);
     }
   }
+  // A calculated row can carry a published uncertainty range (e.g. GiveWell's 25th–75th percentile);
+  // sensitivity varies the row across it.
+  if (row?.node && row.range) {
+    lines.push(
+      <p key="cr">
+        Reported range <span className="num">{formatValue(row.range.low, row.format)} – {formatValue(row.range.high, row.format)}</span>
+        {row.range.note ? <>: {row.range.note}</> : "."}
+      </p>,
+    );
+  }
   const src = row?.source ?? named?.source;
   if (src && n.type !== "fact") {
     lines.push(
@@ -396,9 +406,23 @@ export default function ModelTree({ model, values, view }: { model: ResolvedMode
       const h = decodeURIComponent(location.hash);
       if (h.startsWith("#row-")) revealLatest.current(h.slice(5));
     };
+    // A link to the row the address already points at fires no hashchange (the reader may have
+    // collapsed it since), so such clicks reveal it directly.
+    const onClick = (ev: MouseEvent) => {
+      const a = (ev.target as Element | null)?.closest?.("a[href^='#row-']");
+      if (!a || ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      if (decodeURIComponent(location.hash) === decodeURIComponent(a.getAttribute("href")!)) {
+        ev.preventDefault();
+        revealLatest.current(decodeURIComponent(a.getAttribute("href")!).slice(5));
+      }
+    };
     onHash();
     window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", onHash);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   // After a reveal or "show more", bring the item into view and give it the keyboard.
