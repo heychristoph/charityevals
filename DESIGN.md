@@ -272,8 +272,15 @@ in Ledger Blue; an open term gets a 2px blue underline) that unfold their own st
 1px Strong Hairline. Inputs link to their table row; shared assumptions are Judgment Amber and link to
 their slider. Sums render as "where the value comes from": a 12px segmented bar in cause-ink tints,
 then one hairline-divided line per part (share, label, value, leverage), six shown and the rest behind
-a link button. When several evaluators model a charity, tabs in the nav idiom swap the derivation in
-place, each tab carrying its evaluator's multiple.
+a link button.
+
+### Model page header
+Title, dek (with the charity's site), donate button. Then the model: a selector only when the charity
+has more than one model (a tab per evaluator in the nav idiom, a disclosure listing every model, or the
+countries and programs of a variant family), and under it one quiet "About this model" disclosure that
+holds the model's source, spreadsheet, file and history links, each once. Under the bottom line, when the
+visitor's assumptions move the result away from the evaluator's own, one Slate line says so and offers a
+"Reset to <evaluator>'s assumptions" link button (and "Use your assumptions" to come back).
 
 ### Model table
 Fixed-layout, zebra-free table with hairline row dividers and Strong Hairline section rules. Inputs are 600 weight, formulas Slate, off-path rows Pewter, the final output framed by 2px Ink rules. Rows expand via a chevron to a Mist Paper detail with explainer, source and a formula block (Paper, Hairline border) in which shared assumptions are named in Judgment Amber.
