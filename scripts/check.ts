@@ -54,6 +54,8 @@ for (const m of lib.models.values()) {
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");
   if (!comparable(lib, m)) {
+    // Every charity is ranked: a new unit needs an exchange rate (a shared assumption) in assumptions/default.json.
+    if (m.kind === "charity") errors.push(`${m.id}: unit ${m.output.unit} has no exchange rate (to_common), so the charity can't be ranked`);
     console.log(`${m.id.padEnd(22)} ${fmt(vals[m.output.row])} ${m.output.unit}/$  [${fmt(s.jointLow)} – ${fmt(s.jointHigh)}]  not ranked (no exchange rate)  ${matched} expected values reproduced`);
     continue;
   }

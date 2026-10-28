@@ -12,6 +12,13 @@ const plural = (n: string, one: string, many: string) => (n === "1" ? one : many
 /** One doubled income-year in units of value: ln(2) times the value of raising ln(consumption) by 1. */
 const doubling = (av: Record<string, number>) => Math.LN2 * (av.uov_per_ln_consumption ?? Math.LOG2E);
 
+/** One day of an animal's pain (as bad as a day of a person's disabling pain), in units of value:
+ * the conversion the rankings use for suffering-adjusted days. */
+const painDay = (av: Record<string, number>) => (av.daly_per_sad ?? 0) * (av.uov_per_daly ?? 2) * (av.animal_moral_weight ?? 1);
+
+/** How many of something worth `each` units of value add up to one doubled income-year, rounded. */
+const perDoubling = (d: number, each: number) => (each > 0 ? round(d / each) : undefined);
+
 /** A plain-language reading of a shared assumption at value `v`, given the other current values. */
 export function assumptionComparable(id: string, v: number, av: Record<string, number>): string | undefined {
   const d = doubling({ ...av, [id]: v });
@@ -39,6 +46,20 @@ export function assumptionComparable(id: string, v: number, av: Record<string, n
         `A day of disabling pain counts like losing ${lost} of healthy life.` +
         (days ? ` So sparing animals suffering as bad as ${days} ${plural(days, "day", "days")} of a person's disabling pain counts as much as doubling one person's income for a year.` : "")
       );
+    }
+    case "sads_per_animal_spared": {
+      const n = perDoubling(d, v * painDay(av));
+      return `Each farmed animal spared counts like sparing ${round(v)} ${plural(round(v), "day", "days")} of a person's disabling pain` +
+        (n ? `, so sparing ${n} ${plural(n, "animal counts", "animals count")} as much as doubling one person's income for a year.` : ".");
+    }
+    case "animals_spared_per_person_reached": {
+      const each = v >= 1 ? `Each person reached spares ${round(v)} farmed ${plural(round(v), "animal", "animals")}` : `One in ${round(1 / v)} people reached spares a farmed animal`;
+      const n = perDoubling(d, v * (av.sads_per_animal_spared ?? 0) * painDay(av));
+      return each + (n ? `, so reaching ${n} ${plural(n, "person counts", "people count")} as much as doubling one person's income for a year.` : ".");
+    }
+    case "sads_per_paper": {
+      const n = round((v * painDay(av)) / d);
+      return `One paper counts like sparing ${round(v)} days of a person's disabling pain, as much as doubling ${n} ${plural(n, "person's income", "people's incomes")} for a year.`;
     }
     case "uov_per_wellby": {
       const n = round(v / d);
