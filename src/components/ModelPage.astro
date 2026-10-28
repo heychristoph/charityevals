@@ -5,6 +5,7 @@ import Base from "../layouts/Base.astro";
 import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
+import CharityLogo from "./CharityLogo.tsx";
 import { lib, rankable, modelUrl, historyUrl, modelFile } from "../lib/data";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
@@ -59,7 +60,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     <div class="main">
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
-        <h1>{charity.name}</h1>
+        <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
         {(dek || charity.website) && (
           <p class="dek">
             {dek}
