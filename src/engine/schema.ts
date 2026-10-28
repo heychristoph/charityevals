@@ -29,6 +29,8 @@ export type Range = z.infer<typeof Range>;
 const rowShape = {
   id: z.string().regex(/^[a-z][a-z0-9_]*$/, "row ids are snake_case"),
   label: z.string(),
+  /** Shared assumptions: the jargon name economists use, shown once beside the plain label. */
+  technical: z.string().optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
