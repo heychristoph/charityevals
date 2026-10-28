@@ -4,7 +4,7 @@
 // shared assumption stay live, the rest is folded into numbers. The islands compute identical results
 // under any assumptions without shipping tens of megabytes. A bulk model's own page
 // passes its full rows to the island (bulkRaw).
-import { buildLibrary, comparable, currentModelsOf, modelsOf, type Library, type ResolvedModel } from "../engine/model";
+import { buildLibrary, comparable, modelsOf, type Library, type ResolvedModel } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
 
@@ -58,12 +58,3 @@ export function historyUrl(lib: Library, m: ResolvedModel): string {
 
 /** Charities on the rankings: those with at least one model in a comparable unit. */
 export const rankedCharities = [...lib.charities.values()].filter((c) => modelsOf(lib, c.id).some((m) => comparable(lib, m)));
-
-/** Charities whose evaluators report only in units nobody can convert (e.g. people reached). */
-export const unrankedCharities = [...lib.charities.values()].filter(
-  (c) => modelsOf(lib, c.id).length > 0 && !modelsOf(lib, c.id).some((m) => comparable(lib, m)),
-);
-
-/** Each ranked charity's models that set its place on the rankings (one per evaluator), for
- * rank-flip checks. */
-export const rankedGroups = rankedCharities.map((c) => currentModelsOf(lib, c.id).filter((m) => comparable(lib, m)).map((m) => m.id));

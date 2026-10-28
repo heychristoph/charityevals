@@ -26,7 +26,10 @@ const fmt = (x: number) => (x >= 10 ? x.toFixed(0) : x >= 1 ? x.toFixed(1) : x.t
 const CASH = 0.00335;
 const result = (m: ResolvedModel) => {
   const b = bottomLine(lib, m, av, {}, "evaluator");
-  if (!comparable(lib, m)) return `${fmt(b.native)} ${lib.assumptions.units[m.output!.unit].label} per dollar`;
+  const native = `${fmt(b.native)} ${lib.assumptions.units[m.output!.unit].label} per dollar`;
+  if (!comparable(lib, m)) return native;
+  // In the evaluator's own unit, the multiple of GiveDirectly is ours, through the shared exchange rates.
+  if (m.output!.unit !== lib.assumptions.common.unit) return `${native} (${fmt(b.common / bench)}× GiveDirectly at default exchange rates)`;
   const own = m.byId.has("cash_benchmark") ? ` (${lib.owners.get(m.owner)!.short}: ${fmt(b.native / CASH)}× cash)` : "";
   return `${fmt(b.common / bench)}× GiveDirectly${own}`;
 };
