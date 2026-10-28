@@ -235,7 +235,7 @@ function Detail({ ctx, n, id, lines, formula }: { ctx: Ctx; n: TreeNode; id: str
   );
 }
 
-function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode; depth: number; pos: number; size: number; parentLabel?: string }) {
+function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: TreeNode; depth: number; pos: number; size: number; parentLabel?: string; under?: string }) {
   const { m, look, open, all } = ctx;
   const isOpen = open.has(n.key);
   const branch = isBranch(n);
@@ -243,16 +243,19 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
   const label = labelOf(m, n);
   const kids = isOpen && branch ? childrenOf(m, n, look) : [];
   // The parts with the most leverage, kept in formula order; the rest behind "n more".
-  const ranked = [...kids].sort((a, b) => ctx.weight(b) - ctx.weight(a));
+  const ranked = [...kids].sort((a, b) => (spread && (under || ranged) ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
   const shown = all.has(n.key) || kids.length <= CAP + 1 ? kids : kids.filter((k) => ranked.indexOf(k) < CAP);
   const hidden = kids.filter((k) => !shown.includes(k));
-  const hiddenWeight = hidden.reduce((s, k) => s + ctx.weight(k), 0);
+  const hiddenWeight = hidden.reduce((s, k) => s + (spread && !(under || ranged) ? ctx.weight(k) : Math.abs(k.e ?? 0)), 0);
   const how = n.expr ? shapeOf(n.expr).how : undefined;
   const odds = oneIn(label, n.value);
   const e = n.e;
   const root = depth === 1;
   const spread = ctx.metric === "spread";
-  const share = spread ? ctx.weight(n) : 0;
+  // Below a row whose own published range stands for its uncertainty, parts add none of their own.
+  const share = spread && !under ? ctx.weight(n) : 0;
+  const ranged = !!n.rowId && ctx.u.ranged.has(n.rowId);
+  const below = under ?? (ranged ? label : undefined);
   const formula = isOpen ? formulaOf(m, n) : undefined;
   const fxOpen = !!formula && ctx.fx.has(n.key);
   const lines = isOpen ? detailLines(ctx, n, parentLabel) : [];
@@ -299,13 +302,16 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
           id={`${id}-e`}
           className="tn-lev"
           title={spread
-            ? `${shareText(share)} of the uncertainty in the bottom line comes${root ? "" : " through this branch"}: how much it moves the result, times how well it's known.`
+            ? under ? `Counted in the published range of “${under}”.`
+            : `${shareText(share)} of the uncertainty in the bottom line comes${root ? "" : " through this branch"}: how much it moves the result, times how well it's known${ranged ? " (from its published range)" : ""}.`
             : e === undefined ? "No measurable effect at this value." : `If this number were 10% higher, the bottom line would move about ${leverText(e)}${root ? "" : " through this branch"}.`}
         >
           {n.type !== "const" && (spread ? (
             <>
               <span className="tn-track" aria-hidden><span className="tn-bar tn-bar-spread" style={{ width: `${share * 100}%` }} /></span>
-              <span className="tn-pct num"><span className="visually-hidden">, share of the uncertainty </span>{shareText(share)}</span>
+              <span className="tn-pct num">{under
+                ? <><span className="visually-hidden">, counted in the range above</span><span aria-hidden>in range</span></>
+                : <><span className="visually-hidden">, share of the uncertainty </span>{shareText(share)}</>}</span>
             </>
           ) : (
             <>
@@ -318,7 +324,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
       {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} formula={fxOpen ? formula : undefined} />}
       {isOpen && branch && (
         <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
-          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} />)}
+          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} under={below} />)}
           {hidden.length > 0 && (
             <li
               role="treeitem"
@@ -336,7 +342,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
                 <span className="tn-twist" aria-hidden />
                 <span className="tn-name tn-more">
                   Show {hidden.length} more {hidden.length === 1 ? "part" : "parts"}
-                  <span className="tn-more-note"> · {spread ? `together ${shareText(hiddenWeight)} of the uncertainty or less` : `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less`}</span>
+                  <span className="tn-more-note"> · {spread && !(under || ranged) ? `together ${shareText(hiddenWeight)} of the uncertainty or less` : `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less`}</span>
                 </span>
               </div>
             </li>
@@ -421,7 +427,8 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
   const followLever = () => {
     const keys = ["r"];
     let n = root;
-    for (let i = 0; i < 40 && n.expr; i++) {
+    // Following the uncertainty stops at a row whose published range stands for it.
+    for (let i = 0; i < 40 && n.expr && !(metric === "spread" && n.rowId && u.ranged.has(n.rowId)); i++) {
       const kids = childrenOf(model, n, look).filter((k) => k.type !== "const");
       if (!kids.length) break;
       n = kids.reduce((b, k) => (weight(k) > weight(b) ? k : b));
