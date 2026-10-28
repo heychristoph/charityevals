@@ -61,13 +61,18 @@ export type Uncertainty = {
   drivers: Driver[];
   /** Share of the total from each source. */
   bySource: Record<Source, number>;
-  /** Variance of ln(row), from its inputs' spreads (treating a formula's parts as independent). */
+  /** Variance of ln(row): its sensitivity to every source, summed over every path, times the source's
+   * spread, squared and added up, so a source shared by two branches is counted once. */
   rowVar: (id: string) => number;
   leafVar: (scope: Scope, name: string) => number;
   /** Variance of ln(value) for any sub-formula, for the tree's parts that aren't whole rows. */
   exprVar: (expr: Node) => number;
-  /** Variance of ln(native bottom line): the tree's 100%. */
-  rootVar: number;
+  /** Variance of ln(result in the common unit), every source together: the 100% of both the
+   * breakdown and the tree. */
+  total: number;
+  /** Share of it from converting the model's own unit into the common one (shared exchange rates),
+   * which the tree, built on the model's own result, doesn't show. */
+  conversionShare: number;
   /** Calculated rows with a published range: each counts as one source, standing in for the
    * inputs it's calculated from, which add nothing more through it. */
   ranged: Set<string>;
@@ -181,24 +186,38 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     if (r?.node && feeding.has(id) && !ranged.has(id)) edges.set(id, local(r.node, values[id]));
   }
 
-  // Forward: the variance of each row's logarithm from its parts'.
+  /** Sensitivity of ln(seed) to every source, summed over every path: one backward pass over the
+   * stored elasticities, with no formulas evaluated. A ranged row has no edges, so it ends a path. */
+  const backward = (seed: Map<string, number>) => {
+    const E = new Map<string, number>(seed);
+    for (let i = m.order.length - 1; i >= 0; i--) {
+      const id = m.order[i];
+      const here = E.get(`row:${id}`);
+      const es = edges.get(id);
+      if (!here || !es) continue;
+      for (const x of es) E.set(`${x.scope}:${x.name}`, (E.get(`${x.scope}:${x.name}`) ?? 0) + here * x.e);
+    }
+    return E;
+  };
+  const varFrom = (E: Map<string, number>) => {
+    let v = 0;
+    for (const [key, e] of E) {
+      const leaf = leaves.get(key);
+      if (leaf) v += (e * leaf.spread) ** 2;
+    }
+    return v;
+  };
   const rowVars = new Map<string, number>();
-  const varOf = (scope: Scope, name: string): number =>
-    scope === "row" && m.byId.get(name)?.node && !ranged.has(name) ? rowVars.get(name) ?? 0 : leafVar(scope, name);
-  for (const id of m.order) {
-    const es = edges.get(id);
-    if (es) rowVars.set(id, es.reduce((t, x) => t + x.e ** 2 * varOf(x.scope, x.name), 0));
-  }
+  const rowVar = (id: string) => {
+    if (!edges.has(id)) return leafVar("row", id);
+    let v = rowVars.get(id);
+    if (v === undefined) rowVars.set(id, (v = varFrom(backward(new Map([[`row:${id}`, 1]])))));
+    return v;
+  };
 
   // Backward: the bottom line's elasticity to every number, summed over every path to it.
-  const E = new Map<string, number>();
-  if (m.output) E.set(`row:${m.output.row}`, 1);
-  for (let i = m.order.length - 1; i >= 0; i--) {
-    const id = m.order[i];
-    const here = E.get(`row:${id}`);
-    if (!here) continue;
-    for (const x of edges.get(id) ?? []) E.set(`${x.scope}:${x.name}`, (E.get(`${x.scope}:${x.name}`) ?? 0) + here * x.e);
-  }
+  const E = m.output ? backward(new Map([[`row:${m.output.row}`, 1]])) : new Map<string, number>();
+  const nativeVar = varFrom(E);
   // The common unit is the native result times a conversion built from shared assumptions.
   if (convNode) {
     const base = evaluate(convNode, (s, n) => (s === "assumption" ? av[n] ?? NaN : NaN));
@@ -226,16 +245,17 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     } catch {
       return 0;
     }
-    return local(expr, base).reduce((t, x) => t + x.e ** 2 * varOf(x.scope, x.name), 0);
+    return varFrom(backward(new Map(local(expr, base).map((x) => [`${x.scope}:${x.name}`, x.e]))));
   };
 
   return {
     drivers,
     bySource,
-    rowVar: (id) => varOf("row", id),
+    rowVar,
     leafVar,
     exprVar,
-    rootVar: m.output ? varOf("row", m.output.row) : 0,
+    total,
+    conversionShare: total > 0 ? Math.max(0, 1 - nativeVar / total) : 0,
     ranged,
   };
 }

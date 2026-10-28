@@ -100,14 +100,14 @@ export type Metric = "spread" | "lever";
 /** Share of the bottom line's uncertainty coming through this node: its leverage on the result,
  * squared, times the variance of its own logarithm. */
 function spreadShare(u: Uncertainty, n: TreeNode): number {
-  if (!u.rootVar || n.e === undefined) return 0;
+  if (!u.total || n.e === undefined) return 0;
   const ranged = rangedRowOf(u, n);
   const v = ranged ? u.rowVar(ranged)
     : n.type === "assumption" || n.type === "fact" ? u.leafVar(n.type, n.refId!)
     : n.rowId ? u.rowVar(n.rowId)
     : n.expr ? u.exprVar(n.expr)
     : 0;
-  return Math.min(1, (n.e ** 2 * v) / u.rootVar);
+  return Math.min(1, (n.e ** 2 * v) / u.total);
 }
 
 const shareText = (x: number) => (x < 0.005 ? "<1%" : `${Math.round(x * 100)}%`);
@@ -629,7 +629,7 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
         </p>
         <p>
           {metric === "spread"
-            ? "Share of the uncertainty: how much a number moves the result, times how well it's known (see where the uncertainty comes from, above). Shares through different branches can overlap."
+            ? `Share of the uncertainty: how much a number moves the result, times how loosely it's known, out of the same total as where the uncertainty comes from, above.${u.conversionShare >= 0.005 ? ` The other ${shareText(u.conversionShare)} comes from converting this result into the common unit (your exchange rates), outside this tree.` : ""}`
             : "Bars measure each number through its own branch; a number used in several places moves the result through each."}
           The {rowCount} rows are in <a href={`https://github.com/heychristoph/charityevals/blob/main/${modelFile(model)}`}>the model file</a>.
         </p>

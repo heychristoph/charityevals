@@ -86,7 +86,24 @@ describe("uncertainty", () => {
 
   it("gives the tree a variance for every row", () => {
     expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2 + (by("rate").elasticity * by("rate").spread) ** 2, 2);
-    expect(u.rootVar).toBeGreaterThan(u.rowVar("good"));
+    // The tree's root and the breakdown share one total; the rest is the unit conversion.
+    expect(u.rowVar("per_dollar") / u.total + u.conversionShare).toBeCloseTo(1, 6);
+    expect(u.conversionShare).toBeGreaterThan(0);
+  });
+
+  it("counts a source shared by two branches once, with its paths summed", () => {
+    const shared = buildLibrary([{ ...model, id: "shared", output: { row: "out", unit: "uov", label: "x" }, rows: [
+      { id: "x", label: "X", value: 2, kind: "estimate", explainer: "x" },
+      { id: "a", label: "A", formula: "x * 3" },
+      { id: "b", label: "B", formula: "x * 5" },
+      { id: "out", label: "Out", formula: "a * b" },
+    ] }], assumptions);
+    const sm = shared.models.get("shared")!;
+    const su = uncertainty(shared, sm, compute(shared, sm, av), av, "charityevals");
+    const w = Math.log(DEFAULT_FACTOR.estimate);
+    // out = 15 x², so its elasticity to x is 2 and its variance (2w)², not 2w².
+    expect(su.rowVar("out")).toBeCloseTo((2 * w) ** 2, 3);
+    expect(su.total).toBeCloseTo((2 * w) ** 2, 3);
   });
 
   it("runs on the largest import in well under a second", () => {
