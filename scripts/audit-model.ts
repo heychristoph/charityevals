@@ -1,14 +1,16 @@
 // The mechanical half of an audit of a charityevals model (the audit-cea skill does the rest).
-//   npx tsx scripts/audit-model.ts <model.json | model id> [--exclude id,id] [--json]
+//   npx tsx scripts/audit-model.ts <model.json | model id> [--exclude id,id] [--facts dir] [--json]
 // Works on files outside models/ (drafts, eval runs). Prints:
 //   1. findings from src/engine/lint.ts (template structure, sourcing, magic numbers, bounds)
 //   2. the bottom line, joint low/high and the tornado (which inputs drive the result)
 //   3. the reference class: other hand-built models in the same unit, and other charityevals models
 //      of the same template family row by row, so implausible values stand out
 // --exclude drops models from the library (for blind tests: the auditor mustn't see the answer).
+// --facts adds a directory of facts files that override the repo's by id (an evaluation run's own
+// facts); a facts/ folder next to the model file is picked up without the flag.
 // Exits 1 when a high-severity finding remains.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { assumptionValues, bottomLine, buildLibrary, compute, type ResolvedModel } from "../src/engine/model";
 import { sensitivity } from "../src/engine/sensitivity";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
@@ -22,6 +24,7 @@ const flag = (name: string) => {
 };
 const json = args.includes("--json") && (args.splice(args.indexOf("--json"), 1), true);
 const exclude = new Set((flag("--exclude") ?? "").split(",").filter(Boolean));
+const factsDir = flag("--facts");
 const target = args[0];
 if (!target) {
   console.error("usage: npx tsx scripts/audit-model.ts <model.json | id> [--exclude a,b] [--json]");
@@ -44,11 +47,14 @@ if (!raw) {
   process.exit(2);
 }
 const charities = walk(join(root, "charities")).map(read);
+const localFacts = factsDir ?? (path && existsSync(join(dirname(path), "facts")) ? join(dirname(path), "facts") : undefined);
+const extraFacts = localFacts ? walk(localFacts).map(read) : [];
+const facts = [...walk(join(root, "facts")).map(read).filter((f) => !extraFacts.some((e) => e.id === f.id)), ...extraFacts];
 if (!charities.some((c) => c.id === raw.charity)) charities.push({ id: raw.charity, name: raw.charity, cause: raw.cause });
 const lib = buildLibrary(
   [...repoModels.filter((m) => m.id !== raw.id && !exclude.has(m.id) && !exclude.has(m.charity)), raw],
   read(join(root, "assumptions/default.json")),
-  walk(join(root, "facts")).map(read),
+  facts,
   charities,
   read(join(root, "owners.json")),
 );
