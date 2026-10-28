@@ -5,6 +5,7 @@ import { useResults } from "../lib/use-results";
 import { formatMultiple } from "../lib/format";
 import { DOMAIN, TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import ViewToggle from "./ViewToggle";
+import CharityLogo from "./CharityLogo";
 import "./rankings.css";
 
 const CAUSE_LABEL: Record<string, string> = {
@@ -79,6 +80,7 @@ export default function Rankings() {
             <li key={c.id} ref={flipRef(c.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${c.cause})` }}>
               <div className="r-name">
                 <span className="r-rank num">{i + 1}</span>
+                <CharityLogo id={c.id} name={c.name} size={32} lazy={i >= 6} className="r-logo" />
                 <div>
                   <a href={`/${c.id}`} className="r-link">{c.name}</a>
                   <div className="r-meta small">
