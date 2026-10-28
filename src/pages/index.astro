@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rankings from "../components/Rankings.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
+import CharityLogo from "../components/CharityLogo.tsx";
 import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "../lib/data";
 
 ---
@@ -23,7 +24,7 @@ import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "..
           <ul>
             {unrankedCharities.map((c) => {
               const m = primaryOf(lib, c.id)!;
-              return <li><a href={`/${c.id}`}>{c.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {lib.owners.get(m.owner)!.name}</span></li>;
+              return <li><CharityLogo id={c.id} name={c.name} size={24} className="u-logo" /> <a href={`/${c.id}`}>{c.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {lib.owners.get(m.owner)!.name}</span></li>;
             })}
           </ul>
         </section>
