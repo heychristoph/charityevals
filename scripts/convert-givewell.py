@@ -365,6 +365,25 @@ model = {
     "evaluator": {"name": "GiveWell", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0,
                                                       "life_value_multiplier": 1, "uov_per_ln_consumption": 1.4426950408889634}},
 }
+# Shared rule, also applied by convert-givewell.py: a sheet's explicit discount-rate input moves in
+# proportion to the shared $discount_rate (GiveWell's general rate is 4%), so a 0.5% rate for future
+# deaths stays 0.5% at the default, becomes 0 at 0% and 1% at 8%.
+GW_RATE = 0.04
+def link_discount(rows, ev):
+    n = 0
+    for r in rows:
+        if isinstance(r.get("value"), (int, float)) and re.match(r"(annual )?discount rate", r.get("label", ""), re.I) and 0 <= r["value"] <= 0.15:
+            v = r.pop("value"); r.pop("kind", None)
+            r["formula"] = "$discount_rate" if v == GW_RATE else f"{v!r} * $discount_rate / {GW_RATE}"
+            r["expected"] = v
+            r["explainer"] = (f"GiveWell's {v:.1%} here, scaled with the shared discount rate (GiveWell's general rate is 4%)."
+                              + ("\n\n" + r["explainer"] if r.get("explainer") else ""))
+            n += 1
+    if n: ev["discount_rate"] = GW_RATE
+    return n
+
+link_discount(model["rows"], model["evaluator"]["assumptions"])
+
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 # the charity record: created if missing, its contact details updated from the arguments
 cpath = Path("charities") / f"{a.charity}.json"
