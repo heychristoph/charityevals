@@ -1,0 +1,484 @@
+{
+  "id": "template-cash-income",
+  "name": "Template: cash transfers and income gains",
+  "kind": "template",
+  "cause": "global-health",
+  "template": "cash-income",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, where, and the bottom line in units of value per dollar and × GiveDirectly.",
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the period",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "transfers_share_of_cost",
+      "section": "reach",
+      "label": "Transfers as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.75,
+        "best": 0.82,
+        "high": 0.88
+      },
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the share of total cost that reaches recipients (cash transferred ÷ total expenses). For a livelihood program, the share spent on assets or services delivered."
+    },
+    {
+      "id": "transfer_per_household",
+      "section": "reach",
+      "label": "Transfer per household (nominal USD)",
+      "format": "usd",
+      "value": 1000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity program page",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the transfer size the charity reports."
+    },
+    {
+      "id": "households",
+      "section": "reach",
+      "label": "Households reached",
+      "format": "integer",
+      "formula": "cost_total * transfers_share_of_cost / transfer_per_household"
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "Average household size",
+      "format": "number",
+      "value": 4.5,
+      "kind": "observed",
+      "unit": "people",
+      "source": {
+        "title": "TEMPLATE: DHS / charity data",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: from the charity's census or the country's DHS."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "households * household_size"
+    },
+    {
+      "id": "ppp_factor",
+      "section": "reach",
+      "label": "PPP conversion (2017 international $ per US $)",
+      "format": "number",
+      "formula": "@kenya.ppp_factor_2017",
+      "explainer": "TEMPLATE: point at the right country's fact (add facts/<country>.json from the World Bank if missing)."
+    },
+    {
+      "id": "transfer_per_person_ppp",
+      "section": "reach",
+      "label": "Transfer per person (PPP)",
+      "format": "usd",
+      "formula": "transfer_per_household * ppp_factor / household_size"
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Baseline annual consumption per person (PPP)",
+      "format": "usd",
+      "value": {
+        "low": 500,
+        "best": 650,
+        "high": 800
+      },
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: baseline survey / World Bank PIP",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: recipients' consumption per person per year before the transfer, from the program's baseline survey or the World Bank poverty data for the region."
+    },
+    {
+      "id": "share_consumed_y1",
+      "section": "effect",
+      "label": "Share of the transfer consumed in year 1",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.57,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: RCT",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest is invested. From the RCT literature (Egger et al. 2022; Haushofer & Shapiro 2016)."
+    },
+    {
+      "id": "y1_ln_gain",
+      "section": "effect",
+      "label": "Increase in ln(consumption) in year 1",
+      "format": "number",
+      "formula": "ln(1 + share_consumed_y1 * transfer_per_person_ppp / baseline_consumption)"
+    },
+    {
+      "id": "later_years_ratio",
+      "section": "effect",
+      "label": "Value of later-year gains relative to year 1",
+      "format": "number",
+      "value": {
+        "low": 0.74,
+        "best": 1.23,
+        "high": 1.72
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: GiveWell GiveDirectly CEA, Consumption tab",
+        "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit",
+        "cell": "Consumption!B23; Inputs!D23:F23",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: returns on the invested share over later years, discounted, relative to year 1. GiveWell's GiveDirectly CEA (Nov 2024): 1.23 (0.74–1.72). For a recurring income gain instead of a lump sum, replace y1_ln_gain and this row with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "Total ln(consumption) gain per person",
+      "format": "number",
+      "formula": "y1_ln_gain * (1 + later_years_ratio)"
+    },
+    {
+      "id": "spillover_ratio",
+      "section": "effect",
+      "label": "Spillover benefits to non-recipients, as a share of recipients' benefits",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.3,
+        "high": 0.9
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: Egger et al. 2022 / GiveWell",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: local economic spillovers. GiveWell's adjusted Egger et al. figure is about 0.7; it is weakly identified, so give a wide range."
+    },
+    {
+      "id": "mortality_uov_ratio",
+      "section": "effect",
+      "label": "Mortality benefits as a share of consumption benefits",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: GiveWell GiveDirectly CEA",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: child-mortality effects of cash, as a share of consumption value (GiveWell models these explicitly for GiveDirectly). 0 for programs without mortality evidence."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of credit, when shared with others",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "if($full_credit, 1, attribution_share_shared)",
+      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * leverage_funging_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and costs not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: GiveWell-style supplementary adjustment: list each effect not modelled (morbidity, stillbirths, treatment costs averted, rebound effects) with its sign and size."
+    },
+    {
+      "id": "uov_consumption",
+      "section": "outcome",
+      "label": "Units of value from recipients' consumption",
+      "format": "number",
+      "formula": "people_reached * ln_gain_per_person * $uov_per_ln_consumption * total_adj",
+      "unit": "units of value"
+    },
+    {
+      "id": "uov_spillovers",
+      "section": "outcome",
+      "label": "Units of value from spillovers",
+      "format": "number",
+      "formula": "uov_consumption * spillover_ratio",
+      "unit": "units of value"
+    },
+    {
+      "id": "uov_mortality",
+      "section": "outcome",
+      "label": "Units of value from mortality effects",
+      "format": "number",
+      "formula": "uov_consumption * mortality_uov_ratio * $life_value_multiplier",
+      "unit": "units of value"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total units of value",
+      "format": "number",
+      "formula": "(uov_consumption + uov_spillovers + uov_mortality) * (1 + unmodelled_benefits_adj)",
+      "unit": "units of value"
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share",
+      "unit": "Units of value / $"
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give"
+  }
+}

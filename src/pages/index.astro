@@ -2,8 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rankings from "../components/Rankings.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
-import CharityLogo from "../components/CharityLogo.tsx";
-import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "../lib/data";
+import { rankedCharities, rankable } from "../lib/data";
 
 ---
 
@@ -17,18 +16,6 @@ import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "..
         </p>
       </header>
       <Rankings client:load />
-      {unrankedCharities.length > 0 && (
-        <section class="unranked" aria-labelledby="unranked-title">
-          <h2 id="unranked-title">Evaluated, not ranked</h2>
-          <p class="muted small">Reported in units with no exchange rate to the others, such as papers published.</p>
-          <ul>
-            {unrankedCharities.map((c) => {
-              const m = primaryOf(lib, c.id)!;
-              return <li><CharityLogo id={c.id} name={c.name} size={24} className="u-logo" /> <a href={`/${c.id}`}>{c.name}</a> <span class="muted small">· {lib.assumptions.units[m.output!.unit].label} per dollar · {lib.owners.get(m.owner)!.name}</span></li>;
-            })}
-          </ul>
-        </section>
-      )}
       <p class="count small muted">{rankedCharities.length} charities, {rankable.length} models. <a href="/suggest">Suggest a charity</a></p>
     </div>
     <aside class="side" aria-label="Assumptions">
@@ -55,17 +42,6 @@ import { lib, unrankedCharities, rankedCharities, rankable, primaryOf } from "..
     line-height: 1.5;
     color: var(--ink-2);
     max-width: 62ch;
-  }
-  .unranked {
-    margin-top: var(--s6);
-  }
-  .unranked h2 {
-    font-size: 20px;
-    margin-bottom: var(--s2);
-  }
-  .unranked ul {
-    margin: var(--s2) 0 0;
-    padding-left: 1.1em;
   }
   .count {
     margin-top: var(--s5);

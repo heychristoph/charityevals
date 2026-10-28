@@ -1,0 +1,872 @@
+{
+  "id": "against-malaria-foundation-charityevals",
+  "name": "Against Malaria Foundation (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "template": "direct-health",
+  "charity": "against-malaria-foundation",
+  "owner": "charityevals",
+  "summary": "AMF buys long-lasting insecticidal nets for mass campaigns run with national malaria programmes; in its year to June 2025 it funded 75 million nets, mostly for DRC, Nigeria, South Sudan and Chad. Crediting AMF with its share of the cost (its nets and monitoring, against about $1.5 per net of delivery paid by governments and co-funders), we estimate about 5.6× GiveDirectly, or about $3,200 per malaria death averted counting everyone's costs (about $1,900 of AMF's own money if it got full credit), before income gains. The result is mostly uncertainty: the joint low–high range runs from about 0.13× to 200× because a dozen uncertain inputs multiply (some of them correlated), though no single input on its own moves it outside about 3.8–8×. The biggest uncertainties are how much insecticide resistance and net wear erode the effect measured in 1990s trials, how many deaths malaria causes indirectly, and the delivery costs others pay, which AMF doesn't publish.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "Against Malaria Foundation: charityevals cost-effectiveness model",
+    "url": "https://charityevals.org/against-malaria-foundation-charityevals",
+    "published": "2026-10-28",
+    "retrieved": "2026-10-28"
+  },
+  "resources": [
+    {
+      "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+      "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "AMF financial information (accounts by year, nets funded)",
+      "url": "https://www.againstmalaria.com/FinancialInformation.aspx",
+      "type": "charity"
+    },
+    {
+      "title": "Pryce, Richardson & Lengeler (2018), Insecticide-treated nets for preventing malaria, Cochrane Database of Systematic Reviews",
+      "url": "https://doi.org/10.1002/14651858.CD000363.pub3",
+      "type": "study"
+    },
+    {
+      "title": "Mosha et al. (2024), dual-active-ingredient nets in Tanzania: final-year results, Lancet Infectious Diseases",
+      "url": "https://doi.org/10.1016/S1473-3099(23)00420-6",
+      "type": "study"
+    },
+    {
+      "title": "Accrombessi et al. (2024), dual-active-ingredient nets in Benin, third year, Lancet Infectious Diseases",
+      "url": "https://doi.org/10.1016/S1473-3099(24)00002-1",
+      "type": "study"
+    },
+    {
+      "title": "Barofsky, Anekwe & Chase (2015), Malaria eradication and economic outcomes in Uganda",
+      "url": "https://doi.org/10.1016/j.jhealeco.2015.08.002",
+      "type": "study"
+    },
+    {
+      "title": "WHO malaria mortality rate by country (World Malaria Report), via Our World in Data",
+      "url": "https://ourworldindata.org/grapher/death-rate-from-malaria",
+      "type": "data"
+    },
+    {
+      "title": "WHO malaria fact sheet",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/malaria",
+      "type": "data"
+    },
+    {
+      "title": "Copenhagen Consensus, Expanded malaria intervention (net delivery costs from Winskill et al. 2019)",
+      "url": "https://www.copenhagenconsensus.com/sites/default/files/2023-03/Expanded%20malaria%20intervention.pdf",
+      "type": "other"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the nets AMF funded in its financial year to June 2025 cost AMF: nets, monitoring and a small central cost, from its audited accounts. The in-country delivery costs governments and co-funders pay are estimated here too, but only to set AMF's share of credit under Adjustments."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many nets AMF funded, how many people they protect, and for how long they are used, from AMF's accounts and post-distribution surveys."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "Malaria deaths averted per person protected, from today's malaria death rates in AMF's countries and the Cochrane review of net trials; plus later-life earnings from less childhood malaria."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for insecticide resistance and net durability, for protection that would have existed anyway, and for nets that aren't really used. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in GiveWell-style units of value, per dollar of AMF's spending."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "llin_spend",
+      "section": "cost",
+      "label": "Spending on nets (LLINs) granted in FY2025",
+      "format": "usd",
+      "value": 171957961,
+      "kind": "observed",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.27, note 3",
+        "quote": "Expenditure on LLINs 171,957,961"
+      },
+      "explainer": "What AMF committed to buy nets in its financial year to 30 June 2025 (the latest audited year; FY2026 accounts are still being audited). AMF books a net grant in full when it agrees it with a country, so this is the cost of the 75.3 million nets counted under Reach, most of which are distributed in the following 12–24 months. Funded entirely by public donations."
+    },
+    {
+      "id": "non_net_spend",
+      "section": "cost",
+      "label": "AMF's non-net costs (distribution and post-distribution monitoring)",
+      "format": "usd",
+      "value": 4974347,
+      "kind": "observed",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.27, note 3; p.31, note 6",
+        "quote": "Non-net costs (see note 6) 4,974,347"
+      },
+      "explainer": "What AMF itself paid in-country partners for pre-distribution registration checks, distribution monitoring and the nine-monthly post-distribution surveys (note 6 lists DRC, Nigeria, Uganda, Chad and others). Paid from private funding ring-fenced by a few donors. It covers some distributions funded in earlier years, but year to year it is small and stable relative to net spending, so the mismatch doesn't matter."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program (nets plus AMF's non-net costs)",
+      "format": "usd",
+      "formula": "llin_spend + non_net_spend",
+      "explainer": "AMF runs one program, buying nets and monitoring their distribution, so the modelled program is all of its charitable spending except central and governance costs, which the overhead multiplier adds back."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, central and governance costs)",
+      "format": "usd",
+      "value": 178011823,
+      "kind": "observed",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.21, Statement of Financial Activities",
+        "quote": "Charitable activities 3, 4, 9 (178,011,823)"
+      },
+      "explainer": "Total expenditure for FY2025 from the audited Statement of Financial Activities. It includes central costs ($1.04m, partly donated pro bono services worth $81,751), governance ($29,629) and a small exchange loss. AMF has no separate fundraising expenditure line."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "formula": "program_spend",
+      "explainer": "AMF has a single program (nets and their monitoring), so program expenses equal the modelled program's spending (notes 3 and 4 of the FY2025 accounts)."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads AMF's central and governance costs over the program. At about 1.006 it is unusually low: AMF has 14 staff and two unpaid leaders."
+    },
+    {
+      "id": "partner_cost_per_net",
+      "section": "cost",
+      "label": "In-country delivery cost per net paid by others (governments, Global Fund, partners)",
+      "format": "usd",
+      "value": {
+        "low": 0.6,
+        "best": 1.5,
+        "high": 3.0
+      },
+      "kind": "judgment",
+      "explainer": "AMF buys the nets; the campaign that registers households and hands them out (transport inside the country, storage, staff and volunteers, training, communication) is paid by the national malaria programme and co-funders such as the Global Fund. Those costs are needed for the outcome. AMF does not publish them.\n\nAnchors: a 2026 micro-costing of door-to-door campaigns in two Nigerian states (Eigbiremolen et al., Malaria Journal, doi:10.1186/s12936-026-05829-9) found \"Unit distribution costs were $0.74 per net in Ondo and $0.57 in Anambra\" (economic costs, 97–98% of them financial) and notes these are lower than most other African estimates; a 2019 Mozambique campaign costing found about $0.76 per net; Winskill et al. (2019), as summarised by the Copenhagen Consensus malaria paper, put in-country delivery at $2.65 per net; a DRC (Kasaï) campaign cost $6.58 per net including the net, so roughly $3–4 for delivery. Weighting by where AMF's FY2025 nets went (Nigeria 25% at about $0.65; DRC, South Sudan and Chad 63% at $1.5–3 because of distances and insecurity; Guinea and Zambia 12% at about $1): best guess $1.5. Low $0.6 (Nigeria-level costs everywhere); high $3.0 (Kasaï-level costs in DRC and South Sudan)."
+    },
+    {
+      "id": "partner_costs",
+      "section": "cost",
+      "label": "In-country delivery costs paid by others for these nets",
+      "format": "usd",
+      "formula": "nets_funded * partner_cost_per_net",
+      "explainer": "Delivery cost per net times the nets AMF funded. Not in AMF's cost: it sets AMF's share of credit under Adjustments, so that the 'full credit' setting can give AMF the whole outcome."
+    },
+    {
+      "id": "amf_cost_share",
+      "section": "cost",
+      "label": "AMF's share of the full cost of getting these nets used",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + partner_costs)",
+      "explainer": "AMF's spending as a share of AMF's spending plus others' delivery costs. Used as AMF's share of credit."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "AMF's whole FY2025 spending: nets, monitoring and central costs. Others' delivery costs for the same nets are not added here; they reduce AMF's share of credit (attribution) instead, as in the template, so this model's cost basis is the charity's own spending, like the other models on the site."
+    },
+    {
+      "id": "nets_funded",
+      "section": "reach",
+      "label": "Nets funded in FY2025",
+      "format": "integer",
+      "value": 75332155,
+      "kind": "observed",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.30, note 5",
+        "quote": "75,332,155 171,957,961"
+      },
+      "explainer": "Nets granted in FY2025, by country: DRC 29.1m, Nigeria 19.0m, South Sudan 9.5m, Chad 8.3m, Guinea 4.8m, Zambia 4.7m. These are commitments: most were in transit or scheduled for distribution at the year end. AMF's own count, but each distribution is independently monitored (registration checks, distribution verification, post-distribution surveys) and published."
+    },
+    {
+      "id": "people_per_net",
+      "section": "reach",
+      "label": "People protected per net",
+      "format": "number",
+      "value": {
+        "low": 1.7,
+        "best": 1.8,
+        "high": 1.9
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.7, Results for the year",
+        "quote": "7.1 million LLINs were distributed in three distributions in two countries protecting 12.8 million people"
+      },
+      "explainer": "AMF's planning ratio: 12.8m people for 7.1m nets distributed in FY2025 and 113m people for 62.6m scheduled nets, both 1.80; the lifetime counters on AMF's website give the same (852.8m people, 473.8m nets). Universal-coverage campaigns allocate one net per two people, rounded up per household, which gives a little under 2. Range ±0.1 because the ratio is a planning figure, not a measured count of sleepers."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People protected by the nets funded",
+      "format": "integer",
+      "formula": "nets_funded * people_per_net",
+      "explainer": "People sleeping under the nets AMF funded in FY2025, at distribution. Whether they keep using the nets is under Effect (years of protection) and Adjustments (delivery)."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person protected (AMF's spending)",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context only: about $2.36 per net or $1.31 per person protected. Adding others' delivery costs (about $1.5 per net) raises the all-contributor cost to about $3.85 per net."
+    },
+    {
+      "id": "net_use_years",
+      "section": "reach",
+      "label": "Years of net use per person protected (use-weighted)",
+      "format": "number",
+      "value": {
+        "low": 1.7,
+        "best": 2.1,
+        "high": 2.5
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.8, strategic report",
+        "quote": "sleeping space coverage on day 1 (immediately post distribution) of around 95%, falling to 85-75% after 9 months, to 80-70% after 18 months and to 65-50% after 27 months"
+      },
+      "explainer": "Our calculation from AMF's post-distribution monitoring: share of sleeping spaces covered at 0, 9, 18 and 27 months (95%, 80%, 75%, 57.5% using the midpoints), extended to 36 months at 40%, and integrated with trapezoids: 0.75 × (0.875 + 0.775 + 0.6625 + 0.4875) ≈ 2.1 years of full use per person. Low end 1.7: the bottom of each reported range and nets gone by month 33 (the Tanzanian trial of Mosha et al. 2024 found only 22% of study nets in use at 36 months). High end 2.5: the top of the ranges and some use in year four."
+    },
+    {
+      "id": "trial_usage",
+      "section": "reach",
+      "label": "Net use in the trials behind the effect size",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.72,
+        "high": 0.85
+      },
+      "kind": "estimate",
+      "explainer": "The Cochrane effect is intention-to-treat: communities given nets versus none, where not everyone used them. Dividing net-use years by trial use turns AMF's use-weighted years into the trial-equivalent years the effect applies to. Best estimate 72%: directly observed adherence in the Asembo Bay (western Kenya) trial, the largest mortality trial in the review, which also found \"Approximately 30% of ITNs present were unused.\" The other mortality trials (Ghana, The Gambia, Burkina Faso) don't report comparable adherence in what we read. Range 60% (lower use elsewhere, e.g. the Gambian trial's seasonal use) to 85% (closely supervised trials).",
+      "source": {
+        "title": "Alaii et al. (2003), Factors affecting use of permethrin-treated bed nets during a randomized controlled trial in western Kenya, AJTMH 68(4 Suppl)",
+        "url": "https://doi.org/10.4269/ajtmh.2003.68.137",
+        "retrieved": "2026-10-28",
+        "page": "Abstract (via Europe PMC)",
+        "quote": "The overall percentage adherence was 72.3%."
+      }
+    },
+    {
+      "id": "years_of_coverage",
+      "section": "reach",
+      "label": "Years of protection per person reached (trial-equivalent)",
+      "format": "number",
+      "formula": "net_use_years / trial_usage",
+      "unit": "years",
+      "explainer": "Use-weighted years scaled to the level of use in the trials. Insecticide loss over a net's life (trial nets were re-treated) is handled in the evidence adjustment, not here."
+    },
+    {
+      "id": "malaria_mortality_all_ages",
+      "section": "effect",
+      "label": "Malaria deaths per person per year in AMF's FY2025 countries (net-weighted)",
+      "format": "small",
+      "value": {
+        "low": 0.0005,
+        "best": 0.000656,
+        "high": 0.00095
+      },
+      "kind": "observed",
+      "unit": "deaths / person-year",
+      "source": {
+        "title": "WHO World Malaria Report estimates, 2024, via Our World in Data (Estimated malaria mortality rate per 100,000 population)",
+        "url": "https://ourworldindata.org/grapher/death-rate-from-malaria",
+        "retrieved": "2026-10-28",
+        "page": "2024 values: DRC 61.9, Nigeria 79.5, South Sudan 56.5, Chad 69.0, Guinea 69.4, Zambia 40.7",
+        "quote": "Nigeria,NGA,2024,79.47972"
+      },
+      "explainer": "WHO's 2024 estimate of malaria deaths per 100,000 population in each country AMF funded nets for in FY2025, weighted by its nets there (DRC 39%, Nigeria 25%, South Sudan 13%, Chad 11%, Guinea 6%, Zambia 6%): 65.6 per 100,000, or 0.000656 per person-year, all ages. National averages: AMF's areas are chosen for high burden and low coverage, which would raise this, but sub-national data weren't available for all six countries. The range covers WHO's wide uncertainty for DRC and Nigeria (vital registration is absent) and the gap to IHME's estimates. We couldn't access IHME's country estimates (Our World in Data doesn't redistribute them); IHME is generally reported to give more malaria deaths at older ages and a higher total for Nigeria, so the high end is raised to 95 per 100,000. That bound is our judgment, not an IHME figure."
+    },
+    {
+      "id": "no_net_uplift",
+      "section": "effect",
+      "label": "Malaria mortality without nets, relative to today's observed rate",
+      "format": "multiple",
+      "value": {
+        "low": 1.0,
+        "best": 1.2,
+        "high": 1.35
+      },
+      "kind": "judgment",
+      "explainer": "Today's malaria death rates are measured with existing nets in place (roughly half the population in these countries sleeps under a net in recent surveys), and the effect size compares nets with no nets. If those nets cut malaria deaths among users by about 45%, death rates without any nets would be about 1 / (1 − 0.5 × 0.45) ≈ 1.29 times today's. Best guess 1.2 because coverage in the areas due for a campaign is lower than survey averages (old nets have worn out), so the gap is smaller. 1.0 = today's rate already reflects almost no protection; 1.35 = coverage is as high as survey averages and nets are more effective than the mean. The protection old nets would still have given without AMF's campaign is in counterfactual_adj."
+    },
+    {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Indirect malaria deaths per direct malaria death",
+      "format": "number",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "WHO counts deaths directly attributed to malaria. Malaria also kills indirectly (through anaemia, low birthweight and by weakening children against pneumonia and diarrhoea), which is why nets cut all-cause child mortality by more than direct malaria deaths alone explain. Calibration against the all-cause trial result: the Cochrane trials saved 5.6 lives per 1,000 children per year at a control-group mortality of about 33 per 1,000 child-years; today's mortality after the first month in AMF's countries is about 14 per 1,000 child-years (World Bank under-five minus neonatal mortality, net-weighted), so the same relative effect would save about 2.3 per 1,000, or about 2.8 with the no-net uplift. Direct deaths alone give about 1.6, implying roughly 0.4–0.7 indirect deaths per direct death. Reference class: the GiveWell-based SMC model in this repo uses 0.75. Best guess 0.5; low 0.2 (most of the gap is because trial sites had more untreated malaria); high 0.8. This ratio and mortality_reduction are calibrated together: their product is what the all-cause trial result pins down (Cochrane's 3.6–7.6 lives per 1,000 CI is about ±35%), so the joint low–high, which varies them independently, is wider than the evidence."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Annual malaria mortality without nets, all ages, direct and indirect",
+      "format": "small",
+      "formula": "malaria_mortality_all_ages * no_net_uplift * (1 + indirect_deaths_ratio)",
+      "unit": "deaths / person-year",
+      "explainer": "Deaths per person-year caused directly or indirectly by malaria among the people protected, if they had no nets. Applied at all ages, though indirect deaths are mostly of young children (a small overstatement for older people, who carry a lower weight)."
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "effect",
+      "label": "Reduction in malaria deaths among people protected by nets (trial conditions)",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.45,
+        "high": 0.55
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Pryce, Richardson & Lengeler (2018), Insecticide-treated nets for preventing malaria, Cochrane Database of Systematic Reviews",
+        "url": "https://doi.org/10.1002/14651858.CD000363.pub3",
+        "retrieved": "2026-10-28",
+        "page": "Abstract, main results (ITN versus no nets)",
+        "quote": "reduce the incidence of uncomplicated episodes of Plasmodium falciparum malaria by almost a half (rate ratio 0.55, 95% CI 0.48 to 0.64"
+      },
+      "explainer": "The Cochrane review reports all-cause child mortality (rate ratio 0.83, 95% CI 0.77–0.89, 5.6 lives saved per 1,000 children protected per year), P. falciparum episodes (0.55, 0.48–0.64) and severe malaria (0.56, 0.38–0.82), from trials run in 1987–2001. It doesn't report malaria-specific mortality. We take the reduction in malaria episodes (45%) as the reduction in malaria deaths: severe malaria fell by the same 44%. Range 35–55%, roughly the episode CI widened a little for the step from episodes to deaths. The gap between this and the larger all-cause effect is carried by indirect_deaths_ratio, which is calibrated against the all-cause result at this best estimate; the two ranges are therefore not independent, and pairing the high end of one with the high end of the other overstates the joint high."
+    },
+    {
+      "id": "u5_share_of_malaria_deaths",
+      "section": "effect",
+      "label": "Share of malaria deaths that are children under five (African Region)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.75,
+        "high": 0.8
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "WHO malaria fact sheet (World Malaria Report 2025 figures)",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/malaria",
+        "retrieved": "2026-10-28",
+        "page": "Key facts / disease burden",
+        "quote": "Children under 5 accounted for about 75% of all malaria deaths in the Region."
+      },
+      "explainer": "WHO's share of malaria deaths in the WHO African Region that are of children under five (the same page also gives 76%). Region-wide, not by country. Low end 60% because IHME's estimates (not accessed) are reported to put a larger share of malaria deaths at age five and over; high end 80% for the youngest populations (Chad, DRC)."
+    },
+    {
+      "id": "over5_effect_ratio",
+      "section": "effect",
+      "label": "Effect of nets on malaria deaths at age 5+, relative to under-fives",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "The trials measured mortality in children only. Older children and adults also sleep under the nets and benefit from fewer infectious mosquitoes in the village (the community effect), but school-age children use nets less than young children and women, and adults' malaria deaths are more often in people with other illness. Best guess 70% of the under-five effect; 40% if older people mostly get the community effect only; 100% if the effect is the same at all ages."
+    },
+    {
+      "id": "age_effect_factor",
+      "section": "effect",
+      "label": "Age-weighted effect factor",
+      "format": "percent",
+      "formula": "u5_share_of_malaria_deaths + (1 - u5_share_of_malaria_deaths) * over5_effect_ratio",
+      "explainer": "The share of all malaria deaths the trial-level reduction applies to: under-five deaths fully, older people's deaths at the relative effect above."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "baseline_mortality_rate * mortality_reduction * years_of_coverage * age_effect_factor",
+      "explainer": "Malaria deaths per person-year without nets × the share nets prevent × trial-equivalent years of protection × the age weighting. Cross-check with the all-cause trial result: the implied under-five deaths averted per 1,000 children protected per year is about 2.5, close to the 2.3–2.8 the Cochrane trials' 17% all-cause reduction gives at today's child mortality (see indirect_deaths_ratio)."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of deaths averted that are of children under five",
+      "format": "percent",
+      "formula": "u5_share_of_malaria_deaths / age_effect_factor",
+      "explainer": "Under-five malaria deaths averted as a share of all deaths averted, after the lower effect at older ages. Sets the value per death averted (children under five carry a higher moral weight)."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached (years lived with disability)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.0003
+      },
+      "kind": "judgment",
+      "unit": "DALYs",
+      "explainer": "Set to 0, with illness counted in unmodelled_benefits_adj instead (the high end, 0.0003, is a sensitivity test only: it would count illness here as well as the 1–3% for it in unmodelled_benefits_adj, a small double count). Uncomplicated malaria lasts days, so its years lived with disability are small: roughly 0.3 episodes per person-year × 45% averted × a disability weight of about 0.05 × two weeks ≈ 0.0001 DALYs per person-year, under 1% of the value of deaths averted. Anaemia and the after-effects of severe malaria add some more."
+    },
+    {
+      "id": "child_share_of_people",
+      "section": "effect",
+      "label": "Share of people protected who are children (0–14)",
+      "format": "percent",
+      "value": {
+        "low": 0.39,
+        "best": 0.433,
+        "high": 0.46
+      },
+      "kind": "observed",
+      "source": {
+        "title": "World Bank WDI, Population ages 0-14 (% of total population), 2024",
+        "url": "https://api.worldbank.org/v2/country/NGA;COD;TCD;SSD;GIN;ZMB/indicator/SP.POP.0014.TO.ZS?format=json&date=2024",
+        "retrieved": "2026-10-28",
+        "page": "SP.POP.0014.TO.ZS, 2024",
+        "quote": "Congo, Dem. Rep. 2024 46.0329708653246"
+      },
+      "explainer": "Children aged 0–14 as a share of the population in AMF's FY2025 countries, weighted by nets (DRC 46.0%, Nigeria 41.0%, South Sudan 38.9%, Chad 46.1%, Guinea 40.9%, Zambia 41.5%): 43.3%. Range: the lowest and highest country. Only children's malaria exposure is assumed to affect later earnings."
+    },
+    {
+      "id": "incidence_reduction",
+      "section": "effect",
+      "label": "Reduction in malaria episodes among people protected",
+      "format": "percent",
+      "value": {
+        "low": 0.36,
+        "best": 0.45,
+        "high": 0.52
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Pryce, Richardson & Lengeler (2018), Insecticide-treated nets for preventing malaria, Cochrane Database of Systematic Reviews",
+        "url": "https://doi.org/10.1002/14651858.CD000363.pub3",
+        "retrieved": "2026-10-28",
+        "page": "Abstract, main results (ITN versus no nets)",
+        "quote": "rate ratio 0.55, 95% CI 0.48 to 0.64"
+      },
+      "explainer": "Cochrane's pooled reduction in uncomplicated P. falciparum episodes from nets versus no nets, with its 95% confidence interval. Used for the income branch: how much of a child's malaria burden a year of protection removes."
+    },
+    {
+      "id": "childhood_years",
+      "section": "effect",
+      "label": "Years of childhood over which malaria exposure affects adult earnings",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 15,
+        "high": 18
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "The eradication studies compare cohorts exposed or not over their whole childhood. A net campaign protects a child for about 2–3 of those years, so its share of the 'whole childhood' effect is years of protection ÷ this. Best guess 15 (birth to 15, the schooling years); 10 if the effect comes mostly from early childhood, so each protected year counts more; 18 if it spreads over all of childhood."
+    },
+    {
+      "id": "schooling_gain_full_childhood",
+      "section": "effect",
+      "label": "Extra years of schooling from removing malaria over a whole childhood",
+      "format": "number",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "Barofsky, Anekwe & Chase (2015), Malaria eradication and economic outcomes in sub-Saharan Africa: Evidence from Uganda, Journal of Health Economics",
+        "url": "https://doi.org/10.1016/j.jhealeco.2015.08.002",
+        "retrieved": "2026-10-28",
+        "page": "Abstract",
+        "quote": "malaria eradication raised educational attainment by about a half year for both males and females"
+      },
+      "explainer": "The only quasi-experimental study of malaria eradication and later-life outcomes in sub-Saharan Africa: a 1959–60 campaign in south-western Uganda, compared with a synthetic control. It also found a 40% rise in male wage employment, which we don't count. Bleakley (2010) found higher adult income in cohorts born after eradication in the US, Brazil, Colombia and Mexico, supporting the direction. Range 0.2–0.8 years: a single campaign with a synthetic control is imprecise, and it removed more malaria than a net does."
+    },
+    {
+      "id": "return_to_schooling",
+      "section": "effect",
+      "label": "Increase in earnings per extra year of schooling (log points)",
+      "format": "percent",
+      "value": {
+        "low": 0.06,
+        "best": 0.09,
+        "high": 0.12
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Psacharopoulos & Patrinos (2018), Returns to Investment in Education: A Decennial Review of the Global Literature, World Bank Policy Research Working Paper 8402",
+        "url": "https://doi.org/10.1596/1813-9450-8402",
+        "retrieved": "2026-10-28",
+        "page": "Abstract",
+        "quote": "the private average global rate of return to one extra year of schooling is about 9 percent a year",
+        "note": "Abstract read via OpenAlex (api.openalex.org/works/doi:10.1596/1813-9450-8402); the World Bank repository blocked direct access."
+      },
+      "explainer": "The global average private (Mincerian) return to a year of schooling; the abstract adds that returns are higher in low-income countries. Range from 6% (lower-quality schooling, informal work) to 12%."
+    },
+    {
+      "id": "years_until_work",
+      "section": "effect",
+      "label": "Years from protection to the start of working life",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 10,
+        "high": 15
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "The children protected are aged 0–14, on average about 7, and start earning at 15–20, so earnings gains begin about 10 years after the nets are handed out. Used to discount the gains."
+    },
+    {
+      "id": "working_years",
+      "section": "effect",
+      "label": "Years of working life over which the earnings gain lasts",
+      "format": "number",
+      "value": {
+        "low": 30,
+        "best": 40,
+        "high": 45
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "From about age 17 to 57, allowing for adult mortality in these countries (life expectancy at 15 is roughly another 45–50 years). 30 if the gain fades or adult deaths cut it short; 45 for a full working life."
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, ln(consumption) units, present value",
+      "format": "small",
+      "formula": "child_share_of_people * (years_of_coverage / childhood_years) * incidence_reduction * schooling_gain_full_childhood * return_to_schooling * pv_annuity_due(1, $discount_rate, working_years) / (1 + $discount_rate) ^ years_until_work",
+      "unit": "ln-years",
+      "explainer": "Share of people who are children × share of their childhood malaria burden removed (trial-equivalent years ÷ childhood years × reduction in episodes) × the earnings gain from removing all childhood malaria (schooling gained × return per year, in log points) × years of working life, discounted at the shared discount rate from the time the children start working. It assumes the earnings gain scales with the share of childhood malaria removed. This is the least certain branch, built on one quasi-experiment."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.55,
+        "best": 0.75,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Internal validity is strong: 23 randomised trials and a high-certainty Cochrane rating on mortality. The discount is for external validity, three parts:\n\n- Insecticide resistance (×0.9): mosquitoes in AMF's countries are now widely resistant to pyrethroids, the only insecticide in the trial nets. AMF increasingly buys dual-ingredient (pyrethroid–chlorfenapyr) nets, which in recent trials did better than pyrethroid-only nets against resistant mosquitoes (Tanzania: odds ratio for infection 0.57 at 3 years, Mosha et al. 2024), but the Benin trial found the advantage gone in year 3 (Accrombessi et al. 2024), and not all AMF nets are dual-ingredient.\n- Durability (×0.9): trial nets were re-treated every 6–12 months; today's nets lose insecticide and get holes over three years, so a year of use in year 3 protects less than in year 1. Use decline itself is already in the years of protection.\n- Setting (×0.95): fewer malaria deaths today are untreated (artemisinin drugs, rapid tests, SMC, vaccines in some areas), so the share of deaths nets prevent may be lower than in 1990s trials, though baseline mortality already reflects much of this.\n\nProduct ≈ 0.77, rounded to 0.75. Low 0.55: resistance badly erodes even the new nets. High 0.95: dual-ingredient nets fully restore trial-level protection."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Without AMF's campaign, some of the people would still have been protected: by nets from the previous campaign (about half still in use at 27 months by AMF's own survey, but older nets have less insecticide and more holes) and by routine nets for pregnant women and infants. Whether another funder would have bought these nets is in leverage_funging_adj, not here. Best guess 80%: roughly a fifth of the protection would have existed anyway. Low 70%: many households still had usable nets. High 95%: old nets were mostly worn out."
+    },
+    {
+      "id": "unpriced_contrib_adj",
+      "section": "adjustments",
+      "label": "Share of credit left after unpriced contributions",
+      "format": "percent",
+      "value": {
+        "low": 0.9,
+        "best": 1.0,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Households' and volunteers' time and the national programme's planning and data are needed too but aren't in the delivery-cost estimate. 1 = they are negligible next to the priced costs; 0.9 = they deserve a tenth of the credit."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of credit, when shared with others",
+      "format": "percent",
+      "explainer": "AMF's share of credit: its share of the priced cost of getting these nets used (AMF's nets and monitoring vs. others' delivery spending), times an allowance for unpriced contributions. With 'full credit' on, AMF gets the whole outcome, as if the delivery would happen regardless of who pays for it.",
+      "formula": "amf_cost_share * unpriced_contrib_adj"
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "if($full_credit, 1, attribution_share_shared)",
+      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (nets reach households and reported use is real)",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The years of protection rest on AMF's post-distribution surveys, which mostly record whether a net is hung over a sleeping space, not whether someone slept under it, so they likely overstate use. Some nets also go missing between warehouse and household (AMF reports one theft of 45,000 nets, in FY2020) or are given to households that already have enough. AMF's registration checks and independent monitors make losses lower than in typical campaigns. Best guess 85%; 70% if survey responses overstate use by a quarter or more; 95% if the surveys are close to accurate."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 1.0,
+        "high": 1.15
+      },
+      "kind": "judgment",
+      "explainer": "Two effects that roughly cancel. Funging (below 1): if AMF didn't fund these nets, the Global Fund or a government might have bought some of them, freeing their money for other uses that do somewhat less good. This is the only place 'another funder would have paid' is counted. Leverage (above 1): AMF's credit is cut by its share of the cost, but much of the partners' delivery spending is staff time and budget that would otherwise go to less cost-effective health work, so their share of credit overstates what that money gives up. Best guess 1.0 (no net effect); 0.8 if much of the funding would have come from elsewhere; 1.15 if partners' delivery money has a low opportunity cost."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and costs not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Effects left out, with sign:\n\n- (+) Malaria illness: uncomplicated episodes, anaemia and severe malaria's after-effects (dalys_averted_per_person is 0), about +1–3%.\n- (+) Treatment costs households and clinics no longer pay, about +2–5%.\n- (+) Protection of pregnant women: fewer stillbirths, low-birthweight babies and maternal anaemia, about +3–8%.\n- (+) The 40% rise in male wage employment in the Uganda eradication study, beyond schooling, and better health for people who would otherwise survive malaria anyway, a few percent.\n- (−) Nets used for fishing or worn out early, and faster insecticide resistance, a few percent.\n\nNet best guess +15%; 5% if most of these are small; 35% if the stillbirth and morbidity effects are large."
+    },
+    {
+      "id": "years_to_benefit",
+      "section": "adjustments",
+      "label": "Years from funding to the middle of the protection period",
+      "format": "number",
+      "value": {
+        "low": 1.0,
+        "best": 2.0,
+        "high": 3.0
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "FY2025's nets are commitments: at the year end most were in transit or scheduled for the next 12 months (AMF accounts p.7), and each net protects for about three years after it is handed out. About one year to distribution plus about a year to the middle of the effective protection: 2 years. 1 year if distribution is quick; 3 if campaigns slip, as they often do in DRC and South Sudan."
+    },
+    {
+      "id": "timing_discount",
+      "section": "adjustments",
+      "label": "Discount for the delay before deaths are averted",
+      "format": "percent",
+      "formula": "1 / (1 + $discount_rate) ^ years_to_benefit",
+      "explainer": "Discounts the deaths averted with the shared discount rate for the delay from funding to the middle of the protection period."
+    },
+    {
+      "id": "years_to_distribution",
+      "section": "adjustments",
+      "label": "Years from funding to distribution",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1.0,
+        "high": 2.0
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "At the FY2025 year end most of these nets were in transit or scheduled within 12 months (AMF accounts p.7: 62.6 million nets scheduled for the next 12 months, 7.0 million in the following 12). Used to discount income, whose own discounting starts at the handout."
+    },
+    {
+      "id": "timing_discount_income",
+      "section": "adjustments",
+      "label": "Discount for the delay before nets are handed out (income branch)",
+      "format": "percent",
+      "formula": "1 / (1 + $discount_rate) ^ years_to_distribution",
+      "explainer": "Income gains are already discounted from the handout to working life, so they only need the delay from funding to distribution."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * total_adj * timing_discount",
+      "explainer": "Malaria deaths averted by the nets AMF funded in FY2025, over their life, after adjustments and discounted for the delay before they happen."
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights for the age mix of deaths averted, times your multiplier on the value of a life."
+    },
+    {
+      "id": "uov_deaths",
+      "section": "outcome",
+      "label": "Units of value from deaths averted",
+      "format": "number",
+      "formula": "deaths_averted * value_per_death",
+      "unit": "units of value",
+      "explainer": "Deaths averted × value per death."
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness averted",
+      "format": "number",
+      "formula": "people_reached * dalys_averted_per_person * total_adj * $uov_per_daly",
+      "unit": "units of value",
+      "explainer": "Zero here: illness is in unmodelled_benefits_adj (see dalys_averted_per_person)."
+    },
+    {
+      "id": "uov_income",
+      "section": "outcome",
+      "label": "Units of value from later-life income",
+      "format": "number",
+      "formula": "people_reached * ln_income_gain_per_person * total_adj * timing_discount_income * $uov_per_ln_consumption",
+      "unit": "units of value",
+      "explainer": "Later-life earnings of children protected, valued with the shared rate for a unit of ln(consumption), discounted for the delay from funding to distribution (the income branch itself discounts from distribution to working life)."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total units of value",
+      "format": "number",
+      "formula": "(uov_deaths + uov_morbidity + uov_income) * (1 + unmodelled_benefits_adj)",
+      "unit": "units of value",
+      "explainer": "Deaths averted, illness and income, plus the unmodelled effects as a share."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "units of value / $",
+      "explainer": "Per dollar of AMF's own spending; others' delivery costs reduce AMF's share of credit under Adjustments."
+    },
+    {
+      "id": "cost_per_death_averted",
+      "section": "outcome",
+      "label": "Cost per death averted (AMF's spending, all credit, before unmodelled benefits)",
+      "format": "usd",
+      "formula": "cost_total / (people_reached * deaths_averted_per_person * evidence_adj * counterfactual_adj * implementation_adj * leverage_funging_adj * timing_discount)",
+      "explainer": "Context only: AMF's own spending per malaria death averted if AMF got full credit (about $2,200), before income gains and unmodelled benefits. Counting everyone's costs (or, equivalently, AMF's spending against the deaths credited to it) gives about $3,500."
+    },
+    {
+      "id": "amf_staff_costs",
+      "section": "donor",
+      "label": "AMF staff costs",
+      "format": "usd",
+      "value": 897688,
+      "kind": "observed",
+      "source": {
+        "title": "AMF Annual Report and Financial Statements, year ended 30 June 2025 (audited, Crowe U.K. LLP)",
+        "url": "https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p.32, note 7",
+        "quote": "Staff costs cover the cost of 14 individuals (12 salaried)"
+      },
+      "explainer": "Salaries ($796,395), pensions and social security for AMF's 14 staff (12 salaried), net of exchange movements: the subtotal in note 7."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "formula": "amf_staff_costs / cost_total",
+      "explainer": "AMF's staff costs as a share of its total cost."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The accounts say salaries are set at market levels, but the CEO and Executive Chairman draw no pay at all. Best guess 30%: the usual 15% gap for delivery charities, raised because two of the most senior roles are unpaid. Low 10% (market pay for the salaried staff, leaders' time valued low); high 50%. It barely matters: AMF's staff cost is under 0.5% of the total."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)",
+      "explainer": "Staff costs × gap ÷ (1 − gap)."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))",
+      "explainer": "With salary sacrifice counted, your dollar is credited with its share only."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share",
+      "unit": "Units of value / $",
+      "explainer": "The bottom line."
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give"
+  }
+}
