@@ -137,7 +137,7 @@
       "id": "p1_annual_discount",
       "section": "p1_program_1_hsi_cea",
       "label": "Annual discount",
-      "formula": "(1 - (1 / (1 + 0.014)) ^ p1_duration_of_impact) / ((1 - 1 / (1 + 0.014)) * p1_duration_of_impact)",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p1_duration_of_impact) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p1_duration_of_impact)",
       "expected": 0.9401029593
     },
     {
@@ -274,7 +274,7 @@
       "id": "p2_annual_discount",
       "section": "p2_program_2_ssfi_cea",
       "label": "Annual discount",
-      "formula": "(1 - (1 / (1 + 0.014)) ^ p2_duration_of_impact_of_the_sludge_removal) / ((1 - 1 / (1 + 0.014)) * p2_duration_of_impact_of_the_sludge_removal)",
+      "formula": "(1 - (1 / (1 + max($discount_rate, 0.000001))) ^ p2_duration_of_impact_of_the_sludge_removal) / ((1 - 1 / (1 + max($discount_rate, 0.000001))) * p2_duration_of_impact_of_the_sludge_removal)",
       "expected": 0.9930966469
     },
     {
@@ -542,7 +542,8 @@
     "name": "ACE",
     "assumptions": {
       "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "full_credit": 0,
+      "discount_rate": 0.014
     }
   },
   "resources": [
