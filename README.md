@@ -26,6 +26,10 @@ scripts/import-ace.sh        re-imports ACE's recommended charities (convert-ace
 scripts/convert-hli-psychotherapy.py  HLI's StrongMinds / Friendship Bench model
 scripts/import-resources.sh  refreshes each charity's evidence and sources list
 .claude/skills/import-cea/   Claude skill: turn a published CEA into a model
+.claude/skills/build-cea/    Claude skill: build charityevals' own CEA of any charity from public evidence
+.claude/skills/audit-cea/    Claude skill: independent audit of a model (sources, double counting, sensitivity)
+scripts/audit-model.ts       mechanical audit: template lint, tornado, reference class
+evaluation/                  blind tests of build-cea against evaluator models (docs/eval-skills.md)
 ```
 
 ## Models
