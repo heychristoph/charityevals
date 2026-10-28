@@ -28,8 +28,10 @@ export const lib = buildLibrary(
 
 if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib.errors.join("\n")}`);
 
-/** A bulk model's full file, for its own page to hand to the browser. Server only. */
+/** A bulk model's full file. On the server, from models/grants/; in the browser, the copy the page's
+ * client:model directive fetched before hydrating (lib/model-directive.ts). */
 export function bulkRaw(id: string): unknown {
+  if (!import.meta.env.SSR) return globalThis.__charityevalsModels?.[id];
   return Object.values(bulkFiles).find((f) => f.default.id === id)?.default;
 }
 

@@ -1,0 +1,10 @@
+# Response headers for the static assets (Cloudflare Workers static assets read this file at deploy).
+
+# Build output with content hashes in the file names: a changed file gets a new name, so browsers can
+# keep these for a year without asking again.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Full model files, fetched by model pages after load. Data for the pages, not pages themselves.
+/models/*
+  X-Robots-Tag: noindex
