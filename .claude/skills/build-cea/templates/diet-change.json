@@ -1,0 +1,315 @@
+{
+  "id": "template-diet-change",
+  "name": "Template: diet change and meal replacement",
+  "kind": "template",
+  "cause": "animal-welfare",
+  "template": "diet-change",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, where, and the bottom line in SADs averted per dollar and × GiveDirectly.",
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the period",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "meals_replaced_per_year",
+      "section": "reach",
+      "label": "Animal-product meals replaced per year",
+      "format": "integer",
+      "value": 1000000,
+      "kind": "observed",
+      "unit": "meals / year",
+      "source": {
+        "title": "TEMPLATE: charity impact report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: meals per year the charity reports replacing (institutional menu changes, pledges × meals per participant). Say how the charity measures it and whether it is self-reported."
+    },
+    {
+      "id": "sads_per_meal",
+      "section": "effect",
+      "label": "SADs averted per meal replaced",
+      "format": "number",
+      "formula": "@sad_factors.sads_per_meal_replaced",
+      "unit": "SADs / meal",
+      "explainer": "TEMPLATE: the shared figure; override only if the charity reports what the replaced meals contained, and explain."
+    },
+    {
+      "id": "production_response",
+      "section": "effect",
+      "label": "Fall in production per meal not eaten",
+      "format": "percent",
+      "formula": "@sad_factors.production_response",
+      "explainer": "Fewer meals bought lowers production by less than one for one, because prices fall and others buy more."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years the change persists",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 8
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: follow-up study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: how long the change persists. Apply it only to NEW meals added in the period (new institutions, new pledges): if meals_replaced_per_year is the year's total flow from all partnerships, old and new, set this to 1, or the same meals are credited in several years' cost. For new additions, cite follow-up data (Faunalytics' study of former vegetarians, institutions' own reports)."
+    },
+    {
+      "id": "discounted_years",
+      "section": "effect",
+      "label": "Discounted years of impact",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "years"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of credit, when shared with others",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "if($full_credit, 1, attribution_share_shared)",
+      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "SADs averted",
+      "format": "number",
+      "formula": "meals_replaced_per_year * discounted_years * sads_per_meal * production_response * total_adj",
+      "unit": "SADs"
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "outcome",
+      "label": "SADs averted per dollar",
+      "format": "number",
+      "formula": "outcome_total / cost_total",
+      "unit": "SADs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "format": "small",
+      "formula": "sads_per_dollar * donor_cost_share",
+      "unit": "SADs averted / $"
+    }
+  ],
+  "output": {
+    "row": "sads_per_donor_dollar",
+    "unit": "sad",
+    "label": "SADs averted per dollar you give"
+  }
+}
