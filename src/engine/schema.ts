@@ -172,9 +172,9 @@ export const Unit = z
   .object({
     label: z.string(),
     short: z.string(),
-    /** Formula over $assumptions: how many common units one of this unit is worth. Omitted for
-     * units nobody has a defensible exchange rate for (e.g. "people reached"): such models get a
-     * page and sensitivity in their own unit, but aren't ranked against others. */
+    /** Formula over $assumptions: how many common units one of this unit is worth. Every unit a
+     * charity model reports in needs one (`npm run check` fails otherwise); a model in a unit
+     * without one would get a page in its own unit but drop off the rankings. */
     to_common: z.string().optional(),
     explainer: z.string().optional(),
   })

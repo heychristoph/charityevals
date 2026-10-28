@@ -6,7 +6,7 @@ GiveWell states results as multiples of its cash benchmark. GiveDirectly itself 
 | Model | By | Date | Result | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [Pure Earth BOTEC](/pure-earth) | GW | July 2021 | 6.9× GiveDirectly (GW: 18× cash) | 76, 2 kept fixed |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | 14× GiveDirectly | 27 |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | 14× GiveDirectly | 25 |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | 0.11 wellbeing-adjusted life years per dollar (14× GiveDirectly at default exchange rates) | 27 |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | 0.11 wellbeing-adjusted life years per dollar (14× GiveDirectly at default exchange rates) | 25 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

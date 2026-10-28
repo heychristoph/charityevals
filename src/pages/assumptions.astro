@@ -7,6 +7,8 @@ import { formatValue } from "../lib/format";
 const groups = new Map<string, typeof lib.facts extends Map<string, infer F> ? F[] : never>();
 for (const f of lib.facts.values()) groups.set(f.group, [...(groups.get(f.group) ?? []), f]);
 const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.some((r) => r.factDeps.includes(key)) && !m.extends);
+// Assumption defaults derived from facts name them in source.note (e.g. "@ace.dvf_sads_per_meal / ...").
+const citedBy = (key: string) => lib.assumptions.rows.filter((a) => new RegExp(`@${key.replace(".", "\\.")}\\b`).test(a.source?.note ?? ""));
 ---
 
 <Base title="Shared assumptions" description="Every model on the site reads these values. Most are value judgments rather than facts, and they decide most cross-cause comparisons." active="assumptions">
@@ -34,8 +36,10 @@ const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.so
                   {f.label}
                   <span class="small muted fact-meta">
                     {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
-                    {" · used by "}
+                    {usedBy(f.key).length > 0 && " · used by "}
                     {usedBy(f.key).map((m, i) => <>{i > 0 && ", "}<a href={modelUrl(lib, m)}>{m.name}</a></>)}
+                    {citedBy(f.key).length > 0 && " · basis for "}
+                    {citedBy(f.key).map((a, i) => <>{i > 0 && ", "}<a href={`#a-${a.id}`}>{a.label}</a></>)}
                     {" · "}<code>@{f.key}</code>
                   </span>
                 </th>
