@@ -505,9 +505,16 @@
   .tn-group {
     margin-left: 6px;
   }
-  /* Deep branches stop indenting so labels keep their width; the rails and levels still show depth. */
+  /* Below the third level each step indents only a few pixels, so a long chain keeps its labels
+     readable; the rails still show the nesting, without elbows. */
   .tn-group[data-deep] {
     margin-left: 0;
+  }
+  .tn-group[data-deep] > .tn-item {
+    padding-left: 4px;
+  }
+  .tn-group[data-deep] > .tn-item::after {
+    display: none;
   }
   .tn-detail {
     margin-left: 0;

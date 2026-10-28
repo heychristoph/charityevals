@@ -286,7 +286,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel }: { ctx: Ctx; n: TreeNode
       </div>
       {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} formula={fxOpen ? formula : undefined} />}
       {isOpen && branch && (
-        <ul role="group" className="tn-group" data-deep={depth >= 6 ? "" : undefined}>
+        <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
           {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} />)}
           {hidden.length > 0 && (
             <li
