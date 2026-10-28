@@ -9,6 +9,7 @@ import { formatMultiple, formatValue } from "../lib/format";
 import { Markdown } from "./AssumptionsPanel";
 import ViewToggle from "./ViewToggle";
 import { oneIn } from "../lib/comparables";
+import { track } from "../lib/analytics";
 import Derivation, { type Choice } from "./Derivation";
 import { TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import "./model.css";
@@ -332,7 +333,10 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
                 <button type="button" className="link-button" onClick={() => setTableShown(false)}>Hide table</button>
               </>
             ) : (
-              <button type="button" className="link-button" aria-expanded={false} onClick={() => setTableShown(true)}>
+              <button type="button" className="link-button" aria-expanded={false} onClick={() => {
+                track("table_open", { value: model.rows.length });
+                setTableShown(true);
+              }}>
                 Show all {model.rows.length.toLocaleString("en-US")} rows
               </button>
             )}

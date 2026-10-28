@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   // A static site: Cloudflare serves the Astro build directly. The Worker only runs for /api/*, which
-  // is the "suggest a charity" form (worker/index.ts).
+  // is the "suggest a charity" form and the analytics endpoint (worker/index.ts).
   "name": "charityevals",
   "main": "worker/index.ts",
   "account_id": "7c6c4c53ba700e67460bb6724cd7108c",
@@ -16,6 +16,10 @@
   // addresses on the account. The recipient is the secret SUGGEST_TO (`wrangler secret put
   // SUGGEST_TO`), the inbox hello@charityevals.org forwards to, so it isn't in this public repo.
   "send_email": [{ "name": "SUGGESTIONS" }],
+  // Visitor analytics (POST /api/event): anonymous counts, plus per-visit journeys for visitors who
+  // opt in. The dataset is created on first write and keeps data for three months. See
+  // docs/analytics.md for what is stored and how to query it.
+  "analytics_engine_datasets": [{ "binding": "EVENTS", "dataset": "charityevals_events" }],
   "routes": [
     { "pattern": "charityevals.org", "custom_domain": true },
     { "pattern": "www.charityevals.org", "custom_domain": true }

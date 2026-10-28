@@ -1,0 +1,149 @@
+---
+// The analytics choice: a small bar fixed to the bottom of the window until the visitor accepts or
+// declines, reopened from the footer's "Privacy settings". It never blocks the page and never takes
+// focus on its own. Plain DOM, no island: nothing to hydrate. What each choice means is in
+// src/lib/analytics.ts and on the privacy page.
+---
+
+<section class="consent" id="consent" aria-labelledby="consent-title" hidden>
+  <div class="page consent-bar">
+    <div class="consent-text">
+      <h2 id="consent-title" class="visually-hidden">Privacy choice</h2>
+      <p>
+        We'd like to learn which charities and assumptions people look at. Until you choose, we count visits anonymously,
+        with no cookies and no ids. Accept, and we also keep a random id in this browser to connect one visit's pages.
+        Decline, and we count nothing. <a href="/privacy#analytics">How it works</a>
+      </p>
+      <p class="consent-state" id="consent-state" aria-live="polite"></p>
+    </div>
+    <div class="consent-actions" role="group" aria-label="Analytics">
+      <button type="button" class="consent-choice" data-consent="accept">Accept</button>
+      <button type="button" class="consent-choice" data-consent="decline">Decline</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { getConsent, setConsent, initAnalytics } from "../lib/analytics";
+
+  const bar = document.getElementById("consent")!;
+  const state = document.getElementById("consent-state")!;
+  let opener: HTMLElement | null = null;
+
+  const describe = () => {
+    const c = getConsent();
+    state.textContent = c === "granted" ? "Your current choice: accepted." : c === "denied" ? "Your current choice: declined." : "";
+  };
+
+  const open = (from: HTMLElement | null) => {
+    opener = from;
+    describe();
+    bar.hidden = false;
+    if (from) bar.querySelector<HTMLButtonElement>(".consent-choice")!.focus();
+  };
+
+  const close = () => {
+    bar.hidden = true;
+    opener?.focus();
+    opener = null;
+  };
+
+  for (const b of bar.querySelectorAll<HTMLButtonElement>("[data-consent]"))
+    b.addEventListener("click", () => {
+      setConsent(b.dataset.consent === "accept");
+      close();
+    });
+
+  bar.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && opener) close();
+  });
+
+  for (const b of document.querySelectorAll<HTMLElement>("[data-consent-open]"))
+    b.addEventListener("click", () => open(b));
+
+  // Ask once; after that the footer link is the way back.
+  if (getConsent() === undefined) open(null);
+
+  initAnalytics();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    background: var(--paper);
+    border-top: 1px solid var(--rule-strong);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s3) var(--s6);
+    padding-top: var(--s3);
+    padding-bottom: var(--s3);
+  }
+  .consent-text {
+    flex: 1;
+    max-width: 92ch;
+  }
+  .consent p {
+    margin: 0;
+  }
+  .consent-state:empty {
+    display: none;
+  }
+  .consent-state {
+    color: var(--ink);
+    margin-top: var(--s1);
+  }
+  .consent-actions {
+    display: flex;
+    gap: var(--s5);
+    flex-shrink: 0;
+  }
+  /* Two equal link buttons in Ledger Blue: neither choice is louder than the other. */
+  .consent-choice,
+  :global([data-consent-open]) {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+  .consent-choice {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--blue);
+    padding: var(--s2) 0;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent);
+    text-underline-offset: 0.18em;
+  }
+  .consent-choice:hover {
+    color: var(--blue-ink);
+    text-decoration-color: currentColor;
+  }
+  :global([data-consent-open]) {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  :global([data-consent-open]:hover) {
+    color: var(--ink);
+  }
+  @media (max-width: 640px) {
+    .consent-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .consent-actions {
+      gap: var(--s6);
+    }
+  }
+</style>
