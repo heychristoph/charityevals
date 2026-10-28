@@ -94,8 +94,9 @@ export function partElasticity(expr: Node, part: Node, look: Lookup): number | u
 export const valueOfNode = safe;
 
 /** What a reference ends at once rows that only pass another number along are skipped: a row whose
- * formula is just another row, or one row wrapped in something that leaves it unchanged
- * (iferror(x, 0), round(x) on a whole number, x × 1). `via` lists the rows skipped. */
+ * formula is just another row, or one row in a wrapper that is the identity by construction
+ * (iferror(x, ...), round(x) on a whole number, x * 1, x + 0, max(x)). Equal values alone never count:
+ * 1 - x equals x at 0.5 and still reverses it. `via` lists the rows skipped. */
 export type Target =
   | { scope: "row"; id: string; via: string[] }
   | { scope: "assumption" | "fact"; id: string; via: string[] };
@@ -113,30 +114,36 @@ export function passThrough(m: ResolvedModel, rowId: string, look: Lookup): Targ
       id = n.name;
       continue;
     }
-    const only = singleRowRef(n);
-    if (!only || !m.byId.has(only)) break;
-    const a = look("row", id), b = look("row", only);
+    const inner = identityOf(n);
+    if (!inner || !m.byId.has(inner)) break;
+    // The wrappers that can change a value (iferror's fallback, rounding) must not have, here.
+    const a = look("row", id), b = look("row", inner);
     if (!(a === b || Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a)))) break;
     via.push(id);
-    id = only;
+    id = inner;
   }
   return { scope: "row", id, via };
 }
 
-/** The one row a formula reads, when it reads exactly one thing (any number of times) and that is a row. */
-function singleRowRef(n: Node): string | undefined {
-  let found: string | undefined, other = false;
-  const walk = (x: Node) => {
-    if (other) return;
-    if (x.type === "ref") {
-      if (x.scope !== "row" || (found && found !== x.name)) other = true;
-      else found = x.name;
-    } else if (x.type === "neg") walk(x.arg);
-    else if (x.type === "bin") { walk(x.left); walk(x.right); }
-    else if (x.type === "call") x.args.forEach(walk);
-  };
-  walk(n);
-  return other ? undefined : found;
+const isNum = (n: Node, v: number) => n.type === "num" && n.value === v;
+
+/** The row a formula returns unchanged, when its shape guarantees it (or, for iferror and rounding,
+ * when its value confirms it). */
+export function identityOf(n: Node): string | undefined {
+  switch (n.type) {
+    case "ref": return n.scope === "row" ? n.name : undefined;
+    case "call":
+      if (n.fn === "iferror" || n.fn === "round" || n.fn === "roundup" || n.fn === "rounddown") return identityOf(n.args[0]);
+      if (["sum", "product", "avg", "min", "max", "median"].includes(n.fn) && n.args.length === 1) return identityOf(n.args[0]);
+      return undefined;
+    case "bin":
+      if ((n.op === "*" || n.op === "/") && isNum(n.right, 1)) return identityOf(n.left);
+      if (n.op === "*" && isNum(n.left, 1)) return identityOf(n.right);
+      if ((n.op === "+" || n.op === "-") && isNum(n.right, 0)) return identityOf(n.left);
+      if (n.op === "+" && isNum(n.left, 0)) return identityOf(n.right);
+      return undefined;
+    default: return undefined;
+  }
 }
 
 /** A node of the tree. Keys are paths of part indices from the root ("r.0.2"), stable for a formula. */

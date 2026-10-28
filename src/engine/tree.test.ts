@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "./expr";
 import { buildLibrary, compute } from "./model";
-import { childrenOf, lookupFor, pathTo, rootOf, shapeOf } from "./tree";
+import { childrenOf, identityOf, lookupFor, pathTo, rootOf, shapeOf } from "./tree";
 import { rowsFeeding } from "./sensitivity";
 
 const root = join(import.meta.dirname, "../..");
@@ -21,6 +21,13 @@ describe("formula shapes", () => {
     expect(ops("a - b + c")).toEqual(["", "−", "+"]);
     expect(ops("a - (b - c)")).toEqual(["", "−", "+"]);
     expect(ops("sum(a, b, c)")).toEqual(["", "+", "+"]);
+  });
+  it("collapses only wrappers that return their input unchanged", () => {
+    expect(identityOf(parse("iferror(a, 0)"))).toBe("a");
+    expect(identityOf(parse("a * 1"))).toBe("a");
+    expect(identityOf(parse("max(a)"))).toBe("a");
+    expect(identityOf(parse("1 - a"))).toBeUndefined();
+    expect(identityOf(parse("a * a"))).toBeUndefined();
   });
   it("names what operators can't say", () => {
     expect(shapeOf(parse("max(a, b)")).how).toBe("the larger part");
