@@ -154,29 +154,3 @@ export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Fla
   }
   return out;
 }
-
-/** For each shared assumption, whether moving it to its low or high end reorders the given models. */
-/** Assumptions whose low or high end changes the ranking. `groups` lists each ranked charity's
- * models; a charity sits at the geometric mean of its models' positive results, as on the rankings. */
-export function rankFlips(lib: Library, groups: string[][], av: Record<string, number>, view: View = "charityevals") {
-  const position = (ids: string[], a: Record<string, number>) => {
-    const xs = ids.map((id) => bottomLine(lib, lib.models.get(id)!, a, {}, view).common).filter((x) => x > 0);
-    return xs.length ? Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length) : 0;
-  };
-  const order = (a: Record<string, number>) =>
-    groups
-      .map((ids, i) => ({ i, v: position(ids, a) }))
-      .sort((x, y) => y.v - x.v)
-      .map((x) => x.i)
-      .join(",");
-  const base = order(av);
-  return lib.assumptions.rows
-    .filter((a) => hasRange(a.value))
-    .map((a) => ({
-      id: a.id,
-      label: a.label,
-      atLow: order({ ...av, [a.id]: Math.min(pickValue(a.value, "low"), av[a.id]) }) !== base,
-      atHigh: order({ ...av, [a.id]: Math.max(pickValue(a.value, "high"), av[a.id]) }) !== base,
-    }))
-    .filter((f) => f.atLow || f.atHigh);
-}

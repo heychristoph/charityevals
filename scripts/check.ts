@@ -6,6 +6,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, bottomLine, comparable, modelsOf } from "../src/engine/model";
 import { sensitivity, flags } from "../src/engine/sensitivity";
+import { lintModel } from "../src/engine/lint";
 
 const root = join(import.meta.dirname, "..");
 const TOLERANCE = 1e-6;
@@ -48,12 +49,17 @@ for (const m of lib.models.values()) {
     else matched++;
   }
   if (!m.output) { console.log(`${m.id}: template, ${matched} expected values reproduced`); continue; }
+  // charityevals' own models (build-cea) must follow their template and source every number.
+  if (m.owner === "charityevals" && m.kind !== "template")
+    for (const f of lintModel(lib, m)) if (f.severity === "high") errors.push(`${m.id}${f.row ? `.${f.row}` : ""}: ${f.message} (npx tsx scripts/audit-model.ts ${m.id})`);
   // Each charity's main model carries the write-up; other models of it link back there.
   if (m.kind === "charity" && modelsOf(lib, m.charity)[0]?.id === m.id && !existsSync(join(root, "writeups", `${m.id}.md`)))
     errors.push(`${m.id}: missing write-up writeups/${m.id}.md`);
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");
   if (!comparable(lib, m)) {
+    // Every charity is ranked: a new unit needs an exchange rate (a shared assumption) in assumptions/default.json.
+    if (m.kind === "charity") errors.push(`${m.id}: unit ${m.output.unit} has no exchange rate (to_common), so the charity can't be ranked`);
     console.log(`${m.id.padEnd(22)} ${fmt(vals[m.output.row])} ${m.output.unit}/$  [${fmt(s.jointLow)} – ${fmt(s.jointHigh)}]  not ranked (no exchange rate)  ${matched} expected values reproduced`);
     continue;
   }

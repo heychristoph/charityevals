@@ -3,12 +3,11 @@ import Prose from "../layouts/Prose.astro";
 import { publisher } from "../lib/site";
 ---
 
-<Prose title="Privacy" description="What data charityevals collects, why, and how to say no." updated="27 October 2026">
+<Prose title="Privacy" description="What data charityevals collects, why, and how to say no." updated="28 October 2026">
   <p>
     Short version: no accounts, no cookies, no third-party scripts. We count which pages and charities people look at
     without identifying anyone; if you accept, we also connect the pages of one visit using a random id kept in your
-    browser. You can decline, or change your mind, under <button type="button" class="inline-settings" data-consent-open>privacy settings</button>
-    at the bottom of every page. The assumptions you set stay in your browser.
+    browser. You choose when you first visit, and can <a href="#changing">change your choice</a> at any time. The assumptions you set stay in your browser.
   </p>
 
   <h2>Who is responsible</h2>
@@ -27,8 +26,7 @@ import { publisher } from "../lib/site";
   <p>
     We want to know which charities people look at, which assumptions they change and which donate links they follow,
     so we can improve the site. We collect this ourselves: the page sends small events to our own server, which stores
-    them in Cloudflare Workers Analytics Engine. There are two levels, and you choose with the bar at the bottom of the
-    page.
+    them in Cloudflare Workers Analytics Engine. There are two levels, and you choose when you first visit.
   </p>
   <h3>Before you choose: anonymous counts</h3>
   <p>
@@ -45,7 +43,8 @@ import { publisher } from "../lib/site";
     two events can be connected to each other or to you. Because this has no effect on your privacy and serves only to
     learn how well the site works, Dutch law allows it without consent (Article 11.7a(3)(b) of the
     Telecommunicatiewet). The stored events are not personal data. If you decline, or your browser sends a Global
-    Privacy Control or Do Not Track signal, we don't send even these, unless you accept.
+    Privacy Control or Do Not Track signal, we don't send even these and don't ask; we take the signal as declining,
+    unless you accept here.
   </p>
   <h3>If you accept: visits connected</h3>
   <p>
@@ -56,10 +55,10 @@ import { publisher } from "../lib/site";
     contents never reach these statistics. The ids are personal data, so we only use them with your consent (Article
     6(1)(a) GDPR, and Article 11.7a(1) Telecommunicatiewet). We ask again after a year.
   </p>
-  <h3>Changing your mind</h3>
+  <h3 id="changing">Changing your mind</h3>
   <p>
-    Use <button type="button" class="inline-settings" data-consent-open>privacy settings</button>, at the bottom of
-    every page, at any time. Declining stops all statistics from your browser at once and deletes both ids from it, so
+    <button type="button" class="inline-settings" data-consent-open>Change your choice</button> here, at any time;
+    the Privacy link at the bottom of every page leads here. Declining stops all statistics from your browser at once and deletes both ids from it, so
     nothing sent later can be linked to what was sent before. Your choice itself is kept in your browser's local
     storage so we don't ask on every page; clearing the site's data removes it and we ask again.
   </p>

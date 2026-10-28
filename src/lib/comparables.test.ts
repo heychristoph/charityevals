@@ -50,6 +50,30 @@ describe("assumption comparables", () => {
     expect(discounted / full).toBeCloseTo(10, 1);
   });
 
+  describe("animal exchange rates read as days of pain and income doublings, matching the unit conversions", () => {
+    const sadToUov = defaults.daly_per_sad * defaults.uov_per_daly * defaults.animal_moral_weight;
+    it("animals spared", () => {
+      expect(assumptions.units.animals_spared.to_common).toBe("$sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight");
+      const s = at("sads_per_animal_spared")!;
+      expect(s).toMatch(/^Each farmed animal spared counts like sparing 22 days of a person's disabling pain, so sparing \d+ animals count as much as doubling one person's income for a year\.$/);
+      expect(nums(s)[1] * defaults.sads_per_animal_spared * sadToUov).toBeCloseTo(doubling(defaults), 0);
+    });
+    it("people reached", () => {
+      expect(assumptions.units.people_reached.to_common).toBe("$animals_spared_per_person_reached * $sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight");
+      const s = at("animals_spared_per_person_reached")!;
+      expect(s).toMatch(/^One in 5\.6 people reached spares a farmed animal, so reaching \d+ people count as much/);
+      const n = nums(s)[1];
+      expect(n * defaults.animals_spared_per_person_reached * defaults.sads_per_animal_spared * sadToUov).toBeCloseTo(doubling(defaults), 0);
+      expect(at("animals_spared_per_person_reached", 1.5)).toMatch(/^Each person reached spares 1\.5 farmed animals/);
+    });
+    it("research papers", () => {
+      expect(assumptions.units.paper.to_common).toBe("$sads_per_paper * $daly_per_sad * $uov_per_daly * $animal_moral_weight");
+      expect(at("sads_per_paper")).toBe(
+        `One paper counts like sparing 100,000 days of a person's disabling pain, as much as doubling ${Math.round((1e5 * sadToUov) / doubling(defaults))} people's incomes for a year.`,
+      );
+    });
+  });
+
   it("a point of life satisfaction reads as years of doubled income", () => {
     expect(at("uov_per_wellby")).toBe("Raising someone's life satisfaction by one point out of ten for a year counts as much as doubling their income for 1.1 years.");
     expect(nums(at("uov_per_wellby", 3))[0]).toBeCloseTo(3 / doubling(defaults), 1);
