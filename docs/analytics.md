@@ -59,7 +59,8 @@ fields at the end, never reorder.
 | `view_toggle` | `charityevals` or `evaluator` | | |
 | `evaluator_tab` | evaluator id | `page` or `other` | |
 | `derivation_open` | | | depth (1 = a term of the bottom line) |
-| `table_open` | | | rows in the table |
+| `table_open` | | | rows in the table (retired: the table became the tree) |
+| `tree_open` | | `lever` when following the biggest lever | depth opened (1 = the bottom line) |
 | `suggestion_sent` | | | |
 | `outbound_click` | host name | `source`, `spreadsheet`, `model-file`, `history`, `charity`, `resource-<type>` or `link` | |
 
