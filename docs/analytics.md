@@ -60,7 +60,7 @@ fields at the end, never reorder.
 | `table_open` | | | rows in the table (retired: the table became the tree) |
 | `tree_open` | | `lever` when following the biggest lever | depth opened (1 = the bottom line) |
 | `suggestion_sent` | | | |
-| `outbound_click` | host name | `source`, `spreadsheet`, `resource-<type>` or `link` | |
+| `outbound_click` | host name | `source`, `spreadsheet`, `model-file`, `history`, `charity`, `resource-<type>` or `link` | |
 
 ## Querying
 
