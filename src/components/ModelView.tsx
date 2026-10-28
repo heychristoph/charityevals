@@ -1,13 +1,13 @@
 import type React from "react";
 import { Fragment, useEffect, useMemo, useState } from "react";
-import { ChevronRight, ExternalLink, AlertTriangle, Info } from "lucide-react";
+import { ChevronRight, ExternalLink, AlertTriangle, Info, RotateCcw } from "lucide-react";
 import { lib, modelUrl, rawFacts, bulkRaw } from "../lib/data";
-import { buildLibrary, comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
+import { bottomLine, buildLibrary, comparable, compute, hasRange, inputRange, pickValue, type ResolvedModel, type ResolvedRow, type View } from "../engine/model";
 import { rowsFeeding } from "../engine/sensitivity";
 import { useResults, useResultFor } from "../lib/use-results";
 import { formatMultiple, formatValue } from "../lib/format";
 import { Markdown } from "./AssumptionsPanel";
-import ViewToggle from "./ViewToggle";
+import { setView } from "../lib/assumption-state";
 import { oneIn } from "../lib/comparables";
 import { track } from "../lib/analytics";
 import Derivation, { type Choice } from "./Derivation";
@@ -212,6 +212,45 @@ function ModelRow({ row, model, value, open, onToggle, onPath, view }: {
   );
 }
 
+/** Every model is its evaluator's; the visitor's shared assumptions may differ from the ones the
+ * evaluator used (its pins, `evaluator.assumptions`). Says so when they move this result, with one way
+ * to switch to the evaluator's own assumptions and back. */
+function EvaluatorNote({ model, r, av }: { model: ResolvedModel; r: ReturnType<typeof useResultFor>; av: Record<string, number> }) {
+  const name = model.evaluator?.name;
+  const their = name?.endsWith("s") ? `${name}'` : `${name}'s`;
+  const theirs = useMemo(() => {
+    if (!model.evaluator || r.view === "evaluator") return undefined;
+    const native = bottomLine(lib, model, av, {}, "evaluator").native;
+    if (!comparable(lib, model)) return { value: native, text: formatValue(native, Math.abs(native) < 0.1 ? "small" : "number") };
+    const bench = lib.models.get(lib.assumptions.common.benchmark)!;
+    const multiple = bottomLine(lib, model, av, {}, "evaluator").common / bottomLine(lib, bench, av, {}, bench.evaluator ? "evaluator" : "charityevals").common;
+    return { value: multiple, text: formatMultiple(multiple) };
+  }, [model, av, r.view]);
+  if (!name) return null;
+  const switchTo = (view: "evaluator" | "charityevals") => {
+    track("view_toggle", { key: view });
+    setView(view);
+  };
+  if (r.view === "evaluator")
+    return (
+      <p className="small muted bl-evaluator">
+        On {their} own assumptions.{" "}
+        <button type="button" className="link-button" onClick={() => switchTo("charityevals")}>Use your assumptions</button>
+      </p>
+    );
+  // A difference that doesn't show at the figure's precision isn't worth a note.
+  const mine = comparable(lib, model) ? formatMultiple(r.central) : formatValue(r.native, Math.abs(r.native) < 0.1 ? "small" : "number");
+  if (!theirs || !Number.isFinite(theirs.value) || theirs.text === mine) return null;
+  return (
+    <p className="small muted bl-evaluator">
+      Your assumptions differ from {their}, which give <span className="num">{theirs.text}</span>.{" "}
+      <button type="button" className="link-button" onClick={() => switchTo("evaluator")}>
+        <RotateCcw size={14} aria-hidden /> Reset to {their} assumptions
+      </button>
+    </p>
+  );
+}
+
 export default function ModelView({ id, bulk = false, choices = [], children }: { id: string; bulk?: boolean; choices?: Choice[]; children?: React.ReactNode }) {
   // Bulk models reach the browser as one-row summaries; their page loads the full file before
   // hydrating (client:model, lib/model-directive.ts).
@@ -260,14 +299,6 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      {model.evaluator && (
-        <div className="view-bar">
-          <ViewToggle evaluatorName={model.evaluator.name} />
-          <p className="view-note">
-            {r.view === "evaluator" ? `As ${model.evaluator.name} published it.` : `${model.evaluator.name}'s analysis, with your assumptions.`}
-          </p>
-        </div>
-      )}
       {comparable(lib, model) ? (
       <section className="bottom-line" aria-labelledby="bl-title">
           <h2 id="bl-title" className="bl-title">
@@ -290,6 +321,7 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
             </span>{" "}
             <a href="#your-assumptions" className="jump">Change your assumptions</a>
           </p>
+          <EvaluatorNote model={model} r={r} av={av} />
         </section>
       ) : (
         <section className="bottom-line" aria-labelledby="bl-title">
@@ -300,6 +332,7 @@ export default function ModelView({ id, bulk = false, choices = [], children }: 
             Range {formatValue(r.low, "number")} to {formatValue(r.high, "number")}. Not ranked: there's no exchange rate between {unit.label} and other good done.{" "}
             <a href="#your-assumptions" className="jump">Change your assumptions</a>
           </p>
+          <EvaluatorNote model={model} r={r} av={av} />
         </section>
       )}
 
