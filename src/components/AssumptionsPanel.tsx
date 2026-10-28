@@ -83,9 +83,10 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
           <details className="explainer small">
             <summary><ChevronRight size={14} className="chev" aria-hidden /> Why this value</summary>
             <Markdown text={row.explainer} />
+            <Technical row={row} />
           </details>
         ) : (
-          <div className="explainer small"><Markdown text={row.explainer} /></div>
+          <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>
         )
       )}
     </div>
@@ -119,13 +120,19 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
           <details className="explainer small">
             <summary><ChevronRight size={14} className="chev" aria-hidden /> What this means</summary>
             <Markdown text={row.explainer} />
+            <Technical row={row} />
           </details>
         ) : (
-          <div className="explainer small"><Markdown text={row.explainer} /></div>
+          <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>
         )
       )}
     </div>
   );
+}
+
+/** The jargon name, kept out of the label and shown once for readers who know it from evaluators' sheets. */
+function Technical({ row }: { row: Row }) {
+  return row.technical ? <p className="technical muted">Technical name: {row.technical}</p> : null;
 }
 
 /** Paragraphs and **bold** only; explainers are short. */
