@@ -286,7 +286,9 @@ const queue = [...todo];
 await Promise.all(
   Array.from({ length: 6 }, async () => {
     for (let c = queue.shift(); c; c = queue.shift()) {
-      const r = await logoFor(c as { id: string; name: string; website: string });
+      // A decode or encode failure is this charity's problem only: the batch carries on and the
+      // manifest is still written for every logo that did land.
+      const r = await logoFor(c as { id: string; name: string; website: string }).catch((e: Error) => ({ error: `processing failed: ${e.message}` }));
       if ("error" in r) {
         // A failed fetch (often a timeout or a bot wall) keeps the logo we already have.
         failures.push(`${c.id} (${c.website}): ${r.error}${manifest[c.id] ? "; kept the existing logo" : ""}`);
