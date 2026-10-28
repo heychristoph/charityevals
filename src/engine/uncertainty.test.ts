@@ -21,7 +21,9 @@ const model = {
     { id: "effect", label: "Effect", value: { low: 0.4, best: 0.8, high: 1.6 }, kind: "estimate", explainer: "x" },
     { id: "validity", label: "Adjustment for external validity", value: 0.5, kind: "estimate", explainer: "x" },
     { id: "unused", label: "Context", value: 3, kind: "observed", explainer: "x" },
-    { id: "good", label: "Good done", formula: "people * effect * validity" },
+    { id: "reach", label: "Share reached", value: 0.5, kind: "estimate", explainer: "x" },
+    { id: "coverage", label: "Coverage", formula: "reach * 2", range: { low: 0.5, high: 2 } },
+    { id: "good", label: "Good done", formula: "people * effect * validity * coverage" },
     { id: "per_dollar", label: "Good per dollar", formula: "good / cost" },
   ],
 };
@@ -65,8 +67,16 @@ describe("uncertainty", () => {
     expect(conv.length).toBeGreaterThan(0);
   });
 
+  it("takes a calculated row's published range at its word, without its inputs on top", () => {
+    expect(by("coverage")).toMatchObject({ published: true, scope: "row" });
+    expect(by("coverage").spread).toBeCloseTo(Math.log(4) / 2);
+    expect(u.drivers.find((d) => d.id === "reach")).toBeUndefined();
+    expect(u.ranged.has("coverage")).toBe(true);
+    expect(u.rowVar("coverage")).toBeCloseTo(by("coverage").spread ** 2);
+  });
+
   it("gives the tree a variance for every row", () => {
-    expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2, 2);
+    expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2, 2);
     expect(u.rootVar).toBeGreaterThan(u.rowVar("good"));
   });
 

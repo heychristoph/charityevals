@@ -22,7 +22,7 @@ export const DEFAULT_FACTOR: Record<Exclude<Source, "assumption">, number> = { j
 
 // Most bulk-imported GiveWell inputs are typed "estimate" wholesale, so the label decides. These are
 // the words GiveWell, ACE and HLI use for subjective adjustments and for measured quantities.
-const JUDGMENT = /adjust|validity|replicab|counterfactual|leverage|fung|crowd|discount|moral weight|guess|subjective|plausib|probability|likelihood|chance|attribut|persist|decay|spillover|bias|we (think|assume|estimate)|our (estimate|guess)|assum/i;
+const JUDGMENT = /adjust|validity|replicab|counterfactual|leverage|fung|crowd|discount|moral weight|guess|subjective|plausib|probability|likelihood|chance|attribution|persist|decay|spillover|bias|we (think|assume|estimate)|our (estimate|guess)|assum/i;
 const DATA = /\bcosts?\b|spent|spending|expenditure|budget|price|population|number of|enrol|census|exchange rate|inflation|\bgdp\b|salar|wage/i;
 // Fixed conversions carry no uncertainty of their own.
 const CONSTANT = /days (in|per) (a )?year|weeks (in|per) (a )?year|months (in|per) (a )?year|hours (in|per) (a )?day|unit conversion/i;
@@ -66,6 +66,9 @@ export type Uncertainty = {
   exprVar: (expr: Node) => number;
   /** Variance of ln(native bottom line): the tree's 100%. */
   rootVar: number;
+  /** Calculated rows with a published range: each counts as one source, standing in for the
+   * inputs it's calculated from, which add nothing more through it. */
+  ranged: Set<string>;
 };
 
 const H = 0.01;
@@ -90,8 +93,19 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   const leafVals = (scope: Scope, name: string) =>
     scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : pickValue(lib.facts.get(name)?.value);
 
-  // Spreads of every number the result can depend on.
+  // Spreads of every number the result can depend on. A calculated row with a published range (an
+  // evaluator's interval on, say, a mortality reduction) is taken at its word, as a source in its own
+  // right; its upstream inputs then count only through other paths, so nothing is counted twice.
   const leaves = new Map<string, Omit<Driver, "elasticity" | "contribution" | "share">>();
+  const ranged = new Set<string>();
+  for (const id of feeding) {
+    const r = m.byId.get(id);
+    if (!r?.node || !r.range) continue;
+    const s = spreadOf(values[id], { low: r.range.low, high: r.range.high }, 1);
+    if (!s || !(s.spread > 0)) continue;
+    ranged.add(id);
+    leaves.set(`row:${id}`, { key: `row:${id}`, scope: "row", id, label: r.label || id, source: sourceOf(r), published: true, ...s });
+  }
   for (const id of feeding) {
     const r = m.byId.get(id);
     if (!r || r.node || r.format === "toggle" || CONSTANT.test(r.label)) continue;
@@ -155,13 +169,13 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   const edges = new Map<string, { scope: Scope; name: string; e: number }[]>();
   for (const id of m.order) {
     const r = m.byId.get(id);
-    if (r?.node && feeding.has(id)) edges.set(id, local(r.node, values[id]));
+    if (r?.node && feeding.has(id) && !ranged.has(id)) edges.set(id, local(r.node, values[id]));
   }
 
   // Forward: the variance of each row's logarithm from its parts'.
   const rowVars = new Map<string, number>();
   const varOf = (scope: Scope, name: string): number =>
-    scope === "row" && m.byId.get(name)?.node ? rowVars.get(name) ?? 0 : leafVar(scope, name);
+    scope === "row" && m.byId.get(name)?.node && !ranged.has(name) ? rowVars.get(name) ?? 0 : leafVar(scope, name);
   for (const id of m.order) {
     const es = edges.get(id);
     if (es) rowVars.set(id, es.reduce((t, x) => t + x.e ** 2 * varOf(x.scope, x.name), 0));
@@ -213,5 +227,6 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     leafVar,
     exprVar,
     rootVar: m.output ? varOf("row", m.output.row) : 0,
+    ranged,
   };
 }
