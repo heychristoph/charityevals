@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, compute } from "./model";
 import { DEFAULT_FACTOR, sourceOf, uncertainty } from "./uncertainty";
+import { childrenOf, lookupFor, rootOf } from "./tree";
 
 const root = join(import.meta.dirname, "../..");
 const assumptions = JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8"));
@@ -98,6 +99,15 @@ describe("uncertainty", () => {
     expect(ids).toContain("plus");
     expect(ids).toContain("minus");
     expect(zu.drivers.find((d) => d.id === "plus")!.share).toBeGreaterThan(0.1);
+    // The tree reaches the zero-valued sum and its parts by derivatives, and their shares match.
+    const values = compute(zero, zm, av);
+    const look = lookupFor(zero, zm, values, av, "charityevals");
+    const share = (g: number | undefined, v: number) => ((g! / zu.result) ** 2 * v) / zu.total;
+    const root = rootOf(zm, look);
+    const parts = childrenOf(zm, root, look);
+    const net = parts.flatMap((p) => (p.expr ? childrenOf(zm, p, look) : [p])).find((p) => p.rowId === "net")!;
+    expect(net.value).toBe(0);
+    expect(share(net.g, zu.rowAbsVar("net"))).toBeCloseTo(zu.drivers.filter((d) => d.id === "plus" || d.id === "minus").reduce((t, d) => t + d.share, 0), 3);
   });
 
   it("gives the tree a variance for every row", () => {

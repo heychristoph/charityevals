@@ -97,17 +97,19 @@ function rangedRowOf(u: Uncertainty, n: TreeNode): string | undefined {
  * result's uncertainty that comes through a number (its leverage times how well it's known). */
 export type Metric = "spread" | "lever";
 
-/** Share of the bottom line's uncertainty coming through this node: its leverage on the result,
- * squared, times the variance of its own logarithm. */
+/** Share of the bottom line's uncertainty coming through this node: the result's derivative with
+ * respect to it through this branch, squared, times its variance, both in its own units, so a node
+ * whose value is zero still shows what it carries. */
 function spreadShare(u: Uncertainty, n: TreeNode): number {
-  if (!u.total || n.e === undefined) return 0;
+  if (!u.total || !u.result || n.g === undefined) return 0;
   const ranged = rangedRowOf(u, n);
-  const v = ranged ? u.rowVar(ranged)
-    : n.type === "assumption" || n.type === "fact" ? u.leafVar(n.type, n.refId!)
-    : n.rowId ? u.rowVar(n.rowId)
-    : n.expr ? u.exprVar(n.expr)
+  const v = ranged ? u.rowAbsVar(ranged)
+    : n.type === "assumption" || n.type === "fact" ? u.leafAbsVar(n.type, n.refId!)
+    : n.rowId ? u.rowAbsVar(n.rowId)
+    : n.expr ? u.exprAbsVar(n.expr)
     : 0;
-  return Math.min(1, (n.e ** 2 * v) / u.total);
+  // (change in ln(result) through this branch)² × this number's variance, out of the whole.
+  return Math.min(1, ((n.g / u.result) ** 2 * v) / u.total);
 }
 
 const shareText = (x: number) => (x < 0.005 ? "<1%" : `${Math.round(x * 100)}%`);

@@ -65,8 +65,14 @@ export type Uncertainty = {
    * spread, squared and added up, so a source shared by two branches is counted once. */
   rowVar: (id: string) => number;
   leafVar: (scope: Scope, name: string) => number;
-  /** Variance of ln(value) for any sub-formula, for the tree's parts that aren't whole rows. */
-  exprVar: (expr: Node) => number;
+  /** Variance in a number's own units: of a row, of a shared assumption or fact, or of any
+   * sub-formula. With a derivative of the bottom line, it gives the tree its shares even where a
+   * number is zero. */
+  rowAbsVar: (id: string) => number;
+  leafAbsVar: (scope: Scope, name: string) => number;
+  exprAbsVar: (expr: Node) => number;
+  /** The model's own bottom line, central. */
+  result: number;
   /** Variance of ln(result in the common unit), every source together: the 100% of both the
    * breakdown and the tree. */
   total: number;
@@ -220,15 +226,10 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     for (const [key, g] of G) if (leaves.has(key)) v += (g * sigma(key)) ** 2;
     return v;
   };
-  const rowVars = new Map<string, number>();
   const rowVar = (id: string) => {
     if (!edges.has(id)) return leafVar("row", id);
-    let v = rowVars.get(id);
-    if (v === undefined) {
-      const y = values[id];
-      rowVars.set(id, (v = y ? absVar(backward(new Map([[`row:${id}`, 1]]))) / y ** 2 : 0));
-    }
-    return v;
+    const v = values[id];
+    return v ? rowAbsVar(id) / v ** 2 : 0;
   };
 
   // The bottom line's derivative with respect to every number; divided by the result, the change in
@@ -259,15 +260,21 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   drivers.sort((x, y) => y.contribution - x.contribution);
 
-  const exprVar = (expr: Node) => {
+  const rowAbsVars = new Map<string, number>();
+  const rowAbsVar = (id: string) => {
+    if (!edges.has(id)) return sigma(`row:${id}`) ** 2;
+    let v = rowAbsVars.get(id);
+    if (v === undefined) rowAbsVars.set(id, (v = absVar(backward(new Map([[`row:${id}`, 1]])))));
+    return v;
+  };
+  const exprAbsVar = (expr: Node) => {
     let base: number;
     try {
       base = evaluate(expr, leafVals);
     } catch {
       return 0;
     }
-    if (!base) return 0;
-    return absVar(backward(new Map(local(expr, base).map((x) => [`${x.scope}:${x.name}`, x.d])))) / base ** 2;
+    return absVar(backward(new Map(local(expr, base).map((x) => [`${x.scope}:${x.name}`, x.d]))));
   };
 
   return {
@@ -275,7 +282,10 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     bySource,
     rowVar,
     leafVar,
-    exprVar,
+    rowAbsVar,
+    leafAbsVar: (scope, name) => sigma(`${scope}:${name}`) ** 2,
+    exprAbsVar,
+    result: y,
     total,
     conversionShare: total > 0 ? Math.max(0, 1 - nativeVar / total) : 0,
     ranged,
