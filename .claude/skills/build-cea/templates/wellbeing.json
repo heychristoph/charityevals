@@ -1,0 +1,358 @@
+{
+  "id": "template-wellbeing",
+  "name": "Template: mental health and wellbeing",
+  "kind": "template",
+  "cause": "global-health",
+  "template": "wellbeing",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, where, and the bottom line in WELLBYs per dollar and × GiveDirectly.",
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the period",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People treated in the period",
+      "format": "integer",
+      "value": 10000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity annual report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people who started treatment in the year the spending covers (not only completers: completion goes into implementation_adj)."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person treated",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: compare with the charity's own published figure and with other models of the family."
+    },
+    {
+      "id": "initial_effect_sd",
+      "section": "effect",
+      "label": "Effect at the end of treatment (standard deviations)",
+      "format": "number",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "unit": "SD",
+      "source": {
+        "title": "TEMPLATE: meta-analysis",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range."
+    },
+    {
+      "id": "effect_duration_years",
+      "section": "effect",
+      "label": "Years until the effect has faded",
+      "format": "number",
+      "value": {
+        "low": 1.5,
+        "best": 2.5,
+        "high": 5
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: meta-analysis of follow-ups",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: how long until the effect has faded to zero, from follow-up studies (the effect is assumed to fall linearly). An input, not initial ÷ decay, so the effect size doesn't enter twice and inflate the joint range. If follow-ups show a plateau rather than a fade, say so and set the duration to the area-equivalent linear fade."
+    },
+    {
+      "id": "effect_decay_sd_per_year",
+      "section": "effect",
+      "label": "Implied decay of the effect (SDs per year)",
+      "format": "number",
+      "formula": "initial_effect_sd / effect_duration_years",
+      "unit": "SD / year",
+      "explainer": "Context: compare with the decay rates reported in follow-up studies."
+    },
+    {
+      "id": "sd_years_per_person",
+      "section": "effect",
+      "label": "Total effect per person (SD-years)",
+      "format": "number",
+      "formula": "0.5 * initial_effect_sd * effect_duration_years",
+      "explainer": "Area of the triangle: linear decay from the initial effect to zero."
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person treated",
+      "format": "number",
+      "formula": "sd_years_per_person * @wellby_factors.wellbys_per_sd_year",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "household_size",
+      "section": "effect",
+      "label": "Household size",
+      "format": "number",
+      "formula": "@wellby_factors.household_size_psychotherapy",
+      "explainer": "TEMPLATE: use a country fact when the charity works outside HLI's settings."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "effect",
+      "label": "Household multiplier (recipient plus spillovers)",
+      "format": "multiple",
+      "formula": "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of credit, when shared with others",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "if($full_credit, 1, attribution_share_shared)",
+      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "WELLBYs",
+      "format": "number",
+      "formula": "people_reached * wellbys_per_person * household_multiplier * total_adj",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "outcome",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "WELLBYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+    },
+    {
+      "id": "wellbys_per_donor_dollar",
+      "section": "donor",
+      "label": "WELLBYs per dollar you give",
+      "format": "small",
+      "formula": "wellbys_per_dollar * donor_cost_share",
+      "unit": "WELLBYs / $"
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_donor_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar you give"
+  }
+}

@@ -177,7 +177,7 @@ export function siteSchema() {
       url: abs("/"),
       logo: { "@type": "ImageObject", url: abs("/icon-512.png"), width: 512, height: 512 },
       email: publisher.email,
-      founder: { "@type": "Person", name: publisher.name },
+      founder: { "@type": "Person", name: publisher.name, url: publisher.url },
       sameAs: [repo],
     },
   ];

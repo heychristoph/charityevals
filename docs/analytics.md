@@ -11,7 +11,9 @@ third-party scripts, no cookies, no IP addresses, no free text. What visitors ar
   data point through an allow-list (unknown events dropped, every field cut to a short token, query
   strings removed from paths). It writes to the `EVENTS` binding, dataset `charityevals_events`
   (`wrangler.jsonc`). The dataset is created on the first write after deploy.
-- `src/components/Consent.astro` is the bar at the bottom of the page and the footer's "Privacy settings".
+- `src/components/Consent.astro` is the dialog that asks on the first visit (not on `/privacy`, and not when
+  the browser sends Global Privacy Control or Do Not Track, which counts as declining). The privacy page
+  reopens it to change the choice.
 
 Two tiers, chosen by the visitor:
 

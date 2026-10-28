@@ -5,6 +5,7 @@ import { useResults } from "../lib/use-results";
 import { formatMultiple } from "../lib/format";
 import { DOMAIN, TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import ViewToggle from "./ViewToggle";
+import CharityLogo from "./CharityLogo";
 import "./rankings.css";
 
 const CAUSE_LABEL: Record<string, string> = {
@@ -40,7 +41,7 @@ function useFlip(order: string) {
 }
 
 export default function Rankings() {
-  const { results, flips, view } = useResults();
+  const { results, view } = useResults();
   const flipRef = useFlip(results.map((r) => r.charity.id).join());
   const label = lib.assumptions.common.benchmark_label;
 
@@ -79,6 +80,7 @@ export default function Rankings() {
             <li key={c.id} ref={flipRef(c.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${c.cause})` }}>
               <div className="r-name">
                 <span className="r-rank num">{i + 1}</span>
+                <CharityLogo id={c.id} name={c.name} size={32} lazy={i >= 6} className="r-logo" />
                 <div>
                   <a href={`/${c.id}`} className="r-link">{c.name}</a>
                   <div className="r-meta small">
@@ -131,33 +133,10 @@ export default function Rankings() {
         })}
       </ol>
 
-      <div className="r-notes small muted">
-        {view === "evaluator" ? (
-          <p>In the evaluator view each model's own assumptions are fixed; only the exchange rates between causes move the ranking.</p>
-        ) : flips.length > 0 ? (
-          <p>
-            <strong className="ink">What could change this order:</strong>{" "}
-            {flips.map((f, i) => (
-              <span key={f.id}>
-                {i > 0 && "; "}
-                <a href={`#a-${f.id}`}>{f.label}</a>
-                {" "}at its {f.atLow && f.atHigh ? "low or high" : f.atLow ? "low" : "high"} end
-              </span>
-            ))}
-            .
-          </p>
-        ) : (
-          <p>No single assumption, moved to the end of its range, changes this order.</p>
-        )}
-        <p>
-          Source: charityevals re-implementations of GiveWell's GiveDirectly analysis (November 2024) and Animal Charity
-          Evaluators' Sinergia Animal analysis (2025); each model page links its spreadsheet and model file.
-        </p>
-        <p>
-          Joint low and joint high set every input to whichever end of its range lowers or raises the result. They are wider than a
-          confidence interval and are not probabilities. Cross-cause multiples depend entirely on the exchange rates you set.
-        </p>
-      </div>
+      <p className="r-notes small muted">
+        Bars run from joint low to joint high: every input at the end of its range that lowers or raises the result.{" "}
+        <a href="/method">How we compare charities</a>
+      </p>
     </figure>
   );
 }

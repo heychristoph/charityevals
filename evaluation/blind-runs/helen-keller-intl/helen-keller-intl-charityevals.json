@@ -1,0 +1,922 @@
+{
+  "id": "helen-keller-intl-charityevals",
+  "name": "Helen Keller Intl: vitamin A supplementation (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "template": "direct-health",
+  "charity": "helen-keller-intl",
+  "owner": "charityevals",
+  "summary": "Helen Keller Intl supports ministries of health in 14 African countries to give children aged 6–59 months a high-dose vitamin A capsule twice a year; in its fiscal year to June 2025 it reported reaching 47 million children, at about $0.54 of its own money per dose. Using the Cochrane review's 12% reduction in child deaths, today's child mortality in those countries and discounts for lower deficiency than in the trials, doses that would have happened anyway and Helen Keller's roughly half share of the full cost of each dose, we estimate about 0.025 units of value per dollar you give, about 2.9× GiveDirectly, with a very wide joint range (0.15–36×). The biggest uncertainties are how much vitamin A still reduces mortality where deficiency and measles have declined, and how much of the campaigns would happen without Helen Keller.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "Helen Keller Intl vitamin A supplementation: charityevals cost-effectiveness model",
+    "url": "https://charityevals.org/helen-keller-intl-charityevals",
+    "published": "2026-10-28",
+    "retrieved": "2026-10-28"
+  },
+  "resources": [
+    {
+      "type": "charity",
+      "title": "Helen Keller Intl audited financial statements FY2025",
+      "url": "https://helenkellerintl.org/wp-content/uploads/2026/03/Helen-Keller-Intl_FY25-Audited-Financial-Statements.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "Helen Keller Intl Form 990 FY2025",
+      "url": "https://helenkellerintl.org/wp-content/uploads/2026/04/FY25_Helen-Keller-Intl_Form-990_final_website.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "Helen Keller Intl 2024 annual report",
+      "url": "https://helenkellerintl.org/wp-content/uploads/2025/03/HKIntl_2024AnnualReport.pdf"
+    },
+    {
+      "type": "study",
+      "title": "Imdad et al. 2022, Cochrane review of VAS in children 6–59 months",
+      "url": "https://www.cochrane.org/evidence/CD008524_vitamin-supplementation-preventing-disease-and-death-children-aged-six-months-five-years"
+    },
+    {
+      "type": "study",
+      "title": "Imdad et al. 2017 (PMC), sensitivity analyses incl. excluding DEVTA",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6464706/"
+    },
+    {
+      "type": "study",
+      "title": "Vosti et al. 2025, cost of a VAS campaign in Burkina Faso",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13250235/"
+    },
+    {
+      "type": "study",
+      "title": "Baker et al. 2025, cost-effectiveness of routine VAS strategies in Côte d'Ivoire",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0338784"
+    },
+    {
+      "type": "data",
+      "title": "UN IGME child mortality estimates",
+      "url": "https://childmortality.org"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What Helen Keller spent on vitamin A supplementation in its fiscal year July 2024 to June 2025, including its share of overhead. From the audited financial statements; the VAS share of nutrition spending is a judgment."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "Children aged 6–59 months given two doses in the year, as Helen Keller reports, and what that cost per child and per dose."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "Deaths averted per child-year of supplementation: today's all-cause mortality at 6–59 months in Helen Keller's countries times the reduction found in the Cochrane review."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for today's lower deficiency, doses that would have been given anyway, credit shared with governments and capsule donors, tallies running above surveyed coverage, and funging. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "Deaths averted valued with GiveWell's moral weights, plus unmodelled benefits, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "nutrition_expenses",
+      "section": "cost",
+      "label": "Nutrition program expenses, including vitamin A (FY2025)",
+      "format": "usd",
+      "value": 76889685,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, consolidated financial statements, year ended 30 June 2025 (audited)",
+        "url": "https://helenkellerintl.org/wp-content/uploads/2026/03/Helen-Keller-Intl_FY25-Audited-Financial-Statements.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p. 4, consolidated statement of activities",
+        "quote": "Nutrition , including Vitamin A  76,889,685"
+      },
+      "explainer": "Audited spending on Helen Keller Intl's nutrition program in the fiscal year July 2024 to June 2025. The audited statements don't split vitamin A supplementation (VAS) from the rest of nutrition (home gardens, malnutrition screening, food fortification, Asia programs), so the VAS share is the next row. FY2024 was $57.8M; the rise reflects VAS scale-up."
+    },
+    {
+      "id": "vas_share_of_nutrition",
+      "section": "cost",
+      "label": "Share of nutrition spending that is vitamin A supplementation",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.55,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Helen Keller doesn't publish VAS spending separately. Best guess 55% (about $42M), anchored on its own 2025 Nutrition for Growth pledge of \"at least $35 million per year to provide vitamin A supplementation to 40 million children under five\" (https://helenkellerintl.org/our-stories/27-billion-pledged-at-2025-nutrition-for-growth-summit; the Global Nutrition Report's commitment tracker records it as \"nine African countries\", 2025–2027, https://globalnutritionreport.org/resources/naf/commitment-tracker/helen-keller-intl-o4v6-2/provide-lifesaving-vitamin-supplementation/), scaled to the 47 million children reached in FY2025 across 14 countries ($35M × 47/40 ≈ $41M, 53%). Cross-check: the 14 African country offices' operating budgets for all programs sum to about $70M, and the big VAS countries are cheap (Niger: $5.1M budget, 7.3M children; DRC: $8.5M, 10.8M children). Low 40% if more of nutrition is fortification, Asia and food programs; high 70% if VAS dominates. This share mostly cancels out of the result, because attribution below is Helen Keller's share of the full cost per dose."
+    },
+    {
+      "id": "direct_cost_per_dose",
+      "section": "cost",
+      "label": "Helen Keller's direct VAS spending per dose (before HQ overhead)",
+      "format": "usd",
+      "formula": "program_spend / (people_reached * doses_per_child_year)",
+      "explainer": "Helen Keller's VAS program spending, without its headquarters management and fundraising overhead, per reported dose: about $0.45. Used for the attribution share, because the field costing studies behind full_cost_per_dose count in-country costs and don't include Helen Keller's headquarters overhead."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on vitamin A supplementation (FY2025)",
+      "format": "usd",
+      "formula": "nutrition_expenses * vas_share_of_nutrition",
+      "explainer": "Audited nutrition expenses times the VAS share. Same fiscal year as the reach figure below."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 125882062,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, consolidated financial statements, year ended 30 June 2025 (audited)",
+        "url": "https://helenkellerintl.org/wp-content/uploads/2026/03/Helen-Keller-Intl_FY25-Audited-Financial-Statements.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p. 4, consolidated statement of activities",
+        "quote": "Total expenses  125,882,062"
+      },
+      "explainer": "Total FY2025 expenses including $10.5M of donated medicines (mostly for neglected tropical diseases), from the audited statement of activities."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 104868999,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, consolidated financial statements, year ended 30 June 2025 (audited)",
+        "url": "https://helenkellerintl.org/wp-content/uploads/2026/03/Helen-Keller-Intl_FY25-Audited-Financial-Statements.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p. 4, consolidated statement of activities",
+        "quote": "Total program services  104,868,999"
+      },
+      "explainer": "All program-service expenses in FY2025, including the in-kind medicines, from the same statement."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management ($16.4M) and fundraising ($4.6M) over programs in proportion to their cost. Including the in-kind medicines in both totals slightly lowers the multiplier (1.20); excluding them gives 1.22."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of vitamin A supplementation, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "Helen Keller's own spending only. Government health workers' time, donated capsules (procured through UNICEF) and other partners' money are not in this cost; they lower the attribution share instead."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "Children reached with two doses in FY2025 (child-years of supplementation)",
+      "format": "integer",
+      "value": 47000000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Form 990 for FY2025, Schedule O (Part III line 4b)",
+        "url": "https://helenkellerintl.org/wp-content/uploads/2026/04/FY25_Helen-Keller-Intl_Form-990_final_website.pdf",
+        "retrieved": "2026-10-28",
+        "page": "Schedule O, Part III line 4b continuation",
+        "quote": "PARTNERED WITH 14 AFRICAN GOVERNMENTS TO REACH OVER 47 MILLION CHILDREN UNDER THE AGE OF FIVE WITH TWO DOSES OF VITAMIN A SUPPLEMENTATION"
+      },
+      "explainer": "Children aged 6–59 months given both of the year's two doses in the 14 African countries Helen Keller supports, as reported by Helen Keller (administrative tally from campaign registers, not a survey). Roughly consistent with its other figures: \"more than 94.4 million capsules\" in 2025 (https://helenkellerintl.org/combatting-vitamin-a-deficiencies/; that total covers campaigns in 18 countries including Asia, so it is not exactly the same population), and nearly 44 million children with two doses (87 million capsules) in FY2024 (2024 annual report). Treated as child-years of protection; the gap between tallies and surveyed coverage is in implementation_adj."
+    },
+    {
+      "id": "doses_per_child_year",
+      "section": "reach",
+      "label": "Doses per child per year",
+      "format": "number",
+      "value": 2,
+      "kind": "observed",
+      "unit": "doses",
+      "source": {
+        "title": "WHO guideline: vitamin A supplementation in infants and children 6–59 months of age (2011)",
+        "url": "https://www.who.int/publications/i/item/9789241501767",
+        "retrieved": "2026-10-28",
+        "page": "Recommendations",
+        "quote": "Children 12–59 months of age: 200 000 IU every 4–6 months"
+      },
+      "explainer": "WHO recommends a high dose every 4–6 months; Helen Keller-supported campaigns run twice a year. Used only to express cost per dose and in the attribution share."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Helen Keller's cost per child-year (two doses)",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Helen Keller's own cost, with overhead, per child given two doses in the year. Context: about $1.08 at the best guesses. Helen Keller's 2025 pledge implies about $0.88 per child-year ($35M for 40M children)."
+    },
+    {
+      "id": "cost_per_dose",
+      "section": "reach",
+      "label": "Helen Keller's cost per dose delivered",
+      "format": "usd",
+      "formula": "cost_total / (people_reached * doses_per_child_year)",
+      "explainer": "Helen Keller's own spending per capsule given, about $0.54 at the best guesses. Helen Keller says delivering vitamin A costs \"a little more than $1 a dose\"; that can't be its own spending (94 million doses at $1 would exceed its whole nutrition budget), so we read it as the full cost including governments' contribution, which is how full_cost_per_dose below uses it. Context only; attribution uses direct_cost_per_dose."
+    },
+    {
+      "id": "years_of_coverage",
+      "section": "reach",
+      "label": "Years of protection per child-year reached",
+      "format": "number",
+      "value": {
+        "low": 0.85,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "One child given two doses six months apart is one child-year of supplementation, the exposure the trials measured (most dosed every 4–6 months). Best 1. Low 0.85 if six-month gaps leave children with depleted stores for part of each interval, since the trials' intervals were often shorter than the campaigns'."
+    },
+    {
+      "id": "children_nigeria",
+      "section": "reach",
+      "label": "Children reached in Nigeria (weight)",
+      "format": "integer",
+      "value": 5800000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Nigeria country page",
+        "url": "https://helenkellerintl.org/where-we-work/nigeria/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided more than 5.8 million children under the age of 5 with two doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Nigeria last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_drc",
+      "section": "reach",
+      "label": "Children reached in Democratic Republic of Congo (weight)",
+      "format": "integer",
+      "value": 10800000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Democratic Republic of Congo country page",
+        "url": "https://helenkellerintl.org/where-we-work/democratic-republic-of-congo/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Reached more than 10.8 million children—96% of children under the age of 5—with 2 doses of vitamin A across 13 provinces."
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Democratic Republic of Congo last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_niger",
+      "section": "reach",
+      "label": "Children reached in Niger (weight)",
+      "format": "integer",
+      "value": 7300000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Niger country page",
+        "url": "https://helenkellerintl.org/where-we-work/niger/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Reached more than 7.3 million children under the age of five with two doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Niger last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_cameroon",
+      "section": "reach",
+      "label": "Children reached in Cameroon (weight)",
+      "format": "integer",
+      "value": 6000000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Cameroon country page",
+        "url": "https://helenkellerintl.org/where-we-work/cameroon/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided more than 6 million children under the age of 5 with twice annual vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Cameroon last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_cote_divoire",
+      "section": "reach",
+      "label": "Children reached in Côte d'Ivoire (weight)",
+      "format": "integer",
+      "value": 4700000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Côte d'Ivoire country page",
+        "url": "https://helenkellerintl.org/where-we-work/cote-divoire/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Reached more than 4.7 million children with a full dose of vitamin A, reaching an average of 96% of eligible children."
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Côte d'Ivoire last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_guinea",
+      "section": "reach",
+      "label": "Children reached in Guinea (weight)",
+      "format": "integer",
+      "value": 3700000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Guinea country page",
+        "url": "https://helenkellerintl.org/where-we-work/guinea/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided more than 3.7 million children under the age of 5 with 2 doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Guinea last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_mali",
+      "section": "reach",
+      "label": "Children reached in Mali (weight)",
+      "format": "integer",
+      "value": 3600000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Mali country page",
+        "url": "https://helenkellerintl.org/where-we-work/mali/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Ensured good health for more than 3.6 million children under the age of 5"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Mali last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_burkina_faso",
+      "section": "reach",
+      "label": "Children reached in Burkina Faso (weight)",
+      "format": "integer",
+      "value": 1600000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Burkina Faso country page",
+        "url": "https://helenkellerintl.org/where-we-work/burkina-faso/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Reached more than 1.6 million children with a full biannual dose of vitamin A."
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Burkina Faso last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_mozambique",
+      "section": "reach",
+      "label": "Children reached in Mozambique (weight)",
+      "format": "integer",
+      "value": 1400000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Mozambique country page",
+        "url": "https://helenkellerintl.org/where-we-work/mozambique/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided more than 1.4 million children under the age of 5 with two doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Mozambique last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_madagascar",
+      "section": "reach",
+      "label": "Children reached in Madagascar (weight)",
+      "format": "integer",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Madagascar country page",
+        "url": "https://helenkellerintl.org/where-we-work/madagascar/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided biannual doses of vitamin A supplements to more than 1 million children aged 6-59 months."
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Madagascar last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_kenya",
+      "section": "reach",
+      "label": "Children reached in Kenya (weight)",
+      "format": "integer",
+      "value": 948860,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Kenya country page",
+        "url": "https://helenkellerintl.org/where-we-work/kenya/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Provided twice-yearly vitamin A supplements to 948,860 children under the age of 5."
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Kenya last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_senegal",
+      "section": "reach",
+      "label": "Children reached in Senegal (weight)",
+      "format": "integer",
+      "value": 570000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Senegal country page",
+        "url": "https://helenkellerintl.org/where-we-work/senegal/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Targeted more than 570,000 children under the age of 5 with 2 doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Senegal last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "children_tanzania",
+      "section": "reach",
+      "label": "Children reached in Tanzania (weight)",
+      "format": "integer",
+      "value": 492000,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, Tanzania country page",
+        "url": "https://helenkellerintl.org/where-we-work/tanzania/",
+        "retrieved": "2026-10-28",
+        "page": "\"Last year\" results (2025 one-pager)",
+        "quote": "Reached 100%—more than 492,000—of children under the age of 5 with two doses of vitamin A"
+      },
+      "explainer": "Children Helen Keller reports reaching with vitamin A in Tanzania last year, from its country page. Used only to weight the country mortality rates below; the 13 countries sum to about 48 million, close to the 47 million total. Sierra Leone, the 14th country, gives no figure and is left out of the weights."
+    },
+    {
+      "id": "age_span_years",
+      "section": "effect",
+      "label": "Length of the eligible age band (6–59 months)",
+      "format": "number",
+      "value": 4.5,
+      "kind": "observed",
+      "unit": "years",
+      "source": {
+        "title": "WHO guideline: vitamin A supplementation in infants and children 6–59 months of age (2011)",
+        "url": "https://www.who.int/publications/i/item/9789241501767",
+        "retrieved": "2026-10-28",
+        "page": "Title and scope",
+        "quote": "infants and children 6–59 months of age"
+      },
+      "explainer": "Children are eligible from 6 to 59 months of age, 4.5 years. Converts deaths per birth between those ages into an annual rate."
+    },
+    {
+      "id": "postneonatal_share_6_11",
+      "section": "effect",
+      "label": "Share of post-neonatal infant deaths that happen at 6–11 months",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.4,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "UN IGME gives deaths before 28 days, before age 1 and before age 5, but not before 6 months. Deaths after the neonatal period fall with age, so months 6–11 hold less than half of the deaths between 1 and 11 months: best 40%, range 30–50%. Only about a fifth of 6–59-month deaths depend on this split, so it moves the baseline by less than ±5%."
+    },
+    {
+      "id": "mort_nigeria",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Nigeria",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@nigeria.under5_mortality_2024 - @nigeria.infant_mortality_2024) + (@nigeria.infant_mortality_2024 - @nigeria.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@nigeria.infant_mortality_2024 + @nigeria.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Nigeria (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_drc",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Democratic Republic of Congo",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@drc.under5_mortality_2024 - @drc.infant_mortality_2024) + (@drc.infant_mortality_2024 - @drc.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@drc.infant_mortality_2024 + @drc.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Democratic Republic of Congo (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_niger",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Niger",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@niger.under5_mortality_2024 - @niger.infant_mortality_2024) + (@niger.infant_mortality_2024 - @niger.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@niger.infant_mortality_2024 + @niger.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Niger (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_cameroon",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Cameroon",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@cameroon.under5_mortality_2024 - @cameroon.infant_mortality_2024) + (@cameroon.infant_mortality_2024 - @cameroon.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@cameroon.infant_mortality_2024 + @cameroon.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Cameroon (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_cote_divoire",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Côte d'Ivoire",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@cote_divoire.under5_mortality_2024 - @cote_divoire.infant_mortality_2024) + (@cote_divoire.infant_mortality_2024 - @cote_divoire.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@cote_divoire.infant_mortality_2024 + @cote_divoire.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Côte d'Ivoire (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_guinea",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Guinea",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@guinea.under5_mortality_2024 - @guinea.infant_mortality_2024) + (@guinea.infant_mortality_2024 - @guinea.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@guinea.infant_mortality_2024 + @guinea.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Guinea (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_mali",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Mali",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@mali.under5_mortality_2024 - @mali.infant_mortality_2024) + (@mali.infant_mortality_2024 - @mali.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@mali.infant_mortality_2024 + @mali.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Mali (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_burkina_faso",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Burkina Faso",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@burkina_faso.under5_mortality_2024 - @burkina_faso.infant_mortality_2024) + (@burkina_faso.infant_mortality_2024 - @burkina_faso.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@burkina_faso.infant_mortality_2024 + @burkina_faso.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Burkina Faso (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_mozambique",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Mozambique",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@mozambique.under5_mortality_2024 - @mozambique.infant_mortality_2024) + (@mozambique.infant_mortality_2024 - @mozambique.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@mozambique.infant_mortality_2024 + @mozambique.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Mozambique (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_madagascar",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Madagascar",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@madagascar.under5_mortality_2024 - @madagascar.infant_mortality_2024) + (@madagascar.infant_mortality_2024 - @madagascar.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@madagascar.infant_mortality_2024 + @madagascar.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Madagascar (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_kenya",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Kenya",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@kenya.under5_mortality_2024 - @kenya.infant_mortality_2024) + (@kenya.infant_mortality_2024 - @kenya.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@kenya.infant_mortality_2024 + @kenya.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Kenya (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_senegal",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Senegal",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@senegal.under5_mortality_2024 - @senegal.infant_mortality_2024) + (@senegal.infant_mortality_2024 - @senegal.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@senegal.infant_mortality_2024 + @senegal.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Senegal (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "mort_tanzania",
+      "section": "effect",
+      "label": "Annual mortality at 6–59 months, Tanzania",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "((@tanzania.under5_mortality_2024 - @tanzania.infant_mortality_2024) + (@tanzania.infant_mortality_2024 - @tanzania.neonatal_mortality_2024) * postneonatal_share_6_11) / (age_span_years * (1 - 0.5 * (@tanzania.infant_mortality_2024 + @tanzania.under5_mortality_2024)))",
+      "explainer": "Deaths per live birth between 6 and 59 months in Tanzania (deaths at 1–4 years plus the 6–11-month part of post-neonatal infant deaths, UN IGME 2024), divided by the child-years lived in that band (4.5 years times the share of children alive, averaged between age 1 and age 5). National averages; Helen Keller's areas may be riskier or safer."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "All-cause mortality at 6–59 months, weighted by children reached",
+      "format": "small",
+      "unit": "deaths / child-year",
+      "formula": "(children_nigeria * mort_nigeria + children_drc * mort_drc + children_niger * mort_niger + children_cameroon * mort_cameroon + children_cote_divoire * mort_cote_divoire + children_guinea * mort_guinea + children_mali * mort_mali + children_burkina_faso * mort_burkina_faso + children_mozambique * mort_mozambique + children_madagascar * mort_madagascar + children_kenya * mort_kenya + children_senegal * mort_senegal + children_tanzania * mort_tanzania) / (children_nigeria + children_drc + children_niger + children_cameroon + children_cote_divoire + children_guinea + children_mali + children_burkina_faso + children_mozambique + children_madagascar + children_kenya + children_senegal + children_tanzania)",
+      "explainer": "All-cause deaths per child-year among 6–59-month-olds in Helen Keller's 13 countries with figures, weighted by children reached (DRC, Niger, Cameroon and Nigeria are 63% of the weight). All-cause, because the effect below is on all-cause mortality. It is today's mortality (2024), lower than in the trials of the 1980s and 1990s; the change in what children die of is handled in evidence_adj."
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "effect",
+      "label": "Reduction in all-cause mortality at 6–59 months from VAS",
+      "format": "percent",
+      "value": {
+        "low": 0.07,
+        "best": 0.12,
+        "high": 0.24
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Imdad A et al., Vitamin A supplementation for preventing morbidity and mortality in children from six months to five years of age, Cochrane 2022 (CD008524.pub4), plain-language summary",
+        "url": "https://www.cochrane.org/evidence/CD008524_vitamin-supplementation-preventing-disease-and-death-children-aged-six-months-five-years",
+        "retrieved": "2026-10-28",
+        "page": "Main results (19 trials, 1,202,382 children)",
+        "quote": "risk ratio (RR) 0.88, 95% confidence interval (CI) 0.83 to 0.93; high-certainty evidence"
+      },
+      "explainer": "Cochrane's fixed-effect pooled result: 12% fewer deaths (95% CI 7–17%) across 19 trials and 1.2 million children. The fixed-effect estimate is dominated by the DEVTA trial (India, about one million children), which found no clear effect; the random-effects estimate is 24% (RR 0.76, 0.66–0.88) and excluding DEVTA gives 23% (RR 0.77, 0.70–0.84) in the 2017 version of the review (https://pmc.ncbi.nlm.nih.gov/articles/PMC6464706/). The six African trials give 14% (RR 0.86, 0.75–0.98). Low end: the fixed-effect lower bound; high end: the random-effects estimate. Best: the fixed-effect estimate, which already gives DEVTA its full weight."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per child-year (before adjustments)",
+      "format": "small",
+      "formula": "baseline_mortality_rate * mortality_reduction * years_of_coverage",
+      "explainer": "Annual mortality times the relative reduction times the years of protection."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of deaths averted that are of children under five",
+      "format": "percent",
+      "value": 1,
+      "kind": "observed",
+      "source": {
+        "title": "WHO guideline: vitamin A supplementation in infants and children 6–59 months of age (2011)",
+        "url": "https://www.who.int/publications/i/item/9789241501767",
+        "retrieved": "2026-10-28",
+        "page": "Title and scope",
+        "quote": "infants and children 6–59 months of age"
+      },
+      "explainer": "Every child supplemented is between 6 and 59 months old, and the deaths counted are theirs within the year of protection, so all are under five."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per child-year (years lived with disability)",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "DALYs",
+      "source": {
+        "title": "Imdad A et al., Cochrane 2022 (CD008524.pub4), plain-language summary",
+        "url": "https://www.cochrane.org/evidence/CD008524_vitamin-supplementation-preventing-disease-and-death-children-aged-six-months-five-years",
+        "retrieved": "2026-10-28",
+        "page": "Main results",
+        "quote": "VAS reduced the incidence of diarrhoea (RR 0.85, 95% CI 0.82 to 0.87; 15 studies, 77,946 children; low-certainty evidence)"
+      },
+      "explainer": "Set to 0 here: the illness VAS prevents (diarrhoea episodes, measles, night blindness and xerophthalmia, which can blind) is counted in unmodelled_benefits_adj instead, so it isn't counted twice."
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per child-year, ln(consumption), present value",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "ln-years",
+      "source": {
+        "title": "Imdad A et al., Cochrane 2022 (CD008524.pub4), plain-language summary",
+        "url": "https://www.cochrane.org/evidence/CD008524_vitamin-supplementation-preventing-disease-and-death-children-aged-six-months-five-years",
+        "retrieved": "2026-10-28",
+        "page": "Main results (no growth, cognition or earnings outcome reported)",
+        "quote": "VAS reduced the incidence of diarrhoea"
+      },
+      "explainer": "0: we found no trial linking childhood VAS to adult income or schooling. A small developmental benefit (fewer illnesses and less blindness in early childhood) is possible and is covered by the high end of unmodelled_benefits_adj."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.55,
+        "best": 0.85,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Internal validity is good: Cochrane rates the mortality evidence high-certainty, and the pooled fixed-effect result already includes the null DEVTA trial, so no publication-bias discount. The remaining question is external validity. Most trials ran in the 1980s–90s, when vitamin A deficiency (VAD) was commoner and measles and diarrhoea caused more of children's deaths; VAS works mainly through diarrhoea deaths (RR 0.88). VAD among under-fives in WHO's African region is still about 31% (Song et al. 2023, https://pmc.ncbi.nlm.nih.gov/articles/PMC10416138/), down from about 48% in sub-Saharan Africa in 2013 (Stevens et al. 2015, as cited there). Measles vaccination and ORS have lowered the share of deaths VAS can prevent. Because the 12% best estimate already gives DEVTA (a modern, lower-deficiency setting) most of the pooled weight, only a modest further discount is applied: best 0.85, giving about 10% effective reduction, a little below the Africa (14%) and high-mortality (11%) subgroups in the 2017 review. Low 0.55: DEVTA alone is the best guide to modern settings. High 1.0: the pooled fixed-effect estimate, already conservative relative to the 23–24% random-effects and excluding-DEVTA estimates, applies as is."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of doses that wouldn't have been given anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Without Helen Keller's support in a country, ministries of health would still give some vitamin A through routine services and, in places, other partners' campaigns. This row answers that question only; whether other funders would replace a marginal donation is leverage_funging_adj. Reference class: when polio campaigns, a main VAS platform with external financing, were scaled back, two-dose coverage in West and Central Africa fell from 79% in 2015 to 54% in 2016 (UNICEF, https://www.unicef.ca/en/press-release/over-140-million-children-greater-risk-illness-they-miss-life-saving-vitamin): about a third of doses lost in the first year, not a collapse to zero, because governments and partners shifted some delivery to child health days. The number of sub-Saharan countries with at least 80% two-dose coverage fell from 27 (2009–10) to 10 (2016) (UNICEF 2018, Coverage at a Crossroads, https://www.unicef.org/media/48031/file/vitamin-a-report-eng.pdf, p. 20). Routine-only delivery in northern Côte d'Ivoire in 2023 reached 9–20% (fixed) and 51% (advanced) of children (Baker et al. 2025, https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0338784), against 88% surveyed coverage in a Helen Keller-supported campaign in Burkina Faso (Vosti et al. 2025). Best 0.6: about 40% of the doses would have reached the same children anyway. Losing Helen Keller would be a bigger shock than losing one platform (it funds and organises the campaigns), so somewhat more than the third lost in West and Central Africa in 2016 would be lost, but governments and other partners would keep part of the coverage, as they did then. Low 0.4: other partners (UNICEF, Nutrition International) or governments would run most of the campaigns. High 0.85: coverage would fall to routine-only levels (9–51%)."
+    },
+    {
+      "id": "full_cost_per_dose",
+      "section": "adjustments",
+      "label": "Full cost per dose actually received, all payers",
+      "format": "usd",
+      "value": {
+        "low": 0.8,
+        "best": 1.2,
+        "high": 2.1
+      },
+      "kind": "judgment",
+      "explainer": "What one dose actually received costs everyone together: Helen Keller's field costs, the government's (health workers' time and salaries, supervision, per diems), the donated capsule (about 2 cents, UNICEF 2018) and other partners. Both costing studies count children from coverage surveys, not tallies, which is why attribution divides by implementation_adj. Burkina Faso 2021–22 campaign (Helen Keller co-authored): the paper's headline is $1.34 per child reached including caregivers' time; its district totals net of caregivers' time ($112,517 for 102,722 children) give about $1.10, our best guess, since caregivers' time is left out as it is for other charities' beneficiaries (Vosti et al. 2025, Food and Nutrition Bulletin, https://pmc.ncbi.nlm.nih.gov/articles/PMC13250235/). Côte d'Ivoire 2023: routine strategies 458–723 FCFA (about $0.75–1.20 at about 606 FCFA per dollar), catch-up strategies up to 1,497–1,611 FCFA (about $2.50–2.70) per child supplemented (Baker et al. 2025). Helen Keller itself says \"a little more than $1 a dose\" (https://helenkellerintl.org/combatting-vitamin-a-deficiencies/). An older review put Africa at about $0.50 per capsule in 2004 prices (Neidecker-Gonzales et al. 2007). These study costs are in 2022–23 prices; Helen Keller's spending is FY2025 (mid-2024 to mid-2025), so we raise them by about 8% for US-dollar inflation over the period: best $1.20 (from $1.10), low $0.80 (cheap routine or large-scale campaign delivery), high $2.10 (a larger mix of costly catch-up and community strategies)."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "Helen Keller's share of credit (its share of the full cost)",
+      "format": "percent",
+      "formula": "min(1, direct_cost_per_dose / (implementation_adj * full_cost_per_dose))",
+      "explainer": "Helen Keller pays part of each dose; governments and capsule donors pay the rest, and the dose needs all of them. Following the house convention, Helen Keller is credited with its share of the full cost. Both sides are on the same basis: Helen Keller's direct field spending (no headquarters overhead) per dose actually received (reported doses × implementation_adj), against the studies' full cost per dose actually received. At the best guesses that is $0.45 / 0.8 = $0.56 of $1.20, or about 47%. Headquarters overhead is left out of Helen Keller's share because the field costing studies leave out every partner's headquarters costs (UNICEF's, ministries' central administration), so the share compares like with like; Helen Keller's overhead is still part of what the donor pays (cost_total). Counting it on both sides instead would raise the result by about 9%. Because direct_cost_per_dose rises with the VAS share of spending, that share mostly cancels out of the result, and so does implementation_adj: the model effectively values every field dollar spent on the campaigns, by anyone, equally."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "if($full_credit, 1, attribution_share_shared)",
+      "explainer": "With full credit for shared outcomes switched on, Helen Keller gets every death the doses avert, for its own cost."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (reported doses actually received)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The 47 million is a tally from campaign registers, and tallies run high (wrong population denominators, double counting). Helen Keller-run surveys: Tanzania, survey coverage 65% against 98.5% from tally sheets, a ratio of 0.66 (Nyhus Dhillon et al. 2013, https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0058629); Sierra Leone 2011, 91.8% against 105.1%, a ratio of 0.87 (Hodges et al. 2013, https://pmc.ncbi.nlm.nih.gov/articles/PMC4168566/); Burkina Faso 2021–22, 88% surveyed coverage (Vosti et al. 2025). Best 0.8; low 0.6 as in Tanzania; high 0.95. Also covers children getting only one of the two doses."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Only the donation-level question, since whether the campaigns would happen without Helen Keller is counterfactual_adj: does a marginal dollar to Helen Keller's VAS program add to VAS spending? Slightly below 1 because Helen Keller's VAS work is largely funded by restricted grants from large funders, which might cover a shortfall from individual donors, and Helen Keller can move unrestricted money between programs. Not above 1: the government staff time Helen Keller's money draws in is already credited to governments through the attribution share. Best 0.95; low 0.8 if large funders would largely fill any gap; high 1.0."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Positive effects not in the death count: fewer diarrhoea episodes (RR 0.85) and measles cases (RR 0.45), less night blindness (RR 0.32) and xerophthalmia (Bitot's spots RR 0.42), which can lead to blindness (Cochrane 2022); deworming and other services often delivered at the same campaigns; any later-life gain from healthier early childhood. Negative: transient side effects (vomiting, bulging fontanelle) are minor. Best +10%, range 3–25%. Anchor: the illness averted is mostly short episodes; at the shared rate of 2 units per DALY a death-dominated program's morbidity rarely adds more than a tenth."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * total_adj",
+      "explainer": "Child deaths averted in FY2025 credited to Helen Keller, after all adjustments."
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights for the age mix of deaths averted (here all under five), times your multiplier on the value of a life."
+    },
+    {
+      "id": "uov_deaths",
+      "section": "outcome",
+      "label": "Units of value from deaths averted",
+      "format": "number",
+      "formula": "deaths_averted * value_per_death",
+      "unit": "units of value",
+      "explainer": "Deaths averted times the value of each."
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness averted",
+      "format": "number",
+      "formula": "people_reached * dalys_averted_per_person * total_adj * $uov_per_daly",
+      "unit": "units of value",
+      "explainer": "Zero: illness is counted in unmodelled_benefits_adj."
+    },
+    {
+      "id": "uov_income",
+      "section": "outcome",
+      "label": "Units of value from later-life income",
+      "format": "number",
+      "formula": "people_reached * ln_income_gain_per_person * total_adj * $uov_per_ln_consumption",
+      "unit": "units of value",
+      "explainer": "Zero: no evidence of income effects from VAS."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total units of value",
+      "format": "number",
+      "formula": "(uov_deaths + uov_morbidity + uov_income) * (1 + unmodelled_benefits_adj)",
+      "unit": "units of value",
+      "explainer": "All units of value from one year of the program, including the unmodelled benefits."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "units of value / $",
+      "explainer": "Units of value per dollar Helen Keller spends on VAS."
+    },
+    {
+      "id": "personnel_expenses",
+      "section": "donor",
+      "label": "Personnel expenses (FY2025)",
+      "format": "usd",
+      "value": 46180105,
+      "kind": "observed",
+      "source": {
+        "title": "Helen Keller Intl, consolidated financial statements, year ended 30 June 2025 (audited)",
+        "url": "https://helenkellerintl.org/wp-content/uploads/2026/03/Helen-Keller-Intl_FY25-Audited-Financial-Statements.pdf",
+        "retrieved": "2026-10-28",
+        "page": "p. 6, statement of functional expenses, Total 2025 column",
+        "quote": "Personnel $ 7,162,299 $ 21,987,738 $ 2,235,889 $ 31,385,926 $ 12,342,425  $ 2,451,754 $ 14,794,179 $ 46,180,105"
+      },
+      "explainer": "Salaries and benefits for all staff, FY2025. Doesn't include government health workers or per diems paid to them, which are other line items."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of total cost",
+      "format": "percent",
+      "formula": "personnel_expenses / total_expenses",
+      "explainer": "Personnel ÷ total expenses, about 37%, organisation-wide (no VAS-specific split)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Most of Helen Keller's 800-plus staff work in country offices in Africa and Asia, where international NGO salaries are generally at or above local private-sector pay for similar skills; headquarters staff in New York likely earn less than in the private sector. Best 10%, below the 15% the repo uses for large delivery charities because so much of the payroll is in-country; low 0, high 25%."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)",
+      "explainer": "The extra pay staff would earn elsewhere, counted as an in-kind donation."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))",
+      "explainer": "With salary sacrifice counted, cash donations pay this share of the cost."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share",
+      "unit": "units of value / $",
+      "explainer": "The bottom line: units of value per dollar donated to Helen Keller's VAS program."
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give"
+  }
+}

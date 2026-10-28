@@ -1,149 +1,148 @@
 ---
-// The analytics choice: a small bar fixed to the bottom of the window until the visitor accepts or
-// declines, reopened from the footer's "Privacy settings". It never blocks the page and never takes
-// focus on its own. Plain DOM, no island: nothing to hydrate. What each choice means is in
-// src/lib/analytics.ts and on the privacy page.
+// The analytics choice: a modal dialog on the first visit that blocks the page until the visitor
+// accepts or declines (the native <dialog> makes the rest of the page inert and traps focus). Both
+// choices are buttons on this one layer, so declining takes one click, as GDPR consent requires.
+// It isn't shown when the browser sends Global Privacy Control or Do Not Track (treated as "Decline"),
+// nor on the privacy page itself, which it links to; that page reopens it to change the choice.
+// Plain DOM, no island: nothing to hydrate. What each choice means is in src/lib/analytics.ts and on
+// the privacy page.
+
+interface Props {
+  /** Ask on load if there's no choice yet. Off on the privacy page, so the policy can be read first. */
+  ask?: boolean;
+}
+const { ask = true } = Astro.props;
 ---
 
-<section class="consent" id="consent" aria-labelledby="consent-title" hidden>
-  <div class="page consent-bar">
-    <div class="consent-text">
-      <h2 id="consent-title" class="visually-hidden">Privacy choice</h2>
-      <p>
-        We'd like to learn which charities and assumptions people look at. Until you choose, we count visits anonymously,
-        with no cookies and no ids. Accept, and we also keep a random id in this browser to connect one visit's pages.
-        Decline, and we count nothing. <a href="/privacy#analytics">How it works</a>
-      </p>
-      <p class="consent-state" id="consent-state" aria-live="polite"></p>
-    </div>
-    <div class="consent-actions" role="group" aria-label="Analytics">
-      <button type="button" class="consent-choice" data-consent="accept">Accept</button>
-      <button type="button" class="consent-choice" data-consent="decline">Decline</button>
-    </div>
+<dialog class="consent" id="consent" aria-labelledby="consent-title" aria-describedby="consent-text" data-ask={ask ? "" : undefined}>
+  <h2 id="consent-title">Help us improve charityevals</h2>
+  <p id="consent-text">
+    We'd like to see which charities people look at and how they get there. Accept, and a random id in this browser
+    connects the pages of your visit: no cookies, no names, no ads. Decline, and we count nothing. <a
+      href="/privacy#analytics">How it works</a
+    >
+  </p>
+  <p class="consent-state" id="consent-state" aria-live="polite"></p>
+  <div class="consent-actions">
+    <button type="button" class="consent-accept" data-consent="accept">Accept</button>
+    <button type="button" class="consent-decline" data-consent="decline">Decline</button>
   </div>
-</section>
+</dialog>
 
 <script>
-  import { getConsent, setConsent, initAnalytics } from "../lib/analytics";
+  import { getConsent, setConsent, shouldAsk, initAnalytics } from "../lib/analytics";
 
-  const bar = document.getElementById("consent")!;
+  const dialog = document.getElementById("consent") as HTMLDialogElement;
   const state = document.getElementById("consent-state")!;
-  let opener: HTMLElement | null = null;
+  /** Opened on load without a choice: it stays until one is made. */
+  let blocking = false;
 
   const describe = () => {
     const c = getConsent();
     state.textContent = c === "granted" ? "Your current choice: accepted." : c === "denied" ? "Your current choice: declined." : "";
   };
 
-  const open = (from: HTMLElement | null) => {
-    opener = from;
+  const open = (block: boolean) => {
+    blocking = block;
     describe();
-    bar.hidden = false;
-    if (from) bar.querySelector<HTMLButtonElement>(".consent-choice")!.focus();
+    if (!dialog.open) dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>(".consent-accept")!.focus();
   };
 
-  const close = () => {
-    bar.hidden = true;
-    opener?.focus();
-    opener = null;
-  };
-
-  for (const b of bar.querySelectorAll<HTMLButtonElement>("[data-consent]"))
+  for (const b of dialog.querySelectorAll<HTMLButtonElement>("[data-consent]"))
     b.addEventListener("click", () => {
       setConsent(b.dataset.consent === "accept");
-      close();
+      blocking = false;
+      dialog.close();
     });
 
-  bar.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && opener) close();
+  // Escape closes it only when the visitor opened it to change an earlier choice.
+  dialog.addEventListener("cancel", (e) => {
+    if (blocking) e.preventDefault();
+  });
+  // Some browsers close a modal on a repeated Escape regardless; without a choice, it comes back.
+  dialog.addEventListener("close", () => {
+    if (blocking) open(true);
   });
 
-  for (const b of document.querySelectorAll<HTMLElement>("[data-consent-open]"))
-    b.addEventListener("click", () => open(b));
+  for (const b of document.querySelectorAll<HTMLElement>("[data-consent-open]")) b.addEventListener("click", () => open(false));
 
-  // Ask once; after that the footer link is the way back.
-  if (getConsent() === undefined) open(null);
+  if (dialog.hasAttribute("data-ask") && shouldAsk()) open(true);
 
   initAnalytics();
 </script>
 
 <style>
   .consent {
-    position: fixed;
-    inset: auto 0 0 0;
-    z-index: 50;
+    width: min(480px, calc(100% - 32px));
+    max-height: calc(100% - 32px);
+    margin: auto;
+    padding: var(--s6);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
     background: var(--paper);
-    border-top: 1px solid var(--rule-strong);
-    font-size: 14px;
-    line-height: 1.45;
     color: var(--ink-2);
+    font-size: 17px;
+    line-height: 1.5;
   }
-  .consent[hidden] {
-    display: none;
+  .consent::backdrop {
+    background: rgb(29 36 51 / 0.55);
   }
-  .consent-bar {
-    display: flex;
-    align-items: center;
-    gap: var(--s3) var(--s6);
-    padding-top: var(--s3);
-    padding-bottom: var(--s3);
+  /* The page behind can't scroll while the dialog is open. */
+  :global(html:has(dialog.consent[open])) {
+    overflow: hidden;
   }
-  .consent-text {
-    flex: 1;
-    max-width: 92ch;
-  }
-  .consent p {
-    margin: 0;
+  .consent h2 {
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: var(--s3);
   }
   .consent-state:empty {
     display: none;
   }
   .consent-state {
     color: var(--ink);
-    margin-top: var(--s1);
+    margin-top: var(--s2);
   }
   .consent-actions {
     display: flex;
-    gap: var(--s5);
-    flex-shrink: 0;
+    gap: var(--s3);
+    margin-top: var(--s5);
   }
-  /* Two equal link buttons in Ledger Blue: neither choice is louder than the other. */
-  .consent-choice,
-  :global([data-consent-open]) {
-    background: none;
-    border: 0;
-    padding: 0;
-    font: inherit;
+  .consent-actions button {
+    font: 600 18px/1.2 var(--sans);
+    min-height: 52px;
+    padding: var(--s3) var(--s5);
+    border-radius: var(--radius);
     cursor: pointer;
   }
-  .consent-choice {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--blue);
-    padding: var(--s2) 0;
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent);
-    text-underline-offset: 0.18em;
+  /* The one filled button on the site: the choice we ask for. Decline stays a full, visible button. */
+  .consent-accept {
+    flex: 2;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    color: #fff;
   }
-  .consent-choice:hover {
-    color: var(--blue-ink);
-    text-decoration-color: currentColor;
+  .consent-accept:hover {
+    background: var(--blue-ink);
+    border-color: var(--blue-ink);
   }
-  :global([data-consent-open]) {
-    color: var(--ink-2);
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-  }
-  :global([data-consent-open]:hover) {
+  .consent-decline {
+    flex: 1;
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
     color: var(--ink);
   }
+  .consent-decline:hover {
+    border-color: var(--ink-3);
+    background: var(--paper-2);
+  }
   @media (max-width: 640px) {
-    .consent-bar {
-      flex-direction: column;
-      align-items: stretch;
+    .consent {
+      padding: var(--s5);
     }
     .consent-actions {
-      gap: var(--s6);
+      flex-direction: column;
     }
   }
 </style>
