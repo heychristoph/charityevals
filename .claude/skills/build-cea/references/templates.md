@@ -55,6 +55,9 @@ These settle the questions the development runs kept hitting; follow them so mod
    branch its own prefixed rows (`new_…`, `acc_…`) and sum the branches into `outcome_total`. Keep the
    canonical adjustment rows as outcome-weighted averages of the branches (formulas), so they still
    read as "the model's" counterfactual, attribution and implementation, and say so in the explainer.
+   Name branch adjustments `<branch>_<canonical id>` (`acc_counterfactual_adj`) and apply them in
+   each branch; the canonical averages then stay outside the result's path (the lint accepts that
+   only when every branch's own row reaches the result), so nothing is discounted twice.
 5. **One question per adjustment.** Years brought forward and the counterfactual answer the same
    question for accountability work: hens that would have switched on time get either zero years or
    a zero counterfactual, not both. Completion and dosage reduce `implementation_adj` only where the
