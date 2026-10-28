@@ -79,7 +79,10 @@ function labelOf(m: ResolvedModel, n: TreeNode): string {
 }
 
 function show(m: ResolvedModel, n: TreeNode): string {
-  const f = n.rowId ? m.byId.get(n.rowId)?.format : n.type === "assumption" ? assumptionRow(n.refId!)?.format : n.type === "fact" ? lib.facts.get(n.refId!)?.format : undefined;
+  // The row named in the formula speaks first (it carries the label shown), then the rows it passed
+  // through, then the number it ends at.
+  const own = [n.named, ...n.via].map((id) => (id ? m.byId.get(id)?.format : undefined)).find(Boolean);
+  const f = own ?? (n.rowId ? m.byId.get(n.rowId)?.format : n.type === "assumption" ? assumptionRow(n.refId!)?.format : n.type === "fact" ? lib.facts.get(n.refId!)?.format : undefined);
   return f && f !== "number" && f !== "small" && f !== "toggle" ? formatValue(n.value, f) : fmtNum(n.value);
 }
 
