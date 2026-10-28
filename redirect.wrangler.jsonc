@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // charityevals.com and www.charityevals.com redirect to charityevals.org (worker/redirect.ts). A
+  // Worker of its own, so the site's Worker still only runs for /api/*. It rarely changes and the
+  // deploy workflow's token covers only the charityevals.org zone, so it's deployed by hand:
+  // `npm run deploy:redirect`.
+  "name": "charityevals-redirect",
+  "main": "worker/redirect.ts",
+  "account_id": "7c6c4c53ba700e67460bb6724cd7108c",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "charityevals.com", "custom_domain": true },
+    { "pattern": "www.charityevals.com", "custom_domain": true }
+  ]
+}
