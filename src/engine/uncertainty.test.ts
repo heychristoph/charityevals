@@ -84,6 +84,22 @@ describe("uncertainty", () => {
     expect(by("rate").share).toBeGreaterThan(0);
   });
 
+  it("passes uncertainty through a sum that cancels to zero", () => {
+    const zero = buildLibrary([{ ...model, id: "zero", output: { row: "out", unit: "uov", label: "x" }, rows: [
+      { id: "base", label: "Base", value: 10, kind: "observed", explainer: "x" },
+      { id: "plus", label: "Benefit", value: 0.3, kind: "estimate", explainer: "x" },
+      { id: "minus", label: "Harm", value: -0.3, kind: "estimate", explainer: "x" },
+      { id: "net", label: "Net", formula: "plus + minus" },
+      { id: "out", label: "Out", formula: "base * (1 + net)" },
+    ] }], assumptions);
+    const zm = zero.models.get("zero")!;
+    const zu = uncertainty(zero, zm, compute(zero, zm, av), av, "charityevals");
+    const ids = zu.drivers.map((d) => d.id);
+    expect(ids).toContain("plus");
+    expect(ids).toContain("minus");
+    expect(zu.drivers.find((d) => d.id === "plus")!.share).toBeGreaterThan(0.1);
+  });
+
   it("gives the tree a variance for every row", () => {
     expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2 + (by("rate").elasticity * by("rate").spread) ** 2, 2);
     // The tree's root and the breakdown share one total; the rest is the unit conversion.
