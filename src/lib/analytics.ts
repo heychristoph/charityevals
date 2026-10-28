@@ -160,6 +160,12 @@ export function trackAssumption(id: string, value: number, defaultValue: number,
   timers.set(id, { t: setTimeout(send, 1500), send });
 }
 
+/** Drops changes still waiting out their 1.5 s: after "Reset", they're values the visitor discarded. */
+export function cancelAssumptionEvents() {
+  for (const { t } of timers.values()) clearTimeout(t);
+  timers.clear();
+}
+
 /** Sends changes still waiting out their 1.5 s, when the visitor leaves the page. */
 function flush() {
   for (const { t, send } of [...timers.values()]) {
@@ -175,7 +181,17 @@ export function initAnalytics() {
   window.addEventListener("pagehide", flush);
   // A choice made in another tab replaces whatever this tab holds in memory.
   window.addEventListener("storage", (e) => {
-    if (e.key === CONSENT_KEY || e.key === null) chosen = undefined;
+    if (e.key !== CONSENT_KEY && e.key !== null) return;
+    chosen = undefined;
+    // Withdrawn elsewhere (or storage cleared): this tab's session id goes too, so a later "Accept" here
+    // starts a fresh session that can't be linked to the earlier one.
+    if (getConsent() !== "granted") {
+      try {
+        store("session")?.removeItem(SESSION_KEY);
+      } catch {
+        /* nothing stored to clear */
+      }
+    }
   });
 
   document.addEventListener(
