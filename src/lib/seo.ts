@@ -13,6 +13,16 @@ export const WEBSITE_ID = `${SITE}/#website`;
 
 export const abs = (path: string) => new URL(path, SITE).toString();
 
+/** About what a search result shows of a title. */
+export const TITLE_MAX = 60;
+const SUFFIX = ` · ${SITE_NAME}`;
+
+/** The document title: the page's own, plus the site name where it still fits a search result. */
+export function documentTitle(title: string): string {
+  const t = title.replace(/\s+/g, " ").trim();
+  return t.includes(SITE_NAME) || t.length + SUFFIX.length > TITLE_MAX ? t : t + SUFFIX;
+}
+
 /** The canonical form of a built page's path: no ".html", no trailing slash (except the root). */
 export function canonicalPath(pathname: string): string {
   const p = pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
@@ -47,30 +57,37 @@ export function modelMeta(m: ResolvedModel) {
   const owner = lib.owners.get(m.owner)!;
   const primary = primaryOf(lib, charity.id)?.id === m.id;
   const evaluators = new Set(modelsOf(lib, charity.id).map((x) => x.owner)).size;
-  const title = primary
-    ? `${charity.name}: cost-effectiveness${evaluators > 1 ? "" : ` (${owner.short})`}`
-    : `${m.name}: ${owner.name} model`.length <= 58
-      ? `${m.name}: ${owner.name} model`
-      : `${m.name} (${owner.short})`;
+  // Imported model names can be long and contain line breaks; some don't name the charity.
+  const name = m.name.replace(/\s+/g, " ").trim();
+  const named = name.toLowerCase().includes(charity.name.toLowerCase());
+  // The first candidate that fits a search result (about 60 characters); else the shortest, which is
+  // still unique: model names are.
+  const candidates = primary
+    ? [`${charity.name}: cost-effectiveness (${owner.short})`, `${charity.name}: cost-effectiveness`, charity.name]
+    : [`${name}: ${owner.name} model`, ...(named ? [] : [`${charity.name}: ${name} (${owner.short})`]), `${name} (${owner.short})`, name];
+  if (primary && evaluators > 1) candidates.shift();
+  const title = candidates.find((t) => t.length <= TITLE_MAX) ?? candidates.at(-1)!;
 
   const x = defaultMultiple(m);
   const unit = m.output ? lib.assumptions.units[m.output.unit]?.label : undefined;
   const when = monthYear(m.source?.published);
   const by = owner.kind === "charityevals" ? "charityevals' own model" : `${owner.name}'s model${when ? ` (${when})` : ""}`;
+  // Long model names are in the title already; the description leads with the charity instead.
+  const subject = name.length <= 50 ? name : charity.name;
   const lead = x !== undefined
-    ? `${m.name}: ${formatMultiple(x)} as much good per dollar as GiveDirectly on default assumptions, from ${by}.`
-    : `${m.name}: ${by}, in ${unit ?? "its own unit"} per dollar.`;
+    ? `${subject}: ${formatMultiple(x)} as much good per dollar as GiveDirectly on default assumptions, from ${by}.`
+    : `${subject}: ${by}, in ${unit ?? "its own unit"} per dollar.`;
   const dek = firstSentence(charity.summary ?? m.summary);
   const tail = "Every input with its source and range.";
   const description = [dek, tail].reduce<string>((acc, s) => (s && `${acc} ${s}`.length <= 160 ? `${acc} ${s}` : acc), lead);
-  return { charity, owner, primary, title, description: clip(description), cause: CAUSE[charity.cause] };
+  return { charity, owner, primary, name, title, description: clip(description), cause: CAUSE[charity.cause] };
 }
 
 const CC_BY_NC_SA_3_US = "https://creativecommons.org/licenses/by-nc-sa/3.0/us/";
 
 /** JSON-LD for a model page: the page, the charity it is about, the model as a dataset, breadcrumbs. */
 export function modelSchema(m: ResolvedModel, description: string) {
-  const { charity, owner, primary } = modelMeta(m);
+  const { charity, owner, primary, name } = modelMeta(m);
   const url = abs(modelUrl(lib, m));
   const charityUrl = abs(modelUrl(lib, primaryOf(lib, charity.id)!));
   const ownerNode = owner.kind === "charityevals"
@@ -85,7 +102,7 @@ export function modelSchema(m: ResolvedModel, description: string) {
   const dataset = {
     "@type": "Dataset",
     "@id": `${url}#model`,
-    name: `${m.name}: cost-effectiveness model`,
+    name: `${name}: cost-effectiveness model`,
     description: clip(m.summary && m.summary.length >= 50 ? m.summary : description, 5000),
     url,
     creator: { "@id": ORG_ID },
@@ -116,7 +133,7 @@ export function modelSchema(m: ResolvedModel, description: string) {
   const crumbs = [
     { name: "Rankings", url: abs("/") },
     { name: charity.name, url: charityUrl },
-    ...(primary ? [] : [{ name: m.name, url }]),
+    ...(primary ? [] : [{ name, url }]),
   ];
   return [
     {
