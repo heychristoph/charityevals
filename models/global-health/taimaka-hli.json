@@ -19,7 +19,7 @@
       "title": "HLI, How treating malnutrition impacts happiness: a charity evaluation of Taimaka (2024)",
       "url": "https://www.happierlivesinstitute.org/report/how-treating-malnutrition-impacts-happiness-a-charity-evaluation-of-taimaka/",
       "type": "evaluation",
-      "note": "HLI publishes no spreadsheet for this estimate (or only one behind sign-in): the model is built from the inputs and figures stated in the report's text, each quoted on its row. HLI links GiveWell's CMAM model and Taimaka's own cost sheet, not a sheet of its own."
+      "note": "HLI publishes no public spreadsheet for this estimate: the model is built from the inputs and figures stated in the report's text, each quoted on its row. HLI links GiveWell's CMAM model and Taimaka's own cost sheet, not a sheet of its own."
     },
     {
       "title": "HLI, 2025 giving season charities update",
@@ -79,7 +79,7 @@
         "quote": "WELLBYs per 1k | 60.0 | 64.5 | 72.4 | 22.2",
         "retrieved": "2026-10-30"
       },
-      "explainer": "From one trial of atole, a protein supplement given to children in Guatemala, followed into adulthood (n = 1,249): 56.84 WELLBYs of direct effect, times HLI's validity (0.26), generalisability (0.41) and charity-level (0.88) adjustments, is 5.23 WELLBYs per child treated, at $87 a child."
+      "explainer": "From one trial of atole, a protein supplement given to children in Guatemala, followed into adulthood (n = 1,249): 56.84 WELLBYs of direct effect, with HLI's validity (0.26), generalisability (0.41) and charity-level (0.88) adjustments, gives 5.23 WELLBYs per child treated in HLI's table, at $87 a child. (The product of the rounded factors shown is 5.33; HLI's table and its 60.0 are used here.)"
     },
     {
       "id": "wbp1k_famine",
@@ -133,7 +133,7 @@
     {
       "id": "effect_duration_years",
       "section": "per_dollar",
-      "label": "Years the wellbeing effect lasts",
+      "label": "Years the wellbeing effect lasts, from treatment",
       "format": "number",
       "unit": "years",
       "value": 62,
@@ -145,15 +145,36 @@
         "quote": "a wellbeing effect of approximately between 0.09 to 0.46 standard deviations (SDs) per person that lasts 62 years",
         "retrieved": "2026-10-30"
       },
-      "explainer": "HLI's duration for the wellbeing effect of treatment in early childhood. We spread HLI's WELLBYs evenly over these years from now, which is generous to the near years (the effect HLI measures shows up in adulthood)."
+      "explainer": "HLI's duration for the effect of treatment in early childhood: to about age 62."
+    },
+    {
+      "id": "effect_start_years",
+      "section": "per_dollar",
+      "label": "Years from treatment until the benefit is counted, on average",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0,
+        "best": 10,
+        "high": 16
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/how-treating-malnutrition-impacts-happiness-a-charity-evaluation-of-taimaka/",
+        "page": "Sections 3.2–3.4",
+        "quote": "62 - 16 = 46 years",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Our judgment from HLI's own timing: in the atole and famine estimates the harm grows linearly until age 25 and is constant after; in the SQ-LNS (IQ) estimate the benefit runs from age 16 to 62. A single start 10 years after treatment, with the WELLBYs spread evenly from then to the end, stands in for these profiles; 0 is HLI's undiscounted view, 16 the IQ pathway's."
     },
     {
       "id": "discount_factor",
       "section": "per_dollar",
-      "label": "Discount factor for benefits spread evenly over those years",
+      "label": "Discount factor for the timing of the benefit",
       "format": "number",
-      "formula": "pv_annuity_due(1, discount_rate_per_year, effect_duration_years) / effect_duration_years",
-      "explainer": "The present value of an equal benefit each year over the years above, starting now, as a share of the undiscounted total: 1 at a 0% rate, lower the longer the benefit lasts."
+      "formula": "(1 + discount_rate_per_year) ^ -effect_start_years * pv_annuity_due(1, discount_rate_per_year, effect_duration_years - effect_start_years) / (effect_duration_years - effect_start_years)",
+      "explainer": "The WELLBYs spread evenly from the start year to the end of the effect, discounted to today, as a share of their undiscounted total: 1 at a 0% rate."
     },
     {
       "id": "wellbys_per_dollar_discounted",

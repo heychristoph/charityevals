@@ -6,7 +6,7 @@ HLI calls this "a highly uncertain BOTEC" (back-of-the-envelope calculation) and
 
 ### What the charity does
 
-Pallium India grew out of a palliative care society in Calicut, Kerala, which now covers about two thirds of the people who need such care. It trains clinicians, supports state governments and works on the rules and supply chains that keep morphine from patients. HLI models a hypothetical project in which it does the same in Karnataka.
+Pallium India grew out of a palliative care society in Calicut, Kerala, a state whose public palliative care programme now reaches about two thirds of the people who need it. It trains clinicians, supports state governments and works on the supply chains and training that stand between patients and morphine; HLI notes that regulation stopped being the main barrier in India in 2014, and the problem now is uptake. HLI models a hypothetical project in which it does the same in Karnataka.
 
 ### How the impact happens
 
@@ -30,11 +30,11 @@ HLI's two ends come first and their geometric mean is the central figure. Our st
 
 - **A central figure.** HLI gives 16 to 108 and no best guess; we use the geometric mean, 42. HLI's 2025 giving season update quoted an earlier, wider range, 26 to 163.
 - **Discounting** over the 10 years the patients are reached.
-- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution.
+- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. The state government, which would deliver the care, isn't counted as a contributor, which flatters Pallium when that setting is on.
 
 ### Biggest uncertainties
 
-Everything about the project is hypothetical: whether Pallium expands to Karnataka, how much faster coverage grows, and how long patients benefit. HLI says its 0.07 WELLBYs per patient "should be understood as a plausible lower bound".
+Everything about the project is hypothetical, and the report's two sections differ slightly on its size ($1–2 million and 1.1–3.1 million patients in section 1; $1 million and 1.1–3.2 million in the appendix): whether Pallium expands to Karnataka, how much faster coverage grows, and how long patients benefit. HLI says its 0.07 WELLBYs per patient "should be understood as a plausible lower bound".
 
 ### What isn't modelled
 

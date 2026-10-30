@@ -1,6 +1,6 @@
 ### Summary
 
-The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects and the decades the trees take to grow, that is **<span data-figure="headline" data-model="woodland-trust-sogive">0.0038</span> years of healthy life per $1,000** on our scale.
+The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects, SoGive's own caveats on survival and permanence, and the decades the trees take to grow, that is **<span data-figure="headline" data-model="woodland-trust-sogive">0.0070</span> years of healthy life per $1,000** on our scale.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £2.14 and its £7.40 for restoration. SoGive rates the Woodland Trust "Not Recommended (tentative)".
 
@@ -18,14 +18,15 @@ In 2019 the Woodland Trust spent £53.3m, planted 4.1 million trees, committed 3
 
 SoGive's planting figure is its bottom line. Our steps follow:
 
-- **All three projects:** a donation to the Woodland Trust isn't restricted to planting, so our view divides all three projects' cost by all their tonnes, which about doubles the cost per tonne. Protected woodland counts half its carbon (our judgment of how much would otherwise be lost).
+- **All three projects:** a donation to the Woodland Trust isn't restricted to planting, so our view divides all three projects' cost by all their tonnes. Protected woodland counts half its carbon (our judgment of how much would otherwise be lost).
+- **SoGive's caveats:** SoGive lists assumptions it didn't test; our view applies them as judgments: 70% of trees survive (1.1 million of the 4.1 million were given away to schools and groups), half of a restored hectare's uptake is extra (the land was degraded, not bare), and 80% of the carbon stays stored.
 - **Pounds to dollars** at the 2019 average exchange rate.
-- **The delay:** trees take up their carbon over a century, on average about 50 years after planting, and a tonne taken up then does less than one kept out of the air now; the delay is discounted at the shared rate.
+- **The delay:** trees take up their carbon over a century, on average about 50 years after planting. A tonne taken up then avoids only the heat deaths still to come; we count half of an averted tonne's (judgment, 0.25 to 0.8). The site's conversion already discounts the deaths for when they happen, so this is a share, not a second discount.
 - **No air pollution:** trees taking up carbon leave the fuel burned elsewhere unchanged, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0, and the tonnes count for their heat deaths only.
 
 ### What drives the result
 
-- **The delay and the discount rate.** At 4%, a 50-year delay cuts the value of a tonne to about a seventh; at 0% the figure is 0.28.
+- **Timing:** the share of a tonne's heat deaths still to come when the trees take up the carbon (half, our judgment).
 - **Deaths caused by one more tonne of CO₂**, a value you set.
 - **Survival and permanence:** every tree is assumed to live and stand for 100 years.
 
@@ -33,12 +34,12 @@ SoGive's planting figure is its bottom line. Our steps follow:
 
 - **All projects**, not planting alone.
 - **Tonnes become healthy years** through the shared climate rate, counting heat deaths only; SoGive compares pounds per tonne with its benchmark.
-- **Discounting** for the decades the trees take to grow.
+- **SoGive's untested assumptions** (survival, extra uptake, permanence) applied as our judgments, and a share for the decades the trees take to grow.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. Volunteers' time isn't counted.
 
 ### Biggest uncertainties
 
-Carbon taken up by trees isn't the same as emissions avoided: it returns if the woodland is felled or burns. SoGive asked academics how many tonnes taken up by planting would match one tonne avoided and got answers from 2 to more than 10; neither SoGive's figure nor ours applies such a discount, which flatters planting. Restoration credits all the carbon a restored hectare takes up, though some woodland was there already.
+Carbon taken up by trees isn't the same as emissions avoided: SoGive notes it "delays rather than averts" emissions. In its July 2020 climate recommendations SoGive reported asking academics how many tonnes absorbed by planting would match one tonne averted, with answers from 2 to more than 10; our permanence and timing judgments stand in for part of that. SoGive's spreadsheet of rough calculations is no longer online.
 
 ### What isn't modelled
 
@@ -46,5 +47,6 @@ Wildlife, recreation and wellbeing benefits of woodland, which SoGive discusses 
 
 ### Sources
 
+- SoGive, [Climate change donation recommendations](https://forum.effectivealtruism.org/posts/yhKnbcX6YmTgLpfwJ) (EA Forum, July 2020), Appendix 1.
 - SoGive, [Woodland Trust analysis](https://app.sogive.org/#charity?charityId=woodland-trust) (last modified November 2020). SoGive's terms ask that its impact assessments be credited with a link back; this page does both.
 - Clare and Vargas (2026), [Cross-cause cost-effectiveness: climate change versus global health and development interventions](https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/), Rethink Priorities: the deaths per tonne behind the shared climate rate.
