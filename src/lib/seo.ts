@@ -78,7 +78,7 @@ export function seoName(m: ResolvedModel): string {
   return names.get(m.id) ?? unbracketed(plainModelName(m.name));
 }
 
-const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
+const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety", climate: "Climate" } as const;
 
 export function modelMeta(m: ResolvedModel) {
   const charity = lib.charities.get(m.charity)!;

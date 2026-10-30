@@ -13,6 +13,7 @@ const CAUSE_LABEL: Record<string, string> = {
   "global-health": "Global health",
   "animal-welfare": "Animal welfare",
   "ai-safety": "AI safety",
+  climate: "Climate",
 };
 
 const pct = (v: number) => pctStr(xFor(v, 100));

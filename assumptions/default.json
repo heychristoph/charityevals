@@ -145,6 +145,34 @@
       "explainer": "GiveWell's weight on income gains, kept fixed: it defines a doubled-income year, the measure the other exchange rates are set in. Moving it would do the same as moving all of them together."
     },
     {
+      "id": "deaths_per_tco2e",
+      "section": "cross-cause",
+      "label": "Deaths caused by one more tonne of CO₂",
+      "technical": "Mortality cost of carbon: deaths per tonne of CO₂e, from heat and fossil-fuel air pollution",
+      "shown_as": {
+        "factor": 10000,
+        "format": "number"
+      },
+      "unit": "deaths per 10,000 tonnes",
+      "format": "small",
+      "value": {
+        "low": 0.0000431,
+        "best": 0.00019,
+        "high": 0.000511
+      },
+      "kind": "estimate",
+      "slider": {
+        "low": 0.000001,
+        "high": 0.001,
+        "zero": true
+      },
+      "source": {
+        "title": "Rethink Priorities, Cross-cause cost-effectiveness: climate change versus global health (Clare & Vargas, 2026)",
+        "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/"
+      },
+      "explainer": "Climate charities count the tonnes of CO₂ (and other greenhouse gases, as CO₂-equivalents) they keep out of the air. To compare them with everything else, we ask how many deaths one more tonne causes, and value each death like any other adult's death on the site.\n\nThe default, 1.9 deaths per 10,000 tonnes, is Rethink Priorities' estimate (facts: climate.deaths_per_tco2e): 0.43 from heat and 1.46 from the fine-particle air pollution that comes with burning fossil fuels. Rethink counts the heat deaths until 2300 without discounting; we discount them at \"Next year's good counts less by\" over the years until they come (\"Years until the heat deaths from a tonne of CO₂\", 60 by default), as every model discounts future good. Air-pollution deaths come the same year and aren't discounted. The range runs from heat alone (0.43) to the tops of Rethink's intervals (5.1), which is also about what Rethink's estimate of all climate damage, crops and sea level included, comes to in lives.\n\nEach death counts as GiveWell's value of an adult's death (73 doubled-income years, facts: moral_weights.uov_per_death_over5), times \"A child's life vs doubled-income year\", so climate moves with the same weight on lives as health charities. At the defaults one tonne of CO₂ from burning less fossil fuel is worth about 2 days of healthy life (a charity that cuts one for $1 does about 5.5 years of healthy life per $1,000); a tonne kept out of the air some other way (a forest, a methane leak) cuts only the discounted heat deaths, about 1.3 hours.\n\nFor comparison, the US government's social cost of carbon of $185 a tonne (Rennert et al. 2022) rests on the same heat-death count but values deaths in poor countries and in the future less; Giving What We Can's 2016 estimate is about 50 times lower than our default, mainly because it leaves out air pollution. Climate damage that isn't deaths (lost crops, income, migration) and tail risks are not counted, so the default is likely low. Tonnes that come without fuel smoke (a forest left standing, a methane leak stopped) count only for their heat deaths (a separate unit, tonnes averted without burning less fuel); each climate model says which of its tonnes those are."
+    },
+    {
       "id": "life_value_multiplier",
       "section": "moral-weights",
       "label": "A child's life vs doubled-income year",
@@ -180,7 +208,43 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in."
+      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\")."
+    },
+    {
+      "id": "climate_heat_death_delay",
+      "section": "economics",
+      "label": "Years until the heat deaths from a tonne of CO₂",
+      "technical": "Discount-weighted delay between emitting a tonne of CO₂e and the extra heat deaths it causes",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 30,
+        "best": 60,
+        "high": 100
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Clare & Vargas (2026), Rethink Priorities, quoting Bressler (2021), The mortality cost of carbon, Nature Communications",
+        "url": "https://rethinkpriorities.org/wp-content/uploads/2026/05/Publication-Version-Climate-x-GHD.pdf",
+        "page": "footnote 28, p. 21",
+        "quote": "These [deaths] are concentrated at the end of the century when global average temperatures are highest and marginal changes to temperatures are most damaging."
+      },
+      "explainer": "A tonne of CO₂ emitted now warms the planet for centuries, but the deaths that warming causes come late: both Bressler (2021) and Rennert et al. (2022), whose model Rethink Priorities re-ran, find them concentrated at the end of the century, when it is hottest and each extra bit of warming does most harm. Rethink counts them to 2300 without discounting. We discount them like any other future good, as if they all came this many years after the tonne: 60 by default (about 2085 for a tonne cut today), 30 to 100 in the range. Our judgment; no source gives the year-by-year profile. At 4% a year, a death 60 years away counts about a tenth of one today.\n\nAir-pollution deaths are not delayed: fuel that isn't burned saves them the same year, so they aren't discounted."
+    },
+    {
+      "id": "climate_heat_share",
+      "section": "cross-cause",
+      "label": "Share of a tonne's deaths that come from heat",
+      "technical": "Heat deaths ÷ (heat + air-pollution deaths) per tonne of CO₂e, Rethink Priorities' medians",
+      "fixed": true,
+      "format": "percent",
+      "value": 0.2279,
+      "kind": "estimate",
+      "source": {
+        "title": "Clare & Vargas (2026), Rethink Priorities (facts: climate.deaths_per_tco2e_heat and climate.deaths_per_tco2e_air_pollution)",
+        "url": "https://rethinkpriorities.org/wp-content/uploads/2026/05/Publication-Version-Climate-x-GHD.pdf"
+      },
+      "explainer": "Of Rethink Priorities' 1.9 deaths per 10,000 tonnes, 0.43 come from heat and 1.46 from the fine particles that come with burning fossil fuels: heat is 23%. Fixed, not a slider: it splits whatever you set for \"Deaths caused by one more tonne of CO₂\" into deaths that come decades later (heat, discounted) and deaths that come at once (air pollution). Tonnes that don't come from burning less fuel (a forest left standing, a methane leak stopped, CO₂ captured at a running plant) cut only the heat part."
     }
   ],
   "units": {
@@ -207,6 +271,18 @@
       "short": "WELLBYs",
       "to_common": "$uov_per_wellby",
       "explainer": "One point of life satisfaction (0–10) for one person for one year. Used by the Happier Lives Institute."
+    },
+    "tco2e": {
+      "label": "tonnes of CO₂-equivalent averted",
+      "short": "t CO₂e",
+      "to_common": "$deaths_per_tco2e * (1 - $climate_heat_share + $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay) * 73.1914 * $life_value_multiplier",
+      "explainer": "Greenhouse gas kept out of the air by burning less coal, oil or gas, in tonnes of CO₂ or the same warming from other gases. Converted through the deaths one more tonne causes (\"Deaths caused by one more tonne of CO₂\"): the air-pollution deaths at once, the heat deaths discounted over the years until they come. Each death is valued as GiveWell values an adult's death (73.1914 units of value, facts: moral_weights.uov_per_death_over5) times the value-of-life slider."
+    },
+    "tco2e_no_smoke": {
+      "label": "tonnes of CO₂-equivalent averted without burning less fuel",
+      "short": "t CO₂e",
+      "to_common": "$deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * 73.1914 * $life_value_multiplier",
+      "explainer": "Greenhouse gas kept out of the air without burning less fossil fuel: forests left standing, methane leaks stopped, CO₂ captured at plants that keep running. Such tonnes cut only the heat deaths a tonne causes, discounted over the years until they come, not the air-pollution deaths that come with burning fuel. Each death is valued as GiveWell values an adult's death times the value-of-life slider."
     },
     "daly": {
       "label": "DALYs averted",

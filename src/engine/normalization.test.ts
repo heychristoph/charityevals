@@ -5,7 +5,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { buildLibrary } from "./model";
+import { assumptionValues, buildLibrary, toCommon } from "./model";
 import { applyWaivers, checkAll, inv10, inv2b, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
@@ -131,5 +131,51 @@ describe("invariant checks", () => {
     const l = buildLibrary([base, bad, animal], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $chicken_vs_person independent"]);
+  });
+});
+
+// Climate (docs/normalization.md 2.5): a tonne of CO₂e reaches the scale through the deaths it causes,
+// each valued as GiveWell's adult death. The unit's conversion can only read assumptions, so the
+// shared figures it stands on are checked here against the facts they come from.
+describe("climate conversion", () => {
+  const fact = (k: string) => lib.facts.get(k)?.value;
+  const row = (id: string) => assumptions.rows.find((r: { id: string }) => r.id === id);
+
+  it("the deaths-per-tonne assumption is Rethink Priorities' figure, range and all", () => {
+    expect(row("deaths_per_tco2e").value).toEqual(fact("climate.deaths_per_tco2e"));
+  });
+
+  it("both climate units convert at GiveWell's value of an adult's death, times the value-of-life slider", () => {
+    for (const u of ["tco2e", "tco2e_no_smoke"])
+      expect(assumptions.units[u].to_common).toMatch(new RegExp(`^\\$deaths_per_tco2e \\* .* \\* ${fact("moral_weights.uov_per_death_over5")} \\* \\$life_value_multiplier$`));
+  });
+
+  it("the heat share is Rethink Priorities' heat deaths over heat and air-pollution deaths", () => {
+    const heat = (fact("climate.deaths_per_tco2e_heat") as { best: number }).best;
+    const air = (fact("climate.deaths_per_tco2e_air_pollution") as { best: number }).best;
+    expect(row("climate_heat_share").value).toBeCloseTo(heat / (heat + air), 4);
+  });
+
+  it("heat deaths are discounted over the delay; air-pollution deaths and the no-smoke unit follow", () => {
+    const l = buildLibrary([], assumptions);
+    const av = assumptionValues(assumptions);
+    const one = (u: string, a = av) => toCommon(l, u, a) / (a.deaths_per_tco2e * 73.1914);
+    const share = av.climate_heat_share, df = (1 + av.discount_rate) ** -av.climate_heat_death_delay;
+    expect(one("tco2e")).toBeCloseTo(1 - share + share * df, 9);
+    expect(one("tco2e_no_smoke")).toBeCloseTo(share * df, 9);
+    expect(one("tco2e_no_smoke", { ...av, discount_rate: 0 })).toBeCloseTo(share, 9);
+  });
+
+  it("INV-10 flags a non-climate model that moves with the climate rate, and passes a climate model", () => {
+    const base = {
+      id: "base", name: "Base", kind: "charity", cause: "global-health",
+      rows: [{ id: "x", label: "x", value: 2, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" }],
+      output: { row: "out", unit: "uov", label: "UoV per $" },
+    };
+    const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $deaths_per_tco2e" }] };
+    const tonnes = { ...base, id: "tonnes", cause: "climate", output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
+    const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv10(l).violations.map(keyOf)).toEqual(["bad $deaths_per_tco2e independent"]);
   });
 });
