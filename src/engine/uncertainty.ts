@@ -126,7 +126,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   for (const id of feeding) {
     const r = m.byId.get(id);
-    if (!r || r.node || r.format === "toggle" || CONSTANT.test(r.label)) continue;
+    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || CONSTANT.test(r.label)) continue;
     const range = inputRange(r, view);
     const source = sourceOf(r);
     const v = values[id];

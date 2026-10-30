@@ -28,7 +28,14 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "charityevals adjustments on top of ACE's model."
+      "explainer": "charityevals adjustments on top of ACE's model.",
+      "kind": "ours"
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "explainer": "charityevals' standard step for every animal model, not ACE's. Ambitious Impact's suffering-adjusted days (SADs) count each species' pain as a share of a person's, using its own species weights. Here those weights come out and Rethink Priorities' estimates go in, so every species is counted in days of a chicken's disabling pain. How a chicken's suffering compares with a person's is the one animal slider, under Your values.",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -48,13 +55,13 @@
       "id": "p1_sads_averted_per_hen_per_year",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "SADs averted per hen per year",
-      "value": 17.486002148,
-      "kind": "estimate",
+      "formula": "@sad_factors.sads_per_hen_year_cage_to_aviary",
+      "published": 17.486002148,
       "source": {
         "title": "ACE (Research evidence)",
         "cell": "Cage-free corporate outreach (K!B8"
       },
-      "explainer": "ACE's input, source type: Research evidence."
+      "explainer": "ACE's figure for a hen-year moved from a battery cage to cage-free, from Ambitious Impact's suffering-adjusted days. Our view uses the shared figure for the same change (Suffering-adjusted days per animal, under Data), so it counts the same in every model; the evaluator view keeps ACE's 17.486002148."
     },
     {
       "id": "p1_years_commitments_brought_forward",
@@ -232,18 +239,50 @@
       "label": "SADs averted per dollar you give",
       "format": "number",
       "formula": "sads_per_dollar * donor_cost_share"
+    },
+    {
+      "id": "sads_chicken",
+      "section": "species",
+      "label": "SADs averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_per_donor_dollar"
+    },
+    {
+      "id": "ced_chicken",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
+      "explainer": "The SADs for chickens with Ambitious Impact's weight for a hen (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "number",
+      "formula": "ced_chicken",
+      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],
   "output": {
-    "row": "sads_per_donor_dollar",
-    "unit": "sad",
-    "label": "SADs averted per dollar you give"
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "sads_per_dollar",
+      "unit": "sad"
+    },
+    "species": [
+      "chicken"
+    ]
   },
   "evaluator": {
     "name": "ACE",
     "assumptions": {
       "discount_rate": 0.04,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "chicken_vs_person": 0.463966,
+      "rp_species_weights": 0
     }
   },
   "resources": [

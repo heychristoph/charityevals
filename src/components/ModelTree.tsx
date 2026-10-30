@@ -11,7 +11,6 @@ import { comparable, hasRange, pickValue, type ResolvedModel } from "../engine/m
 import type { Node } from "../engine/expr";
 import type { Row } from "../engine/schema";
 import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf, spreadShare, type TreeNode } from "../engine/tree";
-import { formulaText } from "../engine/derive";
 import { rowsFeeding } from "../engine/sensitivity";
 import type { Uncertainty } from "../engine/uncertainty";
 import { useAssumptionValues } from "../lib/use-results";
@@ -21,6 +20,7 @@ import { track } from "../lib/analytics";
 import { clearEdits, setEdit } from "../lib/edit-state";
 import { Markdown } from "./AssumptionsPanel";
 import InfoTip from "./InfoTip";
+import Glossed from "./Glossed";
 import type { Flag } from "../engine/sensitivity";
 import "./tree.css";
 
@@ -144,9 +144,9 @@ type Ctx = {
   weight: (n: TreeNode) => number;
   toggle: (n: TreeNode, depth: number) => void;
   showAll: (key: string) => void;
-  fx: Set<string>;
-  toggleFx: (key: string) => void;
   setFocus: (key: string) => void;
+  /** Special terms already explained higher up the tree: each gets its info tip once. */
+  glossed: Set<string>;
   /** The reader's edits: inputs by row id, facts by "@key". */
   edits: Record<string, number>;
   /** The top row is in years of healthy life per $1,000. */
@@ -202,12 +202,27 @@ function EditValue({ ctx, n, label }: { ctx: Ctx; n: TreeNode; label: string }) 
 const domId = (key: string) => `tn-${key.replace(/\./g, "-")}`;
 const isBranch = (n: TreeNode) => !!n.expr;
 
+/** A row where our view uses a shared figure in place of the evaluator's own number, so the same
+ * physical change counts the same in every model (docs/normalization.md, decision 3). The evaluator's
+ * number is the row's `published`; differences under 0.5% (rounding) don't count. */
+function overwriteOf(ctx: Ctx, n: TreeNode): { theirs: number; ours: number; format?: Row["format"]; change?: string } | undefined {
+  for (const rid of [n.named, ...n.via, n.rowId]) {
+    const r = rid ? ctx.m.byId.get(rid) : undefined;
+    if (!r?.node || r.published === undefined) continue;
+    const theirs = pickValue(r.published);
+    if (Math.abs(n.value - theirs) <= 0.005 * Math.max(Math.abs(n.value), Math.abs(theirs))) return undefined;
+    const fact = r.factDeps.map((k) => lib.facts.get(k)).find((f) => f?.change);
+    return { theirs, ours: n.value, format: r.format ?? fact?.format, change: fact?.change };
+  }
+}
+
 /** What a node is, in a word or two, beside its label. */
 function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   const row = n.rowId ? ctx.m.byId.get(n.rowId) : undefined;
   const evaluator = ctx.m.evaluator?.name;
   const e = editable(ctx, n);
   if (e && e.id in ctx.edits) return <span id={id} className="tn-tag tn-tag-edited">your edit</span>;
+  if (overwriteOf(ctx, n)) return <span id={id} className="tn-tag tn-tag-changed">changed for consistency</span>;
   if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed)
     return <span id={id} className="tn-tag"><span className="kind-dot kind-estimate" aria-hidden /><a href={`/data#a-${n.refId}`}>fixed rate</a></span>;
   if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your value</span>;
@@ -224,12 +239,6 @@ function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
     );
   }
   return null;
-}
-
-/** The raw formula behind a node, for readers who want it. */
-function formulaOf(m: ResolvedModel, n: TreeNode): string | undefined {
-  if (n.type === "expr") return formulaText(n.expr!);
-  return (n.rowId ? m.byId.get(n.rowId)?.formula : undefined) ?? (n.named ? m.byId.get(n.named)?.formula : undefined);
 }
 
 /** What an open node is and where it comes from, as lines of prose. */
@@ -268,6 +277,14 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
   } else if (n.type === "const") {
     lines.push(<p key="c">A number written into {parentLabel ? <>the formula for {parentLabel}</> : "the formula"} itself, such as a unit conversion or a fixed adjustment.</p>);
   }
+  const ow = overwriteOf(ctx, n);
+  if (ow)
+    lines.push(
+      <p key="ow" className="tn-differs">
+        {evaluator ?? "The evaluator"} uses <span className="num">{formatValue(ow.theirs, ow.format)}</span> here; we use{" "}
+        <span className="num">{formatValue(ow.ours, ow.format)}</span> so {ow.change ?? "the same change"} counts the same in every model.
+      </p>,
+    );
   if (explainer) lines.push(<div key="x" className="tn-explainer"><Markdown text={explainer} /></div>);
   if (editable(ctx, n)) lines.push(<EditValue key="ed" ctx={ctx} n={n} label={labelOf(m, n)} />);
   if (n.type === "input" && row) {
@@ -341,10 +358,8 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const odds = oneIn(label, n.value);
   const root = depth === 1;
   const share = under ? 0 : ctx.weight(n);
-  const formula = isOpen ? formulaOf(m, n) : undefined;
-  const fxOpen = !!formula && ctx.fx.has(n.key);
   const lines = isOpen ? detailLines(ctx, n, parentLabel) : [];
-  const hasDetail = lines.length > 0 || fxOpen;
+  const hasDetail = lines.length > 0;
   const ed = editable(ctx, n);
   const edited = !!ed && ed.id in ctx.edits;
   return (
@@ -371,7 +386,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
             {n.op && <><span aria-hidden>{n.op}</span><span className="visually-hidden">{SPOKEN[n.op] ?? n.op}</span></>}
           </span>
           <span className="tn-text">
-            <span id={`${id}-l`} className="tn-label">{label}</span>
+            <span id={`${id}-l`} className="tn-label"><Glossed text={label} seen={ctx.glossed} /></span>
             {how && <span className="tn-how"> · {how}</span>}
             <Tag ctx={ctx} n={n} id={`${id}-t`} />
             {root && ctx.flags.length > 0 && (
@@ -381,12 +396,6 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
                   <ul className="tn-flag-list">{ctx.flags.map((f) => <li key={f.short}>{f.text}.</li>)}</ul>
                 </InfoTip>
               </span>
-            )}
-            {formula && (
-              <button type="button" className="link-button tn-fx" aria-expanded={fxOpen} aria-controls={fxOpen ? `${id}-d-fx` : undefined}
-                onClick={(ev) => { ev.stopPropagation(); ctx.toggleFx(n.key); }}>
-                {fxOpen ? "hide formula" : "formula"}
-              </button>
             )}
           </span>
         </span>
@@ -409,7 +418,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
           )}
         </span>
       </div>
-      {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} formula={fxOpen ? formula : undefined} />}
+      {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} />}
       {isOpen && branch && (
         <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
           {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} under={below} />)}
@@ -471,14 +480,8 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
   const [pending, setPending] = useState<string>();
   const [orphan, setOrphan] = useState<string>();
   const [q, setQ] = useState("");
-  const [fx, setFx] = useState<Set<string>>(() => new Set());
   // Bars show each number's share of the uncertainty.
   const weight = (n: TreeNode) => spreadShare(u, n, root.value);
-  const toggleFx = (key: string) => setFx((f) => {
-    const x = new Set(f);
-    x.has(key) ? x.delete(key) : x.add(key);
-    return x;
-  });
   const tree = useRef<HTMLUListElement>(null);
   const orphanRef = useRef<HTMLDivElement>(null);
   const used = useMemo(() => (q ? rowsFeeding(model) : new Set<string>()), [model, q]);
@@ -647,7 +650,7 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
     }
   };
 
-  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, fx, toggleFx, edits, years: toCommon !== undefined };
+  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 

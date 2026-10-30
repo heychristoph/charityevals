@@ -56,7 +56,8 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
   const pointInputs: string[] = [];
   for (const r of m.rows) {
     if (!relevant.has(r.id) || r.id in edits) continue;
-    if (r.node) {
+    // In the evaluator view a calculated row carrying the evaluator's own number is an input.
+    if (r.node && !(view === "evaluator" && r.published !== undefined)) {
       // A calculated row with a published range is varied as a whole.
       if (r.range) {
         swings.push(swing(r.id, r.label, "row", "estimate", r.range.low, r.range.high,

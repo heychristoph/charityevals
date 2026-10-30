@@ -3,7 +3,7 @@
     {
       "id": "cross-cause",
       "title": "Exchange rates",
-      "explainer": "Charities do different kinds of good: raising incomes, adding years of healthy life, sparing animals pain, making people more satisfied with their lives. To rank them on one list, results are shown in years of healthy life, and the rates below say what the other kinds of good are worth against each other. Animal analyses that count animals spared are first converted into days of an animal's pain. Change them and the ranking changes; that is the point."
+      "explainer": "Charities do different kinds of good: raising incomes, adding years of healthy life, sparing animals pain, making people more satisfied with their lives. To rank them on one list, results are shown in years of healthy life, and the rates below say what the other kinds of good are worth against each other. Animal analyses are first put into days of a chicken's pain, each species weighed against a chicken. Change them and the ranking changes; that is the point."
     },
     {
       "id": "moral-weights",
@@ -68,7 +68,7 @@
         "high": 0.0027
       },
       "kind": "judgment",
-      "explainer": "Animal charities count days of pain, adjusted for intensity and for how much each species can suffer, so one day equals a day of a person's disabling pain. This says how much healthy life such a day costs: about 10 hours by default, 2 to 24 in the range.\n\nNobody publishes this rate, so it's the least grounded number on the site, and it often decides whether animal charities rank above global health."
+      "explainer": "Animal models count days of disabling pain, with milder pain as a fraction of a day, in chickens; the chicken slider says what a chicken's day is worth in a person's. This says how much healthy life a person's day of disabling pain costs: about 10 hours by default, 2 to 24 in the range.\n\nNobody publishes this rate, so it's the least grounded number on the site, and it often decides whether animal charities rank above global health."
     },
     {
       "id": "uov_per_wellby",
@@ -87,44 +87,37 @@
       "explainer": "Not a judgment call: both evaluators measured the same programme. The Happier Lives Institute counts good in life satisfaction (0–10) and doesn't convert it; we need a rate only to rank its analyses with the rest.\n\nGiveDirectly's cash transfers are the one programme both have measured: HLI finds 7.55 points-for-a-year per $1,000, GiveWell 8.7 doubled-income years, so one point is worth about 1.15 doubled-income years. HLI's own 2021 moral-weights work implies about 0.55, so the range runs from 0.4 to 3."
     },
     {
-      "id": "animal_moral_weight",
+      "id": "chicken_vs_person",
       "section": "cross-cause",
       "label": "A chicken's suffering vs a person's",
-      "technical": "Moral weight on welfare ranges",
-      "shown_as": {
-        "factor": 0.332,
-        "format": "percent"
-      },
-      "unit": "×",
-      "format": "multiple",
+      "technical": "Chicken's welfare range relative to a person's",
+      "unit": "× a person",
+      "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 1,
-        "high": 3.012
+        "low": 0.002,
+        "best": 0.332,
+        "high": 0.869
       },
       "kind": "judgment",
-      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. The default, 33%, is Rethink Priorities' median welfare range for chickens. We assume Ambitious Impact's pain days, which the animal models use, already build it in; other species move in proportion.\n\nLower it if you doubt chickens feel pain the way people do; raise it, up to 100%, if you think a chicken's suffering counts as much as a person's."
+      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. The default, 33%, is Rethink Priorities' median welfare range for chickens; their 90% range is 0.2% to 87%. In an informal survey, most people answered about 0.2% (500 chickens to one person).\n\nEvery animal model counts its result in chicken-equivalent pain days: each species weighed against a chicken by Rethink Priorities' estimates, with Ambitious Impact's own species weights taken out of ACE's figures first. So this one value sets how all animals compare with people.\n\nSet it to 0 if a chicken's suffering shouldn't count; raise it, up to 100%, if it counts as much as a person's.",
+      "slider": {
+        "low": 0.001,
+        "high": 1,
+        "zero": true
+      },
+      "source": {
+        "title": "Rethink Priorities' welfare range estimates",
+        "url": "https://www.rethinkpriorities.org/publications/welfare-range-estimates"
+      }
     },
     {
-      "id": "sads_per_animal_spared",
-      "section": "cross-cause",
-      "label": "Pain days per factory-farmed animal",
-      "technical": "Suffering-adjusted days (SADs) per animal spared",
-      "fixed": true,
-      "unit": "SADs / animal",
-      "format": "number",
-      "value": {
-        "low": 4,
-        "best": 22.4,
-        "high": 45
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "ACE, Dansk Vegetarisk Forening cost-effectiveness sheet (2024)",
-        "url": "https://docs.google.com/spreadsheets/d/1opvB9PLqI8DQJkdwilu64EJAGRHKzGy0aYABdnykpMw/edit",
-        "note": "@ace.dvf_sads_per_meal / @ace.dvf_animals_spared_per_meal; cross-check: @ace.ace2016_years_suffering_per_leaflet, @ace.caged_hen_sads_per_year"
-      },
-      "explainer": "Not a judgment call: a conversion ACE publishes. Some older analyses (ACE's, 2014–2017) count farmed animals spared instead of days of pain; this turns one into the other.\n\nACE's 2024 ratio for diet change is about 22 days per animal. The range runs from 4, for mixes of small, short-lived animals, to 45, past ACE's own bounds of 8 to 41."
+      "id": "rp_species_weights",
+      "label": "Weigh each species by Rethink Priorities' estimates",
+      "technical": "Rethink Priorities' welfare ranges instead of Ambitious Impact's species weights",
+      "format": "toggle",
+      "value": 1,
+      "kind": "judgment",
+      "explainer": "On (our view): each species counts by Rethink Priorities' welfare range relative to a chicken (facts/welfare_ranges.json). Off (the evaluator view): by the species weights inside Ambitious Impact's suffering-adjusted days, so ACE's own results reproduce. Not offered as a control: the chicken slider is the one animal weight readers set."
     },
     {
       "id": "uov_per_ln_consumption",
@@ -200,20 +193,20 @@
     "sad": {
       "label": "suffering-adjusted days averted",
       "short": "SADs",
-      "to_common": "$daly_per_sad * $uov_per_daly * $animal_moral_weight",
-      "explainer": "Days of animal suffering averted, weighted by pain intensity and species welfare range (Ambitious Impact)."
+      "to_common": "$chicken_vs_person / 0.463966 * $daly_per_sad * $uov_per_daly",
+      "explainer": "Ambitious Impact's unit: days of an animal's pain, weighted by intensity and by Ambitious Impact's weight for the species, so one equals a day of a person's disabling pain. ACE reports in it; our animal models convert it into chicken-equivalent pain days before ranking. A model still reporting in SADs (the build-cea templates) converts them as chickens' SADs: 0.463966 is Ambitious Impact's weight for a hen (Species and pain weights, under Data). The rankings use chicken-equivalent pain days."
+    },
+    "ced": {
+      "label": "chicken-equivalent pain days averted",
+      "short": "chicken pain days",
+      "to_common": "$chicken_vs_person * $daly_per_sad * $uov_per_daly",
+      "explainer": "Days of disabling pain spared, counted in chickens: each species' days times how much it can suffer relative to a chicken (Rethink Priorities). Converted to healthy years with how a chicken's suffering compares with a person's and the healthy hours a day of disabling pain costs."
     },
     "wellby": {
       "label": "wellbeing-adjusted life years",
       "short": "WELLBYs",
       "to_common": "$uov_per_wellby",
       "explainer": "One point of life satisfaction (0–10) for one person for one year. Used by the Happier Lives Institute."
-    },
-    "animals_spared": {
-      "label": "animals spared",
-      "short": "animals",
-      "to_common": "$sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight",
-      "explainer": "Farmed animals spared from life in factory farming, ACE's 2014–2017 headline unit. It counts animals of every species alike, so it is converted into SADs with the shared rate of SADs per animal spared, then like any SAD."
     },
     "daly": {
       "label": "DALYs averted",

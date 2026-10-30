@@ -136,7 +136,7 @@ export function buildLibrary(
       const merged: RowPatch & Partial<ResolvedRow> = { ...rows[i], ...patch };
       // Switching an inherited row between input and formula drops the other side.
       if (patch.value !== undefined) delete merged.formula;
-      if (patch.formula !== undefined) { delete merged.value; delete merged.kind; delete merged.published; }
+      if (patch.formula !== undefined) { delete merged.value; delete merged.kind; if (patch.published === undefined) delete merged.published; }
       if (patch.value !== undefined) delete merged.range;
       merged.overridden = Object.keys(patch).filter((k) => k !== "id" && k !== "expected");
       rows[i] = merged;
@@ -181,6 +181,8 @@ export function buildLibrary(
     const output = file.output ?? parent?.output;
     if (output && !byId.has(output.row)) errors.push(`${id}: output row ${output.row} doesn't exist`);
     if (output && !assumptions.units[output.unit]) errors.push(`${id}: output unit ${output.unit} isn't defined in assumptions`);
+    if (output?.native && !byId.has(output.native.row)) errors.push(`${id}: native row ${output.native.row} doesn't exist`);
+    for (const sp of output?.species ?? []) if (!byId.has(`ced_${sp}`)) errors.push(`${id}: species ${sp} has no ced_${sp} row`);
 
     const model: ResolvedModel = {
       ...file,
@@ -255,6 +257,12 @@ export function inputValue(r: Row, view: View, pick: Pick = "best"): number {
   return pickValue(view === "evaluator" && r.published !== undefined ? r.published : r.value, pick);
 }
 
+/** Whether a row acts as an input in a view: an input row, or, in the evaluator view, a calculated row
+ * that carries the evaluator's own number (`published`). */
+export function actsAsInput(r: Row & { node?: Node }, view: View): boolean {
+  return !r.node || (view === "evaluator" && r.published !== undefined);
+}
+
 export function inputRange(r: Row, view: View): number | Range | undefined {
   return view === "evaluator" && r.published !== undefined ? r.published : r.value;
 }
@@ -275,7 +283,9 @@ export function compute(
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   for (const id of m.order) {
     const r = m.byId.get(id)!;
-    vals[id] = inputs[id] ?? (r.node ? evaluate(r.node, lookup) : inputValue(r, view));
+    // The evaluator view takes a calculated row's published number over its formula: a row that reads
+    // a shared fact in our view keeps the evaluator's own figure there.
+    vals[id] = inputs[id] ?? (r.node && !(view === "evaluator" && r.published !== undefined) ? evaluate(r.node, lookup) : inputValue(r, view));
   }
   return vals;
 }
@@ -340,7 +350,7 @@ export function bottomLine(
 ) {
   if (!m.output) return { native: NaN, common: NaN };
   const native = compute(lib, m, av, inputs, view)[m.output.row];
-  return { native, common: native * toCommon(lib, m.output.unit, av) };
+  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view)) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -355,7 +365,9 @@ export function headline(
   if (!m.output) return NaN;
   const native = compute(lib, m, av, inputs, view)[m.output.row];
   const conv = headlineConversion(lib, m.output.unit);
-  return conv ? native * evaluate(conv, (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : native;
+  // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
+  const a = viewAssumptions(m, av, view);
+  return conv ? native * evaluate(conv, (scope, n) => (scope === "assumption" ? a[n] ?? NaN : NaN)) : native;
 }
 
 /** Assumptions that can change this model's headline in a view. */

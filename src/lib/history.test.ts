@@ -13,7 +13,7 @@ describe("model history", () => {
     const dir = mkdtempSync(join(tmpdir(), "ce-history-"));
     cpSync(join(repo, "assumptions"), join(dir, "assumptions"), { recursive: true });
     // Only the facts these two models read; the generated GiveWell facts would just slow git down.
-    for (const f of ["kenya.json", "malawi.json"]) cpSync(join(repo, "facts", f), join(dir, "facts", f));
+    for (const f of ["kenya.json", "malawi.json", "sad_factors.json", "aim_sads.json", "welfare_ranges.json"]) cpSync(join(repo, "facts", f), join(dir, "facts", f));
     for (const f of ["animal-welfare/sinergia-animal.json", "global-health/givedirectly.json"])
       cpSync(join(repo, "models", f), join(dir, "models", f));
     const g = (...args: string[]) =>

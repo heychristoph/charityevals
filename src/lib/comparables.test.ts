@@ -25,7 +25,7 @@ describe("assumption comparables", () => {
   });
 
   it("never brings a second unit into a slider whose value already reads plainly", () => {
-    for (const id of ["uov_per_daly", "uov_per_wellby", "life_value_multiplier", "sads_per_animal_spared", "daly_per_sad", "animal_moral_weight"]) expect(at(id)).toBeUndefined();
+    for (const id of ["uov_per_daly", "uov_per_wellby", "life_value_multiplier", "daly_per_sad", "chicken_vs_person"]) expect(at(id)).toBeUndefined();
   });
 
   it("discount rate reads as the share good done in ten years keeps", () => {
