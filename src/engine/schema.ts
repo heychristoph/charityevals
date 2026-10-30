@@ -255,7 +255,8 @@ export const Unit = z
   .object({
     label: z.string(),
     short: z.string(),
-    /** Formula over $assumptions: how many common units one of this unit is worth. Every unit a
+    /** Formula over $assumptions and @facts (and, by bare id, fixed rows of the model it converts,
+     * docs/normalization.md 2.5): how many common units one of this unit is worth. Every unit a
      * charity model reports in needs one (`npm run check` fails otherwise); a model in a unit
      * without one would get a page in its own unit but drop off the rankings. */
     to_common: z.string().optional(),

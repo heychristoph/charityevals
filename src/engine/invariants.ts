@@ -109,7 +109,7 @@ export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   for (const m of models) {
     const vals = compute(lib, m, av);
     const native = vals[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(av, vals));
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals));
     const got = headline(lib, m, av);
     if (!(close(got, want) || (Number.isNaN(got) && Number.isNaN(want))))
       violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion = ${fmt(want)}` });
@@ -380,7 +380,7 @@ export function inv8(lib: Library, av = assumptionValues(lib.assumptions)): Inva
     const va = viewAssumptions(m, av, "evaluator");
     const vals = compute(lib, m, av, {}, "evaluator");
     const native = vals[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(va, vals));
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, va, vals));
     const got = headline(lib, m, av, {}, "evaluator");
     if (!(close(got, want, 1e-9) || (Number.isNaN(got) && Number.isNaN(want)))) {
       const pins = Object.entries(m.evaluator!.assumptions).filter(([a, v]) => v !== av[a]).map(([a, v]) => `$${a}=${v}`).join(", ");

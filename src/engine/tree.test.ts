@@ -113,7 +113,7 @@ describe("the headline", () => {
     const av: Record<string, number> = { ...assumptionValues(buildLibrary([], assumptions).assumptions), uov_per_daly: 3.1, chicken_vs_person: 0.37 };
     for (const [id, u] of Object.entries(assumptions.units as Record<string, { to_common?: string }>)) {
       if (!u.to_common) continue;
-      const look = (s: string, n: string) => (s === "row" ? 0.25 : av[n]);
+      const look = (s: string, n: string) => (s === "row" ? 0.25 : s === "fact" ? 2 : av[n]);
       const common = 0.25 * evaluate(parse(u.to_common!), look);
       expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, u.to_common!), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
     }

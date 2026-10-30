@@ -177,7 +177,7 @@ tonnes carry, in one row the conversion reads:
 heat factor   = (1 + $discount_rate) ^ -$climate_heat_death_delay
 healthy years = tonnes × $deaths_per_tco2e
                 × ($climate_heat_share × heat factor + (1 − $climate_heat_share) × air_pollution_weight)
-                × 73.1914 × $life_value_multiplier / $uov_per_daly
+                × @moral_weights.uov_per_death_over5 × $life_value_multiplier / $uov_per_daly
 ```
 
 - `air_pollution_weight` (a row of the model, fixed id): the air-pollution deaths each of the model's
@@ -187,8 +187,8 @@ healthy years = tonnes × $deaths_per_tco2e
   (`fuel_smoke_factor`, per-fuel evidence such as deaths per TWh, not the world average). It sits in the
   model's conversion section (kind `ours`), each input with a source or a labelled judgment and a
   low/high range, so the sensitivity and uncertainty tools vary it like any other input.
-- The mechanism: `to_common` may name rows of the converted model by bare id, and the engine evaluates
-  the conversion with the model's computed rows (`toCommon`, `headline`, `bottomLine`, uncertainty).
+- The mechanism: `to_common` may name rows of the converted model by bare id (and shared facts by
+  `@key`), and the engine evaluates the conversion with the model's computed rows (`toCommon`, `headline`, `bottomLine`, uncertainty).
   `buildLibrary` records these as the model's `conversionRows`; a `tco2e` model without
   `air_pollution_weight` is a build error, and `rowsFeeding` follows them, so the row's inputs count as
   on the path. The shared rates stay shared: INV-2b still forbids any row from reading a cross-cause
@@ -200,11 +200,11 @@ healthy years = tonnes × $deaths_per_tco2e
 
   | Model | Tonnes | `air_pollution_weight` (range) | Source | Before → after |
   |---|---|---|---|---|
-  | Clean Air Task Force (FP) | 13% from US coal retired for gas (FP's own split) × 0.13 (0.09–0.24) of the average per net tonne | 0.017 | Toll from Coal 2010 (7.1 deaths/TWh) and Markandya & Wilkinson 2007 (gas ≈ a ninth of coal per TWh) | 0.12 → 0.19 |
-  | Future Cleantech Architects (GG) | all EU gas power displaced (0.8–1) × 0.048 (0.01–0.08) | 0.048 | Markandya & Wilkinson 2007: gas 2.8 deaths/TWh at 0.4 t/MWh | 1.11 → 3.0 |
+  | Clean Air Task Force (FP) | 13% from US coal retired for gas (FP's own split) × 0.13 (0.09–0.24) of the average per net tonne | 0.017 | Toll from Coal 2010 over EIA's 1,847 TWh (7.1 deaths/TWh) and Markandya & Wilkinson 2007 (gas ≈ a ninth of coal per TWh) | 0.12 → 0.19 |
+  | Future Cleantech Architects (GG) | all EU gas power displaced (0.8–1) × 0.039 (0.01–0.08) | 0.039 | Markandya & Wilkinson 2007: gas 2.8 deaths/TWh, at FP's 0.49 t/MWh | 1.11 → 2.6 |
   | Evergreen 2022 / 2021 (GG) | US power, IRA health modelling per tonne: 0.013 (0.005–0.027) | 0.013 | Energy Innovation 2022, Resources for the Future 2022 | 0.031 → 0.045; 0.28 → 0.41 |
-  | Opportunity Green (GG) | half of ship smoke per tonne cut (0.2–1, judgment) × ship smoke 0.94 (0.42–2.1) of the average | 0.47 | Zhang et al. 2021 (NOx about half of post-2020 ship deaths), Sofiev et al. 2018 | 7.3 → 3.5 (heat only was 0.2) |
-  | Coalition for Rainforest Nations (FP) | no fuel; clearing-fire smoke 0.008 (0–0.02) | 0.008 | Reddington et al. 2015 | 0.62 → 0.80 |
+  | Opportunity Green (GG) | half of ship smoke per tonne cut (0.2–1, judgment) × ship smoke 0.94 (0.42–2.1) of the average | 0.47 | Zhang et al. 2021 (NOx about half of post-2020 ship deaths), Sofiev et al. 2018, IMO Fourth GHG Study | 7.3 → 3.5 (heat only was 0.2) |
+  | Coalition for Rainforest Nations (FP) | no fuel; clearing-fire smoke 0.005 (0–0.03) | 0.005 | Reddington et al. 2015; IPCC 2006 Vol. 4 Tables 4.3, 4.4, 4.7 | 0.62 → 0.73 |
   | Carbon180 (GG) | capture at running plants, DAC: 0 (0–0.05, judgment) | 0 | | 0.23 → 0.23 |
   | Good Food Institute (GG) | livestock methane, N₂O, land: 0 (0–0.05, judgment) | 0 | | 0.051 → 0.051 |
 
@@ -223,10 +223,11 @@ healthy years = tonnes × $deaths_per_tco2e
   find them "concentrated at the end of the century"; no source gives the year-by-year profile. At 4%
   a heat death 60 years away counts 0.095 of one today. This applies the site's rule that every
   model discounts future good at `$discount_rate`; at 0% the units give Rethink's undiscounted values.
-- 73.1914: GiveWell's value of a death at five or older (`@moral_weights.uov_per_death_over5`), the
-  site's default for adult deaths. Written into `to_common` because a unit's conversion reads only
-  assumptions; src/engine/normalization.test.ts fails if it drifts from the fact, or if the slider's
-  default and range or the heat share drift from the `@climate` facts.
+- `@moral_weights.uov_per_death_over5` (73.1914): GiveWell's value of a death at five or older, the
+  site's default for adult deaths, read by `to_common` from the fact itself (a unit's conversion may
+  read shared facts, its one source; the `sad` unit likewise reads `@aim_sads.chicken_2024`, and no
+  unit conversion holds a literal standing in for a shared figure). src/engine/normalization.test.ts
+  fails if the slider's default and range or the heat share drift from the `@climate` facts.
 - `$life_value_multiplier` makes climate move with the same weight on lives as GiveWell's and HLI's
   models (decision 8's lever, here applied in the conversion because no evaluator's climate model
   counts deaths).

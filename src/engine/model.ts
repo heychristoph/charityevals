@@ -88,8 +88,10 @@ export function buildLibrary(
   for (const [id, u] of Object.entries(assumptions.units)) {
     if (!u.to_common) continue;
     try {
-      for (const a of refs(parse(u.to_common)).assumptions)
+      const used = refs(parse(u.to_common));
+      for (const a of used.assumptions)
         if (!assumptionIds.has(a)) errors.push(`assumptions: unit ${id} uses unknown $${a}`);
+
     } catch (e) {
       errors.push(`assumptions: unit ${id}: ${(e as Error).message}`);
     }
@@ -187,6 +189,8 @@ export function buildLibrary(
     if (output?.native && !byId.has(output.native.row)) errors.push(`${id}: native row ${output.native.row} doesn't exist`);
     for (const sp of output?.species ?? []) if (!byId.has(`ced_${sp}`)) errors.push(`${id}: species ${sp} has no ced_${sp} row`);
     const conversionRows = output ? unitRows(assumptions.units[output.unit]?.to_common) : [];
+    if (output && rawFacts.length)
+      for (const f of unitFacts(assumptions.units[output.unit]?.to_common)) if (!facts.has(f)) errors.push(`${id}: unit ${output.unit} reads unknown fact @${f}`);
     for (const r of conversionRows) if (!byId.has(r)) errors.push(`${id}: unit ${output!.unit} reads row ${r}, which the model doesn't define (docs/normalization.md 2.5)`);
 
     const model: ResolvedModel = {
@@ -226,6 +230,16 @@ function unitRows(toCommon: string | undefined): string[] {
   if (!toCommon) return [];
   try {
     return [...refs(parse(toCommon)).rows];
+  } catch {
+    return [];
+  }
+}
+
+/** Shared facts a unit's conversion reads (`@file.row`). */
+function unitFacts(toCommon: string | undefined): string[] {
+  if (!toCommon) return [];
+  try {
+    return [...refs(parse(toCommon)).facts];
   } catch {
     return [];
   }
@@ -318,12 +332,14 @@ export function comparable(lib: Library, m: ResolvedModel): boolean {
  * `rows` are that model's computed values. */
 export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}): number {
   const u = lib.assumptions.units[unit];
-  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(av, rows)) : NaN;
+  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(lib, av, rows)) : NaN;
 }
 
-/** The lookup a unit's conversion evaluates with: assumptions, and the converted model's own rows. */
-export function conversionLookup(av: Record<string, number>, rows: Record<string, number> = {}) {
-  return (scope: Scope, n: string) => (scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : NaN);
+/** The lookup a unit's conversion evaluates with: assumptions, shared facts (a fixed figure such as
+ * GiveWell's value of an adult's death, read from its one source), and the converted model's own rows. */
+export function conversionLookup(lib: Library, av: Record<string, number>, rows: Record<string, number> = {}) {
+  return (scope: Scope, n: string) =>
+    scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : pickValue(lib.facts.get(n)?.value);
 }
 
 /** The site's headline unit, years of healthy life (DALYs averted) per $1,000 donated, in common units
@@ -395,7 +411,7 @@ export function headline(
   const conv = headlineConversion(lib, m.output.unit);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
-  return conv ? native * evaluate(conv, conversionLookup(a, vals)) : native;
+  return conv ? native * evaluate(conv, conversionLookup(lib, a, vals)) : native;
 }
 
 /** Assumptions that can change this model's headline in a view. */

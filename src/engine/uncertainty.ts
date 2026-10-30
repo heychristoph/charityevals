@@ -241,7 +241,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   // unit that reads one (climate, docs/normalization.md 2.5), a fixed row of the model: that row's
   // own sources reach the headline through it.
   if (convNode) {
-    const convLook = (s: Scope, n: string) => (s === "assumption" ? av[n] ?? NaN : s === "row" ? values[n] ?? NaN : NaN);
+    const convLook = (s: Scope, n: string) => (s === "assumption" ? av[n] ?? NaN : s === "row" ? values[n] ?? NaN : pickValue(lib.facts.get(n)?.value));
     const base = evaluate(convNode, convLook);
     if (base) {
       const d = (expr: Node, scope: Scope, name: string) => {
