@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "uov_per_ln_consumption": 1.442695040889,
       "resource_shares": 0
@@ -60,11 +61,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -556,17 +559,70 @@
       "expected": 1.442695041
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Increase in ln(income) from reducing point in time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
+      "section": "malaria_consortium",
+      "value": 0.01182453322,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
+        "cell": "Malaria Consortium!B105"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Average number of years between program implementation and the beginning of long-term benefits",
+      "section": "malaria_consortium",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
+        "cell": "Malaria Consortium!B106"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Duration of long term benefits of SMC (in years)",
+      "section": "malaria_consortium",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
+        "cell": "Malaria Consortium!B109"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "malaria_consortium",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
+        "cell": "Malaria Consortium!B107"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_reducing_prevalence",
       "label": "Present value of lifetime benefits from reducing prevalence from 1 to 0 for an individual for one year between the ages of 0 and 14 (in terms of increases in ln",
       "section": "malaria_consortium",
-      "value": 0.1644336191,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.1644336191,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B110"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B107,B109,-B108,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(B107,B109,-B108,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 10 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.1644336191 at 4%."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_kenya",
@@ -892,14 +948,14 @@
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects",
       "section": "malaria_consortium",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B171"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A171),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A171)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A171),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A171)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()). Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 0.09.",
       "format": "percent"
     },
     {
@@ -2044,6 +2100,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_in_multiples_of_cash_transfers_after_acco",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

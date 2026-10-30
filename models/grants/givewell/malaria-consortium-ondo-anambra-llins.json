@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "uov_per_ln_consumption": 1.442695040889,
       "resource_shares": 0
@@ -62,7 +63,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -691,17 +693,70 @@
       }
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Adjusted increase in ln(income) from reducing point-in-time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
+      "section": "malaria_consortium_llins",
+      "value": 0.01182453322,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
+        "cell": "Malaria Consortium (LLINs)!B114"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium (LLINs)!B121, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Average number of years between nets being distributed and the beginning of long term benefits",
+      "section": "malaria_consortium_llins",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
+        "cell": "Malaria Consortium (LLINs)!B117"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium (LLINs)!B121, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Duration of long term benefits of Malaria Consortium (in years)",
+      "section": "malaria_consortium_llins",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
+        "cell": "Malaria Consortium (LLINs)!B120"
+      },
+      "explainer": "GiveWell's input behind the present value in Malaria Consortium (LLINs)!B121, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "malaria_consortium_llins",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
+        "cell": "Malaria Consortium (LLINs)!B118"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_reducing_prevalence",
       "label": "Present value of lifetime benefits from reducing prevalence from 1 to 0 for an individual for one year between the ages of 0 and 14",
       "section": "malaria_consortium_llins",
-      "value": 0.1644336191,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.1644336191,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B121"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B118,B120,-B119,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(B118,B120,-B119,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 10 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.1644336191 at 4%."
     },
     {
       "id": "present_value_of_benefits_from_reducing_point_in_time_probab",
@@ -960,14 +1015,14 @@
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects",
       "section": "malaria_consortium_llins",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B184"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A184),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A184)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A184),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A184)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()). Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 0.09.",
       "format": "percent"
     },
     {
@@ -988,14 +1043,14 @@
       "id": "prevention_of_stillbirths",
       "label": "Prevention of stillbirths",
       "section": "malaria_consortium_llins",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.prevention_of_stillbirths",
+      "published": 0.09,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B186"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A186),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A186)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A186),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A186)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()). Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 0.09.",
       "format": "percent"
     },
     {
@@ -2054,14 +2109,25 @@
       "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
       "label": "Units of value generated per philanthropic dollar spent, after accounting for leverage/funging",
       "section": "malaria_consortium_llins",
-      "formula": "(if($resource_shares, total_units_of_value_generated_not_specified / total_expenditure_attributable_to_different_actors_total_exp, (total_units_of_value_generated_by_philanthropic_spending_aft / (sum(percentage_of_total_costs_covered_by_malaria_consortium_nige, percentage_of_total_costs_covered_by_other_philanthropic_act) * total_spending_by_all_contributors_nigeria)))) * donor_cost_share",
+      "formula": "if($resource_shares, total_units_of_value_generated_not_specified / total_expenditure_attributable_to_different_actors_total_exp, (total_units_of_value_generated_by_philanthropic_spending_aft / (sum(percentage_of_total_costs_covered_by_malaria_consortium_nige, percentage_of_total_costs_covered_by_other_philanthropic_act) * total_spending_by_all_contributors_nigeria)))",
       "expected": 0.05484767692,
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest).\n\nWith credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+      "unit": "uov"
+    }
   }
 }

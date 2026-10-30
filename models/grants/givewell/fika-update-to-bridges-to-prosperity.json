@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "uov_per_ln_consumption": 1.44,
       "resource_shares": 0
     }
@@ -43,11 +44,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -66,17 +69,57 @@
       "format": "usd"
     },
     {
+      "id": "average_effect_of_bridges_on_ln_household_income",
+      "label": "Average effect of bridges on ln(household income) (Brooks and Donovan 2019 (Nicaragua))",
+      "section": "bridges",
+      "value": 0.2532737775,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1EsWfGApbof1klPiMT7lYcPXH0fAKTUsoLeJ_-I5yU0Y/edit",
+        "cell": "Bridges!B34"
+      },
+      "explainer": "Calculated in the source sheet as `=(B15*B28)+(B16*B29)`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
+      "id": "discount_rate_brooks_and_donovan_2019_nicaragua",
+      "label": "Discount rate (Brooks and Donovan 2019 (Nicaragua))",
+      "section": "bridges",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1EsWfGApbof1klPiMT7lYcPXH0fAKTUsoLeJ_-I5yU0Y/edit",
+        "cell": "Bridges!B36"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04."
+    },
+    {
+      "id": "duration_of_long_term_benefits_brooks_and_donovan_2019",
+      "label": "Duration of long-term benefits (in years) (Brooks and Donovan 2019 (Nicaragua))",
+      "section": "bridges",
+      "value": 15.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1EsWfGApbof1klPiMT7lYcPXH0fAKTUsoLeJ_-I5yU0Y/edit",
+        "cell": "Bridges!B37"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_intervention_in_term",
       "label": "Present value of lifetime benefits from intervention (in terms of increases in ln(household income)) (Brooks and Donovan 2019 (Nicaragua))",
       "section": "bridges",
-      "value": 2.928635824,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_brooks_and_donovan_2019_nicaragua, duration_of_long_term_benefits_brooks_and_donovan_2019, -average_effect_of_bridges_on_ln_household_income, 0, 1)",
+      "expected": 2.928635824,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1EsWfGApbof1klPiMT7lYcPXH0fAKTUsoLeJ_-I5yU0Y/edit",
         "cell": "Bridges!B38"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B36,B37,-B34,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's `=pv(B36,B37,-B34,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_brooks_and",
@@ -562,6 +605,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "x_cash_after_leveraging_and_funging",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

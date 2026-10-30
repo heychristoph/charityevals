@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.05,
       "resource_shares": 0
     }
   },
@@ -42,11 +43,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -87,17 +90,86 @@
       "format": "usd"
     },
     {
+      "id": "new_incentives_annual_rfmf",
+      "label": "New Incentives Annual RFMF",
+      "section": "main_new_ni_botec",
+      "value": 20000000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
+        "cell": "Main - New NI BOTEC!B12"
+      },
+      "explainer": "GiveWell's input behind the present value (all four scenarios use it), read from the sheet so the present value moves with your discount rate.",
+      "format": "usd"
+    },
+    {
+      "id": "share_of_total_rfmf_reallocated_to_new_incentives",
+      "label": "% of total RFMF that is reallocated to New Incentives",
+      "section": "main_new_ni_botec",
+      "value": 0.75,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
+        "cell": "Main - New NI BOTEC!B13"
+      },
+      "explainer": "GiveWell's input behind the present value (all four scenarios use it), read from the sheet so the present value moves with your discount rate.",
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_money_reallocated_per_year",
+      "label": "Amount of money reallocated per year",
+      "section": "main_new_ni_botec",
+      "formula": "new_incentives_annual_rfmf * share_of_total_rfmf_reallocated_to_new_incentives",
+      "expected": 15000000.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
+        "cell": "Main - New NI BOTEC!B14"
+      },
+      "explainer": "GiveWell's `=B12*B13`.",
+      "format": "usd"
+    },
+    {
+      "id": "future_years_funding_new_incentives",
+      "label": "For how many future years will we fund New Incentives?",
+      "section": "main_new_ni_botec",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
+        "cell": "Main - New NI BOTEC!B20"
+      },
+      "explainer": "GiveWell's input behind the present value (all four scenarios use it), read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "discount_rate_npv_money_reallocated",
+      "label": "Discount rate",
+      "section": "main_new_ni_botec",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.05,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
+        "cell": "Main - New NI BOTEC!B21"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.05.\n\nAssumption"
+    },
+    {
       "id": "net_present_value_of_money_reallocated_scenario_1_5x_cash",
       "label": "Net present value of money reallocated (Scenario 1: 5x cash)",
       "section": "main_new_ni_botec",
-      "value": 121617325.1,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_npv_money_reallocated, future_years_funding_new_incentives, -amount_of_money_reallocated_per_year, 0, 1)",
+      "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
         "cell": "Main - New NI BOTEC!B22"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B21,B20,-B14,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalculation",
+      "explainer": "GiveWell's `=pv(B21,B20,-B14,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalculation",
       "format": "usd"
     },
     {
@@ -277,14 +349,14 @@
       "id": "net_present_value_of_money_reallocated_scenario_2_2x_cash",
       "label": "Net present value of money reallocated (Scenario 2: 2x cash)",
       "section": "main_new_ni_botec",
-      "value": 121617325.1,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_npv_money_reallocated, future_years_funding_new_incentives, -amount_of_money_reallocated_per_year, 0, 1)",
+      "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
         "cell": "Main - New NI BOTEC!C22"
       },
-      "explainer": "Calculated in the source sheet as `=pv(C21,C20,-C14,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalculation",
+      "explainer": "GiveWell's `=pv(C21,C20,-C14,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalculation",
       "format": "usd"
     },
     {
@@ -446,14 +518,14 @@
       "id": "net_present_value_of_money_reallocated_scenario_3_7_5x_cash",
       "label": "Net present value of money reallocated (Scenario 3: 7.5x cash)",
       "section": "main_new_ni_botec",
-      "value": 121617325.1,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_npv_money_reallocated, future_years_funding_new_incentives, -amount_of_money_reallocated_per_year, 0, 1)",
+      "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
         "cell": "Main - New NI BOTEC!D22"
       },
-      "explainer": "Calculated in the source sheet as `=pv(D21,D20,-D14,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalculation",
+      "explainer": "GiveWell's `=pv(D21,D20,-D14,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalculation",
       "format": "usd"
     },
     {
@@ -615,14 +687,14 @@
       "id": "net_present_value_of_money_reallocated_scenario_4_10x_cash",
       "label": "Net present value of money reallocated (Scenario 4: 10x cash)",
       "section": "main_new_ni_botec",
-      "value": 121617325.1,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_npv_money_reallocated, future_years_funding_new_incentives, -amount_of_money_reallocated_per_year, 0, 1)",
+      "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1j66PaM4XAH0RahM8HH-BAdRtn58SaR2iVlV39iq7sQg/edit",
         "cell": "Main - New NI BOTEC!E22"
       },
-      "explainer": "Calculated in the source sheet as `=pv(E21,E20,-E14,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalculation",
+      "explainer": "GiveWell's `=pv(E21,E20,-E14,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalculation",
       "format": "usd"
     },
     {
@@ -837,6 +909,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "overall_generating_information_is_x_times_more_cost_effectiv",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

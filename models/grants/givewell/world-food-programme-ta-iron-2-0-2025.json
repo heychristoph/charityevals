@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "uov_per_daly": 2.26,
       "uov_per_ln_consumption": 1.44,
@@ -93,11 +94,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -2165,17 +2168,70 @@
       "expected": 7592.336659
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Adjusted increase in ln(income) per anemia case averted among people under age 15",
+      "section": "iron_fortification_cea",
+      "value": 3.650832766e-05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
+        "cell": "Iron fortification CEA!E69"
+      },
+      "explainer": "GiveWell's input behind the present value in Iron fortification CEA!E74, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Average number of years between receiving iron and the beginning of long-term benefits",
+      "section": "iron_fortification_cea",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
+        "cell": "Iron fortification CEA!E70"
+      },
+      "explainer": "GiveWell's input behind the present value in Iron fortification CEA!E74, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Expected number of years the long-term benefits of iron interventions last",
+      "section": "iron_fortification_cea",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
+        "cell": "Iron fortification CEA!E73"
+      },
+      "explainer": "GiveWell's input behind the present value in Iron fortification CEA!E74, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "iron_fortification_cea",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
+        "cell": "Iron fortification CEA!E71"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_individual_lifetime_benefits_per_person_wit",
       "label": "Present value of individual lifetime benefits per person with dietary iron deficiency among people under age 15",
       "section": "iron_fortification_cea",
-      "value": 0.0005076899299,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.0005076899299,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
         "cell": "Iron fortification CEA!E74"
       },
-      "explainer": "Calculated in the source sheet as `=pv(E71,E73,-E72,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(E71,E73,-E72,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 10 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.0005076899299 at 4%."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households",
@@ -3640,6 +3696,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_multiples_of_cash_transfers_after_adjustm",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

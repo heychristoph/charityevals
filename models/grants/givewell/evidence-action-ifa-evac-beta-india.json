@@ -50,11 +50,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -590,7 +592,7 @@
         "cell": "Main!B74"
       },
       "explainer": "From an older GiveWell value scale (0.4 here); it moves in proportion to the shared `uov_per_ln_consumption`.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
-      "formula": "0.4 * $uov_per_ln_consumption / 1.4426950408889634",
+      "formula": "0.4 * $uov_per_ln_consumption * ln(2)",
       "expected": 0.4
     },
     {
@@ -858,6 +860,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "ifa_supplementation_is_x_times_as_cost_effective_as_givedire",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

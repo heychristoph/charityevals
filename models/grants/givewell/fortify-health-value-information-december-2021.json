@@ -42,26 +42,68 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
     {
+      "id": "pv_years_funded",
+      "label": "How long we fund Fortify Health, conditional on us deciding to continue funding (years)",
+      "section": "main",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+        "cell": "Main!B9"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "How fast these opportunities get worse each year",
+      "section": "main",
+      "value": 0.05,
+      "kind": "estimate",
+      "format": "percent",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+        "cell": "Main!B15"
+      },
+      "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 5% a year; it is not time preference, so the discount slider leaves it alone."
+    },
+    {
+      "id": "pv_annual_uov_per_dollar",
+      "label": "Units of value per dollar from Fortify Health in first year",
+      "section": "main",
+      "value": 0.005453658537,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+        "cell": "Main!B16"
+      },
+      "explainer": "Calculated in the source sheet as `=(B13-B14)/(B3*1000000)`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
       "id": "present_discounted_value_of_additional_units_of_value_per_do",
       "label": "Present discounted value of additional units of value per dollar",
       "section": "main",
-      "value": 0.04421729089,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_funded, -pv_annual_uov_per_dollar, 0, 1)",
+      "expected": 0.04421729089,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
         "cell": "Main!B17"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B15,B9,-B16,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalc"
+      "explainer": "GiveWell's `=pv(B15,B9,-B16,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalc"
     },
     {
       "id": "units_of_value_per_dollar_givedirectly",
@@ -147,6 +189,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_x_cash",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

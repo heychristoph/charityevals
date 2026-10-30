@@ -19,7 +19,8 @@
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0
     }
   },
   "resources": [
@@ -50,11 +51,18 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not HLI's. HLI's report adds up the triangle and the rectangle with no time discount, so the evaluator view sets the rate to 0 and HLI's numbers reproduce. In our view, later years count less at the discount rate under Your values, compounding yearly as in GiveWell's models, counted from when the money is spent."
     }
   ],
   "rows": [
@@ -108,7 +116,7 @@
       "id": "wellbeing_loss_integrated_over_the_years_until_effect_stabil",
       "label": "Wellbeing loss integrated over the years until effect stabilises (the triangle)",
       "section": "ghana_cf_yrs_analysis",
-      "formula": "average_effect_as_measured_at_follow_up_wellbys * 0.5 * year_at_which_effect_stabilises",
+      "formula": "average_effect_as_measured_at_follow_up_wellbys * 0.5 * year_at_which_effect_stabilises * discount_factor_until_effect_stabilises",
       "expected": 0.432
     },
     {
@@ -132,10 +140,58 @@
       "expected": 36.8
     },
     {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits that build up gradually can be discounted smoothly; a year t from now still counts 1/(1 + rate)^t."
+    },
+    {
+      "id": "average_age_of_children_reached_now",
+      "section": "discounting",
+      "label": "Average age of the children reached, when the money is spent",
+      "format": "number",
+      "formula": "the_year_after_which_we_think_exposure_in_childhood_no_longe / 2",
+      "explainer": "HLI's curve starts at birth and its beneficiaries are the children under 10 in Ghana today, so we take the average child as 5 years old: the part of the curve before then counts in full, the rest is discounted from now. HLI doesn't say when benefits start relative to the funding; this is our reading. At a 4% rate, counting every child as a newborn would lower the result by about a fifth, counting them all as 10 would raise it by about a fifth, and a 2-year wait for the policy to take effect would lower it by about 8%."
+    },
+    {
+      "id": "years_from_now_until_effect_stabilises",
+      "section": "discounting",
+      "label": "Years from now until the effect stabilises",
+      "format": "number",
+      "formula": "max(year_at_which_effect_stabilises - average_age_of_children_reached_now, 0)",
+      "explainer": "HLI's stabilisation age (27) less the children's average age now."
+    },
+    {
+      "id": "discount_factor_until_effect_stabilises",
+      "section": "discounting",
+      "label": "Discount factor: years until the effect stabilises",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, (average_age_of_children_reached_now ^ 2 / 2 + (1 - exp(-(continuous_discount_rate * years_from_now_until_effect_stabilises)) * (1 + continuous_discount_rate * years_from_now_until_effect_stabilises)) / continuous_discount_rate ^ 2 + average_age_of_children_reached_now * (1 - exp(-(continuous_discount_rate * years_from_now_until_effect_stabilises))) / continuous_discount_rate) / (year_at_which_effect_stabilises ^ 2 / 2), 1)",
+      "explainer": "HLI's triangle: the effect grows in a straight line from nothing at birth to its stable level at 27. The years before the children's current age count in full; the rest is discounted from now. This is its present value as a share of its undiscounted area (1 at a 0% rate)."
+    },
+    {
+      "id": "discount_factor_after_effect_stabilises",
+      "section": "discounting",
+      "label": "Discount factor: years after the effect stabilises",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, exp(-(continuous_discount_rate * years_from_now_until_effect_stabilises)) * (1 - exp(-(continuous_discount_rate * years_of_effect_stable))) / (continuous_discount_rate * years_of_effect_stable), 1)",
+      "explainer": "HLI's rectangle: the stable effect from age 27 until death at 63.8, which starts 22 years from now for the average child. This is its present value as a share of its undiscounted area (1 at a 0% rate). Most of the lifetime effect comes decades from now, so discounting moves this model a lot."
+    },
+    {
       "id": "wellbeing_loss_integrated_over_the_years_after_effect_stabil",
       "label": "Wellbeing loss integrated over the years after effect stabilises (the rectangle)",
       "section": "ghana_cf_yrs_analysis",
-      "formula": "average_effect_as_measured_at_follow_up_wellbys * years_of_effect_stable",
+      "formula": "average_effect_as_measured_at_follow_up_wellbys * years_of_effect_stable * discount_factor_after_effect_stabilises",
       "expected": 1.1776
     },
     {
@@ -624,6 +680,10 @@
   "output": {
     "row": "wellby_per_dollar",
     "unit": "wellby",
-    "label": "WELLBYs per dollar"
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1_000",
+      "unit": "WELLBYs per $1,000"
+    }
   }
 }

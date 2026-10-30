@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -59,11 +60,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -71,8 +74,9 @@
       "id": "what_this_is_simple_botec_to_estimate_the_increase_in_the_co",
       "label": "What this is: Simple BOTEC to estimate the increase in the cost-effectiveness of BRAC’s pr: Discount rate (Best guess)",
       "section": "leverage",
-      "value": 0.0,
-      "kind": "estimate",
+      "formula": "$discount_rate",
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's BOTEC uses 0% here; the evaluator view keeps it.",
+      "expected": 0.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -1055,6 +1059,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_x_cash_best_guess",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

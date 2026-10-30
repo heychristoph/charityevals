@@ -55,7 +55,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -1185,14 +1186,24 @@
       "id": "units_of_value_per_dollar_donated",
       "label": "Units of value per dollar donated",
       "section": "new_incentives",
-      "formula": "(sum(total_units_of_value_from_new_incentives_under_5_mortality_p, total_units_of_value_from_new_incentives_over_5_mortality_pe, total_units_of_value_from_new_incentives_developmental_benef, total_units_of_value_from_new_incentives_consumption_per_1_0) / cost_of_the_program_per_1_000_eligibles_nominal_usd) * donor_cost_share",
-      "expected": 0.01437158518,
+      "formula": "sum(total_units_of_value_from_new_incentives_under_5_mortality_p, total_units_of_value_from_new_incentives_over_5_mortality_pe, total_units_of_value_from_new_incentives_developmental_benef, total_units_of_value_from_new_incentives_consumption_per_1_0) / cost_of_the_program_per_1_000_eligibles_nominal_usd",
+      "expected": 0.01437158518
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_per_dollar_donated * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_per_dollar_donated",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_per_dollar_donated",
+      "unit": "uov"
+    }
   }
 }

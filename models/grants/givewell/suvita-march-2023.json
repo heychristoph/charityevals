@@ -60,11 +60,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -1667,14 +1669,14 @@
       "id": "mortality_effects_of_indirectly_incentivized_vaccines_beside",
       "label": "Mortality effects of indirectly incentivized vaccines besides rotavirus (i.e., polio, yellow fever, rubella, mumps, varicella meningitis A)",
       "section": "suvita_sms",
-      "value": 0.036,
-      "kind": "estimate",
+      "formula": "@givewell.mortality_effects_of_indirectly_incentivized_vaccines_beside",
+      "published": 0.036,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/10S755x6CDRkYyRPkKDMnRL90qRrnnqzsMtSWg-WI_Xo/edit",
         "cell": "Suvita - SMS!D189"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A189),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A189)*('Supplemental intervention-level'!$A:$A=\"SU\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A189),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A189)*('Supplemental intervention-level'!$A:$A=\"SU\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()). Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 0.036.",
       "format": "percent"
     },
     {
@@ -2026,9 +2028,10 @@
         "url": "https://docs.google.com/spreadsheets/d/10S755x6CDRkYyRPkKDMnRL90qRrnnqzsMtSWg-WI_Xo/edit",
         "cell": "Moral weights and discount rate!C9"
       },
-      "formula": "73.1914046254006 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
+      "published": 73.1914046254006,
       "expected": 73.1914046254006,
-      "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for a death at five or older, times your multiplier on the value of a life. Our view reads the shared figure (73.1914, under Data) so every model values these deaths the same; the evaluator view keeps this sheet's unrounded 73.1914046254006."
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o_2",
@@ -2618,6 +2621,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_estimate_in_multiples_of_cash_trans",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

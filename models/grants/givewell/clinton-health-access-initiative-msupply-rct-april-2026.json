@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.014,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -51,26 +52,68 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
     {
+      "id": "deaths_under_5_averted_from_program_annual_laos_rct",
+      "label": "Deaths under 5 averted from program, annual (Laos RCT)",
+      "section": "cea",
+      "value": 10.02978428,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
+        "cell": "CEA!B19"
+      },
+      "explainer": "Calculated in the source sheet as `=B13*B$18`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
+      "id": "total_years_program_speed_up_laos_rct",
+      "label": "Total years program speed up (Laos RCT)",
+      "section": "cea",
+      "value": 5.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
+        "cell": "CEA!B20"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "discount_rate_laos_rct",
+      "label": "Discount rate (Laos RCT)",
+      "section": "cea",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.014,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
+        "cell": "CEA!B21"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.014."
+    },
+    {
       "id": "deaths_under_5_averted_total_discounted_laos_rct",
       "label": "Deaths under 5 averted, total, discounted (Laos RCT)",
       "section": "cea",
-      "value": 48.78312623,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_laos_rct, total_years_program_speed_up_laos_rct, -deaths_under_5_averted_from_program_annual_laos_rct, 0, 1)",
+      "expected": 48.78312623,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "CEA!B22"
       },
-      "explainer": "Calculated in the source sheet as `=PV(B$21,B20,-B19,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's `=PV(B$21,B20,-B19,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate."
     },
     {
       "id": "number_of_deaths_2023_all_causes_ihme_laos_value_of_preventi",
@@ -907,6 +950,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_x_benchmark_laos_rct",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

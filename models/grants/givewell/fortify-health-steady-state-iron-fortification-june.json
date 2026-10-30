@@ -19,7 +19,8 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0.04175
     }
   },
   "resources": [
@@ -58,7 +59,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -378,25 +380,25 @@
       "id": "adjusting_for_state_differences_india_women_with_any_anemia",
       "label": "Adjusting for state differences: India (Women with any anemia)",
       "section": "counterfactual",
-      "value": 53.1,
-      "kind": "estimate",
+      "formula": "@givewell.total_women_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1epyGHcuM9A7YjtddVpEPByBs_lxFY5fh1FQbVLlPneA/edit",
         "cell": "Counterfactual!C192"
-      }
+      },
+      "expected": 53.1
     },
     {
       "id": "adjusting_for_state_differences_india_men_with_any_anemia",
       "label": "Adjusting for state differences: India (Men with any anemia)",
       "section": "counterfactual",
-      "value": 23.3,
-      "kind": "estimate",
+      "formula": "@givewell.total_men_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1epyGHcuM9A7YjtddVpEPByBs_lxFY5fh1FQbVLlPneA/edit",
         "cell": "Counterfactual!D192"
-      }
+      },
+      "expected": 23.3
     },
     {
       "id": "adjusting_for_state_differences_india_average_adult",
@@ -520,15 +522,15 @@
       "id": "discount_rate_active",
       "label": "Discount rate (Active)",
       "section": "user_inputs",
-      "value": 0.04175,
-      "kind": "estimate",
+      "formula": "$discount_rate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1epyGHcuM9A7YjtddVpEPByBs_lxFY5fh1FQbVLlPneA/edit",
         "cell": "User inputs!B3"
       },
-      "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic).",
-      "format": "percent"
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4.175%; the evaluator view keeps it.",
+      "format": "percent",
+      "expected": 0.04175
     },
     {
       "id": "cognitive_benefits_in_children_discount_rate",
@@ -920,13 +922,13 @@
       "id": "adjusting_for_state_differences_india_children_with_any_anem",
       "label": "Adjusting for state differences: India (Children with any anemia)",
       "section": "counterfactual",
-      "value": 58.5,
-      "kind": "estimate",
+      "formula": "@givewell.total_children_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1epyGHcuM9A7YjtddVpEPByBs_lxFY5fh1FQbVLlPneA/edit",
         "cell": "Counterfactual!B192"
-      }
+      },
+      "expected": 58.5
     },
     {
       "id": "ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
@@ -2345,14 +2347,24 @@
       "id": "units_of_value_per_dollar_donated",
       "label": "Units of value per dollar donated",
       "section": "fh_india_iron_fortification",
-      "formula": "((units_of_value_per_beneficiary + units_of_value_per_beneficiary_2 + units_of_value_per_beneficiary_3) / annual_cost_per_person_nominal_usd) * donor_cost_share",
-      "expected": 0.04212305684,
+      "formula": "(units_of_value_per_beneficiary + units_of_value_per_beneficiary_2 + units_of_value_per_beneficiary_3) / annual_cost_per_person_nominal_usd",
+      "expected": 0.04212305684
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_per_dollar_donated * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_per_dollar_donated",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_per_dollar_donated",
+      "unit": "uov"
+    }
   }
 }

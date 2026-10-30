@@ -21,7 +21,8 @@
     "assumptions": {
       "life_value_multiplier": 1,
       "uov_per_ln_consumption": 1.442695040889,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0.04
     }
   },
   "resources": [
@@ -77,11 +78,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -1910,9 +1913,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
         "cell": "Inputs!H172"
       },
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262,
-      "explainer": "GiveWell's moral weight, 116.25262 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight, 116.25262 units of value (the shared figure for a death under five, under Data), times your multiplier on the value of a life."
     },
     {
       "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_2",
@@ -2056,9 +2059,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
         "cell": "Inputs!H173"
       },
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914,
-      "explainer": "GiveWell's moral weight, 73.1914 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight, 73.1914 units of value (the shared figure for a death at five or older, under Data), times your multiplier on the value of a life."
     },
     {
       "id": "value_assigned_to_averting_a_malaria_attributable_death_of_a_5",
@@ -2273,17 +2276,78 @@
       "expected": 0.0002007099988
     },
     {
-      "id": "present_value_of_individual_lifetime_benefits_per_malaria_ca",
-      "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
+      "id": "increase_in_annual_income_per_malaria_case_averted",
+      "label": "Increase in annual income per malaria case averted among people under age 15",
       "section": "main_cea",
-      "value": 0.08054428131,
+      "format": "percent",
+      "value": 0.0058088,
       "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
         "cell": "Main CEA!H137"
       },
-      "explainer": "Calculated in the source sheet as `=pv(H134,H136,-H135,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's input behind the present value in Main CEA!H137, which the sheet carries as a number; the same figure as in GiveWell's AMF model, which reproduces 0.08054428131 at 4%."
+    },
+    {
+      "id": "adjusted_increase_in_ln_income_per_malaria_case_averted",
+      "label": "Adjusted increase in ln(income) per malaria case averted among people under age 15",
+      "section": "main_cea",
+      "formula": "ln(1 + increase_in_annual_income_per_malaria_case_averted)"
+    },
+    {
+      "id": "years_until_long_term_income_benefits_begin",
+      "label": "Average number of years between nets being distributed and the beginning of long-term benefits",
+      "section": "main_cea",
+      "value": 10,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
+        "cell": "Main CEA!H137"
+      },
+      "explainer": "GiveWell's input behind the present value in Main CEA!H137, which the sheet carries as a number; the same figure as in GiveWell's AMF model, which reproduces 0.08054428131 at 4%."
+    },
+    {
+      "id": "discount_rate_for_future_benefits",
+      "label": "Discount rate for future benefits",
+      "section": "main_cea",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%."
+    },
+    {
+      "id": "discounted_increase_in_ln_income_per_malaria_case_averted",
+      "label": "Discounted increase in ln(income) per malaria case averted among people under age 15",
+      "section": "main_cea",
+      "formula": "adjusted_increase_in_ln_income_per_malaria_case_averted / (1 + discount_rate_for_future_benefits) ^ years_until_long_term_income_benefits_begin"
+    },
+    {
+      "id": "years_long_term_income_benefits_last",
+      "label": "Expected number of years the long-term benefits will last",
+      "section": "main_cea",
+      "value": 40,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
+        "cell": "Main CEA!H137"
+      },
+      "explainer": "GiveWell's input behind the present value in Main CEA!H137, which the sheet carries as a number; the same figure as in GiveWell's AMF model, which reproduces 0.08054428131 at 4%."
+    },
+    {
+      "id": "present_value_of_individual_lifetime_benefits_per_malaria_ca",
+      "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
+      "section": "main_cea",
+      "formula": "pv(discount_rate_for_future_benefits, years_long_term_income_benefits_last, -discounted_increase_in_ln_income_per_malaria_case_averted, 0, 1)",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1r_wnxTzdVtIClM_K8xZYGz8DwxAjiC0NbYQXfefKgaE/edit",
+        "cell": "Main CEA!H137"
+      },
+      "explainer": "Calculated in the source sheet as `=pv(H134,H136,-H135,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from GiveWell's inputs so it moves with your discount rate: the yearly gain in ln(income), received each year the benefits last, with later years counting less. GiveWell's sheet has 0.08054428131 at 4%.",
+      "expected": 0.08054428131
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_2",
@@ -3518,6 +3582,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_estimate_pulled_from_below_for_visi",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

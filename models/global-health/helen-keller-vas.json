@@ -114,7 +114,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -916,13 +917,13 @@
     {
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects (overall)",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H129"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H129.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H129. Reads the shared fact @givewell.short_term_anemia_effects (0.09, the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.09.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -976,13 +977,13 @@
     {
       "id": "children_reached_by_vas_campaigns_may_have_lower_than_averag",
       "label": "Children reached by VAS campaigns may have lower than average baseline mortality rates (overall)",
-      "value": -0.1,
-      "kind": "estimate",
+      "formula": "@givewell.children_reached_by_vas_campaigns_may_have_lower_than_averag",
+      "published": -0.1,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H136"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H136.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H136. Reads the shared fact @givewell.children_reached_by_vas_campaigns_may_have_lower_than_averag (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's -0.1.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -1071,10 +1072,17 @@
     {
       "id": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
       "label": "Units of value generated per dollar spent by the grantee, after accounting for all adjustments",
-      "formula": "(total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)) * donor_cost_share",
+      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)",
       "expected": 0.01562715325,
       "section": "cost_effectiveness_after_all_adjustments",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest).\n\nWith credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+      "explainer": "With credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     },
     {
       "id": "cost_effectiveness_in_terms_of_multiples_of_givedirectly_s_u_2",
@@ -1179,9 +1187,13 @@
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",

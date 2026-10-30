@@ -21,7 +21,8 @@
     "assumptions": {
       "uov_per_daly": 2.3,
       "uov_per_ln_consumption": 1.442695040889,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0.04
     }
   },
   "resources": [
@@ -48,7 +49,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -207,9 +209,10 @@
       "id": "overall_discount_rate_active",
       "label": "Overall discount rate (Active)",
       "section": "moral_weights",
-      "formula": "overall_discount_rate_givewell_2020",
+      "formula": "$discount_rate",
       "expected": 0.04,
-      "format": "percent"
+      "format": "percent",
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%, the sum of the components above."
     },
     {
       "id": "cognitive_benefits_in_children_discount_rate_preferred",
@@ -247,13 +250,13 @@
       "id": "increase_in_iq_from_iron_supplementation_in_children_with_an",
       "label": "Increase in IQ from iron supplementation in children with anemia (standard deviations) (Preferred)",
       "section": "iron_fortification",
-      "value": 0.3,
-      "kind": "estimate",
+      "formula": "@givewell.increase_in_iq_from_iron_supplementation_in_children_with_an",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1hCNU1us4gavfFUduatVFr2u20V7YxMDdnc8ty9lTeRM/edit",
         "cell": "Iron Fortification!C19"
-      }
+      },
+      "expected": 0.3
     },
     {
       "id": "iq_points_per_standard_deviation_preferred",
@@ -478,13 +481,13 @@
       "id": "increase_in_iq_from_iron_supplementation_in_adults_with_iron",
       "label": "Increase in IQ from iron supplementation in adults with iron deficiency (standard deviations) (Preferred)",
       "section": "iron_fortification",
-      "value": 0.35,
-      "kind": "estimate",
+      "formula": "@givewell.increase_in_iq_from_iron_supplementation_in_adults_with_anem",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1hCNU1us4gavfFUduatVFr2u20V7YxMDdnc8ty9lTeRM/edit",
         "cell": "Iron Fortification!C42"
-      }
+      },
+      "expected": 0.35
     },
     {
       "id": "internal_validity_adjustment_for_iq_in_adults_preferred",
@@ -658,14 +661,24 @@
       "id": "units_of_value_per_dollar_donated",
       "label": "Units of value per dollar donated",
       "section": "iron_fortification",
-      "formula": "(units_of_value_per_dollar_donated_2) * donor_cost_share",
-      "expected": 0.03768687482,
+      "formula": "units_of_value_per_dollar_donated_2",
+      "expected": 0.03768687482
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_per_dollar_donated * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_per_dollar_donated",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_per_dollar_donated",
+      "unit": "uov"
+    }
   }
 }

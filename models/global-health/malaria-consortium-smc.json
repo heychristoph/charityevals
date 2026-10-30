@@ -122,7 +122,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -433,13 +434,13 @@
     {
       "id": "indirect_malaria_deaths_per_direct_malaria_death",
       "label": "Indirect malaria deaths per direct malaria death (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H51"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H51.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H51. Reads the shared fact @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 (0.75, the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_under_age_5"
     },
     {
@@ -854,7 +855,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "units_of_value_from_mortality_reduction_among_people_under_a",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -869,7 +870,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older (overall)",
       "explainer": "GiveWell's moral weight: 73.1914 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "units_of_value_from_mortality_reduction_among_people_age_5_a",
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914
     },
     {
@@ -927,7 +928,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "total_value_of_outcomes",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -942,7 +943,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older (overall)",
       "explainer": "GiveWell's moral weight: 73.1914 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "total_value_of_outcomes",
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914
     },
     {
@@ -1162,13 +1163,13 @@
     {
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects (overall)",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H168"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H168.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H168. Reads the shared fact @givewell.short_term_anemia_effects (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.09.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -1334,10 +1335,17 @@
     {
       "id": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
       "label": "Units of value generated per dollar spent by the grantee, after accounting for all adjustments",
-      "formula": "(total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)) * donor_cost_share",
+      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)",
       "expected": 0.04901858921,
       "section": "cost_effectiveness_after_all_adjustments",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest).\n\nWith credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+      "explainer": "With credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     },
     {
       "id": "cost_effectiveness_in_terms_of_multiples_of_givedirectly_s_u_2",
@@ -1452,9 +1460,13 @@
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",

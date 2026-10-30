@@ -19,6 +19,8 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "life_value_multiplier": 1,
+      "discount_rate": 0.06,
       "resource_shares": 0
     }
   },
@@ -50,7 +52,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -71,14 +74,14 @@
       "id": "discount_rate_andrew",
       "label": "Discount rate (Andrew)",
       "section": "parameters",
-      "value": 0.06,
-      "kind": "estimate",
+      "formula": "$discount_rate",
+      "expected": 0.06,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1q4XLGooV74W-3Or50vtmip-9cmrPzDtB_r5QLZSbYA0/edit",
         "cell": "Parameters!B3"
       },
-      "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "Your discount rate (Timing, under Your values). This sheet uses 6%; the evaluator view keeps it.",
       "format": "percent"
     },
     {
@@ -212,14 +215,14 @@
       "id": "value_assigned_to_averting_the_death_of_an_individual_under",
       "label": "Value assigned to averting the death of an individual under 5 — AMF (Andrew)",
       "section": "moral_weights",
-      "value": 8.0,
-      "kind": "estimate",
+      "formula": "8 * $life_value_multiplier",
+      "expected": 8.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1q4XLGooV74W-3Or50vtmip-9cmrPzDtB_r5QLZSbYA0/edit",
         "cell": "Moral weights!B9"
       },
-      "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's 2018 moral weight for an under-5 death in this sheet's units (8), times your multiplier on the value of a life."
     },
     {
       "id": "value_assigned_to_averting_a_death_of_an_under_5_amoxicillin_2",
@@ -411,14 +414,24 @@
       "id": "units_of_value_per_dollar_donated_andrew",
       "label": "Units of value per dollar donated (Andrew)",
       "section": "amoxicillin_procurement_p2",
-      "formula": "(total_units_of_value_from_instances_of_under_5_deaths_averte / difference_in_costs_between_program_and_counterfactual_in_sc) * donor_cost_share",
-      "expected": 0.003470801066,
+      "formula": "total_units_of_value_from_instances_of_under_5_deaths_averte / difference_in_costs_between_program_and_counterfactual_in_sc",
+      "expected": 0.003470801066
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_per_dollar_donated_andrew * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_per_dollar_donated_andrew",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_per_dollar_donated_andrew",
+      "unit": "uov"
+    }
   }
 }

@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -59,11 +60,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -1569,8 +1572,9 @@
       "id": "number_of_annual_malaria_deaths_in_drc_all_ages",
       "label": "Number of annual malaria deaths in DRC, all ages",
       "section": "detailed_cea",
-      "value": 57160.15,
-      "kind": "estimate",
+      "formula": "@givewell.number_of_malaria_deaths_per_year_gbd_2019",
+      "published": 57160.15,
+      "explainer": "Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 57160.15.",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
@@ -1757,17 +1761,70 @@
       "expected": 120226.4214
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Increase in ln(income) from not having malaria for a year",
+      "section": "supplemental_calculations",
+      "value": 0.01537057717,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
+        "cell": "Supplemental calculations!B56"
+      },
+      "explainer": "GiveWell's input behind the present value in Supplemental calculations!B60, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Number of years until benefits accrue",
+      "section": "supplemental_calculations",
+      "value": 16,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
+        "cell": "Supplemental calculations!B57"
+      },
+      "explainer": "GiveWell's input behind the present value in Supplemental calculations!B60, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Number of years benefits last for",
+      "section": "supplemental_calculations",
+      "value": 40,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
+        "cell": "Supplemental calculations!B58"
+      },
+      "explainer": "GiveWell's input behind the present value in Supplemental calculations!B60, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "supplemental_calculations",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
+        "cell": "Supplemental calculations!B59"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "discounted_increase_in_annual_ln_consumption",
       "label": "Discounted increase in annual ln(consumption)",
       "section": "supplemental_calculations",
-      "value": 0.1689260976,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.1689260976,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1NP1vgZ-PNjx3YOfCHF3BIxieSEbHM3ufr4eiPP8I3pY/edit",
         "cell": "Supplemental calculations!B60"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B59,B58,-B56/(1+B59)^B57,,1)`; kept as a fixed number here (text in arithmetic).\n\nWe assume that an increase in a treated individual's future income is the same as an increase in their future consumption.",
+      "explainer": "Calculated in the source sheet as `=pv(B59,B58,-B56/(1+B59)^B57,,1)`; kept as a fixed number here (text in arithmetic).\n\nWe assume that an increase in a treated individual's future income is the same as an increase in their future consumption.\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 16 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.1689260976 at 4%.",
       "format": "percent"
     },
     {
@@ -2337,6 +2394,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_of_grant_in_multiples_of_cash_transfers",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

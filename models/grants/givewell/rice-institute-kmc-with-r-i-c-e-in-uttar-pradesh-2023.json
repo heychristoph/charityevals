@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -51,11 +52,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -281,17 +284,70 @@
       }
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Expected amount of money reallocated per year",
+      "section": "optionality",
+      "value": 650612.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1OzlOwhrH4hCoRLqQ3am_1ikP_T_dCTfUTENQTbiYf1w/edit",
+        "cell": "Optionality!B14"
+      },
+      "explainer": "GiveWell's input behind the present value in Optionality!B21, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "How many years in the future will we make allocation decisions using results of this grant",
+      "section": "optionality",
+      "value": 2,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1OzlOwhrH4hCoRLqQ3am_1ikP_T_dCTfUTENQTbiYf1w/edit",
+        "cell": "Optionality!B17"
+      },
+      "explainer": "GiveWell's input behind the present value in Optionality!B21, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "For how many future years will we fund program?",
+      "section": "optionality",
+      "value": 10,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1OzlOwhrH4hCoRLqQ3am_1ikP_T_dCTfUTENQTbiYf1w/edit",
+        "cell": "Optionality!B18"
+      },
+      "explainer": "GiveWell's input behind the present value in Optionality!B21, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "optionality",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1OzlOwhrH4hCoRLqQ3am_1ikP_T_dCTfUTENQTbiYf1w/edit",
+        "cell": "Optionality!B19"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "net_present_value_of_money_reallocated",
       "label": "Net present value of money reallocated",
       "section": "optionality",
-      "value": 5074086.712,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 5074086.712,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OzlOwhrH4hCoRLqQ3am_1ikP_T_dCTfUTENQTbiYf1w/edit",
         "cell": "Optionality!B21"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B19,B18,-B20,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "Calculated in the source sheet as `=pv(B19,B18,-B20,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the money reallocated each year, starting 2 years later and lasting 10 years, later years counting less. GiveWell's sheet has 5074086.712 at 4%.",
       "format": "usd"
     },
     {
@@ -448,6 +504,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "overall_cost_effectiveness_of_grant",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

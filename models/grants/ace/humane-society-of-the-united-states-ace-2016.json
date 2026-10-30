@@ -21,7 +21,8 @@
     "assumptions": {
       "resource_shares": 0,
       "chicken_vs_person": 0.463966,
-      "rp_species_weights": 0
+      "rp_species_weights": 0,
+      "discount_rate": 0
     }
   },
   "resources": [
@@ -48,6 +49,11 @@
       "title": "Your dollar's share",
       "explainer": "charityevals adjustments on top of ACE's model.",
       "kind": "ours"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not ACE's. ACE counts a year of benefit the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so ACE's numbers reproduce."
     },
     {
       "id": "species",
@@ -427,10 +433,34 @@
       "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe consider a limited term of impact because companies might simply have adopted the same policy later without HSUS FAPC's influence, might go out of business, or might abandon the policy after following it for some number of years."
     },
     {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). ACE's 2016 model doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits spread over years can be discounted smoothly rather than in yearly steps."
+    },
+    {
+      "id": "discounted_years_of_impact",
+      "section": "discounting",
+      "label": "Years of impact expected, discounted",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, (1 - exp(-continuous_discount_rate * years_of_impact_expected)) / continuous_discount_rate, years_of_impact_expected)",
+      "explainer": "ACE multiplies the animals a policy affects each year by the years of impact, counting every year the same. In our view later years count less at the discount rate: this is the present value of one animal-year per year over that many years (equal to the years at a 0% rate; 3.6 instead of 3.9 at 4%)."
+    },
+    {
       "id": "equivalent_hens_spared_from_cage_free_policies",
       "label": "Equivalent hens spared from cage-free policies",
       "section": "model",
-      "formula": "hens_affected_yearly_by_cage_free_policies_hsus_fa*proportional_improvement_in_welfare_due_to_cage_fr*hsus_fapc_s_responsibility_for_changes*years_of_impact_expected"
+      "formula": "hens_affected_yearly_by_cage_free_policies_hsus_fa*proportional_improvement_in_welfare_due_to_cage_fr*hsus_fapc_s_responsibility_for_changes*discounted_years_of_impact"
     },
     {
       "id": "equivalent_years_of_suffering_spared_from_cage_fre",
@@ -494,7 +524,7 @@
       "id": "equivalent_chickens_spared_from_improved_welfare_p",
       "label": "Equivalent chickens spared from improved welfare policies",
       "section": "model",
-      "formula": "broiler_chickens_affected_yearly_by_improved_welfa*proportional_improvement_in_welfare_due_to_improve*hsus_fapc_s_responsibility_for_changes_2*years_of_impact_expected"
+      "formula": "broiler_chickens_affected_yearly_by_improved_welfa*proportional_improvement_in_welfare_due_to_improve*hsus_fapc_s_responsibility_for_changes_2*discounted_years_of_impact"
     },
     {
       "id": "equivalent_years_of_suffering_spared_from_improved",
@@ -713,8 +743,8 @@
     "unit": "ced",
     "label": "Chicken-equivalent pain days averted per dollar you give",
     "native": {
-      "row": "total_years_of_suffering_spared_per_dollar",
-      "unit": "years of farmed-animal life"
+      "row": "total_animals_spared_per_dollar",
+      "unit": "animals spared"
     },
     "species": [
       "chicken",

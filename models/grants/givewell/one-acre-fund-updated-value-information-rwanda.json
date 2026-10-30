@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.065,
       "uov_per_ln_consumption": 1.44,
       "resource_shares": 0
     }
@@ -63,11 +64,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -142,8 +145,9 @@
       "id": "givewell_discount_rate",
       "label": "GiveWell discount rate",
       "section": "kenya",
-      "value": 0.065,
-      "kind": "estimate",
+      "formula": "$discount_rate",
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 6.5% here; the evaluator view keeps it.",
+      "expected": 0.065,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lIEYkle23H4kA9orEyHh6zEYv3xwG__0shWUaMmGyLI/edit",
@@ -7105,6 +7109,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
+      "unit": "multiples of cash transfers"
+    }
   }
 }
