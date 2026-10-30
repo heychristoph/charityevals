@@ -4,6 +4,6 @@ Builds footbridges to connect isolated rural communities to markets, schools and
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [Bridges to Prosperity Value of Information rough estimate (May 2022)](/fika/fika-bridges-to-prosperity-value-information) | GW | May 2022 | <span data-figure="headline" data-model="fika-bridges-to-prosperity-value-information">16</span> | 37 |
-| [Update to Bridges to Prosperity cost-effectiveness analysis for Intervention Report (August 2022)](/fika) | GW | May 2022 | <span data-figure="headline" data-model="fika-update-to-bridges-to-prosperity">2.3</span> | 27, 1 kept fixed |
+| [Update to Bridges to Prosperity cost-effectiveness analysis for Intervention Report (August 2022)](/fika) | GW | May 2022 | <span data-figure="headline" data-model="fika-update-to-bridges-to-prosperity">2.3</span> | 29, 1 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

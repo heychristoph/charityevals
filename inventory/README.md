@@ -1,7 +1,7 @@
 # Inventory of public evaluator models
 
 Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, the
-Happier Lives Institute, SoGive (`sogive.md`) and Founders Pledge (`founders-pledge.md`), checked page by page in October 2026, and what we did with each. Each entry
+Happier Lives Institute, SoGive (`sogive.md`), Founders Pledge (`founders-pledge.md`) and Ambitious Impact (`ambitious-impact-models.json`), checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
 ## GiveWell: `givewell-models.json`, `givewell-sheets.json`
@@ -73,3 +73,31 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   sheets behind sign-in, intervention-level or hypothetical sheets, and three sheets whose unit or
   figure doesn't carry over (No Means No Worldwide, TerraPraxis, The Humane League 2019). The file
   lists every entry and its reason.
+
+## Ambitious Impact (formerly Charity Entrepreneurship): `ambitious-impact-models.json`
+
+- **Source:** 96 reports. They come from AIM's research site (research.ambitiousimpact.com) and the archived
+  report pages of charityentrepreneurship.com (2019–2026: top ideas, considered ideas, the research-reports-2026
+  pages), plus the yearly announcement posts and AIM's Zenodo records. Sheet links were read from each report
+  PDF and checked against the xlsx export. 79 reports name a CEA sheet; 74 of those sheets are public.
+- **Licence:** about 42 reports are on Zenodo under CC BY 4.0, and the entry for each records it. AIM's terms of
+  use otherwise reserve rights, allow non-commercial use, and allow citing with attribution.
+- **Imported:** 21 models in `models/grants/ambitious-impact/`, via `scripts/convert-sheet.py` and then
+  `scripts/link-aim.py` (`scripts/aim-links.json`). These are the public sheets for ideas that AIM incubated a
+  charity to run, attached to that charity: 4 existing charities (Clear Solutions, Ansh, Spiro, Healthy Futures)
+  and 17 new ones.
+  - Each model is AIM's estimate made before the charity existed. Under the ranking rules it is AIM's figure for
+    that charity: newest by date per evaluator, not a side sheet.
+  - Where the sheet has changed since the report (Healthy Futures, LABRI, Opal Health, Rahi Impact), the model
+    reproduces today's sheet.
+- **Not imported:**
+  - 36 public sheets for ideas where no charity AIM incubated to run them was found. The site ranks organisations,
+    so there is nothing to attach them to.
+  - 11 animal sheets in welfare points or animals helped. There is no conversion from these to the site's scale,
+    and AIM replaced them with SADs in 2023.
+  - 17 reports with no AIM sheet (the estimate is in the text or in Guesstimate).
+  - 5 private or deleted sheets.
+  - 2 EA-meta sheets that need a bridge to the site's scale.
+  - 1 breakeven analysis.
+  - 2 Fortify Health CEAs that AIM's pages don't claim as its own.
+  - 1 tobacco-tax idea whose charity isn't confirmed on AIM's pages.
