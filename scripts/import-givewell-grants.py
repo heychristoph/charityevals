@@ -41,7 +41,7 @@ for e in manifest:
          "source": {"publisher": "GiveWell", "title": e["title"], "url": pages[0] if pages else e["url"], "sheet": e["url"],
                     **({"published": e["first_grant"]} if e.get("first_grant") else {}), "retrieved": "2026-10-27",
                     "license": "CC BY-NC-SA 3.0 US"},
-         "evaluator": {"name": "GiveWell", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
+         "evaluator": {"name": "GiveWell", "assumptions": {"resource_shares": 0}},
          "resources": [{"title": e["title"], "url": e["url"], "type": "model", "note": "The spreadsheet this page reproduces."}]
                       + [{"title": f"GiveWell grant page ({p.rstrip('/').rsplit('/', 1)[-1].replace('-', ' ')})", "url": p, "type": "evaluation"} for p in pages[:8]]}
     if e.get("cell"): s["cell"], s["bottom"] = e["cell"], e["bottom"]

@@ -362,7 +362,7 @@ model = {
     "sections": secs,
     "rows": ordered(base) + extra,
     "output": {"row": final_id, "unit": "uov", "label": "Units of value per dollar"},
-    "evaluator": {"name": "GiveWell", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0,
+    "evaluator": {"name": "GiveWell", "assumptions": {"resource_shares": 0,
                                                       "life_value_multiplier": 1, "uov_per_ln_consumption": 1.4426950408889634}},
 }
 # Shared rule, also applied by convert-givewell.py: a sheet's explicit discount-rate input moves in

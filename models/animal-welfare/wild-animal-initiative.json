@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/114nMuoeHSKWZslT7tQmxAR2jRoXMWoUBhb_swHx5QcY/edit",
     "published": "2025-11-04",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -37,6 +37,11 @@
       "id": "donor",
       "title": "Your dollar's share",
       "explainer": "charityevals adjustments on top of ACE's model."
+    },
+    {
+      "id": "pain",
+      "title": "From papers to pain spared",
+      "explainer": "charityevals' rough theory of change, not ACE's: papers build the field, the field makes ways of helping wild animals possible sooner, and those spare animals pain. Every input is a forecast; each could be several times off."
     }
   ],
   "rows": [
@@ -504,9 +509,10 @@
       "expected": 289.7075406
     },
     {
-      "id": "sads_total",
+      "id": "papers_total",
       "section": "bottom",
       "label": "Peer-reviewed papers, all modelled programs",
+      "explainer": "ACE counts this charity's results in research papers, not days of pain. The last section turns papers into pain spared.",
       "format": "integer",
       "formula": "p1_papers_published_per_1_million * p1_grant_program_expenditures_20232025_including_op / 1e+06 + p3_papers_published_per_1_million * p3_program_expenditures_20232025_including_operatio / 1e+06"
     },
@@ -518,11 +524,11 @@
       "formula": "p1_grant_program_expenditures_20232025_including_op + p3_program_expenditures_20232025_including_operatio"
     },
     {
-      "id": "sads_per_dollar",
+      "id": "papers_per_dollar",
       "section": "bottom",
       "label": "All modelled programs: Peer-reviewed papers per dollar",
       "format": "small",
-      "formula": "sads_total / cost_total"
+      "formula": "papers_total / cost_total"
     },
     {
       "id": "staff_cost_share",
@@ -562,26 +568,117 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
-      "id": "sads_per_donor_dollar",
+      "id": "papers_per_donor_dollar",
       "section": "donor",
       "label": "Peer-reviewed papers per dollar you give",
       "format": "small",
-      "formula": "sads_per_dollar * donor_cost_share"
+      "formula": "papers_per_dollar * donor_cost_share"
+    },
+    {
+      "id": "animals_helped_per_year",
+      "section": "pain",
+      "label": "Wild animals eventually helped each year",
+      "format": "number",
+      "value": {
+        "low": 400000000.0,
+        "best": 1000000000.0,
+        "high": 2500000000.0
+      },
+      "kind": "judgment",
+      "explainer": "How many wild animals the ways of helping that this field makes possible would eventually reach each year, for example through more humane pest control. Our guess; the range is ours."
+    },
+    {
+      "id": "pain_days_spared_each",
+      "section": "pain",
+      "label": "Days of pain spared per animal helped, per year",
+      "format": "number",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1.25
+      },
+      "kind": "judgment",
+      "explainer": "Days of pain, as bad as a day of a person's disabling pain once adjusted for intensity and species, that each animal helped is spared each year. There is no separate welfare-range step: how much each species can suffer is part of this guess, as in ACE's pain days. Our guess; the range is ours."
+    },
+    {
+      "id": "years_sooner",
+      "section": "pain",
+      "label": "Years sooner help arrives because the field exists",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 10,
+        "high": 25
+      },
+      "kind": "judgment",
+      "explainer": "The field's contribution is bringing help forward, not causing it outright. Our guess; the range is ours."
+    },
+    {
+      "id": "chance_field_succeeds",
+      "section": "pain",
+      "label": "Chance the field leads to help at scale",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Most research fields never produce interventions used at scale. Our guess; the range is ours."
+    },
+    {
+      "id": "credit_per_paper",
+      "section": "pain",
+      "label": "Share of the field's credit per paper",
+      "format": "small",
+      "value": {
+        "low": 8e-05,
+        "best": 0.0002,
+        "high": 0.0005
+      },
+      "kind": "judgment",
+      "explainer": "One paper's share of everything the field achieves: 1 in 5,000 by default, roughly the papers the field needs before help reaches scale. Our guess; the range is ours."
+    },
+    {
+      "id": "years_until_help",
+      "section": "pain",
+      "label": "Years until that help starts",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 20,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "Good done later counts for less at your discount rate (Timing, under Your values), so this sets how far away the benefit is. Our guess; the range is ours."
+    },
+    {
+      "id": "pain_days_per_paper",
+      "section": "pain",
+      "label": "Days of pain spared per paper, discounted",
+      "format": "number",
+      "formula": "animals_helped_per_year * pain_days_spared_each * years_sooner * chance_field_succeeds * credit_per_paper / (1 + $discount_rate) ^ years_until_help"
+    },
+    {
+      "id": "pain_days_per_donor_dollar",
+      "section": "pain",
+      "label": "Days of pain spared per dollar you give",
+      "format": "small",
+      "formula": "papers_per_donor_dollar * pain_days_per_paper"
     }
   ],
   "output": {
-    "row": "sads_per_donor_dollar",
-    "unit": "paper",
-    "label": "Peer-reviewed papers per dollar you give"
+    "row": "pain_days_per_donor_dollar",
+    "unit": "sad",
+    "label": "Days of pain spared per dollar you give"
   },
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0
     }
   },
   "resources": [

@@ -1,107 +1,152 @@
 {
- "id": "fortify-health-value-information-december-2021",
- "name": "Fortify Health Value of Information BOTEC [December 2021]",
- "kind": "charity",
- "cause": "global-health",
- "charity": "fortify-health",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"Fortify Health Value of Information BOTEC [December 2021]\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "Fortify Health Value of Information BOTEC [December 2021] (public)",
-  "url": "https://www.givewell.org/research/incubation-grants/Fortify-Health-expansion-December-2021",
-  "sheet": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
-  "published": "2021-12-17",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "fortify-health-value-information-december-2021",
+  "name": "Fortify Health Value of Information BOTEC [December 2021]",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "fortify-health",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Funds research on Fortify Health's program helping flour mills in India add iron to wheat flour. GiveWell's spreadsheet \"Fortify Health Value of Information BOTEC [December 2021]\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "Fortify Health Value of Information BOTEC [December 2021] (public)",
+    "url": "https://www.givewell.org/research/incubation-grants/Fortify-Health-expansion-December-2021",
+    "sheet": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+    "published": "2021-12-17",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "Fortify Health Value of Information BOTEC [December 2021] (public)",
+      "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (Fortify Health expansion December 2021)",
+      "url": "https://www.givewell.org/research/incubation-grants/Fortify-Health-expansion-December-2021",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "main",
+      "title": "Main"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
+    }
+  ],
+  "rows": [
+    {
+      "id": "present_discounted_value_of_additional_units_of_value_per_do",
+      "label": "Present discounted value of additional units of value per dollar",
+      "section": "main",
+      "value": 0.04421729089,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+        "cell": "Main!B17"
+      },
+      "explainer": "Calculated in the source sheet as `=pv(B15,B9,-B16,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalc"
+    },
+    {
+      "id": "units_of_value_per_dollar_givedirectly",
+      "label": "Units of value per dollar, GiveDirectly",
+      "section": "main",
+      "value": 0.00344,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
+        "cell": "Main!B12"
+      },
+      "explainer": "Top charities CEA: https://docs.google.com/spreadsheets/d/1B1fODKVbnGP4fejsZCVNvBm5zvI1jC7DhkaJpFk6zfo/edit#gid=1680005064&range=B38"
+    },
+    {
+      "id": "cost_effectiveness_x_cash",
+      "label": "Cost-effectiveness (x cash)",
+      "section": "main",
+      "formula": "present_discounted_value_of_additional_units_of_value_per_do / units_of_value_per_dollar_givedirectly",
+      "expected": 12.85386363
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(cost_effectiveness_x_cash * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar"
   }
- },
- "resources": [
-  {
-   "title": "Fortify Health Value of Information BOTEC [December 2021] (public)",
-   "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (Fortify Health expansion December 2021)",
-   "url": "https://www.givewell.org/research/incubation-grants/Fortify-Health-expansion-December-2021",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "main",
-   "title": "Main"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "present_discounted_value_of_additional_units_of_value_per_do",
-   "label": "Present discounted value of additional units of value per dollar",
-   "section": "main",
-   "value": 0.04421729089,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
-    "cell": "Main!B17"
-   },
-   "explainer": "Calculated in the source sheet as `=pv(B15,B9,-B16,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalc"
-  },
-  {
-   "id": "units_of_value_per_dollar_givedirectly",
-   "label": "Units of value per dollar, GiveDirectly",
-   "section": "main",
-   "value": 0.00344,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1bnvjukUR-Ju316bbj3mzstm_0g2xbGwLqa78xQfBaeQ/edit",
-    "cell": "Main!B12"
-   },
-   "explainer": "Top charities CEA: https://docs.google.com/spreadsheets/d/1B1fODKVbnGP4fejsZCVNvBm5zvI1jC7DhkaJpFk6zfo/edit#gid=1680005064&range=B38"
-  },
-  {
-   "id": "cost_effectiveness_x_cash",
-   "label": "Cost-effectiveness (x cash)",
-   "section": "main",
-   "formula": "present_discounted_value_of_additional_units_of_value_per_do / units_of_value_per_dollar_givedirectly",
-   "expected": 12.85386363
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "cost_effectiveness_x_cash * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

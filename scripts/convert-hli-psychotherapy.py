@@ -101,8 +101,8 @@ for cid, c in CHARITIES.items():
                    "which measures impact in wellbeing-adjusted life years (WELLBYs).",
         "source": {"publisher": "Happier Lives Institute", "title": "The wellbeing cost-effectiveness of StrongMinds and Friendship Bench (Nov 2024 update)",
                    "url": REPORT, "sheet": SHEET, "published": "2024-11-01", "retrieved": "2026-10-26",
-                   "license": "Unclear: check HLI's terms before republishing"},
-        "evaluator": {"name": "HLI", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
+                   "license": "© Happier Lives Institute; no licence published"},
+        "evaluator": {"name": "HLI", "assumptions": {"resource_shares": 0}},
         "sections": sections, "rows": rows,
         "output": {"row": "wellbys_per_dollar", "unit": "wellby", "label": "WELLBYs per dollar"},
         "resources": [

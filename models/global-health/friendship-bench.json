@@ -13,13 +13,12 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
     "published": "2024-11-01",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check HLI's terms before republishing"
+    "license": "© Happier Lives Institute; no licence published"
   },
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0
     }
   },
   "sections": [
@@ -42,6 +41,10 @@
     {
       "id": "cost",
       "title": "Cost"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
     },
     {
       "id": "bottom",
@@ -880,11 +883,53 @@
       "expected": 20.61229197
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "wellbys_per_dollar",
       "section": "bottom",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "wellbys_per_1000 / 1000"
+      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

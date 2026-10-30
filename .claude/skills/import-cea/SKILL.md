@@ -87,17 +87,20 @@ is the reference). Then:
 - **Moral weights and cross-cause rates** belong in `assumptions/default.json`, referenced as
   `$name`, so users can change them once for every model. Reuse existing ones before adding.
   Set `evaluator: { name, assumptions }` on the model with the values the evaluator used, plus
-  `count_salary_sacrifice: 0` and `full_credit: 0` (or 1 if the evaluator gives full credit),
-  so the evaluator view reproduces their model exactly.
+  `resource_shares: 0`, so the evaluator view reproduces their model exactly.
 - **Shared facts** (country data such as PPP factors, mortality rates, population) live in
   `facts/<place>.json` and are referenced as `@kenya.ppp_factor_2017`. Check for an existing fact
   before adding a row with a country-level number; add new ones to the facts file, not the model.
-- **Credit for shared outcomes:** where the evaluator credits the charity with a share of an
-  outcome, keep the full outcome and the share as separate rows and combine them with
-  `if($full_credit, 1, share)`, so visitors can switch to full credit.
+- **Credit for shared outcomes:** one toggle, `$resource_shares`. Off: the evaluator's
+  counterfactual logic as published. On: an outcome is shared by everything that went into it
+  (every funder's money, in-kind costs, staff's forgone pay). Where the evaluator subtracts or adds
+  for other funders' money (leverage, funging, crowding in or out), wrap that step in
+  `if($resource_shares, <the figure before it>, …)` so on lands on value per dollar of all
+  spending. Where the evaluator credits the charity with a share of an outcome, keep the full
+  outcome and the share as separate rows; the share applies in both modes.
 - **Salary sacrifice:** add a "Your dollar's share" section like the existing models: staff pay as
   a share of cost, pay gap versus comparable for-profit jobs (both judgment, with reasoning), the
-  forgone salary, the cash share of full cost using `if($count_salary_sacrifice, …, 0)`, and a
+  forgone salary, the cash share of full cost using `if($resource_shares, …, 0)`, and a
   per-donor-dollar output row. Use the charity's financials for staff costs where they exist.
 - **Where we disagree** with an input, keep our value in `value`, the evaluator's in `published`,
   and say why in the explainer.
@@ -111,7 +114,7 @@ is the reference). Then:
 - Same charity, different setting (country, program)? Make a `variant` that `extends` the parent
   and overrides only the rows that differ, with `expected` on the rows the sheet reports.
 
-- **Write-up:** `writeups/<id>.md`, a one-page evaluation shown on the charity's page. Sections:
+- **Write-up:** `writeups/<id>.md`, a one-page evaluation shown on the charity's page under its own heading, so sections are `###` headings. Sections:
   Summary (bottom line in both views and the range), What the charity does, How the impact
   happens, How the model works, What drives the result (the top swings from
   `npm run check -- <id>`), Where we differ from the evaluator, Biggest uncertainties, What isn't
