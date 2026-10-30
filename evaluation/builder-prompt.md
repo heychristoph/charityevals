@@ -27,7 +27,7 @@ evaluation rules:
   `npx tsx scripts/audit-model.ts models/{cause}/{id}.json --exclude {evaluator model ids}` (the exclusion keeps the reference class from showing the answer). (Don't run `npm run check`: the
   sandbox has no bulk models, so the summaries check doesn't apply.)
 
-Report at the end: the bottom line (native unit, × GiveDirectly, joint low–high), the values of the
+Report at the end: the bottom line (native unit, years of healthy life per $1,000, joint low–high), the values of the
 canonical rows, audit rounds (high/medium/low counts each round, what you changed), every source
 you could not access, any blind-rule incidents, and anything in the skill or templates that was
 unclear, missing or wrong (be specific: this is how the skill gets fixed).

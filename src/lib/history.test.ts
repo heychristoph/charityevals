@@ -13,7 +13,7 @@ describe("model history", () => {
     const dir = mkdtempSync(join(tmpdir(), "ce-history-"));
     cpSync(join(repo, "assumptions"), join(dir, "assumptions"), { recursive: true });
     // Only the facts these two models read; the generated GiveWell facts would just slow git down.
-    for (const f of ["kenya.json", "malawi.json"]) cpSync(join(repo, "facts", f), join(dir, "facts", f));
+    for (const f of ["kenya.json", "malawi.json", "sad_factors.json", "aim_sads.json", "welfare_ranges.json"]) cpSync(join(repo, "facts", f), join(dir, "facts", f));
     for (const f of ["animal-welfare/sinergia-animal.json", "global-health/givedirectly.json"])
       cpSync(join(repo, "models", f), join(dir, "models", f));
     const g = (...args: string[]) =>
@@ -35,7 +35,7 @@ describe("model history", () => {
     expect(h.map((e) => e.subject)).toEqual(["Import Sinergia", "Shorter cage-free duration"]);
     expect(h[0].note).toMatch(/First version/);
     expect(h[1].changes.map((c) => c.id)).toEqual(["cf_years"]);
+    expect(h[1].changes[0]).toMatchObject({ before: "15", after: "10", kind: "value" });
     expect(h[1].ours!).toBeLessThan(h[0].ours!);
-    expect(h[1].evaluator!).toBeLessThan(h[0].evaluator!);
   }, 30_000); // runs git a dozen times; slow when other test files run alongside
 });

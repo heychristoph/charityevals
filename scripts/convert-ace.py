@@ -293,7 +293,7 @@ rows_out += [
     {"id": "salary_sacrifice", "section": "donor", "label": "Salary forgone by staff (in-kind donation)", "format": "usd",
      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"},
     {"id": "donor_cost_share", "section": "donor", "label": "Share of the full cost paid by cash donations", "format": "percent",
-     "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"},
+     "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"},
     {"id": "sads_per_donor_dollar", "section": "donor", "label": f"{a.unit_label} per dollar you give", "format": "small" if a.per != 1 else "number",
      "formula": "sads_per_dollar * donor_cost_share"},
 ]
@@ -312,7 +312,8 @@ for r in rows_out:
 
 # Credit shared with other organisations: ACE deducts other groups' contribution to an achievement. The
 # full-credit toggle counts the whole achievement instead (as Sinergia's model does), so each such input
-# keeps ACE's estimate in a "_shared" row and the row the formulas use is zero under full credit.
+# keeps ACE's estimate in a "_shared" row, which the formulas read through the original row. ACE's split
+# stands in for each group's share of the resources behind a win, so it applies in both credit modes.
 ATTRIBUTION = re.compile(r"contribution (made )?by other (organi[sz]ations|charities|groups)", re.I)
 shared_rows = []
 for r in rows_out:
@@ -320,8 +321,8 @@ for r in rows_out:
         shared = {**r, "id": f"{r['id']}_shared", "label": f"{r['label']} (ACE's estimate)"}
         best = r["value"]["best"] if isinstance(r["value"], dict) else r["value"]
         for k in ("value", "kind", "source", "explainer"): r.pop(k, None)
-        r.update({"formula": f"if($full_credit, 0, {shared['id']})", "expected": best,
-                  "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."})
+        r.update({"formula": shared["id"], "expected": best,
+                  "explainer": "ACE's estimate of other organisations' share of the credit."})
         shared_rows.append(shared)
 rows_out = shared_rows + rows_out
 
@@ -331,11 +332,11 @@ model = {
     "summary": (f"{a.what} A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet "
                 f"({len(programs)} program{'s' if len(programs) > 1 else ''} with {a.unit_label} estimates: {names}).").strip(),
     "source": {"publisher": "Animal Charity Evaluators", "title": f"{a.name} review", "url": a.review, "sheet": a.sheet_url,
-               "published": a.published, "retrieved": "2026-10-26", "license": "Unclear: check ACE's terms before republishing"},
+               "published": a.published, "retrieved": "2026-10-26", "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"},
     "sections": [s for s in sections if any(r.get("section") == s["id"] for r in rows_out)],
     "rows": rows_out,
     "output": {"row": "sads_per_donor_dollar", "unit": a.unit, "label": f"{a.unit_label} per dollar you give"},
-    "evaluator": {"name": "ACE", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0,
+    "evaluator": {"name": "ACE", "assumptions": {"resource_shares": 0,
                                                  **({"discount_rate": ace_rate} if ace_rate is not None else {})}},
 }
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)

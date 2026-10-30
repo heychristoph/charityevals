@@ -111,6 +111,11 @@
     {
       "id": "counterfactual_program_outcomes",
       "title": "Counterfactual program outcomes"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -818,38 +823,38 @@
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "value": -0.04737736968,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!AN133"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!AN133.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!AN133.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.04737736968)",
+      "expected": -0.04737736968
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_into_the_2))",
       "expected": -0.04737736968,
       "section": "leverage_and_funging_adjustment"
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "value": -0.2624949456,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!AN134"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!AN134.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!AN134.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.2624949456)",
+      "expected": -0.2624949456
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_out_of_th_2))",
       "expected": -0.2624949456,
       "section": "leverage_and_funging_adjustment"
     },
@@ -912,13 +917,13 @@
     {
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects (overall)",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H129"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H129.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H129. Reads the shared fact @givewell.short_term_anemia_effects (0.09, the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.09.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -972,13 +977,13 @@
     {
       "id": "children_reached_by_vas_campaigns_may_have_lower_than_averag",
       "label": "Children reached by VAS campaigns may have lower than average baseline mortality rates (overall)",
-      "value": -0.1,
-      "kind": "estimate",
+      "formula": "@givewell.children_reached_by_vas_campaigns_may_have_lower_than_averag",
+      "published": -0.1,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H136"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H136.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H136. Reads the shared fact @givewell.children_reached_by_vas_campaigns_may_have_lower_than_averag (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's -0.1.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -992,19 +997,19 @@
     {
       "id": "adjustment_for_leverage_and_funging",
       "label": "Adjustment for leverage and funging",
-      "value": -0.3098723153,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!AN135"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!AN135.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!AN135.",
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "if($resource_shares, 0, -0.3098723153)",
+      "expected": -0.3098723153
     },
     {
       "id": "overall_adjustment_for_leverage_and_funging",
       "label": "Overall adjustment for leverage and funging",
-      "formula": "adjustment_for_leverage_and_funging",
+      "formula": "if($resource_shares, 0, (adjustment_for_leverage_and_funging))",
       "format": "percent",
       "expected": -0.3098723153,
       "section": "cost_effectiveness_after_all_adjustments"
@@ -1024,11 +1029,60 @@
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
       "label": "Units of value generated per dollar spent by the grantee, after accounting for all adjustments",
-      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / total_spending_contributed_by_grantee_4",
+      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)",
       "expected": 0.01562715325,
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "explainer": "With credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     },
     {
       "id": "cost_effectiveness_in_terms_of_multiples_of_givedirectly_s_u_2",
@@ -1047,19 +1101,19 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
       "label": "Leverage and funging adjustment for counterfactual output estimates",
-      "value": -0.3098723153,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!AN140"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!AN140.",
-      "section": "adjustments_affecting_program_outputs"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!AN140.",
+      "section": "adjustments_affecting_program_outputs",
+      "formula": "if($resource_shares, 0, -0.3098723153)",
+      "expected": -0.3098723153
     },
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es",
       "label": "Leverage and funging adjustment for counterfactual output estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_output_es_2))",
       "expected": -0.3098723153,
       "section": "adjustments_affecting_program_outputs"
     },
@@ -1081,7 +1135,7 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es_3",
       "label": "Leverage and funging adjustment for counterfactual output estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_output_es_2))",
       "expected": -0.3098723153,
       "section": "adjustments_affecting_program_outcomes"
     },
@@ -1133,17 +1187,20 @@
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
       "life_value_multiplier": 1,
-      "uov_per_ln_consumption": 1.4426950408889634
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "resource_shares": 0
     }
   },
   "resources": [

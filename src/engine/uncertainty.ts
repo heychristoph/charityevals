@@ -9,8 +9,8 @@
 // so it runs on 8,000-row models in the browser. Default spreads only feed this view; the joint low and
 // high on the rankings use published ranges alone.
 
-import { evaluate, parse, refs, type Node, type Scope } from "./expr";
-import { hasRange, inputRange, pickValue, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
+import { evaluate, refs, type Node, type Scope } from "./expr";
+import { hasRange, headlineConversion, inputRange, pickValue, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
 import { rowsFeeding } from "./sensitivity";
 
 /** Where a number comes from, for grouping: your shared assumptions, the evaluator's judgment calls,
@@ -73,11 +73,11 @@ export type Uncertainty = {
   exprAbsVar: (expr: Node) => number;
   /** The model's own bottom line, central. */
   result: number;
-  /** Variance of ln(result in the common unit), every source together: the 100% of both the
-   * breakdown and the tree. */
+  /** Variance of ln(headline), every source together: the 100% of both the breakdown and the tree.
+   * The headline is in years of healthy life, so a healthy year's value counts only where the
+   * model's unit doesn't already cancel it. */
   total: number;
-  /** Share of it from converting the model's own unit into the common one (shared exchange rates),
-   * which the tree, built on the model's own result, doesn't show. */
+  /** Share of it from converting the model's own result into the headline (shared exchange rates). */
   conversionShare: number;
   /** Calculated rows with a published range: each counts as one source, standing in for the
    * inputs it's calculated from, which add nothing more through it. */
@@ -105,11 +105,11 @@ function spreadOf(v: number, published: { low: number; high: number } | undefine
   return { spread: Math.abs(Math.log(high / low)) / 2, low: Math.min(low, high), high: Math.max(low, high) };
 }
 
-export function uncertainty(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View): Uncertainty {
+export function uncertainty(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View, inputs: Record<string, number> = {}): Uncertainty {
   const a = viewAssumptions(m, av, view);
   const feeding = rowsFeeding(m);
   const leafVals = (scope: Scope, name: string) =>
-    scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : pickValue(lib.facts.get(name)?.value);
+    scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value);
 
   // Spreads of every number the result can depend on. A calculated row with a published range (an
   // evaluator's interval on, say, a mortality reduction) is taken at its word, as a source in its own
@@ -126,7 +126,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   for (const id of feeding) {
     const r = m.byId.get(id);
-    if (!r || r.node || r.format === "toggle" || CONSTANT.test(r.label)) continue;
+    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || CONSTANT.test(r.label)) continue;
     const range = inputRange(r, view);
     const source = sourceOf(r);
     const v = values[id];
@@ -140,8 +140,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     r?.assumptionDeps.forEach((x) => assumptionIds.add(x));
     r?.factDeps.forEach((x) => factIds.add(x));
   }
-  const conv = m.output ? lib.assumptions.units[m.output.unit]?.to_common : undefined;
-  const convNode = conv ? parse(conv) : undefined;
+  const convNode = m.output ? headlineConversion(lib, m.output.unit) : undefined;
   if (convNode) refs(convNode).assumptions.forEach((x) => assumptionIds.add(x));
   for (const id of assumptionIds) {
     const row = lib.assumptions.rows.find((r) => r.id === id);
@@ -238,7 +237,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   const G = m.output && y ? backward(new Map([[`row:${m.output.row}`, 1]])) : new Map<string, number>();
   const lnD = new Map<string, number>([...G].map(([k, g]) => [k, g / y]));
   const nativeVar = y ? absVar(G) / y ** 2 : 0;
-  // The common unit is the native result times a conversion built from shared assumptions.
+  // The headline is the native result times a conversion built from shared assumptions.
   if (convNode) {
     const base = evaluate(convNode, (s, n) => (s === "assumption" ? av[n] ?? NaN : NaN));
     if (base) for (const x of local(convNode, base)) lnD.set(`assumption:${x.name}`, (lnD.get(`assumption:${x.name}`) ?? 0) + x.d / base);

@@ -6,7 +6,7 @@
   "template": "cash-income",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, and the bottom line in units of value per dollar and × GiveDirectly.",
+  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
   "resources": [],
   "sections": [
     {
@@ -37,7 +37,8 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
   "rows": [
@@ -234,14 +235,14 @@
       "formula": "ln(1 + share_consumed_y1 * transfer_per_person_ppp / baseline_consumption)"
     },
     {
-      "id": "later_years_ratio",
+      "id": "later_gain_share_per_year",
       "section": "effect",
-      "label": "Value of later-year gains relative to year 1",
-      "format": "number",
+      "label": "Yearly gain in later years, as a share of the year-1 gain",
+      "format": "percent",
       "value": {
-        "low": 0.74,
-        "best": 1.23,
-        "high": 1.72
+        "low": 0.1,
+        "best": 0.165,
+        "high": 0.23
       },
       "kind": "estimate",
       "source": {
@@ -250,7 +251,36 @@
         "cell": "Consumption!B23; Inputs!D23:F23",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: returns on the invested share over later years, discounted, relative to year 1. GiveWell's GiveDirectly CEA (Nov 2024): 1.23 (0.74–1.72). For a recurring income gain instead of a lump sum, replace y1_ln_gain and this row with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
+      "explainer": "TEMPLATE: returns on the invested share in each later year, relative to the year-1 consumption gain. About 0.165 over 9 later years reproduces GiveWell's 1.23 (0.74–1.72) at 4% (GiveDirectly CEA, Nov 2024); cite the follow-up studies you use. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
+    },
+    {
+      "id": "later_years",
+      "section": "effect",
+      "label": "Years the later gains last",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 9,
+        "high": 15
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: follow-up study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: how long the invested share keeps paying returns, from follow-up studies."
+    },
+    {
+      "id": "later_years_ratio",
+      "section": "effect",
+      "label": "Value of later-year gains relative to year 1, present value",
+      "format": "number",
+      "formula": "later_gain_share_per_year * pv_annuity_due(1, $discount_rate, later_years) / (1 + $discount_rate)",
+      "explainer": "Later years' gains discounted at the shared rate, so the result moves with it."
     },
     {
       "id": "ln_gain_per_person",
@@ -343,8 +373,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "if($full_credit, 1, attribution_share_shared)",
-      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
     },
     {
       "id": "leverage_funging_adj",
@@ -451,7 +481,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
     },
     {
       "id": "salary_sacrifice",
@@ -465,7 +495,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",
@@ -479,6 +509,10 @@
   "output": {
     "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar you give"
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
   }
 }

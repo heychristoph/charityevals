@@ -127,6 +127,11 @@
     {
       "id": "counterfactual_program_outcomes",
       "title": "Counterfactual program outcomes"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -572,13 +577,13 @@
     {
       "id": "indirect_malaria_deaths_per_direct_malaria_death",
       "label": "Indirect malaria deaths per direct malaria death (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H71"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H71.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H71. Reads the shared fact @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 (0.75, the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_under_age_5"
     },
     {
@@ -659,13 +664,12 @@
     {
       "id": "malaria_deaths_among_people_under_age_5_per_year_2",
       "label": "Malaria deaths among people under age 5 per year",
-      "value": 44077.9481,
-      "kind": "observed",
+      "formula": "@givewell.number_of_under_5_malaria_deaths_per_year_gbd_2019",
       "source": {
         "title": "GiveWell (GBD 2019)",
         "cell": "Inputs!J140"
       },
-      "explainer": "Value from GiveWell's sheet, cell Inputs!J140.",
+      "explainer": "Value from GiveWell's sheet, cell Inputs!J140. Reads the shared fact @givewell.number_of_under_5_malaria_deaths_per_year_gbd_2019 (44077.95, the same number in GiveWell's other sheets), so every model uses one figure. GiveWell's own figure differs only in rounding.",
       "section": "mortality_reduction_among_people_age_5_and_older"
     },
     {
@@ -795,15 +799,110 @@
       "section": "malaria_incidence_reduction_among_people_under_age_15"
     },
     {
+      "id": "increase_in_annual_income_per_malaria_case_averted",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Increase in annual income per malaria case averted among people under age 15",
+      "format": "percent",
+      "value": 0.0058088,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H145"
+      },
+      "explainer": "Value from GiveWell's sheet, cell Inputs!H145."
+    },
+    {
+      "id": "adjusted_increase_in_ln_income_per_malaria_case_averted",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Adjusted increase in ln(income) per malaria case averted among people under age 15",
+      "formula": "ln(1 + increase_in_annual_income_per_malaria_case_averted)",
+      "expected": 0.005791993972,
+      "source": {
+        "title": "GiveWell",
+        "cell": "Main CEA!H97"
+      }
+    },
+    {
+      "id": "years_until_long_term_income_benefits_begin",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Average number of years between nets being distributed and the beginning of long-term benefits",
+      "value": 10,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H146"
+      },
+      "explainer": "Value from GiveWell's sheet, cell Inputs!H146."
+    },
+    {
+      "id": "discount_rate_for_future_benefits",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Discount rate for future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H147"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%."
+    },
+    {
+      "id": "discounted_increase_in_ln_income_per_malaria_case_averted",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Discounted increase in ln(income) per malaria case averted among people under age 15",
+      "formula": "adjusted_increase_in_ln_income_per_malaria_case_averted / (1 + discount_rate_for_future_benefits) ^ years_until_long_term_income_benefits_begin",
+      "expected": 0.003912863593,
+      "source": {
+        "title": "GiveWell",
+        "cell": "Main CEA!H100"
+      }
+    },
+    {
+      "id": "years_long_term_income_benefits_last",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Expected number of years the long-term benefits will last",
+      "value": 40,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H148"
+      },
+      "explainer": "Value from GiveWell's sheet, cell Inputs!H148."
+    },
+    {
+      "id": "present_value_of_individual_lifetime_benefits_per_malaria_case",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
+      "formula": "pv(discount_rate_for_future_benefits, years_long_term_income_benefits_last, -discounted_increase_in_ln_income_per_malaria_case_averted, 0, 1)",
+      "expected": 0.08054428131,
+      "source": {
+        "title": "GiveWell",
+        "cell": "Main CEA!H102"
+      },
+      "explainer": "The yearly gain in ln(income), received each year the benefits last, with later years counting less at your discount rate."
+    },
+    {
+      "id": "multiplier_for_resource_sharing_within_households",
+      "section": "long_term_income_increases_for_people_under_age_15",
+      "label": "Multiplier for resource sharing within households",
+      "value": 2,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H149"
+      },
+      "explainer": "Value from GiveWell's sheet, cell Inputs!H149."
+    },
+    {
       "id": "present_value_of_total_lifetime_benefits_per_malaria_case_av",
       "label": "Present value of total lifetime benefits per malaria case averted among people under age 15 (overall)",
-      "value": 0.1610885626,
-      "kind": "estimate",
+      "formula": "present_value_of_individual_lifetime_benefits_per_malaria_case * multiplier_for_resource_sharing_within_households",
+      "expected": 0.1610885626,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H104"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H104.",
       "section": "long_term_income_increases_for_people_under_age_15"
     },
     {
@@ -832,7 +931,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "units_of_value_from_mortality_reduction_among_people_under_a",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -847,7 +946,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older (overall)",
       "explainer": "GiveWell's moral weight: 73.1914 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "units_of_value_from_mortality_reduction_among_people_age_5_a",
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914
     },
     {
@@ -898,7 +997,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "total_value_of_outcomes",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -913,7 +1012,7 @@
       "label": "Value assigned to averting a malaria-attributable death of a person age 5 or older (overall)",
       "explainer": "GiveWell's moral weight: 73.1914 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "total_value_of_outcomes",
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914
     },
     {
@@ -926,13 +1025,12 @@
     {
       "id": "value_of_increased_income_through_averting_a_case_of_malaria",
       "label": "Value of increased income through averting a case of malaria in a person under age 15 (overall)",
-      "value": 0.2324016704,
-      "kind": "estimate",
+      "formula": "present_value_of_total_lifetime_benefits_per_malaria_case_av * value_assigned_to_increasing_ln_by_one_unit_for_one_person_f",
+      "expected": 0.2324016704,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H133"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H133.",
       "section": "total_value_of_outcomes"
     },
     {
@@ -1052,38 +1150,38 @@
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "value": -0.004114250426,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!J111"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!J111.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!J111.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.004114250426)",
+      "expected": -0.004114250426
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_into_the_2))",
       "expected": -0.004114250426,
       "section": "leverage_and_funging_adjustment"
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "value": -0.1461607338,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!J112"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!J112.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!J112.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.1461607338)",
+      "expected": -0.1461607338
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_out_of_th_2))",
       "expected": -0.1461607338,
       "section": "leverage_and_funging_adjustment"
     },
@@ -1115,13 +1213,13 @@
     {
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects (overall)",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H177"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H177.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H177. Reads the shared fact @givewell.short_term_anemia_effects (0.09, the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.09.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -1236,7 +1334,7 @@
     {
       "id": "overall_adjustment_for_leverage_and_funging",
       "label": "Overall adjustment for leverage and funging",
-      "formula": "sum(adjustment_for_the_possibility_of_crowding_funding_into_the, adjustment_for_the_possibility_of_crowding_funding_out_of_th)",
+      "formula": "if($resource_shares, 0, (sum(adjustment_for_the_possibility_of_crowding_funding_into_the, adjustment_for_the_possibility_of_crowding_funding_out_of_th)))",
       "format": "percent",
       "expected": -0.1502749842,
       "section": "cost_effectiveness_after_all_adjustments"
@@ -1256,11 +1354,60 @@
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
       "label": "Units of value generated per philanthropic dollar spent, after accounting for all adjustments",
-      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / total_spending_contributed_by_grantee_4",
+      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, total_spending_by_all_contributors, total_spending_contributed_by_grantee_4)",
       "expected": 0.04871465413,
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "explainer": "With credit by share of resources, divided by everyone's spending on the program, not just the grantee's."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     },
     {
       "id": "cost_effectiveness_in_terms_of_multiples_of_our_benchmark_2",
@@ -1273,19 +1420,19 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
       "label": "Leverage and funging adjustment for counterfactual output estimates",
-      "value": -0.1502749842,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!J118"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!J118.",
-      "section": "adjustments_affecting_program_outputs"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!J118.",
+      "section": "adjustments_affecting_program_outputs",
+      "formula": "if($resource_shares, 0, -0.1502749842)",
+      "expected": -0.1502749842
     },
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es",
       "label": "Leverage and funging adjustment for counterfactual output estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_output_es_2))",
       "expected": -0.1502749842,
       "section": "adjustments_affecting_program_outputs"
     },
@@ -1300,19 +1447,19 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_outcome_e",
       "label": "Leverage and funging adjustment for counterfactual outcome estimates",
-      "value": -0.1549071168,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!J126"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!J126.",
-      "section": "adjustments_affecting_program_outcomes"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!J126.",
+      "section": "adjustments_affecting_program_outcomes",
+      "formula": "if($resource_shares, 0, -0.1549071168)",
+      "expected": -0.1549071168
     },
     {
       "id": "row_215",
       "label": "Leverage and funging adjustment for counterfactual outcome estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_outcome_e",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_outcome_e))",
       "expected": -0.1549071168,
       "section": "adjustments_affecting_program_outcomes"
     },
@@ -1395,17 +1542,21 @@
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
       "life_value_multiplier": 1,
-      "uov_per_ln_consumption": 1.4426950408889634
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "resource_shares": 0,
+      "discount_rate": 0.04
     }
   },
   "resources": [

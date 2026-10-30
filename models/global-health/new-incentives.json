@@ -135,6 +135,15 @@
     {
       "id": "counterfactual_program_outcomes",
       "title": "Counterfactual program outcomes"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    },
+    {
+      "id": "other_contributors",
+      "title": "Costs paid by others"
     }
   ],
   "rows": [
@@ -314,13 +323,13 @@
     {
       "id": "mortalities_indirectly_attributable_to_vaccine_preventable_d",
       "label": "Mortalities indirectly attributable to vaccine-preventable disease per mortality directly caused by vaccine-preventable disease (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H45"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H45.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H45. Reads the shared fact @givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_under_age_5"
     },
     {
@@ -417,13 +426,13 @@
     {
       "id": "mortalities_indirectly_attributable_to_vaccine_preventable_d_2",
       "label": "Mortalities indirectly attributable to vaccine-preventable disease per mortality directly caused by vaccine-preventable disease (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H55"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H55.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H55. Reads the shared fact @givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_age_5_through_age_14"
     },
     {
@@ -551,13 +560,13 @@
     {
       "id": "mortalities_indirectly_attributable_to_vaccine_preventable_d_3",
       "label": "Mortalities indirectly attributable to vaccine-preventable disease per mortality directly caused by vaccine-preventable disease (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H68"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H68.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H68. Reads the shared fact @givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_age_15_through_age_49"
     },
     {
@@ -685,13 +694,13 @@
     {
       "id": "mortalities_indirectly_attributable_to_vaccine_preventable_d_4",
       "label": "Mortalities indirectly attributable to vaccine-preventable disease per mortality directly caused by vaccine-preventable disease (overall)",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d",
+      "published": 0.75,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H81"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H81.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H81. Reads the shared fact @givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.75.",
       "section": "mortality_reduction_among_people_age_50_through_age_74"
     },
     {
@@ -757,7 +766,7 @@
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "long_term_income_increases",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -830,7 +839,7 @@
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "units_of_value_from_mortality_reduction_among_people_under_a",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -968,7 +977,7 @@
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person under age 5 (overall)",
       "explainer": "GiveWell's moral weight: 116.253 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
       "section": "total_value_of_outcomes",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -1184,19 +1193,19 @@
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "value": -0.1131989389,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!V95"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!V95.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!V95.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.1131989389)",
+      "expected": -0.1131989389
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
       "label": "Adjustment for the possibility of crowding funding into the program (leverage)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_into_the_2))",
       "format": "percent",
       "expected": -0.1131989389,
       "section": "leverage_and_funging_adjustment"
@@ -1204,19 +1213,19 @@
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "value": -0.05245162943,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!V96"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!V96.",
-      "section": "leverage_and_funging_adjustment"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!V96.",
+      "section": "leverage_and_funging_adjustment",
+      "formula": "if($resource_shares, 0, -0.05245162943)",
+      "expected": -0.05245162943
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
       "label": "Adjustment for the possibility of crowding funding out of the program (funging)",
-      "formula": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
+      "formula": "if($resource_shares, 0, (adjustment_for_the_possibility_of_crowding_funding_out_of_th_2))",
       "format": "percent",
       "expected": -0.05245162943,
       "section": "leverage_and_funging_adjustment"
@@ -1333,13 +1342,13 @@
     {
       "id": "mortality_effects_of_indirectly_incentivized_vaccines_beside",
       "label": "Mortality effects of indirectly incentivized vaccines besides rotavirus (i.e., polio, yellow fever, rubella, mumps, varicella meningitis A) (overall)",
-      "value": 0.036,
-      "kind": "estimate",
+      "formula": "@givewell.mortality_effects_of_indirectly_incentivized_vaccines_beside",
+      "published": 0.036,
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H221"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H221.",
+      "explainer": "Value from GiveWell's sheet, cell Main CEA!H221. Reads the shared fact @givewell.mortality_effects_of_indirectly_incentivized_vaccines_beside (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.036.",
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
@@ -1406,19 +1415,19 @@
     {
       "id": "overall_adjustment_for_leverage_and_funging_2",
       "label": "Overall adjustment for leverage and funging",
-      "value": -0.1656505683,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!V97"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!V97.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!V97.",
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "if($resource_shares, 0, -0.1656505683)",
+      "expected": -0.1656505683
     },
     {
       "id": "overall_adjustment_for_leverage_and_funging",
       "label": "Overall adjustment for leverage and funging",
-      "formula": "overall_adjustment_for_leverage_and_funging_2",
+      "formula": "if($resource_shares, 0, (overall_adjustment_for_leverage_and_funging_2))",
       "format": "percent",
       "expected": -0.1656505683,
       "section": "cost_effectiveness_after_all_adjustments"
@@ -1439,11 +1448,101 @@
       "section": "cost_effectiveness_after_all_adjustments"
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": 0.19,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, New Incentives review (spending breakdown, November 2017 to December 2023)",
+        "url": "https://www.givewell.org/charities/new-incentives"
+      },
+      "explainer": "Staff compensation was 19% of New Incentives' spending from November 2017 to December 2023 ($8.90m of $46.21m), per GiveWell's review."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "government_cost_per_child_counterfactually_vaccinated",
+      "section": "other_contributors",
+      "label": "Government costs per child counterfactually vaccinated",
+      "format": "usd",
+      "value": 34.28598,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H318"
+      },
+      "explainer": "GiveWell's estimate of what Nigeria's governments spend on vaccines and clinic time for each extra child vaccinated (LeverageFunging!H11)."
+    },
+    {
+      "id": "gavi_cost_per_child_counterfactually_vaccinated",
+      "section": "other_contributors",
+      "label": "Gavi costs per child counterfactually vaccinated",
+      "format": "usd",
+      "value": 28.63798,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell",
+        "cell": "Inputs!H319"
+      },
+      "explainer": "GiveWell's estimate of what Gavi spends on vaccines for each extra child vaccinated (LeverageFunging!H12)."
+    },
+    {
+      "id": "vaccine_cost_per_child_paid_by_others",
+      "section": "other_contributors",
+      "label": "Vaccines and clinic time per extra child vaccinated, paid by government and Gavi",
+      "format": "usd",
+      "formula": "government_cost_per_child_counterfactually_vaccinated + gavi_cost_per_child_counterfactually_vaccinated",
+      "explainer": "New Incentives pays the cash incentives; the government and Gavi pay for the vaccines and the health workers who give them. GiveWell's model counts that money through its leverage adjustment, not as a cost; with credit by share of resources it counts as part of the cost. The figures are GiveWell's own, from the same sheet."
+    },
+    {
+      "id": "spending_by_others",
+      "section": "other_contributors",
+      "label": "Spending by government and Gavi on the extra vaccinations",
+      "format": "usd",
+      "formula": "children_counterfactually_vaccinated * vaccine_cost_per_child_paid_by_others"
+    },
+    {
       "id": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
       "label": "Units of value generated per dollar spent by the grantee, after accounting for all adjustments",
-      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / row_240",
+      "formula": "total_value_generated_by_grantee_spending_after_adjusting_fo / if($resource_shares, row_240 + spending_by_others, row_240)",
       "expected": 0.008873711181,
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "explainer": "With credit by share of resources, divided by everyone's spending (New Incentives' plus what the government and Gavi spend on the extra vaccinations), times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     },
     {
       "id": "cost_effectiveness_in_terms_of_multiples_of_our_benchmark_af",
@@ -1456,19 +1555,19 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_impact_es_2",
       "label": "Leverage and funging adjustment for counterfactual impact estimates",
-      "value": -0.1656505683,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!V100"
       },
-      "explainer": "Value from GiveWell's sheet, cell LeverageFunging!V100.",
-      "section": "adjustments_affecting_program_outputs"
+      "explainer": "Switched off when credit is shared by share of resources.\n\nValue from GiveWell's sheet, cell LeverageFunging!V100.",
+      "section": "adjustments_affecting_program_outputs",
+      "formula": "if($resource_shares, 0, -0.1656505683)",
+      "expected": -0.1656505683
     },
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_impact_es",
       "label": "Leverage and funging adjustment for counterfactual impact estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_impact_es_2",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_impact_es_2))",
       "format": "percent",
       "expected": -0.1656505683,
       "section": "adjustments_affecting_program_outputs"
@@ -1484,7 +1583,7 @@
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_impact_es_3",
       "label": "Leverage and funging adjustment for counterfactual impact estimates",
-      "formula": "leverage_and_funging_adjustment_for_counterfactual_impact_es_2",
+      "formula": "if($resource_shares, 0, (leverage_and_funging_adjustment_for_counterfactual_impact_es_2))",
       "expected": -0.1656505683,
       "section": "adjustments_affecting_program_outcomes"
     },
@@ -1562,18 +1661,21 @@
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_dollar_spent_by_the_grantee_aft",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
       "life_value_multiplier": 1,
       "uov_per_ln_consumption": 1.4426950408889634,
-      "discount_rate": 0.04
+      "discount_rate": 0.04,
+      "resource_shares": 0
     }
   },
   "resources": [

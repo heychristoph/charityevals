@@ -37,6 +37,16 @@ const rowShape = {
   label: z.string(),
   /** Shared assumptions: the jargon name economists use, shown once beside the plain label. */
   technical: z.string().optional(),
+  /** Shared assumptions only: show the value times `factor`, in `format`, without changing what the
+   * models read. Lets a multiplier on an evaluator's weights read in the site's own terms. */
+  shown_as: z.object({ factor: z.number().positive(), format: Format.optional() }).strict().optional(),
+  /** Shared assumptions only: a number taken from evidence rather than a judgment call. Listed with
+   * its source and range on the assumptions page, but not offered as a slider. */
+  fixed: z.boolean().optional(),
+  /** Shared assumptions only: the slider's ends, when they differ from the plausible range the
+   * uncertainty uses. `zero` adds a stop at 0 below a log scale, for a weight some readers set to
+   * nothing at all. */
+  slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional() }).strict().optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -49,8 +59,12 @@ const rowShape = {
    * the formula's. */
   range: z.object({ low: z.number(), high: z.number(), note: z.string().optional() }).strict().optional(),
   /** The source evaluator's value, when ours differs. The evaluator view uses it; the explainer
-   * must say why we differ. */
+   * must say why we differ. On a calculated row (one that reads a shared fact in our view, say), the
+   * evaluator view uses this number instead of the formula, so the sheet still reproduces. */
   published: z.union([z.number(), Range]).optional(),
+  /** Facts that stand for one physical change (a hen moved out of a cage): the change in a few words,
+   * for the note on rows that use the fact in place of an evaluator's own number. */
+  change: z.string().optional(),
   kind: Kind.optional(),
   source: Source.optional(),
   /** Markdown. Why this row exists, how the number was chosen, what would change it. */
@@ -72,8 +86,8 @@ export const Row = z
       ctx.addIssue({ code: "custom", message: `row ${r.id}: input rows need a source or an explainer` });
     if (r.range !== undefined && r.formula === undefined)
       ctx.addIssue({ code: "custom", message: `row ${r.id}: range is for calculated rows; give inputs a low/best/high value` });
-    if (r.published !== undefined && (r.value === undefined || !r.explainer))
-      ctx.addIssue({ code: "custom", message: `row ${r.id}: a published value needs our own value and an explainer saying why they differ` });
+    if (r.published !== undefined && !r.explainer)
+      ctx.addIssue({ code: "custom", message: `row ${r.id}: a published value needs an explainer saying why ours differs` });
   });
 export type Row = z.infer<typeof Row>;
 
@@ -87,7 +101,10 @@ export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
  * structure, so models of the same family can be compared row by row. */
 export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta"]);
 
-export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
+/** `kind`: whose rows these are. evaluator (the default): rows that reproduce the evaluator's sheet.
+ * ours: charityevals' steps after the evaluator's bottom line (credit, bridges, the species step), the
+ * same for every model of the kind (docs/normalization.md). */
+export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional(), kind: z.enum(["evaluator", "ours"]).optional() }).strict();
 
 export const Resource = z
   .object({
@@ -124,6 +141,49 @@ export const Charity = z
     donate_via: z.string().optional(),
     summary: z.string().optional(),
     resources: z.array(Resource).default([]),
+    /** A charity that runs several programs an evaluator models separately (src/engine/ranking.ts).
+     * Each evaluator's newest model of each program counts on the rankings, combined by `weight`;
+     * a model that matches no program doesn't count. Without this, all of an evaluator's models are
+     * one program. */
+    programs: z
+      .array(
+        z
+          .object({
+            id: z.string(),
+            label: z.string(),
+            /** Regular expression over model ids, tried in order: a model belongs to the first program it matches. */
+            models: z.string(),
+            /** The program's share of the charity's funding, in any unit (e.g. dollars granted). Used only
+             * when every program has one; otherwise the evaluator's figure is the programs' median. 0: the
+             * program got no money in the window, so it doesn't count. */
+            weight: z.number().nonnegative().optional(),
+            /** URL and a one-line note on how the weight was reached. */
+            weight_source: z.string().optional(),
+          })
+          .strict(),
+      )
+      .optional(),
+    /** Money per location for a model with location variants (src/engine/ranking.ts): its figure is the
+     * funding-weighted mean of these entries instead of the median location. An entry can cover several
+     * locations when the split between them isn't published (they count as their median). List every
+     * location of the family; unfunded ones at weight 0. */
+    locations: z
+      .array(
+        z
+          .object({
+            /** The family's own model (the one the variants extend), e.g. "against-malaria-foundation". */
+            family: z.string(),
+            label: z.string(),
+            /** Regular expression over the family's model ids (the family's own model is a location too). */
+            models: z.string(),
+            /** Dollars granted there in the window the source note names. */
+            weight: z.number().nonnegative(),
+            /** URL and a one-line note. */
+            weight_source: z.string(),
+          })
+          .strict(),
+      )
+      .optional(),
   })
   .strict();
 export type Charity = z.infer<typeof Charity>;
@@ -165,7 +225,18 @@ export const Model = z
     sections: z.array(Section).default([]),
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */
-    output: z.object({ row: z.string(), unit: z.string(), label: z.string() }).strict().optional(),
+    output: z
+      .object({
+        row: z.string(),
+        unit: z.string(),
+        label: z.string(),
+        /** The evaluator's own bottom line, in its own unit (e.g. SADs per dollar), before our steps. */
+        native: z.object({ row: z.string(), unit: z.string() }).strict().optional(),
+        /** Animal models: the species their result passes through, each by its own `ced_<species>` row. */
+        species: z.array(z.string()).optional(),
+      })
+      .strict()
+      .optional(),
     /** Imported by a generic converter (scripts/convert-sheet.py, convert-guesstimate.py) and traced
      * from the evaluator's sheet. scripts/link-parameters.py ties its moral weights, discount rate and
      * DALY value to the shared assumptions, and shared data to facts. */
@@ -210,7 +281,7 @@ export const Assumptions = z
     groups: z.array(AssumptionGroup),
     rows: z.array(Row),
     units: z.record(z.string(), Unit),
-    common: z.object({ unit: z.string(), benchmark: z.string(), benchmark_label: z.string() }).strict(),
+    common: z.object({ unit: z.string(), benchmark: z.string(), benchmark_label: z.string().optional() }).strict(),
   })
   .strict();
 export type Assumptions = z.infer<typeof Assumptions>;

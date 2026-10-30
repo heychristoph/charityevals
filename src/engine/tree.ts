@@ -4,7 +4,9 @@
 // Works one formula at a time, so it costs the same on a 20-row model as on an 8,000-row one: only
 // the nodes the reader has opened are ever looked at.
 import { evaluate, type Lookup, type Node } from "./expr";
-import { pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
+import { headlineNode, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
+import { formulaText } from "./derive";
+import type { Uncertainty } from "./uncertainty";
 
 /** One part of a formula and how it joins the others: "+", "−", "×", "÷", "^", or a function's role. */
 export type Part = { op?: string; node: Node };
@@ -49,17 +51,19 @@ export function shapeOf(n: Node): Shape {
       if (n.op === "^") return { how: "raised to a power", parts: [{ node: n.left }, { op: "^", node: n.right }] };
       return { how: "1 if true, else 0", parts: [{ node: n.left }, { op: CMP[n.op], node: n.right }] };
     case "call":
-      if (n.fn === "if") return { how: "depends on a condition", parts: n.args.map((a, i) => ({ op: ["if", "then", "else"][i], node: a })) };
+      // Read as the formula itself ("if … then … else …"): a "depends on a condition" label only took room.
+      if (n.fn === "if") return { parts: n.args.map((a, i) => ({ op: ["if", "then", "else"][i], node: a })) };
       if (n.fn === "iferror") return { how: "with a fallback", parts: n.args.map((a, i) => ({ op: i ? "if invalid" : undefined, node: a })) };
       return { how: FN[n.fn] ?? n.fn, parts: n.args.map((a) => ({ node: a })) };
     default: return { parts: [] };
   }
 }
 
-/** Looks up rows (from computed values), assumptions (as this view sees them) and facts. */
-export function lookupFor(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View): Lookup {
+/** Looks up rows (from computed values), assumptions (as this view sees them) and facts. `inputs`
+ * holds the reader's edits, facts under "@key" as in compute. */
+export function lookupFor(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View, inputs: Record<string, number> = {}): Lookup {
   const a = viewAssumptions(m, av, view);
-  return (scope, name) => (scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : pickValue(lib.facts.get(name)?.value));
+  return (scope, name) => (scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value));
 }
 
 function replace(n: Node, target: Node, by: Node): Node {
@@ -176,11 +180,27 @@ export type TreeNode = {
   /** Change in the bottom line per unit change in this number, through this branch. Unlike `e`, it
    * exists when this number or its formula is zero. */
   g?: number;
+  /** A name for a node no row names: the headline the tree ends in. */
+  label?: string;
 };
 
-/** The root: the model's output row. */
-export function rootOf(m: ResolvedModel, look: Lookup): TreeNode {
-  return nodeFor(m, { type: "ref", scope: "row", name: m.output!.row }, "r", undefined, look, 1, 1);
+/** The headline every page shows, over the model's own result: its output row, converted with the
+ * unit's exchange rates into years of healthy life (DALYs), per $1,000 (see headlineNode). */
+export function headlineExpr(m: ResolvedModel, toCommon: string): Node {
+  return headlineNode({ type: "ref", scope: "row", name: m.output!.row }, toCommon);
+}
+
+/** The same as text, for reading and tests. */
+export function headlineFormula(m: ResolvedModel, toCommon: string): string {
+  return formulaText(headlineExpr(m, toCommon));
+}
+
+/** The root: the headline, years of healthy life per $1,000, when the model's unit converts
+ * (`toCommon`, the unit's conversion into the common unit); else the model's output row. */
+export function rootOf(m: ResolvedModel, look: Lookup, toCommon?: string): TreeNode {
+  if (toCommon === undefined) return nodeFor(m, { type: "ref", scope: "row", name: m.output!.row }, "r", undefined, look, 1, 1);
+  const expr = headlineExpr(m, toCommon);
+  return { key: "r", type: "expr", expr, via: [], value: safe(expr, look), e: 1, g: 1, label: "Years of healthy life per $1,000" };
 }
 
 function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined, look: Lookup, e: number | undefined, g?: number): TreeNode {
@@ -209,12 +229,20 @@ export function childrenOf(m: ResolvedModel, node: TreeNode, look: Lookup): Tree
 
 /** The keys from the root down to the first node showing a row (or having skipped it on the way),
  * breadth first, so the shortest route. Undefined when the bottom line doesn't use the row. */
-export function pathTo(m: ResolvedModel, rowId: string, look: Lookup): string[] | undefined {
-  const root = rootOf(m, look);
+export function pathTo(m: ResolvedModel, rowId: string, look: Lookup, toCommon?: string): string[] | undefined {
+  return pathToNode(m, look, toCommon, (n) => n.rowId === rowId || n.named === rowId || n.via.includes(rowId));
+}
+
+/** The same for an assumption or a shared fact: the first node that reads it. */
+export function pathToRef(m: ResolvedModel, scope: "assumption" | "fact", id: string, look: Lookup, toCommon?: string): string[] | undefined {
+  return pathToNode(m, look, toCommon, (n) => n.type === scope && n.refId === id);
+}
+
+function pathToNode(m: ResolvedModel, look: Lookup, toCommon: string | undefined, hit: (n: TreeNode) => boolean): string[] | undefined {
+  const root = rootOf(m, look, toCommon);
   const parent = new Map<string, string>();
   const seen = new Set<string>();
   const queue: TreeNode[] = [root];
-  const hit = (n: TreeNode) => n.rowId === rowId || n.named === rowId || n.via.includes(rowId);
   for (let i = 0; i < queue.length; i++) {
     const n = queue[i];
     if (hit(n)) {
@@ -237,4 +265,26 @@ export function pathTo(m: ResolvedModel, rowId: string, look: Lookup): string[] 
 /** Children without leverage: for searching, where only the structure matters. */
 function childrenOfStructure(m: ResolvedModel, node: TreeNode, look: Lookup): TreeNode[] {
   return shapeOf(node.expr!).parts.map((p, i) => nodeFor(m, p.node, `${node.key}.${i}`, p.op, look, undefined));
+}
+
+/** The row with a published range this node stands for: the row the formula names, a row it passed
+ * through on the way, or the row it ends at. */
+export function rangedRowOf(u: Uncertainty, n: TreeNode): string | undefined {
+  return [n.named, ...n.via, n.rowId].find((id): id is string => !!id && u.ranged.has(id));
+}
+
+/** Share of the bottom line's uncertainty coming through this node: the result's derivative with
+ * respect to it through this branch, squared, times its variance, both in its own units, so a node
+ * whose value is zero still shows what it carries. `result` is the tree's root value: derivatives
+ * through the tree are relative to it. */
+export function spreadShare(u: Uncertainty, n: TreeNode, result: number): number {
+  if (!u.total || !result || n.g === undefined) return 0;
+  const ranged = rangedRowOf(u, n);
+  const v = ranged ? u.rowAbsVar(ranged)
+    : n.type === "assumption" || n.type === "fact" ? u.leafAbsVar(n.type, n.refId!)
+    : n.rowId ? u.rowAbsVar(n.rowId)
+    : n.expr ? u.exprAbsVar(n.expr)
+    : 0;
+  // (change in ln(result) through this branch)² × this number's variance, out of the whole.
+  return Math.min(1, ((n.g / result) ** 2 * v) / u.total);
 }

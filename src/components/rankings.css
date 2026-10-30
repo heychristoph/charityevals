@@ -3,8 +3,12 @@
   display: grid;
   gap: var(--s3);
 }
-.rankings-caption {
-  font-size: 15px;
+.r-unit {
+  align-self: end;
+  padding-bottom: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 .ink {
   color: var(--ink);
@@ -18,7 +22,7 @@
   align-items: center;
 }
 .r-axis {
-  height: 22px;
+  min-height: 22px;
   border-bottom: 1px solid var(--rule-strong);
 }
 .r-axis .r-track {
@@ -53,11 +57,12 @@
 .r-name {
   display: flex;
   gap: var(--s3);
-  align-items: baseline;
+  align-items: flex-start;
 }
 .r-rank {
   color: var(--ink-3);
   font-size: 15px;
+  line-height: 22px;
   min-width: 1ch;
 }
 .r-link {
@@ -88,9 +93,6 @@
   width: 1px;
   background: var(--rule);
 }
-.r-grid-one {
-  background: var(--rule-strong);
-}
 .r-bar {
   position: absolute;
   left: 0;
@@ -110,7 +112,8 @@
 .r-dot {
   position: absolute;
   left: -7px;
-  top: 50%;
+  /* --lane: a row with several evaluators puts each dot in its own lane above or below the bar. */
+  top: calc(50% + var(--lane, 0px));
   width: 14px;
   height: 14px;
   transform: translateY(-50%);
@@ -129,29 +132,19 @@
   font: 600 20px/1.2 var(--serif);
 }
 
-.r-foot {
-  grid-column: 2 / 4;
-  display: flex;
-  gap: var(--s4);
-  flex-wrap: wrap;
-}
 .r-flags {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 5px;
+  margin-left: 4px;
 }
-.r-flags svg {
+.r-flags .info-tip-button {
   color: var(--warn);
-  flex: none;
-  position: relative;
-  top: 2px;
+}
+.r-flag-list {
+  margin: 0;
+  padding-left: 1.1em;
 }
 
 .r-notes {
-  display: grid;
-  gap: var(--s2);
   margin-top: var(--s2);
-  max-width: var(--measure);
 }
 
 @media (max-width: 760px) {
@@ -159,9 +152,17 @@
   .r-row {
     grid-template-columns: 1fr auto;
   }
-  .r-axis > div:first-child,
+  .r-axis {
+    row-gap: var(--s2);
+  }
+  .r-axis .r-unit {
+    grid-column: 1 / -1;
+  }
   .r-axis > div:last-child {
     display: none;
+  }
+  .r-axis .r-track {
+    height: 22px;
   }
   .r-axis .r-track {
     grid-column: 1 / -1;
@@ -176,14 +177,8 @@
   .r-row .r-track {
     grid-column: 1 / -1;
   }
-  .r-foot {
-    grid-column: 1 / -1;
-  }
 }
 
-.r-donate {
-  font-weight: 600;
-}
 
 /* Several evaluators on one row: each dot carries its evaluator's initials. */
 .r-dot.r-dot-owner {
@@ -198,4 +193,31 @@
   font: 700 9px/1 var(--sans);
   color: var(--paper);
   letter-spacing: 0.02em;
+}
+
+/* A row with several evaluators: room for a lane of dots above the bar and one below. */
+.r-track.r-track-multi {
+  height: 46px;
+}
+
+/* On a narrow axis every other tick label would run into its neighbour ("10k100k"): keep 1, 100, 10k. */
+.r-axis .r-track {
+  container-type: inline-size;
+}
+@container (max-width: 420px) {
+  .r-tick-minor {
+    visibility: hidden;
+  }
+}
+
+.r-flag-lead {
+  margin: 0 0 var(--s1);
+}
+
+/* The row's number is the primary evaluator's figure; other evaluators' dots are drawn hollow. */
+.r-dot.r-dot-other {
+  background: var(--paper);
+}
+.r-dot-other .r-dot-label {
+  color: var(--cause);
 }

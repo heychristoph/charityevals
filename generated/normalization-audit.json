@@ -1,0 +1,130 @@
+[
+ {
+  "id": "INV-1",
+  "title": "Every ranked model reports in a ranked unit",
+  "status": "checked",
+  "checked": 147,
+  "violations": [],
+  "how": "Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {uov, daly, wellby, ced}.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-2a",
+  "title": "Headline = native result × the unit's conversion (our view)",
+  "status": "checked",
+  "checked": 275,
+  "violations": [],
+  "how": "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)). The evaluator view is INV-8. Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-2b",
+  "title": "No model row reads a cross-cause rate",
+  "status": "checked",
+  "checked": 275,
+  "violations": [],
+  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $uov_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day} must be empty, and $uov_per_daly only where evaluator.assumptions pins it.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-3",
+  "title": "Every animal model passes through the species step, once per species, from the shared table",
+  "status": "checked",
+  "checked": 14,
+  "violations": [],
+  "how": "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s> / @aim_sads.chicken); raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-4",
+  "title": "No literal stands in for a shared fact or assumption",
+  "status": "partial",
+  "checked": 275,
+  "violations": [],
+  "suppressed": {
+   "input equals a shared value but its label doesn't resemble the shared one's": 10298,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 2067,
+   "round value (one significant digit) and labels only loosely alike": 50,
+   "input within 0.1% of a shared value (not equal) and labels only loosely alike": 9,
+   "shared label too generic (under three significant words) for a loose match": 14,
+   "input equals a country fact but is about another place": 24
+  },
+  "how": "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.1%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label; near-equal (not equal) values, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
+  "waived": 36,
+  "failing_models": []
+ },
+ {
+  "id": "INV-5",
+  "title": "The evaluator view uses the evaluator's own rates",
+  "status": "checked",
+  "checked": 275,
+  "violations": [],
+  "how": "Every evaluator model with an output (variants too, with their own inputs) must declare output.native; its evaluator layer is the native row, every row feeding it and every other row outside sections of kind \"ours\". Each non-toggle assumption a row in that layer reads is moved to ×0.5 and ×1.5 in our view (0 → 0.5 and 1): no row of the layer may move in the evaluator view, so every `expected` still reproduces and the bottom line stays the evaluator's. A pin in evaluator.assumptions passes by construction; an unpinned assumption passes only if no evaluator row's value depends on it. Each toggle the layer reads (GiveWell's leverage and funging switches on $resource_shares) must be pinned, so the evaluator view sees the evaluator's position.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-6",
+  "title": "The evaluator's bottom line reproduces",
+  "status": "checked",
+  "checked": 177,
+  "violations": [],
+  "how": "Every evaluator model with an output (not variants: they inherit output.native and don't inherit `expected`) declares output.native, and that row or one of its direct inputs carries `expected`; scripts/check.ts checks those values reproduce in the evaluator view.",
+  "waived": 13,
+  "failing_models": []
+ },
+ {
+  "id": "INV-7",
+  "title": "Our rows are visibly ours",
+  "status": "checked",
+  "checked": 177,
+  "violations": [],
+  "how": "Every evaluator model with an output (not variants: rows and sections are the parent's) declares output.native, and the output uses it. The output uses the native row (or, for a result split by species, every direct input of it). Every row that feeds the output and is computed, directly or not, from the native row or one of its direct inputs (without feeding the native row itself) is in a section of kind \"ours\" and has no `expected`; no row in the layer is in one of ours (rows switched by a toggle inside the evaluator's layer stay the evaluator's: INV-5 checks the toggle is pinned). Not checked: inputs of our steps that aren't computed from the bottom line (GiveWell's value of cash, staff-pay judgments; ours by section), and evaluator rows beside the bottom line that a bridge reads (ACE 2016's hen-years; INV-5 still holds them to the evaluator's rates).",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-8",
+  "title": "One view, one set of numbers",
+  "status": "checked",
+  "checked": 275,
+  "violations": [],
+  "how": "headline(m, av, {}, \"evaluator\") against compute(evaluator view)[output] × the unit's conversion evaluated with viewAssumptions(m, av, \"evaluator\"). Fails wherever a pin changes a rate in the conversion ($uov_per_daly for uov models).",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-9",
+  "title": "Shared levers reach every model they apply to",
+  "status": "partial",
+  "checked": 177,
+  "violations": [],
+  "how": "Models don't declare mortality/multi_year yet, so keywords in the labels of rows on the path to the output stand in: deaths/mortality/lives saved (not seedlings, trees, crops) → some row on the path must read $life_value_multiplier; discount rate/factor, present value, years or duration of benefit/effect, decay (not iron absorption discount factors) → some row on the path must read $discount_rate. Variants are checked through their parent. Heuristic by nature (keywords, not declarations); it can't see deaths valued under another name (DALYs or years of life lost, \"lives\" without \"saved\"), benefits spread over years without the keywords, or a lever read on one branch of the path while another branch values deaths or years with literals; and it flags sheets where the words are context only (normalization-waivers.json).",
+  "waived": 21,
+  "failing_models": []
+ },
+ {
+  "id": "INV-10",
+  "title": "Each slider moves exactly the models it should",
+  "status": "checked",
+  "checked": 275,
+  "violations": [],
+  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Others: independent of the animal assumptions and of $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "SAME-CHANGE",
+  "title": "Same physical change, same SADs figure",
+  "status": "partial",
+  "checked": 8,
+  "violations": [],
+  "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.",
+  "waived": 0,
+  "failing_models": []
+ }
+]

@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1ZMSPjCga107ObiFOG1y7PlHeM_7r60b95wgGuRRUDiE/edit",
     "published": "2025-11-04",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -32,7 +32,14 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "charityevals adjustments on top of ACE's model."
+      "explainer": "charityevals adjustments on top of ACE's model.",
+      "kind": "ours"
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "explainer": "charityevals' standard step for every animal model, not ACE's. Ambitious Impact's suffering-adjusted days (SADs) count each species' pain as a share of a person's, using its own species weights. Here those weights come out and Rethink Priorities' estimates go in, so every species is counted in days of a chicken's disabling pain. How a chicken's suffering compares with a person's is the one animal slider, under Your values.",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -87,13 +94,13 @@
       "id": "p1_sads_averted_per_shrimp_stunned",
       "section": "p1_program_1_hsi_cea",
       "label": "SADs averted per shrimp stunned",
-      "value": 0.00452,
-      "kind": "estimate",
+      "formula": "@sad_factors.sads_per_shrimp_stunned",
+      "published": 0.00452,
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Program 1 HSI CEA!B13"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's figure for stunning one shrimp before slaughter, in Ambitious Impact's suffering-adjusted days. ACE's reviews use 0.00452 here and 0.0973 for the Aquatic Life Institute, 21 times apart, for the same change. Our view uses one shared figure (Suffering-adjusted days per animal, under Data) so stunning a shrimp counts the same in every model; the evaluator view keeps ACE's 0.00452."
     },
     {
       "id": "p1_the_total_number_of_sads_averted_thanks_to_swp_s",
@@ -523,7 +530,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -531,19 +538,50 @@
       "label": "SADs averted per dollar you give",
       "format": "number",
       "formula": "sads_per_dollar * donor_cost_share"
+    },
+    {
+      "id": "sads_shrimp",
+      "section": "species",
+      "label": "SADs averted per dollar you give: shrimp",
+      "format": "number",
+      "formula": "sads_per_donor_dollar"
+    },
+    {
+      "id": "ced_shrimp",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: shrimp",
+      "format": "number",
+      "formula": "sads_shrimp / @aim_sads.shrimp * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp / @aim_sads.chicken)",
+      "explainer": "The SADs for shrimp with Ambitious Impact's weight for shrimp taken out, and Rethink Priorities' estimate of how much shrimp can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "number",
+      "formula": "ced_shrimp",
+      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],
   "output": {
-    "row": "sads_per_donor_dollar",
-    "unit": "sad",
-    "label": "SADs averted per dollar you give"
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "sads_per_dollar",
+      "unit": "sad"
+    },
+    "species": [
+      "shrimp"
+    ]
   },
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
-      "discount_rate": 0.014
+      "discount_rate": 0.014,
+      "resource_shares": 0,
+      "chicken_vs_person": 0.463966,
+      "rp_species_weights": 0
     }
   },
   "resources": [

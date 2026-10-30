@@ -1,1322 +1,1373 @@
 {
- "id": "malengo-2024",
- "name": "Malengo BOTEC, 2024",
- "kind": "charity",
- "cause": "global-health",
- "charity": "malengo",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"Malengo BOTEC, 2024\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "GiveWell, Malengo BOTEC, 2024 (public)",
-  "url": "https://www.givewell.org/research/grants/malengo-core-operations-january-2024",
-  "sheet": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-  "published": "2024-01-19",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0,
-   "uov_per_ln_consumption": 1.44,
-   "life_value_multiplier": 1,
-   "discount_rate": 0.065
+  "id": "malengo-2024",
+  "name": "Malengo BOTEC, 2024",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "malengo",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Helps students from Uganda move to Germany for university study and work. GiveWell's spreadsheet \"Malengo BOTEC, 2024\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "GiveWell, Malengo BOTEC, 2024 (public)",
+    "url": "https://www.givewell.org/research/grants/malengo-core-operations-january-2024",
+    "sheet": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+    "published": "2024-01-19",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "uov_per_ln_consumption": 1.44,
+      "life_value_multiplier": 1,
+      "discount_rate": 0.065,
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "GiveWell, Malengo BOTEC, 2024 (public)",
+      "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (malengo core operations january 2024)",
+      "url": "https://www.givewell.org/research/grants/malengo-core-operations-january-2024",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "botec",
+      "title": "BOTEC"
+    },
+    {
+      "id": "future_cohorts",
+      "title": "Future cohorts"
+    },
+    {
+      "id": "ppp_adjustment",
+      "title": "PPP adjustment"
+    },
+    {
+      "id": "hh_multipliers",
+      "title": "HH multipliers"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line",
+      "kind": "ours"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    }
+  ],
+  "rows": [
+    {
+      "id": "number_of_children_whose_migration_decisions_could_be_affect",
+      "label": "Number of children whose migration decisions could be affected (Best-guess)",
+      "section": "botec",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D48"
+      },
+      "explainer": "Guess - I imagine the people that could plausibly be affected include siblings, cousins, and close friends"
+    },
+    {
+      "id": "baseline_rates_of_european_migration_in_child_s_network_best",
+      "label": "Baseline rates of European migration in child's network (Best-guess)",
+      "section": "botec",
+      "value": 0.01,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D49"
+      },
+      "explainer": "I base this estimate on two statistics: the emigrant-to-home population ratio in Uganda (5%), and the percentage of migrating Africans who migrate to Europe (18% ~= 20%) For emigrant-to-home population ratio in Uganda, see Map 1.1 (page 45) in World Bank (2018). From the Economist: \"Only 18% of those (Africans) living abroad are in Europe. About 70% are in other African countries\", The Economist (2021)",
+      "format": "percent"
+    },
+    {
+      "id": "number_of_children_in_network_who_would_migrate_without_prog",
+      "label": "Number of children in network who would migrate without programme (Best-guess)",
+      "section": "botec",
+      "formula": "number_of_children_whose_migration_decisions_could_be_affect * baseline_rates_of_european_migration_in_child_s_network_best",
+      "expected": 0.1
+    },
+    {
+      "id": "percentage_increase_in_migration_probability_given_migrant_e",
+      "label": "Percentage increase in migration probability given migrant exposure (Best-guess)",
+      "section": "botec",
+      "value": 0.22,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D51"
+      },
+      "explainer": "\"Bedasso et al. (2020) find an effect of migrant exposure on completing secondary education of 14–17%, and on own future migration of 22%\", impact of Malengo",
+      "format": "percent"
+    },
+    {
+      "id": "additional_cases_of_migration_per_person_caused_by_the_progr",
+      "label": "Additional cases of migration per person caused by the programme (Best-guess)",
+      "section": "botec",
+      "formula": "number_of_children_in_network_who_would_migrate_without_prog * percentage_increase_in_migration_probability_given_migrant_e",
+      "expected": 0.022
+    },
+    {
+      "id": "direct_effects_income_gains_from_migrating_discount_rate_bes",
+      "label": "Direct effects: income gains from migrating: Discount rate (Best-guess)",
+      "section": "botec",
+      "value": 0.04,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D17"
+      },
+      "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
+      "format": "percent"
+    },
+    {
+      "id": "working_lifespan_duration_of_benefits_years_best_guess",
+      "label": "Working lifespan/duration of benefits, years (Best-guess)",
+      "section": "botec",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D18"
+      },
+      "explainer": "Assume average working lifespan for the participants"
+    },
+    {
+      "id": "income_for_those_who_migrate_net_of_remittances_and_repaymen",
+      "label": "Income for those who migrate net of remittances & repayments (Best-guess)",
+      "section": "botec",
+      "value": 40000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D12"
+      },
+      "explainer": "My best-guess takes the mid-point of starting salaries for engineering, agriculture, and English graduates, which I think are representative of the types of degrees Malengo students would study. From the resulting figure ($44k), I subtract $4k to account for remittances. I don't subtract the $30k repayment amount because: i) over the course of a 40 year life, $30k ~= $1k per year; ii) this parameter is pretty uncertain to begin with; iii) the bottom-line actually isn't that sensitive to this parameter (b/c of our logarithmic utility assumption)",
+      "format": "usd"
+    },
+    {
+      "id": "ppp_conversion_factor_2021_uganda",
+      "label": "PPP conversion factor 2021 - Uganda",
+      "section": "ppp_adjustment",
+      "value": 1309.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "PPP adjustment!B3"
+      },
+      "explainer": "World Bank"
+    },
+    {
+      "id": "usd_ugx_exchange_rate_2021",
+      "label": "USD:UGX exchange rate 2021",
+      "section": "ppp_adjustment",
+      "value": 3586.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "PPP adjustment!B5"
+      },
+      "explainer": "exchangerates.org.uk Average 2021 rate"
+    },
+    {
+      "id": "ugandan_relative_price_level_2021",
+      "label": "Ugandan relative price level 2021",
+      "section": "ppp_adjustment",
+      "formula": "ppp_conversion_factor_2021_uganda / usd_ugx_exchange_rate_2021",
+      "expected": 0.3650306748,
+      "format": "percent"
+    },
+    {
+      "id": "ppp_conversion_factor_2021_germany",
+      "label": "PPP conversion factor 2021 - Germany",
+      "section": "ppp_adjustment",
+      "value": 0.74,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "PPP adjustment!B4"
+      },
+      "explainer": "World Bank"
+    },
+    {
+      "id": "usd_eur_exchange_rate_2021",
+      "label": "USD:EUR exchange rate 2021",
+      "section": "ppp_adjustment",
+      "value": 0.8458,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "PPP adjustment!B6"
+      },
+      "explainer": "exchangerates.org.uk Average 2021 rate"
+    },
+    {
+      "id": "german_relative_price_level_2021",
+      "label": "German relative price level 2021",
+      "section": "ppp_adjustment",
+      "formula": "ppp_conversion_factor_2021_germany / usd_eur_exchange_rate_2021",
+      "expected": 0.8749113266,
+      "format": "percent"
+    },
+    {
+      "id": "implied_ppp_adjustment",
+      "label": "Implied PPP adjustment",
+      "section": "ppp_adjustment",
+      "formula": "ugandan_relative_price_level_2021 / german_relative_price_level_2021",
+      "expected": 0.4172201957,
+      "format": "percent"
+    },
+    {
+      "id": "direct_effects_income_gains_from_migrating_ppp_adjustment_be",
+      "label": "Direct effects: income gains from migrating: PPP adjustment (Best-guess)",
+      "section": "botec",
+      "formula": "implied_ppp_adjustment",
+      "expected": 0.4172201957,
+      "format": "percent"
+    },
+    {
+      "id": "income_for_those_who_migrate_ppp_adjusted_best_guess",
+      "label": "Income for those who migrate, PPP adjusted (Best-guess)",
+      "section": "botec",
+      "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * direct_effects_income_gains_from_migrating_ppp_adjustment_be",
+      "expected": 16688.80783,
+      "format": "usd"
+    },
+    {
+      "id": "counterfactual_income_per_person_participating_best_guess",
+      "label": "Counterfactual income per person participating (Best-guess)",
+      "section": "botec",
+      "value": 2000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D11"
+      },
+      "explainer": "Best-guess is that counter-factual income would be higher for participating students, given they are selected on ability \"Compared to the outside option of taking a job in Uganda with the average yearly income of those with a high school diploma or some college, EUR 1,598\", the impact of Malengo",
+      "format": "usd"
+    },
+    {
+      "id": "units_of_value_per_ln_inc_increase_best_guess",
+      "label": "Units of value per ln inc increase (Best-guess)",
+      "section": "botec",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D16"
+      },
+      "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGiveWell moral weights GiveWell, Moral weights and discount rate",
+      "formula": "$uov_per_ln_consumption",
+      "expected": 1.44
+    },
+    {
+      "id": "average_number_of_years_between_malengo_programme_and_long_t",
+      "label": "Average number of years between Malengo programme and long-term benefits (Best-guess)",
+      "section": "botec",
+      "value": 5.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D19"
+      },
+      "explainer": "Assume that it takes scholars ~5 years to graduate"
+    },
+    {
+      "id": "units_of_value_in_first_year_of_those_that_migrate_direct_be",
+      "label": "Units of value in first year of those that migrate, direct (Best-guess)",
+      "section": "botec",
+      "formula": "(ln(income_for_those_who_migrate_ppp_adjusted_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
+      "expected": 2.511062286
+    },
+    {
+      "id": "income_for_those_who_migrate_net_of_remittances_and_repaymen_2",
+      "label": "Income for those who migrate net of remittances & repayments (Old best guess)",
+      "section": "botec",
+      "value": 40000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B12"
+      },
+      "explainer": "My best-guess takes the mid-point of starting salaries for engineering, agriculture, and English graduates, which I think are representative of the types of degrees Malengo students would study. From the resulting figure ($44k), I subtract $4k to account for remittances. I don't subtract the $30k repayment amount because: i) over the course of a 40 year life, $30k ~= $1k per year; ii) this parameter is pretty uncertain to begin with; iii) the bottom-line actually isn't that sensitive to this parameter (b/c of our logarithmic utility assumption)",
+      "format": "usd"
+    },
+    {
+      "id": "income_for_those_that_remain_in_germany",
+      "label": "Income for those that remain in Germany",
+      "section": "hh_multipliers",
+      "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen_2",
+      "expected": 40000.0,
+      "format": "usd"
+    },
+    {
+      "id": "number_of_earners_in_hh",
+      "label": "Number of earners in hh",
+      "section": "hh_multipliers",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "HH multipliers!B4"
+      }
+    },
+    {
+      "id": "household_income_for_those_that_remain_in_germany",
+      "label": "Household income for those that remain in Germany",
+      "section": "hh_multipliers",
+      "formula": "income_for_those_that_remain_in_germany * number_of_earners_in_hh",
+      "expected": 80000.0,
+      "format": "usd"
+    },
+    {
+      "id": "expected_hh_size_of_those_that_remain_in_germany",
+      "label": "Expected hh size of those that remain in Germany",
+      "section": "hh_multipliers",
+      "value": 3.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "HH multipliers!B18"
+      },
+      "explainer": "I think it's fair to assume that those who remain in Germany will have smaller families"
+    },
+    {
+      "id": "household_consumption_per_capita_among_those_that_remain_in",
+      "label": "Household consumption per capita among those that remain in Germany",
+      "section": "hh_multipliers",
+      "formula": "household_income_for_those_that_remain_in_germany / expected_hh_size_of_those_that_remain_in_germany",
+      "expected": 26666.66667,
+      "format": "usd"
+    },
+    {
+      "id": "counterfactual_income_per_person_participating_old_best_gues",
+      "label": "Counterfactual income per person participating (Old best guess)",
+      "section": "botec",
+      "value": 2000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B11"
+      },
+      "explainer": "Best-guess is that counter-factual income would be higher for participating students, given they are selected on ability \"Compared to the outside option of taking a job in Uganda with the average yearly income of those with a high school diploma or some college, EUR 1,598\", the impact of Malengo",
+      "format": "usd"
+    },
+    {
+      "id": "counterfactual_income_per_person_participating",
+      "label": "Counterfactual income per person participating",
+      "section": "hh_multipliers",
+      "formula": "counterfactual_income_per_person_participating_old_best_gues",
+      "expected": 2000.0,
+      "format": "usd"
+    },
+    {
+      "id": "counterfactual_household_income",
+      "label": "Counterfactual household income",
+      "section": "hh_multipliers",
+      "formula": "counterfactual_income_per_person_participating * number_of_earners_in_hh",
+      "expected": 4000.0,
+      "format": "usd"
+    },
+    {
+      "id": "expected_hh_size_of_participants_in_uganda",
+      "label": "Expected hh size of participants in Uganda",
+      "section": "hh_multipliers",
+      "value": 4.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "HH multipliers!B3"
+      }
+    },
+    {
+      "id": "counterfactual_household_consumption_per_capita",
+      "label": "Counterfactual household consumption per capita",
+      "section": "hh_multipliers",
+      "formula": "counterfactual_household_income / expected_hh_size_of_participants_in_uganda",
+      "expected": 1000.0,
+      "format": "usd"
+    },
+    {
+      "id": "increase_in_units_of_consumption_given_inc_sharing",
+      "label": "Increase in units of consumption given inc sharing",
+      "section": "hh_multipliers",
+      "formula": "(ln(household_consumption_per_capita_among_those_that_remain_in) - ln(counterfactual_household_consumption_per_capita)) * expected_hh_size_of_those_that_remain_in_germany",
+      "expected": 9.850243038
+    },
+    {
+      "id": "increase_in_units_of_consumption_without_inc_sharing",
+      "label": "Increase in units of consumption without inc sharing",
+      "section": "hh_multipliers",
+      "formula": "ln(income_for_those_that_remain_in_germany) - ln(counterfactual_income_per_person_participating)",
+      "expected": 2.995732274
+    },
+    {
+      "id": "implied_hh_multiplier_for_those_that_stay_in_germany",
+      "label": "Implied hh multiplier for those that stay in Germany",
+      "section": "hh_multipliers",
+      "formula": "increase_in_units_of_consumption_given_inc_sharing / increase_in_units_of_consumption_without_inc_sharing",
+      "expected": 3.288091905
+    },
+    {
+      "id": "household_multiplier_amongst_scholars_that_migrate_best_gues",
+      "label": "Household multiplier amongst scholars that migrate (Best-guess)",
+      "section": "botec",
+      "formula": "implied_hh_multiplier_for_those_that_stay_in_germany",
+      "expected": 3.288091905
+    },
+    {
+      "id": "units_of_value_in_first_year_of_those_that_migrate_given_res",
+      "label": "Units of value in first year of those that migrate, given resource sharing (Best-guess)",
+      "section": "botec",
+      "formula": "units_of_value_in_first_year_of_those_that_migrate_direct_be * household_multiplier_amongst_scholars_that_migrate_best_gues",
+      "expected": 8.256603576
+    },
+    {
+      "id": "total_present_discounted_units_of_direct_value_per_person_th",
+      "label": "Total present-discounted units of direct value per person that migrates (Best-guess)",
+      "section": "botec",
+      "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_migrate_given_res)",
+      "expected": 163.4210876
+    },
+    {
+      "id": "baseline_consumption_per_person_in_remittance_household_old",
+      "label": "Baseline consumption per person in remittance household (Old best guess)",
+      "section": "botec",
+      "value": 1200.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B31"
+      },
+      "explainer": "Malengo internal estimate",
+      "format": "usd"
+    },
+    {
+      "id": "household_consumption_per_capita_in_remittance_households",
+      "label": "Household consumption per capita in remittance households",
+      "section": "hh_multipliers",
+      "formula": "baseline_consumption_per_person_in_remittance_household_old",
+      "expected": 1200.0,
+      "format": "usd"
+    },
+    {
+      "id": "remittance_per_household_old_best_guess",
+      "label": "Remittance per household (Old best guess)",
+      "section": "botec",
+      "value": 1000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B32"
+      },
+      "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo",
+      "format": "usd"
+    },
+    {
+      "id": "remittance_size_per_household",
+      "label": "Remittance size per household",
+      "section": "hh_multipliers",
+      "formula": "remittance_per_household_old_best_guess",
+      "expected": 1000.0,
+      "format": "usd"
+    },
+    {
+      "id": "expected_hh_size_of_remittance_recipients",
+      "label": "Expected hh size of remittance recipients",
+      "section": "hh_multipliers",
+      "value": 4.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "HH multipliers!B25"
+      }
+    },
+    {
+      "id": "increase_in_units_of_consumption_given_inc_sharing_2",
+      "label": "Increase in units of consumption given inc sharing",
+      "section": "hh_multipliers",
+      "formula": "(ln(household_consumption_per_capita_in_remittance_households + remittance_size_per_household / expected_hh_size_of_remittance_recipients) - ln(household_consumption_per_capita_in_remittance_households)) * expected_hh_size_of_remittance_recipients",
+      "expected": 0.7569679986
+    },
+    {
+      "id": "increase_in_units_of_consumption_without_inc_sharing_2",
+      "label": "Increase in units of consumption without inc sharing",
+      "section": "hh_multipliers",
+      "formula": "ln(household_consumption_per_capita_in_remittance_households + remittance_size_per_household) - ln(household_consumption_per_capita_in_remittance_households)",
+      "expected": 0.6061358036
+    },
+    {
+      "id": "implied_hh_multipler_in_remittance_households",
+      "label": "Implied hh multipler in remittance households",
+      "section": "hh_multipliers",
+      "formula": "increase_in_units_of_consumption_given_inc_sharing_2 / increase_in_units_of_consumption_without_inc_sharing_2",
+      "expected": 1.248842246
+    },
+    {
+      "id": "household_multiplier_in_remittance_households_best_guess",
+      "label": "Household multiplier in remittance households (Best-guess)",
+      "section": "botec",
+      "formula": "implied_hh_multipler_in_remittance_households",
+      "expected": 1.248842246
+    },
+    {
+      "id": "remittance_per_household_best_guess",
+      "label": "Remittance per household (Best-guess)",
+      "section": "botec",
+      "value": 1000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D32"
+      },
+      "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo",
+      "format": "usd"
+    },
+    {
+      "id": "baseline_consumption_per_person_in_remittance_household_best",
+      "label": "Baseline consumption per person in remittance household (Best-guess)",
+      "section": "botec",
+      "formula": "1.4 * 365",
+      "expected": 511.0,
+      "format": "usd"
+    },
+    {
+      "id": "number_of_households_receiving_remittances_best_guess",
+      "label": "Number of households receiving remittances (Best-guess)",
+      "section": "botec",
+      "value": 4.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D33"
+      },
+      "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo"
+    },
+    {
+      "id": "units_of_value_in_first_year_of_those_that_migrate_indirect",
+      "label": "Units of value in first year of those that migrate, indirect (Best-guess)",
+      "section": "botec",
+      "formula": "(ln(remittance_per_household_best_guess + baseline_consumption_per_person_in_remittance_household_best) - ln(baseline_consumption_per_person_in_remittance_household_best)) * number_of_households_receiving_remittances_best_guess * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
+      "expected": 5.132726393
+    },
+    {
+      "id": "units_of_value_in_first_year_given_resource_sharing_in_house",
+      "label": "Units of value in first year given resource sharing in household (Best-guess)",
+      "section": "botec",
+      "formula": "household_multiplier_in_remittance_households_best_guess * units_of_value_in_first_year_of_those_that_migrate_indirect",
+      "expected": 6.409965559
+    },
+    {
+      "id": "total_present_discounted_units_of_indirect_value_per_person",
+      "label": "Total present-discounted units of indirect value per person that migrates (Best-guess)",
+      "section": "botec",
+      "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_given_resource_sharing_in_house)",
+      "expected": 126.8709989
+    },
+    {
+      "id": "total_discounted_units_of_value_per_person_that_migrates_bes",
+      "label": "Total discounted units of value per person that migrates (Best-guess)",
+      "section": "botec",
+      "formula": "total_present_discounted_units_of_direct_value_per_person_th + total_present_discounted_units_of_indirect_value_per_person",
+      "expected": 290.2920865
+    },
+    {
+      "id": "total_discounted_units_of_value_per_person_from_migration_sp",
+      "label": "Total discounted units of value per person from migration spillovers (Best-guess)",
+      "section": "botec",
+      "formula": "additional_cases_of_migration_per_person_caused_by_the_progr * total_discounted_units_of_value_per_person_that_migrates_bes",
+      "expected": 6.386425904
+    },
+    {
+      "id": "of_participants_that_get_a_job_in_germany_best_guess",
+      "label": "% of participants that get a job in Germany (Best-guess)",
+      "section": "botec",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D9"
+      },
+      "explainer": "My best-guess assumes that 70% of Malengo students will graduate, and 70% of graduates will find a grad job in Germany. 1*0.7*0.7 = 0.49 = ~50%",
+      "format": "percent"
+    },
+    {
+      "id": "total_discounted_units_of_value_per_person_from_remittances",
+      "label": "Total discounted units of value per person from remittances (Best-guess)",
+      "section": "botec",
+      "formula": "total_present_discounted_units_of_indirect_value_per_person * of_participants_that_get_a_job_in_germany_best_guess",
+      "expected": 63.43549945
+    },
+    {
+      "id": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best",
+      "label": "Moral weight of averting the death of a 60-64 year-old (Best-guess)",
+      "section": "botec",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D44"
+      },
+      "explainer": "GiveWell's moral weight, 40 units of value, times your multiplier on the value of a life.\n\nRough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)",
+      "formula": "40 * $life_value_multiplier",
+      "expected": 40.0
+    },
+    {
+      "id": "direct_effects_income_gains_from_migrating_discount_rate_old",
+      "label": "Direct effects: income gains from migrating: Discount rate (Old best guess)",
+      "section": "botec",
+      "value": 0.04,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B17"
+      },
+      "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
+      "format": "percent"
+    },
+    {
+      "id": "life_expectancy_at_birth_in_uganda_old_best_guess",
+      "label": "Life expectancy at birth in Uganda (Old best guess)",
+      "section": "botec",
+      "value": 64.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B41"
+      },
+      "explainer": "Rough guess. A more precise esimate would be life expectancy conditional on making it to age 18. World Bank"
+    },
+    {
+      "id": "average_age_of_participant_old_best_guess",
+      "label": "Average age of participant (Old best guess)",
+      "section": "botec",
+      "value": 18.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B42"
+      }
+    },
+    {
+      "id": "average_number_of_years_between_malengo_programme_and_mortal",
+      "label": "Average number of years between Malengo programme and mortality benefits (Old best guess)",
+      "section": "botec",
+      "formula": "life_expectancy_at_birth_in_uganda_old_best_guess - average_age_of_participant_old_best_guess",
+      "expected": 46.0
+    },
+    {
+      "id": "units_of_value_from_mortality_among_those_that_migrate_best",
+      "label": "Units of value from mortality among those that migrate (Best-guess)",
+      "section": "botec",
+      "formula": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best / (1 + direct_effects_income_gains_from_migrating_discount_rate_old) ^ average_number_of_years_between_malengo_programme_and_mortal * of_participants_that_get_a_job_in_germany_best_guess",
+      "expected": 3.292277151
+    },
+    {
+      "id": "income_for_those_who_return_to_uganda_best_guess",
+      "label": "Income for those who return to Uganda (Best-guess)",
+      "section": "botec",
+      "value": 4000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D15"
+      },
+      "explainer": "Rough guess: some participants that return to Uganda will have graduated, so I take a rough midpoint between Ugandan salaries for secondary ($1,600) and tertiary graduates ($5,600)",
+      "format": "usd"
+    },
+    {
+      "id": "units_of_value_in_first_year_of_those_that_return_direct_bes",
+      "label": "Units of value in first year of those that return, direct (Best-guess)",
+      "section": "botec",
+      "formula": "(ln(income_for_those_who_return_to_uganda_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
+      "expected": 0.8203916976
+    },
+    {
+      "id": "income_for_those_who_return_to_uganda_old_best_guess",
+      "label": "Income for those who return to Uganda (Old best guess)",
+      "section": "botec",
+      "value": 4000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B15"
+      },
+      "explainer": "Rough guess: some participants that return to Uganda will have graduated, so I take a rough midpoint between Ugandan salaries for secondary ($1,600) and tertiary graduates ($5,600)",
+      "format": "usd"
+    },
+    {
+      "id": "income_for_those_who_return_to_uganda",
+      "label": "Income for those who return to Uganda",
+      "section": "hh_multipliers",
+      "formula": "income_for_those_who_return_to_uganda_old_best_guess",
+      "expected": 4000.0,
+      "format": "usd"
+    },
+    {
+      "id": "household_income_among_those_who_return",
+      "label": "Household income among those who return",
+      "section": "hh_multipliers",
+      "formula": "income_for_those_who_return_to_uganda + counterfactual_income_per_person_participating",
+      "expected": 6000.0,
+      "format": "usd"
+    },
+    {
+      "id": "household_consumption_per_capita_among_those_that_return",
+      "label": "Household consumption per capita among those that return",
+      "section": "hh_multipliers",
+      "formula": "household_income_among_those_who_return / expected_hh_size_of_participants_in_uganda",
+      "expected": 1500.0,
+      "format": "usd"
+    },
+    {
+      "id": "increase_in_units_of_consumption_given_inc_sharing_3",
+      "label": "Increase in units of consumption given inc sharing",
+      "section": "hh_multipliers",
+      "formula": "(ln(household_consumption_per_capita_among_those_that_return) - ln(counterfactual_household_consumption_per_capita)) * expected_hh_size_of_participants_in_uganda",
+      "expected": 1.621860432
+    },
+    {
+      "id": "increase_in_units_of_consumption_without_inc_sharing_3",
+      "label": "Increase in units of consumption without inc sharing",
+      "section": "hh_multipliers",
+      "formula": "ln(income_for_those_who_return_to_uganda) - ln(counterfactual_income_per_person_participating)",
+      "expected": 0.6931471806
+    },
+    {
+      "id": "implied_hh_multiplier_for_those_that_return_to_uganda",
+      "label": "Implied hh multiplier for those that return to Uganda",
+      "section": "hh_multipliers",
+      "formula": "increase_in_units_of_consumption_given_inc_sharing_3 / increase_in_units_of_consumption_without_inc_sharing_3",
+      "expected": 2.339850003
+    },
+    {
+      "id": "household_multiplier_amongst_scholars_that_return_best_guess",
+      "label": "Household multiplier amongst scholars that return (Best-guess)",
+      "section": "botec",
+      "formula": "implied_hh_multiplier_for_those_that_return_to_uganda",
+      "expected": 2.339850003
+    },
+    {
+      "id": "units_of_value_in_first_year_of_those_that_return_given_reso",
+      "label": "Units of value in first year of those that return, given resource sharing (Best-guess)",
+      "section": "botec",
+      "formula": "units_of_value_in_first_year_of_those_that_return_direct_bes * household_multiplier_amongst_scholars_that_return_best_guess",
+      "expected": 1.919593516
+    },
+    {
+      "id": "total_present_discounted_units_of_direct_value_per_person_th_2",
+      "label": "Total present-discounted units of direct value per person that returns (Best-guess)",
+      "section": "botec",
+      "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_return_given_reso)",
+      "expected": 37.99408041
+    },
+    {
+      "id": "of_participants_that_return_to_uganda_best_guess",
+      "label": "% of participants that return to Uganda (Best-guess)",
+      "section": "botec",
+      "formula": "1 - of_participants_that_get_a_job_in_germany_best_guess",
+      "expected": 0.5,
+      "format": "percent"
+    },
+    {
+      "id": "total_discounted_units_of_value_per_person_from_direct_effec",
+      "label": "Total discounted units of value per person from direct effects (Best-guess)",
+      "section": "botec",
+      "formula": "total_present_discounted_units_of_direct_value_per_person_th * of_participants_that_get_a_job_in_germany_best_guess + total_present_discounted_units_of_direct_value_per_person_th_2 * of_participants_that_return_to_uganda_best_guess",
+      "expected": 100.707584
+    },
+    {
+      "id": "units_of_value_per_person_from_direct_indirect_effects_best",
+      "label": "Units of value per person from direct + indirect effects (Best-guess)",
+      "section": "botec",
+      "formula": "total_discounted_units_of_value_per_person_from_migration_sp + total_discounted_units_of_value_per_person_from_remittances + units_of_value_from_mortality_among_those_that_migrate_best + total_discounted_units_of_value_per_person_from_direct_effec",
+      "expected": 173.8217865
+    },
+    {
+      "id": "units_of_value_per_person_cohort_1",
+      "label": "Units of value per person (Cohort 1)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best",
+      "expected": 173.8217865
+    },
+    {
+      "id": "discount_rate_for_future_cohorts_old_best_guess",
+      "label": "Discount rate for future cohorts (Old best guess)",
+      "section": "botec",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B59"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.065
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_1",
+      "label": "Years into the future (truncated at 100 years) (Cohort 1)",
+      "section": "future_cohorts",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "Future cohorts!C3"
+      }
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_1",
+      "label": "Discounted units of value per person (Cohort 1)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_1 / (1 + discount_rate_for_future_cohorts_old_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_1",
+      "expected": 173.8217865
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_1",
+      "label": "Number of students sponsored (Cohort 1)",
+      "section": "future_cohorts",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "Future cohorts!C4"
+      }
+    },
+    {
+      "id": "length_of_obligation_years",
+      "label": "Length of obligation (years)",
+      "section": "botec",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D61"
+      },
+      "explainer": "If you live in Germany or another high- or middle-income country, and your yearly income exceeds EUR 27,000, you contribute 14% of your pre-tax income to future Malengo Scholars for a period of 10 years"
+    },
+    {
+      "id": "annual_payment_from_income_sharing_agreement_from_migrants_b",
+      "label": "Annual payment from income sharing agreement from migrants (Best-guess)",
+      "section": "botec",
+      "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * 0.14",
+      "expected": 5600.0,
+      "format": "usd"
+    },
+    {
+      "id": "total_repayments_raised_per_migrant",
+      "label": "Total repayments raised per migrant",
+      "section": "botec",
+      "formula": "if(length_of_obligation_years * annual_payment_from_income_sharing_agreement_from_migrants_b > 75000, 75000, length_of_obligation_years * annual_payment_from_income_sharing_agreement_from_migrants_b)",
+      "expected": 56000.0,
+      "format": "usd"
+    },
+    {
+      "id": "program_cost_per_person_best_guess",
+      "label": "Program cost per person (Best-guess)",
+      "section": "botec",
+      "value": 34358.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D6"
+      },
+      "explainer": "Malengo internal estimate From Malengo, Budget (unpublished)",
+      "format": "usd"
+    },
+    {
+      "id": "repayment_compliance_rate",
+      "label": "Repayment compliance rate",
+      "section": "botec",
+      "value": 0.9,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D63"
+      },
+      "explainer": "The ISA is legally binding; this is the repayment rate assumed by Chancen, the private company that Malengo has been working with",
+      "format": "percent"
+    },
+    {
+      "id": "expected_number_of_future_scholars_funded_per_student",
+      "label": "Expected number of future scholars funded per student",
+      "section": "botec",
+      "formula": "total_repayments_raised_per_migrant / program_cost_per_person_best_guess * of_participants_that_get_a_job_in_germany_best_guess * repayment_compliance_rate",
+      "expected": 0.7334536353
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_2",
+      "label": "Number of students sponsored (Cohort 2)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_1 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.7334536353
+    },
+    {
+      "id": "units_of_value_per_person_cohort_2",
+      "label": "Units of value per person (Cohort 2)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_2",
+      "expected": 127.4902212
+    },
+    {
+      "id": "discount_rate_for_future_cohorts_best_guess",
+      "label": "Discount rate for future cohorts (Best-guess)",
+      "section": "botec",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D59"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.065
+    },
+    {
+      "id": "average_time_between_cohorts_years",
+      "label": "Average time between cohorts (years)",
+      "section": "botec",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!D65"
+      },
+      "explainer": "Taking account time spent studying (5 years) + midpoint in length of obligation (5 year)"
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_2",
+      "label": "Years into the future (truncated at 100 years) (Cohort 2)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_1 + average_time_between_cohorts_years",
+      "expected": 10.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_2",
+      "label": "Discounted units of value per person (Cohort 2)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_2 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_2",
+      "expected": 67.91736012
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_3",
+      "label": "Number of students sponsored (Cohort 3)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_2 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.5379542351
+    },
+    {
+      "id": "units_of_value_per_person_cohort_3",
+      "label": "Units of value per person (Cohort 3)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_3",
+      "expected": 93.50816621
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_3",
+      "label": "Years into the future (truncated at 100 years) (Cohort 3)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_2 + average_time_between_cohorts_years",
+      "expected": 20.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_3",
+      "label": "Discounted units of value per person (Cohort 3)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_3 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_3",
+      "expected": 26.53733975
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_4",
+      "label": "Number of students sponsored (Cohort 4)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_3 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.3945644893
+    },
+    {
+      "id": "units_of_value_per_person_cohort_4",
+      "label": "Units of value per person (Cohort 4)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_4",
+      "expected": 68.58390443
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_4",
+      "label": "Years into the future (truncated at 100 years) (Cohort 4)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_3 + average_time_between_cohorts_years",
+      "expected": 30.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_4",
+      "label": "Discounted units of value per person (Cohort 4)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_4 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_4",
+      "expected": 10.36893071
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_5",
+      "label": "Number of students sponsored (Cohort 5)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_4 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.289394759
+    },
+    {
+      "id": "units_of_value_per_person_cohort_5",
+      "label": "Units of value per person (Cohort 5)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_5",
+      "expected": 50.30311403
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_5",
+      "label": "Years into the future (truncated at 100 years) (Cohort 5)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_4 + average_time_between_cohorts_years",
+      "expected": 40.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_5",
+      "label": "Discounted units of value per person (Cohort 5)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_5 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_5",
+      "expected": 4.051450713
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_6",
+      "label": "Number of students sponsored (Cohort 6)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_5 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.212257638
+    },
+    {
+      "id": "units_of_value_per_person_cohort_6",
+      "label": "Units of value per person (Cohort 6)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_6",
+      "expected": 36.89500185
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_6",
+      "label": "Years into the future (truncated at 100 years) (Cohort 6)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_5 + average_time_between_cohorts_years",
+      "expected": 50.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_6",
+      "label": "Discounted units of value per person (Cohort 6)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_6 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_6",
+      "expected": 1.583022719
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_7",
+      "label": "Number of students sponsored (Cohort 7)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_6 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.1556811362
+    },
+    {
+      "id": "units_of_value_per_person_cohort_7",
+      "label": "Units of value per person (Cohort 7)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_7",
+      "expected": 27.06077323
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_7",
+      "label": "Years into the future (truncated at 100 years) (Cohort 7)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_6 + average_time_between_cohorts_years",
+      "expected": 60.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_7",
+      "label": "Discounted units of value per person (Cohort 7)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_7 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_7",
+      "expected": 0.6185342252
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_8",
+      "label": "Number of students sponsored (Cohort 8)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_7 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.1141848953
+    },
+    {
+      "id": "units_of_value_per_person_cohort_8",
+      "label": "Units of value per person (Cohort 8)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_8",
+      "expected": 19.8478225
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_8",
+      "label": "Years into the future (truncated at 100 years) (Cohort 8)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_7 + average_time_between_cohorts_years",
+      "expected": 70.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_8",
+      "label": "Discounted units of value per person (Cohort 8)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_8 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_8",
+      "expected": 0.2416797834
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_9",
+      "label": "Number of students sponsored (Cohort 9)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_8 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.08374932655
+    },
+    {
+      "id": "units_of_value_per_person_cohort_9",
+      "label": "Units of value per person (Cohort 9)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_9",
+      "expected": 14.55745756
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_9",
+      "label": "Years into the future (truncated at 100 years) (Cohort 9)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_8 + average_time_between_cohorts_years",
+      "expected": 80.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_9",
+      "label": "Discounted units of value per person (Cohort 9)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_9 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_9",
+      "expected": 0.09443150488
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_10",
+      "label": "Number of students sponsored (Cohort 10)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_9 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.06142624801
+    },
+    {
+      "id": "units_of_value_per_person_cohort_10",
+      "label": "Units of value per person (Cohort 10)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_10",
+      "expected": 10.67722017
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_10",
+      "label": "Years into the future (truncated at 100 years) (Cohort 10)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_9 + average_time_between_cohorts_years",
+      "expected": 90.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_10",
+      "label": "Discounted units of value per person (Cohort 10)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_10 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_10",
+      "expected": 0.03689720748
+    },
+    {
+      "id": "number_of_students_sponsored_cohort_11",
+      "label": "Number of students sponsored (Cohort 11)",
+      "section": "future_cohorts",
+      "formula": "number_of_students_sponsored_cohort_10 * expected_number_of_future_scholars_funded_per_student",
+      "expected": 0.0450533049
+    },
+    {
+      "id": "units_of_value_per_person_cohort_11",
+      "label": "Units of value per person (Cohort 11)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_11",
+      "expected": 7.831245947
+    },
+    {
+      "id": "years_into_the_future_truncated_at_100_years_cohort_11",
+      "label": "Years into the future (truncated at 100 years) (Cohort 11)",
+      "section": "future_cohorts",
+      "formula": "years_into_the_future_truncated_at_100_years_cohort_10 + average_time_between_cohorts_years",
+      "expected": 100.0
+    },
+    {
+      "id": "discounted_units_of_value_per_person_cohort_11",
+      "label": "Discounted units of value per person (Cohort 11)",
+      "section": "future_cohorts",
+      "formula": "units_of_value_per_person_cohort_11 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_11",
+      "expected": 0.01441684025
+    },
+    {
+      "id": "total_units_of_value_generated_per_person_given_income_shari",
+      "label": "Total units of value generated per person given income sharing agreement",
+      "section": "botec",
+      "formula": "sum(discounted_units_of_value_per_person_cohort_1, discounted_units_of_value_per_person_cohort_2, discounted_units_of_value_per_person_cohort_3, discounted_units_of_value_per_person_cohort_4, discounted_units_of_value_per_person_cohort_5, discounted_units_of_value_per_person_cohort_6, discounted_units_of_value_per_person_cohort_7, discounted_units_of_value_per_person_cohort_8, discounted_units_of_value_per_person_cohort_9, discounted_units_of_value_per_person_cohort_10, discounted_units_of_value_per_person_cohort_11)",
+      "expected": 285.2858501
+    },
+    {
+      "id": "old_best_guess_row_4",
+      "label": "Old best guess (row 4)",
+      "section": "botec",
+      "value": 12520.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B4"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "old_best_guess_row_5",
+      "label": "Old best guess (row 5)",
+      "section": "botec",
+      "value": 0.35,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
+        "cell": "BOTEC!B5"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "program_cost_per_person_old_best_guess",
+      "label": "Program cost per person (Old best guess)",
+      "section": "botec",
+      "formula": "old_best_guess_row_4 / (1 - old_best_guess_row_5)",
+      "expected": 19261.53846,
+      "format": "usd"
+    },
+    {
+      "id": "units_of_value_per",
+      "label": "Units of value per $",
+      "section": "botec",
+      "formula": "total_units_of_value_generated_per_person_given_income_shari / program_cost_per_person_old_best_guess",
+      "expected": 0.01481116634
+    },
+    {
+      "id": "cell_b69_on_botec",
+      "label": "Cell B69 on BOTEC",
+      "section": "botec",
+      "unit": "x cash",
+      "formula": "units_of_value_per / 0.00335",
+      "expected": 4.421243683
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(cell_b69_on_botec * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cell_b69_on_botec",
+      "unit": "multiples of cash transfers"
+    }
   }
- },
- "resources": [
-  {
-   "title": "GiveWell, Malengo BOTEC, 2024 (public)",
-   "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (malengo core operations january 2024)",
-   "url": "https://www.givewell.org/research/grants/malengo-core-operations-january-2024",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "botec",
-   "title": "BOTEC"
-  },
-  {
-   "id": "future_cohorts",
-   "title": "Future cohorts"
-  },
-  {
-   "id": "ppp_adjustment",
-   "title": "PPP adjustment"
-  },
-  {
-   "id": "hh_multipliers",
-   "title": "HH multipliers"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "number_of_children_whose_migration_decisions_could_be_affect",
-   "label": "Number of children whose migration decisions could be affected (Best-guess)",
-   "section": "botec",
-   "value": 10.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D48"
-   },
-   "explainer": "Guess - I imagine the people that could plausibly be affected include siblings, cousins, and close friends"
-  },
-  {
-   "id": "baseline_rates_of_european_migration_in_child_s_network_best",
-   "label": "Baseline rates of European migration in child's network (Best-guess)",
-   "section": "botec",
-   "value": 0.01,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D49"
-   },
-   "explainer": "I base this estimate on two statistics: the emigrant-to-home population ratio in Uganda (5%), and the percentage of migrating Africans who migrate to Europe (18% ~= 20%) For emigrant-to-home population ratio in Uganda, see Map 1.1 (page 45) in World Bank (2018). From the Economist: \"Only 18% of those (Africans) living abroad are in Europe. About 70% are in other African countries\", The Economist (2021)",
-   "format": "percent"
-  },
-  {
-   "id": "number_of_children_in_network_who_would_migrate_without_prog",
-   "label": "Number of children in network who would migrate without programme (Best-guess)",
-   "section": "botec",
-   "formula": "number_of_children_whose_migration_decisions_could_be_affect * baseline_rates_of_european_migration_in_child_s_network_best",
-   "expected": 0.1
-  },
-  {
-   "id": "percentage_increase_in_migration_probability_given_migrant_e",
-   "label": "Percentage increase in migration probability given migrant exposure (Best-guess)",
-   "section": "botec",
-   "value": 0.22,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D51"
-   },
-   "explainer": "\"Bedasso et al. (2020) find an effect of migrant exposure on completing secondary education of 14–17%, and on own future migration of 22%\", impact of Malengo",
-   "format": "percent"
-  },
-  {
-   "id": "additional_cases_of_migration_per_person_caused_by_the_progr",
-   "label": "Additional cases of migration per person caused by the programme (Best-guess)",
-   "section": "botec",
-   "formula": "number_of_children_in_network_who_would_migrate_without_prog * percentage_increase_in_migration_probability_given_migrant_e",
-   "expected": 0.022
-  },
-  {
-   "id": "direct_effects_income_gains_from_migrating_discount_rate_bes",
-   "label": "Direct effects: income gains from migrating: Discount rate (Best-guess)",
-   "section": "botec",
-   "value": 0.04,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D17"
-   },
-   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent"
-  },
-  {
-   "id": "working_lifespan_duration_of_benefits_years_best_guess",
-   "label": "Working lifespan/duration of benefits, years (Best-guess)",
-   "section": "botec",
-   "value": 40.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D18"
-   },
-   "explainer": "Assume average working lifespan for the participants"
-  },
-  {
-   "id": "income_for_those_who_migrate_net_of_remittances_and_repaymen",
-   "label": "Income for those who migrate net of remittances & repayments (Best-guess)",
-   "section": "botec",
-   "value": 40000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D12"
-   },
-   "explainer": "My best-guess takes the mid-point of starting salaries for engineering, agriculture, and English graduates, which I think are representative of the types of degrees Malengo students would study. From the resulting figure ($44k), I subtract $4k to account for remittances. I don't subtract the $30k repayment amount because: i) over the course of a 40 year life, $30k ~= $1k per year; ii) this parameter is pretty uncertain to begin with; iii) the bottom-line actually isn't that sensitive to this parameter (b/c of our logarithmic utility assumption)",
-   "format": "usd"
-  },
-  {
-   "id": "ppp_conversion_factor_2021_uganda",
-   "label": "PPP conversion factor 2021 - Uganda",
-   "section": "ppp_adjustment",
-   "value": 1309.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "PPP adjustment!B3"
-   },
-   "explainer": "World Bank"
-  },
-  {
-   "id": "usd_ugx_exchange_rate_2021",
-   "label": "USD:UGX exchange rate 2021",
-   "section": "ppp_adjustment",
-   "value": 3586.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "PPP adjustment!B5"
-   },
-   "explainer": "exchangerates.org.uk Average 2021 rate"
-  },
-  {
-   "id": "ugandan_relative_price_level_2021",
-   "label": "Ugandan relative price level 2021",
-   "section": "ppp_adjustment",
-   "formula": "ppp_conversion_factor_2021_uganda / usd_ugx_exchange_rate_2021",
-   "expected": 0.3650306748,
-   "format": "percent"
-  },
-  {
-   "id": "ppp_conversion_factor_2021_germany",
-   "label": "PPP conversion factor 2021 - Germany",
-   "section": "ppp_adjustment",
-   "value": 0.74,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "PPP adjustment!B4"
-   },
-   "explainer": "World Bank"
-  },
-  {
-   "id": "usd_eur_exchange_rate_2021",
-   "label": "USD:EUR exchange rate 2021",
-   "section": "ppp_adjustment",
-   "value": 0.8458,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "PPP adjustment!B6"
-   },
-   "explainer": "exchangerates.org.uk Average 2021 rate"
-  },
-  {
-   "id": "german_relative_price_level_2021",
-   "label": "German relative price level 2021",
-   "section": "ppp_adjustment",
-   "formula": "ppp_conversion_factor_2021_germany / usd_eur_exchange_rate_2021",
-   "expected": 0.8749113266,
-   "format": "percent"
-  },
-  {
-   "id": "implied_ppp_adjustment",
-   "label": "Implied PPP adjustment",
-   "section": "ppp_adjustment",
-   "formula": "ugandan_relative_price_level_2021 / german_relative_price_level_2021",
-   "expected": 0.4172201957,
-   "format": "percent"
-  },
-  {
-   "id": "direct_effects_income_gains_from_migrating_ppp_adjustment_be",
-   "label": "Direct effects: income gains from migrating: PPP adjustment (Best-guess)",
-   "section": "botec",
-   "formula": "implied_ppp_adjustment",
-   "expected": 0.4172201957,
-   "format": "percent"
-  },
-  {
-   "id": "income_for_those_who_migrate_ppp_adjusted_best_guess",
-   "label": "Income for those who migrate, PPP adjusted (Best-guess)",
-   "section": "botec",
-   "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * direct_effects_income_gains_from_migrating_ppp_adjustment_be",
-   "expected": 16688.80783,
-   "format": "usd"
-  },
-  {
-   "id": "counterfactual_income_per_person_participating_best_guess",
-   "label": "Counterfactual income per person participating (Best-guess)",
-   "section": "botec",
-   "value": 2000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D11"
-   },
-   "explainer": "Best-guess is that counter-factual income would be higher for participating students, given they are selected on ability \"Compared to the outside option of taking a job in Uganda with the average yearly income of those with a high school diploma or some college, EUR 1,598\", the impact of Malengo",
-   "format": "usd"
-  },
-  {
-   "id": "units_of_value_per_ln_inc_increase_best_guess",
-   "label": "Units of value per ln inc increase (Best-guess)",
-   "section": "botec",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D16"
-   },
-   "explainer": "Linked to the shared assumption `uov_per_ln_consumption`; GiveWell's sheet uses 1.44.\n\nGiveWell moral weights GiveWell, Moral weights and discount rate",
-   "formula": "$uov_per_ln_consumption",
-   "expected": 1.44
-  },
-  {
-   "id": "average_number_of_years_between_malengo_programme_and_long_t",
-   "label": "Average number of years between Malengo programme and long-term benefits (Best-guess)",
-   "section": "botec",
-   "value": 5.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D19"
-   },
-   "explainer": "Assume that it takes scholars ~5 years to graduate"
-  },
-  {
-   "id": "units_of_value_in_first_year_of_those_that_migrate_direct_be",
-   "label": "Units of value in first year of those that migrate, direct (Best-guess)",
-   "section": "botec",
-   "formula": "(ln(income_for_those_who_migrate_ppp_adjusted_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
-   "expected": 2.511062286
-  },
-  {
-   "id": "income_for_those_who_migrate_net_of_remittances_and_repaymen_2",
-   "label": "Income for those who migrate net of remittances & repayments (Old best guess)",
-   "section": "botec",
-   "value": 40000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B12"
-   },
-   "explainer": "My best-guess takes the mid-point of starting salaries for engineering, agriculture, and English graduates, which I think are representative of the types of degrees Malengo students would study. From the resulting figure ($44k), I subtract $4k to account for remittances. I don't subtract the $30k repayment amount because: i) over the course of a 40 year life, $30k ~= $1k per year; ii) this parameter is pretty uncertain to begin with; iii) the bottom-line actually isn't that sensitive to this parameter (b/c of our logarithmic utility assumption)",
-   "format": "usd"
-  },
-  {
-   "id": "income_for_those_that_remain_in_germany",
-   "label": "Income for those that remain in Germany",
-   "section": "hh_multipliers",
-   "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen_2",
-   "expected": 40000.0,
-   "format": "usd"
-  },
-  {
-   "id": "number_of_earners_in_hh",
-   "label": "Number of earners in hh",
-   "section": "hh_multipliers",
-   "value": 2.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "HH multipliers!B4"
-   }
-  },
-  {
-   "id": "household_income_for_those_that_remain_in_germany",
-   "label": "Household income for those that remain in Germany",
-   "section": "hh_multipliers",
-   "formula": "income_for_those_that_remain_in_germany * number_of_earners_in_hh",
-   "expected": 80000.0,
-   "format": "usd"
-  },
-  {
-   "id": "expected_hh_size_of_those_that_remain_in_germany",
-   "label": "Expected hh size of those that remain in Germany",
-   "section": "hh_multipliers",
-   "value": 3.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "HH multipliers!B18"
-   },
-   "explainer": "I think it's fair to assume that those who remain in Germany will have smaller families"
-  },
-  {
-   "id": "household_consumption_per_capita_among_those_that_remain_in",
-   "label": "Household consumption per capita among those that remain in Germany",
-   "section": "hh_multipliers",
-   "formula": "household_income_for_those_that_remain_in_germany / expected_hh_size_of_those_that_remain_in_germany",
-   "expected": 26666.66667,
-   "format": "usd"
-  },
-  {
-   "id": "counterfactual_income_per_person_participating_old_best_gues",
-   "label": "Counterfactual income per person participating (Old best guess)",
-   "section": "botec",
-   "value": 2000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B11"
-   },
-   "explainer": "Best-guess is that counter-factual income would be higher for participating students, given they are selected on ability \"Compared to the outside option of taking a job in Uganda with the average yearly income of those with a high school diploma or some college, EUR 1,598\", the impact of Malengo",
-   "format": "usd"
-  },
-  {
-   "id": "counterfactual_income_per_person_participating",
-   "label": "Counterfactual income per person participating",
-   "section": "hh_multipliers",
-   "formula": "counterfactual_income_per_person_participating_old_best_gues",
-   "expected": 2000.0,
-   "format": "usd"
-  },
-  {
-   "id": "counterfactual_household_income",
-   "label": "Counterfactual household income",
-   "section": "hh_multipliers",
-   "formula": "counterfactual_income_per_person_participating * number_of_earners_in_hh",
-   "expected": 4000.0,
-   "format": "usd"
-  },
-  {
-   "id": "expected_hh_size_of_participants_in_uganda",
-   "label": "Expected hh size of participants in Uganda",
-   "section": "hh_multipliers",
-   "value": 4.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "HH multipliers!B3"
-   }
-  },
-  {
-   "id": "counterfactual_household_consumption_per_capita",
-   "label": "Counterfactual household consumption per capita",
-   "section": "hh_multipliers",
-   "formula": "counterfactual_household_income / expected_hh_size_of_participants_in_uganda",
-   "expected": 1000.0,
-   "format": "usd"
-  },
-  {
-   "id": "increase_in_units_of_consumption_given_inc_sharing",
-   "label": "Increase in units of consumption given inc sharing",
-   "section": "hh_multipliers",
-   "formula": "(ln(household_consumption_per_capita_among_those_that_remain_in) - ln(counterfactual_household_consumption_per_capita)) * expected_hh_size_of_those_that_remain_in_germany",
-   "expected": 9.850243038
-  },
-  {
-   "id": "increase_in_units_of_consumption_without_inc_sharing",
-   "label": "Increase in units of consumption without inc sharing",
-   "section": "hh_multipliers",
-   "formula": "ln(income_for_those_that_remain_in_germany) - ln(counterfactual_income_per_person_participating)",
-   "expected": 2.995732274
-  },
-  {
-   "id": "implied_hh_multiplier_for_those_that_stay_in_germany",
-   "label": "Implied hh multiplier for those that stay in Germany",
-   "section": "hh_multipliers",
-   "formula": "increase_in_units_of_consumption_given_inc_sharing / increase_in_units_of_consumption_without_inc_sharing",
-   "expected": 3.288091905
-  },
-  {
-   "id": "household_multiplier_amongst_scholars_that_migrate_best_gues",
-   "label": "Household multiplier amongst scholars that migrate (Best-guess)",
-   "section": "botec",
-   "formula": "implied_hh_multiplier_for_those_that_stay_in_germany",
-   "expected": 3.288091905
-  },
-  {
-   "id": "units_of_value_in_first_year_of_those_that_migrate_given_res",
-   "label": "Units of value in first year of those that migrate, given resource sharing (Best-guess)",
-   "section": "botec",
-   "formula": "units_of_value_in_first_year_of_those_that_migrate_direct_be * household_multiplier_amongst_scholars_that_migrate_best_gues",
-   "expected": 8.256603576
-  },
-  {
-   "id": "total_present_discounted_units_of_direct_value_per_person_th",
-   "label": "Total present-discounted units of direct value per person that migrates (Best-guess)",
-   "section": "botec",
-   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_migrate_given_res)",
-   "expected": 163.4210876
-  },
-  {
-   "id": "baseline_consumption_per_person_in_remittance_household_old",
-   "label": "Baseline consumption per person in remittance household (Old best guess)",
-   "section": "botec",
-   "value": 1200.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B31"
-   },
-   "explainer": "Malengo internal estimate",
-   "format": "usd"
-  },
-  {
-   "id": "household_consumption_per_capita_in_remittance_households",
-   "label": "Household consumption per capita in remittance households",
-   "section": "hh_multipliers",
-   "formula": "baseline_consumption_per_person_in_remittance_household_old",
-   "expected": 1200.0,
-   "format": "usd"
-  },
-  {
-   "id": "remittance_per_household_old_best_guess",
-   "label": "Remittance per household (Old best guess)",
-   "section": "botec",
-   "value": 1000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B32"
-   },
-   "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo",
-   "format": "usd"
-  },
-  {
-   "id": "remittance_size_per_household",
-   "label": "Remittance size per household",
-   "section": "hh_multipliers",
-   "formula": "remittance_per_household_old_best_guess",
-   "expected": 1000.0,
-   "format": "usd"
-  },
-  {
-   "id": "expected_hh_size_of_remittance_recipients",
-   "label": "Expected hh size of remittance recipients",
-   "section": "hh_multipliers",
-   "value": 4.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "HH multipliers!B25"
-   }
-  },
-  {
-   "id": "increase_in_units_of_consumption_given_inc_sharing_2",
-   "label": "Increase in units of consumption given inc sharing",
-   "section": "hh_multipliers",
-   "formula": "(ln(household_consumption_per_capita_in_remittance_households + remittance_size_per_household / expected_hh_size_of_remittance_recipients) - ln(household_consumption_per_capita_in_remittance_households)) * expected_hh_size_of_remittance_recipients",
-   "expected": 0.7569679986
-  },
-  {
-   "id": "increase_in_units_of_consumption_without_inc_sharing_2",
-   "label": "Increase in units of consumption without inc sharing",
-   "section": "hh_multipliers",
-   "formula": "ln(household_consumption_per_capita_in_remittance_households + remittance_size_per_household) - ln(household_consumption_per_capita_in_remittance_households)",
-   "expected": 0.6061358036
-  },
-  {
-   "id": "implied_hh_multipler_in_remittance_households",
-   "label": "Implied hh multipler in remittance households",
-   "section": "hh_multipliers",
-   "formula": "increase_in_units_of_consumption_given_inc_sharing_2 / increase_in_units_of_consumption_without_inc_sharing_2",
-   "expected": 1.248842246
-  },
-  {
-   "id": "household_multiplier_in_remittance_households_best_guess",
-   "label": "Household multiplier in remittance households (Best-guess)",
-   "section": "botec",
-   "formula": "implied_hh_multipler_in_remittance_households",
-   "expected": 1.248842246
-  },
-  {
-   "id": "remittance_per_household_best_guess",
-   "label": "Remittance per household (Best-guess)",
-   "section": "botec",
-   "value": 1000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D32"
-   },
-   "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo",
-   "format": "usd"
-  },
-  {
-   "id": "baseline_consumption_per_person_in_remittance_household_best",
-   "label": "Baseline consumption per person in remittance household (Best-guess)",
-   "section": "botec",
-   "formula": "1.4 * 365",
-   "expected": 511.0,
-   "format": "usd"
-  },
-  {
-   "id": "number_of_households_receiving_remittances_best_guess",
-   "label": "Number of households receiving remittances (Best-guess)",
-   "section": "botec",
-   "value": 4.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D33"
-   },
-   "explainer": "\"To estimate the magnitude of such remittances, a useful statistic is that the average Ugandan migrant in the UK sends USD 4,000 per year back to Uganda (Cooper et al., “Remittances in Uganda”, Centre for Financial Regulation & Inclusion, 2018). While we don’t have data for the remittances sent by the 2,600 Ugandans living in Germany, it is likely that the magnitude is similar due to the relatively similar household incomes in Germany compared to the UK\", the impact of Malengo"
-  },
-  {
-   "id": "units_of_value_in_first_year_of_those_that_migrate_indirect",
-   "label": "Units of value in first year of those that migrate, indirect (Best-guess)",
-   "section": "botec",
-   "formula": "(ln(remittance_per_household_best_guess + baseline_consumption_per_person_in_remittance_household_best) - ln(baseline_consumption_per_person_in_remittance_household_best)) * number_of_households_receiving_remittances_best_guess * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
-   "expected": 5.132726393
-  },
-  {
-   "id": "units_of_value_in_first_year_given_resource_sharing_in_house",
-   "label": "Units of value in first year given resource sharing in household (Best-guess)",
-   "section": "botec",
-   "formula": "household_multiplier_in_remittance_households_best_guess * units_of_value_in_first_year_of_those_that_migrate_indirect",
-   "expected": 6.409965559
-  },
-  {
-   "id": "total_present_discounted_units_of_indirect_value_per_person",
-   "label": "Total present-discounted units of indirect value per person that migrates (Best-guess)",
-   "section": "botec",
-   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_given_resource_sharing_in_house)",
-   "expected": 126.8709989
-  },
-  {
-   "id": "total_discounted_units_of_value_per_person_that_migrates_bes",
-   "label": "Total discounted units of value per person that migrates (Best-guess)",
-   "section": "botec",
-   "formula": "total_present_discounted_units_of_direct_value_per_person_th + total_present_discounted_units_of_indirect_value_per_person",
-   "expected": 290.2920865
-  },
-  {
-   "id": "total_discounted_units_of_value_per_person_from_migration_sp",
-   "label": "Total discounted units of value per person from migration spillovers (Best-guess)",
-   "section": "botec",
-   "formula": "additional_cases_of_migration_per_person_caused_by_the_progr * total_discounted_units_of_value_per_person_that_migrates_bes",
-   "expected": 6.386425904
-  },
-  {
-   "id": "of_participants_that_get_a_job_in_germany_best_guess",
-   "label": "% of participants that get a job in Germany (Best-guess)",
-   "section": "botec",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D9"
-   },
-   "explainer": "My best-guess assumes that 70% of Malengo students will graduate, and 70% of graduates will find a grad job in Germany. 1*0.7*0.7 = 0.49 = ~50%",
-   "format": "percent"
-  },
-  {
-   "id": "total_discounted_units_of_value_per_person_from_remittances",
-   "label": "Total discounted units of value per person from remittances (Best-guess)",
-   "section": "botec",
-   "formula": "total_present_discounted_units_of_indirect_value_per_person * of_participants_that_get_a_job_in_germany_best_guess",
-   "expected": 63.43549945
-  },
-  {
-   "id": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best",
-   "label": "Moral weight of averting the death of a 60-64 year-old (Best-guess)",
-   "section": "botec",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D44"
-   },
-   "explainer": "GiveWell's moral weight, 40 units of value, times your multiplier on the value of a life.\n\nRough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)",
-   "formula": "40 * $life_value_multiplier",
-   "expected": 40.0
-  },
-  {
-   "id": "direct_effects_income_gains_from_migrating_discount_rate_old",
-   "label": "Direct effects: income gains from migrating: Discount rate (Old best guess)",
-   "section": "botec",
-   "value": 0.04,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B17"
-   },
-   "explainer": "GiveWell moral weight GiveWell, Moral weights and discount rate",
-   "format": "percent"
-  },
-  {
-   "id": "life_expectancy_at_birth_in_uganda_old_best_guess",
-   "label": "Life expectancy at birth in Uganda (Old best guess)",
-   "section": "botec",
-   "value": 64.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B41"
-   },
-   "explainer": "Rough guess. A more precise esimate would be life expectancy conditional on making it to age 18. World Bank"
-  },
-  {
-   "id": "average_age_of_participant_old_best_guess",
-   "label": "Average age of participant (Old best guess)",
-   "section": "botec",
-   "value": 18.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B42"
-   }
-  },
-  {
-   "id": "average_number_of_years_between_malengo_programme_and_mortal",
-   "label": "Average number of years between Malengo programme and mortality benefits (Old best guess)",
-   "section": "botec",
-   "formula": "life_expectancy_at_birth_in_uganda_old_best_guess - average_age_of_participant_old_best_guess",
-   "expected": 46.0
-  },
-  {
-   "id": "units_of_value_from_mortality_among_those_that_migrate_best",
-   "label": "Units of value from mortality among those that migrate (Best-guess)",
-   "section": "botec",
-   "formula": "moral_weight_of_averting_the_death_of_a_60_64_year_old_best / (1 + direct_effects_income_gains_from_migrating_discount_rate_old) ^ average_number_of_years_between_malengo_programme_and_mortal * of_participants_that_get_a_job_in_germany_best_guess",
-   "expected": 3.292277151
-  },
-  {
-   "id": "income_for_those_who_return_to_uganda_best_guess",
-   "label": "Income for those who return to Uganda (Best-guess)",
-   "section": "botec",
-   "value": 4000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D15"
-   },
-   "explainer": "Rough guess: some participants that return to Uganda will have graduated, so I take a rough midpoint between Ugandan salaries for secondary ($1,600) and tertiary graduates ($5,600)",
-   "format": "usd"
-  },
-  {
-   "id": "units_of_value_in_first_year_of_those_that_return_direct_bes",
-   "label": "Units of value in first year of those that return, direct (Best-guess)",
-   "section": "botec",
-   "formula": "(ln(income_for_those_who_return_to_uganda_best_guess) - ln(counterfactual_income_per_person_participating_best_guess)) * units_of_value_per_ln_inc_increase_best_guess / (1 + direct_effects_income_gains_from_migrating_discount_rate_bes) ^ average_number_of_years_between_malengo_programme_and_long_t",
-   "expected": 0.8203916976
-  },
-  {
-   "id": "income_for_those_who_return_to_uganda_old_best_guess",
-   "label": "Income for those who return to Uganda (Old best guess)",
-   "section": "botec",
-   "value": 4000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B15"
-   },
-   "explainer": "Rough guess: some participants that return to Uganda will have graduated, so I take a rough midpoint between Ugandan salaries for secondary ($1,600) and tertiary graduates ($5,600)",
-   "format": "usd"
-  },
-  {
-   "id": "income_for_those_who_return_to_uganda",
-   "label": "Income for those who return to Uganda",
-   "section": "hh_multipliers",
-   "formula": "income_for_those_who_return_to_uganda_old_best_guess",
-   "expected": 4000.0,
-   "format": "usd"
-  },
-  {
-   "id": "household_income_among_those_who_return",
-   "label": "Household income among those who return",
-   "section": "hh_multipliers",
-   "formula": "income_for_those_who_return_to_uganda + counterfactual_income_per_person_participating",
-   "expected": 6000.0,
-   "format": "usd"
-  },
-  {
-   "id": "household_consumption_per_capita_among_those_that_return",
-   "label": "Household consumption per capita among those that return",
-   "section": "hh_multipliers",
-   "formula": "household_income_among_those_who_return / expected_hh_size_of_participants_in_uganda",
-   "expected": 1500.0,
-   "format": "usd"
-  },
-  {
-   "id": "increase_in_units_of_consumption_given_inc_sharing_3",
-   "label": "Increase in units of consumption given inc sharing",
-   "section": "hh_multipliers",
-   "formula": "(ln(household_consumption_per_capita_among_those_that_return) - ln(counterfactual_household_consumption_per_capita)) * expected_hh_size_of_participants_in_uganda",
-   "expected": 1.621860432
-  },
-  {
-   "id": "increase_in_units_of_consumption_without_inc_sharing_3",
-   "label": "Increase in units of consumption without inc sharing",
-   "section": "hh_multipliers",
-   "formula": "ln(income_for_those_who_return_to_uganda) - ln(counterfactual_income_per_person_participating)",
-   "expected": 0.6931471806
-  },
-  {
-   "id": "implied_hh_multiplier_for_those_that_return_to_uganda",
-   "label": "Implied hh multiplier for those that return to Uganda",
-   "section": "hh_multipliers",
-   "formula": "increase_in_units_of_consumption_given_inc_sharing_3 / increase_in_units_of_consumption_without_inc_sharing_3",
-   "expected": 2.339850003
-  },
-  {
-   "id": "household_multiplier_amongst_scholars_that_return_best_guess",
-   "label": "Household multiplier amongst scholars that return (Best-guess)",
-   "section": "botec",
-   "formula": "implied_hh_multiplier_for_those_that_return_to_uganda",
-   "expected": 2.339850003
-  },
-  {
-   "id": "units_of_value_in_first_year_of_those_that_return_given_reso",
-   "label": "Units of value in first year of those that return, given resource sharing (Best-guess)",
-   "section": "botec",
-   "formula": "units_of_value_in_first_year_of_those_that_return_direct_bes * household_multiplier_amongst_scholars_that_return_best_guess",
-   "expected": 1.919593516
-  },
-  {
-   "id": "total_present_discounted_units_of_direct_value_per_person_th_2",
-   "label": "Total present-discounted units of direct value per person that returns (Best-guess)",
-   "section": "botec",
-   "formula": "pv(direct_effects_income_gains_from_migrating_discount_rate_bes, working_lifespan_duration_of_benefits_years_best_guess, -units_of_value_in_first_year_of_those_that_return_given_reso)",
-   "expected": 37.99408041
-  },
-  {
-   "id": "of_participants_that_return_to_uganda_best_guess",
-   "label": "% of participants that return to Uganda (Best-guess)",
-   "section": "botec",
-   "formula": "1 - of_participants_that_get_a_job_in_germany_best_guess",
-   "expected": 0.5,
-   "format": "percent"
-  },
-  {
-   "id": "total_discounted_units_of_value_per_person_from_direct_effec",
-   "label": "Total discounted units of value per person from direct effects (Best-guess)",
-   "section": "botec",
-   "formula": "total_present_discounted_units_of_direct_value_per_person_th * of_participants_that_get_a_job_in_germany_best_guess + total_present_discounted_units_of_direct_value_per_person_th_2 * of_participants_that_return_to_uganda_best_guess",
-   "expected": 100.707584
-  },
-  {
-   "id": "units_of_value_per_person_from_direct_indirect_effects_best",
-   "label": "Units of value per person from direct + indirect effects (Best-guess)",
-   "section": "botec",
-   "formula": "total_discounted_units_of_value_per_person_from_migration_sp + total_discounted_units_of_value_per_person_from_remittances + units_of_value_from_mortality_among_those_that_migrate_best + total_discounted_units_of_value_per_person_from_direct_effec",
-   "expected": 173.8217865
-  },
-  {
-   "id": "units_of_value_per_person_cohort_1",
-   "label": "Units of value per person (Cohort 1)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best",
-   "expected": 173.8217865
-  },
-  {
-   "id": "discount_rate_for_future_cohorts_old_best_guess",
-   "label": "Discount rate for future cohorts (Old best guess)",
-   "section": "botec",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B59"
-   },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.065
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_1",
-   "label": "Years into the future (truncated at 100 years) (Cohort 1)",
-   "section": "future_cohorts",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "Future cohorts!C3"
-   }
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_1",
-   "label": "Discounted units of value per person (Cohort 1)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_1 / (1 + discount_rate_for_future_cohorts_old_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_1",
-   "expected": 173.8217865
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_1",
-   "label": "Number of students sponsored (Cohort 1)",
-   "section": "future_cohorts",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "Future cohorts!C4"
-   }
-  },
-  {
-   "id": "length_of_obligation_years",
-   "label": "Length of obligation (years)",
-   "section": "botec",
-   "value": 10.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D61"
-   },
-   "explainer": "If you live in Germany or another high- or middle-income country, and your yearly income exceeds EUR 27,000, you contribute 14% of your pre-tax income to future Malengo Scholars for a period of 10 years"
-  },
-  {
-   "id": "annual_payment_from_income_sharing_agreement_from_migrants_b",
-   "label": "Annual payment from income sharing agreement from migrants (Best-guess)",
-   "section": "botec",
-   "formula": "income_for_those_who_migrate_net_of_remittances_and_repaymen * 0.14",
-   "expected": 5600.0,
-   "format": "usd"
-  },
-  {
-   "id": "total_repayments_raised_per_migrant",
-   "label": "Total repayments raised per migrant",
-   "section": "botec",
-   "formula": "if(length_of_obligation_years * annual_payment_from_income_sharing_agreement_from_migrants_b > 75000, 75000, length_of_obligation_years * annual_payment_from_income_sharing_agreement_from_migrants_b)",
-   "expected": 56000.0,
-   "format": "usd"
-  },
-  {
-   "id": "program_cost_per_person_best_guess",
-   "label": "Program cost per person (Best-guess)",
-   "section": "botec",
-   "value": 34358.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D6"
-   },
-   "explainer": "Malengo internal estimate From Malengo, Budget (unpublished)",
-   "format": "usd"
-  },
-  {
-   "id": "repayment_compliance_rate",
-   "label": "Repayment compliance rate",
-   "section": "botec",
-   "value": 0.9,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D63"
-   },
-   "explainer": "The ISA is legally binding; this is the repayment rate assumed by Chancen, the private company that Malengo has been working with",
-   "format": "percent"
-  },
-  {
-   "id": "expected_number_of_future_scholars_funded_per_student",
-   "label": "Expected number of future scholars funded per student",
-   "section": "botec",
-   "formula": "total_repayments_raised_per_migrant / program_cost_per_person_best_guess * of_participants_that_get_a_job_in_germany_best_guess * repayment_compliance_rate",
-   "expected": 0.7334536353
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_2",
-   "label": "Number of students sponsored (Cohort 2)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_1 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.7334536353
-  },
-  {
-   "id": "units_of_value_per_person_cohort_2",
-   "label": "Units of value per person (Cohort 2)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_2",
-   "expected": 127.4902212
-  },
-  {
-   "id": "discount_rate_for_future_cohorts_best_guess",
-   "label": "Discount rate for future cohorts (Best-guess)",
-   "section": "botec",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D59"
-   },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.065.\n\nWe use a higher discount rate for future cohorts. This is to account for greater uncertainty about those potential participants (e.g., around program structure and counterfactual outcomes for future cohorts)",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.065
-  },
-  {
-   "id": "average_time_between_cohorts_years",
-   "label": "Average time between cohorts (years)",
-   "section": "botec",
-   "value": 10.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!D65"
-   },
-   "explainer": "Taking account time spent studying (5 years) + midpoint in length of obligation (5 year)"
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_2",
-   "label": "Years into the future (truncated at 100 years) (Cohort 2)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_1 + average_time_between_cohorts_years",
-   "expected": 10.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_2",
-   "label": "Discounted units of value per person (Cohort 2)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_2 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_2",
-   "expected": 67.91736012
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_3",
-   "label": "Number of students sponsored (Cohort 3)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_2 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.5379542351
-  },
-  {
-   "id": "units_of_value_per_person_cohort_3",
-   "label": "Units of value per person (Cohort 3)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_3",
-   "expected": 93.50816621
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_3",
-   "label": "Years into the future (truncated at 100 years) (Cohort 3)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_2 + average_time_between_cohorts_years",
-   "expected": 20.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_3",
-   "label": "Discounted units of value per person (Cohort 3)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_3 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_3",
-   "expected": 26.53733975
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_4",
-   "label": "Number of students sponsored (Cohort 4)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_3 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.3945644893
-  },
-  {
-   "id": "units_of_value_per_person_cohort_4",
-   "label": "Units of value per person (Cohort 4)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_4",
-   "expected": 68.58390443
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_4",
-   "label": "Years into the future (truncated at 100 years) (Cohort 4)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_3 + average_time_between_cohorts_years",
-   "expected": 30.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_4",
-   "label": "Discounted units of value per person (Cohort 4)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_4 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_4",
-   "expected": 10.36893071
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_5",
-   "label": "Number of students sponsored (Cohort 5)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_4 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.289394759
-  },
-  {
-   "id": "units_of_value_per_person_cohort_5",
-   "label": "Units of value per person (Cohort 5)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_5",
-   "expected": 50.30311403
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_5",
-   "label": "Years into the future (truncated at 100 years) (Cohort 5)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_4 + average_time_between_cohorts_years",
-   "expected": 40.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_5",
-   "label": "Discounted units of value per person (Cohort 5)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_5 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_5",
-   "expected": 4.051450713
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_6",
-   "label": "Number of students sponsored (Cohort 6)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_5 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.212257638
-  },
-  {
-   "id": "units_of_value_per_person_cohort_6",
-   "label": "Units of value per person (Cohort 6)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_6",
-   "expected": 36.89500185
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_6",
-   "label": "Years into the future (truncated at 100 years) (Cohort 6)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_5 + average_time_between_cohorts_years",
-   "expected": 50.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_6",
-   "label": "Discounted units of value per person (Cohort 6)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_6 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_6",
-   "expected": 1.583022719
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_7",
-   "label": "Number of students sponsored (Cohort 7)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_6 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.1556811362
-  },
-  {
-   "id": "units_of_value_per_person_cohort_7",
-   "label": "Units of value per person (Cohort 7)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_7",
-   "expected": 27.06077323
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_7",
-   "label": "Years into the future (truncated at 100 years) (Cohort 7)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_6 + average_time_between_cohorts_years",
-   "expected": 60.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_7",
-   "label": "Discounted units of value per person (Cohort 7)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_7 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_7",
-   "expected": 0.6185342252
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_8",
-   "label": "Number of students sponsored (Cohort 8)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_7 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.1141848953
-  },
-  {
-   "id": "units_of_value_per_person_cohort_8",
-   "label": "Units of value per person (Cohort 8)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_8",
-   "expected": 19.8478225
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_8",
-   "label": "Years into the future (truncated at 100 years) (Cohort 8)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_7 + average_time_between_cohorts_years",
-   "expected": 70.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_8",
-   "label": "Discounted units of value per person (Cohort 8)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_8 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_8",
-   "expected": 0.2416797834
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_9",
-   "label": "Number of students sponsored (Cohort 9)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_8 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.08374932655
-  },
-  {
-   "id": "units_of_value_per_person_cohort_9",
-   "label": "Units of value per person (Cohort 9)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_9",
-   "expected": 14.55745756
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_9",
-   "label": "Years into the future (truncated at 100 years) (Cohort 9)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_8 + average_time_between_cohorts_years",
-   "expected": 80.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_9",
-   "label": "Discounted units of value per person (Cohort 9)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_9 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_9",
-   "expected": 0.09443150488
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_10",
-   "label": "Number of students sponsored (Cohort 10)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_9 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.06142624801
-  },
-  {
-   "id": "units_of_value_per_person_cohort_10",
-   "label": "Units of value per person (Cohort 10)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_10",
-   "expected": 10.67722017
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_10",
-   "label": "Years into the future (truncated at 100 years) (Cohort 10)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_9 + average_time_between_cohorts_years",
-   "expected": 90.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_10",
-   "label": "Discounted units of value per person (Cohort 10)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_10 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_10",
-   "expected": 0.03689720748
-  },
-  {
-   "id": "number_of_students_sponsored_cohort_11",
-   "label": "Number of students sponsored (Cohort 11)",
-   "section": "future_cohorts",
-   "formula": "number_of_students_sponsored_cohort_10 * expected_number_of_future_scholars_funded_per_student",
-   "expected": 0.0450533049
-  },
-  {
-   "id": "units_of_value_per_person_cohort_11",
-   "label": "Units of value per person (Cohort 11)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_from_direct_indirect_effects_best * number_of_students_sponsored_cohort_11",
-   "expected": 7.831245947
-  },
-  {
-   "id": "years_into_the_future_truncated_at_100_years_cohort_11",
-   "label": "Years into the future (truncated at 100 years) (Cohort 11)",
-   "section": "future_cohorts",
-   "formula": "years_into_the_future_truncated_at_100_years_cohort_10 + average_time_between_cohorts_years",
-   "expected": 100.0
-  },
-  {
-   "id": "discounted_units_of_value_per_person_cohort_11",
-   "label": "Discounted units of value per person (Cohort 11)",
-   "section": "future_cohorts",
-   "formula": "units_of_value_per_person_cohort_11 / (1 + discount_rate_for_future_cohorts_best_guess) ^ years_into_the_future_truncated_at_100_years_cohort_11",
-   "expected": 0.01441684025
-  },
-  {
-   "id": "total_units_of_value_generated_per_person_given_income_shari",
-   "label": "Total units of value generated per person given income sharing agreement",
-   "section": "botec",
-   "formula": "sum(discounted_units_of_value_per_person_cohort_1, discounted_units_of_value_per_person_cohort_2, discounted_units_of_value_per_person_cohort_3, discounted_units_of_value_per_person_cohort_4, discounted_units_of_value_per_person_cohort_5, discounted_units_of_value_per_person_cohort_6, discounted_units_of_value_per_person_cohort_7, discounted_units_of_value_per_person_cohort_8, discounted_units_of_value_per_person_cohort_9, discounted_units_of_value_per_person_cohort_10, discounted_units_of_value_per_person_cohort_11)",
-   "expected": 285.2858501
-  },
-  {
-   "id": "old_best_guess_row_4",
-   "label": "Old best guess (row 4)",
-   "section": "botec",
-   "value": 12520.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B4"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "old_best_guess_row_5",
-   "label": "Old best guess (row 5)",
-   "section": "botec",
-   "value": 0.35,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
-    "cell": "BOTEC!B5"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "program_cost_per_person_old_best_guess",
-   "label": "Program cost per person (Old best guess)",
-   "section": "botec",
-   "formula": "old_best_guess_row_4 / (1 - old_best_guess_row_5)",
-   "expected": 19261.53846,
-   "format": "usd"
-  },
-  {
-   "id": "units_of_value_per",
-   "label": "Units of value per $",
-   "section": "botec",
-   "formula": "total_units_of_value_generated_per_person_given_income_shari / program_cost_per_person_old_best_guess",
-   "expected": 0.01481116634
-  },
-  {
-   "id": "cell_b69_on_botec",
-   "label": "Cell B69 on BOTEC",
-   "section": "botec",
-   "unit": "x cash",
-   "formula": "units_of_value_per / 0.00335",
-   "expected": 4.421243683
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "cell_b69_on_botec * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

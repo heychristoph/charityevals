@@ -1,107 +1,198 @@
 {
- "id": "ird-global-operational-funding-threshold-2023",
- "name": "IRD operational funding threshold analysis BOTEC, 2023",
- "kind": "charity",
- "cause": "global-health",
- "charity": "ird-global",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"IRD operational funding threshold analysis BOTEC, 2023\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "GiveWell, IRD operational funding threshold analysis BOTEC, 2023 (public)",
-  "url": "https://www.givewell.org/research/grants/ird-global-organizational-support-april-2023",
-  "sheet": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
-  "published": "2023-04-05",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "ird-global-operational-funding-threshold-2023",
+  "name": "IRD operational funding threshold analysis BOTEC, 2023",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "ird-global",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Funds IRD Global's operations, which run child vaccination programs in Pakistan. GiveWell's spreadsheet \"IRD operational funding threshold analysis BOTEC, 2023\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "GiveWell, IRD operational funding threshold analysis BOTEC, 2023 (public)",
+    "url": "https://www.givewell.org/research/grants/ird-global-organizational-support-april-2023",
+    "sheet": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+    "published": "2023-04-05",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "GiveWell, IRD operational funding threshold analysis BOTEC, 2023 (public)",
+      "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (ird global organizational support april 2023)",
+      "url": "https://www.givewell.org/research/grants/ird-global-organizational-support-april-2023",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "main",
+      "title": "Main"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line",
+      "kind": "ours"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    }
+  ],
+  "rows": [
+    {
+      "id": "pv_years_funded",
+      "label": "How long we fund IRD programs (years)",
+      "section": "main",
+      "value": 5.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+        "cell": "Main!B13"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "How fast these opportunities get worse each year",
+      "section": "main",
+      "value": 0.05,
+      "kind": "estimate",
+      "format": "percent",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+        "cell": "Main!B19"
+      },
+      "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 5% a year; it is not time preference, so the discount slider leaves it alone."
+    },
+    {
+      "id": "pv_annual_uov_per_dollar",
+      "label": "Units of value per dollar from IRD operational support grant, per year",
+      "section": "main",
+      "value": 0.007444444444,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+        "cell": "Main!B20"
+      },
+      "explainer": "Calculated in the source sheet as `=(B17-B18)/(B5*1000000)`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
+      "id": "present_discounted_value_of_additional_units_of_value_per_do",
+      "label": "Present discounted value of additional units of value per dollar",
+      "section": "main",
+      "formula": "pv(pv_discount_rate, pv_years_funded, -pv_annual_uov_per_dollar, 0, 1)",
+      "expected": 0.03384207598,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+        "cell": "Main!B21"
+      },
+      "explainer": "GiveWell's `=pv(B19,B13,-B20,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.\n\nCalculation"
+    },
+    {
+      "id": "units_of_value_per_dollar_givedirectly",
+      "label": "Units of value per dollar, GiveDirectly",
+      "section": "main",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
+        "cell": "Main!B16"
+      },
+      "explainer": "from our Top charities cost-effectiveness analysis (after adjustments)"
+    },
+    {
+      "id": "cost_effectiveness_of_this_grant_in_expectation_x_cash",
+      "label": "Cost-effectiveness of this grant in expectation (x cash)",
+      "section": "main",
+      "formula": "present_discounted_value_of_additional_units_of_value_per_do / units_of_value_per_dollar_givedirectly",
+      "expected": 10.10211223
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(cost_effectiveness_of_this_grant_in_expectation_x_cash * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_of_this_grant_in_expectation_x_cash",
+      "unit": "multiples of cash transfers"
+    }
   }
- },
- "resources": [
-  {
-   "title": "GiveWell, IRD operational funding threshold analysis BOTEC, 2023 (public)",
-   "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (ird global organizational support april 2023)",
-   "url": "https://www.givewell.org/research/grants/ird-global-organizational-support-april-2023",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "main",
-   "title": "Main"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "present_discounted_value_of_additional_units_of_value_per_do",
-   "label": "Present discounted value of additional units of value per dollar",
-   "section": "main",
-   "value": 0.03384207598,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
-    "cell": "Main!B21"
-   },
-   "explainer": "Calculated in the source sheet as `=pv(B19,B13,-B20,,1)`; kept as a fixed number here (text in arithmetic).\n\nCalculation"
-  },
-  {
-   "id": "units_of_value_per_dollar_givedirectly",
-   "label": "Units of value per dollar, GiveDirectly",
-   "section": "main",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1vMTPiGm5rJycbWih8LERE9P7hBk2FZhqqnLY9KhWfLY/edit",
-    "cell": "Main!B16"
-   },
-   "explainer": "from our Top charities cost-effectiveness analysis (after adjustments)"
-  },
-  {
-   "id": "cost_effectiveness_of_this_grant_in_expectation_x_cash",
-   "label": "Cost-effectiveness of this grant in expectation (x cash)",
-   "section": "main",
-   "formula": "present_discounted_value_of_additional_units_of_value_per_do / units_of_value_per_dollar_givedirectly",
-   "expected": 10.10211223
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "cost_effectiveness_of_this_grant_in_expectation_x_cash * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

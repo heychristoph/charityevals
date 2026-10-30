@@ -1,21 +1,24 @@
-// Build-time only: a model's history from git. For every commit that touched the model, its
-// parents, the shared assumptions or facts, we rebuild the whole library as it was at that commit
-// and compute the bottom line, so the page shows how the assessment moved and why.
+// Build-time only: a model's history from git. Only commits that touched the model's own file (or the
+// files it extends) count; for each we rebuild the library as it was at that commit, compute the
+// result and every row, and keep the commit message, so the page shows what changed and why.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, bottomLine, pickValue, type Library, type ResolvedModel } from "../engine/model";
+import { buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
+import { formatValue } from "./format";
 
-export type RowChange = { id: string; label: string; before: string; after: string };
+/** One row that changed: its value before and after, and whether its calculation changed too. */
+export type RowChange = { id: string; label: string; before: string; after: string; kind: "value" | "formula" | "added" | "removed" };
 
 export type HistoryEntry = {
   sha: string | null; // null: uncommitted changes in the working copy
   date: string;
   author: string;
   subject: string;
-  /** Multiples of the benchmark, default assumptions. Undefined when that version can't be read. */
+  /** The commit message's body: why the change was made. */
+  body: string;
+  /** Years of healthy life per $1,000, default assumptions. Undefined when that version can't be read. */
   ours?: number;
-  evaluator?: number;
   changes: RowChange[];
   note?: string;
 };
@@ -67,68 +70,88 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
   }
 }
 
-const describe = (r: ResolvedModel["rows"][number] | undefined) =>
-  !r ? "—" : r.formula !== undefined ? `= ${r.formula}` : typeof r.value === "object"
-    ? `${r.value.low ?? r.value.best} / ${r.value.best} / ${r.value.high ?? r.value.best}`
-    : String(pickValue(r.value));
-
-function evaluate(lib: Library | undefined, id: string) {
+function evaluate(lib: Library | undefined, id: string): { ours?: number; values?: Record<string, number> } {
   const m = lib?.models.get(id);
-  const bench = lib?.models.get(lib.assumptions.common.benchmark);
-  if (!lib || !m || !bench || !m.output) return {};
+  if (!lib || !m || !m.output) return {};
   const av = assumptionValues(lib.assumptions);
-  const ours = bottomLine(lib, m, av).common / bottomLine(lib, bench, av).common;
-  const evaluator = m.evaluator
-    ? bottomLine(lib, m, av, {}, "evaluator").common / bottomLine(lib, bench, av, {}, bench.evaluator ? "evaluator" : "charityevals").common
-    : undefined;
-  return { ours: Number.isFinite(ours) ? ours : undefined, evaluator: evaluator !== undefined && Number.isFinite(evaluator) ? evaluator : undefined };
+  // The page's own headline: years of healthy life per $1,000 (none for a unit nobody converts).
+  const ours = comparable(lib, m) ? headline(lib, m, av) : NaN;
+  let values: Record<string, number> | undefined;
+  try {
+    values = compute(lib, m, av);
+  } catch {
+    /* an old version today's engine can't run */
+  }
+  return { ours: Number.isFinite(ours) ? ours : undefined, values };
 }
 
-function diffRows(before: ResolvedModel | undefined, after: ResolvedModel | undefined): RowChange[] {
+/** Rows whose input or calculation changed between two versions, shown by their values. */
+function diffRows(before: ResolvedModel | undefined, bv: Record<string, number> | undefined, after: ResolvedModel | undefined, av: Record<string, number> | undefined): RowChange[] {
   if (!after) return [];
+  const show = (r: ResolvedModel["rows"][number], v: Record<string, number> | undefined) => (v && Number.isFinite(v[r.id]) ? formatValue(v[r.id], r.format) : "—");
   const out: RowChange[] = [];
   for (const r of after.rows) {
     const b = before?.byId.get(r.id);
-    const [x, y] = [describe(b), describe(r)];
-    if (x !== y) out.push({ id: r.id, label: r.label, before: x, after: y });
+    if (!b) {
+      out.push({ id: r.id, label: r.label, before: "—", after: show(r, av), kind: "added" });
+      continue;
+    }
+    // A row changed when what it says changed (its value, range or formula), not when a change upstream
+    // merely moved its result: that shows in the result line.
+    const formula = (b.formula ?? "") !== (r.formula ?? "");
+    if (!formula && JSON.stringify(b.value) === JSON.stringify(r.value)) continue;
+    const [was, is] = [show(b, bv), show(r, av)];
+    // A value that reads the same before and after (only its range or a far decimal moved) isn't a
+    // change worth a line; a new calculation that gives the same number still is, shown once.
+    if (!formula && was === is) continue;
+    out.push({ id: r.id, label: r.label, before: was, after: is, kind: formula ? "formula" : "value" });
   }
-  for (const r of before?.rows ?? []) if (!after.byId.has(r.id)) out.push({ id: r.id, label: r.label, before: describe(r), after: "removed" });
-  return out;
+  for (const r of before?.rows ?? []) if (!after.byId.has(r.id)) out.push({ id: r.id, label: r.label, before: show(r, bv), after: "removed", kind: "removed" });
+  // Imported sheets repeat a row under the same label (a value and the cell that passes it on): one line each.
+  return out.filter((c, i) => out.findIndex((x) => x.label === c.label && x.before === c.before && x.after === c.after && x.kind === c.kind) === i);
 }
 
+/** The commit message's body without git trailers (Co-Authored-By: …, Signed-off-by: …). */
+const reason = (body: string) => body.split("\n").filter((l) => !/^[A-Za-z-]+: .*<[^>]+>\s*$/.test(l)).join("\n").trim();
+
 /** Oldest first. Empty when the site isn't built from a git checkout. */
-export function modelHistory(root: string, model: ResolvedModel, filePaths: string[]): HistoryEntry[] {
-  const paths = [...filePaths, "assumptions/default.json", "facts"];
+/** `uncommitted`: add the working copy's changes as a last entry (while developing; a production build
+ * shows only what's committed). */
+export function modelHistory(root: string, model: ResolvedModel, filePaths: string[], { uncommitted = true }: { uncommitted?: boolean } = {}): HistoryEntry[] {
   let log: string[] = [];
   try {
-    log = git(root, ["log", "--reverse", "--format=%H%x1f%ad%x1f%an%x1f%s", "--date=short", "--", ...paths]).split("\n").filter(Boolean);
+    // %x1e ends each commit, %x1f separates its fields: the body may span lines.
+    log = git(root, ["log", "--reverse", "--format=%H%x1f%ad%x1f%an%x1f%s%x1f%b%x1e", "--date=short", "--", ...filePaths]).split("\x1e").map((l) => l.trim()).filter(Boolean);
   } catch {
     return [];
   }
   const entries: HistoryEntry[] = [];
-  let prev: ResolvedModel | undefined;
-  const step = (sha: string | null, date: string, author: string, subject: string) => {
+  let prev: { m: ResolvedModel; values?: Record<string, number> } | undefined;
+  const step = (sha: string | null, date: string, author: string, subject: string, body: string) => {
     const lib = libraryAt(root, sha);
     const m = lib?.models.get(model.id);
-    const result = evaluate(lib, model.id);
-    const changes = diffRows(prev, m);
+    const { ours, values } = evaluate(lib, model.id);
     entries.push({
-      sha, date, author, subject, ...result,
-      changes: prev ? changes : [],
-      note: !m ? "This model doesn't exist yet at this point, or can't be read by today's engine." : !prev ? `First version: ${m.rows.length} rows.` : undefined,
+      sha, date, author, subject, body: reason(body), ours,
+      changes: prev ? diffRows(prev.m, prev.values, m, values) : [],
+      note: !m ? "This model doesn't exist yet at this point, or can't be read by today's engine."
+        : !prev ? `First version: ${m.rows.length} rows.`
+        : undefined,
     });
-    if (m) prev = m;
+    if (m) prev = { m, values };
   };
   for (const line of log) {
-    const [sha, date, author, subject] = line.split("\x1f");
-    step(sha, date, author, subject);
+    const [sha, date, author, subject, body = ""] = line.split("\x1f");
+    step(sha, date, author, subject, body);
   }
   let dirty = false;
-  try {
-    dirty = git(root, ["status", "--porcelain", "--", ...paths]).trim().length > 0;
+  if (uncommitted) try {
+    dirty = git(root, ["status", "--porcelain", "--", ...filePaths]).trim().length > 0;
   } catch {
     /* not a checkout */
   }
-  if (dirty) step(null, new Date().toISOString().slice(0, 10), "", "Uncommitted changes");
-  return entries.filter((e) => e.sha === null || e.note || e.changes.length || e === entries[0]);
+  if (dirty) step(null, new Date().toISOString().slice(0, 10), "", "Uncommitted changes", "");
+  // Every commit to the file stays: one that changed no number (wording, sources, links) says so.
+  for (const e of entries) if (!e.note && !e.changes.length) e.note = "No numbers changed: wording, sources or links did.";
+  return entries;
 }

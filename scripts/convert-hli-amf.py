@@ -86,8 +86,8 @@ amf = {
                "HLI leaves open: the neutral point above which a life counts as good. HLI found AMF less cost-effective than StrongMinds under "
                "almost all views it considered.",
     "source": {"publisher": "Happier Lives Institute", "title": "The elephant in the bednet: the importance of philosophy when choosing between extending and improving lives",
-               "url": REPORT, "sheet": SHEET, "published": "2022-11-01", "retrieved": "2026-10-27", "license": "Unclear: check HLI's terms before republishing"},
-    "evaluator": {"name": "HLI", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
+               "url": REPORT, "sheet": SHEET, "published": "2022-11-01", "retrieved": "2026-10-27", "license": "© Happier Lives Institute; no licence published"},
+    "evaluator": {"name": "HLI", "assumptions": {"resource_shares": 0}},
     "sections": [{"id": "saving", "title": "Value of the lives saved", "explainer": "Deaths averted, each worth the wellbeing of the years saved, plus grief averted for the family."},
                  {"id": "improving", "title": "Better health and income"}, {"id": "bottom", "title": "Bottom line"}],
     "rows": amf_rows,
@@ -105,8 +105,8 @@ gd = {
                "life satisfaction and mental health, including spillovers to the household.",
     "source": {"publisher": "Happier Lives Institute", "title": "Cash transfers cost-effectiveness analysis",
                "url": "https://www.happierlivesinstitute.org/report/cash-transfers-cost-effectiveness-analysis/", "sheet": SUMMARY,
-               "published": "2024-11-01", "retrieved": "2026-10-27", "license": "Unclear: check HLI's terms before republishing"},
-    "evaluator": {"name": "HLI", "assumptions": {"count_salary_sacrifice": 0, "full_credit": 0}},
+               "published": "2024-11-01", "retrieved": "2026-10-27", "license": "© Happier Lives Institute; no licence published"},
+    "evaluator": {"name": "HLI", "assumptions": {"resource_shares": 0}},
     "sections": [{"id": "bottom", "title": "Bottom line"}],
     "rows": [
         {"id": "wellbys_per_1000", "section": "bottom", "label": "WELLBYs per $1,000", "format": "number", "value": S["B45"].value, "kind": "estimate",

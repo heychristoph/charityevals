@@ -1,22 +1,27 @@
 // "How the pieces fit together": the whole model as an expandable tree. The bottom line sits at the
 // top; each number opens into the numbers it's made from, each marked with how it joins them (× ÷ + −)
-// and a bar for how much the bottom line moves if it were 10% higher. Leaves say what they are: your
+// and a bar for its share of the bottom line's uncertainty. Leaves say what they are: your
 // assumption (linked to its slider), a shared fact (with its source) or the evaluator's input.
 // Only opened nodes are ever computed, so an 8,000-row model costs no more to show than a small one.
 import { Fragment, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import { ChevronRight, ExternalLink, Search, X } from "lucide-react";
+import { AlertTriangle, ChevronRight, ExternalLink, Search, X } from "lucide-react";
+import usage from "../../generated/usage.json";
 import { lib, modelFile, modelUrl } from "../lib/data";
-import { hasRange, inputRange, pickValue, type ResolvedModel, type View } from "../engine/model";
+import { comparable, hasRange, pickValue, type ResolvedModel } from "../engine/model";
 import type { Node } from "../engine/expr";
-import { childrenOf, lookupFor, pathTo, rootOf, shapeOf, type TreeNode } from "../engine/tree";
-import { formulaText } from "../engine/derive";
+import type { Row } from "../engine/schema";
+import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf, spreadShare, type TreeNode } from "../engine/tree";
 import { rowsFeeding } from "../engine/sensitivity";
 import type { Uncertainty } from "../engine/uncertainty";
 import { useAssumptionValues } from "../lib/use-results";
-import { formatValue } from "../lib/format";
+import { formatValue, formatAssumption, formatYears, parseEdit, editText } from "../lib/format";
 import { oneIn } from "../lib/comparables";
 import { track } from "../lib/analytics";
+import { clearEdits, setEdit } from "../lib/edit-state";
 import { Markdown } from "./AssumptionsPanel";
+import InfoTip from "./InfoTip";
+import Glossed from "./Glossed";
+import type { Flag } from "../engine/sensitivity";
 import "./tree.css";
 
 /** Parts shown before "n more": the ones with the most leverage, in the formula's own order. */
@@ -36,7 +41,7 @@ export function Formula({ text, model }: { text: string; model: ResolvedModel })
       {parts.map((p, i) => {
         if (p.startsWith("@")) {
           const f = lib.facts.get(p.slice(1));
-          return f ? <a key={i} href={`/assumptions#f-${f.key}`} title={`Shared fact: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
+          return f ? <a key={i} href={`/data#f-${f.key}`} title={`Shared data: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
         }
         if (p.startsWith("$")) {
           const a = lib.assumptions.rows.find((r) => r.id === p.slice(1));
@@ -60,6 +65,8 @@ function exprLabel(m: ResolvedModel, n: Node, depth = 0): string {
       case "ref": return n.scope === "row" ? rowLabel(m, n.name) : n.scope === "assumption" ? assumptionRow(n.name)?.label ?? n.name : lib.facts.get(n.name)?.label ?? n.name;
       case "neg": return `−${exprLabel(m, n.arg, depth + 1)}`;
       default: {
+        // Deeper than one level of brackets, a formula stops reading as words: name the part instead.
+        if (depth >= 2) return "…";
         const sh = shapeOf(n);
         const inner = sh.parts.map((p, i) => `${p.op ? `${p.op} ` : i ? ", " : ""}${exprLabel(m, p.node, depth + 1)}`).join(" ").replace(/ ,/g, ",");
         const body = sh.how && n.type === "call" ? `${sh.how} (${inner})` : inner;
@@ -70,48 +77,48 @@ function exprLabel(m: ResolvedModel, n: Node, depth = 0): string {
   return depth === 0 && s.length > 90 ? `${s.slice(0, 88).trimEnd()}…` : s;
 }
 
+/** Evaluators' jargon in row labels, in plain words: "funging" and "leverage" are other funders'
+ * money pushed elsewhere or pulled in. */
+function plain(label: string): string {
+  return label
+    .replace(/\s*\((?:funging|leverage)\)/gi, "")
+    .replace(/\bleverage and funging\b/gi, (w) => (w[0] === "L" ? "Other funders" : "other funders"))
+    .replace(/\bfunging\b/gi, "displaced funding");
+}
+
 function labelOf(m: ResolvedModel, n: TreeNode): string {
+  return plain(rawLabelOf(m, n));
+}
+
+function rawLabelOf(m: ResolvedModel, n: TreeNode): string {
+  if (n.label) return n.label;
   if (n.named) return rowLabel(m, n.named);
   if (n.type === "assumption") return assumptionRow(n.refId!)?.label ?? n.refId!;
   if (n.type === "fact") return lib.facts.get(n.refId!)?.label ?? n.refId!;
+  // The headline's "× 1000" turns a value per dollar into one per $1,000.
+  if (n.type === "const" && n.value === 1000 && /^r\.\d+$/.test(n.key)) return "Per $1,000 instead of per dollar";
   if (n.type === "const") return "Fixed number in the formula";
   if (n.type === "expr") return exprLabel(m, n.expr!);
   return rowLabel(m, n.rowId!);
 }
 
-function show(m: ResolvedModel, n: TreeNode): string {
+function show(m: ResolvedModel, n: TreeNode, years = false): string {
+  // The top row is the number under the page title, rounded the same way.
+  if (years) return formatYears(n.value);
   // The row named in the formula speaks first (it carries the label shown), then the rows it passed
   // through, then the number it ends at.
   const own = [n.named, ...n.via].map((id) => (id ? m.byId.get(id)?.format : undefined)).find(Boolean);
+  if (!own && n.type === "assumption" && assumptionRow(n.refId!)) return formatAssumption(assumptionRow(n.refId!)!, n.value);
   const f = own ?? (n.rowId ? m.byId.get(n.rowId)?.format : n.type === "assumption" ? assumptionRow(n.refId!)?.format : n.type === "fact" ? lib.facts.get(n.refId!)?.format : undefined);
   return f && f !== "number" && f !== "small" && f !== "toggle" ? formatValue(n.value, f) : fmtNum(n.value);
 }
 
-/** The row with a published range this node stands for: the row the formula names, a row it passed
- * through on the way, or the row it ends at. */
-function rangedRowOf(u: Uncertainty, n: TreeNode): string | undefined {
-  return [n.named, ...n.via, n.rowId].find((id): id is string => !!id && u.ranged.has(id));
-}
+/** How much of the uncertainty "Reveal uncertainties" opens up to. */
+const REVEAL_SHARE = 0.8;
 
-/** What the bars measure: the result's change if a number were 10% higher, or the share of the
- * result's uncertainty that comes through a number (its leverage times how well it's known). */
-export type Metric = "spread" | "lever";
-
-/** Share of the bottom line's uncertainty coming through this node: the result's derivative with
- * respect to it through this branch, squared, times its variance, both in its own units, so a node
- * whose value is zero still shows what it carries. */
-function spreadShare(u: Uncertainty, n: TreeNode): number {
-  if (!u.total || !u.result || n.g === undefined) return 0;
-  const ranged = rangedRowOf(u, n);
-  const v = ranged ? u.rowAbsVar(ranged)
-    : n.type === "assumption" || n.type === "fact" ? u.leafAbsVar(n.type, n.refId!)
-    : n.rowId ? u.rowAbsVar(n.rowId)
-    : n.expr ? u.exprAbsVar(n.expr)
-    : 0;
-  // (change in ln(result) through this branch)² × this number's variance, out of the whole.
-  return Math.min(1, ((n.g / u.result) ** 2 * v) / u.total);
-}
-
+/** A bar's width, to a tenth of a percent: the server's HTML shortens longer numbers, and the page
+ * must hydrate to exactly the string it was served. */
+const barWidth = (x: number) => `${Math.round(Math.min(Math.max(x, 0), 1) * 1000) / 10}%`;
 const shareText = (x: number) => (x < 0.005 ? "<1%" : `${Math.round(x * 100)}%`);
 
 /** "+6.2%": the bottom line's change if this number were 10% higher. */
@@ -126,31 +133,103 @@ function leverText(e: number | undefined): string {
 type Ctx = {
   m: ResolvedModel;
   look: ReturnType<typeof lookupFor>;
-  view: View;
   open: Set<string>;
   all: Set<string>;
   focus: string;
   flash?: string;
-  metric: Metric;
   u: Uncertainty;
-  /** The bar's length, 0–1, under the current metric. */
+  /** Caveats about the whole result, shown as a warning sign on the top row. */
+  flags: Flag[];
+  /** The bar's length, 0–1: the node's share of the uncertainty. */
   weight: (n: TreeNode) => number;
   toggle: (n: TreeNode, depth: number) => void;
   showAll: (key: string) => void;
-  fx: Set<string>;
-  toggleFx: (key: string) => void;
   setFocus: (key: string) => void;
+  /** Special terms already explained higher up the tree: each gets its info tip once. */
+  glossed: Set<string>;
+  /** The reader's edits: inputs by row id, facts by "@key". */
+  edits: Record<string, number>;
+  /** The top row is in years of healthy life per $1,000. */
+  years: boolean;
 };
+
+/** The models that read a shared fact, when more than one does. */
+const readers = (key: string): string[] => (usage as Record<string, string[]>)[key] ?? [];
+
+/** The number a leaf stands for that a reader can edit: an input row (by id) or a shared fact ("@key"),
+ * with its value before any edit. */
+function editable(ctx: Ctx, n: TreeNode): { id: string; original: number; format?: Row["format"] } | undefined {
+  if (n.type === "input" && n.rowId) {
+    const row = ctx.m.byId.get(n.rowId);
+    return row && !row.node ? { id: row.id, original: pickValue(row.value), format: row.format } : undefined;
+  }
+  if (n.type === "fact") {
+    const f = lib.facts.get(n.refId!);
+    return f ? { id: `@${n.refId}`, original: pickValue(f.value), format: f.format } : undefined;
+  }
+}
+
+/** "Try another value": a field for an input or fact, scoped to this page. */
+function EditValue({ ctx, n, label }: { ctx: Ctx; n: TreeNode; label: string }) {
+  const e = editable(ctx, n)!;
+  const edited = e.id in ctx.edits;
+  // The field shows the value as the row does (rounded); left as it is, the number keeps its full precision.
+  const asText = (x: number) => editText(x, e.format);
+  const [text, setText] = useState(() => asText(n.value));
+  useEffect(() => setText(asText(n.value)), [n.value]);
+  const commit = () => {
+    if (text.trim() === asText(n.value)) return;
+    const v = parseEdit(text, e.format);
+    if (v === undefined) return setText(asText(n.value));
+    setEdit(e.id, v, e.original);
+    track("tree_edit", { detail: e.id });
+  };
+  return (
+    <p className="tn-edit">
+      <label>
+        Try another value{" "}
+        <input className="num" inputMode="decimal" aria-label={`${label}, try another value`} value={text}
+          onChange={(ev) => setText(ev.target.value)} onFocus={(ev) => ev.target.select()} onBlur={commit}
+          onKeyDown={(ev) => { ev.stopPropagation(); if (ev.key === "Enter") commit(); if (ev.key === "Escape") setText(asText(n.value)); }} />
+        {e.format === "percent" ? "%" : ""}
+      </label>
+      {e.id.startsWith("@") && <span className="muted"> on this page only</span>}
+      {edited && <> <button type="button" className="link-button" onClick={() => setEdit(e.id, undefined, e.original)}>back to {formatValue(e.original, e.format)}</button></>}
+    </p>
+  );
+}
 
 const domId = (key: string) => `tn-${key.replace(/\./g, "-")}`;
 const isBranch = (n: TreeNode) => !!n.expr;
+
+/** A row where our view uses a shared figure in place of the evaluator's own number, so the same
+ * physical change counts the same in every model (docs/normalization.md, decision 3). The evaluator's
+ * number is the row's `published`; differences under 0.5% (rounding) don't count. */
+function overwriteOf(ctx: Ctx, n: TreeNode): { theirs: number; ours: number; format?: Row["format"]; change?: string } | undefined {
+  for (const rid of [n.named, ...n.via, n.rowId]) {
+    const r = rid ? ctx.m.byId.get(rid) : undefined;
+    if (!r?.node || r.published === undefined) continue;
+    const theirs = pickValue(r.published);
+    if (Math.abs(n.value - theirs) <= 0.005 * Math.max(Math.abs(n.value), Math.abs(theirs))) return undefined;
+    const fact = r.factDeps.map((k) => lib.facts.get(k)).find((f) => f?.change);
+    return { theirs, ours: n.value, format: r.format ?? fact?.format, change: fact?.change };
+  }
+}
 
 /** What a node is, in a word or two, beside its label. */
 function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   const row = n.rowId ? ctx.m.byId.get(n.rowId) : undefined;
   const evaluator = ctx.m.evaluator?.name;
-  if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your assumption</span>;
-  if (n.type === "fact") return <span id={id} className="tn-tag tn-tag-f">shared fact</span>;
+  const e = editable(ctx, n);
+  if (e && e.id in ctx.edits) return <span id={id} className="tn-tag tn-tag-edited">your edit</span>;
+  if (overwriteOf(ctx, n)) return <span id={id} className="tn-tag tn-tag-changed">changed for consistency</span>;
+  if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed)
+    return <span id={id} className="tn-tag"><span className="kind-dot kind-estimate" aria-hidden /><a href={`/data#a-${n.refId}`}>fixed rate</a></span>;
+  if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your value</span>;
+  if (n.type === "fact") {
+    const count = readers(n.refId!).length;
+    return <span id={id} className="tn-tag tn-tag-f">{count > 1 ? `shared · ${count} models` : "shared fact"}</span>;
+  }
   if (n.type === "input" && row) {
     return (
       <span id={id} className={`tn-tag tn-tag-${row.kind ?? "observed"}`}>
@@ -162,43 +241,56 @@ function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   return null;
 }
 
-/** The raw formula behind a node, for readers who want it. */
-function formulaOf(m: ResolvedModel, n: TreeNode): string | undefined {
-  if (n.type === "expr") return formulaText(n.expr!);
-  return (n.rowId ? m.byId.get(n.rowId)?.formula : undefined) ?? (n.named ? m.byId.get(n.named)?.formula : undefined);
-}
-
 /** What an open node is and where it comes from, as lines of prose. */
 function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
-  const { m, view } = ctx;
+  const { m } = ctx;
   const row = n.rowId ? m.byId.get(n.rowId) : undefined;
   const named = n.named ? m.byId.get(n.named) : undefined;
   const evaluator = m.evaluator?.name;
   const lines: ReactNode[] = [];
-  const explainer = named?.explainer ?? row?.explainer;
+  // The source line names the sheet's cell; an explainer that only repeats it ("Value from GiveWell's
+  // sheet, cell J111.") says nothing more.
+  const cell = (row?.source ?? named?.source)?.cell;
+  const rawExplainer = named?.explainer ?? row?.explainer;
+  const explainer = cell && rawExplainer
+    ? rawExplainer.split(/\n\n+/).map((para) => para.split(/(?<=\.)\s+/).filter((x) => !x.includes(cell)).join(" ")).filter(Boolean).join("\n\n") || undefined
+    : rawExplainer;
   if (n.type === "assumption") {
     const a = assumptionRow(n.refId!);
-    lines.push(<p key="a">One of the shared assumptions every model uses, and yours to set. <a href={`#a-${n.refId}`}>Adjust it</a>.</p>);
+    lines.push(a?.fixed
+      ? <p key="a">A fixed rate taken from evidence, shared by every model. <a href={`/data#a-${n.refId}`}>Its source</a>.</p>
+      : <p key="a">One of your values: every model uses it, and you can change it. <a href={`#a-${n.refId}`}>Adjust it</a>.</p>);
     if (a?.explainer) lines.push(<div key="ax" className="tn-explainer"><Markdown text={a.explainer} /></div>);
   } else if (n.type === "fact") {
     const f = lib.facts.get(n.refId!);
+    const others = readers(n.refId!).filter((id) => id !== m.id).map((id) => lib.models.get(id)).filter((x) => !!x);
+    const SHOWN = 3;
     lines.push(
       <p key="f">
-        Shared fact from <a href={`/assumptions#f-${f?.key ?? n.refId}`}>{f?.group ?? "the facts"}</a>: every model that needs it reads the same value.
+        Shared data from <a href={`/data#f-${f?.key ?? n.refId}`}>{f?.group ?? "the facts"}</a>
+        {others.length > 0 && <>, also read by{" "}
+          {others.slice(0, SHOWN).map((o, i) => <Fragment key={o.id}>{i ? (i === others.length - 1 ? " and " : ", ") : ""}<a href={modelUrl(lib, o)}>{o.name}</a></Fragment>)}
+          {others.length > SHOWN && <> and {others.length - SHOWN} more</>}</>}.
         {f?.source?.title && <> Source: {f.source.url ? <a href={f.source.url}>{f.source.title}</a> : f.source.title}.</>}
       </p>,
     );
   } else if (n.type === "const") {
     lines.push(<p key="c">A number written into {parentLabel ? <>the formula for {parentLabel}</> : "the formula"} itself, such as a unit conversion or a fixed adjustment.</p>);
   }
+  const ow = overwriteOf(ctx, n);
+  if (ow)
+    lines.push(
+      <p key="ow" className="tn-differs">
+        {evaluator ?? "The evaluator"} uses <span className="num">{formatValue(ow.theirs, ow.format)}</span> here; we use{" "}
+        <span className="num">{formatValue(ow.ours, ow.format)}</span> so {ow.change ?? "the same change"} counts the same in every model.
+      </p>,
+    );
   if (explainer) lines.push(<div key="x" className="tn-explainer"><Markdown text={explainer} /></div>);
+  if (editable(ctx, n)) lines.push(<EditValue key="ed" ctx={ctx} n={n} label={labelOf(m, n)} />);
   if (n.type === "input" && row) {
-    const range = inputRange(row, view);
-    if (hasRange(range)) lines.push(<p key="r">Plausible range <span className="num">{formatValue(pickValue(range, "low"), row.format)} – {formatValue(pickValue(range, "high"), row.format)}</span>.</p>);
-    if (row.published !== undefined) {
-      const other = view === "evaluator" ? row.value : row.published;
-      lines.push(<p key="p" className="tn-differs">{view === "evaluator" ? "charityevals uses" : `${evaluator ?? "The evaluator"} uses`} <span className="num">{formatValue(pickValue(other), row.format)}</span> here.</p>);
-    }
+    if (hasRange(row.value)) lines.push(<p key="r">Plausible range <span className="num">{formatValue(pickValue(row.value, "low"), row.format)} – {formatValue(pickValue(row.value, "high"), row.format)}</span>.</p>);
+    if (row.published !== undefined)
+      lines.push(<p key="p" className="tn-differs">{evaluator ?? "The evaluator"} uses <span className="num">{formatValue(pickValue(row.published), row.format)}</span> here.</p>);
   }
   // A calculated row can carry a published uncertainty range (e.g. GiveWell's 25th–75th percentile);
   // sensitivity varies the row across it.
@@ -251,26 +343,25 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const branch = isBranch(n);
   const id = domId(n.key);
   const label = labelOf(m, n);
-  const spread = ctx.metric === "spread";
   // Below a row whose own published range stands for its uncertainty, parts add none of their own.
   const rangedRow = rangedRowOf(ctx.u, n);
   const ranged = !!rangedRow;
   const below = under ?? (ranged ? label : undefined);
   const kids = isOpen && branch ? childrenOf(m, n, look) : [];
   // The parts with the most leverage, kept in formula order; the rest behind "n more".
-  const ranked = [...kids].sort((a, b) => (spread && (under || ranged) ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
+  // Inside a published range, by leverage: the range already holds their uncertainty.
+  const ranked = [...kids].sort((a, b) => (under || ranged ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
   const shown = all.has(n.key) || kids.length <= CAP + 1 ? kids : kids.filter((k) => ranked.indexOf(k) < CAP);
   const hidden = kids.filter((k) => !shown.includes(k));
-  const hiddenWeight = hidden.reduce((s, k) => s + (spread && !(under || ranged) ? ctx.weight(k) : Math.abs(k.e ?? 0)), 0);
+  const hiddenWeight = hidden.reduce((s, k) => s + (under || ranged ? Math.abs(k.e ?? 0) : ctx.weight(k)), 0);
   const how = n.expr ? shapeOf(n.expr).how : undefined;
   const odds = oneIn(label, n.value);
-  const e = n.e;
   const root = depth === 1;
-  const share = spread && !under ? ctx.weight(n) : 0;
-  const formula = isOpen ? formulaOf(m, n) : undefined;
-  const fxOpen = !!formula && ctx.fx.has(n.key);
+  const share = under ? 0 : ctx.weight(n);
   const lines = isOpen ? detailLines(ctx, n, parentLabel) : [];
-  const hasDetail = lines.length > 0 || fxOpen;
+  const hasDetail = lines.length > 0;
+  const ed = editable(ctx, n);
+  const edited = !!ed && ed.id in ctx.edits;
   return (
     <li
       role="treeitem"
@@ -295,44 +386,39 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
             {n.op && <><span aria-hidden>{n.op}</span><span className="visually-hidden">{SPOKEN[n.op] ?? n.op}</span></>}
           </span>
           <span className="tn-text">
-            <span id={`${id}-l`} className="tn-label">{label}</span>
+            <span id={`${id}-l`} className="tn-label"><Glossed text={label} seen={ctx.glossed} /></span>
             {how && <span className="tn-how"> · {how}</span>}
             <Tag ctx={ctx} n={n} id={`${id}-t`} />
-            {formula && (
-              <button type="button" className="tn-fx" aria-expanded={fxOpen} aria-controls={fxOpen ? `${id}-d-fx` : undefined}
-                onClick={(ev) => { ev.stopPropagation(); ctx.toggleFx(n.key); }}>
-                {fxOpen ? "hide formula" : "formula"}
-              </button>
+            {root && ctx.flags.length > 0 && (
+              // The sign opens its own list; it doesn't open or close the row.
+              <span className="tn-flags" onClick={(ev) => ev.stopPropagation()} onKeyDown={(ev) => ev.stopPropagation()}>
+                <InfoTip label={`${ctx.flags.length} ${ctx.flags.length === 1 ? "caveat" : "caveats"}`} icon={<AlertTriangle size={14} aria-hidden />}>
+                  <ul className="tn-flag-list">{ctx.flags.map((f) => <li key={f.short}>{f.text}.</li>)}</ul>
+                </InfoTip>
+              </span>
             )}
           </span>
         </span>
-        <span id={`${id}-v`} className="tn-val num">
-          {show(m, n)}{odds && <span className="tn-odds"> {odds}</span>}
+        <span id={`${id}-v`} className={`tn-val num ${edited ? "tn-edited" : ""}`}>
+          {show(m, n, root && ctx.years)}{odds && <span className="tn-odds"> {odds}</span>}
         </span>
         <span
           id={`${id}-e`}
           className="tn-lev"
-          title={spread
-            ? under ? `Counted in the published range of “${under}”.`
-            : `${shareText(share)} of the uncertainty in the bottom line comes${root ? "" : " through this branch"}: how much it moves the result, times how well it's known${ranged ? " (from its published range)" : ""}.`
-            : e === undefined ? "No measurable effect at this value." : `If this number were 10% higher, the bottom line would move about ${leverText(e)}${root ? "" : " through this branch"}.`}
+          title={under ? `Counted in the published range of “${under}”.`
+            : `${shareText(share)} of the uncertainty in the bottom line comes${root ? "" : " through this branch"}: how much it moves the result, times how well it's known${ranged ? " (from its published range)" : ""}.`}
         >
-          {n.type !== "const" && (spread ? (
+          {n.type !== "const" && (
             <>
-              <span className="tn-track" aria-hidden><span className="tn-bar tn-bar-spread" style={{ width: `${share * 100}%` }} /></span>
+              <span className="tn-track" aria-hidden><span className="tn-bar tn-bar-spread" style={{ width: barWidth(share) }} /></span>
               <span className="tn-pct num">{under
                 ? <><span className="visually-hidden">, counted in the range above</span><span aria-hidden>in range</span></>
                 : <><span className="visually-hidden">, share of the uncertainty </span>{shareText(share)}</>}</span>
             </>
-          ) : (
-            <>
-              <span className="tn-track" aria-hidden><span className={`tn-bar ${e !== undefined && e < 0 ? "neg" : ""}`} style={{ width: `${Math.min(Math.abs(e ?? 0), 1) * 100}%` }} /></span>
-              <span className="tn-pct num"><span className="visually-hidden">, if 10% higher the result moves </span>{leverText(e)}</span>
-            </>
-          ))}
+          )}
         </span>
       </div>
-      {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} formula={fxOpen ? formula : undefined} />}
+      {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} />}
       {isOpen && branch && (
         <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
           {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} under={below} />)}
@@ -352,8 +438,8 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
               <div className="tn-row" onClick={() => ctx.showAll(n.key)}>
                 <span className="tn-twist" aria-hidden />
                 <span className="tn-name tn-more">
-                  Show {hidden.length} more {hidden.length === 1 ? "part" : "parts"}
-                  <span className="tn-more-note"> · {spread && !(under || ranged) ? `together ${shareText(hiddenWeight)} of the uncertainty or less` : `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less`}</span>
+                  <span className="tn-more-label">Show {hidden.length} more {hidden.length === 1 ? "part" : "parts"}</span>
+                  <span className="tn-more-note"> · {under || ranged ? `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less` : `together ${shareText(hiddenWeight)} of the uncertainty or less`}</span>
                 </span>
               </div>
             </li>
@@ -374,25 +460,28 @@ function matches(m: ResolvedModel, q: string, used: Set<string>) {
     .slice(0, 8);
 }
 
-export default function ModelTree({ model, values, view, u }: { model: ResolvedModel; values: Record<string, number>; view: View; u: Uncertainty }) {
+/** `place`: the location this model covers when it is one of several, named on the top row so it reads
+ * apart from the page's headline, which may combine every funded location. */
+export default function ModelTree({ model, values, edits = {}, u, flags = [], place, children }: { model: ResolvedModel; values: Record<string, number>; edits?: Record<string, number>; u: Uncertainty; flags?: Flag[]; place?: string; children?: React.ReactNode }) {
   const av = useAssumptionValues();
-  const look = useMemo(() => lookupFor(lib, model, values, av, view), [model, values, av, view]);
-  const root = useMemo(() => rootOf(model, look), [model, look]);
-  const [open, setOpen] = useState<Set<string>>(() => new Set(["r"]));
+  const look = useMemo(() => lookupFor(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
+  const editCount = Object.keys(edits).length;
+  // The tree ends in the number at the top of the page: the model's result converted into years of
+  // healthy life per $1,000. Models in a unit nobody converts end in their own result.
+  const toCommon = comparable(lib, model) ? lib.assumptions.units[model.output!.unit].to_common : undefined;
+  const root = useMemo(() => {
+    const r = rootOf(model, look, toCommon);
+    return place && r.label ? { ...r, label: `${r.label} in ${place}` } : r;
+  }, [model, look, toCommon, place]);
+  const [open, setOpen] = useState<Set<string>>(() => new Set(toCommon === undefined ? ["r"] : ["r", "r.0"]));
   const [all, setAll] = useState<Set<string>>(() => new Set());
   const [focus, setFocus] = useState("r");
   const [flash, setFlash] = useState<string>();
   const [pending, setPending] = useState<string>();
   const [orphan, setOrphan] = useState<string>();
   const [q, setQ] = useState("");
-  const [fx, setFx] = useState<Set<string>>(() => new Set());
-  const [metric, setMetric] = useState<Metric>("spread");
-  const weight = (n: TreeNode) => (metric === "spread" ? spreadShare(u, n) : Math.abs(n.e ?? 0));
-  const toggleFx = (key: string) => setFx((f) => {
-    const x = new Set(f);
-    x.has(key) ? x.delete(key) : x.add(key);
-    return x;
-  });
+  // Bars show each number's share of the uncertainty.
+  const weight = (n: TreeNode) => spreadShare(u, n, root.value);
   const tree = useRef<HTMLUListElement>(null);
   const orphanRef = useRef<HTMLDivElement>(null);
   const used = useMemo(() => (q ? rowsFeeding(model) : new Set<string>()), [model, q]);
@@ -419,7 +508,7 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
   /** Open the tree down to a row, or show it apart when the bottom line doesn't use it. */
   const reveal = (rowId: string) => {
     if (!model.byId.has(rowId)) return;
-    const path = pathTo(model, rowId, look);
+    const path = pathTo(model, rowId, look, toCommon);
     if (!path) {
       setOrphan(rowId);
       setPending(ORPHAN);
@@ -434,22 +523,32 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
     setPending(target);
   };
 
-  /** Open the chain of parts that each carry the most leverage, from the bottom line to an input. */
-  const followLever = () => {
-    const keys = ["r"];
-    let n = root;
-    // Following the uncertainty stops at a row whose published range stands for it.
-    for (let i = 0; i < 40 && n.expr && !(metric === "spread" && rangedRowOf(u, n)); i++) {
-      const kids = childrenOf(model, n, look).filter((k) => k.type !== "const");
-      if (!kids.length) break;
-      n = kids.reduce((b, k) => (weight(k) > weight(b) ? k : b));
-      keys.push(n.key);
+  /** Open the tree down to the biggest sources of uncertainty, biggest first, until together they
+   * cover REVEAL_SHARE of it: every path to them, with each step's parts all shown. */
+  const [revealed, setRevealed] = useState(false);
+  const collapse = () => { setOpen(new Set(["r"])); setAll(new Set()); setOrphan(undefined); setFocus("r"); setRevealed(false); };
+  const initial = () => { setOpen(new Set(toCommon === undefined ? ["r"] : ["r", "r.0"])); setAll(new Set()); setFocus("r"); setRevealed(false); };
+  const revealUncertainties = () => {
+    if (revealed) return initial();
+    const paths: string[][] = [];
+    let covered = 0;
+    for (const d of u.drivers) {
+      if (covered >= REVEAL_SHARE) break;
+      const path = d.scope === "row" ? pathTo(model, d.id, look, toCommon)
+        : d.scope === "assumption" || d.scope === "fact" ? pathToRef(model, d.scope, d.id, look, toCommon) : undefined;
+      if (!path) continue;
+      paths.push(path);
+      covered += d.share;
     }
-    track("tree_open", { value: keys.length, detail: metric === "spread" ? "spread" : "lever" });
-    setOpen((o) => new Set([...o, ...keys]));
-    setFocus(n.key);
-    setFlash(n.key);
-    setPending(n.key);
+    if (!paths.length) return;
+    track("tree_open", { value: paths.length, detail: "reveal" });
+    setRevealed(true);
+    setOpen((o) => new Set([...o, ...paths.flat()]));
+    setAll((a) => new Set([...a, ...paths.flatMap((p) => p.slice(0, -1))]));
+    const first = paths[0].at(-1)!;
+    setFocus(first);
+    setFlash(first);
+    setPending(first);
   };
 
   // Links to a row (#row-<id>) from the uncertainty list, the derivation, formulas and the history page.
@@ -551,30 +650,32 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
     }
   };
 
-  const ctx: Ctx = { m: model, look, view, open, all, focus, flash, metric, u, weight, toggle, showAll, setFocus, fx, toggleFx };
+  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 
   return (
     <section className="model-tree" aria-labelledby="tree-title" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      <h2 id="tree-title">How the pieces fit together</h2>
-      <p className="tn-intro">
-        The bottom line at the top; under each number, the numbers it's made from and how they combine. Open any of them.
-      </p>
-      <div className="tn-metric small" role="radiogroup" aria-label="What the bars show">
-        <span className="muted">Bars show</span>
-        {([["spread", "Share of the uncertainty"], ["lever", "Result if 10% higher"]] as const).map(([k, label]) => (
-          <button key={k} type="button" role="radio" aria-checked={metric === k} className={`tn-metric-opt ${metric === k ? "on" : ""}`}
-            onClick={() => { setMetric(k); track("tree_metric", { key: k }); }}>
-            {label}
-          </button>
-        ))}
+      <div className="sec-head tip-host">
+        <h2 id="tree-title">Model</h2>
+        <InfoTip label="How to read this">
+          The number at the top of the page first; under each number, the numbers it's made from and how they combine. Open any of them.
+        </InfoTip>
       </div>
+      {children && <div className="tn-about small">{children}</div>}
 
       <div className="tn-tools">
         <div className="tn-actions small">
-          <button type="button" className="link-button" onClick={followLever}>{metric === "spread" ? "Follow the biggest uncertainty" : "Follow the biggest lever"}</button>
-          <button type="button" className="link-button" disabled={open.size <= 1 && !orphan} onClick={() => { setOpen(new Set(["r"])); setAll(new Set()); setOrphan(undefined); setFocus("r"); }}>Collapse all</button>
+          <button type="button" className="link-button tn-reveal" aria-pressed={revealed} onClick={revealUncertainties}>
+            <span className="tn-check" aria-hidden />Reveal uncertainties
+          </button>
+          <button type="button" className="link-button" disabled={open.size <= 1 && !orphan} onClick={collapse}>Collapse all</button>
+          {editCount > 0 && (
+            <span className="tn-edits">
+              {editCount} {editCount === 1 ? "edit" : "edits"} in the page link:{" "}
+              <button type="button" className="link-button" onClick={clearEdits}>Undo</button>
+            </span>
+          )}
         </div>
         <div className="tn-search" role="search">
           <label htmlFor="tn-q" className="visually-hidden">Find a number in this model</label>
@@ -615,10 +716,15 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
         </div>
       )}
 
-      <div className="tn-cols small" aria-hidden>
-        <span />
-        <span>Value</span>
-        <span>{metric === "spread" ? "Share of the uncertainty" : "Result if 10% higher"}</span>
+      <div className="tn-cols small tip-host">
+        <span aria-hidden />
+        <span aria-hidden>Value</span>
+        <span>
+          <span aria-hidden>Share of the uncertainty</span>{"\u00a0"}
+          <InfoTip label="What the share of the uncertainty means">
+            How much a number moves the result, times how loosely it's known. Reveal uncertainties opens the numbers behind 80% of it.
+          </InfoTip>
+        </span>
       </div>
       <ul ref={tree} role="tree" aria-labelledby="tree-title" className="tn-tree" onKeyDown={onKey}>
         <Item ctx={ctx} n={root} depth={1} pos={1} size={1} />
@@ -627,13 +733,7 @@ export default function ModelTree({ model, values, view, u }: { model: ResolvedM
         <p className="tn-legend">
           <span><span className="kind-dot kind-observed" aria-hidden /> observed</span>
           <span><span className="kind-dot kind-estimate" aria-hidden /> estimate</span>
-          <span><span className="kind-dot kind-judgment" aria-hidden /> judgment or your assumption</span>
-        </p>
-        <p>
-          {metric === "spread"
-            ? `Share of the uncertainty: how much a number moves the result, times how loosely it's known, out of the same total as where the uncertainty comes from, above.${u.conversionShare >= 0.005 ? ` The other ${shareText(u.conversionShare)} comes from converting this result into the common unit (your exchange rates), outside this tree.` : ""}`
-            : "Bars measure each number through its own branch; a number used in several places moves the result through each."}
-          The {rowCount} rows are in <a href={`https://github.com/heychristoph/charityevals/blob/main/${modelFile(model)}`}>the model file</a>.
+          <span><span className="kind-dot kind-judgment" aria-hidden /> judgment or your value</span>
         </p>
       </div>
     </section>

@@ -42,6 +42,15 @@ scale (× GiveDirectly) under the site's default assumptions (the "charityevals 
 ratio compares like with like: the blind model against the evaluator model in the same view.
 The evaluator's own view (their moral weights and accounting) is shown for reference.
 
+**These runs predate the current scale** (October 2026: years of healthy life per $1,000, animal
+models through the species step in chicken-equivalent pain days, one SADs figure per physical change,
+docs/normalization.md). The figures below are multiples of GiveDirectly, as `evaluation/compare.ts`
+still prints them, and the animal models then reported SADs converted with Ambitious Impact's
+weights. For the global-health families the ratios carry over (both sides convert the same way); for
+the animal families the evaluator side has since changed (e.g. THL's shared hen figure and Rethink
+Priorities' species weights), so those ratios would differ if re-run. The skills and templates have
+since moved to the current scale; they have not been re-evaluated.
+
 ## Results
 
 | Set | Charity | Template | Evaluator | Evaluator, own view | Evaluator, charityevals view | Blind build | Blind joint low–high | Ratio (blind ÷ evaluator) | Audit rounds (high/med/low) |
@@ -120,7 +129,7 @@ about structure.
   measures the spread with shared assumptions at their defaults, and prints both.
 - **Conventions** added to `references/templates.md` after builders resolved the same questions
   differently: partner and government costs lower attribution rather than entering
-  `cost_total` (so `$full_credit` stays meaningful); reach is a flow, and only new additions get
+  `cost_total` (so the charity's share of resources stays meaningful); reach is a flow, and only new additions get
   persistence (SVB's builder had credited one year's meals for 1.5 years); several branches in
   one family; one question per adjustment (accountability: years brought forward vs.
   counterfactual); optional rows (`indirect_deaths_ratio`, `delay_years`, …); currency rows;
@@ -169,9 +178,9 @@ away (e.g. the duration input lets a plateau, as in Friendship Bench, raise the 
   This is by design (comparability), but it means agreement on structure is not evidence.
 - **Different scope.** A blind build may model a different program or year than the evaluator
   (DVF most of all); the ratio then measures scope as much as accuracy.
-- **Shared exchange rates dominate cross-cause uncertainty.** For animal models the shared SAD to
-  DALY rate and animal moral weight swing the result more than anything the builder decides;
-  the joint ranges above include them.
+- **Shared exchange rates dominate cross-cause uncertainty.** For animal models the shared rates
+  (a chicken against a person, and a day of disabling pain in healthy life) swing the result more
+  than anything the builder decides; the joint ranges above include them.
 - **Audits are LLM reviews.** They verified sources by fetching them and caught real errors (a
   misread RCT, missing indirect deaths, a double-counted delivery shortfall, a misread UNICEF
   trend), but an auditor can share the builder's blind spots.

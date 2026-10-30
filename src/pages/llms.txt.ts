@@ -3,8 +3,8 @@
 import type { APIRoute } from "astro";
 import { lib, modelUrl, primaryOf, rankable } from "../lib/data";
 import { modelsOf } from "../engine/model";
-import { abs, defaultMultiple } from "../lib/seo";
-import { formatMultiple } from "../lib/format";
+import { abs, defaultYears } from "../lib/seo";
+import { formatYears } from "../lib/format";
 import { repo } from "../lib/site";
 
 const CAUSES = [["global-health", "Global health"], ["animal-welfare", "Animal welfare"], ["ai-safety", "AI safety"]] as const;
@@ -15,9 +15,9 @@ export const GET: APIRoute = () => {
     const c = lib.charities.get(id)!;
     const models = modelsOf(lib, id);
     const m = primaryOf(lib, id)!;
-    const x = defaultMultiple(m);
+    const x = defaultYears(m);
     const owners = [...new Set(models.map((x) => lib.owners.get(x.owner)!.name))].join(", ");
-    const figure = x !== undefined ? `${formatMultiple(x)} as much good per dollar as GiveDirectly (default assumptions)` : `measured in ${lib.assumptions.units[m.output!.unit].label} per dollar`;
+    const figure = x !== undefined ? `${formatYears(x)} years of healthy life per $1,000 (default assumptions)` : `measured in ${lib.assumptions.units[m.output!.unit].label} per dollar`;
     return `- [${c.name}](${abs(modelUrl(lib, m))}): ${figure} in ${lib.owners.get(m.owner)!.name}'s model; ${models.length > 1 ? `${models.length} models` : "modelled"} by ${owners}`;
   };
   const sections = CAUSES.map(([cause, title]) => {
@@ -30,12 +30,12 @@ export const GET: APIRoute = () => {
 
 > Open cost-effectiveness analyses (CEAs) of charities. Each model re-implements a published evaluator's analysis (GiveWell, Animal Charity Evaluators, Happier Lives Institute) or is charityevals' own where none exists. Every input has a source, a low/best/high range, a kind (observed, estimate or judgment) and an explanation. Visitors can change the shared assumptions (moral weights, exchange rates between causes) and every model recomputes.
 
-Results are given as a multiple of GiveDirectly's cash transfers per dollar ("× GiveDirectly"), on the site's default assumptions; each page shows the plausible range and what drives it. The evaluators have not reviewed or endorsed this site. Estimates are for research, not financial advice.
+Results are given in years of healthy life per $1,000 donated (DALYs averted, with income, wellbeing and animal outcomes converted at the shared exchange rates), on the site's default assumptions; GiveDirectly's cash transfers come to ${formatYears(defaultYears(lib.models.get(lib.assumptions.common.benchmark)!) ?? NaN)}; each page shows the plausible range and what drives it. The evaluators have not reviewed or endorsed this site. Estimates are for research, not financial advice.
 
 ## Key pages
 
 - [Rankings](${abs("/")}): every charity, ranked by good done per dollar, re-ranked live by your assumptions
-- [Shared assumptions](${abs("/assumptions")}): the moral weights, exchange rates and shared facts every model reads
+- [Shared data](${abs("/data")}): the fixed exchange rates and shared data every model reads; the adjustable values sit beside the rankings
 - [Method](${abs("/method")}): how models are built, checked against their sources, and compared across causes
 - [About](${abs("/about")}): who runs the site and how to contribute
 - [Source code and model files](${repo}): every model is a JSON file in a public git repository

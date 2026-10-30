@@ -48,7 +48,8 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "charityevals adjustments on top of GiveWell's model. With the default assumptions they change little for GiveDirectly, because most of its cost is the transfers themselves."
+      "explainer": "charityevals adjustments on top of GiveWell's model. With the default assumptions they change little for GiveDirectly, because most of its cost is the transfers themselves.",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -533,12 +534,12 @@
       "section": "supplementary",
       "label": "Leverage and funging",
       "format": "percent",
-      "value": 0.02,
-      "kind": "judgment",
       "source": {
         "cell": "New CEA!B61"
       },
-      "explainer": "Net effect of the donation drawing in, or displacing, other funders."
+      "explainer": "Switched off when credit is shared by share of resources.\n\nNet effect of the donation drawing in, or displacing, other funders.",
+      "formula": "if($resource_shares, 0, 0.02)",
+      "expected": 0.02
     },
     {
       "id": "adj_fraud",
@@ -669,7 +670,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "donation / (donation + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "donation / (donation + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",
@@ -683,15 +684,18 @@
   "output": {
     "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar you give"
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
   },
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
       "uov_per_ln_consumption": 1.4426950408889634,
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
-      "life_value_multiplier": 1
+      "life_value_multiplier": 1,
+      "resource_shares": 0
     }
   },
   "resources": [

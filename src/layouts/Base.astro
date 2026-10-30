@@ -8,7 +8,7 @@ import Consent from "../components/Consent.astro";
 interface Props {
   title: string;
   description?: string;
-  active?: "rankings" | "assumptions" | "method" | "about";
+  active?: "rankings" | "method" | "about";
   /** Keep the page out of search results (its links are still followed). */
   noindex?: boolean;
   /** schema.org nodes for this page, added to the site's own (WebSite, Organization). */
@@ -22,7 +22,6 @@ const ogImage = new URL("/og.png", Astro.site);
 const structured = jsonLd([...siteSchema(), ...schema]);
 const nav = [
   { id: "rankings", href: "/", label: "Rankings" },
-  { id: "assumptions", href: "/assumptions", label: "Assumptions" },
   { id: "method", href: "/method", label: "Method" },
   { id: "about", href: "/about", label: "About" },
 ];
@@ -63,7 +62,7 @@ const nav = [
   <body>
     <header class="site-header">
       <div class="page bar">
-        <a class="wordmark" href="/" aria-label="charityevals, home"><img src="/logo.svg" alt="charityevals" width="190" height="32" /></a>
+        <a class="wordmark" href="/" aria-label="charityevals, home"><img src="/logo.svg" alt="charityevals" width="188" height="32" /></a>
         <nav aria-label="Main">
           {nav.map((n) => (
             <a href={n.href} aria-current={active === n.id ? "page" : undefined}>{n.label}</a>
@@ -80,6 +79,7 @@ const nav = [
           <a href="/suggest">Suggest a charity</a>
           <a href="/about">About</a>
           <a href="/method">Method</a>
+          <a href="/data">Shared data</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
           <a href="/legal">Legal notice</a>
@@ -88,6 +88,9 @@ const nav = [
         </nav>
       </div>
     </footer>
+    <script>
+      import "../scripts/glossary-tips";
+    </script>
     <Consent ask={canonicalPath(Astro.url.pathname) !== "/privacy"} />
   </body>
 </html>
