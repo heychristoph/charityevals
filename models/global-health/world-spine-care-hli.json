@@ -1,0 +1,211 @@
+{
+  "id": "world-spine-care-hli",
+  "name": "World Spine Care (HLI, 2026)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "world-spine-care",
+  "owner": "hli",
+  "summary": "Runs clinics giving free physiotherapy and chiropractic care for back and neck pain in low- and middle-income countries. The Happier Lives Institute's back-of-the-envelope estimate (WELLBYs per $1,000), rebuilt from the figures in its report.",
+  "source": {
+    "publisher": "Happier Lives Institute",
+    "title": "Investigating three ways to reduce the global pain burden (pain cause exploration 3)",
+    "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+    "published": "2026-04-09",
+    "retrieved": "2026-10-30",
+    "license": "© Happier Lives Institute; no licence published. Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "HLI, Investigating three ways to reduce the global pain burden (2026), section 3",
+      "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+      "type": "evaluation",
+      "note": "HLI publishes no public spreadsheet for this estimate: the model is built from the inputs and figures stated in the report's text, each quoted on its row. HLI's figure is for a donation restricted to World Spine Care's clinics in low- and middle-income countries (Botswana, the Dominican Republic and others), not its work in Canada."
+    },
+    {
+      "title": "World Spine Care",
+      "url": "https://worldspinecare.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "HLI",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "effects",
+      "title": "Effect per patient treated for a year"
+    },
+    {
+      "id": "cost",
+      "title": "Cost"
+    },
+    {
+      "id": "bottom",
+      "title": "HLI's bottom line"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "life_satisfaction_gain",
+      "section": "effects",
+      "label": "Life satisfaction gained when musculoskeletal pain is treated (0–10 scale)",
+      "format": "number",
+      "value": 1.17,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+        "page": "Section 3 (World Spine Care)",
+        "quote": "We base our estimate on the 1.17 life satisfaction effect reported by Boonstra et al. (2013)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Boonstra et al. (2013) found people with chronic musculoskeletal pain 0.7 points less satisfied with life on a 1–7 scale than the general public, 1.17 on a 0–10 scale. HLI notes part of the gap is likely age, education and employment, and calls the resulting estimate generous: it assumes treatment removes the whole gap for a year."
+    },
+    {
+      "id": "household_spillover_ratio",
+      "section": "effects",
+      "label": "Household spillover, as a share of the patient's own effect",
+      "format": "number",
+      "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+      "explainer": "HLI uses its psychotherapy spillover, having none for pain treatment (\"16.24% spillover for an average non-recipient household size of 3.33 people in LMICs\")."
+    },
+    {
+      "id": "other_household_members",
+      "section": "effects",
+      "label": "Other household members",
+      "format": "number",
+      "value": 3.33,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+        "page": "Section 3 (World Spine Care)",
+        "quote": "16.24% spillover for an average non-recipient household size of 3.33 people in LMICs",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "replication_adjustment",
+      "section": "effects",
+      "label": "Replication adjustment",
+      "format": "percent",
+      "value": 0.51,
+      "kind": "judgment",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+        "page": "Section 3 (World Spine Care)",
+        "quote": "apply our standard 0.51 (49% discount) replication adjustment",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "wellbys_per_patient",
+      "section": "effects",
+      "label": "WELLBYs per patient treated for a year",
+      "format": "number",
+      "formula": "life_satisfaction_gain * (1 + household_spillover_ratio * other_household_members) * replication_adjustment",
+      "expected": 0.9193905864,
+      "explainer": "HLI: \"This gives an estimated 0.92 total adjusted WELLBYs per person treated\"."
+    },
+    {
+      "id": "cost_per_patient",
+      "section": "cost",
+      "label": "Cost to treat a patient for a year",
+      "format": "usd",
+      "value": {
+        "low": 44,
+        "best": 53.5,
+        "high": 63
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/pain-cause-exploration-3-investigating-three-ways-to-reduce-the-global-pain-burden/",
+        "page": "Section 3 (World Spine Care)",
+        "quote": "Our best guess was that it costs between $44 and $63 to treat a patient for one year",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From World Spine Care's clinic data for Botswana and the Dominican Republic ($13–17 a visit). HLI's generous estimate assumes only three visits per patient; more visits would raise the cost. HLI gives the range; the middle, $53.50, is ours."
+    },
+    {
+      "id": "wellbys_per_1000",
+      "section": "bottom",
+      "label": "WELLBYs per $1,000",
+      "format": "number",
+      "formula": "wellbys_per_patient / cost_per_patient * 1000",
+      "expected": 17.18487077,
+      "explainer": "HLI: \"an overall cost-effectiveness of 15–21 WELLBYs per $1,000 donated\", the two ends of its cost range; the central figure at the middle cost is ours. The benefit comes within the year of treatment, so there is nothing to discount."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Clinics run mostly on clinicians' time: our judgment of the staff share of cost."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Most clinicians are volunteers from high-income countries on below-market stipends (HLI, section 3), so the gap to their usual pay is large. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "staff_pay",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "unit": "WELLBYs per $",
+      "formula": "wellbys_per_1000 / 1000 * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1000",
+      "unit": "WELLBYs per $1,000"
+    }
+  }
+}

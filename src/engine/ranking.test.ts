@@ -18,15 +18,17 @@ const lib = buildLibrary(walk(join(root, "models")).map(read), read(join(root, "
 const ids = (charity: string) => rankingPlan(lib, charity).flatMap((e) => e.parts.map((p) => p.model.id));
 
 describe("ranking plan", () => {
-  it("never ranks a skeleton, VOI, breakeven, threshold or optionality sheet", () => {
+  it("never ranks a skeleton, VOI, breakeven, threshold, optionality or upper-bound sheet", () => {
     for (const id of ["centre-for-pesticide-suicide-prevention-cpsp-skeleton", "vital-strategies-botec-breakeven",
       "clinton-health-access-initiative-chai-msupply-voi-2025", "dimagi-optionality-mother-baby-wellness",
-      "path-threshold-accelerator-malaria-vaccines", "fika-bridges-to-prosperity-value-information"])
+      "path-threshold-accelerator-malaria-vaccines", "fika-bridges-to-prosperity-value-information",
+      "versus-arthritis-sogive-upper-bound", "motor-neurone-disease-association-sogive-upper-bound"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(true);
     for (const id of ["against-malaria-foundation", "vital-strategies-model", "evidence-action-deworm-world-2024-renewal"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(false);
     expect(ids("vital-strategies")).toEqual(["vital-strategies-model"]);
     expect(rankingPlan(lib, "centre-for-pesticide-suicide-prevention")).toEqual([]);
+    expect(rankingPlan(lib, "versus-arthritis")).toEqual([]);
   });
 
   it("gives each evaluator one entry, and each program its newest model", () => {

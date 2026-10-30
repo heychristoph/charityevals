@@ -1,6 +1,7 @@
 // Which models put a charity on the rankings, and how they make one figure per evaluator.
 //   - Sheets that don't estimate a program's cost-effectiveness (skeletons, value-of-information,
-//     breakeven, threshold and optionality analyses, sensitivity copies) never count.
+//     breakeven, threshold and optionality analyses, sensitivity copies) never count, nor do an
+//     evaluator's stated upper bounds (a best case it calls unlikely, never a central estimate).
 //   - Within an evaluator, each program counts once: its newest model by source.published, hand-built
 //     or bulk import alike, hand-built first on the same date (newestFirst). A charity's `programs`
 //     say which models are which program; without them, all of an evaluator's models are one program.
@@ -16,7 +17,7 @@ import type { Charity } from "./schema";
 
 /** Matched against a model's id, name and source title. */
 export const SIDE_SHEET =
-  /skeleton|\bvoi\b|value[- ]of[- ](information|incubation|the grant)|value[- ]information|break-?even|optionality|option[- ]value|threshold|\[(low|high) [^\]]*copy\]|assumptions copy\]/i;
+  /skeleton|\bvoi\b|value[- ]of[- ](information|incubation|the grant)|value[- ]information|break-?even|optionality|option[- ]value|threshold|upper[- ]bound|\[(low|high) [^\]]*copy\]|assumptions copy\]/i;
 
 export function isSideSheet(m: ResolvedModel): boolean {
   return SIDE_SHEET.test(`${m.id} ${m.name} ${m.source?.title ?? ""}`);

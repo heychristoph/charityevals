@@ -1,0 +1,248 @@
+{
+  "id": "icddr-b-hli",
+  "name": "icddr,b: Reach Up parenting programme (HLI, 2024)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "icddr-b",
+  "owner": "hli",
+  "summary": "Home visits and parenting groups in Bangladesh that teach parents of young children to play, read and talk with them. The Happier Lives Institute's estimate (WELLBYs per $1,000) for the Reach Up programme delivered by icddr,b, rebuilt from the figures in its report.",
+  "source": {
+    "publisher": "Happier Lives Institute",
+    "title": "Does improving parenting practices in childhood lead to happier adults?",
+    "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+    "published": "2024-11-27",
+    "retrieved": "2026-10-30",
+    "license": "© Happier Lives Institute; no licence published. Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "HLI, Does improving parenting practices in childhood lead to happier adults? (2024)",
+      "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+      "type": "evaluation",
+      "note": "HLI publishes no public spreadsheet for this estimate: the model is built from the inputs and figures stated in the report's text, each quoted on its row. HLI adds that \"there is currently no available option to directly fund this programme\", so it doesn't recommend it; its 2025 update lists parenting charities in general as an honourable mention."
+    },
+    {
+      "title": "icddr,b",
+      "url": "https://www.icddrb.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "HLI",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "effects",
+      "title": "Effect per child"
+    },
+    {
+      "id": "bottom",
+      "title": "HLI's bottom line"
+    },
+    {
+      "id": "per_dollar",
+      "title": "Discounting",
+      "kind": "ours",
+      "explainer": "charityevals' step, not HLI's. HLI counts a year of better wellbeing the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so HLI's figure is unchanged there."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "individual_wellbys",
+      "section": "effects",
+      "label": "WELLBYs for the child, before adjustments",
+      "format": "number",
+      "value": 14.5,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+        "page": "Summary",
+        "quote": "The naive total individual benefit is 14.5 WELLBYs",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "HLI's estimate: home visits improve the child's later depression scores by 0.23 SDs for 32 years, from two trials of home visiting in low- and middle-income countries and four causal studies of preschool stimulation in rich countries, weighted equally."
+    },
+    {
+      "id": "spillover_wellbys",
+      "section": "effects",
+      "label": "WELLBYs for the rest of the household",
+      "format": "number",
+      "value": 7,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+        "page": "Summary",
+        "quote": "with a spillover effect of 7 WELLBYs for a total effect of ~22 WELLBYs",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "total_naive_wellbys",
+      "section": "effects",
+      "label": "Total WELLBYs per child, before adjustments",
+      "format": "number",
+      "formula": "individual_wellbys + spillover_wellbys",
+      "expected": 21.5
+    },
+    {
+      "id": "replicability_discount",
+      "section": "effects",
+      "label": "HLI's discount, mainly for replicability",
+      "format": "percent",
+      "value": 0.77,
+      "kind": "judgment",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+        "page": "Summary",
+        "quote": "However, we discount this by 77% (primarily for replicability concerns)",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "adjusted_wellbys",
+      "section": "effects",
+      "label": "WELLBYs per child, adjusted",
+      "format": "number",
+      "formula": "total_naive_wellbys * (1 - replicability_discount)",
+      "expected": 4.945,
+      "explainer": "HLI: \"to arrive at our final effect estimate of 5 WELLBYs\"."
+    },
+    {
+      "id": "cost_per_child",
+      "section": "effects",
+      "label": "Cost per child reached by icddr,b",
+      "format": "usd",
+      "value": 98,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+        "page": "Summary",
+        "quote": "We estimate that it costs $98 per child treated by the icddr,b",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "wellbys_per_1000",
+      "section": "bottom",
+      "label": "WELLBYs per $1,000",
+      "format": "number",
+      "formula": "adjusted_wellbys / cost_per_child * 1000",
+      "expected": 50.45918367,
+      "explainer": "HLI: \"leading to a cost-effectiveness of 50 WELLBYs per $1k (WBp1k)\". HLI expects costs to fall if icddr,b scales the programme."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future wellbeing",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "effect_duration_years",
+      "section": "per_dollar",
+      "label": "Years the effect lasts",
+      "format": "number",
+      "unit": "years",
+      "value": 32,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/does-improving-parenting-practices-in-childhood-lead-to-happier-adults/",
+        "page": "Summary",
+        "quote": "an effect of 0.23 standard deviations (SDs) on depression that lasts 32 years",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "HLI's duration. We spread the WELLBYs evenly over these years from now. HLI doesn't say when the 32 years start; most of the child's 14.5 WELLBYs are adult wellbeing, so a later start would cut the discounted figure further."
+    },
+    {
+      "id": "discount_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for benefits spread evenly over those years",
+      "format": "number",
+      "formula": "pv_annuity_due(1, discount_rate_per_year, effect_duration_years) / effect_duration_years",
+      "explainer": "The present value of an equal benefit each year over the years above, starting now, as a share of the undiscounted total: 1 at a 0% rate, lower the longer the benefit lasts."
+    },
+    {
+      "id": "wellbys_per_dollar_discounted",
+      "section": "per_dollar",
+      "label": "WELLBYs per dollar, discounted",
+      "format": "small",
+      "formula": "wellbys_per_1000 / 1000 * discount_factor"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "staff_pay",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "unit": "WELLBYs per $",
+      "formula": "wellbys_per_dollar_discounted * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1000",
+      "unit": "WELLBYs per $1,000"
+    }
+  }
+}
