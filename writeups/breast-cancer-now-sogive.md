@@ -1,6 +1,6 @@
 ### Summary
 
-Breast Cancer Now funds breast cancer research in the UK, runs support services for people with breast cancer, and campaigns on screening and treatment. SoGive could not trace the charity's own research to health gains, so it estimated what UK breast cancer research as a whole has cost per year of healthy life gained: £1,000 to £8,800. At the middle of that range, allowing for the share of a donation that goes to research and the years research takes to pay off, that is **<span data-figure="headline" data-model="breast-cancer-now-sogive">0.057</span> years of healthy life per $1,000** on our scale.
+Breast Cancer Now funds breast cancer research in the UK, runs support services for people with breast cancer, and campaigns on screening and treatment. SoGive could not trace the charity's own research to health gains, so it estimated what UK breast cancer research as a whole has cost per year of healthy life gained: £1,000 to £8,800. At the middle of that range, allowing for the share of a donation that goes to research and the years research takes to pay off, that is **<span data-figure="headline" data-model="breast-cancer-now-sogive">0.060</span> years of healthy life per $1,000** on our scale.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row; its two bounds on the unlabelled spending give SoGive's two ends. SoGive rates Breast Cancer Now "Not Recommended (tentative)".
 
@@ -20,7 +20,7 @@ SoGive uses Glover et al. (2014), which estimated the returns to UK cancer resea
 
 SoGive's figures come first, ending at its cost per healthy year. SoGive gives only the two bounds, so the central value is ours: the unlabelled spending split like the labelled (19% breast cancer), £2,484 per healthy year. Our steps follow:
 
-- **Research share:** only the part of a donation spent on research is credited with SoGive's healthy years. In 2019–20 the charity spent £17.0m on fundraising and £22.6m on research, support services, campaigning and information; we put research at 35% of the total (25% to 50%, our judgment).
+- **Research share:** only the part of a donation spent on research is credited with SoGive's healthy years. In 2019–20 the charity spent £14.6m on research out of £39.7m in all (£17.0m of it on fundraising): 37%.
 - **Pounds to dollars** at the 2021 average exchange rate.
 - **The lag:** research pays off about 15 years later (Glover et al.), discounted at the shared rate.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
@@ -28,7 +28,7 @@ SoGive's figures come first, ending at its cost per healthy year. SoGive gives o
 ### What drives the result
 
 - **How much of the unlabelled research was about breast cancer**, which spans SoGive's whole range (ninefold).
-- **The research share of spending** (35%), our reading of the accounts.
+- **The research share of spending** (37% in 2019–20).
 - **The research lag and the discount rate.** At the default 4%, a 15-year lag roughly halves the figure.
 - **Whether Breast Cancer Now's research is average.** SoGive assumes so, having no sign it is better.
 
