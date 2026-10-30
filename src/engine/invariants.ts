@@ -40,10 +40,10 @@ export type InvariantReport = {
 
 export const keyOf = (v: Pick<Violation, "model" | "where">) => `${v.model} ${v.where}`;
 
-/** Units the design ranks in. `ced` doesn't exist yet, so no animal model can pass INV-1 today. */
-export const RANKED_UNITS = ["uov", "daly", "wellby", "ced"];
+/** Units the design ranks in: tco2e is climate's, converted through the deaths a tonne causes. */
+export const RANKED_UNITS = ["uov", "daly", "wellby", "ced", "tco2e"];
 /** Rates that convert between causes: they belong in a unit's conversion, never in a model row. */
-export const CROSS_CAUSE = ["daly_per_sad", "uov_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day"];
+export const CROSS_CAUSE = ["daly_per_sad", "uov_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day", "deaths_per_tco2e"];
 const ANIMAL_ASSUMPTIONS = ["chicken_vs_person", "daly_per_sad"];
 
 const close = (a: number, b: number, rel = 1e-9) => a === b || Math.abs(a - b) <= rel * Math.max(Math.abs(a), Math.abs(b));
@@ -405,8 +405,11 @@ type Shape = "linear" | "independent";
 function expectations(m: ResolvedModel): [string, Shape][] {
   const unit = m.output!.unit;
   if (m.cause === "animal-welfare")
-    return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
+    return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
   const base: [string, Shape][] = ANIMAL_ASSUMPTIONS.map((a) => [a, "independent"]);
+  // Climate: a tonne is worth the deaths it causes, each valued like an adult's death.
+  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
+  base.push(["deaths_per_tco2e", "independent"]);
   if (unit === "wellby") return [...base, ["uov_per_wellby", "linear"], ["uov_per_ln_consumption", "independent"]];
   if (unit === "daly") return [...base, ["uov_per_wellby", "independent"]];
   return [...base, ["uov_per_wellby", "independent"]];
@@ -428,7 +431,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Others: independent of the animal assumptions and of $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
   };
 }
 

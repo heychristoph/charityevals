@@ -7,7 +7,7 @@ import { abs, defaultYears } from "../lib/seo";
 import { formatYears } from "../lib/format";
 import { repo } from "../lib/site";
 
-const CAUSES = [["global-health", "Global health"], ["animal-welfare", "Animal welfare"], ["ai-safety", "AI safety"]] as const;
+const CAUSES = [["global-health", "Global health"], ["animal-welfare", "Animal welfare"], ["ai-safety", "AI safety"], ["climate", "Climate"]] as const;
 
 export const GET: APIRoute = () => {
   const charities = [...lib.charities.values()].filter((c) => primaryOf(lib, c.id));

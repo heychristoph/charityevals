@@ -50,7 +50,7 @@ const RES_GROUPS = [
 ] as const;
 const allResources = [...(charity.resources ?? []), ...(model.resources ?? []), ...writeupLinks].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
 const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
-const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
+const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety", climate: "Climate" } as const;
 // Bulk imports carry a generated summary about the import; the charity's own one-liner reads better.
 // One sentence: the charity's own line, else the model summary's first sentence. It doesn't repeat the import boilerplate every model's summary carries
 // ("a re-implementation of ...": the method page says it once for all) or the source's title.
