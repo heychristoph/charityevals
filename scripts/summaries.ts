@@ -57,7 +57,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
       const label = id === m.output!.row ? r.label : "";
       if (live.has(id)) {
         const { explainer: _e, source: _s, expected: _x, section: _c, format: _f, ...rest } = r;
-        return { ...rest, label, ...("value" in rest ? { explainer: "Input." } : {}) };
+        return { ...rest, label, ...("value" in rest || "published" in rest ? { explainer: "Input." } : {}) };
       }
       return { id, label, value: values[id], kind: "estimate", explainer: "Folded." };
     });

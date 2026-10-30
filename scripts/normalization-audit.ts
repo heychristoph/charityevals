@@ -8,7 +8,7 @@
 import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary } from "../src/engine/model";
-import { checkAll, keyOf, toAllowlist } from "../src/engine/invariants";
+import { applyWaivers, checkAll, keyOf, toAllowlist, type Waivers } from "../src/engine/invariants";
 
 const root = join(import.meta.dirname, "..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -29,15 +29,18 @@ if (lib.errors.length) {
   process.exit(1);
 }
 
-const reports = checkAll(lib);
+// Flags settled by hand (src/engine/normalization-waivers.json, each with its reason) aren't violations.
+const waivers: Waivers = read(join(root, "src/engine/normalization-waivers.json"));
+const { reports, stale } = applyWaivers(checkAll(lib), waivers);
+if (stale.length) console.log(`Stale waivers (remove them):\n  ${stale.join("\n  ")}\n`);
 const all = process.argv.includes("--all");
 
 console.log("Normalization audit (docs/normalization.md section 3)\n");
-console.log(["Invariant", "Status", "Models checked", "Failing models", "Violations"].join(" | "));
-console.log("---|---|---|---|---");
+console.log(["Invariant", "Status", "Models checked", "Failing models", "Violations", "Waived"].join(" | "));
+console.log("---|---|---|---|---|---");
 for (const r of reports) {
   const failing = new Set(r.violations.map((v) => v.model));
-  console.log([`${r.id} ${r.title}`, r.status, r.checked, failing.size, r.violations.length].join(" | "));
+  console.log([`${r.id} ${r.title}`, r.status, r.checked, failing.size, r.violations.length, r.waived ?? 0].join(" | "));
 }
 for (const r of reports) {
   const by = new Map<string, string[]>();
