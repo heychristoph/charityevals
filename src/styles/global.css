@@ -95,16 +95,22 @@ p {
   text-wrap: pretty;
 }
 
-a {
-  color: var(--blue);
+/* Text links: ink words on a blue underline, offset clear of descenders; the underline deepens on
+   hover. Nav, footer, tabs and buttons opt out where they're drawn. */
+a,
+.link-button,
+.text-link {
+  color: var(--ink);
   text-decoration-line: underline;
-  text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent);
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--blue) 55%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
 }
-a:hover {
-  color: var(--blue-ink);
-  text-decoration-color: currentColor;
+a:hover,
+.link-button:hover:not(:disabled),
+.text-link:hover:not(:disabled) {
+  color: var(--ink);
+  text-decoration-color: var(--blue-ink);
 }
 
 :focus-visible {
@@ -207,40 +213,3 @@ code {
   }
 }
 
-/* Model view switch: a two-option segmented control */
-.view-toggle {
-  display: inline-flex;
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
-  padding: 2px;
-  background: var(--paper);
-  font-size: 14px;
-}
-.view-toggle button {
-  font: inherit;
-  border: 0;
-  background: none;
-  color: var(--ink-2);
-  padding: 5px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.view-toggle button:hover {
-  color: var(--ink);
-}
-.view-toggle button.on {
-  background: var(--blue);
-  color: var(--paper);
-}
-.view-note {
-  font-size: 14px;
-  color: var(--ink-2);
-  max-width: var(--measure);
-}
-.view-bar {
-  display: flex;
-  gap: var(--s3) var(--s4);
-  align-items: center;
-  flex-wrap: wrap;
-}
