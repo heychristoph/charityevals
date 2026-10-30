@@ -1,8 +1,8 @@
 ### Summary
 
-Aquatic Life Institute (ALI) pushes retailers, certifiers and policymakers to adopt welfare standards for farmed fish. ACE's analysis (2024 evaluation, renewed in 2025) estimates SADs for its corporate and institutional outreach: **<span data-figure="headline" data-model="aquatic-life-institute">530</span> years of healthy life per $1,000** you give, the second highest on the site after Sinergia Animal. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Aquatic Life Institute (ALI) pushes retailers, certifiers and policymakers to adopt welfare standards for farmed fish. ACE's analysis (2024 evaluation, renewed in 2025) estimates SADs for its corporate and institutional outreach: **<span data-figure="headline" data-model="aquatic-life-institute">3.8</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
-The model reproduces all 18 of ACE's intermediate figures.
+In ACE's own view the model reproduces all 23 of ACE's intermediate figures, which come to 530.
 
 ### How the impact happens
 
@@ -10,7 +10,7 @@ Companies such as retailers commit to standards (for example stunning at slaught
 
 ### What drives the result
 
-Whether specific large commitments are implemented: **how certain Tesco's stunning commitment is** is the largest factual lever in ACE's sheet (about 430 to 630 years of healthy life per $1,000 on its own).
+Two shared figures matter most: **how much a shrimp can suffer relative to a chicken** (about 0.062 to 140 years of healthy life per $1,000 on its own) and **suffering spared per stunned shrimp** (3.8 to 82; the high end is ACE's own figure). Within ACE's sheet, the **years of impact** (1.8 to 5.9) and **how certain Tesco's stunning commitment is** (3.1 to 4.6) matter most.
 
 ### What isn't modelled
 
@@ -18,8 +18,10 @@ ALI's policy feedback program has no SADs estimate and is left out of the bottom
 
 ### Where we differ from ACE
 
-- **Salary sacrifice (on by default).** We guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, so the forgone pay is an in-kind donation of about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
-- **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, so the full-credit switch doesn't change this model yet.
+- **Suffering per stunned shrimp (changed for consistency).** ACE uses 0.097 days of suffering per shrimp stunned; we use the shared 0.0045, ACE's more recent figure from its 2025 Shrimp Welfare Project review, so the same change counts the same in every model.
+- **Shrimp weight.** ACE's figures carry Ambitious Impact's weight for a shrimp, about 43% of a chicken's; we use Rethink Priorities', about 9%. Together with the point above, this takes ACE's 530 to <span data-figure="headline" data-model="aquatic-life-institute">3.8</span>.
+- **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
+- **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them.
 
 
 ### Sources
