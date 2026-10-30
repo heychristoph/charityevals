@@ -94,7 +94,7 @@ def species_rows(shares):
         rows.append(f(f"sads_{sp}", "species", f"SADs averted per dollar you give: {names[sp]}", f"sads_per_donor_dollar * {share}" if share else "sads_per_donor_dollar",
                       None if share else "TEMPLATE: one species takes all the SADs. For several, add a sads_<species> row per species with its share (a sourced fact or a judgment row with a range) and a ced_<species> row for each.", "number"))
         rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {names[sp]}",
-                      f"sads_{sp} / @aim_sads.{sp} * if($rp_species_weights, @welfare_ranges.{sp}_vs_chicken, @aim_sads.{sp} / @aim_sads.chicken)",
+                      f"sads_{sp} / @aim_sads.{sp}_2024 * if($rp_species_weights, @welfare_ranges.{sp}_vs_chicken, @aim_sads.{sp}_2024 / @aim_sads.chicken_2024)",
                       "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it.", "number"))
     rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, _ in shares), None, "small", "chicken pain days / $"))
     return rows

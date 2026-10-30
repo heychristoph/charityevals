@@ -75,11 +75,20 @@ describe("invariant checks", () => {
       { id: "ced_shrimp", label: "ced", formula: ced },
       { id: "out", label: "out", formula: "ced_shrimp" },
     ];
-    const good = { ...animal, id: "good", rows: rows("sads_shrimp / @aim_sads.shrimp * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp / @aim_sads.chicken)"), output: { row: "out", unit: "ced", label: "x", species: ["shrimp"] } };
+    const good = { ...animal, id: "good", rows: rows("sads_shrimp / @aim_sads.shrimp_2025 * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp_2025 / @aim_sads.chicken_2024)"), output: { row: "out", unit: "ced", label: "x", species: ["shrimp"] } };
     const bad = { ...good, id: "bad", rows: rows("sads_shrimp * @welfare_ranges.shrimp_vs_chicken * 2") };
-    const l = buildLibrary([base, good, bad], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    // A second SAD version must divide by its own version's weight.
+    const v2024 = (w: string) => [
+      ...good.rows.slice(0, 2),
+      { id: "sads_shrimp_2024", label: "SADs (2024)", value: 1, kind: "observed", explainer: "Test input." },
+      { id: "ced_shrimp_2024", label: "ced (2024)", formula: `sads_shrimp_2024 / @aim_sads.shrimp_${w} * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp_${w} / @aim_sads.chicken_2024)` },
+      { id: "out", label: "out", formula: "ced_shrimp + ced_shrimp_2024" },
+    ];
+    const mixed = { ...good, id: "mixed", rows: v2024("2024") };
+    const mismatched = { ...good, id: "mismatched", rows: v2024("2025") };
+    const l = buildLibrary([base, good, bad, mixed, mismatched], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
     expect(l.errors).toEqual([]);
-    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp"]);
+    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp", "mismatched ced_shrimp_2024"]);
   });
 
   // An evaluator's model: native row `x_cash` (with `expected`), our staff-pay step after it.

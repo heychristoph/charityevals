@@ -10,7 +10,7 @@ About 50 chefs a year are trained; each prepares thousands of plant-based meals 
 
 ### What drives the result
 
-**Suffering spared per meal swapped** is the largest factual lever (about 0.18 to 3.7 years of healthy life per $1,000 on its own), then **how much a fish can suffer relative to a chicken** (0.42 to 12): most of a replaced meal's suffering falls on fish.
+**Suffering spared per meal swapped** is the largest factual lever (about 0.23 to 4.0 years of healthy life per $1,000 on its own), then **how much a fish can suffer relative to a chicken** (0.41 to 13): most of a replaced meal's suffering falls on fish.
 
 ### What isn't modelled
 
