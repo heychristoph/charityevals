@@ -34,6 +34,8 @@ export type InvariantReport = {
   violations: Violation[];
   /** Matches the check dropped as likely false positives, with why (counts only). */
   suppressed?: Record<string, number>;
+  /** Flags settled by hand as not violations (normalization-waivers.json). */
+  waived?: number;
 };
 
 export const keyOf = (v: Pick<Violation, "model" | "where">) => `${v.model} ${v.where}`;
@@ -261,40 +263,83 @@ export function inv4(lib: Library): InvariantReport {
   }
   return {
     id: "INV-4", title: "No literal stands in for a shared fact or assumption", status: "partial", checked: models.length, violations, suppressed,
-    how: "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.1%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label; near-equal (not equal) values, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact.",
+    how: "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.1%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label; near-equal (not equal) values, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
   };
 }
 
 // --- INV-5 / INV-6 / INV-8: the evaluator view --------------------------------------------------
 
-/** INV-5: every non-toggle assumption the model reads is pinned in the evaluator view. */
-export function inv5(lib: Library): InvariantReport {
+/** Rows feeding a row (itself included): the evaluator's layer, when the row is output.native. */
+function upstream(m: ResolvedModel, id: string): Set<string> {
+  const seen = new Set<string>();
+  const walk = (x: string) => { if (seen.has(x)) return; seen.add(x); m.byId.get(x)?.deps.forEach(walk); };
+  walk(id);
+  return seen;
+}
+
+/** Models whose evaluator layer the invariants check: an evaluator's model with an output. */
+const evaluatorModels = (lib: Library) => [...lib.models.values()].filter((m) => m.evaluator && m.output && m.owner !== "charityevals");
+const noNative = (inv: string, m: ResolvedModel): Violation => ({
+  inv, model: m.id, where: "output.native", detail: "declares no output.native, so nothing says where the evaluator's model ends",
+});
+
+/** INV-5: moving any assumption the evaluator's layer reads, in our view only, leaves the evaluator
+ * view's numbers where they were. */
+export function inv5(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
   const toggles = new Set(lib.assumptions.rows.filter((a) => a.format === "toggle").map((a) => a.id));
-  const models = [...lib.models.values()].filter((m) => m.evaluator && m.owner !== "charityevals");
+  const models = evaluatorModels(lib);
   const violations: Violation[] = [];
   for (const m of models) {
-    // Rows in sections of kind "ours" (credit, bridges, the species step) are charityevals', not the evaluator's.
+    const native = m.output!.native?.row;
+    if (!native) { violations.push(noNative("INV-5", m)); continue; }
+    const pins = m.evaluator!.assumptions;
+    // The evaluator's layer: the bottom line and everything feeding it, plus every row in an
+    // evaluator section (side figures a bridge may read).
     const ours = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
-    const read = new Set(m.rows.filter((r) => !(r.section && ours.has(r.section))).flatMap((r) => r.assumptionDeps));
-    for (const a of read)
-      if (!toggles.has(a) && !(a in m.evaluator!.assumptions))
-        violations.push({ inv: "INV-5", model: m.id, where: `$${a}`, detail: `reads $${a} (rows ${m.rows.filter((r) => r.assumptionDeps.includes(a)).map((r) => r.id).slice(0, 3).join(", ")}) but the evaluator view doesn't pin it, so the reproduction moves with the visitor's slider` });
+    const layer = upstream(m, native);
+    for (const r of m.rows) if (!(r.section && ours.has(r.section))) layer.add(r.id);
+    const read = new Set(m.rows.filter((r) => layer.has(r.id)).flatMap((r) => r.assumptionDeps));
+    // Rows that must stay put: the whole layer, which includes every row reproducing one of the
+    // evaluator's figures (`expected`) and the native row.
+    const watched = [...layer];
+    const base = compute(lib, m, av, {}, "evaluator");
+    for (const a of [...read].sort()) {
+      const users = m.rows.filter((r) => layer.has(r.id) && r.assumptionDeps.includes(a)).map((r) => r.id).slice(0, 3).join(", ");
+      if (toggles.has(a)) {
+        // A switch inside the evaluator's rows (GiveWell's leverage and funging adjustments) is fine
+        // as long as the evaluator view sets it to the evaluator's position.
+        if (!(a in pins)) violations.push({ inv: "INV-5", model: m.id, where: `$${a}`, detail: `the evaluator's rows (${users}) switch on toggle $${a}, but the evaluator view doesn't pin it` });
+        continue;
+      }
+      const moved = new Set<string>();
+      for (const k of [0.5, 1.5]) {
+        const vals = compute(lib, m, { ...av, [a]: av[a] === 0 ? k - 0.5 : av[a] * k }, {}, "evaluator");
+        for (const id of watched) if (!(close(vals[id], base[id], 1e-9) || (Number.isNaN(vals[id]) && Number.isNaN(base[id])))) moved.add(id);
+      }
+      if (moved.size)
+        violations.push({ inv: "INV-5", model: m.id, where: `$${a}`, detail: `the evaluator's rows (${users}) read $${a}; moved ±50% in our view, the evaluator view moves too (${[...moved].slice(0, 3).join(", ")}${moved.size > 3 ? ", …" : ""}): pin it in evaluator.assumptions` });
+    }
   }
   return {
-    id: "INV-5", title: "The evaluator view uses the evaluator's own rates", status: "partial", checked: models.length, violations,
-    how: "Every assumption read by a row outside the model's own sections (kind \"ours\": credit, bridges, the species step) counts as read inside the evaluator's model: each non-toggle one must be pinned in evaluator.assumptions. Models without section kinds count every row. The design's stronger test (expected still reproduces with the assumption moved ±50% in our view) needs output.native and isn't run.",
+    id: "INV-5", title: "The evaluator view uses the evaluator's own rates", status: "checked", checked: models.length, violations,
+    how: "Every evaluator model with an output (variants too, with their own inputs) must declare output.native; its evaluator layer is the native row, every row feeding it and every other row outside sections of kind \"ours\". Each non-toggle assumption a row in that layer reads is moved to ×0.5 and ×1.5 in our view (0 → 0.5 and 1): no row of the layer may move in the evaluator view, so every `expected` still reproduces and the bottom line stays the evaluator's. A pin in evaluator.assumptions passes by construction; an unpinned assumption passes only if no evaluator row's value depends on it. Each toggle the layer reads (GiveWell's leverage and funging switches on $resource_shares) must be pinned, so the evaluator view sees the evaluator's position.",
   };
 }
 
-/** INV-6 (partial): an evaluator model has at least one `expected` value to reproduce. */
+/** INV-6: the native row, or one of its direct inputs, carries the evaluator's figure (`expected`). */
 export function inv6(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.evaluator && m.output && m.kind !== "variant");
-  const violations = models.filter((m) => !m.rows.some((r) => r.expected !== undefined)).map((m) => ({
-    inv: "INV-6", model: m.id, where: "model", detail: "evaluator model with no `expected` value on any row: nothing shows the evaluator's bottom line reproduces",
-  }));
+  const models = evaluatorModels(lib).filter((m) => m.kind !== "variant");
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const native = m.output!.native?.row;
+    if (!native) { violations.push(noNative("INV-6", m)); continue; }
+    const r = m.byId.get(native)!;
+    if (r.expected === undefined && !r.deps.some((d) => m.byId.get(d)?.expected !== undefined))
+      violations.push({ inv: "INV-6", model: m.id, where: "model", detail: `neither the native row ${native} nor its direct inputs (${r.deps.slice(0, 4).join(", ") || "none: it is an input"}) carry \`expected\`: nothing shows the evaluator's bottom line reproduces` });
+  }
   return {
-    id: "INV-6", title: "The evaluator's bottom line reproduces", status: "partial", checked: models.length, violations,
-    how: "output.native doesn't exist, so the native row can't be found. Checked only that each evaluator model (not variants, which don't inherit `expected`) carries at least one `expected`; scripts/check.ts already checks those values reproduce.",
+    id: "INV-6", title: "The evaluator's bottom line reproduces", status: "checked", checked: models.length, violations,
+    how: "Every evaluator model with an output (not variants: they inherit output.native and don't inherit `expected`) declares output.native, and that row or one of its direct inputs carries `expected`; scripts/check.ts checks those values reproduce in the evaluator view.",
   };
 }
 
@@ -350,7 +395,7 @@ export function inv9(lib: Library): InvariantReport {
   }
   return {
     id: "INV-9", title: "Shared levers reach every model they apply to", status: "partial", checked: models.length, violations,
-    how: "Models don't declare mortality/multi_year yet, so keywords in the labels of rows on the path to the output stand in: deaths/mortality/lives saved (not seedlings, trees, crops) → some row on the path must read $life_value_multiplier; discount rate/factor, present value, years or duration of benefit/effect, decay (not iron absorption discount factors) → some row on the path must read $discount_rate. Variants are checked through their parent. Keyword matches can miss rows that value deaths under another name and can flag sheets where deaths are context only.",
+    how: "Models don't declare mortality/multi_year yet, so keywords in the labels of rows on the path to the output stand in: deaths/mortality/lives saved (not seedlings, trees, crops) → some row on the path must read $life_value_multiplier; discount rate/factor, present value, years or duration of benefit/effect, decay (not iron absorption discount factors) → some row on the path must read $discount_rate. Variants are checked through their parent. Heuristic by nature (keywords, not declarations); it can't see deaths valued under another name (DALYs or years of life lost, \"lives\" without \"saved\"), benefits spread over years without the keywords, or a lever read on one branch of the path while another branch values deaths or years with literals; and it flags sheets where the words are context only (normalization-waivers.json).",
   };
 }
 
@@ -465,21 +510,29 @@ export function sameChange(lib: Library, av = assumptionValues(lib.assumptions))
 // ---------------------------------------------------------------------------------------------
 
 /** INV-7: between the evaluator's bottom line (output.native) and ours, every row is in one of our
- * own sections and reproduces nothing; above it, every row is the evaluator's. Models that declare
- * output.native only. */
+ * own sections and reproduces nothing; above it, every row is the evaluator's. "Between" is every row
+ * computed from the evaluator's layer that isn't part of it, so a species split of the bottom line's
+ * inputs counts too. */
 export function inv7(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.output?.native && m.kind !== "variant");
+  const models = evaluatorModels(lib).filter((m) => m.kind !== "variant");
   const violations: Violation[] = [];
   for (const m of models) {
-    const native = m.output!.native!.row;
+    if (!m.output!.native) { violations.push(noNative("INV-7", m)); continue; }
+    const native = m.output!.native.row;
+    const out = m.output!.row;
     const ours = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
     const feedsOut = rowsFeeding(m);
-    const feedsNative = new Set<string>();
-    const walk = (id: string) => { if (feedsNative.has(id)) return; feedsNative.add(id); m.byId.get(id)?.deps.forEach(walk); };
-    walk(native);
-    // Rows that use the native row, directly or not.
+    const feedsNative = upstream(m, native);
+    // Rows computed from the bottom line, or (a result split by species before it is summed) from
+    // its direct inputs, directly or not: ours. Evaluator rows beside the bottom line that our steps
+    // read (ACE 2016's hen-years) aren't in between.
+    const nativeDeps = m.byId.get(native)!.deps;
+    const seeds = new Set([native, ...nativeDeps]);
     const below = new Set<string>();
-    for (const id of m.order) if (m.byId.get(id)!.deps.some((d) => d === native || below.has(d))) below.add(id);
+    for (const id of m.order) if (!feedsNative.has(id) && m.byId.get(id)!.deps.some((d) => seeds.has(d) || below.has(d))) below.add(id);
+    // The output uses the bottom line, or every one of its direct inputs.
+    const usesNative = out === native || upstream(m, out).has(native) || (nativeDeps.length > 0 && nativeDeps.every((d) => feedsOut.has(d)));
+    if (!usesNative) violations.push({ inv: "INV-7", model: m.id, where: out, detail: `the output uses neither the evaluator's bottom line (${native}) nor all of its inputs` });
     for (const id of below) {
       if (!feedsOut.has(id)) continue;
       const r = m.byId.get(id)!;
@@ -492,15 +545,15 @@ export function inv7(lib: Library): InvariantReport {
     }
   }
   return {
-    id: "INV-7", title: "Our rows are visibly ours", status: "partial", checked: models.length, violations,
-    how: "Models that declare output.native (so far the animal models): every row that uses the native row and feeds the output is in a section of kind \"ours\" and has no `expected`; no row feeding the native row is in one of ours. Models without output.native aren't checked.",
+    id: "INV-7", title: "Our rows are visibly ours", status: "checked", checked: models.length, violations,
+    how: "Every evaluator model with an output (not variants: rows and sections are the parent's) declares output.native, and the output uses it. The output uses the native row (or, for a result split by species, every direct input of it). Every row that feeds the output and is computed, directly or not, from the native row or one of its direct inputs (without feeding the native row itself) is in a section of kind \"ours\" and has no `expected`; no row in the layer is in one of ours (rows switched by a toggle inside the evaluator's layer stay the evaluator's: INV-5 checks the toggle is pinned). Not checked: inputs of our steps that aren't computed from the bottom line (GiveWell's value of cash, staff-pay judgments; ours by section), and evaluator rows beside the bottom line that a bridge reads (ACE 2016's hen-years; INV-5 still holds them to the evaluator's rates).",
   };
 }
 
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv3(lib), inv4(lib), inv5(lib), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
@@ -509,3 +562,26 @@ export type Allowlist = Record<string, string[]>;
 export function toAllowlist(reports: InvariantReport[]): Allowlist {
   return Object.fromEntries(reports.filter((r) => r.violations.length).map((r) => [r.id, [...new Set(r.violations.map(keyOf))].sort()]));
 }
+
+/** Waivers: flags checked by hand and found not to be violations (a coincidence of values, a word
+ * that means something else), each with its reason. Unlike the allowlist, which is debt to fix, a
+ * waiver is settled; a waiver that no longer matches anything is stale and must go. */
+export type Waivers = Record<string, Record<string, string>>;
+
+/** Reports without the waived violations, and the waivers that matched nothing. */
+export function applyWaivers(reports: InvariantReport[], waivers: Waivers): { reports: InvariantReport[]; stale: string[] } {
+  const used = new Set<string>();
+  const out = reports.map((r) => {
+    const w = waivers[r.id] ?? {};
+    const violations = r.violations.filter((v) => {
+      const k = keyOf(v);
+      if (!(k in w)) return true;
+      used.add(`${r.id} ${k}`);
+      return false;
+    });
+    return { ...r, violations, waived: r.violations.length - violations.length };
+  });
+  const stale = Object.entries(waivers).flatMap(([id, w]) => Object.keys(w).map((k) => `${id} ${k}`)).filter((k) => !used.has(k));
+  return { reports: out, stale };
+}
+

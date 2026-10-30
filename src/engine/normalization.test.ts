@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildLibrary } from "./model";
-import { checkAll, inv10, inv2b, inv3, keyOf, type Allowlist } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv2b, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -18,10 +18,13 @@ const assumptions = read(join(root, "assumptions/default.json"));
 const lib = buildLibrary(walk(join(root, "models")).map(read), assumptions,
   walk(join(root, "facts")).map(read), walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
 const allowlist: Allowlist = read(join(import.meta.dirname, "normalization-allowlist.json"));
-const reports = checkAll(lib);
+const waivers: Waivers = read(join(import.meta.dirname, "normalization-waivers.json"));
+const { reports, stale } = applyWaivers(checkAll(lib), waivers);
 
 describe("normalization invariants", () => {
   it("builds the library without errors", () => expect(lib.errors).toEqual([]));
+
+  it("every waiver still matches a flag (stale ones must go)", () => expect(stale).toEqual([]));
 
   it("allowlists only invariants that exist", () => {
     const ids = new Set(reports.map((r) => r.id));
@@ -77,6 +80,41 @@ describe("invariant checks", () => {
     const l = buildLibrary([base, good, bad], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
     expect(l.errors).toEqual([]);
     expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp"]);
+  });
+
+  // An evaluator's model: native row `x_cash` (with `expected`), our staff-pay step after it.
+  const sheet = (id: string, opts: { pins?: Record<string, number>; nativeExpected?: boolean; outSection?: string; discount?: boolean } = {}) => ({
+    id, name: id, kind: "charity", cause: "global-health",
+    sections: [{ id: "cea", title: "CEA" }, { id: "staff_pay", title: "Staff pay", kind: "ours" }],
+    rows: [
+      { id: "x", label: "x", value: 2, kind: "observed", explainer: "Test input.", section: "cea" },
+      { id: "x_cash", label: "x cash", section: "cea", formula: opts.discount ? "x / (1 + $discount_rate)" : "if($resource_shares, x, x)", ...(opts.nativeExpected === false ? {} : { expected: opts.discount ? 2 / 1.04 : 2 }) },
+      { id: "share", label: "share", value: 0.9, kind: "judgment", explainer: "Test input.", section: "staff_pay" },
+      { id: "out", label: "out", section: opts.outSection ?? "staff_pay", formula: "x_cash * share" },
+    ],
+    output: { row: "out", unit: "uov", label: "UoV per $", native: { row: "x_cash", unit: "multiples of cash transfers" } },
+    evaluator: { name: "GiveWell", assumptions: { resource_shares: 0, ...(opts.pins ?? {}) } },
+  });
+
+  it("INV-5 flags an unpinned rate or toggle inside the evaluator's rows", () => {
+    const models = [base, sheet("good", { discount: true, pins: { discount_rate: 0.04 } }), sheet("unpinned", { discount: true })];
+    const toggle = { ...sheet("toggle"), evaluator: { name: "GiveWell", assumptions: {} } };
+    const l = buildLibrary([...models, toggle], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv5(l).violations.map(keyOf)).toEqual(["unpinned $discount_rate", "toggle $resource_shares"]);
+  });
+
+  it("INV-6 flags a native row with no `expected` on it or its direct inputs", () => {
+    const l = buildLibrary([base, sheet("good"), sheet("bad", { nativeExpected: false })], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv6(l).violations.map(keyOf)).toEqual(["bad model"]);
+  });
+
+  it("INV-7 flags one of our steps in an evaluator section, and a missing native row", () => {
+    const { native: _n, ...noNative } = sheet("none").output;
+    const l = buildLibrary([base, sheet("good"), sheet("bad", { outSection: "cea" }), { ...sheet("none"), output: noNative }], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv7(l).violations.map(keyOf)).toEqual(["bad out", "none output.native"]);
   });
 
   it("INV-10 flags a non-animal model that moves with the animal weight", () => {
