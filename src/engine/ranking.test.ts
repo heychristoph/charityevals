@@ -31,7 +31,9 @@ describe("ranking plan", () => {
 
   it("gives each evaluator one entry, and each program its newest model", () => {
     expect(rankingPlan(lib, "against-malaria-foundation").map((e) => e.owner)).toEqual(["givewell", "hli"]);
+    // GiveWell's four programs, plus SoGive's deworming model as SoGive's own entry.
     expect(ids("evidence-action").sort()).toEqual([
+      "evidence-action-deworm-the-world-sogive-2022",
       "evidence-action-deworm-world-2024-renewal",
       "evidence-action-ifa-in-bihar-uttar-pradesh-july-2024",
       "evidence-action-in-line-chlorination-india-2023",
