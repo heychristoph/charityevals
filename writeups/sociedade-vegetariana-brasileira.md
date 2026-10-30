@@ -10,7 +10,7 @@ Institutions commit to serving plant-based meals; each replaced meal means fewer
 
 ### What drives the result
 
-**How much suffering a replaced meal spares** (about 2.8 to 58 years of healthy life per $1,000 on its own) and **how much a fish can suffer relative to a chicken** (6.6 to 190) move the result most. Among SVB's own inputs, **years of impact**, how long institutions keep the change, matters most (20 to 42).
+**How much suffering a replaced meal spares** (about 3.7 to 63 years of healthy life per $1,000 on its own) and **how much a fish can suffer relative to a chicken** (6.4 to 200) move the result most. Among SVB's own inputs, **years of impact**, how long institutions keep the change, matters most (21 to 45).
 
 ### What isn't modelled
 
