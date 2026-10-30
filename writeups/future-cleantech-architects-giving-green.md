@@ -1,6 +1,6 @@
 ### Summary
 
-Future Cleantech Architects (FCA) is a German think tank that works on EU policy for the hardest parts of decarbonisation: heavy industry, high-temperature heat, aviation and shipping fuels. Giving Green estimated in 2024 that one piece of its work, advocacy for a target for innovative renewable energy in the EU's Renewable Energy Directive, kept a tonne of CO₂-equivalent out of the air for about 14 cents. On our scale that is **<span data-figure="headline" data-model="future-cleantech-architects-giving-green">1.1</span> years of healthy life per $1,000**: we count these tonnes for their heat deaths only, which come decades from now and are discounted like any future good.
+Future Cleantech Architects (FCA) is a German think tank that works on EU policy for the hardest parts of decarbonisation: heavy industry, high-temperature heat, aviation and shipping fuels. Giving Green estimated in 2024 that one piece of its work, advocacy for a target for innovative renewable energy in the EU's Renewable Energy Directive, kept a tonne of CO₂-equivalent out of the air for about 14 cents. On our scale that is **<span data-figure="headline" data-model="future-cleantech-architects-giving-green">3.0</span> years of healthy life per $1,000**: these tonnes avoid heat deaths decades from now, discounted like any future good, and the air pollution of the gas power they replace, at once.
 
 The model reproduces all 5 of Giving Green's calculated figures in its spreadsheet.
 
@@ -23,7 +23,7 @@ Giving Green's chain:
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Our steps follow:
 
 - **Tonnes per dollar:** one over the cost per tonne.
-- **Tonnes counted for heat deaths only:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. These tonnes come from EU gas plants burning less, and burning gas emits about a twentieth of that average smoke per tonne (see below), so the model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only.
+- **Air pollution per tonne, from gas power:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. These tonnes come from EU gas plants burning less, and burning gas emits about a twentieth of that average smoke per tonne (see below), so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is all the tonnes (0.8–1) times 0.048 (0.01–0.08).
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
@@ -37,7 +37,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 ### Where we differ from Giving Green
 
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
-- **Displaced gas power counts for its heat deaths only.** Gas plants cause roughly 2.8 deaths per TWh of electricity against roughly 25 for coal, with less than half coal's CO₂ (Markandya and Wilkinson, 2007): about a twentieth of the world-average air-pollution deaths per tonne in the shared rate. Counting the tonnes at the world average would put FCA at about 40 healthy years per $1,000, roughly 13 times too high; counting heat only understates it about 2–3 times. We treat them as the Clean Air Task Force model treats its US coal tonnes.
+- **Displaced gas power counts its own air pollution.** Gas plants cause roughly 2.8 deaths per TWh of electricity against roughly 25 for coal, with less than half coal's CO₂ (Markandya and Wilkinson, 2007): about a twentieth of the world-average air-pollution deaths per tonne in the shared rate. That makes the result about 2.7 times what heat alone gives (1.1 before October 2026); the world average would have given about 40. The Clean Air Task Force model sets its coal tonnes' smoke the same way.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 

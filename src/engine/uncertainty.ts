@@ -237,10 +237,30 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   const G = m.output && y ? backward(new Map([[`row:${m.output.row}`, 1]])) : new Map<string, number>();
   const lnD = new Map<string, number>([...G].map(([k, g]) => [k, g / y]));
   const nativeVar = y ? absVar(G) / y ** 2 : 0;
-  // The headline is the native result times a conversion built from shared assumptions.
+  // The headline is the native result times a conversion built from shared assumptions and, for a
+  // unit that reads one (climate, docs/normalization.md 2.5), a fixed row of the model: that row's
+  // own sources reach the headline through it.
   if (convNode) {
-    const base = evaluate(convNode, (s, n) => (s === "assumption" ? av[n] ?? NaN : NaN));
-    if (base) for (const x of local(convNode, base)) lnD.set(`assumption:${x.name}`, (lnD.get(`assumption:${x.name}`) ?? 0) + x.d / base);
+    const convLook = (s: Scope, n: string) => (s === "assumption" ? av[n] ?? NaN : s === "row" ? values[n] ?? NaN : NaN);
+    const base = evaluate(convNode, convLook);
+    if (base) {
+      const d = (expr: Node, scope: Scope, name: string) => {
+        const v = convLook(scope, name);
+        const leaf = leaves.get(`${scope}:${name}`);
+        const step = v !== 0 ? Math.abs(v) * H : leaf?.absolute ? (leaf.high - leaf.low) * H : ZERO_STEP;
+        return (evaluate(expr, (s, n) => (s === scope && n === name ? v + step : convLook(s, n))) - base) / step;
+      };
+      const r = refs(convNode);
+      for (const name of r.assumptions) {
+        const x = d(convNode, "assumption", name);
+        if (Number.isFinite(x) && x !== 0) lnD.set(`assumption:${name}`, (lnD.get(`assumption:${name}`) ?? 0) + x / base);
+      }
+      for (const name of r.rows) {
+        const x = d(convNode, "row", name);
+        if (!Number.isFinite(x) || x === 0) continue;
+        for (const [k, g] of backward(new Map([[`row:${name}`, x / base]]))) lnD.set(k, (lnD.get(k) ?? 0) + g);
+      }
+    }
   }
 
   const drivers: Driver[] = [];

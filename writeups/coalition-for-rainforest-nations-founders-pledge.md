@@ -1,6 +1,6 @@
 ### Summary
 
-The Coalition for Rainforest Nations (CfRN) represents rainforest countries in the UN climate negotiations. Founders Pledge estimated in 2018 that its past work kept a tonne of CO₂-equivalent out of the air for about 24 cents, by bringing forward money that pays countries to protect forests. On our scale that is **<span data-figure="headline" data-model="coalition-for-rainforest-nations-founders-pledge">0.62</span> years of healthy life per $1,000**: forest tonnes avoid only heat deaths, which come decades from now and are discounted like any future good.
+The Coalition for Rainforest Nations (CfRN) represents rainforest countries in the UN climate negotiations. Founders Pledge estimated in 2018 that its past work kept a tonne of CO₂-equivalent out of the air for about 24 cents, by bringing forward money that pays countries to protect forests. On our scale that is **<span data-figure="headline" data-model="coalition-for-rainforest-nations-founders-pledge">0.80</span> years of healthy life per $1,000**: forest tonnes avoid heat deaths, which come decades from now and are discounted like any future good, and a little smoke from the fires used to clear forest.
 
 The model reproduces all 7 of Founders Pledge's calculated figures in its spreadsheet.
 
@@ -25,7 +25,7 @@ Founders Pledge also estimates an effect through national forest plans but leave
 Founders Pledge's rows come first, ending at its bottom line in dollars per tonne. Our steps follow:
 
 - **Tonnes per dollar:** one over the cost per tonne.
-- **Forest tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. A forest left standing comes with no fuel smoke, so the model reports tonnes averted without burning less fuel, which the site values for their heat deaths only.
+- **Forest tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. A forest left standing saves no fossil fuel, but tropical forest is mostly cleared by fire: Reddington et al. (2015) find Brazil's fall in deforestation prevents 400–1,700 deaths a year from smoke, about 0.004–0.016 of the world-average fossil-fuel smoke per tonne of CO₂. The model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.008 (0–0.02); Founders Pledge leaves this smoke out.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂" (0.43 per 10,000 tonnes at the defaults), each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂" (60 by default; at 4% a year such a death counts about a tenth of one today).
@@ -39,7 +39,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 ### Where we differ from Founders Pledge
 
 - **Tonnes become healthy years** through the shared climate rate. Founders Pledge stops at dollars per tonne.
-- **Forest tonnes count for their heat deaths only**, because a standing forest cuts no fuel smoke.
+- **Forest tonnes count their heat deaths and a little clearing-fire smoke** (0.008 of an average fossil-fuel tonne's, Reddington et al. 2015), which Founders Pledge leaves out: about 1.3 times what heat alone gives (0.62 before October 2026).
 - **Future deaths are discounted.** Rethink Priorities counts the heat deaths to 2300 without discounting; like every model on the site, ours discounts future good at the shared rate. At 0% the result would be about 6.5; the discount rate and the delay are the biggest levers on this result.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 

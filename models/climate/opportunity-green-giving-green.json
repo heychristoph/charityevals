@@ -73,7 +73,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The tonnes come from ships burning cleaner fuel in place of heavy fuel oil, so the model reports them as tonnes from burning less fuel, which the site values for the heat deaths they avoid (discounted over the decades until they come) and the air-pollution deaths they avoid at once. That is an upper bound, about 1.2 times too high on our rough guess of the smoke that goes with these tonnes (docs/normalization.md 2.5)."
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The tonnes come from ships burning cleaner fuel or less of it; ship smoke per tonne of CO₂ is about the world average, and only part of it goes with each well-to-wake tonne cut (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -362,7 +362,51 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "1 / cost_per_tonne",
-      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes from burning less fuel, which count their air-pollution deaths at the shared world average (1.46 per 10,000 tonnes) as well as their heat deaths. Ship smoke is about twice that average per tonne of CO₂: Sofiev et al. (2018) estimate about 266,000 deaths a year from ship emissions after the 2020 sulphur limit (the abstract's ~250,000), from about 870 million tonnes of CO₂, some 3.1 deaths per 10,000 tonnes. But the IMO's standard lowers the greenhouse-gas intensity of ship fuel rather than how much is burned, so only part of that smoke goes with each well-to-wake tonne: liquefied gas removes sulphur and most particles while cutting well-to-wake CO₂e only 15–20%, which puts a lot of smoke on each tonne; ammonia and methanol still emit NOx; and part of each tonne is upstream fuel supply. Our rough, unsourced guess is 40% of ship smoke, about 1.2 deaths per 10,000 tonnes or 0.83 of the world average. At that guess this unit overstates the result about 1.2 times, while counting heat only would understate it about 30 times; it is the nearer of the two. Below about a quarter of ship smoke per tonne, heat only would be nearer (see the write-up)."
+      "explainer": "One over Giving Green's cost per tonne. How much air pollution these tonnes cut is the rows below."
+    },
+    {
+      "id": "fuel_share",
+      "section": "per_dollar",
+      "label": "Share of ship smoke that goes with each tonne cut",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Zhang et al. (2021), Mortality reduction relative to implementing new shipping emissions policy (scenario study), Environmental Research Letters 16, 084015 (MIT)",
+        "url": "https://doi.org/10.1088/1748-9326/ac146b",
+        "note": "About 94,000 deaths in 2015 from shipping's fine particles; the 0.5% sulphur cap avoids about 30,000 a year; a Tier III NOx standard would avoid about 33,000 more."
+      },
+      "explainer": "Our judgment, with a wide range. The IMO's standard lowers the greenhouse-gas intensity of ship fuel more than how much is burned. Fuel burned less (efficiency, slower steaming) cuts all its smoke with each tonne. Fuel switched to ammonia, methanol or biofuels cuts the sulphur and most of the particles but not the NOx, and after the 2020 sulphur cap NOx drives about half of ship smoke deaths (Zhang et al. 2021: a NOx standard would avoid about 33,000 of the remaining ~64,000). Part of each well-to-wake tonne is upstream fuel supply, far from people. Best guess half; low 0.2 (mostly fuel switching, much of it upstream); high 1 (liquefied gas removes sulphur, particles and most NOx while cutting only 15–20% of well-to-wake CO₂e, which puts a lot of smoke on each tonne)."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne of CO₂ from ships, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.42,
+        "best": 0.94,
+        "high": 2.1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Sofiev et al. (2018), Cleaner fuels for ships provide public health benefits with climate tradeoffs, Nature Communications; Zhang et al. (2021), Environmental Research Letters",
+        "url": "https://www.nature.com/articles/s41467-017-02774-9",
+        "note": "Sofiev: about 266,000 deaths a year from ship emissions after the 2020 sulphur limit. Zhang: about 94,000 in 2015, less about 30,000 avoided by the sulphur limit."
+      },
+      "explainer": "Ship smoke per tonne of CO₂ after the 2020 sulphur limit. Sofiev et al. (2018) estimate about 266,000 deaths a year from about 870 million tonnes of CO₂, 3.1 per 10,000 tonnes: 2.1 times the world average of 1.46. Zhang et al. (2021) find about 94,000 in 2015, of which the sulphur limit avoids about 30,000, leaving about 64,000 from about a billion tonnes (IMO's Fourth GHG Study): 0.6 per 10,000, 0.42 of the average. The two studies span the range; the best guess, 0.94, is their middle on a log scale."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of ship smoke that goes with each tonne cut times ship smoke per tonne of CO₂. It replaces an earlier, unsourced 40% guess, under which the model had to count either all of the world-average smoke or none."
     },
     {
       "id": "staff_cost_share",
@@ -412,7 +456,7 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "tco2e_per_dollar * donor_cost_share",
-      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its air-pollution part at once and its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
     }
   ],
   "output": {

@@ -164,21 +164,49 @@ less. Rebasing multiplies shrimp SADs by 0.093 × 0.332 / 0.199 = **0.156**.
 (`ced_s = disabling_days_s * @welfare_ranges.s_vs_chicken`). "Animals spared" becomes animals
 spared by species × days each would have lived × intensity, never a single all-species ratio.
 
-### 2.5 Climate: tonnes of CO₂-equivalent averted (`tco2e`, `tco2e_no_smoke`)
+### 2.5 Climate: tonnes of CO₂-equivalent averted (`tco2e`)
 
-Added October 2026 (issue #15). A tonne of greenhouse gas kept out of the air is worth the deaths
-that tonne would cause, each valued like any other adult's death on the site, and discounted like
-any other future good. Two units, because tonnes differ in which deaths they avoid:
+Added October 2026 (issue #15); one unit since October 2026. A tonne of greenhouse gas kept out of
+the air is worth the deaths that tonne would cause, each valued like any other adult's death on the
+site, and discounted like any other future good. Every tonne avoids its heat deaths; a tonne that
+comes from burning less fossil fuel near people also avoids air-pollution deaths, and how much depends
+on the fuel and the place. So there is one unit, and each model says how much air pollution its
+tonnes carry, in one row the conversion reads:
 
 ```
 heat factor   = (1 + $discount_rate) ^ -$climate_heat_death_delay
-tco2e          (burning less coal, oil or gas):
-  healthy years = tonnes × $deaths_per_tco2e × (1 − $climate_heat_share + $climate_heat_share × heat factor)
-                  × 73.1914 × $life_value_multiplier / $uov_per_daly
-tco2e_no_smoke (forests, methane leaks, CO₂ captured at a running plant):
-  healthy years = tonnes × $deaths_per_tco2e × $climate_heat_share × heat factor
-                  × 73.1914 × $life_value_multiplier / $uov_per_daly
+healthy years = tonnes × $deaths_per_tco2e
+                × ($climate_heat_share × heat factor + (1 − $climate_heat_share) × air_pollution_weight)
+                × 73.1914 × $life_value_multiplier / $uov_per_daly
 ```
+
+- `air_pollution_weight` (a row of the model, fixed id): the air-pollution deaths each of the model's
+  tonnes avoids, as a multiple of the fossil-fuel average behind Rethink's rate (1.46 per 10,000
+  tonnes). It is the share of the tonnes that come from burning less fuel near people (`fuel_share`)
+  times, where the fuel differs from the average, that fuel's smoke per tonne relative to it
+  (`fuel_smoke_factor`, per-fuel evidence such as deaths per TWh, not the world average). It sits in the
+  model's conversion section (kind `ours`), each input with a source or a labelled judgment and a
+  low/high range, so the sensitivity and uncertainty tools vary it like any other input.
+- The mechanism: `to_common` may name rows of the converted model by bare id, and the engine evaluates
+  the conversion with the model's computed rows (`toCommon`, `headline`, `bottomLine`, uncertainty).
+  `buildLibrary` records these as the model's `conversionRows`; a `tco2e` model without
+  `air_pollution_weight` is a build error, and `rowsFeeding` follows them, so the row's inputs count as
+  on the path. The shared rates stay shared: INV-2b still forbids any row from reading a cross-cause
+  rate, and also checks that a conversion row sits in an `ours` section and that neither it nor
+  anything feeding it reads a shared assumption. The model supplies only how much of the shared
+  air-pollution rate applies to its tonnes; the rate itself is never in a row.
+- Shares at October 2026 (healthy years per $1,000, before → after the change, which replaced the
+  two units `tco2e`, all smoke at the world average, and `tco2e_no_smoke`, none):
+
+  | Model | Tonnes | `air_pollution_weight` (range) | Source | Before → after |
+  |---|---|---|---|---|
+  | Clean Air Task Force (FP) | 13% from US coal retired for gas (FP's own split) × 0.13 (0.09–0.24) of the average per net tonne | 0.017 | Toll from Coal 2010 (7.1 deaths/TWh) and Markandya & Wilkinson 2007 (gas ≈ a ninth of coal per TWh) | 0.12 → 0.19 |
+  | Future Cleantech Architects (GG) | all EU gas power displaced (0.8–1) × 0.048 (0.01–0.08) | 0.048 | Markandya & Wilkinson 2007: gas 2.8 deaths/TWh at 0.4 t/MWh | 1.11 → 3.0 |
+  | Evergreen 2022 / 2021 (GG) | US power, IRA health modelling per tonne: 0.013 (0.005–0.027) | 0.013 | Energy Innovation 2022, Resources for the Future 2022 | 0.031 → 0.045; 0.28 → 0.41 |
+  | Opportunity Green (GG) | half of ship smoke per tonne cut (0.2–1, judgment) × ship smoke 0.94 (0.42–2.1) of the average | 0.47 | Zhang et al. 2021 (NOx about half of post-2020 ship deaths), Sofiev et al. 2018 | 7.3 → 3.5 (heat only was 0.2) |
+  | Coalition for Rainforest Nations (FP) | no fuel; clearing-fire smoke 0.008 (0–0.02) | 0.008 | Reddington et al. 2015 | 0.62 → 0.80 |
+  | Carbon180 (GG) | capture at running plants, DAC: 0 (0–0.05, judgment) | 0 | | 0.23 → 0.23 |
+  | Good Food Institute (GG) | livestock methane, N₂O, land: 0 (0–0.05, judgment) | 0 | | 0.051 → 0.051 |
 
 - `$deaths_per_tco2e`: "Deaths caused by one more tonne of CO₂", the climate slider. Default 1.9 per
   10,000 tonnes, Rethink Priorities' median for heat deaths (0.43, from its own run of the GIVE
@@ -202,24 +230,26 @@ tco2e_no_smoke (forests, methane leaks, CO₂ captured at a running plant):
 - `$life_value_multiplier` makes climate move with the same weight on lives as GiveWell's and HLI's
   models (decision 8's lever, here applied in the conversion because no evaluator's climate model
   counts deaths).
-- At the defaults: a `tco2e` tonne = 0.0055 healthy years (about 2 days), so $1 a tonne = 5.5
-  healthy years per $1,000; a `tco2e_no_smoke` tonne = 0.00015 healthy years (about 1.3 hours), so
-  $1 a tonne = 0.15. Undiscounted (0%) they are 0.0070 and 0.0016.
+- At the defaults: a tonne with `air_pollution_weight` 0 = 0.00015 healthy years (about 1.3 hours),
+  so $1 a tonne = 0.15 healthy years per $1,000; each 0.1 of weight adds 0.0005 (0.53 per $1,000 at
+  $1 a tonne), up to 0.0055 (about 2 days, 5.5 per $1,000) at weight 1. Undiscounted (0%) the ends
+  are 0.0016 and 0.0070.
 - Cross-checks, not read by models: the social cost of carbon, $185/t (Rennert et al. 2022), of which
   $90 is the same heat deaths valued at income-weighted, 2%-discounted prices (`@climate.social_cost_of_carbon_usd`);
   Giving What We Can's 2016 estimate, 258,200 tonnes per life (`@climate.tco2e_per_death_gwwc_2016`),
   about 50 times below our default because it leaves out air pollution.
 - What it leaves out: damage that isn't death (crops, income, migration), tipping points and growth
-  effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution is an
-  average over fossil fuels: tonnes from coal carry more of it, US plants with scrubbers less.
-  Methane's ozone deaths aren't counted yet (a methane fact is open work). At the slider's high end
-  (a stand-in for all damage) the 23% heat share undercounts what `tco2e_no_smoke` tonnes carry.
+  effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution per
+  tonne differs by fuel and place; each model's `air_pollution_weight` carries that. Methane's ozone deaths aren't counted yet (a methane fact is open work). At the slider's high end
+  (a stand-in for all damage) the 23% heat share undercounts what tonnes with a low `air_pollution_weight` carry.
 - The evaluator's own figure (FP's and Giving Green's $ per tonne) is the native row; the model's
-  output is tonnes per dollar (`1 / cost per tonne`, in an `ours` section, then our credit steps), in
-  the unit that fits its tonnes; the write-up says which. `deaths_per_tco2e`, `climate_heat_share`
-  and `climate_heat_death_delay` are cross-cause rates (INV-2b): no model row reads them. INV-10:
-  climate models move in proportion to `$deaths_per_tco2e` and `$life_value_multiplier`; every
-  other model is independent of the climate rates.
+  output is tonnes per dollar (`1 / cost per tonne`, in an `ours` section, then our credit steps) in
+  `tco2e`, with `air_pollution_weight` and its inputs in the same section; the write-up says what the
+  weight rests on. `deaths_per_tco2e`, `climate_heat_share` and `climate_heat_death_delay` are
+  cross-cause rates (INV-2b): no model row reads them. INV-10: climate models move in proportion to
+  `$deaths_per_tco2e` and `$life_value_multiplier`; every other model is independent of the climate
+  rates. INV-9 counts the levers the unit's conversion applies (`$life_value_multiplier`) as on the
+  path.
 
 ### 2.6 Anything else
 
@@ -236,8 +266,8 @@ shrinks).
 
 | # | Invariant | How to test |
 |---|---|---|
-| INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby`, `ced`, `tco2e` or `tco2e_no_smoke`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
-| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `uov_per_wellby`, `sads_per_animal_spared`), and `uov_per_daly` only under INV-5. |
+| INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby`, `ced` or `tco2e`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
+| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `uov_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. |
 | INV-3 | Every animal model passes through the species step, once per species, from the shared table. | For `unit = ced`: the model declares `output.species` (e.g. `["chicken","pig"]`). For each, a row `ced_<s>` exists, its formula equals the template for its source (`aim` or `raw`) after whitespace normalisation, it reads `@welfare_ranges.<s>_vs_chicken`, and it is upstream of the output. No other row reads `@welfare_ranges.*` or `@aim_sads.*`. Every path from a row whose unit is SAD or days of pain to the output passes through a `ced_*` row. |
 | INV-4 | No literal stands in for a shared number. | Facts get a `match` field (row label/id pattern). For every input row matching a fact's pattern whose value equals the fact's low/best/high: it must be a formula reading the fact, with the evaluator's literal in `published`. Also: no formula contains a constant equal to a fact or assumption value (extends lint's magic-number rule to all models). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |

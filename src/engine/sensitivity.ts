@@ -136,6 +136,8 @@ export function rowsFeeding(m: ResolvedModel): Set<string> {
     m.byId.get(id)?.deps.forEach(walk);
   };
   if (m.output) walk(m.output.row);
+  // Rows the unit's conversion reads (docs/normalization.md 2.5) feed the headline too.
+  (m.conversionRows ?? []).forEach(walk);
   return seen;
 }
 

@@ -3,10 +3,10 @@
 // (output.native, output.species, section kinds, the `ced` unit), so each check derives what it can
 // from what exists, and says where it can't. Used by src/engine/normalization.test.ts (with an
 // allowlist that only shrinks) and scripts/normalization-audit.ts (the full report).
-import { evaluate, type Node } from "./expr";
+import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  assumptionValues, compute, headline, headlineConversion, inputValue, pickValue, viewAssumptions,
+  assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
 import { isSideSheet } from "./ranking";
@@ -40,8 +40,8 @@ export type InvariantReport = {
 
 export const keyOf = (v: Pick<Violation, "model" | "where">) => `${v.model} ${v.where}`;
 
-/** Units the design ranks in: tco2e and tco2e_no_smoke are climate's, converted through the deaths a tonne causes. */
-export const RANKED_UNITS = ["uov", "daly", "wellby", "ced", "tco2e", "tco2e_no_smoke"];
+/** Units the design ranks in: tco2e is climate's, converted through the deaths a tonne causes. */
+export const RANKED_UNITS = ["uov", "daly", "wellby", "ced", "tco2e"];
 /** Rates that convert between causes: they belong in a unit's conversion, never in a model row. */
 export const CROSS_CAUSE = ["daly_per_sad", "uov_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day", "deaths_per_tco2e", "climate_heat_share", "climate_heat_death_delay"];
 const ANIMAL_ASSUMPTIONS = ["chicken_vs_person", "daly_per_sad"];
@@ -107,8 +107,9 @@ export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
-    const native = compute(lib, m, av)[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, (s, n) => (s === "assumption" ? av[n] ?? NaN : NaN));
+    const vals = compute(lib, m, av);
+    const native = vals[m.output!.row];
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(av, vals));
     const got = headline(lib, m, av);
     if (!(close(got, want) || (Number.isNaN(got) && Number.isNaN(want))))
       violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion = ${fmt(want)}` });
@@ -133,10 +134,23 @@ export function inv2b(lib: Library): InvariantReport {
           violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} $${a}`, detail: `row reads $uov_per_daly but the evaluator view doesn't pin it${m.evaluator ? "" : " (no evaluator view)"}` });
       }
     }
+    // A row the unit's conversion reads (climate's air_pollution_weight) is ours and reads no shared
+    // assumption: the model supplies how much of the rate applies, the rate stays shared.
+    const ours = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
+    const feedsConv = new Set<string>();
+    const walk = (id: string) => { if (feedsConv.has(id)) return; feedsConv.add(id); m.byId.get(id)?.deps.forEach(walk); };
+    m.conversionRows.forEach(walk);
+    for (const id of m.conversionRows) {
+      const r = m.byId.get(id);
+      if (r && !(r.section && ours.has(r.section)))
+        violations.push({ inv: "INV-2b", model: m.id, where: `${id} section`, detail: `row ${id} is read by the ${m.output!.unit} conversion but sits outside an ours section` });
+    }
+    for (const id of feedsConv) for (const a of m.byId.get(id)?.assumptionDeps ?? [])
+      violations.push({ inv: "INV-2b", model: m.id, where: `${id} $${a}`, detail: `row ${id} feeds the ${m.output!.unit} conversion and reads $${a}` });
   }
   return {
     id: "INV-2b", title: "No model row reads a cross-cause rate", status: "checked", checked: models.length, violations,
-    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it.`,
+    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.`,
   };
 }
 
@@ -364,8 +378,9 @@ export function inv8(lib: Library, av = assumptionValues(lib.assumptions)): Inva
   const violations: Violation[] = [];
   for (const m of models) {
     const va = viewAssumptions(m, av, "evaluator");
-    const native = compute(lib, m, av, {}, "evaluator")[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, (s, n) => (s === "assumption" ? va[n] ?? NaN : NaN));
+    const vals = compute(lib, m, av, {}, "evaluator");
+    const native = vals[m.output!.row];
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(va, vals));
     const got = headline(lib, m, av, {}, "evaluator");
     if (!(close(got, want, 1e-9) || (Number.isNaN(got) && Number.isNaN(want)))) {
       const pins = Object.entries(m.evaluator!.assumptions).filter(([a, v]) => v !== av[a]).map(([a, v]) => `$${a}=${v}`).join(", ");
@@ -387,8 +402,10 @@ const MULTI_YEAR = /\b(discount(ing|ed)?[ _]?(rate|factor)|discounted|present va
 /** "Absorption discount factor" (iron fortification) is about bioavailability, not time. */
 const NOT_TIME = /absorption|bioavailab/i;
 
-function readsOnPath(m: ResolvedModel, path: Set<string>, a: string) {
-  return m.rows.some((r) => path.has(r.id) && r.assumptionDeps.includes(a));
+function readsOnPath(m: ResolvedModel, path: Set<string>, a: string, lib?: Library) {
+  // The unit's conversion counts as on the path: climate's applies $life_value_multiplier itself.
+  const conv = lib && m.output ? headlineConversion(lib, m.output.unit) : undefined;
+  return (!!conv && refs(conv).assumptions.has(a)) || m.rows.some((r) => path.has(r.id) && r.assumptionDeps.includes(a));
 }
 
 export function inv9(lib: Library): InvariantReport {
@@ -400,7 +417,7 @@ export function inv9(lib: Library): InvariantReport {
     const path = rowsFeeding(m);
     const onPath = m.rows.filter((r) => path.has(r.id));
     const deaths = onPath.filter((r) => MORTALITY.test(text(r)) && !NOT_PEOPLE.test(text(r)));
-    if (deaths.length && !readsOnPath(m, path, "life_value_multiplier"))
+    if (deaths.length && !readsOnPath(m, path, "life_value_multiplier", lib))
       violations.push({ inv: "INV-9", model: m.id, where: "$life_value_multiplier", detail: `${deaths.length} rows on the path about deaths (e.g. ${deaths.slice(0, 3).map((r) => r.id).join(", ")}) but nothing on the path reads $life_value_multiplier` });
     const years = onPath.filter((r) => MULTI_YEAR.test(text(r)) && !NOT_TIME.test(text(r)));
     if (years.length && !readsOnPath(m, path, "discount_rate")) {
@@ -423,7 +440,7 @@ function expectations(m: ResolvedModel): [string, Shape][] {
     return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
   const base: [string, Shape][] = ANIMAL_ASSUMPTIONS.map((a) => [a, "independent"]);
   // Climate: a tonne is worth the deaths it causes, each valued like an adult's death.
-  if (unit === "tco2e" || unit === "tco2e_no_smoke") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
+  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
   base.push(["deaths_per_tco2e", "independent"], ["climate_heat_death_delay", "independent"]);
   if (unit === "wellby") return [...base, ["uov_per_wellby", "linear"], ["uov_per_ln_consumption", "independent"]];
   if (unit === "daly") return [...base, ["uov_per_wellby", "independent"]];
@@ -446,7 +463,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e, tco2e_no_smoke) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
   };
 }
 

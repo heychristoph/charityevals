@@ -5,7 +5,7 @@
   "status": "checked",
   "checked": 194,
   "violations": [],
-  "how": "Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {uov, daly, wellby, ced, tco2e, tco2e_no_smoke}.",
+  "how": "Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {uov, daly, wellby, ced, tco2e}.",
   "waived": 0,
   "failing_models": []
  },
@@ -25,7 +25,7 @@
   "status": "checked",
   "checked": 322,
   "violations": [],
-  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $uov_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it.",
+  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $uov_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
   "waived": 0,
   "failing_models": []
  },
@@ -46,7 +46,7 @@
   "checked": 322,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 17317,
+   "input equals a shared value but its label doesn't resemble the shared one's": 17346,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 3670,
    "round value (one significant digit) and labels only loosely alike": 56,
    "input within 0.1% of a shared value (not equal) and labels only loosely alike": 9,
@@ -113,7 +113,7 @@
   "status": "checked",
   "checked": 322,
   "violations": [],
-  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e, tco2e_no_smoke) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
   "waived": 0,
   "failing_models": []
  },

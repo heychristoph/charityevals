@@ -72,7 +72,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come: the tonnes come from EU gas-fired power displaced, and burning gas emits few of the fine particles behind the air-pollution part of the shared rate (docs/normalization.md 2.5)."
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The tonnes come from EU gas-fired power displaced by renewables: fuel not burned, but gas makes far less smoke per tonne than the world average (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -244,7 +244,51 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "1 / cost_per_tonne",
-      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only. FCA's 21 million tonnes assume the innovative renewables replace natural gas (BOTEC!A6). Gas plants cause roughly 2.8 deaths per TWh at about 0.4 tonnes of CO₂ per MWh, against roughly 25 per TWh at about 1 tonne for coal (Markandya and Wilkinson 2007, Lancet), so gas carries about a twentieth of the world-average air-pollution deaths per tonne in the shared climate rate. Counting heat only understates the result about 2–3 times at the defaults; counting the full world average would overstate it about 13 times. This is the same treatment as the Clean Air Task Force model's US coal tonnes (see the write-up)."
+      "explainer": "One over Giving Green's cost per tonne. How much air pollution these tonnes cut is the rows below."
+    },
+    {
+      "id": "fuel_share",
+      "section": "per_dollar",
+      "label": "Share of these tonnes from burning less fuel",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!A6"
+      },
+      "explainer": "FCA's 21 million tonnes assume the innovative renewables replace natural-gas power (BOTEC!A6): every tonne is gas not burned. The low end allows for part of the target going to uses (hydrogen for industry) where the fuel replaced is burned far from people or the tonnes come from process emissions."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne of CO₂ from gas power, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.01,
+        "best": 0.048,
+        "high": 0.08
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370, 979–990",
+        "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
+        "note": "Deaths from air pollution per TWh in Europe: coal 24.5, gas 2.8."
+      },
+      "explainer": "Per fuel, not the world average. Gas plants cause roughly 2.8 deaths per TWh at about 0.4 tonnes of CO₂ per MWh (Markandya & Wilkinson 2007), 0.07 deaths per 10,000 tonnes: 0.048 of the world average of 1.46. Low 0.01: today's EU gas plants under the Industrial Emissions Directive emit less than the 2007 figures (our judgment). High 0.08: if a quarter of the power displaced were coal (24.5 per TWh at about 1 tonne per MWh, 0.17 of the average)."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from gas power displaced times gas power's smoke per tonne."
     },
     {
       "id": "staff_cost_share",
@@ -294,12 +338,12 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "tco2e_per_dollar * donor_cost_share",
-      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
     }
   ],
   "output": {
     "row": "tco2e_per_donor_dollar",
-    "unit": "tco2e_no_smoke",
+    "unit": "tco2e",
     "label": "Tonnes of CO₂e averted per dollar",
     "native": {
       "row": "cost_per_tonne",

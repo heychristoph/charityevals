@@ -21,6 +21,9 @@ export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
   order: string[];
   /** This model's id, then its parent's, and so on. */
   chain: string[];
+  /** Rows of this model that its output unit's conversion reads (a climate model's
+   * `air_pollution_weight`, docs/normalization.md 2.5): they feed the headline alongside the output. */
+  conversionRows: string[];
 };
 
 export type FactRow = Row & { key: string; group: string };
@@ -183,6 +186,8 @@ export function buildLibrary(
     if (output && !assumptions.units[output.unit]) errors.push(`${id}: output unit ${output.unit} isn't defined in assumptions`);
     if (output?.native && !byId.has(output.native.row)) errors.push(`${id}: native row ${output.native.row} doesn't exist`);
     for (const sp of output?.species ?? []) if (!byId.has(`ced_${sp}`)) errors.push(`${id}: species ${sp} has no ced_${sp} row`);
+    const conversionRows = output ? unitRows(assumptions.units[output.unit]?.to_common) : [];
+    for (const r of conversionRows) if (!byId.has(r)) errors.push(`${id}: unit ${output!.unit} reads row ${r}, which the model doesn't define (docs/normalization.md 2.5)`);
 
     const model: ResolvedModel = {
       ...file,
@@ -198,6 +203,7 @@ export function buildLibrary(
       byId,
       order: topoOrder(id, resolved, byId, errors),
       chain: [id, ...(parent?.chain ?? [])],
+      conversionRows,
     };
     if (rawCharities.length) {
       if (!model.charity) errors.push(`${id}: no charity`);
@@ -213,6 +219,16 @@ export function buildLibrary(
   for (const id of files.keys()) resolve(id);
   if (!models.has(assumptions.common.benchmark)) errors.push(`assumptions: benchmark model ${assumptions.common.benchmark} doesn't exist`);
   return { models, charities, owners, assumptions, facts, errors };
+}
+
+/** Rows a unit's conversion reads from the model it converts (bare names in `to_common`). */
+function unitRows(toCommon: string | undefined): string[] {
+  if (!toCommon) return [];
+  try {
+    return [...refs(parse(toCommon)).rows];
+  } catch {
+    return [];
+  }
 }
 
 function topoOrder(id: string, rows: ResolvedRow[], byId: Map<string, ResolvedRow>, errors: string[]): string[] {
@@ -297,9 +313,17 @@ export function comparable(lib: Library, m: ResolvedModel): boolean {
   return !!(m.output && lib.assumptions.units[m.output.unit]?.to_common);
 }
 
-export function toCommon(lib: Library, unit: string, av: Record<string, number>): number {
+/** What one unit is worth in common units. A unit's conversion reads shared assumptions and, for a
+ * unit that declares one (climate's `air_pollution_weight`), a fixed row of the model it converts:
+ * `rows` are that model's computed values. */
+export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}): number {
   const u = lib.assumptions.units[unit];
-  return u?.to_common ? evaluate(parse(u.to_common), (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : NaN;
+  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(av, rows)) : NaN;
+}
+
+/** The lookup a unit's conversion evaluates with: assumptions, and the converted model's own rows. */
+export function conversionLookup(av: Record<string, number>, rows: Record<string, number> = {}) {
+  return (scope: Scope, n: string) => (scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : NaN);
 }
 
 /** The site's headline unit, years of healthy life (DALYs averted) per $1,000 donated, in common units
@@ -351,8 +375,9 @@ export function bottomLine(
   view: View = "charityevals",
 ) {
   if (!m.output) return { native: NaN, common: NaN };
-  const native = compute(lib, m, av, inputs, view)[m.output.row];
-  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view)) };
+  const vals = compute(lib, m, av, inputs, view);
+  const native = vals[m.output.row];
+  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view), vals) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -365,11 +390,12 @@ export function headline(
   view: View = "charityevals",
 ): number {
   if (!m.output) return NaN;
-  const native = compute(lib, m, av, inputs, view)[m.output.row];
+  const vals = compute(lib, m, av, inputs, view);
+  const native = vals[m.output.row];
   const conv = headlineConversion(lib, m.output.unit);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
-  return conv ? native * evaluate(conv, (scope, n) => (scope === "assumption" ? a[n] ?? NaN : NaN)) : native;
+  return conv ? native * evaluate(conv, conversionLookup(a, vals)) : native;
 }
 
 /** Assumptions that can change this model's headline in a view. */

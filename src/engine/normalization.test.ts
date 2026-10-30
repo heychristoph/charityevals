@@ -5,7 +5,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { assumptionValues, buildLibrary, toCommon } from "./model";
+import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
 import { applyWaivers, checkAll, inv10, inv2b, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
@@ -135,8 +135,9 @@ describe("invariant checks", () => {
 });
 
 // Climate (docs/normalization.md 2.5): a tonne of CO₂e reaches the scale through the deaths it causes,
-// each valued as GiveWell's adult death. The unit's conversion can only read assumptions, so the
-// shared figures it stands on are checked here against the facts they come from.
+// each valued as GiveWell's adult death. The unit's conversion reads assumptions plus one fixed row of
+// the model (air_pollution_weight), so the shared figures it stands on are checked here against the
+// facts they come from.
 describe("climate conversion", () => {
   const fact = (k: string) => lib.facts.get(k)?.value;
   const row = (id: string) => assumptions.rows.find((r: { id: string }) => r.id === id);
@@ -145,8 +146,9 @@ describe("climate conversion", () => {
     expect(row("deaths_per_tco2e").value).toEqual(fact("climate.deaths_per_tco2e"));
   });
 
-  it("both climate units convert at GiveWell's value of an adult's death, times the value-of-life slider", () => {
-    for (const u of ["tco2e", "tco2e_no_smoke"])
+  it("the climate unit converts at GiveWell's value of an adult's death, times the value-of-life slider", () => {
+    expect(assumptions.units.tco2e_no_smoke).toBeUndefined();
+    for (const u of ["tco2e"])
       expect(assumptions.units[u].to_common).toMatch(new RegExp(`^\\$deaths_per_tco2e \\* .* \\* ${fact("moral_weights.uov_per_death_over5")} \\* \\$life_value_multiplier$`));
   });
 
@@ -156,14 +158,35 @@ describe("climate conversion", () => {
     expect(row("climate_heat_share").value).toBeCloseTo(heat / (heat + air), 4);
   });
 
-  it("heat deaths are discounted over the delay; air-pollution deaths and the no-smoke unit follow", () => {
+  it("heat deaths are discounted over the delay; air-pollution deaths scale with the model's air_pollution_weight row", () => {
     const l = buildLibrary([], assumptions);
     const av = assumptionValues(assumptions);
-    const one = (u: string, a = av) => toCommon(l, u, a) / (a.deaths_per_tco2e * 73.1914);
+    const one = (w: number, a = av) => toCommon(l, "tco2e", a, { air_pollution_weight: w }) / (a.deaths_per_tco2e * 73.1914);
     const share = av.climate_heat_share, df = (1 + av.discount_rate) ** -av.climate_heat_death_delay;
-    expect(one("tco2e")).toBeCloseTo(1 - share + share * df, 9);
-    expect(one("tco2e_no_smoke")).toBeCloseTo(share * df, 9);
-    expect(one("tco2e_no_smoke", { ...av, discount_rate: 0 })).toBeCloseTo(share, 9);
+    expect(one(1)).toBeCloseTo(1 - share + share * df, 9);
+    expect(one(0)).toBeCloseTo(share * df, 9);
+    expect(one(0, { ...av, discount_rate: 0 })).toBeCloseTo(share, 9);
+    expect(one(0.25)).toBeCloseTo(share * df + 0.25 * (1 - share), 9);
+    expect(toCommon(l, "tco2e", av)).toBeNaN();
+  });
+
+  it("a tco2e model must define air_pollution_weight in an ours section, reading no shared assumption", () => {
+    const base = {
+      id: "base", name: "Base", kind: "charity", cause: "climate",
+      sections: [{ id: "conv", title: "Conversion", kind: "ours" }, { id: "eval", title: "Evaluator" }],
+      rows: [{ id: "x", label: "x", value: 2, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" },
+        { id: "air_pollution_weight", section: "conv", label: "w", value: 0.5, kind: "judgment", explainer: "Test input." }],
+      output: { row: "out", unit: "tco2e", label: "t CO₂e per $" },
+    };
+    const missing = { ...base, id: "missing", rows: base.rows.slice(0, 2) };
+    const outside = { ...base, id: "outside", rows: [...base.rows.slice(0, 2), { ...base.rows[2], section: "eval" }] };
+    const reads = { ...base, id: "reads", rows: [...base.rows.slice(0, 2), { id: "air_pollution_weight", section: "conv", label: "w", formula: "$discount_rate" }] };
+    const l = buildLibrary([base, missing, outside, reads], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual(["missing: unit tco2e reads row air_pollution_weight, which the model doesn't define (docs/normalization.md 2.5)"]);
+    expect(inv2b(l).violations.map(keyOf).sort()).toEqual(["outside air_pollution_weight section", "reads air_pollution_weight $discount_rate"]);
+    const av = assumptionValues(assumptions);
+    const df = (1 + av.discount_rate) ** -av.climate_heat_death_delay, h = av.climate_heat_share;
+    expect(headline(l, l.models.get("base")!, av)).toBeCloseTo(2 * av.deaths_per_tco2e * (h * df + (1 - h) * 0.5) * 73.1914 * av.life_value_multiplier / av.uov_per_daly * 1000, 9);
   });
 
   it("INV-10 flags a non-climate model that moves with the climate rate, and passes a climate model", () => {
@@ -173,7 +196,7 @@ describe("climate conversion", () => {
       output: { row: "out", unit: "uov", label: "UoV per $" },
     };
     const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $deaths_per_tco2e" }] };
-    const tonnes = { ...base, id: "tonnes", cause: "climate", output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
+    const tonnes = { ...base, id: "tonnes", cause: "climate", rows: [...base.rows, { id: "air_pollution_weight", label: "w", value: 0.3, kind: "judgment", explainer: "Test input." }], output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
     const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $deaths_per_tco2e independent"]);

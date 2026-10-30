@@ -21,7 +21,7 @@ Giving Green's chain, for three federal measures passed or proposed in 2020–21
 Giving Green's rows come first, ending at its bottom line in dollars per tonne. Our steps follow:
 
 - **Tonnes per dollar:** one over the cost per tonne.
-- **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. CO₂ captured at plants that keep running, or pulled from the air, comes with no less smoke, so the model reports tonnes averted without burning less fuel, which the site values for their heat deaths only.
+- **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. CO₂ captured at plants that keep running, or pulled from the air, comes with no less smoke, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0 (0–0.05, our judgment), and the site values them for their heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".

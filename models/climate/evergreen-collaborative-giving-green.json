@@ -71,7 +71,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come: US power plants, where most of the IRA's cuts fall, emit a small fraction of the world-average smoke behind the air-pollution part of the shared rate (docs/normalization.md 2.5)."
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The cuts come mostly from US power plants burning less coal and gas, which emit a small fraction of the world-average smoke per tonne (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -278,7 +278,42 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "1 / cost_per_tonne",
-      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only. Most of the cuts come from US power plants burning less coal and gas, but the IRA's own health modelling finds few air-pollution deaths per tonne: Energy Innovation (2022) projects about 3,700–3,900 deaths avoided in 2030 and Resources for the Future (2022) 700–1,300, from roughly a billion tonnes cut that year, about a fortieth to a hundred-and-fiftieth of the world-average air-pollution deaths per tonne in the shared climate rate. Counting heat only understates the result by about 1.2–1.9 times; counting the world average would overstate it about 37 times. So these count as tonnes averted without burning less fuel, a lower bound (see the write-up)."
+      "explainer": "One over Giving Green's cost per tonne. How much air pollution these tonnes cut is the rows below."
+    },
+    {
+      "id": "fuel_share",
+      "section": "per_dollar",
+      "label": "Share of these tonnes from burning less fuel",
+      "format": "percent",
+      "value": 1,
+      "kind": "judgment",
+      "explainer": "Most of the IRA's cuts come from US power plants burning less coal and gas. Set to 1 because the health studies in the next row count deaths avoided per tonne of the whole package, so the tonnes that don't come from burning less fuel are already averaged into that figure."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne cut by US clean-electricity policy, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.005,
+        "best": 0.013,
+        "high": 0.027
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Energy Innovation (2022) and Resources for the Future (2022), health modelling of the Inflation Reduction Act",
+        "url": "https://energyinnovation.org/wp-content/uploads/2022/08/Modeling-the-Inflation-Reduction-Act-with-the-US-Energy-Policy-Simulator_August.pdf",
+        "note": "Deaths avoided in 2030: about 3,700–3,900 (Energy Innovation), 700–1,300 (Resources for the Future), from roughly a billion tonnes cut that year."
+      },
+      "explainer": "Per fuel and place, not the world average: US power plants mostly have scrubbers. Health modelling of the Inflation Reduction Act projects about 3,700–3,900 deaths avoided in 2030 (Energy Innovation, 2022) or 700–1,300 (Resources for the Future, 2022), from roughly a billion tonnes cut that year: 0.7 to 3.9 deaths per million tonnes, 0.005 to 0.027 of the world average of 1.46 per 10,000. Best guess 0.013, the middle of the two studies' central figures on a log scale."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the US health studies' deaths per tonne, relative to the world average."
     },
     {
       "id": "staff_cost_share",
@@ -328,12 +363,12 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "tco2e_per_dollar * donor_cost_share",
-      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
     }
   ],
   "output": {
     "row": "tco2e_per_donor_dollar",
-    "unit": "tco2e_no_smoke",
+    "unit": "tco2e",
     "label": "Tonnes of CO₂e averted per dollar",
     "native": {
       "row": "cost_per_tonne",

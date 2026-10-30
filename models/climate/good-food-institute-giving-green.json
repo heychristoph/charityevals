@@ -73,7 +73,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The tonnes are livestock emissions (methane, nitrous oxide and land clearing), not fuel burned, so the model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come (docs/normalization.md 2.5)."
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The tonnes are livestock emissions (methane, nitrous oxide and land clearing), not fuel burned, so they count for their heat deaths, discounted over the decades until they come (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -352,7 +352,28 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "1 / cost_per_tonne",
-      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only: the tonnes are methane and nitrous oxide from animals and manure and CO₂ from clearing land for feed and pasture, none of which comes with the fine particles from burning fossil fuels behind most of the deaths in the shared climate rate. Methane also forms ozone, which kills; that isn't counted here (see the write-up)."
+      "explainer": "One over Giving Green's cost per tonne. How much air pollution these tonnes cut is the row below."
+    },
+    {
+      "id": "fuel_share",
+      "section": "per_dollar",
+      "label": "Share of these tonnes from burning less fuel",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. The tonnes are methane and nitrous oxide from animals and manure and CO₂ from clearing land for feed and pasture, none of which comes with the fine particles from burning fossil fuels behind most of the deaths in the shared climate rate. Livestock supply chains do burn some fuel (feed, processing, transport), but making alternative proteins takes energy too, so the net is near zero; the high end allows for some fuel saved and for smoke from land-clearing fires (see the Coalition for Rainforest Nations model). Methane also forms ozone, which kills; that isn't counted here (see the write-up)."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here it is the share of tonnes from burning less fuel, at the world-average smoke per tonne; at 0, the fuel doesn't matter."
     },
     {
       "id": "staff_cost_share",
@@ -402,12 +423,12 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "tco2e_per_dollar * donor_cost_share",
-      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
     }
   ],
   "output": {
     "row": "tco2e_per_donor_dollar",
-    "unit": "tco2e_no_smoke",
+    "unit": "tco2e",
     "label": "Tonnes of CO₂e averted per dollar",
     "native": {
       "row": "cost_per_tonne",

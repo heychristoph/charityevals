@@ -22,7 +22,7 @@ Giving Green's chain:
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Our steps follow:
 
 - **Tonnes per dollar:** one over the cost per tonne.
-- **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. Livestock emissions are methane, nitrous oxide and CO₂ from cleared land, with no fuel smoke, so the model reports tonnes averted without burning less fuel, which the site values for their heat deaths only.
+- **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. Livestock emissions are methane, nitrous oxide and CO₂ from cleared land, with no fuel smoke, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0 (0–0.05, our judgment: livestock chains burn some fuel, but making alternative proteins takes energy too), and the site values them for their heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
