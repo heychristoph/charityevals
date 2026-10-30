@@ -164,6 +164,17 @@ less. Rebasing multiplies shrimp SADs by 0.093 × 0.332 / 0.199 = **0.156**.
 (`ced_s = disabling_days_s * @welfare_ranges.s_vs_chicken`). "Animals spared" becomes animals
 spared by species × days each would have lived × intensity, never a single all-species ratio.
 
+**AIM's welfare points (2018–2023)** are a count that isn't SADs: one point of AIM's −100 to +100 welfare
+score for one animal for one year, times AIM's probability that the animal is sentient (no other species
+weight). The bridge (facts/aim_wp.json, ours): divide by the sheet's own sentience figure, times
+`@aim_wp.pain_days_per_wp_year` (2.1 days of disabling pain per welfare-point-year, range 1.09–9.09), giving
+`pain_days_<s>`, then the raw template. The 2.1 is AIM's own two metrics on one change: a hen moved from a battery
+cage to an aviary gains 17.86 points a year (−57.14 to −39.29, CE's 2018 welfare-point sheet) and is spared 37.5
+days of disabling pain a year (17.4 SADs over the 2024 hen weight). The high end is Vasco Grilo's reading (100
+points for a year = one healthy year, 9.09 days at 0.0011). AIM's co-founder and funding counterfactuals stay as published by default; "Credit by share of
+resources" replaces them (`if($resource_shares, …)`). Where AIM values that loss in other charities' welfare
+points, the loss goes through its own species rows (chicken, AIM's benchmark), not the intervention's species.
+
 ### 2.5 Climate: tonnes of CO₂-equivalent averted (`tco2e`)
 
 Added October 2026 (issue #15); one unit since October 2026. A tonne of greenhouse gas kept out of

@@ -1,0 +1,180 @@
+{
+ "id": "healthier-hens-aim-2018",
+ "name": "Healthier Hens: feed fortification for hens (Ambitious Impact, 2018 summary)",
+ "kind": "charity",
+ "cause": "animal-welfare",
+ "charity": "healthier-hens",
+ "owner": "ambitious-impact",
+ "bulk": true,
+ "summary": "Charity Entrepreneurship's 2018 first look at fortifying laying hens' and broilers' feed with calcium, phosphorus and vitamin D3, the idea it researched again in 2020 and Healthier Hens was founded to run. About 22 welfare points gained per hen per year for $4.88 of nutrients, $0.22 per welfare point: a ceiling on the nutrients' cost-effectiveness, not a charity CEA, since it leaves out running a charity and the chance it succeeds. Superseded by the 2020 report.",
+ "source": {
+  "publisher": "Ambitious Impact (Charity Entrepreneurship)",
+  "title": "Food fortification of factory farmed animals' food (summary report)",
+  "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_382e3fe169e14573abab07a541331da7.pdf",
+  "published": "2018-10",
+  "retrieved": "2026-10-30",
+  "license": "AIM terms of use: non-commercial use and citation with attribution; no open licence found"
+ },
+ "evaluator": {
+  "name": "Ambitious Impact",
+  "assumptions": {
+   "resource_shares": 0
+  }
+ },
+ "resources": [],
+ "sections": [
+  {
+   "id": "report",
+   "title": "Charity Entrepreneurship's estimate (summary report)",
+   "explainer": "A 5-page summary of a 50-page unpublished report. The summary also gives $0.27 per welfare point for a painkiller (phenylbutazone), which was ruled out as impractical; this model uses the nutrients. It is a ceiling on the nutrients' cost-effectiveness, not a charity CEA."
+  },
+  {
+   "id": "staff_pay",
+   "title": "Staff pay below market",
+   "kind": "ours",
+   "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
+  },
+  {
+   "id": "bridge",
+   "title": "From welfare points to days of pain (ours)",
+   "kind": "ours",
+   "explainer": "charityevals' bridge, not Ambitious Impact's. Ambitious Impact stops at welfare points per dollar, a unit it retired in 2024 and that has no published exchange rate to anything else. We turn welfare points back into days of disabling pain on the animal's own scale, with one shared rate (facts: aim_wp.pain_days_per_wp_year) used by every welfare-point model, so the species weights below can be applied like in every other animal model."
+  },
+  {
+   "id": "species",
+   "title": "In chicken pain days",
+   "kind": "ours",
+   "explainer": "charityevals' standard species step: days of pain of hens, weighed by how much they can suffer relative to a chicken (Rethink Priorities' welfare ranges, which already include the chance an animal is sentient)."
+  }
+ ],
+ "rows": [
+  {
+   "id": "nutrient_cost_per_hen_year",
+   "section": "report",
+   "label": "Cost of the nutrients per hen per year",
+   "format": "usd",
+   "value": 4.88,
+   "kind": "estimate",
+   "source": {
+    "title": "Food fortification of factory farmed animals' food (summary report)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_382e3fe169e14573abab07a541331da7.pdf",
+    "page": "4",
+    "quote": "cost of all nutrients per hen per year: $ 4.88"
+   },
+   "explainer": "Calcium, phosphorus and vitamin D3 added to a hen's feed for a year."
+  },
+  {
+   "id": "wp_gain_per_hen_year",
+   "section": "report",
+   "label": "Welfare points gained per hen per year",
+   "format": "number",
+   "value": 22,
+   "kind": "estimate",
+   "source": {
+    "title": "Food fortification of factory farmed animals' food (summary report)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_382e3fe169e14573abab07a541331da7.pdf",
+    "page": "2",
+    "quote": "Supplementing feed with those nutrients would increase hens' welfare by ~22 points"
+   },
+   "explainer": "The rise in a hen's welfare score (−100 to +100) from fewer fractures and less bone pain. Page 5's diagram lists \"expected welfare point change\" of 22, 17, 8 and 8 against several supplements and options without saying how they combine; the cost per point matches 22."
+  },
+  {
+   "id": "cost_per_wp",
+   "section": "report",
+   "label": "Cost per welfare point",
+   "format": "usd",
+   "formula": "nutrient_cost_per_hen_year / wp_gain_per_hen_year",
+   "expected": 0.2218181818181818,
+   "explainer": "The summary's \"calcium, phosphorum, D3 - $ 0.22\" per welfare point (page 2) is the yearly nutrient cost divided by the welfare points gained: $4.88 / 22 = $0.222. It counts the nutrients only, not the charity's own costs or its chance of success."
+  },
+  {
+   "id": "wp_per_dollar",
+   "section": "report",
+   "label": "Welfare points per dollar (Ambitious Impact's bottom line)",
+   "format": "number",
+   "formula": "1 / cost_per_wp",
+   "expected": 4.508196721311475,
+   "explainer": "The reciprocal of $0.22 per welfare point. Welfare points are Charity Entrepreneurship's pre-2024 unit: a hen's welfare scored from −100 to +100, for a year."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "staff_pay",
+   "label": "Staff pay as a share of program cost",
+   "format": "percent",
+   "value": 0,
+   "kind": "judgment",
+   "explainer": "The figure is the cost of the nutrients alone, with no staff in it, so there is no forgone pay to share. Our reading of the summary."
+  },
+  {
+   "id": "salary_gap",
+   "section": "staff_pay",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "value": {
+    "low": 0,
+    "best": 0.1,
+    "high": 0.25
+   },
+   "kind": "judgment",
+   "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "staff_pay",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "staff_pay",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+  },
+  {
+   "id": "wp_per_donor_dollar",
+   "section": "staff_pay",
+   "label": "Welfare points per dollar you give",
+   "format": "number",
+   "formula": "wp_per_dollar * donor_cost_share"
+  },
+  {
+   "id": "pain_days_chicken",
+   "section": "bridge",
+   "label": "Days of disabling pain spared per dollar you give: hens",
+   "format": "number",
+   "formula": "wp_per_donor_dollar * @aim_wp.pain_days_per_wp_year",
+   "explainer": "This early figure is not discounted for sentience. Charity Entrepreneurship's welfare-point table keeps the chance of sentience in a separate column ('Odds of feeling pain', 0.7 for hens) from the welfare score, and $0.22 is exactly $4.88 of nutrients per hen-year over 22 points, with no sentience factor. So nothing is taken out before the bridge.\n\nEach welfare-point-year is turned into days of disabling pain on the animal's own scale with the shared rate (facts: aim_wp.pain_days_per_wp_year), calibrated on Ambitious Impact's own welfare points and suffering-adjusted days for the same change. The rate and its range are ours, not Ambitious Impact's."
+  },
+  {
+   "id": "ced_chicken",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give: hens",
+   "format": "number",
+   "formula": "pain_days_chicken * @welfare_ranges.chicken_vs_chicken",
+   "explainer": "The days of pain of hens, weighed by how much they can suffer relative to a chicken (Rethink Priorities' estimates)."
+  },
+  {
+   "id": "ced_per_donor_dollar",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give",
+   "format": "number",
+   "formula": "ced_chicken",
+   "explainer": "Days of disabling pain spared, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+  }
+ ],
+ "output": {
+  "row": "ced_per_donor_dollar",
+  "unit": "ced",
+  "label": "Chicken-equivalent pain days averted per dollar you give",
+  "native": {
+   "row": "wp_per_dollar",
+   "unit": "welfare points per dollar"
+  },
+  "species": [
+   "chicken"
+  ]
+ }
+}

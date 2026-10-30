@@ -39,11 +39,14 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     const values = compute(lib, m, av);
     // Live: reads an assumption or a ranged input, directly or through other rows.
     const live = new Set<string>();
+    // A row with the evaluator's own number in `published` differs between the views: folding it to
+    // our value would put our number into the evaluator view.
+    const published = new Set((raw.rows as { id: string; published?: unknown }[]).filter((r) => r.published !== undefined).map((r) => r.id));
     for (const id of m.order) {
       const r = m.byId.get(id)!;
       // A ranged shared fact is uncertain too: folding it would drop it from the browser's ranges.
       const rangedFact = r.factDeps.some((f) => hasRange(lib.facts.get(f)?.value));
-      if (r.assumptionDeps.length || rangedFact || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
+      if (r.assumptionDeps.length || rangedFact || typeof r.value === "object" || r.range || published.has(id) || r.deps.some((d) => live.has(d))) live.add(id);
     }
     const seen = new Set<string>();
     const visit = (id: string) => {
