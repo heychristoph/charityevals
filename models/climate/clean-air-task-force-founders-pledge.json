@@ -82,7 +82,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' steps after Founders Pledge's bottom line. Founders Pledge reports dollars per tonne; the site needs tonnes per dollar. Then, because the shared climate rate counts the air-pollution deaths that come with burning fossil fuels, tonnes that don't come from fuel left unburned count only for their heat deaths."
+      "explainer": "charityevals' step after Founders Pledge's bottom line: Founders Pledge reports dollars per tonne; the site needs tonnes per dollar. The model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -643,24 +643,8 @@
       "label": "Tonnes of CO₂e averted per dollar",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "1 / cost_per_tonne"
-    },
-    {
-      "id": "heat_share_of_deaths",
-      "section": "per_dollar",
-      "label": "Share of a tonne's harm that comes from heat, not air pollution",
-      "format": "percent",
-      "formula": "@climate.deaths_per_tco2e_heat / (@climate.deaths_per_tco2e_heat + @climate.deaths_per_tco2e_air_pollution)",
-      "explainer": "Our step. The shared climate rate (\"Deaths caused by one more tonne of CO₂\", 1.9 per 10,000 tonnes by default) adds two things: deaths from the extra heat (0.43) and deaths from the fine particles that come with burning coal, oil and gas (1.46), both Rethink Priorities' estimates. A tonne of CO₂ kept out of the air without burning less fuel (a forest left standing, methane that doesn't leak, CO₂ captured at a plant that keeps running) does little about those particles. So such tonnes count as this share of a tonne: 23%. The split comes from Rethink's own two figures, not from the slider: whatever you set the slider to, these tonnes count at 23% of it, so they are undercounted when the slider is set to heat only (its low end) or to all climate damage, crops and sea level included (its high end)."
-    },
-    {
-      "id": "tco2e_per_dollar_comparable",
-      "section": "per_dollar",
-      "label": "Tonnes per dollar, counted at their heat share",
-      "format": "number",
-      "unit": "t CO₂e per $",
-      "formula": "tco2e_per_dollar * heat_share_of_deaths",
-      "explainer": "Our step. None of Founders Pledge's tonnes comes with the average fossil-fuel air pollution in the shared rate. The methane rules stop leaks and carbon capture removes CO₂ from plants that keep running, so neither cuts fine particles. The coal retirements do, but US coal plants with scrubbers emit far fewer particles per tonne than the world average behind the rate (CATF's own Toll from Coal implies about a twentieth), and those deaths are what Founders Pledge counts separately as US air-pollution deaths. So every tonne counts for its heat deaths only, about a quarter of a tonne. Methane also forms ozone, which kills; that isn't counted here (see the write-up)."
+      "formula": "1 / cost_per_tonne",
+      "explainer": "One over Founders Pledge's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only: the methane rules stop leaks and carbon capture removes CO₂ from plants that keep running, so neither cuts the fine particles behind most of the deaths in the shared climate rate. The coal retirements do, but US coal plants with scrubbers emit far fewer particles per tonne than the world average behind the rate (CATF's own Toll from Coal implies about a twentieth), and those deaths are the ones Founders Pledge counts separately as US air-pollution deaths. Methane also forms ozone, which kills; that isn't counted here (see the write-up)."
     },
     {
       "id": "staff_cost_share",
@@ -709,13 +693,13 @@
       "label": "Tonnes of CO₂e averted per dollar donated",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "tco2e_per_dollar_comparable * donor_cost_share",
-      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns tonnes into years of healthy life with the shared climate rate, \"Deaths caused by one more tonne of CO₂\"."
+      "formula": "tco2e_per_dollar * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
     }
   ],
   "output": {
     "row": "tco2e_per_donor_dollar",
-    "unit": "tco2e",
+    "unit": "tco2e_no_smoke",
     "label": "Tonnes of CO₂e averted per dollar",
     "native": {
       "row": "cost_per_tonne",

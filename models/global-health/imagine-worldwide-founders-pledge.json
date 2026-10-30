@@ -178,6 +178,30 @@
       "expected": 179873980
     },
     {
+      "id": "rampup_years",
+      "section": "government",
+      "label": "Years of philanthropic ramp-up before the government takes over",
+      "format": "integer",
+      "value": 6,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "CEA!B5 (note)",
+        "quote": "Summing the number of students served in each of the first six years of implementation. This is during the philanthropic funding phase, before the government takes over."
+      },
+      "explainer": "The government phase starts after the six years of philanthropic ramp-up, so its students learn, and its money is spent, in program years 7 to 16."
+    },
+    {
+      "id": "gov_phase_discount",
+      "section": "government",
+      "label": "Discount factor for the government phase (program years 7–16)",
+      "format": "percent",
+      "formula": "-pv($discount_rate, years_after_takeover, 1, 0, 1) / years_after_takeover / (1 + $discount_rate) ^ rampup_years",
+      "published": 1,
+      "explainer": "Changed for consistency. Founders Pledge doesn't discount the government phase (CEA!B9: \"We do not do any time discounting because both costs and benefits are in the future\"), so its own number here is 100%. On this site every model discounts future good at the shared rate: the donor's money is spent in the first six years, while the government phase's learning (and the government's spending, which Founders Pledge subtracts at its value elsewhere) comes in years 7 to 16. So both are discounted to the start of the program: the average of (1 + rate)^−t for t = 6 to 15, about 67% at 4%. The ramp-up years themselves stay undiscounted, as Founders Pledge has them, because their costs and benefits fall in the same years. The evaluator view keeps Founders Pledge's 100%."
+    },
+    {
       "id": "effect_sd",
       "section": "impact",
       "label": "Learning gain per year, in standard deviations",
@@ -365,7 +389,7 @@
       "section": "value",
       "label": "Value of learning after government takeover",
       "format": "integer",
-      "formula": "(years_after_takeover * students_per_year * p_takeover) * wellbys_per_student",
+      "formula": "(years_after_takeover * students_per_year * p_takeover) * wellbys_per_student * gov_phase_discount",
       "expected": 10031223.47
     },
     {
@@ -395,7 +419,7 @@
       "section": "value",
       "label": "Value the government's money would have produced otherwise",
       "format": "integer",
-      "formula": "gov_wellbys_per_dollar * gov_cost_total",
+      "formula": "gov_wellbys_per_dollar * gov_cost_total * gov_phase_discount",
       "expected": 890556.075
     },
     {

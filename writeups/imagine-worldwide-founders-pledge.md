@@ -1,6 +1,6 @@
 ### Summary
 
-Imagine Worldwide puts tablets with child-led learning software for reading and maths into primary schools, and in Malawi it is scaling the program to every school, with the government planning to take it over. Founders Pledge's 2023 analysis of the Malawi scale-up comes to **<span data-figure="headline" data-model="imagine-worldwide-founders-pledge">17</span> years of healthy life per $1,000**.
+Imagine Worldwide puts tablets with child-led learning software for reading and maths into primary schools, and in Malawi it is scaling the program to every school, with the government planning to take it over. Founders Pledge's 2023 analysis of the Malawi scale-up comes to **<span data-figure="headline" data-model="imagine-worldwide-founders-pledge">14</span> years of healthy life per $1,000**.
 
 The model reproduces all 20 of Founders Pledge's calculated figures. All of the benefit is higher income, valued as GiveWell values income.
 
@@ -29,7 +29,7 @@ The [model](/imagine-worldwide) follows the CEA tab and the income-benefits tab 
 ### Where we differ from Founders Pledge
 
 - **Units:** Founders Pledge values a doubled income-year at 1.9 of its units; we count the same income gain in GiveWell's units of value, like every other income model on the site.
-- **Discounting:** the income gains read the shared discount rate (Your values). Founders Pledge uses 4%, the same as our default, so nothing changes until you move it. Founders Pledge doesn't discount the government phase (years 7 to 16), on the grounds that both its costs and benefits lie in the future; we keep that, so a higher discount rate makes this model look somewhat better than it should.
+- **Discounting:** the income gains read the shared discount rate (Your values); Founders Pledge uses 4%, the same as our default. Founders Pledge doesn't discount the government phase (years 7 to 16), on the grounds that both its costs and benefits lie in the future. We do (changed for consistency): the donor's money is spent in the first six years, so the government phase's learning, and the government spending Founders Pledge nets off, are discounted to the start, about 67% at 4%. That lowers the result by about a fifth (Founders Pledge's own figure is 16.9 on our scale). The ramp-up years stay undiscounted, as their costs and benefits fall in the same years.
 - **Credit by share of resources:** when on, the learning is shared over everyone's spending, philanthropic and government, instead of counting the government phase as leverage; and the funging discount drops.
 - **Staff pay:** when on, staff's pay below market counts as an in-kind contribution. We use our default for programs that mostly buy and hand out goods.
 
