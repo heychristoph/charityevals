@@ -1,7 +1,7 @@
 # Inventory of public evaluator models
 
-Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators and the
-Happier Lives Institute, checked page by page in October 2026, and what we did with each. Each entry
+Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, the
+Happier Lives Institute and SoGive (`sogive.md`), checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
 ## GiveWell: `givewell-models.json`, `givewell-sheets.json`
