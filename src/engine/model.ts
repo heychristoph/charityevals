@@ -78,7 +78,7 @@ export function buildLibrary(
   const assumptionsParsed = Assumptions.safeParse(rawAssumptions);
   if (!assumptionsParsed.success) {
     errors.push(`assumptions: ${assumptionsParsed.error.message}`);
-    return { models: new Map(), charities, owners, assumptions: { groups: [], rows: [], units: {}, common: { unit: "", benchmark: "", benchmark_label: "" } }, facts, errors };
+    return { models: new Map(), charities, owners, assumptions: { groups: [], rows: [], units: {}, common: { unit: "", benchmark: "" } }, facts, errors };
   }
   const assumptions = assumptionsParsed.data;
   const assumptionIds = new Set(assumptions.rows.map((r) => r.id));
@@ -290,6 +290,46 @@ export function toCommon(lib: Library, unit: string, av: Record<string, number>)
   return u?.to_common ? evaluate(parse(u.to_common), (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : NaN;
 }
 
+/** The site's headline unit, years of healthy life (DALYs averted) per $1,000 donated, in common units
+ * per dollar: results anywhere on the site are the common value divided by this. */
+export function perHealthyYearPer1000(av: Record<string, number>): number {
+  return av.uov_per_daly / 1000;
+}
+
+const UOV_PER_DALY: Node = { type: "ref", scope: "assumption", name: "uov_per_daly" };
+
+/** The headline every page shows, as a formula over `result` (a model's own result per dollar): the
+ * unit's conversion into the common unit, factor by factor, divided by a healthy year's value, per
+ * $1,000. Where the conversion already multiplies by that value, the two cancel and neither appears,
+ * so ranges and uncertainty never vary a number the headline doesn't depend on. */
+export function headlineNode(result: Node, toCommon: string): Node {
+  const factors: { node: Node; inv: boolean }[] = [];
+  const split = (n: Node, inv: boolean) => {
+    if (n.type === "bin" && (n.op === "*" || n.op === "/")) {
+      split(n.left, inv);
+      split(n.right, n.op === "/" ? !inv : inv);
+    } else if (!(n.type === "num" && n.value === 1)) factors.push({ node: n, inv });
+  };
+  split(parse(toCommon), false);
+  const i = factors.findIndex((f) => !f.inv && f.node.type === "ref" && f.node.scope === "assumption" && f.node.name === "uov_per_daly");
+  if (i >= 0) factors.splice(i, 1);
+  else factors.push({ node: UOV_PER_DALY, inv: true });
+  factors.push({ node: { type: "num", value: 1000 }, inv: false });
+  return factors.reduce<Node>((acc, f) => ({ type: "bin", op: f.inv ? "/" : "*", left: acc, right: f.node }), result);
+}
+
+const conversions = new Map<string, Node>();
+
+/** What turns a model's result per dollar in `unit` into the headline: undefined for a unit with no
+ * exchange rate. */
+export function headlineConversion(lib: Library, unit: string): Node | undefined {
+  const to = lib.assumptions.units[unit]?.to_common;
+  if (!to) return undefined;
+  let n = conversions.get(to);
+  if (!n) conversions.set(to, (n = headlineNode({ type: "num", value: 1 }, to)));
+  return n;
+}
+
 /** The model's bottom line per dollar, in its own unit and in the common unit. */
 export function bottomLine(
   lib: Library,
@@ -303,14 +343,27 @@ export function bottomLine(
   return { native, common: native * toCommon(lib, m.output.unit, av) };
 }
 
-/** Assumptions that can change this model's common-unit result in a view. */
+/** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
+ * else its own result per dollar. */
+export function headline(
+  lib: Library,
+  m: ResolvedModel,
+  av: Record<string, number>,
+  inputs: Record<string, number> = {},
+  view: View = "charityevals",
+): number {
+  if (!m.output) return NaN;
+  const native = compute(lib, m, av, inputs, view)[m.output.row];
+  const conv = headlineConversion(lib, m.output.unit);
+  return conv ? native * evaluate(conv, (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : native;
+}
+
+/** Assumptions that can change this model's headline in a view. */
 export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals"): string[] {
   const used = new Set<string>();
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
-  if (m.output) {
-    const u = lib.assumptions.units[m.output.unit];
-    if (u?.to_common) refs(parse(u.to_common)).assumptions.forEach((a) => used.add(a));
-  }
+  const conv = m.output && headlineConversion(lib, m.output.unit);
+  if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))
@@ -319,7 +372,9 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
 }
 
 /** A charity's models: by owner (owners.json order); within an owner, hand-built models before bulk
- * imports, then newest first. The first model of each owner is that owner's current view. */
+ * imports, then newest first. The first model of each owner is that owner's current view. Which model
+ * ranks, and the charity's main page (src/lib/data.ts primaryOf), go by date alone, hand-built or not
+ * (src/engine/ranking.ts); scripts/check.ts and bulk-writeups.ts still key write-ups on this order. */
 export function modelsOf(lib: Library, charity: string): ResolvedModel[] {
   const order = [...lib.owners.keys()];
   const date = (m: ResolvedModel) => m.source?.published ?? "";
@@ -337,4 +392,12 @@ export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] 
 /** Shared facts this model reads. */
 export function usedFacts(m: ResolvedModel): string[] {
   return [...new Set(m.rows.flatMap((r) => r.factDeps))];
+}
+
+/** Fact key → ids of the models that read it, in id order: only facts more than one model reads. */
+export function factUsage(lib: Library): Record<string, string[]> {
+  const by: Record<string, string[]> = {};
+  for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)))
+    for (const k of usedFacts(m)) (by[k] ??= []).push(m.id);
+  return Object.fromEntries(Object.entries(by).filter(([, ids]) => ids.length > 1).sort(([a], [b]) => a.localeCompare(b)));
 }
