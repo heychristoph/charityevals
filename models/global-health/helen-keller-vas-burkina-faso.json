@@ -4,7 +4,7 @@
   "kind": "variant",
   "cause": "global-health",
   "extends": "helen-keller-vas",
-  "summary": "The same GiveWell model with its Burkina Faso column.",
+  "summary": "Gives children aged 6–59 months vitamin A supplements twice a year in Burkina Faso. The same GiveWell model with its Burkina Faso column.",
   "rows": [
     {
       "id": "percentage_of_total_costs_covered_by_the_grantee_2",
@@ -168,7 +168,9 @@
     },
     {
       "id": "proportion_of_people_under_age_5_represented_in_gbd_2021_dis_2",
-      "value": 0.37594444,
+      "formula": "@givewell.proportion_of_people_under_age_5_represented_in_gbd_2021_dis",
+      "published": 0.37594444,
+      "explainer": "Value from GiveWell's sheet, cell Inputs!I169. Reads the shared fact @givewell.proportion_of_people_under_age_5_represented_in_gbd_2021_dis (the same number in GiveWell's other sheets), so every model uses one figure. The evaluator view keeps GiveWell's 0.37594444.",
       "source": {
         "title": "GiveWell",
         "cell": "Inputs!I169"
@@ -355,11 +357,13 @@
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the_2",
-      "value": -0.01833780533,
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!I133"
-      }
+      },
+      "formula": "if($resource_shares, 0, -0.01833780533)",
+      "expected": -0.01833780533,
+      "explainer": "Switched off when credit is shared by share of resources."
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_into_the",
@@ -367,11 +371,13 @@
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th_2",
-      "value": -0.4312943169,
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!I134"
-      }
+      },
+      "formula": "if($resource_shares, 0, -0.4312943169)",
+      "expected": -0.4312943169,
+      "explainer": "Switched off when credit is shared by share of resources."
     },
     {
       "id": "adjustment_for_the_possibility_of_crowding_funding_out_of_th",
@@ -408,11 +414,13 @@
     },
     {
       "id": "adjustment_for_leverage_and_funging",
-      "value": -0.4496321222,
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!I135"
-      }
+      },
+      "formula": "if($resource_shares, 0, -0.4496321222)",
+      "expected": -0.4496321222,
+      "explainer": "Switched off when credit is shared by share of resources."
     },
     {
       "id": "overall_adjustment_for_leverage_and_funging",
@@ -440,11 +448,13 @@
     },
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es_2",
-      "value": -0.4496321222,
       "source": {
         "title": "GiveWell",
         "cell": "LeverageFunging!I140"
-      }
+      },
+      "formula": "if($resource_shares, 0, -0.4496321222)",
+      "expected": -0.4496321222,
+      "explainer": "Switched off when credit is shared by share of resources."
     },
     {
       "id": "leverage_and_funging_adjustment_for_counterfactual_output_es",

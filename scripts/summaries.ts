@@ -1,4 +1,5 @@
-// Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model.
+// Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model, and
+// generated/usage.json: which models read each shared fact (the browser's summaries fold facts away).
 //   npx tsx scripts/summaries.ts           write
 //   npx tsx scripts/summaries.ts --check   fail if the file is out of date (npm run check runs this)
 // Bulk models (models/grants/) are tens of megabytes of rows, too much for the browser. Each stand-in
@@ -9,25 +10,29 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute } from "../src/engine/model";
+import { buildLibrary, assumptionValues, compute, factUsage, hasRange } from "../src/engine/model";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
+const usageOut = join(root, "generated/usage.json");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
   const p = join(d, f);
   return statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
 });
 
-export function summaries(): unknown[] {
+function library() {
   const raws = walk(join(root, "models/grants")).sort().map(read);
-  const lib = buildLibrary(
+  return { raws, lib: buildLibrary(
     [...walk(join(root, "models")).filter((p) => !p.includes("/models/grants/")).map(read), ...raws],
     read(join(root, "assumptions/default.json")),
     walk(join(root, "facts")).map(read),
     walk(join(root, "charities")).map(read),
     read(join(root, "owners.json")),
-  );
+  ) };
+}
+
+export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] {
   const av = assumptionValues(lib.assumptions);
   return raws.map((raw) => {
     const m = lib.models.get(raw.id)!;
@@ -36,7 +41,9 @@ export function summaries(): unknown[] {
     const live = new Set<string>();
     for (const id of m.order) {
       const r = m.byId.get(id)!;
-      if (r.assumptionDeps.length || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
+      // A ranged shared fact is uncertain too: folding it would drop it from the browser's ranges.
+      const rangedFact = r.factDeps.some((f) => hasRange(lib.facts.get(f)?.value));
+      if (r.assumptionDeps.length || rangedFact || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
     }
     const seen = new Set<string>();
     const visit = (id: string) => {
@@ -52,7 +59,7 @@ export function summaries(): unknown[] {
       const label = id === m.output!.row ? r.label : "";
       if (live.has(id)) {
         const { explainer: _e, source: _s, expected: _x, section: _c, format: _f, ...rest } = r;
-        return { ...rest, label, ...("value" in rest ? { explainer: "Input." } : {}) };
+        return { ...rest, label, ...("value" in rest || "published" in rest ? { explainer: "Input." } : {}) };
       }
       return { id, label, value: values[id], kind: "estimate", explainer: "Folded." };
     });
@@ -61,7 +68,9 @@ export function summaries(): unknown[] {
     const rename = (f: string) => f.replace(/(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => short.get(w) ?? w);
     const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}) }));
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
-    return { ...meta, rows: compact };
+    // A stand-in folds the native and species rows away, so its output names only the bottom line.
+    const { native: _native, species: _species, ...output } = (raw.output ?? {}) as Record<string, unknown>;
+    return { ...meta, ...(raw.output ? { output } : {}), rows: compact };
   });
 }
 
@@ -78,10 +87,12 @@ function same(a: unknown, b: unknown): boolean {
   return a === b;
 }
 
-const fresh = summaries();
-if (process.argv.includes("--check")) {
-  if (!existsSync(out) || !same(JSON.parse(readFileSync(out, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
-    console.error("generated/bulk-summaries.json is out of date: run npx tsx scripts/summaries.ts");
-    process.exit(1);
-  }
-} else writeFileSync(out, JSON.stringify(fresh) + "\n");
+const built = library();
+for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)]] as const) {
+  if (process.argv.includes("--check")) {
+    if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
+      console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts`);
+      process.exit(1);
+    }
+  } else writeFileSync(file, JSON.stringify(fresh) + "\n");
+}

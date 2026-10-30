@@ -3,86 +3,161 @@
 import Base from "../layouts/Base.astro";
 import { lib, modelUrl, modelFile } from "../lib/data";
 import { modelHistory } from "../lib/history";
-import { formatMultiple } from "../lib/format";
+import { formatYears, plainModelName } from "../lib/format";
 
 interface Props {
   modelId: string;
 }
 const model = lib.models.get(Astro.props.modelId)!;
 const fileOf = (id: string) => modelFile(lib.models.get(id)!);
-const files = [...model.chain.map(fileOf), `writeups/${model.id}.md`];
-const entries = modelHistory(__REPO_ROOT__, model, files);
+// Only this model's own file and the files it extends: changes elsewhere (shared values, other models)
+// aren't changes to this model.
+const files = model.chain.map(fileOf);
+// Work in progress shows while developing, never on the published site.
+const entries = modelHistory(__REPO_ROOT__, model, files, { uncommitted: import.meta.env.DEV });
 const newestFirst = [...entries].reverse();
+// A commit that changed no number (wording, sources, links) takes one quiet line; a run of them, one
+// line together, their titles behind a disclosure.
+const quiet = (e: (typeof entries)[number]) => !e.changes.length && !!e.note?.startsWith("No numbers changed");
+type Block = { kind: "change"; e: (typeof entries)[number]; older?: number } | { kind: "quiet"; es: (typeof entries)[number][] };
+const blocks: Block[] = [];
+newestFirst.forEach((e, i) => {
+  const last = blocks.at(-1);
+  if (quiet(e) && last?.kind === "quiet") last.es.push(e);
+  else blocks.push(quiet(e) ? { kind: "quiet", es: [e] } : { kind: "change", e, older: newestFirst[i + 1]?.ours });
+});
+// Commit subjects in plain words: no code formatting, no file names, no "area:" prefixes.
+const title = (s: string) => {
+  const t = s.replace(/`([^`]*)`/g, "$1").replace(/^[a-z][\w-]*(\([^)]*\))?:\s+/, "").replace(/\s*\((?:[\w./-]+\.(?:py|ts|tsx|json|sh|astro|mjs)(?:,\s*)?)+\)/g, "");
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+const span = (es: (typeof entries)[number][]) => {
+  const [a, b] = [es.at(-1)!.date, es[0].date];
+  return a === b ? a : `${a} to ${b}`;
+};
 const repo = "https://github.com/heychristoph/charityevals";
 
-// A small step chart of both bottom lines over the versions, on a log scale.
+// A small step chart of the result over the versions, on a log scale.
 const pts = entries.filter((e) => e.ours !== undefined);
-const vals = pts.flatMap((e) => [e.ours!, e.evaluator ?? e.ours!]);
+const vals = pts.map((e) => e.ours!);
 const [lo, hi] = vals.length ? [Math.min(...vals) / 1.3, Math.max(...vals) * 1.3] : [0.5, 2];
-const W = 640, H = 160, P = 8;
-const x = (i: number) => (pts.length < 2 ? W / 2 : P + (i * (W - 2 * P)) / (pts.length - 1));
-const y = (v: number) => H - P - ((Math.log(v) - Math.log(lo)) / (Math.log(hi) - Math.log(lo))) * (H - 2 * P);
+// Each point carries its result above and its date below; side padding keeps the end labels inside.
+const W = 640, H = 150, PX = 36, PT = 26, PB = 26;
+const x = (i: number) => (pts.length < 2 ? W / 2 : PX + (i * (W - 2 * PX)) / (pts.length - 1));
+const y = (v: number) => H - PB - ((Math.log(v) - Math.log(lo)) / (Math.log(hi) - Math.log(lo))) * (H - PT - PB);
+// A flat line says nothing: chart only when the result moved between versions.
+const moved = new Set(pts.map((e) => formatYears(e.ours!))).size > 1;
 const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
   pts.map((e, i) => { const v = get(e); return v === undefined ? "" : `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`; }).join(" ");
 ---
 
 <Base noindex title={`${model.name}: history`} description={`How the ${model.name} assessment has changed, version by version.`} active="rankings">
   <div class="page wrap" style={`--cause: var(--cause-${model.cause})`}>
-    <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={modelUrl(lib, model)}>{model.name}</a> / History</nav>
-    <h1>How this assessment has changed</h1>
+    <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={modelUrl(lib, model)}>{plainModelName(model.name)}</a> / History</nav>
+    <h1>How this model has changed</h1>
     <p class="dek">
-      Every change to the model, its parent models, the shared assumptions or the shared facts is a commit. For each one we rebuild the site's data as it was then and recompute the result with default assumptions.
+      Every change to {plainModelName(model.name)}'s model, newest first, with its result in years of healthy life per $1,000 at default values.
     </p>
 
     {entries.length === 0 ? (
       <p class="empty">No history yet: this model hasn't been committed to the repository.</p>
     ) : (
       <>
-        {pts.length > 1 && (
+        {moved && (
           <figure class="chart">
-            <figcaption class="small"><strong>Result per version, × GiveDirectly</strong> <span class="muted">· default assumptions, log scale</span></figcaption>
+            <figcaption class="small"><strong>Result per version, years of healthy life per $1,000</strong> <span class="muted">· default values</span></figcaption>
             <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Result over versions">
-              <path d={path((e) => e.evaluator)} class="line-eval" />
               <path d={path((e) => e.ours)} class="line-ours" />
-              {pts.map((e, i) => <circle cx={x(i)} cy={y(e.ours!)} r="4" class="dot-ours" />)}
+              {pts.map((e, i) => (
+                <g>
+                  <circle cx={x(i)} cy={y(e.ours!)} r="4" class="dot-ours" />
+                  {/* Labels where the result moved, plus the ends: repeated labels on a flat stretch overlap. */}
+                  {(i === 0 || i === pts.length - 1 || formatYears(e.ours!) !== formatYears(pts[i - 1].ours!)) && (
+                    <>
+                      <text x={x(i)} y={y(e.ours!) - 10} class="pt-value" text-anchor="middle">{formatYears(e.ours!)}</text>
+                      <text x={x(i)} y={H - 6} class="pt-date" text-anchor="middle">{e.date}</text>
+                    </>
+                  )}
+                </g>
+              ))}
             </svg>
-            <p class="small muted legend"><span class="key ours" /> charityevals model <span class="key eval" /> evaluator's model</p>
           </figure>
         )}
 
         <ol class="versions">
-          {newestFirst.map((e) => (
-            <li>
-              <div class="v-head">
-                <div>
-                  <strong>{e.subject}</strong>
-                  <span class="small muted">
-                    {" "}· {e.date}{e.author && ` · ${e.author}`}
-                    {e.sha ? <> · <a href={`${repo}/commit/${e.sha}`}><code>{e.sha.slice(0, 7)}</code></a></> : " · not yet committed"}
-                  </span>
+          {blocks.map((b) => {
+            if (b.kind === "quiet") return (
+              <li class="v-quiet small">
+                <details>
+                  <summary>
+                    <span>{b.es.length === 1 ? "Wording, sources or links changed" : `${b.es.length} changes to wording, sources or links`}</span>
+                    <span class="muted"> · {span(b.es)} · no numbers changed</span>
+                  </summary>
+                  <ul>
+                    {b.es.map((e) => (
+                      <li>
+                        {title(e.subject)}
+                        <span class="muted"> · {e.date}{e.sha && <> · <a href={`${repo}/blob/${e.sha}/${modelFile(model)}`}>this version</a></>}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            );
+            const { e, older } = b;
+            return (
+              <li>
+                <div class="v-head">
+                  <div>
+                    <h2 class="v-title">{title(e.subject)}</h2>
+                    <p class="small muted">
+                      {e.date}{e.author && ` · ${e.author}`}
+                      {e.sha ? <> · <a href={`${repo}/blob/${e.sha}/${modelFile(model)}`}>This version of the model</a></> : " · not yet committed"}
+                    </p>
+                  </div>
+                  <div class="v-result num">
+                    {older !== undefined && e.ours !== undefined && formatYears(older) !== formatYears(e.ours) && <span class="muted">{formatYears(older)} → </span>}
+                    {e.ours !== undefined ? formatYears(e.ours) : "—"}
+                  </div>
                 </div>
-                <div class="v-result num">
-                  {e.ours !== undefined ? formatMultiple(e.ours) : "—"}
-                  {e.evaluator !== undefined && <span class="small muted"> (evaluator {formatMultiple(e.evaluator)})</span>}
-                </div>
-              </div>
-              {e.note && <p class="small muted">{e.note}</p>}
-              {e.changes.length > 0 && (
-                <table class="changes small">
-                  {e.changes.slice(0, 25).map((c) => (
-                    <tr>
-                      <th scope="row"><a href={`${modelUrl(lib, model)}#row-${c.id}`}>{c.label}</a></th>
-                      <td class="num before">{c.before}</td>
-                      <td class="arrow" aria-hidden>→</td>
-                      <td class="num">{c.after}</td>
-                    </tr>
-                  ))}
-                  {e.changes.length > 25 && <tr><td colspan="4" class="muted">and {e.changes.length - 25} more rows</td></tr>}
-                </table>
-              )}
-              {e.sha === null && e.changes.length === 0 && !e.note && <p class="small muted">Shared assumptions or facts changed; this model's rows didn't.</p>}
-            </li>
-          ))}
+                {e.body && (
+                  <details class="v-why">
+                    <summary aria-label="Why this change was made">…</summary>
+                    {e.body.split(/\n\s*\n/).map((para) => {
+                      const items = para.split(/\n(?=- )/);
+                      return /^- /.test(para)
+                        ? <ul>{items.map((it) => <li>{it.replace(/^- /, "").replace(/\s*\n\s*/g, " ")}</li>)}</ul>
+                        : <p>{para.replace(/\s*\n\s*/g, " ")}</p>;
+                    })}
+                  </details>
+                )}
+                {e.note && <p class="small muted">{e.note}</p>}
+                {e.changes.length > 0 && (
+                  <table class="changes small">
+                    <thead><tr><th scope="col">What changed</th><th scope="col" class="num">Before</th><th aria-hidden></th><th scope="col" class="num">After</th></tr></thead>
+                    <tbody>
+                      {e.changes.slice(0, 25).map((c) => (
+                        <tr>
+                          <th scope="row">
+                            <a href={`${modelUrl(lib, model)}#row-${c.id}`}>{c.label}</a>
+                            {c.kind !== "value" && <span class="muted"> · {c.kind === "formula" ? "calculation changed" : c.kind}</span>}
+                          </th>
+                          {c.before === c.after
+                            ? <td colspan="3" class="num">{c.after}<span class="visually-hidden">, the same number as before</span></td>
+                            : <>
+                                <td class="num before">{c.before}</td>
+                                <td class="arrow" aria-hidden>→</td>
+                                <td class="num">{c.after}</td>
+                              </>}
+                        </tr>
+                      ))}
+                      {e.changes.length > 25 && <tr><td colspan="4" class="muted">and {e.changes.length - 25} more</td></tr>}
+                    </tbody>
+                  </table>
+                )}
+              </li>
+            );
+          })}
         </ol>
       </>
     )}
@@ -120,37 +195,24 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
   .chart svg {
     width: 100%;
     height: auto;
-    border-bottom: 1px solid var(--rule-strong);
   }
   .line-ours {
     fill: none;
     stroke: var(--cause);
     stroke-width: 2;
   }
-  .line-eval {
-    fill: none;
-    stroke: var(--ink-3);
-    stroke-width: 1.5;
-    stroke-dasharray: 4 4;
+  .pt-value {
+    font: 600 13px var(--sans);
+    fill: var(--ink);
+  }
+  .pt-date {
+    font: 12px var(--sans);
+    fill: var(--ink-3);
   }
   .dot-ours {
     fill: var(--paper);
     stroke: var(--cause);
     stroke-width: 2;
-  }
-  .legend {
-    display: flex;
-    gap: var(--s2);
-    align-items: center;
-  }
-  .key {
-    display: inline-block;
-    width: 18px;
-    height: 0;
-    border-top: 2px solid var(--cause);
-  }
-  .key.eval {
-    border-top: 1.5px dashed var(--ink-3);
   }
   .versions {
     list-style: none;
@@ -158,7 +220,7 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
     margin: 0;
     border-top: 1px solid var(--rule-strong);
   }
-  .versions li {
+  .versions > li {
     padding: var(--s4) 0;
     border-bottom: 1px solid var(--rule);
     display: grid;
@@ -170,6 +232,58 @@ const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
     gap: var(--s4);
     align-items: baseline;
     flex-wrap: wrap;
+  }
+  .v-title {
+    font-size: 19px;
+    margin: 0 0 2px;
+  }
+  .versions > li.v-quiet {
+    padding: var(--s2) 0;
+  }
+  .v-quiet summary {
+    cursor: pointer;
+    color: var(--ink-2);
+    width: fit-content;
+  }
+  .v-quiet ul {
+    margin: var(--s2) 0 0;
+    padding-left: 1.2em;
+    display: grid;
+    gap: 2px;
+  }
+  .v-why ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  .v-why summary {
+    width: fit-content;
+    padding: 0 var(--s2);
+    border-radius: 4px;
+    background: var(--paper-2);
+    color: var(--ink-2);
+    cursor: pointer;
+    list-style: none;
+    line-height: 1.4;
+  }
+  .v-why summary::-webkit-details-marker {
+    display: none;
+  }
+  .v-why[open] summary {
+    margin-bottom: var(--s2);
+  }
+  .v-why {
+    max-width: var(--measure);
+    color: var(--ink-2);
+    display: grid;
+    gap: var(--s2);
+  }
+  .changes thead th {
+    color: var(--ink-3);
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .changes thead th.num {
+    text-align: right;
   }
   .v-result {
     font: 600 18px/1.2 var(--serif);

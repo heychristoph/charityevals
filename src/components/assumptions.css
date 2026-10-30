@@ -49,6 +49,31 @@
   font-size: 14px;
   color: var(--ink-2);
 }
+.group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.group-toggle:hover {
+  color: var(--ink);
+}
+.group-toggle .chev {
+  transition: transform 0.2s ease-out;
+}
+.group-toggle[aria-expanded="true"] .chev {
+  transform: rotate(90deg);
+}
+.group-changed {
+  margin-left: var(--s2);
+  font-weight: 400;
+  color: var(--blue);
+}
 .group-explainer {
   max-width: var(--measure);
 }
@@ -63,16 +88,48 @@
   align-items: baseline;
   gap: var(--s3);
 }
-.assumption-head label {
+.assumption-name {
   font-size: 15px;
   line-height: 1.35;
 }
-.assumption-head output {
+.value-field {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: text;
+  text-decoration: underline dotted 1px var(--ink-3);
+  text-underline-offset: 4px;
+}
+.value-field:hover {
+  text-decoration-color: var(--blue);
+}
+.assumption.changed .value-field {
+  color: var(--blue);
+}
+.fixed-value {
   font-weight: 600;
   white-space: nowrap;
 }
-.assumption.changed .assumption-head output {
-  color: var(--blue);
+.value-edit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.value-edit input {
+  width: 6ch;
+  padding: 1px 4px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  font: inherit;
+  text-align: right;
+  color: var(--ink);
+  background: var(--paper);
 }
 .assumption-scale {
   display: flex;
@@ -134,27 +191,6 @@
 .explainer p + p {
   margin-top: var(--s2);
 }
-details.explainer summary {
-  cursor: pointer;
-  color: var(--blue);
-  width: fit-content;
-  list-style: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-}
-details.explainer summary::-webkit-details-marker {
-  display: none;
-}
-details.explainer summary .chev {
-  transition: transform 0.2s ease-out;
-}
-details.explainer[open] summary .chev {
-  transform: rotate(90deg);
-}
-details.explainer[open] summary {
-  margin-bottom: var(--s1);
-}
 
 .link-button {
   display: inline-flex;
@@ -164,15 +200,11 @@ details.explainer[open] summary {
   border: 0;
   padding: 0;
   font: inherit;
-  color: var(--blue);
   cursor: pointer;
-}
-.link-button:hover:not(:disabled) {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
 }
 .link-button:disabled {
   color: var(--ink-3);
+  text-decoration: none;
   cursor: default;
 }
 
@@ -190,9 +222,6 @@ details.explainer[open] summary {
   background: var(--ink-3);
   border-radius: 1px;
   pointer-events: none;
-}
-.reset-one {
-  width: fit-content;
 }
 
 .mini-ranking {
@@ -274,19 +303,6 @@ details.explainer[open] summary {
 .switch-text {
   min-width: 2em;
 }
-.group:disabled {
-  opacity: 0.45;
-}
-.group:disabled .switch,
-.group:disabled input {
-  cursor: not-allowed;
-}
-.evaluator-note {
-  color: var(--ink);
-  background: var(--blue-wash);
-  padding: var(--s2) var(--s3);
-  border-radius: var(--radius);
-}
 
 /* A familiar comparison under each slider: the number restated as something people can picture. */
 .comparable {
@@ -294,4 +310,37 @@ details.explainer[open] summary {
   font-size: 14px;
   line-height: 1.45;
   color: var(--ink);
+}
+
+/* Phones: the panel comes after the rankings or the model, so a button at the bottom of the screen
+   leads to it until it is in view. */
+.values-jump {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .values-jump {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 20;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgb(29 36 51 / 0.22);
+  }
+  .values-jump:hover {
+    color: var(--paper);
+    background: var(--ink-2);
+  }
+  .values-jump-count {
+    font-weight: 400;
+    opacity: 0.85;
+  }
 }

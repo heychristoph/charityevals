@@ -6,7 +6,9 @@ import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
-import { lib, rankable, modelUrl, historyUrl, modelFile } from "../lib/data";
+import Headline from "./Headline.tsx";
+import { plainModelName } from "../lib/format";
+import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
@@ -24,9 +26,17 @@ const siblings = modelsOf(lib, charity.id);
 const current = currentModelsOf(lib, charity.id);
 const file = modelFile(model);
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
-// Variants share their parent's write-up unless they have their own.
-const writeupId = [model.id, ...model.chain.slice(1)].find((id) => writeups[`../../writeups/${id}.md`]);
+// Variants share their parent's write-up unless they have their own. The charity's main page falls
+// back to the write-up filed under its first model: a hand-written evaluation stays on the main page
+// when a newer sheet becomes the main model.
+const isMain = primaryOf(lib, charity.id)?.id === model.id;
+const writeupId = [model.id, ...model.chain.slice(1), ...(isMain ? [siblings[0]?.id] : [])].find((id) => id && writeups[`../../writeups/${id}.md`]);
 const Writeup = writeupId ? writeups[`../../writeups/${writeupId}.md`].Content : undefined;
+// A write-up's own "Sources" list would sit right above Evidence and sources, so its links join that
+// list instead and the section is hidden.
+const writeupRaw = import.meta.glob<string>("../../writeups/*.md", { eager: true, query: "?raw", import: "default" });
+const sourcesMd = writeupId ? (writeupRaw[`../../writeups/${writeupId}.md`] ?? "").split(/^### Sources\s*$/m)[1]?.split(/^#{2,3} /m)[0] ?? "" : "";
+const writeupLinks = [...sourcesMd.matchAll(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g)].map((x) => ({ title: x[1], url: x[2], type: "other" as const }));
 const parent = model.extends ? lib.models.get(model.extends) : undefined;
 const root = parent && model.kind === "variant" ? parent : model;
 const family = [root, ...rankable.filter((m) => m.extends === root.id && m.kind === "variant")];
@@ -38,20 +48,32 @@ const RES_GROUPS = [
   ["charity", "From the charity"],
   ["other", "Other sources"],
 ] as const;
-const allResources = [...(charity.resources ?? []), ...(model.resources ?? [])].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
+const allResources = [...(charity.resources ?? []), ...(model.resources ?? []), ...writeupLinks].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
 const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
 // Bulk imports carry a generated summary about the import; the charity's own one-liner reads better.
-// One sentence: the charity's own line, else the model summary's first sentence. "About this model"
-// shows the rest of the summary. Neither repeats the import boilerplate every model's summary carries
+// One sentence: the charity's own line, else the model summary's first sentence. It doesn't repeat the import boilerplate every model's summary carries
 // ("a re-implementation of ...": the method page says it once for all) or the source's title.
 const sentences = (s?: string) => s?.trim().split(/(?<=[.!?])\s+(?=[A-Z"'(])/) ?? [];
 const BOILERPLATE = /^(A (faithful )?re-implementation of|Every number is traced|Calculated rows reproduce|\w+'s spreadsheet "|The others are listed below)/;
 const own = sentences(model.summary).filter((x) => !BOILERPLATE.test(x));
 const dek = charity.summary ?? own[0];
-const about = own.filter((x) => x !== dek).join(" ");
 const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/.*$/, "");
 const meta = modelMeta(model);
+// Which location the headline is for, when the model is one of several locations: a variant's name
+// carries it ("Against Malaria Foundation (Chad)"); the main model's summary names it ("this page
+// shows DRC, the median location").
+const placeOf = (m: typeof model) =>
+  m.kind === "variant"
+    ? m.name.startsWith(charity.name) ? m.name.slice(charity.name.length).trim().replace(/^\((.*)\)$/, "$1") : undefined
+    : m.summary?.match(/this page shows ([^,.]+(?:\([^)]*\))?), the median/i)?.[1];
+// The charity's main page headlines the evaluator's figure as the rankings combine it (Headline).
+const main = primaryOf(lib, charity.id)?.id === model.id;
+const place = family.length > 1 ? placeOf(model) : undefined;
+const placeText = place && (model.kind === "variant" ? `in ${place}` : `in ${place}, the median of ${family.length} locations`);
+// The charity's other models and its locations, in one list: both are "other versions of this number".
+const others = model.kind !== "variant" && siblings.length > current.length ? siblings : [];
+const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map((m) => m.id)).size;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
@@ -60,7 +82,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     <div class="main">
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
-        <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
+        <div class="m-title">
+          <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
+          {model.bulk
+            ? <Headline client:model={model.id} id={model.id} bulk place={placeText} main={main} />
+            : <Headline client:load id={model.id} place={placeText} main={main} />}
+        </div>
         {(dek || charity.website) && (
           <p class="dek">
             {dek}
@@ -70,7 +97,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         {charity.donate && (
           <div class="donate">
             <a class="donate-button" href={charity.donate} rel="noopener" data-track="donate" data-charity={charity.id}>Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
-            <span class="small muted">{charity.donate_via ? `Through ${charity.donate_via}'s form. ` : ""}We take nothing and aren't paid for listings.</span>
+            <span class="small muted">{charity.donate_via ? `Through ${charity.donate_via}'s form. ` : ""}We earn nothing from donations or listings.</span>
           </div>
         )}
       </header>
@@ -87,53 +114,64 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             })}
           </nav>
         )}
-        {model.kind !== "variant" && siblings.length > current.length && (
-          <details class="m-disclosure small" open={current.length === 1 && siblings.length <= 6}>
-            <summary>All {siblings.length} models of {charity.name}</summary>
-            <p class="muted">Newest first per evaluator; the rankings use the newest. × GiveDirectly, on your assumptions.</p>
-            <VariantList client:load ids={siblings.map((m) => m.id)} current={model.id} dated />
+        {modelCount > 1 && (
+          <details class="m-disclosure small" open={modelCount <= 8}>
+            <summary>{model.kind === "variant" ? `${family.length} locations in ${owner.name}'s model` : `All ${modelCount} models of ${charity.name}`}</summary>
+            {family.length > 1 && (
+              <div class="m-list">
+                {others.length > 0 && <h3 class="m-list-title">Locations in {owner.name}'s model</h3>}
+                <VariantList client:load ids={family.map((m) => m.id)} current={model.id} names={Object.fromEntries(family.flatMap((m) => { const p = placeOf(m); return p ? [[m.id, p]] : []; }))} />
+              </div>
+            )}
+            {others.length > 0 && (
+              <div class="m-list">
+                {family.length > 1 && <h3 class="m-list-title">Every evaluator's models, newest first</h3>}
+                <VariantList client:load ids={others.map((m) => m.id)} current={model.id} dated />
+              </div>
+            )}
           </details>
         )}
-        {family.length > 1 && (
-          <details class="m-disclosure small" open={family.length <= 8}>
-            <summary>{family.length} countries and programs in {owner.name}'s model</summary>
-            <p class="muted">Same model, different inputs. × GiveDirectly, on your assumptions.</p>
-            <VariantList client:load ids={family.map((m) => m.id)} current={model.id} />
-          </details>
-        )}
-        <details class="m-disclosure m-about small">
-          <summary>About this model</summary>
-          <p>
-            {model.source ? <a href={model.source.url} data-track-kind="source">{model.name}</a> : <strong>{model.name}</strong>}
-            {" "}by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
-            {about && <> {about}</>}
-            {parent && <> It extends <a href={modelUrl(lib, parent)}>{parent.name}</a>, inheriting every row and overriding a few.</>}
-          </p>
-          <p class="m-links">
-            {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
-            <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
-            {model.source?.license && <span class="muted"> · Licence: {model.source.license}</span>}
-          </p>
-        </details>
       </div>
       {/* A bulk model hydrates once its full file has loaded (client:model), rather than carrying it as a prop. */}
       {model.bulk ? (
-        <ModelView client:model={model.id} id={model.id} bulk>
+        <ModelView client:model={model.id} id={model.id} bulk place={place}>
+          <Fragment slot="about">
+            <p>
+              {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
+              {" "}by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
+            </p>
+            <p class="m-links">
+              {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
+              <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+              {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
+            </p>
+          </Fragment>
           {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
+            <section class="writeup" aria-labelledby="writeup-title">
               <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body"><Writeup /></div>
-              <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
+              <div class="writeup-body" data-gloss><Writeup /></div>
             </section>
           )}
         </ModelView>
       ) : (
-        <ModelView client:load id={model.id}>
+        <ModelView client:load id={model.id} place={place}>
+          <Fragment slot="about">
+            <p>
+              {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
+              {" "}by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
+            </p>
+            <p class="m-links">
+              {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
+              <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+              {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
+            </p>
+          </Fragment>
           {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title" data-collapsible>
+            <section class="writeup" aria-labelledby="writeup-title">
               <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body"><Writeup /></div>
-              <button type="button" class="link-button writeup-more" hidden>Read the full evaluation</button>
+              <div class="writeup-body" data-gloss><Writeup /></div>
             </section>
           )}
         </ModelView>
@@ -171,33 +209,16 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   // The model selector's tabs are plain links; count which evaluator visitors switch to.
   for (const tab of document.querySelectorAll<HTMLAnchorElement>("[data-evaluator-tab]"))
     tab.addEventListener("click", () => track("evaluator_tab", { key: tab.dataset.evaluatorTab, detail: tab.hasAttribute("aria-current") ? "page" : "other" }));
-
-  // Long write-ups show their first section; the rest opens on request. Without JavaScript, all of it shows.
-  for (const sec of document.querySelectorAll<HTMLElement>(".writeup[data-collapsible]")) {
-    const body = sec.querySelector<HTMLElement>(".writeup-body")!;
-    const more = sec.querySelector<HTMLButtonElement>(".writeup-more")!;
-    if (body.scrollHeight < 520) continue;
-    sec.classList.add("collapsed");
-    more.hidden = false;
-    more.addEventListener("click", () => {
-      sec.classList.remove("collapsed");
-      more.hidden = true;
-    });
-  }
 </script>
 
 <style>
-  .writeup.collapsed .writeup-body {
-    max-height: 340px;
-    overflow: hidden;
-    mask-image: linear-gradient(to bottom, #000 70%, transparent);
-  }
-  .writeup-more {
-    margin-top: var(--s2);
+  .writeup-body :global(h3#sources),
+  .writeup-body :global(h3#sources ~ *) {
+    display: none;
   }
   .resources summary {
     cursor: pointer;
-    color: var(--blue);
+    color: var(--ink);
   }
   .resources summary h2 {
     display: inline;
@@ -215,10 +236,9 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     border-top: 1px solid var(--rule);
   }
   .writeup-title {
-    font-size: 26px;
     margin-bottom: var(--s3);
   }
-  .writeup :global(h2) {
+  .writeup :global(h3) {
     font-size: 20px;
     margin: var(--s5) 0 var(--s2);
   }
@@ -242,6 +262,53 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     display: grid;
     gap: var(--s4);
     margin-bottom: var(--s5);
+  }
+  .m-title {
+    display: grid;
+    gap: var(--s2);
+  }
+  .m-title :global(.m-headline) {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: var(--s2);
+    flex-wrap: wrap;
+  }
+  .m-title :global(.m-figure) {
+    font: 650 40px/1.1 var(--serif);
+    letter-spacing: -0.02em;
+    color: var(--cause);
+  }
+  .m-title :global(.m-unit) {
+    color: var(--ink-2);
+    font-size: 17px;
+    flex: 1 1 14em;
+  }
+  .m-title :global(.m-parts) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--s1);
+  }
+  .m-title :global(.m-parts th) {
+    text-align: left;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .m-title :global(.m-parts td) {
+    text-align: right;
+    padding-left: var(--s3);
+    white-space: nowrap;
+  }
+  .m-title :global(.m-parts tr + tr > *) {
+    border-top: 1px solid var(--rule);
+  }
+  .m-list + .m-list {
+    margin-top: var(--s4);
+  }
+  .m-list-title {
+    font: 600 14px/1.4 var(--sans);
+    color: var(--ink-2);
+    margin: 0 0 var(--s2);
   }
   .dek {
     font-size: 18px;
@@ -271,7 +338,9 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .res-group details summary {
     cursor: pointer;
-    color: var(--blue);
+    color: var(--ink);
+    text-decoration: underline 1.5px color-mix(in srgb, var(--blue) 55%, transparent);
+    text-underline-offset: 4px;
     margin: var(--s2) 0;
   }
   /* The model: which one (only when there is a choice), then what it is */
@@ -303,11 +372,13 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .m-disclosure summary {
     cursor: pointer;
-    color: var(--blue);
+    color: var(--ink);
+    text-decoration: underline 1.5px color-mix(in srgb, var(--blue) 55%, transparent);
+    text-underline-offset: 4px;
     width: fit-content;
   }
   .m-disclosure summary:hover {
-    color: var(--blue-ink);
+    text-decoration-color: var(--blue-ink);
   }
   .m-disclosure[open] summary {
     margin-bottom: var(--s2);
@@ -340,6 +411,9 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .m-disclosure :global(.variant-list li a) {
     flex: 1;
+  }
+  .m-disclosure :global(.variant-note) {
+    margin: var(--s2) 0 0;
   }
   .m-disclosure :global(.variant-list li.current a) {
     color: var(--ink);

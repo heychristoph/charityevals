@@ -1,819 +1,869 @@
 {
- "id": "evidence-action-ifa-evac-beta-india",
- "name": "IFA CEA for EvAc Beta India grant",
- "kind": "charity",
- "cause": "global-health",
- "charity": "evidence-action",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"IFA CEA for EvAc Beta India grant\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "IFA CEA for EvAc Beta India grant (shared publicly)",
-  "url": "https://www.givewell.org/research/incubation-grants/march-2018-evidence-action-beta-iron-folic-acid",
-  "sheet": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-  "published": "2018-03-01",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0,
-   "uov_per_daly": 2,
-   "discount_rate": 0.04,
-   "uov_per_ln_consumption": 1.4426950408889634,
-   "life_value_multiplier": 1
+  "id": "evidence-action-ifa-evac-beta-india",
+  "name": "IFA CEA for EvAc Beta India grant",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "evidence-action",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Helps Indian states give children and adolescents iron and folic acid supplements to prevent anemia. GiveWell's spreadsheet \"IFA CEA for EvAc Beta India grant\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "IFA CEA for EvAc Beta India grant (shared publicly)",
+    "url": "https://www.givewell.org/research/incubation-grants/march-2018-evidence-action-beta-iron-folic-acid",
+    "sheet": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+    "published": "2018-03-01",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "uov_per_daly": 2,
+      "discount_rate": 0.04,
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "life_value_multiplier": 1,
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "IFA CEA for EvAc Beta India grant (shared publicly)",
+      "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (march 2018 evidence action beta iron folic acid)",
+      "url": "https://www.givewell.org/research/incubation-grants/march-2018-evidence-action-beta-iron-folic-acid",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "main",
+      "title": "Main"
+    },
+    {
+      "id": "supplementary_data",
+      "title": "Supplementary data"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line",
+      "kind": "ours"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    }
+  ],
+  "rows": [
+    {
+      "id": "iron_supplementation_cost_per_person_treated",
+      "label": "Iron supplementation cost per person treated",
+      "section": "main",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B2"
+      },
+      "explainer": "Guesstimate. Would like to refine. Chris has some further thoughts in this link.",
+      "format": "usd"
+    },
+    {
+      "id": "hypothetical_cohort",
+      "label": "Hypothetical cohort",
+      "section": "main",
+      "value": 10000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B3"
+      },
+      "explainer": "Arbitrary. Changing this value does not affect the bottom line estimates."
+    },
+    {
+      "id": "cost_to_treat_cohort",
+      "label": "Cost to treat cohort",
+      "section": "main",
+      "formula": "iron_supplementation_cost_per_person_treated * hypothetical_cohort",
+      "expected": 20000.0,
+      "format": "usd"
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_7",
+      "label": "Prevalent cases mild anemia (row 7)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B7"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "format": "percent",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_7",
+      "expected": 0.5557
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_8",
+      "label": "Prevalent cases mild anemia (row 8)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B8"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "format": "percent",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_8",
+      "expected": 0.548
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_9",
+      "label": "Prevalent cases mild anemia (row 9)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B9"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "format": "percent",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_9",
+      "expected": 0.3793
+    },
+    {
+      "id": "ida_prevalence_any_severity_by_age_group_in_india_15_19",
+      "label": "IDA prevalence (any severity) by age group in India: 15-19",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B10"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "format": "percent",
+      "formula": "@givewell_india.ida_prevalence_any_severity_by_age_group_in_india_15_19",
+      "expected": 0.3821
+    },
+    {
+      "id": "ida_prevalence_any_severity_by_age_group_in_india_average",
+      "label": "IDA prevalence (any severity) by age group in India: Average",
+      "section": "supplementary_data",
+      "formula": "avg(prevalent_cases_mild_anemia_row_7, prevalent_cases_mild_anemia_row_8, prevalent_cases_mild_anemia_row_9, ida_prevalence_any_severity_by_age_group_in_india_15_19)",
+      "expected": 0.466275,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit",
+      "label": "Proportion of cohort with iron-deficiency anemia (any severity)",
+      "section": "main",
+      "formula": "ida_prevalence_any_severity_by_age_group_in_india_average",
+      "expected": 0.466275,
+      "format": "percent"
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_3",
+      "label": "Prevalent cases mild anemia (row 3)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B3"
+      },
+      "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_3",
+      "expected": 215706218.1
+    },
+    {
+      "id": "prevalent_cases_moderate_anemia_row_3",
+      "label": "Prevalent cases moderate anemia (row 3)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!C3"
+      },
+      "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+      "formula": "@givewell.prevalent_cases_moderate_anemia_row_3",
+      "expected": 212827806.1
+    },
+    {
+      "id": "prevalent_cases_severe_anemia_row_3",
+      "label": "Prevalent cases severe anemia (row 3)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!D3"
+      },
+      "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
+      "formula": "@givewell.prevalent_cases_severe_anemia_row_3",
+      "expected": 18525569.5
+    },
+    {
+      "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent",
+      "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases mild anemia)",
+      "section": "supplementary_data",
+      "formula": "prevalent_cases_mild_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
+      "expected": 0.4824999198,
+      "format": "percent"
+    },
+    {
+      "id": "of_people_with_anemia_proportion_with_mild_anemia",
+      "label": "Of people with anemia, proportion with mild anemia",
+      "section": "main",
+      "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent",
+      "expected": 0.4824999198,
+      "format": "percent"
+    },
+    {
+      "id": "risk_ratio_anemia_iron_supplementation",
+      "label": "Risk ratio anemia, iron supplementation",
+      "section": "main",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B11"
+      },
+      "explainer": "Low et al 2013, p. E798. See also [private draft report on iron evidence base] - 0.5 is roughly in the middle of different estimates"
+    },
+    {
+      "id": "proportion_of_population_cured_of_mild_anemia_under_suppleme",
+      "label": "Proportion of population 'cured' of mild anemia under supplementation",
+      "section": "main",
+      "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_mild_anemia * risk_ratio_anemia_iron_supplementation",
+      "expected": 0.112488825,
+      "format": "percent"
+    },
+    {
+      "id": "yld_burden_of_a_year_of_mild_anemia",
+      "label": "YLD burden of a year of mild anemia",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B15"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Chris has some additional thoughts on DALY weights for anemia here.",
+      "formula": "@givewell.yld_burden_of_a_year_of_mild_anemia",
+      "expected": 0.004
+    },
+    {
+      "id": "mild_anemia_ylds_averted_in_cohort",
+      "label": "Mild anemia YLDs averted in cohort",
+      "section": "main",
+      "formula": "hypothetical_cohort * proportion_of_population_cured_of_mild_anemia_under_suppleme * yld_burden_of_a_year_of_mild_anemia",
+      "expected": 4.499553002
+    },
+    {
+      "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent_2",
+      "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases moderate anemia)",
+      "section": "supplementary_data",
+      "formula": "prevalent_cases_moderate_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
+      "expected": 0.4760613777,
+      "format": "percent"
+    },
+    {
+      "id": "of_people_with_anemia_proportion_with_moderate_anemia",
+      "label": "Of people with anemia, proportion with moderate anemia",
+      "section": "main",
+      "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent_2",
+      "expected": 0.4760613777,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_population_cured_of_moderate_anemia_under_supp",
+      "label": "Proportion of population 'cured' of moderate anemia under supplementation",
+      "section": "main",
+      "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_moderate_anemia * risk_ratio_anemia_iron_supplementation",
+      "expected": 0.1109877594,
+      "format": "percent"
+    },
+    {
+      "id": "yld_burden_of_a_year_of_moderate_anemia",
+      "label": "YLD burden of a year of moderate anemia",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B16"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
+      "formula": "@givewell.yld_burden_of_a_year_of_moderate_anemia",
+      "expected": 0.052
+    },
+    {
+      "id": "moderate_anemia_ylds_averted_in_cohort",
+      "label": "Moderate anemia YLDs averted in cohort",
+      "section": "main",
+      "formula": "hypothetical_cohort * proportion_of_population_cured_of_moderate_anemia_under_supp * yld_burden_of_a_year_of_moderate_anemia",
+      "expected": 57.71363491
+    },
+    {
+      "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent_3",
+      "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases severe anemia)",
+      "section": "supplementary_data",
+      "formula": "prevalent_cases_severe_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
+      "expected": 0.04143870249,
+      "format": "percent"
+    },
+    {
+      "id": "of_people_with_anemia_proportion_with_severe_anemia",
+      "label": "Of people with anemia, proportion with severe anemia",
+      "section": "main",
+      "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent_3",
+      "expected": 0.04143870249,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_population_cured_of_severe_anemia_under_supple",
+      "label": "Proportion of population 'cured' of severe anemia under supplementation",
+      "section": "main",
+      "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_severe_anemia * risk_ratio_anemia_iron_supplementation",
+      "expected": 0.009660915502,
+      "format": "percent"
+    },
+    {
+      "id": "yld_burden_of_a_year_of_severe_anemia",
+      "label": "YLD burden of a year of severe anemia",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B17"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
+      "formula": "@givewell.yld_burden_of_a_year_of_severe_anemia",
+      "expected": 0.149
+    },
+    {
+      "id": "severe_anemia_ylds_averted_in_cohort",
+      "label": "Severe anemia YLDs averted in cohort",
+      "section": "main",
+      "formula": "hypothetical_cohort * proportion_of_population_cured_of_severe_anemia_under_supple * yld_burden_of_a_year_of_severe_anemia",
+      "expected": 14.3947641
+    },
+    {
+      "id": "total_anemia_ylds_averted_in_cohort",
+      "label": "Total anemia YLDs averted in cohort",
+      "section": "main",
+      "formula": "sum(mild_anemia_ylds_averted_in_cohort, moderate_anemia_ylds_averted_in_cohort, severe_anemia_ylds_averted_in_cohort)",
+      "expected": 76.60795201
+    },
+    {
+      "id": "cost_per_anemia_yld_averted",
+      "label": "Cost per anemia YLD averted",
+      "section": "main",
+      "formula": "cost_to_treat_cohort / total_anemia_ylds_averted_in_cohort",
+      "expected": 261.0695035,
+      "format": "usd"
+    },
+    {
+      "id": "anemia_ylds_averted_per_10_000_2",
+      "label": "Anemia YLDs averted per $10,000",
+      "section": "main",
+      "formula": "10000 / cost_per_anemia_yld_averted",
+      "expected": 38.30397601
+    },
+    {
+      "id": "anemia_ylds_averted_per_10_000",
+      "label": "Anemia YLDs averted per $10,000",
+      "section": "main",
+      "formula": "anemia_ylds_averted_per_10_000_2",
+      "expected": 38.30397601
+    },
+    {
+      "id": "value_of_1_yld",
+      "label": "Value of 1 YLD",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B73"
+      },
+      "explainer": "From an older GiveWell value scale (1 here); it moves in proportion to the shared `uov_per_daly`.\n\nArbitrary starting point",
+      "formula": "1 * $uov_per_daly / 2",
+      "expected": 1.0
+    },
+    {
+      "id": "anemia_cases_averted",
+      "label": "Anemia cases averted",
+      "section": "main",
+      "formula": "anemia_ylds_averted_per_10_000 * value_of_1_yld",
+      "expected": 38.30397601
+    },
+    {
+      "id": "discount_rate",
+      "label": "Discount rate",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B38"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nRoughly the median in V1 of the 2018 CEA",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04
+    },
+    {
+      "id": "average_number_of_years_between_entering_fortification_progr",
+      "label": "Average number of years between 'entering fortification program' and beginning of long term benefits",
+      "section": "main",
+      "value": 12.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B37"
+      },
+      "explainer": "Benefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016"
+    },
+    {
+      "id": "duration_of_long_term_benefits_of_fortification_in_years",
+      "label": "Duration of long term benefits of fortification (in years)",
+      "section": "main",
+      "value": 30.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B39"
+      },
+      "explainer": "Median duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016"
+    },
+    {
+      "id": "change_in_intelligence_quotient_from_short_term_supplementat",
+      "label": "Change in intelligence quotient from short-term supplementation for anemic individuals (in standard deviations)",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B31"
+      },
+      "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)",
+      "formula": "@givewell.change_in_intelligence_quotient_from_short_term_supplementat",
+      "expected": 0.33
+    },
+    {
+      "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
+      "label": "Percentage increase in wages/consumption for every 1 point increase in IQ",
+      "section": "main",
+      "value": 0.01,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B32"
+      },
+      "explainer": "Same methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
+      "format": "percent"
+    },
+    {
+      "id": "speculative_adjustment_to_assess_the_long_term_benefit_of_ma",
+      "label": "Speculative adjustment to assess the long-term benefit of many years of iron",
+      "section": "main",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B33"
+      },
+      "explainer": "We see increases in IQ after supplementation for less than 1 year. It could be that there's a linear effect (e.g. one year of supplementation raises IQ by 5 points, 2 years raises IQ by 10 points). That's extremely implausible though. More likely, going from low haemoglobin levels to normal haemoglobin levels leads to an IQ increase of a couple points. I would guess that those cognitive benefits remain as long as someone is non-anemic and mostly disappear if haemoglobin levels return to the initial low levels. I have much more to say about this. More details here: https://docs.google.com/document/d/15ifHdYl-mI6ZF_SgksADD3myusxya3ZBYrPHLKt9_ao/edit?usp=sharing",
+      "format": "percent"
+    },
+    {
+      "id": "percentage_increase_in_wages_consumption_from_increase_in_iq",
+      "label": "Percentage increase in wages/consumption from increase in IQ from supplementation",
+      "section": "main",
+      "formula": "change_in_intelligence_quotient_from_short_term_supplementat * 15 * percentage_increase_in_wages_consumption_for_every_1_point_i * speculative_adjustment_to_assess_the_long_term_benefit_of_ma",
+      "expected": 0.00495,
+      "format": "percent"
+    },
+    {
+      "id": "increase_in_annual_ln_consumption_for_beneficiaries",
+      "label": "Increase in annual ln(consumption) for beneficiaries",
+      "section": "main",
+      "formula": "ln(1 + percentage_increase_in_wages_consumption_from_increase_in_iq) - ln(1)",
+      "expected": 0.00493778903
+    },
+    {
+      "id": "proportion_of_population_in_each_year_cohort_between_ages_3",
+      "label": "Proportion of population in each year cohort between ages 3-12",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B28"
+      },
+      "explainer": "Guesstimate based on demographic info used by Evidence Action. I would guess there are more beneficiaries in the 5-9 range than 15-19",
+      "format": "percent",
+      "formula": "@givewell.proportion_of_population_in_each_year_cohort_between_ages_3",
+      "expected": 0.65
+    },
+    {
+      "id": "proportion_of_children_with_anemia_at_baseline",
+      "label": "Proportion of children with anemia at baseline",
+      "section": "main",
+      "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit",
+      "expected": 0.466275,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_population_with_potential_benefits",
+      "label": "Proportion of population with (potential) benefits",
+      "section": "main",
+      "formula": "proportion_of_population_in_each_year_cohort_between_ages_3 * proportion_of_children_with_anemia_at_baseline",
+      "expected": 0.30307875,
+      "format": "percent"
+    },
+    {
+      "id": "average_increase_in_annual_ln_consumption_in_cohort_includin",
+      "label": "Average increase in annual ln(consumption) in cohort (including non-beneficiaries)",
+      "section": "main",
+      "formula": "increase_in_annual_ln_consumption_for_beneficiaries * proportion_of_population_with_potential_benefits",
+      "expected": 0.001496538927
+    },
+    {
+      "id": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
+      "label": "Present value of sum of average lifetime income benefits (including non-beneficiaries)",
+      "section": "main",
+      "formula": "pv(discount_rate, average_number_of_years_between_entering_fortification_progr + duration_of_long_term_benefits_of_fortification_in_years, -average_increase_in_annual_ln_consumption_in_cohort_includin) - pv(discount_rate, average_number_of_years_between_entering_fortification_progr, -average_increase_in_annual_ln_consumption_in_cohort_includin)",
+      "expected": 0.01616344797
+    },
+    {
+      "id": "multiplier_for_resource_sharing_in_households_beneficiaries",
+      "label": "Multiplier for resource sharing in households (beneficiaries will eventually have children)",
+      "section": "main",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B41"
+      },
+      "explainer": "Consistent with the multiplier used in GW's 2018 V1 deworming CEA",
+      "format": "percent"
+    },
+    {
+      "id": "sum_of_lifetime_income_benefits_per_individual_in_cohort_acc",
+      "label": "Sum of lifetime income benefits per individual in cohort, accounting for resource sharing",
+      "section": "main",
+      "formula": "present_value_of_sum_of_average_lifetime_income_benefits_inc * multiplier_for_resource_sharing_in_households_beneficiaries",
+      "expected": 0.03232689593
+    },
+    {
+      "id": "total_lifetime_income_benefits_for_full_cohort_in_terms_of_l",
+      "label": "Total lifetime income benefits for full cohort, in terms of ln(income)",
+      "section": "main",
+      "formula": "sum_of_lifetime_income_benefits_per_individual_in_cohort_acc * hypothetical_cohort",
+      "expected": 323.2689593
+    },
+    {
+      "id": "units_of_increase_in_ln_income_per_10_000_2",
+      "label": "Units of increase in ln(income) per $10,000",
+      "section": "main",
+      "formula": "total_lifetime_income_benefits_for_full_cohort_in_terms_of_l * (10000 / cost_to_treat_cohort)",
+      "expected": 161.6344797
+    },
+    {
+      "id": "units_of_increase_in_ln_income_per_10_000",
+      "label": "Units of increase in ln(income) per $10,000",
+      "section": "main",
+      "formula": "units_of_increase_in_ln_income_per_10_000_2",
+      "expected": 161.6344797
+    },
+    {
+      "id": "value_of_doubling_consumption_for_one_person_for_one_year",
+      "label": "Value of doubling consumption for one person for one year",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B74"
+      },
+      "explainer": "From an older GiveWell value scale (0.4 here); it moves in proportion to the shared `uov_per_ln_consumption`.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
+      "formula": "0.4 * $uov_per_ln_consumption * ln(2)",
+      "expected": 0.4
+    },
+    {
+      "id": "value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
+      "label": "Value of increasing ln(consumption) by one unit for one person for one year",
+      "section": "main",
+      "formula": "value_of_doubling_consumption_for_one_person_for_one_year / ln(2)",
+      "expected": 0.5770780164
+    },
+    {
+      "id": "units_of_value_per_10_000_coming_from_income_benefits",
+      "label": "Units of value per $10,000 coming from...: Income benefits",
+      "section": "main",
+      "formula": "units_of_increase_in_ln_income_per_10_000 * value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
+      "expected": 93.27570491
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_16",
+      "label": "Prevalent cases mild anemia (row 16)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B16"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool) For comparison, the equivalent figure in sub-Saharan Africa is 260.81 (~22x higher). See GBD Results tool: http://ghdx.healthdata.org/gbd-results-tool (Permalink function is not working)",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_16",
+      "expected": 12.16
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_17",
+      "label": "Prevalent cases mild anemia (row 17)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B17"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_17",
+      "expected": 4.2
+    },
+    {
+      "id": "prevalent_cases_mild_anemia_row_18",
+      "label": "Prevalent cases mild anemia (row 18)",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B18"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "formula": "@givewell.prevalent_cases_mild_anemia_row_18",
+      "expected": 3.29
+    },
+    {
+      "id": "malaria_mortality_rate_per_100_000_by_age_group_in_india_15",
+      "label": "Malaria mortality rate per 100,000 by age group in India: 15-19",
+      "section": "supplementary_data",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Supplementary data!B19"
+      },
+      "explainer": "GBD 2016 (permalink to query from the Results Tool)",
+      "formula": "@givewell_india.malaria_mortality_rate_per_100_000_by_age_group_in_india_15",
+      "expected": 0.91
+    },
+    {
+      "id": "malaria_mortality_rate_per_100_000_by_age_group_in_india_ave",
+      "label": "Malaria mortality rate per 100,000 by age group in India: Average",
+      "section": "supplementary_data",
+      "formula": "avg(prevalent_cases_mild_anemia_row_16, prevalent_cases_mild_anemia_row_17, prevalent_cases_mild_anemia_row_18, malaria_mortality_rate_per_100_000_by_age_group_in_india_15)",
+      "expected": 5.14
+    },
+    {
+      "id": "baseline_deaths_due_to_malaria_per_100_000_individuals_0_19",
+      "label": "Baseline deaths due to malaria per 100,000 individuals 0-19 in India",
+      "section": "main",
+      "formula": "malaria_mortality_rate_per_100_000_by_age_group_in_india_ave",
+      "expected": 5.14
+    },
+    {
+      "id": "relative_risk_of_malaria_mortality_with_ifa_supplementation",
+      "label": "Relative risk of malaria mortality with IFA supplementation",
+      "section": "main",
+      "value": 1.16,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B48"
+      },
+      "explainer": "We are unsure about the appropriate value for this parameter. Neuberger et al. 2016 finds a RR of 1.16 for clinical malaria in areas receiving iron supplementation where malaria control and management services are unavailable."
+    },
+    {
+      "id": "additional_direct_malaria_deaths_in_cohort",
+      "label": "Additional direct malaria deaths in cohort",
+      "section": "main",
+      "formula": "baseline_deaths_due_to_malaria_per_100_000_individuals_0_19 * (relative_risk_of_malaria_mortality_with_ifa_supplementation - 1) * (hypothetical_cohort / 100000)",
+      "expected": 0.08224
+    },
+    {
+      "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
+      "label": "Ratio of indirect malaria deaths per direct malaria death",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B50"
+      },
+      "explainer": "See the equivalent input in our SMC CEA for more details",
+      "formula": "@givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
+      "expected": 0.5
+    },
+    {
+      "id": "expected_additional_malaria_attributable_deaths_in_cohort_2",
+      "label": "Expected additional malaria-attributable deaths in cohort",
+      "section": "main",
+      "formula": "additional_direct_malaria_deaths_in_cohort * (1 + ratio_of_indirect_malaria_deaths_per_direct_malaria_death)",
+      "expected": 0.12336
+    },
+    {
+      "id": "expected_additional_malaria_attributable_deaths_in_cohort",
+      "label": "Expected additional malaria-attributable deaths in cohort",
+      "section": "main",
+      "formula": "expected_additional_malaria_attributable_deaths_in_cohort_2",
+      "expected": 0.12336
+    },
+    {
+      "id": "value_of_averting_one_death",
+      "label": "Value of averting one death`",
+      "section": "main",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B75"
+      },
+      "explainer": "GiveWell's moral weight, 30 units of value, times your multiplier on the value of a life.\n\nRoughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line",
+      "formula": "30 * $life_value_multiplier",
+      "expected": 30.0
+    },
+    {
+      "id": "increases_in_malaria_risk",
+      "label": "Increases in malaria risk",
+      "section": "main",
+      "formula": "-expected_additional_malaria_attributable_deaths_in_cohort * value_of_averting_one_death",
+      "expected": -3.7008
+    },
+    {
+      "id": "side_effect_ylds_caused_per_10_000",
+      "label": "Side effect YLDs caused per $10,000",
+      "section": "main",
+      "value": 0.8322461161,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B82"
+      },
+      "explainer": "Calculated in the source sheet as `=B69:C69`; kept as a fixed number here (range used as a number)."
+    },
+    {
+      "id": "adverse_side_effects",
+      "label": "Adverse side effects",
+      "section": "main",
+      "formula": "-side_effect_ylds_caused_per_10_000 * value_of_1_yld",
+      "expected": -0.8322461161
+    },
+    {
+      "id": "overall_units_of_value_per_10_000",
+      "label": "Overall units of value per $10,000",
+      "section": "main",
+      "formula": "sum(anemia_cases_averted, units_of_value_per_10_000_coming_from_income_benefits, increases_in_malaria_risk, adverse_side_effects)",
+      "expected": 127.0466348
+    },
+    {
+      "id": "givedirectly_units_of_increase_in_ln_consumption_for_each_10",
+      "label": "GiveDirectly units of increase in ln(consumption) for each $10,000 donated",
+      "section": "main",
+      "value": 25.24181792,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
+        "cell": "Main!B93"
+      },
+      "explainer": "Median outcome in V1 of the 2018 CEA. See rows 35 and 36 of the \"Cash\" tab in the linked CEA copy"
+    },
+    {
+      "id": "units_of_value_per_10_000_from_givedirectly",
+      "label": "Units of value per 10,000 from GiveDirectly",
+      "section": "main",
+      "formula": "givedirectly_units_of_increase_in_ln_consumption_for_each_10 * value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
+      "expected": 14.56649821
+    },
+    {
+      "id": "ifa_supplementation_is_x_times_as_cost_effective_as_givedire",
+      "label": "IFA supplementation is X times as cost-effective as GiveDirectly",
+      "section": "main",
+      "formula": "overall_units_of_value_per_10_000 / units_of_value_per_10_000_from_givedirectly",
+      "expected": 8.721837804
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(ifa_supplementation_is_x_times_as_cost_effective_as_givedire * cash_benchmark * units_of_value_per_10_000_from_givedirectly / 14.56649821) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest).\n\nThe sheet's multiple of cash, converted at GiveWell's benchmark and scaled by how the sheet's own GiveDirectly value (Units of value per 10,000 from GiveDirectly) moves with your assumptions, so that the multiple's denominator doesn't push the result the wrong way."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "ifa_supplementation_is_x_times_as_cost_effective_as_givedire",
+      "unit": "multiples of cash transfers"
+    }
   }
- },
- "resources": [
-  {
-   "title": "IFA CEA for EvAc Beta India grant (shared publicly)",
-   "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (march 2018 evidence action beta iron folic acid)",
-   "url": "https://www.givewell.org/research/incubation-grants/march-2018-evidence-action-beta-iron-folic-acid",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "main",
-   "title": "Main"
-  },
-  {
-   "id": "supplementary_data",
-   "title": "Supplementary data"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "iron_supplementation_cost_per_person_treated",
-   "label": "Iron supplementation cost per person treated",
-   "section": "main",
-   "value": 2.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B2"
-   },
-   "explainer": "Guesstimate. Would like to refine. Chris has some further thoughts in this link.",
-   "format": "usd"
-  },
-  {
-   "id": "hypothetical_cohort",
-   "label": "Hypothetical cohort",
-   "section": "main",
-   "value": 10000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B3"
-   },
-   "explainer": "Arbitrary. Changing this value does not affect the bottom line estimates."
-  },
-  {
-   "id": "cost_to_treat_cohort",
-   "label": "Cost to treat cohort",
-   "section": "main",
-   "formula": "iron_supplementation_cost_per_person_treated * hypothetical_cohort",
-   "expected": 20000.0,
-   "format": "usd"
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_7",
-   "label": "Prevalent cases mild anemia (row 7)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B7"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "format": "percent",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_7",
-   "expected": 0.5557
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_8",
-   "label": "Prevalent cases mild anemia (row 8)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B8"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "format": "percent",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_8",
-   "expected": 0.548
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_9",
-   "label": "Prevalent cases mild anemia (row 9)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B9"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "format": "percent",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_9",
-   "expected": 0.3793
-  },
-  {
-   "id": "ida_prevalence_any_severity_by_age_group_in_india_15_19",
-   "label": "IDA prevalence (any severity) by age group in India: 15-19",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B10"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "format": "percent",
-   "formula": "@givewell_india.ida_prevalence_any_severity_by_age_group_in_india_15_19",
-   "expected": 0.3821
-  },
-  {
-   "id": "ida_prevalence_any_severity_by_age_group_in_india_average",
-   "label": "IDA prevalence (any severity) by age group in India: Average",
-   "section": "supplementary_data",
-   "formula": "avg(prevalent_cases_mild_anemia_row_7, prevalent_cases_mild_anemia_row_8, prevalent_cases_mild_anemia_row_9, ida_prevalence_any_severity_by_age_group_in_india_15_19)",
-   "expected": 0.466275,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit",
-   "label": "Proportion of cohort with iron-deficiency anemia (any severity)",
-   "section": "main",
-   "formula": "ida_prevalence_any_severity_by_age_group_in_india_average",
-   "expected": 0.466275,
-   "format": "percent"
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_3",
-   "label": "Prevalent cases mild anemia (row 3)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B3"
-   },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_3",
-   "expected": 215706218.1
-  },
-  {
-   "id": "prevalent_cases_moderate_anemia_row_3",
-   "label": "Prevalent cases moderate anemia (row 3)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!C3"
-   },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
-   "formula": "@givewell.prevalent_cases_moderate_anemia_row_3",
-   "expected": 212827806.1
-  },
-  {
-   "id": "prevalent_cases_severe_anemia_row_3",
-   "label": "Prevalent cases severe anemia (row 3)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!D3"
-   },
-   "explainer": "Kassebaum et al. 2016, Table 2, p. 284",
-   "formula": "@givewell.prevalent_cases_severe_anemia_row_3",
-   "expected": 18525569.5
-  },
-  {
-   "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent",
-   "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases mild anemia)",
-   "section": "supplementary_data",
-   "formula": "prevalent_cases_mild_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
-   "expected": 0.4824999198,
-   "format": "percent"
-  },
-  {
-   "id": "of_people_with_anemia_proportion_with_mild_anemia",
-   "label": "Of people with anemia, proportion with mild anemia",
-   "section": "main",
-   "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent",
-   "expected": 0.4824999198,
-   "format": "percent"
-  },
-  {
-   "id": "risk_ratio_anemia_iron_supplementation",
-   "label": "Risk ratio anemia, iron supplementation",
-   "section": "main",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B11"
-   },
-   "explainer": "Low et al 2013, p. E798. See also [private draft report on iron evidence base] - 0.5 is roughly in the middle of different estimates"
-  },
-  {
-   "id": "proportion_of_population_cured_of_mild_anemia_under_suppleme",
-   "label": "Proportion of population 'cured' of mild anemia under supplementation",
-   "section": "main",
-   "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_mild_anemia * risk_ratio_anemia_iron_supplementation",
-   "expected": 0.112488825,
-   "format": "percent"
-  },
-  {
-   "id": "yld_burden_of_a_year_of_mild_anemia",
-   "label": "YLD burden of a year of mild anemia",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B15"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Chris has some additional thoughts on DALY weights for anemia here.",
-   "formula": "@givewell.yld_burden_of_a_year_of_mild_anemia",
-   "expected": 0.004
-  },
-  {
-   "id": "mild_anemia_ylds_averted_in_cohort",
-   "label": "Mild anemia YLDs averted in cohort",
-   "section": "main",
-   "formula": "hypothetical_cohort * proportion_of_population_cured_of_mild_anemia_under_suppleme * yld_burden_of_a_year_of_mild_anemia",
-   "expected": 4.499553002
-  },
-  {
-   "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent_2",
-   "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases moderate anemia)",
-   "section": "supplementary_data",
-   "formula": "prevalent_cases_moderate_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
-   "expected": 0.4760613777,
-   "format": "percent"
-  },
-  {
-   "id": "of_people_with_anemia_proportion_with_moderate_anemia",
-   "label": "Of people with anemia, proportion with moderate anemia",
-   "section": "main",
-   "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent_2",
-   "expected": 0.4760613777,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_population_cured_of_moderate_anemia_under_supp",
-   "label": "Proportion of population 'cured' of moderate anemia under supplementation",
-   "section": "main",
-   "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_moderate_anemia * risk_ratio_anemia_iron_supplementation",
-   "expected": 0.1109877594,
-   "format": "percent"
-  },
-  {
-   "id": "yld_burden_of_a_year_of_moderate_anemia",
-   "label": "YLD burden of a year of moderate anemia",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B16"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
-   "formula": "@givewell.yld_burden_of_a_year_of_moderate_anemia",
-   "expected": 0.052
-  },
-  {
-   "id": "moderate_anemia_ylds_averted_in_cohort",
-   "label": "Moderate anemia YLDs averted in cohort",
-   "section": "main",
-   "formula": "hypothetical_cohort * proportion_of_population_cured_of_moderate_anemia_under_supp * yld_burden_of_a_year_of_moderate_anemia",
-   "expected": 57.71363491
-  },
-  {
-   "id": "anemia_prevalence_by_severity_in_india_proportion_prevalent_3",
-   "label": "Anemia prevalence by severity in India: Proportion (Prevalent cases severe anemia)",
-   "section": "supplementary_data",
-   "formula": "prevalent_cases_severe_anemia_row_3 / sum(prevalent_cases_mild_anemia_row_3, prevalent_cases_moderate_anemia_row_3, prevalent_cases_severe_anemia_row_3)",
-   "expected": 0.04143870249,
-   "format": "percent"
-  },
-  {
-   "id": "of_people_with_anemia_proportion_with_severe_anemia",
-   "label": "Of people with anemia, proportion with severe anemia",
-   "section": "main",
-   "formula": "anemia_prevalence_by_severity_in_india_proportion_prevalent_3",
-   "expected": 0.04143870249,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_population_cured_of_severe_anemia_under_supple",
-   "label": "Proportion of population 'cured' of severe anemia under supplementation",
-   "section": "main",
-   "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit * of_people_with_anemia_proportion_with_severe_anemia * risk_ratio_anemia_iron_supplementation",
-   "expected": 0.009660915502,
-   "format": "percent"
-  },
-  {
-   "id": "yld_burden_of_a_year_of_severe_anemia",
-   "label": "YLD burden of a year of severe anemia",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B17"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2.",
-   "formula": "@givewell.yld_burden_of_a_year_of_severe_anemia",
-   "expected": 0.149
-  },
-  {
-   "id": "severe_anemia_ylds_averted_in_cohort",
-   "label": "Severe anemia YLDs averted in cohort",
-   "section": "main",
-   "formula": "hypothetical_cohort * proportion_of_population_cured_of_severe_anemia_under_supple * yld_burden_of_a_year_of_severe_anemia",
-   "expected": 14.3947641
-  },
-  {
-   "id": "total_anemia_ylds_averted_in_cohort",
-   "label": "Total anemia YLDs averted in cohort",
-   "section": "main",
-   "formula": "sum(mild_anemia_ylds_averted_in_cohort, moderate_anemia_ylds_averted_in_cohort, severe_anemia_ylds_averted_in_cohort)",
-   "expected": 76.60795201
-  },
-  {
-   "id": "cost_per_anemia_yld_averted",
-   "label": "Cost per anemia YLD averted",
-   "section": "main",
-   "formula": "cost_to_treat_cohort / total_anemia_ylds_averted_in_cohort",
-   "expected": 261.0695035,
-   "format": "usd"
-  },
-  {
-   "id": "anemia_ylds_averted_per_10_000_2",
-   "label": "Anemia YLDs averted per $10,000",
-   "section": "main",
-   "formula": "10000 / cost_per_anemia_yld_averted",
-   "expected": 38.30397601
-  },
-  {
-   "id": "anemia_ylds_averted_per_10_000",
-   "label": "Anemia YLDs averted per $10,000",
-   "section": "main",
-   "formula": "anemia_ylds_averted_per_10_000_2",
-   "expected": 38.30397601
-  },
-  {
-   "id": "value_of_1_yld",
-   "label": "Value of 1 YLD",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B73"
-   },
-   "explainer": "From an older GiveWell value scale (1 here); it moves in proportion to the shared `uov_per_daly`.\n\nArbitrary starting point",
-   "formula": "1 * $uov_per_daly / 2",
-   "expected": 1.0
-  },
-  {
-   "id": "anemia_cases_averted",
-   "label": "Anemia cases averted",
-   "section": "main",
-   "formula": "anemia_ylds_averted_per_10_000 * value_of_1_yld",
-   "expected": 38.30397601
-  },
-  {
-   "id": "discount_rate",
-   "label": "Discount rate",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B38"
-   },
-   "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nRoughly the median in V1 of the 2018 CEA",
-   "format": "percent",
-   "formula": "$discount_rate",
-   "expected": 0.04
-  },
-  {
-   "id": "average_number_of_years_between_entering_fortification_progr",
-   "label": "Average number of years between 'entering fortification program' and beginning of long term benefits",
-   "section": "main",
-   "value": 12.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B37"
-   },
-   "explainer": "Benefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016"
-  },
-  {
-   "id": "duration_of_long_term_benefits_of_fortification_in_years",
-   "label": "Duration of long term benefits of fortification (in years)",
-   "section": "main",
-   "value": 30.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B39"
-   },
-   "explainer": "Median duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016"
-  },
-  {
-   "id": "change_in_intelligence_quotient_from_short_term_supplementat",
-   "label": "Change in intelligence quotient from short-term supplementation for anemic individuals (in standard deviations)",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B31"
-   },
-   "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)",
-   "formula": "@givewell.change_in_intelligence_quotient_from_short_term_supplementat",
-   "expected": 0.33
-  },
-  {
-   "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
-   "label": "Percentage increase in wages/consumption for every 1 point increase in IQ",
-   "section": "main",
-   "value": 0.01,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B32"
-   },
-   "explainer": "Same methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
-   "format": "percent"
-  },
-  {
-   "id": "speculative_adjustment_to_assess_the_long_term_benefit_of_ma",
-   "label": "Speculative adjustment to assess the long-term benefit of many years of iron",
-   "section": "main",
-   "value": 0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B33"
-   },
-   "explainer": "We see increases in IQ after supplementation for less than 1 year. It could be that there's a linear effect (e.g. one year of supplementation raises IQ by 5 points, 2 years raises IQ by 10 points). That's extremely implausible though. More likely, going from low haemoglobin levels to normal haemoglobin levels leads to an IQ increase of a couple points. I would guess that those cognitive benefits remain as long as someone is non-anemic and mostly disappear if haemoglobin levels return to the initial low levels. I have much more to say about this. More details here: https://docs.google.com/document/d/15ifHdYl-mI6ZF_SgksADD3myusxya3ZBYrPHLKt9_ao/edit?usp=sharing",
-   "format": "percent"
-  },
-  {
-   "id": "percentage_increase_in_wages_consumption_from_increase_in_iq",
-   "label": "Percentage increase in wages/consumption from increase in IQ from supplementation",
-   "section": "main",
-   "formula": "change_in_intelligence_quotient_from_short_term_supplementat * 15 * percentage_increase_in_wages_consumption_for_every_1_point_i * speculative_adjustment_to_assess_the_long_term_benefit_of_ma",
-   "expected": 0.00495,
-   "format": "percent"
-  },
-  {
-   "id": "increase_in_annual_ln_consumption_for_beneficiaries",
-   "label": "Increase in annual ln(consumption) for beneficiaries",
-   "section": "main",
-   "formula": "ln(1 + percentage_increase_in_wages_consumption_from_increase_in_iq) - ln(1)",
-   "expected": 0.00493778903
-  },
-  {
-   "id": "proportion_of_population_in_each_year_cohort_between_ages_3",
-   "label": "Proportion of population in each year cohort between ages 3-12",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B28"
-   },
-   "explainer": "Guesstimate based on demographic info used by Evidence Action. I would guess there are more beneficiaries in the 5-9 range than 15-19",
-   "format": "percent",
-   "formula": "@givewell.proportion_of_population_in_each_year_cohort_between_ages_3",
-   "expected": 0.65
-  },
-  {
-   "id": "proportion_of_children_with_anemia_at_baseline",
-   "label": "Proportion of children with anemia at baseline",
-   "section": "main",
-   "formula": "proportion_of_cohort_with_iron_deficiency_anemia_any_severit",
-   "expected": 0.466275,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_population_with_potential_benefits",
-   "label": "Proportion of population with (potential) benefits",
-   "section": "main",
-   "formula": "proportion_of_population_in_each_year_cohort_between_ages_3 * proportion_of_children_with_anemia_at_baseline",
-   "expected": 0.30307875,
-   "format": "percent"
-  },
-  {
-   "id": "average_increase_in_annual_ln_consumption_in_cohort_includin",
-   "label": "Average increase in annual ln(consumption) in cohort (including non-beneficiaries)",
-   "section": "main",
-   "formula": "increase_in_annual_ln_consumption_for_beneficiaries * proportion_of_population_with_potential_benefits",
-   "expected": 0.001496538927
-  },
-  {
-   "id": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
-   "label": "Present value of sum of average lifetime income benefits (including non-beneficiaries)",
-   "section": "main",
-   "formula": "pv(discount_rate, average_number_of_years_between_entering_fortification_progr + duration_of_long_term_benefits_of_fortification_in_years, -average_increase_in_annual_ln_consumption_in_cohort_includin) - pv(discount_rate, average_number_of_years_between_entering_fortification_progr, -average_increase_in_annual_ln_consumption_in_cohort_includin)",
-   "expected": 0.01616344797
-  },
-  {
-   "id": "multiplier_for_resource_sharing_in_households_beneficiaries",
-   "label": "Multiplier for resource sharing in households (beneficiaries will eventually have children)",
-   "section": "main",
-   "value": 2.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B41"
-   },
-   "explainer": "Consistent with the multiplier used in GW's 2018 V1 deworming CEA",
-   "format": "percent"
-  },
-  {
-   "id": "sum_of_lifetime_income_benefits_per_individual_in_cohort_acc",
-   "label": "Sum of lifetime income benefits per individual in cohort, accounting for resource sharing",
-   "section": "main",
-   "formula": "present_value_of_sum_of_average_lifetime_income_benefits_inc * multiplier_for_resource_sharing_in_households_beneficiaries",
-   "expected": 0.03232689593
-  },
-  {
-   "id": "total_lifetime_income_benefits_for_full_cohort_in_terms_of_l",
-   "label": "Total lifetime income benefits for full cohort, in terms of ln(income)",
-   "section": "main",
-   "formula": "sum_of_lifetime_income_benefits_per_individual_in_cohort_acc * hypothetical_cohort",
-   "expected": 323.2689593
-  },
-  {
-   "id": "units_of_increase_in_ln_income_per_10_000_2",
-   "label": "Units of increase in ln(income) per $10,000",
-   "section": "main",
-   "formula": "total_lifetime_income_benefits_for_full_cohort_in_terms_of_l * (10000 / cost_to_treat_cohort)",
-   "expected": 161.6344797
-  },
-  {
-   "id": "units_of_increase_in_ln_income_per_10_000",
-   "label": "Units of increase in ln(income) per $10,000",
-   "section": "main",
-   "formula": "units_of_increase_in_ln_income_per_10_000_2",
-   "expected": 161.6344797
-  },
-  {
-   "id": "value_of_doubling_consumption_for_one_person_for_one_year",
-   "label": "Value of doubling consumption for one person for one year",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B74"
-   },
-   "explainer": "From an older GiveWell value scale (0.4 here); it moves in proportion to the shared `uov_per_ln_consumption`.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
-   "formula": "0.4 * $uov_per_ln_consumption / 1.4426950408889634",
-   "expected": 0.4
-  },
-  {
-   "id": "value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
-   "label": "Value of increasing ln(consumption) by one unit for one person for one year",
-   "section": "main",
-   "formula": "value_of_doubling_consumption_for_one_person_for_one_year / ln(2)",
-   "expected": 0.5770780164
-  },
-  {
-   "id": "units_of_value_per_10_000_coming_from_income_benefits",
-   "label": "Units of value per $10,000 coming from...: Income benefits",
-   "section": "main",
-   "formula": "units_of_increase_in_ln_income_per_10_000 * value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
-   "expected": 93.27570491
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_16",
-   "label": "Prevalent cases mild anemia (row 16)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B16"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool) For comparison, the equivalent figure in sub-Saharan Africa is 260.81 (~22x higher). See GBD Results tool: http://ghdx.healthdata.org/gbd-results-tool (Permalink function is not working)",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_16",
-   "expected": 12.16
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_17",
-   "label": "Prevalent cases mild anemia (row 17)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B17"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_17",
-   "expected": 4.2
-  },
-  {
-   "id": "prevalent_cases_mild_anemia_row_18",
-   "label": "Prevalent cases mild anemia (row 18)",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B18"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "formula": "@givewell.prevalent_cases_mild_anemia_row_18",
-   "expected": 3.29
-  },
-  {
-   "id": "malaria_mortality_rate_per_100_000_by_age_group_in_india_15",
-   "label": "Malaria mortality rate per 100,000 by age group in India: 15-19",
-   "section": "supplementary_data",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Supplementary data!B19"
-   },
-   "explainer": "GBD 2016 (permalink to query from the Results Tool)",
-   "formula": "@givewell_india.malaria_mortality_rate_per_100_000_by_age_group_in_india_15",
-   "expected": 0.91
-  },
-  {
-   "id": "malaria_mortality_rate_per_100_000_by_age_group_in_india_ave",
-   "label": "Malaria mortality rate per 100,000 by age group in India: Average",
-   "section": "supplementary_data",
-   "formula": "avg(prevalent_cases_mild_anemia_row_16, prevalent_cases_mild_anemia_row_17, prevalent_cases_mild_anemia_row_18, malaria_mortality_rate_per_100_000_by_age_group_in_india_15)",
-   "expected": 5.14
-  },
-  {
-   "id": "baseline_deaths_due_to_malaria_per_100_000_individuals_0_19",
-   "label": "Baseline deaths due to malaria per 100,000 individuals 0-19 in India",
-   "section": "main",
-   "formula": "malaria_mortality_rate_per_100_000_by_age_group_in_india_ave",
-   "expected": 5.14
-  },
-  {
-   "id": "relative_risk_of_malaria_mortality_with_ifa_supplementation",
-   "label": "Relative risk of malaria mortality with IFA supplementation",
-   "section": "main",
-   "value": 1.16,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B48"
-   },
-   "explainer": "We are unsure about the appropriate value for this parameter. Neuberger et al. 2016 finds a RR of 1.16 for clinical malaria in areas receiving iron supplementation where malaria control and management services are unavailable."
-  },
-  {
-   "id": "additional_direct_malaria_deaths_in_cohort",
-   "label": "Additional direct malaria deaths in cohort",
-   "section": "main",
-   "formula": "baseline_deaths_due_to_malaria_per_100_000_individuals_0_19 * (relative_risk_of_malaria_mortality_with_ifa_supplementation - 1) * (hypothetical_cohort / 100000)",
-   "expected": 0.08224
-  },
-  {
-   "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
-   "label": "Ratio of indirect malaria deaths per direct malaria death",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B50"
-   },
-   "explainer": "See the equivalent input in our SMC CEA for more details",
-   "formula": "@givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
-   "expected": 0.5
-  },
-  {
-   "id": "expected_additional_malaria_attributable_deaths_in_cohort_2",
-   "label": "Expected additional malaria-attributable deaths in cohort",
-   "section": "main",
-   "formula": "additional_direct_malaria_deaths_in_cohort * (1 + ratio_of_indirect_malaria_deaths_per_direct_malaria_death)",
-   "expected": 0.12336
-  },
-  {
-   "id": "expected_additional_malaria_attributable_deaths_in_cohort",
-   "label": "Expected additional malaria-attributable deaths in cohort",
-   "section": "main",
-   "formula": "expected_additional_malaria_attributable_deaths_in_cohort_2",
-   "expected": 0.12336
-  },
-  {
-   "id": "value_of_averting_one_death",
-   "label": "Value of averting one death`",
-   "section": "main",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B75"
-   },
-   "explainer": "GiveWell's moral weight, 30 units of value, times your multiplier on the value of a life.\n\nRoughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line",
-   "formula": "30 * $life_value_multiplier",
-   "expected": 30.0
-  },
-  {
-   "id": "increases_in_malaria_risk",
-   "label": "Increases in malaria risk",
-   "section": "main",
-   "formula": "-expected_additional_malaria_attributable_deaths_in_cohort * value_of_averting_one_death",
-   "expected": -3.7008
-  },
-  {
-   "id": "side_effect_ylds_caused_per_10_000",
-   "label": "Side effect YLDs caused per $10,000",
-   "section": "main",
-   "value": 0.8322461161,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B82"
-   },
-   "explainer": "Calculated in the source sheet as `=B69:C69`; kept as a fixed number here (range used as a number)."
-  },
-  {
-   "id": "adverse_side_effects",
-   "label": "Adverse side effects",
-   "section": "main",
-   "formula": "-side_effect_ylds_caused_per_10_000 * value_of_1_yld",
-   "expected": -0.8322461161
-  },
-  {
-   "id": "overall_units_of_value_per_10_000",
-   "label": "Overall units of value per $10,000",
-   "section": "main",
-   "formula": "sum(anemia_cases_averted, units_of_value_per_10_000_coming_from_income_benefits, increases_in_malaria_risk, adverse_side_effects)",
-   "expected": 127.0466348
-  },
-  {
-   "id": "givedirectly_units_of_increase_in_ln_consumption_for_each_10",
-   "label": "GiveDirectly units of increase in ln(consumption) for each $10,000 donated",
-   "section": "main",
-   "value": 25.24181792,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
-    "cell": "Main!B93"
-   },
-   "explainer": "Median outcome in V1 of the 2018 CEA. See rows 35 and 36 of the \"Cash\" tab in the linked CEA copy"
-  },
-  {
-   "id": "units_of_value_per_10_000_from_givedirectly",
-   "label": "Units of value per 10,000 from GiveDirectly",
-   "section": "main",
-   "formula": "givedirectly_units_of_increase_in_ln_consumption_for_each_10 * value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
-   "expected": 14.56649821
-  },
-  {
-   "id": "ifa_supplementation_is_x_times_as_cost_effective_as_givedire",
-   "label": "IFA supplementation is X times as cost-effective as GiveDirectly",
-   "section": "main",
-   "formula": "overall_units_of_value_per_10_000 / units_of_value_per_10_000_from_givedirectly",
-   "expected": 8.721837804
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "ifa_supplementation_is_x_times_as_cost_effective_as_givedire * cash_benchmark * units_of_value_per_10_000_from_givedirectly / 14.56649821",
-   "explainer": "The sheet's multiple of cash, converted at GiveWell's benchmark and scaled by how the sheet's own GiveDirectly value (Units of value per 10,000 from GiveDirectly) moves with your assumptions, so that the multiple's denominator doesn't push the result the wrong way."
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

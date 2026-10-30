@@ -13,13 +13,13 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
     "published": "2024-11-01",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check HLI's terms before republishing"
+    "license": "© Happier Lives Institute; no licence published"
   },
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0,
+      "discount_rate": 0
     }
   },
   "sections": [
@@ -44,8 +44,18 @@
       "title": "Cost"
     },
     {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    },
+    {
       "id": "bottom",
       "title": "Bottom line"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not HLI's. HLI counts a year of better wellbeing the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so HLI's numbers reproduce."
     }
   ],
   "rows": [
@@ -86,7 +96,7 @@
       "id": "prior_total_effect_on_the_individual_sd_years",
       "section": "ev_prior",
       "label": "Total effect on the individual [SD-years]",
-      "formula": "prior_initial_effect_sds * prior_effective_duration_years * 0.5",
+      "formula": "prior_initial_effect_sds * prior_effective_duration_years * 0.5 * prior_discount_factor",
       "expected": 1.02352474
     },
     {
@@ -344,7 +354,7 @@
       "id": "rct_total_effect_on_the_individual_sd_years",
       "section": "ev_rct",
       "label": "Total effect on the individual [SD-years]",
-      "formula": "rct_initial_effect_sds * rct_effective_duration_years * 0.5",
+      "formula": "rct_initial_effect_sds * rct_effective_duration_years * 0.5 * rct_discount_factor",
       "expected": 0.07361625136
     },
     {
@@ -589,7 +599,7 @@
       "id": "me_total_effect_on_the_individual_sd_years",
       "section": "ev_me",
       "label": "Total effect on the individual [SD-years]",
-      "formula": "me_initial_effect_sds*me_effective_duration_years*0.5",
+      "formula": "me_initial_effect_sds*me_effective_duration_years*0.5 * prior_discount_factor",
       "expected": 1.375515377
     },
     {
@@ -811,6 +821,38 @@
       "explainer": "HLI's estimate for this body of evidence (SM M&E)."
     },
     {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future wellbeing",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so the effect can be discounted smoothly as it fades rather than in yearly steps."
+    },
+    {
+      "id": "prior_discount_factor",
+      "section": "discounting",
+      "label": "Discount factor: prior evidence and SM M&E (same duration)",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, ((continuous_discount_rate * prior_effective_duration_years) - 1 + exp(-(continuous_discount_rate * prior_effective_duration_years))) / (0.5 * (continuous_discount_rate * prior_effective_duration_years) * (continuous_discount_rate * prior_effective_duration_years)), 1)",
+      "explainer": "HLI's effect starts at the initial effect and fades in a straight line to zero over the effective duration (the triangle in the total-effect row). This is the present value of that triangle at the discount rate, as a share of its undiscounted area: 1 at a 0% rate, about 0.96 for a 3.5-year effect at 4%."
+    },
+    {
+      "id": "rct_discount_factor",
+      "section": "discounting",
+      "label": "Discount factor: Baird et al.",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, ((continuous_discount_rate * rct_effective_duration_years) - 1 + exp(-(continuous_discount_rate * rct_effective_duration_years))) / (0.5 * (continuous_discount_rate * rct_effective_duration_years) * (continuous_discount_rate * rct_effective_duration_years)), 1)",
+      "explainer": "HLI's effect starts at the initial effect and fades in a straight line to zero over the effective duration (the triangle in the total-effect row). This is the present value of that triangle at the discount rate, as a share of its undiscounted area: 1 at a 0% rate, about 0.96 for a 3.5-year effect at 4%."
+    },
+    {
       "id": "charity_effect",
       "section": "combined",
       "label": "Predicted effect per person treated, including household",
@@ -894,17 +936,63 @@
       "expected": 24.77010672
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "wellbys_per_dollar",
-      "section": "bottom",
+      "section": "staff_pay",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "wellbys_per_1000 / 1000"
+      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
     "row": "wellbys_per_dollar",
     "unit": "wellby",
-    "label": "WELLBYs per dollar"
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1000",
+      "unit": "WELLBYs per $1,000"
+    }
   },
   "resources": [
     {

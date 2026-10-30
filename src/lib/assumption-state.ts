@@ -2,51 +2,56 @@
 // and mirrored to localStorage (so they survive navigation). Only values that differ from the
 // defaults are stored. Every island on the page subscribes to the same store.
 import { useSyncExternalStore } from "react";
-import type { View } from "../engine/model";
+import assumptions from "../../assumptions/default.json";
 
 const KEY = "charityevals:assumptions";
-const VIEW_KEY = "charityevals:view";
+/** Where an evaluator view, since removed, was kept: cleared so no one is left in it. */
+const OLD_VIEW_KEY = "charityevals:view";
 type Overrides = Record<string, number>;
 
 let current: Overrides = {};
-let view: View = "charityevals";
 const listeners = new Set<() => void>();
 let loaded = false;
+
+/** Assumptions since renamed or rescaled: old id → [new id, factor]. Links shared before the change
+ * keep their meaning. The chicken weight was a multiplier on Rethink Priorities' median (1 = 33.2%);
+ * it now stores the weight itself. */
+export const LEGACY: Record<string, [string, number]> = { animal_moral_weight: ["chicken_vs_person", 0.332] };
+
+/** Rates now fixed from evidence: an old link's override for one is dropped, not kept unused. */
+const FIXED = new Set(assumptions.rows.filter((r) => (r as { fixed?: boolean }).fixed).map((r) => r.id));
+
+export function upgrade(o: Overrides): Overrides {
+  const out: Overrides = {};
+  for (const [k, v] of Object.entries(o)) if (!(k in LEGACY) && !FIXED.has(k)) out[k] = v;
+  for (const [k, v] of Object.entries(o)) {
+    const legacy = LEGACY[k];
+    if (legacy && !(legacy[0] in out)) out[legacy[0]] = v * legacy[1];
+  }
+  return out;
+}
 
 function load(): Overrides {
   if (typeof window === "undefined") return {};
   const params = new URLSearchParams(window.location.search);
   const fromUrl: Overrides = {};
   for (const [k, v] of params) if (k.startsWith("a.") && Number.isFinite(Number(v))) fromUrl[k.slice(2)] = Number(v);
-  if (Object.keys(fromUrl).length) return fromUrl;
+  if (Object.keys(fromUrl).length) return upgrade(fromUrl);
   try {
-    return JSON.parse(localStorage.getItem(KEY) ?? "{}");
+    return upgrade(JSON.parse(localStorage.getItem(KEY) ?? "{}"));
   } catch {
     return {};
-  }
-}
-
-function loadView(): View {
-  if (typeof window === "undefined") return "charityevals";
-  const fromUrl = new URLSearchParams(window.location.search).get("view");
-  if (fromUrl === "evaluator" || fromUrl === "charityevals") return fromUrl;
-  try {
-    return localStorage.getItem(VIEW_KEY) === "evaluator" ? "evaluator" : "charityevals";
-  } catch {
-    return "charityevals";
   }
 }
 
 function persist() {
   try {
     localStorage.setItem(KEY, JSON.stringify(current));
-    localStorage.setItem(VIEW_KEY, view);
   } catch {
     /* private mode: URL still carries the state */
   }
   const url = new URL(window.location.href);
-  if (view === "evaluator") url.searchParams.set("view", "evaluator");
-  else url.searchParams.delete("view");
+  url.searchParams.delete("view");
   for (const k of [...url.searchParams.keys()]) if (k.startsWith("a.")) url.searchParams.delete(k);
   for (const [k, v] of Object.entries(current)) url.searchParams.set(`a.${k}`, String(Number(v.toPrecision(6))));
   history.replaceState(null, "", url);
@@ -55,8 +60,12 @@ function persist() {
 function ensureLoaded() {
   if (!loaded && typeof window !== "undefined") {
     current = load();
-    view = loadView();
     loaded = true;
+    try {
+      localStorage.removeItem(OLD_VIEW_KEY);
+    } catch {
+      /* private mode */
+    }
   }
 }
 
@@ -74,24 +83,6 @@ export function resetAssumptions() {
   current = {};
   persist();
   listeners.forEach((l) => l());
-}
-
-export function setView(next: View) {
-  ensureLoaded();
-  view = next;
-  persist();
-  listeners.forEach((l) => l());
-}
-
-export function useView(): View {
-  return useSyncExternalStore(
-    (l) => {
-      listeners.add(l);
-      return () => listeners.delete(l);
-    },
-    () => (ensureLoaded(), view),
-    () => "charityevals",
-  );
 }
 
 const EMPTY: Overrides = {};

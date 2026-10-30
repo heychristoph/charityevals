@@ -5,6 +5,7 @@
     {
       "id": "sads_per_hen_year_cage_to_aviary",
       "label": "SADs averted per hen-year moved from a battery cage to an aviary",
+      "change": "a year a hen spends in an aviary instead of a battery cage",
       "unit": "SADs / hen-year",
       "format": "number",
       "value": { "low": 7.93, "best": 17.49, "high": 17.49 },
@@ -21,6 +22,7 @@
     {
       "id": "sads_per_hen_year_enriched_to_aviary",
       "label": "SADs averted per hen-year moved from an enriched cage to an aviary",
+      "change": "a year a hen spends in an aviary instead of an enriched cage",
       "unit": "SADs / hen-year",
       "format": "number",
       "value": { "low": 1.5, "best": 3.05, "high": 6.1 },
@@ -37,6 +39,7 @@
     {
       "id": "sads_per_broiler_bcc",
       "label": "SADs averted per broiler chicken raised under Better Chicken Commitment standards",
+      "change": "a broiler chicken raised to Better Chicken Commitment standards",
       "unit": "SADs / chicken",
       "format": "number",
       "value": { "low": 0.32, "best": 0.64, "high": 1.28 },
@@ -52,6 +55,7 @@
     {
       "id": "sads_per_meal_replaced",
       "label": "SADs averted per animal-product meal replaced by a plant-based meal",
+      "change": "a meal replaced by a plant-based one",
       "unit": "SADs / meal",
       "format": "number",
       "value": { "low": 0.084, "best": 0.902, "high": 1.72 },
@@ -67,6 +71,7 @@
     {
       "id": "animals_spared_per_meal_replaced",
       "label": "Animals spared per animal-product meal replaced",
+      "change": "a meal replaced by a plant-based one",
       "unit": "animals / meal",
       "format": "small",
       "value": { "low": 0.05, "best": 0.104, "high": 0.13 },
@@ -78,6 +83,70 @@
         "retrieved": "2026-10-26"
       },
       "explainer": "How many animals are no longer raised for each meal replaced. Context only: SADs, not animal counts, are the comparable outcome. Range is ours, roughly halving for beef-heavy diets and up to ACE's other estimates for chicken- and fish-heavy diets."
+    },
+    {
+      "id": "sads_per_shrimp_stunned",
+      "label": "SADs averted per shrimp electrically stunned before slaughter",
+      "change": "stunning a shrimp before slaughter",
+      "unit": "SADs / shrimp",
+      "format": "small",
+      "value": { "low": 0.00452, "best": 0.00452, "high": 0.0973 },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, Shrimp Welfare Project CEA (2025), 'Program 1: HSI CEA' tab",
+        "url": "https://docs.google.com/spreadsheets/d/1ZMSPjCga107ObiFOG1y7PlHeM_7r60b95wgGuRRUDiE/edit",
+        "cell": "Program 1: HSI CEA!B11",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Suffering spared when a farmed shrimp is stunned with electricity before slaughter instead of dying slowly in ice slurry or by asphyxiation, in Ambitious Impact's suffering-adjusted days (SADs).\n\nBest guess: the 0.00452 ACE used in its 2025 review of the Shrimp Welfare Project, its most recent figure. High end: the 0.0973 in ACE's 2024 review of the Aquatic Life Institute, from Ambitious Impact's calculation, which assumes 20 minutes of the most intense pain in ice slurry. ACE's figures differ 21-fold for the same change; ACE hasn't said why, so models that use this fact carry that disagreement as uncertainty."
+    },
+    {
+      "id": "meal_sads_share_fish",
+      "label": "Share of a replaced meal's suffering that falls on fish",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.922,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, Global meal replacement estimates (2024), 'SADs per year (global)' tab: animals spared per plant-based person per year by group, times SADs per animal (mean of ACE's bounds)",
+        "url": "https://docs.google.com/spreadsheets/d/1aih91kFSwOc09TJl34gJxmJY6WHOZfwHtwML2OfS9Rg/edit",
+        "cell": "SADs per year (global)!A2:F10",
+        "note": "Wild-caught fishes 78.77 × 19.17 SADs, farmed fishes 13.76 × 78.9, farmed reptiles and amphibians 0.06 × 78.9 (ACE's salmon stand-in): 2,600 of 2,819 SADs a year. These reproduce ACE's 26.9 SADs per animal spared.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Which animals a replaced meal spares, by their share of its suffering-adjusted days. Fish dominate: a plant-based diet spares about 79 wild-caught and 14 farmed fish a year against 12 birds and 0.6 mammals, and ACE counts a farmed salmon's life at 79 SADs.\n\nFrom ACE's 2024 global estimates, the source of its per-meal figures. A particular charity's meals may differ (a beef-heavy canteen spares fewer fish); we use the global mix for every meal model until a charity reports what its meals contained."
+    },
+    {
+      "id": "meal_sads_share_chicken",
+      "label": "Share of a replaced meal's suffering that falls on chickens",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.065,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, Global meal replacement estimates (2024), 'SADs per year (global)' tab",
+        "url": "https://docs.google.com/spreadsheets/d/1aih91kFSwOc09TJl34gJxmJY6WHOZfwHtwML2OfS9Rg/edit",
+        "cell": "SADs per year (global)!A4:F4",
+        "note": "Farmed birds 11.62 a year × 15.73 SADs (mean of broiler 2.53 and laying hen 28.94): 183 of 2,819 SADs a year.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "The share of a replaced meal's suffering-adjusted days that falls on farmed birds, counted as chickens. See the fish share for the source and caveats."
+    },
+    {
+      "id": "meal_sads_share_pig",
+      "label": "Share of a replaced meal's suffering that falls on pigs and other mammals",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.013,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, Global meal replacement estimates (2024), 'SADs per year (global)' tab",
+        "url": "https://docs.google.com/spreadsheets/d/1aih91kFSwOc09TJl34gJxmJY6WHOZfwHtwML2OfS9Rg/edit",
+        "cell": "SADs per year (global)!A5:F5",
+        "note": "Farmed mammals 0.61 a year × 59.7 SADs (mean of piglet 34.85 and sow 84.55): 36 of 2,819 SADs a year.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "The share of a replaced meal's suffering-adjusted days that falls on farmed mammals, which ACE counts as pigs. See the fish share for the source and caveats."
     },
     {
       "id": "production_response",

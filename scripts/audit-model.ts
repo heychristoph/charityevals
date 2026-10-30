@@ -11,7 +11,7 @@
 // Exits 1 when a high-severity finding remains.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { assumptionValues, bottomLine, buildLibrary, compute, type ResolvedModel } from "../src/engine/model";
+import { assumptionValues, bottomLine, buildLibrary, compute, headline, type ResolvedModel } from "../src/engine/model";
 import { sensitivity } from "../src/engine/sensitivity";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
@@ -70,20 +70,20 @@ const findings: Finding[] = [
   ...lintModel(lib, m, new Date()),
 ].sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
 
-const bench = lib.models.get(lib.assumptions.common.benchmark)!;
-const benchCommon = bottomLine(lib, bench, av).common;
+// Results, ranges and swings are in years of healthy life per $1,000, as the site shows them.
 const s = sensitivity(lib, m, av);
 // The same with shared assumptions (moral weights, exchange rates, accounting toggles) held at their
 // defaults: the uncertainty the builder owns, since the builder can't narrow the shared ranges.
 const fixedLib = { ...lib, assumptions: { ...lib.assumptions, rows: lib.assumptions.rows.map((r) => ({ ...r, value: typeof r.value === "object" ? r.value.best : r.value })) } };
 const sOwn = sensitivity(fixedLib, m, av);
 const line = bottomLine(lib, m, av);
+const years = headline(lib, m, av);
 const vals = compute(lib, m, av);
 
 // Reference class: other ranked, hand-built charity models in the same output unit.
 const peers = [...lib.models.values()]
   .filter((x) => x.id !== m.id && x.kind === "charity" && x.output && !x.bulk && x.output.unit === m.output?.unit)
-  .map((x) => ({ id: x.id, owner: x.owner, native: bottomLine(lib, x, av).native }))
+  .map((x) => ({ id: x.id, owner: x.owner, native: bottomLine(lib, x, av).native, years: headline(lib, x, av) }))
   .filter((p) => Number.isFinite(p.native) && p.native > 0)
   .sort((a, b) => a.native - b.native);
 if (peers.length >= 3 && Number.isFinite(line.native)) {
@@ -104,24 +104,24 @@ const fmt = (x: number) => (!Number.isFinite(x) ? String(x) : Math.abs(x) >= 1e4
 if (json) {
   console.log(JSON.stringify({
     id: m.id, template: family, unit: m.output?.unit,
-    native: line.native, common: line.common, multipleOfBenchmark: line.common / benchCommon,
-    jointLow: s.jointLow / benchCommon, jointHigh: s.jointHigh / benchCommon,
-    ownJointLow: sOwn.jointLow / benchCommon, ownJointHigh: sOwn.jointHigh / benchCommon, judgmentShare: s.judgmentShare,
-    swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow / benchCommon, atHigh: w.atHigh / benchCommon })),
+    native: line.native, common: line.common, yearsPer1000: years,
+    jointLow: s.jointLow, jointHigh: s.jointHigh,
+    ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, judgmentShare: s.judgmentShare,
+    swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow, atHigh: w.atHigh })),
     findings, peers, canonical: Object.fromEntries(canon.map((id) => [id, vals[id]])),
   }, null, 2));
 } else {
   console.log(`# Audit (mechanical): ${m.id}  [${family ?? "no template"}]\n`);
-  console.log(`Bottom line: ${fmt(line.native)} ${m.output?.unit}/$ = ${(line.common / benchCommon).toFixed(2)}× GiveDirectly`);
-  console.log(`Joint low–high: ${fmt(s.jointLow / benchCommon)}× – ${fmt(s.jointHigh / benchCommon)}×   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
-  console.log(`Joint low–high with shared assumptions at their defaults: ${fmt(sOwn.jointLow / benchCommon)}× – ${fmt(sOwn.jointHigh / benchCommon)}×`);
+  console.log(`Bottom line: ${fmt(line.native)} ${m.output?.unit}/$ = ${fmt(years)} years of healthy life per $1,000`);
+  console.log(`Joint low–high: ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
+  console.log(`Joint low–high with shared assumptions at their defaults: ${fmt(sOwn.jointLow)} – ${fmt(sOwn.jointHigh)}`);
   console.log(`Point inputs on the result's path (no range): ${s.pointInputs.join(", ") || "none"}\n`);
-  console.log("## Tornado (× GiveDirectly with the input at its low / high end)");
+  console.log("## Tornado (years of healthy life per $1,000 with the input at its low / high end)");
   for (const w of s.swings.slice(0, 12))
-    console.log(`  ${w.id.padEnd(40)} ${String(w.kind ?? w.scope).padEnd(9)} ${fmt(w.low).padStart(10)} – ${fmt(w.high).padEnd(10)} → ${(w.atLow / benchCommon).toFixed(3).padStart(8)} – ${(w.atHigh / benchCommon).toFixed(3)}`);
-  console.log(`\n## Reference class: hand-built models in ${m.output?.unit} (× GiveDirectly)`);
-  for (const p of peers) console.log(`  ${p.id.padEnd(44)} ${p.owner.padEnd(12)} ${(p.native * (line.common / line.native) / benchCommon).toFixed(2)}×`);
-  console.log(`  >> this model                                             ${(line.common / benchCommon).toFixed(2)}×`);
+    console.log(`  ${w.id.padEnd(40)} ${String(w.kind ?? w.scope).padEnd(9)} ${fmt(w.low).padStart(10)} – ${fmt(w.high).padEnd(10)} → ${fmt(w.atLow).padStart(8)} – ${fmt(w.atHigh)}`);
+  console.log(`\n## Reference class: hand-built models in ${m.output?.unit} (years of healthy life per $1,000)`);
+  for (const p of peers) console.log(`  ${p.id.padEnd(44)} ${p.owner.padEnd(12)} ${fmt(p.years)}`);
+  console.log(`  >> this model                                             ${fmt(years)}`);
   if (siblings.length) {
     console.log(`\n## Same template (${family}): canonical rows`);
     const sv = siblings.map((x) => ({ id: x.id, v: compute(lib, x, av) }));

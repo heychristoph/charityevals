@@ -6,7 +6,7 @@
   "template": "policy-research-meta",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, the causal chain to the outcome, and the bottom line per dollar.",
+  "summary": "TEMPLATE: what the charity does, the causal chain to the outcome, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
   "resources": [],
   "sections": [
     {
@@ -37,7 +37,8 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
   "rows": [
@@ -233,8 +234,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "if($full_credit, 1, attribution_share_shared)",
-      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
     },
     {
       "id": "total_adj",
@@ -257,7 +258,7 @@
       "label": "Value per dollar",
       "format": "small",
       "formula": "outcome_total / cost_total",
-      "explainer": "Rename to sads_per_dollar or wellbys_per_dollar when the downstream unit is SADs or WELLBYs."
+      "explainer": "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar)."
     },
     {
       "id": "staff_cost_share",
@@ -290,7 +291,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
     },
     {
       "id": "salary_sacrifice",
@@ -304,7 +305,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",
@@ -318,6 +319,10 @@
   "output": {
     "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar you give"
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
   }
 }

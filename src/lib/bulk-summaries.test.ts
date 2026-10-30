@@ -4,6 +4,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildLibrary, assumptionValues, bottomLine } from "../engine/model";
+import { sensitivity } from "../engine/sensitivity";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -31,6 +32,18 @@ describe("bulk summaries", () => {
         const a = bottomLine(full, m, avF, {}, view).native, b = bottomLine(stub, stub.models.get(m.id)!, avS, {}, view).native;
         if (Math.abs(a - b) > 1e-9 * Math.max(1, Math.abs(a))) diffs.push(`${m.id} (${view}): ${a} vs ${b}`);
       }
+    }
+    expect(diffs).toEqual([]);
+  });
+
+  it("keep the full models' plausible ranges, ranged facts included", () => {
+    const av = assumptionValues(full.assumptions);
+    const diffs: string[] = [];
+    for (const m of full.models.values()) {
+      if (!m.bulk) continue;
+      const a = sensitivity(full, m, av), b = sensitivity(stub, stub.models.get(m.id)!, av);
+      for (const k of ["jointLow", "jointHigh"] as const)
+        if (Math.abs(a[k] - b[k]) > 1e-6 * Math.max(1, Math.abs(a[k]))) diffs.push(`${m.id} ${k}: ${a[k]} vs ${b[k]}`);
     }
     expect(diffs).toEqual([]);
   });

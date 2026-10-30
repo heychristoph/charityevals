@@ -1,6 +1,9 @@
 """Run: python3 .claude/skills/build-cea/scripts/gen-templates.py
 Generates the build-cea template skeletons. Each is a valid model file (kind "template") whose
-numbers are placeholders marked TEMPLATE; npm run check refuses a model that still has one."""
+numbers are placeholders marked TEMPLATE; the lint (npm run check, src/engine/lint.test.ts) refuses a
+model that still has one. Filled in, each ends in a ranked unit (uov, wellby, ced) and passes
+scripts/normalization-audit.ts: output.native is the bottom line before our shared steps, the donor
+(and, for animals, species) sections are kind "ours", animal models go through ced_<species>."""
 import json, sys, os
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..", "templates")
@@ -29,8 +32,9 @@ SECTIONS = [
     {"id": "effect", "title": "Effect per unit", "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."},
     {"id": "adjustments", "title": "Adjustments", "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."},
     {"id": "outcome", "title": "Outcome", "explainer": "The outcome in the family's shared unit, per dollar."},
-    {"id": "donor", "title": "Your dollar's share", "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."},
+    {"id": "donor", "title": "Your dollar's share", "kind": "ours", "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."},
 ]
+SPECIES_SECTION = {"id": "species", "title": "In chicken pain days", "kind": "ours", "explainer": "charityevals' standard step for every animal model. The shared SAD figures are Ambitious Impact's, which count each species' pain as a share of a person's with its own species weights. Here those weights come out and Rethink Priorities' go in, so every species is counted in days of a chicken's disabling pain. How a chicken compares with a person is the one animal slider."}
 
 def cost_rows():
     return [
@@ -53,8 +57,8 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True):
             "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"),
         inp("attribution_share_shared", "adjustments", "This charity's share of credit, when shared with others", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
             "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone.", "percent"),
-        f("attribution_share", "adjustments", "Share of credit used", "if($full_credit, 1, attribution_share_shared)",
-          "With full credit for shared outcomes switched on, the charity gets the whole outcome.", "percent"),
+        f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared",
+          "The charity's share of the resources behind the outcome; it applies whichever way credit is shared.", "percent"),
     ]
     if implementation:
         rows.append(inp("implementation_adj", "adjustments", "Delivery adjustment (fidelity, compliance, follow-through)", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
@@ -75,13 +79,32 @@ def donor_rows(prefix, unit_label):
         inp("staff_cost_share", "donor", "Staff pay as a share of total cost", {"low": 0.1, "best": 0.2, "high": 0.3}, "estimate",
             "salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9).", "percent", source=src("audited financial statements")),
         inp("salary_gap", "donor", "Pay gap versus comparable for-profit jobs", {"low": 0, "best": 0.15, "high": 0.35}, "judgment",
-            "how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups.", "percent"),
+            "how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use.", "percent"),
         f("salary_sacrifice", "donor", "Salary forgone by staff (in-kind donation)", "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)", None, "usd"),
-        f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))", None, "percent"),
+        f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))", None, "percent"),
         f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", f"{prefix}_per_dollar * donor_cost_share", None, "small", f"{unit_label} / $"),
     ]
 
-def model(family, name, unit, prefix, unit_label, cause, rows, summary):
+def species_rows(shares):
+    """The species step (docs/normalization.md 2.4): SADs per donor dollar split by species, each converted
+    with the standard ced_<species> template (src/engine/invariants.ts CED_TEMPLATES.aim), then summed."""
+    names = {"chicken": "chickens", "pig": "pigs", "fish": "fish", "shrimp": "shrimp"}
+    rows = []
+    for sp, share in shares:
+        rows.append(f(f"sads_{sp}", "species", f"SADs averted per dollar you give: {names[sp]}", f"sads_per_donor_dollar * {share}" if share else "sads_per_donor_dollar",
+                      None if share else "TEMPLATE: one species takes all the SADs. For several, add a sads_<species> row per species with its share (a sourced fact or a judgment row with a range) and a ced_<species> row for each.", "number"))
+        rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {names[sp]}",
+                      f"sads_{sp} / @aim_sads.{sp} * if($rp_species_weights, @welfare_ranges.{sp}_vs_chicken, @aim_sads.{sp} / @aim_sads.chicken)",
+                      "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it.", "number"))
+    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, _ in shares), None, "small", "chicken pain days / $"))
+    return rows
+
+def model(family, name, unit, prefix, unit_label, cause, rows, summary, species=None):
+    out = {"row": f"{prefix}_per_donor_dollar", "unit": unit, "label": f"{unit_label} per dollar you give", "native": {"row": f"{prefix}_per_dollar", "unit": unit}}
+    if species:
+        out = {"row": "ced_per_donor_dollar", "unit": "ced", "label": "Chicken-equivalent pain days averted per dollar you give",
+               "native": {"row": f"{prefix}_per_dollar", "unit": unit}, "species": [sp for sp, _ in species]}
+        rows = rows + species_rows(species)
     return {
         "id": f"template-{family}",
         "name": f"Template: {name}",
@@ -92,10 +115,12 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary):
         "owner": "charityevals",
         "summary": "TEMPLATE: " + summary,
         "resources": [],
-        "sections": SECTIONS,
+        "sections": SECTIONS + ([SPECIES_SECTION] if species else []),
         "rows": rows,
-        "output": {"row": f"{prefix}_per_donor_dollar", "unit": unit, "label": f"{unit_label} per dollar you give"},
+        "output": out,
     }
+
+BOTTOM = "the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty."
 
 T = {}
 
@@ -115,21 +140,27 @@ T["direct-health"] = model("direct-health", "direct health (deaths and illness a
           "If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here.", "small"),
         inp("share_under5", "effect", "Share of deaths averted that are of children under five", {"low": 0.6, "best": 0.8, "high": 0.95}, "estimate",
             "the age split of the deaths averted, from the age split of cause-specific deaths in the target group.", "percent", source=src("IHME GBD")),
-        inp("dalys_averted_per_person", "effect", "Illness averted per person reached (years lived with disability)", 0, "estimate",
-            "YLDs averted per person reached, from GBD disability weights × cases averted × duration. 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both.", "small", "DALYs", src("IHME GBD disability weights")),
-        inp("ln_income_gain_per_person", "effect", "Later-life income gain per person reached, ln(consumption) units, present value", 0, "estimate",
-            "present value of the increase in ln(consumption) from developmental effects (e.g. malaria or deworming and adult earnings), per person reached, discounted with $discount_rate. 0 with an explanation when there is no evidence.", "small", "ln-years", src("study")),
+        inp("morbidity_value_ratio", "effect", "Value of illness averted, as a share of the value of deaths averted", 0, "estimate",
+            "illness averted (GBD disability weights × cases averted × duration) valued against the deaths averted, as GiveWell's supplementary adjustments do. A share, not DALYs × an exchange rate: no rate between outcomes may sit inside a model (docs/normalization.md INV-2). 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both.", "percent", source=src("IHME GBD disability weights / GiveWell")),
+        inp("ln_income_gain_per_year", "effect", "Later-life income gain per person reached, ln(consumption) per year", 0, "estimate",
+            "the yearly increase in ln(consumption) in adulthood from developmental effects (e.g. malaria or deworming and adult earnings), per person reached, undiscounted. 0 with an explanation when there is no evidence.", "small", "ln / year", src("study")),
+        inp("years_until_income_gain", "effect", "Years until the income gain starts", {"low": 8, "best": 10, "high": 15}, "estimate",
+            "years from the intervention to adult earnings (GiveWell uses about 10 for child-health programs).", "number", "years", src("study / GiveWell")),
+        inp("years_income_gain_lasts", "effect", "Years the income gain lasts", {"low": 20, "best": 40, "high": 45}, "estimate",
+            "working years over which the gain lasts (GiveWell uses 40).", "number", "years", src("study / GiveWell")),
+        f("ln_income_gain_per_person", "effect", "Later-life income gain per person reached, present value", "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
+          "Discounted at the shared rate, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs.", "small", "ln-years"),
     ] + adj_rows(leverage=True, unmodelled=True) + [
         f("deaths_averted", "outcome", "Deaths averted", "people_reached * deaths_averted_per_person * total_adj", None, "number"),
         f("value_per_death", "outcome", "Value of a death averted (units of value)", "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
           "GiveWell's moral weights for the age mix of deaths averted, times your multiplier on the value of a life.", "number", "units of value"),
         f("uov_deaths", "outcome", "Units of value from deaths averted", "deaths_averted * value_per_death", None, "number", "units of value"),
-        f("uov_morbidity", "outcome", "Units of value from illness averted", "people_reached * dalys_averted_per_person * total_adj * $uov_per_daly", None, "number", "units of value"),
+        f("uov_morbidity", "outcome", "Units of value from illness averted", "uov_deaths * morbidity_value_ratio", None, "number", "units of value"),
         f("uov_income", "outcome", "Units of value from later-life income", "people_reached * ln_income_gain_per_person * total_adj * $uov_per_ln_consumption", None, "number", "units of value"),
         f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_morbidity + uov_income) * (1 + unmodelled_benefits_adj)", None, "number", "units of value"),
         f("uov_per_dollar", "outcome", "Units of value per dollar", "outcome_total / cost_total", None, "small", "units of value / $"),
     ] + donor_rows("uov", "Units of value"),
-    "what the charity does, where, and the bottom line in units of value per dollar and × GiveDirectly.")
+    "what the charity does, where, " + BOTTOM)
 
 # --- cash-income -----------------------------------------------------------------------------
 T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov", "uov", "Units of value", "global-health",
@@ -147,9 +178,13 @@ T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov"
         inp("share_consumed_y1", "effect", "Share of the transfer consumed in year 1", {"low": 0.45, "best": 0.57, "high": 0.7}, "estimate",
             "the rest is invested. From the RCT literature (Egger et al. 2022; Haushofer & Shapiro 2016).", "percent", source=src("RCT")),
         f("y1_ln_gain", "effect", "Increase in ln(consumption) in year 1", "ln(1 + share_consumed_y1 * transfer_per_person_ppp / baseline_consumption)", None, "number"),
-        inp("later_years_ratio", "effect", "Value of later-year gains relative to year 1", {"low": 0.74, "best": 1.23, "high": 1.72}, "estimate",
-            "returns on the invested share over later years, discounted, relative to year 1. GiveWell's GiveDirectly CEA (Nov 2024): 1.23 (0.74–1.72). For a recurring income gain instead of a lump sum, replace y1_ln_gain and this row with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years).", "number",
+        inp("later_gain_share_per_year", "effect", "Yearly gain in later years, as a share of the year-1 gain", {"low": 0.1, "best": 0.165, "high": 0.23}, "estimate",
+            "returns on the invested share in each later year, relative to the year-1 consumption gain. About 0.165 over 9 later years reproduces GiveWell's 1.23 (0.74–1.72) at 4% (GiveDirectly CEA, Nov 2024); cite the follow-up studies you use. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years).", "percent",
             source={"title": "TEMPLATE: GiveWell GiveDirectly CEA, Consumption tab", "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit", "cell": "Consumption!B23; Inputs!D23:F23", "retrieved": D}),
+        inp("later_years", "effect", "Years the later gains last", {"low": 5, "best": 9, "high": 15}, "estimate",
+            "how long the invested share keeps paying returns, from follow-up studies.", "number", "years", src("follow-up study")),
+        f("later_years_ratio", "effect", "Value of later-year gains relative to year 1, present value", "later_gain_share_per_year * pv_annuity_due(1, $discount_rate, later_years) / (1 + $discount_rate)",
+          "Later years' gains discounted at the shared rate, so the result moves with it.", "number"),
         f("ln_gain_per_person", "effect", "Total ln(consumption) gain per person", "y1_ln_gain * (1 + later_years_ratio)", None, "number"),
         inp("spillover_ratio", "effect", "Spillover benefits to non-recipients, as a share of recipients' benefits", {"low": 0, "best": 0.3, "high": 0.9}, "estimate",
             "local economic spillovers. GiveWell's adjusted Egger et al. figure is about 0.7; it is weakly identified, so give a wide range.", "percent", source=src("Egger et al. 2022 / GiveWell")),
@@ -162,7 +197,7 @@ T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov"
         f("outcome_total", "outcome", "Total units of value", "(uov_consumption + uov_spillovers + uov_mortality) * (1 + unmodelled_benefits_adj)", None, "number", "units of value"),
         f("uov_per_dollar", "outcome", "Units of value per dollar", "outcome_total / cost_total", None, "small", "units of value / $"),
     ] + donor_rows("uov", "Units of value"),
-    "what the charity does, where, and the bottom line in units of value per dollar and × GiveDirectly.")
+    "what the charity does, where, " + BOTTOM)
 
 # --- wellbeing -------------------------------------------------------------------------------
 T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "wellbys", "WELLBYs", "global-health",
@@ -175,7 +210,10 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
         inp("effect_duration_years", "effect", "Years until the effect has faded", {"low": 1.5, "best": 2.5, "high": 5}, "estimate",
             "how long until the effect has faded to zero, from follow-up studies (the effect is assumed to fall linearly). An input, not initial ÷ decay, so the effect size doesn't enter twice and inflate the joint range. If follow-ups show a plateau rather than a fade, say so and set the duration to the area-equivalent linear fade.", "number", "years", src("meta-analysis of follow-ups")),
         f("effect_decay_sd_per_year", "effect", "Implied decay of the effect (SDs per year)", "initial_effect_sd / effect_duration_years", "Context: compare with the decay rates reported in follow-up studies.", "number", "SD / year"),
-        f("sd_years_per_person", "effect", "Total effect per person (SD-years)", "0.5 * initial_effect_sd * effect_duration_years", "Area of the triangle: linear decay from the initial effect to zero.", "number"),
+        f("continuous_discount_rate", "effect", "Discount rate, continuous", "ln(1 + $discount_rate)", "The shared yearly rate as a continuous rate, so the effect can be discounted smoothly as it fades.", "number"),
+        f("discount_factor", "effect", "Discount factor for the fading effect", "if(continuous_discount_rate > 0, (continuous_discount_rate * effect_duration_years - 1 + exp(-(continuous_discount_rate * effect_duration_years))) / (0.5 * (continuous_discount_rate * effect_duration_years) * (continuous_discount_rate * effect_duration_years)), 1)",
+          "Present value of the triangle (linear fade to zero) at the shared rate, as a share of its undiscounted area; as in the HLI models.", "percent"),
+        f("sd_years_per_person", "effect", "Total effect per person (SD-years, discounted)", "0.5 * initial_effect_sd * effect_duration_years * discount_factor", "Area of the triangle: linear decay from the initial effect to zero, discounted.", "number"),
         f("wellbys_per_person", "effect", "WELLBYs per person treated", "sd_years_per_person * @wellby_factors.wellbys_per_sd_year", None, "number", "WELLBYs"),
         f("household_size", "effect", "Household size", "@wellby_factors.household_size_psychotherapy", "TEMPLATE: use a country fact when the charity works outside HLI's settings.", "number"),
         f("household_multiplier", "effect", "Household multiplier (recipient plus spillovers)", "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy", None, "multiple"),
@@ -183,7 +221,7 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
         f("outcome_total", "outcome", "WELLBYs", "people_reached * wellbys_per_person * household_multiplier * total_adj", None, "number", "WELLBYs"),
         f("wellbys_per_dollar", "outcome", "WELLBYs per dollar", "outcome_total / cost_total", None, "small", "WELLBYs / $"),
     ] + donor_rows("wellbys", "WELLBYs"),
-    "what the charity does, where, and the bottom line in WELLBYs per dollar and × GiveDirectly.")
+    "what the charity does, where, " + BOTTOM)
 
 # --- corporate-campaign ----------------------------------------------------------------------
 T["corporate-campaign"] = model("corporate-campaign", "corporate and producer welfare campaigns", "sad", "sads", "SADs averted", "animal-welfare",
@@ -194,7 +232,7 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
             "animals already covered by the reform before the campaign can't be credited to it.", "percent", source=src("tracker")),
         f("animals_affected_per_year", "reach", "Animals per year the campaign can change", "animals_per_year * share_not_yet_compliant", None, "integer"),
         f("sads_per_animal_year", "effect", "SADs averted per animal-year under the reform", "@sad_factors.sads_per_hen_year_cage_to_aviary",
-          "TEMPLATE: pick the matching shared fact (cage-free, enriched-to-aviary, broiler BCC per chicken). Add a new fact with sources to facts/sad_factors.json for a new species or reform; never put a SAD figure inline.", "number", "SADs / animal-year"),
+          "TEMPLATE: pick the shared figure for the change (facts/sad_factors.json: cage-free, enriched-to-aviary, broiler BCC, shrimp stunned). A new change gets a new fact with sources and a `change` note; never put a SAD figure inline. Set the species section to match.", "number", "SADs / animal-year"),
         inp("years_of_impact", "effect", "Years the reform is brought forward", {"low": 4, "best": 15, "high": 36}, "estimate",
             "how many years earlier the reform happens than it would have without the campaign: Rethink Priorities' 90% interval for corporate chicken campaigns is 4–36 years.", "number", "years",
             {"title": "TEMPLATE: Rethink Priorities, corporate campaigns for chicken welfare", "url": "https://rethinkpriorities.org/publications/corporate-campaigns-affect-9-to-120-years-of-chicken-life-per-dollar-spent", "page": "summary", "retrieved": D}),
@@ -203,7 +241,7 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
         f("outcome_total", "outcome", "SADs averted", "animals_affected_per_year * discounted_years * sads_per_animal_year * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
     ] + donor_rows("sads", "SADs averted"),
-    "what the charity does, where, and the bottom line in SADs averted per dollar and × GiveDirectly.")
+    "what the charity does, where, " + BOTTOM, species=[("chicken", None)])
 
 # --- diet-change -----------------------------------------------------------------------------
 T["diet-change"] = model("diet-change", "diet change and meal replacement", "sad", "sads", "SADs averted", "animal-welfare",
@@ -220,7 +258,7 @@ T["diet-change"] = model("diet-change", "diet change and meal replacement", "sad
         f("outcome_total", "outcome", "SADs averted", "meals_replaced_per_year * discounted_years * sads_per_meal * production_response * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
     ] + donor_rows("sads", "SADs averted"),
-    "what the charity does, where, and the bottom line in SADs averted per dollar and × GiveDirectly.")
+    "what the charity does, where, " + BOTTOM, species=[(sp, f"@sad_factors.meal_sads_share_{sp}") for sp in ("fish", "chicken", "pig")])
 
 # --- policy-research-meta --------------------------------------------------------------------
 T["policy-research-meta"] = model("policy-research-meta", "policy, research and meta", "uov", "uov", "Units of value", "global-health",
@@ -237,9 +275,9 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
         f("downstream_value", "effect", "Expected value of the change (before adjustments)", "units_affected_per_year * value_per_unit_year * p_success * discounted_years", None, "number"),
     ] + adj_rows(implementation=False) + [
         f("outcome_total", "outcome", "Total value (output unit)", "downstream_value * total_adj", None, "number"),
-        f("uov_per_dollar", "outcome", "Value per dollar", "outcome_total / cost_total", "Rename to sads_per_dollar or wellbys_per_dollar when the downstream unit is SADs or WELLBYs.", "small"),
+        f("uov_per_dollar", "outcome", "Value per dollar", "outcome_total / cost_total", "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar).", "small"),
     ] + donor_rows("uov", "Units of value"),
-    "what the charity does, the causal chain to the outcome, and the bottom line per dollar.")
+    "what the charity does, the causal chain to the outcome, " + BOTTOM)
 
 os.makedirs(OUT, exist_ok=True)
 for fam, m in T.items():

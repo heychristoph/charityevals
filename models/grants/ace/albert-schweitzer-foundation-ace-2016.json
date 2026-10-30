@@ -1,764 +1,936 @@
 {
- "id": "albert-schweitzer-foundation-ace-2016",
- "name": "Albert Schweitzer Foundation: 2016 estimate (ACE)",
- "kind": "charity",
- "cause": "animal-welfare",
- "charity": "albert-schweitzer-foundation",
- "owner": "ace",
- "bulk": true,
- "summary": "Animal Charity Evaluators' 2016 Guesstimate model: projected costs and achievements by program, converted into farmed animals spared per dollar. ACE has since stopped publishing per-dollar estimates; this is the last public one for this charity.",
- "source": {
-  "publisher": "Animal Charity Evaluators",
-  "title": "Albert Schweitzer Foundation 2016 cost effectiveness estimate",
-  "url": "https://animalcharityevaluators.org/charity-review/albert-schweitzer-foundation/2016-nov/",
-  "sheet": "https://www.getguesstimate.com/models/7338",
-  "published": "2016-11-01",
-  "retrieved": "2026-10-27",
-  "license": "Unclear: check ACE's terms before republishing"
- },
- "evaluator": {
-  "name": "ACE",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "albert-schweitzer-foundation-ace-2016",
+  "name": "Albert Schweitzer Foundation: 2016 estimate (ACE)",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "charity": "albert-schweitzer-foundation",
+  "owner": "ace",
+  "bulk": true,
+  "summary": "Campaigns for farmed animals in Germany and beyond, through corporate outreach, lobbying, consumer outreach and media work. Animal Charity Evaluators' 2016 Guesstimate model: projected costs and achievements by program, converted here by species into chicken-equivalent pain days per dollar, like our other animal models: hens spared cages as hen-years of a caged hen's suffering, other animals spared with the shared figure per animal. ACE has since stopped publishing per-dollar estimates; this is the last public one for this charity.",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Albert Schweitzer Foundation 2016 cost effectiveness estimate",
+    "url": "https://animalcharityevaluators.org/charity-review/albert-schweitzer-foundation/2016-nov/",
+    "sheet": "https://www.getguesstimate.com/models/7338",
+    "published": "2016-11-01",
+    "retrieved": "2026-10-27",
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
+  },
+  "evaluator": {
+    "name": "ACE",
+    "assumptions": {
+      "resource_shares": 0,
+      "chicken_vs_person": 0.463966,
+      "rp_species_weights": 0,
+      "discount_rate": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "ACE review, November 2016",
+      "url": "https://animalcharityevaluators.org/charity-review/albert-schweitzer-foundation/2016-nov/",
+      "type": "evaluation"
+    },
+    {
+      "title": "ACE's Guesstimate model",
+      "url": "https://www.getguesstimate.com/models/7338",
+      "type": "model",
+      "note": "The model this page reproduces. Guesstimate shows simulation means; this page uses medians."
+    }
+  ],
+  "sections": [
+    {
+      "id": "model",
+      "title": "Model",
+      "explainer": "The Albert Schweitzer Foundation provided budget and accomplishments information for 2015 and partial information for January to August 2016. Estimates in this sheet are made by Animal Charity Evaluators for the full year of 2016.\n\nRead ACE's 2016 [review](https://animalcharityevaluators.org/research/charity-review/albert-schweitzer-foundation/) of the Albert Schweitzer Foundation."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model.",
+      "kind": "ours"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not ACE's. ACE counts a year of benefit the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so ACE's numbers reproduce."
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "explainer": "charityevals' step, not ACE's. ACE's 2016 models count years of farmed-animal life spared, every species alike. Here hens spared cages count as years of a caged hen's suffering, and every other animal spared by the shared figure for an animal spared, split by species like a replaced meal. Each species is then counted in days of a chicken's disabling pain (Rethink Priorities' estimates); how a chicken compares with a person is the chicken slider.",
+      "kind": "ours"
+    }
+  ],
+  "rows": [
+    {
+      "id": "consumer_outreach_proportion_of_programs",
+      "label": "Consumer Outreach proportion of programs",
+      "section": "model",
+      "formula": "consumer_outreach_cost/total_budget"
+    },
+    {
+      "id": "corporate_outreach_proportion_of_programs",
+      "label": "Corporate Outreach proportion of programs",
+      "section": "model",
+      "formula": "corporate_outreach_cost/total_budget"
+    },
+    {
+      "id": "scientific_and_evaluative_work_proportion_of_progr",
+      "label": "Scientific and Evaluative Work proportion of programs",
+      "section": "model",
+      "formula": "scientific_and_evaluative_work_cost/total_budget"
+    },
+    {
+      "id": "lobbying_and_networking_proportion_of_programs",
+      "label": "Lobbying and Networking proportion of programs",
+      "section": "model",
+      "formula": "lobbying_and_networking_cost/total_budget"
+    },
+    {
+      "id": "international_expansion_proportion_of_programs",
+      "label": "International Expansion proportion of programs",
+      "section": "model",
+      "formula": "international_expansion_cost/total_budget"
+    },
+    {
+      "id": "social_media_and_media_proportion_of_programs",
+      "label": "Social Media and Media proportion of programs",
+      "section": "model",
+      "formula": "social_media_and_media_cost/total_budget"
+    },
+    {
+      "id": "legal_system_proportion_of_programs",
+      "label": "Legal System proportion of programs",
+      "section": "model",
+      "formula": "legal_system_cost/total_budget"
+    },
+    {
+      "id": "consumer_outreach_cost",
+      "label": "Consumer Outreach cost ($)",
+      "section": "model",
+      "formula": "consumer_outreach_cost_2*per"
+    },
+    {
+      "id": "consumer_outreach_cost_2",
+      "label": "Consumer Outreach cost (€)",
+      "section": "model",
+      "value": 349000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "COC1"
+      }
+    },
+    {
+      "id": "animals_spared_per_dollar_by_consumer_outreach",
+      "label": "Animals spared per dollar by Consumer Outreach",
+      "section": "model",
+      "formula": "animals_spared_per_dollar_by_consumer_outreach_2"
+    },
+    {
+      "id": "years_of_suffering_spared_per_dollar_by_consumer_o",
+      "label": "Years of suffering spared per dollar by Consumer Outreach",
+      "section": "model",
+      "formula": "years_of_suffering_spared_per_dollar_by_consumer_o_2"
+    },
+    {
+      "id": "corporate_outreach_cost",
+      "label": "Corporate Outreach cost ($)",
+      "section": "model",
+      "formula": "corporate_outreach_cost_2*per"
+    },
+    {
+      "id": "scientific_and_evaluative_work_cost",
+      "label": "Scientific and Evaluative Work cost ($)",
+      "section": "model",
+      "formula": "scientific_and_evaluative_work_cost_2*per"
+    },
+    {
+      "id": "lobbying_and_networking_cost",
+      "label": "Lobbying and Networking cost ($)",
+      "section": "model",
+      "formula": "lobbying_and_networking_cost_2*per"
+    },
+    {
+      "id": "international_expansion_cost",
+      "label": "International Expansion cost ($)",
+      "section": "model",
+      "formula": "international_expansion_cost_2*per"
+    },
+    {
+      "id": "social_media_and_media_cost",
+      "label": "Social Media and Media cost ($)",
+      "section": "model",
+      "formula": "social_media_and_media_cost_2*per"
+    },
+    {
+      "id": "legal_system_cost",
+      "label": "Legal System cost ($)",
+      "section": "model",
+      "formula": "legal_system_cost_2*per"
+    },
+    {
+      "id": "total_budget",
+      "label": "Total budget ($)",
+      "section": "model",
+      "formula": "sum(legal_system_cost,social_media_and_media_cost,international_expansion_cost,lobbying_and_networking_cost,scientific_and_evaluative_work_cost,corporate_outreach_cost,consumer_outreach_cost)"
+    },
+    {
+      "id": "corporate_outreach_cost_2",
+      "label": "Corporate Outreach cost (€)",
+      "section": "model",
+      "value": 248000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "COC3"
+      }
+    },
+    {
+      "id": "scientific_and_evaluative_work_cost_2",
+      "label": "Scientific and Evaluative Work cost (€)",
+      "section": "model",
+      "value": 143000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "SAV2"
+      }
+    },
+    {
+      "id": "lobbying_and_networking_cost_2",
+      "label": "Lobbying and Networking cost (€)",
+      "section": "model",
+      "value": 52000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "LAN2"
+      }
+    },
+    {
+      "id": "international_expansion_cost_2",
+      "label": "International Expansion cost (€)",
+      "section": "model",
+      "value": 50000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "NXC1"
+      }
+    },
+    {
+      "id": "social_media_and_media_cost_2",
+      "label": "Social Media and Media cost (€)",
+      "section": "model",
+      "value": 38000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "SMA2"
+      }
+    },
+    {
+      "id": "legal_system_cost_2",
+      "label": "Legal System cost (€)",
+      "section": "model",
+      "value": 19000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "LSC1"
+      }
+    },
+    {
+      "id": "per",
+      "label": "$ per €",
+      "section": "model",
+      "value": {
+        "low": 1.05,
+        "best": 1.0988630487917956,
+        "high": 1.15
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "PER"
+      },
+      "explainer": "ACE's 90% interval, 1.05 to 1.15 (lognormal). The best guess is its median."
+    },
+    {
+      "id": "total_animals_spared_per_dollar",
+      "label": "Total animals spared per dollar",
+      "section": "model",
+      "formula": "animals_spared_per_dollar_by_consumer_outreach*consumer_outreach_proportion_of_programs+equivalent_animals_spared_per_dollar_by_corporate*corporate_outreach_proportion_of_programs+animals_spared_per_dollar_by_social_media_and_medi*social_media_and_media_proportion_of_programs",
+      "explainer": "ACE's 2016 headline, not used here: it counts an animal of any species alike, from a chicken to a cow. The result uses ACE's years of suffering spared instead, converted with our shared rates like our other animal models."
+    },
+    {
+      "id": "total_years_of_suffering_spared_per_dollar",
+      "label": "Total years of suffering spared per dollar",
+      "section": "model",
+      "formula": "years_of_suffering_spared_per_dollar_by_consumer_o*consumer_outreach_proportion_of_programs+equivalent_years_of_suffering_spared_per_dollar_by*corporate_outreach_proportion_of_programs+years_of_suffering_spared_per_dollar_by_social_med*social_media_and_media_proportion_of_programs"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "total_budget * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "total_budget / (total_budget + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "participants_in_vegan_taste_week_program",
+      "label": "Participants in Vegan Taste Week program",
+      "section": "model",
+      "value": {
+        "low": 42000.0,
+        "best": 51439.28459844674,
+        "high": 63000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "PIV"
+      },
+      "explainer": "ACE's 90% interval, 42000 to 63000 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, 49,293 people signed up for the Vegan Taste Week and in the first eight months of 2016, 39,187 people signed up.\""
+    },
+    {
+      "id": "local_action_groups",
+      "label": "Local action groups",
+      "section": "model",
+      "value": {
+        "low": 30.0,
+        "best": 33.76388603226827,
+        "high": 38.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "LAG"
+      },
+      "explainer": "ACE's 90% interval, 30 to 38 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we were able to grow the net number of local groups by 7 and in 2016, we increased it by another 7 during the first eight months, now totalling 37 groups.\" Their [website](https://albert-schweitzer-stiftung.de/helfen/aktiv) lists the groups and their planned activities. While some do not have activities listed, they may be active more infrequently; however it is also possible that some groups with no listed activities have dissolved and ASF is not yet aware of this."
+    },
+    {
+      "id": "leaflets_distributed",
+      "label": "Leaflets distributed",
+      "section": "model",
+      "value": {
+        "low": 350000.0,
+        "best": 409878.03063838393,
+        "high": 480000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "LEA"
+      },
+      "explainer": "ACE's 90% interval, 350000 to 480000 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we distributed 444,533 brochures and in 2016, we have distributed 311,340 brochures, so far (with one major push coming later this year).\" \n\nSome channels of distribution (such as through local groups or by mail to activist who order them to distribute) may result in ASF overestimating the number of leaflets distributed to the public, if not all the leaflets they ship are distributed."
+    },
+    {
+      "id": "visitors_to_the_vegan_summer_festival",
+      "label": "Visitors to the Vegan Summer Festival",
+      "section": "model",
+      "value": {
+        "low": 45000.0,
+        "best": 55000.0,
+        "high": 65000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "VTT"
+      },
+      "explainer": "ACE's 90% interval, 45000 to 65000 (normal). The best guess is its median.\n\nASF provided: \"The Vegan Summer Festival is co-hosted every year by VEBU, Berlin Vegan and Albert Schweitzer Foundation. It runs for three days and attracted 55,000 visitors in 2015 and 60,000 visitors in 2016.\""
+    },
+    {
+      "id": "newsletter_subscribers",
+      "label": "Newsletter subscribers",
+      "section": "model",
+      "value": {
+        "low": 95000.0,
+        "best": 102225.24150130436,
+        "high": 110000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "NEW"
+      },
+      "explainer": "ACE's 90% interval, 95000 to 110000 (lognormal). The best guess is its median.\n\nASF provided: \"Our weekly newsletter reached 100,000 subscribers in August 2016.\"\n\nThis metric doesn’t directly figure into our cost-effectiveness calculations because the subscribers are already accounted for in the figures of people reached by ASF outreach."
+    },
+    {
+      "id": "animals_spared_per_leaflet",
+      "label": "Animals spared per leaflet",
+      "section": "model",
+      "formula": "@ace.ace2016_animals_spared_per_leaflet",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "ASP1"
+      },
+      "explainer": "ACE's 90% interval, .21 to 1.86 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75.\n\nThe same figure is kept as shared data (Animal Charity Evaluators, under Data), which this row reads."
+    },
+    {
+      "id": "years_of_suffering_spared_per_leaflet",
+      "label": "Years of suffering spared per leaflet",
+      "section": "model",
+      "formula": "@ace.ace2016_years_suffering_per_leaflet",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "YOS1"
+      },
+      "explainer": "ACE's 90% interval, .079 to .5 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75.\n\nThe same figure is kept as shared data (Animal Charity Evaluators, under Data), which this row reads."
+    },
+    {
+      "id": "animals_spared_per_participant",
+      "label": "Animals spared per participant",
+      "section": "model",
+      "value": {
+        "low": 1.0,
+        "best": 6.324555320336759,
+        "high": 40.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "ASP2"
+      },
+      "explainer": "ACE's 90% interval, 1 to 40 (lognormal). The best guess is its median.\n\nWe assume that the program is about 1/4 as effective per participant as [Veganuary](https://www.getguesstimate.com/models/7225)'s month-long pledge program. This is an extremely crude assumption, so we incorporate additional uncertainty at both ends of the range."
+    },
+    {
+      "id": "years_of_suffering_spared_per_participant",
+      "label": "Years of suffering spared per participant",
+      "section": "model",
+      "value": {
+        "low": 0.4,
+        "best": 2.0976176963403033,
+        "high": 11.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "YOS2"
+      },
+      "explainer": "ACE's 90% interval, .4 to 11 (lognormal). The best guess is its median.\n\nDifferent animals have wildly different lifespans in industrial agriculture systems, ranging from a few weeks for broiler chickens to several years for cows used in milk production.\n\nSince the Vegan Taste Week pledge program addresses overall consumption of animal products in a similar way to leafleting programs, the ratio between animals spared and years of suffering spared should be similar for the two programs. We used this fact, our estimates for the impact of leafleting seen in other cost-effectiveness models, and the number of animals spared per participant calculated for the pledge program to arrive at an appropriate range of years of suffering spared"
+    },
+    {
+      "id": "animals_spared_per_dollar_by_consumer_outreach_2",
+      "label": "Animals spared per dollar by consumer outreach",
+      "section": "model",
+      "formula": "(animals_spared_per_participant*participants_in_vegan_taste_week_program+animals_spared_per_leaflet*leaflets_distributed)/consumer_outreach_cost",
+      "explainer": "We measure the effects of consumer outreach by adding together the effects from leaflets distributed and Vegan Taste Week participation. We do not account separately for the effects of local groups (which have at least some of their effectiveness through these two outcomes) or visitors to the Vegan Summer Festival (which we do not adequately understand)."
+    },
+    {
+      "id": "years_of_suffering_spared_per_dollar_by_consumer_o_2",
+      "label": "Years of suffering spared per dollar by consumer outreach",
+      "section": "model",
+      "formula": "(years_of_suffering_spared_per_participant*participants_in_vegan_taste_week_program+years_of_suffering_spared_per_leaflet*leaflets_distributed)/consumer_outreach_cost",
+      "explainer": "We measure the effects of consumer outreach by adding together the effects from leaflets distributed and Vegan Taste Week participation. We do not account separately for the effects of local groups (which have at least some of their effectiveness through these two outcomes) or visitors to the Vegan Summer Festival (which we do not adequately understand)."
+    },
+    {
+      "id": "corporate_policy_victories",
+      "label": "Corporate policy victories",
+      "section": "model",
+      "value": {
+        "low": 25.0,
+        "best": 31.622776601683793,
+        "high": 40.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "CPV1"
+      },
+      "explainer": "ACE's 90% interval, 25 to 40 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we convinced 31 companies to go cage-free and in the first eight months of 2016, we convinced 17 companies to do so.... After a quick campaign to get German supermarkets to stop selling eggs from caged quails, we developed a relationship with Europe’s largest quail producer, Urgasa.... In 2014, the federal state of Lower Saxony announced that it will outlaw beak searing by the end of 2016. In 2015 and 2016, basically all other decision makers such as the German Agriculture Minister and the egg industry agreed to end the practice by 2016/2017....Late in 2015, a leading German retailer decided to cooperate with us on better trout welfare in aquaculture....One of the most prominent signs of success in that area is the fact that we are cooperating closely with several supermarket chains in order to produce and refine their animal welfare policies. We were able to make meaningful contributions to two policies, gave detailed ex-post feedback to two additional chains that will be considered in the next updates, and are now working on an update with another chain....In 2015, we worked with 34 companies and dining operations to generate 46 impact points (relating to providing mainstream vegan options) and in 2016 we, so far, have worked with 6 companies to generate 41 impact points.\""
+    },
+    {
+      "id": "hens_affected_yearly_by_cage_free_policies_asf_was",
+      "label": "Hens affected yearly by cage-free policies ASF was involved with",
+      "section": "model",
+      "value": {
+        "low": 600000.0,
+        "best": 4898979.485566356,
+        "high": 40000000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "HAY"
+      },
+      "explainer": "ACE's 90% interval, 600000 to 40000000 (lognormal). The best guess is its median.\n\nASF did not provide an estimate, leading us to have considerable uncertainty. We used ASF's estimate of 65 million hens affected by debeaking policies set to affect all eggs sold in Germany as an upper bound. On the lower bound, the vast majority of estimates for the number of hens affected by policy changes by individual grocery chains in the US are larger than 100,000. While Germany is smaller than the US, many of those estimates were for regional chains, so we think it's unlikely that the policies reported by ASF will affect fewer than 1 million hens in total."
+    },
+    {
+      "id": "animals_affected_yearly_by_other_policy_changes_as",
+      "label": "Animals affected yearly by other policy changes ASF was involved with ",
+      "section": "model",
+      "value": {
+        "low": 60000000.0,
+        "best": 77459666.92414834,
+        "high": 100000000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "AAY"
+      },
+      "explainer": "ACE's 90% interval, 60000000 to 100000000 (lognormal). The best guess is its median.\n\nThe 65 million hens ASF says will be affected by an end to debeaking in Germany provide a lower bound. We are very uncertain about the scope of some of the other policy changes they have cited, but none seem clearly larger in reach than that change."
+    },
+    {
+      "id": "proportional_improvement_in_welfare_due_to_cage_fr",
+      "label": "Proportional improvement in welfare due to cage-free policies",
+      "section": "model",
+      "value": {
+        "low": -0.25,
+        "best": 0.10500000000000001,
+        "high": 0.46
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "PMI"
+      },
+      "explainer": "ACE's 90% interval, -.25 to .46 (normal). The best guess is its median.\n\nHens suffer in both battery cage and cage-free systems. While many advocates believe that cage-free systems are better from the hen's perspective, some disagree. Most research privileges outcomes of interest to farmers, rather than the hens' interests."
+    },
+    {
+      "id": "proportional_improvement_in_welfare_due_to_other_p",
+      "label": "Proportional improvement in welfare due to other policies",
+      "section": "model",
+      "value": {
+        "low": -0.24,
+        "best": 0.04500000000000001,
+        "high": 0.33
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "PMI1"
+      },
+      "explainer": "ACE's 90% interval, -.24 to .33 (normal). The best guess is its median.\n\nOther policies ASF has mentioned include ending debeaking, ending caged quail farming, improving \"transport, hygiene, antibiotics use, water quality, slaughter, inspecting carcasses at slaughter, expertise of workers\" in trout farming, and broad animal welfare policies adopted by retailers. \n\nSome policies, such as debeaking, have possible downsides for animals.\n\nWe think the debeaking policy here is likely the one which will affect the most animals. As with cage-free policies, while many think it is positive on balance, if it is implemented poorly there is a risk that hens will wound each other due to the conditions of farming."
+    },
+    {
+      "id": "asf_s_responsibility_for_changes",
+      "label": "ASF's responsibility for changes",
+      "section": "model",
+      "value": {
+        "low": 0.3,
+        "best": 0.4898979485566356,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "ASR"
+      },
+      "explainer": "ACE's 90% interval, .3 to .8 (lognormal). The best guess is its median.\n\nASF is a leading group when it comes to corporate outreach in Germany, but The Humane League has driven some of the push toward cage-free policies internationally and was involved in some of ASF's victories. Other groups may also have been involved."
+    },
+    {
+      "id": "asf_s_responsibility_for_changes_2",
+      "label": "ASF's responsibility for changes",
+      "section": "model",
+      "value": {
+        "low": 0.47271058697614776,
+        "best": 0.7,
+        "high": 0.9272894130238521
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "ASR1"
+      },
+      "explainer": "Beta(7, 3) in Guesstimate: best guess is its mean, range its 90% interval.\n\nASF is a leader in corporate outreach in Germany. While we're not aware of specific roles played by other groups in these victories, some are sweeping enough that we think other groups may have played a supporting role."
+    },
+    {
+      "id": "years_of_impact_expected",
+      "label": "Years of impact expected",
+      "section": "model",
+      "value": {
+        "low": 1.0,
+        "best": 3.872983346207417,
+        "high": 15.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "YOI"
+      },
+      "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe consider a limited term of impact because companies might simply have adopted the same policy later without ASF's influence, might go out of business, or might abandon the policy after following it for some number of years."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). ACE's 2016 model doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits spread over years can be discounted smoothly rather than in yearly steps."
+    },
+    {
+      "id": "discounted_years_of_impact",
+      "section": "discounting",
+      "label": "Years of impact expected, discounted",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, (1 - exp(-continuous_discount_rate * years_of_impact_expected)) / continuous_discount_rate, years_of_impact_expected)",
+      "explainer": "ACE multiplies the animals a policy affects each year by the years of impact, counting every year the same. In our view later years count less at the discount rate: this is the present value of one animal-year per year over that many years (equal to the years at a 0% rate; 3.6 instead of 3.9 at 4%)."
+    },
+    {
+      "id": "equivalent_hens_spared_from_cage_free_policies",
+      "label": "Equivalent hens spared from cage-free policies",
+      "section": "model",
+      "formula": "hens_affected_yearly_by_cage_free_policies_asf_was*proportional_improvement_in_welfare_due_to_cage_fr*asf_s_responsibility_for_changes*discounted_years_of_impact"
+    },
+    {
+      "id": "equivalent_years_of_suffering_spared_from_cage_fre",
+      "label": "Equivalent years of suffering spared from cage-free policies",
+      "section": "model",
+      "formula": "equivalent_hens_spared_from_cage_free_policies",
+      "explainer": "Since laying hens typically live for 1-2 years, the number of hens affected yearly is approximately the number of years of suffering reduced yearly (but we must correct for the fact that these hens are not spared from all the suffering involved in industrial agriculture). (A hen who lives for two years will be considered \"affected yearly\" for both of them, so does not need to be counted twice here.)"
+    },
+    {
+      "id": "equivalent_animals_spared_from_other_policies",
+      "label": "Equivalent animals spared from other policies",
+      "section": "model",
+      "formula": "animals_affected_yearly_by_other_policy_changes_as*proportional_improvement_in_welfare_due_to_other_p*asf_s_responsibility_for_changes_2*discounted_years_of_impact"
+    },
+    {
+      "id": "equivalent_years_of_suffering_spared_from_other_po",
+      "label": "Equivalent years of suffering spared from other policies",
+      "section": "model",
+      "formula": ".9*equivalent_animals_spared_from_other_policies",
+      "explainer": "We expect many of the animals affected to be laying hens and trout, and since laying hens and farmed fish typically live for 1-2 years, the number of these animals affected yearly is approximately the number of years of suffering reduced yearly (but we must correct for the fact that these they are not spared from all the suffering involved in industrial agriculture). (An animal who lives for two years will be considered \"affected yearly\" for both of them, so does not need to be counted twice here.) However, some animals affected by the broader policies will likely live for shorter periods."
+    },
+    {
+      "id": "equivalent_animals_spared_per_dollar_by_corporate_2",
+      "label": "Equivalent animals spared per dollar by corporate policies",
+      "section": "model",
+      "formula": "(equivalent_hens_spared_from_cage_free_policies+equivalent_animals_spared_from_other_policies)/corporate_outreach_cost"
+    },
+    {
+      "id": "equivalent_years_of_suffering_spared_per_dollar_by_2",
+      "label": "Equivalent years of suffering spared per dollar by corporate policies",
+      "section": "model",
+      "formula": "(equivalent_years_of_suffering_spared_from_cage_fre+equivalent_years_of_suffering_spared_from_other_po)/corporate_outreach_cost"
+    },
+    {
+      "id": "equivalent_animals_spared_per_dollar_by_corporate",
+      "label": "Equivalent animals spared per dollar by Corporate Outreach",
+      "section": "model",
+      "formula": "equivalent_animals_spared_per_dollar_by_corporate_2"
+    },
+    {
+      "id": "equivalent_years_of_suffering_spared_per_dollar_by",
+      "label": "Equivalent years of suffering spared per dollar by Corporate Outreach",
+      "section": "model",
+      "formula": "equivalent_years_of_suffering_spared_per_dollar_by_2"
+    },
+    {
+      "id": "articles_written_by_scientific_department",
+      "label": "Articles written by scientific department",
+      "section": "model",
+      "value": {
+        "low": 24.0,
+        "best": 30.983866769659336,
+        "high": 40.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "AWB"
+      },
+      "explainer": "ACE's 90% interval, 24 to 40 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, our scientific department staff wrote 37 articles for our websites and in 2016, it has written 24 articles, so far.\""
+    },
+    {
+      "id": "books_citing_asf_s_articles",
+      "label": "Books citing ASF's articles",
+      "section": "model",
+      "value": {
+        "low": 6.0,
+        "best": 7.3484692283495345,
+        "high": 9.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "BCA"
+      },
+      "explainer": "ACE's 90% interval, 6 to 9 (lognormal). The best guess is its median.\n\nASF provided: \"Nine of these articles were cited in five books in 2015 and 16 have been cited in six books in 2016, so far.\""
+    },
+    {
+      "id": "presentations_and_articles_prepared_for_influentia",
+      "label": "Presentations and articles prepared for influential groups",
+      "section": "model",
+      "value": {
+        "low": 16.0,
+        "best": 23.664319132398465,
+        "high": 35.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "PAA"
+      },
+      "explainer": "ACE's 90% interval, 16 to 35 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we gave 14 presentations, seminars and panel discussions to these target groups. In the first eight months of 2016, that number was eight. \n\nWe are also writing articles and giving interviews to media that is especially consumed by influencers and experts (14 in 2015 and 8 in 2016, so far).\"\n\nThey also specifically cited some other presentations and conference organizing which we think are relevant here and may not have been counted in this number"
+    },
+    {
+      "id": "monthly_engaged_users_facebook",
+      "label": "Monthly engaged users (Facebook)",
+      "section": "model",
+      "value": {
+        "low": 83000.0,
+        "best": 96845.23736353792,
+        "high": 113000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "MEU"
+      },
+      "explainer": "ACE's 90% interval, 83000 to 113000 (lognormal). The best guess is its median.\n\nASF's Facebook reports show an average of 98151 engaged users (anyone who clicks, comments on, shares, or reacts to the page) in a 28 day period. Estimated error due to variation over time is +/- 15%."
+    },
+    {
+      "id": "yearly_unique_video_views_to_95_facebook",
+      "label": "Yearly unique video views to 95% (Facebook)",
+      "section": "model",
+      "value": {
+        "low": 123000.0,
+        "best": 143321.31732579073,
+        "high": 167000.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "YUV"
+      },
+      "explainer": "ACE's 90% interval, 123000 to 167000 (lognormal). The best guess is its median.\n\nASF's Facebook reports show 72475 unique views to 95% over 180 days. This leads to our mean estimate of 144950 unique views to 95% per year, with error due to changes over time of +/- 15%."
+    },
+    {
+      "id": "animals_spared_per_dollar_by_social_media",
+      "label": "Animals spared per dollar by social media",
+      "section": "model",
+      "value": {
+        "low": 0.0073,
+        "best": 0.08365,
+        "high": 0.16
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "ASP4"
+      },
+      "explainer": "ACE's 90% interval, .0073 to .16 (normal). The best guess is its median.\n\nEstimated using our [social media calculator](https://docs.google.com/spreadsheets/d/1jzsw9Suc8HHpzRPeaVDK4oMqQoFTH12HtXYeaW4SrVk/edit#gid=1263869078) for ASF."
+    },
+    {
+      "id": "years_of_suffering_spared_per_dollar_by_social_med_2",
+      "label": "Years of suffering spared per dollar by social media",
+      "section": "model",
+      "value": {
+        "low": 0.0019,
+        "best": 0.008497058314499201,
+        "high": 0.038
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Guesstimate model 7338",
+        "url": "https://www.getguesstimate.com/models/7338",
+        "cell": "YOS4"
+      },
+      "explainer": "ACE's 90% interval, .0019 to .038 (lognormal). The best guess is its median.\n\nEstimated using our [social media calculator](https://docs.google.com/spreadsheets/d/1jzsw9Suc8HHpzRPeaVDK4oMqQoFTH12HtXYeaW4SrVk/edit#gid=1263869078) for ASF."
+    },
+    {
+      "id": "cost_per_video_view",
+      "label": "Cost per video view",
+      "section": "model",
+      "formula": "social_media_and_media_cost/yearly_unique_video_views_to_95_facebook"
+    },
+    {
+      "id": "animals_spared_per_dollar_by_social_media_and_medi",
+      "label": "Animals spared per dollar by Social Media and Media",
+      "section": "model",
+      "formula": "animals_spared_per_dollar_by_social_media"
+    },
+    {
+      "id": "years_of_suffering_spared_per_dollar_by_social_med",
+      "label": "Years of suffering spared per dollar by Social Media and Media",
+      "section": "model",
+      "formula": "years_of_suffering_spared_per_dollar_by_social_med_2"
+    },
+    {
+      "id": "animals_affected_yearly_by_policy_changes_asf_was",
+      "label": "Animals affected yearly by policy changes ASF was involved with",
+      "section": "model",
+      "formula": "hens_affected_yearly_by_cage_free_policies_asf_was+animals_affected_yearly_by_other_policy_changes_as"
+    },
+    {
+      "id": "hen_years_per_dollar",
+      "section": "species",
+      "label": "Years of caged life spared per dollar: chickens",
+      "format": "number",
+      "formula": "equivalent_years_of_suffering_spared_from_cage_fre / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "ACE's equivalent years of suffering spared for hens spared cages by cage-free policies, the part of this model whose species is known."
+    },
+    {
+      "id": "hens_spared_per_dollar",
+      "section": "species",
+      "label": "Chickens spared per dollar",
+      "format": "number",
+      "formula": "equivalent_hens_spared_from_cage_free_policies / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "The same chickens, counted as ACE counts animals spared, so they aren't counted again among other animals."
+    },
+    {
+      "id": "other_animals_per_dollar",
+      "section": "species",
+      "label": "Other animals spared per dollar",
+      "format": "number",
+      "formula": "total_animals_spared_per_dollar - hens_spared_per_dollar",
+      "explainer": "Every other animal ACE counts as spared, mostly through diet change. ACE's 2016 sheets don't say which species they are."
+    },
+    {
+      "id": "sads_per_animal_spared",
+      "section": "species",
+      "label": "SADs averted per animal spared",
+      "format": "number",
+      "formula": "@sad_factors.sads_per_meal_replaced / @sad_factors.animals_spared_per_meal_replaced",
+      "explainer": "The shared figures for a replaced meal, in suffering-adjusted days (SADs) and in animals, give the suffering behind each animal spared: about 8.7 SADs. Every model that counts animals spared uses this one rate, split by species. ACE's 2016 sheets don't give a species breakdown, so the split is ACE's 2024 estimate of which animals a plant-based diet spares."
+    },
+    {
+      "id": "sads_chicken",
+      "section": "species",
+      "label": "SADs averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "(hen_years_per_dollar * @ace.caged_hen_sads_per_year + other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_chicken) * donor_cost_share",
+      "explainer": "SADs averted for chickens per dollar you give."
+    },
+    {
+      "id": "ced_chicken",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
+      "explainer": "The SADs for chickens with Ambitious Impact's weight for a hen (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+    },
+    {
+      "id": "sads_fish",
+      "section": "species",
+      "label": "SADs averted per dollar you give: fish",
+      "format": "number",
+      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_fish * donor_cost_share",
+      "explainer": "SADs averted for fish per dollar you give."
+    },
+    {
+      "id": "ced_fish",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: fish",
+      "format": "number",
+      "formula": "sads_fish / @aim_sads.fish * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish / @aim_sads.chicken)",
+      "explainer": "The SADs for fish with Ambitious Impact's weight for fish taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+    },
+    {
+      "id": "sads_pig",
+      "section": "species",
+      "label": "SADs averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_pig * donor_cost_share",
+      "explainer": "SADs averted for pigs per dollar you give."
+    },
+    {
+      "id": "ced_pig",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "sads_pig / @aim_sads.pig * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig / @aim_sads.chicken)",
+      "explainer": "The SADs for pigs with Ambitious Impact's weight for pigs taken out, and Rethink Priorities' estimate of how much pigs can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "number",
+      "formula": "ced_chicken + ced_fish + ced_pig",
+      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+    }
+  ],
+  "output": {
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "total_animals_spared_per_dollar",
+      "unit": "animals spared"
+    },
+    "species": [
+      "chicken",
+      "fish",
+      "pig"
+    ]
   }
- },
- "resources": [
-  {
-   "title": "ACE review, November 2016",
-   "url": "https://animalcharityevaluators.org/charity-review/albert-schweitzer-foundation/2016-nov/",
-   "type": "evaluation"
-  },
-  {
-   "title": "ACE's Guesstimate model",
-   "url": "https://www.getguesstimate.com/models/7338",
-   "type": "model",
-   "note": "The model this page reproduces. Guesstimate shows simulation means; this page uses medians."
-  }
- ],
- "sections": [
-  {
-   "id": "model",
-   "title": "Model",
-   "explainer": "The Albert Schweitzer Foundation provided budget and accomplishments information for 2015 and partial information for January to August 2016. Estimates in this sheet are made by Animal Charity Evaluators for the full year of 2016.\n\nRead ACE's 2016 [review](https://animalcharityevaluators.org/research/charity-review/albert-schweitzer-foundation/) of the Albert Schweitzer Foundation."
-  }
- ],
- "rows": [
-  {
-   "id": "consumer_outreach_proportion_of_programs",
-   "label": "Consumer Outreach proportion of programs",
-   "section": "model",
-   "formula": "consumer_outreach_cost/total_budget"
-  },
-  {
-   "id": "corporate_outreach_proportion_of_programs",
-   "label": "Corporate Outreach proportion of programs",
-   "section": "model",
-   "formula": "corporate_outreach_cost/total_budget"
-  },
-  {
-   "id": "scientific_and_evaluative_work_proportion_of_progr",
-   "label": "Scientific and Evaluative Work proportion of programs",
-   "section": "model",
-   "formula": "scientific_and_evaluative_work_cost/total_budget"
-  },
-  {
-   "id": "lobbying_and_networking_proportion_of_programs",
-   "label": "Lobbying and Networking proportion of programs",
-   "section": "model",
-   "formula": "lobbying_and_networking_cost/total_budget"
-  },
-  {
-   "id": "international_expansion_proportion_of_programs",
-   "label": "International Expansion proportion of programs",
-   "section": "model",
-   "formula": "international_expansion_cost/total_budget"
-  },
-  {
-   "id": "social_media_and_media_proportion_of_programs",
-   "label": "Social Media and Media proportion of programs",
-   "section": "model",
-   "formula": "social_media_and_media_cost/total_budget"
-  },
-  {
-   "id": "legal_system_proportion_of_programs",
-   "label": "Legal System proportion of programs",
-   "section": "model",
-   "formula": "legal_system_cost/total_budget"
-  },
-  {
-   "id": "consumer_outreach_cost",
-   "label": "Consumer Outreach cost ($)",
-   "section": "model",
-   "formula": "consumer_outreach_cost_2*per"
-  },
-  {
-   "id": "consumer_outreach_cost_2",
-   "label": "Consumer Outreach cost (€)",
-   "section": "model",
-   "value": 349000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "COC1"
-   }
-  },
-  {
-   "id": "animals_spared_per_dollar_by_consumer_outreach",
-   "label": "Animals spared per dollar by Consumer Outreach",
-   "section": "model",
-   "formula": "animals_spared_per_dollar_by_consumer_outreach_2"
-  },
-  {
-   "id": "years_of_suffering_spared_per_dollar_by_consumer_o",
-   "label": "Years of suffering spared per dollar by Consumer Outreach",
-   "section": "model",
-   "formula": "years_of_suffering_spared_per_dollar_by_consumer_o_2"
-  },
-  {
-   "id": "corporate_outreach_cost",
-   "label": "Corporate Outreach cost ($)",
-   "section": "model",
-   "formula": "corporate_outreach_cost_2*per"
-  },
-  {
-   "id": "scientific_and_evaluative_work_cost",
-   "label": "Scientific and Evaluative Work cost ($)",
-   "section": "model",
-   "formula": "scientific_and_evaluative_work_cost_2*per"
-  },
-  {
-   "id": "lobbying_and_networking_cost",
-   "label": "Lobbying and Networking cost ($)",
-   "section": "model",
-   "formula": "lobbying_and_networking_cost_2*per"
-  },
-  {
-   "id": "international_expansion_cost",
-   "label": "International Expansion cost ($)",
-   "section": "model",
-   "formula": "international_expansion_cost_2*per"
-  },
-  {
-   "id": "social_media_and_media_cost",
-   "label": "Social Media and Media cost ($)",
-   "section": "model",
-   "formula": "social_media_and_media_cost_2*per"
-  },
-  {
-   "id": "legal_system_cost",
-   "label": "Legal System cost ($)",
-   "section": "model",
-   "formula": "legal_system_cost_2*per"
-  },
-  {
-   "id": "total_budget",
-   "label": "Total budget ($)",
-   "section": "model",
-   "formula": "sum(legal_system_cost,social_media_and_media_cost,international_expansion_cost,lobbying_and_networking_cost,scientific_and_evaluative_work_cost,corporate_outreach_cost,consumer_outreach_cost)"
-  },
-  {
-   "id": "corporate_outreach_cost_2",
-   "label": "Corporate Outreach cost (€)",
-   "section": "model",
-   "value": 248000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "COC3"
-   }
-  },
-  {
-   "id": "scientific_and_evaluative_work_cost_2",
-   "label": "Scientific and Evaluative Work cost (€)",
-   "section": "model",
-   "value": 143000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "SAV2"
-   }
-  },
-  {
-   "id": "lobbying_and_networking_cost_2",
-   "label": "Lobbying and Networking cost (€)",
-   "section": "model",
-   "value": 52000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "LAN2"
-   }
-  },
-  {
-   "id": "international_expansion_cost_2",
-   "label": "International Expansion cost (€)",
-   "section": "model",
-   "value": 50000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "NXC1"
-   }
-  },
-  {
-   "id": "social_media_and_media_cost_2",
-   "label": "Social Media and Media cost (€)",
-   "section": "model",
-   "value": 38000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "SMA2"
-   }
-  },
-  {
-   "id": "legal_system_cost_2",
-   "label": "Legal System cost (€)",
-   "section": "model",
-   "value": 19000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "LSC1"
-   }
-  },
-  {
-   "id": "per",
-   "label": "$ per €",
-   "section": "model",
-   "value": {
-    "low": 1.05,
-    "best": 1.0988630487917956,
-    "high": 1.15
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "PER"
-   },
-   "explainer": "ACE's 90% interval, 1.05 to 1.15 (lognormal). The best guess is its median."
-  },
-  {
-   "id": "total_animals_spared_per_dollar",
-   "label": "Total animals spared per dollar",
-   "section": "model",
-   "formula": "animals_spared_per_dollar_by_consumer_outreach*consumer_outreach_proportion_of_programs+equivalent_animals_spared_per_dollar_by_corporate*corporate_outreach_proportion_of_programs+animals_spared_per_dollar_by_social_media_and_medi*social_media_and_media_proportion_of_programs"
-  },
-  {
-   "id": "total_years_of_suffering_spared_per_dollar",
-   "label": "Total years of suffering spared per dollar",
-   "section": "model",
-   "formula": "years_of_suffering_spared_per_dollar_by_consumer_o*consumer_outreach_proportion_of_programs+equivalent_years_of_suffering_spared_per_dollar_by*corporate_outreach_proportion_of_programs+years_of_suffering_spared_per_dollar_by_social_med*social_media_and_media_proportion_of_programs"
-  },
-  {
-   "id": "participants_in_vegan_taste_week_program",
-   "label": "Participants in Vegan Taste Week program",
-   "section": "model",
-   "value": {
-    "low": 42000.0,
-    "best": 51439.28459844674,
-    "high": 63000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "PIV"
-   },
-   "explainer": "ACE's 90% interval, 42000 to 63000 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, 49,293 people signed up for the Vegan Taste Week and in the first eight months of 2016, 39,187 people signed up.\""
-  },
-  {
-   "id": "local_action_groups",
-   "label": "Local action groups",
-   "section": "model",
-   "value": {
-    "low": 30.0,
-    "best": 33.76388603226827,
-    "high": 38.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "LAG"
-   },
-   "explainer": "ACE's 90% interval, 30 to 38 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we were able to grow the net number of local groups by 7 and in 2016, we increased it by another 7 during the first eight months, now totalling 37 groups.\" Their [website](https://albert-schweitzer-stiftung.de/helfen/aktiv) lists the groups and their planned activities. While some do not have activities listed, they may be active more infrequently; however it is also possible that some groups with no listed activities have dissolved and ASF is not yet aware of this."
-  },
-  {
-   "id": "leaflets_distributed",
-   "label": "Leaflets distributed",
-   "section": "model",
-   "value": {
-    "low": 350000.0,
-    "best": 409878.03063838393,
-    "high": 480000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "LEA"
-   },
-   "explainer": "ACE's 90% interval, 350000 to 480000 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we distributed 444,533 brochures and in 2016, we have distributed 311,340 brochures, so far (with one major push coming later this year).\" \n\nSome channels of distribution (such as through local groups or by mail to activist who order them to distribute) may result in ASF overestimating the number of leaflets distributed to the public, if not all the leaflets they ship are distributed."
-  },
-  {
-   "id": "visitors_to_the_vegan_summer_festival",
-   "label": "Visitors to the Vegan Summer Festival",
-   "section": "model",
-   "value": {
-    "low": 45000.0,
-    "best": 55000.0,
-    "high": 65000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "VTT"
-   },
-   "explainer": "ACE's 90% interval, 45000 to 65000 (normal). The best guess is its median.\n\nASF provided: \"The Vegan Summer Festival is co-hosted every year by VEBU, Berlin Vegan and Albert Schweitzer Foundation. It runs for three days and attracted 55,000 visitors in 2015 and 60,000 visitors in 2016.\""
-  },
-  {
-   "id": "newsletter_subscribers",
-   "label": "Newsletter subscribers",
-   "section": "model",
-   "value": {
-    "low": 95000.0,
-    "best": 102225.24150130436,
-    "high": 110000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "NEW"
-   },
-   "explainer": "ACE's 90% interval, 95000 to 110000 (lognormal). The best guess is its median.\n\nASF provided: \"Our weekly newsletter reached 100,000 subscribers in August 2016.\"\n\nThis metric doesn’t directly figure into our cost-effectiveness calculations because the subscribers are already accounted for in the figures of people reached by ASF outreach."
-  },
-  {
-   "id": "animals_spared_per_leaflet",
-   "label": "Animals spared per leaflet",
-   "section": "model",
-   "value": {
-    "low": 0.21,
-    "best": 1.0350000000000001,
-    "high": 1.86
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "ASP1"
-   },
-   "explainer": "ACE's 90% interval, .21 to 1.86 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75."
-  },
-  {
-   "id": "years_of_suffering_spared_per_leaflet",
-   "label": "Years of suffering spared per leaflet",
-   "section": "model",
-   "value": {
-    "low": 0.079,
-    "best": 0.2895,
-    "high": 0.5
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "YOS1"
-   },
-   "explainer": "ACE's 90% interval, .079 to .5 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75."
-  },
-  {
-   "id": "animals_spared_per_participant",
-   "label": "Animals spared per participant",
-   "section": "model",
-   "value": {
-    "low": 1.0,
-    "best": 6.324555320336759,
-    "high": 40.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "ASP2"
-   },
-   "explainer": "ACE's 90% interval, 1 to 40 (lognormal). The best guess is its median.\n\nWe assume that the program is about 1/4 as effective per participant as [Veganuary](https://www.getguesstimate.com/models/7225)'s month-long pledge program. This is an extremely crude assumption, so we incorporate additional uncertainty at both ends of the range."
-  },
-  {
-   "id": "years_of_suffering_spared_per_participant",
-   "label": "Years of suffering spared per participant",
-   "section": "model",
-   "value": {
-    "low": 0.4,
-    "best": 2.0976176963403033,
-    "high": 11.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "YOS2"
-   },
-   "explainer": "ACE's 90% interval, .4 to 11 (lognormal). The best guess is its median.\n\nDifferent animals have wildly different lifespans in industrial agriculture systems, ranging from a few weeks for broiler chickens to several years for cows used in milk production.\n\nSince the Vegan Taste Week pledge program addresses overall consumption of animal products in a similar way to leafleting programs, the ratio between animals spared and years of suffering spared should be similar for the two programs. We used this fact, our estimates for the impact of leafleting seen in other cost-effectiveness models, and the number of animals spared per participant calculated for the pledge program to arrive at an appropriate range of years of suffering spared"
-  },
-  {
-   "id": "animals_spared_per_dollar_by_consumer_outreach_2",
-   "label": "Animals spared per dollar by consumer outreach",
-   "section": "model",
-   "formula": "(animals_spared_per_participant*participants_in_vegan_taste_week_program+animals_spared_per_leaflet*leaflets_distributed)/consumer_outreach_cost",
-   "explainer": "We measure the effects of consumer outreach by adding together the effects from leaflets distributed and Vegan Taste Week participation. We do not account separately for the effects of local groups (which have at least some of their effectiveness through these two outcomes) or visitors to the Vegan Summer Festival (which we do not adequately understand)."
-  },
-  {
-   "id": "years_of_suffering_spared_per_dollar_by_consumer_o_2",
-   "label": "Years of suffering spared per dollar by consumer outreach",
-   "section": "model",
-   "formula": "(years_of_suffering_spared_per_participant*participants_in_vegan_taste_week_program+years_of_suffering_spared_per_leaflet*leaflets_distributed)/consumer_outreach_cost",
-   "explainer": "We measure the effects of consumer outreach by adding together the effects from leaflets distributed and Vegan Taste Week participation. We do not account separately for the effects of local groups (which have at least some of their effectiveness through these two outcomes) or visitors to the Vegan Summer Festival (which we do not adequately understand)."
-  },
-  {
-   "id": "corporate_policy_victories",
-   "label": "Corporate policy victories",
-   "section": "model",
-   "value": {
-    "low": 25.0,
-    "best": 31.622776601683793,
-    "high": 40.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "CPV1"
-   },
-   "explainer": "ACE's 90% interval, 25 to 40 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we convinced 31 companies to go cage-free and in the first eight months of 2016, we convinced 17 companies to do so.... After a quick campaign to get German supermarkets to stop selling eggs from caged quails, we developed a relationship with Europe’s largest quail producer, Urgasa.... In 2014, the federal state of Lower Saxony announced that it will outlaw beak searing by the end of 2016. In 2015 and 2016, basically all other decision makers such as the German Agriculture Minister and the egg industry agreed to end the practice by 2016/2017....Late in 2015, a leading German retailer decided to cooperate with us on better trout welfare in aquaculture....One of the most prominent signs of success in that area is the fact that we are cooperating closely with several supermarket chains in order to produce and refine their animal welfare policies. We were able to make meaningful contributions to two policies, gave detailed ex-post feedback to two additional chains that will be considered in the next updates, and are now working on an update with another chain....In 2015, we worked with 34 companies and dining operations to generate 46 impact points (relating to providing mainstream vegan options) and in 2016 we, so far, have worked with 6 companies to generate 41 impact points.\""
-  },
-  {
-   "id": "hens_affected_yearly_by_cage_free_policies_asf_was",
-   "label": "Hens affected yearly by cage-free policies ASF was involved with",
-   "section": "model",
-   "value": {
-    "low": 600000.0,
-    "best": 4898979.485566356,
-    "high": 40000000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "HAY"
-   },
-   "explainer": "ACE's 90% interval, 600000 to 40000000 (lognormal). The best guess is its median.\n\nASF did not provide an estimate, leading us to have considerable uncertainty. We used ASF's estimate of 65 million hens affected by debeaking policies set to affect all eggs sold in Germany as an upper bound. On the lower bound, the vast majority of estimates for the number of hens affected by policy changes by individual grocery chains in the US are larger than 100,000. While Germany is smaller than the US, many of those estimates were for regional chains, so we think it's unlikely that the policies reported by ASF will affect fewer than 1 million hens in total."
-  },
-  {
-   "id": "animals_affected_yearly_by_other_policy_changes_as",
-   "label": "Animals affected yearly by other policy changes ASF was involved with ",
-   "section": "model",
-   "value": {
-    "low": 60000000.0,
-    "best": 77459666.92414834,
-    "high": 100000000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "AAY"
-   },
-   "explainer": "ACE's 90% interval, 60000000 to 100000000 (lognormal). The best guess is its median.\n\nThe 65 million hens ASF says will be affected by an end to debeaking in Germany provide a lower bound. We are very uncertain about the scope of some of the other policy changes they have cited, but none seem clearly larger in reach than that change."
-  },
-  {
-   "id": "proportional_improvement_in_welfare_due_to_cage_fr",
-   "label": "Proportional improvement in welfare due to cage-free policies",
-   "section": "model",
-   "value": {
-    "low": -0.25,
-    "best": 0.10500000000000001,
-    "high": 0.46
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "PMI"
-   },
-   "explainer": "ACE's 90% interval, -.25 to .46 (normal). The best guess is its median.\n\nHens suffer in both battery cage and cage-free systems. While many advocates believe that cage-free systems are better from the hen's perspective, some disagree. Most research privileges outcomes of interest to farmers, rather than the hens' interests."
-  },
-  {
-   "id": "proportional_improvement_in_welfare_due_to_other_p",
-   "label": "Proportional improvement in welfare due to other policies",
-   "section": "model",
-   "value": {
-    "low": -0.24,
-    "best": 0.04500000000000001,
-    "high": 0.33
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "PMI1"
-   },
-   "explainer": "ACE's 90% interval, -.24 to .33 (normal). The best guess is its median.\n\nOther policies ASF has mentioned include ending debeaking, ending caged quail farming, improving \"transport, hygiene, antibiotics use, water quality, slaughter, inspecting carcasses at slaughter, expertise of workers\" in trout farming, and broad animal welfare policies adopted by retailers. \n\nSome policies, such as debeaking, have possible downsides for animals.\n\nWe think the debeaking policy here is likely the one which will affect the most animals. As with cage-free policies, while many think it is positive on balance, if it is implemented poorly there is a risk that hens will wound each other due to the conditions of farming."
-  },
-  {
-   "id": "asf_s_responsibility_for_changes",
-   "label": "ASF's responsibility for changes",
-   "section": "model",
-   "value": {
-    "low": 0.3,
-    "best": 0.4898979485566356,
-    "high": 0.8
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "ASR"
-   },
-   "explainer": "ACE's 90% interval, .3 to .8 (lognormal). The best guess is its median.\n\nASF is a leading group when it comes to corporate outreach in Germany, but The Humane League has driven some of the push toward cage-free policies internationally and was involved in some of ASF's victories. Other groups may also have been involved."
-  },
-  {
-   "id": "asf_s_responsibility_for_changes_2",
-   "label": "ASF's responsibility for changes",
-   "section": "model",
-   "value": {
-    "low": 0.47271058697614776,
-    "best": 0.7,
-    "high": 0.9272894130238521
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "ASR1"
-   },
-   "explainer": "Beta(7, 3) in Guesstimate: best guess is its mean, range its 90% interval.\n\nASF is a leader in corporate outreach in Germany. While we're not aware of specific roles played by other groups in these victories, some are sweeping enough that we think other groups may have played a supporting role."
-  },
-  {
-   "id": "years_of_impact_expected",
-   "label": "Years of impact expected",
-   "section": "model",
-   "value": {
-    "low": 1.0,
-    "best": 3.872983346207417,
-    "high": 15.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "YOI"
-   },
-   "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe consider a limited term of impact because companies might simply have adopted the same policy later without ASF's influence, might go out of business, or might abandon the policy after following it for some number of years."
-  },
-  {
-   "id": "equivalent_hens_spared_from_cage_free_policies",
-   "label": "Equivalent hens spared from cage-free policies",
-   "section": "model",
-   "formula": "hens_affected_yearly_by_cage_free_policies_asf_was*proportional_improvement_in_welfare_due_to_cage_fr*asf_s_responsibility_for_changes*years_of_impact_expected"
-  },
-  {
-   "id": "equivalent_years_of_suffering_spared_from_cage_fre",
-   "label": "Equivalent years of suffering spared from cage-free policies",
-   "section": "model",
-   "formula": "equivalent_hens_spared_from_cage_free_policies",
-   "explainer": "Since laying hens typically live for 1-2 years, the number of hens affected yearly is approximately the number of years of suffering reduced yearly (but we must correct for the fact that these hens are not spared from all the suffering involved in industrial agriculture). (A hen who lives for two years will be considered \"affected yearly\" for both of them, so does not need to be counted twice here.)"
-  },
-  {
-   "id": "equivalent_animals_spared_from_other_policies",
-   "label": "Equivalent animals spared from other policies",
-   "section": "model",
-   "formula": "animals_affected_yearly_by_other_policy_changes_as*proportional_improvement_in_welfare_due_to_other_p*asf_s_responsibility_for_changes_2*years_of_impact_expected"
-  },
-  {
-   "id": "equivalent_years_of_suffering_spared_from_other_po",
-   "label": "Equivalent years of suffering spared from other policies",
-   "section": "model",
-   "formula": ".9*equivalent_animals_spared_from_other_policies",
-   "explainer": "We expect many of the animals affected to be laying hens and trout, and since laying hens and farmed fish typically live for 1-2 years, the number of these animals affected yearly is approximately the number of years of suffering reduced yearly (but we must correct for the fact that these they are not spared from all the suffering involved in industrial agriculture). (An animal who lives for two years will be considered \"affected yearly\" for both of them, so does not need to be counted twice here.) However, some animals affected by the broader policies will likely live for shorter periods."
-  },
-  {
-   "id": "equivalent_animals_spared_per_dollar_by_corporate_2",
-   "label": "Equivalent animals spared per dollar by corporate policies",
-   "section": "model",
-   "formula": "(equivalent_hens_spared_from_cage_free_policies+equivalent_animals_spared_from_other_policies)/corporate_outreach_cost"
-  },
-  {
-   "id": "equivalent_years_of_suffering_spared_per_dollar_by_2",
-   "label": "Equivalent years of suffering spared per dollar by corporate policies",
-   "section": "model",
-   "formula": "(equivalent_years_of_suffering_spared_from_cage_fre+equivalent_years_of_suffering_spared_from_other_po)/corporate_outreach_cost"
-  },
-  {
-   "id": "equivalent_animals_spared_per_dollar_by_corporate",
-   "label": "Equivalent animals spared per dollar by Corporate Outreach",
-   "section": "model",
-   "formula": "equivalent_animals_spared_per_dollar_by_corporate_2"
-  },
-  {
-   "id": "equivalent_years_of_suffering_spared_per_dollar_by",
-   "label": "Equivalent years of suffering spared per dollar by Corporate Outreach",
-   "section": "model",
-   "formula": "equivalent_years_of_suffering_spared_per_dollar_by_2"
-  },
-  {
-   "id": "articles_written_by_scientific_department",
-   "label": "Articles written by scientific department",
-   "section": "model",
-   "value": {
-    "low": 24.0,
-    "best": 30.983866769659336,
-    "high": 40.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "AWB"
-   },
-   "explainer": "ACE's 90% interval, 24 to 40 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, our scientific department staff wrote 37 articles for our websites and in 2016, it has written 24 articles, so far.\""
-  },
-  {
-   "id": "books_citing_asf_s_articles",
-   "label": "Books citing ASF's articles",
-   "section": "model",
-   "value": {
-    "low": 6.0,
-    "best": 7.3484692283495345,
-    "high": 9.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "BCA"
-   },
-   "explainer": "ACE's 90% interval, 6 to 9 (lognormal). The best guess is its median.\n\nASF provided: \"Nine of these articles were cited in five books in 2015 and 16 have been cited in six books in 2016, so far.\""
-  },
-  {
-   "id": "presentations_and_articles_prepared_for_influentia",
-   "label": "Presentations and articles prepared for influential groups",
-   "section": "model",
-   "value": {
-    "low": 16.0,
-    "best": 23.664319132398465,
-    "high": 35.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "PAA"
-   },
-   "explainer": "ACE's 90% interval, 16 to 35 (lognormal). The best guess is its median.\n\nASF provided: \"In 2015, we gave 14 presentations, seminars and panel discussions to these target groups. In the first eight months of 2016, that number was eight. \n\nWe are also writing articles and giving interviews to media that is especially consumed by influencers and experts (14 in 2015 and 8 in 2016, so far).\"\n\nThey also specifically cited some other presentations and conference organizing which we think are relevant here and may not have been counted in this number"
-  },
-  {
-   "id": "monthly_engaged_users_facebook",
-   "label": "Monthly engaged users (Facebook)",
-   "section": "model",
-   "value": {
-    "low": 83000.0,
-    "best": 96845.23736353792,
-    "high": 113000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "MEU"
-   },
-   "explainer": "ACE's 90% interval, 83000 to 113000 (lognormal). The best guess is its median.\n\nASF's Facebook reports show an average of 98151 engaged users (anyone who clicks, comments on, shares, or reacts to the page) in a 28 day period. Estimated error due to variation over time is +/- 15%."
-  },
-  {
-   "id": "yearly_unique_video_views_to_95_facebook",
-   "label": "Yearly unique video views to 95% (Facebook)",
-   "section": "model",
-   "value": {
-    "low": 123000.0,
-    "best": 143321.31732579073,
-    "high": 167000.0
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "YUV"
-   },
-   "explainer": "ACE's 90% interval, 123000 to 167000 (lognormal). The best guess is its median.\n\nASF's Facebook reports show 72475 unique views to 95% over 180 days. This leads to our mean estimate of 144950 unique views to 95% per year, with error due to changes over time of +/- 15%."
-  },
-  {
-   "id": "animals_spared_per_dollar_by_social_media",
-   "label": "Animals spared per dollar by social media",
-   "section": "model",
-   "value": {
-    "low": 0.0073,
-    "best": 0.08365,
-    "high": 0.16
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "ASP4"
-   },
-   "explainer": "ACE's 90% interval, .0073 to .16 (normal). The best guess is its median.\n\nEstimated using our [social media calculator](https://docs.google.com/spreadsheets/d/1jzsw9Suc8HHpzRPeaVDK4oMqQoFTH12HtXYeaW4SrVk/edit#gid=1263869078) for ASF."
-  },
-  {
-   "id": "years_of_suffering_spared_per_dollar_by_social_med_2",
-   "label": "Years of suffering spared per dollar by social media",
-   "section": "model",
-   "value": {
-    "low": 0.0019,
-    "best": 0.008497058314499201,
-    "high": 0.038
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Guesstimate model 7338",
-    "url": "https://www.getguesstimate.com/models/7338",
-    "cell": "YOS4"
-   },
-   "explainer": "ACE's 90% interval, .0019 to .038 (lognormal). The best guess is its median.\n\nEstimated using our [social media calculator](https://docs.google.com/spreadsheets/d/1jzsw9Suc8HHpzRPeaVDK4oMqQoFTH12HtXYeaW4SrVk/edit#gid=1263869078) for ASF."
-  },
-  {
-   "id": "cost_per_video_view",
-   "label": "Cost per video view",
-   "section": "model",
-   "formula": "social_media_and_media_cost/yearly_unique_video_views_to_95_facebook"
-  },
-  {
-   "id": "animals_spared_per_dollar_by_social_media_and_medi",
-   "label": "Animals spared per dollar by Social Media and Media",
-   "section": "model",
-   "formula": "animals_spared_per_dollar_by_social_media"
-  },
-  {
-   "id": "years_of_suffering_spared_per_dollar_by_social_med",
-   "label": "Years of suffering spared per dollar by Social Media and Media",
-   "section": "model",
-   "formula": "years_of_suffering_spared_per_dollar_by_social_med_2"
-  },
-  {
-   "id": "animals_affected_yearly_by_policy_changes_asf_was",
-   "label": "Animals affected yearly by policy changes ASF was involved with",
-   "section": "model",
-   "formula": "hens_affected_yearly_by_cage_free_policies_asf_was+animals_affected_yearly_by_other_policy_changes_as"
-  }
- ],
- "output": {
-  "row": "total_animals_spared_per_dollar",
-  "unit": "animals_spared",
-  "label": "Animals spared per dollar"
- }
 }

@@ -3,10 +3,11 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { parse } from "./expr";
-import { buildLibrary, compute } from "./model";
-import { childrenOf, identityOf, lookupFor, pathTo, rootOf, shapeOf } from "./tree";
-import { rowsFeeding } from "./sensitivity";
+import { evaluate, parse } from "./expr";
+import { assumptionValues, buildLibrary, comparable, compute, headlineNode } from "./model";
+import { childrenOf, headlineFormula, identityOf, lookupFor, pathTo, pathToRef, rootOf, shapeOf, spreadShare } from "./tree";
+import { rowsFeeding, sensitivity } from "./sensitivity";
+import { uncertainty } from "./uncertainty";
 
 const root = join(import.meta.dirname, "../..");
 const assumptions = JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8"));
@@ -93,4 +94,66 @@ describe("the tree", () => {
     expect(missing).toEqual([]);
     console.log(`pathTo: ${((performance.now() - t) / used.length).toFixed(1)} ms per search over ${bm.rows.length} rows`);
   }, 120_000);
+});
+
+describe("the headline", () => {
+  const m = { output: { row: "out" } } as Parameters<typeof headlineFormula>[0];
+  it("converts each unit into healthy years per $1,000, cancelling a healthy year's value where it can", () => {
+    expect(headlineFormula(m, "1")).toBe("out / $uov_per_daly * 1000");
+    expect(headlineFormula(m, "$uov_per_daly")).toBe("out * 1000");
+    expect(headlineFormula(m, "$uov_per_wellby")).toBe("out * $uov_per_wellby / $uov_per_daly * 1000");
+    expect(headlineFormula(m, "$chicken_vs_person * $daly_per_sad * $uov_per_daly")).toBe("out * $chicken_vs_person * $daly_per_sad * 1000");
+  });
+  it("cancels only a multiplied healthy-year value, and keeps grouping", () => {
+    expect(headlineFormula(m, "$k / $uov_per_daly")).toBe("out * $k / $uov_per_daly / $uov_per_daly * 1000");
+    expect(headlineFormula(m, "$uov_per_daly / $k")).toBe("out / $k * 1000");
+    expect(headlineFormula(m, "2 * ($a + $b)")).toBe("out * 2 * ($a + $b) / $uov_per_daly * 1000");
+  });
+  it("equals the common value over a healthy year's value per $1,000 for every unit", () => {
+    const av: Record<string, number> = { ...assumptionValues(buildLibrary([], assumptions).assumptions), uov_per_daly: 3.1, chicken_vs_person: 0.37 };
+    for (const [id, u] of Object.entries(assumptions.units as Record<string, { to_common?: string }>)) {
+      if (!u.to_common) continue;
+      const look = (s: string, n: string) => (s === "row" ? 0.25 : av[n]);
+      const common = 0.25 * evaluate(parse(u.to_common!), look);
+      expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, u.to_common!), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
+    }
+  });
+});
+
+describe("every ranked model's tree", () => {
+  const jf = (d: string): string[] => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? (e.name === "grants" ? [] : jf(join(d, e.name))) : e.name.endsWith(".json") ? [join(d, e.name)] : []));
+  const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
+  const lib = buildLibrary(jf(join(root, "models")).map(read), assumptions, jf(join(root, "facts")).map(read));
+  const av = assumptionValues(lib.assumptions);
+  const ranked = [...lib.models.values()].filter((m) => m.kind !== "template" && comparable(lib, m));
+
+  it("ends in the number the rankings show, and its first parts share out the whole uncertainty", () => {
+    const off: string[] = [];
+    for (const m of ranked) {
+      const values = compute(lib, m, av);
+      const look = lookupFor(lib, m, values, av, "charityevals");
+      const root = rootOf(m, look, lib.assumptions.units[m.output!.unit].to_common);
+      const central = sensitivity(lib, m, av).central;
+      if (!(Math.abs(root.value - central) <= 1e-9 * Math.abs(central))) off.push(`${m.id}: root ${root.value} vs ranking ${central}`);
+      const u = uncertainty(lib, m, values, av, "charityevals");
+      const sum = childrenOf(m, root, look).reduce((t, k) => t + spreadShare(u, k, root.value), 0);
+      if (u.total > 0 && Math.abs(sum - 1) > 0.02) off.push(`${m.id}: shares sum to ${sum.toFixed(3)}`);
+    }
+    expect(ranked.length).toBeGreaterThan(10);
+    expect(off).toEqual([]);
+  }, 60_000);
+});
+
+describe("paths to shared numbers", () => {
+  const lib = buildLibrary([model], assumptions);
+  const m = lib.models.get("toy")!;
+  const av = assumptionValues(lib.assumptions);
+  const look = lookupFor(lib, m, compute(lib, m, av), av, "charityevals");
+  const toCommon = lib.assumptions.units.uov.to_common;
+  it("finds the node that reads an assumption, and nothing for one it doesn't read", () => {
+    expect(pathToRef(m, "assumption", "uov_per_daly", look, toCommon)).toEqual(["r", "r.1"]);
+    expect(pathToRef(m, "assumption", "chicken_vs_person", look, toCommon)).toBeUndefined();
+    expect(pathToRef(m, "fact", "nowhere.x", look, toCommon)).toBeUndefined();
+    expect(pathTo(m, "cost", look, toCommon)).toEqual(["r", "r.0", "r.0.1"]);
+  });
 });

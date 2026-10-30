@@ -11,11 +11,6 @@
 .model-tree h2 {
   margin: 0;
 }
-.tn-intro {
-  margin: 0;
-  max-width: var(--measure);
-  color: var(--ink-2);
-}
 
 /* Tools: link buttons and a quiet search field. */
 .tn-tools {
@@ -352,11 +347,14 @@
   border-bottom-style: dashed;
 }
 .tn-more {
-  color: var(--blue);
+  color: var(--ink);
 }
-.tn-row:hover .tn-more {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+.tn-more-label {
+  text-decoration: underline 1.5px color-mix(in srgb, var(--blue) 55%, transparent);
+  text-underline-offset: 4px;
+}
+.tn-row:hover .tn-more-label {
+  text-decoration-color: var(--blue-ink);
 }
 .tn-more-note {
   color: var(--ink-3);
@@ -397,22 +395,34 @@
   color: var(--ink-2);
 }
 
-/* The quiet way to the raw formula: a small text button after the label of an open node. */
-.tn-fx {
-  font: inherit;
-  font-size: 13px;
-  background: none;
-  border: 0;
-  padding: 0 2px;
-  margin-left: var(--s2);
-  color: var(--blue);
-  cursor: pointer;
-  white-space: nowrap;
+/* "Reveal uncertainties" is a switch: a box that shows whether the tree is opened to them. */
+.tn-reveal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.tn-fx:hover {
-  color: var(--blue-ink);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+.tn-check {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  border: 1.5px solid var(--ink-3);
+  border-radius: var(--radius-hairline, 2px);
+  background: var(--paper);
+  display: inline-grid;
+  place-items: center;
+}
+.tn-reveal[aria-pressed="true"] .tn-check {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.tn-reveal[aria-pressed="true"] .tn-check::after {
+  content: "";
+  width: 6px;
+  height: 3px;
+  border: 1.5px solid var(--paper);
+  border-top: 0;
+  border-right: 0;
+  transform: translateY(-1px) rotate(-45deg);
 }
 
 /* A revealed row: a brief blue wash, then back to paper. */
@@ -524,33 +534,6 @@
   }
 }
 
-/* What the bars show: a quiet two-way switch above the tree. */
-.tn-metric {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--s1) var(--s3);
-  margin: 0 0 var(--s2);
-}
-.tn-metric-opt {
-  font: inherit;
-  background: none;
-  border: 0;
-  padding: 2px 0;
-  color: var(--blue);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-}
-.tn-metric-opt.on {
-  color: var(--ink);
-  font-weight: 600;
-  border-bottom-color: var(--ink);
-  cursor: default;
-}
-.tn-metric-opt:not(.on):hover {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-}
 .tn-bar-spread {
   background: var(--kind-judgment);
 }
@@ -564,4 +547,68 @@
   .tn-chev {
     transition: none;
   }
+}
+
+/* Who made the model, and its spreadsheet, file and history: one quiet line under the heading. */
+.tn-about {
+  display: grid;
+  gap: 2px;
+  color: var(--ink-2);
+  margin-top: calc(var(--s2) * -1);
+}
+
+/* Caveats on the top row: the same warning sign and list as on the rankings. */
+.tn-flags {
+  margin-left: 6px;
+}
+.tn-flags .info-tip-button {
+  color: var(--warn);
+}
+.tn-flag-list {
+  margin: 0;
+  padding-left: 1.1em;
+  font-family: var(--sans);
+  font-weight: 400;
+}
+
+/* The column heading's tip opens under its own (right-hand) column. */
+.tn-cols .info-tip-bubble {
+  left: auto;
+  right: 0;
+  width: min(320px, 100%);
+  font-size: 14px;
+}
+
+/* Our shared figure in place of the evaluator's own: said plainly, in the tag's usual grey. */
+.tn-tag-changed {
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+/* The reader's own edits: blue like links, so an edited number reads as theirs. */
+.tn-tag-edited,
+.tn-val.tn-edited {
+  color: var(--blue);
+}
+.tn-edits {
+  color: var(--ink-2);
+}
+.tn-edit label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.tn-edit input {
+  width: 9ch;
+  padding: 2px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+.tn-edit input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
 }

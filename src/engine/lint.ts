@@ -18,7 +18,8 @@ export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e6, 12, 52, 365,
 const MIN_EXPLAINER = 60;
 const STALE_MONTHS = 18;
 
-function literals(n: Node | undefined, out: number[] = []): number[] {
+/** Every numeric constant in a formula, in order (shared with src/engine/invariants.ts INV-4). */
+export function literals(n: Node | undefined, out: number[] = []): number[] {
   if (!n) return out;
   if (n.type === "num") out.push(n.value);
   else if (n.type === "neg") literals(n.arg, out);
@@ -70,7 +71,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     if (!allowedUnits(family).includes(unit))
       add("high", "unit", `output unit ${unit} is not allowed for ${family} (allowed: ${allowedUnits(family).join(", ")})`, "Report in the family's unit so the model is ranked on the common scale.");
     if (!lib.assumptions.units[unit]?.to_common)
-      add("high", "unit", `unit ${unit} has no exchange rate to the common unit`, "Use a ranked unit (uov, sad, wellby, daly).");
+      add("high", "unit", `unit ${unit} has no exchange rate to the common unit`, "Use a ranked unit (uov, daly, wellby, ced).");
     if (m.output.row !== ids.output) add("high", "output", `output row is ${m.output.row}, template says ${ids.output}`, `Point output.row at ${ids.output}.`);
   }
 
@@ -84,7 +85,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   }
 
   // Required canonical rows.
-  const required = [...spec.required.filter((r) => r !== spec.perDollar && r !== spec.output), ids.perDollar, ids.output];
+  const required = [...new Set([...spec.required.filter((r) => r !== spec.perDollar && r !== spec.donor && r !== spec.output), ids.perDollar, ids.donor, ids.output])];
   for (const r of required) if (!m.byId.has(r)) add("high", "required-row", `missing canonical row ${r}`, `Add ${r} as in the ${family} template, or (for an outcome branch that doesn't apply) a row with value 0 and an explainer saying why.`, r);
 
   const path = rowsFeeding(m);
@@ -103,16 +104,17 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
       }
     const perDollar = m.byId.get(ids.perDollar);
     if (perDollar && !upstream(m, ids.perDollar).has("cost_total")) add("high", "per-dollar", `${ids.perDollar} doesn't divide by cost_total`, `${ids.perDollar} = outcome_total / cost_total.`, ids.perDollar);
-    const out = m.byId.get(output);
-    if (out && !(out.deps.includes(ids.perDollar) && out.deps.includes("donor_cost_share")))
-      add("high", "donor", `${output} should be ${ids.perDollar} * donor_cost_share`, `Set ${output} = ${ids.perDollar} * donor_cost_share.`, output);
+    const donorRow = m.byId.get(ids.donor);
+    if (donorRow && !(donorRow.deps.includes(ids.perDollar) && donorRow.deps.includes("donor_cost_share")))
+      add("high", "donor", `${ids.donor} should be ${ids.perDollar} * donor_cost_share`, `Set ${ids.donor} = ${ids.perDollar} * donor_cost_share.`, ids.donor);
+    // Animal models: the output sums the species step's ced_<species> rows, each from the donor row.
+    if (donorRow && ids.donor !== output && !upstream(m, output).has(ids.donor))
+      add("high", "species", `${output} doesn't build on ${ids.donor}`, `Split ${ids.donor} by species (sads_<species>), convert each with the ced_<species> template, and sum them into ${output}.`, output);
   }
   const attr = m.byId.get("attribution_share");
-  if (attr && !attr.assumptionDeps.includes("full_credit"))
-    add("medium", "full-credit", "attribution_share ignores $full_credit", "attribution_share = if($full_credit, 1, attribution_share_shared).", "attribution_share");
   const dcs = m.byId.get("donor_cost_share");
-  if (dcs && !dcs.assumptionDeps.includes("count_salary_sacrifice"))
-    add("medium", "salary-sacrifice", "donor_cost_share ignores $count_salary_sacrifice", "donor_cost_share = cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0)).", "donor_cost_share");
+  if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
+    add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
 
   // Rows: sourcing, ranges, magic numbers, placeholders.
   for (const r of m.rows) {

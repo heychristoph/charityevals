@@ -64,9 +64,18 @@ describe("uncertainty", () => {
     expect(u.bySource.estimate + u.bySource.judgment + u.bySource.data + u.bySource.assumption).toBeCloseTo(1);
   });
 
-  it("counts the shared assumptions that convert the result into the common unit", () => {
-    const conv = u.drivers.filter((d) => d.source === "assumption");
-    expect(conv.length).toBeGreaterThan(0);
+  it("counts the shared assumptions that convert the result into the headline, and only those", () => {
+    // Counted in healthy years, the model's result needs no conversion: a healthy year's value cancels.
+    expect(u.drivers.filter((d) => d.source === "assumption")).toEqual([]);
+    expect(u.conversionShare).toBeCloseTo(0, 9);
+    // Counted in doubled-income years, it's divided by that value, which then carries uncertainty.
+    const inUov = buildLibrary([{ ...model, id: "uov", output: { ...model.output, unit: "uov" } }], assumptions);
+    const um = inUov.models.get("uov")!;
+    const uu = uncertainty(inUov, um, compute(inUov, um, av), av, "charityevals");
+    const conv = uu.drivers.find((d) => d.id === "uov_per_daly")!;
+    expect(conv.elasticity).toBeCloseTo(-0.99, 2);
+    expect(uu.conversionShare).toBeCloseTo(conv.share, 6);
+    expect(uu.rowVar("per_dollar") / uu.total + uu.conversionShare).toBeCloseTo(1, 6);
   });
 
   it("takes a calculated row's published range at its word, without its inputs on top", () => {
@@ -86,7 +95,7 @@ describe("uncertainty", () => {
   });
 
   it("passes uncertainty through a sum that cancels to zero", () => {
-    const zero = buildLibrary([{ ...model, id: "zero", output: { row: "out", unit: "uov", label: "x" }, rows: [
+    const zero = buildLibrary([{ ...model, id: "zero", output: { row: "out", unit: "daly", label: "x" }, rows: [
       { id: "base", label: "Base", value: 10, kind: "observed", explainer: "x" },
       { id: "plus", label: "Benefit", value: 0.3, kind: "estimate", explainer: "x" },
       { id: "minus", label: "Harm", value: -0.3, kind: "estimate", explainer: "x" },
@@ -112,13 +121,12 @@ describe("uncertainty", () => {
 
   it("gives the tree a variance for every row", () => {
     expect(u.rowVar("good")).toBeCloseTo(by("people").spread ** 2 + by("effect").spread ** 2 + by("validity").spread ** 2 + by("coverage").spread ** 2 + (by("rate").elasticity * by("rate").spread) ** 2, 2);
-    // The tree's root and the breakdown share one total; the rest is the unit conversion.
-    expect(u.rowVar("per_dollar") / u.total + u.conversionShare).toBeCloseTo(1, 6);
-    expect(u.conversionShare).toBeGreaterThan(0);
+    // The tree's root and the breakdown share one total.
+    expect(u.rowVar("per_dollar") / u.total).toBeCloseTo(1, 6);
   });
 
   it("counts a source shared by two branches once, with its paths summed", () => {
-    const shared = buildLibrary([{ ...model, id: "shared", output: { row: "out", unit: "uov", label: "x" }, rows: [
+    const shared = buildLibrary([{ ...model, id: "shared", output: { row: "out", unit: "daly", label: "x" }, rows: [
       { id: "x", label: "X", value: 2, kind: "estimate", explainer: "x" },
       { id: "a", label: "A", formula: "x * 3" },
       { id: "b", label: "B", formula: "x * 5" },

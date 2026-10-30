@@ -1,0 +1,184 @@
+---
+import Base from "../layouts/Base.astro";
+import { Markdown } from "../components/AssumptionsPanel.tsx";
+import InfoTip from "../components/InfoTip.tsx";
+import { lib, modelUrl } from "../lib/data";
+import { formatAssumption, formatValue } from "../lib/format";
+import { pickValue } from "../engine/model";
+
+const groups = new Map<string, typeof lib.facts extends Map<string, infer F> ? F[] : never>();
+// One group per place: "Kenya" and "Kenya (GiveWell's data)" are the same country, from two files.
+const place = (group: string) => group.replace(/\s*\(GiveWell's data\)$/, "");
+for (const f of lib.facts.values()) groups.set(place(f.group), [...(groups.get(place(f.group)) ?? []), f]);
+const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.some((r) => r.factDeps.includes(key)) && !m.extends);
+// Assumption defaults derived from facts name them in source.note (e.g. "@ace.dvf_sads_per_meal / ...").
+const citedBy = (key: string) => lib.assumptions.rows.filter((a) => new RegExp(`@${key.replace(".", "\\.")}\\b`).test(a.source?.note ?? ""));
+// Rates taken from evidence rather than judgment: fixed, so they aren't in the values panel.
+const fixed = lib.assumptions.rows.filter((r) => r.fixed);
+---
+
+<Base title="Shared data" description="The fixed exchange rates and the shared data every model reads, with sources.">
+  <div class="page wrap">
+    <header class="intro">
+      <h1>Shared data</h1>
+      <div class="dek tip-host">
+        Numbers several models read, kept once so they agree.{"\u00a0"}<InfoTip client:visible label="Why these aren't among your values">
+          They come from evidence rather than judgment, so there is nothing here to set to taste. Corrections go through the repository, with a source.
+        </InfoTip>
+      </div>
+    </header>
+
+    <section class="fixed" aria-labelledby="fixed-title">
+      <h2 id="fixed-title">Fixed exchange rates</h2>
+      {fixed.map((r) => {
+        const v = typeof r.value === "object" ? r.value : undefined;
+        return (
+          <div class="rate" id={`a-${r.id}`}>
+            <div class="rate-head tip-host">
+              <h3>
+                {r.label.split(" ").slice(0, -1).join(" ")}{" "}
+                <span class="nobr">{r.label.split(" ").at(-1)}{r.explainer && <>{"\u00a0"}<InfoTip client:visible label={`About ${r.label}`}><Markdown text={r.explainer} /></InfoTip></>}</span>
+              </h3>
+              <span class="num rate-value">{formatAssumption(r, pickValue(r.value))}</span>
+            </div>
+            {(v?.low !== undefined && v?.high !== undefined || r.source?.url) && (
+              <p class="small muted">
+                {v?.low !== undefined && v?.high !== undefined && <>Range {formatAssumption(r, v.low)} to {formatAssumption(r, v.high)}</>}
+                {r.source?.url && <>{v?.low !== undefined ? " · " : ""}<a href={r.source.url}>{r.source.title}</a></>}
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </section>
+
+    <section class="facts" aria-labelledby="facts-title">
+      <h2 id="facts-title">By place and source</h2>
+      {[...groups].map(([group, rows]) => (
+        <details class="fact-group" id={`g-${group}`}>
+          <summary><h3>{group}</h3> <span class="muted small">{rows.length} {rows.length === 1 ? "number" : "numbers"}</span></summary>
+          <table>
+            {rows.map((f) => (
+              <tr id={`f-${f.key}`}>
+                <th scope="row">
+                  {f.label}
+                  <span class="small muted fact-meta">
+                    {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
+                    {usedBy(f.key).length > 0 && " · used by "}
+                    {usedBy(f.key).map((m, i) => <>{i > 0 && ", "}<a href={modelUrl(lib, m)}>{m.name}</a></>)}
+                    {citedBy(f.key).length > 0 && " · basis for "}
+                    {citedBy(f.key).map((a, i) => <>{i > 0 && ", "}<a href={`#a-${a.id}`}>{a.label}</a></>)}
+                    {" · "}<code>@{f.key}</code>
+                  </span>
+                </th>
+                <td class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</td>
+              </tr>
+            ))}
+          </table>
+        </details>
+      ))}
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Links from model pages point at one number (#f-key) inside a folded place: open it.
+  const open = () => {
+    const el = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    const box = el?.closest("details");
+    if (box) { box.open = true; el!.scrollIntoView({ block: "center" }); }
+  };
+  open();
+  window.addEventListener("hashchange", open);
+</script>
+
+<style>
+  .wrap {
+    max-width: 760px;
+    padding-top: var(--s6);
+  }
+  .intro {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .dek {
+    font-size: 19px;
+    color: var(--ink-2);
+  }
+  .fixed {
+    display: grid;
+    gap: var(--s5);
+  }
+  .rate {
+    display: grid;
+    gap: var(--s2);
+    padding-bottom: var(--s5);
+    border-bottom: 1px solid var(--rule);
+  }
+  .rate-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s4);
+  }
+  .rate h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  .rate-value {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .explainer {
+    color: var(--ink-2);
+  }
+  .explainer :global(p + p) {
+    margin-top: var(--s2);
+  }
+  .rate:target {
+    background: var(--blue-wash);
+  }
+  .facts {
+    margin-top: var(--s7);
+    display: grid;
+    gap: var(--s3);
+  }
+  .fact-group {
+    border-bottom: 1px solid var(--rule);
+  }
+  .fact-group summary {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s2);
+    padding: var(--s3) 0;
+    cursor: pointer;
+  }
+  .fact-group h3 {
+    font-size: 17px;
+    margin: 0;
+  }
+  .facts table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .facts th {
+    text-align: left;
+    font-weight: 400;
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .facts td {
+    text-align: right;
+    font-weight: 600;
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .fact-meta {
+    display: block;
+  }
+  .facts tr:target {
+    background: var(--blue-wash);
+  }
+</style>

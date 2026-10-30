@@ -4,7 +4,8 @@
 // shared assumption stay live, the rest is folded into numbers. The islands compute identical results
 // under any assumptions without shipping tens of megabytes. A bulk model's own page
 // passes its full rows to the island (bulkRaw).
-import { buildLibrary, comparable, modelsOf, type Library, type ResolvedModel } from "../engine/model";
+import { buildLibrary, modelsOf, type Library, type ResolvedModel } from "../engine/model";
+import { primaryModel, rankingPlan } from "../engine/ranking";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
 
@@ -39,9 +40,17 @@ export function bulkRaw(id: string): unknown {
 /** Models with a page: charities and their variants, not templates. */
 export const rankable = [...lib.models.values()].filter((m) => m.kind !== "template" && m.output);
 
-/** A charity's main model: the first owner's, in owners.json order. Its page is /<charity>. */
+const primaries = new WeakMap<Library, Map<string, ResolvedModel | undefined>>();
+
+/** A charity's main model; its page is /<charity>. The first evaluator's (owners.json order) newest
+ * model that counts on the rankings (src/engine/ranking.ts), so the page's model is the one behind
+ * its headline and the homepage row, never a skeleton, VOI sheet or partial pilot sheet. A charity
+ * off the rankings: its first model in modelsOf order. */
 export function primaryOf(lib: Library, charity: string): ResolvedModel | undefined {
-  return modelsOf(lib, charity)[0];
+  const cache = primaries.get(lib) ?? new Map<string, ResolvedModel | undefined>();
+  primaries.set(lib, cache);
+  if (!cache.has(charity)) cache.set(charity, primaryModel(lib, charity));
+  return cache.get(charity);
 }
 
 export function modelUrl(lib: Library, m: ResolvedModel): string {
@@ -53,10 +62,11 @@ export function modelFile(m: ResolvedModel): string {
   return m.bulk ? `models/grants/${m.owner}/${m.id}.json` : `models/${m.cause}/${m.id}.json`;
 }
 
-/** The model's change history: the repository's commits that touched its file, and only those. */
+/** The model's history page on this site: every version's result, charted, and what changed. */
 export function historyUrl(m: ResolvedModel): string {
-  return `${repo}/commits/main/${modelFile(m)}`;
+  return `${modelUrl(lib, m)}/history`;
 }
 
-/** Charities on the rankings: those with at least one model in a comparable unit. */
-export const rankedCharities = [...lib.charities.values()].filter((c) => modelsOf(lib, c.id).some((m) => comparable(lib, m)));
+/** Charities on the rankings: those with at least one model that counts (src/engine/ranking.ts): in a
+ * comparable unit, and a program's own estimate rather than a skeleton, breakeven or VOI sheet. */
+export const rankedCharities = [...lib.charities.values()].filter((c) => rankingPlan(lib, c.id).length > 0);

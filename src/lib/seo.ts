@@ -1,9 +1,9 @@
 // Search and social metadata: page titles and descriptions generated from the models, and the
 // schema.org JSON-LD each page carries. Build time only. Nothing here states more than the page does:
 // results are the page's own default-assumption figures, and models are credited to whoever made them.
-import { lib, modelUrl, primaryOf, modelFile } from "./data";
-import { assumptionValues, bottomLine, comparable, modelsOf, type ResolvedModel } from "../engine/model";
-import { formatMultiple } from "./format";
+import { lib, modelUrl, primaryOf, modelFile, rankable } from "./data";
+import { assumptionValues, comparable, headline, modelsOf, type ResolvedModel } from "../engine/model";
+import { formatYears, plainModelName } from "./format";
 import { publisher, repo } from "./site";
 
 export const SITE = "https://charityevals.org";
@@ -40,14 +40,42 @@ export function clip(text: string, max = 160): string {
 const firstSentence = (s?: string) => s?.match(/^.*?[.!?](\s|$)/)?.[0].trim() ?? s;
 const monthYear = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 
-/** The page's own headline figure: benefit per dollar as a multiple of the benchmark, default
- * assumptions, our view (what a first-time visitor sees). Undefined for units nobody converts. */
-export function defaultMultiple(m: ResolvedModel): number | undefined {
+/** The page's own headline figure: years of healthy life per $1,000, default assumptions, our view
+ * (what a first-time visitor sees). Undefined for units nobody converts. */
+export function defaultYears(m: ResolvedModel): number | undefined {
   if (!comparable(lib, m)) return undefined;
   const av = assumptionValues(lib.assumptions);
-  const bench = bottomLine(lib, lib.models.get(lib.assumptions.common.benchmark)!, av).common;
-  const v = bottomLine(lib, m, av).common / bench;
+  const v = headline(lib, m, av);
   return Number.isFinite(v) && v > 0 ? v : undefined;
+}
+
+const spaced = (s: string) => s.replace(/\s+/g, " ").trim();
+/** Without what an evaluator's file name keeps in square brackets (the grant it was for, "copy"). */
+const unbracketed = (s: string) => spaced(s.replace(/\[[^\]]*\]/g, " ")).replace(/\s+([,)])/g, "$1").replace(/^[,\s]+|[,\s—–-]+$/g, "");
+/** Bracketed notes as a plain aside: "[Borno copy] GiveWell's …" → "GiveWell's … (Borno copy)". */
+const unboxed = (s: string) => {
+  const notes = [...s.matchAll(/\[([^\]]*)\]/g)].map((x) => x[1].trim());
+  return notes.length ? `${unbracketed(s)} (${notes.join("; ")})` : spaced(s);
+};
+
+let names: Map<string, string> | undefined;
+/** A model's name for titles and descriptions: plain words (no "CEA", versions or bracketed grant
+ * notes), but never the same as another page's. Where the plain name is shared, the bracketed note
+ * comes back as an aside, then the month it was published, and failing that, the evaluator's own name. */
+export function seoName(m: ResolvedModel): string {
+  if (!names) {
+    const count = (f: (x: ResolvedModel) => string) => {
+      const c = new Map<string, number>();
+      for (const x of rankable) c.set(f(x).toLowerCase(), (c.get(f(x).toLowerCase()) ?? 0) + 1);
+      return (x: ResolvedModel) => c.get(f(x).toLowerCase())! === 1;
+    };
+    const bare = (x: ResolvedModel) => unbracketed(plainModelName(x.name));
+    const boxed = (x: ResolvedModel) => unboxed(plainModelName(x.name));
+    const dated = (x: ResolvedModel) => `${boxed(x)} (${monthYear(x.source?.published) ?? "undated"})`;
+    const bareOk = count(bare), boxedOk = count(boxed), datedOk = count(dated);
+    names = new Map(rankable.map((x) => [x.id, bareOk(x) ? bare(x) : boxedOk(x) ? boxed(x) : datedOk(x) ? dated(x) : spaced(x.name)]));
+  }
+  return names.get(m.id) ?? unbracketed(plainModelName(m.name));
 }
 
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
@@ -58,7 +86,7 @@ export function modelMeta(m: ResolvedModel) {
   const primary = primaryOf(lib, charity.id)?.id === m.id;
   const evaluators = new Set(modelsOf(lib, charity.id).map((x) => x.owner)).size;
   // Imported model names can be long and contain line breaks; some don't name the charity.
-  const name = m.name.replace(/\s+/g, " ").trim();
+  const name = seoName(m);
   const named = name.toLowerCase().includes(charity.name.toLowerCase());
   // The first candidate that fits a search result (about 60 characters); else the shortest, which is
   // still unique: model names are.
@@ -68,14 +96,14 @@ export function modelMeta(m: ResolvedModel) {
   if (primary && evaluators > 1) candidates.shift();
   const title = candidates.find((t) => t.length <= TITLE_MAX) ?? candidates.at(-1)!;
 
-  const x = defaultMultiple(m);
+  const x = defaultYears(m);
   const unit = m.output ? lib.assumptions.units[m.output.unit]?.label : undefined;
   const when = monthYear(m.source?.published);
   const by = owner.kind === "charityevals" ? "charityevals' own model" : `${owner.name}'s model${when ? ` (${when})` : ""}`;
   // Long model names are in the title already; the description leads with the charity instead.
   const subject = name.length <= 50 ? name : charity.name;
   const lead = x !== undefined
-    ? `${subject}: ${formatMultiple(x)} as much good per dollar as GiveDirectly on default assumptions, from ${by}.`
+    ? `${subject}: ${formatYears(x)} years of healthy life per $1,000 on default assumptions, from ${by}.`
     : `${subject}: ${by}, in ${unit ?? "its own unit"} per dollar.`;
   const dek = firstSentence(charity.summary ?? m.summary);
   const tail = "Every input with its source and range.";

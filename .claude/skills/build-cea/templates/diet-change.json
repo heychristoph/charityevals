@@ -6,7 +6,7 @@
   "template": "diet-change",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, and the bottom line in SADs averted per dollar and × GiveDirectly.",
+  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
   "resources": [],
   "sections": [
     {
@@ -37,7 +37,14 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for every animal model. The shared SAD figures are Ambitious Impact's, which count each species' pain as a share of a person's with its own species weights. Here those weights come out and Rethink Priorities' go in, so every species is counted in days of a chicken's disabling pain. How a chicken compares with a person is the one animal slider."
     }
   ],
   "rows": [
@@ -211,8 +218,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "if($full_credit, 1, attribution_share_shared)",
-      "explainer": "With full credit for shared outcomes switched on, the charity gets the whole outcome."
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
     },
     {
       "id": "implementation_adj",
@@ -282,7 +289,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
     },
     {
       "id": "salary_sacrifice",
@@ -296,7 +303,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -305,11 +312,73 @@
       "format": "small",
       "formula": "sads_per_dollar * donor_cost_share",
       "unit": "SADs averted / $"
+    },
+    {
+      "id": "sads_fish",
+      "section": "species",
+      "label": "SADs averted per dollar you give: fish",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * @sad_factors.meal_sads_share_fish"
+    },
+    {
+      "id": "ced_fish",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: fish",
+      "format": "number",
+      "formula": "sads_fish / @aim_sads.fish * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish / @aim_sads.chicken)",
+      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+    },
+    {
+      "id": "sads_chicken",
+      "section": "species",
+      "label": "SADs averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * @sad_factors.meal_sads_share_chicken"
+    },
+    {
+      "id": "ced_chicken",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
+      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+    },
+    {
+      "id": "sads_pig",
+      "section": "species",
+      "label": "SADs averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * @sad_factors.meal_sads_share_pig"
+    },
+    {
+      "id": "ced_pig",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "sads_pig / @aim_sads.pig * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig / @aim_sads.chicken)",
+      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "small",
+      "formula": "ced_fish + ced_chicken + ced_pig",
+      "unit": "chicken pain days / $"
     }
   ],
   "output": {
-    "row": "sads_per_donor_dollar",
-    "unit": "sad",
-    "label": "SADs averted per dollar you give"
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "sads_per_dollar",
+      "unit": "sad"
+    },
+    "species": [
+      "fish",
+      "chicken",
+      "pig"
+    ]
   }
 }
