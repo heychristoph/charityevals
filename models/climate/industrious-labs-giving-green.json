@@ -158,7 +158,7 @@
       "format": "integer",
       "formula": "campaign_cost / cost_per_tonne_best_guess - tonnes_automaker - tonnes_car_industry",
       "expected": 2512820.513,
-      "explainer": "Most of Giving Green's best guess comes from this step: two thirds of the tonnes."
+      "explainer": "Most of Giving Green's best guess comes from this step: two thirds of the tonnes. At the expensive end of Giving Green's range ($12.30) this row goes negative: the whole estimate is then smaller than the automaker-only case."
     },
     {
       "id": "tonnes_averted",
@@ -175,7 +175,7 @@
       "format": "usd",
       "formula": "campaign_cost / tonnes_averted",
       "expected": 0.52,
-      "explainer": "Giving Green's bottom line: about 52 cents a tonne, against its benchmark of roughly $1 a tonne for a top climate nonprofit."
+      "explainer": "Giving Green's bottom line: about 52 cents a tonne. Giving Green's research process page sets roughly $1 a tonne as the benchmark for a top climate nonprofit (https://www.givinggreen.earth/research/giving-greens-research-process)."
     },
     {
       "id": "tco2e_per_dollar",
@@ -206,23 +206,66 @@
       "explainer": "Low-carbon aluminium cuts emissions mainly by running smelters on clean power instead of fossil power, and power is about 62% of the sector's emissions; the rest is anodes, alumina refining and process emissions. The high end adds the fuel burned for heat at alumina refineries; the low end allows for the cut coming more from inert anodes and recycling, which burn nothing less."
     },
     {
-      "id": "fuel_smoke_factor",
+      "id": "smoke_factor_north_america",
       "section": "per_dollar",
-      "label": "Air-pollution deaths per tonne of CO₂ from coal power, relative to the fossil-fuel average",
+      "label": "Air-pollution deaths per tonne cut at North American smelters, relative to the fossil-fuel average",
       "format": "number",
       "value": {
-        "low": 0.06,
-        "best": 0.2,
-        "high": 0.6
+        "low": 0.02,
+        "best": 0.06,
+        "high": 0.13
       },
       "kind": "estimate",
       "source": {
-        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370, 979–990",
+        "title": "CATF, The Toll from Coal (2010), via Founders Pledge's CATF model; Markandya & Wilkinson (2007)",
         "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
-        "note": "Deaths from air pollution per TWh in Europe: coal 24.5. Emission factor 0.82 t CO₂ per MWh (IPCC AR5, as in Founders Pledge's CATF model).",
+        "note": "US coal plants after scrubbers: about 7.1 deaths per TWh at 0.82 t CO₂ per MWh (0.06 of the average); gas about 2.8 per TWh at 0.49 (0.04).",
         "retrieved": "2026-10-30"
       },
-      "explainer": "Coal power causes about 24.5 deaths per TWh in Europe (Markandya & Wilkinson 2007); at 0.82 tonnes of CO₂ per MWh that is 0.3 deaths per 10,000 tonnes, 0.2 of the world average of 1.46. Low 0.06: US coal plants after scrubbers (the 7.1 deaths per TWh behind the Clean Air Task Force model). High 0.6, our judgment: Chinese and Indian coal plants near dense populations, where most of the world's smelters run, cause several times Europe's deaths per TWh."
+      "explainer": "The automaker's US production and the car industry's purchases (the first two steps) cut emissions at North American and imported-metal smelters, which run partly on hydro and partly on US coal and Gulf gas: about US coal's 0.06 of the average. Low 0.02: mostly gas and hydro. High 0.13: the Clean Air Task Force model's figure for US coal switched to gas."
+    },
+    {
+      "id": "smoke_factor_global",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne cut across the global aluminium industry, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370, 979–990",
+        "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
+        "note": "Deaths from air pollution per TWh in Europe: coal 24.5; at 0.82 t CO₂ per MWh, 0.2 of the world fossil-fuel average.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Half the global aluminium industry (the third step, two thirds of the tonnes) is mostly Chinese smelters on coal power. European coal causes about 24.5 deaths per TWh, 0.2 of the average per tonne; Chinese and Indian coal plants near dense populations cause several times Europe's deaths per TWh. Best 0.4 and high 0.8 are our judgment; low 0.2 is European coal."
+    },
+    {
+      "id": "global_tonnes_share",
+      "section": "per_dollar",
+      "label": "Share of the tonnes from the wider aluminium industry (Giving Green's best guess)",
+      "format": "percent",
+      "value": 0.6533,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Industrious Labs deep dive (2024, PDF)",
+        "url": "https://cdn.prod.website-files.com/686d65ad3e40d1dc7eb801b4/68ae6c9a9a0b7aff042cd2b0_311d34_6ea44d810f19495f9038c821c64faa09.pdf",
+        "page": "Deep dive (November 2024), \"What is Industrious Labs' cost-effectiveness?\", pp. 14–16",
+        "quote": "If it additionally impacts the global automotive industry, cost-effectiveness improves to $1.50 per tCO2 e avoided.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From Giving Green's figures: 1 − $0.52 ÷ $1.50, the share of its best guess's tonnes that come from the third step. Held at the best guess, so the smoke mix doesn't swing with Giving Green's cost range."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne of CO₂ cut, relative to the fossil-fuel average (tonne-weighted)",
+      "format": "number",
+      "formula": "(1 - global_tonnes_share) * smoke_factor_north_america + global_tonnes_share * smoke_factor_global",
+      "explainer": "The two regional figures above, weighted by where Giving Green's tonnes come from."
     },
     {
       "id": "air_pollution_weight",
@@ -230,7 +273,7 @@
       "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
       "format": "number",
       "formula": "fuel_share * fuel_smoke_factor",
-      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from smelter power times coal power's smoke per tonne."
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from smelter power times the smoke per tonne where those smelters are."
     },
     {
       "id": "staff_cost_share",

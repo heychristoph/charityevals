@@ -79,7 +79,7 @@
       "source": {
         "title": "SoGive, charity analysis",
         "url": "https://app.sogive.org/#charity?charityId=the-royal-national-lifeboat-institution",
-        "page": "Cost-effectiveness analysis",
+        "page": "More about what the RNLI does",
         "quote": "The total cost of providing the lifeboats in 2019 was £130.6m.",
         "retrieved": "2026-10-30"
       }
@@ -95,7 +95,7 @@
       "source": {
         "title": "SoGive, charity analysis",
         "url": "https://app.sogive.org/#charity?charityId=the-royal-national-lifeboat-institution",
-        "page": "Cost-effectiveness analysis",
+        "page": "More about what the RNLI does",
         "quote": "Spending on lifeguards in 2019 was £21m.",
         "retrieved": "2026-10-30"
       }
@@ -111,7 +111,7 @@
       "source": {
         "title": "SoGive, charity analysis",
         "url": "https://app.sogive.org/#charity?charityId=the-royal-national-lifeboat-institution",
-        "page": "Cost-effectiveness analysis",
+        "page": "More about what the RNLI does",
         "quote": "These safety campaigns cost £10.6m in 2019.",
         "retrieved": "2026-10-30"
       },
@@ -200,12 +200,13 @@
       "value": 497662.3377,
       "kind": "estimate",
       "source": {
-        "title": "SoGive, RNLI record (the \"cost per life saved\" impact figure the app shows)",
+        "title": "SoGive, RNLI analysis and record",
         "url": "https://app.sogive.org/#charity?charityId=the-royal-national-lifeboat-institution",
-        "quote": "costPerBeneficiary: £497662.34 per life saved",
+        "quote": "and with overhead costs, this is closer to £500,000 per life saved",
+        "note": "The exact figure, £497,662.34 per life saved, is the cost per life the SoGive app shows for the RNLI (record field costPerBeneficiary).",
         "retrieved": "2026-10-30"
       },
-      "explainer": "SoGive's figure with overheads, from the same record; a donation pays for fundraising and support costs too, so our view uses it."
+      "explainer": "SoGive's figure with overheads; a donation pays for fundraising and support costs too, so our view uses it. It implies £191.6m of spending in all (×385), which also covers the Bangladesh and flood rescue work left out of the lives count, so it slightly overstates the cost."
     },
     {
       "id": "overhead_factor",
@@ -278,12 +279,25 @@
       "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
     },
     {
+      "id": "volunteer_time_share",
+      "section": "staff_pay",
+      "label": "Volunteers' time, valued at wages, as a share of the cash cost",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Most lifeboat crew are unpaid volunteers on call; with credit by share of resources, their time is a contribution like staff's forgone pay and gets its share of the lives saved."
+    },
+    {
       "id": "donor_cost_share",
       "section": "staff_pay",
       "label": "Share of the full cost paid in cash",
       "format": "percent",
-      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
-      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + volunteer_time_share, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay and volunteers' time count as part of the cost, and they get their share of the outcome. Off, this is 100%."
     },
     {
       "id": "uov_per_dollar",
@@ -292,7 +306,7 @@
       "format": "small",
       "unit": "units of value per $",
       "formula": "uov_per_dollar_cash * donor_cost_share",
-      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The RNLI's crews are mostly volunteers; their time isn't counted as a contribution here, which flatters the RNLI when credit by share of resources is on."
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

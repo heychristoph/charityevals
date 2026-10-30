@@ -1,6 +1,6 @@
 ### Summary
 
-World Spine Care runs clinics that treat back and neck pain with physiotherapy-based care in low- and middle-income countries. The Happier Lives Institute's rough estimate is 15 to 21 WELLBYs per $1,000; at the middle of its cost range that is **<span data-figure="headline" data-model="world-spine-care-hli">9.9</span> years of healthy life per $1,000** on our scale.
+World Spine Care runs clinics that give free physiotherapy and chiropractic care for back and neck pain in low- and middle-income countries. The Happier Lives Institute's rough estimate is 15 to 21 WELLBYs per $1,000; at the middle of its cost range that is **<span data-figure="headline" data-model="world-spine-care-hli">9.9</span> years of healthy life per $1,000** on our scale.
 
 HLI publishes no spreadsheet for this estimate. The model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 0.92 WELLBYs per patient and its 15 to 21 at the two ends of its cost range.
 
@@ -13,7 +13,7 @@ World Spine Care runs clinics in places such as Botswana, Ghana, India and the D
 1. **Effect:** people with chronic musculoskeletal pain are 1.17 points less satisfied with life (0–10 scale) than the general public (Boonstra et al. 2013). HLI assumes a year of treatment removes that gap for the year.
 2. **Household:** HLI adds its psychotherapy spillover, 16.24% of the patient's gain for each of 3.33 other household members.
 3. **Replication:** HLI's standard 0.51 adjustment, giving 0.92 WELLBYs per patient.
-4. **Cost:** $44 to $63 to treat a patient for a year, from the charity's clinic data ($13–17 a visit, several visits).
+4. **Cost:** $44 to $63 to treat a patient for a year, from the charity's clinic data ($13–17 a visit); HLI's generous estimate assumes three visits a patient.
 
 ### How the model works
 
@@ -28,7 +28,7 @@ HLI's figures come first, ending at WELLBYs per $1,000 at the middle cost, $53.5
 ### Where we differ from HLI
 
 - **A central figure.** HLI gives the range; we use the middle of its cost range.
-- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. The volunteer clinicians' time isn't counted, which flatters the charity when that setting is on.
+- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution: here large, because most clinicians are volunteers from rich countries on below-market stipends.
 
 ### Biggest uncertainties
 

@@ -22,6 +22,18 @@
       "note": "SoGive's charity page (its analysis text); SoGive publishes no spreadsheet for it, so the model is built from the figures stated in the text, each quoted on its row. Rated \"Not Recommended (tentative)\"; the record was last modified on 16 November 2020."
     },
     {
+      "title": "SoGive, rough calculations for the Woodland Trust analysis (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/18SfbZAjaCV3IWQ6L0gt8hP4mfEBVu1uHAMjCSW-AEVw/edit",
+      "type": "model",
+      "note": "Linked from the analysis; returned HTTP 410 (gone) in October 2026."
+    },
+    {
+      "title": "SoGive, Climate change donation recommendations (EA Forum, July 2020)",
+      "url": "https://forum.effectivealtruism.org/posts/yhKnbcX6YmTgLpfwJ",
+      "type": "evaluation",
+      "note": "Appendix 1: SoGive asked academics how many tonnes absorbed by tree planting would equal one tonne averted; answers ranged from 2 to more than 10."
+    },
+    {
       "title": "Rethink Priorities, climate change versus global health interventions (2026)",
       "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
       "type": "study",
@@ -60,7 +72,7 @@
       "id": "per_dollar",
       "title": "From pounds per tonne taken up to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' steps after SoGive's bottom line: all three projects, since a donation to the Woodland Trust isn't restricted to planting; pounds to dollars; and the decades over which the trees take up the carbon, discounted at the shared rate. The tonnes are carbon taken up by trees, not fuel left unburned, so they cut no air pollution (docs/normalization.md 2.5)."
+      "explainer": "charityevals' steps after SoGive's bottom line: all three projects, since a donation to the Woodland Trust isn't restricted to planting; the survival, additionality and permanence caveats SoGive lists; pounds to dollars; and the decades over which the trees take up the carbon. The tonnes are carbon taken up by trees, not fuel left unburned, so they cut no air pollution (docs/normalization.md 2.5)."
     },
     {
       "id": "staff_pay",
@@ -254,28 +266,12 @@
       "explainer": "Our judgment; SoGive doesn't cost this project per tonne. Each hectare saved is credited with the same 750 tonnes as a restored one, times this share. It hardly matters: 97 hectares against 4.1 million trees."
     },
     {
-      "id": "tonnes_all_projects",
-      "section": "per_dollar",
-      "label": "Tonnes taken up through all three projects",
-      "format": "integer",
-      "formula": "trees_planted * tonnes_per_tree + (restore_hectares + protect_hectares * protect_counterfactual_share) * tonnes_per_hectare_per_year * forest_lifespan_years"
-    },
-    {
       "id": "cost_all_projects_gbp",
       "section": "per_dollar",
       "label": "Cost of all three projects (£)",
       "format": "integer",
       "unit": "£",
       "formula": "create_cost_gbp + restore_cost_gbp + protect_cost_gbp"
-    },
-    {
-      "id": "cost_per_tonne_all_projects_gbp",
-      "section": "per_dollar",
-      "label": "Cost per tonne across the three projects (£)",
-      "format": "number",
-      "unit": "£",
-      "formula": "cost_all_projects_gbp / tonnes_all_projects",
-      "explainer": "About twice SoGive's planting-only figure: restoration costs more per tonne, and protection adds cost with few tonnes."
     },
     {
       "id": "usd_per_gbp",
@@ -286,48 +282,109 @@
       "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact)."
     },
     {
-      "id": "discount_rate_per_year",
+      "id": "tree_survival_share",
       "section": "per_dollar",
-      "label": "Discount rate",
-      "format": "percent",
-      "formula": "$discount_rate",
-      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
-    },
-    {
-      "id": "uptake_delay_years",
-      "section": "per_dollar",
-      "label": "Average years until the carbon is taken up",
+      "label": "Share of trees planted that survive to take up their carbon",
       "format": "number",
       "value": {
-        "low": 30,
-        "best": 50,
-        "high": 55
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "SoGive, charity analysis",
         "url": "https://app.sogive.org/#charity?charityId=woodland-trust",
-        "page": "Cost-effectiveness analysis",
-        "quote": "Assuming a rate of 5.9 kg CO2 sequestered per tree per year for the first 10 years of early tree life, followed by a rate of 22 kg CO2 sequestered per tree per year for the remaining 90 years of tree life",
+        "page": "Calculations & Assumptions",
+        "quote": "the assumption that zero supply chain losses or planting errors i.e. all 4.1 million trees surviving to maturity. 1.1m of these trees were sent out free to schools and neighbourhood groups",
         "retrieved": "2026-10-30"
       },
-      "explainer": "A tonne taken up decades from now does less than one kept out of the air today. At SoGive's rates a tree takes up its carbon on average 54 years after planting, a restored hectare 50 years; the low end allows for faster early growth. The site's climate conversion treats tonnes as averted now, so this delay is discounted here."
+      "explainer": "SoGive lists this as an assumption it didn't test. Our judgment."
     },
     {
-      "id": "uptake_discount_factor",
+      "id": "restore_additional_share",
       "section": "per_dollar",
-      "label": "Discount factor for the delay",
+      "label": "Share of a restored hectare's uptake that is extra",
       "format": "number",
-      "formula": "(1 + discount_rate_per_year) ^ -uptake_delay_years"
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=woodland-trust",
+        "page": "Calculations & Assumptions",
+        "quote": "for the Restore project in reality these appear to be degraded but not dead areas",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive counts all the carbon a restored hectare takes up, though the land was degraded, not bare, and includes hedgerows and other non-forest land. Our judgment."
+    },
+    {
+      "id": "permanence_share",
+      "section": "per_dollar",
+      "label": "Share of the carbon that stays stored",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=woodland-trust",
+        "page": "Calculations & Assumptions",
+        "quote": "carbon sequestration by trees delays rather than averts CO2 emissions",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Woodland can be felled, burn or die back, returning its carbon. Our judgment."
+    },
+    {
+      "id": "tonnes_kept",
+      "section": "per_dollar",
+      "label": "Tonnes taken up and kept, all three projects",
+      "format": "integer",
+      "formula": "(trees_planted * tonnes_per_tree * tree_survival_share + (restore_hectares * restore_additional_share + protect_hectares * protect_counterfactual_share) * tonnes_per_hectare_per_year * forest_lifespan_years) * permanence_share"
+    },
+    {
+      "id": "heat_deaths_remaining_share",
+      "section": "per_dollar",
+      "label": "Share of a tonne's heat deaths still to come when the carbon is taken up",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. The site values a tonne as if kept out of the air today. Trees take up their carbon over a century, on average about 50 years after planting (at SoGive's rates); a tonne taken up then avoids only the heat deaths still to come, which are concentrated late this century and beyond, and the warming before uptake is done. This row is a share of deaths, not a discount: the conversion already discounts the deaths for when they happen."
+    },
+    {
+      "id": "cost_per_tonne_kept_gbp",
+      "section": "per_dollar",
+      "label": "Cost per tonne taken up and kept, all three projects (£)",
+      "format": "number",
+      "unit": "£",
+      "formula": "cost_all_projects_gbp / tonnes_kept"
+    },
+    {
+      "id": "cost_ratio_to_sogive",
+      "section": "per_dollar",
+      "label": "Our cost per tonne relative to SoGive's planting figure",
+      "format": "multiple",
+      "formula": "cost_per_tonne_kept_gbp / cost_per_tonne_gbp",
+      "explainer": "How much more a tonne costs once all three projects and SoGive's caveats are counted."
     },
     {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
-      "label": "Tonnes of CO₂ taken up per dollar, discounted to today",
+      "label": "Tonnes of CO₂e averted per dollar (equivalent)",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "uptake_discount_factor / (cost_per_tonne_gbp * (cost_per_tonne_all_projects_gbp / cost_per_tonne_gbp) * usd_per_gbp)",
-      "explainer": "One over the all-project cost per tonne in dollars, times the discount for the delay. Written through SoGive's figure so the step from its bottom line shows."
+      "formula": "heat_deaths_remaining_share / (cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp)",
+      "explainer": "One over our cost per tonne in dollars (SoGive's figure times the ratio above), counted as the share of an averted tonne that the timing of the uptake makes it worth."
     },
     {
       "id": "air_pollution_weight",
@@ -386,7 +443,7 @@
       "format": "number",
       "unit": "t CO₂e per $",
       "formula": "tco2e_per_dollar * donor_cost_share",
-      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above. SoGive notes that carbon taken up by trees is not the same as emissions avoided (it returns if the woodland is lost, and SoGive's survey of academics put 2 to more than 10 tonnes taken up as worth one avoided); the site treats them alike, which flatters planting."
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above. SoGive notes that tree carbon delays rather than averts emissions; in its July 2020 climate recommendations it reported academics putting 2 to more than 10 tonnes absorbed by planting as equal to one averted, which is not applied here."
     }
   ],
   "output": {

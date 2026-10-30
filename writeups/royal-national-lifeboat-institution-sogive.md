@@ -19,7 +19,7 @@ SoGive's figures come first, ending at its cost per life saved. Our steps follow
 - **Overheads:** SoGive's fuller figure with overheads, £497,662 per life, since a donation also pays for fundraising and support.
 - **Pounds to dollars** at the 2019 average exchange rate.
 - **Value of a life:** each life saved is valued like any adult's death on the site (GiveWell's value, times the value-of-life slider).
-- **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
+- **Staff pay and volunteers:** with credit by share of resources on, staff's forgone pay and the volunteer crews' time count as part of the cost.
 
 ### What drives the result
 
@@ -30,7 +30,7 @@ SoGive's figures come first, ending at its cost per life saved. Our steps follow
 
 - **Overheads included**, using SoGive's own figure with them.
 - **Lives become healthy years** at the site's value for an adult's death; SoGive compares costs per life directly with its benchmark.
-- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. The volunteer crews' time isn't counted, which flatters the RNLI when that setting is on.
+- **Staff pay and volunteers:** with credit by share of resources, staff's forgone pay and the volunteer crews' time (our judgment: a quarter of the cash cost) count as in-kind contributions.
 
 ### Biggest uncertainties
 

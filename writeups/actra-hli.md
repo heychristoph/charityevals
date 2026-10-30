@@ -6,7 +6,7 @@ HLI publishes no spreadsheet for this estimate. The model is built from the figu
 
 ### What the charity does
 
-ACTRA delivers a programme modelled on Sustainable Transformation of Youth in Liberia (STYL): about eight weeks of group therapy that helps high-risk young men practise self-control, plan for the future and see themselves differently. It is still piloting the programme in Colombia. HLI lists ACTRA as an honourable mention: promising, but small and new.
+ACTRA delivers a programme modelled on Sustainable Transformation of Youth in Liberia (STYL): 24 group sessions over two to three months that help high-risk young men practise self-control, plan for the future and see themselves differently. It is still piloting the programme in Colombia. HLI lists ACTRA as an honourable mention: promising, but small and new.
 
 ### How the impact happens
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Industrious Labs campaigns to cut emissions from heavy industry in North America (aluminium, steel, cement and landfills), mostly by pressing companies to commit to cleaner production and purchasing. Giving Green estimated in 2022 that its aluminium campaign averts a tonne of CO₂e for about 52 cents; on our scale that is **<span data-figure="headline" data-model="industrious-labs-giving-green">1.6</span> years of healthy life per $1,000**.
+Industrious Labs campaigns to cut emissions from heavy industry in North America (aluminium, steel, cement and landfills), mostly by pressing companies to commit to cleaner production and purchasing. Giving Green estimated in 2022 that its aluminium campaign averts a tonne of CO₂e for about 52 cents; on our scale that is **<span data-figure="headline" data-model="industrious-labs-giving-green">2.1</span> years of healthy life per $1,000**.
 
 Giving Green doesn't publish the spreadsheet behind this estimate, and the web page says only "highly cost-effective". The figures are in its downloadable deep dive; the model is built from them, each quoted on its row, and reproduces Giving Green's $0.52.
 
@@ -23,7 +23,7 @@ The model turns these into tonnes for each step: about two thirds of the best gu
 Giving Green's figures come first, ending at its cost per tonne. Our steps follow:
 
 - **Tonnes per dollar:** one over the cost per tonne.
-- **Air pollution:** most of primary aluminium's emissions come from the electricity smelters use (about 62%), half of it from coal; coal power's smoke per tonne of CO₂ is about a fifth of the world fossil-fuel average in Europe and several times that where most smelters are. So the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.12 (0.02 to 0.48).
+- **Air pollution:** most of primary aluminium's emissions come from the electricity smelters use (about 62%). The first two steps cut emissions at North American smelters, where coal and gas plants cause little smoke per tonne (about 0.06 of the world fossil-fuel average); the third, two thirds of the tonnes, is mostly Chinese coal power, which we put at 0.4 of the average (0.2, European coal, to 0.8). Weighted by tonnes, the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is about 0.18.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 The site turns these tonnes into years of healthy life through the deaths they avoid: the heat deaths of every tonne, discounted over the decades until they come, and the air-pollution deaths at once.
@@ -32,7 +32,7 @@ The site turns these tonnes into years of healthy life through the deaths they a
 
 - **The effect on the wider aluminium industry**, a guess Giving Green itself says "should not be taken literally"; without it the cost is $1.50 a tonne.
 - **Deaths caused by one more tonne of CO₂**, a value you set.
-- **The coal smoke per tonne** at the smelters that switch.
+- **The coal smoke per tonne** at the smelters that switch, especially in China (our judgment).
 
 ### Where we differ from Giving Green
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Compassion UK is a Christian child-sponsorship charity: sponsors pay for children in poor countries to attend local church centres that provide schooling support, health care and meals. SoGive estimated that sponsorship's extra schooling brings an extra year's income for about £500; on our scale that is **<span data-figure="headline" data-model="compassion-uk-sogive">0.36</span> years of healthy life per $1,000**.
+Compassion UK is a Christian child-sponsorship charity: sponsors pay for children in poor countries to attend local church centres that provide schooling support, health care and meals. SoGive estimated that sponsorship's extra schooling brings an extra year's income for about £500; on our scale that is **<span data-figure="headline" data-model="compassion-uk-sogive">0.43</span> years of healthy life per $1,000**.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £500. SoGive rates Compassion UK "Not Recommended (firm)".
 
@@ -19,13 +19,13 @@ Most of Compassion UK's funding goes to sponsoring individual children through t
 SoGive's figures come first, ending at its cost per year of additional income. Our steps follow:
 
 - **Income on a log scale.** SoGive adds a 15% gain over 40 years up to six whole years of income. The site, like GiveWell, values income gains in logarithms, which counts a 15% gain a little more: each of SoGive's years is worth 1.34 doublings of income for a year.
-- **Timing:** the extra earnings start when the child starts work, about 10 years after the sponsorship begins, and run for 40 years; both are discounted at the shared rate.
-- **Pounds to dollars** at the 2020 average exchange rate, and the site's value of doubling an income for a year.
+- **Timing:** the extra earnings start when the child starts work, about 6 years after the average pound of the sponsorship is spent, and run for 40 years; both are discounted at the shared rate.
+- **Pounds to dollars** at the 2020 average exchange rate, and the site's value of income.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
 ### What drives the result
 
-- **The discount rate**, since the earnings come between 10 and 50 years after the donation: at the default 4% that cuts the figure to about a third, far more than the log scale adds.
+- **The discount rate**, since the earnings come between 6 and 46 years after the money is spent: at the default 4% that cuts the figure to about two fifths, far more than the log scale adds.
 - **Extra schooling and its return**: 1 year rather than 1.5 cuts the result by a third.
 - **The value of doubling an income**, a value you set.
 

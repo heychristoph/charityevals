@@ -183,7 +183,7 @@
       "label": "US dollars per pound, 2021",
       "format": "number",
       "formula": "@fx.usd_per_gbp_2021",
-      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact). SoGive's pounds mix four decades of research spending in the prices of the day; we convert them at the rate of the year the analysis was written and don't adjust for inflation, which flatters the research."
+      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact). SoGive doesn't say in which year's prices Glover et al.'s spending is stated; we convert at the rate of the year the analysis was written."
     },
     {
       "id": "discount_rate_per_year",
@@ -207,7 +207,7 @@
       "source": {
         "title": "Glover et al. (2014), BMC Medicine 12:99",
         "url": "https://doi.org/10.1186/1741-7015-12-99",
-        "note": "Estimates a lag of about 15 years between cancer research spending and its health gains. The range, 10 to 20 years, is our judgment.",
+        "note": "Estimates a lag of about 15 years between cancer research spending and its health gains (not checked against the paper's text: the publisher's page asked for sign-in). The range, 10 to 20 years, is our judgment.",
         "retrieved": "2026-10-30"
       },
       "explainer": "A donation today pays for research whose benefits arrive years later; the same study SoGive relies on puts the lag at about 15 years."
@@ -220,12 +220,32 @@
       "formula": "(1 + discount_rate_per_year) ^ -research_lag_years"
     },
     {
+      "id": "research_share_of_spend",
+      "section": "per_dollar",
+      "label": "Share of Breast Cancer Now's spending that goes to research",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Breast Cancer Now, Annual Report and Accounts 2019–20",
+        "url": "https://www.breastcancernow.org/media-assets/3c0m2egf/breast_cancer_now_annual_report_and_accounts_2019-2020_0.pdf",
+        "page": "Financial review",
+        "quote": "Charitable expenditure, which includes all activities relating to research, provision of clinical and support services, policy and campaigning, and public health and information, increased from £21.4 million to £22.6 million",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive's figure is per pound of research; a donation also pays for fundraising (£17.0m in 2019–20), support services and campaigning. Charitable spending was £22.6m of about £39.6m, so research is at most 57%; research grants are the largest part of it. Best 35% is our judgment from the accounts."
+    },
+    {
       "id": "dalys_per_dollar_cash",
       "section": "per_dollar",
-      "label": "Healthy years per dollar",
+      "label": "Healthy years per dollar donated to the charity",
       "format": "small",
-      "formula": "lag_discount_factor / (cost_per_qaly_gbp * usd_per_gbp)",
-      "explainer": "A QALY gained counts as one healthy year, the same as a DALY averted."
+      "formula": "lag_discount_factor * research_share_of_spend / (cost_per_qaly_gbp * usd_per_gbp)",
+      "explainer": "A QALY gained counts as one healthy year, the same as a DALY averted; only the research share of a donation is credited with them."
     },
     {
       "id": "staff_cost_share",
