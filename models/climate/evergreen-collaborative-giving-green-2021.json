@@ -1,0 +1,281 @@
+{
+  "id": "evergreen-collaborative-giving-green-2021",
+  "name": "Evergreen Collaborative (Giving Green, 2021)",
+  "kind": "charity",
+  "cause": "climate",
+  "charity": "evergreen-collaborative",
+  "owner": "giving-green",
+  "summary": "US climate policy. A re-implementation of Giving Green's 2021 estimate of what Evergreen's advocacy for a Clean Electricity Performance Program (CEPP) and the Clean Energy for America Act (CEAA) tax credits cost per tonne of CO₂e avoided. Superseded by Giving Green's 2022 estimate, which counts on the rankings.",
+  "source": {
+    "publisher": "Giving Green",
+    "title": "Evergreen Collaborative: deep dive (2021), cost-effectiveness analysis of the CEPP and CEAA (date approximate: Giving Green's 2021 recommendations, November 2021; the month isn't published on the page)",
+    "url": "https://www.givinggreen.earth/research/evergreen-collaborative-top-climate-nonprofit-evaluation",
+    "sheet": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+    "published": "2021-11-01",
+    "retrieved": "2026-10-30",
+    "license": "© Giving Green Research Group; all rights reserved (site terms). Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "Giving Green, Evergreen Collaborative: Top Climate Nonprofit Evaluation (2022 deep dive; the 2021 analysis is in its appendix)",
+      "url": "https://www.givinggreen.earth/research/evergreen-collaborative-top-climate-nonprofit-evaluation",
+      "type": "evaluation"
+    },
+    {
+      "title": "Giving Green, Evergreen cost-effectiveness spreadsheet (2021)",
+      "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+      "type": "model"
+    },
+    {
+      "title": "Giving Green, Evergreen Guesstimate model (2021)",
+      "url": "https://www.getguesstimate.com/models/19284",
+      "type": "model"
+    },
+    {
+      "title": "Rethink Priorities, climate change versus global health interventions (2026)",
+      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
+      "type": "study",
+      "note": "Source of the shared rate that turns tonnes into deaths."
+    },
+    {
+      "title": "Evergreen Collaborative",
+      "url": "https://www.evergreenaction.com",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Giving Green",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "finances",
+      "title": "Evergreen's financial information"
+    },
+    {
+      "id": "emissions",
+      "title": "Power sector emissions under business as usual and the bills"
+    },
+    {
+      "id": "bottom",
+      "title": "Evergreen's cost-effectiveness"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From cost per tonne to tonnes per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come: US power plants emit a small fraction of the world-average smoke behind the air-pollution part of the shared rate (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Giving Green's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "tax_credit_spending",
+      "section": "finances",
+      "label": "Evergreen's spending on clean energy tax credits",
+      "format": "usd",
+      "value": 500000,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B5"
+      },
+      "explainer": "What Evergreen spent on the clean energy tax credits (the CEAA), from its 501(c)(3) and 501(c)(4), as Giving Green records it."
+    },
+    {
+      "id": "cepp_ad_spending",
+      "section": "finances",
+      "label": "Evergreen Action's 501(c)(4) spending on the CEPP",
+      "format": "usd",
+      "value": 500000,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B6"
+      },
+      "explainer": "Television advertising for the Clean Electricity Performance Program."
+    },
+    {
+      "id": "cepp_c3_spending",
+      "section": "finances",
+      "label": "Evergreen Collaborative's 501(c)(3) spending on the CEPP",
+      "format": "usd",
+      "value": 1500000,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B7"
+      },
+      "explainer": "Modelling, staff and consulting time and digital work on the CEPP."
+    },
+    {
+      "id": "total_spending",
+      "section": "finances",
+      "label": "Evergreen's total spending on these bills",
+      "format": "usd",
+      "formula": "tax_credit_spending + cepp_ad_spending + cepp_c3_spending",
+      "expected": 2500000
+    },
+    {
+      "id": "cepp_reduction",
+      "section": "emissions",
+      "label": "Reduction in power sector emissions 2022–30 with the CEPP (million tonnes)",
+      "format": "number",
+      "unit": "million tonnes",
+      "value": 187.1501655,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B13 (='CEPP and CEAA'!D53)"
+      },
+      "explainer": "From the sheet's 'CEPP and CEAA' tab: the extra cut in US power-sector emissions from 2022 to 2030 with the CEPP on top of the tax credits, from Resources for the Future's projections of power-sector emissions under the CEAA alone and under the CEAA with the CEPP."
+    },
+    {
+      "id": "ceaa_reduction",
+      "section": "emissions",
+      "label": "Reduction in power sector emissions 2022–30 with the CEAA (million tonnes)",
+      "format": "number",
+      "unit": "million tonnes",
+      "value": 2774.72602,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B14 (='CEPP and CEAA'!B53)"
+      },
+      "explainer": "From the sheet's 'CEPP and CEAA' tab: the cut in US power-sector emissions from 2022 to 2030 with the Clean Energy for America Act's tax credits."
+    },
+    {
+      "id": "cepp_probability",
+      "section": "bottom",
+      "label": "Change in probability of a bill passing with the CEPP due to Evergreen",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, Evergreen cost-effectiveness analysis (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/15KsaYVWnH_RD4S8v4eAFg0iVs5suvWCozFF4e-F_298/edit",
+        "cell": "Summary!B18:D18"
+      },
+      "explainer": "Giving Green's pessimistic, realistic and optimistic cases: 0.5%, 1% and 3%, kept low because Evergreen was one of many organisations pushing the CEPP. Low and high are Giving Green's pessimistic and optimistic scenarios, not a confidence interval."
+    },
+    {
+      "id": "ceaa_probability",
+      "section": "bottom",
+      "label": "Change in probability of a bill passing with the CEAA due to Evergreen",
+      "format": "percent",
+      "formula": "cepp_probability / 10",
+      "expected": 0.001,
+      "explainer": "Giving Green takes a tenth of Evergreen's effect on the CEPP (0.05%, 0.1% and 0.3%): many organisations pushed for the tax credits, and the CEPP was Evergreen's higher priority."
+    },
+    {
+      "id": "expected_reduction",
+      "section": "bottom",
+      "label": "Expected value of Evergreen in changing CO₂e emissions (million tonnes)",
+      "format": "number",
+      "unit": "million tonnes",
+      "formula": "cepp_reduction * cepp_probability + ceaa_reduction * ceaa_probability",
+      "expected": 4.646227675
+    },
+    {
+      "id": "cost_per_tonne",
+      "section": "bottom",
+      "label": "Cost per tonne of CO₂e",
+      "format": "usd",
+      "formula": "total_spending / (expected_reduction * 1000000)",
+      "expected": 0.5380709201,
+      "explainer": "Giving Green's 2021 bottom line, realistic case: about $0.54 a tonne ($1.08 pessimistic, $0.18 optimistic). In 2022 Giving Green judged it no longer relevant, because the CEPP was left out of the Inflation Reduction Act, and replaced it with an estimate for Evergreen's work on implementing the Inflation Reduction Act."
+    },
+    {
+      "id": "tonnes_per_dollar_gg",
+      "section": "bottom",
+      "label": "Change in CO₂e per dollar (tonnes per $)",
+      "format": "number",
+      "formula": "1 / cost_per_tonne",
+      "expected": 1.85849107
+    },
+    {
+      "id": "tco2e_per_dollar",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per dollar",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "1 / cost_per_tonne",
+      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only. The cuts come from US power plants burning less coal and gas, but health modelling of the comparable Inflation Reduction Act finds few air-pollution deaths per tonne: Energy Innovation (2022) projects about 3,700–3,900 deaths avoided in 2030 and Resources for the Future (2022) 700–1,300, from roughly a billion tonnes cut that year, about a fortieth to a hundred-and-fiftieth of the world-average air-pollution deaths per tonne in the shared climate rate. Counting heat only understates the result by about 1.2–1.9 times; counting the world average would overstate it about 37 times. So these count as tonnes averted without burning less fuel, a lower bound."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown. Evergreen's CEPP spending included $0.5 million of television advertising, so the true share may be lower."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Policy staff and former government officials could typically earn considerably more in law firms, consulting or lobbying. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "tco2e_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Tonnes of CO₂e averted per dollar donated",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+    }
+  ],
+  "output": {
+    "row": "tco2e_per_donor_dollar",
+    "unit": "tco2e_no_smoke",
+    "label": "Tonnes of CO₂e averted per dollar",
+    "native": {
+      "row": "cost_per_tonne",
+      "unit": "$ per tonne CO₂e"
+    }
+  }
+}

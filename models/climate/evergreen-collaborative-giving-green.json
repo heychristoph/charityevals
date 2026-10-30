@@ -1,0 +1,343 @@
+{
+  "id": "evergreen-collaborative-giving-green",
+  "name": "Evergreen Collaborative (Giving Green, 2022)",
+  "kind": "charity",
+  "cause": "climate",
+  "charity": "evergreen-collaborative",
+  "owner": "giving-green",
+  "summary": "US climate policy and its implementation. A re-implementation of Giving Green's 2022 back-of-the-envelope estimate of what Evergreen's work on implementing the Inflation Reduction Act (IRA) costs per tonne of CO₂e avoided.",
+  "source": {
+    "publisher": "Giving Green",
+    "title": "Evergreen Collaborative: Top Climate Nonprofit Evaluation (deep dive, November 2022), IRA implementation back-of-the-envelope calculation",
+    "url": "https://www.givinggreen.earth/research/evergreen-collaborative-top-climate-nonprofit-evaluation",
+    "sheet": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+    "published": "2022-11-07",
+    "retrieved": "2026-10-30",
+    "license": "© Giving Green Research Group; all rights reserved (site terms). Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "Giving Green, Evergreen Collaborative: Top Climate Nonprofit Evaluation (deep dive, last updated November 2022)",
+      "url": "https://www.givinggreen.earth/research/evergreen-collaborative-top-climate-nonprofit-evaluation",
+      "type": "evaluation"
+    },
+    {
+      "title": "Giving Green, Evergreen BOTEC 2022 spreadsheet (last updated 7 November 2022)",
+      "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+      "type": "model"
+    },
+    {
+      "title": "Princeton ZERO Lab, REPEAT Project: preliminary report on the emissions impacts of the Inflation Reduction Act (2022)",
+      "url": "https://repeatproject.org/docs/REPEAT_IRA_Prelminary_Report_2022-08-04.pdf",
+      "type": "study",
+      "note": "The source of Giving Green's 6.3 billion tonnes."
+    },
+    {
+      "title": "Rethink Priorities, climate change versus global health interventions (2026)",
+      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
+      "type": "study",
+      "note": "Source of the shared rate that turns tonnes into deaths."
+    },
+    {
+      "title": "Evergreen Collaborative",
+      "url": "https://www.evergreenaction.com",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Giving Green",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "ira_cost",
+      "title": "IRA cost"
+    },
+    {
+      "id": "ira_ce",
+      "title": "IRA cost-effectiveness"
+    },
+    {
+      "id": "evergreen_cost",
+      "title": "Evergreen cost"
+    },
+    {
+      "id": "evergreen_ce",
+      "title": "Evergreen cost-effectiveness"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From cost per tonne to tonnes per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar. The model reports them as tonnes averted without burning less fuel, which the site values for their heat deaths only, discounted over the decades until they come: US power plants, where most of the IRA's cuts fall, emit a small fraction of the world-average smoke behind the air-pollution part of the shared rate (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Giving Green's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "ira_investment",
+      "section": "ira_cost",
+      "label": "Total IRA climate investment",
+      "format": "usd",
+      "value": 369000000000,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B4"
+      },
+      "explainer": "The dollar amount commonly given for the IRA's climate and energy provisions when it passed in 2022."
+    },
+    {
+      "id": "ira_tonnes",
+      "section": "ira_ce",
+      "label": "IRA's cumulative projected effect on emissions through 2032 (tonnes CO₂e)",
+      "format": "integer",
+      "value": 6300000000,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B6",
+        "note": "Princeton ZERO Lab (REPEAT Project), 2022"
+      },
+      "explainer": "Princeton ZERO Lab's 2022 estimate that the IRA cuts cumulative US greenhouse gas emissions by about 6.3 billion tonnes over the decade."
+    },
+    {
+      "id": "ira_cost_per_tonne",
+      "section": "ira_ce",
+      "label": "Cost-effectiveness of the IRA ($ per tonne CO₂e)",
+      "format": "usd",
+      "formula": "ira_investment / ira_tonnes",
+      "expected": 58.57142857
+    },
+    {
+      "id": "evergreen_annual_budget",
+      "section": "evergreen_cost",
+      "label": "Evergreen's projected annual budget (2023)",
+      "format": "usd",
+      "value": 7500000,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B9 (=0.5*7500000)"
+      },
+      "explainer": "The budget Giving Green projects for 2023, written into its formula. Giving Green's deep dive says Evergreen's 2022 budget was $5 million and that it hoped to grow to $7.5 million."
+    },
+    {
+      "id": "ira_budget_share",
+      "section": "evergreen_cost",
+      "label": "Share of Evergreen's budget going to IRA implementation",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B9 (=0.5*7500000)"
+      },
+      "explainer": "Two of Evergreen's four priorities concern implementing the bill, so Giving Green puts half the budget on it."
+    },
+    {
+      "id": "ira_years",
+      "section": "evergreen_cost",
+      "label": "Years of Evergreen's spending on IRA implementation",
+      "format": "integer",
+      "value": 10,
+      "published": 1,
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!C9 (note: \"multiplied by 10 years of activity\")"
+      },
+      "explainer": "Giving Green's sheet leaves out the ×10 that its own note and write-up describe. The sheet's formula is 0.5 × $7.5 million, one year of spending, which gives $0.49 a tonne; the note on that cell says \"multiplied by 10 years of activity\", and the deep dive says $3.75 million goes to implementation \"each year over the next decade\" and reports $4.88 a tonne, the sheet's calculation with ten years. Ten years also matches the benefit side, which applies Evergreen's influence to the IRA's whole decade of spending and emission cuts. Our view uses ten years, Giving Green's published $4.88; the evaluator view keeps the sheet's one year so its cached cells reproduce."
+    },
+    {
+      "id": "evergreen_ira_budget",
+      "section": "evergreen_cost",
+      "label": "Evergreen's budget to support IRA implementation",
+      "format": "usd",
+      "formula": "evergreen_annual_budget * ira_budget_share * ira_years",
+      "expected": 3750000
+    },
+    {
+      "id": "ira_provisions_targeted",
+      "section": "evergreen_ce",
+      "label": "IRA provisions that Evergreen may target",
+      "format": "usd",
+      "value": 180196000000,
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B11 (='Evergreens IRA line items'!E111*1000000000)"
+      },
+      "explainer": "The IRA line items Giving Green believes Evergreen may influence, added up on the sheet's line-items tab: about $180 billion of the $369 billion."
+    },
+    {
+      "id": "evergreen_influence",
+      "section": "evergreen_ce",
+      "label": "Evergreen's influence on IRA implementation (share of targeted provisions)",
+      "format": "percent",
+      "value": {
+        "low": 0.0005,
+        "best": 0.0025,
+        "high": 0.005
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B12"
+      },
+      "explainer": "Giving Green's guess, which it calls highly uncertain and conservative given the breadth of Evergreen's influence: Evergreen's work makes 0.25% of the targeted money get spent well that otherwise wouldn't. Range is ours: Giving Green gives none; the high end is the 0.5% in its own draft tab ('scratch Evergreen BOTEC 2022'!B8), the low end a fifth of the best guess."
+    },
+    {
+      "id": "ira_dollars_influenced",
+      "section": "evergreen_ce",
+      "label": "IRA implementation affected by Evergreen",
+      "format": "usd",
+      "formula": "ira_provisions_targeted * evergreen_influence",
+      "expected": 450490000
+    },
+    {
+      "id": "tonnes_avoided",
+      "section": "evergreen_ce",
+      "label": "Emissions avoided or removed due to Evergreen (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "ira_dollars_influenced / ira_cost_per_tonne",
+      "expected": 7691292.683,
+      "explainer": "The IRA money Evergreen's work affects, at the IRA's average cost per tonne."
+    },
+    {
+      "id": "cost_per_tonne",
+      "section": "evergreen_ce",
+      "label": "Cost-effectiveness of Evergreen ($ per tonne CO₂e)",
+      "format": "usd",
+      "formula": "evergreen_ira_budget / tonnes_avoided",
+      "expected": 0.4875643347,
+      "explainer": "Giving Green's bottom line. The sheet gives $0.49 a tonne; Giving Green's deep dive reports $4.88, the same calculation with ten years of spending (see \"Years of Evergreen's spending\"). The evaluator view reproduces the sheet; our view uses $4.88. Giving Green has low confidence in it."
+    },
+    {
+      "id": "offset_benchmark",
+      "section": "evergreen_ce",
+      "label": "Carbon offset benchmark ($ per tonne CO₂e)",
+      "format": "usd",
+      "value": 16.6530612244898,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B16 (=326.4/19.6)"
+      },
+      "explainer": "Giving Green's 2022 offset benchmark, a price per tonne written as $326.40 for 19.6 tonnes."
+    },
+    {
+      "id": "times_offset",
+      "section": "evergreen_ce",
+      "label": "…is x times as cost-effective as the offset benchmark",
+      "format": "multiple",
+      "formula": "offset_benchmark / cost_per_tonne",
+      "expected": 34.15561812
+    },
+    {
+      "id": "benchmark_price",
+      "section": "evergreen_ce",
+      "label": "Top recommendation benchmark ($ per tonne CO₂e)",
+      "format": "usd",
+      "value": 1,
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, Evergreen BOTEC 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1HXTp73zZdKjeDJf4HG5HJgC1pfFWWZwzyKDzw1uz5yE/edit",
+        "cell": "Evergreen BOTEC 2022!B18"
+      },
+      "explainer": "Giving Green's rough bar for a top nonprofit: about $1 a tonne, with anything under $10 plausibly in range."
+    },
+    {
+      "id": "times_benchmark",
+      "section": "evergreen_ce",
+      "label": "…is x times as cost-effective as the top recommendation benchmark",
+      "format": "multiple",
+      "formula": "benchmark_price / cost_per_tonne",
+      "expected": 2.051011382
+    },
+    {
+      "id": "tco2e_per_dollar",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per dollar",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "1 / cost_per_tonne",
+      "explainer": "One over Giving Green's cost per tonne. Reported as tonnes averted without burning less fuel, which count for their heat deaths only. Most of the cuts come from US power plants burning less coal and gas, but the IRA's own health modelling finds few air-pollution deaths per tonne: Energy Innovation (2022) projects about 3,700–3,900 deaths avoided in 2030 and Resources for the Future (2022) 700–1,300, from roughly a billion tonnes cut that year, about a fortieth to a hundred-and-fiftieth of the world-average air-pollution deaths per tonne in the shared climate rate. Counting heat only understates the result by about 1.2–1.9 times; counting the world average would overstate it about 37 times. So these count as tonnes averted without burning less fuel, a lower bound (see the write-up)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Policy staff and former government officials could typically earn considerably more in law firms, consulting or lobbying. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "tco2e_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Tonnes of CO₂e averted per dollar donated",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the heat deaths they avoid: the shared \"Deaths caused by one more tonne of CO₂\" times its heat share, discounted over \"Years until the heat deaths from a tonne of CO₂\"."
+    }
+  ],
+  "output": {
+    "row": "tco2e_per_donor_dollar",
+    "unit": "tco2e_no_smoke",
+    "label": "Tonnes of CO₂e averted per dollar",
+    "native": {
+      "row": "cost_per_tonne",
+      "unit": "$ per tonne CO₂e"
+    }
+  }
+}
