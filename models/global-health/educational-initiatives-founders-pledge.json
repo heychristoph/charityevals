@@ -1,0 +1,339 @@
+{
+  "id": "educational-initiatives-founders-pledge",
+  "name": "Educational Initiatives: education (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "educational-initiatives",
+  "owner": "founders-pledge",
+  "summary": "Educational Initiatives makes Mindspark, adaptive learning software that lets pupils in India work at their own level. Founders Pledge's 2019 education report estimates its cost-effectiveness through later earnings.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Education: cause report (2019), Education Cost-Effectiveness Calculation (Public)",
+    "url": "https://www.founderspledge.com/research/fp-education",
+    "sheet": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit#gid=1844752997",
+    "published": "2019-12-20",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Education cause report (2019, PDF)",
+      "url": "https://www.founderspledge.com/research/fp-education",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit#gid=1844752997",
+      "type": "model"
+    },
+    {
+      "title": "Educational Initiatives",
+      "url": "https://www.ei-india.com",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0.05,
+      "uov_per_ln_consumption": 1.4426950408889634
+    }
+  },
+  "sections": [
+    {
+      "id": "tests",
+      "title": "Test score benefits"
+    },
+    {
+      "id": "income",
+      "title": "Income benefits"
+    },
+    {
+      "id": "conversion",
+      "title": "Into units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step: FP's increase in ln(income) per dollar, valued with GiveWell's weight on income."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's. With credit by share of resources on, staff's pay below what they could earn elsewhere counts as their contribution, and they get their share of the outcome."
+    }
+  ],
+  "rows": [
+    {
+      "id": "effect_sd",
+      "section": "tests",
+      "label": "Effect per beneficiary (SD of test scores)",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Public), 2019",
+        "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit",
+        "cell": "'Conventional Education Charitie'!F5:H5"
+      },
+      "explainer": "Based on midline results of a randomised trial (FP's note). FP's pessimistic (10th percentile), middle and optimistic (90th) cases."
+    },
+    {
+      "id": "replicability",
+      "section": "tests",
+      "label": "Replicability adjustment",
+      "format": "percent",
+      "value": 1,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Public), 2019",
+        "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit",
+        "cell": "'Conventional Education Charitie'!G6"
+      },
+      "explainer": "FP applies none (1 in every case)."
+    },
+    {
+      "id": "effect_adjusted",
+      "section": "tests",
+      "label": "Effect per beneficiary, adjusted (SD)",
+      "format": "number",
+      "formula": "effect_sd * replicability",
+      "expected": 0.2
+    },
+    {
+      "id": "cost_per_beneficiary",
+      "section": "tests",
+      "label": "Cost per beneficiary",
+      "format": "usd",
+      "value": {
+        "low": 25,
+        "best": 37.5,
+        "high": 50
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Public), 2019",
+        "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit",
+        "cell": "'Conventional Education Charitie'!F9:H9"
+      },
+      "explainer": "Cost per child: $37.5 in FP's middle case, $25 to $50 in its others."
+    },
+    {
+      "id": "govt_cost_per_beneficiary",
+      "section": "tests",
+      "label": "Government cost per beneficiary",
+      "format": "usd",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Public), 2019",
+        "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit",
+        "cell": "'Conventional Education Charitie'!F10:H10"
+      },
+      "explainer": "FP counts no government money in any case."
+    },
+    {
+      "id": "govt_dollar_value",
+      "section": "tests",
+      "label": "Relative value of government dollars",
+      "format": "percent",
+      "value": 1,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Education Cost-Effectiveness Calculation (Public), 2019",
+        "url": "https://docs.google.com/spreadsheets/d/1KlNP-NDSOs51N4RLEUp76flx7wc6fQtLN1_ZlV8rSTU/edit",
+        "cell": "'Conventional Education Charitie'!G11"
+      },
+      "explainer": "How much a dollar of government money spent alongside the charity's counts as a cost: 1 if it would otherwise have been as well spent, 0 if it would otherwise have done no good."
+    },
+    {
+      "id": "total_cost",
+      "section": "tests",
+      "label": "Total cost per beneficiary",
+      "format": "usd",
+      "formula": "cost_per_beneficiary + govt_cost_per_beneficiary * if($resource_shares, 1, govt_dollar_value)",
+      "expected": 37.5,
+      "explainer": "With credit by share of resources on, the government's money counts in full as a contributor's: its share of the outcome is the share of the cost it paid."
+    },
+    {
+      "id": "sd_per_dollar",
+      "section": "tests",
+      "label": "SD of test scores per $",
+      "format": "small",
+      "formula": "effect_adjusted / total_cost",
+      "expected": 0.005333333333
+    },
+    {
+      "id": "sd_per_100",
+      "section": "tests",
+      "label": "SD per $100",
+      "format": "number",
+      "formula": "sd_per_dollar * 100",
+      "expected": 0.5333333333
+    },
+    {
+      "id": "salary_gain_per_sd",
+      "section": "income",
+      "label": "Annual salary increase per SD",
+      "format": "percent",
+      "formula": "@founders_pledge_2019.earnings_gain_per_sd",
+      "published": 0.1,
+      "explainer": "The shared figure from FP's 2019 education work: 10%, 1% to 25% across its cases (row 17)."
+    },
+    {
+      "id": "additional_share",
+      "section": "income",
+      "label": "Share of the increase that is additional",
+      "format": "percent",
+      "formula": "@founders_pledge_2019.earnings_gain_additional_share",
+      "published": 0.8,
+      "explainer": "The shared figure from FP's 2019 education work: 80%, 50% to 100% across its cases (row 18)."
+    },
+    {
+      "id": "net_gain_per_sd",
+      "section": "income",
+      "label": "Net earnings increase per SD",
+      "format": "percent",
+      "formula": "salary_gain_per_sd * additional_share",
+      "expected": 0.08
+    },
+    {
+      "id": "ln_income_per_sd",
+      "section": "income",
+      "label": "Gain in ln(income) per SD",
+      "format": "number",
+      "formula": "ln(1 + net_gain_per_sd)",
+      "expected": 0.07696104114
+    },
+    {
+      "id": "years_until",
+      "section": "income",
+      "label": "Years until the benefit starts",
+      "format": "number",
+      "formula": "@founders_pledge_2019.years_until_earnings",
+      "published": 8,
+      "explainer": "The shared figure from FP's 2019 education work (row 21)."
+    },
+    {
+      "id": "duration",
+      "section": "income",
+      "label": "Duration of benefits (years)",
+      "format": "number",
+      "formula": "@founders_pledge_2019.earnings_duration_years",
+      "published": 5,
+      "explainer": "The shared figure from FP's 2019 education work: 5 years, 2 to 20 across its cases (row 22)."
+    },
+    {
+      "id": "discount",
+      "section": "income",
+      "label": "Discount rate",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). FP uses 5% (row 23); the evaluator view pins it there."
+    },
+    {
+      "id": "pv_per_sd",
+      "section": "income",
+      "label": "Present value of ln(income) per SD",
+      "format": "number",
+      "formula": "-pv(discount, duration, ln_income_per_sd, 0, 1) / (1 + years_until * discount)",
+      "expected": 0.2499007741,
+      "explainer": "FP's formula: the gain paid at the start of each year for the duration, discounted, then divided by (1 + years until the benefit × rate), simple rather than compound discounting for the wait."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "income",
+      "label": "Present value of ln(income) per $",
+      "format": "small",
+      "formula": "pv_per_sd * sd_per_dollar",
+      "expected": 0.001332804129,
+      "explainer": "Founders Pledge's bottom line for the charity (its Summary tab, balanced case)."
+    },
+    {
+      "id": "cost_per_ln_income",
+      "section": "income",
+      "label": "Cost per unit of ln(income)",
+      "format": "usd",
+      "formula": "1 / ln_income_per_dollar",
+      "expected": 750.2977959
+    },
+    {
+      "id": "cost_to_double_income",
+      "section": "income",
+      "label": "Cost to double one person's income for a year",
+      "format": "usd",
+      "formula": "cost_per_ln_income / $uov_per_ln_consumption",
+      "expected": 520.0668018,
+      "explainer": "FP multiplies by ln 2: a doubling is ln 2 units of ln(income). Written here with GiveWell's weight on income, 1/ln 2, which is the same number; the evaluator view pins it."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "conversion",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "GiveWell's weight on income turns FP's increase in ln(income) into units of value: one unit is a year of doubled income, so this is one over the cost to double income."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "ln_income_per_dollar",
+      "unit": "ln(income) per $"
+    }
+  }
+}
