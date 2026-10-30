@@ -158,9 +158,15 @@ export function speciesOf(m: ResolvedModel): string[] {
   return SPECIES.filter(([, re]) => re.test(text)).map(([s]) => s);
 }
 
-/** The species step's formula for each source: AIM SADs (weight out, ours in) or raw days of pain. */
+/** The species step's formula for each source: AIM SADs (weight out, ours in) or raw days of pain.
+ * AIM's weights changed between SAD versions, so the AIM template names the version `v` whose weight
+ * is built into the figure divided (`@aim_sads.<s>_<v>`). The evaluator branch divides every version
+ * by the 2024 hen, the weight the evaluator views pin `$chicken_vs_person` to, so ACE's SADs reproduce
+ * as SADs whatever their version. A model with figures of two versions for one species adds a second
+ * row `ced_<s>_<v>` reading `sads_<s>_<v>`. */
+export const AIM_VERSIONS = ["2024", "2025"];
 export const CED_TEMPLATES = {
-  aim: (s: string) => `sads_${s} / @aim_sads.${s} * if($rp_species_weights, @welfare_ranges.${s}_vs_chicken, @aim_sads.${s} / @aim_sads.chicken)`,
+  aim: (s: string, v: string, row = s) => `sads_${row} / @aim_sads.${s}_${v} * if($rp_species_weights, @welfare_ranges.${s}_vs_chicken, @aim_sads.${s}_${v} / @aim_sads.chicken_2024)`,
   raw: (s: string) => `pain_days_${s} * @welfare_ranges.${s}_vs_chicken`,
 };
 const squash = (f: string) => f.replace(/\s+/g, "");
@@ -181,14 +187,23 @@ export function inv3(lib: Library): InvariantReport {
       });
       continue;
     }
+    const isTemplate = (s: string, f: string | undefined, versions = AIM_VERSIONS, row?: string) =>
+      f !== undefined && [...versions.map((v) => CED_TEMPLATES.aim(s, v, row ?? s)), ...(row ? [] : [CED_TEMPLATES.raw(s)])].some((t) => squash(t) === squash(f));
     for (const s of species) {
       const r = m.byId.get(`ced_${s}`);
-      const ok = r?.formula !== undefined && Object.values(CED_TEMPLATES).some((t) => squash(t(s)) === squash(r.formula!));
+      const ok = isTemplate(s, r?.formula);
       if (!r || !ok || !path.has(r.id) || !r.factDeps.includes(`welfare_ranges.${s}_vs_chicken`))
         violations.push({
           inv: "INV-3", model: m.id, where: `ced_${s}`,
           detail: !r ? `declares species ${s} but has no ced_${s} row` : !ok ? `ced_${s} isn't the standard template: ${r.formula}` : !path.has(r.id) ? `ced_${s} doesn't feed the output` : `ced_${s} doesn't read @welfare_ranges.${s}_vs_chicken`,
         });
+      // A second SAD version for the same species: ced_<s>_<v>, same template on sads_<s>_<v>.
+      for (const v of AIM_VERSIONS) {
+        const r2 = m.byId.get(`ced_${s}_${v}`);
+        if (!r2) continue;
+        if (!isTemplate(s, r2.formula, [v], `${s}_${v}`) || !path.has(r2.id))
+          violations.push({ inv: "INV-3", model: m.id, where: r2.id, detail: !path.has(r2.id) ? `${r2.id} doesn't feed the output` : `${r2.id} isn't the standard template for version ${v}: ${r2.formula}` });
+      }
     }
     for (const r of m.rows)
       if (!/^ced_/.test(r.id) && r.factDeps.some(SPECIES_FACT))
@@ -196,7 +211,7 @@ export function inv3(lib: Library): InvariantReport {
   }
   return {
     id: "INV-3", title: "Every animal model passes through the species step, once per species, from the shared table", status: "checked", checked: models.length, violations,
-    how: "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s> / @aim_sads.chicken); raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
+    how: "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024), v the SAD version, 2024 or 2025, whose weight is built into the figure; a second version for the same species goes in ced_<s>_<v> on sads_<s>_<v>; raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
   };
 }
 

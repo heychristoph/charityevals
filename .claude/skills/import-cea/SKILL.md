@@ -69,7 +69,7 @@ Worked examples to copy:
 `evaluator: { name, assumptions }` pins every assumption layer E reads to the evaluator's own value
 (INV-5, INV-8): `resource_shares: 0`, their `discount_rate`, `life_value_multiplier: 1`, their
 `uov_per_ln_consumption` / `uov_per_daly` where the sheet uses its own, and for AIM SADs models
-`chicken_vs_person: 0.463966` (`@aim_sads.chicken`) with `rp_species_weights: 0`.
+`chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
 
 - **Deaths** read `$life_value_multiplier` (GiveWell: `@moral_weights.* * $life_value_multiplier`;
   HLI: scale the wellbeing of the years saved, as in AMF-HLI).
@@ -97,8 +97,12 @@ Worked examples to copy:
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,
   shares from facts such as `@sad_factors.meal_sads_share_<s>`), convert each with
-  `ced_<s> = sads_<s> / @aim_sads.<s> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s> / @aim_sads.chicken)`
-  copied exactly, sum them into the output, and list the species in `output.species`. Counts that
+  `ced_<s> = sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024)`
+  copied exactly, sum them into the output, and list the species in `output.species`. `<v>` is the
+  SAD version (2024 or 2025) whose weights are built into the figure the row divides *in our view*
+  (a shared `@sad_factors` fact says its basis in its note; ACE's 2025 sheets use 2025 SADs, its
+  2024 sheets and the 2024 meal sheet 2024 SADs). Figures of two versions for one species: a second
+  pair `sads_<s>_<v>` / `ced_<s>_<v>` (The Humane League). Counts that
   aren't SADs use `ced_<s> = pain_days_<s> * @welfare_ranges.<s>_vs_chicken`. Only `ced_*` rows read
   `@welfare_ranges` or `@aim_sads`.
 - **One SADs figure per physical change** (SAME-CHANGE): a row giving SADs for a change in
