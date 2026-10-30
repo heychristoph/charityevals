@@ -1,0 +1,274 @@
+{
+  "id": "compassion-uk-sogive",
+  "name": "Compassion UK child sponsorship (SoGive, 2020)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "compassion-uk",
+  "owner": "sogive",
+  "summary": "Sponsors children in poor countries through church-run centres that pay for schooling, health care and meals. SoGive's estimate of the cost per year of extra income that sponsorship's extra schooling brings, rebuilt from SoGive's analysis.",
+  "source": {
+    "publisher": "SoGive",
+    "title": "Compassion UK Christian Child Development: SoGive rating and analysis",
+    "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+    "published": "2020-11-11",
+    "retrieved": "2026-10-30",
+    "license": "No licence on the page. SoGive's data terms (sogive.org/doc/getourdata.html, archived September 2019): data for charity analysis is free with attribution to SoGive; use in apps needs a licence, free for low-intensity use, on condition that users are told the source of impact assessments with a link back to SoGive. This model cites SoGive and links its page."
+  },
+  "resources": [
+    {
+      "title": "SoGive, Compassion UK analysis",
+      "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+      "type": "evaluation",
+      "note": "SoGive's charity page (its analysis text); SoGive publishes no spreadsheet for it, so the model is built from the figures stated in the text, each quoted on its row. Rated \"Not Recommended (firm)\"; the record was last modified on 11 November 2020."
+    },
+    {
+      "title": "Wydick, Glewwe & Rutledge (2013), Does international child sponsorship work? A six-country study of impacts on adult life outcomes, Journal of Political Economy 121(2)",
+      "url": "https://www.journals.uchicago.edu/doi/pdf/10.1086/670138",
+      "type": "study"
+    },
+    {
+      "title": "Compassion UK",
+      "url": "https://www.compassionuk.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "SoGive",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "effect",
+      "title": "Extra income from extra schooling"
+    },
+    {
+      "id": "bottom",
+      "title": "SoGive's bottom line"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From pounds per year of extra income to value per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' steps after SoGive's bottom line: SoGive adds up years of income linearly; the site values income in logarithms, as GiveWell does, and discounts it over the years until the sponsored child starts work and through a working life. Then pounds to dollars."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "extra_schooling_years",
+      "section": "effect",
+      "label": "Extra years of schooling from sponsorship",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 1.5,
+        "high": 1.5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+        "page": "Cost-effectiveness analysis",
+        "quote": "achieved 1-1.5 additional years of education",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Wydick, Glewwe and Rutledge (2013), a six-country study of Compassion's sponsorship programme, found 1 to 1.5 more years of schooling; SoGive takes the top of the range."
+    },
+    {
+      "id": "income_gain_per_year_of_schooling",
+      "section": "effect",
+      "label": "Income gain from each extra year of schooling",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+        "page": "Cost-effectiveness analysis",
+        "quote": "If we take the World Bank's estimate that an additional year's schooling increase incomes by about 10%",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "working_years",
+      "section": "effect",
+      "label": "Working life",
+      "format": "number",
+      "unit": "years",
+      "value": 40,
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+        "page": "Cost-effectiveness analysis",
+        "quote": "over a 40 year working life",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "income_years",
+      "section": "effect",
+      "label": "Years of additional income per sponsored child",
+      "format": "number",
+      "formula": "income_gain_per_year_of_schooling * extra_schooling_years * working_years",
+      "expected": 6,
+      "explainer": "SoGive: \"a typical beneficiary would receive the equivalent of six years' additional income (0.1*1.5*40 years)\": a 15% higher income for 40 years, added up as six years of a whole income."
+    },
+    {
+      "id": "cost_per_sponsorship_gbp",
+      "section": "effect",
+      "label": "Cost of a sponsorship (£)",
+      "format": "integer",
+      "unit": "£",
+      "value": 3000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development",
+        "page": "Cost-effectiveness analysis",
+        "quote": "As the average sponsored child received around £3,000 of support",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "The average sponsorship in the study lasted 9.3 years."
+    },
+    {
+      "id": "cost_per_income_year_gbp",
+      "section": "bottom",
+      "label": "Cost per year of additional income (£)",
+      "format": "number",
+      "unit": "£",
+      "formula": "cost_per_sponsorship_gbp / income_years",
+      "expected": 500,
+      "explainer": "SoGive: \"this means it costs Compassion £500 to provide someone with an additional year's income\", against its benchmark of £50 to double someone's income for a year. SoGive also tries a generous allowance for health benefits (preventing all deaths at ages 5–14 at Ugandan rates, 0.014 lives per sponsorship) and finds it doesn't change the verdict; that allowance isn't in this figure."
+    },
+    {
+      "id": "income_gain",
+      "section": "per_dollar",
+      "label": "Income gain while working",
+      "format": "percent",
+      "formula": "income_gain_per_year_of_schooling * extra_schooling_years"
+    },
+    {
+      "id": "log_income_factor",
+      "section": "per_dollar",
+      "label": "Log-income gain per year of additional income",
+      "format": "number",
+      "formula": "ln(1 + income_gain) / income_gain",
+      "explainer": "SoGive counts a 15% gain for 40 years as six whole years of income. The site values income on a log scale, as GiveWell does: a 15% gain a year is ln(1.15) = 0.14 of log income, 0.20 of a doubling, so each of SoGive's years of income (0.15 of a year's income ÷ 0.15) is worth 0.93 of log income, 1.34 doublings."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future income",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "years_until_work",
+      "section": "per_dollar",
+      "label": "Years from the sponsorship until the extra earnings start",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 5,
+        "best": 10,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: sponsorship runs through school (9.3 years on average), and the earnings start when the child starts work."
+    },
+    {
+      "id": "timing_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for the timing of the extra earnings",
+      "format": "number",
+      "formula": "(1 + discount_rate_per_year) ^ -years_until_work * pv_annuity_due(1, discount_rate_per_year, working_years) / working_years"
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "per_dollar",
+      "label": "US dollars per pound, 2020",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2020",
+      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact)."
+    },
+    {
+      "id": "uov_per_dollar_cash",
+      "section": "per_dollar",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "1 / (cost_per_income_year_gbp * usd_per_gbp) * log_income_factor * $uov_per_ln_consumption * timing_factor",
+      "explainer": "Years of additional income per dollar, in log income, valued at the site's value of income (Your values: the value of doubling an income for a year), discounted for timing."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per dollar donated",
+      "format": "small",
+      "unit": "units of value per $",
+      "formula": "uov_per_dollar_cash * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_income_year_gbp",
+      "unit": "£ per year of additional income"
+    }
+  }
+}
