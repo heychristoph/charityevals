@@ -97,3 +97,14 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - 1 breakeven analysis.
   - 2 Fortify Health CEAs that AIM's pages don't claim as its own.
   - 1 tobacco-tax idea whose charity isn't confirmed on AIM's pages.
+
+
+  the PDFs they link, and every linked Google Sheet (tested through its public export): 42 entries
+  with a cost-effectiveness claim, a dollars-per-tonne figure or a linked model.
+- **Imported:** 6 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
+  Good Food Institute, Future Cleantech Architects, Opportunity Green, Evergreen Collaborative (2022,
+  and its superseded 2021 analysis) and Carbon180.
+  benchmark, and most of its pages are qualitative. Left out: recommendations with no published figure
+  the Australian list and the grantee spotlights), strategy-level sheets with no charity, offsets
+  bought from companies (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
+  sheet. The file lists every entry and its reason.
