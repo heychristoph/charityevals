@@ -1,0 +1,59 @@
+.info-tip {
+  position: relative;
+  display: inline-block;
+  vertical-align: -3px;
+}
+.info-tip-button {
+  display: inline-grid;
+  place-items: center;
+  padding: 2px;
+  margin: -2px 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+.info-tip-button:hover,
+.info-tip-button[aria-expanded="true"] {
+  color: var(--blue);
+}
+/* Inside a .tip-host the bubble opens under the host's full width, so it stays on screen. */
+.tip-host {
+  position: relative;
+}
+.tip-host .info-tip {
+  position: static;
+}
+.tip-host .info-tip-bubble {
+  left: 0;
+  right: 0;
+  width: auto;
+  max-width: 420px;
+}
+.nobr {
+  white-space: nowrap;
+}
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.info-tip-bubble p + p {
+  margin-top: var(--s2);
+}
+.info-tip-bubble {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: -8px;
+  width: min(300px, calc(100vw - 32px));
+  padding: var(--s3);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  background: var(--paper);
+  box-shadow: 0 6px 20px rgb(29 36 51 / 0.12);
+  font: 400 14px/1.5 var(--sans);
+  color: var(--ink-2);
+  white-space: normal;
+}
