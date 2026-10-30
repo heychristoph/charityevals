@@ -4,6 +4,6 @@ Research institute in India; runs kangaroo mother care programs in Uttar Pradesh
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [Kangaroo Mother Care rough estimate](/rice-institute) | GW | November 2022 | <span data-figure="headline" data-model="rice-institute-kangaroo-mother-care">44</span> | 14 |
-| [KMC with r.i.c.e. in Uttar Pradesh rough estimate, 2023](/rice-institute/rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023) | GW | November 2022 | <span data-figure="headline" data-model="rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023">28</span> | 22, 1 kept fixed |
+| [KMC with r.i.c.e. in Uttar Pradesh rough estimate, 2023](/rice-institute/rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023) | GW | November 2022 | <span data-figure="headline" data-model="rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023">28</span> | 24, 1 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

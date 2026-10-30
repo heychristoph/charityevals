@@ -4,9 +4,9 @@ Runs mobile conditional cash transfers and health programs in Pakistan and elsew
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [Cost-effectiveness analysis of IRD breastfeeding promotion pilot - March 2024](/ird-global) | GW | March 2024 | <span data-figure="headline" data-model="ird-global-breastfeeding-promotion-pilot-march-2024">21</span> | 163, 2 kept fixed |
-| [IRD operational funding threshold analysis rough estimate, 2023](/ird-global/ird-global-operational-funding-threshold-2023) | GW | April 2023 | <span data-figure="headline" data-model="ird-global-operational-funding-threshold-2023">17</span> | 1, 1 kept fixed |
+| [IRD operational funding threshold analysis rough estimate, 2023](/ird-global/ird-global-operational-funding-threshold-2023) | GW | April 2023 | <span data-figure="headline" data-model="ird-global-operational-funding-threshold-2023">17</span> | 2, 1 kept fixed |
 | [2023 Cost-effectiveness analysis of IRD's ZM and mCCT program in Sindh](/ird-global/ird-global-2023-zm-mcct-in-sindh) | GW | February 2023 | <span data-figure="headline" data-model="ird-global-2023-zm-mcct-in-sindh">13</span> | 598, 1 kept fixed |
-| [IRD's ZM and mCCTs program value of information rough estimate](/ird-global/ird-global-zm-mccts-value-information) | GW | February 2023 | <span data-figure="headline" data-model="ird-global-zm-mccts-value-information">53</span> | 109, 2 kept fixed |
+| [IRD's ZM and mCCTs program value of information rough estimate](/ird-global/ird-global-zm-mccts-value-information) | GW | February 2023 | <span data-figure="headline" data-model="ird-global-zm-mccts-value-information">53</span> | 108, 2 kept fixed |
 | [IRD mCCT Value of information for evaluation rough estimate](/ird-global/ird-global-mcct-value-information-evaluation) | GW | November 2021 | <span data-figure="headline" data-model="ird-global-mcct-value-information-evaluation">27</span> | 86 |
 | [Cost-effectiveness analysis of IRD’s mCCT program in high-risk Sindh districts, 2021](/ird-global/ird-global-mcct-in-high-risk-sindh-districts-2021) | GW | June 2021 | <span data-figure="headline" data-model="ird-global-mcct-in-high-risk-sindh-districts-2021">8.9</span> | 401, 1 kept fixed |
 
