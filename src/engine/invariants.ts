@@ -98,7 +98,7 @@ export function inv1(lib: Library): InvariantReport {
   }));
   return {
     id: "INV-1", title: "Every ranked model reports in a ranked unit", status: "checked", checked: models.length, violations,
-    how: `Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {${RANKED_UNITS.join(", ")}}. The ced unit doesn't exist yet, so every animal model (sad, animals_spared) fails.`,
+    how: `Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {${RANKED_UNITS.join(", ")}}.`,
   };
 }
 

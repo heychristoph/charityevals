@@ -1,7 +1,6 @@
 // Validates every model and prints each bottom line in years of healthy life per $1,000. Fails on schema errors, broken formulas,
 // or a row that no longer reproduces the value its source reports (`expected`).
 //   npm run check            all models
-//   npm run check -- <id>    one model, with its tornado
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable, modelsOf } from "../src/engine/model";

@@ -43,9 +43,14 @@ currency, year).
   (PIP, WDI). Household size: DHS StatCompiler.
 - Before adding a fact, grep `facts/` for it. New country data goes in `facts/<country>.json` with
   `source.url`, `retrieved`, and a range when sources disagree.
+- Animals: SADs per physical change come from facts/sad_factors.json (one figure per change; a new
+  change gets a new fact with a `change` note). Species weights come only from
+  facts/welfare_ranges.json (Rethink Priorities, relative to a chicken), through the `ced_<s>` rows;
+  a species it lacks uses the stand-ins of docs/normalization.md, decision 6.
 
 ## Reference classes for judgments
 
-- `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit
-  and the canonical rows of other charityevals models of the same family. Anchor judgments on
+- `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit (in
+  years of healthy life per $1,000) and the canonical rows of other charityevals models of the same
+  family. Anchor judgments on
   them ("evidence_adj 0.7, as for X, because …") or explain why this charity differs.

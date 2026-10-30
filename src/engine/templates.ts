@@ -12,8 +12,10 @@ export type TemplateSpec = {
   title: string;
   /** Output unit: a key of assumptions.units with a to_common formula. */
   unit: string;
-  /** Row ids of the bottom line before and after the salary-sacrifice share. */
+  /** Row ids of the bottom line before and after the salary-sacrifice share (`donor`), and the
+   * output: the donor row itself, or for animal families the species step's sum after it. */
   perDollar: string;
+  donor: string;
   output: string;
   /** Section ids in the order the model must use them. */
   sections: string[];
@@ -65,11 +67,19 @@ function spec(title: string, unit: string, prefix: string, required: string[], b
     title,
     unit,
     perDollar,
+    donor: output,
     output,
     sections: SECTIONS,
     required: [...COMMON_REQUIRED, ...required, perDollar, output],
     bounds: { ...COMMON_BOUNDS, ...bounds },
   };
+}
+
+/** Animal families count Ambitious Impact's SADs (the shared per-change figures) and end in
+ * chicken-equivalent pain days through the species step (docs/normalization.md 2.4). */
+function animal(title: string, required: string[], bounds: Record<string, [number, number]>): TemplateSpec {
+  const s = spec(title, "ced", "sads", required, bounds);
+  return { ...s, output: "ced_per_donor_dollar", required: [...s.required, "ced_per_donor_dollar"] };
 }
 
 export const TEMPLATES: Record<Family, TemplateSpec> = {
@@ -94,17 +104,13 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     ["people_reached", "initial_effect_sd", "effect_duration_years", "wellbys_per_person", "household_multiplier", "implementation_adj"],
     { initial_effect_sd: [0, 1.5], effect_duration_years: [0, 20], wellbys_per_person: [0, 10], household_multiplier: [1, 3] },
   ),
-  "corporate-campaign": spec(
+  "corporate-campaign": animal(
     "Corporate and producer welfare campaigns",
-    "sad",
-    "sads",
     ["animals_per_year", "sads_per_animal_year", "implementation_adj", "years_of_impact", "discounted_years"],
     { sads_per_animal_year: [0, 400] },
   ),
-  "diet-change": spec(
+  "diet-change": animal(
     "Diet change and institutional meal replacement",
-    "sad",
-    "sads",
     ["meals_replaced_per_year", "sads_per_meal", "production_response", "years_of_impact", "discounted_years", "implementation_adj"],
     { sads_per_meal: [0, 10], production_response: [0, 1] },
   ),
@@ -117,14 +123,17 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
   ),
 };
 
-/** Families whose output is not in units of value: the unit and per-dollar prefix follow the
- * downstream outcome. A policy-research-meta model may report in sad or wellby instead of uov. */
+/** A policy-research-meta model reports in its downstream unit: uov, wellby or ced (via SADs and the
+ * species step, as the animal families). */
 export function allowedUnits(family: Family): string[] {
-  return family === "policy-research-meta" ? ["uov", "sad", "wellby"] : [TEMPLATES[family].unit];
+  return family === "policy-research-meta" ? ["uov", "wellby", "ced"] : [TEMPLATES[family].unit];
 }
 
-export function perDollarIds(family: Family, unit: string): { perDollar: string; output: string } {
-  if (family !== "policy-research-meta") return { perDollar: TEMPLATES[family].perDollar, output: TEMPLATES[family].output };
-  const prefix = unit === "sad" ? "sads" : unit === "wellby" ? "wellbys" : "uov";
-  return { perDollar: `${prefix}_per_dollar`, output: `${prefix}_per_donor_dollar` };
+export function perDollarIds(family: Family, unit: string): { perDollar: string; donor: string; output: string } {
+  if (family !== "policy-research-meta") {
+    const t = TEMPLATES[family];
+    return { perDollar: t.perDollar, donor: t.donor, output: t.output };
+  }
+  const prefix = unit === "ced" ? "sads" : unit === "wellby" ? "wellbys" : "uov";
+  return { perDollar: `${prefix}_per_dollar`, donor: `${prefix}_per_donor_dollar`, output: unit === "ced" ? "ced_per_donor_dollar" : `${prefix}_per_donor_dollar` };
 }
