@@ -1,0 +1,260 @@
+{
+ "id": "shrimp-welfare-project-aim",
+ "name": "Shrimp Welfare Project: dissolved oxygen for farmed shrimp (Ambitious Impact, 2020 idea report)",
+ "kind": "charity",
+ "cause": "animal-welfare",
+ "charity": "shrimp-welfare-project",
+ "owner": "ambitious-impact",
+ "bulk": true,
+ "summary": "Ambitious Impact's 2020 estimate for a new charity improving dissolved oxygen on whiteleg shrimp farms in Vietnam by subsidising aeration, the shrimp welfare idea the Shrimp Welfare Project was founded from. SWP never ran an aeration subsidy: it went on to work with producers on stunning at slaughter and stocking density, which ACE's model of it covers. This scores the founding idea, from the report's stated bottom line (about 160 welfare points per dollar before co-founder and funding counterfactuals, 36 after). Welfare points are AIM's pre-2024 unit; our bridge turns them into days of pain and weighs shrimp like every other animal model. In our view the default result is negative: Ambitious Impact subtracts the good its founders and funding would have done at other animal charities (124 of its 160 welfare points per dollar), and valued as hens' points with Rethink Priorities' species weights that outweighs the shrimp gain, because Rethink puts a shrimp at 0.09 of a hen against Ambitious Impact's implied 0.17. With credit by share of resources on, that subtraction goes and the result is positive.",
+ "source": {
+  "publisher": "Ambitious Impact (Charity Entrepreneurship)",
+  "title": "Research Report: Animal Welfare – Shrimp Welfare (2020 Recommended Idea)",
+  "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.pdf",
+  "published": "2020-08",
+  "retrieved": "2026-10-30",
+  "license": "CC BY 4.0 (Zenodo record 22126409)"
+ },
+ "evaluator": {
+  "name": "Ambitious Impact",
+  "assumptions": {
+   "resource_shares": 0
+  }
+ },
+ "resources": [],
+ "sections": [
+  {
+   "id": "report",
+   "title": "Ambitious Impact's estimate (report text)",
+   "explainer": "The report's stated results. The public Guesstimate model linked from the report (https://www.getguesstimate.com/models/16040) gives about 44 welfare points per dollar before counterfactuals and −78 after, because its benefits count 92 farm-years while its costs count 468. The report's figures match counting the cumulative farm-years in both, so this model follows the report."
+  },
+  {
+   "id": "staff_pay",
+   "title": "Staff pay below market",
+   "kind": "ours",
+   "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
+  },
+  {
+   "id": "bridge",
+   "title": "From welfare points to days of pain (ours)",
+   "kind": "ours",
+   "explainer": "charityevals' bridge, not Ambitious Impact's. Ambitious Impact stops at welfare points per dollar, a unit it retired in 2024 and that has no published exchange rate to anything else. We turn welfare points back into days of disabling pain on the animal's own scale, with one shared rate (facts: aim_wp.pain_days_per_wp_year) used by every welfare-point model, so the species weights below can be applied like in every other animal model."
+  },
+  {
+   "id": "species",
+   "title": "In chicken pain days",
+   "kind": "ours",
+   "explainer": "charityevals' standard species step: the shrimp's days of pain and the hens' days lost elsewhere, each weighed by how much the animal can suffer relative to a chicken (Rethink Priorities' welfare ranges, which already include the chance an animal is sentient)."
+  }
+ ],
+ "rows": [
+  {
+   "id": "wp_per_dollar_without_counterfactuals",
+   "section": "report",
+   "label": "Welfare points per dollar, before counterfactual costs",
+   "format": "number",
+   "value": 160,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Shrimp Welfare (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.pdf",
+    "page": "28 (also 9)",
+    "quote": "may affect a total of ~160 welfare points (WP) per dollar when subsidizing aeration"
+   },
+   "explainer": "Ambitious Impact's estimate for a charity subsidising aeration on Vietnamese whiteleg shrimp farms, counting only the charity's costs (about $280,000 a year, page 31)."
+  },
+  {
+   "id": "counterfactual_loss_aim",
+   "section": "report",
+   "label": "Co-founder and funding counterfactuals, per dollar (Ambitious Impact, welfare points)",
+   "format": "number",
+   "value": 124,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Shrimp Welfare (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.pdf",
+    "page": "28",
+    "quote": "If we include counterfactual costs of funding and co-founders, we can expect to affect 36 welfare points per dollar"
+   },
+   "explainer": "Ambitious Impact's headline is 36 welfare points per dollar after counterfactuals, so the deduction is the difference (co-founders 74 million and funding 18 million welfare points, page 31). Ambitious Impact values this loss as the welfare points the co-founders and the money would have bought at other animal charities, at $0.0037 per welfare point for high-impact ones (its Guesstimate model, cells SIO and TB), mainly chicken campaigns; it is not shrimps' welfare and not discounted for shrimp sentience, so our bridge counts it as hens' welfare points."
+  },
+  {
+   "id": "counterfactual_loss_per_dollar",
+   "section": "report",
+   "label": "Co-founder and funding counterfactuals, per dollar (welfare points)",
+   "format": "number",
+   "formula": "if($resource_shares, 0, counterfactual_loss_aim)",
+   "explainer": "With credit by share of resources on, this deduction is dropped: the outcome is shared out by everyone who paid for it (staff pay below) instead of subtracting what founders and funders would have done elsewhere, like the GiveWell and ACE models. Off (the default, and the evaluator view), Ambitious Impact's deduction stands as published."
+  },
+  {
+   "id": "wp_per_dollar",
+   "section": "report",
+   "label": "Welfare points per dollar (Ambitious Impact's bottom line)",
+   "format": "number",
+   "formula": "wp_per_dollar_without_counterfactuals - counterfactual_loss_per_dollar",
+   "expected": 36,
+   "explainer": "Ambitious Impact's headline, 36 welfare points per dollar, counting co-founder and funding counterfactuals. Welfare points are Ambitious Impact's pre-2024 unit: an animal's welfare scored from −100 to +100, times years, times the chance the animal is sentient."
+  },
+  {
+   "id": "shrimp_helped_per_dollar",
+   "section": "report",
+   "label": "Shrimp helped per dollar (for reference)",
+   "format": "number",
+   "value": 450,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Shrimp Welfare (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.pdf",
+    "page": "28 (also 9)",
+    "quote": "we can positively impact the lives of roughly 450 individual shrimps per dollar"
+   },
+   "explainer": "Shrimp living in better-oxygenated water. For reference; the result uses the welfare points."
+  },
+  {
+   "id": "aim_shrimp_sentience",
+   "section": "report",
+   "label": "Ambitious Impact's probability that shrimp are sentient",
+   "format": "percent",
+   "value": 0.12,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Shrimp Welfare (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.pdf",
+    "page": "30",
+    "quote": "We estimate a 12% probability that shrimp are sentient",
+    "note": "The report's Guesstimate model (https://www.getguesstimate.com/models/16040, cell POS1) samples this; its 5,000 stored draws average 0.119."
+   },
+   "explainer": "Ambitious Impact's welfare points are discounted by this chance (\"welfare points are discounted by sentience, whereas number of shrimp helped is not\", page 30). Read only by our bridge, which takes the discount out."
+  },
+  {
+   "id": "aim_hen_sentience",
+   "section": "report",
+   "label": "Probability that the hens behind the counterfactual loss are sentient (Ambitious Impact's table)",
+   "format": "percent",
+   "value": {
+    "low": 0.7,
+    "best": 0.7,
+    "high": 1
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "Charity Entrepreneurship, welfare points by animal (2018), 'Aggregate different animals' tab; report's Guesstimate model",
+    "url": "https://docs.google.com/spreadsheets/d/1dWzh0Se0nhbPxe2Ye3o-tr3BoOBtdiCbMkpPuw2rBFE/edit#gid=14772511",
+    "cell": "Aggregate different animals!F7:F8",
+    "quote": "Odds of feeling pain: FF (battery cages US) laying hens 0.7",
+    "note": "Guesstimate https://www.getguesstimate.com/models/16040 values the counterfactual loss at 'Estimated impact of high impact charities ($ per WP)' 0.0037, mainly chicken campaigns."
+   },
+   "explainer": "Our judgment that the welfare points Ambitious Impact subtracts are mostly chickens' (it prices them at top animal charities' $0.0037 per welfare point, which are mainly chicken campaigns), with Charity Entrepreneurship's sentience figure for hens, 0.7. Read only by our bridge. High end 1 (range is ours): if the welfare points behind Ambitious Impact's $0.0037 benchmark were not sentience-adjusted, nothing is divided out; this input decides the sign."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "staff_pay",
+   "label": "Staff pay as a share of program cost",
+   "format": "percent",
+   "value": {
+    "low": 0.55,
+    "best": 0.7,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "explainer": "From the report's Guesstimate model at its median inputs: staff cost $63,000 in the first year (two co-founders at about $31,600) plus 50% (the chance of success) × 9 years × $103,000 a year (co-founders and four staff), $528,000 of the $750,000 expected total cost (QJ), which also counts travel, office costs and $151,000 of aeration subsidies: 70%. The range is ours."
+  },
+  {
+   "id": "salary_gap",
+   "section": "staff_pay",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "value": {
+    "low": 0.05,
+    "best": 0.15,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "staff_pay",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "staff_pay",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+  },
+  {
+   "id": "gain_wp_given_sentience_per_donor_dollar",
+   "section": "bridge",
+   "label": "Shrimp welfare points per dollar you give, before Ambitious Impact's discount for sentience",
+   "format": "number",
+   "formula": "wp_per_dollar_without_counterfactuals * donor_cost_share / aim_shrimp_sentience",
+   "explainer": "The shrimp's gain: Ambitious Impact's welfare points before counterfactuals, your share of them, with Ambitious Impact's 12% chance of shrimp sentience taken out, because Rethink Priorities' welfare ranges below already include it."
+  },
+  {
+   "id": "pain_days_shrimp",
+   "section": "bridge",
+   "label": "Days of disabling pain spared per dollar you give: shrimp",
+   "format": "number",
+   "formula": "gain_wp_given_sentience_per_donor_dollar * @aim_wp.pain_days_per_wp_year",
+   "explainer": "Each welfare-point-year turned into days of disabling pain on the shrimp's own scale with the shared rate (facts: aim_wp.pain_days_per_wp_year), calibrated on Ambitious Impact's own welfare points and suffering-adjusted days for the same change. The rate and its range are ours."
+  },
+  {
+   "id": "loss_wp_given_sentience_per_donor_dollar",
+   "section": "bridge",
+   "label": "Counterfactual welfare points lost elsewhere per dollar you give, before discount for sentience",
+   "format": "number",
+   "formula": "counterfactual_loss_per_dollar * donor_cost_share / aim_hen_sentience",
+   "explainer": "Ambitious Impact's deduction for what the co-founders and the money would have done at other animal charities, counted as hens' welfare points with the 0.7 sentience discount taken out. Zero with credit by share of resources on."
+  },
+  {
+   "id": "pain_days_chicken",
+   "section": "bridge",
+   "label": "Days of disabling pain not spared elsewhere per dollar you give: hens (negative)",
+   "format": "number",
+   "formula": "-loss_wp_given_sentience_per_donor_dollar * @aim_wp.pain_days_per_wp_year",
+   "explainer": "The counterfactual loss as days of disabling pain, with the same shared rate, negative because it is good not done elsewhere."
+  },
+  {
+   "id": "ced_shrimp",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give: shrimp",
+   "format": "number",
+   "formula": "pain_days_shrimp * @welfare_ranges.shrimp_vs_chicken",
+   "explainer": "The shrimp's days of pain, weighed by how much shrimp can suffer relative to a chicken (Rethink Priorities' estimates)."
+  },
+  {
+   "id": "ced_chicken",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give: hens elsewhere (negative)",
+   "format": "number",
+   "formula": "pain_days_chicken * @welfare_ranges.chicken_vs_chicken",
+   "explainer": "The counterfactual loss, in chicken pain days."
+  },
+  {
+   "id": "ced_per_donor_dollar",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give",
+   "format": "number",
+   "formula": "ced_shrimp + ced_chicken",
+   "explainer": "Shrimp days spared minus the hens' days Ambitious Impact's counterfactuals say the founders and money would have spared elsewhere. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+  }
+ ],
+ "output": {
+  "row": "ced_per_donor_dollar",
+  "unit": "ced",
+  "label": "Chicken-equivalent pain days averted per dollar you give",
+  "native": {
+   "row": "wp_per_dollar",
+   "unit": "welfare points per dollar"
+  },
+  "species": [
+   "shrimp",
+   "chicken"
+  ]
+ }
+}

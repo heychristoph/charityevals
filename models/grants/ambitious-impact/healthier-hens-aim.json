@@ -1,0 +1,226 @@
+{
+ "id": "healthier-hens-aim",
+ "name": "Healthier Hens: feed fortification for laying hens (Ambitious Impact, 2020 idea report)",
+ "kind": "charity",
+ "cause": "animal-welfare",
+ "charity": "healthier-hens",
+ "owner": "ambitious-impact",
+ "bulk": true,
+ "summary": "Ambitious Impact's 2020 estimate, made before the charity existed, for a new charity subsidising calcium, phosphorus and vitamin D3 in feed for caged laying hens on Indian farms, so fewer of them suffer broken bones. The idea Healthier Hens was founded to run; it later worked in Kenya, which this estimate doesn't model. A minimal model from the report's stated bottom line (34 welfare points per dollar before co-founder and funding counterfactuals, 12 after); the Guesstimate model behind it is private. Welfare points are AIM's pre-2024 unit; our bridge turns them into days of pain and weighs them like every other animal model.",
+ "source": {
+  "publisher": "Ambitious Impact (Charity Entrepreneurship)",
+  "title": "Research Report: Animal Welfare – Feed Fortification (2020 Recommended Idea)",
+  "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_62b83062f5db4467a56d869c6d0431cf.pdf",
+  "published": "2020-08",
+  "retrieved": "2026-10-30",
+  "license": "AIM terms of use: non-commercial use and citation with attribution; no open licence found"
+ },
+ "evaluator": {
+  "name": "Ambitious Impact",
+  "assumptions": {
+   "resource_shares": 0
+  }
+ },
+ "resources": [],
+ "sections": [
+  {
+   "id": "report",
+   "title": "Ambitious Impact's estimate (report text)",
+   "explainer": "The report's stated results, an ex ante estimate for subsidised feed supplements on Indian layer farms, not Healthier Hens' later programme in Kenya. Ambitious Impact modelled a charity working with five more farms a year, with a 26% overall chance of success (page 23); the model itself is a Guesstimate model that is not public."
+  },
+  {
+   "id": "staff_pay",
+   "title": "Staff pay below market",
+   "kind": "ours",
+   "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
+  },
+  {
+   "id": "bridge",
+   "title": "From welfare points to days of pain (ours)",
+   "kind": "ours",
+   "explainer": "charityevals' bridge, not Ambitious Impact's. Ambitious Impact stops at welfare points per dollar, a unit it retired in 2024 and that has no published exchange rate to anything else. We turn welfare points back into days of disabling pain on the animal's own scale, with one shared rate (facts: aim_wp.pain_days_per_wp_year) used by every welfare-point model, so the species weights below can be applied like in every other animal model."
+  },
+  {
+   "id": "species",
+   "title": "In chicken pain days",
+   "kind": "ours",
+   "explainer": "charityevals' standard species step: days of pain of hens, weighed by how much they can suffer relative to a chicken (Rethink Priorities' welfare ranges, which already include the chance an animal is sentient)."
+  }
+ ],
+ "rows": [
+  {
+   "id": "wp_per_dollar_without_counterfactuals",
+   "section": "report",
+   "label": "Welfare points per dollar, before counterfactual costs",
+   "format": "number",
+   "value": {
+    "low": 19.6,
+    "best": 34,
+    "high": 52.3
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Feed Fortification (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_62b83062f5db4467a56d869c6d0431cf.pdf",
+    "page": "18 (also 7, 23); range from page 19",
+    "quote": "or 34 WP per dollar if we exclude counterfactual costs"
+   },
+   "explainer": "Ambitious Impact's estimate for a charity that subsidises the supplements on Indian layer farms, counting only the charity's costs. The range is ours: the best guess scaled by Ambitious Impact's range for the chance of success (15% to 40% around its 26%, page 19), the input the report finds drives the result most. The figures come from a private Guesstimate model, so nothing else can be checked. The report gives a total over the charity's life and no yearly profile, so our discount rate can't be applied to it; its benefits fall within about ten years."
+  },
+  {
+   "id": "counterfactual_loss_aim",
+   "section": "report",
+   "label": "Co-founder and funding counterfactuals, per dollar (Ambitious Impact, welfare points)",
+   "format": "number",
+   "value": 22,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Feed Fortification (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_62b83062f5db4467a56d869c6d0431cf.pdf",
+    "page": "18 (also 7)",
+    "quote": "may affect a total of 12 welfare points (WP) per dollar (considering co-founder and funding counterfactuals)"
+   },
+   "explainer": "Ambitious Impact's headline is 12 welfare points per dollar after counterfactuals, so the deduction is the difference (co-founders 32 million and funding 340,000 welfare points, page 20). "
+  },
+  {
+   "id": "counterfactual_loss_per_dollar",
+   "section": "report",
+   "label": "Co-founder and funding counterfactuals, per dollar (welfare points)",
+   "format": "number",
+   "formula": "if($resource_shares, 0, counterfactual_loss_aim)",
+   "explainer": "With credit by share of resources on, this deduction is dropped: the outcome is shared out by everyone who paid for it (staff pay below) instead of subtracting what founders and funders would have done elsewhere, like the GiveWell and ACE models. Off (the default, and the evaluator view), Ambitious Impact's deduction stands as published."
+  },
+  {
+   "id": "wp_per_dollar",
+   "section": "report",
+   "label": "Welfare points per dollar (Ambitious Impact's bottom line)",
+   "format": "number",
+   "formula": "wp_per_dollar_without_counterfactuals - counterfactual_loss_per_dollar",
+   "expected": 12,
+   "explainer": "Ambitious Impact's headline, 12 welfare points per dollar, counting co-founder and funding counterfactuals. Welfare points are Ambitious Impact's pre-2024 unit: an animal's welfare scored from −100 to +100, times years, times the chance the animal is sentient."
+  },
+  {
+   "id": "hens_helped_per_dollar",
+   "section": "report",
+   "label": "Hens helped per dollar (for reference)",
+   "format": "number",
+   "value": 1.8,
+   "kind": "estimate",
+   "source": {
+    "title": "Research Report: Animal Welfare – Feed Fortification (2020 Recommended Idea)",
+    "url": "https://3394c0c6-1f1a-4f86-a2db-df07ca1e24b2.filesusr.com/ugd/9475db_62b83062f5db4467a56d869c6d0431cf.pdf",
+    "page": "7",
+    "quote": "this intervention could help 1.8 hens for every dollar spent"
+   },
+   "explainer": "Hens that no longer have fractured or broken bones from calcium, phosphorus and vitamin D3 deficiency. For reference; the result uses the welfare points."
+  },
+  {
+   "id": "aim_hen_sentience",
+   "section": "report",
+   "label": "Ambitious Impact's probability that hens are sentient",
+   "format": "percent",
+   "value": 0.7,
+   "kind": "estimate",
+   "source": {
+    "title": "Charity Entrepreneurship, welfare points by animal (2018), 'Aggregate different animals' tab",
+    "url": "https://docs.google.com/spreadsheets/d/1dWzh0Se0nhbPxe2Ye3o-tr3BoOBtdiCbMkpPuw2rBFE/edit#gid=14772511",
+    "cell": "Aggregate different animals!F7:F8",
+    "quote": "Odds of feeling pain: FF (battery cages US) laying hens 0.7; FF (enriched cages EU) laying hens 0.7",
+    "note": "The report doesn't print the value; its CEA (a private Guesstimate model) uses Charity Entrepreneurship's welfare-point system, whose table gives hens 0.7."
+   },
+   "explainer": "Ambitious Impact's welfare points are \"adjusted for probability of sentience\" (page 18). The report doesn't print its figure for hens; Charity Entrepreneurship's welfare-point table gives 0.7. Read only by our bridge, which takes this discount out."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "staff_pay",
+   "label": "Staff pay as a share of program cost",
+   "format": "percent",
+   "value": {
+    "low": 0.08,
+    "best": 0.15,
+    "high": 0.25
+   },
+   "kind": "judgment",
+   "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+  },
+  {
+   "id": "salary_gap",
+   "section": "staff_pay",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "value": {
+    "low": 0.05,
+    "best": 0.15,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "explainer": "The staff here are mostly the co-founders, whom Ambitious Impact budgets at a modest founder salary; the gap to what they could earn elsewhere is moderate. Our judgment; the range is ours."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "staff_pay",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "staff_pay",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+  },
+  {
+   "id": "wp_per_donor_dollar",
+   "section": "staff_pay",
+   "label": "Welfare points per dollar you give",
+   "format": "number",
+   "formula": "wp_per_dollar * donor_cost_share"
+  },
+  {
+   "id": "wp_given_sentience_per_donor_dollar",
+   "section": "bridge",
+   "label": "Welfare points per dollar you give, before Ambitious Impact's discount for sentience",
+   "format": "number",
+   "formula": "wp_per_donor_dollar / aim_hen_sentience",
+   "explainer": "Ambitious Impact multiplies welfare points by the chance the animal is sentient (0.7 for hens). Rethink Priorities' welfare ranges, applied below, already include that chance, so we take Ambitious Impact's out to avoid counting it twice."
+  },
+  {
+   "id": "pain_days_chicken",
+   "section": "bridge",
+   "label": "Days of disabling pain spared per dollar you give: hens",
+   "format": "number",
+   "formula": "wp_given_sentience_per_donor_dollar * @aim_wp.pain_days_per_wp_year",
+   "explainer": "Each welfare-point-year is turned into days of disabling pain on the animal's own scale with the shared rate (facts: aim_wp.pain_days_per_wp_year), calibrated on Ambitious Impact's own welfare points and suffering-adjusted days for the same change. The rate and its range are ours, not Ambitious Impact's."
+  },
+  {
+   "id": "ced_chicken",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give: hens",
+   "format": "number",
+   "formula": "pain_days_chicken * @welfare_ranges.chicken_vs_chicken",
+   "explainer": "The days of pain of hens, weighed by how much they can suffer relative to a chicken (Rethink Priorities' estimates)."
+  },
+  {
+   "id": "ced_per_donor_dollar",
+   "section": "species",
+   "label": "Chicken-equivalent pain days averted per dollar you give",
+   "format": "number",
+   "formula": "ced_chicken",
+   "explainer": "Days of disabling pain spared, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+  }
+ ],
+ "output": {
+  "row": "ced_per_donor_dollar",
+  "unit": "ced",
+  "label": "Chicken-equivalent pain days averted per dollar you give",
+  "native": {
+   "row": "wp_per_dollar",
+   "unit": "welfare points per dollar"
+  },
+  "species": [
+   "chicken"
+  ]
+ }
+}
