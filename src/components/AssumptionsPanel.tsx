@@ -19,22 +19,28 @@ const SNAP = 8;
 function scaleFor(r: Row) {
   const best = pickValue(r.value);
   const v = typeof r.value === "object" ? r.value : { best };
-  let low = v.low ?? best / 10;
-  let high = v.high ?? best * 10;
+  let low = r.slider?.low ?? v.low ?? best / 10;
+  let high = r.slider?.high ?? v.high ?? best * 10;
   if (low === high) { low = best / 10; high = best * 10; }
   // Every positive range is a ratio, so it runs on a log scale: halving and doubling the default are the
-  // same distance. A range that starts at zero (the discount rate) stays linear.
+  // same distance. A range that starts at zero (the discount rate) stays linear. A log scale with a
+  // zero stop gives 0 the first step and the log scale the rest.
   const log = low > 0;
+  const zero = log && !!r.slider?.zero;
+  const first = zero ? 1 : 0;
   return {
     low,
     high,
     log,
+    zero,
     toStep: (x: number) => {
+      if (zero && x <= 0) return 0;
       const t = log ? Math.log(x / low) / Math.log(high / low) : (x - low) / (high - low);
-      return Math.round(Math.min(1, Math.max(0, t)) * STEPS);
+      return first + Math.round(Math.min(1, Math.max(0, t)) * (STEPS - first));
     },
     fromStep: (s: number) => {
-      const t = s / STEPS;
+      if (zero && s === 0) return 0;
+      const t = (s - first) / (STEPS - first);
       const x = log ? low * (high / low) ** t : low + t * (high - low);
       return Number(x.toPrecision(2));
     },
@@ -107,7 +113,7 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
         {compact && row.explainer ? (
           <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="Why this value"><Markdown text={row.explainer} /><Technical row={row} /></InfoTip></LabelWithTip>
         ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
-        <ValueField row={row} value={value} best={best} log={scale.log} />
+        <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />
       </div>
       <div className="slider-wrap" style={{ ["--default" as string]: `${scale.toStep(best) / STEPS}` }}>
         <span className="default-tick" aria-hidden />
@@ -128,7 +134,7 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
         />
       </div>
       <div className="assumption-scale small num">
-        <span>{formatValue(scale.low * k, fmt)}</span>
+        <span>{scale.zero ? formatValue(0, fmt) : formatValue(scale.low * k, fmt)}</span>
         <span>{formatValue(scale.high * k, fmt)}</span>
       </div>
       {comparable && <p className="comparable" aria-live="polite">{comparable}</p>}
