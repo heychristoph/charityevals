@@ -10,7 +10,8 @@ const sig = (x: number, digits = SIG) => {
   const abs = Math.abs(x);
   if (abs >= 1e9) return `${Number((x / 1e9).toPrecision(digits))}B`;
   if (abs >= 1e6) return `${Number((x / 1e6).toPrecision(digits))}M`;
-  return Number(x.toPrecision(digits)).toLocaleString("en-US");
+  // Significant digits, not the locale default of three decimals, so 0.00033 doesn't read as 0.
+  return x.toLocaleString("en-US", { maximumSignificantDigits: digits });
 };
 
 export function formatValue(x: number, format: ResolvedRow["format"] = "number"): string {

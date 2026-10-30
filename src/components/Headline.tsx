@@ -110,7 +110,10 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   const years = comparable(lib, model);
   const { results } = useResults();
   const ev = main ? results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner) : undefined;
-  const combined = useMemo(() => combinedOf(ev, model, av), [ev, model, av]);
+  // The rankings never see page edits, so with any edit the headline switches to this model's own
+  // edited figure (and its edit-aware range) rather than show a combined figure the edit can't move.
+  const edited = Object.keys(edits).length > 0;
+  const combined = useMemo(() => (edited ? undefined : combinedOf(ev, model, av)), [edited, ev, model, av]);
 
   useEffect(() => {
     for (const el of document.querySelectorAll<HTMLElement>("[data-figure=headline]")) {
@@ -124,7 +127,9 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   const figure = combined ? combined.ev.central : value;
   if (!Number.isFinite(figure)) return null;
   const unit = years ? "years of healthy life per $1,000" : `${lib.assumptions.units[model.output!.unit]?.label ?? "per dollar"} per dollar`;
-  const text = combined ? `${unit}, ${combined.qualifier}` : place ? `${unit}, ${place}` : unit;
+  // With edits the figure is this one model's, so its place is just the location, not "the median of …".
+  const where = edited ? place?.replace(/, the median of .*$/, "") : place;
+  const text = combined ? `${unit}, ${combined.qualifier}` : `${where ? `${unit}, ${where}` : unit}${edited ? ", with your edits" : ""}`;
   return (
     <div className="m-headline tip-host">
       <span className="m-figure num">{formatYears(figure)}</span>{" "}
