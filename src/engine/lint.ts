@@ -71,7 +71,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     if (!allowedUnits(family).includes(unit))
       add("high", "unit", `output unit ${unit} is not allowed for ${family} (allowed: ${allowedUnits(family).join(", ")})`, "Report in the family's unit so the model is ranked on the common scale.");
     if (!lib.assumptions.units[unit]?.to_common)
-      add("high", "unit", `unit ${unit} has no exchange rate to the common unit`, "Use a ranked unit (uov, daly, wellby, ced).");
+      add("high", "unit", `unit ${unit} has no exchange rate to the common unit`, "Use a ranked unit (uov, daly, wellby, ced, tco2e).");
     if (m.output.row !== ids.output) add("high", "output", `output row is ${m.output.row}, template says ${ids.output}`, `Point output.row at ${ids.output}.`);
   }
 

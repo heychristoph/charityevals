@@ -95,7 +95,7 @@ export type Row = z.infer<typeof Row>;
 export const RowPatch = z.object({ ...rowShape, label: z.string().optional() }).strict();
 export type RowPatch = z.infer<typeof RowPatch>;
 
-export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
+export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety", "climate"]);
 
 /** Intervention families for charityevals' own models (the build-cea skill). Each prescribes a row
  * structure, so models of the same family can be compared row by row. */
@@ -133,7 +133,7 @@ export const Charity = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/),
     name: z.string(),
-    cause: z.enum(["global-health", "animal-welfare", "ai-safety"]),
+    cause: Cause,
     website: z.string().url().optional(),
     /** Where to give: the charity's own donation page, or an evaluator's form for it. */
     donate: z.string().url().optional(),

@@ -124,3 +124,32 @@ describe("invariant checks", () => {
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $chicken_vs_person independent"]);
   });
 });
+
+// Climate (docs/normalization.md 2.5): a tonne of CO₂e reaches the scale through the deaths it causes,
+// each valued as GiveWell's adult death. The unit's conversion can only read assumptions, so the
+// shared figures it stands on are checked here against the facts they come from.
+describe("climate conversion", () => {
+  const fact = (k: string) => lib.facts.get(k)?.value;
+  const row = (id: string) => assumptions.rows.find((r: { id: string }) => r.id === id);
+
+  it("the deaths-per-tonne assumption is Rethink Priorities' figure, range and all", () => {
+    expect(row("deaths_per_tco2e").value).toEqual(fact("climate.deaths_per_tco2e"));
+  });
+
+  it("tco2e converts at GiveWell's value of an adult's death, times the value-of-life slider", () => {
+    expect(assumptions.units.tco2e.to_common).toBe(`$deaths_per_tco2e * ${fact("moral_weights.uov_per_death_over5")} * $life_value_multiplier`);
+  });
+
+  it("INV-10 flags a non-climate model that moves with the climate rate, and passes a climate model", () => {
+    const base = {
+      id: "base", name: "Base", kind: "charity", cause: "global-health",
+      rows: [{ id: "x", label: "x", value: 2, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" }],
+      output: { row: "out", unit: "uov", label: "UoV per $" },
+    };
+    const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $deaths_per_tco2e" }] };
+    const tonnes = { ...base, id: "tonnes", cause: "climate", output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
+    const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv10(l).violations.map(keyOf)).toEqual(["bad $deaths_per_tco2e independent"]);
+  });
+});
