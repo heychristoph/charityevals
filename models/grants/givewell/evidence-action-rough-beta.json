@@ -51,11 +51,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -101,17 +103,72 @@
       "explainer": "Calculation Edited this to unbreak the calculation"
     },
     {
-      "id": "npv_of_money_reallocated_scenario_1_total_failure_no_new_top",
-      "label": "NPV of money reallocated (Scenario 1: Total failure (no new top charities))",
+      "id": "annual_rfmf_of_one_new_top_charity_from_eab",
+      "label": "Full amount of annual RFMF that one new top charity from EAB will have",
+      "section": "eab_botec",
+      "value": 10000000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "Misc inputs!B13"
+      },
+      "explainer": "GiveWell's input behind the present values, read from the sheet so the present value moves with your discount rate.",
+      "format": "usd"
+    },
+    {
+      "id": "years_new_top_charity_rfmf_is_utilized",
+      "label": "Default number of years that new top charity RFMF will be utilized",
+      "section": "eab_botec",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "Misc inputs!B14"
+      },
+      "explainer": "GiveWell's input behind the present values, read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "discount_rate_eab_botec",
+      "label": "How fast these opportunities get worse each year",
+      "section": "eab_botec",
+      "value": 0.05,
+      "kind": "estimate",
+      "format": "percent",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!B14"
+      },
+      "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 5% a year; it is not time preference, so the discount slider leaves it alone."
+    },
+    {
+      "id": "eab_rfmf_per_year_utilized_b",
+      "label": "EAB RFMF per year that is utilized (Scenario 1: Total failure (no new top charities))",
       "section": "eab_botec",
       "value": 0.0,
       "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!B10"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate.",
+      "format": "usd"
+    },
+    {
+      "id": "npv_of_money_reallocated_scenario_1_total_failure_no_new_top",
+      "label": "NPV of money reallocated (Scenario 1: Total failure (no new top charities))",
+      "section": "eab_botec",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_b, 0, 1)",
+      "expected": 0.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!B16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B14,B11,-B12/B11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(B14,B11,-B12/B11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -253,17 +310,31 @@
       "format": "usd"
     },
     {
+      "id": "eab_rfmf_per_year_utilized_c",
+      "label": "EAB RFMF per year that is utilized (2a: Full RFMF above counterfactual used)",
+      "section": "eab_botec",
+      "formula": "annual_rfmf_of_one_new_top_charity_from_eab * 1.5",
+      "expected": 15000000.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!C10"
+      },
+      "explainer": "GiveWell's `='Misc inputs'!B13*1.5-0`.",
+      "format": "usd"
+    },
+    {
       "id": "npv_of_money_reallocated_2a_full_rfmf_above_counterfactual_u",
       "label": "NPV of money reallocated (2a: Full RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "value": 121617325.1,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_c, 0, 1)",
+      "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!C16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(C14,C11,-C12/C11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(C14,C11,-C12/C11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -427,17 +498,31 @@
       "format": "usd"
     },
     {
+      "id": "eab_rfmf_per_year_utilized_d",
+      "label": "EAB RFMF per year that is utilized (2b: Half RFMF above counterfactual used)",
+      "section": "eab_botec",
+      "formula": "annual_rfmf_of_one_new_top_charity_from_eab * 1.5 * 0.5",
+      "expected": 7500000.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!D10"
+      },
+      "explainer": "GiveWell's `='Misc inputs'!B13*1.5*0.5`.",
+      "format": "usd"
+    },
+    {
       "id": "npv_of_money_reallocated_2b_half_rfmf_above_counterfactual_u",
       "label": "NPV of money reallocated (2b: Half RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "value": 60808662.57,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_d, 0, 1)",
+      "expected": 60808662.57,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!D16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(D14,D11,-D12/D11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(D14,D11,-D12/D11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -599,17 +684,31 @@
       "explainer": "Calculation Edited to make the calculation work"
     },
     {
-      "id": "npv_of_money_reallocated_2c_no_rfmf_used_above_counterfactua",
-      "label": "NPV of money reallocated (2c: No RFMF used above counterfactual (counterfactual is ~5x cash))",
+      "id": "eab_rfmf_per_year_utilized_e",
+      "label": "EAB RFMF per year that is utilized (2c: No RFMF used above counterfactual)",
       "section": "eab_botec",
       "value": 0.0,
       "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!E10"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate.",
+      "format": "usd"
+    },
+    {
+      "id": "npv_of_money_reallocated_2c_no_rfmf_used_above_counterfactua",
+      "label": "NPV of money reallocated (2c: No RFMF used above counterfactual (counterfactual is ~5x cash))",
+      "section": "eab_botec",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_e, 0, 1)",
+      "expected": 0.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!E16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(E14,E11,-E12/E11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(E14,E11,-E12/E11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -716,17 +815,31 @@
       "format": "usd"
     },
     {
+      "id": "eab_rfmf_per_year_utilized_f",
+      "label": "EAB RFMF per year that is utilized (Scenario 3: 1 top charity at 10x cash)",
+      "section": "eab_botec",
+      "formula": "annual_rfmf_of_one_new_top_charity_from_eab",
+      "expected": 10000000.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!F10"
+      },
+      "explainer": "GiveWell's `='Misc inputs'!B13`.",
+      "format": "usd"
+    },
+    {
       "id": "npv_of_money_reallocated_scenario_3_1_top_charity_at_10x_cas",
       "label": "NPV of money reallocated (Scenario 3: 1 top charity at 10x cash, counterfactual at ~5x cash)",
       "section": "eab_botec",
-      "value": 81078216.76,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_f, 0, 1)",
+      "expected": 81078216.76,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!F16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(F14,F11,-F12/F11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(F14,F11,-F12/F11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -888,17 +1001,31 @@
       "format": "usd"
     },
     {
+      "id": "eab_rfmf_per_year_utilized_g",
+      "label": "EAB RFMF per year that is utilized (Scenario 4: Huge upside scenario)",
+      "section": "eab_botec",
+      "formula": "eab_rfmf_per_year_utilized_f / 2",
+      "expected": 5000000.0,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
+        "cell": "EAB BOTEC!G10"
+      },
+      "explainer": "GiveWell's `=F10/2`.",
+      "format": "usd"
+    },
+    {
       "id": "npv_of_money_reallocated",
       "label": "NPV of money reallocated",
       "section": "eab_botec",
-      "value": 40539108.38,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_g, 0, 1)",
+      "expected": 40539108.38,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!G16"
       },
-      "explainer": "Calculated in the source sheet as `=pv(G14,G11,-G12/G11,,1)`; kept as a fixed number here (text in arithmetic).",
+      "explainer": "GiveWell's `=pv(G14,G11,-G12/G11,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate.",
       "format": "usd"
     },
     {
@@ -1123,6 +1250,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "overall_eab_grant_is_x_times_more_cost_effective_than_cash",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

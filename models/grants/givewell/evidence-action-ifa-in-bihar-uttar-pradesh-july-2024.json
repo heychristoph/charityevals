@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "uov_per_daly": 2.3,
       "resource_shares": 0
     }
@@ -59,11 +60,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -667,15 +670,15 @@
       "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
       "label": "Inflammation exposure index rating (as a % of max score) in study population (Bihar)",
       "section": "iron_supplementation_cea",
-      "value": 0.511,
-      "kind": "estimate",
+      "formula": "@givewell.inflammation_exposure_index_rating_as_a_of_max_score_in_stud",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
         "cell": "Iron supplementation CEA!E26"
       },
       "explainer": "GW inflammation index analysis",
-      "format": "percent"
+      "format": "percent",
+      "expected": 0.511
     },
     {
       "id": "inflammation_exposure_index_rating_as_a_of_max_score_in_prog",
@@ -793,17 +796,83 @@
       "expected": 72010.00419
     },
     {
+      "id": "adjusted_increase_in_ln_income_per_anemia_case_averted_bihar",
+      "label": "Adjusted increase in ln(income) per anemia case averted among people under age 15 (Bihar)",
+      "section": "iron_supplementation_cea",
+      "value": 0.002174602496,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
+        "cell": "Iron supplementation CEA!E42"
+      },
+      "explainer": "Calculated in the source sheet as `=ln(1+E41)-ln(1)`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
+      "id": "years_between_receiving_iron_and_long_term_benefits_bihar",
+      "label": "Average number of years between receiving iron and the beginning of long-term benefits (Bihar)",
+      "section": "iron_supplementation_cea",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
+        "cell": "Iron supplementation CEA!E43"
+      },
+      "explainer": "Calculated in the source sheet as `=17-average(0,14)`; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "discount_rate_for_future_benefits_bihar",
+      "label": "Discount rate for future benefits (Bihar)",
+      "section": "iron_supplementation_cea",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
+        "cell": "Iron supplementation CEA!E44"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04."
+    },
+    {
+      "id": "discounted_increase_in_ln_income_per_person_bihar",
+      "label": "Discounted increase in ln(income) per person with dietary iron deficiency among people under age 15 (Bihar)",
+      "section": "iron_supplementation_cea",
+      "formula": "adjusted_increase_in_ln_income_per_anemia_case_averted_bihar / (1 + discount_rate_for_future_benefits_bihar) ^ years_between_receiving_iron_and_long_term_benefits_bihar",
+      "expected": 0.001469083528,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
+        "cell": "Iron supplementation CEA!E45"
+      },
+      "explainer": "GiveWell's `=E42/(1+E44)^E43`."
+    },
+    {
+      "id": "years_long_term_benefits_of_iron_last_bihar",
+      "label": "Expected number of years the long-term benefits of iron interventions last (Bihar)",
+      "section": "iron_supplementation_cea",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
+        "cell": "Iron supplementation CEA!E46"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
       "id": "present_value_of_individual_lifetime_benefits_per_person_wit",
       "label": "Present value of individual lifetime benefits per person with dietary iron deficiency among people under age 15 (Bihar)",
       "section": "iron_supplementation_cea",
-      "value": 0.03024032761,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_for_future_benefits_bihar, years_long_term_benefits_of_iron_last_bihar, -discounted_increase_in_ln_income_per_person_bihar, 0, 1)",
+      "expected": 0.03024032761,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1KB6l8A-K22glpy8cXbS9WTVqmFwfhZT3Ero3j34GugM/edit",
         "cell": "Iron supplementation CEA!E47"
       },
-      "explainer": "Calculated in the source sheet as `=pv(E44,E46,-E45,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's `=pv(E44,E46,-E45,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_bihar",
@@ -1196,6 +1265,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_estimates_copied_from_below_bihar",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

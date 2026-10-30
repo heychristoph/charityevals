@@ -19,7 +19,6 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "discount_rate": 0.04,
       "resource_shares": 0
     }
   },
@@ -43,11 +42,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -183,17 +184,17 @@
     },
     {
       "id": "discount_rate_for_opportunities_getting_worse_over_time_scen",
-      "label": "Discount rate for opportunities getting worse over time (Scenario: 8x cash bar for future opportunities)",
+      "label": "How fast these opportunities get worse each year (Scenario: 8x cash bar for future opportunities)",
       "section": "sindh_pakistan",
+      "value": 0.04,
+      "kind": "estimate",
+      "format": "percent",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1nChwMtHwpbSoLZoIdYxsUrOR73oPS7RiWdp1btSw7Bo/edit",
         "cell": "Sindh, Pakistan!B10"
       },
-      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04.\n\nStandard assumption. This assumes that the cost-effectiveness of opportunities decays over a 10-year period. See our top charities cost-effectiveness analysis.",
-      "format": "percent",
-      "formula": "$discount_rate",
-      "expected": 0.04
+      "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 4% a year; it is not time preference, so the discount slider leaves it alone."
     },
     {
       "id": "discount_for_delayed_benefits_year_2",
@@ -1392,6 +1393,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "weighted_total_cost_effectiveness_of_grant_x_cash",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

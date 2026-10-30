@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -67,11 +68,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -952,9 +955,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
         "cell": "Moral weights and discount rate!C9"
       },
-      "formula": "73.1914046254006 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
+      "published": 73.1914046254006,
       "expected": 73.1914046254006,
-      "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for a death at five or older, times your multiplier on the value of a life. Our view reads the shared figure (73.1914, under Data) so every model values these deaths the same; the evaluator view keeps this sheet's unrounded 73.1914046254006."
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -991,17 +995,70 @@
       "expected": 1.442695041
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Increase in ln(income) from reducing point in time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
+      "section": "main_model_rts_s_for_comparat",
+      "value": 0.01182453322,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "Main model - RTS,S for comparat!B121"
+      },
+      "explainer": "GiveWell's input behind the present value in Main model - RTS,S for comparat!B126, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Average number of years between program implementation and the beginning of long-term benefits",
+      "section": "main_model_rts_s_for_comparat",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "Main model - RTS,S for comparat!B122"
+      },
+      "explainer": "GiveWell's input behind the present value in Main model - RTS,S for comparat!B126, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Duration of long term benefits of vaccination (in years)",
+      "section": "main_model_rts_s_for_comparat",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "Main model - RTS,S for comparat!B125"
+      },
+      "explainer": "GiveWell's input behind the present value in Main model - RTS,S for comparat!B126, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "main_model_rts_s_for_comparat",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "Main model - RTS,S for comparat!B123"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_reducing_prevalence",
       "label": "Present value of lifetime benefits from reducing prevalence from 1 to 0 for an individual for one year between the ages of 0 and 14 (in terms of increases in ln",
       "section": "main_model_rts_s_for_comparat",
-      "value": 0.1644336191,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.1644336191,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
         "cell": "Main model - RTS,S for comparat!B126"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B123,B125,-B124,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(B123,B125,-B124,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 10 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.1644336191 at 4%."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_kenya",
@@ -1327,14 +1384,14 @@
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects",
       "section": "main_model_rts_s_for_comparat",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
+      "published": 0.09,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
         "cell": "Main model - RTS,S for comparat!B187"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A187)*('Supplemental intervention-level'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A187)*('Supplemental intervention-level'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()). Our view reads GiveWell's shared figure (under Data), so every model uses the same number; the evaluator view keeps this sheet's 0.09.",
       "format": "percent"
     },
     {
@@ -2832,17 +2889,70 @@
       }
     },
     {
+      "id": "pv_adjusted_increase_2",
+      "label": "Adjusted increase in ln(income) from reducing point-in-time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
+      "section": "amf",
+      "value": 0.01182453322,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "AMF!B115"
+      },
+      "explainer": "GiveWell's input behind the present value in AMF!B122, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin_2",
+      "label": "Average number of years between nets being distributed and the beginning of long term benefits",
+      "section": "amf",
+      "value": 10.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "AMF!B118"
+      },
+      "explainer": "GiveWell's input behind the present value in AMF!B122, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last_2",
+      "label": "Duration of long term benefits of AMF (in years)",
+      "section": "amf",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "AMF!B121"
+      },
+      "explainer": "GiveWell's input behind the present value in AMF!B122, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate_2",
+      "label": "Discount rate for future benefits",
+      "section": "amf",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
+        "cell": "AMF!B119"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_reducing_prevalence_2",
       "label": "Present value of lifetime benefits from reducing prevalence from 1 to 0 for an individual for one year between the ages of 0 and 14",
       "section": "amf",
-      "value": 0.1644336191,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate_2, pv_years_benefits_last_2, -pv_adjusted_increase_2 / (1 + pv_discount_rate_2) ^ pv_years_until_benefits_begin_2, 0, 1)",
+      "expected": 0.1644336191,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1T5joAEoQeym8g5LIQQz7zbGEDIJm-ZPkZJr9dGXI3Hg/edit",
         "cell": "AMF!B122"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B119,B121,-B120,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(B119,B121,-B120,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 10 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.1644336191 at 4%."
     },
     {
       "id": "present_value_of_benefits_from_reducing_point_in_time_probab_2",
@@ -3455,6 +3565,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

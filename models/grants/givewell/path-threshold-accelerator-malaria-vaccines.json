@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -71,11 +72,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -90,7 +93,7 @@
         "cell": "Inputs!H69"
       },
       "explainer": "GiveWell's moral weight, 116.25262 units of value, times your multiplier on the value of a life.\n\nGW value judgment GW's moral weights and discount rate",
-      "formula": "116.25262 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.25262
     },
     {
@@ -1095,7 +1098,7 @@
         "cell": "Inputs!H70"
       },
       "explainer": "GiveWell's moral weight, 73.1914 units of value, times your multiplier on the value of a life.\n\nGW value judgment GW's moral weights and discount rate",
-      "formula": "73.1914 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914
     },
     {
@@ -1108,17 +1111,70 @@
       "format": "percent"
     },
     {
+      "id": "pv_adjusted_increase",
+      "label": "Adjusted increase in ln(income) per malaria case averted among people under age 15",
+      "section": "income_increases",
+      "value": 0.006429287765,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
+        "cell": "Income increases!H32"
+      },
+      "explainer": "GiveWell's input behind the present value in Income increases!H37, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_until_benefits_begin",
+      "label": "Average number of years between getting vaccinated and the beginning of long-term benefits",
+      "section": "income_increases",
+      "value": 12.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
+        "cell": "Income increases!H33"
+      },
+      "explainer": "GiveWell's input behind the present value in Income increases!H37, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_years_benefits_last",
+      "label": "Expected number of years long-term benefits of vaccination will last",
+      "section": "income_increases",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
+        "cell": "Income increases!H36"
+      },
+      "explainer": "GiveWell's input behind the present value in Income increases!H37, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "pv_discount_rate",
+      "label": "Discount rate for future benefits",
+      "section": "income_increases",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
+        "cell": "Income increases!H34"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4%; the evaluator view keeps it."
+    },
+    {
       "id": "present_value_of_individual_lifetime_benefits_per_malaria_ca",
       "label": "Present value of individual lifetime benefits per malaria case averted among people under age 15",
       "section": "income_increases",
-      "value": 0.08266140743,
-      "kind": "estimate",
+      "formula": "pv(pv_discount_rate, pv_years_benefits_last, -pv_adjusted_increase / (1 + pv_discount_rate) ^ pv_years_until_benefits_begin, 0, 1)",
+      "expected": 0.08266140743,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1x-1uXKKs89mHUW7Z3r3DyhUDD4ZoezNDJ-6lGcPm27Q/edit",
         "cell": "Income increases!H37"
       },
-      "explainer": "Calculated in the source sheet as `=pv(H34,H36,-H35,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Calculated in the source sheet as `=pv(H34,H36,-H35,,1)`; kept as a fixed number here (text in arithmetic).\n\nRebuilt from the sheet's inputs so it moves with your discount rate: the yearly gain in ln(income), starting 12 years later and lasting 40 years, later years counting less. GiveWell's sheet has 0.08266140743 at 4%."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households_2",
@@ -2147,6 +2203,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_estimate_pulled_from_below_for_visi",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

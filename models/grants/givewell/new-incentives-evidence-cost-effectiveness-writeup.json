@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.005,
       "life_value_multiplier": 1,
       "resource_shares": 0
     }
@@ -126,11 +127,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -2710,7 +2713,8 @@
       "id": "discount_factor_with_discount_rate_of_0_5_5_14_years",
       "label": "Discount factor (with discount rate of 0.5%) (5-14 years)",
       "section": "deaths_at_older_age_groups",
-      "formula": "(1 / (1 + 0.005)) ^ avg(5, 14)",
+      "formula": "(1 / (1 + $discount_rate)) ^ avg(5, 14)",
+      "explainer": "Deaths averted later in life count less, at your discount rate (Timing, under Your values). GiveWell's sheet uses 0.5% here; the evaluator view keeps it.",
       "expected": 0.953723345
     },
     {
@@ -3287,7 +3291,8 @@
       "id": "discount_factor_with_discount_rate_of_0_5_15_49_years",
       "label": "Discount factor (with discount rate of 0.5%) (15-49 years)",
       "section": "deaths_at_older_age_groups",
-      "formula": "(1 / (1 + 0.005)) ^ avg(15, 49)",
+      "formula": "(1 / (1 + $discount_rate)) ^ avg(15, 49)",
+      "explainer": "Deaths averted later in life count less, at your discount rate (Timing, under Your values). GiveWell's sheet uses 0.5% here; the evaluator view keeps it.",
       "expected": 0.8524835823
     },
     {
@@ -3786,7 +3791,8 @@
       "id": "discount_factor_with_discount_rate_of_0_5_50_to_74_years",
       "label": "Discount factor (with discount rate of 0.5%) (50 to 74 years)",
       "section": "deaths_at_older_age_groups",
-      "formula": "(1 / (1 + 0.005)) ^ avg(50, 74)",
+      "formula": "(1 / (1 + $discount_rate)) ^ avg(50, 74)",
+      "explainer": "Deaths averted later in life count less, at your discount rate (Timing, under Your values). GiveWell's sheet uses 0.5% here; the evaluator view keeps it.",
       "expected": 0.7340137088
     },
     {
@@ -4907,6 +4913,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_in_multiples_of_cash_after_accounting_for",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

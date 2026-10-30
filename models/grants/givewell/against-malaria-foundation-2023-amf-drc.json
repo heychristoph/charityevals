@@ -55,11 +55,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -239,13 +241,13 @@
       "id": "ratio_of_indirect_malaria_deaths_per_direct_malaria_death",
       "label": "Ratio of indirect malaria deaths per direct malaria death",
       "section": "amf",
-      "value": 0.75,
-      "kind": "estimate",
+      "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B56"
-      }
+      },
+      "expected": 0.75
     },
     {
       "id": "malaria_attributable_deaths_in_target_population_per_1_000_c_2",
@@ -278,14 +280,14 @@
       "id": "reduction_in_malaria_incidence_for_children_under_5_receivin",
       "label": "Reduction in malaria incidence for children under 5 receiving nets (from Pryce et al. 2018 meta-analysis)",
       "section": "amf",
-      "value": 0.45,
-      "kind": "estimate",
+      "formula": "@givewell.reduction_in_malaria_incidence_for_children_under_age_5_rece",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B46"
       },
-      "format": "percent"
+      "format": "percent",
+      "expected": 0.45
     },
     {
       "id": "reduction_in_malaria_incidence_for_children_under_5_sleeping",
@@ -1351,15 +1353,15 @@
       "id": "short_term_anemia_effects",
       "label": "Short-term anemia effects",
       "section": "amf",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.short_term_anemia_effects",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B187"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A187)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "expected": 0.09
     },
     {
       "id": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow",
@@ -1379,15 +1381,15 @@
       "id": "prevention_of_stillbirths",
       "label": "Prevention of stillbirths",
       "section": "amf",
-      "value": 0.09,
-      "kind": "estimate",
+      "formula": "@givewell.prevention_of_stillbirths",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B189"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A189),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A189)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "expected": 0.09
     },
     {
       "id": "investment_of_income_increases",
@@ -1767,6 +1769,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "final_cost_effectiveness_in_terms_of_multiples_of_givedirect",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

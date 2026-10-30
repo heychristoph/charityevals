@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "life_value_multiplier": 1,
       "uov_per_daly": 2.3,
       "discount_rate": 0.014,
       "resource_shares": 0
@@ -64,11 +65,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -978,7 +981,8 @@
       "id": "moral_value_per_death_averted_for_children_5",
       "label": "Moral value per death averted for children <5",
       "section": "full_cea",
-      "formula": "avg(averting_a_death_by_age_post_neonatal, averting_a_death_by_age_1_to_4)",
+      "formula": "avg(averting_a_death_by_age_post_neonatal, averting_a_death_by_age_1_to_4) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for an under-5 death in this sheet (the average of its post-neonatal and 1-4 weights, 114 units of value), times your multiplier on the value of a life.",
       "expected": 114.0
     },
     {
@@ -2116,6 +2120,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "overall_cost_effectiveness_in_multiples_of_cash_transfers",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

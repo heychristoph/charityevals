@@ -19,6 +19,7 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
+      "discount_rate": 0.04,
       "uov_per_ln_consumption": 1.442695040889,
       "resource_shares": 0
     }
@@ -53,11 +54,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -100,17 +103,83 @@
       }
     },
     {
+      "id": "estimated_annual_treatment_effect_on_the_treated_after_adjust_kenya",
+      "label": "Estimated annual treatment effect on the treated after adjustments (Kenya)",
+      "section": "deworm_the_world",
+      "value": 0.007618891721,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
+        "cell": "Deworm the World!B14"
+      },
+      "explainer": "Calculated in the source sheet as `=B10*B11/B13*B12`; kept as a fixed number here, as the yearly amount the present value below discounts."
+    },
+    {
+      "id": "discount_rate_kenya",
+      "label": "Discount rate (Kenya)",
+      "section": "deworm_the_world",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.04,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
+        "cell": "Deworm the World!B16"
+      },
+      "explainer": "Linked to the shared discount rate; GiveWell's sheet uses 0.04."
+    },
+    {
+      "id": "years_between_deworming_and_long_term_benefits_kenya",
+      "label": "Average number of years between deworming and the beginning of long-term benefits (Kenya)",
+      "section": "deworm_the_world",
+      "value": 8.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
+        "cell": "Deworm the World!B17"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
+      "id": "benefit_on_one_years_income_discounted_kenya",
+      "label": "Benefit on one year's income (discounted back because of delay between deworming and working for income) (Kenya)",
+      "section": "deworm_the_world",
+      "formula": "estimated_annual_treatment_effect_on_the_treated_after_adjust_kenya / (1 + discount_rate_kenya) ^ years_between_deworming_and_long_term_benefits_kenya",
+      "expected": 0.005567049553,
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
+        "cell": "Deworm the World!B18"
+      },
+      "explainer": "GiveWell's `=B14/(1+B16)^B17`."
+    },
+    {
+      "id": "duration_of_long_term_benefits_of_deworming_kenya",
+      "label": "Duration of long-term benefits of deworming (in years) (Kenya)",
+      "section": "deworm_the_world",
+      "value": 40.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
+        "cell": "Deworm the World!B19"
+      },
+      "explainer": "GiveWell's input behind the present value, read from the sheet so the present value moves with your discount rate."
+    },
+    {
       "id": "present_value_of_lifetime_benefits_from_a_year_of_deworming_4",
       "label": "Present value of lifetime benefits from a year of deworming (before decay adjustment, in terms of increases in ln(income)) (Kenya)",
       "section": "deworm_the_world",
-      "value": 0.1145948471,
-      "kind": "estimate",
+      "formula": "pv(discount_rate_kenya, duration_of_long_term_benefits_of_deworming_kenya, -benefit_on_one_years_income_discounted_kenya, 0, 1)",
+      "expected": 0.1145948471,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/19q9tQbVHLOiX4YSvSeEHwGo5siJX-rpp4muX6hVrvHY/edit",
         "cell": "Deworm the World!B21"
       },
-      "explainer": "Calculated in the source sheet as `=pv(B16,B19,-B18,,1)`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "GiveWell's `=pv(B16,B19,-B18,,1)`, rebuilt from the sheet's own inputs so the present value moves with your discount rate."
     },
     {
       "id": "adjustment_for_benefits_decaying_over_time_kenya",
@@ -1092,6 +1161,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
+      "unit": "multiples of cash transfers"
+    }
   }
 }

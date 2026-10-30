@@ -18,7 +18,8 @@
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "life_value_multiplier": 1
     }
   },
   "sections": [
@@ -33,7 +34,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Other contributors and staff pay"
+      "title": "Other contributors and staff pay",
+      "kind": "ours"
     },
     {
       "id": "bottom",
@@ -214,11 +216,19 @@
       "expected": 7.256571429
     },
     {
+      "id": "life_value_weight",
+      "section": "saving",
+      "label": "Weight on the value of a life saved (ours)",
+      "format": "multiple",
+      "formula": "$life_value_multiplier",
+      "explainer": "charityevals' step, not HLI's: the shared value-of-life slider (Your values), which scales GiveWell's value of a death averted in its malaria models. Here it scales the wellbeing of the years the person saved goes on to live; grief averted for the family is not scaled. The evaluator view pins it at 1, so HLI's numbers reproduce."
+    },
+    {
       "id": "wellbys_per_life",
       "section": "saving",
       "label": "WELLBYs per life saved",
       "format": "number",
-      "formula": "wellbys_from_grief + wellbys_from_years + wellbys_from_growth",
+      "formula": "wellbys_from_grief + (wellbys_from_years + wellbys_from_growth) * life_value_weight",
       "expected": 132.5995733
     },
     {
@@ -316,7 +326,7 @@
     },
     {
       "id": "wellbys_per_dollar",
-      "section": "bottom",
+      "section": "staff_pay",
       "label": "WELLBYs per dollar",
       "format": "small",
       "formula": "(wellbys_per_1000 / 1000) * if($resource_shares, amf_share_of_spending, 1) * donor_cost_share",
@@ -326,7 +336,11 @@
   "output": {
     "row": "wellbys_per_dollar",
     "unit": "wellby",
-    "label": "WELLBYs per dollar"
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1000",
+      "unit": "WELLBYs per $1,000"
+    }
   },
   "resources": [
     {

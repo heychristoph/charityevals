@@ -43,7 +43,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -314,14 +315,24 @@
       "id": "units_of_value_per_dollar_from_the_intervention",
       "label": "Units of value per dollar from the intervention",
       "section": "sheet1",
-      "formula": "(units_of_value_from_the_intervention / cost_to_givewell) * donor_cost_share",
-      "expected": 0.1424527231,
+      "formula": "units_of_value_from_the_intervention / cost_to_givewell",
+      "expected": 0.1424527231
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "formula": "units_of_value_per_dollar_from_the_intervention * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_per_dollar_from_the_intervention",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_per_dollar_from_the_intervention",
+      "unit": "uov"
+    }
   }
 }

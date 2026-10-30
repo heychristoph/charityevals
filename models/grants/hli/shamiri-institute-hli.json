@@ -19,7 +19,8 @@
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0
     }
   },
   "resources": [
@@ -42,11 +43,18 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not HLI's. HLI counts a year of benefit the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so HLI's numbers reproduce."
     }
   ],
   "rows": [
@@ -97,10 +105,34 @@
       "expected": 2.214868188
     },
     {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits spread over years can be discounted smoothly rather than in yearly steps."
+    },
+    {
+      "id": "discount_factor_model_1",
+      "section": "discounting",
+      "label": "Discount factor for the fading effect",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, ((continuous_discount_rate * duration_model_1_effect_of_shamiri_based_on_direct_evidence) - 1 + exp(-(continuous_discount_rate * duration_model_1_effect_of_shamiri_based_on_direct_evidence))) / (0.5 * (continuous_discount_rate * duration_model_1_effect_of_shamiri_based_on_direct_evidence) * (continuous_discount_rate * duration_model_1_effect_of_shamiri_based_on_direct_evidence)), 1)",
+      "explainer": "HLI's effect starts at the initial effect and fades in a straight line to zero over the duration (the triangle in the total-effect row). This is the present value of that triangle at the discount rate, as a share of its undiscounted area: 1 at a 0% rate, about 0.97 for a 2.2-year effect at 4%."
+    },
+    {
       "id": "total_effect_model_1_effect_of_shamiri_based_on_direct_evide",
       "label": "Total effect (Model 1: Effect of Shamiri based on direct evidence)",
       "section": "analysis",
-      "formula": "initial_effect_model_1_effect_of_shamiri_based_on_direct_evi * duration_model_1_effect_of_shamiri_based_on_direct_evidence * 0.5",
+      "formula": "initial_effect_model_1_effect_of_shamiri_based_on_direct_evi * duration_model_1_effect_of_shamiri_based_on_direct_evidence * 0.5 * discount_factor_model_1",
       "expected": 0.4155092721
     },
     {
@@ -330,6 +362,10 @@
   "output": {
     "row": "wellby_per_dollar",
     "unit": "wellby",
-    "label": "WELLBYs per dollar"
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1_000_2024_model_1_effect_of_shamiri_based_on_di",
+      "unit": "WELLBYs per $1,000"
+    }
   }
 }

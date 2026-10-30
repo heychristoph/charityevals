@@ -83,7 +83,8 @@
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -852,14 +853,25 @@
       "label": "Units of value generated per philanthropic dollar spent, after accounting for all adjustments",
       "section": "main_calcs",
       "unit": "UoV / $",
-      "formula": "(total_units_of_value_generated_after_accounting_for_all_adju / grant_size) * donor_cost_share",
-      "expected": 0.003354557974,
+      "formula": "total_units_of_value_generated_after_accounting_for_all_adju / grant_size",
+      "expected": 0.003354557974
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "label": "Units of value per dollar you give",
+      "section": "staff_pay",
+      "unit": "UoV / $",
+      "formula": "units_of_value_generated_per_philanthropic_dollar_spent_afte * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+    "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "units_of_value_generated_per_philanthropic_dollar_spent_afte",
+      "unit": "uov"
+    }
   }
 }

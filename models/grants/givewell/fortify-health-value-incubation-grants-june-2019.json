@@ -20,7 +20,8 @@
     "name": "GiveWell",
     "assumptions": {
       "life_value_multiplier": 1,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "discount_rate": 0.04175
     }
   },
   "resources": [
@@ -67,11 +68,13 @@
     },
     {
       "id": "bottom_line",
-      "title": "Bottom line"
+      "title": "Bottom line",
+      "kind": "ours"
     },
     {
       "id": "staff_pay",
-      "title": "Staff pay below market"
+      "title": "Staff pay below market",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -1794,25 +1797,25 @@
       "id": "adjusting_for_state_differences_india_women_with_any_anemia",
       "label": "Adjusting for state differences: India (Women with any anemia)",
       "section": "counterfactual",
-      "value": 53.1,
-      "kind": "estimate",
+      "formula": "@givewell.total_women_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "Counterfactual!C180"
-      }
+      },
+      "expected": 53.1
     },
     {
       "id": "adjusting_for_state_differences_india_men_with_any_anemia",
       "label": "Adjusting for state differences: India (Men with any anemia)",
       "section": "counterfactual",
-      "value": 23.3,
-      "kind": "estimate",
+      "formula": "@givewell.total_men_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "Counterfactual!D180"
-      }
+      },
+      "expected": 23.3
     },
     {
       "id": "adjusting_for_state_differences_india_average_adult",
@@ -1936,15 +1939,15 @@
       "id": "discount_rate_active",
       "label": "Discount rate (Active)",
       "section": "user_inputs",
-      "value": 0.04175,
-      "kind": "estimate",
+      "formula": "$discount_rate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "User inputs!B3"
       },
-      "explainer": "Calculated in the source sheet as `=\"COMPUTED_VALUE\"`; kept as a fixed number here (text in arithmetic).",
-      "format": "percent"
+      "explainer": "Your discount rate (Timing, under Your values). GiveWell's sheet uses 4.175%; the evaluator view keeps it.",
+      "format": "percent",
+      "expected": 0.04175
     },
     {
       "id": "cognitive_benefits_in_children_discount_rate",
@@ -2308,13 +2311,13 @@
       "id": "adjusting_for_state_differences_india_children_with_any_anem",
       "label": "Adjusting for state differences: India (Children with any anemia)",
       "section": "counterfactual",
-      "value": 58.5,
-      "kind": "estimate",
+      "formula": "@givewell.total_children_with_any_anemia",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "Counterfactual!B180"
-      }
+      },
+      "expected": 58.5
     },
     {
       "id": "ratio_of_anemia_in_fortify_health_states_compared_to_whole_c_2",
@@ -3201,6 +3204,10 @@
   "output": {
     "row": "uov_per_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar"
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "incubation_grants_are_x_times_cash",
+      "unit": "multiples of cash transfers"
+    }
   }
 }
