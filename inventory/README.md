@@ -54,12 +54,15 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
 - **Imported now:**
   - Pure Earth's advocacy against leaded cosmetics in Ghana, both the current sheet and the one before
     HLI's July 2025 correction;
-  - the Shamiri Institute.
+  - the Shamiri Institute;
+  - second pass, from the figures in the report text (no public sheet): Fortify Health (sheet behind
+    sign-in), Taimaka, ACTRA, icddr,b's Reach Up parenting programme, and, from the 2026 pain report,
+    Pallium India and World Spine Care.
 - **Not imported:**
-  - Fortify Health: HLI's sheet asks for sign-in;
-  - Taimaka: HLI links GiveWell's model, imported under GiveWell;
-  - ACTRA and NEPi: no spreadsheet;
-  - deworming: HLI's reports link GiveWell's sheets.
+  - NEPI: closed in 2025 after financial irregularities, so there is no charity to give to;
+  - deworming: HLI's reports link GiveWell's sheets, and its own view is about deworming in general;
+  - older reports superseded by the imported ones, cause explorations with no organisation, and
+    methodology. `hli-reports.json` gives every report a status.
 
 ## Founders Pledge: `founders-pledge.md`
 
@@ -107,12 +110,13 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
 - **Source:** all 337 pages in Giving Green's sitemap (`/research/`, `/post/` and the site pages),
   the PDFs they link, and every linked Google Sheet (tested through its public export): 42 entries
   with a cost-effectiveness claim, a dollars-per-tonne figure or a linked model.
-- **Imported:** 6 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
+- **Imported:** 7 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
   Good Food Institute, Future Cleantech Architects, Opportunity Green, Evergreen Collaborative (2022,
-  and its superseded 2021 analysis) and Carbon180.
+  and its superseded 2021 analysis), Carbon180 and Industrious Labs (from the figures in Giving Green's
+  2024 deep dive; no sheet is published).
 - **Not imported:** Giving Green uses its estimates only as plausibility checks against a $1-a-tonne
   benchmark, and most of its pages are qualitative. Left out: recommendations with no published figure
-  (Clean Air Task Force rests on Founders Pledge's estimate; Industrious Labs, Project InnerSpace,
-  the Australian list and the grantee spotlights), strategy-level sheets with no charity, offsets
-  bought from companies (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
+  (Clean Air Task Force and Project InnerSpace, which Giving Green "chose not to quantify"; the
+  Australian list and the grantee spotlights), strategy-level sheets with no charity, companies selling
+  offsets, not charities (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
   sheet. The file lists every entry and its reason.

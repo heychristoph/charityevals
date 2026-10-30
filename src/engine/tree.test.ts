@@ -3,7 +3,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { evaluate, parse } from "./expr";
+import { evaluate, parse, type Node } from "./expr";
 import { assumptionValues, buildLibrary, comparable, compute, headlineNode } from "./model";
 import { childrenOf, headlineFormula, identityOf, lookupFor, pathTo, pathToRef, rootOf, shapeOf, spreadShare } from "./tree";
 import { rowsFeeding, sensitivity } from "./sensitivity";
@@ -136,8 +136,22 @@ describe("every ranked model's tree", () => {
       const central = sensitivity(lib, m, av).central;
       if (!(Math.abs(root.value - central) <= 1e-9 * Math.abs(central))) off.push(`${m.id}: root ${root.value} vs ranking ${central}`);
       const u = uncertainty(lib, m, values, av, "charityevals");
-      const sum = childrenOf(m, root, look).reduce((t, k) => t + spreadShare(u, k, root.value), 0);
-      if (u.total > 0 && Math.abs(sum - 1) > 0.02) off.push(`${m.id}: shares sum to ${sum.toFixed(3)}`);
+      const kids = childrenOf(m, root, look);
+      const sum = kids.reduce((t, k) => t + spreadShare(u, k, root.value), 0);
+      if (u.total > 0 && Math.abs(sum - 1) > 0.02) {
+        // Each part's share counts its own variance. When one uncertain number feeds two parts (the
+        // discount rate in a model's own timing step and in the climate conversion), the parts move
+        // together and their shares can't add to 1. Then the parts taken jointly must still carry the
+        // whole uncertainty: the variance of Σ (∂ln result/∂part) × part, covariance included.
+        const nodeOf = (k: (typeof kids)[number]): Node | undefined =>
+          k.type === "expr" ? k.expr
+          : k.type === "assumption" || k.type === "fact" ? { type: "ref", scope: k.type, name: k.refId! }
+          : k.rowId ? { type: "ref", scope: "row", name: k.rowId }
+          : undefined;
+        const terms = kids.flatMap((k) => { const n = nodeOf(k); return n && k.g !== undefined ? [{ type: "bin", op: "*", left: { type: "num", value: k.g / root.value }, right: n } as Node] : []; });
+        const joint = terms.length ? u.exprAbsVar(terms.reduce((a, b) => ({ type: "bin", op: "+", left: a, right: b }) as Node)) / u.total : 0;
+        if (Math.abs(joint - 1) > 0.02) off.push(`${m.id}: shares sum to ${sum.toFixed(3)}, jointly ${joint.toFixed(3)}`);
+      }
     }
     expect(ranked.length).toBeGreaterThan(10);
     expect(off).toEqual([]);

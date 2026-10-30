@@ -1,0 +1,234 @@
+{
+  "id": "actra-hli",
+  "name": "ACTRA (HLI, 2025)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "actra",
+  "owner": "hli",
+  "summary": "Group cognitive behavioural therapy for young men at risk of violence and crime in Colombia. The Happier Lives Institute's predictive estimate (WELLBYs per $1,000), rebuilt from the figures in its report, which adapts its model of NEPI's programme in Liberia.",
+  "source": {
+    "publisher": "Happier Lives Institute",
+    "title": "The promise of ACTRA: preventing crime with cognitive behavioural therapy",
+    "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+    "published": "2025-03-18",
+    "retrieved": "2026-10-30",
+    "license": "© Happier Lives Institute; no licence published. Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "HLI, The promise of ACTRA (2025)",
+      "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+      "type": "evaluation",
+      "note": "HLI publishes no public spreadsheet for this estimate: the model is built from the inputs and figures stated in the report's text, each quoted on its row."
+    },
+    {
+      "title": "HLI, Stealing happiness? The wellbeing cost-effectiveness of NEPI (2024)",
+      "url": "https://www.happierlivesinstitute.org/report/stealing-happiness-the-wellbeing-cost-effectiveness-of-nepi-preventing-crime-with-cash-and-cognitive-behavioural-therapy/",
+      "type": "evaluation",
+      "note": "The model HLI adapts for ACTRA."
+    },
+    {
+      "title": "ACTRA",
+      "url": "https://www.actra.ngo",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "HLI",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "effects",
+      "title": "Benefits per participant (HLI's NEPI model, therapy-only arm)",
+      "explainer": "HLI's NEPI model, rerun for the therapy-only arm of the Liberian trial (Blattman et al. 2017; 10-year follow-up 2023) with Colombian household sizes."
+    },
+    {
+      "id": "bottom",
+      "title": "HLI's bottom line"
+    },
+    {
+      "id": "per_dollar",
+      "title": "Discounting",
+      "kind": "ours",
+      "explainer": "charityevals' step, not HLI's. HLI counts a year of better wellbeing the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so HLI's figure is unchanged there."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "recipient_household_wellbys",
+      "section": "effects",
+      "label": "WELLBYs for the participant and his household",
+      "format": "number",
+      "value": 1.04,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+        "page": "How ACTRA differs from NEPI",
+        "quote": "The recipient and household effects decrease from 3 → 1.04 WELLBYs",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Smaller than in HLI's NEPI estimate because therapy alone had a smaller effect on the men's wellbeing in the trial (0.08 SDs, against 0.19 for therapy plus cash) and Colombian households are smaller (1.66 other members, against 2.74)."
+    },
+    {
+      "id": "victim_wellbys",
+      "section": "effects",
+      "label": "WELLBYs for people spared from crime",
+      "format": "number",
+      "value": 11.1,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+        "page": "How ACTRA differs from NEPI",
+        "quote": "The benefit to victims increased from 10.7 → 11.1 WELLBYs",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Fewer thefts and the wellbeing of the would-be victims: therapy alone cut thefts slightly more in the trial (350 over 10 years, against 338)."
+    },
+    {
+      "id": "total_wellbys",
+      "section": "effects",
+      "label": "Total WELLBYs per participant",
+      "format": "number",
+      "formula": "recipient_household_wellbys + victim_wellbys",
+      "expected": 12.14,
+      "explainer": "HLI: \"The total benefit thus decreases from 13.6 → 12.1 WELLBYS\"."
+    },
+    {
+      "id": "cost_per_participant",
+      "section": "effects",
+      "label": "Cost per participant",
+      "format": "usd",
+      "value": 330,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+        "page": "How ACTRA differs from NEPI",
+        "quote": "which means the naive cost of therapy is $330",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "NEPI's $630 per participant less its $300 cash transfer. HLI thinks the cost could fall well below this, as other charities deliver therapy for under $50, but also that costs in Latin America may run higher."
+    },
+    {
+      "id": "wellbys_per_1000",
+      "section": "bottom",
+      "label": "WELLBYs per $1,000",
+      "format": "number",
+      "formula": "total_wellbys / cost_per_participant * 1000",
+      "expected": 36.78787879,
+      "explainer": "HLI: \"Putting all of these into our existing model nearly doubles the cost-effectiveness from 22 → 37 WELLBYs created per $1,000 donated.\" A prediction for a programme still in its pilot."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future wellbeing",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "effect_duration_years",
+      "section": "per_dollar",
+      "label": "Years the benefits are spread over",
+      "format": "number",
+      "unit": "years",
+      "value": 10,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI report",
+        "url": "https://www.happierlivesinstitute.org/report/the-promise-of-actra-preventing-crime-with-cognitive-behavioural-therapy/",
+        "page": "How ACTRA differs from NEPI",
+        "quote": "350 over 10 years instead of 338",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "HLI counts benefits over the trial's 10-year follow-up; we spread them evenly over those years."
+    },
+    {
+      "id": "discount_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for benefits spread evenly over those years",
+      "format": "number",
+      "formula": "pv_annuity_due(1, discount_rate_per_year, effect_duration_years) / effect_duration_years",
+      "explainer": "The present value of an equal benefit each year over the years above, starting now, as a share of the undiscounted total: 1 at a 0% rate, lower the longer the benefit lasts."
+    },
+    {
+      "id": "wellbys_per_dollar_discounted",
+      "section": "per_dollar",
+      "label": "WELLBYs per dollar, discounted",
+      "format": "small",
+      "formula": "wellbys_per_1000 / 1000 * discount_factor"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "wellbys_per_dollar",
+      "section": "staff_pay",
+      "label": "WELLBYs per dollar",
+      "format": "small",
+      "unit": "WELLBYs per $",
+      "formula": "wellbys_per_dollar_discounted * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "wellbys_per_dollar",
+    "unit": "wellby",
+    "label": "WELLBYs per dollar",
+    "native": {
+      "row": "wellbys_per_1000",
+      "unit": "WELLBYs per $1,000"
+    }
+  }
+}

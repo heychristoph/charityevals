@@ -26,29 +26,40 @@ id), or `not imported:` with the reason.
 | Deworming: END Fund | same, C7 | 2022-09-01 | same | `end-fund-deworming-sogive-2022` (new charity `end-fund`) | 0.0186 (£40.29) |
 | Deworming: SCI Foundation (now Unlimit Health) | same, D7 | 2022-09-01 | same | `unlimit-health-deworming-sogive-2022` (new charity `unlimit-health`) | 0.0202 (£37.04) |
 | Deworming: Sightsavers | same, E7 | 2022-09-01 | same | `sightsavers-deworming-sogive-2022` | 0.0321 (£23.39) |
+| Royal National Lifeboat Institution | [SoGive charity page](https://app.sogive.org/#charity?charityId=the-royal-national-lifeboat-institution) (database analysis, text only) | 2020-10-15 (record last modified) | none; SoGive's data terms: free for charity analysis with attribution and a link back | `royal-national-lifeboat-institution-sogive` (new charity) | £421,299 direct cost per life saved (£497,662 with overheads) |
+| Breast Cancer Now | [SoGive charity page](https://app.sogive.org/#charity?charityId=breast-cancer-now) (text only) | undated; cites 2019–20 accounts, dated 2021 here | same | `breast-cancer-now-sogive` (new charity) | £1,000–£8,800 per QALY for UK breast cancer research (£2,484 at our middle share) |
+| Compassion UK | [SoGive charity page](https://app.sogive.org/#charity?charityId=compassion-uk-christian-child-development) (text only) | 2020-11-11 | same | `compassion-uk-sogive` (new charity `compassion-uk`) | £500 per year of additional income |
+| Woodland Trust | [SoGive charity page](https://app.sogive.org/#charity?charityId=woodland-trust) (text only) | 2020-11-16 | same | `woodland-trust-sogive` (new charity) | £2.14 per tonne of CO₂ taken up by planting (£7.40 for restoration) |
 
 How: StrongMinds is hand-built (row per sheet row). Deworming is traced from each bottom line by
 `scripts/import-sogive.py`, which reuses `scripts/convert-sheet.py` and links like GiveWell's sheets
 (moral weights, discount rate, leverage and funging, staff pay, GiveWell facts). Every `expected` value
-reproduces in the evaluator view (`npm run check`).
+reproduces in the evaluator view (`npm run check`). The four database analyses (second pass, October 2026) have no
+spreadsheet: each model is built from the figures stated in SoGive's text, each quoted on its row, and
+reproduces SoGive's figure; pounds are converted at the Bank of England's annual average rate (`facts/fx.json`).
 
 ## Not imported
 
-**SoGive spreadsheets with numbers, but no charity or no ranked unit**
+**Spreadsheets with numbers linked from SoGive's posts: no charity, or not SoGive's**
 
-- *Cookstoves CEA* ([sheet](https://docs.google.com/spreadsheets/d/1xqFz5Lhuc5x__SPrbuHgWtou289lF3oZrinnaoV7whI/edit); post "Clean cookstoves may be competitive with GiveWell-recommended charities", December 2020). It estimates replacing every cookstove in the world (about $11,800 per life saved), not a charity's program; the climate part needs a social cost of carbon, which isn't on our scale.
-- *CfRN CEA* ([sheet](https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit); "Why we think the Founders Pledge report overrates CfRN", December 2019). Coalition for Rainforest Nations, in tonnes of CO2e per $. No unit on our scale, and getting one needs a new shared rate (tonnes of CO2e to healthy years).
-- *CATF cost-effectiveness* ([sheet](https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit); "Climate change donation recommendations", January 2021; "Update on CATF's plans for 2020"). Clean Air Task Force, in tonnes of CO2e per $. Same reason.
+- *Cookstoves CEA* ([sheet](https://docs.google.com/spreadsheets/d/1xqFz5Lhuc5x__SPrbuHgWtou289lF3oZrinnaoV7whI/edit); post "Clean cookstoves may be competitive with GiveWell-recommended charities", December 2020). It estimates replacing every cookstove in the world (about $11,800 per life saved), not a charity's program (Inyenyeri, a Rwandan stove company, appears only as an example of a stove's price). Rechecked in October 2026: no organisation's figure.
+- *CfRN CEA* ([sheet](https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit); "Why we think the Founders Pledge report overrates CfRN", November 2019). Not SoGive's: the sheet is Founders Pledge's 2018 CfRN model (tabs "CfRN past impact" and "CfRN future work"), which SoGive's post links as "FP's CfRN CEA". The post argues qualitatively that FP overrates CfRN (opportunity cost of REDD+ funds, unpaid incentives, optimistic private funding) but puts no figure of its own on it; asked in the comments whether its adjustments would add up to over $10 a tonne, SoGive says it is "hard to say". FP's model is imported (`coalition-for-rainforest-nations-founders-pledge`).
+- *CATF cost-effectiveness* ([sheet](https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit); "Climate change donation recommendations", July 2020; "Update on CATF's plans for 2020", December 2019). Not SoGive's: the sheet is Founders Pledge's 2018 CATF model, linked as "Founders Pledge cost-effectiveness model for CATF". SoGive "broadly agrees with its conclusions and cost-effectiveness estimates" and quotes FP's $0.29 a tonne for CATF's future projects; its database page for CATF ("on the order of $1 per tonne") ends "This assessment is from Founders Pledge." The update post is call notes with no figure. FP's model is imported (`clean-air-task-force-founders-pledge`).
 - *Conflict-poverty* ([sheet](https://docs.google.com/spreadsheets/d/1FVMibJXxM72QOQBelR0goTUTPWSMOJ2pCoSt4sOIofs/edit); "Conflict and poverty", March 2020). An order-of-magnitude model of a hypothetical poverty program in Kenya averting war. No charity.
 
 **SoGive supporting sheets** (inputs to the imported models, not models themselves): Deworming replicability adjustment and cost per year of doubled consumption; Deworming replicability adjustment 2019; Deworming CE after economic losers (a pasted summary of the imported sheet); Unprogrammed deworming; Early life growth BOTEC; Mental Health Interventions toolkit; Mental Health meta-analysis (METAPSY); TherapyInterventionsData; DALY burden of depression.
 
 **Other evaluators' sheets that SoGive's posts link**: GiveWell's 2017, 2022 and 2023 CEAs, the deworming summary table, the ITN model, people per net and directed grants (GiveWell imports); HLI's StrongMinds 2023 sheet and AMF SWB CEA (HLI); Founders Pledge's StrongMinds and women's empowerment CEAs (not SoGive's); an effective-giving ecosystem overview (no numbers).
 
-**SoGive's charity database** (about 10,000 UK charities, 167 rated). Not imported, for three reasons:
-- The ratings are categories (Gold, Silver, Bronze, "low", "more information needed"), not models.
-- The numbers behind them are costs per output (a net, a meal, a scholar). The few costs per life saved restate GiveWell's figures (AMF, Helen Keller) or are one division with no counterfactual (RNLI, about £420,000 per life saved).
-- SoGive's data page says use in apps and reports needs a licence from SoGive.
+**SoGive's charity database** (about 10,000 UK charities, 167 rated). Checked record by record in the second pass
+(October 2026) for a figure of SoGive's own per unit of outcome (per life saved, healthy year, year of income or tonne):
+- Imported: the RNLI, Breast Cancer Now, Compassion UK and the Woodland Trust (above), and two upper bounds (below).
+- Versus Arthritis (record `arthritis-research-uk`, £3,750 per life-saved equivalent) and the MND Association (£300 per DALY): imported as `versus-arthritis-sogive-upper-bound` and `motor-neurone-disease-association-sogive-upper-bound` (new charities `versus-arthritis`, `mnd-association`). Both are explicit upper bounds under assumptions SoGive calls unlikely, so they are side analyses: shown on the charity pages, never ranked (src/engine/ranking.ts treats "upper bound" like other side sheets). The MND research spending (£3.9m) isn't stated by SoGive; it is back-calculated from its £300.
+- Helen Keller International (£3,400 per life), the Against Malaria Foundation and Malaria Consortium: not imported; they restate GiveWell's figures in pounds (GiveWell's models are imported).
+- Clean Air Task Force: not imported; the text is Founders Pledge's ("This assessment is from Founders Pledge"), imported under FP.
+- Cancer Research UK's £1,600 per QALY, cited on several cancer charities' pages (Bowel Cancer UK, the Royal Marsden, Children with Cancer): not imported; a figure for UK cancer research in general, and the Cancer Research UK record itself wasn't among the records the database returned (its analysis isn't public that way).
+- Everything else: ratings (Gold to "Not Recommended", or "more information needed") with costs per output (a meal, a scholar, a visit, a person reached) or the benchmarks only, with no outcome figure.
+- Terms: SoGive's data page (archived September 2019) says its data is free for charity analysis with attribution, and that apps need a licence, free for low-intensity use, on condition users are told the source of impact assessments with a link back. The imported models and write-ups cite SoGive and link its pages.
 
 **Posts with no cost-effectiveness numbers** (qualitative, or about SoGive itself):
 - StrongMinds series 1, 2 and 3 (methods; numbers feed the imported sheet), "Floors and ceilings" (toolkit), and 5 (moral weight; feeds the sheet).
