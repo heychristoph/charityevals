@@ -257,8 +257,8 @@
     "sad": {
       "label": "suffering-adjusted days averted",
       "short": "SADs",
-      "to_common": "$chicken_vs_person / 0.463966 * $daly_per_sad * $uov_per_daly",
-      "explainer": "Ambitious Impact's unit: days of an animal's pain, weighted by intensity and by Ambitious Impact's weight for the species, so one equals a day of a person's disabling pain. ACE reports in it; every animal model converts it into chicken-equivalent pain days before ranking. A model reporting SADs directly is converted as chickens' SADs: 0.463966 is Ambitious Impact's weight for a hen."
+      "to_common": "$chicken_vs_person / @aim_sads.chicken_2024 * $daly_per_sad * $uov_per_daly",
+      "explainer": "Ambitious Impact's unit: days of an animal's pain, weighted by intensity and by Ambitious Impact's weight for the species, so one equals a day of a person's disabling pain. ACE reports in it; every animal model converts it into chicken-equivalent pain days before ranking. A model reporting SADs directly is converted as chickens' SADs, divided by Ambitious Impact's 2024 weight for a hen (0.463966, facts: aim_sads.chicken_2024)."
     },
     "ced": {
       "label": "chicken-equivalent pain days averted",
@@ -275,8 +275,8 @@
     "tco2e": {
       "label": "tonnes of CO₂-equivalent averted",
       "short": "t CO₂e",
-      "to_common": "$deaths_per_tco2e * ($climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay + (1 - $climate_heat_share) * air_pollution_weight) * 73.1914 * $life_value_multiplier",
-      "explainer": "Greenhouse gas kept out of the air, in tonnes of CO₂ or the same warming from other gases. Converted through the deaths one more tonne causes (\"Deaths caused by one more tonne of CO₂\"): every tonne avoids its heat deaths, discounted over the years until they come; a tonne that comes from burning less fossil fuel near people also avoids air-pollution deaths, at once. How much of that air pollution a model's tonnes carry is the model's own row \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" (air_pollution_weight): 0 for a forest, a methane leak or CO₂ captured at a running plant; the share of tonnes from burning less fuel times how much smoke that fuel makes per tonne for the rest. Each death is valued as GiveWell values an adult's death (73.1914 units of value, facts: moral_weights.uov_per_death_over5) times the value-of-life slider."
+      "to_common": "$deaths_per_tco2e * ($climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay + (1 - $climate_heat_share) * air_pollution_weight) * @moral_weights.uov_per_death_over5 * $life_value_multiplier",
+      "explainer": "Greenhouse gas kept out of the air, in tonnes of CO₂ or the same warming from other gases. Converted through the deaths one more tonne causes (\"Deaths caused by one more tonne of CO₂\"): every tonne avoids its heat deaths, discounted over the years until they come; a tonne that comes from burning less fossil fuel near people also avoids air-pollution deaths, at once. How much of that air pollution a model's tonnes carry is the model's own row \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" (air_pollution_weight): 0 for a forest, a methane leak or CO₂ captured at a running plant; the share of tonnes from burning less fuel times how much smoke that fuel makes per tonne for the rest. Each death is valued as GiveWell values an adult's death (facts: moral_weights.uov_per_death_over5, 73.1914 units of value) times the value-of-life slider."
     },
     "daly": {
       "label": "DALYs averted",
