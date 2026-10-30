@@ -102,9 +102,7 @@ describe("the headline", () => {
     expect(headlineFormula(m, "1")).toBe("out / $uov_per_daly * 1000");
     expect(headlineFormula(m, "$uov_per_daly")).toBe("out * 1000");
     expect(headlineFormula(m, "$uov_per_wellby")).toBe("out * $uov_per_wellby / $uov_per_daly * 1000");
-    expect(headlineFormula(m, "$daly_per_sad * $uov_per_daly * $animal_moral_weight")).toBe("out * $daly_per_sad * $animal_moral_weight * 1000");
-    expect(headlineFormula(m, "$sads_per_animal_spared * $daly_per_sad * $uov_per_daly * $animal_moral_weight"))
-      .toBe("out * $sads_per_animal_spared * $daly_per_sad * $animal_moral_weight * 1000");
+    expect(headlineFormula(m, "$chicken_vs_person * $daly_per_sad * $uov_per_daly")).toBe("out * $chicken_vs_person * $daly_per_sad * 1000");
   });
   it("cancels only a multiplied healthy-year value, and keeps grouping", () => {
     expect(headlineFormula(m, "$k / $uov_per_daly")).toBe("out * $k / $uov_per_daly / $uov_per_daly * 1000");
@@ -112,11 +110,12 @@ describe("the headline", () => {
     expect(headlineFormula(m, "2 * ($a + $b)")).toBe("out * 2 * ($a + $b) / $uov_per_daly * 1000");
   });
   it("equals the common value over a healthy year's value per $1,000 for every unit", () => {
-    const av: Record<string, number> = { ...assumptionValues(buildLibrary([], assumptions).assumptions), uov_per_daly: 3.1, animal_moral_weight: 0.37 };
-    for (const [id, u] of Object.entries(assumptions.units as Record<string, { to_common: string }>)) {
+    const av: Record<string, number> = { ...assumptionValues(buildLibrary([], assumptions).assumptions), uov_per_daly: 3.1, chicken_vs_person: 0.37 };
+    for (const [id, u] of Object.entries(assumptions.units as Record<string, { to_common?: string }>)) {
+      if (!u.to_common) continue;
       const look = (s: string, n: string) => (s === "row" ? 0.25 : av[n]);
-      const common = 0.25 * evaluate(parse(u.to_common), look);
-      expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, u.to_common), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
+      const common = 0.25 * evaluate(parse(u.to_common!), look);
+      expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, u.to_common!), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
     }
   });
 });
@@ -153,7 +152,7 @@ describe("paths to shared numbers", () => {
   const toCommon = lib.assumptions.units.uov.to_common;
   it("finds the node that reads an assumption, and nothing for one it doesn't read", () => {
     expect(pathToRef(m, "assumption", "uov_per_daly", look, toCommon)).toEqual(["r", "r.1"]);
-    expect(pathToRef(m, "assumption", "animal_moral_weight", look, toCommon)).toBeUndefined();
+    expect(pathToRef(m, "assumption", "chicken_vs_person", look, toCommon)).toBeUndefined();
     expect(pathToRef(m, "fact", "nowhere.x", look, toCommon)).toBeUndefined();
     expect(pathTo(m, "cost", look, toCommon)).toEqual(["r", "r.0", "r.0.1"]);
   });

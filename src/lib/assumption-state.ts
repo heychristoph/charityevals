@@ -12,14 +12,29 @@ let current: Overrides = {};
 const listeners = new Set<() => void>();
 let loaded = false;
 
+/** Assumptions since renamed or rescaled: old id → [new id, factor]. Links shared before the change
+ * keep their meaning. The chicken weight was a multiplier on Rethink Priorities' median (1 = 33.2%);
+ * it now stores the weight itself. */
+export const LEGACY: Record<string, [string, number]> = { animal_moral_weight: ["chicken_vs_person", 0.332] };
+
+export function upgrade(o: Overrides): Overrides {
+  const out: Overrides = {};
+  for (const [k, v] of Object.entries(o)) if (!(k in LEGACY)) out[k] = v;
+  for (const [k, v] of Object.entries(o)) {
+    const legacy = LEGACY[k];
+    if (legacy && !(legacy[0] in out)) out[legacy[0]] = v * legacy[1];
+  }
+  return out;
+}
+
 function load(): Overrides {
   if (typeof window === "undefined") return {};
   const params = new URLSearchParams(window.location.search);
   const fromUrl: Overrides = {};
   for (const [k, v] of params) if (k.startsWith("a.") && Number.isFinite(Number(v))) fromUrl[k.slice(2)] = Number(v);
-  if (Object.keys(fromUrl).length) return fromUrl;
+  if (Object.keys(fromUrl).length) return upgrade(fromUrl);
   try {
-    return JSON.parse(localStorage.getItem(KEY) ?? "{}");
+    return upgrade(JSON.parse(localStorage.getItem(KEY) ?? "{}"));
   } catch {
     return {};
   }

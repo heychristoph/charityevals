@@ -6,7 +6,7 @@
   "charity": "albert-schweitzer-foundation",
   "owner": "ace",
   "bulk": true,
-  "summary": "Campaigns for farmed animals in Germany and beyond, through corporate outreach, lobbying, consumer outreach and media work. Animal Charity Evaluators' 2016 Guesstimate model: projected costs and achievements by program, converted here from ACE's years of suffering spared into suffering-adjusted days (SADs) per dollar, like our other animal models. ACE has since stopped publishing per-dollar estimates; this is the last public one for this charity.",
+  "summary": "Campaigns for farmed animals in Germany and beyond, through corporate outreach, lobbying, consumer outreach and media work. Animal Charity Evaluators' 2016 Guesstimate model: projected costs and achievements by program, converted here by species into chicken-equivalent pain days per dollar, like our other animal models: hens spared cages as hen-years of a caged hen's suffering, other animals spared with the shared figure per animal. ACE has since stopped publishing per-dollar estimates; this is the last public one for this charity.",
   "source": {
     "publisher": "Animal Charity Evaluators",
     "title": "Albert Schweitzer Foundation 2016 cost effectiveness estimate",
@@ -19,7 +19,9 @@
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "chicken_vs_person": 0.463966,
+      "rp_species_weights": 0
     }
   },
   "resources": [
@@ -40,6 +42,18 @@
       "id": "model",
       "title": "Model",
       "explainer": "The Albert Schweitzer Foundation provided budget and accomplishments information for 2015 and partial information for January to August 2016. Estimates in this sheet are made by Animal Charity Evaluators for the full year of 2016.\n\nRead ACE's 2016 [review](https://animalcharityevaluators.org/research/charity-review/albert-schweitzer-foundation/) of the Albert Schweitzer Foundation."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model.",
+      "kind": "ours"
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "explainer": "charityevals' step, not ACE's. ACE's 2016 models count years of farmed-animal life spared, every species alike. Here hens spared cages count as years of a caged hen's suffering, and every other animal spared by the shared figure for an animal spared, split by species like a replaced meal. Each species is then counted in days of a chicken's disabling pain (Rethink Priorities' estimates); how a chicken compares with a person is the chicken slider.",
+      "kind": "ours"
     }
   ],
   "rows": [
@@ -260,23 +274,8 @@
       "formula": "years_of_suffering_spared_per_dollar_by_consumer_o*consumer_outreach_proportion_of_programs+equivalent_years_of_suffering_spared_per_dollar_by*corporate_outreach_proportion_of_programs+years_of_suffering_spared_per_dollar_by_social_med*social_media_and_media_proportion_of_programs"
     },
     {
-      "id": "sads_per_year_of_suffering",
-      "section": "model",
-      "label": "SADs per year of factory-farmed life spared",
-      "format": "number",
-      "formula": "@ace.caged_hen_sads_per_year",
-      "explainer": "ACE's years of suffering spared, converted with our shared rate: one year of a battery-caged hen's life, in suffering-adjusted days. Used for every animal, so it is rough for fish and for animals whose lives are less bad."
-    },
-    {
-      "id": "sads_per_dollar",
-      "section": "model",
-      "label": "SADs averted per dollar",
-      "format": "number",
-      "formula": "total_years_of_suffering_spared_per_dollar * sads_per_year_of_suffering"
-    },
-    {
       "id": "staff_cost_share",
-      "section": "model",
+      "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
       "value": {
@@ -289,7 +288,7 @@
     },
     {
       "id": "salary_gap",
-      "section": "model",
+      "section": "donor",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
       "value": {
@@ -302,25 +301,18 @@
     },
     {
       "id": "salary_sacrifice",
-      "section": "model",
+      "section": "donor",
       "label": "Salary forgone by staff (in-kind donation)",
       "format": "usd",
       "formula": "total_budget * staff_cost_share * salary_gap / (1 - salary_gap)"
     },
     {
       "id": "donor_cost_share",
-      "section": "model",
+      "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
       "formula": "total_budget / (total_budget + if($resource_shares, salary_sacrifice, 0))",
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
-    },
-    {
-      "id": "sads_per_donor_dollar",
-      "section": "model",
-      "label": "SADs averted per dollar you give",
-      "format": "number",
-      "formula": "sads_per_dollar * donor_cost_share"
     },
     {
       "id": "participants_in_vegan_taste_week_program",
@@ -411,35 +403,25 @@
       "id": "animals_spared_per_leaflet",
       "label": "Animals spared per leaflet",
       "section": "model",
-      "value": {
-        "low": 0.21,
-        "best": 1.0350000000000001,
-        "high": 1.86
-      },
-      "kind": "judgment",
+      "formula": "@ace.ace2016_animals_spared_per_leaflet",
       "source": {
         "title": "Guesstimate model 7338",
         "url": "https://www.getguesstimate.com/models/7338",
         "cell": "ASP1"
       },
-      "explainer": "ACE's 90% interval, .21 to 1.86 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75."
+      "explainer": "ACE's 90% interval, .21 to 1.86 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75.\n\nThe same figure is kept as shared data (Animal Charity Evaluators, under Data), which this row reads."
     },
     {
       "id": "years_of_suffering_spared_per_leaflet",
       "label": "Years of suffering spared per leaflet",
       "section": "model",
-      "value": {
-        "low": 0.079,
-        "best": 0.2895,
-        "high": 0.5
-      },
-      "kind": "judgment",
+      "formula": "@ace.ace2016_years_suffering_per_leaflet",
       "source": {
         "title": "Guesstimate model 7338",
         "url": "https://www.getguesstimate.com/models/7338",
         "cell": "YOS1"
       },
-      "explainer": "ACE's 90% interval, .079 to .5 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75."
+      "explainer": "ACE's 90% interval, .079 to .5 (normal). The best guess is its median.\n\nDerived from our [leafleting calculator](http://www.animalcharityevaluators.org/research/interventions/impact-calculator/). Does not include shellfish or wild fish.\n\nAs of 2011, Germans typically eat [about 75%](http://faostat3.fao.org/download/FB/CL/E) as much meat as people in the US, so since the calculator was developed from US data, we multiplied its outputs by .75.\n\nThe same figure is kept as shared data (Animal Charity Evaluators, under Data), which this row reads."
     },
     {
       "id": "animals_spared_per_participant",
@@ -817,11 +799,108 @@
       "label": "Animals affected yearly by policy changes ASF was involved with",
       "section": "model",
       "formula": "hens_affected_yearly_by_cage_free_policies_asf_was+animals_affected_yearly_by_other_policy_changes_as"
+    },
+    {
+      "id": "hen_years_per_dollar",
+      "section": "species",
+      "label": "Years of caged life spared per dollar: chickens",
+      "format": "number",
+      "formula": "equivalent_years_of_suffering_spared_from_cage_fre / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "ACE's equivalent years of suffering spared for hens spared cages by cage-free policies, the part of this model whose species is known."
+    },
+    {
+      "id": "hens_spared_per_dollar",
+      "section": "species",
+      "label": "Chickens spared per dollar",
+      "format": "number",
+      "formula": "equivalent_hens_spared_from_cage_free_policies / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "The same chickens, counted as ACE counts animals spared, so they aren't counted again among other animals."
+    },
+    {
+      "id": "other_animals_per_dollar",
+      "section": "species",
+      "label": "Other animals spared per dollar",
+      "format": "number",
+      "formula": "total_animals_spared_per_dollar - hens_spared_per_dollar",
+      "explainer": "Every other animal ACE counts as spared, mostly through diet change. ACE's 2016 sheets don't say which species they are."
+    },
+    {
+      "id": "sads_per_animal_spared",
+      "section": "species",
+      "label": "SADs averted per animal spared",
+      "format": "number",
+      "formula": "@sad_factors.sads_per_meal_replaced / @sad_factors.animals_spared_per_meal_replaced",
+      "explainer": "The shared figures for a replaced meal, in suffering-adjusted days (SADs) and in animals, give the suffering behind each animal spared: about 8.7 SADs. Every model that counts animals spared uses this one rate, split by species. ACE's 2016 sheets don't give a species breakdown, so the split is ACE's 2024 estimate of which animals a plant-based diet spares."
+    },
+    {
+      "id": "sads_chicken",
+      "section": "species",
+      "label": "SADs averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "(hen_years_per_dollar * @ace.caged_hen_sads_per_year + other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_chicken) * donor_cost_share",
+      "explainer": "SADs averted for chickens per dollar you give."
+    },
+    {
+      "id": "ced_chicken",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
+      "explainer": "The SADs for chickens with Ambitious Impact's weight for a hen (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+    },
+    {
+      "id": "sads_fish",
+      "section": "species",
+      "label": "SADs averted per dollar you give: fish",
+      "format": "number",
+      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_fish * donor_cost_share",
+      "explainer": "SADs averted for fish per dollar you give."
+    },
+    {
+      "id": "ced_fish",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: fish",
+      "format": "number",
+      "formula": "sads_fish / @aim_sads.fish * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish / @aim_sads.chicken)",
+      "explainer": "The SADs for fish with Ambitious Impact's weight for fish taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+    },
+    {
+      "id": "sads_pig",
+      "section": "species",
+      "label": "SADs averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_pig * donor_cost_share",
+      "explainer": "SADs averted for pigs per dollar you give."
+    },
+    {
+      "id": "ced_pig",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: pigs",
+      "format": "number",
+      "formula": "sads_pig / @aim_sads.pig * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig / @aim_sads.chicken)",
+      "explainer": "The SADs for pigs with Ambitious Impact's weight for pigs taken out, and Rethink Priorities' estimate of how much pigs can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "number",
+      "formula": "ced_chicken + ced_fish + ced_pig",
+      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],
   "output": {
-    "row": "sads_per_donor_dollar",
-    "unit": "sad",
-    "label": "SADs averted per dollar you give"
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "total_years_of_suffering_spared_per_dollar",
+      "unit": "years of farmed-animal life"
+    },
+    "species": [
+      "chicken",
+      "fish",
+      "pig"
+    ]
   }
 }

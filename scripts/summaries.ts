@@ -66,7 +66,9 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     const rename = (f: string) => f.replace(/(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => short.get(w) ?? w);
     const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}) }));
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
-    return { ...meta, rows: compact };
+    // A stand-in folds the native and species rows away, so its output names only the bottom line.
+    const { native: _native, species: _species, ...output } = (raw.output ?? {}) as Record<string, unknown>;
+    return { ...meta, ...(raw.output ? { output } : {}), rows: compact };
   });
 }
 

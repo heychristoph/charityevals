@@ -43,6 +43,10 @@ const rowShape = {
   /** Shared assumptions only: a number taken from evidence rather than a judgment call. Listed with
    * its source and range on the assumptions page, but not offered as a slider. */
   fixed: z.boolean().optional(),
+  /** Shared assumptions only: the slider's ends, when they differ from the plausible range the
+   * uncertainty uses. `zero` adds a stop at 0 below a log scale, for a weight some readers set to
+   * nothing at all. */
+  slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional() }).strict().optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -55,8 +59,12 @@ const rowShape = {
    * the formula's. */
   range: z.object({ low: z.number(), high: z.number(), note: z.string().optional() }).strict().optional(),
   /** The source evaluator's value, when ours differs. The evaluator view uses it; the explainer
-   * must say why we differ. */
+   * must say why we differ. On a calculated row (one that reads a shared fact in our view, say), the
+   * evaluator view uses this number instead of the formula, so the sheet still reproduces. */
   published: z.union([z.number(), Range]).optional(),
+  /** Facts that stand for one physical change (a hen moved out of a cage): the change in a few words,
+   * for the note on rows that use the fact in place of an evaluator's own number. */
+  change: z.string().optional(),
   kind: Kind.optional(),
   source: Source.optional(),
   /** Markdown. Why this row exists, how the number was chosen, what would change it. */
@@ -78,8 +86,8 @@ export const Row = z
       ctx.addIssue({ code: "custom", message: `row ${r.id}: input rows need a source or an explainer` });
     if (r.range !== undefined && r.formula === undefined)
       ctx.addIssue({ code: "custom", message: `row ${r.id}: range is for calculated rows; give inputs a low/best/high value` });
-    if (r.published !== undefined && (r.value === undefined || !r.explainer))
-      ctx.addIssue({ code: "custom", message: `row ${r.id}: a published value needs our own value and an explainer saying why they differ` });
+    if (r.published !== undefined && !r.explainer)
+      ctx.addIssue({ code: "custom", message: `row ${r.id}: a published value needs an explainer saying why ours differs` });
   });
 export type Row = z.infer<typeof Row>;
 
@@ -93,7 +101,10 @@ export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
  * structure, so models of the same family can be compared row by row. */
 export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta"]);
 
-export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
+/** `kind`: whose rows these are. evaluator (the default): rows that reproduce the evaluator's sheet.
+ * ours: charityevals' steps after the evaluator's bottom line (credit, bridges, the species step), the
+ * same for every model of the kind (docs/normalization.md). */
+export const Section = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional(), kind: z.enum(["evaluator", "ours"]).optional() }).strict();
 
 export const Resource = z
   .object({
@@ -214,7 +225,18 @@ export const Model = z
     sections: z.array(Section).default([]),
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */
-    output: z.object({ row: z.string(), unit: z.string(), label: z.string() }).strict().optional(),
+    output: z
+      .object({
+        row: z.string(),
+        unit: z.string(),
+        label: z.string(),
+        /** The evaluator's own bottom line, in its own unit (e.g. SADs per dollar), before our steps. */
+        native: z.object({ row: z.string(), unit: z.string() }).strict().optional(),
+        /** Animal models: the species their result passes through, each by its own `ced_<species>` row. */
+        species: z.array(z.string()).optional(),
+      })
+      .strict()
+      .optional(),
     /** Imported by a generic converter (scripts/convert-sheet.py, convert-guesstimate.py) and traced
      * from the evaluator's sheet. scripts/link-parameters.py ties its moral weights, discount rate and
      * DALY value to the shared assumptions, and shared data to facts. */

@@ -51,7 +51,8 @@ export function shapeOf(n: Node): Shape {
       if (n.op === "^") return { how: "raised to a power", parts: [{ node: n.left }, { op: "^", node: n.right }] };
       return { how: "1 if true, else 0", parts: [{ node: n.left }, { op: CMP[n.op], node: n.right }] };
     case "call":
-      if (n.fn === "if") return { how: "depends on a condition", parts: n.args.map((a, i) => ({ op: ["if", "then", "else"][i], node: a })) };
+      // Read as the formula itself ("if … then … else …"): a "depends on a condition" label only took room.
+      if (n.fn === "if") return { parts: n.args.map((a, i) => ({ op: ["if", "then", "else"][i], node: a })) };
       if (n.fn === "iferror") return { how: "with a fallback", parts: n.args.map((a, i) => ({ op: i ? "if invalid" : undefined, node: a })) };
       return { how: FN[n.fn] ?? n.fn, parts: n.args.map((a) => ({ node: a })) };
     default: return { parts: [] };
