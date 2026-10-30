@@ -2,6 +2,7 @@
 // and mirrored to localStorage (so they survive navigation). Only values that differ from the
 // defaults are stored. Every island on the page subscribes to the same store.
 import { useSyncExternalStore } from "react";
+import assumptions from "../../assumptions/default.json";
 
 const KEY = "charityevals:assumptions";
 /** Where an evaluator view, since removed, was kept: cleared so no one is left in it. */
@@ -17,9 +18,12 @@ let loaded = false;
  * it now stores the weight itself. */
 export const LEGACY: Record<string, [string, number]> = { animal_moral_weight: ["chicken_vs_person", 0.332] };
 
+/** Rates now fixed from evidence: an old link's override for one is dropped, not kept unused. */
+const FIXED = new Set(assumptions.rows.filter((r) => (r as { fixed?: boolean }).fixed).map((r) => r.id));
+
 export function upgrade(o: Overrides): Overrides {
   const out: Overrides = {};
-  for (const [k, v] of Object.entries(o)) if (!(k in LEGACY)) out[k] = v;
+  for (const [k, v] of Object.entries(o)) if (!(k in LEGACY) && !FIXED.has(k)) out[k] = v;
   for (const [k, v] of Object.entries(o)) {
     const legacy = LEGACY[k];
     if (legacy && !(legacy[0] in out)) out[legacy[0]] = v * legacy[1];

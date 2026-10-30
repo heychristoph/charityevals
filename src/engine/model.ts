@@ -243,8 +243,10 @@ export function hasRange(value: number | Range | undefined): value is Range {
 }
 
 /** Default assumption values (best guesses) with the user's overrides on top. */
+/** Every shared assumption's value: the reader's where they set one, else the default. A fixed rate
+ * (taken from evidence, not offered as a slider) always has its default, whatever an old link says. */
 export function assumptionValues(a: Assumptions, user: Record<string, number> = {}): Record<string, number> {
-  return Object.fromEntries(a.rows.map((r) => [r.id, user[r.id] ?? pickValue(r.value)]));
+  return Object.fromEntries(a.rows.map((r) => [r.id, (r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
 }
 
 /** The assumption values a view computes with: the evaluator view pins what the evaluator used. */
