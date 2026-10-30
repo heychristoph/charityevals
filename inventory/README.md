@@ -1,7 +1,7 @@
 # Inventory of public evaluator models
 
 Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, the
-Happier Lives Institute, SoGive (`sogive.md`), Founders Pledge (`founders-pledge.md`) and Ambitious Impact (`ambitious-impact-models.json`), checked page by page in October 2026, and what we did with each. Each entry
+Happier Lives Institute, SoGive (`sogive.md`), Founders Pledge (`founders-pledge.md`), Ambitious Impact (`ambitious-impact-models.json`) and Giving Green (`giving-green.md`), checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
 ## GiveWell: `givewell-models.json`, `givewell-sheets.json`
@@ -101,3 +101,18 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - 1 breakeven analysis.
   - 2 Fortify Health CEAs that AIM's pages don't claim as its own.
   - 1 tobacco-tax idea whose charity isn't confirmed on AIM's pages.
+
+## Giving Green: `giving-green.md`
+
+- **Source:** all 337 pages in Giving Green's sitemap (`/research/`, `/post/` and the site pages),
+  the PDFs they link, and every linked Google Sheet (tested through its public export): 42 entries
+  with a cost-effectiveness claim, a dollars-per-tonne figure or a linked model.
+- **Imported:** 6 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
+  Good Food Institute, Future Cleantech Architects, Opportunity Green, Evergreen Collaborative (2022,
+  and its superseded 2021 analysis) and Carbon180.
+- **Not imported:** Giving Green uses its estimates only as plausibility checks against a $1-a-tonne
+  benchmark, and most of its pages are qualitative. Left out: recommendations with no published figure
+  (Clean Air Task Force rests on Founders Pledge's estimate; Industrious Labs, Project InnerSpace,
+  the Australian list and the grantee spotlights), strategy-level sheets with no charity, offsets
+  bought from companies (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
+  sheet. The file lists every entry and its reason.
