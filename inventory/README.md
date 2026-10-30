@@ -82,25 +82,32 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   PDF and checked against the xlsx export. 79 reports name a CEA sheet; 74 of those sheets are public.
 - **Licence:** about 42 reports are on Zenodo under CC BY 4.0, and the entry for each records it. AIM's terms of
   use otherwise reserve rights, allow non-commercial use, and allow citing with attribution.
-- **Imported:** 21 models in `models/grants/ambitious-impact/`, via `scripts/convert-sheet.py` and then
-  `scripts/link-aim.py` (`scripts/aim-links.json`). These are the public sheets for ideas that AIM incubated a
-  charity to run, attached to that charity: 4 existing charities (Clear Solutions, Ansh, Spiro, Healthy Futures)
-  and 17 new ones.
-  - Each model is AIM's estimate made before the charity existed. Under the ranking rules it is AIM's figure for
-    that charity: newest by date per evaluator, not a side sheet.
-  - Where the sheet has changed since the report (Healthy Futures, LABRI, Opal Health, Rahi Impact), the model
-    reproduces today's sheet.
-- **Not imported:**
-  - 36 public sheets for ideas where no charity AIM incubated to run them was found. The site ranks organisations,
-    so there is nothing to attach them to.
-  - 11 animal sheets in welfare points or animals helped. There is no conversion from these to the site's scale,
-    and AIM replaced them with SADs in 2023.
-  - 17 reports with no AIM sheet (the estimate is in the text or in Guesstimate).
-  - 5 private or deleted sheets.
-  - 2 EA-meta sheets that need a bridge to the site's scale.
-  - 1 breakeven analysis.
-  - 2 Fortify Health CEAs that AIM's pages don't claim as its own.
-  - 1 tobacco-tax idea whose charity isn't confirmed on AIM's pages.
+- **Imported:** 40 models in `models/grants/ambitious-impact/` (41 entries: the 2022 milkfish and 2025 East Asian
+  fish reports share one sheet), each attached to the charity AIM incubated to run the idea, checked against AIM's full
+  list of incubated charities (61 organisations, 2016 to 2026 H1, including shut-down and merged ones). Each is AIM's
+  estimate made before the charity existed; under the ranking rules the newest is AIM's figure for that charity.
+  - First pass, 21 sheets, via `scripts/convert-sheet.py` and `scripts/link-aim.py` (`scripts/aim-links.json`).
+  - Second pass, 19 models: 15 more sheets (Concentric Policies, ARMoR, Notify Health, Center for Alcohol Policy
+    Solutions, Foundations First, Neev, Fortify Health, Centre for Effective Aid Policy 2020, Family Empowerment
+    Media, Animal Policy International 2022 and 2020, Scale Welfare, Centre for Aquaculture Progress, CEARCH, High
+    Impact Professionals) and minimal models from report text where AIM published no sheet (Fish Welfare Initiative,
+    Shrimp Welfare Project, Healthier Hens 2018 and 2020).
+  - Animal models from before 2024 are in AIM's welfare points. They reach the scale through one bridge of ours,
+    `facts/aim_wp.json`: AIM's sentience adjustment taken out, a welfare-point-year turned into days of disabling pain
+    (2.1, calibrated on AIM's own welfare points and SADs for the same hen moving out of a battery cage; range
+    1.09–9.09), then Rethink Priorities' species weights as in every animal model.
+  - EA-meta models (CEARCH, High Impact Professionals) report dollars of top EA donations; a bridge of ours values
+    those at a multiple of GiveWell's cash benchmark (GiveWell's funding bar), with a range.
+  - AIM's co-founder and funding counterfactuals stay as published; "Credit by share of resources" replaces them,
+    as with GiveWell's and ACE's adjustments. Where AIM values that loss in other charities' welfare points, it goes
+    through its own species rows.
+- **Not imported** (each entry says why):
+  - 41 ideas with no organisation founded from them after the re-check (welfare-point sheets among them), including
+    Lafiya Nigeria's case (it started independently and AIM didn't recommend the 2020 idea) and the 2026 aid-quality
+    replication, written after the Centre for Effective Aid Policy closed.
+  - 6 pages with no AIM estimate of their own (only literature figures, partial costs or none).
+  - 5 private or deleted sheets; 1 breakeven analysis; 2 Fortify Health CEAs that are Fortify's own and already
+    imported as GiveWell's.
 
 ## Giving Green: `giving-green.md`
 

@@ -62,9 +62,10 @@ def link_number(raw):
     """HYPERLINK(url, "0.20"): a number typed as a link's label, which the spreadsheet does arithmetic with.
     Returns (url, number), or None."""
     if not isinstance(raw, str): return None
-    m = re.fullmatch(r'=\s*HYPERLINK\(\s*"([^"]*)"\s*,\s*"\s*\$?(-?(?:\d{1,3}(?:,\d{3})+|\d*)(?:\.\d+)?(?:[eE]-?\d+)?)\s*"\s*\)\s*', raw, re.I)
+    m = re.fullmatch(r'=\s*HYPERLINK\(\s*"([^"]*)"\s*,\s*"\s*\$?(-?(?:\d{1,3}(?:,\d{3})+|\d*)(?:\.\d+)?(?:[eE]-?\d+)?)\s*(%?)\s*"\s*\)\s*', raw, re.I)
     if not m or not re.search(r"\d", m.group(2)): return None
-    return m.group(1), float(m.group(2).replace(",", ""))
+    # A percent label ("41%") is the fraction to the spreadsheet's arithmetic.
+    return m.group(1), float(m.group(2).replace(",", "")) / (100 if m.group(3) else 1)
 
 
 def without_styles(path):
