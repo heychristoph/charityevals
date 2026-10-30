@@ -1,0 +1,290 @@
+{
+  "id": "breast-cancer-now-sogive",
+  "name": "Breast Cancer Now (SoGive, 2021)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "breast-cancer-now",
+  "owner": "sogive",
+  "summary": "Funds breast cancer research in the UK and runs support services and campaigns. SoGive's estimate of the cost per year of healthy life gained by UK breast cancer research as a whole (1970–2010), which it uses for the charity, rebuilt from SoGive's analysis.",
+  "source": {
+    "publisher": "SoGive",
+    "title": "Breast Cancer Now: SoGive rating and analysis",
+    "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+    "published": "2021-01-01",
+    "retrieved": "2026-10-30",
+    "license": "No licence on the page. SoGive's data terms (sogive.org/doc/getourdata.html, archived September 2019): data for charity analysis is free with attribution to SoGive; use in apps needs a licence, free for low-intensity use, on condition that users are told the source of impact assessments with a link back to SoGive. This model cites SoGive and links its page."
+  },
+  "resources": [
+    {
+      "title": "SoGive, Breast Cancer Now analysis",
+      "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+      "type": "evaluation",
+      "note": "SoGive's charity page (its analysis text); SoGive publishes no spreadsheet for it, so the model is built from the figures stated in the text, each quoted on its row. Rated \"Not Recommended (tentative)\". The page carries no date; it cites the charity's 2019–20 annual report and NCRI's 2020 data package, so the date here (2021) is our estimate."
+    },
+    {
+      "title": "Glover et al. (2014), Estimating the returns to UK publicly funded cancer-related research in terms of the net value of improved health outcomes, BMC Medicine 12:99",
+      "url": "https://doi.org/10.1186/1741-7015-12-99",
+      "type": "study"
+    },
+    {
+      "title": "Breast Cancer Now",
+      "url": "https://breastcancernow.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "SoGive",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "spend",
+      "title": "UK cancer research spending on breast cancer, 1970–2009",
+      "explainer": "SoGive can't trace Breast Cancer Now's own research to health gains, so it uses the average return on all UK breast cancer research, from Glover et al. (2014), and assumes the charity's research is about average."
+    },
+    {
+      "id": "bottom",
+      "title": "SoGive's bottom line"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From pounds per healthy year to healthy years per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' steps after SoGive's bottom line: pounds to dollars, and the delay between paying for research and the health it brings, discounted at the shared rate."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cancer_research_spend_gbp",
+      "section": "spend",
+      "label": "UK cancer research spending, 1970–2009 (£)",
+      "format": "integer",
+      "unit": "£",
+      "value": 15100000000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+        "page": "Cost-effectiveness analysis",
+        "quote": "They also estimate total research expenditure from 1970 to 2009 (see Additional File 1), which comes out to £15.1bn.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From Glover et al. (2014), the research taken to produce the health gains of 1991–2010."
+    },
+    {
+      "id": "labelled_share",
+      "section": "spend",
+      "label": "Share of that spending labelled by cancer type",
+      "format": "percent",
+      "value": 0.4,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+        "page": "Cost-effectiveness analysis",
+        "quote": "the proportion of labelled expenditure across 2002 to 2010 is calculated as 40%",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the National Cancer Research Institute's 2020 data package, 2002–2009."
+    },
+    {
+      "id": "breast_share_of_labelled",
+      "section": "spend",
+      "label": "Breast cancer's share of the labelled spending",
+      "format": "percent",
+      "value": 0.19,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+        "page": "Cost-effectiveness analysis",
+        "quote": "Of the proportion of labelled expenditure, breast cancer-related research accounts for an estimated 19% across the time period.",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "breast_share_of_unlabelled",
+      "section": "spend",
+      "label": "Breast cancer's share of the unlabelled spending",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.19,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+        "page": "Cost-effectiveness analysis",
+        "quote": "we can estimate lower and upper bounds - i.e none of the unlabelled expenditure is related to breast cancer or all of it is",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive gives only the two bounds, none and all of it, so its result is a range (£1,000 to £8,800 per healthy year). The central value is ours: the unlabelled spending split like the labelled, 19%."
+    },
+    {
+      "id": "breast_share",
+      "section": "spend",
+      "label": "Breast cancer's share of all UK cancer research spending",
+      "format": "percent",
+      "formula": "labelled_share * breast_share_of_labelled + (1 - labelled_share) * breast_share_of_unlabelled",
+      "expected": 0.19,
+      "explainer": "7.6% to 67.6% across SoGive's bounds."
+    },
+    {
+      "id": "breast_research_spend_gbp",
+      "section": "spend",
+      "label": "UK breast cancer research spending, 1970–2009 (£)",
+      "format": "integer",
+      "unit": "£",
+      "formula": "cancer_research_spend_gbp * breast_share",
+      "expected": 2869000000,
+      "explainer": "SoGive: \"£1.15bn - £10.2bn\" across its bounds."
+    },
+    {
+      "id": "qalys_gained",
+      "section": "spend",
+      "label": "Healthy years gained from breast cancer screening and treatment, 1991–2010",
+      "format": "integer",
+      "value": 1155000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=breast-cancer-now",
+        "page": "Cost-effectiveness analysis",
+        "quote": "the combined estimate for which is 1.155m QALYs gained",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Quality-adjusted life years gained from the key advances in screening and treatment, from Glover et al. (2014), Table 2."
+    },
+    {
+      "id": "cost_per_qaly_gbp",
+      "section": "bottom",
+      "label": "Cost per healthy year gained (£)",
+      "format": "number",
+      "unit": "£",
+      "formula": "breast_research_spend_gbp / qalys_gained",
+      "expected": 2483.982684,
+      "explainer": "SoGive: \"this implies the cost-effectiveness of breast cancer research is around £1,000 - £8,800 per QALY gained\". The central value comes from our middle share above. SoGive counts only gains up to 2010 from research up to 2009, and argues later gains wouldn't change the verdict."
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "per_dollar",
+      "label": "US dollars per pound, 2021",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2021",
+      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact). SoGive's pounds mix four decades of research spending in the prices of the day; we convert them at the rate of the year the analysis was written and don't adjust for inflation, which flatters the research."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future health",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "research_lag_years",
+      "section": "per_dollar",
+      "label": "Years from paying for research to the health it brings",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 15,
+        "high": 20
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Glover et al. (2014), BMC Medicine 12:99",
+        "url": "https://doi.org/10.1186/1741-7015-12-99",
+        "note": "Estimates a lag of about 15 years between cancer research spending and its health gains. The range, 10 to 20 years, is our judgment.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "A donation today pays for research whose benefits arrive years later; the same study SoGive relies on puts the lag at about 15 years."
+    },
+    {
+      "id": "lag_discount_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for the lag",
+      "format": "number",
+      "formula": "(1 + discount_rate_per_year) ^ -research_lag_years"
+    },
+    {
+      "id": "dalys_per_dollar_cash",
+      "section": "per_dollar",
+      "label": "Healthy years per dollar",
+      "format": "small",
+      "formula": "lag_discount_factor / (cost_per_qaly_gbp * usd_per_gbp)",
+      "explainer": "A QALY gained counts as one healthy year, the same as a DALY averted."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Default for a charity that mostly gives grants or buys goods: staff are a small part of the cost. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.0,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "UK charity staff earn somewhat less than in comparable private-sector jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "staff_pay",
+      "label": "Healthy years per dollar donated",
+      "format": "small",
+      "unit": "DALYs per $",
+      "formula": "dalys_per_dollar_cash * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_dollar",
+    "unit": "daly",
+    "label": "Healthy years per dollar",
+    "native": {
+      "row": "cost_per_qaly_gbp",
+      "unit": "£ per QALY gained"
+    }
+  }
+}
