@@ -120,7 +120,7 @@ about structure.
   measures the spread with shared assumptions at their defaults, and prints both.
 - **Conventions** added to `references/templates.md` after builders resolved the same questions
   differently: partner and government costs lower attribution rather than entering
-  `cost_total` (so `$full_credit` stays meaningful); reach is a flow, and only new additions get
+  `cost_total` (so the charity's share of resources stays meaningful); reach is a flow, and only new additions get
   persistence (SVB's builder had credited one year's meals for 1.5 years); several branches in
   one family; one question per adjustment (accountability: years brought forward vs.
   counterfactual); optional rows (`indirect_deaths_ratio`, `delay_years`, …); currency rows;
