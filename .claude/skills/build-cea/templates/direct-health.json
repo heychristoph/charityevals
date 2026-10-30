@@ -6,7 +6,7 @@
   "template": "direct-health",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, and the bottom line in units of value per dollar and × GiveDirectly.",
+  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
   "resources": [],
   "sections": [
     {
@@ -37,7 +37,8 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
   "rows": [
@@ -215,30 +216,29 @@
       "explainer": "TEMPLATE: the age split of the deaths averted, from the age split of cause-specific deaths in the target group."
     },
     {
-      "id": "dalys_averted_per_person",
+      "id": "morbidity_value_ratio",
       "section": "effect",
-      "label": "Illness averted per person reached (years lived with disability)",
-      "format": "small",
+      "label": "Value of illness averted, as a share of the value of deaths averted",
+      "format": "percent",
       "value": 0,
       "kind": "estimate",
-      "unit": "DALYs",
       "source": {
-        "title": "TEMPLATE: IHME GBD disability weights",
+        "title": "TEMPLATE: IHME GBD disability weights / GiveWell",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: YLDs averted per person reached, from GBD disability weights × cases averted × duration. 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both."
+      "explainer": "TEMPLATE: illness averted (GBD disability weights × cases averted × duration) valued against the deaths averted, as GiveWell's supplementary adjustments do. A share, not DALYs × an exchange rate: no rate between outcomes may sit inside a model (docs/normalization.md INV-2). 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both."
     },
     {
-      "id": "ln_income_gain_per_person",
+      "id": "ln_income_gain_per_year",
       "section": "effect",
-      "label": "Later-life income gain per person reached, ln(consumption) units, present value",
+      "label": "Later-life income gain per person reached, ln(consumption) per year",
       "format": "small",
       "value": 0,
       "kind": "estimate",
-      "unit": "ln-years",
+      "unit": "ln / year",
       "source": {
         "title": "TEMPLATE: study",
         "url": "https://example.org/REPLACE",
@@ -246,7 +246,58 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: present value of the increase in ln(consumption) from developmental effects (e.g. malaria or deworming and adult earnings), per person reached, discounted with $discount_rate. 0 with an explanation when there is no evidence."
+      "explainer": "TEMPLATE: the yearly increase in ln(consumption) in adulthood from developmental effects (e.g. malaria or deworming and adult earnings), per person reached, undiscounted. 0 with an explanation when there is no evidence."
+    },
+    {
+      "id": "years_until_income_gain",
+      "section": "effect",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "value": {
+        "low": 8,
+        "best": 10,
+        "high": 15
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: study / GiveWell",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: years from the intervention to adult earnings (GiveWell uses about 10 for child-health programs)."
+    },
+    {
+      "id": "years_income_gain_lasts",
+      "section": "effect",
+      "label": "Years the income gain lasts",
+      "format": "number",
+      "value": {
+        "low": 20,
+        "best": 40,
+        "high": 45
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: study / GiveWell",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: working years over which the gain lasts (GiveWell uses 40)."
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, present value",
+      "format": "small",
+      "formula": "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
+      "unit": "ln-years",
+      "explainer": "Discounted at the shared rate, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs."
     },
     {
       "id": "evidence_adj",
@@ -371,7 +422,7 @@
       "section": "outcome",
       "label": "Units of value from illness averted",
       "format": "number",
-      "formula": "people_reached * dalys_averted_per_person * total_adj * $uov_per_daly",
+      "formula": "uov_deaths * morbidity_value_ratio",
       "unit": "units of value"
     },
     {
@@ -429,7 +480,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
     },
     {
       "id": "salary_sacrifice",
@@ -457,6 +508,10 @@
   "output": {
     "row": "uov_per_donor_dollar",
     "unit": "uov",
-    "label": "Units of value per dollar you give"
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
   }
 }

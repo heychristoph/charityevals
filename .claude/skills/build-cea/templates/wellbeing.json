@@ -6,7 +6,7 @@
   "template": "wellbeing",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, and the bottom line in WELLBYs per dollar and × GiveDirectly.",
+  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
   "resources": [],
   "sections": [
     {
@@ -37,7 +37,8 @@
     {
       "id": "donor",
       "title": "Your dollar's share",
-      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With salary sacrifice counted, your dollar is credited with its share only."
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
   "rows": [
@@ -180,12 +181,28 @@
       "explainer": "Context: compare with the decay rates reported in follow-up studies."
     },
     {
+      "id": "continuous_discount_rate",
+      "section": "effect",
+      "label": "Discount rate, continuous",
+      "format": "number",
+      "formula": "ln(1 + $discount_rate)",
+      "explainer": "The shared yearly rate as a continuous rate, so the effect can be discounted smoothly as it fades."
+    },
+    {
+      "id": "discount_factor",
+      "section": "effect",
+      "label": "Discount factor for the fading effect",
+      "format": "percent",
+      "formula": "if(continuous_discount_rate > 0, (continuous_discount_rate * effect_duration_years - 1 + exp(-(continuous_discount_rate * effect_duration_years))) / (0.5 * (continuous_discount_rate * effect_duration_years) * (continuous_discount_rate * effect_duration_years)), 1)",
+      "explainer": "Present value of the triangle (linear fade to zero) at the shared rate, as a share of its undiscounted area; as in the HLI models."
+    },
+    {
       "id": "sd_years_per_person",
       "section": "effect",
-      "label": "Total effect per person (SD-years)",
+      "label": "Total effect per person (SD-years, discounted)",
       "format": "number",
-      "formula": "0.5 * initial_effect_sd * effect_duration_years",
-      "explainer": "Area of the triangle: linear decay from the initial effect to zero."
+      "formula": "0.5 * initial_effect_sd * effect_duration_years * discount_factor",
+      "explainer": "Area of the triangle: linear decay from the initial effect to zero, discounted."
     },
     {
       "id": "wellbys_per_person",
@@ -325,7 +342,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups."
+      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
     },
     {
       "id": "salary_sacrifice",
@@ -353,6 +370,10 @@
   "output": {
     "row": "wellbys_per_donor_dollar",
     "unit": "wellby",
-    "label": "WELLBYs per dollar you give"
+    "label": "WELLBYs per dollar you give",
+    "native": {
+      "row": "wellbys_per_dollar",
+      "unit": "wellby"
+    }
   }
 }

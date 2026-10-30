@@ -1,6 +1,6 @@
 # One scale, evaluators' models intact
 
-Design, not yet implemented (October 2026). Every charity on the site ends up in **years of healthy
+Implemented October 2026 (the rules below are enforced by src/engine/invariants.ts). Every charity on the site ends up in **years of healthy
 life per $1,000**. This note sets out how each model gets there by the same visible steps, while the
 evaluator's own model still reproduces its spreadsheet.
 
@@ -76,14 +76,13 @@ pain in a chicken.
 ```
 days of disabling pain, species s  = animals × days × intensity (disabling-equivalent share)
 chicken-equivalent days            = Σ_s  days_s × welfare range_s / welfare range_chicken
-healthy years                      = chicken-equivalent days × $chicken_vs_person × $daly_per_disabling_day
+healthy years                      = chicken-equivalent days × $chicken_vs_person × $daly_per_sad
 ```
 
-- `$chicken_vs_person`: today's `animal_moral_weight`, stored as the real number (0.332, Rethink
-  Priorities' median for chickens) instead of a multiplier of 1 shown as 33%. Slider unchanged.
-- `$daly_per_disabling_day`: today's `daly_per_sad` (0.0011, about 10 hours), renamed: it is a
-  person's disabling-pain day.
-- `to_common` for `ced` = `$chicken_vs_person * $daly_per_disabling_day * $uov_per_daly`.
+- `$chicken_vs_person`: the chicken's weight against a person, stored as the real number (0.332,
+  Rethink Priorities' median for chickens). Old `animal_moral_weight` links are mapped to it.
+- `$daly_per_sad`: healthy life lost per day of a person's disabling pain (0.0011, about 10 hours).
+- `to_common` for `ced` = `$chicken_vs_person * $daly_per_sad * $uov_per_daly`.
   At defaults, 1 chicken-equivalent day per dollar = 0.365 healthy years per $1,000. One AIM SAD
   of a chicken (= 1/0.332 chicken days) = 1.1, as today.
 - The units `sad` and `animals_spared` stop being ranked units. They stay as native units in layer E.
@@ -161,7 +160,7 @@ shrinks).
 | # | Invariant | How to test |
 |---|---|---|
 | INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby` or `ced`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
-| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_disabling_day`, `uov_per_wellby`, `sads_per_animal_spared`), and `uov_per_daly` only under INV-5. |
+| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `uov_per_wellby`, `sads_per_animal_spared`), and `uov_per_daly` only under INV-5. |
 | INV-3 | Every animal model passes through the species step, once per species, from the shared table. | For `unit = ced`: the model declares `output.species` (e.g. `["chicken","pig"]`). For each, a row `ced_<s>` exists, its formula equals the template for its source (`aim` or `raw`) after whitespace normalisation, it reads `@welfare_ranges.<s>_vs_chicken`, and it is upstream of the output. No other row reads `@welfare_ranges.*` or `@aim_sads.*`. Every path from a row whose unit is SAD or days of pain to the output passes through a `ced_*` row. |
 | INV-4 | No literal stands in for a shared number. | Facts get a `match` field (row label/id pattern). For every input row matching a fact's pattern whose value equals the fact's low/best/high: it must be a formula reading the fact, with the evaluator's literal in `published`. Also: no formula contains a constant equal to a fact or assumption value (extends lint's magic-number rule to all models). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |
@@ -169,10 +168,10 @@ shrinks).
 | INV-7 | Our rows are visibly ours. | Every row strictly between `output.native` and `output.row` is in a section of kind `accounting`, `bridge` or `conversion`, and has no `expected`. Every row upstream of `native` is in an evaluator section. |
 | INV-8 | One view, one set of numbers. | `headline(m, av, {}, "evaluator")` converts with `viewAssumptions(m, av, "evaluator")`, not `av` (fails today: see 4.2). |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
-| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_disabling_day`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_disabling_day`. |
+| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
-`daly_per_disabling_day`, toggle `rp_species_weights`; `output.native` and `output.species` in the
+`daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
 schema; section `kind`; `published` allowed on formula rows (evaluator view uses the number), so a
 row can read a shared fact in our view and keep ACE's literal in theirs; `headline` and
 `bottomLine` convert with view assumptions.
