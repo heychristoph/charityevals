@@ -58,7 +58,7 @@ for (const c of lib.charities.values()) {
   const guess = models.filter((m) => m.source?.sheet?.includes("guesstimate"));
   const lines = [
     MARK,
-    `${c.summary ?? c.name} ${owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
+    `${c.summary ?? c.name} ${owners.length > 2 ? `${owners.slice(0, -1).join(", ")} and ${owners.at(-1)}` : owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
       `the most recent, from ${month(main.source?.published)}, puts it at **${result(main)}**.`,
     "",
     "| Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |",
