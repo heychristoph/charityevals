@@ -1,7 +1,7 @@
 # Inventory of public evaluator models
 
 Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, the
-Happier Lives Institute and SoGive (`sogive.md`), checked page by page in October 2026, and what we did with each. Each entry
+Happier Lives Institute, SoGive (`sogive.md`) and Founders Pledge (`founders-pledge.md`), checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
 ## GiveWell: `givewell-models.json`, `givewell-sheets.json`
@@ -60,3 +60,16 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - Taimaka: HLI links GiveWell's model, imported under GiveWell;
   - ACTRA and NEPi: no spreadsheet;
   - deworming: HLI's reports link GiveWell's sheets.
+
+## Founders Pledge: `founders-pledge.md`
+
+- **Source:** every `/research/` page in FP's sitemap, its older report PDFs and linked Google Docs,
+  and FP staff's EA Forum posts: 103 pages or reports with a cost-effectiveness claim or model, 35 of
+  them with a public sheet.
+- **Imported:** 14 models: Clean Air Task Force and Coalition for Rainforest Nations (climate, in
+  tonnes of CO₂e), and twelve global health, wellbeing, education and policy models.
+- **Not imported:** recommendation pages with no published model (most since 2022, and every
+  climate, catastrophic-risk and animal page since 2020), pages that rest on GiveWell's models,
+  sheets behind sign-in, intervention-level or hypothetical sheets, and three sheets whose unit or
+  figure doesn't carry over (No Means No Worldwide, TerraPraxis, The Humane League 2019). The file
+  lists every entry and its reason.

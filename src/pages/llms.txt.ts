@@ -7,7 +7,7 @@ import { abs, defaultYears } from "../lib/seo";
 import { formatYears } from "../lib/format";
 import { repo } from "../lib/site";
 
-const CAUSES = [["global-health", "Global health"], ["animal-welfare", "Animal welfare"], ["ai-safety", "AI safety"]] as const;
+const CAUSES = [["global-health", "Global health"], ["animal-welfare", "Animal welfare"], ["ai-safety", "AI safety"], ["climate", "Climate"]] as const;
 
 export const GET: APIRoute = () => {
   const charities = [...lib.charities.values()].filter((c) => primaryOf(lib, c.id));
@@ -28,7 +28,7 @@ export const GET: APIRoute = () => {
 
   const body = `# charityevals
 
-> Open cost-effectiveness analyses (CEAs) of charities. Each model re-implements a published evaluator's analysis (GiveWell, Animal Charity Evaluators, Happier Lives Institute) or is charityevals' own where none exists. Every input has a source, a low/best/high range, a kind (observed, estimate or judgment) and an explanation. Visitors can change the shared assumptions (moral weights, exchange rates between causes) and every model recomputes.
+> Open cost-effectiveness analyses (CEAs) of charities. Each model re-implements a published evaluator's analysis (GiveWell, Animal Charity Evaluators, Happier Lives Institute, Founders Pledge) or is charityevals' own where none exists. Every input has a source, a low/best/high range, a kind (observed, estimate or judgment) and an explanation. Visitors can change the shared assumptions (moral weights, exchange rates between causes) and every model recomputes.
 
 Results are given in years of healthy life per $1,000 donated (DALYs averted, with income, wellbeing and animal outcomes converted at the shared exchange rates), on the site's default assumptions; GiveDirectly's cash transfers come to ${formatYears(defaultYears(lib.models.get(lib.assumptions.common.benchmark)!) ?? NaN)}; each page shows the plausible range and what drives it. The evaluators have not reviewed or endorsed this site. Estimates are for research, not financial advice.
 
