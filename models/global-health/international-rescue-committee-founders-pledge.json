@@ -1,0 +1,237 @@
+{
+  "id": "international-rescue-committee-founders-pledge",
+  "name": "International Rescue Committee: malnutrition treatment (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "international-rescue-committee",
+  "owner": "founders-pledge",
+  "summary": "Community management of acute malnutrition in children (Kenya, Chad, Mali, Ethiopia and elsewhere). Founders Pledge's page states about $130 per child treated in the IRC's most cost-effective programs; our bridge values a child treated with GiveWell's IRC analysis.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "International Rescue Committee's Community Management of Acute Malnutrition program (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/international-rescue-committee-s-community-management-of-acute-malnutrition-program",
+    "published": "2025-03-04",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, International Rescue Committee's Community Management of Acute Malnutrition program",
+      "url": "https://www.founderspledge.com/research/international-rescue-committee-s-community-management-of-acute-malnutrition-program",
+      "type": "evaluation"
+    },
+    {
+      "title": "GiveWell, IRC malnutrition treatment CEA (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From children treated to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: the page gives a cost per child treated but not what a treatment is worth. We value one child treated as GiveWell's IRC malnutrition analysis does for Burkina Faso, its headline column: its units of value a year, after its downside, excluded-effect and leverage adjustments, over the children treated that year, with its other countries as the range."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_child_treated",
+      "section": "page",
+      "label": "Cost per child treated (most cost-effective programs)",
+      "format": "usd",
+      "value": {
+        "low": 104,
+        "best": 130,
+        "high": 215
+      },
+      "kind": "estimate",
+      "expected": 130,
+      "source": {
+        "title": "Founders Pledge, International Rescue Committee (CMAM) (recommendation page)",
+        "url": "https://www.founderspledge.com/research/international-rescue-committee-s-community-management-of-acute-malnutrition-program",
+        "quote": "The IRC’s most cost-effective programs cost approximately $130 per child treated",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: \"The IRC's most cost-effective programs cost approximately $130 per child treated\": a best case, not an average, and the page doesn't say what it includes. Range ours: GiveWell's IRC costs per case run from $104 (Niger) to $132 (DRC); the full program cost per child in Burkina Faso, with government and other funders' inputs, is $215."
+    },
+    {
+      "id": "gw_uov_deaths_per_year",
+      "section": "bridge",
+      "label": "GiveWell: units of value a year from deaths averted, Burkina Faso, after downside and excluded effects",
+      "format": "number",
+      "value": 52889.77,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Malnutrition treatment CEA (IRC standard protocol, 2023)",
+        "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+        "note": "Annual units of value from mortality reduction (Burkina Faso) 55,093.51 × downside 0.8 × excluded effects 1.2 (charityevals model international-rescue-committee-malnutrition-treatment-irc-standard)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's value of the deaths a year of the IRC's program averts in Burkina Faso, about 98% of the total. It moves with our value-of-life lever, as GiveWell's own model does here."
+    },
+    {
+      "id": "gw_uov_development_per_year",
+      "section": "bridge",
+      "label": "GiveWell: units of value a year from development effects, Burkina Faso",
+      "format": "number",
+      "value": 1084.29,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Malnutrition treatment CEA (IRC standard protocol, 2023)",
+        "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+        "note": "Adjusted annual units of value from development effects (Burkina Faso) 1,129.47 × 0.96 (charityevals model international-rescue-committee-malnutrition-treatment-irc-standard)",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "gw_after_leverage_ratio",
+      "section": "bridge",
+      "label": "GiveWell: value after its leverage and funging step, as a share of value before",
+      "format": "percent",
+      "value": 0.7662,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Malnutrition treatment CEA (IRC standard protocol, 2023)",
+        "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+        "note": "'Total annual units of value after leverage and funging adjustment' 41,355.12 over 53,974.06 before (Burkina Faso) (charityevals model international-rescue-committee-malnutrition-treatment-irc-standard)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's allowance for what the government, UNICEF and WFP pay for and would otherwise do: −23%. Founders Pledge's $130 is close to the IRC's own cost per child ($138 in Burkina Faso), not the full program cost, so the value it buys is GiveWell's value after this step."
+    },
+    {
+      "id": "gw_irc_cost_share",
+      "section": "bridge",
+      "label": "GiveWell: the IRC's share of all spending on the program, Burkina Faso",
+      "format": "percent",
+      "value": 0.6392,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Malnutrition treatment CEA (IRC standard protocol, 2023)",
+        "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+        "note": "Total annual cost to IRC $1,624,041 over total program cost $2,540,738 (Burkina Faso) (charityevals model international-rescue-committee-malnutrition-treatment-irc-standard)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "With credit by share of resources on, the IRC's money gets its share of the outcome instead of GiveWell's leverage step."
+    },
+    {
+      "id": "gw_children_per_year",
+      "section": "bridge",
+      "label": "GiveWell: children with severe acute malnutrition treated a year, Burkina Faso",
+      "format": "integer",
+      "value": 11798,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Malnutrition treatment CEA (IRC standard protocol, 2023)",
+        "url": "https://docs.google.com/spreadsheets/d/1gTa8AglabnV3BK06hMf-UYtMOK3MxgI3iT2RtWJ5MtM/edit",
+        "note": "'Number of SAM children treated, annual (Burkina Faso)' (charityevals model international-rescue-committee-malnutrition-treatment-irc-standard, row number_of_sam_children_treated_annual_burkina_faso)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "13,880 cases of severe acute malnutrition a year, 85% of them children."
+    },
+    {
+      "id": "country_factor",
+      "section": "bridge",
+      "label": "Value per child where the IRC works, relative to Burkina Faso",
+      "format": "number",
+      "value": {
+        "low": 0.64,
+        "best": 1,
+        "high": 1.16
+      },
+      "kind": "judgment",
+      "explainer": "Burkina Faso is GiveWell's headline column, but Founders Pledge names Kenya, Chad, Mali and Ethiopia. GiveWell's value per child is 2.93 units of value in Chad (the only overlap, 0.64 of Burkina Faso's 4.57), 4.77 in DRC and 5.30 in Niger (1.16). Our judgment: Burkina Faso's figure as best, GiveWell's other columns as the range."
+    },
+    {
+      "id": "uov_per_child",
+      "section": "bridge",
+      "label": "Units of value per child treated",
+      "format": "number",
+      "formula": "(gw_uov_deaths_per_year * $life_value_multiplier + gw_uov_development_per_year) / gw_children_per_year * country_factor * if($resource_shares, gw_irc_cost_share, gw_after_leverage_ratio)",
+      "explainer": "GiveWell's value of one child treated: about 3.5 units of value at the defaults, after its leverage and funging step. Mortality without treatment differs by country, so this is the bridge's biggest uncertainty."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "uov_per_child / cost_per_child_treated"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_child_treated",
+      "unit": "$ per child treated"
+    }
+  }
+}

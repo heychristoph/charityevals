@@ -1,0 +1,344 @@
+{
+  "id": "central-square-foundation-founders-pledge",
+  "name": "Central Square Foundation (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "central-square-foundation",
+  "owner": "founders-pledge",
+  "summary": "Helps Indian state governments run structured teaching of foundational literacy and numeracy. Founders Pledge's page gives under £2.50 per student and gains of 0.29 (numeracy) and 0.43 (literacy) standard deviations; we turn them into income with Founders Pledge's own 2023 education method.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Central Square Foundation (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/central-square-foundation",
+    "published": "2025-02-03",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Central Square Foundation",
+      "url": "https://www.founderspledge.com/research/central-square-foundation",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0.04
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figures",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "fx",
+      "title": "Pounds to dollars",
+      "kind": "ours",
+      "explainer": "charityevals' step: the page states costs in pounds; we convert at the 2024 average rate."
+    },
+    {
+      "id": "income",
+      "title": "From test scores to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step, using Founders Pledge's own method: its 2023 education report turns a rise in test scores into higher lifetime earnings (19.1% more a year per standard deviation, 17.5% of it kept, from 8 years on for 40 years, shared with the household). The page's figure stops at test scores; we apply the method as its Imagine Worldwide model does."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "effect_numeracy",
+      "section": "page",
+      "label": "Gain in numeracy (standard deviations)",
+      "format": "number",
+      "value": 0.29,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Central Square Foundation (recommendation page)",
+        "url": "https://www.founderspledge.com/research/central-square-foundation",
+        "quote": "an average improvement of 0.29 standard deviations in numeracy and 0.43 standard deviations in literacy",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From evaluations by Education Initiatives of over 15,000 students in 10 districts of Uttar Pradesh and Madhya Pradesh, as the page reports them."
+    },
+    {
+      "id": "effect_literacy",
+      "section": "page",
+      "label": "Gain in literacy (standard deviations)",
+      "format": "number",
+      "value": 0.43,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Central Square Foundation (recommendation page)",
+        "url": "https://www.founderspledge.com/research/central-square-foundation",
+        "quote": "an average improvement of 0.29 standard deviations in numeracy and 0.43 standard deviations in literacy",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "effect_sd",
+      "section": "page",
+      "label": "Average learning gain (standard deviations)",
+      "format": "number",
+      "formula": "(effect_numeracy + effect_literacy) / 2",
+      "expected": 0.36,
+      "explainer": "Our calculation from the page's two figures: the mean of the two subjects, as education analyses usually summarise a gain in both. Founders Pledge's page doesn't combine them."
+    },
+    {
+      "id": "cost_per_student_gbp",
+      "section": "page",
+      "label": "Cost per student (£, upper bound)",
+      "format": "number",
+      "value": 2.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Central Square Foundation (recommendation page)",
+        "url": "https://www.founderspledge.com/research/central-square-foundation",
+        "quote": "Expanding their district level programs is extremely low cost for a structured pedagogy intervention of this quality—less than £2.50 per student.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the page: expanding district programs costs \"less than £2.50 per student\". We take £2.50, the upper bound, so the result is if anything low."
+    },
+    {
+      "id": "sd_per_gbp",
+      "section": "page",
+      "label": "Rise in test scores per pound (standard deviations)",
+      "format": "small",
+      "formula": "effect_sd / cost_per_student_gbp",
+      "expected": 0.144,
+      "explainer": "Our calculation from the page's figures (mean gain over the upper-bound cost); Founders Pledge publishes no per-pound figure."
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "fx",
+      "label": "US dollars per pound (2024 average)",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2024"
+    },
+    {
+      "id": "sd_per_dollar",
+      "section": "fx",
+      "label": "Rise in test scores per dollar (standard deviations)",
+      "format": "small",
+      "formula": "sd_per_gbp / usd_per_gbp"
+    },
+    {
+      "id": "nonrandomised_discount",
+      "section": "fx",
+      "label": "Discount for a non-randomised evaluation",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. The gains come from Education Initiatives' comparison of districts, not a randomised trial; the page gives no comparison group or design. Quasi-experimental education evaluations tend to find larger effects than randomised ones, and randomised trials of structured pedagogy mostly find 0.1 to 0.3 standard deviations, against 0.36 here."
+    },
+    {
+      "id": "csf_share",
+      "section": "fx",
+      "label": "Share of the gain due to Central Square Foundation's spending",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. The £2.50 is what Central Square Foundation spends to expand a district program, but the gain comes from the whole government-run program, and India's national literacy and numeracy mission runs in comparison districts too. If the government spends about as much again (Founders Pledge's Imagine Worldwide model: 1.03 per philanthropic dollar), Central Square Foundation's money is about half the cost, so we credit it with half of the gain, from a quarter to all. With credit by share of resources on, this drops and the government's spending counts as cost instead."
+    },
+    {
+      "id": "sd_per_dollar_attributed",
+      "section": "fx",
+      "label": "Rise in test scores per dollar, credited to Central Square Foundation",
+      "format": "small",
+      "formula": "sd_per_dollar * if($resource_shares, 1, csf_share)"
+    },
+    {
+      "id": "prior_sd",
+      "section": "income",
+      "label": "Founders Pledge's prior for an education program's effect (standard deviations)",
+      "format": "number",
+      "explainer": "Founders Pledge's 2023 education method doesn't take a measured effect at face value: it averages it with a prior of 0.1 standard deviations (the shared Founders Pledge fact).",
+      "formula": "@founders_pledge_2023.prior_sd"
+    },
+    {
+      "id": "prior_weight",
+      "section": "income",
+      "label": "Weight on the prior",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Founders Pledge's rule (its note in the Imagine Worldwide model): \"only a 25% weight on the prior of 0.1 given the adjusted sample size >2000\", and 50% for a national scale-up with government involvement, which this is. 50%, 25% to 75%. The evaluation's design is handled by the separate discount. Our judgment."
+    },
+    {
+      "id": "shrink_factor",
+      "section": "income",
+      "label": "Effect after shrinking towards the prior, as a share of the measured effect",
+      "format": "percent",
+      "formula": "(prior_weight * prior_sd + (1 - prior_weight) * effect_sd * nonrandomised_discount) / effect_sd",
+      "explainer": "The measured gain, discounted for the evaluation's design, averaged with Founders Pledge's prior, as a share of the measured gain."
+    },
+    {
+      "id": "sd_per_dollar_adjusted",
+      "section": "income",
+      "label": "Rise in test scores per dollar, after shrinking (standard deviations)",
+      "format": "small",
+      "formula": "sd_per_dollar_attributed * shrink_factor"
+    },
+    {
+      "id": "salary_increase_per_sd",
+      "section": "income",
+      "label": "Annual salary increase per standard deviation of learning",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.salary_increase_per_sd",
+      "explainer": "Founders Pledge's own figure from its 2023 education report (19.1%), shared with its Imagine Worldwide model. The page's figure stops at test scores; this and the rows below are Founders Pledge's own method for turning test scores into income, applied by us."
+    },
+    {
+      "id": "replicability_adjustment",
+      "section": "income",
+      "label": "Replicability adjustment",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.replicability_adjustment",
+      "explainer": "Founders Pledge's 17.5%: how much of that earnings evidence it expects to hold up, from comparing it with the evidence for deworming."
+    },
+    {
+      "id": "ln_income_gain",
+      "section": "income",
+      "label": "Yearly gain in ln(income) per standard deviation",
+      "format": "small",
+      "formula": "ln(1 + salary_increase_per_sd * replicability_adjustment)"
+    },
+    {
+      "id": "years_till_benefit",
+      "section": "income",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "formula": "@founders_pledge_2023.years_till_income_gain",
+      "explainer": "Founders Pledge's 8 years from primary school to work."
+    },
+    {
+      "id": "benefit_years",
+      "section": "income",
+      "label": "Years the income gain lasts",
+      "format": "number",
+      "formula": "@founders_pledge_2023.income_gain_years",
+      "explainer": "Founders Pledge's 40 working years."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "income",
+      "label": "Household multiplier",
+      "format": "number",
+      "formula": "@founders_pledge_2023.household_multiplier",
+      "explainer": "Founders Pledge counts the gain twice because it is shared with the household."
+    },
+    {
+      "id": "pv_ln_income_per_sd",
+      "section": "income",
+      "label": "Present value of ln(income) gains per standard deviation, per student",
+      "format": "number",
+      "formula": "household_multiplier * (-pv($discount_rate, benefit_years, ln_income_gain, 0, 1)) / (1 + $discount_rate) ^ years_till_benefit",
+      "explainer": "Founders Pledge's formula from its Imagine Worldwide model: the yearly gain paid at the start of each of 40 years, discounted, then discounted again for the 8-year wait. Here at the shared discount rate (Your values); Founders Pledge used 4%, the site's default."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "income",
+      "label": "Increase in ln(income) per dollar",
+      "format": "small",
+      "formula": "sd_per_dollar_adjusted * pv_ln_income_per_sd"
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "income",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "The income gain valued like every income gain on the site: GiveWell's units of value per unit of ln(consumption) (one unit = doubling one person's income for a year)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Technical assistance to governments: mostly people. Our judgment; we haven't seen Central Square Foundation's cost breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "gov_cost_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Government spending on the program per dollar of Central Square Foundation's",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: governments pay the teachers, materials and monitoring of the program Central Square Foundation designs and supports. Reference: Founders Pledge's Imagine Worldwide model puts government spending at about 1.03 per philanthropic dollar. Counts only with credit by share of resources on, when every contributor's spending shares the gain."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gov_cost_per_donor_dollar, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "sd_per_gbp",
+      "unit": "standard deviations of test scores per £"
+    }
+  }
+}

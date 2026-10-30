@@ -1,0 +1,212 @@
+{
+  "id": "taimaka-founders-pledge",
+  "name": "Taimaka (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "taimaka",
+  "owner": "founders-pledge",
+  "summary": "Community treatment of acute malnutrition in Gombe State, Nigeria. Founders Pledge's page states a cost of about $70 per child treated; our bridge values a child treated with GiveWell's Taimaka analysis.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Taimaka (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/taimaka",
+    "published": "2024-09-26",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Taimaka",
+      "url": "https://www.founderspledge.com/research/taimaka",
+      "type": "evaluation"
+    },
+    {
+      "title": "GiveWell, Taimaka malnutrition treatment CEA (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From children treated to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: the page gives a cost per child treated but not what a treatment is worth. We value one child treated by Taimaka as GiveWell's 2024 Taimaka analysis does (deaths averted, later income, its downside and excluded-effect adjustments, before its leverage and funging step): its units of value per dollar times its cost per child."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_child_treated",
+      "section": "page",
+      "label": "Cost per child treated",
+      "format": "usd",
+      "value": {
+        "low": 70,
+        "best": 70,
+        "high": 105
+      },
+      "kind": "estimate",
+      "expected": 70,
+      "source": {
+        "title": "Founders Pledge, Taimaka (recommendation page)",
+        "url": "https://www.founderspledge.com/research/taimaka",
+        "quote": "they can treat a child for around $70",
+        "retrieved": "2026-10-30",
+        "note": "Footnote 7 cites the OptiMA-DRC trial (Cazes et al. 2022, Lancet Global Health), not Taimaka's accounts."
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: Taimaka uses the simplified OptiMA protocol and \"they can treat a child for around $70\". No sheet is published, and the page doesn't say what the cost covers. High end ours: GiveWell's $105 for Taimaka's scale-up."
+    },
+    {
+      "id": "gw_uov_per_dollar",
+      "section": "bridge",
+      "label": "GiveWell: units of value per dollar spent, before leverage and funging",
+      "format": "small",
+      "value": 0.03249032841,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Taimaka malnutrition treatment CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit",
+        "note": "Main CEA, 'Units of value generated per dollar spent, before accounting for leverage/funging' (charityevals model taimaka-malnutrition-treatment-2024, row units_of_value_generated_per_dollar_spent_before_accounting)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's value per dollar of Taimaka's own spending in Gombe (the government's share left out of the denominator), after its downside and excluded-effects adjustments and before its adjustment for other funders."
+    },
+    {
+      "id": "gw_cost_per_child",
+      "section": "bridge",
+      "label": "GiveWell: cost per child treated",
+      "format": "usd",
+      "value": 105.4065076,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Taimaka malnutrition treatment CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit",
+        "note": "Main CEA, 'Cost per child treated for malnutrition' (charityevals model taimaka-malnutrition-treatment-2024, row cost_per_child_treated_for_malnutrition)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's cost per child with severe acute malnutrition for Taimaka's 2025–27 scale-up: its annual budget over the children it expects to treat. Founders Pledge's $70 has no stated scope (its footnote cites the OptiMA-DRC trial, which treats moderate and severe cases together); if it covers cheaper, lower-risk moderate cases, this bridge overstates the result, by up to the 1.5× gap between the two costs."
+    },
+    {
+      "id": "gw_leverage_funging",
+      "section": "bridge",
+      "label": "GiveWell: adjustment for leverage and funging",
+      "format": "percent",
+      "value": -0.09906706939,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Taimaka malnutrition treatment CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit",
+        "note": "'Adjustment for leverage/funging' (charityevals model taimaka-malnutrition-treatment-2024, row adjustment_for_leverage_funging)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's allowance for what the Nigerian government and other funders would otherwise do: about −10%. Applied with credit by share of resources off, as in GiveWell's own model."
+    },
+    {
+      "id": "gw_taimaka_spend_share",
+      "section": "bridge",
+      "label": "GiveWell: Taimaka's share of all spending on the program",
+      "format": "percent",
+      "value": 0.8628711,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Taimaka malnutrition treatment CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit",
+        "note": "Taimaka $1,595,995 a year over total expenditure $1,849,633 (with the domestic government's $253,638) (charityevals model taimaka-malnutrition-treatment-2024)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "With credit by share of resources on, Taimaka's money gets its share of the outcome: 86%; the government's spending gets the rest."
+    },
+    {
+      "id": "uov_per_child",
+      "section": "bridge",
+      "label": "Units of value per child treated",
+      "format": "number",
+      "formula": "gw_uov_per_dollar * gw_cost_per_child * $life_value_multiplier * if($resource_shares, gw_taimaka_spend_share, 1 + gw_leverage_funging)",
+      "explainer": "GiveWell's value of one child treated, after its leverage and funging step (or, with credit by share of resources on, Taimaka's share of all spending). Almost all of it is deaths averted, and GiveWell values the program's later income gains as a ratio of them, so all of it moves with our value-of-life lever (pinned at 1 in Founders Pledge's view)."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar at Founders Pledge's cost",
+      "format": "small",
+      "formula": "uov_per_child / cost_per_child_treated",
+      "explainer": "GiveWell's value of a child treated, over Founders Pledge's cost per child."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_child_treated",
+      "unit": "$ per child treated"
+    }
+  }
+}

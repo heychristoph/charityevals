@@ -1,0 +1,157 @@
+{
+  "id": "pure-earth-founders-pledge",
+  "name": "Pure Earth (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "pure-earth",
+  "owner": "founders-pledge",
+  "summary": "Research, advocacy and cleanup to cut lead poisoning in low- and middle-income countries. Founders Pledge's page states only a multiple of cash transfers, more than 10, which this model takes at face value and turns into income gains through Founders Pledge's own benchmark for GiveDirectly.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Pure Earth (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/pure-earth",
+    "published": "2025-03-12",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Pure Earth",
+      "url": "https://www.founderspledge.com/research/pure-earth",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "to_uov",
+      "title": "From a multiple of cash to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of cash transfers, valued at $164 per WELLBY-equivalent for GiveDirectly; its own weight on income turns that into the income gain it stands for. charityevals' choice: the page gives no outcome measure, and lead's main measured harm is lost IQ and so lost earnings, so the income route fits best (the health route gives about the same at the defaults)."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "gd_multiple",
+      "section": "page",
+      "label": "Cost-effectiveness, multiple of direct cash transfers",
+      "format": "multiple",
+      "value": 10,
+      "kind": "estimate",
+      "expected": 10,
+      "source": {
+        "title": "Founders Pledge, Pure Earth (recommendation page)",
+        "url": "https://www.founderspledge.com/research/pure-earth",
+        "quote": "we estimate that their work is more than 10 times as cost-effective as direct cash transfers",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: \"more than 10 times as cost-effective as direct cash transfers\". No sheet or method is published. We take 10, the floor the page states. The page is from 2025; the benchmark used to read it is from Founders Pledge's 2022 sheets, the latest it has published."
+    },
+    {
+      "id": "wellbys_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Founders Pledge's value units per dollar (WELLBY-equivalents)",
+      "format": "small",
+      "formula": "gd_multiple / @founders_pledge.gd_cost_per_wellby",
+      "explainer": "Founders Pledge's multiple divided by its own GiveDirectly benchmark of 2022, $164 per WELLBY-equivalent: the multiple back in Founders Pledge's value units. The page says \"direct cash transfers\"; we read it against Founders Pledge's GiveDirectly benchmark. Because 10 is a floor, the result is a lower bound."
+    },
+    {
+      "id": "wellbys_per_ln_income",
+      "section": "to_uov",
+      "label": "Founders Pledge's value units per unit of ln(income)",
+      "format": "number",
+      "formula": "@founders_pledge.wellbys_per_doubling / ln(2)",
+      "explainer": "Founders Pledge's 2022 weight for doubling one person's income for a year (1.898 WELLBY-equivalents) per unit of ln(income): a doubling is ln 2 units."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "to_uov",
+      "label": "Increase in ln(income) per dollar",
+      "format": "small",
+      "formula": "wellbys_per_dollar_fp / wellbys_per_ln_income",
+      "explainer": "charityevals' step. Founders Pledge's 'WELLBYs' are its own value unit (3.7 per healthy year, 1.9 per doubled income-year), not life-satisfaction points measured in surveys, so they are turned back into the income gain they stand for, using Founders Pledge's own weight. The benefit counted is mostly higher lifetime income, so the income route fits best."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "The income gain valued like every income gain on the site: GiveWell's units of value per unit of ln(consumption) (one unit = doubling one person's income for a year)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Research and policy work, plus cleanups and training potters, which have more non-staff costs. Our judgment; we haven't seen Pure Earth's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "gd_multiple",
+      "unit": "multiples of GiveDirectly (Founders Pledge)"
+    }
+  }
+}

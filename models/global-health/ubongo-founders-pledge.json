@@ -1,0 +1,292 @@
+{
+  "id": "ubongo-founders-pledge",
+  "name": "Ubongo (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "ubongo",
+  "owner": "founders-pledge",
+  "summary": "Educational cartoons on TV and radio for children across sub-Saharan Africa. Founders Pledge's page gives about £0.25 per child and learning gains of 0.17 standard deviations; we discount for fade-out, as the page says Founders Pledge does, and turn the gains into income with its 2023 education method. Founders Pledge's own figure stops at test scores per pound; the persistence discount, prior and income steps are ours, in both views.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Ubongo (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/ubongo",
+    "published": "2025-03-11",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Ubongo",
+      "url": "https://www.founderspledge.com/research/ubongo",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0.04
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figures",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "fx",
+      "title": "Fade-out, and pounds to dollars",
+      "kind": "ours",
+      "explainer": "charityevals' steps: the page states costs in pounds, and says Founders Pledge discounts for persistence and generalizability without saying by how much."
+    },
+    {
+      "id": "income",
+      "title": "From test scores to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step, using Founders Pledge's own method: its 2023 education report turns a rise in test scores into higher lifetime earnings (19.1% more a year per standard deviation, 17.5% of it kept, after a wait (13 years for these pre-schoolers; Founders Pledge's 8 for primary school) for 40 years, shared with the household). The page's figure stops at test scores; we apply the method as its Imagine Worldwide model does."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "effect_sd",
+      "section": "page",
+      "label": "Learning gain per child (standard deviations)",
+      "format": "number",
+      "value": 0.17,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Ubongo (recommendation page)",
+        "url": "https://www.founderspledge.com/research/ubongo",
+        "quote": "showed statistically significant learning gains, averaging 0.17 standard deviations",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the page: two evaluations of Akili and Me, in Rwanda and Tanzania, \"averaging 0.17 standard deviations\" in counting, number and letter identification, after four weeks of viewing."
+    },
+    {
+      "id": "cost_per_child_gbp",
+      "section": "page",
+      "label": "Cost per child reached (£)",
+      "format": "number",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Ubongo (recommendation page)",
+        "url": "https://www.founderspledge.com/research/ubongo",
+        "quote": "They reach children at an exceptionally low cost—approximately £0.25 per child",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the page: \"approximately £0.25 per child\", per child reached by broadcast (the page says Ubongo reaches 43 million African households), not per child who watched at the trials' dose."
+    },
+    {
+      "id": "sd_per_gbp",
+      "section": "page",
+      "label": "Rise in test scores per pound (standard deviations)",
+      "format": "small",
+      "formula": "effect_sd / cost_per_child_gbp",
+      "expected": 0.68,
+      "explainer": "The page's two figures combined, before the discounts for persistence and generalizability that the page says Founders Pledge applies."
+    },
+    {
+      "id": "persistence_discount",
+      "section": "fx",
+      "label": "Share of the measured gain that persists and generalizes",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, standing in for Founders Pledge's unstated discount (\"Even after applying discounts for uncertainty about effect persistence and generalizability\"). Two reasons. Fade-out: early-childhood test-score gains typically lose roughly half to two-thirds within one to two years before levelling off (Bailey, Duncan, Odgers and Yu 2017, Persistence and fadeout in the impacts of child and adolescent interventions, Journal of Research on Educational Effectiveness). Dose: the gains were measured after four weeks of viewing in a study, while £0.25 is per child reached by broadcast, who watches less. 20% combines the two; 5% to 50%."
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "fx",
+      "label": "US dollars per pound (2024 average)",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2024"
+    },
+    {
+      "id": "sd_per_dollar",
+      "section": "fx",
+      "label": "Lasting rise in test scores per dollar (standard deviations)",
+      "format": "small",
+      "formula": "sd_per_gbp * persistence_discount / usd_per_gbp"
+    },
+    {
+      "id": "prior_sd",
+      "section": "income",
+      "label": "Founders Pledge's prior for an education program's effect (standard deviations)",
+      "format": "number",
+      "formula": "@founders_pledge_2023.prior_sd",
+      "explainer": "Founders Pledge's 2023 education method doesn't take a measured effect at face value: it averages it with a prior of 0.1 standard deviations (the shared Founders Pledge fact)."
+    },
+    {
+      "id": "prior_weight",
+      "section": "income",
+      "label": "Weight on the prior",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Founders Pledge's rule (its note in the Imagine Worldwide model): \"only a 25% weight on the prior of 0.1 given the adjusted sample size >2000\", and 50% for Imagine Worldwide's national scale-up with government involvement. Ubongo's 0.17 comes from two short trials, so we put 50% on the prior (25% to 75%). This corrects for noise in the measured effect; fade-out is the separate row above. Our judgment."
+    },
+    {
+      "id": "shrink_factor",
+      "section": "income",
+      "label": "Effect after shrinking towards the prior, as a share of the measured effect",
+      "format": "percent",
+      "formula": "(prior_weight * prior_sd + (1 - prior_weight) * effect_sd) / effect_sd"
+    },
+    {
+      "id": "sd_per_dollar_adjusted",
+      "section": "income",
+      "label": "Lasting rise in test scores per dollar, after shrinking (standard deviations)",
+      "format": "small",
+      "formula": "sd_per_dollar * shrink_factor"
+    },
+    {
+      "id": "salary_increase_per_sd",
+      "section": "income",
+      "label": "Annual salary increase per standard deviation of learning",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.salary_increase_per_sd",
+      "explainer": "Founders Pledge's own figure from its 2023 education report (19.1%), shared with its Imagine Worldwide model. The page's figure stops at test scores; this and the rows below are Founders Pledge's own method for turning test scores into income, applied by us."
+    },
+    {
+      "id": "replicability_adjustment",
+      "section": "income",
+      "label": "Replicability adjustment",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.replicability_adjustment",
+      "explainer": "Founders Pledge's 17.5%: how much of that earnings evidence it expects to hold up, from comparing it with the evidence for deworming."
+    },
+    {
+      "id": "ln_income_gain",
+      "section": "income",
+      "label": "Yearly gain in ln(income) per standard deviation",
+      "format": "small",
+      "formula": "ln(1 + salary_increase_per_sd * replicability_adjustment)"
+    },
+    {
+      "id": "years_till_benefit",
+      "section": "income",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "explainer": "Changed from Founders Pledge's method for this program: its 8 years is the wait from primary school to work (chosen to match its deworming analysis), but these children are pre-schoolers of about 4 to 5, so they start work about 13 years later. Range: Founders Pledge's 8 to 14. Our judgment.",
+      "value": {
+        "low": 8,
+        "best": 13,
+        "high": 14
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "benefit_years",
+      "section": "income",
+      "label": "Years the income gain lasts",
+      "format": "number",
+      "formula": "@founders_pledge_2023.income_gain_years",
+      "explainer": "Founders Pledge's 40 working years."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "income",
+      "label": "Household multiplier",
+      "format": "number",
+      "formula": "@founders_pledge_2023.household_multiplier",
+      "explainer": "Founders Pledge counts the gain twice because it is shared with the household."
+    },
+    {
+      "id": "pv_ln_income_per_sd",
+      "section": "income",
+      "label": "Present value of ln(income) gains per standard deviation, per student",
+      "format": "number",
+      "formula": "household_multiplier * (-pv($discount_rate, benefit_years, ln_income_gain, 0, 1)) / (1 + $discount_rate) ^ years_till_benefit",
+      "explainer": "Founders Pledge's formula from its Imagine Worldwide model: the yearly gain paid at the start of each of 40 years, discounted, then discounted again for the wait until work (13 years here). At the shared discount rate (Your values); Founders Pledge used 4%."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "income",
+      "label": "Increase in ln(income) per dollar",
+      "format": "small",
+      "formula": "sd_per_dollar_adjusted * pv_ln_income_per_sd"
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "income",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "The income gain valued like every income gain on the site: GiveWell's units of value per unit of ln(consumption) (one unit = doubling one person's income for a year)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Default for media and messaging programs: staff make the content, airtime is bought or donated. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "sd_per_gbp",
+      "unit": "standard deviations of test scores per £ (before discounts)"
+    }
+  }
+}

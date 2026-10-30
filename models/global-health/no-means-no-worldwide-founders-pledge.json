@@ -1,0 +1,321 @@
+{
+  "id": "no-means-no-worldwide-founders-pledge",
+  "name": "No Means No Worldwide (Founders Pledge, 2018)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "no-means-no-worldwide",
+  "owner": "founders-pledge",
+  "summary": "Designs and licenses IMPower, a course that teaches schoolgirls in Kenya and elsewhere to recognise and resist sexual assault. Founders Pledge's 2018 analysis puts it at about $62 per case of sexual assault prevented; our bridge counts the PTSD a case causes, and most of the healthy-years figure's uncertainty is the bridge's.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Women's Empowerment: cause area report (2018), No Means No Worldwide cost-effectiveness analysis",
+    "url": "https://founderspledge.com/research/fp-womens-empowerment",
+    "sheet": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+    "published": "2018-12-01",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Women's Empowerment cause report (2018)",
+      "url": "https://founderspledge.com/research/fp-womens-empowerment",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Women's Empowerment CEAs (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+      "type": "model"
+    },
+    {
+      "title": "Baiocchi et al. (2017), Prevention Science",
+      "url": "https://link.springer.com/article/10.1007/s11121-016-0701-0",
+      "type": "study"
+    },
+    {
+      "title": "No Means No Worldwide",
+      "url": "https://nomeansnoworldwide.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "effect",
+      "title": "Sexual assaults prevented"
+    },
+    {
+      "id": "costs",
+      "title": "Cost per case prevented"
+    },
+    {
+      "id": "bridge",
+      "title": "From cases prevented to healthy years",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: no standard conversion takes a case of sexual violence to the site's scale, so we map it to the nearest standard outcome, healthy years, through the mental illness that often follows (post-traumatic stress, counted with GBD's anxiety weights). Every number here is ours, with a range."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "incidence_reduction",
+      "section": "effect",
+      "label": "Fall in school sexual violence (cases per person-year)",
+      "format": "number",
+      "value": {
+        "low": 0.037,
+        "best": 0.065,
+        "high": 0.1708
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Women's Empowerment cause report CEAs (2018), No Means No Worldwide tab",
+        "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+        "cell": "'No Means No Worldwide'!B3:D3 (best C3 =(0.179-0.111)-(0.143-0.14))",
+        "note": "Baiocchi et al. (2017); Sarnquist et al. (2014); Sinclair et al. (2013)"
+      },
+      "explainer": "From the trials of IMPower, the empowerment and self-defence course NMNW designs, in Nairobi schools: the fall in the yearly rate of sexual assault among girls who took the course, net of the change among those who didn't. Founders Pledge's conservative (B3), best (C3) and optimistic (D3) cases."
+    },
+    {
+      "id": "retention",
+      "section": "effect",
+      "label": "Share of the benefit retained each further year",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Women's Empowerment cause report CEAs (2018), No Means No Worldwide tab",
+        "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+        "cell": "'No Means No Worldwide'!B4:D4",
+        "note": "Senn et al. (2017); private correspondence with NMNW, 20 September 2018"
+      },
+      "explainer": "Founders Pledge's estimate: half the first year's protection is left the next year, half of that the year after, and so on."
+    },
+    {
+      "id": "pv_reduction",
+      "section": "effect",
+      "label": "Cases of sexual violence prevented per girl taught, over all years",
+      "format": "number",
+      "formula": "incidence_reduction / (1 - retention / (1 + $discount_rate))",
+      "expected": 0.13,
+      "explainer": "Founders Pledge's 1/(1 − retention) × the first year's fall: the first year plus every later year's retained share. Founders Pledge doesn't discount; here the later years are discounted at the shared rate (Your values), which the evaluator view pins at 0, so its 0.13 reproduces."
+    },
+    {
+      "id": "unevidenced_adjustment",
+      "section": "effect",
+      "label": "Adjustment for NMNW's activities without evidence yet",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Women's Empowerment cause report CEAs (2018), No Means No Worldwide tab",
+        "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+        "cell": "'No Means No Worldwide'!C6",
+        "note": "Private correspondence with NMNW, 17 August 2018"
+      },
+      "explainer": "Founders Pledge halves the effect because part of NMNW's work (newer curricula, other countries, boys' program) hasn't been evaluated. It applies this in all three cases."
+    },
+    {
+      "id": "indirect_role",
+      "section": "effect",
+      "label": "Adjustment for NMNW's indirect role in delivering the course",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Women's Empowerment cause report CEAs (2018), No Means No Worldwide tab",
+        "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+        "cell": "'No Means No Worldwide'!B7:D7"
+      },
+      "explainer": "NMNW mostly trains and licenses partners who teach the course. Founders Pledge's subjective credit: 1 in its best case, 0.5 to 1.5 in its others."
+    },
+    {
+      "id": "cost_per_girl",
+      "section": "costs",
+      "label": "Cost per girl taught",
+      "format": "usd",
+      "value": {
+        "low": 4,
+        "best": 4,
+        "high": 7
+      },
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Women's Empowerment cause report CEAs (2018), No Means No Worldwide tab",
+        "url": "https://docs.google.com/spreadsheets/d/1kPqBeHN3b7tq9gxho-9M7VGCuO-14CCI1YEsywmy66E/edit#gid=906093345",
+        "cell": "'No Means No Worldwide'!B8:D8",
+        "note": "Private correspondence with NMNW, 28 June and 17 August 2018"
+      },
+      "explainer": "From NMNW: $4 in Founders Pledge's best and optimistic cases, $7 in its conservative one."
+    },
+    {
+      "id": "cost_per_case_prevented",
+      "section": "costs",
+      "label": "Cost per case of sexual assault prevented",
+      "format": "usd",
+      "formula": "cost_per_girl / (pv_reduction * unevidenced_adjustment * indirect_role)",
+      "expected": 61.53846154,
+      "explainer": "Founders Pledge's bottom line: about $62 per case of sexual assault prevented ($9 optimistic, $757 conservative)."
+    },
+    {
+      "id": "cases_per_dollar",
+      "section": "bridge",
+      "label": "Cases of sexual assault prevented per dollar",
+      "format": "small",
+      "formula": "1 / cost_per_case_prevented"
+    },
+    {
+      "id": "ptsd_share",
+      "section": "bridge",
+      "label": "Share of survivors with PTSD a year after a sexual assault",
+      "format": "percent",
+      "value": {
+        "low": 0.32,
+        "best": 0.41,
+        "high": 0.51
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Dworkin, Jaffe, Bedard-Gilligan & Fitzpatrick (2023), PTSD in the year following sexual assault: a meta-analysis of prospective studies, Trauma, Violence, & Abuse 24(2):497–514",
+        "url": "https://doi.org/10.1177/15248380211032213",
+        "note": "41.49% (95% CI 32.36–50.92%) met PTSD criteria 12 months after the assault; 74.58% at one month. 22 samples, 2,106 people, mostly in high-income countries."
+      },
+      "explainer": "How many survivors still have post-traumatic stress disorder a year on: about 41% in a meta-analysis of prospective studies (range: its 95% interval). Most of the studies are from high-income countries, where care is easier to get. Depression often comes with it; we count the illness once. Applied per case prevented as an approximation: the trial counts cases, and a girl assaulted more than once is one survivor, so this may overstate the illness per case a little."
+    },
+    {
+      "id": "disability_weight",
+      "section": "bridge",
+      "label": "Disability weight of the illness that follows",
+      "format": "number",
+      "value": {
+        "low": 0.03,
+        "best": 0.133,
+        "high": 0.396
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Global Burden of Disease Study 2019, disability weights (IHME)",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Anxiety disorders: mild 0.030, moderate 0.133. Major depressive disorder: moderate 0.396."
+      },
+      "explainer": "The Global Burden of Disease has no weight for PTSD itself; it counts it with anxiety disorders. Best guess moderate anxiety (0.133), from mild anxiety (0.030) to moderate depression (0.396), the high end standing in for the depression that often comes with it. Our choice of proxy."
+    },
+    {
+      "id": "illness_years",
+      "section": "bridge",
+      "label": "Years the illness lasts",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 4,
+        "high": 15
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Kessler et al. (1995), Posttraumatic stress disorder in the National Comorbidity Survey, Archives of General Psychiatry 52(12):1048–1060",
+        "url": "https://doi.org/10.1001/archpsyc.1995.03950240066012",
+        "note": "Median time to remission about 3 years with treatment and over 5 years without. Later population studies find longer medians (about 14 years in Chapman et al. 2012, Psychological Medicine)."
+      },
+      "explainer": "Total years ill, counted from the assault. PTSD that lasts a year often lasts several: in a US survey the median time to remission was about three years with treatment and over five without; later population studies find longer. 4 years, 1 to 15; conservative for people still ill a year on. Our judgment."
+    },
+    {
+      "id": "illness_discount",
+      "section": "bridge",
+      "label": "Discount over the years of illness (share of undiscounted)",
+      "format": "percent",
+      "formula": "if($discount_rate, (1 - (1 + $discount_rate) ^ -illness_years) / ($discount_rate * illness_years), 1)",
+      "explainer": "The years of illness spread over time, discounted at the shared rate (Your values), as an average share; 1 at a 0% rate. Founders Pledge's view pins the rate at 0."
+    },
+    {
+      "id": "dalys_per_case",
+      "section": "bridge",
+      "label": "Healthy years lost per case of sexual assault",
+      "format": "number",
+      "formula": "ptsd_share * disability_weight * illness_years * illness_discount",
+      "explainer": "About 0.2 healthy years. Mental illness only: injuries, HIV and other infections, pregnancy, and harm to schooling aren't counted, nor the suffering of survivors without a diagnosable illness, so this is low."
+    },
+    {
+      "id": "dalys_per_dollar_fp",
+      "section": "bridge",
+      "label": "Healthy years (DALYs) per dollar",
+      "format": "small",
+      "formula": "cases_per_dollar * dalys_per_case"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Instructors and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "staff_pay",
+      "label": "Healthy years (DALYs) per donor dollar",
+      "format": "small",
+      "formula": "dalys_per_dollar_fp * donor_cost_share",
+      "explainer": "Healthy years per dollar. With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_dollar",
+    "unit": "daly",
+    "label": "DALYs per dollar",
+    "native": {
+      "row": "cost_per_case_prevented",
+      "unit": "$ per case of sexual assault prevented"
+    }
+  }
+}

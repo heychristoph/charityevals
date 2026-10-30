@@ -1,0 +1,261 @@
+{
+  "id": "lead-exposure-elimination-project-founders-pledge",
+  "name": "Lead Exposure Elimination Project (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "lead-exposure-elimination-project",
+  "owner": "founders-pledge",
+  "summary": "Advocacy for laws against lead in paint in low- and middle-income countries. Founders Pledge's page states a cost per child's lead exposure prevented, $1.66; our bridge turns a prevented exposure into lower blood lead, IQ and earnings with GiveWell's figures.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Lead Exposure Elimination Project (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/lead-exposure-elimination-project-leep",
+    "published": "2023-08-01",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Lead Exposure Elimination Project",
+      "url": "https://www.founderspledge.com/research/lead-exposure-elimination-project-leep",
+      "type": "evaluation"
+    },
+    {
+      "title": "GiveWell, Pure Earth BOTEC (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From a child protected to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: the page doesn't say what a prevented exposure is worth. We assume it lowers a child's blood lead throughout childhood by about 1.5 micrograms per decilitre (our judgment), and value each microgram with GiveWell's lead figures from its Pure Earth analysis: IQ points lost per microgram, earnings per IQ point, shared with the household, plus its allowance for lead's other health effects."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_child_protected",
+      "section": "page",
+      "label": "Cost to prevent one child's lead exposure (in expectation)",
+      "format": "usd",
+      "value": 1.66,
+      "kind": "estimate",
+      "expected": 1.66,
+      "source": {
+        "title": "Founders Pledge, Lead Exposure Elimination Project (recommendation page)",
+        "url": "https://www.founderspledge.com/research/lead-exposure-elimination-project-leep",
+        "quote": "We estimate that it costs $1.66 to prevent one child’s lead exposure (in expectation).",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page (August 2023): \"it costs $1.66 to prevent one child's lead exposure (in expectation)\". The expectation already allows for the chance that a country doesn't regulate or enforce. Founders Pledge publishes no sheet behind it."
+    },
+    {
+      "id": "children_per_dollar",
+      "section": "bridge",
+      "label": "Children protected per dollar",
+      "format": "number",
+      "formula": "1 / cost_per_child_protected"
+    },
+    {
+      "id": "bll_reduction_per_child",
+      "section": "bridge",
+      "label": "Fall in a protected child's blood lead, throughout childhood (µg/dL)",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1.5,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment; the page doesn't say. Reference points: children in low- and middle-income countries average about 4.6 µg/dL (Ericson et al. 2021, Lancet Planetary Health); Ambitious Impact's LEEP model attributes 25% of exposure to paint (about 1.2 µg/dL); GiveWell expects 0.8 to 1.0 µg/dL across a covered population in its Pure Earth analysis. Founders Pledge's unit is a child whose exposure is prevented, a more exposed group than the average child, which argues for the upper part of those figures: 1.5, from 0.5 to 4."
+    },
+    {
+      "id": "iq_points_per_ug",
+      "section": "bridge",
+      "label": "IQ points lost per µg/dL of blood lead throughout childhood",
+      "format": "number",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!G54 (=0.2*75%)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's figure: 0.2 IQ points per µg/dL from the literature, of which GiveWell keeps 75%."
+    },
+    {
+      "id": "earnings_gain_per_iq_point",
+      "section": "bridge",
+      "label": "Yearly earnings gain per IQ point",
+      "format": "percent",
+      "value": 0.0067,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!F56 (=ln(1+0.0067))",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's figure: each IQ point raises yearly earnings by 0.67%."
+    },
+    {
+      "id": "years_to_work",
+      "section": "bridge",
+      "label": "Years from infancy to the start of the earnings gain",
+      "format": "number",
+      "value": 15,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!F58",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "earnings_years",
+      "section": "bridge",
+      "label": "Years the earnings gain lasts",
+      "format": "number",
+      "value": 40,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!F60",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "ln_income_per_iq_point",
+      "section": "bridge",
+      "label": "Present value of ln(income) per IQ point, per person",
+      "format": "small",
+      "formula": "-pv($discount_rate, earnings_years, ln(1 + earnings_gain_per_iq_point) / (1 + $discount_rate) ^ years_to_work, 0, 1)",
+      "explainer": "GiveWell's present value (its F62, 0.0763 at its 4%), rebuilt so it moves with the shared discount rate (Your values): the yearly gain, delayed 15 years, paid at the start of each of 40 years."
+    },
+    {
+      "id": "household_sharing",
+      "section": "bridge",
+      "label": "Multiplier for sharing within the household",
+      "format": "number",
+      "value": 2,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!F64",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell counts the gain twice because it is shared with the household."
+    },
+    {
+      "id": "morbidity_mortality_adjustment",
+      "section": "bridge",
+      "label": "GiveWell: adjustment for lead's health effects beyond IQ",
+      "format": "number",
+      "value": 1.2,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Pure Earth BOTEC (2021)",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "'Pure earth BOTEC (more detailed'!F87",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's +20% for lead's other harms (heart disease, other morbidity and mortality), as in its own Pure Earth model, so the same change counts the same across models."
+    },
+    {
+      "id": "ln_income_per_child",
+      "section": "bridge",
+      "label": "ln(income) gained per child protected",
+      "format": "small",
+      "formula": "bll_reduction_per_child * iq_points_per_ug * ln_income_per_iq_point * household_sharing"
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "children_per_dollar * ln_income_per_child * $uov_per_ln_consumption * morbidity_mortality_adjustment",
+      "explainer": "The income gain valued like every income gain on the site (GiveWell's units of value per unit of ln(consumption)), plus GiveWell's 20% for lead's other health effects."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_child_protected",
+      "unit": "$ per child's lead exposure prevented"
+    }
+  }
+}

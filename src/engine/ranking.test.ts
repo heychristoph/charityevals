@@ -39,13 +39,13 @@ describe("ranking plan", () => {
       "evidence-action-in-line-chlorination-india-2023",
       "evidence-action-syphilis-screening-treatment-in",
     ]);
-    expect(ids("new-incentives")).toEqual(["new-incentives"]);
+    expect(ids("new-incentives")).toEqual(["new-incentives", "new-incentives-founders-pledge"]);
   });
 
   it("counts each program's newest model, hand-built or bulk import (C5)", () => {
     // GiveWell's Jan 2025 Cash for Poverty Relief sheet is newer than the hand-built Nov 2024 model; the
     // Nov 2025 pilot sheets (>6x BOTECs, optionality) cover pilot variations, not the program.
-    expect(ids("givedirectly")).toEqual(["givedirectly-cash-poverty-relief-2024", "givedirectly-hli"]);
+    expect(ids("givedirectly")).toEqual(["givedirectly-cash-poverty-relief-2024", "givedirectly-hli", "givedirectly-founders-pledge"]);
     expect(newestFirst(modelsOf(lib, "givedirectly"))[0].id).toBe("givedirectly-pilots-optionality-2025");
     expect(modelsOf(lib, "givedirectly")[0].id).toBe("givedirectly");
     // The hand-built Sep 2026 SMC model is newer than every bulk SMC sheet.

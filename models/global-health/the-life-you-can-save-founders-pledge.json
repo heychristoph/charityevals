@@ -1,0 +1,200 @@
+{
+  "id": "the-life-you-can-save-founders-pledge",
+  "name": "The Life You Can Save (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "the-life-you-can-save",
+  "owner": "founders-pledge",
+  "summary": "Raises money for effective global poverty charities by promoting effective giving. Founders Pledge's page gives a gross multiplier of about 17 dollars raised per dollar received; our bridge discounts for money that would have been given anyway and values the rest at a multiple of cash transfers.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "The Life You Can Save (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/the-life-you-can-save",
+    "published": "2023-06-08",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, The Life You Can Save",
+      "url": "https://www.founderspledge.com/research/the-life-you-can-save",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From money raised to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: a gross multiplier counts every dollar donors gave through The Life You Can Save. We keep only the share that wouldn't otherwise have gone to similarly effective charities, and value it at a multiple of GiveDirectly's cash transfers (our judgment of the recommended charities' average), with GiveDirectly valued as Founders Pledge values it."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "gross_multiplier",
+      "section": "page",
+      "label": "Dollars raised for high-impact charities per dollar received (gross)",
+      "format": "multiple",
+      "value": 17,
+      "kind": "estimate",
+      "expected": 17,
+      "source": {
+        "title": "Founders Pledge, The Life You Can Save (recommendation page)",
+        "url": "https://www.founderspledge.com/research/the-life-you-can-save",
+        "quote": "We estimate that in 2021 they raised $17 dollars for high-impact charities for every dollar they received.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page; The Life You Can Save reports its 17:1 as a three-year ratio for 2019–2021, and Founders Pledge expects \"a gross multiplier of ~17x over the next few years\". Gross: it doesn't remove money donors would have given anyway."
+    },
+    {
+      "id": "multiplier_change",
+      "section": "bridge",
+      "label": "Gross multiplier in recent years, as a share of Founders Pledge's 17",
+      "format": "percent",
+      "value": {
+        "low": 0.54,
+        "best": 0.59,
+        "high": 1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "The Life You Can Save, 2025 annual report",
+        "url": "https://www.thelifeyoucansave.org/2025-annual-report/",
+        "note": "Three-year leverage ratio 10 (2024 report) and 9.19 (2025 report); 17:1 for 2019–2021.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge expected about 17 to hold \"over the next few years\"; The Life You Can Save's own three-year ratio has since fallen to 10 (2024 report) and 9.19 (2025 report), 59% and 54% of 17. A donation today buys today's ratio, so the result uses 59% (10), with Founders Pledge's own 17 (100%) as the high end. Founders Pledge's figure stays the model's evaluator row."
+    },
+    {
+      "id": "counterfactual_share",
+      "section": "bridge",
+      "label": "Share of the money raised that donors wouldn't otherwise have given as effectively",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Some of the money would have gone to the same or similar charities anyway: The Life You Can Save's 2021 money moved was $22.7 million, $18.5 million without large outlier gifts, and included matching-campaign money from large donors who give effectively already; it calls its own leverage ratio a gross figure (2021 annual report, https://www.thelifeyoucansave.org/2021-annual-report/). Effective-giving organisations' counterfactual estimates vary widely (Rethink Priorities' review of their methods). 40%, from 20% to 70%."
+    },
+    {
+      "id": "recipient_multiple",
+      "section": "bridge",
+      "label": "Value of a dollar given to the recommended charities, multiple of cash transfers",
+      "format": "multiple",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as a multiple of Founders Pledge's GiveDirectly benchmark (about 1.6 years of healthy life per $1,000; the site's GiveWell GiveDirectly model is 4.4). The recommended charities range from GiveDirectly to GiveWell's top charities (AMF and seasonal malaria chemoprevention are about 15 times Founders Pledge's benchmark on this site), with some climate and water charities that aren't valued here. 5, from 2 to 10."
+    },
+    {
+      "id": "gd_wellbys_per_dollar",
+      "section": "bridge",
+      "label": "GiveDirectly's value per dollar, in Founders Pledge's value units",
+      "format": "small",
+      "formula": "1 / @founders_pledge.gd_cost_per_wellby",
+      "explainer": "Founders Pledge's benchmark: $164 per WELLBY-equivalent for GiveDirectly."
+    },
+    {
+      "id": "wellbys_per_ln_income",
+      "section": "bridge",
+      "label": "Founders Pledge's value units per unit of ln(income)",
+      "format": "number",
+      "formula": "@founders_pledge.wellbys_per_doubling / ln(2)"
+    },
+    {
+      "id": "gd_uov_per_dollar",
+      "section": "bridge",
+      "label": "GiveDirectly's units of value per dollar",
+      "format": "small",
+      "formula": "gd_wellbys_per_dollar / wellbys_per_ln_income * $uov_per_ln_consumption",
+      "explainer": "Cash transfers' value per dollar, back in the income gain it stands for and valued with the site's weight on income: about 0.0032, close to GiveWell's 0.0034."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "gross_multiplier * multiplier_change * counterfactual_share * recipient_multiple * gd_uov_per_dollar"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for fundraising and outreach organisations: mostly people. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Marketing and fundraising staff could typically earn more in commercial roles. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gross_multiplier * multiplier_change * counterfactual_share, 0))",
+      "explainer": "With credit by share of resources on, the donors' own gifts are contributors too: the outcome is shared with them and with staff's forgone pay. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "gross_multiplier",
+      "unit": "dollars raised per dollar (gross)"
+    }
+  }
+}

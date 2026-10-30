@@ -1,0 +1,229 @@
+{
+  "id": "raising-the-village-founders-pledge",
+  "name": "Raising the Village (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "raising-the-village",
+  "owner": "founders-pledge",
+  "summary": "Two-year livelihoods program for whole clusters of ultra-poor villages in Uganda (seeds, farming training, savings groups). Founders Pledge's page gives about $30 per person reached and consumption 10% higher (40% in the lean season); we count the rise for GiveWell's three years.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Raising the Village (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/raising-the-village",
+    "published": "2025-05-07",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Raising the Village",
+      "url": "https://www.founderspledge.com/research/raising-the-village",
+      "type": "evaluation"
+    },
+    {
+      "title": "GiveWell, Raising the Village CEA (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figures",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From consumption gains to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: the page gives the cost per person and the trial's consumption gain, not how long the gain lasts. We count it for three years (GiveWell's duration in its Raising the Village analysis), discounted, and value it like every income gain on the site."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_person",
+      "section": "page",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "value": {
+        "low": 25,
+        "best": 30,
+        "high": 35
+      },
+      "kind": "estimate",
+      "expected": 30,
+      "source": {
+        "title": "Founders Pledge, Raising the Village (recommendation page)",
+        "url": "https://www.founderspledge.com/research/raising-the-village",
+        "quote": "costing only about $30 per person reached",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: \"costing only about $30 per person reached\". Range ours (±$5): the page says \"about\". GiveWell's own cost, $145.92 per household of five, is $29 a person."
+    },
+    {
+      "id": "consumption_gain",
+      "section": "page",
+      "label": "Rise in consumption outside the lean season",
+      "format": "percent",
+      "value": {
+        "low": 0.07,
+        "best": 0.1,
+        "high": 0.12
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Raising the Village (recommendation page)",
+        "url": "https://www.founderspledge.com/research/raising-the-village",
+        "quote": "monthly income increases by 25% and consumption by 10% for all households",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the early results of a randomized trial that Founders Pledge cites: \"monthly income increases by 25% and consumption by 10% for all households\". GiveWell's sheet for the same trial shows the 10% is the rise outside the lean season ($59 on $583 a month) and the 40% below is the lean-season rise. Range ours: 7% (GiveWell's 30% discount for unpublished single-study results) to 12%. Consumption, not income, is what the site values."
+    },
+    {
+      "id": "lean_gain",
+      "section": "page",
+      "label": "Rise in consumption in the lean season",
+      "format": "percent",
+      "value": {
+        "low": 0.28,
+        "best": 0.4,
+        "high": 0.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Raising the Village (recommendation page)",
+        "url": "https://www.founderspledge.com/research/raising-the-village",
+        "quote": "Follow-up surveys by independent evaluators found even more impressive consumption gains of 40% during the five months leading up to crop harvest",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "From the page: later surveys found consumption 40% higher in the five months before harvest, when food is scarce. Low end ours (30% less, as above)."
+    },
+    {
+      "id": "lean_months",
+      "section": "page",
+      "label": "Months of lean season a year",
+      "format": "number",
+      "value": 5,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Raising the Village (recommendation page)",
+        "url": "https://www.founderspledge.com/research/raising-the-village",
+        "quote": "Follow-up surveys by independent evaluators found even more impressive consumption gains of 40% during the five months leading up to crop harvest",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "ln_consumption_gain",
+      "section": "bridge",
+      "label": "Yearly gain in ln(consumption) per person",
+      "format": "small",
+      "formula": "(1 - lean_months / 12) * ln(1 + consumption_gain) + lean_months / 12 * ln(1 + lean_gain)",
+      "explainer": "The yearly gain in ln(consumption), averaged over the months: 7 ordinary months at +10%, 5 lean months at +40%, as GiveWell averages them."
+    },
+    {
+      "id": "effect_years",
+      "section": "bridge",
+      "label": "Years the consumption gain lasts",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, Raising the Village CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1nZrzj49SJ21DOj5gH1WJlF29WsfcVZbR0Q5YktyjvT4/edit",
+        "cell": "'Direct delivery BOTEC'!B50",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's best guess, 3 years, for how long the program's effects last. The page doesn't say. The range is our judgment: one year (only the trial's follow-up) to six (twice GiveWell's)."
+    },
+    {
+      "id": "pv_ln_consumption_per_person",
+      "section": "bridge",
+      "label": "Present value of ln(consumption) gains per person",
+      "format": "small",
+      "formula": "-pv($discount_rate, effect_years, ln_consumption_gain, 0, 1)",
+      "explainer": "The yearly gain, paid at the start of each year, discounted at the shared rate (Your values); about 4% above GiveWell's end-of-year convention."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "pv_ln_consumption_per_person / cost_per_person * $uov_per_ln_consumption",
+      "explainer": "GiveWell's units of value per unit of ln(consumption), the site's weight on income. GiveWell also adjusts for internal (−30%) and external (−20%) validity, co-benefits (+30%) and spillovers (+20%), together ×0.87, and adds asset returns after the program (about +6%); we apply none of them, which moves the result by under 10% in all."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_person",
+      "unit": "$ per person reached"
+    }
+  }
+}
