@@ -18,7 +18,8 @@ export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e6, 12, 52, 365,
 const MIN_EXPLAINER = 60;
 const STALE_MONTHS = 18;
 
-function literals(n: Node | undefined, out: number[] = []): number[] {
+/** Every numeric constant in a formula, in order (shared with src/engine/invariants.ts INV-4). */
+export function literals(n: Node | undefined, out: number[] = []): number[] {
   if (!n) return out;
   if (n.type === "num") out.push(n.value);
   else if (n.type === "neg") literals(n.arg, out);
