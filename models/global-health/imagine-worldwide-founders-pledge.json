@@ -115,6 +115,99 @@
       "expected": 14.90741222
     },
     {
+      "id": "students_year_1",
+      "section": "costs",
+      "label": "Students served in ramp-up year 1",
+      "format": "integer",
+      "value": 344618.9,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!B41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "students_year_2",
+      "section": "costs",
+      "label": "Students served in ramp-up year 2",
+      "format": "integer",
+      "value": 861547.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!C41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "students_year_3",
+      "section": "costs",
+      "label": "Students served in ramp-up year 3",
+      "format": "integer",
+      "value": 1550785.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!D41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "students_year_4",
+      "section": "costs",
+      "label": "Students served in ramp-up year 4",
+      "format": "integer",
+      "value": 2412332.3,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!E41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "students_year_5",
+      "section": "costs",
+      "label": "Students served in ramp-up year 5",
+      "format": "integer",
+      "value": 3101570.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!F41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "students_year_6",
+      "section": "costs",
+      "label": "Students served in ramp-up year 6",
+      "format": "integer",
+      "value": 3446189,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Imagine Worldwide CEA (Imagine Worldwide's projections)",
+        "url": "https://docs.google.com/spreadsheets/d/1V-Dk9VeaRaSgbak9C-Ube1paUALtPASByZ_DdiMUX78/edit#gid=262547608",
+        "cell": "Budget!G41"
+      },
+      "explainer": "Imagine Worldwide's projection of pupils using the tablets that year, as Founders Pledge's budget tab has it (cumulative students). The six years sum to the ramp-up's student-years."
+    },
+    {
+      "id": "rampup_discount",
+      "section": "costs",
+      "label": "Discount factor for the ramp-up years (program years 1–6)",
+      "format": "percent",
+      "formula": "(students_year_1 + students_year_2 / (1 + $discount_rate) ^ 1 + students_year_3 / (1 + $discount_rate) ^ 2 + students_year_4 / (1 + $discount_rate) ^ 3 + students_year_5 / (1 + $discount_rate) ^ 4 + students_year_6 / (1 + $discount_rate) ^ 5) / (students_year_1 + students_year_2 + students_year_3 + students_year_4 + students_year_5 + students_year_6)",
+      "published": 1,
+      "explainer": "Changed for consistency. Founders Pledge adds up the ramp-up's student-years without discounting (its own number here is 100%). On this site every year after the donation counts 1/(1 + rate)^t, so each year's pupils are discounted to the start of the program, weighted by how many there are: about 87% at 4%, because most pupils come in the later years. The evaluator view keeps Founders Pledge's 100%."
+    },
+    {
       "id": "years_after_takeover",
       "section": "government",
       "label": "Years of effective operation after government takeover",
@@ -199,7 +292,7 @@
       "format": "percent",
       "formula": "-pv($discount_rate, years_after_takeover, 1, 0, 1) / years_after_takeover / (1 + $discount_rate) ^ rampup_years",
       "published": 1,
-      "explainer": "Changed for consistency. Founders Pledge doesn't discount the government phase (CEA!B9: \"We do not do any time discounting because both costs and benefits are in the future\"), so its own number here is 100%. On this site every model discounts future good at the shared rate: the donor's money is spent in the first six years, while the government phase's learning (and the government's spending, which Founders Pledge subtracts at its value elsewhere) comes in years 7 to 16. So both are discounted to the start of the program: the average of (1 + rate)^−t for t = 6 to 15, about 67% at 4%. The ramp-up years themselves stay undiscounted, as Founders Pledge has them, because their costs and benefits fall in the same years. The evaluator view keeps Founders Pledge's 100%."
+      "explainer": "Changed for consistency. Founders Pledge doesn't discount the government phase (CEA!B9: \"We do not do any time discounting because both costs and benefits are in the future\"), so its own number here is 100%. On this site every model discounts future good at the shared rate: the donor's money is spent in the first six years, while the government phase's learning (and the government's spending, which Founders Pledge subtracts at its value elsewhere) comes in years 7 to 16. So both are discounted to the start of the program: the average of (1 + rate)^−t for t = 6 to 15, about 67% at 4%. The ramp-up years are discounted year by year in their own row (rampup_discount). The evaluator view keeps Founders Pledge's 100%."
     },
     {
       "id": "effect_sd",
@@ -381,7 +474,7 @@
       "section": "value",
       "label": "Value of learning during the ramp-up",
       "format": "integer",
-      "formula": "wellbys_per_student * student_years_rampup",
+      "formula": "wellbys_per_student * student_years_rampup * rampup_discount",
       "expected": 6821231.961
     },
     {
