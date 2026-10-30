@@ -48,6 +48,11 @@ function pv(rate: number, periods: number, payment: number, future = 0, type = 0
   return -(payment * (1 + rate * type) * (g - 1) / rate + future) / g;
 }
 
+/** Spreadsheet NPV: the first value one period from now, each later one a period later. */
+function npv(rate: number, ...values: number[]): number {
+  return values.reduce((s, x, i) => s + x / (1 + rate) ** (i + 1), 0);
+}
+
 export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: number[]) => number; doc: string }> = {
   ln: { arity: [1, 1], fn: Math.log, doc: "natural log" },
   log10: { arity: [1, 1], fn: Math.log10, doc: "base-10 log" },
@@ -70,6 +75,7 @@ export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: num
   roundup: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.ceil), doc: "round away from zero" },
   rounddown: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.trunc), doc: "round towards zero" },
   pv: { arity: [3, 5], fn: pv, doc: "pv(rate, periods, payment, future, type): spreadsheet PV, payments as negatives" },
+  npv: { arity: [2, 200], fn: npv, doc: "npv(rate, x1, x2, ...): spreadsheet NPV, x_i discounted by (1+rate)^i" },
 };
 
 export class ExprError extends Error {}

@@ -50,6 +50,23 @@ def num(v):
     return None
 
 
+def has_error(node):
+    """Whether a parsed formula contains an error literal such as #REF!."""
+    if not isinstance(node, tuple) or not node: return False
+    if node[0] == "err": return True
+    return any(has_error(x) for x in node[1:] if isinstance(x, tuple)) or \
+        any(has_error(y) for x in node[1:] if isinstance(x, list) for y in x)
+
+
+def link_number(raw):
+    """HYPERLINK(url, "0.20"): a number typed as a link's label, which the spreadsheet does arithmetic with.
+    Returns (url, number), or None."""
+    if not isinstance(raw, str): return None
+    m = re.fullmatch(r'=\s*HYPERLINK\(\s*"([^"]*)"\s*,\s*"\s*\$?(-?(?:\d{1,3}(?:,\d{3})+|\d*)(?:\.\d+)?(?:[eE]-?\d+)?)\s*"\s*\)\s*', raw, re.I)
+    if not m or not re.search(r"\d", m.group(2)): return None
+    return m.group(1), float(m.group(2).replace(",", ""))
+
+
 def without_styles(path):
     """A copy of the workbook without cell styles, filters, conditional formats and validations. Some
     Google exports contain ones openpyxl refuses to load; none of them affect values or formulas."""
@@ -248,6 +265,10 @@ class Converter:
         if node[0] == "range" and ":" not in node[2]: return self.b.val(node[1], node[2])
         low = self.lower(node)
         if low[0] == "num": return low[1]
+        if low[0] in ("bin", "neg", "fn"):
+            # A key computed from cells, like A3 + 2024 for a year: its value as the sheet has it.
+            try: return ev(low, self)
+            except (ZeroDivisionError, OverflowError, ValueError, TypeError): pass
         raise Unsupported("lookup key isn't fixed")
 
     def lookup(self, name, args):
@@ -262,6 +283,44 @@ class Converter:
             for i, (c, r) in enumerate(cells):
                 if norm(self.b.val(sh, f"{get_column_letter(c)}{r}")) == norm(key): return ("num", float(i + 1))
             raise Unsupported("MATCH finds nothing")
+        if name in ("VLOOKUP", "HLOOKUP", "XLOOKUP"):
+            # With a fixed key: the cell it returns, keeping the dependency. VLOOKUP/HLOOKUP without
+            # FALSE as the last argument match like the spreadsheet on sorted keys (the last key <= the key).
+            key = self.static(args[0]); norm = lambda v: v.strip().lower() if isinstance(v, str) else num(v)
+            if name == "XLOOKUP":
+                if len(args) > 4 and not (args[4][0] == "num" and args[4][1] == 0): raise Unsupported("XLOOKUP that isn't exact")
+                if args[1][0] != "range" or args[2][0] != "range": raise Unsupported("XLOOKUP over an expression")
+                ksh = args[1][1]; kc1, kr1, kc2, kr2 = self.grid(ksh, args[1][2])
+                rsh = args[2][1]; rc1, rr1, rc2, rr2 = self.grid(rsh, args[2][2])
+                keys = [(c, r) for r in range(kr1, kr2 + 1) for c in range(kc1, kc2 + 1)]
+                for i, (c, r) in enumerate(keys):
+                    if norm(self.b.val(ksh, f"{get_column_letter(c)}{r}")) == norm(key):
+                        if kc1 == kc2 and rc1 == rc2: return ("cell", rsh, f"{get_column_letter(rc1)}{rr1 + i}")
+                        if kr1 == kr2 and rr1 == rr2: return ("cell", rsh, f"{get_column_letter(rc1 + i)}{rr1}")
+                        raise Unsupported("XLOOKUP returning several cells")
+                raise Unsupported("XLOOKUP finds nothing")
+            if args[1][0] != "range": raise Unsupported(f"{name} over an expression")
+            sh = args[1][1]; c1, r1, c2, r2 = self.grid(sh, args[1][2])
+            if args[2][0] != "num": raise Unsupported(f"{name} index isn't fixed")
+            k = int(args[2][1])
+            exact = len(args) > 3 and args[3][0] == "num" and args[3][1] == 0
+            vertical = name == "VLOOKUP"
+            n = (r2 - r1 + 1) if vertical else (c2 - c1 + 1)
+            at = lambda i: (get_column_letter(c1), r1 + i) if vertical else (get_column_letter(c1 + i), r1)
+            hit = None
+            for i in range(n):
+                col, row = at(i); v = norm(self.b.val(sh, f"{col}{row}"))
+                if exact:
+                    if v == norm(key): hit = i; break
+                elif isinstance(v, float) and isinstance(norm(key), float):
+                    if v <= norm(key): hit = i
+                    else: break
+            if hit is None: raise Unsupported(f"{name} finds nothing")
+            if vertical:
+                if c1 + k - 1 > c2: raise Unsupported(f"{name} index outside its range")
+                return ("cell", sh, f"{get_column_letter(c1 + k - 1)}{r1 + hit}")
+            if r1 + k - 1 > r2: raise Unsupported(f"{name} index outside its range")
+            return ("cell", sh, f"{get_column_letter(c1 + hit)}{r1 + k - 1}")
         if name == "FILTER":
             # FILTER(values, keys1 = k1, keys2 = k2, ...) used as a lookup: exactly one row may match.
             if args[0][0] != "range": raise Unsupported("FILTER over an expression")
@@ -297,6 +356,8 @@ class Converter:
     def range_cells(self, sh, rng):
         if ":" not in rng: return [(sh, rng)]
         c1, r1, c2, r2 = range_boundaries(rng)
+        if c1 is None and r1 is not None:  # whole rows (e.g. NPV(rate, 119:119)): up to the last used column
+            c1, c2 = 1, self.b.F[sh].max_column
         if None in (c1, r1, c2, r2): raise Unsupported("whole-column range")
         if (c2 - c1 + 1) * (r2 - r1 + 1) > 400: raise Unsupported("range too large")
         return [(sh, f"{get_column_letter(c)}{r}") for r in range(r1, r2 + 1) for c in range(c1, c2 + 1)]
@@ -313,6 +374,11 @@ class Converter:
         raw = self.b.raw(sh, coord); v = num(self.b.val(sh, coord))
         cellname = f"{sh}!{coord}"
         note = self.b.note_right(sh, r, col)
+        link = link_number(raw)
+        if link and v is None:
+            # A number typed as a link's label (HYPERLINK(url, "0.20")): the spreadsheet does arithmetic with it.
+            raw = v = link[1]
+            note = f"Source linked in the sheet: {link[0]}" + (f"\n\n{note}" if note else "")
         if isinstance(raw, str) and raw.startswith("="):
             raw = unwrap_google(raw)
             try:
@@ -382,6 +448,7 @@ class Converter:
                     s2, rng = parse_ref(v, sh)
                     if not re.fullmatch(r"[A-Z]{1,3}\d+(:[A-Z]{1,3}\d+)?|[A-Z]{1,3}:[A-Z]{1,3}|\d+:\d+", rng): raise Unsupported(f"reference {v}")
                     return ("range", s2, rng)
+                if t.subtype == Token.ERROR: return ("err", t.value)
                 raise Unsupported(f"{t.subtype.lower()} operand")
             raise Unsupported(f"token {t.value}")
         def expr(minp):
@@ -424,9 +491,28 @@ class Converter:
         k = node[0]
         if k == "num" or k == "cell": return node
         if k in ("str", "empty"): raise Unsupported("text in arithmetic")
+        if k == "err": raise Unsupported(f"error {node[1]}")
         if k == "range": return self.lower(self.scalar(node))
         if k == "neg": return ("neg", self.lower(node[1]))
-        if k == "bin": return ("bin", node[1], self.lower(node[2]), self.lower(node[3]))
+        if k == "bin":
+            # A number compared with text, as in AIM's template IF(B68="ongoing", …, …) where B68 holds a number of
+            # years: never equal, whatever number the cell holds. Only when the cell holds a number in the sheet.
+            if node[1] in ("=", "<>"):
+                for a, b in ((node[2], node[3]), (node[3], node[2])):
+                    if a[0] == "str" and b[0] in ("cell", "range"):
+                        c = self.scalar(b)
+                        if num(self.b.val(c[1], c[2])) is not None and not isinstance(self.b.val(c[1], c[2]), bool):
+                            return ("num", 0.0 if node[1] == "=" else 1.0)
+            # A number ordered against a cell holding text, as in AIM's template IF(F$207<=$B$148, …) where B148 is
+            # "ongoing": spreadsheets sort every number before every text, so the answer doesn't depend on the number.
+            if node[1] in ("<", "<=", ">", ">="):
+                for a, text_right in ((node[3], True), (node[2], False)):
+                    if a[0] in ("cell", "range"):
+                        c = self.scalar(a); tv = self.b.val(c[1], c[2])
+                        if isinstance(tv, str) and tv.strip():
+                            less = node[1] in ("<", "<=")
+                            return ("num", 1.0 if less == text_right else 0.0)
+            return ("bin", node[1], self.lower(node[2]), self.lower(node[3]))
         name, args = node[1], node[2]
         if name in LIST_FNS:
             flat = [self.lower(x) for a in args for x in self.items(a)]
@@ -462,10 +548,31 @@ class Converter:
                     terms.append(("bin", "*", ("cell", *vc), ("cell", *wc))); weights.append(("cell", *wc))
             if not terms: raise Unsupported("AVERAGE.WEIGHTED of nothing")
             return ("bin", "/", ("fn", "sum", terms), ("fn", "sum", weights))
+        if name == "NPV":
+            # NPV(rate, values...): like the spreadsheet, empty and text cells don't count as periods.
+            flat = [self.lower(x) for a in args[1:] for x in self.items(a)]
+            if not flat: raise Unsupported("NPV of nothing")
+            return ("fn", "npv", [self.lower(self.scalar(args[0])), *flat])
+        if name == "ISNUMBER" and len(args) == 1 and args[0][0] == "range":
+            # ISNUMBER(cell) guarding against a text placeholder, as in AIM's year rows (=IF(…, B37+1, "-")):
+            # resolved from what the cell holds in the sheet, like a number compared with text above.
+            c = self.scalar(args[0]); v = self.b.val(c[1], c[2])
+            return ("num", 1.0 if num(v) is not None and not isinstance(v, bool) else 0.0)
+        if name == "LOG":
+            # LOG(x, base), base 10 when left out.
+            if len(args) == 1: return ("fn", "log10", [self.lower(self.scalar(args[0]))])
+            if len(args) == 2:
+                return ("bin", "/", ("fn", "ln", [self.lower(self.scalar(args[0]))]), ("fn", "ln", [self.lower(self.scalar(args[1]))]))
         if name == "POWER" and len(args) == 2: return ("bin", "^", self.lower(args[0]), self.lower(args[1]))
         if name == "IFERROR" and len(args) == 1: args = [args[0], ("num", 0.0)]
+        if name == "IFERROR" and has_error(args[0]):
+            # IFERROR around a formula with an error literal (a deleted reference, #REF!): always the fallback.
+            return self.lower(args[1] if args[1][0] != "empty" else ("num", 0.0))
         if name == "IF" and len(args) == 2: args = [*args, ("num", 0.0)]
-        if name in ("MATCH", "INDEX", "FILTER"): return self.lookup(name, args)
+        if name in ("IF", "IFERROR"):
+            # An omitted branch, as in IF(x > 5, 0, ): the spreadsheet returns 0 (FALSE) there.
+            args = [("num", 0.0) if a[0] == "empty" else a for a in args]
+        if name in ("MATCH", "INDEX", "FILTER", "VLOOKUP", "HLOOKUP", "XLOOKUP"): return self.lookup(name, args)
         if name in SIMPLE: return ("fn", SIMPLE[name], [self.lower(self.scalar(a)) for a in args])
         raise Unsupported(f"{name}()")
 
@@ -476,7 +583,20 @@ class Converter:
             i = self.cell_ref(n[1], n[2])
             return i if i else "0"
         if k == "neg": return f"-{self.render(n[1], 3)}"
-        if k == "fn": return f"{n[1]}({', '.join(self.render(a, 0) for a in n[2])})"
+        if k == "fn" and len(n[2]) > 99 and n[1] in ("sum", "product", "min", "max", "and", "or", "avg"):
+            # The engine takes at most 99 arguments: nest the long ones in groups (a mean becomes sum / count).
+            f = "sum" if n[1] == "avg" else n[1]
+            parts = [(("fn", f, n[2][i:i + 99])) for i in range(0, len(n[2]), 99)]
+            whole = self.render(("fn", f, parts), 0)
+            return f"({whole} / {len(n[2])})" if n[1] == "avg" else whole
+        if k == "fn":
+            f, a = n[1], n[2]
+            # The engine takes at most 99 arguments: longer lists (a running SUM($B3:CW3)) nest in groups of 99.
+            if len(a) > 99 and f in ("sum", "min", "max", "product", "and", "or"):
+                return self.render(("fn", f, [("fn", f, a[i:i + 99]) for i in range(0, len(a), 99)]), parent)
+            if len(a) > 99 and f == "avg":
+                return self.render(("bin", "/", ("fn", "sum", a), ("num", float(len(a)))), parent)
+            return f"{f}({', '.join(self.render(x, 0) for x in a)})"
         op = n[1]; pr = {"=": 0, "<>": 0, "<": 0, ">": 0, "<=": 0, ">=": 0, "+": 1, "-": 1, "*": 2, "/": 2, "^": 4}[op]
         l = self.render(n[2], pr); r = self.render(n[3], pr + (0 if op == "^" else 1))
         s = f"{l} {op} {r}"
@@ -484,6 +604,9 @@ class Converter:
 
     def value_of(self, sh, c):
         v = num(self.b.val(sh, c))
+        if v is None:
+            link = link_number(self.b.raw(sh, c))
+            if link: v = link[1]
         return 0.0 if v is None else v
 
 
@@ -514,6 +637,7 @@ def ev(n, cv):
             d = a[1] if len(a) > 1 else 0; k10 = 10 ** d; x = abs(a[0]) * k10
             g = {"round": lambda y: math.floor(y + 0.5), "roundup": math.ceil, "rounddown": math.trunc}[f]
             return math.copysign(g(float(f"{x:.15g}")) / k10, a[0])
+        if f == "npv": return sum(x / (1 + a[0]) ** (i + 1) for i, x in enumerate(a[1:]))
         if f == "pv":
             rate, per, pmt = a[:3]; fv = a[3] if len(a) > 3 else 0; typ = a[4] if len(a) > 4 else 0
             if rate == 0: return -(pmt * per + fv)
