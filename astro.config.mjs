@@ -26,7 +26,7 @@ export default defineConfig({
     },
     sitemap({
       // The 404 page, and the history pages (noindex: tables rebuilt from git, little to search for).
-      filter: (page) => !/\/404\/?$/.test(page) && !/\/history\/?$/.test(page),
+      filter: (page) => !/\/(404|assumptions)\/?$/.test(page) && !/\/history\/?$/.test(page),
       serialize: (item) => {
         const date = lastmod(item.url);
         return date ? { ...item, lastmod: date } : item;

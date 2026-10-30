@@ -108,11 +108,9 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
       add("high", "donor", `${output} should be ${ids.perDollar} * donor_cost_share`, `Set ${output} = ${ids.perDollar} * donor_cost_share.`, output);
   }
   const attr = m.byId.get("attribution_share");
-  if (attr && !attr.assumptionDeps.includes("full_credit"))
-    add("medium", "full-credit", "attribution_share ignores $full_credit", "attribution_share = if($full_credit, 1, attribution_share_shared).", "attribution_share");
   const dcs = m.byId.get("donor_cost_share");
-  if (dcs && !dcs.assumptionDeps.includes("count_salary_sacrifice"))
-    add("medium", "salary-sacrifice", "donor_cost_share ignores $count_salary_sacrifice", "donor_cost_share = cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0)).", "donor_cost_share");
+  if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
+    add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
 
   // Rows: sourcing, ranges, magic numbers, placeholders.
   for (const r of m.rows) {

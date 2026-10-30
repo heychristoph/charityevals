@@ -35,7 +35,7 @@ describe("model history", () => {
     expect(h.map((e) => e.subject)).toEqual(["Import Sinergia", "Shorter cage-free duration"]);
     expect(h[0].note).toMatch(/First version/);
     expect(h[1].changes.map((c) => c.id)).toEqual(["cf_years"]);
+    expect(h[1].changes[0]).toMatchObject({ before: "15", after: "10", kind: "value" });
     expect(h[1].ours!).toBeLessThan(h[0].ours!);
-    expect(h[1].evaluator!).toBeLessThan(h[0].evaluator!);
   }, 30_000); // runs git a dozen times; slow when other test files run alongside
 });

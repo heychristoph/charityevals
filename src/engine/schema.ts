@@ -37,6 +37,12 @@ const rowShape = {
   label: z.string(),
   /** Shared assumptions: the jargon name economists use, shown once beside the plain label. */
   technical: z.string().optional(),
+  /** Shared assumptions only: show the value times `factor`, in `format`, without changing what the
+   * models read. Lets a multiplier on an evaluator's weights read in the site's own terms. */
+  shown_as: z.object({ factor: z.number().positive(), format: Format.optional() }).strict().optional(),
+  /** Shared assumptions only: a number taken from evidence rather than a judgment call. Listed with
+   * its source and range on the assumptions page, but not offered as a slider. */
+  fixed: z.boolean().optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -124,6 +130,49 @@ export const Charity = z
     donate_via: z.string().optional(),
     summary: z.string().optional(),
     resources: z.array(Resource).default([]),
+    /** A charity that runs several programs an evaluator models separately (src/engine/ranking.ts).
+     * Each evaluator's newest model of each program counts on the rankings, combined by `weight`;
+     * a model that matches no program doesn't count. Without this, all of an evaluator's models are
+     * one program. */
+    programs: z
+      .array(
+        z
+          .object({
+            id: z.string(),
+            label: z.string(),
+            /** Regular expression over model ids, tried in order: a model belongs to the first program it matches. */
+            models: z.string(),
+            /** The program's share of the charity's funding, in any unit (e.g. dollars granted). Used only
+             * when every program has one; otherwise the evaluator's figure is the programs' median. 0: the
+             * program got no money in the window, so it doesn't count. */
+            weight: z.number().nonnegative().optional(),
+            /** URL and a one-line note on how the weight was reached. */
+            weight_source: z.string().optional(),
+          })
+          .strict(),
+      )
+      .optional(),
+    /** Money per location for a model with location variants (src/engine/ranking.ts): its figure is the
+     * funding-weighted mean of these entries instead of the median location. An entry can cover several
+     * locations when the split between them isn't published (they count as their median). List every
+     * location of the family; unfunded ones at weight 0. */
+    locations: z
+      .array(
+        z
+          .object({
+            /** The family's own model (the one the variants extend), e.g. "against-malaria-foundation". */
+            family: z.string(),
+            label: z.string(),
+            /** Regular expression over the family's model ids (the family's own model is a location too). */
+            models: z.string(),
+            /** Dollars granted there in the window the source note names. */
+            weight: z.number().nonnegative(),
+            /** URL and a one-line note. */
+            weight_source: z.string(),
+          })
+          .strict(),
+      )
+      .optional(),
   })
   .strict();
 export type Charity = z.infer<typeof Charity>;
@@ -210,7 +259,7 @@ export const Assumptions = z
     groups: z.array(AssumptionGroup),
     rows: z.array(Row),
     units: z.record(z.string(), Unit),
-    common: z.object({ unit: z.string(), benchmark: z.string(), benchmark_label: z.string() }).strict(),
+    common: z.object({ unit: z.string(), benchmark: z.string(), benchmark_label: z.string().optional() }).strict(),
   })
   .strict();
 export type Assumptions = z.infer<typeof Assumptions>;

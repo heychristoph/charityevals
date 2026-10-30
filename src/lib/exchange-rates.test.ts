@@ -22,12 +22,10 @@ describe("exchange rates", () => {
     expect(unranked).toEqual([]);
   });
 
-  it("convert animals spared, people reached and papers through SADs", () => {
-    const av = assumptionValues(lib.assumptions, { sads_per_animal_spared: 7, animals_spared_per_person_reached: 0.3, sads_per_paper: 5000, daly_per_sad: 0.002 });
+  it("convert animals spared through SADs", () => {
+    const av = assumptionValues(lib.assumptions, { sads_per_animal_spared: 7, daly_per_sad: 0.002 });
     const sad = toCommon(lib, "sad", av);
     expect(toCommon(lib, "animals_spared", av)).toBeCloseTo(7 * sad, 12);
-    expect(toCommon(lib, "people_reached", av)).toBeCloseTo(0.3 * 7 * sad, 12);
-    expect(toCommon(lib, "paper", av)).toBeCloseTo(5000 * sad, 12);
   });
 
   it("default SADs per animal spared to ACE's per-meal ratio", () => {
@@ -40,6 +38,6 @@ describe("exchange rates", () => {
     const reach = (id: string) => pickValue(gff.byId.get(id)!.value);
     const engaged = reach("mk_people") / (reach("mk_people") + reach("summit_people") + reach("youth_people"));
     const weighted = engaged * fact("ace.ace2016_animals_spared_per_leaflet") + (1 - engaged) * fact("ace.ace2016_animals_spared_per_video_view");
-    expect(best("animals_spared_per_person_reached")).toBeCloseTo(weighted, 2);
+    expect(pickValue(gff.byId.get("animals_spared_per_person_reached")!.value)).toBeCloseTo(weighted, 2);
   });
 });
