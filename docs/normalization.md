@@ -174,8 +174,17 @@ healthy years = tonnes × $deaths_per_tco2e × 73.1914 × $life_value_multiplier
   about 50 times below our default because it leaves out air pollution.
 - What it leaves out: damage that isn't death (crops, income, migration), tipping points and growth
   effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). And air pollution is an
-  average over fossil fuels: tonnes from coal carry more of it, tonnes kept in forests none. A model
-  whose tonnes carry no air pollution says so in its write-up; it does not change the rate.
+  average over fossil fuels: tonnes from coal carry more of it, tonnes kept in forests none. Tonnes
+  that don't come from fuel left unburned (forests, methane leaks, carbon captured at a plant that
+  keeps running) count at the heat share only, in an `ours` bridge row of the model:
+  `heat_share_of_deaths = @climate.deaths_per_tco2e_heat / (@climate.deaths_per_tco2e_heat + @climate.deaths_per_tco2e_air_pollution)`
+  (23%). The bridge reads the facts, never the slider, so the headline stays proportional to it;
+  the price is that such tonnes count at 23% of whatever the slider says, which undercounts them at
+  the heat-only low end (0.23 × 0.43 instead of 0.43) and at the high end, a stand-in for all
+  climate damage that such tonnes carry in full. A
+  later split into two rates (heat and other climate damage; fossil air pollution) would fix that.
+  Methane's ozone deaths aren't counted yet (a methane fact is open work).
+  Copy the row exactly; the write-up says which tonnes count in full.
 - The evaluator's own figure (FP's and Giving Green's $ per tonne) is the native row; the model's
   output is tonnes per dollar (`1 / cost per tonne`, in an `ours` section, then our credit steps).
   `deaths_per_tco2e` is a cross-cause rate (INV-2b): no model row reads it. INV-10: tco2e models move

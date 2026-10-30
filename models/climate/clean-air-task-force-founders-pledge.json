@@ -1,0 +1,725 @@
+{
+  "id": "clean-air-task-force-founders-pledge",
+  "name": "Clean Air Task Force (Founders Pledge, 2018)",
+  "kind": "charity",
+  "cause": "climate",
+  "charity": "clean-air-task-force",
+  "owner": "founders-pledge",
+  "summary": "Policy advocacy and research on US power-plant and methane regulation and carbon capture. A re-implementation of Founders Pledge's 2018 estimate of what CATF's past work cost per tonne of CO₂e averted.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Climate Change: cause area report (2018), Clean Air Task Force cost-effectiveness analysis (past impact)",
+    "url": "https://www.founderspledge.com/research/fp-climate-change",
+    "sheet": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit",
+    "published": "2018-05-01",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Climate Change cause area report (2018, PDF)",
+      "url": "https://www.founderspledge.com/research/fp-climate-change",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Clean Air Task Force recommendation",
+      "url": "https://www.founderspledge.com/research/clean-air-task-force",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, CATF cost-effectiveness spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit",
+      "type": "model"
+    },
+    {
+      "title": "Rethink Priorities, climate change versus global health interventions (2026)",
+      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
+      "type": "study",
+      "note": "Source of the shared rate that turns tonnes into deaths."
+    },
+    {
+      "title": "Clean Air Task Force",
+      "url": "https://www.catf.us",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "so2_nox",
+      "title": "Power Plant Campaign and \"Clear the Air\": SO₂ and NOx (1996 on)"
+    },
+    {
+      "id": "mercury",
+      "title": "Mercury and Air Toxics Standards"
+    },
+    {
+      "id": "coal",
+      "title": "Coal retirements: CO₂"
+    },
+    {
+      "id": "methane",
+      "title": "Methane Partners Campaign (2009 on)"
+    },
+    {
+      "id": "ccs",
+      "title": "Carbon capture: research and advocacy for a tax credit"
+    },
+    {
+      "id": "cost",
+      "title": "Costs"
+    },
+    {
+      "id": "bottom",
+      "title": "Cost-effectiveness"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From cost per tonne to tonnes per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' steps after Founders Pledge's bottom line. Founders Pledge reports dollars per tonne; the site needs tonnes per dollar. Then, because the shared climate rate counts the air-pollution deaths that come with burning fossil fuels, tonnes that don't come from fuel left unburned count only for their heat deaths."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "deaths_2004",
+      "section": "so2_nox",
+      "label": "Deaths from fine particle pollution from US coal plants in 2004",
+      "format": "integer",
+      "value": 24000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E6",
+        "note": "CATF, The Toll from Coal: http://www.catf.us/resources/publications/files/The_Toll_from_Coal.pdf"
+      },
+      "explainer": "From CATF's own study, The Toll from Coal (p. 7); Founders Pledge notes it is roughly consistent with the EPA's figures."
+    },
+    {
+      "id": "deaths_2010",
+      "section": "so2_nox",
+      "label": "Deaths from fine particle pollution from US coal plants in 2010",
+      "format": "integer",
+      "value": 13200,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E7",
+        "note": "CATF, The Toll from Coal: http://www.catf.us/resources/publications/files/The_Toll_from_Coal.pdf"
+      },
+      "explainer": "From CATF's The Toll from Coal, via Founders Pledge."
+    },
+    {
+      "id": "annual_reduction_deaths",
+      "section": "so2_nox",
+      "label": "Average annual reduction in deaths relative to 2004 (2004–10)",
+      "format": "integer",
+      "formula": "deaths_2004 - (deaths_2004 + deaths_2010) / 2",
+      "expected": 5400,
+      "explainer": "Founders Pledge lacks the yearly figures, so it assumes deaths fell in a straight line from 2004 to 2010 and takes the average reduction."
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "so2_nox",
+      "label": "CATF brought the regulation forward by (years)",
+      "format": "number",
+      "value": {
+        "low": 0.75,
+        "best": 1.5,
+        "high": 4.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D9:F9"
+      },
+      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work (pessimistic 0.75, realistic 1.5, optimistic 4). Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report. The same figure is used for the mercury rules and the coal retirements below."
+    },
+    {
+      "id": "gas_price_adjustment",
+      "section": "so2_nox",
+      "label": "Natural gas price impact adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.84,
+        "high": 0.89
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D10:F10"
+      },
+      "explainer": "The share of the fall in deaths not explained by cheap natural gas pushing coal out anyway. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "so2_nox_deaths_averted",
+      "section": "so2_nox",
+      "label": "Total SO₂ and NOx benefits (deaths averted)",
+      "format": "integer",
+      "formula": "annual_reduction_deaths * years_brought_forward * gas_price_adjustment",
+      "expected": 6804
+    },
+    {
+      "id": "mats_annual_deaths",
+      "section": "mercury",
+      "label": "Average annual reduction in deaths due to the Mercury and Air Toxics Standards (2015–20)",
+      "format": "integer",
+      "value": {
+        "low": 4200,
+        "best": 7600,
+        "high": 11000
+      },
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D14:F14",
+        "note": "EPA: https://www.epa.gov/mats/healthier-americans"
+      },
+      "explainer": "The EPA's range for deaths avoided each year by the Mercury and Air Toxics Standards; Founders Pledge's realistic case is the midpoint (E14 = AVERAGE(D14, F14))."
+    },
+    {
+      "id": "mercury_deaths_averted",
+      "section": "mercury",
+      "label": "Total mercury benefits brought about by CATF (deaths averted)",
+      "format": "integer",
+      "formula": "mats_annual_deaths * years_brought_forward",
+      "expected": 11400
+    },
+    {
+      "id": "deaths_averted",
+      "section": "mercury",
+      "label": "Total SO₂, NOx and mercury benefits (deaths averted)",
+      "format": "integer",
+      "formula": "so2_nox_deaths_averted + mercury_deaths_averted",
+      "expected": 18204,
+      "explainer": "Deaths in the United States from coal plants' air pollution that Founders Pledge credits to CATF. Founders Pledge reports them as a separate result (cost per death averted, below); the bottom line in tonnes doesn't include them, and neither does ours (see the write-up)."
+    },
+    {
+      "id": "coal_retirements_gw",
+      "section": "coal",
+      "label": "Average annual retirements of coal capacity due to CATF-supported regulations, 2010–15 (GW)",
+      "format": "number",
+      "unit": "GW",
+      "value": {
+        "low": 1.0,
+        "best": 4.0,
+        "high": 7.0
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D20:F20",
+        "note": "Bipartisan Policy Center: http://bipartisanpolicy.org/wp-content/uploads/sites/default/files/BPC%20Electric%20System%20Reliability.pdf"
+      },
+      "explainer": "Bipartisan Policy Center (p. 22); the realistic case is the midpoint of 1 and 7 GW (E20 = AVERAGE(D20, F20))."
+    },
+    {
+      "id": "coal_capacity_factor",
+      "section": "coal",
+      "label": "Coal capacity factor",
+      "format": "percent",
+      "value": 0.6,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E21",
+        "note": "EIA: https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_a"
+      },
+      "explainer": "The share of the year a coal plant runs at full output, from the US Energy Information Administration."
+    },
+    {
+      "id": "hours_per_year",
+      "section": "coal",
+      "label": "Hours in a year",
+      "format": "integer",
+      "value": 8760,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D22 (=(D20*8760*$E$21)/1000)"
+      },
+      "explainer": "24 × 365, written into Founders Pledge's formula."
+    },
+    {
+      "id": "annual_coal_generation_twh",
+      "section": "coal",
+      "label": "Annual coal generation averted (TWh)",
+      "format": "number",
+      "unit": "TWh",
+      "formula": "coal_retirements_gw * hours_per_year * coal_capacity_factor / 1000",
+      "expected": 21.024
+    },
+    {
+      "id": "coal_generation_averted_twh",
+      "section": "coal",
+      "label": "Total coal generation averted by CATF (TWh)",
+      "format": "number",
+      "unit": "TWh",
+      "formula": "annual_coal_generation_twh * years_brought_forward",
+      "expected": 31.536
+    },
+    {
+      "id": "coal_emissions_factor",
+      "section": "coal",
+      "label": "Coal power emissions factor (megatonnes of CO₂e per TWh)",
+      "format": "number",
+      "value": 0.82,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D26:F26",
+        "note": "IPCC AR5 WGIII Annex III, p. 1335"
+      },
+      "explainer": "IPCC, Climate Change 2014: Mitigation of Climate Change, Working Group III, p. 1335 (life-cycle median for coal)."
+    },
+    {
+      "id": "coal_emissions_averted",
+      "section": "coal",
+      "label": "Coal emissions averted (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "coal_generation_averted_twh * coal_emissions_factor * 1000000",
+      "expected": 25859520
+    },
+    {
+      "id": "gas_emissions_factor",
+      "section": "coal",
+      "label": "Gas power emissions factor (megatonnes of CO₂e per TWh)",
+      "format": "number",
+      "value": 0.49,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D29:F29",
+        "note": "IPCC AR5 WGIII Annex III, p. 1335"
+      },
+      "explainer": "IPCC, Climate Change 2014: Mitigation of Climate Change, p. 1335 (life-cycle median for gas combined cycle). Founders Pledge assumes the retired coal power is all replaced by gas, which it calls pessimistic."
+    },
+    {
+      "id": "gas_emissions_added",
+      "section": "coal",
+      "label": "Additional gas emissions (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "gas_emissions_factor * coal_generation_averted_twh * 1000000",
+      "expected": 15452640
+    },
+    {
+      "id": "coal_tonnes_averted",
+      "section": "coal",
+      "label": "Tonnes of CO₂e averted by coal retirements",
+      "format": "integer",
+      "formula": "coal_emissions_averted - gas_emissions_added",
+      "expected": 10406880
+    },
+    {
+      "id": "nsps_2012_annual",
+      "section": "methane",
+      "label": "Annual tonnes of CO₂e averted by the 2012 EPA New Source Performance Standard (2012–17)",
+      "format": "integer",
+      "value": {
+        "low": 19000000,
+        "best": 26000000,
+        "high": 33000000
+      },
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D36:F36",
+        "note": "EPA: https://www.epa.gov/sites/production/files/2016-09/documents/natural_gas_transmission_fact_sheet_2012.pdf"
+      },
+      "explainer": "EPA fact sheet (p. 2); the realistic case is the midpoint (E36 = AVERAGE(D36, F36))."
+    },
+    {
+      "id": "nsps_2012_implementation",
+      "section": "methane",
+      "label": "Adjustment for the rules not being fully implemented before 2015",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D37:F37"
+      },
+      "explainer": "The rule was fully in force for three of the five years, so Founders Pledge cuts the benefit only a little. Founders Pledge's subjective input."
+    },
+    {
+      "id": "nsps_2012_years_forward",
+      "section": "methane",
+      "label": "CATF brought the 2012 regulation forward by (years)",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.9166,
+        "high": 1.83
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D38:F38"
+      },
+      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "methane_2012_tonnes",
+      "section": "methane",
+      "label": "CATF impact via the 2012 regulation (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "nsps_2012_annual * nsps_2012_implementation * nsps_2012_years_forward",
+      "expected": 21448440
+    },
+    {
+      "id": "nsps_2016_annual",
+      "section": "methane",
+      "label": "Annual tonnes of CO₂e averted by the 2016 regulation in 2025",
+      "format": "integer",
+      "value": 11000000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E40",
+        "note": "EPA: https://www.epa.gov/sites/production/files/2016-09/documents/nsps-overview-fs.pdf"
+      },
+      "explainer": "EPA overview fact sheet (p. 4)."
+    },
+    {
+      "id": "nsps_2016_effectiveness",
+      "section": "methane",
+      "label": "Adjustment from the rule's peak to its average effect (2016–25)",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.6,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D41:F41"
+      },
+      "explainer": "The 2025 figure is the rule's peak; Founders Pledge scales it down to an average year. Founders Pledge's subjective input."
+    },
+    {
+      "id": "nsps_2016_years",
+      "section": "methane",
+      "label": "CATF's counterfactual impact on the 2016 rule (years)",
+      "format": "number",
+      "value": {
+        "low": 2.0,
+        "best": 3.0,
+        "high": 5.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D42:F42"
+      },
+      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "methane_2016_tonnes",
+      "section": "methane",
+      "label": "CATF impact via the 2016 regulation (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "nsps_2016_annual * nsps_2016_effectiveness * nsps_2016_years",
+      "expected": 19800000
+    },
+    {
+      "id": "methane_tonnes_averted",
+      "section": "methane",
+      "label": "Tonnes of CO₂e averted by the methane rules",
+      "format": "integer",
+      "formula": "methane_2012_tonnes + methane_2016_tonnes",
+      "expected": 41248440
+    },
+    {
+      "id": "ccs_2020",
+      "section": "ccs",
+      "label": "Emissions averted by the carbon capture bill in 2020 (tonnes of CO₂)",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D49:F49"
+      },
+      "explainer": "Analysis by Charles River Associates for CATF, 2016 (confidential), via Founders Pledge; the US Department of Energy's NEMS model gave similar results."
+    },
+    {
+      "id": "ccs_2025",
+      "section": "ccs",
+      "label": "Emissions averted by the carbon capture bill in 2025 (tonnes of CO₂)",
+      "format": "integer",
+      "value": 40000000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D50:F50"
+      },
+      "explainer": "Analysis by Charles River Associates for CATF, 2016 (confidential), via Founders Pledge; the US Department of Energy's NEMS model gave similar results."
+    },
+    {
+      "id": "ccs_annual",
+      "section": "ccs",
+      "label": "Average annual emissions averted by the carbon capture bill, 2020–25 (tonnes of CO₂)",
+      "format": "integer",
+      "formula": "(ccs_2020 + ccs_2025) / 2",
+      "expected": 20000000
+    },
+    {
+      "id": "ccs_years_forward",
+      "section": "ccs",
+      "label": "CATF brought the legislation forward by (years)",
+      "format": "number",
+      "value": {
+        "low": 0.7,
+        "best": 1.5,
+        "high": 3.0
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D52:F52"
+      },
+      "explainer": "Founders Pledge's estimate of how many years earlier the carbon capture tax credit (the FUTURES Act, later 45Q) came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "ccs_tonnes_averted",
+      "section": "ccs",
+      "label": "Tonnes of CO₂e averted by CATF's work on the carbon capture bill",
+      "format": "integer",
+      "formula": "ccs_annual * ccs_years_forward",
+      "expected": 30000000
+    },
+    {
+      "id": "annual_budget",
+      "section": "cost",
+      "label": "Average annual budget (1996–2017)",
+      "format": "usd",
+      "value": 7000000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E57"
+      },
+      "explainer": "From CATF, in personal correspondence with Founders Pledge."
+    },
+    {
+      "id": "years_of_spending",
+      "section": "cost",
+      "label": "Years of spending counted (1996–2017)",
+      "format": "integer",
+      "value": 21,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!E58 (=E57*21)"
+      },
+      "explainer": "Written into Founders Pledge's formula for total costs."
+    },
+    {
+      "id": "total_costs",
+      "section": "cost",
+      "label": "Costs incurred (1996–2017)",
+      "format": "usd",
+      "formula": "annual_budget * years_of_spending",
+      "expected": 147000000
+    },
+    {
+      "id": "tonnes_averted",
+      "section": "bottom",
+      "label": "Total emissions averted (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "coal_tonnes_averted + methane_tonnes_averted + ccs_tonnes_averted",
+      "expected": 81655320,
+      "explainer": "Some of these tonnes are expected in the future rather than already averted."
+    },
+    {
+      "id": "case_study_share",
+      "section": "bottom",
+      "label": "Share of CATF's impact accounted for by the three case studies",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
+        "cell": "CATF past impact!D62:F62"
+      },
+      "explainer": "Founders Pledge credits CATF's whole budget to these case studies, then scales the result up for its other work: at 70%, everything else CATF did adds 43% more. Founders Pledge calls this highly uncertain."
+    },
+    {
+      "id": "adjusted_deaths_averted",
+      "section": "bottom",
+      "label": "Adjusted deaths averted",
+      "format": "integer",
+      "formula": "deaths_averted / case_study_share",
+      "expected": 26005.71429
+    },
+    {
+      "id": "adjusted_tonnes_averted",
+      "section": "bottom",
+      "label": "Adjusted emissions averted (tonnes CO₂e)",
+      "format": "integer",
+      "formula": "tonnes_averted / case_study_share",
+      "expected": 116650457.1
+    },
+    {
+      "id": "cost_per_death_averted",
+      "section": "bottom",
+      "label": "Cost per death averted (US air pollution)",
+      "format": "usd",
+      "formula": "total_costs / adjusted_deaths_averted",
+      "expected": 5652.603823,
+      "explainer": "Founders Pledge's second result, for the US air-pollution deaths above. Not part of the bottom line here (see the write-up)."
+    },
+    {
+      "id": "deaths_averted_per_100k",
+      "section": "bottom",
+      "label": "Expected deaths averted per $100,000",
+      "format": "number",
+      "formula": "100000 / cost_per_death_averted",
+      "expected": 17.6909621
+    },
+    {
+      "id": "cost_per_tonne",
+      "section": "bottom",
+      "label": "Cost per tonne of CO₂e averted",
+      "format": "usd",
+      "formula": "total_costs / adjusted_tonnes_averted",
+      "expected": 1.260175087,
+      "explainer": "Founders Pledge's bottom line for CATF's past work: about $1.26 a tonne (pessimistic $4.40, optimistic $0.35)."
+    },
+    {
+      "id": "tonnes_per_100",
+      "section": "bottom",
+      "label": "Tonnes of CO₂e averted per $100",
+      "format": "number",
+      "formula": "100 / cost_per_tonne",
+      "expected": 79.35405248
+    },
+    {
+      "id": "tco2e_per_dollar",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per dollar",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "1 / cost_per_tonne"
+    },
+    {
+      "id": "heat_share_of_deaths",
+      "section": "per_dollar",
+      "label": "Share of a tonne's harm that comes from heat, not air pollution",
+      "format": "percent",
+      "formula": "@climate.deaths_per_tco2e_heat / (@climate.deaths_per_tco2e_heat + @climate.deaths_per_tco2e_air_pollution)",
+      "explainer": "Our step. The shared climate rate (\"Deaths caused by one more tonne of CO₂\", 1.9 per 10,000 tonnes by default) adds two things: deaths from the extra heat (0.43) and deaths from the fine particles that come with burning coal, oil and gas (1.46), both Rethink Priorities' estimates. A tonne of CO₂ kept out of the air without burning less fuel (a forest left standing, methane that doesn't leak, CO₂ captured at a plant that keeps running) does little about those particles. So such tonnes count as this share of a tonne: 23%. The split comes from Rethink's own two figures, not from the slider: whatever you set the slider to, these tonnes count at 23% of it, so they are undercounted when the slider is set to heat only (its low end) or to all climate damage, crops and sea level included (its high end)."
+    },
+    {
+      "id": "tco2e_per_dollar_comparable",
+      "section": "per_dollar",
+      "label": "Tonnes per dollar, counted at their heat share",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar * heat_share_of_deaths",
+      "explainer": "Our step. None of Founders Pledge's tonnes comes with the average fossil-fuel air pollution in the shared rate. The methane rules stop leaks and carbon capture removes CO₂ from plants that keep running, so neither cuts fine particles. The coal retirements do, but US coal plants with scrubbers emit far fewer particles per tonne than the world average behind the rate (CATF's own Toll from Coal implies about a twentieth), and those deaths are what Founders Pledge counts separately as US air-pollution deaths. So every tonne counts for its heat deaths only, about a quarter of a tonne. Methane also forms ozone, which kills; that isn't counted here (see the write-up)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers, lawyers and advocates could typically earn considerably more in consulting, law firms or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "tco2e_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Tonnes of CO₂e averted per dollar donated",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar_comparable * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns tonnes into years of healthy life with the shared climate rate, \"Deaths caused by one more tonne of CO₂\"."
+    }
+  ],
+  "output": {
+    "row": "tco2e_per_donor_dollar",
+    "unit": "tco2e",
+    "label": "Tonnes of CO₂e averted per dollar",
+    "native": {
+      "row": "cost_per_tonne",
+      "unit": "$ per tonne CO₂e"
+    }
+  }
+}
