@@ -1226,24 +1226,41 @@
     {
       "id": "sads_chicken",
       "section": "species",
-      "label": "SADs averted per dollar you give: chickens",
+      "label": "SADs averted per dollar you give: chickens, 2024 SAD figures",
       "format": "number",
-      "formula": "sads_per_donor_dollar"
+      "formula": "sads_per_donor_dollar * (p1_sum_sads_averted + p1_sum_sads_averted_2) / sads_total",
+      "explainer": "The share of the SADs from hens moved from battery cages to aviaries. In our view these use the shared 17.49 SADs per hen-year, a 2024 SAD figure, so they are divided by the 2024 hen weight. ACE's own 7.93 is a 2025 figure; the evaluator view counts every SAD alike, so the split doesn't change ACE's result."
+    },
+    {
+      "id": "sads_chicken_2025",
+      "section": "species",
+      "label": "SADs averted per dollar you give: chickens, 2025 SAD figures",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * (p1_sum_sads_averted_3 + p2_sum_sads_averted) / sads_total",
+      "explainer": "The share of the SADs from hens moved from enriched cages to aviaries (3.05 per hen) and broilers raised to Better Chicken Commitment standards (0.64 per bird). Both are ACE's 2025 SAD figures, built with Ambitious Impact's 2025 hen weight, so they are divided by that weight."
     },
     {
       "id": "ced_chicken",
       "section": "species",
-      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens (2024 SADs)",
       "format": "number",
-      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
-      "explainer": "The SADs for chickens with Ambitious Impact's weight for a hen (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+      "formula": "sads_chicken / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024)",
+      "explainer": "The SADs for hens moved out of battery cages with the hen weight built into the shared 2024 SAD figure (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+    },
+    {
+      "id": "ced_chicken_2025",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens (2025 SADs)",
+      "format": "number",
+      "formula": "sads_chicken_2025 / @aim_sads.chicken_2025 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2025 / @aim_sads.chicken_2024)",
+      "explainer": "The 2025 SADs for chickens with the hen weight built into them (35% of a person's) taken out, which leaves days of a chicken's disabling pain. The evaluator view divides by the 2024 hen weight its conversion is pinned to, so ACE's own result reproduces."
     },
     {
       "id": "ced_per_donor_dollar",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "number",
-      "formula": "ced_chicken",
+      "formula": "ced_chicken + ced_chicken_2025",
       "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],

@@ -15,11 +15,11 @@ ACE lists retailer commitments (Tesco and others) as secondary effects it didn't
 
 ### What drives the result
 
-Beyond the exchange rates, **how much a shrimp can suffer relative to a chicken** (about 0.16 to 370 years of healthy life per $1,000 on its own: whether shrimp feel pain at all is very uncertain), then **suffering spared per stunned shrimp** (10 to 170; the high end is the figure ACE used for Aquatic Life Institute) and the likelihood stunners are deployed.
+Beyond the exchange rates, **how much a shrimp can suffer relative to a chicken** (about 0.16 to 370 years of healthy life per $1,000 on its own: whether shrimp feel pain at all is very uncertain), then **suffering spared per stunned shrimp** (10 to 180; the high end is the figure ACE used for Aquatic Life Institute) and the likelihood stunners are deployed.
 
 ### Where we differ from ACE
 
-- **Shrimp weight.** ACE's figures carry Ambitious Impact's weight for a shrimp, about 43% of a chicken's. We use Rethink Priorities' shrimp weight, about 9% of a chicken's, as every shrimp model does, and the chicken slider (default 33%) for chickens against people. ACE's own figure, 64, still reproduces in its own view.
+- **Shrimp weight.** ACE's figures carry Ambitious Impact's 2025 weight for a shrimp, about 57% of a hen's. We use Rethink Priorities' shrimp weight, about 9% of a chicken's, as every shrimp model does, and the chicken slider (default 33%) for chickens against people. ACE's own figure, 64, still reproduces in its own view.
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them.
 

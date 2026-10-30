@@ -114,26 +114,46 @@ AIM multiplies each species' intensity-weighted pain days by AIM's welfare range
 SAD on our scale, take AIM's weight out and ours in:
 
 ```
-ced_s = sads_s / @aim_sads.wr_s * if($rp_species_weights, @welfare_ranges.s_vs_chicken,
-                                                         @aim_sads.wr_s / @aim_sads.wr_chicken)
+ced_s = sads_s / @aim_sads.s_v * if($rp_species_weights, @welfare_ranges.s_vs_chicken,
+                                                         @aim_sads.s_v / @aim_sads.chicken_2024)
 ```
 
+`v` is the SAD version (2024 or 2025) whose weights are built into the figure the row divides in
+our view: AIM's weights changed between versions (a hen 46.4% of a person in 2024 SADs, 34.7% in
+2025), and dividing a 2025 figure by a 2024 weight would leave part of AIM's weight in. ACE's 2024
+sheets and its 2024 meal sheet use 2024 SADs; its 2025 sheets use 2025 SADs. Each `@sad_factors` fact
+states its basis, and a range end from the other version is restated on it (×
+weight of its version / weight of the other). A model with figures of both versions for one species
+gets a second pair `sads_s_v` / `ced_s_v` (The Humane League: battery-cage hens on the shared 2024
+figure, enriched-cage hens and broilers on ACE's 2025 ones). The evaluator branch divides every
+version by the 2024 hen, the weight `$chicken_vs_person` is pinned to, so ACE's SADs count as SADs.
+
 In the evaluator view `$rp_species_weights` = 0 and `$chicken_vs_person` is pinned to
-`@aim_sads.wr_chicken`, so the evaluator headline equals SADs × 0.0011 × 1,000, exactly as today.
+`@aim_sads.chicken_2024`, so the evaluator headline equals SADs × 0.0011 × 1,000, exactly as today.
 
-What AIM's weights are (new facts/aim_sads.json), as far as is documented:
+What AIM's weights are (facts/aim_sads.json). AIM publishes the table its SADs use, linked from its
+SADs post: <https://docs.google.com/spreadsheets/d/1bgnTeETRkpnyKZZXDhO5OBl6L2a0OYN1ntnYHL6vz34/edit>
+(probability of sentience in "Sentience estimates", welfare range given sentience in "Welfare range
+estimates", one pair of tabs for 2024 SADs and one for 2025). ACE's 2024 and 2025 sheets use the 2024
+SADs (its 28.94 SADs per caged hen is 62.38 intensity-weighted days × the 2024 hen weight):
 
-- Chicken: **not found in a public source.** The site assumes 0.332 (RP's median). If AIM's figure
-  differs, every chicken model moves by 0.332 / AIM's figure.
-- Shrimp: 0.199 = 43.3% probability of sentience × 46.0% welfare range given sentience (AIM 2025,
-  quoted by Vasco Grilo:
-  <https://ea.greaterwrong.com/posts/waL3iwczrjNt8PreZ/announcing-ace-s-2025-charity-recommendations/comment/zssTWeCRzy4HogCrk>).
-  Secondary source; confirm with AIM.
-- Fish: probability of sentience 52.6%; pigs 92.5% (same author,
-  <https://forum.effectivealtruism.org/posts/yoDTsrR95YRnBW6fk/cost-effectiveness-of-the-fish-welfare-interventions>).
-  Welfare range given sentience not found.
-- AIM's intensity weights and the per-species sheet are not public. The fish post says to ask
-  AIM's animal welfare research team for it. **Getting that sheet is step 1 of the work (section 6).**
+- Chicken, 2024 SADs: 0.464 = 80.6% × 57.6% (ACE's CHKD sheet, 'SADs Estimate'!B8:B9; AIM's 2024 tabs
+  agree to three figures).
+- Pig: 0.633 = 91.4% × 69.2% (2024 tabs, row "Pigs"). 2025 SADs: 0.516.
+- Fish: salmon 0.264 = 50.5% × 52.2%, fish in general 0.281 = 50.6% × 55.6% (2024 tabs). ACE's meal
+  figures mix salmon and cleaner fish; the fact's best guess, 0.274, mixes the two by their SAD shares,
+  with the two as its range.
+- Shrimp, 2025 SADs: 0.199 = 43.3% × 46.0% (2025 tabs, which ACE's 2025 SWP review uses); 2024 SADs:
+  0.30 × 0.62 = 0.186 (ACE's ALI sheet). Both shrimp models divide the shared 2025 figure in our view.
+- Chicken, 2025 SADs: 0.347 = 87.6% × 39.7% (2025 tabs, row "Layer hens"), divided out of ACE's 2025
+  figures (broilers under the BCC, enriched cages to aviaries).
+- AIM's per-species hours of pain behind each SAD figure (sow, piglet, salmon) are not public; ACE's
+  sheets paste the SAD totals. ACE's 2025 SADs sheet is private; that it uses AIM's 2025 weights is
+  inferred.
+- × 3.18 in some pig and shrimp SADs (Sinergia 'SADs per animal'!D6:E10, ALI 'SADs Estimate'!B16):
+  AIM's stand-in for pain intensity growing exponentially between categories (ALI's B16 cell
+  comment), applied where the figure was built without it. A pain term, not a species weight; it
+  stays.
 - AIM changed method in 2026 (v2; docs/eval-skills.md notes it moves SWP's SAD factor a lot). Each
   `@aim_sads.*` fact records the version, and each ACE model says which version its sheet used.
 
@@ -191,7 +211,7 @@ chicken weight is 0.332 and shrimp 0.199 (unconfirmed).
 | Dansk Vegetarisk Forening | SADs; meals, mixed species, 2.58 SADs/meal | same | 3 (no species split), 4 (above shared high of 1.72) | meals → species → `ced_*`; interim shared 0.902 | 19.8 → 6.9 (shared meal factor); species split unknown |
 | Good Food Fund | animals spared (our bridge from people reached) | × 22.4 SADs/animal (DVF ratio) × 0.0011 | 1, 3, 7 | bridge to meals or animals by species → `ced_*` | 4.1 → 1.6 using 8.7 SADs/animal (0.902/0.104, Sinergia/SVB); species split further |
 | Shrimp Welfare Project | SADs; shrimp (0.00452 stunned; 0.22, 0.33 farm) | SADs × 0.0011 | 3 | `ced_shrimp` | 64.3 → 10.0 (×0.156) |
-| Sinergia Animal | SADs; hens 75%, pigs 25%, meals 0.1% | same | 3, 4 (17.49 literal) | `ced_chicken`, `ced_pig`, meals by species | hens none; pigs × (1.55 × 0.332 / AIM pig weight), unknown until AIM's sheet; 912 today |
+| Sinergia Animal | SADs; hens 75%, pigs 25%, meals 0.1% | same | 3, 4 (17.49 literal) | `ced_chicken`, `ced_pig`, meals by species | hens none; pigs × 1.55 × 0.464 / 0.633 (AIM's pig weight, now sourced) |
 | Sociedade Vegetariana Brasileira | SADs; meals 0.084 SADs/meal | same | 3, 4 | meals → species; interim shared 0.902 | 10.1 → 109 (shared meal factor) |
 | The Humane League | SADs; hens (**7.93** cage→cage-free, 3.05 enriched), broilers 0.64 | same | 3, 4 | `ced_chicken`; `@sad_factors` | none from rebase; 80 → 176 if hens use 17.49 like Sinergia/ÇHKD (decision 3) |
 | Wild Animal Initiative | papers (ACE) → our bridge → "pain days" for wild animals, mostly insects and small fish | treated as SADs, i.e. person-equivalent days, × 0.0011 | 3, 7; explainer says species is "part of this guess" | make the guess raw disabling days, split by species group (insects, fish, other), `ced_*` raw template | 0.36 → about 0.005–0.03 (estimate: × 0.332 × 0.04–0.27) |
