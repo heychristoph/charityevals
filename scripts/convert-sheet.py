@@ -465,6 +465,10 @@ class Converter:
         if name == "POWER" and len(args) == 2: return ("bin", "^", self.lower(args[0]), self.lower(args[1]))
         if name == "IFERROR" and len(args) == 1: args = [args[0], ("num", 0.0)]
         if name == "IF" and len(args) == 2: args = [*args, ("num", 0.0)]
+        # A blank-text branch (=IF(x>0, x/LN(2), "")) only blanks a display cell; as a number it is 0.
+        if name == "IF" and len(args) == 3: args = [args[0]] + [("num", 0.0) if a == ("str", "") else a for a in args[1:]]
+        # An omitted optional argument of PV (=PV(rate, n, pmt,, 1)) is its default, 0.
+        if name == "PV": args = [("num", 0.0) if a == ("empty",) else a for a in args]
         if name in ("MATCH", "INDEX", "FILTER"): return self.lookup(name, args)
         if name in SIMPLE: return ("fn", SIMPLE[name], [self.lower(self.scalar(a)) for a in args])
         raise Unsupported(f"{name}()")
