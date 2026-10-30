@@ -1,0 +1,1090 @@
+{
+ "id": "respira-health-aim",
+ "name": "Respira Health: digital pulmonary rehabilitation for COPD (Ambitious Impact, 2025 idea report)",
+ "kind": "charity",
+ "cause": "global-health",
+ "charity": "respira-health",
+ "owner": "ambitious-impact",
+ "bulk": true,
+ "source": {
+  "publisher": "Ambitious Impact (Charity Entrepreneurship)",
+  "title": "Digital Pulmonary Rehabilitation (AIM 2025 idea report): CEA",
+  "url": "https://370b8129-500b-4a5d-99f2-ce6886702186.usrfiles.com/ugd/f521de_5b2cabd0b363497196af2c188e0fd90c.pdf",
+  "sheet": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+  "published": "2024",
+  "retrieved": "2026-10-30",
+  "license": "CC BY 4.0 (Zenodo record of the report)"
+ },
+ "evaluator": {
+  "name": "Ambitious Impact",
+  "assumptions": {
+   "resource_shares": 0,
+   "discount_rate": 0.014,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.3
+  }
+ },
+ "resources": [],
+ "sections": [
+  {
+   "id": "nepal_mycopd_partnership_model",
+   "title": "Nepal myCOPD partnership model"
+  },
+  {
+   "id": "staff_pay",
+   "title": "Staff pay below market",
+   "kind": "ours",
+   "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
+  },
+  {
+   "id": "bottom_line",
+   "title": "Bottom line",
+   "kind": "ours",
+   "explainer": "charityevals' step, not Ambitious Impact's: its bottom line per dollar, in the site's units."
+  }
+ ],
+ "rows": [
+  {
+   "id": "software_maintenance_costs_expected",
+   "label": "Software maintenance costs (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 20199.183621168337,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B37"
+   },
+   "explainer": "LogNormal",
+   "format": "usd"
+  },
+  {
+   "id": "costs_at_period_1_end_default_280_000_expected",
+   "label": "Costs at period 1 end [default: $280,000] (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "280000 + software_maintenance_costs_expected",
+   "expected": 300199.1836,
+   "format": "usd"
+  },
+  {
+   "id": "annual_fixed_costs_in_this_period",
+   "label": "Annual fixed costs in this period",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "costs_at_period_1_end_default_280_000_expected",
+   "expected": 300199.1836,
+   "format": "usd"
+  },
+  {
+   "id": "discount_rate_for_costs_keep_fixed_in_all_ceas",
+   "label": "Discount rate, for costs [keep fixed in all CEAs]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.04,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B16"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "cost_period_2_ends_on_year_or_ongoing_suggest_16_expected",
+   "label": "Cost period 2 ends on year ___ OR \"ongoing\" [suggest: 16] (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 10.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B33"
+   },
+   "explainer": "LogNormal Year"
+  },
+  {
+   "id": "cost_period_1_ends_in_year_suggest_2_5_min_2_expected",
+   "label": "Cost period 1 ends in year __ [suggest: 2-5; min: 2] (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 3.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B21"
+   },
+   "explainer": "Normal Year"
+  },
+  {
+   "id": "cost_period_2_begins_in_year_previous_period_end_1",
+   "label": "Cost period 2 begins in year ___ [previous period end +1]",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "cost_period_1_ends_in_year_suggest_2_5_min_2_expected + 1",
+   "expected": 4.0
+  },
+  {
+   "id": "total_fixed_costs_over_period_2_npv",
+   "label": "Total fixed costs over period 2, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(if(0, annual_fixed_costs_in_this_period / discount_rate_for_costs_keep_fixed_in_all_ceas, annual_fixed_costs_in_this_period * (1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ cost_period_2_ends_on_year_or_ongoing_suggest_16_expected) / discount_rate_for_costs_keep_fixed_in_all_ceas) - annual_fixed_costs_in_this_period * (1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_2_begins_in_year_previous_period_end_1 - 1)) / discount_rate_for_costs_keep_fixed_in_all_ceas) * (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_2_begins_in_year_previous_period_end_1 - 1)",
+   "expected": 1460141.981,
+   "format": "usd"
+  },
+  {
+   "id": "costs_at_period_1_start_fixed_based_on_ce_grant_sizes_expect",
+   "label": "Costs at period 1 start [fixed, based on CE grant sizes] (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 130000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B22"
+   },
+   "explainer": "LogNormal",
+   "format": "usd"
+  },
+  {
+   "id": "cost_period_1_begins_in_year_fixed",
+   "label": "Cost period 1 begins in year __ [fixed]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 1.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B20"
+   },
+   "explainer": "Year"
+  },
+  {
+   "id": "total_length_of_period",
+   "label": "Total length of period",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "cost_period_1_ends_in_year_suggest_2_5_min_2_expected - cost_period_1_begins_in_year_fixed + 1",
+   "expected": 3.0
+  },
+  {
+   "id": "cumulative_discount_multiplier_over_period",
+   "label": "Cumulative discount multiplier over period",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ total_length_of_period",
+   "expected": 0.884736,
+   "format": "percent"
+  },
+  {
+   "id": "increase_per_year",
+   "label": "Increase per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(costs_at_period_1_end_default_280_000_expected - costs_at_period_1_start_fixed_based_on_ce_grant_sizes_expect) / (cost_period_1_ends_in_year_suggest_2_5_min_2_expected - cost_period_1_begins_in_year_fixed)",
+   "expected": 85099.59181,
+   "format": "usd"
+  },
+  {
+   "id": "total_fixed_costs_of_period_at_starting_year_of_period",
+   "label": "Total fixed costs of period at starting year of period",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(costs_at_period_1_start_fixed_based_on_ce_grant_sizes_expect * (1 - cumulative_discount_multiplier_over_period) + increase_per_year * ((1 - cumulative_discount_multiplier_over_period) / discount_rate_for_costs_keep_fixed_in_all_ceas - 1 - (total_length_of_period - 1) * cumulative_discount_multiplier_over_period)) / discount_rate_for_costs_keep_fixed_in_all_ceas",
+   "expected": 613159.1758,
+   "format": "usd"
+  },
+  {
+   "id": "total_fixed_costs_over_period_1_npv",
+   "label": "Total fixed costs over period 1, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_fixed_costs_of_period_at_starting_year_of_period * (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_1_begins_in_year_fixed - 1)",
+   "expected": 613159.1758,
+   "format": "usd"
+  },
+  {
+   "id": "population_of_nepal",
+   "label": "Population of Nepal",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 30034988.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B144"
+   },
+   "explainer": "count"
+  },
+  {
+   "id": "prevalence_of_moderate_severe_copd",
+   "label": "Prevalence of moderate/severe COPD",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "avg(3.6 / 100, 4.4 / 100, 5.2 / 100)",
+   "expected": 0.044,
+   "format": "percent"
+  },
+  {
+   "id": "number_of_severe_copd_patients",
+   "label": "Number of severe COPD patients",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "population_of_nepal * prevalence_of_moderate_severe_copd",
+   "expected": 1321539.472
+  },
+  {
+   "id": "number_copd_patients_hospitalised_per_year",
+   "label": "Number COPD patients hospitalised per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "number_of_severe_copd_patients / 5",
+   "expected": 264307.8944
+  },
+  {
+   "id": "mortality_rates_of_hospitalised_patients",
+   "label": "Mortality rates of hospitalised patients",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.15771274010873512,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B149"
+   },
+   "explainer": "LogNormal",
+   "format": "percent"
+  },
+  {
+   "id": "number_of_hospitilisation_survivors",
+   "label": "Number of hospitilisation survivors",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "number_copd_patients_hospitalised_per_year * (1 - mortality_rates_of_hospitalised_patients)",
+   "expected": 222623.1721
+  },
+  {
+   "id": "baseline_availability_of_pulmonary_rehabilitation",
+   "label": "Baseline availability of pulmonary rehabilitation",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B151"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "of_eligible_people_who_will_take_up_pulmonary_telerehabilita",
+   "label": "% Of eligible people who will take up pulmonary telerehabilitation",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "50 / 100",
+   "expected": 0.5,
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_effect_suggest_range_0_to_80_e_g_40",
+   "label": "Internal validity effect [Suggest range 0% to -80%, e.g. -40%]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": -0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B153"
+   },
+   "explainer": "Normal % change",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_effect_suggest_range_40_to_80_e_g_10",
+   "label": "External validity effect [Suggest range +40% to -80%, e.g. -10%]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": -0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B154"
+   },
+   "explainer": "Normal % change",
+   "format": "percent"
+  },
+  {
+   "id": "discounted_effect_size_in_increasing_pr_uptake",
+   "label": "Discounted effect size in increasing PR uptake",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "of_eligible_people_who_will_take_up_pulmonary_telerehabilita * (1 + internal_validity_effect_suggest_range_0_to_80_e_g_40) * (1 + external_validity_effect_suggest_range_40_to_80_e_g_10)",
+   "expected": 0.405,
+   "format": "percent"
+  },
+  {
+   "id": "of_people_with_smartphones",
+   "label": "% of people with smartphones",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.05,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B156"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "additional_number_of_people_per_year_using_pr_because_of_int",
+   "label": "Additional number of people per year using PR because of intervention",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "number_of_hospitilisation_survivors * (1 - baseline_availability_of_pulmonary_rehabilitation) * discounted_effect_size_in_increasing_pr_uptake * of_people_with_smartphones",
+   "expected": 4057.307312
+  },
+  {
+   "id": "number_of_people_reached_per_year_when_at_scale",
+   "label": "Number of people reached per year when at scale",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "additional_number_of_people_per_year_using_pr_because_of_int",
+   "expected": 4057.307312
+  },
+  {
+   "id": "annual_number_of_people_reached_in_period_2",
+   "label": "Annual number of people reached in period 2",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "number_of_people_reached_per_year_when_at_scale",
+   "expected": 4057.307312
+  },
+  {
+   "id": "effective_discount_rate_for_reach_of_costs_over_time",
+   "label": "Effective discount rate, for reach of costs over time",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "discount_rate_for_costs_keep_fixed_in_all_ceas",
+   "expected": 0.04,
+   "format": "percent"
+  },
+  {
+   "id": "impact_period_2_ends_on_year_or_ongoing_suggest_15",
+   "label": "Impact period 2 ends on year ___ OR \"ongoing\" [suggest: 15]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 10.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B169"
+   },
+   "explainer": "Year"
+  },
+  {
+   "id": "impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8",
+   "label": "Impact period 1 ends (reaches end costs) in year __ [suggest: 2-8]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 4.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B161"
+   },
+   "explainer": "Year"
+  },
+  {
+   "id": "impact_period_2_begins_on_year_previous_period_end_1",
+   "label": "Impact period 2 begins on year ___ [previous period end +1]",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 + 1",
+   "expected": 5.0
+  },
+  {
+   "id": "total_people_reached_over_period_2_npv_for_costs",
+   "label": "Total people reached over period 2, NPV, for costs",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "if(0, annual_number_of_people_reached_in_period_2 / effective_discount_rate_for_reach_of_costs_over_time, annual_number_of_people_reached_in_period_2 * (1 - (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ impact_period_2_ends_on_year_or_ongoing_suggest_15) / effective_discount_rate_for_reach_of_costs_over_time) - annual_number_of_people_reached_in_period_2 * (1 - (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (impact_period_2_begins_on_year_previous_period_end_1 - 1)) / effective_discount_rate_for_reach_of_costs_over_time",
+   "expected": 18715.74233
+  },
+  {
+   "id": "number_of_people_reached_in_first_year_of_period_1_suggest_0",
+   "label": "Number of people reached in first year of period 1 [suggest: 0]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B162"
+   },
+   "explainer": "People"
+  },
+  {
+   "id": "impact_period_1_begins_in_year_suggest_0_suggest_range_0_2",
+   "label": "Impact period 1 begins in year __ [suggest: 0, suggest range 0-2]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B160"
+   },
+   "explainer": "Year"
+  },
+  {
+   "id": "increase_per_year_2",
+   "label": "Increase per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(number_of_people_reached_per_year_when_at_scale - number_of_people_reached_in_first_year_of_period_1_suggest_0) / (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2)",
+   "expected": 1014.326828
+  },
+  {
+   "id": "total_people_reached_over_period_1_npv_for_costs",
+   "label": "Total people reached over period 1, NPV, for costs",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(number_of_people_reached_in_first_year_of_period_1_suggest_0 * (1 - (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1)) + increase_per_year_2 * ((1 - (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1)) / effective_discount_rate_for_reach_of_costs_over_time - 1 - (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1 - 1) * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1))) / effective_discount_rate_for_reach_of_costs_over_time * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 - 1)",
+   "expected": 9355.890994
+  },
+  {
+   "id": "total_people_reached_npv_for_costs",
+   "label": "Total people reached, NPV, for costs",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_people_reached_over_period_2_npv_for_costs + total_people_reached_over_period_1_npv_for_costs",
+   "expected": 28071.63332
+  },
+  {
+   "id": "number_of_people_reached_npv",
+   "label": "Number of people reached, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_people_reached_npv_for_costs",
+   "expected": 28071.63332
+  },
+  {
+   "id": "data_storage_cost_app_running_costs",
+   "label": "Data storage cost app running costs",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.20199183621168318,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B61"
+   },
+   "explainer": "LogNormal"
+  },
+  {
+   "id": "cost_per_patient_including_manager_and_storage",
+   "label": "cost per patient including manager and storage",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "data_storage_cost_app_running_costs",
+   "expected": 0.2019918362,
+   "format": "usd"
+  },
+  {
+   "id": "total_variable_costs_npv",
+   "label": "Total variable costs, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "number_of_people_reached_npv * cost_per_patient_including_manager_and_storage",
+   "expected": 5670.24076,
+   "format": "usd"
+  },
+  {
+   "id": "total_costs_if_successful",
+   "label": "Total costs if successful",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_fixed_costs_over_period_2_npv + total_fixed_costs_over_period_1_npv + total_variable_costs_npv",
+   "expected": 2078971.398,
+   "format": "usd"
+  },
+  {
+   "id": "probability_of_success_that_the_expected_impact_happens_sugg",
+   "label": "Probability of success (that the expected impact happens) [suggest: 90% for direct, 30% for policy]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.9,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B11"
+   },
+   "explainer": "Normal",
+   "format": "percent"
+  },
+  {
+   "id": "total_variable_costs_npv_if_not_successful_suggest_0",
+   "label": "Total variable costs, NPV, if not successful [Suggest: $0]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B75"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "last_year_charity_runs_if_unsuccessful_suggest_4_expected",
+   "label": "Last year charity runs if unsuccessful [suggest: 4] (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 4.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B12"
+   },
+   "explainer": "Normal years"
+  },
+  {
+   "id": "total_fixed_costs_over_period_2_npv_if_not_successful",
+   "label": "Total fixed costs over period 2, NPV, if not successful",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "if(last_year_charity_runs_if_unsuccessful_suggest_4_expected < cost_period_2_begins_in_year_previous_period_end_1, 0, if(last_year_charity_runs_if_unsuccessful_suggest_4_expected > cost_period_2_ends_on_year_or_ongoing_suggest_16_expected, total_fixed_costs_over_period_2_npv, annual_fixed_costs_in_this_period * (1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ last_year_charity_runs_if_unsuccessful_suggest_4_expected) / discount_rate_for_costs_keep_fixed_in_all_ceas - annual_fixed_costs_in_this_period * (1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_2_begins_in_year_previous_period_end_1 - 1)) / discount_rate_for_costs_keep_fixed_in_all_ceas)) * (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_2_begins_in_year_previous_period_end_1 - 1)",
+   "expected": 234983.2494,
+   "format": "usd"
+  },
+  {
+   "id": "total_fixed_costs_over_period_1_npv_if_not_successful",
+   "label": "Total fixed costs over period 1, NPV, if not successful",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "if(last_year_charity_runs_if_unsuccessful_suggest_4_expected < cost_period_1_begins_in_year_fixed, 0, if(last_year_charity_runs_if_unsuccessful_suggest_4_expected > cost_period_1_ends_in_year_suggest_2_5_min_2_expected, total_fixed_costs_over_period_1_npv, (costs_at_period_1_start_fixed_based_on_ce_grant_sizes_expect * (1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (last_year_charity_runs_if_unsuccessful_suggest_4_expected - cost_period_1_begins_in_year_fixed + 1)) + increase_per_year * ((1 - (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (last_year_charity_runs_if_unsuccessful_suggest_4_expected - cost_period_1_begins_in_year_fixed + 1)) / discount_rate_for_costs_keep_fixed_in_all_ceas - 1 - (last_year_charity_runs_if_unsuccessful_suggest_4_expected - cost_period_1_begins_in_year_fixed + 1 - 1) * (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (last_year_charity_runs_if_unsuccessful_suggest_4_expected - cost_period_1_begins_in_year_fixed + 1))) / discount_rate_for_costs_keep_fixed_in_all_ceas * (1 - discount_rate_for_costs_keep_fixed_in_all_ceas) ^ (cost_period_1_begins_in_year_fixed - 1)))",
+   "expected": 613159.1758,
+   "format": "usd"
+  },
+  {
+   "id": "total_costs_if_not_successful",
+   "label": "Total costs if not successful",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_variable_costs_npv_if_not_successful_suggest_0 + total_fixed_costs_over_period_2_npv_if_not_successful + total_fixed_costs_over_period_1_npv_if_not_successful",
+   "expected": 848142.4252,
+   "format": "usd"
+  },
+  {
+   "id": "total_expected_cost_per_successful_charity",
+   "label": "Total expected cost per successful charity",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_costs_if_successful + (1 - probability_of_success_that_the_expected_impact_happens_sugg) / probability_of_success_that_the_expected_impact_happens_sugg * total_costs_if_not_successful",
+   "expected": 2173209.445,
+   "format": "usd"
+  },
+  {
+   "id": "one_off_reaching_new_jurisdiction_costs_expected",
+   "label": "One off reaching new jurisdiction costs (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 183136.0255173904,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B38"
+   },
+   "explainer": "LogNormal",
+   "format": "usd"
+  },
+  {
+   "id": "total_cost_per_successful_charity_including_cost_of_reaching",
+   "label": "Total cost per successful charity including cost of reaching new jurisdiction",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_expected_cost_per_successful_charity + one_off_reaching_new_jurisdiction_costs_expected",
+   "expected": 2356345.471,
+   "format": "usd"
+  },
+  {
+   "id": "cost_total_npv",
+   "label": "Cost total, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_cost_per_successful_charity_including_cost_of_reaching",
+   "expected": 2356345.471,
+   "format": "usd"
+  },
+  {
+   "id": "cost_per_beneficiary_per_year_optional_delete_if_a_daly_cea",
+   "label": "Cost per beneficiary per year [Optional, delete if a DALY/$ CEA]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B128"
+   },
+   "explainer": "$/person/year",
+   "format": "usd"
+  },
+  {
+   "id": "nepal_average_salary",
+   "label": "Nepal average salary",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 757.8395999999999,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B129"
+   },
+   "format": "usd"
+  },
+  {
+   "id": "cost_as_an_income_doubling",
+   "label": "Cost as an Income doubling",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "-cost_per_beneficiary_per_year_optional_delete_if_a_daly_cea / nepal_average_salary",
+   "expected": 0.0
+  },
+  {
+   "id": "one_year_of_doubled_consumption_to_dalys_fixed",
+   "label": "One year of doubled consumption to DALYs [fixed]",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "1 / $uov_per_daly",
+   "expected": 0.4347826087,
+   "explainer": "Ambitious Impact counts a year of doubled income as 1/2.3 of a DALY (its own exchange rate between income and health). Linked to the shared rate between a healthy year and a doubled-income year (Your values); the evaluator view pins it to Ambitious Impact's 2.3 (a DALY = 2.3 doubled-income years)."
+  },
+  {
+   "id": "value_lost_per_year_in_terms_of_dalys",
+   "label": "Value lost per year (in terms of DALYs)",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "cost_as_an_income_doubling * one_year_of_doubled_consumption_to_dalys_fixed",
+   "expected": 0.0
+  },
+  {
+   "id": "disability_weight_for_severe_copd",
+   "label": "Disability weight for Severe COPD",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.41450000000000004,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B104"
+   },
+   "explainer": "Normal"
+  },
+  {
+   "id": "disability_weight_for_moderate_copd",
+   "label": "Disability weight for Moderate COPD",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.23149999999999998,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B105"
+   },
+   "explainer": "Normal"
+  },
+  {
+   "id": "change_in_disability_weight_from_pulmonary_rehabilitation",
+   "label": "Change in disability weight from Pulmonary rehabilitation",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "disability_weight_for_severe_copd - disability_weight_for_moderate_copd",
+   "expected": 0.183
+  },
+  {
+   "id": "discount_for_disability_effect",
+   "label": "Discount for disability effect",
+   "section": "nepal_mycopd_partnership_model",
+   "value": -0.4,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B107"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "gold_catagory_weight",
+   "label": "GOLD catagory weight",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B111"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "qaly_benefit_from_pr_paper_1",
+   "label": "QALY benefit from PR Paper 1",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.030000000000000002,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B108"
+   },
+   "explainer": "Normal"
+  },
+  {
+   "id": "paper_1_weight",
+   "label": "Paper 1 weight",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.3,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B112"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "qaly_benefit_from_pr_paper_2",
+   "label": "QALY benefit from PR Paper 2",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.107,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B109"
+   }
+  },
+  {
+   "id": "paper_2_weight",
+   "label": "Paper 2 weight",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.5,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B113"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "qaly_benefit_from_physical_activity_paper_3",
+   "label": "QALY benefit from physical activity paper 3",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "0.66",
+   "expected": 0.66
+  },
+  {
+   "id": "paper_3_weight",
+   "label": "Paper 3 weight",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B114"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "impact_per_person_per_year",
+   "label": "Impact per person per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "change_in_disability_weight_from_pulmonary_rehabilitation * (1 + discount_for_disability_effect) * gold_catagory_weight + qaly_benefit_from_pr_paper_1 * paper_1_weight + qaly_benefit_from_pr_paper_2 * paper_2_weight + qaly_benefit_from_physical_activity_paper_3 * paper_3_weight",
+   "expected": 0.13948
+  },
+  {
+   "id": "discount_rate_for_impacts_per_person_fixed",
+   "label": "Discount rate, for impacts per person [fixed]",
+   "section": "nepal_mycopd_partnership_model",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B91"
+   },
+   "format": "percent",
+   "formula": "$discount_rate",
+   "expected": 0.014,
+   "explainer": "Ambitious Impact discounts at 0.014 a year. Linked to the shared discount rate (Your values); the evaluator view pins it to Ambitious Impact's rate."
+  },
+  {
+   "id": "number_of_years_that_impact_spread_over_suggest_1_40_min_1",
+   "label": "Number of years that impact spread over [Suggest: 1-40; Min: 1]",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "6.1 * 0.5",
+   "expected": 3.05
+  },
+  {
+   "id": "delay_on_impact_starting_from_intervention_date_suggest_0",
+   "label": "Delay on impact starting from intervention date [Suggest: 0]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B119"
+   }
+  },
+  {
+   "id": "value_of_impact_in_year_of_intervention_discounted_per_perso",
+   "label": "Value of impact in year of intervention (discounted), per person",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "if(0, impact_per_person_per_year / discount_rate_for_impacts_per_person_fixed, impact_per_person_per_year * if(discount_rate_for_impacts_per_person_fixed = 0, number_of_years_that_impact_spread_over_suggest_1_40_min_1, (1 - (1 - discount_rate_for_impacts_per_person_fixed) ^ number_of_years_that_impact_spread_over_suggest_1_40_min_1) / discount_rate_for_impacts_per_person_fixed)) * (1 - discount_rate_for_impacts_per_person_fixed) ^ delay_on_impact_starting_from_intervention_date_suggest_0",
+   "expected": 0.4193392168,
+   "explainer": "At a discount rate of 0 the sheet's formula divides 0 by 0; the model uses its limit, the number of years."
+  },
+  {
+   "id": "mortality_rate_for_copd_2_years_post_exacerbation",
+   "label": "Mortality rate for COPD 2 years post-exacerbation",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.31,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B96"
+   },
+   "explainer": "count",
+   "format": "percent"
+  },
+  {
+   "id": "effect_1_mortality_effect_mortality_reduction",
+   "label": "Effect 1: Mortality effect: Mortality reduction",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.42,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B97"
+   },
+   "explainer": "Normal e.g. DALYs",
+   "format": "percent"
+  },
+  {
+   "id": "internal_validity_effect_suggest_range_0_to_80_e_g_40_2",
+   "label": "Internal validity effect [Suggest range 0% to -80%, e.g. -40%]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": -0.15,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B98"
+   },
+   "explainer": "% change",
+   "format": "percent"
+  },
+  {
+   "id": "external_validity_effect_suggest_range_40_to_80_e_g_10_2",
+   "label": "External validity effect [Suggest range +40% to -80%, e.g. -10%]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": -0.2,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B99"
+   },
+   "explainer": "% change",
+   "format": "percent"
+  },
+  {
+   "id": "discounted_mortality_effect_size",
+   "label": "Discounted mortality effect size",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "effect_1_mortality_effect_mortality_reduction * (1 + internal_validity_effect_suggest_range_0_to_80_e_g_40_2) * (1 + external_validity_effect_suggest_range_40_to_80_e_g_10_2)",
+   "expected": 0.2856,
+   "format": "percent"
+  },
+  {
+   "id": "lives_saved_per_patient_treated",
+   "label": "Lives saved per patient treated",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "mortality_rate_for_copd_2_years_post_exacerbation * discounted_mortality_effect_size",
+   "expected": 0.088536
+  },
+  {
+   "value": 6.1,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B102"
+   },
+   "format": "number",
+   "id": "years_of_life_gained_per_copd_death_averted_aim",
+   "label": "Years of life gained per COPD death averted (Ambitious Impact's figure)",
+   "section": "nepal_mycopd_partnership_model",
+   "explainer": "Written into the sheet's formula for the DALY benefit of lives saved (=B101*6.1*(1-B104)): the average life expectancy of a patient with severe COPD (https://pubmed.ncbi.nlm.nih.gov/29605217). Its own row here so it can be linked to the value of a life."
+  },
+  {
+   "id": "years_of_life_gained_per_copd_death_averted",
+   "label": "Years of life gained per COPD death averted",
+   "section": "nepal_mycopd_partnership_model",
+   "explainer": "Ambitious Impact's value of a death averted, scaled by how much Your values weigh a life (1 in the evaluator view).",
+   "format": "number",
+   "formula": "years_of_life_gained_per_copd_death_averted_aim * $life_value_multiplier",
+   "expected": 6.1
+  },
+  {
+   "id": "daly_benefit_from_lives_saved_per_patient_treated_reached",
+   "label": "DALY benefit from lives saved per patient treated/reached",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "lives_saved_per_patient_treated * years_of_life_gained_per_copd_death_averted * (1 - disability_weight_for_severe_copd)",
+   "expected": 0.3162107508
+  },
+  {
+   "id": "total_net_health_consumption_impact_per_person_per_year",
+   "label": "Total net [health/consumption] impact per person per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "value_lost_per_year_in_terms_of_dalys + value_of_impact_in_year_of_intervention_discounted_per_perso + daly_benefit_from_lives_saved_per_patient_treated_reached",
+   "expected": 0.7355499676
+  },
+  {
+   "id": "daly_impact_per_person_reached_per_year",
+   "label": "[DALY/$/impact] per person reached per year",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_net_health_consumption_impact_per_person_per_year",
+   "expected": 0.7355499676
+  },
+  {
+   "id": "probability_per_year_that_change_would_happen_anyway_even_if",
+   "label": "Probability per year that change would happen anyway (even if no charity) (Expected)",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.01331329997197241,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B9"
+   },
+   "explainer": "LogNormal",
+   "format": "percent"
+  },
+  {
+   "id": "population_growth_rate_if_relevant_e_g_5_if_intervention_dri",
+   "label": "Population growth rate [if relevant, e.g. +5% if intervention drives national policy change that affects the whole country and the country has a 5% population g",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.009073333,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B136"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "daly_rate_change_over_time_if_relevant_e_g_2_5_if_infant_mor",
+   "label": "DALY rate change over time [if relevant, e.g. -2.5% if infant mortality is decreasing by 2.5% per year]",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.0182,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B137"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "increase_in_smartphone_penetration_annual",
+   "label": "Increase in smartphone penetration annual",
+   "section": "nepal_mycopd_partnership_model",
+   "value": 0.02,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
+    "cell": "Nepal myCOPD partnership model!B138"
+   },
+   "format": "percent"
+  },
+  {
+   "id": "effective_discount_rate_for_reach_of_impacts_over_time",
+   "label": "Effective discount rate, for reach of impacts over time",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "discount_rate_for_impacts_per_person_fixed + probability_per_year_that_change_would_happen_anyway_even_if - (population_growth_rate_if_relevant_e_g_5_if_intervention_dri + daly_rate_change_over_time_if_relevant_e_g_2_5_if_infant_mor) - increase_in_smartphone_penetration_annual",
+   "expected": -0.01996003303,
+   "format": "percent"
+  },
+  {
+   "id": "total_people_reached_over_period_2_npv_for_impacts",
+   "label": "Total people reached over period 2, NPV, for impacts",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "if(0, annual_number_of_people_reached_in_period_2 / effective_discount_rate_for_reach_of_impacts_over_time, annual_number_of_people_reached_in_period_2 * (1 - (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ impact_period_2_ends_on_year_or_ongoing_suggest_15) / effective_discount_rate_for_reach_of_impacts_over_time) - annual_number_of_people_reached_in_period_2 * (1 - (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (impact_period_2_begins_on_year_previous_period_end_1 - 1)) / effective_discount_rate_for_reach_of_impacts_over_time",
+   "expected": 27696.63505
+  },
+  {
+   "id": "total_people_reached_over_period_1_npv_for_impacts",
+   "label": "Total people reached over period 1, NPV, for impacts",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "(number_of_people_reached_in_first_year_of_period_1_suggest_0 * (1 - (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1)) + increase_per_year_2 * ((1 - (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1)) / effective_discount_rate_for_reach_of_impacts_over_time - 1 - (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1 - 1) * (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (impact_period_1_ends_reaches_end_costs_in_year_suggest_2_8 - impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 + 1))) / effective_discount_rate_for_reach_of_impacts_over_time * (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (impact_period_1_begins_in_year_suggest_0_suggest_range_0_2 - 1)",
+   "expected": 10554.28215
+  },
+  {
+   "id": "total_people_reached_npv_for_impacts",
+   "label": "Total people reached, NPV, for impacts",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_people_reached_over_period_2_npv_for_impacts + total_people_reached_over_period_1_npv_for_impacts",
+   "expected": 38250.91719
+  },
+  {
+   "id": "number_of_people_reached_total_npv",
+   "label": "Number of people reached total, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "total_people_reached_npv_for_impacts",
+   "expected": 38250.91719
+  },
+  {
+   "id": "daly_total_npv",
+   "label": "DALY total, NPV",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "daly_impact_per_person_reached_per_year * number_of_people_reached_total_npv",
+   "expected": 28135.4609
+  },
+  {
+   "id": "cost_effectiveness_daly",
+   "label": "Cost effectiveness ($/DALY)",
+   "section": "nepal_mycopd_partnership_model",
+   "formula": "cost_total_npv / daly_total_npv",
+   "expected": 83.75002203,
+   "format": "usd"
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "staff_pay",
+   "label": "Staff pay as a share of program cost",
+   "format": "percent",
+   "value": {
+    "low": 0.35,
+    "best": 0.5,
+    "high": 0.65
+   },
+   "kind": "judgment",
+   "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+  },
+  {
+   "id": "salary_gap",
+   "section": "staff_pay",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "value": {
+    "low": 0.05,
+    "best": 0.15,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "staff_pay",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "staff_pay",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "bottom_line",
+   "label": "DALYs averted per dollar",
+   "formula": "(1 / cost_effectiveness_daly) * donor_cost_share",
+   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+  }
+ ],
+ "output": {
+  "row": "dalys_per_dollar",
+  "unit": "daly",
+  "label": "DALYs averted per dollar",
+  "native": {
+   "row": "cost_effectiveness_daly",
+   "unit": "$ per DALY averted (Nepal, myCOPD partnership model)"
+  }
+ },
+ "summary": "Ambitious Impact's estimate for a new charity that partners with a digital app to give pulmonary rehabilitation to people recently hospitalised with COPD, modelled for Nepal. The idea Respira Health was founded to run. A re-implementation of AIM's spreadsheet, traced cell by cell from its bottom line: about $84 per DALY averted (the report's range is $9 to $84 across countries)."
+}
