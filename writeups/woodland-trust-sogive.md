@@ -21,12 +21,12 @@ SoGive's planting figure is its bottom line. Our steps follow:
 - **All three projects:** a donation to the Woodland Trust isn't restricted to planting, so our view divides all three projects' cost by all their tonnes. Protected woodland counts half its carbon (our judgment of how much would otherwise be lost).
 - **SoGive's caveats:** SoGive lists assumptions it didn't test; our view applies them as judgments: 70% of trees survive (1.1 million of the 4.1 million were given away to schools and groups), half of a restored hectare's uptake is extra (the land was degraded, not bare), and 80% of the carbon stays stored.
 - **Pounds to dollars** at the 2019 average exchange rate.
-- **The delay:** trees take up their carbon over a century, on average about 50 years after planting. A tonne taken up then avoids only the heat deaths still to come (three quarters, our judgment), and those come later than the average the site's conversion already discounts for, by about 25 years (our judgment), so at the default 4% a tonne taken up is worth about 0.28 of one averted now (our judgment, 0.15 to 0.6). This is fixed at the default rate rather than moving with the discount slider, so at low rates the figure is too low.
+- **The delay:** trees take up their carbon over a century, on average about 50 years after planting. A tonne taken up then avoids only the heat deaths still to come (three quarters, our judgment), and those come later than the average the site's conversion already discounts for, by about 25 years (our judgment), which we discount at the shared rate: at the default 4% a tonne taken up is worth about 0.28 of one averted now, at 0% about 0.75.
 - **No air pollution:** trees taking up carbon leave the fuel burned elsewhere unchanged, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0, and the tonnes count for their heat deaths only.
 
 ### What drives the result
 
-- **Timing:** what a tonne taken up decades from now is worth against one averted today (0.28, our judgment).
+- **Timing and the discount rate:** what a tonne taken up decades from now is worth against one averted today (0.28 at 4%); at 0% the figure is 0.11.
 - **Deaths caused by one more tonne of CO₂**, a value you set.
 - **Survival and permanence:** every tree is assumed to live and stand for 100 years.
 
