@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "against-malaria-foundation",
   "owner": "hli",
-  "summary": "The Happier Lives Institute's analysis of AMF in wellbeing terms (WELLBYs). Its result depends heavily on a philosophical choice HLI leaves open: the neutral point above which a life counts as good. HLI found AMF less cost-effective than StrongMinds under almost all views it considered.",
+  "summary": "Distributes insecticide-treated bed nets to protect people from malaria. The Happier Lives Institute's analysis of AMF in wellbeing terms (WELLBYs). Its result depends heavily on a philosophical choice HLI leaves open: the neutral point above which a life counts as good. HLI found AMF less cost-effective than StrongMinds under almost all views it considered.",
   "source": {
     "publisher": "Happier Lives Institute",
     "title": "The elephant in the bednet: the importance of philosophy when choosing between extending and improving lives",
@@ -13,13 +13,12 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
     "published": "2022-11-01",
     "retrieved": "2026-10-27",
-    "license": "Unclear: check HLI's terms before republishing"
+    "license": "© Happier Lives Institute; no licence published"
   },
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0
     }
   },
   "sections": [
@@ -31,6 +30,10 @@
     {
       "id": "improving",
       "title": "Better health and income"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Other contributors and staff pay"
     },
     {
       "id": "bottom",
@@ -253,11 +256,71 @@
       "expected": 74.43722062
     },
     {
+      "id": "amf_share_of_spending",
+      "section": "staff_pay",
+      "label": "AMF's share of all spending on its net campaigns",
+      "format": "percent",
+      "value": {
+        "low": 0.937,
+        "best": 0.945,
+        "high": 0.961
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, AMF cost-effectiveness analysis (September 2026)",
+        "url": "https://docs.google.com/spreadsheets/d/1VEtie59TgRvZSEVjfG7qcKBKcQyJn8zO91Lau9YNqXc/edit",
+        "cell": "Inputs!J11"
+      },
+      "explainer": "HLI's deaths averted per $1,000 come from GiveWell's figures per dollar AMF spends. Governments pay the rest of the campaign cost in kind. With credit by share of resources, AMF gets only its share. Best guess is GiveWell's DRC figure; the range spans its other locations."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "wellbys_per_dollar",
       "section": "bottom",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "wellbys_per_1000 / 1000"
+      "formula": "(wellbys_per_1000 / 1000) * if($resource_shares, amf_share_of_spending, 1) * donor_cost_share",
+      "explainer": "With credit by share of resources, times AMF's share of all spending and the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

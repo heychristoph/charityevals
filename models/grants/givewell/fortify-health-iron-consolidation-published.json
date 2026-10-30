@@ -1,1586 +1,1631 @@
 {
- "id": "fortify-health-iron-consolidation-published",
- "name": "Iron CEA Fortify Health consolidation_Published",
- "kind": "charity",
- "cause": "global-health",
- "charity": "fortify-health",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"Iron CEA Fortify Health consolidation_Published\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "Iron CEA Fortify Health consolidation_Published",
-  "url": "https://www.givewell.org/research/incubation-grants/fortify-health/june-2018-grant",
-  "sheet": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-  "published": "2018-06-01",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "fortify-health-iron-consolidation-published",
+  "name": "Iron CEA Fortify Health consolidation_Published",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "fortify-health",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Helps flour mills in India add iron to wheat flour to prevent anemia. GiveWell's spreadsheet \"Iron CEA Fortify Health consolidation_Published\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "Iron CEA Fortify Health consolidation_Published",
+    "url": "https://www.givewell.org/research/incubation-grants/fortify-health/june-2018-grant",
+    "sheet": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+    "published": "2018-06-01",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "Iron CEA Fortify Health consolidation_Published",
+      "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (june 2018 grant)",
+      "url": "https://www.givewell.org/research/incubation-grants/fortify-health/june-2018-grant",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "model",
+      "title": "Model"
+    },
+    {
+      "id": "parameters",
+      "title": "Parameters"
+    },
+    {
+      "id": "calculations",
+      "title": "Calculations"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
+    }
+  ],
+  "rows": [
+    {
+      "id": "change_in_intelligence_quotient_from_supplementation_in_stan_2",
+      "label": "Change in intelligence quotient from supplementation (in standard deviations) (Yes)",
+      "section": "parameters",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B22"
+      },
+      "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)"
+    },
+    {
+      "id": "change_in_intelligence_quotient_from_supplementation_in_stan",
+      "label": "Change in intelligence quotient from supplementation (in standard deviations) (Yes)",
+      "section": "model",
+      "formula": "change_in_intelligence_quotient_from_supplementation_in_stan_2",
+      "expected": 0.25
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_c",
+      "label": "Effectiveness of fortification relative to supplementation, cognitive benefits (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B14"
+      },
+      "explainer": "Subjective input. There is moderate evidence that supplementation improves cognitive development of children aged 5-12 years."
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_c",
+      "expected": 0.5
+    },
+    {
+      "id": "change_in_intelligence_quotient_from_fortification_in_standa",
+      "label": "Change in intelligence quotient from fortification (in standard deviations) (Yes)",
+      "section": "model",
+      "formula": "change_in_intelligence_quotient_from_supplementation_in_stan * effectiveness_of_fortification_relative_to_supplementation_0",
+      "expected": 0.125
+    },
+    {
+      "id": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
+      "label": "Percentage increase in wages/consumption for every 1 point increase in IQ (Yes)",
+      "section": "parameters",
+      "value": 0.0075,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B25"
+      },
+      "explainer": "Same methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
+      "format": "percent"
+    },
+    {
+      "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
+      "label": "Percentage increase in wages/consumption for every 1 point increase in IQ (Yes)",
+      "section": "model",
+      "formula": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
+      "expected": 0.0075,
+      "format": "percent"
+    },
+    {
+      "id": "percentage_increase_in_wages_consumption_from_increase_in_iq",
+      "label": "Percentage increase in wages/consumption from increase in IQ from fortification (Yes)",
+      "section": "model",
+      "formula": "change_in_intelligence_quotient_from_fortification_in_standa * 15 * percentage_increase_in_wages_consumption_for_every_1_point_i",
+      "expected": 0.0140625,
+      "format": "percent"
+    },
+    {
+      "id": "increase_in_annual_ln_consumption_for_beneficiaries_yes",
+      "label": "Increase in annual ln(consumption) for beneficiaries (Yes)",
+      "section": "model",
+      "formula": "ln(1 + percentage_increase_in_wages_consumption_from_increase_in_iq) - ln(1)",
+      "expected": 0.01396454035
+    },
+    {
+      "id": "africa_population_pyramid_2016_6_8_of_population_in_5_9_year",
+      "label": "Africa population pyramid (2016), ~6.8% of population in 5-9 years old bin. Conceptually we model this as 'an extra year of fortification brings benefits to one",
+      "section": "model",
+      "formula": "(0.097 * 686291907 + 0.094 * 637879447) / 1324171354",
+      "expected": 0.09555484086
+    },
+    {
+      "id": "proportion_of_population_in_each_year_cohort_between_ages_3",
+      "label": "Proportion of population in each year cohort between ages 3-12 (Yes)",
+      "section": "model",
+      "formula": "africa_population_pyramid_2016_6_8_of_population_in_5_9_year / 5",
+      "expected": 0.01911096817
+    },
+    {
+      "id": "proportion_of_children_with_anemia_at_baseline_yes_2",
+      "label": "Proportion of children with anemia at baseline (Yes)",
+      "section": "parameters",
+      "value": 0.584,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B29"
+      },
+      "explainer": "2015-16 DHS https://statcompiler.com/en/#cc=IA&ic=CN_ANMC_C_ANY,CN_ANMC_C_MLD,CN_ANMC_C_MOD,CN_ANMC_C_SEV,CN_ANMC_C_NUM,CN_ANMC_C_UNW,AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=1&gr=1"
+    },
+    {
+      "id": "proportion_of_children_with_anemia_at_baseline_yes",
+      "label": "Proportion of children with anemia at baseline (Yes)",
+      "section": "model",
+      "formula": "proportion_of_children_with_anemia_at_baseline_yes_2",
+      "expected": 0.584
+    },
+    {
+      "id": "proportion_of_population_with_potential_benefits_yes",
+      "label": "Proportion of population with (potential) benefits (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_in_each_year_cohort_between_ages_3 * proportion_of_children_with_anemia_at_baseline_yes",
+      "expected": 0.01116080541
+    },
+    {
+      "id": "average_increase_in_annual_ln_consumption_including_non_bene",
+      "label": "Average increase in annual ln(consumption) (including non-beneficiaries) (Yes)",
+      "section": "model",
+      "formula": "increase_in_annual_ln_consumption_for_beneficiaries_yes * proportion_of_population_with_potential_benefits_yes",
+      "expected": 0.0001558555175
+    },
+    {
+      "id": "salmon_indicates_less_subjective_inputs_discount_rate_large",
+      "label": "Salmon indicates less subjective inputs: Discount rate (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.025,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B6"
+      },
+      "explainer": "GiveWell CEA, Nov 2016. Cell C6 of Parameters sheet",
+      "format": "percent"
+    },
+    {
+      "id": "cognitive_benefits_for_children_ages_3_12_discount_rate_yes",
+      "label": "Cognitive benefits for children, ages 3-12: Discount rate (Yes)",
+      "section": "model",
+      "formula": "salmon_indicates_less_subjective_inputs_discount_rate_large",
+      "expected": 0.025,
+      "format": "percent"
+    },
+    {
+      "id": "average_number_of_years_between_entering_fortification_progr",
+      "label": "Average number of years between 'entering fortification program' and beginning of long term benefits (Yes)",
+      "section": "parameters",
+      "value": 12.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B23"
+      },
+      "explainer": "Benefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016"
+    },
+    {
+      "id": "average_number_of_years_between_entering_fortifictaion_progr",
+      "label": "Average number of years between 'entering fortifictaion program' and beginning of long term benefits (Yes)",
+      "section": "model",
+      "formula": "average_number_of_years_between_entering_fortification_progr",
+      "expected": 12.0
+    },
+    {
+      "id": "duration_of_long_term_benefits_of_fortification_in_years_yes_2",
+      "label": "Duration of long term benefits of fortification (in years) (Yes)",
+      "section": "parameters",
+      "value": 30.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B24"
+      },
+      "explainer": "Median duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016"
+    },
+    {
+      "id": "duration_of_long_term_benefits_of_fortification_in_years_yes",
+      "label": "Duration of long term benefits of fortification (in years) (Yes)",
+      "section": "model",
+      "formula": "duration_of_long_term_benefits_of_fortification_in_years_yes_2",
+      "expected": 30.0
+    },
+    {
+      "id": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
+      "label": "Present value of sum of average lifetime income benefits (including non-beneficiaries) (Yes)",
+      "section": "model",
+      "formula": "average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ (average_number_of_years_between_entering_fortifictaion_progr + duration_of_long_term_benefits_of_fortification_in_years_yes)) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes)) - average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ average_number_of_years_between_entering_fortifictaion_progr) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes))",
+      "expected": 0.002486193701
+    },
+    {
+      "id": "average_increase_in_ln_consumption_direct_cognitive_benefits",
+      "label": "Average increase in ln(consumption) (direct cognitive benefits, including non-beneficiaries) (Yes)",
+      "section": "model",
+      "formula": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
+      "expected": 0.002486193701
+    },
+    {
+      "id": "daly_equivalent_of_a_year_of_mild_anemia_yes",
+      "label": "DALY equivalent of a year of mild anemia (Yes)",
+      "section": "model",
+      "value": 0.004,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B38"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
+    },
+    {
+      "id": "proportion_of_population_that_are_women_of_reproductive_age_2",
+      "label": "Proportion of population that are women of reproductive age (Yes)",
+      "section": "parameters",
+      "value": 0.318,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B27"
+      },
+      "explainer": "Calculated from World Bank 2016 data, women ages 15-64, total population http://databank.worldbank.org/data/reports.aspx?source=2&series=SP.POP.TOTL.FE.IN&country=IND"
+    },
+    {
+      "id": "proportion_of_population_that_are_women_of_reproductive_age",
+      "label": "Proportion of population that are women of reproductive age (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_women_of_reproductive_age_2",
+      "expected": 0.318
+    },
+    {
+      "id": "proportion_of_women_with_mild_anemia_110_hb_120_large_effect",
+      "label": "Proportion of women with mild anemia (110<Hb<120) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.1806486486,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B21"
+      },
+      "explainer": "Calculated in the source sheet as `=B8-normdist(110,B7,B20,TRUE)`; kept as a fixed number here (NORMDIST()).\n\nCalculation 0.396 100<Hb<119 according to 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1"
+    },
+    {
+      "id": "proportion_of_women_with_mild_ida_pre_fortification_yes",
+      "label": "Proportion of women with mild IDA (pre-fortification) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_women_with_mild_anemia_110_hb_120_large_effect",
+      "expected": 0.1806486486,
+      "format": "percent"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_m_2",
+      "label": "Effectiveness of fortification relative to supplementation, mild anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B10"
+      },
+      "explainer": "Subjective input. There is strong evidence that supplementation decreases overall cases of anemia."
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_m",
+      "label": "Effectiveness of fortification relative to supplementation, mild anemia (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_m_2",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_mild_anemia_iron_supplementation_i_e_proportion_w",
+      "label": "Risk ratio mild anemia, iron supplementation (i.e. proportion with condition post-supplementation) (Yes)",
+      "section": "model",
+      "value": 0.345,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B23"
+      },
+      "explainer": "Pena-Rosas et al (2015), Low et al (2016), (mean of effects on women of reproductive age, 0.30 and 0.39)"
+    },
+    {
+      "id": "risk_ratio_mild_anemia_iron_fortification_i_e_proportion_wit",
+      "label": "Risk ratio mild anemia, iron fortification (i.e. proportion with condition post-fortification) (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_m * (1 - risk_ratio_mild_anemia_iron_supplementation_i_e_proportion_w)",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_cured_of_mild_anemia_under_fortific",
+      "label": "Proportion of population 'cured' of mild anemia under fortification (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_mild_ida_pre_fortification_yes * (1 - risk_ratio_mild_anemia_iron_fortification_i_e_proportion_wit)",
+      "expected": 0.0
+    },
+    {
+      "id": "mild_anemia_dalys_averted_per_beneficiary_of_iron_fortificat",
+      "label": "Mild anemia DALYs averted per beneficiary of iron fortification (Yes)",
+      "section": "model",
+      "formula": "daly_equivalent_of_a_year_of_mild_anemia_yes * proportion_of_population_cured_of_mild_anemia_under_fortific",
+      "expected": 0.0
+    },
+    {
+      "id": "daly_equivalent_of_a_year_of_moderate_anemia_yes",
+      "label": "DALY equivalent of a year of moderate anemia (Yes)",
+      "section": "model",
+      "value": 0.052,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B39"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
+    },
+    {
+      "id": "proportion_of_women_with_anemia_120g_l_large_effects_only_an",
+      "label": "Proportion of women with anemia (<120g/L) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.53,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B8"
+      },
+      "explainer": "0.48 according to WHO (2011) 0.53 of all women 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1"
+    },
+    {
+      "id": "proportion_of_women_with_severe_anemia_80_g_l_large_effects",
+      "label": "Proportion of women with severe anemia (<80 g/L) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.024,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B10"
+      },
+      "explainer": "0.01 of population has hemoglobin < 70 g/L 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1 0.025 of population of nonpregnant women <80g/L WHO 2011"
+    },
+    {
+      "id": "proportion_of_women_with_moderate_anemia_80_hb_110_large_eff",
+      "label": "Proportion of women with moderate anemia (80<Hb<110) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_women_with_anemia_120g_l_large_effects_only_an - proportion_of_women_with_mild_anemia_110_hb_120_large_effect - proportion_of_women_with_severe_anemia_80_g_l_large_effects",
+      "expected": 0.3253513514
+    },
+    {
+      "id": "proportion_of_women_with_moderate_ida_pre_fortification_yes",
+      "label": "Proportion of women with moderate IDA (pre-fortification) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_women_with_moderate_anemia_80_hb_110_large_eff",
+      "expected": 0.3253513514,
+      "format": "percent"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_m_4",
+      "label": "Effectiveness of fortification relative to supplementation, moderate anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B11"
+      },
+      "explainer": "Subjective input. There is weak evidence that supplementation with iron and folic acid reduces moderate and severe anemia."
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_m_3",
+      "label": "Effectiveness of fortification relative to supplementation, moderate anemia (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_m_4",
+      "expected": 0.5
+    },
+    {
+      "id": "risk_ratio_moderate_anemia_iron_supplementation_only_with_fo",
+      "label": "Risk ratio moderate anemia, iron supplementation (only with folic acid) (Yes)",
+      "section": "model",
+      "value": 0.33,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B24"
+      },
+      "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",0.33,1)`; kept as a fixed number here (text in arithmetic).\n\nPena-Rosas et al (2015) - risk ratio postpartum"
+    },
+    {
+      "id": "risk_ratio_moderate_anemia_iron_fortification_only_with_foli",
+      "label": "Risk ratio moderate anemia, iron fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_m_3 * (1 - risk_ratio_moderate_anemia_iron_supplementation_only_with_fo)",
+      "expected": 0.665
+    },
+    {
+      "id": "proportion_of_population_cured_of_moderate_anemia_under_fort",
+      "label": "Proportion of population 'cured' of moderate anemia under fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_moderate_ida_pre_fortification_yes * (1 - risk_ratio_moderate_anemia_iron_fortification_only_with_foli)",
+      "expected": 0.03465967947
+    },
+    {
+      "id": "moderate_anemia_dalys_averted_per_beneficiary_of_iron_fortif",
+      "label": "Moderate anemia DALYs averted per beneficiary of iron fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "daly_equivalent_of_a_year_of_moderate_anemia_yes * proportion_of_population_cured_of_moderate_anemia_under_fort",
+      "expected": 0.001802303332
+    },
+    {
+      "id": "daly_equivalent_of_a_year_of_severe_anemia_yes",
+      "label": "DALY equivalent of a year of severe anemia (Yes)",
+      "section": "model",
+      "value": 0.149,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B40"
+      },
+      "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
+    },
+    {
+      "id": "proportion_of_women_with_severe_ida_pre_fortification_yes",
+      "label": "Proportion of women with severe IDA (pre-fortification) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_women_with_severe_anemia_80_g_l_large_effects",
+      "expected": 0.024,
+      "format": "percent"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_s_2",
+      "label": "Effectiveness of fortification relative to supplementation, severe anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B12"
+      },
+      "explainer": "Subjective input. There is weak evidence that supplementation with iron and folic acid reduces moderate and severe anemia."
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_s",
+      "label": "Effectiveness of fortification relative to supplementation, severe anemia (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_s_2",
+      "expected": 0.5
+    },
+    {
+      "id": "risk_ratio_severe_anemia_iron_supplementation_only_with_foli",
+      "label": "Risk ratio severe anemia, iron supplementation (only with folic acid) (Yes)",
+      "section": "model",
+      "value": 0.12,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B25"
+      },
+      "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",0.12,1)`; kept as a fixed number here (text in arithmetic).\n\nPena-Rosas et al (2015) - risk ratio during pregnancy"
+    },
+    {
+      "id": "risk_ratio_severe_anemia_iron_fortification_only_with_folic",
+      "label": "Risk ratio severe anemia, iron fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_s * (1 - risk_ratio_severe_anemia_iron_supplementation_only_with_foli)",
+      "expected": 0.56
+    },
+    {
+      "id": "proportion_of_population_cured_of_severe_anemia_under_fortif",
+      "label": "Proportion of population 'cured' of severe anemia under fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_severe_ida_pre_fortification_yes * (1 - risk_ratio_severe_anemia_iron_fortification_only_with_folic)",
+      "expected": 0.00335808
+    },
+    {
+      "id": "severe_anemia_dalys_averted_per_beneficiary_of_iron_fortific",
+      "label": "Severe anemia DALYs averted per beneficiary of iron fortification (only with folic acid) (Yes)",
+      "section": "model",
+      "formula": "daly_equivalent_of_a_year_of_severe_anemia_yes * proportion_of_population_cured_of_severe_anemia_under_fortif",
+      "expected": 0.00050035392
+    },
+    {
+      "id": "daly_equivalent_having_a_low_birth_weight_child_yes",
+      "label": "DALY equivalent having a low birth weight child (Yes)",
+      "section": "model",
+      "value": 0.106,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B57"
+      },
+      "explainer": "WHO (2004) - uses GBD weight from 1990 (includes all sequelae)"
+    },
+    {
+      "id": "births_per_1_000_population_per_year_yes_2",
+      "label": "Births per 1,000 population per year (Yes)",
+      "section": "parameters",
+      "value": 19.3,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B28"
+      },
+      "explainer": "World Bank 2015, Crude Birth Rate, India"
+    },
+    {
+      "id": "births_per_1_000_population_per_year_yes",
+      "label": "Births per 1,000 population per year (Yes)",
+      "section": "model",
+      "formula": "births_per_1_000_population_per_year_yes_2",
+      "expected": 19.3
+    },
+    {
+      "id": "fertility_rate_births_per_1000_population_per_year_yes",
+      "label": "Fertility rate (births per 1000 population per year) (Yes)",
+      "section": "model",
+      "formula": "births_per_1_000_population_per_year_yes",
+      "expected": 19.3
+    },
+    {
+      "id": "proportion_of_population_newborn_babies_yes",
+      "label": "Proportion of population newborn babies (Yes)",
+      "section": "model",
+      "formula": "fertility_rate_births_per_1000_population_per_year_yes / 1000",
+      "expected": 0.0193
+    },
+    {
+      "id": "proportion_of_pregnant_women_at_risk_pre_fortification_yes",
+      "label": "Proportion of pregnant women \"at risk\" (pre-fortification) (Yes)",
+      "section": "model",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B49"
+      },
+      "explainer": "Set this to one because the Cochrane studies look at an unconditional risk ratio for pre-term birth (Pena-Rosas et al 2015)"
+    },
+    {
+      "id": "baseline_proportion_of_babies_that_are_low_birth_weight_pre",
+      "label": "Baseline proportion of babies that are low birth weight (pre-fortification) (Yes)",
+      "section": "model",
+      "value": 0.102,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B50"
+      },
+      "explainer": "Average in Pena-Rosas et al (2015) Cochrane Review - may want to update this for individual countries"
+    },
+    {
+      "id": "proportion_of_population_with_condition_low_birth_weight_pre",
+      "label": "Proportion of population with condition (low birth weight, pre-fortification) (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_newborn_babies_yes * proportion_of_pregnant_women_at_risk_pre_fortification_yes * baseline_proportion_of_babies_that_are_low_birth_weight_pre",
+      "expected": 0.0019686
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_l",
+      "label": "Effectiveness of fortification relative to supplementation, low birth weight (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B13"
+      },
+      "explainer": "Subjective input. There is moderate evidence that iron supplementation improves birth outcomes"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_2",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_l",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con",
+      "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation) (Yes)",
+      "section": "model",
+      "value": 0.84,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B52"
+      },
+      "explainer": "Pena-Rosas et al (2015) Cochrane Review risk ratio - see summary table"
+    },
+    {
+      "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi",
+      "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification) (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_2 * (1 - risk_ratio_from_iron_supplementation_i_e_proportion_with_con)",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_cured_of_condition_under_fortificat",
+      "label": "Proportion of population 'cured' of condition under fortification (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_with_condition_low_birth_weight_pre * (1 - risk_ratio_from_iron_fortification_i_e_proportion_with_condi)",
+      "expected": 0.0
+    },
+    {
+      "id": "dalys_averted_per_beneficiary_of_iron_fortification_yes",
+      "label": "DALYs averted per beneficiary of iron fortification (Yes)",
+      "section": "model",
+      "formula": "daly_equivalent_having_a_low_birth_weight_child_yes * proportion_of_population_cured_of_condition_under_fortificat",
+      "expected": 0.0
+    },
+    {
+      "id": "total_equivalent_under_5_lives_saved_per_10_000_yes",
+      "label": "Total equivalent under-5 lives saved per $10,000 (Yes)",
+      "section": "model",
+      "value": 0.387995,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B69"
+      },
+      "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",sum(B63:B67),0)`; kept as a fixed number here (text in arithmetic).\n\nCalculation"
+    },
+    {
+      "id": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
+      "label": "DALYs averted per death of a 3- to 59-month old child averted (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 9.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B8"
+      },
+      "explainer": "GiveWell CEA, Nov 2016, Cells C53 and C63 of the Parameters sheet"
+    },
+    {
+      "id": "dalys_averted_per_death_of_an_under_5_averted_yes",
+      "label": "DALYs averted per death of an under-5 averted (Yes)",
+      "section": "model",
+      "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
+      "expected": 9.0
+    },
+    {
+      "id": "dalys_averted_per_10_000_yes",
+      "label": "DALYs averted per $10,000 (Yes)",
+      "section": "model",
+      "formula": "total_equivalent_under_5_lives_saved_per_10_000_yes * dalys_averted_per_death_of_an_under_5_averted_yes",
+      "expected": 3.491955
+    },
+    {
+      "id": "dalys_averted_per_beneficiary_of_folic_acid_fortification_ye",
+      "label": "DALYs averted per beneficiary of folic acid fortification (Yes)",
+      "section": "model",
+      "formula": "dalys_averted_per_10_000_yes / (10000 / 0.15)",
+      "expected": 5.2379325e-05
+    },
+    {
+      "id": "daly_equivalent_having_gastrointestinal_issues",
+      "label": "DALY equivalent having gastrointestinal issues",
+      "section": "model",
+      "value": 0.002,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B144"
+      },
+      "explainer": "Arbitrary. Salomon et al (2015) - Table 2, 'Gastric bleeding' has weight of 0.325, but studies use 'any gastrointestinal side effects', so presumably much more mild."
+    },
+    {
+      "id": "proportion_of_women_with_gastrointestinal_side_effects_in_co",
+      "label": "Proportion of women with gastrointestinal side effects in control groups (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "(8 + 1 + 33 + 2 + 8) / (23 + 12 + 128 + 2 + 8)",
+      "expected": 0.3005780347
+    },
+    {
+      "id": "proportion_of_population_that_are_women_of_reproductive_age_3",
+      "label": "Proportion of population that are women of reproductive age (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_population_that_are_women_of_reproductive_age_2",
+      "expected": 0.318
+    },
+    {
+      "id": "proportion_of_population_that_may_have_increased_gastrointes",
+      "label": "Proportion of population that may have increased gastrointestinal side effects (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_women_with_gastrointestinal_side_effects_in_co * proportion_of_population_that_are_women_of_reproductive_age_3",
+      "expected": 0.09558381503
+    },
+    {
+      "id": "baseline_proportion_of_people_with_gastrointestinal_side_eff",
+      "label": "Baseline proportion of people with gastrointestinal side effects (women of reproductive age only)",
+      "section": "model",
+      "formula": "proportion_of_population_that_may_have_increased_gastrointes",
+      "expected": 0.09558381503
+    },
+    {
+      "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_2",
+      "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
+      "section": "model",
+      "value": 1.99,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B139"
+      },
+      "explainer": "Low et al (2016) Cochrane Report, Analysis 5.4"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_s_3",
+      "label": "Effectiveness of fortification relative to supplementation, side effects (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B16"
+      },
+      "explainer": "Subjective input. There is moderate evidence that iron supplementation has adverse side effects."
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_3",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_2",
+      "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
+      "section": "model",
+      "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_2 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_3",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_with_condition_because_of_fortifica",
+      "label": "Proportion of population with condition because of fortification",
+      "section": "model",
+      "formula": "baseline_proportion_of_people_with_gastrointestinal_side_eff * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_2 - 1)",
+      "expected": 0.0
+    },
+    {
+      "id": "gastrointestinal_dalys_caused_per_beneficiary_of_iron_fortif",
+      "label": "Gastrointestinal DALYs caused per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "daly_equivalent_having_gastrointestinal_issues * proportion_of_population_with_condition_because_of_fortifica",
+      "expected": 0.0
+    },
+    {
+      "id": "daly_equivalent_having_diarrhea",
+      "label": "DALY equivalent having diarrhea",
+      "section": "model",
+      "value": 0.074,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B153"
+      },
+      "explainer": "Salomon et al (2015) - Table 2, Mild case of diarrhea"
+    },
+    {
+      "id": "proportion_of_women_with_loose_stools_diarrhea_in_control_gr",
+      "label": "Proportion of women with loose stools/diarrhea in control groups (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "(1 + 2 + 6 + 2 + 1 + 3) / (36 + 8 + 128 + 6 + 44 + 71)",
+      "expected": 0.05119453925
+    },
+    {
+      "id": "proportion_of_population_that_may_have_increased_loose_stool",
+      "label": "Proportion of population that may have increased loose stools/diarrhea side effects (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_women_with_loose_stools_diarrhea_in_control_gr * proportion_of_population_that_are_women_of_reproductive_age_3",
+      "expected": 0.01627986348
+    },
+    {
+      "id": "baseline_proportion_of_people_with_loose_stools_diarrhea_wom",
+      "label": "Baseline proportion of people with loose stools/diarrhea (women of reproductive age only)",
+      "section": "model",
+      "formula": "proportion_of_population_that_may_have_increased_loose_stool",
+      "expected": 0.01627986348
+    },
+    {
+      "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_3",
+      "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
+      "section": "model",
+      "value": 2.13,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B148"
+      },
+      "explainer": "Low et al (2016) Cochrane Report, Analysis 5.7"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_4",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_3",
+      "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
+      "section": "model",
+      "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_3 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_4",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_with_condition_because_of_fortifica_2",
+      "label": "Proportion of population with condition because of fortification",
+      "section": "model",
+      "formula": "baseline_proportion_of_people_with_loose_stools_diarrhea_wom * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_3 - 1)",
+      "expected": 0.0
+    },
+    {
+      "id": "diarrhea_dalys_caused_per_beneficiary_of_iron_fortification",
+      "label": "Diarrhea DALYs caused per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "daly_equivalent_having_diarrhea * proportion_of_population_with_condition_because_of_fortifica_2",
+      "expected": 0.0
+    },
+    {
+      "id": "daly_equivalent_having_constipation",
+      "label": "DALY equivalent having constipation",
+      "section": "model",
+      "value": 0.002,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B162"
+      },
+      "explainer": "Arbitrary. No figures in Salomon et al (2015)"
+    },
+    {
+      "id": "proportion_of_women_with_hard_stools_constipation_in_control",
+      "label": "Proportion of women with hard stools/constipation in control groups (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "(1 + 5 + 0 + 0 + 11 + 0 + 6 + 3) / (31 + 36 + 8 + 182 + 128 + 6 + 44 + 71)",
+      "expected": 0.05138339921
+    },
+    {
+      "id": "proportion_of_population_that_may_have_increased_hard_stools",
+      "label": "Proportion of population that may have increased hard stools/constipation side effects (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_women_with_hard_stools_constipation_in_control * proportion_of_population_that_are_women_of_reproductive_age_3",
+      "expected": 0.01633992095
+    },
+    {
+      "id": "baseline_proportion_of_people_with_hard_stools_constipation",
+      "label": "Baseline proportion of people with hard stools/constipation (women of reproductive age only)",
+      "section": "model",
+      "formula": "proportion_of_population_that_may_have_increased_hard_stools",
+      "expected": 0.01633992095
+    },
+    {
+      "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_4",
+      "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
+      "section": "model",
+      "value": 2.07,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B157"
+      },
+      "explainer": "Low et al (2016) Cochrane Report, Analysis 5.8"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_5",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_4",
+      "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
+      "section": "model",
+      "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_4 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_5",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_with_condition_because_of_fortifica_3",
+      "label": "Proportion of population with condition because of fortification",
+      "section": "model",
+      "formula": "baseline_proportion_of_people_with_hard_stools_constipation * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_4 - 1)",
+      "expected": 0.0
+    },
+    {
+      "id": "constipation_dalys_caused_per_beneficiary_of_iron_fortificat",
+      "label": "Constipation DALYs caused per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "daly_equivalent_having_constipation * proportion_of_population_with_condition_because_of_fortifica_3",
+      "expected": 0.0
+    },
+    {
+      "id": "daly_equivalent_having_abdominal_pain",
+      "label": "DALY equivalent having abdominal pain",
+      "section": "model",
+      "value": 0.011,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B171"
+      },
+      "explainer": "Salomon et al (2015) - Table 2, Mild abdominopelvic problem"
+    },
+    {
+      "id": "proportion_of_women_with_abdominal_pain_in_control_groups_la",
+      "label": "Proportion of women with abdominal pain in control groups (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "(0 + 4 + 2 + 15 + 1 + 3 + 4) / (120 + 36 + 182 + 128 + 6 + 44 + 71)",
+      "expected": 0.04940374787
+    },
+    {
+      "id": "proportion_of_population_that_may_have_increased_abdominal_p",
+      "label": "Proportion of population that may have increased abdominal pain side effects (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "proportion_of_women_with_abdominal_pain_in_control_groups_la * proportion_of_population_that_are_women_of_reproductive_age_3",
+      "expected": 0.01571039182
+    },
+    {
+      "id": "baseline_proportion_of_people_with_abdominal_pain_women_of_r",
+      "label": "Baseline proportion of people with abdominal pain (women of reproductive age only)",
+      "section": "model",
+      "formula": "proportion_of_population_that_may_have_increased_abdominal_p",
+      "expected": 0.01571039182
+    },
+    {
+      "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_5",
+      "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
+      "section": "model",
+      "value": 1.99,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B166"
+      },
+      "explainer": "Low et al (2016) Cochrane Report, Analysis 5.10"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_6",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
+      "expected": 0.0
+    },
+    {
+      "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_5",
+      "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
+      "section": "model",
+      "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_5 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_6",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_with_condition_because_of_fortifica_4",
+      "label": "Proportion of population with condition because of fortification",
+      "section": "model",
+      "formula": "baseline_proportion_of_people_with_abdominal_pain_women_of_r * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_5 - 1)",
+      "expected": 0.0
+    },
+    {
+      "id": "abdominal_pain_dalys_caused_per_beneficiary_of_iron_fortific",
+      "label": "Abdominal pain DALYs caused per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "daly_equivalent_having_abdominal_pain * proportion_of_population_with_condition_because_of_fortifica_4",
+      "expected": 0.0
+    },
+    {
+      "id": "total_dalys_caused_by_side_effects_per_beneficiary_of_iron_f",
+      "label": "Total DALYs caused by side effects per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "gastrointestinal_dalys_caused_per_beneficiary_of_iron_fortif + diarrhea_dalys_caused_per_beneficiary_of_iron_fortification + constipation_dalys_caused_per_beneficiary_of_iron_fortificat + abdominal_pain_dalys_caused_per_beneficiary_of_iron_fortific",
+      "expected": 0.0
+    },
+    {
+      "id": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted_2",
+      "label": "DALYs averted per death of a 3- to 59-month old child averted",
+      "section": "model",
+      "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
+      "expected": 9.0
+    },
+    {
+      "id": "under_5_mortality_rate_per_year_per_1_000_live_births_large",
+      "label": "Under 5 mortality rate per year (per 1,000 live births) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 43.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B25"
+      },
+      "explainer": "India, World Bank 2016 figures: http://data.worldbank.org/indicator/SH.DYN.MORT"
+    },
+    {
+      "id": "mortality_rate_neonatal_per_1_000_live_births_large_effects",
+      "label": "Mortality rate, neonatal (per 1,000 live births) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 25.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B26"
+      },
+      "explainer": "India, World Bank 2016 figures: http://data.worldbank.org/indicator/SH.DYN.NMRT"
+    },
+    {
+      "id": "under_5_mortality_rate_excluding_neonates_per_1_000_live_bir",
+      "label": "Under 5 mortality rate (excluding neonates) per 1,000 live births (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "under_5_mortality_rate_per_year_per_1_000_live_births_large - mortality_rate_neonatal_per_1_000_live_births_large_effects",
+      "expected": 18.0
+    },
+    {
+      "id": "of_under_5_mortality_rate_excluding_neonatal_mortality_due_t",
+      "label": "% of under 5 mortality rate (excluding neonatal mortality) due to malaria, 2015, sub-Saharan Africa (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.0131,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B28"
+      },
+      "explainer": "Unicef 2015, \"Malaria mortality among children under 5\" https://data.unicef.org/topic/child-health/malaria/",
+      "format": "percent"
+    },
+    {
+      "id": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
+      "label": "Under 5 mortality due to malaria (excluding neonates) (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "formula": "under_5_mortality_rate_excluding_neonates_per_1_000_live_bir * of_under_5_mortality_rate_excluding_neonatal_mortality_due_t",
+      "expected": 0.2358
+    },
+    {
+      "id": "risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff",
+      "label": "Risk ratio for clincial malaria cases, intention to treat effect (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.29,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B31"
+      },
+      "explainer": "0.29 is our calculated rate ratio, based on combining the SMC Cochrane Review with Tagbor 2016. See \"RevMan analysis\" here: https://docs.google.com/a/givewell.org/document/d/1mYhJcSBUWOHcIzC7Vzvs_5j26YtPPoBW546hqv7rgaU/edit?usp=sharing. 0.62 is the RR from Tagbor 2016, the weakest effect on malaria incidence that we've obeserved in the 7 RCTs we've seen on SMC."
+    },
+    {
+      "id": "fraction_of_annual_malaria_burden_occurring_in_smc_period_la",
+      "label": "Fraction of annual malaria burden occurring in SMC period (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.75,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B32"
+      },
+      "explainer": "In sites considered suitable for SMC, the median fraction of incidence occurring in the 4 consecutive months of peak transmission was 77% and the mean 75.7% (Supplementary Table S1,2). We therefore assumed that, on average, 75% of the annual burden occurred in the SMC period, but also explored the impact of SMC, if 60% and 90% of annual incidence occurred in the period when SMC was given. Cairns 2012, Pg 9. Note that according to the WHO, 60% is the minimum fraction of incidence occuring in 4 months for an area to be suitable for SMC. WHO SMC Policy Recommendation 2012, Pg 2.",
+      "format": "percent"
+    },
+    {
+      "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
+      "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B33"
+      },
+      "explainer": "GW best guess - Our base assumption is that malaria incidence and malaria mortality are related at a 1:1 ratio (e.g. a 71% reduction in malaria incidence leads to a 71% reduction in malaria mortality). In WHO's Africa region, malaria incidence declined by ~40% between 2000 and 2015, and malaria mortality rates declined by ~65% (World Malaria Report 2015, Pg 10, Figure 2.2). Reductions in malaria mortality could be caused by a combination of reductions in malaria incidence and increased access to malaria treatment.",
+      "format": "percent"
+    },
+    {
+      "id": "moderate_severe_anemia_calculations_replicability_adustment",
+      "label": "Moderate/Severe anemia calculations: Replicability adustment (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.9,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B34"
+      },
+      "explainer": "GW best guess - Our best guess that the significant malaria incidence reduction effects from SMC RCTs would replicate. We have seen evidence for SMC's significant effects on malaria incidence from 7 randomized controlled trials (RCTs included in Meremikwu et al 2012 plus Tagbor 2016.)",
+      "format": "percent"
+    },
+    {
+      "id": "external_validity_adjustment_large_effects_only_anemia_cogni",
+      "label": "External validity adjustment (Large effects only (anemia, cognitive, malaria))",
+      "section": "calculations",
+      "value": 0.8,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Calculations!B35"
+      },
+      "explainer": "GW best guess - We account for differences in malaria mortality separately, so this external validity adjustment accounts for other differences between the settings of the SMC RCTs in the 2006 \"baseline\" year and present SMC programs in Sahel regions.",
+      "format": "percent"
+    },
+    {
+      "id": "deaths_averted_per_protected_child_under_5_under_smc_includi_2",
+      "label": "Deaths averted per protected child under 5 under SMC (including replicability and external validity adjustments, and accounting for decline in malaria mortality",
+      "section": "calculations",
+      "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef * (1 - risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff) * fraction_of_annual_malaria_burden_occurring_in_smc_period_la * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction * moderate_severe_anemia_calculations_replicability_adustment * external_validity_adjustment_large_effects_only_anemia_cogni / 1000",
+      "expected": 9.040572e-05
+    },
+    {
+      "id": "deaths_averted_per_protected_child_under_5_under_smc_includi",
+      "label": "Deaths averted per protected child under 5 under SMC (including replicability and external validity adjustments, and accounting for decline in malaria mortality",
+      "section": "model",
+      "formula": "deaths_averted_per_protected_child_under_5_under_smc_includi_2",
+      "expected": 9.040572e-05
+    },
+    {
+      "id": "proportion_of_people_living_in_areas_with_malaria_protection",
+      "label": "Proportion of people living in areas with malaria protection and management services (Yes)",
+      "section": "parameters",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B33"
+      },
+      "explainer": "Arbitrary guess. Can change for country-specific estimates"
+    },
+    {
+      "id": "proportion_of_population_living_in_areas_with_malaria_contro",
+      "label": "Proportion of population living in areas with malaria control and management services (Yes)",
+      "section": "model",
+      "formula": "proportion_of_people_living_in_areas_with_malaria_protection",
+      "expected": 0.5
+    },
+    {
+      "id": "children_under_5_as_of_population_yes_2",
+      "label": "Children under 5 as % of population (Yes)",
+      "section": "parameters",
+      "value": 0.091,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B30"
+      },
+      "explainer": "Calculated from World Bank 2016 data,population ages 0-4 female, male as percents, x male and female population as count, http://databank.worldbank.org/data/reports.aspx?source=2&series=SP.POP.TOTL.FE.IN&country=IND",
+      "format": "percent"
+    },
+    {
+      "id": "children_under_5_as_of_population_yes",
+      "label": "Children under 5 as % of population (Yes)",
+      "section": "model",
+      "formula": "children_under_5_as_of_population_yes_2",
+      "expected": 0.091,
+      "format": "percent"
+    },
+    {
+      "id": "under_5_deaths_averted_by_malaria_treatment_as_proportion_of",
+      "label": "Under 5 deaths averted by malaria treatment as proportion of population (Yes)",
+      "section": "model",
+      "formula": "deaths_averted_per_protected_child_under_5_under_smc_includi * proportion_of_population_living_in_areas_with_malaria_contro * children_under_5_as_of_population_yes",
+      "expected": 4.11346026e-06
+    },
+    {
+      "id": "proportion_of_treated_people_whose_seasonal_malaria_chemopre_2",
+      "label": "Proportion of treated people whose seasonal malaria chemoprevention drugs will fail under folic acid supplementation (Yes)",
+      "section": "model",
+      "value": 0.129,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B123"
+      },
+      "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",(27.1-0.5*(13.9+14.5))/100,0)`; kept as a fixed number here (text in arithmetic).\n\nNzila, Okombo and Molloy (2014): \"At day 14, the rates of treatment failure in the placebo and 0.4 mg FA groups were identical (13.9% and 14.5%, respectively, P < 0.05), while the failure rate in the 5 mg FA arm was significantly higher than in the placebo group (27.1% versus 13.9%, P=.005).\" Nzila et al. 2013 Pg. 4.",
+      "format": "percent"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_m_5",
+      "label": "Effectiveness of fortification relative to supplementation, malaria (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B15"
+      },
+      "explainer": "Subjective input. There is moderate evidence that iron supplementation may increase malaria infections in areas without malaria prevention and control. There is weak evidence that folic acid supplementation decreases the efficacy of antimalarial drugs"
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_7",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
+      "expected": 0.5
+    },
+    {
+      "id": "proportion_of_treated_people_whose_seasonal_malaria_chemopre",
+      "label": "Proportion of treated people whose seasonal malaria chemoprevention drugs will fail under folic acid fortification (Yes)",
+      "section": "model",
+      "formula": "proportion_of_treated_people_whose_seasonal_malaria_chemopre_2 * effectiveness_of_fortification_relative_to_supplementation_0_7",
+      "expected": 0.0645,
+      "format": "percent"
+    },
+    {
+      "id": "under_5_deaths_as_proportion_of_population_from_decreased_an",
+      "label": "Under 5 deaths as proportion of population from decreased antimalarial drugs efficacy under fortification (Yes)",
+      "section": "model",
+      "formula": "under_5_deaths_averted_by_malaria_treatment_as_proportion_of * proportion_of_treated_people_whose_seasonal_malaria_chemopre",
+      "expected": 2.653181868e-07
+    },
+    {
+      "id": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
+      "label": "Percent of total malaria benefit coming from under 5 mortality reduction (Yes)",
+      "section": "parameters",
+      "value": 0.3488,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B31"
+      },
+      "explainer": "See GiveWell (2016), November CEA, cell B80 of Bednets sheet. Also see Calculations sheet for SMC estimate",
+      "format": "percent"
+    },
+    {
+      "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat",
+      "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
+      "section": "model",
+      "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
+      "expected": 0.3488,
+      "format": "percent"
+    },
+    {
+      "id": "equivalent_of_proportion_of_population_dying_due_to_decrease",
+      "label": "Equivalent of proportion of population dying due to decreased malaria drug efficacy",
+      "section": "model",
+      "formula": "under_5_deaths_as_proportion_of_population_from_decreased_an / percentage_of_total_malaria_effects_coming_from_under_5_deat",
+      "expected": 7.606599391e-07
+    },
+    {
+      "id": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births",
+      "label": "Baseline under-5 deaths due to malaria per 1000 live births in areas without malaria control (Yes)",
+      "section": "model",
+      "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
+      "expected": 0.2358
+    },
+    {
+      "id": "children_under_5_as_of_population_yes_3",
+      "label": "Children under 5 as % of population (Yes)",
+      "section": "model",
+      "formula": "children_under_5_as_of_population_yes_2",
+      "expected": 0.091,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_population_that_are_under_5_deaths_yes",
+      "label": "Proportion of population that are under-5 deaths (Yes)",
+      "section": "model",
+      "formula": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births * children_under_5_as_of_population_yes_3 / 1000",
+      "expected": 2.14578e-05
+    },
+    {
+      "id": "proportion_of_population_living_in_areas_without_malaria_con",
+      "label": "Proportion of population living in areas without malaria control and management services (Yes)",
+      "section": "model",
+      "formula": "1 - proportion_of_people_living_in_areas_with_malaria_protection",
+      "expected": 0.5
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_8",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
+      "expected": 0.5
+    },
+    {
+      "id": "malaria_risk_ratio_from_iron_supplementation_in_areas_withou",
+      "label": "Malaria risk ratio from iron supplementation in areas without malaria control services (Yes)",
+      "section": "model",
+      "value": 1.16,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B110"
+      },
+      "explainer": "Neuberger et al (2016)"
+    },
+    {
+      "id": "malaria_risk_ratio_from_iron_fortification_in_areas_without",
+      "label": "Malaria risk ratio from iron fortification in areas without malaria control services (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_8 * (1 - malaria_risk_ratio_from_iron_supplementation_in_areas_withou)",
+      "expected": 1.08
+    },
+    {
+      "id": "proportion_of_population_dying_as_a_result_of_increased_mala",
+      "label": "Proportion of population dying as a result of increased malaria in areas without control services (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_under_5_deaths_yes * proportion_of_population_living_in_areas_without_malaria_con * (malaria_risk_ratio_from_iron_fortification_in_areas_without - 1)",
+      "expected": 8.58312e-07
+    },
+    {
+      "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat_2",
+      "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
+      "section": "model",
+      "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
+      "expected": 0.3488,
+      "format": "percent"
+    },
+    {
+      "id": "equivalent_of_proportion_of_population_dying_due_to_increase",
+      "label": "Equivalent of proportion of population dying due to increased malaria (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_dying_as_a_result_of_increased_mala / percentage_of_total_malaria_effects_coming_from_under_5_deat_2",
+      "expected": 2.460756881e-06
+    },
+    {
+      "id": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births_2",
+      "label": "Baseline under-5 deaths due to malaria per 1000 live births in malaria control areas (Yes)",
+      "section": "model",
+      "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
+      "expected": 0.2358
+    },
+    {
+      "id": "children_under_5_as_of_population_yes_4",
+      "label": "Children under 5 as % of population (Yes)",
+      "section": "model",
+      "formula": "children_under_5_as_of_population_yes_2",
+      "expected": 0.091,
+      "format": "percent"
+    },
+    {
+      "id": "proportion_of_population_that_are_under_5_deaths_yes_2",
+      "label": "Proportion of population that are under-5 deaths (Yes)",
+      "section": "model",
+      "formula": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births_2 * children_under_5_as_of_population_yes_4 / 1000",
+      "expected": 2.14578e-05
+    },
+    {
+      "id": "proportion_of_population_living_in_areas_with_malaria_contro_2",
+      "label": "Proportion of population living in areas with malaria control and management services (Yes)",
+      "section": "model",
+      "formula": "proportion_of_people_living_in_areas_with_malaria_protection",
+      "expected": 0.5
+    },
+    {
+      "id": "effectiveness_of_fortification_relative_to_supplementation_0_9",
+      "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
+      "section": "model",
+      "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
+      "expected": 0.5
+    },
+    {
+      "id": "malaria_risk_ratio_from_iron_supplementation_in_areas_with_m",
+      "label": "Malaria risk ratio from iron supplementation in areas with malaria control services (only without folic acid) (Yes)",
+      "section": "model",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B97"
+      },
+      "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"No\",0.91,1)`; kept as a fixed number here (text in arithmetic).\n\nRisk ration from Neuberger et al (2016) for iron alone, equal to 1 if with folic acid."
+    },
+    {
+      "id": "malaria_risk_ratio_from_iron_fortification_in_areas_with_mal",
+      "label": "Malaria risk ratio from iron fortification in areas with malaria control services (Yes)",
+      "section": "model",
+      "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_9 * (1 - malaria_risk_ratio_from_iron_supplementation_in_areas_with_m)",
+      "expected": 1.0
+    },
+    {
+      "id": "proportion_of_population_prevented_from_dying_as_a_result_of",
+      "label": "Proportion of population prevented from dying as a result of reduced malaria in areas with control services (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_that_are_under_5_deaths_yes_2 * proportion_of_population_living_in_areas_with_malaria_contro_2 * (1 - malaria_risk_ratio_from_iron_fortification_in_areas_with_mal)",
+      "expected": 0.0
+    },
+    {
+      "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat_3",
+      "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
+      "section": "model",
+      "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
+      "expected": 0.3488,
+      "format": "percent"
+    },
+    {
+      "id": "equivalent_of_proportion_of_population_prevented_from_dying",
+      "label": "Equivalent of proportion of population prevented from dying due to reduced malaria (Yes)",
+      "section": "model",
+      "formula": "proportion_of_population_prevented_from_dying_as_a_result_of / percentage_of_total_malaria_effects_coming_from_under_5_deat_3",
+      "expected": 0.0
+    },
+    {
+      "id": "equivalent_of_total_proportion_of_population_dying_from_mala",
+      "label": "Equivalent of total proportion of population dying from malaria as a result of fortification",
+      "section": "model",
+      "formula": "equivalent_of_proportion_of_population_dying_due_to_decrease + equivalent_of_proportion_of_population_dying_due_to_increase - equivalent_of_proportion_of_population_prevented_from_dying",
+      "expected": 3.22141682e-06
+    },
+    {
+      "id": "equivalent_malaria_dalys_caused_per_beneficiary_of_iron_fort",
+      "label": "Equivalent malaria DALYs caused per beneficiary of iron fortification",
+      "section": "model",
+      "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted_2 * equivalent_of_total_proportion_of_population_dying_from_mala",
+      "expected": 2.899275138e-05
+    },
+    {
+      "id": "total_net_dalys_averted_per_beneficiary_of_iron_fortificatio",
+      "label": "Total net DALYs averted per beneficiary of iron fortification (health effects only) (Yes)",
+      "section": "model",
+      "formula": "mild_anemia_dalys_averted_per_beneficiary_of_iron_fortificat + moderate_anemia_dalys_averted_per_beneficiary_of_iron_fortif + severe_anemia_dalys_averted_per_beneficiary_of_iron_fortific + dalys_averted_per_beneficiary_of_iron_fortification_yes + dalys_averted_per_beneficiary_of_folic_acid_fortification_ye - total_dalys_caused_by_side_effects_per_beneficiary_of_iron_f - equivalent_malaria_dalys_caused_per_beneficiary_of_iron_fort",
+      "expected": 0.002326043826
+    },
+    {
+      "id": "r_1_daly_averted_is_equivalent_to_increasing_ln_consumption_by",
+      "label": "1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years? (Large effects only (anemia, cognitive, malaria))",
+      "section": "parameters",
+      "value": 3.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Parameters!B7"
+      },
+      "explainer": "GiveWell CEA, Nov 2016. Cell C7 of Parameters sheet"
+    },
+    {
+      "id": "ln_consumption_equivalent_of_dalys_averted_per_beneficiary_o",
+      "label": "ln(consumption) equivalent of DALYs averted per beneficiary of iron fortification (health effects only) (Yes)",
+      "section": "model",
+      "formula": "total_net_dalys_averted_per_beneficiary_of_iron_fortificatio * r_1_daly_averted_is_equivalent_to_increasing_ln_consumption_by",
+      "expected": 0.006978131478
+    },
+    {
+      "id": "iron_fortification_total_cost_per_beneficiary_per_year_yes",
+      "label": "Iron fortification total cost per beneficiary per year (Yes)",
+      "section": "model",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
+        "cell": "Model!B14"
+      },
+      "explainer": "Calculated in the source sheet as `=IF(Parameters!B$17=\"Yes\",Parameters!B$19+Parameters!B$20,Parameters!B$19)`; kept as a fixed number here (text in arithmetic).\n\nhttps://docs.google.com/spreadsheets/d/1SW3AKd4neQ6w9xW7EHCPhx6q-xSTdOysfS58JSU0k68/edit#gid=0&range=E46",
+      "format": "usd"
+    },
+    {
+      "id": "proportional_average_increase_in_consumption_per_dollar_incl",
+      "label": "Proportional average increase in consumption per dollar (including health benefits) (Yes)",
+      "section": "model",
+      "formula": "(average_increase_in_ln_consumption_direct_cognitive_benefits + ln_consumption_equivalent_of_dalys_averted_per_beneficiary_o) / iron_fortification_total_cost_per_beneficiary_per_year_yes",
+      "expected": 0.03785730072,
+      "format": "percent"
+    },
+    {
+      "id": "overall_cost_effectiveness_relative_to_givedirectly_standard",
+      "label": "Overall cost-effectiveness relative to GiveDirectly standard cash transfer program (Yes)",
+      "section": "model",
+      "formula": "proportional_average_increase_in_consumption_per_dollar_incl / 0.0026",
+      "expected": 14.56050028
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(overall_cost_effectiveness_relative_to_givedirectly_standard * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar"
   }
- },
- "resources": [
-  {
-   "title": "Iron CEA Fortify Health consolidation_Published",
-   "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (june 2018 grant)",
-   "url": "https://www.givewell.org/research/incubation-grants/fortify-health/june-2018-grant",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "model",
-   "title": "Model"
-  },
-  {
-   "id": "parameters",
-   "title": "Parameters"
-  },
-  {
-   "id": "calculations",
-   "title": "Calculations"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "change_in_intelligence_quotient_from_supplementation_in_stan_2",
-   "label": "Change in intelligence quotient from supplementation (in standard deviations) (Yes)",
-   "section": "parameters",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B22"
-   },
-   "explainer": "0.25 SD in Sachdev et al (2005), 0.33 SD in Low et al (only for anemic children), ~0.25 for other cognitive tests in Christian et al (2010)"
-  },
-  {
-   "id": "change_in_intelligence_quotient_from_supplementation_in_stan",
-   "label": "Change in intelligence quotient from supplementation (in standard deviations) (Yes)",
-   "section": "model",
-   "formula": "change_in_intelligence_quotient_from_supplementation_in_stan_2",
-   "expected": 0.25
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_c",
-   "label": "Effectiveness of fortification relative to supplementation, cognitive benefits (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B14"
-   },
-   "explainer": "Subjective input. There is moderate evidence that supplementation improves cognitive development of children aged 5-12 years."
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_c",
-   "expected": 0.5
-  },
-  {
-   "id": "change_in_intelligence_quotient_from_fortification_in_standa",
-   "label": "Change in intelligence quotient from fortification (in standard deviations) (Yes)",
-   "section": "model",
-   "formula": "change_in_intelligence_quotient_from_supplementation_in_stan * effectiveness_of_fortification_relative_to_supplementation_0",
-   "expected": 0.125
-  },
-  {
-   "id": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
-   "label": "Percentage increase in wages/consumption for every 1 point increase in IQ (Yes)",
-   "section": "parameters",
-   "value": 0.0075,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B25"
-   },
-   "explainer": "Same methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
-   "format": "percent"
-  },
-  {
-   "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
-   "label": "Percentage increase in wages/consumption for every 1 point increase in IQ (Yes)",
-   "section": "model",
-   "formula": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
-   "expected": 0.0075,
-   "format": "percent"
-  },
-  {
-   "id": "percentage_increase_in_wages_consumption_from_increase_in_iq",
-   "label": "Percentage increase in wages/consumption from increase in IQ from fortification (Yes)",
-   "section": "model",
-   "formula": "change_in_intelligence_quotient_from_fortification_in_standa * 15 * percentage_increase_in_wages_consumption_for_every_1_point_i",
-   "expected": 0.0140625,
-   "format": "percent"
-  },
-  {
-   "id": "increase_in_annual_ln_consumption_for_beneficiaries_yes",
-   "label": "Increase in annual ln(consumption) for beneficiaries (Yes)",
-   "section": "model",
-   "formula": "ln(1 + percentage_increase_in_wages_consumption_from_increase_in_iq) - ln(1)",
-   "expected": 0.01396454035
-  },
-  {
-   "id": "africa_population_pyramid_2016_6_8_of_population_in_5_9_year",
-   "label": "Africa population pyramid (2016), ~6.8% of population in 5-9 years old bin. Conceptually we model this as 'an extra year of fortification brings benefits to one",
-   "section": "model",
-   "formula": "(0.097 * 686291907 + 0.094 * 637879447) / 1324171354",
-   "expected": 0.09555484086
-  },
-  {
-   "id": "proportion_of_population_in_each_year_cohort_between_ages_3",
-   "label": "Proportion of population in each year cohort between ages 3-12 (Yes)",
-   "section": "model",
-   "formula": "africa_population_pyramid_2016_6_8_of_population_in_5_9_year / 5",
-   "expected": 0.01911096817
-  },
-  {
-   "id": "proportion_of_children_with_anemia_at_baseline_yes_2",
-   "label": "Proportion of children with anemia at baseline (Yes)",
-   "section": "parameters",
-   "value": 0.584,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B29"
-   },
-   "explainer": "2015-16 DHS https://statcompiler.com/en/#cc=IA&ic=CN_ANMC_C_ANY,CN_ANMC_C_MLD,CN_ANMC_C_MOD,CN_ANMC_C_SEV,CN_ANMC_C_NUM,CN_ANMC_C_UNW,AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=1&gr=1"
-  },
-  {
-   "id": "proportion_of_children_with_anemia_at_baseline_yes",
-   "label": "Proportion of children with anemia at baseline (Yes)",
-   "section": "model",
-   "formula": "proportion_of_children_with_anemia_at_baseline_yes_2",
-   "expected": 0.584
-  },
-  {
-   "id": "proportion_of_population_with_potential_benefits_yes",
-   "label": "Proportion of population with (potential) benefits (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_in_each_year_cohort_between_ages_3 * proportion_of_children_with_anemia_at_baseline_yes",
-   "expected": 0.01116080541
-  },
-  {
-   "id": "average_increase_in_annual_ln_consumption_including_non_bene",
-   "label": "Average increase in annual ln(consumption) (including non-beneficiaries) (Yes)",
-   "section": "model",
-   "formula": "increase_in_annual_ln_consumption_for_beneficiaries_yes * proportion_of_population_with_potential_benefits_yes",
-   "expected": 0.0001558555175
-  },
-  {
-   "id": "salmon_indicates_less_subjective_inputs_discount_rate_large",
-   "label": "Salmon indicates less subjective inputs: Discount rate (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.025,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B6"
-   },
-   "explainer": "GiveWell CEA, Nov 2016. Cell C6 of Parameters sheet",
-   "format": "percent"
-  },
-  {
-   "id": "cognitive_benefits_for_children_ages_3_12_discount_rate_yes",
-   "label": "Cognitive benefits for children, ages 3-12: Discount rate (Yes)",
-   "section": "model",
-   "formula": "salmon_indicates_less_subjective_inputs_discount_rate_large",
-   "expected": 0.025,
-   "format": "percent"
-  },
-  {
-   "id": "average_number_of_years_between_entering_fortification_progr",
-   "label": "Average number of years between 'entering fortification program' and beginning of long term benefits (Yes)",
-   "section": "parameters",
-   "value": 12.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B23"
-   },
-   "explainer": "Benefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016"
-  },
-  {
-   "id": "average_number_of_years_between_entering_fortifictaion_progr",
-   "label": "Average number of years between 'entering fortifictaion program' and beginning of long term benefits (Yes)",
-   "section": "model",
-   "formula": "average_number_of_years_between_entering_fortification_progr",
-   "expected": 12.0
-  },
-  {
-   "id": "duration_of_long_term_benefits_of_fortification_in_years_yes_2",
-   "label": "Duration of long term benefits of fortification (in years) (Yes)",
-   "section": "parameters",
-   "value": 30.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B24"
-   },
-   "explainer": "Median duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016"
-  },
-  {
-   "id": "duration_of_long_term_benefits_of_fortification_in_years_yes",
-   "label": "Duration of long term benefits of fortification (in years) (Yes)",
-   "section": "model",
-   "formula": "duration_of_long_term_benefits_of_fortification_in_years_yes_2",
-   "expected": 30.0
-  },
-  {
-   "id": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
-   "label": "Present value of sum of average lifetime income benefits (including non-beneficiaries) (Yes)",
-   "section": "model",
-   "formula": "average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ (average_number_of_years_between_entering_fortifictaion_progr + duration_of_long_term_benefits_of_fortification_in_years_yes)) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes)) - average_increase_in_annual_ln_consumption_including_non_bene * (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes) ^ average_number_of_years_between_entering_fortifictaion_progr) / (1 - 1 / (1 + cognitive_benefits_for_children_ages_3_12_discount_rate_yes))",
-   "expected": 0.002486193701
-  },
-  {
-   "id": "average_increase_in_ln_consumption_direct_cognitive_benefits",
-   "label": "Average increase in ln(consumption) (direct cognitive benefits, including non-beneficiaries) (Yes)",
-   "section": "model",
-   "formula": "present_value_of_sum_of_average_lifetime_income_benefits_inc",
-   "expected": 0.002486193701
-  },
-  {
-   "id": "daly_equivalent_of_a_year_of_mild_anemia_yes",
-   "label": "DALY equivalent of a year of mild anemia (Yes)",
-   "section": "model",
-   "value": 0.004,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B38"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
-  },
-  {
-   "id": "proportion_of_population_that_are_women_of_reproductive_age_2",
-   "label": "Proportion of population that are women of reproductive age (Yes)",
-   "section": "parameters",
-   "value": 0.318,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B27"
-   },
-   "explainer": "Calculated from World Bank 2016 data, women ages 15-64, total population http://databank.worldbank.org/data/reports.aspx?source=2&series=SP.POP.TOTL.FE.IN&country=IND"
-  },
-  {
-   "id": "proportion_of_population_that_are_women_of_reproductive_age",
-   "label": "Proportion of population that are women of reproductive age (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_women_of_reproductive_age_2",
-   "expected": 0.318
-  },
-  {
-   "id": "proportion_of_women_with_mild_anemia_110_hb_120_large_effect",
-   "label": "Proportion of women with mild anemia (110<Hb<120) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.1806486486,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B21"
-   },
-   "explainer": "Calculated in the source sheet as `=B8-normdist(110,B7,B20,TRUE)`; kept as a fixed number here (NORMDIST()).\n\nCalculation 0.396 100<Hb<119 according to 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1"
-  },
-  {
-   "id": "proportion_of_women_with_mild_ida_pre_fortification_yes",
-   "label": "Proportion of women with mild IDA (pre-fortification) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_women_with_mild_anemia_110_hb_120_large_effect",
-   "expected": 0.1806486486,
-   "format": "percent"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_m_2",
-   "label": "Effectiveness of fortification relative to supplementation, mild anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B10"
-   },
-   "explainer": "Subjective input. There is strong evidence that supplementation decreases overall cases of anemia."
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_m",
-   "label": "Effectiveness of fortification relative to supplementation, mild anemia (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_m_2",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_mild_anemia_iron_supplementation_i_e_proportion_w",
-   "label": "Risk ratio mild anemia, iron supplementation (i.e. proportion with condition post-supplementation) (Yes)",
-   "section": "model",
-   "value": 0.345,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B23"
-   },
-   "explainer": "Pena-Rosas et al (2015), Low et al (2016), (mean of effects on women of reproductive age, 0.30 and 0.39)"
-  },
-  {
-   "id": "risk_ratio_mild_anemia_iron_fortification_i_e_proportion_wit",
-   "label": "Risk ratio mild anemia, iron fortification (i.e. proportion with condition post-fortification) (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_m * (1 - risk_ratio_mild_anemia_iron_supplementation_i_e_proportion_w)",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_cured_of_mild_anemia_under_fortific",
-   "label": "Proportion of population 'cured' of mild anemia under fortification (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_mild_ida_pre_fortification_yes * (1 - risk_ratio_mild_anemia_iron_fortification_i_e_proportion_wit)",
-   "expected": 0.0
-  },
-  {
-   "id": "mild_anemia_dalys_averted_per_beneficiary_of_iron_fortificat",
-   "label": "Mild anemia DALYs averted per beneficiary of iron fortification (Yes)",
-   "section": "model",
-   "formula": "daly_equivalent_of_a_year_of_mild_anemia_yes * proportion_of_population_cured_of_mild_anemia_under_fortific",
-   "expected": 0.0
-  },
-  {
-   "id": "daly_equivalent_of_a_year_of_moderate_anemia_yes",
-   "label": "DALY equivalent of a year of moderate anemia (Yes)",
-   "section": "model",
-   "value": 0.052,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B39"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
-  },
-  {
-   "id": "proportion_of_women_with_anemia_120g_l_large_effects_only_an",
-   "label": "Proportion of women with anemia (<120g/L) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.53,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B8"
-   },
-   "explainer": "0.48 according to WHO (2011) 0.53 of all women 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1"
-  },
-  {
-   "id": "proportion_of_women_with_severe_anemia_80_g_l_large_effects",
-   "label": "Proportion of women with severe anemia (<80 g/L) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.024,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B10"
-   },
-   "explainer": "0.01 of population has hemoglobin < 70 g/L 2015-2016 DHS https://statcompiler.com/en/#cc=IA&ic=AN_ANEM_W_ANY,AN_ANEM_W_MLD,AN_ANEM_W_MOD,AN_ANEM_W_SEV,AN_ANEM_W_NUM,AN_ANEM_W_UNW&scl=0&scc=IA&dt=0&pt=0&ss=0&gr=1 0.025 of population of nonpregnant women <80g/L WHO 2011"
-  },
-  {
-   "id": "proportion_of_women_with_moderate_anemia_80_hb_110_large_eff",
-   "label": "Proportion of women with moderate anemia (80<Hb<110) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_women_with_anemia_120g_l_large_effects_only_an - proportion_of_women_with_mild_anemia_110_hb_120_large_effect - proportion_of_women_with_severe_anemia_80_g_l_large_effects",
-   "expected": 0.3253513514
-  },
-  {
-   "id": "proportion_of_women_with_moderate_ida_pre_fortification_yes",
-   "label": "Proportion of women with moderate IDA (pre-fortification) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_women_with_moderate_anemia_80_hb_110_large_eff",
-   "expected": 0.3253513514,
-   "format": "percent"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_m_4",
-   "label": "Effectiveness of fortification relative to supplementation, moderate anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B11"
-   },
-   "explainer": "Subjective input. There is weak evidence that supplementation with iron and folic acid reduces moderate and severe anemia."
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_m_3",
-   "label": "Effectiveness of fortification relative to supplementation, moderate anemia (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_m_4",
-   "expected": 0.5
-  },
-  {
-   "id": "risk_ratio_moderate_anemia_iron_supplementation_only_with_fo",
-   "label": "Risk ratio moderate anemia, iron supplementation (only with folic acid) (Yes)",
-   "section": "model",
-   "value": 0.33,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B24"
-   },
-   "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",0.33,1)`; kept as a fixed number here (text in arithmetic).\n\nPena-Rosas et al (2015) - risk ratio postpartum"
-  },
-  {
-   "id": "risk_ratio_moderate_anemia_iron_fortification_only_with_foli",
-   "label": "Risk ratio moderate anemia, iron fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_m_3 * (1 - risk_ratio_moderate_anemia_iron_supplementation_only_with_fo)",
-   "expected": 0.665
-  },
-  {
-   "id": "proportion_of_population_cured_of_moderate_anemia_under_fort",
-   "label": "Proportion of population 'cured' of moderate anemia under fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_moderate_ida_pre_fortification_yes * (1 - risk_ratio_moderate_anemia_iron_fortification_only_with_foli)",
-   "expected": 0.03465967947
-  },
-  {
-   "id": "moderate_anemia_dalys_averted_per_beneficiary_of_iron_fortif",
-   "label": "Moderate anemia DALYs averted per beneficiary of iron fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "daly_equivalent_of_a_year_of_moderate_anemia_yes * proportion_of_population_cured_of_moderate_anemia_under_fort",
-   "expected": 0.001802303332
-  },
-  {
-   "id": "daly_equivalent_of_a_year_of_severe_anemia_yes",
-   "label": "DALY equivalent of a year of severe anemia (Yes)",
-   "section": "model",
-   "value": 0.149,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B40"
-   },
-   "explainer": "2013 GBD weights from Salomon et al (2015) - Table 2. Pessimistic scenario uses 1990 GBD weights from WHO 2004."
-  },
-  {
-   "id": "proportion_of_women_with_severe_ida_pre_fortification_yes",
-   "label": "Proportion of women with severe IDA (pre-fortification) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_women_with_severe_anemia_80_g_l_large_effects",
-   "expected": 0.024,
-   "format": "percent"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_s_2",
-   "label": "Effectiveness of fortification relative to supplementation, severe anemia (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B12"
-   },
-   "explainer": "Subjective input. There is weak evidence that supplementation with iron and folic acid reduces moderate and severe anemia."
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_s",
-   "label": "Effectiveness of fortification relative to supplementation, severe anemia (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_s_2",
-   "expected": 0.5
-  },
-  {
-   "id": "risk_ratio_severe_anemia_iron_supplementation_only_with_foli",
-   "label": "Risk ratio severe anemia, iron supplementation (only with folic acid) (Yes)",
-   "section": "model",
-   "value": 0.12,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B25"
-   },
-   "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",0.12,1)`; kept as a fixed number here (text in arithmetic).\n\nPena-Rosas et al (2015) - risk ratio during pregnancy"
-  },
-  {
-   "id": "risk_ratio_severe_anemia_iron_fortification_only_with_folic",
-   "label": "Risk ratio severe anemia, iron fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_s * (1 - risk_ratio_severe_anemia_iron_supplementation_only_with_foli)",
-   "expected": 0.56
-  },
-  {
-   "id": "proportion_of_population_cured_of_severe_anemia_under_fortif",
-   "label": "Proportion of population 'cured' of severe anemia under fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_women_of_reproductive_age * proportion_of_women_with_severe_ida_pre_fortification_yes * (1 - risk_ratio_severe_anemia_iron_fortification_only_with_folic)",
-   "expected": 0.00335808
-  },
-  {
-   "id": "severe_anemia_dalys_averted_per_beneficiary_of_iron_fortific",
-   "label": "Severe anemia DALYs averted per beneficiary of iron fortification (only with folic acid) (Yes)",
-   "section": "model",
-   "formula": "daly_equivalent_of_a_year_of_severe_anemia_yes * proportion_of_population_cured_of_severe_anemia_under_fortif",
-   "expected": 0.00050035392
-  },
-  {
-   "id": "daly_equivalent_having_a_low_birth_weight_child_yes",
-   "label": "DALY equivalent having a low birth weight child (Yes)",
-   "section": "model",
-   "value": 0.106,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B57"
-   },
-   "explainer": "WHO (2004) - uses GBD weight from 1990 (includes all sequelae)"
-  },
-  {
-   "id": "births_per_1_000_population_per_year_yes_2",
-   "label": "Births per 1,000 population per year (Yes)",
-   "section": "parameters",
-   "value": 19.3,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B28"
-   },
-   "explainer": "World Bank 2015, Crude Birth Rate, India"
-  },
-  {
-   "id": "births_per_1_000_population_per_year_yes",
-   "label": "Births per 1,000 population per year (Yes)",
-   "section": "model",
-   "formula": "births_per_1_000_population_per_year_yes_2",
-   "expected": 19.3
-  },
-  {
-   "id": "fertility_rate_births_per_1000_population_per_year_yes",
-   "label": "Fertility rate (births per 1000 population per year) (Yes)",
-   "section": "model",
-   "formula": "births_per_1_000_population_per_year_yes",
-   "expected": 19.3
-  },
-  {
-   "id": "proportion_of_population_newborn_babies_yes",
-   "label": "Proportion of population newborn babies (Yes)",
-   "section": "model",
-   "formula": "fertility_rate_births_per_1000_population_per_year_yes / 1000",
-   "expected": 0.0193
-  },
-  {
-   "id": "proportion_of_pregnant_women_at_risk_pre_fortification_yes",
-   "label": "Proportion of pregnant women \"at risk\" (pre-fortification) (Yes)",
-   "section": "model",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B49"
-   },
-   "explainer": "Set this to one because the Cochrane studies look at an unconditional risk ratio for pre-term birth (Pena-Rosas et al 2015)"
-  },
-  {
-   "id": "baseline_proportion_of_babies_that_are_low_birth_weight_pre",
-   "label": "Baseline proportion of babies that are low birth weight (pre-fortification) (Yes)",
-   "section": "model",
-   "value": 0.102,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B50"
-   },
-   "explainer": "Average in Pena-Rosas et al (2015) Cochrane Review - may want to update this for individual countries"
-  },
-  {
-   "id": "proportion_of_population_with_condition_low_birth_weight_pre",
-   "label": "Proportion of population with condition (low birth weight, pre-fortification) (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_newborn_babies_yes * proportion_of_pregnant_women_at_risk_pre_fortification_yes * baseline_proportion_of_babies_that_are_low_birth_weight_pre",
-   "expected": 0.0019686
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_l",
-   "label": "Effectiveness of fortification relative to supplementation, low birth weight (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B13"
-   },
-   "explainer": "Subjective input. There is moderate evidence that iron supplementation improves birth outcomes"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_2",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_l",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con",
-   "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation) (Yes)",
-   "section": "model",
-   "value": 0.84,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B52"
-   },
-   "explainer": "Pena-Rosas et al (2015) Cochrane Review risk ratio - see summary table"
-  },
-  {
-   "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi",
-   "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification) (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_2 * (1 - risk_ratio_from_iron_supplementation_i_e_proportion_with_con)",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_cured_of_condition_under_fortificat",
-   "label": "Proportion of population 'cured' of condition under fortification (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_with_condition_low_birth_weight_pre * (1 - risk_ratio_from_iron_fortification_i_e_proportion_with_condi)",
-   "expected": 0.0
-  },
-  {
-   "id": "dalys_averted_per_beneficiary_of_iron_fortification_yes",
-   "label": "DALYs averted per beneficiary of iron fortification (Yes)",
-   "section": "model",
-   "formula": "daly_equivalent_having_a_low_birth_weight_child_yes * proportion_of_population_cured_of_condition_under_fortificat",
-   "expected": 0.0
-  },
-  {
-   "id": "total_equivalent_under_5_lives_saved_per_10_000_yes",
-   "label": "Total equivalent under-5 lives saved per $10,000 (Yes)",
-   "section": "model",
-   "value": 0.387995,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B69"
-   },
-   "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",sum(B63:B67),0)`; kept as a fixed number here (text in arithmetic).\n\nCalculation"
-  },
-  {
-   "id": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
-   "label": "DALYs averted per death of a 3- to 59-month old child averted (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 9.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B8"
-   },
-   "explainer": "GiveWell CEA, Nov 2016, Cells C53 and C63 of the Parameters sheet"
-  },
-  {
-   "id": "dalys_averted_per_death_of_an_under_5_averted_yes",
-   "label": "DALYs averted per death of an under-5 averted (Yes)",
-   "section": "model",
-   "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
-   "expected": 9.0
-  },
-  {
-   "id": "dalys_averted_per_10_000_yes",
-   "label": "DALYs averted per $10,000 (Yes)",
-   "section": "model",
-   "formula": "total_equivalent_under_5_lives_saved_per_10_000_yes * dalys_averted_per_death_of_an_under_5_averted_yes",
-   "expected": 3.491955
-  },
-  {
-   "id": "dalys_averted_per_beneficiary_of_folic_acid_fortification_ye",
-   "label": "DALYs averted per beneficiary of folic acid fortification (Yes)",
-   "section": "model",
-   "formula": "dalys_averted_per_10_000_yes / (10000 / 0.15)",
-   "expected": 5.2379325e-05
-  },
-  {
-   "id": "daly_equivalent_having_gastrointestinal_issues",
-   "label": "DALY equivalent having gastrointestinal issues",
-   "section": "model",
-   "value": 0.002,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B144"
-   },
-   "explainer": "Arbitrary. Salomon et al (2015) - Table 2, 'Gastric bleeding' has weight of 0.325, but studies use 'any gastrointestinal side effects', so presumably much more mild."
-  },
-  {
-   "id": "proportion_of_women_with_gastrointestinal_side_effects_in_co",
-   "label": "Proportion of women with gastrointestinal side effects in control groups (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "(8 + 1 + 33 + 2 + 8) / (23 + 12 + 128 + 2 + 8)",
-   "expected": 0.3005780347
-  },
-  {
-   "id": "proportion_of_population_that_are_women_of_reproductive_age_3",
-   "label": "Proportion of population that are women of reproductive age (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_population_that_are_women_of_reproductive_age_2",
-   "expected": 0.318
-  },
-  {
-   "id": "proportion_of_population_that_may_have_increased_gastrointes",
-   "label": "Proportion of population that may have increased gastrointestinal side effects (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_women_with_gastrointestinal_side_effects_in_co * proportion_of_population_that_are_women_of_reproductive_age_3",
-   "expected": 0.09558381503
-  },
-  {
-   "id": "baseline_proportion_of_people_with_gastrointestinal_side_eff",
-   "label": "Baseline proportion of people with gastrointestinal side effects (women of reproductive age only)",
-   "section": "model",
-   "formula": "proportion_of_population_that_may_have_increased_gastrointes",
-   "expected": 0.09558381503
-  },
-  {
-   "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_2",
-   "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
-   "section": "model",
-   "value": 1.99,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B139"
-   },
-   "explainer": "Low et al (2016) Cochrane Report, Analysis 5.4"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_s_3",
-   "label": "Effectiveness of fortification relative to supplementation, side effects (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B16"
-   },
-   "explainer": "Subjective input. There is moderate evidence that iron supplementation has adverse side effects."
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_3",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_2",
-   "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
-   "section": "model",
-   "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_2 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_3",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_with_condition_because_of_fortifica",
-   "label": "Proportion of population with condition because of fortification",
-   "section": "model",
-   "formula": "baseline_proportion_of_people_with_gastrointestinal_side_eff * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_2 - 1)",
-   "expected": 0.0
-  },
-  {
-   "id": "gastrointestinal_dalys_caused_per_beneficiary_of_iron_fortif",
-   "label": "Gastrointestinal DALYs caused per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "daly_equivalent_having_gastrointestinal_issues * proportion_of_population_with_condition_because_of_fortifica",
-   "expected": 0.0
-  },
-  {
-   "id": "daly_equivalent_having_diarrhea",
-   "label": "DALY equivalent having diarrhea",
-   "section": "model",
-   "value": 0.074,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B153"
-   },
-   "explainer": "Salomon et al (2015) - Table 2, Mild case of diarrhea"
-  },
-  {
-   "id": "proportion_of_women_with_loose_stools_diarrhea_in_control_gr",
-   "label": "Proportion of women with loose stools/diarrhea in control groups (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "(1 + 2 + 6 + 2 + 1 + 3) / (36 + 8 + 128 + 6 + 44 + 71)",
-   "expected": 0.05119453925
-  },
-  {
-   "id": "proportion_of_population_that_may_have_increased_loose_stool",
-   "label": "Proportion of population that may have increased loose stools/diarrhea side effects (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_women_with_loose_stools_diarrhea_in_control_gr * proportion_of_population_that_are_women_of_reproductive_age_3",
-   "expected": 0.01627986348
-  },
-  {
-   "id": "baseline_proportion_of_people_with_loose_stools_diarrhea_wom",
-   "label": "Baseline proportion of people with loose stools/diarrhea (women of reproductive age only)",
-   "section": "model",
-   "formula": "proportion_of_population_that_may_have_increased_loose_stool",
-   "expected": 0.01627986348
-  },
-  {
-   "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_3",
-   "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
-   "section": "model",
-   "value": 2.13,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B148"
-   },
-   "explainer": "Low et al (2016) Cochrane Report, Analysis 5.7"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_4",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_3",
-   "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
-   "section": "model",
-   "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_3 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_4",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_with_condition_because_of_fortifica_2",
-   "label": "Proportion of population with condition because of fortification",
-   "section": "model",
-   "formula": "baseline_proportion_of_people_with_loose_stools_diarrhea_wom * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_3 - 1)",
-   "expected": 0.0
-  },
-  {
-   "id": "diarrhea_dalys_caused_per_beneficiary_of_iron_fortification",
-   "label": "Diarrhea DALYs caused per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "daly_equivalent_having_diarrhea * proportion_of_population_with_condition_because_of_fortifica_2",
-   "expected": 0.0
-  },
-  {
-   "id": "daly_equivalent_having_constipation",
-   "label": "DALY equivalent having constipation",
-   "section": "model",
-   "value": 0.002,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B162"
-   },
-   "explainer": "Arbitrary. No figures in Salomon et al (2015)"
-  },
-  {
-   "id": "proportion_of_women_with_hard_stools_constipation_in_control",
-   "label": "Proportion of women with hard stools/constipation in control groups (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "(1 + 5 + 0 + 0 + 11 + 0 + 6 + 3) / (31 + 36 + 8 + 182 + 128 + 6 + 44 + 71)",
-   "expected": 0.05138339921
-  },
-  {
-   "id": "proportion_of_population_that_may_have_increased_hard_stools",
-   "label": "Proportion of population that may have increased hard stools/constipation side effects (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_women_with_hard_stools_constipation_in_control * proportion_of_population_that_are_women_of_reproductive_age_3",
-   "expected": 0.01633992095
-  },
-  {
-   "id": "baseline_proportion_of_people_with_hard_stools_constipation",
-   "label": "Baseline proportion of people with hard stools/constipation (women of reproductive age only)",
-   "section": "model",
-   "formula": "proportion_of_population_that_may_have_increased_hard_stools",
-   "expected": 0.01633992095
-  },
-  {
-   "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_4",
-   "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
-   "section": "model",
-   "value": 2.07,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B157"
-   },
-   "explainer": "Low et al (2016) Cochrane Report, Analysis 5.8"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_5",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_4",
-   "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
-   "section": "model",
-   "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_4 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_5",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_with_condition_because_of_fortifica_3",
-   "label": "Proportion of population with condition because of fortification",
-   "section": "model",
-   "formula": "baseline_proportion_of_people_with_hard_stools_constipation * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_4 - 1)",
-   "expected": 0.0
-  },
-  {
-   "id": "constipation_dalys_caused_per_beneficiary_of_iron_fortificat",
-   "label": "Constipation DALYs caused per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "daly_equivalent_having_constipation * proportion_of_population_with_condition_because_of_fortifica_3",
-   "expected": 0.0
-  },
-  {
-   "id": "daly_equivalent_having_abdominal_pain",
-   "label": "DALY equivalent having abdominal pain",
-   "section": "model",
-   "value": 0.011,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B171"
-   },
-   "explainer": "Salomon et al (2015) - Table 2, Mild abdominopelvic problem"
-  },
-  {
-   "id": "proportion_of_women_with_abdominal_pain_in_control_groups_la",
-   "label": "Proportion of women with abdominal pain in control groups (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "(0 + 4 + 2 + 15 + 1 + 3 + 4) / (120 + 36 + 182 + 128 + 6 + 44 + 71)",
-   "expected": 0.04940374787
-  },
-  {
-   "id": "proportion_of_population_that_may_have_increased_abdominal_p",
-   "label": "Proportion of population that may have increased abdominal pain side effects (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "proportion_of_women_with_abdominal_pain_in_control_groups_la * proportion_of_population_that_are_women_of_reproductive_age_3",
-   "expected": 0.01571039182
-  },
-  {
-   "id": "baseline_proportion_of_people_with_abdominal_pain_women_of_r",
-   "label": "Baseline proportion of people with abdominal pain (women of reproductive age only)",
-   "section": "model",
-   "formula": "proportion_of_population_that_may_have_increased_abdominal_p",
-   "expected": 0.01571039182
-  },
-  {
-   "id": "risk_ratio_from_iron_supplementation_i_e_proportion_with_con_5",
-   "label": "Risk ratio from iron supplementation (i.e. proportion with condition post-supplementation)",
-   "section": "model",
-   "value": 1.99,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B166"
-   },
-   "explainer": "Low et al (2016) Cochrane Report, Analysis 5.10"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_6",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_s_3",
-   "expected": 0.0
-  },
-  {
-   "id": "risk_ratio_from_iron_fortification_i_e_proportion_with_condi_5",
-   "label": "Risk ratio from iron fortification (i.e. proportion with condition post-fortification)",
-   "section": "model",
-   "formula": "1 + (risk_ratio_from_iron_supplementation_i_e_proportion_with_con_5 - 1) * effectiveness_of_fortification_relative_to_supplementation_0_6",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_with_condition_because_of_fortifica_4",
-   "label": "Proportion of population with condition because of fortification",
-   "section": "model",
-   "formula": "baseline_proportion_of_people_with_abdominal_pain_women_of_r * (risk_ratio_from_iron_fortification_i_e_proportion_with_condi_5 - 1)",
-   "expected": 0.0
-  },
-  {
-   "id": "abdominal_pain_dalys_caused_per_beneficiary_of_iron_fortific",
-   "label": "Abdominal pain DALYs caused per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "daly_equivalent_having_abdominal_pain * proportion_of_population_with_condition_because_of_fortifica_4",
-   "expected": 0.0
-  },
-  {
-   "id": "total_dalys_caused_by_side_effects_per_beneficiary_of_iron_f",
-   "label": "Total DALYs caused by side effects per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "gastrointestinal_dalys_caused_per_beneficiary_of_iron_fortif + diarrhea_dalys_caused_per_beneficiary_of_iron_fortification + constipation_dalys_caused_per_beneficiary_of_iron_fortificat + abdominal_pain_dalys_caused_per_beneficiary_of_iron_fortific",
-   "expected": 0.0
-  },
-  {
-   "id": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted_2",
-   "label": "DALYs averted per death of a 3- to 59-month old child averted",
-   "section": "model",
-   "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
-   "expected": 9.0
-  },
-  {
-   "id": "under_5_mortality_rate_per_year_per_1_000_live_births_large",
-   "label": "Under 5 mortality rate per year (per 1,000 live births) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 43.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B25"
-   },
-   "explainer": "India, World Bank 2016 figures: http://data.worldbank.org/indicator/SH.DYN.MORT"
-  },
-  {
-   "id": "mortality_rate_neonatal_per_1_000_live_births_large_effects",
-   "label": "Mortality rate, neonatal (per 1,000 live births) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 25.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B26"
-   },
-   "explainer": "India, World Bank 2016 figures: http://data.worldbank.org/indicator/SH.DYN.NMRT"
-  },
-  {
-   "id": "under_5_mortality_rate_excluding_neonates_per_1_000_live_bir",
-   "label": "Under 5 mortality rate (excluding neonates) per 1,000 live births (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "under_5_mortality_rate_per_year_per_1_000_live_births_large - mortality_rate_neonatal_per_1_000_live_births_large_effects",
-   "expected": 18.0
-  },
-  {
-   "id": "of_under_5_mortality_rate_excluding_neonatal_mortality_due_t",
-   "label": "% of under 5 mortality rate (excluding neonatal mortality) due to malaria, 2015, sub-Saharan Africa (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.0131,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B28"
-   },
-   "explainer": "Unicef 2015, \"Malaria mortality among children under 5\" https://data.unicef.org/topic/child-health/malaria/",
-   "format": "percent"
-  },
-  {
-   "id": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
-   "label": "Under 5 mortality due to malaria (excluding neonates) (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "formula": "under_5_mortality_rate_excluding_neonates_per_1_000_live_bir * of_under_5_mortality_rate_excluding_neonatal_mortality_due_t",
-   "expected": 0.2358
-  },
-  {
-   "id": "risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff",
-   "label": "Risk ratio for clincial malaria cases, intention to treat effect (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.29,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B31"
-   },
-   "explainer": "0.29 is our calculated rate ratio, based on combining the SMC Cochrane Review with Tagbor 2016. See \"RevMan analysis\" here: https://docs.google.com/a/givewell.org/document/d/1mYhJcSBUWOHcIzC7Vzvs_5j26YtPPoBW546hqv7rgaU/edit?usp=sharing. 0.62 is the RR from Tagbor 2016, the weakest effect on malaria incidence that we've obeserved in the 7 RCTs we've seen on SMC."
-  },
-  {
-   "id": "fraction_of_annual_malaria_burden_occurring_in_smc_period_la",
-   "label": "Fraction of annual malaria burden occurring in SMC period (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.75,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B32"
-   },
-   "explainer": "In sites considered suitable for SMC, the median fraction of incidence occurring in the 4 consecutive months of peak transmission was 77% and the mean 75.7% (Supplementary Table S1,2). We therefore assumed that, on average, 75% of the annual burden occurred in the SMC period, but also explored the impact of SMC, if 60% and 90% of annual incidence occurred in the period when SMC was given. Cairns 2012, Pg 9. Note that according to the WHO, 60% is the minimum fraction of incidence occuring in 4 months for an area to be suitable for SMC. WHO SMC Policy Recommendation 2012, Pg 2.",
-   "format": "percent"
-  },
-  {
-   "id": "ratio_of_the_reduction_in_malaria_mortality_to_the_reduction",
-   "label": "Ratio of the reduction in malaria mortality to the reduction in malaria incidence (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B33"
-   },
-   "explainer": "GW best guess - Our base assumption is that malaria incidence and malaria mortality are related at a 1:1 ratio (e.g. a 71% reduction in malaria incidence leads to a 71% reduction in malaria mortality). In WHO's Africa region, malaria incidence declined by ~40% between 2000 and 2015, and malaria mortality rates declined by ~65% (World Malaria Report 2015, Pg 10, Figure 2.2). Reductions in malaria mortality could be caused by a combination of reductions in malaria incidence and increased access to malaria treatment.",
-   "format": "percent"
-  },
-  {
-   "id": "moderate_severe_anemia_calculations_replicability_adustment",
-   "label": "Moderate/Severe anemia calculations: Replicability adustment (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.9,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B34"
-   },
-   "explainer": "GW best guess - Our best guess that the significant malaria incidence reduction effects from SMC RCTs would replicate. We have seen evidence for SMC's significant effects on malaria incidence from 7 randomized controlled trials (RCTs included in Meremikwu et al 2012 plus Tagbor 2016.)",
-   "format": "percent"
-  },
-  {
-   "id": "external_validity_adjustment_large_effects_only_anemia_cogni",
-   "label": "External validity adjustment (Large effects only (anemia, cognitive, malaria))",
-   "section": "calculations",
-   "value": 0.8,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Calculations!B35"
-   },
-   "explainer": "GW best guess - We account for differences in malaria mortality separately, so this external validity adjustment accounts for other differences between the settings of the SMC RCTs in the 2006 \"baseline\" year and present SMC programs in Sahel regions.",
-   "format": "percent"
-  },
-  {
-   "id": "deaths_averted_per_protected_child_under_5_under_smc_includi_2",
-   "label": "Deaths averted per protected child under 5 under SMC (including replicability and external validity adjustments, and accounting for decline in malaria mortality",
-   "section": "calculations",
-   "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef * (1 - risk_ratio_for_clincial_malaria_cases_intention_to_treat_eff) * fraction_of_annual_malaria_burden_occurring_in_smc_period_la * ratio_of_the_reduction_in_malaria_mortality_to_the_reduction * moderate_severe_anemia_calculations_replicability_adustment * external_validity_adjustment_large_effects_only_anemia_cogni / 1000",
-   "expected": 9.040572e-05
-  },
-  {
-   "id": "deaths_averted_per_protected_child_under_5_under_smc_includi",
-   "label": "Deaths averted per protected child under 5 under SMC (including replicability and external validity adjustments, and accounting for decline in malaria mortality",
-   "section": "model",
-   "formula": "deaths_averted_per_protected_child_under_5_under_smc_includi_2",
-   "expected": 9.040572e-05
-  },
-  {
-   "id": "proportion_of_people_living_in_areas_with_malaria_protection",
-   "label": "Proportion of people living in areas with malaria protection and management services (Yes)",
-   "section": "parameters",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B33"
-   },
-   "explainer": "Arbitrary guess. Can change for country-specific estimates"
-  },
-  {
-   "id": "proportion_of_population_living_in_areas_with_malaria_contro",
-   "label": "Proportion of population living in areas with malaria control and management services (Yes)",
-   "section": "model",
-   "formula": "proportion_of_people_living_in_areas_with_malaria_protection",
-   "expected": 0.5
-  },
-  {
-   "id": "children_under_5_as_of_population_yes_2",
-   "label": "Children under 5 as % of population (Yes)",
-   "section": "parameters",
-   "value": 0.091,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B30"
-   },
-   "explainer": "Calculated from World Bank 2016 data,population ages 0-4 female, male as percents, x male and female population as count, http://databank.worldbank.org/data/reports.aspx?source=2&series=SP.POP.TOTL.FE.IN&country=IND",
-   "format": "percent"
-  },
-  {
-   "id": "children_under_5_as_of_population_yes",
-   "label": "Children under 5 as % of population (Yes)",
-   "section": "model",
-   "formula": "children_under_5_as_of_population_yes_2",
-   "expected": 0.091,
-   "format": "percent"
-  },
-  {
-   "id": "under_5_deaths_averted_by_malaria_treatment_as_proportion_of",
-   "label": "Under 5 deaths averted by malaria treatment as proportion of population (Yes)",
-   "section": "model",
-   "formula": "deaths_averted_per_protected_child_under_5_under_smc_includi * proportion_of_population_living_in_areas_with_malaria_contro * children_under_5_as_of_population_yes",
-   "expected": 4.11346026e-06
-  },
-  {
-   "id": "proportion_of_treated_people_whose_seasonal_malaria_chemopre_2",
-   "label": "Proportion of treated people whose seasonal malaria chemoprevention drugs will fail under folic acid supplementation (Yes)",
-   "section": "model",
-   "value": 0.129,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B123"
-   },
-   "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"Yes\",(27.1-0.5*(13.9+14.5))/100,0)`; kept as a fixed number here (text in arithmetic).\n\nNzila, Okombo and Molloy (2014): \"At day 14, the rates of treatment failure in the placebo and 0.4 mg FA groups were identical (13.9% and 14.5%, respectively, P < 0.05), while the failure rate in the 5 mg FA arm was significantly higher than in the placebo group (27.1% versus 13.9%, P=.005).\" Nzila et al. 2013 Pg. 4.",
-   "format": "percent"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_m_5",
-   "label": "Effectiveness of fortification relative to supplementation, malaria (0=ineffective, 1=as effective) (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B15"
-   },
-   "explainer": "Subjective input. There is moderate evidence that iron supplementation may increase malaria infections in areas without malaria prevention and control. There is weak evidence that folic acid supplementation decreases the efficacy of antimalarial drugs"
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_7",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
-   "expected": 0.5
-  },
-  {
-   "id": "proportion_of_treated_people_whose_seasonal_malaria_chemopre",
-   "label": "Proportion of treated people whose seasonal malaria chemoprevention drugs will fail under folic acid fortification (Yes)",
-   "section": "model",
-   "formula": "proportion_of_treated_people_whose_seasonal_malaria_chemopre_2 * effectiveness_of_fortification_relative_to_supplementation_0_7",
-   "expected": 0.0645,
-   "format": "percent"
-  },
-  {
-   "id": "under_5_deaths_as_proportion_of_population_from_decreased_an",
-   "label": "Under 5 deaths as proportion of population from decreased antimalarial drugs efficacy under fortification (Yes)",
-   "section": "model",
-   "formula": "under_5_deaths_averted_by_malaria_treatment_as_proportion_of * proportion_of_treated_people_whose_seasonal_malaria_chemopre",
-   "expected": 2.653181868e-07
-  },
-  {
-   "id": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
-   "label": "Percent of total malaria benefit coming from under 5 mortality reduction (Yes)",
-   "section": "parameters",
-   "value": 0.3488,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B31"
-   },
-   "explainer": "See GiveWell (2016), November CEA, cell B80 of Bednets sheet. Also see Calculations sheet for SMC estimate",
-   "format": "percent"
-  },
-  {
-   "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat",
-   "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
-   "section": "model",
-   "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
-   "expected": 0.3488,
-   "format": "percent"
-  },
-  {
-   "id": "equivalent_of_proportion_of_population_dying_due_to_decrease",
-   "label": "Equivalent of proportion of population dying due to decreased malaria drug efficacy",
-   "section": "model",
-   "formula": "under_5_deaths_as_proportion_of_population_from_decreased_an / percentage_of_total_malaria_effects_coming_from_under_5_deat",
-   "expected": 7.606599391e-07
-  },
-  {
-   "id": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births",
-   "label": "Baseline under-5 deaths due to malaria per 1000 live births in areas without malaria control (Yes)",
-   "section": "model",
-   "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
-   "expected": 0.2358
-  },
-  {
-   "id": "children_under_5_as_of_population_yes_3",
-   "label": "Children under 5 as % of population (Yes)",
-   "section": "model",
-   "formula": "children_under_5_as_of_population_yes_2",
-   "expected": 0.091,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_population_that_are_under_5_deaths_yes",
-   "label": "Proportion of population that are under-5 deaths (Yes)",
-   "section": "model",
-   "formula": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births * children_under_5_as_of_population_yes_3 / 1000",
-   "expected": 2.14578e-05
-  },
-  {
-   "id": "proportion_of_population_living_in_areas_without_malaria_con",
-   "label": "Proportion of population living in areas without malaria control and management services (Yes)",
-   "section": "model",
-   "formula": "1 - proportion_of_people_living_in_areas_with_malaria_protection",
-   "expected": 0.5
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_8",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
-   "expected": 0.5
-  },
-  {
-   "id": "malaria_risk_ratio_from_iron_supplementation_in_areas_withou",
-   "label": "Malaria risk ratio from iron supplementation in areas without malaria control services (Yes)",
-   "section": "model",
-   "value": 1.16,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B110"
-   },
-   "explainer": "Neuberger et al (2016)"
-  },
-  {
-   "id": "malaria_risk_ratio_from_iron_fortification_in_areas_without",
-   "label": "Malaria risk ratio from iron fortification in areas without malaria control services (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_8 * (1 - malaria_risk_ratio_from_iron_supplementation_in_areas_withou)",
-   "expected": 1.08
-  },
-  {
-   "id": "proportion_of_population_dying_as_a_result_of_increased_mala",
-   "label": "Proportion of population dying as a result of increased malaria in areas without control services (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_under_5_deaths_yes * proportion_of_population_living_in_areas_without_malaria_con * (malaria_risk_ratio_from_iron_fortification_in_areas_without - 1)",
-   "expected": 8.58312e-07
-  },
-  {
-   "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat_2",
-   "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
-   "section": "model",
-   "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
-   "expected": 0.3488,
-   "format": "percent"
-  },
-  {
-   "id": "equivalent_of_proportion_of_population_dying_due_to_increase",
-   "label": "Equivalent of proportion of population dying due to increased malaria (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_dying_as_a_result_of_increased_mala / percentage_of_total_malaria_effects_coming_from_under_5_deat_2",
-   "expected": 2.460756881e-06
-  },
-  {
-   "id": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births_2",
-   "label": "Baseline under-5 deaths due to malaria per 1000 live births in malaria control areas (Yes)",
-   "section": "model",
-   "formula": "under_5_mortality_due_to_malaria_excluding_neonates_large_ef",
-   "expected": 0.2358
-  },
-  {
-   "id": "children_under_5_as_of_population_yes_4",
-   "label": "Children under 5 as % of population (Yes)",
-   "section": "model",
-   "formula": "children_under_5_as_of_population_yes_2",
-   "expected": 0.091,
-   "format": "percent"
-  },
-  {
-   "id": "proportion_of_population_that_are_under_5_deaths_yes_2",
-   "label": "Proportion of population that are under-5 deaths (Yes)",
-   "section": "model",
-   "formula": "baseline_under_5_deaths_due_to_malaria_per_1000_live_births_2 * children_under_5_as_of_population_yes_4 / 1000",
-   "expected": 2.14578e-05
-  },
-  {
-   "id": "proportion_of_population_living_in_areas_with_malaria_contro_2",
-   "label": "Proportion of population living in areas with malaria control and management services (Yes)",
-   "section": "model",
-   "formula": "proportion_of_people_living_in_areas_with_malaria_protection",
-   "expected": 0.5
-  },
-  {
-   "id": "effectiveness_of_fortification_relative_to_supplementation_0_9",
-   "label": "Effectiveness of fortification relative to supplementation (0=ineffective, 1=as effective) (Yes)",
-   "section": "model",
-   "formula": "effectiveness_of_fortification_relative_to_supplementation_m_5",
-   "expected": 0.5
-  },
-  {
-   "id": "malaria_risk_ratio_from_iron_supplementation_in_areas_with_m",
-   "label": "Malaria risk ratio from iron supplementation in areas with malaria control services (only without folic acid) (Yes)",
-   "section": "model",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B97"
-   },
-   "explainer": "Calculated in the source sheet as `=if(Parameters!B17=\"No\",0.91,1)`; kept as a fixed number here (text in arithmetic).\n\nRisk ration from Neuberger et al (2016) for iron alone, equal to 1 if with folic acid."
-  },
-  {
-   "id": "malaria_risk_ratio_from_iron_fortification_in_areas_with_mal",
-   "label": "Malaria risk ratio from iron fortification in areas with malaria control services (Yes)",
-   "section": "model",
-   "formula": "1 - effectiveness_of_fortification_relative_to_supplementation_0_9 * (1 - malaria_risk_ratio_from_iron_supplementation_in_areas_with_m)",
-   "expected": 1.0
-  },
-  {
-   "id": "proportion_of_population_prevented_from_dying_as_a_result_of",
-   "label": "Proportion of population prevented from dying as a result of reduced malaria in areas with control services (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_that_are_under_5_deaths_yes_2 * proportion_of_population_living_in_areas_with_malaria_contro_2 * (1 - malaria_risk_ratio_from_iron_fortification_in_areas_with_mal)",
-   "expected": 0.0
-  },
-  {
-   "id": "percentage_of_total_malaria_effects_coming_from_under_5_deat_3",
-   "label": "Percentage of total malaria effects coming from under-5 deaths (Yes)",
-   "section": "model",
-   "formula": "percent_of_total_malaria_benefit_coming_from_under_5_mortali",
-   "expected": 0.3488,
-   "format": "percent"
-  },
-  {
-   "id": "equivalent_of_proportion_of_population_prevented_from_dying",
-   "label": "Equivalent of proportion of population prevented from dying due to reduced malaria (Yes)",
-   "section": "model",
-   "formula": "proportion_of_population_prevented_from_dying_as_a_result_of / percentage_of_total_malaria_effects_coming_from_under_5_deat_3",
-   "expected": 0.0
-  },
-  {
-   "id": "equivalent_of_total_proportion_of_population_dying_from_mala",
-   "label": "Equivalent of total proportion of population dying from malaria as a result of fortification",
-   "section": "model",
-   "formula": "equivalent_of_proportion_of_population_dying_due_to_decrease + equivalent_of_proportion_of_population_dying_due_to_increase - equivalent_of_proportion_of_population_prevented_from_dying",
-   "expected": 3.22141682e-06
-  },
-  {
-   "id": "equivalent_malaria_dalys_caused_per_beneficiary_of_iron_fort",
-   "label": "Equivalent malaria DALYs caused per beneficiary of iron fortification",
-   "section": "model",
-   "formula": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted_2 * equivalent_of_total_proportion_of_population_dying_from_mala",
-   "expected": 2.899275138e-05
-  },
-  {
-   "id": "total_net_dalys_averted_per_beneficiary_of_iron_fortificatio",
-   "label": "Total net DALYs averted per beneficiary of iron fortification (health effects only) (Yes)",
-   "section": "model",
-   "formula": "mild_anemia_dalys_averted_per_beneficiary_of_iron_fortificat + moderate_anemia_dalys_averted_per_beneficiary_of_iron_fortif + severe_anemia_dalys_averted_per_beneficiary_of_iron_fortific + dalys_averted_per_beneficiary_of_iron_fortification_yes + dalys_averted_per_beneficiary_of_folic_acid_fortification_ye - total_dalys_caused_by_side_effects_per_beneficiary_of_iron_f - equivalent_malaria_dalys_caused_per_beneficiary_of_iron_fort",
-   "expected": 0.002326043826
-  },
-  {
-   "id": "r_1_daly_averted_is_equivalent_to_increasing_ln_consumption_by",
-   "label": "1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years? (Large effects only (anemia, cognitive, malaria))",
-   "section": "parameters",
-   "value": 3.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Parameters!B7"
-   },
-   "explainer": "GiveWell CEA, Nov 2016. Cell C7 of Parameters sheet"
-  },
-  {
-   "id": "ln_consumption_equivalent_of_dalys_averted_per_beneficiary_o",
-   "label": "ln(consumption) equivalent of DALYs averted per beneficiary of iron fortification (health effects only) (Yes)",
-   "section": "model",
-   "formula": "total_net_dalys_averted_per_beneficiary_of_iron_fortificatio * r_1_daly_averted_is_equivalent_to_increasing_ln_consumption_by",
-   "expected": 0.006978131478
-  },
-  {
-   "id": "iron_fortification_total_cost_per_beneficiary_per_year_yes",
-   "label": "Iron fortification total cost per beneficiary per year (Yes)",
-   "section": "model",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
-    "cell": "Model!B14"
-   },
-   "explainer": "Calculated in the source sheet as `=IF(Parameters!B$17=\"Yes\",Parameters!B$19+Parameters!B$20,Parameters!B$19)`; kept as a fixed number here (text in arithmetic).\n\nhttps://docs.google.com/spreadsheets/d/1SW3AKd4neQ6w9xW7EHCPhx6q-xSTdOysfS58JSU0k68/edit#gid=0&range=E46",
-   "format": "usd"
-  },
-  {
-   "id": "proportional_average_increase_in_consumption_per_dollar_incl",
-   "label": "Proportional average increase in consumption per dollar (including health benefits) (Yes)",
-   "section": "model",
-   "formula": "(average_increase_in_ln_consumption_direct_cognitive_benefits + ln_consumption_equivalent_of_dalys_averted_per_beneficiary_o) / iron_fortification_total_cost_per_beneficiary_per_year_yes",
-   "expected": 0.03785730072,
-   "format": "percent"
-  },
-  {
-   "id": "overall_cost_effectiveness_relative_to_givedirectly_standard",
-   "label": "Overall cost-effectiveness relative to GiveDirectly standard cash transfer program (Yes)",
-   "section": "model",
-   "formula": "proportional_average_increase_in_consumption_per_dollar_incl / 0.0026",
-   "expected": 14.56050028
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "overall_cost_effectiveness_relative_to_givedirectly_standard * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

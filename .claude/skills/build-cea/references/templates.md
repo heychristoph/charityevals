@@ -29,7 +29,7 @@ model carries.
 | `overhead_ratio` | total ÷ program expenses: spreads management and fundraising over programs | same document |
 | `evidence_adj` | how far to trust the effect size here: internal validity (bias, publication bias, self-report) × external validity (different setting, population, implementer). 1 = face value | judgment, anchored on the evaluator adjustments for the same intervention |
 | `counterfactual_adj` | share of the outcome that wouldn't have happened anyway in this setting | coverage data, trend data, other providers |
-| `attribution_share_shared` / `attribution_share` | share of credit when others contributed; `if($full_credit, 1, …)` | coalition/co-funder information; judgment |
+| `attribution_share_shared` / `attribution_share` | the charity's share of the resources behind an outcome when others contributed | coalition/co-funder information; judgment |
 | `implementation_adj` | share of reported reach that gets the intervention as studied (adherence, coverage-survey vs. admin data, pledges honoured) | monitoring data, trackers |
 | `leverage_funging_adj` | would governments or other funders have paid anyway (<1), or does the money pull others in (>1)? | funding-gap data; judgment |
 | `unmodelled_benefits_adj` | effects not modelled, as a share of modelled value (GiveWell-style supplementary adjustments) | list each, with sign and size |
@@ -46,7 +46,7 @@ These settle the questions the development runs kept hitting; follow them so mod
 2. **Cost is the charity's own spending.** `cost_total` is what this charity spent (with its overhead).
    Money or in-kind work by co-funders, governments or partners never goes into `cost_total`; it
    lowers `attribution_share_shared`, typically to the charity's share of the total cost of the
-   outcome. That keeps `$full_credit` meaningful: on, the charity gets the whole outcome for its own cost.
+   outcome. The charity's share then applies in both credit modes, so nothing is counted twice.
 3. **Flows, not stocks.** Reach is per year. Multiply by persistence (`years_of_impact`,
    `pv_annuity_due`) only for what was *added* in the period (new commitments, new institutions,
    new pledges). A year's total flow from an ongoing program (all partner institutions' meals this

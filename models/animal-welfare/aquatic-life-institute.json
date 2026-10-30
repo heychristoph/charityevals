@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/113VWopanUvFiSS9KO3ruj4W8d77MUg0b2IlsVg-hr7M/edit",
     "published": "2024-11-12",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -39,14 +39,14 @@
     {
       "id": "p1_m_s_shrimps_stunned_count_projection_best_guess",
       "section": "p1_corporate_and_institutional_out",
-      "label": "M&S shrimps stunned count projection best guess",
-      "value": 1859778968,
-      "kind": "estimate",
+      "label": "M&S shrimps stunned count projection (discounted)",
+      "formula": "-pv((p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per), max(0, p1_how_many_years_of_impact_do_we_expect - (2026 - 2023)), p1_shrimps_that_the_retailer_estimates_will_be_stun) / (1 + (p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per)) ^ (2026 - 2023)",
+      "expected": 1859778968,
       "source": {
         "title": "ACE",
         "cell": "Future projections!B3"
       },
-      "explainer": "From ACE's spreadsheet, cell Future projections!B3."
+      "explainer": "The yearly number, counted from 2026 until the end of the expected years of impact (from 2023), shrinking each year by your discount rate less the UK shrimp industry's growth. ACE's sheet does the same with an NPV at 4%."
     },
     {
       "id": "p1_of_success_contributed_by_ali",
@@ -90,14 +90,14 @@
     {
       "id": "p1_waitrose_shrimps_sold_count_projection_best_gues",
       "section": "p1_corporate_and_institutional_out",
-      "label": "Waitrose shrimps sold count projection best guess",
-      "value": 1876677356,
-      "kind": "estimate",
+      "label": "Waitrose shrimps sold count projection (discounted)",
+      "formula": "-pv((p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per), max(0, p1_how_many_years_of_impact_do_we_expect_2 - (p1_estimate_of_when_stunning_will_be_implemented - 2023)), p1_how_many_shrimps_will_be_stunned) / (1 + (p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per)) ^ (p1_estimate_of_when_stunning_will_be_implemented - 2023)",
+      "expected": 1876677356,
       "source": {
         "title": "ACE",
         "cell": "Future projections!B6"
       },
-      "explainer": "From ACE's spreadsheet, cell Future projections!B6."
+      "explainer": "The yearly number, counted from the year stunning is implemented until the end of the expected years of impact (from 2023), shrinking each year by your discount rate less the UK shrimp industry's growth. ACE's sheet does the same with an NPV at 4%."
     },
     {
       "id": "p1_of_success_contributed_by_ali_2",
@@ -141,14 +141,14 @@
     {
       "id": "p1_tesco_shrimps_sold_count_projection_best_guess",
       "section": "p1_corporate_and_institutional_out",
-      "label": "Tesco shrimps sold count projection best guess",
-      "value": 4351082607,
-      "kind": "estimate",
+      "label": "Tesco shrimps sold count projection (discounted)",
+      "formula": "-pv((p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per), max(0, p1_how_many_years_of_impact_do_we_expect_3 - (p1_estimate_of_when_full_stunning_will_be_implement - 2023)), p1_shrimps_sold_by_tesco_annually) / (1 + (p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per)) ^ (p1_estimate_of_when_full_stunning_will_be_implement - 2023)",
+      "expected": 4351082607,
       "source": {
         "title": "ACE",
         "cell": "Future projections!B9"
       },
-      "explainer": "From ACE's spreadsheet, cell Future projections!B9."
+      "explainer": "The yearly number, counted from the year full stunning is implemented until the end of the expected years of impact (from 2023), shrinking each year by your discount rate less the UK shrimp industry's growth. ACE's sheet does the same with an NPV at 4%."
     },
     {
       "id": "p1_current_rate_of_electrical_stunning_in_shrimps",
@@ -211,14 +211,14 @@
     {
       "id": "p1_globalgap_shrimps_sold_count_projection_best_gue",
       "section": "p1_corporate_and_institutional_out",
-      "label": "GLOBALGAP shrimps sold count projection best guess",
-      "value": 52838739695,
-      "kind": "estimate",
+      "label": "GLOBALGAP shrimps sold count projection (discounted)",
+      "formula": "-pv((p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per), max(0, p1_how_many_years_of_impact_do_we_expect_4 - 1), p1_whiteleg_shrimps_individuals) / (1 + (p1_general_annual_discount_rate - p1_past_4_year_growth_of_the_uk_shrimp_industry_per)) ^ 1",
+      "expected": 52838739695,
       "source": {
         "title": "ACE",
         "cell": "Future projections!B12"
       },
-      "explainer": "From ACE's spreadsheet, cell Future projections!B12."
+      "explainer": "The yearly number, counted from 2024 until the end of the expected years of impact (from 2023), shrinking each year by your discount rate less the UK shrimp industry's growth. ACE's sheet does the same with an NPV at 4%."
     },
     {
       "id": "p1_shrimps_with_environmental_enrichment_after_comm",
@@ -487,13 +487,13 @@
       "id": "p1_general_annual_discount_rate",
       "section": "p1_corporate_and_institutional_out",
       "label": "General annual discount rate",
-      "value": 0.04,
-      "kind": "estimate",
+      "formula": "$discount_rate",
+      "expected": 0.04,
       "source": {
         "title": "ACE (Estimate (external))",
         "cell": "Corporate and Institutional Out!B52"
       },
-      "explainer": "This is applied both by GiveWell and Charity Entrepreneurship\n\nACE's input, source type: Estimate (external)."
+      "explainer": "Your discount rate (Timing, under Your values). ACE's sheet uses 4%, which it applies both here and in its Future projections tab."
     },
     {
       "id": "p1_program_1_expenditures_annually",
@@ -760,7 +760,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -778,8 +778,8 @@
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "discount_rate": 0.04,
+      "resource_shares": 0
     }
   },
   "resources": [

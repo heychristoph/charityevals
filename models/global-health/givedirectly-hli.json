@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "givedirectly",
   "owner": "hli",
-  "summary": "The Happier Lives Institute's estimate of GiveDirectly's effect on wellbeing, from its meta-analysis of cash transfers' effects on life satisfaction and mental health, including spillovers to the household.",
+  "summary": "Sends cash transfers of about $1,000 to poor households in East Africa. The Happier Lives Institute's estimate of GiveDirectly's effect on wellbeing, from its meta-analysis of cash transfers' effects on life satisfaction and mental health, including spillovers to the household.",
   "source": {
     "publisher": "Happier Lives Institute",
     "title": "Cash transfers cost-effectiveness analysis",
@@ -13,16 +13,19 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
     "published": "2024-11-01",
     "retrieved": "2026-10-27",
-    "license": "Unclear: check HLI's terms before republishing"
+    "license": "© Happier Lives Institute; no licence published"
   },
   "evaluator": {
     "name": "HLI",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0
     }
   },
   "sections": [
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
+    },
     {
       "id": "bottom",
       "title": "Bottom line"
@@ -44,11 +47,53 @@
       "explainer": "HLI's current figure for GiveDirectly, which it uses as the benchmark for its other charities. HLI's earlier, more detailed model (2022) put it at 8.2 WELLBYs per $1,000. HLI's report explains the meta-analysis behind it; the summary sheet publishes only the result, so this model has a single input."
     },
     {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.08,
+        "high": 0.12
+      },
+      "kind": "judgment",
+      "explainer": "About 16% of GiveDirectly's costs are not transfers; we guess half of that is staff pay, as in our GiveDirectly model."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as in our GiveDirectly model."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
       "id": "wellbys_per_dollar",
       "section": "bottom",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "wellbys_per_1000 / 1000"
+      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1BcZB3WeYarZC67MgFUjGKLWdLw2WVVZO8LitYcQb3fU/edit",
     "published": "2025-03-01",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -73,7 +73,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1BiqnEWyWVy8ae-GdS62pqC-YxwRM9Bhdwq1IPtKrlvQ/edit",
         "cell": "Cage-free Campaigns CEA!B7"
       },
-      "explainer": "ACE's estimate from each company's egg volumes. Under shared credit (the default) only Sinergia's share counts; with full credit for shared outcomes, all of these hens do."
+      "explainer": "ACE's estimate from each company's egg volumes. Only Sinergia's share counts."
     },
     {
       "id": "cf_hens_per_year_attributed",
@@ -101,7 +101,7 @@
       "section": "cage_free",
       "label": "Hens per year credited to Sinergia",
       "format": "integer",
-      "formula": "if($full_credit, cf_hens_per_year_total, cf_hens_per_year_attributed)",
+      "formula": "cf_hens_per_year_attributed",
       "expected": 7864022
     },
     {
@@ -246,7 +246,7 @@
       "label": "SADs credited to Sinergia",
       "unit": "SADs",
       "format": "integer",
-      "formula": "pig_sads_full * if($full_credit, 1, pig_attribution_share)",
+      "formula": "pig_sads_full * pig_attribution_share",
       "expected": 499629727
     },
     {
@@ -449,7 +449,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -469,8 +469,7 @@
     "name": "Animal Charity Evaluators",
     "assumptions": {
       "discount_rate": 0.04,
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "resource_shares": 0
     }
   },
   "resources": [

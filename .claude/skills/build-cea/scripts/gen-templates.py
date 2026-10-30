@@ -53,8 +53,8 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True):
             "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"),
         inp("attribution_share_shared", "adjustments", "This charity's share of credit, when shared with others", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
             "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone.", "percent"),
-        f("attribution_share", "adjustments", "Share of credit used", "if($full_credit, 1, attribution_share_shared)",
-          "With full credit for shared outcomes switched on, the charity gets the whole outcome.", "percent"),
+        f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared",
+          "The charity's share of the resources behind the outcome; it applies whichever way credit is shared.", "percent"),
     ]
     if implementation:
         rows.append(inp("implementation_adj", "adjustments", "Delivery adjustment (fidelity, compliance, follow-through)", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
@@ -77,7 +77,7 @@ def donor_rows(prefix, unit_label):
         inp("salary_gap", "donor", "Pay gap versus comparable for-profit jobs", {"low": 0, "best": 0.15, "high": 0.35}, "judgment",
             "how much less staff earn than in comparable for-profit roles. Use the repo's existing models as reference: about 15% for large delivery charities, 35% for advocacy groups.", "percent"),
         f("salary_sacrifice", "donor", "Salary forgone by staff (in-kind donation)", "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)", None, "usd"),
-        f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))", None, "percent"),
+        f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))", None, "percent"),
         f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", f"{prefix}_per_dollar * donor_cost_share", None, "small", f"{unit_label} / $"),
     ]
 

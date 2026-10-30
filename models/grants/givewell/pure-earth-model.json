@@ -1,1575 +1,1620 @@
 {
- "id": "pure-earth-model",
- "name": "Pure Earth BOTEC",
- "kind": "charity",
- "cause": "global-health",
- "charity": "pure-earth",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"Pure Earth BOTEC\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "Pure Earth BOTEC (public)",
-  "url": "https://www.givewell.org/research/incubation-grants/Pure-Earth-lead-exposure-July-2021",
-  "sheet": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-  "published": "2021-07-20",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "pure-earth-model",
+  "name": "Pure Earth BOTEC",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "pure-earth",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Works to reduce lead exposure, in places such as Bihar, India. GiveWell's spreadsheet \"Pure Earth BOTEC\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "Pure Earth BOTEC (public)",
+    "url": "https://www.givewell.org/research/incubation-grants/Pure-Earth-lead-exposure-July-2021",
+    "sheet": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+    "published": "2021-07-20",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "Pure Earth BOTEC (public)",
+      "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (Pure Earth lead exposure July 2021)",
+      "url": "https://www.givewell.org/research/incubation-grants/Pure-Earth-lead-exposure-July-2021",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "pure_earth_botec_simple",
+      "title": "Pure Earth BOTEC (Simple)"
+    },
+    {
+      "id": "pure_earth_botec_more_detailed",
+      "title": "Pure earth BOTEC (more detailed"
+    },
+    {
+      "id": "pure_earth_budget",
+      "title": "Pure Earth budget"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
+    }
+  ],
+  "rows": [
+    {
+      "id": "doublings_of_consumption_for_one_year",
+      "label": "doublings of consumption for one year",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.44,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F67"
+      }
+    },
+    {
+      "id": "multiplier_for_resource_sharing_within_households",
+      "label": "Multiplier for resource sharing within households",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F64"
+      },
+      "explainer": "We use the same estimate for the resource sharing multiplier as we do when estimating the long-term income effects from deworming."
+    },
+    {
+      "id": "units_of_ln_consumption_2",
+      "label": "units of ln(consumption)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.07632448359,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F62"
+      },
+      "explainer": "Calculated in the source sheet as `=pv(F57,F60,-F59,,1)`; kept as a fixed number here (text in arithmetic)."
+    },
+    {
+      "id": "units_of_ln_consumption",
+      "label": "units of ln(consumption)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "multiplier_for_resource_sharing_within_households * units_of_ln_consumption_2",
+      "expected": 0.1526489672
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_1",
+      "label": "Units of value from increasing IQ by 1",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
+      "expected": 0.2198145127
+    },
+    {
+      "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels",
+      "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "0.2 * (75 / 100)",
+      "expected": 0.15
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_0_15",
+      "label": "Units of value from increasing IQ by 0.15",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_1 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per",
+      "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_0_15",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra",
+      "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 3.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G77"
+      },
+      "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2"
+    },
+    {
+      "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout",
+      "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Bihar)",
+      "section": "pure_earth_botec_simple",
+      "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra / 1000)",
+      "expected": 9.697699091,
+      "format": "usd"
+    },
+    {
+      "id": "bihar_india_row_34",
+      "label": "Bihar, India (row 34)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.35,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G34"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_34",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (row 34)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!D34"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "bihar_india_row_35",
+      "label": "Bihar, India (row 35)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.3,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G35"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_35",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (row 35)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!D35"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "bihar_india_row_36",
+      "label": "Bihar, India (row 36)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G36"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_36",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (row 36)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!D36"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "bihar_india_row_37",
+      "label": "Bihar, India (row 37)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G37"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_37",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (row 37)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.75,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!D37"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "bihar_india_row_38",
+      "label": "Bihar, India (row 38)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G38"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_38",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (row 38)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!D38"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_proportion_of_population_covered_bihar_india",
+      "label": "Expected proportion of population covered (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(bihar_india_row_34 * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, bihar_india_row_35 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, bihar_india_row_36 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, bihar_india_row_37 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, bihar_india_row_38 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
+      "expected": 0.385,
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_bihar_in",
+      "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.35,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G27"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_millions",
+      "label": "Probability of decreasing average BLLs by <0.5 ug/dl ($ millions)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!E27"
+      }
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_biha",
+      "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.35,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G28"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill",
+      "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl ($ millions)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!E28"
+      }
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_biha",
+      "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G29"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill",
+      "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl ($ millions)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 2.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!E29"
+      }
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_3_ug_dl_bihar_indi",
+      "label": "Probability of decreasing average BLLs by >3 ug/dl (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G30"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_3_ug_dl_millions",
+      "label": "Probability of decreasing average BLLs by >3 ug/dl ($ millions)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 3.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!E30"
+      }
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_bihar",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_bihar_in * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_biha * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_biha * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_bihar_indi * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
+      "expected": 1.0
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_bihar_india",
+      "label": "Expected reduction in country average BLL (ug/dl) (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "expected_proportion_of_population_covered_bihar_india * expected_decrease_in_blls_in_covered_population_ug_dl_bihar",
+      "expected": 0.385
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_bihar",
+      "label": "Expected reduction in country average BLL (ug/dl) (Bihar)",
+      "section": "pure_earth_botec_simple",
+      "formula": "expected_reduction_in_country_average_bll_ug_dl_bihar_india",
+      "expected": 0.385
+    },
+    {
+      "id": "child_births_per_year_bihar_india",
+      "label": "Child births per year (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "104099452 * 26.2 / 1000",
+      "expected": 2727405.642
+    },
+    {
+      "id": "number_of_years_benefits_are_counterfactually_sustained_for",
+      "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 7.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G48"
+      },
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit."
+    },
+    {
+      "id": "children_in_country_cohorts_before_population_covered_adjust",
+      "label": "Children in country cohorts (before population covered adjustment) (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "child_births_per_year_bihar_india * number_of_years_benefits_are_counterfactually_sustained_for",
+      "expected": 19091839.5
+    },
+    {
+      "id": "children_in_country_cohorts_bihar",
+      "label": "Children in country cohorts (Bihar)",
+      "section": "pure_earth_botec_simple",
+      "formula": "children_in_country_cohorts_before_population_covered_adjust",
+      "expected": 19091839.5
+    },
+    {
+      "id": "expected_value_in_millions_spent_on_cash_transfers_bihar",
+      "label": "Expected value (in $ millions spent on cash transfers) (Bihar)",
+      "section": "pure_earth_botec_simple",
+      "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout * expected_reduction_in_country_average_bll_ug_dl_bihar * children_in_country_cohorts_bihar / 1000000",
+      "expected": 71.2815621,
+      "format": "usd"
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_1_2",
+      "label": "Units of value from increasing IQ by 1",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
+      "expected": 0.2198145127
+    },
+    {
+      "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_2",
+      "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "0.2 * (75 / 100)",
+      "expected": 0.15
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_0_15_2",
+      "label": "Units of value from increasing IQ by 0.15",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_1_2 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_2",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_2",
+      "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_0_15_2",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_2",
+      "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 3.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H77"
+      },
+      "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2 https://docs.google.com/spreadsheets/d/11HsJLpq0Suf3SK_PmzzWpK1tr_BTd364j0l3xVvSCQw/edit#gid=1680005064&range=A38:B38"
+    },
+    {
+      "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_2",
+      "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Jharkhand, Uttar Pradesh, West Benga",
+      "section": "pure_earth_botec_simple",
+      "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_2 / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_2 / 1000)",
+      "expected": 9.697699091,
+      "format": "usd"
+    },
+    {
+      "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row",
+      "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 34)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H34"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_2",
+      "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 35)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.32,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H35"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_3",
+      "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 36)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H36"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_4",
+      "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 37)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.08,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H37"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_5",
+      "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 38)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H38"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_proportion_of_population_covered_jharkhand_uttar_pr",
+      "label": "Expected proportion of population covered (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_2 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_3 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_4 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_5 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
+      "expected": 0.305,
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_jharkhan",
+      "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H27"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_jhar",
+      "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H28"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_jhar",
+      "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.2,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H29"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_3_ug_dl_jharkhand",
+      "label": "Probability of decreasing average BLLs by >3 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H30"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_jharkh",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_jharkhan * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_jhar * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_jhar * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_jharkhand * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
+      "expected": 0.8
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut_2",
+      "label": "Expected reduction in country average BLL (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "expected_proportion_of_population_covered_jharkhand_uttar_pr * expected_decrease_in_blls_in_covered_population_ug_dl_jharkh",
+      "expected": 0.244
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut",
+      "label": "Expected reduction in country average BLL (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_simple",
+      "formula": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut_2",
+      "expected": 0.244
+    },
+    {
+      "id": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or",
+      "label": "Child births per year (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "(32988134 + 199812341 + 91276115 + 72147030) / 4 * 17.592 / 1000",
+      "expected": 1742591.481
+    },
+    {
+      "id": "number_of_years_benefits_are_counterfactually_sustained_for_2",
+      "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 7.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H48"
+      },
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
+    },
+    {
+      "id": "children_in_country_cohorts_before_population_covered_adjust_2",
+      "label": "Children in country cohorts (before population covered adjustment) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or * number_of_years_benefits_are_counterfactually_sustained_for_2",
+      "expected": 12198140.37
+    },
+    {
+      "id": "children_in_country_cohorts_jharkhand_uttar_pradesh_west_ben",
+      "label": "Children in country cohorts (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_simple",
+      "formula": "children_in_country_cohorts_before_population_covered_adjust_2",
+      "expected": 12198140.37
+    },
+    {
+      "id": "expected_value_in_millions_spent_on_cash_transfers_jharkhand",
+      "label": "Expected value (in $ millions spent on cash transfers) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_simple",
+      "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_2 * expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut * children_in_country_cohorts_jharkhand_uttar_pradesh_west_ben / 1000000",
+      "expected": 28.86371031,
+      "format": "usd"
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_1_3",
+      "label": "Units of value from increasing IQ by 1",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
+      "expected": 0.2198145127
+    },
+    {
+      "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_3",
+      "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "0.2 * (75 / 100)",
+      "expected": 0.15
+    },
+    {
+      "id": "units_of_value_from_increasing_iq_by_0_15_3",
+      "label": "Units of value from increasing IQ by 0.15",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_1_3 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_3",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_3",
+      "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "units_of_value_from_increasing_iq_by_0_15_3",
+      "expected": 0.03297217691
+    },
+    {
+      "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_3",
+      "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 3.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I77"
+      },
+      "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2 https://docs.google.com/spreadsheets/d/11HsJLpq0Suf3SK_PmzzWpK1tr_BTd364j0l3xVvSCQw/edit#gid=1680005064&range=A38:B38"
+    },
+    {
+      "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_3",
+      "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Philippines)",
+      "section": "pure_earth_botec_simple",
+      "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_3 / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_3 / 1000)",
+      "expected": 9.697699091,
+      "format": "usd"
+    },
+    {
+      "id": "philippines_row_34",
+      "label": "Philippines (row 34)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I34"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "philippines_row_35",
+      "label": "Philippines (row 35)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.32,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I35"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "philippines_row_36",
+      "label": "Philippines (row 36)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I36"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "philippines_row_37",
+      "label": "Philippines (row 37)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.08,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I37"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "philippines_row_38",
+      "label": "Philippines (row 38)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I38"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_proportion_of_population_covered_philippines",
+      "label": "Expected proportion of population covered (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(philippines_row_34 * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, philippines_row_35 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, philippines_row_36 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, philippines_row_37 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, philippines_row_38 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
+      "expected": 0.305,
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_philippi",
+      "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I27"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_phil",
+      "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I28"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_phil",
+      "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.2,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I29"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_decreasing_average_blls_by_3_ug_dl_philippine",
+      "label": "Probability of decreasing average BLLs by >3 ug/dl (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I30"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "expected_decrease_in_blls_in_covered_population_ug_dl_philip",
+      "label": "Expected decrease in BLLs in covered population (ug/dl) (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_philippi * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_phil * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_phil * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_philippine * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
+      "expected": 0.8
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_philippines_2",
+      "label": "Expected reduction in country average BLL (ug/dl) (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "expected_proportion_of_population_covered_philippines * expected_decrease_in_blls_in_covered_population_ug_dl_philip",
+      "expected": 0.244
+    },
+    {
+      "id": "expected_reduction_in_country_average_bll_ug_dl_philippines",
+      "label": "Expected reduction in country average BLL (ug/dl) (Philippines)",
+      "section": "pure_earth_botec_simple",
+      "formula": "expected_reduction_in_country_average_bll_ug_dl_philippines_2",
+      "expected": 0.244
+    },
+    {
+      "id": "child_births_per_year_philippines",
+      "label": "Child births per year (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 2619967.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I47"
+      },
+      "explainer": "Calculated in the source sheet as `=sumifs('IHME live births forecast'!$I$3:$I$898,'IHME live births forecast'!$B$3:$B$898,I$2,'IHME live births forecast'!$C$3:$C$898,\"2022\")`; kept as a fixed number here (SUMIFS()).\n\nKnoema, World Data Atlas, 2018 crude birth rate for Bihar, India\nGovernment of India, Office of the Registrar General & Census Commissioner, Primary Census Data Highlights: Chapter 1\nMacrotrends, India Birth Rate 1950-2021 (accessed August 9, 2021)\nMacrotrends, Mexico Birth Rate 1950-2021 (accessed August 9, 2021)\nGovernment of Mexico, National Institute of Statistics and Geography, Mexico in Figures: Michoacán de Ocampo https://knoema.com/atlas/India/Bihar/Birth-rate\nhttps://www.censusindia.gov.in/2011census/PCA/PCA_highlights/pca_highlights_file/India/Chapter-1.pdf\nhttps://www.macrotrends.net/countries/IND/india/birth-rate\nhttps://www.macrotrends.net/countries/MEX/mexico/birth-rate\nhttps://files.givewell.org/files/DWDA%202009/Pure_Earth/Government_of_Mexico_National_Institute_of_Statistics_and_Geography_Mexico_in_Figures__Michoacan_de_Ocampo.pdf"
+    },
+    {
+      "id": "number_of_years_benefits_are_counterfactually_sustained_for_3",
+      "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 7.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I48"
+      },
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
+    },
+    {
+      "id": "children_in_country_cohorts_before_population_covered_adjust_3",
+      "label": "Children in country cohorts (before population covered adjustment) (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "product(child_births_per_year_philippines, number_of_years_benefits_are_counterfactually_sustained_for_3)",
+      "expected": 18339769.0
+    },
+    {
+      "id": "children_in_country_cohorts_philippines",
+      "label": "Children in country cohorts (Philippines)",
+      "section": "pure_earth_botec_simple",
+      "formula": "children_in_country_cohorts_before_population_covered_adjust_3",
+      "expected": 18339769.0
+    },
+    {
+      "id": "expected_value_in_millions_spent_on_cash_transfers_philippin",
+      "label": "Expected value (in $ millions spent on cash transfers) (Philippines)",
+      "section": "pure_earth_botec_simple",
+      "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_3 * expected_reduction_in_country_average_bll_ug_dl_philippines * children_in_country_cohorts_philippines / 1000000",
+      "expected": 43.39626892,
+      "format": "usd"
+    },
+    {
+      "id": "expected_value_in_millions_spent_on_cash_transfers_overall",
+      "label": "Expected value (in $ millions spent on cash transfers) (Overall)",
+      "section": "pure_earth_botec_simple",
+      "formula": "sum(expected_value_in_millions_spent_on_cash_transfers_bihar, expected_value_in_millions_spent_on_cash_transfers_jharkhand, expected_value_in_millions_spent_on_cash_transfers_philippin)",
+      "expected": 143.5415413,
+      "format": "usd"
+    },
+    {
+      "id": "india_bihar_original_budget_total",
+      "label": "India/Bihar (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 745588.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y8"
+      },
+      "explainer": "India/Bihar",
+      "format": "usd"
+    },
+    {
+      "id": "india_bihar_change",
+      "label": "India/Bihar (Change)",
+      "section": "pure_earth_budget",
+      "value": 553985.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z8"
+      },
+      "explainer": "India/Bihar",
+      "format": "usd"
+    },
+    {
+      "id": "india_bihar_revised_budget_total",
+      "label": "India/Bihar (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(india_bihar_original_budget_total, india_bihar_change)",
+      "expected": 1299573.0,
+      "format": "usd"
+    },
+    {
+      "id": "accounting_cost_millions_bihar_india",
+      "label": "Accounting cost, $ millions (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "india_bihar_revised_budget_total / 1000000",
+      "expected": 1.299573,
+      "format": "usd"
+    },
+    {
+      "id": "bangladesh_original_budget_total",
+      "label": "Bangladesh (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 827435.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y7"
+      },
+      "explainer": "Bangladesh",
+      "format": "usd"
+    },
+    {
+      "id": "bangladesh_change",
+      "label": "Bangladesh (Change)",
+      "section": "pure_earth_budget",
+      "value": 31901.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z7"
+      },
+      "explainer": "Bangladesh",
+      "format": "usd"
+    },
+    {
+      "id": "bangladesh_revised_budget_total",
+      "label": "Bangladesh (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(bangladesh_original_budget_total, bangladesh_change)",
+      "expected": 859336.0,
+      "format": "usd"
+    },
+    {
+      "id": "bangladesh_millions",
+      "label": "Bangladesh, $ millions",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "bangladesh_revised_budget_total / 1000000",
+      "expected": 0.859336,
+      "format": "usd"
+    },
+    {
+      "id": "rms_original_budget_total",
+      "label": "RMS (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 499384.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y11"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "rms_change",
+      "label": "RMS (Change)",
+      "section": "pure_earth_budget",
+      "value": -57558.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z11"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "rms_revised_budget_total",
+      "label": "RMS (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(rms_original_budget_total, rms_change)",
+      "expected": 441826.0,
+      "format": "usd"
+    },
+    {
+      "id": "rms_millions",
+      "label": "RMS, $ millions",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "rms_revised_budget_total / 1000000",
+      "expected": 0.441826,
+      "format": "usd"
+    },
+    {
+      "id": "gahp_1_36_original_budget_total",
+      "label": "GAHP, 1-36 (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 708000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y13"
+      },
+      "explainer": "GAHP 1-36",
+      "format": "usd"
+    },
+    {
+      "id": "gahp_1_36_change",
+      "label": "GAHP, 1-36 (Change)",
+      "section": "pure_earth_budget",
+      "value": -177000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z13"
+      },
+      "explainer": "GAHP 1-36",
+      "format": "usd"
+    },
+    {
+      "id": "gahp_1_36_revised_budget_total",
+      "label": "GAHP, 1-36 (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(gahp_1_36_original_budget_total, gahp_1_36_change)",
+      "expected": 531000.0,
+      "format": "usd"
+    },
+    {
+      "id": "gahp_millions",
+      "label": "GAHP, $ millions",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "gahp_1_36_revised_budget_total / 1000000",
+      "expected": 0.531,
+      "format": "usd"
+    },
+    {
+      "id": "mel_1_36_original_budget_total",
+      "label": "MEL, 1-36 (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 1093162.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y14"
+      },
+      "explainer": "1-36",
+      "format": "usd"
+    },
+    {
+      "id": "mel_1_36_change",
+      "label": "MEL, 1-36 (Change)",
+      "section": "pure_earth_budget",
+      "value": -227850.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z14"
+      },
+      "explainer": "1-36",
+      "format": "usd"
+    },
+    {
+      "id": "mel_1_36_revised_budget_total",
+      "label": "MEL, 1-36 (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(mel_1_36_original_budget_total, mel_1_36_change)",
+      "expected": 865312.0,
+      "format": "usd"
+    },
+    {
+      "id": "mel_millions",
+      "label": "MEL, $ millions",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "mel_1_36_revised_budget_total / 1000000",
+      "expected": 0.865312,
+      "format": "usd"
+    },
+    {
+      "id": "comms_1_36_original_budget_total",
+      "label": "Comms, 1-36 (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 772942.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y15"
+      },
+      "explainer": "Comms 1-36",
+      "format": "usd"
+    },
+    {
+      "id": "comms_1_36_change",
+      "label": "Comms, 1-36 (Change)",
+      "section": "pure_earth_budget",
+      "value": -296411.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z15"
+      },
+      "explainer": "Comms 1-36",
+      "format": "usd"
+    },
+    {
+      "id": "comms_1_36_revised_budget_total",
+      "label": "Comms, 1-36 (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(comms_1_36_original_budget_total, comms_1_36_change)",
+      "expected": 476531.0,
+      "format": "usd"
+    },
+    {
+      "id": "comms_millions",
+      "label": "Comms, $ millions",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "comms_1_36_revised_budget_total / 1000000",
+      "expected": 0.476531,
+      "format": "usd"
+    },
+    {
+      "id": "additional_supporting_activities_which_we_include_in_cost_mu",
+      "label": "Additional supporting activities which we include in cost multiplier",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "bangladesh_millions + rms_millions + gahp_millions + mel_millions + comms_millions",
+      "expected": 3.174005,
+      "format": "usd"
+    },
+    {
+      "id": "additional_2_countries_original_budget_total",
+      "label": "Additional 2 countries (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 1035386.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y12"
+      },
+      "explainer": "Additional 2 countries 7-36",
+      "format": "usd"
+    },
+    {
+      "id": "additional_2_countries_change",
+      "label": "Additional 2 countries (Change)",
+      "section": "pure_earth_budget",
+      "value": 165157.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z12"
+      },
+      "explainer": "Additional 2 countries 7-36",
+      "format": "usd"
+    },
+    {
+      "id": "additional_2_countries_revised_budget_total",
+      "label": "Additional 2 countries (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(additional_2_countries_original_budget_total, additional_2_countries_change)",
+      "expected": 1200543.0,
+      "format": "usd"
+    },
+    {
+      "id": "additional_2_countries",
+      "label": "Additional 2 countries",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "additional_2_countries_revised_budget_total / 1000000",
+      "expected": 1.200543,
+      "format": "usd"
+    },
+    {
+      "id": "india_other_original_budget_total",
+      "label": "India/other (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 905997.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y9"
+      },
+      "explainer": "India/other",
+      "format": "usd"
+    },
+    {
+      "id": "india_other_change",
+      "label": "India/other (Change)",
+      "section": "pure_earth_budget",
+      "value": 423076.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z9"
+      },
+      "explainer": "India/other",
+      "format": "usd"
+    },
+    {
+      "id": "india_other_revised_budget_total",
+      "label": "India/other (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(india_other_original_budget_total, india_other_change)",
+      "expected": 1329073.0,
+      "format": "usd"
+    },
+    {
+      "id": "accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal",
+      "label": "Accounting cost, $ millions (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "india_other_revised_budget_total / 1000000",
+      "expected": 1.329073,
+      "format": "usd"
+    },
+    {
+      "id": "philippines_original_budget_total",
+      "label": "Philippines (Original budget total)",
+      "section": "pure_earth_budget",
+      "value": 996045.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Y10"
+      },
+      "explainer": "Philippines",
+      "format": "usd"
+    },
+    {
+      "id": "philippines_change",
+      "label": "Philippines (Change)",
+      "section": "pure_earth_budget",
+      "value": 383.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure Earth budget!Z10"
+      },
+      "explainer": "Philippines",
+      "format": "usd"
+    },
+    {
+      "id": "philippines_revised_budget_total",
+      "label": "Philippines (Revised budget total)",
+      "section": "pure_earth_budget",
+      "formula": "sum(philippines_original_budget_total, philippines_change)",
+      "expected": 996428.0,
+      "format": "usd"
+    },
+    {
+      "id": "accounting_cost_millions_philippines",
+      "label": "Accounting cost, $ millions (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "philippines_revised_budget_total / 1000000",
+      "expected": 0.996428,
+      "format": "usd"
+    },
+    {
+      "id": "total_costs_of_funding_gaps_we_included_in_this_analysis_and",
+      "label": "Total costs of funding gaps we included in this analysis (and funded)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "sum(accounting_cost_millions_bihar_india, accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal, accounting_cost_millions_philippines)",
+      "expected": 3.625074,
+      "format": "usd"
+    },
+    {
+      "id": "total_direct_activities_to_which_we_apply_this_cost_multipli",
+      "label": "Total direct activities to which we apply this cost multiplier",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "additional_2_countries + total_costs_of_funding_gaps_we_included_in_this_analysis_and",
+      "expected": 4.825617,
+      "format": "usd"
+    },
+    {
+      "id": "multiplier_for_supporting_activities",
+      "label": "Multiplier for supporting activities",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "1 + additional_supporting_activities_which_we_include_in_cost_mu / total_direct_activities_to_which_we_apply_this_cost_multipli",
+      "expected": 1.657740761
+    },
+    {
+      "id": "multiplier_for_supporting_activities_bihar_india",
+      "label": "Multiplier for supporting activities (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "multiplier_for_supporting_activities",
+      "expected": 1.657740761
+    },
+    {
+      "id": "multiplier_for_sustained_reduction_bihar_india",
+      "label": "Multiplier for sustained reduction (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!G22"
+      },
+      "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess."
+    },
+    {
+      "id": "estimated_true_cost_bihar_india",
+      "label": "Estimated \"true\" cost (Bihar, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "product(accounting_cost_millions_bihar_india, multiplier_for_supporting_activities_bihar_india, multiplier_for_sustained_reduction_bihar_india)",
+      "expected": 3.231532702,
+      "format": "usd"
+    },
+    {
+      "id": "true_estimated_cost_millions_bihar",
+      "label": "True estimated cost ($ millions) (Bihar)",
+      "section": "pure_earth_botec_simple",
+      "formula": "estimated_true_cost_bihar_india",
+      "expected": 3.231532702,
+      "format": "usd"
+    },
+    {
+      "id": "multiplier_for_supporting_activities_jharkhand_uttar_pradesh",
+      "label": "Multiplier for supporting activities (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "multiplier_for_supporting_activities",
+      "expected": 1.657740761
+    },
+    {
+      "id": "multiplier_for_sustained_reduction_jharkhand_uttar_pradesh_w",
+      "label": "Multiplier for sustained reduction (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!H22"
+      },
+      "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.hcqkpx555ofl"
+    },
+    {
+      "id": "estimated_true_cost_jharkhand_uttar_pradesh_west_bengal_or_t",
+      "label": "Estimated \"true\" cost (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "product(accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal, multiplier_for_supporting_activities_jharkhand_uttar_pradesh, multiplier_for_sustained_reduction_jharkhand_uttar_pradesh_w)",
+      "expected": 3.304887731,
+      "format": "usd"
+    },
+    {
+      "id": "true_estimated_cost_millions_jharkhand_uttar_pradesh_west_be",
+      "label": "True estimated cost ($ millions) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
+      "section": "pure_earth_botec_simple",
+      "formula": "estimated_true_cost_jharkhand_uttar_pradesh_west_bengal_or_t",
+      "expected": 3.304887731,
+      "format": "usd"
+    },
+    {
+      "id": "multiplier_for_supporting_activities_philippines",
+      "label": "Multiplier for supporting activities (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "multiplier_for_supporting_activities",
+      "expected": 1.657740761
+    },
+    {
+      "id": "multiplier_for_sustained_reduction_philippines",
+      "label": "Multiplier for sustained reduction (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!I22"
+      },
+      "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.hcqkpx555ofl"
+    },
+    {
+      "id": "estimated_true_cost_philippines",
+      "label": "Estimated \"true\" cost (Philippines)",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "product(accounting_cost_millions_philippines, multiplier_for_supporting_activities_philippines, multiplier_for_sustained_reduction_philippines)",
+      "expected": 2.477728967,
+      "format": "usd"
+    },
+    {
+      "id": "true_estimated_cost_millions_philippines",
+      "label": "True estimated cost ($ millions) (Philippines)",
+      "section": "pure_earth_botec_simple",
+      "formula": "estimated_true_cost_philippines",
+      "expected": 2.477728967,
+      "format": "usd"
+    },
+    {
+      "id": "true_estimated_cost_millions_overall",
+      "label": "True estimated cost ($ millions) (Overall)",
+      "section": "pure_earth_botec_simple",
+      "formula": "sum(true_estimated_cost_millions_bihar, true_estimated_cost_millions_jharkhand_uttar_pradesh_west_be, true_estimated_cost_millions_philippines)",
+      "expected": 9.0141494,
+      "format": "usd"
+    },
+    {
+      "id": "cost_effectiveness_in_multiples_of_cash_transfers_overall",
+      "label": "Cost-effectiveness (in multiples of cash transfers) (Overall)",
+      "section": "pure_earth_botec_simple",
+      "formula": "expected_value_in_millions_spent_on_cash_transfers_overall / true_estimated_cost_millions_overall",
+      "expected": 15.9240251
+    },
+    {
+      "id": "adjustment_for_morbidity_and_mortality",
+      "label": "Adjustment for morbidity and mortality",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.2,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F87"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_government_resources_required_to_achieve_redu",
+      "label": "Adjustment for government resources required to achieve reductions",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 0.9,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F88"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_reduced_social_harm_e_g_crime_aggression",
+      "label": "Adjustment for reduced social harm (e.g. crime, aggression)",
+      "section": "pure_earth_botec_more_detailed",
+      "value": 1.05,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
+        "cell": "Pure earth BOTEC (more detailed!F89"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "total_adjustment",
+      "label": "Total adjustment",
+      "section": "pure_earth_botec_more_detailed",
+      "formula": "product(adjustment_for_morbidity_and_mortality, adjustment_for_government_resources_required_to_achieve_redu, adjustment_for_reduced_social_harm_e_g_crime_aggression)",
+      "expected": 1.134,
+      "format": "percent"
+    },
+    {
+      "id": "speculative_adjustments_overall",
+      "label": "Speculative adjustments (Overall)",
+      "section": "pure_earth_botec_simple",
+      "formula": "total_adjustment",
+      "expected": 1.134,
+      "format": "percent"
+    },
+    {
+      "id": "adjusted_cost_effectiveness_multiples_of_cash_overall",
+      "label": "Adjusted cost-effectiveness (multiples of cash) (Overall)",
+      "section": "pure_earth_botec_simple",
+      "formula": "cost_effectiveness_in_multiples_of_cash_transfers_overall * speculative_adjustments_overall",
+      "expected": 18.05784447
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(adjusted_cost_effectiveness_multiples_of_cash_overall * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar"
   }
- },
- "resources": [
-  {
-   "title": "Pure Earth BOTEC (public)",
-   "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (Pure Earth lead exposure July 2021)",
-   "url": "https://www.givewell.org/research/incubation-grants/Pure-Earth-lead-exposure-July-2021",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "pure_earth_botec_simple",
-   "title": "Pure Earth BOTEC (Simple)"
-  },
-  {
-   "id": "pure_earth_botec_more_detailed",
-   "title": "Pure earth BOTEC (more detailed"
-  },
-  {
-   "id": "pure_earth_budget",
-   "title": "Pure Earth budget"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "doublings_of_consumption_for_one_year",
-   "label": "doublings of consumption for one year",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.44,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F67"
-   }
-  },
-  {
-   "id": "multiplier_for_resource_sharing_within_households",
-   "label": "Multiplier for resource sharing within households",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 2.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F64"
-   },
-   "explainer": "We use the same estimate for the resource sharing multiplier as we do when estimating the long-term income effects from deworming."
-  },
-  {
-   "id": "units_of_ln_consumption_2",
-   "label": "units of ln(consumption)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.07632448359,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F62"
-   },
-   "explainer": "Calculated in the source sheet as `=pv(F57,F60,-F59,,1)`; kept as a fixed number here (text in arithmetic)."
-  },
-  {
-   "id": "units_of_ln_consumption",
-   "label": "units of ln(consumption)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "multiplier_for_resource_sharing_within_households * units_of_ln_consumption_2",
-   "expected": 0.1526489672
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_1",
-   "label": "Units of value from increasing IQ by 1",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
-   "expected": 0.2198145127
-  },
-  {
-   "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels",
-   "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "0.2 * (75 / 100)",
-   "expected": 0.15
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_0_15",
-   "label": "Units of value from increasing IQ by 0.15",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_1 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per",
-   "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_0_15",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra",
-   "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 3.4,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G77"
-   },
-   "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2"
-  },
-  {
-   "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout",
-   "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Bihar)",
-   "section": "pure_earth_botec_simple",
-   "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra / 1000)",
-   "expected": 9.697699091,
-   "format": "usd"
-  },
-  {
-   "id": "bihar_india_row_34",
-   "label": "Bihar, India (row 34)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.35,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G34"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_34",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (row 34)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!D34"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "bihar_india_row_35",
-   "label": "Bihar, India (row 35)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.3,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G35"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_35",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (row 35)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!D35"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "bihar_india_row_36",
-   "label": "Bihar, India (row 36)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G36"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_36",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (row 36)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!D36"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "bihar_india_row_37",
-   "label": "Bihar, India (row 37)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G37"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_37",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (row 37)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.75,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!D37"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "bihar_india_row_38",
-   "label": "Bihar, India (row 38)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.15,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G38"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_row_38",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (row 38)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!D38"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_proportion_of_population_covered_bihar_india",
-   "label": "Expected proportion of population covered (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(bihar_india_row_34 * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, bihar_india_row_35 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, bihar_india_row_36 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, bihar_india_row_37 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, bihar_india_row_38 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
-   "expected": 0.385,
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_bihar_in",
-   "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.35,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G27"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_millions",
-   "label": "Probability of decreasing average BLLs by <0.5 ug/dl ($ millions)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!E27"
-   }
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_biha",
-   "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.35,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G28"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill",
-   "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl ($ millions)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!E28"
-   }
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_biha",
-   "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G29"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill",
-   "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl ($ millions)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 2.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!E29"
-   }
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_3_ug_dl_bihar_indi",
-   "label": "Probability of decreasing average BLLs by >3 ug/dl (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G30"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_3_ug_dl_millions",
-   "label": "Probability of decreasing average BLLs by >3 ug/dl ($ millions)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 3.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!E30"
-   }
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_bihar",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_bihar_in * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_biha * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_biha * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_bihar_indi * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
-   "expected": 1.0
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_bihar_india",
-   "label": "Expected reduction in country average BLL (ug/dl) (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "expected_proportion_of_population_covered_bihar_india * expected_decrease_in_blls_in_covered_population_ug_dl_bihar",
-   "expected": 0.385
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_bihar",
-   "label": "Expected reduction in country average BLL (ug/dl) (Bihar)",
-   "section": "pure_earth_botec_simple",
-   "formula": "expected_reduction_in_country_average_bll_ug_dl_bihar_india",
-   "expected": 0.385
-  },
-  {
-   "id": "child_births_per_year_bihar_india",
-   "label": "Child births per year (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "104099452 * 26.2 / 1000",
-   "expected": 2727405.642
-  },
-  {
-   "id": "number_of_years_benefits_are_counterfactually_sustained_for",
-   "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 7.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G48"
-   },
-   "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit."
-  },
-  {
-   "id": "children_in_country_cohorts_before_population_covered_adjust",
-   "label": "Children in country cohorts (before population covered adjustment) (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "child_births_per_year_bihar_india * number_of_years_benefits_are_counterfactually_sustained_for",
-   "expected": 19091839.5
-  },
-  {
-   "id": "children_in_country_cohorts_bihar",
-   "label": "Children in country cohorts (Bihar)",
-   "section": "pure_earth_botec_simple",
-   "formula": "children_in_country_cohorts_before_population_covered_adjust",
-   "expected": 19091839.5
-  },
-  {
-   "id": "expected_value_in_millions_spent_on_cash_transfers_bihar",
-   "label": "Expected value (in $ millions spent on cash transfers) (Bihar)",
-   "section": "pure_earth_botec_simple",
-   "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout * expected_reduction_in_country_average_bll_ug_dl_bihar * children_in_country_cohorts_bihar / 1000000",
-   "expected": 71.2815621,
-   "format": "usd"
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_1_2",
-   "label": "Units of value from increasing IQ by 1",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
-   "expected": 0.2198145127
-  },
-  {
-   "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_2",
-   "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "0.2 * (75 / 100)",
-   "expected": 0.15
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_0_15_2",
-   "label": "Units of value from increasing IQ by 0.15",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_1_2 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_2",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_2",
-   "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_0_15_2",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_2",
-   "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 3.4,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H77"
-   },
-   "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2 https://docs.google.com/spreadsheets/d/11HsJLpq0Suf3SK_PmzzWpK1tr_BTd364j0l3xVvSCQw/edit#gid=1680005064&range=A38:B38"
-  },
-  {
-   "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_2",
-   "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Jharkhand, Uttar Pradesh, West Benga",
-   "section": "pure_earth_botec_simple",
-   "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_2 / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_2 / 1000)",
-   "expected": 9.697699091,
-   "format": "usd"
-  },
-  {
-   "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row",
-   "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 34)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.4,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H34"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_2",
-   "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 35)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.32,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H35"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_3",
-   "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 36)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.15,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H36"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_4",
-   "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 37)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.08,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H37"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_5",
-   "label": "Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India (row 38)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H38"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_proportion_of_population_covered_jharkhand_uttar_pr",
-   "label": "Expected proportion of population covered (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_2 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_3 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_4 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, jharkhand_uttar_pradesh_west_bengal_or_tamil_nadu_india_row_5 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
-   "expected": 0.305,
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_jharkhan",
-   "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H27"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_jhar",
-   "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H28"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_jhar",
-   "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.2,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H29"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_3_ug_dl_jharkhand",
-   "label": "Probability of decreasing average BLLs by >3 ug/dl (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H30"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_jharkh",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_jharkhan * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_jhar * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_jhar * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_jharkhand * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
-   "expected": 0.8
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut_2",
-   "label": "Expected reduction in country average BLL (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "expected_proportion_of_population_covered_jharkhand_uttar_pr * expected_decrease_in_blls_in_covered_population_ug_dl_jharkh",
-   "expected": 0.244
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut",
-   "label": "Expected reduction in country average BLL (ug/dl) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_simple",
-   "formula": "expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut_2",
-   "expected": 0.244
-  },
-  {
-   "id": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or",
-   "label": "Child births per year (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "(32988134 + 199812341 + 91276115 + 72147030) / 4 * 17.592 / 1000",
-   "expected": 1742591.481
-  },
-  {
-   "id": "number_of_years_benefits_are_counterfactually_sustained_for_2",
-   "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 7.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H48"
-   },
-   "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
-  },
-  {
-   "id": "children_in_country_cohorts_before_population_covered_adjust_2",
-   "label": "Children in country cohorts (before population covered adjustment) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or * number_of_years_benefits_are_counterfactually_sustained_for_2",
-   "expected": 12198140.37
-  },
-  {
-   "id": "children_in_country_cohorts_jharkhand_uttar_pradesh_west_ben",
-   "label": "Children in country cohorts (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_simple",
-   "formula": "children_in_country_cohorts_before_population_covered_adjust_2",
-   "expected": 12198140.37
-  },
-  {
-   "id": "expected_value_in_millions_spent_on_cash_transfers_jharkhand",
-   "label": "Expected value (in $ millions spent on cash transfers) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_simple",
-   "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_2 * expected_reduction_in_country_average_bll_ug_dl_jharkhand_ut * children_in_country_cohorts_jharkhand_uttar_pradesh_west_ben / 1000000",
-   "expected": 28.86371031,
-   "format": "usd"
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_1_3",
-   "label": "Units of value from increasing IQ by 1",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "doublings_of_consumption_for_one_year * units_of_ln_consumption",
-   "expected": 0.2198145127
-  },
-  {
-   "id": "estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_3",
-   "label": "Estimated IQ point loss per 1 μg/dl increase in blood levels throughout childhood (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "0.2 * (75 / 100)",
-   "expected": 0.15
-  },
-  {
-   "id": "units_of_value_from_increasing_iq_by_0_15_3",
-   "label": "Units of value from increasing IQ by 0.15",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_1_3 * estimated_iq_point_loss_per_1_g_dl_increase_in_blood_levels_3",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_3",
-   "label": "Total units of value from reducing BLL by 1 ug/dl in one person throughout childhood",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "units_of_value_from_increasing_iq_by_0_15_3",
-   "expected": 0.03297217691
-  },
-  {
-   "id": "units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_3",
-   "label": "Units of value per $1,000 (GiveDirectly's cash transfer program)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 3.4,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I77"
-   },
-   "explainer": "GiveWell, 2021 cost-effectiveness analysis, version 2 https://docs.google.com/spreadsheets/d/11HsJLpq0Suf3SK_PmzzWpK1tr_BTd364j0l3xVvSCQw/edit#gid=1680005064&range=A38:B38"
-  },
-  {
-   "id": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_3",
-   "label": "Value of reducing BLLs by 1 ug/dl for one person throughout childhood (in $ spent on GiveDirectly's cash transfer program) (Philippines)",
-   "section": "pure_earth_botec_simple",
-   "formula": "total_units_of_value_from_reducing_bll_by_1_ug_dl_in_one_per_3 / (units_of_value_per_1_000_givedirectly_s_cash_transfer_progra_3 / 1000)",
-   "expected": 9.697699091,
-   "format": "usd"
-  },
-  {
-   "id": "philippines_row_34",
-   "label": "Philippines (row 34)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.4,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I34"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "philippines_row_35",
-   "label": "Philippines (row 35)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.32,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I35"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "philippines_row_36",
-   "label": "Philippines (row 36)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.15,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I36"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "philippines_row_37",
-   "label": "Philippines (row 37)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.08,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I37"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "philippines_row_38",
-   "label": "Philippines (row 38)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I38"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_proportion_of_population_covered_philippines",
-   "label": "Expected proportion of population covered (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(philippines_row_34 * expected_decrease_in_blls_in_covered_population_ug_dl_row_34, philippines_row_35 * expected_decrease_in_blls_in_covered_population_ug_dl_row_35, philippines_row_36 * expected_decrease_in_blls_in_covered_population_ug_dl_row_36, philippines_row_37 * expected_decrease_in_blls_in_covered_population_ug_dl_row_37, philippines_row_38 * expected_decrease_in_blls_in_covered_population_ug_dl_row_38)",
-   "expected": 0.305,
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_ug_dl_philippi",
-   "label": "Probability of decreasing average BLLs by <0.5 ug/dl (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I27"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_phil",
-   "label": "Probability of decreasing average BLLs by 0.5-1.5 ug/dl (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I28"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_phil",
-   "label": "Probability of decreasing average BLLs by 1.5-2.5 ug/dl (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.2,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I29"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_decreasing_average_blls_by_3_ug_dl_philippine",
-   "label": "Probability of decreasing average BLLs by >3 ug/dl (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I30"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "expected_decrease_in_blls_in_covered_population_ug_dl_philip",
-   "label": "Expected decrease in BLLs in covered population (ug/dl) (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(probability_of_decreasing_average_blls_by_0_5_ug_dl_philippi * probability_of_decreasing_average_blls_by_0_5_ug_dl_millions, probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_phil * probability_of_decreasing_average_blls_by_0_5_1_5_ug_dl_mill, probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_phil * probability_of_decreasing_average_blls_by_1_5_2_5_ug_dl_mill, probability_of_decreasing_average_blls_by_3_ug_dl_philippine * probability_of_decreasing_average_blls_by_3_ug_dl_millions)",
-   "expected": 0.8
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_philippines_2",
-   "label": "Expected reduction in country average BLL (ug/dl) (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "expected_proportion_of_population_covered_philippines * expected_decrease_in_blls_in_covered_population_ug_dl_philip",
-   "expected": 0.244
-  },
-  {
-   "id": "expected_reduction_in_country_average_bll_ug_dl_philippines",
-   "label": "Expected reduction in country average BLL (ug/dl) (Philippines)",
-   "section": "pure_earth_botec_simple",
-   "formula": "expected_reduction_in_country_average_bll_ug_dl_philippines_2",
-   "expected": 0.244
-  },
-  {
-   "id": "child_births_per_year_philippines",
-   "label": "Child births per year (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 2619967.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I47"
-   },
-   "explainer": "Calculated in the source sheet as `=sumifs('IHME live births forecast'!$I$3:$I$898,'IHME live births forecast'!$B$3:$B$898,I$2,'IHME live births forecast'!$C$3:$C$898,\"2022\")`; kept as a fixed number here (SUMIFS()).\n\nKnoema, World Data Atlas, 2018 crude birth rate for Bihar, India\nGovernment of India, Office of the Registrar General & Census Commissioner, Primary Census Data Highlights: Chapter 1\nMacrotrends, India Birth Rate 1950-2021 (accessed August 9, 2021)\nMacrotrends, Mexico Birth Rate 1950-2021 (accessed August 9, 2021)\nGovernment of Mexico, National Institute of Statistics and Geography, Mexico in Figures: Michoacán de Ocampo https://knoema.com/atlas/India/Bihar/Birth-rate\nhttps://www.censusindia.gov.in/2011census/PCA/PCA_highlights/pca_highlights_file/India/Chapter-1.pdf\nhttps://www.macrotrends.net/countries/IND/india/birth-rate\nhttps://www.macrotrends.net/countries/MEX/mexico/birth-rate\nhttps://files.givewell.org/files/DWDA%202009/Pure_Earth/Government_of_Mexico_National_Institute_of_Statistics_and_Geography_Mexico_in_Figures__Michoacan_de_Ocampo.pdf"
-  },
-  {
-   "id": "number_of_years_benefits_are_counterfactually_sustained_for_3",
-   "label": "Number of years benefits are counterfactually sustained for (assuming additional funding) (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 7.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I48"
-   },
-   "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
-  },
-  {
-   "id": "children_in_country_cohorts_before_population_covered_adjust_3",
-   "label": "Children in country cohorts (before population covered adjustment) (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "product(child_births_per_year_philippines, number_of_years_benefits_are_counterfactually_sustained_for_3)",
-   "expected": 18339769.0
-  },
-  {
-   "id": "children_in_country_cohorts_philippines",
-   "label": "Children in country cohorts (Philippines)",
-   "section": "pure_earth_botec_simple",
-   "formula": "children_in_country_cohorts_before_population_covered_adjust_3",
-   "expected": 18339769.0
-  },
-  {
-   "id": "expected_value_in_millions_spent_on_cash_transfers_philippin",
-   "label": "Expected value (in $ millions spent on cash transfers) (Philippines)",
-   "section": "pure_earth_botec_simple",
-   "formula": "value_of_reducing_blls_by_1_ug_dl_for_one_person_throughout_3 * expected_reduction_in_country_average_bll_ug_dl_philippines * children_in_country_cohorts_philippines / 1000000",
-   "expected": 43.39626892,
-   "format": "usd"
-  },
-  {
-   "id": "expected_value_in_millions_spent_on_cash_transfers_overall",
-   "label": "Expected value (in $ millions spent on cash transfers) (Overall)",
-   "section": "pure_earth_botec_simple",
-   "formula": "sum(expected_value_in_millions_spent_on_cash_transfers_bihar, expected_value_in_millions_spent_on_cash_transfers_jharkhand, expected_value_in_millions_spent_on_cash_transfers_philippin)",
-   "expected": 143.5415413,
-   "format": "usd"
-  },
-  {
-   "id": "india_bihar_original_budget_total",
-   "label": "India/Bihar (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 745588.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y8"
-   },
-   "explainer": "India/Bihar",
-   "format": "usd"
-  },
-  {
-   "id": "india_bihar_change",
-   "label": "India/Bihar (Change)",
-   "section": "pure_earth_budget",
-   "value": 553985.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z8"
-   },
-   "explainer": "India/Bihar",
-   "format": "usd"
-  },
-  {
-   "id": "india_bihar_revised_budget_total",
-   "label": "India/Bihar (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(india_bihar_original_budget_total, india_bihar_change)",
-   "expected": 1299573.0,
-   "format": "usd"
-  },
-  {
-   "id": "accounting_cost_millions_bihar_india",
-   "label": "Accounting cost, $ millions (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "india_bihar_revised_budget_total / 1000000",
-   "expected": 1.299573,
-   "format": "usd"
-  },
-  {
-   "id": "bangladesh_original_budget_total",
-   "label": "Bangladesh (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 827435.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y7"
-   },
-   "explainer": "Bangladesh",
-   "format": "usd"
-  },
-  {
-   "id": "bangladesh_change",
-   "label": "Bangladesh (Change)",
-   "section": "pure_earth_budget",
-   "value": 31901.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z7"
-   },
-   "explainer": "Bangladesh",
-   "format": "usd"
-  },
-  {
-   "id": "bangladesh_revised_budget_total",
-   "label": "Bangladesh (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(bangladesh_original_budget_total, bangladesh_change)",
-   "expected": 859336.0,
-   "format": "usd"
-  },
-  {
-   "id": "bangladesh_millions",
-   "label": "Bangladesh, $ millions",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "bangladesh_revised_budget_total / 1000000",
-   "expected": 0.859336,
-   "format": "usd"
-  },
-  {
-   "id": "rms_original_budget_total",
-   "label": "RMS (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 499384.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y11"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "rms_change",
-   "label": "RMS (Change)",
-   "section": "pure_earth_budget",
-   "value": -57558.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z11"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "rms_revised_budget_total",
-   "label": "RMS (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(rms_original_budget_total, rms_change)",
-   "expected": 441826.0,
-   "format": "usd"
-  },
-  {
-   "id": "rms_millions",
-   "label": "RMS, $ millions",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "rms_revised_budget_total / 1000000",
-   "expected": 0.441826,
-   "format": "usd"
-  },
-  {
-   "id": "gahp_1_36_original_budget_total",
-   "label": "GAHP, 1-36 (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 708000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y13"
-   },
-   "explainer": "GAHP 1-36",
-   "format": "usd"
-  },
-  {
-   "id": "gahp_1_36_change",
-   "label": "GAHP, 1-36 (Change)",
-   "section": "pure_earth_budget",
-   "value": -177000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z13"
-   },
-   "explainer": "GAHP 1-36",
-   "format": "usd"
-  },
-  {
-   "id": "gahp_1_36_revised_budget_total",
-   "label": "GAHP, 1-36 (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(gahp_1_36_original_budget_total, gahp_1_36_change)",
-   "expected": 531000.0,
-   "format": "usd"
-  },
-  {
-   "id": "gahp_millions",
-   "label": "GAHP, $ millions",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "gahp_1_36_revised_budget_total / 1000000",
-   "expected": 0.531,
-   "format": "usd"
-  },
-  {
-   "id": "mel_1_36_original_budget_total",
-   "label": "MEL, 1-36 (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 1093162.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y14"
-   },
-   "explainer": "1-36",
-   "format": "usd"
-  },
-  {
-   "id": "mel_1_36_change",
-   "label": "MEL, 1-36 (Change)",
-   "section": "pure_earth_budget",
-   "value": -227850.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z14"
-   },
-   "explainer": "1-36",
-   "format": "usd"
-  },
-  {
-   "id": "mel_1_36_revised_budget_total",
-   "label": "MEL, 1-36 (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(mel_1_36_original_budget_total, mel_1_36_change)",
-   "expected": 865312.0,
-   "format": "usd"
-  },
-  {
-   "id": "mel_millions",
-   "label": "MEL, $ millions",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "mel_1_36_revised_budget_total / 1000000",
-   "expected": 0.865312,
-   "format": "usd"
-  },
-  {
-   "id": "comms_1_36_original_budget_total",
-   "label": "Comms, 1-36 (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 772942.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y15"
-   },
-   "explainer": "Comms 1-36",
-   "format": "usd"
-  },
-  {
-   "id": "comms_1_36_change",
-   "label": "Comms, 1-36 (Change)",
-   "section": "pure_earth_budget",
-   "value": -296411.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z15"
-   },
-   "explainer": "Comms 1-36",
-   "format": "usd"
-  },
-  {
-   "id": "comms_1_36_revised_budget_total",
-   "label": "Comms, 1-36 (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(comms_1_36_original_budget_total, comms_1_36_change)",
-   "expected": 476531.0,
-   "format": "usd"
-  },
-  {
-   "id": "comms_millions",
-   "label": "Comms, $ millions",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "comms_1_36_revised_budget_total / 1000000",
-   "expected": 0.476531,
-   "format": "usd"
-  },
-  {
-   "id": "additional_supporting_activities_which_we_include_in_cost_mu",
-   "label": "Additional supporting activities which we include in cost multiplier",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "bangladesh_millions + rms_millions + gahp_millions + mel_millions + comms_millions",
-   "expected": 3.174005,
-   "format": "usd"
-  },
-  {
-   "id": "additional_2_countries_original_budget_total",
-   "label": "Additional 2 countries (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 1035386.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y12"
-   },
-   "explainer": "Additional 2 countries 7-36",
-   "format": "usd"
-  },
-  {
-   "id": "additional_2_countries_change",
-   "label": "Additional 2 countries (Change)",
-   "section": "pure_earth_budget",
-   "value": 165157.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z12"
-   },
-   "explainer": "Additional 2 countries 7-36",
-   "format": "usd"
-  },
-  {
-   "id": "additional_2_countries_revised_budget_total",
-   "label": "Additional 2 countries (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(additional_2_countries_original_budget_total, additional_2_countries_change)",
-   "expected": 1200543.0,
-   "format": "usd"
-  },
-  {
-   "id": "additional_2_countries",
-   "label": "Additional 2 countries",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "additional_2_countries_revised_budget_total / 1000000",
-   "expected": 1.200543,
-   "format": "usd"
-  },
-  {
-   "id": "india_other_original_budget_total",
-   "label": "India/other (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 905997.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y9"
-   },
-   "explainer": "India/other",
-   "format": "usd"
-  },
-  {
-   "id": "india_other_change",
-   "label": "India/other (Change)",
-   "section": "pure_earth_budget",
-   "value": 423076.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z9"
-   },
-   "explainer": "India/other",
-   "format": "usd"
-  },
-  {
-   "id": "india_other_revised_budget_total",
-   "label": "India/other (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(india_other_original_budget_total, india_other_change)",
-   "expected": 1329073.0,
-   "format": "usd"
-  },
-  {
-   "id": "accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal",
-   "label": "Accounting cost, $ millions (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "india_other_revised_budget_total / 1000000",
-   "expected": 1.329073,
-   "format": "usd"
-  },
-  {
-   "id": "philippines_original_budget_total",
-   "label": "Philippines (Original budget total)",
-   "section": "pure_earth_budget",
-   "value": 996045.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Y10"
-   },
-   "explainer": "Philippines",
-   "format": "usd"
-  },
-  {
-   "id": "philippines_change",
-   "label": "Philippines (Change)",
-   "section": "pure_earth_budget",
-   "value": 383.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure Earth budget!Z10"
-   },
-   "explainer": "Philippines",
-   "format": "usd"
-  },
-  {
-   "id": "philippines_revised_budget_total",
-   "label": "Philippines (Revised budget total)",
-   "section": "pure_earth_budget",
-   "formula": "sum(philippines_original_budget_total, philippines_change)",
-   "expected": 996428.0,
-   "format": "usd"
-  },
-  {
-   "id": "accounting_cost_millions_philippines",
-   "label": "Accounting cost, $ millions (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "philippines_revised_budget_total / 1000000",
-   "expected": 0.996428,
-   "format": "usd"
-  },
-  {
-   "id": "total_costs_of_funding_gaps_we_included_in_this_analysis_and",
-   "label": "Total costs of funding gaps we included in this analysis (and funded)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "sum(accounting_cost_millions_bihar_india, accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal, accounting_cost_millions_philippines)",
-   "expected": 3.625074,
-   "format": "usd"
-  },
-  {
-   "id": "total_direct_activities_to_which_we_apply_this_cost_multipli",
-   "label": "Total direct activities to which we apply this cost multiplier",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "additional_2_countries + total_costs_of_funding_gaps_we_included_in_this_analysis_and",
-   "expected": 4.825617,
-   "format": "usd"
-  },
-  {
-   "id": "multiplier_for_supporting_activities",
-   "label": "Multiplier for supporting activities",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "1 + additional_supporting_activities_which_we_include_in_cost_mu / total_direct_activities_to_which_we_apply_this_cost_multipli",
-   "expected": 1.657740761
-  },
-  {
-   "id": "multiplier_for_supporting_activities_bihar_india",
-   "label": "Multiplier for supporting activities (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "multiplier_for_supporting_activities",
-   "expected": 1.657740761
-  },
-  {
-   "id": "multiplier_for_sustained_reduction_bihar_india",
-   "label": "Multiplier for sustained reduction (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!G22"
-   },
-   "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess."
-  },
-  {
-   "id": "estimated_true_cost_bihar_india",
-   "label": "Estimated \"true\" cost (Bihar, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "product(accounting_cost_millions_bihar_india, multiplier_for_supporting_activities_bihar_india, multiplier_for_sustained_reduction_bihar_india)",
-   "expected": 3.231532702,
-   "format": "usd"
-  },
-  {
-   "id": "true_estimated_cost_millions_bihar",
-   "label": "True estimated cost ($ millions) (Bihar)",
-   "section": "pure_earth_botec_simple",
-   "formula": "estimated_true_cost_bihar_india",
-   "expected": 3.231532702,
-   "format": "usd"
-  },
-  {
-   "id": "multiplier_for_supporting_activities_jharkhand_uttar_pradesh",
-   "label": "Multiplier for supporting activities (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "multiplier_for_supporting_activities",
-   "expected": 1.657740761
-  },
-  {
-   "id": "multiplier_for_sustained_reduction_jharkhand_uttar_pradesh_w",
-   "label": "Multiplier for sustained reduction (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!H22"
-   },
-   "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.hcqkpx555ofl"
-  },
-  {
-   "id": "estimated_true_cost_jharkhand_uttar_pradesh_west_bengal_or_t",
-   "label": "Estimated \"true\" cost (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "product(accounting_cost_millions_jharkhand_uttar_pradesh_west_bengal, multiplier_for_supporting_activities_jharkhand_uttar_pradesh, multiplier_for_sustained_reduction_jharkhand_uttar_pradesh_w)",
-   "expected": 3.304887731,
-   "format": "usd"
-  },
-  {
-   "id": "true_estimated_cost_millions_jharkhand_uttar_pradesh_west_be",
-   "label": "True estimated cost ($ millions) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
-   "section": "pure_earth_botec_simple",
-   "formula": "estimated_true_cost_jharkhand_uttar_pradesh_west_bengal_or_t",
-   "expected": 3.304887731,
-   "format": "usd"
-  },
-  {
-   "id": "multiplier_for_supporting_activities_philippines",
-   "label": "Multiplier for supporting activities (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "multiplier_for_supporting_activities",
-   "expected": 1.657740761
-  },
-  {
-   "id": "multiplier_for_sustained_reduction_philippines",
-   "label": "Multiplier for sustained reduction (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!I22"
-   },
-   "explainer": "We expect that future funding may be required to sustain a reduction in blood lead levels for the modeled 7 year period. This estimate was an intuitive guess. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.hcqkpx555ofl"
-  },
-  {
-   "id": "estimated_true_cost_philippines",
-   "label": "Estimated \"true\" cost (Philippines)",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "product(accounting_cost_millions_philippines, multiplier_for_supporting_activities_philippines, multiplier_for_sustained_reduction_philippines)",
-   "expected": 2.477728967,
-   "format": "usd"
-  },
-  {
-   "id": "true_estimated_cost_millions_philippines",
-   "label": "True estimated cost ($ millions) (Philippines)",
-   "section": "pure_earth_botec_simple",
-   "formula": "estimated_true_cost_philippines",
-   "expected": 2.477728967,
-   "format": "usd"
-  },
-  {
-   "id": "true_estimated_cost_millions_overall",
-   "label": "True estimated cost ($ millions) (Overall)",
-   "section": "pure_earth_botec_simple",
-   "formula": "sum(true_estimated_cost_millions_bihar, true_estimated_cost_millions_jharkhand_uttar_pradesh_west_be, true_estimated_cost_millions_philippines)",
-   "expected": 9.0141494,
-   "format": "usd"
-  },
-  {
-   "id": "cost_effectiveness_in_multiples_of_cash_transfers_overall",
-   "label": "Cost-effectiveness (in multiples of cash transfers) (Overall)",
-   "section": "pure_earth_botec_simple",
-   "formula": "expected_value_in_millions_spent_on_cash_transfers_overall / true_estimated_cost_millions_overall",
-   "expected": 15.9240251
-  },
-  {
-   "id": "adjustment_for_morbidity_and_mortality",
-   "label": "Adjustment for morbidity and mortality",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.2,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F87"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_government_resources_required_to_achieve_redu",
-   "label": "Adjustment for government resources required to achieve reductions",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 0.9,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F88"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_reduced_social_harm_e_g_crime_aggression",
-   "label": "Adjustment for reduced social harm (e.g. crime, aggression)",
-   "section": "pure_earth_botec_more_detailed",
-   "value": 1.05,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
-    "cell": "Pure earth BOTEC (more detailed!F89"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "total_adjustment",
-   "label": "Total adjustment",
-   "section": "pure_earth_botec_more_detailed",
-   "formula": "product(adjustment_for_morbidity_and_mortality, adjustment_for_government_resources_required_to_achieve_redu, adjustment_for_reduced_social_harm_e_g_crime_aggression)",
-   "expected": 1.134,
-   "format": "percent"
-  },
-  {
-   "id": "speculative_adjustments_overall",
-   "label": "Speculative adjustments (Overall)",
-   "section": "pure_earth_botec_simple",
-   "formula": "total_adjustment",
-   "expected": 1.134,
-   "format": "percent"
-  },
-  {
-   "id": "adjusted_cost_effectiveness_multiples_of_cash_overall",
-   "label": "Adjusted cost-effectiveness (multiples of cash) (Overall)",
-   "section": "pure_earth_botec_simple",
-   "formula": "cost_effectiveness_in_multiples_of_cash_transfers_overall * speculative_adjustments_overall",
-   "expected": 18.05784447
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "adjusted_cost_effectiveness_multiples_of_cash_overall * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

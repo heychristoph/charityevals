@@ -1,873 +1,918 @@
 {
- "id": "unfpa-supplies-partnership-february-2026",
- "name": "UNFPA Supplies Partnership - CEA - February 2026",
- "kind": "charity",
- "cause": "global-health",
- "charity": "unfpa",
- "owner": "givewell",
- "bulk": true,
- "summary": "GiveWell's spreadsheet \"UNFPA Supplies Partnership - CEA - February 2026\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
- "source": {
-  "publisher": "GiveWell",
-  "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
-  "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
-  "sheet": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-  "published": "2026-02-20",
-  "retrieved": "2026-10-27",
-  "license": "CC BY-NC-SA 3.0 US"
- },
- "evaluator": {
-  "name": "GiveWell",
-  "assumptions": {
-   "count_salary_sacrifice": 0,
-   "full_credit": 0
+  "id": "unfpa-supplies-partnership-february-2026",
+  "name": "UNFPA Supplies Partnership - CEA - February 2026",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "unfpa",
+  "owner": "givewell",
+  "bulk": true,
+  "summary": "Supplies contraceptives to public health systems in low-income countries. GiveWell's spreadsheet \"UNFPA Supplies Partnership - CEA - February 2026\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
+    "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
+    "sheet": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+    "published": "2026-02-20",
+    "retrieved": "2026-10-27",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "resources": [
+    {
+      "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
+      "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces."
+    },
+    {
+      "title": "GiveWell grant page (UNFPA Supplies Partnership Reproductive Health Commodity Procurement February 2026)",
+      "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
+      "type": "evaluation"
+    }
+  ],
+  "sections": [
+    {
+      "id": "simple_cea",
+      "title": "Simple CEA"
+    },
+    {
+      "id": "cea",
+      "title": "CEA"
+    },
+    {
+      "id": "leveragefunging",
+      "title": "LeverageFunging"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line"
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market"
+    }
+  ],
+  "rows": [
+    {
+      "id": "units_of_value_per_cyp_best_guess",
+      "label": "Units of value per CYP (Best guess)",
+      "section": "cea",
+      "value": 0.7,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B25"
+      },
+      "explainer": "GiveWell's estimate of the value of one year of modern contraception use (0.7 units of value)"
+    },
+    {
+      "id": "units_of_value_per_couple_year_of_protection",
+      "label": "Units of value per couple-year of protection",
+      "section": "simple_cea",
+      "formula": "units_of_value_per_cyp_best_guess",
+      "expected": 0.7
+    },
+    {
+      "id": "share_of_commodities_funding_going_to_family_planning_commod",
+      "label": "Share of commodities funding going to family planning commodities (Best guess)",
+      "section": "cea",
+      "formula": "0.91 * avg(0.93, 0.955)",
+      "expected": 0.857675,
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_grant_going_to_matched_fund_best_guess",
+      "label": "Amount of grant going to matched fund (Best guess)",
+      "section": "cea",
+      "formula": "(952514 + 952514) * share_of_commodities_funding_going_to_family_planning_commod",
+      "expected": 1633894.89,
+      "format": "usd"
+    },
+    {
+      "id": "match_proportion_best_guess",
+      "label": "Match proportion (Best guess)",
+      "section": "cea",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B8"
+      },
+      "explainer": "As of 2026, the match is $1 for every $1 of increased or maintained domestic government funding, per UNFPA. UNFPA Supplies Partnership, Annual Report 2025, slide 15.",
+      "format": "percent"
+    },
+    {
+      "id": "matched_funding_by_domestic_governments_best_guess",
+      "label": "Matched funding by domestic governments (Best guess)",
+      "section": "cea",
+      "formula": "amount_of_grant_going_to_matched_fund_best_guess * match_proportion_best_guess",
+      "expected": 1633894.89,
+      "format": "usd"
+    },
+    {
+      "id": "amount_of_grant_going_to_commodities_best_guess",
+      "label": "Amount of grant going to commodities (Best guess)",
+      "section": "cea",
+      "formula": "3503354 + 3503354",
+      "expected": 7006708.0,
+      "format": "usd"
+    },
+    {
+      "id": "total_grant_amount_going_specifically_to_family_planning_com",
+      "label": "Total grant amount going specifically to family planning commodities (Best guess)",
+      "section": "cea",
+      "formula": "amount_of_grant_going_to_commodities_best_guess * share_of_commodities_funding_going_to_family_planning_commod",
+      "expected": 6009478.284,
+      "format": "usd"
+    },
+    {
+      "id": "grant_amount_going_to_family_planning_commodities",
+      "label": "Grant amount going to family planning commodities",
+      "section": "simple_cea",
+      "formula": "total_grant_amount_going_specifically_to_family_planning_com",
+      "expected": 6009478.284,
+      "format": "usd"
+    },
+    {
+      "id": "amount_going_to_family_planning_commodities_including_fundin",
+      "label": "Amount going to family planning commodities, including funding matched by governments",
+      "section": "simple_cea",
+      "formula": "matched_funding_by_domestic_governments_best_guess + grant_amount_going_to_family_planning_commodities",
+      "expected": 7643373.174,
+      "format": "usd"
+    },
+    {
+      "id": "cost_per_couple_year_of_protection_cyp_best_guess",
+      "label": "Cost per couple-year of protection (CYP) (Best guess)",
+      "section": "cea",
+      "value": 2.49,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B12"
+      },
+      "explainer": "UNFPA's estimated 2025 average commodity cost per couple-year of protection, shared by UNFPA (unpublished; the 2025 figure is provisional pending final spend/CYP data).",
+      "format": "usd"
+    },
+    {
+      "id": "cost_couple_year_of_protection_cyp",
+      "label": "Cost / couple-year of protection (CYP)",
+      "section": "simple_cea",
+      "formula": "cost_per_couple_year_of_protection_cyp_best_guess",
+      "expected": 2.49,
+      "format": "usd"
+    },
+    {
+      "id": "couple_years_of_protection_covered_by_grant_and_matched_fund",
+      "label": "Couple-years of protection covered by grant and matched funding",
+      "section": "simple_cea",
+      "formula": "amount_going_to_family_planning_commodities_including_fundin / cost_couple_year_of_protection_cyp",
+      "expected": 3069627.781
+    },
+    {
+      "id": "adjustment_for_supply_chain_leakage_best_guess",
+      "label": "Adjustment for supply chain leakage (Best guess)",
+      "section": "cea",
+      "value": -0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B17"
+      },
+      "explainer": "Guess. This could include commodities being damaged, not being delivered correctly to facilities for use, nationally procured commodities going into private sector and being sold, etc.",
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_supply_chain_leakage",
+      "label": "Adjustment for supply chain leakage",
+      "section": "simple_cea",
+      "formula": "adjustment_for_supply_chain_leakage_best_guess",
+      "expected": -0.25,
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_expiry_best_guess",
+      "label": "Adjustment for expiry (Best guess)",
+      "section": "cea",
+      "value": -0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B18"
+      },
+      "explainer": "Guess. There is data at higher levels indicating expiry rates are very low, but we are less certain about the possibility of this as commodities move through the distribution chain. \nThis could be because commodities are going to places where there isn't demand and expiring, or because existing modern contraception users are switching methods and there is lower demand for the previously preferred method.",
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_expiry",
+      "label": "Adjustment for expiry",
+      "section": "simple_cea",
+      "formula": "adjustment_for_expiry_best_guess",
+      "expected": -0.1,
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_people_switching_from_private_to_public_secto_2",
+      "label": "Adjustment for people switching from private to public sector (Best guess)",
+      "section": "cea",
+      "value": -0.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B19"
+      },
+      "explainer": "Guess.",
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_people_switching_from_private_to_public_secto",
+      "label": "Adjustment for people switching from private to public sector",
+      "section": "simple_cea",
+      "formula": "adjustment_for_people_switching_from_private_to_public_secto_2",
+      "expected": -0.25,
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
+      "label": "Adjustment for uncertainty around CYP estimates (Best guess)",
+      "section": "cea",
+      "value": -0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B20"
+      },
+      "explainer": "Guess. Couple-years of protection (CYP) conversion factors are implictly (and explicitly in some cases) intended to capture effects such as methods not being used correctly, early stopping of some methods (long-acting reversible contraceptives), and overlapping method use. We explicitly apply a -10% adjustment for higher than average failure rates of contraception methods in the units of value per CYP we estimate: \"We assume that women who take up modern contraception due to GiveWell-funded programs have 10% higher failure rates when using modern contraceptives relative to the typical user of modern contraception. This adjustment is meant to capture that the women who take up due to our programs are likely to be more inexperienced using modern contraception than the average user.\" \nHowever, we have not fully vetted the extent to which CYP conversion factors are accounting for overlapping",
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_uncertainty_around_cyp_estimates",
+      "label": "Adjustment for uncertainty around CYP estimates",
+      "section": "simple_cea",
+      "formula": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
+      "expected": -0.1,
+      "format": "percent"
+    },
+    {
+      "id": "couple_years_of_protection_covered_by_grant_after_adjustment",
+      "label": "Couple-years of protection covered by grant, after adjustments (Best guess)",
+      "section": "simple_cea",
+      "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund * (1 + adjustment_for_supply_chain_leakage) * (1 + adjustment_for_expiry) * (1 + adjustment_for_people_switching_from_private_to_public_secto) * (1 + adjustment_for_uncertainty_around_cyp_estimates)",
+      "expected": 1398599.158
+    },
+    {
+      "id": "grant_to_unfpa_supplies_best_guess",
+      "label": "Grant to UNFPA Supplies (Best guess)",
+      "section": "cea",
+      "value": 10000000.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B3"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "grant_size",
+      "label": "Grant size",
+      "section": "simple_cea",
+      "formula": "grant_to_unfpa_supplies_best_guess",
+      "expected": 10000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "initial_cost_effectiveness_estimate",
+      "label": "Initial cost-effectiveness estimate",
+      "section": "simple_cea",
+      "formula": "units_of_value_per_couple_year_of_protection * couple_years_of_protection_covered_by_grant_after_adjustment / grant_size / 0.00333",
+      "expected": 29.39998229
+    },
+    {
+      "id": "grant_to_unfpa_supplies_best_guess_2",
+      "label": "Grant to UNFPA Supplies (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "grant_to_unfpa_supplies_best_guess",
+      "expected": 10000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "total_spending_contributed_by_grantee_best_guess",
+      "label": "Total spending contributed by grantee (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "grant_to_unfpa_supplies_best_guess_2",
+      "expected": 10000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "scenario_1_domestic_governments_would_replace_philanthropic",
+      "label": "Scenario 1: Domestic governments would replace philanthropic costs (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 0.8,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H37"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_spending_domestic_governments_would_shift_to_the_g",
+      "label": "Amount of spending domestic governments would shift to the grantee program (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "total_spending_contributed_by_grantee_best_guess * scenario_1_domestic_governments_would_replace_philanthropic",
+      "expected": 8000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "couple_years_of_protection_covered_by_grant_and_matched_fund_2",
+      "label": "Couple-years of protection covered by grant and matched funding (Best guess)",
+      "section": "cea",
+      "formula": "(total_grant_amount_going_specifically_to_family_planning_com + matched_funding_by_domestic_governments_best_guess) / cost_per_couple_year_of_protection_cyp_best_guess",
+      "expected": 3069627.781
+    },
+    {
+      "id": "couple_years_of_protection_generated_by_funding_as_of_unfund_2",
+      "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, prior to adjustments (Best guess)",
+      "section": "cea",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "CEA!B16"
+      },
+      "explainer": "Assumes commodities procured against forecast unfunded demand are used; rows 17–20 adjust downward.",
+      "format": "percent"
+    },
+    {
+      "id": "couple_years_of_protection_generated_by_funding_as_of_unfund",
+      "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, after adjustments (Best guess)",
+      "section": "cea",
+      "formula": "couple_years_of_protection_generated_by_funding_as_of_unfund_2 * (1 + adjustment_for_supply_chain_leakage_best_guess) * (1 + adjustment_for_expiry_best_guess) * (1 + adjustment_for_people_switching_from_private_to_public_secto_2) * (1 + adjustment_for_uncertainty_around_cyp_estimates_best_guess)",
+      "expected": 0.455625,
+      "format": "percent"
+    },
+    {
+      "id": "additional_number_of_cyps_best_guess",
+      "label": "Additional number of CYPs (Best guess)",
+      "section": "cea",
+      "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund_2 * couple_years_of_protection_generated_by_funding_as_of_unfund",
+      "expected": 1398599.158
+    },
+    {
+      "id": "total_units_of_value_generated_before_leverage_adjustment_be",
+      "label": "Total units of value generated, before leverage adjustment (Best guess)",
+      "section": "cea",
+      "formula": "additional_number_of_cyps_best_guess * units_of_value_per_cyp_best_guess",
+      "expected": 979019.4103
+    },
+    {
+      "id": "units_of_value_per_of_funding_best_guess",
+      "label": "Units of value per $ of funding (Best guess)",
+      "section": "cea",
+      "formula": "total_units_of_value_generated_before_leverage_adjustment_be / grant_to_unfpa_supplies_best_guess",
+      "expected": 0.09790194103
+    },
+    {
+      "id": "units_of_value_generated_per_dollar_donated_to_grantee_best",
+      "label": "Units of value generated per dollar donated to grantee (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "units_of_value_per_of_funding_best_guess",
+      "expected": 0.09790194103
+    },
+    {
+      "id": "value_generated_by_shifting_government_spending_to_the_grant",
+      "label": "Value generated by shifting government spending to the grantee program (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * units_of_value_generated_per_dollar_donated_to_grantee_best",
+      "expected": 783215.5282
+    },
+    {
+      "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
+      "label": "Counterfactual value per dollar spent by domestic governments (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "value": 0.005057,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H48"
+      }
+    },
+    {
+      "id": "value_lost_by_shifting_spending_away_from_programs_domestic",
+      "label": "Value lost by shifting spending away from programs domestic governments would otherwise have funded (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * counterfactual_value_per_dollar_spent_by_domestic_government",
+      "expected": 40456.0
+    },
+    {
+      "id": "net_value_generated_by_shifting_government_spending_to_the_g",
+      "label": "Net value generated by shifting government spending to the grantee program (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "value_generated_by_shifting_government_spending_to_the_grant - value_lost_by_shifting_spending_away_from_programs_domestic",
+      "expected": 742759.5282
+    },
+    {
+      "id": "change_in_value_generated_by_the_grantee_program_if_this_sce",
+      "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "-net_value_generated_by_shifting_government_spending_to_the_g",
+      "expected": -742759.5282
+    },
+    {
+      "id": "scenario_1_domestic_governments_would_replace_philanthropic_2",
+      "label": "Scenario 1: Domestic governments would replace philanthropic costs (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H31"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_this_scenario_representing_the_true_counterfa",
+      "label": "Probability of this scenario representing the true counterfactual (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "scenario_1_domestic_governments_would_replace_philanthropic_2",
+      "expected": 0.15,
+      "format": "percent"
+    },
+    {
+      "id": "expected_change_in_value_generated_by_the_grantee_program",
+      "label": "Expected change in value generated by the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce * probability_of_this_scenario_representing_the_true_counterfa",
+      "expected": -111413.9292
+    },
+    {
+      "id": "scenario_2_other_philanthropic_actors_would_replace_gw_costs",
+      "label": "Scenario 2: Other philanthropic actors would replace GW costs (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 1.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H38"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to",
+      "label": "Amount of spending the Global Fund and/or PMI would shift to the grantee program",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "total_spending_contributed_by_grantee_best_guess * scenario_2_other_philanthropic_actors_would_replace_gw_costs",
+      "expected": 10000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "value_generated_by_shifting_global_fund_and_or_pmi_spending",
+      "label": "Value generated by shifting Global Fund and/or PMI spending to the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * units_of_value_generated_per_dollar_donated_to_grantee_best",
+      "expected": 979019.4103
+    },
+    {
+      "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
+      "label": "Counterfactual value per dollar spent by the Global Fund or PMI (proxy for other philanthropic donors) (Best guess)",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "value": 0.015433,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H49"
+      }
+    },
+    {
+      "id": "value_lost_by_shifting_spending_away_from_programs_the_globa",
+      "label": "Value lost by shifting spending away from programs the Global Fund and/or PMI would otherwise have funded",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * counterfactual_value_per_dollar_spent_by_the_global_fund_or",
+      "expected": 154330.0
+    },
+    {
+      "id": "net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
+      "label": "Net value generated by shifting Global Fund and/or PMI spending to the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "value_generated_by_shifting_global_fund_and_or_pmi_spending - value_lost_by_shifting_spending_away_from_programs_the_globa",
+      "expected": 824689.4103
+    },
+    {
+      "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_2",
+      "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "-net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
+      "expected": -824689.4103
+    },
+    {
+      "id": "scenario_2_other_philanthropic_actors_would_replace_gw_costs_2",
+      "label": "Scenario 2: Other philanthropic actors would replace GW costs (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 0.15,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H32"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
+      "label": "Probability of this scenario representing the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "scenario_2_other_philanthropic_actors_would_replace_gw_costs_2",
+      "expected": 0.15,
+      "format": "percent"
+    },
+    {
+      "id": "expected_change_in_value_generated_by_the_grantee_program_2",
+      "label": "Expected change in value generated by the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_2 * probability_of_this_scenario_representing_the_true_counterfa_2",
+      "expected": -123703.4115
+    },
+    {
+      "id": "government_downstream_costs_per_couple_years_of_protection_c",
+      "label": "Government downstream costs per couple-years of protection covered by grant (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "value": 8.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H9"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "matched_funding_by_domestic_governments_best_guess_2",
+      "label": "Matched funding by domestic governments (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "matched_funding_by_domestic_governments_best_guess",
+      "expected": 1633894.89,
+      "format": "usd"
+    },
+    {
+      "id": "total_spending_contributed_by_domestic_governments_downstrea",
+      "label": "Total spending contributed by domestic governments (downstream) (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "government_downstream_costs_per_couple_years_of_protection_c * couple_years_of_protection_covered_by_grant_and_matched_fund_2 + matched_funding_by_domestic_governments_best_guess_2",
+      "expected": 27725731.03,
+      "format": "usd"
+    },
+    {
+      "id": "total_spending_contributed_by_other_philanthropic_actors_bes",
+      "label": "Total spending contributed by other philanthropic actors (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H21"
+      },
+      "format": "usd"
+    },
+    {
+      "id": "total_spending_causally_upstream_of_donations_to_grantee_bes",
+      "label": "Total spending causally upstream of donations to grantee (Best guess)",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "sum(total_spending_contributed_by_grantee_best_guess, total_spending_contributed_by_other_philanthropic_actors_bes)",
+      "expected": 10000000.0,
+      "format": "usd"
+    },
+    {
+      "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre",
+      "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "total_spending_contributed_by_other_philanthropic_actors_bes / total_spending_causally_upstream_of_donations_to_grantee_bes",
+      "expected": 0.0,
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_spending_domestic_governments_would_shift_away_fro",
+      "label": "Amount of spending domestic governments would shift away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "total_spending_contributed_by_domestic_governments_downstrea * (1 - scenario_3_other_upstream_costs_would_stay_the_same_downstre)",
+      "expected": 27725731.03,
+      "format": "usd"
+    },
+    {
+      "id": "value_generated_by_shifting_spending_toward_programs_domesti",
+      "label": "Value generated by shifting spending toward programs domestic governments would otherwise have supported",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_domestic_governments_would_shift_away_fro * counterfactual_value_per_dollar_spent_by_domestic_government",
+      "expected": 140209.0218
+    },
+    {
+      "id": "value_lost_by_shifting_government_spending_away_from_the_gra",
+      "label": "Value lost by shifting government spending away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H77"
+      }
+    },
+    {
+      "id": "net_value_generated_by_shifting_government_spending_away_fro",
+      "label": "Net value generated by shifting government spending away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "value_generated_by_shifting_spending_toward_programs_domesti - value_lost_by_shifting_government_spending_away_from_the_gra",
+      "expected": 140209.0218
+    },
+    {
+      "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_3",
+      "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "-net_value_generated_by_shifting_government_spending_away_fro",
+      "expected": -140209.0218
+    },
+    {
+      "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
+      "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 0.5,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H33"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_this_scenario_representing_the_true_counterfa_3",
+      "label": "Probability of this scenario representing the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
+      "expected": 0.5,
+      "format": "percent"
+    },
+    {
+      "id": "expected_change_in_value_generated_by_the_program",
+      "label": "Expected change in value generated by the program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_3 * probability_of_this_scenario_representing_the_true_counterfa_3",
+      "expected": -70104.5109
+    },
+    {
+      "id": "scenario_4_distributions_would_go_unfunded_best_guess",
+      "label": "Scenario 4: Distributions would go unfunded (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H40"
+      },
+      "format": "percent"
+    },
+    {
+      "id": "amount_of_spending_domestic_governments_would_shift_away_fro_2",
+      "label": "Amount of spending domestic governments would shift away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "$",
+      "formula": "total_spending_contributed_by_domestic_governments_downstrea * (1 - scenario_4_distributions_would_go_unfunded_best_guess)",
+      "expected": 27725731.03,
+      "format": "usd"
+    },
+    {
+      "id": "value_generated_by_shifting_spending_to_programs_domestic_go",
+      "label": "Value generated by shifting spending to programs domestic governments would otherwise have funded",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "amount_of_spending_domestic_governments_would_shift_away_fro_2 * counterfactual_value_per_dollar_spent_by_domestic_government",
+      "expected": 140209.0218
+    },
+    {
+      "id": "value_lost_by_shifting_government_spending_away_from_the_gra_2",
+      "label": "Value lost by shifting government spending away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "value": 0.0,
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
+        "cell": "LeverageFunging!H87"
+      }
+    },
+    {
+      "id": "net_value_generated_by_shifting_government_spending_away_fro_2",
+      "label": "Net value generated by shifting government spending away from the grantee program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "value_generated_by_shifting_spending_to_programs_domestic_go - value_lost_by_shifting_government_spending_away_from_the_gra_2",
+      "expected": 140209.0218
+    },
+    {
+      "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_4",
+      "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "-net_value_generated_by_shifting_government_spending_away_fro_2",
+      "expected": -140209.0218
+    },
+    {
+      "id": "scenario_4_distributions_would_go_unfunded_best_guess_2",
+      "label": "Scenario 4: Distributions would go unfunded (Best guess)",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "1 - sum(scenario_1_domestic_governments_would_replace_philanthropic_2, scenario_2_other_philanthropic_actors_would_replace_gw_costs_2, scenario_3_other_upstream_costs_would_stay_the_same_downstre_2)",
+      "expected": 0.2,
+      "format": "percent"
+    },
+    {
+      "id": "probability_of_this_scenario_representing_the_true_counterfa_4",
+      "label": "Probability of this scenario representing the true counterfactual",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "scenario_4_distributions_would_go_unfunded_best_guess_2",
+      "expected": 0.2,
+      "format": "percent"
+    },
+    {
+      "id": "expected_change_in_value_generated_by_the_program_2",
+      "label": "Expected change in value generated by the program",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_4 * probability_of_this_scenario_representing_the_true_counterfa_4",
+      "expected": -28041.80436
+    },
+    {
+      "id": "total_expected_change_in_value_generated_as_a_result_of_leve",
+      "label": "Total expected change in value generated as a result of leverage and funging",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "sum(expected_change_in_value_generated_by_the_grantee_program, expected_change_in_value_generated_by_the_grantee_program_2, expected_change_in_value_generated_by_the_program, expected_change_in_value_generated_by_the_program_2)",
+      "expected": -333263.656
+    },
+    {
+      "id": "total_value_generated_by_grantee_spending_before_adjusting_f",
+      "label": "Total value generated by grantee spending before adjusting for leverage and funging",
+      "section": "leveragefunging",
+      "unit": "UoV",
+      "formula": "total_spending_contributed_by_grantee_best_guess * units_of_value_generated_per_dollar_donated_to_grantee_best",
+      "expected": 979019.4103
+    },
+    {
+      "id": "adjustment_for_leverage_and_funging_2",
+      "label": "Adjustment for leverage and funging",
+      "section": "leveragefunging",
+      "unit": "%",
+      "formula": "if($resource_shares, 0, (total_expected_change_in_value_generated_as_a_result_of_leve / total_value_generated_by_grantee_spending_before_adjusting_f))",
+      "expected": -0.3404055655,
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_leverage_and_funging_best_guess",
+      "label": "Adjustment for leverage and funging (Best guess)",
+      "section": "cea",
+      "formula": "if($resource_shares, 0, (adjustment_for_leverage_and_funging_2))",
+      "expected": -0.3404055655,
+      "format": "percent"
+    },
+    {
+      "id": "adjustment_for_leverage_and_funging",
+      "label": "Adjustment for leverage and funging",
+      "section": "simple_cea",
+      "formula": "if($resource_shares, 0, (adjustment_for_leverage_and_funging_best_guess))",
+      "expected": -0.3404055655,
+      "format": "percent"
+    },
+    {
+      "id": "final_cost_effectiveness_after_all_adjustments",
+      "label": "Final cost-effectiveness (after all adjustments)",
+      "section": "simple_cea",
+      "formula": "initial_cost_effectiveness_estimate * (1 + adjustment_for_leverage_and_funging)",
+      "expected": 19.39206469
+    },
+    {
+      "id": "cash_benchmark",
+      "label": "Units of value per dollar given to GiveDirectly",
+      "section": "bottom_line",
+      "value": 0.00335,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, cost-effectiveness benchmark",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
+      },
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "label": "Units of value per dollar",
+      "section": "bottom_line",
+      "formula": "(final_cost_effectiveness_after_all_adjustments * cash_benchmark) * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar"
   }
- },
- "resources": [
-  {
-   "title": "UNFPA Supplies Partnership - CEA - February 2026 (public)",
-   "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-   "type": "model",
-   "note": "The spreadsheet this page reproduces."
-  },
-  {
-   "title": "GiveWell grant page (UNFPA Supplies Partnership Reproductive Health Commodity Procurement February 2026)",
-   "url": "https://www.givewell.org/research/grants/UNFPA-Supplies-Partnership-Reproductive-Health-Commodity-Procurement-February-2026",
-   "type": "evaluation"
-  }
- ],
- "sections": [
-  {
-   "id": "simple_cea",
-   "title": "Simple CEA"
-  },
-  {
-   "id": "cea",
-   "title": "CEA"
-  },
-  {
-   "id": "leveragefunging",
-   "title": "LeverageFunging"
-  },
-  {
-   "id": "bottom_line",
-   "title": "Bottom line"
-  }
- ],
- "rows": [
-  {
-   "id": "units_of_value_per_cyp_best_guess",
-   "label": "Units of value per CYP (Best guess)",
-   "section": "cea",
-   "value": 0.7,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B25"
-   },
-   "explainer": "GiveWell's estimate of the value of one year of modern contraception use (0.7 units of value)"
-  },
-  {
-   "id": "units_of_value_per_couple_year_of_protection",
-   "label": "Units of value per couple-year of protection",
-   "section": "simple_cea",
-   "formula": "units_of_value_per_cyp_best_guess",
-   "expected": 0.7
-  },
-  {
-   "id": "share_of_commodities_funding_going_to_family_planning_commod",
-   "label": "Share of commodities funding going to family planning commodities (Best guess)",
-   "section": "cea",
-   "formula": "0.91 * avg(0.93, 0.955)",
-   "expected": 0.857675,
-   "format": "percent"
-  },
-  {
-   "id": "amount_of_grant_going_to_matched_fund_best_guess",
-   "label": "Amount of grant going to matched fund (Best guess)",
-   "section": "cea",
-   "formula": "(952514 + 952514) * share_of_commodities_funding_going_to_family_planning_commod",
-   "expected": 1633894.89,
-   "format": "usd"
-  },
-  {
-   "id": "match_proportion_best_guess",
-   "label": "Match proportion (Best guess)",
-   "section": "cea",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B8"
-   },
-   "explainer": "As of 2026, the match is $1 for every $1 of increased or maintained domestic government funding, per UNFPA. UNFPA Supplies Partnership, Annual Report 2025, slide 15.",
-   "format": "percent"
-  },
-  {
-   "id": "matched_funding_by_domestic_governments_best_guess",
-   "label": "Matched funding by domestic governments (Best guess)",
-   "section": "cea",
-   "formula": "amount_of_grant_going_to_matched_fund_best_guess * match_proportion_best_guess",
-   "expected": 1633894.89,
-   "format": "usd"
-  },
-  {
-   "id": "amount_of_grant_going_to_commodities_best_guess",
-   "label": "Amount of grant going to commodities (Best guess)",
-   "section": "cea",
-   "formula": "3503354 + 3503354",
-   "expected": 7006708.0,
-   "format": "usd"
-  },
-  {
-   "id": "total_grant_amount_going_specifically_to_family_planning_com",
-   "label": "Total grant amount going specifically to family planning commodities (Best guess)",
-   "section": "cea",
-   "formula": "amount_of_grant_going_to_commodities_best_guess * share_of_commodities_funding_going_to_family_planning_commod",
-   "expected": 6009478.284,
-   "format": "usd"
-  },
-  {
-   "id": "grant_amount_going_to_family_planning_commodities",
-   "label": "Grant amount going to family planning commodities",
-   "section": "simple_cea",
-   "formula": "total_grant_amount_going_specifically_to_family_planning_com",
-   "expected": 6009478.284,
-   "format": "usd"
-  },
-  {
-   "id": "amount_going_to_family_planning_commodities_including_fundin",
-   "label": "Amount going to family planning commodities, including funding matched by governments",
-   "section": "simple_cea",
-   "formula": "matched_funding_by_domestic_governments_best_guess + grant_amount_going_to_family_planning_commodities",
-   "expected": 7643373.174,
-   "format": "usd"
-  },
-  {
-   "id": "cost_per_couple_year_of_protection_cyp_best_guess",
-   "label": "Cost per couple-year of protection (CYP) (Best guess)",
-   "section": "cea",
-   "value": 2.49,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B12"
-   },
-   "explainer": "UNFPA's estimated 2025 average commodity cost per couple-year of protection, shared by UNFPA (unpublished; the 2025 figure is provisional pending final spend/CYP data).",
-   "format": "usd"
-  },
-  {
-   "id": "cost_couple_year_of_protection_cyp",
-   "label": "Cost / couple-year of protection (CYP)",
-   "section": "simple_cea",
-   "formula": "cost_per_couple_year_of_protection_cyp_best_guess",
-   "expected": 2.49,
-   "format": "usd"
-  },
-  {
-   "id": "couple_years_of_protection_covered_by_grant_and_matched_fund",
-   "label": "Couple-years of protection covered by grant and matched funding",
-   "section": "simple_cea",
-   "formula": "amount_going_to_family_planning_commodities_including_fundin / cost_couple_year_of_protection_cyp",
-   "expected": 3069627.781
-  },
-  {
-   "id": "adjustment_for_supply_chain_leakage_best_guess",
-   "label": "Adjustment for supply chain leakage (Best guess)",
-   "section": "cea",
-   "value": -0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B17"
-   },
-   "explainer": "Guess. This could include commodities being damaged, not being delivered correctly to facilities for use, nationally procured commodities going into private sector and being sold, etc.",
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_supply_chain_leakage",
-   "label": "Adjustment for supply chain leakage",
-   "section": "simple_cea",
-   "formula": "adjustment_for_supply_chain_leakage_best_guess",
-   "expected": -0.25,
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_expiry_best_guess",
-   "label": "Adjustment for expiry (Best guess)",
-   "section": "cea",
-   "value": -0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B18"
-   },
-   "explainer": "Guess. There is data at higher levels indicating expiry rates are very low, but we are less certain about the possibility of this as commodities move through the distribution chain. \nThis could be because commodities are going to places where there isn't demand and expiring, or because existing modern contraception users are switching methods and there is lower demand for the previously preferred method.",
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_expiry",
-   "label": "Adjustment for expiry",
-   "section": "simple_cea",
-   "formula": "adjustment_for_expiry_best_guess",
-   "expected": -0.1,
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_people_switching_from_private_to_public_secto_2",
-   "label": "Adjustment for people switching from private to public sector (Best guess)",
-   "section": "cea",
-   "value": -0.25,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B19"
-   },
-   "explainer": "Guess.",
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_people_switching_from_private_to_public_secto",
-   "label": "Adjustment for people switching from private to public sector",
-   "section": "simple_cea",
-   "formula": "adjustment_for_people_switching_from_private_to_public_secto_2",
-   "expected": -0.25,
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
-   "label": "Adjustment for uncertainty around CYP estimates (Best guess)",
-   "section": "cea",
-   "value": -0.1,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B20"
-   },
-   "explainer": "Guess. Couple-years of protection (CYP) conversion factors are implictly (and explicitly in some cases) intended to capture effects such as methods not being used correctly, early stopping of some methods (long-acting reversible contraceptives), and overlapping method use. We explicitly apply a -10% adjustment for higher than average failure rates of contraception methods in the units of value per CYP we estimate: \"We assume that women who take up modern contraception due to GiveWell-funded programs have 10% higher failure rates when using modern contraceptives relative to the typical user of modern contraception. This adjustment is meant to capture that the women who take up due to our programs are likely to be more inexperienced using modern contraception than the average user.\" \nHowever, we have not fully vetted the extent to which CYP conversion factors are accounting for overlapping",
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_uncertainty_around_cyp_estimates",
-   "label": "Adjustment for uncertainty around CYP estimates",
-   "section": "simple_cea",
-   "formula": "adjustment_for_uncertainty_around_cyp_estimates_best_guess",
-   "expected": -0.1,
-   "format": "percent"
-  },
-  {
-   "id": "couple_years_of_protection_covered_by_grant_after_adjustment",
-   "label": "Couple-years of protection covered by grant, after adjustments (Best guess)",
-   "section": "simple_cea",
-   "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund * (1 + adjustment_for_supply_chain_leakage) * (1 + adjustment_for_expiry) * (1 + adjustment_for_people_switching_from_private_to_public_secto) * (1 + adjustment_for_uncertainty_around_cyp_estimates)",
-   "expected": 1398599.158
-  },
-  {
-   "id": "grant_to_unfpa_supplies_best_guess",
-   "label": "Grant to UNFPA Supplies (Best guess)",
-   "section": "cea",
-   "value": 10000000.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B3"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "grant_size",
-   "label": "Grant size",
-   "section": "simple_cea",
-   "formula": "grant_to_unfpa_supplies_best_guess",
-   "expected": 10000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "initial_cost_effectiveness_estimate",
-   "label": "Initial cost-effectiveness estimate",
-   "section": "simple_cea",
-   "formula": "units_of_value_per_couple_year_of_protection * couple_years_of_protection_covered_by_grant_after_adjustment / grant_size / 0.00333",
-   "expected": 29.39998229
-  },
-  {
-   "id": "grant_to_unfpa_supplies_best_guess_2",
-   "label": "Grant to UNFPA Supplies (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "grant_to_unfpa_supplies_best_guess",
-   "expected": 10000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "total_spending_contributed_by_grantee_best_guess",
-   "label": "Total spending contributed by grantee (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "grant_to_unfpa_supplies_best_guess_2",
-   "expected": 10000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "scenario_1_domestic_governments_would_replace_philanthropic",
-   "label": "Scenario 1: Domestic governments would replace philanthropic costs (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 0.8,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H37"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "amount_of_spending_domestic_governments_would_shift_to_the_g",
-   "label": "Amount of spending domestic governments would shift to the grantee program (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "total_spending_contributed_by_grantee_best_guess * scenario_1_domestic_governments_would_replace_philanthropic",
-   "expected": 8000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "couple_years_of_protection_covered_by_grant_and_matched_fund_2",
-   "label": "Couple-years of protection covered by grant and matched funding (Best guess)",
-   "section": "cea",
-   "formula": "(total_grant_amount_going_specifically_to_family_planning_com + matched_funding_by_domestic_governments_best_guess) / cost_per_couple_year_of_protection_cyp_best_guess",
-   "expected": 3069627.781
-  },
-  {
-   "id": "couple_years_of_protection_generated_by_funding_as_of_unfund_2",
-   "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, prior to adjustments (Best guess)",
-   "section": "cea",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "CEA!B16"
-   },
-   "explainer": "Assumes commodities procured against forecast unfunded demand are used; rows 17–20 adjust downward.",
-   "format": "percent"
-  },
-  {
-   "id": "couple_years_of_protection_generated_by_funding_as_of_unfund",
-   "label": "Couple-years of protection generated by funding, as % of unfunded forecast demand, after adjustments (Best guess)",
-   "section": "cea",
-   "formula": "couple_years_of_protection_generated_by_funding_as_of_unfund_2 * (1 + adjustment_for_supply_chain_leakage_best_guess) * (1 + adjustment_for_expiry_best_guess) * (1 + adjustment_for_people_switching_from_private_to_public_secto_2) * (1 + adjustment_for_uncertainty_around_cyp_estimates_best_guess)",
-   "expected": 0.455625,
-   "format": "percent"
-  },
-  {
-   "id": "additional_number_of_cyps_best_guess",
-   "label": "Additional number of CYPs (Best guess)",
-   "section": "cea",
-   "formula": "couple_years_of_protection_covered_by_grant_and_matched_fund_2 * couple_years_of_protection_generated_by_funding_as_of_unfund",
-   "expected": 1398599.158
-  },
-  {
-   "id": "total_units_of_value_generated_before_leverage_adjustment_be",
-   "label": "Total units of value generated, before leverage adjustment (Best guess)",
-   "section": "cea",
-   "formula": "additional_number_of_cyps_best_guess * units_of_value_per_cyp_best_guess",
-   "expected": 979019.4103
-  },
-  {
-   "id": "units_of_value_per_of_funding_best_guess",
-   "label": "Units of value per $ of funding (Best guess)",
-   "section": "cea",
-   "formula": "total_units_of_value_generated_before_leverage_adjustment_be / grant_to_unfpa_supplies_best_guess",
-   "expected": 0.09790194103
-  },
-  {
-   "id": "units_of_value_generated_per_dollar_donated_to_grantee_best",
-   "label": "Units of value generated per dollar donated to grantee (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "units_of_value_per_of_funding_best_guess",
-   "expected": 0.09790194103
-  },
-  {
-   "id": "value_generated_by_shifting_government_spending_to_the_grant",
-   "label": "Value generated by shifting government spending to the grantee program (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * units_of_value_generated_per_dollar_donated_to_grantee_best",
-   "expected": 783215.5282
-  },
-  {
-   "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
-   "label": "Counterfactual value per dollar spent by domestic governments (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "value": 0.005057,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H48"
-   }
-  },
-  {
-   "id": "value_lost_by_shifting_spending_away_from_programs_domestic",
-   "label": "Value lost by shifting spending away from programs domestic governments would otherwise have funded (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_domestic_governments_would_shift_to_the_g * counterfactual_value_per_dollar_spent_by_domestic_government",
-   "expected": 40456.0
-  },
-  {
-   "id": "net_value_generated_by_shifting_government_spending_to_the_g",
-   "label": "Net value generated by shifting government spending to the grantee program (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "value_generated_by_shifting_government_spending_to_the_grant - value_lost_by_shifting_spending_away_from_programs_domestic",
-   "expected": 742759.5282
-  },
-  {
-   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce",
-   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "-net_value_generated_by_shifting_government_spending_to_the_g",
-   "expected": -742759.5282
-  },
-  {
-   "id": "scenario_1_domestic_governments_would_replace_philanthropic_2",
-   "label": "Scenario 1: Domestic governments would replace philanthropic costs (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 0.15,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H31"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_this_scenario_representing_the_true_counterfa",
-   "label": "Probability of this scenario representing the true counterfactual (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "scenario_1_domestic_governments_would_replace_philanthropic_2",
-   "expected": 0.15,
-   "format": "percent"
-  },
-  {
-   "id": "expected_change_in_value_generated_by_the_grantee_program",
-   "label": "Expected change in value generated by the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce * probability_of_this_scenario_representing_the_true_counterfa",
-   "expected": -111413.9292
-  },
-  {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_gw_costs",
-   "label": "Scenario 2: Other philanthropic actors would replace GW costs (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 1.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H38"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to",
-   "label": "Amount of spending the Global Fund and/or PMI would shift to the grantee program",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "total_spending_contributed_by_grantee_best_guess * scenario_2_other_philanthropic_actors_would_replace_gw_costs",
-   "expected": 10000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "value_generated_by_shifting_global_fund_and_or_pmi_spending",
-   "label": "Value generated by shifting Global Fund and/or PMI spending to the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * units_of_value_generated_per_dollar_donated_to_grantee_best",
-   "expected": 979019.4103
-  },
-  {
-   "id": "counterfactual_value_per_dollar_spent_by_the_global_fund_or",
-   "label": "Counterfactual value per dollar spent by the Global Fund or PMI (proxy for other philanthropic donors) (Best guess)",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "value": 0.015433,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H49"
-   }
-  },
-  {
-   "id": "value_lost_by_shifting_spending_away_from_programs_the_globa",
-   "label": "Value lost by shifting spending away from programs the Global Fund and/or PMI would otherwise have funded",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_the_global_fund_and_or_pmi_would_shift_to * counterfactual_value_per_dollar_spent_by_the_global_fund_or",
-   "expected": 154330.0
-  },
-  {
-   "id": "net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
-   "label": "Net value generated by shifting Global Fund and/or PMI spending to the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "value_generated_by_shifting_global_fund_and_or_pmi_spending - value_lost_by_shifting_spending_away_from_programs_the_globa",
-   "expected": 824689.4103
-  },
-  {
-   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_2",
-   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "-net_value_generated_by_shifting_global_fund_and_or_pmi_spend",
-   "expected": -824689.4103
-  },
-  {
-   "id": "scenario_2_other_philanthropic_actors_would_replace_gw_costs_2",
-   "label": "Scenario 2: Other philanthropic actors would replace GW costs (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 0.15,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H32"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_this_scenario_representing_the_true_counterfa_2",
-   "label": "Probability of this scenario representing the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "scenario_2_other_philanthropic_actors_would_replace_gw_costs_2",
-   "expected": 0.15,
-   "format": "percent"
-  },
-  {
-   "id": "expected_change_in_value_generated_by_the_grantee_program_2",
-   "label": "Expected change in value generated by the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_2 * probability_of_this_scenario_representing_the_true_counterfa_2",
-   "expected": -123703.4115
-  },
-  {
-   "id": "government_downstream_costs_per_couple_years_of_protection_c",
-   "label": "Government downstream costs per couple-years of protection covered by grant (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "value": 8.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H9"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "matched_funding_by_domestic_governments_best_guess_2",
-   "label": "Matched funding by domestic governments (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "matched_funding_by_domestic_governments_best_guess",
-   "expected": 1633894.89,
-   "format": "usd"
-  },
-  {
-   "id": "total_spending_contributed_by_domestic_governments_downstrea",
-   "label": "Total spending contributed by domestic governments (downstream) (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "government_downstream_costs_per_couple_years_of_protection_c * couple_years_of_protection_covered_by_grant_and_matched_fund_2 + matched_funding_by_domestic_governments_best_guess_2",
-   "expected": 27725731.03,
-   "format": "usd"
-  },
-  {
-   "id": "total_spending_contributed_by_other_philanthropic_actors_bes",
-   "label": "Total spending contributed by other philanthropic actors (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H21"
-   },
-   "format": "usd"
-  },
-  {
-   "id": "total_spending_causally_upstream_of_donations_to_grantee_bes",
-   "label": "Total spending causally upstream of donations to grantee (Best guess)",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "sum(total_spending_contributed_by_grantee_best_guess, total_spending_contributed_by_other_philanthropic_actors_bes)",
-   "expected": 10000000.0,
-   "format": "usd"
-  },
-  {
-   "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre",
-   "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "total_spending_contributed_by_other_philanthropic_actors_bes / total_spending_causally_upstream_of_donations_to_grantee_bes",
-   "expected": 0.0,
-   "format": "percent"
-  },
-  {
-   "id": "amount_of_spending_domestic_governments_would_shift_away_fro",
-   "label": "Amount of spending domestic governments would shift away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "total_spending_contributed_by_domestic_governments_downstrea * (1 - scenario_3_other_upstream_costs_would_stay_the_same_downstre)",
-   "expected": 27725731.03,
-   "format": "usd"
-  },
-  {
-   "id": "value_generated_by_shifting_spending_toward_programs_domesti",
-   "label": "Value generated by shifting spending toward programs domestic governments would otherwise have supported",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_domestic_governments_would_shift_away_fro * counterfactual_value_per_dollar_spent_by_domestic_government",
-   "expected": 140209.0218
-  },
-  {
-   "id": "value_lost_by_shifting_government_spending_away_from_the_gra",
-   "label": "Value lost by shifting government spending away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H77"
-   }
-  },
-  {
-   "id": "net_value_generated_by_shifting_government_spending_away_fro",
-   "label": "Net value generated by shifting government spending away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "value_generated_by_shifting_spending_toward_programs_domesti - value_lost_by_shifting_government_spending_away_from_the_gra",
-   "expected": 140209.0218
-  },
-  {
-   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_3",
-   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "-net_value_generated_by_shifting_government_spending_away_fro",
-   "expected": -140209.0218
-  },
-  {
-   "id": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
-   "label": "Scenario 3: Other upstream costs would stay the same (downstream costs would shrink in proportion to the total size of the program) (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 0.5,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H33"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_this_scenario_representing_the_true_counterfa_3",
-   "label": "Probability of this scenario representing the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "scenario_3_other_upstream_costs_would_stay_the_same_downstre_2",
-   "expected": 0.5,
-   "format": "percent"
-  },
-  {
-   "id": "expected_change_in_value_generated_by_the_program",
-   "label": "Expected change in value generated by the program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_3 * probability_of_this_scenario_representing_the_true_counterfa_3",
-   "expected": -70104.5109
-  },
-  {
-   "id": "scenario_4_distributions_would_go_unfunded_best_guess",
-   "label": "Scenario 4: Distributions would go unfunded (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H40"
-   },
-   "format": "percent"
-  },
-  {
-   "id": "amount_of_spending_domestic_governments_would_shift_away_fro_2",
-   "label": "Amount of spending domestic governments would shift away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "$",
-   "formula": "total_spending_contributed_by_domestic_governments_downstrea * (1 - scenario_4_distributions_would_go_unfunded_best_guess)",
-   "expected": 27725731.03,
-   "format": "usd"
-  },
-  {
-   "id": "value_generated_by_shifting_spending_to_programs_domestic_go",
-   "label": "Value generated by shifting spending to programs domestic governments would otherwise have funded",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "amount_of_spending_domestic_governments_would_shift_away_fro_2 * counterfactual_value_per_dollar_spent_by_domestic_government",
-   "expected": 140209.0218
-  },
-  {
-   "id": "value_lost_by_shifting_government_spending_away_from_the_gra_2",
-   "label": "Value lost by shifting government spending away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "value": 0.0,
-   "kind": "estimate",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
-    "cell": "LeverageFunging!H87"
-   }
-  },
-  {
-   "id": "net_value_generated_by_shifting_government_spending_away_fro_2",
-   "label": "Net value generated by shifting government spending away from the grantee program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "value_generated_by_shifting_spending_to_programs_domestic_go - value_lost_by_shifting_government_spending_away_from_the_gra_2",
-   "expected": 140209.0218
-  },
-  {
-   "id": "change_in_value_generated_by_the_grantee_program_if_this_sce_4",
-   "label": "Change in value generated by the grantee program if this scenario represented the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "-net_value_generated_by_shifting_government_spending_away_fro_2",
-   "expected": -140209.0218
-  },
-  {
-   "id": "scenario_4_distributions_would_go_unfunded_best_guess_2",
-   "label": "Scenario 4: Distributions would go unfunded (Best guess)",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "1 - sum(scenario_1_domestic_governments_would_replace_philanthropic_2, scenario_2_other_philanthropic_actors_would_replace_gw_costs_2, scenario_3_other_upstream_costs_would_stay_the_same_downstre_2)",
-   "expected": 0.2,
-   "format": "percent"
-  },
-  {
-   "id": "probability_of_this_scenario_representing_the_true_counterfa_4",
-   "label": "Probability of this scenario representing the true counterfactual",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "scenario_4_distributions_would_go_unfunded_best_guess_2",
-   "expected": 0.2,
-   "format": "percent"
-  },
-  {
-   "id": "expected_change_in_value_generated_by_the_program_2",
-   "label": "Expected change in value generated by the program",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "change_in_value_generated_by_the_grantee_program_if_this_sce_4 * probability_of_this_scenario_representing_the_true_counterfa_4",
-   "expected": -28041.80436
-  },
-  {
-   "id": "total_expected_change_in_value_generated_as_a_result_of_leve",
-   "label": "Total expected change in value generated as a result of leverage and funging",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "sum(expected_change_in_value_generated_by_the_grantee_program, expected_change_in_value_generated_by_the_grantee_program_2, expected_change_in_value_generated_by_the_program, expected_change_in_value_generated_by_the_program_2)",
-   "expected": -333263.656
-  },
-  {
-   "id": "total_value_generated_by_grantee_spending_before_adjusting_f",
-   "label": "Total value generated by grantee spending before adjusting for leverage and funging",
-   "section": "leveragefunging",
-   "unit": "UoV",
-   "formula": "total_spending_contributed_by_grantee_best_guess * units_of_value_generated_per_dollar_donated_to_grantee_best",
-   "expected": 979019.4103
-  },
-  {
-   "id": "adjustment_for_leverage_and_funging_2",
-   "label": "Adjustment for leverage and funging",
-   "section": "leveragefunging",
-   "unit": "%",
-   "formula": "total_expected_change_in_value_generated_as_a_result_of_leve / total_value_generated_by_grantee_spending_before_adjusting_f",
-   "expected": -0.3404055655,
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_leverage_and_funging_best_guess",
-   "label": "Adjustment for leverage and funging (Best guess)",
-   "section": "cea",
-   "formula": "adjustment_for_leverage_and_funging_2",
-   "expected": -0.3404055655,
-   "format": "percent"
-  },
-  {
-   "id": "adjustment_for_leverage_and_funging",
-   "label": "Adjustment for leverage and funging",
-   "section": "simple_cea",
-   "formula": "adjustment_for_leverage_and_funging_best_guess",
-   "expected": -0.3404055655,
-   "format": "percent"
-  },
-  {
-   "id": "final_cost_effectiveness_after_all_adjustments",
-   "label": "Final cost-effectiveness (after all adjustments)",
-   "section": "simple_cea",
-   "formula": "initial_cost_effectiveness_estimate * (1 + adjustment_for_leverage_and_funging)",
-   "expected": 19.39206469
-  },
-  {
-   "id": "cash_benchmark",
-   "label": "Units of value per dollar given to GiveDirectly",
-   "section": "bottom_line",
-   "value": 0.00335,
-   "kind": "estimate",
-   "source": {
-    "title": "GiveWell, cost-effectiveness benchmark",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
-   },
-   "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
-  },
-  {
-   "id": "uov_per_dollar",
-   "label": "Units of value per dollar",
-   "section": "bottom_line",
-   "formula": "final_cost_effectiveness_after_all_adjustments * cash_benchmark"
-  }
- ],
- "output": {
-  "row": "uov_per_dollar",
-  "unit": "uov",
-  "label": "Units of value per dollar"
- }
 }

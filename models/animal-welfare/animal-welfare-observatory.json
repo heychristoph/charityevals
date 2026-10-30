@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1CAcmf4dXPk9tNWit25C7A7GJqEGNtnN-unXKZoyzvx4/edit",
     "published": "2025-11-04",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -204,9 +204,9 @@
       "id": "p1_contribution_made_by_other_charities_to_this_wor",
       "section": "p1_european_chicken_commitment_cea",
       "label": "% contribution made by other charities to this work",
-      "formula": "if($full_credit, 0, p1_contribution_made_by_other_charities_to_this_wor_shared)",
+      "formula": "p1_contribution_made_by_other_charities_to_this_wor_shared",
       "expected": 0.1,
-      "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."
+      "explainer": "ACE's estimate of other organisations' share of the credit."
     },
     {
       "id": "p1_of_expenses_on_this_program_that_will_come_from",
@@ -345,9 +345,9 @@
       "id": "p1_contribution_made_by_other_charities_to_this_wor_2",
       "section": "p1_european_chicken_commitment_cea",
       "label": "% contribution made by other charities to this work",
-      "formula": "if($full_credit, 0, p1_contribution_made_by_other_charities_to_this_wor_2_shared)",
+      "formula": "p1_contribution_made_by_other_charities_to_this_wor_2_shared",
       "expected": 0.8,
-      "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."
+      "explainer": "ACE's estimate of other organisations' share of the credit."
     },
     {
       "id": "p1_of_expenses_on_this_program_that_will_come_from_2",
@@ -526,9 +526,9 @@
       "id": "p2_contribution_made_by_other_charities_to_this_wor",
       "section": "p2_cage_free_eggs_cea",
       "label": "% contribution made by other charities to this work",
-      "formula": "if($full_credit, 0, p2_contribution_made_by_other_charities_to_this_wor_shared)",
+      "formula": "p2_contribution_made_by_other_charities_to_this_wor_shared",
       "expected": 0.1,
-      "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."
+      "explainer": "ACE's estimate of other organisations' share of the credit."
     },
     {
       "id": "p2_of_expenses_on_this_program_that_will_come_from",
@@ -667,9 +667,9 @@
       "id": "p2_contribution_made_by_other_charities_to_this_wor_2",
       "section": "p2_cage_free_eggs_cea",
       "label": "% contribution made by other charities to this work",
-      "formula": "if($full_credit, 0, p2_contribution_made_by_other_charities_to_this_wor_2_shared)",
+      "formula": "p2_contribution_made_by_other_charities_to_this_wor_2_shared",
       "expected": 0.1,
-      "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."
+      "explainer": "ACE's estimate of other organisations' share of the credit."
     },
     {
       "id": "p2_of_expenses_on_this_program_that_will_come_from_2",
@@ -803,9 +803,9 @@
       "id": "p2_contribution_made_by_other_charities_to_this_wor_3",
       "section": "p2_cage_free_eggs_cea",
       "label": "% contribution made by other charities to this work",
-      "formula": "if($full_credit, 0, p2_contribution_made_by_other_charities_to_this_wor_3_shared)",
+      "formula": "p2_contribution_made_by_other_charities_to_this_wor_3_shared",
       "expected": 0.1,
-      "explainer": "ACE's estimate of other organisations' share of the credit, or none when you give full credit for shared outcomes."
+      "explainer": "ACE's estimate of other organisations' share of the credit."
     },
     {
       "id": "p2_of_expenses_on_this_program_that_will_come_from_3",
@@ -948,7 +948,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -966,9 +966,8 @@
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0,
-      "discount_rate": 0.014
+      "discount_rate": 0.014,
+      "resource_shares": 0
     }
   },
   "resources": [

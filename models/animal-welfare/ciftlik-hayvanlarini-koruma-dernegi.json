@@ -13,7 +13,7 @@
     "sheet": "https://docs.google.com/spreadsheets/d/1pbZhUGFsU-xjCKggOOoSbgm3vFYBS562PxsWsBqZdw0/edit",
     "published": "2024-11-12",
     "retrieved": "2026-10-26",
-    "license": "Unclear: check ACE's terms before republishing"
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use)"
   },
   "sections": [
     {
@@ -76,14 +76,14 @@
       "id": "p1_general_annual_discount_rate",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "General annual discount rate",
-      "value": 0.04,
-      "kind": "estimate",
+      "formula": "$discount_rate",
+      "expected": 0.04,
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Cage-free corporate outreach (K!B11",
         "url": "https://docs.google.com/spreadsheets/d/18ROI6dRdKsNfXg5gIyBa1_7eYOjowfbw5n65zkrLnvc/edit?gid=1362437801#gid=1362437801"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "Your discount rate (Timing, under Your values). ACE's sheet uses 4%."
     },
     {
       "id": "p1_responsibility_for_commitments",
@@ -116,14 +116,14 @@
     {
       "id": "p1_number_of_hens_affected",
       "section": "p1_cage_free_corporate_outreach_k",
-      "label": "Number of hens affected (4% annual discount)",
-      "value": 1832042.713,
-      "kind": "estimate",
+      "label": "Number of hens affected (discounted)",
+      "formula": "pv_annuity_due(p1_hens_affected_per_year, p1_general_annual_discount_rate, p1_years_commitments_brought_forward)",
+      "expected": 1832042.713,
       "source": {
         "title": "ACE",
         "cell": "Cage-free corporate outreach (K!B14"
       },
-      "explainer": "ACE computes this with a Google Sheets function (such as NPV over the years of impact). The value is copied from the sheet, so changing the inputs above doesn't change it yet."
+      "explainer": "Hens affected each year, over the years the commitments are brought forward, with later years counting less."
     },
     {
       "id": "p1_total_hens_helped_by_kafessiz_turkiye_in_2023",
@@ -224,7 +224,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($count_salary_sacrifice, salary_sacrifice, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "sads_per_donor_dollar",
@@ -242,8 +242,8 @@
   "evaluator": {
     "name": "ACE",
     "assumptions": {
-      "count_salary_sacrifice": 0,
-      "full_credit": 0
+      "discount_rate": 0.04,
+      "resource_shares": 0
     }
   },
   "resources": [
