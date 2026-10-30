@@ -10,7 +10,7 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, factUsage } from "../src/engine/model";
+import { buildLibrary, assumptionValues, compute, factUsage, hasRange } from "../src/engine/model";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
@@ -41,7 +41,9 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     const live = new Set<string>();
     for (const id of m.order) {
       const r = m.byId.get(id)!;
-      if (r.assumptionDeps.length || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
+      // A ranged shared fact is uncertain too: folding it would drop it from the browser's ranges.
+      const rangedFact = r.factDeps.some((f) => hasRange(lib.facts.get(f)?.value));
+      if (r.assumptionDeps.length || rangedFact || typeof r.value === "object" || r.range || r.deps.some((d) => live.has(d))) live.add(id);
     }
     const seen = new Set<string>();
     const visit = (id: string) => {
