@@ -1,6 +1,5 @@
 # Inventory of public evaluator models
 
-Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, Founders Pledge and the
 Happier Lives Institute, checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
@@ -70,3 +69,14 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   sheets behind sign-in, intervention-level or hypothetical sheets, and three sheets whose unit or
   figure doesn't carry over (No Means No Worldwide, TerraPraxis, The Humane League 2019). The file
   lists every entry and its reason.
+
+
+  the PDFs they link, and every linked Google Sheet (tested through its public export): 42 entries
+  with a cost-effectiveness claim, a dollars-per-tonne figure or a linked model.
+- **Imported:** 6 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
+  Good Food Institute, Future Cleantech Architects, Opportunity Green, Evergreen Collaborative (2022,
+  and its superseded 2021 analysis) and Carbon180.
+  benchmark, and most of its pages are qualitative. Left out: recommendations with no published figure
+  the Australian list and the grantee spotlights), strategy-level sheets with no charity, offsets
+  bought from companies (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
+  sheet. The file lists every entry and its reason.
