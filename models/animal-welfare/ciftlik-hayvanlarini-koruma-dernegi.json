@@ -67,17 +67,17 @@
       "id": "p1_years_commitments_brought_forward",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "# years commitments brought forward",
-      "value": {
-        "low": 4.0,
-        "best": 20.5,
-        "high": 37.0
-      },
-      "kind": "estimate",
       "source": {
         "title": "ACE",
         "cell": "Cage-free corporate outreach (K!B9:D9"
       },
-      "explainer": "ACE's best guess is the midpoint of its bounds; the range is ACE's."
+      "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE's own figure, 20.5 years (the midpoint of its bounds, 4 to 37), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 4.0,
+        "best": 20.5,
+        "high": 37.0
+      }
     },
     {
       "id": "p1_general_annual_discount_rate",
@@ -93,38 +93,86 @@
       "explainer": "Your discount rate (Timing, under Your values). ACE's sheet uses 4%."
     },
     {
+      "id": "p1_years_until_effect",
+      "section": "p1_cage_free_corporate_outreach_k",
+      "label": "Years from winning the commitments until they take effect",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 7
+      },
+      "kind": "judgment",
+      "explainer": "Ours, not ACE's. Kafessiz Türkiye's commitments were won in 2023 with deadlines a few years out (Turkish cage-free pledges mostly name 2025 to 2030), so the hens' lives change some years after the win. Our judgment: 4 years, 2 to 7. ACE counts the benefit from the year of the win; the evaluator view keeps that."
+    },
+    {
+      "id": "p1_wait_discount",
+      "section": "p1_cage_free_corporate_outreach_k",
+      "label": "Discount for the wait until the commitments take effect",
+      "format": "percent",
+      "formula": "(1 + p1_general_annual_discount_rate) ^ -p1_years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency: every model discounts the wait until a won reform takes effect at \"Next year's good counts less by\". ACE counts the hens from the year of the win, so the evaluator view uses 1."
+    },
+    {
       "id": "p1_responsibility_for_commitments",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "% responsibility for commitments",
-      "value": 1.0,
-      "kind": "observed",
+      "value": {
+        "low": 0.5,
+        "best": 1.0,
+        "high": 1.0
+      },
+      "kind": "judgment",
       "source": {
         "title": "ACE (Charity's data)",
         "cell": "Cage-free corporate outreach (K!B12"
       },
-      "explainer": "ACE's input, source type: Charity's data."
+      "explainer": "ACE's input (source type: charity's data): ÇHKD takes all the credit for the commitments Kafessiz Türkiye won. Who caused a win is a judgment, not an observation, so filed as one; the range down to 50% is ours (other groups, the Open Wing Alliance's international campaigns among them, press some of the same companies). Used with \"Credit by share of resources\" off."
+    },
+    {
+      "id": "p1_resource_share_of_commitments",
+      "section": "p1_cage_free_corporate_outreach_k",
+      "label": "ÇHKD's share of the resources all groups spent winning these commitments",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Ours. With \"Credit by share of resources\" on, a win is shared by what each group put into it, as GiveWell's models share an outcome by every funder's money. Kafessiz Türkiye is ÇHKD's own campaign, but international groups in the Open Wing Alliance also press the multinational companies among its targets. No group publishes what it spent per company; our judgment is 80%, 50% to 100%."
+    },
+    {
+      "id": "p1_credit_for_commitments",
+      "section": "p1_cage_free_corporate_outreach_k",
+      "label": "Credit for the commitments",
+      "format": "percent",
+      "formula": "if($resource_shares, p1_resource_share_of_commitments, p1_responsibility_for_commitments)",
+      "explainer": "ACE's responsibility (100%) by default; with \"Credit by share of resources\" on, ÇHKD's share of the resources behind the wins."
     },
     {
       "id": "p1_of_companies_that_stick_to_their_commitments",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "% of companies that stick to their commitments",
-      "value": {
-        "low": 0.2834645669,
-        "best": 0.6250656168,
-        "high": 0.9666666667
-      },
-      "kind": "estimate",
       "source": {
         "title": "ACE",
         "cell": "Cage-free corporate outreach (K!B13:D13"
       },
-      "explainer": "ACE's best guess is the midpoint of its bounds; the range is ACE's."
+      "explainer": "Changed for consistency: reads the shared share of cage-free commitments companies keep (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), as every model crediting a cage-free pledge does. ACE's own 63% (the midpoint of its bounds, 28% to 97%) is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": {
+        "low": 0.2834645669,
+        "best": 0.6250656168,
+        "high": 0.9666666667
+      }
     },
     {
       "id": "p1_number_of_hens_affected",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "Number of hens affected (discounted)",
-      "formula": "pv_annuity_due(p1_hens_affected_per_year, p1_general_annual_discount_rate, p1_years_commitments_brought_forward)",
+      "formula": "pv_annuity_due(p1_hens_affected_per_year, p1_general_annual_discount_rate, p1_years_commitments_brought_forward) * p1_wait_discount",
       "expected": 1832042.713,
       "source": {
         "title": "ACE",
@@ -136,14 +184,14 @@
       "id": "p1_total_hens_helped_by_kafessiz_turkiye_in_2023",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "Total hens helped by Kafessiz Türkiye in 2023",
-      "formula": "p1_number_of_hens_affected * p1_responsibility_for_commitments * p1_of_companies_that_stick_to_their_commitments",
+      "formula": "p1_number_of_hens_affected * p1_credit_for_commitments * p1_of_companies_that_stick_to_their_commitments",
       "expected": 1145146.908
     },
     {
       "id": "p1_total_sads_averted_by_kafessiz_turkiye_in_2023",
       "section": "p1_cage_free_corporate_outreach_k",
       "label": "Total SADs averted by Kafessiz Türkiye in 2023",
-      "formula": "p1_number_of_hens_affected * p1_sads_averted_per_hen_per_year * p1_responsibility_for_commitments * p1_of_companies_that_stick_to_their_commitments",
+      "formula": "p1_number_of_hens_affected * p1_sads_averted_per_hen_per_year * p1_credit_for_commitments * p1_of_companies_that_stick_to_their_commitments",
       "expected": 20024041.29
     },
     {

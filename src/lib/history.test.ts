@@ -24,18 +24,18 @@ describe("model history", () => {
 
     const path = "models/animal-welfare/sinergia-animal.json";
     const file = JSON.parse(readFileSync(join(dir, path), "utf8"));
-    file.rows.find((r: { id: string }) => r.id === "cf_years").value = { low: 4, best: 10, high: 36 };
+    file.rows.find((r: { id: string }) => r.id === "cf_years_until_effect").value = { low: 2, best: 6, high: 7 };
     writeFileSync(join(dir, path), JSON.stringify(file));
-    g("commit", "-qam", "Shorter cage-free duration");
+    g("commit", "-qam", "Longer wait for cage-free");
 
     const lib = buildLibrary([file], JSON.parse(readFileSync(join(dir, "assumptions/default.json"), "utf8")));
     const model = lib.models.get("sinergia-animal")!;
     const h = modelHistory(dir, model, [path]);
 
-    expect(h.map((e) => e.subject)).toEqual(["Import Sinergia", "Shorter cage-free duration"]);
+    expect(h.map((e) => e.subject)).toEqual(["Import Sinergia", "Longer wait for cage-free"]);
     expect(h[0].note).toMatch(/First version/);
-    expect(h[1].changes.map((c) => c.id)).toEqual(["cf_years"]);
-    expect(h[1].changes[0]).toMatchObject({ before: "15", after: "10", kind: "value" });
+    expect(h[1].changes.map((c) => c.id)).toEqual(["cf_years_until_effect"]);
+    expect(h[1].changes[0]).toMatchObject({ before: "4", after: "6", kind: "value" });
     expect(h[1].ours!).toBeLessThan(h[0].ours!);
   }, 30_000); // runs git a dozen times; slow when other test files run alongside
 });
