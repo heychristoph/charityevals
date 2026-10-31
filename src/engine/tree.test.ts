@@ -121,11 +121,12 @@ describe("the headline", () => {
 });
 
 describe("every ranked model's tree", () => {
-  const jf = (d: string): string[] => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? (e.name === "grants" ? [] : jf(join(d, e.name))) : e.name.endsWith(".json") ? [join(d, e.name)] : []));
+  const jf = (d: string): string[] => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? jf(join(d, e.name)) : e.name.endsWith(".json") ? [join(d, e.name)] : []));
   const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
+  // Bulk models are loaded (a hand-built meta model reads some live, `#id`) but not walked: too many.
   const lib = buildLibrary(jf(join(root, "models")).map(read), assumptions, jf(join(root, "facts")).map(read));
   const av = assumptionValues(lib.assumptions);
-  const ranked = [...lib.models.values()].filter((m) => m.kind !== "template" && comparable(lib, m));
+  const ranked = [...lib.models.values()].filter((m) => m.kind !== "template" && !m.bulk && comparable(lib, m));
 
   it("ends in the number the rankings show, and its first parts share out the whole uncertainty", () => {
     const off: string[] = [];

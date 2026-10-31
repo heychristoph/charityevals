@@ -1785,11 +1785,28 @@
    "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
   },
   {
+   "id": "death_value_in_dalys",
+   "section": "bottom_line",
+   "label": "Value of one of these deaths averted, by age, in healthy years",
+   "format": "number",
+   "formula": "(@death_ages.smoking_share_15_49_mongolia * @moral_weights.uov_per_death_age_15_49 + @death_ages.smoking_share_50plus_mongolia * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier / $uov_per_daly",
+   "explainer": "Every death the site counts is valued by the age it happens at (docs/normalization.md, decision 2026-10-31 #4): GiveWell's moral weights by age over the ages of deaths from smoking in Mongolia, four in five of them at 50 or older (GBD 2023, Mongolia) (facts: death_ages), times how much Your values weigh a life, in healthy years at the shared rate."
+  },
+  {
+   "id": "gbd_daly_revaluation",
+   "section": "bottom_line",
+   "label": "Our value of one of Ambitious Impact's GBD DALYs (deaths valued by age), per DALY",
+   "format": "percent",
+   "formula": "@death_ages.smoking_yld_share + @death_ages.smoking_deaths_per_daly_mongolia * death_value_in_dalys",
+   "published": 1,
+   "explainer": "**Changed for consistency.** Ambitious Impact counts the Global Burden of Disease's DALYs for smoking in Mongolia: mostly years of life lost to deaths, at GBD's life expectancy, untouched by the value-of-life slider. Our view splits each DALY into the illness part (kept as DALYs) and the deaths behind the rest (36.5 DALYs per smoking death in Mongolia), and values those deaths by age like every death on the site (row above). The evaluator view keeps Ambitious Impact's DALYs (1)."
+  },
+  {
    "id": "dalys_per_dollar",
    "section": "bottom_line",
    "label": "DALYs averted per dollar",
-   "formula": "(1 / charity_gov_cost_per_life_daly_averted_expected) * donor_cost_share",
-   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+   "formula": "(1 / charity_gov_cost_per_life_daly_averted_expected) * donor_cost_share * gbd_daly_revaluation",
+   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
   }
  ],
  "output": {
@@ -1805,7 +1822,9 @@
   "name": "Ambitious Impact",
   "assumptions": {
    "resource_shares": 0,
-   "discount_rate": 0.04
+   "discount_rate": 0.04,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.3
   }
  },
  "summary": "Ambitious Impact's 2022 estimate for a new charity advocating for higher tobacco taxes, here a 50% rise in Mongolia's tobacco excise, the first of the four country-and-ask tabs the report costs. The idea Concentric Policies was founded to run. A re-implementation of that tab of AIM's spreadsheet, traced from its cost per DALY counting the charity's and the government's costs ($51). The report's range, $39 to $51, is that figure across the four tabs (Mongolia and Lebanon, a 50% rise or a rise to 75% of the price; mean about $47); this tab is near the least favourable. Health DALYs only: the sheet's income gains are left out of its cost per DALY, as in AIM's own figure. In our view the health gains come a few years after the tax, which AIM's sheet notes it leaves out.",

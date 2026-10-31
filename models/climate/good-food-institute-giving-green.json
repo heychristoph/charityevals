@@ -359,13 +359,22 @@
       "explainer": "Giving Green counts GFI's spending from 2016 to 2022 (mostly 2019–22) against the gap in livestock emissions between a low- and a high-innovation world, summed from 2022 until the two converge, with ClimateWorks' gap measured in 2050: most of the tonnes come in the 2040s and 2050s, about 25 years after the average dollar. Our judgment from Giving Green's scenarios. Giving Green counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is GFI's 2016–22 budget over its expected effect, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e averted per dollar",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
-      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below."
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below. A marginal dollar is counted at the shared share of the past average (row above)."
     },
     {
       "id": "fuel_share",
@@ -387,6 +396,15 @@
       "format": "number",
       "formula": "fuel_share",
       "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here it is the share of tonnes from burning less fuel, at the world-average smoke per tonne; at 0, the fuel doesn't matter."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths averted per tonne, counted directly by the evaluator (none here)",
+      "format": "small",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "A row every climate model has, which the site's conversion reads (docs/normalization.md 2.5): air-pollution deaths the evaluator counts itself, per tonne, on top of what the tonnes carry through air_pollution_weight. The evaluator counts none for this charity, so 0."
     },
     {
       "id": "staff_cost_share",

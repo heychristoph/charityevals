@@ -5315,11 +5315,28 @@
    "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
   },
   {
+   "id": "death_value_in_dalys",
+   "section": "bottom_line",
+   "label": "Value of one of these deaths averted, by age, in healthy years",
+   "format": "number",
+   "formula": "(@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier / $uov_per_daly",
+   "explainer": "Every death the site counts is valued by the age it happens at (docs/normalization.md, decision 2026-10-31 #4): GiveWell's moral weights by age over the ages of deaths from kiln smoke (ambient fine particles and sulphur dioxide) in northern India, nine in ten of them at 50 or older (GBD 2023, world) (facts: death_ages), times how much Your values weigh a life, in healthy years at the shared rate."
+  },
+  {
+   "id": "gbd_daly_revaluation",
+   "section": "bottom_line",
+   "label": "Our value of one of Ambitious Impact's GBD DALYs (deaths valued by age), per DALY",
+   "format": "percent",
+   "formula": "@death_ages.air_pollution_yld_share + @death_ages.air_pollution_deaths_per_daly_india * death_value_in_dalys",
+   "published": 1,
+   "explainer": "**Changed for consistency.** Ambitious Impact counts the Global Burden of Disease's DALYs for kiln smoke (ambient fine particles and sulphur dioxide) in northern India: mostly years of life lost to deaths, at GBD's life expectancy, untouched by the value-of-life slider. Our view splits each DALY into the illness part (kept as DALYs) and the deaths behind the rest (27.9 DALYs per death in India), and values those deaths by age like every death on the site (row above). The evaluator view keeps Ambitious Impact's DALYs (1)."
+  },
+  {
    "id": "dalys_per_dollar",
    "section": "bottom_line",
    "label": "DALYs averted per dollar",
-   "formula": "(1 / r4_cost_effectiveness_per_year_impact) * donor_cost_share",
-   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+   "formula": "(1 / r4_cost_effectiveness_per_year_impact) * donor_cost_share * gbd_daly_revaluation",
+   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
   }
  ],
  "output": {
@@ -5335,7 +5352,9 @@
   "name": "Ambitious Impact",
   "assumptions": {
    "resource_shares": 0,
-   "discount_rate": 0.014
+   "discount_rate": 0.014,
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.5
   }
  },
  "theoretical": {

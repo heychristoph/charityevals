@@ -90,14 +90,15 @@
       "label": "Cost per tonne if only the automaker's own operations change",
       "format": "usd",
       "value": 3,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Giving Green, Industrious Labs deep dive (2024, PDF)",
         "url": "https://cdn.prod.website-files.com/686d65ad3e40d1dc7eb801b4/68ae6c9a9a0b7aff042cd2b0_311d34_6ea44d810f19495f9038c821c64faa09.pdf",
         "page": "Deep dive (November 2024), \"What is Industrious Labs' cost-effectiveness?\", pp. 14–16",
         "quote": "If Industrious Labs only impacts the automaker's operations, its cost-effectiveness is $3 per tCO2 e avoided.",
         "retrieved": "2026-10-30"
-      }
+      },
+      "explainer": "The evaluator's own subjective guess, filed as a judgment."
     },
     {
       "id": "cost_per_tonne_with_car_industry",
@@ -105,14 +106,15 @@
       "label": "Cost per tonne if the rest of the car industry follows too",
       "format": "usd",
       "value": 1.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Giving Green, Industrious Labs deep dive (2024, PDF)",
         "url": "https://cdn.prod.website-files.com/686d65ad3e40d1dc7eb801b4/68ae6c9a9a0b7aff042cd2b0_311d34_6ea44d810f19495f9038c821c64faa09.pdf",
         "page": "Deep dive (November 2024), \"What is Industrious Labs' cost-effectiveness?\", pp. 14–16",
         "quote": "If it additionally impacts the global automotive industry, cost-effectiveness improves to $1.50 per tCO2 e avoided.",
         "retrieved": "2026-10-30"
-      }
+      },
+      "explainer": "The evaluator's own subjective guess, filed as a judgment."
     },
     {
       "id": "cost_per_tonne_best_guess",
@@ -124,7 +126,7 @@
         "best": 0.52,
         "high": 12.3
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Giving Green, Industrious Labs deep dive (2024, PDF)",
         "url": "https://cdn.prod.website-files.com/686d65ad3e40d1dc7eb801b4/68ae6c9a9a0b7aff042cd2b0_311d34_6ea44d810f19495f9038c821c64faa09.pdf",
@@ -132,7 +134,7 @@
         "quote": "Our best guess is that Industrious Labs' aluminum corporate advocacy efforts avoid one tCO2 e for around $0.52 (range: $0.03-$12.30).",
         "retrieved": "2026-10-30"
       },
-      "explainer": "Giving Green's best guess, which adds a small effect (a 0.1 percentage point higher chance, 10 years sooner) on half the global aluminium industry committing. Giving Green has \"low confidence\" in the analysis and says it \"should not be taken literally\"; its range is $0.03 to $12.30."
+      "explainer": "Giving Green's best guess, which adds a small effect (a 0.1 percentage point higher chance, 10 years sooner) on half the global aluminium industry committing. Giving Green has \"low confidence\" in the analysis and says it \"should not be taken literally\"; its range is $0.03 to $12.30. The evaluator's own subjective guess, filed as a judgment."
     },
     {
       "id": "tonnes_automaker",
@@ -191,13 +193,22 @@
       "explainer": "The campaign runs over several years from about 2022; carmakers' low-carbon aluminium purchases ramp up toward 2030, and two thirds of Giving Green's tonnes come from the wider aluminium industry committing ten years sooner, later still. Best guess 8 years from the money to the average tonne, 4 to 15. Our judgment. Giving Green counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is the cost of one past corporate campaign over its effect, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e averted per dollar",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
-      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below."
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below. A marginal dollar is counted at the shared share of the past average (row above)."
     },
     {
       "id": "fuel_share",
@@ -264,7 +275,7 @@
       "label": "Share of the tonnes from the wider aluminium industry (Giving Green's best guess)",
       "format": "percent",
       "value": 0.6533,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Giving Green, Industrious Labs deep dive (2024, PDF)",
         "url": "https://cdn.prod.website-files.com/686d65ad3e40d1dc7eb801b4/68ae6c9a9a0b7aff042cd2b0_311d34_6ea44d810f19495f9038c821c64faa09.pdf",
@@ -272,7 +283,7 @@
         "quote": "If it additionally impacts the global automotive industry, cost-effectiveness improves to $1.50 per tCO2 e avoided.",
         "retrieved": "2026-10-30"
       },
-      "explainer": "From Giving Green's figures: 1 − $0.52 ÷ $1.50, the share of its best guess's tonnes that come from the third step. Held at the best guess rather than computed from the cost rows, so the smoke mix doesn't swing with Giving Green's cost range (computing it there breaks the uncertainty split, since the same input would then drive both tonnes and smoke)."
+      "explainer": "From Giving Green's figures: 1 − $0.52 ÷ $1.50, the share of its best guess's tonnes that come from the third step. Held at the best guess rather than computed from the cost rows, so the smoke mix doesn't swing with Giving Green's cost range (computing it there breaks the uncertainty split, since the same input would then drive both tonnes and smoke). The evaluator's own subjective guess, filed as a judgment."
     },
     {
       "id": "fuel_smoke_factor",
@@ -289,6 +300,15 @@
       "format": "number",
       "formula": "fuel_share * fuel_smoke_factor",
       "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from smelter power times the smoke per tonne where those smelters are."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths averted per tonne, counted directly by the evaluator (none here)",
+      "format": "small",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "A row every climate model has, which the site's conversion reads (docs/normalization.md 2.5): air-pollution deaths the evaluator counts itself, per tonne, on top of what the tonnes carry through air_pollution_weight. The evaluator counts none for this charity, so 0."
     },
     {
       "id": "staff_cost_share",

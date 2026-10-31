@@ -25,7 +25,7 @@ Giving Green's rows come first, ending at its bottom line in dollars per tonne, 
 - **Air pollution per tonne, from US evidence:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. Most of the IRA's cuts come from US power plants, and the IRA's health modelling (Energy Innovation and Resources for the Future, 2022) finds about a fortieth to a hundred-and-fiftieth of that average smoke deaths per tonne. The model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.013 (0.005–0.027), the middle of the two studies on a log scale; every tonne also counts for its heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
-The site turns these tonnes into years of healthy life through the deaths they avoid: the heat part of "Deaths caused by one more tonne of CO₂" (23%), discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂", plus its air-pollution part times the model's air-pollution row, at once; each death valued like any adult's.
+The site turns these tonnes into years of healthy life through the deaths they avoid: the heat part of "Deaths caused by one more tonne of CO₂" (23%), discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂", plus its air-pollution part times the model's air-pollution row, at once; each death valued by the age it comes at, like every death on the site.
 
 ### What drives the result
 
@@ -35,6 +35,7 @@ The site turns these tonnes into years of healthy life through the deaths they a
 
 ### Where we differ from Giving Green
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
 - **Giving Green's published figure, not its sheet's.** Giving Green's spreadsheet leaves out the ×10 its own note and write-up describe: it divides by one year of Evergreen's implementation budget ($3.75 million) and gets $0.49 a tonne, while the note on that cell says "multiplied by 10 years of activity" and the write-up reports $4.88, the same calculation with ten years. Our view uses Giving Green's $4.88; the evaluator view keeps the sheet's cells so they reproduce.
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **US power tonnes count their own, small air pollution**, from the IRA's health modelling, not the world average: about 1.5 times what heat deaths alone give (1.2–1.9 across the two studies). Before October 2026 the site counted heat only (0.031).

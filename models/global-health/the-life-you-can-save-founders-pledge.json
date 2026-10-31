@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "the-life-you-can-save",
   "owner": "founders-pledge",
-  "summary": "Raises money for effective global poverty charities by promoting effective giving. Founders Pledge's page gives a gross multiplier of about 17 dollars raised per dollar received; our view takes today's ratio and values each dollar moved by the site's shared method: half of it new money, the rest credited for the gain over GiveDirectly, all going to GiveWell's Top Charities at their live results.",
+  "summary": "Raises money for effective global poverty charities by promoting effective giving. Founders Pledge's page gives a gross multiplier of about 17 dollars raised per dollar received; our view takes today's ratio (9.19, 2025), counts a marginal dollar at half the average (our judgment) and values each dollar moved by the site's shared method: half of it new money, the rest credited for the gain over GiveDirectly, going to the charities The Life You Can Save's own 2025 split names, each at its live result.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "The Life You Can Save (charity recommendation)",
@@ -75,42 +75,51 @@
       "label": "Gross multiplier in recent years, as a share of Founders Pledge's 17",
       "format": "percent",
       "value": {
-        "low": 0.54,
-        "best": 0.59,
+        "low": 0.5,
+        "best": 0.540588,
         "high": 1
       },
-      "kind": "estimate",
+      "kind": "observed",
       "source": {
         "title": "The Life You Can Save, 2025 annual report",
         "url": "https://www.thelifeyoucansave.org/2025-annual-report/",
-        "note": "Three-year leverage ratio 10 (2024 report) and 9.19 (2025 report); 17:1 for 2019–2021.",
-        "retrieved": "2026-10-30"
+        "note": "3-year leverage ratio 9.19:1 (2023–2025: money moved over expenses; $24.07 million moved in 2025 on $2.62 million of expenses). Earlier: 10 (2024 report), 17 (2019–2021).",
+        "retrieved": "2026-10-31"
       },
-      "explainer": "Founders Pledge expected about 17 to hold \"over the next few years\"; The Life You Can Save's own three-year ratio has since fallen to 10 (2024 report) and 9.19 (2025 report), 59% and 54% of 17. A donation today buys today's ratio, so the result uses 59% (10), with Founders Pledge's own 17 (100%) as the high end. Founders Pledge's figure stays the model's evaluator row."
+      "explainer": "Founders Pledge expected about 17 to hold \"over the next few years\"; The Life You Can Save's own three-year ratio has since fallen to 10 (2024 report) and 9.19 (2025 report, 2023–2025), 54% of 17. A donation today buys today's ratio, so the result uses the latest, 9.19, with Founders Pledge's own 17 (100%) as the high end and 8.5 (50%) as the low end. Founders Pledge's figure stays the model's evaluator row."
     },
     {
-      "id": "value_global_health",
+      "id": "marginal_vs_past_average",
+      "section": "bridge",
+      "label": "A marginal dollar's money moved as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): the leverage ratio is money moved over all of The Life You Can Save's costs in 2023–2025, an average; the next dollar it receives moves less than the average dollar did. 50%, from 18% (CEARCH's estimate for Giving What We Can's marginal dollar) to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
+      "id": "value_tlycs_recommended",
       "section": "moved_money",
-      "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
+      "label": "Value of a dollar to The Life You Can Save's recommended charities (its 2025 split, live), units of value",
       "format": "small",
-      "formula": "@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives",
-      "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
+      "formula": "(@meta.tlycs_moved_2025_against_malaria_foundation * #against-malaria-foundation + @meta.tlycs_moved_2025_carbon180 * #carbon180-giving-green + @meta.tlycs_moved_2025_clean_air_task_force * #clean-air-task-force-founders-pledge + @meta.tlycs_moved_2025_development_media_international * #development-media-international-dmi + @meta.tlycs_moved_2025_evergreen_collaborative * #evergreen-collaborative-giving-green + @meta.tlycs_moved_2025_evidence_action * #evidence-action-syphilis-screening-treatment-in + @meta.tlycs_moved_2025_givedirectly * #givedirectly + @meta.tlycs_moved_2025_gain * #global-alliance-for-improved-nutrition-founders-pledge + @meta.tlycs_moved_2025_helen_keller_intl * #helen-keller-vas + @meta.tlycs_moved_2025_innovations_for_poverty_action * #innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach + @meta.tlycs_moved_2025_iodine_global_network * #iodine-global-network-founders-pledge + @meta.tlycs_moved_2025_lafiya * #lafiya-nigeria-2026 + @meta.tlycs_moved_2025_malaria_consortium * #malaria-consortium-smc + @meta.tlycs_moved_2025_new_incentives * #new-incentives + @meta.tlycs_moved_2025_one_acre_fund * #one-acre-fund-seedlings-2022 + @meta.tlycs_moved_2025_raising_the_village * #raising-the-village-2024 + @meta.tlycs_moved_2025_teaching_at_the_right_level_africa * #teaching-at-the-right-level-africa-founders-pledge + @meta.tlycs_moved_2025_unlimit_health * #unlimit-health-deworming-sogive-2022 + @meta.tlycs_moved_2025_village_enterprise * #village-enterprise-founders-pledge) / (@meta.tlycs_moved_2025_against_malaria_foundation + @meta.tlycs_moved_2025_carbon180 + @meta.tlycs_moved_2025_clean_air_task_force + @meta.tlycs_moved_2025_development_media_international + @meta.tlycs_moved_2025_evergreen_collaborative + @meta.tlycs_moved_2025_evidence_action + @meta.tlycs_moved_2025_givedirectly + @meta.tlycs_moved_2025_gain + @meta.tlycs_moved_2025_helen_keller_intl + @meta.tlycs_moved_2025_innovations_for_poverty_action + @meta.tlycs_moved_2025_iodine_global_network + @meta.tlycs_moved_2025_lafiya + @meta.tlycs_moved_2025_malaria_consortium + @meta.tlycs_moved_2025_new_incentives + @meta.tlycs_moved_2025_one_acre_fund + @meta.tlycs_moved_2025_raising_the_village + @meta.tlycs_moved_2025_teaching_at_the_right_level_africa + @meta.tlycs_moved_2025_unlimit_health + @meta.tlycs_moved_2025_village_enterprise)",
+      "explainer": "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its main model's live result on this site (GiveDirectly at GiveWell's model, as everywhere in meta models). The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix."
     },
     {
       "id": "moved_dollar_value",
       "section": "moved_money",
       "label": "Value of a dollar moved, units of value",
       "format": "small",
-      "formula": "value_global_health",
-      "explainer": "This organisation moves money only to global health and poverty charities, so a dollar moved is valued at that destination alone (GiveWell's Top Charities, live), not the across-causes mix."
+      "formula": "value_tlycs_recommended",
+      "explainer": "Valued by where this organisation's money actually went: its own published split by charity, each at its live result on this site."
     },
     {
       "id": "prior_dollar_value",
       "section": "moved_money",
-      "label": "Value of a dollar where shifted money would otherwise have gone, units of value",
+      "label": "Value of a dollar where shifted money would otherwise have gone (our judgment: 1× GiveDirectly), units of value",
       "format": "small",
       "formula": "@meta.prior_vs_cash * #givedirectly",
-      "explainer": "Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
+      "explainer": "Our judgment. Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
     },
     {
       "id": "new_money_share",
@@ -133,8 +142,8 @@
       "section": "bridge",
       "label": "Units of value per dollar",
       "format": "small",
-      "formula": "gross_multiplier * multiplier_change * moved_dollar_net_value",
-      "explainer": "Changed for consistency. Dollars moved per dollar received (Founders Pledge's gross multiplier, at today's ratio), each worth the site's shared net value of a dollar moved: new money in full, shifted money for the gain over GiveDirectly. This model used to keep 40% of the money (our judgment, 20–70%) and value it at 5 times Founders Pledge's cash benchmark (2–10); the shared method replaces both."
+      "formula": "gross_multiplier * multiplier_change * marginal_vs_past_average * moved_dollar_net_value",
+      "explainer": "Changed for consistency. Dollars moved per marginal dollar received (Founders Pledge's gross multiplier, at today's ratio, times the share a marginal dollar moves of the average), each worth the site's shared net value of a dollar moved: The Life You Can Save's own 2025 split by charity at their live results, new money in full, shifted money for the gain over GiveDirectly. This model used to keep 40% of the money (our judgment, 20–70%) and value it at 5 times Founders Pledge's cash benchmark (2–10); the shared method replaces both."
     },
     {
       "id": "staff_cost_share",
@@ -170,12 +179,20 @@
       "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
     },
     {
+      "id": "moved_per_dollar",
+      "section": "staff_pay",
+      "label": "Money moved per dollar of The Life You Can Save's cost (marginal)",
+      "format": "multiple",
+      "formula": "gross_multiplier * multiplier_change * marginal_vs_past_average",
+      "explainer": "Gross money moved by a marginal dollar of cost: what credit by share of resources counts as the donors' contribution (times the new-money share)."
+    },
+    {
       "id": "donor_cost_share",
       "section": "staff_pay",
       "label": "Share of the full cost paid in cash",
       "format": "percent",
-      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gross_multiplier * multiplier_change * new_money_share, 0))",
-      "explainer": "With credit by share of resources on, the donors' own new gifts are contributors too: the outcome is shared with them and with staff's forgone pay. Off, this is 100%."
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))",
+      "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, the donors whose new money the organisation moves are contributors too, alongside staff's forgone pay, so the outcome is shared with them. Off, this is 100%."
     },
     {
       "id": "uov_per_dollar",

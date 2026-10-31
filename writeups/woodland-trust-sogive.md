@@ -32,6 +32,7 @@ SoGive's planting figure is its bottom line. Our steps follow:
 
 ### Where we differ from SoGive
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
 - **All projects**, not planting alone.
 - **Tonnes become healthy years** through the shared climate rate, counting heat deaths only; SoGive compares pounds per tonne with its benchmark.
 - **SoGive's untested assumptions** (survival, extra uptake, permanence) applied as our judgments.

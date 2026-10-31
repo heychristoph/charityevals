@@ -24,7 +24,7 @@ Giving Green's rows come first, ending at its bottom line in dollars per tonne. 
 - **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. CO₂ captured at plants that keep running, or pulled from the air, comes with no less smoke, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0 (0–0.05, our judgment), and the site values them for their heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
-The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
+The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued by the age it comes at like every death on the site, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
 
 ### What drives the result
 
@@ -34,6 +34,8 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 
 ### Where we differ from Giving Green
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
+- **A marginal dollar, not the past average.** Giving Green's figure is Carbon180's 2019–21 policy spending over the bills it influenced: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Captured and removed tonnes count for their heat deaths only**, because they come with no less fuel smoke.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.

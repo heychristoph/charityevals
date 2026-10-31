@@ -651,48 +651,39 @@
       "explainer": "Founders Pledge counts CATF's spending from 1996 to 2017 (about 2007 on average) against tonnes avoided by the coal retirements of 2010–15 (13% of the tonnes), the 2012 methane rule (2012–17, 26%), the 2016 methane rule (2016–25, 24%) and the carbon capture tax credit (2020–25, 37%): on average about 2019, twelve years after the average dollar. Low 8: the spending behind these case studies came mostly in the later years; high 16: the carbon capture tonnes come later than Founders Pledge's 2020–25 window. Our judgment from Founders Pledge's dates. Founders Pledge counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is CATF's 1996–2017 budget over the wins it brought forward, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e averted per dollar",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
-      "explainer": "One over Founders Pledge's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below."
-    },
-    {
-      "id": "fuel_share",
-      "section": "per_dollar",
-      "label": "Share of these tonnes from burning less fuel (coal retirements)",
-      "format": "percent",
-      "formula": "coal_tonnes_averted / tonnes_averted",
-      "explainer": "Founders Pledge's own split: the coal retirements' net tonnes (coal burned less, minus the gas burned in its place) over all three case studies' tonnes, about 13%. The methane rules stop leaks and carbon capture removes CO₂ from plants that keep running; neither burns less fuel. Founders Pledge scales all three up by the same share of CATF's impact, so the mix carries over."
-    },
-    {
-      "id": "fuel_smoke_factor",
-      "section": "per_dollar",
-      "label": "Air-pollution deaths per net tonne of US coal-to-gas switching, relative to the fossil-fuel average",
-      "format": "number",
-      "value": {
-        "low": 0.09,
-        "best": 0.13,
-        "high": 0.24
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "US EIA, Monthly Energy Review, Table 7.2a Electricity Net Generation: Total (All Sectors); CATF, The Toll from Coal (2010), via Founders Pledge (rows deaths_2010, deaths_2004); Markandya & Wilkinson (2007), Electricity generation and health, The Lancet",
-        "url": "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T07.02A",
-        "cell": "Table 7.2a, Electricity Net Generation From Coal, All Sectors: 2004 annual 1,978,300.549 and 2010 annual 1,847,290.279 million kWh",
-        "note": "US coal plants: 13,200 deaths in 2010 and 24,000 in 2004 (Toll from Coal). Markandya & Wilkinson (https://doi.org/10.1016/S0140-6736(07)61253-7), Europe, deaths per TWh: coal 24.5, gas 2.8."
-      },
-      "explainer": "Per fuel, not the world average. US coal plants caused about 13,200 deaths in 2010 (CATF's Toll from Coal, row deaths_2010) from 1,847 TWh (EIA), some 7.1 deaths per TWh; a gas plant makes roughly a ninth of a coal plant's deaths per TWh (Markandya & Wilkinson 2007: 2.8 against 24.5), about 0.8. Each TWh switched cuts 0.82 − 0.49 = 0.33 million net tonnes (Founders Pledge's emission factors), so about (7.1 − 0.8) ÷ 330,000 = 1.9 deaths per 100,000 net tonnes: 0.13 of the world average of 1.46 per 10,000. Low 0.09 (gas at Markandya & Wilkinson's European 2.8 per TWh); high 0.24 (the 2004 fleet, 24,000 deaths from 1,978 TWh, 12 per TWh, closer to the older unscrubbed plants that retired first). Founders Pledge counts US air-pollution deaths from CATF's SO₂, NOx and mercury rules separately (not in this output); the retirements overlap the mercury rule a little."
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Founders Pledge's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below. A marginal dollar is counted at the shared share of the past average (row above)."
     },
     {
       "id": "air_pollution_weight",
       "section": "per_dollar",
       "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
       "format": "number",
-      "formula": "fuel_share * fuel_smoke_factor",
-      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from coal retirements times the smoke per net tonne of switching US coal power to gas."
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5) for the air pollution each tonne carries. 0 here, our judgment: the only tonnes that burn less fuel are the coal retirements (about 13% of the tonnes), and the smoke they cut is already in Founders Pledge's own count of US coal-plant deaths averted, which the next row adds directly. Counting both would count the same smoke twice (it used to be 13% × 0.13 = 0.017 of an average fossil tonne).",
+      "value": 0,
+      "kind": "judgment"
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "US air-pollution deaths averted per tonne (Founders Pledge's own count)",
+      "format": "small",
+      "formula": "adjusted_deaths_averted / adjusted_tonnes_averted",
+      "explainer": "Founders Pledge counts about 26,000 US deaths from coal-plant fine particles, sulphur dioxide and mercury averted by the rules CATF brought forward (rows above), next to its 117 million tonnes. The site's conversion values each of these deaths like every air-pollution death (by the ages air pollution kills at, times the value-of-life slider) and adds them to the tonnes' own deaths, so the model carries both outcomes FP counted (docs/normalization.md 2.5). Per tonne, so they share the tonnes' wait and credit steps. They don't scale with \"Deaths caused by one more tonne of CO₂\": they are counted deaths, not a rate per tonne."
     },
     {
       "id": "staff_cost_share",

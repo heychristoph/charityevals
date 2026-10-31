@@ -26,7 +26,7 @@ Giving Green's rows come first, ending at its bottom line in dollars per tonne, 
 - **Air pollution per tonne, from gas power:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. These tonnes come from EU gas plants burning less, and burning gas emits about a twenty-fifth of that average smoke per tonne (see below), so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is all the tonnes (0.8–1) times 0.039 (0.01–0.08).
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
-The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
+The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂", each valued by the age it comes at like every death on the site, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂".
 
 ### What drives the result
 
@@ -36,6 +36,8 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 
 ### Where we differ from Giving Green
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
+- **A marginal dollar, not the past average.** Giving Green's figure is FCA's past spending on the RED III target over its effect: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Displaced gas power counts its own air pollution.** Gas plants cause roughly 2.8 deaths per TWh of electricity against roughly 25 for coal, (Markandya and Wilkinson, 2007), at 0.49 tonnes of CO₂ per MWh (the gas factor Founders Pledge uses): about a twenty-fifth of the world-average air-pollution deaths per tonne in the shared rate. That makes the result about 2.4 times what heat alone gives (1.1 before October 2026); the world average would have given about 40. The Clean Air Task Force model sets its coal tonnes' smoke the same way.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.

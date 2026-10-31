@@ -28,7 +28,7 @@ Founders Pledge's rows come first, ending at its bottom line in dollars per tonn
 - **Forest tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. A forest left standing saves no fossil fuel, but tropical forest is mostly cleared by fire: Reddington et al. (2015) find Brazil's fall in deforestation prevents 400–1,700 deaths a year from smoke; at IPCC's default carbon in South American rain forest (about 710 tonnes of CO₂ a hectare) that is about 0.003–0.011 of the world-average fossil-fuel smoke per tonne of CO₂. The model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.005 (0–0.03); Founders Pledge leaves this smoke out.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
-The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂" (0.43 per 10,000 tonnes at the defaults), each valued like any adult's death, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂" (60 by default; at 4% a year such a death counts about a tenth of one today).
+The site turns these tonnes into years of healthy life through the heat deaths they avoid: 23% of "Deaths caused by one more tonne of CO₂" (0.43 per 10,000 tonnes at the defaults), each valued by the age it comes at like every death on the site, discounted at "Next year's good counts less by" over "Years until the heat deaths from a tonne of CO₂" (60 by default; at 4% a year such a death counts about a tenth of one today).
 
 ### What drives the result
 
@@ -38,6 +38,8 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 
 ### Where we differ from Founders Pledge
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
+- **A marginal dollar, not the past average.** Founders Pledge's figure is CfRN's 2004–17 budget over the REDD+ funding it helped bring about: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Tonnes become healthy years** through the shared climate rate. Founders Pledge stops at dollars per tonne.
 - **Forest tonnes count their heat deaths and a little clearing-fire smoke** (0.005 of an average fossil-fuel tonne's, Reddington et al. 2015 with IPCC's forest carbon), which Founders Pledge leaves out: about 1.2 times what heat alone gives (0.62 before October 2026).
 - **Future deaths are discounted.** Rethink Priorities counts the heat deaths to 2300 without discounting; like every model on the site, ours discounts future good at the shared rate. At 0% the result would be about 6.5; the discount rate and the delay are the biggest levers on this result.

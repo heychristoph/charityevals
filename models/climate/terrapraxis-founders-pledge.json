@@ -5,7 +5,7 @@
   "cause": "climate",
   "charity": "terrapraxis",
   "owner": "founders-pledge",
-  "summary": "TerraPraxis promotes re-powering coal plants with advanced nuclear heat. Founders Pledge's Climate Fund paid for its COP26 event on committed coal emissions; Founders Pledge's best guess is $0.02 a tonne of CO₂, $1.10 under conservative assumptions. Like every model on the site, our view uses the evaluator's best guess; the conservative case is the end of the range.",
+  "summary": "TerraPraxis promotes re-powering coal plants with advanced nuclear heat. Founders Pledge's Climate Fund paid for its COP26 event on committed coal emissions; Founders Pledge's best guess is $0.02 a tonne of CO₂, $1.10 under conservative assumptions. Like every model on the site, our view uses the evaluator's best guess; the conservative case is the end of the range. Why it is more than ten times its peers: it values one event (an estimated $81,000 grant at COP26), not an organisation's work over years, through three probabilities Founders Pledge guessed; its own conservative case is 55 times lower. We keep the best guess, as for every evaluator.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "\"The ideas of economists\": two Climate Fund grants at COP26 (TerraPraxis event)",
@@ -136,7 +136,7 @@
       "label": "Cost per tonne of CO₂e avoided, Founders Pledge's conservative case",
       "format": "usd",
       "value": 1.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "expected": 1.1,
       "source": {
         "title": "Founders Pledge, \"The ideas of economists\" (Climate Fund grants at COP26, Johannes Ackva, 2021)",
@@ -144,7 +144,7 @@
         "quote": "this would mean you believe that the cost per avoided ton of CO2 would be USD 1.10/tCO2e.",
         "retrieved": "2026-10-30"
       },
-      "explainer": "Founders Pledge's figure under its \"extremely conservative\" assumptions (the rows above): \"USD 1.10/tCO2e\". The page doesn't state the grant's size, and the linked sheet models a different TerraPraxis grant (engaging the IEA), so the $1.10 is taken as stated."
+      "explainer": "Founders Pledge's figure under its \"extremely conservative\" assumptions (the rows above): \"USD 1.10/tCO2e\". The page doesn't state the grant's size, and the linked sheet models a different TerraPraxis grant (engaging the IEA), so the $1.10 is taken as stated. The evaluator's own subjective guess, filed as a judgment."
     },
     {
       "id": "implied_grant",
@@ -204,13 +204,13 @@
       "label": "Cost per tonne of CO₂e avoided, Founders Pledge's best guess",
       "format": "usd",
       "expected": 0.02,
-      "explainer": "Founders Pledge's bottom line, its best guess of $0.02 a tonne, used like every other evaluator's best guess on the site. Its conservative case, $1.10 a tonne, is the high end of the range. The best guess rests on three guessed probabilities for a single event, so the range is wide.",
+      "explainer": "Founders Pledge's bottom line, its best guess of $0.02 a tonne, used like every other evaluator's best guess on the site. Its conservative case, $1.10 a tonne, is the high end of the range. The best guess rests on three guessed probabilities for a single event, so the range is wide. The evaluator's own subjective guess, filed as a judgment.",
       "value": {
         "low": 0.02,
         "best": 0.02,
         "high": 1.1
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, \"The ideas of economists\" (Climate Fund grants at COP26, Johannes Ackva, 2021)",
         "url": "https://www.founderspledge.com/research/the-ideas-of-economists",
@@ -232,12 +232,21 @@
       "explainer": "Founders Pledge's case brings re-powering five years forward; re-powered plants need advanced reactors that are not yet commercial, so the avoided tonnes come in the 2030s or later. Best guess 10 years after the 2021 event, 5 to 20. Our judgment."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is one past grant (a COP26 event) over its effect, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e avoided per dollar",
       "format": "number",
-      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
-      "explainer": "One over the cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site."
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over the cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. A marginal dollar is counted at the shared share of the past average (row above)."
     },
     {
       "id": "fuel_share",
@@ -277,6 +286,15 @@
       "format": "number",
       "formula": "fuel_share * fuel_smoke_factor",
       "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths averted per tonne, counted directly by the evaluator (none here)",
+      "format": "small",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "A row every climate model has, which the site's conversion reads (docs/normalization.md 2.5): air-pollution deaths the evaluator counts itself, per tonne, on top of what the tonnes carry through air_pollution_weight. The evaluator counts none for this charity, so 0."
     },
     {
       "id": "staff_cost_share",

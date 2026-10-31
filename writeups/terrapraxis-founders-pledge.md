@@ -2,7 +2,7 @@
 
 TerraPraxis works to re-power existing coal plants with advanced nuclear heat, so that their sites, grid connections and jobs can outlive coal. Founders Pledge's Climate Fund paid for a TerraPraxis event at COP26. Its best guess is that the grant avoided a tonne of CO₂ for $0.02; under what it called extremely conservative assumptions, $1.10. Taking the best guess, as for every evaluator on the site, and discounting the wait until the tonnes are avoided, that is **<span data-figure="headline" data-model="terrapraxis-founders-pledge">2.1</span> years of healthy life per $1,000**.
 
-The figure is a back-of-the-envelope estimate for one event, not a model of TerraPraxis's work as a whole; it rests on three guessed probabilities.
+**Why it is more than ten times every other climate model on the site.** It isn't an organisation's work over years, like the others, but a single event (an estimated $81,000 grant), and its cost per tonne rests on three probabilities Founders Pledge guessed: how much of the world's coal emissions the event brings forward (1 in 1,000), by how many years (5), and how much paying for it philanthropically mattered (5%). Change any one and the result moves in proportion; Founders Pledge's own conservative case is 55 times lower. We keep its best guess, as for every evaluator, but read the figure as a guess about one event, not as evidence that TerraPraxis outperforms the rest.
 
 ### What the charity does
 
@@ -24,13 +24,16 @@ The site then turns tonnes into healthy years through the deaths they avoid, hea
 
 ### What drives the result
 
-- **The cost per tonne.** Founders Pledge's conservative case, $1.10 a tonne, is 55 times its best guess; three guessed probabilities for a single event set it. The result is far above every other climate model on the site, and the range is wide.
+- **The cost per tonne.** Founders Pledge's conservative case, $1.10 a tonne, is 55 times its best guess; three guessed probabilities for a single event set it (filed as judgments). That is why the result is more than ten times every other climate model on the site, and why the range is wide.
+- **How much less a marginal dollar does than this past grant's average** (50%, from 18% to 100%; our judgment, shared with every model built on a past average).
 - **The discount rate and the wait** until the tonnes are avoided.
 - **"Deaths caused by one more tonne of CO₂"** and the value of a life (Your values).
 - **How dirty the avoided coal power is** (0.2 to 1 of the average).
 
 ### Where we differ from Founders Pledge
 
+- **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
+- **A marginal dollar, not the past average.** Founders Pledge's figure is one past grant (a COP26 event) over its effect: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Discounting:** Founders Pledge doesn't discount the wait until the tonnes are avoided; we do, at the site's discount rate, as for every future benefit.
 - **Air pollution:** Founders Pledge counts only tonnes; we add the coal smoke they carry.
 - **Credit by share of resources:** off by default; when on, staff's forgone pay counts as cost.
