@@ -6,7 +6,7 @@
  "charity": "cearch",
  "owner": "ambitious-impact",
  "bulk": true,
- "summary": "Ambitious Impact's 2021 estimate for a new charity doing exploratory cause-prioritisation research, to find and promote new cause areas and interventions for effective altruist and other donors. The idea CEARCH (the Centre for Exploratory Altruism Research) was founded to run in 2022. A re-implementation of AIM's spreadsheet, traced from its five-year benefit-cost ratio, in dollars of current effective-altruist donations' worth of value per dollar spent; our bridge values those dollars like the donations they stand for. Ambitious Impact notes that 'this CEA is only comparable to other CEAs created for EA meta charities by Charity Entrepreneurship'.",
+ "summary": "Ambitious Impact's 2021 estimate for a new charity doing exploratory cause-prioritisation research, to find and promote new cause areas and interventions for effective altruist and other donors. The idea CEARCH (the Centre for Exploratory Altruism Research) was founded to run in 2022. A re-implementation of AIM's spreadsheet, traced from its five-year benefit-cost ratio, in dollars of current effective-altruist donations' worth of value per dollar spent; our bridge values each such dollar at the site's shared value of a dollar moved, from where effective donors give and each destination's live result. Ambitious Impact notes that 'this CEA is only comparable to other CEAs created for EA meta charities by Charity Entrepreneurship'.",
  "source": {
   "publisher": "Ambitious Impact (Charity Entrepreneurship)",
   "title": "EA Meta: Exploratory Altruism (CE 2021 top idea report): CEA",
@@ -30,7 +30,7 @@
    "id": "timing",
    "title": "Timing and failure",
    "kind": "ours",
-   "explainer": "charityevals' steps, not Ambitious Impact's: the sheet adds up five years of dollars without discounting and assumes the organisation succeeds."
+   "explainer": "charityevals' steps, not Ambitious Impact's: the sheet adds up five years of dollars without discounting and assumes the organisation succeeds; our view discounts and applies the site's shared chance of success for a new meta organisation."
   },
   {
    "id": "staff_pay",
@@ -39,10 +39,16 @@
    "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
   },
   {
+   "id": "moved_money",
+   "title": "Value of a dollar moved (shared)",
+   "kind": "ours",
+   "explainer": "charityevals' shared method for money a meta charity moves, the same rows in every such model (docs/normalization.md 2.8). A dollar moved is worth what the charities it reaches achieve, each at its live result on this site under your values; new money counts in full, shifted money only for the gain over where it would have gone."
+  },
+  {
    "id": "bridge",
    "title": "From dollars of EA donations to units of value (ours)",
    "kind": "ours",
-   "explainer": "charityevals' bridge, not Ambitious Impact's. Ambitious Impact counts value in dollars of top-tier effective-altruist donations. That value reaches people through the charities the donations fund, so we value each such dollar like a dollar to GiveWell's top charities, in multiples of GiveWell's benchmark, with a wide range."
+   "explainer": "charityevals' bridge, not Ambitious Impact's. Ambitious Impact counts value in dollars of top-tier effective-altruist donations. Each such dollar is valued like any dollar a meta charity moves on this site: the shared value of a dollar moved (docs/normalization.md 2.8)."
   }
  ],
  "rows": [
@@ -658,19 +664,9 @@
    "section": "timing",
    "label": "Chance the new organisation succeeds",
    "format": "percent",
-   "value": {
-    "low": 0.4,
-    "best": 0.6,
-    "high": 0.8
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Ambitious Impact, Better Futures Guide CEA (2025): probability of success from AIM's incubated charities",
-    "url": "https://docs.google.com/spreadsheets/d/1YGItQcdngy4HXZw-oUjlOWTVgO06UseqXQ9TkO3XSJo/edit",
-    "cell": "Main CEA (probability of success, 0.56)"
-   },
-   "explainer": "The sheet assumes the organisation succeeds ('did not discount for chance of organizational failure', CEA!D61), because its comparison organisations (ACE, GiveWell, Rethink Priorities) are ones that succeeded. Ambitious Impact's own later estimate for a new research and advice charity, from how its incubated charities fared, is about 56%. Our judgment 60%, range 40–80% (ours); the evaluator view uses the sheet's 100%. This overlaps partly with method 2, whose ideas already carry a yearly chance of success (2.5–40%): that is the chance an idea finds traction, this is the chance the organisation lasts to pursue it, so we apply it to both methods.",
-   "published": 1
+   "explainer": "Changed for consistency. The sheet assumes the organisation succeeds ('did not discount for chance of organizational failure', CEA!D61), because its comparison organisations (ACE, GiveWell, Rethink Priorities) are ones that succeeded. Every not-yet-proven meta organisation on the site gets one shared chance of success in our view: Ambitious Impact's own average of three methods for a new evaluator, 55.7% (range 50–63.5%, docs/normalization.md 2.8). This model used our own 60% (40–80%) before. The evaluator view uses the sheet's 100%. It overlaps partly with method 2, whose ideas already carry a yearly chance of success (2.5–40%): that is the chance an idea finds traction, this is the chance the organisation lasts to pursue it, so we apply it to both methods.",
+   "published": 1,
+   "formula": "@meta.success_chance_new_org"
   },
   {
    "id": "staff_cost_share",
@@ -729,45 +725,44 @@
    "formula": "bcr * benefit_delay_discount * perpetuity_discount * organisation_success * donor_cost_share"
   },
   {
-   "id": "cash_benchmark",
-   "section": "bridge",
-   "label": "GiveWell's benchmark (old GiveDirectly estimate), units of value per dollar",
-   "format": "number",
-   "source": {
-    "title": "GiveWell, cost-effectiveness models (updated September 2026)",
-    "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-effectiveness-models",
-    "quote": "The previous benchmark was based on GiveDirectly's flagship unconditional cash transfers program.",
-    "note": "0.00335 units of value per dollar is the benchmark's value in GiveWell's sheets, the same figure the GiveWell imports use."
-   },
-   "explainer": "GiveWell's benchmark, the value of a dollar given as cash (0.00335 units of value per dollar), read from the shared fact every \"multiple of cash\" uses.",
-   "formula": "@cash.uov_per_dollar"
+   "id": "value_global_health",
+   "section": "moved_money",
+   "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
+   "format": "small",
+   "formula": "@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives",
+   "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
   },
   {
-   "id": "ea_dollar_multiple_of_cash",
-   "section": "bridge",
-   "label": "Value of a dollar of top-tier EA donations, in multiples of GiveWell's benchmark",
-   "format": "number",
-   "value": {
-    "low": 2,
-    "best": 8,
-    "high": 15
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "GiveWell blog, We aim to cost-effectively direct around $1 billion annually by 2025 (November 2021); GiveWell, cost-effectiveness models (2026)",
-    "url": "https://blog.givewell.org/2021/11/22/we-aim-to-cost-effectively-direct-around-1-billion-annually-by-2025/",
-    "quote": "This year, we expect to identify $400 million in 8x or better opportunities. (2021) / As of May 2026, our bar for funding programs is 6x our benchmark. (2026)",
-    "note": "2026 bar: GiveWell, cost-effectiveness models, https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-effectiveness-models"
-   },
-   "explainer": "CEARCH's value reaches people through the charities the money it influences goes to. Ambitious Impact counts the value in 'equivalent donations to today's current top-tier EA charities', and warns that 'this CEA is only comparable to other CEAs created for EA meta charities by Charity Entrepreneurship'. To put such dollars on the site's scale we value them like donations to GiveWell's top charities at the time of Ambitious Impact's 2021 report: GiveWell then funded opportunities at '8x or better' its benchmark, so the best guess is 8 (its bar is 6 today). Low end 2: part of top-tier EA money goes to animal welfare and longtermist work, which has no agreed value on this scale, so we allow for these dollars being worth much less here than GiveWell's bar. High end 15: GiveWell's current model of the Against Malaria Foundation, as imported on this site, comes to about 0.049 units of value per dollar, 15 times the benchmark. The bridge and its range are ours, not Ambitious Impact's."
+   "id": "value_animals",
+   "section": "moved_money",
+   "label": "Value of a dollar to animal charities (ACE's Recommended Charities, live), units of value",
+   "format": "small",
+   "formula": "avg(#animal-welfare-observatory, #aquatic-life-institute, #ciftlik-hayvanlarini-koruma-dernegi, #dansk-vegetarisk-forening, #good-food-fund, #shrimp-welfare-project, #sinergia-animal, #sociedade-vegetariana-brasileira, #the-humane-league, #wild-animal-initiative)",
+   "explainer": "Animal Charity Evaluators' ten Recommended Charities (November 2025), each at its result on this site under your values (species weights and the chicken slider included), with equal weights: ACE's Recommended Charity Fund spreads money across all of them and publishes no fixed split."
+  },
+  {
+   "id": "value_longtermist",
+   "section": "moved_money",
+   "label": "Value of a dollar to longtermist charities, units of value (not valued: 0)",
+   "format": "small",
+   "formula": "@meta.value_longtermist",
+   "explainer": "Said openly: the site has no model that puts reducing catastrophic risk on its scale, so this part of the money counts as nothing."
+  },
+  {
+   "id": "moved_dollar_value",
+   "section": "moved_money",
+   "label": "Value of a dollar moved, units of value",
+   "format": "small",
+   "formula": "(@meta.dest_share_human * value_global_health + @meta.dest_share_animals * value_animals + @meta.dest_share_longtermist * value_longtermist) / (@meta.dest_share_human + @meta.dest_share_animals + @meta.dest_share_longtermist)",
+   "explainer": "Where effective donations go when donors choose the cause (Giving What We Can, 2020–2022: about 60% human wellbeing, 10% animals, 10% longtermist causes, 20% unknown or several), each part at its live value. The unknown part is valued at the average of the known ones, so it drops out of the mix."
   },
   {
    "id": "uov_per_dollar",
    "section": "bridge",
    "label": "Units of value per dollar you give",
    "format": "small",
-   "formula": "ea_dollars_per_donor_dollar * ea_dollar_multiple_of_cash * cash_benchmark",
-   "explainer": "Dollars of EA-donation value per dollar, valued like donations to GiveWell's top charities, in GiveWell's units of value. The headline turns units of value into healthy years at the shared rate."
+   "formula": "ea_dollars_per_donor_dollar * moved_dollar_value",
+   "explainer": "Changed for consistency. Ambitious Impact counts value in dollars of 'equivalent donations to today's current top-tier EA charities', already net of what the money would have done anyway. Each such dollar is worth what a dollar moved by any meta charity is worth on this site: the shared value of a dollar moved, from where effective donors give (global health, animals, longtermist causes) and each destination's live result. This model used to value it at 8 times GiveWell's cash benchmark (our judgment, 2 to 15); the shared method replaces that multiple. The headline turns units of value into healthy years at the shared rate."
   }
  ],
  "output": {

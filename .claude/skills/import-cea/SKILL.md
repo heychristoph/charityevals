@@ -113,6 +113,8 @@ become the range.
   `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
   "changed for consistency" explainer. A concept two models use with different values and no shared
   version gets a new shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
+  A model whose outcome mixes kinds (AIM's "DALY-equivalents" folding in income and deaths) is split
+  into its parts, each converted with our rates.
 - Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
 - Counterfactuals that subtract what the founders or the money would have done elsewhere are not
   used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
@@ -125,6 +127,14 @@ become the range.
 - **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
   `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
   rate stays and `$discount_rate` goes on top (INV-9b). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
+- **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
+  moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of
+  cash, counterfactual share or success chance in our view. Write the shared rows with
+  `python3 scripts/moved-money.py <model> <mix|global-health> [net]` (destinations read live with
+  `#model-id`) and multiply money moved by `moved_dollar_net_value` (or a result already in counterfactual
+  "EA dollars" by `moved_dollar_value`); a new organisation's chance of success reads
+  `@meta.success_chance_new_org`, the evaluator's figure in `published`. Career changes use the shared
+  `career_change_value`.
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,

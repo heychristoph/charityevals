@@ -63,7 +63,7 @@ export function shapeOf(n: Node): Shape {
  * holds the reader's edits, facts under "@key" as in compute. */
 export function lookupFor(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View, inputs: Record<string, number> = {}): Lookup {
   const a = viewAssumptions(m, av, view);
-  return (scope, name) => (scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value));
+  return (scope, name) => (scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : scope === "model" ? values[`#${name}`] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value));
 }
 
 function replace(n: Node, target: Node, by: Node): Node {
@@ -113,7 +113,7 @@ export const valueOfNode = safe;
  * 1 - x equals x at 0.5 and still reverses it. `via` lists the rows skipped. */
 export type Target =
   | { scope: "row"; id: string; via: string[] }
-  | { scope: "assumption" | "fact"; id: string; via: string[] };
+  | { scope: "assumption" | "fact" | "model"; id: string; via: string[] };
 
 export function passThrough(m: ResolvedModel, rowId: string, look: Lookup): Target {
   const via: string[] = [];
@@ -165,12 +165,12 @@ export type TreeNode = {
   key: string;
   /** How this joins its parent: "×", "÷", "+", "−"… */
   op?: string;
-  type: "row" | "input" | "assumption" | "fact" | "const" | "expr";
+  type: "row" | "input" | "assumption" | "fact" | "model" | "const" | "expr";
   /** The row it shows (row and input), the first row named in the parent's formula, and rows skipped. */
   rowId?: string;
   named?: string;
   via: string[];
-  /** Assumption or fact id. */
+  /** Assumption or fact id, or the id of the model read live. */
   refId?: string;
   /** The formula this node's value comes from, when it has parts. */
   expr?: Node;
@@ -234,7 +234,7 @@ export function pathTo(m: ResolvedModel, rowId: string, look: Lookup, toCommon?:
 }
 
 /** The same for an assumption or a shared fact: the first node that reads it. */
-export function pathToRef(m: ResolvedModel, scope: "assumption" | "fact", id: string, look: Lookup, toCommon?: string): string[] | undefined {
+export function pathToRef(m: ResolvedModel, scope: "assumption" | "fact" | "model", id: string, look: Lookup, toCommon?: string): string[] | undefined {
   return pathToNode(m, look, toCommon, (n) => n.type === scope && n.refId === id);
 }
 
