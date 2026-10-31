@@ -271,6 +271,7 @@ def main():
                     FX_FILE.write_text(json.dumps(fx, indent=2, ensure_ascii=False) + "\n")
     ratio_income(files, log)
     deworming_multiples(files, log)
+    policy_years(files, log)
     for p, m, ind in files:
         p.write_text(json.dumps(m, indent=ind, ensure_ascii=False) + "\n")
     FACT_FILE.write_text(json.dumps({"id": "givewell_shared", "label": "GiveWell's house constants (one figure for every GiveWell model)", "rows": facts}, indent=2, ensure_ascii=False) + "\n")
@@ -343,6 +344,54 @@ def deworming_multiples(files, log):
         native["formula"] = f"({native['formula']}) * deworming_value_at_shared_values"
         rows.insert(rows.index(native), new)
         log.append(f"deworm  {m['id']}:{nat} x deworming_value_at_shared_values")
+
+
+POLICY_MODELS = ["vital-strategies-model", "vital-strategies-botec-breakeven", "centre-for-pesticide-suicide-prevention-cpsp-skeleton"]
+POLICY_YEARS = re.compile(r"^(Number of years brought forward|Number of years by which .* accelerate policy change|"
+                          r"(Alcohol tax|Advertising restrictions|Drunk.driving countermeasures|Reducing days and hours of sale) \(Base\))", re.I)
+
+
+def policy_years(files, log):
+    """GiveWell's policy sheets credit a won law or regulation with the years it is brought forward (Open
+    Philanthropy's default of 10 for Vital Strategies' alcohol policies, 9 for CPSP's pesticide bans). Our view
+    reads the one slider every won reform reads, `$win_years_counted` (docs/normalization.md 2.9), the sheet's
+    years in `published`; the years are discounted (`pv_annuity_due` at `$discount_rate`, 0 in `published`),
+    and so is the wait until the policy takes effect (`policy_years_until_effect`, our judgment, discounted
+    by `policy_wait_discount`, 1 in `published`)."""
+    for p, m, ind in files:
+        if m["id"] not in POLICY_MODELS: continue
+        rows = m["rows"]
+        if any(r["id"] == "policy_wait_discount" for r in rows): continue
+        leaves = [r for r in rows if POLICY_YEARS.search(r.get("label", "")) and "value" in r]
+        for r in leaves:
+            old = r.pop("value"); r.pop("kind", None); r.pop("expected", None)
+            r["formula"] = "$win_years_counted"; r["published"] = old
+            r["explainer"] = (f"Changed for consistency. GiveWell credits the policy with {short(best(old))} years brought forward. Every model that "
+                              "credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform "
+                              "counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
+                              + ("\n\n" + r["explainer"] if r.get("explainer") else ""))
+        sec = next((r.get("section") for r in rows if r["id"].startswith("number_of_years_brought_forward")), leaves[0].get("section"))
+        anchor = next(i for i, r in enumerate(rows) if r.get("section") == sec)
+        new = []
+        if not any(r["id"] == "years_discount_rate" for r in rows):
+            new.append({"id": "years_discount_rate", "label": "Discount rate on the years of benefit", "section": sec, "formula": "$discount_rate", "published": 0, "format": "percent",
+                        "explainer": "Changed for consistency. The sheet adds up the years a policy is brought forward at face value; the site discounts every future benefit at your discount rate (Timing, under Your values). The evaluator view keeps 0."})
+        new += [
+            {"id": "policy_years_until_effect", "label": "Years from the grant until the policy takes effect", "section": sec, "unit": "years",
+             "value": {"low": 1, "best": 3, "high": 5}, "kind": "judgment",
+             "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."},
+            {"id": "policy_wait_discount", "label": "Discount for the wait until the policy takes effect", "section": sec,
+             "formula": "(1 + $discount_rate) ^ -policy_years_until_effect", "published": 1, "format": "number",
+             "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."}]
+        for k, r in enumerate(new): rows.insert(anchor + k, r)
+        n = 0
+        for r in rows:
+            f = r.get("formula", "")
+            if "pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward" in f:
+                r["formula"] = f"{f} * policy_wait_discount"; n += 1
+            elif re.search(r"(?<!\w)number_of_years_brought_forward\w*(?!\w)", f) and r["id"].startswith("expected_lives_saved"):
+                r["formula"] = re.sub(r"(?<![\w(, ])(number_of_years_brought_forward\w*)", r"pv_annuity_due(1, years_discount_rate, \1) * policy_wait_discount", f); n += 1
+        log.append(f"policy  {m['id']}: {len(leaves)} years rows -> $win_years_counted, {n} benefit rows discounted")
 
 
 if __name__ == "__main__":
