@@ -46,6 +46,19 @@
         "retrieved": "2026-10-26"
       },
       "explainer": "How much each other household member benefits when one person is treated, relative to the person treated. HLI's 16% rests on a handful of studies. The range is ours: below 5% the spillover is negligible; 30% is about what HLI estimated for cash transfers."
+    },
+    {
+      "id": "uov_per_wellby_anchor",
+      "label": "Units of value per WELLBY at which depression counts the same as by its GBD weights (the WELLBY slider's default)",
+      "unit": "units of value / WELLBY",
+      "format": "number",
+      "value": 0.130563,
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' calibration (docs/normalization.md 2.3)",
+        "note": "PHQ-9 SD 4.211710187 (depression.phq9_sd) × 0.031 healthy years per PHQ-9 point-year (depression.dalys_per_phq9_point_year) × 2 units of value per healthy year (the default of \"Healthy year vs doubled-income year\") ÷ 2 WELLBYs per SD-year (wellby_factors.wellbys_per_sd_year) = 0.130563. src/engine/wellby-calibration.test.ts fails if it drifts from those figures or from the slider's default."
+      },
+      "explainer": "The rate at which one standard deviation of depression for a year is worth the same whether it goes through HLI's WELLBYs (2 WELLBYs) or through the Global Burden of Disease weights on the PHQ-9 (4.2 points × 0.031 = 0.13 healthy years): 0.13 doubled-income years per WELLBY, the default of the WELLBY slider.\n\nHLI models that count deaths read it once, to put a death valued the site's way (GiveWell's moral weights by age, times the value-of-life slider) into WELLBYs: at the slider's default such a death counts exactly what it counts in every other model. A model row may not read the slider itself (the exchange rate belongs to the unit's conversion), so the anchor stands in for it."
     }
   ]
 }
