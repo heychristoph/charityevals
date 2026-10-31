@@ -36,7 +36,7 @@ DEATHS = {
     "respira-health-aim": {"years_of_life_gained_per_copd_death_averted": ("50_74", "people hospitalised with COPD, whom AIM's sheet gives 6.1 years of life left; GiveWell publishes no older band")},
 }
 COST_RATES = {
-    "better-season-project-aim": ["discount_rate_for_fixed_costs_keep_fixed_in_all_ceas"],
+    # better-season-project-aim keeps AIM's 4% for costs: scripts/aim-bsp-farm-rate.py and the INV-2c waiver say why.
     "first-embrace-aim": ["discount_rate_for_fixed_costs_keep_fixed_in_all_ceas"],
     "labri-aim": ["discount_rate_for_fixed_costs_keep_fixed_in_all_ceas"],
     "lead-research-for-action-aim": ["discount_rate_for_fixed_costs_keep_fixed_in_all_ceas"],
