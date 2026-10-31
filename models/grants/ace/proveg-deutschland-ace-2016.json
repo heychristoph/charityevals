@@ -21,7 +21,8 @@
     "assumptions": {
       "resource_shares": 0,
       "chicken_vs_person": 0.463966,
-      "rp_species_weights": 0
+      "rp_species_weights": 0,
+      "discount_rate": 0
     }
   },
   "resources": [
@@ -42,6 +43,11 @@
       "id": "model",
       "title": "Model",
       "explainer": "VEBU provided budget and accomplishments information from 2015 and estimated accomplishments information from 2016.  Estimates in this sheet are made by Animal Charity Evaluators for the full year of 2015 unless otherwise noted.\n\nRead ACE's 2016 [review](https://animalcharityevaluators.org/research/charity-review/vebu/) of VEBU.\n"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not ACE's. ACE counts a year of changed meals the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so ACE's numbers reproduce."
     },
     {
       "id": "donor",
@@ -396,13 +402,13 @@
       "id": "animals_spared_per_dollar_by_corporate_policies",
       "label": "Animals spared per dollar by corporate policies",
       "section": "model",
-      "formula": "meals_affected_per_year_by_policies_influenced_in*years_of_change_accounted_for*animals_spared_per_meal/corporate_outreach_and_labeling_cost"
+      "formula": "meals_affected_per_year_by_policies_influenced_in*discounted_years_of_change*animals_spared_per_meal/corporate_outreach_and_labeling_cost"
     },
     {
       "id": "years_of_suffering_spared_per_dollar_by_corporate_2",
       "label": "Years of suffering spared per dollar by corporate policies",
       "section": "model",
-      "formula": "meals_affected_per_year_by_policies_influenced_in*years_of_change_accounted_for*years_of_suffering_spared_per_meal/corporate_outreach_and_labeling_cost"
+      "formula": "meals_affected_per_year_by_policies_influenced_in*discounted_years_of_change*years_of_suffering_spared_per_meal/corporate_outreach_and_labeling_cost"
     },
     {
       "id": "animals_spared_per_dollar_by_corporate_outreach_an",
@@ -637,6 +643,30 @@
       "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe account for a limited term of change, because organizations may revise their practices again or may have adopted the practice later without VEBU's influence. We think it is unlikely that most institutions would retain a practice for less than a full year, and in the US we're aware of institutional policy changes lasting at least 4 years (for programs started about 4 years ago)."
     },
     {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). ACE's 2016 model doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits spread over years can be discounted smoothly rather than in yearly steps."
+    },
+    {
+      "id": "discounted_years_of_change",
+      "section": "discounting",
+      "label": "Years of change accounted for, discounted",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, (1 - exp(-continuous_discount_rate * years_of_change_accounted_for_2)) / continuous_discount_rate, years_of_change_accounted_for_2)",
+      "explainer": "ACE multiplies the meals a policy or a trained caterer changes each year by the years of change, counting every year the same. In our view later years count less at the discount rate: this is the present value of one year's change a year over that many years (equal to the years at a 0% rate; 3.6 instead of 3.9 at 4%)."
+    },
+    {
       "id": "average_meals_affected_per_institution_per_year",
       "label": "Average meals affected per institution per year",
       "section": "model",
@@ -691,13 +721,13 @@
       "id": "animals_spared_per_dollar_by_caterer_training",
       "label": "Animals spared per dollar by caterer training",
       "section": "model",
-      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*years_of_change_accounted_for_2*animals_spared_per_meal_2)/institutional_outreach_cost"
+      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*discounted_years_of_change*animals_spared_per_meal_2)/institutional_outreach_cost"
     },
     {
       "id": "years_of_suffering_spared_per_dollar_by_caterer_tr",
       "label": "Years of suffering spared per dollar by caterer training",
       "section": "model",
-      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*years_of_change_accounted_for_2*years_of_suffering_spared_per_meal_2)/institutional_outreach_cost"
+      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*discounted_years_of_change*years_of_suffering_spared_per_meal_2)/institutional_outreach_cost"
     },
     {
       "id": "social_media_proportion_of_programs",
