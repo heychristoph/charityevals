@@ -126,18 +126,14 @@
       "section": "funding",
       "label": "Years of additional funding brought about by CfRN",
       "format": "number",
-      "value": {
-        "low": 1.0,
-        "best": 3.0,
-        "high": 6.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
         "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
         "cell": "CfRN past impact!C8:E8"
       },
-      "explainer": "How many years earlier REDD+ funding started because CfRN put forests into the UN climate talks. Founders Pledge's subjective estimate; see the CfRN past-impact appendix of its 2018 climate report."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CfRN brought about three years of additional REDD+ funding (and of the national plans) (its range 1.0–6.0), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 3.0
     },
     {
       "id": "elasticity_adjustment",

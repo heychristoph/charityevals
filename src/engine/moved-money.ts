@@ -27,9 +27,9 @@ export const MOVED_MONEY_SECTION = {
 
 /** GiveWell's four Top Charities, read live, weighted by GiveWell's 2024 funding. */
 export const GLOBAL_HEALTH_DESTINATIONS = ["against-malaria-foundation", "malaria-consortium-smc", "helen-keller-vas", "new-incentives"];
-/** Animal Charity Evaluators' ten Recommended Charities (November 2025), read live. ACE's Recommended
- * Charity Fund publishes no per-charity split yet (facts/ace_fund_weights.json doesn't exist), so the
- * median, not the mean: one charity's result (Sinergia Animal) doesn't set the whole cause. */
+/** Animal Charity Evaluators' ten Recommended Charities (November 2025), read live, weighted by what ACE's
+ * Recommended Charity Fund paid each in its February and August 2026 rounds (facts/ace_fund_weights.json,
+ * row id = model id with underscores). */
 export const ANIMAL_DESTINATIONS = [
   "animal-welfare-observatory", "aquatic-life-institute", "ciftlik-hayvanlarini-koruma-dernegi", "dansk-vegetarisk-forening",
   "good-food-fund", "shrimp-welfare-project", "sinergia-animal", "sociedade-vegetariana-brasileira", "the-humane-league",
@@ -68,7 +68,7 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
 export type TemplateRow = { id: string; label: string; format: "small" | "percent"; formula: string; explainer: string };
 
 const gh = `@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives`;
-const aw = `median(${ANIMAL_DESTINATIONS.map((id) => `#${id}`).join(", ")})`;
+const aw = ANIMAL_DESTINATIONS.map((id) => `@ace_fund_weights.${id.replace(/-/g, "_")} * #${id}`).join(" + ");
 const lw = `avg(${LIVELIHOODS_DESTINATIONS.map((id) => `#${id}`).join(", ")})`;
 const tl = `(${TLYCS_DESTINATIONS.map(([k, id]) => `@meta.tlycs_moved_2025_${k} * #${id}`).join(" + ")}) / (${TLYCS_DESTINATIONS.map(([k]) => `@meta.tlycs_moved_2025_${k}`).join(" + ")})`;
 
@@ -80,8 +80,8 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   },
   value_animals: {
     id: "value_animals", format: "small", formula: aw,
-    label: "Value of a dollar to animal charities (ACE's Recommended Charities, live, median), units of value",
-    explainer: "Animal Charity Evaluators' ten Recommended Charities (November 2025), each at its result on this site under your values (species weights and the chicken slider included). ACE's Recommended Charity Fund publishes no split by charity, so the median of the ten stands in for where a dollar to it goes, not the mean: the mean would be three quarters one charity (Sinergia Animal).",
+    label: "Value of a dollar to animal charities (ACE's Recommended Charities, live, weighted by ACE's fund), units of value",
+    explainer: "Animal Charity Evaluators' ten Recommended Charities (November 2025), each at its result on this site under your values (species weights and the chicken slider included), weighted by what ACE's Recommended Charity Fund actually paid each in February and August 2026 ($3.26 million: Wild Animal Initiative 16%, The Humane League 16%, Sinergia Animal 15%, Dansk Vegetarisk Forening 13%, the rest 4–8% each), in place of equal weights.",
   },
   value_longtermist: {
     id: "value_longtermist", format: "small", formula: "@meta.value_longtermist",

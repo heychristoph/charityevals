@@ -38,6 +38,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 
 ### Where we differ from Founders Pledge
 
+- **Years a won reform counts.** Founders Pledge credits CfRN with three years of additional REDD+ funding and national plans. Our view reads the shared "Years a won reform counts before it would have come anyway" (5 by default, 1 to 20), like every model that credits a won reform (docs/normalization.md 2.9), each year after the first discounted at the shared rate. Founders Pledge's 3 stays in the evaluator view.
 - **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
 - **A marginal dollar, not the past average.** Founders Pledge's figure is CfRN's 2004–17 budget over the REDD+ funding it helped bring about: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Tonnes become healthy years** through the shared climate rate. Founders Pledge stops at dollars per tonne.

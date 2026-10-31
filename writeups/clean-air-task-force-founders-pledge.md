@@ -1,6 +1,6 @@
 ### Summary
 
-Clean Air Task Force (CATF) is a US-based research and advocacy group that pushes for rules and technology to cut greenhouse gases and air pollution. Founders Pledge estimated in 2018 that its past work kept a tonne of CO₂-equivalent out of the air for about $1.26. It also credits CATF with about 26,000 US deaths from coal-plant air pollution avoided. On our scale that is **<span data-figure="headline" data-model="clean-air-task-force-founders-pledge">1.3</span> years of healthy life per $1,000**, counting both: the heat deaths the tonnes would cause, which come decades from now and are discounted like any future good, and Founders Pledge's own count of air-pollution deaths, each valued by the age it comes at. The deaths are most of it. A marginal dollar is counted at half of what CATF's past average dollar achieved (our judgment, see "Where we differ").
+Clean Air Task Force (CATF) is a US-based research and advocacy group that pushes for rules and technology to cut greenhouse gases and air pollution. Founders Pledge estimated in 2018 that its past work kept a tonne of CO₂-equivalent out of the air for about $1.26. It also credits CATF with about 26,000 US deaths from coal-plant air pollution avoided. On our scale that is **<span data-figure="headline" data-model="clean-air-task-force-founders-pledge">4.2</span> years of healthy life per $1,000**, counting both: the heat deaths the tonnes would cause, which come decades from now and are discounted like any future good, and Founders Pledge's own count of air-pollution deaths, each valued by the age it comes at. The deaths are most of it. Each rule counts for the site's shared number of years a won reform counts (5 by default), and a marginal dollar at half of what CATF's past average dollar achieved (our judgment, see "Where we differ").
 
 The model reproduces all 22 of Founders Pledge's calculated figures in its spreadsheet.
 
@@ -35,11 +35,12 @@ The site then turns these tonnes into years of healthy life through the heat dea
 - **Founders Pledge's count of US air-pollution deaths** and the value of a life (Your values): most of the result.
 - **How much less a marginal dollar does than CATF's past average** (50%, from 18% to 100%; our judgment).
 - **Deaths caused by one more tonne of CO₂**, a value you set: it moves the tonnes' part.
-- **How many years earlier each policy came because of CATF** (1.5 years for the coal rules, about 1 and 3 for the methane rules, 1.5 for carbon capture): Founders Pledge's judgments, with its own pessimistic and optimistic cases.
+- **How many years each won rule counts** ("Years a won reform counts", 5 by default, 1 to 20, Your values): Founders Pledge's own were 1.5 years for the coal rules, about 1 and 3 for the methane rules, 1.5 for carbon capture.
 - **The share of CATF's impact the three campaigns cover** (70%, between 50% and 90%).
 
 ### Where we differ from Founders Pledge
 
+- **Years a won reform counts.** Founders Pledge credits each policy for the years CATF brought it forward (1.5 for the power-plant rules and carbon capture, about 1 and 3 for the methane rules). Our view reads the shared "Years a won reform counts before it would have come anyway" (5 by default, 1 to 20), like every model that credits a won reform (docs/normalization.md 2.9), each year after the first discounted at the shared rate; the deaths and the tonnes both scale with it. Founders Pledge's years stay in the evaluator view.
 - **Tonnes become healthy years** through the shared climate rate. Founders Pledge stops at dollars per tonne.
 - **Every tonne counts for its heat deaths**, discounted over the decades until they come. Methane and carbon capture don't cut fuel smoke; the coal retirements' smoke is in Founders Pledge's death count, which we add.
 - **Future deaths are discounted.** Rethink Priorities counts the heat deaths to 2300 without discounting; like every model on the site, ours discounts future good at the shared rate. At 0% the result would be about 1.3.

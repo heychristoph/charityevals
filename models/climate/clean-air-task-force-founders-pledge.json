@@ -136,18 +136,14 @@
       "section": "so2_nox",
       "label": "CATF brought the regulation forward by (years)",
       "format": "number",
-      "value": {
-        "low": 0.75,
-        "best": 1.5,
-        "high": 4.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
         "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
         "cell": "CATF past impact!D9:F9"
       },
-      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work (pessimistic 0.75, realistic 1.5, optimistic 4). Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report. The same figure is used for the mercury rules and the coal retirements below."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CATF brought the SO₂/NOx and mercury rules and the coal retirements forward by 1.5 years (its range 0.75–4.0), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 1.5
     },
     {
       "id": "gas_price_adjustment",
@@ -374,18 +370,14 @@
       "section": "methane",
       "label": "CATF brought the 2012 regulation forward by (years)",
       "format": "number",
-      "value": {
-        "low": 0.25,
-        "best": 0.9166,
-        "high": 1.83
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
         "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
         "cell": "CATF past impact!D38:F38"
       },
-      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CATF brought the 2012 methane rule forward by 0.92 years (its range 0.25–1.83), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 0.9166
     },
     {
       "id": "methane_2012_tonnes",
@@ -433,18 +425,14 @@
       "section": "methane",
       "label": "CATF's counterfactual impact on the 2016 rule (years)",
       "format": "number",
-      "value": {
-        "low": 2.0,
-        "best": 3.0,
-        "high": 5.5
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
         "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
         "cell": "CATF past impact!D42:F42"
       },
-      "explainer": "Founders Pledge's estimate of how many years earlier the rule came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CATF brought the 2016 methane rule forward by 3 years (its range 2.0–5.5), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 3.0
     },
     {
       "id": "methane_2016_tonnes",
@@ -503,18 +491,14 @@
       "section": "ccs",
       "label": "CATF brought the legislation forward by (years)",
       "format": "number",
-      "value": {
-        "low": 0.7,
-        "best": 1.5,
-        "high": 3.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Clean Air Task Force CEA (2018 climate report)",
         "url": "https://docs.google.com/spreadsheets/d/1q6srpmt5VkdXLGfYzqHqkU3hvGUwPKjA67uxqYI0Upw/edit#gid=0",
         "cell": "CATF past impact!D52:F52"
       },
-      "explainer": "Founders Pledge's estimate of how many years earlier the carbon capture tax credit (the FUTURES Act, later 45Q) came because of CATF's work. Founders Pledge's subjective input; see the CATF past-impact appendix of its 2018 climate report."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CATF brought the carbon capture tax credit forward by 1.5 years (its range 0.7–3.0), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 1.5
     },
     {
       "id": "ccs_tonnes_averted",
@@ -678,12 +662,29 @@
       "kind": "judgment"
     },
     {
+      "id": "deaths_per_year_forward",
+      "section": "per_dollar",
+      "label": "US air-pollution deaths averted per year a rule is brought forward (scaled to all of CATF's impact)",
+      "format": "integer",
+      "formula": "(annual_reduction_deaths * gas_price_adjustment + mats_annual_deaths) / case_study_share",
+      "explainer": "Founders Pledge's deaths before they are multiplied by the years each rule was brought forward: the SO₂/NOx rules' yearly deaths (after its gas-price adjustment) and the mercury rule's, scaled up like everything else by the share of CATF's impact the case studies cover."
+    },
+    {
+      "id": "tonnes_per_year_forward",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per year a policy is brought forward (scaled to all of CATF's impact)",
+      "format": "integer",
+      "formula": "(annual_coal_generation_twh * (coal_emissions_factor - gas_emissions_factor) * 1000000 + nsps_2012_annual * nsps_2012_implementation + nsps_2016_annual * nsps_2016_effectiveness + ccs_annual) / case_study_share",
+      "explainer": "Founders Pledge's tonnes before they are multiplied by the years each policy was brought forward: coal retirements net of gas, the two methane rules and the carbon capture credit, scaled up the same way."
+    },
+    {
       "id": "extra_deaths_per_tco2e",
       "section": "per_dollar",
       "label": "US air-pollution deaths averted per tonne (Founders Pledge's own count)",
       "format": "small",
-      "formula": "adjusted_deaths_averted / adjusted_tonnes_averted",
-      "explainer": "Founders Pledge counts about 26,000 US deaths from coal-plant fine particles, sulphur dioxide and mercury averted by the rules CATF brought forward (rows above), next to its 117 million tonnes. The site's conversion values each of these deaths like every air-pollution death (by the ages air pollution kills at, times the value-of-life slider) and adds them to the tonnes' own deaths, so the model carries both outcomes FP counted (docs/normalization.md 2.5). Per tonne, so they share the tonnes' wait and credit steps. They don't scale with \"Deaths caused by one more tonne of CO₂\": they are counted deaths, not a rate per tonne."
+      "formula": "deaths_per_year_forward / tonnes_per_year_forward",
+      "explainer": "Founders Pledge counts about 26,000 US deaths from coal-plant fine particles, sulphur dioxide and mercury averted by the rules CATF brought forward (rows above), next to its 117 million tonnes. The site's conversion values each of these deaths like every air-pollution death (by the ages air pollution kills at, times the value-of-life slider) and adds them to the tonnes' own deaths, so the model carries both outcomes FP counted (docs/normalization.md 2.5). Taken per year brought forward (rows above): every policy now counts the same shared number of years (\"Years a won reform counts\"), so the ratio doesn't depend on it, and the conversion reads no shared value. The evaluator view keeps Founders Pledge's own ratio (26,006 deaths over 116.7 million tonnes), its policies' years differing. Per tonne, so they share the tonnes' wait and credit steps. They don't scale with \"Deaths caused by one more tonne of CO₂\": they are counted deaths, not a rate per tonne.",
+      "published": 0.000222937097
     },
     {
       "id": "staff_cost_share",

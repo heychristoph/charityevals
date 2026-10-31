@@ -234,10 +234,52 @@ tonnes carry, in one row the conversion reads:
 
 ```
 heat factor   = (1 + $discount_rate) ^ -$climate_heat_death_delay
-healthy years = tonnes × $deaths_per_tco2e
-                × ($climate_heat_share × heat factor + (1 − $climate_heat_share) × air_pollution_weight)
-                × @moral_weights.uov_per_death_over5 × $life_value_multiplier / $uov_per_daly
+V_heat        = Σ_band @death_ages.heat_share_<band> × @moral_weights.<band>           (59.7 UoV)
+V_air         = Σ_band @death_ages.air_pollution_share_<band> × @moral_weights.<band>  (47.6 UoV)
+healthy years = tonnes × [ $deaths_per_tco2e × $climate_heat_share × heat factor × (1 + @climate.nondeath_damages_vs_deaths) × V_heat
+                         + ($deaths_per_tco2e × (1 − $climate_heat_share) × air_pollution_weight + extra_deaths_per_tco2e) × V_air ]
+                × $life_value_multiplier / $uov_per_daly
 ```
+
+**Deaths by age (late October 2026).** Each death is valued by the age it comes at, like every death on the
+site (decision 2026-10-31 #4): GiveWell's moral weights by age (`@moral_weights`: under five 116.25, 5–14 134,
+15–49 104, 50–74 42, and 42 above 74 for want of an older band) over the ages of the deaths (facts/death_ages.json,
+GBD 2023 via Our World in Data: heat deaths 7% under five, 2% 5–14, 17% 15–49, 74% 50 and over; ambient
+air-pollution deaths 3%, 0.2%, 5%, 92%). Today's heat-death ages stand in for the late-century deaths (our
+judgment; older populations then would lower the value a little). Before: every death at GiveWell's all-ages
+value for malaria deaths over five, 73.19. Heat deaths ×0.82, air-pollution deaths ×0.65. The same ages value the
+deaths inside Ambitious Impact's GBD DALYs (Neev's kiln smoke, Concentric's tobacco, ARMoR's resistant
+infections): our view splits each DALY into its illness part (`@death_ages.*_yld_share`, a judgment) and the
+deaths behind the rest (`@death_ages.*_deaths_per_daly`, GBD 2023 / GRAM 2021), valued by age ×
+`$life_value_multiplier` (row `gbd_daly_revaluation`, `published` 1), so the value-of-life slider moves them too.
+
+**Deaths an evaluator counts itself** (`extra_deaths_per_tco2e`, a row every climate model has, 0 unless the
+evaluator counts deaths): Founders Pledge counts about 26,000 US coal-plant air-pollution deaths for Clean Air Task
+Force beside its tonnes. They are added per tonne at the air-pollution value, so they share the tonnes' wait and
+credit steps, move with the value of a life and not with `$deaths_per_tco2e` (a waiver records that for INV-10).
+The row is taken per year brought forward, so it reads no shared value (INV-2b). CATF's `air_pollution_weight` is
+0: its coal retirements' smoke is inside Founders Pledge's death count.
+
+**Judgments, labelled.** Damage that isn't death counts as 0 (`@climate.nondeath_damages_vs_deaths`, judgment,
+range to the social cost of carbon's 1.06), a visible factor on the heat part. A cost per tonne that is an
+organisation's past budget over its past wins is an average; the models built that way (Clean Air Task Force,
+Coalition for Rainforest Nations, Carbon180, Evergreen 2021, Future Cleantech Architects, Good Food Institute,
+Industrious Labs, Opportunity Green, Terrapraxis) multiply tonnes per dollar by the one shared
+`@meta.marginal_vs_past_average` (judgment, 50%, 18–100%), the same figure as The Life You Can Save's leverage
+(`published` 1). Evergreen 2023 (a projected budget) and Woodland Trust (cost per tree delivered) don't take it.
+Evaluators' subjective best guesses (Terrapraxis's and Industrious Labs' cost per tonne, Evergreen's budget share
+and years, Carbon180's spending shares) are filed as `judgment`. Won policies (CATF's rules and credit, CfRN's
+REDD+ years) count `$win_years_counted` years, discounted (2.9).
+
+**Terrapraxis is more than ten times its peers** because it values a single event (an implied $81,000 grant), not
+an organisation's work, through three probabilities Founders Pledge guessed; its own conservative case is 55×
+lower. Best guess kept, the reason stated on the model and write-up.
+
+Before → after (healthy years per $1,000, our view at the defaults): Clean Air Task Force 0.12 → 4.2 (its US deaths
+counted, 1.3; then 5 years per won rule); Coalition for Rainforest Nations 0.55 → 0.34; Carbon180 0.19 → 0.076;
+Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 2.2 → 0.78; Good Food Institute 0.019
+→ 0.0077; Industrious Labs 0.86 → 0.30; Opportunity Green 3.0 → 0.99; Terrapraxis 77.6 → 25.7; Woodland Trust
+0.0029 → 0.0024. Neev 2.0 → 1.9, Concentric Policies 17.4 → 14.7, ARMoR 9.1 → 8.1 (evaluator views unchanged).
 
 - `air_pollution_weight` (a row of the model, fixed id): the air-pollution deaths each of the model's
   tonnes avoids, as a multiple of the fossil-fuel average behind Rethink's rate (1.46 per 10,000
@@ -282,8 +324,8 @@ healthy years = tonnes × $deaths_per_tco2e
   find them "concentrated at the end of the century"; no source gives the year-by-year profile. At 4%
   a heat death 60 years away counts 0.095 of one today. This applies the site's rule that every
   model discounts future good at `$discount_rate`; at 0% the units give Rethink's undiscounted values.
-- `@moral_weights.uov_per_death_over5` (73.1914): GiveWell's value of a death at five or older, the
-  site's default for adult deaths, read by `to_common` from the fact itself (a unit's conversion may
+- `@moral_weights.<age band>` over `@death_ages.*` (above; until late October 2026
+  `@moral_weights.uov_per_death_over5`, 73.1914), read by `to_common` from the facts themselves (a unit's conversion may
   read shared facts, its one source; the `sad` unit likewise reads `@aim_sads.chicken_2024`, and no
   unit conversion holds a literal standing in for a shared figure). src/engine/normalization.test.ts
   fails if the slider's default and range or the heat share drift from the `@climate` facts.
@@ -341,9 +383,10 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned) | 2 (1–4) | judgment, assumptions |
 | Income | `$uov_per_ln_consumption` | 1/ln 2 | GiveWell |
 | Life satisfaction | `$uov_per_wellby` (unit conversion only; slider) | 0.130563 (0.1–0.55; slider 0.05–3) | calibrated on depression: a PHQ-9 SD-year worth the same via WELLBYs and via GBD weights (2.3); evaluator view of HLI models 1.15 (GiveDirectly, Kenya) |
-| A death | `@moral_weights.uov_per_death_under5` / `_over5` × `$life_value_multiplier`; GiveWell's own age curve inside GiveWell sheets is the same scale | 116.25 / 73.19 UoV | GiveWell moral weights |
+| A death | `@moral_weights.<age band>` × `$life_value_multiplier`, the band of the death's age (an age mix from `@death_ages` where deaths of many ages are counted together: climate, GBD DALYs); `_over5` only for deaths of unknown age; GiveWell's own age curve inside GiveWell sheets is the same scale | 116.25 / 134 / 104 / 42 UoV | GiveWell moral weights |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low FP's 2022 GiveDirectly, high GiveWell's 2024 GiveDirectly |
+| A dollar to GiveDirectly (where money goes or would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's GiveDirectly model on the site; every meta model reads it, never `@cash` |
 | Pounds, euros, kroner | `@fx.usd_per_<cur>_<year>` | IRS yearly averages | IRS (2021–25 live table, 2015–20 archived) |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
 | Household spillover of psychotherapy | `@wellby_factors.household_size_psychotherapy`, `household_spillover_ratio_psychotherapy` | 4.73 people, 16.24% each | HLI (StrongMinds, Friendship Bench); read by HLI's, SoGive's and Founders Pledge's StrongMinds |
@@ -371,6 +414,12 @@ Ambitious Impact's Kaya Guides counts QALYs per participant taken from economic 
 not a depression scale, so it has nothing to convert (unchanged, 1.07); its Novah sheet types GBD's moderate
 weight 0.396, the `@depression.dw_moderate` figure (AIM's files, not changed here). No GiveWell psychotherapy
 model is imported.
+
+**Two GiveDirectly figures, two concepts.** `@cash.uov_per_dollar` (0.00335) is the benchmark old sheets divided
+by to state a result as "×cash": wherever it is used the multiple is multiplied back by the same figure, so it
+cancels and only the sheet's units of value remain. `#givedirectly` (0.00872) is what a dollar given to
+GiveDirectly does today on this site: the meta models use it for money that goes, or would have gone, to cash.
+Neither replaces the other; no row reads `@cash` for a real dollar to GiveDirectly.
 
 **Multiples of cash.** A result published only as a multiple of cash (FP's "10× GiveDirectly") is
 multiplied by `@cash.uov_per_dollar`. Where a sheet made the multiple by dividing its units of value by
@@ -533,6 +582,37 @@ model was removed); INV-12 requires it of any model with a row on its path about
 | The Life You Can Save (Founders Pledge) | 33.6 [1.0–1,040] → 185 [5.6–1,430] | 32.2 → 185 | 40% kept (20–70%) × 5× Founders Pledge's cash (2–10) → 50% new money, global-health destinations live, shifted money net of GiveDirectly (0.0370 per dollar moved, 5.5× the old 0.0067). Founders Pledge states only its gross 17×, so both views use the shared method. |
 | Better Futures Guide (Ambitious Impact, 2025) | 27.9 [9.5–71] → 62.7 [7.6–308] | 27.9 → 27.9 | the sheet's 35% new money and 3× its old GiveDirectly (0.0165 per dollar moved) → 50% and GiveWell's Top Charities live (0.0370), × 2.25; success already 55.7%, now read from the shared fact. Evaluator view unchanged. |
 
+**Late October 2026: destinations by evidence, one success step, one credit formula.**
+
+- *Where the money goes, by evidence.* The Life You Can Save publishes its money moved by charity: its 2025 split
+  (facts/meta.json `tlycs_moved_2025_*`, $24.1M, 19 charities modelled here for $13.4M, the rest valued at their
+  average) replaces GiveWell's Top Charities (`value_tlycs_recommended`). Better Futures Guide recommends
+  livelihoods charities and has published none yet: the livelihoods charities the site models, live, equal weights
+  (`value_livelihoods`: GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund), not
+  GiveWell's health charities. CEARCH's research and grants are global-health policy (hypertension and salt, lead,
+  tobacco and alcohol taxes): global health, not the across-causes mix. No model uses the mix now; its animal leg
+  is weighted by ACE's Recommended Charity Fund payouts (`@ace_fund_weights`, 2.9), no longer equal weights.
+- *Leverage, latest and marginal.* The Life You Can Save's 3-year ratio is 9.19 (2025 report); a ratio of money
+  moved over all costs is an average, and the next dollar moves less: `@meta.marginal_vs_past_average` (judgment,
+  50%, 18–100%; CEARCH's estimates for Giving What We Can 0.18 and 0.43, Giving What We Can's own view ~1), the same
+  figure the retrospective climate models take (2.5). CEARCH and Better Futures Guide model a new organisation's
+  whole costs, so they don't take it.
+- *One success step* (`SUCCESS_ADJUSTMENT_FORMULA`): an expected value over success and failure for benefits and
+  costs alike; a failed organisation moves `@meta.failure_money_share` (Ambitious Impact's 20%) and spends for
+  `@meta.failure_years_run` (3) years. Better Futures Guide's sheet already does this (its 20% now reads the fact);
+  CEARCH used to multiply benefits by the chance and charge all five years of costs.
+- *One credit-by-share-of-resources formula* (`META_DONOR_COST_SHARE_FORMULA`): donors' new money moved per dollar
+  (`moved_per_dollar × new_money_share`) and staff's forgone pay share the outcome, in all three models (before:
+  TLYCS new money, CEARCH all money influenced, Better Futures Guide none).
+- *Labelled judgments*: `value_longtermist` = 0 and `prior_vs_cash` say "our judgment" on the model rows; Ambitious
+  Impact's subjective inputs in CEARCH and Better Futures Guide are filed as `judgment`.
+
+| Model | Our view before → after | Evaluator view | What changed |
+|---|---|---|---|
+| CEARCH | 99.4 (84.0 after 2.9) → 114 | 210 → 161 | global-health destination; one success step (+50%) |
+| The Life You Can Save | 185 → 84.6 | 185 → 169 | its own split; 9.19; marginal 50% |
+| Better Futures Guide | 62.7 → 27.4 | 27.9 | livelihoods charities live (0.0206 vs 0.0413 UoV per dollar) |
+
 ### 2.9 Won reforms: one way (October 2026)
 
 A corporate pledge, a law or a regulation a campaign wins would probably have come some day anyway. Evaluators
@@ -590,9 +670,11 @@ benefit of a win = per year once in effect × fulfilment × credit
   our judgment; stand-in species weights and the welfare-point bridge are labelled as judgments on every row that
   uses them.
 
-Climate and global-health rows that credit a policy win and should read the same slider (other owners' files):
-Clean Air Task Force `years_brought_forward` (1.5) and `ccs_years_forward`, Coalition for Rainforest Nations
-`years_brought_forward` (3), Innovation in Government Initiative `india_years_forward` (1.5), GiveWell's Centre for
+Climate rows now read it (`pv_annuity_due(1, $discount_rate, $win_years_counted)`, the evaluator's years in
+`published`, the wait being the model's `years_until_avoided`): Clean Air Task Force `years_brought_forward` (1.5),
+`nsps_2012_years_forward` (0.92), `nsps_2016_years` (3), `ccs_years_forward` (1.5); Coalition for Rainforest Nations
+`years_brought_forward` (3). Terrapraxis's `years_earlier` (5) cancels against the grant its page implies, so the
+slider can't move it without a decision on the grant's size. Global-health rows still to do (other owners' files): Innovation in Government Initiative `india_years_forward` (1.5), GiveWell's Centre for
 Pesticide Suicide Prevention `number_of_years_brought_forward` and Vital Strategies' years-forward rows.
 
 Before → after (healthy years per $1,000, our view at the defaults; evaluator views unchanged except Wild Animal

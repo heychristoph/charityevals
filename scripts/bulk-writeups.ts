@@ -5,7 +5,7 @@
 // with a hand-written evaluation when there is one (the script never overwrites a file without it).
 import { existsSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "../src/engine/moved-money";
+import { LIVELIHOODS_ONLY, MOVED_MONEY_ROWS, SUCCESS_FACT, TLYCS_SPLIT, sameFormula } from "../src/engine/moved-money";
 import { buildLibrary, assumptionValues, comparable, headline, modelsOf, type ResolvedModel } from "../src/engine/model";
 import { primaryModel } from "../src/engine/ranking";
 import { formatYears, plainModelName } from "../src/lib/format";
@@ -49,9 +49,13 @@ function movedMoney(m: ResolvedModel, name: string): string | undefined {
   const mix = sameFormula(v.formula, MOVED_MONEY_ROWS.moved_dollar_value.formula);
   const where = mix
     ? "where effective donors give (Giving What We Can's split: about 60% global health, 10% animals, 10% longtermist causes, which the site doesn't value), each at its live result on this site"
-    : "GiveWell's Top Charities, each at its live result on this site";
+    : sameFormula(v.formula, LIVELIHOODS_ONLY.formula)
+      ? "the livelihoods charities the site models (it has published no list of its own yet), each at its live result on this site (GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund)"
+      : sameFormula(v.formula, TLYCS_SPLIT.formula)
+        ? "its own published split of the money it moved, each charity at its live result on this site"
+        : "GiveWell's Top Charities, each at its live result on this site (where its money goes: its work is in global health and poverty)";
   const net = m.byId.has("moved_dollar_net_value") ? " Half the money is counted as new; the rest only for the gain over GiveDirectly." : "";
-  const success = m.rows.some((r) => r.factDeps.includes(SUCCESS_FACT)) ? " A new organisation's chance of success is the site's shared 56%." : "";
+  const success = m.rows.some((r) => r.factDeps.includes(SUCCESS_FACT)) ? " A new organisation's chance of success is the site's shared 56%, taken as an expected value over success and failure (a failed organisation still moves 20% of the money and spends for three years), the same step for every new meta organisation." : "";
   return `**Where we differ from ${owner}.** ${name} works through the money it moves or redirects, not a programme of its own, so our view values each such dollar the way the site values every meta charity's: by ${where}, so the sliders move it too.${net}${success} ${owner}'s own valuation stays in the evaluator view. [How money moved is valued](https://github.com/heychristoph/charityevals/blob/main/docs/normalization.md#28-money-moved-success-and-career-changes-one-method-october-2026).`;
 }
 
