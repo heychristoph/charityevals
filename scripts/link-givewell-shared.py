@@ -38,11 +38,11 @@ FACTS = [
     dict(id="resource_sharing_multiplier", label="Multiplier for resource sharing within households (GiveWell)", unit="x", format="number",
          value=rng(1, 2, 3), kind="judgment",
          explainer="GiveWell's guess that an income gain to one person is shared with the household, so it counts twice. The same 2 in every GiveWell sheet that values long-term income (malaria, vitamin A, vaccines, deworming, iron). The range is ours: from no sharing counted (1) to half again more (3).",
-         rules=[dict(label=r"^Multiplier for resource sharing within households( \((Kenya|overall|Best guess)\))?$", values=[2])]),
+         rules=[dict(label=r"^Multiplier for resource sharing( within households)?( \(.*\))?$", values=[2])]),
     dict(id="treatment_costs_averted", label="Treatment costs averted from prevention (GiveWell's supplemental adjustment)", unit="share", format="percent",
          value=rng(0.06, 0.2, 0.2), kind="judgment",
          explainer="GiveWell adds 20% to the value of a program that prevents illness, for the treatment costs households and health systems no longer pay. Every current GiveWell sheet uses 20%; its 2021–2023 malaria sheets (Borno SMC, Ondo and Anambra nets, PATH's malaria vaccine and PMC sheets), its PLA-MNH and its Mirriah ALIMA sheets used 6%, the low end of the range.",
-         rules=[dict(label=r"^Treatment costs averted( from prevention)?( \((Not specified|overall|#REF!)\))?$", values=[0.2, 0.06])]),
+         rules=[dict(label=r"^Treatment costs(/economic losses)? averted( from prevention)?( \((Not specified|overall|#REF!)\))?$", values=[0.2, 0.06])]),
     dict(id="investment_of_income_increases", label="Investment of income increases (GiveWell's supplemental adjustment, most programs)", unit="share", format="percent",
          value=rng(0.025, 0.05, 0.1), kind="judgment",
          explainer="GiveWell adds 5% for income gains that are invested and pay off later (SMC, vaccines, malnutrition treatment and most other programs); its net, vitamin A and deworming sheets use 2.5%, 3% and 10%, each its own figure here.",
@@ -64,7 +64,7 @@ FACTS = [
          explainer="GiveWell's guess of when a child protected from malaria (nets, vaccines, testing) starts working: 10 years on average. SMC, which reaches slightly younger children for fewer years, has its own 12.5.",
          rules=[dict(label=r"^Average number of years between (nets being distributed|program implementation) and the beginning of long-term benefits", values=[10])]),
     dict(id="years_until_income_benefits_smc", label="Years between SMC and the start of income gains (GiveWell)", unit="years", format="number",
-         value=rng(10, 12.5, 15), kind="judgment",
+         value=rng(10, 12.5, 14), kind="judgment",
          explainer="GiveWell's guess of when a child who received seasonal malaria chemoprevention starts working: 12.5 years on average, in every SMC sheet.",
          rules=[dict(label=r"^Average number of years between receiving SMC and the beginning of", values=[12.5])]),
     dict(id="years_until_income_benefits_iron", label="Years between iron supplementation or fortification and the start of income gains (GiveWell)", unit="years", format="number",
@@ -80,9 +80,9 @@ FACTS = [
          explainer="IQ scales are set so that one standard deviation is 15 points; GiveWell's iron sheets use it to turn effects in standard deviations into IQ points.",
          rules=[dict(label=r"^IQ points per standard deviation", values=[15])]),
     dict(id="cf_value_government", label="Counterfactual value of a dollar of domestic government spending (GiveWell)", unit="units of value per $", format="number",
-         value=rng(0.00496, 0.005057, 0.0056), kind="estimate",
+         value=rng(0.00496, 0.005057, 0.0051), kind="estimate",
          explainer="What GiveWell thinks a dollar a government spends on a program would otherwise have done: 0.005057 units of value (about 1.5x cash), in most current sheets. Its 2020–2025 copies of 0.00496 to 0.0051 are earlier rounds of the same estimate. A sheet's own figure for one country's government (India's 0.00123 in Evidence Action's chlorination sheet) stays in that sheet.",
-         rules=[dict(label=r"^(Counterfactual value per dollar spent by domestic governments?( on [a-zA-Z ]+)?|Counterfactual value of spending from domestic government.*|Counterfactual value of government spending.*)$", values=[0.005057, 0.005071, 0.0051, 0.00496, 0.00507])]),
+         rules=[dict(label=r"^(Counterfactual value per dollar spent by domestic governments?( on [a-zA-Z ]+)?( \(.*\))?|Counterfactual value of spending from domestic government.*|Counterfactual value of government spending.*|Counterfactual value of spending from (non-philanthropic|other) actors.*: Domestic government.*)$", values=[0.005057, 0.005071, 0.0051, 0.00496, 0.00507])]),
     dict(id="cf_value_global_fund", label="Counterfactual value of a dollar of Global Fund or PMI spending (GiveWell)", unit="units of value per $", format="number",
          value=rng(0.0154, 0.015433, 0.015433), kind="estimate",
          explainer="What GiveWell thinks a dollar the Global Fund or the US President's Malaria Initiative spends would otherwise have done: 0.015433 units of value (about 4.6x cash), in every current malaria sheet.",
@@ -151,7 +151,7 @@ FACTS = [
          explainer="People per household in Northwest Nigeria, GiveWell's figure from the 2021 Nigeria Malaria Indicator Survey, used in its New Incentives and IRC vaccine sheets. One 2024 New Incentives sheet uses 6.8.",
          rules=[dict(label=r"^Average number of people per household$", values=[6.7, 6.8])]),
     dict(id="household_size_bangladesh", label="Average household size, Bangladesh (HIES 2022)", unit="people", format="number",
-         value=rng(4.26, 4.26, 4.5), kind="observed",
+         value=4.26, kind="observed",
          explainer="People per household in Bangladesh: 4.26 in the Bangladesh Bureau of Statistics' Household Income and Expenditure Survey 2022 (rural households 4.3), as GiveWell's 2024 eyeglasses sheet cites. GiveWell's 2025 CHoBI7 sheet uses 4.5.",
          source=dict(title="Bangladesh Bureau of Statistics, Household Income and Expenditure Survey 2022, final report", url="https://bbs.gov.bd/site/page/648dd9f5-067b-4bcc-ba38-45bfb9b12394/-", note="Average household size 4.26 (cited in GiveWell's eyeglasses for workers CEA, 2024)"),
          rules=[dict(label=r"^(Average household size, Bangladesh \(Value - best guess\)|Income to household consumption: Household Size \(Workers in rural Bangladesh\))$", values=[4.5, 4.3])]),
@@ -272,6 +272,7 @@ def main():
     ratio_income(files, log)
     deworming_multiples(files, log)
     policy_years(files, log)
+    mixed_counterfactual(files, log)
     for p, m, ind in files:
         p.write_text(json.dumps(m, indent=ind, ensure_ascii=False) + "\n")
     FACT_FILE.write_text(json.dumps({"id": "givewell_shared", "label": "GiveWell's house constants (one figure for every GiveWell model)", "rows": facts}, indent=2, ensure_ascii=False) + "\n")
@@ -392,6 +393,21 @@ def policy_years(files, log):
             elif re.search(r"(?<!\w)number_of_years_brought_forward\w*(?!\w)", f) and r["id"].startswith("expected_lives_saved"):
                 r["formula"] = re.sub(r"(?<![\w(, ])(number_of_years_brought_forward\w*)", r"pv_annuity_due(1, years_discount_rate, \1) * policy_wait_discount", f); n += 1
         log.append(f"policy  {m['id']}: {len(leaves)} years rows -> $win_years_counted, {n} benefit rows discounted")
+
+
+def mixed_counterfactual(files, log):
+    """CHAI's TSU sheet values money moved from governments and other funders at the plain average of GiveWell's
+    three figures, typed in (0.0056, 0.0154, 0.007): it reads the shared three instead."""
+    shared = "avg(@givewell_shared.cf_value_government, @givewell_shared.cf_value_global_fund, @givewell_shared.cf_value_gavi)"
+    for p, m, ind in files:
+        for r in m["rows"]:
+            if r.get("formula") == "avg(0.0056, 0.0154, 0.007)":
+                r["published"] = r.pop("expected"); r["formula"] = shared
+                r["explainer"] = ("Changed for consistency. The sheet averages GiveWell's values of a dollar of government (0.0056), Global Fund (0.0154) "
+                                  "and Gavi (0.007) money, typed in; it reads the shared three (`@givewell_shared.cf_value_government`, "
+                                  "`cf_value_global_fund`, `cf_value_gavi`). The evaluator view keeps the sheet's 0.00933."
+                                  + ("\n\n" + r["explainer"] if r.get("explainer") else ""))
+                log.append(f"mixed   {m['id']}:{r['id']}")
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ Humanitarian aid organisation; GiveWell funds its malnutrition treatment and vac
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Global Vaccines cost-effectiveness analysis [Based on New Incentives]](/international-rescue-committee) | GW | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-global-vaccines-based-on-new-incentives">46</span> | 796, 13 kept fixed |
+| [Global Vaccines cost-effectiveness analysis [Based on New Incentives]](/international-rescue-committee) | GW | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-global-vaccines-based-on-new-incentives">46</span> | 802, 13 kept fixed |
 | [VoI rough estimate for IRC mini incubator, June 27, 2024](/international-rescue-committee/international-rescue-committee-voi-irc-mini-incubator-june-27-2024) | GW | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-voi-irc-mini-incubator-june-27-2024">17</span> | 30 |
 | [Malnutrition treatment cost-effectiveness analysis (IRC standard protocol), 2023](/international-rescue-committee/international-rescue-committee-malnutrition-treatment-irc-standard) | GW | January 2024 | <span data-figure="headline" data-model="international-rescue-committee-malnutrition-treatment-irc-standard">13</span> | 713 |
 | [International Rescue Committee: malnutrition treatment (Founders Pledge)](/international-rescue-committee/international-rescue-committee-founders-pledge) | FP | March 2025 | <span data-figure="headline" data-model="international-rescue-committee-founders-pledge">13</span> | 1 |

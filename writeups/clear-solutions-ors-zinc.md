@@ -3,7 +3,7 @@ Works to increase use of oral rehydration salts and zinc for childhood diarrhoea
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | GW | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">10</span> | 193, 74 kept fixed |
+| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | GW | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">10</span> | 196, 71 kept fixed |
 | [Clear Solutions (Founders Pledge)](/clear-solutions/clear-solutions-founders-pledge) | FP | May 2025 | <span data-figure="headline" data-model="clear-solutions-founders-pledge">11</span> | 1 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
