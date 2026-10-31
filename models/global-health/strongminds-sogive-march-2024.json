@@ -34,7 +34,7 @@
   },
   {
    "id": "household",
-   "title": "Household spillovers (GiveWell's figures)"
+   "title": "Household spillovers"
   },
   {
    "id": "moral_weight",
@@ -225,28 +225,28 @@
    "section": "household",
    "label": "People in the client's household",
    "format": "number",
-   "value": 5.3,
-   "kind": "estimate",
    "source": {
     "title": "SoGive cost-effectiveness analysis, StrongMinds (in progress)",
     "url": "https://docs.google.com/spreadsheets/d/1sNB40ot0sfa4v3OdF0Pv9F99hSKImbrjyTVfnISJeFU/edit",
     "cell": "'simplified cea'!B13"
    },
-   "explainer": "Taken by SoGive from GiveWell's assessment of HLI's StrongMinds analysis."
+   "explainer": "Changed for consistency: every psychotherapy model on the site counts the household the same way, with HLI's figures for the settings StrongMinds works in (facts: wellby_factors.household_size_psychotherapy, 4.73 people). SoGive took 5.3 from GiveWell's assessment of HLI's StrongMinds analysis (kept in the evaluator view).",
+   "formula": "@wellby_factors.household_size_psychotherapy",
+   "published": 5.3
   },
   {
    "id": "spillover_per_member",
    "section": "household",
    "label": "Benefit to each other household member, relative to the client",
    "format": "percent",
-   "value": 0.15,
-   "kind": "estimate",
    "source": {
     "title": "SoGive cost-effectiveness analysis, StrongMinds (in progress)",
     "url": "https://docs.google.com/spreadsheets/d/1sNB40ot0sfa4v3OdF0Pv9F99hSKImbrjyTVfnISJeFU/edit",
     "cell": "'simplified cea'!B14"
    },
-   "explainer": "Taken by SoGive from GiveWell's assessment of HLI's StrongMinds analysis."
+   "explainer": "Changed for consistency: the shared spillover ratio for psychotherapy (facts: wellby_factors.household_spillover_ratio_psychotherapy, 16%), which HLI's and Founders Pledge's StrongMinds models also read. SoGive took 15% from GiveWell's assessment of HLI's analysis (kept in the evaluator view).",
+   "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+   "published": 0.15
   },
   {
    "id": "household_multiplier",
@@ -270,15 +270,14 @@
    "section": "moral_weight",
    "label": "Spread (SD) of depression scores before treatment",
    "format": "number",
-   "value": 4.211710187,
-   "kind": "estimate",
    "source": {
     "title": "SoGive cost-effectiveness analysis, StrongMinds (in progress)",
     "url": "https://docs.google.com/spreadsheets/d/1sNB40ot0sfa4v3OdF0Pv9F99hSKImbrjyTVfnISJeFU/edit",
     "cell": "'simplified cea'!B10"
    },
-   "explainer": "Standard deviation of PHQ-9 scores of trial participants before treatment, from the METAPSY database. The effect size above is in these standard deviations.",
-   "unit": "PHQ-9 points"
+   "explainer": "Standard deviation of PHQ-9 scores of trial participants before treatment, from the METAPSY database: SoGive's figure, which is also the site's shared one (facts: depression.phq9_sd), read from the fact so that every model turning standard deviations of depression into PHQ-9 points uses the same spread, and the WELLBY exchange rate is calibrated on it. The effect size above is in these standard deviations.",
+   "unit": "PHQ-9 points",
+   "formula": "@depression.phq9_sd"
   },
   {
    "id": "phq9_rather_nothing",

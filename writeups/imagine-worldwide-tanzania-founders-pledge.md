@@ -1,6 +1,6 @@
 ### Summary
 
-Imagine Worldwide provides solar-powered tablets with adaptive reading and maths software (onebillion) to primary schools in sub-Saharan Africa, and is expanding from Malawi to Tanzania. Founders Pledge's Tanzania page gives £10 per pupil and learning gains of over 0.3 standard deviations. Turned into income with Founders Pledge's own method, that is **<span data-figure="headline" data-model="imagine-worldwide-tanzania-founders-pledge">14</span> years of healthy life per $1,000**.
+Imagine Worldwide provides solar-powered tablets with adaptive reading and maths software (onebillion) to primary schools in sub-Saharan Africa, and is expanding from Malawi to Tanzania. Founders Pledge's Tanzania page gives £10 per pupil and learning gains of over 0.3 standard deviations. Turned into income with Founders Pledge's own method, that is **<span data-figure="headline" data-model="imagine-worldwide-tanzania-founders-pledge">11</span> years of healthy life per $1,000**.
 
 This page-based model is Founders Pledge's newest figure for the charity, so it is the one ranked; Founders Pledge's full 2023 Malawi model is on the site too, at about the same result.
 
@@ -14,17 +14,17 @@ Five large trials in Tanzania and Malawi found gains of over 0.3 standard deviat
 
 ### How the model works
 
-Founders Pledge's figures come first: 0.3 standard deviations for £10, 0.03 per pound. Our steps follow: pounds to dollars at the 2024 average rate; Founders Pledge's usual 25% weight on its 0.1 prior for an education program's effect; then Founders Pledge's own 2023 education method turns test scores into income: 19.1% higher earnings a year per standard deviation, of which it keeps 17.5% for how well the evidence replicates, from a few years after school for 40 working years, shared with the household, discounted at the shared rate. The income gain is then valued like every income gain on the site.
+Founders Pledge's figures come first: 0.3 standard deviations for £10, 0.03 per pound. Our steps follow: pounds to dollars at the 2024 average rate; a 50% weight on Founders Pledge's 0.1 prior for an education program's effect, the site's one value for every Founders Pledge education model; then Founders Pledge's own 2023 education method turns test scores into income: 19.1% higher earnings a year per standard deviation, of which it keeps 17.5% for how well the evidence replicates, from a few years after school for 40 working years, shared with the household, discounted at the shared rate. The income gain is then valued like every income gain on the site.
 
 ### What drives the result
 
 - **The discount rate.**
-- **The weight on the prior** (0 to 50%).
+- **The weight on the prior** (25% to 75%).
 - **The learning gain** (0.3 to 0.4).
 
 ### Where we differ from Founders Pledge
 
-- **Shrinking towards the prior:** the page doesn't say whether its 0.3 is already shrunk; we apply Founders Pledge's usual 25%.
+- **Shrinking towards the prior (ours, one value for all):** the page doesn't say whether its 0.3 is already shrunk. Every Founders Pledge education model whose page doesn't state its shrinking uses one weight on the prior, 50%, what Founders Pledge applied in the one sheet it published (Imagine Worldwide Malawi); its rule for samples above 2,000 would give 25%, the low end of the range.
 - **From test scores to healthy years:** Founders Pledge's page stops at learning; we apply its own 2023 method.
 - **Credit by share of resources:** when on, staff's forgone pay counts as cost. Off by default.
 
