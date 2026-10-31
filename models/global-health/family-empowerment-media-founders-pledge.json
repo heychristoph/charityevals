@@ -32,7 +32,8 @@
     "assumptions": {
       "resource_shares": 0,
       "life_value_multiplier": 1,
-      "discount_rate": 0
+      "discount_rate": 0,
+      "uov_per_daly": 1.9498
     }
   },
   "sections": [
@@ -276,14 +277,14 @@
       "id": "dalys_per_maternal_death",
       "section": "worst",
       "label": "DALY-equivalents per maternal death averted",
-      "value": 41.1,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_over5 / $uov_per_daly",
+      "published": 41.1,
       "source": {
         "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
         "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
         "cell": "'FEM Family Planning (Kano, Nigeria)'!B28 (=B19*41.1)"
       },
-      "explainer": "Founders Pledge's value of a maternal death, in healthy years."
+      "explainer": "Changed for consistency. Founders Pledge values averting a maternal death at 41.1 healthy years. The site values every death averted with one shared figure, so that a life saved counts the same in every model: GiveWell's moral weights, 73.19 for a death at age five or older units of value (a unit of value is a doubled income for a year), times the weight on a life under Your values. Divided by the rate between a healthy year and a doubled-income year (Your values), that is 37 healthy years at the default. The evaluator view uses Founders Pledge's 41.1."
     },
     {
       "id": "life_value_weight",

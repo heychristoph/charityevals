@@ -21,7 +21,7 @@ Giving Green's back-of-the-envelope chain:
 
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Air pollution per tonne, from US evidence:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. Most of the IRA's cuts come from US power plants, and the IRA's health modelling (Energy Innovation and Resources for the Future, 2022) finds about a fortieth to a hundred-and-fiftieth of that average smoke deaths per tonne. The model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.013 (0.005–0.027), the middle of the two studies on a log scale; every tonne also counts for its heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -39,6 +39,7 @@ The site turns these tonnes into years of healthy life through the deaths they a
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **US power tonnes count their own, small air pollution**, from the IRA's health modelling, not the world average: about 1.5 times what heat deaths alone give (1.2–1.9 across the two studies). Before October 2026 the site counted heat only (0.031).
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
+- **The wait for the tonnes is discounted.** Giving Green counts a tonne the same whenever it is avoided; the Inflation Reduction Act's cuts through 2032 grow over the decade, so the tonnes come about 4 years after the money (2 to 7, our judgment from Giving Green's dates). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Giving Green takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 
 ### Biggest uncertainties

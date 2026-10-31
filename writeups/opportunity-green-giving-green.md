@@ -22,7 +22,7 @@ Giving Green's chain:
 
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Giving Green's fuel-standards tab, which turns emissions-intensity paths into the 1.3%, is taken as a figure with its cell cited. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Tonnes from burning less fuel:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. Ship smoke per tonne of CO₂ is about that average: 2.1 times it by Sofiev et al. (2018: about 266,000 deaths a year after the 2020 sulphur limit, from about 870 million tonnes of CO₂), 0.42 times it by Zhang et al. (2021: about 94,000 deaths in 2015, less about 30,000 the sulphur limit avoids, from about a billion tonnes); the model takes 0.94, their middle on a log scale. The IMO's standard lowers the greenhouse-gas intensity of ship fuel more than how much is burned, so only part of that smoke goes with each tonne: fuel burned less cuts all of it; ammonia, methanol and biofuels cut the sulphur and particles but not the NOx, which Zhang et al. find drives about half of ship smoke deaths after 2020; liquefied gas cuts most smoke while cutting well-to-wake emissions only 15–20%; and part of each tonne is upstream fuel supply. Our judgment is half (0.2–1). So the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.5 × 0.94 = 0.47.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -40,6 +40,7 @@ The site turns these tonnes into years of healthy life through the deaths they a
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Shipping tonnes count their own air pollution**: about 0.47 of an average fossil-fuel tonne's, a sourced share and per-fuel figure that replace the earlier choice between the full world average (7.3) and heat only (0.2), which rested on an unsourced 40% guess. Every climate model now sets this row from its own evidence.
 - **Future heat deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
+- **The wait for the tonnes is discounted.** Giving Green counts a tonne the same whenever it is avoided; the gap between ambitious and business-as-usual shipping rules runs from 2025 until the latter catch up, about 4 years after the 2023–25 spending (2 to 8, our judgment from Giving Green's dates). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Giving Green takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 
 ### Biggest uncertainties

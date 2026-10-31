@@ -21,6 +21,7 @@ After the cross-cause exchange rates and your weight on animal suffering, the la
 - **A chicken against a person.** ACE's figures count a hen's suffering at 35% of a person's (Ambitious Impact's weight in ACE's 2025 SADs; 46% in the 2024 SADs behind the 17.5). We take out whichever weight each figure was built with. We count days of a chicken's pain and let the chicken slider (default 33%) set how they compare with a person's, as in every animal model.
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them.
+- **Pounds to dollars (changed for consistency).** ACE converts the charity's spending in pounds at its own rate, $1.2781 a pound; we use the 2024 IRS yearly average, $1.277, as for every model with costs in pounds. The difference is under 0.1%.
 
 ### Biggest uncertainties
 

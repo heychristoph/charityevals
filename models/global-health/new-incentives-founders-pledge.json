@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "new-incentives",
   "owner": "founders-pledge",
-  "summary": "Cash incentives for routine childhood vaccination in northern Nigeria. Founders Pledge's recommendation page states only a multiple of cash transfers, more than 10, which this model takes at face value and turns into healthy years through Founders Pledge's own benchmark for GiveDirectly.",
+  "summary": "Cash incentives for routine childhood vaccination in northern Nigeria. Founders Pledge's recommendation page states only a multiple of cash transfers, more than 10, which this model takes at face value and turns into healthy years through the site's shared value of a dollar given as cash.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "New Incentives (charity recommendation)",
@@ -24,7 +24,8 @@
   "evaluator": {
     "name": "Founders Pledge",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "uov_per_daly": 1.9498
     }
   },
   "sections": [
@@ -34,10 +35,10 @@
       "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
     },
     {
-      "id": "to_daly",
-      "title": "From a multiple of cash to healthy years",
+      "id": "to_uov",
+      "title": "From a multiple of cash to units of value",
       "kind": "ours",
-      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of GiveDirectly. Its own sheets of the time value GiveDirectly at $164 per WELLBY-equivalent and a healthy year at 3.7 WELLBY-equivalents; dividing by both gives healthy years per dollar."
+      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of cash transfers. The site values cash at one shared benchmark (GiveWell's 0.00335 units of value per dollar), so the multiple times that benchmark is units of value (doubled income-years) per dollar."
     },
     {
       "id": "staff_pay",
@@ -64,20 +65,13 @@
       "explainer": "Founders Pledge's figure, quoted on its page: \"more than 10 times as effective as direct cash transfers\". The page says it rests on GiveWell's cost-effectiveness analysis; Founders Pledge publishes no sheet of its own. We take 10, the floor the page states, so the result is if anything low. GiveWell's own New Incentives models are on the site separately."
     },
     {
-      "id": "wellbys_per_dollar_fp",
-      "section": "to_daly",
-      "label": "Founders Pledge's value units per dollar (WELLBY-equivalents)",
+      "id": "uov_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Units of value per dollar",
       "format": "small",
-      "formula": "gd_multiple / @founders_pledge.gd_cost_per_wellby",
-      "explainer": "Founders Pledge's multiple divided by its own GiveDirectly benchmark of 2022, $164 per WELLBY-equivalent (the nearest it has published): the multiple back in Founders Pledge's value units. The page attributes the multiple to GiveWell's analysis and doesn't say which cash benchmark it means; read against GiveWell's GiveDirectly instead (4.4 years of healthy life per $1,000 on this site), the result would be about 2.6 times higher. Because it goes through a multiple, the site's value-of-life setting has no effect here."
-    },
-    {
-      "id": "dalys_per_dollar_fp",
-      "section": "to_daly",
-      "label": "Healthy years (DALYs) per dollar",
-      "format": "small",
-      "formula": "wellbys_per_dollar_fp / @founders_pledge.wellbys_per_daly",
-      "explainer": "charityevals' step. Founders Pledge's 'WELLBYs' here are its own value unit, built from its moral weights (3.7 per healthy year, 1.9 per doubled income-year), not life-satisfaction points measured in surveys, so they are turned back into healthy years at its own 3.7 rather than at the site's WELLBY exchange rate. The benefit counted is mostly lives saved, so the healthy-year route fits best."
+      "formula": "gd_multiple * @cash.uov_per_dollar",
+      "published": 0.0321321657,
+      "explainer": "Changed for consistency. Founders Pledge states the result as a multiple of cash transfers; read against its own GiveDirectly benchmark of 2022 ($164 per WELLBY-equivalent, and 1.898 WELLBY-equivalents per doubled income-year), 10 times cash is 0.0321 units of value (doubled income-years) per dollar. The site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335 units of value per dollar given as cash, so that \"10 times cash\" means the same in every model; Founders Pledge's own benchmark comes to almost the same (0.0032). GiveWell's November 2024 estimate for GiveDirectly in Kenya is 2.6 times higher; it sets the top of the benchmark's range. Because 10 is the floor the page states, the result is a lower bound. Because it goes through a multiple, the site's value-of-life setting has no effect here. The evaluator view uses Founders Pledge's 0.0321, at its own rate of 1.95 doubled income-years per healthy year (3.7 / 1.898)."
     },
     {
       "id": "staff_cost_share",
@@ -121,18 +115,18 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
-      "id": "dalys_per_dollar",
+      "id": "uov_per_dollar",
       "section": "staff_pay",
-      "label": "Healthy years (DALYs) per donor dollar",
+      "label": "Units of value per donor dollar",
       "format": "small",
-      "formula": "dalys_per_dollar_fp * donor_cost_share",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
       "explainer": "Healthy years per dollar. With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
-    "row": "dalys_per_dollar",
-    "unit": "daly",
-    "label": "DALYs per dollar",
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
     "native": {
       "row": "gd_multiple",
       "unit": "multiples of GiveDirectly (Founders Pledge)"

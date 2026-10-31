@@ -21,12 +21,12 @@ SoGive's planting figure is its bottom line. Our steps follow:
 - **All three projects:** a donation to the Woodland Trust isn't restricted to planting, so our view divides all three projects' cost by all their tonnes. Protected woodland counts half its carbon (our judgment of how much would otherwise be lost).
 - **SoGive's caveats:** SoGive lists assumptions it didn't test; our view applies them as judgments: 70% of trees survive (1.1 million of the 4.1 million were given away to schools and groups), half of a restored hectare's uptake is extra (the land was degraded, not bare), and 80% of the carbon stays stored.
 - **Pounds to dollars** at the 2019 average exchange rate.
-- **The delay:** trees take up their carbon over a century, on average about 50 years after planting. A tonne taken up then avoids only the heat deaths still to come (three quarters, our judgment), and those come later than the average the site's conversion already discounts for, by about 25 years (our judgment), which we discount at the shared rate: at the default 4% a tonne taken up is worth about 0.28 of one averted now, at 0% about 0.75.
+- **The delay:** trees take up their carbon over a century, on average about 50 years after planting. Like every model's tonnes that come later, they are discounted at the shared rate for the wait until they are taken up: about 40 years (30 to 55, our judgment), the single wait worth the same as SoGive's yearly uptake discounted year by year at 4%. A tonne taken up then counts like a tonne kept out of the air then, its heat deaths discounted again from that year by the site's conversion.
 - **No air pollution:** trees taking up carbon leave the fuel burned elsewhere unchanged, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0, and the tonnes count for their heat deaths only.
 
 ### What drives the result
 
-- **Timing and the discount rate:** what a tonne taken up decades from now is worth against one averted today (0.28 at 4%); at 0% the figure is 0.11.
+- **Timing and the discount rate:** the result falls steeply with "Next year's good counts less by", since the tonnes come decades from now and their heat deaths decades after that.
 - **Deaths caused by one more tonne of CO₂**, a value you set.
 - **Survival and permanence:** every tree is assumed to live and stand for 100 years.
 
@@ -34,7 +34,8 @@ SoGive's planting figure is its bottom line. Our steps follow:
 
 - **All projects**, not planting alone.
 - **Tonnes become healthy years** through the shared climate rate, counting heat deaths only; SoGive compares pounds per tonne with its benchmark.
-- **SoGive's untested assumptions** (survival, extra uptake, permanence) applied as our judgments, and a share for the decades the trees take to grow.
+- **SoGive's untested assumptions** (survival, extra uptake, permanence) applied as our judgments.
+- **The wait for the carbon is discounted.** SoGive counts a tonne the same whenever the trees take it up; like every future benefit on the site, the tonnes are discounted at the shared rate for the decades the trees take to grow (about 40 years, our judgment from SoGive's uptake rates), in both of the site's views, since SoGive takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. Volunteers' time isn't counted.
 
 ### Biggest uncertainties

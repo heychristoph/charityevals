@@ -91,8 +91,14 @@ Worked examples to copy:
 
 ## 5. Our steps to the scale (layers B and C)
 
-- `output.unit` is `uov`, `daly`, `wellby` or `ced` (INV-1). No exchange rate between outcomes inside
-  the model, except one the evaluator used, pinned (INV-2).
+- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (INV-2c,
+  normalization.md 1 and 2.7): every conversion the evaluator made in its own way (an exchange rate
+  between outcomes, the value of a death, depression to DALYs, a cash benchmark behind a multiple of
+  cash, a pound/euro rate, a typed-in discount rate) reads the shared version in our view
+  (`$uov_per_ln_consumption`, `@moral_weights`, `@depression.dalys_per_phq9_point_year`,
+  `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
+  "changed for consistency" explainer. A concept two models use with different values and no shared
+  version gets a new shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,

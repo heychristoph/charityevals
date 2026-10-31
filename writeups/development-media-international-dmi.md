@@ -4,6 +4,6 @@ Runs radio and TV campaigns to change health behaviours in low-income countries.
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [DMI rough estimate](/development-media-international) | GW | April 2020 | <span data-figure="headline" data-model="development-media-international-dmi">39</span> | 118 |
-| [Development Media International (Founders Pledge)](/development-media-international/development-media-international-founders-pledge) | FP | November 2022 | <span data-figure="headline" data-model="development-media-international-founders-pledge">5.4</span> | 31 |
+| [Development Media International (Founders Pledge)](/development-media-international/development-media-international-founders-pledge) | FP | November 2022 | <span data-figure="headline" data-model="development-media-international-founders-pledge">5.0</span> | 31 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

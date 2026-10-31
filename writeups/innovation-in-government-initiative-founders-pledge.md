@@ -17,9 +17,9 @@ Founders Pledge credits two reforms:
 
 ### How the model works
 
-Both reforms are put into GiveWell's 2016–17 unit of value, "under-five-life equivalents", added up and divided by the initiative's budget to date ($2.6 million). Founders Pledge then compares the cost per life-equivalent with GiveDirectly's in the same unit. We take that multiple of cash and multiply it by GiveWell's current value of a dollar given to GiveDirectly, as we do for GiveWell's own sheets reported in multiples of cash. That mostly cancels how GiveWell's older units valued a child's life, though India's freed-up money is valued in them directly.
+Founders Pledge puts both reforms into GiveWell's 2016–17 unit of value, "under-five-life equivalents", adds them up and divides by the initiative's budget to date ($2.6 million). It then compares the cost per life-equivalent with GiveDirectly's in the same unit, a multiple of cash. In our view each reform is valued in units of value on its own: India's freed-up money, which Founders Pledge values in GiveWell's 2017 unit directly, through what the same value given as cash is worth at the site's shared cash benchmark; Zambia's income gain directly, like every income gain on the site.
 
-In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia, under 40%.
+In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia, a little over 40% at the default values.
 
 ### What drives the result
 
@@ -30,6 +30,7 @@ In Founders Pledge's figures India is about 83% of the benefit; after our correc
 ### Where we differ from Founders Pledge
 
 - **Zambia's gain per child (corrected):** Founders Pledge's sheet multiplies the gain in test scores per dollar (0.0138 standard deviations per $) by the 286,000 children reached, as if it were a gain per child. We multiply by the dollars spent per child first, our estimate of $7.50 ($5 to $15), from Founders Pledge's own 0.02 standard deviations per dollar against an effect of about 0.15 per child. The Zambia benefit rises 7.5-fold; Founders Pledge's own number stays in the evaluator view.
+- **Valuing Zambia's income gain (changed for consistency):** Founders Pledge turns the gain in ln(income) into child-life equivalents with GiveWell's 2016 moral weights (3 units of ln(income) per DALY, 7 DALYs per child's life) and compares those with GiveDirectly at $11,663 per child-life equivalent: a unit of ln(income) comes to 1.86 units of value. We value it like every income gain on the site, with the weight on income under Your values (1.44 at the default), so those three figures drop out. India's part is unchanged: its child-life equivalents are GiveWell's 2017 unit, worth what $11,663 given as cash is worth at the site's shared cash benchmark (0.00335 units of value per dollar, GiveWell's).
 - **Discount rate:** our view uses the shared rate under Your values (4% by default) for Zambia's earnings gains; Founders Pledge uses 5%. Founders Pledge discounts the eight-year wait with a simple factor, 1 / (1 + 8 × rate), rather than compounding; we keep its formula.
 - **Shared figures:** the earnings gain per standard deviation (10%), the share that is additional (80%), the wait (8 years) and duration (5 years) come from the shared facts for Founders Pledge's 2019 education work. They are the same numbers as in this sheet; the ranges come from Founders Pledge's education sheet.
 - **Credit by share of resources:** when on, staff's pay below market counts as their contribution, at our default for research and policy work (staff about 60% of cost, paid about 30% below market). Founders Pledge's "years brought forward" is its own counterfactual credit and stays in both views.

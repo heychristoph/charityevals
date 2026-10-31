@@ -21,7 +21,7 @@ Giving Green's chain:
 
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. Livestock emissions are methane, nitrous oxide and CO₂ from cleared land, with no fuel smoke, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0 (0–0.05, our judgment: livestock chains burn some fuel, but making alternative proteins takes energy too), and the site values them for their heat deaths.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -38,6 +38,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Livestock tonnes count for their heat deaths only**, because they come with no fuel smoke.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
+- **The wait for the tonnes is discounted.** Giving Green counts a tonne the same whenever it is avoided; the livestock gap between Giving Green's scenarios is widest around 2050, so the tonnes come about 25 years after the 2016–22 spending (15 to 35, our judgment). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Giving Green takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for research and policy work) counts as an in-kind contribution.
 
 ### Biggest uncertainties

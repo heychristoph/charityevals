@@ -22,7 +22,7 @@ Giving Green's chain:
 
 Giving Green's rows come first, ending at its bottom line in dollars per tonne, followed by its comparisons with an offset price and with its $1-a-tonne benchmark. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Air pollution per tonne, from gas power:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels, at the world average. These tonnes come from EU gas plants burning less, and burning gas emits about a twenty-fifth of that average smoke per tonne (see below), so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is all the tonnes (0.8–1) times 0.039 (0.01–0.08).
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -39,6 +39,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Displaced gas power counts its own air pollution.** Gas plants cause roughly 2.8 deaths per TWh of electricity against roughly 25 for coal, (Markandya and Wilkinson, 2007), at 0.49 tonnes of CO₂ per MWh (the gas factor Founders Pledge uses): about a twenty-fifth of the world-average air-pollution deaths per tonne in the shared rate. That makes the result about 2.4 times what heat alone gives (1.1 before October 2026); the world average would have given about 40. The Clean Air Task Force model sets its coal tonnes' smoke the same way.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
+- **The wait for the tonnes is discounted.** Giving Green counts a tonne the same whenever it is avoided; the tonnes come from 2023 to 2030 as the target's renewables are built, about 5 years after the advocacy (3 to 7, our judgment from Giving Green's dates). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Giving Green takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 
 ### Biggest uncertainties

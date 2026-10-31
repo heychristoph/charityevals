@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "pure-earth",
   "owner": "founders-pledge",
-  "summary": "Research, advocacy and cleanup to cut lead poisoning in low- and middle-income countries. Founders Pledge's page states only a multiple of cash transfers, more than 10, which this model takes at face value and turns into income gains through Founders Pledge's own benchmark for GiveDirectly.",
+  "summary": "Research, advocacy and cleanup to cut lead poisoning in low- and middle-income countries. Founders Pledge's page states only a multiple of cash transfers, more than 10, which this model takes at face value and turns into income gains through the site's shared value of a dollar given as cash.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "Pure Earth (charity recommendation)",
@@ -37,7 +37,7 @@
       "id": "to_uov",
       "title": "From a multiple of cash to units of value",
       "kind": "ours",
-      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of cash transfers, valued at $164 per WELLBY-equivalent for GiveDirectly; its own weight on income turns that into the income gain it stands for. charityevals' choice: the page gives no outcome measure, and lead's main measured harm is lost IQ and so lost earnings, so the income route fits best (the health route gives about the same at the defaults)."
+      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of cash transfers. The site values cash at one shared benchmark (GiveWell's 0.00335 units of value per dollar, the income gain of a dollar given as cash), so the multiple times that benchmark is units of value (doubled income-years) per dollar. charityevals' choice: the page gives no outcome measure, and lead's main measured harm is lost IQ and so lost earnings, so the income route fits best (the health route gives about the same at the defaults)."
     },
     {
       "id": "staff_pay",
@@ -64,36 +64,13 @@
       "explainer": "Founders Pledge's figure, quoted on its page: \"more than 10 times as cost-effective as direct cash transfers\". No sheet or method is published. We take 10, the floor the page states. The page is from 2025; the benchmark used to read it is from Founders Pledge's 2022 sheets, the latest it has published."
     },
     {
-      "id": "wellbys_per_dollar_fp",
-      "section": "to_uov",
-      "label": "Founders Pledge's value units per dollar (WELLBY-equivalents)",
-      "format": "small",
-      "formula": "gd_multiple / @founders_pledge.gd_cost_per_wellby",
-      "explainer": "Founders Pledge's multiple divided by its own GiveDirectly benchmark of 2022, $164 per WELLBY-equivalent: the multiple back in Founders Pledge's value units. The page says \"direct cash transfers\"; we read it against Founders Pledge's GiveDirectly benchmark. Because 10 is a floor, the result is a lower bound."
-    },
-    {
-      "id": "wellbys_per_ln_income",
-      "section": "to_uov",
-      "label": "Founders Pledge's value units per unit of ln(income)",
-      "format": "number",
-      "formula": "@founders_pledge.wellbys_per_doubling / ln(2)",
-      "explainer": "Founders Pledge's 2022 weight for doubling one person's income for a year (1.898 WELLBY-equivalents) per unit of ln(income): a doubling is ln 2 units."
-    },
-    {
-      "id": "ln_income_per_dollar",
-      "section": "to_uov",
-      "label": "Increase in ln(income) per dollar",
-      "format": "small",
-      "formula": "wellbys_per_dollar_fp / wellbys_per_ln_income",
-      "explainer": "charityevals' step. Founders Pledge's 'WELLBYs' are its own value unit (3.7 per healthy year, 1.9 per doubled income-year), not life-satisfaction points measured in surveys, so they are turned back into the income gain they stand for, using Founders Pledge's own weight. The benefit counted is mostly higher lifetime income, so the income route fits best."
-    },
-    {
       "id": "uov_per_dollar_fp",
       "section": "to_uov",
       "label": "Units of value per dollar",
       "format": "small",
-      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
-      "explainer": "The income gain valued like every income gain on the site: GiveWell's units of value per unit of ln(consumption) (one unit = doubling one person's income for a year)."
+      "formula": "gd_multiple * @cash.uov_per_dollar",
+      "explainer": "Changed for consistency. Founders Pledge states the result as a multiple of cash transfers; read against its own GiveDirectly benchmark of 2022 ($164 per WELLBY-equivalent, and 1.898 WELLBY-equivalents per doubled income-year), 10 times cash is 0.0321 units of value (doubled income-years) per dollar. The site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335 units of value per dollar given as cash, so that \"10 times cash\" means the same in every model; Founders Pledge's own benchmark comes to almost the same (0.0032). GiveWell's November 2024 estimate for GiveDirectly in Kenya is 2.6 times higher; it sets the top of the benchmark's range. The page says \"direct cash transfers\" and is from 2025; Founders Pledge's 2022 benchmark is the latest it has published. Because 10 is a floor, the result is a lower bound. The evaluator view uses Founders Pledge's 0.0321.",
+      "published": 0.0321321657
     },
     {
       "id": "staff_cost_share",

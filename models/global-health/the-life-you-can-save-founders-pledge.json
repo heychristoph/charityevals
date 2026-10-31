@@ -37,7 +37,7 @@
       "id": "bridge",
       "title": "From money raised to units of value",
       "kind": "ours",
-      "explainer": "charityevals' bridge, not Founders Pledge's: a gross multiplier counts every dollar donors gave through The Life You Can Save. We keep only the share that wouldn't otherwise have gone to similarly effective charities, and value it at a multiple of GiveDirectly's cash transfers (our judgment of the recommended charities' average), with GiveDirectly valued as Founders Pledge values it."
+      "explainer": "charityevals' bridge, not Founders Pledge's: a gross multiplier counts every dollar donors gave through The Life You Can Save. We keep only the share that wouldn't otherwise have gone to similarly effective charities, and value it at a multiple of GiveDirectly's cash transfers (our judgment of the recommended charities' average), with cash valued at the site's shared benchmark."
     },
     {
       "id": "staff_pay",
@@ -109,27 +109,13 @@
       "explainer": "Our judgment, as a multiple of Founders Pledge's GiveDirectly benchmark (about 1.6 years of healthy life per $1,000; the site's GiveWell GiveDirectly model is 4.4). The recommended charities range from GiveDirectly to GiveWell's top charities (AMF and seasonal malaria chemoprevention are about 15 times Founders Pledge's benchmark on this site), with some climate and water charities that aren't valued here. 5, from 2 to 10."
     },
     {
-      "id": "gd_wellbys_per_dollar",
-      "section": "bridge",
-      "label": "GiveDirectly's value per dollar, in Founders Pledge's value units",
-      "format": "small",
-      "formula": "1 / @founders_pledge.gd_cost_per_wellby",
-      "explainer": "Founders Pledge's benchmark: $164 per WELLBY-equivalent for GiveDirectly."
-    },
-    {
-      "id": "wellbys_per_ln_income",
-      "section": "bridge",
-      "label": "Founders Pledge's value units per unit of ln(income)",
-      "format": "number",
-      "formula": "@founders_pledge.wellbys_per_doubling / ln(2)"
-    },
-    {
       "id": "gd_uov_per_dollar",
       "section": "bridge",
       "label": "GiveDirectly's units of value per dollar",
       "format": "small",
-      "formula": "gd_wellbys_per_dollar / wellbys_per_ln_income * $uov_per_ln_consumption",
-      "explainer": "Cash transfers' value per dollar, back in the income gain it stands for and valued with the site's weight on income: about 0.0032, close to GiveWell's 0.0034."
+      "formula": "@cash.uov_per_dollar",
+      "explainer": "Changed for consistency. Cash transfers' value per dollar. This model first read it from Founders Pledge's 2022 GiveDirectly benchmark ($164 per WELLBY-equivalent, 1.898 WELLBY-equivalents per doubled income-year): 0.0032 units of value per dollar. The site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335 units of value per dollar given as cash, so that a multiple of cash means the same in every model. The evaluator view keeps 0.0032.",
+      "published": 0.003213216573
     },
     {
       "id": "uov_per_dollar_fp",
