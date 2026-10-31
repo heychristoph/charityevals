@@ -347,10 +347,10 @@
     "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
     "cell": "Main CEA!B212"
    },
-   "explainer": "Ambitious Impact's fixed 4% for costs, kept in our view too. In this sheet the rate's main job is the last year's perpetuity of ongoing costs (cost / rate, every year after the 30 the impacts are counted for): tied to the shared rate, that perpetuity becomes infinite at 0% while the benefits stay finite, so the result would fall to nothing and stop moving one way with the slider. The benefits over the years are discounted at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 4% a year in every CEA (kept in the evaluator view). Our view discounts costs at the shared rate (Your values), floored just above 0 because AIM's formulas divide by it.",
    "format": "percent",
-   "value": 0.04,
-   "kind": "judgment"
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04
   },
   {
    "id": "impact_period_begins_in_year_suggest_0_suggest_range_0_2",
@@ -859,9 +859,11 @@
    "id": "effective_discount_rate_for_reach_of_costs_over_time",
    "label": "Effective discount rate, for reach of costs over time",
    "section": "main_cea",
-   "formula": "discount_rate_for_fixed_costs_keep_fixed_in_all_ceas",
+   "formula": "discount_rate_for_fixed_costs_keep_fixed_in_all_ceas + probability_change_happens_anyway_per_year_suggest_0_for_dir - impacted_population_growth_rate_if_relevant_e_g_5_if_interve",
    "expected": 0.04,
-   "format": "percent"
+   "format": "percent",
+   "published": 0.04,
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts the costs of reaching households at its fixed cost rate (4%), while the impacts of reaching them fade with the chance the change happens anyway (5% a year) and grow with the population (2%). Our view gives the costs the impacts' horizon: the charity stops paying when the change would have happened anyway, and pays for more households as the population grows, discounted at the shared rate. Ambitious Impact's 4% is kept in the evaluator view."
   },
   {
    "id": "total_costs_if_successful_discounted_consumption_doublings",
@@ -3177,9 +3179,11 @@
    "id": "total_costs_if_successful_discounted_29",
    "label": "Total costs (if successful) discounted",
    "section": "main_cea",
-   "formula": "total_fixed_costs_29 / discount_rate_for_fixed_costs_keep_fixed_in_all_ceas * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (cell_ak328_on_main_cea - 1) + total_variable_costs_29 / discount_rate_for_fixed_costs_keep_fixed_in_all_ceas * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (cell_ak328_on_main_cea - 1)",
+   "formula": "total_fixed_costs_29 / (discount_rate_for_fixed_costs_keep_fixed_in_all_ceas + probability_change_happens_anyway_per_year_suggest_0_for_dir) * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (cell_ak328_on_main_cea - 1) + total_variable_costs_29 / effective_discount_rate_for_reach_of_impacts_over_time * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (cell_ak328_on_main_cea - 1)",
    "expected": 1183663.78,
-   "format": "usd"
+   "format": "usd",
+   "published": 1183663.78,
+   "explainer": "**Changed for consistency.** Ambitious Impact's last year counts the ongoing costs forever, divided by the cost rate alone, while the impacts' perpetuity in the same year fades with the chance the change happens anyway (5% a year) and grows with the population. With the shared discount rate that would make costs infinite at 0% and benefits finite. Our view runs the costs over the impacts' horizon: fixed costs stop when the change would have happened anyway (rate + 5%), costs per household reached follow the reach as the impacts do (the impacts' effective rate). Ambitious Impact's figure is kept in the evaluator view."
   },
   {
    "id": "npv_total_costs_if_charity_successful",
