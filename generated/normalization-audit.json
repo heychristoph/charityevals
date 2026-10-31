@@ -56,8 +56,8 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 18208,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 4701,
+   "input equals a shared value but its label doesn't resemble the shared one's": 27042,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 4824,
    "round value (one significant digit) and labels only loosely alike": 57,
    "input within 0.1% of a shared value (not equal) and labels only loosely alike": 9,
    "shared label too generic (under three significant words) for a loose match": 14,
@@ -143,7 +143,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   "waived": 0,
   "failing_models": []
  },
@@ -165,6 +165,16 @@
   "violations": [],
   "how": "Ambitious Impact's models (the rule is general; other evaluators' models are being brought under it separately): every row on the path to the output whose label states an income-to-health exchange rate (years of doubled consumption to DALYs); a value of a death averted, in DALYs or years of life; a pound or euro exchange rate must read the shared version ($uov_per_ln_consumption (and $uov_per_daly); @moral_weights.* * $life_value_multiplier; @fx.*). Labels stand in for meaning, so a rate under another name isn't seen; stillbirths, which have no shared value, are left out.",
   "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-12",
+  "title": "Money moved and career changes are valued one way",
+  "status": "partial",
+  "checked": 5,
+  "violations": [],
+  "how": "Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (value_global_health, value_animals, value_longtermist, moved_dollar_value, prior_dollar_value, new_money_share, moved_dollar_net_value) must have the shared formula word for word; and every row on its path stating an organisation's chance of success must read @meta.success_chance_new_org. A row on the path about career changes needs the shared career_change_value = career_forgone_pay * career_years * career_employer_value * career_counterfactual_share. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.",
+  "waived": 2,
   "failing_models": []
  }
 ]

@@ -1,8 +1,8 @@
 ### Summary
 
-The Life You Can Save promotes effective giving, through Peter Singer's book and its own outreach, and raises money for a list of recommended charities fighting extreme poverty. Founders Pledge estimated it raised about $17 for those charities for each dollar it received. After allowing for money donors would have given anyway and for the lower ratio of recent years, that is **<span data-figure="headline" data-model="the-life-you-can-save-founders-pledge">32</span> years of healthy life per $1,000**.
+The Life You Can Save promotes effective giving, through Peter Singer's book and its own outreach, and raises money for a list of recommended charities fighting extreme poverty. Founders Pledge estimated it raised about $17 for those charities for each dollar it received. At the lower ratio of recent years, and valuing each dollar moved the way the site values every meta charity's, that is **<span data-figure="headline" data-model="the-life-you-can-save-founders-pledge">185</span> years of healthy life per $1,000**.
 
-Founders Pledge's figure is a gross multiplier; everything after it is our bridge, and the result rests on two judgments.
+Founders Pledge's figure is a gross multiplier; everything after it is ours: today's ratio, and the site's shared method for money moved.
 
 ### What the charity does
 
@@ -17,28 +17,30 @@ Donors it reaches give to its recommended charities, which save lives and raise 
 Founders Pledge's figure comes first: 17 dollars raised per dollar received (2019–2021). Our bridge follows:
 
 - **The ratio now:** The Life You Can Save's own three-year ratio has fallen to about 10 (2024 and 2025 reports), so we use 59% of Founders Pledge's 17, with 17 as the high end;
-- **Money that wouldn't otherwise have been given as well:** 40% (20% to 70%), our judgment;
-- **What a dollar to the recommended charities does:** 5 times cash transfers (2 to 10), our judgment, with cash valued at the site's shared benchmark for cash transfers.
+- **Where the money goes:** GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium, Helen Keller Intl, New Incentives), each at its own result on this site under your values, weighted by GiveWell's 2024 funding: about 0.041 units of value per dollar (21 years of healthy life per $1,000);
+- **New and shifted money:** half the money is new (Ambitious Impact's Effective Giving Incubation figure, 35% to 80%) and counts in full; the rest would have been given anyway and counts only for the gain over GiveDirectly's result.
+
+Each dollar moved is then worth about 0.037 units of value, and The Life You Can Save moves about 10 per dollar it receives.
 
 ### What drives the result
 
-- **The value of the recommended charities** (2 to 10 times cash).
-- **The counterfactual share** (20% to 70%).
-- **How income and health are weighed** (Your values).
+- **The ratio of money moved** (54% to 100% of Founders Pledge's 17).
+- **The share of new money** (35% to 80%) and **where shifted money would have gone** (nothing to three times GiveDirectly).
+- **Your values:** how lives and income are weighed moves the Top Charities' results, and with them this one.
 
 ### Where we differ from Founders Pledge
 
 - **Everything after the multiplier** is ours: Founders Pledge gives no figure in outcomes.
-- **The value of cash (changed for consistency):** the bridge values the money raised as a multiple of cash transfers. Read against Founders Pledge's 2022 GiveDirectly benchmark, a dollar of cash is worth 0.0032 units of value; the site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335, about 4% more. The evaluator view keeps 0.0032.
+- **Money moved, valued one way (changed for consistency):** this model used to keep 40% of the money (our own judgment) and value it at 5 times cash transfers. The site now values every meta charity's money moved by one method (docs/normalization.md 2.8): the same share of new money, the same value for where shifted money would have gone, and the charities the money reaches at their live results. That raised the result from 34 to 185 years per $1,000, because a dollar to GiveWell's Top Charities, at their results on this site, is worth about 2.5 times the old five-times-cash valuation, and because half the money now counts in full and the rest for its gain over GiveDirectly, where 40% counted before.
 - **Credit by share of resources:** when on, donors' own gifts and staff's forgone pay share the outcome, which lowers the result a lot. Off by default.
 
 ### Biggest uncertainties
 
-How much of the money raised is new: neither Founders Pledge nor The Life You Can Save publishes a counterfactual figure, and some of its money comes from large donors who already give effectively.
+How much of the money raised is new: neither Founders Pledge nor The Life You Can Save publishes a counterfactual figure, and some of its money comes from large donors who already give effectively. The site's shared 50% is Ambitious Impact's estimate for effective-giving organisations in general.
 
 ### What isn't modelled
 
-Longer-run effects on donors' giving after they stop giving through The Life You Can Save; its climate and water recommendations, valued here like the rest.
+Longer-run effects on donors' giving after they stop giving through The Life You Can Save; its climate and water recommendations, valued here like GiveWell's Top Charities.
 
 ### Sources
 

@@ -308,6 +308,9 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Pounds, euros, kroner | `@fx.usd_per_<cur>_<year>` | IRS yearly averages | IRS (2021–25 live table, 2015–20 archived) |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
 | Species | `@welfare_ranges.*` (2.4) | | Rethink Priorities |
+| A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0539 across causes, 0.0413 global health (units of value per $) | GiveWell 2024 funding, ACE's Recommended Charities, Giving What We Can 2020–22 |
+| New money among money moved | `@meta.new_money_share` | 50% (35–80%) | Ambitious Impact, Effective Giving Incubation report |
+| A new meta organisation's chance of success | `@meta.success_chance_new_org` | 55.7% (50–63.5%) | Ambitious Impact, Better Futures Guide CEA |
 
 **Depression.** Evaluators that leave their own unit for health each turned depression into DALYs
 their own way: Founders Pledge spreads GBD's severe weight over the whole PHQ-9 (0.658 / 27 = 0.0244 a
@@ -381,6 +384,104 @@ for a later shared fact), disability weights for single diseases each used by on
 weights, No Means No's PTSD 0.133), fade and "opportunities get worse" rates, GiveWell's
 costs averted per DALY, and HLI's death values.
 
+### 2.8 Money moved, success and career changes: one method (October 2026)
+
+Meta charities (evaluators, fundraisers, effective-giving and research organisations) produce no outcome
+of their own: they move money, and sometimes people, to charities that do. Before this section the
+site valued a moved dollar three ways: CEARCH (Ambitious Impact) as EA dollars × 8 × GiveWell's cash
+benchmark (our judgment 2–15), The Life You Can Save (Founders Pledge) as 40% of the money (our
+judgment) × 5 × Founders Pledge's GiveDirectly, Better Futures Guide (Ambitious Impact) with Ambitious
+Impact's 35% new money at 3× its pre-2024 GiveDirectly and a 55.7% chance of success, CEARCH with our
+own 60%. Counterfactual shares, destinations and success chances differed for no reason. Now every
+meta model values money one way, in a section of its own (`moved_money`, kind `ours`) whose rows are
+written word for word from src/engine/moved-money.ts (`python3 scripts/moved-money.py <model> <mix|global-health> [net]`)
+and checked by INV-12.
+
+**Reading another model live: `#model-id`.** A formula may read another model's result per dollar in
+common units (units of value), in our view, under the reader's current values: `#against-malaria-foundation`.
+The engine (src/engine/model.ts `modelResult`) computes the referenced model's `bottomLine(...).common`
+with the reader's assumption values (never the referencing model's evaluator pins, and never the
+reader's page edits), caches it per set of values, and stores it beside the rows as `"#id"`, so the
+tree, uncertainty and derivations read the same number; `inputs["#id"]` overrides it like an input.
+`buildLibrary` reports an unknown model, a model without a result in common units, and any cycle of
+references (and a cycle yields NaN at run time, never a loop); a model rebuilt on its own (a bulk
+model's page) passes `{ models: lib.models }`. Model ids contain hyphens, so a minus after a reference
+needs a space (`#givedirectly - x`). The browser's stand-ins (scripts/summaries.ts) keep every row that
+reads a model live, and the reference itself, so a page computes the same result under any values;
+`npm run check` fails when they are stale.
+
+*Sliders and ranges.* Every slider the referenced models read moves the meta model (`usedAssumptions`
+adds them, so the sensitivity ranges swing them too; INV-10 expects no independence from them). The
+referenced models' own inputs and facts are not varied inside the meta model's range: it uses each
+destination's result at the reader's values, so the meta model's range covers its own inputs, the
+shared meta facts and the shared assumptions, not the destinations' input uncertainty. Deliberate: a
+destination's own range is shown on its own page, and adding ten models' input ranges into one joint
+low/high would make every meta range meaningless.
+
+**The method** (facts/meta.json):
+
+```
+value_global_health = Σ GiveWell 2024 funding share × #top-charity          (AMF 49.5%, Malaria Consortium SMC 28.7%,
+                                                                             Helen Keller VAS 17.8%, New Incentives 4.0%)
+value_animals       = avg(#ACE Recommended Charities, November 2025)          (equal weights, ten models)
+value_longtermist   = @meta.value_longtermist = 0                             (said openly: no model puts it on the scale)
+V = moved_dollar_value
+    across causes:  (h × value_global_health + a × value_animals + l × 0) / (h + a + l)
+                    h, a, l = Giving What We Can 2020–22: 60%, 10%, 10%; the ~20% unknown or several
+                    causes is valued at the average of the known ones, so it drops out
+    one cause:      value_global_health  (an organisation that only moves money to global health and poverty)
+V_before = prior_dollar_value = @meta.prior_vs_cash × #givedirectly          (1×, from 0 to 3×)
+net      = moved_dollar_net_value = new × V + (1 − new) × (V − V_before)     new = @meta.new_money_share = 50% (35–80%)
+success  = @meta.success_chance_new_org = 55.7% (50–63.5%)                   for an organisation not yet proven
+```
+
+- *Destinations.* GiveWell's Top Charities weighted by what GiveWell directed to each in 2024
+  ($150m, $87m, $54m, $12m of $303m, GiveWell's 2024 metrics post); Animal Charity Evaluators' ten
+  Recommended Charities with equal weights (its Recommended Charity Fund spreads money over all of them
+  and publishes no fixed split); longtermist causes at 0. At today's defaults: global health 0.0413
+  units of value per dollar (20.7 healthy years per $1,000), animals 0.183 (91.5, mostly Sinergia
+  Animal), the across-causes mix 0.0539 (26.9). GiveDirectly 0.00872.
+- *Which mix.* An organisation whose donors give across causes (CEARCH: "EA donations") takes the
+  Giving What We Can mix; one that only moves money within global health and poverty (The Life You Can
+  Save's recommended list, Better Futures Guide's livelihoods charities) takes that destination alone.
+  Better Futures Guide's charities don't exist yet; Ambitious Impact assumes they reach GiveWell's bar
+  (3× GiveDirectly's new estimate), so GiveWell's Top Charities stand in.
+- *Shifted money.* Money given anyway, now to a better charity, earns only the gain. Where it would
+  have gone is GiveDirectly's live result (Ambitious Impact's assumption), times a shared multiple
+  with a range from 0 (ordinary charities) to 3 (GiveWell's bar).
+- *A result already counterfactual.* CEARCH's bottom line is in dollars of "equivalent donations to
+  today's top-tier EA charities", already net of what the money would have done: it is multiplied by V,
+  not by the net value.
+- *An evaluator's own valuation inside its layer* (Better Futures Guide): the sheet's rows stay; our
+  bottom line divides out the value per dollar moved its rows imply (`aim_value_per_dollar_moved`) and
+  multiplies by ours (`moved_money_revaluation`, `published` 1 so the evaluator view keeps the sheet's).
+  The sheet's new-money share and chance of success read the shared facts, the sheet's figures in
+  `published`.
+
+**Career changes** (the mirror of staff pay below market). Staff who take less than they could earn
+elsewhere give the difference in kind; it is credited at $1 of the employer's cost per $1 forgone
+(`salary_sacrifice`, 273 models, on with credit by share of resources). A programme that moves people
+into high-impact jobs is the other side: per career changed,
+
+```
+career_change_value = career_forgone_pay × career_years × career_employer_value × career_counterfactual_share
+```
+
+forgone pay a year (what they could earn elsewhere less what they take), the years they stay, the
+new employer's live result per dollar (`#employer-model`, or `moved_dollar_value` where the jobs are
+spread over many employers), and the share of the changes the programme caused (its own survey or a
+labelled judgment, with a range). No model on the site uses it today (High Impact Professionals'
+model was removed); INV-12 requires it of any model with a row on its path about career changes.
+
+**Before → after** (healthy years per $1,000 at the defaults; plausible range in brackets):
+
+| Model | Our view | Evaluator view | What changed |
+|---|---|---|---|
+| CEARCH (Ambitious Impact, 2021) | 53.2 [0.42–313] → 99.4 [1.3–978] | 104 → 210 | 8× cash benchmark (2–15) → V across causes, live (0.0539); our 60% success (40–80%) → shared 55.7%. The evaluator view also uses V (Ambitious Impact gives no value for its EA dollars) and the sheet's 100% success and 0% discount. |
+| The Life You Can Save (Founders Pledge) | 33.6 [1.0–1,040] → 185 [5.6–1,430] | 32.2 → 185 | 40% kept (20–70%) × 5× Founders Pledge's cash (2–10) → 50% new money, global-health destinations live, shifted money net of GiveDirectly (0.0370 per dollar moved, 5.5× the old 0.0067). Founders Pledge states only its gross 17×, so both views use the shared method. |
+| Better Futures Guide (Ambitious Impact, 2025) | 27.9 [9.5–71] → 62.7 [7.6–308] | 27.9 → 27.9 | the sheet's 35% new money and 3× its old GiveDirectly (0.0165 per dollar moved) → 50% and GiveWell's Top Charities live (0.0370), × 2.25; success already 55.7%, now read from the shared fact. Evaluator view unchanged. |
+
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -403,6 +504,7 @@ shrinks).
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
 | INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | (Ambitious Impact's models for now.) Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death) or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@fx.*`), itself or through a row it is computed from. |
+| INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
@@ -524,6 +626,10 @@ evaluator view still reproduces every `expected`. Every slider moves every model
    `$discount_rate` (scripts/aim-shared-rates-2.py). No benefit grows with the economy in our view (Learning
    Alliance's 3% offset is AIM's only).
 5. **INV-11** checks it.
+6. **Money moved: one method** (2.8). Every slider moves every model, meta charities included: a dollar moved is
+   worth its destinations' live results (`#model`), one share of new money, one value for where shifted money
+   would have gone, one chance of success for a new organisation; career changes are the mirror of staff pay.
+   CEARCH, The Life You Can Save and Better Futures Guide follow it; INV-12 checks it.
 
 ## 6. Order of work
 
