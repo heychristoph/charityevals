@@ -12,7 +12,8 @@ Inputs: the model path; optionally the write-up path, the previous round's findi
 (sources and model ids you must not read; pass the ids to `--exclude`) and where to write findings
 (default: print them).
 
-The rules are docs/normalization.md (standard steps, INV-1…INV-10, SAME-CHANGE), the import-cea
+The rules are docs/normalization.md (standard steps, shared versions in 2.7, money moved in 2.8, won
+reforms in 2.9, INV-1 … INV-17 and SAME-CHANGE in section 3, the owner decisions), the import-cea
 skill (evaluator models, ranking, write-ups) and build-cea's references/templates.md (charityevals
 models). Results are years of healthy life per $1,000 throughout.
 
@@ -24,7 +25,17 @@ models). Results are years of healthy life per $1,000 throughout.
   the lint codes that only apply to charityevals models (owner, template, required-row, unit, output,
   sections, donor, species).
 - `npx tsx scripts/check.ts <id>` (model in models/): `expected` values reproduce in the evaluator view.
-- `npx tsx scripts/normalization-audit.ts` (model in models/): any violation for this model.
+- `npx tsx scripts/normalization-audit.ts` (model in models/): any violation for this model is a
+  finding (high). A waiver is acceptable only for a checked false positive, with its reason in
+  src/engine/normalization-waivers.json; a waiver covering a real problem is itself a high finding.
+  The allowlist (src/engine/normalization-allowlist.json) stays `{}`. Know what each check sees and
+  misses (`how` in the report): INV-2c (an evaluator's own conversion moving our headline), INV-2d (a
+  constant beside a lever in a formula, `8 * $life_value_multiplier`), INV-4 (a literal copy of a shared
+  number, with label synonyms and 0.2% tolerance), INV-13 (the same concept at another value in another
+  model; place and year are the only reasons), INV-14 (a literal in five or more models with no fact
+  behind it), INV-15 (more than ten times its peers without a reason in the summary), INV-16 (a side or
+  value-of-information sheet ranked, or a bottom-line location that isn't the sheet's), INV-17 (deaths
+  in a WELLBY model moving with the WELLBY rate).
 
 Copy the high and medium findings into your list (don't re-derive them), then go beyond them.
 
@@ -40,8 +51,23 @@ Copy the high and medium findings into your list (don't re-derive them), then go
     sourced, nothing else reading species weights;
   - one SADs figure per physical change (`@sad_factors`), with the evaluator's own in `published`
     and an explainer that says so;
-  - deaths read `$life_value_multiplier`; benefits over several years read `$discount_rate`, with no
-    typed-in present value;
+  - one consistent way: every conversion (exchange rate between outcomes, value of a death, depression
+    to health, cash benchmark, currency rate, time discount) reads the shared version in our view, the
+    evaluator's figure in `published` with a "changed for consistency" explainer, and the evaluator
+    view still reproduces every `expected`;
+  - deaths read `@moral_weights.<age band>` (the band of the death's age, or an `@death_ages` mix) ×
+    `$life_value_multiplier`; in a WELLBY model they don't move with `$daly_per_wellby`;
+  - depression anchored on `@depression` (PHQ-9 points, `phq9_sd` per SD); therapy spillovers from
+    `@wellby_factors`;
+  - every future benefit, and the wait before it, reads `$discount_rate`, with no typed-in present value;
+  - a won reform counts `$win_years_counted` years, the wait discounted, pledges kept from
+    `@sad_factors.commitment_fulfilment_*`, diet change × `@sad_factors.production_response` (2.9);
+  - a cost per outcome that is past spending over past wins (campaigns, policy, research, money moved)
+    × `@meta.marginal_vs_past_average`;
+  - money moved through the shared rows of src/engine/moved-money.ts, destinations live (`#model-id`);
+  - an idea-stage (Ambitious Impact) model shown only if the charity runs the programme and nothing
+    better exists, flagged `theoretical`;
+  - best guesses, not conservative cases; subjective inputs filed as `kind: "judgment"`;
   - credit by share of resources counts every contributor's spending and staff's forgone pay;
   - the evaluator view pins the evaluator's own rates;
   - for an import, the evaluator's rows unchanged except visible overwrites.
@@ -73,8 +99,8 @@ so the severity rests on a number.
 - Ranges: real uncertainty or arbitrary ±? Anything uncertain left as a point value? Judge the spread
   with shared assumptions at their defaults: those are the visitor's to set, not the builder's.
 - Peers: where the result sits among models in the same unit and for the same intervention, and
-  which row explains the gap with the nearest one. More than 10× outside the peers needs a sourced
-  reason. The same physical change or the same shared number must count the same as in the peers.
+  which row explains the gap with the nearest one. More than 10× the peers' median needs a reason in
+  the model's `summary` (INV-15), sourced where it can be. The same physical change or the same shared number must count the same as in the peers.
 
 ## 6. Severity
 
@@ -84,7 +110,9 @@ so the severity rests on a number.
   an evaluator's own conversion kept in our view where charityevals has a shared one (exchange
   rates between outcomes, DALY definitions, value of life, discounting, cash benchmarks, currency
   rates); a conservative or optimistic case used where the evaluator gives a best guess; a future
-  benefit not discounted at `$discount_rate`; a founders' or funding counterfactual subtracted in
+  benefit not discounted at `$discount_rate`; a death valued off its age band or not moving with
+  `$life_value_multiplier`; a past average used without `@meta.marginal_vs_past_average`; a judgment
+  filed as observed or estimate; a founders' or funding counterfactual subtracted in
   our view; an unfinished sheet imported; an idea-stage estimate shown for a charity that doesn't
   run the programme, or without the `theoretical` flag; any normalization-audit violation;
   anything `npm run check` rejects.
