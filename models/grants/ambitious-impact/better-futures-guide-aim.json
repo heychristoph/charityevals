@@ -47,10 +47,16 @@
    "explainer": "charityevals' step, not Ambitious Impact's: with credit by share of resources on, staff's forgone pay counts as part of the cost."
   },
   {
+   "id": "moved_money",
+   "title": "Value of a dollar moved (shared)",
+   "kind": "ours",
+   "explainer": "charityevals' shared method for money a meta charity moves, the same rows in every such model (docs/normalization.md 2.8). A dollar moved is worth what the charities it reaches achieve, each at its live result on this site under your values; new money counts in full, shifted money only for the gain over where it would have gone."
+  },
+  {
    "id": "bottom_line",
    "title": "Bottom line",
    "kind": "ours",
-   "explainer": "charityevals' step, not Ambitious Impact's: its bottom line per dollar, in the site's units."
+   "explainer": "charityevals' step, not Ambitious Impact's: its bottom line per dollar, in the site's units, with the money moved valued by the site's shared method."
   }
  ],
  "rows": [
@@ -258,15 +264,15 @@
    "id": "new_money_raised_as_total_money_moved",
    "label": "New money raised as % total money moved",
    "section": "main_cea",
-   "value": 0.35,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1YGItQcdngy4HXZw-oUjlOWTVgO06UseqXQ9TkO3XSJo/edit",
     "cell": "Main CEA!B34"
    },
-   "explainer": "From AIM's Effective Giving Incubation Report: 'Further, we find good evidence that the percentage of money raised that is\ncounterfactual (i.e. would not have otherwise been donated) is about 50% of the total\nraised'.\n\nMaybe charity evaluators raise less new funding than effective giving organizations. If they are 50%, maybe 35% is a reasonable assumption. https://9475dbf4-555e-4808-9886-5f8ee815cc82.usrfiles.com/ugd/9475db_d06fa170d29349318fe61cd87f1d5faa.pdf",
-   "format": "percent"
+   "explainer": "Changed for consistency: every meta charity on the site reads one shared share of new money in our view, 50%, the figure from Ambitious Impact's own Effective Giving Incubation report quoted below; the evaluator view keeps the sheet's 35%. (The site's value of a dollar moved replaces the sheet's in the bottom line anyway, so this row only keeps the sheet's own rows consistent with it.)\n\nFrom AIM's Effective Giving Incubation Report: 'Further, we find good evidence that the percentage of money raised that is\ncounterfactual (i.e. would not have otherwise been donated) is about 50% of the total\nraised'.\n\nMaybe charity evaluators raise less new funding than effective giving organizations. If they are 50%, maybe 35% is a reasonable assumption. https://9475dbf4-555e-4808-9886-5f8ee815cc82.usrfiles.com/ugd/9475db_d06fa170d29349318fe61cd87f1d5faa.pdf",
+   "format": "percent",
+   "published": 0.35,
+   "formula": "@meta.new_money_share"
   },
   {
    "id": "of_that_new_money_usd_2023",
@@ -1497,9 +1503,11 @@
    "id": "probability_of_success",
    "label": "Probability of success",
    "section": "main_cea",
-   "formula": "average_of_methods",
+   "formula": "@meta.success_chance_new_org",
    "expected": 0.5573717949,
-   "format": "percent"
+   "format": "percent",
+   "published": 0.5573717949,
+   "explainer": "Changed for consistency. Ambitious Impact's average of its three methods (this tab), 55.7%. Every not-yet-proven meta organisation on the site reads one shared chance of success in our view, which is this figure (range 50–63.5%, its lowest and highest method), so the default doesn't change; the evaluator view uses the sheet's own number."
   },
   {
    "id": "if_charity_is_unsuccessful_what_of_successful_money_moved_wi",
@@ -2214,6 +2222,63 @@
    "expected": 55.73968888
   },
   {
+   "id": "aim_value_per_dollar_moved",
+   "section": "bottom_line",
+   "label": "The sheet's value of a dollar moved, units of value",
+   "format": "small",
+   "formula": "(new_money_raised_as_total_money_moved * income_doublings_per_usd_donated_to_new_opporuntities_identi + (1 - new_money_raised_as_total_money_moved) * (income_doublings_per_usd_donated_to_new_opporuntities_identi - income_doublings_per_usd_donated_to_givedirectly)) * ln(2) * $uov_per_ln_consumption",
+   "explainer": "What the sheet's rows credit per dollar the evaluator moves: new money at 3 times its GiveDirectly figure, the rest shifted money for the gain over GiveDirectly, in years of doubled consumption, turned into units of value like the bottom line. Taken out again in the next row."
+  },
+  {
+   "id": "value_global_health",
+   "section": "moved_money",
+   "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
+   "format": "small",
+   "formula": "@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives",
+   "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
+  },
+  {
+   "id": "moved_dollar_value",
+   "section": "moved_money",
+   "label": "Value of a dollar moved, units of value",
+   "format": "small",
+   "formula": "value_global_health",
+   "explainer": "This organisation moves money only to global health and poverty charities, so a dollar moved is valued at that destination alone (GiveWell's Top Charities, live), not the across-causes mix."
+  },
+  {
+   "id": "prior_dollar_value",
+   "section": "moved_money",
+   "label": "Value of a dollar where shifted money would otherwise have gone, units of value",
+   "format": "small",
+   "formula": "@meta.prior_vs_cash * #givedirectly",
+   "explainer": "Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
+  },
+  {
+   "id": "new_money_share",
+   "section": "moved_money",
+   "label": "Share of money moved that is new money",
+   "format": "percent",
+   "formula": "@meta.new_money_share",
+   "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
+  },
+  {
+   "id": "moved_dollar_net_value",
+   "section": "moved_money",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "format": "small",
+   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+  },
+  {
+   "id": "moved_money_revaluation",
+   "section": "bottom_line",
+   "label": "The site's value of a dollar moved over Ambitious Impact's",
+   "format": "multiple",
+   "formula": "moved_dollar_net_value / aim_value_per_dollar_moved",
+   "published": 1,
+   "explainer": "Changed for consistency. Ambitious Impact values the money the evaluator moves with its own new-money share (35%), its own multiple for the charities it would find (3 times its pre-November 2024 GiveDirectly figure) and that GiveDirectly figure for where shifted money would have gone. Our view values every meta charity's moved money one way (docs/normalization.md 2.8): half new money (Ambitious Impact's own Effective Giving Incubation figure), going to GiveWell's Top Charities at their live results, shifted money credited for the gain over GiveDirectly's live result. This row swaps one for the other; the money moved, the costs and the chance of success stay Ambitious Impact's. The evaluator view keeps Ambitious Impact's (1)."
+  },
+  {
    "id": "staff_cost_share",
    "section": "staff_pay",
    "label": "Staff pay as a share of program cost",
@@ -2258,8 +2323,8 @@
    "id": "uov_per_dollar",
    "section": "bottom_line",
    "label": "Units of value per dollar",
-   "formula": "(income_doublings_per_1000_usd / 1000 * ln(2) * $uov_per_ln_consumption) * donor_cost_share",
-   "explainer": "Ambitious Impact counts income in years of doubled consumption. A doubling for a year is ln 2 of log-consumption, which is one GiveWell unit of value at the shared value of income, so the result ranks with the GiveWell models. With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+   "formula": "(income_doublings_per_1000_usd / 1000 * ln(2) * $uov_per_ln_consumption) * moved_money_revaluation * donor_cost_share",
+   "explainer": "Ambitious Impact counts income in years of doubled consumption. A doubling for a year is ln 2 of log-consumption, which is one GiveWell unit of value at the shared value of income, so the result ranks with the GiveWell models. Then the site's value of a dollar moved in place of Ambitious Impact's, and, with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
   }
  ],
  "output": {
@@ -2271,7 +2336,7 @@
    "unit": "years of doubled consumption per $1,000 (expected, with 56% chance of success)"
   }
  },
- "summary": "Ambitious Impact's 2025 estimate for a new evaluator that finds and recommends highly cost-effective livelihoods charities, moving donors' money to them. The idea Better Futures Guide was founded to run. Its bottom line is the years of doubled consumption per $1,000 of the evaluator's costs, from new and shifted donations, weighted by its chance of success.",
+ "summary": "Ambitious Impact's 2025 estimate for a new evaluator that finds and recommends highly cost-effective livelihoods charities, moving donors' money to them. The idea Better Futures Guide was founded to run. Its bottom line is the years of doubled consumption per $1,000 of the evaluator's costs, from new and shifted donations, weighted by its chance of success. Our view values the money it moves by the site's shared method for meta charities (new money share, destinations at their live results, one chance of success).",
  "theoretical": {
   "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
   "runs": "Better Futures Guide is setting up as a livelihoods charity evaluator; its first recommendations are planned before the end of 2026.",
