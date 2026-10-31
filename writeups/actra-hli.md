@@ -1,6 +1,6 @@
 ### Summary
 
-ACTRA (Acción Transformadora) runs group cognitive behavioural therapy for young men with violent or criminal backgrounds in Colombia, to cut crime and help the men themselves. The Happier Lives Institute predicts it creates 37 WELLBYs per $1,000 donated; on our scale that is **<span data-figure="headline" data-model="actra-hli">18</span> years of healthy life per $1,000**.
+ACTRA (Acción Transformadora) runs group cognitive behavioural therapy for young men with violent or criminal backgrounds in Colombia, to cut crime and help the men themselves. The Happier Lives Institute predicts it creates 37 WELLBYs per $1,000 donated; on our scale that is **<span data-figure="headline" data-model="actra-hli">2.0</span> years of healthy life per $1,000**.
 
 HLI publishes no spreadsheet for this estimate. The model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 37.
 
@@ -30,6 +30,7 @@ HLI's rows give its bottom line in WELLBYs per $1,000. Our steps follow: the ben
 
 ### Where we differ from HLI
 
+- **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, set so that a fall in depression counts the same in HLI's analyses as in the site's other depression models (0.13 doubled-income years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 1.15, nine times higher; the evaluator view converts at that rate.
 - **Discounting.** HLI counts a WELLBY in ten years the same as one now; our view spreads the benefits over 10 years and discounts them at the shared rate.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution.
 

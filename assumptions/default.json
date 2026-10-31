@@ -73,18 +73,26 @@
     {
       "id": "uov_per_wellby",
       "section": "cross-cause",
-      "label": "1 life-satisfaction point vs doubled-income year",
+      "label": "1 point more life satisfaction for a year vs doubled-income year",
       "technical": "Units of value per WELLBY (wellbeing-adjusted life year)",
-      "fixed": true,
       "unit": "units of value / WELLBY",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 1.15,
+        "low": 0.1,
+        "best": 0.130563,
+        "high": 0.55
+      },
+      "slider": {
+        "low": 0.05,
         "high": 3
       },
-      "kind": "estimate",
-      "explainer": "Not a judgment call: both evaluators measured the same programme. The Happier Lives Institute counts good in life satisfaction (0–10) and doesn't convert it; we need a rate only to rank its analyses with the rest.\n\nGiveDirectly's cash transfers are the one programme both have measured: HLI finds 7.55 points-for-a-year per $1,000, GiveWell 8.7 doubled-income years, so one point is worth about 1.15 doubled-income years. HLI's own 2021 moral-weights work implies about 0.55, so the range runs from 0.4 to 3."
+      "kind": "judgment",
+      "source": {
+        "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year × 2 units of value per healthy year ÷ 2 WELLBYs per SD-year = 0.130563 (src/engine/wellby-calibration.test.ts keeps it in step with the facts)."
+      },
+      "explainer": "The Happier Lives Institute counts good in life satisfaction (0–10) for a year, its WELLBY, and doesn't convert it to health or income. This says what one such point is worth, so its analyses can be ranked with the rest.\n\nThe default makes depression count the same whichever way it is measured. Most of HLI's analyses are of therapy for depression, and the site counts a fall in depression as health: the Global Burden of Disease weights for mild, moderate and severe depression on the PHQ-9 questionnaire, 0.031 healthy years per point for a year, which Founders Pledge's and SoGive's StrongMinds analyses also go through. One standard deviation of depression for a year is about 4.2 PHQ-9 points, so 0.13 healthy years; HLI counts it as 2 WELLBYs. So a WELLBY is worth 0.065 healthy years, or 0.13 doubled-income years at the default healthy-year rate. Every HLI model, depression or not, converts at this rate.\n\nOther views: HLI's own 2021 moral-weights work implies about 0.55; matching GiveDirectly's cash transfers, the one programme HLI and GiveWell both measured (HLI 7.55 WELLBYs per $1,000, GiveWell's Kenya estimate 8.7 doubled-income years), gives 1.15, which is where HLI's own results sit relative to cash. At 1.15 HLI's therapy charities count about 9 times more than at the default, and Founders Pledge's and SoGive's analyses of the same therapy don't move. The evaluator view converts HLI's models at 1.15, so they keep their place relative to GiveDirectly as HLI sees it."
     },
     {
       "id": "chicken_vs_person",

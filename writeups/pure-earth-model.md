@@ -4,8 +4,8 @@ Works to reduce lead and mercury pollution, including lead in cosmetics and spic
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [Pure Earth rough estimate](/pure-earth) | GW | July 2021 | <span data-figure="headline" data-model="pure-earth-model">27</span> | 76, 2 kept fixed |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics">20</span> | 27 |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics-before-correction">21</span> | 25 |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics">2.3</span> | 27 |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics-before-correction">2.3</span> | 25 |
 | [Pure Earth (Founders Pledge)](/pure-earth/pure-earth-founders-pledge) | FP | March 2025 | <span data-figure="headline" data-model="pure-earth-founders-pledge">17</span> | 1 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

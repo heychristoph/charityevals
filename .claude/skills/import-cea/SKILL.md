@@ -85,8 +85,10 @@ become the range.
 `uov_per_ln_consumption` / `uov_per_daly` where the sheet uses its own, and for AIM SADs models
 `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
 
-- **Deaths** read `$life_value_multiplier` (GiveWell: `@moral_weights.* * $life_value_multiplier`;
-  HLI: scale the wellbeing of the years saved, as in AMF-HLI).
+- **Deaths** read `$life_value_multiplier`: `@moral_weights.<age band> * $life_value_multiplier` in every
+  model. In a WELLBY model (HLI) the death is put into WELLBYs at `@wellby_factors.uov_per_wellby_anchor`,
+  with the evaluator's own death value (years above a neutral point) kept for the evaluator view, as in
+  AMF-HLI and Taimaka-HLI (normalization.md 2.3). The WELLBY rate itself is calibrated on depression.
 - **Future benefits** read `$discount_rate`. A frozen present value (a cached `=PV(…)`) is rebuilt
   from the sheet's inputs (`pv`, `pv_annuity_due`) with the sheet's value as `expected`. Decay rates
   and "opportunities get worse" rates are the sheet's own inputs, not the discount rate. An evaluator
