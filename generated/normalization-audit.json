@@ -36,7 +36,7 @@
   "checked": 348,
   "violations": [],
   "how": "Every input row on the path to the output (variants: their overrides) whose id and label name one of 6 kinds of conversion (exchange rate between outcomes; value of a death; depression scale to health; cash benchmark; exchange rate between currencies; discount rate), and every read of a fact holding an evaluator's own conversion (@founders_pledge.wellbys_per_daly, @founders_pledge.wellbys_per_doubling, @founders_pledge.gd_cost_per_wellby), is moved ×1.25 in our view: the headline must not move. A literal that matters is the evaluator's own conversion: the row must read the shared fact or assumption, with the evaluator's figure in `published` (rows reading a shared value are formulas, so they aren't candidates). Heuristic on labels: a conversion under other words isn't seen, and a flagged row that isn't a conversion gets a waiver with its reason.",
-  "waived": 41,
+  "waived": 18,
   "failing_models": []
  },
  {
@@ -56,8 +56,8 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 18208,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 4698,
+   "input equals a shared value but its label doesn't resemble the shared one's": 18211,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 4701,
    "round value (one significant digit) and labels only loosely alike": 57,
    "input within 0.1% of a shared value (not equal) and labels only loosely alike": 9,
    "shared label too generic (under three significant words) for a loose match": 14,
@@ -114,7 +114,27 @@
   "checked": 250,
   "violations": [],
   "how": "Models don't declare mortality/multi_year yet, so keywords in the labels of rows on the path to the output stand in: deaths/mortality/lives saved (not seedlings, trees, crops) → some row on the path must read $life_value_multiplier; discount rate/factor, present value, years or duration of benefit/effect, decay (not iron absorption discount factors) → some row on the path must read $discount_rate. Variants are checked through their parent. Heuristic by nature (keywords, not declarations); it can't see deaths valued under another name (DALYs or years of life lost, \"lives\" without \"saved\"), benefits spread over years without the keywords, or a lever read on one branch of the path while another branch values deaths or years with literals; and it flags sheets where the words are context only (normalization-waivers.json).",
-  "waived": 25,
+  "waived": 12,
+  "failing_models": []
+ },
+ {
+  "id": "INV-9b",
+  "title": "Benefits over several years are discounted",
+  "status": "partial",
+  "checked": 348,
+  "violations": [],
+  "how": "Every input row on the path to the output (variants: their overrides) whose label counts how long a benefit, change, coverage or flow of money lasts (years of change/impact/benefit/production/funding, number of years, duration of the effect) and is above 1 is moved ×1.25 in our view, once at a 0% discount rate and once at max(8%, twice the default): if the headline rises, and by the same factor at both rates, those years are added up at face value and must be discounted at $discount_rate. Heuristic on labels: years counted under other words aren't seen, and a frozen present value (a cached PV typed in as a number) isn't either.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-5b",
+  "title": "Every evaluator pin is read",
+  "status": "checked",
+  "checked": 348,
+  "violations": [],
+  "how": "For every model with evaluator.assumptions, each pinned assumption must be read by some row of the model (inherited rows count) or by its output unit's conversion. An unread pin is either a lever the model should read (a death valued without $life_value_multiplier, years without $discount_rate) or dead weight to drop.",
+  "waived": 0,
   "failing_models": []
  },
  {

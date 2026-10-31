@@ -422,7 +422,17 @@
       "label": "Number of years brought forward",
       "section": "calculations",
       "formula": "number_of_years_by_which_cpsp_is_expected_to_accelerate_poli",
-      "expected": 9.0
+      "expected": 9.0,
+      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "calculations",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "sri_lanka_2",
@@ -555,7 +565,7 @@
       "id": "expected_lives_saved_ok",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent",
+      "formula": "expected_annual_lives_saved_ok * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent",
       "expected": 520.6672195
     },
     {
@@ -878,7 +888,7 @@
       "id": "expected_lives_saved_ok_2",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_2 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_2",
+      "formula": "expected_annual_lives_saved_ok_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_2",
       "expected": 752.9695212
     },
     {
@@ -1195,7 +1205,7 @@
       "id": "expected_lives_saved_ok_3",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_3 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_3",
+      "formula": "expected_annual_lives_saved_ok_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_3",
       "expected": 3830.967505
     },
     {
@@ -1627,7 +1637,7 @@
       "id": "expected_lives_saved_ok_4",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_4 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_4",
+      "formula": "expected_annual_lives_saved_ok_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_4",
       "expected": 3549.139435
     },
     {
@@ -1914,7 +1924,7 @@
       "id": "expected_lives_saved_ok_5",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_5 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_5",
+      "formula": "expected_annual_lives_saved_ok_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_5",
       "expected": 13476.54139
     },
     {
@@ -2132,7 +2142,7 @@
       "id": "expected_lives_saved_ok_6",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_6 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_6",
+      "formula": "expected_annual_lives_saved_ok_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_6",
       "expected": 3549.139435
     },
     {

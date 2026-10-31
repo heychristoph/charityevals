@@ -197,10 +197,19 @@
       "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 4% a year; it is not time preference, so the discount slider leaves it alone."
     },
     {
+      "id": "years_discount_rate",
+      "section": "sindh_pakistan",
+      "label": "Discount rate on future benefits (time preference)",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0,
+      "explainer": "Changed for consistency. GiveWell's sheet lowers later years only by how fast these opportunities get worse (its own rate, kept), not for time: a benefit in a later year otherwise counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values), applied on top of the sheet's rate. The evaluator view keeps only the sheet's rate."
+    },
+    {
       "id": "discount_for_delayed_benefits_year_2",
       "label": "Discount for delayed benefits (Year 2)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_1 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_1 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.96,
       "format": "percent"
     },
@@ -208,7 +217,7 @@
       "id": "discount_for_delayed_benefits_year_3",
       "label": "Discount for delayed benefits (Year 3)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_2 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_2 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.9216,
       "format": "percent"
     },
@@ -216,7 +225,7 @@
       "id": "discount_for_delayed_benefits_year_4",
       "label": "Discount for delayed benefits (Year 4)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_3 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_3 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.884736,
       "format": "percent"
     },
@@ -224,7 +233,7 @@
       "id": "discount_for_delayed_benefits_year_5",
       "label": "Discount for delayed benefits (Year 5)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_4 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_4 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.84934656,
       "format": "percent"
     },
@@ -285,7 +294,7 @@
       "id": "discount_for_delayed_benefits_year_6",
       "label": "Discount for delayed benefits (Year 6)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_5 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_5 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.8153726976,
       "format": "percent"
     },
@@ -339,7 +348,7 @@
       "id": "discount_for_delayed_benefits_year_7",
       "label": "Discount for delayed benefits (Year 7)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_6 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_6 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.7827577897,
       "format": "percent"
     },
@@ -393,7 +402,7 @@
       "id": "discount_for_delayed_benefits_year_8",
       "label": "Discount for delayed benefits (Year 8)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_7 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_7 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.7514474781,
       "format": "percent"
     },
@@ -442,7 +451,7 @@
       "id": "discount_for_delayed_benefits_year_9",
       "label": "Discount for delayed benefits (Year 9)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_8 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_8 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.721389579,
       "format": "percent"
     },
@@ -491,7 +500,7 @@
       "id": "discount_for_delayed_benefits_year_10",
       "label": "Discount for delayed benefits (Year 10)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_9 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_9 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.6925339958,
       "format": "percent"
     },
@@ -540,7 +549,7 @@
       "id": "discount_for_delayed_benefits_year_11",
       "label": "Discount for delayed benefits (Year 11)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_10 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_10 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.664832636,
       "format": "percent"
     },
@@ -589,7 +598,7 @@
       "id": "discount_for_delayed_benefits_year_12",
       "label": "Discount for delayed benefits (Year 12)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_11 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_11 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.6382393306,
       "format": "percent"
     },
@@ -638,7 +647,7 @@
       "id": "discount_for_delayed_benefits_year_13",
       "label": "Discount for delayed benefits (Year 13)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_12 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_12 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.6127097573,
       "format": "percent"
     },
@@ -687,7 +696,7 @@
       "id": "discount_for_delayed_benefits_year_14",
       "label": "Discount for delayed benefits (Year 14)",
       "section": "sindh_pakistan",
-      "formula": "discount_for_delayed_benefits_year_13 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen)",
+      "formula": "discount_for_delayed_benefits_year_13 * (1 - discount_rate_for_opportunities_getting_worse_over_time_scen) / (1 + years_discount_rate)",
       "expected": 0.588201367,
       "format": "percent"
     },

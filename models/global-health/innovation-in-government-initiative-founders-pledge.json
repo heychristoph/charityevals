@@ -66,7 +66,7 @@
       "id": "conversion",
       "title": "Into units of value",
       "kind": "ours",
-      "explainer": "charityevals' step: Founders Pledge's multiple of cash, times the site's shared value of a dollar given as cash (GiveWell's 0.00335 units of value). India's freed-up money stays in GiveWell's 2017 child-life equivalents, which the multiple turns into cash terms. Zambia's income gain is re-valued with the site's weight on income, not through Founders Pledge's chain of DALYs and child-life equivalents."
+      "explainer": "charityevals' step. Founders Pledge counts both reforms in GiveWell's 2017 child-life equivalents. India's freed-up money is valued as Founders Pledge counts it, each child-life equivalent as an under-five death averted at GiveWell's current moral weight times the weight on a life; Zambia's income gain is re-valued with the site's weight on income, not through Founders Pledge's chain of DALYs and child-life equivalents."
     },
     {
       "id": "staff_pay",
@@ -611,10 +611,11 @@
     {
       "id": "uov_per_life_eq",
       "section": "conversion",
-      "label": "Units of value per child-life equivalent (GiveWell 2017 unit)",
+      "label": "Units of value per child-life equivalent",
       "format": "number",
-      "formula": "givedirectly_cost_per_life_eq * @cash.uov_per_dollar",
-      "explainer": "A child-life equivalent is GiveWell's 2017 unit of value, not a count of deaths. GiveDirectly produced one for every $11,663 in GiveWell's 2017 analysis, so one is worth what $11,663 given as cash is worth at the site's shared value of a dollar given as cash (GiveWell's 0.00335 units of value): 39 units of value. Used only to put Zambia's income gain, valued in units of value, back in the same unit as India's freed-up money."
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "explainer": "Changed for consistency. A child-life equivalent is GiveWell's 2017 unit of value: Founders Pledge values India's freed-up money in it (governments' cost of an outcome as good as saving a child's life, $13,615 to $16,774), and GiveWell's 2017 moral weights fix what it is worth against income (GiveDirectly at $11,663 per child-life equivalent, so 39 units of value at the shared cash benchmark). The site values every death averted with one shared figure, so a child-life equivalent counts as what it says, an under-five death averted: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. The evaluator view keeps 39.07 (11,663 × 0.00335), which reproduces Founders Pledge's multiple of cash.",
+      "published": 39.07105
     },
     {
       "id": "uov_per_ln_income",
@@ -631,7 +632,7 @@
       "label": "Benefit of the Zambia reform at the site's weight on income (child-life equivalents)",
       "format": "number",
       "formula": "zambia_pv_total * zambia_years_forward * uov_per_ln_income / uov_per_life_eq",
-      "explainer": "The present value of Zambia's income gain, times the years the reform was brought forward, valued at the site's weight on income and put back in child-life equivalents so it can be added to India's. Founders Pledge's 7 DALYs per child life and 3 units of ln(income) per DALY drop out; in the evaluator view this equals Founders Pledge's own figure."
+      "explainer": "The present value of Zambia's income gain, times the years the reform was brought forward, valued at the site's weight on income and put in child-life equivalents so it can be added to India's (the value of a child-life equivalent cancels for Zambia). Founders Pledge's 7 DALYs per child life and 3 units of ln(income) per DALY drop out; in the evaluator view this equals Founders Pledge's own figure."
     },
     {
       "id": "revaluation",
@@ -646,8 +647,8 @@
       "section": "conversion",
       "label": "Units of value per dollar",
       "format": "small",
-      "formula": "multiple_of_cash * @cash.uov_per_dollar * revaluation",
-      "explainer": "Founders Pledge's multiple of cash, times the site's shared value of a dollar given as cash (GiveWell's 0.00335 units of value), with Zambia re-valued at the site's weight on income. GiveDirectly's $11,663 per child-life equivalent then cancels for Zambia; it stays for India, whose freed-up money Founders Pledge values in child-life equivalents directly."
+      "formula": "multiple_of_cash / givedirectly_cost_per_life_eq * uov_per_life_eq * revaluation",
+      "explainer": "Founders Pledge's multiple of cash divided back by GiveDirectly's $11,663 per child-life equivalent is the initiative's child-life equivalents per dollar (so GiveWell's 2017 GiveDirectly figure cancels), with Zambia re-valued at the site's weight on income, each worth the site's value of an under-five death. In the evaluator view this is Founders Pledge's multiple of cash times the shared cash benchmark."
     },
     {
       "id": "staff_cost_share",
