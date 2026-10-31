@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv2b, inv2c, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv2b, inv2c, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -21,11 +21,11 @@ const allowlist: Allowlist = read(join(import.meta.dirname, "normalization-allow
 const waivers: Waivers = read(join(import.meta.dirname, "normalization-waivers.json"));
 const { reports, stale } = applyWaivers(checkAll(lib), waivers);
 
-// TEMPORARY (2026-10-31): INV-2c ("one consistent way") and the cash-benchmark fact it brought land
+// TEMPORARY (2026-10-31): INV-2c ("one consistent way"), INV-9b (undiscounted years) and the cash-benchmark fact land
 // before the Ambitious Impact pass that applies them to AIM's models (a parallel branch). Their violations of INV-2c and INV-4 are reported by
 // scripts/normalization-audit.ts but don't fail here. Delete this block when that branch merges.
 const PENDING = (v: { inv: string; model: string }) =>
-  (v.inv === "INV-2c" || v.inv === "INV-4") && (lib.models.get(v.model)?.owner === "ambitious-impact");
+  (v.inv === "INV-2c" || v.inv === "INV-4" || v.inv === "INV-9b") && (lib.models.get(v.model)?.owner === "ambitious-impact");
 
 describe("normalization invariants", () => {
   it("builds the library without errors", () => expect(lib.errors).toEqual([]));
@@ -84,6 +84,27 @@ describe("invariant checks", () => {
     const l = buildLibrary([base, own, cancels, shared], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
     expect(l.errors).toEqual([]);
     expect(inv2c(l).violations.map(keyOf).sort()).toEqual(["cancels death_value", "own gd"]);
+  });
+
+  it("INV-9b flags years of benefit summed at face value, not discounted ones or cost years", () => {
+    const rows = (years: string) => [
+      { id: "annual", label: "Benefit a year", value: 0.01, kind: "observed", explainer: "Test input." },
+      { id: "years", label: "Number of years of benefit", value: 5, kind: "judgment", explainer: "Test input." },
+      { id: "out", label: "out", formula: `annual * ${years}` },
+    ];
+    const flat = { ...base, id: "flat", rows: rows("years") };
+    const discounted = { ...base, id: "discounted", rows: rows("pv_annuity_due(1, $discount_rate, years)") };
+    const cost = { ...base, id: "cost", rows: rows("1 / years") };
+    const l = buildLibrary([base, flat, discounted, cost], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv9b(l).violations.map(keyOf)).toEqual(["flat years"]);
+  });
+
+  it("INV-5b flags an evaluator pin that no row reads", () => {
+    const pinned = (id: string, formula: string) => ({ ...base, id, rows: [base.rows[0], { id: "out", label: "out", formula }], evaluator: { name: "HLI", assumptions: { life_value_multiplier: 1 } } });
+    const l = buildLibrary([base, pinned("unread", "x"), pinned("read", "x * $life_value_multiplier")], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv5b(l).violations.map(keyOf)).toEqual(["unread evaluator.assumptions.life_value_multiplier"]);
   });
 
   it("INV-2b flags a row reading a cross-cause rate", () => {

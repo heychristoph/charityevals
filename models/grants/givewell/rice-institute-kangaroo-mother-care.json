@@ -120,13 +120,23 @@
       "label": "Years that treatment and equipment will last at hospital (Projected cost of expanding to 12 additional hospitals)",
       "section": "costs",
       "formula": "years_that_treatment_and_equipment_will_last_at_hospital_hig",
-      "expected": 3.0
+      "expected": 3.0,
+      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "costs",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "cost_per_child_treated_with_kmc_from_fixed_costs_projected_c",
       "label": "Cost per child treated with KMC, from fixed costs (Projected cost of expanding to 12 additional hospitals)",
       "section": "costs",
-      "formula": "fixed_cost_for_each_hospital_in_usd_projected_cost_of_expand / (number_of_low_birth_weight_babies_per_hospital_per_year_proj * years_that_treatment_and_equipment_will_last_at_hospital_pro)",
+      "formula": "fixed_cost_for_each_hospital_in_usd_projected_cost_of_expand / (number_of_low_birth_weight_babies_per_hospital_per_year_proj * pv_annuity_due(1, years_discount_rate, years_that_treatment_and_equipment_will_last_at_hospital_pro))",
       "expected": 49.16666667,
       "format": "usd"
     },
