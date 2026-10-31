@@ -11,6 +11,7 @@
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, factUsage, hasRange } from "../src/engine/model";
+import { isValueOfInformation } from "../src/engine/ranking";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
@@ -75,7 +76,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
     // A stand-in folds the native and species rows away, so its output names only the bottom line.
     const { native: _native, species: _species, ...output } = (raw.output ?? {}) as Record<string, unknown>;
-    return { ...meta, ...(raw.output ? { output } : {}), rows: compact };
+    return { ...meta, ...(raw.output ? { output } : {}), ...(isValueOfInformation(m) ? { value_of_information: true } : {}), rows: compact };
   });
 }
 
