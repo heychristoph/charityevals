@@ -22,8 +22,22 @@ Worked examples to copy:
 - models/global-health/strongminds.json, against-malaria-foundation-hli.json, models/grants/hli/:
   our discounting and value-of-life levers on an evaluator that has neither, pinned to HLI's values.
 
+**One consistent way** (owner, 2026-10-31): wherever charityevals has its own version of a
+conversion (an exchange rate between outcomes, a DALY definition, value of life, discounting,
+species or sentience weights, a cash benchmark, currency rates in facts/fx.json), our view uses ours,
+as a visible "changed for consistency" row; never keep the evaluator's own conversion in our view.
+Every slider must move every model it concerns. Where an evaluator gives a best guess and other cases
+(conservative, optimistic), our view takes the best guess like everywhere else; the other cases
+become the range.
+
 ## 1. Find the source
 
+- Don't import unfinished work: a sheet or tab marked "in progress", "draft" or "WIP" that the
+  evaluator hasn't published. Record it in `inventory/` as "not imported: unfinished".
+- An estimate made before the charity existed (an idea or incubation report) is shown only if the
+  charity actually runs the modelled programme today (cite where it says so) and no model based on
+  the charity's actual data exists. Mark it `theoretical`, so the site flags it as purely
+  theoretical; otherwise record it in `inventory/` as "not shown" with the reason.
 - The evaluator's write-up and its sheet. Record publisher, title, URL, sheet URL, `published`
   (the ranking uses it), today as `retrieved`, and `license` (GiveWell: CC BY-NC-SA 3.0 US; ACE:
   unclear, say so).
@@ -91,8 +105,15 @@ Worked examples to copy:
 
 ## 5. Our steps to the scale (layers B and C)
 
-- `output.unit` is `uov`, `daly`, `wellby` or `ced` (INV-1). No exchange rate between outcomes inside
-  the model, except one the evaluator used, pinned (INV-2).
+- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). An exchange rate between
+  outcomes inside the model reads our shared assumption or fact in our view; the evaluator's own rate
+  goes in `published` and is pinned only in the evaluator view (INV-2). A model whose outcome mixes
+  kinds (AIM's "DALY-equivalents" folding in income and deaths) is split into its parts, each
+  converted with our rates.
+- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
+- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
+  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
+  credit-by-share-of-resources lever as in section 4.
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,

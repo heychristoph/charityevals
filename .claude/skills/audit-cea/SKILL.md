@@ -81,7 +81,13 @@ so the severity rests on a number.
 - **high**: wrong or unsupported number on a top-5 driver; unit error; double counting or a missing
   adjustment that moves the result by more than 25%; wrong family; a broken rule (unsourced number,
   a shared number retyped, an exchange rate inside the model, a species weight outside `ced_*`);
-  any normalization-audit violation; anything `npm run check` rejects.
+  an evaluator's own conversion kept in our view where charityevals has a shared one (exchange
+  rates between outcomes, DALY definitions, value of life, discounting, cash benchmarks, currency
+  rates); a conservative or optimistic case used where the evaluator gives a best guess; a future
+  benefit not discounted at `$discount_rate`; a founders' or funding counterfactual subtracted in
+  our view; an unfinished sheet imported; an idea-stage estimate shown for a charity that doesn't
+  run the programme, or without the `theoretical` flag; any normalization-audit violation;
+  anything `npm run check` rejects.
 - **medium**: moves the result 10–25%; weak source for a top-10 driver; judgment without a reference
   class; range clearly too narrow or wide; a gap with peers left unexplained; a write-up with a stale
   or non-live result, or a result as a multiple of GiveDirectly.
