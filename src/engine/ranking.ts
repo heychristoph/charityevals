@@ -19,8 +19,30 @@ import type { Charity } from "./schema";
 export const SIDE_SHEET =
   /skeleton|\bvoi\b|value[- ]of[- ](information|incubation|the grant)|value[- ]information|break-?even|optionality|option[- ]value|threshold|upper[- ]bound|\[(low|high) [^\]]*copy\]|assumptions copy\]/i;
 
+/** A row of GiveWell's value-of-information template: what research or a pilot is worth through the money it
+ * moves later ("Best guess on CE of this reallocated funding", "Cost to generate information to reallocate",
+ * "Total units of value from value of information", "Probability that the change is in the decision"). */
+export const VOI_ROW =
+  /(ce|cost-effectiveness) of (this|the) reallocated funding|generate information|value of information|change is in the decision/i;
+
+/** A sheet that values a grant through what it lets GiveWell learn, whatever its title says: its bottom line
+ * rests on a value-of-information row (Raising the Village's RCT follow-up, IDinsight). An option value from
+ * scaling a program the grant runs anyway (Rice Institute's optionality) is not this template. */
+export function isValueOfInformation(m: ResolvedModel): boolean {
+  if (!m.output) return false;
+  const seen = new Set<string>();
+  const walk = (id: string): boolean => {
+    if (seen.has(id)) return false;
+    seen.add(id);
+    const r = m.byId.get(id);
+    if (!r) return false;
+    return VOI_ROW.test(r.label ?? "") || [...(r.deps ?? [])].some(walk);
+  };
+  return walk(m.output.row);
+}
+
 export function isSideSheet(m: ResolvedModel): boolean {
-  return SIDE_SHEET.test(`${m.id} ${m.name} ${m.source?.title ?? ""}`);
+  return SIDE_SHEET.test(`${m.id} ${m.name} ${m.source?.title ?? ""}`) || isValueOfInformation(m);
 }
 
 /** The program a model belongs to: "" for a charity without programs, undefined when it matches none. */

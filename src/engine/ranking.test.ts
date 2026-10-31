@@ -24,8 +24,11 @@ describe("ranking plan", () => {
       "path-threshold-accelerator-malaria-vaccines", "fika-bridges-to-prosperity-value-information",
       "versus-arthritis-sogive-upper-bound", "motor-neurone-disease-association-sogive-upper-bound"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(true);
-    for (const id of ["against-malaria-foundation", "vital-strategies-model", "evidence-action-deworm-world-2024-renewal"])
+    for (const id of ["against-malaria-foundation", "vital-strategies-model", "evidence-action-deworm-world-2024-renewal",
+      "rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(false);
+    // Value-of-information sheets whose title doesn't say so are found by their rows.
+    for (const id of ["raising-the-village-2024", "idinsight-model"]) expect(isSideSheet(lib.models.get(id)!)).toBe(true);
     expect(ids("vital-strategies")).toEqual(["vital-strategies-model"]);
     expect(rankingPlan(lib, "centre-for-pesticide-suicide-prevention")).toEqual([]);
     expect(rankingPlan(lib, "versus-arthritis")).toEqual([]);
@@ -40,6 +43,7 @@ describe("ranking plan", () => {
       "evidence-action-ifa-in-bihar-uttar-pradesh-july-2024",
       "evidence-action-in-line-chlorination-india-2023",
       "evidence-action-syphilis-screening-treatment-in",
+      "evidence-action-water-quality-nov-2022",
     ]);
     expect(ids("new-incentives")).toEqual(["new-incentives", "new-incentives-founders-pledge"]);
   });
