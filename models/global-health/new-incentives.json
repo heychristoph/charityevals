@@ -772,10 +772,11 @@
     {
       "id": "value_assigned_to_averting_a_death_from_vaccine_preventable_2",
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person age 5-14 (overall)",
-      "explainer": "GiveWell's moral weight: 133.7 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_age_5_14, 134 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 133.7, is kept for the evaluator view.",
       "section": "long_term_income_increases",
-      "formula": "133.7 * $life_value_multiplier",
-      "expected": 133.7
+      "formula": "@moral_weights.uov_per_death_age_5_14 * $life_value_multiplier",
+      "expected": 133.7,
+      "published": 133.7
     },
     {
       "id": "units_of_value_generated_from_deaths_averted_among_people_un",
@@ -999,10 +1000,11 @@
     {
       "id": "value_assigned_to_averting_a_death_from_vaccine_preventable_8",
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person age 5-14 (overall)",
-      "explainer": "GiveWell's moral weight: 133.7 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_age_5_14, 134 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 133.7, is kept for the evaluator view.",
       "section": "total_value_of_outcomes",
-      "formula": "133.7 * $life_value_multiplier",
-      "expected": 133.7
+      "formula": "@moral_weights.uov_per_death_age_5_14 * $life_value_multiplier",
+      "expected": 133.7,
+      "published": 133.7
     },
     {
       "id": "units_of_value_from_5_14_deaths_averted_2",
@@ -1014,10 +1016,11 @@
     {
       "id": "value_assigned_to_averting_a_death_from_vaccine_preventable_9",
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person age 15-49 (overall)",
-      "explainer": "GiveWell's moral weight: 103.586 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_age_15_49, 104 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 103.586, is kept for the evaluator view.",
       "section": "total_value_of_outcomes",
-      "formula": "103.58571 * $life_value_multiplier",
-      "expected": 103.58571
+      "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "expected": 103.58571,
+      "published": 103.58571
     },
     {
       "id": "units_of_value_from_15_49_deaths_averted_2",
@@ -1029,10 +1032,11 @@
     {
       "id": "value_assigned_to_averting_a_death_from_vaccine_preventable_10",
       "label": "Value assigned to averting a death from vaccine-preventable disease of a person age 50-74 (overall)",
-      "explainer": "GiveWell's moral weight: 42.44 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_age_50_74, 42 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 42.44, is kept for the evaluator view.",
       "section": "total_value_of_outcomes",
-      "formula": "42.44 * $life_value_multiplier",
-      "expected": 42.44
+      "formula": "@moral_weights.uov_per_death_age_50_74 * $life_value_multiplier",
+      "expected": 42.44,
+      "published": 42.44
     },
     {
       "id": "units_of_value_from_50_74_deaths_averted_2",
@@ -1255,38 +1259,38 @@
     {
       "id": "morbidity_effects_from_directly_incentivized_vaccines_and_ro",
       "label": "Morbidity effects from directly incentivized vaccines and rotavirus (overall)",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H212"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H212.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.morbidity_effects_from_directly_incentivized_vaccines_a",
+      "expected": 0.06
     },
     {
       "id": "morbidity_effects_of_indirectly_incentivized_vaccines_beside",
       "label": "Morbidity effects of indirectly incentivized vaccines besides rotavirus (i.e., polio, yellow fever, rubella, mumps, varicella meningitis A) (overall)",
-      "value": 0.007,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H213"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H213.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.morbidity_effects_of_indirectly_incentivized_vaccines_b",
+      "expected": 0.007
     },
     {
       "id": "inflation",
       "label": "Inflation (overall)",
-      "value": -0.05,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H214"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H214.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.inflation",
+      "expected": -0.05
     },
     {
       "id": "treatment_costs_averted_from_prevention",
@@ -1327,26 +1331,26 @@
     {
       "id": "lower_likelihood_of_infecting_others",
       "label": "Lower likelihood of infecting others (overall)",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H219"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H219.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.lower_likelihood_of_infecting_others",
+      "expected": 0.06
     },
     {
       "id": "herd_immunity",
       "label": "Herd immunity (overall)",
-      "value": 0.125,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H220"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H220.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.herd_immunity",
+      "expected": 0.125
     },
     {
       "id": "mortality_effects_of_indirectly_incentivized_vaccines_beside",
@@ -1363,50 +1367,50 @@
     {
       "id": "effects_during_outbreaks",
       "label": "Effects during outbreaks (overall)",
-      "value": 0.04,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H222"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H222.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.effects_during_outbreaks",
+      "expected": 0.04
     },
     {
       "id": "vaccine_derived_polio_outbreaks",
       "label": "Vaccine-derived polio outbreaks (overall)",
-      "value": -0.02,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H223"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H223.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.vaccine_derived_polio_outbreaks",
+      "expected": -0.02
     },
     {
       "id": "serotype_replacement",
       "label": "Serotype replacement (overall)",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H224"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H224.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.serotype_replacement",
+      "expected": -0.04
     },
     {
       "id": "increased_timeliness_of_vaccination",
       "label": "Increased timeliness of vaccination (overall)",
-      "value": 0.035,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H225"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H225.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.increased_timeliness_of_vaccination",
+      "expected": 0.035
     },
     {
       "id": "total_supplemental_intervention_level_adjustment",
@@ -1461,26 +1465,21 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": 0.19,
-      "kind": "observed",
       "source": {
         "title": "GiveWell, New Incentives review (spending breakdown, November 2017 to December 2023)",
         "url": "https://www.givewell.org/charities/new-incentives"
       },
-      "explainer": "Staff compensation was 19% of New Incentives' spending from November 2017 to December 2023 ($8.90m of $46.21m), per GiveWell's review."
+      "explainer": "Staff compensation was 19% of New Incentives' spending from November 2017 to December 2023 ($8.90m of $46.21m), per GiveWell's review.",
+      "formula": "@staff_pay.share_new_incentives",
+      "expected": 0.19
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

@@ -324,14 +324,14 @@
       "id": "internal_validity_adjustment_smc_nigeria",
       "label": "Internal validity adjustment — SMC (Nigeria)",
       "section": "malaria_consortium",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B24"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_nigeria",
@@ -390,9 +390,10 @@
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C8"
       },
-      "formula": "116.9 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.9,
-      "explainer": "GiveWell's moral weight, 116.9 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 116.9, is kept for the evaluator view.",
+      "published": 116.9
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -520,9 +521,10 @@
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C9"
       },
-      "formula": "83.1 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 83.1,
-      "explainer": "GiveWell's moral weight, 83.1 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 83.1, is kept for the evaluator view.",
+      "published": 83.1
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -852,14 +854,14 @@
       "id": "false_monitoring_results",
       "label": "False monitoring results",
       "section": "malaria_consortium",
-      "value": 0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B144"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results_0_02",
+      "expected": 0.02
     },
     {
       "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
@@ -873,14 +875,14 @@
       "id": "change_of_priorities",
       "label": "Change of priorities",
       "section": "malaria_consortium",
-      "value": 0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B148"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.change_of_priorities_0_02",
+      "expected": 0.02
     },
     {
       "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
@@ -899,14 +901,14 @@
       "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "malaria_consortium",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B150"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_wit",
+      "expected": 0.05
     },
     {
       "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
@@ -977,15 +979,15 @@
       "id": "rebound_effects_decreased_immunity_development",
       "label": "Rebound effects / decreased immunity development",
       "section": "malaria_consortium",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B173"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A173),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A173)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "expected": -0.04
     },
     {
       "id": "adjustments_for_excluded_effects_drug_resistance",
@@ -1333,7 +1335,7 @@
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C5"
       },
-      "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+      "formula": "$uov_per_ln_consumption * ln(2)",
       "expected": 1.0,
       "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 1 per doubling."
     },
@@ -1686,14 +1688,14 @@
       "id": "discount_to_the_benefits_of_cash_from_potential_negative_spi",
       "label": "Discount to the benefits of cash from potential negative spillover effects on consumption",
       "section": "givedirectly",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B29"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.discount_to_the_benefits_of_cash_from_potential_negativ",
+      "expected": 0.05
     },
     {
       "id": "baseline_annual_consumption_per_capita_in_nominal_usd",
@@ -1745,14 +1747,14 @@
       "id": "percentage_of_transfers_invested",
       "label": "Percentage of transfers invested",
       "section": "givedirectly",
-      "value": 0.39,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B12"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.percentage_of_transfers_invested",
+      "expected": 0.39
     },
     {
       "id": "amount_invested_nominal_usd",
@@ -1766,66 +1768,66 @@
       "id": "return_on_investment",
       "label": "Return on investment",
       "section": "givedirectly",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B15"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.return_on_investment",
+      "expected": 0.1
     },
     {
       "id": "percent_of_investment_returned_when_benefits_end",
       "label": "Percent of investment returned when benefits end",
       "section": "givedirectly",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B25"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.percent_of_investment_returned_when_benefits_end",
+      "expected": 0.2
     },
     {
       "id": "improving_circumstances_over_time_givewell_2020",
       "label": "Improving circumstances over time (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 0.017,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C32"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.improving_circumstances_over_time_givewell_2020",
+      "expected": 0.017
     },
     {
       "id": "compounding_non_monetary_benefits_givewell_2020",
       "label": "Compounding non-monetary benefits (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 0.009,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C33"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.compounding_non_monetary_benefits_givewell_2020",
+      "expected": 0.009
     },
     {
       "id": "derived_value_assignments_temporal_uncertainty_givewell_2020",
       "label": "Derived value assignments: Temporal uncertainty (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 0.014,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C34"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.derived_value_assignments_temporal_uncertainty_givewell",
+      "expected": 0.014
     },
     {
       "id": "pure_time_preference_donors_givewell_2020",
@@ -1881,13 +1883,13 @@
       "id": "duration_of_investment_benefits_in_years",
       "label": "Duration of investment benefits (in years)",
       "section": "givedirectly",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B23"
-      }
+      },
+      "formula": "@givewell_common.duration_of_investment_benefits_in_years",
+      "expected": 10.0
     },
     {
       "id": "present_value_of_ln_consumption_increase_in_the_last_year_of",
@@ -1965,27 +1967,27 @@
       "id": "arbitrary_donation_size",
       "label": "Arbitrary donation size",
       "section": "givedirectly",
-      "value": 100000.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B4"
       },
-      "format": "usd"
+      "format": "usd",
+      "value": 100000.0,
+      "kind": "estimate"
     },
     {
       "id": "transfers_as_a_percentage_of_total_cost",
       "label": "Transfers as a percentage of total cost",
       "section": "givedirectly",
-      "value": 0.83,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "GiveDirectly!B5"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.transfers_as_a_percentage_of_total_cost",
+      "expected": 0.83
     },
     {
       "id": "total_funding_available_for_cash_transfers_out_of_hypothetic",
@@ -2054,26 +2056,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

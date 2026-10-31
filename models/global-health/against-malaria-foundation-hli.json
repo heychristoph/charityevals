@@ -21,7 +21,7 @@
       "resource_shares": 0,
       "life_value_multiplier": 1,
       "discount_rate": 0,
-      "uov_per_wellby": 1.15
+      "daly_per_wellby": 0.575
     }
   },
   "sections": [
@@ -104,22 +104,6 @@
       "explainer": "From GiveWell's current AMF model, whose deaths our view counts: about 81% are children under five, the rest people five and older. (HLI's 2022 copy put the average age at 20.)"
     },
     {
-      "id": "uov_per_death",
-      "section": "saving",
-      "label": "Value of averting a death, by age (units of value)",
-      "format": "number",
-      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
-      "explainer": "GiveWell's moral weights, as in its AMF model: 116.25 doubled-income years for a child under five, 73.19 for a person five or older, times \"A child's life vs doubled-income year\" (Your values)."
-    },
-    {
-      "id": "wellbys_per_death",
-      "section": "saving",
-      "label": "WELLBYs per death averted, at the site's value of a death",
-      "format": "number",
-      "formula": "uov_per_death / @wellby_factors.uov_per_wellby_anchor",
-      "explainer": "Changed for consistency: in our view a death averted is valued the way every model on the site values it, GiveWell's moral weight for the age of the person saved (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not by HLI's WELLBYs of the years the person goes on to live above a neutral point. It is put into WELLBYs at the rate the WELLBY slider defaults to (facts: wellby_factors.uov_per_wellby_anchor, 0.13 units of value per WELLBY), so at the default the death counts exactly what it counts in GiveWell's models; moving the WELLBY slider scales it with the rest of the model. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models."
-    },
-    {
       "id": "hli_death_value_weight",
       "section": "saving",
       "label": "Weight on HLI's own value of a life saved (evaluator view only)",
@@ -127,7 +111,7 @@
       "value": 0,
       "published": 1,
       "kind": "judgment",
-      "explainer": "Changed for consistency: 0 in our view, so every death counts at the site's value (above); 1 in the evaluator view, so HLI's own figure, with its neutral point, reproduces. A switch between the two, not a blend."
+      "explainer": "Changed for consistency: 0 in our view, so HLI's own value of a life saved drops out and every death counts at the site's value (Discounting); 1 in the evaluator view, so HLI's own figure, with its neutral point, reproduces. A switch between the two, not a blend."
     },
     {
       "id": "avg_age_at_death",
@@ -301,8 +285,9 @@
       "section": "saving",
       "label": "WELLBYs from saving lives per $1,000",
       "format": "number",
-      "formula": "deaths_counted_per_1000 * (hli_death_value_weight * wellbys_per_life + (1 - hli_death_value_weight) * wellbys_per_death)",
-      "expected": 44.46714081
+      "formula": "deaths_counted_per_1000 * hli_death_value_weight * wellbys_per_life",
+      "expected": 44.46714081,
+      "explainer": "HLI's WELLBYs from the lives saved. Our view counts the deaths outside this row (0 here, see Discounting): valued the site's way, not by HLI's WELLBYs of the years lived above a neutral point."
     },
     {
       "id": "wellbys_improving_per_1000",
@@ -376,11 +361,35 @@
       "explainer": "The WELLBYs spread evenly over those years from the start year, discounted to today, as a share of their undiscounted total: 1 at a 0% rate."
     },
     {
+      "id": "uov_per_death",
+      "section": "discounting",
+      "label": "Value of averting a death, by age (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights, as in its AMF model: 116.25 doubled-income years for a child under five, 73.19 for a person five or older, times \"A child's life vs doubled-income year\" (Your values)."
+    },
+    {
+      "id": "uov_valued_outside_wellbys",
+      "section": "discounting",
+      "label": "Value of the deaths averted per $1,000, the site's way (units of value)",
+      "format": "number",
+      "formula": "deaths_counted_per_1000 * uov_per_death * (1 - hli_death_value_weight)",
+      "explainer": "Changed for consistency: in our view a death averted is valued the way every model on the site values it, GiveWell's moral weight for the age of the person saved (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not by HLI's WELLBYs of the years the person goes on to live above a neutral point. 0 in the evaluator view, where HLI's own value counts. Deaths averted now are not discounted. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models."
+    },
+    {
+      "id": "wellbys_from_uov",
+      "section": "discounting",
+      "label": "WELLBYs per $1,000 from the deaths averted",
+      "format": "number",
+      "formula": "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)",
+      "explainer": "The deaths' value in units of value (above), put into WELLBYs at the WELLBY rate (\"1 point more life satisfaction for a year vs doubled-income year\", Your values). The unit's conversion multiplies every WELLBY by the same rate, so the two cancel: the deaths count their shared value whatever the WELLBY slider says, and only the WELLBYs HLI measured move with it. The one row a model may read the WELLBY rate in (docs/normalization.md 2.3, INV-17)."
+    },
+    {
       "id": "wellbys_per_1000_discounted",
       "section": "discounting",
       "label": "WELLBYs per $1,000, discounted",
       "format": "number",
-      "formula": "wellbys_saving_per_1000 + wellbys_improving_per_1000 * discount_factor"
+      "formula": "wellbys_saving_per_1000 + wellbys_improving_per_1000 * discount_factor + wellbys_from_uov"
     },
     {
       "id": "amf_share_of_spending",
@@ -405,26 +414,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

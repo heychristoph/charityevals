@@ -2156,9 +2156,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
         "cell": "Iron fortification CEA!E51"
       },
-      "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.26, and 2.3 here.\n\nGiveWell, \"Moral Weights\" (May 2025)",
-      "formula": "2.3 * $uov_per_daly / 2.26",
-      "expected": 2.3
+      "explainer": "Changed for consistency: a year lived with disability averted is a healthy year, worth \"Healthy year vs doubled-income year\" (Your values) in every model. This sheet's own figure, 2.3, is kept for the evaluator view.",
+      "formula": "$uov_per_daly",
+      "expected": 2.3,
+      "published": 2.3
     },
     {
       "id": "total_units_of_value_from_anemia_ylds_averted_bihar",
@@ -2992,8 +2993,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
         "cell": "Iron fortification CEA!E102"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\nGiveWell, \"Moral Weights\" (May 2025)",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nGiveWell, \"Moral Weights\" (May 2025)",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -3353,14 +3354,14 @@
       "id": "internal_validity_adjustment_3",
       "label": "Internal validity adjustment",
       "section": "iron_fortification_cea",
-      "value": -0.2,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1I_geqX499db10DkoJDFIgOg9a_g71QRIQtzFBfd_4fM/edit",
         "cell": "Iron fortification CEA!E116"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_m0_2",
+      "expected": -0.2
     },
     {
       "id": "external_validity_adjustment_3",
@@ -3648,26 +3649,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

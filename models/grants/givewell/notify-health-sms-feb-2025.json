@@ -4077,9 +4077,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B68"
       },
-      "formula": "116 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.0,
-      "explainer": "GiveWell's moral weight, 116 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 116, is kept for the evaluator view.",
+      "published": 116.0
     },
     {
       "id": "moral_weight_of_averting_the_death_of_a_person_under_age_fiv",
@@ -4396,14 +4397,14 @@
       "id": "adjustment_for_reduction_in_vaccine_efficacy_over_time_for_5",
       "label": "Adjustment for reduction in vaccine efficacy over time for 5-14-year-olds",
       "section": "full_cea_main",
-      "value": -0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B77"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.adjustment_for_reduction_in_vaccine_efficacy_over_time",
+      "expected": -0.1
     },
     {
       "id": "proportion_of_vaccine_preventable_disease_incidence_averted_2",
@@ -4479,9 +4480,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B86"
       },
-      "formula": "134 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_age_5_14 * $life_value_multiplier",
       "expected": 134.0,
-      "explainer": "GiveWell's moral weight, 134 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_age_5_14, 134 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "units_of_value_from_mortality_reduction_individuals_5_14_yea",
@@ -4820,9 +4821,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B100"
       },
-      "formula": "104 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
       "expected": 104.0,
-      "explainer": "GiveWell's moral weight, 104 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_age_15_49, 104 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "units_of_value_from_mortality_reduction_individuals_15_49_ye",
@@ -5161,9 +5162,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B114"
       },
-      "formula": "42 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_age_50_74 * $life_value_multiplier",
       "expected": 42.0,
-      "explainer": "GiveWell's moral weight, 42 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_age_50_74, 42 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "units_of_value_from_mortality_reduction_individuals_50_74_ye",
@@ -5248,14 +5249,14 @@
       "id": "lower_likelihood_of_infecting_others",
       "label": "Lower likelihood of infecting others",
       "section": "full_cea_main",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B181"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.lower_likelihood_of_infecting_others",
+      "expected": 0.06
     },
     {
       "id": "supplemental_intervention_level_adjustments_herd_immunity",
@@ -5314,14 +5315,14 @@
       "id": "effects_during_outbreaks",
       "label": "Effects during outbreaks",
       "section": "full_cea_main",
-      "value": 0.04,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B186"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.effects_during_outbreaks",
+      "expected": 0.04
     },
     {
       "id": "increasing_vaccination_rates_independent_of_an_sms_reminders",
@@ -5340,14 +5341,14 @@
       "id": "vaccine_derived_polio_outbreaks",
       "label": "Vaccine-derived polio outbreaks",
       "section": "full_cea_main",
-      "value": -0.02,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B188"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.vaccine_derived_polio_outbreaks",
+      "expected": -0.02
     },
     {
       "id": "supplemental_intervention_level_adjustments_serotype_replace",
@@ -5380,14 +5381,14 @@
       "id": "increased_timeliness_of_vaccination",
       "label": "Increased timeliness of vaccination",
       "section": "full_cea_main",
-      "value": 0.035,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B191"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.increased_timeliness_of_vaccination",
+      "expected": 0.035
     },
     {
       "id": "increased_clinic_utilization",
@@ -5515,15 +5516,15 @@
       "id": "false_monitoring_results",
       "label": "False monitoring results",
       "section": "full_cea_main",
-      "value": -0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1n4bfiiU7hy6Sxlkh5_jW538blTc_lYcbKmYxxMr_IhI/edit",
         "cell": "Full CEA - Main!B161"
       },
       "explainer": "We have relatively high confidence in New Incentives' monitoring, which involves multiple rounds of checks and audits by different teams. We make a small downward adjustment to account for our having spent more total time over years of review interrogating some of our other top charities' monitoring methods, relative to a single round of intensive review of New Incentives' monitoring before adding it to our list of top charities in 2020.",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results",
+      "expected": -0.02
     },
     {
       "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
@@ -6551,26 +6552,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.25,
-        "best": 0.4,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_media"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment."
+      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment.",
+      "formula": "@staff_pay.gap_media"
     },
     {
       "id": "salary_sacrifice",

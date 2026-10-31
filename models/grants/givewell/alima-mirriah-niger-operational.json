@@ -548,9 +548,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "Simplified CEA!B32"
       },
-      "formula": "112 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 112.0,
-      "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 112, is kept for the evaluator view.",
+      "published": 112.0
     },
     {
       "id": "percent_of_those_treated_who_experience_sam_mam_again_at_som",
@@ -1036,9 +1037,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B103"
       },
-      "formula": "112 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 112.0,
-      "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 112, is kept for the evaluator view.",
+      "published": 112.0
     },
     {
       "id": "units_of_value_from_pediatric_emergency_deaths_averted",
@@ -1270,14 +1272,14 @@
       "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "cea",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B202"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_wit",
+      "expected": 0.05
     },
     {
       "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
@@ -1601,26 +1603,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

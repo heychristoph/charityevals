@@ -358,14 +358,14 @@
     {
       "id": "internal_validity_adjustment",
       "label": "Internal validity adjustment (overall)",
-      "value": -0.05,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H44"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H44.",
-      "section": "mortality_reduction_among_people_under_age_5"
+      "section": "mortality_reduction_among_people_under_age_5",
+      "formula": "@givewell_common.internal_validity_adjustment",
+      "expected": -0.05
     },
     {
       "id": "external_validity_adjustment",
@@ -1060,15 +1060,15 @@
     {
       "id": "drug_resistance_2",
       "label": "Drug resistance",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Inputs!S107"
       },
       "format": "percent",
       "explainer": "Value from GiveWell's sheet, cell Inputs!S107.",
-      "section": "supplemental_intervention_level_adjustments"
+      "section": "supplemental_intervention_level_adjustments",
+      "formula": "@givewell_common.drug_resistance",
+      "expected": -0.04
     },
     {
       "id": "drug_resistance",
@@ -1151,14 +1151,14 @@
     {
       "id": "malaria_morbidity",
       "label": "Malaria morbidity (overall)",
-      "value": 0.09,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H167"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H167.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.malaria_morbidity",
+      "expected": 0.09
     },
     {
       "id": "short_term_anemia_effects",
@@ -1199,50 +1199,50 @@
     {
       "id": "serious_adverse_events_due_to_side_effects_of_treatment",
       "label": "Serious adverse events due to side effects of treatment (overall)",
-      "value": -0.006,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H171"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H171.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.serious_adverse_events_due_to_side_effects_of_treatment",
+      "expected": -0.006
     },
     {
       "id": "failure_to_ingest_first_day_of_treatment_of_smc",
       "label": "Failure to ingest first day of treatment of SMC (overall)",
-      "value": -0.035,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H172"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H172.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.failure_to_ingest_first_day_of_treatment_of_smc",
+      "expected": -0.035
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
       "label": "Rebound effects / decreased immunity development (overall)",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H174"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H174.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "expected": -0.04
     },
     {
       "id": "subnational_adjustments",
       "label": "Subnational adjustments (overall)",
-      "value": 0.032,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H176"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H176.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.subnational_adjustments_0_032",
+      "expected": 0.032
     },
     {
       "id": "total_supplemental_intervention_level_adjustment",
@@ -1296,26 +1296,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

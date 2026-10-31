@@ -101,7 +101,7 @@ describe("the headline", () => {
   it("converts each unit into healthy years per $1,000, cancelling a healthy year's value where it can", () => {
     expect(headlineFormula(m, "1")).toBe("out / $uov_per_daly * 1000");
     expect(headlineFormula(m, "$uov_per_daly")).toBe("out * 1000");
-    expect(headlineFormula(m, "$uov_per_wellby")).toBe("out * $uov_per_wellby / $uov_per_daly * 1000");
+    expect(headlineFormula(m, "$daly_per_wellby * $uov_per_daly")).toBe("out * $daly_per_wellby * 1000");
     expect(headlineFormula(m, "$chicken_vs_person * $daly_per_sad * $uov_per_daly")).toBe("out * $chicken_vs_person * $daly_per_sad * 1000");
   });
   it("cancels only a multiplied healthy-year value, and keeps grouping", () => {
@@ -124,7 +124,8 @@ describe("every ranked model's tree", () => {
   const jf = (d: string): string[] => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? jf(join(d, e.name)) : e.name.endsWith(".json") ? [join(d, e.name)] : []));
   const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
   // Bulk models are loaded (a hand-built meta model reads some live, `#id`) but not walked: too many.
-  const lib = buildLibrary(jf(join(root, "models")).map(read), assumptions, jf(join(root, "facts")).map(read));
+  // Charities and owners too: a meta model reads a charity's programme-weighted figure live (`#owner:charity`).
+  const lib = buildLibrary(jf(join(root, "models")).map(read), assumptions, jf(join(root, "facts")).map(read), jf(join(root, "charities")).map(read), read(join(root, "owners.json")));
   const av = assumptionValues(lib.assumptions);
   const ranked = [...lib.models.values()].filter((m) => m.kind !== "template" && !m.bulk && comparable(lib, m));
 

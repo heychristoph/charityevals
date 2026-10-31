@@ -569,14 +569,14 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_8x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (8x bar for future opportunities)",
       "section": "value_of_information_main",
-      "value": 8.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
         "cell": "Value of information (main)!B8"
       },
-      "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up"
+      "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up",
+      "value": 8.0,
+      "kind": "estimate"
     },
     {
       "id": "units_of_value_per_dollar_givedirectly_8x_bar_for_future_opp",
@@ -855,15 +855,15 @@
       "id": "risk_that_we_learn_this_is_above_below_our_bar_and_are_wrong",
       "label": "Risk that we learn this is above/below our bar and are wrong",
       "section": "value_of_information_main",
-      "value": -0.2,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
         "cell": "Value of information (main)!B41"
       },
       "explainer": "Uses standard assumption for simplicity",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.risk_that_we_learn_this_is_above_below_our_bar_and_are",
+      "expected": -0.2
     },
     {
       "id": "benefit_from_influencing_other_funders_value_to_broader_rese",
@@ -1002,15 +1002,15 @@
       "id": "weight_on_different_scenario_8x_bar_for_future_opportunities",
       "label": "Weight on different scenario (8x bar for future opportunities)",
       "section": "value_of_information_main",
-      "value": 0.35,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
         "cell": "Value of information (main)!B9"
       },
       "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_on_different_scenario_8x_bar_for_future_opportun",
+      "expected": 0.35
     },
     {
       "id": "what_this_is_value_of_information_cea_for_the_chobi7_program_2",
@@ -1092,14 +1092,14 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_10x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (10x bar for future opportunities)",
       "section": "value_of_information_main",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
         "cell": "Value of information (main)!C8"
       },
-      "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up"
+      "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up",
+      "value": 10.0,
+      "kind": "estimate"
     },
     {
       "id": "units_of_value_per_dollar_givedirectly_10x_bar_for_future_op",
@@ -1748,15 +1748,15 @@
       "id": "weight_on_different_scenario_12x_bar_for_future_opportunitie",
       "label": "Weight on different scenario (12x bar for future opportunities)",
       "section": "value_of_information_main",
-      "value": 0.15,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18DOXYrt61LVa3DCxIECjRu9hYEbRNcU6NGQZwpYvGus/edit",
         "cell": "Value of information (main)!D9"
       },
       "explainer": "Assumption. This is based on forecasted funds raised. Responsibility for updating this (and other generic parameters) will rest with the cross-cutting team. See Section 2.1.2 of write-up",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_on_different_scenario_12x_bar_for_future_opportu",
+      "expected": 0.15
     },
     {
       "id": "cost_effectiveness_x_cash_2",
@@ -1811,26 +1811,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

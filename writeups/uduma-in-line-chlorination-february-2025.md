@@ -3,7 +3,7 @@ Water supply and in-line chlorination in Mali. GiveWell published 2 public model
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Uduma ILC pilot in Mali – Option value cost-effectiveness analysis, February 2025](/uduma/uduma-ilc-pilot-in-mali-option-value-february) | GW | February 2025 | <span data-figure="headline" data-model="uduma-ilc-pilot-in-mali-option-value-february">11</span> | 31, 6 kept fixed |
-| [Uduma in-line chlorination cost-effectiveness analysis (February 2025)](/uduma) | GW | February 2025 | <span data-figure="headline" data-model="uduma-in-line-chlorination-february-2025">22</span> | 384, 16 kept fixed |
+| [Uduma ILC pilot in Mali – Option value cost-effectiveness analysis, February 2025](/uduma/uduma-ilc-pilot-in-mali-option-value-february) | GW | February 2025 | <span data-figure="headline" data-model="uduma-ilc-pilot-in-mali-option-value-february">11</span> | 34, 6 kept fixed |
+| [Uduma in-line chlorination cost-effectiveness analysis (February 2025)](/uduma) | GW | February 2025 | <span data-figure="headline" data-model="uduma-in-line-chlorination-february-2025">22</span> | 415, 16 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

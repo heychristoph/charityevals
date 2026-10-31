@@ -1,5 +1,6 @@
 import { parse, refs, evaluate, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
+import { evaluatorFigure, evaluatorFigureModels } from "./ranking";
 
 export type ResolvedRow = Row & {
   /** Id of the model this row was first defined in, when that isn't this model. */
@@ -231,9 +232,18 @@ export function buildLibrary(
   // `#model-id`: another model's live result. It must exist (here or in `options.models`), report in a
   // unit that converts to the common one, and no chain of references may come back to the model.
   const known = (id: string) => models.get(id) ?? options.models?.get(id);
+  // `#owner:charity`: a charity's figure from one evaluator, read through the models the rankings use.
+  const all: Library = { models: new Map([...(options.models ?? []), ...models]), charities, owners, assumptions, facts, errors: [] };
+  const targets = (d: string): string[] => (isCharityRef(d) ? evaluatorFigureModels(all, ...splitCharityRef(d)).map((t) => t.id) : [d]);
   for (const m of models.values())
     for (const r of m.rows)
       for (const d of r.modelDeps) {
+        if (isCharityRef(d)) {
+          const [owner, charity] = splitCharityRef(d);
+          if (!owners.has(owner) || !charities.has(charity)) errors.push(`${m.id}.${r.id}: unknown evaluator or charity #${d}`);
+          else if (!targets(d).length) errors.push(`${m.id}.${r.id}: ${owner} doesn't rank ${charity} (#${d})`);
+          continue;
+        }
         const t = known(d);
         if (!t) errors.push(`${m.id}.${r.id}: unknown model #${d}`);
         else if (!t.output || !assumptions.units[t.output.unit]?.to_common) errors.push(`${m.id}.${r.id}: model #${d} has no result in common units`);
@@ -243,7 +253,7 @@ export function buildLibrary(
     if (state.get(id) === 2) return;
     if (state.get(id) === 1) { errors.push(`model reference cycle ${[...path, id].join(" → ")}`); return; }
     state.set(id, 1);
-    for (const d of modelDepsOf(known(id))) visit(d, [...path, id]);
+    for (const d of modelDepsOf(known(id)).flatMap(targets)) visit(d, [...path, id]);
     state.set(id, 2);
   };
   for (const id of models.keys()) visit(id, []);
@@ -256,11 +266,17 @@ export function modelDepsOf(m: ResolvedModel | undefined): string[] {
   return m ? [...new Set(m.rows.flatMap((r) => r.modelDeps ?? []))] : [];
 }
 
-/** Every model a model's result depends on through `#id` references, directly or not. */
+/** `#owner:charity`: a charity's figure from one evaluator (src/engine/ranking.ts evaluatorFigure). */
+export const isCharityRef = (ref: string) => ref.includes(":");
+export const splitCharityRef = (ref: string) => ref.split(":") as [owner: string, charity: string];
+
+/** Every model a model's result depends on through `#id` references, directly or not (a charity
+ * reference stands for the models its figure reads). */
 export function referencedModels(lib: Library, m: ResolvedModel): ResolvedModel[] {
   const seen = new Map<string, ResolvedModel>();
+  const expand = (d: string) => (isCharityRef(d) ? evaluatorFigureModels(lib, ...splitCharityRef(d)).map((t) => t.id) : [d]);
   const walk = (x: ResolvedModel) => {
-    for (const d of modelDepsOf(x)) {
+    for (const d of modelDepsOf(x).flatMap(expand)) {
       const t = lib.models.get(d);
       if (!t || seen.has(d) || d === m.id) continue;
       seen.set(d, t);
@@ -285,11 +301,11 @@ export function modelResult(lib: Library, id: string, av: Record<string, number>
   if (!cache) resultCache.set(av, (cache = new Map()));
   const hit = cache.get(id);
   if (hit !== undefined) return hit;
-  const m = lib.models.get(id);
-  if (!m || computing.has(id)) return NaN;
+  const m = isCharityRef(id) ? undefined : lib.models.get(id);
+  if ((!m && !isCharityRef(id)) || computing.has(id)) return NaN;
   computing.add(id);
   try {
-    const v = bottomLine(lib, m, av).common;
+    const v = m ? bottomLine(lib, m, av).common : evaluatorFigure(lib, ...splitCharityRef(id), (t) => modelResult(lib, t.id, av));
     cache.set(id, v);
     return v;
   } finally {

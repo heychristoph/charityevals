@@ -136,14 +136,14 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_8x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (8x bar for future opportunities)",
       "section": "main",
-      "value": 8.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1zS_rfzVUOQismGjv-ptvofa12L6XNyXY1u3IPGuoAjM/edit",
         "cell": "Main!B6"
       },
-      "explainer": "Assumption. This is based on forecasted funds raised."
+      "explainer": "Assumption. This is based on forecasted funds raised.",
+      "value": 8.0,
+      "kind": "estimate"
     },
     {
       "id": "weight_on_different_scenario_8x_bar_for_future_opportunities",
@@ -163,14 +163,14 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_10x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (10x bar for future opportunities)",
       "section": "main",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1zS_rfzVUOQismGjv-ptvofa12L6XNyXY1u3IPGuoAjM/edit",
         "cell": "Main!C6"
       },
-      "explainer": "Assumption. This is based on forecasted funds raised."
+      "explainer": "Assumption. This is based on forecasted funds raised.",
+      "value": 10.0,
+      "kind": "estimate"
     },
     {
       "id": "weight_on_different_scenario_10x_bar_for_future_opportunitie",
@@ -224,14 +224,14 @@
       "id": "units_of_value_per_dollar_givedirectly_8x_bar_for_future_opp",
       "label": "Units of value per dollar, GiveDirectly (8x bar for future opportunities)",
       "section": "main",
-      "value": 0.003355,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1zS_rfzVUOQismGjv-ptvofa12L6XNyXY1u3IPGuoAjM/edit",
         "cell": "Main!B8"
       },
-      "explainer": "Top charities cost-effectiveness analysis"
+      "explainer": "Changed for consistency. The sheet has 0.003355 here; the site uses one figure for this in every model, 0.00335 (Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar), `@cash.uov_per_dollar`). The evaluator view keeps 0.003355.\n\nTop charities cost-effectiveness analysis",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.003355
     },
     {
       "id": "increased_likelihood_of_success_of_an_svs_program_from_fundi",
@@ -641,15 +641,15 @@
       "id": "risk_that_pilot_study_is_funded_without_us_in_a_few_years",
       "label": "Risk that pilot/study is funded without us in a few years",
       "section": "main",
-      "value": -0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1zS_rfzVUOQismGjv-ptvofa12L6XNyXY1u3IPGuoAjM/edit",
         "cell": "Main!B49"
       },
       "explainer": "Subjective guess",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.risk_that_pilot_study_is_funded_without_us_in_a_few_yea",
+      "expected": -0.1
     },
     {
       "id": "benefit_from_influencing_other_funders_value_to_broader_rese",
@@ -726,26 +726,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

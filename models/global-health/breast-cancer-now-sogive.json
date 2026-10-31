@@ -260,13 +260,8 @@
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.0,
-        "best": 0.1,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "UK charity staff earn somewhat less than in comparable private-sector jobs. Our judgment."
+      "explainer": "UK charity staff earn somewhat less than in comparable private-sector jobs. Our judgment.",
+      "formula": "@staff_pay.gap_uk_charity"
     },
     {
       "id": "salary_sacrifice",
@@ -284,13 +279,22 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "staff_pay",
+      "label": "A marginal dollar's result as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): SoGive's figure is UK breast cancer research spending over 1970–2009 divided by the healthy years that research is credited with, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "staff_pay",
       "label": "Healthy years per dollar donated",
       "format": "small",
       "unit": "DALYs per $",
-      "formula": "dalys_per_dollar_cash * donor_cost_share",
-      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "dalys_per_dollar_cash * donor_cost_share * marginal_vs_past_average",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). A marginal dollar is counted at the shared share of the past average (row above)."
     }
   ],
   "output": {

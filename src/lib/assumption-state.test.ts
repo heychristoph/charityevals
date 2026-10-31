@@ -15,7 +15,8 @@ describe("old assumption links", () => {
 });
 
 describe("the WELLBY rate", () => {
-  it("is a slider again, so an old link's value applies", () => {
-    expect(upgrade({ uov_per_wellby: 0.55 })).toEqual({ uov_per_wellby: 0.55 });
+  it("is a slider, so an old link's value applies, restated in healthy years per WELLBY", () => {
+    expect(upgrade({ uov_per_wellby: 0.55 })).toEqual({ daly_per_wellby: 0.275 });
+    expect(upgrade({ daly_per_wellby: 0.1 })).toEqual({ daly_per_wellby: 0.1 });
   });
 });

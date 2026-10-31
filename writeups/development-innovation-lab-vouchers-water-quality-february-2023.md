@@ -4,7 +4,7 @@ A University of Chicago research lab; GiveWell funded its water-treatment vouche
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [DIL Bridge Funding Water Vouchers Value of Information rough estimate, Jan 2024](/development-innovation-lab/development-innovation-lab-dil-bridge-funding-water-vouchers-value) | GW | January 2024 | <span data-figure="headline" data-model="development-innovation-lab-dil-bridge-funding-water-vouchers-value">23</span> | 7 |
-| [Vouchers Water Quality cost-effectiveness analysis, February 2023](/development-innovation-lab) | GW | February 2023 | <span data-figure="headline" data-model="development-innovation-lab-vouchers-water-quality-february-2023">24</span> | 307, 13 kept fixed |
+| [Vouchers Water Quality cost-effectiveness analysis, February 2023](/development-innovation-lab) | GW | February 2023 | <span data-figure="headline" data-model="development-innovation-lab-vouchers-water-quality-february-2023">24</span> | 338, 13 kept fixed |
 | [Water Vouchers Value of Information rough estimate](/development-innovation-lab/development-innovation-lab-water-vouchers-value-information) | GW | January 2023 | <span data-figure="headline" data-model="development-innovation-lab-water-vouchers-value-information">23</span> | 7 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

@@ -19,7 +19,7 @@ Companies make pledges; some implement them, on a timeline the campaigns can bri
 - **Pledges kept (changed for consistency).** ACE's own probabilities (30% for the European Chicken Commitment, 80% to 90% for cage-free) become the shared figures: 30% for broiler pledges and 92% of cage-free commitments fulfilled (Chicken Watch).
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them. They are ACE's estimate of the other groups' share of the work, so they are also what "Credit by share of resources" uses.
-
+- **Past average, not the next dollar (ours):** ACE's estimate divides the Observatory's past year of campaign spending by the pledges it won, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
 
 ### Sources
 

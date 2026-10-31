@@ -17,6 +17,7 @@ Beyond the exchange rates, our guesses on the path from papers to pain spared: e
 ### Where we differ from ACE
 
 Only the optional salary-sacrifice adjustment (see the "Your dollar's share" section). The step from papers to pain spared is ours, not ACE's. With "Credit by share of resources" on, a paper's share of the field's credit is its cost over what the whole field will spend until help arrives (our judgment, $700 million, $300 million to $2 billion) instead of 1 in 5,000 papers.
+- **Past average, not the next dollar (ours):** ACE's estimate divides Wild Animal Initiative's 2023–2025 spending by the papers it produced, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
 
 ### Sources
 

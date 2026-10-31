@@ -2526,9 +2526,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!F8"
       },
-      "formula": "100.7 * $life_value_multiplier",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7,
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "proportion_of_6_59_month_admissions_occurring_6_11_months_ni_2",
@@ -2555,9 +2555,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!G8"
       },
-      "formula": "127.3 * $life_value_multiplier",
+      "formula": "@moral_weights.givewell_age_1_4 * $life_value_multiplier",
       "expected": 127.3,
-      "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_1_4, 127.3 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "of_children_admitted_for_malnutrition_treatment_in_each_age_2",
@@ -2632,14 +2632,14 @@
       "id": "internal_validity_adjustment_smc_burkina_faso",
       "label": "Internal validity adjustment — SMC (Burkina Faso)",
       "section": "moral_weights",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!B18"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_burkina_faso",
@@ -2677,14 +2677,14 @@
       "id": "internal_validity_adjustment_smc_togo",
       "label": "Internal validity adjustment — SMC (Togo)",
       "section": "moral_weights",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!D18"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_togo",
@@ -2722,14 +2722,14 @@
       "id": "internal_validity_adjustment_smc_chad",
       "label": "Internal validity adjustment — SMC (Chad)",
       "section": "moral_weights",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!E18"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_chad",
@@ -2767,14 +2767,14 @@
       "id": "internal_validity_adjustment_smc_mozambique",
       "label": "Internal validity adjustment — SMC (Mozambique)",
       "section": "moral_weights",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!H18"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_mozambique",
@@ -2812,14 +2812,14 @@
       "id": "internal_validity_adjustment_smc_nigeria",
       "label": "Internal validity adjustment — SMC (Nigeria)",
       "section": "moral_weights",
-      "value": 0.95,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Moral weights!C18"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_smc",
+      "expected": 0.95
     },
     {
       "id": "external_validity_adjustment_smc_nigeria",
@@ -4229,14 +4229,14 @@
       "id": "risk_of_wastage_double_treatment",
       "label": "Risk of wastage: Double treatment",
       "section": "downside_adjustment",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Downside adjustment!B3"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.risk_of_wastage_double_treatment",
+      "expected": 0.05
     },
     {
       "id": "risk_of_wastage_ineffective_goods",
@@ -4276,27 +4276,27 @@
       "id": "misappropriation_without_monitoring_results",
       "label": "Misappropriation without monitoring results",
       "section": "downside_adjustment",
-      "value": 0.025,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Downside adjustment!B9"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.misappropriation_without_monitoring_results",
+      "expected": 0.025
     },
     {
       "id": "false_monitoring_results",
       "label": "False monitoring results",
       "section": "downside_adjustment",
-      "value": 0.025,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Downside adjustment!B10"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results_0_025",
+      "expected": 0.025
     },
     {
       "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
@@ -4323,27 +4323,27 @@
       "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "downside_adjustment",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Downside adjustment!B15"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_non",
+      "expected": 0.05
     },
     {
       "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "downside_adjustment",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1sdCMECxGXmImnyXNQw8ZILrMnxkXU27IhO2sWJ30Twc/edit",
         "cell": "Downside adjustment!B16"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_wit",
+      "expected": 0.05
     },
     {
       "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
@@ -8248,26 +8248,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

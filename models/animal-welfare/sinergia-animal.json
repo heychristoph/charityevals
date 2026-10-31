@@ -5,7 +5,7 @@
   "cause": "animal-welfare",
   "charity": "sinergia-animal",
   "owner": "ace",
-  "summary": "Corporate campaigns for farmed animals in Latin America and Southeast Asia: cage-free egg commitments, pig welfare commitments in Brazil, and replacing meat in institutional meals. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet for its 2025 recommendation, covering three programs (about 84% of programme spending).",
+  "summary": "Corporate campaigns for farmed animals in Latin America and Southeast Asia: cage-free egg commitments, pig welfare commitments in Brazil, and replacing meat in institutional meals. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet for its 2025 recommendation, covering three programs (about 84% of programme spending). It is more than ten times its peers because its cage-free commitments cover about 20.7 million hens a year in Latin America, 7.9 million credited to Sinergia, for about $0.9 million of campaign spending: some 31 hen-years out of cages per dollar before compliance, each counting the shared 17.5 SADs.",
   "source": {
     "publisher": "Animal Charity Evaluators",
     "title": "Sinergia Animal – 2025 Recommended Charity",
@@ -353,12 +353,12 @@
         "best": 0.575,
         "high": 0.65
       },
-      "kind": "observed",
+      "kind": "judgment",
       "source": {
         "title": "Sinergia Animal via ACE",
         "cell": "Pig welfare campaigns CEA!B14:D14"
       },
-      "explainer": "Sinergia's own range. Best guess is the midpoint."
+      "explainer": "Sinergia's own guess at the share of pig pledges companies keep (0.5–0.65; no shared record exists for pig pledges, so the evaluator's figure stays). A judgment: no tracker publishes a fulfilment rate for gestation-crate pledges. Best guess is the midpoint."
     },
     {
       "id": "pig_sads",
@@ -510,26 +510,16 @@
       "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.65,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Campaigning is mostly people: researchers, campaigners and corporate negotiators. Advocacy nonprofits typically spend well over half their budget on staff. We haven't seen Sinergia's own breakdown, so this is a guess. Range is ours."
+      "explainer": "Campaigning is mostly people: researchers, campaigners and corporate negotiators. Advocacy nonprofits typically spend well over half their budget on staff. We haven't seen Sinergia's own breakdown, so this is a guess. Range is ours.",
+      "formula": "@staff_pay.share_advocacy"
     },
     {
       "id": "salary_gap",
       "section": "donor",
       "label": "Pay gap versus comparable for-profit jobs",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Campaigners and negotiators with these skills could earn considerably more in corporate communications, sales or consulting. Animal advocacy salaries are low even by nonprofit standards. Range is ours."
+      "explainer": "Campaigners and negotiators with these skills could earn considerably more in corporate communications, sales or consulting. Animal advocacy salaries are low even by nonprofit standards. Range is ours.",
+      "formula": "@staff_pay.gap_advocacy"
     },
     {
       "id": "salary_sacrifice",
@@ -544,6 +534,15 @@
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
       "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "A marginal dollar's result as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): ACE's estimate is Sinergia's past campaign spending over the cage-free, pig and meal commitments it won, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
     },
     {
       "id": "sads_per_donor_dollar",
@@ -567,8 +566,8 @@
       "section": "species",
       "label": "SADs averted per dollar you give: chickens",
       "format": "number",
-      "formula": "(cf_sads + mr_sads * production_response * @sad_factors.meal_sads_share_chicken) / cost_total * donor_cost_share",
-      "explainer": "SADs averted for chickens per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
+      "formula": "(cf_sads + mr_sads * production_response * @sad_factors.meal_sads_share_chicken) / cost_total * donor_cost_share * marginal_vs_past_average",
+      "explainer": "SADs averted for chickens per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data). A marginal dollar is counted at the shared share of the past average (row marginal_vs_past_average)."
     },
     {
       "id": "ced_chicken",
@@ -583,8 +582,8 @@
       "section": "species",
       "label": "SADs averted per dollar you give: pigs",
       "format": "number",
-      "formula": "(pig_sads + mr_sads * production_response * @sad_factors.meal_sads_share_pig) / cost_total * donor_cost_share",
-      "explainer": "SADs averted for pigs per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
+      "formula": "(pig_sads + mr_sads * production_response * @sad_factors.meal_sads_share_pig) / cost_total * donor_cost_share * marginal_vs_past_average",
+      "explainer": "SADs averted for pigs per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data). A marginal dollar is counted at the shared share of the past average (row marginal_vs_past_average)."
     },
     {
       "id": "ced_pig",
@@ -599,8 +598,8 @@
       "section": "species",
       "label": "SADs averted per dollar you give: fish",
       "format": "number",
-      "formula": "mr_sads * production_response * @sad_factors.meal_sads_share_fish / cost_total * donor_cost_share",
-      "explainer": "SADs averted for fish per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
+      "formula": "mr_sads * production_response * @sad_factors.meal_sads_share_fish / cost_total * donor_cost_share * marginal_vs_past_average",
+      "explainer": "SADs averted for fish per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data). A marginal dollar is counted at the shared share of the past average (row marginal_vs_past_average)."
     },
     {
       "id": "ced_fish",

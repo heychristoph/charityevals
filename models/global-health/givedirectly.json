@@ -477,11 +477,20 @@
       "expected": 5.986295771
     },
     {
+      "id": "uov_per_under5_death",
+      "section": "mortality",
+      "label": "Value of averting a death of a child under five (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "published": 116,
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.25 units of value), times \"A child's life vs doubled-income year\" (Your values). GiveWell's sheet types 116, kept for the evaluator view."
+    },
+    {
       "id": "child_mortality_uov",
       "section": "mortality",
       "label": "Units of value from child deaths averted",
       "format": "number",
-      "formula": "under5_deaths_averted * 116 * $life_value_multiplier",
+      "formula": "under5_deaths_averted * uov_per_under5_death",
       "expected": 694.4103094
     },
     {
@@ -617,12 +626,12 @@
       "section": "bottom",
       "label": "GiveWell's previous estimate for cash (units of value / $)",
       "format": "small",
-      "value": 0.003355,
-      "kind": "estimate",
       "source": {
         "cell": "New CEA!B28"
       },
-      "explainer": "GiveWell still expresses everything as a multiple of this older figure (\"× cash\"). Kept so this model reproduces GiveWell's headline numbers."
+      "explainer": "Changed for consistency. The sheet has 0.003355 here; the site uses one figure for this in every model, 0.00335 (Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar), `@cash.uov_per_dollar`). The evaluator view keeps 0.003355.\n\nGiveWell still expresses everything as a multiple of this older figure (\"× cash\"). Kept so this model reproduces GiveWell's headline numbers.",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.003355
     },
     {
       "id": "multiple_of_cash",
@@ -637,26 +646,16 @@
       "section": "donor",
       "label": "Staff pay as a share of total cost",
       "format": "percent",
-      "value": {
-        "low": 0.04,
-        "best": 0.08,
-        "high": 0.12
-      },
-      "kind": "judgment",
-      "explainer": "About 16% of GiveDirectly's costs are not transfers (see the cost share above). We guess half of that is staff pay. GiveDirectly publishes audited financials that could pin this down; we haven't extracted them yet. Range is ours."
+      "explainer": "About 16% of GiveDirectly's costs are not transfers (see the cost share above). We guess half of that is staff pay. GiveDirectly publishes audited financials that could pin this down; we haven't extracted them yet. Range is ours.",
+      "formula": "@staff_pay.share_givedirectly"
     },
     {
       "id": "salary_gap",
       "section": "donor",
       "label": "Pay gap versus comparable for-profit jobs",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "How much less staff earn than they could elsewhere, as a share of what they'd earn. Field staff in Kenya are paid at or near local market rates; headquarters staff in tech, finance and operations likely take a larger cut. Range is ours."
+      "explainer": "How much less staff earn than they could elsewhere, as a share of what they'd earn. Field staff in Kenya are paid at or near local market rates; headquarters staff in tech, finance and operations likely take a larger cut. Range is ours.",
+      "formula": "@staff_pay.gap_givedirectly"
     },
     {
       "id": "salary_sacrifice",

@@ -80,6 +80,15 @@
       "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
     },
     {
+      "id": "value_of_preventing_one_death_from_alcohol_age_mix",
+      "label": "Age mix of these deaths, relative to the average death at five or over",
+      "format": "number",
+      "value": 0.7787800206035135,
+      "kind": "estimate",
+      "explainer": "Deaths from alcohol fall mostly in middle and older age (GiveWell's public-health-regulation moral weights). GiveWell's sheet values these deaths at 57 units of value, 0.779 of its average five-and-over death (73.1914), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "calculations"
+    },
+    {
       "id": "value_of_preventing_one_death_from_alcohol",
       "label": "Value of preventing one death from alcohol",
       "section": "calculations",
@@ -88,9 +97,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!E68"
       },
-      "formula": "57 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * value_of_preventing_one_death_from_alcohol_age_mix * $life_value_multiplier",
       "expected": 57.0,
-      "explainer": "GiveWell's moral weight, 57 units of value, times your multiplier on the value of a life."
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_over5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 57 units of value at the defaults, as in GiveWell's sheet."
     },
     {
       "id": "increase_in_probability_in_percentage_points_of_intervention",
@@ -5665,26 +5674,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

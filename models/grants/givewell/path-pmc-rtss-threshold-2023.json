@@ -303,9 +303,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
         "cell": "Moral weights and discount rate!C8"
       },
-      "formula": "116.252615789931 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.252615789931,
-      "explainer": "GiveWell's moral weight, 116.252615789931 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -774,14 +774,14 @@
       "id": "false_monitoring_results",
       "label": "False monitoring results",
       "section": "units_of_value_with_different_e",
-      "value": 0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
         "cell": "Units of value with different e!B149"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results_0_02",
+      "expected": 0.02
     },
     {
       "id": "total_adjustment_for_quality_of_monitoring_and_evaluation",
@@ -795,14 +795,14 @@
       "id": "change_of_priorities",
       "label": "Change of priorities",
       "section": "units_of_value_with_different_e",
-      "value": 0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
         "cell": "Units of value with different e!B153"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.change_of_priorities_0_02",
+      "expected": 0.02
     },
     {
       "id": "confidence_in_funds_being_used_for_intended_purpose_non_fund",
@@ -821,14 +821,14 @@
       "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "units_of_value_with_different_e",
-      "value": 0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GSBObQp0HE7_doWfqc2bLpui3DyYMHCH6315zsstGNs/edit",
         "cell": "Units of value with different e!B155"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_wit",
+      "expected": 0.05
     },
     {
       "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
@@ -1399,26 +1399,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

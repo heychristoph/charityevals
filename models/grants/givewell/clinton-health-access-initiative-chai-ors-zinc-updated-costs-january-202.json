@@ -146,8 +146,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Moral weights!B2"
       },
-      "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life.\n\nmeasure location",
-      "formula": "83.6 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_early_neonatal, 83.6 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location",
+      "formula": "@moral_weights.givewell_age_early_neonatal * $life_value_multiplier",
       "expected": 83.6
     },
     {
@@ -167,8 +167,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Moral weights!C2"
       },
-      "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life.\n\nmeasure location cause",
-      "formula": "84.5 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_late_neonatal, 84.5 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause",
+      "formula": "@moral_weights.givewell_age_late_neonatal * $life_value_multiplier",
       "expected": 84.5
     },
     {
@@ -188,8 +188,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Moral weights!D2"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause metric",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -209,8 +209,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Moral weights!E2"
       },
-      "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric year",
-      "formula": "127.3 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_1_4, 127.3 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause metric year",
+      "formula": "@moral_weights.givewell_age_1_4 * $life_value_multiplier",
       "expected": 127.3
     },
     {
@@ -725,14 +725,14 @@
       "id": "weight_direct_evidence",
       "label": "Weight (Direct evidence)",
       "section": "development_effects",
-      "value": 0.35,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!C6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_direct_evidence",
+      "expected": 0.35
     },
     {
       "id": "ors_zinc_provision_cognitive_effects",
@@ -751,14 +751,14 @@
       "id": "weight_cognitive_effects",
       "label": "Weight (Cognitive effects)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!D6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_cognitive_effects",
+      "expected": 0.15
     },
     {
       "id": "ors_zinc_provision_growth",
@@ -777,14 +777,14 @@
       "id": "weight_growth",
       "label": "Weight (Growth)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!E6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_growth",
+      "expected": 0.15
     },
     {
       "id": "ors_zinc_provision_mortality",
@@ -803,14 +803,14 @@
       "id": "weight_mortality",
       "label": "Weight (Mortality)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!F6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_mortality",
+      "expected": 0.1
     },
     {
       "id": "ors_zinc_provision_morbidity",
@@ -829,14 +829,14 @@
       "id": "weight_morbidity",
       "label": "Weight (Morbidity)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!G6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_morbidity",
+      "expected": 0.1
     },
     {
       "id": "ors_zinc_provision_anemia",
@@ -855,14 +855,14 @@
       "id": "weight_anemia",
       "label": "Weight (Anemia)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!H6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_anemia",
+      "expected": 0.075
     },
     {
       "id": "ors_zinc_provision_biological_plausibility",
@@ -881,14 +881,14 @@
       "id": "weight_biological_plausibility",
       "label": "Weight (Biological plausibility)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!I6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_biological_plausibility",
+      "expected": 0.075
     },
     {
       "id": "ors_zinc_provision_weighted_average",
@@ -901,13 +901,13 @@
       "id": "smc_direct_evidence",
       "label": "SMC (Direct evidence)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!C7"
-      }
+      },
+      "formula": "@givewell_common.smc_direct_evidence",
+      "expected": 2.0
     },
     {
       "id": "smc_cognitive_effects",
@@ -925,13 +925,13 @@
       "id": "smc_growth",
       "label": "SMC (Growth)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!E7"
-      }
+      },
+      "formula": "@givewell_common.smc_growth",
+      "expected": 2.0
     },
     {
       "id": "smc_mortality",
@@ -949,13 +949,13 @@
       "id": "smc_morbidity",
       "label": "SMC (Morbidity)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!G7"
-      }
+      },
+      "formula": "@givewell_common.smc_morbidity",
+      "expected": 3.0
     },
     {
       "id": "smc_anemia",
@@ -973,13 +973,13 @@
       "id": "smc_biological_plausibility",
       "label": "SMC (Biological plausibility)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aiaRxOoJEieaJWKXSXr000xAk55arJaKN_jVAriBzU4/edit",
         "cell": "Development effects!I7"
-      }
+      },
+      "formula": "@givewell_common.smc_biological_plausibility",
+      "expected": 3.0
     },
     {
       "id": "smc_weighted_average",
@@ -3180,26 +3180,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

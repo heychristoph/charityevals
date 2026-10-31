@@ -3,6 +3,6 @@ Johns Hopkins affiliate running maternal, child and malaria programs, including 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of seasonal malaria chemoprevention (SMC) - Cameroon grant to Jhpiego (May 2025)](/jhpiego) | GW | May 2025 | <span data-figure="headline" data-model="jhpiego-seasonal-malaria-chemoprevention-smc">43</span> | 187, 2 kept fixed |
+| [Cost-effectiveness analysis of seasonal malaria chemoprevention (SMC) - Cameroon grant to Jhpiego (May 2025)](/jhpiego) | GW | May 2025 | <span data-figure="headline" data-model="jhpiego-seasonal-malaria-chemoprevention-smc">43</span> | 204, 2 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

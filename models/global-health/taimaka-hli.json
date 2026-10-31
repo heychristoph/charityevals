@@ -38,7 +38,7 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0,
-      "uov_per_wellby": 1.15
+      "daly_per_wellby": 0.575
     }
   },
   "sections": [
@@ -194,26 +194,21 @@
       "explainer": "Taimaka treats children under five for acute malnutrition, so each life saved is an under-five death averted: GiveWell's moral weight, 116.25 doubled-income years, times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
-      "id": "wellbys_per_death",
+      "id": "uov_valued_outside_wellbys",
       "section": "lives",
-      "label": "WELLBYs per death averted, at the site's value of a death",
-      "format": "number",
-      "formula": "uov_per_death / @wellby_factors.uov_per_wellby_anchor",
-      "explainer": "Changed for consistency: in our view a death averted is valued the way every model on the site values it, GiveWell's moral weight for the age of the person saved (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not by HLI's WELLBYs of the years the person goes on to live above a neutral point. It is put into WELLBYs at the rate the WELLBY slider defaults to (facts: wellby_factors.uov_per_wellby_anchor, 0.13 units of value per WELLBY), so at the default the death counts exactly what it counts in GiveWell's models; moving the WELLBY slider scales it with the rest of the model. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models. HLI's own figure, 62 years × (5.72 − 2) = 231 WELLBYs from birth, undiscounted, is used above only to turn its 65 WELLBYs per $1,000 back into lives saved."
-    },
-    {
-      "id": "wellbys_lives_per_1000",
-      "section": "lives",
-      "label": "WELLBYs per $1,000 from lives saved",
-      "formula": "lives_saved_per_1000 * wellbys_per_death"
-    },
-    {
-      "id": "wellbys_mortality_per_1000",
-      "section": "lives",
-      "label": "WELLBYs per $1,000 from lives saved",
-      "formula": "wellbys_lives_per_1000",
+      "label": "Value of the lives saved per $1,000, the site's way (units of value)",
+      "formula": "lives_saved_per_1000 * uov_per_death",
       "published": 0,
-      "explainer": "Changed for consistency: the site counts the lives a charity saves in every model, valued one way (above). HLI's bottom line leaves them out (0 here in the evaluator view), as a bonus for those who value saving lives, which it puts at 65 WELLBYs per $1,000 at a neutral point of 2, plus 2.88 for grief averted."
+      "explainer": "Changed for consistency: the site counts the lives a charity saves in every model, valued one way: GiveWell's moral weight for an under-five death (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not HLI's WELLBYs of the years lived above a neutral point. HLI's bottom line leaves them out (0 here in the evaluator view), as a bonus for those who value saving lives, which it puts at 65 WELLBYs per $1,000 at a neutral point of 2, plus 2.88 for grief averted. HLI's own figure, 62 years × (5.72 − 2) = 231 WELLBYs from birth, undiscounted, is used above only to turn its 65 WELLBYs per $1,000 back into lives saved. Deaths averted now are not discounted. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models.",
+      "format": "number"
+    },
+    {
+      "id": "wellbys_from_uov",
+      "section": "lives",
+      "label": "WELLBYs per $1,000 from the lives saved",
+      "format": "number",
+      "formula": "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)",
+      "explainer": "The deaths' value in units of value (above), put into WELLBYs at the WELLBY rate (\"1 point more life satisfaction for a year vs doubled-income year\", Your values). The unit's conversion multiplies every WELLBY by the same rate, so the two cancel: the deaths count their shared value whatever the WELLBY slider says, and only the WELLBYs HLI measured move with it. The one row a model may read the WELLBY rate in (docs/normalization.md 2.3, INV-17)."
     },
     {
       "id": "discount_rate_per_year",
@@ -274,7 +269,7 @@
       "section": "per_dollar",
       "label": "WELLBYs per dollar, discounted",
       "format": "small",
-      "formula": "(wellbys_per_1000 * discount_factor + wellbys_mortality_per_1000) / 1000",
+      "formula": "(wellbys_per_1000 * discount_factor + wellbys_from_uov) / 1000",
       "explainer": "HLI's life-improving WELLBYs, discounted for when they come, plus the lives saved (not discounted: a death averted now is valued as a whole, as in every model)."
     },
     {
@@ -282,26 +277,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

@@ -3,8 +3,8 @@ Delivers vitamin A supplementation, fortification and other nutrition programs. 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of Nutrition International's rice fortification program, 2024](/nutrition-international) | GW | September 2024 | <span data-figure="headline" data-model="nutrition-international-rice-fortification-2024">17</span> | 249, 17 kept fixed |
-| [[Copy for 2024 Chad renewal grant] GiveWell, cost-effectiveness analysis of vitamin A supplementation, 2024](/nutrition-international/nutrition-international-2024-chad-renewal-vitamin-a) | GW | September 2024 | <span data-figure="headline" data-model="nutrition-international-2024-chad-renewal-vitamin-a">10.0</span> | 11 |
-| [Nutrition International cost-effectiveness analysis — Chad, May 2023](/nutrition-international/nutrition-international-chad-may-2023) | GW | May 2023 | <span data-figure="headline" data-model="nutrition-international-chad-may-2023">35</span> | 277, 18 kept fixed |
+| [Cost-effectiveness analysis of Nutrition International's rice fortification program, 2024](/nutrition-international) | GW | September 2024 | <span data-figure="headline" data-model="nutrition-international-rice-fortification-2024">17</span> | 250, 17 kept fixed |
+| [[Copy for 2024 Chad renewal grant] GiveWell, cost-effectiveness analysis of vitamin A supplementation, 2024](/nutrition-international/nutrition-international-2024-chad-renewal-vitamin-a) | GW | September 2024 | <span data-figure="headline" data-model="nutrition-international-2024-chad-renewal-vitamin-a">9.8</span> | 11 |
+| [Nutrition International cost-effectiveness analysis — Chad, May 2023](/nutrition-international/nutrition-international-chad-may-2023) | GW | May 2023 | <span data-figure="headline" data-model="nutrition-international-chad-may-2023">34</span> | 306, 18 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

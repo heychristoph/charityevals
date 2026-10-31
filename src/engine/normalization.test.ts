@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv11, inv2b, inv2c, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv15, inv16, inv17, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -81,6 +81,78 @@ describe("invariant checks", () => {
     expect(inv2c(l).violations.map(keyOf).sort()).toEqual(["cancels death_value", "own gd"]);
   });
 
+  it("INV-2d flags a constant next to a shared assumption, not a shared fact or a constant inside its own function", () => {
+    const facts = [read(join(root, "facts/moral_weights.json"))];
+    const m = (id: string, formula: string) => ({ ...base, id, rows: [base.rows[0], { id: "out", label: "out", formula }] });
+    const l = buildLibrary([base, m("staff", "x * 8 * $life_value_multiplier"), m("scaled", "x * 0.005 * $discount_rate / 0.04"), m("years", "x * pv_annuity_due(1, $discount_rate, 5)"),
+      m("shared", "x * @moral_weights.uov_per_death_under5 * $life_value_multiplier"), m("ln", "x * ln(2) * $uov_per_ln_consumption")], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    expect(l.errors).toEqual([]);
+    expect(inv2d(l).violations.map(keyOf).sort()).toEqual(["scaled out 0.005 $discount_rate", "scaled out 0.04 $discount_rate", "staff out 8 $life_value_multiplier", "years out 5 $discount_rate"]);
+  });
+
+  it("INV-13 flags a concept stated as its own literal, copied or different, not one read from the shared fact", () => {
+    const facts = [read(join(root, "facts/givewell_shared.json"))];
+    const m = (id: string, share: object) => ({ ...base, id, rows: [{ id: "share", label: "Multiplier for resource sharing within households", ...share }, { id: "out", label: "out", formula: "share" }] });
+    const lit = (value: number) => ({ value, kind: "estimate", explainer: "Test input." });
+    const l = buildLibrary([base, m("other", lit(3)), m("copy", lit(2)), m("shared", { formula: "@givewell_shared.resource_sharing_multiplier" })], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    expect(l.errors).toEqual([]);
+    expect(inv13(l).violations.map(keyOf).sort()).toEqual(["copy resource-sharing share", "other resource-sharing share"]);
+  });
+
+  it("INV-14 flags the same literal under the same label in five models, not four, a round number, or a scenario's own value", () => {
+    const m = (id: string, label: string, value: number) => ({ ...base, id, owner: "givewell", rows: [{ id: "a", label, value, kind: "estimate", explainer: "Test input." }, { id: "out", label: "out", formula: "a" }] });
+    const many = (prefix: string, n: number, label: string, value: number) => Array.from({ length: n }, (_, i) => m(`${prefix}${i}`, label, value));
+    const l = buildLibrary([base, ...many("five", 5, "House adjustment for widgets (Kenya)", 0.137), ...many("four", 4, "Another house figure", 0.211),
+      ...many("round", 5, "Some halving", 0.5), ...many("bar", 5, "Value of the 8x bar", 8)], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, [], [], read(join(root, "owners.json")));
+    expect(l.errors).toEqual([]);
+    expect(inv14(l).violations.map(keyOf).sort()).toEqual(["five0 a = 0.137", "five1 a = 0.137", "five2 a = 0.137", "five3 a = 0.137", "five4 a = 0.137"]);
+  });
+
+  it("INV-15 flags a ranked model more than ten times its peers' median unless its summary says why", () => {
+    const owners = read(join(root, "owners.json"));
+    const c = (id: string) => ({ id, name: id, cause: "global-health" });
+    const m = (id: string, x: number, summary = "") => ({ ...base, id, charity: id, owner: "givewell", summary, rows: [{ id: "x", label: "x", value: x, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" }] });
+    const models = [m("a", 1), m("b", 1.2), m("c", 0.9), m("high", 20), m("explained", 30, "It is more than ten times its peers because it is a test.")];
+    const l = buildLibrary(models, { ...assumptions, common: { ...assumptions.common, benchmark: "a" } }, [], models.map((x) => c(x.id)), owners);
+    expect(l.errors).toEqual([]);
+    expect(inv15(l).violations.map(keyOf)).toEqual(["high summary"]);
+  });
+
+  it("INV-16 flags a ranked value-of-information sheet found by its rows, and a bottom line from another country's column", () => {
+    const owners = read(join(root, "owners.json"));
+    const rows = (labels: string[], native = "Final estimate") => [...labels.map((label, i) => ({ id: `r${i}`, label, value: 1, kind: "estimate", explainer: "Test input." })),
+      { id: "nat", label: native, formula: labels.map((_, i) => `r${i}`).join(" + ") || "1" }, { id: "out", label: "out", formula: "nat" }];
+    const m = (id: string, name: string, r: object[]) => ({ ...base, id, name, charity: id, owner: "givewell", rows: r, output: { ...base.output, native: { row: "nat", unit: "x cash" } } });
+    const models = [m("prog", "Nets in Chad", rows(["Nets"], "Final cost-effectiveness estimate (Chad)")),
+      m("pilot", "Pilot follow-up", rows(["Weight on future funding bar scenario", "Probability that the decision changes"])),
+      m("column", "Nets grant for Nigeria", rows(["Nets"], "Final cost-effectiveness estimate (Chad)"))];
+    const l = buildLibrary(models, { ...assumptions, common: { ...assumptions.common, benchmark: "prog" } }, [], models.map((x) => ({ id: x.id, name: x.id, cause: "global-health" })), owners);
+    expect(l.errors).toEqual([]);
+    expect(inv16(l).violations.map(keyOf).sort()).toEqual(["column location", "pilot side sheet"]);
+  });
+
+  it("INV-17 passes deaths valued outside the WELLBYs, and flags deaths valued inside them", () => {
+    const facts = [read(join(root, "facts/moral_weights.json"))];
+    const w = (id: string, rows: object[]) => ({ ...base, id, sections: [{ id: "ours", title: "Ours", kind: "ours" }], rows, output: { row: "out", unit: "wellby", label: "WELLBYs per $" } });
+    const wellbys = { id: "w", label: "WELLBYs", value: 0.01, kind: "estimate", explainer: "Test input." };
+    const deaths = { id: "deaths", label: "Deaths averted per dollar", value: 0.0001, kind: "estimate", explainer: "Test input." };
+    const good = w("good", [wellbys, deaths,
+      { id: "uov_valued_outside_wellbys", section: "ours", label: "Deaths' value", formula: "deaths * @moral_weights.uov_per_death_under5 * $life_value_multiplier" },
+      { id: "wellbys_from_uov", section: "ours", label: "WELLBYs from deaths", formula: "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)" },
+      { id: "out", label: "out", section: "ours", formula: "w + wellbys_from_uov" }]);
+    const inside = w("inside", [wellbys, deaths, { id: "out", label: "out", formula: "w + deaths * @moral_weights.uov_per_death_under5 * $life_value_multiplier / 0.13" }]);
+    const l = buildLibrary([base, good, inside], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    expect(l.errors).toEqual([]);
+    expect(inv17(l).violations.map(keyOf)).toEqual(["inside deaths"]);
+    expect(inv2b(l).violations.map(keyOf)).toEqual([]);
+    // The deaths count their shared value whatever the WELLBY rate: the unit's conversion cancels it.
+    const av = assumptionValues(assumptions);
+    const m = l.models.get("good")!;
+    const deathsPart = (a: Record<string, number>) => headline(l, m, a) - headline(l, m, a, { uov_valued_outside_wellbys: 0 });
+    expect(deathsPart({ ...av, daly_per_wellby: av.daly_per_wellby * 3 })).toBeCloseTo(deathsPart(av), 9);
+    expect(deathsPart(av)).toBeCloseTo((0.0001 * 116.25262 / av.uov_per_daly) * 1000, 6);
+  });
+
   it("INV-9b flags years of benefit summed at face value, not discounted ones or cost years", () => {
     const rows = (years: string) => [
       { id: "annual", label: "Benefit a year", value: 0.01, kind: "observed", explainer: "Test input." },
@@ -103,10 +175,10 @@ describe("invariant checks", () => {
   });
 
   it("INV-2b flags a row reading a cross-cause rate", () => {
-    const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $uov_per_wellby" }] };
+    const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $daly_per_wellby" }] };
     const l = buildLibrary([base, bad], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
-    expect(inv2b(l).violations.map(keyOf)).toEqual(["bad out $uov_per_wellby"]);
+    expect(inv2b(l).violations.map(keyOf)).toEqual(["bad out $daly_per_wellby"]);
   });
 
   it("INV-3 flags a species step that isn't the shared template", () => {

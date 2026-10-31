@@ -491,9 +491,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C8"
       },
-      "formula": "116.9 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.9,
-      "explainer": "GiveWell's moral weight, 116.9 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 116.9, is kept for the evaluator view.",
+      "published": 116.9
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -518,9 +519,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C9"
       },
-      "formula": "83.1 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 83.1,
-      "explainer": "GiveWell's moral weight, 83.1 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 83.1, is kept for the evaluator view.",
+      "published": 83.1
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -1030,15 +1032,15 @@
       "id": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow",
       "label": "Prevention of diseases other than malaria (e.g. dengue, yellow fever, zika, encephalitis)",
       "section": "malaria_consortium_llins",
-      "value": 0.02,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B185"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A185),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A185)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.prevention_of_diseases_other_than_malaria_e_g_dengue_ye",
+      "expected": 0.02
     },
     {
       "id": "prevention_of_stillbirths",
@@ -1072,15 +1074,15 @@
       "id": "rebound_effects_decreased_immunity_development",
       "label": "Rebound effects / decreased immunity development",
       "section": "malaria_consortium_llins",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B188"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A188),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A188)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "expected": -0.04
     },
     {
       "id": "treatment_costs_averted_from_prevention_not_specified",
@@ -1453,7 +1455,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C5"
       },
-      "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+      "formula": "$uov_per_ln_consumption * ln(2)",
       "expected": 1.0,
       "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 1 per doubling."
     },
@@ -2070,26 +2072,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

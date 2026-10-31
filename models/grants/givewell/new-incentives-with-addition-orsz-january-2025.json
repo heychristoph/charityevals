@@ -362,15 +362,15 @@
       "id": "bauchi_both_under_5_diarrheal_diseases_2021",
       "label": "Bauchi, Both, Under 5, Diarrheal diseases, 2021",
       "section": "gbd_estimates_ors",
-      "value": 0.028953826,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "GBD estimates_ORS!AL175"
       },
       "explainer": "Kwara Diarrheal diseases Both 28 to 364 days (post neonatal)",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.both_under_5_diarrheal_diseases_2021",
+      "expected": 0.028953826
     },
     {
       "id": "probability_that_a_person_will_die_of_diarrheal_disease_befo_2",
@@ -567,13 +567,13 @@
       "label": "GBD 2021: Rotavirus mortalities among people under age 5: Bauchi, Rotavirus, Both, Early Neonatal, 2021 (Value)",
       "section": "gbd_estimates_ors",
       "unit": "death",
-      "value": 96.03063654,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "GBD estimates_ORS!BS25"
-      }
+      },
+      "formula": "@givewell_common.gbd_2021_rotavirus_mortalities_among_people_under_age_5",
+      "expected": 96.03063654
     },
     {
       "id": "early_neonatal_diarrheal_disease_mortalities_caused_by_rotav_2",
@@ -594,13 +594,13 @@
       "label": "GBD 2021: Rotavirus mortalities among people under age 5: Bauchi, Rotavirus, Both, Late Neonatal, 2021 (Value)",
       "section": "gbd_estimates_ors",
       "unit": "death",
-      "value": 98.96516718,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "GBD estimates_ORS!BS26"
-      }
+      },
+      "formula": "@givewell_common.gbd_2021_rotavirus_mortalities_among_people_un_98_9652",
+      "expected": 98.96516718
     },
     {
       "id": "late_neonatal_diarrheal_disease_mortalities_caused_by_rotavi_2",
@@ -966,8 +966,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Moral weights!B3"
       },
-      "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life.\n\nLocation rei_name",
-      "formula": "83.6 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_early_neonatal, 83.6 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nLocation rei_name",
+      "formula": "@moral_weights.givewell_age_early_neonatal * $life_value_multiplier",
       "expected": 83.6
     },
     {
@@ -987,8 +987,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Moral weights!C3"
       },
-      "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life.\n\nLocation rei_name",
-      "formula": "84.5 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_late_neonatal, 84.5 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nLocation rei_name",
+      "formula": "@moral_weights.givewell_age_late_neonatal * $life_value_multiplier",
       "expected": 84.5
     },
     {
@@ -1008,8 +1008,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Moral weights!D3"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nLocation rei_name",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nLocation rei_name",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -1615,14 +1615,14 @@
       "label": "False monitoring results",
       "section": "ors_inputs",
       "unit": "%",
-      "value": -0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Inputs!H116"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results",
+      "expected": -0.02
     },
     {
       "id": "false_monitoring_results",
@@ -1661,14 +1661,14 @@
       "label": "Non-funding bottlenecks",
       "section": "ors_inputs",
       "unit": "%",
-      "value": -0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Inputs!H119"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.non_funding_bottlenecks",
+      "expected": -0.05
     },
     {
       "id": "non_funding_bottlenecks",
@@ -2202,26 +2202,21 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": 0.19,
-      "kind": "observed",
       "source": {
         "title": "GiveWell, New Incentives review (spending breakdown, November 2017 to December 2023)",
         "url": "https://www.givewell.org/charities/new-incentives"
       },
-      "explainer": "Staff compensation was 19% of New Incentives' spending from November 2017 to December 2023 ($8.90m of $46.21m), per GiveWell's review."
+      "explainer": "Staff compensation was 19% of New Incentives' spending from November 2017 to December 2023 ($8.90m of $46.21m), per GiveWell's review.",
+      "formula": "@staff_pay.share_new_incentives",
+      "expected": 0.19
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

@@ -42,6 +42,15 @@ function jsonFilesWorking(root: string, dir: string): unknown[] {
   return walk(dir).map((p) => JSON.parse(readFileSync(join(root, p), "utf8")));
 }
 
+/** owners.json at a commit; none before it existed. */
+function ownersAt(root: string, sha: string): unknown[] {
+  try {
+    return JSON.parse(git(root, ["show", `${sha}:owners.json`]));
+  } catch {
+    return [];
+  }
+}
+
 const libraryCache = new Map<string, Library | undefined>();
 
 /** The library as it was at a commit, or in the working copy when sha is null. Cached: every
@@ -59,11 +68,16 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
         jsonFilesWorking(root, "models"),
         JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8")),
         jsonFilesWorking(root, "facts"),
+        // A meta model reads a charity's programme-weighted figure live (`#owner:charity`).
+        jsonFilesWorking(root, "charities"),
+        existsSync(join(root, "owners.json")) ? JSON.parse(readFileSync(join(root, "owners.json"), "utf8")) : [],
       );
     return buildLibrary(
       jsonFilesAt(root, sha, "models"),
       JSON.parse(git(root, ["show", `${sha}:assumptions/default.json`])),
       jsonFilesAt(root, sha, "facts"),
+      jsonFilesAt(root, sha, "charities"),
+      ownersAt(root, sha),
     );
   } catch {
     return undefined;

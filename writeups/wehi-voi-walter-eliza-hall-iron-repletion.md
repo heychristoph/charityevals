@@ -3,6 +3,6 @@ Medical research institute; GiveWell funded a trial of iron repletion there. Giv
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [VoI rough estimate for Walter and Eliza Hall Iron Repletion RCT, July 2025](/wehi) | GW | July 2025 | <span data-figure="headline" data-model="wehi-voi-walter-eliza-hall-iron-repletion">40</span> | 125 |
+| [VoI rough estimate for Walter and Eliza Hall Iron Repletion RCT, July 2025](/wehi) | GW | July 2025 | <span data-figure="headline" data-model="wehi-voi-walter-eliza-hall-iron-repletion">40</span> | 129 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

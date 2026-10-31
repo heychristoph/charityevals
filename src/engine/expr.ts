@@ -8,6 +8,9 @@
 //                                            (units of value), our view, under the current assumptions.
 //                                            Model ids contain hyphens: write a space before a minus
 //                                            that follows one (#givedirectly - x).
+//              #givewell:evidence-action   a charity's figure from one evaluator, live, as the rankings
+//                                            make it: its programmes' models, each over its locations,
+//                                            weighted by funding (src/engine/ranking.ts evaluatorFigure).
 //   operators  + - * / ^ (right-assoc), unary -, parentheses
 //   compare    = <> < > <= >=   (1 when true, 0 when false; lowest precedence)
 //   functions  see FUNCTIONS below
@@ -105,7 +108,7 @@ function tokenize(src: string): Tok[] {
       i += fact[0].length;
       continue;
     }
-    const model = /^#[a-z0-9]+(?:-[a-z0-9]+)*/.exec(src.slice(i));
+    const model = /^#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?/.exec(src.slice(i));
     if (model) {
       out.push({ t: "id", v: model[0].slice(1), scope: "model" });
       i += model[0].length;
