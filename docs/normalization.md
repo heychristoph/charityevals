@@ -171,9 +171,9 @@ weight). The bridge (facts/aim_wp.json, ours): divide by the sheet's own sentien
 `pain_days_<s>`, then the raw template. The 2.1 is AIM's own two metrics on one change: a hen moved from a battery
 cage to an aviary gains 17.86 points a year (−57.14 to −39.29, CE's 2018 welfare-point sheet) and is spared 37.5
 days of disabling pain a year (17.4 SADs over the 2024 hen weight). The high end is Vasco Grilo's reading (100
-points for a year = one healthy year, 9.09 days at 0.0011). AIM's co-founder and funding counterfactuals stay as published by default; "Credit by share of
-resources" replaces them (`if($resource_shares, …)`). Where AIM values that loss in other charities' welfare
-points, the loss goes through its own species rows (chicken, AIM's benchmark), not the intervention's species.
+points for a year = one healthy year, 9.09 days at 0.0011). AIM's co-founder and funding counterfactuals (what the founders and the money would have achieved at other
+charities) are left out of our view for every AIM model (decision of 2026-10-31, below); AIM's figure stays in the
+evaluator view.
 
 ### 2.5 Climate: tonnes of CO₂-equivalent averted (`tco2e`)
 
@@ -288,6 +288,7 @@ shrinks).
 | INV-8 | One view, one set of numbers. | `headline(m, av, {}, "evaluator")` converts with `viewAssumptions(m, av, "evaluator")`, not `av` (fails today: see 4.2). |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
 | INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`. |
+| INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | (Ambitious Impact's models for now.) Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death) or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@fx.*`), itself or through a row it is computed from. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
@@ -383,6 +384,29 @@ some models, so sliders move some charities and not their neighbours.
 9. Yes: the evaluator view (used by our reproduction checks) converts at each evaluator's own rates.
 10. Dropped: with one shared figure per physical change (3), the AIM version matters only as the
     evaluator's own number shown on overwritten rows.
+
+### Decided 2026-10-31 (owner): one consistent way
+
+The site never keeps an evaluator's own conversion, exchange rate or weight in our view where it has its own
+version: the row reads ours (a shared assumption or fact), `published` or a pin keeps the evaluator's, and the
+evaluator view still reproduces every `expected`. Every slider moves every model.
+
+1. **Purely theoretical models.** A model of an idea written before the charity existed (Ambitious Impact's idea
+   reports) is shown only if the charity runs the modelled programme today (cited on the model, `theoretical`) and
+   no model of its actual work exists (another evaluator's or ours). Otherwise it is removed and listed in
+   inventory/ambitious-impact-models.json as "not shown: <reason>" (scripts/aim-theoretical.py). Kept ones are
+   flagged "purely theoretical" on the model and charity pages, in the model lists and on the rankings (a hollow,
+   dashed dot and a caveat).
+2. **Several programmes:** a kept model of a charity that runs more than one is weighted by funding share
+   (`programs` with `weight_source`).
+3. **AIM's co-founder and funding counterfactuals** are left out of our view (no other evaluator subtracts what
+   the founders and the money would have done elsewhere, and it double-counts the comparison the ranking makes);
+   founders' forgone pay is our staff-pay step.
+4. **AIM's DALY-equivalents are decomposed** (scripts/aim-shared-rates.py): income at
+   `ln(2) * $uov_per_ln_consumption / $uov_per_daly` (AIM's 1/2.3 or 1/2.5 pinned), deaths at
+   `@moral_weights.uov_per_death_under5|over5 * $life_value_multiplier / $uov_per_daly` (AIM's DALYs per death in
+   `published`; stillbirths, with no shared value, stay AIM's), every benefit discount rate at `$discount_rate`.
+5. **INV-11** checks it.
 
 ## 6. Order of work
 

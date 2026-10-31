@@ -20,7 +20,8 @@
   "assumptions": {
    "resource_shares": 0,
    "discount_rate": 0.04,
-   "uov_per_daly": 2.3
+   "uov_per_daly": 2.3,
+   "uov_per_ln_consumption": 1.4426950408889634
   }
  },
  "resources": [],
@@ -3657,9 +3658,9 @@
    "id": "one_year_of_doubled_consumption_to_dalys_fixed",
    "label": "One year of doubled consumption to DALYs [fixed]",
    "section": "main_model",
-   "formula": "1 / $uov_per_daly",
+   "formula": "ln(2) * $uov_per_ln_consumption / $uov_per_daly",
    "expected": 0.4347826087,
-   "explainer": "Ambitious Impact counts a year of doubled income as 1/2.3 of a DALY (its own exchange rate between income and health). Linked to the shared rate between a healthy year and a doubled-income year (Your values); the evaluator view pins it to Ambitious Impact's 2.3 (a DALY = 2.3 doubled-income years)."
+   "explainer": "**Changed for consistency.** Ambitious Impact turns a year of doubled consumption into 0.4348 DALYs (1/2.3, its own exchange rate), kept in the evaluator view. Our view uses the site's shared values: a doubling is ln 2 of log-consumption, valued at the shared value of income (Your values), and converted to healthy years at the shared rate, so this model moves with both sliders like every income model."
   },
   {
    "id": "daly_equivlents_per_person_per_year_of_their_working_life",
@@ -5241,5 +5242,11 @@
    "unit": "$ per DALY equivalent (West Africa, final result)"
   }
  },
- "summary": "Ambitious Impact's 2024 estimate for a new charity running studies on sources of lead exposure in low- and middle-income countries, so governments and others can act on them, modelled for West Africa. The idea Lead Research for Action was founded to run. A re-implementation of AIM's spreadsheet, traced cell by cell from its final cost per DALY equivalent."
+ "summary": "Ambitious Impact's 2024 estimate for a new charity running studies on sources of lead exposure in low- and middle-income countries, so governments and others can act on them, modelled for West Africa. The idea Lead Research for Action was founded to run. A re-implementation of AIM's spreadsheet, traced cell by cell from its final cost per DALY equivalent.",
+ "theoretical": {
+  "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+  "runs": "Lead Research for Action runs studies of lead in consumer products in Malawi and Kenya; AIM modelled West Africa.",
+  "url": "https://www.leadresearch.org/what-we-do",
+  "checked": "2026-10-31"
+ }
 }

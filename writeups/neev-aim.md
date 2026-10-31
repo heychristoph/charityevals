@@ -5,4 +5,6 @@ Works with brick kilns in South Asia to switch to cleaner, more efficient firing
 | --- | --- | --- | --- | --- |
 | [Neev: brick kiln energy efficiency to cut air pollution (Ambitious Impact, 2026 idea report)](/neev) | AIM | July 2025 | <span data-figure="headline" data-model="neev-aim">2.0</span> | 523 |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Neev existed, not of the charity's own results. It is shown because Neev runs the programme today ([checked October 2026](https://neev.earth)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

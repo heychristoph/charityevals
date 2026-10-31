@@ -4,6 +4,7 @@ import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import type { Basis } from "../engine/ranking";
 import { formatYears } from "../lib/format";
+import { THEORETICAL_TEXT } from "../engine/sensitivity";
 import { DOMAIN, TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
@@ -116,6 +117,11 @@ export default function Rankings() {
                   <div className="r-meta small">
                     <span className="r-cause">{CAUSE_LABEL[c.cause]}</span>
                     <span className="muted"> · {owners.map((o) => o.short).join(", ")}</span>
+                    {r.evaluators.some((x) => x.theoretical) && (
+                      <span className="r-theory" title={THEORETICAL_TEXT}>
+                        {" "}· {multi ? `${owners.filter((_, k) => r.evaluators[k].theoretical).map((o) => o.short).join(", ")}: purely theoretical` : "purely theoretical"}
+                      </span>
+                    )}
                     {warns.length > 0 && (
                       <InfoTip
                         className="r-flags"
@@ -138,7 +144,7 @@ export default function Rankings() {
               <div
                 className={`r-track ${multi ? "r-track-multi" : ""}`}
                 role="img"
-                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${formatYears(x.central)}`).join(", ")} years of healthy life per $1,000; range ${formatYears(r.low)} to ${formatYears(r.high)}`}
+                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${formatYears(x.central)}${x.theoretical ? " (purely theoretical)" : ""}`).join(", ")} years of healthy life per $1,000; range ${formatYears(r.low)} to ${formatYears(r.high)}`}
               >
                 {TICKS.map((t) => (
                   <span key={t} className="r-grid" style={{ left: pct(t) }} />
@@ -149,7 +155,7 @@ export default function Rankings() {
                 />
                 {r.evaluators.map((x, k) => (
                   <span key={x.owner} className="r-dot-layer" style={{ transform: `translateX(${pct(x.central)})`, ["--lane" as string]: multi ? `${k % 2 ? LANE : -LANE}px` : undefined }}>
-                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""}`} title={`${owners[k].name}: ${formatYears(x.central)}${BASIS[x.basis](x.programs.length)}`}>
+                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""} ${x.theoretical ? "r-dot-theory" : ""}`} title={`${owners[k].name}: ${formatYears(x.central)}${BASIS[x.basis](x.programs.length)}${x.theoretical ? " (purely theoretical: an estimate made before the charity existed)" : ""}`}>
                       {multi && <span className="r-dot-label">{owners[k].short}</span>}
                     </span>
                   </span>

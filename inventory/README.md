@@ -85,7 +85,7 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   PDF and checked against the xlsx export. 79 reports name a CEA sheet; 74 of those sheets are public.
 - **Licence:** about 42 reports are on Zenodo under CC BY 4.0, and the entry for each records it. AIM's terms of
   use otherwise reserve rights, allow non-commercial use, and allow citing with attribution.
-- **Imported:** 40 models in `models/grants/ambitious-impact/` (41 entries: the 2022 milkfish and 2025 East Asian
+- **Imported:** 40 models (17 shown, below) in `models/grants/ambitious-impact/` (41 entries: the 2022 milkfish and 2025 East Asian
   fish reports share one sheet), each attached to the charity AIM incubated to run the idea, checked against AIM's full
   list of incubated charities (61 organisations, 2016 to 2026 H1, including shut-down and merged ones). Each is AIM's
   estimate made before the charity existed; under the ranking rules the newest is AIM's figure for that charity.
@@ -101,9 +101,21 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
     1.09–9.09), then Rethink Priorities' species weights as in every animal model.
   - EA-meta models (CEARCH, High Impact Professionals) report dollars of top EA donations; a bridge of ours values
     those at a multiple of GiveWell's cash benchmark (GiveWell's funding bar), with a range.
-  - AIM's co-founder and funding counterfactuals stay as published; "Credit by share of resources" replaces them,
-    as with GiveWell's and ACE's adjustments. Where AIM values that loss in other charities' welfare points, it goes
-    through its own species rows.
+  - AIM's co-founder and funding counterfactuals are left out of our view (owner decision 2026-10-31; AIM's figure
+    stays in the evaluator view); founders' forgone pay is our staff-pay step under "Credit by share of resources".
+  - AIM's DALY-equivalents are decomposed in our view: income, deaths and discounting read the shared values
+    (`scripts/aim-shared-rates.py`, docs/normalization.md "Decided 2026-10-31").
+- **Shown only where it applies** (owner decision 2026-10-31, `scripts/aim-theoretical.py`): an AIM model is a
+  pre-founding estimate of an idea, so it is shown only if the charity runs the modelled programme today and no model
+  of the charity's actual work exists. 17 models are kept, each marked `theoretical` with the page that shows the
+  charity runs the programme (the entry's `theoretical` field), and flagged "purely theoretical" on the site. 23 are
+  not shown, each entry's status says why: 10 charities have another evaluator's model of their actual work (ACTRA,
+  Ansh, Clear Solutions, Family Empowerment Media, Fortify Health, Healthy Futures, LEEP, Notify Health, Shrimp
+  Welfare Project, Spiro); the charity closed (Healthier Hens, both models; Centre for Effective Aid Policy, both;
+  Maternal Health Initiative); it doesn't run the modelled programme (Animal Policy International's 2020 precursor
+  idea, Fish Welfare Initiative's aeration, Radius Institute's seat-belt law, Rahi Impact's Nepal platform, High
+  Impact Professionals' earning-to-give support, Scale Welfare's milkfish water quality); or no evidence it runs it
+  today (Center for Alcohol Policy Solutions, Foundations First).
 - **Not imported** (each entry says why):
   - 41 ideas with no organisation founded from them after the re-check (welfare-point sheets among them), including
     Lafiya Nigeria's case (it started independently and AIM didn't recommend the 2020 idea) and the 2026 aid-quality

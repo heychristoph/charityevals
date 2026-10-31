@@ -237,6 +237,23 @@ export const Model = z
       })
       .strict()
       .optional(),
+    /** A purely theoretical estimate: written about an idea before the charity existed (Ambitious
+     * Impact's idea reports), not from the charity's own results. Shown only while the charity runs the
+     * modelled programme and no model of its actual work exists (owner decision 2026-10-31); the site
+     * flags it wherever the model or its dot appears. */
+    theoretical: z
+      .object({
+        /** Why it is theoretical, in one sentence. */
+        reason: z.string(),
+        /** Evidence the charity runs the modelled programme today (what it runs, where). */
+        runs: z.string(),
+        /** The page that evidence is from. */
+        url: z.string().url(),
+        /** When it was checked (YYYY-MM-DD). */
+        checked: z.string(),
+      })
+      .strict()
+      .optional(),
     /** Imported by a generic converter (scripts/convert-sheet.py, convert-guesstimate.py) and traced
      * from the evaluator's sheet. scripts/link-parameters.py ties its moral weights, discount rate and
      * DALY value to the shared assumptions, and shared data to facts. */

@@ -5,4 +5,6 @@ Works to improve the welfare of farmed fish in Greece, starting with electrical 
 | --- | --- | --- | --- | --- |
 | [Centre for Aquaculture Progress: electrical stunning for farmed fish in Greece (Ambitious Impact, 2023 idea report)](/centre-for-aquaculture-progress) | AIM | August 2023 | <span data-figure="headline" data-model="centre-for-aquaculture-progress-aim">110</span> | 158 |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Centre for Aquaculture Progress existed, not of the charity's own results. It is shown because Centre for Aquaculture Progress runs the programme today ([checked October 2026](https://centreforaquacultureprogress.org/news/stakeholder-report-electrical-stunning)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
