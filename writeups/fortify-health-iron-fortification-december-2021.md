@@ -3,12 +3,12 @@ Works with flour mills in India to fortify wheat flour with iron, folic acid and
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Fortify Health iron fortification cost-effectiveness analysis, December 2021](/fortify-health) | GW | December 2021 | <span data-figure="headline" data-model="fortify-health-iron-fortification-december-2021">7.2</span> | 118 |
+| [Fortify Health iron fortification cost-effectiveness analysis, December 2021](/fortify-health) | GW | December 2021 | <span data-figure="headline" data-model="fortify-health-iron-fortification-december-2021">7.2</span> | 124 |
 | [Fortify Health Value of Information rough estimate, December 2021](/fortify-health/fortify-health-value-information-december-2021) | GW | December 2021 | <span data-figure="headline" data-model="fortify-health-value-information-december-2021">19</span> | 2, 1 kept fixed |
-| [Iron Fortification cost-effectiveness analysis [moral weights updated Feb 2021]](/fortify-health/fortify-health-iron-fortification-moral-weights) | GW | July 2021 | <span data-figure="headline" data-model="fortify-health-iron-fortification-moral-weights">17</span> | 26 |
+| [Iron Fortification cost-effectiveness analysis [moral weights updated Feb 2021]](/fortify-health/fortify-health-iron-fortification-moral-weights) | GW | July 2021 | <span data-figure="headline" data-model="fortify-health-iron-fortification-moral-weights">18</span> | 32 |
 | [Iron fortification impact on perinatal maternal mortality rough estimate](/fortify-health/fortify-health-iron-fortification-impact-on-perinatal) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-iron-fortification-impact-on-perinatal">0.66</span> | 6 |
-| [Steady-state Fortify Health iron fortification cost-effectiveness analysis, June 2019](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-steady-state-iron-fortification-june">21</span> | 186, 2 kept fixed |
-| [Fortify Health Value of Incubation Grants, June 2019](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-value-incubation-grants-june-2019">22</span> | 233, 3 kept fixed |
+| [Steady-state Fortify Health iron fortification cost-effectiveness analysis, June 2019](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-steady-state-iron-fortification-june">17</span> | 189, 2 kept fixed |
+| [Fortify Health Value of Incubation Grants, June 2019](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-value-incubation-grants-june-2019">21</span> | 236, 3 kept fixed |
 | [Iron cost-effectiveness analysis Fortify Health consolidation Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | <span data-figure="headline" data-model="fortify-health-iron-consolidation-published">13</span> | 115, 7 kept fixed |
 | [Fortify Health (HLI, 2024)](/fortify-health/fortify-health-hli) | HLI | November 2024 | <span data-figure="headline" data-model="fortify-health-hli">1.3</span> | 1 |
 

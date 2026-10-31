@@ -12,7 +12,7 @@
     "title": "GiveWell, Uduma in-line chlorination CEA (February 2025) [public]",
     "url": "https://www.givewell.org/research/grants/uduma-in-line-chlorination-pilot-november-2024",
     "sheet": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
-    "published": "2024-11-27",
+    "published": "2025-02-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -421,7 +421,7 @@
       "label": "Adjustment to account for customer number overreporting",
       "section": "uduma_costs",
       "value": -0.15,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -523,7 +523,7 @@
       "label": "Adjustment for point-of-collection vs. household-level testing (from EvAc data) (Mali)",
       "section": "adherence_adjustments",
       "value": 0.82,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -590,7 +590,7 @@
       "label": "Adjustment for implementation at scale (Mali)",
       "section": "adherence_adjustments",
       "value": -0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -3844,7 +3844,7 @@
       "label": "Effect size in blinded vs. unblinded trials with subjective outcome",
       "section": "morbidity_effect",
       "value": 0.78,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -3889,7 +3889,7 @@
       "label": "Internal validity adjustment for morbidity",
       "section": "internal_validity_adjustments",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -4695,20 +4695,30 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (",
       "section": "uduma_cea",
-      "value": 0.31,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
         "cell": "Uduma CEA!G41"
-      }
+      },
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "published": 0.31,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.31 here. The site uses one figure for this in every GiveWell model, 0.30647 (Value of long-term income gains as a share of the value of deaths averted (GiveWell), `@givewell_shared.income_to_mortality_value_ratio`), GiveWell's current best guess; the evaluator view keeps 0.31."
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (, at your discount rate and values",
+      "section": "uduma_cea",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.31,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "adjustment_for_income_increases_generated_by_chlorination_co",
       "label": "Adjustment for income increases generated by chlorination compared to SMC (Mali)",
       "section": "uduma_cea",
       "value": -0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -4720,7 +4730,7 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by chlorination (Mali)",
       "section": "uduma_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2 * (1 + adjustment_for_income_increases_generated_by_chlorination_co)",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2_at_shared_values * (1 + adjustment_for_income_increases_generated_by_chlorination_co)",
       "expected": 0.248
     },
     {
@@ -4881,7 +4891,7 @@
       "label": "Supplementary internal validity adjustment applied to people 5-14 (Mali)",
       "section": "uduma_cea",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -4925,7 +4935,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -4938,7 +4948,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -4985,7 +4995,7 @@
       "label": "False monitoring results",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -5006,7 +5016,7 @@
       "label": "Change of priorities",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -5019,7 +5029,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -5032,7 +5042,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "uduma_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
@@ -5069,14 +5079,15 @@
       "id": "treatment_costs_averted_ref",
       "label": "Treatment costs averted (#REF!)",
       "section": "uduma_cea",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
         "cell": "Uduma CEA!K70"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2,
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's."
     },
     {
       "id": "spillover_effects_on_neighbouring_communities_ref",
@@ -5232,14 +5243,15 @@
       "id": "treatment_costs_averted",
       "label": "Treatment costs averted",
       "section": "uduma_cea",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1aFQ8FqBV2TH34lLGqcelBTrLuJVsHg63gH9LgYB2r4M/edit",
         "cell": "Uduma CEA!G70"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2,
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's."
     },
     {
       "id": "spillover_effects_on_neighbouring_communities",

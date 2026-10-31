@@ -12,7 +12,7 @@
     "title": "GiveWell's CEA of New Incentives' program, with the addition of ORSZ [January 2025] (public)",
     "url": "https://www.givewell.org/research/grants/new-incentives-oral-rehydration-solution-and-zinc-distribution-october-2024",
     "sheet": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
-    "published": "2024-10-23",
+    "published": "2025-01-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -257,7 +257,7 @@
       "section": "ors_main_cea",
       "unit": "%",
       "value": -0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -271,7 +271,7 @@
       "section": "ors_main_cea",
       "unit": "%",
       "value": -0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -520,7 +520,7 @@
       "section": "ors_main_cea",
       "unit": "%",
       "value": -0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -798,7 +798,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": -0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -821,7 +821,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": -0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1252,20 +1252,30 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "ors_inputs",
-      "value": 0.30647,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Inputs!H89"
-      }
+      },
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "expected": 0.30647,
+      "explainer": "Reads the figure every GiveWell model shares: Value of long-term income gains as a share of the value of deaths averted (GiveWell) (`@givewell_shared.income_to_mortality_value_ratio`), the same number as this sheet's."
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC), at your discount rate and values",
+      "section": "ors_inputs",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.30647,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "ors_main_cea",
       "unit": "UoV",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
       "expected": 0.30647
     },
     {
@@ -1274,7 +1284,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": 0.22,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1583,7 +1593,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1606,7 +1616,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": -0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1629,7 +1639,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1652,7 +1662,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": -0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1675,7 +1685,7 @@
       "section": "ors_inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
@@ -1974,13 +1984,14 @@
       "label": "Counterfactual value per dollar spent by The Global Fund",
       "section": "ors_main_cea",
       "unit": "UoV",
-      "value": 0.0154,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Main CEA!H199"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_global_fund",
+      "published": 0.0154,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.0154 here. The site uses one figure for this in every GiveWell model, 0.015433 (Counterfactual value of a dollar of Global Fund or PMI spending (GiveWell), `@givewell_shared.cf_value_global_fund`), GiveWell's current best guess; the evaluator view keeps 0.0154."
     },
     {
       "id": "value_lost_by_shifting_spending_away_from_programs_other_phi",
@@ -2059,13 +2070,14 @@
       "label": "Counterfactual value per dollar spent by domestic governments",
       "section": "ors_main_cea",
       "unit": "UoV",
-      "value": 0.005071,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1GmgRFJZY_eYGR8ymB4CZY6qguGEBuYCzofE0rf_IqxQ/edit",
         "cell": "ORS Main CEA!H198"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_government",
+      "published": 0.005071,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.005071 here. The site uses one figure for this in every GiveWell model, 0.005057 (Counterfactual value of a dollar of domestic government spending (GiveWell), `@givewell_shared.cf_value_government`), GiveWell's current best guess; the evaluator view keeps 0.005071."
     },
     {
       "id": "value_lost_by_shifting_spending_away_from_programs_domestic",

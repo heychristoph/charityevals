@@ -12,7 +12,7 @@
     "title": "Simplified New Incentives cost-effectiveness analysis [June 2023] (public)",
     "url": "https://www.givewell.org/research/grants/new-incentives-nigeria-expansion-extension-may-2023",
     "sheet": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
-    "published": "2023-05-03",
+    "published": "2023-06-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -184,7 +184,7 @@
       "label": "Overall adjustment for vaccines with multiple doses (Bauchi)",
       "section": "new_incentives_full_cea",
       "value": 1.132165819,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -434,7 +434,7 @@
       "label": "Weighted average adjustment factor",
       "section": "new_incentives_full_cea",
       "value": 0.7541764706,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -462,7 +462,7 @@
       "label": "Percent of adjustment that applies to non-measles vaccines",
       "section": "new_incentives_full_cea",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -503,7 +503,7 @@
       "label": "Adjustment for all-cause mortality effect (goal-seek based on indirect deaths averted per direct death averted estimate)",
       "section": "new_incentives_full_cea",
       "value": 1.40522,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -901,21 +901,22 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 1.442695041,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "Moral weights and discount rate!C22"
       },
-      "explainer": "Calculated in the source sheet as `=if(C5>0,C5/ln(2),\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's sheet types in its value of a one-unit rise in ln(consumption) for a year, 1/ln 2 = 1.4427 units of value. The site values income the same way in every model, through the income slider (Value of doubling an income, under Your values), so this row reads it; at the default the number is the same. The evaluator view keeps 1.4427.",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.442695041
     },
     {
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
       "section": "givedirectly",
-      "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
-      "expected": 1.442695041
+      "formula": "@cash.uov_per_dollar * arbitrary_donation_size / (total_units_of_increase_in_ln_consumption * total_adjustment_factor * total_adjustment_factor_2)",
+      "explainer": "Changed for consistency. In GiveWell's sheet this is the same 1.4427 units of value, used to value GiveDirectly's cash transfers, the benchmark the sheet divides by to state its result as a multiple of cash. The site values \"1x cash\" with one shared figure (units of value per dollar given to GiveDirectly, @cash), so this row is set so that GiveDirectly's value per dollar in this section equals that figure: the shared figure divided by the sheet's own increase in ln(consumption) per dollar. The multiple is then multiplied back by the same figure, so it cancels and our units of value are the program's own, with income valued at the income slider. The evaluator view keeps 1.4427.",
+      "published": 1.442695041
     },
     {
       "id": "total_units_of_value_generated",
@@ -929,7 +930,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -943,7 +944,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -979,7 +980,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -993,7 +994,7 @@
       "label": "False monitoring results",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1015,7 +1016,7 @@
       "label": "Change of priorities",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1029,7 +1030,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1043,7 +1044,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "givedirectly",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1087,7 +1088,7 @@
       "label": "Supplemental intervention-level adjustments: Developmental effects",
       "section": "givedirectly",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1101,7 +1102,7 @@
       "label": "Supplemental intervention-level adjustments: Reduced morbidity",
       "section": "givedirectly",
       "value": 0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1275,7 +1276,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "new_incentives_full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1424,7 +1425,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "new_incentives_full_cea",
       "value": 0.6,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1559,7 +1560,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "new_incentives_full_cea",
       "value": 0.3,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1857,7 +1858,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "new_incentives_full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1871,7 +1872,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "new_incentives_full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1907,7 +1908,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "new_incentives_full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1921,7 +1922,7 @@
       "label": "False monitoring results",
       "section": "new_incentives_full_cea",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1943,7 +1944,7 @@
       "label": "Change of priorities",
       "section": "new_incentives_full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1957,7 +1958,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "new_incentives_full_cea",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -1971,7 +1972,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "new_incentives_full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -2023,7 +2024,7 @@
       "label": "Supplemental intervention-level adjustments: Herd immunity",
       "section": "new_incentives_full_cea",
       "value": 0.125,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -2121,7 +2122,7 @@
       "label": "Crowding out of New Incentives",
       "section": "new_incentives_full_cea",
       "value": -0.175,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -2149,7 +2150,7 @@
       "label": "Supplemental intervention-level adjustments: Serotype replacement",
       "section": "new_incentives_full_cea",
       "value": -0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -2163,7 +2164,7 @@
       "label": "Supplemental intervention-level adjustments: Inflation",
       "section": "new_incentives_full_cea",
       "value": -0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -2176,15 +2177,15 @@
       "id": "treatment_costs_averted_from_prevention",
       "label": "Treatment costs averted from prevention",
       "section": "new_incentives_full_cea",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "New Incentives full CEA!C261"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "increased_timeliness_of_vaccination",
@@ -2204,15 +2205,15 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "new_incentives_full_cea",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "New Incentives full CEA!C263"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "increased_clinic_utilization",
@@ -2754,14 +2755,14 @@
       "id": "counterfactual_value_of_gavi_spending",
       "label": "Counterfactual value of Gavi spending",
       "section": "value_of_counterfactual_spendin",
-      "value": 0.007,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "Value of counterfactual spendin!B47"
       },
-      "explainer": "US allocations to Gavi and Maternal and Child Health Assumed to be the counterfactual value of other opportunities that Gavi donors (primarily high-income countries and private philanthropy) would fund"
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of Gavi spending (GiveWell) (`@givewell_shared.cf_value_gavi`), the same number as this sheet's.\n\nUS allocations to Gavi and Maternal and Child Health Assumed to be the counterfactual value of other opportunities that Gavi donors (primarily high-income countries and private philanthropy) would fund",
+      "formula": "@givewell_shared.cf_value_gavi",
+      "expected": 0.007
     },
     {
       "id": "counterfactual_value_of_spending_from_non_philanthropic_acto_2",
@@ -2877,7 +2878,7 @@
       "label": "Scenario 3: Distributions would go unfunded",
       "section": "new_incentives_full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3077,7 +3078,7 @@
       "label": "Overall adjustment for vaccines with multiple doses (Bauchi)",
       "section": "no_leveraging_new_incentives",
       "value": 1.132165819,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3321,7 +3322,7 @@
       "label": "Weighted average adjustment factor",
       "section": "no_leveraging_new_incentives",
       "value": 0.7541764706,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3349,7 +3350,7 @@
       "label": "Percent of adjustment that applies to non-measles vaccines",
       "section": "no_leveraging_new_incentives",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3376,7 +3377,7 @@
       "label": "Adjustment for all-cause mortality effect (goal-seek based on indirect deaths averted per direct death averted estimate)",
       "section": "no_leveraging_new_incentives",
       "value": 1.40522,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3568,7 +3569,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_leveraging_new_incentives",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3704,7 +3705,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_leveraging_new_incentives",
       "value": 0.6,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -3826,7 +3827,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_leveraging_new_incentives",
       "value": 0.3,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4088,7 +4089,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "no_leveraging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4102,7 +4103,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "no_leveraging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4138,7 +4139,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "no_leveraging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4152,7 +4153,7 @@
       "label": "False monitoring results",
       "section": "no_leveraging_new_incentives",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4174,7 +4175,7 @@
       "label": "Change of priorities",
       "section": "no_leveraging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4188,7 +4189,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "no_leveraging_new_incentives",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4202,7 +4203,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "no_leveraging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4253,7 +4254,7 @@
       "label": "Supplemental intervention-level adjustments: Herd immunity",
       "section": "no_leveraging_new_incentives",
       "value": 0.125,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4351,7 +4352,7 @@
       "label": "Crowding out of New Incentives",
       "section": "no_leveraging_new_incentives",
       "value": -0.175,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4379,7 +4380,7 @@
       "label": "Supplemental intervention-level adjustments: Serotype replacement",
       "section": "no_leveraging_new_incentives",
       "value": -0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4393,7 +4394,7 @@
       "label": "Supplemental intervention-level adjustments: Inflation",
       "section": "no_leveraging_new_incentives",
       "value": -0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4406,15 +4407,15 @@
       "id": "treatment_costs_averted_from_prevention_2",
       "label": "Treatment costs averted from prevention",
       "section": "no_leveraging_new_incentives",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "No leveraging_New Incentives!C261"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "increased_timeliness_of_vaccination_2",
@@ -4434,15 +4435,15 @@
       "id": "investment_of_income_increases_2",
       "label": "Investment of income increases",
       "section": "no_leveraging_new_incentives",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "No leveraging_New Incentives!C263"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "increased_clinic_utilization_2",
@@ -4659,7 +4660,7 @@
       "label": "Scenario 3: Distributions would go unfunded",
       "section": "no_leveraging_new_incentives",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -4875,7 +4876,7 @@
       "label": "Overall adjustment for vaccines with multiple doses (Bauchi)",
       "section": "no_funging_new_incentives",
       "value": 1.132165819,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5119,7 +5120,7 @@
       "label": "Weighted average adjustment factor",
       "section": "no_funging_new_incentives",
       "value": 0.7541764706,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5147,7 +5148,7 @@
       "label": "Percent of adjustment that applies to non-measles vaccines",
       "section": "no_funging_new_incentives",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5174,7 +5175,7 @@
       "label": "Adjustment for all-cause mortality effect (goal-seek based on indirect deaths averted per direct death averted estimate)",
       "section": "no_funging_new_incentives",
       "value": 1.40522,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5366,7 +5367,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_funging_new_incentives",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5502,7 +5503,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_funging_new_incentives",
       "value": 0.6,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5624,7 +5625,7 @@
       "label": "Adjustment for long-term vaccine effectiveness (TRUE)",
       "section": "no_funging_new_incentives",
       "value": 0.3,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5886,7 +5887,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "no_funging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5900,7 +5901,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "no_funging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5936,7 +5937,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "no_funging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5950,7 +5951,7 @@
       "label": "False monitoring results",
       "section": "no_funging_new_incentives",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5972,7 +5973,7 @@
       "label": "Change of priorities",
       "section": "no_funging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -5986,7 +5987,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "no_funging_new_incentives",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6000,7 +6001,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "no_funging_new_incentives",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6051,7 +6052,7 @@
       "label": "Supplemental intervention-level adjustments: Herd immunity",
       "section": "no_funging_new_incentives",
       "value": 0.125,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6149,7 +6150,7 @@
       "label": "Crowding out of New Incentives",
       "section": "no_funging_new_incentives",
       "value": -0.175,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6177,7 +6178,7 @@
       "label": "Supplemental intervention-level adjustments: Serotype replacement",
       "section": "no_funging_new_incentives",
       "value": -0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6191,7 +6192,7 @@
       "label": "Supplemental intervention-level adjustments: Inflation",
       "section": "no_funging_new_incentives",
       "value": -0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
@@ -6204,15 +6205,15 @@
       "id": "treatment_costs_averted_from_prevention_3",
       "label": "Treatment costs averted from prevention",
       "section": "no_funging_new_incentives",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "No funging_New Incentives!C261"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A261),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A261)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "increased_timeliness_of_vaccination_3",
@@ -6232,15 +6233,15 @@
       "id": "investment_of_income_increases_3",
       "label": "Investment of income increases",
       "section": "no_funging_new_incentives",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "No funging_New Incentives!C263"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A263),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A263)*('Supplemental intervention-level'!$A:$A=\"NI\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "increased_clinic_utilization_3",
@@ -6457,7 +6458,7 @@
       "label": "Scenario 3: Distributions would go unfunded",
       "section": "no_funging_new_incentives",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",

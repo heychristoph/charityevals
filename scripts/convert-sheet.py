@@ -691,11 +691,58 @@ AFTER = re.compile(r"after (all )?(adjustments|accounting for (all|leverage|fung
 SKIP = re.compile(r"\bonly\b|before|\bif\b|gap|p\(|threshold|% change|percent|from (mortality|development|income|morbidity|deaths|value of information)|per (child|person|beneficiary|death|treatment)|comparison|bar\b|lower bound|upper bound|\(low|\(high|25th|75th|pessimistic|optimistic", re.I)
 
 
-def find_bottom(b):
+# A column that is a bound or a scenario, not the sheet's best guess.
+BOUND_COL = re.compile(r"\b(low(er)?|upper|high(er)?|pessimistic|optimistic|conservative|worst|best case|25th|75th|bound)\b", re.I)
+BEST_COL = re.compile(r"best guess|central|\bmain\b|\bmedian\b|\bbase\b|\boverall\b", re.I)
+# Words in a title or grant page that say nothing about which column is the grant's.
+HINT_STOP = set("""the a an of and or for in on to with by at from grant grants renewal campaign campaigns program programs programme
+    support additional cea botec cost effectiveness analysis model version public shared copy update updated givewell givewells
+    research incubation top charities net nets itn itns llin llins insecticide treated distribution distributions malaria
+    seasonal chemoprevention smc vitamin supplementation vas conditional cash transfers increase infant vaccination
+    consortium foundation against helen keller intl international new incentives state states monitoring evaluation
+    funding gaps gap capacity month months year years phase""".split())
+
+
+def hint_words(spec):
+    """Place names and other specific words that tell the grant's own column apart from a sheet's other
+    locations (an Ondo grant in a sheet that starts with Chad): (words in the sheet's title, words in its
+    grant page's address). A sheet linked from several grant pages has no single grant, so only its title
+    counts."""
+    src = spec.get("source", {})
+    words = lambda text: {w for w in re.findall(r"[a-z]+", re.sub(r"https?://[^/]+/", " ", text).lower()) if len(w) > 2 and w not in HINT_STOP}
+    pages = [r.get("url", "") for r in spec.get("resources", []) if r.get("type") == "evaluation"]
+    return words(f"{src.get('title', '')} {spec.get('name', '')}"), words(pages[0]) if len(pages) == 1 else set()
+
+
+def column_header(ws, r, cc, rows_above=6):
+    """The text over a column above row r: its location or scenario labels."""
+    out = []
+    for rr in range(max(1, r - rows_above), r):
+        v = ws.cell(rr, cc).value
+        if isinstance(v, str) and v.strip(): out.append(v.strip())
+    return " ".join(out)
+
+
+def pick_column(ws, r, cols, hints):
+    """Of a bottom-line row's numeric columns, the grant's own: a column whose header names a place in the
+    sheet's title, else in its one grant page; else a best-guess column; never a bound or scenario column
+    while another remains; the first column on a tie (a sheet's headline column usually comes first)."""
+    if len(cols) == 1: return cols[0]
+    title, page = hints if isinstance(hints, tuple) else (set(hints), set())
+    def score(cc):
+        h = column_header(ws, r, cc)
+        words = set(re.findall(r"[a-z]+", h.lower()))
+        return (bool(words & title), bool(words & page), 0 if BOUND_COL.search(h) else 1, 1 if BEST_COL.search(h) else 0)
+    best = max(score(cc) for cc in cols)
+    return next(cc for cc in cols if score(cc) == best)
+
+
+def find_bottom(b, hints=(frozenset(), frozenset())):
     """The sheet's headline number. A cell labelled as the final estimate wins; otherwise one labelled as
     after all adjustments; otherwise the lowest multiple-of-cash row in the first tab that has one; failing
     all of those, units of value per dollar the same way. Rows that are partial ('only', 'before', 'if')
-    don't count."""
+    don't count. On a row with several columns (locations, scenarios), the grant's own column
+    (pick_column), not simply the first."""
     found = []
     for t, sh in enumerate(b.F.sheetnames):
         ws = b.V[sh]
@@ -706,13 +753,20 @@ def find_bottom(b):
                 if SKIP.search(lab): continue
                 kind = "xcash" if XCASH.search(lab) and not UOV.search(lab) else "uov" if UOV.search(lab) else None
                 if not kind: continue
-                for cc in range(c.column + 1, min(ws.max_column, c.column + 12) + 1):
+                # The row's run of numeric columns from the first one right of the label (locations or
+                # scenarios side by side); a gap ends it.
+                cols = []
+                for cc in range(c.column + 1, min(ws.max_column, c.column + 24) + 1):
                     v = num(ws.cell(c.row, cc).value)
-                    if v is None: continue
-                    if str(b.F[sh].cell(c.row, cc).value or "").startswith("=") or "pulled" in lab.lower():
-                        ok = 0.05 <= v <= 500 if kind == "xcash" else 1e-4 <= v <= 2
-                        if ok: found.append((kind, t, c.row, sh, f"{get_column_letter(cc)}{c.row}", lab))
-                    break
+                    if v is None:
+                        if cols or cc >= c.column + 12: break
+                        continue
+                    formula = str(b.F[sh].cell(c.row, cc).value or "").startswith("=") or "pulled" in lab.lower()
+                    if not (formula and (0.05 <= v <= 500 if kind == "xcash" else 1e-4 <= v <= 2)): break
+                    cols.append(cc)
+                if cols:
+                    cc = pick_column(ws, c.row, cols, hints)
+                    found.append((kind, t, c.row, sh, f"{get_column_letter(cc)}{c.row}", lab))
     if not found: return None
     def pick(cands):
         first_tab = min(x[1] for x in cands)
@@ -737,7 +791,7 @@ def build(book, spec):
         if sh not in book.F.sheetnames:  # tab names in hand-written specs may be cut short
             sh = next(n for n in book.F.sheetnames if n.startswith(sh))
     else:
-        found = find_bottom(book)
+        found = find_bottom(book, hint_words(spec))
         if not found: raise SystemExit(f"{spec['id']}: no bottom line found; pass a cell")
         kind, sh, coord = found
         kind = spec.get("bottom", kind)
