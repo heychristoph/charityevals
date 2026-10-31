@@ -38,7 +38,7 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0,
-      "life_value_multiplier": 1
+      "uov_per_wellby": 1.15
     }
   },
   "sections": [
@@ -172,25 +172,6 @@
       }
     },
     {
-      "id": "neutral_point",
-      "section": "lives",
-      "label": "Neutral point on the 0–10 life-satisfaction scale",
-      "value": {
-        "low": 0,
-        "best": 2,
-        "high": 5.0
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "HLI report",
-        "url": "https://www.happierlivesinstitute.org/report/how-treating-malnutrition-impacts-happiness-a-charity-evaluation-of-taimaka/",
-        "page": "Appendix (mortality effects)",
-        "quote": "on a 0 to 10 life-satisfaction scale is 2",
-        "retrieved": "2026-10-31"
-      },
-      "explainer": "HLI's neutral point, 2: below it a life is worse than no life. Range as in HLI's model of the Against Malaria Foundation (range is ours here)."
-    },
-    {
       "id": "hli_wellbys_per_life",
       "section": "lives",
       "label": "WELLBYs per life saved, at HLI's neutral point (HLI)",
@@ -205,40 +186,34 @@
       "explainer": "HLI's WELLBYs from lives saved over its WELLBYs per life: about 0.28 lives per $1,000."
     },
     {
-      "id": "life_value_weight",
+      "id": "uov_per_death",
       "section": "lives",
-      "label": "Weight on the value of a life saved (ours)",
-      "formula": "$life_value_multiplier",
-      "explainer": "The weight on a life under Your values (1 = GiveWell's moral weights). It scales the wellbeing of the years saved, as in HLI's model of the Against Malaria Foundation."
+      "label": "Value of averting a child's death (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "explainer": "Taimaka treats children under five for acute malnutrition, so each life saved is an under-five death averted: GiveWell's moral weight, 116.25 doubled-income years, times \"A child's life vs doubled-income year\" (Your values)."
+    },
+    {
+      "id": "wellbys_per_death",
+      "section": "lives",
+      "label": "WELLBYs per death averted, at the site's value of a death",
+      "format": "number",
+      "formula": "uov_per_death / @wellby_factors.uov_per_wellby_anchor",
+      "explainer": "Changed for consistency: in our view a death averted is valued the way every model on the site values it, GiveWell's moral weight for the age of the person saved (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not by HLI's WELLBYs of the years the person goes on to live above a neutral point. It is put into WELLBYs at the rate the WELLBY slider defaults to (facts: wellby_factors.uov_per_wellby_anchor, 0.13 units of value per WELLBY), so at the default the death counts exactly what it counts in GiveWell's models; moving the WELLBY slider scales it with the rest of the model. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models. HLI's own figure, 62 years × (5.72 − 2) = 231 WELLBYs from birth, undiscounted, is used above only to turn its 65 WELLBYs per $1,000 back into lives saved."
     },
     {
       "id": "wellbys_lives_per_1000",
       "section": "lives",
       "label": "WELLBYs per $1,000 from lives saved",
-      "formula": "lives_saved_per_1000 * life_expectancy * (avg_life_satisfaction - neutral_point) * life_value_weight"
-    },
-    {
-      "id": "wellbys_grief_per_1000",
-      "section": "lives",
-      "label": "WELLBYs per $1,000 from grief averted (HLI)",
-      "value": 2.88,
-      "kind": "estimate",
-      "source": {
-        "title": "HLI report",
-        "url": "https://www.happierlivesinstitute.org/report/how-treating-malnutrition-impacts-happiness-a-charity-evaluation-of-taimaka/",
-        "page": "Appendix (mortality effects)",
-        "quote": "avoiding grief adds 2.88 WBp1k to the cost-effectiveness.",
-        "retrieved": "2026-10-31"
-      },
-      "explainer": "HLI: a child's death costs the household 10.24 WELLBYs of grief."
+      "formula": "lives_saved_per_1000 * wellbys_per_death"
     },
     {
       "id": "wellbys_mortality_per_1000",
       "section": "lives",
-      "label": "WELLBYs per $1,000 from lives saved and grief averted",
-      "formula": "wellbys_lives_per_1000 + wellbys_grief_per_1000",
+      "label": "WELLBYs per $1,000 from lives saved",
+      "formula": "wellbys_lives_per_1000",
       "published": 0,
-      "explainer": "Changed for consistency: the site counts the lives a charity saves in every model. HLI's bottom line leaves them out (0 here in the evaluator view), as a bonus for those who value saving lives."
+      "explainer": "Changed for consistency: the site counts the lives a charity saves in every model, valued one way (above). HLI's bottom line leaves them out (0 here in the evaluator view), as a bonus for those who value saving lives, which it puts at 65 WELLBYs per $1,000 at a neutral point of 2, plus 2.88 for grief averted."
     },
     {
       "id": "discount_rate_per_year",
@@ -300,7 +275,7 @@
       "label": "WELLBYs per dollar, discounted",
       "format": "small",
       "formula": "(wellbys_per_1000 * discount_factor + wellbys_mortality_per_1000) / 1000",
-      "explainer": "HLI's life-improving WELLBYs, discounted for when they come, plus the lives saved and grief averted (not discounted: a death averted is valued as a whole, as in every model)."
+      "explainer": "HLI's life-improving WELLBYs, discounted for when they come, plus the lives saved (not discounted: a death averted now is valued as a whole, as in every model)."
     },
     {
       "id": "staff_cost_share",
