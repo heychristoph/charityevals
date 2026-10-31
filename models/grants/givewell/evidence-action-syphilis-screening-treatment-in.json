@@ -245,7 +245,16 @@
         "url": "https://docs.google.com/spreadsheets/d/1SAmkzeGJeirIdQTgFJgf3WUAGoK-F-eHfEvkjGk9xNo/edit",
         "cell": "CEA!B37"
       },
-      "explainer": "Assumption. Consistent with other technical assistance CEAs (IPTi, maternal syphilis in Liberia)"
+      "explainer": "Assumption. Consistent with other technical assistance CEAs (IPTi, maternal syphilis in Liberia)\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "cea",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "percent_chance_that_program_is_sustained_after_scale_up_cond",
@@ -279,7 +288,7 @@
       "id": "expected_number_of_women_screened_beyond_grant_period_years",
       "label": "Expected number of women screened beyond grant period (years 6-10) (Zambia (original))",
       "section": "cea",
-      "formula": "number_of_years_beyond_grant_period_that_we_re_modeling_impa * (percent_chance_that_dual_test_is_successfully_adopted_in_int * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop + (1 - percent_chance_that_dual_test_is_successfully_adopted_in_int) * annual_total_number_of_women_screened_if_dual_test_isn_t_ado)",
+      "formula": "pv_annuity_due(1, years_discount_rate, number_of_years_beyond_grant_period_that_we_re_modeling_impa) * (percent_chance_that_dual_test_is_successfully_adopted_in_int * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop + (1 - percent_chance_that_dual_test_is_successfully_adopted_in_int) * annual_total_number_of_women_screened_if_dual_test_isn_t_ado)",
       "expected": 1747689.71
     },
     {
@@ -384,7 +393,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1SAmkzeGJeirIdQTgFJgf3WUAGoK-F-eHfEvkjGk9xNo/edit",
         "cell": "CEA!B65"
       },
-      "explainer": "The more years it would take to scale the program in the counterfactual scenario relative to the intervention scenario, the fewer years of benefits in the counterfactual we model here"
+      "explainer": "The more years it would take to scale the program in the counterfactual scenario relative to the intervention scenario, the fewer years of benefits in the counterfactual we model here\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
     },
     {
       "id": "annual_total_number_of_women_screened_once_dual_test_is_adop_2",
@@ -404,7 +413,7 @@
       "id": "expected_number_of_women_screened_beyond_scale_up_period",
       "label": "Expected number of women screened beyond scale-up period",
       "section": "cea",
-      "formula": "number_of_years_of_benefits_beyond_scale_up_period * (percent_chance_that_dual_test_would_have_been_adopted_by_gov * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop_2 + (1 - percent_chance_that_dual_test_would_have_been_adopted_by_gov) * annual_total_number_of_women_screened_beyond_scale_up_period)",
+      "formula": "pv_annuity_due(1, years_discount_rate, number_of_years_of_benefits_beyond_scale_up_period) * (percent_chance_that_dual_test_would_have_been_adopted_by_gov * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop_2 + (1 - percent_chance_that_dual_test_would_have_been_adopted_by_gov) * annual_total_number_of_women_screened_beyond_scale_up_period)",
       "expected": 1385731.708
     },
     {
