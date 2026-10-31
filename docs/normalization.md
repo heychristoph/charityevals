@@ -327,13 +327,17 @@ GiveDirectly's $11,663 (2019: $12,298), at that year's moral weights between dea
 re-prices it with the shared versions: GiveDirectly's cost per life-equivalent reads
 `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar` (about $34,700), the
 sheet's figure in `published`. A step stated as a multiple of cash keeps its multiple (the figure cancels);
-a step stated as a cost per life-equivalent is valued as an under-five death; per-outcome rows the sheet has
+a cost per life-equivalent that GiveWell labels as a multiple of cash (IDinsight's and Evidence Action
+Beta's $2,000 / $5,000 / $10,000 / $1,000, "~5x / 2x / 1x / 10x cash") is that multiple: GiveDirectly's
+cost divided by it, GiveWell's dollar figure in `published`, so it is valued through `@cash`; only a figure
+with no cash meaning (Evidence Action India's $10,000 for the government's alternative use of funds) is
+valued as an under-five death; per-outcome rows the sheet has
 (Fortify's 2019 incubation sheet: a death at GiveWell's 2019 47.22, a year lived with disability at 2.84)
 read `@moral_weights` and `$uov_per_daly` (pinned 2.84). Four of the five sheets (Evidence Action India,
 Evidence Action Beta, IDinsight, IDinsight's New Incentives value of information) have no outcome rows at
-all: they are leverage or value-of-information sheets whose only outcome is money moved, in life-equivalents
-or multiples of cash, so the life-equivalent is the outcome and is valued as an under-five death.
-Founders Pledge's Innovation in Government counts India the same way.
+all: they are leverage or value-of-information sheets whose only outcome is money moved, in multiples of
+cash or life-equivalents, valued as above. Founders Pledge's Innovation in Government counts India in
+life-equivalents with no cash meaning, so each is an under-five death.
 
 Inventory of evaluator-internal conversions outside AIM's models (October 2026; AIM's are handled in
 their own pass). "Before → after" is healthy years per $1,000 in our view at the defaults; the evaluator
@@ -358,7 +362,7 @@ view is unchanged unless stated.
 | GiveWell Fortify Health iron consolidation | 1 DALY = 3 ln(consumption)-years | 4.33 UoV/DALY | `$uov_per_daly / $uov_per_ln_consumption`, pin 4.33 | 22.5 → 12.8 (evaluator view 24.4 → 11.3: it now converts at the sheet's own 4.33) |
 | GiveWell Healthy Futures | neonatal death = 33.07 DALYs | 33.07 | GiveWell's own neonatal weight (84 UoV, already in the sheet) / `$uov_per_daly`, pin 2.54 | 4.92 → 5.40 |
 | GiveWell Malengo | time discount 4% typed in; €→$ | 0.04; 0.8458 €/$ | `$discount_rate` (pin 0.04; 6.5% for later cohorts = ours + GiveWell's 2.5-point uncertainty premium); `1 / @fx.usd_per_eur_2021` | 8.96 → 7.42 |
-| GiveWell, sheets with 2017/2019 life-equivalents | GiveDirectly cost per life-eq.; Fortify 2019: under-5 death 47.22, YLD 2.84 | 11,663; 12,298 | `uov_per_death_under5 × $life_value_multiplier / @cash` ($34,700); `@moral_weights`; `$uov_per_daly` pinned 2.84 | EA India 20.9 → 14.2, EA Beta 14.6 → 27.7, IDinsight 16.1 → 37.4, IDinsight NI 19.3 (cancels), Fortify 2019 incubation 24.9 → 21.7 (evaluator view 21.7 → 15.3: it converts at the sheet's 2.84) |
+| GiveWell, sheets with 2017/2019 life-equivalents | GiveDirectly cost per life-eq.; Fortify 2019: under-5 death 47.22, YLD 2.84 | 11,663; 12,298 | `uov_per_death_under5 × $life_value_multiplier / @cash` ($34,700); `@moral_weights`; `$uov_per_daly` pinned 2.84 | EA India 20.9 → 14.2, EA Beta 14.6 → 11.2, IDinsight 16.1 → 14.5 (labelled multiples of cash read as the multiple GiveWell states, not its exact dollar ratio), IDinsight NI 19.3 (cancels), Fortify 2019 incubation 24.9 → 21.7 (evaluator view 21.7 → 15.3: it converts at the sheet's 2.84) |
 | HLI Taimaka | lives saved left out of HLI's bottom line (a bonus: 65 WBp1k deprivationist, neutral point 2; grief 2.88) | 0 | our step: lives saved × 62 × (5.72 − neutral point) × `$life_value_multiplier`, plus grief | 10.5 → 49.6 |
 | Years of benefit at face value (ACE ProVeg 2016; GiveWell Vital Strategies, Pure Earth, Rice KMC, CHAI TSUs, EA India, EA syphilis ×2, CPSP) | no time discount | 0 | `pv_annuity_due(1, years_discount_rate, years)`, the rate reading `$discount_rate` with 0 in `published` | ProVeg 1.14 → 1.13, Vital Strategies 21.0 → 17.7, Pure Earth 30.7 → 27.4, KMC 43.8 → 42.3, TSUs 44.8 → 43.9, CPSP 92.6 → 79.6, syphilis 50.7 → 48.2 / 48.7 → 44.3 |
 | "Opportunities get worse" sheets (EA Beta, Accelerator, CHAI incubator, Fortify VoI 2021, IRD threshold, IRD ZM) | decay only, no time preference | | decay kept, `$discount_rate` on top (0 in `published`) | 15.7–42.6, each −7% to −20% |
