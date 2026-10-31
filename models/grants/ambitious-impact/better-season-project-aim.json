@@ -347,10 +347,10 @@
     "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
     "cell": "Main CEA!B212"
    },
-   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values).",
+   "explainer": "Ambitious Impact's fixed 4% for costs, kept in our view too. In this sheet the rate's main job is the last year's perpetuity of ongoing costs (cost / rate, every year after the 30 the impacts are counted for): tied to the shared rate, that perpetuity becomes infinite at 0% while the benefits stay finite, so the result would fall to nothing and stop moving one way with the slider. The benefits over the years are discounted at the shared rate.",
    "format": "percent",
-   "formula": "max($discount_rate, 0.000001)",
-   "published": 0.04
+   "value": 0.04,
+   "kind": "judgment"
   },
   {
    "id": "impact_period_begins_in_year_suggest_0_suggest_range_0_2",
@@ -4234,16 +4234,30 @@
     "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
     "cell": "Main CEA!B68"
    },
-   "explainer": "Ambitious Impact discounts at 0.04 a year. Linked to the shared discount rate (Your values); the evaluator view pins it to Ambitious Impact's rate. Floored at 0.0001%: Ambitious Impact's formulas divide by this rate, so at exactly 0 they would give 0/0; just above 0 they give the limit (no discounting).",
+   "explainer": "Discounts the programme's benefits over the years (the effective rate for the reach of impacts) at the shared rate (Your values); the evaluator view pins Ambitious Impact's 4%. The farm-economics tab keeps the households' own 4% (farm_household_discount_rate).",
    "format": "percent",
    "formula": "max($discount_rate, 0.000001)",
    "expected": 0.04
   },
   {
+   "id": "farm_household_discount_rate",
+   "label": "Households' own discount rate on monthly consumption (farm economics)",
+   "section": "per_month_farm_economics",
+   "format": "percent",
+   "value": 0.04,
+   "kind": "estimate",
+   "source": {
+    "title": "Source spreadsheet",
+    "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
+    "cell": "Main CEA!B68"
+   },
+   "explainer": "Ambitious Impact's 4% a year, as it uses it on the farm-economics tab: each household's monthly consumption, loan repayments netted against the tank's income gains over 30 years, is discounted at this rate / 12. It stands for how the household weighs consumption now against later while it repays a loan, a fact about the farmers like the loan's interest rate, so it isn't the site's discount rate and doesn't move with it. The programme's benefits and costs over the years are discounted at the shared rate (Your values)."
+  },
+  {
    "id": "month_name_context_january_monthly_discount_rate_assumed_con",
    "label": "Month name, context: January (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -4663,7 +4677,7 @@
    "id": "month_name_context_february_monthly_discount_rate_assumed_co",
    "label": "Month name, context: February (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -4802,7 +4816,7 @@
    "id": "month_name_context_march_monthly_discount_rate_assumed_const",
    "label": "Month name, context: March (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -4941,7 +4955,7 @@
    "id": "month_name_context_april_monthly_discount_rate_assumed_const",
    "label": "Month name, context: April (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5080,7 +5094,7 @@
    "id": "month_name_context_may_monthly_discount_rate_assumed_constan",
    "label": "Month name, context: May (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5219,7 +5233,7 @@
    "id": "month_name_context_june_monthly_discount_rate_assumed_consta",
    "label": "Month name, context: June (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5358,7 +5372,7 @@
    "id": "month_name_context_july_monthly_discount_rate_assumed_consta",
    "label": "Month name, context: July (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5497,7 +5511,7 @@
    "id": "month_name_context_august_monthly_discount_rate_assumed_cons",
    "label": "Month name, context: August (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5636,7 +5650,7 @@
    "id": "month_name_context_september_monthly_discount_rate_assumed_c",
    "label": "Month name, context: September (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5775,7 +5789,7 @@
    "id": "month_name_context_october_monthly_discount_rate_assumed_con",
    "label": "Month name, context: October (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -5914,7 +5928,7 @@
    "id": "month_name_context_november_monthly_discount_rate_assumed_co",
    "label": "Month name, context: November (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6053,7 +6067,7 @@
    "id": "month_name_context_december_monthly_discount_rate_assumed_co",
    "label": "Month name, context: December (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6192,7 +6206,7 @@
    "id": "month_name_context_january_monthly_discount_rate_assumed_con_2",
    "label": "Month name, context: January (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6352,7 +6366,7 @@
    "id": "month_name_context_february_monthly_discount_rate_assumed_co_2",
    "label": "Month name, context: February (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6491,7 +6505,7 @@
    "id": "month_name_context_march_monthly_discount_rate_assumed_const_2",
    "label": "Month name, context: March (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6630,7 +6644,7 @@
    "id": "month_name_context_april_monthly_discount_rate_assumed_const_2",
    "label": "Month name, context: April (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6769,7 +6783,7 @@
    "id": "month_name_context_may_monthly_discount_rate_assumed_constan_2",
    "label": "Month name, context: May (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -6908,7 +6922,7 @@
    "id": "month_name_context_june_monthly_discount_rate_assumed_consta_2",
    "label": "Month name, context: June (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7047,7 +7061,7 @@
    "id": "month_name_context_july_monthly_discount_rate_assumed_consta_2",
    "label": "Month name, context: July (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7186,7 +7200,7 @@
    "id": "month_name_context_august_monthly_discount_rate_assumed_cons_2",
    "label": "Month name, context: August (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7325,7 +7339,7 @@
    "id": "month_name_context_september_monthly_discount_rate_assumed_c_2",
    "label": "Month name, context: September (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7464,7 +7478,7 @@
    "id": "month_name_context_october_monthly_discount_rate_assumed_con_2",
    "label": "Month name, context: October (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7603,7 +7617,7 @@
    "id": "month_name_context_november_monthly_discount_rate_assumed_co_2",
    "label": "Month name, context: November (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7742,7 +7756,7 @@
    "id": "month_name_context_december_monthly_discount_rate_assumed_co_2",
    "label": "Month name, context: December (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -7882,7 +7896,7 @@
    "id": "month_name_context_january_monthly_discount_rate_assumed_con_3",
    "label": "Month name, context: January (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8043,7 +8057,7 @@
    "id": "month_name_context_february_monthly_discount_rate_assumed_co_3",
    "label": "Month name, context: February (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8182,7 +8196,7 @@
    "id": "month_name_context_march_monthly_discount_rate_assumed_const_3",
    "label": "Month name, context: March (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8321,7 +8335,7 @@
    "id": "month_name_context_april_monthly_discount_rate_assumed_const_3",
    "label": "Month name, context: April (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8460,7 +8474,7 @@
    "id": "month_name_context_may_monthly_discount_rate_assumed_constan_3",
    "label": "Month name, context: May (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8599,7 +8613,7 @@
    "id": "month_name_context_june_monthly_discount_rate_assumed_consta_3",
    "label": "Month name, context: June (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8738,7 +8752,7 @@
    "id": "month_name_context_july_monthly_discount_rate_assumed_consta_3",
    "label": "Month name, context: July (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -8877,7 +8891,7 @@
    "id": "month_name_context_august_monthly_discount_rate_assumed_cons_3",
    "label": "Month name, context: August (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9016,7 +9030,7 @@
    "id": "month_name_context_september_monthly_discount_rate_assumed_c_3",
    "label": "Month name, context: September (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9155,7 +9169,7 @@
    "id": "month_name_context_october_monthly_discount_rate_assumed_con_3",
    "label": "Month name, context: October (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9294,7 +9308,7 @@
    "id": "month_name_context_november_monthly_discount_rate_assumed_co_3",
    "label": "Month name, context: November (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9433,7 +9447,7 @@
    "id": "month_name_context_december_monthly_discount_rate_assumed_co_3",
    "label": "Month name, context: December (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9572,7 +9586,7 @@
    "id": "month_name_context_january_monthly_discount_rate_assumed_con_4",
    "label": "Month name, context: January (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9732,7 +9746,7 @@
    "id": "month_name_context_february_monthly_discount_rate_assumed_co_4",
    "label": "Month name, context: February (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -9871,7 +9885,7 @@
    "id": "month_name_context_march_monthly_discount_rate_assumed_const_4",
    "label": "Month name, context: March (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10010,7 +10024,7 @@
    "id": "april_monthly_discount_rate_assumed_constant",
    "label": "April (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10149,7 +10163,7 @@
    "id": "may_monthly_discount_rate_assumed_constant",
    "label": "May (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10288,7 +10302,7 @@
    "id": "june_monthly_discount_rate_assumed_constant",
    "label": "June (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10427,7 +10441,7 @@
    "id": "july_monthly_discount_rate_assumed_constant",
    "label": "July (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10566,7 +10580,7 @@
    "id": "august_monthly_discount_rate_assumed_constant",
    "label": "August (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10705,7 +10719,7 @@
    "id": "september_monthly_discount_rate_assumed_constant",
    "label": "September (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10844,7 +10858,7 @@
    "id": "october_monthly_discount_rate_assumed_constant",
    "label": "October (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -10983,7 +10997,7 @@
    "id": "november_monthly_discount_rate_assumed_constant",
    "label": "November (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11122,7 +11136,7 @@
    "id": "december_monthly_discount_rate_assumed_constant",
    "label": "December (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11261,7 +11275,7 @@
    "id": "january_monthly_discount_rate_assumed_constant",
    "label": "January (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11421,7 +11435,7 @@
    "id": "february_monthly_discount_rate_assumed_constant",
    "label": "February (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11560,7 +11574,7 @@
    "id": "march_monthly_discount_rate_assumed_constant",
    "label": "March (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11699,7 +11713,7 @@
    "id": "april_monthly_discount_rate_assumed_constant_2",
    "label": "April (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11838,7 +11852,7 @@
    "id": "may_monthly_discount_rate_assumed_constant_2",
    "label": "May (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -11977,7 +11991,7 @@
    "id": "june_monthly_discount_rate_assumed_constant_2",
    "label": "June (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12116,7 +12130,7 @@
    "id": "july_monthly_discount_rate_assumed_constant_2",
    "label": "July (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12255,7 +12269,7 @@
    "id": "august_monthly_discount_rate_assumed_constant_2",
    "label": "August (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12394,7 +12408,7 @@
    "id": "september_monthly_discount_rate_assumed_constant_2",
    "label": "September (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12533,7 +12547,7 @@
    "id": "october_monthly_discount_rate_assumed_constant_2",
    "label": "October (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12672,7 +12686,7 @@
    "id": "november_monthly_discount_rate_assumed_constant_2",
    "label": "November (Monthly discount rate, assumed constant)",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12811,7 +12825,7 @@
    "id": "december_13",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -12950,7 +12964,7 @@
    "id": "january_13",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13110,7 +13124,7 @@
    "id": "february_13",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13249,7 +13263,7 @@
    "id": "march_13",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13388,7 +13402,7 @@
    "id": "april_13",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13527,7 +13541,7 @@
    "id": "may_13",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13666,7 +13680,7 @@
    "id": "june_13",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13805,7 +13819,7 @@
    "id": "july_13",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -13944,7 +13958,7 @@
    "id": "august_13",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14083,7 +14097,7 @@
    "id": "september_13",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14222,7 +14236,7 @@
    "id": "october_13",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14361,7 +14375,7 @@
    "id": "november_13",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14500,7 +14514,7 @@
    "id": "december_30",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14639,7 +14653,7 @@
    "id": "january_30",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14799,7 +14813,7 @@
    "id": "february_30",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -14938,7 +14952,7 @@
    "id": "march_30",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15077,7 +15091,7 @@
    "id": "april_30",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15216,7 +15230,7 @@
    "id": "may_30",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15355,7 +15369,7 @@
    "id": "june_30",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15494,7 +15508,7 @@
    "id": "july_30",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15633,7 +15647,7 @@
    "id": "august_30",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15772,7 +15786,7 @@
    "id": "september_30",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -15911,7 +15925,7 @@
    "id": "october_30",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16050,7 +16064,7 @@
    "id": "november_30",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16189,7 +16203,7 @@
    "id": "december_47",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16328,7 +16342,7 @@
    "id": "january_47",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16488,7 +16502,7 @@
    "id": "february_47",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16627,7 +16641,7 @@
    "id": "march_47",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16766,7 +16780,7 @@
    "id": "april_47",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -16905,7 +16919,7 @@
    "id": "may_47",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17044,7 +17058,7 @@
    "id": "june_47",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17183,7 +17197,7 @@
    "id": "july_47",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17322,7 +17336,7 @@
    "id": "august_47",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17461,7 +17475,7 @@
    "id": "september_47",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17600,7 +17614,7 @@
    "id": "october_47",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17739,7 +17753,7 @@
    "id": "november_47",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -17878,7 +17892,7 @@
    "id": "december_64",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18017,7 +18031,7 @@
    "id": "january_64",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18177,7 +18191,7 @@
    "id": "february_64",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18316,7 +18330,7 @@
    "id": "march_64",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18455,7 +18469,7 @@
    "id": "april_64",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18594,7 +18608,7 @@
    "id": "may_64",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18733,7 +18747,7 @@
    "id": "june_64",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -18872,7 +18886,7 @@
    "id": "july_64",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19011,7 +19025,7 @@
    "id": "august_64",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19150,7 +19164,7 @@
    "id": "september_64",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19289,7 +19303,7 @@
    "id": "october_64",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19428,7 +19442,7 @@
    "id": "november_64",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19567,7 +19581,7 @@
    "id": "december_81",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19706,7 +19720,7 @@
    "id": "january_81",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -19866,7 +19880,7 @@
    "id": "february_81",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20005,7 +20019,7 @@
    "id": "march_81",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20144,7 +20158,7 @@
    "id": "april_81",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20283,7 +20297,7 @@
    "id": "may_81",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20422,7 +20436,7 @@
    "id": "june_81",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20561,7 +20575,7 @@
    "id": "july_81",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20700,7 +20714,7 @@
    "id": "august_81",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20839,7 +20853,7 @@
    "id": "september_81",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -20978,7 +20992,7 @@
    "id": "october_81",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21117,7 +21131,7 @@
    "id": "november_81",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21256,7 +21270,7 @@
    "id": "december_98",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21395,7 +21409,7 @@
    "id": "january_98",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21555,7 +21569,7 @@
    "id": "february_98",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21694,7 +21708,7 @@
    "id": "march_98",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21833,7 +21847,7 @@
    "id": "april_98",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -21972,7 +21986,7 @@
    "id": "may_98",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22111,7 +22125,7 @@
    "id": "june_98",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22250,7 +22264,7 @@
    "id": "july_98",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22389,7 +22403,7 @@
    "id": "august_98",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22528,7 +22542,7 @@
    "id": "september_98",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22667,7 +22681,7 @@
    "id": "october_98",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22806,7 +22820,7 @@
    "id": "november_98",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -22945,7 +22959,7 @@
    "id": "december_115",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23084,7 +23098,7 @@
    "id": "january_115",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23244,7 +23258,7 @@
    "id": "february_115",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23383,7 +23397,7 @@
    "id": "march_115",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23522,7 +23536,7 @@
    "id": "april_115",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23661,7 +23675,7 @@
    "id": "may_115",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23800,7 +23814,7 @@
    "id": "june_115",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -23939,7 +23953,7 @@
    "id": "july_115",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24078,7 +24092,7 @@
    "id": "august_115",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24217,7 +24231,7 @@
    "id": "september_115",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24356,7 +24370,7 @@
    "id": "october_115",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24495,7 +24509,7 @@
    "id": "november_115",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24634,7 +24648,7 @@
    "id": "december_132",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24773,7 +24787,7 @@
    "id": "january_132",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -24933,7 +24947,7 @@
    "id": "february_132",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25072,7 +25086,7 @@
    "id": "march_132",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25211,7 +25225,7 @@
    "id": "april_132",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25350,7 +25364,7 @@
    "id": "may_132",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25489,7 +25503,7 @@
    "id": "june_132",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25628,7 +25642,7 @@
    "id": "july_132",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25767,7 +25781,7 @@
    "id": "august_132",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -25906,7 +25920,7 @@
    "id": "september_132",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26045,7 +26059,7 @@
    "id": "october_132",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26184,7 +26198,7 @@
    "id": "november_132",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26323,7 +26337,7 @@
    "id": "december_149",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26462,7 +26476,7 @@
    "id": "january_149",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26622,7 +26636,7 @@
    "id": "february_149",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26761,7 +26775,7 @@
    "id": "march_149",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -26900,7 +26914,7 @@
    "id": "april_149",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27039,7 +27053,7 @@
    "id": "may_149",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27178,7 +27192,7 @@
    "id": "june_149",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27317,7 +27331,7 @@
    "id": "july_149",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27456,7 +27470,7 @@
    "id": "august_149",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27595,7 +27609,7 @@
    "id": "september_149",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27734,7 +27748,7 @@
    "id": "october_149",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -27873,7 +27887,7 @@
    "id": "november_149",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28012,7 +28026,7 @@
    "id": "december_166",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28151,7 +28165,7 @@
    "id": "january_166",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28311,7 +28325,7 @@
    "id": "february_166",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28450,7 +28464,7 @@
    "id": "march_166",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28589,7 +28603,7 @@
    "id": "april_166",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28728,7 +28742,7 @@
    "id": "may_166",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -28867,7 +28881,7 @@
    "id": "june_166",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29006,7 +29020,7 @@
    "id": "july_166",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29145,7 +29159,7 @@
    "id": "august_166",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29284,7 +29298,7 @@
    "id": "september_166",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29423,7 +29437,7 @@
    "id": "october_166",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29562,7 +29576,7 @@
    "id": "november_166",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29701,7 +29715,7 @@
    "id": "december_183",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -29840,7 +29854,7 @@
    "id": "january_183",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30000,7 +30014,7 @@
    "id": "february_183",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30139,7 +30153,7 @@
    "id": "march_183",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30278,7 +30292,7 @@
    "id": "april_183",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30417,7 +30431,7 @@
    "id": "may_183",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30556,7 +30570,7 @@
    "id": "june_183",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30695,7 +30709,7 @@
    "id": "july_183",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30834,7 +30848,7 @@
    "id": "august_183",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -30973,7 +30987,7 @@
    "id": "september_183",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31112,7 +31126,7 @@
    "id": "october_183",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31251,7 +31265,7 @@
    "id": "november_183",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31390,7 +31404,7 @@
    "id": "december_200",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31529,7 +31543,7 @@
    "id": "january_200",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31689,7 +31703,7 @@
    "id": "february_200",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31828,7 +31842,7 @@
    "id": "march_200",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -31967,7 +31981,7 @@
    "id": "april_200",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32106,7 +32120,7 @@
    "id": "may_200",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32245,7 +32259,7 @@
    "id": "june_200",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32384,7 +32398,7 @@
    "id": "july_200",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32523,7 +32537,7 @@
    "id": "august_200",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32662,7 +32676,7 @@
    "id": "september_200",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32801,7 +32815,7 @@
    "id": "october_200",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -32940,7 +32954,7 @@
    "id": "november_200",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33079,7 +33093,7 @@
    "id": "december_217",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33218,7 +33232,7 @@
    "id": "january_217",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33378,7 +33392,7 @@
    "id": "february_217",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33517,7 +33531,7 @@
    "id": "march_217",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33656,7 +33670,7 @@
    "id": "april_217",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33795,7 +33809,7 @@
    "id": "may_217",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -33934,7 +33948,7 @@
    "id": "june_217",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34073,7 +34087,7 @@
    "id": "july_217",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34212,7 +34226,7 @@
    "id": "august_217",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34351,7 +34365,7 @@
    "id": "september_217",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34490,7 +34504,7 @@
    "id": "october_217",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34629,7 +34643,7 @@
    "id": "november_217",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34768,7 +34782,7 @@
    "id": "december_234",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -34907,7 +34921,7 @@
    "id": "january_234",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35067,7 +35081,7 @@
    "id": "february_234",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35206,7 +35220,7 @@
    "id": "march_234",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35345,7 +35359,7 @@
    "id": "april_234",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35484,7 +35498,7 @@
    "id": "may_234",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35623,7 +35637,7 @@
    "id": "june_234",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35762,7 +35776,7 @@
    "id": "july_234",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -35901,7 +35915,7 @@
    "id": "august_234",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36040,7 +36054,7 @@
    "id": "september_234",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36179,7 +36193,7 @@
    "id": "october_234",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36318,7 +36332,7 @@
    "id": "november_234",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36457,7 +36471,7 @@
    "id": "december_251",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36596,7 +36610,7 @@
    "id": "january_251",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36756,7 +36770,7 @@
    "id": "february_251",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -36895,7 +36909,7 @@
    "id": "march_251",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37034,7 +37048,7 @@
    "id": "april_251",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37173,7 +37187,7 @@
    "id": "may_251",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37312,7 +37326,7 @@
    "id": "june_251",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37451,7 +37465,7 @@
    "id": "july_251",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37590,7 +37604,7 @@
    "id": "august_251",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37729,7 +37743,7 @@
    "id": "september_251",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -37868,7 +37882,7 @@
    "id": "october_251",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38007,7 +38021,7 @@
    "id": "november_251",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38146,7 +38160,7 @@
    "id": "december_268",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38285,7 +38299,7 @@
    "id": "january_268",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38445,7 +38459,7 @@
    "id": "february_268",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38584,7 +38598,7 @@
    "id": "march_268",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38723,7 +38737,7 @@
    "id": "april_268",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -38862,7 +38876,7 @@
    "id": "may_268",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39001,7 +39015,7 @@
    "id": "june_268",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39140,7 +39154,7 @@
    "id": "july_268",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39279,7 +39293,7 @@
    "id": "august_268",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39418,7 +39432,7 @@
    "id": "september_268",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39557,7 +39571,7 @@
    "id": "october_268",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39696,7 +39710,7 @@
    "id": "november_268",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39835,7 +39849,7 @@
    "id": "december_285",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -39974,7 +39988,7 @@
    "id": "january_285",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40134,7 +40148,7 @@
    "id": "february_285",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40273,7 +40287,7 @@
    "id": "march_285",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40412,7 +40426,7 @@
    "id": "april_285",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40551,7 +40565,7 @@
    "id": "may_285",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40690,7 +40704,7 @@
    "id": "june_285",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40829,7 +40843,7 @@
    "id": "july_285",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -40968,7 +40982,7 @@
    "id": "august_285",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41107,7 +41121,7 @@
    "id": "september_285",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41246,7 +41260,7 @@
    "id": "october_285",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41385,7 +41399,7 @@
    "id": "november_285",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41524,7 +41538,7 @@
    "id": "december_302",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41663,7 +41677,7 @@
    "id": "january_302",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41823,7 +41837,7 @@
    "id": "february_302",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -41962,7 +41976,7 @@
    "id": "march_302",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42101,7 +42115,7 @@
    "id": "april_302",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42240,7 +42254,7 @@
    "id": "may_302",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42379,7 +42393,7 @@
    "id": "june_302",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42518,7 +42532,7 @@
    "id": "july_302",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42657,7 +42671,7 @@
    "id": "august_302",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42796,7 +42810,7 @@
    "id": "september_302",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -42935,7 +42949,7 @@
    "id": "october_302",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43074,7 +43088,7 @@
    "id": "november_302",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43213,7 +43227,7 @@
    "id": "december_319",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43352,7 +43366,7 @@
    "id": "january_319",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43512,7 +43526,7 @@
    "id": "february_319",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43651,7 +43665,7 @@
    "id": "march_319",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43790,7 +43804,7 @@
    "id": "april_319",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -43929,7 +43943,7 @@
    "id": "may_319",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44068,7 +44082,7 @@
    "id": "june_319",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44207,7 +44221,7 @@
    "id": "july_319",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44346,7 +44360,7 @@
    "id": "august_319",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44485,7 +44499,7 @@
    "id": "september_319",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44624,7 +44638,7 @@
    "id": "october_319",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44763,7 +44777,7 @@
    "id": "november_319",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -44902,7 +44916,7 @@
    "id": "december_336",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45041,7 +45055,7 @@
    "id": "january_336",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45201,7 +45215,7 @@
    "id": "february_336",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45340,7 +45354,7 @@
    "id": "march_336",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45479,7 +45493,7 @@
    "id": "april_336",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45618,7 +45632,7 @@
    "id": "may_336",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45757,7 +45771,7 @@
    "id": "june_336",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -45896,7 +45910,7 @@
    "id": "july_336",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46035,7 +46049,7 @@
    "id": "august_336",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46174,7 +46188,7 @@
    "id": "september_336",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46313,7 +46327,7 @@
    "id": "october_336",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46452,7 +46466,7 @@
    "id": "november_336",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46591,7 +46605,7 @@
    "id": "december_353",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46730,7 +46744,7 @@
    "id": "january_353",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -46890,7 +46904,7 @@
    "id": "february_353",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47029,7 +47043,7 @@
    "id": "march_353",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47168,7 +47182,7 @@
    "id": "april_353",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47307,7 +47321,7 @@
    "id": "may_353",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47446,7 +47460,7 @@
    "id": "june_353",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47585,7 +47599,7 @@
    "id": "july_353",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47724,7 +47738,7 @@
    "id": "august_353",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -47863,7 +47877,7 @@
    "id": "september_353",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48002,7 +48016,7 @@
    "id": "october_353",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48141,7 +48155,7 @@
    "id": "november_353",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48280,7 +48294,7 @@
    "id": "december_370",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48419,7 +48433,7 @@
    "id": "january_370",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48579,7 +48593,7 @@
    "id": "february_370",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48718,7 +48732,7 @@
    "id": "march_370",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48857,7 +48871,7 @@
    "id": "april_370",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -48996,7 +49010,7 @@
    "id": "may_370",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49135,7 +49149,7 @@
    "id": "june_370",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49274,7 +49288,7 @@
    "id": "july_370",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49413,7 +49427,7 @@
    "id": "august_370",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49552,7 +49566,7 @@
    "id": "september_370",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49691,7 +49705,7 @@
    "id": "october_370",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49830,7 +49844,7 @@
    "id": "november_370",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -49969,7 +49983,7 @@
    "id": "december_387",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50108,7 +50122,7 @@
    "id": "january_387",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50268,7 +50282,7 @@
    "id": "february_387",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50407,7 +50421,7 @@
    "id": "march_387",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50546,7 +50560,7 @@
    "id": "april_387",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50685,7 +50699,7 @@
    "id": "may_387",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50824,7 +50838,7 @@
    "id": "june_387",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -50963,7 +50977,7 @@
    "id": "july_387",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51102,7 +51116,7 @@
    "id": "august_387",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51241,7 +51255,7 @@
    "id": "september_387",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51380,7 +51394,7 @@
    "id": "october_387",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51519,7 +51533,7 @@
    "id": "november_387",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51658,7 +51672,7 @@
    "id": "december_404",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51797,7 +51811,7 @@
    "id": "january_404",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -51957,7 +51971,7 @@
    "id": "february_404",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52096,7 +52110,7 @@
    "id": "march_404",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52235,7 +52249,7 @@
    "id": "april_404",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52374,7 +52388,7 @@
    "id": "may_404",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52513,7 +52527,7 @@
    "id": "june_404",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52652,7 +52666,7 @@
    "id": "july_404",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52791,7 +52805,7 @@
    "id": "august_404",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -52930,7 +52944,7 @@
    "id": "september_404",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53069,7 +53083,7 @@
    "id": "october_404",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53208,7 +53222,7 @@
    "id": "november_404",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53347,7 +53361,7 @@
    "id": "december_421",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53486,7 +53500,7 @@
    "id": "january_421",
    "label": "January",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53646,7 +53660,7 @@
    "id": "february_421",
    "label": "February",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53785,7 +53799,7 @@
    "id": "march_421",
    "label": "March",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -53924,7 +53938,7 @@
    "id": "april_421",
    "label": "April",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54063,7 +54077,7 @@
    "id": "may_421",
    "label": "May",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54202,7 +54216,7 @@
    "id": "june_421",
    "label": "June",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54341,7 +54355,7 @@
    "id": "july_421",
    "label": "July",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54480,7 +54494,7 @@
    "id": "august_421",
    "label": "August",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54619,7 +54633,7 @@
    "id": "september_421",
    "label": "September",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54758,7 +54772,7 @@
    "id": "october_421",
    "label": "October",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -54897,7 +54911,7 @@
    "id": "november_421",
    "label": "November",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
@@ -55036,7 +55050,7 @@
    "id": "december_438",
    "label": "December",
    "section": "per_month_farm_economics",
-   "formula": "discount_rate_for_income_effects / 12",
+   "formula": "farm_household_discount_rate / 12",
    "expected": 0.003333333333,
    "format": "percent"
   },
