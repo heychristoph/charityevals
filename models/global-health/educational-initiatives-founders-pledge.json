@@ -179,18 +179,18 @@
       "section": "income",
       "label": "Annual salary increase per SD",
       "format": "percent",
-      "formula": "@founders_pledge_2019.earnings_gain_per_sd",
+      "formula": "@founders_pledge_2023.salary_increase_per_sd",
       "published": 0.1,
-      "explainer": "The shared figure from FP's 2019 education work: 10%, 1% to 25% across its cases (row 17)."
+      "explainer": "Changed for consistency: Founders Pledge's 2023 figure, 19.1% a year per standard deviation of learning (facts: founders_pledge_2023.salary_increase_per_sd). Its 2019 method, which this analysis used, assumed 10% (kept in the evaluator view). Founders Pledge's own models of education rest on two methods: its 2019 one (earnings +10% per standard deviation of test scores, 80% of it additional, lasting 5 years, no household) and its 2023 one (+19.1% per standard deviation, times 17.5% for replicability, lasting a 40-year working life, doubled for the household). Our view uses Founders Pledge's latest for every education model, so a standard deviation of learning is worth the same wherever it comes from."
     },
     {
       "id": "additional_share",
       "section": "income",
-      "label": "Share of the increase that is additional",
+      "label": "Share of the increase that counts",
       "format": "percent",
-      "formula": "@founders_pledge_2019.earnings_gain_additional_share",
+      "formula": "@founders_pledge_2023.replicability_adjustment",
       "published": 0.8,
-      "explainer": "The shared figure from FP's 2019 education work: 80%, 50% to 100% across its cases (row 18)."
+      "explainer": "Changed for consistency: Founders Pledge's 2023 method counts 17.5% of the measured earnings gain, its replicability adjustment for the evidence linking test scores to earnings (facts: founders_pledge_2023.replicability_adjustment). Its 2019 method counted 80% as additional (kept in the evaluator view). Founders Pledge's own models of education rest on two methods: its 2019 one (earnings +10% per standard deviation of test scores, 80% of it additional, lasting 5 years, no household) and its 2023 one (+19.1% per standard deviation, times 17.5% for replicability, lasting a 40-year working life, doubled for the household). Our view uses Founders Pledge's latest for every education model, so a standard deviation of learning is worth the same wherever it comes from."
     },
     {
       "id": "net_gain_per_sd",
@@ -213,18 +213,27 @@
       "section": "income",
       "label": "Years until the benefit starts",
       "format": "number",
-      "formula": "@founders_pledge_2019.years_until_earnings",
+      "formula": "@founders_pledge_2023.years_till_income_gain",
       "published": 8,
-      "explainer": "The shared figure from FP's 2019 education work (row 21)."
+      "explainer": "Founders Pledge's 2023 figure (facts: founders_pledge_2023.years_till_income_gain), the same 8 years its 2019 method used."
     },
     {
       "id": "duration",
       "section": "income",
       "label": "Duration of benefits (years)",
       "format": "number",
-      "formula": "@founders_pledge_2019.earnings_duration_years",
+      "formula": "@founders_pledge_2023.income_gain_years",
       "published": 5,
-      "explainer": "The shared figure from FP's 2019 education work: 5 years, 2 to 20 across its cases (row 22)."
+      "explainer": "Changed for consistency: Founders Pledge's 2023 method counts the gain over a 40-year working life (facts: founders_pledge_2023.income_gain_years); its 2019 method, which this analysis used, counted 5 years (kept in the evaluator view). Founders Pledge's own models of education rest on two methods: its 2019 one (earnings +10% per standard deviation of test scores, 80% of it additional, lasting 5 years, no household) and its 2023 one (+19.1% per standard deviation, times 17.5% for replicability, lasting a 40-year working life, doubled for the household). Our view uses Founders Pledge's latest for every education model, so a standard deviation of learning is worth the same wherever it comes from."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "income",
+      "label": "Household multiplier",
+      "format": "multiple",
+      "formula": "@founders_pledge_2023.household_multiplier",
+      "published": 1,
+      "explainer": "Changed for consistency: Founders Pledge's 2023 method doubles the income gain for the household it is shared with (facts: founders_pledge_2023.household_multiplier); its 2019 method counted the earner only (1 in the evaluator view)."
     },
     {
       "id": "discount",
@@ -239,9 +248,10 @@
       "section": "income",
       "label": "Present value of ln(income) per SD",
       "format": "number",
-      "formula": "-pv(discount, duration, ln_income_per_sd, 0, 1) / (1 + years_until * discount)",
+      "formula": "household_multiplier * -pv(discount, duration, ln_income_per_sd, 0, 1) / (1 + discount) ^ years_until",
       "expected": 0.2499007741,
-      "explainer": "FP's formula: the gain paid at the start of each year for the duration, discounted, then divided by (1 + years until the benefit × rate), simple rather than compound discounting for the wait."
+      "explainer": "The income gain per standard deviation, summed over the years it lasts and discounted to today at the discount rate under Your values, compounding over the wait as in Founders Pledge's 2023 method. Changed for consistency: Founders Pledge's 2019 sheet discounted the wait at simple interest (÷ (1 + 8 × 5%)) and counted one earner for 5 years; its figure, 0.25, is kept in the evaluator view.",
+      "published": 0.2499007741
     },
     {
       "id": "ln_income_per_dollar",

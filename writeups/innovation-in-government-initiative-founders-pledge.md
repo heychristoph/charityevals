@@ -1,8 +1,8 @@
 ### Summary
 
-J-PAL's Innovation in Government Initiative pays for partnerships that help governments adopt policies backed by evidence. Built on Founders Pledge's 2019 estimate of two reforms the initiative (then the Government Partnership Initiative) helped bring forward, with one step corrected (Founders Pledge's own figure is 6.1 on our scale), our figure is **<span data-figure="headline" data-model="innovation-in-government-initiative-founders-pledge">13.6</span> years of healthy life per $1,000**.
+J-PAL's Innovation in Government Initiative pays for partnerships that help governments adopt policies backed by evidence. Built on Founders Pledge's 2019 estimate of two reforms the initiative (then the Government Partnership Initiative) helped bring forward, with one step corrected (Founders Pledge's own figure is 6.1 on our scale), our figure is **<span data-figure="headline" data-model="innovation-in-government-initiative-founders-pledge">39</span> years of healthy life per $1,000**.
 
-The model reproduces all 18 of Founders Pledge's calculated figures in the evaluator view. Our view corrects one step in the Zambia estimate (below), which roughly doubles the result.
+The model reproduces all 18 of Founders Pledge's calculated figures in the evaluator view. Our view corrects one step in the Zambia estimate and values Zambia's earnings with Founders Pledge's 2023 education figures, shared by every education model (below); together they raise the result about sixfold.
 
 ### What the charity does
 
@@ -19,21 +19,21 @@ Founders Pledge credits two reforms:
 
 Founders Pledge puts both reforms into GiveWell's 2016–17 unit of value, "under-five-life equivalents", adds them up and divides by the initiative's budget to date ($2.6 million). It then compares the cost per life-equivalent with GiveDirectly's in the same unit, a multiple of cash. In our view each reform is valued in units of value on its own: India's freed-up money, which Founders Pledge values in GiveWell's 2017 unit directly, with each child-life equivalent counted as an under-five death averted, like every death on the site; Zambia's income gain directly, like every income gain on the site.
 
-In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia and our value of a child's life, about 70% at the default values.
+In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia, Founders Pledge's 2023 earnings figures and our value of a child's life, about 40% at the default values.
 
 ### What drives the result
 
 - **How much of the ministry's savings estimate is real** (0% to 75%) and **how many years the initiative brought the reform forward** (0 to 3). Either at its low end takes the India part to zero.
 - **The exchange rate between health and income** under Your values: the result is in income terms.
-- For Zambia, the shared assumptions from Founders Pledge's 2019 education work: how much earnings rise per standard deviation of test scores and for how long.
+- For Zambia, how much earnings rise per standard deviation of test scores and for how long: Founders Pledge's 2023 education figures, shared by every education model on the site.
 
 ### Where we differ from Founders Pledge
 
 - **Zambia's gain per child (corrected):** Founders Pledge's sheet multiplies the gain in test scores per dollar (0.0138 standard deviations per $) by the 286,000 children reached, as if it were a gain per child. We multiply by the dollars spent per child first, our estimate of $7.50 ($5 to $15), from Founders Pledge's own 0.02 standard deviations per dollar against an effect of about 0.15 per child. The Zambia benefit rises 7.5-fold; Founders Pledge's own number stays in the evaluator view.
 - **Valuing Zambia's income gain (changed for consistency):** Founders Pledge turns the gain in ln(income) into child-life equivalents with GiveWell's 2016 moral weights (3 units of ln(income) per DALY, 7 DALYs per child's life) and compares those with GiveDirectly at $11,663 per child-life equivalent: a unit of ln(income) comes to 1.86 units of value. We value it like every income gain on the site, with the weight on income under Your values (1.44 at the default), so those three figures drop out.
 - **Valuing India's freed-up money (changed for consistency):** Founders Pledge counts it in child-life equivalents, GiveWell's 2017 unit, and its multiple of cash prices one at GiveDirectly's $11,663, which at the site's cash benchmark (0.00335 units of value per dollar) is 39 units of value. That keeps GiveWell's 2017 weighing of a child's life against income. We count a child-life equivalent as what it says, an under-five death averted, valued like every death on the site: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. India's part roughly triples at the default; the evaluator view keeps Founders Pledge's multiple of cash.
-- **Discount rate:** our view uses the shared rate under Your values (4% by default) for Zambia's earnings gains; Founders Pledge uses 5%. Founders Pledge discounts the eight-year wait with a simple factor, 1 / (1 + 8 × rate), rather than compounding; we keep its formula.
-- **Shared figures:** the earnings gain per standard deviation (10%), the share that is additional (80%), the wait (8 years) and duration (5 years) come from the shared facts for Founders Pledge's 2019 education work. They are the same numbers as in this sheet; the ranges come from Founders Pledge's education sheet.
+- **Earnings from learning (changed for consistency):** Founders Pledge's 2019 method, which the Zambia estimate used, counts 10% more earnings a year per standard deviation of test scores, 80% of it additional, for 5 years, for the earner alone. Founders Pledge's newer education analyses (2023: Central Square Foundation, EIDU, Imagine Worldwide, Teaching at the Right Level, Ubongo) count 19.1% times a 17.5% replicability adjustment, over a 40-year working life, doubled for the household. Our view uses Founders Pledge's latest for every education model, so a standard deviation of learning is worth the same wherever it comes from; it compounds the eight-year wait at the discount rate, as the 2023 method does, where the 2019 sheet used a simple factor. Per standard deviation this is about 3.7 times the 2019 value at 4%. The evaluator view keeps the 2019 figures.
+- **Discount rate:** our view uses the shared rate under Your values (4% by default) for Zambia's earnings gains; Founders Pledge uses 5%.
 - **Credit by share of resources:** when on, staff's pay below market counts as their contribution, at our default for research and policy work (staff about 60% of cost, paid about 30% below market). Founders Pledge's "years brought forward" is its own counterfactual credit and stays in both views.
 
 ### Biggest uncertainties

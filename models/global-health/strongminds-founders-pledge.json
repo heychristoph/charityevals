@@ -239,11 +239,36 @@
       "explainer": "Founders Pledge counts a benefit that keeps a fixed share of itself each year (the retention rate), summed over all years, without discounting. Discounting each year's benefit at the shared rate turns the sum 1 / (1 − r) into 1 / (1 − r / (1 + rate)); this is the ratio of the two. At a rate of 0 it is 1, so Founders Pledge's figures reproduce."
     },
     {
+      "id": "household_size",
+      "section": "ours",
+      "label": "Household size of psychotherapy recipients",
+      "format": "number",
+      "formula": "@wellby_factors.household_size_psychotherapy",
+      "explainer": "The shared figure for the settings StrongMinds works in (facts: wellby_factors.household_size_psychotherapy), as in HLI's and SoGive's StrongMinds models."
+    },
+    {
+      "id": "household_spillover_ratio",
+      "section": "ours",
+      "label": "Household spillover of psychotherapy, as a share of the recipient's own effect",
+      "format": "percent",
+      "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+      "explainer": "The shared spillover ratio (facts: wellby_factors.household_spillover_ratio_psychotherapy), as in HLI's and SoGive's StrongMinds models."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "ours",
+      "label": "Household multiplier: everyone who benefits, per participant",
+      "format": "multiple",
+      "formula": "1 + (household_size - 1) * household_spillover_ratio",
+      "published": 1,
+      "explainer": "Changed for consistency: HLI and SoGive count the benefit therapy brings the rest of the household, each other member gaining about 16% of the participant's own; Founders Pledge counts the participant only (1 in the evaluator view). Our view counts the household in every psychotherapy model, from the shared figures, so the three StrongMinds analyses differ only in what they measured."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "ours",
-      "label": "DALYs averted per dollar",
+      "label": "DALYs averted per dollar, household included",
       "format": "small",
-      "formula": "1 / cost_per_daly",
+      "formula": "household_multiplier / cost_per_daly",
       "explainer": "Founders Pledge's cost per DALY turned around."
     },
     {

@@ -1,6 +1,6 @@
 ### Summary
 
-Pallium India provides palliative care in Kerala and helps other Indian states build pain relief and opioid access for people with serious illness. The Happier Lives Institute's rough estimate for Pallium helping Karnataka catch up with Kerala is 16 to 108 WELLBYs per $1,000; we take the middle of that range, which on our scale is **<span data-figure="headline" data-model="pallium-india-hli">20</span> years of healthy life per $1,000**.
+Pallium India provides palliative care in Kerala and helps other Indian states build pain relief and opioid access for people with serious illness. The Happier Lives Institute's rough estimate for Pallium helping Karnataka catch up with Kerala is 16 to 108 WELLBYs per $1,000; we take the middle of that range, which on our scale is **<span data-figure="headline" data-model="pallium-india-hli">2.3</span> years of healthy life per $1,000**.
 
 HLI calls this "a highly uncertain BOTEC" (back-of-the-envelope calculation) and plans a fuller report. It gives only the range and no spreadsheet; the model takes HLI's two ends, quoted, and uses their geometric mean as the central figure, which is our choice.
 
@@ -28,6 +28,7 @@ HLI's two ends come first and their geometric mean is the central figure. Our st
 
 ### Where we differ from HLI
 
+- **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, set so that a fall in depression counts the same in HLI's analyses as in the site's other depression models (0.13 doubled-income years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 1.15, nine times higher; the evaluator view converts at that rate.
 - **A central figure.** HLI gives 16 to 108 and no best guess; we use the geometric mean, 42. HLI's 2025 giving season update quoted an earlier, wider range, 26 to 163.
 - **Discounting** over the 10 years the patients are reached.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. The state government, which would deliver the care, isn't counted as a contributor, which flatters Pallium when that setting is on.
