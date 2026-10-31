@@ -35,10 +35,14 @@ const fmtNum = (x: number) => formatValue(x, Math.abs(x) > 0 && Math.abs(x) < 0.
 
 /** A formula with every reference named and linked: rows open in the tree, assumptions go to their slider. */
 export function Formula({ text, model }: { text: string; model: ResolvedModel }) {
-  const parts = text.split(/(@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*|\$?[a-z_][a-z0-9_]*)/gi);
+  const parts = text.split(/(#[a-z0-9]+(?:-[a-z0-9]+)*|@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*|\$?[a-z_][a-z0-9_]*)/gi);
   return (
     <code className="formula">
       {parts.map((p, i) => {
+        if (p.startsWith("#")) {
+          const o = lib.models.get(p.slice(1));
+          return o ? <a key={i} href={modelUrl(lib, o)} title="Another model's result, live" className="ref ref-m">{liveLabel(o.name)}</a> : p;
+        }
         if (p.startsWith("@")) {
           const f = lib.facts.get(p.slice(1));
           return f ? <a key={i} href={`/data#f-${f.key}`} title={`Shared data: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
@@ -55,6 +59,9 @@ export function Formula({ text, model }: { text: string; model: ResolvedModel })
 }
 
 const assumptionRow = (id: string) => lib.assumptions.rows.find((r) => r.id === id);
+/** A model read live by another (`#id`): its name, as a result. */
+const liveLabel = (name: string) => `${name}: result per dollar, live`;
+const modelLabel = (id: string) => liveLabel(lib.models.get(id)?.name ?? id);
 const rowLabel = (m: ResolvedModel, id: string) => m.byId.get(id)?.label || id.replace(/_/g, " ");
 
 /** A sub-formula read in words: "Cost per net + Delivery cost", shortened when long. */
@@ -62,7 +69,7 @@ function exprLabel(m: ResolvedModel, n: Node, depth = 0): string {
   const s = (() => {
     switch (n.type) {
       case "num": return fmtNum(n.value);
-      case "ref": return n.scope === "row" ? rowLabel(m, n.name) : n.scope === "assumption" ? assumptionRow(n.name)?.label ?? n.name : lib.facts.get(n.name)?.label ?? n.name;
+      case "ref": return n.scope === "row" ? rowLabel(m, n.name) : n.scope === "assumption" ? assumptionRow(n.name)?.label ?? n.name : n.scope === "model" ? modelLabel(n.name) : lib.facts.get(n.name)?.label ?? n.name;
       case "neg": return `−${exprLabel(m, n.arg, depth + 1)}`;
       default: {
         // Deeper than one level of brackets, a formula stops reading as words: name the part instead.
@@ -95,6 +102,7 @@ function rawLabelOf(m: ResolvedModel, n: TreeNode): string {
   if (n.named) return rowLabel(m, n.named);
   if (n.type === "assumption") return assumptionRow(n.refId!)?.label ?? n.refId!;
   if (n.type === "fact") return lib.facts.get(n.refId!)?.label ?? n.refId!;
+  if (n.type === "model") return modelLabel(n.refId!);
   // The headline's "× 1000" turns a value per dollar into one per $1,000.
   if (n.type === "const" && n.value === 1000 && /^r\.\d+$/.test(n.key)) return "Per $1,000 instead of per dollar";
   if (n.type === "const") return "Fixed number in the formula";
@@ -226,6 +234,7 @@ function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed)
     return <span id={id} className="tn-tag"><span className="kind-dot kind-estimate" aria-hidden /><a href={`/data#a-${n.refId}`}>fixed rate</a></span>;
   if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your value</span>;
+  if (n.type === "model") return <span id={id} className="tn-tag tn-tag-f">live model</span>;
   if (n.type === "fact") {
     const count = readers(n.refId!).length;
     return <span id={id} className="tn-tag tn-tag-f">{count > 1 ? `shared · ${count} models` : "shared fact"}</span>;
@@ -272,6 +281,15 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
           {others.slice(0, SHOWN).map((o, i) => <Fragment key={o.id}>{i ? (i === others.length - 1 ? " and " : ", ") : ""}<a href={modelUrl(lib, o)}>{o.name}</a></Fragment>)}
           {others.length > SHOWN && <> and {others.length - SHOWN} more</>}</>}.
         {f?.source?.title && <> Source: {f.source.url ? <a href={f.source.url}>{f.source.title}</a> : f.source.title}.</>}
+      </p>,
+    );
+  } else if (n.type === "model") {
+    const o = lib.models.get(n.refId!);
+    lines.push(
+      <p key="m">
+        Another model's result per dollar, in units of value, computed live with your values in charityevals' view:{" "}
+        {o ? <a href={modelUrl(lib, o)}>{o.name}</a> : n.refId}. Change a slider and it moves here too. Its own uncertainty
+        isn't part of this model's range: the range uses its result at your values (docs/normalization.md 2.8).
       </p>,
     );
   } else if (n.type === "const") {

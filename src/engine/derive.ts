@@ -6,7 +6,7 @@ import { evaluate, type Node } from "./expr";
 import { bottomLine, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
 
 /** What a reference in a formula points at. */
-export type Ref = { scope: "row" | "assumption" | "fact"; id: string };
+export type Ref = { scope: "row" | "assumption" | "fact" | "model"; id: string };
 
 /** How a row is made: an input, a sum whose parts can be shown as shares, or any other formula. */
 export type Step =
@@ -63,7 +63,7 @@ export function needsParens(n: Node, parent: string | undefined, right: boolean)
 export function formulaText(n: Node, parent?: string, right = false): string {
   switch (n.type) {
     case "num": return String(n.value);
-    case "ref": return n.scope === "assumption" ? `$${n.name}` : n.scope === "fact" ? `@${n.name}` : n.name;
+    case "ref": return n.scope === "assumption" ? `$${n.name}` : n.scope === "fact" ? `@${n.name}` : n.scope === "model" ? `#${n.name}` : n.name;
     case "neg": return `-${formulaText(n.arg, "*", true)}`;
     case "call": return `${n.fn}(${n.args.map((a) => formulaText(a)).join(", ")})`;
     case "bin": {
@@ -93,7 +93,7 @@ export function leverage(
   if (ref.scope === "assumption") after = bottomLine(lib, view === "evaluator" && m.evaluator?.assumptions[ref.id] !== undefined
     ? { ...m, evaluator: { ...m.evaluator, assumptions: { ...m.evaluator.assumptions, [ref.id]: value * (1 + h) } } }
     : m, { ...av, [ref.id]: value * (1 + h) }, {}, view).native;
-  else after = bottomLine(lib, m, av, { [ref.scope === "fact" ? `@${ref.id}` : ref.id]: value * (1 + h) }, view).native;
+  else after = bottomLine(lib, m, av, { [ref.scope === "fact" ? `@${ref.id}` : ref.scope === "model" ? `#${ref.id}` : ref.id]: value * (1 + h) }, view).native;
   const e = (after - base) / base / h;
   return Number.isFinite(e) ? Math.round(e * 1000) / 1000 : undefined;
 }
@@ -103,5 +103,5 @@ export function valueOf(
   lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View, n: Node,
 ): number {
   const a = viewAssumptions(m, av, view);
-  return evaluate(n, (scope, name) => (scope === "row" ? values[name] : scope === "assumption" ? a[name] : pickValue(lib.facts.get(name)?.value)));
+  return evaluate(n, (scope, name) => (scope === "row" ? values[name] : scope === "assumption" ? a[name] : scope === "model" ? values[`#${name}`] : pickValue(lib.facts.get(name)?.value)));
 }

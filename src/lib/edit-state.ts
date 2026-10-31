@@ -70,7 +70,7 @@ function target(m: ResolvedModel, facts: Set<string>, key: string): string | und
     const r = m.byId.get(id);
     if (!r) return undefined;
     if (!r.node) return id;
-    if (r.node.type !== "ref" || r.node.scope === "assumption") return undefined;
+    if (r.node.type !== "ref" || r.node.scope === "assumption" || r.node.scope === "model") return undefined;
     if (r.node.scope === "fact") return facts.has(r.node.name) ? `@${r.node.name}` : undefined;
     id = r.node.name;
   }

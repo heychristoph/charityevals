@@ -4,11 +4,15 @@
 //   refs       transfer_per_household   another row in the same model
 //              $discount_rate           a shared assumption (the visitor can change it)
 //              @kenya.ppp_factor_2017   a shared fact (data used by several models)
+//              #against-malaria-foundation   another model's live result per dollar, in common units
+//                                            (units of value), our view, under the current assumptions.
+//                                            Model ids contain hyphens: write a space before a minus
+//                                            that follows one (#givedirectly - x).
 //   operators  + - * / ^ (right-assoc), unary -, parentheses
 //   compare    = <> < > <= >=   (1 when true, 0 when false; lowest precedence)
 //   functions  see FUNCTIONS below
 
-export type Scope = "row" | "assumption" | "fact";
+export type Scope = "row" | "assumption" | "fact" | "model";
 type BinOp = "+" | "-" | "*" | "/" | "^" | "=" | "<>" | "<" | ">" | "<=" | ">=";
 
 export type Node =
@@ -101,6 +105,12 @@ function tokenize(src: string): Tok[] {
       i += fact[0].length;
       continue;
     }
+    const model = /^#[a-z0-9]+(?:-[a-z0-9]+)*/.exec(src.slice(i));
+    if (model) {
+      out.push({ t: "id", v: model[0].slice(1), scope: "model" });
+      i += model[0].length;
+      continue;
+    }
     const id = /^\$?[a-z_][a-z0-9_]*/i.exec(src.slice(i));
     if (id) {
       const a = id[0].startsWith("$");
@@ -177,9 +187,9 @@ export function parse(src: string): Node {
   return node;
 }
 
-export function refs(node: Node, out = { rows: new Set<string>(), assumptions: new Set<string>(), facts: new Set<string>() }) {
+export function refs(node: Node, out = { rows: new Set<string>(), assumptions: new Set<string>(), facts: new Set<string>(), models: new Set<string>() }) {
   switch (node.type) {
-    case "ref": (node.scope === "assumption" ? out.assumptions : node.scope === "fact" ? out.facts : out.rows).add(node.name); break;
+    case "ref": (node.scope === "assumption" ? out.assumptions : node.scope === "fact" ? out.facts : node.scope === "model" ? out.models : out.rows).add(node.name); break;
     case "neg": refs(node.arg, out); break;
     case "bin": refs(node.left, out); refs(node.right, out); break;
     case "call": node.args.forEach((a) => refs(a, out)); break;

@@ -15,7 +15,7 @@ function modelOf(id: string, bulk: boolean): ResolvedModel {
   const raw = bulkRaw(id);
   if (!raw) return lib.models.get(id)!;
   let m = built.get(id);
-  if (!m) built.set(id, (m = buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()]).models.get(id)!));
+  if (!m) built.set(id, (m = buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id)!));
   return m;
 }
 

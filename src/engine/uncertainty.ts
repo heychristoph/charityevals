@@ -109,7 +109,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   const a = viewAssumptions(m, av, view);
   const feeding = rowsFeeding(m);
   const leafVals = (scope: Scope, name: string) =>
-    scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value);
+    scope === "row" ? values[name] ?? NaN : scope === "assumption" ? a[name] ?? NaN : scope === "model" ? values[`#${name}`] ?? NaN : inputs[`@${name}`] ?? pickValue(lib.facts.get(name)?.value);
 
   // Spreads of every number the result can depend on. A calculated row with a published range (an
   // evaluator's interval on, say, a mortality reduction) is taken at its word, as a source in its own
