@@ -1,6 +1,6 @@
 ### Summary
 
-icddr,b is a health research institute in Bangladesh that also runs health programmes, among them Reach Up, in which health workers visit parents of young children and run parenting groups. The Happier Lives Institute estimates Reach Up creates 50 WELLBYs per $1,000; on our scale that is **<span data-figure="headline" data-model="icddr-b-hli">17</span> years of healthy life per $1,000**.
+icddr,b is a health research institute in Bangladesh that also runs health programmes, among them Reach Up, in which health workers visit parents of young children and run parenting groups. The Happier Lives Institute estimates Reach Up creates 50 WELLBYs per $1,000; on our scale that is **<span data-figure="headline" data-model="icddr-b-hli">1.9</span> years of healthy life per $1,000**.
 
 HLI found no way for donors to fund this programme directly, so it does not recommend it; the estimate is here because HLI published it. HLI publishes no spreadsheet for it: the model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 50.
 
@@ -30,6 +30,7 @@ HLI's figures come first, ending at WELLBYs per $1,000. Our steps follow: the be
 
 ### Where we differ from HLI
 
+- **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, set so that a fall in depression counts the same in HLI's analyses as in the site's other depression models (0.13 doubled-income years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 1.15, nine times higher; the evaluator view converts at that rate.
 - **Discounting.** HLI counts a WELLBY decades from now the same as one now. Our view discounts the 32 years of benefit at the shared rate, which cuts the figure by about two fifths at the default 4%.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution.
 

@@ -10,6 +10,6 @@ Works with flour mills in India to fortify wheat flour with iron, folic acid and
 | [Steady-state Fortify Health iron fortification cost-effectiveness analysis, June 2019](/fortify-health/fortify-health-steady-state-iron-fortification-june) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-steady-state-iron-fortification-june">21</span> | 186, 2 kept fixed |
 | [Fortify Health Value of Incubation Grants, June 2019](/fortify-health/fortify-health-value-incubation-grants-june-2019) | GW | August 2019 | <span data-figure="headline" data-model="fortify-health-value-incubation-grants-june-2019">22</span> | 233, 3 kept fixed |
 | [Iron cost-effectiveness analysis Fortify Health consolidation Published](/fortify-health/fortify-health-iron-consolidation-published) | GW | June 2018 | <span data-figure="headline" data-model="fortify-health-iron-consolidation-published">13</span> | 115, 7 kept fixed |
-| [Fortify Health (HLI, 2024)](/fortify-health/fortify-health-hli) | HLI | November 2024 | <span data-figure="headline" data-model="fortify-health-hli">11</span> | 1 |
+| [Fortify Health (HLI, 2024)](/fortify-health/fortify-health-hli) | HLI | November 2024 | <span data-figure="headline" data-model="fortify-health-hli">1.3</span> | 1 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

@@ -57,7 +57,7 @@
         "title": "ACE (Charity's guess)",
         "cell": "European Chicken Commitment CEA!B13"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds. With \"Credit by share of resources\" on, the same split is used: it is ACE's estimate of the other groups' share of the work, which is what sharing by resources asks for."
     },
     {
       "id": "p1_contribution_made_by_other_charities_to_this_wor_2_shared",
@@ -73,7 +73,7 @@
         "title": "ACE (Charity's guess)",
         "cell": "European Chicken Commitment CEA!B29"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds. With \"Credit by share of resources\" on, the same split is used: it is ACE's estimate of the other groups' share of the work, which is what sharing by resources asks for."
     },
     {
       "id": "p2_contribution_made_by_other_charities_to_this_wor_shared",
@@ -89,7 +89,7 @@
         "title": "ACE (Charity's guess)",
         "cell": "Cage-Free Eggs CEA!B13"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds. With \"Credit by share of resources\" on, the same split is used: it is ACE's estimate of the other groups' share of the work, which is what sharing by resources asks for."
     },
     {
       "id": "p2_contribution_made_by_other_charities_to_this_wor_2_shared",
@@ -105,7 +105,7 @@
         "title": "ACE (Charity's guess)",
         "cell": "Cage-Free Eggs CEA!B29"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds. With \"Credit by share of resources\" on, the same split is used: it is ACE's estimate of the other groups' share of the work, which is what sharing by resources asks for."
     },
     {
       "id": "p2_contribution_made_by_other_charities_to_this_wor_3_shared",
@@ -121,7 +121,7 @@
         "title": "ACE (Charity's guess)",
         "cell": "Cage-Free Eggs CEA!B45"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds. With \"Credit by share of resources\" on, the same split is used: it is ACE's estimate of the other groups' share of the work, which is what sharing by resources asks for."
     },
     {
       "id": "p1_number_of_broiler_chickens_per_year_in_the_suppl",
@@ -167,33 +167,33 @@
       "id": "p1_companies_expected_implementation_date_if_not_fo",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Companies' expected implementation date (years from now) if not for accountability campaigning",
-      "value": {
-        "low": 20.0,
-        "best": 25.0,
-        "high": 40.0
-      },
-      "kind": "estimate",
       "source": {
         "title": "ACE (Estimate (external))",
         "cell": "European Chicken Commitment CEA!B8"
       },
-      "explainer": "ACE's input, source type: Estimate (external). Range: ACE's bounds."
+      "explainer": "Changed for consistency: the date the companies would have got there without Animal Welfare Observatory's campaigning is the date they're expected to now plus the shared \"Years a won reform counts before it would have come anyway\" (5 by default), so the campaign is credited the same span as every model crediting a won reform. ACE's own date, 25 years from now (20–40), 15 years after the expected one, is kept as the evaluator's and used in the evaluator view. The years are discounted from the expected date, as ACE does.",
+      "formula": "p1_companies_expected_implementation_date + $win_years_counted",
+      "published": {
+        "low": 20.0,
+        "best": 25.0,
+        "high": 40.0
+      }
     },
     {
       "id": "p1_probability_of_companies_implementing_commitment",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Probability of companies implementing commitments at all",
-      "value": {
-        "low": 0.2,
-        "best": 0.3,
-        "high": 0.4
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "European Chicken Commitment CEA!B9"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: reads the shared share of European Chicken Commitment pledges companies keep (facts: sad_factors.commitment_fulfilment_broiler, 30%), as every model crediting a broiler pledge does. ACE's own guess, 30% (20%–40%), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_broiler",
+      "published": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.4
+      }
     },
     {
       "id": "p1_sads_averted_per_chicken_as_a_result_of_ecc_impl",
@@ -229,19 +229,19 @@
         "title": "ACE (ACE's guess)",
         "cell": "European Chicken Commitment CEA!B14"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds. This shares the wins between the year evaluated and the work of other years, by how much of the work each holds: already a split by resources, so it applies with \"Credit by share of resources\" on or off."
     },
     {
       "id": "p1_discount_to_account_for_fact_that_companies_are",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Discount to account for fact that companies are already partly compliant",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "European Chicken Commitment CEA!B15"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's input (source type: estimate): half the change is counted, because the companies are already partly compliant. A judgment, so filed as one."
     },
     {
       "id": "p1_annual_discount_rate",
@@ -308,33 +308,33 @@
       "id": "p1_company_s_expected_introduction_of_these_welfare",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Company's expected introduction of these welfare improvements (years from now) if not for animal advocacy campaigning",
-      "value": {
-        "low": 20.0,
-        "best": 25.0,
-        "high": 40.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "European Chicken Commitment CEA!B24"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: the date the companies would have got there without Animal Welfare Observatory's campaigning is the date they're expected to now plus the shared \"Years a won reform counts before it would have come anyway\" (5 by default), so the campaign is credited the same span as every model crediting a won reform. ACE's own date, 25 years from now (20–40), 15 years after the expected one, is kept as the evaluator's and used in the evaluator view. The years are discounted from the expected date, as ACE does.",
+      "formula": "p1_company_s_expected_implementation_date + $win_years_counted",
+      "published": {
+        "low": 20.0,
+        "best": 25.0,
+        "high": 40.0
+      }
     },
     {
       "id": "p1_probability_of_company_implementing_commitments",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Probability of company implementing commitments at all",
-      "value": {
-        "low": 0.2,
-        "best": 0.3,
-        "high": 0.4
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "European Chicken Commitment CEA!B25"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: reads the shared share of European Chicken Commitment pledges companies keep (facts: sad_factors.commitment_fulfilment_broiler, 30%), as every model crediting a broiler pledge does. ACE's own guess, 30% (20%–40%), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_broiler",
+      "published": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.4
+      }
     },
     {
       "id": "p1_sads_averted_per_chicken_as_a_result_of_ecc_impl_2",
@@ -370,19 +370,19 @@
         "title": "ACE (ACE's guess)",
         "cell": "European Chicken Commitment CEA!B30"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds. This shares the wins between the year evaluated and the work of other years, by how much of the work each holds: already a split by resources, so it applies with \"Credit by share of resources\" on or off."
     },
     {
       "id": "p1_discount_to_account_for_fact_that_companies_are_2",
       "section": "p1_european_chicken_commitment_cea",
       "label": "Discount to account for fact that companies are already partly compliant",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "European Chicken Commitment CEA!B31"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's input (source type: estimate): half the change is counted, because the companies are already partly compliant. A judgment, so filed as one."
     },
     {
       "id": "p1_annual_discount_rate_2",
@@ -491,33 +491,33 @@
       "id": "p2_company_s_expected_introduction_of_these_welfare",
       "section": "p2_cage_free_eggs_cea",
       "label": "Company's expected introduction of these welfare improvements (years from now) if not for animal advocacy campaigning",
-      "value": {
-        "low": 10.0,
-        "best": 12.0,
-        "high": 15.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B8"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: the date the companies would have got there without Animal Welfare Observatory's campaigning is the date they're expected to now plus the shared \"Years a won reform counts before it would have come anyway\" (5 by default), so the campaign is credited the same span as every model crediting a won reform. ACE's own date, 12 years from now (10–15), 7.5 years after the expected one, is kept as the evaluator's and used in the evaluator view. The years are discounted from the expected date, as ACE does.",
+      "formula": "p2_company_s_expected_implementation_date + $win_years_counted",
+      "published": {
+        "low": 10.0,
+        "best": 12.0,
+        "high": 15.0
+      }
     },
     {
       "id": "p2_probability_of_companies_implementing_commitment",
       "section": "p2_cage_free_eggs_cea",
       "label": "Probability of companies implementing commitments at all",
-      "value": {
-        "low": 0.75,
-        "best": 0.9,
-        "high": 0.95
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B9"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: reads the shared share of cage-free commitments companies keep (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), as every model crediting a cage-free pledge does. ACE's own guess, 90% (75%–95%), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 0.95
+      }
     },
     {
       "id": "p2_sads_averted_per_chicken_as_a_result_of_transiti",
@@ -553,19 +553,19 @@
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B14"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds. This shares the wins between the year evaluated and the work of other years, by how much of the work each holds: already a split by resources, so it applies with \"Credit by share of resources\" on or off."
     },
     {
       "id": "p2_discount_to_account_for_fact_that_companies_are",
       "section": "p2_cage_free_eggs_cea",
       "label": "Discount to account for fact that companies are already partly compliant",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Cage-Free Eggs CEA!B15"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's input (source type: estimate): half the change is counted, because the companies are already partly compliant. A judgment, so filed as one."
     },
     {
       "id": "p2_annual_discount_rate",
@@ -632,33 +632,33 @@
       "id": "p2_companies_expected_implementation_date_if_not_fo",
       "section": "p2_cage_free_eggs_cea",
       "label": "Companies' expected implementation date (years from now) if not for accountability campaigning",
-      "value": {
-        "low": 4.0,
-        "best": 4.0,
-        "high": 5.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (Charity's guess)",
         "cell": "Cage-Free Eggs CEA!B24"
       },
-      "explainer": "ACE's input, source type: Charity's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: the date the companies would have got there without Animal Welfare Observatory's campaigning is the date they're expected to now plus the shared \"Years a won reform counts before it would have come anyway\" (5 by default), so the campaign is credited the same span as every model crediting a won reform. ACE's own date, 4 years from now (4–5), 2.5 years after the expected one, is kept as the evaluator's and used in the evaluator view. The years are discounted from the expected date, as ACE does.",
+      "formula": "p2_companies_expected_implementation_date + $win_years_counted",
+      "published": {
+        "low": 4.0,
+        "best": 4.0,
+        "high": 5.0
+      }
     },
     {
       "id": "p2_probability_of_companies_implementing_commitment_2",
       "section": "p2_cage_free_eggs_cea",
       "label": "Probability of companies implementing commitments at all",
-      "value": {
-        "low": 0.75,
-        "best": 0.9,
-        "high": 0.95
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B25"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: reads the shared share of cage-free commitments companies keep (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), as every model crediting a cage-free pledge does. ACE's own guess, 90% (75%–95%), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 0.95
+      }
     },
     {
       "id": "p2_sads_averted_per_chicken_as_a_result_of_transiti_2",
@@ -694,19 +694,19 @@
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B30"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds. This shares the wins between the year evaluated and the work of other years, by how much of the work each holds: already a split by resources, so it applies with \"Credit by share of resources\" on or off."
     },
     {
       "id": "p2_discount_to_account_for_fact_that_companies_are_2",
       "section": "p2_cage_free_eggs_cea",
       "label": "Discount to account for fact that companies are already partly compliant",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Cage-Free Eggs CEA!B31"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's input (source type: estimate): half the change is counted, because the companies are already partly compliant. A judgment, so filed as one."
     },
     {
       "id": "p2_annual_discount_rate_2",
@@ -768,33 +768,33 @@
       "id": "p2_companies_expected_implementation_date_if_not_fo_2",
       "section": "p2_cage_free_eggs_cea",
       "label": "Companies' expected implementation date (years from now) if not for accountability campaigning",
-      "value": {
-        "low": 5.0,
-        "best": 5.0,
-        "high": 6.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B40"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: the date the companies would have got there without Animal Welfare Observatory's campaigning is the date they're expected to now plus the shared \"Years a won reform counts before it would have come anyway\" (5 by default), so the campaign is credited the same span as every model crediting a won reform. ACE's own date, 5 years from now (5–6), 2 years after the expected one, is kept as the evaluator's and used in the evaluator view. The years are discounted from the expected date, as ACE does.",
+      "formula": "p2_companies_expected_implementation_date_2 + $win_years_counted",
+      "published": {
+        "low": 5.0,
+        "best": 5.0,
+        "high": 6.0
+      }
     },
     {
       "id": "p2_probability_of_companies_implementing_commitment_3",
       "section": "p2_cage_free_eggs_cea",
       "label": "Probability of companies implementing commitments at all",
-      "value": {
-        "low": 0.65,
-        "best": 0.8,
-        "high": 0.9
-      },
-      "kind": "judgment",
       "source": {
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B41"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "Changed for consistency: reads the shared share of cage-free commitments companies keep (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), as every model crediting a cage-free pledge does. ACE's own guess, 80% (65%–90%), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": {
+        "low": 0.65,
+        "best": 0.8,
+        "high": 0.9
+      }
     },
     {
       "id": "p2_sads_averted_per_chicken_as_a_result_of_transiti_3",
@@ -830,19 +830,19 @@
         "title": "ACE (ACE's guess)",
         "cell": "Cage-Free Eggs CEA!B46"
       },
-      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds."
+      "explainer": "ACE's input, source type: ACE's guess. Range: ACE's bounds. This shares the wins between the year evaluated and the work of other years, by how much of the work each holds: already a split by resources, so it applies with \"Credit by share of resources\" on or off."
     },
     {
       "id": "p2_discount_to_account_for_fact_that_companies_are_3",
       "section": "p2_cage_free_eggs_cea",
       "label": "Discount to account for fact that companies are already partly compliant",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Cage-Free Eggs CEA!B47"
       },
-      "explainer": "ACE's input, source type: Estimate (ACE)."
+      "explainer": "ACE's input (source type: estimate): half the change is counted, because the companies are already partly compliant. A judgment, so filed as one."
     },
     {
       "id": "p2_annual_discount_rate_3",
