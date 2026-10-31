@@ -5,4 +5,6 @@ An evaluator that researches livelihoods charities and recommends the most cost-
 | --- | --- | --- | --- | --- |
 | [Better Futures Guide: a livelihoods charity evaluator (Ambitious Impact, 2025 idea report)](/better-futures-guide) | AIM | February 2025 | <span data-figure="headline" data-model="better-futures-guide-aim">28</span> | 168, 14 kept fixed |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Better Futures Guide existed, not of the charity's own results. It is shown because Better Futures Guide runs the programme today ([checked October 2026](https://betterfuturesguide.org/)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

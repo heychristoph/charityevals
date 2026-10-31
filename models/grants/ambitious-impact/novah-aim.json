@@ -21,7 +21,8 @@
    "resource_shares": 0,
    "discount_rate": 0.04,
    "life_value_multiplier": 1,
-   "uov_per_daly": 2.3
+   "uov_per_daly": 2.3,
+   "uov_per_ln_consumption": 1.4426950408889634
   }
  },
  "resources": [],
@@ -3658,25 +3659,18 @@
    "explainer": "BO= Source; IPV-O= McManus, 2022; DW= Assumes 30 YLL"
   },
   {
-   "value": 29.77,
-   "kind": "estimate",
+   "id": "dalys_weighted_row_7",
+   "label": "DALYs (weighted) (row 7)",
+   "section": "standard_inputs",
+   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "expected": 29.77,
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 29.77 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "published": 29.77,
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/10wxOOuc4Iw7p72Gi4YK6x90cJTrkLmqsY3N-cJ_oD0Y/edit",
     "cell": "Standard inputs!B7"
-   },
-   "id": "dalys_weighted_row_7_aim",
-   "label": "DALYs (weighted) (row 7) (Ambitious Impact's figure)",
-   "section": "standard_inputs",
-   "explainer": ""
-  },
-  {
-   "id": "dalys_weighted_row_7",
-   "label": "DALYs (weighted) (row 7)",
-   "section": "standard_inputs",
-   "formula": "dalys_weighted_row_7_aim * $life_value_multiplier",
-   "expected": 29.77,
-   "explainer": "Ambitious Impact's value of a death averted, scaled by how much Your values weigh a life (1 in the evaluator view)."
+   }
   },
   {
    "id": "fatality_due_to_suicide_years_lived_w_disability_or_years_of",
@@ -5074,9 +5068,9 @@
    "id": "conversion_from_one_year_of_doubled_consumption_to_dalys",
    "label": "Conversion from one year of doubled consumption to DALYs",
    "section": "standard_inputs",
-   "formula": "1 / $uov_per_daly",
+   "formula": "ln(2) * $uov_per_ln_consumption / $uov_per_daly",
    "expected": 0.4347826087,
-   "explainer": "Ambitious Impact counts a year of doubled income as 1/2.3 of a DALY (its own exchange rate between income and health). Linked to the shared rate between a healthy year and a doubled-income year (Your values); the evaluator view pins it to Ambitious Impact's 2.3 (a DALY = 2.3 doubled-income years)."
+   "explainer": "**Changed for consistency.** Ambitious Impact turns a year of doubled consumption into 0.4348 DALYs (1/2.3, its own exchange rate), kept in the evaluator view. Our view uses the site's shared values: a doubling is ln 2 of log-consumption, valued at the shared value of income (Your values), and converted to healthy years at the shared rate, so this model moves with both sliders like every income model."
   },
   {
    "id": "conversion_to_daly",
@@ -6276,5 +6270,11 @@
    "unit": "$ per DALY-equivalent averted (Angola, IHME-weighted burden, with spillovers)"
   }
  },
- "summary": "Ambitious Impact's 2023 estimate (2024 idea report) for a new charity broadcasting entertainment-led radio and TV drama that shifts attitudes to prevent intimate partner violence. The idea Novah was founded to run. Its bottom line is the cost per DALY-equivalent averted in Angola, the modelled country closest to AIM's four-country average (about $79); AIM counts women's lost income in it at 0.43 DALYs per year of doubled consumption (1/2.3, GiveWell's rate; 'Standard inputs'!B13)."
+ "summary": "Ambitious Impact's 2023 estimate (2024 idea report) for a new charity broadcasting entertainment-led radio and TV drama that shifts attitudes to prevent intimate partner violence. The idea Novah was founded to run. Its bottom line is the cost per DALY-equivalent averted in Angola, the modelled country closest to AIM's four-country average (about $79); AIM counts women's lost income in it at 0.43 DALYs per year of doubled consumption (1/2.3, GiveWell's rate; 'Standard inputs'!B13).",
+ "theoretical": {
+  "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+  "runs": "Novah broadcasts radio drama to prevent intimate partner violence in Rwanda, under an RCT; AIM modelled radio and TV in Angola.",
+  "url": "https://novah.ngo",
+  "checked": "2026-10-31"
+ }
 }

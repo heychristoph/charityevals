@@ -5,4 +5,6 @@ Helps smallholder farmers buy productive tools such as water tanks through loans
 | --- | --- | --- | --- | --- |
 | [Better Season Project: asset-collateralised loans for smallholder farmers (Ambitious Impact, 2026 idea report)](/better-season-project) | AIM | January 2025 | <span data-figure="headline" data-model="better-season-project-aim">41</span> | 6066, 2 kept fixed |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Better Season Project existed, not of the charity's own results. It is shown because Better Season Project runs the programme today ([checked October 2026](https://www.betterseasonproject.org/)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

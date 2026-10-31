@@ -3,7 +3,7 @@
   "id": "INV-1",
   "title": "Every ranked model reports in a ranked unit",
   "status": "checked",
-  "checked": 241,
+  "checked": 218,
   "violations": [],
   "how": "Models of kind charity with an output that aren't side sheets (what rankingPlan can pick) must have output.unit in {uov, daly, wellby, ced, tco2e}.",
   "waived": 0,
@@ -13,7 +13,7 @@
   "id": "INV-2a",
   "title": "Headline = native result × the unit's conversion (our view)",
   "status": "checked",
-  "checked": 371,
+  "checked": 348,
   "violations": [],
   "how": "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)). The evaluator view is INV-8. Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
   "waived": 0,
@@ -23,7 +23,7 @@
   "id": "INV-2b",
   "title": "No model row reads a cross-cause rate",
   "status": "checked",
-  "checked": 371,
+  "checked": 348,
   "violations": [],
   "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $uov_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
   "waived": 0,
@@ -33,38 +33,8 @@
   "id": "INV-2c",
   "title": "No evaluator's own conversion in our view",
   "status": "partial",
-  "checked": 371,
+  "checked": 348,
   "violations": [
-   {
-    "inv": "INV-2c",
-    "model": "actra-aim",
-    "where": "counsumption_doublings_per_person_daly_row_396",
-    "detail": "exchange rate between outcomes: input \"counsumption doublings per person – [DALY] (row 396)\" = 1 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "actra-aim",
-    "where": "discount_rate_for_economic_impacts_1_5_for_health_4_for_icom",
-    "detail": "discount rate: input \"Discount rate for economic impacts [1.5% for health, 4% for icome/other]\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "actra-aim",
-    "where": "discount_rate_for_fixed_costs_keep_fixed_in_all_ceas",
-    "detail": "discount rate: input \"Discount rate, for fixed costs [keep fixed in all CEAs]\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "actra-aim",
-    "where": "gbp_to_usd_exchange_rate",
-    "detail": "exchange rate between currencies: input \"GBP to USD exchange rate\" = 1.2766 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "ansh-aim",
-    "where": "daly_per_neonate_death_averted_aim",
-    "detail": "value of a death: input \"DALY per neonate death averted (Ambitious Impact's figure)\" = 33.07 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
    {
     "inv": "INV-2c",
     "model": "better-season-project-aim",
@@ -85,18 +55,6 @@
    },
    {
     "inv": "INV-2c",
-    "model": "centre-for-effective-aid-policy-aim",
-    "where": "givedirectly_uov_per_dollar",
-    "detail": "cash benchmark: input \"Units of value per dollar given to GiveDirectly (GiveWell's benchmark)\" = 0.00335 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "clear-solutions-aim",
-    "where": "daly_per_under_5_year_old_death_averted_aim",
-    "detail": "value of a death: input \"DALY per Under 5 Year old death averted (Ambitious Impact's figure)\" = 36.528 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
     "model": "first-embrace-aim",
     "where": "counsumption_doublings_per_person_daly_row_243",
     "detail": "exchange rate between outcomes: input \"counsumption doublings per person – [DALY] (row 243)\" = 1 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
@@ -109,30 +67,6 @@
    },
    {
     "inv": "INV-2c",
-    "model": "first-embrace-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_30_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 0 (standard input) (Ambitious Impact's figure)\" = 33.07 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "foundations-first-aim",
-    "where": "counsumption_doublings_per_person_consumption_doubling_row_2",
-    "detail": "exchange rate between outcomes: input \"Timeline year (column C)\" = 1 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "healthy-futures-aim",
-    "where": "dalys_equivalent_to_one_neonatal_death_averted_aim",
-    "detail": "value of a death: input \"DALYs equivalent to one neonatal death averted (Ambitious Impact's figure)\" = 33.07 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "high-impact-professionals-aim",
-    "where": "cash_benchmark",
-    "detail": "cash benchmark: input \"GiveWell's benchmark (old GiveDirectly estimate), units of value per dollar\" = 0.00335 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
     "model": "labri-aim",
     "where": "counsumption_doublings_per_person_daly_equivelents_row_241",
     "detail": "exchange rate between outcomes: input \"counsumption doublings per person – DALY equivelents (row 241)\" = 1 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
@@ -142,12 +76,6 @@
     "model": "labri-aim",
     "where": "discount_rate_for_fixed_costs_keep_fixed_in_all_ceas",
     "detail": "discount rate: input \"Discount rate, for fixed costs [keep fixed in all CEAs]\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "labri-aim",
-    "where": "discount_rate_for_health_impacts",
-    "detail": "discount rate: input \"Discount rate for health impacts\" = 0.014 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
    },
    {
     "inv": "INV-2c",
@@ -187,81 +115,15 @@
    },
    {
     "inv": "INV-2c",
-    "model": "notify-health-aim",
-    "where": "dalys_weighted_row_10_aim",
-    "detail": "value of a death: input \"DALYs lost per death at age 70 (Ambitious Impact's figure; used for deaths at ages 50–74)\" = 7.09 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "notify-health-aim",
-    "where": "dalys_weighted_row_4_aim",
-    "detail": "value of a death: input \"DALYs lost per death at age 0 (Ambitious Impact's figure; used for deaths at ages under 1)\" = 33.07 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "notify-health-aim",
-    "where": "dalys_weighted_row_5_aim",
-    "detail": "value of a death: input \"DALYs lost per death at age 5 (Ambitious Impact's figure; used for deaths at ages 1–4)\" = 36.53 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "notify-health-aim",
-    "where": "dalys_weighted_row_6_aim",
-    "detail": "value of a death: input \"DALYs lost per death at age 15 (Ambitious Impact's figure; used for deaths at ages 5–14)\" = 36.9 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "notify-health-aim",
-    "where": "dalys_weighted_row_8_aim",
-    "detail": "value of a death: input \"DALYs lost per death at age 45 (Ambitious Impact's figure; used for deaths at ages 15–49)\" = 20.41 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
     "model": "opal-health-aim",
     "where": "discount_rate_for_costs_keep_fixed_in_all_ceas_never",
     "detail": "discount rate: input \"Discount rate, for costs [keep fixed in all CEAs] (never)\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
    },
    {
     "inv": "INV-2c",
-    "model": "opal-health-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_28_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 0 (standard input) (Ambitious Impact's figure)\" = 33.07 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "opal-health-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_29_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 5 (standard input) (Ambitious Impact's figure)\" = 36.53 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "opal-health-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_30_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 15 (standard input) (Ambitious Impact's figure)\" = 36.9 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "opal-health-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_31_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 30 (standard input) (Ambitious Impact's figure)\" = 29.77 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "opal-health-aim",
-    "where": "set_at_2_times_median_salary_data_dalys_weighted_row_32_aim",
-    "detail": "value of a death: input \"DALYs per death averted at age 45 (standard input) (Ambitious Impact's figure)\" = 20.41 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
     "model": "oxygen-access-project-aim",
     "where": "discount_rate_for_costs",
     "detail": "discount rate: input \"Discount rate for costs\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
-   },
-   {
-    "inv": "INV-2c",
-    "model": "rahi-impact-aim",
-    "where": "discount_rate_for_costs_keep_fixed_in_all_ceas",
-    "detail": "discount rate: input \"Discount rate, for costs [keep fixed in all CEAs]\" = 0.04 is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in `published`"
    },
    {
     "inv": "INV-2c",
@@ -273,24 +135,15 @@
   "how": "Every input row on the path to the output (variants: their overrides) whose id and label name one of 6 kinds of conversion (exchange rate between outcomes; value of a death; depression scale to health; cash benchmark; exchange rate between currencies; discount rate), and every read of a fact holding an evaluator's own conversion (@founders_pledge.wellbys_per_daly, @founders_pledge.wellbys_per_doubling, @founders_pledge.gd_cost_per_wellby), is moved ×1.25 in our view: the headline must not move. A literal that matters is the evaluator's own conversion: the row must read the shared fact or assumption, with the evaluator's figure in `published` (rows reading a shared value are formulas, so they aren't candidates). Heuristic on labels: a conversion under other words isn't seen, and a flagged row that isn't a conversion gets a waiver with its reason.",
   "waived": 39,
   "failing_models": [
-   "actra-aim",
-   "ansh-aim",
    "better-season-project-aim",
    "cearch-aim",
-   "centre-for-effective-aid-policy-aim",
-   "clear-solutions-aim",
    "first-embrace-aim",
-   "foundations-first-aim",
-   "healthy-futures-aim",
-   "high-impact-professionals-aim",
    "labri-aim",
    "lead-research-for-action-aim",
    "learning-alliance-aim",
    "neev-aim",
-   "notify-health-aim",
    "opal-health-aim",
    "oxygen-access-project-aim",
-   "rahi-impact-aim",
    "respira-health-aim"
   ]
  },
@@ -298,7 +151,7 @@
   "id": "INV-3",
   "title": "Every animal model passes through the species step, once per species, from the shared table",
   "status": "checked",
-  "checked": 23,
+  "checked": 17,
   "violations": [],
   "how": "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024), v the SAD version, 2024 or 2025, whose weight is built into the figure; a second version for the same species goes in ced_<s>_<v> on sads_<s>_<v>; raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
   "waived": 0,
@@ -308,48 +161,34 @@
   "id": "INV-4",
   "title": "No literal stands in for a shared fact or assumption",
   "status": "partial",
-  "checked": 371,
+  "checked": 348,
   "violations": [
    {
     "inv": "INV-4",
     "model": "cearch-aim",
     "where": "cash_benchmark = @cash.uov_per_dollar",
     "detail": "input \"GiveWell's benchmark (old GiveDirectly estimate), units of value per dollar\" = 0.00335 is a literal copy of @cash.uov_per_dollar (0.00335, \"Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "centre-for-effective-aid-policy-aim",
-    "where": "givedirectly_uov_per_dollar = @cash.uov_per_dollar",
-    "detail": "input \"Units of value per dollar given to GiveDirectly (GiveWell's benchmark)\" = 0.00335 is a literal copy of @cash.uov_per_dollar (0.00335, \"Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "high-impact-professionals-aim",
-    "where": "cash_benchmark = @cash.uov_per_dollar",
-    "detail": "input \"GiveWell's benchmark (old GiveDirectly estimate), units of value per dollar\" = 0.00335 is a literal copy of @cash.uov_per_dollar (0.00335, \"Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar)\")"
    }
   ],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 19853,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 5008,
-   "round value (one significant digit) and labels only loosely alike": 58,
-   "input within 0.1% of a shared value (not equal) and labels only loosely alike": 10,
+   "input equals a shared value but its label doesn't resemble the shared one's": 18209,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 4692,
+   "round value (one significant digit) and labels only loosely alike": 57,
+   "input within 0.1% of a shared value (not equal) and labels only loosely alike": 9,
    "shared label too generic (under three significant words) for a loose match": 14,
    "input equals a country fact but is about another place": 24
   },
   "how": "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.1%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label; near-equal (not equal) values, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
-  "waived": 37,
+  "waived": 42,
   "failing_models": [
-   "cearch-aim",
-   "centre-for-effective-aid-policy-aim",
-   "high-impact-professionals-aim"
+   "cearch-aim"
   ]
  },
  {
   "id": "INV-5",
   "title": "The evaluator view uses the evaluator's own rates",
   "status": "checked",
-  "checked": 371,
+  "checked": 348,
   "violations": [],
   "how": "Every evaluator model with an output (variants too, with their own inputs) must declare output.native; its evaluator layer is the native row, every row feeding it and every other row outside sections of kind \"ours\". Each non-toggle assumption a row in that layer reads is moved to ×0.5 and ×1.5 in our view (0 → 0.5 and 1): no row of the layer may move in the evaluator view, so every `expected` still reproduces and the bottom line stays the evaluator's. A pin in evaluator.assumptions passes by construction; an unpinned assumption passes only if no evaluator row's value depends on it. Each toggle the layer reads (GiveWell's leverage and funging switches on $resource_shares) must be pinned, so the evaluator view sees the evaluator's position.",
   "waived": 0,
@@ -359,7 +198,7 @@
   "id": "INV-6",
   "title": "The evaluator's bottom line reproduces",
   "status": "checked",
-  "checked": 273,
+  "checked": 250,
   "violations": [],
   "how": "Every evaluator model with an output (not variants: they inherit output.native and don't inherit `expected`) declares output.native, and that row or one of its direct inputs carries `expected`; scripts/check.ts checks those values reproduce in the evaluator view.",
   "waived": 13,
@@ -369,7 +208,7 @@
   "id": "INV-7",
   "title": "Our rows are visibly ours",
   "status": "checked",
-  "checked": 273,
+  "checked": 250,
   "violations": [],
   "how": "Every evaluator model with an output (not variants: rows and sections are the parent's) declares output.native, and the output uses it. The output uses the native row (or, for a result split by species, every direct input of it). Every row that feeds the output and is computed, directly or not, from the native row or one of its direct inputs (without feeding the native row itself) is in a section of kind \"ours\" and has no `expected`; no row in the layer is in one of ours (rows switched by a toggle inside the evaluator's layer stay the evaluator's: INV-5 checks the toggle is pinned). Not checked: inputs of our steps that aren't computed from the bottom line (GiveWell's value of cash, staff-pay judgments; ours by section), and evaluator rows beside the bottom line that a bridge reads (ACE 2016's hen-years; INV-5 still holds them to the evaluator's rates).",
   "waived": 0,
@@ -379,7 +218,7 @@
   "id": "INV-8",
   "title": "One view, one set of numbers",
   "status": "checked",
-  "checked": 371,
+  "checked": 348,
   "violations": [],
   "how": "headline(m, av, {}, \"evaluator\") against compute(evaluator view)[output] × the unit's conversion evaluated with viewAssumptions(m, av, \"evaluator\"). Fails wherever a pin changes a rate in the conversion ($uov_per_daly for uov models).",
   "waived": 0,
@@ -389,17 +228,17 @@
   "id": "INV-9",
   "title": "Shared levers reach every model they apply to",
   "status": "partial",
-  "checked": 273,
+  "checked": 250,
   "violations": [],
   "how": "Models don't declare mortality/multi_year yet, so keywords in the labels of rows on the path to the output stand in: deaths/mortality/lives saved (not seedlings, trees, crops) → some row on the path must read $life_value_multiplier; discount rate/factor, present value, years or duration of benefit/effect, decay (not iron absorption discount factors) → some row on the path must read $discount_rate. Variants are checked through their parent. Heuristic by nature (keywords, not declarations); it can't see deaths valued under another name (DALYs or years of life lost, \"lives\" without \"saved\"), benefits spread over years without the keywords, or a lever read on one branch of the path while another branch values deaths or years with literals; and it flags sheets where the words are context only (normalization-waivers.json).",
-  "waived": 26,
+  "waived": 25,
   "failing_models": []
  },
  {
   "id": "INV-10",
   "title": "Each slider moves exactly the models it should",
   "status": "checked",
-  "checked": 371,
+  "checked": 348,
   "violations": [],
   "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
   "waived": 0,
@@ -412,6 +251,16 @@
   "checked": 9,
   "violations": [],
   "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-11",
+  "title": "No evaluator-internal exchange rate where a shared one exists",
+  "status": "partial",
+  "checked": 17,
+  "violations": [],
+  "how": "Ambitious Impact's models (the rule is general; other evaluators' models are being brought under it separately): every row on the path to the output whose label states an income-to-health exchange rate (years of doubled consumption to DALYs); a value of a death averted, in DALYs or years of life; a pound or euro exchange rate must read the shared version ($uov_per_ln_consumption (and $uov_per_daly); @moral_weights.* * $life_value_multiplier; @fx.*). Labels stand in for meaning, so a rate under another name isn't seen; stillbirths, which have no shared value, are left out.",
   "waived": 0,
   "failing_models": []
  }
