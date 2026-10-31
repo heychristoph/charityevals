@@ -154,6 +154,66 @@ export function inv2b(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-2c: one consistent way (owner, 2026-10-31) -------------------------------------------------
+
+/** Kinds of conversion an evaluator may make inside its own model that charityevals makes one shared
+ * way: each is matched on an input row's id and label. */
+const UNIT = String.raw`(wellbys?|dalys?|qalys?|units? of value|uov|ln ?\(?(?:income|consumption)\)?|doubl\w+|(?:child[- ])?life[- ]equivalents?|healthy years?)`;
+export const CONVERSION_KINDS: [string, RegExp][] = [
+  // An exchange rate between two outcomes: WELLBYs per DALY, ln(income) equivalent to a DALY.
+  ["exchange rate between outcomes", new RegExp(String.raw`\b${UNIT}\b[^.;]{0,30}\b(per|equivalent to|in)\b[^.;$]{0,20}?\b${UNIT}\b|\b(daly|wellby|qaly)[- ]equivalents? per (death|daly|doubl)`, "i")],
+  // A value put on a death or a life saved.
+  ["value of a death", /\b(value|worth|wellbys?|dalys?|qalys?|units? of value|uov)\b[^.;]{0,40}\b(per|of|averting|for|equivalent to)\b[^.;]{0,25}\b(deaths?|lives? saved|saving an? (child|person|life))\b/i],
+  // Depression measured on a scale, counted as a health loss.
+  ["depression scale to health", /\bphq\b[^.;]{0,40}\b(daly|weight|rather|healthy)\b|\b(daly|disability) weight(ing)? per\b|depression[^.;]{0,30}counts as|rather experience nothing/i],
+  // A cash benchmark: what a dollar given as cash is worth, the denominator of "multiples of cash".
+  ["cash benchmark", /\b(units? of value|uov|value generated)\b[^.;]{0,50}\b(givedirectly|give ?directly'?s?|cash transfers?)\b(?![^.;]*relative to)|\b(givedirectly|give directly)\b[^.;]{0,20}\b(units? of value|uov)\b|\bbenchmark\b[^.;]{0,30}\b(units? of value|uov|per dollar)\b|\b(units? of value|uov)\b[^.;]{0,30}\bbenchmark\b|\bcash benchmark\b|\bcost per[^.;]{0,30}life equivalent[^.;]{0,20}givedirectly/i],
+  // A currency rate between pounds or euros and dollars (local currencies in GiveWell sheets stay theirs).
+  ["exchange rate between currencies", /\b(gbp|eur|usd)[ _:]?(to|per|\/|:)[ _]?(usd|gbp|eur)\b|\b(dollars?|usd|\$) per (pound|euro|£|€)|\b(pounds?|euros?|£|€) per (dollar|usd|\$)|\bexchange rate\b[^.;]{0,30}\b(pound|euro|gbp|eur|sterling)/i],
+  // A time-preference discount rate typed in rather than read from $discount_rate.
+  ["discount rate", /^(?![^]*\b(fad\w*|decay\w*|persist\w*|uncertain\w*|forecast\w*|funders?|replic\w*|table|get worse|opportunit\w*)\b)[^]*\b(time )?discount rate\b/i],
+];
+/** Facts holding an evaluator's own conversion (not a shared one): our view may read one only where
+ * it cancels, or where it undoes the evaluator's own conversion to recover what it measured. */
+export const EVALUATOR_CONVERSION_FACTS = ["founders_pledge.wellbys_per_daly", "founders_pledge.wellbys_per_doubling", "founders_pledge.gd_cost_per_wellby"];
+
+/** INV-2c: in our view, no evaluator's own conversion between outcomes, value of a death, depression
+ * weight, cash benchmark, currency rate or time discount moves the headline: each reads the shared
+ * version, the evaluator's figure kept in `published`. Found by perturbation: the input (or fact) is
+ * moved ×1.25 in our view and the headline must not move, so a rate the model applies and undoes,
+ * or one on a side calculation, passes. */
+export function inv2c(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const violations: Violation[] = [];
+  const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
+  const moves = (m: ResolvedModel, h0: number, inputs: Record<string, number>) => {
+    const h = headline(lib, m, av, inputs);
+    return !(close(h, h0, 1e-9) || (Number.isNaN(h) && Number.isNaN(h0)));
+  };
+  for (const m of models) {
+    const h0 = headline(lib, m, av);
+    if (!Number.isFinite(h0) || h0 === 0) continue;
+    const path = rowsFeeding(m);
+    const vals = compute(lib, m, av);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id) || r.formula !== undefined) continue;
+      const kind = CONVERSION_KINDS.find(([k, re]) => re.test(r.label) || (k !== "discount rate" && re.test(r.id.replace(/_/g, " "))));
+      if (!kind || !Number.isFinite(vals[r.id]) || vals[r.id] === 0) continue;
+      if (moves(m, h0, { [r.id]: vals[r.id] * 1.25 }))
+        violations.push({ inv: "INV-2c", model: m.id, where: r.id, detail: `${kind[0]}: input "${r.label}" = ${fmt(vals[r.id])} is the evaluator's own and moves our headline; read the shared fact or assumption, keep the evaluator's number in \`published\`` });
+    }
+    const facts = new Set(m.rows.filter((r) => path.has(r.id)).flatMap((r) => r.factDeps).filter((f) => EVALUATOR_CONVERSION_FACTS.includes(f)));
+    for (const f of facts) {
+      const v = pickValue(lib.facts.get(f)?.value);
+      if (moves(m, h0, { [`@${f}`]: v * 1.25 }))
+        violations.push({ inv: "INV-2c", model: m.id, where: `@${f}`, detail: `our headline moves with the evaluator's own conversion @${f} (${fmt(v)}): use the shared rate, or apply it only to undo the evaluator's own conversion of a figure it published` });
+    }
+  }
+  return {
+    id: "INV-2c", title: "No evaluator's own conversion in our view", status: "partial", checked: models.length, violations,
+    how: `Every input row on the path to the output (variants: their overrides) whose id and label name one of ${CONVERSION_KINDS.length} kinds of conversion (${CONVERSION_KINDS.map(([k]) => k).join("; ")}), and every read of a fact holding an evaluator's own conversion (${EVALUATOR_CONVERSION_FACTS.map((f) => "@" + f).join(", ")}), is moved ×1.25 in our view: the headline must not move. A literal that matters is the evaluator's own conversion: the row must read the shared fact or assumption, with the evaluator's figure in \`published\` (rows reading a shared value are formulas, so they aren't candidates). Heuristic on labels: a conversion under other words isn't seen, and a flagged row that isn't a conversion gets a waiver with its reason.`,
+  };
+}
+
 // --- INV-3: species ---------------------------------------------------------------------------
 
 const SPECIES: [string, RegExp][] = [
@@ -588,7 +648,7 @@ export function inv7(lib: Library): InvariantReport {
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

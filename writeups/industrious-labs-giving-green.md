@@ -22,7 +22,7 @@ The model turns these into tonnes for each step: about two thirds of the best gu
 
 Giving Green's figures come first, ending at its cost per tonne. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Air pollution:** most of primary aluminium's emissions come from the electricity smelters use (about 62%). The first two steps cut emissions at North American smelters, where coal and gas plants cause little smoke per tonne (about 0.06 of the world fossil-fuel average); the third, two thirds of the tonnes, is mostly Chinese coal power: China's power-plant coal caused about 86,500 deaths in 2013 (GBD MAPS 2016) over 3,981 TWh of coal-fired generation (China Electricity Council), about 0.18 of the average per tonne (0.1 to 0.35). Weighted by tonnes, the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is about 0.08.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -39,6 +39,7 @@ The site turns these tonnes into years of healthy life through the deaths they a
 - **Tonnes become healthy years** through the shared climate rate; Giving Green stops at dollars per tonne.
 - **Air pollution:** the share of these tonnes that is coal power not burned also counts for its smoke.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.
+- **The wait for the tonnes is discounted.** Giving Green counts a tonne the same whenever it is avoided; low-carbon aluminium purchases ramp up toward 2030 and most of the tonnes come from the wider industry later still, about 8 years after the campaign (4 to 15, our judgment). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Giving Green takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution.
 
 ### Biggest uncertainties

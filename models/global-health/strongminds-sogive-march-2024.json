@@ -5,7 +5,7 @@
  "cause": "global-health",
  "charity": "strongminds",
  "owner": "sogive",
- "summary": "Group interpersonal therapy for depression in Uganda and Zambia, delivered by StrongMinds' staff, volunteers and partner organisations. A re-implementation of SoGive's cost-effectiveness analysis, which counts depression averted in SoGive's DALYs: lowering depression by about 23 PHQ-9 points for a year counts as one year of healthy life. This is the version SoGive published in March 2024 (StrongMinds 6 of 9), at StrongMinds' 2023 cost per person.",
+ "summary": "Group interpersonal therapy for depression in Uganda and Zambia, delivered by StrongMinds' staff, volunteers and partner organisations. A re-implementation of SoGive's cost-effectiveness analysis, which counts depression averted in SoGive's DALYs: lowering depression by about 23 PHQ-9 points for a year counts as one year of healthy life (our view uses the site's shared conversion, about 32 points). This is the version SoGive published in March 2024 (StrongMinds 6 of 9), at StrongMinds' 2023 cost per person.",
  "source": {
   "publisher": "SoGive",
   "title": "StrongMinds (6 of 9): Organisation-specific factors, and SoGive's cost-effectiveness analysis",
@@ -283,16 +283,16 @@
   {
    "id": "phq9_rather_nothing",
    "section": "moral_weight",
-   "label": "Depression score at which most people would rather experience nothing",
+   "label": "PHQ-9 points less for a year that count as one year of healthy life",
    "format": "number",
-   "value": 23,
-   "kind": "estimate",
+   "formula": "1 / @depression.dalys_per_phq9_point_year",
+   "published": 23,
    "source": {
     "title": "SoGive cost-effectiveness analysis, StrongMinds (in progress)",
     "url": "https://docs.google.com/spreadsheets/d/1sNB40ot0sfa4v3OdF0Pv9F99hSKImbrjyTVfnISJeFU/edit",
     "cell": "'simplified cea'!B26"
    },
-   "explainer": "SoGive's moral weight for depression (StrongMinds 5 of 9): from time-trade-off and rating-scale data, a PHQ-9 score of about 23 is as bad as not existing, so lowering depression by 23 points for a year counts as one year of healthy life (SoGive's \"DALY of depression\").",
+   "explainer": "Changed for consistency: SoGive counts a fall of 23 PHQ-9 points for a year as one year of healthy life (its \"DALY of depression\", StrongMinds 5 of 9: from time-trade-off and rating-scale data, a score of about 23 is as bad as not existing). The site turns depression into healthy years one way for every model: the Global Burden of Disease weights for mild, moderate and severe depression placed on the PHQ-9 bands, 0.031 healthy years per point for a year, so one healthy year is about 32 points. SoGive's 23 is the top of that fact's range. The evaluator view keeps SoGive's 23.",
    "unit": "PHQ-9 points"
   },
   {
@@ -303,7 +303,7 @@
    "formula": "phq9_rather_nothing / phq9_sd",
    "expected": 5.460964544,
    "unit": "SD-years",
-   "explainer": "23 PHQ-9 points in standard deviations: about 5.5 SD-years of depression averted are worth one DALY on SoGive's scale."
+   "explainer": "The points above in standard deviations of SoGive's sample: SoGive's 23 points are about 5.5 SD-years per DALY; the site's shared conversion (about 32 points) gives about 7.7."
   },
   {
    "id": "dalys_per_person_treated",

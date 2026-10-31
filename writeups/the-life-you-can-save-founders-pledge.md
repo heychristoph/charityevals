@@ -18,7 +18,7 @@ Founders Pledge's figure comes first: 17 dollars raised per dollar received (201
 
 - **The ratio now:** The Life You Can Save's own three-year ratio has fallen to about 10 (2024 and 2025 reports), so we use 59% of Founders Pledge's 17, with 17 as the high end;
 - **Money that wouldn't otherwise have been given as well:** 40% (20% to 70%), our judgment;
-- **What a dollar to the recommended charities does:** 5 times cash transfers (2 to 10), our judgment, with cash valued as Founders Pledge values GiveDirectly.
+- **What a dollar to the recommended charities does:** 5 times cash transfers (2 to 10), our judgment, with cash valued at the site's shared benchmark for cash transfers.
 
 ### What drives the result
 
@@ -29,6 +29,7 @@ Founders Pledge's figure comes first: 17 dollars raised per dollar received (201
 ### Where we differ from Founders Pledge
 
 - **Everything after the multiplier** is ours: Founders Pledge gives no figure in outcomes.
+- **The value of cash (changed for consistency):** the bridge values the money raised as a multiple of cash transfers. Read against Founders Pledge's 2022 GiveDirectly benchmark, a dollar of cash is worth 0.0032 units of value; the site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335, about 4% more. The evaluator view keeps 0.0032.
 - **Credit by share of resources:** when on, donors' own gifts and staff's forgone pay share the outcome, which lowers the result a lot. Off by default.
 
 ### Biggest uncertainties

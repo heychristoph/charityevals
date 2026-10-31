@@ -48,9 +48,7 @@
   "evaluator": {
     "name": "SoGive",
     "assumptions": {
-      "resource_shares": 0,
-      "discount_rate": 0,
-      "life_value_multiplier": 1
+      "resource_shares": 0
     }
   },
   "sections": [
@@ -349,47 +347,17 @@
       "formula": "(trees_planted * tonnes_per_tree * tree_survival_share + (restore_hectares * restore_additional_share + protect_hectares * protect_counterfactual_share) * tonnes_per_hectare_per_year * forest_lifespan_years) * permanence_share"
     },
     {
-      "id": "heat_deaths_still_to_come",
+      "id": "years_until_avoided",
       "section": "per_dollar",
-      "label": "Share of a tonne's heat deaths still to come when the carbon is taken up",
+      "label": "Years from the grant until the tonnes are avoided",
       "format": "number",
       "value": {
-        "low": 0.5,
-        "best": 0.75,
-        "high": 0.9
+        "low": 30,
+        "best": 40,
+        "high": 55
       },
       "kind": "judgment",
-      "explainer": "Our judgment. The site values a tonne as if kept out of the air today. Trees take up their carbon over a century, on average about 50 years after planting (at SoGive's rates); a tonne taken up then avoids only the heat deaths still to come, which are concentrated late this century and beyond."
-    },
-    {
-      "id": "discount_rate_per_year",
-      "section": "per_dollar",
-      "label": "Discount rate",
-      "format": "percent",
-      "formula": "$discount_rate",
-      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
-    },
-    {
-      "id": "extra_delay_years",
-      "section": "per_dollar",
-      "label": "Years by which the deaths these tonnes avoid come later than an average tonne's",
-      "format": "number",
-      "unit": "years",
-      "value": {
-        "low": 15,
-        "best": 25,
-        "high": 40
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment. The site's conversion already discounts a tonne's heat deaths over 60 years; the deaths a tonne taken up decades from now still avoids are the later ones, so they come later than that average and are discounted for the extra years here."
-    },
-    {
-      "id": "heat_deaths_remaining_share",
-      "section": "per_dollar",
-      "label": "Value of a tonne taken up later, relative to one averted now",
-      "format": "number",
-      "formula": "heat_deaths_still_to_come * (1 + discount_rate_per_year) ^ -extra_delay_years",
-      "explainer": "The share of deaths still to come, discounted for the extra delay: about 0.28 at 4%, 0.75 at 0%. The discount rate also enters through the site's conversion, so the two move together."
+      "explainer": "Trees take up their carbon over a century: at SoGive's rates (5.9 kg of CO₂ a year for a tree's first 10 years, 22 kg a year for the next 90) the average tonne is taken up about 54 years after planting, and a restored hectare's even uptake over 100 years averages 50. Discounting the stream year by year at 4% gives the same value as a single wait of about 40 years for planted trees (36 for restored woodland), the best guess here. Low 30: faster early growth than SoGive assumes; high 55: the undiscounted average. SoGive counts a tonne the same whenever it is taken up; the site discounts every future benefit at the discount rate under Your values, in both views. A tonne taken up then is counted like a tonne kept out of the air then: the site's climate conversion discounts its heat deaths again from that year, so no separate share of deaths \"still to come\" is applied. Our judgment from SoGive's rates."
     },
     {
       "id": "cost_per_tonne_kept_gbp",
@@ -413,8 +381,8 @@
       "label": "Tonnes of CO₂e averted per dollar (equivalent)",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "heat_deaths_remaining_share / (cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp)",
-      "explainer": "One over our cost per tonne in dollars (SoGive's figure times the ratio above), counted as the share of an averted tonne that the timing of the uptake makes it worth."
+      "formula": "(1 + $discount_rate) ^ -years_until_avoided / (cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp)",
+      "explainer": "One over our cost per tonne in dollars (SoGive's figure times the ratio above), discounted for the wait until the trees take up the carbon, like every future benefit on the site."
     },
     {
       "id": "air_pollution_weight",

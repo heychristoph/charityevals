@@ -24,7 +24,7 @@ Founders Pledge also estimates an effect through national forest plans but leave
 
 Founders Pledge's rows come first, ending at its bottom line in dollars per tonne. Our steps follow:
 
-- **Tonnes per dollar:** one over the cost per tonne.
+- **Tonnes per dollar:** one over the cost per tonne, discounted for the years until the tonnes are avoided.
 - **Forest tonnes without fuel smoke:** the shared climate rate, "Deaths caused by one more tonne of CO₂", counts deaths from heat and from the fine particles that come with burning fossil fuels. A forest left standing saves no fossil fuel, but tropical forest is mostly cleared by fire: Reddington et al. (2015) find Brazil's fall in deforestation prevents 400–1,700 deaths a year from smoke; at IPCC's default carbon in South American rain forest (about 710 tonnes of CO₂ a hectare) that is about 0.003–0.011 of the world-average fossil-fuel smoke per tonne of CO₂. The model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.005 (0–0.03); Founders Pledge leaves this smoke out.
 - **Staff pay:** with credit by share of resources on, staff's forgone pay counts as part of the cost.
 
@@ -41,6 +41,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 - **Tonnes become healthy years** through the shared climate rate. Founders Pledge stops at dollars per tonne.
 - **Forest tonnes count their heat deaths and a little clearing-fire smoke** (0.005 of an average fossil-fuel tonne's, Reddington et al. 2015 with IPCC's forest carbon), which Founders Pledge leaves out: about 1.2 times what heat alone gives (0.62 before October 2026).
 - **Future deaths are discounted.** Rethink Priorities counts the heat deaths to 2300 without discounting; like every model on the site, ours discounts future good at the shared rate. At 0% the result would be about 6.5; the discount rate and the delay are the biggest levers on this result.
+- **The wait for the tonnes is discounted.** Founders Pledge counts a tonne the same whenever it is avoided; REDD+ pays for forest kept after the fact and was slow to pay out, so the forest is kept about 7 years after the average dollar of 2004–17 spending (3 to 12, our judgment from Founders Pledge's dates). Like every future benefit on the site, the tonnes are discounted for that wait at the shared rate, in both of the site's views, since Founders Pledge takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay (our judgment for policy work) counts as an in-kind contribution.
 
 ### Biggest uncertainties

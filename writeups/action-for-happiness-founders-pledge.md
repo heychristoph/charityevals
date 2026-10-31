@@ -29,13 +29,15 @@ The plausible range spans about 200 times, from Founders Pledge's conservative t
 
 ### Where we differ from Founders Pledge
 
+- **Depression as lost health (changed for consistency):** Founders Pledge counts each point of depression score (PHQ-9) as 1/23.25 of the weight of severe depression: 0.028 healthy years per point for a year. The site counts a fall in PHQ-9 score the same way in every model, 0.031 per point, the Global Burden of Disease weights for mild, moderate and severe depression placed on the questionnaire's severity bands. That raises the result by about a tenth; Founders Pledge's view keeps 0.028.
+- **Exchange rate (changed for consistency):** Founders Pledge converts the £1 million budget at the rate of 1 December 2019, $1.2911 per pound. The site converts pounds at the IRS yearly average for the year the money is spent, here 2020 ($1.2837): under 1% less money, so a slightly higher result.
 - **Discounting:** Founders Pledge discounts future participants for uncertainty and for other funders, not for time, and counts later years of benefit in full. In our view, both count less at the discount rate under Your values; Founders Pledge's view sets it to 0.
 - **Staff pay:** with credit by share of resources on, staff's pay below what they could earn elsewhere counts as part of the cost (our guess: half the cost is staff, paid 15% below market). Off by default. Founders Pledge's discount for the chance another funder would have paid the scale-up is a funging step, so it is dropped when that switch is on. The ongoing cost of running the extra courses, and volunteers' unpaid time, would then belong in the cost too; neither is counted, so the result with the switch on is too high.
 
 ### Biggest uncertainties
 
 - The study measured effects shortly after the course; how long they last is a guess.
-- Participants volunteer for a wellbeing course, so they may differ from the people a depression treatment reaches; the sheet measures depression in DALY-equivalents of severe depression, spread evenly over the score.
+- Participants volunteer for a wellbeing course, so they may differ from the people a depression treatment reaches; the sheet measures depression in DALY-equivalents of severe depression, spread evenly over the score (our view uses the site's shared conversion of PHQ-9 points, which ranges from 0.024 to 0.044 healthy years per point for a year).
 - Founders Pledge's own "comparable to StrongMinds" column ($373 per DALY-equivalent: severity spread over the whole 27-point scale, slower fading and the optimistic effect) shows how much the method choices matter: they explain most of the gap to [its StrongMinds analysis](/strongminds/strongminds-founders-pledge).
 - The growth projections were the charity's own, made in 2019, before the pandemic moved courses online.
 

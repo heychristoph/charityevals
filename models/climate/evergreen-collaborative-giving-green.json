@@ -71,7 +71,7 @@
       "id": "per_dollar",
       "title": "From cost per tonne to tonnes per dollar",
       "kind": "ours",
-      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The cuts come mostly from US power plants burning less coal and gas, which emit a small fraction of the world-average smoke per tonne (docs/normalization.md 2.5)."
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The cuts come mostly from US power plants burning less coal and gas, which emit a small fraction of the world-average smoke per tonne (docs/normalization.md 2.5). The tonnes come years after the money is spent, so they are discounted for that wait at the site's discount rate."
     },
     {
       "id": "staff_pay",
@@ -272,13 +272,26 @@
       "expected": 2.051011382
     },
     {
+      "id": "years_until_avoided",
+      "section": "per_dollar",
+      "label": "Years from the grant until the tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 7
+      },
+      "kind": "judgment",
+      "explainer": "Giving Green counts ten years of Evergreen's spending from 2023 against the Inflation Reduction Act's cuts through 2032, which grow over the decade as the money is spent on clean power and industry: on average the tonnes come a few years after the dollar that helped steer them. Our judgment from Giving Green's dates. Giving Green counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
+    },
+    {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e averted per dollar",
       "format": "number",
       "unit": "t CO₂e per $",
-      "formula": "1 / cost_per_tonne",
-      "explainer": "One over Giving Green's cost per tonne. How much air pollution these tonnes cut is the rows below."
+      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below."
     },
     {
       "id": "fuel_share",
