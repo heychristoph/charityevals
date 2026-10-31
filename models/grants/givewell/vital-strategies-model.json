@@ -58,6 +58,28 @@
   ],
   "rows": [
     {
+      "id": "policy_years_until_effect",
+      "label": "Years from the grant until the policy takes effect",
+      "section": "calculations",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."
+    },
+    {
+      "id": "policy_wait_discount",
+      "label": "Discount for the wait until the policy takes effect",
+      "section": "calculations",
+      "formula": "(1 + $discount_rate) ^ -policy_years_until_effect",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
+    },
+    {
       "id": "value_of_preventing_one_death_from_alcohol",
       "label": "Value of preventing one death from alcohol",
       "section": "calculations",
@@ -87,14 +109,14 @@
       "id": "number_of_years_brought_forward_vietnam",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "years_discount_rate",
@@ -195,7 +217,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam) * reduction_in_annual_alcohol_deaths_vietnam * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam) * reduction_in_annual_alcohol_deaths_vietnam * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 4214.254011
     },
     {
@@ -215,14 +237,14 @@
       "id": "number_of_years_brought_forward_vietnam_2",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_vietnam_2",
@@ -241,7 +263,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_2",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_2) * reduction_in_annual_alcohol_deaths_vietnam_2 * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_2) * reduction_in_annual_alcohol_deaths_vietnam_2 * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 621.7264152
     },
     {
@@ -261,14 +283,14 @@
       "id": "number_of_years_brought_forward_vietnam_3",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte",
@@ -287,7 +309,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_3",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 237.981403
     },
     {
@@ -307,14 +329,14 @@
       "id": "number_of_years_brought_forward_vietnam_4",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou",
@@ -333,7 +355,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_4",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 1209.03052
     },
     {
@@ -373,14 +395,14 @@
       "id": "number_of_years_brought_forward_nigeria",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_nigeria",
@@ -472,7 +494,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria) * reduction_in_annual_alcohol_deaths_nigeria * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria) * reduction_in_annual_alcohol_deaths_nigeria * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 3776.425833
     },
     {
@@ -492,14 +514,14 @@
       "id": "number_of_years_brought_forward_nigeria_2",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_nigeria_2",
@@ -518,7 +540,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_2",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_2) * reduction_in_annual_alcohol_deaths_nigeria_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_2) * reduction_in_annual_alcohol_deaths_nigeria_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 557.1338817
     },
     {
@@ -538,14 +560,14 @@
       "id": "number_of_years_brought_forward_nigeria_3",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2",
@@ -564,7 +586,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_3",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_7 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_7 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 213.2569882
     },
     {
@@ -584,14 +606,14 @@
       "id": "number_of_years_brought_forward_nigeria_4",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2",
@@ -610,7 +632,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_4",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_8 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_8 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 1083.421663
     },
     {
@@ -650,14 +672,14 @@
       "id": "number_of_years_brought_forward_mexico",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_mexico",
@@ -749,7 +771,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_9 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico) * reduction_in_annual_alcohol_deaths_mexico * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_9 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico) * reduction_in_annual_alcohol_deaths_mexico * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 3392.974986
     },
     {
@@ -769,14 +791,14 @@
       "id": "number_of_years_brought_forward_mexico_2",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_mexico_2",
@@ -795,7 +817,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_2",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_10 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_2) * reduction_in_annual_alcohol_deaths_mexico_2 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_10 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_2) * reduction_in_annual_alcohol_deaths_mexico_2 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 500.5636038
     },
     {
@@ -815,14 +837,14 @@
       "id": "number_of_years_brought_forward_mexico_3",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3",
@@ -841,7 +863,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_3",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_11 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_11 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 191.6032933
     },
     {
@@ -861,14 +883,14 @@
       "id": "number_of_years_brought_forward_mexico_4",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3",
@@ -887,7 +909,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_4",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_12 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_12 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 973.4131598
     },
     {
@@ -927,14 +949,14 @@
       "id": "number_of_years_brought_forward_philippines",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_philippines",
@@ -1026,7 +1048,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_13 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines) * reduction_in_annual_alcohol_deaths_philippines * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_13 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines) * reduction_in_annual_alcohol_deaths_philippines * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 3132.609659
     },
     {
@@ -1046,14 +1068,14 @@
       "id": "number_of_years_brought_forward_philippines_2",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_philippines_2",
@@ -1072,7 +1094,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_2",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_14 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_2) * reduction_in_annual_alcohol_deaths_philippines_2 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_14 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_2) * reduction_in_annual_alcohol_deaths_philippines_2 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 462.1520602
     },
     {
@@ -1092,14 +1114,14 @@
       "id": "number_of_years_brought_forward_philippines_3",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4",
@@ -1118,7 +1140,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_3",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_15 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_15 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 176.9003101
     },
     {
@@ -1138,14 +1160,14 @@
       "id": "number_of_years_brought_forward_philippines_4",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4",
@@ -1164,7 +1186,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_4",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_16 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_16 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 898.7167541
     },
     {
@@ -1204,14 +1226,14 @@
       "id": "number_of_years_brought_forward_thailand",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_thailand",
@@ -1303,7 +1325,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_17 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand) * reduction_in_annual_alcohol_deaths_thailand * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_17 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand) * reduction_in_annual_alcohol_deaths_thailand * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 3078.624981
     },
     {
@@ -1323,14 +1345,14 @@
       "id": "number_of_years_brought_forward_thailand_2",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_thailand_2",
@@ -1349,7 +1371,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_2",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_18 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_2) * reduction_in_annual_alcohol_deaths_thailand_2 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_18 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_2) * reduction_in_annual_alcohol_deaths_thailand_2 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 454.1877325
     },
     {
@@ -1369,14 +1391,14 @@
       "id": "number_of_years_brought_forward_thailand_3",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5",
@@ -1395,7 +1417,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_3",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_19 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_19 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 173.8517636
     },
     {
@@ -1415,14 +1437,14 @@
       "id": "number_of_years_brought_forward_thailand_4",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5",
@@ -1441,7 +1463,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_4",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_20 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_20 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 883.2290491
     },
     {
@@ -1481,14 +1503,14 @@
       "id": "number_of_years_brought_forward_ethiopia",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ethiopia",
@@ -1565,7 +1587,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_21 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia) * reduction_in_annual_alcohol_deaths_ethiopia * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_21 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia) * reduction_in_annual_alcohol_deaths_ethiopia * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 1884.365256
     },
     {
@@ -1585,14 +1607,14 @@
       "id": "number_of_years_brought_forward_ethiopia_2",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ethiopia_2",
@@ -1611,7 +1633,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_2",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_22 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_2) * reduction_in_annual_alcohol_deaths_ethiopia_2 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_22 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_2) * reduction_in_annual_alcohol_deaths_ethiopia_2 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 277.9992978
     },
     {
@@ -1631,14 +1653,14 @@
       "id": "number_of_years_brought_forward_ethiopia_3",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6",
@@ -1657,7 +1679,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_3",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_23 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_23 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 106.4112145
     },
     {
@@ -1677,14 +1699,14 @@
       "id": "number_of_years_brought_forward_ethiopia_4",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6",
@@ -1703,7 +1725,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_4",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_24 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_24 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 540.6069734
     },
     {
@@ -1743,14 +1765,14 @@
       "id": "number_of_years_brought_forward_south_africa",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_south_africa",
@@ -1842,7 +1864,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_25 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa) * reduction_in_annual_alcohol_deaths_south_africa * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_25 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa) * reduction_in_annual_alcohol_deaths_south_africa * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 1850.62891
     },
     {
@@ -1862,14 +1884,14 @@
       "id": "number_of_years_brought_forward_south_africa_2",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_south_africa_2",
@@ -1888,7 +1910,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_2",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_26 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_2) * reduction_in_annual_alcohol_deaths_south_africa_2 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_26 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_2) * reduction_in_annual_alcohol_deaths_south_africa_2 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 273.0221945
     },
     {
@@ -1908,14 +1930,14 @@
       "id": "number_of_years_brought_forward_south_africa_3",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7",
@@ -1934,7 +1956,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_3",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_27 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_27 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 104.5061031
     },
     {
@@ -1954,14 +1976,14 @@
       "id": "number_of_years_brought_forward_south_africa_4",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7",
@@ -1980,7 +2002,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_4",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_28 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_28 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 530.9283276
     },
     {
@@ -2020,14 +2042,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_united_republic_of_tanzan",
@@ -2104,7 +2126,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_29 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_29 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 1898.776758
     },
     {
@@ -2124,14 +2146,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_2",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2",
@@ -2150,7 +2172,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_2",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_30 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_2) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_30 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_2) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 280.1254182
     },
     {
@@ -2170,14 +2192,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_3",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8",
@@ -2196,7 +2218,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_3",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_31 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_31 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 107.2250405
     },
     {
@@ -2216,14 +2238,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_4",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8",
@@ -2242,7 +2264,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_4",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_32 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_32 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 544.7415002
     },
     {
@@ -2282,14 +2304,14 @@
       "id": "number_of_years_brought_forward_myanmar",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_myanmar",
@@ -2381,7 +2403,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_33 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar) * reduction_in_annual_alcohol_deaths_myanmar * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_33 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar) * reduction_in_annual_alcohol_deaths_myanmar * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 1656.895322
     },
     {
@@ -2401,14 +2423,14 @@
       "id": "number_of_years_brought_forward_myanmar_2",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_myanmar_2",
@@ -2427,7 +2449,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_2",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_34 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_2) * reduction_in_annual_alcohol_deaths_myanmar_2 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_34 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_2) * reduction_in_annual_alcohol_deaths_myanmar_2 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 244.4407922
     },
     {
@@ -2447,14 +2469,14 @@
       "id": "number_of_years_brought_forward_myanmar_3",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9",
@@ -2473,7 +2495,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_3",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_35 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_35 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 93.56585349
     },
     {
@@ -2493,14 +2515,14 @@
       "id": "number_of_years_brought_forward_myanmar_4",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9",
@@ -2519,7 +2541,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_4",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_36 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_36 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 475.3479521
     },
     {
@@ -2559,14 +2581,14 @@
       "id": "number_of_years_brought_forward_uganda",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_uganda",
@@ -2658,7 +2680,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_37 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda) * reduction_in_annual_alcohol_deaths_uganda * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_37 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda) * reduction_in_annual_alcohol_deaths_uganda * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 1375.48284
     },
     {
@@ -2678,14 +2700,14 @@
       "id": "number_of_years_brought_forward_uganda_2",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_uganda_2",
@@ -2704,7 +2726,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_2",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_38 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_2) * reduction_in_annual_alcohol_deaths_uganda_2 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_38 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_2) * reduction_in_annual_alcohol_deaths_uganda_2 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 202.9241742
     },
     {
@@ -2724,14 +2746,14 @@
       "id": "number_of_years_brought_forward_uganda_3",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10",
@@ -2750,7 +2772,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_3",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_39 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_39 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 77.67432506
     },
     {
@@ -2770,14 +2792,14 @@
       "id": "number_of_years_brought_forward_uganda_4",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10",
@@ -2796,7 +2818,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_4",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_40 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_40 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 394.6133121
     },
     {
@@ -2836,14 +2858,14 @@
       "id": "number_of_years_brought_forward_kenya",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kenya",
@@ -2935,7 +2957,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_41 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya) * reduction_in_annual_alcohol_deaths_kenya * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_41 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya) * reduction_in_annual_alcohol_deaths_kenya * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 894.0533049
     },
     {
@@ -2955,14 +2977,14 @@
       "id": "number_of_years_brought_forward_kenya_2",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kenya_2",
@@ -2981,7 +3003,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_2",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_42 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_2) * reduction_in_annual_alcohol_deaths_kenya_2 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_42 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_2) * reduction_in_annual_alcohol_deaths_kenya_2 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 131.8991582
     },
     {
@@ -3001,14 +3023,14 @@
       "id": "number_of_years_brought_forward_kenya_3",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11",
@@ -3027,7 +3049,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_3",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_43 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_43 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 50.48771604
     },
     {
@@ -3047,14 +3069,14 @@
       "id": "number_of_years_brought_forward_kenya_4",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11",
@@ -3073,7 +3095,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_4",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_44 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_44 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 256.4956288
     },
     {
@@ -3113,14 +3135,14 @@
       "id": "number_of_years_brought_forward_cambodia",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cambodia",
@@ -3212,7 +3234,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_45 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia) * reduction_in_annual_alcohol_deaths_cambodia * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_45 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia) * reduction_in_annual_alcohol_deaths_cambodia * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 697.5171471
     },
     {
@@ -3232,14 +3254,14 @@
       "id": "number_of_years_brought_forward_cambodia_2",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cambodia_2",
@@ -3258,7 +3280,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_2",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_46 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_2) * reduction_in_annual_alcohol_deaths_cambodia_2 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_46 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_2) * reduction_in_annual_alcohol_deaths_cambodia_2 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 102.9042944
     },
     {
@@ -3278,14 +3300,14 @@
       "id": "number_of_years_brought_forward_cambodia_3",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12",
@@ -3304,7 +3326,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_3",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_47 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_47 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 39.3892036
     },
     {
@@ -3324,14 +3346,14 @@
       "id": "number_of_years_brought_forward_cambodia_4",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12",
@@ -3350,7 +3372,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_4",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_48 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_48 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 200.1112219
     },
     {
@@ -3390,14 +3412,14 @@
       "id": "number_of_years_brought_forward_kazakhstan",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kazakhstan",
@@ -3489,7 +3511,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_49 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan) * reduction_in_annual_alcohol_deaths_kazakhstan * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_49 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan) * reduction_in_annual_alcohol_deaths_kazakhstan * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 577.6129648
     },
     {
@@ -3509,14 +3531,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_2",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kazakhstan_2",
@@ -3535,7 +3557,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_2",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_50 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_2) * reduction_in_annual_alcohol_deaths_kazakhstan_2 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_50 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_2) * reduction_in_annual_alcohol_deaths_kazakhstan_2 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 85.21490093
     },
     {
@@ -3555,14 +3577,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_3",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13",
@@ -3581,7 +3603,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_3",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_51 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_51 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 32.6181439
     },
     {
@@ -3601,14 +3623,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_4",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13",
@@ -3627,7 +3649,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_4",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_52 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_52 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 165.7118203
     },
     {
@@ -3667,14 +3689,14 @@
       "id": "number_of_years_brought_forward_belarus",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_belarus",
@@ -3766,7 +3788,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_53 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus) * reduction_in_annual_alcohol_deaths_belarus * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_53 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus) * reduction_in_annual_alcohol_deaths_belarus * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 602.4672716
     },
     {
@@ -3786,14 +3808,14 @@
       "id": "number_of_years_brought_forward_belarus_2",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_belarus_2",
@@ -3812,7 +3834,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_2",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_54 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_2) * reduction_in_annual_alcohol_deaths_belarus_2 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_54 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_2) * reduction_in_annual_alcohol_deaths_belarus_2 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 88.88164218
     },
     {
@@ -3832,14 +3854,14 @@
       "id": "number_of_years_brought_forward_belarus_3",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14",
@@ -3858,7 +3880,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_3",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_55 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_55 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 34.02168122
     },
     {
@@ -3878,14 +3900,14 @@
       "id": "number_of_years_brought_forward_belarus_4",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14",
@@ -3904,7 +3926,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_4",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_56 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_56 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 172.8422912
     },
     {
@@ -3944,14 +3966,14 @@
       "id": "number_of_years_brought_forward_cameroon",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cameroon",
@@ -4043,7 +4065,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_57 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon) * reduction_in_annual_alcohol_deaths_cameroon * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_57 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon) * reduction_in_annual_alcohol_deaths_cameroon * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 542.500723
     },
     {
@@ -4063,14 +4085,14 @@
       "id": "number_of_years_brought_forward_cameroon_2",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cameroon_2",
@@ -4089,7 +4111,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_2",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_58 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_2) * reduction_in_annual_alcohol_deaths_cameroon_2 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_58 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_2) * reduction_in_annual_alcohol_deaths_cameroon_2 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 80.03481255
     },
     {
@@ -4109,14 +4131,14 @@
       "id": "number_of_years_brought_forward_cameroon_3",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15",
@@ -4135,7 +4157,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_3",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_59 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_59 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 30.63533495
     },
     {
@@ -4155,14 +4177,14 @@
       "id": "number_of_years_brought_forward_cameroon_4",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15",
@@ -4181,7 +4203,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_4",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_60 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_60 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 155.6384427
     },
     {
@@ -4221,14 +4243,14 @@
       "id": "number_of_years_brought_forward_colombia",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_colombia",
@@ -4320,7 +4342,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_61 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia) * reduction_in_annual_alcohol_deaths_colombia * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_61 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia) * reduction_in_annual_alcohol_deaths_colombia * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 522.8783058
     },
     {
@@ -4340,14 +4362,14 @@
       "id": "number_of_years_brought_forward_colombia_2",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_colombia_2",
@@ -4366,7 +4388,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_2",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_62 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_2) * reduction_in_annual_alcohol_deaths_colombia_2 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_62 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_2) * reduction_in_annual_alcohol_deaths_colombia_2 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 77.13992888
     },
     {
@@ -4386,14 +4408,14 @@
       "id": "number_of_years_brought_forward_colombia_3",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16",
@@ -4412,7 +4434,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_3",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_63 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_63 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 29.5272455
     },
     {
@@ -4432,14 +4454,14 @@
       "id": "number_of_years_brought_forward_colombia_4",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16",
@@ -4458,7 +4480,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_4",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_64 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_64 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 150.0089526
     },
     {
@@ -4498,14 +4520,14 @@
       "id": "number_of_years_brought_forward_ghana",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ghana",
@@ -4597,7 +4619,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_65 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana) * reduction_in_annual_alcohol_deaths_ghana * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_65 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana) * reduction_in_annual_alcohol_deaths_ghana * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 485.1608205
     },
     {
@@ -4617,14 +4639,14 @@
       "id": "number_of_years_brought_forward_ghana_2",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ghana_2",
@@ -4643,7 +4665,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_2",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_66 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_2) * reduction_in_annual_alcohol_deaths_ghana_2 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_66 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_2) * reduction_in_annual_alcohol_deaths_ghana_2 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 71.57549047
     },
     {
@@ -4663,14 +4685,14 @@
       "id": "number_of_years_brought_forward_ghana_3",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17",
@@ -4689,7 +4711,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_3",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_67 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_67 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 27.39731692
     },
     {
@@ -4709,14 +4731,14 @@
       "id": "number_of_years_brought_forward_ghana_4",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17",
@@ -4735,7 +4757,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_4",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_68 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_68 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 139.1881547
     },
     {
@@ -4775,14 +4797,14 @@
       "id": "number_of_years_brought_forward_burundi",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_burundi",
@@ -4874,7 +4896,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_69 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi) * reduction_in_annual_alcohol_deaths_burundi * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_69 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi) * reduction_in_annual_alcohol_deaths_burundi * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 356.0329203
     },
     {
@@ -4894,14 +4916,14 @@
       "id": "number_of_years_brought_forward_burundi_2",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_burundi_2",
@@ -4920,7 +4942,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_2",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_70 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_2) * reduction_in_annual_alcohol_deaths_burundi_2 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_70 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_2) * reduction_in_annual_alcohol_deaths_burundi_2 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 52.5253273
     },
     {
@@ -4940,14 +4962,14 @@
       "id": "number_of_years_brought_forward_burundi_3",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18",
@@ -4966,7 +4988,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_3",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_71 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_71 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 20.10538844
     },
     {
@@ -4986,14 +5008,14 @@
       "id": "number_of_years_brought_forward_burundi_4",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18",
@@ -5012,7 +5034,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_4",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_72 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_72 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 102.1425538
     },
     {
@@ -5052,14 +5074,14 @@
       "id": "number_of_years_brought_forward_serbia",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X24"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_serbia",
@@ -5151,7 +5173,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_73 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia) * reduction_in_annual_alcohol_deaths_serbia * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_73 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia) * reduction_in_annual_alcohol_deaths_serbia * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 326.636456
     },
     {
@@ -5171,14 +5193,14 @@
       "id": "number_of_years_brought_forward_serbia_2",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X51"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_serbia_2",
@@ -5197,7 +5219,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_2",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_74 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_2) * reduction_in_annual_alcohol_deaths_serbia_2 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_74 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_2) * reduction_in_annual_alcohol_deaths_serbia_2 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 48.18848422
     },
     {
@@ -5217,14 +5239,14 @@
       "id": "number_of_years_brought_forward_serbia_3",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X42"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19",
@@ -5243,7 +5265,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_3",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_75 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_75 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 18.44535281
     },
     {
@@ -5263,14 +5285,14 @@
       "id": "number_of_years_brought_forward_serbia_4",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X33"
       },
-      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19",
@@ -5289,7 +5311,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_4",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_76 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_76 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 93.7089799
     },
     {
