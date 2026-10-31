@@ -68,6 +68,10 @@ for (const c of lib.charities.values()) {
       return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | ${lib.owners.get(m.owner)!.short} | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""} |`;
     }),
     "",
+    ...(main.theoretical
+      ? [`**Purely theoretical.** ${lib.owners.get(main.owner)!.name}'s estimate is of the idea, written before ${c.name} existed, not of the charity's own results. ` +
+        `It is shown because ${c.name} runs the programme today ([checked ${month(main.theoretical.checked)}](${main.theoretical.url})) and no model of its actual work exists yet.`, ""]
+      : []),
     `We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).`,
     "",
   ];

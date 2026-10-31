@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv2b, inv2c, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv11, inv2b, inv2c, inv3, inv5, inv6, inv7, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -21,11 +21,6 @@ const allowlist: Allowlist = read(join(import.meta.dirname, "normalization-allow
 const waivers: Waivers = read(join(import.meta.dirname, "normalization-waivers.json"));
 const { reports, stale } = applyWaivers(checkAll(lib), waivers);
 
-// TEMPORARY (2026-10-31): INV-2c ("one consistent way") and the cash-benchmark fact it brought land
-// before the Ambitious Impact pass that applies them to AIM's models (a parallel branch). Their violations of INV-2c and INV-4 are reported by
-// scripts/normalization-audit.ts but don't fail here. Delete this block when that branch merges.
-const PENDING = (v: { inv: string; model: string }) =>
-  (v.inv === "INV-2c" || v.inv === "INV-4") && (lib.models.get(v.model)?.owner === "ambitious-impact");
 
 describe("normalization invariants", () => {
   it("builds the library without errors", () => expect(lib.errors).toEqual([]));
@@ -43,7 +38,7 @@ describe("normalization invariants", () => {
     const found = new Set(r.violations.map(keyOf));
 
     it(`${r.id}: no new violations (${r.title})`, () => {
-      const fresh = r.violations.filter((v) => !allowed.has(keyOf(v)) && !PENDING(v)).map((v) => `${keyOf(v)}: ${v.detail}`);
+      const fresh = r.violations.filter((v) => !allowed.has(keyOf(v))).map((v) => `${keyOf(v)}: ${v.detail}`);
       expect(fresh, `new ${r.id} violations; fix them (see npx tsx scripts/normalization-audit.ts)`).toEqual([]);
     });
 
@@ -226,5 +221,40 @@ describe("climate conversion", () => {
     const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $deaths_per_tco2e independent"]);
+  });
+});
+
+describe("INV-11: evaluator-internal exchange rates", () => {
+  const facts = walk(join(root, "facts")).map(read);
+  const aim = (id: string, conv: Record<string, unknown>, death: Record<string, unknown>) => ({
+    id, name: id, kind: "charity", cause: "global-health", owner: "ambitious-impact",
+    rows: [
+      { id: "doublings", label: "Years of doubled consumption", value: 10, kind: "estimate", explainer: "Test input." },
+      { id: "to_dalys", label: "One year of doubled consumption to DALYs", ...conv },
+      { id: "deaths", label: "Deaths averted", value: 0.1, kind: "estimate", explainer: "Test input." },
+      { id: "per_death", label: "DALYs per death averted at age 0", ...death },
+      { id: "out", label: "DALYs per $", formula: "doublings * to_dalys + deaths * per_death" },
+    ],
+    output: { row: "out", unit: "daly", label: "DALYs per $" },
+    evaluator: { name: "Ambitious Impact", assumptions: { uov_per_daly: 2.3, uov_per_ln_consumption: 1 / Math.LN2, life_value_multiplier: 1 } },
+  });
+  const ours = aim("ours", { formula: "ln(2) * $uov_per_ln_consumption / $uov_per_daly" },
+    { formula: "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly", published: 33.07, explainer: "Changed for consistency: AIM's own figure is 33.07." });
+  const theirs = aim("theirs", { formula: "1 / $uov_per_daly" }, { value: 33.07, kind: "estimate", explainer: "AIM's figure." });
+  const l = buildLibrary([ours, theirs], { ...assumptions, common: { ...assumptions.common, benchmark: "ours" } }, facts);
+
+  it("flags AIM's own income-to-DALY rate and DALYs per death, and passes the shared ones", () => {
+    expect(l.errors).toEqual([]);
+    expect(inv11(l).violations.map(keyOf).sort()).toEqual(["theirs per_death death-value", "theirs to_dalys income-to-daly"]);
+  });
+
+  it("the shared versions move with the sliders; the evaluator view keeps AIM's numbers", () => {
+    const av = assumptionValues(assumptions);
+    const m = l.models.get("ours")!;
+    const h = headline(l, m, av);
+    expect(headline(l, m, { ...av, uov_per_ln_consumption: av.uov_per_ln_consumption * 1.5 })).toBeGreaterThan(h);
+    expect(headline(l, m, { ...av, life_value_multiplier: 1.5 })).toBeGreaterThan(h);
+    // Evaluator view: 10 / 2.3 + 0.1 * 33.07 DALYs per dollar.
+    expect(headline(l, m, av, {}, "evaluator")).toBeCloseTo((10 / 2.3 + 0.1 * 33.07) * 1000, 6);
   });
 });

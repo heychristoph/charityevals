@@ -18,7 +18,7 @@ export const GET: APIRoute = () => {
     const x = defaultYears(m);
     const owners = [...new Set(models.map((x) => lib.owners.get(x.owner)!.name))].join(", ");
     const figure = x !== undefined ? `${formatYears(x)} years of healthy life per $1,000 (default assumptions)` : `measured in ${lib.assumptions.units[m.output!.unit].label} per dollar`;
-    return `- [${c.name}](${abs(modelUrl(lib, m))}): ${figure} in ${lib.owners.get(m.owner)!.name}'s model; ${models.length > 1 ? `${models.length} models` : "modelled"} by ${owners}`;
+    return `- [${c.name}](${abs(modelUrl(lib, m))}): ${figure} in ${lib.owners.get(m.owner)!.name}'s model${m.theoretical ? " (purely theoretical: an estimate of the idea from before the charity existed)" : ""}; ${models.length > 1 ? `${models.length} models` : "modelled"} by ${owners}`;
   };
   const sections = CAUSES.map(([cause, title]) => {
     const list = charities.filter((c) => c.cause === cause).sort((a, b) => a.name.localeCompare(b.name));

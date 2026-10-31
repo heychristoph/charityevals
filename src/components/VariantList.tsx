@@ -20,7 +20,7 @@ export default function VariantList({ ids, current, dated = false, names = {} }:
         {rows.map(({ model, central }) => (
           <li key={model.id} className={model.id === current ? "current" : ""}>
             <a href={modelUrl(lib, model)}>{names[model.id] ?? plainModelName(model.name)}</a>
-            {dated && <span className="muted small">{lib.owners.get(model.owner)?.short} · {month(model.source?.published)}</span>}
+            {dated && <span className="muted small">{lib.owners.get(model.owner)?.short} · {month(model.source?.published)}{model.theoretical ? " · purely theoretical" : ""}</span>}
             <span className="num">{comparable(lib, model) ? formatYears(central) : "not ranked"}</span>
           </li>
         ))}
