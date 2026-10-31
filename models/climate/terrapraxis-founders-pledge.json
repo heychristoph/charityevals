@@ -5,7 +5,7 @@
   "cause": "climate",
   "charity": "terrapraxis",
   "owner": "founders-pledge",
-  "summary": "TerraPraxis promotes re-powering coal plants with advanced nuclear heat. Founders Pledge's Climate Fund paid for its COP26 event on committed coal emissions; Founders Pledge's best guess is $0.02 a tonne of CO₂, $1.10 under conservative assumptions. Our view takes the conservative case, our judgment for a single-event estimate resting on guessed probabilities.",
+  "summary": "TerraPraxis promotes re-powering coal plants with advanced nuclear heat. Founders Pledge's Climate Fund paid for its COP26 event on committed coal emissions; Founders Pledge's best guess is $0.02 a tonne of CO₂, $1.10 under conservative assumptions. Like every model on the site, our view uses the evaluator's best guess; the conservative case is the end of the range.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "\"The ideas of economists\": two Climate Fund grants at COP26 (TerraPraxis event)",
@@ -201,19 +201,43 @@
     {
       "id": "cost_per_tonne",
       "section": "page",
-      "label": "Cost per tonne of CO₂e avoided",
+      "label": "Cost per tonne of CO₂e avoided, Founders Pledge's best guess",
       "format": "usd",
-      "formula": "cost_per_tonne_conservative",
-      "published": 0.02,
       "expected": 0.02,
-      "explainer": "Founders Pledge's bottom line is its best guess, $0.02 a tonne (published value; the evaluator view uses it). Changed in our view: charityevals' judgment takes Founders Pledge's conservative case, $1.10, instead. At $0.02 the result would be about 115 years of healthy life per $1,000 at the default settings, more than 30 times every other climate model on the site, resting on three guessed probabilities for a single event; the conservative case is the one we are willing to rank. This is our call, not a correction of Founders Pledge's arithmetic, which reproduces."
+      "explainer": "Founders Pledge's bottom line, its best guess of $0.02 a tonne, used like every other evaluator's best guess on the site. Its conservative case, $1.10 a tonne, is the high end of the range. The best guess rests on three guessed probabilities for a single event, so the range is wide.",
+      "value": {
+        "low": 0.02,
+        "best": 0.02,
+        "high": 1.1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, \"The ideas of economists\" (Climate Fund grants at COP26, Johannes Ackva, 2021)",
+        "url": "https://www.founderspledge.com/research/the-ideas-of-economists",
+        "quote": "putting our best guess at USD 0.02/tCO2e.",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "years_until_avoided",
+      "section": "per_dollar",
+      "label": "Years from the grant until the tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 10,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "Founders Pledge's case brings re-powering five years forward; re-powered plants need advanced reactors that are not yet commercial, so the avoided tonnes come in the 2030s or later. Best guess 10 years after the 2021 event, 5 to 20. Our judgment."
     },
     {
       "id": "tco2e_per_dollar",
       "section": "per_dollar",
       "label": "Tonnes of CO₂e avoided per dollar",
       "format": "number",
-      "formula": "1 / cost_per_tonne"
+      "formula": "1 / cost_per_tonne * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over the cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site."
     },
     {
       "id": "fuel_share",
