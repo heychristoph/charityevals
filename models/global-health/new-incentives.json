@@ -787,19 +787,28 @@
     {
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by New Incentives' program (overall)",
-      "value": 0.30647,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H92"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H92.",
-      "section": "long_term_income_increases"
+      "explainer": "Reads the figure every GiveWell model shares: Value of long-term income gains as a share of the value of deaths averted (GiveWell) (`@givewell_shared.income_to_mortality_value_ratio`), the same number as this sheet's.\n\nValue from GiveWell's sheet, cell Main CEA!H92.",
+      "section": "long_term_income_increases",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "expected": 0.30647
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by New Incentives' program (overall), at your discount rate and values",
+      "section": "long_term_income_increases",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.30647,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "units_of_value_generated_from_long_term_income_increases",
       "label": "Units of value generated from long-term income increases",
-      "formula": "units_of_value_generated_from_deaths_averted_among_people_un * ratio_of_value_generated_from_income_increases_to_value_gene",
+      "formula": "units_of_value_generated_from_deaths_averted_among_people_un * ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values",
       "expected": 1327.084299,
       "section": "long_term_income_increases"
     },
@@ -1282,26 +1291,26 @@
     {
       "id": "treatment_costs_averted_from_prevention",
       "label": "Treatment costs averted from prevention (overall)",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H215"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H215.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nValue from GiveWell's sheet, cell Main CEA!H215.",
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "investment_of_income_increases",
       "label": "Investment of income increases (overall)",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H216"
       },
-      "explainer": "Value from GiveWell's sheet, cell Main CEA!H216.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nValue from GiveWell's sheet, cell Main CEA!H216.",
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "increased_clinic_utilization",

@@ -221,10 +221,19 @@
       }
     },
     {
+      "id": "deworming_value_at_shared_values",
+      "label": "Deworming's long-term income gains at your discount rate and values, relative to GiveWell's",
+      "section": "cameroon",
+      "formula": "pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming) * $uov_per_ln_consumption * ln(2)",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency. The sheet's multiples of cash come from GiveWell's deworming CEA, which values deworming by the income children earn later: 40 years of gains starting 8 years on, discounted at 4% and valued at 1/ln 2 units of value per unit of ln(consumption). Typed in as numbers, they ignored your discount rate and the income slider. This factor is the present value of those 40 years at your rate over the same at 4%, times the income slider over 1/ln 2, the same chain Deworm the World's model uses (it leaves out that CEA's decay of the effect over time, so it moves a little more than the full model would). It is 1 at the defaults; the evaluator view keeps the sheet's figures."
+    },
+    {
       "id": "total_cost_effectiveness",
       "label": "Total (Cost-effectiveness)",
       "section": "cameroon",
-      "formula": "sum(west_total_sac_treated_2023_2025 * west_cost_effectiveness, far_north_total_sac_treated_2023_2025 * far_north_cost_effectiveness, north_total_sac_treated_2023_2025 * north_cost_effectiveness, adamaoua_total_sac_treated_2023_2025 * adamaoua_cost_effectiveness, east_total_sac_treated_2023_2025 * east_cost_effectiveness, littoral_total_sac_treated_2023_2025 * littoral_cost_effectiveness, south_total_sac_treated_2023_2025 * south_cost_effectiveness) / sum(west_total_sac_treated_2023_2025, far_north_total_sac_treated_2023_2025, north_total_sac_treated_2023_2025, adamaoua_total_sac_treated_2023_2025, east_total_sac_treated_2023_2025, littoral_total_sac_treated_2023_2025, south_total_sac_treated_2023_2025)",
+      "formula": "(sum(west_total_sac_treated_2023_2025 * west_cost_effectiveness, far_north_total_sac_treated_2023_2025 * far_north_cost_effectiveness, north_total_sac_treated_2023_2025 * north_cost_effectiveness, adamaoua_total_sac_treated_2023_2025 * adamaoua_cost_effectiveness, east_total_sac_treated_2023_2025 * east_cost_effectiveness, littoral_total_sac_treated_2023_2025 * littoral_cost_effectiveness, south_total_sac_treated_2023_2025 * south_cost_effectiveness) / sum(west_total_sac_treated_2023_2025, far_north_total_sac_treated_2023_2025, north_total_sac_treated_2023_2025, adamaoua_total_sac_treated_2023_2025, east_total_sac_treated_2023_2025, littoral_total_sac_treated_2023_2025, south_total_sac_treated_2023_2025)) * deworming_value_at_shared_values",
       "expected": 13.48746385
     },
     {

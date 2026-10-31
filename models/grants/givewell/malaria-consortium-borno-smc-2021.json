@@ -575,14 +575,14 @@
       "id": "pv_years_until_benefits_begin",
       "label": "Average number of years between program implementation and the beginning of long-term benefits",
       "section": "malaria_consortium",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B106"
       },
-      "explainer": "GiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+      "explainer": "Reads the figure every GiveWell model shares: Years between malaria prevention in childhood and the start of income gains (GiveWell) (`@givewell_shared.years_until_income_benefits_malaria`), the same number as this sheet's.\n\nGiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate.",
+      "formula": "@givewell_shared.years_until_income_benefits_malaria",
+      "expected": 10.0
     },
     {
       "id": "pv_years_benefits_last",
@@ -628,13 +628,14 @@
       "id": "multiplier_for_resource_sharing_within_households_kenya",
       "label": "Multiplier for resource sharing within households (Kenya)",
       "section": "deworm_the_world",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Deworm the World!B23"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households",
@@ -962,15 +963,15 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "malaria_consortium",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B172"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A172),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A172)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A172),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A172)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
@@ -1004,15 +1005,15 @@
       "id": "treatment_costs_averted_from_prevention_not_specified",
       "label": "Treatment costs averted from prevention (Not specified)",
       "section": "malaria_consortium",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B176"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A176),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A176)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.06 here. The site uses one figure for this in every GiveWell model, 0.2 (Treatment costs averted from prevention (GiveWell's supplemental adjustment), `@givewell_shared.treatment_costs_averted`), GiveWell's current best guess; the evaluator view keeps 0.06.\n\nCalculated in the source sheet as `=iferror(if(isblank($A176),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A176)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "published": 0.06
     },
     {
       "id": "effect_on_fertility_subnational_adjustments_not_specified",

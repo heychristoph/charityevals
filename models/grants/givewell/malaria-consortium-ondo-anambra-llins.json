@@ -684,13 +684,14 @@
       "id": "multiplier_for_resource_sharing_within_households",
       "label": "Multiplier for resource sharing within households",
       "section": "malaria_consortium_llins",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B122"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "pv_adjusted_increase",
@@ -1057,15 +1058,15 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "malaria_consortium_llins",
-      "value": 0.025,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B187"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A187)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases, nets (GiveWell) (`@givewell_shared.investment_of_income_increases_nets`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A187)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases_nets",
+      "expected": 0.025
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
@@ -1085,15 +1086,15 @@
       "id": "treatment_costs_averted_from_prevention_not_specified",
       "label": "Treatment costs averted from prevention (Not specified)",
       "section": "malaria_consortium_llins",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B190"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A190)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.06 here. The site uses one figure for this in every GiveWell model, 0.2 (Treatment costs averted from prevention (GiveWell's supplemental adjustment), `@givewell_shared.treatment_costs_averted`), GiveWell's current best guess; the evaluator view keeps 0.06.\n\nCalculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A190)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "published": 0.06
     },
     {
       "id": "effect_on_fertility_subnational_adjustments_not_specified",

@@ -217,10 +217,19 @@
       "format": "usd"
     },
     {
+      "id": "deworming_value_at_shared_values",
+      "label": "Deworming's long-term income gains at your discount rate and values, relative to GiveWell's",
+      "section": "sheet1",
+      "formula": "pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming) * $uov_per_ln_consumption * ln(2)",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency. The sheet's multiples of cash come from GiveWell's deworming CEA, which values deworming by the income children earn later: 40 years of gains starting 8 years on, discounted at 4% and valued at 1/ln 2 units of value per unit of ln(consumption). Typed in as numbers, they ignored your discount rate and the income slider. This factor is the present value of those 40 years at your rate over the same at 4%, times the income slider over 1/ln 2, the same chain Deworm the World's model uses (it leaves out that CEA's decay of the effect over time, so it moves a little more than the full model would). It is 1 at the defaults; the evaluator view keeps the sheet's figures."
+    },
+    {
       "id": "cost_effectiveness_x_cash_total",
       "label": "Cost-effectiveness (x-cash) (Total)",
       "section": "sheet1",
-      "formula": "sum(adjusted_funding_by_province_bas_uele * cost_effectiveness_x_cash_bas_uele, adjusted_funding_by_province_haut_katanga * cost_effectiveness_x_cash_haut_katanga, adjusted_funding_by_province_ituri * cost_effectiveness_x_cash_ituri, adjusted_funding_by_province_lomami * cost_effectiveness_x_cash_lomami) / adjusted_funding_by_province_total",
+      "formula": "(sum(adjusted_funding_by_province_bas_uele * cost_effectiveness_x_cash_bas_uele, adjusted_funding_by_province_haut_katanga * cost_effectiveness_x_cash_haut_katanga, adjusted_funding_by_province_ituri * cost_effectiveness_x_cash_ituri, adjusted_funding_by_province_lomami * cost_effectiveness_x_cash_lomami) / adjusted_funding_by_province_total) * deworming_value_at_shared_values",
       "expected": 15.09421367
     },
     {

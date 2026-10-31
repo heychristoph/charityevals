@@ -95,10 +95,15 @@ FACTS = [
          value=rng(0.245, 0.30647, 0.3197), kind="estimate",
          explainer="GiveWell's shortcut for programs that save children's lives without modelling their later income: the income gain is 0.30647 times the value of the deaths averted, the ratio in its AMF and SMC models (2023–2024). Some sheets round it to 0.31; New Incentives' March 2025 renewal uses 0.3197.\n\nIt is a ratio at GiveWell's own values (4% discounting, its weight on a death). Our view rescales it in each model so that the income gain is discounted at your rate, valued at the income slider and doesn't grow with the weight on a life, as in AMF and SMC.",
          rules=[dict(label=r"^Ratio of value generated from income increases to value generated from mortalities", values=[0.30647, 0.31, 0.3197])]),
-    dict(id="income_ratio_discount_rate", label="Discount rate behind GiveWell's ratio of income to mortality value", unit="%", format="percent",
+    dict(id="income_discount_rate", label="GiveWell's discount rate for future income, behind figures it states already discounted", unit="%", format="percent",
          value=0.04, kind="judgment",
-         explainer="The rate GiveWell's AMF and SMC models discount income at, so the rate built into the ratio above. Our view divides it out and puts your discount rate in (models with `income_increases_at_shared_values`).",
+         source=dict(title="GiveWell, CEA of insecticide-treated net distributions: 'Discount rate for future benefits'", url="https://docs.google.com/spreadsheets/d/1VEtie59TgRvZSEVjfG7qcKBKcQyJn8zO91Lau9YNqXc/edit"),
+         explainer="The rate GiveWell's models discount income at (4%), so the rate built into figures they hand on already discounted: the ratio of income to mortality value above, and the multiples of cash its deworming CEA gives Sightsavers' sheets. Our view divides it out and puts your discount rate in (rows `..._at_shared_values`).",
          rules=[]),
+    dict(id="years_until_income_benefits_deworming", label="Years between deworming and the start of income gains (GiveWell)", unit="years", format="number",
+         value=rng(5, 8, 10), kind="judgment",
+         explainer="GiveWell's guess of when a dewormed school-age child starts working: 8 years on average, in its deworming CEA. Range ours.",
+         rules=[dict(label=r"^Average number of years between deworming and the beginning of long-term benefits", values=[8])]),
     dict(id="uov_per_cyp_low_income", label="Value of a year of modern contraception, low-income countries (GiveWell)", unit="units of value", format="number",
          value=rng(0.3, 0.6997, 1.1), kind="judgment",
          explainer="GiveWell's value of one year of modern contraception use in low-income countries on average, from its 'Valuing contraception' model: better health for women and children (maternal and child deaths and illness averted) 0.23, women's earnings 0.05, more resources for existing children 0.19, subjective well-being 0.23. The range is GiveWell's 25th to 75th percentile.\n\nOf the 0.70, 0.12 is the value of maternal and child deaths averted (`uov_per_cyp_deaths_low_income`); our view scales that part with the weight on a life under Your values.",
@@ -150,14 +155,10 @@ FACTS = [
          explainer="People per household in Bangladesh: 4.26 in the Bangladesh Bureau of Statistics' Household Income and Expenditure Survey 2022 (rural households 4.3), as GiveWell's 2024 eyeglasses sheet cites. GiveWell's 2025 CHoBI7 sheet uses 4.5.",
          source=dict(title="Bangladesh Bureau of Statistics, Household Income and Expenditure Survey 2022, final report", url="https://bbs.gov.bd/site/page/648dd9f5-067b-4bcc-ba38-45bfb9b12394/-", note="Average household size 4.26 (cited in GiveWell's eyeglasses for workers CEA, 2024)"),
          rules=[dict(label=r"^(Average household size, Bangladesh \(Value - best guess\)|Income to household consumption: Household Size \(Workers in rural Bangladesh\))$", values=[4.5, 4.3])]),
-    dict(id="malaria_mortality_1_59m_chad_2022", label="Annual malaria mortality rate among 1-59-month-olds, Chad (GiveWell, 2023 net model)", unit="%", format="percent",
-         value=0.001483872221, kind="estimate",
-         explainer="Chad's malaria death rate among children aged 1–59 months as GiveWell's June 2023 net model has it. GiveWell's 2024 net models and later revise it to 0.26% (`malaria_mortality_1_59m_chad_2024`); each vintage reads its own.",
-         rules=[dict(label=r"^Annual malaria mortality rate among 1-59-month-olds \(Chad\)$", values=[0.001483872221])]),
     dict(id="malaria_mortality_1_59m_chad_2024", label="Annual malaria mortality rate among 1-59-month-olds, Chad (GiveWell, 2024 net models)", unit="%", format="percent",
-         value=None, kind="estimate",
-         explainer="Chad's malaria death rate among children aged 1–59 months in GiveWell's net models from December 2024 on.",
-         rules=[dict(label=r"^Annual malaria mortality rate among 1-59-month-olds \(Chad\)$", values="other")]),
+         value=0.00263528145, kind="estimate",
+         explainer="Chad's malaria death rate among children aged 1–59 months in GiveWell's net models from December 2024 on (0.26%; its June 2023 model had 0.15%, now that sheet is read at its DRC column). A dated fact: a later vintage that revises it gets its own.",
+         rules=[dict(label=r"^Annual malaria mortality rate among 1-59-month-olds \(Chad\)$", values=[0.00263528145])]),
 ]
 
 GBD = [
@@ -196,6 +197,7 @@ def models():
 
 
 def matches(rule, m, r, taken):
+    if rule["values"] == "other": return False
     if "formula" in r or not isinstance(best(r.get("value")), (int, float)) or isinstance(r.get("value"), bool): return False
     if not re.search(rule["label"], r.get("label", ""), re.I): return False
     if rule.get("models") and not re.search(rule["models"], m["id"]): return False
@@ -238,20 +240,23 @@ def main():
                     linked.append((m, r, best(r["value"])))
             if f.get("value") is None: continue
             fv = best(f["value"])
+            ref = f"@{prefix}.{f['id']}"
+            # Rows a previous run linked count for the source too.
+            rx = re.compile(re.escape(ref) + r"(?!\w)")
+            already = [(m, r, best(r.get("published", r.get("expected")))) for p, m, ind in files for r in m["rows"] if rx.search(r.get("formula", ""))]
             # The source: the newest sheet that has the shared figure itself.
-            same = sorted([(m.get("source", {}).get("published", ""), m, r) for m, r, v in linked if close(v, fv)], key=lambda x: x[0])
+            same = sorted([(m.get("source", {}).get("published", ""), m, r) for m, r, v in linked + already if close(v, fv)], key=lambda x: x[0])
             if same and not f.get("source"):
                 _, m, r = same[-1]
                 f["source"] = {"title": f"GiveWell, {m['name']}", "url": r.get("source", {}).get("url") or m["source"].get("sheet") or m["source"]["url"],
                                **({"cell": r["source"]["cell"]} if r.get("source", {}).get("cell") else {}),
                                "note": f"The same figure in {len(same)} of GiveWell's sheets; " + ", ".join(sorted({x[1]['id'] for x in same}))[:600]}
-            ref = f"@{prefix}.{f['id']}"
             formula = f.get("formula", ref)
             for m, r, v in linked:
                 changed = link_row(r, formula, fv, ref, f["label"])
                 log.append(f"{'CHANGED' if changed else 'linked '} {ref:60s} {m['id']}:{r['id']} {short(v)} -> {short(fv)}")
             row = {"id": f["id"], "label": f["label"], "unit": f.get("unit", "weight"), "format": f.get("format", "number"), "value": f["value"],
-                   "kind": f.get("kind", "estimate"), "source": {**(f.get("source") or {}), "retrieved": RETRIEVED}, "explainer": f["explainer"]} if out is not None else None
+                   "kind": f.get("kind", "estimate"), "source": {**(f.get("source") or {}), "retrieved": RETRIEVED}, "explainer": f.get("explainer", "")} if out is not None else None
             if prefix == "gbd_disability_weights":
                 row.update({"unit": "disability weight", "kind": "estimate",
                             "source": {"title": "IHME, Global Burden of Disease Study 2019 (GBD 2019) Disability Weights", "url": GBD_URL, "retrieved": RETRIEVED},
@@ -265,6 +270,7 @@ def main():
                                        "explainer": "The IRS yearly average, the site's one source for currency rates. Models read it instead of an evaluator's own rate."})
                     FX_FILE.write_text(json.dumps(fx, indent=2, ensure_ascii=False) + "\n")
     ratio_income(files, log)
+    deworming_multiples(files, log)
     for p, m, ind in files:
         p.write_text(json.dumps(m, indent=ind, ensure_ascii=False) + "\n")
     FACT_FILE.write_text(json.dumps({"id": "givewell_shared", "label": "GiveWell's house constants (one figure for every GiveWell model)", "rows": facts}, indent=2, ensure_ascii=False) + "\n")
@@ -274,7 +280,7 @@ def main():
 
 RATIO = re.compile(r"^Ratio of value generated from income increases to value generated from mortalities", re.I)
 SCALE = ("pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria"
-         " / (pv(@givewell_shared.income_ratio_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_ratio_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria)"
+         " / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria)"
          " * $uov_per_ln_consumption * ln(2) / $life_value_multiplier")
 
 
@@ -306,6 +312,37 @@ def ratio_income(files, log):
                 r["formula"] = rx.sub(new_id, r["formula"]); n += 1
             rows.insert(rows.index(leaf) + 1, new)
             log.append(f"ratio   {m['id']}:{leaf['id']} -> {new_id} ({n} readers)")
+
+
+DEWORM_SCALE = ("pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming"
+                " / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_deworming)"
+                " * $uov_per_ln_consumption * ln(2)")
+SIGHTSAVERS = ["sightsavers-cost-effectiveness-april-2023-drc", "sightsavers-cost-effectiveness-january-2023", "sightsavers-cameroon-nigeria-cost-effectiveness"]
+
+
+def deworming_multiples(files, log):
+    """Sightsavers' sheets average multiples of cash typed in from GiveWell's deworming CEA, already
+    discounted at 4% and valued at 1/ln 2: no slider moved them. Our view scales the sheet's bottom line by
+    the same deworming chain Deworm the World's model uses: 40 years of income gains starting 8 years on,
+    at your discount rate over the same at 4%, times the income slider over 1/ln 2 (1 at the defaults; the
+    evaluator view keeps the sheet's figure)."""
+    for p, m, ind in files:
+        if m["id"] not in SIGHTSAVERS: continue
+        nat = m["output"]["native"]["row"]
+        rows = m["rows"]
+        if any(r["id"] == "deworming_value_at_shared_values" for r in rows): continue
+        native = next(r for r in rows if r["id"] == nat)
+        new = {"id": "deworming_value_at_shared_values", "label": "Deworming's long-term income gains at your discount rate and values, relative to GiveWell's",
+               "section": native.get("section"), "formula": DEWORM_SCALE, "published": 1, "format": "number",
+               "explainer": ("Changed for consistency. The sheet's multiples of cash come from GiveWell's deworming CEA, which values deworming by the income "
+                             "children earn later: 40 years of gains starting 8 years on, discounted at 4% and valued at 1/ln 2 units of value per unit of "
+                             "ln(consumption). Typed in as numbers, they ignored your discount rate and the income slider. This factor is the present value "
+                             "of those 40 years at your rate over the same at 4%, times the income slider over 1/ln 2, the same chain Deworm the World's model "
+                             "uses (it leaves out that CEA's decay of the effect over time, so it moves a little more than the full model would). It is 1 at "
+                             "the defaults; the evaluator view keeps the sheet's figures.")}
+        native["formula"] = f"({native['formula']}) * deworming_value_at_shared_values"
+        rows.insert(rows.index(native), new)
+        log.append(f"deworm  {m['id']}:{nat} x deworming_value_at_shared_values")
 
 
 if __name__ == "__main__":
