@@ -3,7 +3,7 @@ Public health organisation working on tobacco, alcohol, road safety and data sys
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Vital Strategies rough estimate Breakeven](/vital-strategies/vital-strategies-botec-breakeven) | GW | December 2021 | <span data-figure="headline" data-model="vital-strategies-botec-breakeven">42</span> | 447, 44 kept fixed |
+| [Vital Strategies rough estimate Breakeven](/vital-strategies/vital-strategies-botec-breakeven) | GW | December 2021 | <span data-figure="headline" data-model="vital-strategies-botec-breakeven">43</span> | 447, 44 kept fixed |
 | [Vital Strategies rough estimate](/vital-strategies) | GW | December 2021 | <span data-figure="headline" data-model="vital-strategies-model">21</span> | 156, 40 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
