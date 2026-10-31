@@ -3,6 +3,6 @@ The UN's sexual and reproductive health agency; GiveWell funded its Supplies Par
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [UNFPA Supplies Partnership - cost-effectiveness analysis - February 2026](/unfpa) | GW | February 2026 | <span data-figure="headline" data-model="unfpa-supplies-partnership-february-2026">32</span> | 62 |
+| [UNFPA Supplies Partnership - cost-effectiveness analysis - February 2026](/unfpa) | GW | February 2026 | <span data-figure="headline" data-model="unfpa-supplies-partnership-february-2026">32</span> | 64 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

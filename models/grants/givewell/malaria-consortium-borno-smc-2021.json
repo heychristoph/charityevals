@@ -325,7 +325,7 @@
       "label": "Internal validity adjustment — SMC (Nigeria)",
       "section": "malaria_consortium",
       "value": 0.95,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -338,7 +338,7 @@
       "label": "External validity adjustment — SMC (Nigeria)",
       "section": "malaria_consortium",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -542,14 +542,14 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 1.442695041,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Moral weights and discount rate!C22"
       },
-      "explainer": "Calculated in the source sheet as `=if(C5>0,C5/ln(2),\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's sheet types in its value of a one-unit rise in ln(consumption) for a year, 1/ln 2 = 1.4427 units of value. The site values income the same way in every model, through the income slider (Value of doubling an income, under Your values), so this row reads it; at the default the number is the same. The evaluator view keeps 1.4427.",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.442695041
     },
     {
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
@@ -563,7 +563,7 @@
       "label": "Increase in ln(income) from reducing point in time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
       "section": "malaria_consortium",
       "value": 0.01182453322,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -575,14 +575,14 @@
       "id": "pv_years_until_benefits_begin",
       "label": "Average number of years between program implementation and the beginning of long-term benefits",
       "section": "malaria_consortium",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B106"
       },
-      "explainer": "GiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate."
+      "explainer": "Reads the figure every GiveWell model shares: Years between malaria prevention in childhood and the start of income gains (GiveWell) (`@givewell_shared.years_until_income_benefits_malaria`), the same number as this sheet's.\n\nGiveWell's input behind the present value in Malaria Consortium!B110, which the import carried as a fixed number; read from the sheet so the present value moves with your discount rate.",
+      "formula": "@givewell_shared.years_until_income_benefits_malaria",
+      "expected": 10.0
     },
     {
       "id": "pv_years_benefits_last",
@@ -628,13 +628,14 @@
       "id": "multiplier_for_resource_sharing_within_households_kenya",
       "label": "Multiplier for resource sharing within households (Kenya)",
       "section": "deworm_the_world",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Deworm the World!B23"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "multiplier_for_resource_sharing_within_households",
@@ -792,7 +793,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "malaria_consortium",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -805,7 +806,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "malaria_consortium",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -839,7 +840,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "malaria_consortium",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -852,7 +853,7 @@
       "label": "False monitoring results",
       "section": "malaria_consortium",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -873,7 +874,7 @@
       "label": "Change of priorities",
       "section": "malaria_consortium",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -886,7 +887,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "malaria_consortium",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -899,7 +900,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "malaria_consortium",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -935,7 +936,7 @@
       "label": "Adjustments for excluded effects: Malaria morbidity",
       "section": "malaria_consortium",
       "value": 0.09,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -962,15 +963,15 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "malaria_consortium",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B172"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A172),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A172)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A172),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A172)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
@@ -991,7 +992,7 @@
       "label": "Adjustments for excluded effects: Drug resistance",
       "section": "malaria_consortium",
       "value": -0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -1004,22 +1005,22 @@
       "id": "treatment_costs_averted_from_prevention_not_specified",
       "label": "Treatment costs averted from prevention (Not specified)",
       "section": "malaria_consortium",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B176"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A176),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A176)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.06 here. The site uses one figure for this in every GiveWell model, 0.2 (Treatment costs averted from prevention (GiveWell's supplemental adjustment), `@givewell_shared.treatment_costs_averted`), GiveWell's current best guess; the evaluator view keeps 0.06.\n\nCalculated in the source sheet as `=iferror(if(isblank($A176),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A176)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "published": 0.06
     },
     {
       "id": "effect_on_fertility_subnational_adjustments_not_specified",
       "label": "Effect on fertility: Subnational adjustments (Not specified)",
       "section": "malaria_consortium",
       "value": 0.032,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -1089,7 +1090,7 @@
       "label": "Adjustment for impact relative to the counterfactual to be moving from 4 cycles to 5 (Not specified)",
       "section": "malaria_consortium",
       "value": -0.05129999999999999,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
@@ -2012,8 +2013,9 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_5",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
       "section": "givedirectly",
-      "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
-      "expected": 1.442695041
+      "formula": "@cash.uov_per_dollar * arbitrary_donation_size / (total_units_of_increase_in_ln_consumption)",
+      "explainer": "Changed for consistency. In GiveWell's sheet this is the same 1.4427 units of value, used to value GiveDirectly's cash transfers, the benchmark the sheet divides by to state its result as a multiple of cash. The site values \"1x cash\" with one shared figure (units of value per dollar given to GiveDirectly, @cash), so this row is set so that GiveDirectly's value per dollar in this section equals that figure: the shared figure divided by the sheet's own increase in ln(consumption) per dollar. The multiple is then multiplied back by the same figure, so it cancels and our units of value are the program's own, with income valued at the income slider. The evaluator view keeps 1.4427.",
+      "published": 1.442695041
     },
     {
       "id": "total_units_of_value_generated_2",

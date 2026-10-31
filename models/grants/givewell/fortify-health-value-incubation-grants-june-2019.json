@@ -84,7 +84,7 @@
       "label": "Scenario B (FH entirely fails to scale up): P(Scenario B)",
       "section": "production_quantity",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -491,7 +491,7 @@
       "label": "Scenario A (things go largely according to plan, with some delays): Wastage adjustment (Maintenance level production)",
       "section": "production_quantity",
       "value": 0.218,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -930,7 +930,7 @@
       "label": "Scenario A (things go largely according to plan, with some delays): Wastage adjustment (Low bound production)",
       "section": "production_quantity",
       "value": 0.218,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -1369,7 +1369,7 @@
       "label": "Scenario A (things go largely according to plan, with some delays): Wastage adjustment (High bound production)",
       "section": "production_quantity",
       "value": 0.218,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -1448,7 +1448,7 @@
       "label": "Scenario B (FH entirely fails to scale up): Wastage adjustment",
       "section": "production_quantity",
       "value": 0.218,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -1865,7 +1865,7 @@
       "label": "Internal validity adjustment for iron deficiency",
       "section": "user_inputs",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -1886,7 +1886,7 @@
       "label": "External validity adjustment for iron deficiency",
       "section": "user_inputs",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -1962,25 +1962,27 @@
       "id": "mean_number_of_years_between_supplementation_and_initial_con",
       "label": "Mean number of years between supplementation and initial consumption benefits",
       "section": "fh_india_iron_fortification",
-      "value": 11.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B34"
-      }
+      },
+      "formula": "@givewell_shared.years_until_income_benefits_iron",
+      "published": 11.0,
+      "explainer": "Changed for consistency. GiveWell's sheet has 11 here. The site uses one figure for this in every GiveWell model, 10 (Years between iron supplementation or fortification and the start of income gains (GiveWell), `@givewell_shared.years_until_income_benefits_iron`), GiveWell's current best guess; the evaluator view keeps 11."
     },
     {
       "id": "median_duration_of_consumption_benefits",
       "label": "Median duration of consumption benefits",
       "section": "fh_india_iron_fortification",
-      "value": 30.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B35"
-      }
+      },
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "published": 30.0,
+      "explainer": "Changed for consistency. GiveWell's sheet has 30 here. The site uses one figure for this in every GiveWell model, 40 (Years long-term income gains last (GiveWell), `@givewell_shared.long_term_benefit_years`), GiveWell's current best guess; the evaluator view keeps 30."
     },
     {
       "id": "increase_in_iq_from_iron_supplementation_in_children_with_an",
@@ -1998,20 +2000,21 @@
       "id": "iq_points_per_standard_deviation",
       "label": "IQ points per standard deviation",
       "section": "fh_india_iron_fortification",
-      "value": 15.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B26"
-      }
+      },
+      "formula": "@givewell_shared.iq_points_per_sd",
+      "expected": 15.0,
+      "explainer": "Reads the figure every GiveWell model shares: IQ points per standard deviation (`@givewell_shared.iq_points_per_sd`), the same number as this sheet's."
     },
     {
       "id": "internal_validity_adjustment_for_iq_children",
       "label": "Internal validity adjustment for IQ (children)",
       "section": "fh_india_iron_fortification",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2024,7 +2027,7 @@
       "label": "External validity adjustment for IQ (children)",
       "section": "user_inputs",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2059,21 +2062,22 @@
       "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
       "label": "Percentage increase in wages/consumption for every 1 point increase in IQ",
       "section": "fh_india_iron_fortification",
-      "value": 0.01,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B28"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.wage_gain_per_iq_point",
+      "published": 0.01,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.01 here. The site uses one figure for this in every GiveWell model, 0.0067 (Increase in wages per IQ point (GiveWell), `@givewell_shared.wage_gain_per_iq_point`), GiveWell's current best guess; the evaluator view keeps 0.01."
     },
     {
       "id": "adjustment_to_amortize_benefits",
       "label": "Adjustment to amortize benefits",
       "section": "fh_india_iron_fortification",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2106,13 +2110,14 @@
       "id": "multiplier_for_resource_sharing_2",
       "label": "Multiplier for resource sharing",
       "section": "user_inputs",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "User inputs!B18"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "multiplier_for_resource_sharing",
@@ -2622,7 +2627,7 @@
       "label": "Internal validity adjustment for IQ (adults)",
       "section": "fh_india_iron_fortification",
       "value": 0.65,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2635,7 +2640,7 @@
       "label": "External validity adjustment for IQ (adults)",
       "section": "user_inputs",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2663,13 +2668,14 @@
       "id": "iq_points_per_standard_deviation_2",
       "label": "IQ points per standard deviation",
       "section": "fh_india_iron_fortification",
-      "value": 15.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B48"
-      }
+      },
+      "formula": "@givewell_shared.iq_points_per_sd",
+      "expected": 15.0,
+      "explainer": "Reads the figure every GiveWell model shares: IQ points per standard deviation (`@givewell_shared.iq_points_per_sd`), the same number as this sheet's."
     },
     {
       "id": "increase_in_iq_from_iron_fortification_in_average_adult_poin",
@@ -2682,14 +2688,15 @@
       "id": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
       "label": "Percentage increase in wages/consumption for every 1 point increase in IQ",
       "section": "fh_india_iron_fortification",
-      "value": 0.01,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "FH (India) Iron fortification!B50"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.wage_gain_per_iq_point",
+      "published": 0.01,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.01 here. The site uses one figure for this in every GiveWell model, 0.0067 (Increase in wages per IQ point (GiveWell), `@givewell_shared.wage_gain_per_iq_point`), GiveWell's current best guess; the evaluator view keeps 0.01."
     },
     {
       "id": "multiplier_for_resource_sharing_3",
@@ -2774,7 +2781,7 @@
       "label": "P(Scenario 3): Fortify Health have operational problems which means they fail to scale up the program",
       "section": "voi_inputs",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2788,7 +2795,7 @@
       "label": "P(Scenario 4): Some other unforeseen obstacle prevents us from wanting to recommend them as a top charity",
       "section": "voi_inputs",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2810,7 +2817,7 @@
       "label": "P(Our outside options above 11x cash are sufficiently small that we can fill entire FH RFMF)",
       "section": "voi_inputs",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2928,7 +2935,7 @@
       "label": "P(We have outside options at > 11x sufficient to use up all donations)",
       "section": "voi_inputs",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -2957,7 +2964,7 @@
       "label": "Net Present Value of money reallocated (Scenario 5c: Some outside options > 11x such that we fill half RFMF)",
       "section": "voi_botec",
       "value": 26350420.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
@@ -3071,7 +3078,7 @@
       "label": "Probability that we want them to run an RCT/similarly intense level of monitoring because we are too unsure about the benefits",
       "section": "voi_inputs",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",

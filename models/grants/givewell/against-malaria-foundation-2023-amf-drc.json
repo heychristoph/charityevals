@@ -138,7 +138,7 @@
       "label": "Adjustment for net usage in program contexts",
       "section": "amf",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -209,7 +209,7 @@
       "label": "Adjustment for net coverage years lost due to residual nets from previous distributions",
       "section": "amf",
       "value": 0.97,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -302,7 +302,7 @@
       "label": "Internal validity adjustment — Nets",
       "section": "amf",
       "value": 0.95,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -315,7 +315,7 @@
       "label": "External validity adjustment — Nets",
       "section": "amf",
       "value": 0.95,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -758,21 +758,22 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 1.442695041,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "Moral weights and discount rate!C22"
       },
-      "explainer": "Calculated in the source sheet as `=if(C5>0,C5/ln(2),\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's sheet types in its value of a one-unit rise in ln(consumption) for a year, 1/ln 2 = 1.4427 units of value. The site values income the same way in every model, through the income slider (Value of doubling an income, under Your values), so this row reads it; at the default the number is the same. The evaluator view keeps 1.4427.",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.442695041
     },
     {
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
       "section": "givedirectly",
-      "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
-      "expected": 1.442695041
+      "formula": "@cash.uov_per_dollar * arbitrary_donation_size / (total_units_of_increase_in_ln_consumption * total_adjustment_factor * total_adjustment_factor_2)",
+      "explainer": "Changed for consistency. In GiveWell's sheet this is the same 1.4427 units of value, used to value GiveDirectly's cash transfers, the benchmark the sheet divides by to state its result as a multiple of cash. The site values \"1x cash\" with one shared figure (units of value per dollar given to GiveDirectly, @cash), so this row is set so that GiveDirectly's value per dollar in this section equals that figure: the shared figure divided by the sheet's own increase in ln(consumption) per dollar. The multiple is then multiplied back by the same figure, so it cancels and our units of value are the program's own, with income valued at the income slider. The evaluator view keeps 1.4427.",
+      "published": 1.442695041
     },
     {
       "id": "total_units_of_value_generated",
@@ -786,7 +787,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -800,7 +801,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -836,7 +837,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -850,7 +851,7 @@
       "label": "False monitoring results",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -872,7 +873,7 @@
       "label": "Change of priorities",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -886,7 +887,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "givedirectly",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -900,7 +901,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "givedirectly",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -944,7 +945,7 @@
       "label": "Supplemental intervention-level adjustments: Developmental effects",
       "section": "givedirectly",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -958,7 +959,7 @@
       "label": "Supplemental intervention-level adjustments: Reduced morbidity",
       "section": "givedirectly",
       "value": 0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1225,13 +1226,14 @@
       "id": "multiplier_for_resource_sharing_within_households",
       "label": "Multiplier for resource sharing within households",
       "section": "amf",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B125"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "present_value_of_lifetime_benefits_from_reducing_prevalence",
@@ -1340,7 +1342,7 @@
       "label": "Supplemental intervention-level adjustments: Malaria morbidity",
       "section": "amf",
       "value": 0.09,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1395,15 +1397,15 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "amf",
-      "value": 0.025,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B190"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A190)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases, nets (GiveWell) (`@givewell_shared.investment_of_income_increases_nets`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A190)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases_nets",
+      "expected": 0.025
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
@@ -1423,22 +1425,22 @@
       "id": "treatment_costs_averted_from_prevention",
       "label": "Treatment costs averted from prevention",
       "section": "amf",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
         "cell": "AMF!B193"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A193),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A193)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A193),\"\",index('Supplemental intervention-level'!$M:$M,match(1,('Supplemental intervention-level'!$C:$C=$A193)*('Supplemental intervention-level'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "effect_on_fertility_subnational_adjustments",
       "label": "Effect on fertility: Subnational adjustments",
       "section": "amf",
       "value": 0.024,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1501,7 +1503,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "amf",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1514,7 +1516,7 @@
       "label": "False monitoring results",
       "section": "amf",
       "value": 0.02,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1535,7 +1537,7 @@
       "label": "Change of priorities",
       "section": "amf",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1548,7 +1550,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "amf",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",
@@ -1561,7 +1563,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "amf",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1lvWRNFSdhDvEd-Ft1TFhVxMd7qyGBY6hJyD_hSGchcs/edit",

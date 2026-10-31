@@ -62,11 +62,33 @@
   ],
   "rows": [
     {
+      "id": "policy_years_until_effect",
+      "label": "Years from the grant until the policy takes effect",
+      "section": "calculations",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."
+    },
+    {
+      "id": "policy_wait_discount",
+      "label": "Discount for the wait until the policy takes effect",
+      "section": "calculations",
+      "formula": "(1 + $discount_rate) ^ -policy_years_until_effect",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
+    },
+    {
       "id": "annual_lives_saved_in_each_scenario_row_32",
       "label": "Annual lives saved in each scenario (row 32)",
       "section": "calculations",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -80,7 +102,7 @@
       "label": "Adjustment for enforcement",
       "section": "assumptions",
       "value": 0.85,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -114,7 +136,7 @@
       "label": "Adjustment for recent pesticide bans (Sri Lanka)",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -340,7 +362,7 @@
       "label": "Annual lives saved in each scenario (row 36)",
       "section": "calculations",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -409,13 +431,14 @@
       "id": "number_of_years_by_which_cpsp_is_expected_to_accelerate_poli",
       "label": "Number of years by which CPSP is expected to accelerate policy change",
       "section": "assumptions",
-      "value": 9.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
         "cell": "Assumptions!E19"
-      }
+      },
+      "formula": "$win_years_counted",
+      "published": 9.0,
+      "explainer": "Changed for consistency. GiveWell credits the policy with 9 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
     },
     {
       "id": "number_of_years_brought_forward",
@@ -565,7 +588,7 @@
       "id": "expected_lives_saved_ok",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent",
+      "formula": "expected_annual_lives_saved_ok * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent * policy_wait_discount",
       "expected": 520.6672195
     },
     {
@@ -586,7 +609,7 @@
       "label": "Adjustment for recent pesticide bans (Nepal)",
       "section": "assumptions",
       "value": 0.25,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -888,7 +911,7 @@
       "id": "expected_lives_saved_ok_2",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_2",
+      "formula": "expected_annual_lives_saved_ok_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_2 * policy_wait_discount",
       "expected": 752.9695212
     },
     {
@@ -903,7 +926,7 @@
       "label": "Adjustment for recent pesticide bans (India (Maharashtra))",
       "section": "assumptions",
       "value": 0.25,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1205,7 +1228,7 @@
       "id": "expected_lives_saved_ok_3",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_3",
+      "formula": "expected_annual_lives_saved_ok_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_3 * policy_wait_discount",
       "expected": 3830.967505
     },
     {
@@ -1255,7 +1278,7 @@
       "label": "Adjustment for recent pesticide bans (Regional (Global))",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1637,7 +1660,7 @@
       "id": "expected_lives_saved_ok_4",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_4",
+      "formula": "expected_annual_lives_saved_ok_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_4 * policy_wait_discount",
       "expected": 3549.139435
     },
     {
@@ -1658,7 +1681,7 @@
       "label": "Adjustment for recent pesticide bans (China)",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1924,7 +1947,7 @@
       "id": "expected_lives_saved_ok_5",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_5",
+      "formula": "expected_annual_lives_saved_ok_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_5 * policy_wait_discount",
       "expected": 13476.54139
     },
     {
@@ -1959,7 +1982,7 @@
       "label": "Adjustment for recent pesticide bans (UN (Global))",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -2142,7 +2165,7 @@
       "id": "expected_lives_saved_ok_6",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_6",
+      "formula": "expected_annual_lives_saved_ok_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_6 * policy_wait_discount",
       "expected": 3549.139435
     },
     {

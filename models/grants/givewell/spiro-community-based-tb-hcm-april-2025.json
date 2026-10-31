@@ -12,7 +12,7 @@
     "title": "GiveWell CEA of Spiro - community-based TB HCM (April 2025) (public)",
     "url": "https://www.givewell.org/research/grants/Spiro-Tuberculosis-Household-Contact-Management-in-Pakistan-February-2025",
     "sheet": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
-    "published": "2025-03-06",
+    "published": "2025-04-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -182,7 +182,7 @@
       "label": "Adjustment factor for adherence to TPT compared to study",
       "section": "full_cea",
       "value": 1.06,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
@@ -196,7 +196,7 @@
       "label": "Internal validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
@@ -210,7 +210,7 @@
       "label": "External validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
@@ -1045,14 +1045,14 @@
       "id": "morbidity_benefits_reductions_in_morbidity_averted_due_to_av",
       "label": "Morbidity benefits (reductions in morbidity averted due to averted TB disease): Disability weight",
       "section": "full_cea",
-      "value": 0.333,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
         "cell": "Full CEA!B164"
       },
-      "explainer": "Global Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis"
+      "explainer": "Reads the figure every GiveWell model shares: Disability weight: tuberculosis, not HIV infected (GBD 2019) (`@gbd_disability_weights.tuberculosis`), the same number as this sheet's.\n\nGlobal Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis",
+      "formula": "@gbd_disability_weights.tuberculosis",
+      "expected": 0.333
     },
     {
       "id": "average_duration_of_tb_symptoms_in_children_in_years",
@@ -1093,21 +1093,30 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "full_cea",
-      "value": 0.31,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
         "cell": "Full CEA!B158"
       },
-      "explainer": "See cell note"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.31 here. The site uses one figure for this in every GiveWell model, 0.30647 (Value of long-term income gains as a share of the value of deaths averted (GiveWell), `@givewell_shared.income_to_mortality_value_ratio`), GiveWell's current best guess; the evaluator view keeps 0.31.\n\nSee cell note",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "published": 0.31
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC), at your discount rate and values",
+      "section": "full_cea",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.31,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "adjustment_for_income_increases_generated_by_tb_u5_hcm_compa",
       "label": "Adjustment for income increases generated by TB U5 HCM compared to SMC",
       "section": "full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-GkmmIJQoTzFzFGcU30Ti_pD15tl6Cwjul_tvl7jZao/edit",
@@ -1120,7 +1129,7 @@
       "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec",
       "label": "Estimate of total units of value from TB U5 HCM income effects",
       "section": "full_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa) * total_units_of_value_of_deaths_averted_by_the_program",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa) * total_units_of_value_of_deaths_averted_by_the_program",
       "expected": 1554.498463
     },
     {

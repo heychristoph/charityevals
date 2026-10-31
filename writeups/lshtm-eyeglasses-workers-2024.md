@@ -4,6 +4,6 @@ GiveWell funded trials there on eyeglasses for workers and other programs. GiveW
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [EARN RCT VoI rough estimate, 2024](/lshtm/lshtm-earn-rct-voi-2024) | GW | May 2024 | <span data-figure="headline" data-model="lshtm-earn-rct-voi-2024">21</span> | 96 |
-| [Eyeglasses for workers cost-effectiveness analysis, 2024](/lshtm) | GW | May 2024 | <span data-figure="headline" data-model="lshtm-eyeglasses-workers-2024">25</span> | 25 |
+| [Eyeglasses for workers cost-effectiveness analysis, 2024](/lshtm) | GW | May 2024 | <span data-figure="headline" data-model="lshtm-eyeglasses-workers-2024">25</span> | 26 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
