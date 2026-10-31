@@ -21,7 +21,8 @@
     "assumptions": {
       "life_value_multiplier": 1,
       "resource_shares": 0,
-      "discount_rate": 0.04175
+      "discount_rate": 0.04175,
+      "uov_per_daly": 2.844535114
     }
   },
   "resources": [
@@ -1912,14 +1913,14 @@
       "id": "value_assigned_to_1_yld_averted_active",
       "label": "Value assigned to 1 YLD averted (Active)",
       "section": "moral_weights",
-      "value": 2.844535114,
-      "kind": "estimate",
+      "formula": "$uov_per_daly",
+      "published": 2.844535114,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "Moral weights!B18"
       },
-      "explainer": "Calculated in the source sheet as `=IF(B7>0,B7/30,\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's 2019 sheet values a year lived with disability averted at 2.84 units of value (its moral weight for a year of life lost, divided by 30). That is an exchange rate between health and income; the site uses one for every model, Healthy year vs doubled-income year under Your values, so the anaemia years averted count as healthy years. The evaluator view pins it at GiveWell's 2.84 and keeps the sheet's number.\n\nCalculated in the source sheet as `=IF(B7>0,B7/30,\"\")`; kept as a fixed number here (text in arithmetic)."
     },
     {
       "id": "value_assigned_to_1_yld_averted",
@@ -2843,15 +2844,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly",
       "section": "voi_botec",
-      "value": 12298.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 12298.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "VoI BOTEC!G23"
       },
-      "explainer": "See 2019 CEA V4: https://docs.google.com/spreadsheets/d/1_bNbnVaAUQSq4fIzGBU_wVWojmwZrvQKzjSRx92y6wc/edit#gid=1680005064",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2019 sheets count every outcome in under-five life-equivalents and price one at $12,298 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $12,298.\n\nGiveWell's note: See 2019 CEA V4: https://docs.google.com/spreadsheets/d/1_bNbnVaAUQSq4fIzGBU_wVWojmwZrvQKzjSRx92y6wc/edit#gid=1680005064"
     },
     {
       "id": "counterfactual_giving_opportunity_is_x_times_cash",
@@ -2969,15 +2970,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_scenario",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (Scenario 5c: Some outside options > 11x such that we fill half RFMF)",
       "section": "voi_botec",
-      "value": 12298.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 12298.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "VoI BOTEC!H23"
       },
-      "explainer": "See 2019 CEA V4: https://docs.google.com/spreadsheets/d/1_bNbnVaAUQSq4fIzGBU_wVWojmwZrvQKzjSRx92y6wc/edit#gid=1680005064",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2019 sheets count every outcome in under-five life-equivalents and price one at $12,298 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $12,298.\n\nGiveWell's note: See 2019 CEA V4: https://docs.google.com/spreadsheets/d/1_bNbnVaAUQSq4fIzGBU_wVWojmwZrvQKzjSRx92y6wc/edit#gid=1680005064"
     },
     {
       "id": "counterfactual_donation_opportunity_in_the_event_that_we_don_4",
@@ -3032,9 +3033,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1QZNP8J_TSCjLN1iIuOdupR1l_v4r-789jXm2kBFfyNg/edit",
         "cell": "Moral weights!B6"
       },
-      "explainer": "GiveWell's moral weight, 47.22104173 units of value, times your multiplier on the value of a life.",
-      "formula": "47.22104173 * $life_value_multiplier",
-      "expected": 47.22104173
+      "explainer": "Changed for consistency. GiveWell's 2019 moral weight for averting an under-five death is 47.22 units of value. The site values every under-five death averted with one shared figure, GiveWell's current moral weight (116.25 units of value), times the weight on a life under Your values. Here it values the lives the reallocated money saves, which the sheet counts in life-equivalents at GiveDirectly's cost per life-equivalent; that cost is re-priced the same way, so this step comes to the money moved times its multiple of cash times the shared cash benchmark. The evaluator view keeps 47.22.",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "expected": 47.22104173,
+      "published": 47.22104173
     },
     {
       "id": "expected_units_of_value_from_reallocating_funds_2",
