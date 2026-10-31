@@ -20,7 +20,8 @@
   "assumptions": {
    "resource_shares": 0,
    "discount_rate": 0.014,
-   "life_value_multiplier": 1
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.3
   }
  },
  "resources": [],
@@ -3203,25 +3204,18 @@
    "expected": 0.0
   },
   {
-   "value": 36.528,
-   "kind": "estimate",
+   "id": "one_5_life_saved_equivelent_dalys",
+   "label": "One <5 life saved equivelent DALYs",
+   "section": "r_2024_updated_cea",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.528 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "expected": 36.528,
+   "published": 36.528,
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/12S_7m-n0PKbls5qjoy9ffnAnaEG5xt7Ywdtj6n--Amc/edit",
     "cell": "2024 - updated CEA!B50"
-   },
-   "id": "one_5_life_saved_equivelent_dalys_aim",
-   "label": "One <5 life saved equivelent DALYs (Ambitious Impact's figure)",
-   "section": "r_2024_updated_cea",
-   "explainer": "https://docs.google.com/spreadsheets/d/1xFvjzL8eM2Mg8yH9Jr3EJH1iE2ZedOEiNPKBCHgJJC4/edit#gid=324518670"
-  },
-  {
-   "id": "one_5_life_saved_equivelent_dalys",
-   "label": "One <5 life saved equivelent DALYs",
-   "section": "r_2024_updated_cea",
-   "explainer": "Ambitious Impact's value of a death averted, scaled by how much Your values weigh a life (1 in the evaluator view).",
-   "formula": "one_5_life_saved_equivelent_dalys_aim * $life_value_multiplier",
-   "expected": 36.528
+   }
   },
   {
    "id": "number_of_dalys_averted",
@@ -3989,5 +3983,11 @@
    "unit": "$ per DALY averted (Nigeria, 2024 updated CEA)"
   }
  },
- "summary": "Ambitious Impact's estimate for a new charity that distributes and maintains oxygen concentrators and pulse oximeters so hospitals can treat childhood pneumonia, modelled for Nigeria. The idea Oxygen Access Project was founded to run. A re-implementation of the 2024 updated CEA in AIM's spreadsheet, which AIM marks as superseding the 2023 report's model, traced cell by cell from its bottom line: about $173 per DALY averted (the 2023 report quoted $38 to $79)."
+ "summary": "Ambitious Impact's estimate for a new charity that distributes and maintains oxygen concentrators and pulse oximeters so hospitals can treat childhood pneumonia, modelled for Nigeria. The idea Oxygen Access Project was founded to run. A re-implementation of the 2024 updated CEA in AIM's spreadsheet, which AIM marks as superseding the 2023 report's model, traced cell by cell from its bottom line: about $173 per DALY averted (the 2023 report quoted $38 to $79).",
+ "theoretical": {
+  "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+  "runs": "Oxygen Access Project provides hospitals with oximeters, oxygen concentrators, maintenance and power (registered February 2025 for work in Nigeria).",
+  "url": "https://www.oxygenaccessproject.org",
+  "checked": "2026-10-31"
+ }
 }

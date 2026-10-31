@@ -585,10 +585,54 @@ export function inv7(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-11: no evaluator-internal exchange rate where the site has a shared one --------------------
+
+/** Conversions the site holds one shared version of (owner decision 2026-10-31, "one consistent way"):
+ * a row on a model's path that states one of these must read ours in our view, with the evaluator's
+ * number as `published` or pinned in the evaluator view, so every slider moves every model. */
+export const SHARED_RATES: { id: string; what: string; test: (label: string) => boolean; reads: (r: ResolvedRow) => boolean; want: string }[] = [
+  {
+    id: "income-to-daly", what: "an income-to-health exchange rate (years of doubled consumption to DALYs)",
+    test: (t) => /\bdoubl\w*\b.*\b(consumption|income)\b.*\b(to|in)\b.*\bdalys?\b|\bdalys?\b.*\bper\b.*\bdoubl/i.test(t),
+    reads: (r) => r.assumptionDeps.includes("uov_per_ln_consumption"), want: "$uov_per_ln_consumption (and $uov_per_daly)",
+  },
+  {
+    id: "death-value", what: "a value of a death averted, in DALYs or years of life",
+    test: (t) => /\b(dalys?|daly equivalents?|years of life|life years)\b.*\bper\b.*\b(deaths?|lives? saved)\b|\blife saved equiv\w* dalys?\b/i.test(t) && !/still ?births?/i.test(t),
+    reads: (r) => r.factDeps.some((f) => f.startsWith("moral_weights.")), want: "@moral_weights.* * $life_value_multiplier",
+  },
+  {
+    id: "fx", what: "a pound or euro exchange rate",
+    test: (t) => /\b(exchange|conversion|fx)\b/i.test(t) && /\b(gbp|eur|pounds?|euros?|£|€)\b/i.test(t),
+    reads: (r) => r.factDeps.some((f) => f.startsWith("fx.")), want: "@fx.*",
+  },
+];
+
+/** INV-11: an evaluator's own exchange rate doesn't survive in our view where a shared one exists. */
+export function inv11(lib: Library): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output && m.owner === "ambitious-impact");
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id)) continue;
+      for (const s of SHARED_RATES) {
+        // Ours if the row, or a row it is computed from, reads the shared version.
+        if (!s.test(r.label) || [...upstream(m, r.id)].some((id) => s.reads(m.byId.get(id)!))) continue;
+        violations.push({ inv: "INV-11", model: m.id, where: `${r.id} ${s.id}`, detail: `"${r.label}" is ${s.what} but reads ${r.formula ?? fmt(inputValue(r, "charityevals"))}, not the shared ${s.want}: read ours, with the evaluator's number in \`published\` or pinned` });
+      }
+    }
+  }
+  return {
+    id: "INV-11", title: "No evaluator-internal exchange rate where a shared one exists", status: "partial", checked: models.length, violations,
+    how: `Ambitious Impact's models (the rule is general; other evaluators' models are being brought under it separately): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen; stillbirths, which have no shared value, are left out.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av), inv11(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

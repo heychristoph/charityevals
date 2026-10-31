@@ -5,4 +5,6 @@ Advocates for pull incentives, such as subscription payments, that fund the deve
 | --- | --- | --- | --- | --- |
 | [ARMoR: advocacy for subscription models for new antimicrobials (Ambitious Impact, 2023 idea report)](/alliance-for-reducing-microbial-resistance) | AIM | June 2023 | <span data-figure="headline" data-model="alliance-for-reducing-microbial-resistance-aim">9.1</span> | 165 |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before ARMoR (Alliance for Reducing Microbial Resistance) existed, not of the charity's own results. It is shown because ARMoR (Alliance for Reducing Microbial Resistance) runs the programme today ([checked October 2026](https://forum.effectivealtruism.org/posts/srjXGXhsecmZvpEdq/two-years-of-doing-advocacy-on-antimicrobial-resistance)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

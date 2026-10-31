@@ -44,6 +44,8 @@ export type EvaluatorResult = {
   basis: Basis;
   programs: ProgramResult[];
   flags: Flag[];
+  /** Every program's model is purely theoretical (an idea's estimate from before the charity existed). */
+  theoretical: boolean;
 };
 
 /** A charity on the rankings: one figure per evaluator, and where the row sits. */
@@ -122,7 +124,7 @@ function computeResults(av: Record<string, number>) {
     const evaluators = plans.get(c.id)!.map(({ owner, parts }): EvaluatorResult => {
       const programs = parts.map((p) => programResult(c, p.program, p.model, p.weight, av));
       const flags = [...new Map(programs.flatMap((p) => p.result.flags).map((f) => [f.short, f])).values()];
-      return { owner, ...combine(programs), programs, flags };
+      return { owner, ...combine(programs), programs, flags, theoretical: programs.every((p) => !!p.result.model.theoretical) };
     });
     const lead = evaluators.find((e) => e.owner === primaryOf(lib, c.id)?.owner) ?? evaluators[0];
     return {

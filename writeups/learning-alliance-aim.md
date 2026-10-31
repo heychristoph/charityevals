@@ -5,4 +5,6 @@ Helps primary schools in sub-Saharan Africa teach better with structured lesson 
 | --- | --- | --- | --- | --- |
 | [Learning Alliance: structured pedagogy and lesson plans (Ambitious Impact, 2024 idea report)](/learning-alliance) | AIM | February 2024 | <span data-figure="headline" data-model="learning-alliance-aim">25</span> | 313, 1 kept fixed |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Learning Alliance existed, not of the charity's own results. It is shown because Learning Alliance runs the programme today ([checked October 2026](https://www.learningalliance.net/)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

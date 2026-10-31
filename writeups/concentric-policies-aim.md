@@ -5,4 +5,6 @@ Advocates for data-driven policies against non-communicable diseases, starting w
 | --- | --- | --- | --- | --- |
 | [Concentric Policies: tobacco taxation advocacy (Ambitious Impact, 2022 idea report)](/concentric-policies) | AIM | January 2022 | <span data-figure="headline" data-model="concentric-policies-aim">17</span> | 115 |
 
+**Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Concentric Policies existed, not of the charity's own results. It is shown because Concentric Policies runs the programme today ([checked October 2026](https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the)) and no model of its actual work exists yet.
+
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

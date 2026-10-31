@@ -20,7 +20,8 @@
   "assumptions": {
    "resource_shares": 0,
    "discount_rate": 0.014,
-   "life_value_multiplier": 1
+   "life_value_multiplier": 1,
+   "uov_per_daly": 2.5
   }
  },
  "resources": [],
@@ -3893,25 +3894,18 @@
    "format": "percent"
   },
   {
-   "value": 33.07,
-   "kind": "estimate",
+   "id": "set_at_2_times_median_salary_data_dalys_weighted_row_30",
+   "label": "DALYs per death averted at age 0 (standard input)",
+   "section": "data_standard_inputs_tools_re",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "expected": 33.07,
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 33.07 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "published": 33.07,
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1CippqWuyq_DNvwK21-Bq-Mta1ORFcCwdf1HWd7FWstM/edit",
     "cell": "Data Standard inputs  tools  re!B30"
-   },
-   "id": "set_at_2_times_median_salary_data_dalys_weighted_row_30_aim",
-   "label": "DALYs per death averted at age 0 (standard input) (Ambitious Impact's figure)",
-   "section": "data_standard_inputs_tools_re",
-   "explainer": ""
-  },
-  {
-   "id": "set_at_2_times_median_salary_data_dalys_weighted_row_30",
-   "label": "DALYs per death averted at age 0 (standard input)",
-   "section": "data_standard_inputs_tools_re",
-   "formula": "set_at_2_times_median_salary_data_dalys_weighted_row_30_aim * $life_value_multiplier",
-   "expected": 33.07,
-   "explainer": "Ambitious Impact's value of a death averted, scaled by how much Your values weigh a life (1 in the evaluator view)."
+   }
   },
   {
    "id": "dalys_per_neonatal_death_averted",
@@ -5037,5 +5031,11 @@
    "unit": "$ per DALY averted (Pakistan)"
   }
  },
- "summary": "Ambitious Impact's 2025 update of its estimate for a new charity scaling up kangaroo care for low birth weight babies by embedding it in hospitals, modelled for Pakistan. The idea First Embrace was founded to run (First Embrace works in Nigeria). A re-implementation of AIM's spreadsheet, traced cell by cell from its bottom line: the final cost per DALY averted per successful charity (about $50)."
+ "summary": "Ambitious Impact's 2025 update of its estimate for a new charity scaling up kangaroo care for low birth weight babies by embedding it in hospitals, modelled for Pakistan. The idea First Embrace was founded to run (First Embrace works in Nigeria). A re-implementation of AIM's spreadsheet, traced cell by cell from its bottom line: the final cost per DALY averted per successful charity (about $50).",
+ "theoretical": {
+  "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+  "runs": "First Embrace runs hospital-embedded kangaroo care in Kano State, Nigeria (since February 2026); AIM modelled Pakistan.",
+  "url": "https://forum.effectivealtruism.org/posts/wGXCuedzsubqNDAca/introducing-first-embrace-an-ambitious-impact-incubated",
+  "checked": "2026-10-31"
+ }
 }

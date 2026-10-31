@@ -148,8 +148,12 @@ const STALE_MONTHS = 18;
 /** One significant figure: a caveat states a size, not a measurement. */
 const roughly = (x: number) => Number(x.toPrecision(1)).toLocaleString("en-US");
 
+/** The caveat every purely theoretical model carries (schema: `theoretical`), first in its list. */
+export const THEORETICAL_TEXT = "Purely theoretical: an estimate of the idea, written before the charity existed, not of the charity's own results";
+
 export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Flag[] {
   const out: Flag[] = [];
+  if (m.theoretical) out.push({ level: "warn", short: "purely theoretical", text: THEORETICAL_TEXT });
   const spread = s.jointHigh / s.jointLow;
   if (spread > 100) out.push({ level: "warn", short: "wide range", text: `The plausible range spans about ${roughly(spread)}×` });
   if (s.judgmentShare > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `About ${Math.round(s.judgmentShare * 10) * 10}% of the uncertainty comes from judgment calls and shared assumptions` });
