@@ -120,8 +120,8 @@ become the range.
 - **Life-equivalents** (GiveWell's 2017/2019 sheets, Founders Pledge's child-life equivalents): GiveDirectly's
   cost per life-equivalent reads `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar`
   (the sheet's 11,663 in `published`), so steps stated as multiples of cash keep their multiple; a cost per life-equivalent the sheet labels
-  as a multiple of cash ("$2,000, ~5x cash") becomes GiveDirectly's cost / that multiple (dollar figure in
-  `published`); only a figure with no cash meaning counts as an under-five death; per-outcome rows (deaths, income, YLDs) read the shared versions directly.
+  as a multiple of cash ("$2,000, ~5x cash") is a cash multiple at the sheet's own ratio: GiveDirectly's cost / ($11,663 / $2,000)
+  (dollar figure in `published`); only a figure with no cash meaning counts as an under-five death; per-outcome rows (deaths, income, YLDs) read the shared versions directly.
 - **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
   `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
   rate stays and `$discount_rate` goes on top (INV-9b). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
