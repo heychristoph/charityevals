@@ -293,13 +293,22 @@
         "url": "https://docs.google.com/spreadsheets/d/1xdNZCpzI7-w7uoeJT7GTtY6oDpnPjkOKuaSxif_56qM/edit",
         "cell": "BOTEC!D37"
       },
-      "explainer": "We believe that the benefits of the TSU's work will continue for a little longer than the grant period itself (6 months beyond the one-year grant period, so benefits over a total of 1.5 years). These additional benefits could come from a few channels, such as continued effects on government decision-making after the TSU stops working with the government, or the expenditure the TSU influences last for beyond the one year."
+      "explainer": "We believe that the benefits of the TSU's work will continue for a little longer than the grant period itself (6 months beyond the one-year grant period, so benefits over a total of 1.5 years). These additional benefits could come from a few channels, such as continued effects on government decision-making after the TSU stops working with the government, or the expenditure the TSU influences last for beyond the one year.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "botec",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "total_benefits_units_of_value_from_program_malawi",
       "label": "Total benefits (units of value) from program (Malawi)",
       "section": "botec",
-      "formula": "total_units_of_value_from_program_in_year_1_malawi * number_of_years_of_benefit_from_program_malawi",
+      "formula": "total_units_of_value_from_program_in_year_1_malawi * pv_annuity_due(1, years_discount_rate, number_of_years_of_benefit_from_program_malawi)",
       "expected": 38220.0
     },
     {
@@ -594,13 +603,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1xdNZCpzI7-w7uoeJT7GTtY6oDpnPjkOKuaSxif_56qM/edit",
         "cell": "BOTEC!C37"
       },
-      "explainer": "We believe that the benefits of the TSU's work will continue for a little longer than the grant period itself (6 months beyond the one-year grant period, so benefits over a total of 1.5 years). These additional benefits could come from a few channels, such as continued effects on government decision-making after the TSU stops working with the government, or the expenditure the TSU influences last for beyond the one year."
+      "explainer": "We believe that the benefits of the TSU's work will continue for a little longer than the grant period itself (6 months beyond the one-year grant period, so benefits over a total of 1.5 years). These additional benefits could come from a few channels, such as continued effects on government decision-making after the TSU stops working with the government, or the expenditure the TSU influences last for beyond the one year.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
     },
     {
       "id": "total_benefits_units_of_value_from_program_burkina_faso",
       "label": "Total benefits (units of value) from program (Burkina Faso)",
       "section": "botec",
-      "formula": "total_units_of_value_from_program_in_year_1_burkina_faso * number_of_years_of_benefit_from_program_burkina_faso",
+      "formula": "total_units_of_value_from_program_in_year_1_burkina_faso * pv_annuity_due(1, years_discount_rate, number_of_years_of_benefit_from_program_burkina_faso)",
       "expected": 98000.0
     },
     {

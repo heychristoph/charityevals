@@ -431,13 +431,22 @@
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "Pure earth BOTEC (more detailed!G48"
       },
-      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit."
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "pure_earth_botec_more_detailed",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "children_in_country_cohorts_before_population_covered_adjust",
       "label": "Children in country cohorts (before population covered adjustment) (Bihar, India)",
       "section": "pure_earth_botec_more_detailed",
-      "formula": "child_births_per_year_bihar_india * number_of_years_benefits_are_counterfactually_sustained_for",
+      "formula": "child_births_per_year_bihar_india * pv_annuity_due(1, years_discount_rate, number_of_years_benefits_are_counterfactually_sustained_for)",
       "expected": 19091839.5
     },
     {
@@ -668,13 +677,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "Pure earth BOTEC (more detailed!H48"
       },
-      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
     },
     {
       "id": "children_in_country_cohorts_before_population_covered_adjust_2",
       "label": "Children in country cohorts (before population covered adjustment) (Jharkhand, Uttar Pradesh, West Bengal, or Tamil Nadu, India)",
       "section": "pure_earth_botec_more_detailed",
-      "formula": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or * number_of_years_benefits_are_counterfactually_sustained_for_2",
+      "formula": "child_births_per_year_jharkhand_uttar_pradesh_west_bengal_or * pv_annuity_due(1, years_discount_rate, number_of_years_benefits_are_counterfactually_sustained_for_2)",
       "expected": 12198140.37
     },
     {
@@ -911,13 +920,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "Pure earth BOTEC (more detailed!I48"
       },
-      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28"
+      "explainer": "We are very uncertain about this assumption. For a grant we recommended to the Centre for Pesticide Suicide Prevention, we assumed nine years of benefit. https://docs.google.com/document/d/1fkyhhdvfzDZvOoOe2fSAg69UB6qjLYROrTuSVurxr6s/edit#heading=h.64kuoj2dxt28\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
     },
     {
       "id": "children_in_country_cohorts_before_population_covered_adjust_3",
       "label": "Children in country cohorts (before population covered adjustment) (Philippines)",
       "section": "pure_earth_botec_more_detailed",
-      "formula": "product(child_births_per_year_philippines, number_of_years_benefits_are_counterfactually_sustained_for_3)",
+      "formula": "product(child_births_per_year_philippines, pv_annuity_due(1, years_discount_rate, number_of_years_benefits_are_counterfactually_sustained_for_3))",
       "expected": 18339769.0
     },
     {
