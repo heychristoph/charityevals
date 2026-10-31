@@ -22,6 +22,7 @@ Beyond the exchange rates, **how much a shrimp can suffer relative to a chicken*
 - **Shrimp weight.** ACE's figures carry Ambitious Impact's 2025 weight for a shrimp, about 57% of a hen's. We use Rethink Priorities' shrimp weight, about 9% of a chicken's, as every shrimp model does, and the chicken slider (default 33%) for chickens against people. ACE's own figure, 64, still reproduces in its own view.
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them.
+- **Pounds to dollars (changed for consistency).** ACE converts the charity's spending in pounds at its own rate, $1.2781 a pound; we use the 2024 IRS yearly average, $1.277, as for every model with costs in pounds. The difference is under 0.1%.
 
 
 ### Sources
