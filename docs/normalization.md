@@ -307,6 +307,9 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low FP's 2022 GiveDirectly, high GiveWell's 2024 GiveDirectly |
 | Pounds, euros, kroner | `@fx.usd_per_<cur>_<year>` | IRS yearly averages | IRS (2021–25 live table, 2015–20 archived) |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
+| Years a won reform counts | `$win_years_counted` (2.9) | 5 (1–20) | judgment, the middle of the evaluators' figures |
+| Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.92 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025); judgment from CIWF ChickenTrack |
+| Production per meal not eaten | `@sad_factors.production_response` | 0.76 (0.56–0.91) | Norwood and Lusk 2011 |
 | Species | `@welfare_ranges.*` (2.4) | | Rethink Priorities |
 | A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0539 across causes, 0.0413 global health (units of value per $) | GiveWell 2024 funding, ACE's Recommended Charities, Giving What We Can 2020–22 |
 | New money among money moved | `@meta.new_money_share` | 50% (35–80%) | Ambitious Impact, Effective Giving Incubation report |
@@ -480,6 +483,91 @@ model was removed); INV-12 requires it of any model with a row on its path about
 | CEARCH (Ambitious Impact, 2021) | 53.2 [0.42–313] → 99.4 [1.3–978] | 104 → 210 | 8× cash benchmark (2–15) → V across causes, live (0.0539); our 60% success (40–80%) → shared 55.7%. The evaluator view also uses V (Ambitious Impact gives no value for its EA dollars) and the sheet's 100% success and 0% discount. |
 | The Life You Can Save (Founders Pledge) | 33.6 [1.0–1,040] → 185 [5.6–1,430] | 32.2 → 185 | 40% kept (20–70%) × 5× Founders Pledge's cash (2–10) → 50% new money, global-health destinations live, shifted money net of GiveDirectly (0.0370 per dollar moved, 5.5× the old 0.0067). Founders Pledge states only its gross 17×, so both views use the shared method. |
 | Better Futures Guide (Ambitious Impact, 2025) | 27.9 [9.5–71] → 62.7 [7.6–308] | 27.9 → 27.9 | the sheet's 35% new money and 3× its old GiveDirectly (0.0165 per dollar moved) → 50% and GiveWell's Top Charities live (0.0370), × 2.25; success already 55.7%, now read from the shared fact. Evaluator view unchanged. |
+
+### 2.9 Won reforms: one way (October 2026)
+
+A corporate pledge, a law or a regulation a campaign wins would probably have come some day anyway. Evaluators
+answered "for how many years does the win count?" from 0.5 to 55 years for the same kind of win, discounted the
+wait until it takes effect in some models and not others, used their own rate of pledges kept, and shared credit
+in coalitions by rules that ignore the "Credit by share of resources" toggle. Now:
+
+```
+benefit of a win = per year once in effect × fulfilment × credit
+                   × (1 + $discount_rate) ^ -years_until_effect
+                   × pv_annuity_due(1, $discount_rate, $win_years_counted)
+```
+
+- **`$win_years_counted`** ("Years a won reform counts before it would have come anyway", Your values → How impact
+  is counted): judgment, 5 (1–20), about the middle of the evaluators' own figures (Founders Pledge 0.5–1.5, ACE 3.9,
+  5.5, 10, 15, 20.5, Ambitious Impact 35 and 55). Every model that credits a won commitment or policy reads it in our
+  view; the evaluator's years are in `published` (or, where the sheet works with dates, the "date without the
+  campaign" row becomes `expected date + $win_years_counted`, ACE's date in `published`: The Humane League, Animal
+  Welfare Observatory). Ambitious Impact's year-by-year sheets weight each year after the five years to
+  implementation by `max(0, min(1, years_counted - (year - 6)))`.
+- **The wait** until the reform takes effect is discounted at `$discount_rate` in every such model: rows
+  `*_years_until_effect` (judgment, from the commitments' deadlines, with ranges) and a discount factor with
+  `published` 1 where the evaluator doesn't discount it. Already done by the evaluator: The Humane League, Animal
+  Welfare Observatory, Aquatic Life Institute (its years counted now start at the stunning date), Ambitious Impact.
+  Zero for meal policies (Sociedade Vegetariana Brasileira, Dansk Vegetarisk Forening, ACE 2016 institutional work).
+- **Fulfilment**: `@sad_factors.commitment_fulfilment_cage_free` (0.92, 0.38–0.96: Open Wing Alliance / Chicken Watch
+  2025, commitments due by 2024, by count) and `@sad_factors.commitment_fulfilment_broiler` (judgment 0.3, 0.15–0.5:
+  no tracker publishes a rate; CIWF ChickenTrack reports progress only). They replace every evaluator's own figure
+  (0.25–0.9) in our view, and are added (with `published` 1) where the evaluator had none (ACE 2016). Pig and shrimp
+  pledges keep the evaluator's figure: no shared record exists.
+- **Coalition credit** follows `$resource_shares` like GiveWell's leverage and funging: off (default), the
+  evaluator's credit share, filed as `judgment`; on, the charity's share of the resources all groups put into the
+  win. Where the evaluator's split is already a share of the work (ACE's "% contribution made by other
+  organisations", Sinergia's "% of Sinergia's collaboration", Aquatic Life Institute's "% of success contributed")
+  the same share serves both modes. Where it is counterfactual responsibility (ÇHKD 100%, Dansk Vegetarisk
+  Forening's 70% to others, ACE 2016's HSUS and ASF responsibility) a `*_resource_share` judgment with a range is
+  used when the toggle is on. Wild Animal Initiative's credit per paper becomes, when on, a paper's cost over the
+  field's spending until help arrives.
+- **Diet change**: every meals-replaced or animals-spared path multiplies by `@sad_factors.production_response`
+  (0.76, `published` 1), as charityevals' own diet template does, and, outside Latin America, by
+  `meal_mix_vs_reference` (judgment; `published` 1): the shared per-meal figure is Sinergia's Latin American
+  canteen meal. ACE's 2025 meal estimates have only Brazil, US and global tabs, in a later SAD version 9× lower, so
+  only their ratio is used: US meals 1.5 (0.75–3); Denmark, Germany and China 1 (0.5–2), a labelled judgment.
+- **ACE 2016 hens and broilers** read the shared SADs figures (decision 3): a cage-free hen-year 17.49 SADs (ACE 2016:
+  its proportional improvement 0.105 × 28.9 = 3.03), a broiler under better standards 0.64 in 2025 SADs (ACE 2016:
+  0.075 × 7/52 × 28.9 = 0.29), the broilers in a `ced_chicken_2025` pair. The ACE 2016 models are split by species
+  (decision 5's condition), so they rank; HSUS's is now the highest animal figure on the site.
+- **ACE's Recommended Charity Fund weights** (facts/ace_fund_weights.json): what the fund paid each of the ten
+  Recommended Charities in February and August 2026, $3.26M in all (Wild Animal Initiative 16.4%, The Humane League
+  16.1%, Sinergia 15.1%, Dansk Vegetarisk Forening 13.0%, Good Food Fund 8.3%, Shrimp Welfare Project 7.9%,
+  Sociedade Vegetariana Brasileira 6.7%, Aquatic Life Institute 6.6%, ÇHKD 6.3%, Animal Welfare Observatory 3.6%),
+  for the animal leg of the moved-money value (2.8) in place of equal weights.
+- **Also**: the cage-to-aviary hen figure's high end is now 28.94 (a caged hen's whole year), so the 17.49 best guess
+  is the geometric middle of its range; the shrimp-stunning best guess stays at the bottom of its range, labelled as
+  our judgment; stand-in species weights and the welfare-point bridge are labelled as judgments on every row that
+  uses them.
+
+Climate and global-health rows that credit a policy win and should read the same slider (other owners' files):
+Clean Air Task Force `years_brought_forward` (1.5) and `ccs_years_forward`, Coalition for Rainforest Nations
+`years_brought_forward` (3), Innovation in Government Initiative `india_years_forward` (1.5), GiveWell's Centre for
+Pesticide Suicide Prevention `number_of_years_brought_forward` and Vital Strategies' years-forward rows.
+
+Before → after (healthy years per $1,000, our view at the defaults; evaluator views unchanged except Wild Animal
+Initiative, whose bridge is ours in both):
+
+| Model | Before → after | Main reasons |
+|---|---|---|
+| HSUS Farm Animal Protection Campaign (ACE 2016) | 213 → 746 | shared hen-year SADs (×5.8), broilers 0.64; years 3.87 → 5; fulfilment 0.92, wait 6 years; production response on meals |
+| Albert Schweitzer Foundation (ACE 2016) | 48.6 → 150 | the same; wait 4 years |
+| The Humane League (Founders Pledge 2019) | 129 → 684 | years 0.5–1.5 → 5, discounted with a 4–6-year wait; cage-free fulfilment 0.6 → 0.92 |
+| Sinergia Animal | 675 → 379 | cage-free years 15 → 5 and a 4-year wait; pigs 1–22 years → 5 from each deadline; fulfilment 0.53 → 0.92; production response |
+| The Humane League (ACE) | 126 → 122 | years brought forward 3–15 → 5; fulfilment per shared figures |
+| Animal Welfare Observatory | 22.5 → 26.3 | the same |
+| Sociedade Vegetariana Brasileira | 32.9 → 23.5 | years 5.5 → 5; production response |
+| Çiftlik Hayvanlarını Koruma Derneği | 42.5 → 17.3 | years 20.5 → 5, a 4-year wait; fulfilment 0.63 → 0.92 |
+| Centre for Aquaculture Progress (AIM) | 106 → 14.6 | 55 years → 5 |
+| Animal Policy International (AIM) | 55.3 → 13.2 | 35 years → 5 |
+| Vegan Outreach (ACE 2016) | 9.41 → 10.7 | production response 0.76 × US meal 1.5 |
+| Aquatic Life Institute | 3.83 → 1.88 | 15 years from 2023 → 5 from the stunning date |
+| Dansk Vegetarisk Forening | 2.09 → 0.87 | years 10 → 5; production response |
+| ProVeg Deutschland (ACE 2016) | 1.13 → 0.89 | production response; years 3.87 → 5 |
+| Good Food Fund | 0.478 → 0.363 | production response |
+| Wild Animal Initiative | 0.0204 → 0.0172 | the ten years sooner discounted |
+| CEARCH (reads ACE's charities live) | 99.4 → 84.0 | its animal destinations moved |
 
 
 ## 3. Invariants
