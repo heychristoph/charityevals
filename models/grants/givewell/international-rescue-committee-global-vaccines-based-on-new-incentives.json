@@ -8227,20 +8227,29 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "inputs",
-      "value": 0.30647,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!H261"
       },
-      "explainer": "GW's SMC CEA"
+      "explainer": "Reads the figure every GiveWell model shares: Value of long-term income gains as a share of the value of deaths averted (GiveWell) (`@givewell_shared.income_to_mortality_value_ratio`), the same number as this sheet's.\n\nGW's SMC CEA",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "expected": 0.30647
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC), at your discount rate and values",
+      "section": "inputs",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.30647,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "main_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
       "expected": 0.30647
     },
     {
@@ -8319,14 +8328,14 @@
       "id": "average_number_of_people_per_household_2",
       "label": "Average number of people per household",
       "section": "inputs",
-      "value": 6.7,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!I275"
       },
-      "explainer": "GW's analysis of average household size in Northwest Nigeria We base our estimate of average household size on the results of the 2021 Malaria Indicator Survey (MIS) from Nigeria. Average household size reported in the 2021 MIS ranges from 6.3 to 8.1 in states where New Incentives operate, averaging 6.7. We use this average value across all states in the CEA, including prospective states where New Incentives does not yet operate. We have opted not to vary this estimate by state, because this parameter has a negligible effect on estimated cost-effectiveness of the program."
+      "explainer": "Reads the figure every GiveWell model shares: Average household size, Northwest Nigeria (2021 Malaria Indicator Survey) (`@givewell_shared.household_size_nigeria_northwest`), the same number as this sheet's.\n\nGW's analysis of average household size in Northwest Nigeria We base our estimate of average household size on the results of the 2021 Malaria Indicator Survey (MIS) from Nigeria. Average household size reported in the 2021 MIS ranges from 6.3 to 8.1 in states where New Incentives operate, averaging 6.7. We use this average value across all states in the CEA, including prospective states where New Incentives does not yet operate. We have opted not to vary this estimate by state, because this parameter has a negligible effect on estimated cost-effectiveness of the program.",
+      "formula": "@givewell_shared.household_size_nigeria_northwest",
+      "expected": 6.7
     },
     {
       "id": "average_number_of_people_per_household",
@@ -8867,15 +8876,15 @@
       "label": "Treatment costs averted from prevention",
       "section": "inputs",
       "unit": "%",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!H312"
       },
-      "explainer": "GW guesstimate GW's supplemental intervention-level adjustments",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's.\n\nGW guesstimate GW's supplemental intervention-level adjustments",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2
     },
     {
       "id": "treatment_costs_averted_from_prevention_2",
@@ -8900,15 +8909,15 @@
       "label": "Investment of income increases",
       "section": "inputs",
       "unit": "%",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!H313"
       },
-      "explainer": "GW guesstimate GW's supplemental intervention-level adjustments",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's.\n\nGW guesstimate GW's supplemental intervention-level adjustments",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05
     },
     {
       "id": "investment_of_income_increases_2",
@@ -9546,14 +9555,14 @@
       "label": "Counterfactual value per dollar spent by domestic governments on immunization programs",
       "section": "inputs",
       "unit": "UoV",
-      "value": 0.005057,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!H337"
       },
-      "explainer": "GW analysis GW's analysis of the counterfactual value of other actors' spending"
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of domestic government spending (GiveWell) (`@givewell_shared.cf_value_government`), the same number as this sheet's.\n\nGW analysis GW's analysis of the counterfactual value of other actors' spending",
+      "formula": "@givewell_shared.cf_value_government",
+      "expected": 0.005057
     },
     {
       "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
@@ -9656,14 +9665,14 @@
       "label": "Counterfactual value per dollar spent by Gavi",
       "section": "inputs",
       "unit": "UoV",
-      "value": 0.007,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Wgu_d2oyVKMvS7-NZcMUNmhSj2hptEtWrf_qG4LfaNg/edit",
         "cell": "Inputs!H338"
       },
-      "explainer": "GW analysis GW's analysis of the counterfactual value of other actors' spending"
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of Gavi spending (GiveWell) (`@givewell_shared.cf_value_gavi`), the same number as this sheet's.\n\nGW analysis GW's analysis of the counterfactual value of other actors' spending",
+      "formula": "@givewell_shared.cf_value_gavi",
+      "expected": 0.007
     },
     {
       "id": "counterfactual_value_per_dollar_spent_by_gavi",

@@ -64,14 +64,14 @@
       "id": "units_of_value_per_cyp_best_guess",
       "label": "Units of value per CYP (Best guess)",
       "section": "cea",
-      "value": 0.7,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
         "cell": "CEA!B25"
       },
-      "explainer": "GiveWell's estimate of the value of one year of modern contraception use (0.7 units of value)"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.7 here. The site uses one figure for this in every GiveWell model, 0.6997 (Value of a year of modern contraception, low-income countries (GiveWell), `@givewell_shared.uov_per_cyp_low_income`), GiveWell's current best guess; the evaluator view keeps 0.7.\n\nGiveWell's estimate of the value of one year of modern contraception use (0.7 units of value)",
+      "formula": "@givewell_shared.uov_per_cyp_low_income + @givewell_shared.uov_per_cyp_deaths_low_income * ($life_value_multiplier - 1)",
+      "published": 0.7
     },
     {
       "id": "units_of_value_per_couple_year_of_protection",
@@ -513,13 +513,14 @@
       "label": "Counterfactual value per dollar spent by the Global Fund or PMI (proxy for other philanthropic donors) (Best guess)",
       "section": "leveragefunging",
       "unit": "UoV",
-      "value": 0.015433,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/13zNeNX3hm1ZQDvvg5v_NACifYw7ryPVIOhCPez4XQAs/edit",
         "cell": "LeverageFunging!H49"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_global_fund",
+      "expected": 0.015433,
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of Global Fund or PMI spending (GiveWell) (`@givewell_shared.cf_value_global_fund`), the same number as this sheet's."
     },
     {
       "id": "value_lost_by_shifting_spending_away_from_programs_the_globa",
