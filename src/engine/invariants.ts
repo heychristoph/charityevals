@@ -491,6 +491,61 @@ export function inv9(lib: Library): InvariantReport {
   };
 }
 
+/** An input that counts how many years a benefit, change or flow of money lasts. */
+const YEARS_OF = /\b(years? of (the )?(change|impact|benefits?|effects?|production|funding|coverage|higher coverage|government funds|reallocation|policy|polic(y|ies)|reform|treatment costs)|number of (future )?years|for how many (future )?years|years? (that|for which|over which)[^.;]{0,40}\b(utili[sz]ed|last|lasts|persist\w*|counted|funded?)|duration of (the )?(benefits?|effects?|impact|change)|(benefit|effect|impact)s? (duration|last(s|ing)? for)|years the (wellbeing )?(benefit|effect|change)s? last)\b/i;
+
+/** INV-9b: a benefit counted over several years is discounted. Per input row, not per model (INV-9
+ * passes a model that reads $discount_rate on one branch while another sums years at face value):
+ * each input row on the path whose label counts the years a benefit lasts is moved ×1.25 in our
+ * view at the default rate and at 0; if the headline moves by the same factor both times, those
+ * years are added up undiscounted. */
+export function inv9b(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  const r0 = av.discount_rate;
+  const hi = { ...av, discount_rate: Math.max(0.08, r0 * 2) };
+  const zero = { ...av, discount_rate: 0 };
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    const vals = compute(lib, m, av);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id) || r.formula !== undefined || !YEARS_OF.test(r.label) || NOT_TIME.test(r.label)) continue;
+      const v = vals[r.id];
+      if (!Number.isFinite(v) || v <= 1) continue;
+      const gain = (a: Record<string, number>) => {
+        const h0 = headline(lib, m, a), h1 = headline(lib, m, a, { [r.id]: v * 1.25 });
+        return Number.isFinite(h0) && h0 !== 0 ? h1 / h0 : NaN;
+      };
+      const g0 = gain(zero), g1 = gain(hi);
+      // Moves the headline, and by the same factor whatever the rate: summed at face value.
+      if (Number.isFinite(g0) && g0 > 1 + 1e-9 && close(g0, g1, 1e-9))
+        violations.push({ inv: "INV-9b", model: m.id, where: r.id, detail: `"${r.label}" = ${fmt(v)} years: moving it ×1.25 moves our headline ×${fmt(g0)} at a 0% and at a ${fmt(hi.discount_rate * 100)}% discount rate alike, so the years are added up undiscounted; discount them at $discount_rate (pinned to the evaluator's rate, 0 if none, in the evaluator view)` });
+    }
+  }
+  return {
+    id: "INV-9b", title: "Benefits over several years are discounted", status: "partial", checked: models.length, violations,
+    how: "Every input row on the path to the output (variants: their overrides) whose label counts how long a benefit, change, coverage or flow of money lasts (years of change/impact/benefit/production/funding, number of years, duration of the effect) and is above 1 is moved ×1.25 in our view, once at a 0% discount rate and once at max(8%, twice the default): if the headline rises, and by the same factor at both rates, those years are added up at face value and must be discounted at $discount_rate. Heuristic on labels: years counted under other words aren't seen, and a frozen present value (a cached PV typed in as a number) isn't either.",
+  };
+}
+
+/** INV-5b: every evaluator pin is read. A pin in evaluator.assumptions that no row (and not the
+ * unit's conversion) reads does nothing: either the model has the concept and some row must read the
+ * shared lever (a death valued without $life_value_multiplier), or the pin should go. */
+export function inv5b(lib: Library): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.evaluator && Object.keys(m.evaluator.assumptions).length);
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const conv = m.output ? headlineConversion(lib, m.output.unit) : undefined;
+    const read = new Set([...m.rows.flatMap((r) => r.assumptionDeps), ...(conv ? refs(conv).assumptions : [])]);
+    for (const a of Object.keys(m.evaluator!.assumptions))
+      if (!read.has(a)) violations.push({ inv: "INV-5b", model: m.id, where: `evaluator.assumptions.${a}`, detail: `the evaluator view pins $${a} = ${m.evaluator!.assumptions[a]}, but no row and not the ${m.output?.unit ?? "(no output)"} conversion reads it: read the shared lever where the model has the concept, or drop the pin` });
+  }
+  return {
+    id: "INV-5b", title: "Every evaluator pin is read", status: "checked", checked: models.length, violations,
+    how: "For every model with evaluator.assumptions, each pinned assumption must be read by some row of the model (inherited rows count) or by its output unit's conversion. An unread pin is either a lever the model should read (a death valued without $life_value_multiplier, years without $discount_rate) or dead weight to drop.",
+  };
+}
+
 // --- INV-10: each slider moves exactly the models it should ---------------------------------------
 
 type Shape = "linear" | "independent";
@@ -692,7 +747,7 @@ export function inv11(lib: Library): InvariantReport {
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av), inv11(lib)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

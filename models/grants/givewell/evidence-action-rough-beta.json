@@ -65,15 +65,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_scenario",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (Scenario 1: Total failure (no new top charities))",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!B30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_to_generate_information_to_reallocate_scenario_1_total",
@@ -144,6 +144,15 @@
       "explainer": "GiveWell's assumption that the cost-effectiveness of funding opportunities falls by 5% a year; it is not time preference, so the discount slider leaves it alone."
     },
     {
+      "id": "years_discount_rate",
+      "section": "eab_botec",
+      "label": "Discount rate on future benefits (time preference)",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0,
+      "explainer": "Changed for consistency. GiveWell's sheet lowers later years only by how fast these opportunities get worse (its own rate, kept), not for time: a benefit in a later year otherwise counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values), applied on top of the sheet's rate. The evaluator view keeps only the sheet's rate."
+    },
+    {
       "id": "eab_rfmf_per_year_utilized_b",
       "label": "EAB RFMF per year that is utilized (Scenario 1: Total failure (no new top charities))",
       "section": "eab_botec",
@@ -161,7 +170,7 @@
       "id": "npv_of_money_reallocated_scenario_1_total_failure_no_new_top",
       "label": "NPV of money reallocated (Scenario 1: Total failure (no new top charities))",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_b, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_b, 0, 1)",
       "expected": 0.0,
       "source": {
         "title": "Source spreadsheet",
@@ -277,15 +286,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_2a_full",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (2a: Full RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!C30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "full_cost_of_eab_to_create_top_charities_assuming_it_doesn_t",
@@ -327,7 +336,7 @@
       "id": "npv_of_money_reallocated_2a_full_rfmf_above_counterfactual_u",
       "label": "NPV of money reallocated (2a: Full RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_c, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_c, 0, 1)",
       "expected": 121617325.1,
       "source": {
         "title": "Source spreadsheet",
@@ -479,15 +488,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_2b_half",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (2b: Half RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!D30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_to_generate_information_to_reallocate_2b_half_rfmf_abov",
@@ -515,7 +524,7 @@
       "id": "npv_of_money_reallocated_2b_half_rfmf_above_counterfactual_u",
       "label": "NPV of money reallocated (2b: Half RFMF above counterfactual used, counterfactual dollars to ~2.5x cash)",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_d, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_d, 0, 1)",
       "expected": 60808662.57,
       "source": {
         "title": "Source spreadsheet",
@@ -652,15 +661,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_2c_no_rf",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (2c: No RFMF used above counterfactual (counterfactual is ~5x cash))",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!E30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_to_generate_information_to_reallocate_2c_no_rfmf_used_a",
@@ -701,7 +710,7 @@
       "id": "npv_of_money_reallocated_2c_no_rfmf_used_above_counterfactua",
       "label": "NPV of money reallocated (2c: No RFMF used above counterfactual (counterfactual is ~5x cash))",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_e, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_e, 0, 1)",
       "expected": 0.0,
       "source": {
         "title": "Source spreadsheet",
@@ -796,15 +805,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly_scenario_2",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly (Scenario 3: 1 top charity at 10x cash, counterfactual at ~5x cash)",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!F30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_to_generate_information_to_reallocate_scenario_3_1_top",
@@ -832,7 +841,7 @@
       "id": "npv_of_money_reallocated_scenario_3_1_top_charity_at_10x_cas",
       "label": "NPV of money reallocated (Scenario 3: 1 top charity at 10x cash, counterfactual at ~5x cash)",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_f, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_f, 0, 1)",
       "expected": 81078216.76,
       "source": {
         "title": "Source spreadsheet",
@@ -982,15 +991,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly",
       "section": "eab_botec",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1MJA3GbjnU4zULLMLOYv_uK-gaS44l5yZJh5302Rk08Y/edit",
         "cell": "EAB BOTEC!G30"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_to_generate_information_to_reallocate",
@@ -1018,7 +1027,7 @@
       "id": "npv_of_money_reallocated",
       "label": "NPV of money reallocated",
       "section": "eab_botec",
-      "formula": "pv(discount_rate_eab_botec, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_g, 0, 1)",
+      "formula": "pv((1 + discount_rate_eab_botec) * (1 + years_discount_rate) - 1, years_new_top_charity_rfmf_is_utilized, -eab_rfmf_per_year_utilized_g, 0, 1)",
       "expected": 40539108.38,
       "source": {
         "title": "Source spreadsheet",

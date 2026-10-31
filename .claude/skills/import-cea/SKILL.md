@@ -105,17 +105,6 @@ become the range.
 
 ## 5. Our steps to the scale (layers B and C)
 
-<<<<<<< HEAD
-- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). An exchange rate between
-  outcomes inside the model reads our shared assumption or fact in our view; the evaluator's own rate
-  goes in `published` and is pinned only in the evaluator view (INV-2). A model whose outcome mixes
-  kinds (AIM's "DALY-equivalents" folding in income and deaths) is split into its parts, each
-  converted with our rates.
-- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
-- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
-  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
-  credit-by-share-of-resources lever as in section 4.
-=======
 - `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (INV-2c,
   normalization.md 1 and 2.7): every conversion the evaluator made in its own way (an exchange rate
   between outcomes, the value of a death, depression to DALYs, a cash benchmark behind a multiple of
@@ -124,7 +113,17 @@ become the range.
   `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
   "changed for consistency" explainer. A concept two models use with different values and no shared
   version gets a new shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
->>>>>>> worktree-agent-aa715a352886180e5
+- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
+- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
+  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
+  credit-by-share-of-resources lever as in section 4.
+- **Life-equivalents** (GiveWell's 2017/2019 sheets, Founders Pledge's child-life equivalents): GiveDirectly's
+  cost per life-equivalent reads `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar`
+  (the sheet's 11,663 in `published`), so steps stated as multiples of cash keep their multiple and a life-equivalent
+  counts as an under-five death; per-outcome rows (deaths, income, YLDs) read the shared versions directly.
+- **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
+  `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
+  rate stays and `$discount_rate` goes on top (INV-9b). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,

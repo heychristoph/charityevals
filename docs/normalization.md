@@ -322,9 +322,18 @@ in its own unit, WELLBYs, so it doesn't go through this conversion; its rows now
 **Multiples of cash.** A result published only as a multiple of cash (FP's "10× GiveDirectly") is
 multiplied by `@cash.uov_per_dollar`. Where a sheet made the multiple by dividing its units of value by
 its own cash figure, that figure reads `@cash.uov_per_dollar` too (the sheet's in `published`), so the
-benchmark cancels and our units of value are the sheet's. GiveWell's 2017 sheets state cash as a cost per
-under-five life-equivalent (11,663, 12,298): no clean way to cancel, so they are waived, their multiple
-converted with the shared benchmark.
+benchmark cancels and our units of value are the sheet's. GiveWell's 2017 and 2019 sheets count everything in under-five life-equivalents and price one at
+GiveDirectly's $11,663 (2019: $12,298), at that year's moral weights between deaths and income. Our view
+re-prices it with the shared versions: GiveDirectly's cost per life-equivalent reads
+`@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar` (about $34,700), the
+sheet's figure in `published`. A step stated as a multiple of cash keeps its multiple (the figure cancels);
+a step stated as a cost per life-equivalent is valued as an under-five death; per-outcome rows the sheet has
+(Fortify's 2019 incubation sheet: a death at GiveWell's 2019 47.22, a year lived with disability at 2.84)
+read `@moral_weights` and `$uov_per_daly` (pinned 2.84). Four of the five sheets (Evidence Action India,
+Evidence Action Beta, IDinsight, IDinsight's New Incentives value of information) have no outcome rows at
+all: they are leverage or value-of-information sheets whose only outcome is money moved, in life-equivalents
+or multiples of cash, so the life-equivalent is the outcome and is valued as an under-five death.
+Founders Pledge's Innovation in Government counts India the same way.
 
 Inventory of evaluator-internal conversions outside AIM's models (October 2026; AIM's are handled in
 their own pass). "Before → after" is healthy years per $1,000 in our view at the defaults; the evaluator
@@ -341,7 +350,7 @@ view is unchanged unless stated.
 | FP New Incentives | "10× cash" via FP's $164/WELLBY-eq. and 3.7 per DALY | 0.00321 UoV/$ per 1× | `@cash.uov_per_dollar`; output now `uov` (pin `uov_per_daly` 1.9498 keeps its evaluator view) | 16.5 → 16.8 |
 | FP Pure Earth | "10× cash" via $164 and 1.898 | 0.00321 | `@cash` 0.00335 | 16.1 → 16.8 |
 | FP The Life You Can Save | value of recipients' cash, FP's GiveDirectly | 0.00321 | `@cash` | 32.2 → 33.6 |
-| FP Innovation in Government (Zambia) | 7 DALYs per child life, 3 ln(income) per DALY, GiveDirectly $11,663 per life-eq. | 1.86 UoV per ln(income) | `$uov_per_ln_consumption` 1.44 (India's part, valued by FP in 2017 life-equivalents, goes through `@cash`) | 13.6 → 11.7 |
+| FP Innovation in Government (Zambia) | 7 DALYs per child life, 3 ln(income) per DALY, GiveDirectly $11,663 per life-eq. | 1.86 UoV per ln(income) | `$uov_per_ln_consumption` 1.44; India's 2017 child-life equivalents valued as under-five deaths, `@moral_weights.uov_per_death_under5 × $life_value_multiplier` (116.25, was 39 through `@cash`) | 13.6 → 11.7 → 21.6 |
 | FP GiveDirectly, Imagine Worldwide | FP's 1.898 per doubling | | undo of a figure FP publishes only in its units: waived | none |
 | FP Imagine, GAIN, Iodine Global Network | own GiveDirectly figure | | cancels or off the path | none |
 | GiveWell, 141 grant sheets | our multiply-back of the multiple of cash | 0.00335 literal | `@cash.uov_per_dollar` | none |
@@ -349,7 +358,10 @@ view is unchanged unless stated.
 | GiveWell Fortify Health iron consolidation | 1 DALY = 3 ln(consumption)-years | 4.33 UoV/DALY | `$uov_per_daly / $uov_per_ln_consumption`, pin 4.33 | 22.5 → 12.8 (evaluator view 24.4 → 11.3: it now converts at the sheet's own 4.33) |
 | GiveWell Healthy Futures | neonatal death = 33.07 DALYs | 33.07 | GiveWell's own neonatal weight (84 UoV, already in the sheet) / `$uov_per_daly`, pin 2.54 | 4.92 → 5.40 |
 | GiveWell Malengo | time discount 4% typed in; €→$ | 0.04; 0.8458 €/$ | `$discount_rate` (pin 0.04; 6.5% for later cohorts = ours + GiveWell's 2.5-point uncertainty premium); `1 / @fx.usd_per_eur_2021` | 8.96 → 7.42 |
-| GiveWell, sheets with 2017 life-equivalents | GiveDirectly cost per life-eq. | 11,663; 12,298 | waived (above) | none |
+| GiveWell, sheets with 2017/2019 life-equivalents | GiveDirectly cost per life-eq.; Fortify 2019: under-5 death 47.22, YLD 2.84 | 11,663; 12,298 | `uov_per_death_under5 × $life_value_multiplier / @cash` ($34,700); `@moral_weights`; `$uov_per_daly` pinned 2.84 | EA India 20.9 → 14.2, EA Beta 14.6 → 27.7, IDinsight 16.1 → 37.4, IDinsight NI 19.3 (cancels), Fortify 2019 incubation 24.9 → 21.7 (evaluator view 21.7 → 15.3: it converts at the sheet's 2.84) |
+| HLI Taimaka | lives saved left out of HLI's bottom line (a bonus: 65 WBp1k deprivationist, neutral point 2; grief 2.88) | 0 | our step: lives saved × 62 × (5.72 − neutral point) × `$life_value_multiplier`, plus grief | 10.5 → 49.6 |
+| Years of benefit at face value (ACE ProVeg 2016; GiveWell Vital Strategies, Pure Earth, Rice KMC, CHAI TSUs, EA India, EA syphilis ×2, CPSP) | no time discount | 0 | `pv_annuity_due(1, years_discount_rate, years)`, the rate reading `$discount_rate` with 0 in `published` | ProVeg 1.14 → 1.13, Vital Strategies 21.0 → 17.7, Pure Earth 30.7 → 27.4, KMC 43.8 → 42.3, TSUs 44.8 → 43.9, CPSP 92.6 → 79.6, syphilis 50.7 → 48.2 / 48.7 → 44.3 |
+| "Opportunities get worse" sheets (EA Beta, Accelerator, CHAI incubator, Fortify VoI 2021, IRD threshold, IRD ZM) | decay only, no time preference | | decay kept, `$discount_rate` on top (0 in `published`) | 15.7–42.6, each −7% to −20% |
 | GiveWell age-specific moral weights (100.7, 127.3, 116…) | value of a death | | they are the shared curve (× `$life_value_multiplier`) | none |
 | ACE The Humane League, Shrimp Welfare Project | £→$ | 1.2781 | `@fx.usd_per_gbp_2024` 1.277 | <0.1% |
 | ACE Animal Welfare Observatory; Dansk Vegetarisk Forening | €→$; DKK→$ | 1.0822; 0.1452 | `@fx.usd_per_eur_2024` 1.0823; `@fx.usd_per_dkk_2023` 0.14514 | <0.1% |
@@ -381,6 +393,8 @@ shrinks).
 | INV-6 | The evaluator's bottom line reproduces. | Model declares `output.native` (the native row). That row, or its direct inputs, carry `expected`; `scripts/check.ts` already checks `expected` in the evaluator view. |
 | INV-7 | Our rows are visibly ours. | Every row strictly between `output.native` and `output.row` is in a section of kind `accounting`, `bridge` or `conversion`, and has no `expected`. Every row upstream of `native` is in an evaluator section. |
 | INV-8 | One view, one set of numbers. | `headline(m, av, {}, "evaluator")` converts with `viewAssumptions(m, av, "evaluator")`, not `av` (fails today: see 4.2). |
+| INV-9b | Benefits over several years are discounted. | Each input on the path whose label counts years a benefit lasts (years of change/impact/benefit/funding, number of years, duration) is moved ×1.25 at a 0% and an 8% rate: if the headline rises by the same factor at both, the years are summed at face value. |
+| INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
 | INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | (Ambitious Impact's models for now.) Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death) or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@fx.*`), itself or through a row it is computed from. |
