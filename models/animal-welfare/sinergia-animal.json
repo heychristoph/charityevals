@@ -88,13 +88,13 @@
       "label": "Hens per year attributable to Sinergia",
       "format": "integer",
       "value": 7864022,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE company-level estimates",
         "url": "https://docs.google.com/spreadsheets/d/1BiqnEWyWVy8ae-GdS62pqC-YxwRM9Bhdwq1IPtKrlvQ/edit",
         "cell": "Cage-free Campaigns CEA!B10"
       },
-      "explainer": "ACE's estimate of the hens attributable to Sinergia, after discounting for other groups that campaigned on the same companies. ACE gives no range here, so attribution adds no uncertainty below, though it is a judgment call."
+      "explainer": "ACE's estimate of the hens attributable to Sinergia, after splitting each company's hens between the groups that campaigned on it (ACE's \"% of Sinergia's collaboration\", 38% overall). A judgment, so filed as one. ACE's split is a share of the campaigning work, so it is also what credit by share of resources gives: the same share is used with \"Credit by share of resources\" on. ACE gives no range here, so attribution adds no uncertainty below, though it is a judgment call."
     },
     {
       "id": "cf_attribution_share",
@@ -117,25 +117,53 @@
       "label": "Years the commitments last",
       "unit": "years",
       "format": "number",
-      "value": {
-        "low": 4,
-        "best": 15,
-        "high": 36
-      },
-      "kind": "estimate",
       "source": {
         "title": "Rethink Priorities, corporate campaigns for chicken welfare",
         "url": "https://rethinkpriorities.org/publications/corporate-campaigns-affect-9-to-120-years-of-chicken-life-per-dollar-spent",
         "cell": "Cage-free Campaigns CEA!B8"
       },
-      "explainer": "How long the policy changes until it would have happened anyway. Rethink Priorities' 90% interval, the widest input in this model."
+      "explainer": "Changed for consistency: how many years a won commitment counts before it would have come anyway reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE's own figure, Rethink Priorities' 15 years (4–36) for how long the policy changes until it would have happened anyway, is kept as the evaluator's and used in the evaluator view.",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 4,
+        "best": 15,
+        "high": 36
+      }
+    },
+    {
+      "id": "cf_years_until_effect",
+      "section": "cage_free",
+      "label": "Years from winning the commitments until they take effect",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 7
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE company-level estimates (implementation deadlines)",
+        "url": "https://docs.google.com/spreadsheets/d/1BiqnEWyWVy8ae-GdS62pqC-YxwRM9Bhdwq1IPtKrlvQ/edit",
+        "cell": "Implementation deadline column"
+      },
+      "explainer": "Ours, not ACE's. The commitments were won in 2023; the deadlines ACE lists run from 2025 to 2030 (most hens are at companies with no deadline listed), so the hens' lives change some years later. Our judgment: 4 years, 2 to 7. ACE counts the benefit from the year the commitment is won; the evaluator view keeps that."
+    },
+    {
+      "id": "cf_wait_discount",
+      "section": "cage_free",
+      "label": "Discount for the wait until the commitments take effect",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -cf_years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency: every model discounts the wait until a won reform takes effect at \"Next year's good counts less by\", as climate models discount the wait until tonnes are avoided. ACE counts the hens from the year of the win, so the evaluator view uses 1."
     },
     {
       "id": "cf_hens_all_years",
       "section": "cage_free",
       "label": "Hen-years over the whole period (discounted)",
       "format": "integer",
-      "formula": "pv_annuity_due(cf_hens_per_year, $discount_rate, cf_years)",
+      "formula": "pv_annuity_due(cf_hens_per_year, $discount_rate, cf_years) * cf_wait_discount",
       "expected": 90932653.11
     },
     {
@@ -143,16 +171,16 @@
       "section": "cage_free",
       "label": "Share of companies that keep their commitment",
       "format": "percent",
-      "value": {
-        "low": 0.3793103448,
-        "best": 0.5341673675,
-        "high": 0.6890243902
-      },
-      "kind": "estimate",
       "source": {
         "cell": "Cage-free Campaigns CEA!B13:D13"
       },
-      "explainer": "Low end: 22 of 58 companies followed through in one tracker. High end: 113 of 164 in another. Best guess is the midpoint."
+      "explainer": "Changed for consistency: the share of cage-free commitments companies keep reads the shared figure (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), as every model crediting a cage-free pledge does. ACE's own 53% (the midpoint of 22 of 58 companies in one tracker and 113 of 164 in another) is kept as the evaluator's and used in the evaluator view.",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": {
+        "low": 0.3793103448,
+        "best": 0.5341673675,
+        "high": 0.6890243902
+      }
     },
     {
       "id": "cf_hens_impacted",
@@ -219,19 +247,78 @@
       "explainer": "Fewer animals raised for the replaced meals, times the suffering in each animal's life. ACE calls the SADs-per-meal figures rough.\n\nACE's estimate, 900,203 SADs (86,972 to 1,713,434) for 997,510 meals, is the source of the shared figure for a replaced meal (Suffering-adjusted days per animal, under Data). Our view multiplies the meals by that shared figure, so a replaced meal counts the same in every model; the evaluator view keeps ACE's total."
     },
     {
+      "id": "pig_sads_per_year_from_2023",
+      "section": "pig_welfare",
+      "label": "SADs a year from commitments due in 2023, before sharing credit",
+      "unit": "SADs",
+      "format": "integer",
+      "value": 37954871,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!M3:M12, O3:O12, AB3:AC12, R3:S12"
+      },
+      "explainer": "Sows and piglets a year covered by each producer's commitment, times ACE's SADs per animal for the improvement, summed over the producers whose transition deadline is 2023 (Aurora, BRF, JBS, Master Agroindustrial, Pif Paf): 37.95M. Reproduces ACE's sheet: each producer's all-years total is this times its years brought forward, discounted at 4%."
+    },
+    {
+      "id": "pig_sads_per_year_from_2029",
+      "section": "pig_welfare",
+      "label": "SADs a year from commitments due in 2029, before sharing credit",
+      "unit": "SADs",
+      "format": "integer",
+      "value": 13976480,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!M3:M12, O3:O12, AB3:AC12, R3:S12"
+      },
+      "explainer": "As above, for Alegra (transition deadline 2029): 30,535 sows × 16.72 SADs + 916,050 piglets × 14.70."
+    },
+    {
+      "id": "pig_sads_per_year_from_2031",
+      "section": "pig_welfare",
+      "label": "SADs a year from commitments due in 2031, before sharing credit",
+      "unit": "SADs",
+      "format": "integer",
+      "value": 36663372,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!M3:M12, O3:O12, AB3:AC12, R3:S12"
+      },
+      "explainer": "As above, for Alibem (transition deadline 2031): 80,100 sows × 16.72 SADs + 2,403,000 piglets × 14.70."
+    },
+    {
+      "id": "pig_years_counted",
+      "section": "pig_welfare",
+      "label": "Years the pig commitments count before they would have come anyway",
+      "unit": "years",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 1,
+        "best": 9.47,
+        "high": 22
+      },
+      "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE counts each producer's years until Brazil's legal deadline (1 to 22 years; 9.47 is the single span that gives ACE's total), kept as the evaluator's."
+    },
+    {
       "id": "pig_sads_full",
       "section": "pig_welfare",
       "label": "SADs from all commitments, all years, before sharing credit",
       "unit": "SADs",
       "format": "integer",
-      "value": 713756752.8428571,
-      "kind": "estimate",
       "source": {
         "title": "ACE pig producer estimates",
         "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
         "cell": "Pig commitments!AD3:AE12, divided by W3:W12"
       },
-      "explainer": "About 0.85M sows and 18M piglets a year, over all years, discounted at 4%. ACE's sheet lists each producer's SADs after sharing credit; dividing by Sinergia's share gives the total. ACE computed years and per-animal SADs in that sheet, so they aren't separate inputs here yet. The per-animal SADs are ACE's 2024 ones ('SADs per animal' tab): 84.55 and 51.75 for sows in crates and crate-free, 34.85 and 20.18 for piglets with and without mutilations. The group-housing and single-mutilation figures (D6:E10) are older SAD values times 3.18, Ambitious Impact's stand-in for pain intensity growing exponentially between categories, which its newer per-animal figures build in (ACE's Aquatic Life Institute sheet, 'SADs Estimate'!B16 comment). It scales pain, not species: Ambitious Impact's 2024 pig weight is applied separately, and divided out in ced_pig."
+      "explainer": "SADs from all the pig commitments, all years counted, before sharing credit. Changed for consistency: ACE counts each producer from its transition deadline to Brazil's legal deadline (1 to 22 years) and doesn't discount the wait until the deadline; ours counts the shared years for every producer, from its deadline, with the wait discounted at \"Next year's good counts less by\". ACE's total, 713.8M, is the evaluator's (ACE's sheet lists each producer's SADs after sharing credit; dividing by Sinergia's share gives it). The per-animal SADs are ACE's 2024 ones ('SADs per animal' tab): 84.55 and 51.75 for sows in crates and crate-free, 34.85 and 20.18 for piglets with and without mutilations; the group-housing and single-mutilation figures are older SAD values times 3.18, Ambitious Impact's stand-in for pain intensity growing exponentially between categories (ACE's Aquatic Life Institute sheet, 'SADs Estimate'!B16 comment). It scales pain, not species: Ambitious Impact's 2024 pig weight is applied separately, and divided out in ced_pig.",
+      "formula": "(pig_sads_per_year_from_2023 + pig_sads_per_year_from_2029 * (1 + $discount_rate) ^ -(2029 - 2023) + pig_sads_per_year_from_2031 * (1 + $discount_rate) ^ -(2031 - 2023)) * pv_annuity_due(1, $discount_rate, pig_years_counted)",
+      "published": 713756752.8428571
     },
     {
       "id": "pig_attribution_share",
@@ -239,13 +326,13 @@
       "label": "Sinergia's share of credit",
       "format": "percent",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "ACE pig producer estimates",
         "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
         "cell": "Pig commitments!W3:W12"
       },
-      "explainer": "ACE's \"% of Sinergia's collaboration\": 70% for every producer counted. The other 30% is credited to other organisations."
+      "explainer": "ACE's \"% of Sinergia's collaboration\": 70% for every producer counted. The other 30% is credited to other organisations. A judgment, so filed as one. ACE's split is a share of the campaigning work, so the same share is used with \"Credit by share of resources\" on."
     },
     {
       "id": "pig_sads_attributed",
@@ -467,11 +554,20 @@
       "formula": "sads_per_dollar * donor_cost_share"
     },
     {
+      "id": "production_response",
+      "section": "species",
+      "label": "Fall in production per meal not eaten",
+      "format": "percent",
+      "formula": "@sad_factors.production_response",
+      "published": 1,
+      "explainer": "Changed for consistency: when fewer meals with meat are eaten, prices fall and others eat a little more, so production falls by less (0.76 per unit for chicken, Norwood and Lusk; facts: sad_factors.production_response). Every diet-change model multiplies the suffering of meals replaced by it, as charityevals' own diet template does. ACE counts one meal less eaten as one meal less produced (1), kept in the evaluator view. Applies to the meals replaced only, not to the welfare commitments."
+    },
+    {
       "id": "sads_chicken",
       "section": "species",
       "label": "SADs averted per dollar you give: chickens",
       "format": "number",
-      "formula": "(cf_sads + mr_sads * @sad_factors.meal_sads_share_chicken) / cost_total * donor_cost_share",
+      "formula": "(cf_sads + mr_sads * production_response * @sad_factors.meal_sads_share_chicken) / cost_total * donor_cost_share",
       "explainer": "SADs averted for chickens per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
     },
     {
@@ -487,7 +583,7 @@
       "section": "species",
       "label": "SADs averted per dollar you give: pigs",
       "format": "number",
-      "formula": "(pig_sads + mr_sads * @sad_factors.meal_sads_share_pig) / cost_total * donor_cost_share",
+      "formula": "(pig_sads + mr_sads * production_response * @sad_factors.meal_sads_share_pig) / cost_total * donor_cost_share",
       "explainer": "SADs averted for pigs per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
     },
     {
@@ -503,7 +599,7 @@
       "section": "species",
       "label": "SADs averted per dollar you give: fish",
       "format": "number",
-      "formula": "mr_sads * @sad_factors.meal_sads_share_fish / cost_total * donor_cost_share",
+      "formula": "mr_sads * production_response * @sad_factors.meal_sads_share_fish / cost_total * donor_cost_share",
       "explainer": "SADs averted for fish per dollar you give: cage-free hens count as chickens, the pig campaigns as pigs, and replaced meals by ACE's global estimate of which animals a meal spares (Share of a replaced meal's suffering, under Data)."
     },
     {
@@ -512,7 +608,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "number",
       "formula": "sads_fish / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024)",
-      "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+      "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces. The fish weight is a stand-in, our judgment: Rethink Priorities estimated only carp and salmon, and their mean stands for every farmed and wild-caught fish (facts: welfare_ranges.fish_vs_chicken, kind judgment)."
     },
     {
       "id": "ced_per_donor_dollar",

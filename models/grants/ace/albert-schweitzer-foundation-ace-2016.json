@@ -577,7 +577,28 @@
         "url": "https://www.getguesstimate.com/models/7338",
         "cell": "ASR"
       },
-      "explainer": "ACE's 90% interval, .3 to .8 (lognormal). The best guess is its median.\n\nASF is a leading group when it comes to corporate outreach in Germany, but The Humane League has driven some of the push toward cage-free policies internationally and was involved in some of ASF's victories. Other groups may also have been involved."
+      "explainer": "ACE's 90% interval, .3 to .8 (lognormal). The best guess is its median.\n\nASF is a leading group when it comes to corporate outreach in Germany, but The Humane League has driven some of the push toward cage-free policies internationally and was involved in some of ASF's victories. Other groups may also have been involved. Used with \"Credit by share of resources\" off."
+    },
+    {
+      "id": "asf_cage_free_credit_resource_share",
+      "section": "model",
+      "label": "ASF's share of the resources all groups spent winning the cage-free policies",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Ours. With \"Credit by share of resources\" on, a win is shared by what each group put into it. ASF led most German corporate cage-free campaigns of 2015–2016, alongside other members of the Open Wing Alliance; no group publishes its spending per company, so our judgment is half (ACE's responsibility is 49%), from 30% to 80%."
+    },
+    {
+      "id": "asf_cage_free_credit",
+      "section": "model",
+      "label": "Credit for these changes",
+      "format": "percent",
+      "formula": "if($resource_shares, asf_cage_free_credit_resource_share, asf_s_responsibility_for_changes)",
+      "explainer": "ACE's responsibility by default; with \"Credit by share of resources\" on, the charity's share of the resources all groups put into the wins, as GiveWell's models share an outcome by every funder's money."
     },
     {
       "id": "asf_s_responsibility_for_changes_2",
@@ -594,24 +615,45 @@
         "url": "https://www.getguesstimate.com/models/7338",
         "cell": "ASR1"
       },
-      "explainer": "Beta(7, 3) in Guesstimate: best guess is its mean, range its 90% interval.\n\nASF is a leader in corporate outreach in Germany. While we're not aware of specific roles played by other groups in these victories, some are sweeping enough that we think other groups may have played a supporting role."
+      "explainer": "Beta(7, 3) in Guesstimate: best guess is its mean, range its 90% interval.\n\nASF is a leader in corporate outreach in Germany. While we're not aware of specific roles played by other groups in these victories, some are sweeping enough that we think other groups may have played a supporting role. Used with \"Credit by share of resources\" off."
+    },
+    {
+      "id": "asf_other_credit_resource_share",
+      "section": "model",
+      "label": "ASF's share of the resources all groups spent winning the other policy changes",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Ours. Our judgment for ASF's share of what all groups put into its other policy wins: 60%, 40% to 90% (ACE's responsibility is 70%)."
+    },
+    {
+      "id": "asf_other_credit",
+      "section": "model",
+      "label": "Credit for these changes",
+      "format": "percent",
+      "formula": "if($resource_shares, asf_other_credit_resource_share, asf_s_responsibility_for_changes_2)",
+      "explainer": "ACE's responsibility by default; with \"Credit by share of resources\" on, the charity's share of the resources all groups put into the wins, as GiveWell's models share an outcome by every funder's money."
     },
     {
       "id": "years_of_impact_expected",
       "label": "Years of impact expected",
       "section": "model",
-      "value": {
-        "low": 1.0,
-        "best": 3.872983346207417,
-        "high": 15.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "Guesstimate model 7338",
         "url": "https://www.getguesstimate.com/models/7338",
         "cell": "YOI"
       },
-      "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe consider a limited term of impact because companies might simply have adopted the same policy later without ASF's influence, might go out of business, or might abandon the policy after following it for some number of years."
+      "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE's own figure, 3.87 years (1 to 15, the geometric middle of its bounds), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 1.0,
+        "best": 3.872983346207417,
+        "high": 15.0
+      }
     },
     {
       "id": "discount_rate_per_year",
@@ -641,7 +683,7 @@
       "id": "equivalent_hens_spared_from_cage_free_policies",
       "label": "Equivalent hens spared from cage-free policies",
       "section": "model",
-      "formula": "hens_affected_yearly_by_cage_free_policies_asf_was*proportional_improvement_in_welfare_due_to_cage_fr*asf_s_responsibility_for_changes*discounted_years_of_impact"
+      "formula": "hens_affected_yearly_by_cage_free_policies_asf_was*proportional_improvement_in_welfare_due_to_cage_fr*asf_cage_free_credit*discounted_years_of_impact"
     },
     {
       "id": "equivalent_years_of_suffering_spared_from_cage_fre",
@@ -654,7 +696,7 @@
       "id": "equivalent_animals_spared_from_other_policies",
       "label": "Equivalent animals spared from other policies",
       "section": "model",
-      "formula": "animals_affected_yearly_by_other_policy_changes_as*proportional_improvement_in_welfare_due_to_other_p*asf_s_responsibility_for_changes_2*discounted_years_of_impact"
+      "formula": "animals_affected_yearly_by_other_policy_changes_as*proportional_improvement_in_welfare_due_to_other_p*asf_other_credit*discounted_years_of_impact"
     },
     {
       "id": "equivalent_years_of_suffering_spared_from_other_po",
@@ -831,14 +873,6 @@
       "formula": "hens_affected_yearly_by_cage_free_policies_asf_was+animals_affected_yearly_by_other_policy_changes_as"
     },
     {
-      "id": "hen_years_per_dollar",
-      "section": "species",
-      "label": "Years of caged life spared per dollar: chickens",
-      "format": "number",
-      "formula": "equivalent_years_of_suffering_spared_from_cage_fre / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
-      "explainer": "ACE's equivalent years of suffering spared for hens spared cages by cage-free policies, the part of this model whose species is known."
-    },
-    {
       "id": "hens_spared_per_dollar",
       "section": "species",
       "label": "Chickens spared per dollar",
@@ -855,6 +889,89 @@
       "explainer": "Every other animal ACE counts as spared, mostly through diet change. ACE's 2016 sheets don't say which species they are."
     },
     {
+      "id": "cage_free_years_until_effect",
+      "section": "species",
+      "label": "Years from winning the cage-free policies until they take effect",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "Ours. ASF's 2015–2016 German pledges were mostly for processed eggs, with deadlines around 2020 (shell eggs had largely gone cage-free already); our judgment is 4 years, 2 to 8. ACE's 2016 model counts from the win."
+    },
+    {
+      "id": "cage_free_wait_discount",
+      "section": "species",
+      "label": "Discount for the wait until the policies take effect",
+      "format": "percent",
+      "formula": "(1 + discount_rate_per_year) ^ -cage_free_years_until_effect",
+      "explainer": "Every model discounts the wait until a won reform takes effect at \"Next year's good counts less by\". ACE's 2016 model doesn't discount (0% in the evaluator view), so there it is 1."
+    },
+    {
+      "id": "other_years_until_effect",
+      "section": "species",
+      "label": "Years from winning the other policy changes until they take effect",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 6
+      },
+      "kind": "judgment",
+      "explainer": "Ours: 3 years, 1 to 6, for ASF's other policy wins (broiler and other welfare standards with deadlines a few years out)."
+    },
+    {
+      "id": "other_wait_discount",
+      "section": "species",
+      "label": "Discount for the wait until the policies take effect",
+      "format": "percent",
+      "formula": "(1 + discount_rate_per_year) ^ -other_years_until_effect",
+      "explainer": "Every model discounts the wait until a won reform takes effect at \"Next year's good counts less by\". ACE's 2016 model doesn't discount (0% in the evaluator view), so there it is 1."
+    },
+    {
+      "id": "cage_free_fulfilment",
+      "section": "species",
+      "label": "Share of cage-free pledges companies keep",
+      "format": "percent",
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "published": 1,
+      "explainer": "Changed for consistency: the share of cage-free pledges companies keep (facts: sad_factors.commitment_fulfilment_cage_free, 92% of commitments due by 2024 fulfilled, Chicken Watch), applied by every model that credits a cage-free pledge. ACE's 2016 model has no such step (1), kept in the evaluator view."
+    },
+    {
+      "id": "sads_per_cage_free_hen_year",
+      "section": "species",
+      "label": "SADs averted per hen-year out of a battery cage",
+      "unit": "SADs / hen-year",
+      "formula": "@sad_factors.sads_per_hen_year_cage_to_aviary",
+      "published": 3.0345,
+      "explainer": "Changed for consistency (one SADs figure per physical change): a year a hen spends cage-free instead of in a battery cage reads the shared figure, 17.49 SADs (facts: sad_factors.sads_per_hen_year_cage_to_aviary), as every other model does. ACE's 2016 model values it at its \"proportional improvement in welfare due to cage-free policies\", 0.105 (−0.25 to 0.46), of a caged hen's year, 28.9 SADs: 3.034 SADs, kept as the evaluator's."
+    },
+    {
+      "id": "cage_free_hen_years_per_dollar",
+      "section": "species",
+      "label": "Hen-years out of battery cages per dollar",
+      "formula": "hens_affected_yearly_by_cage_free_policies_asf_was * asf_cage_free_credit * discounted_years_of_impact * cage_free_wait_discount * cage_free_fulfilment / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "Hens covered by the cage-free policies, times ASF's credit, the years counted (discounted), the wait and the share of pledges kept, per dollar of the whole budget. Each hen-year then counts the shared SADs figure for a year out of a battery cage, not ACE's proportional improvement."
+    },
+    {
+      "id": "other_policy_animals_per_dollar",
+      "section": "species",
+      "label": "Equivalent animals spared by the other policy changes, per dollar",
+      "formula": "equivalent_animals_spared_from_other_policies / corporate_outreach_cost * corporate_outreach_proportion_of_programs",
+      "explainer": "ACE's equivalent animals spared by ASF's other policy wins (animals affected × proportional improvement × credit × years), per dollar of the whole budget. Valued below at the SADs per animal spared, like ACE's other counts, but without the production response: these are welfare reforms, not meals."
+    },
+    {
+      "id": "diet_animals_per_dollar",
+      "section": "species",
+      "label": "Animals spared by diet change (leaflets, pledges, media) per dollar",
+      "formula": "other_animals_per_dollar - other_policy_animals_per_dollar",
+      "explainer": "The animals ACE counts as spared by ASF's consumer outreach and media work: everything but the cage-free hens and the other policy changes."
+    },
+    {
       "id": "sads_per_animal_spared",
       "section": "species",
       "label": "SADs averted per animal spared",
@@ -863,11 +980,38 @@
       "explainer": "The shared figures for a replaced meal, in suffering-adjusted days (SADs) and in animals, give the suffering behind each animal spared: about 8.7 SADs. Every model that counts animals spared uses this one rate, split by species. ACE's 2016 sheets don't give a species breakdown, so the split is ACE's 2024 estimate of which animals a plant-based diet spares."
     },
     {
+      "id": "production_response",
+      "label": "Fall in production per meal not eaten",
+      "format": "percent",
+      "formula": "@sad_factors.production_response",
+      "published": 1,
+      "explainer": "Changed for consistency: when fewer meals with animal products are eaten, prices fall and others eat a little more, so production falls by less (0.76 per unit for chicken, Norwood and Lusk; facts: sad_factors.production_response). Every diet-change model multiplies the suffering of meals replaced by it, as charityevals' own diet template does. ACE's 2016 model counts one meal less eaten as one meal less produced (1), kept in the evaluator view.",
+      "section": "species"
+    },
+    {
+      "id": "meal_mix_vs_reference",
+      "label": "Suffering in a replaced meal in Germany, relative to the reference meal",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE, Meal Replacement Estimates 2025 ('Brazil', 'U.S.' and 'Global' tabs, column L)",
+        "url": "https://docs.google.com/spreadsheets/d/11W1pj0_zi0aHabR_degTMNT4wYpf_HbdMqwFxfEiv5k/edit",
+        "cell": "Brazil!L8, U.S.!L8, Global!L8"
+      },
+      "explainer": "Our judgment, labelled as one. The shared per-meal figure (facts: sad_factors.sads_per_meal_replaced) is ACE's Latin American reference meal, Sinergia Animal's canteens. ACE publishes per-country meal estimates only for Brazil and the US, none for Germany, so the reference meal stands in (1). The range, half to double, is ours: ACE's 2025 tabs put a US meal at 1.5 times a Brazilian one and the world average at 0.6 times. The evaluator's own per-meal figure has no such step (1), kept in the evaluator view.",
+      "published": 1
+    },
+    {
       "id": "sads_chicken",
       "section": "species",
       "label": "SADs averted per dollar you give: chickens",
       "format": "number",
-      "formula": "(hen_years_per_dollar * @ace.caged_hen_sads_per_year + other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_chicken) * donor_cost_share",
+      "formula": "(cage_free_hen_years_per_dollar * sads_per_cage_free_hen_year + (diet_animals_per_dollar * production_response * meal_mix_vs_reference + other_policy_animals_per_dollar * other_wait_discount) * sads_per_animal_spared * @sad_factors.meal_sads_share_chicken) * donor_cost_share",
       "explainer": "SADs averted for chickens per dollar you give."
     },
     {
@@ -883,7 +1027,7 @@
       "section": "species",
       "label": "SADs averted per dollar you give: fish",
       "format": "number",
-      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_fish * donor_cost_share",
+      "formula": "(diet_animals_per_dollar * production_response * meal_mix_vs_reference + other_policy_animals_per_dollar * other_wait_discount) * sads_per_animal_spared * @sad_factors.meal_sads_share_fish * donor_cost_share",
       "explainer": "SADs averted for fish per dollar you give."
     },
     {
@@ -892,14 +1036,14 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "number",
       "formula": "sads_fish / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024)",
-      "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+      "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces. The fish weight is a stand-in, our judgment: Rethink Priorities estimated only carp and salmon, and their mean stands for every farmed and wild-caught fish (facts: welfare_ranges.fish_vs_chicken, kind judgment)."
     },
     {
       "id": "sads_pig",
       "section": "species",
       "label": "SADs averted per dollar you give: pigs",
       "format": "number",
-      "formula": "other_animals_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_pig * donor_cost_share",
+      "formula": "(diet_animals_per_dollar * production_response * meal_mix_vs_reference + other_policy_animals_per_dollar * other_wait_discount) * sads_per_animal_spared * @sad_factors.meal_sads_share_pig * donor_cost_share",
       "explainer": "SADs averted for pigs per dollar you give."
     },
     {
