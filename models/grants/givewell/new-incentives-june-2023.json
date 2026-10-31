@@ -901,21 +901,22 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 1.442695041,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18-lcdvBojQzCXqCKWuc8M8kFeJ74iMTchMTCuLxlezk/edit",
         "cell": "Moral weights and discount rate!C22"
       },
-      "explainer": "Calculated in the source sheet as `=if(C5>0,C5/ln(2),\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's sheet types in its value of a one-unit rise in ln(consumption) for a year, 1/ln 2 = 1.4427 units of value. The site values income the same way in every model, through the income slider (Value of doubling an income, under Your values), so this row reads it; at the default the number is the same. The evaluator view keeps 1.4427.",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.442695041
     },
     {
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year",
       "section": "givedirectly",
-      "formula": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
-      "expected": 1.442695041
+      "formula": "@cash.uov_per_dollar * arbitrary_donation_size / (total_units_of_increase_in_ln_consumption * total_adjustment_factor * total_adjustment_factor_2)",
+      "explainer": "Changed for consistency. In GiveWell's sheet this is the same 1.4427 units of value, used to value GiveDirectly's cash transfers, the benchmark the sheet divides by to state its result as a multiple of cash. The site values \"1x cash\" with one shared figure (units of value per dollar given to GiveDirectly, @cash), so this row is set so that GiveDirectly's value per dollar in this section equals that figure: the shared figure divided by the sheet's own increase in ln(consumption) per dollar. The multiple is then multiplied back by the same figure, so it cancels and our units of value are the program's own, with income valued at the income slider. The evaluator view keeps 1.4427.",
+      "published": 1.442695041
     },
     {
       "id": "total_units_of_value_generated",
