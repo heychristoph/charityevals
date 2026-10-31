@@ -173,6 +173,42 @@ export function combine(xs: (Figure & { weight?: number })[]): Figure & { basis:
   };
 }
 
+// Which models rank a charity doesn't depend on the reader's values: one plan per library.
+const plans = new WeakMap<Library, Map<string, EvaluatorPlan | undefined>>();
+function planOf(lib: Library, owner: string, charity: string): EvaluatorPlan | undefined {
+  let cache = plans.get(lib);
+  if (!cache) plans.set(lib, (cache = new Map()));
+  const key = `${owner}:${charity}`;
+  if (!cache.has(key)) cache.set(key, rankingPlan(lib, charity).find((p) => p.owner === owner));
+  return cache.get(key);
+}
+
+/** A charity's figure from one evaluator, the way the rankings make it (src/lib/use-results.ts): each
+ * program's model over its locations (declared funding, else the sheet's own grant sizes, else the model
+ * itself), the programs weighted by funding. `figure` is one model's value per dollar; the weights don't
+ * depend on it, so any linear measure (units of value, healthy years) combines the same way. NaN when the
+ * evaluator doesn't rank the charity. Formulas read it as `#owner:charity` (expr.ts). */
+export function evaluatorFigure(lib: Library, owner: string, charity: string, figure: (m: ResolvedModel) => number): number {
+  const c = lib.charities.get(charity);
+  const plan = planOf(lib, owner, charity);
+  if (!c || !plan) return NaN;
+  const one = (m: ResolvedModel): Figure => { const v = figure(m); return { central: v, low: v, high: v }; };
+  return combine(plan.parts.map((p) => {
+    const family = locationsOf(lib, p.model);
+    const declared = declaredLocations(c, family);
+    if (declared) return { ...combineLocations(declared, one), weight: p.weight };
+    const weights = locationWeights(lib, family);
+    if (!weights) return { ...one(p.model), weight: p.weight };
+    return { ...combine(family.map((x, i) => ({ ...one(x), weight: weights[i] }))), weight: p.weight };
+  })).central;
+}
+
+/** Every model `evaluatorFigure` reads for a charity and evaluator (programs and their locations). */
+export function evaluatorFigureModels(lib: Library, owner: string, charity: string): ResolvedModel[] {
+  const plan = planOf(lib, owner, charity);
+  return plan ? plan.parts.flatMap((p) => locationsOf(lib, p.model)) : [];
+}
+
 /** The model a charity's main page shows: its first evaluator's first model that counts on the
  * rankings, so the page's model is the one behind its headline and homepage row. A charity off the
  * rankings: its first model in modelsOf order. */

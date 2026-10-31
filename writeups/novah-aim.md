@@ -3,7 +3,7 @@ Works to prevent intimate partner violence against women through mass media. Amb
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Novah: entertainment-led mass media to reduce intimate partner violence (Ambitious Impact, 2024 idea report)](/novah) | AIM | September 2023 | <span data-figure="headline" data-model="novah-aim">12</span> | 586 |
+| [Novah: entertainment-led mass media to reduce intimate partner violence (Ambitious Impact, 2024 idea report)](/novah) | AIM | September 2023 | <span data-figure="headline" data-model="novah-aim">12</span> | 588 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Novah existed, not of the charity's own results. It is shown because Novah runs the programme today ([checked October 2026](https://novah.ngo)) and no model of its actual work exists yet.
 

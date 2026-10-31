@@ -246,9 +246,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1oAjIUg17iFqDO8ieK0Uu8qv4DilDMKv5dFK098W28Ng/edit",
         "cell": "Sheet1!B24"
       },
-      "explainer": "GiveWell's moral weight, 118 units of value, times your multiplier on the value of a life.\n\nThis value is taken from our 2024 investigation into Taimaka's malnutrition treatment program and is based on the proportion of children at different ages admitted for treatment in that program. Age group proportions could be slightly different in programs affected by this trial, which could have a minor impact on overall cost-effectiveness.\n(See https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit?gid=1362437801#gid=1362437801&range=B9)\n\nAlso see https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/moral-weights for an explanation of GiveWell's moral weights.",
-      "formula": "118 * $life_value_multiplier",
-      "expected": 118.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118, is kept for the evaluator view.\n\nThis value is taken from our 2024 investigation into Taimaka's malnutrition treatment program and is based on the proportion of children at different ages admitted for treatment in that program. Age group proportions could be slightly different in programs affected by this trial, which could have a minor impact on overall cost-effectiveness.\n(See https://docs.google.com/spreadsheets/d/1O6V1IUGmZhSfVM0y215uJkB-_CT7pUsa9CSIdGL3fK8/edit?gid=1362437801#gid=1362437801&range=B9)\n\nAlso see https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/moral-weights for an explanation of GiveWell's moral weights.",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "expected": 118.0,
+      "published": 118.0
     },
     {
       "id": "units_of_value_from_the_intervention",
@@ -275,26 +276,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

@@ -501,26 +501,26 @@
     {
       "id": "internal_validity_adjustment",
       "label": "Internal validity adjustment (overall)",
-      "value": -0.05,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H64"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H64.",
-      "section": "mortality_reduction_among_people_under_age_5"
+      "section": "mortality_reduction_among_people_under_age_5",
+      "formula": "@givewell_common.internal_validity_adjustment",
+      "expected": -0.05
     },
     {
       "id": "external_validity_adjustment",
       "label": "External validity adjustment (overall)",
-      "value": -0.05,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H65"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H65.",
-      "section": "mortality_reduction_among_people_under_age_5"
+      "section": "mortality_reduction_among_people_under_age_5",
+      "formula": "@givewell_common.external_validity_adjustment",
+      "expected": -0.05
     },
     {
       "id": "expected_reduction_in_malaria_incidence_among_people_under_a",
@@ -803,13 +803,13 @@
       "section": "long_term_income_increases_for_people_under_age_15",
       "label": "Increase in annual income per malaria case averted among people under age 15",
       "format": "percent",
-      "value": 0.0058088,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Inputs!H145"
       },
-      "explainer": "Value from GiveWell's sheet, cell Inputs!H145."
+      "explainer": "Value from GiveWell's sheet, cell Inputs!H145.",
+      "formula": "@givewell_common.increase_in_annual_income_per_malaria_case_averted_amon",
+      "expected": 0.0058088
     },
     {
       "id": "adjusted_increase_in_ln_income_per_malaria_case_averted",
@@ -1201,14 +1201,14 @@
     {
       "id": "malaria_morbidity",
       "label": "Malaria morbidity (overall)",
-      "value": 0.09,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H176"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H176.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.malaria_morbidity",
+      "expected": 0.09
     },
     {
       "id": "short_term_anemia_effects",
@@ -1225,14 +1225,14 @@
     {
       "id": "prevention_of_diseases_other_than_malaria",
       "label": "Prevention of diseases other than malaria (e.g. dengue, yellow fever, zika, encephalitis) (overall)",
-      "value": 0.02,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H178"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H178.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.prevention_of_diseases_other_than_malaria_e_g_dengue_ye",
+      "expected": 0.02
     },
     {
       "id": "prevention_of_stillbirths",
@@ -1273,50 +1273,50 @@
     {
       "id": "rebound_effects_decreased_immunity_development",
       "label": "Rebound effects / decreased immunity development (overall)",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H183"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H183.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "expected": -0.04
     },
     {
       "id": "subnational_adjustments",
       "label": "Subnational adjustments (overall)",
-      "value": 0.024,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H184"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H184.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.subnational_adjustments",
+      "expected": 0.024
     },
     {
       "id": "mosquito_insecticide_resistance_in_trials_underlying_our_est",
       "label": "Mosquito insecticide resistance in trials underlying our estimates (overall)",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H186"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H186.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.mosquito_insecticide_resistance_in_trials_underlying_ou",
+      "expected": 0.05
     },
     {
       "id": "differences_in_mosquito_species",
       "label": "Differences in mosquito species (overall)",
-      "value": -0.02,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H187"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H187.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.differences_in_mosquito_species",
+      "expected": -0.02
     },
     {
       "id": "total_supplemental_intervention_level_adjustment",
@@ -1358,26 +1358,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

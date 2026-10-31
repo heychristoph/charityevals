@@ -427,13 +427,13 @@
       "id": "number_of_post_neonatal_months_of_life_in_which_children_are_4",
       "label": "Number of post-neonatal months of life in which children are under 1 year old",
       "section": "inputs",
-      "value": 11.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1my2WcUOm_5NLBBx8uUppLCUqMsabufTeTLNo_2A_5zE/edit",
         "cell": "Inputs!H28"
-      }
+      },
+      "formula": "@givewell_common.number_of_post_neonatal_months_of_life_in_whic_11",
+      "expected": 11.0
     },
     {
       "id": "number_of_post_neonatal_months_of_life_in_which_children_are_3",
@@ -990,13 +990,13 @@
       "id": "number_of_post_neonatal_months_of_life_in_which_children_are_8",
       "label": "Number of post-neonatal months of life in which children are under 1 year old",
       "section": "inputs",
-      "value": 11.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1my2WcUOm_5NLBBx8uUppLCUqMsabufTeTLNo_2A_5zE/edit",
         "cell": "Inputs!H44"
-      }
+      },
+      "formula": "@givewell_common.number_of_post_neonatal_months_of_life_in_whic_11",
+      "expected": 11.0
     },
     {
       "id": "number_of_post_neonatal_months_of_life_in_which_children_are_7",
@@ -1907,9 +1907,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1my2WcUOm_5NLBBx8uUppLCUqMsabufTeTLNo_2A_5zE/edit",
         "cell": "Inputs!H219"
       },
-      "formula": "118.73259 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 118.73259,
-      "explainer": "GiveWell's moral weight, 118.73259 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118.733, is kept for the evaluator view.",
+      "published": 118.73259
     },
     {
       "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w",
@@ -2429,14 +2430,14 @@
       "label": "Short-term consequences of reduced infectious disease morbidity",
       "section": "inputs",
       "unit": "%",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1my2WcUOm_5NLBBx8uUppLCUqMsabufTeTLNo_2A_5zE/edit",
         "cell": "Inputs!H244"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.short_term_consequences_of_reduced_infectious_disease_m",
+      "expected": 0.06
     },
     {
       "id": "short_term_consequences_of_reduced_infectious_disease_morbid",
@@ -2545,14 +2546,14 @@
       "label": "Interaction between VAS and vaccines",
       "section": "inputs",
       "unit": "%",
-      "value": 0.015,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1my2WcUOm_5NLBBx8uUppLCUqMsabufTeTLNo_2A_5zE/edit",
         "cell": "Inputs!H249"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.interaction_between_vas_and_vaccines",
+      "expected": 0.015
     },
     {
       "id": "interaction_between_vas_and_vaccines",
@@ -3492,26 +3493,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

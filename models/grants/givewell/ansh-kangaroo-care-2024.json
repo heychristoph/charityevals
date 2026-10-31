@@ -78,9 +78,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1QcyzAN88TVMfKNQ4Bd1gTV_WOOSaYTzINYH1bm-7mfo/edit",
         "cell": "CEA!B20"
       },
-      "formula": "84 * $life_value_multiplier",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0,
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values)."
     },
     {
       "id": "moral_weight_neonatal_mortality",
@@ -1304,26 +1304,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

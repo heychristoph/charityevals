@@ -187,18 +187,14 @@
       "section": "india",
       "label": "Years GPI brought the reform forward",
       "format": "number",
-      "value": {
-        "low": 0,
-        "best": 1.5,
-        "high": 3
-      },
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Government Partnership Initiative CEA (evidence-based policy report, 2019)",
         "url": "https://docs.google.com/spreadsheets/d/1F4aRiaczIMv5yTp-k_AjrHWjgP_DTUFz6oXXZTK5ggs/edit",
         "cell": "'India_funds flow'!B8:D8 (C8 = average)"
       },
-      "explainer": "FP's way of crediting policy work: how much sooner the reform happened because of J-PAL's Government Partnership Initiative (GPI, now IGI). Between 0 and 3 years. This is FP's own counterfactual credit and applies in both views."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the row reform_wait_discount). Founders Pledge judged that J-PAL's Government Partnership Initiative (GPI, now IGI) brought India's fund-flow reform forward by 1.5 years (its range 0–3), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 1.5
     },
     {
       "id": "share_education",
@@ -320,7 +316,7 @@
       "section": "india",
       "label": "Benefit of GPI's work on India's fund-flow reform (child-life equivalents)",
       "format": "number",
-      "formula": "india_savings_actual * india_years_forward / cost_life_eq_government",
+      "formula": "india_savings_actual * india_years_forward * reform_wait_discount / cost_life_eq_government",
       "expected": 666.5809737,
       "explainer": "Value in under-five-life equivalents, GiveWell's 2017 unit of value (not a count of deaths)."
     },
@@ -546,23 +542,46 @@
       "section": "zambia",
       "label": "Years GPI brought the reform forward",
       "format": "number",
-      "value": 3,
-      "kind": "judgment",
       "source": {
         "title": "Founders Pledge, Government Partnership Initiative CEA (evidence-based policy report, 2019)",
         "url": "https://docs.google.com/spreadsheets/d/1F4aRiaczIMv5yTp-k_AjrHWjgP_DTUFz6oXXZTK5ggs/edit",
         "cell": "'Zambia_remedial education'!B20"
       },
-      "explainer": "FP starts from 5 years for a campaign responsible for a policy and adjusts down to 3, as J-PAL played an important role but others did too. FP's own counterfactual credit; applies in both views."
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the row reform_wait_discount). Founders Pledge started from 5 years for a campaign responsible for a policy and adjusted down to 3 for Zambia's Teaching at the Right Level scale-up, as J-PAL played an important role but others did too; undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 3
     },
     {
       "id": "zambia_life_eq",
       "section": "zambia",
       "label": "Benefit of GPI's work on Zambia's education reform (child-life equivalents)",
       "format": "number",
-      "formula": "(zambia_pv_total / dalys_per_child_life / ln_income_per_daly) * zambia_years_forward",
+      "formula": "(zambia_pv_total / dalys_per_child_life / ln_income_per_daly) * zambia_years_forward * reform_wait_discount",
       "expected": 140.870489,
       "explainer": "Value in under-five-life equivalents, GiveWell's 2016/17 unit of value (not a count of deaths)."
+    },
+    {
+      "id": "reform_years_until_effect",
+      "section": "summary",
+      "label": "Years from GPI's spending until the reforms take effect",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not Founders Pledge's: GPI's budget runs to December 2017, and India's fund-flow reform and Zambia's scale-up were rolled out in 2016–2018, so the average dollar came about a year before the reforms took effect (0 to 3). Founders Pledge counts the benefit from the spending on; the site discounts the wait at your rate, as in every model that credits a won reform (docs/normalization.md 2.9)."
+    },
+    {
+      "id": "reform_wait_discount",
+      "section": "summary",
+      "label": "Discount for the wait until the reforms take effect",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ -reform_years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (Founders Pledge doesn't discount the wait)."
     },
     {
       "id": "gpi_budget",
@@ -641,7 +660,7 @@
       "section": "conversion",
       "label": "Benefit of the Zambia reform at the site's weight on income (child-life equivalents)",
       "format": "number",
-      "formula": "zambia_pv_total * zambia_years_forward * uov_per_ln_income / uov_per_life_eq",
+      "formula": "zambia_pv_total * zambia_years_forward * reform_wait_discount * uov_per_ln_income / uov_per_life_eq",
       "explainer": "The present value of Zambia's income gain, times the years the reform was brought forward, valued at the site's weight on income and put in child-life equivalents so it can be added to India's (the value of a child-life equivalent cancels for Zambia). Founders Pledge's 7 DALYs per child life and 3 units of ln(income) per DALY drop out; in the evaluator view this equals Founders Pledge's own figure."
     },
     {
@@ -665,26 +684,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",
@@ -702,12 +711,21 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "staff_pay",
+      "label": "A marginal dollar's result as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): Founders Pledge divides the Initiative's budget to date by the two reforms it helped bring forward, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "uov_per_dollar",
       "section": "staff_pay",
       "label": "Units of value per donor dollar",
       "format": "small",
-      "formula": "uov_per_dollar_fp * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "uov_per_dollar_fp * donor_cost_share * marginal_vs_past_average",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). A marginal dollar is counted at the shared share of the past average (row above)."
     }
   ],
   "output": {

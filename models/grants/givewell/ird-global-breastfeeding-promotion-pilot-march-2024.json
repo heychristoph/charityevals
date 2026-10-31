@@ -2005,8 +2005,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Simple CEA!B20"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n50 / 200 8-22x",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n50 / 200 8-22x",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -2555,8 +2555,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Simple CEA!B15"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n40 / 180 11–16x",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n40 / 180 11–16x",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -2627,14 +2627,14 @@
       "id": "weight_direct_evidence",
       "label": "Weight (Direct evidence)",
       "section": "development_effects",
-      "value": 0.35,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!C6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_direct_evidence",
+      "expected": 0.35
     },
     {
       "id": "breastfeeding_promotion_cognitive_effects",
@@ -2653,14 +2653,14 @@
       "id": "weight_cognitive_effects",
       "label": "Weight (Cognitive effects)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!D6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_cognitive_effects",
+      "expected": 0.15
     },
     {
       "id": "breastfeeding_promotion_growth",
@@ -2679,14 +2679,14 @@
       "id": "weight_growth",
       "label": "Weight (Growth)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!E6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_growth",
+      "expected": 0.15
     },
     {
       "id": "breastfeeding_promotion_mortality",
@@ -2705,14 +2705,14 @@
       "id": "weight_mortality",
       "label": "Weight (Mortality)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!F6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_mortality",
+      "expected": 0.1
     },
     {
       "id": "breastfeeding_promotion_morbidity",
@@ -2731,14 +2731,14 @@
       "id": "weight_morbidity",
       "label": "Weight (Morbidity)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!G6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_morbidity",
+      "expected": 0.1
     },
     {
       "id": "breastfeeding_promotion_anemia",
@@ -2757,14 +2757,14 @@
       "id": "weight_anemia",
       "label": "Weight (Anemia)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!H6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_anemia",
+      "expected": 0.075
     },
     {
       "id": "breastfeeding_promotion_biological_plausibility",
@@ -2783,14 +2783,14 @@
       "id": "weight_biological_plausibility",
       "label": "Weight (Biological plausibility)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!I6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_biological_plausibility",
+      "expected": 0.075
     },
     {
       "id": "breastfeeding_promotion_weighted_average",
@@ -2803,13 +2803,13 @@
       "id": "smc_direct_evidence",
       "label": "SMC (Direct evidence)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!C7"
-      }
+      },
+      "formula": "@givewell_common.smc_direct_evidence",
+      "expected": 2.0
     },
     {
       "id": "smc_cognitive_effects",
@@ -2827,13 +2827,13 @@
       "id": "smc_growth",
       "label": "SMC (Growth)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!E7"
-      }
+      },
+      "formula": "@givewell_common.smc_growth",
+      "expected": 2.0
     },
     {
       "id": "smc_mortality",
@@ -2851,13 +2851,13 @@
       "id": "smc_morbidity",
       "label": "SMC (Morbidity)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!G7"
-      }
+      },
+      "formula": "@givewell_common.smc_morbidity",
+      "expected": 3.0
     },
     {
       "id": "smc_anemia",
@@ -2875,13 +2875,13 @@
       "id": "smc_biological_plausibility",
       "label": "SMC (Biological plausibility)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Development effects!I7"
-      }
+      },
+      "formula": "@givewell_common.smc_biological_plausibility",
+      "expected": 3.0
     },
     {
       "id": "smc_weighted_average",
@@ -3011,8 +3011,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Main CEA!B48"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n2020 GiveWell Moral Weights, p. 9",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -3038,8 +3038,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1yRYk8y-yDthWOI2aDsYW4TSRqvfY11hthWOYo8PU52s/edit",
         "cell": "Main CEA!B50"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n2020 GiveWell Moral Weights, p. 9",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -3180,26 +3180,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

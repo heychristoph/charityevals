@@ -87,6 +87,15 @@
   ],
   "rows": [
     {
+      "id": "value_from_u5_death_averted_based_on_age_distribut_age_mix",
+      "label": "Age mix of these deaths, relative to the average under-five death",
+      "format": "number",
+      "value": 0.9618208079955533,
+      "kind": "estimate",
+      "explainer": "Diarrhoeal deaths of children under five fall at younger ages than under-five deaths overall. GiveWell's sheet values these deaths at 111.814 units of value, 0.962 of its average under-five death (116.253), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "cea"
+    },
+    {
       "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia",
       "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
       "section": "cea",
@@ -95,8 +104,8 @@
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "CEA!B72"
       },
-      "explainer": "GiveWell's moral weight, 111.8141889 units of value, times your multiplier on the value of a life.",
-      "formula": "111.8141889 * $life_value_multiplier",
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_under5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 111.814 units of value at the defaults, as in GiveWell's sheet.",
+      "formula": "@moral_weights.uov_per_death_under5 * value_from_u5_death_averted_based_on_age_distribut_age_mix * $life_value_multiplier",
       "expected": 111.8141889
     },
     {
@@ -577,14 +586,14 @@
       "id": "weight_direct_evidence",
       "label": "Weight (Direct evidence)",
       "section": "development_effects",
-      "value": 0.35,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!C6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_direct_evidence",
+      "expected": 0.35
     },
     {
       "id": "ors_zinc_provision_cognitive_effects",
@@ -603,14 +612,14 @@
       "id": "weight_cognitive_effects",
       "label": "Weight (Cognitive effects)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!D6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_cognitive_effects",
+      "expected": 0.15
     },
     {
       "id": "ors_zinc_provision_growth",
@@ -629,14 +638,14 @@
       "id": "weight_growth",
       "label": "Weight (Growth)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!E6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_growth",
+      "expected": 0.15
     },
     {
       "id": "ors_zinc_provision_mortality",
@@ -655,14 +664,14 @@
       "id": "weight_mortality",
       "label": "Weight (Mortality)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!F6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_mortality",
+      "expected": 0.1
     },
     {
       "id": "ors_zinc_provision_morbidity",
@@ -681,14 +690,14 @@
       "id": "weight_morbidity",
       "label": "Weight (Morbidity)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!G6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_morbidity",
+      "expected": 0.1
     },
     {
       "id": "ors_zinc_provision_anemia",
@@ -707,14 +716,14 @@
       "id": "weight_anemia",
       "label": "Weight (Anemia)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!H6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_anemia",
+      "expected": 0.075
     },
     {
       "id": "ors_zinc_provision_biological_plausibility",
@@ -733,14 +742,14 @@
       "id": "weight_biological_plausibility",
       "label": "Weight (Biological plausibility)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!I6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_biological_plausibility",
+      "expected": 0.075
     },
     {
       "id": "ors_zinc_provision_weighted_average",
@@ -753,13 +762,13 @@
       "id": "smc_direct_evidence",
       "label": "SMC (Direct evidence)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!C7"
-      }
+      },
+      "formula": "@givewell_common.smc_direct_evidence",
+      "expected": 2.0
     },
     {
       "id": "smc_cognitive_effects",
@@ -777,13 +786,13 @@
       "id": "smc_growth",
       "label": "SMC (Growth)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!E7"
-      }
+      },
+      "formula": "@givewell_common.smc_growth",
+      "expected": 2.0
     },
     {
       "id": "smc_mortality",
@@ -801,13 +810,13 @@
       "id": "smc_morbidity",
       "label": "SMC (Morbidity)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!G7"
-      }
+      },
+      "formula": "@givewell_common.smc_morbidity",
+      "expected": 3.0
     },
     {
       "id": "smc_anemia",
@@ -825,13 +834,13 @@
       "id": "smc_biological_plausibility",
       "label": "SMC (Biological plausibility)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "Development effects!I7"
-      }
+      },
+      "formula": "@givewell_common.smc_biological_plausibility",
+      "expected": 3.0
     },
     {
       "id": "smc_weighted_average",
@@ -1698,6 +1707,15 @@
       "expected": 36.15094714
     },
     {
+      "id": "value_from_u5_death_averted_based_on_age_distribut_age_mix",
+      "label": "Age mix of these deaths, relative to the average under-five death",
+      "format": "number",
+      "value": 0.9618208079955533,
+      "kind": "estimate",
+      "explainer": "Diarrhoeal deaths of children under five fall at younger ages than under-five deaths overall. GiveWell's sheet values these deaths at 111.814 units of value, 0.962 of its average under-five death (116.253), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "no_leveraging_cea"
+    },
+    {
       "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia_2",
       "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
       "section": "no_leveraging_cea",
@@ -1706,8 +1724,8 @@
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "No leveraging_CEA!B72"
       },
-      "explainer": "GiveWell's moral weight, 111.8141889 units of value, times your multiplier on the value of a life.",
-      "formula": "111.8141889 * $life_value_multiplier",
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_under5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 111.814 units of value at the defaults, as in GiveWell's sheet.",
+      "formula": "@moral_weights.uov_per_death_under5 * value_from_u5_death_averted_based_on_age_distribut_age_mix * $life_value_multiplier",
       "expected": 111.8141889
     },
     {
@@ -2626,6 +2644,15 @@
       "expected": 36.15094714
     },
     {
+      "id": "value_from_u5_death_averted_based_on_age_distribut_age_mix",
+      "label": "Age mix of these deaths, relative to the average under-five death",
+      "format": "number",
+      "value": 0.9618208079955533,
+      "kind": "estimate",
+      "explainer": "Diarrhoeal deaths of children under five fall at younger ages than under-five deaths overall. GiveWell's sheet values these deaths at 111.814 units of value, 0.962 of its average under-five death (116.253), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "no_funging_cea"
+    },
+    {
       "id": "value_from_u5_death_averted_based_on_age_distribution_of_dia_3",
       "label": "Value from U5 death averted based on age distribution of diarrheal mortality",
       "section": "no_funging_cea",
@@ -2634,8 +2661,8 @@
         "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
         "cell": "No funging_CEA!B72"
       },
-      "explainer": "GiveWell's moral weight, 111.8141889 units of value, times your multiplier on the value of a life.",
-      "formula": "111.8141889 * $life_value_multiplier",
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_under5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 111.814 units of value at the defaults, as in GiveWell's sheet.",
+      "formula": "@moral_weights.uov_per_death_under5 * value_from_u5_death_averted_based_on_age_distribut_age_mix * $life_value_multiplier",
       "expected": 111.8141889
     },
     {
@@ -3319,26 +3346,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

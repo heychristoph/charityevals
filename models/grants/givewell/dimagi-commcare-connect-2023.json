@@ -79,14 +79,14 @@
       "id": "arbitrary_donation_size_nigeria",
       "label": "Arbitrary donation size (Nigeria)",
       "section": "commcare_connect_botec",
-      "value": 100000.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1EGbktwOSmRr9nshBJy9Vr_E0eTkyTDyXqPvHMSzZTGs/edit",
         "cell": "CommCare Connect BOTEC!B5"
       },
-      "format": "usd"
+      "format": "usd",
+      "value": 100000.0,
+      "kind": "estimate"
     },
     {
       "id": "flw_compensation",
@@ -296,9 +296,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1EGbktwOSmRr9nshBJy9Vr_E0eTkyTDyXqPvHMSzZTGs/edit",
         "cell": "CommCare Connect BOTEC!B32"
       },
-      "explainer": "GiveWell's moral weight, 119 units of value, times your multiplier on the value of a life.\n\nGiveWell's moral weights",
-      "formula": "119 * $life_value_multiplier",
-      "expected": 119.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 119, is kept for the evaluator view.\n\nGiveWell's moral weights",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "expected": 119.0,
+      "published": 119.0
     },
     {
       "id": "total_units_of_value_from_mortality_reduction_nigeria",
@@ -911,26 +912,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

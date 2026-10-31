@@ -752,8 +752,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1rReve_909lnjR47kUbezN5gtEsA7S53K3V-CL2EAzXI/edit",
         "cell": "Main!C116"
       },
-      "explainer": "GiveWell's moral weight, 116.252615789931 units of value, times your multiplier on the value of a life.\n\nSource: GiveWell's moral weights and discount rate. See more on how we derive these figures here.",
-      "formula": "116.252615789931 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nSource: GiveWell's moral weights and discount rate. See more on how we derive these figures here.",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.252615789931
     },
     {
@@ -856,8 +856,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1rReve_909lnjR47kUbezN5gtEsA7S53K3V-CL2EAzXI/edit",
         "cell": "Main!C117"
       },
-      "explainer": "GiveWell's moral weight, 73.1914046254006 units of value, times your multiplier on the value of a life.\n\nSource: GiveWell's moral weights and discount rate. See more on how we derive these figures here.",
-      "formula": "73.1914046254006 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nSource: GiveWell's moral weights and discount rate. See more on how we derive these figures here.",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.1914046254006
     },
     {
@@ -996,15 +996,15 @@
       "id": "increase_in_annual_income_per_malaria_case_averted_among_peo",
       "label": "Increase in annual income per malaria case averted among people under age 15",
       "section": "main",
-      "value": 0.0058088,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rReve_909lnjR47kUbezN5gtEsA7S53K3V-CL2EAzXI/edit",
         "cell": "Main!C132"
       },
       "explainer": "Source: GiveWell's CEA of insecticide-treated net (ITN) distributions. See more on how we derived these estimates here.",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.increase_in_annual_income_per_malaria_case_averted_amon",
+      "expected": 0.0058088
     },
     {
       "id": "adjusted_increase_in_ln_income_per_malaria_case_averted_amon",
@@ -4845,26 +4845,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

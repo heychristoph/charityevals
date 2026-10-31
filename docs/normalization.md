@@ -38,7 +38,9 @@ Where the line is drawn:
   undoing the evaluator's own conversion of a figure it only published converted (FP's $164 per
   WELLBY-equivalent for GiveDirectly, divided back to doublings by FP's 1.898). Rows that read a
   cross-cause rate are still forbidden (INV-2b): `$uov_per_daly` only with the evaluator's implied rate
-  pinned. Checked by INV-2c, so every slider moves every model it should.
+  pinned. Checked by INV-2c (an evaluator's conversion as an input), INV-2d (a constant beside a lever
+  inside a formula), INV-13 (the same concept answered two ways across models) and INV-14 (a constant
+  copied into five or more models with no shared fact), so every slider moves every model it should.
 - **A species weight is a conversion, not part of the evaluator's model.** AIM's SADs come with
   AIM's species weights built in; we take them out and put ours in, in the same rows for every
   animal model. The evaluator view keeps AIM's.
@@ -69,52 +71,64 @@ that a "healthy year" from a GiveWell model is GiveWell's value divided by 2, no
 
 ### 2.3 Life satisfaction: WELLBYs (`wellby`)
 
-`healthy years = WELLBYs × $uov_per_wellby / $uov_per_daly` (0.130563 / 2 = 0.0653 at the defaults).
+`healthy years = WELLBYs × $daly_per_wellby` (0.0652815 at the default; the unit's `to_common` is
+`$daly_per_wellby * $uov_per_daly`, whose units of value cancel).
 
 **Calibrated on depression (owner, 2026-10-31).** Most WELLBYs on the site are HLI's psychotherapy
 results, and the same therapy is also modelled in DALYs (Founders Pledge, SoGive). Until October 2026
 the rate was a calibration on GiveDirectly (1.15, fixed), and one standard deviation of depression for
 a year was then worth 2 × 1.15 / 2 = 1.15 healthy years through HLI but 4.21 × 0.031 = 0.13 through the
 GBD weights: 8.8 times apart. The owner anchored depression on the GBD disability weights, so the
-WELLBY rate is now a slider ("1 point more life satisfaction for a year vs doubled-income year", Exchange
+WELLBY rate is now a slider ("1 point more life satisfaction for a year vs a year of healthy life", `$daly_per_wellby`, Exchange
 rates, kind judgment) whose default makes the two routes agree:
 
 ```
-one SD-year of depression, GBD route   = @depression.phq9_sd × @depression.dalys_per_phq9_point_year
-                                       = 4.211710187 × 0.031 = 0.13056 healthy years
-one SD-year of depression, WELLBY route = @wellby_factors.wellbys_per_sd_year × $uov_per_wellby / $uov_per_daly
-                                       = 2 × u / 2
-equal when u = 4.211710187 × 0.031 × 2 / 2 = 0.130563 units of value per WELLBY
+one SD-year of depression, GBD route    = @depression.phq9_sd × @depression.dalys_per_phq9_point_year
+                                        = 4.211710187 × 0.031 = 0.13056 healthy years
+one SD-year of depression, WELLBY route = @wellby_factors.wellbys_per_sd_year × $daly_per_wellby = 2 × d
+equal when d = 4.211710187 × 0.031 / 2 = 0.0652815 healthy years per WELLBY
 ```
+
+**At any healthy-year rate (late October 2026).** The slider was first stated in units of value per WELLBY
+(`$uov_per_wellby`, 0.130563), so the equivalence held only at `$uov_per_daly` = 2: moving "Healthy year vs
+doubled-income year" moved the WELLBY models (∝ 1/`$uov_per_daly`) and not the DALY ones. It is now stated in
+healthy years (`$daly_per_wellby`, "1 point more life satisfaction for a year vs a year of healthy life"), so
+both routes agree at any value of a healthy year and WELLBY models, like DALY models, don't move with that
+slider (INV-10). Old links are restated (÷ 2, src/lib/assumption-state.ts `LEGACY`). Nothing moves at the
+defaults.
 
 - `@depression.phq9_sd` (new, 4.21, range 3.5–5.5): the spread of PHQ-9 scores among people starting
   therapy, from METAPSY via SoGive; SoGive's StrongMinds model reads it too. One SD of depression is
   this many PHQ-9 points in every model.
 - The default is a number (sliders have no formulas); src/engine/wellby-calibration.test.ts fails if it
-  drifts from the facts. The calibration holds at the default healthy-year rate (`$uov_per_daly` = 2);
-  moving that slider moves WELLBY models (∝ 1/`$uov_per_daly`) and not the DALY ones, as before.
-- Plausible range 0.1–0.55 (the GBD route with Founders Pledge's 0.0244 a point; HLI's own 2021
-  moral-weights work, 0.55). Slider 0.05–3: it reaches HLI's own rate and the GiveDirectly calibration.
+  drifts from the facts, and checks that the unit converts in healthy years.
+- Plausible range 0.05–0.275 healthy years (the GBD route with Founders Pledge's 0.0244 a point; HLI's own
+  2021 moral-weights work, 0.55 doubled-income years at 2 a healthy year). Slider 0.025–1.5: it reaches
+  HLI's own rate and the GiveDirectly calibration.
 - **GiveDirectly, one figure.** The old calibration point is now the evaluator view: every HLI model
-  pins `uov_per_wellby` at 1.15 in `evaluator.assumptions`, the rate at which HLI's GiveDirectly (7.55
+  pins `daly_per_wellby` at 0.575 (1.15 units of value at 2 a healthy year) in `evaluator.assumptions`, the rate at which HLI's GiveDirectly (7.55
   WELLBYs per $1,000) equals GiveWell's GiveDirectly in Kenya (`givedirectly`, 8.7 units of value per
   $1,000, 4.36 healthy years): HLI's results relative to cash, as HLI presents them. The site uses the one
   Kenya figure wherever it needs "GiveDirectly" as a calibration or benchmark (`common.benchmark`,
   `#givedirectly` in the meta models, this pin): HLI's cash estimate rests on Kenyan trials, so it is the
   like-for-like comparison. GiveWell's 2024 five-country aggregate (5.46, `givedirectly-cash-poverty-relief-2024`)
   is GiveWell's ranked figure for the charity, a different programme mix; calibrating on it would give
-  1.45. HLI's figures (WELLBYs, every `expected`) are unchanged.
+  0.72 (1.45 units of value). HLI's figures (WELLBYs, every `expected`) are unchanged.
 - What it costs: at the default, HLI's GiveDirectly is 0.49 healthy years per $1,000 against GiveWell's
   4.36. HLI's and GiveWell's figures can't agree on both cash and depression; the owner chose depression.
 
 **Deaths in WELLBY models.** A death is valued the site's way, `@moral_weights` for the age band ×
 `$life_value_multiplier`, never through HLI's deprivationist WELLBYs (years × life satisfaction above a
-neutral point; the neutral point stays in the evaluator view). A row may not read `$uov_per_wellby`
-(INV-2b), so the death is put into WELLBYs at `@wellby_factors.uov_per_wellby_anchor` (0.130563, the
-slider's default, held equal by the same test): at the default WELLBY rate the death counts exactly its
-shared value, and it scales with the WELLBY slider like the rest of the model (a known simplification:
-under another WELLBY rate the deaths in AMF-HLI and Taimaka-HLI move with it). Deaths averted now are not
-discounted; grief averted is part of what a death costs (as in GiveWell's weights) and is not added.
+neutral point; the neutral point stays in the evaluator view). The deaths' value, in units of value, sits in
+the row `uov_valued_outside_wellbys` (an `ours` section; 0 in the evaluator view), and enters the WELLBYs
+only through one fixed row, `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)`,
+which the unit's conversion multiplies back: the deaths count exactly their shared value (÷ `$uov_per_daly`,
+like GiveWell's deaths) at any WELLBY rate, and only the WELLBYs HLI measured move with the WELLBY slider.
+It is the one row a model may read the WELLBY rate in (INV-2b's exception, checked by INV-17; INV-10
+holds the deaths at 0 when it tests WELLBY models' shape). Until late October 2026 the deaths were put into
+WELLBYs at a fixed anchor fact (`@wellby_factors.uov_per_wellby_anchor`, now removed), so under another WELLBY
+rate the deaths in AMF-HLI and Taimaka-HLI moved with it. Deaths averted now are not discounted; grief averted
+is part of what a death costs (as in GiveWell's weights) and is not added.
 
 ### 2.4 Animal suffering: chicken-equivalent pain days (new unit `ced`)
 
@@ -267,6 +281,7 @@ Coalition for Rainforest Nations, Carbon180, Evergreen 2021, Future Cleantech Ar
 Industrious Labs, Opportunity Green, Terrapraxis) multiply tonnes per dollar by the one shared
 `@meta.marginal_vs_past_average` (judgment, 50%, 18–100%), the same figure as The Life You Can Save's leverage
 (`published` 1). Evergreen 2023 (a projected budget) and Woodland Trust (cost per tree delivered) don't take it.
+Since late October 2026 the same factor applies in every cause (2.9, "Past average, every cause").
 Evaluators' subjective best guesses (Terrapraxis's and Industrious Labs' cost per tonne, Evergreen's budget share
 and years, Carbon180's spending shares) are filed as `judgment`. Won policies (CATF's rules and credit, CfRN's
 REDD+ years) count `$win_years_counted` years, discounted (2.9).
@@ -382,8 +397,14 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 |---|---|---|---|
 | Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned) | 2 (1–4) | judgment, assumptions |
 | Income | `$uov_per_ln_consumption` | 1/ln 2 | GiveWell |
-| Life satisfaction | `$uov_per_wellby` (unit conversion only; slider) | 0.130563 (0.1–0.55; slider 0.05–3) | calibrated on depression: a PHQ-9 SD-year worth the same via WELLBYs and via GBD weights (2.3); evaluator view of HLI models 1.15 (GiveDirectly, Kenya) |
-| A death | `@moral_weights.<age band>` × `$life_value_multiplier`, the band of the death's age (an age mix from `@death_ages` where deaths of many ages are counted together: climate, GBD DALYs); `_over5` only for deaths of unknown age; GiveWell's own age curve inside GiveWell sheets is the same scale | 116.25 / 134 / 104 / 42 UoV | GiveWell moral weights |
+| Life satisfaction | `$daly_per_wellby` (healthy years per WELLBY; unit conversion only, slider; deaths in WELLBY models enter through `wellbys_from_uov`, INV-17) | 0.0652815 (0.05–0.275; slider 0.025–1.5) | calibrated on depression: a PHQ-9 SD-year worth the same via WELLBYs and via GBD weights at any `$uov_per_daly` (2.3); evaluator view of HLI models 0.575 (GiveDirectly, Kenya) |
+| A death | `@moral_weights.<age band>` × `$life_value_multiplier`, the band of the death's age (an age mix from `@death_ages` where deaths of many ages are counted together: climate, GBD DALYs); `_over5` only for deaths of unknown age | 116.25 / 134 / 104 / 42 UoV | GiveWell moral weights |
+| A death in a GiveWell sheet by finer age | `@moral_weights.givewell_age_<group>` (early, late and post-neonatal, 1–4, then five-year groups to 85+) and `givewell_neonatal` (84), × `$life_value_multiplier`; a sheet's age-weighted figure for a programme's deaths (diarrhoeal deaths, Bangladesh's over-fives, alcohol deaths) is the band's value × a measured `*_age_mix` row | 83.6 … 134.3 … 12.4 UoV | GiveWell's 2020 moral weights by age, as its sheets carry them; INV-2d |
+| GiveWell's house constants | `@givewell_shared.*`: resource sharing (2), treatment costs averted (20%), investment of income gains (5%; nets 2.5%, vitamin A 3%, deworming 10%), years long-term gains last (40) and until they start, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception by country (deaths part × `$life_value_multiplier`), a stillbirth (21), indirect deaths per diarrhoea death, GiveWell's discount rate for figures it states discounted | as listed | facts/givewell_shared.json, GiveWell's current sheets; every GiveWell sheet, and every other evaluator's true copy (SoGive's deworming, Founders Pledge's LEEP, Ambitious Impact's LaBri and Lead Research for Action) reads them; INV-13 |
+| Disability weights | `@gbd_disability_weights.*` (tuberculosis, HIV on and off treatment, near vision loss) and `@depression.dw_*` | GBD 2019 | facts/gbd_disability_weights.json; every sheet that types a GBD weight reads it (Novah's depression and HIV weights since late October 2026) |
+| Figures GiveWell's sheets share | `@givewell_common.*`: 298 figures typed under the same label into five or more of GiveWell's sheets (and SoGive's copies): supplemental adjustments, the GiveDirectly investment block, vaccine and net parameters, GBD death rates by age and cause, trial data | as typed | facts/givewell_common.json, generated from the sheets (INV-14); no value changed |
+| Staff pay below market | `@staff_pay.*`: share of cost and pay gap by kind of work (goods, staff-delivered help, research and policy, advocacy, media; GiveDirectly's and New Incentives' own) | as listed | facts/staff_pay.json, our judgment, read by 487 staff-pay rows; only matters with "Credit by share of resources" on |
+| Past average vs the next dollar | `@meta.marginal_vs_past_average` | 50% (18–100%) | judgment; every model built on an organisation's past spending over its past wins (2.9) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low FP's 2022 GiveDirectly, high GiveWell's 2024 GiveDirectly |
 | A dollar to GiveDirectly (where money goes or would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's GiveDirectly model on the site; every meta model reads it, never `@cash` |
@@ -466,14 +487,14 @@ view is unchanged unless stated.
 | GiveWell Healthy Futures | neonatal death = 33.07 DALYs | 33.07 | GiveWell's own neonatal weight (84 UoV, already in the sheet) / `$uov_per_daly`, pin 2.54 | 4.92 → 5.40 |
 | GiveWell Malengo | time discount 4% typed in; €→$ | 0.04; 0.8458 €/$ | `$discount_rate` (pin 0.04; 6.5% for later cohorts = ours + GiveWell's 2.5-point uncertainty premium); `1 / @fx.usd_per_eur_2021` | 8.96 → 7.42 |
 | GiveWell, sheets with 2017/2019 life-equivalents | GiveDirectly cost per life-eq.; Fortify 2019: under-5 death 47.22, YLD 2.84 | 11,663; 12,298 | `uov_per_death_under5 × $life_value_multiplier / @cash` ($34,700); `@moral_weights`; `$uov_per_daly` pinned 2.84 | EA India 20.9 → 14.2, EA Beta 14.6 → 12.5 (its time discounting on top of the decay rate), IDinsight 16.1 → 16.1, IDinsight NI 19.3 (cancels), Fortify 2019 incubation 24.9 → 21.7 (evaluator view 21.7 → 15.3: it converts at the sheet's 2.84) |
-| HLI Taimaka | lives saved left out of HLI's bottom line (a bonus: 65 WBp1k deprivationist, neutral point 2; grief 2.88) | 0 | our step: lives saved (HLI's 65 ÷ 231 WBs a life = 0.28 per $1,000) × `@moral_weights.uov_per_death_under5` × `$life_value_multiplier` ÷ `@wellby_factors.uov_per_wellby_anchor`; no grief on top | 10.5 → 49.6 → 17.6 (WELLBY rate and deaths; deaths alone at the old rate 28.6) |
+| HLI Taimaka | lives saved left out of HLI's bottom line (a bonus: 65 WBp1k deprivationist, neutral point 2; grief 2.88) | 0 | our step: lives saved (HLI's 65 ÷ 231 WBs a life = 0.28 per $1,000) × `@moral_weights.uov_per_death_under5` × `$life_value_multiplier` into WELLBYs through `wellbys_from_uov` (2.3, INV-17; until late October 2026 ÷ an anchor fact); no grief on top | 10.5 → 49.6 → 17.6 (WELLBY rate and deaths; deaths alone at the old rate 28.6) |
 | Years of benefit at face value (ACE ProVeg 2016; GiveWell Vital Strategies, Pure Earth, Rice KMC, CHAI TSUs, EA India, EA syphilis ×2, CPSP) | no time discount | 0 | `pv_annuity_due(1, years_discount_rate, years)`, the rate reading `$discount_rate` with 0 in `published` | ProVeg 1.14 → 1.13, Vital Strategies 21.0 → 17.7, Pure Earth 30.7 → 27.4, KMC 43.8 → 42.3, TSUs 44.8 → 43.9, CPSP 92.6 → 79.6, syphilis 50.7 → 48.2 / 48.7 → 44.3 |
 | "Opportunities get worse" sheets (EA Beta, Accelerator, CHAI incubator, Fortify VoI 2021, IRD threshold, IRD ZM) | decay only, no time preference | | decay kept, `$discount_rate` on top (0 in `published`) | 15.7–42.6, each −7% to −20% |
 | GiveWell age-specific moral weights (100.7, 127.3, 116…) | value of a death | | they are the shared curve (× `$life_value_multiplier`) | none |
 | ACE The Humane League, Shrimp Welfare Project | £→$ | 1.2781 | `@fx.usd_per_gbp_2024` 1.277 | <0.1% |
 | ACE Animal Welfare Observatory; Dansk Vegetarisk Forening | €→$; DKK→$ | 1.0822; 0.1452 | `@fx.usd_per_eur_2024` 1.0823; `@fx.usd_per_dkk_2023` 0.14514 | <0.1% |
 | HLI StrongMinds, Friendship Bench, Shamiri, Pure Earth | SD-years → WELLBYs (2), household spillover, household size | literals equal to HLI's | `@wellby_factors`; WELLBYs at the depression-calibrated rate (2.3) | StrongMinds 22.2 → 2.52, Friendship Bench 26.7 → 3.03, Shamiri 18.4 → 2.09, Pure Earth 20.0 → 2.27 |
-| HLI AMF | a death in WELLBYs (years × wellbeing above neutral, 133 WBs); deaths from GiveWell 2022 before leverage (0.335/$1,000); improving effects at HLI's upper bound (29.97) | | GiveWell 2026's deaths (0.232 before, 0.196 after leverage and funging, the switch on `$resource_shares`), × `@moral_weights` (81% under five) × `$life_value_multiplier` ÷ `uov_per_wellby_anchor`; improving effects at the middle of HLI's cases (15.0, range 0–29.97), discounted (start 3 years, over 20); HLI's in `published` | 42.8 → 11.2 (at the old WELLBY rate: 34.2 midpoint; about 29 with shared deaths) |
+| HLI AMF | a death in WELLBYs (years × wellbeing above neutral, 133 WBs); deaths from GiveWell 2022 before leverage (0.335/$1,000); improving effects at HLI's upper bound (29.97) | | GiveWell 2026's deaths (0.232 before, 0.196 after leverage and funging, the switch on `$resource_shares`), × `@moral_weights` (81% under five) × `$life_value_multiplier` into WELLBYs through `wellbys_from_uov` (2.3, INV-17); improving effects at the middle of HLI's cases (15.0, range 0–29.97), discounted (start 3 years, over 20); HLI's in `published` | 42.8 → 11.2 (at the old WELLBY rate: 34.2 midpoint; about 29 with shared deaths) |
 | HLI GiveDirectly, ACTRA, icddr,b, Pallium, Fortify Health, World Spine Care | WELLBYs at the GiveDirectly calibration | 1.15 | depression-calibrated rate (2.3) | 4.34 → 0.49, 17.8 → 2.03, 16.9 → 1.91, 20.2 → 2.29, 11.0 → 1.25, 9.88 → 1.12 |
 | FP Educational Initiatives, Winning Start, Innovation in Government (Zambia) | 2019 education method: +10% earnings per SD × 80% additional, 5 years, one earner, simple-interest wait | 0.1, 0.8, 5, 1 | `@founders_pledge_2023` (19.1% × 17.5%, 40 years, ×2 household, compounded); 2019 figures in `published` | 1.04 → 3.81, 2.68 → 9.80, 21.6 → 39.4 |
 | FP Imagine Worldwide Tanzania (ours) | weight on FP's prior | 25% (ours) | `@founders_pledge_2023.prior_weight` 50% (also Central Square, EIDU, Ubongo, unchanged) | 13.97 → 11.17 |
@@ -586,7 +607,12 @@ model was removed); INV-12 requires it of any model with a row on its path about
 
 - *Where the money goes, by evidence.* The Life You Can Save publishes its money moved by charity: its 2025 split
   (facts/meta.json `tlycs_moved_2025_*`, $24.1M, 19 charities modelled here for $13.4M, the rest valued at their
-  average) replaces GiveWell's Top Charities (`value_tlycs_recommended`). Better Futures Guide recommends
+  average) replaces GiveWell's Top Charities (`value_tlycs_recommended`). Charities GiveWell ranks by several
+  programmes (Evidence Action, Malaria Consortium) are read at GiveWell's programme-weighted figure, the one the
+  rankings show, through `#owner:charity` (`#givewell:evidence-action`: one evaluator's figure for a charity,
+  computed live from its ranked programme models and their locations, src/engine/ranking.ts `evaluatorFigure`);
+  before, each was one sheet (Evidence Action's syphilis sheet, 0.0963 units of value per dollar, now 0.0591;
+  Malaria Consortium's single SMC location, 0.0490, now 0.0803). The Life You Can Save 89.0 → 82.4. Better Futures Guide recommends
   livelihoods charities and has published none yet: the livelihoods charities the site models, live, equal weights
   (`value_livelihoods`: GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund), not
   GiveWell's health charities. CEARCH's research and grants are global-health policy (hypertension and salt, lead,
@@ -674,8 +700,25 @@ Climate rows now read it (`pv_annuity_due(1, $discount_rate, $win_years_counted)
 `published`, the wait being the model's `years_until_avoided`): Clean Air Task Force `years_brought_forward` (1.5),
 `nsps_2012_years_forward` (0.92), `nsps_2016_years` (3), `ccs_years_forward` (1.5); Coalition for Rainforest Nations
 `years_brought_forward` (3). Terrapraxis's `years_earlier` (5) cancels against the grant its page implies, so the
-slider can't move it without a decision on the grant's size. Global-health rows still to do (other owners' files): Innovation in Government Initiative `india_years_forward` (1.5), GiveWell's Centre for
-Pesticide Suicide Prevention `number_of_years_brought_forward` and Vital Strategies' years-forward rows.
+slider can't move it without a decision on the grant's size. Global health: GiveWell's Centre for Pesticide
+Suicide Prevention `number_of_years_brought_forward` and Vital Strategies' years-forward rows read it (wave of
+2026-10-31), and Founders Pledge's Innovation in Government Initiative `india_years_forward` (1.5) and
+`zambia_years_forward` (3) too, the evaluator's years in `published`, with a one-year wait until each reform
+takes effect discounted (`reform_years_until_effect`, judgment 1, 0–3; `reform_wait_discount`, `published` 1):
+39.4 → 40.4.
+
+**Past average, every cause (late October 2026).** The shared `@meta.marginal_vs_past_average` (judgment, 50%,
+18–100%) applies to every model whose cost-effectiveness is an organisation's past spending divided by the wins
+that spending achieved: campaigns, policies, corporate commitments, research. Besides The Life You Can Save and
+the nine retrospective climate models (2.5), that is ACE's 2024/2025 estimates for Animal Welfare Observatory,
+Aquatic Life Institute, ÇHKD, The Humane League, Sinergia Animal, Sociedade Vegetariana Brasileira and Wild
+Animal Initiative, Founders Pledge's The Humane League (2015–2018 budget over its wins) and Innovation in
+Government Initiative (budget to date over two reforms), and SoGive's Breast Cancer Now (UK research spending
+1970–2009 over the healthy years it is credited with). Each takes the factor in an `ours` row
+`marginal_vs_past_average` (`published` 1), so evaluator views are unchanged; each falls by half at the
+defaults. Unit-cost delivery (nets, treatments, stunners installed, trees, chef training, people reached:
+Dansk Vegetarisk Forening, Shrimp Welfare Project, Good Food Fund) and forward-looking estimates (GiveWell,
+Ambitious Impact, HLI, ACE 2016's projections, Evergreen 2023) don't take it.
 
 Before → after (healthy years per $1,000, our view at the defaults; evaluator views unchanged except Wild Animal
 Initiative, whose bridge is ours in both):
@@ -711,9 +754,9 @@ shrinks).
 | # | Invariant | How to test |
 |---|---|---|
 | INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby`, `ced` or `tco2e`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
-| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `uov_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
+| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `daly_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. One exception, in WELLBY models: `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion cancels (2.3, INV-17). (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
 | INV-3 | Every animal model passes through the species step, once per species, from the shared table. | For `unit = ced`: the model declares `output.species` (e.g. `["chicken","pig"]`). For each, a row `ced_<s>` exists, its formula equals the template for its source (`aim` or `raw`) after whitespace normalisation, it reads `@welfare_ranges.<s>_vs_chicken`, and it is upstream of the output. No other row reads `@welfare_ranges.*` or `@aim_sads.*`. Every path from a row whose unit is SAD or days of pain to the output passes through a `ced_*` row. |
-| INV-4 | No literal stands in for a shared number. | Facts get a `match` field (row label/id pattern). For every input row matching a fact's pattern whose value equals the fact's low/best/high: it must be a formula reading the fact, with the evaluator's literal in `published`. Also: no formula contains a constant equal to a fact or assumption value (extends lint's magic-number rule to all models). |
+| INV-4 | No literal stands in for a shared number. | An input row whose value is within 0.2% of a fact's or assumption's low/best/high (0.003355 for `@cash`'s 0.00335) and whose label resembles the shared label, or uses one of its synonyms (ln(consumption) or a doubled income for `$uov_per_ln_consumption`; a DALY or disability weight, "(DW)", for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for `@cash`), must be a formula reading the fact, with the evaluator's literal in `published`. Facts made from identical labels (facts/givewell_common.json, staff_pay.json) match only rows with that label, on their best value. Also: no formula contains a constant equal to a fact or assumption value (distinctive, or under a close label; exponents and one- or two-digit constants under labels only loosely alike are arithmetic). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |
 | INV-6 | The evaluator's bottom line reproduces. | Model declares `output.native` (the native row). That row, or its direct inputs, carry `expected`; `scripts/check.ts` already checks `expected` in the evaluator view. |
 | INV-7 | Our rows are visibly ours. | Every row strictly between `output.native` and `output.row` is in a section of kind `accounting`, `bridge` or `conversion`, and has no `expected`. Every row upstream of `native` is in an evaluator section. |
@@ -721,9 +764,15 @@ shrinks).
 | INV-9b | Benefits over several years are discounted. | Each input on the path whose label counts years a benefit lasts (years of change/impact/benefit/funding, number of years, duration) is moved ×1.25 at a 0% and an 8% rate: if the headline rises by the same factor at both, the years are summed at face value. |
 | INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
-| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$uov_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`. |
+| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | (Ambitious Impact's models for now.) Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death) or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@fx.*`), itself or through a row it is computed from. |
 | INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
+| INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |
+| INV-13 | Same concept, same value across models. | Rows on the path (not variants) whose label names one of a curated list of concepts several evaluators state (resource sharing, treatment costs averted, investment of income gains, years long-term gains last, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception, of a stillbirth, indirect deaths per diarrhoea death, household spillover of therapy, pledges kept, prior weight on education studies, depression per PHQ-9 point) read the concept's shared fact, the evaluator's figure in `published`. A place or year the facts don't cover is the only reason to differ, recorded as a waiver with the reason. Late October 2026: 81 rows; deworming's 10% investment share became a fact, the true copies in SoGive's, Founders Pledge's and Ambitious Impact's models read `@givewell_shared` (the 18 INV-4 waivers for them are gone), GiveWell's 2022 water sheets take the current 20% treatment costs averted. |
+| INV-14 | No house constant without a shared fact. | Input rows on the path (not variants), grouped by whose figure it is (SoGive's copies of GiveWell's sheets count as GiveWell's), label (places and "overall" dropped) and value: a group in five or more models is a constant copied by hand and becomes a shared fact every copy reads. Round structural numbers (lint's allowed literals) and numbers that define their row (an arbitrary donation's size, a "10x bar" of 10) are exempt. Late October 2026: facts/givewell_common.json (298 figures, read by 2,275 rows in 118 models) and facts/staff_pay.json (our staff-pay defaults by kind of work and two charities' own shares, read by 487 rows); no value changed. |
+| INV-15 | A ranked model far above its peers says why. | Every model the rankings use whose headline is more than 10× the median of the other ranked models of its cause (at least three) states the reason in its summary, "more than ten times its peers because …". Late October 2026: Terrapraxis (one event), Clean Air Task Force (Founders Pledge's counted deaths), Sinergia, The Humane League (Founders Pledge), HSUS and Albert Schweitzer Foundation (ACE 2016): cage-free pledges move many hen-years per dollar. |
+| INV-16 | Side sheets never rank; the ranked column is the grant's. | Every model the rankings use has at most one row on its path that reads like a value-of-information or decision sheet (future funding bar, CE of reallocated funding, value of information, probability the decision changes, P(… x cash)); and where its native row's label names a place in parentheses, the model's name, id or title names that place too when it names any. Complements `isSideSheet` (title and template) in src/engine/ranking.ts. |
+| INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest doesn't move with `$life_value_multiplier`. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
@@ -849,14 +898,49 @@ evaluator view still reproduces every `expected`. Every slider moves every model
    worth its destinations' live results (`#model`), one share of new money, one value for where shifted money
    would have gone, one chance of success for a new organisation; career changes are the mirror of staff pay.
    CEARCH, The Life You Can Save and Better Futures Guide follow it; INV-12 checks it.
-7. **Depression is anchored on the GBD disability weights.** The WELLBY rate is a slider whose default
-   (0.130563) makes a PHQ-9 standard-deviation-year worth the same through HLI's WELLBYs as through
-   `@depression` (2.3); HLI's evaluator view converts at the GiveDirectly calibration (1.15, Kenya).
+7. **Depression is anchored on the GBD disability weights.** The WELLBY rate is a slider, in healthy years
+   per WELLBY (`$daly_per_wellby`, 0.0652815), whose default makes a PHQ-9 standard-deviation-year worth the
+   same through HLI's WELLBYs as through `@depression` at any value of a healthy year (2.3); HLI's evaluator
+   view converts at the GiveDirectly calibration (0.575, Kenya). Deaths in HLI models don't move with it (INV-17).
    Deaths in HLI models are valued with `@moral_weights` × `$life_value_multiplier` (AMF-HLI, Taimaka-HLI),
    AMF-HLI counts GiveWell's current deaths after leverage and funging and the middle of HLI's improving
    cases; household spillovers of therapy are counted in every StrongMinds model; Founders Pledge's maternal
    deaths sit in the 15–49 band; Founders Pledge's education models all use its 2023 method and one prior
    weight.
+
+### Late October 2026: the checks that close the gaps (INV-2d, INV-13 to INV-17)
+
+The owner's rule ("one consistent way") is now checked where the earlier invariants couldn't see: a constant
+beside a lever inside a formula (INV-2d), one concept answered two ways (INV-13), a constant copied by hand
+into five or more models (INV-14), an outlier with no stated reason (INV-15), a side sheet or another
+location's column in the ranking (INV-16), deaths in WELLBY models moving with the WELLBY rate (INV-17). The
+allowlist stays empty; waivers are only checked false positives, each with its reason.
+
+Ranked models that moved more than 5% (healthy years per $1,000, our view at the defaults; evaluator views
+unchanged):
+
+| Model | Before → after | Why |
+|---|---|---|
+| Sinergia Animal | 379.5 → 189.7 | past average × `@meta.marginal_vs_past_average` (2.9) |
+| The Humane League (Founders Pledge) | 683.8 → 341.9 | the same |
+| The Humane League (ACE) | 122.0 → 61.0 | the same |
+| Animal Welfare Observatory | 26.3 → 13.2 | the same |
+| Sociedade Vegetariana Brasileira | 23.6 → 11.8 | the same |
+| Çiftlik Hayvanlarını Koruma Derneği | 17.3 → 8.6 | the same |
+| Aquatic Life Institute | 1.88 → 0.94 | the same |
+| Wild Animal Initiative | 0.0172 → 0.0086 | the same |
+| Breast Cancer Now (SoGive) | 0.060 → 0.030 | the same |
+| The Life You Can Save (Founders Pledge) | 89.0 → 82.4 | Evidence Action and Malaria Consortium at GiveWell's programme-weighted figures (2.8) |
+| WHO guideline review (GiveWell, March 2025) | 33.7 → 49.3 | a death of unknown age at the shared over-five value (73.19), not the sheet's 50 (INV-2d) |
+| UCL participatory learning and action (GiveWell) | 22.8 → 21.6 | post-neonatal and maternal deaths at the shared curve (100.7, 104), not 110 and 115 (INV-2d) |
+
+Unranked models that moved most: Evidence Action syphilis screening 2.8 → 41.2 (an under-five death at 116.25,
+not one staff member's 8), Evidence Action IFA Beta India 12.8 → 29.8 and Phase 2 1.6 → 3.3 (a doubled income,
+a year lived with disability and a death at the shared values, not the 2019 sheet's units), New Incentives June
+2019 7.2 → 14.1 (a death at 116.25, not 2019's 47.22), Centre for Pesticide Suicide Prevention skeleton 42.4 →
+53.1 (suicides at the 15–49 band, GiveWell's 80% kept), GiveWell's 2022 water-quality sheets +17–18% (the
+current 20% for treatment costs averted). The WELLBY slider's move to healthy years and the deaths in AMF-HLI
+and Taimaka-HLI change nothing at the defaults.
 
 ## 6. Order of work
 

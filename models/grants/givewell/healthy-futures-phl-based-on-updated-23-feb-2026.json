@@ -4050,14 +4050,14 @@
       "id": "internal_validity_adjustment_to_baseline_adverse_outcome_rat",
       "label": "Internal validity adjustment to baseline adverse outcome rates due to syphilis",
       "section": "treatment_effects",
-      "value": 1.1,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C25"
       },
-      "explainer": "Some studies included a large proportion of women with latent syphilis infections that's likely not entirely captured by our adjustment for diagnostic performance. For example, one study (Ingraham, 1940-49, see p. 220) exclusively studied women with infections that were asymptomatic, while another (Harmon, 1917, see p. 220) followed the pregnancies of women long after their diagnosis. There seems to be a wide consensus that the negative consequences of maternal syphilis are higher for pregnancies that occur during the active stage of an infection compared to during the latent stage, and we are interested in the baseline rates of APOs among women with active syphilis infections."
+      "explainer": "Some studies included a large proportion of women with latent syphilis infections that's likely not entirely captured by our adjustment for diagnostic performance. For example, one study (Ingraham, 1940-49, see p. 220) exclusively studied women with infections that were asymptomatic, while another (Harmon, 1917, see p. 220) followed the pregnancies of women long after their diagnosis. There seems to be a wide consensus that the negative consequences of maternal syphilis are higher for pregnancies that occur during the active stage of an infection compared to during the latent stage, and we are interested in the baseline rates of APOs among women with active syphilis infections.",
+      "formula": "@givewell_common.internal_validity_adjustment_to_baseline_adverse_outcom",
+      "expected": 1.1
     },
     {
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_stillbirth",
@@ -4070,27 +4070,27 @@
       "id": "treatment_effectiveness_in_reducing_stillbirth_or_miscarriag_2",
       "label": "Treatment effectiveness (in reducing stillbirth or miscarriage)",
       "section": "treatment_effects",
-      "value": 0.82,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C9"
       },
-      "explainer": "Estimate is based on meta-analysis conducted by Blencowe et al. 2011 which looked at the effect of BPG if the mother was treated with at least one dose anytime within the first 32 weeks of pregnancy. We are assuming that reductions in miscarriage resulting from treatment would be similar to reductions in stillbirth resulting from treatment."
+      "explainer": "Estimate is based on meta-analysis conducted by Blencowe et al. 2011 which looked at the effect of BPG if the mother was treated with at least one dose anytime within the first 32 weeks of pregnancy. We are assuming that reductions in miscarriage resulting from treatment would be similar to reductions in stillbirth resulting from treatment.",
+      "formula": "@givewell_common.treatment_effectiveness_in_reducing_stillbirth_or_misca",
+      "expected": 0.82
     },
     {
       "id": "internal_validity_adjustment_to_treatment_effectiveness",
       "label": "Internal validity adjustment to treatment effectiveness",
       "section": "treatment_effects",
-      "value": 0.73,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C29"
       },
-      "explainer": "Since Blencowe et al. 2011 consisted of naturalistic studies, we adjust the effect size down to account for potential confounders. This adjustment factor doesn't apply to the treatment effect on congenital syphilis, since congenital syphilis only occurs in women with syphilis and so confounding factors are unlikely to bias the effect size."
+      "explainer": "Since Blencowe et al. 2011 consisted of naturalistic studies, we adjust the effect size down to account for potential confounders. This adjustment factor doesn't apply to the treatment effect on congenital syphilis, since congenital syphilis only occurs in women with syphilis and so confounding factors are unlikely to bias the effect size.",
+      "formula": "@givewell_common.internal_validity_adjustment_to_treatment_effectiveness",
+      "expected": 0.73
     },
     {
       "id": "external_validity_adjustment_to_treatment_effectiveness",
@@ -5113,6 +5113,15 @@
       "explainer": "Changed for consistency: the sheet counts a neonatal death averted as 33.07 DALYs (years of life lost). The site values every death averted on one shared curve, GiveWell's moral weights times the slider on the value of a life; for a neonatal death that is the sheet's own 84 units of value (Units of value - neonatal death, above), turned into healthy years with the shared rate (Healthy year vs doubled-income year, under Assumptions). Stillbirths and miscarriages, which the sheet values relative to a neonatal death, follow. The evaluator view keeps 33.07, with the rate pinned at 84 / 33.07.\n\nYears life lost, as per GiveWell https://docs.google.com/spreadsheets/d/1xFvjzL8eM2Mg8yH9Jr3EJH1iE2ZedOEiNPKBCHgJJC4/edit#gid=324518670"
     },
     {
+      "id": "givewell_uov_per_miscarriage",
+      "label": "GiveWell's value of averting a miscarriage (units of value)",
+      "format": "number",
+      "value": 10,
+      "kind": "judgment",
+      "explainer": "GiveWell's own moral weight for a miscarriage averted, 10 units of value. The site has no shared value for a miscarriage (only for a stillbirth, facts: givewell_shared.uov_per_stillbirth), so GiveWell's judgment stays; it moves with \"A child's life vs doubled-income year\" (Your values) like every death.",
+      "section": "daly_uov_calculations"
+    },
+    {
       "id": "units_of_value_miscarriage",
       "label": "Units of value - miscarriage",
       "section": "daly_uov_calculations",
@@ -5122,7 +5131,7 @@
         "cell": "DALY  UoV calculations!C28"
       },
       "explainer": "GiveWell's moral weight, 10 units of value, times your multiplier on the value of a life, like the neonatal death below, so the ratio between them stays GiveWell's.\n\nGiveWell's numbers https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit#gid=973941931",
-      "formula": "10 * $life_value_multiplier",
+      "formula": "givewell_uov_per_miscarriage * $life_value_multiplier",
       "expected": 10.0
     },
     {
@@ -5134,9 +5143,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "DALY  UoV calculations!C29"
       },
-      "explainer": "GiveWell's moral weight, 33 units of value, times your multiplier on the value of a life, like the neonatal death below, so the ratio between them stays GiveWell's.\n\nGiveWell's numbers https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit#gid=973941931",
-      "formula": "33 * $life_value_multiplier",
-      "expected": 33.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: givewell_shared.uov_per_stillbirth, 21 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 33, is kept for the evaluator view.\n\nGiveWell's numbers https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit#gid=973941931",
+      "formula": "@givewell_shared.uov_per_stillbirth * $life_value_multiplier",
+      "expected": 33.0,
+      "published": 33.0
     },
     {
       "id": "units_of_value_neonatal_death",
@@ -5147,8 +5157,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "DALY  UoV calculations!C27"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\nGiveWell's numbers https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit#gid=973941931",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nGiveWell's numbers https://docs.google.com/spreadsheets/d/17ivGP0KATv32vfrUCLzXUuoerXAkMXKkciLv-B_WwE8/edit#gid=973941931",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -5169,13 +5179,13 @@
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_neonatal_d_2",
       "label": "Likelihood of maternal syphilis case resulting in neonatal death",
       "section": "treatment_effects",
-      "value": 0.123,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C4"
-      }
+      },
+      "formula": "@givewell_common.likelihood_of_maternal_syphilis_case_resulting_in_neona",
+      "expected": 0.123
     },
     {
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_neonatal_d",
@@ -5188,13 +5198,13 @@
       "id": "treatment_effectiveness_in_reducing_neonatal_death_2",
       "label": "Treatment effectiveness (in reducing neonatal death)",
       "section": "treatment_effects",
-      "value": 0.8,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C10"
-      }
+      },
+      "formula": "@givewell_common.treatment_effectiveness_in_reducing_neonatal_death",
+      "expected": 0.8
     },
     {
       "id": "treatment_effectiveness_in_reducing_neonatal_death",
@@ -5501,26 +5511,26 @@
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_congenital_2",
       "label": "Likelihood of maternal syphilis case resulting in congenital syphilis",
       "section": "treatment_effects",
-      "value": 0.155,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C5"
-      }
+      },
+      "formula": "@givewell_common.likelihood_of_maternal_syphilis_case_resulting_in_conge",
+      "expected": 0.155
     },
     {
       "id": "internal_validity_adjustment_to_baseline_congenital_syphilis",
       "label": "Internal validity adjustment to baseline congenital syphilis rates",
       "section": "treatment_effects",
-      "value": 1.2,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C26"
       },
-      "explainer": "Two of the five studies that reported congenital syphilis outcomes had no follow-up after delivery, which could lead those studies to underdiagnose cases. Those two studies indeed found drastically lower congenital syphilis rates than the other studies, so we adjust upwards for including those studies. The effect sizes are pooled using a random-effects model, but since the weights are not listed in the meta-analysis, we take the ratio of the averages with and without these two studies weighted by study sample size to get a rough adjustment factor."
+      "explainer": "Two of the five studies that reported congenital syphilis outcomes had no follow-up after delivery, which could lead those studies to underdiagnose cases. Those two studies indeed found drastically lower congenital syphilis rates than the other studies, so we adjust upwards for including those studies. The effect sizes are pooled using a random-effects model, but since the weights are not listed in the meta-analysis, we take the ratio of the averages with and without these two studies weighted by study sample size to get a rough adjustment factor.",
+      "formula": "@givewell_common.internal_validity_adjustment_to_baseline_congenital_syp",
+      "expected": 1.2
     },
     {
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_congenital",
@@ -5533,13 +5543,13 @@
       "id": "treatment_effectiveness_in_reducing_congenital_syphilis_2",
       "label": "Treatment effectiveness (in reducing congenital syphilis)",
       "section": "treatment_effects",
-      "value": 0.97,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C11"
-      }
+      },
+      "formula": "@givewell_common.treatment_effectiveness_in_reducing_congenital_syphilis",
+      "expected": 0.97
     },
     {
       "id": "treatment_effectiveness_in_reducing_congenital_syphilis",
@@ -5879,13 +5889,13 @@
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_low_birth_2",
       "label": "Likelihood of maternal syphilis case resulting in low birth weight",
       "section": "treatment_effects",
-      "value": 0.121,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C6"
-      }
+      },
+      "formula": "@givewell_common.likelihood_of_maternal_syphilis_case_resulting_in_low_b",
+      "expected": 0.121
     },
     {
       "id": "likelihood_of_maternal_syphilis_case_resulting_in_low_birth",
@@ -5898,13 +5908,13 @@
       "id": "treatment_effectiveness_in_reducing_low_birth_weight_2",
       "label": "Treatment effectiveness (in reducing low birth weight)",
       "section": "treatment_effects",
-      "value": 0.64,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Nl5bhaB3HoR3cnc0iwQn1ASGry7JfLTeu1hXU2t5gt0/edit",
         "cell": "Treatment effects!C12"
-      }
+      },
+      "formula": "@givewell_common.treatment_effectiveness_in_reducing_low_birth_weight",
+      "expected": 0.64
     },
     {
       "id": "treatment_effectiveness_in_reducing_low_birth_weight",
@@ -7229,26 +7239,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

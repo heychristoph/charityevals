@@ -701,9 +701,10 @@
         "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
         "cell": "Source GBD 2019 data on infecti!H20"
       },
-      "formula": "2.26 * $uov_per_daly / 2.3",
+      "formula": "$uov_per_daly",
       "expected": 2.26,
-      "explainer": "Linked to the shared assumption `uov_per_daly`; GiveWell's sheet uses 2.3, and 2.26 here."
+      "explainer": "Changed for consistency: a year lived with disability averted is a healthy year, worth \"Healthy year vs doubled-income year\" (Your values) in every model. This sheet's own figure, 2.26, is kept for the evaluator view.",
+      "published": 2.26
     },
     {
       "id": "ylds_years_lived_with_disability_value_4",
@@ -3061,8 +3062,8 @@
         "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
         "cell": "Iron fortification CEA!E102"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\nGW's moral weights and discount rate",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nGW's moral weights and discount rate",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -3446,15 +3447,15 @@
       "id": "internal_validity_adjustment_2",
       "label": "Internal validity adjustment",
       "section": "iron_fortification_cea",
-      "value": -0.2,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/145-2SzApMbKGpeCSWCAcMKPBrMJ2KXRJsthBaM08xjk/edit",
         "cell": "Iron fortification CEA!E116"
       },
       "explainer": "GW iron supplementation and fortification intervention report",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_m0_2",
+      "expected": -0.2
     },
     {
       "id": "internal_validity_adjusment_west_bengal",
@@ -3954,26 +3955,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

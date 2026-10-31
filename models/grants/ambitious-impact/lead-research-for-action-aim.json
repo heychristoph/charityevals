@@ -3617,15 +3617,15 @@
    "id": "increase_in_income_consumption_for_every_1_point_increase_in",
    "label": "% increase in income (/consumption) for every 1 point increase in IQ",
    "section": "main_model",
-   "value": 0.0067,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1uibrG6wefd2DXqOgHy-cU5qpWsDl7YYfLTTIbHVQEKA/edit",
     "cell": "Main model!B51"
    },
-   "explainer": "% change From GiveWell https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit#gid=154585324",
-   "format": "percent"
+   "explainer": "Reads the shared figure (Increase in wages per IQ point (GiveWell), `@givewell_shared.wage_gain_per_iq_point`), the same number as this sheet's.\n\n% change From GiveWell https://docs.google.com/spreadsheets/d/15h60n8jDSQMFpmA_y4ilYOUE0mP-C9SRosEMHuWDnug/edit#gid=154585324",
+   "format": "percent",
+   "formula": "@givewell_shared.wage_gain_per_iq_point",
+   "expected": 0.0067
   },
   {
    "id": "increase_in_income_per_person_in_each_year_of_working_life",
@@ -3639,14 +3639,14 @@
    "id": "multiplier_for_resource_sharing",
    "label": "Multiplier for resource sharing",
    "section": "main_model",
-   "value": 2.0,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1uibrG6wefd2DXqOgHy-cU5qpWsDl7YYfLTTIbHVQEKA/edit",
     "cell": "Main model!B53"
    },
-   "explainer": "coefficient Following GiveWell's reasoning: Each working adult's income benefits multiple people; on average ~2"
+   "explainer": "Reads the shared figure (Multiplier for resource sharing within households (GiveWell), `@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's.\n\ncoefficient Following GiveWell's reasoning: Each working adult's income benefits multiple people; on average ~2",
+   "formula": "@givewell_shared.resource_sharing_multiplier",
+   "expected": 2.0
   },
   {
    "id": "conversion_to_consumption_doublings",
@@ -5190,26 +5190,16 @@
    "section": "staff_pay",
    "label": "Staff pay as a share of program cost",
    "format": "percent",
-   "value": {
-    "low": 0.45,
-    "best": 0.6,
-    "high": 0.75
-   },
-   "kind": "judgment",
-   "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+   "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+   "formula": "@staff_pay.share_research_policy"
   },
   {
    "id": "salary_gap",
    "section": "staff_pay",
    "label": "Pay gap versus comparable jobs elsewhere",
    "format": "percent",
-   "value": {
-    "low": 0.15,
-    "best": 0.3,
-    "high": 0.45
-   },
-   "kind": "judgment",
-   "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+   "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+   "formula": "@staff_pay.gap_research_policy"
   },
   {
    "id": "salary_sacrifice",

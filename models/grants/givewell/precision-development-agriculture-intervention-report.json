@@ -158,7 +158,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1Pl4gpFlLW93HKukoBJEiGwsiqYAD9byh2gxfDZxMftM/edit",
         "cell": "Moral weights!C3"
       },
-      "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+      "formula": "$uov_per_ln_consumption * ln(2)",
       "expected": 1.0,
       "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 1 per doubling."
     },
@@ -194,14 +194,14 @@
       "id": "arbitrary_donation_size",
       "label": "Arbitrary donation size",
       "section": "pad",
-      "value": 100000.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Pl4gpFlLW93HKukoBJEiGwsiqYAD9byh2gxfDZxMftM/edit",
         "cell": "PAD!C7"
       },
-      "format": "usd"
+      "format": "usd",
+      "value": 100000.0,
+      "kind": "estimate"
     },
     {
       "id": "cost_per_farmer",
@@ -263,26 +263,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.25,
-        "best": 0.4,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_media"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment."
+      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment.",
+      "formula": "@staff_pay.gap_media"
     },
     {
       "id": "salary_sacrifice",

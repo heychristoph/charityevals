@@ -12,18 +12,20 @@ The initiative funds researchers and governments to work together on scaling up 
 
 Founders Pledge credits two reforms:
 
-1. **India, rural employment guarantee:** a change to how money flows to the scheme, tested first in Bihar, cut the money sitting idle in accounts. India's ministry estimated savings of Rs 500 crore (about $78 million) a year across states. Founders Pledge assumes only 37.5% of that is real, and that the initiative brought the reform forward by 1.5 years. The money saved is valued by what the government would buy with it in education, health and social protection.
-2. **Zambia, Teaching at the Right Level:** remedial teaching reached 286,000 children instead of a less effective use of the money (scholarships stand in for the alternative). Higher test scores mean higher earnings later; the reform was brought forward by 3 years.
+1. **India, rural employment guarantee:** a change to how money flows to the scheme, tested first in Bihar, cut the money sitting idle in accounts. India's ministry estimated savings of Rs 500 crore (about $78 million) a year across states. Founders Pledge assumes only 37.5% of that is real, and that the initiative brought the reform forward by 1.5 years (our view: the shared years a won reform counts, below). The money saved is valued by what the government would buy with it in education, health and social protection.
+2. **Zambia, Teaching at the Right Level:** remedial teaching reached 286,000 children instead of a less effective use of the money (scholarships stand in for the alternative). Higher test scores mean higher earnings later; Founders Pledge credits the reform with 3 years brought forward (our view: the shared years a won reform counts, below).
 
 ### How the model works
 
 Founders Pledge puts both reforms into GiveWell's 2016–17 unit of value, "under-five-life equivalents", adds them up and divides by the initiative's budget to date ($2.6 million). It then compares the cost per life-equivalent with GiveDirectly's in the same unit, a multiple of cash. In our view each reform is valued in units of value on its own: India's freed-up money, which Founders Pledge values in GiveWell's 2017 unit directly, with each child-life equivalent counted as an under-five death averted, like every death on the site; Zambia's income gain directly, like every income gain on the site.
 
-In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia, Founders Pledge's 2023 earnings figures and our value of a child's life, about 40% at the default values.
+In Founders Pledge's figures India is about 83% of the benefit; after our correction to Zambia, Founders Pledge's 2023 earnings figures, our value of a child's life and the shared years a won reform counts, about 55% at the default values.
 
 ### What drives the result
 
-- **How much of the ministry's savings estimate is real** (0% to 75%) and **how many years the initiative brought the reform forward** (0 to 3). Either at its low end takes the India part to zero.
+- **How much of the ministry's savings estimate is real** (0% to 75%): at its low end the India part is zero.
+- **Years a won reform counts** under Your values (5 by default, 1 to 20): both reforms are proportional to it, near enough.
+- **Whether a marginal dollar does as much as the initiative's past average** (50% by default, 18% to 100%).
 - **The exchange rate between health and income** under Your values: the result is in income terms.
 - For Zambia, how much earnings rise per standard deviation of test scores and for how long: Founders Pledge's 2023 education figures, shared by every education model on the site.
 
@@ -34,12 +36,15 @@ In Founders Pledge's figures India is about 83% of the benefit; after our correc
 - **Valuing India's freed-up money (changed for consistency):** Founders Pledge counts it in child-life equivalents, GiveWell's 2017 unit, and its multiple of cash prices one at GiveDirectly's $11,663, which at the site's cash benchmark (0.00335 units of value per dollar) is 39 units of value. That keeps GiveWell's 2017 weighing of a child's life against income. We count a child-life equivalent as what it says, an under-five death averted, valued like every death on the site: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. India's part roughly triples at the default; the evaluator view keeps Founders Pledge's multiple of cash.
 - **Earnings from learning (changed for consistency):** Founders Pledge's 2019 method, which the Zambia estimate used, counts 10% more earnings a year per standard deviation of test scores, 80% of it additional, for 5 years, for the earner alone. Founders Pledge's newer education analyses (2023: Central Square Foundation, EIDU, Imagine Worldwide, Teaching at the Right Level, Ubongo) count 19.1% times a 17.5% replicability adjustment, over a 40-year working life, doubled for the household. Our view uses Founders Pledge's latest for every education model, so a standard deviation of learning is worth the same wherever it comes from; it compounds the eight-year wait at the discount rate, as the 2023 method does, where the 2019 sheet used a simple factor. Per standard deviation this is about 3.7 times the 2019 value at 4%. The evaluator view keeps the 2019 figures.
 - **Discount rate:** our view uses the shared rate under Your values (4% by default) for Zambia's earnings gains; Founders Pledge uses 5%.
-- **Credit by share of resources:** when on, staff's pay below market counts as their contribution, at our default for research and policy work (staff about 60% of cost, paid about 30% below market). Founders Pledge's "years brought forward" is its own counterfactual credit and stays in both views.
+- **Years a won reform counts (changed for consistency):** Founders Pledge credits the initiative with 1.5 years for India's reform (0 to 3) and 3 for Zambia's, undiscounted. Every model on the site that credits a won reform reads one figure for how long the win counts before it would have come anyway, Years a won reform counts under Your values (5 by default), each year after the first discounted at the shared rate; the evaluator view keeps Founders Pledge's years.
+- **The wait until the reforms take effect (ours):** the initiative's budget runs to 2017 and the reforms were rolled out in 2016–2018; we discount about a year's wait (0 to 3) at the shared rate, as every model that credits a won reform does. Founders Pledge doesn't.
+- **Past average, not the next dollar (ours):** Founders Pledge divides the initiative's budget to date by the two reforms it helped win, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%). The evaluator view keeps 100%.
+- **Credit by share of resources:** when on, staff's pay below market counts as their contribution, at our default for research and policy work (staff about 60% of cost, paid about 30% below market).
 
 ### Biggest uncertainties
 
 - The India savings figure has no published justification; Founders Pledge already discounts it by more than half.
-- "Years brought forward" is a judgment for both reforms, and the result is proportional to it.
+- How long a won reform counts is a judgment for both reforms (shared, under Your values), and the result is close to proportional to it.
 - What Zambia spends per child on Teaching at the Right Level: our correction depends on it in proportion.
 - The estimate covers the initiative's first years (to 2017). Its later grants aren't in it.
 

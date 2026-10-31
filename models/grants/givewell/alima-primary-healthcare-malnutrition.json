@@ -78,9 +78,10 @@
         "url": "https://docs.google.com/spreadsheets/d/12Wv5Ti2HEOxDR1kpnsvcHg5TsNQhMBCwSLus4ywEBu8/edit",
         "cell": "Simple CEA for CA!D15"
       },
-      "formula": "119 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 119.0,
-      "explainer": "GiveWell's moral weight, 119 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 119, is kept for the evaluator view.",
+      "published": 119.0
     },
     {
       "id": "estimated_consultations_split_by_condition_malaria_best_gues",
@@ -2168,9 +2169,10 @@
         "url": "https://docs.google.com/spreadsheets/d/12Wv5Ti2HEOxDR1kpnsvcHg5TsNQhMBCwSLus4ywEBu8/edit",
         "cell": "Simple CEA for CA!D28"
       },
-      "formula": "73 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 73.0,
-      "explainer": "GiveWell's moral weight, 73 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 73, is kept for the evaluator view.",
+      "published": 73.0
     },
     {
       "id": "units_of_value_from_mortality_effect_for_people_over_5",
@@ -2290,26 +2292,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

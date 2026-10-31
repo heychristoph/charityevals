@@ -108,15 +108,15 @@
       "section": "bridge",
       "label": "Yearly earnings gain per IQ point",
       "format": "percent",
-      "value": 0.0067,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell, Pure Earth BOTEC (2021)",
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "'Pure earth BOTEC (more detailed'!F56 (=ln(1+0.0067))",
         "retrieved": "2026-10-30"
       },
-      "explainer": "GiveWell's figure: each IQ point raises yearly earnings by 0.67%."
+      "explainer": "Reads the shared figure (Increase in wages per IQ point (GiveWell), `@givewell_shared.wage_gain_per_iq_point`), the same number as this sheet's.\n\nGiveWell's figure: each IQ point raises yearly earnings by 0.67%.",
+      "formula": "@givewell_shared.wage_gain_per_iq_point",
+      "expected": 0.0067
     },
     {
       "id": "years_to_work",
@@ -137,14 +137,15 @@
       "section": "bridge",
       "label": "Years the earnings gain lasts",
       "format": "number",
-      "value": 40,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell, Pure Earth BOTEC (2021)",
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "'Pure earth BOTEC (more detailed'!F60",
         "retrieved": "2026-10-30"
-      }
+      },
+      "formula": "@founders_pledge_2023.income_gain_years",
+      "expected": 40,
+      "explainer": "Reads the shared figure (Years an earnings gain lasts (Founders Pledge's 2023 method), `@founders_pledge_2023.income_gain_years`), the same number as this sheet's."
     },
     {
       "id": "ln_income_per_iq_point",
@@ -159,15 +160,15 @@
       "section": "bridge",
       "label": "Multiplier for sharing within the household",
       "format": "number",
-      "value": 2,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell, Pure Earth BOTEC (2021)",
         "url": "https://docs.google.com/spreadsheets/d/1x0BchpoMphvAqSe71hJqM2gBByeRIf2oaz3WGVrVdow/edit",
         "cell": "'Pure earth BOTEC (more detailed'!F64",
         "retrieved": "2026-10-30"
       },
-      "explainer": "GiveWell counts the gain twice because it is shared with the household."
+      "explainer": "Reads the shared figure (Multiplier for resource sharing within households (GiveWell), `@givewell_shared.resource_sharing_multiplier`), the same number as Founders Pledge copies from GiveWell's Pure Earth BOTEC. GiveWell counts the gain twice because it is shared with the household.",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2
     },
     {
       "id": "morbidity_mortality_adjustment",
@@ -204,26 +205,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

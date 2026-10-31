@@ -3,7 +3,7 @@ Treats acute malnutrition in children in northern Nigeria. GiveWell, Happier Liv
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Taimaka malnutrition treatment cost-effectiveness analysis, 2024](/taimaka) | GW | November 2024 | <span data-figure="headline" data-model="taimaka-malnutrition-treatment-2024">15</span> | 208 |
+| [Taimaka malnutrition treatment cost-effectiveness analysis, 2024](/taimaka) | GW | November 2024 | <span data-figure="headline" data-model="taimaka-malnutrition-treatment-2024">15</span> | 212 |
 | [Taimaka (HLI, 2024)](/taimaka/taimaka-hli) | HLI | November 2024 | <span data-figure="headline" data-model="taimaka-hli">18</span> | 1 |
 | [Taimaka (Founders Pledge)](/taimaka/taimaka-founders-pledge) | FP | September 2024 | <span data-figure="headline" data-model="taimaka-founders-pledge">22</span> | 1 |
 

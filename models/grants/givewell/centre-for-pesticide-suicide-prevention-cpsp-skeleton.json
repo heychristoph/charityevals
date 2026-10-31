@@ -1239,12 +1239,22 @@
       "expected": 5104.604246
     },
     {
+      "id": "suicide_death_value_share",
+      "label": "Share of a death's value GiveWell counts for a suicide averted",
+      "format": "percent",
+      "value": 0.8,
+      "kind": "judgment",
+      "explainer": "GiveWell counts 80% of a death's value for a suicide averted (its sheet: 80% of 83). Its own judgment about suicide deaths, kept: not a different value of a life.",
+      "section": "assumptions"
+    },
+    {
       "id": "value_of_preventing_one_death_from_suicide",
       "label": "Value of preventing one death from suicide",
       "section": "assumptions",
-      "explainer": "GiveWell's value: 80% of 83 units of value, times your multiplier on the value of a life.",
-      "formula": "80 / 100 * 83 * $life_value_multiplier",
-      "expected": 66.4
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model. Pesticide suicides are mostly of people aged 15 to 49, so GiveWell's weight for that band (facts: moral_weights.uov_per_death_age_15_49, 104 units of value), times GiveWell's 80% (above), times \"A child's life vs doubled-income year\" (Your values). GiveWell's sheet values the death at 83 before its 80%, 66.4, kept for the evaluator view.",
+      "formula": "suicide_death_value_share * @moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "expected": 66.4,
+      "published": 66.4
     },
     {
       "id": "value_of_preventing_one_death_from_pesticide_suicide",
@@ -2507,26 +2517,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

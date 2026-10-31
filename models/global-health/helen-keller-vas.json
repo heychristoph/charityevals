@@ -412,14 +412,14 @@
     {
       "id": "internal_validity_adjustment",
       "label": "Internal validity adjustment (overall)",
-      "value": -0.2,
-      "kind": "judgment",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H51"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H51.",
-      "section": "mortality_reduction_among_people_under_age_5"
+      "section": "mortality_reduction_among_people_under_age_5",
+      "formula": "@givewell_common.internal_validity_adjustment_m0_2",
+      "expected": -0.2
     },
     {
       "id": "adjustment_for_supplementation_frequency_in_vas_trials_vs_cu",
@@ -499,10 +499,11 @@
     {
       "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w",
       "label": "Value assigned to averting a death of a person under age 5 with vitamin A supplementation (overall)",
-      "explainer": "GiveWell's moral weight: 118.733 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118.733, is kept for the evaluator view.",
       "section": "long_term_income_increases_for_people_under_age_5",
-      "formula": "118.73259 * $life_value_multiplier",
-      "expected": 118.73259
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "expected": 118.73259,
+      "published": 118.73259
     },
     {
       "id": "units_of_value_generated_from_deaths_averted_among_people_un",
@@ -592,10 +593,11 @@
     {
       "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w_3",
       "label": "Value assigned to averting a death of a person under age 5 with vitamin A supplementation (overall)",
-      "explainer": "GiveWell's moral weight: 118.733 units of value. In our model it scales with your moral weights; GiveWell's model uses its own value.",
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118.733, is kept for the evaluator view.",
       "section": "total_value_of_outcomes",
-      "formula": "118.73259 * $life_value_multiplier",
-      "expected": 118.73259
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "expected": 118.73259,
+      "published": 118.73259
     },
     {
       "id": "units_of_value_from_under_5_deaths_averted_2",
@@ -712,15 +714,15 @@
     {
       "id": "biased_monitoring_results_2",
       "label": "Biased monitoring results",
-      "value": -0.02,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Inputs!AN197"
       },
       "format": "percent",
       "explainer": "Value from GiveWell's sheet, cell Inputs!AN197.",
-      "section": "supplemental_grantee_level_adjustments"
+      "section": "supplemental_grantee_level_adjustments",
+      "formula": "@givewell_common.biased_monitoring_results",
+      "expected": -0.02
     },
     {
       "id": "biased_monitoring_results",
@@ -914,14 +916,14 @@
     {
       "id": "short_term_consequences_of_reduced_infectious_disease_morbid",
       "label": "Short-term consequences of reduced infectious disease morbidity (overall)",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H128"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H128.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.short_term_consequences_of_reduced_infectious_disease_m",
+      "expected": 0.06
     },
     {
       "id": "short_term_anemia_effects",
@@ -974,14 +976,14 @@
     {
       "id": "interaction_between_vas_and_vaccines",
       "label": "Interaction between VAS and vaccines (overall)",
-      "value": 0.015,
-      "kind": "estimate",
       "source": {
         "title": "GiveWell",
         "cell": "Main CEA!H135"
       },
       "explainer": "Value from GiveWell's sheet, cell Main CEA!H135.",
-      "section": "cost_effectiveness_after_all_adjustments"
+      "section": "cost_effectiveness_after_all_adjustments",
+      "formula": "@givewell_common.interaction_between_vas_and_vaccines",
+      "expected": 0.015
     },
     {
       "id": "children_reached_by_vas_campaigns_may_have_lower_than_averag",
@@ -1042,26 +1044,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

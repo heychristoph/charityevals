@@ -17,11 +17,11 @@ As for StrongMinds, HLI runs three bodies of evidence through the same chain (in
 
 HLI measures impact in WELLBYs: one point of life satisfaction on a 0–10 scale, for one person, for one year. To put it on the same scale as everything else we use one exchange rate for every HLI model, "1 point more life satisfaction for a year vs doubled-income year" under Your values. Its default is set so that depression counts the same whoever measured it: HLI counts one standard deviation of depression for a year as 2 WELLBYs, and the site counts the same fall in depression, about 4.2 points on the PHQ-9 questionnaire, as 0.13 years of healthy life by the Global Burden of Disease weights, which Founders Pledge's and SoGive's analyses also go through. That makes a WELLBY worth about 0.13 doubled-income years.
 
-At that rate HLI's therapy charities come out near Founders Pledge's analysis of the same therapy. HLI itself values them against GiveDirectly's cash transfers, which implies a rate about 9 times higher (1.15); at that rate this charity would come out about 9 times higher, and the evaluator view shows it that way. The slider runs from 0.05 to 3, so either view is a click away.
+At that rate HLI's therapy charities come out near Founders Pledge's analysis of the same therapy. HLI itself values them against GiveDirectly's cash transfers, which implies a rate about 9 times higher (0.575 healthy years per WELLBY); at that rate this charity would come out about 9 times higher, and the evaluator view shows it that way. The slider runs from 0.025 to 1.5, so either view is a click away.
 
 ### Where we differ from HLI
 
-- **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models, 0.13 doubled-income years per WELLBY, not at a rate that matches HLI's view of cash transfers (1.15, the evaluator view). About 9 times lower.
+- **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models, 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). About 9 times lower.
 - **Discounting (ours):** later benefits count less at the discount rate under Your values; HLI doesn't discount (0 in the evaluator view).
 - **Staff pay and credit by share of resources (ours):** off by default.
 - HLI publishes no ranges in this sheet, so the tornado chart shows mainly the exchange rate; the "100% judgment" flag reflects that gap.

@@ -42,21 +42,23 @@ export const LIVELIHOODS_DESTINATIONS = [
 ];
 /** The Life You Can Save's own split of the money it moved in 2025 (facts/meta.json tlycs_moved_2025_*),
  * each charity at its main model on the site (GiveDirectly at #givedirectly, as everywhere in meta
- * models). Its other charities have no model here and drop out: they're valued at the average of these. */
+ * models), or, for a charity that runs several programmes, at its programme-weighted figure from the
+ * rankings (`#owner:charity`: Evidence Action and Malaria Consortium, GiveWell's). Its other charities
+ * have no model here and drop out: they're valued at the average of these. */
 export const TLYCS_DESTINATIONS: [string, string][] = [
   ["against_malaria_foundation", "against-malaria-foundation"],
   ["carbon180", "carbon180-giving-green"],
   ["clean_air_task_force", "clean-air-task-force-founders-pledge"],
   ["development_media_international", "development-media-international-dmi"],
   ["evergreen_collaborative", "evergreen-collaborative-giving-green"],
-  ["evidence_action", "evidence-action-syphilis-screening-treatment-in"],
+  ["evidence_action", "givewell:evidence-action"],
   ["givedirectly", "givedirectly"],
   ["gain", "global-alliance-for-improved-nutrition-founders-pledge"],
   ["helen_keller_intl", "helen-keller-vas"],
   ["innovations_for_poverty_action", "innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach"],
   ["iodine_global_network", "iodine-global-network-founders-pledge"],
   ["lafiya", "lafiya-nigeria-2026"],
-  ["malaria_consortium", "malaria-consortium-smc"],
+  ["malaria_consortium", "givewell:malaria-consortium"],
   ["new_incentives", "new-incentives"],
   ["one_acre_fund", "one-acre-fund-seedlings-2022"],
   ["raising_the_village", "raising-the-village-2024"],
@@ -96,7 +98,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,
     label: "Value of a dollar to The Life You Can Save's recommended charities (its 2025 split, live), units of value",
-    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its main model's live result on this site (GiveDirectly at GiveWell's model, as everywhere in meta models). The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
+    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its main model's live result on this site (GiveDirectly at GiveWell's model, as everywhere in meta models); Evidence Action and Malaria Consortium, which run several programmes, at GiveWell's programme-weighted figure for the charity, as on the rankings (Evidence Action: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water; Malaria Consortium: seasonal malaria chemoprevention over its locations, bed nets and vitamin A). The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
   },
   moved_dollar_value: {
     id: "moved_dollar_value", format: "small",

@@ -150,27 +150,27 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_8x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (8x bar for future opportunities)",
       "section": "optionality",
-      "value": 8.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!B19"
       },
-      "explainer": "Standard assumption. This is based on forecasted funds raised."
+      "explainer": "Standard assumption. This is based on forecasted funds raised.",
+      "value": 8.0,
+      "kind": "estimate"
     },
     {
       "id": "units_of_value_per_dollar_unconditional_cash_transfers_8x_ba",
       "label": "Units of value per dollar, unconditional cash transfers (8x bar for future opportunities)",
       "section": "optionality",
-      "value": 0.003355,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!B21"
       },
-      "explainer": "Top charities cost-effectiveness analysis"
+      "explainer": "Changed for consistency. The sheet has 0.003355 here; the site uses one figure for this in every model, 0.00335 (Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar), `@cash.uov_per_dollar`). The evaluator view keeps 0.003355.\n\nTop charities cost-effectiveness analysis",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.003355
     },
     {
       "id": "cost_per_mother_child_pair_directly_treated_usd_nigeria_dima",
@@ -317,8 +317,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "CEA!C41"
       },
-      "explainer": "GiveWell's moral weight, 84 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
-      "formula": "84 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_neonatal, 84 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n2020 GiveWell Moral Weights, p. 9",
+      "formula": "@moral_weights.givewell_neonatal * $life_value_multiplier",
       "expected": 84.0
     },
     {
@@ -896,8 +896,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "CEA!C39"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\n2020 GiveWell Moral Weights, p. 9",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\n2020 GiveWell Moral Weights, p. 9",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -1402,14 +1402,14 @@
       "id": "weight_direct_evidence",
       "label": "Weight (Direct evidence)",
       "section": "development_effects",
-      "value": 0.35,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!C6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_direct_evidence",
+      "expected": 0.35
     },
     {
       "id": "breastfeeding_promotion_cognitive_effects",
@@ -1428,14 +1428,14 @@
       "id": "weight_cognitive_effects",
       "label": "Weight (Cognitive effects)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!D6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_cognitive_effects",
+      "expected": 0.15
     },
     {
       "id": "breastfeeding_promotion_growth",
@@ -1454,14 +1454,14 @@
       "id": "weight_growth",
       "label": "Weight (Growth)",
       "section": "development_effects",
-      "value": 0.15,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!E6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_growth",
+      "expected": 0.15
     },
     {
       "id": "breastfeeding_promotion_mortality",
@@ -1480,14 +1480,14 @@
       "id": "weight_mortality",
       "label": "Weight (Mortality)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!F6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_mortality",
+      "expected": 0.1
     },
     {
       "id": "breastfeeding_promotion_morbidity",
@@ -1506,14 +1506,14 @@
       "id": "weight_morbidity",
       "label": "Weight (Morbidity)",
       "section": "development_effects",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!G6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_morbidity",
+      "expected": 0.1
     },
     {
       "id": "breastfeeding_promotion_anemia",
@@ -1532,14 +1532,14 @@
       "id": "weight_anemia",
       "label": "Weight (Anemia)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!H6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_anemia",
+      "expected": 0.075
     },
     {
       "id": "breastfeeding_promotion_biological_plausibility",
@@ -1558,14 +1558,14 @@
       "id": "weight_biological_plausibility",
       "label": "Weight (Biological plausibility)",
       "section": "development_effects",
-      "value": 0.075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!I6"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_biological_plausibility",
+      "expected": 0.075
     },
     {
       "id": "breastfeeding_promotion_weighted_average",
@@ -1578,13 +1578,13 @@
       "id": "smc_direct_evidence",
       "label": "SMC (Direct evidence)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!C7"
-      }
+      },
+      "formula": "@givewell_common.smc_direct_evidence",
+      "expected": 2.0
     },
     {
       "id": "smc_cognitive_effects",
@@ -1602,13 +1602,13 @@
       "id": "smc_growth",
       "label": "SMC (Growth)",
       "section": "development_effects",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!E7"
-      }
+      },
+      "formula": "@givewell_common.smc_growth",
+      "expected": 2.0
     },
     {
       "id": "smc_mortality",
@@ -1626,13 +1626,13 @@
       "id": "smc_morbidity",
       "label": "SMC (Morbidity)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!G7"
-      }
+      },
+      "formula": "@givewell_common.smc_morbidity",
+      "expected": 3.0
     },
     {
       "id": "smc_anemia",
@@ -1650,13 +1650,13 @@
       "id": "smc_biological_plausibility",
       "label": "SMC (Biological plausibility)",
       "section": "development_effects",
-      "value": 3.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Development effects!I7"
-      }
+      },
+      "formula": "@givewell_common.smc_biological_plausibility",
+      "expected": 3.0
     },
     {
       "id": "smc_weighted_average",
@@ -1879,15 +1879,15 @@
       "id": "weight_on_different_scenario_8x_bar_for_future_opportunities",
       "label": "Weight on different scenario (8x bar for future opportunities)",
       "section": "optionality",
-      "value": 0.35,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!B20"
       },
       "explainer": "Standard assumption. These are rough guesses.",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_on_different_scenario_8x_bar_for_future_opportun",
+      "expected": 0.35
     },
     {
       "id": "discount_rate_10x_bar_for_future_opportunities",
@@ -1969,27 +1969,27 @@
       "id": "cost_effectiveness_of_counterfactual_opportunity_10x_bar_for",
       "label": "Cost-effectiveness of counterfactual opportunity (10x bar for future opportunities)",
       "section": "optionality",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!C19"
       },
-      "explainer": "Standard assumption. This is based on forecasted funds raised."
+      "explainer": "Standard assumption. This is based on forecasted funds raised.",
+      "value": 10.0,
+      "kind": "estimate"
     },
     {
       "id": "units_of_value_per_dollar_unconditional_cash_transfers_10x_b",
       "label": "Units of value per dollar, unconditional cash transfers (10x bar for future opportunities)",
       "section": "optionality",
-      "value": 0.003355,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!C21"
       },
-      "explainer": "Top charities cost-effectiveness analysis"
+      "explainer": "Changed for consistency. The sheet has 0.003355 here; the site uses one figure for this in every model, 0.00335 (Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar), `@cash.uov_per_dollar`). The evaluator view keeps 0.003355.\n\nTop charities cost-effectiveness analysis",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.003355
     },
     {
       "id": "change_in_funding_to_program_per_year_if_we_update_millions_2",
@@ -2273,14 +2273,14 @@
       "id": "units_of_value_per_dollar_unconditional_cash_transfers_12x_b",
       "label": "Units of value per dollar, unconditional cash transfers (12x bar for future opportunities)",
       "section": "optionality",
-      "value": 0.003355,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!D21"
       },
-      "explainer": "Top charities cost-effectiveness analysis"
+      "explainer": "Changed for consistency. The sheet has 0.003355 here; the site uses one figure for this in every model, 0.00335 (Value of a dollar given as cash, the benchmark behind \"multiples of cash\" (units of value per dollar), `@cash.uov_per_dollar`). The evaluator view keeps 0.003355.\n\nTop charities cost-effectiveness analysis",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.003355
     },
     {
       "id": "change_in_funding_to_program_per_year_if_we_update_millions_3",
@@ -2461,15 +2461,15 @@
       "id": "weight_on_different_scenario_12x_bar_for_future_opportunitie",
       "label": "Weight on different scenario (12x bar for future opportunities)",
       "section": "optionality",
-      "value": 0.15,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1-56q_XIGb3hIw7E51da6ry_jsk9HXA23U2Eu_UcTGx0/edit",
         "cell": "Optionality!D20"
       },
       "explainer": "Standard assumption. These are rough guesses.",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.weight_on_different_scenario_12x_bar_for_future_opportu",
+      "expected": 0.15
     },
     {
       "id": "cost_effectiveness_x_cash",
@@ -2494,26 +2494,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

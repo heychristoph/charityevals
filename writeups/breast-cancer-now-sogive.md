@@ -38,6 +38,7 @@ SoGive's figures come first, ending at its cost per healthy year. SoGive gives o
 - **Research share:** SoGive's figure is per pound of research; we count fundraising, support services and campaigning as part of the cost of the healthy years.
 - **Discounting** for the years between paying for research and the health it brings; SoGive's ratio compares past spending with past gains.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution.
+- **Past average, not the next dollar (ours):** SoGive's figure divides UK breast cancer research spending over 1970–2009 by the healthy years that research is credited with, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
 
 ### Biggest uncertainties
 

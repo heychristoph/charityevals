@@ -94,6 +94,27 @@ describe("model references (#id)", () => {
     expect(Number.isNaN(headline(l, l.models.get("x")!, assumptionValues(l.assumptions)))).toBe(true);
   });
 
+  it("reads a charity's programme-weighted figure from one evaluator (#owner:charity), live", () => {
+    const owners = [{ id: "ev", name: "Ev", short: "E", url: "https://example.org", kind: "evaluator" }];
+    const prog = (id: string, x: number, unit = "u") => ({ ...model(id, [input("x", x), { id: "out", label: "out", formula: "x" }], unit), charity: "multi", owner: "ev" });
+    const charity = {
+      id: "multi", name: "Multi", cause: "global-health",
+      programs: [{ id: "a", label: "A", models: "^prog-a", weight: 3 }, { id: "b", label: "B", models: "^prog-b", weight: 1 }],
+    };
+    const other = { id: "other", name: "Other", cause: "global-health" };
+    const mine = (x: object) => ({ ...x, charity: "other", owner: "ev" });
+    const reader = mine(model("reader", [{ id: "out", label: "out", formula: "10 * #ev:multi" }]));
+    const l = buildLibrary([mine(dest), prog("prog-a", 2), prog("prog-b", 4, "v"), reader], assumptions, [], [charity, other], owners);
+    expect(l.errors).toEqual([]);
+    const r = l.models.get("reader")!;
+    // (3 × 2 + 1 × 4 × $w) / 4 units of value per dollar: 3.5 at $w = 2, 4.5 at $w = 3.
+    expect(compute(l, r, av).out).toBeCloseTo(35);
+    expect(compute(l, r, { ...av, w: 3 }).out).toBeCloseTo(45);
+    expect(usedAssumptions(l, r)).toContain("w");
+    const bad = mine(model("bad", [{ id: "out", label: "out", formula: "#ev:nobody + #ev:multi" }]));
+    expect(buildLibrary([mine(dest), prog("prog-a", 2), bad], assumptions, [], [charity, other], owners).errors).toContain("bad.out: unknown evaluator or charity #ev:nobody");
+  });
+
   it("resolves references against another library for a model rebuilt on its own (a bulk page)", () => {
     const alone = buildLibrary([meta], assumptions, [], [], [], { models: lib.models });
     expect(alone.errors.filter((e) => e.includes("#"))).toEqual([]);

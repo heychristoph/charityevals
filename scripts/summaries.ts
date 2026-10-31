@@ -70,7 +70,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     // Short ids: the browser never shows them. The bottom line keeps its own, for links and history.
     const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));
     // Leaves `$assumption`, `@fact.row` and `#model-id` alone.
-    const rename = (f: string) => f.replace(/#[a-z0-9]+(?:-[a-z0-9]+)*|(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => (w.startsWith("#") ? w : short.get(w) ?? w));
+    const rename = (f: string) => f.replace(/#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?|(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => (w.startsWith("#") ? w : short.get(w) ?? w));
     const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}) }));
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
     // A stand-in folds the native and species rows away, so its output names only the bottom line.

@@ -360,14 +360,14 @@
       "label": "Internal validity adjustment",
       "section": "inputs",
       "unit": "%",
-      "value": -0.2,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!H164"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_m0_2",
+      "expected": -0.2
     },
     {
       "id": "internal_validity_adjustment",
@@ -1505,9 +1505,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!H174"
       },
-      "formula": "118.73259 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 118.73259,
-      "explainer": "GiveWell's moral weight, 118.73259 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118.733, is kept for the evaluator view.",
+      "published": 118.73259
     },
     {
       "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w_2",
@@ -1753,15 +1754,15 @@
       "label": "False monitoring results",
       "section": "inputs",
       "unit": "%",
-      "value": -0.02,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!I192"
       },
       "explainer": "Overall, we believe that Helen Keller's coverage surveys are designed to measure key indicators of the success of VAS campaigns and to achieve samples that are generally representative of target populations. Helen Keller’s surveys use an audit procedure whereby supervisors re-survey a random sample of participants, and Helen Keller has increasingly begun to report the results from this procedure. This alleviates some of our initial concerns about the quality of Helen Keller's auditing procedure and gives us more confidence in the accuracy of the monitoring data. However, we note that the caregiver-reported nature of responses may produce bias in results. \n\nFor more information on our analysis of Helen Keller’s monitoring, see our grantee review here: https://www.givewell.org/charities/helen-keller-international#Methodology/ \n\nA detailed write up of our reasoning, accessible to GiveWell s",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.false_monitoring_results",
+      "expected": -0.02
     },
     {
       "id": "false_monitoring_results",
@@ -1824,14 +1825,14 @@
       "label": "Within-org fungibility",
       "section": "inputs",
       "unit": "%",
-      "value": -0.05,
-      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!I196"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.within_org_fungibility",
+      "expected": -0.05
     },
     {
       "id": "within_org_fungibility",
@@ -1856,14 +1857,14 @@
       "label": "Short-term consequences of reduced infectious disease morbidity",
       "section": "inputs",
       "unit": "%",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!H199"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.short_term_consequences_of_reduced_infectious_disease_m",
+      "expected": 0.06
     },
     {
       "id": "short_term_consequences_of_reduced_infectious_disease_morbid",
@@ -1973,14 +1974,14 @@
       "label": "Interaction between VAS and vaccines",
       "section": "inputs",
       "unit": "%",
-      "value": 0.015,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!H205"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.interaction_between_vas_and_vaccines",
+      "expected": 0.015
     },
     {
       "id": "interaction_between_vas_and_vaccines",
@@ -2198,14 +2199,14 @@
       "label": "Scenario 1: Domestic governments would replace the grantee's costs",
       "section": "inputs",
       "unit": "%",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1krF39UEnkHkSqhfWbw1ZApA0kJIkmdrkv2O33eNRxck/edit",
         "cell": "Inputs!I212"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.scenario_1_domestic_governments_would_replace_the_grant",
+      "expected": 0.1
     },
     {
       "id": "scenario_1_domestic_governments_would_replace_the_grantee_s",
@@ -2850,26 +2851,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

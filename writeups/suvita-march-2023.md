@@ -3,7 +3,7 @@ SMS reminders and community ambassadors to raise childhood vaccination rates in 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Suvita cost-effectiveness analysis, March 2023](/suvita) | GW | April 2023 | <span data-figure="headline" data-model="suvita-march-2023">38</span> | 149, 20 kept fixed |
+| [Suvita cost-effectiveness analysis, March 2023](/suvita) | GW | April 2023 | <span data-figure="headline" data-model="suvita-march-2023">38</span> | 186, 20 kept fixed |
 | [Suvita (Founders Pledge)](/suvita/suvita-founders-pledge) | FP | June 2022 | <span data-figure="headline" data-model="suvita-founders-pledge">30</span> | 30 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

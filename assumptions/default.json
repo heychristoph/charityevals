@@ -86,28 +86,28 @@
       "explainer": "Animal models count days of disabling pain, with milder pain as a fraction of a day, in chickens; the chicken slider says what a chicken's day is worth in a person's. This says how much healthy life a person's day of disabling pain costs: about 10 hours by default, 2 to 24 in the range.\n\nNobody publishes this rate, so it's the least grounded number on the site, and it often decides whether animal charities rank above global health."
     },
     {
-      "id": "uov_per_wellby",
+      "id": "daly_per_wellby",
       "section": "cross-cause",
-      "label": "1 point more life satisfaction for a year vs doubled-income year",
-      "technical": "Units of value per WELLBY (wellbeing-adjusted life year)",
-      "unit": "units of value / WELLBY",
+      "label": "1 point more life satisfaction for a year vs a year of healthy life",
+      "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
+      "unit": "healthy years / WELLBY",
       "format": "multiple",
       "value": {
-        "low": 0.1,
-        "best": 0.130563,
-        "high": 0.55
+        "low": 0.05,
+        "best": 0.0652815,
+        "high": 0.275
       },
       "slider": {
-        "low": 0.05,
-        "high": 3
+        "low": 0.025,
+        "high": 1.5
       },
       "kind": "judgment",
       "source": {
         "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
         "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
-        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year × 2 units of value per healthy year ÷ 2 WELLBYs per SD-year = 0.130563 (src/engine/wellby-calibration.test.ts keeps it in step with the facts)."
+        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year ÷ 2 WELLBYs per SD-year = 0.0652815 healthy years per WELLBY (src/engine/wellby-calibration.test.ts keeps it in step with the facts). Stated in healthy years, so the calibration holds whatever \"Healthy year vs doubled-income year\" is set to."
       },
-      "explainer": "The Happier Lives Institute counts good in life satisfaction (0–10) for a year, its WELLBY, and doesn't convert it to health or income. This says what one such point is worth, so its analyses can be ranked with the rest.\n\nThe default makes depression count the same whichever way it is measured. Most of HLI's analyses are of therapy for depression, and the site counts a fall in depression as health: the Global Burden of Disease weights for mild, moderate and severe depression on the PHQ-9 questionnaire, 0.031 healthy years per point for a year, which Founders Pledge's and SoGive's StrongMinds analyses also go through. One standard deviation of depression for a year is about 4.2 PHQ-9 points, so 0.13 healthy years; HLI counts it as 2 WELLBYs. So a WELLBY is worth 0.065 healthy years, or 0.13 doubled-income years at the default healthy-year rate. Every HLI model, depression or not, converts at this rate.\n\nOther views: HLI's own 2021 moral-weights work implies about 0.55; matching GiveDirectly's cash transfers, the one programme HLI and GiveWell both measured (HLI 7.55 WELLBYs per $1,000, GiveWell's Kenya estimate 8.7 doubled-income years), gives 1.15, which is where HLI's own results sit relative to cash. At 1.15 HLI's therapy charities count about 9 times more than at the default, and Founders Pledge's and SoGive's analyses of the same therapy don't move. The evaluator view converts HLI's models at 1.15, so they keep their place relative to GiveDirectly as HLI sees it."
+      "explainer": "The Happier Lives Institute counts good in life satisfaction (0–10) for a year, its WELLBY, and doesn't convert it to health or income. This says what one such point is worth in healthy years, so its analyses can be ranked with the rest.\n\nThe default makes depression count the same whichever way it is measured. Most of HLI's analyses are of therapy for depression, and the site counts a fall in depression as health: the Global Burden of Disease weights for mild, moderate and severe depression on the PHQ-9 questionnaire, 0.031 healthy years per point for a year, which Founders Pledge's and SoGive's StrongMinds analyses also go through. One standard deviation of depression for a year is about 4.2 PHQ-9 points, so 0.13 healthy years; HLI counts it as 2 WELLBYs. So a WELLBY is worth 0.065 healthy years. Because the rate is in healthy years, the two routes agree whatever \"Healthy year vs doubled-income year\" is set to: WELLBY models, like DALY models, don't move with that slider. Every HLI model, depression or not, converts at this rate; deaths in HLI models are valued the site's way and don't move with it.\n\nOther views: HLI's own 2021 moral-weights work implies about 0.275 (0.55 doubled-income years at 2 a healthy year); matching GiveDirectly's cash transfers, the one programme HLI and GiveWell both measured (HLI 7.55 WELLBYs per $1,000, GiveWell's Kenya estimate 4.36 healthy years per $1,000), gives 0.575, which is where HLI's own results sit relative to cash. At 0.575 HLI's therapy charities count about 9 times more than at the default, and Founders Pledge's and SoGive's analyses of the same therapy don't move. The evaluator view converts HLI's models at 0.575, so they keep their place relative to GiveDirectly as HLI sees it."
     },
     {
       "id": "chicken_vs_person",
@@ -292,7 +292,7 @@
     "wellby": {
       "label": "wellbeing-adjusted life years",
       "short": "WELLBYs",
-      "to_common": "$uov_per_wellby",
+      "to_common": "$daly_per_wellby * $uov_per_daly",
       "explainer": "One point of life satisfaction (0–10) for one person for one year. Used by the Happier Lives Institute."
     },
     "tco2e": {

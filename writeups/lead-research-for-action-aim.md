@@ -3,7 +3,7 @@ Runs research on sources of lead exposure in low- and middle-income countries so
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Lead Research for Action: closing knowledge gaps about lead exposure in LMICs (Ambitious Impact, 2024 idea report)](/lead-research-for-action) | AIM | August 2024 | <span data-figure="headline" data-model="lead-research-for-action-aim">34</span> | 506, 1 kept fixed |
+| [Lead Research for Action: closing knowledge gaps about lead exposure in LMICs (Ambitious Impact, 2024 idea report)](/lead-research-for-action) | AIM | August 2024 | <span data-figure="headline" data-model="lead-research-for-action-aim">34</span> | 508, 1 kept fixed |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Lead Research for Action existed, not of the charity's own results. It is shown because Lead Research for Action runs the programme today ([checked October 2026](https://www.leadresearch.org/what-we-do)) and no model of its actual work exists yet.
 

@@ -10,7 +10,7 @@ import {
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
 import { CAREER_CHANGE_FORMULA, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
-import { isSideSheet } from "./ranking";
+import { isSideSheet, rankingPlan } from "./ranking";
 import { rowsFeeding } from "./sensitivity";
 
 export type Violation = {
@@ -44,8 +44,15 @@ export const keyOf = (v: Pick<Violation, "model" | "where">) => `${v.model} ${v.
 /** Units the design ranks in: tco2e is climate's, converted through the deaths a tonne causes. */
 export const RANKED_UNITS = ["uov", "daly", "wellby", "ced", "tco2e"];
 /** Rates that convert between causes: they belong in a unit's conversion, never in a model row. */
-export const CROSS_CAUSE = ["daly_per_sad", "uov_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day", "deaths_per_tco2e", "climate_heat_share", "climate_heat_death_delay"];
+export const CROSS_CAUSE = ["daly_per_sad", "daly_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day", "deaths_per_tco2e", "climate_heat_share", "climate_heat_death_delay"];
 const ANIMAL_ASSUMPTIONS = ["chicken_vs_person", "daly_per_sad"];
+
+/** WELLBY models value deaths the site's way, in units of value, and put them into WELLBYs in one
+ * fixed row that the unit's conversion cancels (docs/normalization.md 2.3, INV-17): the only row a
+ * model may read the WELLBY rate in. */
+export const WELLBY_FROM_UOV = { row: "wellbys_from_uov", input: "uov_valued_outside_wellbys", formula: "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)" };
+const isWellbyFromUov = (m: ResolvedModel, r: ResolvedRow) =>
+  m.output?.unit === "wellby" && r.id === WELLBY_FROM_UOV.row && r.formula !== undefined && r.formula.replace(/\s+/g, "") === WELLBY_FROM_UOV.formula.replace(/\s+/g, "");
 
 const close = (a: number, b: number, rel = 1e-9) => a === b || Math.abs(a - b) <= rel * Math.max(Math.abs(a), Math.abs(b));
 const fmt = (x: number) => (Number.isFinite(x) ? String(+x.toPrecision(6)) : String(x));
@@ -127,7 +134,15 @@ export function inv2b(lib: Library): InvariantReport {
   const models = [...lib.models.values()];
   for (const m of models) {
     const pinned = m.evaluator?.assumptions ?? {};
+    const oursSections = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
     for (const r of ownRows(m)) {
+      if (isWellbyFromUov(m, r)) {
+        // The sanctioned WELLBY row: in one of our sections, and what it converts reads no WELLBY rate.
+        if (!(r.section && oursSections.has(r.section))) violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} section`, detail: `${r.id} puts units of value into WELLBYs but sits outside an ours section` });
+        if ([...upstream(m, WELLBY_FROM_UOV.input)].some((id) => m.byId.get(id)?.assumptionDeps.includes("daly_per_wellby")))
+          violations.push({ inv: "INV-2b", model: m.id, where: `${WELLBY_FROM_UOV.input} $daly_per_wellby`, detail: `${WELLBY_FROM_UOV.input} must be in units of value, reading no WELLBY rate` });
+        continue;
+      }
       for (const a of r.assumptionDeps) {
         if (CROSS_CAUSE.includes(a))
           violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} $${a}`, detail: `row reads cross-cause rate $${a}: ${r.formula}` });
@@ -151,7 +166,7 @@ export function inv2b(lib: Library): InvariantReport {
   }
   return {
     id: "INV-2b", title: "No model row reads a cross-cause rate", status: "checked", checked: models.length, violations,
-    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.`,
+    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. One exception, in WELLBY models only: the row ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula}, in an ours section, which puts deaths valued the site's way into WELLBYs so that the unit's conversion cancels the rate again (INV-17); what it converts reads no WELLBY rate. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.`,
   };
 }
 
@@ -292,7 +307,12 @@ export function inv3(lib: Library): InvariantReport {
 
 // --- INV-4: literals standing in for shared numbers ---------------------------------------------
 
-type Shared = { ref: string; label: string; values: number[]; best: number; place?: string };
+type Shared = { ref: string; label: string; values: number[]; best: number; place?: string; sameLabelOnly?: boolean };
+
+/** Facts made by grouping identical labels (INV-14's house constants): a copy of one has the same label,
+ * so only a row with that label (places dropped) is matched to it, on its best value; labels merely
+ * alike, or a range end, are other figures that happen to share a round number. */
+const SAME_LABEL_FILES = new Set(["givewell_common", "staff_pay"]);
 
 /** Facts files about one country (givewell_kenya, malawi): a row copying one must be about that country. */
 const PLACES = ["kenya", "malawi", "uganda", "india", "chad", "mozambique", "rwanda", "burkina_faso", "nigeria", "drc"];
@@ -304,7 +324,8 @@ function sharedNumbers(lib: Library): Shared[] {
     if (v === undefined) continue;
     const values = typeof v === "number" ? [v] : [v.low, v.best, v.high].filter((x): x is number => typeof x === "number");
     const file = f.key.split(".")[0];
-    out.push({ ref: `@${f.key}`, label: f.label, values: [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " ") });
+    const same = SAME_LABEL_FILES.has(file);
+    out.push({ ref: `@${f.key}`, label: f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
   }
   for (const a of lib.assumptions.rows) {
     if (a.format === "toggle") continue;
@@ -312,6 +333,19 @@ function sharedNumbers(lib: Library): Shared[] {
   }
   return out;
 }
+
+/** Words for a shared number that a row's label may use instead of the shared label's: a row whose id
+ * or label matches the first pattern resembles the shared values the second names. */
+export const INV4_SYNONYMS: [RegExp, RegExp][] = [
+  // ln(consumption) by one unit, a doubled income, a doubling of consumption: $uov_per_ln_consumption.
+  [/\bln\s*\(?\s*(consumption|income)\b|\bdoubl\w*\b[^.;]{0,20}\b(income|consumption)\b|\b(income|consumption)\b[^.;]{0,20}\bdoubl/i, /^\$uov_per_ln_consumption$/],
+  // A DALY weight, a disability weight, "(DW)": the GBD weights.
+  [/\b(daly|disability) weights?\b|\(dw\)|\bdw\b/i, /^@(gbd_disability_weights|depression\.dw_)/],
+  // GiveDirectly's (previous) cost-effectiveness, a cash benchmark, units of value per dollar of cash: @cash.
+  [/\bgivedirectly\b[^.;]{0,40}\b(cost[- ]effectiveness|units? of value|estimate)\b|\bcash benchmark\b|\bunits? of value per (dollar|\$)[^.;]{0,30}\bcash\b/i, /^@cash\./],
+];
+/** Input values this close to a shared value count as copies (GiveWell's 0.003355 for @cash's 0.00335). */
+const INV4_TOLERANCE = 2e-3;
 
 export function inv4(lib: Library): InvariantReport {
   const shared = sharedNumbers(lib);
@@ -327,23 +361,32 @@ export function inv4(lib: Library): InvariantReport {
         // An input whose value equals a fact's or assumption's low/best/high, and whose label reads like it.
         const x = pickValue(r.value);
         for (const s of shared) {
-          const hit = s.values.find((sv) => close(x, sv, 1e-3));
+          const hit = s.values.find((sv) => close(x, sv, INV4_TOLERANCE));
           if (hit === undefined) continue;
-          if (!resembles(text, s.label)) { drop("input equals a shared value but its label doesn't resemble the shared one's"); continue; }
+          if (s.sameLabelOnly && labelKey(r.label) !== labelKey(s.label.replace(/\((GiveWell)\)\s*$/, ""))) { drop("input equals a house-constant fact but under another label"); continue; }
+          const synonym = INV4_SYNONYMS.some(([row, ref]) => row.test(text) && ref.test(s.ref));
+          if (!synonym && !resembles(text, s.label)) { drop("input equals a shared value but its label doesn't resemble the shared one's"); continue; }
           const like = likeness(text, s.label);
-          if (!s.values.some((sv) => close(x, sv)) && like.ofLarger < 0.5) { drop("input within 0.1% of a shared value (not equal) and labels only loosely alike"); continue; }
+          if (!synonym && !s.values.some((sv) => close(x, sv)) && like.ofLarger < 0.5) { drop("input within 0.2% of a shared value (not equal) and labels only loosely alike"); continue; }
           if (!placeOk(s)) { drop("input equals a country fact but is about another place"); continue; }
-          if (words(s.label).size < 3 && like.ofLarger < 0.75) { drop("shared label too generic (under three significant words) for a loose match"); continue; }
-          if (sigDigits(hit) <= 1 && like.ofLarger < 0.6) { drop("round value (one significant digit) and labels only loosely alike"); continue; }
+          if (!synonym && words(s.label).size < 3 && like.ofLarger < 0.75) { drop("shared label too generic (under three significant words) for a loose match"); continue; }
+          if (!synonym && sigDigits(hit) <= 1 && like.ofLarger < 0.6) { drop("round value (one significant digit) and labels only loosely alike"); continue; }
           violations.push({ inv: "INV-4", model: m.id, where: `${r.id} = ${s.ref}`, detail: `input "${r.label}" = ${fmt(x)} is a literal copy of ${s.ref} (${fmt(hit)}, "${s.label}")` });
         }
       } else if (r.node) {
         // A constant inside a formula equal to a shared value's best guess.
-        for (const c of new Set(literals(r.node as Node).filter((v) => !ALLOWED_LITERALS.has(v)))) {
+        // Exponents (a variance's `^ 2`) are arithmetic, not figures.
+        const exps = new Set<number>();
+        const walkExp = (n: Node): void => { if (n.type === "bin") { if (n.op === "^" && n.right.type === "num") exps.add(n.right.value); walkExp(n.left); walkExp(n.right); } else if (n.type === "neg") walkExp(n.arg); else if (n.type === "call") n.args.forEach(walkExp); };
+        walkExp(r.node as Node);
+        for (const c of new Set(literals(r.node as Node).filter((v) => !ALLOWED_LITERALS.has(v) && !exps.has(v)))) {
           for (const s of shared) {
-            if (!close(c, s.best, 1e-9)) continue;
+            if (!close(c, s.best, 1e-9) || s.sameLabelOnly) continue;
             const distinctive = sigDigits(c) >= 5 && !Number.isInteger(c);
-            if (!distinctive && !resembles(text, s.label)) { drop("formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it"); continue; }
+            if (!distinctive && !resembles(text, s.label) && !INV4_SYNONYMS.some(([row, ref]) => row.test(text) && ref.test(s.ref))) { drop("formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it"); continue; }
+            // A short constant in one of a sheet's own calculations (a variance weight of 2, a 1.1 multiplier) only
+            // stands in for a shared figure when the labels are close, not merely alike.
+            if (!distinctive && sigDigits(c) <= 2 && likeness(text, s.label).ofLarger < 0.75) { drop("formula constant is short (one or two significant digits) and the row label only loosely resembles the shared one"); continue; }
             if (!placeOk(s)) { drop("formula constant equals a country fact but the row is about another place"); continue; }
             violations.push({ inv: "INV-4", model: m.id, where: `${r.id} ${fmt(c)} = ${s.ref}`, detail: `formula constant ${fmt(c)} equals ${s.ref} ("${s.label}"): ${r.formula!.slice(0, 160)}` });
           }
@@ -353,7 +396,7 @@ export function inv4(lib: Library): InvariantReport {
   }
   return {
     id: "INV-4", title: "No literal stands in for a shared fact or assumption", status: "partial", checked: models.length, violations, suppressed,
-    how: "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.1%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label; near-equal (not equal) values, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
+    how: "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.2%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label, or uses one of the synonyms for it (ln(consumption) or a doubled income for $uov_per_ln_consumption; a DALY or disability weight or (DW) for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for @cash); near-equal (not equal) values without a synonym, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
   };
 }
 
@@ -553,28 +596,32 @@ type Shape = "linear" | "independent";
 function expectations(m: ResolvedModel): [string, Shape][] {
   const unit = m.output!.unit;
   if (m.cause === "animal-welfare")
-    return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
+    return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
   const base: [string, Shape][] = ANIMAL_ASSUMPTIONS.map((a) => [a, "independent"]);
   // Climate: a tonne is worth the deaths it causes, each valued like an adult's death.
-  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["uov_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
+  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
   base.push(["deaths_per_tco2e", "independent"], ["climate_heat_death_delay", "independent"]);
-  if (unit === "wellby") return [...base, ["uov_per_wellby", "linear"], ["uov_per_ln_consumption", "independent"]];
-  if (unit === "daly") return [...base, ["uov_per_wellby", "independent"]];
-  return [...base, ["uov_per_wellby", "independent"]];
+  // WELLBYs (without the deaths valued outside them, INV-17) convert in healthy years: proportional to
+  // the WELLBY rate, independent of the healthy-year rate, like DALYs.
+  if (unit === "wellby") return [...base, ["daly_per_wellby", "linear"], ["uov_per_daly", "independent"], ["uov_per_ln_consumption", "independent"]];
+  if (unit === "daly") return [...base, ["daly_per_wellby", "independent"]];
+  return [...base, ["daly_per_wellby", "independent"]];
 }
 
 export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
-    const h0 = headline(lib, m, av);
+    // A WELLBY model's deaths, valued outside its WELLBYs, are held at 0 here: INV-17 checks them.
+    const held: Record<string, number> = m.output!.unit === "wellby" && m.byId.has(WELLBY_FROM_UOV.input) ? { [WELLBY_FROM_UOV.input]: 0 } : {};
+    const h0 = headline(lib, m, av, held);
     if (!Number.isFinite(h0) || h0 === 0) continue;
     // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
     // they move: no independence is expected for those.
     const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
     for (const [a, shape] of expectations(m)) {
       if (shape === "independent" && inherited.has(a)) continue;
-      const at = (k: number) => headline(lib, m, { ...av, [a]: av[a] * k });
+      const at = (k: number) => headline(lib, m, { ...av, [a]: av[a] * k }, held);
       const h2 = at(1.5);
       const ok = shape === "linear" ? close(h2, 1.5 * h0, 1e-9) && close(at(0.5), 0.5 * h0, 1e-9) : close(h2, h0, 1e-9);
       if (!ok)
@@ -583,7 +630,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   };
 }
 
@@ -798,10 +845,268 @@ export function inv12(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-2d: no literal times a lever ---------------------------------------------------------------
+
+/** The factors of a product or quotient (a * b / c → a, b, c), looking through unary minus. */
+function factors(n: Node): Node[] {
+  if (n.type === "bin" && (n.op === "*" || n.op === "/")) return [...factors(n.left), ...factors(n.right)];
+  if (n.type === "neg") return factors(n.arg);
+  return [n];
+}
+/** Every product or quotient chain in a formula, and every call's argument list. */
+function chains(n: Node, out: Node[][] = []): Node[][] {
+  if (n.type === "bin" && (n.op === "*" || n.op === "/")) {
+    const fs = factors(n);
+    out.push(fs);
+    fs.forEach((f) => chains(f, out));
+  } else if (n.type === "bin") { chains(n.left, out); chains(n.right, out); }
+  else if (n.type === "neg") chains(n.arg, out);
+  else if (n.type === "call") { out.push(n.args); n.args.forEach((a) => chains(a, out)); }
+  return out;
+}
+
+/** INV-2d: a constant multiplied or divided by a shared assumption inside a formula (`8 *
+ * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is a
+ * number standing in for a shared value or an evaluator's input hidden from the other checks: read the
+ * shared fact (the evaluator's figure in `published`), or make the constant its own labelled input row. */
+export function inv2d(lib: Library): InvariantReport {
+  const toggles = new Set(lib.assumptions.rows.filter((a) => a.format === "toggle").map((a) => a.id));
+  const models = [...lib.models.values()].filter((m) => m.output);
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id) || !r.node) continue;
+      const found = new Set<string>();
+      for (const fs of chains(r.node as Node)) {
+        const levers = fs.filter((f) => f.type === "ref" && f.scope === "assumption" && !toggles.has(f.name)).map((f) => (f as { name: string }).name);
+        const consts = fs.filter((f) => f.type === "num" && !ALLOWED_LITERALS.has(f.value)).map((f) => (f as { value: number }).value);
+        for (const c of consts) for (const a of levers) found.add(`${fmt(c)} $${a}`);
+      }
+      for (const k of found) violations.push({ inv: "INV-2d", model: m.id, where: `${r.id} ${k}`, detail: `formula ${r.formula} puts the constant ${k.split(" ")[0]} next to ${k.split(" ")[1]}: read the shared fact with the evaluator's figure in \`published\`, or make the constant its own input row` });
+    }
+  }
+  return {
+    id: "INV-2d", title: "No literal times a lever", status: "checked", checked: models.length, violations,
+    how: `Every formula row on the path to the output (variants: their overrides) is split into its product and quotient chains and its function calls' argument lists; a chain or argument list holding both a non-toggle shared assumption ($life_value_multiplier, $discount_rate, …) and a constant outside lint's ALLOWED_LITERALS (${[...ALLOWED_LITERALS].join(", ")}) is flagged. Such a constant is a value the lever is meant to replace (8 for a death next to $life_value_multiplier) or an evaluator's input that INV-2c, INV-4 and INV-13 can't see inside a formula: it must read the shared fact, with the evaluator's figure in \`published\`, or become its own labelled input row. ln(2) and other constants inside a function of their own (not beside the assumption) pass.`,
+  };
+}
+
+// --- INV-13: same concept, same value ---------------------------------------------------------------
+
+/** Concepts several evaluators' models state, each with its shared version. A literal row naming the
+ * concept must agree with the shared version for its context, or read it; context (a place, a
+ * programme) is the only reason to differ, and the shared version then has one fact per context. */
+export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]; context?: (text: string) => string | undefined }[] = [
+  { id: "resource-sharing", test: /\bresource sharing\b|\bhousehold sharing\b/i, facts: ["givewell_shared.resource_sharing_multiplier"] },
+  { id: "treatment-costs-averted", test: /\btreatment costs averted\b/i, not: /malnutrition|sam\b|wasting/i, facts: ["givewell_shared.treatment_costs_averted"] },
+  { id: "investment-of-income", test: /\binvestment of income increases\b/i, facts: ["givewell_shared.investment_of_income_increases", "givewell_shared.investment_of_income_increases_nets", "givewell_shared.investment_of_income_increases_vas", "givewell_shared.investment_of_income_increases_deworming"] },
+  { id: "long-term-benefit-years", test: /\b(years|duration)\b[^.;]{0,30}\b(long[- ]term|income|earnings?)\b[^.;]{0,20}\b(benefits?|gains?|increases?|effects?)\b[^.;]{0,20}\b(last|persist|counted)|\bduration of (long[- ]term )?(income|earnings) (benefits?|gains?|effects?)\b/i, not: /until|before|start|delay/i, facts: ["givewell_shared.long_term_benefit_years", "founders_pledge_2023.income_gain_years"] },
+  { id: "wage-gain-per-iq-point", test: /\b(wages?|income|consumption|earnings)\b[^.;]{0,40}\b(iq|1 point)\b/i, facts: ["givewell_shared.wage_gain_per_iq_point"] },
+  { id: "cf-value-government", test: /\bcounterfactual value\b[^.;]{0,40}\b(government|domestic)\b/i, facts: ["givewell_shared.cf_value_government"], context: (t) => (/india/i.test(t) ? "India" : undefined) },
+  // Per dollar, not "as percentage of value of AMF spending" (a ratio, another quantity).
+  { id: "cf-value-global-fund", test: /\bcounterfactual value\b[^.;]{0,40}\b(global fund|pmi)\b/i, not: /percent|% of|as a share/i, facts: ["givewell_shared.cf_value_global_fund"] },
+  { id: "cf-value-gavi", test: /\bcounterfactual value\b[^.;]{0,40}\bgavi\b/i, facts: ["givewell_shared.cf_value_gavi"] },
+  { id: "income-to-mortality-ratio", test: /\bratio of value generated from income increases to value generated from mortalit/i, facts: ["givewell_shared.income_to_mortality_value_ratio"] },
+  { id: "value-of-cyp", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\b(cyp|year of (modern )?contracepti\w*|couple[- ]years? of protection)\b/i, not: /death/i, facts: ["givewell_shared.uov_per_cyp_low_income", "givewell_shared.uov_per_cyp_nigeria", "givewell_shared.uov_per_cyp_sierra_leone"], context: (t) => (/nigeria|kano|lagos|kaduna/i.test(t) ? "Nigeria" : /sierra leone/i.test(t) ? "Sierra Leone" : undefined) },
+  { id: "value-of-stillbirth", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\bstill ?births?\b/i, facts: ["givewell_shared.uov_per_stillbirth"] },
+  { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
+  { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy", "wellby_factors.household_size_psychotherapy"] },
+  { id: "commitment-fulfilment", test: /\b(fulfil\w*|compliance|kept|keep)\b[^.;]{0,40}\b(commitments?|(?<!founders )pledges?)\b|\bcommitments?\b[^.;]{0,30}\b(fulfil\w*|compliance)\b/i, not: /\bpigs?\b|gestation|sows?|shrimp|fish/i, facts: ["sad_factors.commitment_fulfilment_cage_free", "sad_factors.commitment_fulfilment_broiler"] },
+  { id: "prior-weight-education", test: /\bweight on (the |fp'?s? |founders pledge'?s? )?prior\b/i, facts: ["founders_pledge_2023.prior_weight"] },
+  { id: "depression-per-phq9-point", test: /\bphq[- ]?9?\b[^.;]{0,40}\b(daly|healthy|disability)\b|\bdalys? per (phq|point)\b/i, facts: ["depression.dalys_per_phq9_point_year", "depression.phq9_sd"] },
+];
+
+/** Rows a model wrote that state a concept as a literal, with their context (a place, a programme). */
+export function conceptRows(lib: Library) {
+  const out: { concept: string; model: string; row: string; label: string; value: number; context: string; readsShared: boolean }[] = [];
+  for (const m of lib.models.values()) {
+    if (!m.output || m.kind === "variant") continue;
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id)) continue;
+      for (const c of CONCEPTS) {
+        const text = `${r.id.replace(/_/g, " ")} ${r.label}`;
+        if (!c.test.test(r.label) || c.not?.test(text)) continue;
+        const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => c.facts.includes(f)));
+        if (r.formula !== undefined && !readsShared) continue;
+        const ctx = c.context?.(`${text} ${m.name} ${m.id}`) ?? "";
+        out.push({ concept: c.id, model: m.id, row: r.id, label: r.label, value: r.formula === undefined ? pickValue(r.value) : NaN, context: ctx, readsShared });
+      }
+    }
+  }
+  return out;
+}
+
+/** INV-13: one concept, one value. A row (on the path, not in a variant) that states one of CONCEPTS as
+ * a literal must read its shared fact: where it equals the shared value that is INV-4's copy, where it
+ * differs it is the same question answered two ways. A context the concept knows (a country's
+ * contraception value) picks its fact; any other reason to differ is a waiver with the reason. */
+export function inv13(lib: Library): InvariantReport {
+  const rows = conceptRows(lib);
+  const violations: Violation[] = [];
+  for (const r of rows) {
+    if (r.readsShared) continue;
+    const c = CONCEPTS.find((x) => x.id === r.concept)!;
+    const shared = c.facts.map((f) => ({ f, v: pickValue(lib.facts.get(f)?.value) })).filter((x) => Number.isFinite(x.v));
+    const same = shared.find((x) => close(r.value, x.v, INV4_TOLERANCE));
+    const others = [...new Set(rows.filter((o) => o.concept === r.concept && o.model !== r.model).map((o) => o.readsShared ? "shared" : fmt(o.value)))];
+    violations.push({
+      inv: "INV-13", model: r.model, where: `${r.concept} ${r.row}`,
+      detail: same
+        ? `"${r.label}" = ${fmt(r.value)} restates @${same.f}: read it (evaluator's figure in \`published\`)`
+        : `"${r.label}" = ${fmt(r.value)}${r.context ? ` (${r.context})` : ""} answers a question the site answers once (${shared.map((x) => `@${x.f} = ${fmt(x.v)}`).join(", ") || "no shared fact yet"}); other models: ${others.join(", ") || "none"}. Read the shared fact with the evaluator's figure in \`published\`, or record the reason (place, year) in a waiver`,
+    });
+  }
+  return {
+    id: "INV-13", title: "Same concept, same value across models", status: "partial", checked: new Set(rows.map((r) => r.model)).size, violations,
+    how: `Rows on the path to the output (not variants) whose label names one of ${CONCEPTS.length} concepts several evaluators state (${CONCEPTS.map((c) => c.id).join(", ")}) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in \`published\`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.`,
+  };
+}
+
+// --- INV-14: house constants behind a shared fact ----------------------------------------------------
+
+/** Places stripped from a label before grouping: the same figure under "(Kenya)" and "(Uganda)" is one figure. */
+const PLACE_WORDS = /\b(overall|kenya|uganda|malawi|nigeria|chad|niger|india|mozambique|rwanda|burkina faso|togo|cameroon|guinea|drc|democratic republic of the congo|mali|ethiopia|zambia|madagascar|pakistan|bangladesh|ghana|benin|south sudan|sierra leone|liberia|tanzania|bihar|uttar pradesh|kano|lagos|katsina|bauchi|borno|ondo|anambra|sindh|punjab)\b/gi;
+/** A label reduced to its significant words, sorted, places dropped: "Internal validity adjustment (overall)". */
+const labelKey = (label: string) => [...words(label.replace(PLACE_WORDS, " "))].sort().join(" ");
+/** Who a figure is copied from: SoGive's 2022 deworming sheets are copies of GiveWell's. */
+const originOf = (m: ResolvedModel) => (m.owner === "sogive" ? "givewell" : m.owner ?? "");
+/** A number that defines the row rather than estimating anything: a hypothetical donation's size, or a
+ * scenario whose label states its own value ("Cost-effectiveness of counterfactual opportunity (10x bar)" = 10). */
+const definitional = (label: string, v: number) =>
+  /\b(arbitrary|hypothetical)\b/i.test(label) || [...label.matchAll(/(?<![\w.])(\d+(?:\.\d+)?)(?:x\b|(?![\w.]))/g)].some((x) => Number(x[1]) === v);
+
+/** INV-14: the same literal under the same label in five or more models, none reading a fact, is an
+ * evaluator's house constant (or one of ours) copied by hand: it belongs in a shared fact, read by every
+ * copy, so a correction reaches all of them. */
+export function inv14(lib: Library): InvariantReport {
+  const groups = new Map<string, { model: string; row: string; label: string; value: number }[]>();
+  for (const m of lib.models.values()) {
+    if (!m.output || m.kind === "variant") continue;
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id) || r.formula !== undefined || r.value === undefined) continue;
+      const v = pickValue(r.value);
+      if (!Number.isFinite(v) || ALLOWED_LITERALS.has(v) || definitional(r.label, v)) continue;
+      if (!labelKey(r.label)) continue;
+      const key = `${originOf(m)}: ${labelKey(r.label)} = ${fmt(v)}`;
+      groups.set(key, [...(groups.get(key) ?? []), { model: m.id, row: r.id, label: r.label, value: v }]);
+    }
+  }
+  const violations: Violation[] = [];
+  let checked = 0;
+  for (const [key, rows] of groups) {
+    const models = new Set(rows.map((r) => r.model));
+    checked++;
+    if (models.size < 5) continue;
+    for (const r of rows)
+      violations.push({ inv: "INV-14", model: r.model, where: `${r.row} = ${fmt(r.value)}`, detail: `"${r.label}" = ${fmt(r.value)} is typed into ${models.size} models (${[...models].slice(0, 4).join(", ")}${models.size > 4 ? ", …" : ""}) with no shared fact behind it (${key})` });
+  }
+  return {
+    id: "INV-14", title: "No house constant without a shared fact", status: "partial", checked, violations,
+    how: `Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and "overall" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (${[...ALLOWED_LITERALS].join(", ")}: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, "10x bar" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.`,
+  };
+}
+
+// --- INV-15: an outlier says why ----------------------------------------------------------------------
+
+/** The phrase a summary uses to say why a ranked model is far above its peers. */
+export const OUTLIER_REASON = /more than (ten|\d+) times (its|the) peers\b[^.]*\bbecause\b/i;
+
+/** INV-15: a ranked model more than ten times the median of its peers (the other models the rankings use
+ * in the same cause) says why in its summary. Best guesses stay; the reader is told why one stands out. */
+export function inv15(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const ranked = new Map<string, ResolvedModel>();
+  for (const c of lib.charities.keys()) for (const p of rankingPlan(lib, c)) for (const part of p.parts) ranked.set(part.model.id, part.model);
+  const h = new Map([...ranked.values()].map((m) => [m.id, headline(lib, m, av)]));
+  const violations: Violation[] = [];
+  for (const m of ranked.values()) {
+    const peers = [...ranked.values()].filter((o) => o.id !== m.id && o.cause === m.cause).map((o) => h.get(o.id)!).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
+    if (peers.length < 3) continue;
+    const median = peers.length % 2 ? peers[peers.length >> 1] : (peers[peers.length / 2 - 1] + peers[peers.length / 2]) / 2;
+    const x = h.get(m.id)!;
+    if (x > 10 * median && !OUTLIER_REASON.test(m.summary ?? ""))
+      violations.push({ inv: "INV-15", model: m.id, where: "summary", detail: `${fmt(x)} healthy years per $1,000 is ${fmt(x / median)}× the median of its ${peers.length} ranked peers in ${m.cause} (${fmt(median)}); its summary must say why ("more than ten times its peers because …")` });
+  }
+  return {
+    id: "INV-15", title: "A ranked model far above its peers says why", status: "checked", checked: ranked.size, violations,
+    how: "For every model the rankings use (rankingPlan), at the defaults in our view: if its headline is more than 10× the median of the other ranked models of the same cause (at least three), its summary must state the reason in the words \"more than ten times its peers because …\". The best guess stays; the outlier is explained where readers meet it.",
+  };
+}
+
+// --- INV-16: side sheets never rank; the ranked column is the grant's -------------------------------
+
+/** Rows of a value-of-information or decision sheet that the title-and-template test can miss. Money a
+ * government or partner reallocates because of the programme (technical assistance, Rice Institute's
+ * scale-up) is the programme's own effect, not a sign of one. */
+const VOI_CONTENT = /\bfuture (funding )?(bar|opportunit\w*)\b|\b(ce|cost-effectiveness) of (this|the) reallocated funding\b|\bvalue of (the )?information\b|\bprobability (that )?(the |we |givewell )?(\w+ ){0,3}(decision|changes? (our|the) (mind|decision))|\bp\(\s*[^)]*\bx cash\b|\bcounterfactual (use|value) of (the )?(research|information)\b|\binformation value\b/i;
+const COUNTRIES = ["Chad", "Nigeria", "Democratic Republic of the Congo", "DRC", "Uganda", "Kenya", "Malawi", "Mozambique", "Burkina Faso", "Togo", "Cameroon", "Niger", "Guinea", "Zambia", "Rwanda", "Tanzania", "Ethiopia", "Ghana", "Madagascar", "Mali", "South Sudan", "Benin", "Côte d'Ivoire", "India", "Pakistan", "Bangladesh", "Laos", "Sierra Leone", "Liberia", "Somalia", "Sudan", "Angola", "Zimbabwe"];
+const countriesIn = (t: string) => COUNTRIES.filter((c) => new RegExp(`\\b${c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(t)).map((c) => (c === "DRC" ? "Democratic Republic of the Congo" : c));
+
+/** INV-16: no ranked model is a value-of-information or other side sheet (by its rows, not only its title),
+ * and a ranked sheet's bottom line is for the place its title or grant names. */
+export function inv16(lib: Library): InvariantReport {
+  const ranked = new Map<string, ResolvedModel>();
+  for (const c of lib.charities.keys()) for (const p of rankingPlan(lib, c)) for (const part of p.parts) ranked.set(part.model.id, part.model);
+  const violations: Violation[] = [];
+  for (const m of ranked.values()) {
+    const path = rowsFeeding(m);
+    const voi = m.rows.filter((r) => path.has(r.id) && VOI_CONTENT.test(r.label));
+    if (voi.length >= 2)
+      violations.push({ inv: "INV-16", model: m.id, where: "side sheet", detail: `ranked, but ${voi.length} rows on its path read like a value-of-information or decision sheet (${voi.slice(0, 3).map((r) => `"${r.label}"`).join(", ")}): it values what a grant lets the funder learn, not the programme` });
+    const native = m.output?.native ? m.byId.get(m.output.native.row) : undefined;
+    const at = native ? countriesIn(native.label.match(/\(([^)]*)\)\s*$/)?.[1] ?? "") : [];
+    const named = countriesIn(`${m.name} ${m.source?.title ?? ""} ${m.id.replace(/-/g, " ")}`);
+    if (at.length && named.length && !at.some((c) => named.includes(c)))
+      violations.push({ inv: "INV-16", model: m.id, where: "location", detail: `its bottom line "${native!.label}" is for ${at.join(", ")}, but the sheet is about ${named.join(", ")}: take the grant's own column` });
+  }
+  return {
+    id: "INV-16", title: "Side sheets never rank; the ranked column is the grant's", status: "partial", checked: ranked.size, violations,
+    how: "For every model the rankings use: at most one row on its path may read like a value-of-information or decision sheet (future funding bar, reallocated funding, value of information, the probability a decision changes, P(… x cash)); two or more and the sheet values what a grant lets the funder learn, so it must be a side sheet (src/engine/ranking.ts SIDE_SHEET or VOI_ROW). And where the native row's label ends in a place in parentheses (GiveWell's \"Final cost-effectiveness estimate (Chad)\"), the model's name, id or source title must name that place too when it names any: otherwise the importer took another location's column.",
+  };
+}
+
+// --- INV-17: deaths in WELLBY models are valued the site's way --------------------------------------
+
+/** INV-17: a WELLBY model that counts deaths values them like every other model (@moral_weights ×
+ * $life_value_multiplier, in units of value) and they don't move with the WELLBY rate: they enter the
+ * WELLBYs only through uov_valued_outside_wellbys → wellbys_from_uov, which the unit's conversion cancels. */
+export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output?.unit === "wellby" && m.kind !== "variant");
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    const deaths = m.rows.filter((r) => path.has(r.id) && (r.factDeps.some((f) => f.startsWith("moral_weights.")) || r.assumptionDeps.includes("life_value_multiplier")));
+    const bridge = m.byId.get(WELLBY_FROM_UOV.row);
+    const h0 = headline(lib, m, av);
+    if (!Number.isFinite(h0)) continue;
+    if (!bridge) {
+      if (deaths.length) violations.push({ inv: "INV-17", model: m.id, where: "deaths", detail: `values deaths (${deaths.slice(0, 2).map((r) => r.id).join(", ")}) inside its WELLBYs: value them in units of value in ${WELLBY_FROM_UOV.input} and convert them only in ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula}` });
+      continue;
+    }
+    if (!isWellbyFromUov(m, bridge) || !path.has(bridge.id)) { violations.push({ inv: "INV-17", model: m.id, where: WELLBY_FROM_UOV.row, detail: `${WELLBY_FROM_UOV.row} must be ${WELLBY_FROM_UOV.formula} and feed the output` }); continue; }
+    const into = upstream(m, WELLBY_FROM_UOV.input);
+    for (const r of deaths) if (!into.has(r.id) && r.id !== WELLBY_FROM_UOV.row)
+      violations.push({ inv: "INV-17", model: m.id, where: `${r.id} deaths`, detail: `${r.id} values deaths but reaches the output other than through ${WELLBY_FROM_UOV.input}` });
+    const part = (a: Record<string, number>) => headline(lib, m, a) - headline(lib, m, a, { [WELLBY_FROM_UOV.input]: 0 });
+    const d0 = part(av), d1 = part({ ...av, daly_per_wellby: av.daly_per_wellby * 1.5 });
+    if (!close(d0, d1, 1e-9))
+      violations.push({ inv: "INV-17", model: m.id, where: "$daly_per_wellby", detail: `the deaths' part of the headline moves with the WELLBY rate: ${fmt(d0)} → ${fmt(d1)} at ×1.5` });
+    const l0 = headline(lib, m, av, { [WELLBY_FROM_UOV.input]: 0 }), l1 = headline(lib, m, { ...av, life_value_multiplier: av.life_value_multiplier * 1.5 }, { [WELLBY_FROM_UOV.input]: 0 });
+    if (!close(l0, l1, 1e-9))
+      violations.push({ inv: "INV-17", model: m.id, where: "$life_value_multiplier", detail: `the WELLBYs without the deaths still move with the value of a life (${fmt(l0)} → ${fmt(l1)}): a death is valued inside the WELLBYs` });
+  }
+  return {
+    id: "INV-17", title: "Deaths in WELLBY models don't move with the WELLBY rate", status: "checked", checked: models.length, violations,
+    how: `WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in ${WELLBY_FROM_UOV.input} and put it into WELLBYs only in ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula} (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with ${WELLBY_FROM_UOV.input} = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest doesn't move with $life_value_multiplier.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

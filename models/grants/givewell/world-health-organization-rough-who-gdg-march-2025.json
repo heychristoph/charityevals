@@ -62,9 +62,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1lFsp1hjS-bb7-Q95rf3V3Sffg3AHlSeECCI_oa6KsJk/edit",
         "cell": "SLD!B10"
       },
-      "explainer": "GiveWell's moral weight, 50 units of value, times your multiplier on the value of a life.\n\nGiveWell's moral weights",
-      "formula": "50 * $life_value_multiplier",
-      "expected": 50.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 50, is kept for the evaluator view.\n\nGiveWell's moral weights",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
+      "expected": 50.0,
+      "published": 50.0
     },
     {
       "id": "how_many_more_hospitalizations_per_year_in_a_high_resistance",
@@ -186,26 +187,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

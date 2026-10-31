@@ -641,9 +641,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1LcGo_-R7UQia09niQ4z55nnRQ-IzxtV1iC5O8kyNlGY/edit",
         "cell": "BOTEC!D44"
       },
-      "explainer": "GiveWell's moral weight, 40 units of value, times your multiplier on the value of a life.\n\nRough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)",
-      "formula": "40 * $life_value_multiplier",
-      "expected": 40.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.givewell_age_60_64, 39.6 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 40, is kept for the evaluator view.\n\nRough guess: assume prolonging someone's life expectancy is equivalent to averting the death of a 60-64 year old. This seems roughly reasonable: life expectancy is ~81 in Germany GiveWell, Update on GiveWell's moral weights, 2020 (see chart on p. 9)",
+      "formula": "@moral_weights.givewell_age_60_64 * $life_value_multiplier",
+      "expected": 40.0,
+      "published": 40.0
     },
     {
       "id": "direct_effects_income_gains_from_migrating_discount_rate_old",
@@ -1316,26 +1317,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

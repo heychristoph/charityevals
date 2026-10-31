@@ -268,9 +268,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
         "cell": "Desal kiosks!B21"
       },
-      "formula": "113 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 113.0,
-      "explainer": "GiveWell's moral weight, 113 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 113, is kept for the evaluator view.",
+      "published": 113.0
     },
     {
       "id": "what_this_is_estimated_cost_effectiveness_of_the_water_entre",
@@ -716,6 +717,15 @@
       "expected": 1096.353277
     },
     {
+      "id": "moral_value_per_over_5_death_averted_bangladesh_age_mix",
+      "label": "Age mix of these deaths, relative to the average death at five or over",
+      "format": "number",
+      "value": 0.6011635246763964,
+      "kind": "estimate",
+      "explainer": "Deaths over five in Bangladesh fall at older ages than over-five deaths in GiveWell's average. GiveWell's sheet values these deaths at 44 units of value, 0.601 of its average five-and-over death (73.1914), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "desal_kiosks"
+    },
+    {
       "id": "moral_value_per_over_5_death_averted_bangladesh",
       "label": "Moral value per over-5 death averted (Bangladesh)",
       "section": "desal_kiosks",
@@ -724,9 +734,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
         "cell": "Desal kiosks!B31"
       },
-      "formula": "44 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * moral_value_per_over_5_death_averted_bangladesh_age_mix * $life_value_multiplier",
       "expected": 44.0,
-      "explainer": "GiveWell's moral weight, 44 units of value, times your multiplier on the value of a life."
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_over5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 44 units of value at the defaults, as in GiveWell's sheet."
     },
     {
       "id": "percent_of_population_that_is_o5_bangladesh",
@@ -1012,26 +1022,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

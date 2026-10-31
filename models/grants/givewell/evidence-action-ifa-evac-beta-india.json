@@ -389,9 +389,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
         "cell": "Main!B73"
       },
-      "explainer": "From an older GiveWell value scale (1 here); it moves in proportion to the shared `uov_per_daly`.\n\nArbitrary starting point",
-      "formula": "1 * $uov_per_daly / 2",
-      "expected": 1.0
+      "explainer": "Changed for consistency: a year lived with disability averted is a healthy year, worth \"Healthy year vs doubled-income year\" (Your values) in every model. This sheet's own figure, 1, is kept for the evaluator view.",
+      "formula": "$uov_per_daly",
+      "expected": 1.0,
+      "published": 1.0
     },
     {
       "id": "anemia_cases_averted",
@@ -544,15 +545,15 @@
       "id": "multiplier_for_resource_sharing_in_households_beneficiaries",
       "label": "Multiplier for resource sharing in households (beneficiaries will eventually have children)",
       "section": "main",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
         "cell": "Main!B41"
       },
-      "explainer": "Consistent with the multiplier used in GW's 2018 V1 deworming CEA",
-      "format": "percent"
+      "explainer": "Reads the shared figure (Multiplier for resource sharing within households (GiveWell), `@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's.\n\nConsistent with the multiplier used in GW's 2018 V1 deworming CEA",
+      "format": "percent",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0
     },
     {
       "id": "sum_of_lifetime_income_benefits_per_individual_in_cohort_acc",
@@ -591,9 +592,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
         "cell": "Main!B74"
       },
-      "explainer": "From an older GiveWell value scale (0.4 here); it moves in proportion to the shared `uov_per_ln_consumption`.\n\nExtrapolation from the rough rule of thumb that 1 DALY = 2.5x GDP per capita.",
-      "formula": "0.4 * $uov_per_ln_consumption * ln(2)",
-      "expected": 0.4
+      "explainer": "Changed for consistency: a doubled income for a year is worth the same in every model, \"Value of doubling an income for a year\" (Your values, 1 unit of value). This sheet's own figure, 0.4 in its own units, is kept for the evaluator view.",
+      "formula": "$uov_per_ln_consumption * ln(2)",
+      "expected": 0.4,
+      "published": 0.4
     },
     {
       "id": "value_of_increasing_ln_consumption_by_one_unit_for_one_perso",
@@ -731,9 +733,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1TRY43-L1hipvYduQX9lyNJiEU0LqQaevEDRf3pvOgUE/edit",
         "cell": "Main!B75"
       },
-      "explainer": "GiveWell's moral weight, 30 units of value, times your multiplier on the value of a life.\n\nRoughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line",
-      "formula": "30 * $life_value_multiplier",
-      "expected": 30.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 30, is kept for the evaluator view.\n\nRoughly reasonable. Since averted deaths only play a small role in this CEA, this value is unlikely to influence the bottom line",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
+      "expected": 30.0,
+      "published": 30.0
     },
     {
       "id": "increases_in_malaria_risk",
@@ -812,26 +815,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",
