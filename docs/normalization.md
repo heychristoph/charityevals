@@ -499,8 +499,11 @@ evaluator view still reproduces every `expected`. Every slider moves every model
    founders' forgone pay is our staff-pay step.
 4. **AIM's DALY-equivalents are decomposed** (scripts/aim-shared-rates.py): income at
    `ln(2) * $uov_per_ln_consumption / $uov_per_daly` (AIM's 1/2.3 or 1/2.5 pinned), deaths at
-   `@moral_weights.uov_per_death_under5|over5 * $life_value_multiplier / $uov_per_daly` (AIM's DALYs per death in
-   `published`; stillbirths, with no shared value, stay AIM's), every benefit discount rate at `$discount_rate`.
+   `@moral_weights.<age band> * $life_value_multiplier / $uov_per_daly`, the band matching the age of the death
+   (GiveWell's 2020 moral weights by age: under five, 5–14, 15–49, 50–74; AIM's DALYs per death in `published`;
+   stillbirths, with no shared value, stay AIM's), every discount rate, AIM's fixed 4% for costs included, at
+   `$discount_rate` (scripts/aim-shared-rates-2.py). No benefit grows with the economy in our view (Learning
+   Alliance's 3% offset is AIM's only).
 5. **INV-11** checks it.
 
 ## 6. Order of work

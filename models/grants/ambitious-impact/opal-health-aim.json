@@ -322,15 +322,15 @@
    "id": "discount_rate_for_costs_keep_fixed_in_all_ceas_never",
    "label": "Discount rate, for costs [keep fixed in all CEAs] (never)",
    "section": "sierra_leone_cea",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1LKt_FY1DvuNxOkd5EbRknxmAYGreZChCqTdJkpSMHT0/edit",
     "cell": "Sierra Leone CEA!B17"
    },
-   "explainer": "LogNormal",
-   "format": "percent"
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values).",
+   "format": "percent",
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04
   },
   {
    "id": "population_growth_rate_if_relevant_e_g_5_if_intervention_dri",
@@ -4729,9 +4729,9 @@
    "id": "set_at_2_times_median_salary_data_dalys_weighted_row_30",
    "label": "DALYs per death averted at age 15 (standard input)",
    "section": "standard_inputs_tools_resourc",
-   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier / $uov_per_daly",
    "expected": 36.9,
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.9 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.9 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged 15 to 49 (@moral_weights, GiveWell's moral weights by age; this death is age 15 in AIM's standard inputs), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "published": 36.9,
    "source": {
     "title": "Source spreadsheet",
@@ -4743,9 +4743,9 @@
    "id": "set_at_2_times_median_salary_data_dalys_weighted_row_31",
    "label": "DALYs per death averted at age 30 (standard input)",
    "section": "standard_inputs_tools_resourc",
-   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier / $uov_per_daly",
    "expected": 29.77,
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 29.77 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 29.77 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged 15 to 49 (@moral_weights, GiveWell's moral weights by age; this death is age 30 in AIM's standard inputs), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "published": 29.77,
    "source": {
     "title": "Source spreadsheet",
@@ -4757,9 +4757,9 @@
    "id": "set_at_2_times_median_salary_data_dalys_weighted_row_32",
    "label": "DALYs per death averted at age 45 (standard input)",
    "section": "standard_inputs_tools_resourc",
-   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier / $uov_per_daly",
    "expected": 20.41,
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 20.41 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 20.41 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged 15 to 49 (@moral_weights, GiveWell's moral weights by age; this death is age 45 in AIM's standard inputs), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "published": 20.41,
    "source": {
     "title": "Source spreadsheet",
@@ -4859,7 +4859,7 @@
    "section": "standard_inputs_tools_resourc",
    "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
    "expected": 33.07,
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 33.07 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 33.07 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights, GiveWell's moral weights by age; this death is age 0 in AIM's standard inputs), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "published": 33.07,
    "source": {
     "title": "Source spreadsheet",
@@ -4963,9 +4963,9 @@
    "id": "set_at_2_times_median_salary_data_dalys_weighted_row_29",
    "label": "DALYs per death averted at age 5 (standard input)",
    "section": "standard_inputs_tools_resourc",
-   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "formula": "@moral_weights.uov_per_death_age_5_14 * $life_value_multiplier / $uov_per_daly",
    "expected": 36.53,
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.53 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.53 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged 5 to 14 (@moral_weights, GiveWell's moral weights by age; this death is age 5 in AIM's standard inputs), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "published": 36.53,
    "source": {
     "title": "Source spreadsheet",

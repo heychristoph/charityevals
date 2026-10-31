@@ -56,14 +56,15 @@
    "id": "discount_rate_for_costs",
    "label": "Discount rate for costs",
    "section": "r_2024_updated_cea",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/12S_7m-n0PKbls5qjoy9ffnAnaEG5xt7Ywdtj6n--Amc/edit",
     "cell": "2024 - updated CEA!B145"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04,
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values)."
   },
   {
    "id": "effective_discount_rate_for_costs",
@@ -3207,7 +3208,7 @@
    "id": "one_5_life_saved_equivelent_dalys",
    "label": "One <5 life saved equivelent DALYs",
    "section": "r_2024_updated_cea",
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.528 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 36.528 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a child under five (@moral_weights, GiveWell's moral weights by age; this death is a child under five with pneumonia), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
    "expected": 36.528,
    "published": 36.528,

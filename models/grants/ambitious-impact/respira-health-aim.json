@@ -79,14 +79,15 @@
    "id": "discount_rate_for_costs_keep_fixed_in_all_ceas",
    "label": "Discount rate, for costs [keep fixed in all CEAs]",
    "section": "nepal_mycopd_partnership_model",
-   "value": 0.04,
-   "kind": "estimate",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1-iivf8M_XzvuliM2OyOIdah9S_hnU1goX4iDmmd32KM/edit",
     "cell": "Nepal myCOPD partnership model!B16"
    },
-   "format": "percent"
+   "format": "percent",
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04,
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values)."
   },
   {
    "id": "cost_period_2_ends_on_year_or_ongoing_suggest_16_expected",
@@ -885,9 +886,9 @@
    "id": "years_of_life_gained_per_copd_death_averted",
    "label": "Years of life gained per COPD death averted",
    "section": "nepal_mycopd_partnership_model",
-   "explainer": "**Changed for consistency.** Ambitious Impact counts 6.1 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged five or older (@moral_weights), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
+   "explainer": "**Changed for consistency.** Ambitious Impact counts 6.1 DALYs for this death averted (its own figure, kept in the evaluator view). Our view values every death the site counts the same way: GiveWell's value of averting the death of a person aged 50 to 74 (@moral_weights, GiveWell's moral weights by age; this death is people hospitalised with COPD, whom AIM's sheet gives 6.1 years of life left; GiveWell publishes no older band), scaled by how much Your values weigh a life, in healthy years at the shared rate.",
    "format": "number",
-   "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier / $uov_per_daly",
+   "formula": "@moral_weights.uov_per_death_age_50_74 * $life_value_multiplier / $uov_per_daly",
    "expected": 6.1,
    "published": 6.1,
    "source": {

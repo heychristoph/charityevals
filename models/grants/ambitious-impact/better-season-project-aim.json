@@ -140,8 +140,8 @@
    "format": "usd"
   },
   {
-   "id": "counsumption_doublings_per_person_consumption_doublings_row",
-   "label": "counsumption doublings per person – Consumption doublings (row 328)",
+   "id": "timeline_year_1",
+   "label": "Timeline year (column C): year 1 of the cost and impact schedule",
    "section": "main_cea",
    "unit": "Year",
    "value": 1.0,
@@ -150,7 +150,8 @@
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
     "cell": "Main CEA!C328"
-   }
+   },
+   "explainer": "The year index of AIM's template (column C), here year 1. The converter named it after the row beside it (\"counsumption doublings per person\"); it is a count of years, not a conversion."
   },
   {
    "id": "cost_period_begins_in_year_fixed",
@@ -234,7 +235,7 @@
    "id": "fixed_costs_period_1_scaling_costs_consumption_doublings",
    "label": "Fixed costs: Period [1] – scaling costs (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row = cost_period_begins_in_year_fixed, costs_at_period_start, if(counsumption_doublings_per_person_consumption_doublings_row > cost_period_begins_in_year_fixed, if(cost_period_ends_in_year_suggest_2_5_min_2 >= counsumption_doublings_per_person_consumption_doublings_row, fixed_costs_period_1_scaling_costs_please_fill + step1_increase_per_year, 0), 0))",
+   "formula": "if(timeline_year_1 = cost_period_begins_in_year_fixed, costs_at_period_start, if(timeline_year_1 > cost_period_begins_in_year_fixed, if(cost_period_ends_in_year_suggest_2_5_min_2 >= timeline_year_1, fixed_costs_period_1_scaling_costs_please_fill + step1_increase_per_year, 0), 0))",
    "expected": 130000.0,
    "format": "usd"
   },
@@ -270,7 +271,7 @@
    "id": "fixed_costs_period_2_ongoing_costs_consumption_doublings",
    "label": "Fixed costs: Period [2] – ongoing costs (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row >= cost_period_begins_in_year_previous_period_end_1, if(counsumption_doublings_per_person_consumption_doublings_row <= cost_period_ends_on_year_or_ongoing_suggest_16, costs_each_year_over_period_are, 0), 0)",
+   "formula": "if(timeline_year_1 >= cost_period_begins_in_year_previous_period_end_1, if(timeline_year_1 <= cost_period_ends_on_year_or_ongoing_suggest_16, costs_each_year_over_period_are, 0), 0)",
    "expected": 0.0,
    "format": "usd"
   },
@@ -325,7 +326,7 @@
    "id": "fixed_costs_other_one_off_costs_consumption_doublings",
    "label": "Fixed costs: Other – one off costs (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row >= costs_are_spread_out_starting_in_year, if(counsumption_doublings_per_person_consumption_doublings_row <= costs_are_spread_out_ending_in_year, costs_each_year_over_period_are_2, 0), 0)",
+   "formula": "if(timeline_year_1 >= costs_are_spread_out_starting_in_year, if(timeline_year_1 <= costs_are_spread_out_ending_in_year, costs_each_year_over_period_are_2, 0), 0)",
    "expected": 0.0,
    "format": "usd"
   },
@@ -346,10 +347,10 @@
     "url": "https://docs.google.com/spreadsheets/d/1i3RAtRytLMSrSRFB6mHGxRI6B2XDS2Ok1fiKniOszwk/edit",
     "cell": "Main CEA!B212"
    },
-   "explainer": "Ambitious Impact's discount rate for costs, which its template says to keep fixed in all CEAs; left at its value.",
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values).",
    "format": "percent",
-   "value": 0.04,
-   "kind": "estimate"
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04
   },
   {
    "id": "impact_period_begins_in_year_suggest_0_suggest_range_0_2",
@@ -812,7 +813,7 @@
    "id": "variable_costs_period_1_initial_scaling_consumption_doubling",
    "label": "Variable costs: Period [1] – initial scaling (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row = impact_period_begins_in_year_suggest_0_suggest_range_0_2, cost_in_first_year_of_period, if(counsumption_doublings_per_person_consumption_doublings_row > impact_period_begins_in_year_suggest_0_suggest_range_0_2, if(impact_period_ends_reaches_end_costs_in_year_suggest_2_8 >= counsumption_doublings_per_person_consumption_doublings_row, variable_costs_period_1_initial_scaling_please_fill + additional_cost_each_year_when_scaling, 0), 0))",
+   "formula": "if(timeline_year_1 = impact_period_begins_in_year_suggest_0_suggest_range_0_2, cost_in_first_year_of_period, if(timeline_year_1 > impact_period_begins_in_year_suggest_0_suggest_range_0_2, if(impact_period_ends_reaches_end_costs_in_year_suggest_2_8 >= timeline_year_1, variable_costs_period_1_initial_scaling_please_fill + additional_cost_each_year_when_scaling, 0), 0))",
    "expected": 32224.14137,
    "format": "usd"
   },
@@ -842,7 +843,7 @@
    "id": "variable_costs_period_2_running_at_scale_consumption_doublin",
    "label": "Variable costs: Period [2] – running at scale (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row >= impact_period_begins_on_year_previous_period_end_1, if(1, impact_period_ends_on_year_or_ongoing_annual_cost, 0), 0)",
+   "formula": "if(timeline_year_1 >= impact_period_begins_on_year_previous_period_end_1, if(1, impact_period_ends_on_year_or_ongoing_annual_cost, 0), 0)",
    "expected": 0.0,
    "format": "usd"
   },
@@ -866,7 +867,7 @@
    "id": "total_costs_if_successful_discounted_consumption_doublings",
    "label": "Total costs (if successful) discounted (Consumption doublings)",
    "section": "main_cea",
-   "formula": "total_fixed_costs_consumption_doublings * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (counsumption_doublings_per_person_consumption_doublings_row - 1) + total_variable_costs_consumption_doublings * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (counsumption_doublings_per_person_consumption_doublings_row - 1)",
+   "formula": "total_fixed_costs_consumption_doublings * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (timeline_year_1 - 1) + total_variable_costs_consumption_doublings * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (timeline_year_1 - 1)",
    "expected": 162224.1414,
    "format": "usd"
   },
@@ -3268,7 +3269,7 @@
    "id": "total_fixed_costs_if_unsuccessful_consumption_doublings",
    "label": "Total fixed costs (if unsuccessful) (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row > last_year_charity_runs_if_unsuccessful_suggest_4, 0, total_fixed_costs_consumption_doublings)",
+   "formula": "if(timeline_year_1 > last_year_charity_runs_if_unsuccessful_suggest_4, 0, total_fixed_costs_consumption_doublings)",
    "expected": 130000.0,
    "format": "usd"
   },
@@ -3276,7 +3277,7 @@
    "id": "total_variable_costs_if_unsuccessful_consumption_doublings",
    "label": "Total variable costs (if unsuccessful) (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row > last_year_charity_runs_if_unsuccessful_suggest_4, 0, if_charity_fails_what_of_variable_costs_are_spent_suggest_40 * total_variable_costs_consumption_doublings)",
+   "formula": "if(timeline_year_1 > last_year_charity_runs_if_unsuccessful_suggest_4, 0, if_charity_fails_what_of_variable_costs_are_spent_suggest_40 * total_variable_costs_consumption_doublings)",
    "expected": 12889.65655,
    "format": "usd"
   },
@@ -3284,7 +3285,7 @@
    "id": "total_costs_if_unsuccessful_disocunted_consumption_doublings",
    "label": "Total costs (if unsuccessful) disocunted (Consumption doublings)",
    "section": "main_cea",
-   "formula": "total_fixed_costs_if_unsuccessful_consumption_doublings * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (counsumption_doublings_per_person_consumption_doublings_row - 1) + total_variable_costs_if_unsuccessful_consumption_doublings * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (counsumption_doublings_per_person_consumption_doublings_row - 1)",
+   "formula": "total_fixed_costs_if_unsuccessful_consumption_doublings * (1 - discount_rate_for_fixed_costs_keep_fixed_in_all_ceas) ^ (timeline_year_1 - 1) + total_variable_costs_if_unsuccessful_consumption_doublings * (1 - effective_discount_rate_for_reach_of_costs_over_time) ^ (timeline_year_1 - 1)",
    "expected": 142889.6565,
    "format": "usd"
   },
@@ -55471,7 +55472,7 @@
    "id": "impact_period_1_initial_scaling_consumption_doublings",
    "label": "Impact: Period [1] – initial scaling (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row = impact_period_begins_in_year_suggest_0_suggest_range_0_2, impact_in_frist_year_of_period, if(counsumption_doublings_per_person_consumption_doublings_row > impact_period_begins_in_year_suggest_0_suggest_range_0_2, if(impact_period_ends_reaches_end_costs_in_year_suggest_2_8 >= counsumption_doublings_per_person_consumption_doublings_row, impact_period_1_initial_scaling_please_fill + additional_impact_each_year_when_scaling, 0), 0))",
+   "formula": "if(timeline_year_1 = impact_period_begins_in_year_suggest_0_suggest_range_0_2, impact_in_frist_year_of_period, if(timeline_year_1 > impact_period_begins_in_year_suggest_0_suggest_range_0_2, if(impact_period_ends_reaches_end_costs_in_year_suggest_2_8 >= timeline_year_1, impact_period_1_initial_scaling_please_fill + additional_impact_each_year_when_scaling, 0), 0))",
    "expected": 6654.454084
   },
   {
@@ -55485,7 +55486,7 @@
    "id": "impact_period_2_running_at_scale_consumption_doublings",
    "label": "Impact: Period [2] – running at scale (Consumption doublings)",
    "section": "main_cea",
-   "formula": "if(counsumption_doublings_per_person_consumption_doublings_row >= impact_period_begins_on_year_previous_period_end_1, if(1, impact_period_ends_on_year_or_ongoing_annual_impact, 0), 0)",
+   "formula": "if(timeline_year_1 >= impact_period_begins_on_year_previous_period_end_1, if(1, impact_period_ends_on_year_or_ongoing_annual_impact, 0), 0)",
    "expected": 0.0
   },
   {
@@ -55548,7 +55549,7 @@
    "id": "total_impact_discounted_consumption_doublings",
    "label": "Total impact, discounted (Consumption doublings)",
    "section": "main_cea",
-   "formula": "hidden_by_default_but_reveal_if_you_want_to_use_total_impact * (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (counsumption_doublings_per_person_consumption_doublings_row - 1)",
+   "formula": "hidden_by_default_but_reveal_if_you_want_to_use_total_impact * (1 - effective_discount_rate_for_reach_of_impacts_over_time) ^ (timeline_year_1 - 1)",
    "expected": 6654.454084
   },
   {

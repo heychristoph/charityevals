@@ -61,10 +61,10 @@
     "url": "https://docs.google.com/spreadsheets/d/1qp0I0djz4P3lFmQXKjkBtRi2ECpNEkLMX_0bfcx80gM/edit",
     "cell": "CEA (SSA)!B60"
    },
-   "explainer": "Ambitious Impact's discount rate for costs and the growth-model benefits (4%); left at its value.",
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts costs and benefits at a fixed 0.04 a year in every CEA (kept in the evaluator view). Our view discounts everything in the future at the shared rate (Your values).",
    "format": "percent",
-   "value": 0.04,
-   "kind": "estimate"
+   "formula": "max($discount_rate, 0.000001)",
+   "published": 0.04
   },
   {
    "id": "fixed_charity_costs",
@@ -856,27 +856,14 @@
    }
   },
   {
-   "id": "income_growth_offset",
-   "label": "Income growth netted off the discount rate (Ambitious Impact's 4% less its 1%)",
-   "section": "cea_ssa",
-   "value": 0.03,
-   "kind": "estimate",
-   "format": "percent",
-   "source": {
-    "title": "Source spreadsheet",
-    "url": "https://docs.google.com/spreadsheets/d/1qp0I0djz4P3lFmQXKjkBtRi2ECpNEkLMX_0bfcx80gM/edit",
-    "cell": "CEA (SSA)!B61"
-   },
-   "explainer": "Ambitious Impact discounts the earnings gains at 1% instead of its usual 4% because it assumes they grow with the economy, about 3% a year. Kept as that offset so the earnings gains follow the shared discount rate."
-  },
-  {
    "id": "discount_rate_assuming_income_increase_tracks_growth",
    "label": "Discount rate (assuming income increase tracks growth)",
    "section": "cea_ssa",
-   "explainer": "Ambitious Impact's 1% rate for earnings gains that grow with the economy: the shared discount rate (Your values) less the 3% growth offset. The evaluator view pins the shared rate to Ambitious Impact's 4%, which gives its 1%.",
+   "explainer": "**Changed for consistency.** Ambitious Impact discounts the income gain at 1% a year: its 4% less 3% because it assumes the gain grows with the economy (kept in the evaluator view). Our view discounts every future benefit at the shared rate and, as for every other model, doesn't grow a benefit with the economy.",
    "format": "percent",
-   "formula": "$discount_rate - income_growth_offset",
-   "expected": 0.01
+   "formula": "$discount_rate",
+   "expected": 0.01,
+   "published": 0.01
   },
   {
    "id": "increased_income_per_child",
