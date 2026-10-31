@@ -8,15 +8,15 @@ ACE's figures work out to about **7.2 peer-reviewed papers per $1 million** acro
 
 Papers are a proxy. Whether WAI is a good use of money depends on how much you think establishing wild animal welfare as a research field is worth, which is a judgment no spreadsheet settles. ACE's review discusses this qualitatively.
 
-Our rough Fermi estimate: a paper earns 1 in 5,000 of the credit for a field that has a 10% chance of helping a billion wild animals a year, half a day of pain each, ten years sooner, starting in 20 years. That is about 46,000 days of pain per paper after discounting, each guess with a wide range. We guess 70% of those days are insects', 20% fish's and 10% other animals', and weigh each against a chicken's by Rethink Priorities' estimates (an insect about 4% of a chicken, a fish about a fifth). That comes to about **<span data-figure="headline" data-model="wild-animal-initiative">0.020</span> years of healthy life per $1,000**, with a range from almost nothing to about 230. Where WAI ranks depends almost entirely on these guesses.
+Our rough Fermi estimate: a paper earns 1 in 5,000 of the credit for a field that has a 10% chance of helping a billion wild animals a year, half a day of pain each, ten years sooner, starting in 20 years. Each of the ten years sooner is discounted, as every future benefit is, and so is the 20-year wait. That is about 39,000 days of pain per paper after discounting, each guess with a wide range. We guess 70% of those days are insects', 20% fish's and 10% other animals', and weigh each against a chicken's by Rethink Priorities' estimates (an insect about 4% of a chicken, a fish about a fifth). That comes to about **<span data-figure="headline" data-model="wild-animal-initiative">0.017</span> years of healthy life per $1,000**, with a range from almost nothing to about 230. Where WAI ranks depends almost entirely on these guesses.
 
 ### What drives the result
 
-Beyond the exchange rates, our guesses on the path from papers to pain spared: each alone moves the result between about 0.008 and 0.05 years of healthy life per $1,000. Within ACE's figures, WAI's estimates of how many funded projects will be completed and published, and ACE's estimate of operational costs per program.
+Beyond the exchange rates, our guesses on the path from papers to pain spared: each alone moves the result between about 0.007 and 0.045 years of healthy life per $1,000. Within ACE's figures, WAI's estimates of how many funded projects will be completed and published, and ACE's estimate of operational costs per program.
 
 ### Where we differ from ACE
 
-Only the optional salary-sacrifice adjustment (see the "Your dollar's share" section). The step from papers to pain spared is ours, not ACE's.
+Only the optional salary-sacrifice adjustment (see the "Your dollar's share" section). The step from papers to pain spared is ours, not ACE's. With "Credit by share of resources" on, a paper's share of the field's credit is its cost over what the whole field will spend until help arrives (our judgment, $700 million, $300 million to $2 billion) instead of 1 in 5,000 papers.
 
 ### Sources
 

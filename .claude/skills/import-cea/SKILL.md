@@ -129,6 +129,12 @@ become the range.
 - **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
   `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
   rate stays and `$discount_rate` goes on top (INV-9b). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
+- **Won reforms** (corporate pledges, laws, regulations; normalization.md 2.9): the years a win counts read
+  `$win_years_counted` (the evaluator's years in `published`, or "date without the campaign" = expected date +
+  `$win_years_counted`); the wait until it takes effect and the years counted are discounted at `$discount_rate`;
+  cage-free and broiler pledges kept read `@sad_factors.commitment_fulfilment_cage_free` / `_broiler`; coalition
+  credit is `if($resource_shares, <charity's share of all groups' resources>, <evaluator's credit, kind judgment>)`.
+  Meals replaced or animals spared multiply by `@sad_factors.production_response` (`published` 1).
 - **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
   moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of
   cash, counterfactual share or success chance in our view. Write the shared rows with
