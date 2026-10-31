@@ -30,6 +30,7 @@ export const VOI_ROW =
  * scaling a program the grant runs anyway (Rice Institute's optionality) is not this template. */
 export function isValueOfInformation(m: ResolvedModel): boolean {
   if (!m.output) return false;
+  if (m.value_of_information) return true;
   const seen = new Set<string>();
   const walk = (id: string): boolean => {
     if (seen.has(id)) return false;

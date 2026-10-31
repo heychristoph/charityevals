@@ -258,6 +258,9 @@ export const Model = z
      * from the evaluator's sheet. scripts/link-parameters.py ties its moral weights, discount rate and
      * DALY value to the shared assumptions, and shared data to facts. */
     bulk: z.boolean().optional(),
+    /** Set by scripts/summaries.ts on a bulk model's browser stand-in whose full rows make it a
+     * value-of-information sheet: the stand-in folds those rows away, so the browser can't tell. */
+    value_of_information: z.boolean().optional(),
     /** How to reproduce the evaluator's own model: the assumption values it used. In the
      * evaluator view these replace the visitor's (exchange rates between causes stay theirs). */
     evaluator: z
