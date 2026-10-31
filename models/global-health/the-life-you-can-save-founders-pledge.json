@@ -5,7 +5,7 @@
   "cause": "global-health",
   "charity": "the-life-you-can-save",
   "owner": "founders-pledge",
-  "summary": "Raises money for effective global poverty charities by promoting effective giving. Founders Pledge's page gives a gross multiplier of about 17 dollars raised per dollar received; our bridge discounts for money that would have been given anyway and values the rest at a multiple of cash transfers.",
+  "summary": "Raises money for effective global poverty charities by promoting effective giving. Founders Pledge's page gives a gross multiplier of about 17 dollars raised per dollar received; our view takes today's ratio and values each dollar moved by the site's shared method: half of it new money, the rest credited for the gain over GiveDirectly, all going to GiveWell's Top Charities at their live results.",
   "source": {
     "publisher": "Founders Pledge",
     "title": "The Life You Can Save (charity recommendation)",
@@ -34,10 +34,16 @@
       "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
     },
     {
-      "id": "bridge",
-      "title": "From money raised to units of value",
+      "id": "moved_money",
+      "title": "Value of a dollar moved (shared)",
       "kind": "ours",
-      "explainer": "charityevals' bridge, not Founders Pledge's: a gross multiplier counts every dollar donors gave through The Life You Can Save. We keep only the share that wouldn't otherwise have gone to similarly effective charities, and value it at a multiple of GiveDirectly's cash transfers (our judgment of the recommended charities' average), with cash valued at the site's shared benchmark."
+      "explainer": "charityevals' shared method for money a meta charity moves, the same rows in every such model (docs/normalization.md 2.8). A dollar moved is worth what the charities it reaches achieve, each at its live result on this site under your values; new money counts in full, shifted money only for the gain over where it would have gone."
+    },
+    {
+      "id": "bridge",
+      "title": "Money moved today",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: Founders Pledge's multiplier was for 2019–2021, and a donation today buys today's ratio. Each dollar moved is then valued by the site's shared method (docs/normalization.md 2.8)."
     },
     {
       "id": "staff_pay",
@@ -83,46 +89,52 @@
       "explainer": "Founders Pledge expected about 17 to hold \"over the next few years\"; The Life You Can Save's own three-year ratio has since fallen to 10 (2024 report) and 9.19 (2025 report), 59% and 54% of 17. A donation today buys today's ratio, so the result uses 59% (10), with Founders Pledge's own 17 (100%) as the high end. Founders Pledge's figure stays the model's evaluator row."
     },
     {
-      "id": "counterfactual_share",
-      "section": "bridge",
-      "label": "Share of the money raised that donors wouldn't otherwise have given as effectively",
-      "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment. Some of the money would have gone to the same or similar charities anyway: The Life You Can Save's 2021 money moved was $22.7 million, $18.5 million without large outlier gifts, and included matching-campaign money from large donors who give effectively already; it calls its own leverage ratio a gross figure (2021 annual report, https://www.thelifeyoucansave.org/2021-annual-report/). Effective-giving organisations' counterfactual estimates vary widely (Rethink Priorities' review of their methods). 40%, from 20% to 70%."
-    },
-    {
-      "id": "recipient_multiple",
-      "section": "bridge",
-      "label": "Value of a dollar given to the recommended charities, multiple of cash transfers",
-      "format": "multiple",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 10
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as a multiple of Founders Pledge's GiveDirectly benchmark (about 1.6 years of healthy life per $1,000; the site's GiveWell GiveDirectly model is 4.4). The recommended charities range from GiveDirectly to GiveWell's top charities (AMF and seasonal malaria chemoprevention are about 15 times Founders Pledge's benchmark on this site), with some climate and water charities that aren't valued here. 5, from 2 to 10."
-    },
-    {
-      "id": "gd_uov_per_dollar",
-      "section": "bridge",
-      "label": "GiveDirectly's units of value per dollar",
+      "id": "value_global_health",
+      "section": "moved_money",
+      "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
       "format": "small",
-      "formula": "@cash.uov_per_dollar",
-      "explainer": "Changed for consistency. Cash transfers' value per dollar. This model first read it from Founders Pledge's 2022 GiveDirectly benchmark ($164 per WELLBY-equivalent, 1.898 WELLBY-equivalents per doubled income-year): 0.0032 units of value per dollar. The site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335 units of value per dollar given as cash, so that a multiple of cash means the same in every model. The evaluator view keeps 0.0032.",
-      "published": 0.003213216573
+      "formula": "@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives",
+      "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
+    },
+    {
+      "id": "moved_dollar_value",
+      "section": "moved_money",
+      "label": "Value of a dollar moved, units of value",
+      "format": "small",
+      "formula": "value_global_health",
+      "explainer": "This organisation moves money only to global health and poverty charities, so a dollar moved is valued at that destination alone (GiveWell's Top Charities, live), not the across-causes mix."
+    },
+    {
+      "id": "prior_dollar_value",
+      "section": "moved_money",
+      "label": "Value of a dollar where shifted money would otherwise have gone, units of value",
+      "format": "small",
+      "formula": "@meta.prior_vs_cash * #givedirectly",
+      "explainer": "Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
+    },
+    {
+      "id": "new_money_share",
+      "section": "moved_money",
+      "label": "Share of money moved that is new money",
+      "format": "percent",
+      "formula": "@meta.new_money_share",
+      "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
+    },
+    {
+      "id": "moved_dollar_net_value",
+      "section": "moved_money",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "format": "small",
+      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
     },
     {
       "id": "uov_per_dollar_fp",
       "section": "bridge",
       "label": "Units of value per dollar",
       "format": "small",
-      "formula": "gross_multiplier * multiplier_change * counterfactual_share * recipient_multiple * gd_uov_per_dollar"
+      "formula": "gross_multiplier * multiplier_change * moved_dollar_net_value",
+      "explainer": "Changed for consistency. Dollars moved per dollar received (Founders Pledge's gross multiplier, at today's ratio), each worth the site's shared net value of a dollar moved: new money in full, shifted money for the gain over GiveDirectly. This model used to keep 40% of the money (our judgment, 20–70%) and value it at 5 times Founders Pledge's cash benchmark (2–10); the shared method replaces both."
     },
     {
       "id": "staff_cost_share",
@@ -162,8 +174,8 @@
       "section": "staff_pay",
       "label": "Share of the full cost paid in cash",
       "format": "percent",
-      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gross_multiplier * multiplier_change * counterfactual_share, 0))",
-      "explainer": "With credit by share of resources on, the donors' own gifts are contributors too: the outcome is shared with them and with staff's forgone pay. Off, this is 100%."
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gross_multiplier * multiplier_change * new_money_share, 0))",
+      "explainer": "With credit by share of resources on, the donors' own new gifts are contributors too: the outcome is shared with them and with staff's forgone pay. Off, this is 100%."
     },
     {
       "id": "uov_per_dollar",

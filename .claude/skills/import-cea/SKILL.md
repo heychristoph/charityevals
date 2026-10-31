@@ -105,17 +105,6 @@ become the range.
 
 ## 5. Our steps to the scale (layers B and C)
 
-<<<<<<< HEAD
-- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). An exchange rate between
-  outcomes inside the model reads our shared assumption or fact in our view; the evaluator's own rate
-  goes in `published` and is pinned only in the evaluator view (INV-2). A model whose outcome mixes
-  kinds (AIM's "DALY-equivalents" folding in income and deaths) is split into its parts, each
-  converted with our rates.
-- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
-- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
-  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
-  credit-by-share-of-resources lever as in section 4.
-=======
 - `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (INV-2c,
   normalization.md 1 and 2.7): every conversion the evaluator made in its own way (an exchange rate
   between outcomes, the value of a death, depression to DALYs, a cash benchmark behind a multiple of
@@ -124,7 +113,20 @@ become the range.
   `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
   "changed for consistency" explainer. A concept two models use with different values and no shared
   version gets a new shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
->>>>>>> worktree-agent-aa715a352886180e5
+  A model whose outcome mixes kinds (AIM's "DALY-equivalents" folding in income and deaths) is split
+  into its parts, each converted with our rates.
+- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
+- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
+  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
+  credit-by-share-of-resources lever as in section 4.
+- **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
+  moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of
+  cash, counterfactual share or success chance in our view. Write the shared rows with
+  `python3 scripts/moved-money.py <model> <mix|global-health> [net]` (destinations read live with
+  `#model-id`) and multiply money moved by `moved_dollar_net_value` (or a result already in counterfactual
+  "EA dollars" by `moved_dollar_value`); a new organisation's chance of success reads
+  `@meta.success_chance_new_org`, the evaluator's figure in `published`. Career changes use the shared
+  `career_change_value`.
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,

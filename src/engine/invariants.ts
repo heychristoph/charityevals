@@ -6,9 +6,10 @@
 import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, viewAssumptions,
+  assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
+import { CAREER_CHANGE_FORMULA, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
 import { isSideSheet } from "./ranking";
 import { rowsFeeding } from "./sensitivity";
 
@@ -513,7 +514,11 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   for (const m of models) {
     const h0 = headline(lib, m, av);
     if (!Number.isFinite(h0) || h0 === 0) continue;
+    // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
+    // they move: no independence is expected for those.
+    const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
     for (const [a, shape] of expectations(m)) {
+      if (shape === "independent" && inherited.has(a)) continue;
       const at = (k: number) => headline(lib, m, { ...av, [a]: av[a] * k });
       const h2 = at(1.5);
       const ok = shape === "linear" ? close(h2, 1.5 * h0, 1e-9) && close(at(0.5), 0.5 * h0, 1e-9) : close(h2, h0, 1e-9);
@@ -523,7 +528,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $uov_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $uov_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $uov_per_wellby, except WELLBY models, which are proportional to $uov_per_wellby and independent of $uov_per_ln_consumption. Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   };
 }
 
@@ -689,10 +694,59 @@ export function inv11(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-12: one way to value money moved (docs/normalization.md 2.8) -------------------------------
+
+/** Rows (and native units) that say a model values money moved or raised: a meta charity's bottom line. */
+export const MOVED_MONEY = /\b(money|dollars?|donations?|funds?)\b[^.;]{0,40}\b(moved|raised|influenced|affected|shifted|leveraged)\b|\bmoney moved\b|\bleverage ratio\b|\bgross multiplier\b|\bEA[- ]donations?\b/i;
+/** A not-yet-proven organisation's chance of success, in our view the shared one. */
+const ORG_SUCCESS = /\bprobability of success\b|\bchance (that )?(the )?(new )?(organi[sz]ation|charity|evaluator) succeeds\b/i;
+const CAREER = /\bcareer (change|plan|switch|shift)s?\b/i;
+
+/** INV-12: every model that values money moved, raised or influenced, or career changes, goes through
+ * the site's one method: the shared rows of src/engine/moved-money.ts, word for word, on the path. */
+export function inv12(lib: Library): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "variant");
+  const violations: Violation[] = [];
+  let checked = 0;
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    const onPath = m.rows.filter((r) => path.has(r.id));
+    const moved = onPath.filter((r) => MOVED_MONEY.test(r.label));
+    if (MOVED_MONEY.test(m.output!.native?.unit ?? "") || moved.length) {
+      checked++;
+      const v = m.byId.get("moved_dollar_value");
+      if (!v || !path.has(v.id)) {
+        violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value", detail: `values money moved (${moved.slice(0, 2).map((r) => `"${r.label}"`).join(", ") || m.output!.native?.unit}) but its result doesn't go through the shared moved_dollar_value: write the shared rows (python3 scripts/moved-money.py) and read them` });
+      } else if (!MOVED_DOLLAR_FORMULAS.some((f) => sameFormula(v.formula, f))) {
+        violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value formula", detail: `moved_dollar_value is ${v.formula ?? "an input"}, not the shared formula` });
+      }
+      for (const [id, t] of Object.entries(MOVED_MONEY_ROWS)) {
+        const r = m.byId.get(id);
+        if (!r || id === "moved_dollar_value") continue;
+        if (!sameFormula(r.formula, t.formula)) violations.push({ inv: "INV-12", model: m.id, where: `${id} formula`, detail: `shared row ${id} is ${r.formula ?? "an input"}, not ${t.formula}` });
+      }
+      for (const r of onPath)
+        if (ORG_SUCCESS.test(r.label) && !r.factDeps.includes(SUCCESS_FACT))
+          violations.push({ inv: "INV-12", model: m.id, where: `${r.id} success`, detail: `"${r.label}" is a meta organisation's chance of success but reads ${r.formula ?? fmt(inputValue(r, "charityevals"))}, not @${SUCCESS_FACT} (evaluator's figure in \`published\`)` });
+    }
+    const careers = onPath.filter((r) => CAREER.test(r.label));
+    if (careers.length) {
+      checked++;
+      const c = m.byId.get("career_change_value");
+      if (!c || !path.has(c.id) || !sameFormula(c.formula, CAREER_CHANGE_FORMULA))
+        violations.push({ inv: "INV-12", model: m.id, where: "career_change_value", detail: `values career changes ("${careers[0].label}") but not through the shared career_change_value = ${CAREER_CHANGE_FORMULA}` });
+    }
+  }
+  return {
+    id: "INV-12", title: "Money moved and career changes are valued one way", status: "partial", checked, violations,
+    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word; and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av), inv11(lib)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
