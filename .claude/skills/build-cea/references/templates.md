@@ -86,7 +86,7 @@ docs/normalization.md's, not repeated here.
 
 Chain: people reached × years of protection × baseline mortality the intervention can reduce ×
 relative risk reduction = deaths averted, valued with GiveWell's weights
-(`@moral_weights.uov_per_death_under5` / `uov_per_death_over5`) times `$life_value_multiplier`; plus
+(`@moral_weights.<age band>`: under five, 5–14, 15–49 or 50–74 by the age of the deaths, `uov_per_death_over5` only for unknown ages) times `$life_value_multiplier`; plus
 illness as a share of that value (`morbidity_value_ratio`, never DALYs × `$uov_per_daly`) and
 later-life income (yearly ln-consumption gain, discounted with `$discount_rate` over its delay and
 duration, × `$uov_per_ln_consumption`).

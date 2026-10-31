@@ -35,10 +35,14 @@ const fmtNum = (x: number) => formatValue(x, Math.abs(x) > 0 && Math.abs(x) < 0.
 
 /** A formula with every reference named and linked: rows open in the tree, assumptions go to their slider. */
 export function Formula({ text, model }: { text: string; model: ResolvedModel }) {
-  const parts = text.split(/(#[a-z0-9]+(?:-[a-z0-9]+)*|@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*|\$?[a-z_][a-z0-9_]*)/gi);
+  const parts = text.split(/(#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?|@[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*|\$?[a-z_][a-z0-9_]*)/gi);
   return (
     <code className="formula">
       {parts.map((p, i) => {
+        if (p.startsWith("#") && p.includes(":")) {
+          const c = lib.charities.get(p.slice(1).split(":")[1]);
+          return c ? <a key={i} href={`/${c.id}`} title="One evaluator's programme-weighted figure for a charity, live" className="ref ref-m">{modelLabel(p.slice(1))}</a> : p;
+        }
         if (p.startsWith("#")) {
           const o = lib.models.get(p.slice(1));
           return o ? <a key={i} href={modelUrl(lib, o)} title="Another model's result, live" className="ref ref-m">{liveLabel(o.name)}</a> : p;
@@ -61,7 +65,12 @@ export function Formula({ text, model }: { text: string; model: ResolvedModel })
 const assumptionRow = (id: string) => lib.assumptions.rows.find((r) => r.id === id);
 /** A model read live by another (`#id`): its name, as a result. */
 const liveLabel = (name: string) => `${name}: result per dollar, live`;
-const modelLabel = (id: string) => liveLabel(lib.models.get(id)?.name ?? id);
+const modelLabel = (id: string) => {
+  if (!id.includes(":")) return liveLabel(lib.models.get(id)?.name ?? id);
+  // `#owner:charity`: one evaluator's figure for a charity, weighted over its programmes as the rankings make it.
+  const [owner, charity] = id.split(":");
+  return `${lib.charities.get(charity)?.name ?? charity} (${lib.owners.get(owner)?.name ?? owner}), programme-weighted, live`;
+};
 const rowLabel = (m: ResolvedModel, id: string) => m.byId.get(id)?.label || id.replace(/_/g, " ");
 
 /** A sub-formula read in words: "Cost per net + Delivery cost", shortened when long. */
@@ -224,6 +233,16 @@ function overwriteOf(ctx: Ctx, n: TreeNode): { theirs: number; ours: number; for
   }
 }
 
+/** Shared facts and fixed rates of kind judgment a calculated row reads: a judgment of ours or an
+ * evaluator's, fixed rather than a slider, which the row's page must still show as a judgment. */
+function judgmentsRead(ctx: Ctx, n: TreeNode): { label: string; href: string }[] {
+  const r = n.rowId ? ctx.m.byId.get(n.rowId) : n.named ? ctx.m.byId.get(n.named) : undefined;
+  if (!r?.node) return [];
+  const facts = r.factDeps.map((k) => lib.facts.get(k)).filter((f) => f?.kind === "judgment").map((f) => ({ label: `${f!.group}: ${f!.label}`, href: `/data#f-${f!.key}` }));
+  const fixed = r.assumptionDeps.map(assumptionRow).filter((a) => a?.fixed && a.kind === "judgment").map((a) => ({ label: a!.label, href: `/data#a-${a!.id}` }));
+  return [...facts, ...fixed];
+}
+
 /** What a node is, in a word or two, beside its label. */
 function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   const row = n.rowId ? ctx.m.byId.get(n.rowId) : undefined;
@@ -231,14 +250,22 @@ function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   const e = editable(ctx, n);
   if (e && e.id in ctx.edits) return <span id={id} className="tn-tag tn-tag-edited">your edit</span>;
   if (overwriteOf(ctx, n)) return <span id={id} className="tn-tag tn-tag-changed">changed for consistency</span>;
-  if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed)
-    return <span id={id} className="tn-tag"><span className="kind-dot kind-estimate" aria-hidden /><a href={`/data#a-${n.refId}`}>fixed rate</a></span>;
+  if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed) {
+    const judgment = assumptionRow(n.refId!)?.kind === "judgment";
+    return <span id={id} className={`tn-tag ${judgment ? "tn-tag-judgment" : ""}`}><span className={`kind-dot kind-${judgment ? "judgment" : "estimate"}`} aria-hidden /><a href={`/data#a-${n.refId}`}>{judgment ? "fixed judgment" : "fixed rate"}</a></span>;
+  }
   if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your value</span>;
   if (n.type === "model") return <span id={id} className="tn-tag tn-tag-f">live model</span>;
   if (n.type === "fact") {
     const count = readers(n.refId!).length;
+    if (lib.facts.get(n.refId!)?.kind === "judgment")
+      return <span id={id} className="tn-tag tn-tag-judgment"><span className="kind-dot kind-judgment" aria-hidden />{count > 1 ? `shared judgment · ${count} models` : "shared judgment"}</span>;
     return <span id={id} className="tn-tag tn-tag-f">{count > 1 ? `shared · ${count} models` : "shared fact"}</span>;
   }
+  if (isBranch(n) && row?.kind === "judgment")
+    return <span id={id} className="tn-tag tn-tag-judgment"><span className="kind-dot kind-judgment" aria-hidden />judgment</span>;
+  if (isBranch(n) && judgmentsRead(ctx, n).length)
+    return <span id={id} className="tn-tag tn-tag-judgment"><span className="kind-dot kind-judgment" aria-hidden />rests on a judgment</span>;
   if (n.type === "input" && row) {
     return (
       <span id={id} className={`tn-tag tn-tag-${row.kind ?? "observed"}`}>
@@ -283,6 +310,8 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
         {f?.source?.title && <> Source: {f.source.url ? <a href={f.source.url}>{f.source.title}</a> : f.source.title}.</>}
       </p>,
     );
+    if (f?.kind === "judgment")
+      lines.push(<p key="fj" className="tn-judgment">A judgment, not a measurement: fixed in the shared data rather than offered as a slider, with its reasons and range below.</p>);
   } else if (n.type === "model") {
     const o = lib.models.get(n.refId!);
     lines.push(
@@ -295,6 +324,14 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
   } else if (n.type === "const") {
     lines.push(<p key="c">A number written into {parentLabel ? <>the formula for {parentLabel}</> : "the formula"} itself, such as a unit conversion or a fixed adjustment.</p>);
   }
+  const judged = n.type !== "fact" ? judgmentsRead(ctx, n) : [];
+  if (judged.length)
+    lines.push(
+      <p key="jr" className="tn-judgment">
+        Rests on {judged.length === 1 ? "a judgment" : "judgments"}:{" "}
+        {judged.map((j, i) => <Fragment key={j.href}>{i ? (i === judged.length - 1 ? " and " : ", ") : ""}<a href={j.href}>{j.label}</a></Fragment>)}.
+      </p>,
+    );
   const ow = overwriteOf(ctx, n);
   if (ow)
     lines.push(

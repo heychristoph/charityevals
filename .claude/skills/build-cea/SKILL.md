@@ -10,8 +10,12 @@ any two models of a family read side by side, and comparable with every evaluato
 
 1. **Comparable**: the family's template, its canonical row ids, the shared `$assumptions` and
    `@facts`, and the standard steps of **docs/normalization.md** (read it: the units, the species step,
-   one SADs figure per change, the shared levers). Two models of a family differ only where the
-   charities differ.
+   one SADs figure per change, the shared levers, the shared versions in 2.7, money moved in 2.8, won
+   reforms in 2.9, the invariants in section 3). **One consistent way**: every conversion, value of a
+   death, discount, cash benchmark or currency rate is the site's shared one. Two models of a family
+   differ only where the charities differ.
+4. **Best guesses**, not conservative cases: the central value is the most likely one; caution goes
+   into the range.
 2. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
    assumption or fact, or a labelled judgment with a reason and a low/high range. Formulas hold no
    constants beyond unit conversions (`ALLOWED_LITERALS`, src/engine/lint.ts).
@@ -71,16 +75,30 @@ Copy `templates/<family>.json` to the output path and fill it in.
   `source.quote` or `source.page`, with the source's interval as the range. `judgment` needs a
   low/best/high range and an explainer giving the reason and the anchor (a reference class: another
   model's value, a published estimate).
-- **Shared numbers** come from `@facts` and `$assumptions`, never retyped (INV-4): GiveWell's moral
-  weights `@moral_weights.*` times `$life_value_multiplier`, SADs per change `@sad_factors.*`, WELLBY
-  conversions `@wellby_factors.*`, country data `@<country>.*`. Missing shared data goes into the
+- **Shared numbers** come from `@facts` and `$assumptions`, never retyped (INV-4) nor written into a
+  formula beside a lever (`8 * $life_value_multiplier`, INV-2d): deaths at `@moral_weights.<age band>`
+  (the band of the death's age; an `@death_ages` mix for deaths of many ages) times
+  `$life_value_multiplier`, SADs per change `@sad_factors.*`, depression `@depression.*` (PHQ-9 points,
+  `phq9_sd` per SD), WELLBY conversions and therapy spillovers `@wellby_factors.*`, GiveWell's house
+  constants `@givewell_shared.*`, disability weights `@gbd_disability_weights.*`, pledges kept
+  `@sad_factors.commitment_fulfilment_*`, diet change `@sad_factors.production_response`, country data
+  `@<country>.*`. A concept another model uses at another value is INV-13: use the shared figure or say
+  why the place or year differs. Missing shared data goes into the
   right facts file with a source and range (a new SADs figure with a `change` note). A new assumption
   in assumptions/default.json only for a cross-model value judgment no fact can settle (`fixed: true`
   when evidence sets it and it shouldn't be a slider); never relabel existing ones.
 - **The standard steps** are in the template; keep them intact:
-  - future benefits read `$discount_rate` (`pv_annuity_due`, the wellbeing discount factor); never
-    type in a present value worked out elsewhere;
-  - no exchange rate between outcomes inside the model (`$uov_per_daly`, `$uov_per_wellby`,
+  - every future benefit reads `$discount_rate` (`pv_annuity_due`, the wellbeing discount factor),
+    including the wait before it starts; never type in a present value worked out elsewhere;
+  - a won reform (pledge, law, regulation) counts `$win_years_counted` years, the wait until it takes
+    effect discounted (normalization.md 2.9); coalition credit follows `$resource_shares`;
+  - a cost per outcome that is the charity's past spending over its past wins (campaigns, policy,
+    research, money moved) is multiplied by `@meta.marginal_vs_past_average` in an `ours` section;
+  - money moved or raised goes through the shared rows of src/engine/moved-money.ts
+    (`python3 scripts/moved-money.py`), destinations read live with `#model-id` (INV-12);
+  - deaths in a `wellbeing` model are valued in units of value and enter WELLBYs only through
+    `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` (INV-17);
+  - no exchange rate between outcomes inside the model (`$uov_per_daly`, `$daly_per_wellby`,
     `$daly_per_sad`, `$chicken_vs_person`): the output unit's conversion does that (INV-2);
   - animal families: SADs → `sads_<species>` → `ced_<species>` (the formula exactly as in the
     template) → `ced_per_donor_dollar`, species weights only there (INV-3); add a species pair per
@@ -89,6 +107,8 @@ Copy `templates/<family>.json` to the output path and fill it in.
     contributors' spending (references/templates.md, convention 2).
 - **Adjustments**: one question each; an RCT's effect is already net of its control group.
   Say what isn't adjusted for.
+- **Summary**: if the result is more than ten times the median of its peers (same cause and
+  intervention), the `summary` says why ("more than ten times its peers because …", INV-15).
 - **Money**: USD of the year spent; other currencies through an input row `fx_<cur>_per_usd`.
 - **Write-up** `writeups/<id>.md` when this is the charity's main model, following import-cea
   section 7 (live figures, plain summary first, results in years of healthy life per $1,000), plus a
@@ -124,8 +144,8 @@ Record the rounds (counts by severity, what changed) in the write-up or the eval
 ## 5. Verify and report
 
 `npx tsx scripts/check.ts <id>`, `npm run check`, `npx vitest run`, `npx tsc --noEmit`,
-`npx tsx scripts/normalization-audit.ts` (no violation for the model; waivers only as in import-cea
-section 8), and the pages (`npm run dev`: `/<charity>`, `/<id>`). In an evaluation sandbox without
+`npx tsx scripts/normalization-audit.ts` (INV-1 … INV-17 and SAME-CHANGE: no violation for the model;
+waivers only for checked false positives, with reasons, as in import-cea section 8; the allowlist stays `{}`), and the pages (`npm run dev`: `/<charity>`, `/<id>`). In an evaluation sandbox without
 bulk models, run only `npx tsx scripts/check.ts <id>` and skip the page.
 
 Report: the result (native unit, years of healthy life per $1,000, joint low–high), the top 3

@@ -28,14 +28,14 @@ export const GET: APIRoute = () => {
 
   const body = `# charityevals
 
-> Open cost-effectiveness analyses (CEAs) of charities. Each model re-implements a published evaluator's analysis (GiveWell, Animal Charity Evaluators, Happier Lives Institute, Founders Pledge) or is charityevals' own where none exists. Every input has a source, a low/best/high range, a kind (observed, estimate or judgment) and an explanation. Visitors can change the shared assumptions (moral weights, exchange rates between causes) and every model recomputes.
+> Open cost-effectiveness analyses (CEAs) of charities. Each model re-implements a published evaluator's analysis (GiveWell, Animal Charity Evaluators, Happier Lives Institute, Founders Pledge) or is charityevals' own where none exists. Every input has a source, a low/best/high range, a kind (observed, estimate or judgment) and an explanation. Visitors can change the shared value judgments (moral weights, exchange rates between outcomes, the discount rate, years a won reform counts, deaths per tonne of CO2) and every model recomputes; each evaluator's own conversions are replaced by the site's shared ones in charityevals' view, with the evaluator's figure kept in its own view.
 
 Results are given in years of healthy life per $1,000 donated (DALYs averted, with income, wellbeing and animal outcomes converted at the shared exchange rates), on the site's default assumptions; GiveDirectly's cash transfers come to ${formatYears(defaultYears(lib.models.get(lib.assumptions.common.benchmark)!) ?? NaN)}; each page shows the plausible range and what drives it. The evaluators have not reviewed or endorsed this site. Estimates are for research, not financial advice.
 
 ## Key pages
 
 - [Rankings](${abs("/")}): every charity, ranked by good done per dollar, re-ranked live by your assumptions
-- [Shared data](${abs("/data")}): the fixed exchange rates and shared data every model reads; the adjustable values sit beside the rankings
+- [Shared data](${abs("/data")}): the fixed rates, the fixed judgments and the shared data every model reads; the adjustable values sit beside the rankings
 - [Method](${abs("/method")}): how models are built, checked against their sources, and compared across causes
 - [About](${abs("/about")}): who runs the site and how to contribute
 - [Source code and model files](${repo}): every model is a JSON file in a public git repository
