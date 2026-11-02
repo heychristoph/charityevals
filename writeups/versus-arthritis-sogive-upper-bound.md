@@ -1,6 +1,6 @@
 ### Summary
 
-Versus Arthritis (formerly Arthritis Research UK) funds arthritis research and runs information, support and awareness work in the UK. SoGive published only an upper bound for it: at most about £4,000 per life-saved equivalent, under assumptions SoGive itself thinks are unlikely. On our scale that bound is **<span data-figure="headline" data-model="versus-arthritis-sogive-upper-bound">8.4</span> years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
+Versus Arthritis (formerly Arthritis Research UK) funds arthritis research and runs information, support and awareness work in the UK. SoGive published only an upper bound for it: at most about £4,000 per life-saved equivalent, under assumptions SoGive itself thinks are unlikely. On our scale that bound is **<span data-figure="headline" data-model="versus-arthritis-sogive-upper-bound">7.6</span> years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its calculation. SoGive rates Versus Arthritis "Not Recommended (tentative)".
 
@@ -14,7 +14,7 @@ SoGive then says it is "tempted to believe these do not achieve an outcome as go
 
 ### Our steps
 
-Back to healthy years at SoGive's own 50 per life, pounds to dollars at the 2021 rate, the research part discounted for a 15-year lag, and staff pay when credit by share of resources is on.
+Back to healthy years at SoGive's own 50 per life, pounds to dollars at the 2021 rate, the research part discounted for a 15-year lag and counted at the share of a past average set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default: the credit is a share of what all arthritis research achieves, an average, and the next dollar's research does less), and staff pay when credit by share of resources is on.
 
 ### Why it isn't ranked
 

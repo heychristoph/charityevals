@@ -196,6 +196,12 @@ export const Model = z
      * template: reusable structure that others extend, not ranked by itself. */
     kind: z.enum(["charity", "variant", "template"]),
     cause: Cause,
+    /** What the bottom line's dollar is (docs/normalization.md 2.10, INV-18): `past_average`, an
+     * organisation's (or a field's) past spending over everything it achieved, which reads the slider
+     * `$marginal_vs_past_average`; `marginal`, the evaluator's estimate of the next grant or of planned
+     * work; `unit_cost`, a price per item delivered that more money buys again. Neither of the last two
+     * reads the slider. Required on every charity model; variants inherit it. */
+    estimate_basis: z.enum(["past_average", "marginal", "unit_cost"]).optional(),
     extends: z.string().optional(),
     /** For charityevals' own models: the build-cea template family the model follows. */
     template: TemplateFamily.optional(),

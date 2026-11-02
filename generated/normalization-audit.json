@@ -66,7 +66,7 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 38456,
+   "input equals a shared value but its label doesn't resemble the shared one's": 37320,
    "input equals a house-constant fact but under another label": 16600,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 6565,
    "round value (one significant digit) and labels only loosely alike": 90,
@@ -236,6 +236,16 @@
   "checked": 13,
   "violations": [],
   "how": "WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in uov_valued_outside_wellbys and put it into WELLBYs only in wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with uov_valued_outside_wellbys = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest doesn't move with $life_value_multiplier.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-18",
+  "title": "Past averages, and only past averages, read the next-dollar slider",
+  "status": "checked",
+  "checked": 348,
+  "violations": [],
+  "how": "Every model with an output (variants inherit the field) declares estimate_basis. past_average: a row on the path to the output reads $marginal_vs_past_average, halving it lowers our headline, and every row reading it has the evaluator's value in `published` (or the evaluator pins it), so the evaluator view keeps the average. marginal and unit_cost: no row reads $marginal_vs_past_average.",
   "waived": 0,
   "failing_models": []
  }

@@ -93,7 +93,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - a won reform (pledge, law, regulation) counts `$win_years_counted` years, the wait until it takes
     effect discounted (normalization.md 2.9); coalition credit follows `$resource_shares`;
   - a cost per outcome that is the charity's past spending over its past wins (campaigns, policy,
-    research, money moved) is multiplied by `@meta.marginal_vs_past_average` in an `ours` section;
+    research, money moved, a service's lives saved) is multiplied by the slider `$marginal_vs_past_average`
+    in an `ours` section (`published` 1); every charity model sets `estimate_basis` (`past_average`,
+    `marginal` or `unit_cost`; normalization.md 2.10, INV-18) and only `past_average` reads the slider;
   - money moved or raised goes through the shared rows of src/engine/moved-money.ts
     (`python3 scripts/moved-money.py`), destinations read live with `#model-id` (INV-12);
   - deaths in a `wellbeing` model are valued in units of value and enter WELLBYs only through
