@@ -325,7 +325,8 @@ function sharedNumbers(lib: Library): Shared[] {
     const values = typeof v === "number" ? [v] : [v.low, v.best, v.high].filter((x): x is number => typeof x === "number");
     const file = f.key.split(".")[0];
     const same = SAME_LABEL_FILES.has(file);
-    out.push({ ref: `@${f.key}`, label: f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
+    // A house constant's plain label is ours; copies in the sheets carry the sheet's own wording, kept in source.quote.
+    out.push({ ref: `@${f.key}`, label: same ? f.source?.quote ?? f.label : f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
   }
   for (const a of lib.assumptions.rows) {
     if (a.format === "toggle") continue;
