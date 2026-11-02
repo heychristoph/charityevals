@@ -929,6 +929,8 @@ some models, so sliders move some charities and not their neighbours.
     slider, and add, per past-average model, the organisation's spending at the start and end of the period
     the estimate averages over (B₀, B, from annual reports); under log returns the ratio is
     (1 − B₀/B) / ln(B/B₀), shown beside the slider's value, used only if the owner adopts it.
+    **Decided 2026-11-02: not now.** One slider for every past-average model; revisit if an evaluator
+    publishes evidence that the ratio depends on growth, age or size.
 
 ### Decided 2026-10-30 (owner)
 
