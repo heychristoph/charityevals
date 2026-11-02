@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv15, inv16, inv17, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv15, inv16, inv17, inv18, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -151,6 +151,27 @@ describe("invariant checks", () => {
     const deathsPart = (a: Record<string, number>) => headline(l, m, a) - headline(l, m, a, { uov_valued_outside_wellbys: 0 });
     expect(deathsPart({ ...av, daly_per_wellby: av.daly_per_wellby * 3 })).toBeCloseTo(deathsPart(av), 9);
     expect(deathsPart(av)).toBeCloseTo((0.0001 * 116.25262 / av.uov_per_daly) * 1000, 6);
+  });
+
+  it("INV-18 wants every past average, and nothing else, to read the next-dollar slider", () => {
+    const x = { id: "x", label: "Pledges won per dollar of past spending", value: 2, kind: "observed", explainer: "Test input." };
+    const slider = { id: "marginal_vs_past_average", label: "Next dollar vs average", formula: "$marginal_vs_past_average", published: 1, explainer: "Changed for consistency: the evaluator publishes the average." };
+    const m = (id: string, estimate_basis: string | undefined, rows: object[]) => ({ ...base, id, ...(estimate_basis ? { estimate_basis } : {}), rows });
+    const good = m("good", "past_average", [x, slider, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
+    const missed = m("missed", "past_average", [x, { id: "out", label: "out", formula: "x" }]);
+    const twice = m("twice", "marginal", [x, slider, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
+    const both = m("both", "past_average", [x, { ...slider, published: undefined }, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
+    const unstated = m("unstated", undefined, [x, { id: "out", label: "out", formula: "x" }]);
+    const l = buildLibrary([{ ...base, estimate_basis: "unit_cost" }, good, missed, twice, both, unstated], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv18(l).violations.map(keyOf).sort()).toEqual([
+      "both marginal_vs_past_average evaluator view", "missed $marginal_vs_past_average", "twice marginal_vs_past_average $marginal_vs_past_average", "unstated estimate_basis",
+    ]);
+    // On the site: every charity model says what its dollar is, and the slider's readers are exactly the past averages.
+    const charities = [...lib.models.values()].filter((t) => t.kind === "charity");
+    expect(charities.filter((t) => !t.estimate_basis).map((t) => t.id)).toEqual([]);
+    const readers = charities.filter((t) => t.rows.some((r) => r.assumptionDeps.includes("marginal_vs_past_average"))).map((t) => t.id).sort();
+    expect(readers).toEqual(charities.filter((t) => t.estimate_basis === "past_average").map((t) => t.id).sort());
   });
 
   it("INV-9b flags years of benefit summed at face value, not discounted ones or cost years", () => {

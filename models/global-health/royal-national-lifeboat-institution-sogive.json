@@ -3,6 +3,7 @@
   "name": "Royal National Lifeboat Institution (SoGive, 2020)",
   "kind": "charity",
   "cause": "global-health",
+  "estimate_basis": "past_average",
   "charity": "royal-national-lifeboat-institution",
   "owner": "sogive",
   "summary": "Lifeboats, lifeguards and water-safety campaigns around the coasts of the UK and Ireland. SoGive's estimate of the RNLI's cost per life saved in 2019, from its annual report, rebuilt from SoGive's analysis.",
@@ -294,13 +295,22 @@
       "explainer": "With credit by share of resources, staff's forgone pay and volunteers' time count as part of the cost, and they get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "staff_pay",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "$marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Your value, shared with every model built on an organisation's past average (Your values: \"How much the next dollar does compared with the average dollar so far\"): SoGive's figure is the RNLI's 2019 spending on lifeboats, lifeguards and safety campaigns over the lives it counts as saved that year, an average; the stations and campaigns already cover the UK and Irish coasts, so a further dollar saves fewer lives than the average dollar did. 50% by default (our judgment), from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "uov_per_dollar",
       "section": "staff_pay",
       "label": "Units of value per dollar donated",
       "format": "small",
       "unit": "units of value per $",
-      "formula": "uov_per_dollar_cash * donor_cost_share",
-      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "uov_per_dollar_cash * donor_cost_share * marginal_vs_past_average",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). A marginal dollar is counted at the share of the past average you set (row above)."
     }
   ],
   "output": {
