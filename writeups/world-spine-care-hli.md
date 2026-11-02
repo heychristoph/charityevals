@@ -11,7 +11,7 @@ World Spine Care runs clinics in places such as Botswana, Ghana, India and the D
 ### How the impact happens
 
 1. **Effect:** people with chronic musculoskeletal pain are 1.17 points less satisfied with life (0–10 scale) than the general public (Boonstra et al. 2013). HLI assumes a year of treatment removes that gap for the year.
-2. **Household:** HLI adds its psychotherapy spillover, 16.24% of the patient's gain for each of 3.33 other household members.
+2. **Household:** HLI adds its psychotherapy spillover, 16.24% of the patient's gain for each other household member: 3.33 in HLI's figure for low- and middle-income countries, 2.4 in our view (below).
 3. **Replication:** HLI's standard 0.51 adjustment, giving 0.92 WELLBYs per patient.
 4. **Cost:** $44 to $63 to treat a patient for a year, from the charity's clinic data ($13–17 a visit); HLI's generous estimate assumes three visits a patient.
 
@@ -28,6 +28,7 @@ HLI's figures come first, ending at WELLBYs per $1,000 at the middle cost, $53.5
 ### Where we differ from HLI
 
 - **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, set so that a fall in depression counts the same in HLI's analyses as in the site's other depression models (0.065 healthy years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 0.575 healthy years per WELLBY, nine times higher; the evaluator view converts at that rate.
+- **Household size (changed for consistency):** every model reads one household size per place. HLI uses an average for low- and middle-income countries (3.33 other members); we take the two countries whose clinic data HLI uses, Botswana (3.3 people, 2022 census) and the Dominican Republic (3.5, DHS), less the patient: 2.4 other members. The evaluator view keeps HLI's 3.33.
 - **A central figure.** HLI gives the range; we use the middle of its cost range.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution: here large, because most clinicians are volunteers from rich countries on below-market stipends.
 

@@ -3,7 +3,7 @@ Global health organisation working on malaria vaccines, perennial malaria chemop
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Threshold cost-effectiveness analysis: PATH Accelerator Grant for Malaria Vaccines, January 2025](/path/path-threshold-accelerator-malaria-vaccines) | GW | January 2025 | <span data-figure="headline" data-model="path-threshold-accelerator-malaria-vaccines">15</span> | 161, 1 kept fixed |
+| [Threshold cost-effectiveness analysis: PATH Accelerator Grant for Malaria Vaccines, January 2025](/path/path-threshold-accelerator-malaria-vaccines) | GW | January 2025 | <span data-figure="headline" data-model="path-threshold-accelerator-malaria-vaccines">15</span> | 162, 1 kept fixed |
 | [PMC RTSS Threshold rough estimate, 2023](/path/path-pmc-rtss-threshold-2023) | GW | February 2023 | <span data-figure="headline" data-model="path-pmc-rtss-threshold-2023">18</span> | 102, 1 kept fixed |
 | [PMC DRC pilot grant cost-effectiveness analysis](/path) | GW | November 2022 | <span data-figure="headline" data-model="path-pmc-drc-pilot">38</span> | 147, 21 kept fixed |
 | [RTS,S for pilot comparison areas cost-effectiveness analysis - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | GW | January 2022 | <span data-figure="headline" data-model="path-rts-s-pilot-comparison-areas-based-on">21</span> | 265, 14 kept fixed |
