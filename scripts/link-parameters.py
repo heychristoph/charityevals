@@ -2,7 +2,15 @@
 hand-built ones: visitors' moral weights, discount rate and DALY value move them, and data several
 sheets share lives once in facts/.
 
-    python3 scripts/link-parameters.py            # all of models/grants/givewell/
+    python3 scripts/link-parameters.py --only <model-id,...>  # newly imported sheets: assumptions only
+    python3 scripts/link-parameters.py --rebuild              # all of models/grants/givewell/, facts too
+
+First import only. Since then, other scripts (link-givewell-shared.py, link-fx.py, the judgment-kind
+and staff-pay passes) and hand edits have linked rows to shared facts this script doesn't know; a rerun
+turns some of those links back into typed-in numbers. So it refuses to run without --rebuild, and even
+then leaves facts/givewell_common.json and facts/givewell_shared.json, which other scripts own, alone.
+To link a newly imported sheet, use --only (scripts/import-givewell-grants.py does), then
+link-givewell-shared.py and link-fx.py for its shared figures.
 
 Assumptions. In every model:
 - a value of averting a death (GiveWell's moral weights) becomes `v * $life_value_multiplier`;
@@ -19,7 +27,7 @@ facts/givewell_<country>.json (or facts/givewell.json) and the models read it as
 are rewritten on every run. Inputs that look like judgment calls (adjustments, weights, probabilities)
 stay in their models.
 """
-import json, re, collections
+import json, re, collections, sys
 from pathlib import Path
 
 MODELS = Path("models/grants/givewell")
@@ -178,12 +186,23 @@ def country_of(label):
     return None, None
 
 
+# The fact files this script writes: facts/givewell.json and facts/givewell_<country>.json. Other
+# scripts own facts/givewell_common.json (link-givewell-shared's repeated figures, relabelled by hand)
+# and facts/givewell_shared.json; a rerun must leave them and their links alone.
+NOT_OURS = {"givewell_common", "givewell_shared"}
+
+
+def ours(fid: str) -> bool:
+    return fid.startswith("givewell") and fid not in NOT_OURS
+
+
 def main():
     models = {p: json.loads(p.read_text()) for p in sorted(MODELS.glob("*.json"))}
     # Rerunnable: fact links from an earlier run go back to plain inputs before the facts are rebuilt.
     for m in models.values():
         for r in m["rows"]:
-            if r.get("formula", "").startswith("@givewell") and "expected" in r:
+            f = r.get("formula", "")
+            if f.startswith("@givewell") and ours(f[1:].split(".")[0]) and "expected" in r:
                 r["value"] = r.pop("expected"); r.pop("formula"); r["kind"] = "estimate"
     linked = {p: link_assumptions(m) for p, m in models.items()}
     rescaled = sum(live_benchmark(m) for m in models.values())
@@ -214,16 +233,33 @@ def main():
         for p, r in uses:
             r.pop("value"); r.pop("kind", None)
             r["formula"] = f"@{fid}.{key}"; r["expected"] = v
-    for old in FACTS.glob("givewell*.json"): old.unlink()
+    for old in FACTS.glob("givewell*.json"):
+        if ours(old.stem): old.unlink()
     for f in files.values():
         f.pop("keys")
         (FACTS / f"{f['id']}.json").write_text(json.dumps(f, indent=1, ensure_ascii=False) + "\n")
     for p, m in models.items():
-        p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
+        p.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
     print(f"{sum(1 for n in linked.values() if n)} of {len(models)} models linked to assumptions ({sum(linked.values())} rows);",
           f"{rescaled} rescaled by a live cash benchmark;",
           f"{sum(len(f['rows']) for f in files.values())} shared facts in {len(files)} files")
 
 
+def only(ids: set[str]) -> None:
+    """Assumption links and the live benchmark for these models alone; facts are left as they are."""
+    for p in sorted(MODELS.glob("*.json")):
+        m = json.loads(p.read_text())
+        if m["id"] not in ids: continue
+        n = link_assumptions(m); live_benchmark(m)
+        p.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
+        print(m["id"], f"{n} rows linked to assumptions")
+
+
 if __name__ == "__main__":
+    if "--only" in sys.argv:
+        only(set(sys.argv[sys.argv.index("--only") + 1].split(",")))
+        sys.exit()
+    if "--rebuild" not in sys.argv:
+        sys.exit("link-parameters.py rebuilds every GiveWell fact link from scratch and undoes links made since "
+                 "the first import (see the docstring). Pass --rebuild if that is what you want.")
     main()
