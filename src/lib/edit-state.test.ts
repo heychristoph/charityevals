@@ -44,6 +44,18 @@ describe("edits in the URL", () => {
     expect(editsFor(m, { ...ok, out: 1, missing: 2, "@kenya.gdp": 4 })).toEqual(ok);
   });
 
+  it("keeps edits to a fact only the unit's conversion reads, given the library", async () => {
+    const { editsFor } = await import("./edit-state");
+    const facts = [{ id: "c", label: "C", rows: [{ id: "extra", label: "Extra", value: 0.5, kind: "judgment", explainer: "x" }] }];
+    const lib = buildLibrary([{
+      id: "toy", name: "Toy", cause: "climate", kind: "charity", output: { row: "out", unit: "t", label: "x" },
+      rows: [{ id: "out", label: "Out", value: 1, kind: "observed", explainer: "x" }],
+    }], { groups: [], rows: [], units: { t: { label: "t", short: "t", to_common: "1 + @c.extra" } }, common: { unit: "t", benchmark: "toy" } }, facts);
+    const m = lib.models.get("toy")!;
+    expect(editsFor(m, { "@c.extra": 1 }, lib)).toEqual({ "@c.extra": 1 });
+    expect(editsFor(m, { "@c.extra": 1 })).toEqual({});
+  });
+
   it("moves an edit to a pass-through row onto what it copies, and drops what applies nowhere from the URL", async () => {
     const { editsFor, readEdits } = await import("./edit-state");
     const lib = buildLibrary([{

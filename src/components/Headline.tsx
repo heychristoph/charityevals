@@ -105,7 +105,7 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   const model = useMemo(() => modelOf(id, bulk), [id, bulk]);
   const av = useAssumptionValues();
   const urlEdits = useEdits();
-  const edits = useMemo(() => editsFor(model, urlEdits), [model, urlEdits]);
+  const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
   const years = comparable(lib, model);
   const { results } = useResults();
