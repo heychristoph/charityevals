@@ -352,8 +352,8 @@ Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 
   $1 a tonne), up to 0.0055 (about 2 days, 5.5 per $1,000) at weight 1. Undiscounted (0%) the ends
   are 0.0016 and 0.0070.
 - Cross-checks, not read by models: the social cost of carbon, $185/t (Rennert et al. 2022), of which
-  $90 is the same heat deaths valued at income-weighted, 2%-discounted prices (`@climate.social_cost_of_carbon_usd`);
-  Giving What We Can's 2016 estimate, 258,200 tonnes per life (`@climate.tco2e_per_death_gwwc_2016`),
+  $90 is the same heat deaths valued at income-weighted, 2%-discounted prices (Rethink Priorities' re-run; a cross-check, no longer stored as a fact since no model reads it);
+  Giving What We Can's 2016 estimate, 258,200 tonnes per life (a cross-check, no longer stored as a fact),
   about 50 times below our default because it leaves out air pollution.
 - What it leaves out: damage that isn't death (crops, income, migration), tipping points and growth
   effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution per
@@ -402,7 +402,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | A death in a GiveWell sheet by finer age | `@moral_weights.givewell_age_<group>` (early, late and post-neonatal, 1–4, then five-year groups to 85+) and `givewell_neonatal` (84), × `$life_value_multiplier`; a sheet's age-weighted figure for a programme's deaths (diarrhoeal deaths, Bangladesh's over-fives, alcohol deaths) is the band's value × a measured `*_age_mix` row | 83.6 … 134.3 … 12.4 UoV | GiveWell's 2020 moral weights by age, as its sheets carry them; INV-2d |
 | GiveWell's house constants | `@givewell_shared.*`: resource sharing (2), treatment costs averted (20%), investment of income gains (5%; nets 2.5%, vitamin A 3%, deworming 10%), years long-term gains last (40) and until they start, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception by country (deaths part × `$life_value_multiplier`), a stillbirth (21), indirect deaths per diarrhoea death, GiveWell's discount rate for figures it states discounted | as listed | facts/givewell_shared.json, GiveWell's current sheets; every GiveWell sheet, and every other evaluator's true copy (SoGive's deworming, Founders Pledge's LEEP, Ambitious Impact's LaBri and Lead Research for Action) reads them; INV-13 |
 | Disability weights | `@gbd_disability_weights.*` (tuberculosis, HIV on and off treatment, near vision loss) and `@depression.dw_*` | GBD 2019 | facts/gbd_disability_weights.json; every sheet that types a GBD weight reads it (Novah's depression and HIV weights since late October 2026) |
-| Figures GiveWell's sheets share | `@givewell_common.*`: 298 figures typed under the same label into five or more of GiveWell's sheets (and SoGive's copies): supplemental adjustments, the GiveDirectly investment block, vaccine and net parameters, GBD death rates by age and cause (Bauchi state, the first column of GiveWell's New Incentives sheets), trial data | as typed | facts/givewell_common.json, generated from the sheets (INV-14); no value changed. Since 2026-11-02 each has a plain label, a unit, an explainer (what it is, where GiveWell uses it, the sheet and cell it is read from) and a section (/data groups them: vaccines, malaria, water, syphilis, deworming, cash, government spending, funding risks, value of information, development scoring, discount rate); the sheet's own row label is kept in `source.quote`, which INV-4 matches copies against. Kinds were reviewed by hand: 113 judgments (GiveWell's adjustments, weights, guesses and assumed shares), 94 estimates (studies, GBD, derived figures), 91 observed (survey coverage, trial counts, programme parameters, spending shares) |
+| Figures GiveWell's sheets share | `@givewell_common.*`: 293 figures typed under the same label into five or more of GiveWell's sheets (and SoGive's copies): supplemental adjustments, the GiveDirectly investment block, vaccine and net parameters, GBD death rates by age and cause (Bauchi state, the first column of GiveWell's New Incentives sheets), trial data | as typed | facts/givewell_common.json, generated from the sheets (INV-14); no value changed. Since 2026-11-02 each has a plain label, a unit, an explainer (what it is, where GiveWell uses it, the sheet and cell it is read from) and a section (/data groups them: vaccines, malaria, water, syphilis, deworming, cash, government spending, funding risks, value of information, development scoring, discount rate); the sheet's own row label is kept in `source.quote`, which INV-4 matches copies against. Kinds were reviewed by hand: 109 judgments (GiveWell's adjustments, weights, guesses and assumed shares), 94 estimates (studies, GBD, derived figures), 90 observed (survey coverage, trial counts, programme parameters, spending shares) |
 | Staff pay below market | `@staff_pay.*`: share of cost and pay gap by kind of work (goods, staff-delivered help, research and policy, advocacy, media; GiveDirectly's and New Incentives' own) | as listed | facts/staff_pay.json, our judgment, read by 487 staff-pay rows; only matters with "Credit by share of resources" on |
 | Past average vs the next dollar | `$marginal_vs_past_average` (slider, "How much the next dollar does compared with the average dollar so far") | 50% (18–100%) | judgment; every model whose `estimate_basis` is `past_average` (2.10) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
@@ -417,7 +417,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.77 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025), North America's rate as a judgment for pledges weighted by hens (decided 2026-11-02); judgment from CIWF ChickenTrack |
 | Production per meal not eaten | `@sad_factors.production_response` | 0.76 (0.56–0.91) | Norwood and Lusk 2011 |
 | Species | `@welfare_ranges.*` (2.4) | | Rethink Priorities |
-| A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0539 across causes, 0.0413 global health (units of value per $) | GiveWell 2024 funding, ACE's Recommended Charities, Giving What We Can 2020–22 |
+| A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0413 global health (units of value per $); livelihoods and The Life You Can Save's split live | GiveWell 2024 funding; the organisation's own split |
 | New money among money moved | `@meta.new_money_share` | 50% (35–80%) | Ambitious Impact, Effective Giving Incubation report |
 | A new meta organisation's chance of success | `@meta.success_chance_new_org` | 55.7% (50–63.5%) | Ambitious Impact, Better Futures Guide CEA |
 
@@ -525,7 +525,7 @@ judgment) × 5 × Founders Pledge's GiveDirectly, Better Futures Guide (Ambitiou
 Impact's 35% new money at 3× its pre-2024 GiveDirectly and a 55.7% chance of success, CEARCH with our
 own 60%. Counterfactual shares, destinations and success chances differed for no reason. Now every
 meta model values money one way, in a section of its own (`moved_money`, kind `ours`) whose rows are
-written word for word from src/engine/moved-money.ts (`python3 scripts/moved-money.py <model> <mix|global-health> [net]`)
+written word for word from src/engine/moved-money.ts (`python3 scripts/moved-money.py <model> <global-health|livelihoods|tlycs> [net]`)
 and checked by INV-12.
 
 **Reading another model live: `#model-id`.** A formula may read another model's result per dollar in
@@ -554,27 +554,23 @@ low/high would make every meta range meaningless.
 ```
 value_global_health = Σ GiveWell 2024 funding share × #top-charity          (AMF 49.5%, Malaria Consortium SMC 28.7%,
                                                                              Helen Keller VAS 17.8%, New Incentives 4.0%)
-value_animals       = avg(#ACE Recommended Charities, November 2025)          (equal weights, ten models)
-value_longtermist   = @meta.value_longtermist = 0                             (said openly: no model puts it on the scale)
 V = moved_dollar_value
-    across causes:  (h × value_global_health + a × value_animals + l × 0) / (h + a + l)
-                    h, a, l = Giving What We Can 2020–22: 60%, 10%, 10%; the ~20% unknown or several
-                    causes is valued at the average of the known ones, so it drops out
     one cause:      value_global_health  (an organisation that only moves money to global health and poverty)
+                    value_livelihoods, value_tlycs_recommended (below)
 V_before = prior_dollar_value = @meta.prior_vs_cash × #givedirectly          (1×, from 0 to 3×)
 net      = moved_dollar_net_value = new × V + (1 − new) × (V − V_before)     new = @meta.new_money_share = 50% (35–80%)
 success  = @meta.success_chance_new_org = 55.7% (50–63.5%)                   for an organisation not yet proven
 ```
 
 - *Destinations.* GiveWell's Top Charities weighted by what GiveWell directed to each in 2024
-  ($150m, $87m, $54m, $12m of $303m, GiveWell's 2024 metrics post); Animal Charity Evaluators' ten
-  Recommended Charities with equal weights (its Recommended Charity Fund spreads money over all of them
-  and publishes no fixed split); longtermist causes at 0. At today's defaults: global health 0.0413
-  units of value per dollar (20.7 healthy years per $1,000), animals 0.183 (91.5, mostly Sinergia
-  Animal), the across-causes mix 0.0539 (26.9). GiveDirectly 0.00872.
-- *Which mix.* An organisation whose donors give across causes (CEARCH: "EA donations") takes the
-  Giving What We Can mix; one that only moves money within global health and poverty (The Life You Can
-  Save's recommended list, Better Futures Guide's livelihoods charities) takes that destination alone.
+  ($150m, $87m, $54m, $12m of $303m, GiveWell's 2024 metrics post). At today's defaults: global health
+  0.0413 units of value per dollar (20.7 healthy years per $1,000). GiveDirectly 0.00872.
+- *Which destination.* Where the organisation's money goes: its own published split (The Life You Can
+  Save), else the cause it works in (global health and poverty: CEARCH; livelihoods: Better Futures Guide).
+  The across-causes mix this section first had (Giving What We Can's 2020–22 split, ACE's Recommended
+  Charities, longtermist causes at 0) was removed on 2026-11-02 with its facts (`@meta.dest_share_*`,
+  `@meta.value_longtermist`, facts/ace_fund_weights.json): since late October no model used it. An
+  organisation that moves money across causes would rebuild it from where its own money goes.
   Better Futures Guide's charities don't exist yet; Ambitious Impact assumes they reach GiveWell's bar
   (3× GiveDirectly's new estimate), so GiveWell's Top Charities stand in.
 - *Shifted money.* Money given anyway, now to a better charity, earns only the gain. Where it would
@@ -625,8 +621,8 @@ model was removed); INV-12 requires it of any model with a row on its path about
   livelihoods charities and has published none yet: the livelihoods charities the site models, live, equal weights
   (`value_livelihoods`: GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund), not
   GiveWell's health charities. CEARCH's research and grants are global-health policy (hypertension and salt, lead,
-  tobacco and alcohol taxes): global health, not the across-causes mix. No model uses the mix now; its animal leg
-  is weighted by ACE's Recommended Charity Fund payouts (`@ace_fund_weights`, 2.9), no longer equal weights.
+  tobacco and alcohol taxes): global health, not the across-causes mix. No model used the mix after this, and it
+  was removed on 2026-11-02 (above).
 - *Leverage, latest and marginal.* The Life You Can Save's 3-year ratio is 9.19 (2025 report); a ratio of money
   moved over all costs is an average, and the next dollar moves less: `$marginal_vs_past_average` (2.10; judgment,
   50%, 18–100%; CEARCH's estimates for Giving What We Can 0.18 and 0.43, Giving What We Can's own view ~1), the same
@@ -639,7 +635,7 @@ model was removed); INV-12 requires it of any model with a row on its path about
 - *One credit-by-share-of-resources formula* (`META_DONOR_COST_SHARE_FORMULA`): donors' new money moved per dollar
   (`moved_per_dollar × new_money_share`) and staff's forgone pay share the outcome, in all three models (before:
   TLYCS new money, CEARCH all money influenced, Better Futures Guide none).
-- *Labelled judgments*: `value_longtermist` = 0 and `prior_vs_cash` say "our judgment" on the model rows; Ambitious
+- *Labelled judgments*: `prior_vs_cash` says "our judgment" on the model rows; Ambitious
   Impact's subjective inputs in CEARCH and Better Futures Guide are filed as `judgment`.
 
 | Model | Our view before → after | Evaluator view | What changed |
@@ -695,11 +691,8 @@ benefit of a win = per year once in effect × fulfilment × credit
   its proportional improvement 0.105 × 28.9 = 3.03), a broiler under better standards 0.64 in 2025 SADs (ACE 2016:
   0.075 × 7/52 × 28.9 = 0.29), the broilers in a `ced_chicken_2025` pair. The ACE 2016 models are split by species
   (decision 5's condition), so they rank; HSUS's is now the highest animal figure on the site.
-- **ACE's Recommended Charity Fund weights** (facts/ace_fund_weights.json): what the fund paid each of the ten
-  Recommended Charities in February and August 2026, $3.26M in all (Wild Animal Initiative 16.4%, The Humane League
-  16.1%, Sinergia 15.1%, Dansk Vegetarisk Forening 13.0%, Good Food Fund 8.3%, Shrimp Welfare Project 7.9%,
-  Sociedade Vegetariana Brasileira 6.7%, Aquatic Life Institute 6.6%, ÇHKD 6.3%, Animal Welfare Observatory 3.6%),
-  for the animal leg of the moved-money value (2.8) in place of equal weights.
+- **ACE's Recommended Charity Fund weights** were added here for the animal leg of the across-causes moved-money
+  value (2.8); with that mix unused they were removed on 2026-11-02.
 - **Also**: the cage-to-aviary hen figure's high end is now 28.94 (a caged hen's whole year), so the 17.49 best guess
   is the geometric middle of its range; the shrimp-stunning best guess stays at the bottom of its range, labelled as
   our judgment; stand-in species weights and the welfare-point bridge are labelled as judgments on every row that
@@ -962,7 +955,7 @@ chicken weight is 0.332 and shrimp 0.199 (unconfirmed).
 | Sociedade Vegetariana Brasileira | SADs; meals 0.084 SADs/meal | same | 3, 4 | meals → species; interim shared 0.902 | 10.1 → 109 (shared meal factor) |
 | The Humane League | SADs; hens (**7.93** cage→cage-free, 3.05 enriched), broilers 0.64 | same | 3, 4 | `ced_chicken`; `@sad_factors` | none from rebase; 80 → 176 if hens use 17.49 like Sinergia/ÇHKD (decision 3) |
 | Wild Animal Initiative | papers (ACE) → our bridge → "pain days" for wild animals, mostly insects and small fish | treated as SADs, i.e. person-equivalent days, × 0.0011 | 3, 7; explainer says species is "part of this guess" | make the guess raw disabling days, split by species group (insects, fish, other), `ced_*` raw template | 0.36 → about 0.005–0.03 (estimate: × 0.332 × 0.04–0.27) |
-| ACE 2016: Albert Schweitzer Fdn | years of farmed-animal life spared (all species) | × 28.9 (caged-hen SADs/year, `@ace.caged_hen_sads_per_year`) × 0.0011 | 3 (every species and system = caged hen), 7 | split years by species from ACE 2016 calculators, per-species SADs per year of life, `ced_*` | down; size needs the split (fish and broilers dominate counts). 312 today |
+| ACE 2016: Albert Schweitzer Fdn | years of farmed-animal life spared (all species) | × 28.9 (caged-hen SADs/year, Ambitious Impact's; the fact is gone since the models read `@sad_factors.sads_per_hen_year_cage_to_aviary`) × 0.0011 | 3 (every species and system = caged hen), 7 | split years by species from ACE 2016 calculators, per-species SADs per year of life, `ced_*` | down; size needs the split (fish and broilers dominate counts). 312 today |
 | ACE 2016: HSUS | same | same | 3, 7 | same | down (cage-free hens part unchanged). 323 today |
 | ACE 2016: ProVeg | same | same | 3, 7 | same | 3.6 today |
 | ACE 2016: Vegan Outreach | same | same | 3, 7 | same | 29 today |
