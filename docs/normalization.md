@@ -812,6 +812,98 @@ ratio is (1 − B₀/B) / ln(B/B₀) for an organisation that has grown from B�
 tenfold, 21% after a hundredfold. No evaluator adjusts the ratio by an organisation's age or size: there is no
 age- or size-based adjustment here either (an open proposal, section 5, item 11).
 
+### 2.11 Old estimates count less: a slider for an estimate's age (November 2026)
+
+The rankings use each evaluator's newest model of a charity however old it is (src/engine/ranking.ts). HSUS's
+newest is ACE's 2016 review, which made it the top animal charity although HSUS isn't among ACE's current
+recommended charities. Owner decision 2026-11-02: an old estimate gets a discount the reader sets, like the
+discount rate for future good.
+
+**The slider.** Your values → Timing, "Each year since an estimate was made, it counts less by"
+(`$estimate_age_discount`, judgment, **5% a year, range 0–15%**). A model's result is divided by
+`(1 + $estimate_age_discount) ^ age`, written like `$discount_rate`, where `age` is the years from the model's
+`source.published` to `common.estimate_age_as_of` in assumptions/default.json (2026-11-02). That date is part
+of the data, bumped when the site's data is refreshed, never the build's clock, so a result is the same whenever
+and wherever it is computed (server, browser, CI). A date given as a year or a month alone counts from its middle
+(1 July; the 15th); a date after the as-of date is age 0. Every model with an output has a date (all 348 did
+already: 331 full dates, 11 months, 6 years); scripts/check.ts fails on a model without one, and buildLibrary on
+one it can't read. Ours only: the evaluator view never applies it.
+
+**One place.** `modelConversion(lib, m, view)` (src/engine/model.ts) is the unit's conversion
+(`headlineConversion`) divided, in our view, by the age divisor (`ageDivisorNode`). Everything reads it:
+`headline` (the rankings, charity figures, sensitivity's swings, the joint range), `bottomLine(...).common`
+(what `#id` and `#owner:charity` read, so a meta charity's live destinations), `usedAssumptions` (the slider is
+a lever of every dated model), uncertainty (the slider is a driver through the conversion), the tree
+(`headlineExprOf`: its root ends in "÷ For the estimate's age", whose parts are 1 + the slider and "Years since
+the estimate was made"), the bulk stand-ins (scripts/summaries.ts keeps `source`, so the browser ages them the
+same) and history (below).
+
+- **Meta charities**: each destination read live is discounted by its own age (its common result already is),
+  and the meta model's own estimate by its own age on top: The Life You Can Save (Founders Pledge, June 2023)
+  takes 3.4 years of its own and each destination's. In the evaluator view neither applies: it reads its
+  destinations at the reader's values with the slider at 0 (`readerValues`), however deep.
+- **History** pages rebuild each past commit's library with that commit's assumptions. A commit from before the
+  slider gets today's slider and as-of date (src/lib/history.ts `withAgeDiscount`): an estimate's age is how old
+  it is now, so the line runs on into the page's headline instead of jumping at this commit.
+
+**The default, from the site's data where it can.** Successive estimates of the same charity and programme by
+the same evaluator, one per date, at least three months apart (programmes as `charities/*.json` declares them;
+side sheets excluded), compared in the evaluator's own view:
+
+| | GiveWell | Founders Pledge | HLI | Giving Green | ACE, SoGive, AIM |
+|---|---|---|---|---|---|
+| pairs | 41 (AMF, Evidence Action, Malaria Consortium, New Incentives, Helen Keller, …) | 1 (Imagine Worldwide) | 1 (Pure Earth) | 1 (Evergreen) | none: one estimate per charity on the site |
+| median gap | 1.2 years | 1.9 | 0.6 | 1.0 | |
+| median absolute change | 0.51 in ln (×1.67 or ×0.60) | 0.41 | 0.03 | 0.18 | |
+| direction | 39% down; mean +0.08 in ln per revision, pooled +5.5% a year (our view −1.2%) | down | down | up | |
+
+Revisions are large and not directional: GiveWell's estimates of a programme move by about two-thirds up or 40%
+down per revision, and on average rise slightly. Noise without drift lowers how much an old estimate tells you
+but not its expected value, so the revisions alone support 0%. What they can't see is selection: they only
+cover estimates that were renewed. Evaluators re-check what they recommend every year or two (GiveWell revises
+its top charities' models several times a year: the site has AMF models from 5 dates since 2023 and Malaria Consortium models from 7;
+ACE moved its recommended charities to a two-year re-evaluation cycle in 2022; Founders Pledge says it
+re-evaluates comprehensively about every two years) and some recommendations are withdrawn rather than renewed
+(HSUS, ACE's other 2016 reviews). An estimate older than its evaluator's cycle is one the evaluator has not
+re-affirmed. The data are too thin to measure that, so **the default is a labelled judgment**: 5% a year, so an
+estimate inside its evaluator's two-year cycle loses under 10% (2 years: 0.91), and a ten-year-old one 40%
+(0.61), less than one typical revision moves an estimate. 0% is the low end (what revisions support), 15% the
+high (a ten-year-old estimate at a quarter, 0.25). The slider's explainer says the same.
+
+Checked by INV-2a (headline = native × conversion × (1 + d)^−age; bottomLine's common result = headline ×
+$uov_per_daly / 1000) and INV-19 (every model with a result in common units has a date; with the destinations it
+reads live held, its headline at the default, 10% and 15% is its headline at 0 times exactly (1 + d)^−age; its
+evaluator view, destinations included, never moves); src/engine/estimate-age.test.ts tests both on small
+models, the tree, sensitivity and uncertainty.
+
+**Before → after** (primary evaluator's figure, healthy years per $1,000, our view at the defaults; the median
+ranked charity's primary estimate is 2.3 years old and its figure falls 11%):
+
+| # | All, before | All, after |
+|---|---|---|
+| 1 | HSUS (ACE 2016) 637 | HSUS 391 |
+| 2 | Sinergia Animal 166 | Sinergia Animal 153 |
+| 3 | Albert Schweitzer Foundation (ACE 2016) 130 | CEARCH (AIM 2021) 87.1 |
+| 4 | CEARCH 114 | Albert Schweitzer Foundation 80.0 |
+| 5 | The Life You Can Save (FP 2023) 82.5 | SickKids (GiveWell 2026) 67.8 |
+| 6 | SickKids 70.2 | Better Season Project (AIM 2025) 60.0 |
+| 7 | Better Season Project 64.1 | The Life You Can Save 59.4 |
+| 8 | Family Empowerment Media 62.1 | Family Empowerment Media 52.1 |
+| 9 | The Humane League (ACE) 51.1 | The Humane League 48.7 |
+| 10 | Ubongo 49.6 | Ubongo 45.8 |
+
+Animal welfare: the same top four; Vegan Outreach (ACE 2016) 10.7 → 6.59 falls from 9th to 10th behind Shrimp
+Welfare Project; Animal Policy International (AIM 2022) from 6th to 8th. Climate: Clean Air Task Force (FP 2018)
+4.16 → 2.75 and Coalition for Rainforest Nations (FP 2018) 0.338 → 0.223 (5th → 6th, behind Industrious Labs).
+Global health: The Life You Can Save 82.5 → 59.4 (2nd → 4th); Helen Keller and Malaria Consortium (GiveWell,
+September 2026) move up into the top 10 past Development Media International. Biggest moves overall: Results for
+Development (GiveWell 2019) 29th → 42nd, Vegan Outreach 68th → 78th, Better Futures Guide 26th → 34th, GAIN and
+Iodine Global Network (FP 2021) 60th/61st → 67th/68th, Terrapraxis (FP 2021) 30th → 37th, Pure Earth (GiveWell
+2021) 27th → 32nd; recent GiveWell sheets rise (AMF 37th → 28th, New Incentives 28th → 23rd). HSUS stays first
+across the slider's range (at 15%: 157 against Sinergia's 132); it drops below Sinergia only above about 17.5%
+a year. The slider alone doesn't settle HSUS: whether ACE's 2016 projection should rank at all is a separate
+question, left to the owner.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -822,7 +914,7 @@ shrinks).
 | # | Invariant | How to test |
 |---|---|---|
 | INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby`, `ced` or `tco2e`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
-| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `daly_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. One exception, in WELLBY models: `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion cancels (2.3, INV-17). (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
+| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views, times in our view the estimate's age factor `(1 + $estimate_age_discount)^−age` (2.11), and `bottomLine(m).common` (what `#id` reads) the same number in units of value. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `daly_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. One exception, in WELLBY models: `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion cancels (2.3, INV-17). (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
 | INV-3 | Every animal model passes through the species step, once per species, from the shared table. | For `unit = ced`: the model declares `output.species` (e.g. `["chicken","pig"]`). For each, a row `ced_<s>` exists, its formula equals the template for its source (`aim` or `raw`) after whitespace normalisation, it reads `@welfare_ranges.<s>_vs_chicken`, and it is upstream of the output. No other row reads `@welfare_ranges.*` or `@aim_sads.*`. Every path from a row whose unit is SAD or days of pain to the output passes through a `ced_*` row. |
 | INV-4 | No literal stands in for a shared number. | An input row whose value is within 0.2% of a fact's or assumption's low/best/high (0.003355 for `@cash`'s 0.00335) and whose label resembles the shared label, or uses one of its synonyms (ln(consumption) or a doubled income for `$uov_per_ln_consumption`; a DALY or disability weight, "(DW)", for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for `@cash`), must be a formula reading the fact, with the evaluator's literal in `published`. Facts made from identical labels (facts/givewell_common.json, staff_pay.json) match only rows with that label, on their best value. Also: no formula contains a constant equal to a fact or assumption value (distinctive, or under a close label; exponents and one- or two-digit constants under labels only loosely alike are arithmetic). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |
@@ -842,6 +934,7 @@ shrinks).
 | INV-16 | Side sheets never rank; the ranked column is the grant's. | Every model the rankings use has at most one row on its path that reads like a value-of-information or decision sheet (future funding bar, CE of reallocated funding, value of information, probability the decision changes, P(… x cash)); and where its native row's label names a place in parentheses, the model's name, id or title names that place too when it names any. Complements `isSideSheet` (title and template) in src/engine/ranking.ts. |
 | INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest doesn't move with `$life_value_multiplier`. |
 | INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
+| INV-19 | An estimate counts less by its age, in our view only (2.11). | Every model with a result in common units has `source.published`. With the models it reads live (`#id`) held at their values at 0, its headline at the slider's default, 10% and high end is its headline at 0 times exactly `(1 + d)^−age`, age from `source.published` to `common.estimate_age_as_of`; its evaluator view, destinations included, is the same at every setting. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
@@ -1047,3 +1140,8 @@ and Taimaka-HLI change nothing at the defaults.
   America's 77%, where the largest pledges are; range 38–96% unchanged. The reasoning is in the fact's
   explainer (`@sad_factors.commitment_fulfilment_cage_free`), shown on /data and on every model page
   that reads it. Effect: every cage-free model about 15% lower (HSUS 2016 746 → 637, Sinergia 190 → 166).
+- **Old estimates count less (2.11).** A slider under Timing, `$estimate_age_discount`, 5% a year (0–15%):
+  every model's result is divided by (1 + d)^age, age from its `source.published` to the data's as-of date
+  (`common.estimate_age_as_of`, 2026-11-02, bumped when the data is refreshed). Our view only; a meta charity
+  takes it on each destination and on its own estimate. The default is a labelled judgment: GiveWell's
+  revisions are large but not directional. Effect: HSUS 637 → 391, still first; INV-19.

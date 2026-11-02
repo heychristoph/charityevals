@@ -6,7 +6,8 @@
 import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, referencedModels, usedAssumptions, viewAssumptions,
+  AGE_DISCOUNT, assumptionValues, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
+  pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
 import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
@@ -110,21 +111,28 @@ export function inv1(lib: Library): InvariantReport {
   };
 }
 
-/** INV-2a: the headline is the native result times the unit's conversion (charityevals view). */
+/** INV-2a: the headline is the native result times the unit's conversion times the factor for the
+ * estimate's age (charityevals view). */
 export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
     const vals = compute(lib, m, av);
     const native = vals[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals));
+    const age = estimateAge(lib, m) ?? 0;
+    const factor = AGE_DISCOUNT in av ? (1 + av[AGE_DISCOUNT]) ** -age : 1;
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals)) * factor;
     const got = headline(lib, m, av);
     if (!(close(got, want) || (Number.isNaN(got) && Number.isNaN(want))))
-      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion = ${fmt(want)}` });
+      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion × age factor ${fmt(factor)} = ${fmt(want)}` });
+    // The common result `#id` references and the rankings read is the same number in units of value.
+    const common = bottomLine(lib, m, av).common;
+    if (!(close(common, got * perHealthyYearPer1000(av)) || (Number.isNaN(got) && Number.isNaN(common))))
+      violations.push({ inv: "INV-2a", model: m.id, where: "bottomLine.common", detail: `common result ${fmt(common)} ≠ headline ${fmt(got)} × a healthy year's value / 1000` });
   }
   return {
-    id: "INV-2a", title: "Headline = native result × the unit's conversion (our view)", status: "checked", checked: models.length, violations,
-    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)). The evaluator view is INV-8. Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
+    id: "INV-2a", title: "Headline = native result × the unit's conversion × the estimate's age factor (our view)", status: "checked", checked: models.length, violations,
+    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
   };
 }
 
@@ -1149,10 +1157,50 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+/** INV-19 (docs/normalization.md 2.11): an estimate counts less by its age, in our view only. Every
+ * model with a result in common units has a date; with the destinations it reads live (`#id`) held, its
+ * headline at the slider's default and high end is its headline at 0 times exactly (1 + d)^−age; its
+ * evaluator view doesn't move with the slider at all, destinations included. */
+export function inv19(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const A = AGE_DISCOUNT;
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  if (!(A in av)) return { id: "INV-19", title: "An estimate counts less by its age, in our view only", status: "not checked", checked: 0, violations, how: `No $${A} in the assumptions.` };
+  const row = lib.assumptions.rows.find((r) => r.id === A)!;
+  const zero = { ...av, [A]: 0 };
+  const settings = [...new Set([av[A], pickValue(row.value, "high"), 0.1])].filter((d) => d > 0);
+  for (const m of models) {
+    const age = estimateAge(lib, m);
+    if (age === undefined) {
+      violations.push({ inv: "INV-19", model: m.id, where: "source.published", detail: "no date the estimate was made, so its age can't be discounted" });
+      continue;
+    }
+    // Destinations read live hold their values at 0: what moves is this model's own estimate.
+    const held = Object.fromEntries(modelDepsOf(m).map((d) => [`#${d}`, compute(lib, m, zero)[`#${d}`]]));
+    const h0 = headline(lib, m, zero, held);
+    const e0 = headline(lib, m, zero, {}, "evaluator");
+    if (!Number.isFinite(h0) || h0 === 0) continue;
+    for (const d of settings) {
+      const a = { ...av, [A]: d };
+      const want = h0 * (1 + d) ** -age;
+      const got = headline(lib, m, a, held);
+      if (!close(got, want, 1e-9))
+        violations.push({ inv: "INV-19", model: m.id, where: `our view at ${fmt(d)}`, detail: `estimate ${fmt(age)} years old: headline ${fmt(got)} at $${A} = ${fmt(d)}, want ${fmt(h0)} × ${fmt((1 + d) ** -age)} = ${fmt(want)}` });
+      const e = headline(lib, m, a, {}, "evaluator");
+      if (!(close(e, e0, 1e-12) || (Number.isNaN(e) && Number.isNaN(e0))))
+        violations.push({ inv: "INV-19", model: m.id, where: `evaluator view at ${fmt(d)}`, detail: `the evaluator view moves with $${A}: ${fmt(e0)} at 0, ${fmt(e)} at ${fmt(d)}` });
+    }
+  }
+  return {
+    id: "INV-19", title: "An estimate counts less by its age, in our view only", status: "checked", checked: models.length, violations,
+    how: `Every model with a result in common units (not templates) has source.published. With every model it reads live (\`#id\`) held at its value at $${A} = 0, its headline at the slider's default, at 10% and at its high end equals its headline at 0 times (1 + d)^−age exactly (age from source.published to common.estimate_age_as_of); the evaluator view's headline, destinations included, is the same at every setting.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

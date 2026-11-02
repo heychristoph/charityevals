@@ -38,6 +38,7 @@ import Prose from "../layouts/Prose.astro";
   <ul>
     <li><strong>Deaths</strong> are valued by age band (under five, 5–14, 15–49, 50 and over), from GiveWell's moral weights, times your "child's life" value.</li>
     <li><strong>Every future benefit</strong> is discounted at your discount rate, including a wait before it starts.</li>
+    <li><strong>An older estimate counts less.</strong> See <a href="#estimate-age">old estimates</a> below.</li>
     <li><strong>A won reform</strong> (a corporate pledge, a law, a regulation) counts for the years under Your values before it would have come anyway (5 by default), with the wait until it takes effect discounted and one shared rate of pledges kept.</li>
     <li><strong>Charities that move money</strong> (fundraisers, evaluators, effective-giving organisations) are worth what their money does where it goes: those destinations' own results, read live, so every slider moves them too, with one shared share of new money and one chance of success for an organisation not yet proven.</li>
     <li><strong>A past average isn't the next dollar.</strong> Where a model's cost-effectiveness is an organisation's past spending over everything it achieved (campaign wins, research, money moved, a service's lives saved), it is multiplied by how much the next dollar does compared with that average, a value under Your values (50% by default, from 18% to 100%). Every model says which kind of estimate it is; estimates that are already about the next grant (GiveWell's, Ambitious Impact's, the Happier Lives Institute's) and costs per item delivered don't take it, so nothing is counted twice.</li>
@@ -46,10 +47,21 @@ import Prose from "../layouts/Prose.astro";
 
   <h2 id="judgments">Judgments: yours and fixed ones</h2>
   <p>
-    The judgments that move many models are yours to set under Your values: how a healthy year compares with income, a child's life, a WELLBY and a chicken's suffering, the discount rate, the years a won reform counts, how much the next dollar does compared with an organisation's past average, the deaths per tonne of CO₂ and when they come. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
+    The judgments that move many models are yours to set under Your values: how a healthy year compares with income, a child's life, a WELLBY and a chicken's suffering, the discount rate, how much less an old estimate counts, the years a won reform counts, how much the next dollar does compared with an organisation's past average, the deaths per tonne of CO₂ and when they come. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
   </p>
   <p>
     Some fixed figures are judgments too, not measurements: species Rethink Priorities doesn't cover (fish, cattle, insects) counted as stand-ins, how Ambitious Impact's welfare points become days of pain, longtermist causes valued at zero in money-moved models, where shifted money would have gone, the share of broiler pledges kept, damage from CO₂ other than deaths at zero, Founders Pledge's education constants and the default share of staff pay below market. They are fixed rather than sliders because each concerns only a few models or sits inside a range set by evidence, and the site keeps one slider per concept. Each is marked "judgment" wherever a model reads it, with its range, which the uncertainty bars use.
+  </p>
+
+  <h2 id="estimate-age">Old estimates count less</h2>
+  <p>
+    Each charity is ranked by its evaluator's newest estimate, however old. Some are a decade old: the Humane Society of the United States is ranked on Animal Charity Evaluators' 2016 review; HSUS isn't among ACE's current recommended charities. Evaluators re-check what they recommend every year or two (GiveWell revises its top charities' models several times a year; Animal Charity Evaluators and Founders Pledge re-evaluate about every two years), and some recommendations are withdrawn rather than renewed.
+  </p>
+  <p>
+    So under Your values → Timing you set how much less an estimate counts for each year since it was published, compounding like the discount rate: <strong>5% a year by default</strong>, from 0% to 15%. At 5% a 2-year-old estimate counts 91% and a 10-year-old one 61%. Every model page says how old its estimate is and what that does to its figure at your settings. A charity that moves money to others takes it twice over, as it should: each destination's figure is discounted for that destination's own estimate, and the result for its own.
+  </p>
+  <p>
+    The default is a judgment, not a measurement. GiveWell's successive estimates of the same programme, which the site keeps (41 pairs, about a year apart), move a lot, typically two-thirds up or 40% down, but they don't mostly move down, so revisions alone would justify no discount. What they can't show is the estimates nobody renewed. An estimate's age is counted from its publication date to the date the site's data was last refreshed (2 November 2026), not the day you read it, so a figure doesn't change by itself. The evaluator's own view never applies this.
   </p>
 
   <h2 id="theoretical">Purely theoretical models</h2>

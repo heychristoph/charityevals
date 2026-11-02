@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { evaluate, parse, type Node } from "./expr";
-import { assumptionValues, buildLibrary, comparable, compute, headlineNode } from "./model";
+import { assumptionValues, buildLibrary, comparable, compute, headlineExprOf, headlineNode } from "./model";
 import { childrenOf, headlineFormula, identityOf, lookupFor, pathTo, pathToRef, rootOf, shapeOf, spreadShare } from "./tree";
 import { rowsFeeding, sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
@@ -134,7 +134,8 @@ describe("every ranked model's tree", () => {
     for (const m of ranked) {
       const values = compute(lib, m, av);
       const look = lookupFor(lib, m, values, av, "charityevals");
-      const root = rootOf(m, look, lib.assumptions.units[m.output!.unit].to_common);
+      // The formula the page's tree ends in: the unit's conversion and the estimate's age (ModelTree).
+      const root = rootOf(m, look, headlineExprOf(lib, m, { type: "ref", scope: "row", name: m.output!.row }));
       const central = sensitivity(lib, m, av).central;
       if (!(Math.abs(root.value - central) <= 1e-9 * Math.abs(central))) off.push(`${m.id}: root ${root.value} vs ranking ${central}`);
       const u = uncertainty(lib, m, values, av, "charityevals");
