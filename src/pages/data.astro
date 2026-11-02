@@ -21,6 +21,9 @@ const judgments = [...lib.facts.values()].filter((f) => f.kind === "judgment");
 // Grouped by file: GiveWell's house adjustments alone are over a hundred.
 const judgmentGroups = new Map<string, typeof judgments>();
 for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f.group) ?? []), f]);
+// A file with many figures (GiveWell's shared figures) files each under a section; the list shows a
+// heading where the section changes.
+const newSection = (rows: { section?: string }[], i: number) => rows[i].section && rows[i].section !== rows[i - 1]?.section;
 ---
 
 <Base title="Shared data" description="The fixed rates, the fixed judgments and the shared data every model reads, with sources.">
@@ -67,8 +70,11 @@ for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f
         <details class="fact-group">
           <summary><h3>{group}</h3> <span class="muted small">{rows.length} {rows.length === 1 ? "judgment" : "judgments"}</span></summary>
           <ul>
-            {rows.map((f) => (
-              <li><a href={`#f-${f.key}`}>{f.label}</a> <span class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</span></li>
+            {rows.map((f, i) => (
+              <>
+                {newSection(rows, i) && <li class="section-head">{f.section}</li>}
+                <li><a href={`#f-${f.key}`}>{f.label}</a> <span class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</span></li>
+              </>
             ))}
           </ul>
         </details>
@@ -81,11 +87,14 @@ for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f
         <details class="fact-group" id={`g-${group}`}>
           <summary><h3>{group}</h3> <span class="muted small">{rows.length} {rows.length === 1 ? "number" : "numbers"}</span></summary>
           <table>
-            {rows.map((f) => (
+            {rows.map((f, i) => (
+              <>
+              {newSection(rows, i) && <tr class="section-head"><th scope="colgroup" colspan="2">{f.section}</th></tr>}
               <tr id={`f-${f.key}`}>
                 <th scope="row">
                   {f.label}
                   {f.kind === "judgment" && <span class="small judgment-tag"> <span class="kind-dot kind-judgment" aria-hidden="true" />judgment</span>}
+                  {f.explainer && <div class="small fact-explainer"><Markdown text={f.explainer} /></div>}
                   <span class="small muted fact-meta">
                     {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
                     {usedBy(f.key).length > 0 && " · used by "}
@@ -97,6 +106,7 @@ for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f
                 </th>
                 <td class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</td>
               </tr>
+              </>
             ))}
           </table>
         </details>
@@ -219,6 +229,27 @@ for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f
   }
   .fact-meta {
     display: block;
+  }
+  .fact-explainer {
+    color: var(--ink-2);
+    margin-top: var(--s1);
+  }
+  .fact-explainer :global(p) {
+    margin: 0;
+  }
+  .fact-explainer :global(p + p) {
+    margin-top: var(--s1);
+  }
+  .facts tr.section-head th {
+    padding-top: var(--s4);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+  .judgments li.section-head {
+    list-style: none;
+    margin: var(--s3) 0 var(--s1);
+    font-weight: 600;
+    color: var(--ink-2);
   }
   .facts tr:target {
     background: var(--blue-wash);
