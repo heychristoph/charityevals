@@ -4,7 +4,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
 import { formatValue } from "./format";
 
 /** One row that changed: its value before and after, and whether its calculation changed too. */
@@ -64,6 +64,19 @@ function ownersAt(root: string, sha: string): unknown[] {
   }
 }
 
+type RawAssumptions = { rows?: { id: string }[]; common?: Record<string, unknown> };
+
+/** A past commit's assumptions with today's discount for an estimate's age where that commit had none
+ * (docs/normalization.md 2.11): the age is how old an estimate is now, not when the commit was made, so
+ * every version is aged to today's date and the line runs on into the page's headline. */
+function withAgeDiscount(a: RawAssumptions, root: string): RawAssumptions {
+  if (a.rows?.some((r) => r.id === AGE_DISCOUNT)) return a;
+  const today: RawAssumptions = JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8"));
+  const row = today.rows?.find((r) => r.id === AGE_DISCOUNT);
+  if (!row || !a.rows || !a.common) return a;
+  return { ...a, rows: [...a.rows, row], common: { ...a.common, estimate_age_as_of: today.common?.estimate_age_as_of } };
+}
+
 /** The library as it was at a commit, or in the working copy when sha is null. Never cached: a library
  * holds every model, bulk imports included, and one per commit doesn't fit in memory (see
  * prepareHistories, which builds each commit's library once for every page). */
@@ -80,7 +93,7 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
       );
     return buildLibrary(
       jsonFilesAt(root, sha, "models"),
-      JSON.parse(git(root, ["show", `${sha}:assumptions/default.json`])),
+      withAgeDiscount(JSON.parse(git(root, ["show", `${sha}:assumptions/default.json`])), root),
       jsonFilesAt(root, sha, "facts"),
       jsonFilesAt(root, sha, "charities"),
       ownersAt(root, sha),
