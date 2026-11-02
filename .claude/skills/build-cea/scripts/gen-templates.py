@@ -215,7 +215,7 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
           "Present value of the triangle (linear fade to zero) at the shared rate, as a share of its undiscounted area; as in the HLI models.", "percent"),
         f("sd_years_per_person", "effect", "Total effect per person (SD-years, discounted)", "0.5 * initial_effect_sd * effect_duration_years * discount_factor", "Area of the triangle: linear decay from the initial effect to zero, discounted.", "number"),
         f("wellbys_per_person", "effect", "WELLBYs per person treated", "sd_years_per_person * @wellby_factors.wellbys_per_sd_year", None, "number", "WELLBYs"),
-        f("household_size", "effect", "Household size", "@wellby_factors.household_size_psychotherapy", "TEMPLATE: use a country fact when the charity works outside HLI's settings.", "number"),
+        f("household_size", "effect", "Household size", "@household_size.uganda", "TEMPLATE: the fact for the country the charity works in (facts/household_size.json, the latest DHS survey); add one if it is missing.", "number"),
         f("household_multiplier", "effect", "Household multiplier (recipient plus spillovers)", "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy", None, "multiple"),
     ] + adj_rows() + [
         f("outcome_total", "outcome", "WELLBYs", "people_reached * wellbys_per_person * household_multiplier * total_adj", None, "number", "WELLBYs"),

@@ -10,7 +10,7 @@ import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf, childrenOf } from "./tree";
 import { inv12, keyOf } from "./invariants";
-import { GLOBAL_HEALTH_DESTINATIONS, ANIMAL_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY } from "./moved-money";
+import { GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY } from "./moved-money";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -135,9 +135,9 @@ describe("INV-12: money moved is valued one way", () => {
   });
   const realAssumptions = read(join(root, "assumptions/default.json"));
   const facts = walk(join(root, "facts")).map(read);
-  const destinations = walk(join(root, "models")).map(read).filter((m) => [...GLOBAL_HEALTH_DESTINATIONS, ...ANIMAL_DESTINATIONS, "givedirectly"].includes(m.id));
-  const shared = (ids: (keyof typeof MOVED_MONEY_ROWS)[], ghOnly = false) =>
-    ids.map((id) => (id === "moved_dollar_value" && ghOnly ? GLOBAL_HEALTH_ONLY : MOVED_MONEY_ROWS[id])).map(({ id, label, formula }) => ({ id, label, formula }));
+  const destinations = walk(join(root, "models")).map(read).filter((m) => [...GLOBAL_HEALTH_DESTINATIONS, "givedirectly"].includes(m.id));
+  const shared = (ids: (keyof typeof MOVED_MONEY_ROWS | "moved_dollar_value")[], _ghOnly = true) =>
+    ids.map((id) => (id === "moved_dollar_value" ? GLOBAL_HEALTH_ONLY : MOVED_MONEY_ROWS[id])).map(({ id, label, formula }) => ({ id, label, formula }));
   const meta = (id: string, rows: object[]) => ({
     id, name: id, kind: "charity", cause: "global-health", rows,
     output: { row: "out", unit: "uov", label: "UoV per $", native: { row: "raised", unit: "dollars raised per dollar (gross)" } },
