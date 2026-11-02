@@ -35,7 +35,7 @@ The site turns these tonnes into years of healthy life through the heat deaths t
 ### Where we differ from Giving Green
 
 - **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
-- **A marginal dollar, not the past average.** Giving Green's figure is Carbon180's 2019–21 policy spending over the bills it influenced: an average. The next dollar does less; our judgment counts it at 50% (18% to 100%), one figure shared with every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
+- **A marginal dollar, not the past average.** Giving Green's figure is Carbon180's 2019–21 policy spending over the bills it influenced: an average. The next dollar does less; our view counts it at the share set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default, our judgment; 18% to 100%), one slider for every model on the site built on a past average (The Life You Can Save's leverage ratio, the other retrospective climate models). The evaluator view keeps 100%.
 - **Tonnes become healthy years** through the shared climate rate. Giving Green stops at dollars per tonne.
 - **Captured and removed tonnes count for their heat deaths only**, because they come with no less fuel smoke.
 - **Future deaths are discounted.** Like every model on the site, ours discounts future good at the shared rate.

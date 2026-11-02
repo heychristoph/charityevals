@@ -63,7 +63,8 @@ Copy the high and medium findings into your list (don't re-derive them), then go
   - a won reform counts `$win_years_counted` years, the wait discounted, pledges kept from
     `@sad_factors.commitment_fulfilment_*`, diet change × `@sad_factors.production_response` (2.9);
   - a cost per outcome that is past spending over past wins (campaigns, policy, research, money moved)
-    × `@meta.marginal_vs_past_average`;
+    × `$marginal_vs_past_average`, and `estimate_basis` says what the model's dollar is
+    (`past_average`, `marginal`, `unit_cost`; normalization.md 2.10, INV-18);
   - money moved through the shared rows of src/engine/moved-money.ts, destinations live (`#model-id`);
   - an idea-stage (Ambitious Impact) model shown only if the charity runs the programme and nothing
     better exists, flagged `theoretical`;
@@ -111,7 +112,8 @@ so the severity rests on a number.
   rates between outcomes, DALY definitions, value of life, discounting, cash benchmarks, currency
   rates); a conservative or optimistic case used where the evaluator gives a best guess; a future
   benefit not discounted at `$discount_rate`; a death valued off its age band or not moving with
-  `$life_value_multiplier`; a past average used without `@meta.marginal_vs_past_average`; a judgment
+  `$life_value_multiplier`; a past average used without `$marginal_vs_past_average`, a marginal or unit-cost
+  estimate that reads it (counted twice), or a wrong `estimate_basis`; a judgment
   filed as observed or estimate; a founders' or funding counterfactual subtracted in
   our view; an unfinished sheet imported; an idea-stage estimate shown for a charity that doesn't
   run the programme, or without the `theoretical` flag; any normalization-audit violation;

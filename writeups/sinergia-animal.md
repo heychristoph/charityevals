@@ -45,7 +45,7 @@ At the low end of the chicken slider alone, Sinergia falls to about GiveDirectly
 - **The wait (ours).** ACE counts hens from the year of the win; we discount the wait until the commitments take effect (4 years for cage-free, 2 to 7; each pig producer's own deadline).
 - **Compliance (changed for consistency).** ACE's 53% of cage-free pledges kept becomes the shared 77% (Chicken Watch, North America), the same for every cage-free model.
 - **Production response (changed for consistency).** A meal not eaten cuts production by 0.76 of a meal, as in every diet-change model; ACE counts 1.
-- **Past average, not the next dollar (ours):** ACE's estimate divides Sinergia's past campaign spending by the commitments it won, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
+- **Past average, not the next dollar (ours):** ACE's estimate divides Sinergia's past campaign spending by the commitments it won, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the next dollar at the share of the average set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default, our judgment; 18% to 100%). The evaluator view keeps 100%.
 
 ### Biggest uncertainties
 

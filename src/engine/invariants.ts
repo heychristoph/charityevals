@@ -9,7 +9,7 @@ import {
   assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { rowsFeeding } from "./sensitivity";
 
@@ -1103,10 +1103,56 @@ export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+/** INV-18 (docs/normalization.md 2.10): every model states what its dollar is (`estimate_basis`); every
+ * past average reads the "next dollar vs average dollar" slider on the path to its output, in our view only;
+ * no marginal or unit-cost estimate reads it, which would count diminishing returns twice. A model that
+ * reads another model live (`#id`) moves with that model's slider through it, which is not a read. */
+export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const A = MARGINAL_ASSUMPTION;
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template");
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const basis = m.estimate_basis;
+    if (!basis) {
+      violations.push({ inv: "INV-18", model: m.id, where: "estimate_basis", detail: "no estimate_basis: say whether the result is a past_average, marginal or unit_cost estimate" });
+      continue;
+    }
+    const readers = m.rows.filter((r) => r.assumptionDeps.includes(A));
+    if (basis !== "past_average") {
+      for (const r of readers)
+        violations.push({ inv: "INV-18", model: m.id, where: `${r.id} $${A}`, detail: `reads $${A}, but its estimate is ${basis}: already about the next dollar, so the slider would count diminishing returns twice` });
+      // Nor through anything else, unless through another model it reads live.
+      if (!readers.length && !referencedModels(lib, m).some((t) => usedAssumptions(lib, t).includes(A))) {
+        const h0 = headline(lib, m, av), h1 = headline(lib, m, { ...av, [A]: av[A] * 0.5 });
+        if (Number.isFinite(h0) && !close(h0, h1, 1e-9))
+          violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `a ${basis} estimate whose headline moves with $${A} (${fmt(h0)} → ${fmt(h1)})` });
+      }
+      continue;
+    }
+    const path = rowsFeeding(m);
+    if (!readers.some((r) => path.has(r.id))) {
+      violations.push({ inv: "INV-18", model: m.id, where: `$${A}`, detail: `a past average, but no row on the path to the output reads $${A}` });
+      continue;
+    }
+    const half = { ...av, [A]: av[A] * 0.5 };
+    const h0 = headline(lib, m, av), h1 = headline(lib, m, half);
+    if (!(Number.isFinite(h0) && h1 < h0))
+      violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `halving $${A} doesn't lower our headline (${fmt(h0)} → ${fmt(h1)})` });
+    // The evaluator publishes the average: its view keeps 1. (Destinations read live through `#id` move in
+    // both views, so this is checked on the rows, not the headline.)
+    for (const r of readers) if (r.published === undefined && m.evaluator?.assumptions[A] === undefined)
+      violations.push({ inv: "INV-18", model: m.id, where: `${r.id} evaluator view`, detail: `reads $${A} with no \`published\` value: the evaluator view must keep the evaluator's 1` });
+  }
+  return {
+    id: "INV-18", title: "Past averages, and only past averages, read the next-dollar slider", status: "checked", checked: models.length, violations,
+    how: `Every model with an output (variants inherit the field) declares estimate_basis. past_average: a row on the path to the output reads $${A}, halving it lowers our headline, and every row reading it has the evaluator's value in \`published\` (or the evaluator pins it), so the evaluator view keeps the average. marginal and unit_cost: no row reads $${A}.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
