@@ -69,7 +69,8 @@ for e in manifest:
         subprocess.run(["curl", "-sL", "--max-time", "180", "-A", "Mozilla/5.0", f"https://docs.google.com/spreadsheets/d/{e['sheet']}/export?format=xlsx", "-o", str(f)], check=True)
     pages = e["grant_pages"]
     name = clean(e["title"])
-    s = {"id": e["model_id"], "name": name, "charity": e["charity"], "owner": "givewell", "cause": "global-health",
+    # GiveWell estimates the next grant, never a past average (docs/normalization.md 2.10).
+    s = {"id": e["model_id"], "name": name, "charity": e["charity"], "owner": "givewell", "cause": "global-health", "estimate_basis": "marginal",
          "summary": f"GiveWell's spreadsheet \"{name}\", linked from {'its grant page' if len(pages) == 1 else f'{len(pages)} of its grant pages'}. "
                     "Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
          "source": {"publisher": "GiveWell", "title": e["title"], "url": pages[0] if pages else e["url"], "sheet": e["url"],
