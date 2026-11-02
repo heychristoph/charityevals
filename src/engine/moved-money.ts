@@ -5,7 +5,9 @@
 //
 //   V        value of a dollar moved = Σ destination share × that destination's live result (#model),
 //            the destinations being where the organisation's money actually goes (its own published
-//            split where it has one, else the cause it works in)
+//            split where it has one, else the cause it works in: global health, livelihoods). The
+//            across-causes mix (Giving What We Can's split, animals, longtermist causes at 0) was removed
+//            on 2026-11-02: no model used it; an organisation moving money across causes would rebuild it.
 //   V_before value of where shifted money would have gone = @meta.prior_vs_cash × GiveDirectly, live
 //   net      new share × V + (1 − new share) × (V − V_before)
 //
@@ -27,14 +29,6 @@ export const MOVED_MONEY_SECTION = {
 
 /** GiveWell's four Top Charities, read live, weighted by GiveWell's 2024 funding. */
 export const GLOBAL_HEALTH_DESTINATIONS = ["against-malaria-foundation", "malaria-consortium-smc", "helen-keller-vas", "new-incentives"];
-/** Animal Charity Evaluators' ten Recommended Charities (November 2025), read live, weighted by what ACE's
- * Recommended Charity Fund paid each in its February and August 2026 rounds (facts/ace_fund_weights.json,
- * row id = model id with underscores). */
-export const ANIMAL_DESTINATIONS = [
-  "animal-welfare-observatory", "aquatic-life-institute", "ciftlik-hayvanlarini-koruma-dernegi", "dansk-vegetarisk-forening",
-  "good-food-fund", "shrimp-welfare-project", "sinergia-animal", "sociedade-vegetariana-brasileira", "the-humane-league",
-  "wild-animal-initiative",
-];
 /** Livelihoods charities with an evaluator's live model on the site, for an organisation that moves money
  * to livelihoods charities (Better Futures Guide). Equal weights: none of them has a published share yet. */
 export const LIVELIHOODS_DESTINATIONS = [
@@ -70,7 +64,6 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
 export type TemplateRow = { id: string; label: string; format: "small" | "percent"; formula: string; explainer: string };
 
 const gh = `@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives`;
-const aw = ANIMAL_DESTINATIONS.map((id) => `@ace_fund_weights.${id.replace(/-/g, "_")} * #${id}`).join(" + ");
 const lw = `avg(${LIVELIHOODS_DESTINATIONS.map((id) => `#${id}`).join(", ")})`;
 const tl = `(${TLYCS_DESTINATIONS.map(([k, id]) => `@meta.tlycs_moved_2025_${k} * #${id}`).join(" + ")}) / (${TLYCS_DESTINATIONS.map(([k]) => `@meta.tlycs_moved_2025_${k}`).join(" + ")})`;
 
@@ -79,16 +72,6 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     id: "value_global_health", format: "small", formula: gh,
     label: "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
     explainer: "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%).",
-  },
-  value_animals: {
-    id: "value_animals", format: "small", formula: aw,
-    label: "Value of a dollar to animal charities (ACE's Recommended Charities, live, weighted by ACE's fund), units of value",
-    explainer: "Animal Charity Evaluators' ten Recommended Charities (November 2025), each at its result on this site under your values (species weights and the chicken slider included), weighted by what ACE's Recommended Charity Fund actually paid each in February and August 2026 ($3.26 million: Wild Animal Initiative 16%, The Humane League 16%, Sinergia Animal 15%, Dansk Vegetarisk Forening 13%, the rest 4–8% each), in place of equal weights.",
-  },
-  value_longtermist: {
-    id: "value_longtermist", format: "small", formula: "@meta.value_longtermist",
-    label: "Value of a dollar to longtermist charities, units of value (our judgment: 0)",
-    explainer: "Our judgment, said openly: the site has no model that puts reducing catastrophic risk on its scale, so this part of the money counts as nothing.",
   },
   value_livelihoods: {
     id: "value_livelihoods", format: "small", formula: lw,
@@ -99,12 +82,6 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     id: "value_tlycs_recommended", format: "small", formula: tl,
     label: "Value of a dollar to The Life You Can Save's recommended charities (its 2025 split, live), units of value",
     explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its main model's live result on this site (GiveDirectly at GiveWell's model, as everywhere in meta models); Evidence Action and Malaria Consortium, which run several programmes, at GiveWell's programme-weighted figure for the charity, as on the rankings (Evidence Action: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water; Malaria Consortium: seasonal malaria chemoprevention over its locations, bed nets and vitamin A). The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
-  },
-  moved_dollar_value: {
-    id: "moved_dollar_value", format: "small",
-    formula: "(@meta.dest_share_human * value_global_health + @meta.dest_share_animals * value_animals + @meta.dest_share_longtermist * value_longtermist) / (@meta.dest_share_human + @meta.dest_share_animals + @meta.dest_share_longtermist)",
-    label: "Value of a dollar moved, units of value",
-    explainer: "Where effective donations go when donors choose the cause (Giving What We Can, 2020–2022: about 60% human wellbeing, 10% animals, 10% longtermist causes, 20% unknown or several), each part at its live value. The unknown part is valued at the average of the known ones, so it drops out of the mix.",
   },
   prior_dollar_value: {
     id: "prior_dollar_value", format: "small", formula: "@meta.prior_vs_cash * #givedirectly",
@@ -129,7 +106,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
 export const GLOBAL_HEALTH_ONLY: TemplateRow = {
   id: "moved_dollar_value", format: "small", formula: "value_global_health",
   label: "Value of a dollar moved, units of value",
-  explainer: "This organisation moves money only to global health and poverty charities, so a dollar moved is valued at that destination alone (GiveWell's Top Charities, live), not the across-causes mix.",
+  explainer: "This organisation moves money only to global health and poverty charities, so a dollar moved is valued at that destination alone (GiveWell's Top Charities, live).",
 };
 /** `moved_dollar_value` for an organisation that moves money to livelihoods charities (Better Futures Guide). */
 export const LIVELIHOODS_ONLY: TemplateRow = {
@@ -145,7 +122,7 @@ export const TLYCS_SPLIT: TemplateRow = {
 };
 
 /** Formulas a meta model's `moved_dollar_value` may have. */
-export const MOVED_DOLLAR_FORMULAS = [MOVED_MONEY_ROWS.moved_dollar_value.formula, GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
+export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
 
 /** The success chance a not-yet-proven meta organisation's row reads in our view. */
 export const SUCCESS_FACT = "meta.success_chance_new_org";

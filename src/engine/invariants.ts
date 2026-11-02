@@ -6,7 +6,8 @@
 import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  assumptionValues, compute, conversionLookup, headline, headlineConversion, inputValue, pickValue, referencedModels, usedAssumptions, viewAssumptions,
+  AGE_DISCOUNT, assumptionValues, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
+  pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
 import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
@@ -110,21 +111,28 @@ export function inv1(lib: Library): InvariantReport {
   };
 }
 
-/** INV-2a: the headline is the native result times the unit's conversion (charityevals view). */
+/** INV-2a: the headline is the native result times the unit's conversion times the factor for the
+ * estimate's age (charityevals view). */
 export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
     const vals = compute(lib, m, av);
     const native = vals[m.output!.row];
-    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals));
+    const age = estimateAge(lib, m) ?? 0;
+    const factor = AGE_DISCOUNT in av ? (1 + av[AGE_DISCOUNT]) ** -age : 1;
+    const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals)) * factor;
     const got = headline(lib, m, av);
     if (!(close(got, want) || (Number.isNaN(got) && Number.isNaN(want))))
-      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion = ${fmt(want)}` });
+      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion × age factor ${fmt(factor)} = ${fmt(want)}` });
+    // The common result `#id` references and the rankings read is the same number in units of value.
+    const common = bottomLine(lib, m, av).common;
+    if (!(close(common, got * perHealthyYearPer1000(av)) || (Number.isNaN(got) && Number.isNaN(common))))
+      violations.push({ inv: "INV-2a", model: m.id, where: "bottomLine.common", detail: `common result ${fmt(common)} ≠ headline ${fmt(got)} × a healthy year's value / 1000` });
   }
   return {
-    id: "INV-2a", title: "Headline = native result × the unit's conversion (our view)", status: "checked", checked: models.length, violations,
-    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)). The evaluator view is INV-8. Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
+    id: "INV-2a", title: "Headline = native result × the unit's conversion × the estimate's age factor (our view)", status: "checked", checked: models.length, violations,
+    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
   };
 }
 
@@ -325,7 +333,8 @@ function sharedNumbers(lib: Library): Shared[] {
     const values = typeof v === "number" ? [v] : [v.low, v.best, v.high].filter((x): x is number => typeof x === "number");
     const file = f.key.split(".")[0];
     const same = SAME_LABEL_FILES.has(file);
-    out.push({ ref: `@${f.key}`, label: f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
+    // A house constant's plain label is ours; copies in the sheets carry the sheet's own wording, kept in source.quote.
+    out.push({ ref: `@${f.key}`, label: same ? f.source?.quote ?? f.label : f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: file === "household_size" ? f.key.split(".")[1].replace(/_(rural|high_coverage_districts)$/, "").replace(/_/g, " ") : PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
   }
   for (const a of lib.assumptions.rows) {
     if (a.format === "toggle") continue;
@@ -769,6 +778,11 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
     reads: (r) => r.factDeps.some((f) => f.startsWith("moral_weights.")), want: "@moral_weights.* * $life_value_multiplier",
   },
   {
+    id: "stillbirth-value", what: "a value of a stillbirth averted",
+    test: (t) => /\b(dalys?|daly equivalents?|years of life|life years|units? of value)\b.*\bper\b.*\bstill ?births?\b/i.test(t),
+    reads: (r) => r.factDeps.includes("givewell_shared.uov_per_stillbirth"), want: "@givewell_shared.uov_per_stillbirth * $life_value_multiplier / $uov_per_daly",
+  },
+  {
     id: "fx", what: "a pound or euro exchange rate",
     test: (t) => /\b(exchange|conversion|fx)\b/i.test(t) && /\b(gbp|eur|pounds?|euros?|£|€)\b/i.test(t),
     reads: (r) => r.factDeps.some((f) => f.startsWith("fx.")), want: "@fx.*",
@@ -777,7 +791,7 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
 
 /** INV-11: an evaluator's own exchange rate doesn't survive in our view where a shared one exists. */
 export function inv11(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.output && m.owner === "ambitious-impact");
+  const models = [...lib.models.values()].filter((m) => m.output && m.owner !== "charityevals");
   const violations: Violation[] = [];
   for (const m of models) {
     const path = rowsFeeding(m);
@@ -792,7 +806,7 @@ export function inv11(lib: Library): InvariantReport {
   }
   return {
     id: "INV-11", title: "No evaluator-internal exchange rate where a shared one exists", status: "partial", checked: models.length, violations,
-    how: `Ambitious Impact's models (the rule is general; other evaluators' models are being brought under it separately): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen; stillbirths, which have no shared value, are left out.`,
+    how: `Every evaluator's model (since 2026-11-02; before, Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
   };
 }
 
@@ -897,6 +911,14 @@ export function inv2d(lib: Library): InvariantReport {
 /** Concepts several evaluators' models state, each with its shared version. A literal row naming the
  * concept must agree with the shared version for its context, or read it; context (a place, a
  * programme) is the only reason to differ, and the shared version then has one fact per context. */
+/** facts/household_size.json: one household size per place, and the words that name the place. */
+const HOUSEHOLD_PLACES: [string, RegExp][] = [
+  ["Northwest Nigeria", /northwest|north west|kano|katsina|sokoto|zamfara|kebbi|jigawa|kaduna|new incentives/i], ["Nigeria", /nigeria/i], ["Kenya", /kenya/i], ["Malawi", /malawi/i],
+  ["Mozambique", /mozambique/i], ["Rwanda", /rwanda/i], ["Uganda", /uganda/i], ["Zimbabwe", /zimbabwe/i], ["Bangladesh", /bangladesh/i],
+  ["DRC", /\bdrc\b|congo/i], ["India", /india|bihar|bengal|pradesh|punjab/i], ["Pakistan", /pakistan|sindh/i],
+];
+const HOUSEHOLD_SIZE_FACTS = ["household_size.*"];
+
 export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]; context?: (text: string) => string | undefined }[] = [
   { id: "resource-sharing", test: /\bresource sharing\b|\bhousehold sharing\b/i, facts: ["givewell_shared.resource_sharing_multiplier"] },
   { id: "treatment-costs-averted", test: /\btreatment costs averted\b/i, not: /malnutrition|sam\b|wasting/i, facts: ["givewell_shared.treatment_costs_averted"] },
@@ -911,11 +933,17 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "value-of-cyp", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\b(cyp|year of (modern )?contracepti\w*|couple[- ]years? of protection)\b/i, not: /death/i, facts: ["givewell_shared.uov_per_cyp_low_income", "givewell_shared.uov_per_cyp_nigeria", "givewell_shared.uov_per_cyp_sierra_leone"], context: (t) => (/nigeria|kano|lagos|kaduna/i.test(t) ? "Nigeria" : /sierra leone/i.test(t) ? "Sierra Leone" : undefined) },
   { id: "value-of-stillbirth", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\bstill ?births?\b/i, facts: ["givewell_shared.uov_per_stillbirth"] },
   { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
-  { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy", "wellby_factors.household_size_psychotherapy"] },
+  { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy"] },
+  // One household size per place (facts/household_size.json, the latest DHS survey): a row naming a household's size reads its place's fact.
+  { id: "household-size", test: /\bhousehold size\b|\b(people|persons) per household\b|\bnumber of household members\b|\bother household members\b|\bpeople in the client's household\b/i, not: /\bprofit\b|extrapolation|\bnpv\b/i, facts: HOUSEHOLD_SIZE_FACTS, context: (t) => HOUSEHOLD_PLACES.find(([, re]) => re.test(t))?.[0] },
   { id: "commitment-fulfilment", test: /\b(fulfil\w*|compliance|kept|keep)\b[^.;]{0,40}\b(commitments?|(?<!founders )pledges?)\b|\bcommitments?\b[^.;]{0,30}\b(fulfil\w*|compliance)\b/i, not: /\bpigs?\b|gestation|sows?|shrimp|fish/i, facts: ["sad_factors.commitment_fulfilment_cage_free", "sad_factors.commitment_fulfilment_broiler"] },
   { id: "prior-weight-education", test: /\bweight on (the |fp'?s? |founders pledge'?s? )?prior\b/i, facts: ["founders_pledge_2023.prior_weight"] },
   { id: "depression-per-phq9-point", test: /\bphq[- ]?9?\b[^.;]{0,40}\b(daly|healthy|disability)\b|\bdalys? per (phq|point)\b/i, facts: ["depression.dalys_per_phq9_point_year", "depression.phq9_sd"] },
 ];
+
+/** A concept's facts: "file.*" stands for every fact in that file (one per place). */
+const conceptReads = (facts: string[], f: string) => facts.some((x) => x === f || (x.endsWith(".*") && f.startsWith(x.slice(0, -1))));
+const conceptFacts = (lib: Library, facts: string[]) => [...lib.facts.keys()].filter((f) => conceptReads(facts, f));
 
 /** Rows a model wrote that state a concept as a literal, with their context (a place, a programme). */
 export function conceptRows(lib: Library) {
@@ -928,7 +956,7 @@ export function conceptRows(lib: Library) {
       for (const c of CONCEPTS) {
         const text = `${r.id.replace(/_/g, " ")} ${r.label}`;
         if (!c.test.test(r.label) || c.not?.test(text)) continue;
-        const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => c.facts.includes(f)));
+        const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => conceptReads(c.facts, f)));
         if (r.formula !== undefined && !readsShared) continue;
         const ctx = c.context?.(`${text} ${m.name} ${m.id}`) ?? "";
         out.push({ concept: c.id, model: m.id, row: r.id, label: r.label, value: r.formula === undefined ? pickValue(r.value) : NaN, context: ctx, readsShared });
@@ -948,7 +976,7 @@ export function inv13(lib: Library): InvariantReport {
   for (const r of rows) {
     if (r.readsShared) continue;
     const c = CONCEPTS.find((x) => x.id === r.concept)!;
-    const shared = c.facts.map((f) => ({ f, v: pickValue(lib.facts.get(f)?.value) })).filter((x) => Number.isFinite(x.v));
+    const shared = conceptFacts(lib, c.facts).map((f) => ({ f, v: pickValue(lib.facts.get(f)?.value) })).filter((x) => Number.isFinite(x.v));
     const same = shared.find((x) => close(r.value, x.v, INV4_TOLERANCE));
     const others = [...new Set(rows.filter((o) => o.concept === r.concept && o.model !== r.model).map((o) => o.readsShared ? "shared" : fmt(o.value)))];
     violations.push({
@@ -1149,10 +1177,50 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+/** INV-19 (docs/normalization.md 2.11): an estimate counts less by its age, in our view only. Every
+ * model with a result in common units has a date; with the destinations it reads live (`#id`) held, its
+ * headline at the slider's default and high end is its headline at 0 times exactly (1 + d)^−age; its
+ * evaluator view doesn't move with the slider at all, destinations included. */
+export function inv19(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const A = AGE_DISCOUNT;
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  if (!(A in av)) return { id: "INV-19", title: "An estimate counts less by its age, in our view only", status: "not checked", checked: 0, violations, how: `No $${A} in the assumptions.` };
+  const row = lib.assumptions.rows.find((r) => r.id === A)!;
+  const zero = { ...av, [A]: 0 };
+  const settings = [...new Set([av[A], pickValue(row.value, "high"), 0.1])].filter((d) => d > 0);
+  for (const m of models) {
+    const age = estimateAge(lib, m);
+    if (age === undefined) {
+      violations.push({ inv: "INV-19", model: m.id, where: "source.published", detail: "no date the estimate was made, so its age can't be discounted" });
+      continue;
+    }
+    // Destinations read live hold their values at 0: what moves is this model's own estimate.
+    const held = Object.fromEntries(modelDepsOf(m).map((d) => [`#${d}`, compute(lib, m, zero)[`#${d}`]]));
+    const h0 = headline(lib, m, zero, held);
+    const e0 = headline(lib, m, zero, {}, "evaluator");
+    if (!Number.isFinite(h0) || h0 === 0) continue;
+    for (const d of settings) {
+      const a = { ...av, [A]: d };
+      const want = h0 * (1 + d) ** -age;
+      const got = headline(lib, m, a, held);
+      if (!close(got, want, 1e-9))
+        violations.push({ inv: "INV-19", model: m.id, where: `our view at ${fmt(d)}`, detail: `estimate ${fmt(age)} years old: headline ${fmt(got)} at $${A} = ${fmt(d)}, want ${fmt(h0)} × ${fmt((1 + d) ** -age)} = ${fmt(want)}` });
+      const e = headline(lib, m, a, {}, "evaluator");
+      if (!(close(e, e0, 1e-12) || (Number.isNaN(e) && Number.isNaN(e0))))
+        violations.push({ inv: "INV-19", model: m.id, where: `evaluator view at ${fmt(d)}`, detail: `the evaluator view moves with $${A}: ${fmt(e0)} at 0, ${fmt(e)} at ${fmt(d)}` });
+    }
+  }
+  return {
+    id: "INV-19", title: "An estimate counts less by its age, in our view only", status: "checked", checked: models.length, violations,
+    how: `Every model with a result in common units (not templates) has source.published. With every model it reads live (\`#id\`) held at its value at $${A} = 0, its headline at the slider's default, at 10% and at its high end equals its headline at 0 times (1 + d)^−age exactly (age from source.published to common.estimate_age_as_of); the evaluator view's headline, destinations included, is the same at every setting.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

@@ -167,7 +167,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
   moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of
   cash, counterfactual share or success chance in our view. Write the shared rows with
-  `python3 scripts/moved-money.py <model> <mix|global-health> [net]` (destinations read live with
+  `python3 scripts/moved-money.py <model> <global-health|livelihoods|tlycs> [net]` (destinations read live with
   `#model-id`) and multiply money moved by `moved_dollar_net_value` (or a result already in counterfactual
   "EA dollars" by `moved_dollar_value`); a new organisation's chance of success reads
   `@meta.success_chance_new_org`, the evaluator's figure in `published`. Career changes use the shared

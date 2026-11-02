@@ -13,7 +13,7 @@
     {
       "id": "economics",
       "title": "Timing",
-      "explainer": "How much less good done in the future counts than the same good done today."
+      "explainer": "How much less good done in the future counts than the same good done today, and how much less an old estimate counts than a new one."
     },
     {
       "id": "accounting",
@@ -248,6 +248,21 @@
       "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\")."
     },
     {
+      "id": "estimate_age_discount",
+      "section": "economics",
+      "label": "Each year since an estimate was made, it counts less by",
+      "technical": "Annual discount on a cost-effectiveness estimate's age",
+      "unit": "per year",
+      "format": "percent",
+      "value": {
+        "low": 0.0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "How much less to trust a cost-effectiveness estimate for each year since its evaluator published it, compounding like the discount rate: at 5% a 2-year-old estimate counts 91% and a 10-year-old one 61%. Evaluators re-check what they recommend every year or two (GiveWell updates its top charities' models several times a year; Animal Charity Evaluators re-evaluates its recommended charities every two years, and Founders Pledge about every two years) and withdraw some recommendations, so an estimate nobody has renewed for years may no longer stand. The site's own data can't set the rate: GiveWell's successive estimates of the same programme (41 pairs, about a year apart) move a lot, typically two-thirds up or 40% down, but not mostly down (39% of them fell, and on average they rose a few percent a year). So 5% is a judgment, between 0% (what the revisions alone support) and 15%. An estimate's age counts from its publication date to the date the site's data was last refreshed (2 November 2026), so results don't change with the day you look. Every model on the rankings takes it; a charity that moves money takes it on its own estimate and on each destination's. The evaluator's own view never applies it."
+    },
+    {
       "id": "climate_heat_death_delay",
       "section": "economics",
       "label": "Years until the heat deaths from a tonne of CO₂",
@@ -324,6 +339,7 @@
   },
   "common": {
     "unit": "uov",
-    "benchmark": "givedirectly"
+    "benchmark": "givedirectly",
+    "estimate_age_as_of": "2026-11-02"
   }
 }

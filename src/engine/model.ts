@@ -217,6 +217,9 @@ export function buildLibrary(
       chain: [id, ...(parent?.chain ?? [])],
       conversionRows,
     };
+    // A date that isn't one can't be aged (scripts/check.ts also requires a date on every site model).
+    if (model.source?.published && !Number.isFinite(dateInYears(model.source.published)))
+      errors.push(`${id}: source.published ${model.source.published} isn't a date (YYYY, YYYY-MM or YYYY-MM-DD)`);
     if (rawCharities.length) {
       if (!model.charity) errors.push(`${id}: no charity`);
       else if (!charities.has(model.charity)) errors.push(`${id}: unknown charity ${model.charity}`);
@@ -401,11 +404,12 @@ export function compute(
   const vals: Record<string, number> = {};
   // Another model's result is stored as "#id" beside the rows, so every later lookup over these values
   // (the tree, uncertainty) reads the same number. It is always our view at the reader's values: the
-  // evaluator view of this model doesn't pin another model's rates.
+  // evaluator view of this model doesn't pin another model's rates, but it never discounts an estimate
+  // for its age (readerValues).
   const lookup = (scope: Scope, n: string) =>
     scope === "row" ? vals[n] ?? NaN
     : scope === "assumption" ? a[n] ?? NaN
-    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, av))
+    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, readerValues(av, view)))
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   for (const id of m.order) {
     const r = m.byId.get(id)!;
@@ -477,6 +481,105 @@ export function headlineConversion(lib: Library, unit: string): Node | undefined
   return n;
 }
 
+// --- An estimate's age (docs/normalization.md 2.11) -------------------------------------------------
+
+/** The slider for how much less an estimate counts for each year since it was made. */
+export const AGE_DISCOUNT = "estimate_age_discount";
+
+/** A date as a year with a fraction: "2016-05-20" → 2016.38. A month or a year alone stands for its
+ * middle (the 15th; 1 July), so an estimate dated only "2016" is counted from mid-2016. NaN for
+ * anything else. */
+export function dateInYears(date: string): number {
+  const d = /^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/.exec(date);
+  if (!d) return NaN;
+  const y = Number(d[1]), mo = d[2] === undefined ? 7 : Number(d[2]), day = d[3] === undefined ? (d[2] === undefined ? 1 : 15) : Number(d[3]);
+  const t = Date.UTC(y, mo - 1, day);
+  // 2016-13-01 or 2016-02-30 would roll over into another date.
+  if (new Date(t).getUTCMonth() !== mo - 1 || new Date(t).getUTCDate() !== day) return NaN;
+  return y + (t - Date.UTC(y, 0, 1)) / (Date.UTC(y + 1, 0, 1) - Date.UTC(y, 0, 1));
+}
+
+/** How old a model's estimate is, in years: from its source.published to the date the site's data is
+ * counted to (assumptions `common.estimate_age_as_of`), never the build's clock, so a result is the
+ * same whenever it is computed. 0 for an estimate dated after that; undefined where either date is
+ * missing (buildLibrary requires a date on every model with an output). */
+export function estimateAge(lib: Library, m: ResolvedModel): number | undefined {
+  const asOf = lib.assumptions.common.estimate_age_as_of;
+  const made = m.source?.published;
+  if (!asOf || !made) return undefined;
+  const age = dateInYears(asOf) - dateInYears(made);
+  return Number.isFinite(age) ? Math.max(0, age) : undefined;
+}
+
+const ageNodes = new WeakSet<Node>();
+const ageYears = new WeakSet<Node>();
+/** Whether a node is the divisor for an estimate's age, or the years in it, so the tree can name them. */
+export const isAgeDivisor = (n: Node) => ageNodes.has(n);
+export const isAgeYears = (n: Node) => ageYears.has(n);
+
+/** What a result is divided by for its estimate's age, (1 + $estimate_age_discount) ^ age: the factor
+ * is (1 + d) ^ −age, written like the time discount ($discount_rate). Undefined in the evaluator view
+ * (it never applies there), in a library without the slider (an old commit's), and for an estimate
+ * with no age. */
+export function ageDivisorNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
+  if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === AGE_DISCOUNT)) return undefined;
+  const age = estimateAge(lib, m);
+  if (!age) return undefined;
+  const years: Node = { type: "num", value: age };
+  const n: Node = {
+    type: "bin", op: "^",
+    left: { type: "bin", op: "+", left: { type: "num", value: 1 }, right: { type: "ref", scope: "assumption", name: AGE_DISCOUNT } },
+    right: years,
+  };
+  ageNodes.add(n);
+  ageYears.add(years);
+  return n;
+}
+
+/** The factor for a model's age at assumption values `a` (the view's own): 1 where none applies. */
+export function ageFactor(lib: Library, m: ResolvedModel, a: Record<string, number>, view: View = "charityevals"): number {
+  const n = ageDivisorNode(lib, m, view);
+  return n ? 1 / evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
+}
+
+const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, Node | undefined>>>();
+
+/** What turns a model's result per dollar into its headline in a view: the unit's conversion
+ * (headlineConversion) and, in our view, the factor for the estimate's age. The one place the age
+ * applies: the headline, bottomLine's common result (so `#id` references, the rankings and a meta
+ * charity's destinations), sensitivity, uncertainty and the tree all read it from here. Undefined for
+ * a unit with no exchange rate. */
+export function modelConversion(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
+  let byView = modelConversions.get(m);
+  if (!byView) modelConversions.set(m, (byView = {}));
+  if (view in byView) return byView[view];
+  const conv = m.output ? headlineConversion(lib, m.output.unit) : undefined;
+  const age = conv && ageDivisorNode(lib, m, view);
+  return (byView[view] = conv && age ? { type: "bin", op: "/", left: conv, right: age } : conv);
+}
+
+/** The headline as a formula over `result` (a model's own result per dollar, e.g. its output row):
+ * headlineNode's conversion and, in our view, the age factor. Undefined for a unit with no exchange
+ * rate. */
+export function headlineExprOf(lib: Library, m: ResolvedModel, result: Node, view: View = "charityevals"): Node | undefined {
+  const to = m.output && lib.assumptions.units[m.output.unit]?.to_common;
+  if (!to) return undefined;
+  const conv = headlineNode(result, to);
+  const age = ageDivisorNode(lib, m, view);
+  return age ? { type: "bin", op: "/", left: conv, right: age } : conv;
+}
+
+const readers = new WeakMap<Record<string, number>, Record<string, number>>();
+/** The values a view reads other models (`#id`) at: the reader's own in our view; in the evaluator
+ * view the same with no discount for age, so that view never applies it, however deep. One object per
+ * `av`, so modelResult's cache still hits. */
+export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
+  if (view !== "evaluator" || !av[AGE_DISCOUNT]) return av;
+  let r = readers.get(av);
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0 }));
+  return r;
+}
+
 /** The model's bottom line per dollar, in its own unit and in the common unit. */
 export function bottomLine(
   lib: Library,
@@ -488,7 +591,8 @@ export function bottomLine(
   if (!m.output) return { native: NaN, common: NaN };
   const vals = compute(lib, m, av, inputs, view);
   const native = vals[m.output.row];
-  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view), vals, inputs) };
+  const a = viewAssumptions(m, av, view);
+  return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -503,7 +607,7 @@ export function headline(
   if (!m.output) return NaN;
   const vals = compute(lib, m, av, inputs, view);
   const native = vals[m.output.row];
-  const conv = headlineConversion(lib, m.output.unit);
+  const conv = modelConversion(lib, m, view);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
   return conv ? native * evaluate(conv, conversionLookup(lib, a, vals, inputs)) : native;
@@ -513,10 +617,12 @@ export function headline(
 export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals"): string[] {
   const used = new Set<string>();
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
-  const conv = m.output && headlineConversion(lib, m.output.unit);
+  const conv = modelConversion(lib, m, view);
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // A model read live (`#id`) moves with every assumption it reads, in our view.
   for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
+  // The evaluator view never discounts an estimate for its age, its own or a model's it reads.
+  if (view === "evaluator") used.delete(AGE_DISCOUNT);
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))

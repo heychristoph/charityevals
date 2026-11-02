@@ -308,7 +308,14 @@ export const Assumptions = z
     groups: z.array(AssumptionGroup),
     rows: z.array(Row),
     units: z.record(z.string(), Unit),
-    common: z.object({ unit: z.string(), benchmark: z.string(), benchmark_label: z.string().optional() }).strict(),
+    common: z.object({
+      unit: z.string(),
+      benchmark: z.string(),
+      benchmark_label: z.string().optional(),
+      /** The date an estimate's age is counted to (`$estimate_age_discount`, src/engine/model.ts estimateAge):
+       * fixed in the data, bumped when the site's data is refreshed, never the build's clock. */
+      estimate_age_as_of: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    }).strict(),
   })
   .strict();
 export type Assumptions = z.infer<typeof Assumptions>;

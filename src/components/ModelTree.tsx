@@ -7,7 +7,7 @@ import { Fragment, useEffect, useMemo, useRef, useState, type KeyboardEvent, typ
 import { AlertTriangle, ChevronRight, ExternalLink, Search, X } from "lucide-react";
 import usage from "../../generated/usage.json";
 import { lib, modelFile, modelUrl } from "../lib/data";
-import { comparable, hasRange, pickValue, type ResolvedModel } from "../engine/model";
+import { comparable, hasRange, headlineExprOf, pickValue, type ResolvedModel } from "../engine/model";
 import type { Node } from "../engine/expr";
 import type { Row } from "../engine/schema";
 import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf, spreadShare, type TreeNode } from "../engine/tree";
@@ -522,8 +522,9 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
   const look = useMemo(() => lookupFor(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
   const editCount = Object.keys(edits).length;
   // The tree ends in the number at the top of the page: the model's result converted into years of
-  // healthy life per $1,000. Models in a unit nobody converts end in their own result.
-  const toCommon = comparable(lib, model) ? lib.assumptions.units[model.output!.unit].to_common : undefined;
+  // healthy life per $1,000, with the estimate's age discounted (headlineExprOf). Models in a unit nobody
+  // converts end in their own result.
+  const toCommon = useMemo(() => (comparable(lib, model) ? headlineExprOf(lib, model, { type: "ref", scope: "row", name: model.output!.row }) : undefined), [model]);
   const root = useMemo(() => {
     const r = rootOf(model, look, toCommon);
     return place && r.label ? { ...r, label: `${r.label} in ${place}` } : r;

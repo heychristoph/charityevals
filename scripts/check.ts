@@ -47,6 +47,8 @@ for (const m of lib.models.values()) {
     else matched++;
   }
   if (!m.output) { console.log(`${m.id}: template, ${matched} expected values reproduced`); continue; }
+  // Every estimate says when it was made: our view discounts it by its age ($estimate_age_discount).
+  if (m.kind !== "template" && !m.source?.published) errors.push(`${m.id}: no source.published, the date the estimate was made (our view discounts it by its age)`);
   // charityevals' own models (build-cea) must follow their template and source every number.
   if (m.owner === "charityevals" && m.kind !== "template")
     for (const f of lintModel(lib, m)) if (f.severity === "high") errors.push(`${m.id}${f.row ? `.${f.row}` : ""}: ${f.message} (npx tsx scripts/audit-model.ts ${m.id})`);

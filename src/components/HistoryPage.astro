@@ -1,7 +1,7 @@
 ---
 // A model's change history, rebuilt from git at build time.
 import Base from "../layouts/Base.astro";
-import { lib, modelUrl, modelFile, primaryOf } from "../lib/data";
+import { lib, modelUrl, modelFile, primaryOf, rankable } from "../lib/data";
 import { modelHistory } from "../lib/history";
 import { formatYears, plainModelName } from "../lib/format";
 
@@ -13,10 +13,9 @@ const fileOf = (id: string) => modelFile(lib.models.get(id)!);
 // Only this model's own file and the files it extends: changes elsewhere (shared values, other models)
 // aren't changes to this model.
 const files = model.chain.map(fileOf);
-// Every history page's model (src/pages/[charity]/history.astro), so the build walks the past commits
-// once for all of them instead of once per page.
-const all = [...lib.charities.values()]
-  .map((c) => primaryOf(lib, c.id))
+// Every history page's model (src/pages/[charity]/history.astro and [charity]/[model]/history.astro),
+// so the build walks the past commits once for all of them instead of once per page.
+const all = [...new Set([...[...lib.charities.values()].map((c) => primaryOf(lib, c.id)), ...rankable])]
   .filter((m) => !!m)
   .map((m) => ({ model: m, filePaths: m.chain.map(fileOf) }));
 // Work in progress shows while developing, never on the published site.
