@@ -1,8 +1,10 @@
 ### Summary
 
-The Happier Lives Institute (HLI) estimates that GiveDirectly's cash transfers produce **<span data-figure="headline" data-model="givedirectly-hli">4.3</span> years of healthy life per $1,000** at our default exchange rate (7.55 points of life satisfaction a year per $1,000 in HLI's own terms), counting effects on recipients' life satisfaction and mental health and spillovers to their households. HLI uses it as the benchmark against which it compares its own recommendations.
+The Happier Lives Institute (HLI) estimates that GiveDirectly's cash transfers produce **<span data-figure="headline" data-model="givedirectly-hli">0.49</span> years of healthy life per $1,000** at our default exchange rate (7.55 points of life satisfaction a year per $1,000 in HLI's own terms), counting effects on recipients' life satisfaction and mental health and spillovers to their households. HLI uses it as the benchmark against which it compares its own recommendations.
 
-This is the figure our default WELLBY exchange rate is calibrated on, so with defaults HLI's and GiveWell's models of GiveDirectly agree exactly. Move the exchange rate and they separate; that is the point of having both.
+GiveWell's model of GiveDirectly in Kenya gives <span data-figure="headline" data-model="givedirectly">4.4</span>, about 9 times more. The gap is the exchange rate. The site's default WELLBY rate is calibrated on depression, so that a fall in depression counts the same in HLI's therapy analyses as in Founders Pledge's and SoGive's (0.065 healthy years per WELLBY). HLI and GiveWell disagree about cash against depression relief: by HLI's figures, therapy does about 9 times more good per dollar than GiveWell's and the Global Burden of Disease weights would give it. One rate can't make both comparisons agree, and the owner's choice is to anchor on health.
+
+The rate that would make the two GiveDirectly models agree is 0.575 healthy years per WELLBY (HLI's 7.55 WELLBYs per $1,000 against GiveWell's 4.36 healthy years for Kenya, like for like: HLI's cash estimate rests mostly on Kenyan trials). The evaluator view uses it, and the slider ("1 point more life satisfaction for a year vs a year of healthy life") reaches it. GiveWell's newer five-country estimate, the GiveDirectly figure the rankings show, would give about 0.72.
 
 ### What's in the model
 

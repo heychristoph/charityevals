@@ -186,13 +186,13 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
   );
 }
 
-/** An evidence-based rate: its value, source and range, with nothing to drag. */
+/** A fixed rate (evidence-based, or a judgment kept fixed, which says so): its value, source and range, with nothing to drag. */
 function Fixed({ row }: { row: Row }) {
   const v = typeof row.value === "object" ? row.value : undefined;
   return (
     <div className="assumption" id={`a-${row.id}`}>
       <div className="assumption-head">
-        <span className="assumption-name">{row.label}</span>
+        <span className="assumption-name">{row.label}{row.kind === "judgment" && <span className="muted small"> · fixed judgment</span>}</span>
         <span className="num fixed-value">{formatAssumption(row, pickValue(row.value))}</span>
       </div>
       {v?.low !== undefined && v?.high !== undefined && (

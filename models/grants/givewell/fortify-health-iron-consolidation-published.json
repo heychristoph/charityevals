@@ -21,7 +21,8 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0.025,
-      "life_value_multiplier": 1
+      "life_value_multiplier": 1,
+      "uov_per_daly": 4.328085
     }
   },
   "resources": [
@@ -113,15 +114,15 @@
       "id": "percentage_increase_in_wages_consumption_for_every_1_point_i_2",
       "label": "Percentage increase in wages/consumption for every 1 point increase in IQ (Yes)",
       "section": "parameters",
-      "value": 0.0075,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
         "cell": "Parameters!B25"
       },
-      "explainer": "Same methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
-      "format": "percent"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.0075 here. The site uses one figure for this in every GiveWell model, 0.0067 (Increase in wages per IQ point (GiveWell), `@givewell_shared.wage_gain_per_iq_point`), GiveWell's current best guess; the evaluator view keeps 0.0075.\n\nSame methodology as in the GiveWell's iodine CE estimate, using information from DCP2, 'Economic Benefits of Long-Term Improvements in IQ' section here: https://www.ncbi.nlm.nih.gov/books/NBK11783/",
+      "format": "percent",
+      "formula": "@givewell_shared.wage_gain_per_iq_point",
+      "published": 0.0075
     },
     {
       "id": "percentage_increase_in_wages_consumption_for_every_1_point_i",
@@ -220,14 +221,14 @@
       "id": "average_number_of_years_between_entering_fortification_progr",
       "label": "Average number of years between 'entering fortification program' and beginning of long term benefits (Yes)",
       "section": "parameters",
-      "value": 12.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
         "cell": "Parameters!B23"
       },
-      "explainer": "Benefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016"
+      "explainer": "Changed for consistency. GiveWell's sheet has 12 here. The site uses one figure for this in every GiveWell model, 10 (Years between iron supplementation or fortification and the start of income gains (GiveWell), `@givewell_shared.years_until_income_benefits_iron`), GiveWell's current best guess; the evaluator view keeps 12.\n\nBenefits shown between ages ~3-12. Median was 8 years for deworming in GiveWell CEA, Nov 2016",
+      "formula": "@givewell_shared.years_until_income_benefits_iron",
+      "published": 12.0
     },
     {
       "id": "average_number_of_years_between_entering_fortifictaion_progr",
@@ -240,14 +241,14 @@
       "id": "duration_of_long_term_benefits_of_fortification_in_years_yes_2",
       "label": "Duration of long term benefits of fortification (in years) (Yes)",
       "section": "parameters",
-      "value": 30.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
         "cell": "Parameters!B24"
       },
-      "explainer": "Median duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016"
+      "explainer": "Changed for consistency. GiveWell's sheet has 30 here. The site uses one figure for this in every GiveWell model, 40 (Years long-term income gains last (GiveWell), `@givewell_shared.long_term_benefit_years`), GiveWell's current best guess; the evaluator view keeps 30.\n\nMedian duration of benefits for deworming was 30 in GiveWell CEA, Nov 2016",
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "published": 30.0
     },
     {
       "id": "duration_of_long_term_benefits_of_fortification_in_years_yes",
@@ -713,14 +714,15 @@
       "id": "dalys_averted_per_death_of_a_3_to_59_month_old_child_averted",
       "label": "DALYs averted per death of a 3- to 59-month old child averted (Large effects only (anemia, cognitive, malaria))",
       "section": "parameters",
-      "formula": "9 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
         "cell": "Parameters!B8"
       },
-      "explainer": "GiveWell's 2016 moral weight for a child's death averted, 9 DALYs, times your multiplier on the value of a life.\n\nGiveWell CEA, Nov 2016, Cells C53 and C63 of the Parameters sheet",
-      "expected": 9.0
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model: a child's death under five (facts: moral_weights.uov_per_death_under5, 116.25 units of value) times \"A child's life vs doubled-income year\" (Your values), in DALYs at \"Healthy year vs doubled-income year\". This sheet's own figure, 9.0 DALYs, is kept for the evaluator view.",
+      "expected": 9.0,
+      "published": 9.0
     },
     {
       "id": "dalys_averted_per_death_of_an_under_5_averted_yes",
@@ -1177,7 +1179,7 @@
       "label": "Moderate/Severe anemia calculations: Replicability adustment (Large effects only (anemia, cognitive, malaria))",
       "section": "calculations",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
@@ -1191,7 +1193,7 @@
       "label": "External validity adjustment (Large effects only (anemia, cognitive, malaria))",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
@@ -1522,14 +1524,14 @@
       "id": "r_1_daly_averted_is_equivalent_to_increasing_ln_consumption_by",
       "label": "1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years? (Large effects only (anemia, cognitive, malaria))",
       "section": "parameters",
-      "value": 3.0,
-      "kind": "estimate",
+      "formula": "$uov_per_daly / $uov_per_ln_consumption",
+      "published": 3.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1Un_KZ8FcAO1eIemRc8XUca9n61hRN8vZTXBxG42KYtg/edit",
         "cell": "Parameters!B7"
       },
-      "explainer": "GiveWell CEA, Nov 2016. Cell C7 of Parameters sheet"
+      "explainer": "Changed for consistency: GiveWell's sheet counts a DALY averted as worth raising ln(consumption) by one unit for 3 years. The site trades healthy years against income one shared way for every model (Healthy year vs doubled-income year, and Value of doubling an income for a year, under Assumptions), so our view uses their ratio here. The evaluator view keeps GiveWell's 3. Deaths in this sheet are counted as DALYs first (9 per under-5 death), so their value moves with the same rate.\n\nGiveWell CEA, Nov 2016. Cell C7 of Parameters sheet."
     },
     {
       "id": "ln_consumption_equivalent_of_dalys_averted_per_beneficiary_o",
@@ -1571,39 +1573,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

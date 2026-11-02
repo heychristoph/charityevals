@@ -19,7 +19,9 @@
     "name": "HLI",
     "assumptions": {
       "resource_shares": 0,
-      "life_value_multiplier": 1
+      "life_value_multiplier": 1,
+      "discount_rate": 0,
+      "daly_per_wellby": 0.575
     }
   },
   "sections": [
@@ -33,29 +35,83 @@
       "title": "Better health and income"
     },
     {
+      "id": "bottom",
+      "title": "Bottom line"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "kind": "ours",
+      "explainer": "charityevals' step, not HLI's: HLI counts wellbeing the same whenever it comes. Our view discounts the life-improving benefits at the discount rate under Your values; the evaluator view pins it at 0. Deaths averted now are valued as a whole and not discounted."
+    },
+    {
       "id": "staff_pay",
       "title": "Other contributors and staff pay",
       "kind": "ours"
-    },
-    {
-      "id": "bottom",
-      "title": "Bottom line"
     }
   ],
   "rows": [
     {
       "id": "deaths_averted_per_1000",
       "section": "saving",
-      "label": "Deaths averted per $1,000 (from GiveWell's AMF model)",
+      "label": "Deaths averted per $1,000, before leverage and funging (GiveWell's AMF model)",
       "format": "number",
-      "value": 0.3353490491,
+      "value": 0.231974741,
       "kind": "estimate",
       "source": {
-        "title": "HLI, AMF wellbeing CEA",
-        "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
-        "cell": "GiveWell Numbers!B8"
+        "title": "GiveWell, AMF cost-effectiveness analysis (September 2026)",
+        "url": "https://docs.google.com/spreadsheets/d/1VEtie59TgRvZSEVjfG7qcKBKcQyJn8zO91Lau9YNqXc/edit",
+        "note": "196.04 lives counterfactually saved per $1m (after GiveWell's supplemental adjustments and its −15.49% leverage and funging adjustment), divided back by (1 − 0.1549) to 231.97 per $1m before leverage and funging. HLI's 0.3353 per $1,000 is GiveWell's 2022 figure per dollar AMF spends, before those adjustments (HLI sheet, 'GiveWell Numbers'!B8).",
+        "retrieved": "2026-10-31"
       },
-      "explainer": "Under-five and over-five deaths averted per $1,000, which HLI takes from its copy of GiveWell's 2022 AMF model. GiveWell's current model (the other model of this charity) gives a different figure; HLI's analysis predates it."
+      "explainer": "Changed for consistency: our view takes the deaths from GiveWell's current AMF model, the other model of this charity on the site, so both count the same deaths. HLI used its copy of GiveWell's 2022 model, 0.335 per $1,000 per dollar AMF spends, before GiveWell's leverage and funging adjustment (kept in the evaluator view). GiveWell's adjustment for leverage and funging follows below, under the same switch as in GiveWell's model.",
+      "published": 0.3353490491
+    },
+    {
+      "id": "leverage_funging_adjustment",
+      "section": "saving",
+      "label": "GiveWell's adjustment for leverage and funging",
+      "format": "percent",
+      "formula": "if($resource_shares, 0, -0.1549071168)",
+      "published": 0,
+      "source": {
+        "title": "GiveWell, AMF cost-effectiveness analysis (September 2026)",
+        "url": "https://docs.google.com/spreadsheets/d/1VEtie59TgRvZSEVjfG7qcKBKcQyJn8zO91Lau9YNqXc/edit",
+        "note": "'Leverage and funging adjustment for counterfactual outcome estimates', −15.49%."
+      },
+      "explainer": "Changed for consistency: GiveWell's own adjustment for money the grant pulls in from others (leverage) or pushes away (funging), as its AMF model applies it to lives saved. With credit by share of resources on, it is 0 and AMF gets its share of the whole campaign instead, as in GiveWell's model. HLI applied none (0 in the evaluator view)."
+    },
+    {
+      "id": "deaths_counted_per_1000",
+      "section": "saving",
+      "label": "Deaths averted per $1,000, counted",
+      "format": "number",
+      "formula": "deaths_averted_per_1000 * (1 + leverage_funging_adjustment)"
+    },
+    {
+      "id": "share_under5",
+      "section": "saving",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": 0.8081215132,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, AMF cost-effectiveness analysis (September 2026)",
+        "url": "https://docs.google.com/spreadsheets/d/1VEtie59TgRvZSEVjfG7qcKBKcQyJn8zO91Lau9YNqXc/edit",
+        "note": "202.57 under-five deaths of 250.66 averted per $1m, before adjustments.",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "From GiveWell's current AMF model, whose deaths our view counts: about 81% are children under five, the rest people five and older. (HLI's 2022 copy put the average age at 20.)"
+    },
+    {
+      "id": "hli_death_value_weight",
+      "section": "saving",
+      "label": "Weight on HLI's own value of a life saved (evaluator view only)",
+      "format": "percent",
+      "value": 0,
+      "published": 1,
+      "kind": "judgment",
+      "explainer": "Changed for consistency: 0 in our view, so HLI's own value of a life saved drops out and every death counts at the site's value (Discounting); 1 in the evaluator view, so HLI's own figure, with its neutral point, reproduces. A switch between the two, not a blend."
     },
     {
       "id": "avg_age_at_death",
@@ -216,28 +272,22 @@
       "expected": 7.256571429
     },
     {
-      "id": "life_value_weight",
-      "section": "saving",
-      "label": "Weight on the value of a life saved (ours)",
-      "format": "multiple",
-      "formula": "$life_value_multiplier",
-      "explainer": "charityevals' step, not HLI's: the shared value-of-life slider (Your values), which scales GiveWell's value of a death averted in its malaria models. Here it scales the wellbeing of the years the person saved goes on to live; grief averted for the family is not scaled. The evaluator view pins it at 1, so HLI's numbers reproduce."
-    },
-    {
       "id": "wellbys_per_life",
       "section": "saving",
-      "label": "WELLBYs per life saved",
+      "label": "WELLBYs per life saved (HLI)",
       "format": "number",
-      "formula": "wellbys_from_grief + (wellbys_from_years + wellbys_from_growth) * life_value_weight",
-      "expected": 132.5995733
+      "formula": "wellbys_from_grief + wellbys_from_years + wellbys_from_growth",
+      "expected": 132.5995733,
+      "explainer": "HLI's value of a life saved: the wellbeing of the years the person goes on to live above the neutral point, rising over time, plus grief averted for the family. The evaluator view uses it; our view values deaths the site's way (below)."
     },
     {
       "id": "wellbys_saving_per_1000",
       "section": "saving",
       "label": "WELLBYs from saving lives per $1,000",
       "format": "number",
-      "formula": "deaths_averted_per_1000 * wellbys_per_life",
-      "expected": 44.46714081
+      "formula": "deaths_counted_per_1000 * hli_death_value_weight * wellbys_per_life",
+      "expected": 44.46714081,
+      "explainer": "HLI's WELLBYs from the lives saved. Our view counts the deaths outside this row (0 here, see Discounting): valued the site's way, not by HLI's WELLBYs of the years lived above a neutral point."
     },
     {
       "id": "wellbys_improving_per_1000",
@@ -246,16 +296,17 @@
       "format": "number",
       "value": {
         "low": 0,
-        "best": 29.97007981,
+        "best": 14.98503991,
         "high": 29.97007981
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "HLI, AMF wellbeing CEA",
         "url": "https://docs.google.com/spreadsheets/d/1RrBuiPVgL-t8hlr6EqkqABiaqdHMGkpvfeiqiiX49LU/edit",
         "cell": "Improving (Upper B)!B103"
       },
-      "explainer": "Less malaria illness and higher later incomes, including community spillovers at 75% net coverage. This is HLI's upper bound; its lower-bound tab is broken in the published sheet (#REF!), so the range runs down to HLI's 'just life saving' version, which leaves it out."
+      "explainer": "Less malaria illness and higher later incomes, including community spillovers at 75% net coverage. HLI publishes two cases: its 'just life saving' version, which leaves these out (0), and its upper bound, 29.97 (its lower-bound tab is broken in the published sheet, #REF!). Changed for consistency: like everywhere else on the site our view takes a central figure, here the middle of HLI's two cases, 15.0, with the two as the range; HLI's sheet adds its upper bound (kept in the evaluator view).",
+      "published": 29.97007981
     },
     {
       "id": "wellbys_per_1000",
@@ -264,6 +315,81 @@
       "format": "number",
       "formula": "wellbys_saving_per_1000 + wellbys_improving_per_1000",
       "expected": 74.43722062
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future wellbeing",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "improving_start_years",
+      "section": "discounting",
+      "label": "Years from the nets until the life-improving benefit starts, on average",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Part of the benefit is less malaria while the nets last (the first two to three years), part is higher incomes when the children protected grow up (GiveWell counts these from about ten years on). One start year, 3, stands in for the mix; 0 is all illness, 10 all income."
+    },
+    {
+      "id": "improving_duration_years",
+      "section": "discounting",
+      "label": "Years the life-improving benefit is spread over",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 3,
+        "best": 20,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: from three years (illness only, the life of a net) to forty (GiveWell's working life for the income gains), with 20 for the mix."
+    },
+    {
+      "id": "discount_factor",
+      "section": "discounting",
+      "label": "Discount factor for the life-improving benefit",
+      "format": "number",
+      "formula": "(1 + discount_rate_per_year) ^ -improving_start_years * pv_annuity_due(1, discount_rate_per_year, improving_duration_years) / improving_duration_years",
+      "explainer": "The WELLBYs spread evenly over those years from the start year, discounted to today, as a share of their undiscounted total: 1 at a 0% rate."
+    },
+    {
+      "id": "uov_per_death",
+      "section": "discounting",
+      "label": "Value of averting a death, by age (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights, as in its AMF model: 116.25 doubled-income years for a child under five, 73.19 for a person five or older, times \"A child's life vs doubled-income year\" (Your values)."
+    },
+    {
+      "id": "uov_valued_outside_wellbys",
+      "section": "discounting",
+      "label": "Value of the deaths averted per $1,000, the site's way (units of value)",
+      "format": "number",
+      "formula": "deaths_counted_per_1000 * uov_per_death * (1 - hli_death_value_weight)",
+      "explainer": "Changed for consistency: in our view a death averted is valued the way every model on the site values it, GiveWell's moral weight for the age of the person saved (facts: moral_weights) times \"A child's life vs doubled-income year\" (Your values), not by HLI's WELLBYs of the years the person goes on to live above a neutral point. 0 in the evaluator view, where HLI's own value counts. Deaths averted now are not discounted. Grief averted for the family is part of what a death costs and is not added on top, as in GiveWell's models."
+    },
+    {
+      "id": "wellbys_from_uov",
+      "section": "discounting",
+      "label": "WELLBYs per $1,000 from the deaths averted",
+      "format": "number",
+      "formula": "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)",
+      "explainer": "The deaths' value in units of value (above), put into WELLBYs at the WELLBY rate (\"1 point more life satisfaction for a year vs doubled-income year\", Your values). The unit's conversion multiplies every WELLBY by the same rate, so the two cancel: the deaths count their shared value whatever the WELLBY slider says, and only the WELLBYs HLI measured move with it. The one row a model may read the WELLBY rate in (docs/normalization.md 2.3, INV-17)."
+    },
+    {
+      "id": "wellbys_per_1000_discounted",
+      "section": "discounting",
+      "label": "WELLBYs per $1,000, discounted",
+      "format": "number",
+      "formula": "wellbys_saving_per_1000 + wellbys_improving_per_1000 * discount_factor + wellbys_from_uov"
     },
     {
       "id": "amf_share_of_spending",
@@ -288,26 +414,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",
@@ -329,7 +445,7 @@
       "section": "staff_pay",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "(wellbys_per_1000 / 1000) * if($resource_shares, amf_share_of_spending, 1) * donor_cost_share",
+      "formula": "(wellbys_per_1000_discounted / 1000) * if($resource_shares, amf_share_of_spending, 1) * donor_cost_share",
       "explainer": "With credit by share of resources, times AMF's share of all spending and the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],

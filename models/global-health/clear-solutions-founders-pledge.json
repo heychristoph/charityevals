@@ -1,0 +1,210 @@
+{
+  "id": "clear-solutions-founders-pledge",
+  "name": "Clear Solutions (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "clear-solutions",
+  "owner": "founders-pledge",
+  "summary": "Community health workers bringing oral rehydration salts and zinc to children with diarrhoea in Nigeria. Founders Pledge's page states the drugs cost less than $0.60 a course; our bridge scales GiveWell's ORS/zinc analysis to that price.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Clear Solutions (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/clear-solutions",
+    "published": "2025-05-09",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Clear Solutions",
+      "url": "https://www.founderspledge.com/research/clear-solutions",
+      "type": "evaluation"
+    },
+    {
+      "title": "GiveWell, ORS/zinc CEA (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "bridge",
+      "title": "From the price of a course to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' bridge, not Founders Pledge's: the page's figure is the price of the drugs for one course, not the program's full cost or its effect. We take GiveWell's ORS/zinc analysis of the same program and scale it by GiveWell's price for the same co-pack over Founders Pledge's."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_course",
+      "section": "page",
+      "label": "Drug price of an ORS and zinc course (UNICEF co-pack)",
+      "format": "usd",
+      "value": 0.6,
+      "kind": "estimate",
+      "expected": 0.6,
+      "source": {
+        "title": "Founders Pledge, Clear Solutions (recommendation page)",
+        "url": "https://www.founderspledge.com/research/clear-solutions",
+        "quote": "These treatments are both inexpensive—costing less than $0.60 per course",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: the treatments cost \"less than $0.60 per course\", linked to UNICEF's supply catalogue. It is the price of the drugs, not the program's cost per child, and an upper bound."
+    },
+    {
+      "id": "gw_copack_price_2021",
+      "section": "bridge",
+      "label": "GiveWell: ORS and zinc co-pack price (2021 dollars)",
+      "format": "usd",
+      "value": 0.57,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, ORS/zinc CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+        "note": "Low SDI column, 'ORS+Zinc Co-Pack (2x 1L ORS+10 tabs Zinc) (USD, 2021)' (charityevals model clear-solutions-ors-zinc)",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "gw_inflation",
+      "section": "bridge",
+      "label": "GiveWell: US dollar inflation, 2021 to 2023",
+      "format": "percent",
+      "value": 0.12,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, ORS/zinc CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+        "note": "Low SDI column, 'USD inflation, 2021 to 2023' (charityevals model clear-solutions-ors-zinc)",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "gw_copack_price",
+      "section": "bridge",
+      "label": "GiveWell: price of the same co-pack, in its 2023 dollars",
+      "format": "usd",
+      "formula": "gw_copack_price_2021 * (1 + gw_inflation)",
+      "explainer": "GiveWell's price for the UNICEF ORS and zinc co-pack, inflated to its price year as GiveWell does: about $0.64."
+    },
+    {
+      "id": "gw_uov_all_support",
+      "section": "bridge",
+      "label": "GiveWell: units of value per dollar of all support (NGO and government)",
+      "format": "small",
+      "value": 0.01327741075,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, ORS/zinc CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+        "note": "CEA, 'Units of value generated per dollar spent' (charityevals model clear-solutions-ors-zinc, row units_of_value_generated_per_dollar_spent)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's value per dollar of the NGO's and the government's spending together, in low-SDI Nigerian states: the figure for credit by share of resources, when the government's money counts as cost."
+    },
+    {
+      "id": "gw_uov_philanthropic",
+      "section": "bridge",
+      "label": "GiveWell: units of value per philanthropic dollar, after leverage and funging",
+      "format": "small",
+      "value": 0.02029111345,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, ORS/zinc CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+        "note": "CEA, 'Units of value generated per philanthropic dollar spent, after accounting for leverage/funging' (charityevals model clear-solutions-ors-zinc)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "GiveWell's value per dollar of the charity's own money, after allowing for what the government's matching spending would otherwise do: the default figure, as in GiveWell's own model of the program."
+    },
+    {
+      "id": "gw_mortality_share",
+      "section": "bridge",
+      "label": "GiveWell: share of the value from deaths averted",
+      "format": "percent",
+      "value": 0.8629,
+      "kind": "estimate",
+      "source": {
+        "title": "GiveWell, ORS/zinc CEA (2024)",
+        "url": "https://docs.google.com/spreadsheets/d/17UkCIzatQ4swocfDwjV2q7Ru0aUD3T8czeyxZ4QA9oQ/edit",
+        "note": "Total units of value 4,685.84, of which development effects 335.42 and costs averted 308.23 (the rest, deaths averted) (charityevals model clear-solutions-ors-zinc)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "The part of GiveWell's value that moves with our value-of-life lever."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "bridge",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "if($resource_shares, gw_uov_all_support, gw_uov_philanthropic) * (gw_mortality_share * $life_value_multiplier + 1 - gw_mortality_share) * gw_copack_price / cost_per_course",
+      "explainer": "GiveWell's value per dollar, scaled by GiveWell's price for the same co-pack over Founders Pledge's (about 0.64 against 0.60, ×1.06). GiveWell builds every cost from the drug price (non-commodity costs ×2.25, leakage ×1.1, a matching government share), so before its leverage step a cheaper course stretches every dollar in proportion; after it the scaling is approximate, and GiveWell's course adds an extra ORS sachet the co-pack price leaves out. Founders Pledge's price is no evidence that Clear Solutions' course is cheaper; the result is close to GiveWell's own."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_course",
+      "unit": "$ per ORS/zinc course"
+    }
+  }
+}

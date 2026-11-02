@@ -102,7 +102,7 @@
       "label": "BRAC annual microloan disbursement in Bangladesh (Best guess)",
       "section": "leverage",
       "value": 6000000000.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -220,7 +220,7 @@
       "label": "Probability the trial/study fails (8x bar for future opportunities)",
       "section": "voi",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -242,7 +242,7 @@
       "label": "Probability that high quality RCT informs BRAC programming (Best guess)",
       "section": "leverage",
       "value": 0.33,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -268,9 +268,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
         "cell": "Desal kiosks!B21"
       },
-      "formula": "113 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 113.0,
-      "explainer": "GiveWell's moral weight, 113 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 113, is kept for the evaluator view.",
+      "published": 113.0
     },
     {
       "id": "what_this_is_estimated_cost_effectiveness_of_the_water_entre",
@@ -670,7 +671,7 @@
       "label": "Percent reduction in under-5 all-cause mortality, pre-adjustment (Bangladesh)",
       "section": "desal_kiosks",
       "value": 0.074,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -684,7 +685,7 @@
       "label": "Adjustment for lower than expected reduction in over-5 mortality in Bangladesh",
       "section": "desal_kiosks",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -716,6 +717,15 @@
       "expected": 1096.353277
     },
     {
+      "id": "moral_value_per_over_5_death_averted_bangladesh_age_mix",
+      "label": "Age mix of these deaths, relative to the average death at five or over",
+      "format": "number",
+      "value": 0.6011635246763964,
+      "kind": "estimate",
+      "explainer": "Deaths over five in Bangladesh fall at older ages than over-five deaths in GiveWell's average. GiveWell's sheet values these deaths at 44 units of value, 0.601 of its average five-and-over death (73.1914), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "desal_kiosks"
+    },
+    {
       "id": "moral_value_per_over_5_death_averted_bangladesh",
       "label": "Moral value per over-5 death averted (Bangladesh)",
       "section": "desal_kiosks",
@@ -724,9 +734,9 @@
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
         "cell": "Desal kiosks!B31"
       },
-      "formula": "44 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * moral_value_per_over_5_death_averted_bangladesh_age_mix * $life_value_multiplier",
       "expected": 44.0,
-      "explainer": "GiveWell's moral weight, 44 units of value, times your multiplier on the value of a life."
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_over5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 44 units of value at the defaults, as in GiveWell's sheet."
     },
     {
       "id": "percent_of_population_that_is_o5_bangladesh",
@@ -844,7 +854,7 @@
       "label": "Percent reduction in over-5 all-cause mortality, pre-adjustment (Bangladesh)",
       "section": "desal_kiosks",
       "value": 0.051,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -857,7 +867,7 @@
       "label": "Adjustment for lower than expected reduction in over-5 mortality in Bangladesh",
       "section": "desal_kiosks",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
@@ -899,13 +909,14 @@
       "id": "units_of_value_per_dollar_givedirectly_bangladesh",
       "label": "Units of value per dollar, GiveDirectly (Bangladesh)",
       "section": "desal_kiosks",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.00335,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1PGWD96cCvwVYgW7KXX2Deo5thCSBeo4QEsVxUylvd8Q/edit",
         "cell": "Desal kiosks!B39"
-      }
+      },
+      "explainer": "Changed for consistency: GiveWell's sheet used 0.00335 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.00335."
     },
     {
       "id": "cost_of_illness_averted_adjustment_bangladesh",
@@ -999,39 +1010,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

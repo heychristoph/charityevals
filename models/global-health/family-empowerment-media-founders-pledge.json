@@ -1,0 +1,609 @@
+{
+  "id": "family-empowerment-media-founders-pledge",
+  "name": "Family Empowerment Media (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "family-empowerment-media",
+  "owner": "founders-pledge",
+  "summary": "Radio campaigns about family planning in Kano, Nigeria. A re-implementation of Founders Pledge's November 2022 back-of-the-envelope estimate in its mass media report, which counts maternal deaths and fistulas averted through fewer unintended births, in WELLBY-equivalents, over three scenarios for how long the effect lasts.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Mass media interventions (shallow investigation), BOTECs",
+    "url": "https://www.founderspledge.com/research/mass-media-interventions",
+    "sheet": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+    "published": "2022-11-22",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge: Mass media interventions",
+      "url": "https://www.founderspledge.com/research/mass-media-interventions",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge mass media BOTECs (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "life_value_multiplier": 1,
+      "discount_rate": 0,
+      "uov_per_daly": 1.9498
+    }
+  },
+  "sections": [
+    {
+      "id": "params",
+      "title": "Intervention parameters"
+    },
+    {
+      "id": "calc",
+      "title": "Births, deaths and fistulas averted"
+    },
+    {
+      "id": "worst",
+      "title": "Worst case: effects for one year only"
+    },
+    {
+      "id": "best",
+      "title": "Best case: effects over 8 years"
+    },
+    {
+      "id": "medium",
+      "title": "Medium case: strongly diminishing effects over 4 years"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting (our lever inside Founders Pledge's scenarios)",
+      "explainer": "These rows feed Founders Pledge's scenarios, so they sit in its part of the model, but the lever is ours: the shared discount rate (Your values) is added to Founders Pledge's own scenario rates. Founders Pledge's notes describe those rates as diminishing effects or as access spreading anyway, not as later good counting less. The evaluator view pins our rate at 0, so Founders Pledge's numbers reproduce."
+    },
+    {
+      "id": "overall",
+      "title": "Overall cost-effectiveness"
+    },
+    {
+      "id": "to_daly",
+      "title": "Back to healthy years",
+      "kind": "ours",
+      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of GiveDirectly at $164 per WELLBY-equivalent; divided by that and by its 3.7 WELLBY-equivalents per healthy year, it is healthy years (DALYs) per dollar."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "women_reached",
+      "section": "params",
+      "label": "Women of reproductive age reached",
+      "format": "integer",
+      "value": 2240000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B4"
+      },
+      "explainer": "From FEM: Freedom Radio reaches 5.6 million listeners (third-party evaluation; the station says 10 million), 40% of them women of reproductive age. Kano campaign only."
+    },
+    {
+      "id": "effect_births",
+      "section": "params",
+      "label": "Effect of the radio campaign (share fewer births per year)",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B5"
+      },
+      "explainer": "From DMI's randomised trial in Burkina Faso."
+    },
+    {
+      "id": "generalisability_discount",
+      "section": "params",
+      "label": "Generalisability discount",
+      "format": "percent",
+      "value": 0.25,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B6"
+      },
+      "explainer": "Founders Pledge's judgment: the trial's women lived in rural villages without electricity, under 5 km from a health facility, which likely limits how well it carries over to Kano. The sheet's note on the fewer-births row says 40%, but the formula uses this 25%."
+    },
+    {
+      "id": "births_per_woman_year",
+      "section": "params",
+      "label": "Births per woman of reproductive age per year, Kano",
+      "value": 0.19,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B7"
+      },
+      "explainer": "DHS Nigeria 2018."
+    },
+    {
+      "id": "maternal_mortality_ratio",
+      "section": "params",
+      "label": "Maternal deaths per birth",
+      "format": "small",
+      "value": 0.00576,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B8"
+      },
+      "explainer": "Kano state data, including deaths from unsafe abortion."
+    },
+    {
+      "id": "fistula_prevalence",
+      "section": "params",
+      "label": "Fistula prevalence (%)",
+      "value": 0.426,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X14703481",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B9"
+      },
+      "explainer": "Lancet Global Health (2014) fistula study."
+    },
+    {
+      "id": "children_with_fistula",
+      "section": "params",
+      "label": "Mean number of children for a woman with fistula",
+      "value": 3.1,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X14703481",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B10"
+      },
+      "explainer": "Lancet Global Health (2014) fistula study."
+    },
+    {
+      "id": "pct_fistula_pregnancy",
+      "section": "params",
+      "label": "Fistulas due to pregnancy (%)",
+      "value": 71.4,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X14703481",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B11"
+      },
+      "explainer": "Lancet Global Health (2014) fistula study."
+    },
+    {
+      "id": "disability_weight_fistula",
+      "section": "params",
+      "label": "Disability weight of fistula",
+      "value": 0.5925,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B12"
+      },
+      "explainer": "GBD: the average of the weights for rectovaginal and vesicovaginal fistula."
+    },
+    {
+      "id": "years_contraception",
+      "section": "params",
+      "label": "Average time using contraception (years)",
+      "value": 1.96,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B13"
+      },
+      "explainer": "Founders Pledge's rough estimate: about half of users had implants (about 3 years), the rest injectables or pills (about 1 year), weighted."
+    },
+    {
+      "id": "births_reduction_per_woman",
+      "section": "calc",
+      "label": "Fewer births per woman per year",
+      "formula": "births_per_woman_year * effect_births",
+      "expected": 0.019
+    },
+    {
+      "id": "fewer_births",
+      "section": "calc",
+      "label": "Fewer births per year",
+      "format": "integer",
+      "formula": "births_reduction_per_woman * women_reached",
+      "expected": 42560
+    },
+    {
+      "id": "fewer_births_adjusted",
+      "section": "calc",
+      "label": "Fewer births, after the generalisability discount",
+      "format": "integer",
+      "formula": "fewer_births * (1 - generalisability_discount)",
+      "expected": 31920
+    },
+    {
+      "id": "maternal_deaths_averted",
+      "section": "calc",
+      "label": "Maternal deaths averted",
+      "formula": "fewer_births_adjusted * maternal_mortality_ratio",
+      "expected": 183.8592
+    },
+    {
+      "id": "fistula_per_pregnancy",
+      "section": "calc",
+      "label": "Chance of fistula per pregnancy",
+      "format": "small",
+      "formula": "((pct_fistula_pregnancy / 100) * (fistula_prevalence / 100)) / children_with_fistula",
+      "expected": 0.0009811741935
+    },
+    {
+      "id": "fistulas_averted",
+      "section": "calc",
+      "label": "Fewer women with fistula",
+      "formula": "fistula_per_pregnancy * fewer_births * (1 - generalisability_discount)",
+      "expected": 31.31908026
+    },
+    {
+      "id": "cost",
+      "section": "calc",
+      "label": "Total cost",
+      "format": "usd",
+      "value": 400000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B24"
+      },
+      "explainer": "From FEM by email: the approximate cost of its Kano campaign."
+    },
+    {
+      "id": "dalys_per_maternal_death",
+      "section": "worst",
+      "label": "DALY-equivalents per maternal death averted",
+      "formula": "@moral_weights.uov_per_death_age_15_49 / $uov_per_daly",
+      "published": 41.1,
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B28 (=B19*41.1)"
+      },
+      "explainer": "Changed for consistency. Founders Pledge values averting a maternal death at 41.1 healthy years. The site values every death averted with one shared figure for the age of the person saved, so that a life saved counts the same in every model: GiveWell's moral weights by age, here 104 units of value for a death at 15 to 49, the ages at which women give birth (a unit of value is a doubled income for a year), times the weight on a life under Your values. Divided by the rate between a healthy year and a doubled-income year (Your values), that is 52 healthy years at the default. The evaluator view uses Founders Pledge's 41.1."
+    },
+    {
+      "id": "life_value_weight",
+      "section": "worst",
+      "label": "Weight on the value of a life saved (ours)",
+      "format": "multiple",
+      "formula": "$life_value_multiplier",
+      "explainer": "charityevals' step, not Founders Pledge's: the shared value-of-life slider (Your values) scales the value of the deaths averted. The evaluator view pins it at 1, so Founders Pledge's numbers reproduce."
+    },
+    {
+      "id": "dalys_fistula_year",
+      "section": "worst",
+      "label": "DALYs averted by averting fistulas, one year",
+      "formula": "fistulas_averted * disability_weight_fistula",
+      "expected": 18.55655505
+    },
+    {
+      "id": "dalys_deaths_year",
+      "section": "worst",
+      "label": "DALY-equivalents averted by averting maternal deaths, one year",
+      "formula": "maternal_deaths_averted * dalys_per_maternal_death * life_value_weight",
+      "expected": 7556.61312
+    },
+    {
+      "id": "dalys_worst",
+      "section": "worst",
+      "label": "DALYs averted (one year of births × time using contraception)",
+      "formula": "(dalys_deaths_year + dalys_fistula_year) * years_contraception",
+      "expected": 14847.33256
+    },
+    {
+      "id": "wellbys_worst",
+      "section": "worst",
+      "label": "WELLBY-equivalents",
+      "formula": "dalys_worst * @founders_pledge.wellbys_per_daly",
+      "expected": 54935.13048
+    },
+    {
+      "id": "cost_per_wellby_worst",
+      "section": "worst",
+      "label": "Cost per WELLBY",
+      "format": "usd",
+      "formula": "cost / wellbys_worst",
+      "expected": 7.281315189
+    },
+    {
+      "id": "gdx_worst",
+      "section": "worst",
+      "label": "Multiple of GiveDirectly",
+      "format": "multiple",
+      "formula": "@founders_pledge.gd_cost_per_wellby / cost_per_wellby_worst",
+      "expected": 22.5234035
+    },
+    {
+      "id": "p_worst",
+      "section": "worst",
+      "label": "Probability of this scenario",
+      "format": "percent",
+      "value": 0.7,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B33"
+      },
+      "explainer": "Founders Pledge's rough judgment."
+    },
+    {
+      "id": "rate_best_fp",
+      "section": "best",
+      "label": "Rate at which the effect fades (Founders Pledge's 'discount rate')",
+      "format": "percent",
+      "value": 0.08,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B36"
+      },
+      "explainer": "Founders Pledge sets it higher than usual because contraceptive access and knowledge would spread anyway."
+    },
+    {
+      "id": "years_best",
+      "section": "best",
+      "label": "Years of effectiveness",
+      "value": 8,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B41"
+      },
+      "explainer": "Founders Pledge assumes contraceptive knowledge and access would be widespread within 10 years anyway."
+    },
+    {
+      "id": "dalys_fistula_best",
+      "section": "best",
+      "label": "DALYs averted by averting fistulas",
+      "formula": "pv(rate_best, years_best, -dalys_fistula_year, 0, 1)",
+      "expected": 115.1688477,
+      "explainer": "Spreadsheet PV with payments at the start of each year, as in the sheet (=PV(B36,B41,-B27,0,1))."
+    },
+    {
+      "id": "dalys_deaths_best",
+      "section": "best",
+      "label": "DALY-equivalents by averting maternal deaths",
+      "formula": "pv(rate_best, years_best, -dalys_deaths_year, 0, 1)",
+      "expected": 46899.13742
+    },
+    {
+      "id": "wellbys_best",
+      "section": "best",
+      "label": "WELLBY-equivalents",
+      "formula": "(dalys_fistula_best + dalys_deaths_best) * @founders_pledge.wellbys_per_daly",
+      "expected": 173952.9332
+    },
+    {
+      "id": "cost_per_wellby_best",
+      "section": "best",
+      "label": "Cost per WELLBY",
+      "format": "usd",
+      "formula": "cost / wellbys_best",
+      "expected": 2.29947258
+    },
+    {
+      "id": "gdx_best",
+      "section": "best",
+      "label": "Multiple of GiveDirectly",
+      "format": "multiple",
+      "formula": "@founders_pledge.gd_cost_per_wellby / cost_per_wellby_best",
+      "expected": 71.3207026
+    },
+    {
+      "id": "p_best",
+      "section": "best",
+      "label": "Probability of this scenario",
+      "format": "percent",
+      "value": 0.05,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B43"
+      },
+      "explainer": "Founders Pledge's judgment: unlikely but possible that new contraceptive knowledge becomes the norm."
+    },
+    {
+      "id": "rate_medium_fp",
+      "section": "medium",
+      "label": "Rate at which the effect fades (Founders Pledge's 'discount rate')",
+      "format": "percent",
+      "value": 0.6,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B46"
+      },
+      "explainer": "Founders Pledge assumes strongly diminishing effects."
+    },
+    {
+      "id": "years_medium",
+      "section": "medium",
+      "label": "Years of effectiveness",
+      "value": 4,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B51"
+      },
+      "explainer": "Founders Pledge's judgment."
+    },
+    {
+      "id": "dalys_fistula_medium",
+      "section": "medium",
+      "label": "DALYs averted by averting fistulas",
+      "formula": "pv(rate_medium, years_medium, -dalys_fistula_year, 0, 1)",
+      "expected": 41.93346523
+    },
+    {
+      "id": "dalys_deaths_medium",
+      "section": "medium",
+      "label": "DALY-equivalents by averting maternal deaths",
+      "formula": "pv(rate_medium, years_medium, -dalys_deaths_year, 0, 1)",
+      "expected": 17076.17457
+    },
+    {
+      "id": "wellbys_medium",
+      "section": "medium",
+      "label": "WELLBYs",
+      "formula": "(dalys_fistula_medium + dalys_deaths_medium) * @founders_pledge.wellbys_per_daly",
+      "expected": 63336.99973
+    },
+    {
+      "id": "cost_per_wellby_medium",
+      "section": "medium",
+      "label": "Cost per WELLBY",
+      "format": "usd",
+      "formula": "cost / wellbys_medium",
+      "expected": 6.315423871
+    },
+    {
+      "id": "gdx_medium",
+      "section": "medium",
+      "label": "Multiple of GiveDirectly",
+      "format": "multiple",
+      "formula": "@founders_pledge.gd_cost_per_wellby / cost_per_wellby_medium",
+      "expected": 25.96816989
+    },
+    {
+      "id": "p_medium",
+      "section": "medium",
+      "label": "Probability of this scenario",
+      "format": "percent",
+      "value": 0.25,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Mass media BOTECs: FEM family planning (Kano, Nigeria), November 2022",
+        "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+        "cell": "'FEM Family Planning (Kano, Nigeria)'!B53"
+      },
+      "explainer": "Founders Pledge's judgment."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future years (ours)",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "Our lever, not Founders Pledge's: the shared discount rate (Your values). Founders Pledge's own rates in these scenarios are explained in its notes as diminishing effects (or, for FEM's 8%, as contraceptive access spreading anyway), so we read them as the effect fading and apply ours on top. The evaluator view pins it at 0, so Founders Pledge's numbers reproduce."
+    },
+    {
+      "id": "rate_best",
+      "section": "discounting",
+      "label": "Fading and discount combined, best case",
+      "format": "percent",
+      "formula": "(1 + rate_best_fp) * (1 + discount_rate_per_year) - 1",
+      "explainer": "Founders Pledge's rate for this scenario combined with ours: the effect falls off at Founders Pledge's rate, and later years also count less at ours."
+    },
+    {
+      "id": "rate_medium",
+      "section": "discounting",
+      "label": "Fading and discount combined, medium case",
+      "format": "percent",
+      "formula": "(1 + rate_medium_fp) * (1 + discount_rate_per_year) - 1",
+      "explainer": "Founders Pledge's rate for this scenario combined with ours: the effect falls off at Founders Pledge's rate, and later years also count less at ours."
+    },
+    {
+      "id": "gd_multiple",
+      "section": "overall",
+      "label": "Overall multiple of GiveDirectly (probability-weighted)",
+      "format": "multiple",
+      "formula": "(p_worst * gdx_worst) + (gdx_best * p_best) + (p_medium * gdx_medium)",
+      "expected": 25.82446005
+    },
+    {
+      "id": "wellbys_per_dollar_fp",
+      "section": "to_daly",
+      "label": "Founders Pledge's value per dollar (WELLBY-equivalents)",
+      "format": "small",
+      "formula": "gd_multiple / @founders_pledge.gd_cost_per_wellby",
+      "explainer": "Founders Pledge's multiple of GiveDirectly divided by its $164 per WELLBY for GiveDirectly: the multiple back in its value units."
+    },
+    {
+      "id": "dalys_per_dollar_fp",
+      "section": "to_daly",
+      "label": "Healthy years (DALY-equivalents) per dollar",
+      "format": "small",
+      "formula": "wellbys_per_dollar_fp / @founders_pledge.wellbys_per_daly",
+      "explainer": "charityevals' step. Founders Pledge's 2022 'WELLBYs' are its own unit of value, built from its moral weights (3.7 per healthy year, 1.9 per doubled income-year), not life-satisfaction points measured in surveys, so they are not converted at the WELLBY exchange rate. Every benefit here was counted in healthy years and multiplied by 3.7, so dividing by 3.7 gives the healthy years back."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_media"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment.",
+      "formula": "@staff_pay.gap_media"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "staff_pay",
+      "label": "DALYs per dollar",
+      "format": "small",
+      "formula": "dalys_per_dollar_fp * donor_cost_share",
+      "explainer": "Founders Pledge's healthy years per dollar. With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_dollar",
+    "unit": "daly",
+    "label": "DALYs per dollar",
+    "native": {
+      "row": "gd_multiple",
+      "unit": "multiples of GiveDirectly (Founders Pledge)"
+    }
+  }
+}

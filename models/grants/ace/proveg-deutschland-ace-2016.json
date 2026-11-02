@@ -21,7 +21,8 @@
     "assumptions": {
       "resource_shares": 0,
       "chicken_vs_person": 0.463966,
-      "rp_species_weights": 0
+      "rp_species_weights": 0,
+      "discount_rate": 0
     }
   },
   "resources": [
@@ -42,6 +43,11 @@
       "id": "model",
       "title": "Model",
       "explainer": "VEBU provided budget and accomplishments information from 2015 and estimated accomplishments information from 2016.  Estimates in this sheet are made by Animal Charity Evaluators for the full year of 2015 unless otherwise noted.\n\nRead ACE's 2016 [review](https://animalcharityevaluators.org/research/charity-review/vebu/) of VEBU.\n"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not ACE's. ACE counts a year of changed meals the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so ACE's numbers reproduce."
     },
     {
       "id": "donor",
@@ -396,13 +402,13 @@
       "id": "animals_spared_per_dollar_by_corporate_policies",
       "label": "Animals spared per dollar by corporate policies",
       "section": "model",
-      "formula": "meals_affected_per_year_by_policies_influenced_in*years_of_change_accounted_for*animals_spared_per_meal/corporate_outreach_and_labeling_cost"
+      "formula": "meals_affected_per_year_by_policies_influenced_in*discounted_years_of_change*animals_spared_per_meal/corporate_outreach_and_labeling_cost"
     },
     {
       "id": "years_of_suffering_spared_per_dollar_by_corporate_2",
       "label": "Years of suffering spared per dollar by corporate policies",
       "section": "model",
-      "formula": "meals_affected_per_year_by_policies_influenced_in*years_of_change_accounted_for*years_of_suffering_spared_per_meal/corporate_outreach_and_labeling_cost"
+      "formula": "meals_affected_per_year_by_policies_influenced_in*discounted_years_of_change*years_of_suffering_spared_per_meal/corporate_outreach_and_labeling_cost"
     },
     {
       "id": "animals_spared_per_dollar_by_corporate_outreach_an",
@@ -537,26 +543,16 @@
       "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.65,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours.",
+      "formula": "@staff_pay.share_advocacy"
     },
     {
       "id": "salary_gap",
       "section": "donor",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours.",
+      "formula": "@staff_pay.gap_advocacy"
     },
     {
       "id": "salary_sacrifice",
@@ -623,18 +619,42 @@
       "id": "years_of_change_accounted_for_2",
       "label": "Years of change accounted for ",
       "section": "model",
-      "value": {
-        "low": 1.0,
-        "best": 3.872983346207417,
-        "high": 15.0
-      },
-      "kind": "judgment",
       "source": {
         "title": "Guesstimate model 7399",
         "url": "https://www.getguesstimate.com/models/7399",
         "cell": "YOC"
       },
-      "explainer": "ACE's 90% interval, 1 to 15 (lognormal). The best guess is its median.\n\nWe account for a limited term of change, because organizations may revise their practices again or may have adopted the practice later without VEBU's influence. We think it is unlikely that most institutions would retain a practice for less than a full year, and in the US we're aware of institutional policy changes lasting at least 4 years (for programs started about 4 years ago)."
+      "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE's own figure, 3.87 years (1 to 15, the geometric middle of its bounds), is kept as the evaluator's and used in the evaluator view.",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 1.0,
+        "best": 3.872983346207417,
+        "high": 15.0
+      }
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). ACE's 2016 model doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "continuous_discount_rate",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, so benefits spread over years can be discounted smoothly rather than in yearly steps."
+    },
+    {
+      "id": "discounted_years_of_change",
+      "section": "discounting",
+      "label": "Years of change accounted for, discounted",
+      "format": "number",
+      "formula": "if(continuous_discount_rate > 0, (1 - exp(-continuous_discount_rate * years_of_change_accounted_for_2)) / continuous_discount_rate, years_of_change_accounted_for_2)",
+      "explainer": "ACE multiplies the meals a policy or a trained caterer changes each year by the years of change, counting every year the same. In our view later years count less at the discount rate: this is the present value of one year's change a year over that many years (equal to the years at a 0% rate; 3.6 instead of 3.9 at 4%)."
     },
     {
       "id": "average_meals_affected_per_institution_per_year",
@@ -691,13 +711,13 @@
       "id": "animals_spared_per_dollar_by_caterer_training",
       "label": "Animals spared per dollar by caterer training",
       "section": "model",
-      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*years_of_change_accounted_for_2*animals_spared_per_meal_2)/institutional_outreach_cost"
+      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*discounted_years_of_change*animals_spared_per_meal_2)/institutional_outreach_cost"
     },
     {
       "id": "years_of_suffering_spared_per_dollar_by_caterer_tr",
       "label": "Years of suffering spared per dollar by caterer training",
       "section": "model",
-      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*years_of_change_accounted_for_2*years_of_suffering_spared_per_meal_2)/institutional_outreach_cost"
+      "formula": "(institutions_reached_per_year_by_caterer_training*average_meals_affected_per_institution_per_year*discounted_years_of_change*years_of_suffering_spared_per_meal_2)/institutional_outreach_cost"
     },
     {
       "id": "social_media_proportion_of_programs",
@@ -743,11 +763,38 @@
       "explainer": "The shared figures for a replaced meal, in suffering-adjusted days (SADs) and in animals, give the suffering behind each animal spared: about 8.7 SADs. Every model that counts animals spared uses this one rate, split by species. ACE's 2016 sheets don't give a species breakdown, so the split is ACE's 2024 estimate of which animals a plant-based diet spares."
     },
     {
+      "id": "production_response",
+      "label": "Fall in production per meal not eaten",
+      "format": "percent",
+      "formula": "@sad_factors.production_response",
+      "published": 1,
+      "explainer": "Changed for consistency: when fewer meals with animal products are eaten, prices fall and others eat a little more, so production falls by less (0.76 per unit for chicken, Norwood and Lusk; facts: sad_factors.production_response). Every diet-change model multiplies the suffering of meals replaced by it, as charityevals' own diet template does. ACE's 2016 model counts one meal less eaten as one meal less produced (1), kept in the evaluator view.",
+      "section": "species"
+    },
+    {
+      "id": "meal_mix_vs_reference",
+      "label": "Suffering in a replaced meal in Germany, relative to the reference meal",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "ACE, Meal Replacement Estimates 2025 ('Brazil', 'U.S.' and 'Global' tabs, column L)",
+        "url": "https://docs.google.com/spreadsheets/d/11W1pj0_zi0aHabR_degTMNT4wYpf_HbdMqwFxfEiv5k/edit",
+        "cell": "Brazil!L8, U.S.!L8, Global!L8"
+      },
+      "explainer": "Our judgment, labelled as one. The shared per-meal figure (facts: sad_factors.sads_per_meal_replaced) is ACE's Latin American reference meal, Sinergia Animal's canteens. ACE publishes per-country meal estimates only for Brazil and the US, none for Germany, so the reference meal stands in (1). The range, half to double, is ours: ACE's 2025 tabs put a US meal at 1.5 times a Brazilian one and the world average at 0.6 times. The evaluator's own per-meal figure has no such step (1), kept in the evaluator view.",
+      "published": 1
+    },
+    {
       "id": "sads_chicken",
       "section": "species",
       "label": "SADs averted per dollar you give: chickens",
       "format": "number",
-      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_chicken * donor_cost_share",
+      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * production_response * meal_mix_vs_reference * @sad_factors.meal_sads_share_chicken * donor_cost_share",
       "explainer": "SADs averted for chickens per dollar you give."
     },
     {
@@ -755,15 +802,15 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
       "format": "number",
-      "formula": "sads_chicken / @aim_sads.chicken * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken / @aim_sads.chicken)",
-      "explainer": "The SADs for chickens with Ambitious Impact's weight for a hen (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
+      "formula": "sads_chicken / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024)",
+      "explainer": "The SADs for chickens with the hen weight built into the 2024 SADs ACE used (46% of a person's) taken out, which leaves days of a chicken's disabling pain. A chicken counts as 1 here by definition; how a chicken's suffering compares with a person's is the chicken slider. The evaluator view keeps Ambitious Impact's weight, so ACE's own result reproduces."
     },
     {
       "id": "sads_fish",
       "section": "species",
       "label": "SADs averted per dollar you give: fish",
       "format": "number",
-      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_fish * donor_cost_share",
+      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * production_response * meal_mix_vs_reference * @sad_factors.meal_sads_share_fish * donor_cost_share",
       "explainer": "SADs averted for fish per dollar you give."
     },
     {
@@ -771,15 +818,15 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "number",
-      "formula": "sads_fish / @aim_sads.fish * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish / @aim_sads.chicken)",
-      "explainer": "The SADs for fish with Ambitious Impact's weight for fish taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+      "formula": "sads_fish / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024)",
+      "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces. The fish weight is a stand-in, our judgment: Rethink Priorities estimated only carp and salmon, and their mean stands for every farmed and wild-caught fish (facts: welfare_ranges.fish_vs_chicken, kind judgment)."
     },
     {
       "id": "sads_pig",
       "section": "species",
       "label": "SADs averted per dollar you give: pigs",
       "format": "number",
-      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * @sad_factors.meal_sads_share_pig * donor_cost_share",
+      "formula": "total_animals_spared_per_dollar * sads_per_animal_spared * production_response * meal_mix_vs_reference * @sad_factors.meal_sads_share_pig * donor_cost_share",
       "explainer": "SADs averted for pigs per dollar you give."
     },
     {
@@ -787,8 +834,8 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: pigs",
       "format": "number",
-      "formula": "sads_pig / @aim_sads.pig * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig / @aim_sads.chicken)",
-      "explainer": "The SADs for pigs with Ambitious Impact's weight for pigs taken out, and Rethink Priorities' estimate of how much pigs can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+      "formula": "sads_pig / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)",
+      "explainer": "The SADs for pigs with the pig weight built into the 2024 SADs ACE used (63% of a person's) taken out, and Rethink Priorities' estimate of how much pigs can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
     },
     {
       "id": "ced_per_donor_dollar",

@@ -806,7 +806,7 @@
       "label": "Upward adjustment to coverage in districts that received support from the Global-Fund-supported project, relative to districts that did not receive support from",
       "section": "counterfactual_tpt_coverage",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -915,7 +915,7 @@
       "label": "Upward adjustment to coverage in districts that received support from the Global-Fund-supported project, relative to districts that did not receive support from",
       "section": "counterfactual_tpt_coverage",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1082,7 +1082,7 @@
       "label": "Adjustment factor for adherence to TPT compared to study",
       "section": "full_cea",
       "value": 1.06,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1096,7 +1096,7 @@
       "label": "Adjustment factor for adherence to TPT compared to study",
       "section": "full_cea",
       "value": 1.06,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1118,7 +1118,7 @@
       "label": "Internal validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1132,7 +1132,7 @@
       "label": "Internal validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1154,7 +1154,7 @@
       "label": "External validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -1168,7 +1168,7 @@
       "label": "External validity adjustment",
       "section": "full_cea",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -2163,8 +2163,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Moral weights!F2"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -2176,8 +2176,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Moral weights!G2"
       },
-      "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life.",
-      "formula": "127.3 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_1_4, 127.3 units of value), times \"A child's life vs doubled-income year\" (Your values).",
+      "formula": "@moral_weights.givewell_age_1_4 * $life_value_multiplier",
       "expected": 127.3
     },
     {
@@ -2491,21 +2491,30 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (",
       "section": "full_cea",
-      "value": 0.31,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Full CEA!C206"
       },
-      "explainer": "See cell note"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.31 here. The site uses one figure for this in every GiveWell model, 0.30647 (Value of long-term income gains as a share of the value of deaths averted (GiveWell), `@givewell_shared.income_to_mortality_value_ratio`), GiveWell's current best guess; the evaluator view keeps 0.31.\n\nSee cell note",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "published": 0.31
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (, at your discount rate and values",
+      "section": "full_cea",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.31,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "adjustment_for_income_increases_generated_by_tb_u5_hcm_compa",
       "label": "Adjustment for income increases generated by TB U5 HCM compared to SMC (#REF!)",
       "section": "full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -2518,7 +2527,7 @@
       "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec",
       "label": "Estimate of total units of value from TB U5 HCM income effects (#REF!)",
       "section": "full_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa) * total_units_of_value_of_death_averted_ref",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_at_shared_values * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa) * total_units_of_value_of_death_averted_ref",
       "expected": 13206.90627
     },
     {
@@ -2545,14 +2554,14 @@
       "id": "morbidity_benefits_reductions_in_morbidity_averted_due_to_av",
       "label": "Morbidity benefits (reductions in morbidity averted due to averted TB disease): Disability weight (#REF!)",
       "section": "full_cea",
-      "value": 0.333,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Full CEA!C212"
       },
-      "explainer": "Global Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis"
+      "explainer": "Reads the figure every GiveWell model shares: Disability weight: tuberculosis, not HIV infected (GBD 2019) (`@gbd_disability_weights.tuberculosis`), the same number as this sheet's.\n\nGlobal Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis",
+      "formula": "@gbd_disability_weights.tuberculosis",
+      "expected": 0.333
     },
     {
       "id": "average_duration_of_tb_symptoms_in_children_in_years_ref",
@@ -3376,21 +3385,30 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (",
       "section": "full_cea",
-      "value": 0.31,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Full CEA!D206"
       },
-      "explainer": "See cell note"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.31 here. The site uses one figure for this in every GiveWell model, 0.30647 (Value of long-term income gains as a share of the value of deaths averted (GiveWell), `@givewell_shared.income_to_mortality_value_ratio`), GiveWell's current best guess; the evaluator view keeps 0.31.\n\nSee cell note",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "published": 0.31
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC) (, at your discount rate and values",
+      "section": "full_cea",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.31,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "adjustment_for_income_increases_generated_by_tb_u5_hcm_compa_2",
       "label": "Adjustment for income increases generated by TB U5 HCM compared to SMC (#REF!)",
       "section": "full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3424,7 +3442,7 @@
       "id": "estimate_of_total_units_of_value_from_tb_u5_hcm_income_effec_3",
       "label": "Estimate of total units of value from TB U5 HCM income effects (#REF!)",
       "section": "full_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2 * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa_2) * total_units_of_value_of_death_averted_ref_2",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_2_at_shared_values * (1 + adjustment_for_income_increases_generated_by_tb_u5_hcm_compa_2) * total_units_of_value_of_death_averted_ref_2",
       "expected": 21097.72305
     },
     {
@@ -3459,14 +3477,14 @@
       "id": "morbidity_benefits_reductions_in_morbidity_averted_due_to_av_2",
       "label": "Morbidity benefits (reductions in morbidity averted due to averted TB disease): Disability weight (#REF!)",
       "section": "full_cea",
-      "value": 0.333,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
         "cell": "Full CEA!D212"
       },
-      "explainer": "Global Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis"
+      "explainer": "Reads the figure every GiveWell model shares: Disability weight: tuberculosis, not HIV infected (GBD 2019) (`@gbd_disability_weights.tuberculosis`), the same number as this sheet's.\n\nGlobal Burden of Disease Study 2019 disability weights for drug-susceptible tuberculosis",
+      "formula": "@gbd_disability_weights.tuberculosis",
+      "expected": 0.333
     },
     {
       "id": "average_duration_of_tb_symptoms_in_children_in_years_ref_2",
@@ -3620,7 +3638,7 @@
       "label": "Adjustment factor for smaller effect from facility-based TPT initiation",
       "section": "additional_benefits",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3634,7 +3652,7 @@
       "label": "Adjustment factor for higher counterfactual TB treatment coverage",
       "section": "additional_benefits",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3648,7 +3666,7 @@
       "label": "Adjustment factor for transmission effects",
       "section": "additional_benefits",
       "value": 2.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3662,7 +3680,7 @@
       "label": "Adjustment factor for averted TB deaths being temporarily delayed rather than genuinely averted",
       "section": "additional_benefits",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3743,7 +3761,7 @@
       "label": "Scenario 1: Government funding would replace philanthropic funding",
       "section": "full_cea",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3835,7 +3853,7 @@
       "label": "Scenario 1: Government funding would replace philanthropic funding",
       "section": "full_cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3864,7 +3882,7 @@
       "label": "Scenario 2: Other international funders would replace philanthropic funding",
       "section": "full_cea",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -3906,7 +3924,7 @@
       "label": "Scenario 2: Other international funders would replace philanthropic funding",
       "section": "full_cea",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1rxsXvePnzCqNUUy9nEQx9af8Iuq6XKBbDgJvwXnCB3k/edit",
@@ -4499,39 +4517,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

@@ -1,0 +1,203 @@
+{
+  "id": "teaching-at-the-right-level-africa-founders-pledge",
+  "name": "Teaching at the Right Level Africa (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "teaching-at-the-right-level-africa",
+  "owner": "founders-pledge",
+  "summary": "Helps African governments teach children by learning level rather than grade. Founders Pledge's page states 0.03 to 0.05 standard deviations of test scores per dollar; we turn test scores into income with Founders Pledge's own 2023 education method.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Teaching at the Right Level Africa (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/teaching-at-the-right-level-africa",
+    "published": "2024-01-16",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Teaching at the Right Level Africa",
+      "url": "https://www.founderspledge.com/research/teaching-at-the-right-level-africa",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0.04
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "income",
+      "title": "From test scores to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step, using Founders Pledge's own method: its 2023 education report turns a rise in test scores into higher lifetime earnings (19.1% more a year per standard deviation, 17.5% of it kept, from 8 years on for 40 years, shared with the household). The page's figure stops at test scores; we apply the method as its Imagine Worldwide model does."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "sd_per_dollar",
+      "section": "page",
+      "label": "Rise in test scores per dollar (standard deviations, all students)",
+      "format": "small",
+      "value": {
+        "low": 0.03,
+        "best": 0.04,
+        "high": 0.05
+      },
+      "kind": "estimate",
+      "expected": 0.04,
+      "source": {
+        "title": "Founders Pledge, Teaching at the Right Level Africa (recommendation page)",
+        "url": "https://www.founderspledge.com/research/teaching-at-the-right-level-africa",
+        "quote": "TaRL Africa brings about a total increase in test scores of between 0.03-0.05 standard deviations per USD$ donated",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's own estimate, quoted on its page: \"a total increase in test scores of between 0.03-0.05 standard deviations per USD$ donated\", summed over all the students reached. Best guess the midpoint (ours); the range is Founders Pledge's. No sheet is published; the page says it assumes returns to scale are linear. The page also says \"In this evaluation, we have not attempted to account for\" counterfactual government spending; Founders Pledge's Imagine Worldwide model nets that out and applies a 0.7 funging discount, so this figure is not adjusted the same way. Because it is Founders Pledge's finished estimate, not a raw effect size, no shrinking towards the prior is added."
+    },
+    {
+      "id": "salary_increase_per_sd",
+      "section": "income",
+      "label": "Annual salary increase per standard deviation of learning",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.salary_increase_per_sd",
+      "explainer": "Founders Pledge's own figure from its 2023 education report (19.1%), shared with its Imagine Worldwide model. The page's figure stops at test scores; this and the rows below are Founders Pledge's own method for turning test scores into income, applied by us."
+    },
+    {
+      "id": "replicability_adjustment",
+      "section": "income",
+      "label": "Replicability adjustment",
+      "format": "percent",
+      "formula": "@founders_pledge_2023.replicability_adjustment",
+      "explainer": "Founders Pledge's 17.5%: how much of that earnings evidence it expects to hold up, from comparing it with the evidence for deworming."
+    },
+    {
+      "id": "ln_income_gain",
+      "section": "income",
+      "label": "Yearly gain in ln(income) per standard deviation",
+      "format": "small",
+      "formula": "ln(1 + salary_increase_per_sd * replicability_adjustment)"
+    },
+    {
+      "id": "years_till_benefit",
+      "section": "income",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "formula": "@founders_pledge_2023.years_till_income_gain",
+      "explainer": "Founders Pledge's 8 years from primary school to work."
+    },
+    {
+      "id": "benefit_years",
+      "section": "income",
+      "label": "Years the income gain lasts",
+      "format": "number",
+      "formula": "@founders_pledge_2023.income_gain_years",
+      "explainer": "Founders Pledge's 40 working years."
+    },
+    {
+      "id": "household_multiplier",
+      "section": "income",
+      "label": "Household multiplier",
+      "format": "number",
+      "formula": "@founders_pledge_2023.household_multiplier",
+      "explainer": "Founders Pledge counts the gain twice because it is shared with the household."
+    },
+    {
+      "id": "pv_ln_income_per_sd",
+      "section": "income",
+      "label": "Present value of ln(income) gains per standard deviation, per student",
+      "format": "number",
+      "formula": "household_multiplier * (-pv($discount_rate, benefit_years, ln_income_gain, 0, 1)) / (1 + $discount_rate) ^ years_till_benefit",
+      "explainer": "Founders Pledge's formula from its Imagine Worldwide model: the yearly gain paid at the start of each of 40 years, discounted, then discounted again for the 8-year wait. Here at the shared discount rate (Your values); Founders Pledge used 4%, the site's default."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "income",
+      "label": "Increase in ln(income) per dollar",
+      "format": "small",
+      "formula": "sd_per_dollar * pv_ln_income_per_sd"
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "income",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "The income gain valued like every income gain on the site: GiveWell's units of value per unit of ln(consumption) (one unit = doubling one person's income for a year)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Technical assistance to governments, mostly by African education staff. Our judgment; we haven't seen TaRL Africa's cost breakdown.",
+      "formula": "@staff_pay.share_research_policy"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Education specialists at a nonprofit in Africa may earn somewhat less than at donors or consultancies. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "gov_cost_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Government spending on the program per dollar donated to TaRL Africa",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Founders Pledge's figure counts the learning in programs that governments run and pay for, and its page says it hasn't accounted for that spending. Founders Pledge's Imagine Worldwide model puts the government's share at about as much as the philanthropic money (1.03 per dollar). Counts only with credit by share of resources on, when every contributor's spending shares the gain."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + gov_cost_per_donor_dollar, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "sd_per_dollar",
+      "unit": "standard deviations of test scores per $"
+    }
+  }
+}

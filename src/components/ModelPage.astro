@@ -50,7 +50,7 @@ const RES_GROUPS = [
 ] as const;
 const allResources = [...(charity.resources ?? []), ...(model.resources ?? []), ...writeupLinks].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
 const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
-const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety" } as const;
+const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety", climate: "Climate" } as const;
 // Bulk imports carry a generated summary about the import; the charity's own one-liner reads better.
 // One sentence: the charity's own line, else the model summary's first sentence. It doesn't repeat the import boilerplate every model's summary carries
 // ("a re-implementation of ...": the method page says it once for all) or the source's title.
@@ -101,6 +101,16 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </div>
         )}
       </header>
+      {model.theoretical && (
+        <aside class="theory-note" role="note" aria-label="Purely theoretical estimate">
+          <p>
+            <strong>Purely theoretical.</strong> This is {owner.name}'s estimate of the idea, written before {charity.name} existed, not of
+            the charity's own results. We show it because {charity.name} runs this programme today
+            (<a href={model.theoretical.url} rel="noopener">checked {fmtDate(model.theoretical.checked)}</a>: {model.theoretical.runs.replace(/\.$/, "")})
+            and no model of its actual work exists yet.
+          </p>
+        </aside>
+      )}
       <div class="m-model">
         {current.length > 1 && (
           <nav class="owners" aria-label="Evaluators' models of this charity">
@@ -108,7 +118,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               const here = m.owner === model.owner;
               return (
                 <a href={modelUrl(lib, m)} aria-current={here ? "page" : undefined} class:list={["owner-tab", { here }]} data-evaluator-tab={m.owner}>
-                  {lib.owners.get(m.owner)!.name}
+                  {lib.owners.get(m.owner)!.name}{m.theoretical && <span class="owner-tab-note"> (purely theoretical)</span>}
                 </a>
               );
             })}
@@ -215,6 +225,19 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   .writeup-body :global(h3#sources),
   .writeup-body :global(h3#sources ~ *) {
     display: none;
+  }
+  .theory-note {
+    margin: 0 0 1rem;
+    padding: 0.6rem 0.8rem;
+    border-left: 3px dashed var(--cause);
+    background: color-mix(in srgb, var(--cause) 7%, transparent);
+  }
+  .theory-note p {
+    margin: 0;
+  }
+  .owner-tab-note {
+    font-weight: 400;
+    font-style: italic;
   }
   .resources summary {
     cursor: pointer;

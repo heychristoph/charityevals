@@ -1,0 +1,758 @@
+{
+  "id": "suvita-founders-pledge",
+  "name": "Suvita (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "suvita",
+  "owner": "founders-pledge",
+  "summary": "SMS reminders and community ambassadors that raise childhood vaccination, plus SMS reminders for antenatal visits, in Bihar and Maharashtra, India. A re-implementation of Founders Pledge's June 2022 cost-effectiveness analysis, which counts under-5 deaths averted and values them in its units of value (WELLBYs).",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Suvita: charity recommendation and cost-effectiveness analysis",
+    "url": "https://www.founderspledge.com/research/suvita",
+    "sheet": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+    "published": "2022-06-13",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge: Suvita",
+      "url": "https://www.founderspledge.com/research/suvita",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge Suvita CEA (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "life_value_multiplier": 1
+    }
+  },
+  "sections": [
+    {
+      "id": "gap",
+      "title": "The donation"
+    },
+    {
+      "id": "params",
+      "title": "Reach and budget"
+    },
+    {
+      "id": "effects",
+      "title": "Effect sizes"
+    },
+    {
+      "id": "vaccination",
+      "title": "Vaccination reminders"
+    },
+    {
+      "id": "sanity",
+      "title": "Sanity check (doesn't feed the result)"
+    },
+    {
+      "id": "anc",
+      "title": "Antenatal care reminders"
+    },
+    {
+      "id": "outcomes",
+      "title": "Outcomes"
+    },
+    {
+      "id": "ce",
+      "title": "Cost-effectiveness"
+    },
+    {
+      "id": "to_uov",
+      "title": "Into doubled income-years",
+      "kind": "ours",
+      "explainer": "charityevals' step: Founders Pledge's value units are WELLBY-equivalents built from its moral weights; dividing by its value of a doubled income-year gives GiveWell's units of value."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "room_for_more_funding",
+      "section": "gap",
+      "label": "Room for more funding over the next 3 years",
+      "format": "usd",
+      "value": 5600000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B1"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "donation",
+      "section": "gap",
+      "label": "Hypothetical donation",
+      "format": "usd",
+      "value": 100000,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B3"
+      },
+      "explainer": "The donation Founders Pledge models; the result is per dollar, so its size only matters through its share of Suvita's budget."
+    },
+    {
+      "id": "children_sms_2021",
+      "section": "params",
+      "label": "Children reached by SMS, end of 2021",
+      "format": "integer",
+      "value": 450000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B6"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "children_sms_added_2022",
+      "section": "params",
+      "label": "Predicted additional children reached by SMS, end of 2022 (funding gap met)",
+      "format": "integer",
+      "value": 250000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B7"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "children_amb_2021",
+      "section": "params",
+      "label": "Children reached by ambassadors, end of 2021",
+      "format": "integer",
+      "value": 11057,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B8"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "children_amb_added_2022",
+      "section": "params",
+      "label": "Predicted additional children reached by ambassadors, end of 2022 (funding gap met)",
+      "format": "integer",
+      "value": 40000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B9"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "women_anc_2021",
+      "section": "params",
+      "label": "Pregnant women reached for antenatal care, end of 2021",
+      "format": "integer",
+      "value": 32225,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B10"
+      },
+      "explainer": "From Suvita by email to Founders Pledge (June 2022)."
+    },
+    {
+      "id": "women_anc_added_2022",
+      "section": "params",
+      "label": "Predicted additional pregnant women reached for antenatal care, end of 2022",
+      "format": "integer",
+      "value": 27775,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B11"
+      },
+      "explainer": "From Suvita by email to Founders Pledge (June 2022); Suvita said it was on track for 60,000+ in 2022, so this may be low."
+    },
+    {
+      "id": "budget_2022",
+      "section": "params",
+      "label": "Suvita's total budget, 2022",
+      "format": "usd",
+      "value": 520000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B12"
+      },
+      "explainer": "Suvita's budget, which covers messaging both the children enrolled in 2021 and those newly reached in 2022. Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "donation_share",
+      "section": "params",
+      "label": "Donation as a share of the 2022 budget",
+      "format": "percent",
+      "formula": "donation / budget_2022",
+      "expected": 0.1923076923
+    },
+    {
+      "id": "pp_vaccination_sms",
+      "section": "effects",
+      "label": "Increase in vaccination rates, SMS program (percentage points)",
+      "value": 2,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B16"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "pp_vaccination_ambassador",
+      "section": "effects",
+      "label": "Increase in vaccination rates, ambassador program (percentage points)",
+      "value": 7.35,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B17"
+      },
+      "explainer": "Suvita's own figures, via Founders Pledge (the sheet cites an internal source)."
+    },
+    {
+      "id": "pp_anc_attendance",
+      "section": "effects",
+      "label": "Increase in antenatal appointments from SMS reminders, with a 50% discount (percentage points)",
+      "value": 5.4,
+      "kind": "estimate",
+      "source": {
+        "title": "Cochrane review, mobile phone messaging for preventive health care (via Founders Pledge)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B18"
+      },
+      "explainer": "Cochrane review of SMS reminders (10.8 points), halved by Founders Pledge."
+    },
+    {
+      "id": "anc_infant_mortality_effect",
+      "section": "effects",
+      "label": "Fall in infant mortality from attending all four antenatal visits, before discount (percentage points)",
+      "value": 1.47,
+      "kind": "estimate",
+      "source": {
+        "title": "BMJ Open 2017;7:e017122, via Founders Pledge",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B19 (=1.47*0.3333)"
+      },
+      "explainer": "From a study of antenatal care and infant mortality (BMJ Open 2017)."
+    },
+    {
+      "id": "anc_neonatal_mortality_effect",
+      "section": "effects",
+      "label": "Fall in neonatal mortality from attending all four antenatal visits, before discount (percentage points)",
+      "value": 0.8,
+      "kind": "estimate",
+      "source": {
+        "title": "BMJ Open 2017;7:e017123, via Founders Pledge",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B20 (=0.8*0.3333)"
+      },
+      "explainer": "From a study of antenatal care and neonatal mortality (BMJ Open 2017)."
+    },
+    {
+      "id": "anc_effect_kept",
+      "section": "effects",
+      "label": "Share of the antenatal-care effect kept (Founders Pledge's 66% discount)",
+      "value": 0.3333,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B19:B20"
+      },
+      "explainer": "Founders Pledge keeps a third of the effect of attending all four visits: most women in Maharashtra attend none or all four, and the reminders come before every visit."
+    },
+    {
+      "id": "pp_infant_mortality_anc",
+      "section": "effects",
+      "label": "Fall in infant mortality from attending all four visits, after discount (percentage points)",
+      "formula": "anc_infant_mortality_effect * anc_effect_kept",
+      "expected": 0.489951
+    },
+    {
+      "id": "pp_neonatal_mortality_anc",
+      "section": "effects",
+      "label": "Fall in neonatal mortality from attending all four visits, after discount (percentage points)",
+      "formula": "anc_neonatal_mortality_effect * anc_effect_kept",
+      "expected": 0.26664
+    },
+    {
+      "id": "pct_no_anc4",
+      "section": "effects",
+      "label": "Women who don't attend at least four antenatal visits, Maharashtra (%)",
+      "value": 29.7,
+      "kind": "observed",
+      "source": {
+        "title": "NFHS-5 (2021), via Founders Pledge",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B21"
+      },
+      "explainer": "NFHS-5 (2021). The antenatal reminders run in Maharashtra only."
+    },
+    {
+      "id": "nmr_per_1000",
+      "section": "effects",
+      "label": "Neonatal mortality, Maharashtra (per 1,000 live births)",
+      "value": 16.5,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B22 (=16.5/10)"
+      },
+      "explainer": "Maharashtra's neonatal mortality rate, as Founders Pledge uses it."
+    },
+    {
+      "id": "pct_nmr",
+      "section": "effects",
+      "label": "Neonatal mortality, Maharashtra (%)",
+      "formula": "nmr_per_1000 / 10",
+      "expected": 1.65
+    },
+    {
+      "id": "imr_per_1000",
+      "section": "effects",
+      "label": "Infant mortality, Maharashtra (per 1,000 live births)",
+      "value": 23.2,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B23 (=23.2/10)"
+      },
+      "explainer": "Maharashtra's infant mortality rate, as Founders Pledge uses it."
+    },
+    {
+      "id": "pct_imr",
+      "section": "effects",
+      "label": "Infant mortality, Maharashtra (%)",
+      "formula": "imr_per_1000 / 10",
+      "expected": 2.32
+    },
+    {
+      "id": "share_still_enrolled",
+      "section": "vaccination",
+      "label": "Share of last year's children still on the schedule",
+      "format": "percent",
+      "value": 0.8,
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B26:B27 (0.8)"
+      },
+      "explainer": "The last vaccines on the schedule are in a child's fifth year, so a fifth of last year's children leave the program."
+    },
+    {
+      "id": "children_sms_2022",
+      "section": "vaccination",
+      "label": "Children reached by SMS reminders in 2022",
+      "format": "integer",
+      "formula": "share_still_enrolled * children_sms_2021 + children_sms_added_2022",
+      "expected": 610000
+    },
+    {
+      "id": "children_amb_2022",
+      "section": "vaccination",
+      "label": "Children reached by ambassadors in 2022",
+      "format": "integer",
+      "formula": "share_still_enrolled * children_amb_2021 + children_amb_added_2022",
+      "expected": 48845.6
+    },
+    {
+      "id": "children_sms_donation",
+      "section": "vaccination",
+      "label": "Children reached by SMS thanks to the donation",
+      "format": "integer",
+      "formula": "donation_share * children_sms_2022",
+      "expected": 117307.6923
+    },
+    {
+      "id": "sms_share_bihar",
+      "section": "vaccination",
+      "label": "Share of Suvita's SMS that go to Bihar",
+      "format": "percent",
+      "value": 0.6,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B29 (0.6), B30 (0.4)"
+      },
+      "explainer": "About 60% of Suvita's SMS go to Bihar and 40% to Maharashtra, which have different baseline vaccination rates."
+    },
+    {
+      "id": "children_sms_bihar",
+      "section": "vaccination",
+      "label": "Children in Bihar reached by SMS thanks to the donation",
+      "format": "integer",
+      "formula": "sms_share_bihar * children_sms_donation",
+      "expected": 70384.61538
+    },
+    {
+      "id": "children_sms_maharashtra",
+      "section": "vaccination",
+      "label": "Children in Maharashtra reached by SMS thanks to the donation",
+      "format": "integer",
+      "formula": "(1 - sms_share_bihar) * children_sms_donation",
+      "expected": 46923.07692
+    },
+    {
+      "id": "children_amb_donation",
+      "section": "vaccination",
+      "label": "Children reached by ambassadors thanks to the donation",
+      "format": "integer",
+      "formula": "donation_share * children_amb_2022",
+      "expected": 9393.384615
+    },
+    {
+      "id": "children_amb_bihar",
+      "section": "vaccination",
+      "label": "Children in Bihar reached by ambassadors thanks to the donation",
+      "format": "integer",
+      "formula": "children_amb_donation",
+      "expected": 9393.384615,
+      "explainer": "All of the ambassador program is in Bihar (the sheet keeps a Maharashtra row at 0 for later years)."
+    },
+    {
+      "id": "deaths_averted_sms",
+      "section": "vaccination",
+      "label": "Under-5 deaths averted through vaccination, SMS reminders",
+      "format": "number",
+      "value": 37.448,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B34"
+      },
+      "explainer": "Copied by hand from Founders Pledge's separate SMS and ambassador sheet (adapted from Suvita's and GiveWell's model), which isn't published. The sheet's notes say it must be updated by hand when the children reached change, so it doesn't move with the rows above. With the ambassador figure it is about 95% of the deaths averted, so the result rests on a sheet we can't check. Founders Pledge's own sanity check below (which doesn't feed the result) gives about 317 deaths for the SMS children, about 8 times this figure."
+    },
+    {
+      "id": "deaths_averted_ambassador",
+      "section": "vaccination",
+      "label": "Under-5 deaths averted through vaccination, ambassadors",
+      "format": "number",
+      "value": 11.31,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B35"
+      },
+      "explainer": "Copied by hand from Founders Pledge's unpublished SMS and ambassador sheet, like the SMS figure; we can't check it."
+    },
+    {
+      "id": "sanity_pp_vaccination",
+      "section": "sanity",
+      "label": "Increase in vaccination from the intervention (percentage points)",
+      "value": 2,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B38"
+      },
+      "explainer": "Founders Pledge's sanity check of the SMS effect on deaths; it doesn't feed the result."
+    },
+    {
+      "id": "vacc_rate_bihar",
+      "section": "sanity",
+      "label": "Current vaccination rate, Bihar (%)",
+      "value": 73.5,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B39 (=(73.5+71)/2)"
+      },
+      "explainer": "NFHS-5."
+    },
+    {
+      "id": "vacc_rate_maharashtra",
+      "section": "sanity",
+      "label": "Current vaccination rate, Maharashtra (%)",
+      "value": 71,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B39 (=(73.5+71)/2)"
+      },
+      "explainer": "NFHS-5."
+    },
+    {
+      "id": "vacc_rate",
+      "section": "sanity",
+      "label": "Current vaccination rate, average (%)",
+      "formula": "(vacc_rate_bihar + vacc_rate_maharashtra) / 2",
+      "expected": 72.25
+    },
+    {
+      "id": "vaccinated_without",
+      "section": "sanity",
+      "label": "Children vaccinated without the reminders",
+      "format": "integer",
+      "formula": "children_sms_donation * (vacc_rate / 100)",
+      "expected": 84754.80769
+    },
+    {
+      "id": "vaccinated_with",
+      "section": "sanity",
+      "label": "Children vaccinated with the reminders",
+      "format": "integer",
+      "formula": "children_sms_donation * ((sanity_pp_vaccination + vacc_rate) / 100)",
+      "expected": 87100.96154
+    },
+    {
+      "id": "extra_vaccinated",
+      "section": "sanity",
+      "label": "Extra children vaccinated",
+      "format": "integer",
+      "formula": "vaccinated_with - vaccinated_without",
+      "expected": 2346.153846
+    },
+    {
+      "id": "mortality_effect_mcgovern",
+      "section": "sanity",
+      "label": "Mortality reduction per extra child vaccinated, before the 50% discount",
+      "value": 0.27,
+      "kind": "estimate",
+      "source": {
+        "title": "McGovern and Canning (2015), via Founders Pledge",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B43 (=(0.27/2)*B42)"
+      },
+      "explainer": "McGovern and Canning (2015), halved as in the earlier evaluation."
+    },
+    {
+      "id": "sanity_deaths",
+      "section": "sanity",
+      "label": "Children who would have died without the program (sanity check)",
+      "formula": "(mortality_effect_mcgovern / 2) * extra_vaccinated",
+      "expected": 316.7307692
+    },
+    {
+      "id": "women_anc_donation",
+      "section": "anc",
+      "label": "Additional pregnant women reached thanks to the donation, Maharashtra",
+      "format": "integer",
+      "formula": "donation_share * women_anc_added_2022",
+      "expected": 5341.346154
+    },
+    {
+      "id": "anc4_without",
+      "section": "anc",
+      "label": "Women who attend four antenatal visits without the program",
+      "format": "integer",
+      "formula": "women_anc_donation * ((100 - pct_no_anc4) / 100)",
+      "expected": 3754.966346
+    },
+    {
+      "id": "anc4_with",
+      "section": "anc",
+      "label": "Women who attend four antenatal visits with the program",
+      "format": "integer",
+      "formula": "((100 - pct_no_anc4 + pp_anc_attendance) / 100) * women_anc_donation",
+      "expected": 4043.399038
+    },
+    {
+      "id": "extra_anc4",
+      "section": "anc",
+      "label": "Extra women who attend four visits",
+      "formula": "anc4_with - anc4_without",
+      "expected": 288.4326923
+    },
+    {
+      "id": "neonatal_deaths_without",
+      "section": "anc",
+      "label": "Neonatal deaths among them without the program",
+      "formula": "extra_anc4 * (pct_nmr / 100)",
+      "expected": 4.759139423
+    },
+    {
+      "id": "neonatal_deaths_with",
+      "section": "anc",
+      "label": "Neonatal deaths among them with the program",
+      "formula": "extra_anc4 * ((pct_nmr / 100) - (pp_infant_mortality_anc / 100))",
+      "expected": 3.345960563,
+      "explainer": "As in the sheet, this subtracts the infant-mortality effect (not the neonatal one) from the neonatal rate."
+    },
+    {
+      "id": "infant_deaths_without",
+      "section": "anc",
+      "label": "Infant deaths among them without the program",
+      "formula": "extra_anc4 * (pct_imr / 100)",
+      "expected": 6.691638462
+    },
+    {
+      "id": "infant_deaths_with",
+      "section": "anc",
+      "label": "Infant deaths among them with the program",
+      "formula": "extra_anc4 * ((pct_imr / 100) - (pp_infant_mortality_anc / 100))",
+      "expected": 5.278459601
+    },
+    {
+      "id": "anc_deaths_averted",
+      "section": "anc",
+      "label": "Infants and newborns saved by the antenatal reminders",
+      "formula": "(neonatal_deaths_without - neonatal_deaths_with) + (infant_deaths_without - infant_deaths_with)",
+      "expected": 2.826357721,
+      "explainer": "As in the sheet, newborn deaths averted are added to infant deaths averted, though infant mortality already includes the newborn period: a double count worth about 1.4 deaths, under 3% of the result."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcomes",
+      "label": "Under-5 deaths averted",
+      "formula": "deaths_averted_ambassador + deaths_averted_sms + anc_deaths_averted",
+      "expected": 51.58435772
+    },
+    {
+      "id": "wellbys_per_u5_death",
+      "section": "outcomes",
+      "label": "Value of averting an under-5 death (in Founders Pledge units: WELLBY-equivalents)",
+      "unit": "WELLBYs",
+      "formula": "@moral_weights.uov_per_death_under5 * @founders_pledge.wellbys_per_doubling",
+      "published": 241.3,
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B58 (=B57*241.3)"
+      },
+      "explainer": "Changed for consistency. Founders Pledge's 2022 moral weight for an under-5 death is 241.3 WELLBY-equivalents (127 doubled income-years at its 1.898 per doubling; its Imagine Worldwide sheet of 2023 uses 244.8). The site values every death averted with one shared figure, so that a life saved counts the same in every model: GiveWell's moral weights, 116.25 units of value (a unit of value is a doubled income for a year), times the weight on a life under Your values. Here that value is written in Founders Pledge's units, 116.25 × Founders Pledge's 1.898, so the steps below can stay as Founders Pledge built them; the step into doubled income-years divides the 1.898 out again, so each death counts 116.25. The evaluator view uses Founders Pledge's 241.3."
+    },
+    {
+      "id": "life_value_weight",
+      "section": "outcomes",
+      "label": "Weight on the value of a life saved (ours)",
+      "format": "multiple",
+      "formula": "$life_value_multiplier",
+      "explainer": "charityevals' step, not Founders Pledge's: the shared value-of-life slider (Your values), which scales GiveWell's value of a death averted. The evaluator view pins it at 1, so Founders Pledge's numbers reproduce."
+    },
+    {
+      "id": "value_deaths",
+      "section": "outcomes",
+      "label": "Value of the deaths averted (WELLBYs)",
+      "unit": "WELLBYs",
+      "formula": "deaths_averted * wellbys_per_u5_death * life_value_weight",
+      "expected": 12447.30552
+    },
+    {
+      "id": "wellbys_per_dollar_fp",
+      "section": "ce",
+      "label": "Units of value (WELLBYs) per dollar",
+      "format": "small",
+      "formula": "value_deaths / donation",
+      "expected": 0.1244730552
+    },
+    {
+      "id": "gd_wellbys_per_dollar",
+      "section": "ce",
+      "label": "GiveDirectly's units of value per dollar (Founders Pledge)",
+      "format": "small",
+      "value": 0.005867,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Suvita CEA (June 2022)",
+        "url": "https://docs.google.com/spreadsheets/d/1Ig25UiOkJf1cHDAMZgnrNhDXbh7jGks37nrIKleQ4k4/edit#gid=993518195",
+        "cell": "Suvita!B62 (=B61/0.005867)"
+      },
+      "explainer": "Founders Pledge's benchmark from its own GiveDirectly analysis: about $170 per WELLBY."
+    },
+    {
+      "id": "gd_multiple",
+      "section": "ce",
+      "label": "Multiple of GiveDirectly",
+      "format": "multiple",
+      "formula": "wellbys_per_dollar_fp / gd_wellbys_per_dollar",
+      "expected": 21.2157926
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Doubled income-years per dollar",
+      "format": "small",
+      "formula": "wellbys_per_dollar_fp / @founders_pledge.wellbys_per_doubling",
+      "explainer": "charityevals' step. Founders Pledge's 2022 'WELLBYs' are its own unit of value, built from its moral weights (3.7 per healthy year, 1.9 per doubled income-year), not life-satisfaction points measured in surveys, so they are not converted at the WELLBY exchange rate. Divided by Founders Pledge's value of doubling one person's income for a year (1.898), its result is in doubled income-years, GiveWell's units of value, so a death keeps exactly the weight Founders Pledge gives it relative to income."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for media and messaging programs: staff make the content, airtime and messages are bought. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_media"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Producers and researchers could often earn more in commercial media. Our judgment.",
+      "formula": "@staff_pay.gap_media"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Founders Pledge's value per dollar in doubled income-years (GiveWell's units of value). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "wellbys_per_dollar_fp",
+      "unit": "Founders Pledge units of value (WELLBY-equivalents) per $"
+    }
+  }
+}

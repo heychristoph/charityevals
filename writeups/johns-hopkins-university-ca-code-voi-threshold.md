@@ -4,6 +4,6 @@ GiveWell funded trials there on cholera prevention (CHoBI7) and child mortality 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
 | [CA CODE VoI threshold rough estimate](/johns-hopkins-university) | GW | August 2025 | <span data-figure="headline" data-model="johns-hopkins-university-ca-code-voi-threshold">18</span> | 38 |
-| [CHoBI7 Bangladesh VOI cost-effectiveness analysis](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | GW | March 2025 | <span data-figure="headline" data-model="johns-hopkins-university-chobi7-bangladesh-voi">15</span> | 84 |
+| [CHoBI7 Bangladesh VOI cost-effectiveness analysis](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | GW | March 2025 | <span data-figure="headline" data-model="johns-hopkins-university-chobi7-bangladesh-voi">15</span> | 87 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

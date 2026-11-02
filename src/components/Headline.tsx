@@ -15,7 +15,7 @@ function modelOf(id: string, bulk: boolean): ResolvedModel {
   const raw = bulkRaw(id);
   if (!raw) return lib.models.get(id)!;
   let m = built.get(id);
-  if (!m) built.set(id, (m = buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()]).models.get(id)!));
+  if (!m) built.set(id, (m = buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id)!));
   return m;
 }
 
@@ -105,7 +105,7 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   const model = useMemo(() => modelOf(id, bulk), [id, bulk]);
   const av = useAssumptionValues();
   const urlEdits = useEdits();
-  const edits = useMemo(() => editsFor(model, urlEdits), [model, urlEdits]);
+  const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
   const years = comparable(lib, model);
   const { results } = useResults();

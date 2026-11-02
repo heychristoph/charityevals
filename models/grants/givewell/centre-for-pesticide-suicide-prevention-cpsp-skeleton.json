@@ -62,11 +62,33 @@
   ],
   "rows": [
     {
+      "id": "policy_years_until_effect",
+      "label": "Years from the grant until the policy takes effect",
+      "section": "calculations",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."
+    },
+    {
+      "id": "policy_wait_discount",
+      "label": "Discount for the wait until the policy takes effect",
+      "section": "calculations",
+      "formula": "(1 + $discount_rate) ^ -policy_years_until_effect",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
+    },
+    {
       "id": "annual_lives_saved_in_each_scenario_row_32",
       "label": "Annual lives saved in each scenario (row 32)",
       "section": "calculations",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -80,7 +102,7 @@
       "label": "Adjustment for enforcement",
       "section": "assumptions",
       "value": 0.85,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -114,7 +136,7 @@
       "label": "Adjustment for recent pesticide bans (Sri Lanka)",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -340,7 +362,7 @@
       "label": "Annual lives saved in each scenario (row 36)",
       "section": "calculations",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -409,20 +431,31 @@
       "id": "number_of_years_by_which_cpsp_is_expected_to_accelerate_poli",
       "label": "Number of years by which CPSP is expected to accelerate policy change",
       "section": "assumptions",
-      "value": 9.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
         "cell": "Assumptions!E19"
-      }
+      },
+      "formula": "$win_years_counted",
+      "published": 9.0,
+      "explainer": "Changed for consistency. GiveWell credits the policy with 9 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
     },
     {
       "id": "number_of_years_brought_forward",
       "label": "Number of years brought forward",
       "section": "calculations",
       "formula": "number_of_years_by_which_cpsp_is_expected_to_accelerate_poli",
-      "expected": 9.0
+      "expected": 9.0,
+      "explainer": "In our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "calculations",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "sri_lanka_2",
@@ -555,7 +588,7 @@
       "id": "expected_lives_saved_ok",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent",
+      "formula": "expected_annual_lives_saved_ok * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent * policy_wait_discount",
       "expected": 520.6672195
     },
     {
@@ -576,7 +609,7 @@
       "label": "Adjustment for recent pesticide bans (Nepal)",
       "section": "assumptions",
       "value": 0.25,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -878,7 +911,7 @@
       "id": "expected_lives_saved_ok_2",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_2 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_2",
+      "formula": "expected_annual_lives_saved_ok_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_2 * policy_wait_discount",
       "expected": 752.9695212
     },
     {
@@ -893,7 +926,7 @@
       "label": "Adjustment for recent pesticide bans (India (Maharashtra))",
       "section": "assumptions",
       "value": 0.25,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1195,7 +1228,7 @@
       "id": "expected_lives_saved_ok_3",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_3 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_3",
+      "formula": "expected_annual_lives_saved_ok_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_3 * policy_wait_discount",
       "expected": 3830.967505
     },
     {
@@ -1206,12 +1239,22 @@
       "expected": 5104.604246
     },
     {
+      "id": "suicide_death_value_share",
+      "label": "Share of a death's value GiveWell counts for a suicide averted",
+      "format": "percent",
+      "value": 0.8,
+      "kind": "judgment",
+      "explainer": "GiveWell counts 80% of a death's value for a suicide averted (its sheet: 80% of 83). Its own judgment about suicide deaths, kept: not a different value of a life.",
+      "section": "assumptions"
+    },
+    {
       "id": "value_of_preventing_one_death_from_suicide",
       "label": "Value of preventing one death from suicide",
       "section": "assumptions",
-      "explainer": "GiveWell's value: 80% of 83 units of value, times your multiplier on the value of a life.",
-      "formula": "80 / 100 * 83 * $life_value_multiplier",
-      "expected": 66.4
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model. Pesticide suicides are mostly of people aged 15 to 49, so GiveWell's weight for that band (facts: moral_weights.uov_per_death_age_15_49, 104 units of value), times GiveWell's 80% (above), times \"A child's life vs doubled-income year\" (Your values). GiveWell's sheet values the death at 83 before its 80%, 66.4, kept for the evaluator view.",
+      "formula": "suicide_death_value_share * @moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "expected": 66.4,
+      "published": 66.4
     },
     {
       "id": "value_of_preventing_one_death_from_pesticide_suicide",
@@ -1245,7 +1288,7 @@
       "label": "Adjustment for recent pesticide bans (Regional (Global))",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1627,7 +1670,7 @@
       "id": "expected_lives_saved_ok_4",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_4 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_4",
+      "formula": "expected_annual_lives_saved_ok_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_4 * policy_wait_discount",
       "expected": 3549.139435
     },
     {
@@ -1648,7 +1691,7 @@
       "label": "Adjustment for recent pesticide bans (China)",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -1914,7 +1957,7 @@
       "id": "expected_lives_saved_ok_5",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_5 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_5",
+      "formula": "expected_annual_lives_saved_ok_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_5 * policy_wait_discount",
       "expected": 13476.54139
     },
     {
@@ -1949,7 +1992,7 @@
       "label": "Adjustment for recent pesticide bans (UN (Global))",
       "section": "assumptions",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
@@ -2132,7 +2175,7 @@
       "id": "expected_lives_saved_ok_6",
       "label": "Expected lives saved (OK)",
       "section": "calculations",
-      "formula": "expected_annual_lives_saved_ok_6 * number_of_years_brought_forward * adjustment_for_change_in_pesticide_suicide_without_intervent_6",
+      "formula": "expected_annual_lives_saved_ok_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward) * adjustment_for_change_in_pesticide_suicide_without_intervent_6 * policy_wait_discount",
       "expected": 3549.139435
     },
     {
@@ -2252,13 +2295,14 @@
       "id": "givedirectly_units_of_value_generated_per_dollar_spent_befor",
       "label": "GiveDirectly units of value generated per dollar spent (before adjustments)",
       "section": "assumptions",
-      "value": 0.0034,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.0034,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1eNBp1Yd9HcOM1-MHQU6HPFz9204GZqcRXGCJrPp5aNE/edit",
         "cell": "Assumptions!E26"
-      }
+      },
+      "explainer": "Changed for consistency: GiveWell's sheet used 0.0034 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.0034."
     },
     {
       "id": "givedirectly_units_of_value_generated_per_thousand_dollars_s",
@@ -2461,39 +2505,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

@@ -1,0 +1,581 @@
+{
+  "id": "action-for-happiness-founders-pledge",
+  "name": "Action for Happiness (Founders Pledge, 2020)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "action-for-happiness",
+  "owner": "founders-pledge",
+  "summary": "Eight-week 'Exploring What Matters' courses on wellbeing, run by volunteers, mostly in the UK. A re-implementation of Founders Pledge's 2020 cost-effectiveness analysis of funding Action for Happiness' scale-up, in DALY-equivalents of depression averted.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Action for Happiness: full report and cost-effectiveness analysis (2020)",
+    "url": "https://www.founderspledge.com/research/fp-action-for-happiness",
+    "sheet": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+    "published": "2020-01-27",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Action for Happiness full report (January 2020)",
+      "url": "https://www.founderspledge.com/research/fp-action-for-happiness",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Action for Happiness summary page (updated November 2022)",
+      "url": "https://www.founderspledge.com/research/action-for-happiness-summary",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Action for Happiness CEA (spreadsheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+      "type": "model"
+    },
+    {
+      "title": "Krekel, De Neve, Fancourt and Layard (2021), A local community course that raises wellbeing and pro-sociality",
+      "url": "https://cep.lse.ac.uk/_NEW/PUBLICATIONS/abstract.asp?index=7579",
+      "type": "study"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "fp_benefits",
+      "title": "Benefits per course participant"
+    },
+    {
+      "id": "fp_participants",
+      "title": "Number of course participants"
+    },
+    {
+      "id": "fp_cost",
+      "title": "Costs of scale-up and cost-effectiveness"
+    },
+    {
+      "id": "discounting",
+      "title": "Discounting",
+      "explainer": "charityevals' step, not Founders Pledge's. Founders Pledge discounts future participants for uncertainty and for other funders, but not for time. In our view later years count less at the discount rate under Your values; Founders Pledge's view sets it to 0, so its numbers reproduce."
+    },
+    {
+      "id": "ours",
+      "title": "Our steps: per dollar, and staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' steps after Founders Pledge's bottom line: the cost per outcome turned into outcomes per dollar, then credit by share of resources (staff's forgone pay), which is off by default and in Founders Pledge's view."
+    }
+  ],
+  "rows": [
+    {
+      "id": "phq9_reduction",
+      "section": "fp_benefits",
+      "label": "Average reduction in PHQ-9 score per participant compared with control, directly after the course",
+      "format": "number",
+      "value": {
+        "low": 0.4043646407,
+        "best": 0.7743126164,
+        "high": 2.191510359
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Output of BA'!D2, F2, H2 (Main CEA!B3:D3)",
+        "note": "Krekel, De Neve, Fancourt and Layard (2021), A local community course that raises wellbeing and pro-sociality (CEP discussion paper)"
+      },
+      "explainer": "Founders Pledge's Bayesian update of the course's measured effect on depression (the CEP trial) on a sceptical prior. Conservative, best guess and optimistic values from its 'Output of BA' tab; we copy them rather than re-run the update."
+    },
+    {
+      "id": "phq9_severe_mdd",
+      "section": "fp_benefits",
+      "label": "PHQ-9 score for average severe major depressive disorder",
+      "format": "number",
+      "value": 23.25,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C4",
+        "note": "PHQ-9 Instruction Manual (Pfizer); sheet formula =(19.5+27)/2"
+      },
+      "explainer": "The middle of the PHQ-9 range for severe depression (20–27), as Founders Pledge computes it ((19.5 + 27) / 2)."
+    },
+    {
+      "id": "dw_severe_mdd",
+      "section": "fp_benefits",
+      "label": "DALY weighting of severe major depressive disorder",
+      "format": "number",
+      "formula": "@depression.dw_severe",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C5"
+      },
+      "explainer": "The Global Burden of Disease disability weight for severe major depression, 0.658 (GBD 2016, which Founders Pledge used, and GBD 2019 agree; shared fact)."
+    },
+    {
+      "id": "dw_per_phq9_point",
+      "section": "fp_benefits",
+      "label": "DALY weighting per point on the PHQ-9 scale (healthy years per point-year)",
+      "format": "number",
+      "formula": "@depression.dalys_per_phq9_point_year",
+      "published": 0.02830107527,
+      "expected": 0.02830107527,
+      "explainer": "Changed for consistency. Founders Pledge divides the weight of severe depression by the middle of the severe band (0.658 / 23.25 = 0.0283 per point, 'Main CEA'!C6). The site counts every fall in depression on the PHQ-9 the same way, for every model: 0.031 healthy years per point for a year, the Global Burden of Disease weights for mild, moderate and severe depression placed on the PHQ-9's severity bands (shared fact). The evaluator view uses Founders Pledge's 0.0283."
+    },
+    {
+      "id": "dalys_post_course",
+      "section": "fp_benefits",
+      "label": "Reduction in DALY-equivalents per year per participant directly after the course",
+      "format": "number",
+      "formula": "phq9_reduction * dw_per_phq9_point",
+      "expected": 0.02191387964
+    },
+    {
+      "id": "life_satisfaction_gain",
+      "section": "fp_benefits",
+      "label": "Average increase in life satisfaction score per participant compared with control, directly after the course",
+      "format": "number",
+      "value": {
+        "low": 0.1856632814,
+        "best": 0.3236982051,
+        "high": 1.110914922
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Output of BA'!D3, F3, H3 (Main CEA!B8:D8)",
+        "note": "Krekel, De Neve, Fancourt and Layard (2021), A local community course that raises wellbeing and pro-sociality (CEP discussion paper)"
+      },
+      "explainer": "Founders Pledge's Bayesian update, labelled life satisfaction in its Main CEA tab; the cell it reads ('Output of BA' row 3) is the happiness result, so the sheet's two labels are swapped. A side result: it doesn't feed the bottom line."
+    },
+    {
+      "id": "happiness_gain",
+      "section": "fp_benefits",
+      "label": "Average increase in happiness score per participant compared with control, directly after the course",
+      "format": "number",
+      "value": {
+        "low": 0.151498575,
+        "best": 0.3076497847,
+        "high": 1.045746031
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Output of BA'!D4, F4, H4 (Main CEA!B9:D9)",
+        "note": "Krekel, De Neve, Fancourt and Layard (2021), A local community course that raises wellbeing and pro-sociality (CEP discussion paper)"
+      },
+      "explainer": "Founders Pledge's Bayesian update, labelled happiness in its Main CEA tab; the cell it reads ('Output of BA' row 4) is the life satisfaction result (labels swapped, as above). A side result."
+    },
+    {
+      "id": "retention_rate",
+      "section": "fp_benefits",
+      "label": "Yearly retention rate of benefits",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.725
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Subjective CEA inputs'!J3:L3 (Main CEA!B10:D10)",
+        "note": "Subjective estimate"
+      },
+      "explainer": "The share of the benefit left a year later: Founders Pledge's subjective conservative, best-guess and optimistic values."
+    },
+    {
+      "id": "dalys_per_participant",
+      "section": "fp_benefits",
+      "label": "Total DALY-equivalents averted per participant",
+      "format": "number",
+      "formula": "1 / (1 - retention_rate) * dalys_post_course * (1 + retention_rate) / 2 * benefit_discount_factor",
+      "expected": 0.03287081946,
+      "explainer": "Founders Pledge's sum over all years of a benefit that keeps the retention rate each year, each year at the average of its start and end. Times our discount factor, 1 in Founders Pledge's view."
+    },
+    {
+      "id": "severe_mdd_years_per_participant",
+      "section": "fp_benefits",
+      "label": "Total equivalent years of severe major depression averted per participant",
+      "format": "number",
+      "formula": "dalys_per_participant / dw_severe_mdd",
+      "expected": 0.04995565267
+    },
+    {
+      "id": "life_satisfaction_years_per_participant",
+      "section": "fp_benefits",
+      "label": "Total life satisfaction point-years gained per participant",
+      "format": "number",
+      "formula": "1 / (1 - retention_rate) * life_satisfaction_gain * (1 + retention_rate) / 2 * benefit_discount_factor",
+      "expected": 0.4855473076
+    },
+    {
+      "id": "happiness_years_per_participant",
+      "section": "fp_benefits",
+      "label": "Total happiness point-years gained per participant",
+      "format": "number",
+      "formula": "1 / (1 - retention_rate) * happiness_gain * (1 + retention_rate) / 2 * benefit_discount_factor",
+      "expected": 0.461474677
+    },
+    {
+      "id": "participants_2019",
+      "section": "fp_participants",
+      "label": "Projected course participants in 2019",
+      "format": "integer",
+      "value": 2044,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C17",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "Action for Happiness' own projection of course participants with the scale-up funding, from its growth model; 2019 is the level without it."
+    },
+    {
+      "id": "participants_2020",
+      "section": "fp_participants",
+      "label": "Projected course participants in 2020",
+      "format": "integer",
+      "value": 3000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C18",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "Action for Happiness' own projection of course participants with the scale-up funding, from its growth model; 2019 is the level without it."
+    },
+    {
+      "id": "participants_2021",
+      "section": "fp_participants",
+      "label": "Projected course participants in 2021",
+      "format": "integer",
+      "value": 4650,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C19",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "Action for Happiness' own projection of course participants with the scale-up funding, from its growth model; 2019 is the level without it."
+    },
+    {
+      "id": "participants_2022",
+      "section": "fp_participants",
+      "label": "Projected course participants in 2022",
+      "format": "integer",
+      "value": 8000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C20",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "Action for Happiness' own projection of course participants with the scale-up funding, from its growth model; 2019 is the level without it."
+    },
+    {
+      "id": "participants_2023",
+      "section": "fp_participants",
+      "label": "Projected course participants in 2023 (and beyond)",
+      "format": "integer",
+      "value": 10200,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C21",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "Action for Happiness' own projection of course participants with the scale-up funding, from its growth model; 2019 is the level without it."
+    },
+    {
+      "id": "extra_participants_2020",
+      "section": "fp_participants",
+      "label": "Extra course participants through scale-up funding in 2020",
+      "format": "integer",
+      "formula": "participants_2020 - participants_2019",
+      "expected": 956
+    },
+    {
+      "id": "extra_participants_2021",
+      "section": "fp_participants",
+      "label": "Extra course participants through scale-up funding in 2021",
+      "format": "integer",
+      "formula": "participants_2021 - participants_2019",
+      "expected": 2606
+    },
+    {
+      "id": "extra_participants_2022",
+      "section": "fp_participants",
+      "label": "Extra course participants through scale-up funding in 2022",
+      "format": "integer",
+      "formula": "participants_2022 - participants_2019",
+      "expected": 5956
+    },
+    {
+      "id": "extra_participants_2023_on",
+      "section": "fp_participants",
+      "label": "Yearly extra course participants through scale-up funding from 2023",
+      "format": "integer",
+      "formula": "participants_2023 - participants_2019",
+      "expected": 8156
+    },
+    {
+      "id": "completion_rate",
+      "section": "fp_participants",
+      "label": "Proportion of participants completing the course",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.8
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!B26:D26",
+        "note": "Discussion with Action for Happiness, 22 October"
+      },
+      "explainer": "From Founders Pledge's conversation with Action for Happiness; the range is Founders Pledge's."
+    },
+    {
+      "id": "planning_accuracy",
+      "section": "fp_participants",
+      "label": "Discount for the accuracy of Action for Happiness' planning",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.725,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Subjective CEA inputs'!J4:L4 (Main CEA!B33:D33)",
+        "note": "Subjective estimate"
+      },
+      "explainer": "Founders Pledge's guess at how much of the projected growth will happen. Its own range."
+    },
+    {
+      "id": "forecast_decay",
+      "section": "fp_participants",
+      "label": "Yearly discount rate for the uncertainty of the projection",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.125,
+        "high": 0.275
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Subjective CEA inputs'!J5:L5 (Main CEA!B34:D34)",
+        "note": "Subjective estimate"
+      },
+      "explainer": "Founders Pledge discounts each later year of projected participants, continuously, for the chance the projection is wrong. Not a time preference: our discount rate is applied on top in our view. Its own range (optimistic 5%, conservative 27.5%)."
+    },
+    {
+      "id": "other_funder_decay",
+      "section": "fp_participants",
+      "label": "Yearly discount rate for the chance another funder pays for the scale-up",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Subjective CEA inputs'!J6:L6 (Main CEA!B35:D35)",
+        "note": "Subjective estimate"
+      },
+      "explainer": "Founders Pledge's yearly discount, continuously, for the chance that someone else would have funded the growth anyway, so later participants are less due to this money. Its own range."
+    },
+    {
+      "id": "other_funder_rate",
+      "section": "fp_participants",
+      "label": "Discount for other funders, as applied",
+      "format": "percent",
+      "formula": "if($resource_shares, 0, other_funder_decay)",
+      "explainer": "A funging step: with credit by share of resources on, money from other funders isn't subtracted from this donation's credit, so the discount is 0 (the ongoing running costs and volunteers' time that would then belong in the cost aren't counted; see the write-up). Off, Founders Pledge's rate."
+    },
+    {
+      "id": "total_extra_participants",
+      "section": "fp_participants",
+      "label": "Total extra course participants through scale-up funding",
+      "format": "number",
+      "formula": "planning_accuracy * (exp(-(forecast_decay + time_discount)) * extra_participants_2020 + exp(-(forecast_decay + time_discount) * 2) * extra_participants_2021 + exp(-(forecast_decay + time_discount) * 3) * extra_participants_2022 + extra_participants_2023_on * exp(-time_discount * 3) * (exp(-(other_funder_rate + time_discount)) + exp(-(other_funder_rate + time_discount) * 2) + exp(-(other_funder_rate + time_discount) * 3) + exp(-(forecast_decay + other_funder_rate + time_discount) * 3) / (exp(forecast_decay + other_funder_rate + time_discount) - 1)))",
+      "expected": 20254.82971,
+      "explainer": "Founders Pledge's sum of the extra participants in each future year, each year discounted continuously at its forecast and other-funder rates, with the years from 2026 on summed to infinity. Our time discount is added to every rate, and the yearly extra participants from 2023 on are discounted three more years for when they come (Founders Pledge starts its other-funder discount in 2023); it is 0 in Founders Pledge's view, so the sheet reproduces."
+    },
+    {
+      "id": "funding_gbp",
+      "section": "fp_cost",
+      "label": "Budgeted scale-up funding (GBP)",
+      "format": "number",
+      "value": 1000000,
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C29",
+        "note": "Action for Happiness growth model v2"
+      },
+      "explainer": "The scale-up budget Action for Happiness asked for."
+    },
+    {
+      "id": "gbp_to_usd",
+      "section": "fp_cost",
+      "label": "GBP to USD",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2020",
+      "published": 1.2911,
+      "source": {
+        "title": "Founders Pledge, Action for Happiness cost-effectiveness analysis (2020)",
+        "url": "https://docs.google.com/spreadsheets/d/1AVbQ4uV18A8DbFQACCI6vkqWBNYlKWpIIMyZDzKLkcM/edit",
+        "cell": "'Main CEA'!C30",
+        "note": "poundsterlinglive.com, 1 December 2019"
+      },
+      "explainer": "Changed for consistency. Founders Pledge converts the pound budget at the rate of 1 December 2019, 1.2911 dollars per pound. The site converts every pound figure at the IRS yearly average rate for the year the money is spent (shared fact), so that the same pound counts the same in every model: here 2020, when the scale-up funding starts (1.2837). The evaluator view uses Founders Pledge's 1.2911."
+    },
+    {
+      "id": "funding_usd",
+      "section": "fp_cost",
+      "label": "Budgeted scale-up funding (USD)",
+      "format": "usd",
+      "formula": "funding_gbp * gbp_to_usd",
+      "expected": 1291100
+    },
+    {
+      "id": "cost_per_daly",
+      "section": "fp_cost",
+      "label": "Cost per DALY-equivalent averted (USD)",
+      "format": "usd",
+      "formula": "funding_usd / (total_extra_participants * completion_rate * dalys_per_participant)",
+      "expected": 2770.273922,
+      "explainer": "Founders Pledge's bottom line in the 2020 sheet: $2,770 per DALY-equivalent ($177–30,778 across its optimistic and conservative cases)."
+    },
+    {
+      "id": "cost_per_severe_mdd_year",
+      "section": "fp_cost",
+      "label": "Cost per year of severe major depressive disorder prevented (USD)",
+      "format": "usd",
+      "formula": "cost_per_daly * dw_severe_mdd",
+      "expected": 1822.840241
+    },
+    {
+      "id": "cost_per_happiness_point_year",
+      "section": "fp_cost",
+      "label": "Cost per happiness point-year gained (USD)",
+      "format": "usd",
+      "formula": "funding_usd / (total_extra_participants * completion_rate * happiness_years_per_participant)",
+      "expected": 197.3264807
+    },
+    {
+      "id": "cost_per_life_satisfaction_point_year",
+      "section": "fp_cost",
+      "label": "Cost per life satisfaction point-year gained (USD)",
+      "format": "usd",
+      "formula": "funding_usd / (total_extra_participants * completion_rate * life_satisfaction_years_per_participant)",
+      "expected": 187.5433609,
+      "explainer": "Labelled life satisfaction in the sheet ($188 per point-year), but its input is the happiness result (labels swapped), so $188 is per happiness point-year and life satisfaction is the row above ($197). Founders Pledge's 2022 summary page gives $137 per WELLBY from a later estimate with no published model; this model reproduces the 2020 sheet."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "discounting",
+      "label": "Discount rate on future benefits",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). Founders Pledge doesn't discount these benefits, so its view pins the rate at 0."
+    },
+    {
+      "id": "benefit_discount_factor",
+      "section": "discounting",
+      "label": "Discount factor on benefits that fade year by year",
+      "format": "number",
+      "formula": "(1 - retention_rate) / (1 - retention_rate / (1 + discount_rate_per_year))",
+      "explainer": "Founders Pledge counts a benefit that keeps a fixed share of itself each year (the retention rate), summed over all years, without discounting. Discounting each year's benefit at the shared rate turns the sum 1 / (1 − r) into 1 / (1 − r / (1 + rate)); this is the ratio of the two. At a rate of 0 it is 1, so Founders Pledge's figures reproduce."
+    },
+    {
+      "id": "time_discount",
+      "section": "discounting",
+      "label": "Same rate, compounded continuously",
+      "format": "number",
+      "formula": "ln(1 + discount_rate_per_year)",
+      "explainer": "The yearly rate as a continuous rate, added to Founders Pledge's continuous yearly discounts on future participants."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "ours",
+      "label": "DALY-equivalents averted per dollar",
+      "format": "small",
+      "formula": "1 / cost_per_daly",
+      "explainer": "Founders Pledge's cost per DALY-equivalent turned around."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "ours",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for programs where staff deliver the help themselves (here, staff who build and support a network of volunteer-led courses): staff pay is about half the cost. Our judgment; we haven't seen the scale-up budget's breakdown. Volunteers' unpaid time is not counted.",
+      "formula": "@staff_pay.share_staff_delivered"
+    },
+    {
+      "id": "salary_gap",
+      "section": "ours",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Charity staff often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "ours",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "ours",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "ours",
+      "label": "DALY-equivalents averted per donor dollar",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "DALY-equivalents averted per dollar",
+    "native": {
+      "row": "cost_per_daly",
+      "unit": "$ per DALY-equivalent averted"
+    }
+  }
+}

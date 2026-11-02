@@ -543,26 +543,16 @@
       "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.65,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours.",
+      "formula": "@staff_pay.share_advocacy"
     },
     {
       "id": "salary_gap",
       "section": "donor",
       "label": "Pay gap versus comparable for-profit jobs",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours.",
+      "formula": "@staff_pay.gap_advocacy"
     },
     {
       "id": "salary_sacrifice",
@@ -579,11 +569,21 @@
       "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "A marginal dollar's result as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): ACE's estimate is Wild Animal Initiative's 2023–2025 research and grant spending over the papers it produced, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
       "id": "papers_per_donor_dollar",
       "section": "donor",
       "label": "Peer-reviewed papers per dollar you give",
       "format": "small",
-      "formula": "papers_per_dollar * donor_cost_share"
+      "formula": "papers_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "explainer": "A marginal dollar is counted at the shared share of the past average (row above)."
     },
     {
       "id": "animals_helped_per_year",
@@ -648,7 +648,28 @@
         "high": 0.0005
       },
       "kind": "judgment",
-      "explainer": "One paper's share of everything the field achieves: 1 in 5,000 by default, roughly the papers the field needs before help reaches scale. Our guess; the range is ours."
+      "explainer": "One paper's share of everything the field achieves: 1 in 5,000 by default, roughly the papers the field needs before help reaches scale. Our guess; the range is ours. Used with \"Credit by share of resources\" off."
+    },
+    {
+      "id": "field_spending_until_help",
+      "section": "pain",
+      "label": "What the whole field will spend until the help arrives",
+      "unit": "$",
+      "format": "integer",
+      "value": {
+        "low": 300000000,
+        "best": 700000000,
+        "high": 2000000000
+      },
+      "kind": "judgment",
+      "explainer": "Ours. With \"Credit by share of resources\" on, the field's credit is shared by money spent rather than by papers: a paper's share is what it cost over everything the field spends until help arrives at scale. Wild animal welfare science today spends a few tens of millions of dollars a year, Wild Animal Initiative a large part of it; over the 20 years until help, our judgment is $700 million ($300 million to $2 billion), chosen so that at today's cost per paper both ways give about the same credit."
+    },
+    {
+      "id": "credit_per_paper_used",
+      "section": "pain",
+      "label": "Share of the field's credit per paper, as used",
+      "formula": "if($resource_shares, cost_total / papers_total / field_spending_until_help, credit_per_paper)",
+      "explainer": "Our credit per paper by default; with \"Credit by share of resources\" on, a paper's cost over what the whole field will spend."
     },
     {
       "id": "years_until_help",
@@ -664,11 +685,19 @@
       "explainer": "Good done later counts for less at your discount rate (Timing, under Your values), so this sets how far away the benefit is. Our guess; the range is ours."
     },
     {
+      "id": "years_sooner_discounted",
+      "section": "pain",
+      "label": "Years sooner, discounted",
+      "unit": "years",
+      "formula": "pv_annuity_due(1, $discount_rate, years_sooner)",
+      "explainer": "The years the help arrives sooner, each year's benefit discounted at \"Next year's good counts less by\" (every future benefit is). The wait until the help starts is discounted separately below."
+    },
+    {
       "id": "pain_days_per_paper",
       "section": "pain",
       "label": "Days of pain spared per paper, discounted",
       "format": "number",
-      "formula": "animals_helped_per_year * pain_days_spared_each * years_sooner * chance_field_succeeds * credit_per_paper / (1 + $discount_rate) ^ years_until_help"
+      "formula": "animals_helped_per_year * pain_days_spared_each * years_sooner_discounted * chance_field_succeeds * credit_per_paper_used / (1 + $discount_rate) ^ years_until_help"
     },
     {
       "id": "pain_days_per_donor_dollar",
@@ -724,7 +753,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: insects",
       "format": "small",
       "formula": "pain_days_insect * @welfare_ranges.insect_vs_chicken",
-      "explainer": "The days of pain for insects, weighed by how much insects can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none)."
+      "explainer": "The days of pain for insects, weighed by how much insects can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none). The insect weight is a stand-in, our judgment: the black soldier fly's, with the silkworm and the bee as the range (facts: welfare_ranges.insect_vs_chicken, kind judgment)."
     },
     {
       "id": "pain_days_fish",
@@ -739,7 +768,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "small",
       "formula": "pain_days_fish * @welfare_ranges.fish_vs_chicken",
-      "explainer": "The days of pain for fish, weighed by how much fish can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none)."
+      "explainer": "The days of pain for fish, weighed by how much fish can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none). The fish weight is a stand-in, our judgment: Rethink Priorities estimated only carp and salmon, and their mean stands for every farmed and wild-caught fish (facts: welfare_ranges.fish_vs_chicken, kind judgment)."
     },
     {
       "id": "pain_days_other",
@@ -754,7 +783,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: other wild animals",
       "format": "small",
       "formula": "pain_days_other * @welfare_ranges.other_vs_chicken",
-      "explainer": "The days of pain for other wild animals, weighed by how much other wild animals can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none)."
+      "explainer": "The days of pain for other wild animals, weighed by how much other wild animals can suffer relative to a chicken (Rethink Priorities' estimates; stand-ins where they have none). The weight for other wild vertebrates is a stand-in, our judgment: the chicken's, with farmed fish to the pig as the range (facts: welfare_ranges.other_vs_chicken, kind judgment)."
     },
     {
       "id": "ced_per_donor_dollar",

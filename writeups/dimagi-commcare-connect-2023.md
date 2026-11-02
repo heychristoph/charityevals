@@ -3,7 +3,7 @@ Makes CommCare, a mobile platform for community health workers, and runs CommCar
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Optionality rough estimate for Dimagi Mother-Baby Wellness Coaching Comm Care Connect program design, November 2024](/dimagi/dimagi-optionality-mother-baby-wellness) | GW | November 2024 | <span data-figure="headline" data-model="dimagi-optionality-mother-baby-wellness">22</span> | 138, 1 kept fixed |
+| [Optionality rough estimate for Dimagi Mother-Baby Wellness Coaching Comm Care Connect program design, November 2024](/dimagi/dimagi-optionality-mother-baby-wellness) | GW | November 2024 | <span data-figure="headline" data-model="dimagi-optionality-mother-baby-wellness">22</span> | 151, 1 kept fixed |
 | [Dimagi CommCare Connect rough estimate, 2023](/dimagi) | GW | November 2023 | <span data-figure="headline" data-model="dimagi-commcare-connect-2023">17</span> | 49 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

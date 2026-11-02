@@ -1,0 +1,374 @@
+{
+  "id": "future-cleantech-architects-giving-green",
+  "name": "Future Cleantech Architects (Giving Green, 2024)",
+  "kind": "charity",
+  "cause": "climate",
+  "charity": "future-cleantech-architects",
+  "owner": "giving-green",
+  "summary": "EU policy work for hard-to-decarbonise sectors. A re-implementation of Giving Green's 2024 estimate of what FCA's advocacy for a 5% target for innovative renewable energy in the EU's Renewable Energy Directive (RED III) cost per tonne of CO₂e avoided. Giving Green's own range spans more than three orders of magnitude ($0.01–$33 a tonne), and it has low confidence in the estimate.",
+  "source": {
+    "publisher": "Giving Green",
+    "title": "Future Cleantech Architects: Top Climate Nonprofit Evaluation (2024), cost-effectiveness analysis",
+    "url": "https://www.givinggreen.earth/research/future-cleantech-architects-top-climate-nonprofit-evaluation",
+    "sheet": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+    "published": "2024-10-30",
+    "retrieved": "2026-10-30",
+    "license": "© Giving Green Research Group; all rights reserved (site terms). Numbers cited as facts with their source."
+  },
+  "resources": [
+    {
+      "title": "Giving Green, Future Cleantech Architects: Top Climate Nonprofit Evaluation (2024)",
+      "url": "https://www.givinggreen.earth/research/future-cleantech-architects-top-climate-nonprofit-evaluation",
+      "type": "evaluation"
+    },
+    {
+      "title": "Giving Green, Future Cleantech Architects: Top Climate Nonprofit Evaluation (2026)",
+      "url": "https://www.givinggreen.earth/research/future-cleantech-architects-top-climate-nonprofit-evaluation-2026",
+      "type": "evaluation",
+      "note": "Keeps the 2024 analysis as its cost-effectiveness check."
+    },
+    {
+      "title": "Giving Green, FCA cost-effectiveness spreadsheet (last updated 24 October 2024)",
+      "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+      "type": "model"
+    },
+    {
+      "title": "Giving Green, FCA Guesstimate model",
+      "url": "https://www.getguesstimate.com/models/24694",
+      "type": "model"
+    },
+    {
+      "title": "Rethink Priorities, climate change versus global health interventions (2026)",
+      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
+      "type": "study",
+      "note": "Source of the shared rate that turns tonnes into deaths."
+    },
+    {
+      "title": "Future Cleantech Architects",
+      "url": "https://fcarchitects.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Giving Green",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost"
+    },
+    {
+      "id": "effectiveness",
+      "title": "Effectiveness"
+    },
+    {
+      "id": "bottom",
+      "title": "Cost-effectiveness"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From cost per tonne to tonnes per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' step after Giving Green's bottom line: Giving Green reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. The tonnes come from EU gas-fired power displaced by renewables: fuel not burned, but gas makes far less smoke per tonne than the world average (docs/normalization.md 2.5). The tonnes come years after the money is spent, so they are discounted for that wait at the site's discount rate."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Giving Green's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "red_iii_budget",
+      "section": "cost",
+      "label": "FCA's budget spent on RED III advocacy",
+      "format": "usd",
+      "value": 77283,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B4"
+      },
+      "explainer": "What FCA spent on its advocacy for the third revision of the EU's Renewable Energy Directive: an input in Giving Green's sheet, with no published breakdown (Giving Green's page gives FCA's whole budget as €1.6 million a year)."
+    },
+    {
+      "id": "target_emissions_avoided",
+      "section": "effectiveness",
+      "label": "Emissions avoided 2023–30 because of the 5% target for innovative renewables, FCA's estimate assuming they replace natural gas (tonnes CO₂e)",
+      "format": "integer",
+      "value": {
+        "low": 470000,
+        "best": 21000000,
+        "high": 100000000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B6:D6"
+      },
+      "explainer": "FCA's own model of the target that each member state should aim for at least 5% of new renewable capacity to be innovative technology by 2030, as enacted in RED III: 21 million tonnes avoided from 2023 to 2030 (Giving Green's low-impact case 0.47 million, high-impact 100 million). Giving Green assumes the gain lasts only until 2030."
+    },
+    {
+      "id": "counterfactual_capacity",
+      "section": "effectiveness",
+      "label": "Relative capacity of innovative renewables installed anyway, without the target",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B7:D7"
+      },
+      "explainer": "Giving Green's guess: innovative renewables would still be installed without the target, at a lower rate. The best guess is the midpoint of 20% (high-impact case) and 50% (low-impact case)."
+    },
+    {
+      "id": "extra_emissions_avoided",
+      "section": "effectiveness",
+      "label": "Emissions avoided 2023–30 from the extra innovative renewables, relative to the counterfactual (tonnes CO₂)",
+      "format": "integer",
+      "formula": "target_emissions_avoided * (1 - counterfactual_capacity)",
+      "expected": 13650000
+    },
+    {
+      "id": "advocacy_likelihood",
+      "section": "effectiveness",
+      "label": "Increase in the likelihood that more innovative renewables are installed because of nonprofits' advocacy",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.125,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B9:D9"
+      },
+      "explainer": "Giving Green's guess; the best guess is the midpoint of 5% and 20%."
+    },
+    {
+      "id": "fca_share",
+      "section": "effectiveness",
+      "label": "FCA's share of the advocacy for the 5% target",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.3333,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B10:D10"
+      },
+      "explainer": "Giving Green's guess: about a third, between a fifth and a half."
+    },
+    {
+      "id": "tonnes_avoided",
+      "section": "effectiveness",
+      "label": "Tonnes of CO₂e removed or avoided due to FCA's advocacy",
+      "format": "integer",
+      "formula": "extra_emissions_avoided * advocacy_likelihood * fca_share",
+      "expected": 568693.125
+    },
+    {
+      "id": "cost_per_tonne",
+      "section": "bottom",
+      "label": "Cost per tonne of CO₂e",
+      "format": "usd",
+      "formula": "red_iii_budget / tonnes_avoided",
+      "expected": 0.1358957874,
+      "explainer": "Giving Green's bottom line: about $0.14 a tonne (range $0.01 to $33). Giving Green has low confidence in it and notes that one piece of FCA's policy work is unlikely to generalise to the whole organisation."
+    },
+    {
+      "id": "offset_benchmark",
+      "section": "bottom",
+      "label": "Carbon offset benchmark ($ per tonne CO₂e)",
+      "format": "usd",
+      "value": 18,
+      "kind": "observed",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B14"
+      },
+      "explainer": "Giving Green's offset benchmark, the price of Tradewater's refrigerant-destruction offsets."
+    },
+    {
+      "id": "times_offset",
+      "section": "bottom",
+      "label": "…is x times as cost-effective as the offset benchmark",
+      "format": "multiple",
+      "formula": "offset_benchmark / cost_per_tonne",
+      "expected": 132.4544369
+    },
+    {
+      "id": "benchmark_price",
+      "section": "bottom",
+      "label": "Top recommendation benchmark ($ per tonne CO₂e)",
+      "format": "usd",
+      "value": 1,
+      "kind": "judgment",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!B16"
+      },
+      "explainer": "Giving Green's rough bar for a top nonprofit: about $1 a tonne, with anything under $10 plausibly in range."
+    },
+    {
+      "id": "times_benchmark",
+      "section": "bottom",
+      "label": "…is x times as cost-effective as the top recommendation benchmark",
+      "format": "multiple",
+      "formula": "benchmark_price / cost_per_tonne",
+      "expected": 7.35857983
+    },
+    {
+      "id": "years_until_avoided",
+      "section": "per_dollar",
+      "label": "Years from the grant until the tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 3,
+        "best": 5,
+        "high": 7
+      },
+      "kind": "judgment",
+      "explainer": "FCA's advocacy came before RED III was adopted in 2023; Giving Green counts the tonnes from 2023 to 2030, growing as the innovative renewables are built toward the 2030 target, so the average tonne comes about five years after the money is spent. Our judgment from Giving Green's dates. Giving Green counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is FCA's past spending on the RED III target over its effect, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
+      "id": "tco2e_per_dollar",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per dollar",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Giving Green's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below. A marginal dollar is counted at the shared share of the past average (row above)."
+    },
+    {
+      "id": "fuel_share",
+      "section": "per_dollar",
+      "label": "Share of these tonnes from burning less fuel",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Giving Green, FCA cost-effectiveness analysis",
+        "url": "https://docs.google.com/spreadsheets/d/17CkQUlOxfVGcP0naiCSiKgMyDdym68r2seun4_B43NY/edit",
+        "cell": "BOTEC!A6"
+      },
+      "explainer": "FCA's 21 million tonnes assume the innovative renewables replace natural-gas power (BOTEC!A6): every tonne is gas not burned. The low end allows for part of the target going to uses (hydrogen for industry) where the fuel replaced is burned far from people or the tonnes come from process emissions."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths per tonne of CO₂ from gas power, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.01,
+        "best": 0.039,
+        "high": 0.08
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370, 979–990",
+        "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
+        "note": "Deaths from air pollution per TWh in Europe: coal 24.5, gas 2.8."
+      },
+      "explainer": "Per fuel, not the world average. Gas plants cause roughly 2.8 deaths per TWh (Markandya & Wilkinson 2007); at 0.49 tonnes of CO₂ per MWh (the gas emission factor Founders Pledge uses in its Clean Air Task Force model) that is 0.057 deaths per 10,000 tonnes: 0.039 of the world average of 1.46. Low 0.01 is our judgment: today's EU gas plants under the Industrial Emissions Directive emit less than the 2007 figures. High 0.08: if a quarter of the power displaced were coal (24.5 per TWh at 0.82 tonnes per MWh, 0.2 of the average)."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here: the share of tonnes from gas power displaced times gas power's smoke per tonne."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths averted per tonne, counted directly by the evaluator (none here)",
+      "format": "small",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "A row every climate model has, which the site's conversion reads (docs/normalization.md 2.5): air-pollution deaths the evaluator counts itself, per tonne, on top of what the tonnes carry through air_pollution_weight. The evaluator counts none for this charity, so 0."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Engineers and policy experts could typically earn considerably more in industry or consulting. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "tco2e_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Tonnes of CO₂e averted per dollar donated",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
+    }
+  ],
+  "output": {
+    "row": "tco2e_per_donor_dollar",
+    "unit": "tco2e",
+    "label": "Tonnes of CO₂e averted per dollar",
+    "native": {
+      "row": "cost_per_tonne",
+      "unit": "$ per tonne CO₂e"
+    }
+  }
+}

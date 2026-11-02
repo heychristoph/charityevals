@@ -18,32 +18,40 @@ const lib = buildLibrary(walk(join(root, "models")).map(read), read(join(root, "
 const ids = (charity: string) => rankingPlan(lib, charity).flatMap((e) => e.parts.map((p) => p.model.id));
 
 describe("ranking plan", () => {
-  it("never ranks a skeleton, VOI, breakeven, threshold or optionality sheet", () => {
+  it("never ranks a skeleton, VOI, breakeven, threshold, optionality or upper-bound sheet", () => {
     for (const id of ["centre-for-pesticide-suicide-prevention-cpsp-skeleton", "vital-strategies-botec-breakeven",
       "clinton-health-access-initiative-chai-msupply-voi-2025", "dimagi-optionality-mother-baby-wellness",
-      "path-threshold-accelerator-malaria-vaccines", "fika-bridges-to-prosperity-value-information"])
+      "path-threshold-accelerator-malaria-vaccines", "fika-bridges-to-prosperity-value-information",
+      "versus-arthritis-sogive-upper-bound", "motor-neurone-disease-association-sogive-upper-bound"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(true);
-    for (const id of ["against-malaria-foundation", "vital-strategies-model", "evidence-action-deworm-world-2024-renewal"])
+    for (const id of ["against-malaria-foundation", "vital-strategies-model", "evidence-action-deworm-world-2024-renewal",
+      "rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023"])
       expect(isSideSheet(lib.models.get(id)!)).toBe(false);
+    // Value-of-information sheets whose title doesn't say so are found by their rows.
+    for (const id of ["raising-the-village-2024", "idinsight-model"]) expect(isSideSheet(lib.models.get(id)!)).toBe(true);
     expect(ids("vital-strategies")).toEqual(["vital-strategies-model"]);
     expect(rankingPlan(lib, "centre-for-pesticide-suicide-prevention")).toEqual([]);
+    expect(rankingPlan(lib, "versus-arthritis")).toEqual([]);
   });
 
   it("gives each evaluator one entry, and each program its newest model", () => {
     expect(rankingPlan(lib, "against-malaria-foundation").map((e) => e.owner)).toEqual(["givewell", "hli"]);
+    // GiveWell's four programs, plus SoGive's deworming model as SoGive's own entry.
     expect(ids("evidence-action").sort()).toEqual([
+      "evidence-action-deworm-the-world-sogive-2022",
       "evidence-action-deworm-world-2024-renewal",
       "evidence-action-ifa-in-bihar-uttar-pradesh-july-2024",
       "evidence-action-in-line-chlorination-india-2023",
       "evidence-action-syphilis-screening-treatment-in",
+      "evidence-action-water-quality-nov-2022",
     ]);
-    expect(ids("new-incentives")).toEqual(["new-incentives"]);
+    expect(ids("new-incentives")).toEqual(["new-incentives", "new-incentives-founders-pledge"]);
   });
 
   it("counts each program's newest model, hand-built or bulk import (C5)", () => {
     // GiveWell's Jan 2025 Cash for Poverty Relief sheet is newer than the hand-built Nov 2024 model; the
     // Nov 2025 pilot sheets (>6x BOTECs, optionality) cover pilot variations, not the program.
-    expect(ids("givedirectly")).toEqual(["givedirectly-cash-poverty-relief-2024", "givedirectly-hli"]);
+    expect(ids("givedirectly")).toEqual(["givedirectly-cash-poverty-relief-2024", "givedirectly-hli", "givedirectly-founders-pledge"]);
     expect(newestFirst(modelsOf(lib, "givedirectly"))[0].id).toBe("givedirectly-pilots-optionality-2025");
     expect(modelsOf(lib, "givedirectly")[0].id).toBe("givedirectly");
     // The hand-built Sep 2026 SMC model is newer than every bulk SMC sheet.

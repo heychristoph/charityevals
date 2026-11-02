@@ -199,8 +199,10 @@
       "id": "p1_program_1_humane_slaughter_initiative_expenditur",
       "section": "p1_program_1_hsi_cea",
       "label": "Program 1: Humane Slaughter Initiative expenditures annually (USD)",
-      "formula": "479783 * 1.2781",
-      "expected": 613210.6523
+      "formula": "479783 * @fx.usd_per_gbp_2024",
+      "published": 613210.6523,
+      "expected": 613210.6523,
+      "explainer": "Changed for consistency: ACE converted £479,783 to dollars at its own rate of 1.2781; the site converts pounds at the year's IRS average for every model (@fx.usd_per_gbp_2024, 1.277). The evaluator view keeps ACE's figure."
     },
     {
       "id": "p1_program_1_humane_slaughter_initiative_additional",
@@ -327,12 +329,12 @@
       "section": "p2_program_2_ssfi_cea",
       "label": "Duration of impact of the stocking density decrease (years)",
       "value": 1.0,
-      "kind": "observed",
+      "kind": "judgment",
       "source": {
         "title": "ACE (Charity's data)",
         "cell": "Program 2 SSFI CEA!B17"
       },
-      "explainer": "The duration of impact for the stocking density depends on the farmers keeping it lower. They might be incentivised to do that based on the lower mortality that SWP observed.\nIn this case, stocking density was measured throughout the year and is not assumed to have longer lasting impact beyond the 1 year, because farmers are less incentivised to keep the numbers lower\n\nACE's input, source type: Charity's data."
+      "explainer": "The duration of impact for the stocking density depends on the farmers keeping it lower. They might be incentivised to do that based on the lower mortality that SWP observed.\nIn this case, stocking density was measured throughout the year and is not assumed to have longer lasting impact beyond the 1 year, because farmers are less incentivised to keep the numbers lower\n\nACE's input, source type: Charity's data. Filed by ACE as observed; how long a change lasts is a judgment, so filed as one."
     },
     {
       "id": "p2_number_of_shrimps_not_being_farmed_due_to_lower",
@@ -447,8 +449,10 @@
       "id": "p2_program_1_expenditures_annually",
       "section": "p2_program_2_ssfi_cea",
       "label": "Program 1 (Program Name) expenditures annually (USD)",
-      "formula": "33435 * 1.2781",
-      "expected": 42733.2735
+      "formula": "33435 * @fx.usd_per_gbp_2024",
+      "published": 42733.2735,
+      "expected": 42733.2735,
+      "explainer": "Changed for consistency: ACE converted £33,435 to dollars at its own rate of 1.2781; the site converts pounds at the year's IRS average for every model (@fx.usd_per_gbp_2024, 1.277). The evaluator view keeps ACE's figure."
     },
     {
       "id": "p2_program_1_expenditures_annually_including_operat",
@@ -497,26 +501,16 @@
       "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.65,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours."
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours.",
+      "formula": "@staff_pay.share_advocacy"
     },
     {
       "id": "salary_gap",
       "section": "donor",
       "label": "Pay gap versus comparable for-profit jobs",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.55
-      },
-      "kind": "judgment",
-      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours."
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours.",
+      "formula": "@staff_pay.gap_advocacy"
     },
     {
       "id": "salary_sacrifice",
@@ -551,8 +545,8 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: shrimp",
       "format": "number",
-      "formula": "sads_shrimp / @aim_sads.shrimp * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp / @aim_sads.chicken)",
-      "explainer": "The SADs for shrimp with Ambitious Impact's weight for shrimp taken out, and Rethink Priorities' estimate of how much shrimp can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
+      "formula": "sads_shrimp / @aim_sads.shrimp_2025 * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp_2025 / @aim_sads.chicken_2024)",
+      "explainer": "The SADs for shrimp with the shrimp weight built into ACE's 2025 SADs (19.9% of a person's) taken out, and Rethink Priorities' estimate of how much shrimp can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces."
     },
     {
       "id": "ced_per_donor_dollar",

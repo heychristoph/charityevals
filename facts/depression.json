@@ -1,0 +1,82 @@
+{
+  "id": "depression",
+  "label": "Depression as a health loss (shared conversion)",
+  "rows": [
+    {
+      "id": "dw_mild",
+      "label": "Disability weight of a mild episode of major depressive disorder (GBD 2019)",
+      "unit": "DALYs per year",
+      "format": "number",
+      "value": { "low": 0.099, "best": 0.145, "high": 0.209 },
+      "kind": "estimate",
+      "source": {
+        "title": "Global Burden of Disease Study 2019 (GBD 2019) Disability Weights, IHME",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Major depressive disorder, mild episode: 0.145 (95% uncertainty interval 0.099–0.209). Unchanged from GBD 2013 and 2016.",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "How much of a year of healthy life a year of mild major depression costs, by the Global Burden of Disease weights. One of the three points the shared depression conversion is fitted to."
+    },
+    {
+      "id": "dw_moderate",
+      "label": "Disability weight of a moderate episode of major depressive disorder (GBD 2019)",
+      "unit": "DALYs per year",
+      "format": "number",
+      "value": { "low": 0.267, "best": 0.396, "high": 0.531 },
+      "kind": "estimate",
+      "source": {
+        "title": "Global Burden of Disease Study 2019 (GBD 2019) Disability Weights, IHME",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Major depressive disorder, moderate episode: 0.396 (0.267–0.531).",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "How much of a year of healthy life a year of moderate major depression costs, by the Global Burden of Disease weights. One of the three points the shared depression conversion is fitted to."
+    },
+    {
+      "id": "dw_severe",
+      "label": "Disability weight of a severe episode of major depressive disorder (GBD 2019)",
+      "unit": "DALYs per year",
+      "format": "number",
+      "value": { "low": 0.477, "best": 0.658, "high": 0.807 },
+      "kind": "estimate",
+      "source": {
+        "title": "Global Burden of Disease Study 2019 (GBD 2019) Disability Weights, IHME",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Major depressive disorder, severe episode: 0.658 (0.477–0.807); the same figure as GBD 2016's, which Founders Pledge used.",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "How much of a year of healthy life a year of severe major depression costs, by the Global Burden of Disease weights. Founders Pledge's mental health analyses start from it."
+    },
+    {
+      "id": "dalys_per_phq9_point_year",
+      "label": "Healthy years lost per PHQ-9 point of depression for a year",
+      "unit": "DALYs per PHQ-9 point-year",
+      "format": "number",
+      "value": { "low": 0.0244, "best": 0.031, "high": 0.0435 },
+      "kind": "estimate",
+      "source": {
+        "title": "GBD 2019 disability weights for major depression placed on the PHQ-9 severity bands (Kroenke, Spitzer & Williams 2001, J Gen Intern Med 16(9):606–613)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1495268/",
+        "note": "Slope of a least-squares line through each GBD weight at the middle of its PHQ-9 band: mild 0.145 at 7 (band 5–9), moderate 0.396 at 14.5 (bands 10–14 and 15–19: GBD has no moderately severe level), severe 0.658 at 23.5 (band 20–27): 0.031 per point. Range: Founders Pledge's StrongMinds spread of the severe weight over the whole scale (0.658 / 27 = 0.0244) to SoGive's 23 points for a full healthy year (1 / 23 = 0.0435).",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "The one way the site turns a fall in depression, measured on the PHQ-9 questionnaire (0–27), into years of healthy life: each point less for a year is 0.031 of a healthy year. It is the Global Burden of Disease weights for mild, moderate and severe depression placed on the PHQ-9's severity bands, so a fall from severe to mild counts what GBD counts for that change.\n\nEvaluators each used their own: Founders Pledge 0.658 / 27 = 0.024 for StrongMinds and 0.658 / 23.25 = 0.028 for Action for Happiness, SoGive 1 / 23 = 0.043 (a full healthy year at the score where most people would rather feel nothing). Those set the range. A model measuring depression in standard deviations multiplies by the spread of PHQ-9 scores in its own sample."
+    },
+    {
+      "id": "phq9_sd",
+      "label": "Spread (standard deviation) of PHQ-9 depression scores among people starting therapy",
+      "unit": "PHQ-9 points",
+      "format": "number",
+      "value": { "low": 3.5, "best": 4.211710187, "high": 5.5 },
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, StrongMinds cost-effectiveness analysis (March 2024), from the METAPSY database of psychotherapy trials",
+        "url": "https://docs.google.com/spreadsheets/d/1sNB40ot0sfa4v3OdF0Pv9F99hSKImbrjyTVfnISJeFU/edit",
+        "cell": "'simplified cea'!B10",
+        "note": "Standard deviation of PHQ-9 scores of trial participants before treatment. The range is ours: samples in psychotherapy trials in low- and middle-income countries typically show 3.5 to 5.5 points.",
+        "retrieved": "2026-10-31"
+      },
+      "explainer": "Turns an effect measured in standard deviations of a depression scale into PHQ-9 points: one standard deviation is about 4.2 points among people starting therapy. Psychotherapy effects are reported in these units, by SoGive (StrongMinds) and by the Happier Lives Institute, whose meta-analyses pool depression scales the same way.\n\nWith the shared 0.031 healthy years per point for a year, one standard deviation of depression for a year is 0.13 healthy years. That is the anchor the WELLBY exchange rate is calibrated on (\"1 point more life satisfaction for a year vs doubled-income year\"), so a fall in depression counts the same in HLI's analyses as in Founders Pledge's and SoGive's."
+    }
+  ]
+}

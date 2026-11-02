@@ -1,6 +1,6 @@
 ### Summary
 
-Friendship Bench trains lay health workers, often older women known as "grandmothers", to deliver problem-solving talk therapy for depression on benches outside clinics in Zimbabwe. The Happier Lives Institute (HLI) rates it a top charity, at about $21 per point of life satisfaction for a year: **<span data-figure="headline" data-model="friendship-bench">28</span> years of healthy life per $1,000** with our default exchange rate.
+Friendship Bench trains lay health workers, often older women known as "grandmothers", to deliver problem-solving talk therapy for depression on benches outside clinics in Zimbabwe. The Happier Lives Institute (HLI) rates it a top charity, at about $21 per point of life satisfaction for a year: **<span data-figure="headline" data-model="friendship-bench">3.0</span> years of healthy life per $1,000** with our default exchange rate.
 
 The model reproduces all 32 of HLI's intermediate figures.
 
@@ -15,11 +15,16 @@ As for StrongMinds, HLI runs three bodies of evidence through the same chain (in
 
 ### Comparing with other charities
 
-HLI measures impact in WELLBYs: one point of life satisfaction on a 0–10 scale, for one person, for one year. To put it on the same scale as GiveWell's charities we use one exchange rate, calibrated so that GiveDirectly scores the same in HLI's units and in GiveWell's (about 1.15 GiveWell units of value per WELLBY). That calibration is contested, so it is a slider: for Friendship Bench it runs from about 10 to 73 years of healthy life per $1,000.
+HLI measures impact in WELLBYs: one point of life satisfaction on a 0–10 scale, for one person, for one year. To put it on the same scale as everything else we use one exchange rate for every HLI model, "1 point more life satisfaction for a year vs doubled-income year" under Your values. Its default is set so that depression counts the same whoever measured it: HLI counts one standard deviation of depression for a year as 2 WELLBYs, and the site counts the same fall in depression, about 4.2 points on the PHQ-9 questionnaire, as 0.13 years of healthy life by the Global Burden of Disease weights, which Founders Pledge's and SoGive's analyses also go through. That makes a WELLBY worth about 0.13 doubled-income years.
+
+At that rate HLI's therapy charities come out near Founders Pledge's analysis of the same therapy. HLI itself values them against GiveDirectly's cash transfers, which implies a rate about 9 times higher (0.575 healthy years per WELLBY); at that rate this charity would come out about 9 times higher, and the evaluator view shows it that way. The slider runs from 0.025 to 1.5, so either view is a click away.
 
 ### Where we differ from HLI
 
-Nothing yet. HLI publishes no ranges in this sheet, so the tornado chart shows only the exchange rate; the "100% judgment" flag reflects that gap. We haven't estimated a salary gap for this charity.
+- **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models, 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). About 9 times lower.
+- **Discounting (ours):** later benefits count less at the discount rate under Your values; HLI doesn't discount (0 in the evaluator view).
+- **Staff pay and credit by share of resources (ours):** off by default.
+- HLI publishes no ranges in this sheet, so the tornado chart shows mainly the exchange rate; the "100% judgment" flag reflects that gap.
 
 ### Sources
 

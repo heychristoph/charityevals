@@ -1,0 +1,424 @@
+{
+  "id": "coalition-for-rainforest-nations-founders-pledge",
+  "name": "Coalition for Rainforest Nations (Founders Pledge, 2018)",
+  "kind": "charity",
+  "cause": "climate",
+  "charity": "coalition-for-rainforest-nations",
+  "owner": "founders-pledge",
+  "summary": "Diplomacy for rainforest countries in the UN climate talks, behind the REDD+ mechanism that pays countries to keep forests standing. A re-implementation of Founders Pledge's 2018 estimate of what CfRN's past work cost per tonne of CO₂e averted.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Climate Change: cause area report (2018), Coalition for Rainforest Nations cost-effectiveness analysis (past impact)",
+    "url": "https://www.founderspledge.com/research/fp-climate-change",
+    "sheet": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit",
+    "published": "2018-05-01",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Climate Change cause area report (2018, PDF)",
+      "url": "https://www.founderspledge.com/research/fp-climate-change",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Coalition for Rainforest Nations recommendation",
+      "url": "https://www.founderspledge.com/research/coalition-for-rainforest-nations",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, CfRN cost-effectiveness spreadsheet",
+      "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit",
+      "type": "model"
+    },
+    {
+      "title": "Rethink Priorities, climate change versus global health interventions (2026)",
+      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
+      "type": "study",
+      "note": "Source of the shared rate that turns tonnes into deaths."
+    },
+    {
+      "title": "Coalition for Rainforest Nations",
+      "url": "https://www.rainforestcoalition.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "funding",
+      "title": "Effect on forestry funding"
+    },
+    {
+      "id": "cost",
+      "title": "Costs"
+    },
+    {
+      "id": "bottom",
+      "title": "Cost-effectiveness of past activities"
+    },
+    {
+      "id": "plans",
+      "title": "Effect on national forestry plans (not in Founders Pledge's total)"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From cost per tonne to tonnes per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' step after Founders Pledge's bottom line: Founders Pledge reports dollars per tonne; the site needs tonnes per dollar, and how much air pollution those tonnes cut. Forest carbon kept out of the air comes with no fossil-fuel smoke; only the smoke from fires used to clear forest counts, and it is small per tonne (docs/normalization.md 2.5). The tonnes come years after the money is spent, so they are discounted for that wait at the site's discount rate."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "redd_funding",
+      "section": "funding",
+      "label": "Additional funding for REDD+, 2006–14",
+      "format": "usd",
+      "value": {
+        "low": 5000000000.0,
+        "best": 7500000000.0,
+        "high": 9800000000.0
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C6:E6",
+        "note": "CGD: https://www.cgdev.org/sites/default/files/CGD-Norman-Nakhooda-Climate-Forests-5-REDD-Finance.pdf"
+      },
+      "explainer": "Money pledged for REDD+ (Reducing Emissions from Deforestation and forest Degradation) over 2006–14, from the Center for Global Development's review (Norman and Nakhooda). Founders Pledge's note says only about $400m had been disbursed by 2015, so the realistic case assumes most pledges are paid out."
+    },
+    {
+      "id": "funding_years",
+      "section": "funding",
+      "label": "Years of REDD+ funding (2006–14)",
+      "format": "integer",
+      "value": 8,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C7:E7 (=C6/8)"
+      },
+      "explainer": "Written into Founders Pledge's formula."
+    },
+    {
+      "id": "annual_redd_funding",
+      "section": "funding",
+      "label": "Average additional annual REDD+ funding, 2006–14",
+      "format": "usd",
+      "formula": "redd_funding / funding_years",
+      "expected": 937500000
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "funding",
+      "label": "Years of additional funding brought about by CfRN",
+      "format": "number",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C8:E8"
+      },
+      "explainer": "**Changed for consistency:** reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default, 1–20; docs/normalization.md 2.9), like every model that credits a won reform, each year after the first discounted at the shared rate (the wait until the reform takes effect is the model's years_until_avoided). Founders Pledge judged that CfRN brought about three years of additional REDD+ funding (and of the national plans) (its range 1.0–6.0), undiscounted; that figure is kept as the evaluator's and used in the evaluator view.",
+      "formula": "pv_annuity_due(1, $discount_rate, $win_years_counted)",
+      "published": 3.0
+    },
+    {
+      "id": "elasticity_adjustment",
+      "section": "funding",
+      "label": "Elasticity of emissions to cost of abatement adjustment factor",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C9:E9"
+      },
+      "explainer": "A small cut for emissions that move elsewhere or come back when protecting forests gets cheaper. Founders Pledge's subjective estimate; see the CfRN past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "temporal_shifting",
+      "section": "funding",
+      "label": "Temporal funding shifting adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C10:E10"
+      },
+      "explainer": "A cut for funders who would have given the money later anyway. Founders Pledge's subjective estimate; see the CfRN past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "funding_brought_about",
+      "section": "funding",
+      "label": "Impact-adjusted total additional funding brought about by CfRN",
+      "format": "usd",
+      "formula": "annual_redd_funding * years_brought_forward * (1 - elasticity_adjustment) * (1 - temporal_shifting)",
+      "expected": 2404687500
+    },
+    {
+      "id": "cost_per_tonne_redd",
+      "section": "funding",
+      "label": "Average cost to avert a tonne of CO₂e with REDD+ finance",
+      "format": "usd",
+      "value": {
+        "low": 5.0,
+        "best": 15.0,
+        "high": 30.0
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C12:E12",
+        "note": "https://www.cgdev.org/sites/default/files/Seymour-Busch-why-forests-why-now-full-book.PDF"
+      },
+      "explainer": "From Seymour and Busch, Why Forests? Why Now? (CGD), chapter 5, a review of estimates (p. 127)."
+    },
+    {
+      "id": "tonnes_averted",
+      "section": "funding",
+      "label": "Tonnes of CO₂e averted by CfRN via increased forestry funding",
+      "format": "integer",
+      "formula": "funding_brought_about / cost_per_tonne_redd",
+      "expected": 160312500
+    },
+    {
+      "id": "annual_budget",
+      "section": "cost",
+      "label": "Average annual budget (2004–17)",
+      "format": "usd",
+      "value": 3000000,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!D17"
+      },
+      "explainer": "CfRN's internal information, via Founders Pledge."
+    },
+    {
+      "id": "years_of_spending",
+      "section": "cost",
+      "label": "Years of spending counted (2004–17)",
+      "format": "integer",
+      "value": 13,
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!D18 (=$D$17*13)"
+      },
+      "explainer": "Written into Founders Pledge's formula for total costs."
+    },
+    {
+      "id": "total_costs",
+      "section": "cost",
+      "label": "Costs incurred (2004–17)",
+      "format": "usd",
+      "formula": "annual_budget * years_of_spending",
+      "expected": 39000000
+    },
+    {
+      "id": "cost_per_tonne",
+      "section": "bottom",
+      "label": "Cost per tonne of CO₂e averted",
+      "format": "usd",
+      "formula": "total_costs / tonnes_averted",
+      "expected": 0.2432748538,
+      "explainer": "Founders Pledge's bottom line for CfRN's past work: about $0.24 a tonne (pessimistic $2.60, optimistic $0.03)."
+    },
+    {
+      "id": "tonnes_per_100",
+      "section": "bottom",
+      "label": "Tonnes of CO₂e averted per $100",
+      "format": "number",
+      "formula": "100 / cost_per_tonne",
+      "expected": 411.0576923
+    },
+    {
+      "id": "forestry_emissions_gt",
+      "section": "plans",
+      "label": "Annual net emissions from forestry and other land use (GtCO₂e)",
+      "format": "number",
+      "value": {
+        "low": 4.3,
+        "best": 4.9,
+        "high": 5.5
+      },
+      "kind": "observed",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C29:E29",
+        "note": "IPCC AR5 WGIII, p. 86"
+      },
+      "explainer": "IPCC, Climate Change 2014: Mitigation, p. 86; the realistic case is the midpoint (D29 = AVERAGE(C29, E29))."
+    },
+    {
+      "id": "plan_deforestation_cut",
+      "section": "plans",
+      "label": "Reduction in deforestation due to national REDD+ plans over the period",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.002,
+        "high": 0.003
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Founders Pledge, Coalition for Rainforest Nations CEA (2018 climate report)",
+        "url": "https://docs.google.com/spreadsheets/d/12lwvxlWLjwuSuXiciFvnBF2bkfcCkrusdqqT37_QWac/edit#gid=0",
+        "cell": "CfRN past impact!C31:E31"
+      },
+      "explainer": "Founders Pledge calls this the most subjective judgment in the model and leaves the whole effect out of its total. Founders Pledge's subjective estimate; see the CfRN past-impact appendix of its 2018 climate report."
+    },
+    {
+      "id": "plans_tonnes_averted",
+      "section": "plans",
+      "label": "Impact-adjusted tonnes of CO₂e averted by CfRN enabling national plans (not in Founders Pledge's total)",
+      "format": "integer",
+      "formula": "forestry_emissions_gt * years_brought_forward * plan_deforestation_cut * 1000000000",
+      "expected": 29400000,
+      "explainer": "Founders Pledge works this out but marks it \"effect not included in model\", so it doesn't feed the bottom line here either."
+    },
+    {
+      "id": "years_until_avoided",
+      "section": "per_dollar",
+      "label": "Years from the grant until the tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 3,
+        "best": 7,
+        "high": 12
+      },
+      "kind": "judgment",
+      "explainer": "Founders Pledge counts CfRN's spending from 2004 to 2017 (about 2010 on average) against REDD+ money pledged over 2006–14. REDD+ pays countries for forest kept after the fact, and Founders Pledge notes that only about $400 million had been paid out by 2015, so the forest the money keeps standing is mostly kept from the mid-2010s into the 2020s: about seven years after the average dollar, 3 to 12. Our judgment from Founders Pledge's dates. Founders Pledge counts a tonne the same whenever it is avoided; the site discounts every future benefit at the discount rate under Your values, in both views (an evaluator stating dollars per tonne takes no view on discounting). The heat deaths a tonne avoids are discounted again from the year it is avoided, in the site's climate conversion."
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "per_dollar",
+      "label": "A marginal dollar's tonnes as a share of the past average (our judgment)",
+      "format": "percent",
+      "formula": "@meta.marginal_vs_past_average",
+      "published": 1,
+      "explainer": "Our judgment, one figure for every model built on an organisation's past average (facts: meta.marginal_vs_past_average, shared with The Life You Can Save's leverage ratio): the cost per tonne is CfRN's 2004–17 budget over the REDD+ funding it helped bring about, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+    },
+    {
+      "id": "tco2e_per_dollar",
+      "section": "per_dollar",
+      "label": "Tonnes of CO₂e averted per dollar",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "1 / cost_per_tonne * marginal_vs_past_average * (1 + $discount_rate) ^ -years_until_avoided",
+      "explainer": "One over Founders Pledge's cost per tonne, discounted for the wait until the tonnes are avoided, like every future benefit on the site. How much air pollution these tonnes cut is the rows below. A marginal dollar is counted at the shared share of the past average (row above)."
+    },
+    {
+      "id": "fire_smoke_factor",
+      "section": "per_dollar",
+      "label": "Air pollution per tonne of forest carbon kept, relative to an average fossil-fuel tonne (fire smoke)",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.005,
+        "high": 0.03
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Reddington et al. (2015), Air quality and human health improvements from reductions in deforestation-related fire in Brazil, Nature Geoscience 8, 768–771; IPCC (2006), Guidelines for National Greenhouse Gas Inventories, Vol. 4, Ch. 4 Forest Land",
+        "url": "https://doi.org/10.1038/ngeo2535",
+        "note": "Reddington: deforestation in Brazil fell from 37,800 to 22,900 km² a year (2001–12), preventing about 400–1,700 premature adult deaths a year across South America. IPCC 2006 (https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_04_Ch4_Forest_Land.pdf): Table 4.7, tropical rain forest, North and South America, 300 (120–400) tonnes dry matter per ha above ground; Table 4.4, root-to-shoot ratio 0.37 for tropical rainforest; Table 4.3, carbon fraction 0.47."
+      },
+      "explainer": "No fossil fuel is involved, but tropical forest is mostly cleared by fire, and its smoke kills. Reddington et al. (2015) find that Brazil's fall in deforestation, about 14,900 km² a year, prevents 400–1,700 deaths a year. IPCC's default for South American rain forest, 300 tonnes of dry matter a hectare above ground (120–400, Table 4.7), plus roots at 0.37 of that (Table 4.4), at 0.47 tonnes of carbon per tonne (Table 4.3), is about 190 tonnes of carbon or 710 tonnes of CO₂ a hectare, 71,000 a km²: about 1.05 billion tonnes a year. That is 0.4–1.6 deaths per million tonnes, 0.003–0.011 of the world-average fossil-fuel smoke per tonne (1.46 per 10,000); best guess 0.005, the middle on a log scale. Low 0, as Founders Pledge leaves fire smoke out and CfRN's tonnes also come from countries that clear forest with less fire; high 0.03, the top of Reddington's deaths with IPCC's lowest biomass."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "per_dollar",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fire_smoke_factor",
+      "explainer": "The row the site's climate conversion reads (docs/normalization.md 2.5): the air-pollution deaths each of these tonnes avoids, as a multiple of the world average behind the shared rate, 1.46 air-pollution deaths per 10,000 tonnes of CO₂ from fossil fuels (Rethink Priorities). The conversion values every tonne for its heat deaths (discounted over the decades until they come) and adds \"Deaths caused by one more tonne of CO₂\"'s air-pollution part times this row, at once. Here it is the fire smoke above: none of these tonnes come from burning less fossil fuel."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "per_dollar",
+      "label": "Air-pollution deaths averted per tonne, counted directly by the evaluator (none here)",
+      "format": "small",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "A row every climate model has, which the site's conversion reads (docs/normalization.md 2.5): air-pollution deaths the evaluator counts itself, per tonne, on top of what the tonnes carry through air_pollution_weight. The evaluator counts none for this charity, so 0."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this charity's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Researchers, lawyers and advocates could typically earn considerably more in consulting, law firms or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "tco2e_per_donor_dollar",
+      "section": "staff_pay",
+      "label": "Tonnes of CO₂e averted per dollar donated",
+      "format": "number",
+      "unit": "t CO₂e per $",
+      "formula": "tco2e_per_dollar * donor_cost_share",
+      "explainer": "The tonnes per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). The site turns these tonnes into years of healthy life through the deaths they avoid: \"Deaths caused by one more tonne of CO₂\", its heat part discounted over \"Years until the heat deaths from a tonne of CO₂\" for every tonne, and its air-pollution part, at once, times \"Air pollution these tonnes cut, relative to an average fossil-fuel tonne\" above."
+    }
+  ],
+  "output": {
+    "row": "tco2e_per_donor_dollar",
+    "unit": "tco2e",
+    "label": "Tonnes of CO₂e averted per dollar",
+    "native": {
+      "row": "cost_per_tonne",
+      "unit": "$ per tonne CO₂e"
+    }
+  }
+}

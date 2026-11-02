@@ -19,7 +19,8 @@
     "name": "HLI",
     "assumptions": {
       "resource_shares": 0,
-      "discount_rate": 0
+      "discount_rate": 0,
+      "daly_per_wellby": 0.575
     }
   },
   "sections": [
@@ -103,14 +104,14 @@
       "id": "prior_wellby_conversion",
       "section": "ev_prior",
       "label": "WELLBY conversion",
-      "value": 2.0,
-      "kind": "estimate",
+      "formula": "@wellby_factors.wellbys_per_sd_year",
+      "published": 2.0,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "F10"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM prior)."
+      "explainer": "HLI's estimate for this body of evidence (SM prior). Reads HLI's 2 WELLBYs per standard-deviation-year of better wellbeing or less depression, the shared fact (@wellby_factors.wellbys_per_sd_year) every HLI model reads. Same number; the evaluator view keeps HLI's 2 whatever the fact says."
     },
     {
       "id": "prior_total_effect_on_the_individual_wellbys",
@@ -268,27 +269,27 @@
       "id": "prior_number_of_household_members_total",
       "section": "ev_prior",
       "label": "Number of household members [total]",
-      "value": 4.7344554296912,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_size_psychotherapy",
+      "published": 4.7344554296912,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "F30"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM prior)."
+      "explainer": "HLI's estimate for this body of evidence (SM prior). Reads HLI's household size of psychotherapy recipients, the shared fact (@wellby_factors.household_size_psychotherapy). Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "prior_spillover_ratio",
       "section": "ev_prior",
       "label": "Spillover ratio",
-      "value": 0.162400011974389,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+      "published": 0.162400011974389,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "F31"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM prior)."
+      "explainer": "HLI's estimate for this body of evidence (SM prior). Reads HLI's household spillover from psychotherapy (16.24% of the recipient's effect for each other household member), the shared fact (@wellby_factors.household_spillover_ratio_psychotherapy) every HLI model that uses it reads. Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "prior_non_recipient_effect_wellbys",
@@ -361,14 +362,14 @@
       "id": "rct_wellby_conversion",
       "section": "ev_rct",
       "label": "WELLBY conversion",
-      "value": 2.0,
-      "kind": "estimate",
+      "formula": "@wellby_factors.wellbys_per_sd_year",
+      "published": 2.0,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "G10"
       },
-      "explainer": "HLI's estimate for this body of evidence (Baird et al.)."
+      "explainer": "HLI's estimate for this body of evidence (Baird et al.). Reads HLI's 2 WELLBYs per standard-deviation-year of better wellbeing or less depression, the shared fact (@wellby_factors.wellbys_per_sd_year) every HLI model reads. Same number; the evaluator view keeps HLI's 2 whatever the fact says."
     },
     {
       "id": "rct_total_effect_on_the_individual_wellbys",
@@ -526,27 +527,27 @@
       "id": "rct_number_of_household_members_total",
       "section": "ev_rct",
       "label": "Number of household members [total]",
-      "value": 4.7344554296912,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_size_psychotherapy",
+      "published": 4.7344554296912,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "G30"
       },
-      "explainer": "HLI's estimate for this body of evidence (Baird et al.)."
+      "explainer": "HLI's estimate for this body of evidence (Baird et al.). Reads HLI's household size of psychotherapy recipients, the shared fact (@wellby_factors.household_size_psychotherapy). Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "rct_spillover_ratio",
       "section": "ev_rct",
       "label": "Spillover ratio",
-      "value": 0.162400011974389,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+      "published": 0.162400011974389,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "G31"
       },
-      "explainer": "HLI's estimate for this body of evidence (Baird et al.)."
+      "explainer": "HLI's estimate for this body of evidence (Baird et al.). Reads HLI's household spillover from psychotherapy (16.24% of the recipient's effect for each other household member), the shared fact (@wellby_factors.household_spillover_ratio_psychotherapy) every HLI model that uses it reads. Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "rct_non_recipient_effect_wellbys",
@@ -606,14 +607,14 @@
       "id": "me_wellby_conversion",
       "section": "ev_me",
       "label": "WELLBY conversion",
-      "value": 2.0,
-      "kind": "estimate",
+      "formula": "@wellby_factors.wellbys_per_sd_year",
+      "published": 2.0,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "H10"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM M&E)."
+      "explainer": "HLI's estimate for this body of evidence (SM M&E). Reads HLI's 2 WELLBYs per standard-deviation-year of better wellbeing or less depression, the shared fact (@wellby_factors.wellbys_per_sd_year) every HLI model reads. Same number; the evaluator view keeps HLI's 2 whatever the fact says."
     },
     {
       "id": "me_total_effect_on_the_individual_wellbys",
@@ -771,27 +772,27 @@
       "id": "me_number_of_household_members_total",
       "section": "ev_me",
       "label": "Number of household members [total]",
-      "value": 4.7344554296912,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_size_psychotherapy",
+      "published": 4.7344554296912,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "H30"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM M&E)."
+      "explainer": "HLI's estimate for this body of evidence (SM M&E). Reads HLI's household size of psychotherapy recipients, the shared fact (@wellby_factors.household_size_psychotherapy). Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "me_spillover_ratio",
       "section": "ev_me",
       "label": "Spillover ratio",
-      "value": 0.162400011974389,
-      "kind": "estimate",
+      "formula": "@wellby_factors.household_spillover_ratio_psychotherapy",
+      "published": 0.162400011974389,
       "source": {
         "title": "HLI summary spreadsheet V4",
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "H31"
       },
-      "explainer": "HLI's estimate for this body of evidence (SM M&E)."
+      "explainer": "HLI's estimate for this body of evidence (SM M&E). Reads HLI's household spillover from psychotherapy (16.24% of the recipient's effect for each other household member), the shared fact (@wellby_factors.household_spillover_ratio_psychotherapy) every HLI model that uses it reads. Same number; the evaluator view keeps HLI's figure."
     },
     {
       "id": "me_non_recipient_effect_wellbys",
@@ -940,26 +941,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",

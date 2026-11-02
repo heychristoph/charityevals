@@ -58,6 +58,37 @@
   ],
   "rows": [
     {
+      "id": "policy_years_until_effect",
+      "label": "Years from the grant until the policy takes effect",
+      "section": "calculations",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."
+    },
+    {
+      "id": "policy_wait_discount",
+      "label": "Discount for the wait until the policy takes effect",
+      "section": "calculations",
+      "formula": "(1 + $discount_rate) ^ -policy_years_until_effect",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
+    },
+    {
+      "id": "value_of_preventing_one_death_from_alcohol_age_mix",
+      "label": "Age mix of these deaths, relative to the average death at five or over",
+      "format": "number",
+      "value": 0.7787800206035135,
+      "kind": "estimate",
+      "explainer": "Deaths from alcohol fall mostly in middle and older age (GiveWell's public-health-regulation moral weights). GiveWell's sheet values these deaths at 57 units of value, 0.779 of its average five-and-over death (73.1914), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "calculations"
+    },
+    {
       "id": "value_of_preventing_one_death_from_alcohol",
       "label": "Value of preventing one death from alcohol",
       "section": "calculations",
@@ -66,16 +97,16 @@
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!E68"
       },
-      "formula": "57 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * value_of_preventing_one_death_from_alcohol_age_mix * $life_value_multiplier",
       "expected": 57.0,
-      "explainer": "GiveWell's moral weight, 57 units of value, times your multiplier on the value of a life."
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_over5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 57 units of value at the defaults, as in GiveWell's sheet."
     },
     {
       "id": "increase_in_probability_in_percentage_points_of_intervention",
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Vietnam)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -87,13 +118,23 @@
       "id": "number_of_years_brought_forward_vietnam",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "calculations",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_vietnam",
@@ -126,7 +167,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Vietnam)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -185,7 +226,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention * number_of_years_brought_forward_vietnam * reduction_in_annual_alcohol_deaths_vietnam * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam) * reduction_in_annual_alcohol_deaths_vietnam * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 4214.254011
     },
     {
@@ -193,7 +234,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Vietnam)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -205,13 +246,14 @@
       "id": "number_of_years_brought_forward_vietnam_2",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_vietnam_2",
@@ -230,7 +272,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_2",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_2 * number_of_years_brought_forward_vietnam_2 * reduction_in_annual_alcohol_deaths_vietnam_2 * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_2 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_2) * reduction_in_annual_alcohol_deaths_vietnam_2 * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 621.7264152
     },
     {
@@ -238,7 +280,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Vietnam)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -250,13 +292,14 @@
       "id": "number_of_years_brought_forward_vietnam_3",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte",
@@ -275,7 +318,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_3",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_3 * number_of_years_brought_forward_vietnam_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_3 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 237.981403
     },
     {
@@ -283,7 +326,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Vietnam)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -295,13 +338,14 @@
       "id": "number_of_years_brought_forward_vietnam_4",
       "label": "Number of years brought forward (Vietnam)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!F33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou",
@@ -320,7 +364,7 @@
       "id": "expected_lives_saved_from_this_intervention_vietnam_4",
       "label": "Expected lives saved from this intervention (Vietnam)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_4 * number_of_years_brought_forward_vietnam_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou * annual_deaths_from_alcohol_affected_by_policy_vietnam",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_4 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_vietnam_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou * annual_deaths_from_alcohol_affected_by_policy_vietnam * policy_wait_discount",
       "expected": 1209.03052
     },
     {
@@ -335,7 +379,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Vietnam)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -348,7 +392,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Nigeria)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -360,13 +404,14 @@
       "id": "number_of_years_brought_forward_nigeria",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_nigeria",
@@ -399,7 +444,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Nigeria)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -458,7 +503,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_5 * number_of_years_brought_forward_nigeria * reduction_in_annual_alcohol_deaths_nigeria * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_5 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria) * reduction_in_annual_alcohol_deaths_nigeria * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 3776.425833
     },
     {
@@ -466,7 +511,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Nigeria)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -478,13 +523,14 @@
       "id": "number_of_years_brought_forward_nigeria_2",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_nigeria_2",
@@ -503,7 +549,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_2",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_6 * number_of_years_brought_forward_nigeria_2 * reduction_in_annual_alcohol_deaths_nigeria_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_6 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_2) * reduction_in_annual_alcohol_deaths_nigeria_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 557.1338817
     },
     {
@@ -511,7 +557,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Nigeria)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -523,13 +569,14 @@
       "id": "number_of_years_brought_forward_nigeria_3",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2",
@@ -548,7 +595,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_3",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_7 * number_of_years_brought_forward_nigeria_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_7 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 213.2569882
     },
     {
@@ -556,7 +603,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Nigeria)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -568,13 +615,14 @@
       "id": "number_of_years_brought_forward_nigeria_4",
       "label": "Number of years brought forward (Nigeria)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!G33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2",
@@ -593,7 +641,7 @@
       "id": "expected_lives_saved_from_this_intervention_nigeria_4",
       "label": "Expected lives saved from this intervention (Nigeria)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_8 * number_of_years_brought_forward_nigeria_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_8 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_nigeria_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_2 * annual_deaths_from_alcohol_affected_by_policy_nigeria * policy_wait_discount",
       "expected": 1083.421663
     },
     {
@@ -608,7 +656,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Nigeria)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -621,7 +669,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Mexico)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -633,13 +681,14 @@
       "id": "number_of_years_brought_forward_mexico",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_mexico",
@@ -672,7 +721,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Mexico)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -731,7 +780,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_9 * number_of_years_brought_forward_mexico * reduction_in_annual_alcohol_deaths_mexico * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_9 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico) * reduction_in_annual_alcohol_deaths_mexico * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 3392.974986
     },
     {
@@ -739,7 +788,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Mexico)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -751,13 +800,14 @@
       "id": "number_of_years_brought_forward_mexico_2",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_mexico_2",
@@ -776,7 +826,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_2",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_10 * number_of_years_brought_forward_mexico_2 * reduction_in_annual_alcohol_deaths_mexico_2 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_10 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_2) * reduction_in_annual_alcohol_deaths_mexico_2 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 500.5636038
     },
     {
@@ -784,7 +834,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Mexico)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -796,13 +846,14 @@
       "id": "number_of_years_brought_forward_mexico_3",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3",
@@ -821,7 +872,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_3",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_11 * number_of_years_brought_forward_mexico_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_11 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_3 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 191.6032933
     },
     {
@@ -829,7 +880,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Mexico)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -841,13 +892,14 @@
       "id": "number_of_years_brought_forward_mexico_4",
       "label": "Number of years brought forward (Mexico)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!H33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3",
@@ -866,7 +918,7 @@
       "id": "expected_lives_saved_from_this_intervention_mexico_4",
       "label": "Expected lives saved from this intervention (Mexico)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_12 * number_of_years_brought_forward_mexico_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3 * annual_deaths_from_alcohol_affected_by_policy_mexico",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_12 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_mexico_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_3 * annual_deaths_from_alcohol_affected_by_policy_mexico * policy_wait_discount",
       "expected": 973.4131598
     },
     {
@@ -881,7 +933,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Mexico)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -894,7 +946,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Philippines)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -906,13 +958,14 @@
       "id": "number_of_years_brought_forward_philippines",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_philippines",
@@ -945,7 +998,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Philippines)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1004,7 +1057,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_13 * number_of_years_brought_forward_philippines * reduction_in_annual_alcohol_deaths_philippines * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_13 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines) * reduction_in_annual_alcohol_deaths_philippines * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 3132.609659
     },
     {
@@ -1012,7 +1065,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Philippines)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1024,13 +1077,14 @@
       "id": "number_of_years_brought_forward_philippines_2",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_philippines_2",
@@ -1049,7 +1103,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_2",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_14 * number_of_years_brought_forward_philippines_2 * reduction_in_annual_alcohol_deaths_philippines_2 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_14 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_2) * reduction_in_annual_alcohol_deaths_philippines_2 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 462.1520602
     },
     {
@@ -1057,7 +1111,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Philippines)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1069,13 +1123,14 @@
       "id": "number_of_years_brought_forward_philippines_3",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4",
@@ -1094,7 +1149,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_3",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_15 * number_of_years_brought_forward_philippines_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_15 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_4 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 176.9003101
     },
     {
@@ -1102,7 +1157,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Philippines)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1114,13 +1169,14 @@
       "id": "number_of_years_brought_forward_philippines_4",
       "label": "Number of years brought forward (Philippines)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!I33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4",
@@ -1139,7 +1195,7 @@
       "id": "expected_lives_saved_from_this_intervention_philippines_4",
       "label": "Expected lives saved from this intervention (Philippines)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_16 * number_of_years_brought_forward_philippines_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4 * annual_deaths_from_alcohol_affected_by_policy_philippines",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_16 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_philippines_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_4 * annual_deaths_from_alcohol_affected_by_policy_philippines * policy_wait_discount",
       "expected": 898.7167541
     },
     {
@@ -1154,7 +1210,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Philippines)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1167,7 +1223,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Thailand)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1179,13 +1235,14 @@
       "id": "number_of_years_brought_forward_thailand",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_thailand",
@@ -1218,7 +1275,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Thailand)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1277,7 +1334,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_17 * number_of_years_brought_forward_thailand * reduction_in_annual_alcohol_deaths_thailand * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_17 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand) * reduction_in_annual_alcohol_deaths_thailand * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 3078.624981
     },
     {
@@ -1285,7 +1342,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Thailand)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1297,13 +1354,14 @@
       "id": "number_of_years_brought_forward_thailand_2",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_thailand_2",
@@ -1322,7 +1380,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_2",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_18 * number_of_years_brought_forward_thailand_2 * reduction_in_annual_alcohol_deaths_thailand_2 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_18 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_2) * reduction_in_annual_alcohol_deaths_thailand_2 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 454.1877325
     },
     {
@@ -1330,7 +1388,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Thailand)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1342,13 +1400,14 @@
       "id": "number_of_years_brought_forward_thailand_3",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5",
@@ -1367,7 +1426,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_3",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_19 * number_of_years_brought_forward_thailand_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_19 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_5 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 173.8517636
     },
     {
@@ -1375,7 +1434,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Thailand)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1387,13 +1446,14 @@
       "id": "number_of_years_brought_forward_thailand_4",
       "label": "Number of years brought forward (Thailand)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!J33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5",
@@ -1412,7 +1472,7 @@
       "id": "expected_lives_saved_from_this_intervention_thailand_4",
       "label": "Expected lives saved from this intervention (Thailand)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_20 * number_of_years_brought_forward_thailand_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5 * annual_deaths_from_alcohol_affected_by_policy_thailand",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_20 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_thailand_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_5 * annual_deaths_from_alcohol_affected_by_policy_thailand * policy_wait_discount",
       "expected": 883.2290491
     },
     {
@@ -1427,7 +1487,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Thailand)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1440,7 +1500,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ethiopia)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1452,13 +1512,14 @@
       "id": "number_of_years_brought_forward_ethiopia",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ethiopia",
@@ -1491,7 +1552,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Ethiopia)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1535,7 +1596,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_21 * number_of_years_brought_forward_ethiopia * reduction_in_annual_alcohol_deaths_ethiopia * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_21 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia) * reduction_in_annual_alcohol_deaths_ethiopia * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 1884.365256
     },
     {
@@ -1543,7 +1604,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ethiopia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1555,13 +1616,14 @@
       "id": "number_of_years_brought_forward_ethiopia_2",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ethiopia_2",
@@ -1580,7 +1642,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_2",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_22 * number_of_years_brought_forward_ethiopia_2 * reduction_in_annual_alcohol_deaths_ethiopia_2 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_22 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_2) * reduction_in_annual_alcohol_deaths_ethiopia_2 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 277.9992978
     },
     {
@@ -1588,7 +1650,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ethiopia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1600,13 +1662,14 @@
       "id": "number_of_years_brought_forward_ethiopia_3",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6",
@@ -1625,7 +1688,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_3",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_23 * number_of_years_brought_forward_ethiopia_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_23 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 106.4112145
     },
     {
@@ -1633,7 +1696,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ethiopia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1645,13 +1708,14 @@
       "id": "number_of_years_brought_forward_ethiopia_4",
       "label": "Number of years brought forward (Ethiopia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!K33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6",
@@ -1670,7 +1734,7 @@
       "id": "expected_lives_saved_from_this_intervention_ethiopia_4",
       "label": "Expected lives saved from this intervention (Ethiopia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_24 * number_of_years_brought_forward_ethiopia_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_24 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ethiopia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_6 * annual_deaths_from_alcohol_affected_by_policy_ethiopia * policy_wait_discount",
       "expected": 540.6069734
     },
     {
@@ -1685,7 +1749,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Ethiopia)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1698,7 +1762,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (South Africa)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1710,13 +1774,14 @@
       "id": "number_of_years_brought_forward_south_africa",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_south_africa",
@@ -1749,7 +1814,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (South Africa)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1808,7 +1873,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_25 * number_of_years_brought_forward_south_africa * reduction_in_annual_alcohol_deaths_south_africa * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_25 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa) * reduction_in_annual_alcohol_deaths_south_africa * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 1850.62891
     },
     {
@@ -1816,7 +1881,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (South Africa)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1828,13 +1893,14 @@
       "id": "number_of_years_brought_forward_south_africa_2",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_south_africa_2",
@@ -1853,7 +1919,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_2",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_26 * number_of_years_brought_forward_south_africa_2 * reduction_in_annual_alcohol_deaths_south_africa_2 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_26 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_2) * reduction_in_annual_alcohol_deaths_south_africa_2 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 273.0221945
     },
     {
@@ -1861,7 +1927,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (South Africa)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1873,13 +1939,14 @@
       "id": "number_of_years_brought_forward_south_africa_3",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7",
@@ -1898,7 +1965,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_3",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_27 * number_of_years_brought_forward_south_africa_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_27 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 104.5061031
     },
     {
@@ -1906,7 +1973,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (South Africa)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1918,13 +1985,14 @@
       "id": "number_of_years_brought_forward_south_africa_4",
       "label": "Number of years brought forward (South Africa)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!L33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7",
@@ -1943,7 +2011,7 @@
       "id": "expected_lives_saved_from_this_intervention_south_africa_4",
       "label": "Expected lives saved from this intervention (South Africa)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_28 * number_of_years_brought_forward_south_africa_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_28 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_south_africa_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_7 * annual_deaths_from_alcohol_affected_by_policy_south_africa * policy_wait_discount",
       "expected": 530.9283276
     },
     {
@@ -1958,7 +2026,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (South Africa)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1971,7 +2039,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -1983,13 +2051,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_united_republic_of_tanzan",
@@ -2022,7 +2091,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2066,7 +2135,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_29 * number_of_years_brought_forward_united_republic_of_tanzania * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_29 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 1898.776758
     },
     {
@@ -2074,7 +2143,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2086,13 +2155,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_2",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2",
@@ -2111,7 +2181,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_2",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_30 * number_of_years_brought_forward_united_republic_of_tanzania_2 * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_30 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_2) * reduction_in_annual_alcohol_deaths_united_republic_of_tanzan_2 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 280.1254182
     },
     {
@@ -2119,7 +2189,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2131,13 +2201,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_3",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8",
@@ -2156,7 +2227,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_3",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_31 * number_of_years_brought_forward_united_republic_of_tanzania_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_31 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 107.2250405
     },
     {
@@ -2164,7 +2235,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2176,13 +2247,14 @@
       "id": "number_of_years_brought_forward_united_republic_of_tanzania_4",
       "label": "Number of years brought forward (United Republic of Tanzania)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!M33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8",
@@ -2201,7 +2273,7 @@
       "id": "expected_lives_saved_from_this_intervention_united_republic_4",
       "label": "Expected lives saved from this intervention (United Republic of Tanzania)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_32 * number_of_years_brought_forward_united_republic_of_tanzania_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_32 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_united_republic_of_tanzania_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_8 * annual_deaths_from_alcohol_affected_by_policy_united_republi * policy_wait_discount",
       "expected": 544.7415002
     },
     {
@@ -2216,7 +2288,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2229,7 +2301,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Myanmar)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2241,13 +2313,14 @@
       "id": "number_of_years_brought_forward_myanmar",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_myanmar",
@@ -2280,7 +2353,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Myanmar)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2339,7 +2412,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_33 * number_of_years_brought_forward_myanmar * reduction_in_annual_alcohol_deaths_myanmar * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_33 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar) * reduction_in_annual_alcohol_deaths_myanmar * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 1656.895322
     },
     {
@@ -2347,7 +2420,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Myanmar)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2359,13 +2432,14 @@
       "id": "number_of_years_brought_forward_myanmar_2",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_myanmar_2",
@@ -2384,7 +2458,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_2",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_34 * number_of_years_brought_forward_myanmar_2 * reduction_in_annual_alcohol_deaths_myanmar_2 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_34 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_2) * reduction_in_annual_alcohol_deaths_myanmar_2 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 244.4407922
     },
     {
@@ -2392,7 +2466,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Myanmar)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2404,13 +2478,14 @@
       "id": "number_of_years_brought_forward_myanmar_3",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9",
@@ -2429,7 +2504,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_3",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_35 * number_of_years_brought_forward_myanmar_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_35 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 93.56585349
     },
     {
@@ -2437,7 +2512,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Myanmar)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2449,13 +2524,14 @@
       "id": "number_of_years_brought_forward_myanmar_4",
       "label": "Number of years brought forward (Myanmar)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!N33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9",
@@ -2474,7 +2550,7 @@
       "id": "expected_lives_saved_from_this_intervention_myanmar_4",
       "label": "Expected lives saved from this intervention (Myanmar)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_36 * number_of_years_brought_forward_myanmar_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_36 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_myanmar_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_9 * annual_deaths_from_alcohol_affected_by_policy_myanmar * policy_wait_discount",
       "expected": 475.3479521
     },
     {
@@ -2489,7 +2565,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Myanmar)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2502,7 +2578,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Uganda)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2514,13 +2590,14 @@
       "id": "number_of_years_brought_forward_uganda",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_uganda",
@@ -2553,7 +2630,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Uganda)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2612,7 +2689,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_37 * number_of_years_brought_forward_uganda * reduction_in_annual_alcohol_deaths_uganda * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_37 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda) * reduction_in_annual_alcohol_deaths_uganda * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 1375.48284
     },
     {
@@ -2620,7 +2697,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Uganda)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2632,13 +2709,14 @@
       "id": "number_of_years_brought_forward_uganda_2",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_uganda_2",
@@ -2657,7 +2735,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_2",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_38 * number_of_years_brought_forward_uganda_2 * reduction_in_annual_alcohol_deaths_uganda_2 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_38 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_2) * reduction_in_annual_alcohol_deaths_uganda_2 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 202.9241742
     },
     {
@@ -2665,7 +2743,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Uganda)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2677,13 +2755,14 @@
       "id": "number_of_years_brought_forward_uganda_3",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10",
@@ -2702,7 +2781,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_3",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_39 * number_of_years_brought_forward_uganda_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_39 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_10 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 77.67432506
     },
     {
@@ -2710,7 +2789,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Uganda)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2722,13 +2801,14 @@
       "id": "number_of_years_brought_forward_uganda_4",
       "label": "Number of years brought forward (Uganda)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!O33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10",
@@ -2747,7 +2827,7 @@
       "id": "expected_lives_saved_from_this_intervention_uganda_4",
       "label": "Expected lives saved from this intervention (Uganda)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_40 * number_of_years_brought_forward_uganda_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10 * annual_deaths_from_alcohol_affected_by_policy_uganda",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_40 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_uganda_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_10 * annual_deaths_from_alcohol_affected_by_policy_uganda * policy_wait_discount",
       "expected": 394.6133121
     },
     {
@@ -2762,7 +2842,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Uganda)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2775,7 +2855,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kenya)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2787,13 +2867,14 @@
       "id": "number_of_years_brought_forward_kenya",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kenya",
@@ -2826,7 +2907,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Kenya)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2885,7 +2966,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_41 * number_of_years_brought_forward_kenya * reduction_in_annual_alcohol_deaths_kenya * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_41 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya) * reduction_in_annual_alcohol_deaths_kenya * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 894.0533049
     },
     {
@@ -2893,7 +2974,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kenya)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2905,13 +2986,14 @@
       "id": "number_of_years_brought_forward_kenya_2",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kenya_2",
@@ -2930,7 +3012,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_2",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_42 * number_of_years_brought_forward_kenya_2 * reduction_in_annual_alcohol_deaths_kenya_2 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_42 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_2) * reduction_in_annual_alcohol_deaths_kenya_2 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 131.8991582
     },
     {
@@ -2938,7 +3020,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kenya)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2950,13 +3032,14 @@
       "id": "number_of_years_brought_forward_kenya_3",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11",
@@ -2975,7 +3058,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_3",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_43 * number_of_years_brought_forward_kenya_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_43 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_11 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 50.48771604
     },
     {
@@ -2983,7 +3066,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kenya)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -2995,13 +3078,14 @@
       "id": "number_of_years_brought_forward_kenya_4",
       "label": "Number of years brought forward (Kenya)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!P33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11",
@@ -3020,7 +3104,7 @@
       "id": "expected_lives_saved_from_this_intervention_kenya_4",
       "label": "Expected lives saved from this intervention (Kenya)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_44 * number_of_years_brought_forward_kenya_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11 * annual_deaths_from_alcohol_affected_by_policy_kenya",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_44 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kenya_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_11 * annual_deaths_from_alcohol_affected_by_policy_kenya * policy_wait_discount",
       "expected": 256.4956288
     },
     {
@@ -3035,7 +3119,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Kenya)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3048,7 +3132,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cambodia)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3060,13 +3144,14 @@
       "id": "number_of_years_brought_forward_cambodia",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cambodia",
@@ -3099,7 +3184,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Cambodia)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3158,7 +3243,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_45 * number_of_years_brought_forward_cambodia * reduction_in_annual_alcohol_deaths_cambodia * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_45 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia) * reduction_in_annual_alcohol_deaths_cambodia * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 697.5171471
     },
     {
@@ -3166,7 +3251,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cambodia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3178,13 +3263,14 @@
       "id": "number_of_years_brought_forward_cambodia_2",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cambodia_2",
@@ -3203,7 +3289,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_2",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_46 * number_of_years_brought_forward_cambodia_2 * reduction_in_annual_alcohol_deaths_cambodia_2 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_46 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_2) * reduction_in_annual_alcohol_deaths_cambodia_2 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 102.9042944
     },
     {
@@ -3211,7 +3297,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cambodia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3223,13 +3309,14 @@
       "id": "number_of_years_brought_forward_cambodia_3",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12",
@@ -3248,7 +3335,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_3",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_47 * number_of_years_brought_forward_cambodia_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_47 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 39.3892036
     },
     {
@@ -3256,7 +3343,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cambodia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3268,13 +3355,14 @@
       "id": "number_of_years_brought_forward_cambodia_4",
       "label": "Number of years brought forward (Cambodia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!Q33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12",
@@ -3293,7 +3381,7 @@
       "id": "expected_lives_saved_from_this_intervention_cambodia_4",
       "label": "Expected lives saved from this intervention (Cambodia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_48 * number_of_years_brought_forward_cambodia_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_48 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cambodia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_12 * annual_deaths_from_alcohol_affected_by_policy_cambodia * policy_wait_discount",
       "expected": 200.1112219
     },
     {
@@ -3308,7 +3396,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Cambodia)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3321,7 +3409,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kazakhstan)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3333,13 +3421,14 @@
       "id": "number_of_years_brought_forward_kazakhstan",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kazakhstan",
@@ -3372,7 +3461,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Kazakhstan)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3431,7 +3520,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_49 * number_of_years_brought_forward_kazakhstan * reduction_in_annual_alcohol_deaths_kazakhstan * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_49 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan) * reduction_in_annual_alcohol_deaths_kazakhstan * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 577.6129648
     },
     {
@@ -3439,7 +3528,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kazakhstan)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3451,13 +3540,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_2",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_kazakhstan_2",
@@ -3476,7 +3566,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_2",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_50 * number_of_years_brought_forward_kazakhstan_2 * reduction_in_annual_alcohol_deaths_kazakhstan_2 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_50 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_2) * reduction_in_annual_alcohol_deaths_kazakhstan_2 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 85.21490093
     },
     {
@@ -3484,7 +3574,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kazakhstan)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3496,13 +3586,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_3",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13",
@@ -3521,7 +3612,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_3",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_51 * number_of_years_brought_forward_kazakhstan_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_51 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 32.6181439
     },
     {
@@ -3529,7 +3620,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Kazakhstan)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3541,13 +3632,14 @@
       "id": "number_of_years_brought_forward_kazakhstan_4",
       "label": "Number of years brought forward (Kazakhstan)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!R33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13",
@@ -3566,7 +3658,7 @@
       "id": "expected_lives_saved_from_this_intervention_kazakhstan_4",
       "label": "Expected lives saved from this intervention (Kazakhstan)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_52 * number_of_years_brought_forward_kazakhstan_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_52 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_kazakhstan_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_13 * annual_deaths_from_alcohol_affected_by_policy_kazakhstan * policy_wait_discount",
       "expected": 165.7118203
     },
     {
@@ -3581,7 +3673,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Kazakhstan)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3594,7 +3686,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Belarus)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3606,13 +3698,14 @@
       "id": "number_of_years_brought_forward_belarus",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_belarus",
@@ -3645,7 +3738,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Belarus)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3704,7 +3797,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_53 * number_of_years_brought_forward_belarus * reduction_in_annual_alcohol_deaths_belarus * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_53 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus) * reduction_in_annual_alcohol_deaths_belarus * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 602.4672716
     },
     {
@@ -3712,7 +3805,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Belarus)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3724,13 +3817,14 @@
       "id": "number_of_years_brought_forward_belarus_2",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_belarus_2",
@@ -3749,7 +3843,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_2",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_54 * number_of_years_brought_forward_belarus_2 * reduction_in_annual_alcohol_deaths_belarus_2 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_54 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_2) * reduction_in_annual_alcohol_deaths_belarus_2 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 88.88164218
     },
     {
@@ -3757,7 +3851,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Belarus)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3769,13 +3863,14 @@
       "id": "number_of_years_brought_forward_belarus_3",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14",
@@ -3794,7 +3889,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_3",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_55 * number_of_years_brought_forward_belarus_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_55 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_14 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 34.02168122
     },
     {
@@ -3802,7 +3897,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Belarus)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3814,13 +3909,14 @@
       "id": "number_of_years_brought_forward_belarus_4",
       "label": "Number of years brought forward (Belarus)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!S33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14",
@@ -3839,7 +3935,7 @@
       "id": "expected_lives_saved_from_this_intervention_belarus_4",
       "label": "Expected lives saved from this intervention (Belarus)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_56 * number_of_years_brought_forward_belarus_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14 * annual_deaths_from_alcohol_affected_by_policy_belarus",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_56 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_belarus_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_14 * annual_deaths_from_alcohol_affected_by_policy_belarus * policy_wait_discount",
       "expected": 172.8422912
     },
     {
@@ -3854,7 +3950,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Belarus)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3867,7 +3963,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cameroon)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3879,13 +3975,14 @@
       "id": "number_of_years_brought_forward_cameroon",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cameroon",
@@ -3918,7 +4015,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Cameroon)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3977,7 +4074,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_57 * number_of_years_brought_forward_cameroon * reduction_in_annual_alcohol_deaths_cameroon * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_57 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon) * reduction_in_annual_alcohol_deaths_cameroon * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 542.500723
     },
     {
@@ -3985,7 +4082,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cameroon)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -3997,13 +4094,14 @@
       "id": "number_of_years_brought_forward_cameroon_2",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_cameroon_2",
@@ -4022,7 +4120,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_2",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_58 * number_of_years_brought_forward_cameroon_2 * reduction_in_annual_alcohol_deaths_cameroon_2 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_58 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_2) * reduction_in_annual_alcohol_deaths_cameroon_2 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 80.03481255
     },
     {
@@ -4030,7 +4128,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cameroon)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4042,13 +4140,14 @@
       "id": "number_of_years_brought_forward_cameroon_3",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15",
@@ -4067,7 +4166,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_3",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_59 * number_of_years_brought_forward_cameroon_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_59 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 30.63533495
     },
     {
@@ -4075,7 +4174,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Cameroon)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4087,13 +4186,14 @@
       "id": "number_of_years_brought_forward_cameroon_4",
       "label": "Number of years brought forward (Cameroon)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!T33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15",
@@ -4112,7 +4212,7 @@
       "id": "expected_lives_saved_from_this_intervention_cameroon_4",
       "label": "Expected lives saved from this intervention (Cameroon)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_60 * number_of_years_brought_forward_cameroon_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_60 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_cameroon_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_15 * annual_deaths_from_alcohol_affected_by_policy_cameroon * policy_wait_discount",
       "expected": 155.6384427
     },
     {
@@ -4127,7 +4227,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Cameroon)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4140,7 +4240,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Colombia)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4152,13 +4252,14 @@
       "id": "number_of_years_brought_forward_colombia",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_colombia",
@@ -4191,7 +4292,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Colombia)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4250,7 +4351,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_61 * number_of_years_brought_forward_colombia * reduction_in_annual_alcohol_deaths_colombia * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_61 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia) * reduction_in_annual_alcohol_deaths_colombia * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 522.8783058
     },
     {
@@ -4258,7 +4359,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Colombia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4270,13 +4371,14 @@
       "id": "number_of_years_brought_forward_colombia_2",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_colombia_2",
@@ -4295,7 +4397,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_2",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_62 * number_of_years_brought_forward_colombia_2 * reduction_in_annual_alcohol_deaths_colombia_2 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_62 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_2) * reduction_in_annual_alcohol_deaths_colombia_2 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 77.13992888
     },
     {
@@ -4303,7 +4405,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Colombia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4315,13 +4417,14 @@
       "id": "number_of_years_brought_forward_colombia_3",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16",
@@ -4340,7 +4443,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_3",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_63 * number_of_years_brought_forward_colombia_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_63 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_16 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 29.5272455
     },
     {
@@ -4348,7 +4451,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Colombia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4360,13 +4463,14 @@
       "id": "number_of_years_brought_forward_colombia_4",
       "label": "Number of years brought forward (Colombia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!U33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16",
@@ -4385,7 +4489,7 @@
       "id": "expected_lives_saved_from_this_intervention_colombia_4",
       "label": "Expected lives saved from this intervention (Colombia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_64 * number_of_years_brought_forward_colombia_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16 * annual_deaths_from_alcohol_affected_by_policy_colombia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_64 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_colombia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_16 * annual_deaths_from_alcohol_affected_by_policy_colombia * policy_wait_discount",
       "expected": 150.0089526
     },
     {
@@ -4400,7 +4504,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Colombia)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4413,7 +4517,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ghana)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4425,13 +4529,14 @@
       "id": "number_of_years_brought_forward_ghana",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ghana",
@@ -4464,7 +4569,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Ghana)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4523,7 +4628,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_65 * number_of_years_brought_forward_ghana * reduction_in_annual_alcohol_deaths_ghana * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_65 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana) * reduction_in_annual_alcohol_deaths_ghana * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 485.1608205
     },
     {
@@ -4531,7 +4636,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ghana)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4543,13 +4648,14 @@
       "id": "number_of_years_brought_forward_ghana_2",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_ghana_2",
@@ -4568,7 +4674,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_2",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_66 * number_of_years_brought_forward_ghana_2 * reduction_in_annual_alcohol_deaths_ghana_2 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_66 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_2) * reduction_in_annual_alcohol_deaths_ghana_2 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 71.57549047
     },
     {
@@ -4576,7 +4682,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ghana)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4588,13 +4694,14 @@
       "id": "number_of_years_brought_forward_ghana_3",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17",
@@ -4613,7 +4720,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_3",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_67 * number_of_years_brought_forward_ghana_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_67 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_17 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 27.39731692
     },
     {
@@ -4621,7 +4728,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Ghana)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4633,13 +4740,14 @@
       "id": "number_of_years_brought_forward_ghana_4",
       "label": "Number of years brought forward (Ghana)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!V33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17",
@@ -4658,7 +4766,7 @@
       "id": "expected_lives_saved_from_this_intervention_ghana_4",
       "label": "Expected lives saved from this intervention (Ghana)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_68 * number_of_years_brought_forward_ghana_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17 * annual_deaths_from_alcohol_affected_by_policy_ghana",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_68 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_ghana_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_17 * annual_deaths_from_alcohol_affected_by_policy_ghana * policy_wait_discount",
       "expected": 139.1881547
     },
     {
@@ -4673,7 +4781,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Ghana)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4686,7 +4794,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Burundi)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4698,13 +4806,14 @@
       "id": "number_of_years_brought_forward_burundi",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_burundi",
@@ -4737,7 +4846,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Burundi)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4796,7 +4905,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_69 * number_of_years_brought_forward_burundi * reduction_in_annual_alcohol_deaths_burundi * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_69 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi) * reduction_in_annual_alcohol_deaths_burundi * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 356.0329203
     },
     {
@@ -4804,7 +4913,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Burundi)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4816,13 +4925,14 @@
       "id": "number_of_years_brought_forward_burundi_2",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_burundi_2",
@@ -4841,7 +4951,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_2",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_70 * number_of_years_brought_forward_burundi_2 * reduction_in_annual_alcohol_deaths_burundi_2 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_70 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_2) * reduction_in_annual_alcohol_deaths_burundi_2 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 52.5253273
     },
     {
@@ -4849,7 +4959,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Burundi)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4861,13 +4971,14 @@
       "id": "number_of_years_brought_forward_burundi_3",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18",
@@ -4886,7 +4997,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_3",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_71 * number_of_years_brought_forward_burundi_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_71 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_18 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 20.10538844
     },
     {
@@ -4894,7 +5005,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Burundi)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4906,13 +5017,14 @@
       "id": "number_of_years_brought_forward_burundi_4",
       "label": "Number of years brought forward (Burundi)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!W33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18",
@@ -4931,7 +5043,7 @@
       "id": "expected_lives_saved_from_this_intervention_burundi_4",
       "label": "Expected lives saved from this intervention (Burundi)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_72 * number_of_years_brought_forward_burundi_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18 * annual_deaths_from_alcohol_affected_by_policy_burundi",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_72 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_burundi_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_18 * annual_deaths_from_alcohol_affected_by_policy_burundi * policy_wait_discount",
       "expected": 102.1425538
     },
     {
@@ -4946,7 +5058,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Burundi)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4959,7 +5071,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Serbia)",
       "section": "calculations",
       "value": 0.35,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -4971,13 +5083,14 @@
       "id": "number_of_years_brought_forward_serbia",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X24"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_serbia",
@@ -5010,7 +5123,7 @@
       "label": "Subjective adjustment to IHME alcohol death estimates (Serbia)",
       "section": "calculations",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -5069,7 +5182,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_73 * number_of_years_brought_forward_serbia * reduction_in_annual_alcohol_deaths_serbia * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_73 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia) * reduction_in_annual_alcohol_deaths_serbia * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 326.636456
     },
     {
@@ -5077,7 +5190,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Serbia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -5089,13 +5202,14 @@
       "id": "number_of_years_brought_forward_serbia_2",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X51"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_serbia_2",
@@ -5114,7 +5228,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_2",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_74 * number_of_years_brought_forward_serbia_2 * reduction_in_annual_alcohol_deaths_serbia_2 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_74 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_2) * reduction_in_annual_alcohol_deaths_serbia_2 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 48.18848422
     },
     {
@@ -5122,7 +5236,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Serbia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -5134,13 +5248,14 @@
       "id": "number_of_years_brought_forward_serbia_3",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X42"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19",
@@ -5159,7 +5274,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_3",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_75 * number_of_years_brought_forward_serbia_3 * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_75 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_3) * reduction_in_annual_alcohol_deaths_from_drunk_driving_counte_19 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 18.44535281
     },
     {
@@ -5167,7 +5282,7 @@
       "label": "Increase in probability (in percentage points) of intervention being implemented in 5 years given AHPDI involvement (Serbia)",
       "section": "calculations",
       "value": 0.45,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -5179,13 +5294,14 @@
       "id": "number_of_years_brought_forward_serbia_4",
       "label": "Number of years brought forward (Serbia)",
       "section": "calculations",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!X33"
-      }
+      },
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value.",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19",
@@ -5204,7 +5320,7 @@
       "id": "expected_lives_saved_from_this_intervention_serbia_4",
       "label": "Expected lives saved from this intervention (Serbia)",
       "section": "calculations",
-      "formula": "increase_in_probability_in_percentage_points_of_intervention_76 * number_of_years_brought_forward_serbia_4 * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19 * annual_deaths_from_alcohol_affected_by_policy_serbia",
+      "formula": "increase_in_probability_in_percentage_points_of_intervention_76 * pv_annuity_due(1, years_discount_rate, number_of_years_brought_forward_serbia_4) * reduction_in_annual_alcohol_deaths_from_reducing_days_or_hou_19 * annual_deaths_from_alcohol_affected_by_policy_serbia * policy_wait_discount",
       "expected": 93.7089799
     },
     {
@@ -5219,7 +5335,7 @@
       "label": "Probability of working in country (best guess based on conversations with Vital Strategies) (Serbia)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
@@ -5506,13 +5622,14 @@
       "id": "givedirectly_units_of_value_generated_per_dollar_spent",
       "label": "GiveDirectly (Units of value generated per dollar spent)",
       "section": "calculations",
-      "value": 0.0034,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.0034,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1TFotEyDjTB3_9Y5cem660_HCb2mzPQsXLeoITnQcbt0/edit",
         "cell": "Calculations!E72"
-      }
+      },
+      "explainer": "Changed for consistency: GiveWell's sheet used 0.0034 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.0034."
     },
     {
       "id": "multiples_of_cash",
@@ -5545,39 +5662,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

@@ -3,7 +3,7 @@ Runs evaluations for governments and NGOs, including GiveWell-funded randomised 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Value of the grant model for New Incentives Endline RCT](/idinsight/idinsight-value-model-new-incentives-endline-rct) | GW | August 2019 | <span data-figure="headline" data-model="idinsight-value-model-new-incentives-endline-rct">19</span> | 67, 4 kept fixed |
+| [Value of the grant model for New Incentives Endline RCT](/idinsight/idinsight-value-model-new-incentives-endline-rct) | GW | August 2019 | <span data-figure="headline" data-model="idinsight-value-model-new-incentives-endline-rct">19</span> | 73 |
 | [IDinsight rough estimate](/idinsight) | GW | April 2018 | <span data-figure="headline" data-model="idinsight-model">16</span> | 226 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

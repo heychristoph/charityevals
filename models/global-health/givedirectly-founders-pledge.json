@@ -1,0 +1,149 @@
+{
+  "id": "givedirectly-founders-pledge",
+  "name": "GiveDirectly (Founders Pledge benchmark)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "givedirectly",
+  "owner": "founders-pledge",
+  "summary": "Unconditional cash transfers to very poor households. Founders Pledge uses GiveDirectly as its yardstick and values it, in its 2022 sheets, at $164 per WELLBY-equivalent of its own value units; this model turns that benchmark into the income gain it stands for. It predates GiveWell's 2024 update and is about 2.7 times below GiveWell's current GiveDirectly model.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "GiveDirectly (charity recommendation) and Founders Pledge's GiveDirectly benchmark in its 2022 mass media BOTECs",
+    "url": "https://www.founderspledge.com/research/givedirectly",
+    "sheet": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+    "published": "2022-11-22",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, GiveDirectly",
+      "url": "https://www.founderspledge.com/research/givedirectly",
+      "type": "evaluation"
+    },
+    {
+      "title": "Founders Pledge, Mass media BOTECs (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1fNW_Vptr0xLh88p4AxADyd1k5iglqdy8GZxBamlLNEs/edit#gid=748560449",
+      "type": "model"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "benchmark",
+      "title": "Founders Pledge's benchmark",
+      "explainer": "Founders Pledge publishes no model of GiveDirectly; its recommendation rests on GiveWell's analysis, and its sheets use a fixed GiveDirectly benchmark derived from GiveWell's cash figure, the yardstick for its multiples of cash."
+    },
+    {
+      "id": "to_uov",
+      "title": "From the benchmark to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step: Founders Pledge's value units per dollar, turned back into the income gain they stand for with Founders Pledge's own weight on a doubled income, then valued like every income gain on the site."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "cost_per_wellby",
+      "section": "benchmark",
+      "label": "GiveDirectly's cost per WELLBY-equivalent (Founders Pledge, 2022)",
+      "format": "usd",
+      "formula": "@founders_pledge.gd_cost_per_wellby",
+      "expected": 164,
+      "explainer": "Founders Pledge's figure in its 2022 mass media sheets (\"164/$ WELLBY for GD\", FEM tab B32), the shared Founders Pledge fact. Its 2023 Imagine Worldwide sheet uses about $171 from its internal GiveDirectly analysis. These 'WELLBYs' are Founders Pledge's value units (3.7 per healthy year, 1.9 per doubled income-year), not survey life-satisfaction points. Founders Pledge's sheets use $157 to $171 for the same benchmark (±4%)."
+    },
+    {
+      "id": "wellbys_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Founders Pledge's value units per dollar",
+      "format": "small",
+      "formula": "1 / cost_per_wellby"
+    },
+    {
+      "id": "wellbys_per_ln_income",
+      "section": "to_uov",
+      "label": "Founders Pledge's value units per unit of ln(income)",
+      "format": "number",
+      "formula": "@founders_pledge.wellbys_per_doubling / ln(2)",
+      "explainer": "Founders Pledge's 2022 weight for doubling one person's income for a year (1.898) per unit of ln(income)."
+    },
+    {
+      "id": "ln_income_per_dollar",
+      "section": "to_uov",
+      "label": "Increase in ln(income) per dollar",
+      "format": "small",
+      "formula": "wellbys_per_dollar_fp / wellbys_per_ln_income",
+      "explainer": "Cash transfers' benefit is income, so Founders Pledge's value units are turned back into the income gain they stand for."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "ln_income_per_dollar * $uov_per_ln_consumption",
+      "explainer": "Valued with the site's weight on income: about 0.0032 units of value per dollar. Founders Pledge's figure is GiveWell's pre-2024 cash benchmark (0.00335) restated in Founders Pledge's units, so it isn't independent of GiveWell. GiveWell's November 2024 GiveDirectly model, which adds spillovers, mortality and later-year gains, gives about 2.7 times this."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.17
+      },
+      "kind": "judgment",
+      "explainer": "About 83% of GiveDirectly's spending reaches recipients (Founders Pledge's page), so staff are at most the rest. Our judgment."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Field staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "cost_per_wellby",
+      "unit": "$ per WELLBY-equivalent (Founders Pledge value units)"
+    }
+  }
+}

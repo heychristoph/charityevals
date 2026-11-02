@@ -1,0 +1,124 @@
+{
+  "id": "pure-earth-founders-pledge",
+  "name": "Pure Earth (Founders Pledge)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "pure-earth",
+  "owner": "founders-pledge",
+  "summary": "Research, advocacy and cleanup to cut lead poisoning in low- and middle-income countries. Founders Pledge's page states only a multiple of cash transfers, more than 10. The model takes 10, so its result is a floor: at least this many healthy years per $1,000. It turns that multiple into income gains through the site's shared value of a dollar given as cash.",
+  "source": {
+    "publisher": "Founders Pledge",
+    "title": "Pure Earth (charity recommendation)",
+    "url": "https://www.founderspledge.com/research/pure-earth",
+    "published": "2025-03-12",
+    "retrieved": "2026-10-30",
+    "license": "© Founders Pledge; no licence published (site footer: © 2026 Founders Pledge)"
+  },
+  "resources": [
+    {
+      "title": "Founders Pledge, Pure Earth",
+      "url": "https://www.founderspledge.com/research/pure-earth",
+      "type": "evaluation"
+    }
+  ],
+  "evaluator": {
+    "name": "Founders Pledge",
+    "assumptions": {
+      "resource_shares": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "page",
+      "title": "Founders Pledge's figure",
+      "explainer": "Founders Pledge's own figures, as its recommendation page states them. It publishes no spreadsheet for this recommendation, so these are the model's only evaluator rows."
+    },
+    {
+      "id": "to_uov",
+      "title": "From a multiple of cash to units of value",
+      "kind": "ours",
+      "explainer": "charityevals' step: Founders Pledge states its result as a multiple of cash transfers. The site values cash at one shared benchmark (GiveWell's 0.00335 units of value per dollar, the income gain of a dollar given as cash), so the multiple times that benchmark is units of value (doubled income-years) per dollar. charityevals' choice: the page gives no outcome measure, and lead's main measured harm is lost IQ and so lost earnings, so the income route fits best (the health route gives about the same at the defaults)."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not Founders Pledge's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "gd_multiple",
+      "section": "page",
+      "label": "Cost-effectiveness, multiple of direct cash transfers (at least)",
+      "format": "multiple",
+      "value": 10,
+      "kind": "estimate",
+      "expected": 10,
+      "source": {
+        "title": "Founders Pledge, Pure Earth (recommendation page)",
+        "url": "https://www.founderspledge.com/research/pure-earth",
+        "quote": "we estimate that their work is more than 10 times as cost-effective as direct cash transfers",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "Founders Pledge's figure, quoted on its page: \"more than 10 times as cost-effective as direct cash transfers\". No sheet or method is published. We take 10, the floor the page states. The page is from 2025; the benchmark used to read it is from Founders Pledge's 2022 sheets, the latest it has published."
+    },
+    {
+      "id": "uov_per_dollar_fp",
+      "section": "to_uov",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "gd_multiple * @cash.uov_per_dollar",
+      "explainer": "Changed for consistency. Founders Pledge states the result as a multiple of cash transfers; read against its own GiveDirectly benchmark of 2022 ($164 per WELLBY-equivalent, and 1.898 WELLBY-equivalents per doubled income-year), 10 times cash is 0.0321 units of value (doubled income-years) per dollar. The site turns every multiple of cash into units of value with one shared benchmark, GiveWell's 0.00335 units of value per dollar given as cash, so that \"10 times cash\" means the same in every model; Founders Pledge's own benchmark comes to almost the same (0.0032). GiveWell's November 2024 estimate for GiveDirectly in Kenya is 2.6 times higher; it sets the top of the benchmark's range. The page says \"direct cash transfers\" and is from 2025; Founders Pledge's 2022 benchmark is the latest it has published. Because 10 is a floor, the result is a lower bound. The evaluator view uses Founders Pledge's 0.0321.",
+      "published": 0.0321321657
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Research and policy work, plus cleanups and training potters, which have more non-staff costs. Our judgment; we haven't seen Pure Earth's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "Researchers, advisers and advocates could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "staff_pay",
+      "label": "Units of value per donor dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_fp * donor_cost_share",
+      "explainer": "Units of value per dollar, in GiveWell's units (one unit = a year of doubled income for one person). With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "gd_multiple",
+      "unit": "multiples of GiveDirectly (Founders Pledge)"
+    }
+  }
+}

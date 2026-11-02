@@ -22,8 +22,39 @@ import Prose from "../layouts/Prose.astro";
   <p>
     Where ACE's models use different numbers for the same change, such as a hen moved out of a cage or a meal replaced, ours use one shared figure, and the row says so: "changed for consistency", with ACE's own number beside it.
   </p>
+  <h3 id="climate">Climate</h3>
   <p>
-    Rates that rest on evidence, such as how life satisfaction compares with income, are fixed; they and the data several models share are listed, with sources, under <a href="/data">shared data</a>. Only value judgments are left for you to set.
+    Climate charities count the tonnes of CO₂ they keep out of the air. We value a tonne by the deaths it would cause: Rethink Priorities estimates about 1.9 deaths per 10,000 tonnes, from extra heat and from the air pollution that comes with burning coal, oil and gas. Each death is valued by the age it comes at, like every death on the site (most heat and air-pollution deaths are of older people), so the "child's life" value under Your values moves climate too. Air-pollution deaths are saved the year the fuel isn't burned; heat deaths come late in the century, so like any future good they are discounted (by default as if 60 years away), and so is the wait until a charity's tonnes are actually avoided. At the defaults a tonne from burning less fossil fuel is worth about a day and a quarter of healthy life, and a charity that cuts one for $1 does about 3.6 years of healthy life per $1,000. Tonnes that come without fuel smoke, such as forests kept standing, count only for their discounted heat deaths, about an hour of healthy life each. The deaths per tonne is one of your values; damage that isn't death, such as lost harvests, is counted as zero, a judgment that makes the default probably low.
+  </p>
+  <h3 id="wellbeing">Life satisfaction and depression</h3>
+  <p>
+    The Happier Lives Institute counts good in points of life satisfaction for a year (WELLBYs). Most of those are psychotherapy results, and the same therapy is modelled elsewhere in healthy years through the disability weights of the Global Burden of Disease. We anchor on the disability weights: by default a WELLBY is worth 0.065 healthy years, the rate at which a year of depression one standard deviation lighter counts the same through either route (0.13 healthy years). That rate is one of your values, stated in healthy years, so the two routes agree whatever a healthy year is worth to you. In the Happier Lives Institute's own view we keep its comparison with cash transfers in Kenya (0.575 healthy years a WELLBY), so its numbers still reproduce. Deaths in these models are valued the site's way, by age, not through life satisfaction, and don't move with the WELLBY rate.
+  </p>
+
+  <h2 id="one-way">One way to count the same thing</h2>
+  <p>
+    Evaluators each convert between outcomes their own way: what a death is worth, how depression becomes lost health, what a dollar of cash does, exchange rates between currencies, how much the future counts. In our view every model uses the site's one version, a shared figure or one of your values, and the row is tagged "changed for consistency" with the evaluator's own number beside it; the evaluator's view keeps their number, so their spreadsheet still reproduces. In particular:
+  </p>
+  <ul>
+    <li><strong>Deaths</strong> are valued by age band (under five, 5–14, 15–49, 50 and over), from GiveWell's moral weights, times your "child's life" value.</li>
+    <li><strong>Every future benefit</strong> is discounted at your discount rate, including a wait before it starts.</li>
+    <li><strong>A won reform</strong> (a corporate pledge, a law, a regulation) counts for the years under Your values before it would have come anyway (5 by default), with the wait until it takes effect discounted and one shared rate of pledges kept.</li>
+    <li><strong>Charities that move money</strong> (fundraisers, evaluators, effective-giving organisations) are worth what their money does where it goes: those destinations' own results, read live, so every slider moves them too, with one shared share of new money and one chance of success for an organisation not yet proven.</li>
+    <li><strong>A past average isn't the next dollar.</strong> Where a model's cost-effectiveness is an organisation's past spending over its past wins, it is multiplied by one shared judgment of how much the next dollar does relative to that average (50%, from 18% to 100%).</li>
+    <li><strong>Best guesses, not conservative cases.</strong> Where an evaluator gives a conservative figure and a best guess, we use the best guess; a model more than ten times its peers says why on its page.</li>
+  </ul>
+
+  <h2 id="judgments">Judgments: yours and fixed ones</h2>
+  <p>
+    The judgments that move many models are yours to set under Your values: how a healthy year compares with income, a child's life, a WELLBY and a chicken's suffering, the discount rate, the years a won reform counts, the deaths per tonne of CO₂ and when they come. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
+  </p>
+  <p>
+    Some fixed figures are judgments too, not measurements: species Rethink Priorities doesn't cover (fish, cattle, insects) counted as stand-ins, how Ambitious Impact's welfare points become days of pain, longtermist causes valued at zero in money-moved models, where shifted money would have gone, the marginal value of a past average, the share of broiler pledges kept, damage from CO₂ other than deaths at zero, Founders Pledge's education constants and the default share of staff pay below market. They are fixed rather than sliders because each concerns only a few models or sits inside a range set by evidence, and the site keeps one slider per concept. Each is marked "judgment" wherever a model reads it, with its range, which the uncertainty bars use.
+  </p>
+
+  <h2 id="theoretical">Purely theoretical models</h2>
+  <p>
+    Some Ambitious Impact models estimate an idea before the charity existed. We show one only if the charity runs the modelled programme today and no model of its actual work exists; it is flagged "purely theoretical" on its pages and on the rankings. A charity that runs several programmes is weighted by funding.
   </p>
 
   <h2>Credit for shared outcomes</h2>
@@ -46,7 +77,7 @@ import Prose from "../layouts/Prose.astro";
 
   <h2 id="imported-models">Imported models</h2>
   <p>
-    Most models are evaluators' spreadsheets imported whole: every public model GiveWell links from its grant pages, plus HLI's and ACE's (the <a href="https://github.com/heychristoph/charityevals/tree/main/inventory">inventory</a> lists what we found and why anything was left out). Each sheet is traced from its bottom line, every cell it depends on becomes a row, and each calculated row must reproduce the sheet's value. Shared values such as the value of a life and the discount rate are then tied to your values, and statistics several sheets share live once as shared data.
+    Most models are evaluators' spreadsheets imported whole: every public model GiveWell links from its grant pages, plus HLI's, ACE's and Founders Pledge's (the <a href="https://github.com/heychristoph/charityevals/tree/main/inventory">inventory</a> lists what we found and why anything was left out). Each sheet is traced from its bottom line, every cell it depends on becomes a row, and each calculated row must reproduce the sheet's value. Shared values such as the value of a life and the discount rate are then tied to your values, and statistics several sheets share live once as shared data.
   </p>
 
   <h2>What this is not</h2>

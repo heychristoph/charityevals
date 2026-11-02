@@ -3,6 +3,6 @@ The UN's food agency; GiveWell funded its technical assistance for iron fortific
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [World Food Programme (TA) Iron cost-effectiveness analysis 2.0, 2025](/world-food-programme) | GW | March 2025 | <span data-figure="headline" data-model="world-food-programme-ta-iron-2-0-2025">19</span> | 180, 15 kept fixed |
+| [World Food Programme (TA) Iron cost-effectiveness analysis 2.0, 2025](/world-food-programme) | GW | March 2025 | <span data-figure="headline" data-model="world-food-programme-ta-iron-2-0-2025">19</span> | 185, 15 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

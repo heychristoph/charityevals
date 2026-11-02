@@ -2,7 +2,7 @@
 // the page's URL only (n.<id>=value), so a link carries them and they never leak into another model or
 // the rankings. Assumption overrides (a.<id>) sit beside them in the same URL.
 import { useSyncExternalStore } from "react";
-import { usedFacts, type ResolvedModel } from "../engine/model";
+import { usedFacts, type Library, type ResolvedModel } from "../engine/model";
 
 type Edits = Record<string, number>;
 const PREFIX = "n.";
@@ -70,7 +70,7 @@ function target(m: ResolvedModel, facts: Set<string>, key: string): string | und
     const r = m.byId.get(id);
     if (!r) return undefined;
     if (!r.node) return id;
-    if (r.node.type !== "ref" || r.node.scope === "assumption") return undefined;
+    if (r.node.type !== "ref" || r.node.scope === "assumption" || r.node.scope === "model") return undefined;
     if (r.node.scope === "fact") return facts.has(r.node.name) ? `@${r.node.name}` : undefined;
     id = r.node.name;
   }
@@ -83,9 +83,10 @@ const isSummary = (m: ResolvedModel) => !!m.bulk && m.rows.every((r) => r.id ===
 /** The edits that apply to a model: its inputs by row id and the shared facts it reads by "@key", with
  * edits to pass-through rows moved to the input they copy. A key that applies nowhere is never applied
  * unmarked; it is dropped from the URL too, so a copied link doesn't carry it. An edit made directly to
- * an input wins over one reaching it through a pass-through row. */
-export function editsFor(m: ResolvedModel, edits: Edits): Edits {
-  const facts = new Set(usedFacts(m));
+ * an input wins over one reaching it through a pass-through row. Given the library, the facts the
+ * model's unit conversion reads (climate's) are editable too. */
+export function editsFor(m: ResolvedModel, edits: Edits, lib?: Library): Edits {
+  const facts = new Set(usedFacts(m, lib));
   const keys = Object.keys(edits);
   const where = keys.map((k) => target(m, facts, k));
   if (keys.every((k, i) => where[i] === k)) return edits;
