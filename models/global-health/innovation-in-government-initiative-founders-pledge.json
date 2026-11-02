@@ -3,6 +3,7 @@
   "name": "Innovation in Government Initiative (J-PAL): policy partnerships (Founders Pledge)",
   "kind": "charity",
   "cause": "global-health",
+  "estimate_basis": "past_average",
   "charity": "innovation-in-government-initiative",
   "owner": "founders-pledge",
   "summary": "J-PAL's Innovation in Government Initiative (formerly the Government Partnership Initiative) funds partnerships that help governments adopt evidence-backed policies. Founders Pledge's 2019 estimate values two reforms it helped bring forward: India's fund-flow reform of its rural employment scheme, and Zambia's scale-up of Teaching at the Right Level.",
@@ -91,18 +92,27 @@
       "explainer": "India's Ministry of Rural Development's estimate (Note to Cabinet) of what the fund-flow reform of the rural employment guarantee scheme (MGNREGS) saves each year, by cutting the money left idle in accounts between transfers."
     },
     {
+      "id": "rupees_per_crore",
+      "section": "india",
+      "label": "Rupees in a crore",
+      "format": "integer",
+      "value": 10000000,
+      "kind": "observed",
+      "explainer": "A crore is ten million rupees in Indian numbering; the sheet's =7.8207*10000000 for Rs 500 crore carries it."
+    },
+    {
       "id": "usd_per_rs_crore",
       "section": "india",
       "label": "US dollars per crore rupees (June 2015)",
       "format": "usd",
-      "value": 156414,
-      "kind": "observed",
       "source": {
         "title": "Founders Pledge, Government Partnership Initiative CEA (evidence-based policy report, 2019)",
         "url": "https://docs.google.com/spreadsheets/d/1F4aRiaczIMv5yTp-k_AjrHWjgP_DTUFz6oXXZTK5ggs/edit",
         "cell": "'India_funds flow'!C3 (=7.8207*10000000 for Rs 500 crore)"
       },
-      "explainer": "FP converts Rs 500 crore to $78,207,000 at June 2015 rates (OANDA): $156,414 per crore (ten million rupees)."
+      "explainer": "Changed for consistency. Founders Pledge converts at the June 2015 rate (OANDA), $156,414 per crore; our view uses the IRS's 2015 average. The site converts every currency at one yearly average (`@fx.usd_per_inr_2015`): 149772 here against the sheet's 156414; the evaluator view keeps the sheet's.\n\nFP converts Rs 500 crore to $78,207,000 at June 2015 rates (OANDA): $156,414 per crore (ten million rupees).",
+      "formula": "@fx.usd_per_inr_2015 * rupees_per_crore",
+      "published": 156414
     },
     {
       "id": "india_savings_usd_all",
@@ -713,11 +723,11 @@
     {
       "id": "marginal_vs_past_average",
       "section": "staff_pay",
-      "label": "A marginal dollar's result as a share of the past average (our judgment)",
+      "label": "How much the next dollar does compared with the average dollar so far",
       "format": "percent",
-      "formula": "@meta.marginal_vs_past_average",
+      "formula": "$marginal_vs_past_average",
       "published": 1,
-      "explainer": "Our judgment, shared with every model built on an organisation's past average (facts: meta.marginal_vs_past_average): Founders Pledge divides the Initiative's budget to date by the two reforms it helped bring forward, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50%, from 18% to 100% (average = marginal). The evaluator view keeps 100%."
+      "explainer": "Your value, shared with every model built on an organisation's past average (Your values: \"How much the next dollar does compared with the average dollar so far\"): Founders Pledge divides the Initiative's budget to date by the two reforms it helped bring forward, an average; the next dollar does less than the average dollar did, since an organisation pursues its best opportunities first. 50% by default (our judgment), from 18% to 100% (average = marginal). The evaluator view keeps 100%."
     },
     {
       "id": "uov_per_dollar",
@@ -725,7 +735,7 @@
       "label": "Units of value per donor dollar",
       "format": "small",
       "formula": "uov_per_dollar_fp * donor_cost_share * marginal_vs_past_average",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). A marginal dollar is counted at the shared share of the past average (row above)."
+      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). A marginal dollar is counted at the share of the past average you set (row above)."
     }
   ],
   "output": {

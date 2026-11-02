@@ -205,6 +205,7 @@ export function buildLibrary(
       summary: file.summary ?? parent?.summary,
       resources: [...(parent?.resources ?? []), ...file.resources].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i),
       source: file.source ?? parent?.source,
+      estimate_basis: file.estimate_basis ?? parent?.estimate_basis,
       charity: file.charity ?? parent?.charity ?? "",
       owner: file.owner ?? parent?.owner ?? "",
       sections,

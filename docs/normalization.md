@@ -279,7 +279,7 @@ range to the social cost of carbon's 1.06), a visible factor on the heat part. A
 organisation's past budget over its past wins is an average; the models built that way (Clean Air Task Force,
 Coalition for Rainforest Nations, Carbon180, Evergreen 2021, Future Cleantech Architects, Good Food Institute,
 Industrious Labs, Opportunity Green, Terrapraxis) multiply tonnes per dollar by the one shared
-`@meta.marginal_vs_past_average` (judgment, 50%, 18–100%), the same figure as The Life You Can Save's leverage
+`$marginal_vs_past_average` (a slider since November 2026, 2.10; judgment, 50%, 18–100%), the same figure as The Life You Can Save's leverage
 (`published` 1). Evergreen 2023 (a projected budget) and Woodland Trust (cost per tree delivered) don't take it.
 Since late October 2026 the same factor applies in every cause (2.9, "Past average, every cause").
 Evaluators' subjective best guesses (Terrapraxis's and Industrious Labs' cost per tonne, Evergreen's budget share
@@ -404,16 +404,16 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Disability weights | `@gbd_disability_weights.*` (tuberculosis, HIV on and off treatment, near vision loss) and `@depression.dw_*` | GBD 2019 | facts/gbd_disability_weights.json; every sheet that types a GBD weight reads it (Novah's depression and HIV weights since late October 2026) |
 | Figures GiveWell's sheets share | `@givewell_common.*`: 298 figures typed under the same label into five or more of GiveWell's sheets (and SoGive's copies): supplemental adjustments, the GiveDirectly investment block, vaccine and net parameters, GBD death rates by age and cause, trial data | as typed | facts/givewell_common.json, generated from the sheets (INV-14); no value changed |
 | Staff pay below market | `@staff_pay.*`: share of cost and pay gap by kind of work (goods, staff-delivered help, research and policy, advocacy, media; GiveDirectly's and New Incentives' own) | as listed | facts/staff_pay.json, our judgment, read by 487 staff-pay rows; only matters with "Credit by share of resources" on |
-| Past average vs the next dollar | `@meta.marginal_vs_past_average` | 50% (18–100%) | judgment; every model built on an organisation's past spending over its past wins (2.9) |
+| Past average vs the next dollar | `$marginal_vs_past_average` (slider, "How much the next dollar does compared with the average dollar so far") | 50% (18–100%) | judgment; every model whose `estimate_basis` is `past_average` (2.10) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low FP's 2022 GiveDirectly, high GiveWell's 2024 GiveDirectly |
 | A dollar to GiveDirectly (where money goes or would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's GiveDirectly model on the site; every meta model reads it, never `@cash` |
-| Pounds, euros, kroner | `@fx.usd_per_<cur>_<year>` | IRS yearly averages | IRS (2021–25 live table, 2015–20 archived) |
+| Currencies (pounds, euros, kroner, rupees; naira, Kenyan and Ugandan shillings, Rwandan francs, kwacha, meticais, leones) | `@fx.usd_per_<cur>_<year>` (its reciprocal where a sheet states local currency per dollar) | yearly averages | IRS where it lists the currency (2021–25 live table, 2015–20 archived), else World Bank WDI, official exchange rate (LCU per US$, period average, PA.NUS.FCRF); the year the evaluator's rate is for. A rate for a particular day (a grant date, "Google, 12 July 2024") stays the evaluator's in `published`; our view uses that year's average. `scripts/link-fx.py` |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
 | Household spillover of psychotherapy | `@wellby_factors.household_size_psychotherapy`, `household_spillover_ratio_psychotherapy` | 4.73 people, 16.24% each | HLI (StrongMinds, Friendship Bench); read by HLI's, SoGive's and Founders Pledge's StrongMinds |
 | Earnings from learning | `@founders_pledge_2023.*` (salary +19.1% per SD × 17.5% replicability, 8 years' wait, 40 years, household ×2); prior weight `@founders_pledge_2023.prior_weight` (ours) | 50% (25–75%) | Founders Pledge's 2023 education method, its latest; every FP education model |
 | Years a won reform counts | `$win_years_counted` (2.9) | 5 (1–20) | judgment, the middle of the evaluators' figures |
-| Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.92 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025); judgment from CIWF ChickenTrack |
+| Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.77 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025), North America's rate as a judgment for pledges weighted by hens (decided 2026-11-02); judgment from CIWF ChickenTrack |
 | Production per meal not eaten | `@sad_factors.production_response` | 0.76 (0.56–0.91) | Norwood and Lusk 2011 |
 | Species | `@welfare_ranges.*` (2.4) | | Rethink Priorities |
 | A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0539 across causes, 0.0413 global health (units of value per $) | GiveWell 2024 funding, ACE's Recommended Charities, Giving What We Can 2020–22 |
@@ -493,6 +493,14 @@ view is unchanged unless stated.
 | GiveWell age-specific moral weights (100.7, 127.3, 116…) | value of a death | | they are the shared curve (× `$life_value_multiplier`) | none |
 | ACE The Humane League, Shrimp Welfare Project | £→$ | 1.2781 | `@fx.usd_per_gbp_2024` 1.277 | <0.1% |
 | ACE Animal Welfare Observatory; Dansk Vegetarisk Forening | €→$; DKK→$ | 1.0822; 0.1452 | `@fx.usd_per_eur_2024` 1.0823; `@fx.usd_per_dkk_2023` 0.14514 | <0.1% |
+| GiveWell New Incentives 2023-11, 2024-10, March 2025, Niger/Yobe; IRC (New Incentives template) | ₦ per $ (Central Bank of Nigeria, 25 April 2024) | 1,165 | `1 / @fx.usd_per_ngn_2024` 1,478.97 (WDI) | 35.5 → 35.2, 31.0 → 30.7, 40.7 → 40.5, 14.2 → 13.9, 45.6 → 45.3 |
+| GiveWell New Incentives June 2023, 2024-04 sheet | ₦ per $ (Google, June 2019) | 362.3 | `@fx.usd_per_ngn_2019` 306.92 | 32.1 → 32.3, 35.1 → 35.3 |
+| GiveWell New Incentives 2018 and 2019 sheets | ₦ per $ | 300 | `@fx.usd_per_ngn_2018` 306.08, `_2019` 306.92 | 17.1 → 17.2, 5.94 → 5.98, 14.1 → 14.1 |
+| GiveWell One Acre Fund seedlings (2022, Rwanda VoI) | KES per $ (undated; the sheet's other rates are 2020 levels) | 108 | `@fx.usd_per_kes_2020` 106.45 | 16.6 → 16.9, 16.9 → 17.2 |
+| GiveWell Malengo | UGX per $ 2021 (exchangerates.org.uk) | 3,586 | `@fx.usd_per_ugx_2021` 3,587.05 | <0.1% |
+| GiveWell GiveDirectly 2024, v2 BOTECs | KES, MWK, MZN, RWF, UGX per $ 2017 (the World Bank's own) | WDI | `@fx.usd_per_<cur>_2017`, same figures | none |
+| AIM Oxygen Access Project; Better Season Project; Opal Health | ₦ per $ (12 July 2024); $ per KES (Google, 5/12/2024); $ per old leone (undated, 2024 sheet) | 1,570; 0.00772; 0.0000508 | `@fx.usd_per_ngn_2024`; `@fx.usd_per_kes_2024` 0.007417; `@fx.usd_per_sle_2023 / 1000` 0.0000469 | 6.53 → 6.36, 62.6 → 64.1, 24.3 → 24.6 |
+| FP Innovation in Government (India) | $ per crore rupees, June 2015 (OANDA) | 156,414 | `@fx.usd_per_inr_2015 × rupees_per_crore` 149,772 (IRS) | 40.4 → 39.4 |
 | HLI StrongMinds, Friendship Bench, Shamiri, Pure Earth | SD-years → WELLBYs (2), household spillover, household size | literals equal to HLI's | `@wellby_factors`; WELLBYs at the depression-calibrated rate (2.3) | StrongMinds 22.2 → 2.52, Friendship Bench 26.7 → 3.03, Shamiri 18.4 → 2.09, Pure Earth 20.0 → 2.27 |
 | HLI AMF | a death in WELLBYs (years × wellbeing above neutral, 133 WBs); deaths from GiveWell 2022 before leverage (0.335/$1,000); improving effects at HLI's upper bound (29.97) | | GiveWell 2026's deaths (0.232 before, 0.196 after leverage and funging, the switch on `$resource_shares`), × `@moral_weights` (81% under five) × `$life_value_multiplier` into WELLBYs through `wellbys_from_uov` (2.3, INV-17); improving effects at the middle of HLI's cases (15.0, range 0–29.97), discounted (start 3 years, over 20); HLI's in `published` | 42.8 → 11.2 (at the old WELLBY rate: 34.2 midpoint; about 29 with shared deaths) |
 | HLI GiveDirectly, ACTRA, icddr,b, Pallium, Fortify Health, World Spine Care | WELLBYs at the GiveDirectly calibration | 1.15 | depression-calibrated rate (2.3) | 4.34 → 0.49, 17.8 → 2.03, 16.9 → 1.91, 20.2 → 2.29, 11.0 → 1.25, 9.88 → 1.12 |
@@ -619,7 +627,7 @@ model was removed); INV-12 requires it of any model with a row on its path about
   tobacco and alcohol taxes): global health, not the across-causes mix. No model uses the mix now; its animal leg
   is weighted by ACE's Recommended Charity Fund payouts (`@ace_fund_weights`, 2.9), no longer equal weights.
 - *Leverage, latest and marginal.* The Life You Can Save's 3-year ratio is 9.19 (2025 report); a ratio of money
-  moved over all costs is an average, and the next dollar moves less: `@meta.marginal_vs_past_average` (judgment,
+  moved over all costs is an average, and the next dollar moves less: `$marginal_vs_past_average` (2.10; judgment,
   50%, 18–100%; CEARCH's estimates for Giving What We Can 0.18 and 0.43, Giving What We Can's own view ~1), the same
   figure the retrospective climate models take (2.5). CEARCH and Better Futures Guide model a new organisation's
   whole costs, so they don't take it.
@@ -664,7 +672,7 @@ benefit of a win = per year once in effect × fulfilment × credit
   `published` 1 where the evaluator doesn't discount it. Already done by the evaluator: The Humane League, Animal
   Welfare Observatory, Aquatic Life Institute (its years counted now start at the stunning date), Ambitious Impact.
   Zero for meal policies (Sociedade Vegetariana Brasileira, Dansk Vegetarisk Forening, ACE 2016 institutional work).
-- **Fulfilment**: `@sad_factors.commitment_fulfilment_cage_free` (0.92, 0.38–0.96: Open Wing Alliance / Chicken Watch
+- **Fulfilment**: `@sad_factors.commitment_fulfilment_cage_free` (0.77 since 2026-11-02, was 0.92; 0.38–0.96: Open Wing Alliance / Chicken Watch
   2025, commitments due by 2024, by count) and `@sad_factors.commitment_fulfilment_broiler` (judgment 0.3, 0.15–0.5:
   no tracker publishes a rate; CIWF ChickenTrack reports progress only). They replace every evaluator's own figure
   (0.25–0.9) in our view, and are added (with `published` 1) where the evaluator had none (ACE 2016). Pig and shrimp
@@ -707,7 +715,7 @@ Suicide Prevention `number_of_years_brought_forward` and Vital Strategies' years
 takes effect discounted (`reform_years_until_effect`, judgment 1, 0–3; `reform_wait_discount`, `published` 1):
 39.4 → 40.4.
 
-**Past average, every cause (late October 2026).** The shared `@meta.marginal_vs_past_average` (judgment, 50%,
+**Past average, every cause (late October 2026).** The shared `@meta.marginal_vs_past_average` (since November 2026 the slider `$marginal_vs_past_average`, 2.10; judgment, 50%,
 18–100%) applies to every model whose cost-effectiveness is an organisation's past spending divided by the wins
 that spending achieved: campaigns, policies, corporate commitments, research. Besides The Life You Can Save and
 the nine retrospective climate models (2.5), that is ACE's 2024/2025 estimates for Animal Welfare Observatory,
@@ -744,6 +752,66 @@ Initiative, whose bridge is ours in both):
 | CEARCH (reads ACE's charities live) | 99.4 → 84.0 | its animal destinations moved |
 
 
+### 2.10 The next dollar vs a past average: a slider, and every model says what its dollar is (November 2026)
+
+The shared figure for how much the next dollar does compared with an organisation's past average was a fixed fact
+(`@meta.marginal_vs_past_average`). It is now a slider under Your values → How impact is counted, "How much the next
+dollar does compared with the average dollar so far" (`$marginal_vs_past_average`, judgment, 50%, 18–100%), and the
+fact is gone. Every model that read the fact reads the slider in the same `ours` row, the evaluator's 1 in
+`published`, so evaluator views are unchanged.
+
+**The rule.** Every charity model declares `estimate_basis` (variants inherit it):
+
+- **`past_average`**: the result is an organisation's (or a field's) past spending divided by everything that
+  spending achieved, where the achievements are not items more money buys again at a known price: won pledges,
+  laws and rules, research results, money moved, a fixed service's lives saved. It reads the slider on the path to
+  its output.
+- **`marginal`**: the evaluator estimates the next grant, the next dollar or planned work: GiveWell's grant and
+  programme sheets (with their funging, leverage and funding-bar logic), Ambitious Impact's idea reports,
+  the Happier Lives Institute's predictive and expansion estimates, Founders Pledge's forward BOTECs and
+  recommendation multiples, ACE's 2016 projections, Giving Green's 2022 Evergreen budget, SoGive's copies of
+  GiveWell's deworming model. It does not read the slider: diminishing returns are already in it.
+- **`unit_cost`**: a price per item delivered (a net, a treatment, a course, a pupil, a tree, a stunner, a
+  sponsored child) times what an item achieves; more money buys more items at about that price. It does not
+  read the slider.
+
+Checked by INV-18: every `past_average` model reads the slider on the path to its output, halving it lowers our
+headline, and the evaluator view keeps 1; no `marginal` or `unit_cost` model reads it, and none moves with it
+except through another model it reads live (a meta charity's destinations, `#id`).
+
+**Classification (250 charity models, 98 variants inheriting):**
+
+| Basis | Count | Models |
+|---|---|---|
+| `past_average` | 23 | ACE: Animal Welfare Observatory, Aquatic Life Institute, Çiftlik Hayvanlarını Koruma Derneği, Sinergia Animal, Sociedade Vegetariana Brasileira, The Humane League, Wild Animal Initiative. Founders Pledge: The Humane League, Clean Air Task Force, Coalition for Rainforest Nations, Terrapraxis, Innovation in Government Initiative, The Life You Can Save. Giving Green: Carbon180, Evergreen 2021, Future Cleantech Architects, Good Food Institute, Industrious Labs, Opportunity Green. SoGive: Breast Cancer Now, **Royal National Lifeboat Institution**, **Motor Neurone Disease Association** (research part), **Versus Arthritis** (research part) |
+| `unit_cost` | 32 | ACE: Dansk Vegetarisk Forening, Good Food Fund, Shrimp Welfare Project. Founders Pledge: Bandhan, Central Square Foundation, Clear Solutions, Educational Initiatives, EIDU, GiveDirectly, GAIN, Imagine Worldwide (Malawi, Tanzania), IRC, Iodine Global Network, No Means No Worldwide, Raising the Village, StrongMinds, Suvita, Taimaka, Teaching at the Right Level Africa, Ubongo, Village Enterprise, Winning Start. HLI: Friendship Bench, GiveDirectly, icddr,b, StrongMinds, Taimaka, Shamiri. SoGive: Compassion UK, StrongMinds (March 2024), Woodland Trust |
+| `marginal` | 195 | GiveWell: all 156. Ambitious Impact: all 17. HLI: ACTRA, AMF, Fortify Health, Pallium India, World Spine Care, Pure Earth (both). Founders Pledge: Action for Happiness (scale-up), DMI, Family Empowerment Media, LEEP ($1.66 per child "in expectation" over future country campaigns), New Incentives, Pure Earth. ACE 2016: Albert Schweitzer Foundation, HSUS, ProVeg Deutschland, Vegan Outreach. Giving Green: Evergreen 2022. SoGive: the four deworming copies of GiveWell's model |
+
+New past averages found by the audit (bold above), which the fact had missed: SoGive's RNLI (2019 spending over
+2019 lives saved: the stations and campaigns already cover the coasts, so the next dollar saves fewer) and the
+research parts of SoGive's two upper bounds (MND Association's £100 per healthy year is what past biomedical
+research achieved; Versus Arthritis is credited with a share of all arthritis research's yearly result). The upper
+bounds take the slider only on research's share of their healthy years, inside the factor that already discounts
+the research lag. Borderline, kept as `unit_cost`: Dansk Vegetarisk Forening (chefs trained, though the meals count
+for years like a won reform) and Shrimp Welfare Project (stunners installed under producers' commitments).
+
+Before → after (healthy years per $1,000, our view at the defaults; evaluator views unchanged): the 20 models that
+read the fact, none (same 50%). Royal National Lifeboat Institution 0.058 → 0.029 (ranked); Motor Neurone Disease
+Association 1.45 → 0.84 and Versus Arthritis 8.40 → 7.59 (upper bounds, not ranked).
+
+**What others do (sources in the slider's explainer).** GiveWell estimates the next grant and sets a funding bar in
+multiples of cash that moves with the money available; ACE separates past cost-effectiveness from room for more
+funding, and Giving What We Can's evaluation found that ACE "does not currently measure marginal cost-effectiveness
+to a sufficient extent". CEARCH's estimate for Giving What We Can splits a budget into deciles with impact falling
+from 10 to 1 (the last 30% of funding gives 6/55 of the impact, about 36% of the average per dollar) and gets a
+marginal multiplier of about 13× against a 30× average. Rethink Priorities' cross-cause funding model uses a power
+law, cost-effectiveness falling a fixed share per doubling of a fund's budget (10% for GiveWell, 46% for a
+catastrophic-risk fund); under a power law the next dollar is (1 − elasticity) of the average whatever the size,
+85% and 11% here. Open Philanthropy's prior for its own programmes is roughly logarithmic returns, under which the
+ratio is (1 − B₀/B) / ln(B/B₀) for an organisation that has grown from B₀ to B: 63% after growing e-fold, 39% after
+tenfold, 21% after a hundredfold. No evaluator adjusts the ratio by an organisation's age or size: there is no
+age- or size-based adjustment here either (an open proposal, section 5, item 11).
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -773,6 +841,7 @@ shrinks).
 | INV-15 | A ranked model far above its peers says why. | Every model the rankings use whose headline is more than 10× the median of the other ranked models of its cause (at least three) states the reason in its summary, "more than ten times its peers because …". Late October 2026: Terrapraxis (one event), Clean Air Task Force (Founders Pledge's counted deaths), Sinergia, The Humane League (Founders Pledge), HSUS and Albert Schweitzer Foundation (ACE 2016): cage-free pledges move many hen-years per dollar. |
 | INV-16 | Side sheets never rank; the ranked column is the grant's. | Every model the rankings use has at most one row on its path that reads like a value-of-information or decision sheet (future funding bar, CE of reallocated funding, value of information, probability the decision changes, P(… x cash)); and where its native row's label names a place in parentheses, the model's name, id or title names that place too when it names any. Complements `isSideSheet` (title and template) in src/engine/ranking.ts. |
 | INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest doesn't move with `$life_value_multiplier`. |
+| INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
@@ -853,6 +922,13 @@ some models, so sliders move some charities and not their neighbours.
 9. **The evaluator view converts at the evaluator's pinned rates** (INV-8). Recommend yes.
 10. **AIM SADs version (2024–25 v1 vs 2026 v2).** Recommend recording it per model now, keeping each
     sheet's version in both views, and treating a move to v2 as a later, separate decision.
+
+11. **Open (November 2026): should the next-dollar share depend on an organisation's growth, age or size?**
+    No evaluator does this, and none of the published methods ties the ratio to age or size; only Open
+    Philanthropy's log-returns prior makes it depend on how far spending has grown. Proposal: keep the one
+    slider, and add, per past-average model, the organisation's spending at the start and end of the period
+    the estimate averages over (B₀, B, from annual reports); under log returns the ratio is
+    (1 − B₀/B) / ln(B/B₀), shown beside the slider's value, used only if the owner adopts it.
 
 ### Decided 2026-10-30 (owner)
 
@@ -961,3 +1037,11 @@ and Taimaka-HLI change nothing at the defaults.
    reaches healthy years" block from layers A–C, and the assumption explainers for the chicken
    slider and pain-day rate stop saying AIM's weights are "assumed to build it in".
 10. **Turn the allowlist off** once it is empty.
+
+### Decided 2026-11-02 (owner)
+
+- **Cage-free pledges kept: 77%, not 92%.** The Open Wing Alliance's 92% counts pledges, not hens, is
+  self-reported, and covers only pledges already due. No tracker counts hens, so the best guess is North
+  America's 77%, where the largest pledges are; range 38–96% unchanged. The reasoning is in the fact's
+  explainer (`@sad_factors.commitment_fulfilment_cage_free`), shown on /data and on every model page
+  that reads it. Effect: every cage-free model about 15% lower (HSUS 2016 746 → 637, Sinergia 190 → 166).

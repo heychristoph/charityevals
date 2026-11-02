@@ -159,11 +159,11 @@ export const SUCCESS_FACT = "meta.success_chance_new_org";
 export const SUCCESS_ADJUSTMENT_FORMULA =
   "(organisation_success + (1 - organisation_success) * failure_money_share) / (organisation_success + (1 - organisation_success) * failure_cost_share)";
 
-/** A marginal dollar against an organisation's past average (facts/meta.json marginal_vs_past_average):
- * read by every model whose result is an established organisation's past average (The Life You Can
- * Save's 3-year leverage ratio; climate models built on past budgets and past wins), the evaluator's 1
- * in `published`. */
-export const MARGINAL_FACT = "meta.marginal_vs_past_average";
+/** A marginal dollar against an organisation's past average: the "Your values" slider read by every model
+ * whose `estimate_basis` is `past_average` (The Life You Can Save's 3-year leverage ratio; climate,
+ * animal and research models built on past budgets and past wins), the evaluator's 1 in `published`.
+ * INV-18 checks that those models, and only those, read it. */
+export const MARGINAL_ASSUMPTION = "marginal_vs_past_average";
 
 /** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, the
  * donors whose new money the organisation moves are co-contributors, alongside staff's forgone pay.

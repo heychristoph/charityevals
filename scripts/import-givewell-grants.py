@@ -4,8 +4,8 @@
     python3 scripts/import-givewell-grants.py <cache dir> --dates     re-date imported models only (sheet_date)
 
 Each sheet is downloaded as xlsx (once), converted by convert-sheet.py from its bottom-line cell, and
-written to models/grants/givewell/<id>.json; link-parameters.py then ties every model to the shared
-assumptions and facts. The manifest gets each import's row counts back.
+written to models/grants/givewell/<id>.json; link-parameters.py --only then ties the new models to the
+shared assumptions (shared facts: the scripts it prints next). The manifest gets each import's row counts back.
 """
 import importlib.util, json, re, subprocess, sys
 from pathlib import Path
@@ -69,7 +69,8 @@ for e in manifest:
         subprocess.run(["curl", "-sL", "--max-time", "180", "-A", "Mozilla/5.0", f"https://docs.google.com/spreadsheets/d/{e['sheet']}/export?format=xlsx", "-o", str(f)], check=True)
     pages = e["grant_pages"]
     name = clean(e["title"])
-    s = {"id": e["model_id"], "name": name, "charity": e["charity"], "owner": "givewell", "cause": "global-health",
+    # GiveWell estimates the next grant, never a past average (docs/normalization.md 2.10).
+    s = {"id": e["model_id"], "name": name, "charity": e["charity"], "owner": "givewell", "cause": "global-health", "estimate_basis": "marginal",
          "summary": f"GiveWell's spreadsheet \"{name}\", linked from {'its grant page' if len(pages) == 1 else f'{len(pages)} of its grant pages'}. "
                     "Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
          "source": {"publisher": "GiveWell", "title": e["title"], "url": pages[0] if pages else e["url"], "sheet": e["url"],
@@ -89,4 +90,8 @@ for e in manifest:
     print(model["id"], st["rows"], st["frozen"])
 manifest_path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")
 # Moral weights, discount rates and shared data back onto the shared assumptions and facts.
-subprocess.run([sys.executable, str(Path(__file__).with_name("link-parameters.py"))], check=True)
+# Only the sheets imported now: a full rebuild would undo links made since (link-parameters.py).
+imported = [e["model_id"] for e in manifest if e.get("status") == "imported" and (not only or e["model_id"] in only)]
+if imported:
+    subprocess.run([sys.executable, str(Path(__file__).with_name("link-parameters.py")), "--only", ",".join(imported)], check=True)
+    print("Next: python3 scripts/link-resource-shares.py, link-givewell-shared.py, link-fx.py, givewell-judgment-kinds.py")

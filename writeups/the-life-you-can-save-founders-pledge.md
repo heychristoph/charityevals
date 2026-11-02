@@ -1,6 +1,6 @@
 ### Summary
 
-The Life You Can Save promotes effective giving, through Peter Singer's book and its own outreach, and raises money for a list of recommended charities fighting extreme poverty. Founders Pledge estimated it raised about $17 for those charities for each dollar it received. At its latest ratio (9.19, 2025), counting a marginal dollar at half the average (our judgment), and valuing each dollar moved by where its money actually went, the way the site values every meta charity's, that is **<span data-figure="headline" data-model="the-life-you-can-save-founders-pledge">84.6</span> years of healthy life per $1,000**.
+The Life You Can Save promotes effective giving, through Peter Singer's book and its own outreach, and raises money for a list of recommended charities fighting extreme poverty. Founders Pledge estimated it raised about $17 for those charities for each dollar it received. At its latest ratio (9.19, 2025), counting a marginal dollar at half the average (the default under Your values), and valuing each dollar moved by where its money actually went, the way the site values every meta charity's, that is **<span data-figure="headline" data-model="the-life-you-can-save-founders-pledge">84.6</span> years of healthy life per $1,000**.
 
 Founders Pledge's figure is a gross multiplier; everything after it is ours: today's ratio, the step from average to marginal, and the site's shared method for money moved.
 
@@ -17,13 +17,13 @@ Donors it reaches give to its recommended charities, which save lives and raise 
 Founders Pledge's figure comes first: 17 dollars raised per dollar received (2019–2021). Our bridge follows:
 
 - **The ratio now:** The Life You Can Save's own three-year ratio (money moved over all its costs) has fallen to 9.19 (2025 annual report, 2023–2025), so we use 54% of Founders Pledge's 17, with 17 as the high end.
-- **A marginal dollar:** that ratio is an average over everything The Life You Can Save spent. The next dollar it receives moves less than the average dollar did; our judgment counts it at 50%, from 18% (CEARCH's estimate for Giving What We Can's marginal dollar) to 100%. One figure for every model on the site built on an organisation's past average, the retrospective climate models included.
+- **A marginal dollar:** that ratio is an average over everything The Life You Can Save spent. The next dollar it receives moves less than the average dollar did; our view counts it at the share set under Your values, "How much the next dollar does compared with the average dollar so far": 50% by default (our judgment), from 18% (CEARCH's estimate for Giving What We Can's marginal dollar) to 100%. One slider for every model on the site built on an organisation's past average, the retrospective climate models included.
 - **Where the money goes:** The Life You Can Save's own published split of the $24.1 million it moved in 2025, by charity. The 19 charities with a model on this site (among them Against Malaria Foundation, GiveDirectly, Development Media International, Evidence Action, Helen Keller Intl, One Acre Fund, Village Enterprise and three climate charities) took $13.4 million; each is valued at its main model's live result under your values (GiveDirectly at GiveWell's model, as in every meta model); Evidence Action and Malaria Consortium, which run several programmes, at GiveWell's programme-weighted figure for the charity, the one the rankings show. The rest, 15 charities and its Rapid Response Fund with no model here, is valued at the average of the modelled ones.
 - **New and shifted money:** half the money is new (Ambitious Impact's Effective Giving Incubation figure, 35% to 80%) and counts in full; the rest would have been given anyway and counts only for the gain over GiveDirectly's result (our judgment: 1× GiveDirectly, from 0 to 3×).
 
 ### What drives the result
 
-- **How much less a marginal dollar moves than the average** (18% to 100%; our judgment).
+- **How much less a marginal dollar moves than the average** (Your values: "How much the next dollar does compared with the average dollar so far"; 50% by default, from 18% to 100%).
 - **The ratio of money moved** (50% to 100% of Founders Pledge's 17).
 - **The share of new money** (35% to 80%) and **where shifted money would have gone** (nothing to three times GiveDirectly; our judgment).
 - **Your values:** how lives and income are weighed moves the destination charities' results, and with them this one.

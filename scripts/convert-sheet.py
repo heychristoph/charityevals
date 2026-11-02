@@ -823,7 +823,8 @@ def build(book, spec):
     model = {k: spec[k] for k in ("id", "name") if k in spec}
     model.update({"kind": spec.get("kind", "charity"), "cause": spec.get("cause", "global-health"), "charity": spec["charity"],
                   "owner": spec["owner"], "bulk": True})
-    for k in ("summary", "source", "evaluator"):
+    # estimate_basis (INV-18): past_average, marginal or unit_cost; a spec without it fails the checks.
+    for k in ("estimate_basis", "summary", "source", "evaluator"):
         if k in spec: model[k] = spec[k]
     model["resources"] = spec.get("resources", [])
     model["sections"] = sections
