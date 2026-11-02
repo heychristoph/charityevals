@@ -50,7 +50,9 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   a leaf (copy the value, cite the cell) from a step worth modelling.
 - **In bulk**: `python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>`
   (Guesstimate: `scripts/convert-guesstimate.py`). Bulk models live in `models/grants/`, carry
-  `bulk: true`, and still follow every rule below.
+  `bulk: true`, and still follow every rule below. The spec sets `estimate_basis` (INV-18:
+  `past_average`, `marginal` or `unit_cost`, normalization.md 2.10); the GiveWell importer sets
+  `marginal`.
   - GiveWell grant sheets: `scripts/import-givewell-grants.py` (runs `scripts/link-parameters.py`),
     then `python3 scripts/link-resource-shares.py`. Both only touch GiveWell models: for another
     evaluator, extend their patterns or link by hand.
@@ -127,7 +129,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (INV-2c,
   normalization.md 1 and 2.7): every conversion the evaluator made in its own way (an exchange rate
   between outcomes, the value of a death, depression to DALYs, a cash benchmark behind a multiple of
-  cash, a pound/euro rate, a typed-in discount rate) reads the shared version in our view
+  cash, a currency rate (`@fx`: the IRS yearly average where the IRS lists the currency, else the World Bank's, for the year the rate is for; scripts/link-fx.py), a typed-in discount rate) reads the shared version in our view
   (`$uov_per_ln_consumption`, `@moral_weights`, `@depression.dalys_per_phq9_point_year`,
   `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
   "changed for consistency" explainer. A concept two models use with different values and no shared
@@ -137,8 +139,11 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
-  not a unit cost of delivery, not a projected budget), multiply by `@meta.marginal_vs_past_average` in an
-  `ours` section (`published` 1), as the retrospective climate models and The Life You Can Save do.
+  not a unit cost of delivery, not a projected budget), multiply by the slider `$marginal_vs_past_average` in
+  an `ours` section (`published` 1), as the retrospective climate models and The Life You Can Save do. Set
+  the model's `estimate_basis`: `past_average`, `marginal` (an estimate of the next grant or of planned
+  work) or `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider
+  (normalization.md 2.10).
 - **Climate** (normalization.md 2.5): the output is tonnes per dollar (`1 / cost per tonne`, in `tco2e`);
   rows `years_until_avoided` (wait discounted at `$discount_rate`), `air_pollution_weight` and
   `extra_deaths_per_tco2e` sit in an `ours` section, each input sourced or a labelled judgment with a range.

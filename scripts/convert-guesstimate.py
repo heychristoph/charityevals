@@ -74,7 +74,7 @@ def convert(space, spec):
     out_id = next(ids[m["id"]] for m in g["metrics"] if m["readableId"] == spec["output"])
     model = {k: spec[k] for k in ("id", "name", "kind", "cause", "charity", "owner") if k in spec}
     model["bulk"] = True
-    model.update({k: spec[k] for k in ("summary", "source", "evaluator") if k in spec})
+    model.update({k: spec[k] for k in ("estimate_basis", "summary", "source", "evaluator") if k in spec})
     model.update({"resources": spec.get("resources", []), "sections": [{"id": "model", "title": "Model", "explainer": space.get("description") or ""}],
                   "rows": rows, "output": {"row": out_id, "unit": spec["unit"], "label": spec["label"]}})
     return model
