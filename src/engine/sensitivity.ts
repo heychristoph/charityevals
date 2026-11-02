@@ -71,7 +71,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     const high = pickValue(range, "high");
     swings.push(swing(r.id, r.label, "row", r.kind, low, high, line(av, { [r.id]: low }), line(av, { [r.id]: high })));
   }
-  for (const key of usedFacts(m)) {
+  for (const key of usedFacts(m, lib)) {
     const f = lib.facts.get(key);
     if (!f || !hasRange(f.value) || `@${key}` in edits) continue;
     const low = pickValue(f.value, "low");
@@ -136,6 +136,8 @@ export function rowsFeeding(m: ResolvedModel): Set<string> {
     m.byId.get(id)?.deps.forEach(walk);
   };
   if (m.output) walk(m.output.row);
+  // Rows the unit's conversion reads (docs/normalization.md 2.5) feed the headline too.
+  (m.conversionRows ?? []).forEach(walk);
   return seen;
 }
 
@@ -146,8 +148,12 @@ const STALE_MONTHS = 18;
 /** One significant figure: a caveat states a size, not a measurement. */
 const roughly = (x: number) => Number(x.toPrecision(1)).toLocaleString("en-US");
 
+/** The caveat every purely theoretical model carries (schema: `theoretical`), first in its list. */
+export const THEORETICAL_TEXT = "Purely theoretical: an estimate of the idea, written before the charity existed, not of the charity's own results";
+
 export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Flag[] {
   const out: Flag[] = [];
+  if (m.theoretical) out.push({ level: "warn", short: "purely theoretical", text: THEORETICAL_TEXT });
   const spread = s.jointHigh / s.jointLow;
   if (spread > 100) out.push({ level: "warn", short: "wide range", text: `The plausible range spans about ${roughly(spread)}×` });
   if (s.judgmentShare > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `About ${Math.round(s.judgmentShare * 10) * 10}% of the uncertainty comes from judgment calls and shared assumptions` });

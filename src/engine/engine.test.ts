@@ -29,6 +29,10 @@ describe("expressions", () => {
     expect(ev("pv_annuity_due(7864022, 0.04, 15)")).toBeCloseTo(90932653.11, 1);
     expect(ev("pv_annuity_due(100, 0, 2.5)")).toBeCloseTo(250);
   });
+  it("computes spreadsheet NPV with the first value one period out", () => {
+    expect(ev("npv(0.1, 110, 121)")).toBeCloseTo(200);
+    expect(ev("npv(0, 1, 2, 3)")).toBe(6);
+  });
   it("rejects unknown functions and stray input", () => {
     expect(() => parse("eval(1)")).toThrow(ExprError);
     expect(() => parse("1 +")).toThrow(ExprError);

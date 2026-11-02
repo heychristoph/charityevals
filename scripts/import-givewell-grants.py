@@ -1,6 +1,7 @@
 """Imports every GiveWell grant model listed for import in inventory/givewell-models.json.
 
     python3 scripts/import-givewell-grants.py <cache dir for downloaded sheets> [model-id,...]
+    python3 scripts/import-givewell-grants.py <cache dir> --dates     re-date imported models only (sheet_date)
 
 Each sheet is downloaded as xlsx (once), converted by convert-sheet.py from its bottom-line cell, and
 written to models/grants/givewell/<id>.json; link-parameters.py then ties every model to the shared
@@ -26,7 +27,40 @@ def clean(title):
     return t[0].upper() + t[1:] if t else title
 
 
-only = set(sys.argv[2].split(",")) if len(sys.argv) > 2 else None
+MONTHS = {m: i + 1 for i, m in enumerate("jan feb mar apr may jun jul aug sep oct nov dec".split())}
+
+
+def sheet_date(e):
+    """The sheet's own date, for "newest sheet first" (src/engine/ranking.ts): the latest date its title
+    states ("[Dec 2023]", "2025 version 1", "updated 23 Feb 2026") where that is after the first grant page
+    linking it; otherwise that grant's date. A sheet a grant page links can be years newer than the grant
+    (a later version filed under the first page), never usefully older."""
+    first = e.get("first_grant")
+    t = e["title"].lower()
+    dates = []
+    for d, mon, y in re.findall(r"(?:(\d{1,2}) )?\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?,? (20\d\d)\b", t):
+        dates.append(f"{y}-{MONTHS[mon]:02d}-{int(d or 1):02d}")
+    for y in re.findall(r"(?<![\d-])(20\d\d)(?![\d-])", t):
+        dates.append(f"{y}-01-01")
+    dates = [d for d in dates if d <= "2026-12-31"]
+    best = max(dates, default=None)
+    return best if best and (not first or best > first) else first
+
+
+only = set(sys.argv[2].split(",")) if len(sys.argv) > 2 and sys.argv[2] != "--dates" else None
+if len(sys.argv) > 2 and sys.argv[2] == "--dates":
+    # Re-date the models already imported without converting them again.
+    for e in manifest:
+        if e["status"] != "imported": continue
+        p = out / f"{e['model_id']}.json"
+        if not p.exists(): continue
+        m = json.loads(p.read_text())
+        d = sheet_date(e)
+        if d and m["source"].get("published") != d:
+            print(e["model_id"], m["source"].get("published"), "->", d)
+            m["source"]["published"] = d
+            p.write_text(json.dumps(m, indent=1 if p.read_text().startswith('{\n "') else 2, ensure_ascii=False) + "\n")
+    sys.exit(0)
 for e in manifest:
     if not e["status"].startswith("import"): continue
     if only and e.get("model_id") not in only: continue
@@ -39,7 +73,7 @@ for e in manifest:
          "summary": f"GiveWell's spreadsheet \"{name}\", linked from {'its grant page' if len(pages) == 1 else f'{len(pages)} of its grant pages'}. "
                     "Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
          "source": {"publisher": "GiveWell", "title": e["title"], "url": pages[0] if pages else e["url"], "sheet": e["url"],
-                    **({"published": e["first_grant"]} if e.get("first_grant") else {}), "retrieved": "2026-10-27",
+                    **({"published": sheet_date(e)} if sheet_date(e) else {}), "retrieved": "2026-10-27",
                     "license": "CC BY-NC-SA 3.0 US"},
          "evaluator": {"name": "GiveWell", "assumptions": {"resource_shares": 0}},
          "resources": [{"title": e["title"], "url": e["url"], "type": "model", "note": "The spreadsheet this page reproduces."}]

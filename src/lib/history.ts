@@ -26,11 +26,24 @@ export type HistoryEntry = {
 const git = (root: string, args: string[]) =>
   execFileSync("git", args, { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"] });
 
+/** Every JSON file under `dir` at a commit, read in one `git cat-file --batch` rather than one process
+ * per file: a past library is hundreds of files. */
 function jsonFilesAt(root: string, sha: string, dir: string): unknown[] {
-  return git(root, ["ls-tree", "-r", "--name-only", sha, "--", dir])
-    .split("\n")
-    .filter((n) => n.endsWith(".json"))
-    .map((n) => JSON.parse(git(root, ["show", `${sha}:${n}`])));
+  const names = git(root, ["ls-tree", "-r", "--name-only", sha, "--", dir]).split("\n").filter((n) => n.endsWith(".json"));
+  if (!names.length) return [];
+  const out = execFileSync("git", ["cat-file", "--batch"], {
+    cwd: root, input: names.map((n) => `${sha}:${n}`).join("\n") + "\n", maxBuffer: 1024 * 1024 * 1024, stdio: ["pipe", "pipe", "ignore"],
+  });
+  // Each object: "<oid> blob <size>\n<content>\n".
+  const files: unknown[] = [];
+  let at = 0;
+  while (at < out.length) {
+    const nl = out.indexOf(10, at);
+    const size = Number(out.subarray(at, nl).toString("utf8").split(" ")[2]);
+    files.push(JSON.parse(out.subarray(nl + 1, nl + 1 + size).toString("utf8")));
+    at = nl + 1 + size + 1;
+  }
+  return files;
 }
 
 function jsonFilesWorking(root: string, dir: string): unknown[] {
@@ -42,16 +55,18 @@ function jsonFilesWorking(root: string, dir: string): unknown[] {
   return walk(dir).map((p) => JSON.parse(readFileSync(join(root, p), "utf8")));
 }
 
-const libraryCache = new Map<string, Library | undefined>();
-
-/** The library as it was at a commit, or in the working copy when sha is null. Cached: every
- * history page asks for the same commits. */
-function libraryAt(root: string, sha: string | null): Library | undefined {
-  const key = `${root}@${sha ?? "working"}`;
-  if (!libraryCache.has(key)) libraryCache.set(key, loadLibrary(root, sha));
-  return libraryCache.get(key);
+/** owners.json at a commit; none before it existed. */
+function ownersAt(root: string, sha: string): unknown[] {
+  try {
+    return JSON.parse(git(root, ["show", `${sha}:owners.json`]));
+  } catch {
+    return [];
+  }
 }
 
+/** The library as it was at a commit, or in the working copy when sha is null. Never cached: a library
+ * holds every model, bulk imports included, and one per commit doesn't fit in memory (see
+ * prepareHistories, which builds each commit's library once for every page). */
 function loadLibrary(root: string, sha: string | null): Library | undefined {
   try {
     if (sha === null)
@@ -59,11 +74,16 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
         jsonFilesWorking(root, "models"),
         JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8")),
         jsonFilesWorking(root, "facts"),
+        // A meta model reads a charity's programme-weighted figure live (`#owner:charity`).
+        jsonFilesWorking(root, "charities"),
+        existsSync(join(root, "owners.json")) ? JSON.parse(readFileSync(join(root, "owners.json"), "utf8")) : [],
       );
     return buildLibrary(
       jsonFilesAt(root, sha, "models"),
       JSON.parse(git(root, ["show", `${sha}:assumptions/default.json`])),
       jsonFilesAt(root, sha, "facts"),
+      jsonFilesAt(root, sha, "charities"),
+      ownersAt(root, sha),
     );
   } catch {
     return undefined;
@@ -114,44 +134,104 @@ function diffRows(before: ResolvedModel | undefined, bv: Record<string, number> 
 /** The commit message's body without git trailers (Co-Authored-By: …, Signed-off-by: …). */
 const reason = (body: string) => body.split("\n").filter((l) => !/^[A-Za-z-]+: .*<[^>]+>\s*$/.test(l)).join("\n").trim();
 
-/** Oldest first. Empty when the site isn't built from a git checkout. */
-/** `uncommitted`: add the working copy's changes as a last entry (while developing; a production build
- * shows only what's committed). */
-export function modelHistory(root: string, model: ResolvedModel, filePaths: string[], { uncommitted = true }: { uncommitted?: boolean } = {}): HistoryEntry[] {
-  let log: string[] = [];
+type Commit = { sha: string; date: string; author: string; subject: string; body: string };
+
+/** Commits that touched these files, oldest first. */
+function commitsOf(root: string, filePaths: string[]): Commit[] {
   try {
     // %x1e ends each commit, %x1f separates its fields: the body may span lines.
-    log = git(root, ["log", "--reverse", "--format=%H%x1f%ad%x1f%an%x1f%s%x1f%b%x1e", "--date=short", "--", ...filePaths]).split("\x1e").map((l) => l.trim()).filter(Boolean);
+    return git(root, ["log", "--reverse", "--format=%H%x1f%ad%x1f%an%x1f%s%x1f%b%x1e", "--date=short", "--", ...filePaths])
+      .split("\x1e").map((l) => l.trim()).filter(Boolean)
+      .map((line) => {
+        const [sha, date, author, subject, body = ""] = line.split("\x1f");
+        return { sha, date, author, subject, body };
+      });
   } catch {
     return [];
   }
-  const entries: HistoryEntry[] = [];
-  let prev: { m: ResolvedModel; values?: Record<string, number> } | undefined;
-  const step = (sha: string | null, date: string, author: string, subject: string, body: string) => {
-    const lib = libraryAt(root, sha);
-    const m = lib?.models.get(model.id);
-    const { ours, values } = evaluate(lib, model.id);
-    entries.push({
-      sha, date, author, subject, body: reason(body), ours,
-      changes: prev ? diffRows(prev.m, prev.values, m, values) : [],
+}
+
+/** One model's history as it is built, commit by commit. */
+class Builder {
+  entries: HistoryEntry[] = [];
+  private prev: { m: ResolvedModel; values?: Record<string, number> } | undefined;
+  constructor(private id: string) {}
+  step(lib: Library | undefined, c: Commit | { sha: null; date: string; author: string; subject: string; body: string }) {
+    const m = lib?.models.get(this.id);
+    const { ours, values } = evaluate(lib, this.id);
+    this.entries.push({
+      sha: c.sha, date: c.date, author: c.author, subject: c.subject, body: reason(c.body), ours,
+      changes: this.prev ? diffRows(this.prev.m, this.prev.values, m, values) : [],
       note: !m ? "This model doesn't exist yet at this point, or can't be read by today's engine."
-        : !prev ? `First version: ${m.rows.length} rows.`
+        : !this.prev ? `First version: ${m.rows.length} rows.`
         : undefined,
     });
-    if (m) prev = { m, values };
-  };
-  for (const line of log) {
-    const [sha, date, author, subject, body = ""] = line.split("\x1f");
-    step(sha, date, author, subject, body);
+    if (m) this.prev = { m, values };
   }
-  let dirty = false;
-  if (uncommitted) try {
-    dirty = git(root, ["status", "--porcelain", "--", ...filePaths]).trim().length > 0;
+  done(): HistoryEntry[] {
+    // Every commit to the file stays: one that changed no number (wording, sources, links) says so.
+    for (const e of this.entries) if (!e.note && !e.changes.length) e.note = "No numbers changed: wording, sources or links did.";
+    return this.entries;
+  }
+}
+
+export type HistoryRequest = { model: ResolvedModel; filePaths: string[] };
+
+/** Histories of many models at once, oldest first each. Walks the commits that touched any of their
+ * files in order and builds the library at each commit once, for every model that commit touched,
+ * keeping only the results. `uncommitted`: add the working copy's changes as a last entry (while
+ * developing; a production build shows only what's committed). */
+export function histories(root: string, reqs: HistoryRequest[], { uncommitted = true }: { uncommitted?: boolean } = {}): Map<string, HistoryEntry[]> {
+  const builders = new Map(reqs.map((r) => [r.model.id, new Builder(r.model.id)]));
+  const bySha = new Map<string, { commit: Commit; ids: string[] }>();
+  for (const r of reqs)
+    for (const c of commitsOf(root, r.filePaths)) {
+      const at = bySha.get(c.sha) ?? { commit: c, ids: [] };
+      at.ids.push(r.model.id);
+      bySha.set(c.sha, at);
+    }
+  let order: string[] = [];
+  try {
+    order = git(root, ["rev-list", "--reverse", "--topo-order", "HEAD"]).split("\n").filter((s) => bySha.has(s));
   } catch {
-    /* not a checkout */
+    /* not a checkout: no commits to walk */
   }
-  if (dirty) step(null, new Date().toISOString().slice(0, 10), "", "Uncommitted changes", "");
-  // Every commit to the file stays: one that changed no number (wording, sources, links) says so.
-  for (const e of entries) if (!e.note && !e.changes.length) e.note = "No numbers changed: wording, sources or links did.";
-  return entries;
+  for (const sha of bySha.keys()) if (!order.includes(sha)) order.push(sha);
+  for (const sha of order) {
+    const { commit, ids } = bySha.get(sha)!;
+    const lib = loadLibrary(root, sha);
+    for (const id of ids) builders.get(id)!.step(lib, commit);
+  }
+  if (uncommitted) {
+    const dirty = reqs.filter((r) => {
+      try {
+        return git(root, ["status", "--porcelain", "--", ...r.filePaths]).trim().length > 0;
+      } catch {
+        return false;
+      }
+    });
+    if (dirty.length) {
+      const lib = loadLibrary(root, null);
+      const c = { sha: null, date: new Date().toISOString().slice(0, 10), author: "", subject: "Uncommitted changes", body: "" };
+      for (const r of dirty) builders.get(r.model.id)!.step(lib, c);
+    }
+  }
+  return new Map([...builders].map(([id, b]) => [id, b.done()]));
+}
+
+const prepared = new Map<string, Map<string, HistoryEntry[]>>();
+
+/** One model's history, oldest first. Empty when the site isn't built from a git checkout. Given `all`
+ * (every history page's request), the first call builds them all together and later calls read the
+ * result, so each past library is built once per build rather than once per page. */
+export function modelHistory(root: string, model: ResolvedModel, filePaths: string[], opts: { uncommitted?: boolean; all?: HistoryRequest[] } = {}): HistoryEntry[] {
+  const { all, ...rest } = opts;
+  if (all) {
+    const key = `${root}@${rest.uncommitted ?? true}`;
+    let done = prepared.get(key);
+    if (!done) prepared.set(key, (done = histories(root, all, rest)));
+    const hit = done.get(model.id);
+    if (hit) return hit;
+  }
+  return histories(root, [{ model, filePaths }], rest).get(model.id) ?? [];
 }

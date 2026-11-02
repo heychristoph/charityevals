@@ -44,8 +44,10 @@
 - [ ] SD vs. raw scale points; SD-years vs. WELLBYs.
 - [ ] Animals in supply chain per year vs. at any one time (hens live ~1.5 years in production).
 - [ ] Output row is per dollar of `cost_total`, then × `donor_cost_share` (animal models: then the species step).
-- [ ] No exchange rate between outcomes inside the model (`$uov_per_daly`, `$uov_per_wellby`,
+- [ ] No exchange rate between outcomes inside the model (`$uov_per_daly`, `$daly_per_wellby`,
       `$daly_per_sad`, `$chicken_vs_person`): the output unit's conversion does it.
+- [ ] No constant beside a lever in a formula (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`): read the shared figure or make it an input row (INV-2d).
+- [ ] Deaths valued by their age band; deaths in a WELLBY model enter only through `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` (INV-17).
 - [ ] Species split: shares sum to 1 and are sourced; each species uses its own welfare range (or the
       stand-ins in docs/normalization.md, decision 6), not a chicken's.
 

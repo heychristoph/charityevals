@@ -395,7 +395,7 @@
       "label": "Adjustment for net coverage years lost due to residual nets from previous distributions (Nigeria)",
       "section": "malaria_consortium_llins",
       "value": 0.99,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -408,7 +408,7 @@
       "label": "Net use adjustment (Nigeria)",
       "section": "malaria_consortium_llins",
       "value": 0.9,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -421,7 +421,7 @@
       "label": "Internal validity adjustment — Nets (Nigeria)",
       "section": "malaria_consortium_llins",
       "value": 0.95,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -434,7 +434,7 @@
       "label": "External validity adjustment — Nets (Nigeria)",
       "section": "malaria_consortium_llins",
       "value": 0.95,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -491,9 +491,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C8"
       },
-      "formula": "116.9 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 116.9,
-      "explainer": "GiveWell's moral weight, 116.9 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 116.9, is kept for the evaluator view.",
+      "published": 116.9
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_under",
@@ -518,9 +519,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C9"
       },
-      "formula": "83.1 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_over5 * $life_value_multiplier",
       "expected": 83.1,
-      "explainer": "GiveWell's moral weight, 83.1 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_over5, 73.1914 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 83.1, is kept for the evaluator view.",
+      "published": 83.1
     },
     {
       "id": "value_assigned_to_averting_the_death_of_an_individual_5_or_o",
@@ -599,14 +601,14 @@
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for_2",
       "label": "Value assigned to increasing ln(consumption) by one unit for one person for one year (GiveWell 2020)",
       "section": "moral_weights_and_discount_rate",
-      "value": 1.442695041,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C22"
       },
-      "explainer": "Calculated in the source sheet as `=if(C5>0,C5/ln(2),\"\")`; kept as a fixed number here (text in arithmetic)."
+      "explainer": "Changed for consistency. GiveWell's sheet types in its value of a one-unit rise in ln(consumption) for a year, 1/ln 2 = 1.4427 units of value. The site values income the same way in every model, through the income slider (Value of doubling an income, under Your values), so this row reads it; at the default the number is the same. The evaluator view keeps 1.4427.",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.442695041
     },
     {
       "id": "value_assigned_to_increasing_ln_consumption_by_one_unit_for",
@@ -684,20 +686,21 @@
       "id": "multiplier_for_resource_sharing_within_households",
       "label": "Multiplier for resource sharing within households",
       "section": "malaria_consortium_llins",
-      "value": 2.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B122"
-      }
+      },
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "expected": 2.0,
+      "explainer": "Reads the figure every GiveWell model shares: Multiplier for resource sharing within households (GiveWell) (`@givewell_shared.resource_sharing_multiplier`), the same number as this sheet's."
     },
     {
       "id": "pv_adjusted_increase",
       "label": "Adjusted increase in ln(income) from reducing point-in-time probability of malaria infection from 100% to 0% for an individual for one year between the ages of 0 and 14",
       "section": "malaria_consortium_llins",
       "value": 0.01182453322,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -851,7 +854,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -865,7 +868,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -901,7 +904,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -915,7 +918,7 @@
       "label": "False monitoring results",
       "section": "malaria_consortium_llins",
       "value": 0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -937,7 +940,7 @@
       "label": "Change of priorities",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -951,7 +954,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -965,7 +968,7 @@
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -1002,7 +1005,7 @@
       "label": "Adjustments for excluded effects: Malaria morbidity",
       "section": "malaria_consortium_llins",
       "value": 0.09,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -1029,15 +1032,15 @@
       "id": "prevention_of_diseases_other_than_malaria_e_g_dengue_yellow",
       "label": "Prevention of diseases other than malaria (e.g. dengue, yellow fever, zika, encephalitis)",
       "section": "malaria_consortium_llins",
-      "value": 0.02,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B185"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A185),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A185)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.prevention_of_diseases_other_than_malaria_e_g_dengue_ye",
+      "expected": 0.02
     },
     {
       "id": "prevention_of_stillbirths",
@@ -1057,50 +1060,50 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "malaria_consortium_llins",
-      "value": 0.025,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B187"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A187)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases, nets (GiveWell) (`@givewell_shared.investment_of_income_increases_nets`), the same number as this sheet's.\n\nCalculated in the source sheet as `=iferror(if(isblank($A187),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A187)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases_nets",
+      "expected": 0.025
     },
     {
       "id": "rebound_effects_decreased_immunity_development",
       "label": "Rebound effects / decreased immunity development",
       "section": "malaria_consortium_llins",
-      "value": -0.04,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B188"
       },
       "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A188),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A188)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "expected": -0.04
     },
     {
       "id": "treatment_costs_averted_from_prevention_not_specified",
       "label": "Treatment costs averted from prevention (Not specified)",
       "section": "malaria_consortium_llins",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Malaria Consortium (LLINs)!B190"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A190)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
-      "format": "percent"
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.06 here. The site uses one figure for this in every GiveWell model, 0.2 (Treatment costs averted from prevention (GiveWell's supplemental adjustment), `@givewell_shared.treatment_costs_averted`), GiveWell's current best guess; the evaluator view keeps 0.06.\n\nCalculated in the source sheet as `=iferror(if(isblank($A190),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A190)*('Adjustments for excluded effect'!$A:$A=\"AMF\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "published": 0.06
     },
     {
       "id": "effect_on_fertility_subnational_adjustments_not_specified",
       "label": "Effect on fertility: Subnational adjustments (Not specified)",
       "section": "malaria_consortium_llins",
       "value": 0.024,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -1155,7 +1158,7 @@
       "label": "Adjustment for impact relative to the counterfactual being to move distributions closer together (Not specified)",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -1452,7 +1455,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
         "cell": "Moral weights and discount rate!C5"
       },
-      "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+      "formula": "$uov_per_ln_consumption * ln(2)",
       "expected": 1.0,
       "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 1 per doubling."
     },
@@ -2042,7 +2045,7 @@
       "label": "Scenario 4: Distributions would go unfunded (Not specified)",
       "section": "malaria_consortium_llins",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1K6gh89fCTDnn1FS2NqfmG5HPpc0YPoamUCi3pYW8QMY/edit",
@@ -2069,26 +2072,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

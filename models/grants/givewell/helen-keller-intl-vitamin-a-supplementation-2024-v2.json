@@ -266,7 +266,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.29,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -350,14 +350,14 @@
       "label": "Internal validity adjustment",
       "section": "inputs",
       "unit": "%",
-      "value": -0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H168"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.internal_validity_adjustment_m0_2",
+      "expected": -0.2
     },
     {
       "id": "internal_validity_adjustment",
@@ -1356,7 +1356,7 @@
       "section": "inputs",
       "unit": "%",
       "value": -0.25,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1388,7 +1388,7 @@
       "section": "external_validity",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1421,7 +1421,7 @@
       "section": "inputs",
       "unit": "%",
       "value": -0.17,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1527,9 +1527,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H178"
       },
-      "formula": "118.73259 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 118.73259,
-      "explainer": "GiveWell's moral weight, 118.73259 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 118.733, is kept for the evaluator view.",
+      "published": 118.73259
     },
     {
       "id": "value_assigned_to_averting_a_death_of_a_person_under_age_5_w_2",
@@ -1582,19 +1583,29 @@
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "inputs",
-      "value": 0.30647,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H172"
-      }
+      },
+      "formula": "@givewell_shared.income_to_mortality_value_ratio",
+      "expected": 0.30647,
+      "explainer": "Reads the figure every GiveWell model shares: Value of long-term income gains as a share of the value of deaths averted (GiveWell) (`@givewell_shared.income_to_mortality_value_ratio`), the same number as this sheet's."
+    },
+    {
+      "id": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
+      "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC), at your discount rate and values",
+      "section": "inputs",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.30647,
+      "format": "number",
+      "explainer": "Changed for consistency. GiveWell values long-term income here as a fixed share of the value of the deaths averted, a ratio it took from its AMF and SMC models at its own values: income discounted at 4% over 40 years starting 10 years on, 1/ln 2 units of value per unit of ln(consumption), and its weight on a death. So in the sheet the income gain would grow with the weight on a life and ignore the discount rate, unlike in AMF and SMC. Our view rescales the ratio: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (which the value of deaths it multiplies already carries). At the defaults it is the sheet's ratio; the evaluator view keeps it."
     },
     {
       "id": "ratio_of_value_generated_from_income_increases_to_value_gene_2",
       "label": "Ratio of value generated from income increases to value generated from mortalities averted among people under age 15 by seasonal malaria chemoprevention (SMC)",
       "section": "main_cea",
-      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3",
+      "formula": "ratio_of_value_generated_from_income_increases_to_value_gene_3_at_shared_values",
       "expected": 0.30647
     },
     {
@@ -1603,7 +1614,7 @@
       "section": "inputs",
       "unit": "%",
       "value": -0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1786,15 +1797,15 @@
       "label": "Biased monitoring results",
       "section": "inputs",
       "unit": "%",
-      "value": -0.02,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!I197"
       },
       "explainer": "Overall, we believe that Helen Keller's coverage surveys are designed to measure key indicators of the success of VAS campaigns and to achieve samples that are generally representative of target populations. Helen Keller’s surveys use an audit procedure whereby supervisors re-survey a random sample of participants, and Helen Keller has increasingly begun to report the results from this procedure. This alleviates some of our initial concerns about the quality of Helen Keller's auditing procedure and gives us more confidence in the accuracy of the monitoring data. However, we note that the caregiver-reported nature of responses may produce bias in results. \n\nFor more information on our analysis of Helen Keller’s monitoring, see our grantee review here: https://www.givewell.org/charities/helen-keller-international#Methodology/ \n\nA detailed write up of our reasoning, accessible to GiveWell s",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.biased_monitoring_results",
+      "expected": -0.02
     },
     {
       "id": "biased_monitoring_results",
@@ -1811,7 +1822,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1835,7 +1846,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
@@ -1857,14 +1868,14 @@
       "label": "Within-org fungibility",
       "section": "inputs",
       "unit": "%",
-      "value": -0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!I201"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.within_org_fungibility",
+      "expected": -0.05
     },
     {
       "id": "within_org_fungibility",
@@ -1889,14 +1900,14 @@
       "label": "Short-term consequences of reduced infectious disease morbidity",
       "section": "inputs",
       "unit": "%",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H204"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.short_term_consequences_of_reduced_infectious_disease_m",
+      "expected": 0.06
     },
     {
       "id": "short_term_consequences_of_reduced_infectious_disease_morbid",
@@ -1935,14 +1946,15 @@
       "label": "Investment of income increases",
       "section": "inputs",
       "unit": "%",
-      "value": 0.03,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H206"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases_vas",
+      "expected": 0.03,
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases, vitamin A (GiveWell) (`@givewell_shared.investment_of_income_increases_vas`), the same number as this sheet's."
     },
     {
       "id": "investment_of_income_increases",
@@ -1981,14 +1993,15 @@
       "label": "Treatment costs averted from prevention",
       "section": "inputs",
       "unit": "%",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H209"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "expected": 0.2,
+      "explainer": "Reads the figure every GiveWell model shares: Treatment costs averted from prevention (GiveWell's supplemental adjustment) (`@givewell_shared.treatment_costs_averted`), the same number as this sheet's."
     },
     {
       "id": "treatment_costs_averted_from_prevention",
@@ -2004,14 +2017,14 @@
       "label": "Interaction between VAS and vaccines",
       "section": "inputs",
       "unit": "%",
-      "value": 0.015,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H210"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.interaction_between_vas_and_vaccines",
+      "expected": 0.015
     },
     {
       "id": "interaction_between_vas_and_vaccines",
@@ -2183,13 +2196,14 @@
       "label": "Counterfactual value per dollar spent by domestic governments on VAS programs",
       "section": "inputs",
       "unit": "UoV",
-      "value": 0.005057,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H227"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_government",
+      "expected": 0.005057,
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of domestic government spending (GiveWell) (`@givewell_shared.cf_value_government`), the same number as this sheet's."
     },
     {
       "id": "counterfactual_value_per_dollar_spent_by_domestic_government",
@@ -2824,13 +2838,14 @@
       "label": "Value generated per dollar donated to GiveDirectly's unconditional cash transfer program",
       "section": "inputs",
       "unit": "UoV",
-      "value": 0.0033545,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.0033545,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1L6D1mf8AMKoUHrN0gBGiJjtstic4RvqLZCxXZ99kdnA/edit",
         "cell": "Inputs!H185"
-      }
+      },
+      "explainer": "Changed for consistency: GiveWell's sheet used 0.0033545 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.0033545."
     },
     {
       "id": "value_generated_per_dollar_donated_to_givedirectly_s_uncondi",
@@ -2860,39 +2875,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs that mostly buy and hand out goods (nets, drugs, supplements, vaccines, water treatment): staff pay is a small part of the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_goods"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment."
+      "explainer": "Delivery staff are mostly hired locally at local rates, so the gap is small. Our judgment.",
+      "formula": "@staff_pay.gap_local_delivery"
     },
     {
       "id": "salary_sacrifice",

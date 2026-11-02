@@ -70,6 +70,15 @@
   ],
   "rows": [
     {
+      "id": "units_of_doubling_consumption_age_mix",
+      "label": "Age mix of these deaths, relative to the average death at five or over",
+      "format": "number",
+      "value": 0.7787800206035135,
+      "kind": "estimate",
+      "explainer": "Deaths from alcohol fall mostly in middle and older age (GiveWell's public-health-regulation moral weights). GiveWell's sheet values these deaths at 57 units of value, 0.779 of its average five-and-over death (73.1914), because of the ages they happen at. A measurement of ages on GiveWell's curve, not a different value of a life, so it stays; the band's value is the shared one.",
+      "section": "assumptions_overall"
+    },
+    {
       "id": "units_of_doubling_consumption",
       "label": "units of doubling consumption",
       "section": "assumptions_overall",
@@ -78,9 +87,40 @@
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F28"
       },
-      "explainer": "GiveWell's moral weight, 57 units of value, times your multiplier on the value of a life.\n\nGiveWell's public health regulation moral weights",
-      "formula": "57 * $life_value_multiplier",
+      "explainer": "The site's value of a death by age (facts: moral_weights.uov_per_death_over5) times the age mix of these deaths (above), times \"A child's life vs doubled-income year\" (Your values): 57 units of value at the defaults, as in GiveWell's sheet.",
+      "formula": "@moral_weights.uov_per_death_over5 * units_of_doubling_consumption_age_mix * $life_value_multiplier",
       "expected": 57.0
+    },
+    {
+      "id": "years_discount_rate",
+      "label": "Discount rate on the years of benefit",
+      "section": "calculations",
+      "formula": "$discount_rate",
+      "published": 0,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet adds up the years a policy is brought forward at face value; the site discounts every future benefit at your discount rate (Timing, under Your values). The evaluator view keeps 0."
+    },
+    {
+      "id": "policy_years_until_effect",
+      "label": "Years from the grant until the policy takes effect",
+      "section": "calculations",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, not GiveWell's: the sheet counts the policy's benefit from the grant on, but a campaign takes time to win and a law time to take effect (GiveWell's own question is whether the policy is in place within 5 years of a 3-year campaign). Three years on average, 1 to 5. The wait is discounted at your rate, as in every model that credits a won reform."
+    },
+    {
+      "id": "policy_wait_discount",
+      "label": "Discount for the wait until the policy takes effect",
+      "section": "calculations",
+      "formula": "(1 + $discount_rate) ^ -policy_years_until_effect",
+      "published": 1,
+      "format": "number",
+      "explainer": "Changed for consistency: a benefit that starts later is worth less at your discount rate. The evaluator view keeps 1 (the sheet doesn't discount the wait)."
     },
     {
       "id": "value_of_preventing_one_death_from_alcohol",
@@ -117,14 +157,14 @@
       "label": "Alcohol tax (Base)",
       "section": "assumptions_overall",
       "unit": "years",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F16"
       },
-      "explainer": "We are very uncertain about this assumption. 10 years is the default assumption Open Philanthropy Project uses in its policy work, based on our understanding from conversations with Open Philanthropy. We have not adjusted this parameter downwards because our understanding is there is little momentum towards more restrictive alcohol policy"
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years.\n\nWe are very uncertain about this assumption. 10 years is the default assumption Open Philanthropy Project uses in its policy work, based on our understanding from conversations with Open Philanthropy. We have not adjusted this parameter downwards because our understanding is there is little momentum towards more restrictive alcohol policy",
+      "formula": "$win_years_counted",
+      "published": 10.0
     },
     {
       "id": "number_of_years_brought_forward_vietnam",
@@ -151,7 +191,7 @@
       "label": "Internal validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -164,7 +204,7 @@
       "label": "External validity (Base)",
       "section": "assumptions_effectsize",
       "value": 1.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -256,7 +296,7 @@
       "section": "assumptions_overall",
       "unit": "%",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -355,13 +395,14 @@
       "label": "Advertising restrictions (Base)",
       "section": "assumptions_overall",
       "unit": "years",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F19"
-      }
+      },
+      "formula": "$win_years_counted",
+      "published": 10.0,
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
     },
     {
       "id": "number_of_years_brought_forward_vietnam_2",
@@ -388,7 +429,7 @@
       "label": "Internal validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -401,7 +442,7 @@
       "label": "External validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -496,13 +537,14 @@
       "label": "Drunk-driving countermeasures (Base)",
       "section": "assumptions_overall",
       "unit": "years",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F18"
-      }
+      },
+      "formula": "$win_years_counted",
+      "published": 10.0,
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
     },
     {
       "id": "number_of_years_brought_forward_vietnam_3",
@@ -529,7 +571,7 @@
       "label": "Internal validity",
       "section": "assumptions_effectsize",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -542,7 +584,7 @@
       "label": "External validity",
       "section": "assumptions_effectsize",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -650,13 +692,14 @@
       "label": "Reducing days and hours of sale (Base)",
       "section": "assumptions_overall",
       "unit": "years",
-      "value": 10.0,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F17"
-      }
+      },
+      "formula": "$win_years_counted",
+      "published": 10.0,
+      "explainer": "Changed for consistency. GiveWell credits the policy with 10 years brought forward. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps the sheet's years."
     },
     {
       "id": "number_of_years_brought_forward_vietnam_4",
@@ -683,7 +726,7 @@
       "label": "Internal validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -696,7 +739,7 @@
       "label": "External validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.85,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -744,7 +787,7 @@
       "label": "Effect on homicides (before adjustments) (Base)",
       "section": "assumptions_effectsize",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -757,7 +800,7 @@
       "label": "Internal validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -770,7 +813,7 @@
       "label": "External validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -817,7 +860,7 @@
       "label": "Effect on motor vehicle deaths (before adjustments) (Base)",
       "section": "assumptions_effectsize",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -830,7 +873,7 @@
       "label": "Internal validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -843,7 +886,7 @@
       "label": "External validity (Base)",
       "section": "assumptions_effectsize",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -985,7 +1028,7 @@
       "label": "Probability of working in country (Vietnam)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -1193,7 +1236,7 @@
       "label": "Probability of working in country (Nigeria)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -1401,7 +1444,7 @@
       "label": "Probability of working in country (Mexico)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -1609,7 +1652,7 @@
       "label": "Probability of working in country (Philippines)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -1817,7 +1860,7 @@
       "label": "Probability of working in country (Thailand)",
       "section": "calculations",
       "value": 0.4,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -2010,7 +2053,7 @@
       "label": "Probability of working in country (Ethiopia)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -2218,7 +2261,7 @@
       "label": "Probability of working in country (South Africa)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -2411,7 +2454,7 @@
       "label": "Probability of working in country (United Republic of Tanzania)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -2619,7 +2662,7 @@
       "label": "Probability of working in country (Myanmar)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -2827,7 +2870,7 @@
       "label": "Probability of working in country (Uganda)",
       "section": "calculations",
       "value": 0.2,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -3035,7 +3078,7 @@
       "label": "Probability of working in country (Kenya)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -3243,7 +3286,7 @@
       "label": "Probability of working in country (Cambodia)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -3451,7 +3494,7 @@
       "label": "Probability of working in country (Kazakhstan)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -3659,7 +3702,7 @@
       "label": "Probability of working in country (Belarus)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -3867,7 +3910,7 @@
       "label": "Probability of working in country (Cameroon)",
       "section": "calculations",
       "value": 0.12,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -4075,7 +4118,7 @@
       "label": "Probability of working in country (Colombia)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -4283,7 +4326,7 @@
       "label": "Probability of working in country (Ghana)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -4491,7 +4534,7 @@
       "label": "Probability of working in country (Burundi)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -4699,7 +4742,7 @@
       "label": "Probability of working in country (Serbia)",
       "section": "calculations",
       "value": 0.1,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
@@ -4900,14 +4943,14 @@
       "id": "givedirectly_units_of_value_generated_per_dollar_spent_befor",
       "label": "GiveDirectly units of value generated per dollar spent (before adjustments)",
       "section": "assumptions_overall",
-      "value": 0.0034,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.0034,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F29"
       },
-      "explainer": "2022 GiveWell cost-effectiveness analysis — version 4"
+      "explainer": "2022 GiveWell cost-effectiveness analysis — version 4. Changed for consistency: GiveWell's sheet used 0.0034 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.0034."
     },
     {
       "id": "givedirectly_units_of_value_generated_per_dollar_spent",
@@ -5140,39 +5183,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

@@ -1,16 +1,16 @@
 ### Summary
 
-Sociedade Vegetariana Brasileira (SVB) works with Brazilian schools and public institutions to replace some meat meals with plant-based ones. ACE's 2025 analysis of the institutional program works out to **<span data-figure="headline" data-model="sociedade-vegetariana-brasileira">30</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Sociedade Vegetariana Brasileira (SVB) works with Brazilian schools and public institutions to replace some meat meals with plant-based ones. ACE's 2025 analysis of the institutional program works out to **<span data-figure="headline" data-model="sociedade-vegetariana-brasileira">24</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 11 of ACE's intermediate figures.
 
 ### How the impact happens
 
-Institutions commit to serving plant-based meals; each replaced meal means fewer animals raised, weighted by the suffering in their lives; the change lasts some years. Most of that suffering falls on fish, which we weigh against a chicken by Rethink Priorities' estimates (about a fifth of a chicken).
+Institutions commit to serving plant-based meals; each replaced meal means fewer animals raised (a little less than one meal's worth, since others eat a little more as prices fall), weighted by the suffering in their lives; the change counts for some years before it would have come anyway. Most of that suffering falls on fish, which we weigh against a chicken by Rethink Priorities' estimates (about a fifth of a chicken).
 
 ### What drives the result
 
-**How much suffering a replaced meal spares** (about 2.8 to 58 years of healthy life per $1,000 on its own) and **how much a fish can suffer relative to a chicken** (6.6 to 190) move the result most. Among SVB's own inputs, **years of impact**, how long institutions keep the change, matters most (20 to 42).
+**How much a fish can suffer relative to a chicken** (about 4.6 to 150 years of healthy life per $1,000 on its own) and **how much suffering a replaced meal spares** (2.6 to 45) move the result most. Next comes **how many years a won reform counts** (6.4 to 41 over the slider's 1 to 20 years), where ACE uses 5.5 years for how long institutions keep the change.
 
 ### What isn't modelled
 
@@ -19,10 +19,12 @@ SVB's other programs aren't in ACE's analysis, and are left out rather than assu
 ### Where we differ from ACE
 
 - **Suffering per meal (changed for consistency).** ACE uses 0.084 days of suffering per meal replaced for SVB; we use the shared 0.90 (ACE's figure for Sinergia Animal's canteen meals), so the same change counts the same in every model. ACE's own figure, 11, still reproduces in its own view.
+- **Years counted (changed for consistency).** ACE counts 5.5 years (3 to 10) of each institution's change; we use the shared "Years a won reform counts before it would have come anyway", 5 by default, as for every won reform.
+- **Production response (changed for consistency).** A meal not eaten cuts production by 0.76 of a meal, as in every diet-change model; ACE counts 1.
 - **Species weights.** Ambitious Impact's weights come out of ACE's figures and Rethink Priorities' go in, relative to a chicken; the chicken slider (default 33%) sets how a chicken's pain compares with a person's.
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them.
-
+- **Past average, not the next dollar (ours):** ACE's estimate divides SVB's past spending by the institutions it won over to plant-based meals, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
 
 ### Sources
 

@@ -1,0 +1,314 @@
+{
+  "id": "versus-arthritis-sogive-upper-bound",
+  "name": "Versus Arthritis (SoGive, upper bound)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "versus-arthritis",
+  "owner": "sogive",
+  "summary": "Funds arthritis research and runs information, support and awareness work in the UK. SoGive's upper bound on its cost per life-saved equivalent, which SoGive calls unlikely to be reached; shown, not ranked.",
+  "source": {
+    "publisher": "SoGive",
+    "title": "Versus Arthritis: SoGive rating and analysis (upper bound)",
+    "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+    "published": "2021-01-01",
+    "retrieved": "2026-10-30",
+    "license": "No licence on the page. SoGive's data terms (sogive.org/doc/getourdata.html, archived September 2019): data for charity analysis is free with attribution to SoGive; use in apps needs a licence, free for low-intensity use, on condition that users are told the source of impact assessments with a link back to SoGive. This model cites SoGive and links its page."
+  },
+  "resources": [
+    {
+      "title": "SoGive, Versus Arthritis analysis (record arthritis-research-uk)",
+      "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+      "type": "evaluation",
+      "note": "SoGive's charity page (its analysis text); SoGive publishes no spreadsheet for it, so the model is built from the figures stated in the text, each quoted on its row. Rated \"Not Recommended (tentative)\". Undated; it uses GBD 2019 and 2018 research spending data, so the date here (2021) is our estimate."
+    },
+    {
+      "title": "Versus Arthritis",
+      "url": "https://www.versusarthritis.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "SoGive",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "research",
+      "title": "Research: SoGive's upper bound",
+      "explainer": "SoGive assumes global arthritis research each year is worth averting a whole year of the world's disease burden from osteoarthritis, rheumatoid arthritis and gout, and credits Versus Arthritis with the UK charity sector's share of world health research. SoGive's own words: an upper bound under assumptions it calls unlikely, offered to show the charity misses its benchmark even then. It is not a central estimate, so this model is shown on the charity's page but never ranks."
+    },
+    {
+      "id": "services",
+      "title": "Information, services and awareness: SoGive's upper bound",
+      "explainer": "SoGive assumes this work is worth averting a whole year of the UK's burden from the three diseases."
+    },
+    {
+      "id": "bottom",
+      "title": "SoGive's bottom line (an upper bound)"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From pounds per life-saved equivalent to healthy years per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' steps after SoGive's bottom line: back to healthy years at SoGive's own 50 per life, pounds to dollars, and the research lag discounted at the shared rate."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "global_arthritis_dalys",
+      "section": "research",
+      "label": "World disease burden from osteoarthritis, rheumatoid arthritis and gout, 2019 (DALYs)",
+      "format": "integer",
+      "value": 23880000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "Osteoarthritis: 314.5k DALYs in the UK, and 18.95M DALYs globally. Rheumatoid arthritis: 66.7k DALYs in the UK, and 3.26M DALYs globally. Gout: 21.8k DALYs in the UK, and 1.67M DALYs globally.",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "18.95 + 3.26 + 1.67 million, from the Global Burden of Disease 2019 (SoGive: \"averting 23.9M DALYs is the hypothesised upper bound\")."
+    },
+    {
+      "id": "uk_share_of_health_research",
+      "section": "research",
+      "label": "UK share of the world's health research spending",
+      "format": "percent",
+      "value": 0.109,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "The ratio between the UK health GERD and the global health GERD was estimated to be 10.9% (= £13.1G / £120G).",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "charity_share_of_uk_research",
+      "section": "research",
+      "label": "UK charities' share of UK health research spending",
+      "format": "percent",
+      "value": 0.0666,
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "the expenditure related to health of the private non-profit sector (charities) in the UK was £577M, which represents 6.66%",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive credits all of it to Versus Arthritis: \"assuming that Versus Arthritis was responsible for all the arthritis research respecting UK charities (what tends to overestimate its impact)\"."
+    },
+    {
+      "id": "research_dalys",
+      "section": "research",
+      "label": "DALYs averted a year by its research (upper bound)",
+      "format": "integer",
+      "formula": "global_arthritis_dalys * uk_share_of_health_research * charity_share_of_uk_research",
+      "expected": 173354.472,
+      "explainer": "SoGive: \"averting 173k DALYs (= 0.725% * 23.9M) is the hypothesised upper bound for the annual impact of Versus Arthritis research\"."
+    },
+    {
+      "id": "uk_arthritis_dalys",
+      "section": "services",
+      "label": "UK disease burden from the three diseases, 2019 (DALYs)",
+      "format": "integer",
+      "value": 403000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "403k DALYs is the upper bound for the annual impact of Versus Arthritis information, services and awareness work",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "314.5k + 66.7k + 21.8k."
+    },
+    {
+      "id": "research_spend_gbp",
+      "section": "bottom",
+      "label": "Spending on research (£)",
+      "format": "integer",
+      "unit": "£",
+      "value": 22800000,
+      "kind": "observed",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "the expenditure on research of £22.8M, and the expenditure on information, services and awareness of £20.4M",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "services_spend_gbp",
+      "section": "bottom",
+      "label": "Spending on information, services and awareness (£)",
+      "format": "integer",
+      "unit": "£",
+      "value": 20400000,
+      "kind": "observed",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "the expenditure on research of £22.8M, and the expenditure on information, services and awareness of £20.4M",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "dalys_per_life",
+      "section": "bottom",
+      "label": "SoGive's DALYs per life-saved equivalent (its exchange rate; these DALYs are mostly illness)",
+      "format": "number",
+      "value": 50,
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=arthritis-research-uk",
+        "page": "Cost-effectiveness analysis",
+        "quote": "it is considered that saving one life is equivalent to averting 50 -DALYs",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive's conversion, from Open Philanthropy."
+    },
+    {
+      "id": "lives_equivalent",
+      "section": "bottom",
+      "label": "Life-saved equivalents a year (upper bound)",
+      "format": "integer",
+      "formula": "(research_dalys + uk_arthritis_dalys) / dalys_per_life",
+      "expected": 11527.08944,
+      "explainer": "SoGive: \"the total impact of Versus Arthritis is equivalent to saving 11.5k lives\"."
+    },
+    {
+      "id": "cost_per_life_gbp",
+      "section": "bottom",
+      "label": "Cost per life-saved equivalent (£, upper bound)",
+      "format": "number",
+      "unit": "£",
+      "formula": "(research_spend_gbp + services_spend_gbp) / lives_equivalent",
+      "expected": 3747.693659,
+      "explainer": "SoGive: \"For these two activities, £4k per life saved\". SoGive's own words: an upper bound under assumptions it calls unlikely, offered to show the charity misses its benchmark even then. It is not a central estimate, so this model is shown on the charity's page but never ranks. SoGive adds: \"we are tempted to believe these do not achieve an outcome as good as averting the burden of disease of osteoarthritis, rheumatoid arthritis and gout in the UK for over one year.\" (Its summary gives different, rounder numbers, 760k and 400k years and £2k a life; the figures here follow its calculation section.)"
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "per_dollar",
+      "label": "US dollars per pound, 2021",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2021",
+      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact)."
+    },
+    {
+      "id": "research_dalys_share",
+      "section": "per_dollar",
+      "label": "Research's share of the healthy years",
+      "format": "percent",
+      "formula": "research_dalys / (research_dalys + uk_arthritis_dalys)",
+      "explainer": "The research part of SoGive's upper bound."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future health",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "research_lag_years",
+      "section": "per_dollar",
+      "label": "Years from paying for research to the health it brings",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 10,
+        "best": 15,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as for Breast Cancer Now (Glover et al. 2014 put the lag for UK cancer research at about 15 years). SoGive counts research's health gains in the same year as the spending."
+    },
+    {
+      "id": "timing_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for the research lag",
+      "format": "number",
+      "formula": "(1 - research_dalys_share) + research_dalys_share * (1 + discount_rate_per_year) ^ -research_lag_years",
+      "explainer": "Support and information work helps people now; research helps years later."
+    },
+    {
+      "id": "dalys_per_dollar_cash",
+      "section": "per_dollar",
+      "label": "Healthy years per dollar (upper bound)",
+      "format": "small",
+      "formula": "dalys_per_life * timing_factor / (cost_per_life_gbp * usd_per_gbp)",
+      "explainer": "Back to healthy years at SoGive's own 50 per life saved, in dollars, with the research lag discounted. Still SoGive's upper bound."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Default for a UK charity that both delivers services and funds others: a little under half the cost is staff. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "UK charity staff earn somewhat less than in comparable private-sector jobs. Our judgment.",
+      "formula": "@staff_pay.gap_uk_charity"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "staff_pay",
+      "label": "Healthy years per dollar donated (upper bound)",
+      "format": "small",
+      "unit": "DALYs per $",
+      "formula": "dalys_per_dollar_cash * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_dollar",
+    "unit": "daly",
+    "label": "Healthy years per dollar (upper bound)",
+    "native": {
+      "row": "cost_per_life_gbp",
+      "unit": "£ per life-saved equivalent (upper bound)"
+    }
+  }
+}

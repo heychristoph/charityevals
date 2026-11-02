@@ -5,6 +5,7 @@
 // with a hand-written evaluation when there is one (the script never overwrites a file without it).
 import { existsSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { LIVELIHOODS_ONLY, MOVED_MONEY_ROWS, SUCCESS_FACT, TLYCS_SPLIT, sameFormula } from "../src/engine/moved-money";
 import { buildLibrary, assumptionValues, comparable, headline, modelsOf, type ResolvedModel } from "../src/engine/model";
 import { primaryModel } from "../src/engine/ranking";
 import { formatYears, plainModelName } from "../src/lib/format";
@@ -39,6 +40,25 @@ const fidelity = (m: ResolvedModel) => {
 };
 const url = (m: ResolvedModel) => (primaryModel(lib, m.charity)?.id === m.id ? `/${m.charity}` : `/${m.charity}/${m.id}`);
 
+/** A meta charity's model values the money it moves by the site's shared method (docs/normalization.md
+ * 2.8): what that changes from the evaluator's own valuation, in a sentence or two. */
+function movedMoney(m: ResolvedModel, name: string): string | undefined {
+  const v = m.byId.get("moved_dollar_value");
+  if (!v) return undefined;
+  const owner = lib.owners.get(m.owner)!.name;
+  const mix = sameFormula(v.formula, MOVED_MONEY_ROWS.moved_dollar_value.formula);
+  const where = mix
+    ? "where effective donors give (Giving What We Can's split: about 60% global health, 10% animals, 10% longtermist causes, which the site doesn't value), each at its live result on this site"
+    : sameFormula(v.formula, LIVELIHOODS_ONLY.formula)
+      ? "the livelihoods charities the site models (it has published no list of its own yet), each at its live result on this site (GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund)"
+      : sameFormula(v.formula, TLYCS_SPLIT.formula)
+        ? "its own published split of the money it moved, each charity at its live result on this site"
+        : "GiveWell's Top Charities, each at its live result on this site (where its money goes: its work is in global health and poverty)";
+  const net = m.byId.has("moved_dollar_net_value") ? " Half the money is counted as new; the rest only for the gain over GiveDirectly." : "";
+  const success = m.rows.some((r) => r.factDeps.includes(SUCCESS_FACT)) ? " A new organisation's chance of success is the site's shared 56%, taken as an expected value over success and failure (a failed organisation still moves 20% of the money and spends for three years), the same step for every new meta organisation." : "";
+  return `**Where we differ from ${owner}.** ${name} works through the money it moves or redirects, not a programme of its own, so our view values each such dollar the way the site values every meta charity's: by ${where}, so the sliders move it too.${net}${success} ${owner}'s own valuation stays in the evaluator view. [How money moved is valued](https://github.com/heychristoph/charityevals/blob/main/docs/normalization.md#28-money-moved-success-and-career-changes-one-method-october-2026).`;
+}
+
 let written = 0;
 for (const c of lib.charities.values()) {
   const models = modelsOf(lib, c.id);
@@ -58,7 +78,7 @@ for (const c of lib.charities.values()) {
   const guess = models.filter((m) => m.source?.sheet?.includes("guesstimate"));
   const lines = [
     MARK,
-    `${c.summary ?? c.name} ${owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
+    `${c.summary ?? c.name} ${owners.length > 2 ? `${owners.slice(0, -1).join(", ")} and ${owners.at(-1)}` : owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
       `the most recent, from ${month(main.source?.published)}, puts it at **${result(main)}**.`,
     "",
     "| Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |",
@@ -68,6 +88,11 @@ for (const c of lib.charities.values()) {
       return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | ${lib.owners.get(m.owner)!.short} | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""} |`;
     }),
     "",
+    ...(main.theoretical
+      ? [`**Purely theoretical.** ${lib.owners.get(main.owner)!.name}'s estimate is of the idea, written before ${c.name} existed, not of the charity's own results. ` +
+        `It is shown because ${c.name} runs the programme today ([checked ${month(main.theoretical.checked)}](${main.theoretical.url})) and no model of its actual work exists yet.`, ""]
+      : []),
+    ...(movedMoney(main, c.name) ? [movedMoney(main, c.name)!, ""] : []),
     `We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).`,
     "",
   ];

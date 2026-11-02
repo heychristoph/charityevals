@@ -1,0 +1,280 @@
+{
+  "id": "motor-neurone-disease-association-sogive-upper-bound",
+  "name": "MND Association (SoGive, upper bound)",
+  "kind": "charity",
+  "cause": "global-health",
+  "charity": "mnd-association",
+  "owner": "sogive",
+  "summary": "Supports people with motor neurone disease in England, Wales and Northern Ireland, funds research and campaigns. SoGive's upper bound on its cost per healthy year, which SoGive calls an unlikely scenario; shown, not ranked.",
+  "source": {
+    "publisher": "SoGive",
+    "title": "Motor Neurone Disease Association: SoGive rating and analysis (upper bound)",
+    "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+    "published": "2021-01-01",
+    "retrieved": "2026-10-30",
+    "license": "No licence on the page. SoGive's data terms (sogive.org/doc/getourdata.html, archived September 2019): data for charity analysis is free with attribution to SoGive; use in apps needs a licence, free for low-intensity use, on condition that users are told the source of impact assessments with a link back to SoGive. This model cites SoGive and links its page."
+  },
+  "resources": [
+    {
+      "title": "SoGive, MND Association analysis",
+      "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+      "type": "evaluation",
+      "note": "SoGive's charity page (its analysis text); SoGive publishes no spreadsheet for it, so the model is built from the figures stated in the text, each quoted on its row. Rated \"Not Recommended (firm)\". Undated; it uses the 2020 annual report, so the date here (2021) is our estimate."
+    },
+    {
+      "title": "MND Association",
+      "url": "https://www.mndassociation.org",
+      "type": "charity"
+    }
+  ],
+  "evaluator": {
+    "name": "SoGive",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0
+    }
+  },
+  "sections": [
+    {
+      "id": "care",
+      "title": "Care and support: SoGive's upper bound"
+    },
+    {
+      "id": "research",
+      "title": "Research: SoGive's upper bound"
+    },
+    {
+      "id": "bottom",
+      "title": "SoGive's bottom line (an upper bound)"
+    },
+    {
+      "id": "per_dollar",
+      "title": "From pounds per healthy year to healthy years per dollar",
+      "kind": "ours",
+      "explainer": "charityevals' steps after SoGive's bottom line: pounds to dollars, and the research lag discounted at the shared rate."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours",
+      "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
+    }
+  ],
+  "rows": [
+    {
+      "id": "care_spend_gbp",
+      "section": "care",
+      "label": "Spending on care and support, 2020 (£)",
+      "format": "integer",
+      "unit": "£",
+      "value": 9000000,
+      "kind": "observed",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+        "page": "Cost-effectiveness analysis",
+        "quote": "Taking the total expenditure on care and support, £9 million, and our estimate of 4,000 people supported",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "people_supported",
+      "section": "care",
+      "label": "People supported in a year",
+      "format": "integer",
+      "value": 4000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+        "page": "Cost-effectiveness analysis",
+        "quote": "we can settle on 4,000 as a crude estimate of the number of people supported during 2020. This is likely an overestimate",
+        "retrieved": "2026-10-30"
+      }
+    },
+    {
+      "id": "dalys_per_person_supported",
+      "section": "care",
+      "label": "Healthy years per person supported (upper bound)",
+      "format": "number",
+      "value": 1,
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+        "page": "Cost-effectiveness analysis",
+        "quote": "Even in the unlikely scenario that MNDA's care and support activities are equivalent to one DALY averted for each individual supported in a given year",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive's own words: an upper bound under assumptions it calls unlikely, offered to show the charity misses its benchmark even then. It is not a central estimate, so this model is shown on the charity's page but never ranks."
+    },
+    {
+      "id": "care_dalys",
+      "section": "care",
+      "label": "Healthy years a year from care and support (upper bound)",
+      "format": "integer",
+      "formula": "people_supported * dalys_per_person_supported",
+      "expected": 4000
+    },
+    {
+      "id": "research_cost_per_daly_gbp",
+      "section": "research",
+      "label": "Research cost per healthy year (£, upper bound)",
+      "format": "number",
+      "unit": "£",
+      "value": 100,
+      "kind": "judgment",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+        "page": "Cost-effectiveness analysis",
+        "quote": "and supposing their research activities avert one DALY for each £100 spent",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive's generous end for biomedical research (some vaccines); it puts cancer research nearer £2,000. SoGive's own words: an upper bound under assumptions it calls unlikely, offered to show the charity misses its benchmark even then. It is not a central estimate, so this model is shown on the charity's page but never ranks."
+    },
+    {
+      "id": "research_spend_gbp",
+      "section": "research",
+      "label": "Spending on research (£, implied)",
+      "format": "integer",
+      "unit": "£",
+      "value": 3900000,
+      "kind": "estimate",
+      "source": {
+        "title": "SoGive, charity analysis",
+        "url": "https://app.sogive.org/#charity?charityId=motor-neurone-disease-association",
+        "page": "Cost-effectiveness analysis",
+        "quote": "their average cost effectiveness would still be around £300 per DALY averted (without accounting for campaigning)",
+        "retrieved": "2026-10-30"
+      },
+      "explainer": "SoGive doesn't state the research spending it used. £3.9m is the amount that makes its stated pieces give its £300 (solving (9m + R) ÷ (4,000 + R ÷ 100) = 300); our back-calculation, not SoGive's number."
+    },
+    {
+      "id": "research_dalys",
+      "section": "research",
+      "label": "Healthy years a year from research (upper bound)",
+      "format": "integer",
+      "formula": "research_spend_gbp / research_cost_per_daly_gbp",
+      "expected": 39000
+    },
+    {
+      "id": "cost_per_daly_gbp",
+      "section": "bottom",
+      "label": "Cost per healthy year (£, upper bound)",
+      "format": "number",
+      "unit": "£",
+      "formula": "(care_spend_gbp + research_spend_gbp) / (care_dalys + research_dalys)",
+      "expected": 300,
+      "explainer": "SoGive: \"their average cost effectiveness would still be around £300 per DALY averted (without accounting for campaigning), which does not meet SoGive's Gold standard\". SoGive's own words: an upper bound under assumptions it calls unlikely, offered to show the charity misses its benchmark even then. It is not a central estimate, so this model is shown on the charity's page but never ranks. SoGive's own basis for its rating is the care cost, about £2,250 a person a year, which it judges unlikely to do as much good as averting 11 years of severe depression."
+    },
+    {
+      "id": "usd_per_gbp",
+      "section": "per_dollar",
+      "label": "US dollars per pound, 2021",
+      "format": "number",
+      "formula": "@fx.usd_per_gbp_2021",
+      "explainer": "charityevals' step: SoGive's figure is in pounds; the site counts per dollar, so the pounds are converted at the year's average exchange rate (shared fact)."
+    },
+    {
+      "id": "research_dalys_share",
+      "section": "per_dollar",
+      "label": "Research's share of the healthy years",
+      "format": "percent",
+      "formula": "research_dalys / (care_dalys + research_dalys)",
+      "explainer": "The research part of SoGive's upper bound."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future health",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). SoGive doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "research_lag_years",
+      "section": "per_dollar",
+      "label": "Years from paying for research to the health it brings",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 10,
+        "best": 15,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as for Breast Cancer Now (Glover et al. 2014 put the lag for UK cancer research at about 15 years). SoGive counts research's health gains in the same year as the spending."
+    },
+    {
+      "id": "timing_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for the research lag",
+      "format": "number",
+      "formula": "(1 - research_dalys_share) + research_dalys_share * (1 + discount_rate_per_year) ^ -research_lag_years",
+      "explainer": "Support and information work helps people now; research helps years later."
+    },
+    {
+      "id": "dalys_per_dollar_cash",
+      "section": "per_dollar",
+      "label": "Healthy years per dollar (upper bound)",
+      "format": "small",
+      "formula": "timing_factor / (cost_per_daly_gbp * usd_per_gbp)",
+      "explainer": "SoGive's upper bound in dollars, with the research lag discounted."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Default for a UK charity that both delivers services and funds others: a little under half the cost is staff. Our judgment; we haven't seen this charity's breakdown."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "explainer": "UK charity staff earn somewhat less than in comparable private-sector jobs. Our judgment.",
+      "formula": "@staff_pay.gap_uk_charity"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "staff_pay",
+      "label": "Healthy years per dollar donated (upper bound)",
+      "format": "small",
+      "unit": "DALYs per $",
+      "formula": "dalys_per_dollar_cash * donor_cost_share",
+      "explainer": "The figure per dollar above; with credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_dollar",
+    "unit": "daly",
+    "label": "Healthy years per dollar (upper bound)",
+    "native": {
+      "row": "cost_per_daly_gbp",
+      "unit": "£ per DALY averted (upper bound)"
+    }
+  }
+}

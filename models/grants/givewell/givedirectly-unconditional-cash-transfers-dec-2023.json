@@ -12,7 +12,7 @@
     "title": "GiveWell's CEA for GiveDirectly's unconditional cash transfers [Dec 2023] (public)",
     "url": "https://www.givewell.org/research/grants/ALIMA-malnutrition-Ngouri-NDjamena-February-2024",
     "sheet": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
-    "published": "2021-05-27",
+    "published": "2023-12-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -213,15 +213,15 @@
       "label": "Percentage of transfers invested",
       "section": "inputs",
       "unit": "%",
-      "value": 0.39,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
         "cell": "Inputs!H23"
       },
       "explainer": "Haushofer & Shapiro 2013",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.percentage_of_transfers_invested",
+      "expected": 0.39
     },
     {
       "id": "percentage_of_transfers_invested",
@@ -246,15 +246,15 @@
       "label": "Return on investment",
       "section": "inputs",
       "unit": "%",
-      "value": 0.1,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
         "cell": "Inputs!H24"
       },
       "explainer": "GW guesstimate GW's report on cash transfers",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.return_on_investment",
+      "expected": 0.1
     },
     {
       "id": "return_on_investment",
@@ -292,15 +292,15 @@
       "label": "Percent of investment returned when benefits end",
       "section": "inputs",
       "unit": "%",
-      "value": 0.2,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
         "cell": "Inputs!H27"
       },
       "explainer": "GW guesstimate",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.percent_of_investment_returned_when_benefits_end",
+      "expected": 0.2
     },
     {
       "id": "percent_of_investment_returned_when_benefits_end",
@@ -477,7 +477,7 @@
         "cell": "Inputs!H35"
       },
       "explainer": "A doubling of consumption, valued through the shared `uov_per_ln_consumption` (per unit of ln(consumption)) times ln(2); GiveWell's sheet uses 1 per doubling.\n\nGW value judgment GW's moral weights and discount rate",
-      "formula": "$uov_per_ln_consumption * 0.6931471805599453",
+      "formula": "$uov_per_ln_consumption * ln(2)",
       "expected": 1.0
     },
     {
@@ -589,7 +589,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
@@ -613,7 +613,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
@@ -646,7 +646,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
@@ -670,7 +670,7 @@
       "section": "inputs",
       "unit": "%",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
@@ -693,15 +693,15 @@
       "label": "Within-org fungibility",
       "section": "inputs",
       "unit": "%",
-      "value": -0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
         "cell": "Inputs!H51"
       },
       "explainer": "GW guestimate",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.within_org_fungibility",
+      "expected": -0.05
     },
     {
       "id": "within_org_fungibility",
@@ -780,15 +780,15 @@
       "label": "Child mortality effects",
       "section": "inputs",
       "unit": "%",
-      "value": 0.04,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1ZWoQhJwsSkM01rvnDPrKd0wSG7aayK5RMiHdNAAKoL4/edit",
         "cell": "Inputs!H57"
       },
       "explainer": "GW guestimate GW's supplemental intervention-level adjustments",
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.child_mortality_effects",
+      "expected": 0.04
     },
     {
       "id": "total_supplemental_intervention_level_adjustment",
@@ -812,26 +812,16 @@
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.04,
-        "best": 0.08,
-        "high": 0.12
-      },
-      "kind": "judgment",
-      "explainer": "About 16% of GiveDirectly's costs are not transfers; we guess half of that is staff pay, as in our GiveDirectly model."
+      "explainer": "About 16% of GiveDirectly's costs are not transfers; we guess half of that is staff pay, as in our GiveDirectly model.",
+      "formula": "@staff_pay.share_givedirectly"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as in our GiveDirectly model."
+      "explainer": "Our judgment, as in our GiveDirectly model.",
+      "formula": "@staff_pay.gap_givedirectly"
     },
     {
       "id": "salary_sacrifice",

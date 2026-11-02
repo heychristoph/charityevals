@@ -95,7 +95,7 @@ export type Row = z.infer<typeof Row>;
 export const RowPatch = z.object({ ...rowShape, label: z.string().optional() }).strict();
 export type RowPatch = z.infer<typeof RowPatch>;
 
-export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety"]);
+export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety", "climate"]);
 
 /** Intervention families for charityevals' own models (the build-cea skill). Each prescribes a row
  * structure, so models of the same family can be compared row by row. */
@@ -133,7 +133,7 @@ export const Charity = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/),
     name: z.string(),
-    cause: z.enum(["global-health", "animal-welfare", "ai-safety"]),
+    cause: Cause,
     website: z.string().url().optional(),
     /** Where to give: the charity's own donation page, or an evaluator's form for it. */
     donate: z.string().url().optional(),
@@ -237,10 +237,30 @@ export const Model = z
       })
       .strict()
       .optional(),
+    /** A purely theoretical estimate: written about an idea before the charity existed (Ambitious
+     * Impact's idea reports), not from the charity's own results. Shown only while the charity runs the
+     * modelled programme and no model of its actual work exists (owner decision 2026-10-31); the site
+     * flags it wherever the model or its dot appears. */
+    theoretical: z
+      .object({
+        /** Why it is theoretical, in one sentence. */
+        reason: z.string(),
+        /** Evidence the charity runs the modelled programme today (what it runs, where). */
+        runs: z.string(),
+        /** The page that evidence is from. */
+        url: z.string().url(),
+        /** When it was checked (YYYY-MM-DD). */
+        checked: z.string(),
+      })
+      .strict()
+      .optional(),
     /** Imported by a generic converter (scripts/convert-sheet.py, convert-guesstimate.py) and traced
      * from the evaluator's sheet. scripts/link-parameters.py ties its moral weights, discount rate and
      * DALY value to the shared assumptions, and shared data to facts. */
     bulk: z.boolean().optional(),
+    /** Set by scripts/summaries.ts on a bulk model's browser stand-in whose full rows make it a
+     * value-of-information sheet: the stand-in folds those rows away, so the browser can't tell. */
+    value_of_information: z.boolean().optional(),
     /** How to reproduce the evaluator's own model: the assumption values it used. In the
      * evaluator view these replace the visitor's (exchange rates between causes stay theirs). */
     evaluator: z
@@ -255,7 +275,8 @@ export const Unit = z
   .object({
     label: z.string(),
     short: z.string(),
-    /** Formula over $assumptions: how many common units one of this unit is worth. Every unit a
+    /** Formula over $assumptions and @facts (and, by bare id, fixed rows of the model it converts,
+     * docs/normalization.md 2.5): how many common units one of this unit is worth. Every unit a
      * charity model reports in needs one (`npm run check` fails otherwise); a model in a unit
      * without one would get a page in its own unit but drop off the rankings. */
     to_common: z.string().optional(),

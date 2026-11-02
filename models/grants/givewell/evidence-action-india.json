@@ -56,15 +56,15 @@
       "id": "cost_per_under_5_life_equivalent_saved_givedirectly",
       "label": "Cost per under-5 life equivalent saved, GiveDirectly",
       "section": "sheet1",
-      "value": 11663.0,
-      "kind": "estimate",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar",
+      "published": 11663.0,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1fP1BvuYZJyGWB42y0tcGS1mX36bJCw0sulfy7WCsSew/edit",
         "cell": "Sheet1!B19"
       },
-      "explainer": "Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018",
-      "format": "usd"
+      "format": "usd",
+      "explainer": "Changed for consistency. GiveWell's 2017 sheets count every outcome in under-five life-equivalents and price one at $11,663 given to GiveDirectly, at that year's moral weights between deaths and income. The site values a life-equivalent as an under-five death averted, the same in every model: GiveWell's current moral weight, 116.25 units of value, times the weight on a life under Your values. A dollar given to GiveDirectly is worth the shared cash benchmark (0.00335 units of value), so GiveDirectly's cost per life-equivalent here is 116.25 / 0.00335, about $34,700. Steps the sheet states as a multiple of cash keep their multiple (this figure cancels out of them); steps stated as a cost per life-equivalent are valued as under-five deaths. The evaluator view keeps $11,663.\n\nGiveWell's note: Median from https://docs.google.com/spreadsheets/d/13b_qt-G_TQtoYNznNak3_5dzvzgCSUPJnk3l5dMisJo/edit#gid=1034883018"
     },
     {
       "id": "cost_of_scoping",
@@ -188,13 +188,22 @@
         "url": "https://docs.google.com/spreadsheets/d/1fP1BvuYZJyGWB42y0tcGS1mX36bJCw0sulfy7WCsSew/edit",
         "cell": "Sheet1!B26"
       },
-      "explainer": "We don't have any info. My recollection from a previous investigation is that my best guess was that a charity may ORS coverage by ~2% per year relative to the counterfactual. Let's assume EvAc does better and gets an increase of ~5%/year for a few years at peak effectiveness. Could look back at Deworm the World's experience as a prior, but couldn't easily track down that data."
+      "explainer": "We don't have any info. My recollection from a previous investigation is that my best guess was that a charity may ORS coverage by ~2% per year relative to the counterfactual. Let's assume EvAc does better and gets an increase of ~5%/year for a few years at peak effectiveness. Could look back at Deworm the World's experience as a prior, but couldn't easily track down that data.\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
+    },
+    {
+      "id": "years_discount_rate",
+      "section": "sheet1",
+      "label": "Discount rate on the years of benefit",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "published": 0.0,
+      "explainer": "Changed for consistency. GiveWell's sheet adds up the years a benefit lasts at face value here, so a benefit in a later year counts as much as one now. The site discounts every future benefit at one shared rate (Next year's good counts less by, under Your values): each year counted here is worth (1 + rate)^-t of a year now, the first one in full. The evaluator view keeps no discounting."
     },
     {
       "id": "number_of_additional_person_years_of_treatment_due_to_evac_t",
       "label": "Number of additional person-years of treatment due to EvAc technical assistance",
       "section": "sheet1",
-      "formula": "targeted_population_in_median_indian_state * (coverage_rate_with_evac_technical_assistance - existing_coverage_rate) * number_of_years_with_higher_coverage",
+      "formula": "targeted_population_in_median_indian_state * (coverage_rate_with_evac_technical_assistance - existing_coverage_rate) * pv_annuity_due(1, years_discount_rate, number_of_years_with_higher_coverage)",
       "expected": 1125000.0
     },
     {
@@ -288,13 +297,13 @@
         "url": "https://docs.google.com/spreadsheets/d/1fP1BvuYZJyGWB42y0tcGS1mX36bJCw0sulfy7WCsSew/edit",
         "cell": "Sheet1!B36"
       },
-      "explainer": "Calculation"
+      "explainer": "Calculation\n\nIn our view these years are discounted at the shared rate (Discount rate on the years of benefit); the evaluator view counts them at face value."
     },
     {
       "id": "government_funds_spent_on_ifa_due_to_evac_technical_assistan",
       "label": "Government funds spent on IFA due to EvAc technical assistance",
       "section": "sheet1",
-      "formula": "amount_of_government_funds_crowded_in * number_of_years_of_government_funds_crowded_in",
+      "formula": "amount_of_government_funds_crowded_in * pv_annuity_due(1, years_discount_rate, number_of_years_of_government_funds_crowded_in)",
       "expected": 4500000.0,
       "format": "usd"
     },
@@ -352,39 +361,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

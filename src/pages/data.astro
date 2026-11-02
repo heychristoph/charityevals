@@ -13,23 +13,29 @@ for (const f of lib.facts.values()) groups.set(place(f.group), [...(groups.get(p
 const usedBy = (key: string) => [...lib.models.values()].filter((m) => m.rows.some((r) => r.factDeps.includes(key)) && !m.extends);
 // Assumption defaults derived from facts name them in source.note (e.g. "@ace.dvf_sads_per_meal / ...").
 const citedBy = (key: string) => lib.assumptions.rows.filter((a) => new RegExp(`@${key.replace(".", "\\.")}\\b`).test(a.source?.note ?? ""));
-// Rates taken from evidence rather than judgment: fixed, so they aren't in the values panel.
+// Fixed rates: not sliders, so they aren't in the values panel (most rest on evidence; a judgment says so).
 const fixed = lib.assumptions.rows.filter((r) => r.fixed);
+// Shared facts that are judgments, not measurements: fixed because each concerns a few models or sits
+// inside a range set by evidence (one slider per concept), but labelled wherever they are read.
+const judgments = [...lib.facts.values()].filter((f) => f.kind === "judgment");
+// Grouped by file: GiveWell's house adjustments alone are over a hundred.
+const judgmentGroups = new Map<string, typeof judgments>();
+for (const f of judgments) judgmentGroups.set(f.group, [...(judgmentGroups.get(f.group) ?? []), f]);
 ---
 
-<Base title="Shared data" description="The fixed exchange rates and the shared data every model reads, with sources.">
+<Base title="Shared data" description="The fixed rates, the fixed judgments and the shared data every model reads, with sources.">
   <div class="page wrap">
     <header class="intro">
       <h1>Shared data</h1>
       <div class="dek tip-host">
         Numbers several models read, kept once so they agree.{"\u00a0"}<InfoTip client:visible label="Why these aren't among your values">
-          They come from evidence rather than judgment, so there is nothing here to set to taste. Corrections go through the repository, with a source.
+          Most come from evidence. Some are judgments, marked as such below and on every model that reads them: they are fixed rather than sliders because each concerns only a few models or sits inside a range the evidence sets, and the site keeps one slider per concept. Their ranges feed the uncertainty bars. Corrections go through the repository, with a source or a reason.
         </InfoTip>
       </div>
     </header>
 
     <section class="fixed" aria-labelledby="fixed-title">
-      <h2 id="fixed-title">Fixed exchange rates</h2>
+      <h2 id="fixed-title">Fixed rates</h2>
       {fixed.map((r) => {
         const v = typeof r.value === "object" ? r.value : undefined;
         return (
@@ -52,6 +58,23 @@ const fixed = lib.assumptions.rows.filter((r) => r.fixed);
       })}
     </section>
 
+    <section class="judgments" aria-labelledby="judgments-title">
+      <h2 id="judgments-title">Fixed judgments</h2>
+      <p class="small muted">
+        These shared figures are judgments, ours or an evaluator's, not measurements: {judgments.length} in all. Each is fixed rather than a slider because it concerns only a few models, sits inside a range set by evidence, or is an evaluator's own default adjustment that its sheets share (GiveWell's supplemental adjustments, kept once so every copy reads the same number). Those with a range feed the uncertainty bars, and a model row that reads one says so.
+      </p>
+      {[...judgmentGroups].map(([group, rows]) => (
+        <details class="fact-group">
+          <summary><h3>{group}</h3> <span class="muted small">{rows.length} {rows.length === 1 ? "judgment" : "judgments"}</span></summary>
+          <ul>
+            {rows.map((f) => (
+              <li><a href={`#f-${f.key}`}>{f.label}</a> <span class="num">{formatValue(Number(typeof f.value === "object" ? f.value.best : f.value), f.format)}</span></li>
+            ))}
+          </ul>
+        </details>
+      ))}
+    </section>
+
     <section class="facts" aria-labelledby="facts-title">
       <h2 id="facts-title">By place and source</h2>
       {[...groups].map(([group, rows]) => (
@@ -62,6 +85,7 @@ const fixed = lib.assumptions.rows.filter((r) => r.fixed);
               <tr id={`f-${f.key}`}>
                 <th scope="row">
                   {f.label}
+                  {f.kind === "judgment" && <span class="small judgment-tag"> <span class="kind-dot kind-judgment" aria-hidden="true" />judgment</span>}
                   <span class="small muted fact-meta">
                     {f.source?.url ? <a href={f.source.url}>{f.source.title}</a> : f.source?.title}
                     {usedBy(f.key).length > 0 && " · used by "}
@@ -174,6 +198,24 @@ const fixed = lib.assumptions.rows.filter((r) => r.fixed);
     padding: var(--s2) 0;
     border-bottom: 1px solid var(--rule);
     vertical-align: top;
+  }
+  .judgments {
+    margin-top: var(--s7);
+    display: grid;
+    gap: var(--s3);
+  }
+  .judgment-tag {
+    color: var(--warn);
+    white-space: nowrap;
+  }
+  .judgment-tag .kind-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    border-radius: 50%;
+    vertical-align: 1px;
+    background: var(--kind-judgment);
   }
   .fact-meta {
     display: block;

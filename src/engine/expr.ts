@@ -4,11 +4,18 @@
 //   refs       transfer_per_household   another row in the same model
 //              $discount_rate           a shared assumption (the visitor can change it)
 //              @kenya.ppp_factor_2017   a shared fact (data used by several models)
+//              #against-malaria-foundation   another model's live result per dollar, in common units
+//                                            (units of value), our view, under the current assumptions.
+//                                            Model ids contain hyphens: write a space before a minus
+//                                            that follows one (#givedirectly - x).
+//              #givewell:evidence-action   a charity's figure from one evaluator, live, as the rankings
+//                                            make it: its programmes' models, each over its locations,
+//                                            weighted by funding (src/engine/ranking.ts evaluatorFigure).
 //   operators  + - * / ^ (right-assoc), unary -, parentheses
 //   compare    = <> < > <= >=   (1 when true, 0 when false; lowest precedence)
 //   functions  see FUNCTIONS below
 
-export type Scope = "row" | "assumption" | "fact";
+export type Scope = "row" | "assumption" | "fact" | "model";
 type BinOp = "+" | "-" | "*" | "/" | "^" | "=" | "<>" | "<" | ">" | "<=" | ">=";
 
 export type Node =
@@ -48,6 +55,11 @@ function pv(rate: number, periods: number, payment: number, future = 0, type = 0
   return -(payment * (1 + rate * type) * (g - 1) / rate + future) / g;
 }
 
+/** Spreadsheet NPV: the first value one period from now, each later one a period later. */
+function npv(rate: number, ...values: number[]): number {
+  return values.reduce((s, x, i) => s + x / (1 + rate) ** (i + 1), 0);
+}
+
 export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: number[]) => number; doc: string }> = {
   ln: { arity: [1, 1], fn: Math.log, doc: "natural log" },
   log10: { arity: [1, 1], fn: Math.log10, doc: "base-10 log" },
@@ -70,6 +82,7 @@ export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: num
   roundup: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.ceil), doc: "round away from zero" },
   rounddown: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.trunc), doc: "round towards zero" },
   pv: { arity: [3, 5], fn: pv, doc: "pv(rate, periods, payment, future, type): spreadsheet PV, payments as negatives" },
+  npv: { arity: [2, 200], fn: npv, doc: "npv(rate, x1, x2, ...): spreadsheet NPV, x_i discounted by (1+rate)^i" },
 };
 
 export class ExprError extends Error {}
@@ -93,6 +106,12 @@ function tokenize(src: string): Tok[] {
     if (fact) {
       out.push({ t: "id", v: fact[0].slice(1), scope: "fact" });
       i += fact[0].length;
+      continue;
+    }
+    const model = /^#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?/.exec(src.slice(i));
+    if (model) {
+      out.push({ t: "id", v: model[0].slice(1), scope: "model" });
+      i += model[0].length;
       continue;
     }
     const id = /^\$?[a-z_][a-z0-9_]*/i.exec(src.slice(i));
@@ -171,9 +190,9 @@ export function parse(src: string): Node {
   return node;
 }
 
-export function refs(node: Node, out = { rows: new Set<string>(), assumptions: new Set<string>(), facts: new Set<string>() }) {
+export function refs(node: Node, out = { rows: new Set<string>(), assumptions: new Set<string>(), facts: new Set<string>(), models: new Set<string>() }) {
   switch (node.type) {
-    case "ref": (node.scope === "assumption" ? out.assumptions : node.scope === "fact" ? out.facts : out.rows).add(node.name); break;
+    case "ref": (node.scope === "assumption" ? out.assumptions : node.scope === "fact" ? out.facts : node.scope === "model" ? out.models : out.rows).add(node.name); break;
     case "neg": refs(node.arg, out); break;
     case "bin": refs(node.left, out); refs(node.right, out); break;
     case "call": node.args.forEach((a) => refs(a, out)); break;

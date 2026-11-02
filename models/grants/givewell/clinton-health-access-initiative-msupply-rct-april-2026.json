@@ -12,7 +12,7 @@
     "title": "GiveWell, mSupply RCT CEA - April 2026 (public)",
     "url": "https://www.givewell.org/research/grants/CHAI-the-mSupply-Foundation-Evaluation-of-an-Electronic-Logistics-Management-Information-System-March-2026",
     "sheet": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
-    "published": "2026-03-13",
+    "published": "2026-04-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -184,8 +184,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "Moral weights!B2"
       },
-      "explainer": "GiveWell's moral weight, 83.6 units of value, times your multiplier on the value of a life.\n\nmeasure location",
-      "formula": "83.6 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_early_neonatal, 83.6 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location",
+      "formula": "@moral_weights.givewell_age_early_neonatal * $life_value_multiplier",
       "expected": 83.6
     },
     {
@@ -205,8 +205,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "Moral weights!C2"
       },
-      "explainer": "GiveWell's moral weight, 84.5 units of value, times your multiplier on the value of a life.\n\nmeasure location cause",
-      "formula": "84.5 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_late_neonatal, 84.5 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause",
+      "formula": "@moral_weights.givewell_age_late_neonatal * $life_value_multiplier",
       "expected": 84.5
     },
     {
@@ -226,8 +226,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "Moral weights!D2"
       },
-      "explainer": "GiveWell's moral weight, 100.7 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric",
-      "formula": "100.7 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_post_neonatal, 100.7 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause metric",
+      "formula": "@moral_weights.givewell_age_post_neonatal * $life_value_multiplier",
       "expected": 100.7
     },
     {
@@ -247,8 +247,8 @@
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "Moral weights!E2"
       },
-      "explainer": "GiveWell's moral weight, 127.3 units of value, times your multiplier on the value of a life.\n\nmeasure location cause metric year",
-      "formula": "127.3 * $life_value_multiplier",
+      "explainer": "GiveWell's moral weight for this age (facts: moral_weights.givewell_age_1_4, 127.3 units of value), times \"A child's life vs doubled-income year\" (Your values).\n\nmeasure location cause metric year",
+      "formula": "@moral_weights.givewell_age_1_4 * $life_value_multiplier",
       "expected": 127.3
     },
     {
@@ -297,7 +297,7 @@
       "label": "Units of value conversion: Downside adjustments (Laos RCT)",
       "section": "cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
@@ -371,13 +371,14 @@
       "id": "units_of_value_per_givewell_benchmark_laos_rct",
       "label": "Units of value per $, GiveWell benchmark (Laos RCT)",
       "section": "cea",
-      "value": 0.00333,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
+      "published": 0.00333,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "CEA!B27"
-      }
+      },
+      "explainer": "Changed for consistency: GiveWell's sheet used 0.00333 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps 0.00333."
     },
     {
       "id": "ce_estimate_x_benchmark_after_initial_adjustments_laos_rct",
@@ -448,13 +449,14 @@
       "label": "Counterfactual value per dollar spent by domestic governments (Laos RCT)",
       "section": "lf",
       "unit": "UoV",
-      "value": 0.005057,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "LF!H46"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_government",
+      "expected": 0.005057,
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of domestic government spending (GiveWell) (`@givewell_shared.cf_value_government`), the same number as this sheet's."
     },
     {
       "id": "value_lost_by_shifting_spending_away_from_programs_domestic",
@@ -547,13 +549,14 @@
       "label": "Counterfactual value per dollar spent by the Global Fund or PMI (used to proxy other philanthropic actors) (Laos RCT)",
       "section": "lf",
       "unit": "UoV",
-      "value": 0.015433,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1bAThhcipjN1Sy4ZDi1kLlvbPUBVQmR7qJsuliOEbEpo/edit",
         "cell": "LF!H47"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_global_fund",
+      "expected": 0.015433,
+      "explainer": "Reads the figure every GiveWell model shares: Counterfactual value of a dollar of Global Fund or PMI spending (GiveWell) (`@givewell_shared.cf_value_global_fund`), the same number as this sheet's."
     },
     {
       "id": "value_lost_by_shifting_spending_away_from_programs_that_othe",
@@ -890,39 +893,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

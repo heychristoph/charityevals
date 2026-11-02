@@ -1,5 +1,6 @@
 import { parse, refs, evaluate, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
+import { evaluatorFigure, evaluatorFigureModels } from "./ranking";
 
 export type ResolvedRow = Row & {
   /** Id of the model this row was first defined in, when that isn't this model. */
@@ -10,6 +11,8 @@ export type ResolvedRow = Row & {
   deps: string[];
   assumptionDeps: string[];
   factDeps: string[];
+  /** Other models whose live result this row reads (`#model-id`). */
+  modelDeps: string[];
 };
 
 export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
@@ -21,6 +24,9 @@ export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
   order: string[];
   /** This model's id, then its parent's, and so on. */
   chain: string[];
+  /** Rows of this model that its output unit's conversion reads (a climate model's
+   * `air_pollution_weight`, docs/normalization.md 2.5): they feed the headline alongside the output. */
+  conversionRows: string[];
 };
 
 export type FactRow = Row & { key: string; group: string };
@@ -47,6 +53,9 @@ export function buildLibrary(
   rawFacts: unknown[] = [],
   rawCharities: unknown[] = [],
   rawOwners: unknown[] = [],
+  /** Models outside this build that formulas may reference by `#id` (a page rebuilding one bulk model
+   * in the browser passes the site's library). */
+  options: { models?: Map<string, ResolvedModel> } = {},
 ): Library {
   const errors: string[] = [];
   const parseAll = <T,>(raws: unknown[], schema: { safeParse: (x: unknown) => { success: boolean; data?: T; error?: { issues: { path: PropertyKey[]; message: string }[] } } }, what: string) => {
@@ -85,8 +94,10 @@ export function buildLibrary(
   for (const [id, u] of Object.entries(assumptions.units)) {
     if (!u.to_common) continue;
     try {
-      for (const a of refs(parse(u.to_common)).assumptions)
+      const used = refs(parse(u.to_common));
+      for (const a of used.assumptions)
         if (!assumptionIds.has(a)) errors.push(`assumptions: unit ${id} uses unknown $${a}`);
+
     } catch (e) {
       errors.push(`assumptions: unit ${id}: ${(e as Error).message}`);
     }
@@ -124,7 +135,7 @@ export function buildLibrary(
     }
 
     const rows: (RowPatch & Partial<ResolvedRow>)[] = parent
-      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, expected: _e, range: _r, ...r }) => ({
+      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, expected: _e, range: _r, ...r }) => ({
           ...r,
           inheritedFrom: r.inheritedFrom ?? parent!.id,
           overridden: undefined,
@@ -150,7 +161,7 @@ export function buildLibrary(
         errors.push(`${id}: ${check.error.issues.map((i) => i.message).join("; ")}`);
         continue;
       }
-      const row: ResolvedRow = { ...check.data, inheritedFrom, overridden, deps: [], assumptionDeps: [], factDeps: [] };
+      const row: ResolvedRow = { ...check.data, inheritedFrom, overridden, deps: [], assumptionDeps: [], factDeps: [], modelDeps: [] };
       if (row.formula !== undefined) {
         try {
           row.node = parse(row.formula);
@@ -158,6 +169,7 @@ export function buildLibrary(
           row.deps = [...used.rows];
           row.assumptionDeps = [...used.assumptions];
           row.factDeps = [...used.facts];
+          row.modelDeps = [...used.models];
         } catch (e) {
           errors.push(`${id}.${row.id}: ${(e as Error).message}`);
         }
@@ -183,6 +195,10 @@ export function buildLibrary(
     if (output && !assumptions.units[output.unit]) errors.push(`${id}: output unit ${output.unit} isn't defined in assumptions`);
     if (output?.native && !byId.has(output.native.row)) errors.push(`${id}: native row ${output.native.row} doesn't exist`);
     for (const sp of output?.species ?? []) if (!byId.has(`ced_${sp}`)) errors.push(`${id}: species ${sp} has no ced_${sp} row`);
+    const conversionRows = output ? unitRows(assumptions.units[output.unit]?.to_common) : [];
+    if (output && rawFacts.length)
+      for (const f of unitFacts(assumptions.units[output.unit]?.to_common)) if (!facts.has(f)) errors.push(`${id}: unit ${output.unit} reads unknown fact @${f}`);
+    for (const r of conversionRows) if (!byId.has(r)) errors.push(`${id}: unit ${output!.unit} reads row ${r}, which the model doesn't define (docs/normalization.md 2.5)`);
 
     const model: ResolvedModel = {
       ...file,
@@ -198,6 +214,7 @@ export function buildLibrary(
       byId,
       order: topoOrder(id, resolved, byId, errors),
       chain: [id, ...(parent?.chain ?? [])],
+      conversionRows,
     };
     if (rawCharities.length) {
       if (!model.charity) errors.push(`${id}: no charity`);
@@ -211,8 +228,109 @@ export function buildLibrary(
   }
 
   for (const id of files.keys()) resolve(id);
+
+  // `#model-id`: another model's live result. It must exist (here or in `options.models`), report in a
+  // unit that converts to the common one, and no chain of references may come back to the model.
+  const known = (id: string) => models.get(id) ?? options.models?.get(id);
+  // `#owner:charity`: a charity's figure from one evaluator, read through the models the rankings use.
+  const all: Library = { models: new Map([...(options.models ?? []), ...models]), charities, owners, assumptions, facts, errors: [] };
+  const targets = (d: string): string[] => (isCharityRef(d) ? evaluatorFigureModels(all, ...splitCharityRef(d)).map((t) => t.id) : [d]);
+  for (const m of models.values())
+    for (const r of m.rows)
+      for (const d of r.modelDeps) {
+        if (isCharityRef(d)) {
+          const [owner, charity] = splitCharityRef(d);
+          if (!owners.has(owner) || !charities.has(charity)) errors.push(`${m.id}.${r.id}: unknown evaluator or charity #${d}`);
+          else if (!targets(d).length) errors.push(`${m.id}.${r.id}: ${owner} doesn't rank ${charity} (#${d})`);
+          continue;
+        }
+        const t = known(d);
+        if (!t) errors.push(`${m.id}.${r.id}: unknown model #${d}`);
+        else if (!t.output || !assumptions.units[t.output.unit]?.to_common) errors.push(`${m.id}.${r.id}: model #${d} has no result in common units`);
+      }
+  const state = new Map<string, 1 | 2>();
+  const visit = (id: string, path: string[]) => {
+    if (state.get(id) === 2) return;
+    if (state.get(id) === 1) { errors.push(`model reference cycle ${[...path, id].join(" → ")}`); return; }
+    state.set(id, 1);
+    for (const d of modelDepsOf(known(id)).flatMap(targets)) visit(d, [...path, id]);
+    state.set(id, 2);
+  };
+  for (const id of models.keys()) visit(id, []);
   if (!models.has(assumptions.common.benchmark)) errors.push(`assumptions: benchmark model ${assumptions.common.benchmark} doesn't exist`);
   return { models, charities, owners, assumptions, facts, errors };
+}
+
+/** Models a model's formulas reference directly (`#id`). */
+export function modelDepsOf(m: ResolvedModel | undefined): string[] {
+  return m ? [...new Set(m.rows.flatMap((r) => r.modelDeps ?? []))] : [];
+}
+
+/** `#owner:charity`: a charity's figure from one evaluator (src/engine/ranking.ts evaluatorFigure). */
+export const isCharityRef = (ref: string) => ref.includes(":");
+export const splitCharityRef = (ref: string) => ref.split(":") as [owner: string, charity: string];
+
+/** Every model a model's result depends on through `#id` references, directly or not (a charity
+ * reference stands for the models its figure reads). */
+export function referencedModels(lib: Library, m: ResolvedModel): ResolvedModel[] {
+  const seen = new Map<string, ResolvedModel>();
+  const expand = (d: string) => (isCharityRef(d) ? evaluatorFigureModels(lib, ...splitCharityRef(d)).map((t) => t.id) : [d]);
+  const walk = (x: ResolvedModel) => {
+    for (const d of modelDepsOf(x).flatMap(expand)) {
+      const t = lib.models.get(d);
+      if (!t || seen.has(d) || d === m.id) continue;
+      seen.set(d, t);
+      walk(t);
+    }
+  };
+  walk(m);
+  return [...seen.values()];
+}
+
+// A referenced model's result per dollar in common units, cached per assumption-values object (the
+// sliders, a sensitivity swing): the same reference read by many rows, or by every input swing of a
+// sensitivity run, is computed once.
+const resultCache = new WeakMap<Record<string, number>, Map<string, number>>();
+const computing = new Set<string>();
+
+/** Another model's live result, as `#id` reads it: its bottom line per dollar in common units (units of
+ * value), in our view, under `av` (the reader's values, never another model's evaluator pins), with no
+ * edits. NaN for an unknown model or a cycle (buildLibrary reports both). */
+export function modelResult(lib: Library, id: string, av: Record<string, number>): number {
+  let cache = resultCache.get(av);
+  if (!cache) resultCache.set(av, (cache = new Map()));
+  const hit = cache.get(id);
+  if (hit !== undefined) return hit;
+  const m = isCharityRef(id) ? undefined : lib.models.get(id);
+  if ((!m && !isCharityRef(id)) || computing.has(id)) return NaN;
+  computing.add(id);
+  try {
+    const v = m ? bottomLine(lib, m, av).common : evaluatorFigure(lib, ...splitCharityRef(id), (t) => modelResult(lib, t.id, av));
+    cache.set(id, v);
+    return v;
+  } finally {
+    computing.delete(id);
+  }
+}
+
+/** Rows a unit's conversion reads from the model it converts (bare names in `to_common`). */
+function unitRows(toCommon: string | undefined): string[] {
+  if (!toCommon) return [];
+  try {
+    return [...refs(parse(toCommon)).rows];
+  } catch {
+    return [];
+  }
+}
+
+/** Shared facts a unit's conversion reads (`@file.row`). */
+function unitFacts(toCommon: string | undefined): string[] {
+  if (!toCommon) return [];
+  try {
+    return [...refs(parse(toCommon)).facts];
+  } catch {
+    return [];
+  }
 }
 
 function topoOrder(id: string, rows: ResolvedRow[], byId: Map<string, ResolvedRow>, errors: string[]): string[] {
@@ -269,7 +387,8 @@ export function inputRange(r: Row, view: View): number | Range | undefined {
   return view === "evaluator" && r.published !== undefined ? r.published : r.value;
 }
 
-/** Every row's value. `inputs` overrides this model's inputs by row id, and shared facts by "@key". */
+/** Every row's value. `inputs` overrides this model's inputs by row id, shared facts by "@key" and
+ * another model's live result by "#id". The result also holds each model read live, under "#id". */
 export function compute(
   lib: Library,
   m: ResolvedModel,
@@ -279,9 +398,13 @@ export function compute(
 ): Record<string, number> {
   const a = viewAssumptions(m, av, view);
   const vals: Record<string, number> = {};
+  // Another model's result is stored as "#id" beside the rows, so every later lookup over these values
+  // (the tree, uncertainty) reads the same number. It is always our view at the reader's values: the
+  // evaluator view of this model doesn't pin another model's rates.
   const lookup = (scope: Scope, n: string) =>
     scope === "row" ? vals[n] ?? NaN
     : scope === "assumption" ? a[n] ?? NaN
+    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, av))
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   for (const id of m.order) {
     const r = m.byId.get(id)!;
@@ -297,9 +420,20 @@ export function comparable(lib: Library, m: ResolvedModel): boolean {
   return !!(m.output && lib.assumptions.units[m.output.unit]?.to_common);
 }
 
-export function toCommon(lib: Library, unit: string, av: Record<string, number>): number {
+/** What one unit is worth in common units. A unit's conversion reads shared assumptions and, for a
+ * unit that declares one (climate's `air_pollution_weight`), a fixed row of the model it converts:
+ * `rows` are that model's computed values. */
+export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}, inputs: Record<string, number> = {}): number {
   const u = lib.assumptions.units[unit];
-  return u?.to_common ? evaluate(parse(u.to_common), (scope, n) => (scope === "assumption" ? av[n] ?? NaN : NaN)) : NaN;
+  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(lib, av, rows, inputs)) : NaN;
+}
+
+/** The lookup a unit's conversion evaluates with: assumptions, shared facts (a fixed figure such as
+ * GiveWell's value of an adult's death, read from its one source; `inputs` overrides one by "@key", as
+ * a sensitivity swing does), and the converted model's own rows. */
+export function conversionLookup(lib: Library, av: Record<string, number>, rows: Record<string, number> = {}, inputs: Record<string, number> = {}) {
+  return (scope: Scope, n: string) =>
+    scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : scope === "model" ? NaN : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
 }
 
 /** The site's headline unit, years of healthy life (DALYs averted) per $1,000 donated, in common units
@@ -351,8 +485,9 @@ export function bottomLine(
   view: View = "charityevals",
 ) {
   if (!m.output) return { native: NaN, common: NaN };
-  const native = compute(lib, m, av, inputs, view)[m.output.row];
-  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view)) };
+  const vals = compute(lib, m, av, inputs, view);
+  const native = vals[m.output.row];
+  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view), vals, inputs) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -365,11 +500,12 @@ export function headline(
   view: View = "charityevals",
 ): number {
   if (!m.output) return NaN;
-  const native = compute(lib, m, av, inputs, view)[m.output.row];
+  const vals = compute(lib, m, av, inputs, view);
+  const native = vals[m.output.row];
   const conv = headlineConversion(lib, m.output.unit);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
-  return conv ? native * evaluate(conv, (scope, n) => (scope === "assumption" ? a[n] ?? NaN : NaN)) : native;
+  return conv ? native * evaluate(conv, conversionLookup(lib, a, vals, inputs)) : native;
 }
 
 /** Assumptions that can change this model's headline in a view. */
@@ -378,6 +514,8 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
   const conv = m.output && headlineConversion(lib, m.output.unit);
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
+  // A model read live (`#id`) moves with every assumption it reads, in our view.
+  for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))
@@ -403,15 +541,19 @@ export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] 
   return modelsOf(lib, charity).filter((m) => !seen.has(m.owner) && seen.add(m.owner));
 }
 
-/** Shared facts this model reads. */
-export function usedFacts(m: ResolvedModel): string[] {
-  return [...new Set(m.rows.flatMap((r) => r.factDeps))];
+/** Shared facts this model reads: in its rows, and, given the library, in its unit's conversion into
+ * the headline (climate's `@climate.*`), which can move its headline just the same. */
+export function usedFacts(m: ResolvedModel, lib?: Library): string[] {
+  const used = new Set(m.rows.flatMap((r) => r.factDeps));
+  const conv = lib && m.output && headlineConversion(lib, m.output.unit);
+  if (conv) refs(conv).facts.forEach((f) => used.add(f));
+  return [...used];
 }
 
 /** Fact key → ids of the models that read it, in id order: only facts more than one model reads. */
 export function factUsage(lib: Library): Record<string, string[]> {
   const by: Record<string, string[]> = {};
   for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)))
-    for (const k of usedFacts(m)) (by[k] ??= []).push(m.id);
+    for (const k of usedFacts(m, lib)) (by[k] ??= []).push(m.id);
   return Object.fromEntries(Object.entries(by).filter(([, ids]) => ids.length > 1).sort(([a], [b]) => a.localeCompare(b)));
 }

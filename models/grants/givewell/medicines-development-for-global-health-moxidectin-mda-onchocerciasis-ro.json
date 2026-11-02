@@ -12,7 +12,7 @@
     "title": "GiveWell, Moxidectin MDA for onchocerciasis rough CEA [September 2024] (public)",
     "url": "https://www.givewell.org/research/grants/medicines-development-for-global-health-moxidectin-who-pre-qualification-grant-june-2024",
     "sheet": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
-    "published": "2024-06-19",
+    "published": "2024-09-01",
     "retrieved": "2026-10-27",
     "license": "CC BY-NC-SA 3.0 US"
   },
@@ -597,7 +597,7 @@
       "label": "Discount to account for possibility of overestimated burden compared to IHME (1 year speed up)",
       "section": "botec",
       "value": 0.8,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
@@ -630,7 +630,7 @@
       "label": "% of hyperendemic and very hyperendemic areas where ivermectin would be replaced with moxidectin (assumption) (1 year speed up)",
       "section": "botec",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
@@ -657,7 +657,7 @@
       "label": "Dosing rounds per year (rough guess) (1 year speed up)",
       "section": "botec",
       "value": 1.5,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1mQfHhePEVMs1jpBig503ewsbCQaQeVzf2vNw3QLtBwg/edit",
@@ -778,39 +778,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown."
+      "explainer": "Default for research, technical assistance and policy work: mostly people. Our judgment; we haven't seen this grant's breakdown.",
+      "formula": "@staff_pay.share_research_policy"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment."
+      "explainer": "Researchers and advisers could typically earn considerably more in consulting or industry. Our judgment.",
+      "formula": "@staff_pay.gap_research_policy"
     },
     {
       "id": "salary_sacrifice",

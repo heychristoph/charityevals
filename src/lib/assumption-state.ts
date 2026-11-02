@@ -16,7 +16,12 @@ let loaded = false;
 /** Assumptions since renamed or rescaled: old id → [new id, factor]. Links shared before the change
  * keep their meaning. The chicken weight was a multiplier on Rethink Priorities' median (1 = 33.2%);
  * it now stores the weight itself. */
-export const LEGACY: Record<string, [string, number]> = { animal_moral_weight: ["chicken_vs_person", 0.332] };
+export const LEGACY: Record<string, [string, number]> = {
+  animal_moral_weight: ["chicken_vs_person", 0.332],
+  // The WELLBY rate was in doubled-income years per WELLBY; it is now in healthy years (÷ 2, the
+  // default healthy-year rate), so depression's calibration holds at any healthy-year rate.
+  uov_per_wellby: ["daly_per_wellby", 0.5],
+};
 
 /** Rates now fixed from evidence: an old link's override for one is dropped, not kept unused. */
 const FIXED = new Set(assumptions.rows.filter((r) => (r as { fixed?: boolean }).fixed).map((r) => r.id));

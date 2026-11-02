@@ -101,7 +101,7 @@
       "label": "Adjustment to SAM / MAM hazard ratio to account for measured socioeconomic confounding",
       "section": "cea",
       "value": 0.85,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -113,7 +113,7 @@
       "label": "Adjustment to SAM / MAM hazard ratio to account for unmeasured socioeconomic confounding",
       "section": "cea",
       "value": 0.7,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -548,9 +548,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "Simplified CEA!B32"
       },
-      "formula": "112 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 112.0,
-      "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 112, is kept for the evaluator view.",
+      "published": 112.0
     },
     {
       "id": "percent_of_those_treated_who_experience_sam_mam_again_at_som",
@@ -609,7 +610,7 @@
       "label": "Internal validity adjustment",
       "section": "cea",
       "value": 0.75,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -622,7 +623,7 @@
       "label": "External validity adjustment",
       "section": "cea",
       "value": 0.85,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1036,9 +1037,10 @@
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B103"
       },
-      "formula": "112 * $life_value_multiplier",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
       "expected": 112.0,
-      "explainer": "GiveWell's moral weight, 112 units of value, times your multiplier on the value of a life."
+      "explainer": "Changed for consistency: the site values a death by the age it happens at, the same in every model (facts: moral_weights.uov_per_death_under5, 116.253 units of value), times \"A child's life vs doubled-income year\" (Your values). This sheet's own figure, 112, is kept for the evaluator view.",
+      "published": 112.0
     },
     {
       "id": "units_of_value_from_pediatric_emergency_deaths_averted",
@@ -1119,13 +1121,14 @@
       "id": "euro_to_u_s_dollar",
       "label": "Euro to U.S. dollar",
       "section": "cea",
-      "value": 1.21,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B164"
-      }
+      },
+      "formula": "@fx.usd_per_eur_2020",
+      "published": 1.21,
+      "explainer": "Changed for consistency. GiveWell's sheet has 1.21 here. The site uses one figure for this in every GiveWell model, 1.1403 (US dollars per euro, 2020 yearly average, `@fx.usd_per_eur_2020`), GiveWell's current best guess; the evaluator view keeps 1.21."
     },
     {
       "id": "total_cost_in_u_s_dollars_of_grant",
@@ -1163,7 +1166,7 @@
       "label": "Risk of wastage: Double treatment",
       "section": "cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1176,7 +1179,7 @@
       "label": "Risk of wastage: Ineffective goods",
       "section": "cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1210,7 +1213,7 @@
       "label": "Misappropriation without monitoring results",
       "section": "cea",
       "value": 0.08,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1223,7 +1226,7 @@
       "label": "False monitoring results",
       "section": "cea",
       "value": 0.03,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1244,7 +1247,7 @@
       "label": "Change of priorities",
       "section": "cea",
       "value": 0.05,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1257,7 +1260,7 @@
       "label": "Confidence in funds being used for intended purpose: Non-funding bottlenecks",
       "section": "cea",
       "value": 0.0,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1269,14 +1272,14 @@
       "id": "confidence_in_funds_being_used_for_intended_purpose_within_o",
       "label": "Confidence in funds being used for intended purpose: Within-org fungibility",
       "section": "cea",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B202"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_common.confidence_in_funds_being_used_for_intended_purpose_wit",
+      "expected": 0.05
     },
     {
       "id": "total_adjustment_for_confidence_in_funds_being_used_for_inte",
@@ -1307,7 +1310,7 @@
       "label": "Adjustments for excluded effects: Malnutrition morbidity",
       "section": "cea",
       "value": 0.09,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1319,21 +1322,22 @@
       "id": "investment_of_income_increases",
       "label": "Investment of income increases",
       "section": "cea",
-      "value": 0.05,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B217"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "expected": 0.05,
+      "explainer": "Reads the figure every GiveWell model shares: Investment of income increases (GiveWell's supplemental adjustment, most programs) (`@givewell_shared.investment_of_income_increases`), the same number as this sheet's."
     },
     {
       "id": "adjustments_for_excluded_effects_drug_resistance",
       "label": "Adjustments for excluded effects: Drug resistance",
       "section": "cea",
       "value": -0.04,
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
@@ -1358,14 +1362,15 @@
       "id": "treatment_costs_averted_from_prevention",
       "label": "Treatment costs averted from prevention",
       "section": "cea",
-      "value": 0.06,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B221"
       },
-      "format": "percent"
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "published": 0.06,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.06 here. The site uses one figure for this in every GiveWell model, 0.2 (Treatment costs averted from prevention (GiveWell's supplemental adjustment), `@givewell_shared.treatment_costs_averted`), GiveWell's current best guess; the evaluator view keeps 0.06."
     },
     {
       "id": "averted_morbidity_and_maternal_mortality_resulting_from_stun",
@@ -1466,13 +1471,14 @@
       "id": "counterfactual_value_of_government_spending_units_of_value_p",
       "label": "Counterfactual value of government spending (units of value per dollar)",
       "section": "cea",
-      "value": 0.00496,
-      "kind": "estimate",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1berdahxFH2vixtz0Z_TCh_hscuVr_5iz7J6poQrLtkQ/edit",
         "cell": "CEA!B233"
-      }
+      },
+      "formula": "@givewell_shared.cf_value_government",
+      "published": 0.00496,
+      "explainer": "Changed for consistency. GiveWell's sheet has 0.00496 here. The site uses one figure for this in every GiveWell model, 0.005057 (Counterfactual value of a dollar of domestic government spending (GiveWell), `@givewell_shared.cf_value_government`), GiveWell's current best guess; the evaluator view keeps 0.00496."
     },
     {
       "id": "total_counterfactual_value_of_government_spending",
@@ -1585,39 +1591,28 @@
       "id": "cash_benchmark",
       "label": "Units of value per dollar given to GiveDirectly",
       "section": "bottom_line",
-      "value": 0.00335,
-      "kind": "estimate",
+      "formula": "@cash.uov_per_dollar",
       "source": {
         "title": "GiveWell, cost-effectiveness benchmark",
         "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness"
       },
-      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years."
+      "explainer": "GiveWell reports this model's result in multiples of cash transfers. Multiplying by GiveWell's value of a dollar to GiveDirectly converts it into units of value per dollar, so it ranks against the other models. Older sheets used older moral weights; the multiple of cash is the comparable number across years. It is the site's shared cash benchmark (The cash benchmark, under Data), the one figure every model's multiple of cash is turned into units of value with."
     },
     {
       "id": "staff_cost_share",
       "section": "staff_pay",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.35,
-        "best": 0.5,
-        "high": 0.65
-      },
-      "kind": "judgment",
-      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown."
+      "explainer": "Default for programs where staff deliver the help themselves (treatment, counselling, coaching, outreach): staff pay is about half the cost. Our judgment; we haven't seen this program's breakdown.",
+      "formula": "@staff_pay.share_staff_delivered"
     },
     {
       "id": "salary_gap",
       "section": "staff_pay",
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment."
+      "explainer": "Health workers and field staff at nonprofits often earn somewhat less than in comparable jobs. Our judgment.",
+      "formula": "@staff_pay.gap_health_field"
     },
     {
       "id": "salary_sacrifice",
