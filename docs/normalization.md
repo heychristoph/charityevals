@@ -1145,3 +1145,14 @@ and Taimaka-HLI change nothing at the defaults.
   (`common.estimate_age_as_of`, 2026-11-02, bumped when the data is refreshed). Our view only; a meta charity
   takes it on each destination and on its own estimate. The default is a labelled judgment: GiveWell's
   revisions are large but not directional. Effect: HSUS 637 → 391, still first; INV-19.
+- **GiveWell's grantee-level adjustments: one figure, one sign convention.** GiveWell's sheets enter the same
+  adjustment two ways: as a negative share they add (−5% within-organisation fungibility) or as a positive
+  share they subtract (5%). Each standard figure is now one shared fact stored as a negative share of value
+  lost (within-organisation fungibility −5%, non-funding bottlenecks −5%, false monitoring results −2% and
+  −2.5% for malnutrition, change of priorities −2% and −1% for SMC); a sheet that subtracts reads its negative
+  (`-@givewell_common.<id>`). Internal-validity adjustments are stored as multipliers (malaria trials 0.95, New
+  Incentives 0.88, vitamin A and iron 0.8); a sheet that adds a share reads `@… - 1`. Typed-in copies of these
+  standard figures (GiveWell's and SoGive's copies of its deworming sheets) read the facts too. Grantee-specific
+  judgments (the END Fund's 10% false-monitoring risk, Deworm the World's 1%) stay each sheet's own. No result
+  changes: every sheet still reproduces.
+
