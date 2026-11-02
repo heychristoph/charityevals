@@ -267,7 +267,7 @@ def main():
                 if not any(x["id"] == f["id"] for x in fx["rows"]):
                     fx["rows"].append({"id": f["id"], "label": f["label"], "unit": "USD", "format": "number", "value": f["value"], "kind": "observed",
                                        "source": {"title": "IRS, Yearly average currency exchange rates", "url": f["url"], "note": f["note"], "retrieved": RETRIEVED},
-                                       "explainer": "The IRS yearly average, the site's one source for currency rates. Models read it instead of an evaluator's own rate."})
+                                       "explainer": "The IRS yearly average, the site's source for every currency it lists (the World Bank's for the rest). Models read it instead of an evaluator's own rate."})
                     FX_FILE.write_text(json.dumps(fx, indent=2, ensure_ascii=False) + "\n")
     ratio_income(files, log)
     deworming_multiples(files, log)
