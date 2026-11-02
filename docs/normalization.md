@@ -413,7 +413,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Household spillover of psychotherapy | `@wellby_factors.household_size_psychotherapy`, `household_spillover_ratio_psychotherapy` | 4.73 people, 16.24% each | HLI (StrongMinds, Friendship Bench); read by HLI's, SoGive's and Founders Pledge's StrongMinds |
 | Earnings from learning | `@founders_pledge_2023.*` (salary +19.1% per SD × 17.5% replicability, 8 years' wait, 40 years, household ×2); prior weight `@founders_pledge_2023.prior_weight` (ours) | 50% (25–75%) | Founders Pledge's 2023 education method, its latest; every FP education model |
 | Years a won reform counts | `$win_years_counted` (2.9) | 5 (1–20) | judgment, the middle of the evaluators' figures |
-| Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.92 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025); judgment from CIWF ChickenTrack |
+| Pledges kept | `@sad_factors.commitment_fulfilment_cage_free` / `_broiler` | 0.77 (0.38–0.96) / 0.3 (0.15–0.5) | Chicken Watch (Open Wing Alliance 2025), North America's rate as a judgment for pledges weighted by hens (decided 2026-11-02); judgment from CIWF ChickenTrack |
 | Production per meal not eaten | `@sad_factors.production_response` | 0.76 (0.56–0.91) | Norwood and Lusk 2011 |
 | Species | `@welfare_ranges.*` (2.4) | | Rethink Priorities |
 | A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0539 across causes, 0.0413 global health (units of value per $) | GiveWell 2024 funding, ACE's Recommended Charities, Giving What We Can 2020–22 |
@@ -664,7 +664,7 @@ benefit of a win = per year once in effect × fulfilment × credit
   `published` 1 where the evaluator doesn't discount it. Already done by the evaluator: The Humane League, Animal
   Welfare Observatory, Aquatic Life Institute (its years counted now start at the stunning date), Ambitious Impact.
   Zero for meal policies (Sociedade Vegetariana Brasileira, Dansk Vegetarisk Forening, ACE 2016 institutional work).
-- **Fulfilment**: `@sad_factors.commitment_fulfilment_cage_free` (0.92, 0.38–0.96: Open Wing Alliance / Chicken Watch
+- **Fulfilment**: `@sad_factors.commitment_fulfilment_cage_free` (0.77 since 2026-11-02, was 0.92; 0.38–0.96: Open Wing Alliance / Chicken Watch
   2025, commitments due by 2024, by count) and `@sad_factors.commitment_fulfilment_broiler` (judgment 0.3, 0.15–0.5:
   no tracker publishes a rate; CIWF ChickenTrack reports progress only). They replace every evaluator's own figure
   (0.25–0.9) in our view, and are added (with `published` 1) where the evaluator had none (ACE 2016). Pig and shrimp
@@ -961,3 +961,11 @@ and Taimaka-HLI change nothing at the defaults.
    reaches healthy years" block from layers A–C, and the assumption explainers for the chicken
    slider and pain-day rate stop saying AIM's weights are "assumed to build it in".
 10. **Turn the allowlist off** once it is empty.
+
+### Decided 2026-11-02 (owner)
+
+- **Cage-free pledges kept: 77%, not 92%.** The Open Wing Alliance's 92% counts pledges, not hens, is
+  self-reported, and covers only pledges already due. No tracker counts hens, so the best guess is North
+  America's 77%, where the largest pledges are; range 38–96% unchanged. The reasoning is in the fact's
+  explainer (`@sad_factors.commitment_fulfilment_cage_free`), shown on /data and on every model page
+  that reads it. Effect: every cage-free model about 15% lower (HSUS 2016 746 → 637, Sinergia 190 → 166).
