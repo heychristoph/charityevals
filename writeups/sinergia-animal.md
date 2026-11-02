@@ -16,7 +16,7 @@ Our model gives **<span data-figure="headline" data-model="sinergia-animal">380<
 A company commits, then (if it follows through) changes its supply by its deadline, then hens or pigs live with less suffering for as long as the policy counts before it would have happened anyway. Each step is a discount:
 
 1. Credit: what share of the commitment is Sinergia's (38% for cage-free, 70% for pigs, ACE's split of the work between the groups that campaigned).
-2. Compliance: what share of companies keep their pledge. Cage-free: the shared figure every model uses, 92% of commitments due by 2024 fulfilled (Chicken Watch), where ACE used 53%. Pigs: Sinergia's own 58%.
+2. Compliance: what share of companies keep their pledge. Cage-free: the shared figure every model uses, 77% (North America's share of pledges kept, Chicken Watch; why not the headline 92% is explained under the figure), where ACE used 53%. Pigs: Sinergia's own 58%.
 3. Wait: the years until the commitments take effect, discounted (about 4 for cage-free; each pig producer's deadline).
 4. Years counted: how long the change counts before it would have come anyway, the shared "Years a won reform counts before it would have come anyway" (5 by default), where ACE used 15 for cage-free and 1 to 22 for the pig producers.
 
@@ -43,7 +43,7 @@ At the low end of the chicken slider alone, Sinergia falls to about GiveDirectly
 - **Credit for shared outcomes (shared, as ACE does).** The cage-free and pig results count Sinergia's share of each hen and pig covered, from ACE's inputs, not every animal covered. ACE's split is a share of the campaigning work, so it is also what "Credit by share of resources" uses.
 - **Years counted (changed for consistency).** ACE credits cage-free commitments for Rethink Priorities' 15 years and each pig commitment until Brazil's legal deadline (1 to 22 years); we use the shared slider for every won reform, 5 years by default.
 - **The wait (ours).** ACE counts hens from the year of the win; we discount the wait until the commitments take effect (4 years for cage-free, 2 to 7; each pig producer's own deadline).
-- **Compliance (changed for consistency).** ACE's 53% of cage-free pledges kept becomes the shared 92% (Chicken Watch), the same for every cage-free model.
+- **Compliance (changed for consistency).** ACE's 53% of cage-free pledges kept becomes the shared 77% (Chicken Watch, North America), the same for every cage-free model.
 - **Production response (changed for consistency).** A meal not eaten cuts production by 0.76 of a meal, as in every diet-change model; ACE counts 1.
 - **Past average, not the next dollar (ours):** ACE's estimate divides Sinergia's past campaign spending by the commitments it won, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%, a judgment). The evaluator view keeps 100%.
 
