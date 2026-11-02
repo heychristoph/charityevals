@@ -423,16 +423,17 @@ export function comparable(lib: Library, m: ResolvedModel): boolean {
 /** What one unit is worth in common units. A unit's conversion reads shared assumptions and, for a
  * unit that declares one (climate's `air_pollution_weight`), a fixed row of the model it converts:
  * `rows` are that model's computed values. */
-export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}): number {
+export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}, inputs: Record<string, number> = {}): number {
   const u = lib.assumptions.units[unit];
-  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(lib, av, rows)) : NaN;
+  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(lib, av, rows, inputs)) : NaN;
 }
 
 /** The lookup a unit's conversion evaluates with: assumptions, shared facts (a fixed figure such as
- * GiveWell's value of an adult's death, read from its one source), and the converted model's own rows. */
-export function conversionLookup(lib: Library, av: Record<string, number>, rows: Record<string, number> = {}) {
+ * GiveWell's value of an adult's death, read from its one source; `inputs` overrides one by "@key", as
+ * a sensitivity swing does), and the converted model's own rows. */
+export function conversionLookup(lib: Library, av: Record<string, number>, rows: Record<string, number> = {}, inputs: Record<string, number> = {}) {
   return (scope: Scope, n: string) =>
-    scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : scope === "model" ? NaN : pickValue(lib.facts.get(n)?.value);
+    scope === "assumption" ? av[n] ?? NaN : scope === "row" ? rows[n] ?? NaN : scope === "model" ? NaN : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
 }
 
 /** The site's headline unit, years of healthy life (DALYs averted) per $1,000 donated, in common units
@@ -486,7 +487,7 @@ export function bottomLine(
   if (!m.output) return { native: NaN, common: NaN };
   const vals = compute(lib, m, av, inputs, view);
   const native = vals[m.output.row];
-  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view), vals) };
+  return { native, common: native * toCommon(lib, m.output.unit, viewAssumptions(m, av, view), vals, inputs) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -504,7 +505,7 @@ export function headline(
   const conv = headlineConversion(lib, m.output.unit);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
-  return conv ? native * evaluate(conv, conversionLookup(lib, a, vals)) : native;
+  return conv ? native * evaluate(conv, conversionLookup(lib, a, vals, inputs)) : native;
 }
 
 /** Assumptions that can change this model's headline in a view. */
@@ -540,15 +541,19 @@ export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] 
   return modelsOf(lib, charity).filter((m) => !seen.has(m.owner) && seen.add(m.owner));
 }
 
-/** Shared facts this model reads. */
-export function usedFacts(m: ResolvedModel): string[] {
-  return [...new Set(m.rows.flatMap((r) => r.factDeps))];
+/** Shared facts this model reads: in its rows, and, given the library, in its unit's conversion into
+ * the headline (climate's `@climate.*`), which can move its headline just the same. */
+export function usedFacts(m: ResolvedModel, lib?: Library): string[] {
+  const used = new Set(m.rows.flatMap((r) => r.factDeps));
+  const conv = lib && m.output && headlineConversion(lib, m.output.unit);
+  if (conv) refs(conv).facts.forEach((f) => used.add(f));
+  return [...used];
 }
 
 /** Fact key → ids of the models that read it, in id order: only facts more than one model reads. */
 export function factUsage(lib: Library): Record<string, string[]> {
   const by: Record<string, string[]> = {};
   for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)))
-    for (const k of usedFacts(m)) (by[k] ??= []).push(m.id);
+    for (const k of usedFacts(m, lib)) (by[k] ??= []).push(m.id);
   return Object.fromEntries(Object.entries(by).filter(([, ids]) => ids.length > 1).sort(([a], [b]) => a.localeCompare(b)));
 }

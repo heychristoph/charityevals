@@ -10,7 +10,7 @@
 // high on the rankings use published ranges alone.
 
 import { evaluate, refs, type Node, type Scope } from "./expr";
-import { hasRange, headlineConversion, inputRange, pickValue, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
+import { hasRange, headlineConversion, inputRange, modelResult, pickValue, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
 import { rowsFeeding } from "./sensitivity";
 
 /** Where a number comes from, for grouping: your shared assumptions, the evaluator's judgment calls,
@@ -141,7 +141,16 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     r?.factDeps.forEach((x) => factIds.add(x));
   }
   const convNode = m.output ? headlineConversion(lib, m.output.unit) : undefined;
-  if (convNode) refs(convNode).assumptions.forEach((x) => assumptionIds.add(x));
+  if (convNode) {
+    const r = refs(convNode);
+    r.assumptions.forEach((x) => assumptionIds.add(x));
+    r.facts.forEach((x) => factIds.add(x));
+  }
+  // A model read live (`#id`) moves with the shared assumptions it reads; its own inputs' uncertainty
+  // stays with that model (docs/normalization.md 2.8).
+  const refModels = new Set<string>();
+  for (const id of feeding) m.byId.get(id)?.modelDeps.forEach((x) => refModels.add(x));
+  if (refModels.size) for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((x) => assumptionIds.add(x));
   for (const id of assumptionIds) {
     const row = lib.assumptions.rows.find((r) => r.id === id);
     if (!row || row.format === "toggle" || !hasRange(row.value)) continue;
@@ -197,6 +206,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     each("row", r.rows);
     each("assumption", r.assumptions);
     each("fact", r.facts);
+    each("model", r.models);
     return out;
   };
 
@@ -206,8 +216,31 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     if (r?.node && feeding.has(id) && !ranged.has(id)) edges.set(id, local(r.node, values[id]));
   }
 
+  // A referenced model's result's derivative with respect to each shared assumption it reads, at the
+  // reader's values (`#id` is always our view), by nudging the assumption 1%.
+  const modelDerivs = new Map<string, { name: string; d: number }[]>();
+  const modelEdges = (ref: string) => {
+    let es = modelDerivs.get(ref);
+    if (es) return es;
+    es = [];
+    const base = leafVals("model", ref);
+    if (Number.isFinite(base))
+      for (const key of leaves.keys()) {
+        if (!key.startsWith("assumption:")) continue;
+        const name = key.slice("assumption:".length);
+        const v = av[name];
+        if (!Number.isFinite(v)) continue;
+        const leaf = leaves.get(key)!;
+        const step = v !== 0 ? Math.abs(v) * H : leaf.absolute ? (leaf.high - leaf.low) * H : ZERO_STEP;
+        const d = (modelResult(lib, ref, { ...av, [name]: v + step }) - base) / step;
+        if (Number.isFinite(d) && d !== 0) es.push({ name, d });
+      }
+    modelDerivs.set(ref, es);
+    return es;
+  };
   /** Derivative of the seed with respect to every number, summed over every path: one backward pass
-   * over the stored derivatives, with no formulas evaluated. A ranged row has no edges, so it ends a path. */
+   * over the stored derivatives, with no formulas evaluated. A ranged row has no edges, so it ends a path.
+   * A referenced model passes its share on to the shared assumptions it reads. */
   const backward = (seed: Map<string, number>) => {
     const G = new Map<string, number>(seed);
     for (let i = m.order.length - 1; i >= 0; i--) {
@@ -216,6 +249,10 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
       const es = edges.get(id);
       if (!here || !es) continue;
       for (const x of es) G.set(`${x.scope}:${x.name}`, (G.get(`${x.scope}:${x.name}`) ?? 0) + here * x.d);
+    }
+    for (const [key, g] of [...G]) {
+      if (!key.startsWith("model:") || !g) continue;
+      for (const x of modelEdges(key.slice("model:".length))) G.set(`assumption:${x.name}`, (G.get(`assumption:${x.name}`) ?? 0) + g * x.d);
     }
     return G;
   };
@@ -241,7 +278,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   // unit that reads one (climate, docs/normalization.md 2.5), a fixed row of the model: that row's
   // own sources reach the headline through it.
   if (convNode) {
-    const convLook = (s: Scope, n: string) => (s === "assumption" ? av[n] ?? NaN : s === "row" ? values[n] ?? NaN : pickValue(lib.facts.get(n)?.value));
+    const convLook = (s: Scope, n: string) => (s === "assumption" ? av[n] ?? NaN : s === "row" ? values[n] ?? NaN : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value));
     const base = evaluate(convNode, convLook);
     if (base) {
       const d = (expr: Node, scope: Scope, name: string) => {
@@ -254,6 +291,10 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
       for (const name of r.assumptions) {
         const x = d(convNode, "assumption", name);
         if (Number.isFinite(x) && x !== 0) lnD.set(`assumption:${name}`, (lnD.get(`assumption:${name}`) ?? 0) + x / base);
+      }
+      for (const name of r.facts) {
+        const x = d(convNode, "fact", name);
+        if (Number.isFinite(x) && x !== 0) lnD.set(`fact:${name}`, (lnD.get(`fact:${name}`) ?? 0) + x / base);
       }
       for (const name of r.rows) {
         const x = d(convNode, "row", name);
