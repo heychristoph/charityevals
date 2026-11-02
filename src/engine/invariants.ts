@@ -334,7 +334,7 @@ function sharedNumbers(lib: Library): Shared[] {
     const file = f.key.split(".")[0];
     const same = SAME_LABEL_FILES.has(file);
     // A house constant's plain label is ours; copies in the sheets carry the sheet's own wording, kept in source.quote.
-    out.push({ ref: `@${f.key}`, label: same ? f.source?.quote ?? f.label : f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
+    out.push({ ref: `@${f.key}`, label: same ? f.source?.quote ?? f.label : f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: file === "household_size" ? f.key.split(".")[1].replace(/_(rural|high_coverage_districts)$/, "").replace(/_/g, " ") : PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
   }
   for (const a of lib.assumptions.rows) {
     if (a.format === "toggle") continue;
@@ -906,6 +906,14 @@ export function inv2d(lib: Library): InvariantReport {
 /** Concepts several evaluators' models state, each with its shared version. A literal row naming the
  * concept must agree with the shared version for its context, or read it; context (a place, a
  * programme) is the only reason to differ, and the shared version then has one fact per context. */
+/** facts/household_size.json: one household size per place, and the words that name the place. */
+const HOUSEHOLD_PLACES: [string, RegExp][] = [
+  ["Northwest Nigeria", /northwest|north west|kano|katsina|sokoto|zamfara|kebbi|jigawa|kaduna|new incentives/i], ["Nigeria", /nigeria/i], ["Kenya", /kenya/i], ["Malawi", /malawi/i],
+  ["Mozambique", /mozambique/i], ["Rwanda", /rwanda/i], ["Uganda", /uganda/i], ["Zimbabwe", /zimbabwe/i], ["Bangladesh", /bangladesh/i],
+  ["DRC", /\bdrc\b|congo/i], ["India", /india|bihar|bengal|pradesh|punjab/i], ["Pakistan", /pakistan|sindh/i],
+];
+const HOUSEHOLD_SIZE_FACTS = ["household_size.*"];
+
 export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]; context?: (text: string) => string | undefined }[] = [
   { id: "resource-sharing", test: /\bresource sharing\b|\bhousehold sharing\b/i, facts: ["givewell_shared.resource_sharing_multiplier"] },
   { id: "treatment-costs-averted", test: /\btreatment costs averted\b/i, not: /malnutrition|sam\b|wasting/i, facts: ["givewell_shared.treatment_costs_averted"] },
@@ -920,11 +928,17 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "value-of-cyp", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\b(cyp|year of (modern )?contracepti\w*|couple[- ]years? of protection)\b/i, not: /death/i, facts: ["givewell_shared.uov_per_cyp_low_income", "givewell_shared.uov_per_cyp_nigeria", "givewell_shared.uov_per_cyp_sierra_leone"], context: (t) => (/nigeria|kano|lagos|kaduna/i.test(t) ? "Nigeria" : /sierra leone/i.test(t) ? "Sierra Leone" : undefined) },
   { id: "value-of-stillbirth", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\bstill ?births?\b/i, facts: ["givewell_shared.uov_per_stillbirth"] },
   { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
-  { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy", "wellby_factors.household_size_psychotherapy"] },
+  { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy"] },
+  // One household size per place (facts/household_size.json, the latest DHS survey): a row naming a household's size reads its place's fact.
+  { id: "household-size", test: /\bhousehold size\b|\b(people|persons) per household\b|\bnumber of household members\b|\bother household members\b|\bpeople in the client's household\b/i, not: /\bprofit\b|extrapolation|\bnpv\b/i, facts: HOUSEHOLD_SIZE_FACTS, context: (t) => HOUSEHOLD_PLACES.find(([, re]) => re.test(t))?.[0] },
   { id: "commitment-fulfilment", test: /\b(fulfil\w*|compliance|kept|keep)\b[^.;]{0,40}\b(commitments?|(?<!founders )pledges?)\b|\bcommitments?\b[^.;]{0,30}\b(fulfil\w*|compliance)\b/i, not: /\bpigs?\b|gestation|sows?|shrimp|fish/i, facts: ["sad_factors.commitment_fulfilment_cage_free", "sad_factors.commitment_fulfilment_broiler"] },
   { id: "prior-weight-education", test: /\bweight on (the |fp'?s? |founders pledge'?s? )?prior\b/i, facts: ["founders_pledge_2023.prior_weight"] },
   { id: "depression-per-phq9-point", test: /\bphq[- ]?9?\b[^.;]{0,40}\b(daly|healthy|disability)\b|\bdalys? per (phq|point)\b/i, facts: ["depression.dalys_per_phq9_point_year", "depression.phq9_sd"] },
 ];
+
+/** A concept's facts: "file.*" stands for every fact in that file (one per place). */
+const conceptReads = (facts: string[], f: string) => facts.some((x) => x === f || (x.endsWith(".*") && f.startsWith(x.slice(0, -1))));
+const conceptFacts = (lib: Library, facts: string[]) => [...lib.facts.keys()].filter((f) => conceptReads(facts, f));
 
 /** Rows a model wrote that state a concept as a literal, with their context (a place, a programme). */
 export function conceptRows(lib: Library) {
@@ -937,7 +951,7 @@ export function conceptRows(lib: Library) {
       for (const c of CONCEPTS) {
         const text = `${r.id.replace(/_/g, " ")} ${r.label}`;
         if (!c.test.test(r.label) || c.not?.test(text)) continue;
-        const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => c.facts.includes(f)));
+        const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => conceptReads(c.facts, f)));
         if (r.formula !== undefined && !readsShared) continue;
         const ctx = c.context?.(`${text} ${m.name} ${m.id}`) ?? "";
         out.push({ concept: c.id, model: m.id, row: r.id, label: r.label, value: r.formula === undefined ? pickValue(r.value) : NaN, context: ctx, readsShared });
@@ -957,7 +971,7 @@ export function inv13(lib: Library): InvariantReport {
   for (const r of rows) {
     if (r.readsShared) continue;
     const c = CONCEPTS.find((x) => x.id === r.concept)!;
-    const shared = c.facts.map((f) => ({ f, v: pickValue(lib.facts.get(f)?.value) })).filter((x) => Number.isFinite(x.v));
+    const shared = conceptFacts(lib, c.facts).map((f) => ({ f, v: pickValue(lib.facts.get(f)?.value) })).filter((x) => Number.isFinite(x.v));
     const same = shared.find((x) => close(r.value, x.v, INV4_TOLERANCE));
     const others = [...new Set(rows.filter((o) => o.concept === r.concept && o.model !== r.model).map((o) => o.readsShared ? "shared" : fmt(o.value)))];
     violations.push({
