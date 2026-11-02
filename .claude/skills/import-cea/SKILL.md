@@ -50,7 +50,9 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   a leaf (copy the value, cite the cell) from a step worth modelling.
 - **In bulk**: `python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>`
   (Guesstimate: `scripts/convert-guesstimate.py`). Bulk models live in `models/grants/`, carry
-  `bulk: true`, and still follow every rule below.
+  `bulk: true`, and still follow every rule below. The spec sets `estimate_basis` (INV-18:
+  `past_average`, `marginal` or `unit_cost`, normalization.md 2.10); the GiveWell importer sets
+  `marginal`.
   - GiveWell grant sheets: `scripts/import-givewell-grants.py` (runs `scripts/link-parameters.py`),
     then `python3 scripts/link-resource-shares.py`. Both only touch GiveWell models: for another
     evaluator, extend their patterns or link by hand.
