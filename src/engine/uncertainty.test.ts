@@ -3,7 +3,8 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { assumptionValues, buildLibrary, compute } from "./model";
+import { assumptionValues, buildLibrary, compute, headline } from "./model";
+import { sensitivity } from "./sensitivity";
 import { DEFAULT_FACTOR, sourceOf, uncertainty } from "./uncertainty";
 import { childrenOf, lookupFor, rootOf } from "./tree";
 
@@ -154,4 +155,31 @@ describe("uncertainty", () => {
     expect(bu.drivers.length).toBeGreaterThan(10);
     expect(ms).toBeLessThan(1000);
   }, 60_000);
+});
+
+// A unit's conversion that reads a ranged shared fact (climate's @climate.*) moves the headline like a
+// model row does: sensitivity swings it and uncertainty counts it.
+describe("facts in a unit's conversion", () => {
+  const conv = {
+    groups: [{ id: "g", title: "G" }],
+    rows: [{ id: "uov_per_daly", section: "g", label: "healthy year", value: 2, kind: "judgment", explainer: "x" }],
+    units: { t: { label: "t", short: "t", to_common: "2 * (1 + @c.extra)" } },
+    common: { unit: "t", benchmark: "toy-t" },
+  };
+  const fact = { id: "c", label: "C", rows: [{ id: "extra", label: "Extra damage", value: { low: 0, best: 0.5, high: 1 }, kind: "judgment", explainer: "x" }] };
+  const toy = { id: "toy-t", name: "T", cause: "climate", kind: "charity", output: { row: "out", unit: "t", label: "t per $" }, rows: [{ id: "out", label: "Out", value: 1, kind: "observed", explainer: "x" }] };
+  const l = buildLibrary([toy], conv, [fact]);
+  const tm = l.models.get("toy-t")!;
+  const tav = assumptionValues(l.assumptions);
+
+  it("honours an override of the fact and swings it in sensitivity", () => {
+    expect(headline(l, tm, tav)).toBeCloseTo(1500);
+    expect(headline(l, tm, tav, { "@c.extra": 1 })).toBeCloseTo(2000);
+    expect(sensitivity(l, tm, tav).swings.find((s) => s.id === "@c.extra")).toMatchObject({ atLow: 1000, atHigh: 2000 });
+  });
+
+  it("counts it as a source of uncertainty", () => {
+    const d = uncertainty(l, tm, compute(l, tm, tav), tav, "charityevals").drivers.find((x) => x.key === "fact:c.extra");
+    expect(d?.elasticity).toBeCloseTo(1 / 3, 2);
+  });
 });

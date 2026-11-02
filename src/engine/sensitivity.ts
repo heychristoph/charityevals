@@ -71,7 +71,7 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     const high = pickValue(range, "high");
     swings.push(swing(r.id, r.label, "row", r.kind, low, high, line(av, { [r.id]: low }), line(av, { [r.id]: high })));
   }
-  for (const key of usedFacts(m)) {
+  for (const key of usedFacts(m, lib)) {
     const f = lib.facts.get(key);
     if (!f || !hasRange(f.value) || `@${key}` in edits) continue;
     const low = pickValue(f.value, "low");

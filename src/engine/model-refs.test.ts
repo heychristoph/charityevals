@@ -74,6 +74,9 @@ describe("model references (#id)", () => {
     // Uncertainty and the tree read the stored value without failing.
     const vals = compute(lib, m, av);
     expect(uncertainty(lib, m, vals, av, "charityevals").result).toBe(60);
+    // Through the reference, $w moves dest's result one for one, so it is a driver of meta-org's.
+    const w = uncertainty(lib, m, vals, av, "charityevals").drivers.find((d) => d.key === "assumption:w");
+    expect(w?.elasticity).toBeCloseTo(1, 2);
     const look = lookupFor(lib, m, vals, av, "charityevals");
     const root = rootOf(m, look);
     const kids = childrenOf(m, root, look);
