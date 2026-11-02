@@ -20,7 +20,8 @@ The model reproduces all 100 of GiveWell's intermediate figures, and those of ev
 
 ### Where we differ from GiveWell
 
-Nothing beyond the shared accounting choices.
+- **Household size (changed for consistency):** every model reads one household size per place, the latest DHS survey's. GiveWell uses 6.7 people for the whole programme (Northwest Nigeria, 2021 Malaria Indicator Survey); our view uses the 2024 DHS: 5.9 for the northwest overall, and each state's own figure on the state pages (from 2.8 in Osun to 6.2 in Kano). The evaluator view keeps 6.7.
+- Otherwise, the shared accounting choices.
 
 ### What isn't modelled
 

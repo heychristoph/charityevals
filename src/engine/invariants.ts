@@ -778,6 +778,11 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
     reads: (r) => r.factDeps.some((f) => f.startsWith("moral_weights.")), want: "@moral_weights.* * $life_value_multiplier",
   },
   {
+    id: "stillbirth-value", what: "a value of a stillbirth averted",
+    test: (t) => /\b(dalys?|daly equivalents?|years of life|life years|units? of value)\b.*\bper\b.*\bstill ?births?\b/i.test(t),
+    reads: (r) => r.factDeps.includes("givewell_shared.uov_per_stillbirth"), want: "@givewell_shared.uov_per_stillbirth * $life_value_multiplier / $uov_per_daly",
+  },
+  {
     id: "fx", what: "a pound or euro exchange rate",
     test: (t) => /\b(exchange|conversion|fx)\b/i.test(t) && /\b(gbp|eur|pounds?|euros?|£|€)\b/i.test(t),
     reads: (r) => r.factDeps.some((f) => f.startsWith("fx.")), want: "@fx.*",
@@ -786,7 +791,7 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
 
 /** INV-11: an evaluator's own exchange rate doesn't survive in our view where a shared one exists. */
 export function inv11(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.output && m.owner === "ambitious-impact");
+  const models = [...lib.models.values()].filter((m) => m.output && m.owner !== "charityevals");
   const violations: Violation[] = [];
   for (const m of models) {
     const path = rowsFeeding(m);
@@ -801,7 +806,7 @@ export function inv11(lib: Library): InvariantReport {
   }
   return {
     id: "INV-11", title: "No evaluator-internal exchange rate where a shared one exists", status: "partial", checked: models.length, violations,
-    how: `Ambitious Impact's models (the rule is general; other evaluators' models are being brought under it separately): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen; stillbirths, which have no shared value, are left out.`,
+    how: `Every evaluator's model (since 2026-11-02; before, Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
   };
 }
 

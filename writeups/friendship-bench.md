@@ -23,6 +23,7 @@ At that rate HLI's therapy charities come out near Founders Pledge's analysis of
 
 - **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models, 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). About 9 times lower.
 - **Discounting (ours):** later benefits count less at the discount rate under Your values; HLI doesn't discount (0 in the evaluator view).
+- **Household size (changed for consistency):** every model reads one household size per place, the latest DHS survey's: Zimbabwe's 4.1 people in place of HLI's 3.92 (kept in the evaluator view).
 - **Staff pay and credit by share of resources (ours):** off by default.
 - HLI publishes no ranges in this sheet, so the tornado chart shows mainly the exchange rate; the "100% judgment" flag reflects that gap.
 

@@ -434,7 +434,7 @@ counted the same way in all three StrongMinds models (`@wellby_factors` ratio, `
 Pledge's sheet counts none, so its model gets the household multiplier in our view, 1 in `published`).
 Ambitious Impact's Kaya Guides counts QALYs per participant taken from economic evaluations (0.028 a year),
 not a depression scale, so it has nothing to convert (unchanged, 1.07); its Novah sheet types GBD's moderate
-weight 0.396, the `@depression.dw_moderate` figure (AIM's files, not changed here). No GiveWell psychotherapy
+weight 0.396, which reads `@depression.dw_moderate` (the same number). No GiveWell psychotherapy
 model is imported.
 
 **Two GiveDirectly figures, two concepts.** `@cash.uov_per_dollar` (0.00335) is the benchmark old sheets divided
@@ -919,7 +919,7 @@ shrinks).
 | INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
 | INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`. |
-| INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | (Ambitious Impact's models for now.) Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death) or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@fx.*`), itself or through a row it is computed from. |
+| INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | Every evaluator's model (Ambitious Impact's only until 2026-11-02). Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death), a value of a stillbirth averted or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@givewell_shared.uov_per_stillbirth`, `@fx.*`), itself or through a row it is computed from. |
 | INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
 | INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |
 | INV-13 | Same concept, same value across models. | Rows on the path (not variants) whose label names one of a curated list of concepts several evaluators state (resource sharing, treatment costs averted, investment of income gains, years long-term gains last, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception, of a stillbirth, indirect deaths per diarrhoea death, household spillover of therapy, pledges kept, prior weight on education studies, depression per PHQ-9 point) read the concept's shared fact, the evaluator's figure in `published`. A place or year the facts don't cover is the only reason to differ, recorded as a waiver with the reason. Late October 2026: 81 rows; deworming's 10% investment share became a fact, the true copies in SoGive's, Founders Pledge's and Ambitious Impact's models read `@givewell_shared` (the 18 INV-4 waivers for them are gone), GiveWell's 2022 water sheets take the current 20% treatment costs averted. |
@@ -1055,7 +1055,7 @@ evaluator view still reproduces every `expected`. Every slider moves every model
    `ln(2) * $uov_per_ln_consumption / $uov_per_daly` (AIM's 1/2.3 or 1/2.5 pinned), deaths at
    `@moral_weights.<age band> * $life_value_multiplier / $uov_per_daly`, the band matching the age of the death
    (GiveWell's 2020 moral weights by age: under five, 5–14, 15–49, 50–74; AIM's DALYs per death in `published`;
-   stillbirths, with no shared value, stay AIM's), every discount rate, AIM's fixed 4% for costs included, at
+   a stillbirth at the shared `@givewell_shared.uov_per_stillbirth`, since 2026-11-02), every discount rate, AIM's fixed 4% for costs included, at
    `$discount_rate` (scripts/aim-shared-rates-2.py). No benefit grows with the economy in our view (Learning
    Alliance's 3% offset is AIM's only).
 5. **INV-11** checks it.
@@ -1150,3 +1150,47 @@ and Taimaka-HLI change nothing at the defaults.
   judgments (the END Fund's 10% false-monitoring risk, Deworm the World's 1%) stay each sheet's own. No result
   changes: every sheet still reproduces.
 
+
+### Fixed 2026-11-02: the last leftovers of one consistent way
+
+Each was an evaluator's own conversion left in our view, or a fact with no reader. Before → after: healthy years
+per $1,000, our view at the defaults; every evaluator view still reproduces every `expected`.
+
+- **A stillbirth.** Ambitious Impact's Opal Health counted 14.52 DALYs per stillbirth averted (GiveWell's older
+  33.4 units of value over AIM's 2.3). It now reads the shared `@givewell_shared.uov_per_stillbirth` (21) ×
+  `$life_value_multiplier` / `$uov_per_daly`, like its other deaths; AIM's figure in `published`. Every model that
+  values a stillbirth reads that fact (GiveWell's syphilis, Liberia and Healthy Futures sheets already did); INV-11,
+  now run on every evaluator's models, checks the label. Opal Health 22.0 → 21.8.
+- **Household size: one figure per place** (facts/household_size.json, 2.7). The latest DHS Program survey's mean
+  household size for the place (rural areas where the sheet counts rural households; a Nigerian state for New
+  Incentives' state models; Botswana's 2022 census; GiveWell's own figure for IRD's Sindh districts). It replaces
+  `@wellby_factors.household_size_psychotherapy` (StrongMinds' models now read Uganda's 4.7), GiveWell's per-country
+  rural facts and its GiveDirectly-tab and India figures, and `@givewell_shared.household_size_nigeria_northwest` /
+  `_bangladesh`. INV-13's `household-size` concept checks it. StrongMinds (HLI) 2.29 → 2.28, Friendship Bench
+  2.75 → 2.80 (Zimbabwe 4.1, HLI 3.92), World Spine Care 1.09 → 0.98 (Botswana and the Dominican Republic, 2.4 other
+  members, HLI's 3.33 for LMICs), GiveDirectly (Malawi) 5.81 → 5.72, New Incentives 4.13 → 3.98 (Northwest Nigeria
+  5.9, GiveWell's 6.7; each state's page its own state, Lagos 1.80 → 1.63, Kano 19.6 → 19.5), Evidence Action water
+  quality 11.6 → 9.51 (rural Kenya 4.2, Evidence Action's 5.2), Y-RISE desalination kiosks 26.8 → 22.7 (rural
+  Bangladesh 4.2, Y-RISE's 5.0), DIL water vouchers 20.2 → 22.5. Rows where the size only calibrates GiveWell's
+  GiveDirectly benchmark (which our view replaces with `@cash.uov_per_dollar`) read rural Kenya and move nothing.
+  Still their own, with the reason waived: households measured in a programme's own participants (Bandhan,
+  Village Enterprise's trial, GiveDirectly's Khongoni and Nampula surveys, PxD's farmers), single Indian states in
+  Evidence Action's in-line chlorination sheet, and HLI's grieving household for AMF (part of HLI's value of a
+  life, which our view replaces: it moves nothing).
+- **Optionality never ranks.** Rice Institute's KMC sheet (GiveWell, 2023) adds 4.3× cash for the money GiveWell
+  might later move to KMC elsewhere. Value-of-information and optionality sheets are side sheets, so our view
+  counts the direct impact only (12.6× cash; GiveWell's 16.9× in `published`): 23.4 → 17.5. No other ranked sheet
+  has an optionality or value-of-information component on its path.
+- **Years after a grant are discounted from when they happen.** Evidence Action's two syphilis sheets discounted
+  years 6–10 from year 0. Now ÷ (1 + rate)^5 for the grant period, and the government's counterfactual years
+  from the end of its later scale-up; the Zambia (original) sheet also discounts the grant years, as the
+  Zambia/Cameroon sheet did. 44.5 → 39.5 and 35.9 → 33.1.
+- **TerraPraxis reads the years-a-win-counts slider.** Founders Pledge's $0.02 a tonne embeds five years of
+  re-powering brought forward; our view scales the tonnes by `pv_annuity_due(1, rate, $win_years_counted)` / 5,
+  like every won reform (2.9): 20.1 → 18.6.
+- **Facts nothing reads, removed**: GiveWell's Grevillea and naira rates and givewell_common's naira rate (the
+  rows read `@fx`), ACE's caged-hen SADs (the models read `@sad_factors`), AIM's 2024 shrimp weight and its
+  pain-intensity ratios, the two climate cross-checks, the GBD mild-depression weight (kept in the PHQ-9 fact's
+  note), and the across-causes moved-money mix with its facts (2.8). `@ace.dvf_animals_spared_per_meal` is
+  Denmark's figure beside the shared Brazilian one (labelled so); neither moves a result (animal counts are
+  context, SADs drive the result).

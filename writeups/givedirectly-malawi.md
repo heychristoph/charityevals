@@ -13,9 +13,11 @@ The model is identical to the Kenya one; only the inputs that describe Malawi di
 
 Child mortality is slightly lower, so the mortality benefit is a smaller share of the total (9% against 12%).
 
+Household size, which spreads the transfer over the family, reads the site's one figure for rural Malawi: 4.3 people in the 2024 DHS (GiveWell's 4.5, from the 2015-16 survey, stays in the evaluator view).
+
 ### How this page is built
 
-This model inherits every row, explanation and source from GiveDirectly (Kenya) and overrides only the eight inputs above. Malawi's purchasing-power and child mortality figures come from the shared Malawi facts. If GiveWell revises a part of the model common to both countries, both pages update from a single change.
+This model inherits every row, explanation and source from GiveDirectly (Kenya) and overrides only the eight inputs above and the household size. Malawi's purchasing-power and child mortality figures come from the shared Malawi facts. If GiveWell revises a part of the model common to both countries, both pages update from a single change.
 
 ### Biggest uncertainties
 

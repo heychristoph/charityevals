@@ -30,7 +30,7 @@ At that rate HLI's therapy charities come out near Founders Pledge's analysis of
 - **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models (above), 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). This is the step that moves the result most: about 9 times.
 - **Discounting (ours):** benefits that come later count less, at the discount rate under Your values; HLI doesn't discount (0 in the evaluator view). Therapy's effect fades within a few years, so this changes little.
 - **Staff pay and credit by share of resources (ours):** with credit by share of resources on, staff's pay below market counts as part of the cost. Off by default.
-- HLI's household figures (4.7 people, 16% spillover each) are now the site's shared ones for psychotherapy, which Founders Pledge's and SoGive's models of StrongMinds read too; HLI's numbers are unchanged.
+- **Household size (changed for consistency):** every model reads one household size per place, the latest DHS survey's: Uganda's 4.7 people, where StrongMinds mostly works, in place of HLI's 4.73 (kept in the evaluator view). HLI's 16% spillover per member is the site's shared figure for psychotherapy; Founders Pledge's and SoGive's StrongMinds models read both.
 - HLI publishes no ranges in this sheet, so the tornado chart shows mainly the exchange rate; the "100% judgment" flag reflects that gap.
 
 ### Sources
