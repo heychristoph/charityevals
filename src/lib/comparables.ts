@@ -24,6 +24,8 @@ export function assumptionComparable(id: string, v: number, av: Record<string, n
     }
     case "discount_rate":
       return v <= 0 ? "Good done in 10 years counts in full." : `Good done in 10 years counts ${Math.round(100 / (1 + v) ** 10)}%.`;
+    case "estimate_age_discount":
+      return v <= 0 ? "A 10-year-old estimate counts in full." : `A 2-year-old estimate counts ${Math.round(100 / (1 + v) ** 2)}%, a 10-year-old one ${Math.round(100 / (1 + v) ** 10)}%.`;
   }
   return undefined;
 }

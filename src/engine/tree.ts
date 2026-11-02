@@ -4,7 +4,7 @@
 // Works one formula at a time, so it costs the same on a 20-row model as on an 8,000-row one: only
 // the nodes the reader has opened are ever looked at.
 import { evaluate, type Lookup, type Node } from "./expr";
-import { headlineNode, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
+import { headlineNode, isAgeDivisor, isAgeYears, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
 import { formulaText } from "./derive";
 import type { Uncertainty } from "./uncertainty";
 
@@ -185,8 +185,11 @@ export type TreeNode = {
 };
 
 /** The headline every page shows, over the model's own result: its output row, converted with the
- * unit's exchange rates into years of healthy life (DALYs), per $1,000 (see headlineNode). */
-export function headlineExpr(m: ResolvedModel, toCommon: string): Node {
+ * unit's exchange rates into years of healthy life (DALYs), per $1,000 (see headlineNode). Given a
+ * formula instead of the unit's conversion (headlineExprOf: in our view with the estimate's age), that
+ * formula. */
+export function headlineExpr(m: ResolvedModel, toCommon: string | Node): Node {
+  if (typeof toCommon !== "string") return toCommon;
   return headlineNode({ type: "ref", scope: "row", name: m.output!.row }, toCommon);
 }
 
@@ -196,8 +199,9 @@ export function headlineFormula(m: ResolvedModel, toCommon: string): string {
 }
 
 /** The root: the headline, years of healthy life per $1,000, when the model's unit converts
- * (`toCommon`, the unit's conversion into the common unit); else the model's output row. */
-export function rootOf(m: ResolvedModel, look: Lookup, toCommon?: string): TreeNode {
+ * (`toCommon`, the unit's conversion into the common unit, or the whole headline formula from
+ * headlineExprOf); else the model's output row. */
+export function rootOf(m: ResolvedModel, look: Lookup, toCommon?: string | Node): TreeNode {
   if (toCommon === undefined) return nodeFor(m, { type: "ref", scope: "row", name: m.output!.row }, "r", undefined, look, 1, 1);
   const expr = headlineExpr(m, toCommon);
   return { key: "r", type: "expr", expr, via: [], value: safe(expr, look), e: 1, g: 1, label: "Years of healthy life per $1,000" };
@@ -205,7 +209,7 @@ export function rootOf(m: ResolvedModel, look: Lookup, toCommon?: string): TreeN
 
 function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined, look: Lookup, e: number | undefined, g?: number): TreeNode {
   const value = safe(n, look);
-  if (n.type === "num") return { key, op, type: "const", via: [], value, e, g };
+  if (n.type === "num") return { key, op, type: "const", via: [], value, e, g, ...(isAgeYears(n) ? { label: "Years since the estimate was made" } : {}) };
   if (n.type === "ref" && n.scope !== "row") return { key, op, type: n.scope, refId: n.name, via: [], value, e, g };
   if (n.type === "ref") {
     const t = passThrough(m, n.name, look);
@@ -213,7 +217,7 @@ function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined,
     const node = m.byId.get(t.id)?.node;
     return { key, op, type: node ? "row" : "input", rowId: t.id, named: n.name, via: t.via, expr: node, value, e, g };
   }
-  return { key, op, type: "expr", expr: n, via: [], value, e, g };
+  return { key, op, type: "expr", expr: n, via: [], value, e, g, ...(isAgeDivisor(n) ? { label: "For the estimate's age" } : {}) };
 }
 
 /** A node's parts, each with its leverage on the bottom line through this branch (chain rule). */
@@ -229,16 +233,16 @@ export function childrenOf(m: ResolvedModel, node: TreeNode, look: Lookup): Tree
 
 /** The keys from the root down to the first node showing a row (or having skipped it on the way),
  * breadth first, so the shortest route. Undefined when the bottom line doesn't use the row. */
-export function pathTo(m: ResolvedModel, rowId: string, look: Lookup, toCommon?: string): string[] | undefined {
+export function pathTo(m: ResolvedModel, rowId: string, look: Lookup, toCommon?: string | Node): string[] | undefined {
   return pathToNode(m, look, toCommon, (n) => n.rowId === rowId || n.named === rowId || n.via.includes(rowId));
 }
 
 /** The same for an assumption or a shared fact: the first node that reads it. */
-export function pathToRef(m: ResolvedModel, scope: "assumption" | "fact" | "model", id: string, look: Lookup, toCommon?: string): string[] | undefined {
+export function pathToRef(m: ResolvedModel, scope: "assumption" | "fact" | "model", id: string, look: Lookup, toCommon?: string | Node): string[] | undefined {
   return pathToNode(m, look, toCommon, (n) => n.type === scope && n.refId === id);
 }
 
-function pathToNode(m: ResolvedModel, look: Lookup, toCommon: string | undefined, hit: (n: TreeNode) => boolean): string[] | undefined {
+function pathToNode(m: ResolvedModel, look: Lookup, toCommon: string | Node | undefined, hit: (n: TreeNode) => boolean): string[] | undefined {
   const root = rootOf(m, look, toCommon);
   const parent = new Map<string, string>();
   const seen = new Set<string>();

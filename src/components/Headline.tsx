@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { buildLibrary, comparable, headline, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
 import { useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
@@ -148,6 +148,30 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
           </InfoTip>
         </WithTip>
       </span>
+      {years && <EstimateAge model={model} av={av} />}
     </div>
   );
 }
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+/** "November 2016" from "2016-11-01"; a year alone as itself. */
+const monthYear = (d: string) => (d.length >= 7 ? `${MONTHS[Number(d.slice(5, 7)) - 1]} ${d.slice(0, 4)}` : d.slice(0, 4));
+
+/** "Estimate from November 2016, 10 years old: × 0.61 at your settings": how old the estimate is and
+ * what the reader's discount for its age (docs/normalization.md 2.11) does to the figure above. */
+function EstimateAge({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+  const age = estimateAge(lib, model);
+  const made = model.source?.published;
+  if (age === undefined || !made) return null;
+  const factor = ageFactor(lib, model, av);
+  const old = age < 1 ? "under a year old" : `${Math.round(age)} ${Math.round(age) === 1 ? "year" : "years"} old`;
+  const effect = factor < 1 ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
+  return (
+    <p className="m-age">
+      Estimate from {monthYear(made)}, {old}: {effect} at <a href={`/assumptions#a-${AGE_DISCOUNT}`}>your settings</a>
+      {age > 0 && <> ({formatPercent(av[AGE_DISCOUNT])} less for each year)</>}.
+    </p>
+  );
+}
+
+const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
