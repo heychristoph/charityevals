@@ -211,15 +211,17 @@
       "id": "total_number_of_women_screened_over_scale_up_period_conditio",
       "label": "Total number of women screened over scale-up period, conditional on successful dual test adoption (Zambia (original))",
       "section": "cea",
-      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * average_screening_rate_over_scale_up_period_intervention_zam * duration_of_scale_up_grant_period_in_years_zambia_original",
-      "expected": 2108887.441
+      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * average_screening_rate_over_scale_up_period_intervention_zam * pv_annuity_due(1, years_discount_rate, duration_of_scale_up_grant_period_in_years_zambia_original)",
+      "expected": 2108887.441,
+      "explainer": "**Changed for consistency.** Our view discounts the years of the grant period at the shared rate (`$discount_rate`), counted from the start of the grant, like every year of benefit the site counts; GiveWell sums them at face value (0 in the evaluator view)."
     },
     {
       "id": "total_number_of_women_screened_over_scale_up_period_if_dual",
       "label": "Total number of women screened over scale-up period, if dual test adoption fails (Zambia (original))",
       "section": "cea",
-      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * current_syphilis_screening_rate_zambia_original * duration_of_scale_up_grant_period_in_years_zambia_original",
-      "expected": 1706289.511
+      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * current_syphilis_screening_rate_zambia_original * pv_annuity_due(1, years_discount_rate, duration_of_scale_up_grant_period_in_years_zambia_original)",
+      "expected": 1706289.511,
+      "explainer": "**Changed for consistency.** Our view discounts the years of the grant period at the shared rate (`$discount_rate`), counted from the start of the grant, like every year of benefit the site counts; GiveWell sums them at face value (0 in the evaluator view)."
     },
     {
       "id": "expected_number_of_women_screened_over_scale_up_period_zambi",
@@ -289,8 +291,9 @@
       "id": "expected_number_of_women_screened_beyond_grant_period_years",
       "label": "Expected number of women screened beyond grant period (years 6-10) (Zambia (original))",
       "section": "cea",
-      "formula": "pv_annuity_due(1, years_discount_rate, number_of_years_beyond_grant_period_that_we_re_modeling_impa) * (percent_chance_that_dual_test_is_successfully_adopted_in_int * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop + (1 - percent_chance_that_dual_test_is_successfully_adopted_in_int) * annual_total_number_of_women_screened_if_dual_test_isn_t_ado)",
-      "expected": 1747689.71
+      "formula": "(pv_annuity_due(1, years_discount_rate, number_of_years_beyond_grant_period_that_we_re_modeling_impa) * (percent_chance_that_dual_test_is_successfully_adopted_in_int * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop + (1 - percent_chance_that_dual_test_is_successfully_adopted_in_int) * annual_total_number_of_women_screened_if_dual_test_isn_t_ado)) / (1 + years_discount_rate) ^ duration_of_scale_up_grant_period_in_years_zambia_original",
+      "expected": 1747689.71,
+      "explainer": "**Changed for consistency.** These years come after the 5-year grant period, so our view discounts them from when they happen: the annuity over the years beyond the grant, times 1/(1 + rate)^5 for the wait until the grant period ends. GiveWell doesn't discount (rate 0 in the evaluator view, so the sheet's figure is unchanged)."
     },
     {
       "id": "expected_number_of_women_treated_beyond_grant_period_years_6",
@@ -359,15 +362,17 @@
       "id": "total_number_of_women_screened_over_scale_up_period_conditio_2",
       "label": "Total number of women screened over scale-up period, conditional on successful dual test adoption (Zambia (original))",
       "section": "cea",
-      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * average_screening_rate_over_scale_up_period_counterfactual_z * duration_of_counterfactual_scale_up_period_zambia_original",
-      "expected": 2108887.441
+      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * average_screening_rate_over_scale_up_period_counterfactual_z * pv_annuity_due(1, years_discount_rate, duration_of_counterfactual_scale_up_period_zambia_original)",
+      "expected": 2108887.441,
+      "explainer": "**Changed for consistency.** Our view discounts the years of the grant period at the shared rate (`$discount_rate`), counted from the start of the grant, like every year of benefit the site counts; GiveWell sums them at face value (0 in the evaluator view)."
     },
     {
       "id": "total_number_of_women_screened_over_scale_up_period_if_dual_2",
       "label": "Total number of women screened over scale-up period, if dual test isn't adopted in counterfactual (Zambia (original))",
       "section": "cea",
-      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * current_syphilis_screening_rate_zambia_original * duration_of_counterfactual_scale_up_period_zambia_original",
-      "expected": 1706289.511
+      "formula": "number_of_pregnant_women_targeted_annually_zambia_original * current_syphilis_screening_rate_zambia_original * pv_annuity_due(1, years_discount_rate, duration_of_counterfactual_scale_up_period_zambia_original)",
+      "expected": 1706289.511,
+      "explainer": "**Changed for consistency.** Our view discounts the years of the grant period at the shared rate (`$discount_rate`), counted from the start of the grant, like every year of benefit the site counts; GiveWell sums them at face value (0 in the evaluator view)."
     },
     {
       "id": "expected_number_of_women_screened_over_scale_up_period",
@@ -414,8 +419,9 @@
       "id": "expected_number_of_women_screened_beyond_scale_up_period",
       "label": "Expected number of women screened beyond scale-up period",
       "section": "cea",
-      "formula": "pv_annuity_due(1, years_discount_rate, number_of_years_of_benefits_beyond_scale_up_period) * (percent_chance_that_dual_test_would_have_been_adopted_by_gov * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop_2 + (1 - percent_chance_that_dual_test_would_have_been_adopted_by_gov) * annual_total_number_of_women_screened_beyond_scale_up_period)",
-      "expected": 1385731.708
+      "formula": "(pv_annuity_due(1, years_discount_rate, number_of_years_of_benefits_beyond_scale_up_period) * (percent_chance_that_dual_test_would_have_been_adopted_by_gov * percent_chance_that_program_is_sustained_after_scale_up_cond * annual_total_number_of_women_screened_once_dual_test_is_adop_2 + (1 - percent_chance_that_dual_test_would_have_been_adopted_by_gov) * annual_total_number_of_women_screened_beyond_scale_up_period)) / (1 + years_discount_rate) ^ (duration_of_scale_up_grant_period_in_years_zambia_original + number_of_years_beyond_grant_period_that_we_re_modeling_impa - number_of_years_of_benefits_beyond_scale_up_period)",
+      "expected": 1385731.708,
+      "explainer": "**Changed for consistency.** The government's sustained years end at the same horizon as the grant's (year 10), so they begin after the grant period plus the years the government would have scaled up later; our view discounts them from then. GiveWell doesn't discount (rate 0 in the evaluator view)."
     },
     {
       "id": "expected_number_of_women_treated_beyond_scale_up_period",
