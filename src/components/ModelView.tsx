@@ -23,7 +23,7 @@ export default function ModelView({ id, bulk = false, place, about, children }: 
   const r = useResultFor(model);
   // The reader's own edits to this model's numbers, from the page's URL: its inputs and facts only.
   const urlEdits = useEdits();
-  const edits = useMemo(() => editsFor(model, urlEdits), [model, urlEdits]);
+  const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const values = useMemo(() => compute(lib, model, av, edits), [model, av, edits]);
   const u = useMemo(() => uncertainty(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
   // The caveats describe the result on screen, so they follow the edits.
