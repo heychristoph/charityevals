@@ -137,8 +137,11 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
-  not a unit cost of delivery, not a projected budget), multiply by `@meta.marginal_vs_past_average` in an
-  `ours` section (`published` 1), as the retrospective climate models and The Life You Can Save do.
+  not a unit cost of delivery, not a projected budget), multiply by the slider `$marginal_vs_past_average` in
+  an `ours` section (`published` 1), as the retrospective climate models and The Life You Can Save do. Set
+  the model's `estimate_basis`: `past_average`, `marginal` (an estimate of the next grant or of planned
+  work) or `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider
+  (normalization.md 2.10).
 - **Climate** (normalization.md 2.5): the output is tonnes per dollar (`1 / cost per tonne`, in `tco2e`);
   rows `years_until_avoided` (wait discounted at `$discount_rate`), `air_pollution_weight` and
   `extra_deaths_per_tco2e` sit in an `ours` section, each input sourced or a labelled judgment with a range.

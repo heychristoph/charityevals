@@ -1,6 +1,6 @@
 ### Summary
 
-The RNLI runs lifeboats, beach lifeguards and water-safety campaigns around the coasts of the UK and Ireland, crewed mostly by volunteers. SoGive estimated from its 2019 annual report that it spent over £420,000 of direct costs per life saved, and closer to £500,000 with overheads; on our scale that is **<span data-figure="headline" data-model="royal-national-lifeboat-institution-sogive">0.058</span> years of healthy life per $1,000**.
+The RNLI runs lifeboats, beach lifeguards and water-safety campaigns around the coasts of the UK and Ireland, crewed mostly by volunteers. SoGive estimated from its 2019 annual report that it spent over £420,000 of direct costs per life saved, and closer to £500,000 with overheads. That is an average over the RNLI's whole service, and the next dollar saves fewer lives; counting it at half the average (the default under Your values), on our scale that is **<span data-figure="headline" data-model="royal-national-lifeboat-institution-sogive">0.029</span> years of healthy life per $1,000**.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £420,000. SoGive rates the RNLI "Not Recommended (firm)".
 
@@ -20,15 +20,18 @@ SoGive's figures come first, ending at its cost per life saved. Our steps follow
 - **Pounds to dollars** at the 2019 average exchange rate.
 - **Value of a life:** each life saved is valued like any adult's death on the site (GiveWell's value, times the value-of-life slider).
 - **Staff pay and volunteers:** with credit by share of resources on, staff's forgone pay and the volunteer crews' time count as part of the cost.
+- **A marginal dollar, not the past average:** the cost per life is a whole year's spending over every life saved that year. The stations and campaigns already cover the coasts, so the next dollar saves fewer lives than the average dollar did; our view counts it at the share set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default, our judgment; 18% to 100%), one slider for every model built on a past average. The evaluator view keeps 100%.
 
 ### What drives the result
 
 - **The RNLI's count of lives saved.** It is the RNLI's own judgment of who would have died without help. SoGive notes it may undercount lives saved by preventive work, and that doubling the lives and counting the help to people not in danger would still leave the RNLI far from its benchmark of £5,000 a life.
 - **The value of a life**, a value you set.
+- **How much the next dollar does compared with the average dollar so far**, a value you set (half by default).
 
 ### Where we differ from SoGive
 
 - **Overheads included**, using SoGive's own figure with them.
+- **The next dollar, not the average:** counted at half the average by default (Your values).
 - **Lives become healthy years** at the site's value for an adult's death; SoGive compares costs per life directly with its benchmark.
 - **Staff pay and volunteers:** with credit by share of resources, staff's forgone pay and the volunteer crews' time (our judgment: a quarter of the cash cost) count as in-kind contributions.
 

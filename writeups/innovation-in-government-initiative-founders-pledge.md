@@ -25,7 +25,7 @@ In Founders Pledge's figures India is about 83% of the benefit; after our correc
 
 - **How much of the ministry's savings estimate is real** (0% to 75%): at its low end the India part is zero.
 - **Years a won reform counts** under Your values (5 by default, 1 to 20): both reforms are proportional to it, near enough.
-- **Whether a marginal dollar does as much as the initiative's past average** (50% by default, 18% to 100%).
+- **Whether a marginal dollar does as much as the initiative's past average** (Your values: "How much the next dollar does compared with the average dollar so far"; 50% by default, 18% to 100%).
 - **The exchange rate between health and income** under Your values: the result is in income terms.
 - For Zambia, how much earnings rise per standard deviation of test scores and for how long: Founders Pledge's 2023 education figures, shared by every education model on the site.
 
@@ -38,7 +38,7 @@ In Founders Pledge's figures India is about 83% of the benefit; after our correc
 - **Discount rate:** our view uses the shared rate under Your values (4% by default) for Zambia's earnings gains; Founders Pledge uses 5%.
 - **Years a won reform counts (changed for consistency):** Founders Pledge credits the initiative with 1.5 years for India's reform (0 to 3) and 3 for Zambia's, undiscounted. Every model on the site that credits a won reform reads one figure for how long the win counts before it would have come anyway, Years a won reform counts under Your values (5 by default), each year after the first discounted at the shared rate; the evaluator view keeps Founders Pledge's years.
 - **The wait until the reforms take effect (ours):** the initiative's budget runs to 2017 and the reforms were rolled out in 2016–2018; we discount about a year's wait (0 to 3) at the shared rate, as every model that credits a won reform does. Founders Pledge doesn't.
-- **Past average, not the next dollar (ours):** Founders Pledge divides the initiative's budget to date by the two reforms it helped win, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the shared 50% of the average (18% to 100%). The evaluator view keeps 100%.
+- **Past average, not the next dollar (ours):** Founders Pledge divides the initiative's budget to date by the two reforms it helped win, an average. The next dollar does less than the average did, since an organisation pursues its best opportunities first: like every model built on an organisation's past spending over its past wins, our view counts the next dollar at the share of the average set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default, our judgment; 18% to 100%). The evaluator view keeps 100%.
 - **Credit by share of resources:** when on, staff's pay below market counts as their contribution, at our default for research and policy work (staff about 60% of cost, paid about 30% below market).
 
 ### Biggest uncertainties

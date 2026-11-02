@@ -1,6 +1,6 @@
 ### Summary
 
-The MND Association supports people living with motor neurone disease in England, Wales and Northern Ireland, funds research and campaigns. SoGive published only an upper bound for it: at best about £300 per year of healthy life, in a scenario SoGive calls unlikely. On our scale that bound is **<span data-figure="headline" data-model="motor-neurone-disease-association-sogive-upper-bound">1.4</span> years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
+The MND Association supports people living with motor neurone disease in England, Wales and Northern Ireland, funds research and campaigns. SoGive published only an upper bound for it: at best about £300 per year of healthy life, in a scenario SoGive calls unlikely. On our scale that bound is **<span data-figure="headline" data-model="motor-neurone-disease-association-sogive-upper-bound">0.84</span> years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £300. SoGive rates the MND Association "Not Recommended (firm)".
 
@@ -14,7 +14,7 @@ SoGive's own basis for its rating is the care cost, about £2,250 a person a yea
 
 ### Our steps
 
-Pounds to dollars at the 2021 rate, the research part discounted for a 15-year lag, and staff pay when credit by share of resources is on.
+Pounds to dollars at the 2021 rate, the research part discounted for a 15-year lag and counted at the share of a past average set under Your values, "How much the next dollar does compared with the average dollar so far" (50% by default: £100 a healthy year is what past research achieved on average, and the next dollar's research does less), and staff pay when credit by share of resources is on.
 
 ### Why it isn't ranked
 
