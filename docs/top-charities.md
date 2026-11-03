@@ -118,11 +118,15 @@ Each new family gets what the existing ones have: a skeleton in `scripts/gen-tem
 every invariant and the lint, a section in `references/templates.md`, and a blind test charity with an
 evaluator model, where one exists, before it is used on the list.
 
-## Decisions needed
+## Decided (2026-11-03)
 
-- **Partial coverage:** rank a charity on what is modelled with its coverage shown, or rank only above a
-  coverage share (say half of programme spending) and list the rest as "not yet comparable".
-- **Conservation and rights:** leave them unranked ("no comparable measure"), count only what converts
-  (climate in tCO2e, health effects), or add a value-judgement slider that prices them in healthy years.
-- **Dogs and cats:** take species weights from a published source (Rethink Priorities' method extended,
-  or a judgement with a wide range), or leave companion-animal work unranked for now.
+Every programme is modelled; there is no partial coverage and no "no comparable measure":
+
+- **Companion animals** go through the animal pipeline like every other species, with Rethink
+  Priorities' welfare ranges for the species' weight.
+- **Conservation** lands on years of healthy life through what it does for people and animals: future
+  health (air, water, food security, disease spillover), wellbeing, climate (tCO2e), and catastrophic risk.
+- **Rights and advocacy** follow the charity's own theory of change to where it lands on wellbeing or
+  health (people freed, laws changed and the lives they affect), like any won policy.
+
+So step 1 above becomes coverage of the whole charity, and step 7 is two more families like the others.
