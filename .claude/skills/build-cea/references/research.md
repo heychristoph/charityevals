@@ -17,8 +17,12 @@ currency, year).
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
 - Use the latest complete fiscal year for which you also have reach numbers; note the fiscal year
   end. If the charity reports program costs per activity, use them for `program_spend`.
-- Currency: an input row `fx_<cur>_usd` with the year's average rate (IRS yearly average rates,
-  or the central bank), never a constant in a formula.
+- Currency: the local-currency amount times `@fx.usd_per_<cur>_<year>` (the IRS yearly average
+  where the IRS lists the currency, else the World Bank's official rate; `scripts/link-fx.py` adds a
+  missing year), never a typed rate or a constant in a formula.
+- Programmes: list every programme with its spending for the year (the statement of functional
+  expenses or the annual report's breakdown); you model all that are a tenth or more of programme
+  spending, weighted by spending (SKILL.md step 0).
 
 ## Reach (reach section)
 
@@ -39,12 +43,17 @@ currency, year).
 
 ## Baselines and shared facts
 
-- Mortality: IHME GBD results tool, UN IGME (childmortality.org). Consumption and PPP: World Bank
-  (PIP, WDI). Household size: DHS StatCompiler.
+- Mortality: IHME GBD results tool, UN IGME (childmortality.org), with the age split of the deaths
+  (each band is valued at its own `@moral_weights`). Consumption and PPP: World Bank (PIP, WDI).
+  Household size: facts/household_size.json first; a missing place gets its latest DHS figure
+  (StatCompiler, mean usual members per household) as a new fact there.
 - Before adding a fact, grep `facts/` for it. New country data goes in `facts/<country>.json` with
   `source.url`, `retrieved`, and a range when sources disagree.
 - Animals: SADs per physical change come from facts/sad_factors.json (one figure per change; a new
-  change gets a new fact with a `change` note). Species weights come only from
+  change gets a new fact with a `change` note and its SAD version). Reach is the animals under the
+  commitments won or tracked in the year (Chicken Watch, the Cage-Free Tracker, company reports);
+  pledges kept, years counted and production response are shared figures, not research targets. A
+  country's meal mix only from a published estimate covering both it and the reference meal. Species weights come only from
   facts/welfare_ranges.json (Rethink Priorities, relative to a chicken), through the `ced_<s>` rows;
   a species it lacks uses the stand-ins of docs/normalization.md, decision 6.
 
