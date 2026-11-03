@@ -35,7 +35,7 @@ export type TemplateSpec = {
   /** The estimate basis a model of this family usually has (INV-18, docs/normalization.md 2.10). */
   basis: Basis;
   /** Other bases the family's conventions name for a kind of dollar it often meets (templates.md
-   * Convention 12): no low finding for them, but the reason still goes in the summary. */
+   * Convention 11): no low finding for them, but the reason still goes in the summary. */
   altBasis?: Basis[];
   reads: Read[];
 };

@@ -22,6 +22,12 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     rows of src/engine/moved-money.ts (#model-id, @meta), the career-change step,
                     $marginal_vs_past_average; a climate skeleton in tco2e with years_until_avoided,
                     air_pollution_weight and extra_deaths_per_tco2e
+  domestic-services, humanitarian-relief, medical-research, conservation, rights-advocacy  in DALYs,
+                    each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
+                    docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
+                    with @welfare_ranges (the raw species step)
+  every skeleton    the proxy rows for a programme with no outcome data: comparable models read live
+                    x $missing_data_discount (docs/normalization.md 2.12)
 """
 import json, os, subprocess, sys
 

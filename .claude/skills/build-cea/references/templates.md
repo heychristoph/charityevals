@@ -14,12 +14,16 @@ outcome      outcome_total (native unit) → <prefix>_per_dollar = outcome_total
 donor        (ours) staff_cost_share, salary_gap (@staff_pay) → salary_sacrifice → donor_cost_share
              [marginal_vs_past_average, past averages only] → <prefix>_per_donor_dollar
 species      (ours, animal families) sads_<s> → ced_<s> → ced_per_donor_dollar (the output, unit ced)
+bridges      (ours) other units' outcomes into the output unit, fixed rows (normalization.md 2.6)
+proxy        (ours) programmes with no outcome data: peers' result × $missing_data_discount
 extras       deaths (wellbeing), moved_money and careers (policy-research-meta), conversion (climate)
 ```
 
-Skeletons: `../templates/<family>.json` (from `../scripts/gen-templates.py`); their explainers say
-which shared figure each row reads and when to change it. src/engine/templates.ts lists each family's
-required rows, bounds, usual basis and required shared reads, which the lint enforces.
+The newer families (domestic-services, humanitarian-relief, medical-research, companion-animals,
+conservation, rights-advocacy, and high-income care) each have a file in [families/](families/).
+
+Skeletons: `../templates/<family>.json` (from `../scripts/gen-templates.py`); src/engine/templates.ts
+lists each family's required rows, bounds, basis and shared reads, which the lint enforces.
 
 ## Glossary
 
@@ -29,7 +33,7 @@ required rows, bounds, usual basis and required shared reads, which the lint enf
 - **SAD** (suffering-adjusted day, Ambitious Impact's): a day of an animal's disabling pain, milder pain as a fraction, AIM's species weight built in (the 2024 and 2025 versions differ in it).
 - **ced** (chicken-equivalent pain day): a day of disabling pain in a chicken; animal models' output unit.
 - **Species step**: the fixed `sads_<s>` → `ced_<s>` rows, one pair per species, that swap AIM's species weight for Rethink Priorities' welfare range (normalization.md 2.4); the split by species is a fact or ranged judgment.
-- **Our view / evaluator view**: our view, the headline, reads the shared facts and sliders; the evaluator view reproduces an imported sheet at the evaluator's own rates (`evaluator.assumptions`, `published`). A charityevals model has only ours.
+- **Our view / evaluator view**: our view reads the shared facts and sliders; the evaluator view reproduces an imported sheet at its own rates. A charityevals model has only ours.
 - **Shared fact** (`@file.key`): a sourced number in facts/*.json, one value for every model. **Shared assumption** (`$name`, a slider): a value judgment in assumptions/default.json that readers can move (discount rate, value of a life).
 - **`estimate_basis`**: what the dollar is: `unit_cost` (price per item delivered), `marginal` (the next grant or planned work), `past_average` (past spending over what it won).
 - **Canonical row**: a row id every model of a family has, meaning the same (`program_spend`, `total_adj`); listed in src/engine/templates.ts.
@@ -95,10 +99,13 @@ required rows, bounds, usual basis and required shared reads, which the lint enf
     `past_average`). A past average's cost and wins come from the *same period*: `program_spend ×
     average_spend_vs_year`, the average real spending over the wins' years (Convention 8) ÷ the
     modelled year's. Years without published accounts: a ranged judgment anchored on the nearest one.
-12. **Partial coverage.** A programme of a tenth or more of spending with no spending split and no
-    outcome data can't be modelled (never guess its outcome): its cost stays in `program_expenses`, out
-    of `program_spend`; the summary and `program_spend`'s explainer name it, its share of spending and
-    that the result covers only the rest.
+12. **Every programme is modelled.** Thin outcome data: the closest family's chain with wide ranged
+    judgments. No outcome data at all: the proxy rows, its spending in `proxy_program_spend` (out of
+    `program_spend`), `proxy_peer_result = median(#a, #b, #c)` of the same kind of work on the site (or
+    the nearest evaluated programme), × `$missing_data_discount`; the summary names it.
+13. **Several outcome units** (the new families): each outcome in its own unit, entering the output
+    unit only through the template's bridge rows (`uov_bridged` → `dalys_from_uov`; normalization.md
+    2.6), never a rate typed between them.
 
 ## direct-health (uov, unit_cost)
 
@@ -125,20 +132,18 @@ programme's fact, or a sourced input where the site has none:
 `treatment_costs_share` (`@givewell_shared.treatment_costs_averted`; 0 for treatment programmes),
 `resource_sharing_multiplier` and `years_income_gain_lasts` are the same for every programme.
 
-- Baseline mortality is from the causes the intervention affects, in the target group and region,
-  today (say how you adjusted from the trials' era). Prefer an all-cause effect from a systematic
+- Baseline mortality: the causes affected, target group and region, today. Prefer an all-cause effect from a systematic
   review (then `indirect_deaths_ratio` is 0); with a cause-specific effect keep it, and check deaths
   averted per person-year against the all-cause trial result scaled to today's mortality.
 - **Ages**: deaths by age band (research.md), weighted by the programme's reach by country. A split another model
   could reuse goes into facts/death_ages.json as `<cause>_<place>_share_<band>`, read by the rows
   (`share_5_14_of_over5 = @death_ages.<x>_share_5_14/(1-@death_ages.<x>_share_under5)`). Several
   age groups at different risk: a row per group, summed into `deaths_averted_per_person`.
-- **Waits**: `gift_to_grant_years` (unspent funds at year end ÷ yearly spending; 0 when the charity
-  spends as it raises), `delay_years` (spending to delivery, from its distribution schedule) and
-  `benefit_midpoint_years` (half the protection; 0 for a one-off effect), discounted together. Interest
-  earned on waiting funds (interest income ÷ average cash, from the accounts) grows the dollar:
+- **Waits**: `gift_to_grant_years` (unspent funds ÷ yearly spending), `delay_years` (to delivery) and
+  `benefit_midpoint_years` (half the protection), discounted together; interest on waiting funds
   `× (1+interest_yield)^gift_to_grant_years`. The income gain's own wait counts from delivery.
-- Illness is in `morbidity_value_ratio` or in `unmodelled_benefits_adj`, never both.
+- Illness in one place only: `morbidity_value_ratio`, `unmodelled_benefits_adj` or, in DALYs,
+  `dalys_illness_averted_per_person` (hospitals and hospices in rich countries: families/high-income-care.md).
 - A cost-share attribution uses the same unit basis as `implementation_adj` (partner cost per dose
   received: divide by `implementation_adj`, or the shortfall counts twice).
 - Cash handed out with the service (conditional incentives): a `uov_cash` branch valued as
@@ -165,13 +170,10 @@ Chain: people treated × (initial effect in SD × duration ÷ 2, linear fade, ×
 `@wellby_factors.wellbys_per_sd_year` × household multiplier × adjustments; plus deaths averted, in
 units of value, entering only through `wellbys_from_uov` (so they don't move with the WELLBY slider).
 
-- PHQ-9 points (a depression questionnaire score) ÷ `@depression.phq9_sd` for SDs; PHQ-8 points (the
-  PHQ-9 without its self-harm item, on nearly the same scale) the same way, said. Never depression to
-  DALYs inside the model.
+- PHQ-9 (or PHQ-8) points ÷ `@depression.phq9_sd` for SDs. Never depression to DALYs inside the model.
 - **The charity's own trial and the literature**: one blend, by precision. Rows `prior_effect_sd`,
   `rct_effect_sd` (estimates, CIs as ranges), `prior_effect_se` (from the meta-analysis's *prediction*
-  interval, which carries the between-study spread a new implementer faces; the pooled interval only
-  when none is published, said), `rct_effect_se` (CI width ÷ 3.92, worked in the explainer); then
+  interval; the pooled one only when none is published, said), `rct_effect_se` (CI width ÷ 3.92, worked in the explainer); then
   `rct_weight = (1/(rct_effect_se*rct_effect_se))/(1/(rct_effect_se*rct_effect_se)+1/(prior_effect_se*prior_effect_se))`
   and `initial_effect_sd` the weighted mean. A trial unlike today's programme (dose, population,
   delivery) moves the weight only as a ranged judgment anchored on the precision weight; what the blend
@@ -217,7 +219,7 @@ rate); × `marginal_vs_past_average`; then the species step.
   SADs) splits `sads_per_donor_dollar` into `sads_<s>` (`ced_<s>`, 2024) and `sads_<s>_2025`
   (`ced_<s>_2025`), both in `ced_per_donor_dollar`.
 - **Grants to sister organisations or coalition members** count as what the recipient does with them:
-  split by activity (its own breakdown, else a ranged judgment) for the tenth rule and `program_spend`;
+  split by activity (its own breakdown, else a ranged judgment) for `program_spend`;
   its wins enter the branch the grant funds, attribution the grant's share of its resources on them. A regranting line is never a programme of its own.
 - A missing SADs figure goes into facts/sad_factors.json (source, `change` note, SAD version).
 

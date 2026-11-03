@@ -55,11 +55,11 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   template's; added rows feed canonical rows; the family fits (a misfiled family is high); every shared
   row the template reads is still read (a template row replaced by a typed number is high).
 - **Scope** (high when it moves the result >25% or the model is of something else): build-cea step 0
-  (the main programme and every one of a tenth or more of spending, weighted by spending; grants to
-  sister organisations split by what they fund; the latest year with audited financials and reach for
-  the same period, stated in the summary; no case study or pilot standing in, since a donor funds the
-  whole programme; a programme left out for want of data stated as partial coverage, Convention 12).
-  Check the charity's spending breakdown yourself.
+  (every programme, weighted by spending, none left out; grants to sister organisations split by what
+  they fund; the latest year with audited financials and reach, stated in the summary; no case study
+  or pilot standing in; a programme with thin data on its family's chain with wide ranges; one with no
+  outcome data at all in the proxy rows, comparable models read live, × `$missing_data_discount`;
+  Convention 12). Check the charity's spending breakdown yourself; a programme missing is high.
 - **Every model** (docs/normalization.md is the rule; these are the usual breaches):
   - output in uov, daly, wellby, ced or tco2e; `output.native` set; rows after it in `ours` sections;
     `source.published` the estimate's date;
