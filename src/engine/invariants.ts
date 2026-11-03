@@ -791,7 +791,8 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
 
 /** INV-11: an evaluator's own exchange rate doesn't survive in our view where a shared one exists. */
 export function inv11(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.output && m.owner !== "charityevals");
+  // Every model, charityevals' own included: one consistent way holds for ours too.
+  const models = [...lib.models.values()].filter((m) => m.output);
   const violations: Violation[] = [];
   for (const m of models) {
     const path = rowsFeeding(m);
@@ -806,7 +807,7 @@ export function inv11(lib: Library): InvariantReport {
   }
   return {
     id: "INV-11", title: "No evaluator-internal exchange rate where a shared one exists", status: "partial", checked: models.length, violations,
-    how: `Every evaluator's model (since 2026-11-02; before, Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
+    how: `Every model, charityevals' own included (since 2026-11-03; every evaluator's since 2026-11-02, before that Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
   };
 }
 
