@@ -16,6 +16,9 @@
       consumption effect *and* as its own branch.
 - [ ] Animals twice: hens counted per commitment and per company when commitments overlap; meals
       counted per pledge and per participant.
+- [ ] Delivery twice: reach counted only where the reform is already delivered (stunners bought,
+      cages removed) *and* multiplied by the fulfilment rate.
+- [ ] Credit twice: money moved valued with the shared new-money share *and* a counterfactual_adj.
 - [ ] Species weight twice: AIM's SADs already carry AIM's species weight; only the `ced_<s>` template
       swaps it for Rethink Priorities'. A SAD figure scaled by a welfare range anywhere else counts it twice.
 
@@ -32,12 +35,19 @@
 - [ ] Deaths: does every value of a death read `$life_value_multiplier`?
 - [ ] Funging and leverage (global health): would a government or the Global Fund have paid?
 - [ ] Production response (diet change): `@sad_factors.production_response` applied.
+- [ ] Won reforms: `$win_years_counted`, the wait until effect discounted, pledges kept from the shared rate.
+- [ ] Past averages: `$marginal_vs_past_average` on the path, and only for `past_average`.
+- [ ] Scope: every programme of a tenth or more of spending, by funding weight; the latest year.
 - [ ] Negative effects: substitution to other animal products, rebound, harms of the intervention.
 
 ## Units
 
 - [ ] Per person vs. per household; per year vs. per lifetime vs. per program round.
-- [ ] Nominal USD vs. PPP; local currency converted at the right year's rate.
+- [ ] Nominal USD vs. PPP; local currency converted at the right year's `@fx` rate, never a typed one.
+- [ ] Household size from `@household_size.<place>`, not a typed or study-sample figure without reason.
+- [ ] Animal SADs: the `ced_<s>` row's SAD version is the shared figure's (2024 hens out of battery
+      cages and meals; 2025 enriched cages, broilers, shrimp).
+- [ ] Signs: downsides as negative shares of value lost, validity as multipliers.
 - [ ] Percent as 45 vs 0.45; per 1,000 or per 100,000 rates divided correctly.
 - [ ] Mortality rate per person-year vs. probability over 5 years (U5MR is a cumulative probability
       per 1,000 live births, not an annual rate).
