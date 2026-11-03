@@ -55,6 +55,12 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
+      "id": "proxy",
+      "title": "Programmes with no outcome data",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
+    },
+    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -513,8 +519,51 @@
       "section": "donor",
       "label": "Units of value per dollar you give",
       "format": "small",
-      "formula": "uov_per_dollar * donor_cost_share * marginal_vs_past_average",
-      "unit": "Units of value / $"
+      "formula": "uov_per_dollar * donor_cost_share * marginal_vs_past_average * (1 - proxy_share) + proxy_per_donor_dollar",
+      "unit": "Units of value / $",
+      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
+    },
+    {
+      "id": "proxy_program_spend",
+      "section": "proxy",
+      "label": "Spending on programmes with no outcome data at all, in the year modelled",
+      "format": "usd",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges."
+    },
+    {
+      "id": "proxy_peer_result",
+      "section": "proxy",
+      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
+      "format": "small",
+      "formula": "#givedirectly",
+      "unit": "units of value / $",
+      "explainer": "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)"
+    },
+    {
+      "id": "proxy_share",
+      "section": "proxy",
+      "label": "Share of the programme spending here that has no outcome data",
+      "format": "percent",
+      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
+      "explainer": "The modelled programmes' result counts for the rest of the spending."
+    },
+    {
+      "id": "proxy_per_donor_dollar",
+      "section": "proxy",
+      "label": "Units of value per dollar you give, from programmes with no outcome data",
+      "format": "small",
+      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
+      "unit": "units of value / $",
+      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
     }
   ],
   "output": {

@@ -66,6 +66,11 @@ const COMMON_REQUIRED = [
   "salary_gap",
   "salary_sacrifice",
   "donor_cost_share",
+  // Programmes with no outcome data at all, valued at comparable programmes' result (the proxy branch).
+  "proxy_program_spend",
+  "proxy_peer_result",
+  "proxy_share",
+  "proxy_per_donor_dollar",
 ];
 const COMMON_BOUNDS: Record<string, [number, number]> = {
   overhead_ratio: [1, 2],
@@ -85,10 +90,20 @@ const COMMON_BOUNDS: Record<string, [number, number]> = {
   years_until_avoided: [0, 60],
   marginal_vs_past_average: [0, 1],
 };
-/** Every family's staff-pay step: the gap is the site's judgment per kind of work. */
+/** Every family's staff-pay step (the gap is the site's judgment per kind of work) and proxy branch (a
+ * programme with no outcome data counts less by the shared missing-data slider). */
 const STAFF_READS: Read[] = [
   { row: "salary_gap", ref: "@staff_pay.gap_", why: "the pay gap is a judgment the site makes once per kind of work (facts/staff_pay.json)", severity: "medium" },
+  { row: "proxy_per_donor_dollar", ref: "$missing_data_discount", why: "a programme with no outcome data, valued at comparable programmes' result, always counts less by the shared missing-data slider (docs/normalization.md 2.12)" },
 ];
+/** A death is valued at the site's one value, and income on the one log scale (2.7), in units of value. */
+const DEATHS_INCOME = (deaths: string, income: string): Read[] => [
+  { row: deaths, ref: "@moral_weights.", why: "a death is valued at GiveWell's moral weight for its age band (@moral_weights), the site's one value of a death" },
+  { row: deaths, ref: "$life_value_multiplier", why: "every death moves with the value-of-a-life slider" },
+  { row: income, ref: "$uov_per_ln_consumption", why: "income gains are valued at the shared value of a doubled income, on the site's one log scale" },
+];
+/** Outcomes in several units: each in its own, bridged into the output unit (docs/normalization.md 2.6). */
+const BRIDGED = ["uov_bridged", "dalys_from_uov", "wellbys_bridged", "dalys_from_wellby", "dalys_direct"];
 /** A won pledge, law or rule counts the shared years, the wait until it takes effect discounted (2.9). */
 const WON_REFORM: Read[] = [
   { row: "years_of_impact", ref: "$win_years_counted", why: "a won reform counts the site's one number of years ($win_years_counted, docs/normalization.md 2.9)" },
@@ -125,7 +140,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     "Direct health: deaths and illness averted",
     "uov",
     "uov",
-    ["people_reached", "baseline_mortality_rate", "mortality_reduction", "deaths_averted_per_person", "share_under5", "deaths_averted", "value_per_death", "uov_deaths", "uov_morbidity", "uov_stillbirths", "uov_income", "unmodelled_benefits_adj", "leverage_funging_adj", "wait_discount"],
+    ["people_reached", "baseline_mortality_rate", "mortality_reduction", "deaths_averted_per_person", "share_under5", "deaths_averted", "value_per_death", "uov_deaths", "uov_morbidity", "uov_stillbirths", "uov_income", "dalys_bridged", "uov_from_daly", "unmodelled_benefits_adj", "leverage_funging_adj", "wait_discount"],
     { mortality_reduction: [0, 0.9], baseline_mortality_rate: [0, 0.2], share_under5: [0, 1], deaths_averted_per_person: [0, 0.05] },
     "unit_cost",
     [
@@ -194,6 +209,72 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     { p_success: [0, 1] },
     "past_average",
     WON_REFORM,
+  ),
+  "domestic-services": spec(
+    "Social services in rich countries (food, housing, youth, veterans, older people, gifts)",
+    "daly",
+    "dalys",
+    ["households_reached", "household_size", "people_reached", "wellbys_per_person", "consumption_mean", "recipients_consumption_share", "baseline_consumption", "ln_gain_per_person", "deaths_averted_per_person", "value_per_death", "implementation_adj", "leverage_funging_adj", "unmodelled_benefits_adj", ...BRIDGED],
+    { recipients_consumption_share: [0.1, 1.5], ln_gain_per_person: [0, 1], wellbys_per_person: [0, 5], deaths_averted_per_person: [0, 0.01] },
+    "unit_cost",
+    [
+      { row: "household_size", ref: "@household_size.", why: "household size is the site's one figure for the country (facts/household_size.json)", severity: "medium" },
+      { row: "consumption_mean", ref: "@united_", why: "a rich country's consumption per person is the site's one figure (facts/united_states.json, united_kingdom.json; add the country's from the World Bank)", severity: "medium" },
+      ...DEATHS_INCOME("uov_bridged", "uov_bridged"),
+    ],
+  ),
+  "humanitarian-relief": spec(
+    "Humanitarian relief in crises (disasters, conflict, displacement, emergency food)",
+    "daly",
+    "dalys",
+    ["people_reached", "crisis_mortality_rate", "baseline_mortality_rate", "share_excess_averted", "years_exposed", "deaths_averted_per_person", "share_under5", "value_per_death", "baseline_consumption", "ln_gain_per_person", "dalys_illness_per_person", "implementation_adj", "leverage_funging_adj", "unmodelled_benefits_adj", ...BRIDGED],
+    { crisis_mortality_rate: [0, 0.5], baseline_mortality_rate: [0, 0.1], share_excess_averted: [0, 1], years_exposed: [0, 5], deaths_averted_per_person: [0, 0.05], share_under5: [0, 1], ln_gain_per_person: [0, 3] },
+    "unit_cost",
+    [...DEATHS_INCOME("uov_bridged", "uov_bridged")],
+  ),
+  "medical-research": spec(
+    "Medical research and disease charities (research, guidelines, advocacy)",
+    "daly",
+    "dalys",
+    ["disease_dalys_per_year", "share_burden_addressable", "p_success", "years_brought_forward", "years_until_effect", "wait_discount", "discounted_years", "research_dalys", "adv_years_of_impact", "adv_discounted_years", "advocacy_dalys", ...BRIDGED],
+    { share_burden_addressable: [0, 1], p_success: [0, 1], years_brought_forward: [0, 30], adv_years_of_impact: [0, 50] },
+    "past_average",
+    [
+      { row: "wait_discount", ref: "$discount_rate", why: "the wait until the result is in practice is discounted at the shared rate" },
+      { row: "discounted_years", ref: "$discount_rate", why: "the years a result is brought forward are discounted at the shared rate" },
+      { row: "adv_years_of_impact", ref: "$win_years_counted", why: "a won reform counts the site's one number of years ($win_years_counted, docs/normalization.md 2.9)" },
+      { row: "adv_discounted_years", ref: "$discount_rate", why: "the years counted and the wait before them are discounted at the shared rate" },
+    ],
+  ),
+  "companion-animals": { ...spec(
+    "Companion animals (shelters, rehoming, neutering, vet care)",
+    "ced",
+    "pain_days",
+    ["animals_helped", "pain_days_per_animal", "neuters", "births_averted_per_neuter", "pain_days_per_unowned_life", "implementation_adj", "share_dog", "ced_per_donor_dollar"],
+    { share_dog: [0, 1], pain_days_per_animal: [0, 3650], births_averted_per_neuter: [0, 20], pain_days_per_unowned_life: [0, 3650] },
+    "unit_cost",
+    [{ row: "pain_days_per_animal", ref: "$discount_rate", why: "days of suffering spared over an animal's remaining years are discounted at the shared rate" }],
+  ), output: "ced_per_donor_dollar" },
+  conservation: { altBasis: ["past_average"], ...spec(
+    "Conservation of land, water and species",
+    "daly",
+    "dalys",
+    ["hectares_protected", "tco2e_per_hectare_year", "years_protected", "years_until_avoided", "air_pollution_weight", "extra_deaths_per_tco2e", "tco2e_bridged", "dalys_from_tco2e", "health_people", "dalys_per_person_year", "livelihood_people", "ln_gain_per_person_year", "nature_people", "ls_gain_per_person_year", "ced_bridged", "dalys_from_ced", "catastrophe_deaths", "annual_risk_reduction", "catastrophe_value_per_death", "implementation_adj", "leverage_funging_adj", "unmodelled_benefits_adj", ...BRIDGED],
+    { annual_risk_reduction: [0, 0.01], years_protected: [0, 100], tco2e_per_hectare_year: [0, 50] },
+    "unit_cost",
+    [
+      { row: "protection_years", ref: "$discount_rate", why: "every year of protection, and the wait before it, is discounted at the shared rate" },
+      ...DEATHS_INCOME("catastrophe_value_per_death", "uov_bridged"),
+    ],
+  ) },
+  "rights-advocacy": spec(
+    "Rights and advocacy (litigation, laws changed, people released)",
+    "daly",
+    "dalys",
+    ["people_affected_per_year", "ls_gain_per_person_year", "dalys_per_person_year", "ln_gain_per_person_year", "p_success", "years_of_impact", "years_until_effect", "wait_discount", "discounted_years", "released_people", "released_years", "released_ls_gain_per_year", ...BRIDGED],
+    { p_success: [0, 1], released_years: [0, 50] },
+    "past_average",
+    [...WON_REFORM, { row: "uov_bridged", ref: "$uov_per_ln_consumption", why: "income gains are valued at the shared value of a doubled income, on the site's one log scale" }, { row: "released_value", ref: "$discount_rate", why: "a released person's years are discounted at the shared rate" }],
   ),
 };
 

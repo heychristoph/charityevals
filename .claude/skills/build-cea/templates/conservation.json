@@ -1,0 +1,808 @@
+{
+  "id": "template-conservation",
+  "name": "Template: conservation of land, water and species",
+  "kind": "template",
+  "cause": "climate",
+  "template": "conservation",
+  "estimate_basis": "unit_cost",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity protects, where, which branches the evidence supports (climate, health, livelihoods, wellbeing, wild animals, catastrophic risk), the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: conservation of land, water and species",
+    "url": "https://charityevals.org/template-conservation",
+    "published": "2026-01-01",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "proxy",
+      "title": "Programmes with no outcome data",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "hectares_protected",
+      "section": "reach",
+      "label": "Hectares newly protected or restored in the year modelled",
+      "format": "integer",
+      "value": 10000,
+      "kind": "observed",
+      "unit": "ha",
+      "source": {
+        "title": "TEMPLATE: charity report / WDPA",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: land or water the year's spending protected, bought, restored or brought under management (not the stock under management from earlier years), from the charity's report or the protected-area database."
+    },
+    {
+      "id": "years_protected",
+      "section": "effect",
+      "label": "Years the protection lasts",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 30,
+        "high": 100
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: PADDD / legal form",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: how long the land stays protected (an easement in perpetuity is long, a management grant short), from the legal form or reference-class studies of protected-area downgrading."
+    },
+    {
+      "id": "protection_years",
+      "section": "effect",
+      "label": "Years of protection, discounted",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_protected) * (1 + $discount_rate) ^ -years_until_avoided",
+      "unit": "years",
+      "explainer": "Every year of protection, and the wait before it, discounted at the shared rate."
+    },
+    {
+      "id": "tco2e_per_hectare_year",
+      "section": "effect",
+      "label": "Climate: tonnes of CO₂e a year a protected hectare keeps out of the air",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "estimate",
+      "unit": "t CO₂e / ha / year",
+      "source": {
+        "title": "TEMPLATE: remote-sensing / carbon study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: avoided emissions (the baseline loss rate × carbon stock per hectare) plus sequestration, per hectare per year, from a remote-sensing or verified-carbon study of comparable sites, net of leakage only if the study nets it (else in unmodelled_benefits_adj)."
+    },
+    {
+      "id": "years_until_avoided",
+      "section": "effect",
+      "label": "Climate: years until the tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 5
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: the wait from the spending to the protection taking effect; discounted at the shared rate, also for the other branches' benefits."
+    },
+    {
+      "id": "fuel_share",
+      "section": "bridges",
+      "label": "Share of these tonnes from burning less fossil fuel near people",
+      "format": "percent",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: emissions inventory",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: 0 for land and ocean carbon, which carries no smoke; the climate skeleton's row (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "bridges",
+      "label": "Air-pollution deaths per tonne of this fuel, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: deaths per TWh study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: only where fuel_share is above 0: the fuel's smoke per tonne against the average behind the shared rate."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "bridges",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "Read by the tonnes' bridge, as by the tco2e unit's conversion."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "bridges",
+      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
+    },
+    {
+      "id": "health_people",
+      "section": "reach",
+      "label": "Health: people whose air, water, food or disease exposure the protection changes",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people downstream or downwind of the protected area, or living with it, whose health the evidence shows it changes (water quality, fire smoke, malaria, zoonotic spillover); 0, with the reason, where there is no evidence."
+    },
+    {
+      "id": "dalys_per_person_year",
+      "section": "effect",
+      "label": "Health: DALYs averted per person per year",
+      "format": "small",
+      "value": {
+        "low": 0.0001,
+        "best": 0.0005,
+        "high": 0.002
+      },
+      "kind": "estimate",
+      "unit": "DALYs",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: from the study of the exposure the protection changes, × the GBD disability weight where it is illness (@gbd_disability_weights)."
+    },
+    {
+      "id": "livelihood_people",
+      "section": "reach",
+      "label": "Livelihoods: people whose income or food security the protection changes",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: fishers, farmers, forest users; 0 where there is no evidence. Lost access is a negative effect below."
+    },
+    {
+      "id": "ln_gain_per_person_year",
+      "section": "effect",
+      "label": "Livelihoods: ln(consumption) gain per person per year",
+      "format": "small",
+      "value": {
+        "low": -0.02,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "estimate",
+      "unit": "ln / year",
+      "source": {
+        "title": "TEMPLATE: impact evaluation",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: ln(1 + income gain / baseline consumption) per year, from impact evaluations of comparable protected areas or fisheries reserves (negative where access is lost)."
+    },
+    {
+      "id": "nature_people",
+      "section": "reach",
+      "label": "Wellbeing: people who visit or live with the protected nature",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: visitor counts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: visitors or residents, from park counts; 0 where there is no evidence."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Wellbeing: life satisfaction gained per person per year (points, 0-10)",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.05
+      },
+      "kind": "estimate",
+      "unit": "points",
+      "source": {
+        "title": "TEMPLATE: wellbeing study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: life-satisfaction points (0-10) gained per person per year while it lasts: a WELLBY per point-year. A result in standard deviations of a wellbeing or depression scale is SDs × @wellby_factors.wellbys_per_sd_year (a formula row); PHQ-9 points ÷ @depression.phq9_sd first. Never converted into DALYs here (the bridge does it). From studies of green or blue space and life satisfaction, net of where people would otherwise go."
+    },
+    {
+      "id": "wild_animal_years",
+      "section": "reach",
+      "label": "Wild animals: animal-years whose welfare the protection changes",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: population study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: only where the charity claims an effect on wild animals' welfare (not species counts): animal-years affected per year; 0 otherwise, with that reason."
+    },
+    {
+      "id": "wild_pain_days_per_animal_year",
+      "section": "effect",
+      "label": "Wild animals: days of disabling pain spared per animal-year (negative if more)",
+      "format": "number",
+      "value": {
+        "low": -5,
+        "best": 0,
+        "high": 5
+      },
+      "kind": "judgment",
+      "unit": "days",
+      "explainer": "TEMPLATE: on Ambitious Impact's pain scale, from welfare biology for the species; more animals living is not by itself a gain. Name the anchor; the sign is often unknown, so the range spans 0."
+    },
+    {
+      "id": "pain_days_fish",
+      "section": "bridges",
+      "label": "Wild animals: days of pain spared (before adjustments)",
+      "format": "number",
+      "formula": "wild_animal_years * wild_pain_days_per_animal_year * protection_years",
+      "unit": "days"
+    },
+    {
+      "id": "ced_fish",
+      "section": "bridges",
+      "label": "Wild animals: chicken-equivalent pain days",
+      "format": "number",
+      "formula": "pain_days_fish * @welfare_ranges.fish_vs_chicken",
+      "unit": "chicken pain days",
+      "explainer": "TEMPLATE: the species step (docs/normalization.md 2.4) with the species' Rethink Priorities welfare range: rename _fish to the species (@welfare_ranges.<s>_vs_chicken; add it if missing, a ranged judgment where Rethink has none)."
+    },
+    {
+      "id": "catastrophe_deaths",
+      "section": "effect",
+      "label": "Catastrophic risk: deaths if the catastrophe happens",
+      "format": "integer",
+      "value": {
+        "low": 100000.0,
+        "best": 1000000.0,
+        "high": 20000000.0
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: scenario study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: deaths in the catastrophe the work lowers the risk of (a pandemic from wildlife spillover, a collapse of a fishery many depend on), from published scenario estimates; 0 where the charity claims no such effect."
+    },
+    {
+      "id": "annual_risk_reduction",
+      "section": "effect",
+      "label": "Catastrophic risk: fall in the catastrophe's yearly probability from the year's work",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 1e-07,
+        "high": 1e-06
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: absolute, per year of protection (from 1-in-a-hundred to slightly less), anchored on published risk estimates and the share of the risk's drivers the work touches. Usually the least grounded number in the model: a wide range, and the summary says so."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the catastrophe's deaths that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the age split of the deaths averted, from WHO Global Health Estimates or IHME GBD for the causes and places (a split another model could reuse goes into facts/death_ages.json and is read here)."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the catastrophe's deaths at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest of the age split, band by band, from the same source, so every death is valued at its own band (docs/normalization.md 2.7)."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the catastrophe's deaths at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest at 50 and over (GiveWell's 50-74 weight; for deaths mostly above 75, as in rich-country care, a mix of @moral_weights.givewell_age_75_79 … _85_plus by the deaths' ages instead)."
+    },
+    {
+      "id": "catastrophe_value_per_death",
+      "section": "effect",
+      "label": "Catastrophic risk: value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number or for future generations (the site's value judgments are its sliders)."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the land that would have been lost without the protection (the baseline loss rate over the years protected, from matched comparisons of protected and unprotected sites), and that no one else would have protected. Name the study."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Livelihoods and catastrophic risk, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Livelihoods and catastrophic risk, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Wellbeing from nature, in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "nature_people * ls_gain_per_person_year * protection_years",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Wellbeing from nature, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "tco2e_bridged",
+      "section": "bridges",
+      "label": "Climate, in tonnes of CO₂-equivalent averted (before adjustments)",
+      "format": "number",
+      "formula": "hectares_protected * tco2e_per_hectare_year * protection_years",
+      "unit": "t CO₂e"
+    },
+    {
+      "id": "dalys_from_tco2e",
+      "section": "bridges",
+      "label": "Climate, in healthy years",
+      "format": "number",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "ced_bridged",
+      "section": "bridges",
+      "label": "Wild animals, in chicken-equivalent pain days averted (before adjustments)",
+      "format": "number",
+      "formula": "ced_fish",
+      "unit": "chicken pain days"
+    },
+    {
+      "id": "dalys_from_ced",
+      "section": "bridges",
+      "label": "Wild animals, in healthy years",
+      "format": "number",
+      "formula": "ced_bridged * ($chicken_vs_person * $daly_per_sad * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from chicken pain days into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "health_people * dalys_per_person_year * protection_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e + dalys_from_ced) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_advocacy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_advocacy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_advocacy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_advocacy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "unit": "Years of healthy life / $",
+      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
+    },
+    {
+      "id": "proxy_program_spend",
+      "section": "proxy",
+      "label": "Spending on programmes with no outcome data at all, in the year modelled",
+      "format": "usd",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges."
+    },
+    {
+      "id": "proxy_peer_result",
+      "section": "proxy",
+      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
+      "format": "small",
+      "formula": "#givedirectly",
+      "unit": "units of value / $",
+      "explainer": "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)"
+    },
+    {
+      "id": "proxy_share",
+      "section": "proxy",
+      "label": "Share of the programme spending here that has no outcome data",
+      "format": "percent",
+      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
+      "explainer": "The modelled programmes' result counts for the rest of the spending."
+    },
+    {
+      "id": "proxy_per_donor_dollar",
+      "section": "proxy",
+      "label": "Units of value per dollar you give, from programmes with no outcome data",
+      "format": "small",
+      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
+      "unit": "units of value / $",
+      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+    },
+    {
+      "id": "proxy_in_dalys",
+      "section": "proxy",
+      "label": "The same, in this model's unit (DALYs)",
+      "format": "small",
+      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
+      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
