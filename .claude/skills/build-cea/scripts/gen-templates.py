@@ -71,14 +71,16 @@ def cost_rows():
         f("cost_total", "cost", "Cost of the modelled program, including overhead", "program_spend * overhead_ratio", None, "usd"),
     ]
 
-def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=()):
-    rows = [
+def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None):
+    rows = list(evidence_rows) if evidence_rows else [
         inp("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", {"low": 0.5, "best": 0.7, "high": 0.9}, "judgment",
             "how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range.", "multiple"),
-        inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
-            "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"),
+    ]
+    rows.append(counterfactual_row or inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
+            "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"))
+    rows += [
         inp("attribution_share_shared", "adjustments", "This charity's share of the resources behind the outcome", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
-            "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. 1 when it delivers alone.", "percent"),
+            "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone.", "percent"),
         f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared",
           "The charity's share of the resources behind the outcome; it applies whichever way credit is shared.", "percent"),
     ]
@@ -91,7 +93,9 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, im
     rows += list(extra)
     factors = ["evidence_adj", "counterfactual_adj", "attribution_share"] + (["implementation_adj"] if implementation else []) + (["leverage_funging_adj"] if leverage else []) + list(factors_extra)
     rows.append(f("total_adj", "adjustments", "All adjustments combined", " * ".join(factors), "The product of the adjustments above.", "multiple"))
-    if unmodelled:
+    if unmodelled_rows:
+        rows += list(unmodelled_rows)
+    elif unmodelled:
         rows.append(inp("unmodelled_benefits_adj", "adjustments", "Benefits and harms not modelled, as a share of modelled value", {"low": -0.05, "best": 0.1, "high": 0.25}, "judgment",
             "a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere.", "percent"))
     return rows
@@ -183,18 +187,20 @@ T["direct-health"] = model("direct-health", "direct health (deaths and illness a
             "deaths per person-year from the causes the intervention affects, in the target age group and region, today, without the program. Use (or add) a country fact in facts/<country>.json (IHME GBD, UN IGME, DHS).", "small", "deaths / person-year", src("IHME GBD / UN IGME")),
         inp("mortality_reduction", "effect", "Reduction in that mortality from the intervention", {"low": 0.05, "best": 0.12, "high": 0.2}, "estimate",
             "relative risk reduction from the best meta-analysis (Cochrane or equivalent); the 95% CI as low/high.", "percent", source=src("meta-analysis")),
-        f("deaths_averted_per_person", "effect", "Deaths averted per person reached (before adjustments)", "baseline_mortality_rate * mortality_reduction * years_of_coverage",
-          "If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here.", "small"),
+        f("indirect_deaths_ratio", "effect", "Deaths malaria causes indirectly, per direct malaria death", "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
+          "TEMPLATE: where mortality_reduction is the fall in deaths from one cause, the deaths that cause brings on indirectly (through anaemia, low birth weight, other infections), per direct death: malaria @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 (0.75, what the site's ranked malaria models read), diarrhoea @givewell_shared.indirect_deaths_per_direct_diarrhea_death. 0, with that reason, where mortality_reduction is the all-cause effect from the trials (it already holds them).", "number"),
+        f("deaths_averted_per_person", "effect", "Deaths averted per person reached (before adjustments)", "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
+          "Direct and indirect deaths over the years of protection. If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here; check the result against the all-cause trial result per person-year, scaled to today's mortality.", "small"),
         inp("share_under5", "effect", "Share of deaths averted that are of children under five", {"low": 0.6, "best": 0.8, "high": 0.95}, "estimate",
-            "the age split of the deaths averted, from the age split of cause-specific deaths in the target group (IHME GBD).", "percent", source=src("IHME GBD")),
+            "the age split of the deaths averted: the split of deaths from the causes the intervention affects, in the countries it works in, weighted by its reach there. Source: WHO Global Health Estimates (deaths by cause, age, sex and country, the latest year) or IHME GBD. A split another model could reuse (one cause in one place) goes into facts/death_ages.json as `<cause>_<place>_share_<band>` (under5, 5_14, 15_49, 50plus) and is read here and below: share_5_14_of_over5 = @death_ages.<x>_share_5_14 / (1 - @death_ages.<x>_share_under5), and so on.", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
         inp("share_5_14_of_over5", "effect", "Of the deaths averted at five or older, share aged 5 to 14", {"low": 0.2, "best": 0.4, "high": 0.6}, "estimate",
-            "the rest of the age split, band by band, so every death is valued at its own age band (docs/normalization.md 2.7). 0 when only under-fives are reached.", "percent", source=src("IHME GBD")),
+            "the rest of the age split, band by band, so every death is valued at its own age band (docs/normalization.md 2.7), from the same source as share_under5. 0 when only under-fives are reached.", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
         inp("share_15_49_of_over15", "effect", "Of the deaths averted at 15 or older, share aged 15 to 49", {"low": 0.3, "best": 0.5, "high": 0.7}, "estimate",
-            "the rest at 50 to 74 (GiveWell's older weight also stands in above 74).", "percent", source=src("IHME GBD")),
-        inp("morbidity_value_ratio", "effect", "Value of illness averted, as a share of the value of deaths averted", 0, "estimate",
-            "illness averted (GBD disability weights, @gbd_disability_weights where the site has the weight, × cases averted × duration) valued against the deaths averted, as GiveWell's supplementary adjustments do. A share, not DALYs × an exchange rate: no rate between outcomes may sit inside a model (docs/normalization.md INV-2). 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both.", "percent", source=src("IHME GBD disability weights / GiveWell")),
+            "the rest at 50 to 74 (GiveWell's older weight also stands in above 74), from the same source.", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
+        f("morbidity_value_ratio", "effect", "Illness averted, as a share of the mortality and income benefits", "@givewell_common.malaria_morbidity",
+          "TEMPLATE: illness averted, as a share of the value of the deaths averted and the income gains together, the base GiveWell's supplementary adjustments apply to (uov_morbidity below). The site's one figure where it has one: malaria (nets, SMC) @givewell_common.malaria_morbidity; incentivised vaccines @givewell_common.morbidity_effects_from_directly_incentivized_vaccines_a. For another program, an estimate input (GBD disability weights, @gbd_disability_weights where the site has the weight, × cases averted × duration, against the deaths' and income's value), with its source; never DALYs × an exchange rate inside the model (docs/normalization.md INV-2). 0 with an explanation when illness is in unmodelled_benefits_adj instead; never both.", "percent"),
         inp("stillbirths_averted_per_person", "effect", "Stillbirths averted per person reached (before adjustments)", 0, "estimate",
-            "for maternal and newborn programs: stillbirths averted per person reached, from the trial or meta-analysis. 0 with an explanation for programs that can't avert stillbirths.", "small", source=src("meta-analysis")),
+            "for maternal and newborn programs, and nets and SMC protecting pregnant women: stillbirths averted per person reached, from the trial or meta-analysis. 0 with an explanation for programs that can't avert stillbirths.", "small", source=src("meta-analysis")),
         inp("ln_income_gain_per_year", "effect", "Later-life income gain per person reached, ln(consumption) per year", 0, "estimate",
             "the yearly increase in ln(consumption) in adulthood from developmental effects (e.g. malaria or deworming and adult earnings), per person reached, undiscounted. 0 with an explanation when there is no evidence.", "small", "ln / year", src("study")),
         f("years_until_income_gain", "effect", "Years until the income gain starts", "@givewell_shared.years_until_income_benefits_malaria",
@@ -203,17 +209,47 @@ T["direct-health"] = model("direct-health", "direct health (deaths and illness a
           "The site's one figure for how long a long-term income gain lasts (GiveWell's working years, 40), read by every model that counts one (INV-13).", "number", "years"),
         f("ln_income_gain_per_person", "effect", "Later-life income gain per person reached, present value", "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
           "Discounted at the shared rate, the wait included, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs.", "small", "ln-years"),
-    ] + adj_rows(leverage=True, unmodelled=True) + [
+        f("resource_sharing_multiplier", "effect", "Resource sharing within households (multiplier on an earner's gain)", "@givewell_shared.resource_sharing_multiplier",
+          "The site's one figure (GiveWell's): an earner's income gain is shared with the household, so it counts this many times. Read by every model that values a long-term income gain (INV-13).", "multiple"),
+    ] + adj_rows(leverage=True, factors_extra=["wait_discount"], evidence_rows=[
+        f("internal_validity_adj", "adjustments", "Internal validity of the trials, a multiplier", "@givewell_common.internal_validity_adjustment_malaria",
+          "TEMPLATE: how far the trials measured the effect they report. The site's one figure where it has one for the intervention: malaria trials (nets, SMC) @givewell_common.internal_validity_adjustment_malaria; vitamin A and iron @givewell_common.internal_validity_adjustment_vas_iron; conditional incentives for vaccination @givewell_common.internal_validity_adjustment_new_incentives; water treatment @givewell_common.internal_validity_adjustment_for_morbidity. Otherwise a judgment input with a range, anchored on those.", "multiple"),
+        inp("external_validity_adj", "adjustments", "External validity: the trials' setting against this program's, a multiplier", {"low": 0.6, "best": 0.8, "high": 1}, "judgment",
+            "how far the trials' effect carries to this program today: other countries, lower baseline mortality, resistance (insecticides, drugs), another delivery model. 1 = the same setting; name the anchor (another model of this intervention) and the reason.", "multiple"),
+        f("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", "internal_validity_adj * external_validity_adj", "The product of its two parts.", "multiple"),
+    ], extra=[
+        inp("gift_to_grant_years", "adjustments", "Years a donation waits before the charity spends it", {"low": 0, "best": 0.5, "high": 1}, "estimate",
+            "the charity's unspent funds at year end ÷ its yearly spending (balance sheet and statement of activities), for a charity that grants or buys ahead from reserves; 0 for one that spends as it raises. Where the accounts show interest earned on the waiting funds, the dollar grows meanwhile: add a row interest_yield (interest income ÷ average cash and deposits, from the accounts) and multiply wait_discount by (1 + interest_yield) ^ gift_to_grant_years.", "number", "years", src("audited financial statements")),
+        inp("delay_years", "adjustments", "Years from the charity's spending to the intervention reaching people", {"low": 0.25, "best": 0.5, "high": 1}, "estimate",
+            "procurement, shipping and distribution: from the grant or purchase to the nets hung, the doses given (the charity's own distribution schedule, cited).", "number", "years", src("charity distribution reports")),
+        f("benefit_midpoint_years", "adjustments", "Years from delivery to the middle of the protection", "years_of_coverage * 0.5",
+          "The benefits come over the years of protection (a net's life, a season's doses), so they are discounted from its middle; 0 for a one-off effect such as a vaccine dose's.", "number", "years"),
+        f("wait_discount", "adjustments", "Discount for the wait until the benefits come", "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years + benefit_midpoint_years)",
+          "Every wait is discounted at the shared rate, like every future benefit (the income gain's own wait is counted from delivery, in ln_income_gain_per_person).", "percent"),
+    ], unmodelled_rows=[
+        f("treatment_costs_share", "adjustments", "Treatment costs averted, as a share of modelled value", "@givewell_shared.treatment_costs_averted",
+          "The site's one figure (GiveWell's supplementary adjustment) for prevention programs: illness prevented saves its treatment. 0, with the reason, for a treatment program.", "percent"),
+        f("rebound_share", "adjustments", "Rebound malaria from lost immunity, as a share of value lost", "@givewell_common.rebound_effects_decreased_immunity_development",
+          "TEMPLATE: malaria prevention only (nets, SMC, malaria vaccines): children protected build less immunity and catch more malaria later, a negative share (the site's one figure). 0, with the reason, for other programs.", "percent"),
+        f("investment_of_income_share", "adjustments", "Investment of income increases, as a share of modelled value", "@givewell_shared.investment_of_income_increases_nets",
+          "TEMPLATE: income gains partly invested and paying off later, the site's one figure per program: nets @givewell_shared.investment_of_income_increases_nets, vitamin A _vas, deworming _deworming, others @givewell_shared.investment_of_income_increases. 0, with the reason, when the model counts no income gain.", "percent"),
+        inp("other_unmodelled_share", "adjustments", "Other benefits and harms not modelled, as a share of modelled value", {"low": -0.05, "best": 0, "high": 0.1}, "judgment",
+            "each effect not modelled above, with its sign and size: benefits positive (other diseases prevented), harms and risks (misuse, faster resistance, funging inside the organisation, monitoring errors) negative shares of value lost, added here, never a positive share subtracted elsewhere.", "percent"),
+        f("unmodelled_benefits_adj", "adjustments", "Benefits and harms not modelled, as a share of modelled value", "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+          "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets.", "percent"),
+    ]) + [
         f("deaths_averted", "outcome", "Deaths averted", "people_reached * deaths_averted_per_person * total_adj", None, "number"),
         f("value_per_death", "outcome", "Value of a death averted (units of value)",
           "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
           "GiveWell's moral weights for the age band of each death averted (under five, 5–14, 15–49, 50 and over), times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7).", "number", "units of value"),
         f("uov_deaths", "outcome", "Units of value from deaths averted", "deaths_averted * value_per_death", None, "number", "units of value"),
-        f("uov_morbidity", "outcome", "Units of value from illness averted", "uov_deaths * morbidity_value_ratio", None, "number", "units of value"),
         f("uov_stillbirths", "outcome", "Units of value from stillbirths averted", "people_reached * stillbirths_averted_per_person * total_adj * @givewell_shared.uov_per_stillbirth * $life_value_multiplier",
           "A stillbirth averted at the site's one value (@givewell_shared.uov_per_stillbirth, GiveWell's), times your multiplier on the value of a life.", "number", "units of value"),
-        f("uov_income", "outcome", "Units of value from later-life income", "people_reached * ln_income_gain_per_person * total_adj * $uov_per_ln_consumption", None, "number", "units of value"),
-        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_morbidity + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj)", None, "number", "units of value"),
+        f("uov_income", "outcome", "Units of value from later-life income", "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption", None, "number", "units of value"),
+        f("uov_morbidity", "outcome", "Units of value from illness averted", "(uov_deaths + uov_income) * morbidity_value_ratio",
+          "A share of the deaths' and income's value, the base GiveWell's supplementary share has.", "number", "units of value"),
+        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity",
+          "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Units of value per dollar", "outcome_total / cost_total", None, "small", "units of value / $"),
     ] + donor_rows("uov", "Units of value", "goods") + donor_tail("uov", "Units of value"),
     "what the charity does, where, " + BOTTOM, "unit_cost")
@@ -264,7 +300,7 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
             "people who started treatment in the year the spending covers (not only completers: completion goes into implementation_adj).", "integer", source=src("charity annual report")),
         f("cost_per_person", "reach", "Cost per person treated", "cost_total / people_reached", "Context: compare with the charity's own published figure and with other models of the family.", "usd"),
         inp("initial_effect_sd", "effect", "Effect at the end of treatment (standard deviations)", {"low": 0.3, "best": 0.5, "high": 0.7}, "estimate",
-            "standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range. A result in PHQ-9 points becomes SDs by dividing by the site's one spread, @depression.phq9_sd (a formula row: points / @depression.phq9_sd), never a study's own SD typed in.", "number", "SD", src("meta-analysis")),
+            "standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range. A result in PHQ-9 points becomes SDs by dividing by the site's one spread, @depression.phq9_sd (a formula row: points / @depression.phq9_sd), never a study's own SD typed in; PHQ-8 points (the PHQ-9 without its self-harm item, on nearly the same scale) the same way, said in the explainer. With a trial of the charity's own delivery as well, make this a formula: the precision-weighted blend of the trial and the literature (templates.md, wellbeing).", "number", "SD", src("meta-analysis")),
         inp("effect_duration_years", "effect", "Years until the effect has faded", {"low": 1.5, "best": 2.5, "high": 5}, "estimate",
             "how long until the effect has faded to zero, from follow-up studies (the effect is assumed to fall linearly). An input, not initial ÷ decay, so the effect size doesn't enter twice and inflate the joint range. If follow-ups show a plateau rather than a fade, say so and set the duration to the area-equivalent linear fade.", "number", "years", src("meta-analysis of follow-ups")),
         f("effect_decay_sd_per_year", "effect", "Implied decay of the effect (SDs per year)", "initial_effect_sd / effect_duration_years", "Context: compare with the decay rates reported in follow-up studies.", "number", "SD / year"),
@@ -276,11 +312,12 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
           "SD-years into WELLBYs at the site's one rate (@wellby_factors). The WELLBY slider then puts WELLBYs into healthy years, calibrated so a year of depression is worth the same here as through the GBD weights (@depression); never convert depression into DALYs inside this model.", "number", "WELLBYs"),
         f("household_size", "effect", "Household size", "@household_size.uganda", "TEMPLATE: the site's household size for the place the charity works (facts/household_size.json, the latest DHS survey); add the place's fact if it is missing.", "number"),
         f("household_multiplier", "effect", "Household multiplier (recipient plus spillovers)", "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy", "Each other household member gains the site's one share of the recipient's effect (HLI's, @wellby_factors).", "multiple"),
-    ] + adj_rows() + [
+    ] + adj_rows(counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.9, "best": 1, "high": 1}, "judgment",
+            "1 when the effect is a trial's against its control arm (an RCT's effect is already net of the care as usual its controls had, and of recovery without treatment). Below 1 only for what the control arms didn't have and these clients would: other treatment that has since become available to them (a government service now reaching the same people), or an effect taken from pre-post data with no control group (then the share of the change that wouldn't have come anyway, from the trials' control-arm change). Say which, and the source.", "percent")) + [
         inp("deaths_averted_per_person", "deaths", "Deaths averted per person treated (before adjustments)", 0, "estimate",
-            "suicides or other deaths averted per person treated, from the trial or meta-analysis. 0 with an explanation when the evidence shows none.", "small", source=src("meta-analysis")),
+            "suicides averted per person treated, by the site's one recipe (templates.md, wellbeing): the yearly suicide rate of the population treated (the clients' sex and age band, in their country: WHO Global Health Estimates) × (the relative risk of suicide with depression − 1) × the share of that excess the treatment removes, over the effect's years as it fades (× 0.5 × effect_duration_years × discount_factor, discounted like the WELLBYs). 0 with an explanation when the evidence shows none.", "small", source=src("WHO Global Health Estimates / meta-analysis")),
         f("value_per_death", "deaths", "Value of a death averted (units of value)", "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
-          "TEMPLATE: GiveWell's moral weight for the age band of the people treated (15–49 for most adult programs; @moral_weights.uov_per_death_age_5_14 for school programs), times your value of a life.", "number", "units of value"),
+          "TEMPLATE: GiveWell's moral weight for the age band of the people treated (15–49 for most adult programs; @moral_weights.uov_per_death_age_5_14 for school programs; a mix by the clients' ages where both), times your value of a life.", "number", "units of value"),
         f("uov_valued_outside_wellbys", "deaths", "Deaths averted, in units of value", "people_reached * deaths_averted_per_person * total_adj * value_per_death", None, "number", "units of value"),
         f("wellbys_from_uov", "deaths", "Deaths averted, in WELLBYs (cancelled by the unit's conversion)", "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)",
           "The one row that puts units of value into WELLBYs; the WELLBY unit's conversion multiplies it back, so the deaths count exactly their shared value at any WELLBY rate.", "number", "WELLBYs"),
@@ -302,11 +339,11 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
         f("years_of_impact", "effect", "Years a won reform counts before it would have come anyway", "$win_years_counted",
           "The site's one answer to how many years a won pledge, law or rule counts before it would have come anyway (Your values → How impact is counted; docs/normalization.md 2.9). Never the charity's or an evaluator's own figure.", "number", "years"),
         inp("years_until_effect", "effect", "Years from winning the commitments until they take effect", {"low": 1, "best": 3, "high": 6}, "judgment",
-            "the wait from the win to the deadline by which companies switch, from the commitments' own deadlines (cite them); the wait is discounted at the shared rate. For accountability work on pledges already due, 0.", "number", "years"),
+            "the wait from the win to the deadline by which companies switch, from the commitments' own deadlines (cite them); the wait is discounted at the shared rate. For an accountability branch credited with the year's observed switches (templates.md, corporate-campaign), the lag between the pressure and the switches it causes (0–2 years), not the time left to every deadline.", "number", "years"),
         f("wait_discount", "effect", "Discount for the wait until the commitments take effect", "(1 + $discount_rate) ^ -years_until_effect", "The wait discounted at the shared rate, like every future benefit.", "percent"),
         f("discounted_years", "effect", "Discounted years of impact", "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount", "Years counted, discounted at the shared rate from when the reform takes effect.", "number", "years"),
     ] + adj_rows(implementation_row=f("implementation_adj", "adjustments", "Share of commitments companies keep", "@sad_factors.commitment_fulfilment_cage_free",
-            "TEMPLATE: the site's one rate of pledges kept: @sad_factors.commitment_fulfilment_cage_free for cage-free pledges, @sad_factors.commitment_fulfilment_broiler for broiler (BCC/ECC) pledges. Pig, fish and shrimp pledges have no shared record: a judgment input with a range and the tracker it rests on.", "percent")) + [
+            "TEMPLATE: the site's one rate of pledges kept: @sad_factors.commitment_fulfilment_cage_free for cage-free pledges, @sad_factors.commitment_fulfilment_broiler for broiler (BCC/ECC) pledges. A charity's own \"92% of pledges kept\" is the same Chicken Watch data (global, by commitment, among those due) the shared rate is built from: never in its place. Pig, fish and shrimp pledges have no shared record: a judgment input with a range and the tracker it rests on. Not applied to a count of hens already switched (an observed flow is delivered already).", "percent")) + [
         f("outcome_total", "outcome", "SADs averted", "animals_affected_per_year * discounted_years * sads_per_animal_year * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
     ] + donor_rows("sads", "SADs averted", "advocacy", marginal=True) + donor_tail("sads", "SADs averted", marginal=True),
@@ -316,7 +353,7 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
 T["diet-change"] = model("diet-change", "diet change and meal replacement", "sad", "sads", "SADs averted", "animal-welfare",
     cost_rows() + [
         inp("meals_replaced_per_year", "reach", "Animal-product meals replaced per year by the changes made in the year modelled", 1_000_000, "observed",
-            "meals per year replaced by the menu changes, pledges or trainings the charity achieved in the year modelled, across all its diet-change work (not one case study). Say how the charity measures it and whether it is self-reported.", "integer", "meals / year", src("charity impact report")),
+            "meals per year replaced by the menu changes, pledges or trainings the charity achieved in the year modelled, across all its diet-change work (not one case study). Say how the charity measures it and whether it is self-reported. Only a running total of meals under all the changes won so far (a stock)? Then the wins per year are (meals a year still running + meals a year of changes that lapsed) ÷ the years of the campaign, set against the average real spending over the same years (estimate_basis past_average; templates.md, diet-change); never the year's flow ÷ the changes' average age.", "integer", "meals / year", src("charity impact report")),
         f("sads_per_meal", "effect", "SADs averted per meal replaced", "@sad_factors.sads_per_meal_replaced * meal_mix_vs_reference",
           "The site's one figure for a replaced meal (Sinergia's Latin American canteen meal, 2024 SADs) times the meal-mix ratio below. Never rebuilt from a meat mix of your own.", "number", "SADs / meal"),
         inp("meal_mix_vs_reference", "effect", "Suffering in a replaced meal here, relative to the reference meal", {"low": 0.5, "best": 1, "high": 2}, "judgment",

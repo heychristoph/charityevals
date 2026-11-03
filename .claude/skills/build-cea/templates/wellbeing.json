@@ -162,7 +162,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range. A result in PHQ-9 points becomes SDs by dividing by the site's one spread, @depression.phq9_sd (a formula row: points / @depression.phq9_sd), never a study's own SD typed in."
+      "explainer": "TEMPLATE: standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range. A result in PHQ-9 points becomes SDs by dividing by the site's one spread, @depression.phq9_sd (a formula row: points / @depression.phq9_sd), never a study's own SD typed in; PHQ-8 points (the PHQ-9 without its self-harm item, on nearly the same scale) the same way, said in the explainer. With a trial of the charity's own delivery as well, make this a formula: the precision-weighted blend of the trial and the literature (templates.md, wellbeing)."
     },
     {
       "id": "effect_duration_years",
@@ -262,12 +262,12 @@
       "label": "Share of the outcome that wouldn't have happened anyway",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
+        "low": 0.9,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+      "explainer": "TEMPLATE: 1 when the effect is a trial's against its control arm (an RCT's effect is already net of the care as usual its controls had, and of recovery without treatment). Below 1 only for what the control arms didn't have and these clients would: other treatment that has since become available to them (a government service now reaching the same people), or an effect taken from pre-post data with no control group (then the share of the change that wouldn't have come anyway, from the trials' control-arm change). Say which, and the source."
     },
     {
       "id": "attribution_share_shared",
@@ -280,7 +280,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -319,13 +319,13 @@
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: meta-analysis",
+        "title": "TEMPLATE: WHO Global Health Estimates / meta-analysis",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: suicides or other deaths averted per person treated, from the trial or meta-analysis. 0 with an explanation when the evidence shows none."
+      "explainer": "TEMPLATE: suicides averted per person treated, by the site's one recipe (templates.md, wellbeing): the yearly suicide rate of the population treated (the clients' sex and age band, in their country: WHO Global Health Estimates) × (the relative risk of suicide with depression − 1) × the share of that excess the treatment removes, over the effect's years as it fades (× 0.5 × effect_duration_years × discount_factor, discounted like the WELLBYs). 0 with an explanation when the evidence shows none."
     },
     {
       "id": "value_per_death",
@@ -334,7 +334,7 @@
       "format": "number",
       "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "TEMPLATE: GiveWell's moral weight for the age band of the people treated (15–49 for most adult programs; @moral_weights.uov_per_death_age_5_14 for school programs), times your value of a life."
+      "explainer": "TEMPLATE: GiveWell's moral weight for the age band of the people treated (15–49 for most adult programs; @moral_weights.uov_per_death_age_5_14 for school programs; a mix by the clients' ages where both), times your value of a life."
     },
     {
       "id": "uov_valued_outside_wellbys",
