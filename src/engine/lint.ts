@@ -6,14 +6,30 @@
 import type { Node } from "./expr";
 import { assumptionValues, compute, hasRange, type Library, type ResolvedModel } from "./model";
 import { rowsFeeding } from "./sensitivity";
-import { TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
+import { bridgesOf } from "./bridges";
+import { CLIMATE_REQUIRED, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
+
+/** Does a row read `ref` ($assumption, or @fact; a trailing `.` or `_` is a prefix), itself or
+ * through the rows it is computed from? */
+function readsRef(m: ResolvedModel, row: string, ref: string): boolean {
+  const name = ref.slice(1);
+  const prefix = /[._]$/.test(name);
+  const hit = (xs: string[]) => xs.some((x) => (prefix ? x.startsWith(name) : x === name));
+  return [...upstream(m, row)].some((id) => {
+    const r = m.byId.get(id);
+    return !!r && (ref.startsWith("$") ? hit(r.assumptionDeps) : hit(r.factDeps));
+  });
+}
+
+const MARGINAL = "marginal_vs_past_average";
 
 export type Severity = "high" | "medium" | "low";
 export type Finding = { severity: Severity; code: string; row?: string; message: string; fix: string };
 
 /** Constants a formula may contain without a row of their own: identities, halves (triangle areas),
- * percent/thousand/million scaling, and calendar conversions. Everything else is a magic number. */
-export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e6, 12, 52, 365, 365.25, 1e-6]);
+ * percent/thousand/hundred-thousand (rates per 100,000)/million scaling, and calendar conversions.
+ * Everything else is a magic number. */
+export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e5, 1e6, 12, 52, 365, 365.25, 1e-6]);
 
 const MIN_EXPLAINER = 60;
 const STALE_MONTHS = 18;
@@ -98,8 +114,11 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
         // (`<branch>_counterfactual_adj`) and keep the canonical row as a weighted average for
         // reading only. That is fine as long as every branch's own adjustment reaches the result.
         const branches = m.rows.filter((x) => x.id.endsWith(`_${r}`) && x.id !== r);
-        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id)))
-          add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches.", r);
+        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id))) {
+          // Said in its explainer already: nothing to fix.
+          if (!/\b(average|summary|weighted)\b[^.]*\bbranch/i.test(`${m.byId.get(r)?.label ?? ""}. ${m.byId.get(r)?.explainer ?? ""}`))
+            add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches, for reading only.", r);
+        }
         else add("high", "unapplied", `${r} is computed but never reaches the bottom line`, `Use ${r} in the chain that leads to ${output}, or (multi-branch models) apply a <branch>_${r} row in every branch.`, r);
       }
     const perDollar = m.byId.get(ids.perDollar);
@@ -115,6 +134,68 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   const dcs = m.byId.get("donor_cost_share");
   if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
     add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
+
+  // Bridges (docs/normalization.md 2.6): a row named as one is the exact bridge formula, so each outcome
+  // reaches the headline through its own unit's shared conversion.
+  const bridges = new Set(bridgesOf(lib, m).map((b) => b.row));
+  for (const r of m.rows)
+    if (/^(uov|dalys|wellbys|ced|tco2e)_from_(uov|daly|wellby|ced|tco2e)$|^proxy_in_/.test(r.id) && r.id !== "wellbys_from_uov" && !bridges.has(r.id))
+      add("high", "bridge", `${r.id} is named as a bridge but isn't one`, "Write it as <input> * (<to_common of the input's unit>) / (<to_common of the output unit>), the template's row word for word, in an ours section.", r.id);
+  // The proxy branch (2.12): comparable programmes' result, read live, counted less by the shared slider.
+  const proxy = m.byId.get("proxy_peer_result");
+  if (proxy && !(proxy.modelDeps ?? []).length)
+    add("high", "proxy", "proxy_peer_result doesn't read the comparable programmes' models live", "Set proxy_peer_result = median(#peer-a, #peer-b, …) (or #nearest-model): the result per dollar of the same kind of work on the site, never a typed number.", "proxy_peer_result");
+  if (output && m.byId.has("proxy_per_donor_dollar") && !path.has("proxy_per_donor_dollar"))
+    add("high", "unapplied", "proxy_per_donor_dollar never reaches the bottom line", "Add it (through the template's bridge where the unit isn't uov) to the per-donor-dollar row, and multiply the modelled part by (1 - proxy_share).", "proxy_per_donor_dollar");
+
+  // When the estimate was made: the estimate-age slider counts from it (docs/normalization.md 2.11).
+  const s = m.source;
+  if (!s?.published || Number.isNaN(new Date(s.published).getTime()))
+    add("high", "published", "no source.published date", 'Set "source": { "publisher": "charityevals", "title": …, "url": "https://charityevals.org/<id>", "published": "<the date the model was built, YYYY-MM-DD>", "retrieved": … }: the estimate-age discount counts from it.');
+  else if (s.publisher !== "charityevals") add("medium", "published", `source.publisher is ${s.publisher}`, 'A charityevals model is published by "charityevals".');
+  if (m.theoretical) add("high", "theoretical", "a charityevals model is flagged theoretical", "build-cea models are built from the charity's own work; remove the flag (an idea-stage model is an import, docs/normalization.md decision 2026-10-31 #1).");
+
+  // What the model's dollar is (INV-18): past averages, and only past averages, read the next-dollar slider.
+  const basis = m.estimate_basis;
+  const marginalReaders = m.rows.filter((r) => r.assumptionDeps.includes(MARGINAL));
+  if (!basis) add("high", "estimate-basis", "no estimate_basis", `Set "estimate_basis": past_average (past spending over past wins: campaigns, policy, research, money moved), marginal (a forecast of planned work) or unit_cost (a price per item delivered). The ${family} template's is ${spec.basis}.`);
+  else {
+    if (basis === "past_average" && !marginalReaders.some((r) => path.has(r.id)))
+      add("high", "estimate-basis", "a past average whose result doesn't read $marginal_vs_past_average", 'Add the row marginal_vs_past_average = $marginal_vs_past_average (`published` 1) in the donor section and multiply the per-donor-dollar row by it.');
+    if (basis !== "past_average")
+      for (const r of marginalReaders) add("high", "estimate-basis", `reads $${MARGINAL} but estimate_basis is ${basis}`, "Only a past average takes the next-dollar slider: remove the row, or set estimate_basis to past_average if the cost is past spending over past wins.", r.id);
+    if (basis !== spec.basis && !spec.altBasis?.includes(basis))
+      add("low", "estimate-basis", `estimate_basis ${basis}; ${family} models are usually ${spec.basis}`, "Say in the summary or the cost explainer why this charity's dollar is different.");
+  }
+
+  // The site's one way for each shared concept the family needs (docs/normalization.md 2.7-2.10).
+  for (const rd of spec.reads)
+    if (m.byId.has(rd.row) && !readsRef(m, rd.row, rd.ref))
+      add(rd.severity ?? "high", "shared", `${rd.row} doesn't read ${rd.ref}`, `Read ${rd.ref}…: ${rd.why}.`, rd.row);
+  if (unit === "tco2e")
+    for (const r of CLIMATE_REQUIRED) if (!m.byId.has(r) || (r === "years_until_avoided" && !path.has(r)))
+      add("high", "required-row", `a climate model needs ${r} on its path`, "Start from the policy-research-meta-climate template (docs/normalization.md 2.5).", r);
+
+  // Deaths by age band, never the all-ages figure where the ages are known; depression stays in WELLBYs.
+  for (const r of m.rows) {
+    if (r.factDeps.includes("moral_weights.uov_per_death_over5"))
+      add("medium", "age-band", "values deaths at the all-ages over-five figure", "Use the band of the deaths' ages (@moral_weights.uov_per_death_age_5_14, _15_49, _50_74), or say in the explainer that the ages are unknown.", r.id);
+    if (unit === "wellby" && r.factDeps.includes("depression.dalys_per_phq9_point_year"))
+      add("high", "exchange-rate", "a WELLBY model converts depression into DALYs", "Stay in WELLBYs (@wellby_factors.wellbys_per_sd_year; PHQ-9 points ÷ @depression.phq9_sd for SDs): the WELLBY unit's conversion is calibrated on depression.", r.id);
+    // A currency rate is the site's (@fx), never typed in.
+    if (r.formula === undefined && r.value !== undefined && (/^fx_/.test(r.id) || /\b[Ee]xchange rate\b|\b[Cc]urrency (rate|conversion)\b|\b[A-Z]{3} per (US ?)?(\$|USD|dollar)\b|\b(US ?)?(\$|USD|dollars?) per [A-Z]{3}\b/.test(r.label)))
+      add("high", "fx", "a currency rate typed in", "Multiply the local-currency row by @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; scripts/link-fx.py adds a missing one).", r.id);
+  }
+
+  // The species step: the ced row's SAD version is the version of the shared figure it divides.
+  for (const r of m.rows) {
+    const mm = /^ced_([a-z]+?)(?:_(2024|2025))?$/.exec(r.id);
+    if (!mm || !r.formula) continue;
+    const v = new RegExp(`@aim_sads\\.${mm[1]}_(\\d{4})`).exec(r.formula)?.[1];
+    const versions = new Set([...upstream(m, r.id)].flatMap((id) => m.byId.get(id)?.factDeps ?? []).map((f) => SAD_FACT_VERSION[f]).filter(Boolean));
+    if (v && versions.size && !versions.has(v))
+      add("high", "sad-version", `${r.id} divides by Ambitious Impact's ${v} weight, but the SADs figure it converts is ${[...versions].join(" and ")} SADs`, `Use @aim_sads.${mm[1]}_${[...versions][0]} in ${r.id} (and, with figures of both versions, a second pair sads_${mm[1]}_<v> / ced_${mm[1]}_<v>).`, r.id);
+  }
 
   // Rows: sourcing, ranges, magic numbers, placeholders.
   for (const r of m.rows) {
@@ -149,7 +230,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   // Facts used: they need sources too.
   for (const key of new Set(m.rows.flatMap((r) => r.factDeps))) {
     const f = lib.facts.get(key);
-    if (f && !f.source?.url) add("medium", "fact-source", `fact @${key} has no source URL`, "Add the source to the facts file.", `@${key}`);
+    if (f && !f.source?.url && f.kind !== "judgment") add("medium", "fact-source", `fact @${key} has no source URL`, "Add the source to the facts file.", `@${key}`);
     const months = f?.source?.retrieved ? monthsSince(f.source.retrieved, today) : undefined;
     if (months !== undefined && months > STALE_MONTHS) add("low", "stale", `fact @${key} was retrieved ${months} months ago`, "Check it is still current.", `@${key}`);
   }
