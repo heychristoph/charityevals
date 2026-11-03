@@ -4,20 +4,28 @@
   "kind": "template",
   "cause": "global-health",
   "template": "cash-income",
+  "estimate_basis": "unit_cost",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: cash transfers and income gains",
+    "url": "https://charityevals.org/template-cash-income",
+    "published": "2026-01-01",
+    "retrieved": "2026-01-01"
+  },
   "resources": [],
   "sections": [
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
     },
     {
       "id": "effect",
@@ -45,7 +53,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on the modelled program(s) in the period",
+      "label": "Spending on the modelled program(s) in the year modelled",
       "format": "usd",
       "value": 1000000,
       "kind": "observed",
@@ -56,7 +64,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
     },
     {
       "id": "total_expenses",
@@ -139,7 +147,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: the transfer size the charity reports."
+      "explainer": "TEMPLATE: the transfer size the charity reports, in US dollars (local currency × @fx.usd_per_<cur>_<year>)."
     },
     {
       "id": "households",
@@ -153,17 +161,9 @@
       "section": "reach",
       "label": "Average household size",
       "format": "number",
-      "value": 4.5,
-      "kind": "observed",
+      "formula": "@household_size.kenya_rural",
       "unit": "people",
-      "source": {
-        "title": "TEMPLATE: DHS / charity data",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: from the charity's census or the country's DHS."
+      "explainer": "TEMPLATE: the site's household size for the place the charity works (facts/household_size.json, the latest DHS survey; rural where the recipients are rural). Add the place's fact if it is missing. A size the charity measured in its own recipients is another population: use it only with that reason in the explainer."
     },
     {
       "id": "people_reached",
@@ -205,7 +205,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: recipients' consumption per person per year before the transfer, from the program's baseline survey or the World Bank poverty data for the region."
+      "explainer": "TEMPLATE: recipients' consumption per person per year before the transfer, in 2017 international dollars, from the program's baseline survey or the World Bank poverty data for the region."
     },
     {
       "id": "share_consumed_y1",
@@ -246,12 +246,13 @@
       },
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: GiveWell GiveDirectly CEA, Consumption tab",
-        "url": "https://docs.google.com/spreadsheets/d/1LqkkwWCud9qGjSJmw9re6DIm5ocpPOaqOJ-KIEVLppk/edit",
-        "cell": "Consumption!B23; Inputs!D23:F23",
+        "title": "TEMPLATE: follow-up study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: returns on the invested share in each later year, relative to the year-1 consumption gain. About 0.165 over 9 later years reproduces GiveWell's 1.23 (0.74–1.72) at 4% (GiveDirectly CEA, Nov 2024); cite the follow-up studies you use. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
+      "explainer": "TEMPLATE: returns on the invested share in each later year, relative to the year-1 consumption gain, from the follow-up studies you cite. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
     },
     {
       "id": "later_years",
@@ -301,13 +302,13 @@
       },
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: Egger et al. 2022 / GiveWell",
+        "title": "TEMPLATE: Egger et al. 2022",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: local economic spillovers. GiveWell's adjusted Egger et al. figure is about 0.7; it is weakly identified, so give a wide range."
+      "explainer": "TEMPLATE: local economic spillovers. Weakly identified (Egger et al. 2022), so give a wide range."
     },
     {
       "id": "mortality_uov_ratio",
@@ -321,18 +322,18 @@
       },
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: GiveWell GiveDirectly CEA",
+        "title": "TEMPLATE: study",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: child-mortality effects of cash, as a share of consumption value (GiveWell models these explicitly for GiveDirectly). 0 for programs without mortality evidence."
+      "explainer": "TEMPLATE: child-mortality effects of cash, as a share of consumption value. 0 for programs without mortality evidence. Where the evidence gives deaths averted, count them as deaths instead (@moral_weights by age band × $life_value_multiplier, as the direct-health template)."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity)",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -340,7 +341,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
     },
     {
       "id": "counterfactual_adj",
@@ -358,7 +359,7 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of credit, when shared with others",
+      "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -366,7 +367,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -400,15 +401,15 @@
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Benefits and costs not modelled, as a share of modelled value",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": 0,
+        "low": -0.05,
         "best": 0.1,
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: GiveWell-style supplementary adjustment: list each effect not modelled (morbidity, stillbirths, treatment costs averted, rebound effects) with its sign and size."
+      "explainer": "TEMPLATE: a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere."
     },
     {
       "id": "uov_consumption",
@@ -453,35 +454,18 @@
     {
       "id": "staff_cost_share",
       "section": "donor",
-      "label": "Staff pay as a share of total cost",
+      "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: audited financial statements",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+      "formula": "@staff_pay.share_goods",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_goods; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
     },
     {
       "id": "salary_gap",
       "section": "donor",
-      "label": "Pay gap versus comparable for-profit jobs",
+      "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_local_delivery); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
     },
     {
       "id": "salary_sacrifice",

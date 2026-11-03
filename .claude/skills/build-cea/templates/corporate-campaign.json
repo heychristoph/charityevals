@@ -4,20 +4,28 @@
   "kind": "template",
   "cause": "animal-welfare",
   "template": "corporate-campaign",
+  "estimate_basis": "past_average",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: corporate and producer welfare campaigns",
+    "url": "https://charityevals.org/template-corporate-campaign",
+    "published": "2026-01-01",
+    "retrieved": "2026-01-01"
+  },
   "resources": [],
   "sections": [
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
     },
     {
       "id": "effect",
@@ -51,7 +59,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on the modelled program(s) in the period",
+      "label": "Spending on the modelled program(s) in the year modelled",
       "format": "usd",
       "value": 1000000,
       "kind": "observed",
@@ -62,7 +70,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
     },
     {
       "id": "total_expenses",
@@ -114,7 +122,7 @@
     {
       "id": "animals_per_year",
       "section": "reach",
-      "label": "Animals per year in the supply chains covered",
+      "label": "Animals per year in the supply chains covered by the commitments won",
       "format": "integer",
       "value": 10000000,
       "kind": "observed",
@@ -126,7 +134,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: animals per year affected by the commitments won (or held to account) in the period: company egg/meat volumes ÷ per-animal output. Cite the tracker or the company's report; note the conversion."
+      "explainer": "TEMPLATE: animals per year under the commitments the charity won (or held to account) in the year modelled: company egg or meat volumes ÷ per-animal output. Count everything the commitments cover, not only what is already delivered: whether companies deliver is implementation_adj (the shared fulfilment rate), so a delivered-only count would discount delivery twice. Cite the tracker or the company's report and the conversion."
     },
     {
       "id": "share_not_yet_compliant",
@@ -162,41 +170,52 @@
       "format": "number",
       "formula": "@sad_factors.sads_per_hen_year_cage_to_aviary",
       "unit": "SADs / animal-year",
-      "explainer": "TEMPLATE: pick the shared figure for the change (facts/sad_factors.json: cage-free, enriched-to-aviary, broiler BCC, shrimp stunned). A new change gets a new fact with sources and a `change` note; never put a SAD figure inline. Set the species section to match."
+      "explainer": "TEMPLATE: the shared figure for the change (facts/sad_factors.json: battery cage to aviary 2024 SADs; enriched cage to aviary, broiler BCC, shrimp stunned 2025 SADs). A new change gets a new fact with sources and a `change` note; never put a SAD figure inline or adapt the shared one. Set the species section to match, with the ced row's version the figure's."
     },
     {
       "id": "years_of_impact",
       "section": "effect",
-      "label": "Years the reform is brought forward",
+      "label": "Years a won reform counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer to how many years a won pledge, law or rule counts before it would have come anyway (Your values → How impact is counted; docs/normalization.md 2.9). Never the charity's or an evaluator's own figure."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years from winning the commitments until they take effect",
       "format": "number",
       "value": {
-        "low": 4,
-        "best": 15,
-        "high": 36
+        "low": 1,
+        "best": 3,
+        "high": 6
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: Rethink Priorities, corporate campaigns for chicken welfare",
-        "url": "https://rethinkpriorities.org/publications/corporate-campaigns-affect-9-to-120-years-of-chicken-life-per-dollar-spent",
-        "page": "summary",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: how many years earlier the reform happens than it would have without the campaign: Rethink Priorities' 90% interval for corporate chicken campaigns is 4–36 years."
+      "explainer": "TEMPLATE: the wait from the win to the deadline by which companies switch, from the commitments' own deadlines (cite them); the wait is discounted at the shared rate. For accountability work on pledges already due, 0."
+    },
+    {
+      "id": "wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait until the commitments take effect",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -years_until_effect",
+      "explainer": "The wait discounted at the shared rate, like every future benefit."
     },
     {
       "id": "discounted_years",
       "section": "effect",
       "label": "Discounted years of impact",
       "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount",
       "unit": "years",
-      "explainer": "Years of impact discounted at the shared rate."
+      "explainer": "Years counted, discounted at the shared rate from when the reform takes effect."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity)",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -204,7 +223,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
     },
     {
       "id": "counterfactual_adj",
@@ -222,7 +241,7 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of credit, when shared with others",
+      "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -230,7 +249,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -243,15 +262,10 @@
     {
       "id": "implementation_adj",
       "section": "adjustments",
-      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "label": "Share of commitments companies keep",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+      "formula": "@sad_factors.commitment_fulfilment_cage_free",
+      "explainer": "TEMPLATE: the site's one rate of pledges kept: @sad_factors.commitment_fulfilment_cage_free for cage-free pledges, @sad_factors.commitment_fulfilment_broiler for broiler (BCC/ECC) pledges. Pig, fish and shrimp pledges have no shared record: a judgment input with a range and the tracker it rests on."
     },
     {
       "id": "total_adj",
@@ -280,35 +294,18 @@
     {
       "id": "staff_cost_share",
       "section": "donor",
-      "label": "Staff pay as a share of total cost",
+      "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: audited financial statements",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+      "formula": "@staff_pay.share_advocacy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_advocacy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
     },
     {
       "id": "salary_gap",
       "section": "donor",
-      "label": "Pay gap versus comparable for-profit jobs",
+      "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
+      "formula": "@staff_pay.gap_advocacy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_advocacy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
     },
     {
       "id": "salary_sacrifice",
@@ -316,6 +313,15 @@
       "label": "Salary forgone by staff (in-kind donation)",
       "format": "usd",
       "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "$marginal_vs_past_average",
+      "published": 1,
+      "explainer": "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says."
     },
     {
       "id": "donor_cost_share",
@@ -329,7 +335,7 @@
       "section": "donor",
       "label": "SADs averted per dollar you give",
       "format": "small",
-      "formula": "sads_per_dollar * donor_cost_share",
+      "formula": "sads_per_dollar * donor_cost_share * marginal_vs_past_average",
       "unit": "SADs averted / $"
     },
     {
@@ -338,7 +344,7 @@
       "label": "SADs averted per dollar you give: chickens",
       "format": "number",
       "formula": "sads_per_donor_dollar",
-      "explainer": "TEMPLATE: one species takes all the SADs. For several, add a sads_<species> row per species with its share (a sourced fact or a judgment row with a range) and a ced_<species> row for each."
+      "explainer": "TEMPLATE: one species takes all the SADs. For several, add a sads_<species> row per species with its share (a sourced fact or a judgment row with a range) and a ced_<species> row for each. A second SAD version for the same species (a broiler or enriched-cage figure, 2025 SADs, beside a cage-to-aviary one, 2024) gets its own pair sads_chicken_2025 / ced_chicken_2025."
     },
     {
       "id": "ced_chicken",
@@ -346,7 +352,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
       "format": "number",
       "formula": "sads_chicken / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024)",
-      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+      "explainer": "Ambitious Impact's species weight (2024 SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's."
     },
     {
       "id": "ced_per_donor_dollar",
