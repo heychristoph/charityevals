@@ -10,8 +10,11 @@ You are building a cost-effectiveness model for **{charity name}** ({website}) w
 evaluation rules:
 
 - **Blind**: this is a test of whether the skill reproduces an evaluator's judgment independently.
-  You must NOT read: {forbidden}. Don't read anything under `~/repos/charityevals` or any path
-  outside the sandbox and your scratch directory. If a search result snippet shows an evaluator's
+  You must NOT read: {forbidden}. Don't read, list or search anything under `~/repos/charityevals` or any path
+  outside the sandbox and your scratch directory (not their parent folders either: other runs and
+  evaluator downloads may sit there). The sandbox has had text naming this charity removed from its
+  docs and facts; the shared facts and sliders themselves are the site's and are always used, even
+  where an evaluator's sheet is their source (don't open those source links). If a search result snippet shows an evaluator's
   cost-effectiveness figure for this charity, don't follow it and don't use it; note it in the log.
   You MAY use the charity's own website and reports, its financial filings, general academic
   literature on the intervention (systematic reviews, RCTs), and data sources (IHME, UN IGME,
@@ -25,9 +28,9 @@ evaluation rules:
   the mechanical audit is clean and say so in your report.
 - Run checks from the sandbox: `cd {sandbox} && npx tsx scripts/check.ts {id}` and
   `npx tsx scripts/audit-model.ts models/{cause}/{id}.json --exclude {evaluator model ids}` (the exclusion keeps the reference class from showing the answer). audit-model runs every
-  invariant of docs/normalization.md on the draft; any violation is a high finding to fix. (Don't run
-  `npm run check`: the sandbox has no bulk models, so the summaries and write-up checks of other
-  models don't apply.)
+  invariant of docs/normalization.md on the draft; any violation is a high finding to fix. `npx tsx scripts/normalization-audit.ts --exclude {evaluator model ids}` runs the invariants over
+  the whole sandbox library. (Don't run `npm run check` or `check.ts` without the id: the sandbox has
+  no bulk models, so other models' summaries and write-ups are missing there.)
 
 Report at the end: the bottom line (native unit, years of healthy life per $1,000, joint low–high), the values of the
 canonical rows, the year modelled and `estimate_basis`, the programmes modelled with their funding
