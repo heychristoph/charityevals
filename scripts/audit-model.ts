@@ -80,6 +80,11 @@ const s = sensitivity(lib, m, av);
 // defaults: the uncertainty the builder owns, since the builder can't narrow the shared ranges.
 const fixedLib = { ...lib, assumptions: { ...lib.assumptions, rows: lib.assumptions.rows.map((r) => ({ ...r, value: typeof r.value === "object" ? r.value.best : r.value })) } };
 const sOwn = sensitivity(fixedLib, m, av);
+// The builder's own ranges only: shared facts (the repo's facts/, not facts added for this model) held at
+// their best too, since a builder can no more narrow the shared SADs or species ranges than a slider.
+const ownFactFiles = new Set(extraFacts.map((f) => f.id as string));
+const builderLib = { ...fixedLib, facts: new Map([...lib.facts].map(([k, f]) => [k, ownFactFiles.has(k.split(".")[0]) || typeof f.value !== "object" ? f : { ...f, value: f.value.best }])) } as typeof lib;
+const sBuilder = sensitivity(builderLib, m, av);
 const line = bottomLine(lib, m, av);
 const years = headline(lib, m, av);
 const vals = compute(lib, m, av);
@@ -129,8 +134,12 @@ for (const r of applyWaivers(checkAll(invLib).filter((x) => x.id !== "INV-15"), 
     findings.push({ severity: "high", code: v.inv, row: v.where, message: v.detail, fix: "Fix the model so the invariant holds (docs/normalization.md section 3); a waiver only for a checked false positive, with its reason." });
 findings.sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
 
-if (sOwn.jointHigh / sOwn.jointLow > 1000)
-  findings.push({ severity: "medium", code: "spread", message: `with shared assumptions at their defaults, joint low to high still spans ${Math.round(sOwn.jointHigh / sOwn.jointLow)}×`, fix: "Check the widest ranges are real; narrow ranges you can source, or say in the summary that the result is mostly uncertainty." });
+// The spread the builder owns (shared assumptions and facts at their best). Said in the summary already
+// ("the result is mostly uncertainty"): low, a reminder to keep the sentence.
+if (sBuilder.jointHigh / sBuilder.jointLow > 1000) {
+  const said = /\bmostly uncertain(ty)?\b|\buncertain(ty)? (spans|of about|is wide)|\bwide(ly)? uncertain/i.test(m.summary ?? "");
+  findings.push({ severity: said ? "low" : "medium", code: "spread", message: `with shared assumptions and shared facts at their best, the model's own ranges still span ${Math.round(sBuilder.jointHigh / sBuilder.jointLow)}× (joint low to high)${said ? "; the summary says so" : ""}`, fix: said ? "Keep the summary's sentence on the uncertainty; narrow the widest of the model's own ranges where a source allows." : "Check the widest of the model's own ranges are real; narrow ranges you can source, or say in the summary that the result is mostly uncertainty." });
+}
 
 // Same-family charityevals models: canonical rows side by side.
 const family = m.template as Family | undefined;
@@ -144,7 +153,7 @@ if (json) {
     id: m.id, template: family, unit: m.output?.unit,
     native: line.native, common: line.common, yearsPer1000: years,
     jointLow: s.jointLow, jointHigh: s.jointHigh,
-    ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, judgmentShare: s.judgmentShare,
+    ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, builderJointLow: sBuilder.jointLow, builderJointHigh: sBuilder.jointHigh, judgmentShare: s.judgmentShare,
     swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow, atHigh: w.atHigh })),
     causeMedian, findings, peers, canonical: Object.fromEntries(canon.map((id) => [id, vals[id]])),
   }, null, 2));
@@ -153,6 +162,7 @@ if (json) {
   console.log(`Bottom line: ${fmt(line.native)} ${m.output?.unit}/$ = ${fmt(years)} years of healthy life per $1,000`);
   console.log(`Joint low–high: ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
   console.log(`Joint low–high with shared assumptions at their defaults: ${fmt(sOwn.jointLow)} – ${fmt(sOwn.jointHigh)}`);
+  console.log(`Joint low–high of the model's own ranges (shared assumptions and facts at their best): ${fmt(sBuilder.jointLow)} – ${fmt(sBuilder.jointHigh)}`);
   console.log(`Point inputs on the result's path (no range): ${s.pointInputs.join(", ") || "none"}\n`);
   console.log("## Tornado (years of healthy life per $1,000 with the input at its low / high end)");
   for (const w of s.swings.slice(0, 12))
