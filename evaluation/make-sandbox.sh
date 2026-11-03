@@ -15,36 +15,72 @@ rsync -a --exclude .git --exclude node_modules --exclude dist --exclude .astro -
   --exclude generated --exclude inventory --exclude 'evaluation/blind-runs' --exclude 'evaluation/dev-runs' --exclude docs/eval-skills.md \
   --exclude '.claude/worktrees' --exclude 'scripts/convert-*' --exclude 'scripts/import-*' --exclude scripts/givewell-manifest.py --exclude scripts/collect-resources.py "$src/" "$dest/"
 ln -sfn "$src/node_modules" "$dest/node_modules"
-node - "$dest" "$@" <<'JS'
+node - "$dest" "$src" "$@" <<'JS'
 const fs = require("fs"), path = require("path");
-const [dest, ...ids] = process.argv.slice(2);
+const [dest, src, ...ids] = process.argv.slice(2);
+// Short names the docs use for a charity besides its id and name.
+const ALIASES = { "against-malaria-foundation": ["AMF"], "the-humane-league": ["THL"], "sociedade-vegetariana-brasileira": ["SVB"],
+  "dansk-vegetarisk-forening": ["DVF"], "shrimp-welfare-project": ["SWP"], "helen-keller-intl": ["Helen Keller"], "the-life-you-can-save": ["TLYCS"] };
 const walk = (d) => fs.readdirSync(d).flatMap((f) => {
   const p = path.join(d, f);
   return fs.statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
 });
 const models = walk(path.join(dest, "models")).map((p) => ({ p, m: JSON.parse(fs.readFileSync(p, "utf8")), s: fs.readFileSync(p, "utf8") }));
-const reads = (s) => [...s.matchAll(/#([a-z0-9][a-z0-9-]*)/g)].map((x) => x[1]);
-// A model goes if it is about an excluded charity, or extends or reads a model that goes.
+// The models a model reads: `#id` in a formula (`#owner:charity` names a charity's figure, not a model).
+const reads = (m) => (m.rows ?? []).flatMap((r) => [...String(r.formula ?? "").matchAll(/#([a-z0-9][a-z0-9-]*)(:?)/g)].filter((x) => !x[2]).map((x) => x[1]));
+// A model goes if it is about an excluded charity, extends or reads a model that goes, or reads a
+// model the sandbox doesn't have (a bulk import).
+const present = new Set(models.map(({ m }) => m.id));
 const gone = new Set();
 let changed = true;
 while (changed) {
   changed = false;
-  for (const { m, s } of models)
-    if (!gone.has(m.id) && (ids.includes(m.charity) || (m.extends && gone.has(m.extends)) || reads(s).some((r) => gone.has(r)))) { gone.add(m.id); changed = true; }
+  for (const { m } of models)
+    if (!gone.has(m.id) && (ids.includes(m.charity) || (m.extends && gone.has(m.extends)) || reads(m).some((r) => gone.has(r) || !present.has(r)))) { gone.add(m.id); changed = true; }
 }
 for (const { p, m } of models) if (gone.has(m.id)) fs.rmSync(p);
-// GiveWell's shared inputs: only rows something left in the sandbox reads.
-const readers = [...models.filter(({ m }) => !gone.has(m.id)).map(({ s }) => s),
+// GiveWell's sheet inputs (facts/givewell*.json except the house constants): drop the rows only the
+// excluded charities' sheets read (their models here and their bulk imports), so no excluded sheet's
+// inputs show; rows anything else reads stay.
+const srcModels = [...walk(path.join(src, "models"))].map((p) => ({ m: JSON.parse(fs.readFileSync(p, "utf8")), s: fs.readFileSync(p, "utf8") }));
+const factRefs = (s) => [...s.matchAll(/@(givewell[a-z_]*)\.([a-z0-9_]+)/g)].map((x) => `${x[1]}.${x[2]}`);
+const theirs = new Set(srcModels.filter(({ m }) => gone.has(m.id) || ids.includes(m.charity)).flatMap(({ s }) => factRefs(s)));
+const others = new Set([...srcModels.filter(({ m }) => !gone.has(m.id) && !ids.includes(m.charity)).map(({ s }) => s),
   ...walk(path.join(dest, ".claude/skills")).map((p) => fs.readFileSync(p, "utf8")),
-  ...walk(path.join(dest, "assumptions")).map((p) => fs.readFileSync(p, "utf8"))].join("\n");
-const used = new Set([...readers.matchAll(/@(givewell[a-z_]*)\.([a-z0-9_]+)/g)].map((x) => `${x[1]}.${x[2]}`));
+  ...walk(path.join(dest, "assumptions")).map((p) => fs.readFileSync(p, "utf8"))].flatMap(factRefs));
 let dropped = 0;
-for (const p of walk(path.join(dest, "facts")).filter((p) => path.basename(p).startsWith("givewell"))) {
+for (const p of walk(path.join(dest, "facts")).filter((p) => path.basename(p).startsWith("givewell") && !p.endsWith("givewell_shared.json"))) {
   const f = JSON.parse(fs.readFileSync(p, "utf8"));
-  const rows = f.rows.filter((r) => used.has(`${f.id}.${r.id}`));
+  const rows = f.rows.filter((r) => !theirs.has(`${f.id}.${r.id}`) || others.has(`${f.id}.${r.id}`));
   dropped += f.rows.length - rows.length;
-  if (!rows.length) { fs.rmSync(p); continue; }
   fs.writeFileSync(p, JSON.stringify({ ...f, rows }, null, 1) + "\n");
+}
+// Text that names an excluded charity (the docs' per-model tables, fact explainers and sources citing
+// an evaluator's sheet of it, waiver reasons) is removed: lines of Markdown, string values of JSON.
+// The numbers stay where other models read them.
+const names = ids.flatMap((c) => {
+  const p = path.join(src, "charities", `${c}.json`);
+  const r = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
+  return [c, r.name, ...(r.aliases ?? []), ...(ALIASES[c] ?? [])].filter(Boolean);
+});
+const names_re = new RegExp(`\\b(${names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`, "i");
+let redacted = 0;
+const scrub = (v, k) => {
+  if (typeof v === "string") return k !== "id" && names_re.test(v) ? (redacted++, "(removed for a blind run)") : v;
+  if (Array.isArray(v)) return v.map((x) => scrub(x, k));
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([kk, x]) => [kk, scrub(x, kk)]));
+  return v;
+};
+for (const p of [...walk(path.join(dest, "facts")), ...walk(path.join(dest, "assumptions")), path.join(dest, "src/engine/normalization-waivers.json")].filter((p) => fs.existsSync(p))) {
+  const raw = fs.readFileSync(p, "utf8");
+  if (!names_re.test(raw)) continue;
+  fs.writeFileSync(p, JSON.stringify(scrub(JSON.parse(raw)), null, raw.startsWith('{\n "') ? 1 : 2) + "\n");
+}
+const md = (d) => fs.readdirSync(d).flatMap((f) => { const p = path.join(d, f); return fs.statSync(p).isDirectory() ? md(p) : f.endsWith(".md") ? [p] : []; });
+for (const p of [...md(path.join(dest, "docs")), ...md(path.join(dest, ".claude/skills"))]) {
+  const lines = fs.readFileSync(p, "utf8").split("\n");
+  const kept = lines.filter((l) => !names_re.test(l));
+  if (kept.length < lines.length) { redacted += lines.length - kept.length; fs.writeFileSync(p, kept.join("\n")); }
 }
 const writeups = path.join(dest, "writeups");
 for (const f of fs.readdirSync(writeups)) {
@@ -57,6 +93,6 @@ for (const c of ids) {
   const r = JSON.parse(fs.readFileSync(p, "utf8"));
   fs.writeFileSync(p, JSON.stringify({ id: r.id, name: r.name, cause: r.cause, website: r.website }, null, 2) + "\n");
 }
-console.log(`removed ${gone.size} models: ${[...gone].sort().join(", ")}; ${dropped} GiveWell fact rows nothing left reads`);
+console.log(`removed ${gone.size} models: ${[...gone].sort().join(", ")}; ${dropped} GiveWell sheet rows only they read; ${redacted} lines or strings naming them`);
 JS
 echo "sandbox at $dest without: $*"
