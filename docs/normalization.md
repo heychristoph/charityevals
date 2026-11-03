@@ -1259,4 +1259,8 @@ Survey 2024), the anchor for how far below the mean a social service's clients c
 `@household_size.united_states` (2.4, BLS) and `@household_size.united_kingdom` (2.35, ONS 2024);
 `@welfare_ranges.dog_vs_chicken` and `cat_vs_chicken` (2.4). Shared assumption added:
 `$missing_data_discount` (2.12). A catastrophe's deaths (conservation's catastrophic-risk branch) are valued
-like every death, by age band × `$life_value_multiplier`, with no new slider.
+like every death, by age band × `$life_value_multiplier`. Future generations need no slider of their own:
+the years of healthy life a catastrophe would take from every later year (`@catastrophe.world_population_long_run`,
+the UN's 2100 projection, × the share of the future lost) are discounted at `$discount_rate`, so the
+discount rate is how much they count; its floor is 0.1% (was 0), so an endless future stays finite
+(the yearly loss ÷ the rate: 1,000 years' worth at 0.1%, 25 at the default 4%).

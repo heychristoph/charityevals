@@ -719,14 +719,18 @@ T["conservation"] = model("conservation", "conservation of land, water and speci
             "absolute, per year of protection (from 1-in-a-hundred to slightly less), anchored on published risk estimates and the share of the risk's drivers the work touches. Usually the least grounded number in the model: a wide range, and the summary says so.", "small"),
     ] + age_rows("effect", {"low": 0.05, "best": 0.1, "high": 0.2}, "the catastrophe's deaths") + [
         f("catastrophe_value_per_death", "effect", "Catastrophic risk: value of a death averted (units of value)", VPD,
-          "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number or for future generations (the site's value judgments are its sliders).", "number", "units of value"),
+          "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number. Future generations are the next two rows.", "number", "units of value"),
+        inp("future_share_lost", "effect", "Catastrophic risk: share of every later year's healthy life the catastrophe would take", {"low": 0, "best": 0, "high": 0.001}, "judgment",
+            "0 for a catastrophe the world recovers from (its deaths are counted above); 1 for one that ends humanity's future; between for one that permanently shrinks it. Anchor on published scenario studies; usually 0 for conservation.", "percent"),
+        f("future_dalys_averted", "effect", "Catastrophic risk: future years of healthy life kept, discounted", "annual_risk_reduction * protection_years * future_share_lost * @catastrophe.world_population_long_run / $discount_rate",
+          "Every later year's healthy life the catastrophe would take (the long-run world population × the share lost), discounted for ever at the shared rate: the yearly loss ÷ $discount_rate. How much future generations count is your discount rate.", "number", "DALYs"),
     ] + adj_rows(leverage=True, unmodelled=True, counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.2, "best": 0.5, "high": 0.8}, "judgment",
             "the share of the land that would have been lost without the protection (the baseline loss rate over the years protected, from matched comparisons of protected and unprotected sites), and that no one else would have protected. Name the study.", "percent")) + multi({
         "uov": ("livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death", "Livelihoods and catastrophic risk"),
         "wellby": ("nature_people * ls_gain_per_person_year * protection_years", "Wellbeing from nature"),
         "tco2e": ("hectares_protected * tco2e_per_hectare_year * protection_years", "Climate"),
         "ced": ("ced_fish", "Wild animals"),
-    }, "health_people * dalys_per_person_year * protection_years") + donor_rows("dalys", "Years of healthy life", "advocacy") + donor_tail("dalys", "Years of healthy life", unit="daly"),
+    }, "health_people * dalys_per_person_year * protection_years + future_dalys_averted") + donor_rows("dalys", "Years of healthy life", "advocacy") + donor_tail("dalys", "Years of healthy life", unit="daly"),
     "what the charity protects, where, which branches the evidence supports (climate, health, livelihoods, wellbeing, wild animals, catastrophic risk), " + BOTTOM, "unit_cost", sections=MULTI_SECTIONS)
 
 # --- rights-advocacy -------------------------------------------------------------------------
