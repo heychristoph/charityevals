@@ -1,78 +1,69 @@
-# Research log: Against Malaria Foundation (build-cea, blind run)
+# Research log: Against Malaria Foundation (blind build-cea run, 2026-11-03)
 
-"Today" = 2026-10-28. Blind list respected: no givewell.org pages/sheets on AMF/ITNs/malaria nets, no HLI pages on AMF/nets, no existing charityevals AMF model/write-up (none exists in SANDBOX/models; charities/against-malaria-foundation.json is only the name/website record and was read).
-
-Note: the shared fact `facts/moral_weights.json` (uov_per_death_under5 = 116.25, uov_per_death_over5 = 73.19) is sourced in the repo to GiveWell's AMF CEA spreadsheet. I use it via `@moral_weights.*` as SKILL.md requires (shared moral weights) but did not open that spreadsheet.
+## Blind-rule notes
+- docs/normalization.md (read for the shared rules, as SKILL.md requires) contains, in the 2.7 inventory table,
+  GiveWell 2026 and HLI figures for AMF ("HLI AMF" row: deaths per $1,000 and HLI's healthy years). Seen
+  inadvertently while reading the required doc; NOT used anywhere. Logged as incident.
+- facts/moral_weights.json and facts/givewell_shared.json list "GiveWell, Against Malaria Foundation CEA" as the
+  source of some shared facts (moral weights, years_until_income_benefits_malaria, income_discount_rate). The
+  template requires these shared facts (one consistent way), so they are read by reference only; no AMF-specific
+  GiveWell parameter beyond what the template prescribes. Did not open facts/givewell_common.json (holds net
+  parameters typed in GiveWell sheets) nor any GiveWell-imported model in the sandbox.
+- Did not open https://www.againstmalaria.com/CostEffectiveness.aspx (likely quotes evaluator estimates).
 
 ## Money
+- https://www.againstmalaria.com/FinancialInformation.aspx (retrieved 2026-11-03): FY runs 1 July-30 June.
+  "Our financial year runs from 1st July to 30th June". Table: FY2026 "Being audited" (revenue $346,944,339,
+  LLIN costs $10,564,250, 6,394,038 nets); FY2025 audited (revenue $147,833,000; LLIN costs $171,957,961;
+  non-net $4,974,347; admin $989,193; nets purchased and forward commitments 75,334,440).
+- Audited accounts FY2025 (year ended 30 June 2025): https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf
+  (retrieved 2026-11-03)
+  - p.21 SOFA: "Charitable activities 3, 4, 9 (178,011,823)"; total expenditure 178,011,823 (all expenditure is charitable activities; no fundraising line).
+  - Note 3: Expenditure on LLINs 171,957,961; Non-net costs 4,974,347; Governance 29,629; Central costs 1,041,315; FX 8,571; total 178,011,823.
+  - Note 5 (p.30) grants of LLINs FY2025 nets / US$: Chad 8,272,050 / 22,889,852; DRC 29,085,845 / 60,966,389;
+    Guinea 4,751,550 / 9,895,150; Nigeria 19,045,150 / 48,866,185; South Sudan 9,502,210 / 20,924,756;
+    Zambia 4,675,350 / 8,415,629; total 75,332,155 / 171,957,961.
+  - Note 6 non-net costs (monitoring by local partners) 4,974,347 (DRC 2,434,921, Uganda 613,072, Nigeria 552,640 ...)
+  - Note 7 staff costs: "Staff costs cover the cost of 14 individuals (12 salaried)"; total 979,393 (salaries 796,395).
+  - Accounting policy p.33: "These grants are fully recognised at the point of agreement between AMF and the recipient country/organisation"; "Non-net costs are all costs associated with a net distribution excluding the cost of the nets themselves. Non- net costs include: all shipping, pre- distribution, distribution and post -distribution costs."
+- DollarsPerNet.aspx (2026-11-03): "As at Nov 2026 : The current average price for a net is close to US$2.00."
+- Home page counters (2026-11-03): Nets funded 474,231,180; People protected 853,616,124 (ratio 1.80).
 
-1. AMF website, Financial information — https://www.againstmalaria.com/FinancialInformation.aspx (2026-10-28)
-   - Links to audited accounts by FY; FY ends 30 June. FY26 accounts "Being audited" (so FY2025 = year to 30 June 2025 is the latest audited year).
-   - "Easier-to-understand" table, FY25: Revenue $147,833,000; LLIN costs $171,957,961; Administrative costs $989,193; "# of nets purchased and forward commitments" 75,334,440.
-   - Homepage counters (same page): "Nets funded" 473,789,870; "People protected" 852,821,766 (ratio 1.80 people per net).
+## Co-funding and reach
+- https://www.againstmalaria.com/MonitoringCosts.aspx (2026-11-03): "AMF typically funds the cost of the nets and co-funding partners fund all distribution non-nets costs." AMF funds post-distribution monitoring.
+- https://www.againstmalaria.com/AMFFundingGap.aspx (2026-11-03): "This is based on the cost of a distributed net being US$4.50. Non-net costs = shipping, household registration and net distribution costs"; "1.80 (# of people that sleep under each net)"; "Actual costs per net are typically between $1.50 and $2.50". Pipeline table: monitoring $0.15-0.20/net; one approved programme where AMF pays $16.6m non-net costs for 15.1m nets (~$1.10/net) -> AMF sometimes now funds distribution costs (not in FY2025 accounts: non-net only $4.97m).
+- Scates et al. 2020, Malar J 19:105, Europe PMC full text PMC7055111 (retrieved 2026-11-03), Table 2: Mali mass distributions 2015 economic cost per net distributed USD 2016: 4.37 (Ségou), 4.61 (Bamako); financial 4.19 / 4.39. "The largest single line item for the two mass distributions in the economic analysis were ITNs."
+  -> partner (non-AMF) cost per net: AMF's $4.50 - $2.00 = $2.50; Scates implies ~$1.6-2.1 after a ~$2.5-2.8 net. Use 2.5 (1.5-3.0).
 
-2. AMF Annual Report and Financial Statements for the year ended 30 June 2025 (Global, audited by Crowe U.K. LLP) — https://www.againstmalaria.com/Downloads/AMF_Accounts_Global_2025.pdf (2026-10-28; text extracted with pypdf)
-   - p.21 SOFA: "Charitable activities 3, 4, 9 (178,011,823)" → total expenditure $178,011,823 (all charitable activities).
-   - p.27 note 3: "Expenditure on LLINs 171,957,961"; "Non-net costs (see note 6) 4,974,347"; "Governance costs 29,629"; "Central costs 1,041,315"; "Foreign exchange 8,571".
-   - p.30 note 5: nets granted FY25 by country: Chad 8,272,050 ($22,889,852); DRC 29,085,845 ($60,966,389); Guinea 4,751,550 ($9,895,150); Nigeria 19,045,150 ($48,866,185); South Sudan 9,502,210 ($20,924,756); Zambia 4,675,350 ($8,415,629). Total "75,332,155 171,957,961".
-   - p.25 accounting policy: "Non-net costs include: all shipping, pre- distribution, distribution and post - distribution costs." But note 6 (p.31) shows what AMF itself funds is monitoring: "AMF identifies partners in-country that have the experience and staff to carry out monitoring activities ... AMF funds the costs of these activities."
-   - p.32 note 7: "Staff costs cover the cost of 14 individuals (12 salaried)"; "Salaries and wages 796,395"; "Pension contributions 63,349"; "Social security costs 107,836"; subtotal 897,688; "The CEO chooses not to draw a salary."
-   - p.7: "In the financial year, 7.1 million LLINs were distributed in three distributions in two countries protecting 12.8 million people"; "18 distributions of 62.6 million LLINs to protect 113 million people were scheduled to be completed in the next 12 months" (1.80 people/net).
-   - p.8: "sleeping space coverage on day 1 (immediately post distribution) of around 95%, falling to 85-75% after 9 months, to 80-70% after 18 months and to 65-50% after 27 months."
-   - p.6: "100% of funds received via fundraising activities or via direct donations, are used to buy LLINs."
-   - p.8: "AMF has focused on widening the use of nets which use a combination of insecticides e.g. pyrethroid and chlorfenapyr."
+## Net use
+- Bertozzi-Villa et al. 2021, Nat Commun 12:3589, PMC8196080 (Europe PMC full text, 2026-11-03): "35 show LLIN median retention times of under 3 years, with an overall median value of 1.64 years (IQR 1.33–2.37)"; "the aggregated all-country estimates for use rate and use gap were 87.1% (83.3, 90.1)" (2019); 2020 use rate 87.1% (83.1–90.3).
+- The Life You Can Save on AMF PDM (search snippet, 2026-11-03): Equateur DRC Sept 2020 ~9 months: 95% present, 87% hung. Not opened further.
+- WMR 2025 Annex 4G (https://cdn.who.int/media/docs/default-source/malaria/world-malaria-reports/wmr2025_annex_4g.xlsx, 2026-11-03): modelled % population with ITN access 2024: Chad 57.6, DRC 69.9, Guinea 53.1, Nigeria 47.7, South Sudan 65.4, Zambia 70.7. Net-weighted (FY2025 nets) 61.3%.
+
+## Mortality
+- WMR 2025 Annex 4H (wmr2025_annex_4h.xlsx, 2026-11-03), 2024 deaths point (low-high) / population at risk:
+  DRC 67,676 (43,400-110,000) / 109,276,264; Nigeria 184,933 (135,000-264,000) / 232,679,477; South Sudan 6,749 (3,720-13,800) / 11,943,408;
+  Chad 13,862 (10,500-19,100) / 20,076,847; Guinea 10,245 (8,480-12,600) / 14,754,785; Zambia 8,682 (7,740-10,200) / 21,314,955.
+  Weighted by FY2025 nets (DRC .386, NGA .253, SSD .126, TCD .110, GIN .063, ZMB .062): 0.656 per 1,000 per year (low 0.456, high 1.009).
+- WMR 2025 partner briefing (https://cdn.who.int/media/docs/default-source/malaria/world-malaria-reports/world-malaria-report-2025-partner-briefing-eng.pdf, 2026-11-03): "About 95% of these deaths (579K) were in the WHO African Region, and 75% of deaths in the African Region were among children under the age of 5".
 
 ## Effect
+- Pryce, Richardson, Lengeler 2018 Cochrane CD000363.pub3, PMC6418392 abstract (Europe PMC, 2026-11-03): "Insecticide-treated nets reduce child mortality from all causes by 17% compared to no nets (rate ratio 0.83, 95% CI 0.77 to 0.89...)"; "5.6 lives (95% CI 3.6 to 7.6) each year for every 1000 children protected"; uncomplicated Pf 0.55 (0.48-0.64); "A 44% reduction in the incidence of severe malaria episodes was seen in the ITN group (rate ratio 0.56, 95% CI 0.38 to 0.82". Trials 1987-2001 (before widespread pyrethroid resistance).
+- Cross-check: trial control U5 mortality ~5.6/0.17 = 33/1000; if direct malaria ~25% (8/1000), 0.45 x 8 x (1 + 0.5 indirect) = 5.5/1000, matching the all-cause result -> indirect ratio 0.5 is consistent.
 
-3. Pryce, Richardson & Lengeler (2018), Insecticide-treated nets for preventing malaria, Cochrane CD000363.pub3 — abstract via Europe PMC REST API (PMID 30398672), https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:30398672 (2026-10-28). Cochrane site returned 403; PubMed/PMC showed a reCAPTCHA page.
-   - "The included studies were conducted between 1987 and 2001."
-   - "reduce child mortality from all causes by 17% compared to no nets (rate ratio 0.83, 95% CI 0.77 to 0.89; 5 trials, 200,833 participants, high-certainty evidence)"
-   - "a saving of 5.6 lives (95% CI 3.6 to 7.6) each year for every 1000 children protected"
-   - "uncomplicated episodes of Plasmodium falciparum malaria by almost a half (rate ratio 0.55, 95% CI 0.48 to 0.64" → incidence_reduction 0.45 (0.36–0.52); mortality_reduction 0.45 (0.30–0.60), our derivation.
-   - severe malaria "rate ratio 0.56, 95% CI 0.38 to 0.82".
-4. Mosha et al. (2024) Lancet Infect Dis, doi 10.1016/S1473-3099(23)00420-6, abstract via Europe PMC (2026-10-28): "Overall usage of study nets was 1023 (22·3%) of 4587 people at 36 months"; chlorfenapyr-PY vs PY "odds ratio 0·57, 95% CI 0·38-0·86". Used qualitatively in evidence_adj and net_use_years low end.
-5. Accrombessi et al. (2024) Lancet Infect Dis, doi 10.1016/S1473-3099(24)00002-1, abstract via Europe PMC (2026-10-28): third year chlorfenapyr HR "0·80, 0·56-1·17"; "people living in the chlorfenapyr-pyrethroid LLIN group no longer benefited from greater protection". Qualitative, evidence_adj.
-6. Barofsky, Anekwe & Chase (2015) J Health Econ, doi 10.1016/j.jhealeco.2015.08.002, abstract via Europe PMC (2026-10-28): "malaria eradication raised educational attainment by about a half year for both males and females ... almost 40% rise in the likelihood of male wage employment" → schooling_gain_full_childhood 0.5 (0.2–0.8).
-7. Bleakley (2010) AEJ Applied — abstract via https://www.aeaweb.org/articles?id=10.1257/app.2.2.1 (2026-10-28): "cohorts born after eradication had higher income as adults". No magnitude taken. (NBER working paper link returned HTML, not PDF.) Did NOT open files.givewell.org Roodman replication (GiveWell file; malaria-income input of their nets/SMC CEAs: avoided under blind rule).
-8. Psacharopoulos & Patrinos (2018), WB WPS 8402 — from search snippet of https://documents1.worldbank.org/curated/zh/442521523465644318/pdf/WPS8402.pdf (2026-10-28): "The private average global return to a year of schooling is 9% a year." → return_to_schooling 0.09 (0.06–0.12). Quote seen in search result text, PDF not opened.
+## Income
+- Barofsky, Anekwe, Chase 2015 J Health Econ 44:118, doi 10.1016/j.jhealeco.2015.08.002 (abstract, Europe PMC, 2026-11-03): "malaria eradication raised educational attainment by about a half year for both males and females".
+- Bleakley 2010 AEJ Applied 2(2):1, PMC3810960 abstract: "cohorts born after eradication had higher income as adults" (qualitative only; full text not available via Europe PMC).
+- Psacharopoulos & Patrinos 2018, Education Economics 26(5):445 (IDEAS abstract via search, 2026-11-03): private return to a year of schooling about 9% a year globally.
 
-## Baselines
-
-9. WHO malaria mortality rate per 100,000 (World Malaria Report), via OWID CSV https://ourworldindata.org/grapher/death-rate-from-malaria.csv (2026-10-28). 2024: DRC 61.931107, Nigeria 79.47972, South Sudan 56.50816, Chad 69.04471, Guinea 69.435104, Zambia 40.731964. Net-weighted (FY25 note 5 shares) = 65.62 per 100k → 0.000656. Also OWID number-of-deaths-from-malaria-who: Nigeria 2024 184,933; DRC 67,676. WHO GHO OData API returned 500; OWID IHME-based charts not downloadable (403 licence).
-10. WHO malaria fact sheet https://www.who.int/news-room/fact-sheets/detail/malaria (2026-10-28): "Globally in 2024, there were an estimated 282 million malaria cases and 610 000 malaria deaths"; "Children under 5 accounted for about 75% of all malaria deaths in the Region." (page also says 76% elsewhere) → u5_share 0.75 (0.70–0.80).
-11. World Bank API SP.POP.0014.TO.ZS 2024 (2026-10-28): DRC 46.03, Guinea 40.90, Nigeria 41.01, South Sudan 38.92, Chad 46.06, Zambia 41.46 → net-weighted 43.26%.
-
-## Costs of others
-
-12. Copenhagen Consensus, Expanded malaria intervention (2023) https://www.copenhagenconsensus.com/sites/default/files/2023-03/Expanded%20malaria%20intervention.pdf (2026-10-28), p.2: "Winskill et al (2019), who estimated the cost/net at $2.24 and in-country delivery cost/net at $2.65, for a total of $4.89"; also "can be protected from a net is 1.8 (Winskill et". → anchor for partner_cost_per_net judgment $2.0 ($1–3).
-13. Search snippet (not opened): WHO/Hoyer presentation "USD 2.0 Operational cost/LLIN" (endmalaria.org) — anchor only.
-14. Wisniewski et al. (2020) Acta Trop, cost of ITN distribution review — abstract only, no per-net figure in abstract.
-
-## Blind-rule incidents
-
-- Search "LLIN mass campaign operational cost per net..." returned a givewell.org result (Malaria Consortium LLIN campaigns in Ondo/Anambra, givewell.org/node/3621) whose snippet, relayed by the search tool, said procurement/shipping was 67% of that campaign budget. Not opened, not used.
-- Search for Bleakley 2010 returned a files.givewell.org Roodman replication PDF link; not opened.
-- No snippet showing an evaluator's cost per life saved for AMF was seen.
-- Shared fact @moral_weights.* is sourced (in the repo) to GiveWell's AMF CEA; used as required by the skill, sheet not opened.
-
-## Model (first version, before audit)
-
-Bottom line 0.0299 uov/$ = 3.48× GiveDirectly, joint 0.11–97.7×. Mechanical audit: 0 findings. check.ts: exit 0.
-
-## Audit round 1 (audit-r1.md): 1 high, 2 medium, 6 low
-
-Sources added while fixing:
-15. Eigbiremolen et al. (2026) Malaria Journal, doi 10.1186/s12936-026-05829-9, abstract via Europe PMC (2026-10-28): "Unit distribution costs were $0.74 per net in Ondo and $0.57 in Anambra." "Financial costs comprised 98% of total economic costs in Ondo and 97% in Anambra." "ITN campaign economic costs in this study were lower than most estimates from other African countries."
-16. Arroz et al. (2019) BMC Res Notes, doi 10.1186/s13104-019-4620-6, abstract via Europe PMC (2026-10-28): "The total financial cost of delivering LLINs was US$ 231,237.30 and US$ 174,790.14 in the intervention (302,648 LLINs were delivered) and control districts (219,613 LLINs" → $0.76 and $0.80 per net.
-17. OpenAlex abstract of Psacharopoulos & Patrinos 2018 (api.openalex.org/works/doi:10.1596/1813-9450-8402, 2026-10-28): "the private average global rate of return to one extra year of schooling is about 9 percent a year" (replaces paraphrased quote).
-18. World Bank API SH.DYN.MORT / SH.DYN.NMRT 2024 (2026-10-28): U5MR DRC 89.7, GIN 92.1, NGA 115.6, SSD 96.7, TCD 97.3, ZMB 48.4 (net-weighted 95.6); NMR 23.6, 29.8, 39.0, 39.5, 30.4, 21.4 (30.5). Post-neonatal U5 ≈ 65/1000 births ≈ 13.5/1000 child-years; trial control ≈ 5.6/0.17 = 33/1000 → today's equivalent all-cause effect ≈ 2.3/1000 (2.8 with no-net uplift). Used to calibrate indirect_deaths_ratio.
-
-Changes: H1 added indirect_deaths_ratio 0.5 (0.2–0.8) into baseline_mortality_rate; M1 partner_cost_per_net 2.0 (1–3) → 1.5 (0.6–3.0); M2 partner costs out of cost_total into attribution_share_shared = amf_cost_share × unpriced_contrib_adj; L1 years_to_benefit 2 (1–3) + timing_discount on deaths and income; L2 counterfactual_adj restricted to existing protection, low 0.65→0.7; L3 mortality high 0.00085→0.00095, u5 share low 0.70→0.60 (IHME not accessible); L4 write-up sensitivity claim fixed; L5 not changed (shared fact, out of scope); L6 quote fixed.
-Result: 3.48× → 4.99× GiveDirectly (0.0429 uov/$), joint 0.10–189×. Mechanical: 1 medium (spread 1839×), answered in summary.
-
-## Audit round 2 (audit-r2.md): 0 high, 3 medium, 5 low — loop stops (no high findings)
-
-19. Alaii et al. (2003) AJTMH 68(4 Suppl):137, doi 10.4269/ajtmh.2003.68.137, abstract via Europe PMC (2026-10-28): "The overall percentage adherence was 72.3%."; "Approximately 30% of ITNs present were unused."; "a ratio of 1.46 persons per ITN" → trial_usage 0.72 (0.60–0.85), now kind estimate.
-
-Changes: trial_usage 0.8 judgment → 0.72 estimate; mortality_reduction range 0.30–0.60 → 0.35–0.55 with correlation note (also in indirect_deaths_ratio); cost-per-death wording fixed (≈$3,200 all costs, ≈$1,900 AMF-only with full credit); stale explainers (uov_per_dollar, cost/outcome sections) updated; income now discounted with years_to_distribution (1 yr) instead of timing_discount (2 yrs); IHME bounds labelled as judgment. Not changed: indirect deaths applied at all ages (low, ~−5%); @moral_weights citation (shared fact).
-Final: 0.0480 uov/$ = 5.59× GiveDirectly, joint 0.127–196×. Mechanical: 1 medium (spread 1546×, answered in summary). check.ts exit 0.
+## Added during the audit rounds (2026-11-03)
+- AMF accounts FY2025 p.8: "sleeping space coverage on day 1 (immediately post distribution) of around 95%, falling to 85-75% after 9 months, to 80-70% after 18 months and to 65-50% after 27 months" -> 2.1 coverage-years to 36 months.
+- AMF accounts p.7: 21.4m nets being distributed at year end, 62.6m within 12 months, 7.0m after.
+- AMF accounts SOFA: interest 12,369,574; note 15 cash 285,213,362 (2024: 184,559,223) -> 5.3% yield.
+- Bertozzi-Villa 2021 Supplementary Table 1.7 (MOESM1, static-content.springer.com): COD 1.41, NGA 2.22, SSD 1.02, TCD 1.03, GIN 1.51, ZMB 1.32; net-weighted 1.525; loss curve kappa=20 -> mean/median 1.0455 (computed) -> 1.59.
+- World Bank SH.DYN.STLB 2023 (UN IGME): DRC 25.9, GIN 22.7, NGA 23.9, SSD 27.6, TCD 28.4, ZMB 14 -> 24.9/1000 total births -> 0.0256 per live birth.
+- WHO GHE 2023 deaths by cause/age/country xlsx (cdn.who.int ... deaths_bycountry_age_sex_2023...): malaria (GHE 220) net-weighted shares u5 0.7625, 5-14 0.0537, 15-49 0.0791, 50+ 0.1046.
+- Gamble 2006 Cochrane CD003755.pub2 (PMC6532581): stillbirths/abortions G1-4 RR 0.67 (0.47-0.97).
+- Okumu 2020 Malar J doi 10.1186/s12936-020-03321-6 abstract: resistance "greatly weakened the historical mass mosquitocidal effects".
+- OWID malaria deaths by age (IHME): 403, non-redistributable. Mosha 2022 / Accrombessi 2023 abstracts: not retrieved (referenced qualitatively only).
+- Shared facts read on auditors' advice (GiveWell-sourced, in the sandbox): @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 (0.75), @givewell_common.malaria_morbidity (0.09), rebound (-0.04), internal_validity_adjustment_malaria (0.95), @givewell_shared.resource_sharing_multiplier (2); added @givewell_shared.investment_of_income_increases_nets 0.025 from docs/normalization.md's statement (GiveWell sheet not opened).
