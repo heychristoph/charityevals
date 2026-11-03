@@ -4,7 +4,10 @@
 //   1. findings from src/engine/lint.ts (template structure, sourcing, magic numbers, bounds)
 //   2. the bottom line, joint low/high and the tornado (which inputs drive the result)
 //   3. the reference class: other hand-built models in the same unit, and other charityevals models
-//      of the same template family row by row, so implausible values stand out
+//      of the same template family row by row, so implausible values stand out; the model against its
+//      cause's median (more than 10× above without a stated reason: high, INV-15; under a tenth: medium)
+//   4. every normalization invariant (src/engine/invariants.ts) on the model, in a library of it and the
+//      models it reads live, waivers applied: any violation is a high finding (drafts outside models/ too)
 // --exclude drops models from the library (for blind tests: the auditor mustn't see the answer).
 // --facts adds a directory of facts files that override the repo's by id (an evaluation run's own
 // facts); a facts/ folder next to the model file is picked up without the flag.
@@ -15,6 +18,7 @@ import { assumptionValues, bottomLine, buildLibrary, compute, headline, type Res
 import { sensitivity } from "../src/engine/sensitivity";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
+import { OUTLIER_REASON, applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
 
 const root = join(import.meta.dirname, "..");
 const args = process.argv.slice(2);
@@ -91,12 +95,46 @@ if (peers.length >= 3 && Number.isFinite(line.native)) {
   if (line.native > 10 * hi || line.native < lo / 10)
     findings.push({ severity: "medium", code: "outlier", message: `bottom line ${line.native.toPrecision(3)} ${m.output!.unit}/$ is more than 10× outside the range of ${peers.length} peer models (${lo.toPrecision(3)}–${hi.toPrecision(3)})`, fix: "Find the row that makes the difference (compare intermediates with the closest peer) and either correct it or argue for it in the explainer and write-up." });
 }
+// Against its cause on the site (INV-15): the median of the other hand-built charity models of the cause,
+// in years of healthy life per $1,000. Far above needs a stated reason; far below usually means another
+// scope (a side programme, a case study, another year) or reach and persistence counted short.
+const causePeers = [...lib.models.values()]
+  .filter((x) => x.id !== m.id && x.kind === "charity" && x.output && !x.bulk && x.cause === m.cause)
+  .map((x) => headline(lib, x, av)).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
+const causeMedian = causePeers.length >= 3 ? (causePeers.length % 2 ? causePeers[causePeers.length >> 1] : (causePeers[causePeers.length / 2 - 1] + causePeers[causePeers.length / 2]) / 2) : NaN;
+if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
+  if (years > 10 * causeMedian && !OUTLIER_REASON.test(m.summary ?? ""))
+    findings.push({ severity: "high", code: "INV-15", message: `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)}) and the summary doesn't say why`, fix: 'Find the row that makes the difference; correct it, or state the reason in the summary ("more than ten times its peers because …").' });
+  if (years < causeMedian / 10)
+    findings.push({ severity: "medium", code: "far-below", message: `${years.toPrecision(3)} years of healthy life per $1,000 is under a tenth of the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})`, fix: "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong, or say in the summary why it is low." });
+}
+
+// The normalization invariants (docs/normalization.md section 3) on this model, in a library of it and the
+// models it reads live: what scripts/normalization-audit.ts checks, also for drafts outside models/. INV-15
+// needs the full rankings and is checked above against the cause's median instead.
+const liveIds = (x: Record<string, unknown>): string[] => {
+  const text = ((x.rows ?? []) as { formula?: string }[]).map((r) => r.formula ?? "").join(" ");
+  const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (b ? allModels.filter((y) => y.charity === b && y.owner === a).map((y) => y.id as string) : [a]));
+  return typeof x.extends === "string" ? [...ids, x.extends] : ids;
+};
+const allModels: Record<string, unknown>[] = walk(join(root, "models")).map(read).filter((x) => x.id !== raw.id && !exclude.has(x.id) && !exclude.has(x.charity));
+const closure = new Map<string, Record<string, unknown>>();
+const visit = (x: Record<string, unknown>) => { for (const id of liveIds(x)) { const t = allModels.find((y) => y.id === id); if (t && !closure.has(id)) { closure.set(id, t); visit(t); } } };
+visit(raw);
+visit({ rows: [{ formula: `#${read(join(root, "assumptions/default.json")).common.benchmark}` }] });
+const invLib = buildLibrary([...closure.values(), raw], read(join(root, "assumptions/default.json")), facts, charities, read(join(root, "owners.json")));
+const waivers: Waivers = read(join(root, "src/engine/normalization-waivers.json"));
+for (const r of applyWaivers(checkAll(invLib).filter((x) => x.id !== "INV-15"), waivers).reports)
+  for (const v of r.violations.filter((v) => v.model === raw.id))
+    findings.push({ severity: "high", code: v.inv, row: v.where, message: v.detail, fix: "Fix the model so the invariant holds (docs/normalization.md section 3); a waiver only for a checked false positive, with its reason." });
+findings.sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
+
 if (sOwn.jointHigh / sOwn.jointLow > 1000)
   findings.push({ severity: "medium", code: "spread", message: `with shared assumptions at their defaults, joint low to high still spans ${Math.round(sOwn.jointHigh / sOwn.jointLow)}×`, fix: "Check the widest ranges are real; narrow ranges you can source, or say in the summary that the result is mostly uncertainty." });
 
 // Same-family charityevals models: canonical rows side by side.
 const family = m.template as Family | undefined;
-const siblings = [...lib.models.values()].filter((x) => x.id !== m.id && x.template === family && x.output);
+const siblings = family ? [...lib.models.values()].filter((x) => x.id !== m.id && x.template === family && x.output) : [];
 const canon = family ? TEMPLATES[family].required.filter((id) => m.byId.has(id)) : [];
 
 const fmt = (x: number) => (!Number.isFinite(x) ? String(x) : Math.abs(x) >= 1e4 || (Math.abs(x) < 1e-3 && x !== 0) ? x.toExponential(3) : x.toPrecision(4));
@@ -108,7 +146,7 @@ if (json) {
     jointLow: s.jointLow, jointHigh: s.jointHigh,
     ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, judgmentShare: s.judgmentShare,
     swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow, atHigh: w.atHigh })),
-    findings, peers, canonical: Object.fromEntries(canon.map((id) => [id, vals[id]])),
+    causeMedian, findings, peers, canonical: Object.fromEntries(canon.map((id) => [id, vals[id]])),
   }, null, 2));
 } else {
   console.log(`# Audit (mechanical): ${m.id}  [${family ?? "no template"}]\n`);
@@ -122,6 +160,7 @@ if (json) {
   console.log(`\n## Reference class: hand-built models in ${m.output?.unit} (years of healthy life per $1,000)`);
   for (const p of peers) console.log(`  ${p.id.padEnd(44)} ${p.owner.padEnd(12)} ${fmt(p.years)}`);
   console.log(`  >> this model                                             ${fmt(years)}`);
+  if (Number.isFinite(causeMedian)) console.log(`  median of ${causePeers.length} ${m.cause} models: ${fmt(causeMedian)} (this model ×${fmt(years / causeMedian)})`);
   if (siblings.length) {
     console.log(`\n## Same template (${family}): canonical rows`);
     const sv = siblings.map((x) => ({ id: x.id, v: compute(lib, x, av) }));
