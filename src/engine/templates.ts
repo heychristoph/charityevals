@@ -237,7 +237,8 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     "daly",
     "dalys",
     ["disease_dalys_per_year", "share_burden_addressable", "p_success", "years_brought_forward", "years_until_effect", "wait_discount", "discounted_years", "research_dalys", "adv_years_of_impact", "adv_discounted_years", "advocacy_dalys", ...BRIDGED],
-    { share_burden_addressable: [0, 1], p_success: [0, 1], years_brought_forward: [0, 30], adv_years_of_impact: [0, 50] },
+    // years_until_effect: the research-to-practice lag is about 17 years (families/medical-research.md), above the reforms' 15.
+    { share_burden_addressable: [0, 1], p_success: [0, 1], years_brought_forward: [0, 30], adv_years_of_impact: [0, 50], years_until_effect: [0, 25] },
     "past_average",
     [
       { row: "wait_discount", ref: "$discount_rate", why: "the wait until the result is in practice is discounted at the shared rate" },
