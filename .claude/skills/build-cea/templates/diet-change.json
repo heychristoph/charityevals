@@ -4,20 +4,28 @@
   "kind": "template",
   "cause": "animal-welfare",
   "template": "diet-change",
+  "estimate_basis": "unit_cost",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: diet change and meal replacement",
+    "url": "https://charityevals.org/template-diet-change",
+    "published": "2026-01-01",
+    "retrieved": "2026-01-01"
+  },
   "resources": [],
   "sections": [
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
     },
     {
       "id": "effect",
@@ -33,6 +41,12 @@
       "id": "outcome",
       "title": "Outcome",
       "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "proxy",
+      "title": "Programmes with no outcome data",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
     },
     {
       "id": "donor",
@@ -51,7 +65,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on the modelled program(s) in the period",
+      "label": "Spending on the modelled program(s) in the year modelled",
       "format": "usd",
       "value": 1000000,
       "kind": "observed",
@@ -62,7 +76,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
     },
     {
       "id": "total_expenses",
@@ -114,7 +128,7 @@
     {
       "id": "meals_replaced_per_year",
       "section": "reach",
-      "label": "Animal-product meals replaced per year",
+      "label": "Animal-product meals replaced per year by the changes made in the year modelled",
       "format": "integer",
       "value": 1000000,
       "kind": "observed",
@@ -126,16 +140,29 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: meals per year the charity reports replacing (institutional menu changes, pledges × meals per participant). Say how the charity measures it and whether it is self-reported."
+      "explainer": "TEMPLATE: meals per year replaced by the menu changes, pledges or trainings the charity achieved in the year modelled, across all its diet-change work (not one case study). Say how the charity measures it and whether it is self-reported. Only a running total of meals under all the changes won so far (a stock)? Then the wins per year are (meals a year still running + meals a year of changes that lapsed) ÷ the years of the campaign, set against the average real spending over the same years (estimate_basis past_average; templates.md, diet-change); never the year's flow ÷ the changes' average age."
     },
     {
       "id": "sads_per_meal",
       "section": "effect",
       "label": "SADs averted per meal replaced",
       "format": "number",
-      "formula": "@sad_factors.sads_per_meal_replaced",
+      "formula": "@sad_factors.sads_per_meal_replaced * meal_mix_vs_reference",
       "unit": "SADs / meal",
-      "explainer": "TEMPLATE: the shared figure; override only if the charity reports what the replaced meals contained, and explain."
+      "explainer": "The site's one figure for a replaced meal (a Latin American canteen meal, 2024 SADs) times the meal-mix ratio below. Never rebuilt from a meat mix of your own."
+    },
+    {
+      "id": "meal_mix_vs_reference",
+      "section": "effect",
+      "label": "Suffering in a replaced meal here, relative to the reference meal",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: 1, range 0.5–2, unless one published estimate compares this country's replaced meal with the reference meal the same way (then its ratio and range, cited). Never a ratio of two different studies, never a per-meal figure rebuilt from a meat mix of your own (docs/normalization.md 2.9)."
     },
     {
       "id": "production_response",
@@ -143,28 +170,16 @@
       "label": "Fall in production per meal not eaten",
       "format": "percent",
       "formula": "@sad_factors.production_response",
-      "explainer": "Fewer meals bought lowers production by less than one for one, because prices fall and others buy more."
+      "explainer": "Fewer meals bought lowers production by less than one for one, because prices fall and others buy more (Norwood and Lusk 2011)."
     },
     {
       "id": "years_of_impact",
       "section": "effect",
-      "label": "Years the change persists",
+      "label": "Years a won menu change counts",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 3,
-        "high": 8
-      },
-      "kind": "estimate",
+      "formula": "$win_years_counted",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: follow-up study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: how long the change persists. Apply it only to NEW meals added in the period (new institutions, new pledges): if meals_replaced_per_year is the year's total flow from all partnerships, old and new, set this to 1, or the same meals are credited in several years' cost. For new additions, cite follow-up data (Faunalytics' study of former vegetarians, institutions' own reports)."
+      "explainer": "TEMPLATE: a menu or procurement change the charity won counts the site's one number of years (docs/normalization.md 2.9; no wait for meal policies). If meals_replaced_per_year is the year's whole flow from all partners, old and new, set 1 (a flow is credited once). For individuals' diet change, replace with a sourced estimate of how long it lasts."
     },
     {
       "id": "discounted_years",
@@ -177,7 +192,7 @@
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity)",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -185,7 +200,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
     },
     {
       "id": "counterfactual_adj",
@@ -203,7 +218,7 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of credit, when shared with others",
+      "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -211,7 +226,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -232,7 +247,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
     },
     {
       "id": "total_adj",
@@ -261,35 +276,18 @@
     {
       "id": "staff_cost_share",
       "section": "donor",
-      "label": "Staff pay as a share of total cost",
+      "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: audited financial statements",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+      "formula": "@staff_pay.share_advocacy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_advocacy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
     },
     {
       "id": "salary_gap",
       "section": "donor",
-      "label": "Pay gap versus comparable for-profit jobs",
+      "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
+      "formula": "@staff_pay.gap_advocacy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_advocacy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
     },
     {
       "id": "salary_sacrifice",
@@ -310,8 +308,59 @@
       "section": "donor",
       "label": "SADs averted per dollar you give",
       "format": "small",
-      "formula": "sads_per_dollar * donor_cost_share",
-      "unit": "SADs averted / $"
+      "formula": "sads_per_dollar * donor_cost_share * (1 - proxy_share)",
+      "unit": "SADs averted / $",
+      "explainer": "The modelled programmes' result for their share of the spending; the programmes with no outcome data join in the species step."
+    },
+    {
+      "id": "proxy_program_spend",
+      "section": "proxy",
+      "label": "Spending on programmes with no outcome data at all, in the year modelled",
+      "format": "usd",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges."
+    },
+    {
+      "id": "proxy_peer_result",
+      "section": "proxy",
+      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
+      "format": "small",
+      "formula": "#givedirectly",
+      "unit": "units of value / $",
+      "explainer": "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)"
+    },
+    {
+      "id": "proxy_share",
+      "section": "proxy",
+      "label": "Share of the programme spending here that has no outcome data",
+      "format": "percent",
+      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
+      "explainer": "The modelled programmes' result counts for the rest of the spending."
+    },
+    {
+      "id": "proxy_per_donor_dollar",
+      "section": "proxy",
+      "label": "Units of value per dollar you give, from programmes with no outcome data",
+      "format": "small",
+      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
+      "unit": "units of value / $",
+      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+    },
+    {
+      "id": "proxy_in_ced",
+      "section": "proxy",
+      "label": "The same, in this model's unit (chicken pain days)",
+      "format": "small",
+      "formula": "proxy_per_donor_dollar / ($chicken_vs_person * $daly_per_sad * $uov_per_daly)",
+      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
     },
     {
       "id": "sads_fish",
@@ -326,7 +375,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "number",
       "formula": "sads_fish / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024)",
-      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+      "explainer": "Ambitious Impact's species weight (2024 SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's."
     },
     {
       "id": "sads_chicken",
@@ -341,7 +390,7 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
       "format": "number",
       "formula": "sads_chicken / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024)",
-      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+      "explainer": "Ambitious Impact's species weight (2024 SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's."
     },
     {
       "id": "sads_pig",
@@ -356,15 +405,16 @@
       "label": "Chicken-equivalent pain days averted per dollar you give: pigs",
       "format": "number",
       "formula": "sads_pig / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)",
-      "explainer": "Ambitious Impact's species weight taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it."
+      "explainer": "Ambitious Impact's species weight (2024 SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's."
     },
     {
       "id": "ced_per_donor_dollar",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "small",
-      "formula": "ced_fish + ced_chicken + ced_pig",
-      "unit": "chicken pain days / $"
+      "formula": "ced_fish + ced_chicken + ced_pig + proxy_in_ced",
+      "unit": "chicken pain days / $",
+      "explainer": "Every species, plus the programmes with no outcome data (the proxy section), already in chicken pain days."
     }
   ],
   "output": {

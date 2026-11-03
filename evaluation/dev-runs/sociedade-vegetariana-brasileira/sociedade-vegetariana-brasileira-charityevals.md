@@ -1,85 +1,54 @@
-## Summary
+### Summary
 
-Sociedade Vegetariana Brasileira (SVB) works with Brazilian public institutions to put plant-based meals on the menu one or more days a week. Our model covers only that institutional program, Segunda Sem Carne ("Meatless Monday"). Our best guess is **about 19 suffering-adjusted days (SADs) averted per dollar, roughly 5× GiveDirectly** at the site's default exchange rates. The plausible range is very wide. Most of that width comes from the shared cross-cause rates and from what one replaced meal is worth, not from anything specific to SVB.
+Sociedade Vegetariana Brasileira (SVB) gets Brazilian schools, popular restaurants, social-assistance centres, hospitals and companies to serve plant-based meals at least one day a week, under the Segunda Sem Carne (Meatless Monday) campaign it brought to Brazil in 2009. Our own estimate of that institutional work in 2023, the latest year with published accounts, comes to **<span data-figure="headline" data-model="sociedade-vegetariana-brasileira-charityevals">11</span> years of healthy life per $1,000** you give.
 
-## What the charity does
+The result is mostly uncertainty. Most of a replaced meal's suffering falls on fish, so how much a fish's suffering counts moves it most; then the suffering in one replaced meal, the years a won reform counts, how much the next dollar does compared with the average so far, and how much of SVB's spending goes to this programme, which its accounts don't say.
 
-SVB is a São Paulo nonprofit. Its 2023 budget was about R$3.0 million (US$0.6 million). Since 2009 its institutional program has helped São Paulo's city and state schools, the Bom Prato popular restaurants, social-assistance centres, hospitals and companies serve plant-based meals. Its support covers diagnosis, recipes, training for cooks, and materials. SVB says these partners have served more than 530 million such meals. SVB also runs a vegan certification label (Selo Vegano), restaurant outreach (Opção Vegana), nutrition and health content, events and public campaigns.
+### What the charity does
 
-## How the impact happens
+SVB is a São Paulo association with about 40 staff and contractors and a network of over 700 volunteers. Its institutional programme trains cooks and nutritionists and helps city and state governments put meat-free days on their menus; it also campaigns for municipal "sustainable menu" bills. It runs the Selo Vegano certification of vegan products, VegFest and other events, courses for health professionals, and free content (e-books, websites, social media).
 
-A school or canteen serves a plant-based meal instead of one with meat. Less meat is bought, so somewhat fewer animals are raised. The model counts the suffering of those animals in SADs, Ambitious Impact's unit, which weights days of suffering by intensity and by each species' welfare range.
+In 2023 SVB spent R$3.03 million (about $607,000): R$2.84 million on programmes and R$195,000 on administration. Its 2023 accounts are prepared and signed by its accountant; no independent audit report is published.
 
-## How the model works
+### How the impact happens
 
-- **Cost**: SVB's 2023 program costs (R$2.84 million) times an estimated 20% share for the institutional program, based on headcount. Add overhead (×1.07) and convert at 4.994 BRL/USD: about US$121,000.
-- **Reach**: about 35 million meals a year (20–55 million). SVB publishes only cumulative totals, so this is the difference between them: 327 million in July 2019, over 500 million in October 2023, over 530 million in October 2024.
-- **Effect per meal**: the shared SADs-per-meal figure, scaled to SVB's portions. SVB reported 2,000 tonnes of meat saved over 47 million meals in 2017, about 43 g per meal (range 25–60 g). The shared figure comes from canteen meals (schools, universities, community kitchens) in Argentina, Colombia and Indonesia. We compare SVB's portion with about 60 g of meat in the reference meal (35–100 g; the source doesn't say whether its values describe canteen portions or an average national meal), and we adjust for Brazil's beef-and-chicken mix: 80% of the shared value, between Argentina's 0.60 and Colombia's 0.88 SADs per meal. That gives about 0.52 SADs per meal. The result is multiplied by the shared production response (0.76). Each year of spending is credited with one year of the meal flow.
-- **Adjustments**:
-  - Evidence, 0.75: people may compensate by eating more meat at other meals, and some meals use eggs or cheese.
-  - Counterfactual, 0.5: many partnerships are years old and might continue without SVB. None of them is mandated by law: São Paulo state's bill was vetoed in 2018, and a federal bill was rejected in committee.
-  - Attribution, 0.7: credit is shared with municipalities, Humane Society International and Mercy For Animals.
-  - Delivery, 0.7: the meal counts are SVB's own and likely planned rather than eaten, and pupils may skip the meatless meal.
-  - Combined: 0.18.
-- **Your dollar's share**: staff, mostly contracted consultants, are about 45% of costs, with a 20% pay gap.
+A partner institution serves a meal without meat instead of one with meat; fewer animal products are bought, so fewer animals are raised, less than one for one because prices fall and others eat a little more. Each meal replaced spares the site's one shared figure of suffering-adjusted days, split between fish, chickens and pigs by the shared global meal mix, and each species' days are weighed against a chicken's by Rethink Priorities' welfare ranges.
 
-## What drives the result
+### How the model works
 
-The biggest single driver is the SADs per replaced meal, a shared fact (0.084–1.72). Across that range the result moves from 0.4× to 9× GiveDirectly. The shared exchange rates come next: animal moral weight, DALYs per SAD, and units of value per DALY. The SVB-specific inputs that matter most are:
+- **Cost.** The institutional programme's share of SVB's programme costs (our judgment, 25%, 15–40%, anchored on the six to eight of about 38 working staff who work on institutional meals and municipal menus), plus its share of administration, in an average year of the campaign: SVB's published totals for 2014–2023 in 2023 prices (IBGE's IPCA), with 2009–2013 at 60% of 2014's level (30–100%), come to about 0.40 of 2023's spending. Converted at the IRS's 2023 average for the real.
+- **Meals.** SVB counted 327 million meals served under the campaign by October 2019 and 530 million by October 2024: 40.6 million a year on average, including the 2020–21 school closures. We put 2023 at 1.1 times that average (0.8–1.6): about 45 million meals a year still running. Adding the menu changes that ran and lapsed (half the fall from 2019's 81 million, 0–100%: about 18 million meals a year) and spreading the total over the fifteen campaign years gives the meals a year a year of SVB's work adds; each won change counts the site's years a won reform counts (5 by default), discounted. The wins of 2009–2023 are set against the spending of 2009–2023.
+- **Per meal.** The shared figure for a replaced meal (Sinergia Animal's Latin American canteen meal), with a Brazilian institutional meal counted as the same (0.5–2, the template's range: no published comparison found), times the shared production response.
+- **Adjustments.** Whether a meal without meat replaces an animal-product meal (some carry eggs or dairy; diners may compensate): 0.72. The share that wouldn't have happened without SVB within the counted years: 0.85. SVB's share of the resources behind the meals, with city nutritionists and cooks doing the menus: 0.6. The share of counted meals actually served as planned, since the counts are SVB's own: 0.8. All our judgments, with ranges.
+- **Your dollar.** The meals come from menu changes SVB won over fifteen years, set against its average spending over the same years: a past average, so the shared "How much the next dollar does compared with the average dollar so far" applies (50% by default). With "Credit by share of resources" on, staff's forgone pay (about 56% of SVB's costs are employees and contractors working like staff, at the shared campaigner pay gap) shares the credit.
 
-- the share of spending on the institutional program
-- the counterfactual adjustment
-- the annual meal count
-- the meat per meal
+### What drives the result
 
-Comparisons with other animal charities on the site are not like-for-like. Those models are imports from Animal Charity Evaluators, which don't apply the production response; ours does, which lowers the result by 24%.
+In order: a chicken's suffering against a person's and a fish's against a chicken's (the shared species sliders and Rethink Priorities' ranges), the shared suffering per meal replaced (0.10 to 1.7 days), the hours of healthy life in a day of disabling pain, the years a won reform counts, the next-dollar factor and how a Brazilian meal compares with the reference meal, then this model's own judgments: the programme's share of spending, SVB's share of the credit, the lapsed partnerships and the 2023 meal count.
 
-## Biggest uncertainties
+### Biggest uncertainties
 
-- **Annual meals**: SVB has published no annual count since 2019, and none is independently verified.
-- **Dependence on SVB**: most of the year's meals come from long-standing partnerships. We don't know how many would continue if SVB stopped.
-- **Compensation**: no study measures whether Brazilian pupils eat more meat at home after a meatless school meal. Helsinki's vegetarian school day at first reduced how many pupils took lunch.
-- **Cost split**: SVB's accounts don't break costs down by program.
+- **The meal counts are SVB's own.** It publishes only rounded running totals, with no method and no count by year since 2019. We take the five-year average and adjust it; no independent check exists.
+- **How much of SVB's spending goes to this programme.** The accounts don't split costs; headcount is our anchor, from today's team page, applied to all fifteen years.
+- **What a meal without meat replaces.** Partly vegetarian meals with eggs or dairy, and pupils who may eat more meat at home.
 
-## What isn't modelled
+### What isn't modelled
 
-- Selo Vegano certification
-- Opção Vegana restaurant outreach
-- Individual Segunda Sem Carne pledges. SVB cites a survey in which a third of sign-ups became vegetarian, but the respondents chose themselves.
-- Public campaigns and events
-- Policy work, such as municipal bills for plant-based meals
-- Health and environmental benefits for people
+SVB's other programmes, together about three-quarters of its spending by our headcount estimate, aren't valued: the Selo Vegano certification (over 3,800 products), VegFest and events, courses for health professionals, the volunteer network, and content and social media. The municipal menu bills (14 proposed, none known to be law) are worked on by the institutional team, so their cost is in the modelled cost, but they add no meals here. None publishes a reach or effect we could turn into meals or animals without inventing the numbers, and the accounts give no spending split to weight them. The model is therefore the cost-effectiveness of SVB's institutional work, not of SVB as a whole. Health and climate benefits of the meals aren't counted.
 
-## How this model was checked
+### How this model was checked
 
-Independent audits by separate reviewers (audit-cea skill):
+Built from the charityevals diet-change template with the site's shared figures (meal suffering, production response, species split and weights, exchange rate, staff pay, next-dollar factor). The mechanical audit (lint and every invariant) and independent audits by a separate reviewer are recorded below.
 
-- **Round 1**: 1 high, 5 medium, 5 low findings.
-  - High: we credited each year of spending with 1.5 years of the meal flow, which double counts future meals. Now 1 year.
-  - Pupils skipping the meal was discounted twice. It now sits only in the delivery adjustment, and the evidence adjustment rose to 0.75.
-  - The institutional share was lowered to the headcount-based 20%.
-  - Meat per meal now has a range.
-  - The reference portion is explained, with notes on species mix.
-  - We also added notes on the reach window, the pay gap for consultants and the production response for beef.
-- **Round 2**: 1 high, 2 medium, 4 low findings.
-  - High: the 110 g adult reference portion compared SVB's school meals with the wrong kind of meal, because the shared figure comes from canteen meals. The reference is now a 50 g canteen meal, plus a species-mix adjustment for Brazil (80%). This raised the result from about 3× to about 6× GiveDirectly.
-  - The counterfactual explainer now notes that no partnership is legally mandated.
-  - Sources were added for the Humane World for Animals partnerships and the 2018 meal count.
-- **Round 3**: 0 high, 3 medium, 4 low findings.
-  - The reference portion was widened to 35–100 g (best 60 g). The source gives one value per country, which may describe an average national meal rather than a canteen portion. This lowered the result to about 5× GiveDirectly.
-  - The species-mix row was relabelled as our judgment.
-  - The counterfactual explainer now mentions parallel school-meal programs and the unconfirmed Santos bill.
-  - An unsourced claim about Humane Society International was removed.
-  - Still open: the counterfactual and evidence adjustments have no reference class, and the joint range is very wide.
+- Round 1 (2 high, 3 medium, 5 low): old menu changes were credited every year they kept running; each win now counts the shared years a won reform counts (the year's flow divided by the changes' average age), with the counterfactual narrowed to that question (8.1 → 5.1). Cited the yearly meal counts behind the 2023 estimate, restored the template's meal-mix range, split the consultants line into staff and outside services, and said where the menu bills' cost sits. Not changed: SVB's other programmes stay unvalued, since SVB publishes no reach, outcome or spending split for them.
+- Round 2 (1 high, 1 medium, 3 low): the round-1 conversion divided the year's flow by the changes' average age, which doubles the wins a year, and set fifteen years of wins against 2023's spending alone. Now everything won in 2009–2023 (running and lapsed) over fifteen years, against the average real yearly spending of the same years from SVB's statements (5.1 → 10). Cited the 2017 count through pt.wikipedia and fixed the meal-mix range in this write-up.
+- Round 3 (0 high, 2 medium, 4 low; passed): used SVB's published 2014 total (R$278,800) as the anchor for 2009–2013, tied the lapsed meals to the 2019 count, listed each year's deflated total, and corrected the next-dollar wording (10.0 → 10.9). The remaining medium is the mechanical spread: most of the range comes from the shared species and per-meal figures, which the summary says.
 
-## Sources
+### Sources
 
-- SVB, [Demonstrações Contábeis 2023 e 2022](https://svb.org.br/wp-content/uploads/2024/08/FinanceiroSVB2023.pdf) and the [accountability page](https://svb.org.br/a-svb/prestacao-de-contas/).
-- [Segunda Sem Carne campaign history](https://segundasemcarne.com.br/a-campanha-segunda-sem-carne/).
-- SVB, [15 years of Segunda Sem Carne](https://svb.org.br/comemoracao-dos-15-anos-da-segunda-sem-carne-no-brasil-reuniu-parceiros-amigos-e-jornalistas/).
-- SVB, [12+ achievements in 2024](https://svb.org.br/12-conquistas-da-svb-em-2024/).
-- SVB, [Segunda Sem Carne do Brasil é a maior do mundo](https://svb.org.br/2456-segunda-sem-carne-do-brasil-e-a-maior-do-mundo/).
-- TNH1, [No país do churrasco…](https://www.tnh1.com.br/noticia/nid/no-pais-do-churrasco-movimento-por-um-dia-sem-carne-e-o-maior-no-mundo/) (2018).
-- SVB, [team and departments](https://svb.org.br/a-svb/sobre-a-svb/equipe-e-departamentos/).
-- Lombardini and Lankoski (2013), [Forced Choice Restriction in Promoting Sustainable Food Consumption](https://ideas.repec.org/a/kap/jcopol/v36y2013i2p159-178.html), Journal of Consumer Policy 36:159–178.
-- IRS, [yearly average exchange rates](https://www.irs.gov/individuals/international-taxpayers/yearly-average-currency-exchange-rates).
+- SVB, [Demonstrações Contábeis 2023 e 2022](https://svb.org.br/wp-content/uploads/2024/08/FinanceiroSVB2023.pdf) and [Prestação de Contas](https://svb.org.br/a-svb/prestacao-de-contas/)
+- SVB, [15 anos da Segunda Sem Carne](https://svb.org.br/comemoracao-dos-15-anos-da-segunda-sem-carne-no-brasil-reuniu-parceiros-amigos-e-jornalistas/) (October 2024)
+- Greenpeace Brasil, [Segunda Sem Carne completa 10 anos](https://www.greenpeace.org/brasil/blog/voce-pode-trocar-sua-carne-de-segunda-por-uma-saborosa-refeicao-vegetariana/) (October 2019)
+- SVB, [Equipe e departamentos](https://svb.org.br/a-svb/sobre-a-svb/equipe-e-departamentos/); [Brazilian Vegetarian Society](https://brazilianvegetariansociety.com.br/)
+- Garnett et al. (2019), [Impact of increasing vegetarian availability on meal selection and sales in cafeterias](https://pubmed.ncbi.nlm.nih.gov/31570584/), PNAS
+- IRS, [Yearly average currency exchange rates](https://www.irs.gov/individuals/international-taxpayers/yearly-average-currency-exchange-rates)
