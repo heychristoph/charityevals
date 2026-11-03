@@ -13,6 +13,8 @@ climate        × tco2e_per_hectare_year                         → tco2e_bridg
 health         health_people × dalys_per_person_year × years    → dalys_direct
 livelihoods    livelihood_people × ln_gain_per_person_year × years × $uov_per_ln_consumption
 catastrophe    catastrophe_deaths × annual_risk_reduction × years × catastrophe_value_per_death
+future         annual_risk_reduction × years × future_share_lost × @catastrophe.world_population_long_run
+               ÷ $discount_rate                                  (DALYs, counted directly)
                                                                 → uov_bridged → dalys_from_uov
 wellbeing      nature_people × ls_gain_per_person_year × years  → wellbys_bridged → dalys_from_wellby
 wild animals   wild_animal_years × wild_pain_days_per_animal_year × years × @welfare_ranges.<s>_vs_chicken
@@ -29,8 +31,9 @@ bridge applies the shared deaths per tonne, heat-death delay and value of a deat
 - The `tco2e` conversion's rates through the bridge (`$deaths_per_tco2e`, `$climate_heat_share`,
   `$climate_heat_death_delay`, `@death_ages.heat_share_*`, `@climate.nondeath_damages_vs_deaths`).
 - `@moral_weights.*` by age band × `$life_value_multiplier` for catastrophe deaths: valued like every
-  death, with no premium for their number or for future generations (the site has no such slider;
-  adding one is a site-wide value judgment, not a model's).
+  death, with no premium for their number. Future generations: the years a catastrophe would take
+  from every later year (`future_share_lost`, 0 unless it shrinks or ends the future), discounted at
+  `$discount_rate`, whose 0.1% floor keeps an endless future finite.
 - `$uov_per_ln_consumption`, `@wellby_factors.wellbys_per_sd_year`, `@gbd_disability_weights.*`,
   `@welfare_ranges.*` (only in `ced_<s>`), `$discount_rate` on every year.
 

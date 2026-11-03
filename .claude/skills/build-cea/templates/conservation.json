@@ -517,7 +517,29 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number or for future generations (the site's value judgments are its sliders)."
+      "explainer": "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number. Future generations are the next two rows."
+    },
+    {
+      "id": "future_share_lost",
+      "section": "effect",
+      "label": "Catastrophic risk: share of every later year's healthy life the catastrophe would take",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.001
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: 0 for a catastrophe the world recovers from (its deaths are counted above); 1 for one that ends humanity's future; between for one that permanently shrinks it. Anchor on published scenario studies; usually 0 for conservation."
+    },
+    {
+      "id": "future_dalys_averted",
+      "section": "effect",
+      "label": "Catastrophic risk: future years of healthy life kept, discounted",
+      "format": "number",
+      "formula": "annual_risk_reduction * protection_years * future_share_lost * @catastrophe.world_population_long_run / $discount_rate",
+      "unit": "DALYs",
+      "explainer": "Every later year's healthy life the catastrophe would take (the long-run world population × the share lost), discounted for ever at the shared rate: the yearly loss ÷ $discount_rate. How much future generations count is your discount rate."
     },
     {
       "id": "evidence_adj",
@@ -686,7 +708,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
       "format": "number",
-      "formula": "health_people * dalys_per_person_year * protection_years",
+      "formula": "health_people * dalys_per_person_year * protection_years + future_dalys_averted",
       "unit": "DALYs"
     },
     {
