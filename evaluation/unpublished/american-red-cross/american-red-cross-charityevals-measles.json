@@ -1,0 +1,833 @@
+{
+  "id": "american-red-cross-charityevals-measles",
+  "name": "American Red Cross: Measles & Rubella Partnership mobilisation (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "template": "direct-health",
+  "estimate_basis": "unit_cost",
+  "charity": "american-red-cross",
+  "owner": "charityevals",
+  "summary": "Through the Measles & Rubella Partnership the American Red Cross funds Red Cross and Red Crescent volunteers who visit households before vaccination campaigns to bring children in (3 million households in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 3 November 2026). This model counts the measles deaths averted among the few extra children vaccinated because of a visit, in years of healthy life per $1,000, at an estimated fifth of the international programme's spending. Nothing in the chain is measured for this programme: the extra vaccinations per visit, the deaths each averts and the Red Cross's share of the cost of vaccinating those children are wide judgments, so the result is mostly uncertainty. It is below the site's global-health median because the vaccine and vaccinators are paid for by others and most children would have been vaccinated without a visit.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: American Red Cross Measles & Rubella Partnership mobilisation (FY2025)",
+    "url": "https://charityevals.org/american-red-cross-charityevals-measles",
+    "published": "2026-11-03",
+    "retrieved": "2026-11-03"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+      "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
+      "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "proxy",
+      "title": "Programmes with no outcome data",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "intl_spend",
+      "section": "cost",
+      "label": "International Relief and Development Services expenses, FY2025",
+      "format": "usd",
+      "value": 48839000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "International Relief and Development Services 48,839 — 48,839 82,217"
+      },
+      "explainer": "The whole international programme; the measles share is below."
+    },
+    {
+      "id": "msl_spend_share",
+      "section": "cost",
+      "label": "Share of international spending on the Measles & Rubella Partnership",
+      "format": "percent",
+      "explainer": "The shared split (facts/american_red_cross.json), read by both the relief and the measles model so the two always add up to the programme.",
+      "formula": "@american_red_cross.msl_spend_share"
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on measles and rubella mobilisation, FY2025",
+      "format": "usd",
+      "explainer": "The international programme's estimated measles share (grants to national societies and the partnership's support).",
+      "formula": "intl_spend * msl_spend_share"
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total operating expenses, FY2025",
+      "format": "usd",
+      "value": 3333107000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Total operating expenses 3,333,107 — 3,333,107 3,571,538"
+      },
+      "explainer": "All programmes plus fundraising and management."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Total program services expenses, FY2025",
+      "format": "usd",
+      "value": 3032359000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Total program services 3,032,359 — 3,032,359 3,260,239"
+      },
+      "explainer": "All six programmes, same statement."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "msl_households_visited",
+      "section": "reach",
+      "label": "Households visited to encourage measles and rubella vaccination, FY2025",
+      "format": "integer",
+      "value": 3000000,
+      "kind": "observed",
+      "source": {
+        "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 8, International services highlights",
+        "quote": "MORE THAN 3 million households visited to encourage vaccinations through the Measles & Rubella Partnership."
+      },
+      "explainer": "Volunteers going door to door before and during campaigns; the Red Cross's own count."
+    },
+    {
+      "id": "msl_u5_per_household",
+      "section": "reach",
+      "label": "Children under five per household visited",
+      "format": "number",
+      "value": {
+        "low": 0.8,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Households in the countries concerned have about one child under five (DHS). Children 5-14 also get campaign doses, but their measles death risk is a small fraction of under-fives' and the rate below is per unvaccinated under-five, so they are counted in unmodelled benefits."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "Children under five in the households visited",
+      "format": "integer",
+      "explainer": "Every child under five in a visited household; the share vaccinated only because of the visit is the counterfactual adjustment.",
+      "formula": "msl_households_visited * msl_u5_per_household"
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: cost per child in a visited household, well under a dollar."
+    },
+    {
+      "id": "years_of_coverage",
+      "section": "reach",
+      "label": "Years under five left for a child vaccinated in the campaign",
+      "format": "number",
+      "value": {
+        "low": 1.5,
+        "best": 2.5,
+        "high": 3.5
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Campaigns vaccinate children from 9 months; a child vaccinated between 9 and 59 months has about 2.5 years left before turning five, when the death rate below applies."
+    },
+    {
+      "id": "msl_global_deaths",
+      "section": "effect",
+      "label": "Measles deaths worldwide, 2023",
+      "format": "integer",
+      "value": 107500,
+      "kind": "observed",
+      "source": {
+        "title": "WHO, news release, 14 November 2024: Measles cases surge worldwide, infecting 10.3 million people in 2023",
+        "url": "https://www.who.int/news/item/14-11-2024-measles-cases-surge-worldwide--infecting-10.3-million-people-in-2023",
+        "retrieved": "2026-11-03",
+        "quote": "an estimated 107 500 people, mostly children younger than 5 years of age, died due to measles in 2023"
+      },
+      "explainer": "WHO and CDC's estimate, mostly children under five."
+    },
+    {
+      "id": "msl_missed_first_dose",
+      "section": "effect",
+      "label": "Children who missed their first measles dose, 2023",
+      "format": "integer",
+      "value": 22000000,
+      "kind": "observed",
+      "source": {
+        "title": "WHO, news release, 14 November 2024: Measles cases surge worldwide, infecting 10.3 million people in 2023",
+        "url": "https://www.who.int/news/item/14-11-2024-measles-cases-surge-worldwide--infecting-10.3-million-people-in-2023",
+        "retrieved": "2026-11-03",
+        "quote": "more than 22 million children missed their first dose of measles vaccine in 2023"
+      },
+      "explainer": "A yearly cohort of unvaccinated infants (WUENIC)."
+    },
+    {
+      "id": "msl_years_unvaccinated",
+      "section": "effect",
+      "label": "Yearly cohorts of unvaccinated children under five at risk at once",
+      "format": "number",
+      "value": {
+        "low": 3,
+        "best": 4,
+        "high": 6
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Each year's missed cohort stays unvaccinated through early childhood until a campaign or a late dose reaches it, so the unvaccinated under-fives alive at once are about four cohorts, from three (frequent campaigns) to six (under five's full span, few catch-ups)."
+    },
+    {
+      "id": "msl_setting_risk",
+      "section": "effect",
+      "label": "Measles death risk where the visits happen, relative to the world's unvaccinated children",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1.2,
+        "high": 2.5
+      },
+      "kind": "judgment",
+      "explainer": "The partnership's campaigns are mostly in Africa and Asia. The WHO African region had about 71% of the world's measles deaths in 2023 (Minta et al., MMWR), well above its share of the children missing their first dose, so the death rate per unvaccinated child there is above the world's; campaigns in Asian countries with high routine coverage and rare outbreaks pull it down. About 1.2, from 0.5 (mostly low-risk settings) to 2.5 (mostly African outbreak settings). The FY2025 campaign list by country isn't published.",
+      "source": {
+        "title": "Minta et al. (2024), Progress Toward Measles Elimination, Worldwide, 2000-2023, MMWR 73(45):1036-1042",
+        "url": "https://www.cdc.gov/mmwr/volumes/73/wr/mm7345a4.htm",
+        "retrieved": "2026-11-03",
+        "page": "Table 2: African Region, 75,942 estimated measles deaths in 2023 (71% of 107,482)",
+        "quote": "Estimated measles deaths decreased 8%, from 116,800 in 2022 to 107,500 in 2023"
+      }
+    },
+    {
+      "id": "msl_u5_share_of_deaths",
+      "section": "effect",
+      "label": "Share of measles deaths that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.7,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "WHO: 'mostly children younger than 5 years of age'. About 70%; the rest are older children and adults."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Yearly risk of dying of measles for an unvaccinated child",
+      "format": "small",
+      "unit": "deaths / person-year",
+      "explainer": "Under-five measles deaths over the unvaccinated under-fives at risk, at the campaign settings' relative risk: about 0.001 a year. Deaths of vaccinated children (vaccine failure) make this a slight overestimate for the unvaccinated, which the setting row's range allows for.",
+      "formula": "msl_global_deaths * msl_u5_share_of_deaths / (msl_missed_first_dose * msl_years_unvaccinated) * msl_setting_risk"
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "effect",
+      "label": "Reduction in measles deaths for a vaccinated child",
+      "format": "percent",
+      "explainer": "The shared measles vaccine efficacy (GiveWell, from Uzicanin and Zimmerman's review).",
+      "formula": "@givewell_common.measles_vaccine_efficacy_rate_from_uzicanin_and_zimmerm"
+    },
+    {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Deaths caused indirectly, per direct death averted (immune amnesia in unmodelled benefits)",
+      "format": "number",
+      "formula": "0",
+      "explainer": "0: herd protection and the deaths after measles (immune amnesia) are in unmodelled benefits."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
+      "explainer": "Direct and indirect deaths over the years of protection. If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here; check the result against the all-cause trial result per person-year, scaled to today's mortality."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "explainer": "1: the chain counts only under-fives.",
+      "formula": "1"
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "explainer": "Not used: the chain counts only under-fives (older children are in unmodelled benefits).",
+      "formula": "0"
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "explainer": "Not used: the chain counts only under-fives (older children are in unmodelled benefits).",
+      "formula": "0"
+    },
+    {
+      "id": "morbidity_value_ratio",
+      "section": "effect",
+      "label": "Illness averted, as a share of the mortality and income benefits",
+      "format": "percent",
+      "formula": "@givewell_common.morbidity_effects_from_directly_incentivized_vaccines_a",
+      "explainer": "GiveWell's shared supplementary share for illness averted by vaccines."
+    },
+    {
+      "id": "stillbirths_averted_per_person",
+      "section": "effect",
+      "label": "Stillbirths averted per person reached (before adjustments)",
+      "format": "small",
+      "explainer": "0: congenital rubella syndrome and the stillbirths it causes are in unmodelled benefits.",
+      "formula": "0"
+    },
+    {
+      "id": "ln_income_gain_per_year",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, ln(consumption) per year",
+      "format": "small",
+      "unit": "ln / year",
+      "explainer": "0: no later-life income gain is modelled for measles vaccination.",
+      "formula": "0"
+    },
+    {
+      "id": "years_until_income_gain",
+      "section": "effect",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "formula": "0",
+      "unit": "years",
+      "explainer": "Not used: there is no income gain."
+    },
+    {
+      "id": "years_income_gain_lasts",
+      "section": "effect",
+      "label": "Years the long-term income gain lasts",
+      "format": "number",
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "unit": "years",
+      "explainer": "The site's one figure for how long a long-term income gain lasts (GiveWell's working years, 40), read by every model that counts one (INV-13)."
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, present value",
+      "format": "small",
+      "formula": "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
+      "unit": "ln-years",
+      "explainer": "Discounted at the shared rate, the wait included, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs."
+    },
+    {
+      "id": "resource_sharing_multiplier",
+      "section": "effect",
+      "label": "Resource sharing within households (multiplier on an earner's gain)",
+      "format": "multiple",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "explainer": "The site's one figure (GiveWell's): an earner's income gain is shared with the household, so it counts this many times. Read by every model that values a long-term income gain (INV-13)."
+    },
+    {
+      "id": "internal_validity_adj",
+      "section": "adjustments",
+      "label": "Internal validity of the chain",
+      "format": "multiple",
+      "explainer": "The mobilisation effect rests on moderate- to low-certainty trials (Cochrane), and the death risk on global estimates; an observational-to-trial discount as for the site's other such effects (0.7-0.9), a little lower for the chain's length.",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.9
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "external_validity_adj",
+      "section": "adjustments",
+      "label": "External validity: the trials' setting against this program's, a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The settings' risk is in msl_setting_risk, so nothing is left to transfer (1); the low end for campaigns unlike the studies' routine programmes."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "formula": "internal_validity_adj * external_validity_adj",
+      "explainer": "The product of its two parts."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the children vaccinated only because of the visit",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.03,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "Home visits and village health education raise routine coverage substantially where it is low (Cochrane: DTP3 risk ratio 1.68, moderate certainty; home visits to find unvaccinated children 1.22 for polio, low certainty), but campaigns already reach 85-95% of children, so the absolute gain is capped: a ratio of 1.03-1.05 on 85-90% is 3-4 points. About 3 points of the children in visited households, from 1 to 8 (hard-to-reach areas).",
+      "source": {
+        "title": "Oyo-Ita et al. (2016), Interventions for improving coverage of childhood immunisation in low- and middle-income countries, Cochrane Database Syst Rev 7 (abstract, via Europe PMC)",
+        "url": "https://europepmc.org/article/MED/27394698",
+        "retrieved": "2026-11-03",
+        "quote": "We found moderate-certainty evidence that health education at village meetings or at home probably improves coverage ... (DTP3: risk ratio (RR) 1.68, 95% confidence interval (CI) 1.09 to 2.59)"
+      }
+    },
+    {
+      "id": "msl_cost_per_extra_child",
+      "section": "adjustments",
+      "label": "Red Cross cost per extra child vaccinated (US$)",
+      "format": "usd",
+      "formula": "cost_total / (people_reached * counterfactual_adj)",
+      "explainer": "The programme's full cost over the children vaccinated only because of a visit."
+    },
+    {
+      "id": "msl_others_cost_per_child",
+      "section": "adjustments",
+      "label": "Others' cost of vaccinating a child found by a visit (US$)",
+      "format": "usd",
+      "explainer": "What governments, Gavi, UNICEF and WHO spend to give one more child a measles-rubella campaign dose: the vaccine and injection supplies (about $1 a dose) plus the campaign's operational cost per child (a few dollars in published campaign costings). About $3, from $1 (the campaign runs anyway and one more child adds only a dose) to $8 (hard-to-reach areas). GiveWell's Gavi figure (@givewell_common.gavi_costs_incurred_per_child_counterfactually_vaccinat, about $29) covers a full routine schedule, not one campaign dose, so it is not used.",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 8
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "explainer": "The Red Cross's cost per extra child against everyone's. It follows the chain: fewer extra children per visit means a larger share of a smaller result.",
+      "formula": "msl_cost_per_extra_child / (msl_cost_per_extra_child + msl_others_cost_per_child)"
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Visits reported that didn't happen or reached no one at home."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "The partnership's other funders could fill some of a gap (below 1); the Red Cross's role draws in volunteers and government campaigns (above 1). Anchor: GiveWell's typical 0.85-0.95."
+    },
+    {
+      "id": "restricted_intl_assets",
+      "section": "adjustments",
+      "label": "Net assets restricted to international services, 30 June 2025 (US$)",
+      "format": "usd",
+      "value": 45431000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 24, note 7, Net assets with donor restrictions (in thousands)",
+        "quote": "International Relief and Development Services 45,431 64,279"
+      },
+      "explainer": "International gifts given and not yet spent at year end."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a donation waits before the charity spends it",
+      "format": "number",
+      "unit": "years",
+      "explainer": "Funds held over a year's international spending: almost a year.",
+      "formula": "restricted_intl_assets / intl_spend"
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from the charity's spending to the intervention reaching people",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Visits come in the weeks before a campaign; a few months from grant to campaign."
+    },
+    {
+      "id": "benefit_midpoint_years",
+      "section": "adjustments",
+      "label": "Years from delivery to the middle of the protection",
+      "format": "number",
+      "formula": "years_of_coverage * 0.5",
+      "unit": "years",
+      "explainer": "Half the years of protection: the measles deaths averted come over childhood, discounted from the middle."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait until the benefits come",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years + benefit_midpoint_years)",
+      "explainer": "Every wait is discounted at the shared rate, like every future benefit (the income gain's own wait is counted from delivery, in ln_income_gain_per_person)."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "treatment_costs_share",
+      "section": "adjustments",
+      "label": "Treatment costs averted, as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "explainer": "GiveWell's shared share for treatment costs averted."
+    },
+    {
+      "id": "rebound_share",
+      "section": "adjustments",
+      "label": "Rebound malaria from lost immunity, as a share of value lost",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: a vaccine doesn't weaken natural immunity the way malaria prevention does."
+    },
+    {
+      "id": "investment_of_income_share",
+      "section": "adjustments",
+      "label": "Investment of income increases, as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases",
+      "explainer": "GiveWell's shared share for income invested by families of children who survive."
+    },
+    {
+      "id": "other_unmodelled_share",
+      "section": "adjustments",
+      "label": "Other benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Older children vaccinated in the campaigns (+), rubella and congenital rubella syndrome averted (+), herd protection of unvisited children (+), deaths after measles from weakened immunity (+), other services promoted at the visits (+)."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+      "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * total_adj"
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights for the age band of each death averted (under five, 5–14, 15–49, 50 and over), times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7)."
+    },
+    {
+      "id": "uov_deaths",
+      "section": "outcome",
+      "label": "Units of value from deaths averted",
+      "format": "number",
+      "formula": "deaths_averted * value_per_death",
+      "unit": "units of value"
+    },
+    {
+      "id": "uov_stillbirths",
+      "section": "outcome",
+      "label": "Units of value from stillbirths averted",
+      "format": "number",
+      "formula": "people_reached * stillbirths_averted_per_person * total_adj * @givewell_shared.uov_per_stillbirth * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "A stillbirth averted at the site's one value (@givewell_shared.uov_per_stillbirth, GiveWell's), times your multiplier on the value of a life."
+    },
+    {
+      "id": "uov_income",
+      "section": "outcome",
+      "label": "Units of value from later-life income",
+      "format": "number",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption",
+      "unit": "units of value"
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness averted",
+      "format": "number",
+      "formula": "(uov_deaths + uov_income) * morbidity_value_ratio",
+      "unit": "units of value",
+      "explainer": "A share of the deaths' and income's value, the base GiveWell's supplementary share has."
+    },
+    {
+      "id": "dalys_illness_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "unit": "DALYs",
+      "explainer": "0: illness is counted as GiveWell's supplementary share (morbidity_value_ratio).",
+      "formula": "0"
+    },
+    {
+      "id": "dalys_bridged",
+      "section": "bridges",
+      "label": "Illness averted, in DALYs",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_averted_per_person * total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "uov_from_daly",
+      "section": "bridges",
+      "label": "Illness averted, in units of value",
+      "format": "number",
+      "formula": "dalys_bridged * ($uov_per_daly)",
+      "unit": "units of value",
+      "explainer": "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total units of value",
+      "format": "number",
+      "formula": "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
+      "unit": "units of value",
+      "explainer": "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "intl_staff_pay",
+      "section": "donor",
+      "label": "Salaries and benefits in International services, FY2025 (US$)",
+      "format": "usd",
+      "value": 15663000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (salaries, wages and benefits subtotal, in thousands; International 15,663)",
+        "quote": "Subtotal 52,350 1,156,315 8,242 209,846 83,087 15,663 1,525,503"
+      },
+      "explainer": "The international programme's own staff."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "intl_staff_pay / intl_spend",
+      "explainer": "The international programme's share from its audited functional expenses (about 32%)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "The shared pay gap for health and field staff at nonprofits."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_per_donor_dollar",
+      "unit": "Units of value / $",
+      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
+    },
+    {
+      "id": "proxy_program_spend",
+      "section": "proxy",
+      "label": "Spending on programmes with no outcome data at all, in the year modelled",
+      "format": "usd",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 8",
+        "quote": "MORE THAN 3 million households visited to encourage vaccinations through the Measles & Rubella Partnership."
+      },
+      "explainer": "0: the programme publishes its reach, so it is modelled in the chain above with wide ranges."
+    },
+    {
+      "id": "proxy_peer_result",
+      "section": "proxy",
+      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
+      "format": "small",
+      "formula": "#givedirectly",
+      "unit": "units of value / $",
+      "explainer": "Not used (no spending without outcome data); the skeleton's placeholder peer stays only so the row exists."
+    },
+    {
+      "id": "proxy_share",
+      "section": "proxy",
+      "label": "Share of the programme spending here that has no outcome data",
+      "format": "percent",
+      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
+      "explainer": "The modelled programmes' result counts for the rest of the spending."
+    },
+    {
+      "id": "proxy_per_donor_dollar",
+      "section": "proxy",
+      "label": "Units of value per dollar you give, from programmes with no outcome data",
+      "format": "small",
+      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
+      "unit": "units of value / $",
+      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
+  }
+}
