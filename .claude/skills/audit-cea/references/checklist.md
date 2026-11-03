@@ -1,5 +1,8 @@
 # Audit checklist
 
+Each item is a way a model can count something twice, miss a step or mix units; terms are in the
+[glossary](../../build-cea/references/templates.md#glossary).
+
 ## Double counting
 
 - [ ] Overhead counted twice: `program_spend` already includes allocated overhead *and* `overhead_ratio` > 1.
@@ -21,9 +24,10 @@
 - [ ] Stocks as flows: observed switches under pressed pledges × the fulfilment rate, or ÷ years
       pressed again; running wins ÷ their average age instead of ÷ the campaign's years; one year's
       cost against many years' wins.
-- [ ] Credit twice: money moved valued with the shared new-money share *and* a counterfactual_adj.
-- [ ] Species weight twice: AIM's SADs already carry AIM's species weight; only the `ced_<s>` template
-      swaps it for Rethink Priorities'. A SAD figure scaled by a welfare range anywhere else counts it twice.
+- [ ] Credit twice: money moved valued with the shared new-money share (already counterfactual) *and*
+      a counterfactual_adj.
+- [ ] Species weight twice: Ambitious Impact's (AIM's) SADs already carry its species weight; only the
+      `ced_<s>` rows (the species step) swap it for Rethink Priorities'. A SAD figure scaled by a welfare range anywhere else counts it twice.
 
 ## Missing adjustments
 
@@ -57,10 +61,9 @@
 - [ ] SD vs. raw scale points; SD-years vs. WELLBYs.
 - [ ] Animals in supply chain per year vs. at any one time (hens live ~1.5 years in production).
 - [ ] Output row is per dollar of `cost_total`, then × `donor_cost_share` (animal models: then the species step).
-- [ ] No exchange rate between outcomes inside the model (`$uov_per_daly`, `$daly_per_wellby`,
-      `$daly_per_sad`, `$chicken_vs_person`): the output unit's conversion does it.
-- [ ] No constant beside a lever in a formula (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`): read the shared figure or make it an input row (INV-2d).
-- [ ] Deaths valued by their age band; deaths in a WELLBY model enter only through `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` (INV-17).
+- [ ] Deaths valued by their age band. No exchange rate between outcomes inside the model, no constant
+      beside a slider, deaths in a WELLBY model only through `wellbys_from_uov`: INV-2, INV-2d and INV-17
+      catch these by label in the mechanical pass; look for the same thing under other words.
 - [ ] Species split: shares sum to 1 and are sourced; each species uses its own welfare range (or the
       stand-ins in docs/normalization.md, decision 6), not a chicken's.
 

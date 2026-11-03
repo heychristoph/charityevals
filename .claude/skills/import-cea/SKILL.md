@@ -5,13 +5,24 @@ description: Import a published cost-effectiveness analysis (GiveWell, ACE, HLI,
 
 # Import a CEA
 
-Job: **reproduce the evaluator's model faithfully, then normalise it.** Their rows, numbers and
-rates stay theirs (layer E, checked in the evaluator view); our standard steps come after their
-bottom line (layers A–C, our view). Disagreements never go silently into their numbers.
+This skill turns an evaluator's published cost-effectiveness analysis into a charityevals model JSON
+with two views: the **evaluator view** reproduces every number of their sheet; **our view** carries
+their bottom line on to **years of healthy life per $1,000 donated**, the site's one scale, by the
+same steps as every other model, so charities rated by different evaluators can be ranked side by
+side. The loop: import, check that every number reproduces
+(`scripts/check.ts`), run the invariants, fix; audit-cea reviews it when asked. Terms (uov, SAD,
+`published`, INV-n): [glossary](../build-cea/references/templates.md#glossary).
 
-Read first: **docs/normalization.md** (the principle, the conversion per outcome kind, the shared
-versions in 2.7, money moved in 2.8, won reforms in 2.9, the invariants in section 3, the owner
-decisions of 2026-10-30 and 2026-10-31). It is the rulebook; this skill only says how to apply it. The checks are src/engine/invariants.ts; the schema is src/engine/schema.ts.
+Job: **reproduce the evaluator's model faithfully, then normalise it.** Their rows, numbers and
+rates stay theirs (layer E, the evaluator's rows, checked in the evaluator view); our standard steps
+come after their bottom line (layers A–C: shared accounting levers, bridges to a standard outcome, the
+conversion to the scale; normalization.md section 1). Disagreements never go silently into their
+numbers, so a reader can find the exact cell where we stop agreeing.
+
+Read first: **docs/normalization.md** (the principle, the conversion per outcome kind, shared
+conversions 2.7, money moved 2.8, won reforms 2.9, the invariants in section 3, the owner decisions of
+2026-10-30 and 2026-10-31). It is the rulebook; this skill only says how to apply it. The checks are
+src/engine/invariants.ts; the schema is src/engine/schema.ts.
 
 Worked examples to copy:
 - models/animal-welfare/sinergia-animal.json: species step, shared per-change SAD figures as
@@ -19,20 +30,23 @@ Worked examples to copy:
 - models/global-health/malaria-consortium-smc.json: `output.native`, `ours` section, PV rebuilt
   on `$discount_rate` with GiveWell's rate pinned, credit by share of resources.
 - models/global-health/taimaka-hli.json, models/grants/hli/: our discounting and value-of-life levers
-  on an evaluator that has neither, pinned to HLI's values.
+  on an evaluator that has neither, pinned to the Happier Lives Institute's (HLI) values.
 
-**One consistent way** (owner, 2026-10-31): wherever charityevals has its own version of a
-conversion (an exchange rate between outcomes, a DALY definition, value of life, discounting,
-species or sentience weights, a cash benchmark, currency rates in facts/fx.json), our view uses ours,
-as a visible "changed for consistency" row; never keep the evaluator's own conversion in our view.
-Every slider must move every model it concerns. Where an evaluator gives a best guess and other cases
-(conservative, optimistic), our view takes the best guess like everywhere else; the other cases
-become the range. The evaluator view (pins and `published`) still reproduces every `expected`.
+**One consistent way** (owner, 2026-10-31; INV-2c checks it): wherever charityevals has its own
+version of a conversion (an exchange rate between outcomes, a DALY definition, value of life,
+discounting, species or sentience weights, a cash benchmark, currency rates in facts/fx.json), our view
+uses ours, as a visible "changed for consistency" row, the evaluator's figure in `published`; never
+keep the evaluator's own conversion in our view, or two charities would differ by their evaluators'
+rates rather than their work. Every slider must move every model it concerns. Where an evaluator gives
+a best guess and other cases (conservative, optimistic), our view takes the best guess like everywhere
+else; the other cases become the range. The evaluator view (pins and `published`) still reproduces
+every `expected` (the sheet's cached values).
 
 ## 1. Find the source
 
-- Don't import unfinished work: a sheet or tab marked "in progress", "draft" or "WIP" that the
-  evaluator hasn't published. Record it in `inventory/` as "not imported: unfinished".
+- Don't import unfinished work (the evaluator doesn't stand behind it yet): a sheet or tab marked "in
+  progress", "draft" or "WIP" that the evaluator hasn't published. Record it in `inventory/` as "not
+  imported: unfinished".
 - An estimate made before the charity existed (an idea or incubation report) is shown only if the
   charity actually runs the modelled programme today (cite where it says so) and no model based on
   the charity's actual data exists. Mark it `theoretical`, so the site flags it as purely
@@ -49,9 +63,8 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   a leaf (copy the value, cite the cell) from a step worth modelling.
 - **In bulk**: `python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>`
   (Guesstimate: `scripts/convert-guesstimate.py`). Bulk models live in `models/grants/`, carry
-  `bulk: true`, and still follow every rule below. The spec sets `estimate_basis` (INV-18:
-  `past_average`, `marginal` or `unit_cost`, normalization.md 2.10); the GiveWell importer sets
-  `marginal`.
+  `bulk: true`, and still follow every rule below. The spec sets `estimate_basis` (what the dollar
+  is: `past_average`, `marginal` or `unit_cost`; section 5); the GiveWell importer sets `marginal`.
   - GiveWell grant sheets: `scripts/import-givewell-grants.py` (runs `scripts/link-parameters.py`),
     then `python3 scripts/link-resource-shares.py`. Both only touch GiveWell models: for another
     evaluator, extend their patterns or link by hand.
@@ -72,7 +85,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   a range you add says "range is ours".
 - Formulas in src/engine/expr.ts syntax; a missing function goes into `FUNCTIONS` with a test.
 - `expected` = the sheet's cached value on every formula row, including the evaluator's bottom line.
-  Set `output.native` to that row and its unit (INV-6).
+  Set `output.native` to that row and its unit (INV-6: the evaluator's bottom line reproduces).
 - Shared data from facts (`@kenya.ppp_factor_2017`, `@givewell*`, `@givewell_shared` (GiveWell's house
   constants: resource sharing, long-term income block, funders' money, CYP and stillbirth values),
   `@gbd_disability_weights`, `@moral_weights`, `@sad_factors`, `@wellby_factors`): reuse before adding;
@@ -90,9 +103,10 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 ## 4. Shared levers (layer A), pinned in the evaluator view
 
 `evaluator: { name, assumptions }` pins every assumption layer E reads to the evaluator's own value
-(INV-5, INV-8): `resource_shares: 0`, their `discount_rate`, `life_value_multiplier: 1`, their
-`uov_per_ln_consumption` / `uov_per_daly` where the sheet uses its own, and for AIM SADs models
-`chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
+(INV-5, INV-8: the evaluator view uses its own rates), so their sheet still reproduces:
+`resource_shares: 0`, their `discount_rate`, `life_value_multiplier: 1`, their
+`uov_per_ln_consumption` / `uov_per_daly` where the sheet uses its own, and for AIM (Ambitious
+Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
 
 - **Deaths** read `$life_value_multiplier`: `@moral_weights.<age band> * $life_value_multiplier` in every
   model, the band of the death's age (under five, 5–14, 15–49, 50–74; `_over5` only for unknown ages;
@@ -124,14 +138,13 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 
 ## 5. Our steps to the scale (layers B and C)
 
-- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (INV-2c,
-  normalization.md 1 and 2.7): every conversion the evaluator made in its own way (an exchange rate
-  between outcomes, the value of a death, depression to DALYs, a cash benchmark behind a multiple of
-  cash, a currency rate (`@fx`: the IRS yearly average where the IRS lists the currency, else the World Bank's, for the year the rate is for; scripts/link-fx.py), a typed-in discount rate) reads the shared version in our view
-  (`$uov_per_ln_consumption`, `@moral_weights`, `@depression.dalys_per_phq9_point_year`,
-  `@cash.uov_per_dollar`, `@fx`, `$discount_rate`), with the evaluator's figure in `published` and a
-  "changed for consistency" explainer. A concept two models use with different values and no shared
-  version gets a new shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
+- `output.unit` is `uov`, `daly`, `wellby`, `ced` or `tco2e` (INV-1). **One consistent way** (above;
+  normalization.md 1 and 2.7): every conversion the evaluator made in its own way reads the shared
+  version in our view: `$uov_per_ln_consumption`, `@moral_weights`, `@depression.dalys_per_phq9_point_year`,
+  `@cash.uov_per_dollar` (behind a multiple of cash), `@fx` (the IRS yearly average where the IRS lists
+  the currency, else the World Bank's, for the year the rate is for; scripts/link-fx.py),
+  `$discount_rate`. A concept two models use with different values and no shared version gets a new
+  shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
   A model whose outcome mixes kinds (AIM's "DALY-equivalents" folding in income and deaths) is split
   into its parts, each converted with our rates.
 - Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
@@ -155,7 +168,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   (dollar figure in `published`); only a figure with no cash meaning counts as an under-five death; per-outcome rows (deaths, income, YLDs) read the shared versions directly.
 - **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
   `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
-  rate stays and `$discount_rate` goes on top (INV-9b). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
+  rate stays and `$discount_rate` goes on top (INV-9b catches years summed at face value). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
 - **Won reforms** (corporate pledges, laws, regulations; normalization.md 2.9): the years a win counts read
   `$win_years_counted` (the evaluator's years in `published`, or "date without the campaign" = expected date +
   `$win_years_counted`); the wait until it takes effect and the years counted are discounted at `$discount_rate`;
@@ -195,7 +208,8 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - Rules in src/engine/ranking.ts: per evaluator and program, the newest model by `source.published`
   (the sheet's own date, not the first grant page that links it) counts, hand-built or bulk alike
   (hand-built first on the same date). Side sheets never count (skeleton, value-of-information,
-  breakeven, optionality, threshold, sensitivity copies), found by content as well as title (INV-16).
+  breakeven, optionality, threshold, sensitivity copies: they test a decision, not estimate the
+  charity), found by content as well as title (INV-16).
   The bottom line is the grant's own location column and the best-guess column, never a bound or
   scenario column (INV-16 checks the location against the sheet's title). One dot
   per evaluator; the charity's row shows its primary evaluator's figure.
@@ -207,7 +221,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 ## 7. Write-up
 
 `writeups/<id>.md` for a charity's main model (`npm run check` fails without one). Copy the shape of
-writeups/the-humane-league.md and writeups/givedirectly.md:
+writeups/sinergia-animal.md and writeups/givedirectly.md:
 
 - `###` headings, in this order, skipping any with nothing to say: Summary, What the charity does,
   How the impact happens, How the model works, What drives the result, Where we differ from
@@ -215,7 +229,7 @@ writeups/the-humane-league.md and writeups/givedirectly.md:
 - The summary opens with one plain sentence on what the charity does, then the result as a live
   figure: `**<span data-figure="headline" data-model="<id>">130</span> years of healthy life per $1,000**`.
 - Results are always years of healthy life per $1,000, never multiples of GiveDirectly or another
-  benchmark. A number that moves with the sliders is a live figure; a fixed number says whose it is
+  benchmark (a multiple shifts whenever the benchmark's model does). A number that moves with the sliders is a live figure; a fixed number says whose it is
   ("ACE's own figure, 94"). No numbers copied from an old run of the model.
 - "Where we differ": one bullet per changed-for-consistency row and per step of ours (species
   weights, discounting, value of life, staff pay, credit by share of resources), with the
@@ -229,7 +243,8 @@ writeups/the-humane-league.md and writeups/givedirectly.md:
 - `npx tsx scripts/check.ts <id>`: every `expected` reproduces (1e-6), both views' results and the
   tornado. A mismatch means the translation is wrong: fix it, never `expected`.
   (`npm run check -- <id>` passes the id to the summaries check, not to check.ts.)
-- `npx tsx scripts/normalization-audit.ts`: no violation for the model (INV-1 … INV-19, SAME-CHANGE). Fix it. A flag you have
+- `npx tsx scripts/normalization-audit.ts`: no violation for the model (every invariant, plus SAME-CHANGE,
+  one SADs figure per physical change). Fix it. A flag you have
   checked by hand and found false (a coincidence of values, a word used otherwise) gets a waiver with
   its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
 - `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev`.

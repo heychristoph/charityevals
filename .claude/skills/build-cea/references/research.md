@@ -1,5 +1,8 @@
 # Research checklist
 
+Every number in the model must trace to a source a reader can open, so the log below is what the
+model's `source` fields and the auditor's checks are built from. Terms: [templates.md](templates.md#glossary).
+
 Read sources with WebFetch/WebSearch. WebFetch doesn't parse most PDFs: download them into your
 scratch directory (its own empty folder) and read them with the Read tool, page by page (`pages`);
 `pdftotext` is usually not installed. Many publishers (PubMed, ScienceDirect,
@@ -16,8 +19,8 @@ currency, year).
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
-- Use the latest complete fiscal year for which you also have reach numbers; note the fiscal year
-  end. If the charity reports program costs per activity, use them for `program_spend`.
+- Use the latest complete fiscal year for which you also have reach numbers (cost and reach must
+  describe the same work); note the fiscal year end. If the charity reports program costs per activity, use them for `program_spend`.
 - Currency: the local-currency amount times `@fx.usd_per_<cur>_<year>` (the IRS yearly average
   where the IRS lists the currency, else the World Bank's official rate; `scripts/link-fx.py` adds a
   missing year), never a typed rate or a constant in a formula.
@@ -44,23 +47,25 @@ currency, year).
 
 ## Baselines and shared facts
 
-- Mortality: IHME GBD results tool, UN IGME (childmortality.org), with the age split of the deaths
-  (each band is valued at its own `@moral_weights`). Consumption and PPP: World Bank (PIP, WDI).
+- Mortality: IHME GBD results tool, UN IGME (childmortality.org). The age split of the deaths (each
+  band is valued at its own `@moral_weights`, the shared value of a death by age): WHO Global Health
+  Estimates (by cause, age, sex and country, latest year; IHME GBD where WHO has no split). Consumption and PPP: World Bank (PIP, WDI).
   Household size: facts/household_size.json first; a missing place gets its latest DHS figure
   (StatCompiler, mean usual members per household) as a new fact there.
 - Before adding a fact, grep `facts/` for it. New country data goes in `facts/<country>.json` with
   `source.url`, `retrieved`, and a range when sources disagree.
-- Animals: SADs per physical change come from facts/sad_factors.json (one figure per change; a new
+- Animals: SADs (suffering-adjusted days) per physical change come from facts/sad_factors.json (one figure per change; a new
   change gets a new fact with a `change` note and its SAD version). Reach is the animals under the
   commitments won or tracked in the year (Chicken Watch, the Cage-Free Tracker, company reports);
-  pledges kept, years counted and production response are shared figures, not research targets. A
-  country's meal mix only from a published estimate covering both it and the reference meal. Species weights come only from
-  facts/welfare_ranges.json (Rethink Priorities, relative to a chicken), through the `ced_<s>` rows;
-  a species it lacks uses the stand-ins of docs/normalization.md, decision 6.
+  pledges kept, years counted and production response are shared figures, not research targets (every
+  animal model uses the same ones). A country's meal mix only from a published estimate covering both
+  it and the reference meal. Species weights come only from facts/welfare_ranges.json (Rethink
+  Priorities, relative to a chicken), through the `ced_<s>` rows (the species step); a species it lacks
+  uses the stand-ins of docs/normalization.md, decision 6.
 
 ## Reference classes for judgments
 
 - `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit (in
-  years of healthy life per $1,000) and the canonical rows of other charityevals models of the same
-  family. Anchor judgments on
-  them ("evidence_adj 0.7, as for X, because …") or explain why this charity differs.
+  years of healthy life per $1,000) and the canonical rows (the row ids every model of a family shares)
+  of other charityevals models of the same family. Anchor judgments on them ("evidence_adj 0.7, as for
+  X, because …") or explain why this charity differs: an unanchored guess can't be checked.
