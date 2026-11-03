@@ -1,174 +1,51 @@
-## Summary
+### Summary
 
-New Incentives pays caregivers in northern Nigeria small cash incentives when their babies get routine vaccines at government clinics. In 2024 it enrolled 1.74 million infants in ten states and spent $25.7 million (audited). Counting the full cost of the 2024 cohort, that is about $17 per infant, which matches the charity's own figure.
+New Incentives (All Babies Are Equal Initiative in Nigeria) pays caregivers in eleven states of northern Nigeria small cash incentives for bringing their infants to government clinics for routine vaccines. Our own estimate for its 2025 work comes to **<span data-figure="headline" data-model="new-incentives-charityevals">14</span> years of healthy life per $1,000**.
 
-Our estimate is **0.014 units of value per dollar, about 1.6 times GiveDirectly**. The joint range is very wide, roughly 0.15 to 19 times (0.2 to 11 times with the shared assumptions at their defaults). That works out to about $12,100 per child death averted, plus the value of the cash to poor households, which is about a sixth of the total.
+No evaluator's cost-effectiveness analysis was used: the model is built from the charity's audited 2025 accounts and annual report, an independent randomised trial of the programme, the charity's own coverage surveys, and the site's shared disease-burden and vaccine figures.
 
-The coverage effect is well evidenced: a randomised trial of this program found it raised full vaccination by 27 percentage points. The weaker link is the step from extra vaccinations to deaths averted. We build it from Nigerian cause-of-death data and vaccine efficacy from other trials, not from a mortality trial of the program.
+### What the charity does
 
-## What the charity does
+At 7,189 government clinics in 205 local government areas, New Incentives' field staff enrol infants and pay caregivers in cash after each of four vaccination visits: BCG at birth, Penta and PCV at 6, 10 and 14 weeks, and measles at 9 months. The incentives were ₦500 for each early visit and ₦2,000 for measles in the trial; in 2025 the charity paid ₦16.0 billion ($10.4 million) to the caregivers of the 1.85 million infants it enrolled, about ₦8,700 per infant. It also runs community awareness work and helps clinics restock vaccines. The vaccines themselves are paid for by Gavi and the Nigerian government. In May 2025 it began a small pilot handing out oral rehydration salts, under 1% of spending and not modelled.
 
-New Incentives works in Nigeria as the All Babies Are Equal Initiative, at government clinics in ten states:
+### How the impact happens
 
-- North West: Kano, Katsina, Jigawa, Sokoto, Kaduna, Kebbi, Zamfara
-- North East: Bauchi, Gombe
-- North Central: a few clinics in Niger State
+1. **More children vaccinated.** In IDinsight's randomised trial (167 clinics in Katsina, Zamfara and Jigawa, 2017-2020), children in programme areas were 16 points more likely to have had BCG, 21 points more likely to have had a first Penta dose, 14 points more likely to have had measles vaccine, and 27 points more likely to be fully immunised. The charity's later coverage surveys in new areas show rises of about the same size.
+2. **Fewer deaths.** Each extra vaccinated child is protected against pneumonia and meningitis (PCV and Hib), whooping cough, diphtheria and tetanus (Penta), rotavirus diarrhoea (given at the same visits), measles and tuberculosis (BCG). Most of the deaths averted are under five.
+3. **Smaller effects:** hepatitis B deaths decades later, illness averted, treatment costs saved, herd immunity, a little more schooling and later income, and the cash itself, which raises poor households' consumption.
 
-Staff enrol infants at their first vaccination and pay cash at each routine vaccination visit, from BCG at birth to measles at nine months. Since July 2024 a ₦5,000 completion bonus brings the total to up to ₦11,000 per child (about $7). Staff also run community awareness work and push clinics to restock vaccines.
+### How the model works
 
-The vaccines and the nurses who give them come from the government and Gavi.
+The model follows the site's direct-health template. Reach is every child born in the clinics' catchment areas (enrolled infants divided by an enrolled share of 65%), because the trial's effects are averages over all children there. For each disease it multiplies Bauchi's chance of dying of it before five (Global Burden of Disease 2021, a shared figure), the share of those deaths after the age of vaccination, the vaccine's efficacy (discounted for this setting, as the site's measles figures show for northern Nigeria) and the rise in coverage of the vaccine that prevents it. The deaths are then scaled for today's states and for unvaccinated children's higher risk, and the site's shared figure for indirect deaths (0.75 per direct death) is added. Deaths at older ages (5-14, 15-49, 50-74) are built the same way, plus hepatitis B deaths from cirrhosis and liver cancer prevented by Penta's hepatitis B doses, from Bauchi's risks at those ages, with the site's shared figures for waning protection and falling death rates, and discounted for the longer wait. A death is valued at the site's moral weight for its age.
 
-## How the impact happens
+Then come the adjustments: trust in the trial and its fit to today's programme, the share New Incentives can claim, funging, and the wait before a gift is spent (New Incentives holds about 2.8 years of spending in treasuries, whose interest roughly offsets the discount). The Gavi and government costs of each extra vaccinated child count in the credit: New Incentives is credited with its share of all the resources behind the extra vaccinations, about half.
 
-1. **The cash brings caregivers back for each visit.** A trial in 167 clinic catchments in Katsina, Zamfara and Jigawa (2017–2020) measured the gains in coverage, from about 25% fully vaccinated in control areas:
-   - BCG: +16 points
-   - Penta 1: +21 points
-   - measles: +14 points
-   - full immunisation: +27 points
+### What drives the result
 
-   Vaccines given at the same visits but not incentivised rose by similar amounts.
-2. **The extra vaccinated children are protected** from measles, pertussis, pneumococcus, Hib and, since the vaccine reached the north in 2022, rotavirus.
-3. **These diseases cause a share of child deaths.** In these zones about 137 children in 1,000 die before age five, so protection averts deaths.
-4. **The cash also raises poor households' consumption.**
+- **Credit shared with Gavi and the government.** Partners spend about $63 for each extra child vaccinated (the site's shared figures), which comes to about as much per child in the catchment areas as New Incentives spends there. With full credit the result would be about twice as high.
+- **Funging.** Most of the charity's money comes from one large funder, and it holds funding to 2028, so a marginal gift partly frees that funder's money (0.85, range 0.6-1).
+- **Today's death rates and the trial's fit.** The death risks come from Bauchi in 2021, and the coverage effects from three states in 2017-2020.
+- **PCV's efficacy and pneumococcus's share of pneumonia deaths.** Pneumonia is the largest single cause of the deaths averted.
 
-## How the model works
+### Biggest uncertainties
 
-**Cost.** We start from the audited 2024 expenses ($25.7 million, 7.2% of it management and fundraising) and scale them up by 1.15. That factor reflects two things:
+- The trial's public brief doesn't report the third-dose Penta and PCV effects. We scale the trial's first-dose effect by the ratio of the dose rises in the charity's coverage surveys (22.5 points for the third dose).
+- Deaths are built from cause-specific risks and efficacies, not measured. The indirect-deaths figure (0.75 per direct death) nearly doubles them; it is consistent with the large all-cause falls seen after PCV and measles vaccination, but rests on modelling.
+- The enrolled share of all children in the catchment areas (65%, range 50-80%) isn't published.
 
-- Infants enrolled in a growing program keep costing money into the next year.
-- The new completion bonus is paid mostly in 2025.
+### What isn't modelled
 
-The 1.15 matches New Incentives' own $17 per infant. The audited Note 8 supports a high end of 1.25: $5.8 million of board-designated "CCT commitments" was added during 2024. That also roughly explains why the annual report's tentative expense figure ($33.0 million) is higher than the audited one.
+- The oral rehydration salts pilot (2025, under 1% of spending).
+- Effects of the programme on the health system beyond vaccine stock (more clinic visits, trust in vaccination) and any lasting effect after the incentives end.
+- Room for more funding and organisational strength.
 
-**Reach.** 1,735,305 infants were enrolled in 2024 (annual report).
+### How this model was checked
 
-**Effect per infant** is the vaccine-preventable risk of an unvaccinated child in the program zones, times the share of enrolled infants vaccinated only because of the incentive.
+The mechanical audit (lint and every normalization invariant) passes. An independent audit (round 1) found 2 high, 5 medium and 4 low issues, all fixed: internal validity now reads the site's shared figure for the trial; deaths after five are built band by band from shared risks and discounted for their wait; partners' cost counts only the extra vaccinations the outcome counts; the pneumococcal share is GBD's own figure; the shared 'fewer infections passed on' adjustment is included; external validity now weighs the incentive's lower real value; the unvaccinated-risk scaling is lower; and the income gain is no longer discounted twice. Round 2 found no high issues (2 medium, 4 low), also all fixed: rotavirus coverage relative to Penta now comes from WHO and UNICEF's 2025 estimates; the cash is valued with the cash-income template's steps (consumed share, later returns, spillovers, child mortality); hepatitis B deaths are now modelled; and the efficacy rows cite their reviews. Round 3 found no high or medium issues (4 low): hepatitis B deaths no longer take the indirect-deaths multiplier, carriers' death risk now cites its source with a survival step, and the hepatitis B prevalence range is the review's confidence interval; the fourth, basing illness only on deaths, was not taken, to keep the template's base for GiveWell's supplementary shares.
 
-- *Death rates by cause.* These come from the 2024 Nigeria verbal autopsy study, a follow-up to the 2024 DHS, weighted 79/21 between the North West and North East to match 2024 enrolments:
-  - measles: 5.4 deaths per 1,000 births
-  - pertussis: about 2.9 per 1,000
-  - diarrhoea: 9.1 per 1,000
-  - pneumococcus and Hib: about 8.5 per 1,000. This is scaled from Wahl et al.'s 2015 national estimates, with some weight on the Gambian PCV trial's 16% cut in all-cause child mortality.
-- *Corrections, cause by cause.* Each cause is multiplied by three factors:
-  - the share of its deaths the vaccine prevents: 77% for measles, 85% for pertussis, 56% for pneumococcus and Hib, and 17% of diarrhoea deaths for rotavirus
-  - the share of its deaths at ages the vaccine can protect: 90% for measles, 85% for pertussis, 95% for the others
-  - how much more an unvaccinated child is at risk than the average child when the rate was measured: 1.4 for measles, 1.3 for pertussis, 1.05 for pneumococcus and Hib, and 1.0 for rotavirus, whose vaccine arrived only in 2022
-- *Mortality trend.* The verbal-autopsy causes are also scaled by 0.9 for the fall in child mortality since the reference period.
-- *Result.* An unvaccinated child has a 1.3% risk of a death before five that full vaccination would prevent.
-- *Share vaccinated because of the incentive.* We take the trial's coverage gain, weighted by where the deaths are (19 points), and divide it by the share of catchment children who enrol (75%). So about 25% of enrolled infants are vaccinated because of the incentive.
-- *Before adjustments*, that is 0.0034 deaths averted per enrolled infant, about one per 300 infants.
+### Sources
 
-**Adjustments** (combined product 0.42):
-
-| Adjustment | Value | Why |
-|---|---|---|
-| Evidence | 0.75 | Carrying the trial to today's scale, caregiver self-report, and the mortality chain |
-| Counterfactual | 0.85 | Later catch-up, and campaign doses that may not have been counted in the trial |
-| Attribution | 0.77 | New Incentives' share of total cost, counting about $20 of government and Gavi vaccine and delivery cost per extra vaccinated child |
-| Delivery | 0.95 | Enrolment counts are administrative |
-| Leverage and funging | 0.90 | Large reserves and a runway policy mean a marginal dollar partly sits in reserve |
-
-**Outcome.** About 2,400 deaths are averted for the 2024 cohort. Each is valued at GiveWell's under-five moral weight, and we add 23% for benefits not modelled.
-
-We add the cash itself as a separate branch of the direct-health template: $8.5 million of transfers. It is valued in ln-consumption units anchored on GiveDirectly and converted with the shared consumption weight, so it moves with the benchmark.
-
-**Your dollar's share.** Staff pay is 34% of costs, mostly local field staff. We assume a 5% pay gap.
-
-## What drives the result
-
-The inputs that move the result most, in multiples of GiveDirectly:
-
-| Input | Range tested | Result |
-|---|---|---|
-| Value of a life (shared assumption) | 0.6–1.4 | 1.1× to 2.2× |
-| Evidence adjustment | 0.55–0.95 | 1.3× to 2.0× |
-| Coverage gain | 14–27 points | 1.35× to 2.05× |
-| Leverage and funging | 0.7–1.05 | 1.3× to 1.9× |
-| Counterfactual catch-up | 0.65–1.0 | 1.3× to 1.9× |
-| Pneumococcal and Hib death burden | 5–12 per 1,000 | 1.45× to 1.85× |
-| Share of children who enrol | 0.65–0.95 | 1.8× to 1.4× |
-
-No single input moves the result above about 2.2×. The joint range is wide because many moderately uncertain inputs multiply together. About 74% of the uncertainty comes from judgment calls and shared assumptions.
-
-## Biggest uncertainties
-
-**How many deaths the vaccines avert here.** Verbal autopsy labels about a third of child deaths "sepsis", and some of those are pneumococcal, Hib or measles deaths. We do not count the contested "non-specific" all-cause effects of measles vaccine.
-
-**Whether the trial's effect holds at today's scale.** The program is now 75 times the size of the trial arm, in different states, with a different incentive. New Incentives' before/after surveys in nine expansion cohorts show gains of a similar size after 24 months:
-
-- Penta 1: +25 points
-- measles: +18 points
-- zero-dose children: −26 points
-
-These surveys are not randomised. The charity's own staff collect the data, and an external firm analyses it.
-
-**The enrolment base.** The trial effect is per child in a catchment, but the cost is per infant enrolled.
-
-**Late catch-up.** We did not find NDHS 2024 tables of catch-up vaccination by zone to anchor the counterfactual adjustment.
-
-## What isn't modelled
-
-These are covered only through the 23% allowance (range 10–45%):
-
-- non-fatal illness averted
-- herd protection of unenrolled children
-- stockout reductions that benefit unenrolled children
-- vaccines we don't count: BCG, IPV, hepatitis B, yellow fever, meningitis A, diphtheria
-- deaths averted after age five
-- possible developmental effects
-
-Caregivers' time and travel are a small offset.
-
-We also don't model the 2024 program additions separately (rewards for clinic staff, malnutrition screening), or the expansions that began in late 2024.
-
-## Sources
-
-- New Incentives, audited consolidated financial statements 2024 and 2023: https://drive.google.com/file/d/1kZPVSMi669EeWQ30qF0iBQgT7NeBNnW4/view
-- New Incentives, Annual Report 2024: https://drive.google.com/file/d/1ZCBUAXqp54e0r-5PDSnMoA_uBtedDBrE/view
-- New Incentives, Coverage Report 2024 (cohorts 1–8 and 11): https://drive.google.com/file/d/1nJkNCgCkJ6s30yJVEyUpWcTCKa5pUT0g/view
-- IDinsight, evaluation brief of the randomised trial (coverage effects): https://cdn.prod.website-files.com/5f7c51bf9fac9b5ed62aa37b/5fae20fa406525d30087de19_New%20Incentives%20Evaluation%20Brief.pdf
-- 2024 Nigeria Verbal Autopsy and Social Autopsy Study, Policy Brief No. 1: https://dhsprogram.com/pubs/pdf/PB15/PB15.pdf
-- Wahl et al. 2018, Lancet Glob Health (pneumococcus and Hib burden): https://europepmc.org/article/MED/29903376
-- Cutts et al. 2005, Lancet (Gambian PCV trial): https://europepmc.org/article/MED/15794968
-- Uzicanin & Zimmerman 2011, J Infect Dis (measles vaccine effectiveness): https://europepmc.org/article/MED/21666154
-- Fulton et al. 2016, Clin Infect Dis (pertussis vaccines): https://europepmc.org/article/MED/26908803
-- Jonesteller et al. 2017, Clin Infect Dis (rotavirus vaccine effectiveness): https://europepmc.org/article/MED/28444323
-- Troeger et al. 2018, JAMA Pediatrics (rotavirus deaths): https://europepmc.org/article/MED/30105384
-- UNICEF Supply Division, PCV price data: https://www.unicef.org/supply/media/25651/file/PCV-vaccine-prices-17062026.pdf
-
-## How this model was checked
-
-**Mechanical audit** (`scripts/audit-model.ts`): no high-severity findings. The remaining low findings are point values on rows that cancel out or are zero by design.
-
-**Independent audit round 1**: 0 high, 6 medium and 11 low findings. All six medium findings were fixed, and with them most of the low ones. Together these moved the result from 2.4× to 1.9× GiveDirectly.
-
-Medium findings fixed:
-
-- Replaced the single unvaccinated-risk multiplier with one per cause.
-- Added the share of deaths at ages each vaccine can protect.
-- Added a mortality-trend adjustment to the verbal-autopsy rates.
-- Raised the cohort cost factor to 1.15 and reconciled it with Note 8 of the audited statements.
-- Tied the value of the cash to the shared consumption weight.
-- Anchored the counterfactual on the campaigns that ran in the trial areas just before its endline.
-
-Low findings fixed:
-
-- Raised the pneumococcal and Hib best guess to give the Gambian trial some weight.
-- Narrowed the enrolment-share floor.
-- Widened the measles efficacy range.
-- Removed the stockout double count.
-- Applied funging to the cash.
-- Lowered the coverage gain for the three-dose series.
-- Write-up consistency fixes.
-
-**Independent audit round 2**: 0 high, 2 medium and about 8 low findings. Round 1's medium findings were confirmed resolved, except that the counterfactual still has no data anchor. Changes made, which moved the result from 1.9× to 1.65× GiveDirectly:
-
-- Set the counterfactual back to 0.85: it is unclear whether the trial counted campaign doses as "Measles 1".
-- Widened leverage and funging to 0.7–1.05 (best 0.9), given New Incentives' $89.5 million in net assets and its runway policy.
-- Fixed the Gambian-trial comparison (deaths prevented vs burden) and the pertussis wording.
-- Cited NDHS 2023–24 Table 15 for the coverage behind the risk multipliers.
-- Lowered the cash value to 0.006 ln-units per dollar after a direct consumption check.
-- Anchored the evidence adjustment on the at-scale survey gains.
-- Corrected the overhead percentage.
-
-The audit loop stopped after round 2, as neither round found any high-severity issues.
+- New Incentives, [Audited Consolidated Financial Statements, December 31, 2025](https://drive.google.com/file/d/18Ksmv_6qF7lXcYeJIhf4gD0deBGzSRO7/view), and [Annual Report 2025](https://drive.google.com/file/d/18Fo7FD1WuR04i8IEDiBoGNjIlv32FICt/view).
+- IDinsight, [Impact of Conditional Cash Transfers on Routine Childhood Immunizations: Evidence from North West Nigeria](https://cdn.prod.website-files.com/5f7c51bf9fac9b5ed62aa37b/5fae20fa406525d30087de19_New%20Incentives%20Evaluation%20Brief.pdf) (2020).
+- New Incentives, [coverage report: baseline and follow-ups for cohorts 1-8 and 11](https://drive.google.com/file/d/1nJkNCgCkJ6s30yJVEyUpWcTCKa5pUT0g/view) (2024).
+- GBD 2016 Lower Respiratory Infections Collaborators, [Lancet Infectious Diseases 2018](https://pmc.ncbi.nlm.nih.gov/articles/PMC6202443/); Cochrane review of [pneumococcal conjugate vaccines](https://www.cochrane.org/evidence/CD004977_vaccines-against-overwhelming-blood-infection-due-pneumococcus-bacteria-and-lung-infection-pneumonia); Anekwe et al., [measles vaccination and schooling](https://pmc.ncbi.nlm.nih.gov/articles/PMC4570928/) (Vaccine 2015); National Bureau of Statistics, [Poverty and Inequality in Nigeria 2019](https://nigerianstat.gov.ng/elibrary/read/1092).

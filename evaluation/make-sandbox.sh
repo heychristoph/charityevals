@@ -63,10 +63,11 @@ const names = ids.flatMap((c) => {
   const r = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
   return [c, r.name, ...(r.aliases ?? []), ...(ALIASES[c] ?? [])].filter(Boolean);
 });
+names.push(...gone); // the removed models' ids (waivers and fact sources name them)
 const names_re = new RegExp(`\\b(${names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "\\s+")).join("|")})\\b`, "i");
 let redacted = 0;
 const scrub = (v, k) => {
-  if (typeof v === "string") return k !== "id" && names_re.test(v) ? (redacted++, "(removed for a blind run)") : v;
+  if (typeof v === "string") return k !== "id" && names_re.test(v) ? (redacted++, k === "url" ? "https://example.org/removed-for-a-blind-run" : "(removed for a blind run)") : v;
   if (Array.isArray(v)) return v.map((x) => scrub(x, k));
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([kk, x]) => [kk, scrub(x, kk)]));
   return v;
@@ -77,7 +78,7 @@ for (const p of [...walk(path.join(dest, "facts")), ...walk(path.join(dest, "ass
   fs.writeFileSync(p, JSON.stringify(scrub(JSON.parse(raw)), null, raw.startsWith('{\n "') ? 1 : 2) + "\n");
 }
 const md = (d) => fs.readdirSync(d).flatMap((f) => { const p = path.join(d, f); return fs.statSync(p).isDirectory() ? md(p) : f.endsWith(".md") ? [p] : []; });
-for (const p of [...md(path.join(dest, "docs")), ...md(path.join(dest, ".claude/skills"))]) {
+for (const p of [...md(path.join(dest, "docs")), ...md(path.join(dest, ".claude/skills")), ...md(path.join(dest, "writeups"))]) {
   const lines = fs.readFileSync(p, "utf8").split("\n");
   // A name can wrap onto the next line: drop both lines.
   const drop = new Set();
