@@ -143,6 +143,9 @@ healthy years                      = chicken-equivalent days × $chicken_vs_pers
 
 - `$chicken_vs_person`: the chicken's weight against a person, stored as the real number (0.332,
   Rethink Priorities' median for chickens). Old `animal_moral_weight` links are mapped to it.
+- Dogs and cats (November 2026, companion-animal models): Rethink Priorities publishes no figure, so
+  `@welfare_ranges.dog_vs_chicken` and `cat_vs_chicken` are a ranged judgment anchored on Rethink's
+  pig, the mammal it estimated (as cattle already are), labelled as ours.
 - `$daly_per_sad`: healthy life lost per day of a person's disabling pain (0.0011, about 10 hours).
 - `to_common` for `ced` = `$chicken_vs_person * $daly_per_sad * $uov_per_daly`.
   At defaults, 1 chicken-equivalent day per dollar = 0.365 healthy years per $1,000. One AIM SAD
@@ -383,11 +386,34 @@ Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 
   rates. INV-9 counts the levers the unit's conversion applies (`$life_value_multiplier`) as on the
   path.
 
-### 2.6 Anything else
+### 2.6 Anything else, and outcomes in several units
 
 Research papers, people reached, courses, policy wins: these are not outcomes on the scale. They
 must go through a bridge (layer B) into one of the units above, and the bridge's rows are ours,
 in their own section, with ranges. A model with no bridge is shown but not ranked, as today.
+
+**Several units in one model (November 2026).** A programme whose good comes in more than one unit
+(a social service's wellbeing, income and health; a conservation programme's tonnes, illness,
+livelihoods and catastrophic risk; illness in DALYs beside deaths in units of value) counts each
+outcome in its own unit, sums it in an input row, and puts it into the model's output unit in one
+**bridge row**, in an `ours` section, whose formula is exactly
+
+```
+<input> * (<to_common of the input's unit>) / (<to_common of the output unit>)
+```
+
+(`src/engine/bridges.ts` `bridgeFormula`; a factor of 1 is left out). The headline multiplies the
+output unit's conversion back, so each outcome reaches the healthy years through its own unit's shared
+conversion and moves with its own sliders only: a WELLBY bridged into a DALY model moves with
+"1 point more life satisfaction…" exactly as in a WELLBY model, and not at all with "Healthy year vs
+doubled-income year". The WELLBY models' `wellbys_from_uov` is the bridge from uov into WELLBYs (2.3).
+Rows a bridge reads besides its input (a tonnes bridge's `air_pollution_weight` and
+`extra_deaths_per_tco2e`) follow the conversion-row rule of 2.5. The build-cea families that count in
+several units report in `daly` (domestic-services, humanitarian-relief, medical-research,
+conservation, rights-advocacy); direct-health bridges illness in DALYs into uov (`uov_from_daly`), the
+sanctioned route for illness averted in a charityevals model, which INV-2b used to block by forbidding
+`$uov_per_daly` in any row. INV-2b, INV-10 and INV-17 check bridges (section 3); the lint refuses a
+row named like a bridge (`dalys_from_<unit>`, `proxy_in_<unit>`) that isn't the exact formula.
 
 ### 2.7 Shared conversions: one consistent way (October 2026)
 
@@ -409,6 +435,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low FP's 2022 GiveDirectly, high GiveWell's 2024 GiveDirectly |
 | A dollar to GiveDirectly (where money goes or would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's GiveDirectly model on the site; every meta model reads it, never `@cash` |
 | Currencies (pounds, euros, kroner, rupees; naira, Kenyan and Ugandan shillings, Rwandan francs, kwacha, meticais, leones) | `@fx.usd_per_<cur>_<year>` (its reciprocal where a sheet states local currency per dollar) | yearly averages | IRS where it lists the currency (2021–25 live table, 2015–20 archived), else World Bank WDI, official exchange rate (LCU per US$, period average, PA.NUS.FCRF); the year the evaluator's rate is for. A rate for a particular day (a grant date, "Google, 12 July 2024") stays the evaluator's in `published`; our view uses that year's average. `scripts/link-fx.py` |
+| Prices over several years (a past average's yearly spending) | `@cpi.<iso3>_<year>`: amount × `@cpi.<iso3>_<Y>` / `@cpi.<iso3>_<year>`, then year Y's `@fx` | index, 2010 = 100 | World Bank WDI, consumer price index (FP.CPI.TOTL), 2005–2025. `scripts/link-cpi.py` |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
 | Household spillover of psychotherapy | `@wellby_factors.household_spillover_ratio_psychotherapy`, times the household of the place (next row) | 16.24% each | HLI (StrongMinds, Friendship Bench); read by HLI's, SoGive's and Founders Pledge's StrongMinds and HLI's World Spine Care |
 | Household size | `@household_size.<place>`: one fact per place, the latest DHS Program survey (mean usual members per household; rural areas where the sheet counts rural households, a Nigerian state for New Incentives' state models); Botswana from its 2022 census; IRD's Sindh districts GiveWell's own | Uganda 4.7, Zimbabwe 4.1, rural Kenya 4.2, Northwest Nigeria 5.9, India 4.4 … | facts/household_size.json (2026-11-02); every model's household size reads its place's (INV-13 `household-size`), the evaluator's figure in `published`. Measured households of a programme's own participants (Bandhan, Village Enterprise's trial, GiveDirectly's Khongoni and Nampula surveys, PxD's farmers) and single Indian states' figures are other places or populations, waived with that reason |
@@ -898,6 +925,29 @@ across the slider's range (at 15%: 157 against Sinergia's 132); it drops below S
 a year. The slider alone doesn't settle HSUS: whether ACE's 2016 projection should rank at all is a separate
 question, left to the owner.
 
+### 2.12 A programme with no outcome data: comparable programmes, discounted (November 2026)
+
+Owner decision 2026-11-03: every programme of every charity is modelled; there is no partial coverage
+and no "no comparable measure". A programme with some outcome data, however thin, gets its family's
+chain with wide ranged judgments. A programme with **no outcome data at all** is valued at the result
+per dollar of the same kind of work elsewhere on the site, read live (`proxy_peer_result =
+median(#a, #b, #c)` of the family's or intervention's models, or the one nearest evaluated
+programme), applied to its share of the spending, and always discounted by one shared slider:
+
+- `$missing_data_discount`, "How much we count a programme we could only estimate from similar ones"
+  (accounting; default 50%, range 10%–100%, our judgment): a programme that measures nothing is
+  probably not the typical one, and the comparison carries none of its own detail.
+
+Every build-cea skeleton has the same proxy rows (an `ours` section "Programmes with no outcome
+data"): `proxy_program_spend` (not part of `program_spend`), `proxy_peer_result`, `proxy_share =
+proxy_program_spend / (program_spend + proxy_program_spend)`, `proxy_per_donor_dollar = proxy_share ×
+proxy_peer_result × $missing_data_discount` (units of value per dollar you give, the peers' own donor
+steps already in), bridged into the model's unit where it isn't uov (`proxy_in_<unit>`, 2.6), and added
+to the per-donor-dollar result, whose modelled part is multiplied by `1 − proxy_share`. The lint makes
+`proxy_per_donor_dollar` read the slider and `proxy_peer_result` read models live (src/engine/
+templates.ts, lint.ts); src/engine/templates.test.ts checks every skeleton's proxy part is
+proportional to the slider.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -908,7 +958,7 @@ shrinks).
 | # | Invariant | How to test |
 |---|---|---|
 | INV-1 | Every ranked model reports in a ranked unit: `uov`, `daly`, `wellby`, `ced` or `tco2e`. | For each model with an `output` that `rankingPlan` can pick: `output.unit ∈ RANKED`. |
-| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views, times in our view the estimate's age factor `(1 + $estimate_age_discount)^−age` (2.11), and `bottomLine(m).common` (what `#id` reads) the same number in units of value. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `daly_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. One exception, in WELLBY models: `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion cancels (2.3, INV-17). (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
+| INV-2 | The headline is the native result times the unit's standard conversion, and nothing else converts. | (a) `headline(m) === compute(m)[output] × evaluate(headlineConversion(unit))` for every model, both views, times in our view the estimate's age factor `(1 + $estimate_age_discount)^−age` (2.11), and `bottomLine(m).common` (what `#id` reads) the same number in units of value. (b) No row's `assumptionDeps` contains a cross-cause rate (`chicken_vs_person`, `daly_per_sad`, `daly_per_wellby`, `sads_per_animal_spared`, the climate rates), and `uov_per_daly` only under INV-5. The one sanctioned model input to a conversion is a row the unit's `to_common` names by fixed id (`tco2e`: `air_pollution_weight`, 2.5): in an `ours` section, with no shared assumption feeding it. Bridges are exempt (2.6): a row in an `ours` section whose formula is exactly `<input> * (<to_common of its unit>) / (<to_common of the output unit>)`, which the output unit's conversion cancels; WELLBY models' `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` is one (2.3, INV-17). Rows a bridge reads besides its input follow the conversion-row rule. (c) **One consistent way**: no evaluator's own conversion moves our headline. Every input row on the path whose label names a conversion (exchange rate between outcomes, value of a death, depression scale to health, cash benchmark, pound/euro rate, time discount rate) and every read of a fact holding an evaluator's conversion (`@founders_pledge.wellbys_per_daly`, `wellbys_per_doubling`, `gd_cost_per_wellby`) is moved ×1.25 in our view; the headline must not move. Rows reading the shared version are formulas and pass; a rate applied and undone cancels and passes. Checked false positives (measurements) are waived with reasons. |
 | INV-3 | Every animal model passes through the species step, once per species, from the shared table. | For `unit = ced`: the model declares `output.species` (e.g. `["chicken","pig"]`). For each, a row `ced_<s>` exists, its formula equals the template for its source (`aim` or `raw`) after whitespace normalisation, it reads `@welfare_ranges.<s>_vs_chicken`, and it is upstream of the output. No other row reads `@welfare_ranges.*` or `@aim_sads.*`. Every path from a row whose unit is SAD or days of pain to the output passes through a `ced_*` row. |
 | INV-4 | No literal stands in for a shared number. | An input row whose value is within 0.2% of a fact's or assumption's low/best/high (0.003355 for `@cash`'s 0.00335) and whose label resembles the shared label, or uses one of its synonyms (ln(consumption) or a doubled income for `$uov_per_ln_consumption`; a DALY or disability weight, "(DW)", for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for `@cash`), must be a formula reading the fact, with the evaluator's literal in `published`. Facts made from identical labels (facts/givewell_common.json, staff_pay.json) match only rows with that label (the sheet's wording, in `source.quote` where the fact's own label has been rewritten), on their best value. Also: no formula contains a constant equal to a fact or assumption value (distinctive, or under a close label; exponents and one- or two-digit constants under labels only loosely alike are arithmetic). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |
@@ -918,7 +968,7 @@ shrinks).
 | INV-9b | Benefits over several years are discounted. | Each input on the path whose label counts years a benefit lasts (years of change/impact/benefit/funding, number of years, duration) is moved ×1.25 at a 0% and an 8% rate: if the headline rises by the same factor at both, the years are summed at face value. |
 | INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
-| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`. |
+| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`. Every bridge's input (2.6) is held at 0 for the output unit's expectations, and the part it brings in moves as a model of its own unit would. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | Every evaluator's model (Ambitious Impact's only until 2026-11-02). Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death), a value of a stillbirth averted or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@givewell_shared.uov_per_stillbirth`, `@fx.*`), itself or through a row it is computed from. |
 | INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
 | INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |
@@ -926,7 +976,7 @@ shrinks).
 | INV-14 | No house constant without a shared fact. | Input rows on the path (not variants), grouped by whose figure it is (SoGive's copies of GiveWell's sheets count as GiveWell's), label (places and "overall" dropped) and value: a group in five or more models is a constant copied by hand and becomes a shared fact every copy reads. Round structural numbers (lint's allowed literals) and numbers that define their row (an arbitrary donation's size, a "10x bar" of 10) are exempt. Late October 2026: facts/givewell_common.json (298 figures, read by 2,275 rows in 118 models) and facts/staff_pay.json (our staff-pay defaults by kind of work and two charities' own shares, read by 487 rows); no value changed. |
 | INV-15 | A ranked model far above its peers says why. | Every model the rankings use whose headline is more than 10× the median of the other ranked models of its cause (at least three) states the reason in its summary, "more than ten times its peers because …". Late October 2026: Terrapraxis (one event), Clean Air Task Force (Founders Pledge's counted deaths), Sinergia, The Humane League (Founders Pledge), HSUS and Albert Schweitzer Foundation (ACE 2016): cage-free pledges move many hen-years per dollar. |
 | INV-16 | Side sheets never rank; the ranked column is the grant's. | Every model the rankings use has at most one row on its path that reads like a value-of-information or decision sheet (future funding bar, CE of reallocated funding, value of information, probability the decision changes, P(… x cash)); and where its native row's label names a place in parentheses, the model's name, id or title names that place too when it names any. Complements `isSideSheet` (title and template) in src/engine/ranking.ts. |
-| INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest doesn't move with `$life_value_multiplier`. |
+| INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest (every bridge's input at 0) doesn't move with `$life_value_multiplier`. Any other model with a bridge from uov values its deaths only upstream of that bridge. |
 | INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
 | INV-19 | An estimate counts less by its age, in our view only (2.11). | Every model with a result in common units has `source.published`. With the models it reads live (`#id`) held at their values at 0, its headline at the slider's default, 10% and high end is its headline at 0 times exactly `(1 + d)^−age`, age from `source.published` to `common.estimate_age_as_of`; its evaluator view, destinations included, is the same at every setting. |
 
@@ -1194,3 +1244,23 @@ per $1,000, our view at the defaults; every evaluator view still reproduces ever
   note), and the across-causes moved-money mix with its facts (2.8). `@ace.dvf_animals_spared_per_meal` is
   Denmark's figure beside the shared Brazilian one (labelled so); neither moves a result (animal counts are
   context, SADs drive the result).
+
+### Decided 2026-11-03 (owner): every programme is modelled
+
+Every programme of every charity is modelled to the one scale: no partial coverage, no "unmodelled", no
+"no comparable measure". The build-cea skills gained six families (domestic-services, humanitarian-relief,
+medical-research, companion-animals, conservation, rights-advocacy; hospitals and hospices are direct-health
+with illness in DALYs, or wellbeing, at the country's values), the bridges of 2.6 that let them count in
+several units, and the proxy rows of 2.12 for programmes with no outcome data. Shared facts added for them:
+`@united_states.consumption_per_person_2024` ($58,517) and `@united_kingdom.consumption_per_person_2024`
+($32,412), household final consumption ÷ population, World Bank 2024, the base of a rich-country model's
+ln(consumption) gain; `@united_states.ce_lowest_quintile_vs_all_2024` (0.446, BLS Consumer Expenditure
+Survey 2024), the anchor for how far below the mean a social service's clients consume;
+`@household_size.united_states` (2.4, BLS) and `@household_size.united_kingdom` (2.35, ONS 2024);
+`@welfare_ranges.dog_vs_chicken` and `cat_vs_chicken` (2.4). Shared assumption added:
+`$missing_data_discount` (2.12). A catastrophe's deaths (conservation's catastrophic-risk branch) are valued
+like every death, by age band × `$life_value_multiplier`. Future generations need no slider of their own:
+the years of healthy life a catastrophe would take from every later year (`@catastrophe.world_population_long_run`,
+the UN's 2100 projection, × the share of the future lost) are discounted at `$discount_rate`, so the
+discount rate is how much they count; its floor is 0.1% (was 0), so an endless future stays finite
+(the yearly loss ÷ the rate: 1,000 years' worth at 0.1%, 25 at the default 4%).
