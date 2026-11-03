@@ -1,8 +1,8 @@
 # Research checklist
 
 Read sources with WebFetch/WebSearch. WebFetch doesn't parse most PDFs: download them into your
-scratch directory (its own empty folder) and extract text (`pdftotext` if installed; otherwise
-`pypdf` in a scratch venv, or the PDF Read tool page by page). Many publishers (PubMed, ScienceDirect,
+scratch directory (its own empty folder) and read them with the Read tool, page by page (`pages`);
+`pdftotext` is usually not installed. Many publishers (PubMed, ScienceDirect,
 Cochrane) show bot checks: use the PMC or Europe PMC copy, the authors' preprint, or the abstract,
 and say which you used. Never bypass a bot check. For every number you take, log: URL, retrieval date,
 page/table, a verbatim quote of at most one sentence, and the number as you'll enter it (unit,
@@ -10,8 +10,9 @@ currency, year).
 
 ## Money (cost section, donor section)
 
-- Start with the charity's own financials page (audited statements, 990s it hosts): ProPublica's
-  PDF and XML downloads are often behind a bot check.
+- Start with the charity's own financials page (audited statements, 990s it hosts): open the listing
+  page and take the latest audited year it links, never a guessed URL for a year (a missing file isn't
+  proof the year is unaudited). ProPublica's PDF and XML downloads are often behind a bot check.
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.

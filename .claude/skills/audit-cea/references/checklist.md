@@ -18,6 +18,9 @@
       counted per pledge and per participant.
 - [ ] Delivery twice: reach counted only where the reform is already delivered (stunners bought,
       cages removed) *and* multiplied by the fulfilment rate.
+- [ ] Stocks as flows: observed switches under pressed pledges × the fulfilment rate, or ÷ years
+      pressed again; running wins ÷ their average age instead of ÷ the campaign's years; one year's
+      cost against many years' wins.
 - [ ] Credit twice: money moved valued with the shared new-money share *and* a counterfactual_adj.
 - [ ] Species weight twice: AIM's SADs already carry AIM's species weight; only the `ced_<s>` template
       swaps it for Rethink Priorities'. A SAD figure scaled by a welfare range anywhere else counts it twice.
