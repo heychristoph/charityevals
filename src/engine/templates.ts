@@ -34,6 +34,9 @@ export type TemplateSpec = {
   bounds: Record<string, [number, number]>;
   /** The estimate basis a model of this family usually has (INV-18, docs/normalization.md 2.10). */
   basis: Basis;
+  /** Other bases the family's conventions name for a kind of dollar it often meets (templates.md
+   * Convention 12): no low finding for them, but the reason still goes in the summary. */
+  altBasis?: Basis[];
   reads: Read[];
 };
 
@@ -122,7 +125,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     "Direct health: deaths and illness averted",
     "uov",
     "uov",
-    ["people_reached", "baseline_mortality_rate", "mortality_reduction", "deaths_averted_per_person", "share_under5", "deaths_averted", "value_per_death", "uov_deaths", "uov_morbidity", "uov_stillbirths", "uov_income", "unmodelled_benefits_adj", "leverage_funging_adj"],
+    ["people_reached", "baseline_mortality_rate", "mortality_reduction", "deaths_averted_per_person", "share_under5", "deaths_averted", "value_per_death", "uov_deaths", "uov_morbidity", "uov_stillbirths", "uov_income", "unmodelled_benefits_adj", "leverage_funging_adj", "wait_discount"],
     { mortality_reduction: [0, 0.9], baseline_mortality_rate: [0, 0.2], share_under5: [0, 1], deaths_averted_per_person: [0, 0.05] },
     "unit_cost",
     [
@@ -130,6 +133,9 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
       { row: "uov_deaths", ref: "$life_value_multiplier", why: "every death moves with the value-of-a-life slider" },
       { row: "uov_stillbirths", ref: "@givewell_shared.uov_per_stillbirth", why: "a stillbirth is valued at the site's one figure" },
       { row: "uov_income", ref: "$uov_per_ln_consumption", why: "income gains are valued at the shared value of a doubled income" },
+      { row: "uov_income", ref: "@givewell_shared.long_term_benefit_years", why: "a long-term income gain lasts the site's one number of years", severity: "medium" },
+      { row: "uov_income", ref: "@givewell_shared.resource_sharing_multiplier", why: "an earner's income gain is shared with the household by the site's one multiplier", severity: "medium" },
+      { row: "wait_discount", ref: "$discount_rate", why: "the wait until the benefits come (funds held, delivery, the middle of the protection) is discounted at the shared rate" },
     ],
   ),
   "cash-income": spec(
@@ -157,7 +163,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
       { row: "household_multiplier", ref: "@wellby_factors.household_spillover_ratio_psychotherapy", why: "household spillovers of therapy are the site's one share" },
     ],
   ),
-  "corporate-campaign": animal(
+  "corporate-campaign": { altBasis: ["unit_cost"], ...animal(
     "Corporate and producer welfare campaigns",
     ["animals_per_year", "sads_per_animal_year", "implementation_adj", "years_of_impact", "years_until_effect", "wait_discount", "discounted_years"],
     { sads_per_animal_year: [0, 400] },
@@ -168,8 +174,8 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
       { row: "sads_per_animal_year", ref: "@sad_factors.sads_per_", why: "one SADs figure per physical change, from facts/sad_factors.json (a new change gets a new fact)" },
       { row: "implementation_adj", ref: "@sad_factors.commitment_fulfilment_", why: "pledges kept are the site's one rate (cage-free or broiler); only pig, fish and shrimp pledges, with no shared record, may use a judgment", severity: "medium" },
     ],
-  ),
-  "diet-change": animal(
+ ) },
+  "diet-change": { altBasis: ["past_average"], ...animal(
     "Diet change and institutional meal replacement",
     ["meals_replaced_per_year", "sads_per_meal", "meal_mix_vs_reference", "production_response", "years_of_impact", "discounted_years", "implementation_adj"],
     { sads_per_meal: [0, 10], production_response: [0, 1], meal_mix_vs_reference: [0.25, 4] },
@@ -179,7 +185,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
       { row: "production_response", ref: "@sad_factors.production_response", why: "diet change always takes the shared production response" },
       { row: "discounted_years", ref: "$discount_rate", why: "years of persistence are discounted at the shared rate" },
     ],
-  ),
+ ) },
   "policy-research-meta": spec(
     "Policy, research and meta (value through other actors)",
     "uov",
