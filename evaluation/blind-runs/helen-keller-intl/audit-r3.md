@@ -1,0 +1,52 @@
+# Audit: helen-keller-intl-charityevals, round 3
+Result: 0.03169 uov/$ = 15.85 years of healthy life per $1,000 (joint 0.28–962; with shared assumptions at their defaults 1.24–179; model's own ranges 1.51–125.5); cause median 5.71 (×2.78). Verdict: **pass** (no high or medium findings; six low).
+
+Scope: vitamin A supplementation (a judged 45% of the $76.9m nutrition line) and NTD mass drug administration ($13.1m cash; $10.5m donated Mectizan as a co-funder's resource), FY2025 (July 2024–June 2025), reach from the same year (Form 990 Schedule O). About half of the $94.3m cash programme spending; the rest of nutrition (about 45%) is left out under Convention 12 and stated as partial coverage in the summary, program_spend and the write-up. Unchanged from round 2 and correct.
+
+Mechanical: lint 0/0/0 (audit-model: "Findings (0)"). Invariants on the model: none. normalization-audit (`--exclude helen-keller-vas`): 0 violations in every invariant; no waiver names this model; allowlist untouched.
+
+Blind-run note: I opened no givewell.org page, no GiveWell sheet and no other evaluator's analysis of Helen Keller. No search snippet showed an evaluator's cost-effectiveness figure for this charity. The annual report (PDF pp. 5–6) mentions GiveWell's ranking and "endorsement" with no figure. A search listed an academic cost-effectiveness study of vitamin A delivery modes in DRC, Togo and Niger (PMC13187644); I didn't open it or use it.
+
+Previous round:
+| R2 # | Status | Note |
+|---|---|---|
+| 1 | resolved | vas_campaign_cost_per_dose (1.05, 1.0–1.25, sourced, verified) and doses_per_child_year (94.4m ÷ 47m = 2.01). Partner cost = 1.21 and attribution = 0.427. The vitamin A result per dollar no longer depends on vas_share_of_nutrition: the share's whole range now moves the total only through branch weights, 15.2–16.6. |
+| 2 | resolved | 2% (0.5–6%), anchored on Burkina Faso 2023–24 and Sierra Leone 2016, both verified (below). Not built as a reach-weighted estimate, but with two of seven countries surveyed, a ranged judgment quoting both is acceptable. Small residue in finding 3. |
+| 3 | pending by design | The write-up's "How this model was checked" is still `AUDIT_PLACEHOLDER`, to be filled after this round. Not counted. |
+| 4 | resolved | 0.06 (0.02–0.15); the 4% non-income share is no longer counted twice. |
+| 5 | resolved | The cost section now says "no spending split by activity". |
+| 6 | partly resolved (finding 5) | The write-up states the size (1–8%), but credits "the round-2 auditor's rough estimate" instead of the sources, and the model's explainer gives no size. |
+| 7 | resolved | (a) The 2.9m is stated as cumulative. That fits: 2.9m a year, doubled as the report expects, would exceed Madagascar's under-five population. (b) Both Madagascar figures are now quoted. A quantitative anchor would still help (finding 4). |
+| 8 | resolved | vas_restricted_share 0.9 (0.7–1); the wait is 2.46 years. |
+| 9 | resolved | The numerator reads `_iron`, the denominator `_malaria`. |
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | low | presentation | summary | The summary still names "the share of nutrition spending that is vitamin A" as one of the biggest uncertainties. Since the round-2 fix, it moves the result only 15.2–16.6 (±5%), and it is no longer in the tornado. The actual model-specific drivers are mortality_reduction (10.2–21.5), external_validity_adj (11.3–20.4), vas_counterfactual_adj (11.3–18.6) and hk_mod_heavy_infection (14.1–20.4). | Computed with the share at 0.36 and 0.6; audit-model tornado. | Replace that clause with "how many children routine care would have reached anyway" (vas_counterfactual_adj). Keep the old trials' carry-over and the worm burden. | none |
+| 2 | low | presentation | ntd_worm_burden_ratio (explainer) | It says "about 0.14", which was the old 5%/37% ratio. It is now 0.054 (2%/37%). | Computed value 0.05405. | Change it to "about 0.05". | none |
+| 3 | low | source / presentation | hk_mod_heavy_infection (explainer); write-up "What drives the result" | (a) The explainer doesn't say why a post-treatment survey stands for the burden a year's treatment averts. The papers support it: Sierra Leone's survey "was conducted 8 months after the last LF MDA", and Burkina Faso's ran "1–4 years after the last MDA" and still found 2.4% prevalence, so rebound within a year is small. (b) The Burkina Faso 0.9% is heavy intensity only: its S. mansoni moderate class (100–399 epg) isn't in it, and the country's STH survey (PMC4862685, prevalence 1.3%) isn't cited. (c) The write-up says "Moderate-to-heavy infection is about 2% in recent surveys". The surveys show 0.33% (hookworm, Sierra Leone) and 0.9% (heavy schistosomiasis, Burkina Faso). The 2% is the judgment after allowing for hotspots and Busia's lower thresholds. | Bah et al. 2019 (PMC6604471), Methods. Zongo et al. 2025 (PMC11813138), Methods and abstract. | (a) Add the two timing quotes to the explainer as the reason the post-treatment level is the counterfactual burden for one year's funding. (b) Note that the Burkina figure excludes moderate S. mansoni, and cite PMC4862685. (c) Reword the write-up: "under 1% in recent surveys in Burkina Faso and Sierra Leone; the model uses 2% to allow for hotspots (Mali, Niger) and the Kenya trial's lower thresholds, against 37% in the trial." | none (the best guess stands) |
+| 4 | low | source | vas_counterfactual_adj | A top-6 judgment (11.3–18.6) still has only a qualitative anchor. Quantitative ones exist: (i) Tanzania, routine EPI-contact delivery 13% (95% CI 10–18%) in 1999 against 76% under twice-yearly campaigns in 2002, which implies 1 − 13/76 ≈ 0.83; (ii) Senegal after its move to routine delivery, 40–50% in most regions against about 90% in campaigns, which implies about 0.5; (iii) Helen Keller's own post-event surveys in 13 countries, door-to-door 91% against fixed-site plus outreach 63% (an upper bound on routine-only). The best guess of 0.75 sits inside that span, a little above its middle. | PMC1635705 (abstract, verified). Senegal study (Current Developments in Nutrition 2022, S2475299122143829: 403 to my fetch, figures from the search summary only). PMC10261640, Table 2 (verified). | Quote (i) and (iii) in the explainer, and (ii) once read in full. Set the range to 0.45–0.85 on them and keep 0.75 only with the reason that today's routine systems sit between Tanzania 1999 and Senegal; otherwise use 0.65 (the span's middle). | 0 at 0.75; −13% (13.8) at 0.65 |
+| 5 | low | presentation / source | write-up "What isn't modelled"; ntd_morbidity_value_ratio (explainer) | The 1–8% size of adults' unvalued NTD illness is credited to "the round-2 auditor's rough estimate", not to its basis. The model explainer gives no size. | Write-up; model. | State the basis in both places: programme-level estimates of about 0.005–0.01 DALY per treatment (APOC 1995–2010, about 8m DALYs over about 0.8bn ivermectin treatments, Coffeng et al. 2013, PLoS NTD; GPELF of the same order), lower near elimination, which gives 1–8% of the result. Cite Coffeng et al. 2013 and a GPELF health-impact paper. | none |
+| 6 | low | source | vas_campaign_cost_per_dose (source.page) | The page "p. 5" is the PDF page; the printed page is 8. The second passage (Madagascar, "for just over $1 a dose", PDF p. 6, printed p. 10) supports the same figure but isn't quoted. | Annual report 2025, verified. | Set page to "PDF p. 5 (printed p. 8)" and add the Madagascar quote with its page to the explainer. | none |
+
+## Sources checked
+| Row | URL | Status | Note |
+|---|---|---|---|
+| vas_campaign_cost_per_dose | helenkellerintl.org …HKIntl_2025AnnualReport_Donor-List.pdf | verified | PDF p. 5: "Vitamin A costs just a little more than $1 a dose". PDF p. 6: "for just over $1 a dose" (finding 6). |
+| vas_people_reached (Madagascar, Mali notes) | same | verified | "2.9 million Malagasy children have received vitamin A … We expect to double our reach in the coming year" (cumulative reading plausible). "Reach nearly 7 Million Malian children with vitamin A" (read as doses). |
+| vas_counterfactual_adj (Madagascar) | same | verified | "88 percent coverage across four priority regions". |
+| hk_mod_heavy_infection (Sierra Leone) | PubMed 31262367 / Europe PMC PMC6604471 | verified | "three (0.08%) children had heavy infections and nine (0.25%) children had moderate infections" (hookworm); "8 months after the last LF MDA". |
+| hk_mod_heavy_infection (Burkina Faso) | PubMed 39913556 / Europe PMC PMC11813138 | verified | "overall prevalence of schistosomiasis was 2.4% … HI infection of 0.9%"; "1–4 years after the last MDA". The explainer's first author "Ouedraogo" is the third author; the first is Zongo D. Low, fold into finding 3. |
+| vas_counterfactual_adj (anchors offered) | PMC1635705; PMC10261640 | verified | Tanzania 13% → 76%. Door-to-door 91% against fixed-site plus outreach 63% (finding 4). |
+| vas_capsules | helenkellerintl.org/combatting-vitamin-a-deficiencies | not refetched | Consistent with 2 × 47m. Unchanged since round 2. |
+| busia_mod_heavy_infection, mortality_reduction, deworming_consumption_gain, financial lines, Form 990 reach | as in round 2 | verified in rounds 1–2, unchanged | Values unchanged in the model. |
+| shared facts (income ratio, investment of income, counterfactual deworming, short-term illness) | facts/ | shared, not a finding | |
+
+## Drivers
+1. Shared sliders `$uov_per_daly` (7.9–31.7), `$discount_rate` (11.4–28.7) and `$life_value_multiplier` (11.7–20.0): the site's, not the builder's.
+2. mortality_reduction (estimate, Cochrane 2022 CI, verified): 10.2–21.5.
+3. external_validity_adj (judgment 0.75, anchored on cause-of-death shift and current deficiency): 11.3–20.4.
+4. vas_counterfactual_adj (judgment 0.75): 11.3–18.6. Quantitative anchors are now available (finding 4).
+5. hk_mod_heavy_infection (judgment 2%, anchored on two verified Helen Keller surveys): 14.1–20.4.
+
+Then vas_leverage_funging_adj, deworming_consumption_gain, vas_implementation_adj, baseline_mortality_rate and vas_campaign_cost_per_dose (16.5–13.7). What would most improve the model: a quantitative routine-coverage anchor for the counterfactual (finding 4), and a post-event coverage survey figure from Helen Keller's PEC surveys for vas_implementation_adj in place of the tally-sheet judgment.
