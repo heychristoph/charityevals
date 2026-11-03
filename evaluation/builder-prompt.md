@@ -24,10 +24,13 @@ evaluation rules:
   `{sandbox}/audits/audit-r<n>.md`. At most 3 rounds. If you cannot spawn a subagent, stop after
   the mechanical audit is clean and say so in your report.
 - Run checks from the sandbox: `cd {sandbox} && npx tsx scripts/check.ts {id}` and
-  `npx tsx scripts/audit-model.ts models/{cause}/{id}.json --exclude {evaluator model ids}` (the exclusion keeps the reference class from showing the answer). (Don't run `npm run check`: the
-  sandbox has no bulk models, so the summaries check doesn't apply.)
+  `npx tsx scripts/audit-model.ts models/{cause}/{id}.json --exclude {evaluator model ids}` (the exclusion keeps the reference class from showing the answer). audit-model runs every
+  invariant of docs/normalization.md on the draft; any violation is a high finding to fix. (Don't run
+  `npm run check`: the sandbox has no bulk models, so the summaries and write-up checks of other
+  models don't apply.)
 
 Report at the end: the bottom line (native unit, years of healthy life per $1,000, joint low–high), the values of the
-canonical rows, audit rounds (high/medium/low counts each round, what you changed), every source
+canonical rows, the year modelled and `estimate_basis`, the programmes modelled with their funding
+weights (and any programme of a tenth or more of spending left out, with why), audit rounds (high/medium/low counts each round, what you changed), every source
 you could not access, any blind-rule incidents, and anything in the skill or templates that was
 unclear, missing or wrong (be specific: this is how the skill gets fixed).
