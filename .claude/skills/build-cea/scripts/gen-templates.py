@@ -123,11 +123,45 @@ def donor_rows(prefix, unit_label, staff, marginal=False):
                       "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says.", "percent", published=1))
     return rows
 
-def donor_tail(prefix, unit_label, marginal=False, dcs="cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"):
+UNITS = json.load(open(os.path.join(ROOT, "assumptions", "default.json")))["units"]
+
+def bridge(input, frm, to):
+    """The one sanctioned way an outcome in one unit enters a model reporting in another (docs/normalization.md
+    2.6, src/engine/bridges.ts bridgeFormula): times its unit's conversion, over the output unit's, so the output
+    unit's conversion cancels and the outcome moves with its own sliders only."""
+    tf, tt = UNITS[frm]["to_common"], UNITS[to]["to_common"]
+    return input + ("" if tf == "1" else f" * ({tf})") + ("" if tt == "1" else f" / ({tt})")
+
+PROXY_SECTION = {"id": "proxy", "title": "Programmes with no outcome data", "kind": "ours", "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."}
+BRIDGE_SECTION = {"id": "bridges", "title": "Other outcomes, in this model's unit", "kind": "ours", "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."}
+PREFIX_OF = {"uov": "uov", "daly": "dalys", "wellby": "wellbys", "ced": "ced", "tco2e": "tco2e"}
+
+def proxy_rows(unit):
+    rows = [
+        inp("proxy_program_spend", "proxy", "Spending on programmes with no outcome data at all, in the year modelled", 0, "observed",
+            "programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges.", "usd", source=src("audited financial statements")),
+        f("proxy_peer_result", "proxy", "Result per dollar of comparable programmes on the site (units of value per dollar you give)", "#givedirectly",
+          "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)", "small", "units of value / $"),
+        f("proxy_share", "proxy", "Share of the programme spending here that has no outcome data", "proxy_program_spend / (program_spend + proxy_program_spend)",
+          "The modelled programmes' result counts for the rest of the spending.", "percent"),
+        f("proxy_per_donor_dollar", "proxy", "Units of value per dollar you give, from programmes with no outcome data", "proxy_share * proxy_peer_result * $missing_data_discount",
+          "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model.", "small", "units of value / $"),
+    ]
+    if unit == "uov":
+        return rows, "proxy_per_donor_dollar"
+    b = f"proxy_in_{PREFIX_OF[unit]}"
+    rows.append(f(b, "proxy", f"The same, in this model's unit ({UNITS[unit]['short']})", bridge("proxy_per_donor_dollar", "uov", unit),
+                  "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it.", "small"))
+    return rows, b
+
+def donor_tail(prefix, unit_label, marginal=False, dcs="cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))", unit="uov", animal=False):
+    prows, term = proxy_rows(unit)
+    base = f"{prefix}_per_dollar * donor_cost_share" + (" * marginal_vs_past_average" if marginal else "") + " * (1 - proxy_share)"
     return [
         f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", dcs, None, "percent"),
-        f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", f"{prefix}_per_dollar * donor_cost_share" + (" * marginal_vs_past_average" if marginal else ""), None, "small", f"{unit_label} / $"),
-    ]
+        f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", base if animal else f"{base} + {term}",
+          "The modelled programmes' result for their share of the spending" + ("; the programmes with no outcome data join in the species step." if animal else ", plus the programmes with no outcome data (the proxy section)."), "small", f"{unit_label} / $"),
+    ] + prows
 
 NAMES = {"chicken": "chickens", "pig": "pigs", "fish": "fish", "shrimp": "shrimp"}
 
@@ -144,7 +178,20 @@ def species_rows(shares):
         rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {NAMES[sp]}",
                       f"sads_{sp} / @aim_sads.{sp}_{v} * if($rp_species_weights, @welfare_ranges.{sp}_vs_chicken, @aim_sads.{sp}_{v} / @aim_sads.chicken_2024)",
                       f"Ambitious Impact's species weight ({v} SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's.", "number"))
-    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, *_ in shares), None, "small", "chicken pain days / $"))
+    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, *_ in shares) + " + proxy_in_ced",
+                  "Every species, plus the programmes with no outcome data (the proxy section), already in chicken pain days.", "small", "chicken pain days / $"))
+    return rows
+
+def raw_species_rows(shares, base="pain_days_per_donor_dollar"):
+    """The species step for days of pain counted in the animal itself (no Ambitious Impact weight inside):
+    pain_days_<s> * @welfare_ranges.<s>_vs_chicken, the `raw` template of src/engine/invariants.ts."""
+    rows = []
+    for sp, share in shares:
+        rows.append(f(f"pain_days_{sp}", "species", f"Days of pain spared per dollar you give: {sp}s", f"{base} * {share}", None, "number"))
+        rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {sp}s", f"pain_days_{sp} * @welfare_ranges.{sp}_vs_chicken",
+                      f"Rethink Priorities' welfare range for the species relative to a chicken (@welfare_ranges.{sp}_vs_chicken). The formula is the standard one; don't edit it.", "number"))
+    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, _ in shares) + " + proxy_in_ced",
+                  "Every species, plus the programmes with no outcome data (the proxy section), already in chicken pain days.", "small", "chicken pain days / $"))
     return rows
 
 def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, species=None, sections=None, id=None, out=None):
@@ -153,6 +200,8 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, s
         out = {"row": "ced_per_donor_dollar", "unit": "ced", "label": "Chicken-equivalent pain days averted per dollar you give",
                "native": {"row": f"{prefix}_per_dollar", "unit": unit}, "species": [sp for sp, *_ in species]}
         rows = rows + species_rows(species)
+    secs = list(sections or SECTIONS)
+    secs.insert([x["id"] for x in secs].index("donor"), PROXY_SECTION)
     mid = id or f"template-{family}"
     return {
         "id": mid,
@@ -166,7 +215,7 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, s
         "summary": "TEMPLATE: " + summary,
         "source": {"publisher": "charityevals", "title": f"charityevals' estimate: {name}", "url": f"https://charityevals.org/{mid}", "published": D, "retrieved": D},
         "resources": [],
-        "sections": (sections or SECTIONS) + ([SPECIES_SECTION] if species else []),
+        "sections": secs + ([SPECIES_SECTION] if species else []),
         "rows": rows,
         "output": out,
     }
@@ -248,11 +297,16 @@ T["direct-health"] = model("direct-health", "direct health (deaths and illness a
         f("uov_income", "outcome", "Units of value from later-life income", "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption", None, "number", "units of value"),
         f("uov_morbidity", "outcome", "Units of value from illness averted", "(uov_deaths + uov_income) * morbidity_value_ratio",
           "A share of the deaths' and income's value, the base GiveWell's supplementary share has.", "number", "units of value"),
-        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity",
-          "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets.", "number", "units of value"),
+        inp("dalys_illness_averted_per_person", "effect", "Illness averted per person reached, in DALYs (before adjustments)", 0, "estimate",
+            "illness counted directly as healthy years: cases averted (or treated) per person × the GBD disability weight of the condition (@gbd_disability_weights where the site has it; add the weight there from the GBD 2019 disability-weights table if not) × the years it lasts, discounted at $discount_rate where it lasts more than a year. The route for hospital, hospice and other care in rich countries, where illness, not deaths, is most of the good. 0 when illness is in morbidity_value_ratio (GiveWell's share) instead: never both.", "small", "DALYs", src("GBD 2019 disability weights / trial")),
+        f("dalys_bridged", "bridges", "Illness averted, in DALYs", "people_reached * dalys_illness_averted_per_person * total_adj", None, "number", "DALYs"),
+        f("uov_from_daly", "bridges", "Illness averted, in units of value", bridge("dalys_bridged", "daly", "uov"),
+          "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to.", "number", "units of value"),
+        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
+          "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Units of value per dollar", "outcome_total / cost_total", None, "small", "units of value / $"),
     ] + donor_rows("uov", "Units of value", "goods") + donor_tail("uov", "Units of value"),
-    "what the charity does, where, " + BOTTOM, "unit_cost")
+    "what the charity does, where, " + BOTTOM, "unit_cost", sections=SECTIONS[:4] + [BRIDGE_SECTION] + SECTIONS[4:])
 
 # --- cash-income -----------------------------------------------------------------------------
 T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov", "uov", "Units of value", "global-health",
@@ -323,7 +377,7 @@ T["wellbeing"] = model("wellbeing", "mental health and wellbeing", "wellby", "we
           "The one row that puts units of value into WELLBYs; the WELLBY unit's conversion multiplies it back, so the deaths count exactly their shared value at any WELLBY rate.", "number", "WELLBYs"),
         f("outcome_total", "outcome", "WELLBYs", "people_reached * wellbys_per_person * household_multiplier * total_adj + wellbys_from_uov", None, "number", "WELLBYs"),
         f("wellbys_per_dollar", "outcome", "WELLBYs per dollar", "outcome_total / cost_total", None, "small", "WELLBYs / $"),
-    ] + donor_rows("wellbys", "WELLBYs", "services") + donor_tail("wellbys", "WELLBYs"),
+    ] + donor_rows("wellbys", "WELLBYs", "services") + donor_tail("wellbys", "WELLBYs", unit="wellby"),
     "what the charity does, where, " + BOTTOM, "unit_cost", sections=WB_SECTIONS)
 
 # --- corporate-campaign ----------------------------------------------------------------------
@@ -346,7 +400,7 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
             "TEMPLATE: the site's one rate of pledges kept: @sad_factors.commitment_fulfilment_cage_free for cage-free pledges, @sad_factors.commitment_fulfilment_broiler for broiler (BCC/ECC) pledges. A charity's own \"92% of pledges kept\" is the same Chicken Watch data (global, by commitment, among those due) the shared rate is built from: never in its place. Pig, fish and shrimp pledges have no shared record: a judgment input with a range and the tracker it rests on. Not applied to a count of hens already switched (an observed flow is delivered already).", "percent")) + [
         f("outcome_total", "outcome", "SADs averted", "animals_affected_per_year * discounted_years * sads_per_animal_year * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
-    ] + donor_rows("sads", "SADs averted", "advocacy", marginal=True) + donor_tail("sads", "SADs averted", marginal=True),
+    ] + donor_rows("sads", "SADs averted", "advocacy", marginal=True) + donor_tail("sads", "SADs averted", marginal=True, unit="ced", animal=True),
     "what the charity does, where, " + BOTTOM, "past_average", species=[("chicken", None, "2024", [])])
 
 # --- diet-change -----------------------------------------------------------------------------
@@ -365,7 +419,7 @@ T["diet-change"] = model("diet-change", "diet change and meal replacement", "sad
     ] + adj_rows() + [
         f("outcome_total", "outcome", "SADs averted", "meals_replaced_per_year * discounted_years * sads_per_meal * production_response * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
-    ] + donor_rows("sads", "SADs averted", "advocacy") + donor_tail("sads", "SADs averted"),
+    ] + donor_rows("sads", "SADs averted", "advocacy") + donor_tail("sads", "SADs averted", unit="ced", animal=True),
     "what the charity does, where, " + BOTTOM, "unit_cost", species=[(sp, f"@sad_factors.meal_sads_share_{sp}", "2024", []) for sp in ("fish", "chicken", "pig")])
 
 # --- policy-research-meta --------------------------------------------------------------------
@@ -444,9 +498,262 @@ T["policy-research-meta-climate"] = model("policy-research-meta", "climate polic
     ] + adj_rows(implementation=False) + [
         f("outcome_total", "outcome", "Tonnes of CO₂e averted", "downstream_value * total_adj", None, "number", "t CO₂e"),
         f("tco2e_per_dollar", "outcome", "Tonnes of CO₂e averted per dollar", "outcome_total / cost_total", None, "small", "t CO₂e / $"),
-    ] + donor_rows("tco2e", "Tonnes of CO₂e averted", "research", marginal=True) + donor_tail("tco2e", "Tonnes of CO₂e averted", marginal=True),
+    ] + donor_rows("tco2e", "Tonnes of CO₂e averted", "research", marginal=True) + donor_tail("tco2e", "Tonnes of CO₂e averted", marginal=True, unit="tco2e"),
     "what the charity does, the causal chain to the tonnes, " + BOTTOM, "past_average",
     sections=SECTIONS[:4] + [CONV_SECTION] + SECTIONS[4:], id="template-policy-research-meta-climate")
+
+# --- outcomes in several units (the new families) --------------------------------------------
+VPD = "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier"
+
+def age_rows(section, under5, what):
+    return [
+        inp("share_under5", section, f"Share of {what} that are of children under five", under5, "estimate",
+            "the age split of the deaths averted, from WHO Global Health Estimates or IHME GBD for the causes and places (a split another model could reuse goes into facts/death_ages.json and is read here).", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
+        inp("share_5_14_of_over5", section, f"Of {what} at five or older, share aged 5 to 14", {"low": 0.1, "best": 0.2, "high": 0.4}, "estimate",
+            "the rest of the age split, band by band, from the same source, so every death is valued at its own band (docs/normalization.md 2.7).", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
+        inp("share_15_49_of_over15", section, f"Of {what} at 15 or older, share aged 15 to 49", {"low": 0.3, "best": 0.5, "high": 0.7}, "estimate",
+            "the rest at 50 and over (GiveWell's 50-74 weight; for deaths mostly above 75, as in rich-country care, a mix of @moral_weights.givewell_age_75_79 … _85_plus by the deaths' ages instead).", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
+    ]
+
+def multi(inputs, direct, unmodelled=True, extra_outcome=()):
+    """Bridges for every unit a family counts in (`inputs`: unit -> (formula, label)), summed with the DALYs
+    counted directly into outcome_total, in DALYs."""
+    rows, parts = [], ["dalys_direct"]
+    for unit, (formula, label) in inputs.items():
+        p = PREFIX_OF[unit]
+        rows.append(f(f"{p}_bridged", "bridges", f"{label}, in {UNITS[unit]['label']} (before adjustments)", formula, None, "number", UNITS[unit]["short"]))
+        rows.append(f(f"dalys_from_{unit}", "bridges", f"{label}, in healthy years", bridge(f"{p}_bridged", unit, "daly"),
+                      f"The bridge from {UNITS[unit]['short']} into healthy years (docs/normalization.md 2.6): fixed, don't edit.", "number", "DALYs"))
+        parts.append(f"dalys_from_{unit}")
+    rows.append(f("dalys_direct", "outcome", "Healthy years counted directly (before adjustments)", direct, None, "number", "DALYs"))
+    rows += list(extra_outcome)
+    rows.append(f("outcome_total", "outcome", "Years of healthy life", f"({' + '.join(parts)}) * total_adj" + (" * (1 + unmodelled_benefits_adj)" if unmodelled else ""),
+                  "Every outcome, each in healthy years by its own unit's conversion, times the adjustments.", "number", "DALYs"))
+    rows.append(f("dalys_per_dollar", "outcome", "Years of healthy life per dollar", "outcome_total / cost_total", None, "small", "DALYs / $"))
+    return rows
+
+MULTI_SECTIONS = SECTIONS[:4] + [BRIDGE_SECTION] + SECTIONS[4:]
+LS = "life-satisfaction points (0-10) gained per person per year while it lasts: a WELLBY per point-year. A result in standard deviations of a wellbeing or depression scale is SDs × @wellby_factors.wellbys_per_sd_year (a formula row); PHQ-9 points ÷ @depression.phq9_sd first. Never converted into DALYs here (the bridge does it)."
+
+# --- domestic-services -----------------------------------------------------------------------
+T["domestic-services"] = model("domestic-services", "social services in rich countries", "daly", "dalys", "Years of healthy life", "global-health",
+    cost_rows() + [
+        inp("households_reached", "reach", "Households served in the year modelled", 10_000, "observed",
+            "households (or individuals, with household_size 1 and the reason) that received the service in the year the spending covers: food parcels, housing, mentoring, visits, gifts. Unique households, not visits; say how the charity counts.", "integer", source=src("charity annual report")),
+        f("household_size", "reach", "People per household", "@household_size.united_states",
+          "TEMPLATE: the site's household size for the country (@household_size.united_states, @household_size.united_kingdom; add the country's from its statistics office). 1, with the reason, for a service to one person (a mentee, a veteran, an older person living alone).", "number", "people"),
+        f("people_reached", "reach", "People reached", "households_reached * household_size", None, "integer"),
+        f("cost_per_person", "reach", "Cost per person reached", "cost_total / people_reached", "Context: compare with the charity's own figure and with other models of the family.", "usd"),
+        inp("ls_gain_per_person_year", "effect", "Life satisfaction gained per person per year while the effect lasts (points, 0-10)", {"low": 0.02, "best": 0.1, "high": 0.3}, "estimate",
+            LS + " From a trial or quasi-experiment of the same service (food insecurity, housing, mentoring, loneliness), else a published wellbeing valuation of the change it makes; 0, with the reason, when the evidence is only on income or health.", "number", "points", src("trial / wellbeing study")),
+        inp("ls_effect_years", "effect", "Years the wellbeing effect lasts", {"low": 0.5, "best": 1, "high": 3}, "estimate",
+            "from follow-ups; 1 for a year's service whose effect ends with it.", "number", "years", src("follow-up study")),
+        f("wellbys_per_person", "effect", "WELLBYs per person reached, discounted", "ls_gain_per_person_year * pv_annuity_due(1, $discount_rate, ls_effect_years)", "Point-years, discounted at the shared rate.", "number", "WELLBYs"),
+        inp("value_per_person", "effect", "Value received per person in the year (US$)", {"low": 200, "best": 400, "high": 800}, "estimate",
+            "what the goods or services are worth to the people who get them, per person per year, at what they would otherwise pay (food at retail, rent saved, benefits claimed), in US dollars (pounds × @fx.usd_per_gbp_<year>). Only the part not already counted as wellbeing or health above; 0 for services with no money value.", "usd", source=src("charity report / price data")),
+        f("consumption_mean", "effect", "Average consumption per person in the country (US$)", "@united_states.consumption_per_person_2024",
+          "TEMPLATE: the site's figure for the country (@united_states.consumption_per_person_2024, @united_kingdom.consumption_per_person_2024; add the country's from the World Bank, NE.CON.PRVT.CD ÷ SP.POP.TOTL), in the same dollars as value_per_person.", "usd"),
+        inp("recipients_consumption_share", "effect", "The people served's consumption per person, as a share of the average", {"low": 0.3, "best": 0.5, "high": 0.8}, "judgment",
+            "how far below the average the clients consume, per person: anchored on the poorest fifth's spending against the average (@united_states.ce_lowest_quintile_vs_all_2024, 0.45 per household, higher per person since their households are smaller) and on the service's eligibility rule (an income threshold, benefits receipt). Say the anchor.", "percent"),
+        f("baseline_consumption", "effect", "The people served's consumption per person (US$)", "consumption_mean * recipients_consumption_share", None, "usd"),
+        inp("income_years", "effect", "Years the help keeps its money value for the people served", {"low": 1, "best": 1, "high": 3}, "estimate",
+            "1 for a year's goods; longer for a gain that persists (a benefit claim won, a home kept), from follow-ups.", "number", "years", src("follow-up study")),
+        f("ln_gain_per_person", "effect", "ln(consumption) gain per person, discounted", "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
+          "The site's one log-income scale at the clients' own consumption: a dollar does far less for a US household than for one living on a few dollars a day.", "number"),
+        inp("dalys_averted_per_person", "effect", "Illness averted per person reached, in DALYs (before adjustments)", {"low": 0, "best": 0.002, "high": 0.01}, "estimate",
+            "health gained other than deaths: cases averted × the GBD disability weight (@gbd_disability_weights; add it if missing) × the years it lasts. 0, with the reason, when the evidence shows none.", "small", "DALYs", src("study / GBD 2019 disability weights")),
+        inp("deaths_averted_per_person", "effect", "Deaths averted per person reached (before adjustments)", {"low": 0, "best": 0.0001, "high": 0.0005}, "estimate",
+            "deaths the service averts (overdoses, exposure, suicides): the group's death rate × the relative reduction × the years, from the study. 0 with the reason when there is no evidence.", "small", source=src("study")),
+    ] + age_rows("effect", {"low": 0, "best": 0.05, "high": 0.2}, "the deaths averted") + [
+        f("value_per_death", "effect", "Value of a death averted (units of value)", VPD, "GiveWell's moral weights by the age band of each death, times your value of a life: the site's one value of a death.", "number", "units of value"),
+    ] + adj_rows(leverage=True, unmodelled=True) + multi({
+        "uov": ("people_reached * (ln_gain_per_person * $uov_per_ln_consumption + deaths_averted_per_person * value_per_death)", "Income gained and deaths averted"),
+        "wellby": ("people_reached * wellbys_per_person", "Life satisfaction gained"),
+    }, "people_reached * dalys_averted_per_person") + donor_rows("dalys", "Years of healthy life", "services") + donor_tail("dalys", "Years of healthy life", unit="daly"),
+    "what the charity does, where, which outcomes the evidence measures (wellbeing, income, health), " + BOTTOM, "unit_cost", sections=MULTI_SECTIONS)
+
+# --- humanitarian-relief ---------------------------------------------------------------------
+T["humanitarian-relief"] = model("humanitarian-relief", "humanitarian relief in crises", "daly", "dalys", "Years of healthy life", "global-health",
+    cost_rows() + [
+        inp("people_reached", "reach", "People reached in the year modelled", 100_000, "observed",
+            "people who received the response (food, water, shelter, health care) in the year the spending covers, unique people, from the charity's or the cluster's reporting; say which.", "integer", source=src("charity report / OCHA cluster data")),
+        f("cost_per_person", "reach", "Cost per person reached", "cost_total / people_reached", "Context: compare with the charity's own figure and with other responses.", "usd"),
+        inp("crisis_mortality_rate", "effect", "Death rate among the people reached during the crisis, without the response", {"low": 0.01, "best": 0.02, "high": 0.05}, "estimate",
+            "deaths per person-year (a crude mortality rate of 1 per 10,000 a day is 0.0365), from mortality surveys of the crisis (SMART, CDC, the Sphere emergency thresholds as a check), for the period before the response or a comparable unserved group.", "small", "deaths / person-year", src("SMART survey / mortality study")),
+        inp("baseline_mortality_rate", "effect", "Death rate in the same population before the crisis", {"low": 0.005, "best": 0.008, "high": 0.012}, "observed",
+            "deaths per person-year before the crisis (UN WPP, DHS, the country's facts file), so only excess deaths count.", "small", "deaths / person-year", src("UN WPP / DHS")),
+        inp("share_excess_averted", "effect", "Share of the excess deaths the response averts among the people reached", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
+            "how much of the crisis's excess mortality this kind of response removes for those it reaches, anchored on studies of the intervention (food aid, water and sanitation, measles campaigns, nutrition treatment) in emergencies; name the anchor.", "percent"),
+        inp("years_exposed", "effect", "Years of the crisis the response covers per person", {"low": 0.25, "best": 0.5, "high": 1}, "estimate",
+            "how long each person is protected by the response (months served ÷ 12).", "number", "years", src("charity report")),
+        f("deaths_averted_per_person", "effect", "Deaths averted per person reached (before adjustments)", "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
+          "Excess deaths over the years covered, times the share the response averts.", "small"),
+    ] + age_rows("effect", {"low": 0.3, "best": 0.45, "high": 0.6}, "the deaths averted") + [
+        f("value_per_death", "effect", "Value of a death averted (units of value)", VPD, "The site's one value of a death, by age band, times your value of a life.", "number", "units of value"),
+        inp("dalys_illness_per_person", "effect", "Illness averted per person reached, in DALYs (before adjustments)", {"low": 0, "best": 0.003, "high": 0.01}, "estimate",
+            "illness other than deaths (acute malnutrition, cholera, injuries treated): cases averted per person × the GBD disability weight (@gbd_disability_weights; add it if missing) × the years it lasts.", "small", "DALYs", src("study / GBD 2019 disability weights")),
+        inp("value_delivered_per_person", "effect", "Food, water and shelter delivered per person in the year (US$)", {"low": 20, "best": 50, "high": 120}, "estimate",
+            "what the goods cost on the local market per person, in US dollars, for the share of their value not counted as deaths and illness averted above (0 when the response is valued only through those).", "usd", source=src("charity report / market prices")),
+        f("ppp_factor", "effect", "PPP conversion (2017 international $ per US $)", "@kenya.ppp_factor_2017", "TEMPLATE: point at the country's fact (add facts/<country>.json from the World Bank).", "number"),
+        inp("baseline_consumption", "effect", "Consumption per person per year of the people reached (PPP)", {"low": 300, "best": 500, "high": 800}, "estimate",
+            "in 2017 international dollars, from a crisis needs assessment or the World Bank poverty data for the region.", "usd", source=src("needs assessment / World Bank PIP")),
+        f("ln_gain_per_person", "effect", "ln(consumption) gain per person", "ln(1 + value_delivered_per_person * ppp_factor / baseline_consumption)", "A year's goods on the site's one log-income scale.", "number"),
+    ] + adj_rows(leverage=True, unmodelled=True, counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome other responders wouldn't have delivered", {"low": 0.3, "best": 0.6, "high": 0.9}, "judgment",
+            "how much of this response would have been delivered anyway by the government, UN agencies or other NGOs had this charity not been there: from the response's funding coverage (OCHA FTS, the appeal's percentage funded) and gaps in the cluster's 4W data. Name the source.", "percent")) + multi({
+        "uov": ("people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)", "Deaths averted and goods delivered"),
+        "wellby": ("0", "Life satisfaction (not counted: deaths, illness and goods cover the response)"),
+    }, "people_reached * dalys_illness_per_person") + donor_rows("dalys", "Years of healthy life", "services") + donor_tail("dalys", "Years of healthy life", unit="daly"),
+    "what the charity does, in which crises, " + BOTTOM, "unit_cost", sections=MULTI_SECTIONS)
+
+# --- medical-research ------------------------------------------------------------------------
+T["medical-research"] = model("medical-research", "medical research and disease charities", "daly", "dalys", "Years of healthy life", "global-health",
+    cost_rows() + [
+        inp("disease_dalys_per_year", "reach", "Disease burden the funded work addresses, DALYs per year", 1_000_000, "observed",
+            "DALYs a year from the disease (or the stage, subtype or population the funded work is about) in the places its results would reach, from IHME GBD (GBD Results tool, the latest year), cited with the query.", "integer", "DALYs / year", src("IHME GBD Results")),
+        inp("share_burden_addressable", "effect", "Share of that burden the kind of advance funded could avert once adopted", {"low": 0.02, "best": 0.05, "high": 0.15}, "judgment",
+            "if the research succeeds, how much of the burden the result (a drug, test, guideline, screening change) averts at the uptake such results reach, anchored on past advances in the field (the burden averted by a comparable earlier result). Name the anchor.", "percent"),
+        inp("p_success", "effect", "Probability the funded portfolio changes practice", {"low": 0.01, "best": 0.05, "high": 0.15}, "judgment",
+            "the chance the work funded in the year leads to a change in practice, from a reference class (share of grants or trials in the field leading to a guideline change or approval; phase success rates for drug work). Name it.", "percent"),
+        inp("years_brought_forward", "effect", "Years the field's work brings the advance forward", {"low": 1, "best": 3, "high": 10}, "judgment",
+            "how much sooner the advance arrives because the field is funded at its current level, the credit then split by attribution_share_shared (this charity's share of the field's funding). Anchored on published research-returns estimates (the reference class in references/families/medical-research.md); name it.", "number", "years"),
+        inp("years_until_effect", "effect", "Years from the funding until the result is in practice", {"low": 5, "best": 10, "high": 20}, "estimate",
+            "typical lag from funding to practice in the field (the 17 years often cited for translation; shorter for guideline and screening work), discounted at the shared rate.", "number", "years", src("translation-lag study")),
+        f("wait_discount", "effect", "Discount for the wait until the result is in practice", "(1 + $discount_rate) ^ -years_until_effect", "The wait discounted at the shared rate.", "percent"),
+        f("discounted_years", "effect", "Discounted years brought forward", "pv_annuity_due(1, $discount_rate, years_brought_forward) * wait_discount", None, "number", "years"),
+        f("research_dalys", "effect", "Expected DALYs averted by the research (before adjustments)", "disease_dalys_per_year * share_burden_addressable * p_success * discounted_years", None, "number", "DALYs"),
+        inp("adv_people_affected_per_year", "effect", "Advocacy: people per year the policy won or pressed would affect", 0, "observed",
+            "people covered by the screening, funding or prevention policy the charity's advocacy won or pressed in the year; 0, with the reason, without advocacy.", "integer", source=src("government statistics / charity report")),
+        inp("adv_dalys_per_person_year", "effect", "Advocacy: DALYs averted per person affected per year", {"low": 0.0001, "best": 0.001, "high": 0.005}, "estimate",
+            "the policy's health effect per person-year, from the evidence on that policy.", "small", source=src("study")),
+        inp("adv_p_success", "effect", "Advocacy: probability the policy changes because of this work", {"low": 0.02, "best": 0.1, "high": 0.3}, "judgment",
+            "from a reference class of similar campaigns; for a policy already won, the charity's share of the cause of the win.", "percent"),
+        f("adv_years_of_impact", "effect", "Advocacy: years a won reform counts", "$win_years_counted", "The site's one answer (docs/normalization.md 2.9).", "number", "years"),
+        inp("adv_years_until_effect", "effect", "Advocacy: years from the win until the policy takes effect", {"low": 0, "best": 1, "high": 3}, "judgment",
+            "from the policy's own start date; discounted at the shared rate.", "number", "years"),
+        f("adv_discounted_years", "effect", "Advocacy: discounted years of impact", "pv_annuity_due(1, $discount_rate, adv_years_of_impact) * (1 + $discount_rate) ^ -adv_years_until_effect", None, "number", "years"),
+        f("advocacy_dalys", "effect", "Expected DALYs averted by advocacy (before adjustments)", "adv_people_affected_per_year * adv_dalys_per_person_year * adv_p_success * adv_discounted_years", None, "number", "DALYs"),
+    ] + adj_rows(implementation=False, unmodelled=True) + multi({
+        "uov": ("0", "Value in units of value (none by default: the burden is counted in DALYs)"),
+        "wellby": ("0", "Life satisfaction (patients' wellbeing gains, where evidence is in WELLBYs)"),
+    }, "research_dalys + advocacy_dalys") + donor_rows("dalys", "Years of healthy life", "research", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
+    "what the charity funds, the disease and the chain from funding to practice, " + BOTTOM, "past_average", sections=MULTI_SECTIONS)
+
+# --- companion-animals -----------------------------------------------------------------------
+T["companion-animals"] = model("companion-animals", "companion animals", "ced", "pain_days", "Days of pain spared", "animal-welfare",
+    cost_rows() + [
+        inp("animals_helped", "reach", "Animals rehomed, rescued or treated in the year modelled", 10_000, "observed",
+            "dogs and cats whose lives the care changes in the year the spending covers: rehomed, taken in from cruelty or the street, treated. Unique animals, from the charity's annual report.", "integer", source=src("charity annual report")),
+        inp("suffering_share_avoided", "effect", "Suffering averted per day of the animal's better life, in days of disabling pain", {"low": 0.01, "best": 0.04, "high": 0.1}, "judgment",
+            "how much less the animal suffers each day after the care than it would have (on the street, in a cruel home, untreated), in disabling-pain-equivalent days per day: Ambitious Impact's pain scale (disabling 1, hurtful about 0.1, annoying about 0.01 of a day of disabling pain) applied to the hours of each pain the care removes, anchored on veterinary welfare assessments. Name the anchor. A death the care averts or causes counts only through the days of suffering, as in every animal model.", "percent"),
+        inp("years_better_life", "effect", "Years the animal's better life lasts", {"low": 1, "best": 4, "high": 8}, "estimate",
+            "the animal's remaining years under the better conditions: remaining life expectancy at the age helped (dogs about 12 years in all, cats about 14; veterinary cohort studies), times the share that stays in the home.", "number", "years", src("veterinary cohort study")),
+        f("pain_days_per_animal", "effect", "Days of disabling pain spared per animal helped, discounted", "suffering_share_avoided * 365 * pv_annuity_due(1, $discount_rate, years_better_life)", "Every future year discounted at the shared rate.", "number", "days"),
+        inp("neuters", "reach", "Neuterings of owned or free-roaming animals in the year", 5_000, "observed",
+            "neuterings the charity paid for or performed in the year; 0, with the reason, without a neutering programme.", "integer", source=src("charity annual report")),
+        inp("births_averted_per_neuter", "effect", "Unowned animals' births averted per neutering", {"low": 0.5, "best": 2, "high": 5}, "estimate",
+            "litters averted over the animal's breeding years × kittens or puppies per litter × the share that would be born unowned, net of population rebound (free-roaming population models). 0 for animals that would not have bred.", "number", source=src("population model study")),
+        inp("pain_days_per_unowned_life", "effect", "Days of disabling pain in the life of an unowned animal that isn't born", {"low": 10, "best": 40, "high": 120}, "judgment",
+            "suffering in a typical unowned dog's or cat's life (disease, injury, starvation, early death), on the same pain scale, net of its good days only where the evidence measures them; anchored on free-roaming welfare studies. Name the anchor.", "number", "days"),
+        f("neuter_pain_days", "effect", "Days of pain spared by neutering (before adjustments)", "neuters * births_averted_per_neuter * pain_days_per_unowned_life * (1 + $discount_rate) ^ -1",
+          "The births come about a year later, discounted at the shared rate.", "number", "days"),
+    ] + adj_rows(counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.3, "best": 0.6, "high": 0.9}, "judgment",
+            "the share of the animals that would not have found a home or care anyway (other shelters, owners, councils): from local intake and rehoming rates. Name the source.", "percent")) + [
+        f("outcome_total", "outcome", "Days of disabling pain spared", "(animals_helped * pain_days_per_animal + neuter_pain_days) * total_adj", None, "number", "days"),
+        f("pain_days_per_dollar", "outcome", "Days of pain spared per dollar", "outcome_total / cost_total", None, "small", "days / $"),
+        inp("share_dog", "species", "Share of the days spared that are dogs'", {"low": 0.3, "best": 0.5, "high": 0.7}, "estimate",
+            "dogs' share of the animals helped, weighted by days spared, from the charity's intake figures; the rest are cats.", "percent", source=src("charity annual report")),
+        f("share_cat", "species", "Share of the days spared that are cats'", "1 - share_dog", None, "percent"),
+    ] + donor_rows("pain_days", "Days of pain spared", "services") + donor_tail("pain_days", "Days of pain spared", unit="ced", animal=True),
+    "what the charity does, where, " + BOTTOM, "unit_cost")
+T["companion-animals"]["rows"] += raw_species_rows([("dog", "share_dog"), ("cat", "share_cat")])
+T["companion-animals"]["sections"].append(SPECIES_SECTION)
+T["companion-animals"]["output"] = {"row": "ced_per_donor_dollar", "unit": "ced", "label": "Chicken-equivalent pain days averted per dollar you give", "native": {"row": "pain_days_per_dollar", "unit": "pain days"}, "species": ["dog", "cat"]}
+
+# --- conservation ----------------------------------------------------------------------------
+T["conservation"] = model("conservation", "conservation of land, water and species", "daly", "dalys", "Years of healthy life", "climate",
+    cost_rows() + [
+        inp("hectares_protected", "reach", "Hectares newly protected or restored in the year modelled", 10_000, "observed",
+            "land or water the year's spending protected, bought, restored or brought under management (not the stock under management from earlier years), from the charity's report or the protected-area database.", "integer", "ha", src("charity report / WDPA")),
+        inp("years_protected", "effect", "Years the protection lasts", {"low": 10, "best": 30, "high": 100}, "estimate",
+            "how long the land stays protected (an easement in perpetuity is long, a management grant short), from the legal form or reference-class studies of protected-area downgrading.", "number", "years", src("PADDD / legal form")),
+        f("protection_years", "effect", "Years of protection, discounted", "pv_annuity_due(1, $discount_rate, years_protected) * (1 + $discount_rate) ^ -years_until_avoided", "Every year of protection, and the wait before it, discounted at the shared rate.", "number", "years"),
+        inp("tco2e_per_hectare_year", "effect", "Climate: tonnes of CO₂e a year a protected hectare keeps out of the air", {"low": 1, "best": 3, "high": 10}, "estimate",
+            "avoided emissions (the baseline loss rate × carbon stock per hectare) plus sequestration, per hectare per year, from a remote-sensing or verified-carbon study of comparable sites, net of leakage only if the study nets it (else in unmodelled_benefits_adj).", "number", "t CO₂e / ha / year", src("remote-sensing / carbon study")),
+        inp("years_until_avoided", "effect", "Climate: years until the tonnes are avoided", {"low": 0, "best": 1, "high": 5}, "judgment",
+            "the wait from the spending to the protection taking effect; discounted at the shared rate, also for the other branches' benefits.", "number", "years"),
+        inp("fuel_share", "bridges", "Share of these tonnes from burning less fossil fuel near people", 0, "estimate",
+            "0 for land and ocean carbon, which carries no smoke; the climate skeleton's row (docs/normalization.md 2.5).", "percent", source=src("emissions inventory")),
+        inp("fuel_smoke_factor", "bridges", "Air-pollution deaths per tonne of this fuel, relative to the fossil-fuel average", {"low": 0.02, "best": 0.1, "high": 0.3}, "estimate",
+            "only where fuel_share is above 0: the fuel's smoke per tonne against the average behind the shared rate.", "number", source=src("deaths per TWh study")),
+        f("air_pollution_weight", "bridges", "Air pollution these tonnes cut, relative to an average fossil-fuel tonne", "fuel_share * fuel_smoke_factor", "Read by the tonnes' bridge, as by the tco2e unit's conversion.", "number"),
+        f("extra_deaths_per_tco2e", "bridges", "Air-pollution deaths averted per tonne, counted directly (none here)", "0",
+          "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice.", "small"),
+        inp("health_people", "reach", "Health: people whose air, water, food or disease exposure the protection changes", 0, "estimate",
+            "people downstream or downwind of the protected area, or living with it, whose health the evidence shows it changes (water quality, fire smoke, malaria, zoonotic spillover); 0, with the reason, where there is no evidence.", "integer", source=src("study")),
+        inp("dalys_per_person_year", "effect", "Health: DALYs averted per person per year", {"low": 0.0001, "best": 0.0005, "high": 0.002}, "estimate",
+            "from the study of the exposure the protection changes, × the GBD disability weight where it is illness (@gbd_disability_weights).", "small", "DALYs", src("study")),
+        inp("livelihood_people", "reach", "Livelihoods: people whose income or food security the protection changes", 0, "estimate",
+            "fishers, farmers, forest users; 0 where there is no evidence. Lost access is a negative effect below.", "integer", source=src("study")),
+        inp("ln_gain_per_person_year", "effect", "Livelihoods: ln(consumption) gain per person per year", {"low": -0.02, "best": 0.02, "high": 0.06}, "estimate",
+            "ln(1 + income gain / baseline consumption) per year, from impact evaluations of comparable protected areas or fisheries reserves (negative where access is lost).", "small", "ln / year", src("impact evaluation")),
+        inp("nature_people", "reach", "Wellbeing: people who visit or live with the protected nature", 0, "estimate",
+            "visitors or residents, from park counts; 0 where there is no evidence.", "integer", source=src("visitor counts")),
+        inp("ls_gain_per_person_year", "effect", "Wellbeing: life satisfaction gained per person per year (points, 0-10)", {"low": 0, "best": 0.01, "high": 0.05}, "estimate",
+            LS + " From studies of green or blue space and life satisfaction, net of where people would otherwise go.", "number", "points", src("wellbeing study")),
+        inp("wild_animal_years", "reach", "Wild animals: animal-years whose welfare the protection changes", 0, "estimate",
+            "only where the charity claims an effect on wild animals' welfare (not species counts): animal-years affected per year; 0 otherwise, with that reason.", "integer", source=src("population study")),
+        inp("wild_pain_days_per_animal_year", "effect", "Wild animals: days of disabling pain spared per animal-year (negative if more)", {"low": -5, "best": 0, "high": 5}, "judgment",
+            "on Ambitious Impact's pain scale, from welfare biology for the species; more animals living is not by itself a gain. Name the anchor; the sign is often unknown, so the range spans 0.", "number", "days"),
+        f("pain_days_fish", "bridges", "Wild animals: days of pain spared (before adjustments)", "wild_animal_years * wild_pain_days_per_animal_year * protection_years", None, "number", "days"),
+        f("ced_fish", "bridges", "Wild animals: chicken-equivalent pain days", "pain_days_fish * @welfare_ranges.fish_vs_chicken",
+          "TEMPLATE: the species step (docs/normalization.md 2.4) with the species' Rethink Priorities welfare range: rename _fish to the species (@welfare_ranges.<s>_vs_chicken; add it if missing, a ranged judgment where Rethink has none).", "number", "chicken pain days"),
+        inp("catastrophe_deaths", "effect", "Catastrophic risk: deaths if the catastrophe happens", {"low": 1e5, "best": 1e6, "high": 2e7}, "estimate",
+            "deaths in the catastrophe the work lowers the risk of (a pandemic from wildlife spillover, a collapse of a fishery many depend on), from published scenario estimates; 0 where the charity claims no such effect.", "integer", source=src("scenario study")),
+        inp("annual_risk_reduction", "effect", "Catastrophic risk: fall in the catastrophe's yearly probability from the year's work", {"low": 0, "best": 1e-7, "high": 1e-6}, "judgment",
+            "absolute, per year of protection (from 1-in-a-hundred to slightly less), anchored on published risk estimates and the share of the risk's drivers the work touches. Usually the least grounded number in the model: a wide range, and the summary says so.", "small"),
+    ] + age_rows("effect", {"low": 0.05, "best": 0.1, "high": 0.2}, "the catastrophe's deaths") + [
+        f("catastrophe_value_per_death", "effect", "Catastrophic risk: value of a death averted (units of value)", VPD,
+          "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number or for future generations (the site's value judgments are its sliders).", "number", "units of value"),
+    ] + adj_rows(leverage=True, unmodelled=True, counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.2, "best": 0.5, "high": 0.8}, "judgment",
+            "the share of the land that would have been lost without the protection (the baseline loss rate over the years protected, from matched comparisons of protected and unprotected sites), and that no one else would have protected. Name the study.", "percent")) + multi({
+        "uov": ("livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death", "Livelihoods and catastrophic risk"),
+        "wellby": ("nature_people * ls_gain_per_person_year * protection_years", "Wellbeing from nature"),
+        "tco2e": ("hectares_protected * tco2e_per_hectare_year * protection_years", "Climate"),
+        "ced": ("ced_fish", "Wild animals"),
+    }, "health_people * dalys_per_person_year * protection_years") + donor_rows("dalys", "Years of healthy life", "advocacy") + donor_tail("dalys", "Years of healthy life", unit="daly"),
+    "what the charity protects, where, which branches the evidence supports (climate, health, livelihoods, wellbeing, wild animals, catastrophic risk), " + BOTTOM, "unit_cost", sections=MULTI_SECTIONS)
+
+# --- rights-advocacy -------------------------------------------------------------------------
+T["rights-advocacy"] = model("rights-advocacy", "rights and advocacy", "daly", "dalys", "Years of healthy life", "global-health",
+    cost_rows() + [
+        inp("people_affected_per_year", "reach", "People per year the laws, rulings or policies won or pressed affect", 100_000, "observed",
+            "people covered by the year's wins (a ruling's class, a law's population, a policy's caseload), from the ruling or official statistics; count everyone covered, the chance of the win in p_success.", "integer", source=src("ruling / government statistics")),
+        inp("ls_gain_per_person_year", "effect", "Wellbeing gained per person affected per year (points, 0-10)", {"low": 0.005, "best": 0.02, "high": 0.08}, "estimate",
+            LS + " From studies of the right's effect on those it covers (discrimination, detention, legal status).", "number", "points", src("study")),
+        inp("dalys_per_person_year", "effect", "Health gained per person affected per year (DALYs)", {"low": 0, "best": 0.0005, "high": 0.002}, "estimate",
+            "illness averted (GBD disability weights, @gbd_disability_weights) where the right changes health (access to care, violence, detention conditions); 0 with the reason otherwise.", "small", "DALYs", src("study")),
+        inp("ln_gain_per_person_year", "effect", "Income gained per person affected per year, ln(consumption)", {"low": 0, "best": 0.01, "high": 0.04}, "estimate",
+            "ln(1 + income gain / consumption) where the right changes income (work permits, benefits, wages); 0 otherwise.", "small", "ln / year", src("study")),
+        inp("p_success", "effect", "Probability the win happens because of this work", {"low": 0.02, "best": 0.1, "high": 0.3}, "judgment",
+            "for pending cases and campaigns, the chance of winning from a reference class (the organisation's or the court's win rate in similar cases); for wins already in the year, the charity's share of the cause of the win (it led the case, joined, filed a brief). Name the reference class.", "percent"),
+        f("years_of_impact", "effect", "Years a won reform counts before it would have come anyway", "$win_years_counted", "The site's one answer (docs/normalization.md 2.9).", "number", "years"),
+        inp("years_until_effect", "effect", "Years from the win until it takes effect", {"low": 0, "best": 1, "high": 3}, "judgment",
+            "from the ruling's or law's own dates; discounted at the shared rate.", "number", "years"),
+        f("wait_discount", "effect", "Discount for the wait until the win takes effect", "(1 + $discount_rate) ^ -years_until_effect", "The wait discounted at the shared rate.", "percent"),
+        f("discounted_years", "effect", "Discounted years of impact", "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount", None, "number", "years"),
+        inp("released_people", "reach", "People released, cleared or kept out of detention in the year", 0, "observed",
+            "people the charity's casework freed or kept free in the year (0, with the reason, without casework), from its case records.", "integer", source=src("charity case records")),
+        inp("released_years", "effect", "Years of freedom gained per person released", {"low": 0.5, "best": 2, "high": 8}, "estimate",
+            "the sentence or detention avoided (time left to serve, expected detention), against what would have happened with other counsel (the counterfactual in counterfactual_adj).", "number", "years", src("case records / sentencing data")),
+        inp("released_ls_gain_per_year", "effect", "Wellbeing gained per year of freedom (points, 0-10)", {"low": 0.5, "best": 1, "high": 2}, "estimate",
+            "the life-satisfaction gap between detention and release, from surveys of prisoners or detainees and the released.", "number", "points", src("wellbeing study")),
+        f("released_value", "effect", "WELLBYs per person released, discounted", "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, released_years)", "The person's own years, discounted at the shared rate (a release isn't a won reform).", "number", "WELLBYs"),
+    ] + adj_rows(implementation=True, implementation_row=inp("implementation_adj", "adjustments", "Share of the win that is enforced", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",
+            "how much of a law or ruling is applied in practice (compliance, enforcement), from studies of similar wins.", "percent"), unmodelled=True) + multi({
+        "uov": ("people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years", "Income gained"),
+        "wellby": ("people_affected_per_year * ls_gain_per_person_year * p_success * discounted_years + released_people * released_value", "Wellbeing gained"),
+    }, "people_affected_per_year * dalys_per_person_year * p_success * discounted_years") + donor_rows("dalys", "Years of healthy life", "advocacy", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
+    "what the charity does, its theory of change from the wins to people's lives, " + BOTTOM, "past_average", sections=MULTI_SECTIONS)
 
 os.makedirs(OUT, exist_ok=True)
 for name, m in T.items():

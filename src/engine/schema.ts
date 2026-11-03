@@ -99,7 +99,7 @@ export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety", "cl
 
 /** Intervention families for charityevals' own models (the build-cea skill). Each prescribes a row
  * structure, so models of the same family can be compared row by row. */
-export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta"]);
+export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta", "domestic-services", "humanitarian-relief", "medical-research", "companion-animals", "conservation", "rights-advocacy"]);
 
 /** `kind`: whose rows these are. evaluator (the default): rows that reproduce the evaluator's sheet.
  * ours: charityevals' steps after the evaluator's bottom line (credit, bridges, the species step), the

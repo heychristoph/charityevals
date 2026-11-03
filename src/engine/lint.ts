@@ -6,6 +6,7 @@
 import type { Node } from "./expr";
 import { assumptionValues, compute, hasRange, type Library, type ResolvedModel } from "./model";
 import { rowsFeeding } from "./sensitivity";
+import { bridgesOf } from "./bridges";
 import { CLIMATE_REQUIRED, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
 
 /** Does a row read `ref` ($assumption, or @fact; a trailing `.` or `_` is a prefix), itself or
@@ -133,6 +134,19 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   const dcs = m.byId.get("donor_cost_share");
   if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
     add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
+
+  // Bridges (docs/normalization.md 2.6): a row named as one is the exact bridge formula, so each outcome
+  // reaches the headline through its own unit's shared conversion.
+  const bridges = new Set(bridgesOf(lib, m).map((b) => b.row));
+  for (const r of m.rows)
+    if (/^(uov|dalys|wellbys|ced|tco2e)_from_(uov|daly|wellby|ced|tco2e)$|^proxy_in_/.test(r.id) && r.id !== "wellbys_from_uov" && !bridges.has(r.id))
+      add("high", "bridge", `${r.id} is named as a bridge but isn't one`, "Write it as <input> * (<to_common of the input's unit>) / (<to_common of the output unit>), the template's row word for word, in an ours section.", r.id);
+  // The proxy branch (2.12): comparable programmes' result, read live, counted less by the shared slider.
+  const proxy = m.byId.get("proxy_peer_result");
+  if (proxy && !(proxy.modelDeps ?? []).length)
+    add("high", "proxy", "proxy_peer_result doesn't read the comparable programmes' models live", "Set proxy_peer_result = median(#peer-a, #peer-b, …) (or #nearest-model): the result per dollar of the same kind of work on the site, never a typed number.", "proxy_peer_result");
+  if (output && m.byId.has("proxy_per_donor_dollar") && !path.has("proxy_per_donor_dollar"))
+    add("high", "unapplied", "proxy_per_donor_dollar never reaches the bottom line", "Add it (through the template's bridge where the unit isn't uov) to the per-donor-dollar row, and multiply the modelled part by (1 - proxy_share).", "proxy_per_donor_dollar");
 
   // When the estimate was made: the estimate-age slider counts from it (docs/normalization.md 2.11).
   const s = m.source;
