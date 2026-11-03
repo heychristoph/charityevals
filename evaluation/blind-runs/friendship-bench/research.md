@@ -1,57 +1,75 @@
-# Friendship Bench CEA: research log (build-cea, blind run)
+# Research log: Friendship Bench (blind build-cea run), 2026-11-03
 
-All retrieved 2026-10-28 unless noted.
+All retrieved 2026-11-03 unless stated.
 
-## Blind-rule notes
-- FB homepage (https://www.friendshipbenchzimbabwe.org) shows a badge linking to happierlivesinstitute.org/charities/friendship-bench-zimbabwe/ ("Top Charities Badge 2025"). Link NOT followed. No CE figure was visible.
-- facts/wellby_factors.json cites an HLI spreadsheet as source (shared fact, allowed). URL not opened.
-- Searches used blocked_domains for HLI, GiveWell, Founders Pledge, EA Forum, charityevals. No search snippet showed an evaluator CE figure for FB.
-- KBF Africa Prize page and news echo "$13–16.50 per client" — attributed to FB's own estimate (prize announcement), not an evaluator. Used as a cost cross-check.
+## Charity's own sources
+- https://www.friendshipbenchzimbabwe.org (home): "1,290,861 clients seen", "3,000 CHWs trained" (last updated Oct 2026). No financials. The home page links an HLI charity listing: NOT followed (blind list).
+- https://www.friendshipbenchzimbabwe.org/impactreports : links annual reports 2020-2025 and quarterly reports (Google Drive). No audited financial statements listed.
+- Annual report 2024 (Drive id 1OdRIWIcOX7ZIxq_zaIWRB2WsxQ0GQrgF), downloaded via drive.google.com/uc?export=download, text with pypdf:
+  - p.6 "TOTAL NUMBER OF CLIENTS SEEN BY FRIENDSHIP BENCH IN 2024" 295,770 (285,900 face-to-face incl. implementing partners; 9,870 online WhatsApp).
+  - p.9 programme matrix 2024: "# of Clients seen ... 295,770"; "# of Follow-up sessions ... 47,073"; CKT groups created 280; partnerships column 7,382 clients.
+  - p.7 "The Quality and Customer Satisfaction team conducted follow ups with a 10% random sample of the clients seen at 6 weeks"; 82% decrease in SSQ-14 symptoms (pre-post, no control).
+  - p.7 "Total number of community health workers providing support 2773".
+  - p.3 auditors: VISTA Chartered Accountants (Harare). Statements not published.
+  - p.10: handover to MoHCC launched Oct/Nov 2024; national rollout by 2028.
+  - p.11: Global Fund HIV/MH integration (93 cadres, 292 clients 2024); WHO FRIENDZ (6,198 clients 2024); p.12 USAID DIV ended 2025; p.13 OPHID RISE (3,797 health workers).
+  - p.20 "Over the next 2 years (January 2024 -December 2025), we need to raise US$8 million: $4.9M (60%) to [programmes] ... $3.1M (40%) to Marketing, finance, HR, administration, fundraising costs which underpin programme delivery." (Same in AR 2023 p. near end.)
+  - p.19 "we reached nearly 300,000 individuals"; individual funders listed.
+- Annual report 2025 (Drive id 1jcoxqvNNTnkIsByD-dSK-u0gnaQzUYCQ):
+  - p.10 "TOTAL NUMBER OF CLIENTS SEEN BY FRIENDSHIP BENCH IN 2025" 336,215 (328,876 face-to-face; 7,339 online).
+  - p.11 follow-up sessions 2025: 3,284 (definition changed vs Q1/Q2 2025 reports, which give 82,245 and 81,295 "follow-up sessions" per quarter).
+  - p.12 "From a target cohort of 13,864 clients enrolled between January and December 2025, ... completed six-weeks follow-up contacts with 5,686 individuals, achieving a 41% follow-up contact rate. Complete clinical data (baseline and follow-up SSQ14) were captured for 3,009 clients."
+  - p.13 recovery 85.2% (SSQ14<=7 at 6 weeks among 2,990 symptomatic), pre-post only; "reliability issues missed counselling sessions and incomplete follow-ups by the lay health workers are the primary drivers of suboptimal satisfaction."
+  - p.11 "we serve 64% of women".
+  - p.20 2026 need "US$4.1 million ... delivering mental health support to 380 000 people".
+- Q1 2025 report p.~7: quotes the 2025 World Happiness Report with an evaluator's WELLBYs-per-$1,000 figure for Friendship Bench. BLIND INCIDENT: seen in text extraction while grepping; not used.
+- Q1 2026 / Q2 2026 reports: 88,436 and 86,832 clients seen; 2,205 / 2,726 follow-up sessions.
 
-## Money
-1. ProPublica Nonprofit Explorer, Friendship Bench Inc (US, EIN 85-3440548): https://projects.propublica.org/nonprofits/organizations/853440548
-   - FY2024 (Dec): total revenue $1,278,819; total expenses $3,103,651; exec comp $0; other salaries $0.
-   - FY2023: revenue $5,089,923; expenses $2,797,049.
-   - XML download (download-xml?object_id=202543189349315039) returned a ProPublica "Security Check" page -> not bypassed. Full-filing page renders "Loading..." to WebFetch. So no Part IX / Schedule F detail. US entity pays no salaries -> its expenses are presumably grants (to FB Zimbabwe and global work): treat as a FLOOR for Zimbabwe spending, not the total (FB Zimbabwe also had USAID, WHO, research grants).
-2. No audited statements for FB Zimbabwe (PVO 12/21) are public. 2025 AR names auditors: "Vista Chartered Accountants (Zimbabwe)" (p.3).
-3. FB Annual Report 2024 (Drive id 1OdRIWIcOX7ZIxq_zaIWRB2WsxQ0GQrgF, via https://www.friendshipbenchzimbabwe.org/impactreports), p.20: "Over the next 2 years (January 2024 -December 2025), we need to raise US$8 million: $4.9M (60%) to [programme] ... $3.1M (40%) to Marketing, finance, HR, administration, fundraising costs which underpin programme delivery." -> ~$4M/yr budget, 60/40 programme/support. (Same text in AR2023 p. last, and Global Pitch Deck p.12: "Expanding our reach to serve an additional 500K clients" -> $16/client planned.)
-4. FB Annual Report 2025 (Drive id 1jcoxqvNNTnkIsByD-dSK-u0gnaQzUYCQ) p.20: "Over the next 12 months (January - December 2026), we need to raise US$4.1 million to ... delivering mental health support to 380 000 people." -> $10.8/person planned 2026.
-5. KBF Africa Prize laureate page https://kbfafricaprize.org/laureate/friendship-bench-zimbabwe/ : "Delivered at an estimated cost of $13–16.50 per client"; "In 2025 alone, the programme reached over 334,000 people".
-6. mhinnovation.net FB page (403 to WebFetch; search snippet only): "2019 to 2022 Total expenditure $3,219,100/Total reach for period 183,395 = cost of innovation USD 17.55". Not used as an input (unverified snippet), context only.
-7. Economic threshold analysis (PMC9046737, https://pmc.ncbi.nlm.nih.gov/articles/PMC9046737/): 2019 USD; fixed programme cost $170,419/yr, 12,364 patients (2020), variable cost $3.37/service user; ICER $191 per YLD averted. Implies ~$14–17/patient (WebFetch model's calculation). Context only (partial scale, 2020).
+## Financial filings (US affiliate, The Friendship Bench Inc, EIN 85-3440548)
+- ProPublica pages behind a bot check for XML/PDF; not bypassed. Summary page (projects.propublica.org/nonprofits/organizations/853440548): FY2024 revenue $1,278,819, expenses $3,103,651.
+- IRS e-file XML from the IRS's own bulk archive (apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11B.zip, object 202543189349315039, extracted by range request):
+  - TotalEmployeeCnt 0; CYTotalExpensesAmt 3103651; CYGrantsAndSimilarPaidAmt 2810000; TotalProgramServiceExpensesAmt 3030926; M&G 63225; fundraising 9500.
+  - Schedule F: RegionTxt ZIMBABWE, PurposeOfGrantTxt PROGRAM SERVICES, CashGrantAmt 2735000.
+  - Schedule I: London School of Hygiene and Tropical Medicine (US address) $75,000.
+  - FeesForServicesOther 258,253 (program 209,378).
+  - IndependentAuditFinclStmtInd false.
+- FY2023 (object 202443189349309314, 2024_TEOS_XML_11A): expenses 2,797,049; Schedule F Zimbabwe 2,640,200.
+- No 2025 990 in the IRS index (index_2026.csv) as of today.
+- CauseIQ: grants received 2024: Rippleworks $2,000,000 and $500,000; National Philanthropic Trust $1,500,000.
+- Lever for Change directory: annual operating budget "$1.1 to 5 Million" (search snippet).
+- africa.com KBF prize article: "Costing just $13-16.50 per client served" (unattributed).
+- Search snippet showed an HLI cost-per-person figure for Friendship Bench: NOT used (blind incident, snippet only).
 
-## Reach
-- AR2023 p.6: "220766 TOTAL NUMBER OF CLIENTS SEEN BY FRIENDSHIP BENCH IN 2023".
-- AR2024 p.6: "295770 TOTAL NUMBER OF CLIENTS SEEN BY FRIENDSHIP BENCH IN 2024"; face-to-face 285,900; online WhatsApp 9,870. Province table p.? "# of Clients seen ... 295,770"; "# of Follow-up sessions ... 47,073".
-- AR2025 p.10: "336 215 TOTAL NUMBER OF CLIENTS SEEN BY FRIENDSHIP BENCH IN 2025"; face-to-face 328,876; online 7,339. p.6: "In 2025 alone, 334,653 clients received sessions on the bench". p.11 table: Clients seen 336,215; follow-up sessions 3,284.
-- AR2024 p.7: "The Quality and Customer Satisfaction team conducted follow ups with a 10% random sample of the clients seen at 6 weeks"; 82% showed significant decrease on SSQ-14.
-- AR2023: "17463 clients were randomly sampled from the 2023 reach, of those sampled, the team managed to call12373 clients, of those contacted, only 3326 clients completed the 6 weeks follow up survey and the SSQ-14."
-- AR2025 p.12–13: cohort 13,864 enrolled with baseline SSQ14; 5,686 (41%) any follow-up; 3,009 (22%) baseline+follow-up SSQ14; "Among the 2,990 clients symptomatic at baseline (SSQ14 ≥ 8), 2,550 achieved recovery (SSQ14 ≤ 7) at six-week follow-up, representing an 85.2% recovery rate." Also: "reliability issues missed counselling sessions and incomplete follow-ups by the lay health workers are the primary drivers of suboptimal satisfaction." -> 2,990/3,009 = 99% symptomatic at baseline: clients are a screened-positive population.
-- AR2025 p.14: government transition: "full integration planned by 2028"; 2026: seven Implementation Provinces and three Technical Assistance Provinces.
-- AR2025 p.7: USAID funding withdrawn Q1 2025.
-
-## Dosage at scale
-- Shava et al. 2026, SST pilot protocol, PMC13295822 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13295822/): "most recipients received between one and three sessions" (vs six in the trial); "up to 48% of the participants only complete one (1) therapy session".
-
-## Effect
-- Chibanda et al. 2016 JAMA 316(24):2618, https://jamanetwork.com/journals/jama/fullarticle/2594719 : 573 randomized (286/287), 24 clinics Harare; "6 sessions of individual problem-solving therapy"; median 5 sessions, 39.9% completed all 6. SSQ-14 6 months: intervention 3.81 (95% CI 3.28–4.34), control 8.90 (8.33–9.47); "adjusted mean difference −4.86; 95% CI, −5.63 to −4.10". PHQ-9 ≥11: 13.7% vs 49.9%; PR 0.28 (0.22–0.34). PHQ-9 continuous mean diff −6.36. 521 (90.9%) followed up. Baseline SSQ SD ~1.3 (restricted by eligibility). Sample size calc assumed SMD 0.75.
-  - My computation: SD from arm CIs: SE_int = (4.34−3.28)/3.92 = 0.27, n≈260 -> SD≈4.4; SE_ctl = (9.47−8.33)/3.92=0.29 -> SD≈4.7; pooled ≈4.5. SMD = 4.86/4.5 ≈ 1.08. If CIs are cluster-adjusted, SD overestimated -> SMD understated; range 0.9–1.3.
-- Haas et al. 2023 JAMA Netw Open (rural Bikita, cluster RCT, 16 facilities), PMC10346120 https://pmc.ncbi.nlm.nih.gov/articles/PMC10346120/ : 244 FB / 272 SC; median 6 sessions, 88.1% completed six. SSQ-14 diff month 3 −1.65 (−3.07 to −0.24), month 6 −1.57 (−2.98 to −0.15), month 9 −1.63 (−3.05 to −0.22). PHQ-9 diff month 3 −0.35 (−1.68 to 0.99), 6: 0.01, 9: −0.04. Conclusion: "The intervention improved CMD symptoms, but the effect was smaller than previously shown in an urban setting." Baseline SSQ SD 1.1; PHQ-9 SD 3.5.
-  - My computation: SSQ SMD ≈ 1.6/4.5 (borrowing Harare follow-up SD) ≈ 0.36; PHQ-9 ≈ 0. Average ≈ 0.2 (range 0–0.4). Effect stable 3→9 months (no decay visible).
-- Tong, Miguel, Panagiotopoulou, Karyotaki, Cuijpers 2023 Psychol Med 53(16):7473, PMC10951412: non-Western trials g = 1.10 (0.90–1.31); low RoB g = 0.69 (0.49–0.89); trim-and-fill 0.60 (0.34–0.87); limit meta-analysis 0.42 (0.18–0.65); selection model 0.49; CAU controls 0.94; post-assessment only.
-- Karyotaki et al. 2022 JAMA Psychiatry 79(5):430, PMC8943620: task-shared psychological interventions in LMICs; conventional MA g 0.48 (0.26–0.68), IPD 1-stage g 0.32 (0.26–0.38); "no indication of publication bias"; post-intervention mean 3.7 months.
-- Connolly et al. 2021 Bull WHO 99(8):572, PMC8319860: lay counsellors g = 0.616 (0.366–0.866). Context.
-- Cuijpers et al. 2026 World Psychiatry 25(2):287, PMC13176859: spline: 3 mo g 0.544 (0.47–0.61); 6 mo 0.434; 12 mo 0.389 (0.31–0.47); 24 mo 0.390. "The SMD increased from baseline to 0.55 at 12 weeks, then gradually decreased to 0.39 at around one‐year follow‐up." 191 RCTs, mostly HIC; few >12 mo.
-
-## Delivery / attribution
-- Haas 2023: LHWs "selected from the existing pool of village health workers"; supervised by clinic nurses. MoHCC partnership/handover (AR2024 p.4: "official hand over of the Friendship Bench Zimbabwe project to the Government of Zimbabwe through the Ministry of Health and Child Care").
-- Rural FB qualitative study (PMC11221631, search snippet): VHWs received USD $10/month for transport and airtime (context only).
+## Literature
+- Chibanda et al. 2016, JAMA 316(24):2618 (https://jamanetwork.com/journals/jama/fullarticle/2594719): 573 randomized, cluster RCT, Harare; 6 sessions PST by lay health workers ("grandmothers") + optional peer group; control enhanced usual care. SSQ-14 6 months AMD −4.86 (−5.63 to −4.10). PHQ-9 continuous (not prespecified) AMD −6.36 "(95% CI, −6.45 to −5.27)" [CI as printed, not centred on the estimate]; Table 2 arm means 4.50 (3.95–5.05) vs 11.01 (9.78–12.24). Median 5 sessions (IQR 4–6); 39.9% all 6. Suicidal ideation 2.3% vs 12.3% at follow-up. Median follow-up 171 days.
+  - Derived SE of difference from arm CIs: SE_i=(5.05−3.95)/3.92=0.281, SE_c=(12.24−9.78)/3.92=0.628, SE_diff=sqrt(0.281²+0.628²)=0.688 points.
+- Karyotaki et al. 2022 JAMA Psychiatry 79(5):430 (IPD-MA task-shared psychological interventions, LMICs; PDF https://cquin.icap.columbia.edu/wp-content/uploads/2023/06/jamapsychiatry_karyotaki_2022_oi_220009_1664919228.58277.pdf): "The 2-stage IPD-MA resulted in a g of 0.32 (95% CI, 0.18-0.46; P < .001) ... The PIs ranged from g = −0.12 to 0.76." Conventional MA of 13 trials g 0.48 (0.26–0.68). Chibanda 2016 is not among the IPD trials (Table 1); Abas 2018 Zimbabwe PST pilot is.
+- Cuijpers et al. 2018 World Psychiatry 17(1):90 (https://research.vu.nl/ws/files/105028031/...): non-Western g 1.10 (0.91–1.30), after trim-and-fill 0.73 (0.51–0.96); low risk of bias studies g 0.51 (0.34–0.69).
+- RE-AIM evaluation of FB scale-up (Europe PMC PMC9682765, BMC HSR 2022): routine FB data "not reliably available"; reach 9–34% by clinic size; programme "up to 6 sessions of PST"; CHWs are "employed as health promoters by the respective city health authorities" with a basic salary.
+- Weobong et al. 2017 PLoS Med (HAP 12-month): gains held from 3 to 12 months (search summary; abstract via ideas.repec.org).
+- Suicide: World Bank API (source WHO GHE), Zimbabwe 2021 crude per 100,000: total 17.34, male 23.57, female 11.71 (https://api.worldbank.org/v2/country/ZWE/indicator/SH.STA.SUIC.FE.P5, .MA.P5).
+- WHO GHO API returned server error 500 (not accessible).
+- PMC direct pages behind bot check; used Europe PMC REST and author PDFs instead.
 
 ## Not accessible
-- ProPublica 990 XML (bot check), Instrumentl (403), mhinnovation (403), medRxiv PDF (403), FB Zimbabwe audited accounts (not public).
+- Friendship Bench Zimbabwe PVO audited financial statements (not published).
+- ProPublica 990 PDF/XML (bot check), WHO GHO API (500), PMC pages (bot check).
 
-## Build v1 (2026-10-28): 0.0912 WELLBY/$ = 12.2x GD (joint 0.14-465x)
-## Audit r1: 1 high, 3 medium, 4 low. Fixes: duration 3->5 (2-8) [Cuijpers 2026 Table 2 plateau 0.39 to 5y per auditor]; single-session 0.45->0.65 (0.45-0.9) as judgment (AR2024 p9 47,073 follow-ups/295,770; AR2025 3,284/336,215); multi 0.8->0.75; evidence_adj anchored on Tong low-RoB 0.69 vs 1.10; reach minus partners 7,382 (AR2024 p9) x 0.95 (0.85-1). Kidia et al 2024 (PMC11221631) quote: "primarily voluntary basis but received USD $10 per month for transport and cellphone credit" (SolidarMed rollout, payer not stated).
-## v2: 0.1244 WELLBY/$ = 16.6x GD (joint 0.13-667x; 0.37-256x at shared defaults)
-## Audit r2: 0 high, 2 medium, 4 low. Verified myself: Q2 2024 impact report (Drive 1rpPGQcpWhn-eRIBSHncfk-x09HXVtjVZ) "# of Clients seen ... 71,388", "# of Follow-up sessions ... 75,256"; Q1 2025 (Drive 1U6FtkVuQZODp29dpuygN-FRuFBMvD3s-) 79,172 clients / 82,245 follow-ups; Q2 2026 86,832 / 2,726. Fixes: share_single_session 0.5 (0.35-0.8); harare_trial_weight 0.35 (0.2-0.5) [Harare 40,684 + Bulawayo 18,278 of 288,388 own clients 2024]; wording fixes; Schleider depression 0.18 vs 0.28 (auditor, via secondary press coverage).
-## Final v3: 0.1169 WELLBY/$ = 15.6x GD (joint 0.11-687x; 0.32-263x at shared defaults). Stopped after r2 (no high).
+## Checks added during the build
+- Chibanda et al. 2011 BMC Public Health 11:828 (Europe PMC abstract, PMC3210104): "The drop in SSQ scores was proportional to the number of sessions attended." 8% of potentially eligible excluded for high suicide risk.
+- Chesney, Goodwin & Fazel 2014 World Psychiatry 13(2):153 (Europe PMC abstract, DOI 10.1002/wps.20128): "Borderline personality disorder, anorexia nervosa, depression and bipolar disorder had the highest suicide risks." No RR in the abstract; RR 5 (2.5-15) is a judgment.
+- World Bank SP.POP.0014.TO.ZS Zimbabwe 2024: 40.87% of population aged 0-14.
+
+## Round-2 additions (2026-11-03)
+- Q1 2024 impact report (Drive 11JxYcf8HFB9U6RRzlIXnSOjDMpRNyiTP) p.4: clients seen 69,721; follow-up sessions 4,707.
+- Q2 2024 (1rpPGQcpWhn-eRIBSHncfk-x09HXVtjVZ) p.4: 71,388; 75,256.
+- Q3 2024 (1Tn-Yt4UVmPet18vFSkj5_AnCdaxPS5qp) p.5: 76,087; 82,313. p.6: "4,050 clients were randomly sampled from the Q3 2024 reach ... managed to call 1003"; 966 with SSQ14 >8 at baseline; 851 <=7 at six weeks.
+- Q1-Q3 2024 totals: 217,196 clients, 162,276 follow-ups (0.747/client) vs annual report 47,073 for the full year: contradiction; best guess 0.747 x 295,770 = 220,980.
+- The Standard article on USAID (thestandard.co.zw ... 200038695) returns 404: DIV amount dropped.
+- WHO GHO API still HTTP 500 at round 2.
+- Vivalt 2020 JEEA and Bold et al. 2018 J Public Econ cited qualitatively as anchors for trial_weight_discount (from my own knowledge, not fetched).
+
+## Round-3 additions
+- WHO GHE 2023 summary tables (Sept 2026), deaths by country/age/sex xlsx (downloaded by the round-3 auditor from the WHO GHE page; verified by me with openpyxl): ZWE 15-29 F pop 2290.681k, self-harm 0.0648k; 30-49 F 2018.464k, 0.1105k; M 2169.345k/0.1908k and 1589.479k/0.3100k → F 4.07, M 13.32 per 100k ages 15-49.
+- Schleider & Weisz 2017 JAACAP (Europe PMC abstract): SSIs g = 0.32 across 50 RCTs; depression 0.21.
+- Kopta 2003 J Clin Psychol summary of Howard et al. 1986 dose-effect study (Europe PMC record).

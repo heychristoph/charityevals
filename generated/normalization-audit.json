@@ -25,7 +25,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $daly_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. One exception, in WELLBY models only: the row wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly), in an ours section, which puts deaths valued the site's way into WELLBYs so that the unit's conversion cancels the rate again (INV-17); what it converts reads no WELLBY rate. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
+  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $daly_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. Bridges are exempt (docs/normalization.md 2.6): a row in an ours section whose formula is exactly <input> * (<to_common of a ranked unit>) / (<to_common of the output unit>), which the output unit's conversion cancels, so the outcome in <input> reaches the headline through its own unit's shared conversion; WELLBY models' wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) is the bridge from uov (INV-17), and what it converts reads no WELLBY rate. Rows a bridge reads besides its input (a tco2e bridge's air_pollution_weight) are held to the conversion-row rule below. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
   "waived": 0,
   "failing_models": []
  },
@@ -45,7 +45,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "Every formula row on the path to the output (variants: their overrides) is split into its product and quotient chains and its function calls' argument lists; a chain or argument list holding both a non-toggle shared assumption ($life_value_multiplier, $discount_rate, …) and a constant outside lint's ALLOWED_LITERALS (0, 1, 0.5, 100, 1000, 1000000, 12, 52, 365, 365.25, 0.000001) is flagged. Such a constant is a value the lever is meant to replace (8 for a death next to $life_value_multiplier) or an evaluator's input that INV-2c, INV-4 and INV-13 can't see inside a formula: it must read the shared fact, with the evaluator's figure in `published`, or become its own labelled input row. ln(2) and other constants inside a function of their own (not beside the assumption) pass.",
+  "how": "Every formula row on the path to the output (variants: their overrides) is split into its product and quotient chains and its function calls' argument lists; a chain or argument list holding both a non-toggle shared assumption ($life_value_multiplier, $discount_rate, …) and a constant outside lint's ALLOWED_LITERALS (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001) is flagged. Such a constant is a value the lever is meant to replace (8 for a death next to $life_value_multiplier) or an evaluator's input that INV-2c, INV-4 and INV-13 can't see inside a formula: it must read the shared fact, with the evaluator's figure in `published`, or become its own labelled input row. ln(2) and other constants inside a function of their own (not beside the assumption) pass.",
   "waived": 0,
   "failing_models": []
  },
@@ -66,9 +66,9 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 34699,
-   "input equals a house-constant fact but under another label": 15880,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7336,
+   "input equals a shared value but its label doesn't resemble the shared one's": 35637,
+   "input equals a house-constant fact but under another label": 15862,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7344,
    "round value (one significant digit) and labels only loosely alike": 90,
    "input within 0.2% of a shared value (not equal) and labels only loosely alike": 19,
    "shared label too generic (under three significant words) for a loose match": 5,
@@ -155,7 +155,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   "waived": 1,
   "failing_models": []
  },
@@ -163,9 +163,9 @@
   "id": "SAME-CHANGE",
   "title": "Same physical change, same SADs figure",
   "status": "partial",
-  "checked": 11,
+  "checked": 10,
   "violations": [],
-  "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.",
+  "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition; per-dollar rows (the species step's sads_<s> split, \"SADs per dollar you give: chickens\") and shares of SADs by species or SAD version, which are results, not a transition's figure.",
   "waived": 0,
   "failing_models": []
  },
@@ -175,7 +175,7 @@
   "status": "partial",
   "checked": 348,
   "violations": [],
-  "how": "Every evaluator's model (since 2026-11-02; before, Ambitious Impact's only): every row on the path to the output whose label states an income-to-health exchange rate (years of doubled consumption to DALYs); a value of a death averted, in DALYs or years of life; a value of a stillbirth averted; a pound or euro exchange rate must read the shared version ($uov_per_ln_consumption (and $uov_per_daly); @moral_weights.* * $life_value_multiplier; @givewell_shared.uov_per_stillbirth * $life_value_multiplier / $uov_per_daly; @fx.*). Labels stand in for meaning, so a rate under another name isn't seen.",
+  "how": "Every model, charityevals' own included (since 2026-11-03; every evaluator's since 2026-11-02, before that Ambitious Impact's only): every row on the path to the output whose label states an income-to-health exchange rate (years of doubled consumption to DALYs); a value of a death averted, in DALYs or years of life; a value of a stillbirth averted; a pound or euro exchange rate must read the shared version ($uov_per_ln_consumption (and $uov_per_daly); @moral_weights.* * $life_value_multiplier; @givewell_shared.uov_per_stillbirth * $life_value_multiplier / $uov_per_daly; @fx.*). Labels stand in for meaning, so a rate under another name isn't seen.",
   "waived": 1,
   "failing_models": []
  },
@@ -195,17 +195,17 @@
   "status": "partial",
   "checked": 118,
   "violations": [],
-  "how": "Rows on the path to the output (not variants) whose label names one of 17 concepts several evaluators state (resource-sharing, treatment-costs-averted, investment-of-income, long-term-benefit-years, wage-gain-per-iq-point, cf-value-government, cf-value-global-fund, cf-value-gavi, income-to-mortality-ratio, value-of-cyp, value-of-stillbirth, indirect-deaths-diarrhea, household-spillover-therapy, household-size, commitment-fulfilment, prior-weight-education, depression-per-phq9-point) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in `published`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.",
-  "waived": 37,
+  "how": "Rows on the path to the output (not variants) whose label names one of 19 concepts several evaluators state (resource-sharing, treatment-costs-averted, investment-of-income, long-term-benefit-years, wage-gain-per-iq-point, cf-value-government, cf-value-global-fund, cf-value-gavi, income-to-mortality-ratio, value-of-cyp, value-of-stillbirth, indirect-deaths-malaria, malaria-morbidity, indirect-deaths-diarrhea, household-spillover-therapy, household-size, commitment-fulfilment, prior-weight-education, depression-per-phq9-point) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in `published`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.",
+  "waived": 39,
   "failing_models": []
  },
  {
   "id": "INV-14",
   "title": "No house constant without a shared fact",
   "status": "partial",
-  "checked": 9225,
+  "checked": 9211,
   "violations": [],
-  "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
+  "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
   "waived": 0,
   "failing_models": []
  },
@@ -235,7 +235,7 @@
   "status": "checked",
   "checked": 13,
   "violations": [],
-  "how": "WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in uov_valued_outside_wellbys and put it into WELLBYs only in wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with uov_valued_outside_wellbys = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest doesn't move with $life_value_multiplier.",
+  "how": "WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in uov_valued_outside_wellbys and put it into WELLBYs only in wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with uov_valued_outside_wellbys = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest (every bridge's input at 0) doesn't move with $life_value_multiplier. Any other model with a bridge from uov (docs/normalization.md 2.6) values its deaths only upstream of that bridge.",
   "waived": 0,
   "failing_models": []
  },
