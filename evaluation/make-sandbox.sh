@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Makes a blind copy of the repo for a build-cea evaluation run (docs/eval-skills.md).
 #   evaluation/make-sandbox.sh <dest> <charity-id> [<charity-id> ...]
-# The copy has no git history, no bulk imports (models/grants) and none of the named charities' models:
+# The copy has no git history, no bulk imports (models/grants) other than those a shared destination
+# set reads, and none of the named charities' models:
 # every model whose `charity` is one of them, every model that extends or reads (#id) one that goes, and
-# their write-ups, plus any write-up whose file name mentions the charity. GiveWell's shared-input facts
-# (facts/givewell*.json) keep only the rows a remaining model or a build-cea template reads, so the
-# models left compute and no excluded sheet's inputs show. The named charities' records keep only name,
-# cause and website. node_modules is a symlink.
+# their write-ups, plus any write-up whose file name mentions the charity. GiveWell's sheet inputs
+# (facts/givewell*.json) lose the rows only the excluded charities' sheets read, and text naming the
+# charities or their models is removed from docs, skills, write-ups, facts and waivers. The named
+# charities' records keep only name, cause and website. node_modules is a symlink.
 set -euo pipefail
 dest=$1; shift
 src=$(cd "$(dirname "$0")/.." && pwd)
@@ -25,6 +26,21 @@ const walk = (d) => fs.readdirSync(d).flatMap((f) => {
   const p = path.join(d, f);
   return fs.statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
 });
+// Bulk imports a shared destination set reads live (src/engine/moved-money.ts names them by model or
+// charity id) come along, with the models they extend, unless they are an excluded charity's.
+{
+  const named = new Set([...fs.readFileSync(path.join(src, "src/engine/moved-money.ts"), "utf8").matchAll(/"(?:[a-z-]+:)?([a-z0-9][a-z0-9-]+)"/g)].map((x) => x[1]));
+  const grants = walk(path.join(src, "models/grants")).map((p) => ({ p, m: JSON.parse(fs.readFileSync(p, "utf8")) }));
+  const byId = new Map(grants.map((g) => [g.m.id, g]));
+  const keep = new Set();
+  const add = (g) => { if (!g || keep.has(g) || ids.includes(g.m.charity)) return; keep.add(g); add(byId.get(g.m.extends)); };
+  for (const g of grants) if (named.has(g.m.id) || named.has(g.m.charity)) add(g);
+  for (const g of keep) {
+    const to = path.join(dest, path.relative(src, g.p));
+    fs.mkdirSync(path.dirname(to), { recursive: true });
+    fs.copyFileSync(g.p, to);
+  }
+}
 const models = walk(path.join(dest, "models")).map((p) => ({ p, m: JSON.parse(fs.readFileSync(p, "utf8")), s: fs.readFileSync(p, "utf8") }));
 // The models a model reads: `#id` in a formula (`#owner:charity` names a charity's figure, not a model).
 const reads = (m) => (m.rows ?? []).flatMap((r) => [...String(r.formula ?? "").matchAll(/#([a-z0-9][a-z0-9-]*)(:?)/g)].filter((x) => !x[2]).map((x) => x[1]));

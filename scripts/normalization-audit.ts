@@ -3,7 +3,7 @@
 //   npx tsx scripts/normalization-audit.ts                     print the table, write generated/normalization-audit.json
 //   npx tsx scripts/normalization-audit.ts --all               also print every violation's detail
 //   npx tsx scripts/normalization-audit.ts --write-allowlist   also rewrite src/engine/normalization-allowlist.json
-//   npx tsx scripts/normalization-audit.ts --exclude a,b       drop models (by model or charity id) first: a blind
+//   npx tsx scripts/normalization-audit.ts --exclude a,b       drop models (by model id, or a charity's evaluator models by charity id) first: a blind
 //                                                              run's answer, or what its sandbox doesn't hold
 // A model that doesn't load (a live reference `#id` to a model missing from the library, as in a sandbox
 // stripped of the bulk models) is skipped with a note, and so is every model that reads it, rather than
@@ -11,7 +11,7 @@
 // report is partial: generated/normalization-audit.json and the allowlist are left as they are.
 // The allowlist is today's violations: src/engine/normalization.test.ts fails on a new one, and on
 // an allowlisted one that no longer occurs (so the list only shrinks). Rewrite it only after fixing.
-import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary } from "../src/engine/model";
 import { applyWaivers, checkAll, keyOf, toAllowlist, type Waivers } from "../src/engine/invariants";
@@ -26,7 +26,10 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
 const args = process.argv.slice(2);
 const exclude = new Set((args.includes("--exclude") ? args[args.indexOf("--exclude") + 1] ?? "" : "").split(",").filter(Boolean));
 let models: Record<string, unknown>[] = walk(join(root, "models")).map(read);
-const excluded = models.filter((x) => exclude.has(x.id as string) || exclude.has(x.charity as string)).map((x) => x.id as string);
+// A charity id drops that charity's evaluator models, never charityevals' own (the draft a blind run audits).
+const excluded = models
+  .filter((x) => exclude.has(x.id as string) || (exclude.has(x.charity as string) && x.owner !== "charityevals"))
+  .map((x) => x.id as string);
 models = models.filter((x) => !excluded.includes(x.id as string));
 const build = () => buildLibrary(
   models,
@@ -94,6 +97,7 @@ const json = reports.map((r) => ({
   violations: [...r.violations].sort((a, b) => keyOf(a).localeCompare(keyOf(b))),
 }));
 if (!partial) {
+  mkdirSync(join(root, "generated"), { recursive: true });
   writeFileSync(join(root, "generated/normalization-audit.json"), JSON.stringify(json, null, 1) + "\n");
   console.log("\nWrote generated/normalization-audit.json");
 }
