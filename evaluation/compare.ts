@@ -33,7 +33,8 @@ const EVALUATOR: Record<string, string> = {
   "the-life-you-can-save": "the-life-you-can-save-founders-pledge",
 };
 
-const models = walk(join(root, "models")).filter((p) => !p.includes("/models/grants/")).map(read);
+// Bulk imports too: shared destination sets (moved money) read some of them live.
+const models = walk(join(root, "models")).map(read);
 const repoFacts = walk(join(root, "facts")).map(read);
 const charities = walk(join(root, "charities")).map(read);
 const owners = read(join(root, "owners.json"));

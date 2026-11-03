@@ -63,7 +63,7 @@ const names = ids.flatMap((c) => {
   const r = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
   return [c, r.name, ...(r.aliases ?? []), ...(ALIASES[c] ?? [])].filter(Boolean);
 });
-const names_re = new RegExp(`\\b(${names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`, "i");
+const names_re = new RegExp(`\\b(${names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "\\s+")).join("|")})\\b`, "i");
 let redacted = 0;
 const scrub = (v, k) => {
   if (typeof v === "string") return k !== "id" && names_re.test(v) ? (redacted++, "(removed for a blind run)") : v;
@@ -79,7 +79,13 @@ for (const p of [...walk(path.join(dest, "facts")), ...walk(path.join(dest, "ass
 const md = (d) => fs.readdirSync(d).flatMap((f) => { const p = path.join(d, f); return fs.statSync(p).isDirectory() ? md(p) : f.endsWith(".md") ? [p] : []; });
 for (const p of [...md(path.join(dest, "docs")), ...md(path.join(dest, ".claude/skills"))]) {
   const lines = fs.readFileSync(p, "utf8").split("\n");
-  const kept = lines.filter((l) => !names_re.test(l));
+  // A name can wrap onto the next line: drop both lines.
+  const drop = new Set();
+  lines.forEach((l, i) => {
+    if (names_re.test(l)) drop.add(i);
+    else if (i + 1 < lines.length && names_re.test(`${l}\n${lines[i + 1]}`)) { drop.add(i); drop.add(i + 1); }
+  });
+  const kept = lines.filter((_, i) => !drop.has(i));
   if (kept.length < lines.length) { redacted += lines.length - kept.length; fs.writeFileSync(p, kept.join("\n")); }
 }
 const writeups = path.join(dest, "writeups");
