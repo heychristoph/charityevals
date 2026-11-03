@@ -44,7 +44,8 @@ const share = (s: number) => (s < 0.005 ? "<1%" : `${Math.round(s * 100)}%`);
  * more than this one model's own figure: several locations by funding, or several programs. */
 function combinedOf(ev: EvaluatorResult | undefined, model: ResolvedModel, av: Record<string, number>): Combined | undefined {
   if (!ev) return undefined;
-  const funder = `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
+  // Our own models weigh a charity's programs by its spending; an evaluator's, by its funding.
+  const funder = ev.owner === "charityevals" ? "the charity's spending" : `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
   const charity = lib.charities.get(model.charity)!;
   if (ev.programs.length > 1) {
     const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
