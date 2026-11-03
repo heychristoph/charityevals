@@ -1,8 +1,9 @@
 ---
 import Prose from "../layouts/Prose.astro";
+import { repo } from "../lib/site";
 ---
 
-<Prose title="How this works" active="method" description="Every charity is a model file that reproduces its evaluator's numbers, re-ranked by values you set, in years of healthy life per $1,000.">
+<Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked in years of healthy life per $1,000 under values you set.">
   <h2>Models are files you can read</h2>
   <p>
     Each charity is one file in a public git repository. A model is a list of rows, like a spreadsheet: inputs with a value, and calculated rows with a formula over other rows. Every input says what kind of number it is (<strong>observed</strong> in data, an <strong>estimate</strong> made elsewhere, or a <strong>judgment</strong>), where it comes from and why it has the value it has. The file's history is the model's changelog.
@@ -11,13 +12,28 @@ import Prose from "../layouts/Prose.astro";
     Models imported from an evaluator have to reproduce that evaluator's own numbers: every calculated row records the value the original spreadsheet shows, and the build fails if the model drifts from it. Where we disagree with a source, we say so rather than quietly changing its numbers.
   </p>
 
+  <h2 id="views">Two views of every model</h2>
+  <p>
+    Every model can be read two ways. <strong>The evaluator's view</strong> is their analysis as they published it, with their own conversions and value judgments, so you can check we reproduced it. <strong>Our view</strong>, the one the rankings use, swaps every conversion and value judgment for the site's one shared version and your settings, so two charities differ only where their work differs, not because their evaluators counted differently. Each model page tags every row where they part "changed for consistency", with the evaluator's own number beside it.
+  </p>
+
+  <h2 id="sources">Where models come from</h2>
+  <p>
+    Most models are <a href="#imported-models">imported</a> from charity evaluators: GiveWell, Animal Charity Evaluators, the Happier Lives Institute, Founders Pledge, SoGive, Ambitious Impact and others. For a charity no evaluator has analysed, we <a href="#our-models">build our own model</a> from the charity's reports and accounts and the research on what its work does, then have it checked independently. A charity with several analyses shows each as its own dot; the row's number is its main one (the newest analysis from its lead evaluator, or ours where there is none).
+  </p>
+
+  <h2 id="what-it-means">What a figure means</h2>
+  <p>
+    A figure is our best estimate of the good an extra $1,000 given to the charity today does, after counting what would have happened anyway, others' share of the credit and the evidence's weak spots. It is an expected value, not a guarantee: some gifts do much more, some nothing. The bar around it shows how far it could plausibly be off. It says nothing about whether a charity is well run in other respects.
+  </p>
+
   <h2 id="healthy-years">One unit: years of healthy life</h2>
   <p>
     Every result is in <strong>years of healthy life per $1,000 donated</strong>. A year of healthy life is one person living one more year in full health; researchers call it a DALY averted. Evaluators count good in different units (GiveWell in years of doubled income, animal analyses in days of pain, the Happier Lives Institute in life satisfaction), so we convert each into healthy years at exchange rates you can change under Your values, beside the rankings. GiveDirectly's cash transfers come to about 4.
   </p>
   <h3 id="animals">Animals</h3>
   <p>
-    Every animal model takes the same steps after the evaluator's own result. Its days of pain, with milder pain counted as a fraction of a day, are split by species. Each species is counted in chickens, by Rethink Priorities' estimates of how much it can suffer relative to a chicken: a pig about 1.6 chickens, a farmed fish about 0.2, a shrimp about 0.1. That gives <strong>chicken-equivalent pain days</strong>, which become healthy years through two of your values: how a chicken's suffering compares with a person's (33% by default), and how much healthy life a day of disabling pain costs (about 10 hours). ACE's figures in suffering-adjusted days already carry Ambitious Impact's own species weights; we take those out first, so the evaluator's view still reproduces ACE.
+    Every animal model takes the same steps after the evaluator's own result. Its days of pain, with milder pain counted as a fraction of a day, are split by species. Each species is counted in chickens, by Rethink Priorities' estimates of how much it can suffer relative to a chicken: a pig about 1.6 chickens, a farmed fish about 0.2, a shrimp about 0.1. Dogs and cats, which Rethink Priorities hasn't estimated, are counted at a judgment anchored on its figure for pigs, the nearest mammal it covers, with a wide range. That gives <strong>chicken-equivalent pain days</strong>, which become healthy years through two of your values: how a chicken's suffering compares with a person's (33% by default), and how much healthy life a day of disabling pain costs (about 10 hours). ACE's figures in suffering-adjusted days already carry Ambitious Impact's own species weights; we take those out first, so the evaluator's view still reproduces ACE.
   </p>
   <p>
     Where ACE's models use different numbers for the same change, such as a hen moved out of a cage or a meal replaced, ours use one shared figure, and the row says so: "changed for consistency", with ACE's own number beside it.
@@ -38,6 +54,7 @@ import Prose from "../layouts/Prose.astro";
   <ul>
     <li><strong>Deaths</strong> are valued by age band (under five, 5–14, 15–49, 50 and over), from GiveWell's moral weights, times your "child's life" value.</li>
     <li><strong>Every future benefit</strong> is discounted at your discount rate, including a wait before it starts.</li>
+    <li><strong>Future generations</strong> count through the same discount rate. Where a charity lowers the risk of a catastrophe, the model counts the deaths it would cause and, if it would shrink or end humanity's future, every later year of healthy life it would take, each discounted at your rate. The lowest rate is 0.1% a year, not zero, because at zero an endless future would count infinitely: at 0.1% a year lost for ever counts about 1,000 times a single year, at the default 4% about 25 times.</li>
     <li><strong>An older estimate counts less.</strong> See <a href="#estimate-age">old estimates</a> below.</li>
     <li><strong>A won reform</strong> (a corporate pledge, a law, a regulation) counts for the years under Your values before it would have come anyway (5 by default), with the wait until it takes effect discounted and one shared rate of pledges kept.</li>
     <li><strong>Charities that move money</strong> (fundraisers, evaluators, effective-giving organisations) are worth what their money does where it goes: those destinations' own results, read live, so every slider moves them too, with one shared share of new money and one chance of success for an organisation not yet proven.</li>
@@ -47,10 +64,10 @@ import Prose from "../layouts/Prose.astro";
 
   <h2 id="judgments">Judgments: yours and fixed ones</h2>
   <p>
-    The judgments that move many models are yours to set under Your values: how a healthy year compares with income, a child's life, a WELLBY and a chicken's suffering, the discount rate, how much less an old estimate counts, the years a won reform counts, how much the next dollar does compared with an organisation's past average, the deaths per tonne of CO₂ and when they come. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
+    The judgments that move many models are yours to set under Your values: how a healthy year compares with income, a child's life, a WELLBY and a chicken's suffering, the discount rate, how much less an old estimate counts, the years a won reform counts, how much the next dollar does compared with an organisation's past average, how much a programme counts that we could only estimate from similar ones, the deaths per tonne of CO₂ and when they come. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
   </p>
   <p>
-    Some fixed figures are judgments too, not measurements: species Rethink Priorities doesn't cover (fish, cattle, insects) counted as stand-ins, how Ambitious Impact's welfare points become days of pain, longtermist causes valued at zero in money-moved models, where shifted money would have gone, the share of broiler pledges kept, damage from CO₂ other than deaths at zero, Founders Pledge's education constants and the default share of staff pay below market. They are fixed rather than sliders because each concerns only a few models or sits inside a range set by evidence, and the site keeps one slider per concept. Each is marked "judgment" wherever a model reads it, with its range, which the uncertainty bars use.
+    Some fixed figures are judgments too, not measurements: species Rethink Priorities doesn't cover (fish, cattle, insects, dogs, cats) counted as stand-ins, how much of the future a given catastrophe would take, how Ambitious Impact's welfare points become days of pain, longtermist causes valued at zero in money-moved models, where shifted money would have gone, the share of broiler pledges kept, damage from CO₂ other than deaths at zero, Founders Pledge's education constants and the default share of staff pay below market. They are fixed rather than sliders because each concerns only a few models or sits inside a range set by evidence, and the site keeps one slider per concept. Each is marked "judgment" wherever a model reads it, with its range, which the uncertainty bars use.
   </p>
 
   <h2 id="estimate-age">Old estimates count less</h2>
@@ -67,6 +84,11 @@ import Prose from "../layouts/Prose.astro";
   <h2 id="theoretical">Purely theoretical models</h2>
   <p>
     Some Ambitious Impact models estimate an idea before the charity existed. We show one only if the charity runs the modelled programme today and no model of its actual work exists; it is flagged "purely theoretical" on its pages and on the rankings. A charity that runs several programmes is weighted by funding.
+  </p>
+
+  <h2 id="charity-figure">How a charity's figure is put together</h2>
+  <p>
+    A charity that runs several programmes, or the same programme in several countries, is the funding-weighted average of them: each programme's or location's result, weighted by the money it gets, from the charity's own accounts where it publishes them and otherwise from the evaluator's sheet. Where an evaluator models only one location of many, the row says so.
   </p>
 
   <h2>Credit for shared outcomes</h2>
@@ -92,8 +114,23 @@ import Prose from "../layouts/Prose.astro";
     Most models are evaluators' spreadsheets imported whole: every public model GiveWell links from its grant pages, plus HLI's, ACE's and Founders Pledge's (the <a href="https://github.com/heychristoph/charityevals/tree/main/inventory">inventory</a> lists what we found and why anything was left out). Each sheet is traced from its bottom line, every cell it depends on becomes a row, and each calculated row must reproduce the sheet's value. Shared values such as the value of a life and the discount rate are then tied to your values, and statistics several sheets share live once as shared data.
   </p>
 
+  <h2 id="our-models">Our own models</h2>
+  <p>
+    Where no evaluator has analysed a charity, we build a model from public evidence. The model is drafted by an AI agent following a fixed, written method (published in the repository), and every number in it links to its source: the charity's audited accounts and reports for its latest year, the research on what its kind of work achieves, and data such as mortality rates and household sizes. Each starts from a template for its kind of work, so any two models of the same kind can be read side by side: health programmes, cash and livelihoods, mental health, social services in rich countries, humanitarian relief, medical research, campaigns for farmed animals, diet change, companion animals, conservation, rights advocacy, and policy, research and fundraising. Every template ends in years of healthy life by the same steps as the imported models, and reads the same shared figures and your values.
+  </p>
+  <ul>
+    <li><strong>The whole charity.</strong> Every programme the money pays for is modelled, weighted by its spending, not a single flagship project or case study (those are usually picked because they went well).</li>
+    <li><strong>Several kinds of good in one model.</strong> A conservation charity can cut emissions, protect health and support livelihoods at once. Each part is counted in its own unit and converted with its own rate, so each still moves only with the values that concern it.</li>
+    <li><strong>Programmes with no outcome data.</strong> Where a charity publishes nothing about what a programme achieves, it gets the result per dollar of the same kind of work elsewhere on the site, discounted by how much you count an estimate made from similar programmes (50% by default, from 10% to 100%). The model says what share of its spending this covers.</li>
+    <li><strong>Every number traced.</strong> Each input is an observed figure with its source and page, a shared figure, or a judgment with a stated reason, an anchor and a range. Thin evidence gets a wide range and a plain sentence, not a cautious number.</li>
+    <li><strong>Checked independently.</strong> Each model is reviewed by a separate AI reviewer that starts fresh, sees only the model and its sources, checks the key numbers against them and looks for double counting, missing adjustments and unit errors. The model is fixed and reviewed again, up to three rounds; a model with a serious finding left isn't published.</li>
+  </ul>
+  <p>
+    We tested the method by building models blind for eleven charities that evaluators have analysed, without reading those analyses, and comparing the results in the same view. Seven of the eleven landed within three times of the evaluator; health charities tended to come out somewhat above their evaluators and animal charities below. The full write-up, including where and why the models differ, is in the <a href={`${repo}/blob/main/docs/eval-skills.md`}>repository</a>. These models are drafts that improve as charities and evaluators point out errors.
+  </p>
+
   <h2>What this is not</h2>
   <p>
-    Not an evaluator's recommendation, and not endorsed by GiveWell, Animal Charity Evaluators or any charity listed. Cost-effectiveness is one input to a giving decision; room for more funding, organisational strength and track record matter too and aren't modelled here yet.
+    Not an evaluator's recommendation, and not endorsed by GiveWell, Animal Charity Evaluators or any charity listed. Where a model is ours, it is our estimate, not the charity's. Cost-effectiveness is one input to a giving decision; room for more funding, organisational strength and track record matter too and aren't modelled here yet.
   </p>
 </Prose>
