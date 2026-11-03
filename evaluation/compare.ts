@@ -8,7 +8,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { assumptionValues, buildLibrary, compute, headline } from "../src/engine/model";
-import { sensitivity } from "../src/engine/sensitivity";
+import { uncertainty } from "../src/engine/uncertainty";
 
 const root = join(import.meta.dirname, "..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -60,13 +60,15 @@ for (const set of ["dev-runs", "blind-runs"]) {
     const o = headline(lib, ours, av);
     const e = headline(lib, ev, av);
     const eOwn = headline(lib, ev, av, {}, "evaluator");
-    const s = sensitivity(lib, ours, av);
     const v = compute(lib, ours, av);
+    // Combined range: the inputs' ranges as independent errors in log space (scripts/audit-model.ts).
+    const sd = Math.sqrt(uncertainty(lib, ours, v, av, "charityevals").total);
+    const [lo, hi] = [o * Math.exp(-sd), o * Math.exp(sd)];
     const when = (m: typeof ours) => `${m.estimate_basis ?? "?"}, ${m.source?.published?.slice(0, 4) ?? "?"}`;
-    rows.push(`| ${set === "dev-runs" ? "dev" : "test"} | ${charity} | ${ours.template} | ${ev.owner} (${when(ev)}) | ${fmt(eOwn)} | ${fmt(e)} | ${fmt(o)} (${when(ours)}) | ${fmt(s.jointLow)}–${fmt(s.jointHigh)} | **${(o / e).toPrecision(2)}** | ${Number.isFinite(v.total_adj) ? v.total_adj.toFixed(2) : "–"} |`);
+    rows.push(`| ${set === "dev-runs" ? "dev" : "test"} | ${charity} | ${ours.template} | ${ev.owner} (${when(ev)}) | ${fmt(eOwn)} | ${fmt(e)} | ${fmt(o)} (${when(ours)}) | ${fmt(lo)}–${fmt(hi)}${e >= lo && e <= hi ? "" : " (evaluator outside)"} | **${(o / e).toPrecision(2)}** | ${Number.isFinite(v.total_adj) ? v.total_adj.toFixed(2) : "–"} |`);
   }
 }
 console.log("Years of healthy life per $1,000 (site defaults, estimate-age discount off for both).\n");
-console.log("| Set | Charity | Template | Evaluator (basis, year) | Evaluator model, evaluator view | Evaluator model, charityevals view | Blind build (basis, year) | Blind joint low–high | Ratio (blind ÷ evaluator, same view) | total_adj |");
+console.log("| Set | Charity | Template | Evaluator (basis, year) | Evaluator model, evaluator view | Evaluator model, charityevals view | Blind build (basis, year) | Blind combined range | Ratio (blind ÷ evaluator, same view) | total_adj |");
 console.log("|---|---|---|---|---|---|---|---|---|---|");
 console.log(rows.join("\n"));

@@ -16,6 +16,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { assumptionValues, bottomLine, buildLibrary, compute, headline, type ResolvedModel } from "../src/engine/model";
 import { sensitivity } from "../src/engine/sensitivity";
+import { uncertainty } from "../src/engine/uncertainty";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
 import { OUTLIER_REASON, applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
@@ -56,7 +57,7 @@ const extraFacts = localFacts ? walk(localFacts).map(read) : [];
 const facts = [...walk(join(root, "facts")).map(read).filter((f) => !extraFacts.some((e) => e.id === f.id)), ...extraFacts];
 if (!charities.some((c) => c.id === raw.charity)) charities.push({ id: raw.charity, name: raw.charity, cause: raw.cause });
 const lib = buildLibrary(
-  [...repoModels.filter((m) => m.id !== raw.id && !exclude.has(m.id) && !exclude.has(m.charity)), raw],
+  [...repoModels.filter((m) => m.id !== raw.id && !exclude.has(m.id) && !(exclude.has(m.charity) && m.owner !== "charityevals")), raw],
   read(join(root, "assumptions/default.json")),
   facts,
   charities,
@@ -88,6 +89,11 @@ const sBuilder = sensitivity(builderLib, m, av);
 const line = bottomLine(lib, m, av);
 const years = headline(lib, m, av);
 const vals = compute(lib, m, av);
+// The combined range: every input's range combined as independent errors in log space (the variance
+// the site's uncertainty breakdown adds up), so a 90% interval if each range is one. The joint
+// low–high sets every input at its end at once, the extreme case, and spans orders of magnitude.
+const sd = Math.sqrt(uncertainty(lib, m, vals, av, "charityevals").total);
+const combined = { low: years * Math.exp(-sd), high: years * Math.exp(sd) };
 
 // Reference class: other ranked, hand-built charity models in the same output unit.
 const peers = [...lib.models.values()]
@@ -122,7 +128,7 @@ const liveIds = (x: Record<string, unknown>): string[] => {
   const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (b ? allModels.filter((y) => y.charity === b && y.owner === a).map((y) => y.id as string) : [a]));
   return typeof x.extends === "string" ? [...ids, x.extends] : ids;
 };
-const allModels: Record<string, unknown>[] = walk(join(root, "models")).map(read).filter((x) => x.id !== raw.id && !exclude.has(x.id) && !exclude.has(x.charity));
+const allModels: Record<string, unknown>[] = walk(join(root, "models")).map(read).filter((x) => x.id !== raw.id && !exclude.has(x.id) && !(exclude.has(x.charity) && x.owner !== "charityevals"));
 const closure = new Map<string, Record<string, unknown>>();
 const visit = (x: Record<string, unknown>) => { for (const id of liveIds(x)) { const t = allModels.find((y) => y.id === id); if (t && !closure.has(id)) { closure.set(id, t); visit(t); } } };
 visit(raw);
@@ -151,7 +157,7 @@ const fmt = (x: number) => (!Number.isFinite(x) ? String(x) : Math.abs(x) >= 1e4
 if (json) {
   console.log(JSON.stringify({
     id: m.id, template: family, unit: m.output?.unit,
-    native: line.native, common: line.common, yearsPer1000: years,
+    native: line.native, common: line.common, yearsPer1000: years, combinedLow: combined.low, combinedHigh: combined.high,
     jointLow: s.jointLow, jointHigh: s.jointHigh,
     ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, builderJointLow: sBuilder.jointLow, builderJointHigh: sBuilder.jointHigh, judgmentShare: s.judgmentShare,
     swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow, atHigh: w.atHigh })),
@@ -160,7 +166,8 @@ if (json) {
 } else {
   console.log(`# Audit (mechanical): ${m.id}  [${family ?? "no template"}]\n`);
   console.log(`Bottom line: ${fmt(line.native)} ${m.output?.unit}/$ = ${fmt(years)} years of healthy life per $1,000`);
-  console.log(`Joint low–high: ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
+  console.log(`Combined range (ranges combined as independent errors; 90% if each range is): ${fmt(combined.low)} – ${fmt(combined.high)}`);
+  console.log(`Joint low–high (every input at its end at once): ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
   console.log(`Joint low–high with shared assumptions at their defaults: ${fmt(sOwn.jointLow)} – ${fmt(sOwn.jointHigh)}`);
   console.log(`Joint low–high of the model's own ranges (shared assumptions and facts at their best): ${fmt(sBuilder.jointLow)} – ${fmt(sBuilder.jointHigh)}`);
   console.log(`Point inputs on the result's path (no range): ${s.pointInputs.join(", ") || "none"}\n`);

@@ -59,26 +59,26 @@ Founders Pledge) and The Life You Can Save (policy-research-meta, Founders Pledg
 healthy life per $1,000 under the site's defaults, with the estimate-age discount off for both sides
 (a blind build is dated today, an evaluator's estimate earlier). `evaluation/compare.ts` prints them.
 
-| Set | Charity | Template | Evaluator | Evaluator, own view | Evaluator, charityevals view | Blind build | Blind joint low–high | Ratio (blind ÷ evaluator) | First run |
+| Set | Charity | Template | Evaluator | Evaluator, own view | Evaluator, charityevals view | Blind build | Blind combined range | Ratio (blind ÷ evaluator) | First run |
 |---|---|---|---|---|---|---|---|---|---|
-| dev | Against Malaria Foundation | direct-health | GiveWell | 24 | 24 | 25 | 0.23–2,352 | **1.0** | 0.99 |
-| dev | Sociedade Vegetariana Brasileira | diet-change | ACE | 11 | 12 | 11 | 4.5e-7–99,467 | **0.92** | 1.4 |
-| dev | StrongMinds | wellbeing | HLI | 23 | 2.5 | 3.2 | 0.037–110 | **1.3** | 0.97 |
-| dev | The Humane League | corporate-campaign | ACE | 94 | 51 | 1.4 | 4.8e-6–1,179 | **0.027** | 0.13 |
-| test | Helen Keller Intl | direct-health | GiveWell (VAS) | 7.8 | 7.7 | 14 | 0.23–947 | **1.8** | 1.7 |
-| test | New Incentives | direct-health | GiveWell | 4.4 | 4.0 | 14 | 0.38–318 | **3.5** | 1.8 |
-| test | Friendship Bench | wellbeing | HLI | 28 | 3.1 | 5.9 | 0.065–306 | **1.9** | 2.4 |
-| test | Shrimp Welfare Project | corporate-campaign | ACE | 64 | 10 | 1.6 | 3.8e-7–161,275 | **0.16** | 1.2 |
-| test | Dansk Vegetarisk Forening | policy-research-meta | ACE | 20 | 0.87 | 0.28 | 6.5e-10–25,147 | **0.32** | 0.0095 |
-| test | Village Enterprise | cash-income | Founders Pledge (2018) | 2.0 | 2.0 | 4.2 | 0.099–91 | **2.1** | – |
-| test | The Life You Can Save | policy-research-meta | Founders Pledge | 163 | 82 | 75 | 0.55–746 | **0.92** | – |
+| dev | Against Malaria Foundation | direct-health | GiveWell | 24 | 24 | 25 | 7.0–93 | **1.0** | 0.99 |
+| dev | Sociedade Vegetariana Brasileira | diet-change | ACE | 11 | 12 | 11 | 0.077–1,528 | **0.92** | 1.4 |
+| dev | StrongMinds | wellbeing | HLI | 23 | 2.5 | 3.2 | 0.93–11 | **1.3** | 0.97 |
+| dev | The Humane League | corporate-campaign | ACE | 94 | 51 | 1.4 | 0.034–58 | **0.027** | 0.13 |
+| test | Helen Keller Intl | direct-health | GiveWell (VAS) | 7.8 | 7.7 | 14 | 4.6–43 | **1.8** | 1.7 |
+| test | New Incentives | direct-health | GiveWell | 4.4 | 4.0 | 14 | 5.3–37 | **3.5** | 1.8 |
+| test | Friendship Bench | wellbeing | HLI | 28 | 3.1 | 5.9 | 1.5–23 | **1.9** | 2.4 |
+| test | Shrimp Welfare Project | corporate-campaign | ACE | 64 | 10 | 1.6 | 0.0065–412 | **0.16** | 1.2 |
+| test | Dansk Vegetarisk Forening | policy-research-meta | ACE | 20 | 0.87 | 0.28 | 0.0013–60 | **0.32** | 0.0095 |
+| test | Village Enterprise | cash-income | Founders Pledge (2018) | 2.0 | 2.0 | 4.2 | 1.4–12 | **2.1** | – |
+| test | The Life You Can Save | policy-research-meta | Founders Pledge | 163 | 82 | 75 | 20–282 | **0.92** | – |
 
-("First run": the October runs recomputed on today's scale, the same way.)
+("First run": the October runs recomputed on today's scale, the same way. "Combined range": every input's range combined as independent errors in log space, a 90% interval if each range is one; the joint low–high, every input at its end at once, spans 10³–10¹⁴×.)
 
 **Test set summary.** 4 of 7 blind builds land within 3× of the evaluator's model in the same view
 (Friendship Bench, Helen Keller, Village Enterprise, The Life You Can Save); Dansk Vegetarisk Forening is
 just outside (3.1× below), New Incentives 3.5× above, Shrimp Welfare Project 6× below. The geometric mean
-of the seven ratios is 1.0. Every evaluator figure lies inside the blind model's joint low–high. Against
+of the seven ratios is 1.0. Every evaluator figure but New Incentives' lies inside the blind model's combined range. Against
 the first run: Dansk Vegetarisk Forening moved from 1/105 to 1/3 (the scope rule: the builder modelled
 the policy work the money paid for, a fund won, not a case study); New Incentives and Shrimp Welfare
 Project moved away (the vaccination model now counts adult deaths band by band and the cash; the shrimp
