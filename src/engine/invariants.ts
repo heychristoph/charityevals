@@ -681,6 +681,9 @@ export function transitionRows(lib: Library, av = assumptionValues(lib.assumptio
     let vals: Record<string, number> | undefined;
     for (const r of ownRows(m)) {
       if (!/\bper\b|-year/i.test(r.label)) continue;
+      // Per dollar, not per animal or meal: the species step's split (sads_<s>, "SADs per dollar you give:
+      // chickens") and shares of SADs by species or SAD version are results, not a transition's figure.
+      if (/\bper (donor )?(dollar|\$|usd)\b|\$\s*\/|you give|\bshare of\b/i.test(r.label) || /^(sads|ced)_[a-z]+(_\d{4})?$/.test(r.id)) continue;
       let tr = TRANSITIONS.find((x) => x.test(r.label));
       if (!tr) continue;
       // The label often says only "to cage-free"; the explainer says which cage the hen leaves.
@@ -714,7 +717,7 @@ export function sameChange(lib: Library, av = assumptionValues(lib.assumptions))
   }
   return {
     id: "SAME-CHANGE", title: "Same physical change, same SADs figure", status: "partial", checked: new Set(rows.map((r) => r.model)).size, violations,
-    how: `Rows in animal models whose label states SADs per unit for one of ${TRANSITIONS.length} transitions (${TRANSITIONS.map((t) => t.id).join(", ")}), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: "animals spared → SADs" and "years of farmed life → SADs" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.`,
+    how: `Rows in animal models whose label states SADs per unit for one of ${TRANSITIONS.length} transitions (${TRANSITIONS.map((t) => t.id).join(", ")}), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: "animals spared → SADs" and "years of farmed life → SADs" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition; per-dollar rows (the species step's sads_<s> split, "SADs per dollar you give: chickens") and shares of SADs by species or SAD version, which are results, not a transition's figure.`,
   };
 }
 
@@ -933,6 +936,10 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "income-to-mortality-ratio", test: /\bratio of value generated from income increases to value generated from mortalit/i, facts: ["givewell_shared.income_to_mortality_value_ratio"] },
   { id: "value-of-cyp", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\b(cyp|year of (modern )?contracepti\w*|couple[- ]years? of protection)\b/i, not: /death/i, facts: ["givewell_shared.uov_per_cyp_low_income", "givewell_shared.uov_per_cyp_nigeria", "givewell_shared.uov_per_cyp_sierra_leone"], context: (t) => (/nigeria|kano|lagos|kaduna/i.test(t) ? "Nigeria" : /sierra leone/i.test(t) ? "Sierra Leone" : undefined) },
   { id: "value-of-stillbirth", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\bstill ?births?\b/i, facts: ["givewell_shared.uov_per_stillbirth"] },
+  // GiveWell's indirect malaria deaths per direct one: one fact per sheet vintage; the site's ranked malaria models read `_2` (0.75).
+  { id: "indirect-deaths-malaria", test: /\bindirect (malaria )?deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\bmalaria\b|\bdeaths? malaria causes indirectly\b/i, facts: ["givewell.indirect_malaria_deaths_per_direct_malaria_death", "givewell.indirect_malaria_deaths_per_direct_malaria_death_2", "givewell.indirect_malaria_deaths_per_direct_malaria_death_3", "givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death"] },
+  // Non-fatal malaria as a share of the mortality and income value (GiveWell's supplemental +9%); not case counts or incidence.
+  { id: "malaria-morbidity", test: /\bmalaria (illness|morbidity)\b|\bmorbidity\b[^.;]{0,30}\bmalaria\b/i, not: /\bcases?\b|\bincidence\b|\bepisodes?\b/i, facts: ["givewell_common.malaria_morbidity"] },
   { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
   { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy"] },
   // One household size per place (facts/household_size.json, the latest DHS survey): a row naming a household's size reads its place's fact.
