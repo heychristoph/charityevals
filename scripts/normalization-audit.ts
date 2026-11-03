@@ -58,8 +58,8 @@ if (partial) console.log(`Partial run: ${excluded.length} excluded, ${skipped.le
 // Flags settled by hand (src/engine/normalization-waivers.json, each with its reason) aren't violations.
 const waivers: Waivers = read(join(root, "src/engine/normalization-waivers.json"));
 const { reports, stale: allStale } = applyWaivers(checkAll(lib), waivers);
-// A waiver for a model left out of this run isn't stale.
-const stale = allStale.filter((k) => ![...excluded, ...skipped].some((id) => k.includes(id)));
+// A waiver for a model not in this run (excluded, skipped, or absent from a sandbox) isn't stale.
+const stale = allStale.filter((k) => lib.models.has(k.split(" ")[1] ?? ""));
 if (stale.length) console.log(`Stale waivers (remove them):\n  ${stale.join("\n  ")}\n`);
 const all = process.argv.includes("--all");
 
