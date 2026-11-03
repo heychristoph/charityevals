@@ -17,6 +17,8 @@ const EVAL_SET = [
   "against malaria foundation", "\\bAMF\\b", "humane league", "\\bTHL\\b", "strongminds", "vegetariana brasileira", "\\bSVB\\b",
   "helen keller", "new incentives", "shrimp welfare", "\\bSWP\\b", "dansk vegetarisk", "\\bDVF\\b", "friendship bench",
   "village enterprise", "life you can save", "\\bTLYCS\\b",
+  // Held out for the new families (docs/top-charities.md): evaluator models a blind build is checked against.
+  "breast cancer now", "versus arthritis", "lifeboat institution", "\\bRNLI\\b", "compassion uk", "rainforest nations",
 ].map((s) => new RegExp(s, "i"));
 
 /** Words per file; a lesson that doesn't fit replaces or merges an older one. */
