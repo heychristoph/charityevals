@@ -26,8 +26,9 @@ export type Severity = "high" | "medium" | "low";
 export type Finding = { severity: Severity; code: string; row?: string; message: string; fix: string };
 
 /** Constants a formula may contain without a row of their own: identities, halves (triangle areas),
- * percent/thousand/million scaling, and calendar conversions. Everything else is a magic number. */
-export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e6, 12, 52, 365, 365.25, 1e-6]);
+ * percent/thousand/hundred-thousand (rates per 100,000)/million scaling, and calendar conversions.
+ * Everything else is a magic number. */
+export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e5, 1e6, 12, 52, 365, 365.25, 1e-6]);
 
 const MIN_EXPLAINER = 60;
 const STALE_MONTHS = 18;
@@ -112,8 +113,11 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
         // (`<branch>_counterfactual_adj`) and keep the canonical row as a weighted average for
         // reading only. That is fine as long as every branch's own adjustment reaches the result.
         const branches = m.rows.filter((x) => x.id.endsWith(`_${r}`) && x.id !== r);
-        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id)))
-          add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches.", r);
+        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id))) {
+          // Said in its explainer already: nothing to fix.
+          if (!/\b(average|summary|weighted)\b[^.]*\bbranch/i.test(`${m.byId.get(r)?.label ?? ""}. ${m.byId.get(r)?.explainer ?? ""}`))
+            add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches, for reading only.", r);
+        }
         else add("high", "unapplied", `${r} is computed but never reaches the bottom line`, `Use ${r} in the chain that leads to ${output}, or (multi-branch models) apply a <branch>_${r} row in every branch.`, r);
       }
     const perDollar = m.byId.get(ids.perDollar);
@@ -146,7 +150,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
       add("high", "estimate-basis", "a past average whose result doesn't read $marginal_vs_past_average", 'Add the row marginal_vs_past_average = $marginal_vs_past_average (`published` 1) in the donor section and multiply the per-donor-dollar row by it.');
     if (basis !== "past_average")
       for (const r of marginalReaders) add("high", "estimate-basis", `reads $${MARGINAL} but estimate_basis is ${basis}`, "Only a past average takes the next-dollar slider: remove the row, or set estimate_basis to past_average if the cost is past spending over past wins.", r.id);
-    if (basis !== spec.basis)
+    if (basis !== spec.basis && !spec.altBasis?.includes(basis))
       add("low", "estimate-basis", `estimate_basis ${basis}; ${family} models are usually ${spec.basis}`, "Say in the summary or the cost explainer why this charity's dollar is different.");
   }
 
