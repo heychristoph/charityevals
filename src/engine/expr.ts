@@ -29,6 +29,9 @@ export type Node =
  * (fractional years allowed), discounted at `rate`. Matches ACE's cage-free sheet:
  * B + NPV(r, B × (years−1)) + B × frac(years) / (1+r)^years. */
 function pvAnnuityDue(amount: number, rate: number, years: number): number {
+  // Under a year: only that fraction of the first year's amount, received now (the formula below
+  // would count the first whole year regardless).
+  if (years < 1) return amount * Math.max(0, years);
   const whole = Math.max(0, Math.trunc(years - 1));
   let pv = amount;
   for (let t = 1; t <= whole; t++) pv += amount / (1 + rate) ** t;
