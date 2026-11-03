@@ -38,6 +38,12 @@ describe("skills", () => {
       expect(EVAL_SET.filter((r) => r.test(text)).map(String)).toEqual([]);
     });
   }
+  // One reference file per template family, each short enough to read before building in it.
+  const families = join(skills, "build-cea/references/families");
+  for (const f of statSync(families, { throwIfNoEntry: false })?.isDirectory() ? readdirSync(families) : [])
+    it(`build-cea/references/families/${f} is at most 800 words`, () => {
+      expect(readFileSync(join(families, f), "utf8").split(/\s+/).filter(Boolean).length).toBeLessThanOrEqual(800);
+    });
   for (const [rel, max] of Object.entries(BUDGET))
     it(`${rel} is at most ${max} words`, () => {
       expect(readFileSync(join(skills, rel), "utf8").split(/\s+/).filter(Boolean).length).toBeLessThanOrEqual(max);
