@@ -12,6 +12,8 @@ import {
 } from "./model";
 import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
+import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
+export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
 import { rowsFeeding } from "./sensitivity";
 
 export type Violation = {
@@ -42,8 +44,7 @@ export type InvariantReport = {
 
 export const keyOf = (v: Pick<Violation, "model" | "where">) => `${v.model} ${v.where}`;
 
-/** Units the design ranks in: tco2e is climate's, converted through the deaths a tonne causes. */
-export const RANKED_UNITS = ["uov", "daly", "wellby", "ced", "tco2e"];
+export { RANKED_UNITS };
 /** Rates that convert between causes: they belong in a unit's conversion, never in a model row. */
 export const CROSS_CAUSE = ["daly_per_sad", "daly_per_wellby", "sads_per_animal_spared", "chicken_vs_person", "daly_per_disabling_day", "deaths_per_tco2e", "climate_heat_share", "climate_heat_death_delay"];
 const ANIMAL_ASSUMPTIONS = ["chicken_vs_person", "daly_per_sad"];
@@ -143,7 +144,15 @@ export function inv2b(lib: Library): InvariantReport {
   for (const m of models) {
     const pinned = m.evaluator?.assumptions ?? {};
     const oursSections = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
+    const bridges = bridgesOf(lib, m);
+    const bridgeIds = new Set(bridges.map((b) => b.row));
     for (const r of ownRows(m)) {
+      if (bridgeIds.has(r.id) && !isWellbyFromUov(m, r)) {
+        // A bridge into the output unit (2.6): in one of our sections; what it bridges is in its own
+        // unit, so (like every other row) it reads no cross-cause rate, which the general rule checks.
+        if (!(r.section && oursSections.has(r.section))) violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} section`, detail: `${r.id} bridges ${bridges.find((b) => b.row === r.id)!.from} into ${m.output!.unit} but sits outside an ours section` });
+        continue;
+      }
       if (isWellbyFromUov(m, r)) {
         // The sanctioned WELLBY row: in one of our sections, and what it converts reads no WELLBY rate.
         if (!(r.section && oursSections.has(r.section))) violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} section`, detail: `${r.id} puts units of value into WELLBYs but sits outside an ours section` });
@@ -163,8 +172,10 @@ export function inv2b(lib: Library): InvariantReport {
     const ours = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
     const feedsConv = new Set<string>();
     const walk = (id: string) => { if (feedsConv.has(id)) return; feedsConv.add(id); m.byId.get(id)?.deps.forEach(walk); };
-    m.conversionRows.forEach(walk);
-    for (const id of m.conversionRows) {
+    // Rows a bridge's formula reads besides its input (a tco2e bridge's air_pollution_weight) follow the same rule.
+    const convRows = [...m.conversionRows, ...bridges.flatMap((b) => bridgeRows(m, b))];
+    convRows.forEach(walk);
+    for (const id of convRows) {
       const r = m.byId.get(id);
       if (r && !(r.section && ours.has(r.section)))
         violations.push({ inv: "INV-2b", model: m.id, where: `${id} section`, detail: `row ${id} is read by the ${m.output!.unit} conversion but sits outside an ours section` });
@@ -174,7 +185,7 @@ export function inv2b(lib: Library): InvariantReport {
   }
   return {
     id: "INV-2b", title: "No model row reads a cross-cause rate", status: "checked", checked: models.length, violations,
-    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. One exception, in WELLBY models only: the row ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula}, in an ours section, which puts deaths valued the site's way into WELLBYs so that the unit's conversion cancels the rate again (INV-17); what it converts reads no WELLBY rate. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.`,
+    how: `Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {${CROSS_CAUSE.map((a) => "$" + a).join(", ")}} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. Bridges are exempt (docs/normalization.md 2.6): a row in an ours section whose formula is exactly <input> * (<to_common of a ranked unit>) / (<to_common of the output unit>), which the output unit's conversion cancels, so the outcome in <input> reaches the headline through its own unit's shared conversion; WELLBY models' ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula} is the bridge from uov (INV-17), and what it converts reads no WELLBY rate. Rows a bridge reads besides its input (a tco2e bridge's air_pollution_weight) are held to the conversion-row rule below. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.`,
   };
 }
 
@@ -602,9 +613,8 @@ export function inv5b(lib: Library): InvariantReport {
 // --- INV-10: each slider moves exactly the models it should ---------------------------------------
 
 type Shape = "linear" | "independent";
-function expectations(m: ResolvedModel): [string, Shape][] {
-  const unit = m.output!.unit;
-  if (m.cause === "animal-welfare")
+function expectations(unit: string, animal: boolean): [string, Shape][] {
+  if (animal)
     return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
   const base: [string, Shape][] = ANIMAL_ASSUMPTIONS.map((a) => [a, "independent"]);
   // Climate: a tonne is worth the deaths it causes, each valued like an adult's death.
@@ -621,25 +631,33 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
-    // A WELLBY model's deaths, valued outside its WELLBYs, are held at 0 here: INV-17 checks them.
-    const held: Record<string, number> = m.output!.unit === "wellby" && m.byId.has(WELLBY_FROM_UOV.input) ? { [WELLBY_FROM_UOV.input]: 0 } : {};
-    const h0 = headline(lib, m, av, held);
-    if (!Number.isFinite(h0) || h0 === 0) continue;
+    // What a bridge brings in from another unit (a WELLBY model's deaths in units of value; 2.6) is
+    // held at 0 for the output unit's expectations and checked against its own unit's below.
+    const bridges = bridgesOf(lib, m);
+    const held: Record<string, number> = Object.fromEntries(bridges.map((b) => [b.input, 0]));
     // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
     // they move: no independence is expected for those.
     const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
-    for (const [a, shape] of expectations(m)) {
-      if (shape === "independent" && inherited.has(a)) continue;
-      const at = (k: number) => headline(lib, m, { ...av, [a]: av[a] * k }, held);
-      const h2 = at(1.5);
-      const ok = shape === "linear" ? close(h2, 1.5 * h0, 1e-9) && close(at(0.5), 0.5 * h0, 1e-9) : close(h2, h0, 1e-9);
-      if (!ok)
-        violations.push({ inv: "INV-10", model: m.id, where: `$${a} ${shape}`, detail: `headline should be ${shape === "linear" ? "proportional to" : "independent of"} $${a}: ${fmt(h0)} at default, ${fmt(h2)} at ×1.5 (${fmt((h2 / h0 - 1) * 100)}%)` });
-    }
+    const check = (part: (a: Record<string, number>) => number, unit: string, animal: boolean, where: string) => {
+      const h0 = part(av);
+      if (!Number.isFinite(h0) || h0 === 0) return;
+      for (const [a, shape] of expectations(unit, animal)) {
+        if (shape === "independent" && inherited.has(a)) continue;
+        const at = (k: number) => part({ ...av, [a]: av[a] * k });
+        const h2 = at(1.5);
+        const ok = shape === "linear" ? close(h2, 1.5 * h0, 1e-9) && close(at(0.5), 0.5 * h0, 1e-9) : close(h2, h0, 1e-9);
+        if (!ok)
+          violations.push({ inv: "INV-10", model: m.id, where: `${where}$${a} ${shape}`, detail: `${where ? `the part bridged from ${unit} ` : "headline "}should be ${shape === "linear" ? "proportional to" : "independent of"} $${a}: ${fmt(h0)} at default, ${fmt(h2)} at ×1.5 (${fmt((h2 / h0 - 1) * 100)}%)` });
+      }
+    };
+    check((a) => headline(lib, m, a, held), m.output!.unit, m.cause === "animal-welfare", "");
+    // WELLBY models' deaths are INV-17's; every other bridged part moves like a model of its own unit.
+    for (const b of bridges) if (!isWellbyFromUov(m, m.byId.get(b.row)!))
+      check((a) => headline(lib, m, a) - headline(lib, m, a, { [b.input]: 0 }), b.from, b.from === "ced", `${b.row} `);
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   };
 }
 
@@ -681,6 +699,9 @@ export function transitionRows(lib: Library, av = assumptionValues(lib.assumptio
     let vals: Record<string, number> | undefined;
     for (const r of ownRows(m)) {
       if (!/\bper\b|-year/i.test(r.label)) continue;
+      // Per dollar, not per animal or meal: the species step's split (sads_<s>, "SADs per dollar you give:
+      // chickens") and shares of SADs by species or SAD version are results, not a transition's figure.
+      if (/\bper (donor )?(dollar|\$|usd)\b|\$\s*\/|you give|\bshare of\b/i.test(r.label) || /^(sads|ced)_[a-z]+(_\d{4})?$/.test(r.id)) continue;
       let tr = TRANSITIONS.find((x) => x.test(r.label));
       if (!tr) continue;
       // The label often says only "to cage-free"; the explainer says which cage the hen leaves.
@@ -714,7 +735,7 @@ export function sameChange(lib: Library, av = assumptionValues(lib.assumptions))
   }
   return {
     id: "SAME-CHANGE", title: "Same physical change, same SADs figure", status: "partial", checked: new Set(rows.map((r) => r.model)).size, violations,
-    how: `Rows in animal models whose label states SADs per unit for one of ${TRANSITIONS.length} transitions (${TRANSITIONS.map((t) => t.id).join(", ")}), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: "animals spared → SADs" and "years of farmed life → SADs" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.`,
+    how: `Rows in animal models whose label states SADs per unit for one of ${TRANSITIONS.length} transitions (${TRANSITIONS.map((t) => t.id).join(", ")}), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: "animals spared → SADs" and "years of farmed life → SADs" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition; per-dollar rows (the species step's sads_<s> split, "SADs per dollar you give: chickens") and shares of SADs by species or SAD version, which are results, not a transition's figure.`,
   };
 }
 
@@ -791,7 +812,8 @@ export const SHARED_RATES: { id: string; what: string; test: (label: string) => 
 
 /** INV-11: an evaluator's own exchange rate doesn't survive in our view where a shared one exists. */
 export function inv11(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.output && m.owner !== "charityevals");
+  // Every model, charityevals' own included: one consistent way holds for ours too.
+  const models = [...lib.models.values()].filter((m) => m.output);
   const violations: Violation[] = [];
   for (const m of models) {
     const path = rowsFeeding(m);
@@ -806,7 +828,7 @@ export function inv11(lib: Library): InvariantReport {
   }
   return {
     id: "INV-11", title: "No evaluator-internal exchange rate where a shared one exists", status: "partial", checked: models.length, violations,
-    how: `Every evaluator's model (since 2026-11-02; before, Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
+    how: `Every model, charityevals' own included (since 2026-11-03; every evaluator's since 2026-11-02, before that Ambitious Impact's only): every row on the path to the output whose label states ${SHARED_RATES.map((s) => s.what).join("; ")} must read the shared version (${SHARED_RATES.map((s) => s.want).join("; ")}). Labels stand in for meaning, so a rate under another name isn't seen.`,
   };
 }
 
@@ -932,6 +954,10 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "income-to-mortality-ratio", test: /\bratio of value generated from income increases to value generated from mortalit/i, facts: ["givewell_shared.income_to_mortality_value_ratio"] },
   { id: "value-of-cyp", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\b(cyp|year of (modern )?contracepti\w*|couple[- ]years? of protection)\b/i, not: /death/i, facts: ["givewell_shared.uov_per_cyp_low_income", "givewell_shared.uov_per_cyp_nigeria", "givewell_shared.uov_per_cyp_sierra_leone"], context: (t) => (/nigeria|kano|lagos|kaduna/i.test(t) ? "Nigeria" : /sierra leone/i.test(t) ? "Sierra Leone" : undefined) },
   { id: "value-of-stillbirth", test: /\b(value|moral weight|units? of value)\b[^.;]{0,40}\bstill ?births?\b/i, facts: ["givewell_shared.uov_per_stillbirth"] },
+  // GiveWell's indirect malaria deaths per direct one: one fact per sheet vintage; the site's ranked malaria models read `_2` (0.75).
+  { id: "indirect-deaths-malaria", test: /\bindirect (malaria )?deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\bmalaria\b|\bdeaths? malaria causes indirectly\b/i, facts: ["givewell.indirect_malaria_deaths_per_direct_malaria_death", "givewell.indirect_malaria_deaths_per_direct_malaria_death_2", "givewell.indirect_malaria_deaths_per_direct_malaria_death_3", "givewell.ratio_of_indirect_malaria_deaths_per_direct_malaria_death"] },
+  // Non-fatal malaria as a share of the mortality and income value (GiveWell's supplemental +9%); not case counts or incidence.
+  { id: "malaria-morbidity", test: /\bmalaria (illness|morbidity)\b|\bmorbidity\b[^.;]{0,30}\bmalaria\b/i, not: /\bcases?\b|\bincidence\b|\bepisodes?\b/i, facts: ["givewell_common.malaria_morbidity"] },
   { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
   { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy"] },
   // One household size per place (facts/household_size.json, the latest DHS survey): a row naming a household's size reads its place's fact.
@@ -1121,13 +1147,24 @@ export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     const d0 = part(av), d1 = part({ ...av, daly_per_wellby: av.daly_per_wellby * 1.5 });
     if (!close(d0, d1, 1e-9))
       violations.push({ inv: "INV-17", model: m.id, where: "$daly_per_wellby", detail: `the deaths' part of the headline moves with the WELLBY rate: ${fmt(d0)} → ${fmt(d1)} at ×1.5` });
-    const l0 = headline(lib, m, av, { [WELLBY_FROM_UOV.input]: 0 }), l1 = headline(lib, m, { ...av, life_value_multiplier: av.life_value_multiplier * 1.5 }, { [WELLBY_FROM_UOV.input]: 0 });
+    const held = Object.fromEntries(bridgesOf(lib, m).map((b) => [b.input, 0]));
+    const l0 = headline(lib, m, av, held), l1 = headline(lib, m, { ...av, life_value_multiplier: av.life_value_multiplier * 1.5 }, held);
     if (!close(l0, l1, 1e-9))
       violations.push({ inv: "INV-17", model: m.id, where: "$life_value_multiplier", detail: `the WELLBYs without the deaths still move with the value of a life (${fmt(l0)} → ${fmt(l1)}): a death is valued inside the WELLBYs` });
   }
+  // Every other model that bridges units of value into its own unit (2.6): a death is valued in units
+  // of value and reaches the output only through that bridge, so it moves with nothing but the value of a life.
+  const others = [...lib.models.values()].filter((m) => m.output && m.output.unit !== "wellby" && m.kind !== "variant" && bridgesOf(lib, m).some((b) => b.from === "uov"));
+  for (const m of others) {
+    const path = rowsFeeding(m);
+    // Bridges themselves are exempt: a tco2e bridge values the deaths a tonne causes through its unit's conversion.
+    const into = new Set([...bridgesOf(lib, m).filter((b) => b.from === "uov").flatMap((b) => [...upstream(m, b.input)]), ...bridgesOf(lib, m).map((b) => b.row)]);
+    for (const r of m.rows) if (path.has(r.id) && !into.has(r.id) && (r.factDeps.some((f) => f.startsWith("moral_weights.")) || r.assumptionDeps.includes("life_value_multiplier")))
+      violations.push({ inv: "INV-17", model: m.id, where: `${r.id} deaths`, detail: `${r.id} values deaths but reaches the ${m.output!.unit} output other than through its bridge from units of value` });
+  }
   return {
-    id: "INV-17", title: "Deaths in WELLBY models don't move with the WELLBY rate", status: "checked", checked: models.length, violations,
-    how: `WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in ${WELLBY_FROM_UOV.input} and put it into WELLBYs only in ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula} (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with ${WELLBY_FROM_UOV.input} = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest doesn't move with $life_value_multiplier.`,
+    id: "INV-17", title: "Deaths in WELLBY models don't move with the WELLBY rate", status: "checked", checked: models.length + others.length, violations,
+    how: `WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in ${WELLBY_FROM_UOV.input} and put it into WELLBYs only in ${WELLBY_FROM_UOV.row} = ${WELLBY_FROM_UOV.formula} (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with ${WELLBY_FROM_UOV.input} = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest (every bridge's input at 0) doesn't move with $life_value_multiplier. Any other model with a bridge from uov (docs/normalization.md 2.6) values its deaths only upstream of that bridge.`,
   };
 }
 
