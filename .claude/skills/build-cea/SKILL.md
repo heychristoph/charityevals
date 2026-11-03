@@ -5,20 +5,16 @@ description: Build charityevals' own cost-effectiveness analysis (CEA) for a cha
 
 # Build a CEA
 
-This skill produces charityevals' own cost-effectiveness model of one charity,
-`models/<cause>/<charity>-charityevals.json`: it starts from what the charity spent in a year and what that spending did, and ends in **years of healthy life
-per $1,000 donated**, the one scale every model on the site reports, so any two charities can be
-ranked side by side. The loop: build from a template, have an independent auditor (audit-cea, in a
+This skill produces charityevals' own model of one charity, `models/<cause>/<charity>-charityevals.json`:
+from what the charity spent in a year and what that did to **years of healthy life per $1,000
+donated**, the site's one scale. The loop: build from a template, have an independent auditor (audit-cea, in a
 fresh subagent) check it, fix what it finds, repeat until no high-severity finding remains. Terms
 (uov, SAD, canonical row, INV-n, Convention n): [glossary](references/templates.md#glossary).
 
 1. **One consistent way.** Every conversion, value of a death, discount, cash benchmark, currency rate,
    household size, species weight, SADs figure, years a won reform counts, pledges kept and sign
-   convention is the site's shared one (docs/normalization.md section 2: units 2.1–2.5, shared
-   conversions 2.7, money moved 2.8, won reforms 2.9, next dollar 2.10, estimate age 2.11; invariants
-   section 3). Every slider moves every model it concerns, so a reader's change to a value judgment
-   moves every ranking alike. Two models of a family differ only where the
-   charities differ.
+   convention is the site's shared one (docs/normalization.md sections 2 and 3). Every slider moves
+   every model it concerns; two models of a family differ only where the charities differ.
 2. **Best guesses**, not conservative cases: a cautious figure in one model beside a best guess in
    another would rank them unfairly, so caution goes into the range.
 3. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
@@ -26,9 +22,8 @@ fresh subagent) check it, fix what it finds, repeat until no high-severity findi
    Formulas hold no constants beyond `ALLOWED_LITERALS` (src/engine/lint.ts), never one beside a lever
    (a slider): a typed constant hides a choice the checks and the reader can't see.
 4. **Faithful to the evidence**: thin evidence gets a wide range and a plain sentence.
-5. **Fix, don't flag.** An inconsistency you find (in your model, a template, a shared fact) is fixed,
-   since a flagged one still reaches the site: read the shared figure, add the missing fact, correct
-   the row.
+5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed, since a
+   flagged one still reaches the site.
 
 The templates read every shared figure their family needs and pass every check as they stand
 (src/engine/templates.test.ts): keep those rows and you stay consistent. The lint and the invariants
@@ -39,23 +34,21 @@ enforce the mechanical rules (audit-model runs them, step 3).
 - Inputs: the charity's name or website; optionally an output path, a **blind list** (sources you must
   not read, for test runs: docs/eval-skills.md) and a date
   to use as today.
-- **Blind runs and shared facts.** Shared facts and sliders always win, even where a fact's source is
-  an evaluator's sheet: they are the site's one answer for every model, not a figure about this
-  charity, so reading them isn't peeking. Don't open their source links, and
-  don't use any evaluator figure for this charity you happen to see.
+- **Blind runs and shared facts.** Shared facts and sliders always win, even from an evaluator's sheet:
+  they are the site's one answer for every model, so reading them isn't peeking. Don't open their
+  source links or use any evaluator figure for this charity you happen to see.
 - Read assumptions/default.json, the facts/*.json labels, src/engine/templates.ts and
   [references/templates.md](references/templates.md) (its **Conventions** first). Skim a model of the
-  same family, else an evaluator model of the intervention, unless the blind list forbids it.
+  family or intervention unless the blind list forbids it.
 - A charityevals model of the charity exists already: update it.
-- **What to model.** The charity's work in the latest year with audited financials and reach for the
-  same period, by spending: its main programme first, then every programme of at least a tenth of
-  programme spending (smaller ones under "What isn't modelled"): branches of one model when they share
-  a family (Convention 4), else one model per family (`<charity>-charityevals-<program>`),
-  weighted by spending in `charities/<id>.json` `programs` with `weight_source` (import-cea section 6).
-  Grants to sister organisations count as the activities they fund. Never a case study or pilot in
-  place of the programme, never another year than the one the money pays for: a donor funds the whole
-  programme as it runs now, and a case study is usually picked because it went well. A programme with
-  no spending split and no outcome data: Convention 12 (partial coverage).
+- **What to model: every programme** (owner, 2026-11-03), in the latest year with audited financials
+  and reach for the same period, main programme first: branches of one model when they share a family
+  (Convention 4), else one model per family (`<charity>-charityevals-<program>`), weighted by spending
+  in `charities/<id>.json` `programs` with `weight_source` (import-cea section 6). Grants to sister
+  organisations count as the activities they fund. Never a case study, pilot or other year in place
+  of the programme: a donor funds the whole programme as it runs now. Thin outcome data: the closest
+  family's chain with wide ranged judgments. No outcome data at all: the proxy branch (Convention 12).
+  Nothing is left out.
 - An Ambitious Impact (AIM) idea-stage model of this charity marked `theoretical` (made before the
   charity ran the work) is shown only while no model of its actual work exists: once yours is in
   models/, remove it and record it in inventory/ambitious-impact-models.json
@@ -71,9 +64,17 @@ enforce the mechanical rules (audit-model runs them, step 3).
 | `corporate-campaign` | cage-free, broiler, fish or shrimp stunning and other company or producer reforms, accountability on pledges | SADs → ced | past_average |
 | `diet-change` | institutional meal replacement, pledges, cooking classes, plant-based outreach | SADs → ced | unit_cost (past_average for won menu changes) |
 | `policy-research-meta` | legislation, research, fundraising/meta, capacity building, career changes | uov, wellby or SADs → ced; climate skeleton, tco2e | past_average |
+| `domestic-services` | food banks, housing, youth, veterans, older people, gifts in rich countries | WELLBYs, uov, DALYs → daly | unit_cost |
+| `humanitarian-relief` | disasters, conflict, refugees, emergency food (blood supply: direct-health) | uov, DALYs → daly | unit_cost |
+| `medical-research` | research, guidelines and advocacy of disease charities | DALYs → daly | past_average |
+| `companion-animals` | shelters, rehoming, neutering, vet care for dogs and cats | pain days → ced | unit_cost |
+| `conservation` | land, water and species protection | tco2e, uov, WELLBYs, DALYs, ced → daly | unit_cost |
+| `rights-advocacy` | litigation, laws changed, people released | WELLBYs, uov, DALYs → daly | past_average |
 
-Never force a programme into a family whose causal chain doesn't fit (its rows would measure
-something else).
+Hospitals and hospices in rich countries: `direct-health` with illness in DALYs, or `wellbeing`, at the
+country's costs and rates. Each new family's chain, shared figures and pitfalls:
+[references/families/](references/families/). Never force a programme into a family whose chain
+doesn't fit.
 
 ## 2. Research
 
@@ -86,7 +87,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
 
 - `id` `<charity>-charityevals`, `kind: "charity"`, `charity`, `owner: "charityevals"`, `template`,
   `cause`, `estimate_basis`, `summary` (2–4 plain sentences: what the charity does, where, the year,
-  the result in years of healthy life per $1,000, the biggest uncertainty, any partial coverage),
+  the result in years of healthy life per $1,000, the biggest uncertainty, any programme proxied),
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
 - **Keep every canonical row id, `output` and the section kinds**, so the model compares row by row
@@ -102,7 +103,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
     `@givewell_shared.uov_per_stillbirth`, both × `$life_value_multiplier`;
   - income ln(consumption) × `$uov_per_ln_consumption`; GiveWell's house constants `@givewell_shared.*`
     and supplementary figures `@givewell_common.*`;
-  - household size `@household_size.<place>` (missing: add the latest DHS figure); PPP
+  - household size `@household_size.<place>`; rich countries' consumption `@united_states.*`; PPP
     `@<country>.ppp_factor_2017`; currency `@fx.usd_per_<cur>_<year>`, other years' prices
     `@cpi.<iso3>_<year>` (Convention 8);
   - cash multiples × `@cash.uov_per_dollar`; money to GiveDirectly `#givedirectly` (live);
@@ -119,16 +120,15 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - every future benefit, and every wait before it, reads `$discount_rate`; never a typed present value;
   - a won reform counts `$win_years_counted` years, the wait until it takes effect discounted; coalition
     credit is the charity's share of all groups' resources (Convention 2);
-  - `estimate_basis` (INV-18: only past averages read the next-dollar slider; Convention 11): a
-    `past_average` keeps the template's `marginal_vs_past_average` row, since the next dollar usually
-    does less than the average one; change the basis only for a reason you write down;
+  - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps the template's
+    `marginal_vs_past_average` row; change the basis only for a reason you write down;
   - money moved goes through the shared rows of src/engine/moved-money.ts word for word
     (`python3 scripts/moved-money.py <model> <destination set> net`), destinations live (`#model-id`);
     career changes through `career_change_value` (INV-12);
-  - deaths in a `wellbeing` model enter WELLBYs only through `wellbys_from_uov` (INV-17), so
-    they don't move with the WELLBY rate;
+  - deaths outside a uov model enter only through its bridge from uov (`wellbys_from_uov`, INV-17);
+  - a programme with no outcome data: the proxy rows (Convention 12, `$missing_data_discount`);
   - no exchange rate between outcomes inside the model (INV-2): the output unit's conversion does
-    that once, so the cross-cause sliders move every model alike;
+    that once; another unit's outcome enters only through the template's bridge rows (2.6);
   - animal families, the species step: SADs → `sads_<s>` → `ced_<s>` with the SAD version of the
     figure it divides (cage-to-aviary and meals 2024; enriched cages, broilers and shrimp 2025), a pair
     per species and version, the species split a sourced fact or ranged judgment;
@@ -149,8 +149,7 @@ As you go: `npx tsx scripts/audit-model.ts <path>` (every check, the result, tor
 ## 4. Audit loop (independent)
 
 When the mechanical audit has no high findings, have a **separate subagent with fresh context** audit
-the model, given only the model path, the write-up path, the blind list and the previous findings file
-(not your notes), so it checks the model and its sources rather than your reasoning:
+the model, given only the model, write-up, blind list and previous findings (not your notes):
 
 ```
 Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
@@ -159,11 +158,8 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
                --exclude <ids> for audit-model.ts and normalization-audit.ts>. Don't edit the model.")
 ```
 
-Then:
-
 1. Fix every **high** and **medium** finding with the fix it names (or a better one that settles the
    same problem, said in the next round's input); fix lows unless the fix would be wrong, and say why.
-   "Noted" or "flagged" isn't a fix.
 2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
 3. Stop when an audit of the current version has no high findings, or after **3 rounds**. Highs left:
    don't publish; keep the model out of `models/` and report what is unresolved.
@@ -177,7 +173,7 @@ don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`).
 
 Report: the result (native unit; years of healthy life per $1,000 with audit-model's `Combined range`
 (glossary), the joint low–high only as the extreme case), the year and
-programmes modelled (with weights) and any left out, the top 3 swings, the share of judgment, audit
+programmes (with weights; which are proxied), the top 3 swings, the share of judgment, audit
 rounds with counts, every fact or assumption added.
 
 To change the templates: edit `scripts/gen-templates.py`, run it, keep src/engine/templates.ts in step,

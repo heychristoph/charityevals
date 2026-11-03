@@ -25,8 +25,8 @@ currency, year).
   where the IRS lists the currency, else the World Bank's official rate; `scripts/link-fx.py` adds a
   missing year), never a typed rate or a constant in a formula.
 - Programmes: list every programme with its spending for the year (the statement of functional
-  expenses or the annual report's breakdown); you model all that are a tenth or more of programme
-  spending, weighted by spending (SKILL.md step 0).
+  expenses or the annual report's breakdown); you model every one, weighted by
+  spending (SKILL.md step 0); note which have no outcome data at all (the proxy rows).
 
 ## Reach (reach section)
 
