@@ -161,6 +161,24 @@ about structure.
 None of these were chosen to move a test result toward the evaluator; several would move results
 away (e.g. the duration input lets a plateau, as in Friendship Bench, raise the estimate).
 
+### Before the re-run (November 2026: the skills brought up to today's rules, not re-run)
+
+Every fix is a rule of the site applied generally, none tuned toward an evaluator's number:
+
+- **Templates follow every rule out of the box.** Each skeleton (and a new climate one in tco2e)
+  carries `estimate_basis`, a build date in `source.published`, staff pay from `@staff_pay`, deaths by
+  age band, stillbirths, household sizes by place, the moved-money rows and the career-change step; a
+  test (src/engine/templates.test.ts) runs every invariant and the lint on each skeleton filled in.
+- **Animal weak spots.** Scope: the builder models the programmes the money pays for by spending (every
+  one of a tenth or more, by funding weight) in the latest year, never a case study (DVF's gap). Reach
+  and persistence of won commitments: every animal under the commitments, delivery only in the shared
+  fulfilment rate, `$win_years_counted` from the discounted wait (SWP's and THL's gaps). Per-meal SADs:
+  the shared figure × a meal-mix ratio from a published estimate covering both places, never rebuilt
+  from a meat mix (DVF's 0.19). The lint enforces the shared reads; the critic checks scope and the
+  cause's median.
+- **The critic** runs every invariant on the model (scripts/audit-model.ts, drafts included) and the
+  normalization audit, treats any violation as high, and gives a concrete fix for every finding.
+
 ## Known limitations
 
 - **Small sample.** Five test charities, one or two per family; no test of the cash-income or

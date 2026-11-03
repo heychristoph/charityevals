@@ -231,7 +231,7 @@ writeups/the-humane-league.md and writeups/givedirectly.md:
 - `npx tsx scripts/check.ts <id>`: every `expected` reproduces (1e-6), both views' results and the
   tornado. A mismatch means the translation is wrong: fix it, never `expected`.
   (`npm run check -- <id>` passes the id to the summaries check, not to check.ts.)
-- `npx tsx scripts/normalization-audit.ts`: no violation for the model (INV-1 … INV-17, SAME-CHANGE). Fix it. A flag you have
+- `npx tsx scripts/normalization-audit.ts`: no violation for the model (INV-1 … INV-19, SAME-CHANGE). Fix it. A flag you have
   checked by hand and found false (a coincidence of values, a word used otherwise) gets a waiver with
   its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
 - `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev`.
