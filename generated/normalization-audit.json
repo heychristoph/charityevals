@@ -25,7 +25,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $daly_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. One exception, in WELLBY models only: the row wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly), in an ours section, which puts deaths valued the site's way into WELLBYs so that the unit's conversion cancels the rate again (INV-17); what it converts reads no WELLBY rate. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
+  "how": "Every row a model wrote itself (variants: only rows they override): assumptionDeps ∩ {$daly_per_sad, $daly_per_wellby, $sads_per_animal_spared, $chicken_vs_person, $daly_per_disabling_day, $deaths_per_tco2e, $climate_heat_share, $climate_heat_death_delay} must be empty, and $uov_per_daly only where evaluator.assumptions pins it. Bridges are exempt (docs/normalization.md 2.6): a row in an ours section whose formula is exactly <input> * (<to_common of a ranked unit>) / (<to_common of the output unit>), which the output unit's conversion cancels, so the outcome in <input> reaches the headline through its own unit's shared conversion; WELLBY models' wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) is the bridge from uov (INV-17), and what it converts reads no WELLBY rate. Rows a bridge reads besides its input (a tco2e bridge's air_pollution_weight) are held to the conversion-row rule below. The one sanctioned way a model shapes its conversion is a row the unit's to_common names by a fixed id (tco2e: air_pollution_weight, docs/normalization.md 2.5): it must sit in an ours section, and neither it nor any row feeding it may read a shared assumption.",
   "waived": 0,
   "failing_models": []
  },
@@ -66,7 +66,7 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 35296,
+   "input equals a shared value but its label doesn't resemble the shared one's": 35603,
    "input equals a house-constant fact but under another label": 15862,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7336,
    "round value (one significant digit) and labels only loosely alike": 90,
@@ -155,7 +155,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+  "how": "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   "waived": 1,
   "failing_models": []
  },
@@ -235,7 +235,7 @@
   "status": "checked",
   "checked": 13,
   "violations": [],
-  "how": "WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in uov_valued_outside_wellbys and put it into WELLBYs only in wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with uov_valued_outside_wellbys = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest doesn't move with $life_value_multiplier.",
+  "how": "WELLBY models (not variants) that value a death (a row on the path reads @moral_weights.* or $life_value_multiplier) must value it in units of value in uov_valued_outside_wellbys and put it into WELLBYs only in wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly) (in an ours section; INV-2b), which the unit's conversion ($daly_per_wellby * $uov_per_daly) cancels. Checked by computation: the deaths' part of the headline (headline − headline with uov_valued_outside_wellbys = 0) doesn't move when $daly_per_wellby is ×1.5, and the rest (every bridge's input at 0) doesn't move with $life_value_multiplier. Any other model with a bridge from uov (docs/normalization.md 2.6) values its deaths only upstream of that bridge.",
   "waived": 0,
   "failing_models": []
  },
