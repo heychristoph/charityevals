@@ -28,6 +28,9 @@ describe("expressions", () => {
     // B + NPV(4%, B × 14) + 0, ACE cage-free cell B12
     expect(ev("pv_annuity_due(7864022, 0.04, 15)")).toBeCloseTo(90932653.11, 1);
     expect(ev("pv_annuity_due(100, 0, 2.5)")).toBeCloseTo(250);
+    // Under a year counts only that fraction of the first year, not a whole year plus the fraction.
+    expect(ev("pv_annuity_due(100, 0.04, 0.25)")).toBeCloseTo(25);
+    expect(ev("pv_annuity_due(100, 0.04, 0)")).toBe(0);
   });
   it("computes spreadsheet NPV with the first value one period out", () => {
     expect(ev("npv(0.1, 110, 121)")).toBeCloseTo(200);

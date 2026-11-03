@@ -212,7 +212,11 @@ export function evaluatorFigureModels(lib: Library, owner: string, charity: stri
 
 /** The model a charity's main page shows: its first evaluator's first model that counts on the
  * rankings, so the page's model is the one behind its headline and homepage row. A charity off the
- * rankings: its first model in modelsOf order. */
+ * rankings: its first model in modelsOf order. charityevals' own models of several programmes
+ * (build-cea: `<charity>-charityevals` and `-<program>` siblings) show the programme with the most
+ * weight, the charity's main model, whatever order the files load in. */
 export function primaryModel(lib: Library, charity: string): ResolvedModel | undefined {
-  return rankingPlan(lib, charity)[0]?.parts[0]?.model ?? modelsOf(lib, charity)[0];
+  const parts = rankingPlan(lib, charity)[0]?.parts ?? [];
+  const main = parts[0]?.model.owner === "charityevals" ? [...parts].sort((a, b) => (b.weight ?? 0) - (a.weight ?? 0))[0] : parts[0];
+  return main?.model ?? modelsOf(lib, charity)[0];
 }
