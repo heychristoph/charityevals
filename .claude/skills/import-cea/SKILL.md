@@ -14,13 +14,12 @@ versions in 2.7, money moved in 2.8, won reforms in 2.9, the invariants in secti
 decisions of 2026-10-30 and 2026-10-31). It is the rulebook; this skill only says how to apply it. The checks are src/engine/invariants.ts; the schema is src/engine/schema.ts.
 
 Worked examples to copy:
-- models/animal-welfare/the-humane-league.json: species step, shared per-change SAD figures as
-  "changed for consistency" overwrites with ACE's number in `published`.
-- models/animal-welfare/dansk-vegetarisk-forening.json: several species from one SADs figure.
-- models/global-health/against-malaria-foundation.json: `output.native`, `ours` section, PV rebuilt
+- models/animal-welfare/sinergia-animal.json: species step, shared per-change SAD figures as
+  "changed for consistency" overwrites with ACE's number in `published`, several species from one figure.
+- models/global-health/malaria-consortium-smc.json: `output.native`, `ours` section, PV rebuilt
   on `$discount_rate` with GiveWell's rate pinned, credit by share of resources.
-- models/global-health/strongminds.json, against-malaria-foundation-hli.json, models/grants/hli/:
-  our discounting and value-of-life levers on an evaluator that has neither, pinned to HLI's values.
+- models/global-health/taimaka-hli.json, models/grants/hli/: our discounting and value-of-life levers
+  on an evaluator that has neither, pinned to HLI's values.
 
 **One consistent way** (owner, 2026-10-31): wherever charityevals has its own version of a
 conversion (an exchange rate between outcomes, a DALY definition, value of life, discounting,
@@ -101,8 +100,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   deaths are valued in units of value and enter WELLBYs only through the sanctioned row
   `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion
   cancels, so deaths don't move with the WELLBY slider (INV-17); the evaluator's own death value (years
-  above a neutral point) stays in `published` for the evaluator view (AMF-HLI, Taimaka-HLI;
-  normalization.md 2.3).
+  above a neutral point) stays in `published` for the evaluator view (normalization.md 2.3).
 - **Depression** is anchored on the GBD disability weights: PHQ-9 points read
   `@depression.dalys_per_phq9_point_year`, one SD is `@depression.phq9_sd` points; HLI's SD-years stay in
   WELLBYs (`@wellby_factors.wellbys_per_sd_year`), and the WELLBY slider's default is calibrated so both
@@ -140,7 +138,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
   not a unit cost of delivery, not a projected budget), multiply by the slider `$marginal_vs_past_average` in
-  an `ours` section (`published` 1), as the retrospective climate models and The Life You Can Save do. Set
+  an `ours` section (`published` 1), as the retrospective climate models and the money-moving charities do. Set
   the model's `estimate_basis`: `past_average`, `marginal` (an estimate of the next grant or of planned
   work) or `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider
   (normalization.md 2.10).
@@ -167,7 +165,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
 - **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
   moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of
   cash, counterfactual share or success chance in our view. Write the shared rows with
-  `python3 scripts/moved-money.py <model> <global-health|livelihoods|tlycs> [net]` (destinations read live with
+  `python3 scripts/moved-money.py <model> <destination set> [net]` (destinations read live with
   `#model-id`) and multiply money moved by `moved_dollar_net_value` (or a result already in counterfactual
   "EA dollars" by `moved_dollar_value`); a new organisation's chance of success reads
   `@meta.success_chance_new_org`, the evaluator's figure in `published`. Career changes use the shared
@@ -183,7 +181,7 @@ become the range. The evaluator view (pins and `published`) still reproduces eve
   SAD version (2024 or 2025) whose weights are built into the figure the row divides *in our view*
   (a shared `@sad_factors` fact says its basis in its note; ACE's 2025 sheets use 2025 SADs, its
   2024 sheets and the 2024 meal sheet 2024 SADs). Figures of two versions for one species: a second
-  pair `sads_<s>_<v>` / `ced_<s>_<v>` (The Humane League). Counts that
+  pair `sads_<s>_<v>` / `ced_<s>_<v>`. Counts that
   aren't SADs use `ced_<s> = pain_days_<s> * @welfare_ranges.<s>_vs_chicken`. Only `ced_*` rows read
   `@welfare_ranges` or `@aim_sads`.
 - **One SADs figure per physical change** (SAME-CHANGE): a row giving SADs for a change in
