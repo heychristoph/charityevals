@@ -1,0 +1,634 @@
+{
+  "id": "template-humanitarian-relief",
+  "name": "Template: humanitarian relief in crises",
+  "kind": "template",
+  "cause": "global-health",
+  "template": "humanitarian-relief",
+  "estimate_basis": "unit_cost",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, in which crises, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: humanitarian relief in crises",
+    "url": "https://charityevals.org/template-humanitarian-relief",
+    "published": "2026-01-01",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "proxy",
+      "title": "Programmes with no outcome data",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached in the year modelled",
+      "format": "integer",
+      "value": 100000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity report / OCHA cluster data",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people who received the response (food, water, shelter, health care) in the year the spending covers, unique people, from the charity's or the cluster's reporting; say which."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: compare with the charity's own figure and with other responses."
+    },
+    {
+      "id": "crisis_mortality_rate",
+      "section": "effect",
+      "label": "Death rate among the people reached during the crisis, without the response",
+      "format": "small",
+      "value": {
+        "low": 0.01,
+        "best": 0.02,
+        "high": 0.05
+      },
+      "kind": "estimate",
+      "unit": "deaths / person-year",
+      "source": {
+        "title": "TEMPLATE: SMART survey / mortality study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: deaths per person-year (a crude mortality rate of 1 per 10,000 a day is 0.0365), from mortality surveys of the crisis (SMART, CDC, the Sphere emergency thresholds as a check), for the period before the response or a comparable unserved group."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Death rate in the same population before the crisis",
+      "format": "small",
+      "value": {
+        "low": 0.005,
+        "best": 0.008,
+        "high": 0.012
+      },
+      "kind": "observed",
+      "unit": "deaths / person-year",
+      "source": {
+        "title": "TEMPLATE: UN WPP / DHS",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: deaths per person-year before the crisis (UN WPP, DHS, the country's facts file), so only excess deaths count."
+    },
+    {
+      "id": "share_excess_averted",
+      "section": "effect",
+      "label": "Share of the excess deaths the response averts among the people reached",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much of the crisis's excess mortality this kind of response removes for those it reaches, anchored on studies of the intervention (food aid, water and sanitation, measles campaigns, nutrition treatment) in emergencies; name the anchor."
+    },
+    {
+      "id": "years_exposed",
+      "section": "effect",
+      "label": "Years of the crisis the response covers per person",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: charity report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: how long each person is protected by the response (months served ÷ 12)."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
+      "explainer": "Excess deaths over the years covered, times the share the response averts."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the age split of the deaths averted, from WHO Global Health Estimates or IHME GBD for the causes and places (a split another model could reuse goes into facts/death_ages.json and is read here)."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest of the age split, band by band, from the same source, so every death is valued at its own band (docs/normalization.md 2.7)."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest at 50 and over (GiveWell's 50-74 weight; for deaths mostly above 75, as in rich-country care, a mix of @moral_weights.givewell_age_75_79 … _85_plus by the deaths' ages instead)."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "The site's one value of a death, by age band, times your value of a life."
+    },
+    {
+      "id": "dalys_illness_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "estimate",
+      "unit": "DALYs",
+      "source": {
+        "title": "TEMPLATE: study / GBD 2019 disability weights",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: illness other than deaths (acute malnutrition, cholera, injuries treated): cases averted per person × the GBD disability weight (@gbd_disability_weights; add it if missing) × the years it lasts."
+    },
+    {
+      "id": "value_delivered_per_person",
+      "section": "effect",
+      "label": "Food, water and shelter delivered per person in the year (US$)",
+      "format": "usd",
+      "value": {
+        "low": 20,
+        "best": 50,
+        "high": 120
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: charity report / market prices",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: what the goods cost on the local market per person, in US dollars, for the share of their value not counted as deaths and illness averted above (0 when the response is valued only through those)."
+    },
+    {
+      "id": "ppp_factor",
+      "section": "effect",
+      "label": "PPP conversion (2017 international $ per US $)",
+      "format": "number",
+      "formula": "@kenya.ppp_factor_2017",
+      "explainer": "TEMPLATE: point at the country's fact (add facts/<country>.json from the World Bank)."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Consumption per person per year of the people reached (PPP)",
+      "format": "usd",
+      "value": {
+        "low": 300,
+        "best": 500,
+        "high": 800
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: needs assessment / World Bank PIP",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: in 2017 international dollars, from a crisis needs assessment or the World Bank poverty data for the region."
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * ppp_factor / baseline_consumption)",
+      "explainer": "A year's goods on the site's one log-income scale."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome other responders wouldn't have delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much of this response would have been delivered anyway by the government, UN agencies or other NGOs had this charity not been there: from the response's funding coverage (OCHA FTS, the appeal's percentage funded) and gaps in the cluster's 4W data. Name the source."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "0",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_per_person",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_staff_delivered",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_staff_delivered; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_health_field); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "unit": "Years of healthy life / $",
+      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
+    },
+    {
+      "id": "proxy_program_spend",
+      "section": "proxy",
+      "label": "Spending on programmes with no outcome data at all, in the year modelled",
+      "format": "usd",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges."
+    },
+    {
+      "id": "proxy_peer_result",
+      "section": "proxy",
+      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
+      "format": "small",
+      "formula": "#givedirectly",
+      "unit": "units of value / $",
+      "explainer": "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)"
+    },
+    {
+      "id": "proxy_share",
+      "section": "proxy",
+      "label": "Share of the programme spending here that has no outcome data",
+      "format": "percent",
+      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
+      "explainer": "The modelled programmes' result counts for the rest of the spending."
+    },
+    {
+      "id": "proxy_per_donor_dollar",
+      "section": "proxy",
+      "label": "Units of value per dollar you give, from programmes with no outcome data",
+      "format": "small",
+      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
+      "unit": "units of value / $",
+      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+    },
+    {
+      "id": "proxy_in_dalys",
+      "section": "proxy",
+      "label": "The same, in this model's unit (DALYs)",
+      "format": "small",
+      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
+      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

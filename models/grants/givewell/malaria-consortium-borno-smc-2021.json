@@ -938,14 +938,14 @@
       "id": "adjustments_for_excluded_effects_malaria_morbidity",
       "label": "Adjustments for excluded effects: Malaria morbidity",
       "section": "malaria_consortium",
-      "value": 0.09,
-      "kind": "judgment",
+      "formula": "@givewell_common.malaria_morbidity",
+      "expected": 0.09,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/18l_L5DHm7u0PP3ewoVSv6PIxAoysPK9Upxqthz9FX_Q/edit",
         "cell": "Malaria Consortium!B170"
       },
-      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A170),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A170)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`; kept as a fixed number here (ISBLANK()).",
+      "explainer": "Calculated in the source sheet as `=iferror(if(isblank($A170),\"\",index('Adjustments for excluded effect'!$M:$M,match(1,('Adjustments for excluded effect'!$C:$C=$A170)*('Adjustments for excluded effect'!$A:$A=\"SMC\"),0))),\"Not specified\")`. Here it reads the shared fact @givewell_common.malaria_morbidity (0.09, GiveWell's malaria illness share in its net, SMC and malaria-vaccine sheets).",
       "format": "percent"
     },
     {
