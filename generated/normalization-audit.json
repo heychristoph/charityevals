@@ -45,7 +45,7 @@
   "status": "checked",
   "checked": 348,
   "violations": [],
-  "how": "Every formula row on the path to the output (variants: their overrides) is split into its product and quotient chains and its function calls' argument lists; a chain or argument list holding both a non-toggle shared assumption ($life_value_multiplier, $discount_rate, …) and a constant outside lint's ALLOWED_LITERALS (0, 1, 0.5, 100, 1000, 1000000, 12, 52, 365, 365.25, 0.000001) is flagged. Such a constant is a value the lever is meant to replace (8 for a death next to $life_value_multiplier) or an evaluator's input that INV-2c, INV-4 and INV-13 can't see inside a formula: it must read the shared fact, with the evaluator's figure in `published`, or become its own labelled input row. ln(2) and other constants inside a function of their own (not beside the assumption) pass.",
+  "how": "Every formula row on the path to the output (variants: their overrides) is split into its product and quotient chains and its function calls' argument lists; a chain or argument list holding both a non-toggle shared assumption ($life_value_multiplier, $discount_rate, …) and a constant outside lint's ALLOWED_LITERALS (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001) is flagged. Such a constant is a value the lever is meant to replace (8 for a death next to $life_value_multiplier) or an evaluator's input that INV-2c, INV-4 and INV-13 can't see inside a formula: it must read the shared fact, with the evaluator's figure in `published`, or become its own labelled input row. ln(2) and other constants inside a function of their own (not beside the assumption) pass.",
   "waived": 0,
   "failing_models": []
  },
@@ -66,8 +66,8 @@
   "checked": 348,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 34699,
-   "input equals a house-constant fact but under another label": 15880,
+   "input equals a shared value but its label doesn't resemble the shared one's": 35296,
+   "input equals a house-constant fact but under another label": 15862,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7336,
    "round value (one significant digit) and labels only loosely alike": 90,
    "input within 0.2% of a shared value (not equal) and labels only loosely alike": 19,
@@ -163,9 +163,9 @@
   "id": "SAME-CHANGE",
   "title": "Same physical change, same SADs figure",
   "status": "partial",
-  "checked": 11,
+  "checked": 10,
   "violations": [],
-  "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition.",
+  "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition; per-dollar rows (the species step's sads_<s> split, \"SADs per dollar you give: chickens\") and shares of SADs by species or SAD version, which are results, not a transition's figure.",
   "waived": 0,
   "failing_models": []
  },
@@ -195,17 +195,17 @@
   "status": "partial",
   "checked": 118,
   "violations": [],
-  "how": "Rows on the path to the output (not variants) whose label names one of 17 concepts several evaluators state (resource-sharing, treatment-costs-averted, investment-of-income, long-term-benefit-years, wage-gain-per-iq-point, cf-value-government, cf-value-global-fund, cf-value-gavi, income-to-mortality-ratio, value-of-cyp, value-of-stillbirth, indirect-deaths-diarrhea, household-spillover-therapy, household-size, commitment-fulfilment, prior-weight-education, depression-per-phq9-point) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in `published`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.",
-  "waived": 37,
+  "how": "Rows on the path to the output (not variants) whose label names one of 19 concepts several evaluators state (resource-sharing, treatment-costs-averted, investment-of-income, long-term-benefit-years, wage-gain-per-iq-point, cf-value-government, cf-value-global-fund, cf-value-gavi, income-to-mortality-ratio, value-of-cyp, value-of-stillbirth, indirect-deaths-malaria, malaria-morbidity, indirect-deaths-diarrhea, household-spillover-therapy, household-size, commitment-fulfilment, prior-weight-education, depression-per-phq9-point) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in `published`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.",
+  "waived": 39,
   "failing_models": []
  },
  {
   "id": "INV-14",
   "title": "No house constant without a shared fact",
   "status": "partial",
-  "checked": 9225,
+  "checked": 9211,
   "violations": [],
-  "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
+  "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
   "waived": 0,
   "failing_models": []
  },
