@@ -1,6 +1,7 @@
 import type React from "react";
 import { useState } from "react";
 import { bulkRaw, lib, modelUrl } from "../lib/data";
+import { clearEdits, readEdits, setPageModels } from "../lib/edit-state";
 import { useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
@@ -20,6 +21,9 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   const [loading, setLoading] = useState<string | undefined>();
   const toggle = async (mid: string) => {
     if (open === mid) return setOpen(undefined);
+    // An edit belongs to the programme it was made in: switching programmes starts from its own numbers
+    // (two programmes can share a row id, and one's edit must not carry over to the other).
+    if (open && Object.keys(readEdits()).length) clearEdits();
     if (lib.models.get(mid)?.bulk && !bulkRaw(mid)) {
       setLoading(mid);
       try {
@@ -35,6 +39,9 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     setOpen(mid);
   };
   const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  // Every programme on the page keeps its own edits in the URL (edit-state: setPageModels); set while
+  // rendering, as the headline's island may filter the edits before this one's effects run.
+  if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
   if (!ev || ev.programs.length < 2) return <ModelView id={id} bulk={!!model.bulk}>{children}</ModelView>;
   const charity = lib.charities.get(model.charity)!;
   const weighted = ev.basis === "weighted";
