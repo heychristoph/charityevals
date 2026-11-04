@@ -78,7 +78,9 @@ def link(m, cfg):
                           "(1 in the evaluator view).")
         m["rows"].insert(m["rows"].index(r), base)
     if cfg.get("deaths"):
-        pins["life_value_multiplier"] = 1
+        # $life_value_multiplier is worked out from the life slider and the healthy-year rate: 1 at AIM's rate.
+        pins.setdefault("uov_per_daly", 2.3)
+        pins["daly_per_child_death"] = 116.25262 / pins["uov_per_daly"]
 
     native = cfg["native"]
     unit, label, formula = OUTCOME[cfg["outcome"]]

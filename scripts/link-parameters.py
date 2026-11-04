@@ -111,7 +111,9 @@ def link_assumptions(m):
         v = r.get("value", r.get("expected"))
         if k == "life":
             link(r, f"{num(v)} * $life_value_multiplier", f"GiveWell's moral weight, {num(v)} units of value, times your multiplier on the value of a life.")
-            ev["life_value_multiplier"] = 1
+            # $life_value_multiplier is worked out from these two: 1 at GiveWell's values.
+            ev.setdefault("uov_per_daly", 2)
+            ev["daly_per_child_death"] = 116.25262 / ev["uov_per_daly"]
         elif k in ("ln", "daly"):
             a = {"ln": "uov_per_ln_consumption", "daly": "uov_per_daly"}[k]
             if legacy:

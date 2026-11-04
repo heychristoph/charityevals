@@ -162,6 +162,6 @@ describe("INV-12: money moved is valued one way", () => {
     expect(v.moved_dollar_value).toBeGreaterThan(v["#givedirectly"]);
     expect(v.moved_dollar_net_value).toBeCloseTo(0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v["#givedirectly"]));
     // Moving a slider the destinations read moves the meta model.
-    expect(headline(l, m, { ...av, life_value_multiplier: av.life_value_multiplier * 2 })).toBeGreaterThan(headline(l, m, av));
+    expect(headline(l, m, { ...av, daly_per_child_death: av.daly_per_child_death * 2 })).toBeGreaterThan(headline(l, m, av));
   });
 });

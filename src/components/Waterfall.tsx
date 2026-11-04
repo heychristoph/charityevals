@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
-import { assumptionValues, headline, type ResolvedModel } from "../engine/model";
+import { assumptionValues, headline, unitFormula, type ResolvedModel } from "../engine/model";
 import { parse, type Node } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
@@ -45,7 +45,7 @@ function show(row: { format?: string; shown_as?: { factor: number; format?: stri
  * read for people): each shared value with its plain meaning and a link to its slider; a conversion that
  * isn't a plain product (climate's) as one factor. */
 function conversionFactors(unit: string, model: ResolvedModel, evaluator: boolean, owner: string): Factor[] {
-  const to = lib.assumptions.units[unit]?.to_common;
+  const to = unitFormula(lib.assumptions, unit);
   if (!to || unit === "daly") return [{ value: "1,000", label: "per $1,000 instead of per dollar", inv: false }];
   const defaults = assumptionValues(lib.assumptions);
   const at = (id: string) => (evaluator && model.evaluator?.assumptions[id] !== undefined ? model.evaluator.assumptions[id] : defaults[id]);
@@ -75,7 +75,9 @@ function conversionFactors(unit: string, model: ResolvedModel, evaluator: boolea
     const pinned = evaluator && model.evaluator?.assumptions[node.name] !== undefined;
     // The start is the evaluator's own figure, so it uses their value; ours replaces it in a step below.
     const ours = pinned ? show(row, defaults[node.name]) : undefined;
-    out.push({ value, label: PLAIN[node.name] ?? row?.label ?? node.name, by: pinned ? `${possessive(owner)} value; we use ${ours} (a step below)` : "your value", inv, href: `#a-${node.name}` });
+    // A pin at our own default (GiveWell's healthy-year rate) has no step of its own.
+    const same = pinned && model.evaluator!.assumptions[node.name] === defaults[node.name];
+    out.push({ value, label: PLAIN[node.name] ?? row?.label ?? node.name, by: same ? `${possessive(owner)} value, the same as ours` : pinned ? `${possessive(owner)} value; we use ${ours} (a step below)` : "your value", inv, href: `#a-${node.name}` });
   }
   out.push({ value: "1,000", label: "per $1,000 instead of per dollar", inv: false });
   return out;

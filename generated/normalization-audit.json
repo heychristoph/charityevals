@@ -66,14 +66,14 @@
   "checked": 366,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 59134,
+   "input equals a shared value but its label doesn't resemble the shared one's": 58012,
    "input equals a house-constant fact but under another label": 17549,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7973,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7978,
    "round value (one significant digit) and labels only loosely alike": 107,
    "input within 0.2% of a shared value (not equal) and labels only loosely alike": 19,
    "shared label too generic (under three significant words) for a loose match": 8,
    "input equals a country fact but is about another place": 72,
-   "formula constant is short (one or two significant digits) and the row label only loosely resembles the shared one": 9
+   "formula constant is short (one or two significant digits) and the row label only loosely resembles the shared one": 4
   },
   "how": "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.2%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label, or uses one of the synonyms for it (ln(consumption) or a doubled income for $uov_per_ln_consumption; a DALY or disability weight or (DW) for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for @cash); near-equal (not equal) values without a synonym, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
   "waived": 51,
