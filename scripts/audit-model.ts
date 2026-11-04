@@ -5,7 +5,8 @@
 //   2. the bottom line, joint low/high and the tornado (which inputs drive the result)
 //   3. the reference class: other hand-built models in the same unit, and other charityevals models
 //      of the same template family row by row, so implausible values stand out; the model against its
-//      cause's median (more than 10× above without a stated reason: high, INV-15; under a tenth: medium)
+//      cause's median (more than 10× above without a stated reason: high, INV-15; under a tenth: medium,
+//      low when the summary says why)
 //   4. every normalization invariant (src/engine/invariants.ts) on the model, in a library of it and the
 //      models it reads live, waivers applied: any violation is a high finding (drafts outside models/ too)
 // --exclude drops models from the library (for blind tests: the auditor mustn't see the answer).
@@ -108,7 +109,9 @@ if (peers.length >= 3 && Number.isFinite(line.native)) {
 }
 // Against its cause on the site (INV-15): the median of the other hand-built charity models of the cause,
 // in years of healthy life per $1,000. Far above needs a stated reason; far below usually means another
-// scope (a side programme, a case study, another year) or reach and persistence counted short.
+// scope (a side programme, a case study, another year) or reach and persistence counted short, and is
+// low once the summary says why (it names the gap, "far below" or "under a tenth of" the median or its peers).
+const FAR_BELOW_REASON = /\b(far below|(?:under|less than) (?:a|one) (?:tenth|hundredth|thousandth) of)\b[^.]*\b(median|peers)\b/i;
 const causePeers = [...lib.models.values()]
   .filter((x) => x.id !== m.id && x.kind === "charity" && x.output && !x.bulk && x.cause === m.cause)
   .map((x) => headline(lib, x, av)).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
@@ -116,8 +119,11 @@ const causeMedian = causePeers.length >= 3 ? (causePeers.length % 2 ? causePeers
 if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
   if (years > 10 * causeMedian && !OUTLIER_REASON.test(m.summary ?? ""))
     findings.push({ severity: "high", code: "INV-15", message: `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)}) and the summary doesn't say why`, fix: 'Find the row that makes the difference; correct it, or state the reason in the summary ("more than ten times its peers because …").' });
-  if (years < causeMedian / 10)
-    findings.push({ severity: "medium", code: "far-below", message: `${years.toPrecision(3)} years of healthy life per $1,000 is under a tenth of the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})`, fix: "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong, or say in the summary why it is low." });
+  // Said in the summary already ("far below the median because …"): low, a reminder to keep the sentence.
+  if (years < causeMedian / 10) {
+    const said = FAR_BELOW_REASON.test(m.summary ?? "");
+    findings.push({ severity: said ? "low" : "medium", code: "far-below", message: `${years.toPrecision(3)} years of healthy life per $1,000 is under a tenth of the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})${said ? "; the summary says why" : ""}`, fix: said ? "Keep the summary's reason; check it still matches the rows that make the gap." : "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong, or say in the summary why it is low (\"far below the median because …\")." });
+  }
 }
 
 // The normalization invariants (docs/normalization.md section 3) on this model, in a library of it and the
