@@ -1103,7 +1103,7 @@ new audit rounds):
   it doesn't take `$missing_data_discount`. Templates (domestic-services, cash-income, humanitarian-relief)
   and our models: the American Red Cross (disaster relief: 0.00261 → 0.00454 years per $1,000, ×1.74),
   Habitat for Humanity US (×1.75), the Salvation Army US (×1.54), United Way (×1.16), and the drafts (St.
-  Jude ×1.01, Habitat's awareness ×1.30, which no longer adds a share of the gap to the national accounts;
+  Jude ×1.01, Habitat's awareness ×3.4: ×1.30 from its US branch and ×2.6 more once its verification round found the 13 Home Equals baselines still adding a share of the gap to the national accounts (the share, gap_top_share, is gone);
   the Red Cross's and Salvation Army's international work, whose shares were re-expressed on the survey
   scale, ×1.00). The national accounts stay where everyone's consumption is meant (the taxpayers who fund
   public money).
@@ -1116,7 +1116,7 @@ new audit rounds):
   change), the British Heart Foundation's CPR and defibrillator branches (×0.98 for the model), St. Jude's
   care, global and graduate branches (draft ×0.86) and its cancer research branch (×0.91).
 
-No model moved by more than 2×.
+One model moved by more than 2×: Habitat's awareness and advocacy model (0.0021 → 0.0071 years per $1,000), above. The five models held back or changed after their last audit (the Red Cross's measles and international relief, St. Jude's patient care, Habitat's awareness, the Salvation Army's overseas work) then had a verification round of only those changes (build-cea step 4); all passed (two after one more fix and round) and are published.
 
 ## 3. Invariants
 

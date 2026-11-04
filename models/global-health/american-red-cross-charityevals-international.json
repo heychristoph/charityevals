@@ -3,14 +3,7 @@
   "name": "American Red Cross: international disaster relief (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {
-    "LBN": 0.16,
-    "UKR": 0.16,
-    "MOZ": 0.51,
-    "BGD": 0.07,
-    "MMR": 0.09,
-    "BRA": 0.01
-  },
+  "beneficiaries": {"LBN":0.16,"UKR":0.16,"MOZ":0.51,"BGD":0.07,"MMR":0.09,"BRA":0.01},
   "beneficiaries_note": "Our build: disaster-response grants to Red Cross and Red Crescent societies, weighted by region from the Form 990's Schedule F (Middle East 45%, Europe 25%, Sub-Saharan Africa 15%, South Asia 7%, East Asia 5%, the Americas 3.5%), each region valued at a stand-in country (Lebanon, Ukraine, Mozambique, Bangladesh, Myanmar, Brazil): shares of the result at the defaults (the poorest, Mozambique, 51%).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
@@ -174,16 +167,20 @@
     {
       "id": "intl_relief_share",
       "section": "reach",
-      "label": "Share of the relief programme's assistance line spent on relief to people",
+      "label": "Share of the non-measles grants abroad for disaster response (applied to the relief programme's assistance line)",
       "format": "percent",
-      "value": 0.639,
+      "value": {
+        "low": 0.55,
+        "best": 0.639,
+        "high": 0.7
+      },
       "kind": "observed",
       "explainer": "Of the grants abroad other than measles, the share for disaster response: the rest, a third, is disaster preparedness (early warning, anticipatory cash, risk reduction), valued in unmodelled benefits.",
       "source": {
         "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
         "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
         "retrieved": "2026-11-04",
-        "quote": "Disaster Response and Disaster Preparedness grant lines (49 lines in all)",
+        "quote": "Disaster response 12,759,181 and disaster preparedness 7,220,510 of the non-measles grants (19,979,691): 0.639",
         "note": "Disaster response 12,759,181; disaster preparedness 7,220,510; 12,759,181 / 19,979,691 = 0.639 of the grants abroad other than measles."
       }
     },
@@ -198,7 +195,7 @@
         "high": 0.8
       },
       "kind": "estimate",
-      "explainer": "Share of the relief grants that reaches people as goods, cash, shelter or services. The IFRC appeals the Red Cross funded that year spent most on the sectors that reach people: Myanmar earthquake 80% (41% as cash), Typhoon Yagi 78%, Bangladesh flash floods 68%, Cyclone Remal 97% (final and one-year reports, MDRMM023, MDRMM021, MDRBD036, MDRBD035); the Brazil floods appeal planned 52%, with 29% for strengthening the national society. Weighted by the Red Cross's contributions about 0.73 of what was spent, and the sector lines still carry their own staff and logistics: about 0.65, from 0.45 to 0.8. As read by the round-3 auditor; the builder verified only the Brazil plan.",
+      "explainer": "Share of the relief grants that reaches people as goods, cash, shelter or services. The IFRC appeals the Red Cross funded that year spent most on the sectors that reach people: Myanmar earthquake 80% (41% as cash), Typhoon Yagi 78%, Bangladesh flash floods 68%, Cyclone Remal 97% (final and one-year reports, MDRMM023, MDRMM021, MDRBD036, MDRBD035); the Brazil floods appeal planned 52%, with 29% for strengthening the national society. Weighted by the Red Cross's contributions about 0.73 of what was spent, and the sector lines still carry their own staff and logistics: about 0.65, from 0.45 to 0.8.",
       "source": {
         "title": "IFRC, Myanmar earthquake emergency appeal MDRMM023, one-year report (operating budget implementation)",
         "url": "https://go-api.ifrc.org/api/DownloadFile/91014/MDRMM023_One-Year-Report",
@@ -212,7 +209,7 @@
       "section": "reach",
       "label": "People reached by the relief the Red Cross funded (estimated)",
       "format": "integer",
-      "explainer": "The relief money that reaches people, divided by what each gets: about 100,000 people. A wide estimate, since neither number is published.",
+      "explainer": "The relief money that reaches people, divided by what each gets: about 150,000 people at the best guesses. A wide estimate, since neither number is published.",
       "formula": "intl_assistance * (1 - msl_spend_share) * intl_relief_share * intl_value_share / value_delivered_per_person"
     },
     {
@@ -367,7 +364,14 @@
         "high": 0.55
       },
       "kind": "judgment",
-      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Middle East and North Africa 5,697,155 of 12,759,181 (44.7%). A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Lebanon stands for the region: the grants most likely went to the Lebanon escalation, Gaza and Syria responses; Lebanon, a middle-income economy, is the stand-in (Gaza's incomes and mortality are far worse, which the range of the deaths rows allows for)."
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Middle East and North Africa 5,697,155 of 12,759,181 (44.7%). A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Lebanon stands for the region: the grants most likely went to the Lebanon escalation, Gaza and Syria responses; Lebanon, a middle-income economy, is the stand-in (Gaza's incomes and mortality are far worse, which the range of the deaths rows allows for).",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Middle East and North Africa 5,697,155 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
     },
     {
       "id": "w_ukraine_of_rest",
@@ -380,7 +384,14 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Europe and Russia Europe 3,131,204 + Russia and neighbouring states 100,000 = 3,231,204 (25.3%), 45.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Ukraine stands for the region: the war in Ukraine is the main European response."
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Europe and Russia Europe 3,131,204 + Russia and neighbouring states 100,000 = 3,231,204 (25.3%), 45.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Ukraine stands for the region: the war in Ukraine is the main European response.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Europe 3,131,204 and Russia and neighbouring states 100,000 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
     },
     {
       "id": "w_mozambique_of_rest",
@@ -393,7 +404,14 @@
         "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Sub-Saharan Africa 1,905,000 (14.9%), 49.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Mozambique stands for the region: drought and storms in southern Africa (the annual report names Mozambique's drought)."
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Sub-Saharan Africa 1,905,000 (14.9%), 49.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Mozambique stands for the region: drought and storms in southern Africa (the annual report names Mozambique's drought).",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Sub-Saharan Africa 1,905,000 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
     },
     {
       "id": "w_bangladesh_of_rest",
@@ -406,7 +424,14 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: South Asia 839,566 (6.6%), 43.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Bangladesh stands for the region: the 2024 floods and Cyclone Remal."
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: South Asia 839,566 (6.6%), 43.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Bangladesh stands for the region: the 2024 floods and Cyclone Remal.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: South Asia 839,566 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
     },
     {
       "id": "w_myanmar_of_rest",
@@ -419,7 +444,14 @@
         "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: East Asia and the Pacific 638,080 (5.0%), 58.8% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Myanmar stands for the region: the March 2025 earthquakes and Typhoon Yagi."
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: East Asia and the Pacific 638,080 (5.0%), 58.8% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Myanmar stands for the region: the March 2025 earthquakes and Typhoon Yagi.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: East Asia and the Pacific 638,080 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
     },
     {
       "id": "w_lebanon",
@@ -586,7 +618,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Disaster-affected households' consumption per person over the year, as a share of their country's household-survey mean (the baseline rows put the national accounts on the survey scale with the shared ratios). Anchors from the World Bank's Poverty and Inequality Platform (api.worldbank.org/pip, retrieved 4 November 2026) and WDI household consumption in 2021 PPP (NE.CON.PRVT.PP.KD over population): the household-survey mean is 0.82 of the national-accounts mean in Mozambique (2022), 0.52 in Bangladesh (2022) and 0.81 in Brazil (2024, income); the poorest 40%'s mean is 0.33 of the survey mean in Mozambique, 0.54 in Bangladesh, 0.30 in Brazil and 0.55 in Myanmar (2017). Relief targets the worst-affected and poorest, about the poorest 40%: 0.27, 0.28 and 0.24 of the national-accounts mean in the three countries with both figures. About 0.3, from 0.2 to 0.5 (relief spread across the affected population). A year's consumption is the base, not the short dip right after the disaster, since the relief is counted against a year. The same share is applied to Lebanon and Ukraine (no comparable split there; displaced households' consumption falls far below their country's mean), within the range. Re-expressed on 4 November 2026 from a share of the national-accounts mean (0.3, 0.2–0.5) by the three countries' survey-to-national-accounts ratios this explainer names (mean 0.72), so the baseline is unchanged; the poorest 40%'s 0.30–0.55 of the survey mean anchors it directly."
+      "explainer": "Disaster-affected households' consumption per person over the year, as a share of their country's household-survey mean (the baseline rows put the national accounts on the survey scale with the shared ratios). Anchors from the World Bank's Poverty and Inequality Platform (api.worldbank.org/pip, retrieved 4 November 2026) and WDI household consumption in 2021 PPP (NE.CON.PRVT.PP.KD over population): the household-survey mean is 0.82 of the national-accounts mean in Mozambique (2022), 0.52 in Bangladesh (2022) and 0.81 in Brazil (2024, income); the poorest 40%'s mean is 0.33 of the survey mean in Mozambique, 0.54 in Bangladesh, 0.30 in Brazil and 0.55 in Myanmar (2017). Relief targets the worst-affected and poorest, about the poorest 40%: 0.27, 0.28 and 0.24 of the national-accounts mean in the three countries with both figures.  A year's consumption is the base, not the short dip right after the disaster, since the relief is counted against a year. The same share is applied to Lebanon and Ukraine (no comparable split there; displaced households' consumption falls far below their country's mean), within the range. Re-expressed on 4 November 2026 from a share of the national-accounts mean (0.3, 0.2–0.5) by the three countries' survey-to-national-accounts ratios this explainer names (mean 0.72), so the baseline is unchanged; the poorest 40%'s 0.30–0.55 of the survey mean anchors it directly."
     },
     {
       "id": "mmr_consumption_share_of_gdp",
@@ -783,11 +815,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.15,
-        "high": 0.35
+        "best": 0.28,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "A third of the grants abroad other than measles ($7.2 million) went to preparedness: early warning, anticipatory cash, cash readiness and coastal risk reduction (Schedule F; the IFRC Bangladesh appeals name the American Red Cross's coastal programme). Its cost is in the model and its value isn't modelled; at about half of relief's value per dollar (the evidence on forecast-based and anticipatory action is thin) it adds about 0.36 / 0.64 × 0.5 ≈ 28%; taken down for the thin evidence: about +15%, from 0 to 35%."
+      "explainer": "A third of the grants abroad other than measles ($7.2 million) went to preparedness: early warning, anticipatory cash, cash readiness and coastal risk reduction (Schedule F; the IFRC Bangladesh appeals name the American Red Cross's coastal programme). Its cost is in the model and its value isn't modelled; at about half of relief's value per dollar it adds about 0.36 / 0.64 × 0.5 ≈ 28%, from 0 to 50%. The thin evidence on forecast-based and anticipatory action is not cut here: the model's missing-data step already discounts it (one step, not two)."
     },
     {
       "id": "other_unmodelled_share",

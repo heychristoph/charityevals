@@ -3,10 +3,7 @@
   "name": "St. Jude Children's Research Hospital: patient care, St. Jude Global, training and community programmes (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {
-    "world": 0.89,
-    "USA": 0.11
-  },
+  "beneficiaries": {"world":0.89,"USA":0.11},
   "beneficiaries_note": "Our build: St. Jude Global's partner hospitals in more than 70 countries and the graduate school's research (89% of the result at the defaults, spread by world population: a judgment, the build names no split), and patient care, clinical training and community programmes in the US (11%).",
   "template": "direct-health",
   "estimate_basis": "unit_cost",
@@ -1037,7 +1034,7 @@
       "label": "Graduate school branch: value of a death averted",
       "format": "number",
       "formula": "((@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier) * survivor_life_share",
-      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths, times your multiplier on the value of a life. Times the survivors' remaining-life share (survivor_life_share).",
+      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths, times your multiplier on the value of a life. Times the survivors' remaining-life share (survivor_life_share). Glover et al.'s returns already count some of survivors' shorter lives, so the ratio may overlap a little here (the branch is about 5% of the result); kept so every death is valued one way.",
       "unit": "uov"
     },
     {
@@ -1415,7 +1412,7 @@
       "label": "Consumption gain per family member in a treatment year, ln(consumption)",
       "format": "small",
       "formula": "ln(1 + us_family_costs_per_year / (@household_size.united_states * @united_states.ce_expenditure_per_person_2024))",
-      "explainer": "The family's saving as a share of an average US household's consumption by the household survey (2.4 people at the Consumer Expenditure Survey's $32,723 each, 2024), on the site's one log scale. The saving is valued like cash (the cash-income family's chain). Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending; A shared conversion, not thin data."
+      "explainer": "The family's saving as a share of an average US household's consumption by the household survey (2.4 people at the Consumer Expenditure Survey's $32,723 each, 2024), on the site's one log scale. The saving is valued like cash (the cash-income family's chain). Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending. A shared conversion, not thin data."
     },
     {
       "id": "us_evidence_adj",
@@ -2031,7 +2028,7 @@
       "format": "number",
       "unit": "units of value",
       "formula": "((us_share_under5 * @moral_weights.uov_per_death_under5 + (1 - us_share_under5) * (us_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - us_share_5_14_of_over5) * (us_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - us_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier) * survivor_life_share",
-      "explainer": "GiveWell's moral weights for the age band of each death, times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7), the same for a child in Memphis as anywhere. Times the survivors' remaining-life share (survivor_life_share)."
+      "explainer": "GiveWell's moral weights for the age band of each death, times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7), the same for a child in Memphis as anywhere. Times the survivors' remaining-life share (survivor_life_share). The childhood-cancer ratio stands for the few non-cancer deaths too (about 5%)."
     },
     {
       "id": "gl_value_per_death",
