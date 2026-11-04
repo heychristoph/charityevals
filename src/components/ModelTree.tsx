@@ -455,8 +455,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
           </span>
         </span>
         <span id={`${id}-v`} className={`tn-val num ${edited ? "tn-edited" : ""}`}>
-          {/* The bottom line is the figure the page headlines just above: read out, not shown twice. */}
-          {root ? <span className="visually-hidden">{show(m, n, ctx.years)}</span> : <>{show(m, n, false)}{odds && <span className="tn-odds"> {odds}</span>}</>}
+          {show(m, n, root && ctx.years)}{odds && <span className="tn-odds"> {odds}</span>}
         </span>
         <span
           id={`${id}-e`}
