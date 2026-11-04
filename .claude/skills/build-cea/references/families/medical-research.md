@@ -17,8 +17,14 @@ advocacy    adv_people_affected_per_year × adv_dalys_per_person_year × adv_p_s
 of the field's funding; ÷ cost_total; × $marginal_vs_past_average
 ```
 
-The burden is in DALYs already (GBD), deaths included, so the uov and WELLBY bridges stay at 0 unless
-a branch measures wellbeing or income (then they carry it, never a rate typed in).
+The burden is GBD DALYs, mostly years of life lost to deaths at GBD's life expectancy, which the
+value-of-a-life slider doesn't touch. As everywhere on the site (normalization.md, decision 2026-10-31
+#4), split each branch's DALYs into the illness part (`@death_ages.<cause>_yld_share_<place>`, kept as
+DALYs) and the deaths behind the rest (`@death_ages.<cause>_deaths_per_daly_<place>`), valued by age
+(`@death_ages.<cause>_share_<band>_<place>` × `@moral_weights`, the five-year weights above 70 in rich
+countries) × `$life_value_multiplier` in units of value, and bring those through `uov_bridged` →
+`dalys_from_uov` with the branch's own adjustments (british-heart-foundation-charityevals does this).
+The WELLBY bridge stays at 0 unless a branch measures wellbeing.
 
 ## Shared figures it reads
 
