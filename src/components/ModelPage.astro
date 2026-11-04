@@ -458,9 +458,17 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     display: grid;
     gap: var(--s4);
   }
+  /* A <details> doesn't lay its content out as a grid, so the groups space themselves: more room
+     above a group's heading than between the heading and its list. */
+  .resources > p {
+    margin: var(--s2) 0 var(--s4);
+  }
+  .res-group + .res-group {
+    margin-top: var(--s5);
+  }
   .res-group h3 {
     font-size: 17px;
-    margin-bottom: var(--s2);
+    margin: 0 0 var(--s2);
   }
   .res-group ul {
     margin: 0;
