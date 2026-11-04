@@ -1,18 +1,22 @@
+import type React from "react";
+import { useState } from "react";
 import { lib, modelUrl } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
+import ModelView from "./ModelView";
 
 const pct = (x: number) => `${x >= 0.995 ? 100 : x < 0.01 ? (x * 100).toPrecision(1) : Math.round(x * 100)}%`;
 
-/** The charity as a whole, on its main page, when its figure combines several programs: the total at
- * the top and each program's model as a part, with its share of the spending and what it adds to the
- * total (the funding-weighted mean of src/engine/ranking.ts: combine, so the parts add up to it). The
- * model shown below the section is the main one; the others link to their own pages. */
-export default function WholeCharity({ id }: { id: string }) {
+/** A charity whose figure combines several programs, as one tree: the whole charity at the top (the
+ * funding-weighted mean of src/engine/ranking.ts: combine, so the parts add up to it), each program's
+ * model a branch that opens into that model's own tree. One branch is open at a time (each tree has
+ * its own search and anchors); the main model's first. `children`: the evaluation's write-up. */
+export default function WholeCharity({ id, children }: { id: string; children?: React.ReactNode }) {
   const model = lib.models.get(id)!;
   const { results } = useResults();
+  const [open, setOpen] = useState<string | undefined>(id);
   const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
-  if (!ev || ev.programs.length < 2) return null;
+  if (!ev || ev.programs.length < 2) return <ModelView id={id}>{children}</ModelView>;
   const charity = lib.charities.get(model.charity)!;
   const weighted = ev.basis === "weighted";
   const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
@@ -20,56 +24,56 @@ export default function WholeCharity({ id }: { id: string }) {
   const rows = ev.programs
     .map((p) => {
       const share = weighted ? (p.weight ?? 0) / total : undefined;
-      return {
-        p,
-        label: charity.programs?.find((x) => x.id === p.program)?.label ?? plainModelName(p.result.model.name),
-        share,
-        adds: share !== undefined ? share * p.central : undefined,
-      };
+      return { p, label: charity.programs?.find((x) => x.id === p.program)?.label ?? plainModelName(p.result.model.name), share };
     })
     .sort((a, b) => (b.share ?? 0) - (a.share ?? 0) || b.p.central - a.p.central);
 
   return (
-    <section className="whole" aria-labelledby="whole-title">
-      <h2 id="whole-title" className="whole-title">The whole charity</h2>
-      <p className="whole-lede">
+    <div className="whole" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
+      <div className="whole-root">
+        <span className="whole-root-label">Years of healthy life per $1,000, the whole charity</span>
+        <span className="whole-root-value num">{formatYears(ev.central)}</span>
+      </div>
+      <p className="whole-lede small">
         {weighted
-          ? <>The figure above is the charity as a whole: each programme's own model, weighted by its share of {by}. Each part's figure moves with your values like the total.</>
-          : <>The figure above is the median of the charity's programmes: not every programme has a share of the funding to weigh it by.</>}
+          ? <>Each programme's own model, weighted by its share of {by}. Open one to see its whole model.</>
+          : <>The median of the charity's programmes: not every programme has a share of the funding to weigh it by.</>}
       </p>
-      <table className="whole-table">
-        <thead>
-          <tr>
-            <th scope="col">Programme</th>
-            {weighted && <th scope="col" className="num">Share of spending</th>}
-            <th scope="col" className="num">Years of healthy life per $1,000</th>
-            {weighted && <th scope="col" className="num">Adds to the total</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ p, label, share, adds }) => {
-            const here = p.result.model.id === model.id;
-            return (
-              <tr key={p.program} className={here ? "here" : undefined}>
-                <th scope="row">
-                  {here ? <span>{label} <span className="muted small">(its model is below)</span></span> : <a href={modelUrl(lib, p.result.model)}>{label}</a>}
-                </th>
-                {weighted && <td className="num">{pct(share!)}</td>}
-                <td className="num">{formatYears(p.central)}</td>
-                {weighted && <td className="num">{formatYears(adds!)}{ev.central > 0 && <span className="muted small"> ({pct(adds! / ev.central)})</span>}</td>}
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th scope="row">The whole charity</th>
-            {weighted && <td className="num">100%</td>}
-            <td className="num">{formatYears(ev.central)}</td>
-            {weighted && <td />}
-          </tr>
-        </tfoot>
-      </table>
-    </section>
+      <ul className="whole-parts">
+        {rows.map(({ p, label, share }) => {
+          const mid = p.result.model.id;
+          const here = open === mid;
+          const adds = share !== undefined ? share * p.central : undefined;
+          return (
+            <li key={p.program} className={here ? "open" : undefined}>
+              <button type="button" className="whole-part" aria-expanded={here} onClick={() => setOpen(here ? undefined : mid)}>
+                <span className="whole-chev" aria-hidden>{here ? "▾" : "▸"}</span>
+                <span className="whole-part-label">{label}</span>
+                <span className="whole-part-math num">
+                  {share !== undefined && <>{pct(share)} × </>}
+                  {formatYears(p.central)}
+                  {adds !== undefined && <> = <strong>{formatYears(adds)}</strong>{ev.central > 0 && <span className="muted"> ({pct(adds / ev.central)} of the total)</span>}</>}
+                </span>
+              </button>
+              {here && (
+                <div className="whole-model">
+                  <ModelView
+                    id={mid}
+                    about={
+                      <p>
+                        <strong>{plainModelName(p.result.model.name)}</strong> by {lib.owners.get(p.result.model.owner)?.name ?? p.result.model.owner}
+                        {p.result.model.source?.published && <>, {new Date(p.result.model.source.published).toLocaleDateString("en-GB", { year: "numeric", month: "long" })}</>}.{" "}
+                        {modelUrl(lib, p.result.model) !== `/${charity.id}` && <><a href={modelUrl(lib, p.result.model)}>Its own page</a>, with the model file and history.</>}
+                      </p>
+                    }
+                  />
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      {children}
+    </div>
   );
 }
