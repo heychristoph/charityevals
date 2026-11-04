@@ -26,8 +26,9 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
                     docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
                     with @welfare_ranges (the raw species step)
-  every skeleton    the proxy rows for a programme with no outcome data: comparable models read live
-                    x $missing_data_discount (docs/normalization.md 2.12)
+  every skeleton    missing_data_adj in total_adj (a branch's <branch>_missing_data_adj): the shared
+                    $missing_data_discount where the outcome isn't measured for this charity, else 1 with
+                    the reason (docs/normalization.md 2.12)
 """
 import json, os, subprocess, sys
 
@@ -36,6 +37,7 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "templates")
 EX = "https://example.org/REPLACE"
 D = "2026-01-01"
+PUBLISHED = "2026-11-04"  # the build date; on or after src/engine/lint.ts MISSING_DATA_RULE_DATE
 
 def src(title, page="REPLACE: page/table", quote="REPLACE: verbatim sentence"):
     return {"title": f"TEMPLATE: {title}", "url": EX, "page": page, "quote": quote, "retrieved": D}
@@ -77,6 +79,12 @@ def cost_rows():
         f("cost_total", "cost", "Cost of the modelled program, including overhead", "program_spend * overhead_ratio", None, "usd"),
     ]
 
+def missing_data_row(id, section, what="this branch's outcome"):
+    """The shared missing-data step (docs/normalization.md 2.12, templates.md Convention 12): one marker per
+    branch (Convention 4: <branch>_missing_data_adj), the shared slider or 1, nothing else."""
+    return f(id, section, "Counted less where the outcome isn't measured for this charity", "$missing_data_discount",
+             f"TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when {what} rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here.", "percent")
+
 def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None):
     rows = list(evidence_rows) if evidence_rows else [
         inp("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", {"low": 0.5, "best": 0.7, "high": 0.9}, "judgment",
@@ -97,7 +105,8 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, im
         rows.append(inp("leverage_funging_adj", "adjustments", "Leverage and funging", {"low": 0.85, "best": 0.95, "high": 1.05}, "judgment",
             "below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95.", "multiple"))
     rows += list(extra)
-    factors = ["evidence_adj", "counterfactual_adj", "attribution_share"] + (["implementation_adj"] if implementation else []) + (["leverage_funging_adj"] if leverage else []) + list(factors_extra)
+    rows.append(missing_data_row("missing_data_adj", "adjustments"))
+    factors = ["evidence_adj", "counterfactual_adj", "attribution_share"] + (["implementation_adj"] if implementation else []) + (["leverage_funging_adj"] if leverage else []) + list(factors_extra) + ["missing_data_adj"]
     rows.append(f("total_adj", "adjustments", "All adjustments combined", " * ".join(factors), "The product of the adjustments above.", "multiple"))
     if unmodelled_rows:
         rows += list(unmodelled_rows)
@@ -138,36 +147,15 @@ def bridge(input, frm, to):
     tf, tt = UNITS[frm]["to_common"], UNITS[to]["to_common"]
     return input + ("" if tf == "1" else f" * ({tf})") + ("" if tt == "1" else f" / ({tt})")
 
-PROXY_SECTION = {"id": "proxy", "title": "Programmes with no outcome data", "kind": "ours", "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."}
 BRIDGE_SECTION = {"id": "bridges", "title": "Other outcomes, in this model's unit", "kind": "ours", "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."}
 PREFIX_OF = {"uov": "uov", "daly": "dalys", "wellby": "wellbys", "ced": "ced", "tco2e": "tco2e"}
 
-def proxy_rows(unit):
-    rows = [
-        inp("proxy_program_spend", "proxy", "Spending on programmes with no outcome data at all, in the year modelled", 0, "observed",
-            "programme spending, same year and accounts as program_spend, on the charity's programmes that publish no outcome data whatsoever (no reach, no results, nothing to build the chain on); not part of program_spend. 0, with that reason, when every programme has some outcome data: partial data keeps the chain above with wide ranges.", "usd", source=src("audited financial statements")),
-        f("proxy_peer_result", "proxy", "Result per dollar of comparable programmes on the site (units of value per dollar you give)", "#givedirectly",
-          "TEMPLATE: the same kind of work elsewhere on the site, read live: median(#model-a, #model-b, #model-c) of this family's or intervention's models, or the one nearest evaluated programme (#model-id) where there are fewer than three; name them and why they are comparable. Never a typed number, never a peer from another kind of work. (#givedirectly is only the skeleton's placeholder.)", "small", "units of value / $"),
-        f("proxy_share", "proxy", "Share of the programme spending here that has no outcome data", "proxy_program_spend / (program_spend + proxy_program_spend)",
-          "The modelled programmes' result counts for the rest of the spending.", "percent"),
-        f("proxy_per_donor_dollar", "proxy", "Units of value per dollar you give, from programmes with no outcome data", "proxy_share * proxy_peer_result * $missing_data_discount",
-          "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model.", "small", "units of value / $"),
-    ]
-    if unit == "uov":
-        return rows, "proxy_per_donor_dollar"
-    b = f"proxy_in_{PREFIX_OF[unit]}"
-    rows.append(f(b, "proxy", f"The same, in this model's unit ({UNITS[unit]['short']})", bridge("proxy_per_donor_dollar", "uov", unit),
-                  "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it.", "small"))
-    return rows, b
-
 def donor_tail(prefix, unit_label, marginal=False, dcs="cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))", unit="uov", animal=False):
-    prows, term = proxy_rows(unit)
-    base = f"{prefix}_per_dollar * donor_cost_share" + (" * marginal_vs_past_average" if marginal else "") + " * (1 - proxy_share)"
+    base = f"{prefix}_per_dollar * donor_cost_share" + (" * marginal_vs_past_average" if marginal else "")
     return [
         f("donor_cost_share", "donor", "Share of the full cost paid by cash donations", dcs, None, "percent"),
-        f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", base if animal else f"{base} + {term}",
-          "The modelled programmes' result for their share of the spending" + ("; the programmes with no outcome data join in the species step." if animal else ", plus the programmes with no outcome data (the proxy section)."), "small", f"{unit_label} / $"),
-    ] + prows
+        f(f"{prefix}_per_donor_dollar", "donor", f"{unit_label} per dollar you give", base, None, "small", f"{unit_label} / $"),
+    ]
 
 NAMES = {"chicken": "chickens", "pig": "pigs", "fish": "fish", "shrimp": "shrimp"}
 
@@ -184,8 +172,8 @@ def species_rows(shares):
         rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {NAMES[sp]}",
                       f"sads_{sp} / @aim_sads.{sp}_{v} * if($rp_species_weights, @welfare_ranges.{sp}_vs_chicken, @aim_sads.{sp}_{v} / @aim_sads.chicken_2024)",
                       f"Ambitious Impact's species weight ({v} SADs, the version of the shared figure above) taken out and Rethink Priorities' (relative to a chicken) put in. The formula is the standard one; don't edit it except the version, which must match the SAD figure's.", "number"))
-    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, *_ in shares) + " + proxy_in_ced",
-                  "Every species, plus the programmes with no outcome data (the proxy section), already in chicken pain days.", "small", "chicken pain days / $"))
+    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, *_ in shares),
+                  "Every species, already in chicken pain days.", "small", "chicken pain days / $"))
     return rows
 
 def raw_species_rows(shares, base="pain_days_per_donor_dollar"):
@@ -196,8 +184,8 @@ def raw_species_rows(shares, base="pain_days_per_donor_dollar"):
         rows.append(f(f"pain_days_{sp}", "species", f"Days of pain spared per dollar you give: {sp}s", f"{base} * {share}", None, "number"))
         rows.append(f(f"ced_{sp}", "species", f"Chicken-equivalent pain days averted per dollar you give: {sp}s", f"pain_days_{sp} * @welfare_ranges.{sp}_vs_chicken",
                       f"Rethink Priorities' welfare range for the species relative to a chicken (@welfare_ranges.{sp}_vs_chicken). The formula is the standard one; don't edit it.", "number"))
-    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, _ in shares) + " + proxy_in_ced",
-                  "Every species, plus the programmes with no outcome data (the proxy section), already in chicken pain days.", "small", "chicken pain days / $"))
+    rows.append(f("ced_per_donor_dollar", "species", "Chicken-equivalent pain days averted per dollar you give", " + ".join(f"ced_{sp}" for sp, _ in shares),
+                  "Every species, already in chicken pain days.", "small", "chicken pain days / $"))
     return rows
 
 def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, species=None, sections=None, id=None, out=None):
@@ -207,7 +195,6 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, s
                "native": {"row": f"{prefix}_per_dollar", "unit": unit}, "species": [sp for sp, *_ in species]}
         rows = rows + species_rows(species)
     secs = list(sections or SECTIONS)
-    secs.insert([x["id"] for x in secs].index("donor"), PROXY_SECTION)
     mid = id or f"template-{family}"
     return {
         "id": mid,
@@ -219,7 +206,7 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, s
         "charity": "template-charity",
         "owner": "charityevals",
         "summary": "TEMPLATE: " + summary,
-        "source": {"publisher": "charityevals", "title": f"charityevals' estimate: {name}", "url": f"https://charityevals.org/{mid}", "published": D, "retrieved": D},
+        "source": {"publisher": "charityevals", "title": f"charityevals' estimate: {name}", "url": f"https://charityevals.org/{mid}", "published": PUBLISHED, "retrieved": D},
         "resources": [],
         "sections": secs + ([SPECIES_SECTION] if species else []),
         "rows": rows,
@@ -471,10 +458,11 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
         inp("career_counterfactual_share", "careers", "Share of the career changes the charity caused", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
             "the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class.", "percent"),
         f("career_change_value", "careers", "Value of one career change (units of value)", "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share", "The site's one career-change step (docs/normalization.md 2.8).", "number", "units of value"),
-        f("careers_value", "careers", "Value of the career changes (units of value)", "careers_changed * career_change_value", None, "number", "units of value"),
+        missing_data_row("careers_missing_data_adj", "careers", "the career changes' count or counterfactual share"),
+        f("careers_value", "careers", "Value of the career changes (units of value)", "careers_changed * career_change_value * careers_missing_data_adj", None, "number", "units of value"),
     ] + adj_rows(implementation=False) + [
         f("outcome_total", "outcome", "Total value (units of value)", "downstream_value * total_adj + moved_value + careers_value",
-          "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share, career changes through their own share.", "number", "units of value"),
+          "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share (its dollars are measured, so no missing-data step), career changes through their own share and missing-data step.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Value per dollar", "outcome_total / cost_total", "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar). For climate, start from the climate skeleton.", "small"),
     ] + donor_rows("uov", "Units of value", "research", marginal=True)
       + donor_tail("uov", "Units of value", marginal=True, dcs="cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"),

@@ -66,11 +66,8 @@ const COMMON_REQUIRED = [
   "salary_gap",
   "salary_sacrifice",
   "donor_cost_share",
-  // Programmes with no outcome data at all, valued at comparable programmes' result (the proxy branch).
-  "proxy_program_spend",
-  "proxy_peer_result",
-  "proxy_share",
-  "proxy_per_donor_dollar",
+  // The missing-data step (docs/normalization.md 2.12): the shared slider, or 1 for a measured outcome.
+  "missing_data_adj",
 ];
 const COMMON_BOUNDS: Record<string, [number, number]> = {
   overhead_ratio: [1, 2],
@@ -89,12 +86,12 @@ const COMMON_BOUNDS: Record<string, [number, number]> = {
   years_until_effect: [0, 15],
   years_until_avoided: [0, 60],
   marginal_vs_past_average: [0, 1],
+  missing_data_adj: [0, 1],
 };
-/** Every family's staff-pay step (the gap is the site's judgment per kind of work) and proxy branch (a
- * programme with no outcome data counts less by the shared missing-data slider). */
+/** Every family's staff-pay step (the gap is the site's judgment per kind of work). The missing-data
+ * step reads its slider only where the outcome isn't measured: src/engine/lint.ts checks it per branch. */
 const STAFF_READS: Read[] = [
   { row: "salary_gap", ref: "@staff_pay.gap_", why: "the pay gap is a judgment the site makes once per kind of work (facts/staff_pay.json)", severity: "medium" },
-  { row: "proxy_per_donor_dollar", ref: "$missing_data_discount", why: "a programme with no outcome data, valued at comparable programmes' result, always counts less by the shared missing-data slider (docs/normalization.md 2.12)" },
 ];
 /** A death is valued at the site's one value, and income on the one log scale (2.7), in units of value. */
 const DEATHS_INCOME = (deaths: string, income: string): Read[] => [
