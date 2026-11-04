@@ -4,7 +4,7 @@
 // Works one formula at a time, so it costs the same on a 20-row model as on an 8,000-row one: only
 // the nodes the reader has opened are ever looked at.
 import { evaluate, type Lookup, type Node } from "./expr";
-import { headlineNode, isAgeDivisor, isAgeYears, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
+import { distanceLabel, headlineNode, isAgeDivisor, isAgeYears, pickValue, viewAssumptions, type Library, type ResolvedModel, type View } from "./model";
 import { formulaText } from "./derive";
 import type { Uncertainty } from "./uncertainty";
 
@@ -217,7 +217,8 @@ function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined,
     const node = m.byId.get(t.id)?.node;
     return { key, op, type: node ? "row" : "input", rowId: t.id, named: n.name, via: t.via, expr: node, value, e, g };
   }
-  return { key, op, type: "expr", expr: n, via: [], value, e, g, ...(isAgeDivisor(n) ? { label: "For the estimate's age" } : {}) };
+  const label = isAgeDivisor(n) ? "For the estimate's age" : distanceLabel(n);
+  return { key, op, type: "expr", expr: n, via: [], value, e, g, ...(label ? { label } : {}) };
 }
 
 /** A node's parts, each with its leverage on the bottom line through this branch (chain rule). */

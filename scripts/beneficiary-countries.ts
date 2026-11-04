@@ -1,0 +1,270 @@
+// Where each model's beneficiaries are, for the reader's distance weight ($home_country,
+// $distance_discount; docs/normalization.md 2.13): fills `beneficiaries` and `beneficiaries_note` on every
+// model with a result in common units, from data the models already carry, in this order:
+//   1. our own builds and the charities that move money: set below (OURS), from the build's stated
+//      countries and the shares of its result by branch;
+//   2. climate, and research with global reach: "world" (spread by world population);
+//   3. a variant's location (its name's parenthesis: "Against Malaria Foundation (Chad)");
+//   4. the charity record's location entries (charities/*.json `locations`: the family's own model);
+//   5. the model's name naming countries ("... Zambia and Cameroon");
+//   6. an evaluator's sheet: the location columns the bottom line reads (row labels "(Burkina Faso)",
+//      "Kenya, Both, <5 years, ...");
+//   7. the country facts files its rows read on the way to the bottom line (@kenya.*, @givewell_chad.*);
+//   8. the model's summary naming countries;
+//   9. where nothing says: the charity's main country of operation from its record (a judgment, listed).
+// Several countries from one source share equally. A variant that names no other country inherits its
+// parent's. A charity's figure over its programmes and locations needs nothing here: each model's
+// headline carries its own weight, so the combination follows from the parts.
+//   npx tsx scripts/beneficiary-countries.ts           write the fields, print counts by method
+//   npx tsx scripts/beneficiary-countries.ts --check   exit 1 if any model's field would change
+import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { buildLibrary, comparable, type ResolvedModel } from "../src/engine/model";
+import { COUNTRIES } from "../src/engine/countries";
+
+const root = join(import.meta.dirname, "..");
+const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
+const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
+  const p = join(d, f);
+  return statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
+});
+const check = process.argv.includes("--check");
+
+type Beneficiaries = Record<string, number> | "world" | "destinations";
+type Decision = { b: Beneficiaries; method: string; note: string } | { inherit: true; method: string };
+
+// --- Our own builds and the charities that move money --------------------------------------------------
+// Shares of the result by branch, at the default values, where a build's branches are in different places.
+const OURS: Record<string, { b: Beneficiaries; note: string }> = {
+  "american-red-cross-charityevals": { b: { USA: 1 }, note: "Our build: US disaster relief, home fire safety and services to military families." },
+  "american-red-cross-charityevals-biomedical": { b: { USA: 1 }, note: "Our build: the US blood supply and US training courses." },
+  "american-red-cross-charityevals-international": { b: { BRA: 0.25, BGD: 0.25, MMR: 0.25, MOZ: 0.25 }, note: "Our build: grants to Red Cross and Red Crescent societies' responses in 32 countries; the build names four (floods in Brazil and Bangladesh, the Myanmar earthquakes, drought in Mozambique) and no split, so they share equally (a judgment)." },
+  "british-heart-foundation-charityevals": { b: { world: 0.941, GBR: 0.059 }, note: "Our build: research valued as a share of the world's cardiovascular burden (94% of the result at the defaults, spread by world population) and UK tobacco policy (6%)." },
+  "british-heart-foundation-charityevals-health": { b: { GBR: 1 }, note: "Our build: health information, CPR training and the defibrillator network in the UK." },
+  "doctors-without-borders-charityevals": { b: { COD: 0.125, TCD: 0.125, SDN: 0.125, SSD: 0.125, NGA: 0.125, NER: 0.125, AFG: 0.125, SOM: 0.125 }, note: "Our build: medical care in about 70 countries; MSF publishes no split by country in the build, so the countries its rows name more than once share equally (DRC, Chad, Sudan, South Sudan, Nigeria, Niger, Afghanistan, Somalia; a judgment)." },
+  "doctors-without-borders-charityevals-relief": { b: { COD: 1 / 3, SDN: 1 / 3, SSD: 1 / 3 }, note: "Our build: relief distributions to displaced families; the countries the build's rows name (DRC, Sudan, South Sudan) share equally (a judgment)." },
+  "habitat-for-humanity-charityevals": { b: { USA: 1 }, note: "Our build: HFHI's US affiliates." },
+  "st-jude-charityevals": { b: { world: 0.937, USA: 0.063 }, note: "Our build: St. Jude Global's partner hospitals in more than 90 countries (94% of the result at the defaults, spread by world population: a judgment, the build names no split) and patient care in Memphis (6%)." },
+  "st-jude-charityevals-research": { b: "world", note: "Our build: research valued as a share of the world's childhood cancer burden." },
+  "united-way-charityevals": { b: { USA: 1 }, note: "Our build: the US United Way network." },
+  "the-nature-conservancy-charityevals": { b: "world", note: "Our build: valued almost entirely through climate and land-policy peers (forest carbon and emissions), whose good is spread by world population." },
+  "the-life-you-can-save-founders-pledge": { b: "destinations", note: "Moves money: each recommended charity it reads live brings its own countries." },
+  "better-futures-guide-aim": { b: "destinations", note: "Moves money: each livelihoods charity it reads live brings its own countries." },
+  "cearch-aim": { b: "destinations", note: "Moves money: each GiveWell top charity it reads live brings its own countries." },
+};
+/** Research and standard-setting whose good reaches the whole world. */
+const WORLD: Record<string, string> = {
+  "alliance-for-reducing-microbial-resistance-aim": "Advocacy for new antimicrobials: antimicrobial resistance is a global burden.",
+  "wild-animal-initiative": "Research on wild animals' welfare, for wild animals everywhere.",
+  "aquatic-life-institute": "Welfare standards for farmed aquatic animals across the global industry.",
+  "world-health-organization-rough-who-gdg-march-2025": "A WHO guideline, adopted by countries worldwide.",
+  "sickkids-f35-milk-trial-2026": "A treatment trial whose result informs care for malnourished children worldwide.",
+  "wehi-voi-walter-eliza-hall-iron-repletion": "A treatment trial whose result informs iron treatment worldwide.",
+};
+/** Models that say nothing about where: the charity's main country of operation (a judgment; listed in
+ * the report). Charities working across many low- and middle-income countries with no main one are
+ * spread by world population. */
+const MAIN: Record<string, { b: Record<string, number> | "world"; note: string }> = {
+  "atlas-ai-atlasai-target-pop-optionality-voi": { b: { NGA: 1 }, note: "Targeting vitamin A supplementation; the sheet's one place named is Nigeria (its notes speak of Nigerian populations)." },
+  "evidence-action-syphilis-screen-treat-in-pregnant-women": { b: { ZMB: 0.5, CMR: 0.5 }, note: "Evidence Action's syphilis screening in pregnancy runs in Zambia and Cameroon (its other syphilis models), sharing equally." },
+  "central-square-foundation-founders-pledge": { b: { IND: 1 }, note: "Central Square Foundation works on India's school education." },
+  "dansk-vegetarisk-forening": { b: { DNK: 1 }, note: "Dansk Vegetarisk Forening works in Denmark." },
+  "eidu-founders-pledge": { b: { KEN: 1 }, note: "EIDU's digital learning programme runs mainly in Kenya." },
+  "kaya-guides-aim": { b: { IND: 1 }, note: "Kaya Guides runs its guided self-help in India." },
+  "precision-development-agriculture-intervention-report": { b: { IND: 1 }, note: "Precision Development's largest phone advisory services are in India." },
+  "shrimp-welfare-project": { b: { IND: 0.5, VNM: 0.5 }, note: "Shrimp Welfare Project's stunning and farm programmes are in India and Vietnam, sharing equally." },
+  "teaching-at-the-right-level-africa-founders-pledge": { b: { ZMB: 1 }, note: "Teaching at the Right Level Africa's largest government programme is in Zambia." },
+  "ubongo-founders-pledge": { b: { TZA: 1 }, note: "Ubongo is based in Tanzania, its largest audience." },
+  "vegan-outreach-ace-2016": { b: { USA: 1 }, note: "Vegan Outreach's 2016 programmes (leafleting, school visits) were mainly in the US." },
+  "world-spine-care-hli": { b: { BWA: 1 }, note: "World Spine Care's first and main clinics are in Botswana." },
+  "medicines-development-for-global-health-moxidectin-mda-onchocerciasis-ro": { b: { COD: 1 }, note: "River blindness is almost all in Africa; DRC carries the largest share of it." },
+  "global-alliance-for-improved-nutrition-founders-pledge": { b: "world", note: "Salt iodization in about 30 low- and middle-income countries with no main one and no split: spread by world population." },
+  "iodine-global-network-founders-pledge": { b: "world", note: "Salt iodization worldwide with no main country and no split: spread by world population." },
+  "lead-exposure-elimination-project-founders-pledge": { b: "world", note: "Lead-paint laws across low- and middle-income countries with no main one and no split: spread by world population." },
+  "miraclefeet-monitoring-may-2023-voi-vet-complete": { b: "world", note: "Clubfoot treatment in about 30 low- and middle-income countries with no main one and no split: spread by world population." },
+  "unfpa-supplies-partnership-february-2026": { b: "world", note: "Contraceptive supplies to public health systems in many low-income countries, no split: spread by world population." },
+};
+
+// --- Country names -------------------------------------------------------------------------------------
+const ALIASES: [string, string][] = [
+  ...COUNTRIES.map((c) => [c.name, c.iso3] as [string, string]),
+  ["DRC", "COD"], ["DR Congo", "COD"], ["Democratic Republic of Congo", "COD"], ["Congo", "COD"], ["Republic of Congo", "COG"],
+  ["Cote d'Ivoire", "CIV"], ["Côte d’Ivoire", "CIV"], ["Ivory Coast", "CIV"],
+  ["UK", "GBR"], ["U.K.", "GBR"], ["Britain", "GBR"], ["England", "GBR"], ["Scotland", "GBR"], ["Wales", "GBR"],
+  ["US", "USA"], ["U.S.", "USA"], ["USA", "USA"], ["United States of America", "USA"],
+  ["Turkey", "TUR"], ["Czech Republic", "CZE"], ["Burma", "MMR"], ["Swaziland", "SWZ"], ["Viet Nam", "VNM"], ["Russian Federation", "RUS"],
+  ["Holland", "NLD"], ["Northern Ireland", "GBR"],
+  // Demonyms that name one country ("Indian" doesn't: the Indian Ocean).
+  ["Brazilian", "BRA"], ["Nigerian", "NGA"], ["Kenyan", "KEN"], ["Ugandan", "UGA"], ["Ghanaian", "GHA"], ["Pakistani", "PAK"],
+  ["Ethiopian", "ETH"], ["Malawian", "MWI"], ["Rwandan", "RWA"], ["Zambian", "ZMB"], ["Danish", "DNK"], ["Bangladeshi", "BGD"],
+  // Places inside one country that sheets and names use alone.
+  ...["Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Benue", "Borno", "Cross River", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Ogun", "Ondo", "Osun", "Oyo", "Sokoto", "Taraba", "Yobe", "Zamfara", "Abuja"].map((s) => [s, "NGA"] as [string, string]),
+  ...["Bihar", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Jharkhand", "Odisha", "Maharashtra", "Gujarat", "Tamil Nadu", "Kerala", "Karnataka", "Chhattisgarh"].map((s) => [s, "IND"] as [string, string]),
+  ["Sindh", "PAK"], ["Karachi", "PAK"], ["Ituri", "COD"], ["Haut-Katanga", "COD"], ["Haut-Lomami", "COD"], ["Lualaba", "COD"], ["Kinshasa", "COD"],
+  ["Karamoja", "UGA"], ["Nampula", "MOZ"], ["Mirriah", "NER"], ["Maradi", "NER"], ["Nairobi", "KEN"], ["Memphis", "USA"],
+];
+const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const PATTERNS = [...ALIASES].sort((a, b) => b[0].length - a[0].length).map(([name, iso]) => ({
+  iso,
+  re: new RegExp(`(?<![\\w-])${escape(name)}(?![\\w-])${name === "US" ? "(?! ?\\$| ?dollar| ?cent)" : ""}`, "g"),
+  // "New Jersey", "Western Australia": a place inside another country, not that country.
+  not: name === "Jersey" ? /New $/ : name === "Georgia" ? /(US state|Atlanta)/ : undefined,
+}));
+
+/** Countries a text names, in the order they first appear (a longer name masks the shorter one in it:
+ * South Sudan is not also Sudan). */
+function countriesIn(text: string): string[] {
+  let t = text;
+  const found: { iso: string; at: number }[] = [];
+  for (const p of PATTERNS) {
+    t = t.replace(p.re, (m, at: number) => {
+      if (p.not?.test(t.slice(Math.max(0, at - 12), at))) return m;
+      found.push({ iso: p.iso, at });
+      return " ".repeat(m.length);
+    });
+  }
+  return [...new Set(found.sort((a, b) => a.at - b.at).map((f) => f.iso))];
+}
+
+const equal = (isos: string[]): Record<string, number> => Object.fromEntries(isos.map((i) => [i, Number((1 / isos.length).toFixed(6))]));
+const names = (b: Record<string, number>) => Object.keys(b).map((i) => (i === "world" ? "the world" : COUNTRIES.find((c) => c.iso3 === i)!.name)).join(", ");
+
+// --- The library ---------------------------------------------------------------------------------------
+const files = walk(join(root, "models"));
+const raws = new Map(files.map((p) => [read(p).id as string, p]));
+const lib = buildLibrary(files.map(read), read(join(root, "assumptions/default.json")), walk(join(root, "facts")).map(read), walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
+if (lib.errors.length) throw new Error(lib.errors.join("\n"));
+
+/** Rows the bottom line reads, directly or not. */
+function feeding(m: ResolvedModel): Set<string> {
+  const seen = new Set<string>();
+  const visit = (id: string) => {
+    if (seen.has(id)) return;
+    seen.add(id);
+    m.byId.get(id)?.deps.forEach(visit);
+  };
+  if (m.output) visit(m.output.row);
+  return seen;
+}
+
+/** Countries named in the labels of the rows the bottom line reads, by how many rows name each: the
+ * location columns of an evaluator's sheet. Countries named in under half as many rows as the most named
+ * are a comparison (a benchmark's country), not a column the bottom line reads. */
+function sheetColumns(m: ResolvedModel): string[] {
+  const counts = new Map<string, number>();
+  for (const id of feeding(m)) for (const iso of countriesIn(m.byId.get(id)!.label)) counts.set(iso, (counts.get(iso) ?? 0) + 1);
+  const top = Math.max(0, ...counts.values());
+  return [...counts].filter(([, n]) => n >= Math.max(2, top / 2)).sort((a, b) => b[1] - a[1]).map(([i]) => i);
+}
+
+/** Countries the explainers of the rows the bottom line reads name at least twice, the most named and
+ * those named at least half as often. */
+function noteCountries(m: ResolvedModel): string[] {
+  const counts = new Map<string, number>();
+  for (const id of feeding(m)) {
+    const r = m.byId.get(id)!;
+    for (const iso of countriesIn(`${r.explainer ?? ""} ${r.source?.note ?? ""}`)) counts.set(iso, (counts.get(iso) ?? 0) + 1);
+  }
+  const top = Math.max(0, ...counts.values());
+  return [...counts].filter(([, n]) => n >= Math.max(2, top / 2)).sort((a, b) => b[1] - a[1]).map(([i]) => i);
+}
+
+function factCountries(m: ResolvedModel): string[] {
+  const out = new Set<string>();
+  for (const id of feeding(m)) for (const f of m.byId.get(id)!.factDeps) {
+    const file = f.split(".")[0].replace(/^givewell_/, "");
+    countriesIn(lib.facts.get(f)!.group).concat(countriesIn(file.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()))).slice(0, 1).forEach((i) => out.add(i));
+  }
+  return [...out];
+}
+
+/** The location a variant's name gives: its last parenthesis, outermost ("New Incentives (Nigeria (Niger))"). */
+function variantLocation(name: string): string | undefined {
+  const open = name.indexOf("(");
+  return open < 0 ? undefined : name.slice(open + 1, name.lastIndexOf(")"));
+}
+
+function decide(m: ResolvedModel): Decision {
+  const ours = OURS[m.id];
+  if (ours) return { b: ours.b, method: ours.b === "destinations" ? "moves money (destinations)" : "our build", note: ours.note };
+  if (m.cause === "climate") return { b: "world", method: "world: climate", note: "Climate: the good of a tonne of CO₂ averted is spread over the world, by population." };
+  if (WORLD[m.id]) return { b: "world", method: "world: global reach", note: WORLD[m.id] };
+  if (m.kind === "variant") {
+    const loc = variantLocation(m.name);
+    const c = loc ? countriesIn(loc)[0] : undefined;
+    const parent = m.extends ? lib.models.get(m.extends) : undefined;
+    const parentB = parent ? decide(parent) : undefined;
+    if (c && !(parentB && "b" in parentB && typeof parentB.b === "object" && Object.keys(parentB.b).join() === c))
+      return { b: { [c]: 1 }, method: "variant location", note: `The variant's location: ${loc}.` };
+    return { inherit: true, method: "variant inherits" };
+  }
+  const own = fromModel(m);
+  if (own) return own;
+  const charity = lib.charities.get(m.charity);
+  if (MAIN[m.id]) return { ...MAIN[m.id], method: "charity's main country (judgment)" };
+  const main = countriesIn(charity?.summary ?? "")[0];
+  if (main) return { b: { [main]: 1 }, method: "charity's main country (judgment)", note: `Nothing in the model says where; the charity's main country of operation, from its record: ${names({ [main]: 1 })}.` };
+  // The country the charity's other models name most.
+  const votes = new Map<string, number>();
+  for (const x of lib.models.values()) {
+    if (x.charity !== m.charity || x.id === m.id || x.kind !== "charity") continue;
+    const d = fromModel(x);
+    if (d && typeof d.b === "object") for (const iso of Object.keys(d.b)) votes.set(iso, (votes.get(iso) ?? 0) + 1);
+  }
+  const top = [...votes].sort((a, b) => b[1] - a[1])[0]?.[0];
+  if (top) return { b: { [top]: 1 }, method: "charity's main country (judgment)", note: `Nothing in the model says where; the charity's main country of operation, the one its other models name most: ${names({ [top]: 1 })}.` };
+  return { b: "world", method: "unresolved", note: "Nothing says where." };
+}
+
+/** What the model itself says (steps 4 to 8). */
+function fromModel(m: ResolvedModel): { b: Record<string, number>; method: string; note: string } | undefined {
+  // A family's own model names the location it shows: "this page shows Togo, the median location".
+  const shows = /this page shows ([^,;]+?)(?:, the|\.|;)/.exec(m.summary ?? "")?.[1];
+  const shown = shows ? countriesIn(shows)[0] : undefined;
+  if (shown) return { b: { [shown]: 1 }, method: "family's shown location", note: `The location the page shows: ${shows}.` };
+  const charity = lib.charities.get(m.charity);
+  for (const l of charity?.locations ?? []) {
+    if (!new RegExp(l.models).test(m.id)) continue;
+    const c = countriesIn(l.label);
+    if (c.length === 1) return { b: equal(c), method: "charity location", note: `The charity record's location for this model: ${l.label}.` };
+  }
+  const inName = countriesIn(m.name);
+  if (inName.length) return { b: equal(inName), method: "model name", note: `The model's name: ${m.name}.` };
+  const cols = sheetColumns(m);
+  if (cols.length) return { b: equal(cols), method: "sheet location columns", note: `The location${cols.length > 1 ? "s" : ""} the sheet's bottom line reads (row labels naming ${names(equal(cols))})${cols.length > 1 ? ", sharing equally" : ""}.` };
+  const facts = factCountries(m);
+  if (facts.length) return { b: equal(facts), method: "country facts", note: `The country facts its rows read: ${names(equal(facts))}${facts.length > 1 ? ", sharing equally" : ""}.` };
+  const inSummary = countriesIn(m.summary ?? "");
+  if (inSummary.length) return { b: equal(inSummary), method: "model summary", note: `The countries the model's summary names${inSummary.length > 1 ? ", sharing equally" : ""}: ${names(equal(inSummary))}.` };
+  const notes = noteCountries(m);
+  if (notes.length) return { b: equal(notes), method: "sheet notes", note: `The countries the notes on the rows its bottom line reads name more than once${notes.length > 1 ? ", sharing equally" : ""}: ${names(equal(notes))}.` };
+  return undefined;
+}
+
+// --- Write ---------------------------------------------------------------------------------------------
+const byMethod: Record<string, string[]> = {};
+let changed = 0;
+for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id))) {
+  if (m.kind === "template" || !comparable(lib, m)) continue;
+  const d = decide(m);
+  (byMethod[d.method] ??= []).push(m.id);
+  if (process.argv.includes("--table")) console.log(`${m.id} | ${d.method} | ${"b" in d ? JSON.stringify(d.b) : "-"}`);
+  const path = raws.get(m.id)!;
+  const text = readFileSync(path, "utf8");
+  let next = text.replace(/^[ \t]+"beneficiaries(_note)?": .*\n/gm, "");
+  if ("b" in d) {
+    const b = typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b;
+    next = next.replace(/^([ \t]+)"cause": "[a-z-]+",\n/m, (line, indent: string) => `${line}${indent}"beneficiaries": ${JSON.stringify(b)},\n${indent}"beneficiaries_note": ${JSON.stringify(d.note)},\n`);
+    if (!next.includes('"beneficiaries"')) throw new Error(`${m.id}: no top-level "cause" line to write after`);
+  }
+  if (next !== text) {
+    changed++;
+    if (!check) writeFileSync(path, next);
+  }
+}
+for (const [method, ids] of Object.entries(byMethod).sort((a, b) => b[1].length - a[1].length)) {
+  console.log(`${method}: ${ids.length}`);
+  if (process.argv.includes("--list") || /judgment|unresolved/.test(method)) for (const id of ids) console.log(`  ${id}`);
+}
+console.log(`${changed} file${changed === 1 ? "" : "s"} ${check ? "would change" : "changed"}`);
+if (check && changed) process.exit(1);

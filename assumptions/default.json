@@ -11,6 +11,11 @@
       "explainer": "How much saving a life counts. A value judgment, not a fact."
     },
     {
+      "id": "distance",
+      "title": "Lives near and far",
+      "explainer": "Whether a life counts the same wherever it is. By default it does, and nothing here changes any figure. Some people give more weight to people (and animals) nearer to them: set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
+    },
+    {
       "id": "economics",
       "title": "Timing",
       "explainer": "How much less good done in the future counts than the same good done today, and how much less an old estimate counts than a new one."
@@ -245,6 +250,32 @@
         "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
       },
       "explainer": "How many doubled-income years saving a young child's life is worth. GiveWell uses about 116, from donor surveys, a survey in Ghana and Kenya, and staff judgment; this scales its weights for every age. The 70–163 range is ours."
+    },
+    {
+      "id": "home_country",
+      "section": "distance",
+      "label": "Where you live",
+      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
+      "control": "country",
+      "format": "integer",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "The country the distance weight counts from. Not set (the default) means no distance weighting at all: every life counts the same wherever it is. Countries are grouped into world regions by the UN's standard list (M49: Northern America, Western Europe, Eastern Africa and so on; facts/countries.json)."
+    },
+    {
+      "id": "distance_discount",
+      "section": "distance",
+      "label": "Each step further from you, a life counts less by",
+      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
+      "unit": "per step",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "A value judgment, not a fact. With a country set under Where you live, a life (a person's or an animal's) in your own country counts in full, one elsewhere in your world region counts less by this much, and one in the rest of the world by this much again: at 50%, a life in your country counts 1, one in your region 0.5 and one further away 0.25. Each estimate is weighed by where the lives it helps are (each model's beneficiaries: the countries its programme works in, or the whole world by population for climate and research with global reach); a charity that moves money takes each destination's weight. 0% (the default) counts every life the same, which is what every evaluator on the site does; the evaluator's own view never applies it."
     },
     {
       "id": "discount_rate",

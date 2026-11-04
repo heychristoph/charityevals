@@ -47,6 +47,9 @@ const rowShape = {
    * uncertainty uses. `zero` adds a stop at 0 below a log scale, for a weight some readers set to
    * nothing at all. */
   slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional() }).strict().optional(),
+  /** Shared assumptions only: how the reader sets it, when not a slider. `country`: a list of countries,
+   * the value an ISO 3166 numeric code (facts/countries.json), 0 for none. */
+  control: z.enum(["country"]).optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -203,6 +206,15 @@ export const Model = z
      * reads the slider. Required on every charity model; variants inherit it. */
     estimate_basis: z.enum(["past_average", "marginal", "unit_cost"]).optional(),
     extends: z.string().optional(),
+    /** Where the people (or animals) a dollar helps are, for the reader's distance weight
+     * ($distance_discount, src/engine/model.ts distanceNode): each country's share by ISO 3166 alpha-3
+     * code, summing to 1, with a "world" share for a part spread by world population; "world" alone for
+     * a benefit spread so (climate, research with global reach); "destinations" for a charity whose good is the money it moves, where each
+     * destination read live (`#id`) brings its own. Variants inherit it. Filled by
+     * scripts/beneficiary-countries.ts. */
+    beneficiaries: z.union([z.record(z.string().regex(/^([A-Z]{3}|world)$/), z.number().positive().max(1)), z.enum(["world", "destinations"])]).optional(),
+    /** How `beneficiaries` was set: the data it was read from, or why it is a judgment. */
+    beneficiaries_note: z.string().optional(),
     /** For charityevals' own models: the build-cea template family the model follows. */
     template: TemplateFamily.optional(),
     /** The charity this model is about (inherited by variants). */
@@ -296,7 +308,25 @@ export const Facts = z
   .object({
     id: z.string().regex(/^[a-z][a-z0-9_]*$/),
     label: z.string(),
+    /** Where a whole file's data comes from (facts/countries.json). */
+    source: Source.optional(),
     rows: z.array(Row),
+    /** facts/countries.json only: world regions (UN M49 codes) and every country in one, with its population. */
+    regions: z.array(z.object({ m49: z.number().int(), name: z.string() }).strict()).optional(),
+    countries: z
+      .array(
+        z
+          .object({
+            iso3: z.string().regex(/^[A-Z]{3}$/),
+            m49: z.number().int().positive(),
+            name: z.string(),
+            region: z.number().int(),
+            population: z.number().int().nonnegative(),
+            population_source: z.literal("wpp").optional(),
+          })
+          .strict(),
+      )
+      .optional(),
   })
   .strict();
 export type Facts = z.infer<typeof Facts>;
