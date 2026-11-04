@@ -22,6 +22,11 @@ function readsRef(m: ResolvedModel, row: string, ref: string): boolean {
 }
 
 const MARGINAL = "marginal_vs_past_average";
+const MISSING = "missing_data_discount";
+/** Models built before the missing-data rule of docs/normalization.md 2.12 (published before this date)
+ * keep their proxy rows until rebuilt: their missing-data findings are medium, not high. */
+export const MISSING_DATA_RULE_DATE = "2026-11-04";
+const squash = (f: string) => f.replace(/\s+/g, "");
 
 export type Severity = "high" | "medium" | "low";
 export type Finding = { severity: Severity; code: string; row?: string; message: string; fix: string };
@@ -102,13 +107,14 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
 
   // Required canonical rows.
   const required = [...new Set([...spec.required.filter((r) => r !== spec.perDollar && r !== spec.donor && r !== spec.output), ids.perDollar, ids.donor, ids.output])];
-  for (const r of required) if (!m.byId.has(r)) add("high", "required-row", `missing canonical row ${r}`, `Add ${r} as in the ${family} template, or (for an outcome branch that doesn't apply) a row with value 0 and an explainer saying why.`, r);
+  const legacy = (m.source?.published ?? "") < MISSING_DATA_RULE_DATE;
+  for (const r of required) if (!m.byId.has(r)) add(r === "missing_data_adj" && legacy ? "medium" : "high", "required-row", `missing canonical row ${r}`, `Add ${r} as in the ${family} template, or (for an outcome branch that doesn't apply) a row with value 0 and an explainer saying why.`, r);
 
   const path = rowsFeeding(m);
   const output = m.output?.row;
   if (output && m.byId.has(output)) {
     // The adjustments and the cost must actually reach the bottom line.
-    for (const r of ["cost_total", "evidence_adj", "counterfactual_adj", "attribution_share", "total_adj", "donor_cost_share", ...(m.byId.has("implementation_adj") ? ["implementation_adj"] : []), ...(m.byId.has("leverage_funging_adj") ? ["leverage_funging_adj"] : []), ...(m.byId.has("unmodelled_benefits_adj") ? ["unmodelled_benefits_adj"] : [])])
+    for (const r of ["cost_total", "evidence_adj", "counterfactual_adj", "attribution_share", "total_adj", "donor_cost_share", "missing_data_adj", ...(m.byId.has("implementation_adj") ? ["implementation_adj"] : []), ...(m.byId.has("leverage_funging_adj") ? ["leverage_funging_adj"] : []), ...(m.byId.has("unmodelled_benefits_adj") ? ["unmodelled_benefits_adj"] : [])])
       if (m.byId.has(r) && !path.has(r)) {
         // Multi-branch models (templates.md convention 4) apply branch-level adjustments
         // (`<branch>_counterfactual_adj`) and keep the canonical row as a weighted average for
@@ -139,14 +145,58 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   // reaches the headline through its own unit's shared conversion.
   const bridges = new Set(bridgesOf(lib, m).map((b) => b.row));
   for (const r of m.rows)
-    if (/^(uov|dalys|wellbys|ced|tco2e)_from_(uov|daly|wellby|ced|tco2e)$|^proxy_in_/.test(r.id) && r.id !== "wellbys_from_uov" && !bridges.has(r.id))
+    if (/^(uov|dalys|wellbys|ced|tco2e)_from_(uov|daly|wellby|ced|tco2e)$/.test(r.id) && r.id !== "wellbys_from_uov" && !bridges.has(r.id))
       add("high", "bridge", `${r.id} is named as a bridge but isn't one`, "Write it as <input> * (<to_common of the input's unit>) / (<to_common of the output unit>), the template's row word for word, in an ours section.", r.id);
-  // The proxy branch (2.12): comparable programmes' result, read live, counted less by the shared slider.
-  const proxy = m.byId.get("proxy_peer_result");
-  if (proxy && !(proxy.modelDeps ?? []).length)
-    add("high", "proxy", "proxy_peer_result doesn't read the comparable programmes' models live", "Set proxy_peer_result = median(#peer-a, #peer-b, …) (or #nearest-model): the result per dollar of the same kind of work on the site, never a typed number.", "proxy_peer_result");
-  if (output && m.byId.has("proxy_per_donor_dollar") && !path.has("proxy_per_donor_dollar"))
-    add("high", "unapplied", "proxy_per_donor_dollar never reaches the bottom line", "Add it (through the template's bridge where the unit isn't uov) to the per-donor-dollar row, and multiply the modelled part by (1 - proxy_share).", "proxy_per_donor_dollar");
+
+  // Missing data (2.12): no programme is valued at other models' result; every branch carries the
+  // marker missing_data_adj / <branch>_missing_data_adj, the shared slider or 1 with its reason; a branch
+  // whose reach or effect inputs are all judgments reads the slider.
+  const ruleSev: Severity = legacy ? "medium" : "high";
+  const literature = "Build the programme's chain from the research on its kind of work (meta-analyses and trials: effect per person or per dollar, persistence), with its own spending and reach, wide ranges, and <branch>_missing_data_adj = $missing_data_discount (templates.md Convention 12); other models only as a cross-check named in the explainer.";
+  for (const r of m.rows) {
+    if (/^proxy_/.test(r.id)) add(ruleSev, "proxy", `${r.id}: the proxy rows are retired (a programme is no longer valued at other models' result)`, literature, r.id);
+    else if (r.formula && /median\([^)]*#/.test(r.formula) && path.has(r.id))
+      add(ruleSev, "borrowed", `${r.id} takes its value from other models' results (median of #…)`, literature, r.id);
+  }
+  const down = new Map<string, string[]>();
+  for (const r of m.rows) for (const d of r.deps) down.set(d, [...(down.get(d) ?? []), r.id]);
+  const isInput = (id: string) => { const r = m.byId.get(id); return !!r && r.formula === undefined && r.value !== undefined; };
+  for (const mk of m.rows.filter((r) => /(^|_)missing_data_adj$/.test(r.id))) {
+    const f = squash(mk.formula ?? "");
+    const branchAverage = mk.id === "missing_data_adj" && mk.deps.some((d) => d.endsWith("_missing_data_adj"));
+    if (f !== `$${MISSING}` && f !== "1" && !branchAverage) {
+      add("high", "missing-data", `${mk.id} is ${mk.formula ?? "a typed number"}, not $${MISSING} or 1`, `Set ${mk.id} = $${MISSING} where the outcome isn't measured for this charity, or 1 where it is (say why): missing data is discounted one way, by the shared slider.`, mk.id);
+      continue;
+    }
+    if (f !== "1") continue;
+    if ((mk.explainer ?? "").length < MIN_EXPLAINER)
+      add("high", "missing-data", `${mk.id} is 1 without a reason`, "Say in the explainer what this charity measured: its own count of who got the intervention, and the effect's counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way).", mk.id);
+    // The branch: the row downstream of the marker that reads the fewest reach and effect rows (its outcome).
+    const seen = new Set<string>();
+    const queue = [...(down.get(mk.id) ?? [])];
+    let best: string[] | undefined;
+    while (queue.length) {
+      const id = queue.shift()!;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      queue.push(...(down.get(id) ?? []));
+      const xs = [...upstream(m, id)].filter((x) => ["reach", "effect"].includes(m.byId.get(x)?.section ?? ""));
+      if (xs.some(isInput) && (!best || xs.length < best.length)) best = xs;
+    }
+    if (!best) continue;
+    // Evidence in a section: an input that isn't a judgment, or a shared fact that isn't one (another
+    // model's result read live is no evidence about this charity).
+    for (const sec of ["reach", "effect"]) {
+      const xs = best.filter((x) => m.byId.get(x)!.section === sec);
+      const judged = xs.filter((x) => isInput(x) && m.byId.get(x)!.kind === "judgment");
+      const evidence = xs.some((x) => {
+        const r = m.byId.get(x)!;
+        return (isInput(x) && r.kind !== "judgment") || r.factDeps.some((k) => lib.facts.get(k)?.kind !== "judgment");
+      });
+      if (judged.length && !evidence)
+        add(ruleSev, "missing-data", `${mk.id} is 1 but its branch's ${sec} rests on judgment only (${judged.join(", ")})`, `Set ${mk.id} = $${MISSING}: an outcome resting on judgment, not on this charity's own data, is counted less by the shared slider (docs/normalization.md 2.12).`, mk.id);
+    }
+  }
 
   // When the estimate was made: the estimate-age slider counts from it (docs/normalization.md 2.11).
   const s = m.source;

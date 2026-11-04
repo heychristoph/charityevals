@@ -23,7 +23,7 @@
     {
       "id": "accounting",
       "title": "How impact is counted",
-      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average, and how much a programme counts that we could only estimate from similar ones."
+      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average, and how much a programme counts whose results aren't measured."
     }
   ],
   "rows": [
@@ -73,8 +73,8 @@
     {
       "id": "missing_data_discount",
       "section": "accounting",
-      "label": "How much we count a programme we could only estimate from similar ones",
-      "technical": "Discount on a programme with no outcome data at all, valued at the result per dollar of comparable programmes on the site (a proxy)",
+      "label": "How much we count a programme whose results aren't measured",
+      "technical": "Discount on every branch of a model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: the row missing_data_adj (docs/normalization.md 2.12)",
       "format": "percent",
       "value": {
         "low": 0.1,
@@ -82,7 +82,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Every programme of every charity is counted, even one that publishes nothing about what it achieved. Such a programme is valued at what a dollar does in the same kind of work elsewhere on the site (the median of the comparable models, or the nearest evaluated programme), applied to its spending. A charity that reports nothing is probably not the typical one: programmes that measure their results tend to be the ones that work, and the comparison carries none of this programme's own detail. So the estimate counts less, by this share, the same for every charity.\n\nThe default, 50%, is our judgment; the range runs from 10% (an unmeasured programme does little next to measured ones) to 100% (it does as well as its peers). Programmes with some outcome data are modelled from that data with wide ranges, not discounted here."
+      "explainer": "Every programme of every charity is counted, even one that publishes little or nothing about what it achieved. Where a charity doesn't measure a programme's results, we build its estimate from the research on that kind of work (meta-analyses and trials of the intervention: how much it does per person or per dollar, and for how long), applied to the programme's own spending and whatever reach it reports, with wide ranges; we never borrow another charity's result. The same goes for any part of a model whose reach or effect is our judgment rather than the charity's own data. A programme that doesn't measure its results is probably not the typical one in the research: programmes that measure tend to be the ones that work, and the literature carries none of this programme's own detail. So every such estimate counts less, by this share, the same way in every model.\n\nA part of a model counts in full only when the charity's own count of who got the intervention meets an effect measured with a credible comparison: its own controlled evaluation, or trials of the same intervention delivered the same way (doses delivered and a trial's effect, for example). The default, 50%, is our judgment; the range runs from 10% (an unmeasured programme does little next to measured ones) to 100% (it does as well as the research says)."
     },
     {
       "id": "uov_per_daly",
