@@ -1,124 +1,18 @@
 ---
-// One evaluator's page: every charity it has a model of, with its models, newest first, and a link to
-// the evaluator's own site. Charity pages link here for "by <evaluator>".
-import Prose from "../../layouts/Prose.astro";
-import Headline from "../../components/Headline.tsx";
+// One evaluator's hub: the rankings filtered to the charities it has a model of, with its site linked.
+import HubPage from "../../components/HubPage.astro";
 import CharityLogo from "../../components/CharityLogo.tsx";
-import { lib, modelUrl } from "../../lib/data";
-import { assumptionValues, comparable, headline, modelsOf } from "../../engine/model";
-import { formatYears, plainModelName } from "../../lib/format";
+import { lib } from "../../lib/data";
 
 export function getStaticPaths() {
   const owners = new Set([...lib.models.values()].filter((m) => m.kind !== "template" && m.output).map((m) => m.owner));
   return [...lib.owners.values()].filter((o) => owners.has(o.id)).map((o) => ({ params: { owner: o.id } }));
 }
 const owner = lib.owners.get(Astro.params.owner!)!;
-const av = assumptionValues(lib.assumptions);
-const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "ai-safety": "AI safety", climate: "Climate" } as const;
-const date = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : "");
-// Each charity with this evaluator's models of it (variants of one model count as one), newest first.
-const charities = [...lib.charities.values()]
-  .map((c) => ({ c, models: modelsOf(lib, c.id).filter((m) => m.owner === owner.id && m.kind === "charity" && m.output) }))
-  .filter((x) => x.models.length)
-  .map((x) => {
-    const models = [...x.models].sort((a, b) => (b.source?.published ?? "").localeCompare(a.source?.published ?? ""));
-    const lead = models[0];
-    return { ...x, models, lead, figure: comparable(lib, lead) ? headline(lib, lead, av) : NaN };
-  })
-  .sort((a, b) => (Number.isFinite(b.figure) ? b.figure : -1) - (Number.isFinite(a.figure) ? a.figure : -1));
-const byCause = Object.entries(CAUSE).map(([id, title]) => ({ title, rows: charities.filter((x) => x.c.cause === id) })).filter((g) => g.rows.length);
-const total = charities.reduce((s, x) => s + x.models.length, 0);
+const host = owner.url?.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 ---
 
-<Prose title={owner.name} description={`Every charity ${owner.name} has a model of on charityevals, with its models.`}>
-  <CharityLogo slot="before-title" id={`owner-${owner.id}`} name={owner.name} size={40} lazy={false} className="ev-logo" />
-  {owner.about && <p class="lede">{owner.about}</p>}
-  <p>
-    {charities.length} {charities.length === 1 ? "charity" : "charities"} and {total} {total === 1 ? "model" : "models"} on this site{owner.id === "charityevals" ? ", built by us" : ", re-implemented from its published analyses"}.
-    {owner.url && <> Its own site: <a href={owner.url} rel="noopener">{owner.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}</a>.</>}
-  </p>
-  <p class="small muted">
-    Years of healthy life per $1,000 for each charity's newest model from {owner.name}, at your values (the site's defaults until you change them). <a href="/method#views">How the evaluator's view and ours differ</a>.
-  </p>
-  {byCause.map((g) => (
-    <section>
-      <h2>{g.title} <span class="muted small num">{g.rows.length}</span></h2>
-      <table class="ev-table">
-        <thead>
-          <tr><th scope="col">Charity</th><th scope="col">Newest model</th><th scope="col" class="num">Years of healthy life per $1,000</th><th scope="col">Models</th></tr>
-        </thead>
-        <tbody>
-          {g.rows.map(({ c, models, lead }) => (
-            <tr>
-              <th scope="row"><span class="ev-charity"><CharityLogo id={c.id} name={c.name} size={24} /><a href={`/${c.id}`}>{c.name}</a></span></th>
-              <td><a href={modelUrl(lib, lead)}>{plainModelName(lead.name)}</a><span class="muted small"> · {date(lead.source?.published)}</span></td>
-              <td class="num">{comparable(lib, lead) ? <span data-figure="headline" data-model={lead.id}>{formatYears(headline(lib, lead, av))}</span> : "–"}</td>
-              <td>
-                {models.length > 1
-                  ? <details><summary>{models.length}</summary><ul>{models.slice(1).map((m) => <li><a href={modelUrl(lib, m)}>{plainModelName(m.name)}</a> <span class="muted small">{date(m.source?.published)}</span></li>)}</ul></details>
-                  : "1"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  ))}
-  {charities[0] && <Headline client:idle id={charities[0].lead.id} bulk={!!charities[0].lead.bulk} />}
-</Prose>
-
-<style>
-  :global(.ev-logo) {
-    margin-bottom: var(--s3);
-  }
-  .ev-charity {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s2);
-  }
-  .lede {
-    font-size: 18px;
-    color: var(--ink-2);
-  }
-  .ev-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-    margin: var(--s2) 0 var(--s5);
-  }
-  .ev-table th,
-  .ev-table td {
-    padding: var(--s2) var(--s3);
-    text-align: left;
-    vertical-align: top;
-  }
-  .ev-table th:first-child,
-  .ev-table td:first-child {
-    padding-left: 0;
-  }
-  .ev-table thead th {
-    font: 600 13px/1.3 var(--sans);
-    color: var(--ink-2);
-    border-bottom: 1px solid var(--rule);
-  }
-  .ev-table th[scope="row"] {
-    font-weight: 400;
-  }
-  .ev-table tbody tr + tr > * {
-    border-top: 1px solid var(--rule);
-  }
-  .ev-table .num {
-    text-align: right;
-    white-space: nowrap;
-  }
-  .ev-table ul {
-    margin: var(--s1) 0 0;
-    padding-left: 1.1em;
-  }
-  @media (max-width: 640px) {
-    .ev-table td:nth-child(2),
-    .ev-table thead th:nth-child(2) {
-      display: none;
-    }
-  }
-</style>
+<HubPage title={owner.name} description={`Every charity ${owner.name} has a model of, ranked on your values.`} owner={owner.id}>
+  <CharityLogo slot="logo" id={`owner-${owner.id}`} name={owner.name} size={40} lazy={false} />
+  {owner.about && <p>{owner.about}{host && <> <a href={owner.url} rel="noopener">{host}</a></>}</p>}
+</HubPage>

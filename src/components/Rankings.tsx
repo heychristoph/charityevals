@@ -10,7 +10,7 @@ import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
 import "./rankings.css";
 
-const CAUSE_LABEL: Record<string, string> = {
+export const CAUSE_LABEL: Record<string, string> = {
   "global-health": "Global health",
   "animal-welfare": "Animal welfare",
   "ai-safety": "AI safety",
@@ -76,8 +76,10 @@ function useFlip(order: string) {
   };
 }
 
-export default function Rankings() {
-  const { results } = useResults();
+/** The rankings; a hub page shows them filtered to one cause or one evaluator's charities. */
+export default function Rankings({ cause, owner }: { cause?: string; owner?: string }) {
+  const { results: all } = useResults();
+  const results = all.filter((r) => (!cause || r.charity.cause === cause) && (!owner || r.evaluators.some((x) => x.owner === owner)));
   const flipRef = useFlip(results.map((r) => r.charity.id).join());
 
   return (
@@ -115,8 +117,8 @@ export default function Rankings() {
                 <div>
                   <a href={`/${c.id}`} className="r-link">{c.name}</a>
                   <div className="r-meta small">
-                    <span className="r-cause">{CAUSE_LABEL[c.cause]}</span>
-                    <span className="muted"> · {owners.map((o) => o.short).join(", ")}</span>
+                    <a className="r-cause" href={`/causes/${c.cause}`}>{CAUSE_LABEL[c.cause]}</a>
+                    <span className="muted"> · {owners.map((o, k) => <span key={o.id}>{k > 0 && ", "}<a className="r-owner" href={`/evaluators/${o.id}`}>{o.short}</a></span>)}</span>
                     {r.evaluators.some((x) => x.theoretical) && (
                       <span className="r-theory" title={THEORETICAL_TEXT}>
                         {" "}· {multi ? `${owners.filter((_, k) => r.evaluators[k].theoretical).map((o) => o.short).join(", ")}: purely theoretical` : "purely theoretical"}
