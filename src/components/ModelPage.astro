@@ -77,10 +77,10 @@ const placeText = place && (model.kind === "variant" ? `in ${place}` : `in ${pla
 const others = model.kind !== "variant" && siblings.length > current.length ? siblings : [];
 const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map((m) => m.id)).size;
 // A charity whose figure combines several programs shows them as one tree on its main page
-// (WholeCharity): the whole charity at the top, each program's model a branch. Bulk models load their
-// file on their own page only, so a combination with one keeps the single model view.
+// (WholeCharity): the whole charity at the top, each program's model a branch, bulk imports included
+// (their file loads when their branch opens; the island waits for the main one's, client:model).
 const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
-const whole = parts.length > 1 && parts.every((p) => !p.model.bulk);
+const whole = parts.length > 1;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
@@ -151,7 +151,8 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       </div>
       {/* A bulk model hydrates once its full file has loaded (client:model), rather than carrying it as a prop. */}
       {whole ? (
-        <WholeCharity client:load id={model.id}>
+        model.bulk ? (
+          <WholeCharity client:model={model.id} id={model.id}>
           {Writeup && (
             <section class="writeup" aria-labelledby="writeup-title">
               <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
@@ -159,6 +160,16 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             </section>
           )}
         </WholeCharity>
+        ) : (
+          <WholeCharity client:load id={model.id}>
+          {Writeup && (
+            <section class="writeup" aria-labelledby="writeup-title">
+              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+              <div class="writeup-body" data-gloss><Writeup /></div>
+            </section>
+          )}
+        </WholeCharity>
+        )
       ) : model.bulk ? (
         <ModelView client:model={model.id} id={model.id} bulk place={place}>
           <Fragment slot="about">
