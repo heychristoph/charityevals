@@ -260,8 +260,8 @@ export function Markdown({ text }: { text: string }) {
 export default function AssumptionsPanel({ compact = true, groups }: { compact?: boolean; groups?: string[] }) {
   const overrides = useOverrides();
   const [copied, setCopied] = useState(false);
-  // In the side panel each group folds; the exchange rates, which move the ranking most, start open.
-  const [open, setOpen] = useState<Record<string, boolean>>({ "cross-cause": true });
+  // In the side panel each group folds; the values about people and animals, which move the ranking most, start open.
+  const [open, setOpen] = useState<Record<string, boolean>>({ people: true, animals: true });
   const changedCount = Object.keys(overrides).length;
   const shown = lib.assumptions.groups.filter((g) => !groups || groups.includes(g.id));
   // On a phone the panel sits below everything else: a button stays at the bottom of the screen until

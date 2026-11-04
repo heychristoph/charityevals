@@ -1,36 +1,36 @@
 {
   "groups": [
     {
-      "id": "cross-cause",
-      "title": "Exchange rates",
-      "explainer": "Charities do different kinds of good: raising incomes, adding years of healthy life, sparing animals pain, making people more satisfied with their lives. To rank them on one list, results are shown in years of healthy life, and the rates below say what the other kinds of good are worth against each other. Animal analyses are first put into days of a chicken's pain, each species weighed against a chicken. Change them and the ranking changes; that is the point."
+      "id": "people",
+      "title": "People",
+      "explainer": "What different kinds of good are worth to you. Results are shown in years of healthy life; these say what a year of extra income, a life saved, a happier year and good done later are worth in those. Value judgments: there is no right answer, and changing them changes the ranking."
     },
     {
-      "id": "moral-weights",
-      "title": "Lives",
-      "explainer": "How much saving a life counts. A value judgment, not a fact."
+      "id": "animals",
+      "title": "Animals",
+      "explainer": "How much animals' suffering counts next to people's. Animal results are counted in days of a chicken's pain; these say what such a day is worth in a person's healthy time."
     },
     {
       "id": "distance",
-      "title": "Lives near and far",
-      "explainer": "Whether a life counts the same wherever it is. By default it does, and nothing here changes any figure. Some people give more weight to people (and animals) nearer to them: set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
+      "title": "Near and far",
+      "explainer": "Whether a life counts the same wherever it is. By default it does. Set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
     },
     {
-      "id": "economics",
-      "title": "Timing",
-      "explainer": "How much less good done in the future counts than the same good done today, and how much less an old estimate counts than a new one."
+      "id": "evidence",
+      "title": "How much to trust the estimates",
+      "explainer": "Estimates are often more optimistic than what a donation achieves today. These say how much to discount results nobody measured, estimates that are years old, an organisation's past average, and reforms that would have come anyway."
     },
     {
       "id": "accounting",
-      "title": "How impact is counted",
-      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average, and how much a programme counts whose results aren't measured."
+      "title": "How credit is shared",
+      "explainer": "Most good is paid for by more than one funder. By default each evaluator's own way of crediting a charity is kept; switch it to share credit by who paid for what."
     }
   ],
   "rows": [
     {
       "id": "resource_shares",
       "section": "accounting",
-      "label": "Credit by share of resources",
+      "label": "Share credit by who paid for what",
       "technical": "Pro-rata attribution instead of counterfactual credit",
       "format": "toggle",
       "value": {
@@ -43,8 +43,8 @@
     },
     {
       "id": "win_years_counted",
-      "section": "accounting",
-      "label": "Years a won reform counts before it would have come anyway",
+      "section": "evidence",
+      "label": "Years a won reform counts",
       "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
       "unit": "years",
       "format": "number",
@@ -58,8 +58,8 @@
     },
     {
       "id": "marginal_vs_past_average",
-      "section": "accounting",
-      "label": "How much the next dollar does compared with the average dollar so far",
+      "section": "evidence",
+      "label": "Your extra dollar, against the average dollar so far",
       "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
       "format": "percent",
       "value": {
@@ -72,8 +72,8 @@
     },
     {
       "id": "missing_data_discount",
-      "section": "accounting",
-      "label": "How much we count a programme whose results aren't measured",
+      "section": "evidence",
+      "label": "Results nobody measured count",
       "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
       "format": "percent",
       "value": {
@@ -86,8 +86,8 @@
     },
     {
       "id": "uov_per_daly",
-      "section": "cross-cause",
-      "label": "Healthy year vs doubled-income year",
+      "section": "people",
+      "label": "A healthy year, in years of doubled income",
       "technical": "Units of value per DALY (disability-adjusted life year) averted",
       "unit": "units of value / DALY",
       "format": "multiple",
@@ -101,8 +101,8 @@
     },
     {
       "id": "daly_per_sad",
-      "section": "cross-cause",
-      "label": "Healthy hours lost per day of disabling pain",
+      "section": "animals",
+      "label": "Healthy hours lost to a day of severe pain",
       "technical": "DALYs per suffering-adjusted day (SAD)",
       "shown_as": {
         "factor": 8760,
@@ -120,8 +120,8 @@
     },
     {
       "id": "daly_per_wellby",
-      "section": "cross-cause",
-      "label": "1 point more life satisfaction for a year vs a year of healthy life",
+      "section": "people",
+      "label": "A point of life satisfaction for a year, in healthy years",
       "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
       "unit": "healthy years / WELLBY",
       "format": "multiple",
@@ -144,8 +144,8 @@
     },
     {
       "id": "chicken_vs_person",
-      "section": "cross-cause",
-      "label": "A chicken's suffering vs a person's",
+      "section": "animals",
+      "label": "A chicken's suffering against a person's",
       "technical": "Chicken's welfare range relative to a person's",
       "unit": "× a person",
       "format": "percent",
@@ -173,7 +173,8 @@
       "format": "toggle",
       "value": 1,
       "kind": "judgment",
-      "explainer": "On (our view): each species counts by Rethink Priorities' welfare range relative to a chicken (facts/welfare_ranges.json). Off (the evaluator view): by the species weights inside Ambitious Impact's suffering-adjusted days, so ACE's own results reproduce. Not offered as a control: the chicken slider is the one animal weight readers set."
+      "explainer": "On (our view): each species counts by Rethink Priorities' welfare range relative to a chicken (facts/welfare_ranges.json). Off (the evaluator view): by the species weights inside Ambitious Impact's suffering-adjusted days, so ACE's own results reproduce. Not offered as a control: the chicken slider is the one animal weight readers set.",
+      "section": "animals"
     },
     {
       "id": "uov_per_ln_consumption",
@@ -202,7 +203,7 @@
     },
     {
       "id": "deaths_per_tco2e",
-      "section": "cross-cause",
+      "section": "evidence",
       "label": "Deaths caused by one more tonne of CO₂",
       "technical": "Mortality cost of carbon: deaths per tonne of CO₂e, from heat and fossil-fuel air pollution",
       "shown_as": {
@@ -226,12 +227,13 @@
         "title": "Rethink Priorities, Cross-cause cost-effectiveness: climate change versus global health (Clare & Vargas, 2026)",
         "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/"
       },
-      "explainer": "Climate charities count the tonnes of CO₂ (and other greenhouse gases, as CO₂-equivalents) they keep out of the air. To compare them with everything else, we ask how many deaths one more tonne causes, and value each death like any other adult's death on the site.\n\nThe default, 1.9 deaths per 10,000 tonnes, is Rethink Priorities' estimate (facts: climate.deaths_per_tco2e): 0.43 from heat and 1.46 from the fine-particle air pollution that comes with burning fossil fuels. Rethink counts the heat deaths until 2300 without discounting; we discount them at \"Next year's good counts less by\" over the years until they come (\"Years until the heat deaths from a tonne of CO₂\", 60 by default), as every model discounts future good. Air-pollution deaths come the same year and aren't discounted. The range runs from heat alone (0.43) to the tops of Rethink's intervals (5.1), which is also about what Rethink's estimate of all climate damage, crops and sea level included, comes to in lives.\n\nEach death is valued by the age it happens at, like every other death on the site: GiveWell's moral weights by age (facts: moral_weights) over the ages of today's heat deaths (60 doubled-income years on average) and air-pollution deaths (48: nine in ten are of people over 50; facts: death_ages, GBD 2023), times \"A child's life vs doubled-income year\", so climate moves with the same weight on lives as health charities. At the defaults a tonne kept out of the air some other way than burning less fuel (a forest, a methane leak) cuts only the discounted heat deaths, about 1 hour of healthy life (a charity that cuts one for $1 does about 0.12 years of healthy life per $1,000); a tonne from burning less fossil fuel, with the world-average smoke behind Rethink's figure, is worth about 1.3 days (3.6 years per $1,000 at $1 a tonne). Most tonnes sit in between: coal smoke per tonne is far above gas's, and a US plant with scrubbers far below the world average.\n\nFor comparison, the US government's social cost of carbon of $185 a tonne (Rennert et al. 2022) rests on the same heat-death count but values deaths in poor countries and in the future less; Giving What We Can's 2016 estimate is about 50 times lower than our default, mainly because it leaves out air pollution. Climate damage that isn't deaths (lost crops, income, migration) and tail risks are not counted: our judgment, stated as a fact set to 0 (climate.nondeath_damages_vs_deaths) so it shows, and the reason the default is likely low. Tonnes that come without fuel smoke (a forest left standing, a methane leak stopped) count only for their heat deaths; each climate model has its own row for how much air pollution its tonnes cut, relative to an average fossil-fuel tonne, from the share of its tonnes that come from burning less fuel and the smoke that fuel makes."
+      "explainer": "Climate charities count the tonnes of CO₂ (and other greenhouse gases, as CO₂-equivalents) they keep out of the air. To compare them with everything else, we ask how many deaths one more tonne causes, and value each death like any other adult's death on the site.\n\nThe default, 1.9 deaths per 10,000 tonnes, is Rethink Priorities' estimate (facts: climate.deaths_per_tco2e): 0.43 from heat and 1.46 from the fine-particle air pollution that comes with burning fossil fuels. Rethink counts the heat deaths until 2300 without discounting; we discount them at \"Next year's good counts less by\" over the years until they come (\"Years until the heat deaths from a tonne of CO₂\", 60 by default), as every model discounts future good. Air-pollution deaths come the same year and aren't discounted. The range runs from heat alone (0.43) to the tops of Rethink's intervals (5.1), which is also about what Rethink's estimate of all climate damage, crops and sea level included, comes to in lives.\n\nEach death is valued by the age it happens at, like every other death on the site: GiveWell's moral weights by age (facts: moral_weights) over the ages of today's heat deaths (60 doubled-income years on average) and air-pollution deaths (48: nine in ten are of people over 50; facts: death_ages, GBD 2023), times \"A child's life vs doubled-income year\", so climate moves with the same weight on lives as health charities. At the defaults a tonne kept out of the air some other way than burning less fuel (a forest, a methane leak) cuts only the discounted heat deaths, about 1 hour of healthy life (a charity that cuts one for $1 does about 0.12 years of healthy life per $1,000); a tonne from burning less fossil fuel, with the world-average smoke behind Rethink's figure, is worth about 1.3 days (3.6 years per $1,000 at $1 a tonne). Most tonnes sit in between: coal smoke per tonne is far above gas's, and a US plant with scrubbers far below the world average.\n\nFor comparison, the US government's social cost of carbon of $185 a tonne (Rennert et al. 2022) rests on the same heat-death count but values deaths in poor countries and in the future less; Giving What We Can's 2016 estimate is about 50 times lower than our default, mainly because it leaves out air pollution. Climate damage that isn't deaths (lost crops, income, migration) and tail risks are not counted: our judgment, stated as a fact set to 0 (climate.nondeath_damages_vs_deaths) so it shows, and the reason the default is likely low. Tonnes that come without fuel smoke (a forest left standing, a methane leak stopped) count only for their heat deaths; each climate model has its own row for how much air pollution its tonnes cut, relative to an average fossil-fuel tonne, from the share of its tonnes that come from burning less fuel and the smoke that fuel makes.",
+      "fixed": true
     },
     {
       "id": "life_value_multiplier",
-      "section": "moral-weights",
-      "label": "A child's life vs doubled-income year",
+      "section": "people",
+      "label": "Saving a life, against the standard value",
       "technical": "Life value multiplier on GiveWell's moral weights",
       "shown_as": {
         "factor": 116.25262,
@@ -249,7 +251,7 @@
         "title": "GiveWell moral weights",
         "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
       },
-      "explainer": "How many doubled-income years saving a young child's life is worth. GiveWell uses about 116, from donor surveys, a survey in Ghana and Kenya, and staff judgment; this scales its weights for every age. The 70–163 range is ours."
+      "explainer": "How much saving a life counts, as a multiple of the standard value: GiveWell's, about 116 years of doubled income for a young child and less for older people. 1 keeps GiveWell's values; 1.4 counts every life saved 40% more. GiveWell's figure comes from donor surveys, a survey in Ghana and Kenya, and staff judgment; the 70–163 range is ours."
     },
     {
       "id": "home_country",
@@ -265,7 +267,7 @@
     {
       "id": "distance_discount",
       "section": "distance",
-      "label": "Each step further from you, a life counts less by",
+      "label": "Each step further away, a life counts less by",
       "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
       "unit": "per step",
       "format": "percent",
@@ -279,8 +281,8 @@
     },
     {
       "id": "discount_rate",
-      "section": "economics",
-      "label": "Next year's good counts less by",
+      "section": "people",
+      "label": "Good done a year later counts less by",
       "technical": "Annual discount rate",
       "unit": "per year",
       "format": "percent",
@@ -290,12 +292,12 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\"). It is also how much future generations count: a catastrophe that costs the future loses every later year of healthy life, each discounted at this rate, so the loss is the yearly loss ÷ the rate (25 years' worth at 4%, 1,000 at the lowest setting, 0.1%: the slider stops there because at 0 an endless future would count infinitely)."
+      "explainer": "How much less good done a year from now counts than the same good today, compounding each year. It is also how much future generations count: a lower rate counts them more (the lowest, 0.1%, counts the far future about 1,000 times a single year). GiveWell uses 4%."
     },
     {
       "id": "estimate_age_discount",
-      "section": "economics",
-      "label": "Each year since an estimate was made, it counts less by",
+      "section": "evidence",
+      "label": "An estimate counts less for each year of its age by",
       "technical": "Annual discount on a cost-effectiveness estimate's age",
       "unit": "per year",
       "format": "percent",
@@ -309,7 +311,7 @@
     },
     {
       "id": "climate_heat_death_delay",
-      "section": "economics",
+      "section": "evidence",
       "label": "Years until the heat deaths from a tonne of CO₂",
       "technical": "Discount-weighted delay between emitting a tonne of CO₂e and the extra heat deaths it causes",
       "unit": "years",
@@ -326,7 +328,8 @@
         "page": "footnote 28, p. 21",
         "quote": "These [deaths] are concentrated at the end of the century when global average temperatures are highest and marginal changes to temperatures are most damaging."
       },
-      "explainer": "A tonne of CO₂ emitted now warms the planet for centuries, but the deaths that warming causes come late: both Bressler (2021) and Rennert et al. (2022), whose model Rethink Priorities re-ran, find them concentrated at the end of the century, when it is hottest and each extra bit of warming does most harm. Rethink counts them to 2300 without discounting. We discount them like any other future good, as if they all came this many years after the tonne: 60 by default (about 2085 for a tonne cut today), 30 to 100 in the range. Our judgment; no source gives the year-by-year profile. At 4% a year, a death 60 years away counts about a tenth of one today.\n\nAir-pollution deaths are not delayed: fuel that isn't burned saves them the same year, so they aren't discounted."
+      "explainer": "A tonne of CO₂ emitted now warms the planet for centuries, but the deaths that warming causes come late: both Bressler (2021) and Rennert et al. (2022), whose model Rethink Priorities re-ran, find them concentrated at the end of the century, when it is hottest and each extra bit of warming does most harm. Rethink counts them to 2300 without discounting. We discount them like any other future good, as if they all came this many years after the tonne: 60 by default (about 2085 for a tonne cut today), 30 to 100 in the range. Our judgment; no source gives the year-by-year profile. At 4% a year, a death 60 years away counts about a tenth of one today.\n\nAir-pollution deaths are not delayed: fuel that isn't burned saves them the same year, so they aren't discounted.",
+      "fixed": true
     },
     {
       "id": "climate_heat_share",
