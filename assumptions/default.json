@@ -42,47 +42,45 @@
       "explainer": "Most good is paid for by several funders: donors, governments, other charities. Off (the default), each charity evaluator's own way of crediting a charity is kept. On, credit is shared by who paid for what, so the shares add up to the whole and nothing is counted twice."
     },
     {
-      "id": "win_years_counted",
-      "section": "evidence",
-      "label": "Years a won reform counts",
-      "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
-      "unit": "years",
-      "format": "number",
-      "value": {
-        "low": 1,
-        "best": 5,
-        "high": 20
-      },
+      "id": "home_country",
+      "section": "distance",
+      "label": "Where you live",
+      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
+      "control": "country",
+      "format": "integer",
+      "value": 0,
       "kind": "judgment",
-      "explainer": "When a campaign wins a change, such as a company promising better conditions for its hens or a new law, the change might have come anyway a few years later. This says how many years of the change the campaign gets credit for.\n\nThe default is 5 years. Charity evaluators use anything from under a year to over 50."
+      "explainer": "Choose your country if you want lives near you to count more. Leave it unset and every life counts the same wherever it is."
     },
     {
-      "id": "marginal_vs_past_average",
-      "section": "evidence",
-      "label": "Your extra dollar, against the average dollar so far",
-      "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
+      "id": "distance_discount",
+      "section": "distance",
+      "label": "Each step further away, a life counts less by",
+      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
+      "unit": "per step",
       "format": "percent",
       "value": {
-        "low": 0.18,
-        "best": 0.5,
-        "high": 1
+        "low": 0,
+        "best": 0,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Some estimates divide everything an organisation achieved by everything it spent. Your donation probably does less than that average, because the easiest wins come first. This says how much your extra dollar does compared with the average one.\n\nThe default, 50%, counts it at half. 100% means your dollar does as much as the average."
+      "explainer": "With your country set, a life in your country counts fully, a life elsewhere in your part of the world counts less by this much, and one in the rest of the world less again. At 50%: your country 1, your region 0.5, the rest of the world 0.25.\n\nThe default, 0%, counts every life the same, as every charity evaluator does."
     },
     {
-      "id": "missing_data_discount",
+      "id": "estimate_age_discount",
       "section": "evidence",
-      "label": "Results nobody measured count",
-      "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
+      "label": "An estimate counts less for each year of its age by",
+      "technical": "Annual discount on a cost-effectiveness estimate's age",
+      "unit": "per year",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.5,
-        "high": 1
+        "low": 0.0,
+        "best": 0.05,
+        "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Some charities don't measure what their work achieves. We still estimate it, from research on that kind of work, but such programmes tend to do less than the research shows. This says how much those unmeasured results count.\n\nThe default, 50%, counts them at half. 100% trusts them fully."
+      "explainer": "Some charities' estimates are years old, and the charity may do less today. This says how much less an estimate counts for each year since it was made.\n\nThe default, 5% a year, counts a 10-year-old estimate at 61%. Set 0% to count every estimate in full."
     },
     {
       "id": "uov_per_daly",
@@ -100,75 +98,56 @@
       "explainer": "How health compares with income. The default, 2, follows the charity evaluator GiveWell, whose values draw on surveys of how people in Ghana and Kenya trade income against health and survival."
     },
     {
-      "id": "daly_per_sad",
-      "section": "animals",
-      "label": "Healthy hours lost to a day of severe pain",
-      "technical": "DALYs per suffering-adjusted day (SAD)",
-      "shown_as": {
-        "factor": 8760,
-        "format": "number"
-      },
-      "unit": "DALY / SAD",
+      "id": "discount_rate",
+      "section": "people",
+      "label": "Good done a year later counts less by",
+      "technical": "Annual discount rate",
+      "unit": "per year",
       "format": "percent",
       "value": {
-        "low": 0.00027,
-        "best": 0.0011,
-        "high": 0.0027
+        "low": 0.001,
+        "best": 0.04,
+        "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much healthy life a day of severe pain costs a person, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time.\n\nThe default is about 10 hours. Nobody has measured this, so it's one of the least certain numbers on the site and often decides whether animal charities rank above health charities."
+      "explainer": "How much less good done a year from now counts than the same good today, compounding each year. It is also how much future generations count: the lower it is, the more the future counts.\n\nThe default, 4%, is what most charity evaluators use. At 0.1%, the lowest, people centuries from now count almost as much as people today."
     },
     {
-      "id": "daly_per_wellby",
+      "id": "life_value_multiplier",
       "section": "people",
-      "label": "One point more life satisfaction for a year is worth … days of healthy life",
-      "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
-      "unit": "healthy years / WELLBY",
+      "label": "Saving a life, against the standard value",
+      "technical": "Life value multiplier on GiveWell's moral weights",
+      "shown_as": {
+        "factor": 116.25262,
+        "format": "multiple"
+      },
+      "unit": "×",
       "format": "multiple",
       "value": {
-        "low": 0.05,
-        "best": 0.0652815,
-        "high": 0.275
-      },
-      "slider": {
-        "low": 0.025,
-        "high": 1.5
+        "low": 0.6,
+        "best": 1,
+        "high": 1.4
       },
       "kind": "judgment",
       "source": {
-        "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
-        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
-        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year ÷ 2 WELLBYs per SD-year = 0.0652815 healthy years per WELLBY (src/engine/wellby-calibration.test.ts keeps it in step with the facts). Stated in healthy years, so the calibration holds whatever \"Healthy year vs doubled-income year\" is set to."
+        "title": "GiveWell moral weights",
+        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
       },
-      "explainer": "Some charities report how much happier people are, in points of life satisfaction on a 0–10 scale. This says how many years of healthy life one point more for a year is worth.\n\nThe default, 0.065, is set so that treating depression counts the same whether it's measured as better health or as more life satisfaction. Raise it if feeling better matters more to you than that.",
-      "shown_as": {
-        "factor": 365,
-        "format": "number"
-      }
+      "explainer": "How much saving a life counts. 1 is the standard value used across the site (the charity evaluator GiveWell's: about 116 years of doubled income for a young child, less for older people). Set 1.4 to count every life saved 40% more, 0.6 to count it 40% less."
     },
     {
-      "id": "chicken_vs_person",
-      "section": "animals",
-      "label": "A chicken's suffering against a person's",
-      "technical": "Chicken's welfare range relative to a person's",
-      "unit": "× a person",
+      "id": "missing_data_discount",
+      "section": "evidence",
+      "label": "Results nobody measured count",
+      "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
       "format": "percent",
       "value": {
-        "low": 0.002,
-        "best": 0.332,
-        "high": 0.869
+        "low": 0.1,
+        "best": 0.5,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. Every animal charity's result moves with this (other animals are compared with chickens).\n\nThe default, 33%, is the middle estimate of a research group that has studied how much different animals can suffer; their range is 0.2% to 87%. Set 0 if animal suffering shouldn't count, 100% if it counts as much as a person's.",
-      "slider": {
-        "low": 0.001,
-        "high": 1,
-        "zero": true
-      },
-      "source": {
-        "title": "Rethink Priorities' welfare range estimates",
-        "url": "https://www.rethinkpriorities.org/publications/welfare-range-estimates"
-      }
+      "explainer": "Some charities don't measure what their work achieves. We still estimate it, from research on that kind of work, but such programmes tend to do less than the research shows. This says how much those unmeasured results count.\n\nThe default, 50%, counts them at half. 100% trusts them fully."
     },
     {
       "id": "rp_species_weights",
@@ -234,83 +213,104 @@
       "fixed": true
     },
     {
-      "id": "life_value_multiplier",
-      "section": "people",
-      "label": "Saving a life, against the standard value",
-      "technical": "Life value multiplier on GiveWell's moral weights",
-      "shown_as": {
-        "factor": 116.25262,
-        "format": "multiple"
+      "id": "marginal_vs_past_average",
+      "section": "evidence",
+      "label": "Your extra dollar, against the average dollar so far",
+      "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
+      "format": "percent",
+      "value": {
+        "low": 0.18,
+        "best": 0.5,
+        "high": 1
       },
-      "unit": "×",
+      "kind": "judgment",
+      "explainer": "Some estimates divide everything an organisation achieved by everything it spent. Your donation probably does less than that average, because the easiest wins come first. This says how much your extra dollar does compared with the average one.\n\nThe default, 50%, counts it at half. 100% means your dollar does as much as the average."
+    },
+    {
+      "id": "win_years_counted",
+      "section": "evidence",
+      "label": "Years a won reform counts",
+      "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 5,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "When a campaign wins a change, such as a company promising better conditions for its hens or a new law, the change might have come anyway a few years later. This says how many years of the change the campaign gets credit for.\n\nThe default is 5 years. Charity evaluators use anything from under a year to over 50."
+    },
+    {
+      "id": "chicken_vs_person",
+      "section": "animals",
+      "label": "A chicken's suffering against a person's",
+      "technical": "Chicken's welfare range relative to a person's",
+      "unit": "× a person",
+      "format": "percent",
+      "value": {
+        "low": 0.002,
+        "best": 0.332,
+        "high": 0.869
+      },
+      "kind": "judgment",
+      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. Every animal charity's result moves with this (other animals are compared with chickens).\n\nThe default, 33%, is the middle estimate of a research group that has studied how much different animals can suffer; their range is 0.2% to 87%. Set 0 if animal suffering shouldn't count, 100% if it counts as much as a person's.",
+      "slider": {
+        "low": 0.001,
+        "high": 1,
+        "zero": true
+      },
+      "source": {
+        "title": "Rethink Priorities' welfare range estimates",
+        "url": "https://www.rethinkpriorities.org/publications/welfare-range-estimates"
+      }
+    },
+    {
+      "id": "daly_per_sad",
+      "section": "animals",
+      "label": "Healthy hours lost to a day of severe pain",
+      "technical": "DALYs per suffering-adjusted day (SAD)",
+      "shown_as": {
+        "factor": 8760,
+        "format": "number"
+      },
+      "unit": "DALY / SAD",
+      "format": "percent",
+      "value": {
+        "low": 0.00027,
+        "best": 0.0011,
+        "high": 0.0027
+      },
+      "kind": "judgment",
+      "explainer": "How much healthy life a day of severe pain costs a person, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time.\n\nThe default is about 10 hours. Nobody has measured this, so it's one of the least certain numbers on the site and often decides whether animal charities rank above health charities."
+    },
+    {
+      "id": "daly_per_wellby",
+      "section": "people",
+      "label": "One point more life satisfaction for a year is worth … days of healthy life",
+      "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
+      "unit": "healthy years / WELLBY",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 1,
-        "high": 1.4
+        "low": 0.05,
+        "best": 0.0652815,
+        "high": 0.275
+      },
+      "slider": {
+        "low": 0.025,
+        "high": 1.5
       },
       "kind": "judgment",
       "source": {
-        "title": "GiveWell moral weights",
-        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
+        "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year ÷ 2 WELLBYs per SD-year = 0.0652815 healthy years per WELLBY (src/engine/wellby-calibration.test.ts keeps it in step with the facts). Stated in healthy years, so the calibration holds whatever \"Healthy year vs doubled-income year\" is set to."
       },
-      "explainer": "How much saving a life counts. 1 is the standard value used across the site (the charity evaluator GiveWell's: about 116 years of doubled income for a young child, less for older people). Set 1.4 to count every life saved 40% more, 0.6 to count it 40% less."
-    },
-    {
-      "id": "home_country",
-      "section": "distance",
-      "label": "Where you live",
-      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
-      "control": "country",
-      "format": "integer",
-      "value": 0,
-      "kind": "judgment",
-      "explainer": "Choose your country if you want lives near you to count more. Leave it unset and every life counts the same wherever it is."
-    },
-    {
-      "id": "distance_discount",
-      "section": "distance",
-      "label": "Each step further away, a life counts less by",
-      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
-      "unit": "per step",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "With your country set, a life in your country counts fully, a life elsewhere in your part of the world counts less by this much, and one in the rest of the world less again. At 50%: your country 1, your region 0.5, the rest of the world 0.25.\n\nThe default, 0%, counts every life the same, as every charity evaluator does."
-    },
-    {
-      "id": "discount_rate",
-      "section": "people",
-      "label": "Good done a year later counts less by",
-      "technical": "Annual discount rate",
-      "unit": "per year",
-      "format": "percent",
-      "value": {
-        "low": 0.001,
-        "best": 0.04,
-        "high": 0.08
-      },
-      "kind": "judgment",
-      "explainer": "How much less good done a year from now counts than the same good today, compounding each year. It is also how much future generations count: the lower it is, the more the future counts.\n\nThe default, 4%, is what most charity evaluators use. At 0.1%, the lowest, people centuries from now count almost as much as people today."
-    },
-    {
-      "id": "estimate_age_discount",
-      "section": "evidence",
-      "label": "An estimate counts less for each year of its age by",
-      "technical": "Annual discount on a cost-effectiveness estimate's age",
-      "unit": "per year",
-      "format": "percent",
-      "value": {
-        "low": 0.0,
-        "best": 0.05,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "Some charities' estimates are years old, and the charity may do less today. This says how much less an estimate counts for each year since it was made.\n\nThe default, 5% a year, counts a 10-year-old estimate at 61%. Set 0% to count every estimate in full."
+      "explainer": "Some charities report how much happier people are, in points of life satisfaction on a 0–10 scale. This says how many years of healthy life one point more for a year is worth.\n\nThe default, 0.065, is set so that treating depression counts the same whether it's measured as better health or as more life satisfaction. Raise it if feeling better matters more to you than that.",
+      "shown_as": {
+        "factor": 365,
+        "format": "number"
+      }
     },
     {
       "id": "climate_heat_death_delay",
