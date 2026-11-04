@@ -162,8 +162,8 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
 1. Fix every **high** and **medium** finding with the fix it names (or a better one that settles the
    same problem, said in the next round's input); fix lows unless the fix would be wrong, and say why.
 2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
-3. Stop when an audit of the current version has no high findings, or after **3 rounds**. Highs left:
-   don't publish; keep the model out of `models/` and report what is unresolved.
+3. Stop at an audit with no high findings, or after **3 rounds**; changes after the last round get one
+   short **verification round**. Highs left: keep it out of `models/`, report them.
 
 ## 5. Verify and report
 
