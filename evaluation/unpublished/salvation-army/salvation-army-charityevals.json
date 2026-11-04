@@ -11,7 +11,7 @@
   "estimate_basis": "unit_cost",
   "charity": "salvation-army",
   "owner": "charityevals",
-  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a model of its own) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to a small fraction of a healthy year per $1,000, about a thousandth of the site's global-health median, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $18,000, a 0.2% gain on the log scale, where a GiveDirectly transfer raises a Kenyan household's consumption by about 40%. About half the result comes from food, goods, money and services, a quarter from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how much the recovery programme changes.",
+  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a model of its own) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about 0.003 years of healthy life per $1,000, about a thousandth of the site's global-health median, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $18,000, a 0.2% gain on the log scale, where a GiveDirectly transfer raises a Kenyan household's consumption by about 40%. About half the result comes from food, goods, money and services, a quarter from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how much the recovery programme changes.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Salvation Army USA, services in the US",
@@ -160,8 +160,8 @@
       "section": "cost",
       "label": "Overseas work paid through the US accounts (modelled separately)",
       "format": "usd",
-      "formula": "@salvation_army.sawso_mission_support + @salvation_army.sawso_livelihoods + @salvation_army.sawso_relief + @salvation_army.sawso_education + @salvation_army.sawso_business_development + @salvation_army.sawso_health + @salvation_army.sawso_anti_trafficking + @salvation_army.other_overseas_support",
-      "explainer": "The World Service Office's programmes (fiscal 2025, by sector) and the territories' other support for the international Salvation Army. It is spent in poor countries on other kinds of work, so it has a model of its own (salvation-army-charityevals-international), weighted by this spending on the charity's page; it is left out of this model's cost and outcomes."
+      "formula": "@salvation_army.sawso_mission_support + @salvation_army.sawso_livelihoods + @salvation_army.sawso_relief + @salvation_army.sawso_education + @salvation_army.sawso_business_development + @salvation_army.sawso_health + @salvation_army.sawso_anti_trafficking + (@salvation_army.sait_us_self_denial_gbp + @salvation_army.sait_us_ihq_support_gbp) * @fx.usd_per_gbp_2024",
+      "explainer": "The World Service Office's programmes (fiscal 2025, by sector) and the US territories' world-services money to International Headquarters (the Self-Denial Fund and headquarters support, from the International Trust's accounts, pounds at the 2024 rate: the Trust's year to March 2025 is mostly 2024). It is spent abroad on other kinds of work, so it has a model of its own (salvation-army-charityevals-international), weighted by this spending on the charity's page; it is left out of this model's cost and outcomes."
     },
     {
       "id": "thrift_store_costs",
@@ -405,8 +405,8 @@
       "section": "effect",
       "label": "Financial help per household (US$)",
       "format": "usd",
-      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households)",
-      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped: about $73 a household, the national figure taken at the Western rate. Fiscal 2023 against fiscal 2025 households; bills paid on a household's behalf count at full value."
+      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
+      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $76 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
     },
     {
       "id": "veterans_served",
@@ -483,17 +483,39 @@
       "explainer": "Job search help, training and placement."
     },
     {
-      "id": "employment_earnings_gain",
+      "id": "employment_gain_per_year",
       "section": "effect",
-      "label": "Extra earnings per person given employment help, over the gain's life (US$)",
+      "label": "Extra earnings in the first year per person given employment help (US$)",
       "format": "usd",
       "value": {
         "low": 0,
-        "best": 800,
-        "high": 3000
+        "best": 500,
+        "high": 1500
       },
       "kind": "judgment",
-      "explainer": "Light-touch job-search assistance in US randomised evaluations raises earnings by a few hundred to about $1,500 in the first year and fades within two or three (job clubs and reemployment services); $800 in all (0-3,000), present value at the shared rate, counted as this year's money (the 1-3% discount on the later part is inside the range)."
+      "explainer": "Light-touch job-search assistance in US randomised evaluations (job clubs, reemployment services) raises earnings by a few hundred to about $1,500 in the first year; most of the Salvation Army's help is lighter (referrals, job-readiness classes). $500 (0-1,500)."
+    },
+    {
+      "id": "employment_gain_years",
+      "section": "effect",
+      "label": "Years until people given job-search help and others earn the same (fade-out)",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "In the same evaluations the gain fades within two or three years, as the control group finds work too: 2 years (1-3)."
+    },
+    {
+      "id": "employment_earnings_gain",
+      "section": "effect",
+      "label": "Extra earnings per person given employment help, discounted over the gain's years (US$)",
+      "format": "usd",
+      "explainer": "The first year's gain over the years it lasts, discounted at the shared rate.",
+      "formula": "employment_gain_per_year * pv_annuity_due(1, $discount_rate, employment_gain_years)"
     },
     {
       "id": "medical_visits",
@@ -1133,7 +1155,7 @@
         "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate. A 1978 follow-up of 97 men in a Salvation Army alcoholism programme (Evaluation of a Salvation Army alcoholism treatment program, Journal of Studies on Alcohol 39(7):1267-1275, doi:10.15288/jsa.1978.39.1267) found 42-77% abstinent six months after discharge, without a control group; residential treatment studies with comparison groups find gains of 10-30 percentage points in remission among those who stay, against natural remission of 5-15% a year. 30% extra remission for graduates and 3% for other admissions, over everyone counted: about 0.03, range 0.005-0.1."
+      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate. A 1978 follow-up of 97 men in a Salvation Army alcoholism programme (Journal of Studies on Alcohol 39(7):1267-1275, doi:10.15288/jsa.1978.39.1267) found 42-77% abstinent six months after discharge, without a control group. Reviews of residential treatment with comparison groups rate the evidence moderate, with outcomes better than or no different from other treatment (Reif et al. 2014, Psychiatric Services, doi:10.1176/appi.ps.201300242; de Andrade et al. 2019, Drug and Alcohol Dependence, doi:10.1016/j.drugalcdep.2019.03.031); people with alcohol use disorder who get help are more likely to be in remission three years on than those who don't, and relapse less over 16 years (Moos & Moos 2006, Addiction, doi:10.1111/j.1360-0443.2006.01310.x), while most people who recover do so without treatment (Tucker et al. 2020, Alcohol Research: Current Reviews, doi:10.35946/arcr.v40.3.02), so the gain over no treatment is a minority of those treated. 30% extra remission for graduates and 3% for other admissions, over everyone counted: about 0.03, range 0.005-0.1."
     },
     {
       "id": "rehab_disability_weight",
@@ -1255,7 +1277,7 @@
       },
       "kind": "judgment",
       "unit": "points",
-      "explainer": "Most participants come a few times; regular ones get company, activity and structure. Group activity and befriending trials for lonely older people and after-school programme studies find gains of 0.1-0.3 SD for the regulars (about 0.2-0.6 life-satisfaction points); spread over everyone counted, most of them occasional, 0.03 points (0.005-0.1)."
+      "explainer": "Most participants come a few times; regular ones get company, activity and structure. A meta-analysis of interventions for lonely older adults living in the community found group-based programmes reduce loneliness by 0.27 SD (95% CI 0.08-0.48; Shekelle et al. 2024, Journal of General Internal Medicine, doi:10.1007/s11606-023-08517-5); for the regulars that is about 0.2-0.5 life-satisfaction points. Spread over everyone counted, most of them occasional, 0.03 points (0.005-0.1)."
     },
     {
       "id": "community_effect_years",
@@ -1612,7 +1634,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. 85% (60-100%) for every branch."
+      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. Reference class: the site's other models of US service charities put delivery at 90% (Habitat for Humanity: homes built and repairs, counted per house), 95% (American Red Cross: casework and smoke alarms, counted per household) and 100% (United Way: dollars granted). The Salvation Army's counts are looser than all three (touchpoints, not people; meals derived from weight), so lower: 85% (60-100%) for every branch."
     },
     {
       "id": "leverage_funging_adj",
@@ -1628,52 +1650,85 @@
       "explainer": "1: government grants are tied to contracts the Salvation Army delivers; a donation doesn't free government money for other uses or pull in much more. 0.9 if some local governments fund less where the Salvation Army is present."
     },
     {
+      "id": "net_assets_available",
+      "section": "adjustments",
+      "label": "Net assets available for operations, 30 September 2025",
+      "format": "usd",
+      "value": 554635000,
+      "kind": "observed",
+      "source": {
+        "title": "The Salvation Army USA, 2026 National Annual Report: Unaudited Combined Statement of Financial Position",
+        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 22",
+        "quote": "Available for Operations 554,635 654,499"
+      },
+      "explainer": "Unrestricted money not designated for buildings or specific programmes: what a new gift joins before it is spent. Endowments and designated funds are left out, since a new gift doesn't wait behind them."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it is spent",
+      "format": "number",
+      "unit": "years",
+      "formula": "net_assets_available / total_expenses",
+      "explainer": "Money available for operations over a year's spending: about seven weeks."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait before a gift is spent",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ (0 - gift_to_grant_years)",
+      "explainer": "The wait discounted at the shared rate, in every branch."
+    },
+    {
       "id": "aid_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, aid branch",
       "format": "multiple",
-      "formula": "aid_evidence_adj * aid_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * aid_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "aid_evidence_adj * aid_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * aid_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "shelter_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, shelter branch",
       "format": "multiple",
-      "formula": "shelter_evidence_adj * shelter_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * shelter_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "shelter_evidence_adj * shelter_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * shelter_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "placement_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, placement branch",
       "format": "multiple",
-      "formula": "placement_evidence_adj * placement_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * placement_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "placement_evidence_adj * placement_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * placement_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "rehab_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, rehab branch",
       "format": "multiple",
-      "formula": "rehab_evidence_adj * rehab_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * rehab_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "rehab_evidence_adj * rehab_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * rehab_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "community_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, community branch",
       "format": "multiple",
-      "formula": "community_evidence_adj * community_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * community_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "community_evidence_adj * community_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * community_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "worship_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, worship branch",
       "format": "multiple",
-      "formula": "worship_evidence_adj * worship_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * worship_missing_data_adj",
-      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "worship_evidence_adj * worship_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * worship_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "missing_data_adj",
@@ -1702,7 +1757,7 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Not modelled, with signs: wellbeing of survivors, prisoners and disaster victims beyond the money value of their help, spiritual care, and the community ties corps build (+); the higher overdose risk of people who relapse after a stretch of abstinence (-); funging inside the organisation, unrestricted money drifting to the church's upkeep (-). They roughly cancel: 0 (-10% to +15%). Count quality is in implementation_adj, and every US programme with a count is on a chain above; the overseas work has its own model."
+      "explainer": "Not modelled, with signs: wellbeing of survivors, prisoners and disaster victims beyond the money value of their help, spiritual care, and the community ties corps build (+); the higher overdose risk of people who relapse after a stretch of abstinence (-); funging inside the organisation, unrestricted money drifting to the church's upkeep (-). They roughly cancel: 0 (-10% to +15%). The 7.3 million personal connections (intake interviews, case management, information requests, p. 21) are how the counted help is delivered, not help of their own. Count quality is in implementation_adj, and every US programme with a count is on a chain above; the overseas work has its own model."
     },
     {
       "id": "aid_uov",
