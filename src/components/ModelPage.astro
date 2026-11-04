@@ -87,7 +87,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
 <Base title={meta.title} description={meta.description} schema={modelSchema(model, meta.description)} active="rankings">
   <div class="page layout" style={`--cause: var(--cause-${model.cause})`} data-track-charity={charity.id} data-track-model={model.id}>
     <div class="main">
-      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
+      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={`/causes/${charity.cause}`}>{CAUSE[charity.cause]}</a>{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
         <div class="m-title">
           <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
