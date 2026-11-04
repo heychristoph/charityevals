@@ -5,6 +5,7 @@ import { buildLibrary, compute } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
 import { editsFor, useEdits } from "../lib/edit-state";
 import ModelTree from "./ModelTree";
+import Waterfall from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
 import { flags, sensitivity } from "../engine/sensitivity";
 import "./model.css";
@@ -34,6 +35,7 @@ export default function ModelView({ id, bulk = false, place, about, children }: 
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
+      <Waterfall model={model} av={av} edits={edits} />
       <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats}>{about}</ModelTree>
 
       {children}
