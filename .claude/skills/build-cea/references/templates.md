@@ -27,19 +27,19 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 - **WELLBY**: one point of life satisfaction (0–10) for one person for a year; × `$daly_per_wellby` gives healthy years.
 - **SAD** (suffering-adjusted day, Ambitious Impact's): a day of an animal's disabling pain, milder pain as a fraction, AIM's species weight built in (the 2024 and 2025 versions differ in it).
 - **ced** (chicken-equivalent pain day): a day of disabling pain in a chicken; animal models' output unit.
-- **Species step**: the fixed `sads_<s>` → `ced_<s>` rows, one pair per species, that swap AIM's species weight for Rethink Priorities' welfare range (normalization.md 2.4); the split by species is a fact or ranged judgment.
+- **Species step**: the fixed `sads_<s>` → `ced_<s>` row pair per species, swapping AIM's species weight for Rethink Priorities' (normalization.md 2.4).
 - **Our view / evaluator view**: our view reads the shared facts and sliders; the evaluator view reproduces an imported sheet at its own rates. A charityevals model has only ours.
 - **Shared fact** (`@file.key`): a sourced number in facts/*.json, one value for every model. **Shared assumption** (`$name`, a slider): a value judgment in assumptions/default.json that readers can move (discount rate, value of a life).
 - **`estimate_basis`**: what the dollar is: `unit_cost` (price per item delivered), `marginal` (the next grant or planned work), `past_average` (past spending over what it won).
 - **Canonical row**: a row id every model of a family has, meaning the same (`program_spend`, `total_adj`); listed in src/engine/templates.ts.
 - **`total_adj`**: the product of the adjustment multipliers.
-- **Invariant (INV-n)**: a site-wide rule computed over every model (listed with reasons in docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model's sources, ranges, constants and required rows. **Convention n**: the numbered rules below.
+- **Invariant (INV-n)**: a site-wide rule over every model (docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model. **Convention n**: the rules below.
 - **Measured / thin** (a branch's outcome for this charity): *measured* when the charity's own count of
   who got the intervention meets an effect with a credible counterfactual (its own controlled
   evaluation, or trials of the same intervention delivered the same way: doses delivered and an RCT's
   effect); *thin* when its reach or effect is a judgment, the effect is from other delivery than the
   charity's, or the programme has no outcome data. Thin takes `$missing_data_discount`.
-- **Combined range**: audit-model's `Combined range`, every input's range combined as independent errors in log space (a 90% interval if each range is one). Joint low–high, every input at its worst or best at once, is the extreme case.
+- **Combined range**: audit-model's, every input's range as independent errors in log space (90% if each range is). Joint low–high, every input at an end at once, is the extreme.
 
 ## What each shared row means
 
@@ -77,12 +77,9 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    (`new_…`, `acc_…`) summed into `outcome_total`. Branch adjustments are `<branch>_<canonical id>`
    (`acc_evidence_adj`, `acc_years_until_effect`, …), each applied in its branch; the canonical rows
    are their outcome-weighted averages, labelled "outcome-weighted average of the branches, for reading only".
-   Since those averages are weighted by the outcome, no row upstream of `outcome_total` may read
-   them (a formula cycle, which stops the model loading): the template rows that multiply by
-   `total_adj` (`deaths_averted`, `uov_stillbirths`, `uov_income`, `dalys_bridged`, a zero advocacy
-   branch, the bridges) take each branch's `<branch>_total_adj` and are summed; the branch outcomes
-   that weight the averages (`<branch>_outcome`) read the bridges' result (`uov_from_daly` × the
-   branch's share of `dalys_bridged`), never a conversion slider themselves (INV-2b).
+   No row upstream of `outcome_total` may read those averages (a formula cycle): rows multiplying by
+   `total_adj` take each branch's `<branch>_total_adj` and are summed; `<branch>_outcome` reads the
+   bridges' result, never a conversion slider (INV-2b).
 5. **One question per adjustment**, so no doubt is counted twice. Years brought forward and the
    counterfactual are one question: a change that would have come anyway gets zero years or a zero
    counterfactual, not both. Completion and dosage lower `implementation_adj` only where the evidence
