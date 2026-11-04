@@ -7,13 +7,13 @@ import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
 import Headline from "./Headline.tsx";
-import WholeCharity from "./WholeCharity.tsx";
+import WholeCharity, { Locations } from "./WholeCharity.tsx";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
-import { rankingPlan } from "../engine/ranking";
+import { locationsOf, rankingPlan } from "../engine/ranking";
 
 interface Props {
   modelId: string;
@@ -81,6 +81,8 @@ const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map
 // (their file loads when their branch opens; the island waits for the main one's, client:model).
 const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
 const whole = parts.length > 1;
+// One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
+const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
@@ -170,6 +172,8 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         </WholeCharity>
         )
       ) : model.bulk ? (
+        <>
+        {located && <Locations client:load id={model.id} />}
         <ModelView client:model={model.id} id={model.id} bulk place={place}>
           <Fragment slot="about">
             <p>
@@ -190,7 +194,10 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             <div class="wf-slot" data-waterfall={model.id}></div>
           </section>
         </ModelView>
+        </>
       ) : (
+        <>
+        {located && <Locations client:load id={model.id} />}
         <ModelView client:load id={model.id} place={place}>
           <Fragment slot="about">
             <p>
@@ -211,6 +218,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             <div class="wf-slot" data-waterfall={model.id}></div>
           </section>
         </ModelView>
+        </>
       )}
       {resources.length > 0 && (
         <details class="resources">
