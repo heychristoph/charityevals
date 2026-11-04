@@ -23,6 +23,10 @@ export const populationShare = (code: number): number => (byCode.get(code)?.popu
 /** The share of the world's population living in a country's region (the country included); 0 for none. */
 export const regionPopulationShare = (code: number): number => (regionPopulation.get(regionOf(code)) ?? 0) / world;
 
+/** A country's name as it reads in a sentence: "the United States", "the Philippines", "Kenya". */
+export const inSentence = (name: string) =>
+  /^(United |Netherlands|Philippines|Democratic Republic|Republic of|Central African|Dominican Republic|Gambia|Bahamas|Maldives|Comoros|Seychelles|Holy See)|Islands$/.test(name) ? `the ${name}` : name;
+
 /** How many steps a country is from home: 0 the same country, 1 the same region, 2 elsewhere. */
 export function steps(home: number, iso3: string): 0 | 1 | 2 {
   const c = byIso3.get(iso3);
