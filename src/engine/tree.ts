@@ -209,7 +209,10 @@ export function rootOf(m: ResolvedModel, look: Lookup, toCommon?: string | Node)
 
 function nodeFor(m: ResolvedModel, n: Node, key: string, op: string | undefined, look: Lookup, e: number | undefined, g?: number): TreeNode {
   const value = safe(n, look);
-  if (n.type === "num") return { key, op, type: "const", via: [], value, e, g, ...(isAgeYears(n) ? { label: "Years since the estimate was made" } : {}) };
+  if (n.type === "num") {
+    const label = isAgeYears(n) ? "Years since the estimate was made" : distanceLabel(n);
+    return { key, op, type: "const", via: [], value, e, g, ...(label ? { label } : {}) };
+  }
   if (n.type === "ref" && n.scope !== "row") return { key, op, type: n.scope, refId: n.name, via: [], value, e, g };
   if (n.type === "ref") {
     const t = passThrough(m, n.name, look);

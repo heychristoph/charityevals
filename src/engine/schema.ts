@@ -215,6 +215,14 @@ export const Model = z
     beneficiaries: z.union([z.record(z.string().regex(/^([A-Z]{3}|world)$/), z.number().positive().max(1)), z.enum(["world", "destinations"])]).optional(),
     /** How `beneficiaries` was set: the data it was read from, or why it is a judgment. */
     beneficiaries_note: z.string().optional(),
+    /** For an imported (evaluator's) model: the share of its result whose outcome isn't measured for this
+     * charity (reach or effect a judgment, or the effect from research on other delivery), which our view
+     * counts at $missing_data_discount: the result is (1 − thin_share) + thin_share × the slider
+     * (docs/normalization.md 2.12, src/engine/model.ts missingDataNode). `note` says why. Required on
+     * every imported model with a result in common units (INV-21); variants inherit it. charityevals'
+     * own models never carry it: their branches' `missing_data_adj` rows apply the slider. Filled by
+     * scripts/missing-data.ts. */
+    missing_data: z.object({ thin_share: z.number().min(0).max(1), note: z.string().min(1) }).strict().optional(),
     /** For charityevals' own models: the build-cea template family the model follows. */
     template: TemplateFamily.optional(),
     /** The charity this model is about (inherited by variants). */

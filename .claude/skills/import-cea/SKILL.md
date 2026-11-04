@@ -147,20 +147,21 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   shared fact. `$uov_per_daly` in a row only with the evaluator's implied rate pinned.
   A model whose outcome mixes kinds (AIM's "DALY-equivalents" folding in income and deaths) is split
   into its parts, each converted with our rates.
-- Text figures stated as a floor ("more than 10x") are taken at the floor and labelled "at least".
+- A floor in text ("more than 10x") is taken at the floor, labelled "at least".
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
   not a unit cost of delivery, not a projected budget), multiply by the slider `$marginal_vs_past_average` in
   an `ours` section (`published` 1), as the retrospective climate models and the money-moving charities do. Set
-  the model's `estimate_basis`: `past_average`, `marginal` (an estimate of the next grant or of planned
-  work) or `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider
-  (normalization.md 2.10).
+  the model's `estimate_basis`: `past_average`, `marginal` (the next grant or planned work) or
+  `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider.
+- **Missing data** (normalization.md 2.12, INV-21): classify the model in scripts/missing-data.ts
+  (`thin_share`, reason; glossary "measured / thin") and run it. Validity adjustments stay; a generic
+  weak-evidence haircut becomes 1 in our view (`SWAPS`, theirs in `published`).
 - **Climate** (normalization.md 2.5): the output is tonnes per dollar (`1 / cost per tonne`, in `tco2e`);
   rows `years_until_avoided` (wait discounted at `$discount_rate`), `air_pollution_weight` and
-  `extra_deaths_per_tco2e` sit in an `ours` section, each input sourced or a labelled judgment with a range.
-- Counterfactuals that subtract what the founders or the money would have done elsewhere are not
-  used in our view: the ranking itself is that comparison. Funging and leverage steps follow the
-  credit-by-share-of-resources lever as in section 4.
+  `extra_deaths_per_tco2e` in an `ours` section, each sourced or a ranged judgment.
+- Counterfactuals subtracting what the founders or money would have done elsewhere aren't used in our
+  view (the ranking is that comparison); funging and leverage follow section 4's lever.
 - **Life-equivalents** (GiveWell's 2017/2019 sheets, Founders Pledge's child-life equivalents): GiveDirectly's
   cost per life-equivalent reads `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar`
   (the sheet's 11,663 in `published`), so steps stated as multiples of cash keep their multiple; a cost per life-equivalent the sheet labels

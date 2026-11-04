@@ -158,6 +158,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     else if (r.formula && /median\([^)]*#/.test(r.formula) && path.has(r.id))
       add(ruleSev, "borrowed", `${r.id} takes its value from other models' results (median of #…)`, literature, r.id);
   }
+  if (m.missing_data) add("high", "missing-data", "a charityevals model carries missing_data", "Remove the field: an own build's branches carry the step in their missing_data_adj rows (the field is for imported models, INV-21).");
   const down = new Map<string, string[]>();
   for (const r of m.rows) for (const d of r.deps) down.set(d, [...(down.get(d) ?? []), r.id]);
   const isInput = (id: string) => { const r = m.byId.get(id); return !!r && r.formula === undefined && r.value !== undefined; };

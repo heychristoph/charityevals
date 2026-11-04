@@ -963,6 +963,65 @@ these as medium until rebuilt (`MISSING_DATA_RULE_DATE`). src/engine/templates.t
 skeleton's result moves with the slider. The auditor (audit-cea) checks the cases the lint can't see: a
 thin branch at 1 under sourced-looking inputs, and a branch reading a peer model's result as its value.
 
+**One rule for every model, imported ones too (owner, 2026-11-04).** Until now only our own builds took
+the slider, which penalised them against imports whose results are no better measured. In our view (never
+the evaluator view) every comparable model's result is now *measured share + thin share × the slider*, by
+the same definition of measured and thin. Built like the age and distance factors:
+
+- **The field.** Every imported model has `missing_data: { thin_share, note }` (variants inherit it): the
+  share of its result that is thin and why. `missingDataNode` (src/engine/model.ts) is
+  `1 − thin_share × (1 − $missing_data_discount)` (the slider itself for a wholly thin model), exactly 1 at
+  a slider of 1; `modelConversion` multiplies it in after the age divisor and the distance weight, so the
+  headline, `bottomLine(...).common`, the rankings, sensitivity, uncertainty, `usedAssumptions` and the
+  tree ("× For the part of the result that isn't measured", whose part is the thin share) read the same
+  number, and every model page has a line ("Not measured for this charity (all of the result): × 0.50 at
+  your settings"). charityevals' own models have no field (their factor is 1): their branches'
+  `missing_data_adj` rows carry the step, so it never counts twice. History pages give a past commit's
+  imports today's classification and slider (src/lib/history.ts), so their lines don't jump here.
+- **Models read live, as for distance.** A charity that moves money ("destinations") reads each
+  destination with its own step (the good is the destination's, as well measured as it is) and is itself
+  measured (counted dollars); a stand-in is read at a slider of 1 (`refValues`) and the reading model's
+  own classification applies once. The evaluator view reads every model at 1 (`readerValues`).
+- **Classification** by scripts/missing-data.ts, a default per evaluator and programme with a reason per
+  model (`--table` prints them): measured where the charity counts who got the intervention (or its cost per
+  person comes from its own past delivery) and the effect is from a controlled evaluation of the charity
+  or trials of the same intervention delivered the same way; thin where the reach is a projection for work
+  not yet delivered, the effect a judgment or research on other delivery. GiveWell's top-charity and
+  established-programme sheets (nets, chemoprevention, vitamin A, New Incentives after its trial,
+  GiveDirectly, deworming, chlorination, malnutrition treatment) are measured; its value-of-information,
+  threshold, pilot and new-partner grant sheets thin; ACE's and Giving Green's campaign and policy
+  estimates, Ambitious Impact's idea-stage ones and research funding thin; Founders Pledge, HLI and SoGive
+  by model (an own RCT of the charity's programme, as for Bandhan, Village Enterprise, Friendship Bench,
+  Shamiri, Imagine Worldwide, NMNW's course: measured). 348 imports: 187 measured (98 of them GiveWell
+  variants), 157 thin, 4 partly thin (Educational Initiatives and NMNW 50%, ALIMA's primary care sheet 50%,
+  Suvita 5%: its antenatal-care part).
+- **The evaluator's evidence adjustments stay** (internal and external validity, replicability, a
+  non-randomised design): they ask how well the trials transfer, which our builds ask in `evidence_adj`. A
+  generic haircut for weak or missing evidence asks this step's question, so in our view it reads 1, the
+  evaluator's figure in `published` ("changed for consistency"): GiveWell's 25% "overall skeptical
+  adjustment" on Evidence Action's own coverage guess in its two iron and folic acid sheets, its 20%
+  skeptical adjustment on Nutrition International's projected rice-fortification coverage, and Founders
+  Pledge's halving of No Means No Worldwide for its unevaluated work (now its thin half).
+
+Checked by INV-21 (every comparable model is classified: our builds by their markers and no field, imports
+by `missing_data` with a reason and no row reading the slider; at 1 an import's factor is exactly 1 and an
+own build's headline is its headline with every marker at 1; with live reads held an import's headline at
+the default and 10% is its headline at 1 × (1 − s(1 − d)); the evaluator view never moves) and
+src/engine/missing-data.test.ts (the factor, stand-ins and destinations, our builds, sensitivity,
+uncertainty, the tree).
+
+**Effect** (primary evaluator's figure per charity at the default 50%, against imports undiscounted and our
+builds as they were): thin imports halve, so measured programmes rise past them. Top 10 after: HSUS (ACE
+2016) 391 → 195, Sinergia 153 → 76.6, The Life You Can Save 58.7 → 51.6 (7th → 3rd; its destinations are
+mostly measured), CEARCH (AIM) 87.1 → 43.5, Helen Keller 41.0 (12th → 5th), Jhpiego 40.0 (13th → 6th),
+Albert Schweitzer Foundation 80.0 → 40.0, Malaria Consortium 39.4 (14th → 8th), SickKids (a GiveWell trial
+sheet, thin) 67.8 → 33.9, Development Media International 33.8 (16th → 10th). Biggest moves: Better Futures
+Guide 34th → 65th (21.0 → 5.43: thin itself and through its thin destinations), Taimaka 52nd → 27th, ALIMA
+53rd → 29th, Imagine Worldwide 63rd → 39th, IRD Global 60th → 36th, Nutrition International 70th → 47th,
+Precision Development 71st → 49th, Central Square Foundation 44th → 23rd, Unlimit Health 72nd → 51st,
+Bandhan 82nd → 62nd. Our own builds (all thin or nearly) keep their figures and climb two to seven places
+(Doctors Without Borders 105th → 98th).
+
 ### 2.13 Lives near and far: the reader's distance weight (November 2026)
 
 Owner decision 2026-11-04: the reader can weigh lives, people's and animals', by how far they are from
@@ -1058,6 +1117,7 @@ shrinks).
 | INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
 | INV-19 | An estimate counts less by its age, in our view only (2.11). | Every model with a result in common units has `source.published`. With the models it reads live (`#id`) held at their values at 0, its headline at the slider's default, 10% and high end is its headline at 0 times exactly `(1 + d)^−age`, age from `source.published` to `common.estimate_age_as_of`; its evaluator view, destinations included, is the same at every setting. |
 | INV-20 | Lives near and far are weighed by where they are, in our view only (2.13). | Every model with a result in common units has `beneficiaries`: shares by ISO alpha-3 codes in facts/countries.json (and `"world"`) summing to 1, `"world"`, or `"destinations"` when it reads models live. With `$home_country` = 0 at 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0%, every headline is exactly its headline with neither. At 50% a step with each of those homes, live reads held, the headline is the unweighted one times Σ share × (1 − d)^steps worked out country by country (1 for "destinations"); the evaluator view never moves. |
+| INV-21 | Missing outcome data: one rule for every model, in our view only (2.12). | Every model with a result in common units is classified: charityevals' own by their `missing_data_adj` rows (and no `missing_data` field), every import by `missing_data` (own or inherited) with a reason and no row reading `$missing_data_discount`. At 1 nothing moves (an import's factor is exactly 1; an own build's headline equals its headline with every marker at 1). With live reads held, an import's headline at the default and 10% is its headline at 1 × (1 − thin_share × (1 − d)); the evaluator view never moves. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the

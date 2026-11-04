@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
 import { byCode, byIso3, inSentence } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
@@ -152,6 +152,7 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
       </span>
       {years && <EstimateAge model={model} av={av} />}
       {years && <DistanceWeight model={model} av={av} />}
+      {years && <MissingData model={model} av={av} />}
     </div>
   );
 }
@@ -210,4 +211,29 @@ function where(b: Record<string, number> | "world"): string {
   if (parts.length > 4) return `in ${parts.length} countries${even ? "" : `, most ${named(parts[0][0])}`}`;
   const list = parts.map(([iso, s]) => `${named(iso)}${even ? "" : ` (${Math.round(s * 100)}%)`}`);
   return list.length === 1 ? list[0] : `${list.slice(0, -1).join(", ")} and ${list.at(-1)}`;
+}
+
+/** "Not measured for this charity (all of the result): × 0.50 at your settings (counted at 50%)": how much
+ * of the result rests on judgment or on research about other delivery, and what the reader's missing-data
+ * slider (docs/normalization.md 2.12) does to the figure above. An imported model's share is its
+ * `missing_data`; a charityevals model's comes from its branches' own missing_data_adj rows; a charity that
+ * moves money takes its destinations'. */
+function MissingData({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+  if (!(MISSING_DATA_DISCOUNT in av)) return null;
+  const d = av[MISSING_DATA_DISCOUNT];
+  const full = headline(lib, model, { ...av, [MISSING_DATA_DISCOUNT]: 1 });
+  const factor = headline(lib, model, av) / full;
+  const share = model.missing_data?.thin_share;
+  // The whole effect on the headline, destinations and branches included.
+  const moved = Number.isFinite(factor) && Math.abs(factor - 1) >= 5e-4;
+  const what = share === undefined
+    ? moved ? "Parts not measured for this charity" : "Measured for this charity"
+    : share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`;
+  const effect = moved ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
+  return (
+    <p className="m-age m-missing" title={model.missing_data?.note}>
+      {what}: {effect} at <a href={`/assumptions#a-${MISSING_DATA_DISCOUNT}`}>your settings</a>
+      {moved || (share ?? 0) > 0 ? <> (counted at {formatPercent(d)})</> : null}.
+    </p>
+  );
 }

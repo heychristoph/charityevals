@@ -6,7 +6,7 @@
 import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, assumptionValues, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
+  AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, assumptionValues, missingDataFactor, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
@@ -122,19 +122,20 @@ export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     const vals = compute(lib, m, av);
     const native = vals[m.output!.row];
     const age = estimateAge(lib, m) ?? 0;
-    const factor = AGE_DISCOUNT in av ? (1 + av[AGE_DISCOUNT]) ** -age : 1;
+    // The missing-data factor is INV-21's to check; here it is the model's own, so the rest is checked.
+    const factor = (AGE_DISCOUNT in av ? (1 + av[AGE_DISCOUNT]) ** -age : 1) * missingDataFactor(lib, m, av);
     const want = native * evaluate(headlineConversion(lib, m.output!.unit)!, conversionLookup(lib, av, vals)) * factor;
     const got = headline(lib, m, av);
     if (!(close(got, want) || (Number.isNaN(got) && Number.isNaN(want))))
-      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion × age factor ${fmt(factor)} = ${fmt(want)}` });
+      violations.push({ inv: "INV-2a", model: m.id, where: "headline", detail: `headline ${fmt(got)} ≠ native ${fmt(native)} × conversion × age and missing-data factors ${fmt(factor)} = ${fmt(want)}` });
     // The common result `#id` references and the rankings read is the same number in units of value.
     const common = bottomLine(lib, m, av).common;
     if (!(close(common, got * perHealthyYearPer1000(av)) || (Number.isNaN(got) && Number.isNaN(common))))
       violations.push({ inv: "INV-2a", model: m.id, where: "bottomLine.common", detail: `common result ${fmt(common)} ≠ headline ${fmt(got)} × a healthy year's value / 1000` });
   }
   return {
-    id: "INV-2a", title: "Headline = native result × the unit's conversion × the estimate's age factor (our view)", status: "checked", checked: models.length, violations,
-    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
+    id: "INV-2a", title: "Headline = native result × the unit's conversion × the estimate's age factor × an import's missing-data factor (our view)", status: "checked", checked: models.length, violations,
+    how: "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11), × an imported model's missing-data factor 1 − thin_share × (1 − $missing_data_discount) (2.12, INV-21); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
   };
 }
 
@@ -1324,10 +1325,63 @@ export function inv20(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+const isOwnBuild = (m: ResolvedModel) => m.owner === "charityevals";
+const MARKER = /(^|_)missing_data_adj$/;
+
+/** INV-21 (docs/normalization.md 2.12): one missing-data rule for every model, in our view only. Every
+ * model with a result in common units is classified: charityevals' own builds by their branches'
+ * missing_data_adj rows (and no `missing_data` field, so the slider never counts twice), every imported
+ * model by `missing_data` (its own or its parent's) with a reason. At $missing_data_discount = 1 nothing
+ * moves: an import's factor is exactly 1, and an own build's headline is its headline with every marker
+ * at 1. With the models it reads live held, an import's headline at the default and at 10% is its headline
+ * at 1 times exactly 1 − thin_share × (1 − d). The evaluator view never moves. */
+export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const D = MISSING_DATA_DISCOUNT;
+  const title = "Missing outcome data: one rule for every model, in our view only";
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  if (!(D in av)) return { id: "INV-21", title, status: "not checked", checked: 0, violations, how: `No $${D} in the assumptions.` };
+  const one = { ...av, [D]: 1 };
+  const settings = [...new Set([av[D], 0.1])].filter((d) => d !== 1);
+  for (const m of models) {
+    const markers = m.rows.filter((r) => MARKER.test(r.id));
+    if (isOwnBuild(m)) {
+      if (m.missing_data) violations.push({ inv: "INV-21", model: m.id, where: "missing_data", detail: "a charityevals model carries missing_data: its branches' missing_data_adj rows apply the slider, so the field would count it twice" });
+      if (!markers.length) { violations.push({ inv: "INV-21", model: m.id, where: "missing_data_adj", detail: "no missing_data_adj row: every branch says whether its outcome is measured (templates.md Convention 12)" }); continue; }
+      const h1 = headline(lib, m, one);
+      const flat = headline(lib, m, av, Object.fromEntries(markers.map((r) => [r.id, 1])));
+      if (Number.isFinite(h1) && !close(h1, flat, 1e-9)) violations.push({ inv: "INV-21", model: m.id, where: "at 1", detail: `headline ${fmt(h1)} at $${D} = 1, ${fmt(flat)} with every marker at 1: the slider moves the result outside its markers` });
+      continue;
+    }
+    const md = m.missing_data;
+    if (!md) { violations.push({ inv: "INV-21", model: m.id, where: "missing_data", detail: "no missing_data classification: how much of the result isn't measured for this charity (scripts/missing-data.ts)" }); continue; }
+    if (!md.note.trim()) violations.push({ inv: "INV-21", model: m.id, where: "missing_data", detail: "missing_data has no reason" });
+    if (markers.some((r) => r.assumptionDeps.includes(D))) violations.push({ inv: "INV-21", model: m.id, where: "missing_data_adj", detail: `an imported model reads $${D} in a row and in missing_data: one step, not two` });
+    if (missingDataFactor(lib, m, one) !== 1) violations.push({ inv: "INV-21", model: m.id, where: "at 1", detail: `the missing-data factor at $${D} = 1 is ${fmt(missingDataFactor(lib, m, one))}, not exactly 1` });
+    const vals = compute(lib, m, one);
+    const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, vals[`#${x}`]]));
+    const h1 = headline(lib, m, one, held);
+    const e1 = headline(lib, m, one, {}, "evaluator");
+    if (!Number.isFinite(h1)) continue;
+    for (const d of settings) {
+      const a = { ...av, [D]: d };
+      const want = h1 * (1 - md.thin_share * (1 - d));
+      const got = headline(lib, m, a, held);
+      if (!close(got, want, 1e-9)) violations.push({ inv: "INV-21", model: m.id, where: `our view at ${fmt(d)}`, detail: `thin share ${fmt(md.thin_share)}: headline ${fmt(got)} at $${D} = ${fmt(d)}, want ${fmt(h1)} × ${fmt(1 - md.thin_share * (1 - d))} = ${fmt(want)}` });
+      const e = headline(lib, m, a, {}, "evaluator");
+      if (!(close(e, e1, 1e-12) || (Number.isNaN(e) && Number.isNaN(e1)))) violations.push({ inv: "INV-21", model: m.id, where: `evaluator view at ${fmt(d)}`, detail: `the evaluator view moves with $${D}: ${fmt(e1)} at 1, ${fmt(e)} at ${fmt(d)}` });
+    }
+  }
+  return {
+    id: "INV-21", title, status: "checked", checked: models.length, violations,
+    how: `Every model with a result in common units (not templates) is classified: a charityevals model by its missing_data_adj rows and no missing_data field; an imported one by missing_data (its own or inherited) with a reason and no row reading $${D}. At $${D} = 1 an import's factor is exactly 1 and an own build's headline equals its headline with every marker at 1. With the models it reads live held, an import's headline at the default and at 10% is its headline at 1 times 1 − thin_share × (1 − d); the evaluator view's headline is the same at every setting.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
