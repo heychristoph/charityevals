@@ -3,19 +3,19 @@
   "name": "Médecins Sans Frontières (Doctors Without Borders): relief distributions and search and rescue",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"COD":0.3333333333333333,"SDN":0.3333333333333333,"SSD":0.3333333333333333},
-  "beneficiaries_note": "Our build: relief distributions to displaced families; the countries the build's rows name (DRC, Sudan, South Sudan) share equally (a judgment).",
+  "beneficiaries": {"COD":0.4489,"SDN":0.2993,"SSD":0.2494,"BGD":0.0024},
+  "beneficiaries_note": "Our build: relief distributions to displaced families (99.8% of the result) in the DRC, Sudan and South Sudan by the build's own country shares (45%, 30%, 25%; a judgment); search and rescue at sea (0.2%), people crossing from Libya, Bangladesh the largest nationality among them (a judgment).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "doctors-without-borders",
   "owner": "charityevals",
-  "summary": "Besides medical care, Médecins Sans Frontières hands out relief items (shelter material, blankets, jerrycans, cooking and hygiene kits, mosquito nets) to displaced families, 653,300 families in 2025, and runs search and rescue in the Mediterranean. This model values the distributions as goods on the site's income scale plus a small share of displaced people's excess deaths averted, and the search and rescue programme (no full-year rescue count for 2025: the new ship sailed only in November) by the site's lifeboat model. The result is mostly uncertainty: MSF doesn't publish what the distributions cost (our estimate) and no study measures how many deaths household items avert.",
+  "summary": "Besides medical care, Médecins Sans Frontières hands out relief items (shelter material, blankets, jerrycans, cooking and hygiene kits, mosquito nets) to displaced families, 653,300 families in 2025, and runs search and rescue in the Mediterranean. This model values the distributions as goods on the site's income scale plus a small share of displaced people's excess deaths averted, and search and rescue as deaths at sea averted, from the route's death rate; in 2025 MSF's new ship sailed only from mid-November, so the year's rescues are few for its cost. The result is mostly uncertainty. Both branches are discounted by the shared missing-data slider: MSF doesn't publish what the distributions cost (our estimate) or the year's rescues (press reports give 68 in the Oyvon's first week), and no study measures how many deaths household items avert.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Médecins Sans Frontières, relief distributions and search and rescue (2025)",
     "url": "https://charityevals.org/doctors-without-borders-charityevals-relief",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -77,12 +77,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -100,68 +94,47 @@
   },
   "rows": [
     {
-      "id": "programmes_eur",
-      "section": "cost",
-      "label": "Programme expenses, 2025 (euros)",
-      "format": "number",
-      "value": 1579640000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 12, Combined Statement of Financial Activities",
-        "quote": "Programmes 2.2.1/2.2.3 (1,309,163) (270,478) (1,579,640) (1,510,419)"
-      },
-      "explainer": "MSF's field programmes in 72 countries in 2025, all MSF entities combined (in thousands of euros in the report). Includes medical supplies, field staff, logistics and sanitation, and grants to partners."
-    },
-    {
-      "id": "programme_support_eur",
-      "section": "cost",
-      "label": "Programme support, 2025 (euros)",
-      "format": "number",
-      "value": 316400000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 12, Combined Statement of Financial Activities",
-        "quote": "Programme support 2.2.4 (308,153) (8,247) (316,400) (293,675)"
-      },
-      "explainer": "Headquarters and regional work that runs the field programmes (project design, monitoring, recruitment of international staff, medical quality). It is part of what a field programme costs, so it counts with the programmes here, not as overhead."
-    },
-    {
       "id": "relief_families",
       "section": "reach",
       "label": "Families receiving relief item distributions, 2025",
       "format": "integer",
-      "value": 653300,
-      "kind": "observed",
-      "source": {
-        "title": "MSF International Activity Report 2025: 2025 figures",
-        "url": "https://www.msf.org/international-activity-report-2025/2025-figures",
-        "retrieved": "2026-11-03",
-        "page": "Activity highlights",
-        "quote": "Families receiving relief item distributions: 653,300"
+      "explainer": "Families who got MSF's relief items in 2025 (MSF's count, 653,300), the shared MSF figure (facts/msf.json) the medical model reads too.",
+      "formula": "@msf.relief_families"
+    },
+    {
+      "id": "relief_share_drc",
+      "section": "reach",
+      "label": "Relief: share of the families in the DRC",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.6
       },
-      "explainer": "Families who got MSF's relief items (shelter material, blankets, mats, jerrycans, cooking sets, hygiene kits, mosquito nets) in 2025, MSF's count."
+      "kind": "judgment",
+      "explainer": "MSF doesn't publish where it distributed; the DRC is its largest programme and the largest displacement response of 2025, Sudan its second, South Sudan its fourth (Financial Report 2025, top ten countries). Our judgment, 45%."
+    },
+    {
+      "id": "relief_share_sudan",
+      "section": "reach",
+      "label": "Relief: share of the families in Sudan",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "MSF doesn't publish where it distributed; Sudan is its second-largest programme with millions newly displaced in Darfur and Kordofan in 2025. Our judgment, 30% of the families, from 20% (if the DRC and South Sudan dominate) to 40%; South Sudan takes the rest."
     },
     {
       "id": "relief_cost_per_family_eur",
       "section": "cost",
       "label": "Cost of a family's relief-item distribution, items and delivery (euros)",
       "format": "number",
-      "value": {
-        "low": 25,
-        "best": 45,
-        "high": 90
-      },
-      "kind": "judgment",
       "unit": "EUR",
-      "explainer": "MSF doesn't split its spending by activity or publish kit prices, so the relief distributions' cost is the families reached times a cost per family, our judgment: 45 euros. The public anchor is UK for UNHCR's family emergency survival kit (mosquito nets, jerrycans, buckets, sanitary pads, blankets, solar lamps) at £65, about 76 euros (https://shop.unrefugees.org.uk/products/emergency-survival-kit), a donor gift price for a full kit; MSF's average is lower because many of its distributions are hygiene or water kits only and it buys in bulk through MSF Supply, though transport and staff in insecure areas add to it. Low end a hygiene kit only; high end the full UNHCR kit with delivery. About 2% of programme spending at the best guess."
+      "explainer": "Our judgment, 45 euros a family for items and delivery (25-90), the shared MSF figure (facts/msf.json, with its anchor, UNHCR's £65 family kit) the medical model reads too.",
+      "formula": "@msf.relief_cost_per_family_eur"
     },
     {
       "id": "relief_program_spend_eur",
@@ -170,24 +143,33 @@
       "format": "number",
       "formula": "relief_families * relief_cost_per_family_eur",
       "unit": "EUR",
-      "explainer": "Modelled in charityevals' model of MSF's relief distributions (doctors-without-borders-charityevals-relief); the same two rows are in both models so the split adds up to MSF's programme spending."
+      "explainer": "The same two rows are in MSF's medical model, which subtracts them, so the split adds up to MSF's programme spending."
     },
     {
       "id": "search_rescue_eur",
       "section": "cost",
       "label": "Search and rescue at sea, 2025 (euros)",
       "format": "number",
-      "value": 3152045,
-      "kind": "observed",
       "unit": "EUR",
+      "explainer": "The shared MSF figure (facts/msf.json). The new ship sailed only from mid-November 2025, so the year's cost, set against seven weeks of rescues, includes preparing it (the Oyvon); the branch is shown at this start-up year's cost.",
+      "formula": "@msf.search_rescue_eur"
+    },
+    {
+      "id": "sar_personnel_eur",
+      "section": "cost",
+      "label": "Search and rescue: personnel costs, 2025 (euros)",
+      "format": "number",
+      "value": 939649,
+      "kind": "observed",
       "source": {
         "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
         "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 68, Finances by country: Search and rescue operations",
-        "quote": "Programmes 3,152,045"
+        "retrieved": "2026-11-04",
+        "page": "p. 68, Search and rescue operations",
+        "quote": "Personnel costs 939,649"
       },
-      "explainer": "The Mediterranean search and rescue programme. It is valued in the relief model's proxy section: in 2025 MSF had no rescue ship until November and publishes no count of people rescued for the year."
+      "explainer": "Staff costs of the search and rescue programme, for the staff-pay step.",
+      "unit": "EUR"
     },
     {
       "id": "total_expenses_eur",
@@ -224,6 +206,15 @@
       "explainer": "Programmes, programme support, awareness-raising and MSF Access, and other humanitarian activities: everything that isn't fundraising or administration."
     },
     {
+      "id": "goods_sold_eur",
+      "section": "cost",
+      "label": "Equipment and services sold to other organisations, 2025 (euros)",
+      "format": "number",
+      "unit": "EUR",
+      "formula": "@msf.goods_sold_eur",
+      "explainer": "The shared MSF figure (facts/msf.json): the buyers pay for these goods and their overhead, so they are left out of the overhead ratio."
+    },
+    {
       "id": "total_expenses",
       "section": "cost",
       "label": "Total expenses, 2025 (US$)",
@@ -242,18 +233,18 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on relief-item distributions, 2025 (US$)",
+      "label": "Spending on relief distributions and search and rescue, 2025 (US$)",
       "format": "usd",
-      "formula": "relief_program_spend_eur * @fx.usd_per_eur_2025",
-      "explainer": "The relief distributions' cost (families × cost per family, above) at the IRS's 2025 yearly average euro rate."
+      "formula": "(relief_program_spend_eur + search_rescue_eur) * @fx.usd_per_eur_2025",
+      "explainer": "The relief distributions (families × our cost per family) and search and rescue at sea, at the IRS's 2025 yearly average euro rate."
     },
     {
       "id": "overhead_ratio",
       "section": "cost",
       "label": "Overhead multiplier (total ÷ programme expenses)",
       "format": "multiple",
-      "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads fundraising (16% of spending) and management (5%) over the programmes in proportion to their cost, as GiveWell and ACE do."
+      "formula": "(total_expenses_eur - goods_sold_eur) / (social_mission_eur - goods_sold_eur)",
+      "explainer": "Total over social-mission expenses, both less the goods sold to other organisations (the buyers pay for those and their share of overhead): spreads fundraising and administration over every programme alike, as in MSF's other models."
     },
     {
       "id": "cost_total",
@@ -268,7 +259,7 @@
       "label": "People per family",
       "format": "number",
       "formula": "@household_size.drc",
-      "explainer": "The site's figure for the DRC (DHS), where MSF's largest displacement responses were in 2025; Sudan's and South Sudan's displaced families are of similar size."
+      "explainer": "The site's figure for the DRC (DHS), the largest of the three; the site has no DHS figure for Sudan or South Sudan, whose displaced families are of similar size."
     },
     {
       "id": "people_reached",
@@ -283,7 +274,7 @@
       "label": "Cost per person reached",
       "format": "usd",
       "formula": "cost_total / people_reached",
-      "explainer": "Context: about 12 dollars a person."
+      "explainer": "Context: about 13 dollars a person."
     },
     {
       "id": "crisis_mortality_rate",
@@ -297,16 +288,16 @@
       },
       "kind": "judgment",
       "unit": "deaths / person-year",
-      "explainer": "MSF distributes to newly displaced people (eastern DRC, Sudan, Gaza, South Sudan). Mortality surveys there run above the Sphere emergency threshold of 1 death per 10,000 people a day (0.0365 a year), which is a check, not a measurement: MSF's own retrospective survey in Zamzam camp, North Darfur (January 2024, 400 households; https://www.msf.org.za/news-and-resources/news-and-resources/sudan-alarming-death-rates-and-malnutrition-crisis-north), found 2.5 per 10,000 a day (0.091 a year). Not every family reached is in a camp that bad, so our judgment is 1.5 per 10,000 a day (0.055), with Sphere's threshold as the low end and Zamzam's rate near the high."
+      "explainer": "MSF distributes to newly displaced people (eastern DRC, Sudan, Gaza, South Sudan). Mortality surveys there run above the Sphere emergency threshold of 1 death per 10,000 people a day (0.0365 a year), which is a check, not a measurement: MSF's own retrospective survey in Zamzam camp, North Darfur (https://www.msf.org.za/news-and-resources/news-and-resources/sudan-alarming-death-rates-and-malnutrition-crisis-north), found 2.5 per 10,000 a day (0.091 a year). Not every family reached is in a camp that bad, so our judgment is 1.5 per 10,000 a day (0.055), with Sphere's threshold as the low end and Zamzam's rate near the high."
     },
     {
       "id": "baseline_mortality_rate",
       "section": "effect",
       "label": "Death rate in the same population before the crisis",
       "format": "small",
-      "formula": "@drc.crude_death_rate_2024",
+      "formula": "relief_share_drc * @drc.crude_death_rate_2024 + relief_share_sudan * @sudan.crude_death_rate_2024 + (1 - relief_share_drc - relief_share_sudan) * @south_sudan.crude_death_rate_2024",
       "unit": "deaths / person-year",
-      "explainer": "The DRC's crude death rate (UN WPP via the World Bank), so only excess deaths count."
+      "explainer": "The three countries' crude death rates (UN WPP via the World Bank), mixed by where the families are, so only excess deaths count."
     },
     {
       "id": "share_excess_averted",
@@ -315,16 +306,29 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.015,
-        "high": 0.04
+        "best": 0.0075,
+        "high": 0.02
       },
       "kind": "judgment",
-      "explainer": "No study measures the effect of household kits on mortality, so we build it from parts. Nets are the item with a measured effect: they cut all-cause child mortality by about a sixth where malaria is common (Cochrane, Pryce et al. 2018). If half the kits include a net, a third of nets are used in camp conditions for the months counted, and a fifth of the excess deaths are of young children in malaria areas, nets avert roughly 0.5 × 0.33 × 0.17 × (a share of the excess deaths they can touch), about 0.5-1% of the excess deaths; shelter, blankets, jerrycans and soap against exposure and diarrhoea perhaps as much again. Our judgment, 1.5%: zero at the low end, 4% if usage is high."
+      "explainer": "The items other than nets (shelter, blankets, jerrycans, soap) against exposure and diarrhoea: no study measures their effect on mortality. Our judgment, 0.75% of the excess deaths over the months they last (half of the earlier 1.5% for all items; the nets are now counted on their own, below); zero at the low end, 2% if they matter as much as nets."
+    },
+    {
+      "id": "relief_items_excess_persistence",
+      "section": "effect",
+      "label": "Other items: share of the crisis's excess death rate that lasts over their half year",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Death rates are highest just after displacement and fall as the response arrives; over the items' shorter half year less of the excess has faded than over the nets' year (60%). Our judgment, 80%."
     },
     {
       "id": "years_exposed",
       "section": "effect",
-      "label": "Years the items protect a family",
+      "label": "Years the items other than nets protect a family",
       "format": "number",
       "value": {
         "low": 0.25,
@@ -333,20 +337,156 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Blankets, sheeting and jerrycans last months in camp conditions; nets a year or more. Our judgment, half a year."
+      "explainer": "Blankets, sheeting and jerrycans last months in camp conditions. Our judgment, half a year (the nets' own years are below)."
+    },
+    {
+      "id": "relief_net_value_per_death",
+      "section": "effect",
+      "label": "Nets: value of a death averted (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "explainer": "The nets' deaths averted are of children under five, at the site's value of a death by age band, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "relief_net_deaths_per_person",
+      "section": "effect",
+      "label": "Nets: children's deaths averted per person reached",
+      "format": "number",
+      "formula": "relief_net_kit_share * relief_net_use * relief_net_new_coverage * relief_net_years * relief_net_mortality_effect / relief_net_trial_use * (baseline_mortality_rate + (crisis_mortality_rate - baseline_mortality_rate) * relief_net_excess_persistence) * share_under5 * relief_malaria_area_share * relief_net_wait",
+      "explainer": "Kits with nets × children under them who wouldn't otherwise be × years × the trials' all-cause effect per child using a net × the deaths of young children per person (the normal rate plus the part of the crisis's excess that lasts the year, × the under-fives' share) in malarious areas, discounted for the longer protection."
+    },
+    {
+      "id": "relief_net_wait",
+      "section": "effect",
+      "label": "Nets: discount for their longer protection",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -((relief_net_years - years_exposed) * 0.5)",
+      "explainer": "The nets' benefit comes over their own years, so its middle is later than the other items' by half the difference (the branch's wait discount covers the rest)."
+    },
+    {
+      "id": "relief_malaria_area_share",
+      "section": "effect",
+      "label": "Nets: share of the families in malarious areas",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Eastern DRC, South Sudan and most of Sudan's displacement areas are malarious; northern Sudan and Gaza much less. Our judgment, 80%."
+    },
+    {
+      "id": "relief_net_mortality_effect",
+      "section": "effect",
+      "label": "Nets: reduction in children's deaths from all causes where they sleep under a net",
+      "format": "percent",
+      "value": {
+        "low": 0.11,
+        "best": 0.17,
+        "high": 0.23
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Pryce, Richardson & Lengeler 2018, Insecticide-treated nets for preventing malaria (Cochrane Database of Systematic Reviews)",
+        "url": "https://doi.org/10.1002/14651858.CD000363.pub3",
+        "retrieved": "2026-11-04",
+        "quote": "ITNs reduce child mortality from all causes by 17% compared to no nets (rate ratio 0.83, 95% CI 0.77 to 0.89)"
+      },
+      "explainer": "An all-cause effect on children's mortality in malarious areas, so it applies to all their deaths, not only the crisis's excess."
+    },
+    {
+      "id": "relief_net_years",
+      "section": "effect",
+      "label": "Nets: years a distributed net protects",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "A net lasts about two to three years in normal use (ITN life); further displacement and camp conditions cut it short. Our judgment, a year.",
+      "unit": "years"
+    },
+    {
+      "id": "relief_net_use",
+      "section": "effect",
+      "label": "Nets: share of the families' children sleeping under the kit's nets",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.33,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Two nets for a family of about six, some sold or used in shelters without a frame. Our judgment, a third."
+    },
+    {
+      "id": "relief_net_new_coverage",
+      "section": "effect",
+      "label": "Nets: share of those children who wouldn't otherwise have slept under a net",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Trials compare nets with no nets; a child who already slept under a net gains nothing. National malaria and household surveys in the DRC, South Sudan and Sudan find roughly half of young children or fewer sleeping under a net, and newly displaced families have often lost theirs. Our judgment, 60%."
+    },
+    {
+      "id": "relief_net_trial_use",
+      "section": "effect",
+      "label": "Nets: share of children in the trials who used them",
+      "format": "percent",
+      "value": {
+        "low": 0.65,
+        "best": 0.75,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Pryce et al.'s 17% is per child given nets, at the trials' own use (about two-thirds to over 80%); dividing by it gives the effect per child who uses a net, so the kits' use share above isn't counted twice. Our judgment, 75%."
+    },
+    {
+      "id": "relief_net_excess_persistence",
+      "section": "effect",
+      "label": "Nets: share of the crisis's excess death rate that lasts over the nets' year",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Death rates are highest just after displacement and fall as the response arrives; the nets protect for a year. Our judgment, 60% of the excess on average over that year."
+    },
+    {
+      "id": "relief_net_kit_share",
+      "section": "effect",
+      "label": "Nets: share of the families' kits that include mosquito nets",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "UNHCR's full family kit has two nets; MSF's distributions are often hygiene or water kits only. Our judgment, half."
     },
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
       "label": "Deaths averted per person reached (before adjustments)",
       "format": "small",
-      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
-      "explainer": "Excess deaths over the months covered, times the share the items avert."
+      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * relief_items_excess_persistence * share_excess_averted * years_exposed + relief_net_deaths_per_person",
+      "explainer": "The other items' share of the excess deaths over the months covered, plus the nets' deaths averted (below)."
     },
     {
       "id": "share_under5",
       "section": "effect",
-      "label": "Share of the deaths averted that are of children under five",
+      "label": "Share of the deaths of the people reached that are of children under five",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -354,7 +494,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "In displacement crises roughly 40-60% of excess deaths are of children under five (mortality surveys of camps); malaria and diarrhoea, the causes items touch, are concentrated in young children. Our judgment."
+      "explainer": "In displacement crises roughly 40-60% of excess deaths are of children under five (mortality surveys of camps); malaria and diarrhoea, the causes items touch, are concentrated in young children. Our judgment. Used twice: the age split of the other items' deaths averted, and the young children's share of the death rate the nets act on."
     },
     {
       "id": "share_5_14_of_over5",
@@ -392,18 +532,53 @@
       "explainer": "The site's one value of a death, by age band, times your value of a life."
     },
     {
+      "id": "relief_episodes_averted",
+      "section": "effect",
+      "label": "Relief: illness episodes averted per person over the months covered",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.06,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Nets avert malaria episodes for their year of use (about half of children's episodes under a net), soap and jerrycans diarrhoea over the months they last (about 30%, Wolf et al. 2022, https://doi.org/10.1016/s0140-6736(22)00937-0), blankets and sheeting respiratory illness; with half the kits carrying nets, a third of children under them and a few episodes a person a year in camps, our judgment, 0.06 episodes averted per person."
+    },
+    {
+      "id": "relief_episode_years",
+      "section": "effect",
+      "label": "Relief: length of an episode (years)",
+      "format": "number",
+      "value": {
+        "low": 0.008,
+        "best": 0.014,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Malaria, diarrhoea and respiratory episodes last about five days when treated or self-limiting (GBD's durations for moderate acute episodes are about a week). Our judgment, five days; three days at the low end, eleven (a long untreated episode) at the high end.",
+      "unit": "years"
+    },
+    {
+      "id": "relief_diarrhoea_share",
+      "section": "effect",
+      "label": "Relief: share of the episodes averted that are diarrhoea",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: about half diarrhoea, half malaria and respiratory infections."
+    },
+    {
       "id": "dalys_illness_per_person",
       "section": "effect",
       "label": "Illness averted per person reached, in DALYs (before adjustments)",
       "format": "number",
-      "value": {
-        "low": 0,
-        "best": 0.0005,
-        "high": 0.002
-      },
-      "kind": "judgment",
       "unit": "DALYs",
-      "explainer": "Malaria episodes averted by nets, diarrhoea by jerrycans and soap, respiratory illness by shelter and blankets: small per person. Our judgment, 0.0005 DALYs (a few illness-days a year)."
+      "explainer": "Episodes averted per person × how long an episode lasts × GBD 2019's disability weights for moderate diarrhoea and a moderate acute infection (malaria, respiratory), mixed.",
+      "formula": "relief_episodes_averted * relief_episode_years * (relief_diarrhoea_share * @gbd_disability_weights.diarrhoea_moderate + (1 - relief_diarrhoea_share) * @gbd_disability_weights.infectious_acute_moderate)"
     },
     {
       "id": "items_share_of_cost",
@@ -416,7 +591,20 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Transport, storage, staff and security in hard-to-reach places add to the items' price; recipients value in-kind items at or a little below their market price. Our judgment, 70%, so the value is tied to the cost (above) rather than ranged separately."
+      "explainer": "The split of the cost between the items' procurement and their delivery (transport, storage, staff and security in hard-to-reach places). Our judgment, 70% items. How recipients value items is in the goods' evidence adjustment, items lost or sold in the implementation adjustment."
+    },
+    {
+      "id": "net_share_of_kit_value",
+      "section": "effect",
+      "label": "Relief: share of the kits' value that is mosquito nets",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "The deaths averted by nets are counted as deaths, so the nets' market value isn't counted again as goods (families/humanitarian-relief.md, Pitfalls). A full UNHCR kit has two nets (about 9% of its value); about half of MSF's kits carry nets: our judgment, 5%."
     },
     {
       "id": "kit_value_usd",
@@ -431,8 +619,8 @@
       "section": "effect",
       "label": "Goods delivered per person (US$)",
       "format": "usd",
-      "formula": "kit_value_usd / household_size",
-      "explainer": "The share of the value not counted as deaths or illness averted is small, so the whole market value counts here as goods."
+      "formula": "kit_value_usd * (1 - net_share_of_kit_value) / household_size",
+      "explainer": "The kit's market value less its nets (valued as deaths averted), per household member."
     },
     {
       "id": "price_2017_per_2025",
@@ -447,8 +635,8 @@
       "section": "effect",
       "label": "PPP conversion (2017 international $ per US $)",
       "format": "number",
-      "formula": "@drc.ppp_factor_2017",
-      "explainer": "The DRC's 2017 household-consumption PPP over its exchange rate (World Bank), standing in for all the countries where MSF distributes (the DRC is the largest; MSF doesn't publish the split)."
+      "formula": "relief_share_drc * @drc.ppp_factor_2017 + relief_share_sudan * @sudan.ppp_factor_2017 + (1 - relief_share_drc - relief_share_sudan) * @south_sudan.ppp_factor_2017",
+      "explainer": "The three countries' 2017 household-consumption PPP over their exchange rates (World Bank), mixed by where the families are. Sudan's official rate of 2017 overstates the pound, so its factor (and the goods' value there) is low; the site has no parallel-market figure, so it stays."
     },
     {
       "id": "baseline_consumption",
@@ -457,11 +645,11 @@
       "format": "usd",
       "value": {
         "low": 350,
-        "best": 550,
+        "best": 590,
         "high": 900
       },
       "kind": "judgment",
-      "explainer": "Displaced families in the DRC and Sudan live below the World Bank's extreme poverty line ($2.15 a day, $785 a year in 2017 PPP); the DRC's average poor person consumes about $1.5 a day. Our judgment, $550 a year."
+      "explainer": "World Bank PIP for the DRC (2020 survey, consumption): 74.4% below the $2.15 line with a poverty gap of 36.0%, so the poor consume on average 2.15 × (1 − 0.360/0.744) = $1.11 a day, $405 a year, in PIP's PPP (928.6 francs per international $; https://api.worldbank.org/pip/v1/pip?country=COD&year=all&povline=2.15, retrieved 2026-11-04). The goods are converted with the World Development Indicators' PPP (634.3 francs, the site's @drc fact), so in that base the same consumption is 405 × 928.6 / 634.3 = $593 a year. Displaced families are poorer than the average poor person, Sudan's and South Sudan's similar. Our judgment, $590; 350 to 900. The DRC's poor stand in for Sudan's and South Sudan's displaced families (the World Bank's latest South Sudan survey, 2016, found 64% below the line, a similar depth)."
     },
     {
       "id": "ln_gain_per_person",
@@ -470,6 +658,113 @@
       "format": "number",
       "formula": "ln(1 + value_delivered_per_person * price_2017_per_2025 * ppp_factor / baseline_consumption)",
       "explainer": "A year's goods on the site's one log-income scale."
+    },
+    {
+      "id": "sar_people_rescued",
+      "section": "reach",
+      "label": "Search and rescue: people MSF rescued in 2025 (our estimate)",
+      "format": "integer",
+      "value": {
+        "low": 68,
+        "best": 150,
+        "high": 300
+      },
+      "kind": "judgment",
+      "explainer": "The Oyvon sailed from mid-November 2025: it rescued 41 people landed in Lampedusa on 16 November (LaPresse, https://uk.lapresse.it/news-en/2025/11/16/migrants-msf-oyvon-rescues-41-people-landed-in-lampedusa) and 27 more, 12 of them minors, the next day (Avvenire, https://www.avvenire.it/attualita/la-nave-di-medici-senza-frontiere-soccorre-27-migranti_101044), at least 68 in its first week. MSF publishes no count for the rest of the year; at the Geo Barents' pace (2,280 people rescued in 2024, about 45 a week: https://www.msf.org/international-activity-report-2024/2024-figures) the seven weeks would be about 300, the high end. Our judgment, 150."
+    },
+    {
+      "id": "sar_route_deaths",
+      "section": "effect",
+      "label": "Central Mediterranean: people dead or missing, 2025",
+      "format": "integer",
+      "value": 1342,
+      "kind": "observed",
+      "source": {
+        "title": "UNHCR, Italy sea arrivals overview 2025 (via ReliefWeb)",
+        "url": "https://reliefweb.int/report/italy/italy-sea-arrivals-overview-2025",
+        "retrieved": "2026-11-04",
+        "quote": "at least 1,342 persons killed or missing"
+      },
+      "explainer": "IOM's Missing Migrants count on the central route (1,330 in IOM's year-end figure)."
+    },
+    {
+      "id": "sar_route_arrivals",
+      "section": "effect",
+      "label": "Sea arrivals in Italy, 2025",
+      "format": "integer",
+      "value": 66296,
+      "kind": "observed",
+      "source": {
+        "title": "ANSA, Migrant landings down 0.48% in 2025, says Interior Ministry",
+        "url": "https://www.ansa.it/english/news/2025/12/31/migrant-landings-down-0.48-in-2025-says-interior-ministry_93902940-88a9-4c1e-a43a-0fc3e1551d99.html",
+        "retrieved": "2026-11-04",
+        "quote": "66,296"
+      },
+      "explainer": "Italy's Interior Ministry count of people arriving by sea in 2025."
+    },
+    {
+      "id": "sar_route_death_rate",
+      "section": "effect",
+      "label": "Central Mediterranean: deaths per crossing that reached Italy",
+      "format": "percent",
+      "formula": "sar_route_deaths / sar_route_arrivals",
+      "explainer": "About 2% of the people who reached Italy. The denominator leaves out interceptions back to Libya and Tunisia and the dead, which makes the per-attempt risk about a quarter lower; the multiple below is set against this figure."
+    },
+    {
+      "id": "sar_risk_vs_route",
+      "section": "effect",
+      "label": "Search and rescue: risk of death of a boat MSF reaches, as a multiple of the route's average",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 2.5,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "NGO ships reach boats in distress far offshore, overloaded rubber boats and wooden boats, whose risk is above the route's average; many shipwrecks leave no survivors. Against the arrivals-based 2% (a quarter above the per-attempt risk), our judgment, 2.5 times."
+    },
+    {
+      "id": "sar_death_risk_unrescued",
+      "section": "effect",
+      "label": "Search and rescue: chance a person rescued would have died without any rescue",
+      "format": "percent",
+      "formula": "sar_route_death_rate * sar_risk_vs_route",
+      "explainer": "The route's death rate × the higher risk of the boats MSF reaches."
+    },
+    {
+      "id": "sar_share_minors",
+      "section": "effect",
+      "label": "Search and rescue: share of the people rescued under 15",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.12,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Most people crossing are young adults; children were about a tenth to a seventh of 2025 arrivals in Italy (UNHCR). Our judgment, 12%."
+    },
+    {
+      "id": "sar_value_per_death",
+      "section": "effect",
+      "label": "Search and rescue: value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(sar_share_minors * @moral_weights.uov_per_death_age_5_14 + (1 - sar_share_minors) * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier",
+      "explainer": "The site's one value of a death by age band, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "sar_unmodelled_benefits_adj",
+      "section": "effect",
+      "label": "Search and rescue: moral hazard and other effects, as a share",
+      "format": "percent",
+      "value": {
+        "low": -0.5,
+        "best": -0.15,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Deiana, Maheshri & Mastrobuoni (2024, https://doi.org/10.2139/ssrn.4283858) find that the state rescue operations of 2013-14 led smugglers to send more boats in bad weather and flimsier rafts, offsetting the safety gain; other studies find no pull factor from NGO ships (Cusumano & Villa; Salvagno et al. 2024, https://doi.org/10.3389/fpubh.2024.1362214). A single NGO ship's effect on smugglers is much smaller than a state operation's; medical care and témoignage on board add a little. Our judgment, -15%."
     },
     {
       "id": "goods_evidence_adj",
@@ -482,7 +777,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The goods are valued at their market price on the site's log-income scale, which needs no study; the low end if recipients value in-kind items below market price (some resale at a discount)."
+      "explainer": "The goods are valued at their market price on the site's log-income scale; the low end if recipients value in-kind items below market price."
     },
     {
       "id": "deaths_evidence_adj",
@@ -490,19 +785,19 @@
       "label": "Evidence adjustment for the deaths and illness averted",
       "format": "multiple",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "The deaths and illness averted rest on no study of kits, only on the nets' trial effect carried to camp conditions. Our judgment, 0.5, as for an untested health effect."
+      "explainer": "How far the nets' trial effect, carried to camp conditions, and the parts built on it hold for the kits: 0.8. That no study measures kits themselves is the missing-data step below, not this row (counting it here too would count it twice)."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(deaths_averted_per_person * value_per_death * deaths_evidence_adj + ln_gain_per_person * $uov_per_ln_consumption * goods_evidence_adj) / (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "formula": "(((crisis_mortality_rate - baseline_mortality_rate) * relief_items_excess_persistence * share_excess_averted * years_exposed * value_per_death + relief_net_deaths_per_person * relief_net_value_per_death) * deaths_evidence_adj + ln_gain_per_person * $uov_per_ln_consumption * goods_evidence_adj) / (((crisis_mortality_rate - baseline_mortality_rate) * relief_items_excess_persistence * share_excess_averted * years_exposed * value_per_death + relief_net_deaths_per_person * relief_net_value_per_death) + ln_gain_per_person * $uov_per_ln_consumption)",
       "explainer": "The goods and the deaths branches each apply their own evidence adjustment; this is their weighted average, for reading only."
     },
     {
@@ -550,7 +845,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Some items are sold, lost in further displacement or go to families counted twice. Our judgment, 85%."
+      "explainer": "Some items are sold at a discount, lost in further displacement or go to families counted twice. Our judgment, 85%."
     },
     {
       "id": "leverage_funging_adj",
@@ -620,10 +915,84 @@
     {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "Adjustments applied to both branches",
+      "label": "Adjustments: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount",
-      "explainer": "The product of the adjustments both branches share; each applies its own evidence adjustment."
+      "formula": "(relief_uov * relief_total_adj + sar_uov * sar_total_adj) / (relief_uov + sar_uov)",
+      "explainer": "Each branch applies its own adjustments; this is their outcome-weighted average of the branches (by value before adjustments), for reading only."
+    },
+    {
+      "id": "relief_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: relief distributions",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts the families, but the kits' cost is our judgment and no study measures what kits do for health, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "relief_total_adj",
+      "section": "adjustments",
+      "label": "Relief distributions: adjustments combined",
+      "format": "multiple",
+      "formula": "counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
+      "explainer": "The canonical rows above are the relief branch's; times its missing-data marker."
+    },
+    {
+      "id": "sar_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Search and rescue: share of the people rescued no one else would have reached in time",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Boats in distress are also reached by the Italian and Maltese coastguards, merchant ships, other NGO vessels, or intercepted by the Libyan coastguard (alive, but returned to detention). Our judgment, half."
+    },
+    {
+      "id": "sar_attribution_share",
+      "section": "adjustments",
+      "label": "Search and rescue: MSF's share of the resources behind the rescues",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "MSF runs the ship and crew; coordination centres and ports add a little. Our judgment, 95%."
+    },
+    {
+      "id": "sar_wait_discount",
+      "section": "adjustments",
+      "label": "Search and rescue: discount for the wait",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -gift_to_grant_years",
+      "explainer": "A gift waits as long as MSF's reserves (above) before it is spent; a rescue's good is immediate."
+    },
+    {
+      "id": "sar_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: search and rescue",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF published no count of the year's rescues (press reports give 68 in the first week; the year's count is our judgment) and the chance a rescued person would have died is a judgment from the route's death rate, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "sar_total_adj",
+      "section": "adjustments",
+      "label": "Search and rescue: adjustments combined",
+      "format": "multiple",
+      "formula": "sar_counterfactual_adj * sar_attribution_share * sar_wait_discount * sar_missing_data_adj",
+      "explainer": "The product of the branch's adjustments."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: outcome-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "(relief_uov * relief_missing_data_adj + sar_uov * sar_missing_data_adj) / (relief_uov + sar_uov)",
+      "explainer": "Each branch reads its own marker; their outcome-weighted average, for reading only."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -639,12 +1008,31 @@
       "explainer": "Benefits: dignity and protection (sheeting and lighting reduce assaults), cash saved for food (+5%). Harms: market disruption is negligible at this scale. Net +5%."
     },
     {
+      "id": "relief_uov",
+      "section": "outcome",
+      "label": "Relief distributions: value before adjustments (units of value)",
+      "format": "number",
+      "formula": "people_reached * (((crisis_mortality_rate - baseline_mortality_rate) * relief_items_excess_persistence * share_excess_averted * years_exposed * value_per_death + relief_net_deaths_per_person * relief_net_value_per_death) * deaths_evidence_adj + ln_gain_per_person * $uov_per_ln_consumption * goods_evidence_adj) * (1 + unmodelled_benefits_adj)",
+      "explainer": "For the branch weights.",
+      "unit": "units of value"
+    },
+    {
+      "id": "sar_uov",
+      "section": "outcome",
+      "label": "Search and rescue: value before adjustments (units of value)",
+      "format": "number",
+      "formula": "sar_people_rescued * sar_death_risk_unrescued * sar_value_per_death * (1 + sar_unmodelled_benefits_adj)",
+      "explainer": "For the branch weights.",
+      "unit": "units of value"
+    },
+    {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death * deaths_evidence_adj + ln_gain_per_person * $uov_per_ln_consumption * goods_evidence_adj)",
-      "unit": "UoV"
+      "formula": "relief_uov * relief_total_adj + sar_uov * sar_total_adj",
+      "unit": "UoV",
+      "explainer": "Both branches' deaths and goods in units of value, each after its own adjustments."
     },
     {
       "id": "dalys_from_uov",
@@ -675,19 +1063,28 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (before adjustments)",
+      "label": "Healthy years counted directly (after the relief branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * dalys_illness_per_person * deaths_evidence_adj",
-      "unit": "DALYs"
+      "formula": "people_reached * dalys_illness_per_person * deaths_evidence_adj * relief_total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Illness averted by the relief items, after the relief branch's adjustments."
+    },
+    {
+      "id": "sar_deaths_averted",
+      "section": "outcome",
+      "label": "Search and rescue: deaths averted",
+      "format": "number",
+      "formula": "sar_people_rescued * sar_death_risk_unrescued * sar_total_adj",
+      "explainer": "People rescued × the chance they would have died × the branch's adjustments."
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "formula": "dalys_direct + dalys_from_uov + dalys_from_wellby",
       "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+      "explainer": "Illness in DALYs and the deaths and goods through their bridge, each branch with its own adjustments already."
     },
     {
       "id": "dalys_per_dollar",
@@ -698,29 +1095,25 @@
       "unit": "DALYs / $"
     },
     {
-      "id": "programme_personnel_eur",
-      "section": "donor",
-      "label": "Personnel costs of programmes and programme support, 2025 (euros)",
-      "format": "number",
-      "value": 1030634000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 25, Note 2.2.2 Personnel expenses",
-        "quote": "Programmes - 229,529 573,255 3,455 806,239 764,674; Programme support 207,167 7,720 9,508 - 224,395"
-      },
-      "explainer": "Pay of international, locally hired and headquarters staff working on the programmes (806.2M euros) and their support (224.4M euros)."
-    },
-    {
       "id": "staff_cost_share",
       "section": "donor",
       "label": "Staff pay as a share of programme cost",
       "format": "percent",
-      "formula": "programme_personnel_eur / (programmes_eur + programme_support_eur)",
-      "explainer": "MSF's own figure from its accounts (54%), in place of the shared default for staff-delivered work (@staff_pay.share_staff_delivered, 50%)."
+      "formula": "(relief_program_spend_eur * (1 - items_share_of_cost) * relief_staff_share_of_delivery + sar_personnel_eur) / (relief_program_spend_eur + search_rescue_eur)",
+      "explainer": "Staff pay in this model's work: the relief distributions' cost beyond the items × staff's share of it, plus search and rescue's personnel (p. 68), over the model's spending."
+    },
+    {
+      "id": "relief_staff_share_of_delivery",
+      "section": "donor",
+      "label": "Relief: staff's share of the cost beyond the items",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Transport, storage and staff make up the cost beyond the items; anchored on MSF's staff share across its programmes (personnel 1,030.6 million of 1,896.0 million euros of programmes and programme support, 54%, Financial Report 2025 p. 25), our judgment, half."
     },
     {
       "id": "salary_gap",
@@ -749,51 +1142,9 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "formula": "dalys_per_dollar * donor_cost_share",
       "unit": "Years of healthy life / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data: search and rescue at sea, 2025 (US$)",
-      "format": "usd",
-      "formula": "search_rescue_eur * @fx.usd_per_eur_2025",
-      "explainer": "MSF's Mediterranean search and rescue: its ship Geo Barents stopped in December 2024 and the new Oyvon started only in November 2025; MSF publishes no count of people rescued in 2025 beyond a first mission's 27 people, too little to build a chain on, so it is valued by the proxy step."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "#royal-national-lifeboat-institution-sogive",
-      "unit": "units of value / $",
-      "explainer": "The one model of rescue at sea on the site, read live: SoGive's model of the RNLI's lifeboats. The nearest evaluated programme; MSF's rescues are of migrants in distress far offshore, where each rescue may save more lives than a coastal lifeboat call-out, and the missing-data slider covers the difference."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "explainer": "The result per dollar × your dollar's share of the full cost."
     }
   ]
 }
