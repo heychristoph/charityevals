@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
 import { assumptionValues, headline, type ResolvedModel } from "../engine/model";
-import { parse, refs } from "../engine/expr";
+import { parse, type Node } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
 
@@ -24,6 +24,55 @@ function hrefOf(t?: StepTarget): string | undefined {
   if (t.type === "rows") return `#row-${t.ids[0]}`;
   if (t.type === "assumption") return `/assumptions#a-${t.id}`;
   return `/method#${t.anchor}`;
+}
+
+/** Plain words for the factors of a unit's conversion: what the number is, in a reader's terms. */
+const PLAIN: Record<string, string> = {
+  chicken_vs_person: "how much a chicken's day of pain counts against a person's",
+  daly_per_sad: "healthy time a day of disabling pain costs, out of the 8,760 hours in a year",
+  daly_per_wellby: "years of healthy life one point of life satisfaction for a year is worth",
+  uov_per_daly: "doubled-income years one year of healthy life is worth",
+};
+type Factor = { value: string; label: string; by?: string; inv: boolean; href?: string };
+
+/** The factors that turn a result in `unit` into years of healthy life per $1,000 (model.ts headlineNode,
+ * read for people): each shared value with its plain meaning and a link to its slider; a conversion that
+ * isn't a plain product (climate's) as one factor. */
+function conversionFactors(unit: string, model: ResolvedModel, evaluator: boolean, owner: string): Factor[] {
+  const to = lib.assumptions.units[unit]?.to_common;
+  if (!to || unit === "daly") return [{ value: "1,000", label: "per $1,000 instead of per dollar", inv: false }];
+  const defaults = assumptionValues(lib.assumptions);
+  const at = (id: string) => (evaluator && model.evaluator?.assumptions[id] !== undefined ? model.evaluator.assumptions[id] : defaults[id]);
+  const parts: { node: Node; inv: boolean }[] = [];
+  const split = (n: Node, inv: boolean) => {
+    if (n.type === "bin" && (n.op === "*" || n.op === "/")) { split(n.left, inv); split(n.right, n.op === "/" ? !inv : inv); }
+    else if (!(n.type === "num" && n.value === 1)) parts.push({ node: n, inv });
+  };
+  split(parse(to), false);
+  const cancel = parts.findIndex((f) => !f.inv && f.node.type === "ref" && f.node.scope === "assumption" && f.node.name === "uov_per_daly");
+  if (cancel >= 0) parts.splice(cancel, 1);
+  else parts.push({ node: { type: "ref", scope: "assumption", name: "uov_per_daly" }, inv: true });
+  const out: Factor[] = [];
+  for (const { node, inv } of parts) {
+    if (node.type !== "ref" || (node.scope !== "assumption" && node.scope !== "fact")) {
+      // Not a plain product (a formula of several values): one factor, the method page explains it.
+      return [{ value: "see how", label: `${lib.assumptions.units[unit]?.label ?? unit} become healthy years`, inv: false, href: `/method#${UNIT_SECTION[unit] ?? "healthy-years"}` }];
+    }
+    if (node.scope === "fact") {
+      const f = lib.facts.get(node.name);
+      out.push({ value: String(Number((typeof f?.value === "object" ? f.value.best ?? 0 : f?.value ?? 0).toPrecision(3))), label: f?.label ?? node.name, inv });
+      continue;
+    }
+    const row = lib.assumptions.rows.find((r) => r.id === node.name);
+    const v = at(node.name);
+    const shown = row?.shown_as ? v * row.shown_as.factor : v;
+    const fmt = row?.shown_as?.format ?? row?.format;
+    const value = row?.shown_as ? `${Number(shown.toPrecision(3))} hours` : fmt === "percent" ? `${Number((shown * 100).toPrecision(3))}%` : `${Number(shown.toPrecision(3))}`;
+    const pinned = evaluator && model.evaluator?.assumptions[node.name] !== undefined;
+    out.push({ value, label: PLAIN[node.name] ?? row?.label ?? node.name, by: pinned ? `${possessive(owner)} value` : "your value", inv, href: `#a-${node.name}` });
+  }
+  out.push({ value: "1,000", label: "per $1,000 instead of per dollar", inv: false });
+  return out;
 }
 
 const KIND: Record<Step["kind"], string> = {
@@ -63,59 +112,47 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
   };
   const owner = lib.owners.get(model.owner)?.name ?? "The evaluator";
   const unitLabel = lib.assumptions.units[w.native.unit]?.label ?? w.native.unit;
-  // The values the unit's conversion into healthy years reads, at the rates the start uses (the
-  // evaluator's where it pinned one, else the site's default), each linked to its slider in Your values.
-  const to = lib.assumptions.units[w.native.unit]?.to_common;
-  const defaults = assumptionValues(lib.assumptions);
-  const rates = to && to !== "1"
-    ? [...refs(parse(to)).assumptions].map((id) => {
-        const row = lib.assumptions.rows.find((r) => r.id === id);
-        const pinned = w.start === "evaluator" && model.evaluator?.assumptions[id] !== undefined;
-        const v = pinned ? model.evaluator!.assumptions[id] : defaults[id];
-        // As the slider shows it: a scaled value (hours, not a fraction of a year), a percent or a multiple.
-        const shown = row?.shown_as ? v * row.shown_as.factor : v;
-        const fmt = row?.shown_as?.format ?? row?.format;
-        const value = fmt === "percent" ? `${Number((shown * 100).toPrecision(3))}%` : fmt === "multiple" ? `${Number(shown.toPrecision(3))}×` : `${Number(shown.toPrecision(3))}`;
-        return { id, label: row?.label ?? id, value, pinned };
-      })
-    : [];
+  // The unit's way into years of healthy life per $1,000, as the factors it multiplies by (the same
+  // split as model.ts headlineNode: a healthy year's value in units of value cancels where it appears),
+  // each at the rate the start uses: the evaluator's where it pinned one, else the site's default.
+  const factors = conversionFactors(w.native.unit, model, w.start === "evaluator", owner);
   return (
     <details className="wf" open>
       <summary>
         <span className="wf-title">{w.start === "evaluator" ? `How ${possessive(owner)} figure becomes ours` : "How the model's figure becomes the one shown"}</span>
       </summary>
-      {/* Their result in its own unit, and the same figure in years of healthy life per $1,000. */}
-      <div className="wf-convert">
-        <div className="wf-unit">
-          <span className="wf-unit-num num">{fmtNative(w.native.value)}</span>
-          <span className="wf-unit-label">{unitLabel} per dollar</span>
-          <span className="wf-unit-by small">{w.start === "evaluator" ? possessive(owner) + " result" : "the model's result"}</span>
+      {/* Their result in its own unit, times each factor that turns it into healthy years, equals the
+          figure the steps start from. */}
+      <div className="wf-eq" role="group" aria-label="How the result becomes years of healthy life">
+        <div className="wf-term">
+          <span className="wf-term-num num">{fmtNative(w.native.value)}</span>
+          <span className="wf-term-label">{unitLabel} per dollar</span>
+          <span className="wf-term-by">{w.start === "evaluator" ? `${possessive(owner)} result` : "the model's result"}</span>
         </div>
-        {w.native.unit !== "daly" && (
-          <>
-            <div className="wf-arrow small">
-              <span className="wf-arrow-mark" aria-hidden>→</span>
-              <a href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`}>in healthy years</a>
-            </div>
-            <div className="wf-unit">
-              <span className="wf-unit-num num">{formatYears(w.startValue)}</span>
-              <span className="wf-unit-label">years of healthy life per $1,000</span>
-            </div>
-          </>
-        )}
+        {factors.map((f, i) => (
+          <Fragment key={i}>
+            <span className="wf-op" aria-label={f.inv ? "divided by" : "times"}>{f.inv ? "÷" : "×"}</span>
+            {f.href ? (
+              <a className="wf-term wf-term-link" href={f.href}>
+                <span className="wf-term-num num">{f.value}</span>
+                <span className="wf-term-label">{f.label}</span>
+                {f.by && <span className="wf-term-by">{f.by}</span>}
+              </a>
+            ) : (
+              <div className="wf-term">
+                <span className="wf-term-num num">{f.value}</span>
+                <span className="wf-term-label">{f.label}</span>
+                {f.by && <span className="wf-term-by">{f.by}</span>}
+              </div>
+            )}
+          </Fragment>
+        ))}
+        <span className="wf-op" aria-label="equals">=</span>
+        <div className="wf-term wf-term-result">
+          <span className="wf-term-num num">{formatYears(w.startValue)}</span>
+          <span className="wf-term-label">years of healthy life per $1,000</span>
+        </div>
       </div>
-      {rates.length > 0 && (
-        <p className="wf-rates small">
-          {w.start === "evaluator" ? `At ${possessive(owner)} rates: ` : "At: "}
-          {rates.map((r, i) => (
-            <span key={r.id}>
-              {i > 0 && " · "}
-              <a href={`#a-${r.id}`} title={r.pinned ? `${possessive(owner)} value; yours is a slider in Your values` : "Your value: its slider in Your values"}>{r.label}</a>{" "}
-              <span className="num">{r.value}</span>{r.pinned ? ` (${possessive(owner)})` : ""}
-            </span>
-          ))}
-        </p>
-      )}
       <ol className="wf-steps" style={{ paddingLeft: 0 }}>
         <li className="wf-step wf-end" style={{ marginTop: 0 }}>
           <span className="wf-label">{w.start === "evaluator" ? `As ${owner} calculates it` : "The model at the site's defaults"}</span>
