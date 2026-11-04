@@ -129,6 +129,7 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
       </summary>
       {/* Their result in its own unit, times each factor that turns it into healthy years, equals the
           figure the steps start from. */}
+      <h3 className="wf-h">{w.start === "evaluator" ? `${possessive(owner)} result in years of healthy life` : "The model's result in years of healthy life"}</h3>
       <div className="wf-eq" role="group" aria-label="How the result becomes years of healthy life">
         {w.reported && (
           <>
@@ -169,6 +170,7 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
           <span className="wf-term-label">years of healthy life per $1,000</span>
         </div>
       </div>
+      <h3 className="wf-h">{w.start === "evaluator" ? `Where our figure differs from ${possessive(owner)}` : "From the model to the figure shown"}</h3>
       <ol className="wf-steps" style={{ paddingLeft: 0 }}>
         <li className="wf-step wf-end" style={{ marginTop: 0 }}>
           <span className="wf-label">{w.start === "evaluator" ? `As ${owner} calculates it` : "The model at the site's defaults"}</span>
