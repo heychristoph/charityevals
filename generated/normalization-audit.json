@@ -11,11 +11,11 @@
  },
  {
   "id": "INV-2a",
-  "title": "Headline = native result × the unit's conversion × the estimate's age factor (our view)",
+  "title": "Headline = native result × the unit's conversion × the estimate's age factor × an import's missing-data factor (our view)",
   "status": "checked",
   "checked": 362,
   "violations": [],
-  "how": "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
+  "how": "headline(m) in the charityevals view against compute(m)[output] × evaluate(headlineConversion(unit)) × (1 + $estimate_age_discount)^−age, age from source.published to common.estimate_age_as_of (2.11), × an imported model's missing-data factor 1 − thin_share × (1 − $missing_data_discount) (2.12, INV-21); and bottomLine(m).common, what `#id` and the rankings read, against the headline × $uov_per_daly / 1000. The evaluator view is INV-8 (no age factor). Whether each unit's conversion is the standard recipe is INV-1 (sad and animals_spared have no standard recipe).",
   "waived": 0,
   "failing_models": []
  },
@@ -64,17 +64,10 @@
   "title": "No literal stands in for a shared fact or assumption",
   "status": "partial",
   "checked": 362,
-  "violations": [
-   {
-    "inv": "INV-4",
-    "model": "salvation-army-charityevals",
-    "where": "volunteer_hour_value = @united_states.volunteer_hour_value_2025",
-    "detail": "input \"Value of a volunteer hour, United States, 2025\" = 36.14 is a literal copy of @united_states.volunteer_hour_value_2025 (36.14, \"Value of an hour of volunteer time, United States, 2025 (US$)\")"
-   }
-  ],
+  "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 57036,
-   "input equals a house-constant fact but under another label": 17171,
+   "input equals a shared value but its label doesn't resemble the shared one's": 57007,
+   "input equals a house-constant fact but under another label": 17159,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7891,
    "round value (one significant digit) and labels only loosely alike": 105,
    "input within 0.2% of a shared value (not equal) and labels only loosely alike": 19,
@@ -84,9 +77,7 @@
   },
   "how": "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.2%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label, or uses one of the synonyms for it (ln(consumption) or a doubled income for $uov_per_ln_consumption; a DALY or disability weight or (DW) for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for @cash); near-equal (not equal) values without a synonym, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
   "waived": 50,
-  "failing_models": [
-   "salvation-army-charityevals"
-  ]
+  "failing_models": []
  },
  {
   "id": "INV-5",
@@ -212,7 +203,7 @@
   "id": "INV-14",
   "title": "No house constant without a shared fact",
   "status": "partial",
-  "checked": 9900,
+  "checked": 9897,
   "violations": [],
   "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
   "waived": 0,
@@ -275,6 +266,16 @@
   "checked": 362,
   "violations": [],
   "how": "Every model with a result in common units (not templates) has beneficiaries: shares by ISO 3166 alpha-3 codes in facts/countries.json (and \"world\", spread by population) summing to 1, \"world\", or \"destinations\" when it reads other models live. With $home_country = 0 at a discount of 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0, the headline is exactly its headline with neither. At 50% a step with each of those homes, and the models it reads live held, the headline is its headline with no home times the weight worked out country by country, Σ share × (1 − d)^steps (0 the home country, 1 its UN M49 region, 2 elsewhere; 1 for \"destinations\", whose destinations bring their own); the evaluator view's headline is the same at every setting.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-21",
+  "title": "Missing outcome data: one rule for every model, in our view only",
+  "status": "checked",
+  "checked": 362,
+  "violations": [],
+  "how": "Every model with a result in common units (not templates) is classified: a charityevals model by its missing_data_adj rows and no missing_data field; an imported one by missing_data (its own or inherited) with a reason and no row reading $missing_data_discount. At $missing_data_discount = 1 an import's factor is exactly 1 and an own build's headline equals its headline with every marker at 1. With the models it reads live held, an import's headline at the default and at 10% is its headline at 1 times 1 − thin_share × (1 − d); the evaluator view's headline is the same at every setting.",
   "waived": 0,
   "failing_models": []
  }
