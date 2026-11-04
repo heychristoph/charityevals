@@ -32,11 +32,18 @@ const TIMEOUT_MS = 15_000;
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 charityevals-logo-fetcher (+https://charityevals.org)";
 
 /** Hand-picked image URLs, for sites whose declared icons are unusable. Same processing applies. */
-const OVERRIDES: Record<string, string> = {};
+const OVERRIDES: Record<string, string> = {
+  // Square marks from Wikimedia Commons, for sites that publish only a tiny favicon.
+  "american-red-cross": "https://commons.wikimedia.org/wiki/Special:FilePath/American_Red_Cross_logo.svg",
+  "habitat-for-humanity": "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_Habitat_for_Humanity_02.svg",
+  "international-rescue-committee": "https://commons.wikimedia.org/wiki/Special:FilePath/International_Rescue_Committee_Logo.svg",
+};
 
 /** Logos checked by eye and found unusable at 24-40px; these charities get the monogram instead. */
 const REJECTED: Record<string, string> = {
   taimaka: "the site icon is a screenshot of small text, unreadable when shrunk",
+  "healthy-futures": "the only square image is a crop of the wordmark",
+  "the-humane-league": "the site icon is a white mark for dark backgrounds, invisible on the tile",
 };
 
 /** bleed: the logo fills its square to the corners (an app icon), so it is shown edge to edge
@@ -256,6 +263,10 @@ async function logoFor(c: { id: string; name: string; website: string }): Promis
   const origin = new URL(base).origin;
   candidates.push({ url: `${origin}/apple-touch-icon.png`, kind: "apple-touch-icon (default path)", declared: 180 });
   candidates.push({ url: `${origin}/favicon.ico`, kind: "favicon.ico (default path)", declared: 0 });
+  candidates.push({ url: `https://icons.duckduckgo.com/ip3/${new URL(origin).hostname}.ico`, kind: "duckduckgo favicon cache", declared: -3 });
+  // Last resort, for sites that block the fetch or hide their icon: Google's favicon cache (its
+  // default globe for an unknown site is 16px, so MIN_PX rejects it).
+  candidates.push({ url: `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encodeURIComponent(origin)}&size=256`, kind: "google favicon cache", declared: -3 });
 
   const tried = new Set<string>();
   let best: { cand: Candidate; dec: Decoded } | undefined;
