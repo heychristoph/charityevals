@@ -2,7 +2,7 @@
 // each came from in generated/logos.json.
 //   npx tsx scripts/fetch-logos.ts               every charity with a website
 //   npx tsx scripts/fetch-logos.ts --only <id>   one or more ids (repeat --only); others keep their entry
-//   npx tsx scripts/fetch-logos.ts --missing     only charities without a logo yet
+//   npx tsx scripts/fetch-logos.ts --missing     only charities (and evaluators, "owner-<id>") without a logo yet
 //
 // Candidates, best first: the icons the homepage declares (apple-touch-icon, <link rel="icon"> with
 // sizes or an SVG) and the conventional /apple-touch-icon.png and /favicon.ico; only when none of
@@ -54,10 +54,16 @@ const args = process.argv.slice(2);
 const only = args.flatMap((a, i) => (a === "--only" ? [args[i + 1]] : []));
 const missingOnly = args.includes("--missing");
 
-const charities = readdirSync(join(root, "charities"))
-  .filter((f) => f.endsWith(".json"))
-  .map((f) => JSON.parse(readFileSync(join(root, "charities", f), "utf8")) as { id: string; name: string; website?: string })
-  .sort((a, b) => a.id.localeCompare(b.id));
+// Evaluators (owners.json) get logos too, keyed "owner-<id>" so they never collide with a charity's.
+const owners = (JSON.parse(readFileSync(join(root, "owners.json"), "utf8")) as { id: string; name: string; url?: string }[])
+  .filter((o) => o.url && o.id !== "charityevals")
+  .map((o) => ({ id: `owner-${o.id}`, name: o.name, website: o.url }));
+const charities = [
+  ...readdirSync(join(root, "charities"))
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(join(root, "charities", f), "utf8")) as { id: string; name: string; website?: string }),
+  ...owners,
+].sort((a, b) => a.id.localeCompare(b.id));
 
 const manifest: Manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, "utf8")) : {};
 

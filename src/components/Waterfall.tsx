@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
-import { headline, type ResolvedModel } from "../engine/model";
+import { assumptionValues, headline, type ResolvedModel } from "../engine/model";
+import { parse, refs } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
 
@@ -62,6 +63,22 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
   };
   const owner = lib.owners.get(model.owner)?.name ?? "The evaluator";
   const unitLabel = lib.assumptions.units[w.native.unit]?.label ?? w.native.unit;
+  // The values the unit's conversion into healthy years reads, at the rates the start uses (the
+  // evaluator's where it pinned one, else the site's default), each linked to its slider in Your values.
+  const to = lib.assumptions.units[w.native.unit]?.to_common;
+  const defaults = assumptionValues(lib.assumptions);
+  const rates = to && to !== "1"
+    ? [...refs(parse(to)).assumptions].map((id) => {
+        const row = lib.assumptions.rows.find((r) => r.id === id);
+        const pinned = w.start === "evaluator" && model.evaluator?.assumptions[id] !== undefined;
+        const v = pinned ? model.evaluator!.assumptions[id] : defaults[id];
+        // As the slider shows it: a scaled value (hours, not a fraction of a year), a percent or a multiple.
+        const shown = row?.shown_as ? v * row.shown_as.factor : v;
+        const fmt = row?.shown_as?.format ?? row?.format;
+        const value = fmt === "percent" ? `${Number((shown * 100).toPrecision(3))}%` : fmt === "multiple" ? `${Number(shown.toPrecision(3))}×` : `${Number(shown.toPrecision(3))}`;
+        return { id, label: row?.label ?? id, value, pinned };
+      })
+    : [];
   return (
     <details className="wf" open>
       <summary>
@@ -76,19 +93,35 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
         </div>
         {w.native.unit !== "daly" && (
           <>
-            <a className="wf-arrow small" href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`} title={`How ${unitLabel} become healthy years`}>
+            <div className="wf-arrow small">
               <span className="wf-arrow-mark" aria-hidden>→</span>
-              <span>in healthy years{w.start === "evaluator" ? `, at ${possessive(owner)} rates` : ""}</span>
-            </a>
+              <a href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`}>in healthy years</a>
+            </div>
             <div className="wf-unit">
               <span className="wf-unit-num num">{formatYears(w.startValue)}</span>
               <span className="wf-unit-label">years of healthy life per $1,000</span>
-              <span className="wf-unit-by small">where the steps below start</span>
             </div>
           </>
         )}
       </div>
+      {rates.length > 0 && (
+        <p className="wf-rates small">
+          {w.start === "evaluator" ? `At ${possessive(owner)} rates: ` : "At: "}
+          {rates.map((r, i) => (
+            <span key={r.id}>
+              {i > 0 && " · "}
+              <a href={`#a-${r.id}`} title={r.pinned ? `${possessive(owner)} value; yours is a slider in Your values` : "Your value: its slider in Your values"}>{r.label}</a>{" "}
+              <span className="num">{r.value}</span>{r.pinned ? ` (${possessive(owner)})` : ""}
+            </span>
+          ))}
+        </p>
+      )}
       <ol className="wf-steps" style={{ paddingLeft: 0 }}>
+        <li className="wf-step wf-end" style={{ marginTop: 0 }}>
+          <span className="wf-label">{w.start === "evaluator" ? `As ${owner} calculates it` : "The model at the site's defaults"}</span>
+          <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.startValue)} /></span>
+          <span className="wf-value num">{formatYears(w.startValue)}</span>
+        </li>
         {w.steps.map((s, i) => {
           const href = hrefOf(s.target);
           const r = s.to / s.from;

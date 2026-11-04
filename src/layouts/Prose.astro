@@ -12,11 +12,15 @@ const { title, description, updated, active } = Astro.props;
 ---
 
 <Base title={title} description={description} active={active}>
-  <article class="page prose wrap" data-gloss>
-    <h1>{title}</h1>
-    {updated && <p class="updated small muted">Last updated {updated}</p>}
-    <slot />
-  </article>
+  {/* The page's width and edges like every other page; the text in a readable column on its left. */}
+  <div class="page">
+    <article class="prose wrap" data-gloss>
+      <slot name="before-title" />
+      <h1>{title}</h1>
+      {updated && <p class="updated small muted">Last updated {updated}</p>}
+      <slot />
+    </article>
+  </div>
 </Base>
 
 <style>
