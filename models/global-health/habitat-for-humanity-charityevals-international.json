@@ -1,19 +1,21 @@
 {
   "id": "habitat-for-humanity-charityevals-international",
-  "name": "Habitat for Humanity International: international programme and public awareness (charityevals)",
+  "name": "Habitat for Humanity International: international programme (charityevals)",
   "kind": "charity",
   "cause": "global-health",
+  "beneficiaries": {"HND":0.0347,"DOM":0.0347,"PER":0.0346,"ARM":0.0288,"MKD":0.0288,"ROU":0.0287,"EGY":0.0287,"KEN":0.129,"UGA":0.129,"MWI":0.129,"ZMB":0.129,"PHL":0.1325,"BGD":0.1325},
+  "beneficiaries_note": "Our build: Habitat's work in more than 60 countries, by region at the shares of the result at the defaults (Africa 52%, Asia and the Pacific 26%, Europe and the Middle East 12%, Latin America and the Caribbean 10%), each region's share spread equally over the stand-in countries whose survey consumption the build reads (a judgment).",
   "template": "cash-income",
   "estimate_basis": "unit_cost",
   "charity": "habitat-for-humanity",
   "owner": "charityevals",
-  "summary": "Habitat for Humanity International (HFHI) spent $75.5 million in the year to June 2025 helping families outside the US build, extend and repair homes with Habitat national organisations in more than 60 countries (mostly incremental building and repairs, about 470,000 people across the network), and working with lenders and building-material firms so that low-income households can buy housing loans and products (2.5 million people in Habitat's count). Valued as the net housing subsidy families receive on the site's log-income scale, at the consumption of Habitat's families in each region, plus a small surplus for market customers, it does about 0.1 years of healthy life per $1,000; this model also holds HFHI's $24.3 million public awareness and education programme, which publishes no outcome data and is valued at Habitat's US result, discounted. It is well below cash transfers because only about 18 cents of each dollar reaches families as housing (HFHI's transfers to partners are 31% of the programme's cost with overhead), half the families are in middle-income Latin America and Europe, better off than cash recipients in East Africa, and housing is an in-kind transfer. The biggest uncertainties are the families' consumption, the subsidy per family and the share of spending that reaches them; HFHI publishes no split of its international spending by type of work.",
+  "summary": "Habitat for Humanity International (HFHI) spent $75.5 million in the year to June 2025 ($74 million without the Home Equals advocacy booked in the same line, counted in the awareness model) helping families outside the US build, extend and repair homes with Habitat national organisations in more than 60 countries (mostly incremental building and repairs, about 470,000 people across the network), and working with lenders and building-material firms so that low-income households can buy housing loans and products (2.4 million people in Habitat's count). Valued as the net housing subsidy families receive on the site's log-income scale, at the household-survey consumption of Habitat's families in each region, plus a small surplus for borrowers and buyers of products, it does about 0.07 years of healthy life per $1,000. It is well below cash transfers because only about 17 cents of each dollar reaches families as housing (HFHI's transfers to partners are 31% of the programme's cost with overhead, and the national organisations it funds spend part on their own staff), close to 60% of the families are in middle-income Latin America, Europe and the Middle East, housing is an in-kind transfer, and both branches (direct housing and market development) are discounted for missing data: HFHI publishes no count of the families its own money reached, no subsidy per family and no split of its spending by type of work. Those are the biggest uncertainties, with the families' consumption.",
   "source": {
     "publisher": "charityevals",
-    "title": "charityevals' estimate: Habitat for Humanity International, international programme and public awareness (FY2025)",
+    "title": "charityevals' estimate: Habitat for Humanity International, international programme (FY2025)",
     "url": "https://charityevals.org/habitat-for-humanity-charityevals-international",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -64,12 +66,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -78,9 +74,9 @@
   ],
   "rows": [
     {
-      "id": "program_spend",
+      "id": "intl_line",
       "section": "cost",
-      "label": "Spending on Habitat's international programme, FY2025 (year to 30 June 2025)",
+      "label": "HFHI's international affiliates programme services, FY2025 (audited line)",
       "format": "usd",
       "value": 75514000,
       "kind": "observed",
@@ -91,7 +87,15 @@
         "page": "p. 6, Consolidated statements of activities, Program services",
         "quote": "International affiliates 75,514"
       },
-      "explainer": "Habitat for Humanity International's (HFHI) programme spending outside the US and Canada in the year to 30 June 2025: grants and house-building transfers to Habitat national organisations and partners ($31.4 million), its area and country offices' staff ($28.1 million), professional services ($5.9 million) and the rest. It pays for homes, incremental improvements, repairs and disaster shelter that families build with Habitat (the direct branch), and for the Terwilliger Center's and national offices' work with banks, microfinance institutions and building-material firms (the market branch). Public awareness and education is proxied in the section below."
+      "explainer": "Habitat for Humanity International's (HFHI) programme spending outside the US and Canada in the year to 30 June 2025: grants and house-building transfers to Habitat national organisations and partners ($31.4 million), its area and country offices' staff ($28.1 million), professional services ($5.9 million) and the rest. It pays for homes, incremental improvements, repairs and disaster shelter that families build with Habitat (the direct branch), and for the Terwilliger Center's and national offices' work with banks, microfinance institutions and building-material firms (the market branch). Public awareness and education, with HFHI's housing advocacy, is modelled separately (habitat-for-humanity-charityevals-awareness)."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on Habitat's international programme, FY2025 (year to 30 June 2025), less the advocacy booked in it",
+      "format": "usd",
+      "formula": "intl_line - @habitat_for_humanity.he_advocacy_cost_fy2025",
+      "explainer": "The audited line less the Home Equals campaign's cost booked in it (@habitat_for_humanity.he_advocacy_cost_fy2025, a judgment shared with the awareness model, which counts it in its own cost), so each model counts that cost once."
     },
     {
       "id": "intl_transfers",
@@ -107,7 +111,7 @@
         "page": "p. 7, Consolidated statements of functional expenses, International Affiliates column",
         "quote": "Program and house building transfers ... 31,435 ... Donated products and advertising distributed ... 214"
       },
-      "explainer": "$31.4 million of cash transfers (including 'payments to other vendors made on behalf of affiliates', note 2) and $0.2 million of donated products: the only international expense lines that can carry housing to families. The area and country offices' staff ($28.1 million), professional services and travel are delivery costs."
+      "explainer": "$31.4 million of cash transfers (including 'payments to other vendors made on behalf of affiliates', note 2) and $0.2 million of donated products: the only international expense lines that can carry housing to families. For the eleven consolidated national organisations they are their own direct spending (consolidated_transfer_share). The area and country offices' and consolidated national organisations' staff ($28.1 million), professional services and travel are delivery costs."
     },
     {
       "id": "total_expenses",
@@ -172,23 +176,57 @@
     {
       "id": "nso_delivery_share",
       "section": "reach",
-      "label": "Share of a national organisation's housing spending that reaches families as materials, skilled labour and subsidy",
+      "label": "Share of an independent national organisation's housing spending that reaches families as materials, skilled labour and subsidy",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.72,
-        "high": 0.85
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "One question: the share of a national organisation's spending of HFHI money that goes to materials, skilled labour and families' subsidy rather than its own staff and offices (families' repayments are netted only in the subsidy per family). Habitat national organisations are builders: much of their staff time is construction and supervision, which is part of the housing delivered. No national organisation's accounts were retrieved for this build; anchors: HFHI's own US programme passes 65% of its spending to affiliates as cash and products (audited statement p. 7), and a single-purpose cash charity reaches 84% (GiveDirectly). 0.72, range 0.5 to 0.85."
+      "explainer": "One question, for the national organisations HFHI funds but doesn't consolidate: the share of a national organisation's spending of HFHI money that goes to materials, skilled labour and families' subsidy rather than its own staff and offices (families' repayments are netted only in the subsidy per family). Habitat for Humanity Poland's audited 2024 accounts are the one national organisation's we could read: of PLN 31.3 million of costs, PLN 24.7 million (79%) were its statutory programme work, the rest administration (PLN 3.4 million), its trading arm (PLN 1.8 million), financing (PLN 0.8 million) and other operating costs (PLN 0.6 million); the programme figure still includes its own programme staff (70 employees) and, in 2024, refugee shelter and a social rental agency more than construction. So 79% is the ceiling of what can reach families; with programme staff and supervision taken out, 0.6, range 0.4 to 0.8. Cross-checks: HFHI's own US programme passes 65% of its spending to affiliates as cash and products (audited statement p. 7); a single-purpose cash charity reaches 84% (GiveDirectly).",
+      "source": {
+        "title": "Fundacja Habitat for Humanity Poland, sprawozdanie finansowe (financial statements) 2024",
+        "url": "https://habitat.pl/files/Sprawozdanie-finansowe-Habitat-for-Humanity-Poland-2024.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 5, Rachunek zysków i strat (profit and loss account)",
+        "quote": "B Koszty działalności statutowej 24 783 909,80 24 708 639,34",
+        "note": "Profit and loss account, 2024 column: statutory costs 24,708,639.34; trading costs 1,763,623.31; administration 3,380,405.28; other operating costs 621,429.41; financial costs 803,741.16 (total 31,277,838.50). Employees: 70 people, 59.1 full-time equivalents (public-benefit report 2024, https://habitat.pl/files/Sprawozdanie-merytoryczne-Habitat-for-Humanity-Poland-2024.pdf, section V)."
+      }
+    },
+    {
+      "id": "consolidated_transfer_share",
+      "section": "reach",
+      "label": "Share of HFHI's international transfers spent by the national organisations consolidated in its accounts",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "HFHI's audited statements consolidate eleven national organisations registered as part of HFHI (note 2), with Habitat for Humanity-Middle East and MicroBuild India. For them, the transfers line is their own direct spending on vendors, materials and families (transfers between them and HFHI are eliminated), and their staff are already in the $28.1 million salaries line. Eleven of Habitat's 60-plus countries, among them some of the larger programmes: 0.3, range 0.1 to 0.5. No split of the transfers by recipient is published (the Form 990's foreign grants schedule could anchor it in a later build); the range carries the doubt, worth about ±9% of the result."
+    },
+    {
+      "id": "consolidated_delivery_share",
+      "section": "reach",
+      "label": "Share of a consolidated national organisation's transfers that reach families as materials, labour and subsidy",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Their staff are outside this line, so nearly all of it is materials, contractors and families' subsidy; some is rent, vehicles and other costs booked as payments to vendors. 0.9, range 0.8 to 1."
     },
     {
       "id": "transfers_share_of_cost",
       "section": "reach",
       "label": "Housing value reaching families as a share of the programme's total cost",
       "format": "percent",
-      "formula": "intl_transfers / cost_total * dir_transfers_share * nso_delivery_share",
-      "explainer": "HFHI's transfers to partners over the programme's cost with overhead, times the share of them for direct housing and the share of that reaching families: about 18 cents per dollar."
+      "formula": "intl_transfers / cost_total * dir_transfers_share * (consolidated_transfer_share * consolidated_delivery_share + (1 - consolidated_transfer_share) * nso_delivery_share)",
+      "explainer": "HFHI's transfers to partners over the programme's cost with overhead, times the share of them for direct housing and the share reaching families: nearly all of what the consolidated national organisations spend (their staff are in HFHI's salaries line), the delivery share of what the independent ones spend. About 17 cents per dollar."
     },
     {
       "id": "transfer_per_household",
@@ -324,24 +362,36 @@
       "explainer": "The region's market-development count, used only to weight household size and consumption by where the market branch's people are."
     },
     {
+      "id": "cons_hnd",
+      "section": "effect",
+      "label": "Survey consumption per person, Honduras, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.hnd_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.hnd_real_growth_survey_to_2024 * @survey_consumption.hnd_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Honduras (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_dom",
+      "section": "effect",
+      "label": "Survey consumption per person, the Dominican Republic, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.dom_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.dom_real_growth_survey_to_2024 * @survey_consumption.dom_consumption_price_level_2024",
+      "explainer": "The household-survey mean for the Dominican Republic (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_per",
+      "section": "effect",
+      "label": "Survey consumption per person, Peru, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.per_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.per_real_growth_survey_to_2024 * @survey_consumption.per_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Peru (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
       "id": "cons_mean_lac",
       "section": "effect",
-      "label": "Survey consumption per person in Habitat's LAC stand-in countries, 2024 (US$, nominal)",
+      "label": "Survey consumption per person in Habitat's Latin America and the Caribbean stand-in countries, 2024 (US$, nominal)",
       "format": "usd",
-      "value": {
-        "low": 2359,
-        "best": 2991,
-        "high": 3672
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "World Bank, World Development Indicators: survey mean consumption per capita (SI.SPR.PCAP, 2021 PPP $ a day), put in nominal 2024 dollars with each country's NE.CON.PRVT.CD ÷ NE.CON.PRVT.PP.CD",
-        "url": "https://api.worldbank.org/v2/country/HND;DOM;PER;KEN;UGA;MWI;ZMB;ARM;MKD;ROU;EGY;PHL;BGD/indicator/SI.SPR.PCAP?format=json&mrnev=1",
-        "quote": "SI.SPR.PCAP: HND 11.55 (2024), PER 13.86 (2024), DOM 22.73 (2024)",
-        "note": "Each: a day × 365 × 1.12 (2021 to 2024 prices) × nominal ÷ PPP household consumption, 2024.",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The household-survey mean consumption per person of the countries Habitat works in, the same countries and the same survey scale as the targeting ratio below and as the site's cash models: Honduras $2,359, Peru $2,942, the Dominican Republic $3,672; their mean $2,991, the range their spread."
+      "formula": "avg(cons_hnd, cons_dom, cons_per)",
+      "explainer": "The mean of the stand-in countries' survey consumption (Honduras, the Dominican Republic, Peru), countries Habitat works in, on the same survey scale as the targeting ratio below and the site's cash models. Their spread is in the targeting ratio's range."
     },
     {
       "id": "cons_fam_lac",
@@ -362,7 +412,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "The bottom 40%'s survey consumption is 0.32 of the mean in Honduras and 0.42 in the Dominican Republic (SI.SPR.PC40 ÷ SI.SPR.PCAP: 3.65 and 9.56 against 11.55 and 22.73 a day); Habitat's Latin American families are low-income but must contribute labour and repay loans, so between that and the mean: 0.55, range 0.32 to 0.9."
+      "explainer": "How far below the survey mean Habitat's families in Latin America and the Caribbean consume. The bottom 40%'s survey mean over the mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json): Honduras 0.32, the Dominican Republic 0.42, Peru 0.41 (mean 0.38), the lower anchor; Habitat's families must contribute labour and often repay loans, so they sit between the bottom 40% and the mean. Best 0.55, range 0.32 to 0.9."
     },
     {
       "id": "dir_ln_gain_lac",
@@ -372,24 +422,44 @@
       "formula": "ln(1 + dir_value_per_person_year / cons_fam_lac) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
+      "id": "cons_arm",
+      "section": "effect",
+      "label": "Survey consumption per person, Armenia, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.arm_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.arm_real_growth_survey_to_2024 - 1)) * @survey_consumption.arm_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Armenia (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_mkd",
+      "section": "effect",
+      "label": "Survey consumption per person, North Macedonia, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.mkd_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.mkd_real_growth_survey_to_2024 * @survey_consumption.mkd_consumption_price_level_2024",
+      "explainer": "The household-survey mean for North Macedonia (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_rou",
+      "section": "effect",
+      "label": "Survey consumption per person, Romania, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.rou_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.rou_real_growth_survey_to_2024 * @survey_consumption.rou_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Romania (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_egy",
+      "section": "effect",
+      "label": "Survey consumption per person, Egypt, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.egy_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.egy_real_growth_survey_to_2024 - 1)) * @survey_consumption.egy_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Egypt (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
       "id": "cons_mean_eme",
       "section": "effect",
-      "label": "Survey consumption per person in Habitat's EME stand-in countries, 2024 (US$, nominal)",
+      "label": "Survey consumption per person in Habitat's Europe and the Middle East stand-in countries, 2024 (US$, nominal)",
       "format": "usd",
-      "value": {
-        "low": 718,
-        "best": 2739,
-        "high": 5971
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "World Bank, World Development Indicators: survey mean consumption per capita (SI.SPR.PCAP, 2021 PPP $ a day), put in nominal 2024 dollars with each country's NE.CON.PRVT.CD ÷ NE.CON.PRVT.PP.CD",
-        "url": "https://api.worldbank.org/v2/country/HND;DOM;PER;KEN;UGA;MWI;ZMB;ARM;MKD;ROU;EGY;PHL;BGD/indicator/SI.SPR.PCAP?format=json&mrnev=1",
-        "quote": "SI.SPR.PCAP: ARM 9.80 (2024), MKD 17.22 (2019), ROU 32.66 (2023), EGY 9.03 (2021)",
-        "note": "Each: a day × 365 × 1.12 (2021 to 2024 prices) × nominal ÷ PPP household consumption, 2024.",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The household-survey mean consumption per person of the countries Habitat works in, the same countries and the same survey scale as the targeting ratio below and as the site's cash models: Armenia $1,608, North Macedonia $2,657, Romania $5,971, Egypt $718; their mean $2,739, the range their spread."
+      "formula": "avg(cons_arm, cons_mkd, cons_rou, cons_egy)",
+      "explainer": "The mean of the stand-in countries' survey consumption (Armenia, North Macedonia, Romania, Egypt), countries Habitat works in, on the same survey scale as the targeting ratio below and the site's cash models. Their spread is in the targeting ratio's range."
     },
     {
       "id": "cons_fam_eme",
@@ -410,7 +480,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Habitat's European and Middle Eastern families (low-income owners, refugees, Roma communities in Armenia, Poland, Romania, Hungary, North Macedonia, Egypt, Jordan, Lebanon) are in the poorer part of their countries; the bottom 40% is typically 0.4 to 0.5 of the survey mean in the region's surveys. 0.6, range 0.4 to 1."
+      "explainer": "How far below the survey mean Habitat's families in Europe and the Middle East consume. The bottom 40%'s survey mean over the mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json): Armenia 0.59, North Macedonia 0.45, Romania 0.52, Egypt 0.58 (mean 0.54), the lower anchor; Habitat's families must contribute labour and often repay loans, so they sit between the bottom 40% and the mean. Best 0.6, range 0.4 to 1.0."
     },
     {
       "id": "dir_ln_gain_eme",
@@ -420,24 +490,44 @@
       "formula": "ln(1 + dir_value_per_person_year / cons_fam_eme) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
+      "id": "cons_ken",
+      "section": "effect",
+      "label": "Survey consumption per person, Kenya, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.ken_real_growth_survey_to_2024 - 1)) * @survey_consumption.ken_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Kenya (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_uga",
+      "section": "effect",
+      "label": "Survey consumption per person, Uganda, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.uga_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.uga_real_growth_survey_to_2024 - 1)) * @survey_consumption.uga_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Uganda (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_mwi",
+      "section": "effect",
+      "label": "Survey consumption per person, Malawi, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.mwi_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.mwi_real_growth_survey_to_2024 - 1)) * @survey_consumption.mwi_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Malawi (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_zmb",
+      "section": "effect",
+      "label": "Survey consumption per person, Zambia, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.zmb_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.zmb_real_growth_survey_to_2024 - 1)) * @survey_consumption.zmb_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Zambia (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
       "id": "cons_mean_afr",
       "section": "effect",
-      "label": "Survey consumption per person in Habitat's AFR stand-in countries, 2024 (US$, nominal)",
+      "label": "Survey consumption per person in Habitat's Africa stand-in countries, 2024 (US$, nominal)",
       "format": "usd",
-      "value": {
-        "low": 306,
-        "best": 439,
-        "high": 584
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "World Bank, World Development Indicators: survey mean consumption per capita (SI.SPR.PCAP, 2021 PPP $ a day), put in nominal 2024 dollars with each country's NE.CON.PRVT.CD ÷ NE.CON.PRVT.PP.CD",
-        "url": "https://api.worldbank.org/v2/country/HND;DOM;PER;KEN;UGA;MWI;ZMB;ARM;MKD;ROU;EGY;PHL;BGD/indicator/SI.SPR.PCAP?format=json&mrnev=1",
-        "quote": "SI.SPR.PCAP: KEN 4.34 (2021), UGA 3.69 (2023), MWI 2.59 (2019), ZMB 2.86 (2022)",
-        "note": "Each: a day × 365 × 1.12 (2021 to 2024 prices) × nominal ÷ PPP household consumption, 2024.",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The household-survey mean consumption per person of the countries Habitat works in, the same countries and the same survey scale as the targeting ratio below and as the site's cash models: Kenya $584, Uganda $529, Malawi $306, Zambia $338; their mean $439, the range their spread."
+      "formula": "avg(cons_ken, cons_uga, cons_mwi, cons_zmb)",
+      "explainer": "The mean of the stand-in countries' survey consumption (Kenya, Uganda, Malawi, Zambia), countries Habitat works in, on the same survey scale as the targeting ratio below and the site's cash models. Their spread is in the targeting ratio's range."
     },
     {
       "id": "cons_fam_afr",
@@ -458,7 +548,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "The bottom 40%'s survey consumption is 0.46 of the mean in Kenya, 0.44 in Uganda and 0.45 in Malawi (SI.SPR.PC40 ÷ SI.SPR.PCAP: 1.98, 1.62, 1.16 against 4.34, 3.69, 2.59 a day); Habitat's African families build and repay, so they are not the poorest: 0.65, range 0.45 (the bottom 40%) to 1 (the mean)."
+      "explainer": "How far below the survey mean Habitat's families in Africa consume. The bottom 40%'s survey mean over the mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json): Kenya 0.46, Uganda 0.44, Malawi 0.45, Zambia 0.28 (mean 0.40), the lower anchor; Habitat's families must contribute labour and often repay loans, so they sit between the bottom 40% and the mean. Best 0.65, range 0.45 to 1.0."
     },
     {
       "id": "dir_ln_gain_afr",
@@ -468,24 +558,28 @@
       "formula": "ln(1 + dir_value_per_person_year / cons_fam_afr) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
+      "id": "cons_phl",
+      "section": "effect",
+      "label": "Survey consumption per person, the Philippines, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.phl_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.phl_real_growth_survey_to_2024 * @survey_consumption.phl_consumption_price_level_2024",
+      "explainer": "The household-survey mean for the Philippines (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
+      "id": "cons_bgd",
+      "section": "effect",
+      "label": "Survey consumption per person, Bangladesh, 2024 (US$, nominal)",
+      "format": "usd",
+      "formula": "@survey_consumption.bgd_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.bgd_real_growth_survey_to_2024 - 1)) * @survey_consumption.bgd_consumption_price_level_2024",
+      "explainer": "The household-survey mean for Bangladesh (World Bank, 2021 PPP dollars a day) as a year, in 2024 US prices by the site's CPI, carried from the survey year to 2024 by real growth per person, at the 2024 price level of household consumption: nominal 2024 dollars. Consumption surveys are carried forward by 0.7 of real growth, income surveys by all of it (the World Bank's line-up rule, @survey_consumption.pip_growth_passthrough_consumption)."
+    },
+    {
       "id": "cons_mean_ap",
       "section": "effect",
-      "label": "Survey consumption per person in Habitat's AP stand-in countries, 2024 (US$, nominal)",
+      "label": "Survey consumption per person in Habitat's Asia and the Pacific stand-in countries, 2024 (US$, nominal)",
       "format": "usd",
-      "value": {
-        "low": 682,
-        "best": 1076,
-        "high": 1470
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "World Bank, World Development Indicators: survey mean consumption per capita (SI.SPR.PCAP, 2021 PPP $ a day), put in nominal 2024 dollars with each country's NE.CON.PRVT.CD ÷ NE.CON.PRVT.PP.CD",
-        "url": "https://api.worldbank.org/v2/country/HND;DOM;PER;KEN;UGA;MWI;ZMB;ARM;MKD;ROU;EGY;PHL;BGD/indicator/SI.SPR.PCAP?format=json&mrnev=1",
-        "quote": "SI.SPR.PCAP: PHL 9.93 (2023), BGD 5.62 (2016)",
-        "note": "Each: a day × 365 × 1.12 (2021 to 2024 prices) × nominal ÷ PPP household consumption, 2024.",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The household-survey mean consumption per person of the countries Habitat works in, the same countries and the same survey scale as the targeting ratio below and as the site's cash models: the Philippines $1,470, Bangladesh $682 (India's survey would be near Bangladesh's); their mean $1,076, the range their spread."
+      "formula": "avg(cons_phl, cons_bgd)",
+      "explainer": "The mean of the stand-in countries' survey consumption (the Philippines, Bangladesh), countries Habitat works in, on the same survey scale as the targeting ratio below and the site's cash models. Their spread is in the targeting ratio's range."
     },
     {
       "id": "cons_fam_ap",
@@ -506,7 +600,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "The bottom 40%'s survey consumption is 0.44 of the mean in the Philippines (4.37 against 9.93 a day); Habitat's Asian families are low-income households who build and repay: 0.65, range 0.44 to 1."
+      "explainer": "How far below the survey mean Habitat's families in Asia and the Pacific consume. The bottom 40%'s survey mean over the mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json): the Philippines 0.44, Bangladesh 0.53 (mean 0.48), the lower anchor; Habitat's families must contribute labour and often repay loans, so they sit between the bottom 40% and the mean. Best 0.65, range 0.44 to 1.0."
     },
     {
       "id": "dir_ln_gain_ap",
@@ -521,8 +615,44 @@
       "label": "Average household size where the market branch's people are (people-weighted by region)",
       "format": "number",
       "unit": "people",
-      "formula": "(mkt_lac * @household_size.dominican_republic + mkt_eme * @household_size.united_kingdom + mkt_afr * avg(@household_size.uganda, @household_size.malawi_rural, @household_size.kenya_rural) + mkt_ap * avg(@household_size.india, @household_size.bangladesh)) / (mkt_lac + mkt_eme + mkt_afr + mkt_ap)",
-      "explainer": "The same stand-in places as for the direct branch, weighted by the market-development people in each region (annual report: 304,150 Latin America and the Caribbean, 485,515 Europe and the Middle East, 508,100 Africa, 1,146,465 Asia-Pacific). Europe's stand-in is the UK's 2.35, below the Eastern European countries Habitat works in (2.5 to 3.5); the site has no fact for them yet, and the size barely moves the result (it cancels between households and the per-person gain)."
+      "formula": "(mkt_lac * hh_lac + mkt_eme * hh_eme + mkt_afr * hh_afr + mkt_ap * hh_ap) / (mkt_lac + mkt_eme + mkt_afr + mkt_ap)",
+      "explainer": "For reading and for the household count: the regions' sizes weighted by the market-development people in each; the market gain uses each region's own size."
+    },
+    {
+      "id": "hh_lac",
+      "section": "reach",
+      "label": "Household size, Latin America and the Caribbean (mean of the stand-in countries)",
+      "format": "number",
+      "unit": "people",
+      "formula": "avg(@household_size.honduras, @household_size.dominican_republic, @household_size.peru)",
+      "explainer": "The site's household sizes for the same stand-in countries as the region's consumption: Honduras, the Dominican Republic and Peru (DHS)."
+    },
+    {
+      "id": "hh_eme",
+      "section": "reach",
+      "label": "Household size, Europe and the Middle East (mean of the stand-in countries)",
+      "format": "number",
+      "unit": "people",
+      "formula": "avg(@household_size.armenia, @household_size.north_macedonia, @household_size.romania, @household_size.egypt)",
+      "explainer": "The site's household sizes for the same stand-in countries as the region's consumption: Armenia and Egypt (DHS), North Macedonia and Romania (Eurostat)."
+    },
+    {
+      "id": "hh_afr",
+      "section": "reach",
+      "label": "Household size, Africa (mean of the stand-in countries)",
+      "format": "number",
+      "unit": "people",
+      "formula": "avg(@household_size.kenya, @household_size.uganda, @household_size.malawi, @household_size.zambia)",
+      "explainer": "The site's household sizes for the same stand-in countries as the region's consumption: Kenya, Uganda, Malawi and Zambia (DHS and MIS)."
+    },
+    {
+      "id": "hh_ap",
+      "section": "reach",
+      "label": "Household size, Asia and the Pacific (mean of the stand-in countries)",
+      "format": "number",
+      "unit": "people",
+      "formula": "avg(@household_size.philippines, @household_size.bangladesh)",
+      "explainer": "The site's household sizes for the same stand-in countries as the region's consumption: the Philippines and Bangladesh (DHS)."
     },
     {
       "id": "household_size",
@@ -530,8 +660,8 @@
       "label": "Average household size, Habitat's countries (people-weighted by region)",
       "format": "number",
       "unit": "people",
-      "formula": "lac_share * @household_size.dominican_republic + eme_share * @household_size.united_kingdom + afr_share * avg(@household_size.uganda, @household_size.malawi_rural, @household_size.kenya_rural) + (1 - lac_share - eme_share - afr_share) * avg(@household_size.india, @household_size.bangladesh)",
-      "explainer": "The site's household sizes for stand-in places, weighted by where Habitat's direct-housing families are: the Dominican Republic for Latin America and the Caribbean (a Habitat country), the United Kingdom for Europe (Habitat's European programmes are in Poland, Romania, Hungary and Armenia, where households are 2.5 to 3.5 people; the Middle East's are larger), the mean of Uganda, rural Malawi and rural Kenya for Africa, and of India and Bangladesh for Asia and the Pacific. About 3.6 people."
+      "formula": "lac_share * hh_lac + eme_share * hh_eme + afr_share * hh_afr + (1 - lac_share - eme_share - afr_share) * hh_ap",
+      "explainer": "The regions' household sizes (the consumption stand-ins' own, from the site's facts) weighted by where Habitat's direct-housing families are: about 3.8 people."
     },
     {
       "id": "people_reached",
@@ -565,7 +695,7 @@
         "page": "Impact: Individuals served, the four regions outside the United States and Canada",
         "quote": "Market development 304,150 (Latin America and the Caribbean); 485,515 (Europe and Middle East); 508,100 (Africa); 1,146,465 (Asia and the Pacific)"
       },
-      "explainer": "Market development across the four regions (2,444,230): people in households that bought housing loans, building materials or services from lenders and firms Habitat works with, Habitat's own count from partners' reports with no stated method. The low end is the Form 990's 'nearly 300,000 households' for the Terwilliger Center's partners alone (× 3.5 people), in case the regional count includes others' customers or double counts; MicroBuild Fund 1 was winding down (one open investment by year end) and adds little in FY2025. Professional services (49,985) and civil-society facilitation (12,990) buy nothing, so they are left out here and counted with tenure security in unmodelled_benefits_adj."
+      "explainer": "Market development across the four regions (2,444,230): people in households that bought housing loans, building materials or services from lenders and firms Habitat works with, Habitat's own count from partners' reports with no stated method. The low end is the Form 990's 'nearly 300,000 households' for the Terwilliger Center's partners alone (× 3.5 people), in case the regional count includes others' customers or double counts; MicroBuild Fund 1 was winding down (one open investment by year end) and adds little in FY2025. Professional services (49,985: land, titling and construction advice) buy nothing, so they are left out here and counted with tenure security in unmodelled_benefits_adj; civil-society facilitation (12,990) is the local organising behind Home Equals, valued in the awareness model."
     },
     {
       "id": "mkt_households",
@@ -639,28 +769,62 @@
       "label": "Market-branch households' consumption per person (US$)",
       "format": "usd",
       "formula": "mkt_vs_dir_consumption * (mkt_lac * cons_fam_lac + mkt_eme * cons_fam_eme + mkt_afr * cons_fam_afr + mkt_ap * cons_fam_ap) / (mkt_lac + mkt_eme + mkt_afr + mkt_ap)",
-      "explainer": "The regional consumption of Habitat's families weighted by where the market branch's people are (annual report regional counts), times the market households' higher consumption."
+      "explainer": "For reading: the regional consumption of Habitat's families weighted by where the market branch's people are, times the market households' higher consumption; the gain itself is taken region by region."
+    },
+    {
+      "id": "mkt_borrower_share",
+      "section": "effect",
+      "label": "Share of the market branch's households that took a housing loan (the rest bought products or services)",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Habitat's market count mixes housing-microfinance borrowers (MicroBuild's investees and the national offices' partner lenders: $230 million lent to 236,000 households over MicroBuild Fund 1's life, FY2025 annual report) with buyers of building materials, construction services and technical advice from the Terwilliger Center's firms ('nearly 300,000 households' received 'products or services' from its partners, Form 990). No split is published; borrowers are the smaller part of the yearly count: 0.4, range 0.2 to 0.7."
+    },
+    {
+      "id": "mkt_value_per_borrower",
+      "section": "effect",
+      "label": "Value to a household of a housing loan through Habitat's partner lenders (US$, present value)",
+      "format": "usd",
+      "value": {
+        "low": 30,
+        "best": 150,
+        "high": 400
+      },
+      "kind": "judgment",
+      "explainer": "Borrowers pay for their loans, so the benefit is their surplus over the next-best option. A typical housing microloan is about $1,000 (MicroBuild: $230 million over 236,000 households) over one to three years; 10 to 15 points less interest than informal lenders for two years is $200 to $300, but most borrowers' alternative is a general microloan or slower self-financing. The trials of new microcredit access find modest gains: borrowing rises, much of it replacing other credit, and consumption barely moves (Banerjee, Karlan and Zinman 2015, six randomized evaluations; Meager 2019, a Bayesian meta-analysis of seven, AEJ: Applied Economics, effects on consumption near zero and uncertain). Best $150, range $30 to $400."
+    },
+    {
+      "id": "mkt_value_per_buyer",
+      "section": "effect",
+      "label": "Value to a household of a building product or service bought from Habitat's partner firms (US$, present value)",
+      "format": "usd",
+      "value": {
+        "low": 5,
+        "best": 20,
+        "high": 80
+      },
+      "kind": "judgment",
+      "explainer": "Product and service buyers pay market prices; their surplus is the better quality, fit or advice they get over what they would have bought anyway (a few percent to a tenth of a $200 to $800 purchase of cement, roofing, water tanks or a builder's services). Best $20, range $5 to $80: well below a borrower's, so the two are no longer valued alike."
     },
     {
       "id": "mkt_value_per_household",
       "section": "effect",
-      "label": "Value to a household of a housing loan or product it buys through Habitat's market partners (US$, present value)",
+      "label": "Value to a market-branch household of what it bought (US$, present value, borrowers and buyers)",
       "format": "usd",
-      "value": {
-        "low": 20,
-        "best": 100,
-        "high": 400
-      },
-      "kind": "judgment",
-      "explainer": "Market households pay for what they get, so the benefit is their surplus over the next-best option: credit at a microfinance institution's 20% to 35% a year instead of informal lenders or building more slowly from savings, better materials, technical advice. A typical housing microloan is about $1,000 (MicroBuild Fund 1: $230 million disbursed to 236,000 households, FY2025 annual report) over one to three years; 10 to 15 points of interest saved on it for two years is $100 to $300, and most borrowers' alternative is slower self-financing, worth less. Best $100, range $20 (most would have borrowed or bought on similar terms) to $400."
+      "formula": "mkt_borrower_share * mkt_value_per_borrower + (1 - mkt_borrower_share) * mkt_value_per_buyer",
+      "explainer": "The borrowers' and buyers' surplus weighted by their shares."
     },
     {
       "id": "mkt_ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person, market branch",
       "format": "number",
-      "formula": "ln(1 + mkt_value_per_household / mkt_household_size / mkt_baseline_consumption)",
-      "explainer": "Counted once, in the year bought (the surplus is already a present value)."
+      "formula": "(mkt_lac * ln(1 + mkt_value_per_household / hh_lac / (mkt_vs_dir_consumption * cons_fam_lac)) + mkt_eme * ln(1 + mkt_value_per_household / hh_eme / (mkt_vs_dir_consumption * cons_fam_eme)) + mkt_afr * ln(1 + mkt_value_per_household / hh_afr / (mkt_vs_dir_consumption * cons_fam_afr)) + mkt_ap * ln(1 + mkt_value_per_household / hh_ap / (mkt_vs_dir_consumption * cons_fam_ap))) / (mkt_lac + mkt_eme + mkt_afr + mkt_ap)",
+      "explainer": "Counted once, in the year bought (the surplus is already a present value), per person at each region's own household size and consumption, weighted by the market people in each region, as the direct branch does."
     },
     {
       "id": "ln_gain_per_person",
@@ -817,21 +981,45 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Below 1 because some of HFHI's international grants pass on institutional money that would reach the national organisations anyway, beyond what the shares by resources already handle. Anchored on GiveWell's 0.85 to 0.95 for its top charities; high end 1. Home Equals' government funding is counted once, in unmodelled_benefits_adj."
+      "explainer": "Below 1 because some of HFHI's international grants pass on institutional money that would reach the national organisations anyway, beyond what the shares by resources already handle. Anchored on GiveWell's 0.85 to 0.95 for its top charities; high end 1. Home Equals is modelled in habitat-for-humanity-charityevals-awareness; none of its money enters this model."
+    },
+    {
+      "id": "dir_missing_data_adj",
+      "section": "adjustments",
+      "label": "Direct branch: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): the families reached are HFHI's transfers over a judged subsidy per family, and the value is a judgment anchored on research on housing improvements elsewhere (Piso Firme), not a count of Habitat's own families or a controlled evaluation of its work. The shared missing-data discount."
+    },
+    {
+      "id": "mkt_missing_data_adj",
+      "section": "adjustments",
+      "label": "Market branch: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: Habitat's count of partners' customers, with no stated method, and a surplus per household that is a judgment anchored on the microcredit trials, not measured for these customers. The shared missing-data discount."
     },
     {
       "id": "dir_total_adj",
       "section": "adjustments",
       "label": "Direct branch: all adjustments combined",
       "format": "multiple",
-      "formula": "dir_evidence_adj * dir_counterfactual_adj * dir_attribution_share * leverage_funging_adj"
+      "formula": "dir_evidence_adj * dir_counterfactual_adj * dir_attribution_share * leverage_funging_adj * dir_missing_data_adj"
     },
     {
       "id": "mkt_total_adj",
       "section": "adjustments",
       "label": "Market branch: all adjustments combined",
       "format": "multiple",
-      "formula": "mkt_evidence_adj * mkt_counterfactual_adj * mkt_attribution_share * leverage_funging_adj"
+      "formula": "mkt_evidence_adj * mkt_counterfactual_adj * mkt_attribution_share * leverage_funging_adj * mkt_missing_data_adj"
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(dir_uov_consumption_raw * dir_missing_data_adj + mkt_uov_consumption_raw * mkt_missing_data_adj) / (dir_uov_consumption_raw + mkt_uov_consumption_raw)",
+      "explainer": "The outcome-weighted average of the branches' missing-data steps, for reading only; both branches are thin, so this is the shared discount."
     },
     {
       "id": "total_adj",
@@ -848,11 +1036,11 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.13,
-        "high": 0.35
+        "best": 0.09,
+        "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Not modelled, as a share of the modelled value: (+) illness averted by floors, latrines and stoves (Piso Firme: large falls in children's parasites and diarrhoea), +5%; (+) security of tenure from Habitat's land and titling help and professional services (49,985 people), +3%; (+) homes that withstand later storms and floods (Habitat's disaster-resilient designs), +3%; (+) Home Equals advocacy for informal settlements ('improved access to adequate housing for more than 7.9 million people' and $1.24 billion of government funding since 2023, its own claims), +4%; (−) families who default on revolving-fund loans or are moved for relocation sites lose part of the value. The high end allows for larger health and advocacy effects."
+      "explainer": "Not modelled, as a share of the modelled value: (+) illness averted by floors, latrines and stoves (Piso Firme: large falls in children's parasites and diarrhoea, Cattaneo et al. 2009), +5%; (+) security of tenure from Habitat's land and titling help and professional services (49,985 people; civil-society facilitation is with Home Equals in the awareness model), +3%; (+) homes that withstand later storms and floods (Habitat's disaster-resilient designs), +3%; (−) families who default on revolving-fund loans or are moved for relocation sites lose part of the value, −2%. Habitat's Home Equals advocacy is no longer here: it is modelled with HFHI's public awareness and education programme (habitat-for-humanity-charityevals-awareness). The high end allows for larger health effects."
     },
     {
       "id": "dir_uov_consumption_raw",
@@ -978,50 +1166,8 @@
       "label": "Units of value per dollar you give",
       "format": "small",
       "unit": "Units of value / $",
-      "formula": "uov_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_per_donor_dollar",
-      "explainer": "The modelled international programme's result for its share of the spending, plus public awareness and education, valued in the proxy section."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on public awareness and education (no outcome data), FY2025",
-      "format": "usd",
-      "value": 24292000,
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
-        "url": "https://www.habitat.org/media/36766/download",
-        "retrieved": "2026-11-03",
-        "page": "p. 6, Consolidated statements of activities, Program services",
-        "quote": "Public awareness and education 24,292"
-      },
-      "explainer": "HFHI's third programme: media, the habitat.org site, social media ('more than 2.38 million followers') and learning events that 'share our message' (Form 990, Schedule O). It publishes no outcome data (no reach beyond followers, no measured change), so it is valued at comparable work's result, discounted. Not part of program_spend."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of the nearest evaluated programme: Habitat's US affiliates work (units of value per dollar you give)",
-      "format": "small",
-      "unit": "units of value / $",
-      "formula": "#habitat-for-humanity-charityevals",
-      "explainer": "No public-awareness programme is modelled on the site, so the nearest evaluated programme is Habitat's own: the awareness work promotes Habitat's housing mission, mostly to US audiences, and supports the US affiliates' building and fundraising. Read live from habitat-for-humanity-charityevals (the US model; it can't read this one back). Valuing it at this international model's result instead would be over ten times higher; the US one is the closer match for awareness aimed at US audiences."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programme's result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "unit": "units of value / $",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+      "formula": "uov_per_dollar * donor_cost_share",
+      "explainer": "The international programme's result per dollar, times the share of its full cost paid by cash donations."
     }
   ],
   "output": {

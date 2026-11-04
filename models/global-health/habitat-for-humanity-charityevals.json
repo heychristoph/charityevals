@@ -9,13 +9,13 @@
   "estimate_basis": "unit_cost",
   "charity": "habitat-for-humanity",
   "owner": "charityevals",
-  "summary": "Habitat for Humanity International (HFHI) funds and supports about 984 independent US affiliates that build homes with volunteers and sell them at appraised value to low-income families, on zero-interest mortgages with down-payment help and forgivable second mortgages, and that repair low-income owners' homes; in the year to June 2025 that was about 3,400 homes and 12,370 repairs, plus disaster recovery after Hurricanes Helene and Milton, and HFHI spent $185 million on it. Counting only the net subsidy each family receives (the home's value less the market value of what it repays and its sweat equity) on the site's log-income scale, and HFHI's share of all the resources behind the homes (the affiliates raise most of the money, spend well over the sale price per home, and volunteers give their time), a dollar to HFHI does about 0.01 years of healthy life per $1,000. That is far below the global-health median because the families are in the US, where the same dollar of housing adds much less to consumption than in a poor country, and because a dollar of the network's resources delivers under half a dollar of subsidy to a family. The biggest uncertainties are the affiliates' full cost per home (which sets HFHI's share) and how much a housing subsidy is worth to a family against cash. HFHI's international programme and its public awareness and education are modelled separately and not yet published.",
+  "summary": "Habitat for Humanity International (HFHI) funds and supports about 984 independent US affiliates that build homes with volunteers and sell them at appraised value to low-income families, on zero-interest mortgages with down-payment help and forgivable second mortgages, and that repair low-income owners' homes; in the year to June 2025 that was about 3,400 homes and 12,370 repairs, plus disaster recovery after Hurricanes Helene and Milton, and HFHI spent $185 million on it ($183 million without the US advocacy booked in the same line, which is counted in the awareness model). Counting only the net subsidy each family receives (the home's value less the market value of what it repays and its sweat equity) on the site's log-income scale, and HFHI's share of all the resources behind the homes (the affiliates raise most of the money, spend about twice the sale price per home, and volunteers give their time), a dollar to HFHI does about 0.003 years of healthy life per $1,000. That is far below the global-health median because the families are in the US, where the same dollar of housing adds much less to consumption than in a poor country, and because a dollar of the network's resources delivers under half a dollar of subsidy to a family. All three branches (homes, repairs, disaster help) are discounted for missing data: Habitat counts what it builds, but no controlled study measures what its homes or repairs do. The biggest uncertainties are the affiliates' full cost per home (which sets HFHI's share) and how much a housing subsidy is worth to a family against cash. HFHI's international programme and its public awareness, education and advocacy are modelled separately.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Habitat for Humanity International, US affiliates programme (FY2025)",
     "url": "https://charityevals.org/habitat-for-humanity-charityevals",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -72,12 +72,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -86,20 +80,28 @@
   ],
   "rows": [
     {
-      "id": "program_spend",
+      "id": "us_affiliates_line",
       "section": "cost",
-      "label": "Spending on Habitat's U.S. affiliates programme, FY2025 (year to 30 June 2025)",
+      "label": "HFHI's U.S. affiliates programme services, FY2025 (audited line)",
       "format": "usd",
       "value": 184691000,
       "kind": "observed",
       "source": {
         "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
         "url": "https://www.habitat.org/media/36766/download",
-        "retrieved": "2026-11-03",
+        "retrieved": "2026-11-04",
         "page": "p. 6, Consolidated statements of activities, Program services",
         "quote": "U.S. affiliates 184,691"
       },
-      "explainer": "Habitat for Humanity International's (HFHI) programme spending on its US affiliates in the year to 30 June 2025, in US dollars (audited, in thousands in the statement): cash grants and house-building transfers to affiliates ($88.5 million), donated products such as appliances and building materials passed on to them ($32.3 million), and the staff, training, lending (Habitat Capital) and services that support the about 984 US affiliates ($63.9 million). The affiliates are independent charities with their own budgets; what HFHI's dollar buys is a share of what they build and repair (attribution below). The international programme and public awareness are in habitat-for-humanity-charityevals-international."
+      "explainer": "Habitat for Humanity International's (HFHI) programme spending on its US affiliates in the year to 30 June 2025, in US dollars (audited, in thousands in the statement): cash grants and house-building transfers to affiliates ($88.5 million), donated products such as appliances and building materials passed on to them ($32.3 million), and the staff, training, lending (Habitat Capital) and services that support the about 984 US affiliates ($63.9 million). The affiliates are independent charities with their own budgets; what HFHI's dollar buys is a share of what they build and repair (attribution below). The international programme and public awareness are modelled separately (habitat-for-humanity-charityevals-international and -awareness)."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on Habitat's U.S. affiliates programme, FY2025 (year to 30 June 2025), less the advocacy booked in it",
+      "format": "usd",
+      "formula": "us_affiliates_line - @habitat_for_humanity.us_advocacy_cost_fy2025",
+      "explainer": "The audited line less the US advocacy (Habitat Voices in Action, advocacy grants to affiliates) booked in it (@habitat_for_humanity.us_advocacy_cost_fy2025, a judgment shared with the awareness model, which counts it in its own cost), so each model counts that cost once."
     },
     {
       "id": "total_expenses",
@@ -151,18 +153,10 @@
     {
       "id": "new_people",
       "section": "reach",
-      "label": "People in homes Habitat built or rehabilitated in the US, FY2025",
+      "label": "People in the homes Habitat sold in the US, FY2025",
       "format": "integer",
-      "value": 15952,
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity, FY2025 annual report: Individuals served",
-        "url": "https://www.habitat.org/multimedia/annual-report-2025/",
-        "retrieved": "2026-11-03",
-        "page": "Impact: Individuals served, United States and Canada",
-        "quote": "New and rehab construction 15,952"
-      },
-      "explainer": "People who moved into a home a US affiliate built or rehabilitated and sold to them in the year, as Habitat counts them (the annual report's table is headed 'United States and Canada'; Habitat Canada's share is small). Habitat's own count, not independently verified (implementation_adj)."
+      "formula": "new_households * new_household_size",
+      "explainer": "The homes times the people per home, so both describe the same homes. Habitat's own count of people in new and rehabilitated homes, 15,952 for the US and Canada by fiscal year (FY2025 annual report: 'New and rehab construction 15,952'), is the high end of the size below."
     },
     {
       "id": "new_second_fifth_weight",
@@ -183,8 +177,13 @@
       "label": "People per Habitat home",
       "format": "number",
       "unit": "people",
-      "formula": "new_people / new_households",
-      "explainer": "Habitat's count of people in new and rehabilitated homes over the homes: about 4.7, against the US average household of 2.4 (@household_size.united_states). Habitat buyers are mostly families with children; the count includes some Canadian homes, so this is a little high."
+      "explainer": "Habitat buyers are mostly families with children. Anchors: Habitat's own count, 15,952 people in new and rehab homes for the US and Canada over the year, against Builder magazine's 3,370 US closings is 4.7 (high, since it mixes Canada and a fiscal year with calendar closings); HUD's 1998 survey of Habitat homeowners found about 4.1 people a home; US family households with children under 18 average about 3.8. Best 4.0, range 3.3 to 4.7.",
+      "value": {
+        "low": 3.3,
+        "best": 4.0,
+        "high": 4.7
+      },
+      "kind": "judgment"
     },
     {
       "id": "new_family_size_vs_us",
@@ -321,8 +320,8 @@
       "section": "reach",
       "label": "Households HFHI's disaster spending helped",
       "format": "integer",
-      "formula": "cost_total * dis_spend_share * dis_reach_share / dis_value_per_household",
-      "explainer": "HFHI's own dollars only (a cost-based count), fewer than the network's 53,500 interventions, which affiliates' own money and volunteers also paid for."
+      "formula": "program_spend * dis_spend_share * dis_reach_share / dis_value_per_household",
+      "explainer": "HFHI's own programme dollars only (a cost-based count, before overhead, as the reach share is a share of programme spending), fewer than the network's 53,500 interventions, which affiliates' own money and volunteers also paid for."
     },
     {
       "id": "dis_people",
@@ -363,7 +362,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Homes are sold at appraised value; the part the family doesn't repay is down-payment help and forgivable or deferred 'silent' second mortgages, forgiven over time if they stay. Houston Habitat's FY2024 statements: down-payment assistance $478,659 on $5,495,044 of sales (8.7%) plus forgivable mortgages, so the family repays about 86% to 91%; Greater Sacramento's FY2025 statements: the family's own first mortgage covers about half the appraised value, the rest silent seconds and the state's CalHome deferred loans. Costly markets lean to Sacramento's model, cheap ones to Houston's: best 0.75, range 0.5 to 0.95."
+      "explainer": "Homes are sold at appraised value; the part the family doesn't repay is down-payment help and forgivable or deferred 'silent' second mortgages, forgiven over time if they stay. Houston Habitat's statements: down-payment assistance $587,915 on $7,420,311 of sales in 2025 (7.9%; 8.7% in 2024) plus forgivable mortgages, so the family repays about 86% to 91%; Greater Sacramento's FY2025 statements: the family's own first mortgage covers about half the appraised value, the rest silent seconds and the state's CalHome deferred loans. Costly markets lean to Sacramento's model, cheap ones to Houston's: best 0.75, range 0.5 to 0.95."
     },
     {
       "id": "new_mortgage_rate",
@@ -395,22 +394,15 @@
     {
       "id": "new_market_mortgage_rate",
       "section": "effect",
-      "label": "Market interest rate for the buyers' mortgages (to price the loan)",
+      "label": "Market interest rate the buyers would pay on a mortgage (to price the loan)",
       "format": "percent",
       "value": {
-        "low": 0.065,
-        "best": 0.0802,
+        "low": 0.055,
+        "best": 0.068,
         "high": 0.085
       },
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity of Greater Sacramento, audit report, years ended June 30, 2025 and 2024",
-        "url": "https://habitatgreatersac.org/wp-content/uploads/HfHGS-2025-Audit-Report.pdf",
-        "retrieved": "2026-11-03",
-        "page": "Note F, mortgages receivable",
-        "quote": "New mortgages issued during the years ended June 30, 2025 and 2024 were discounted at 8.02% and 7.85%"
-      },
-      "explainer": "The rate HFHI sets for affiliates to value their zero-interest mortgages ('These rates are determined by Habitat for Humanity International', Sacramento's Note F), 8.02% for loans made in FY2025. A loan's value is a market price, like the home's, so it is priced at this rate, not at the site's time preference. Range: Houston's 4.99% to 8.64% over its loans' years of origination (6.5% as a low end for an average of recent years) to 8.5%."
+      "kind": "judgment",
+      "explainer": "What the interest-free loan is worth is the payments' value at the rate the family would otherwise pay for a 30-year mortgage. The 30-year fixed rate averaged about 6.6% to 6.9% over July 2024 to June 2025 (Freddie Mac's weekly survey), and low-income buyers with thin credit pay more; best 6.8%, range 5.5% to 8.5%. Affiliates' own accounting rates differ and are a convention, not a market price: Greater Sacramento discounted FY2025's loans at 8.02% (Note F, rates 'determined by Habitat for Humanity International'), Houston at 3.50% to 8.38%, San Diego at 1.50%."
     },
     {
       "id": "new_pv_payments",
@@ -485,7 +477,7 @@
       "label": "Habitat buyers' consumption per person, as a share of the US average",
       "format": "percent",
       "formula": "(new_second_fifth_weight * @united_states.ce_second_quintile_vs_all_2024 + (1 - new_second_fifth_weight) * @united_states.ce_lowest_quintile_vs_all_2024) / new_family_size_vs_us",
-      "explainer": "Household spending of the income group Habitat sells to, relative to the average household (BLS Consumer Expenditures 2024: the poorest fifth 0.446, the second fifth 0.637), divided by Habitat buyers' larger households to put it per person. About 0.36."
+      "explainer": "Household spending of the income group Habitat sells to, relative to the average household (BLS Consumer Expenditures 2024: the poorest fifth 0.446, the second fifth 0.637), divided by Habitat buyers' larger households relative to the US average (2.4) to put it per person. About 0.36."
     },
     {
       "id": "new_baseline_consumption",
@@ -587,12 +579,12 @@
       "label": "Disaster-hit households' consumption per person, as a share of the US average",
       "format": "percent",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 1.0
+        "low": 0.5,
+        "best": 0.67,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Habitat's disaster help goes to households in hard-hit, often rural and lower-income areas of the South-East (western North Carolina, Florida's Gulf coast), prioritising the uninsured and underinsured: between the poorest fifth's per-household 0.446 and the average. 0.6."
+      "explainer": "Per person, relative to the average, on the same relative scale as the other branches and the family's models (spending ratios from the survey, applied to the site's mean): the poorest fifth of US households spends about 0.67 of the average per person (BLS 2024: 0.446 of the average household's spending, for 1.6 people against 2.4), the second fifth about 0.73 (0.637 for 2.1 people). Habitat's disaster help goes to hard-hit, often rural and lower-income areas of the South-East (western North Carolina, Florida's Gulf coast), prioritising the uninsured and underinsured, with family households among them: 0.67, range 0.5 to 0.9."
     },
     {
       "id": "dis_ln_gain_per_person",
@@ -634,7 +626,7 @@
       "label": "Average consumption per person in the US (US$)",
       "format": "usd",
       "formula": "@united_states.consumption_per_person_2024",
-      "explainer": "The site's figure for the US (World Bank, 2024), in the same dollars as the subsidies."
+      "explainer": "The site's figure for the US (World Bank national accounts, 2024: $58,517 a person), the base every rich-country model of the family reads (docs/normalization.md), scaled to each branch's households by the Bureau of Labor Statistics' spending ratios by income fifth, as the template does."
     },
     {
       "id": "recipients_consumption_share",
@@ -744,15 +736,10 @@
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment: what a housing dollar is worth to the family against a cash dollar",
+      "label": "Evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
-      },
-      "kind": "judgment",
-      "explainer": "One question: how much a dollar of subsidised housing is worth to the family against a dollar of cash. A home is an in-kind, illiquid transfer of a fixed size, often more housing than the family would have bought with the cash; studies of US housing assistance summarised by Olsen (2003, 'Housing programs for low-income households', in Moffitt ed., Means-Tested Transfer Programs in the United States) find recipients value subsidised housing at less than its cost, though Habitat buyers chose to buy, which narrows the gap. 0.8, range 0.6 to 0.95. Defaults and early sales are in implementation_adj; the uncertainty in the subsidy figures is in their own ranges."
+      "explainer": "1: the effect is an accounting of what each family gets (the subsidy), not an estimated effect size, so there is no study's effect to discount; what a housing dollar is worth against cash is in cash_equivalent_share, and the lack of any measured outcome in the missing-data step.",
+      "formula": "1"
     },
     {
       "id": "counterfactual_adj",
@@ -802,7 +789,7 @@
         "page": "p. 7, Consolidated statements of functional expenses, U.S. Affiliates column",
         "quote": "Program and house building transfers 88,472 ... Donated products and advertising distributed 32,286"
       },
-      "explainer": "$88.5 million of cash transfers and $32.3 million of donated products: the part of HFHI's spending that shows up again in the affiliates' own costs, so it is taken out of the affiliates' resources below to avoid counting it twice. The line is headed 'donated products and advertising', but the donated media services ($1.9 million, note on contributed nonfinancial assets) match the public awareness column's figure exactly, so the US figure is products (construction materials, cars sold for homes, ReStore goods)."
+      "explainer": "$88.5 million of cash transfers and $32.3 million of donated products: the part of HFHI's spending that shows up again in the affiliates' own costs, so it is taken out of the affiliates' resources below to avoid counting it twice. The line is headed 'donated products and advertising', but the donated media services ($1.9 million, note on contributed nonfinancial assets) match the public awareness column's figure exactly, so the US figure is products (construction materials, cars sold for homes, ReStore goods). Some donated products go to ReStores to be sold rather than into homes; they are left in, a small understatement of the network's resources behind homes (about 0.5% of the result)."
     },
     {
       "id": "affiliate_cost_ratio",
@@ -810,19 +797,33 @@
       "label": "Affiliates' full cost of a home or repair, relative to its sale price or subsidy",
       "format": "multiple",
       "value": {
-        "low": 1.25,
-        "best": 1.7,
-        "high": 2.4
+        "low": 1.5,
+        "best": 2.1,
+        "high": 3.2
       },
       "kind": "judgment",
-      "explainer": "What it costs an affiliate, all in, to deliver a home sold at $1 of appraised price (or a repair worth $1 of subsidy): land, construction, infrastructure, staff, family services, fundraising and administration. From two affiliates' audited statements, cash costs net of non-cash mortgage discounts, ReStore and repair or disaster programmes, over homes sold: Houston Habitat about 2.4 (2024) and 2.0 (2023); Greater Sacramento about 1.93 (FY2025) and 1.23 (FY2024); sales-weighted about 1.8. Small samples swing year to year with land purchases, so best 1.7, range 1.25 to 2.4. HFHI's own total-to-programme ratio, 1.33, is a floor.",
+      "explainer": "What it costs an affiliate, all in, to deliver a home sold at $1 of appraised price: land, construction, infrastructure, staff, family services, fundraising and administration. From three affiliates' audited statements, cash costs net of non-cash mortgage discounts, ReStore, tithes and repair or disaster programmes, over home sales: Houston Habitat about 2.4 (2024), 2.0 (2023) and 2.4 (2025: $14.95 million of housing programme costs less $0.49 million of mortgage discounts, $0.40 million of disaster repairs and $0.34 million of tithes, plus its share of management and fundraising, over $7.42 million of sales of 32 homes); Greater Sacramento about 1.93 (FY2025) and 1.23 (FY2024); San Diego Habitat 2.65 in FY2024 before its ReStore costs ($12.48 million of expenses less an $0.81 million mortgage discount subsidy over $4.40 million of home sales), about 2.2 after them (its three ReStores' costs sit inside programme expenses; their net retail income was $1.86 million), and far higher in FY2023, a one-home year ($5.75 million over $0.52 million), so about 2.7 over the two years after ReStore costs. Over the three affiliates' seven years: weighted by home sales 2.04 ($76.8 million of cost over $37.6 million of sales), each affiliate weighted equally 2.16, the median affiliate-year 2.2. Greater New Haven's 2024 statements can't be used: it sells 'below cost and market value'. All three are large urban affiliates; rural ones (not in the sample) probably build cheaper but at smaller scale. A top-down check: Habitat's US network sold $607 million of homes in 2025 (Builder magazine), so 2.1 times that is about $1.3 billion of home-building cost, within the network's reported $3.1 billion of revenue worldwide alongside ReStores, repairs and the international work (a check of scale, not of the exact ratio). Best 2.1, between the sales-weighted and equal-weighted figures, range 1.5 to 3.2. HFHI's own total-to-programme ratio, 1.33, is a floor. Used for homes only; repairs have their own ratio.",
       "source": {
-        "title": "Houston Habitat for Humanity, audited financial statements, years ended 2024 and 2023",
-        "url": "https://www.houstonhabitat.org/wp-content/uploads/sites/2/2025/09/Houston-Habitat-for-Humanity-2024-FS-with-graphs.pdf",
-        "retrieved": "2026-11-03",
-        "page": "Statements of functional expenses and activities, 2024 and 2023",
-        "quote": "23 homes sold; home and lot sales $5,495,044; total expenses $17,553,558 (2024)"
+        "title": "Houston Habitat for Humanity, audited consolidated financial statements, year ended December 31, 2025",
+        "url": "https://www.houstonhabitat.org/wp-content/uploads/sites/2/2026/06/Houston-Habitat-2025-FS-with-Supplementary-Information.pdf",
+        "retrieved": "2026-11-04",
+        "page": "Consolidated statements of activities and functional expenses, 2025; note on revenue recognition",
+        "quote": "During the years ended December 31, 2025 and 2024, 32 and 23 homes were",
+        "note": "Home and lot sales $7,420,311; low-cost housing programme $14,952,656; total expenses $20,562,597 (2025). Earlier years: Houston 2024 statements (https://www.houstonhabitat.org/wp-content/uploads/sites/2/2025/09/Houston-Habitat-for-Humanity-2024-FS-with-graphs.pdf) and Greater Sacramento FY2025 audit (https://habitatgreatersac.org/wp-content/uploads/HfHGS-2025-Audit-Report.pdf). San Diego Habitat for Humanity, consolidated financial statements, year ended June 30, 2024 (https://sandiegohabitat.s3.us-west-1.amazonaws.com/wp-content/uploads/2025/08/28125657/FY24-Audited-Financial-Statements.pdf, retrieved 2026-11-04): 'Sales of homes 4,402,502'; 'Mortgage discount subsidy 807,225'; 'Total expenses 12,484,483'. FY2023 from the same document's comparative statements: 'Sales of homes 516,250'; 'Total expenses 5,752,305'."
       }
+    },
+    {
+      "id": "rep_cost_ratio",
+      "section": "adjustments",
+      "label": "Affiliates' full cost of a repair, relative to the cost of the work",
+      "format": "multiple",
+      "value": {
+        "low": 1.15,
+        "best": 1.35,
+        "high": 1.6
+      },
+      "kind": "judgment",
+      "explainer": "The repair subsidy is already the cost of the work (Rockford about $7,000 a project), so only the affiliates' staff, family services, management and fundraising come on top, not the homes' building above appraised value. Houston 2025: housing staff, management and fundraising ($2.38 million, $2.45 million and $1.82 million, the last two in part) against $9.36 million of direct home costs, about 1.3 to 1.4; Sacramento similar. 1.35, range 1.15 to 1.6."
     },
     {
       "id": "new_network_cost_per_home",
@@ -854,12 +855,12 @@
       "label": "Share of the volunteers who worked with US affiliates",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "No split of Habitat's volunteers by country is published. Most Habitat volunteering is on US build sites (corporate, church and student build days); Global Village trips and national organisations' volunteers abroad are a minority, and the US affiliates are about 984 of Habitat's organisations and the bulk of its spending. 0.6, range 0.4 to 0.8."
+      "explainer": "No split of Habitat's volunteers by country or activity is published. Most Habitat volunteering is on US build and repair sites (corporate, church and student build days); Global Village trips and national organisations' volunteers abroad are a minority, and a share of US volunteers work in the 863 ReStores, which sell donated goods to fund the affiliates and are not part of the homes' resources (like the donated goods themselves). 0.5 of the network's volunteers on US homes and repairs, range 0.3 to 0.75."
     },
     {
       "id": "hours_per_volunteer",
@@ -873,7 +874,7 @@
         "high": 20
       },
       "kind": "judgment",
-      "explainer": "No network figure is published. Most Habitat volunteers give one build day (6 to 8 hours); a minority are regulars who give hundreds. Best 8 hours on average, range 4 to 20. Cross-check: 828,000 × 0.6 × 8 is about 960 hours per home or home-equivalent, against Houston Habitat's 'approximately 25,000 hours' for 23 homes in 2024 (about 1,090)."
+      "explainer": "No network figure is published. Most Habitat volunteers give one build day (6 to 8 hours); a minority are regulars who give hundreds. Best 8 hours on average, range 4 to 20. Cross-check: 828,000 × 0.5 × 8 is about 800 hours per home or home-equivalent, against Houston Habitat's 'approximately 25,000 hours' for 23 homes in 2024 (about 1,090)."
     },
     {
       "id": "volunteer_hour_value",
@@ -902,7 +903,7 @@
       "section": "adjustments",
       "label": "All resources behind the year's US homes and repairs",
       "format": "usd",
-      "formula": "new_households * new_network_cost_per_home + rep_households * rep_subsidy_per_repair * affiliate_cost_ratio + us_volunteer_value - hfhi_transfers_us * (1 - dis_spend_share) + cost_total * (1 - dis_spend_share)",
+      "formula": "new_households * new_network_cost_per_home + rep_households * rep_subsidy_per_repair * rep_cost_ratio + us_volunteer_value - hfhi_transfers_us * (1 - dis_spend_share) + cost_total * (1 - dis_spend_share)",
       "explainer": "The affiliates' net cost of the homes and repairs (their own money, government grants and HFHI's transfers, less the buyers' payments), plus volunteers' time, less HFHI's transfers already inside the affiliates' costs, plus HFHI's own cost of the programme with its overhead; HFHI's disaster spending is left out on both sides (it is its own branch)."
     },
     {
@@ -974,7 +975,7 @@
       "label": "All adjustments combined",
       "format": "multiple",
       "formula": "evidence_adj * implementation_adj * leverage_funging_adj",
-      "explainer": "The adjustments common to every branch; each branch's counterfactual and attribution are applied in uov_bridged."
+      "explainer": "The adjustments common to every branch; each branch's counterfactual, attribution and missing-data step are applied in uov_bridged."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -983,11 +984,24 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.11,
-        "high": 0.4
+        "best": 0.08,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Not modelled, as a share of the modelled value: (+) children's stability and schooling (Wilder 2015: families report better grades and less moving, uncontrolled), +5%; (+) falls averted by accessibility repairs for older owners, +3%; (+) HFHI's US advocacy (Habitat counts 142 US policy changes), +3%; (−) families who default or sell early lose part of the subsidy (in implementation_adj already, so not here). The high end allows for larger child effects."
+      "explainer": "Not modelled, as a share of the modelled value: (+) children's stability and schooling (Wilder 2015: families report better grades and less moving, uncontrolled), +5%; (+) falls averted by accessibility repairs for older owners (home-safety modifications cut falls among older people at high risk: Gillespie et al. 2012, Cochrane review, rate ratio 0.81), +3%; (−) families who default or sell early lose part of the subsidy (in implementation_adj already, so not here). HFHI's US advocacy is no longer here: it is modelled with the public awareness and education programme (habitat-for-humanity-charityevals-awareness). The high end allows for larger child effects."
+    },
+    {
+      "id": "cash_equivalent_share",
+      "section": "effect",
+      "label": "What a housing dollar is worth to the family against a cash dollar",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "One question: how much a dollar of subsidised housing is worth to the family against a dollar of cash. A home is an in-kind, illiquid transfer of a fixed size, often more housing than the family would have bought with the cash; studies of US housing assistance summarised by Olsen (2003, 'Housing programs for low-income households', in Moffitt ed., Means-Tested Transfer Programs in the United States) find recipients value subsidised housing at less than its cost, though Habitat buyers chose to buy, which narrows the gap. 0.8, range 0.6 to 0.95. Defaults and early sales are in implementation_adj. Applied to every branch's value in hr_uov_raw and dis_uov_raw."
     },
     {
       "id": "hr_uov_raw",
@@ -995,7 +1009,7 @@
       "label": "Homes and repairs: units of value before adjustments",
       "format": "number",
       "unit": "UoV",
-      "formula": "(new_people * new_ln_gain_per_person + rep_people * rep_ln_gain_per_person) * $uov_per_ln_consumption",
+      "formula": "(new_people * new_ln_gain_per_person + rep_people * rep_ln_gain_per_person) * cash_equivalent_share * $uov_per_ln_consumption",
       "explainer": "For the branch weights and the bridge below."
     },
     {
@@ -1004,7 +1018,7 @@
       "label": "Disaster help: units of value before adjustments",
       "format": "number",
       "unit": "UoV",
-      "formula": "dis_people * dis_ln_gain_per_person * $uov_per_ln_consumption"
+      "formula": "dis_people * dis_ln_gain_per_person * cash_equivalent_share * $uov_per_ln_consumption"
     },
     {
       "id": "uov_bridged",
@@ -1012,8 +1026,32 @@
       "label": "Income gained and deaths averted, in GiveWell units of value (after each branch's counterfactual and attribution)",
       "format": "number",
       "unit": "UoV",
-      "formula": "hr_uov_raw * hr_counterfactual_adj * hr_attribution_share + dis_uov_raw * dis_counterfactual_adj * dis_attribution_share + people_reached * deaths_averted_per_person * value_per_death",
-      "explainer": "Each branch's income gain times its own counterfactual and attribution (Convention 4); the common adjustments follow in outcome_total. Deaths are 0."
+      "formula": "hr_uov_raw * hr_counterfactual_adj * hr_attribution_share * hr_missing_data_adj + dis_uov_raw * dis_counterfactual_adj * dis_attribution_share * dis_missing_data_adj + people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "Each branch's income gain times its own counterfactual, attribution and missing-data step (Convention 4); the common adjustments follow in outcome_total. Deaths are 0."
+    },
+    {
+      "id": "hr_missing_data_adj",
+      "section": "adjustments",
+      "label": "Homes and repairs: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): Habitat counts its closings and repairs, but the value each family gets rests on judgments (the share of the home's value the family repays, the subsidy per repair, the affiliates' cost) and on research about housing assistance in general, not on a controlled evaluation of Habitat's homes or repairs. So the branch takes the shared missing-data discount."
+    },
+    {
+      "id": "dis_missing_data_adj",
+      "section": "adjustments",
+      "label": "Disaster help: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the households reached are HFHI's spending over a judged value per household (Habitat reports 53,000 interventions, not what HFHI's own money paid for), and the value is a judgment, with no evaluation of the help. The shared missing-data discount."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(hr_uov_raw * hr_missing_data_adj + dis_uov_raw * dis_missing_data_adj) / (hr_uov_raw + dis_uov_raw)",
+      "explainer": "The outcome-weighted average of the branches' missing-data steps, for reading only; each branch applies its own in uov_bridged. Both are thin, so this is the shared discount."
     },
     {
       "id": "dalys_from_uov",
@@ -1118,50 +1156,8 @@
       "label": "Years of healthy life per dollar you give",
       "format": "small",
       "unit": "Years of healthy life / $",
-      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
-      "explainer": "The modelled programme's result for its share of the spending, plus the programmes with no outcome data (the proxy section, none here)."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data at all, FY2025",
-      "format": "usd",
-      "formula": "0",
-      "explainer": "0 in this model: HFHI's public awareness and education programme ($24.3 million) is valued with the international programme in habitat-for-humanity-charityevals-international, which isn't published yet (its audit isn't finished)."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "unit": "units of value / $",
-      "formula": "#givedirectly",
-      "explainer": "Unused (no spending is proxied in this model, so it is multiplied by 0); the skeleton's placeholder is kept so the model has the standard proxy rows."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "unit": "units of value / $",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "explainer": "The modelled programme's result per dollar, times the share of its full cost paid by cash donations."
     }
   ],
   "output": {
