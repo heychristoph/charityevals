@@ -106,7 +106,7 @@ function ValueField({ row, value, best, log }: { row: Row; value: number; best: 
   );
 }
 
-function Slider({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
+export function Slider({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
   const id = useId();
   const best = pickValue(row.value);
   const base = scaleFor(row);
@@ -165,7 +165,7 @@ function LabelWithTip({ htmlFor, text, children }: { htmlFor: string; text: stri
   );
 }
 
-function Toggle({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
+export function Toggle({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
   const best = pickValue(row.value);
   const on = value >= 0.5;
   return (
@@ -199,7 +199,7 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
 const BY_NAME = [...COUNTRIES].sort((a, b) => a.name.localeCompare(b.name));
 
 /** A country, stored as its ISO numeric code (0 for none): a list rather than a slider. */
-function CountrySelect({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
+export function CountrySelect({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
   const id = useId();
   const best = pickValue(row.value);
   const country = byCode.get(value);
