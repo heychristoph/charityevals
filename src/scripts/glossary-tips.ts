@@ -5,14 +5,17 @@ import { TERMS } from "../lib/glossary";
 import "../components/info-tip.css";
 
 const ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>';
-const SKIP = "a, code, pre, h1, h2, h3, h4, h5, h6, button, .info-tip, [data-figure], summary";
+// React islands (astro-island) render and run their own tips, so the prose pass leaves them alone.
+const SKIP = "a, code, pre, h1, h2, h3, h4, h5, h6, button, .info-tip, [data-figure], summary, astro-island";
+/** The tips this script makes, and only those: an island's InfoTip handles its own clicks. */
+const OURS = "[data-gloss] .gloss-tip .info-tip-button";
 
 function tip(text: string, meaning: string, n: number): HTMLElement {
   const wrap = document.createElement("span");
   wrap.className = "nobr";
   wrap.append(text, " ");
   const box = document.createElement("span");
-  box.className = "info-tip";
+  box.className = "info-tip gloss-tip";
   const id = `gloss-${n}`;
   box.innerHTML = `<button type="button" class="info-tip-button" aria-expanded="false" aria-controls="${id}">${ICON}</button><span id="${id}" role="status" class="info-tip-bubble" hidden></span>`;
   box.querySelector("button")!.setAttribute("aria-label", `Meaning of ${text}`);
@@ -48,7 +51,7 @@ function annotate() {
 }
 
 function close(except?: Element) {
-  for (const b of document.querySelectorAll<HTMLButtonElement>("[data-gloss] .info-tip-button[aria-expanded=true]")) {
+  for (const b of document.querySelectorAll<HTMLButtonElement>(`${OURS}[aria-expanded=true]`)) {
     if (b === except) continue;
     b.setAttribute("aria-expanded", "false");
     (b.nextElementSibling as HTMLElement).hidden = true;
@@ -57,7 +60,7 @@ function close(except?: Element) {
 
 annotate();
 document.addEventListener("click", (e) => {
-  const b = (e.target as Element).closest?.("[data-gloss] .info-tip-button");
+  const b = (e.target as Element).closest?.(OURS);
   close(b ?? undefined);
   if (!b) return;
   const open = b.getAttribute("aria-expanded") !== "true";
