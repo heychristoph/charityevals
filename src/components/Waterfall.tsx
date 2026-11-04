@@ -173,7 +173,7 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
       <h3 className="wf-h">{w.start === "evaluator" ? `Where our figure differs from ${possessive(owner)}` : "From the model to the figure shown"}</h3>
       <ol className="wf-steps" style={{ paddingLeft: 0 }}>
         <li className="wf-step wf-end" style={{ marginTop: 0 }}>
-          <span className="wf-label">{w.start === "evaluator" ? `As ${owner} calculates it` : "The model at the site's defaults"}</span>
+          <span className="wf-label">{w.start === "evaluator" ? `${possessive(owner)} result, in our units` : "The model at the site's defaults"}</span>
           <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.startValue)} /></span>
           <span className="wf-value num">{formatYears(w.startValue)}</span>
         </li>
