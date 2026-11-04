@@ -300,7 +300,9 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   for (const [id, [lo, hi]] of Object.entries(spec.bounds)) {
     if (!m.byId.has(id)) continue;
     const v = vals[id];
-    if (Number.isFinite(v) && (v < lo || v > hi)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
+    // A relative tolerance: a weighted average of branches at 1 can sum to 1 + 2e-16.
+    const eps = 1e-9 * Math.max(1, Math.abs(lo), Math.abs(hi));
+    if (Number.isFinite(v) && (v < lo - eps || v > hi + eps)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
   }
   if (output && Number.isFinite(vals[output]) && vals[output] <= 0) add("high", "non-positive", `bottom line is ${vals[output]}`, "Check signs and the outcome chain.", output);
   return out;
