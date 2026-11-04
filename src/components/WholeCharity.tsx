@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState } from "react";
-import { lib, modelUrl } from "../lib/data";
+import { bulkRaw, lib, modelUrl } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
@@ -10,13 +10,32 @@ const pct = (x: number) => `${x >= 0.995 ? 100 : x < 0.01 ? (x * 100).toPrecisio
 /** A charity whose figure combines several programs, as one tree: the whole charity at the top (the
  * funding-weighted mean of src/engine/ranking.ts: combine, so the parts add up to it), each program's
  * model a branch that opens into that model's own tree. One branch is open at a time (each tree has
- * its own search and anchors); the main model's first. `children`: the evaluation's write-up. */
+ * its own search and anchors); the main model's first. A bulk import's full file is fetched when its
+ * branch opens, as its own page does (lib/model-directive.ts); the page hydrates this island with
+ * client:model when the main model is one. `children`: the evaluation's write-up. */
 export default function WholeCharity({ id, children }: { id: string; children?: React.ReactNode }) {
   const model = lib.models.get(id)!;
   const { results } = useResults();
   const [open, setOpen] = useState<string | undefined>(id);
+  const [loading, setLoading] = useState<string | undefined>();
+  const toggle = async (mid: string) => {
+    if (open === mid) return setOpen(undefined);
+    if (lib.models.get(mid)?.bulk && !bulkRaw(mid)) {
+      setLoading(mid);
+      try {
+        const r = await fetch(`/models/${mid}.json`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        (globalThis.__charityevalsModels ??= {})[mid] = await r.json();
+      } catch (e) {
+        console.warn(`charityevals: model ${mid} not loaded`, e);
+        return setLoading(undefined);
+      }
+      setLoading(undefined);
+    }
+    setOpen(mid);
+  };
   const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
-  if (!ev || ev.programs.length < 2) return <ModelView id={id}>{children}</ModelView>;
+  if (!ev || ev.programs.length < 2) return <ModelView id={id} bulk={!!model.bulk}>{children}</ModelView>;
   const charity = lib.charities.get(model.charity)!;
   const weighted = ev.basis === "weighted";
   const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
@@ -46,7 +65,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
           const adds = share !== undefined ? share * p.central : undefined;
           return (
             <li key={p.program} className={here ? "open" : undefined}>
-              <button type="button" className="whole-part" aria-expanded={here} onClick={() => setOpen(here ? undefined : mid)}>
+              <button type="button" className="whole-part" aria-expanded={here} onClick={() => toggle(mid)} aria-busy={loading === mid}>
                 <span className="whole-chev" aria-hidden>{here ? "▾" : "▸"}</span>
                 <span className="whole-part-label">{label}</span>
                 <span className="whole-part-math num">
@@ -59,6 +78,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
                 <div className="whole-model">
                   <ModelView
                     id={mid}
+                    bulk={!!p.result.model.bulk}
                     about={
                       <p>
                         <strong>{plainModelName(p.result.model.name)}</strong> by {lib.owners.get(p.result.model.owner)?.name ?? p.result.model.owner}
