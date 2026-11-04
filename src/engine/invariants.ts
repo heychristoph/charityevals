@@ -6,7 +6,7 @@
 import { evaluate, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
-  AGE_DISCOUNT, assumptionValues, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
+  AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, assumptionValues, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
@@ -15,6 +15,7 @@ import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
 import { rowsFeeding } from "./sensitivity";
+import { COUNTRIES as COUNTRY_LIST, byCode, byIso3, steps } from "./countries";
 
 export type Violation = {
   /** Invariant id, e.g. "INV-2b". */
@@ -1254,10 +1255,79 @@ export function inv19(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+/** The distance weight for beneficiaries `b` at home `home` and discount `d`, worked out country by
+ * country from facts/countries.json (a "world" share spread over every country by population), not by
+ * the engine's formula. */
+export function expectedDistanceWeight(b: Record<string, number> | "world", home: number, d: number): number {
+  if (!home || !d) return 1;
+  const shares: Record<string, number> = b === "world" ? { world: 1 } : b;
+  const total = COUNTRY_LIST.reduce((s, c) => s + c.population, 0);
+  let w = 0;
+  for (const [iso, share] of Object.entries(shares)) {
+    if (iso === "world") for (const c of COUNTRY_LIST) w += share * (c.population / total) * (1 - d) ** steps(home, c.iso3);
+    else w += share * (1 - d) ** steps(home, iso);
+  }
+  return w;
+}
+
+/** INV-20 (docs/normalization.md 2.13): lives near and far, in our view only. Every model with a result in
+ * common units says where its beneficiaries are: shares by known ISO 3166 alpha-3 code (and "world")
+ * summing to 1, "world", or "destinations" for a model that reads others live (`#id`). With no home
+ * country, or at a discount of 0, no headline moves. With a home country and a discount, and the models
+ * it reads live held, the headline is its headline with no home country times exactly the weight worked
+ * out country by country (1 for a model whose destinations bring their own); the evaluator view never
+ * moves. */
+export function inv20(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const H = HOME_COUNTRY, D = DISTANCE_DISCOUNT;
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  if (!(H in av) || !(D in av)) return { id: "INV-20", title: "Lives near and far: weighed by where they are, in our view only", status: "not checked", checked: 0, violations, how: `No $${H} or $${D} in the assumptions.` };
+  const off = { ...av, [H]: 0, [D]: 0 };
+  const homes = [840, 566, 356, 826].filter((c) => byCode.has(c));
+  for (const m of models) {
+    const b = m.beneficiaries;
+    if (!b) {
+      violations.push({ inv: "INV-20", model: m.id, where: "beneficiaries", detail: "no beneficiaries: where the lives it helps are is unknown (scripts/beneficiary-countries.ts)" });
+      continue;
+    }
+    if (b === "destinations") {
+      if (!modelDepsOf(m).length) violations.push({ inv: "INV-20", model: m.id, where: "beneficiaries", detail: `"destinations" but the model reads no other model live (#id)` });
+    } else if (typeof b === "object") {
+      const unknown = Object.keys(b).filter((k) => k !== "world" && !byIso3.has(k));
+      if (unknown.length) violations.push({ inv: "INV-20", model: m.id, where: "beneficiaries", detail: `unknown country codes ${unknown.join(", ")} (facts/countries.json)` });
+      const sum = Object.values(b).reduce((s, x) => s + x, 0);
+      if (Math.abs(sum - 1) > 1e-6) violations.push({ inv: "INV-20", model: m.id, where: "beneficiaries", detail: `shares sum to ${fmt(sum)}, not 1` });
+    }
+    const h0 = headline(lib, m, off);
+    if (!Number.isFinite(h0)) continue;
+    // Defaults: no home country at any discount, or any home country at 0, change nothing.
+    for (const a of [{ ...off, [D]: 0.5 }, { ...off, [D]: 0.9 }, ...homes.map((h) => ({ ...off, [H]: h }))]) {
+      const got = headline(lib, m, a);
+      if (got !== h0) violations.push({ inv: "INV-20", model: m.id, where: `default at ${a[H]}/${a[D]}`, detail: `headline ${fmt(got)} with home ${a[H]} and discount ${a[D]}, ${fmt(h0)} with none: the defaults must not move it` });
+    }
+    const e0 = headline(lib, m, off, {}, "evaluator");
+    for (const home of homes) {
+      const a = { ...av, [H]: home, [D]: 0.5 };
+      // Models read live hold the values they take at these settings: what moves is this model's own weight.
+      const vals = compute(lib, m, a);
+      const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, vals[`#${x}`]]));
+      const want = headline(lib, m, { ...a, [H]: 0 }, held) * (b === "destinations" ? 1 : expectedDistanceWeight(b, home, 0.5));
+      const got = headline(lib, m, a, held);
+      if (!close(got, want, 1e-9)) violations.push({ inv: "INV-20", model: m.id, where: `our view at ${home}`, detail: `headline ${fmt(got)} at home ${home}, 50% a step; want ${fmt(want)}` });
+      const e = headline(lib, m, a, {}, "evaluator");
+      if (!(close(e, e0, 1e-12) || (Number.isNaN(e) && Number.isNaN(e0)))) violations.push({ inv: "INV-20", model: m.id, where: `evaluator view at ${home}`, detail: `the evaluator view moves with the distance weight: ${fmt(e0)} → ${fmt(e)}` });
+    }
+  }
+  return {
+    id: "INV-20", title: "Lives near and far: weighed by where they are, in our view only", status: "checked", checked: models.length, violations,
+    how: `Every model with a result in common units (not templates) has beneficiaries: shares by ISO 3166 alpha-3 codes in facts/countries.json (and "world", spread by population) summing to 1, "world", or "destinations" when it reads other models live. With $${H} = 0 at a discount of 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0, the headline is exactly its headline with neither. At 50% a step with each of those homes, and the models it reads live held, the headline is its headline with no home times the weight worked out country by country, Σ share × (1 − d)^steps (0 the home country, 1 its UN M49 region, 2 elsewhere; 1 for "destinations", whose destinations bring their own); the evaluator view's headline is the same at every setting.`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

@@ -66,7 +66,7 @@
   "checked": 360,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 38539,
+   "input equals a shared value but its label doesn't resemble the shared one's": 43557,
    "input equals a house-constant fact but under another label": 16686,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7422,
    "round value (one significant digit) and labels only loosely alike": 96,
@@ -213,7 +213,7 @@
   "id": "INV-15",
   "title": "A ranked model far above its peers says why",
   "status": "checked",
-  "checked": 160,
+  "checked": 161,
   "violations": [],
   "how": "For every model the rankings use (rankingPlan), at the defaults in our view: if its headline is more than 10× the median of the other ranked models of the same cause (at least three), its summary must state the reason in the words \"more than ten times its peers because …\". The best guess stays; the outlier is explained where readers meet it.",
   "waived": 0,
@@ -223,7 +223,7 @@
   "id": "INV-16",
   "title": "Side sheets never rank; the ranked column is the grant's",
   "status": "partial",
-  "checked": 160,
+  "checked": 161,
   "violations": [],
   "how": "For every model the rankings use: at most one row on its path may read like a value-of-information or decision sheet (future funding bar, reallocated funding, value of information, the probability a decision changes, P(… x cash)); two or more and the sheet values what a grant lets the funder learn, so it must be a side sheet (src/engine/ranking.ts SIDE_SHEET or VOI_ROW). And where the native row's label ends in a place in parentheses (GiveWell's \"Final cost-effectiveness estimate (Chad)\"), the model's name, id or source title must name that place too when it names any: otherwise the importer took another location's column.",
   "waived": 0,
@@ -256,6 +256,16 @@
   "checked": 360,
   "violations": [],
   "how": "Every model with a result in common units (not templates) has source.published. With every model it reads live (`#id`) held at its value at $estimate_age_discount = 0, its headline at the slider's default, at 10% and at its high end equals its headline at 0 times (1 + d)^−age exactly (age from source.published to common.estimate_age_as_of); the evaluator view's headline, destinations included, is the same at every setting.",
+  "waived": 0,
+  "failing_models": []
+ },
+ {
+  "id": "INV-20",
+  "title": "Lives near and far: weighed by where they are, in our view only",
+  "status": "checked",
+  "checked": 360,
+  "violations": [],
+  "how": "Every model with a result in common units (not templates) has beneficiaries: shares by ISO 3166 alpha-3 codes in facts/countries.json (and \"world\", spread by population) summing to 1, \"world\", or \"destinations\" when it reads other models live. With $home_country = 0 at a discount of 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0, the headline is exactly its headline with neither. At 50% a step with each of those homes, and the models it reads live held, the headline is its headline with no home times the weight worked out country by country, Σ share × (1 − d)^steps (0 the home country, 1 its UN M49 region, 2 elsewhere; 1 for \"destinations\", whose destinations bring their own); the evaluator view's headline is the same at every setting.",
   "waived": 0,
   "failing_models": []
  }

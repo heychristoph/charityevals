@@ -126,7 +126,11 @@ function countriesIn(text: string): string[] {
   return [...new Set(found.sort((a, b) => a.at - b.at).map((f) => f.iso))];
 }
 
-const equal = (isos: string[]): Record<string, number> => Object.fromEntries(isos.map((i) => [i, Number((1 / isos.length).toFixed(6))]));
+/** Equal shares to six decimals, the last taking what rounding left so they sum to 1. */
+const equal = (isos: string[]): Record<string, number> => {
+  const each = Number((1 / isos.length).toFixed(6));
+  return Object.fromEntries(isos.map((i, k) => [i, k < isos.length - 1 ? each : Number((1 - each * (isos.length - 1)).toFixed(6))]));
+};
 const names = (b: Record<string, number>) => Object.keys(b).map((i) => (i === "world" ? "the world" : COUNTRIES.find((c) => c.iso3 === i)!.name)).join(", ");
 
 // --- The library ---------------------------------------------------------------------------------------

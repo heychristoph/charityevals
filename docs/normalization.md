@@ -948,6 +948,69 @@ to the per-donor-dollar result, whose modelled part is multiplied by `1 − prox
 templates.ts, lint.ts); src/engine/templates.test.ts checks every skeleton's proxy part is
 proportional to the slider.
 
+### 2.13 Lives near and far: the reader's distance weight (November 2026)
+
+Owner decision 2026-11-04: the reader can weigh lives, people's and animals', by how far they are from
+them. Your values → Lives near and far:
+
+- "Where you live" (`$home_country`, a dropdown, not a slider: the assumption schema's `control: "country"`):
+  an ISO 3166 numeric code, **0 = not set**, which means no distance weighting at all. Stored as a number, it
+  travels through the overrides, the URL (`?a.home_country=840`) and localStorage like any other value.
+- "Each step further from you, a life counts less by" (`$distance_discount`, judgment, **default 0%**, range
+  0–90%). Steps: your country (weight 1), the rest of your world region (× (1 − d)), the rest of the world
+  (× (1 − d)²). Regions are the UN M49 sub-regions, Africa and Latin America split into their M49 intermediate
+  regions (Northern America, Western Europe, Eastern Africa, South America …): facts/countries.json, with each
+  country's alpha-3 and numeric code, name, region and 2024 population (World Bank; UN World Population
+  Prospects 2024 where the World Bank has none).
+
+**Where each model's beneficiaries are.** Every model with a result in common units has `beneficiaries`:
+shares by ISO alpha-3 code summing to 1 (`{"KEN": 1}`, `{"USA": 0.5, "CAN": 0.25, "KEN": 0.25}`), with a
+`"world"` share for a part spread by world population (`{"world": 0.94, "GBR": 0.06}`); `"world"` alone for a
+benefit spread so (climate, research with global reach); or `"destinations"` for a charity whose good is the
+money it moves. Animals count where the animals are. `beneficiaries_note` says where the field came from.
+scripts/beneficiary-countries.ts fills it from what the models already carry, in this order: our own builds'
+stated countries and their branches' shares of the result; climate and global research → world; a variant's
+location; the family's shown location ("this page shows Togo"); the charity record's location entries; the
+model's name; the location columns the evaluator's sheet reads (row labels "(Burkina Faso)"); country facts
+read on the path; the summary; the sheet's notes; and only where nothing says, the charity's main country of
+operation (a judgment; the script lists them). Several places from one source share equally; a variant that
+names no other place inherits. A charity's figure over its programmes and locations needs nothing more: each
+model's headline carries its own weight, so the combination follows from its parts.
+
+**The weight, in one place.** `distanceNode` (src/engine/model.ts) is
+
+    if($home_country = 0, 1, (1 − d)² + d × s + d × (1 − d) × S)
+
+where s is the beneficiaries' share in the reader's country and S their share in the reader's region (the
+country included; `region_of`, `population_share` and `region_population_share` in the formula language read
+facts/countries.json). That is Σ share × (1 − d)^steps, written so it is exactly 1 with no country or at d = 0.
+`modelConversion` multiplies the conversion (and age divisor) by it, so the headline, `bottomLine(...).common`,
+the rankings, sensitivity, uncertainty, `usedAssumptions` and the tree ("× For where the lives it helps are",
+whose parts name the shares in your country and region) all read the same number. The evaluator view never
+applies it (`distanceNode` is undefined there, and `readerValues` reads other models with d = 0).
+
+**Models read live (`#id`): one weight, never two.** A model reads another for one of two reasons, and the
+rule follows:
+- **A charity that moves money** (`"destinations"`: The Life You Can Save, Better Futures Guide, CEARCH): its
+  good is each destination's, done where the destination works. It reads each destination with its weight
+  (and the counterfactual, `prior_dollar_value = #givedirectly`, with GiveDirectly's), and has no weight of
+  its own.
+- **A stand-in** (every other `#id`: `proxy_peer_result`, 2.12, a US charity's unmeasured programme valued at
+  GiveDirectly's result per dollar): the other model only supplies a value per dollar for this model's own
+  work, whose beneficiaries are this model's. It reads the stand-in without its weight (`refValues`: d = 0),
+  and its own weight applies once, to the whole.
+
+Checked by INV-20 (every model with a result in common units has beneficiaries with known codes summing to 1,
+or "world", or "destinations" only where it reads models live; with no home, or a home at d = 0, every
+headline is exactly unchanged; at 50% with four homes and live reads held, the headline is the unweighted one
+times the weight worked out country by country; the evaluator view never moves). src/engine/distance.test.ts
+tests the weight, both kinds of live read, the evaluator view, sensitivity, uncertainty and the tree.
+
+**Effect** (our view): at the defaults, none. Home United States at 50% a step: a US charity (United Way,
+Habitat for Humanity, the American Red Cross) keeps its figure and every African programme takes a quarter,
+so a US charity rises about 4× against AMF; Clean Air Task Force (world) takes 0.28, The Life You Can Save
+0.25 (its destinations are almost all in Africa).
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -979,6 +1042,7 @@ shrinks).
 | INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest (every bridge's input at 0) doesn't move with `$life_value_multiplier`. Any other model with a bridge from uov values its deaths only upstream of that bridge. |
 | INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
 | INV-19 | An estimate counts less by its age, in our view only (2.11). | Every model with a result in common units has `source.published`. With the models it reads live (`#id`) held at their values at 0, its headline at the slider's default, 10% and high end is its headline at 0 times exactly `(1 + d)^−age`, age from `source.published` to `common.estimate_age_as_of`; its evaluator view, destinations included, is the same at every setting. |
+| INV-20 | Lives near and far are weighed by where they are, in our view only (2.13). | Every model with a result in common units has `beneficiaries`: shares by ISO alpha-3 codes in facts/countries.json (and `"world"`) summing to 1, `"world"`, or `"destinations"` when it reads models live. With `$home_country` = 0 at 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0%, every headline is exactly its headline with neither. At 50% a step with each of those homes, live reads held, the headline is the unweighted one times Σ share × (1 − d)^steps worked out country by country (1 for "destinations"); the evaluator view never moves. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the
