@@ -374,9 +374,12 @@ export function hasRange(value: number | Range | undefined): value is Range {
 export function assumptionValues(a: Assumptions, user: Record<string, number> = {}): Record<string, number> {
   // A saved setting outside a slider's current range (an old link or saved value from before a range
   // changed, e.g. a 0% discount rate once the floor became 0.1%) is moved to the nearest end.
+  // The control's own ends: the slider's where it has them (its zero stop allowed), else the range.
   const clamp = (r: (typeof a.rows)[number], v: number | undefined) => {
-    if (v === undefined || typeof r.value !== "object" || r.value.low === undefined || r.value.high === undefined) return v;
-    return Math.min(r.value.high, Math.max(r.value.low, v));
+    if (v === undefined || typeof r.value !== "object") return v;
+    if (r.slider?.zero && v === 0) return 0;
+    const low = r.slider?.low ?? r.value.low, high = r.slider?.high ?? r.value.high;
+    return Math.min(high ?? Infinity, Math.max(low ?? -Infinity, v));
   };
   return Object.fromEntries(a.rows.map((r) => [r.id, clamp(r, r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
 }
