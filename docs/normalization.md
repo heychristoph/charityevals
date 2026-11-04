@@ -988,13 +988,14 @@ the same definition of measured and thin. Built like the age and distance factor
   or trials of the same intervention delivered the same way; thin where the reach is a projection for work
   not yet delivered, the effect a judgment or research on other delivery. GiveWell's top-charity and
   established-programme sheets (nets, chemoprevention, vitamin A, New Incentives after its trial,
-  GiveDirectly, deworming, chlorination, malnutrition treatment) are measured; its value-of-information,
+  GiveDirectly, deworming, chlorination) are measured; malnutrition treatment is thin, as in our own builds
+  (no trial measures it against none: the deaths averted rest on case series); its value-of-information,
   threshold, pilot and new-partner grant sheets thin; ACE's and Giving Green's campaign and policy
   estimates, Ambitious Impact's idea-stage ones and research funding thin; Founders Pledge, HLI and SoGive
   by model (an own RCT of the charity's programme, as for Bandhan, Village Enterprise, Friendship Bench,
-  Shamiri, Imagine Worldwide, NMNW's course: measured). 348 imports: 187 measured (98 of them GiveWell
-  variants), 157 thin, 4 partly thin (Educational Initiatives and NMNW 50%, ALIMA's primary care sheet 50%,
-  Suvita 5%: its antenatal-care part).
+  Shamiri, Imagine Worldwide, NMNW's course: measured). 348 imports: 178 measured (98 of them GiveWell
+  variants), 167 thin, 3 partly thin (Educational Initiatives and NMNW 50%, Suvita 5%: its antenatal-care
+  part).
 - **The evaluator's evidence adjustments stay** (internal and external validity, replicability, a
   non-randomised design): they ask how well the trials transfer, which our builds ask in `evidence_adj`. A
   generic haircut for weak or missing evidence asks this step's question, so in our view it reads 1, the
@@ -1016,11 +1017,12 @@ builds as they were): thin imports halve, so measured programmes rise past them.
 mostly measured), CEARCH (AIM) 87.1 → 43.5, Helen Keller 41.0 (12th → 5th), Jhpiego 40.0 (13th → 6th),
 Albert Schweitzer Foundation 80.0 → 40.0, Malaria Consortium 39.4 (14th → 8th), SickKids (a GiveWell trial
 sheet, thin) 67.8 → 33.9, Development Media International 33.8 (16th → 10th). Biggest moves: Better Futures
-Guide 34th → 65th (21.0 → 5.43: thin itself and through its thin destinations), Taimaka 52nd → 27th, ALIMA
-53rd → 29th, Imagine Worldwide 63rd → 39th, IRD Global 60th → 36th, Nutrition International 70th → 47th,
-Precision Development 71st → 49th, Central Square Foundation 44th → 23rd, Unlimit Health 72nd → 51st,
-Bandhan 82nd → 62nd. Our own builds (all thin or nearly) keep their figures and climb two to seven places
-(Doctors Without Borders 105th → 98th).
+Guide 34th → 65th (21.0 → 5.43: thin itself and through its thin destinations), Imagine Worldwide 63rd →
+36th, IRD Global 60th → 33rd, Nutrition International 70th → 44th, Precision Development 71st → 46th,
+Unlimit Health 72nd → 48th, END Fund 73rd → 51st, Central Square Foundation 44th → 23rd, Bandhan 82nd →
+62nd, GiveDirectly 85th → 70th, Sightsavers 31st → 20th, AMF 27th → 19th, Helen Keller 12th → 5th. Our
+own builds (all thin or nearly) keep their figures and climb two to six places (Doctors Without Borders,
+whose malaria, HIV, TB and hepatitis C branches are now measured, 0.501 → 0.668 and 104th → 98th).
 
 ### 2.13 Lives near and far: the reader's distance weight (November 2026)
 

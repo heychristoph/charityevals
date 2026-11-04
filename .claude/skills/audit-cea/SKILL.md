@@ -41,8 +41,8 @@ don't flag**: every finding names the concrete fix.
   its reason in src/engine/normalization-waivers.json; one covering a real problem is high. The
   allowlist stays `{}`. Each check's `how` in the report says what it sees and misses.
 
-Copy every high and medium mechanical finding into your list with its fix, then go beyond them: the
-checks work on labels and values, so a rule broken under other words is yours to find. Shared facts and
+Copy every high and medium mechanical finding with its fix, then go beyond them: the checks read labels
+and values, so a rule broken under other words is yours to find. Shared facts and
 sliders are the site's one answer for every model, even in a blind run and wherever their sources are:
 reading them is never a finding.
 
@@ -86,13 +86,13 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     effect already net of care as usual (`counterfactual_adj` 1);
   - climate, money moved and careers: the shared rows (normalization.md 2.5, 2.8; INV-12, valued one way);
   - signs and one question per adjustment (Convention 5);
-  - missing data (Convention 12, glossary "measured / thin"): every thin branch's `missing_data_adj`
-    reads `$missing_data_discount`, a 1 names what was measured; a thin branch at 1 is high;
-  - best guesses, every subjective choice a ranged `judgment` naming its anchor; a blend of a charity
+  - missing data (Convention 12, glossary "measured / thin", both ways): a thin branch at 1 is high; so
+    is a branch at the slider whose reach the charity counts and whose effect is an RCT's of the same
+    intervention delivered the same way (thin over-applied); a judged baseline or counterfactual never makes it thin;
+  - best guesses, every subjective choice a ranged `judgment` naming its anchor; a blend of charity
     trial and the literature by precision weights;
-  - an idea-stage model shown only while no model of the charity's actual work exists, flagged
-    `theoretical`; a charityevals model never is;
-  - for an import, the evaluator's rows unchanged except visible overwrites.
+  - an idea-stage model only while no model of the charity's actual work exists, `theoretical`; ours never;
+  - an import's rows unchanged except visible overwrites.
 
 ## 3. Sources: fetch and verify
 
@@ -140,7 +140,7 @@ so the severity rests on a number.
   class; range clearly too narrow or wide; a gap with peers left unexplained (including under a tenth of
   the cause's median); a sign convention broken; a write-up with a stale or non-live result, or a result
   as a multiple of GiveDirectly.
-- **low**: wording, missing context, cosmetic structure, better sources.
+- **low**: wording, context, cosmetic structure, better sources.
 
 ## 7. Output
 
@@ -163,4 +163,4 @@ Previous round: <each earlier finding: resolved / not resolved (a finding answer
 
 Categories: structure, scope, normalization, source, double-counting, missing-adjustment, units,
 plausibility, sensitivity, comparability, presentation. Every finding has a concrete fix ("set X to Y,
-citing Z p. 12", "read the shared SADs fact, the charity's figure in the explainer"), never "consider revisiting" or "flag". "Pass" means no high findings remain.
+citing Z p. 12"), never "consider revisiting" or "flag". "Pass" means no high findings remain.

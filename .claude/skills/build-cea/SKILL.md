@@ -15,15 +15,14 @@ fresh subagent) check it, fix what it finds, repeat until no high-severity findi
    household size, species weight, SADs figure, years a won reform counts, pledges kept and sign
    convention is the site's shared one (docs/normalization.md sections 2 and 3). Every slider moves
    every model it concerns; two models of a family differ only where the charities differ.
-2. **Best guesses**, not conservative cases: a cautious figure in one model beside a best guess in
-   another would rank them unfairly, so caution goes into the range.
+2. **Best guesses**: a cautious figure beside another model's best guess ranks them unfairly; caution
+   goes into the range.
 3. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
    figure, or a labelled judgment (`kind: "judgment"`) with a reason, an anchor and a range.
    Formulas hold no constants beyond `ALLOWED_LITERALS` (src/engine/lint.ts), never one beside a lever
    (a slider): a typed constant hides a choice the checks and the reader can't see.
 4. **Faithful to the evidence**: thin evidence gets a wide range and a plain sentence.
-5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed, since a
-   flagged one still reaches the site.
+5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed.
 
 The templates read every shared figure their family needs and pass every check as they stand
 (src/engine/templates.test.ts): keep those rows and you stay consistent. The lint and the invariants
@@ -45,7 +44,8 @@ enforce the mechanical rules (audit-model runs them, step 3).
   and reach for the same period, main programme first: branches of one model when they share a family
   (Convention 4), else one model per family (`<charity>-charityevals-<program>`), weighted by spending
   in `charities/<id>.json` `programs` with `weight_source` (import-cea section 6). Grants to sister
-  organisations count as the activities they fund. Never a case study, pilot or other year in place
+  organisations count as the activities they fund (a small portfolio across families: one model, a
+  branch per sector, Convention 4). Never a case study, pilot or other year in place
   of the programme: a donor funds the whole programme as it runs now. Thin or no outcome data: its
   family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
   (Convention 12), never another model's result. Nothing is left out.
@@ -90,7 +90,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   the result in years of healthy life per $1,000, the biggest uncertainty, branches discounted for missing data),
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
-- `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts, run it.
+- `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts and run it.
 - **Keep every canonical row id, `output` and the section kinds**, so the model compares row by row
   with its family. Replace every `TEMPLATE:` explainer and example value; each says which shared figure
   the row reads and when to change it. A branch that doesn't apply stays at 0 with an explainer saying
@@ -149,8 +149,8 @@ As you go: `npx tsx scripts/audit-model.ts <path>` (every check, the result, tor
 
 ## 4. Audit loop (independent)
 
-When the mechanical audit has no high findings, have a **separate subagent with fresh context** audit
-the model, given only the model, write-up, blind list and previous findings (not your notes):
+With no mechanical highs, a **fresh subagent** audits the model, given only the model, write-up, blind
+list and previous findings (not your notes):
 
 ```
 Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
@@ -162,8 +162,10 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
 1. Fix every **high** and **medium** finding with the fix it names (or a better one that settles the
    same problem, said in the next round's input); fix lows unless the fix would be wrong, and say why.
 2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
-3. Stop at an audit with no high findings, or after **3 rounds**; changes after the last round get one
-   short **verification round**. Highs left: keep it out of `models/`, report them.
+3. Stop at an audit with no high findings, or after **3 rounds**. **Verification round**: any change after
+   the last round (yours or a later rule's) gets a fresh auditor given the model, write-up, last
+   findings and the changes, checking only those. Publish only without a high; else fix and verify once
+   more, or keep it out of `models/` with the reason.
 
 ## 5. Verify and report
 
@@ -172,10 +174,9 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
 for checked false positives, with reasons; the allowlist stays `{}`; in a sandbox it skips models that
 don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`).
 
-Report: the result (native unit; years of healthy life per $1,000 with audit-model's `Combined range`
-(glossary), the joint low–high only as the extreme case), the year and
-programmes (with weights; which are discounted for missing data), the top 3 swings, the share of judgment, audit
-rounds with counts, every fact or assumption added.
+Report: the result (native unit; years per $1,000 with the `Combined range`, glossary), year and
+programmes (weights; which are thin), top 3 swings, share of judgment, audit rounds with counts, facts
+or assumptions added.
 
-To change the templates: edit `scripts/gen-templates.py`, run it, keep src/engine/templates.ts in step,
-and run `npx vitest run src/engine/templates.test.ts src/engine/lint.test.ts`.
+To change the templates: edit and run `scripts/gen-templates.py`, keep src/engine/templates.ts in step,
+run `npx vitest run src/engine/templates.test.ts src/engine/lint.test.ts`.

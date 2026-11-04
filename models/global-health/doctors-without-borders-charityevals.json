@@ -20,7 +20,7 @@
   "estimate_basis": "unit_cost",
   "charity": "doctors-without-borders",
   "owner": "charityevals",
-  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating in outbreaks, plus illness averted by surgery and mental-health care; four branches MSF publishes no count for (seasonal malaria chemoprevention, other outbreak vaccination, drug-resistant TB, water and sanitation) are built from the research literature with our estimates of their reach. MSF counts its patients but measures no branch's effect against a comparison, so every branch is discounted by the shared missing-data slider. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else. Its awareness-raising, MSF Access and DNDi grant are a separate model.",
+  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating in outbreaks, plus illness averted by surgery and mental-health care; four branches MSF publishes no count for (seasonal malaria chemoprevention, other outbreak vaccination, drug-resistant TB, water and sanitation) are built from the research literature with our estimates of their reach. MSF counts its patients; treating malaria, HIV, TB and hepatitis C is counted in full (their effects are the trials' of the same treatments), every other branch, whose effect or reach is a judgment, is discounted by the shared missing-data slider. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else. Its awareness-raising, MSF Access and DNDi grant are a separate model.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Médecins Sans Frontières, medical care in crises (2025)",
@@ -1130,8 +1130,14 @@
         "best": 0.75,
         "high": 0.9
       },
-      "kind": "judgment",
-      "explainer": "Antiretroviral treatment cuts mortality by roughly three-quarters even among advanced patients (early-mortality cohorts in Africa)."
+      "kind": "estimate",
+      "explainer": "Antiretroviral treatment cuts mortality by about three-quarters: in a randomised trial in Haiti, starting treatment at once rather than at advanced disease cut deaths from 23 to 6 (hazard ratio 4.0, 1.6-9.8), a 75% reduction (38-90%), the best guess and range here; Africa's early-mortality cohorts of advanced patients agree.",
+      "source": {
+        "title": "Severe et al. 2010, Early versus standard antiretroviral therapy for HIV-infected adults in Haiti, N Engl J Med 363:257-65",
+        "url": "https://doi.org/10.1056/NEJMoa0910370",
+        "retrieved": "2026-11-04",
+        "quote": "There were 23 deaths in the standard-treatment group, as compared with 6 in the early-treatment group (hazard ratio with standard treatment, 4.0; 95% confidence interval [CI], 1.6 to 9.8; P=0.001)."
+      }
     },
     {
       "id": "tb_risk_untreated",
@@ -1156,8 +1162,14 @@
         "best": 0.75,
         "high": 0.85
       },
-      "kind": "judgment",
-      "explainer": "Treated patients still die (5-15% in MSF's settings, more with HIV), so treatment averts about three-quarters of the deaths. Our judgment."
+      "kind": "estimate",
+      "explainer": "In randomised trials of the standard six-month regimen (the control arm of Dorman et al. 2021), 14.6% had an unfavourable outcome (failure, relapse, death or loss), so treatment cures about 85% of patients who would otherwise face the untreated risk; deaths during treatment are 5-15% in MSF's settings, more with HIV. Against a 45% untreated risk that is about three-quarters of the deaths averted (60-85%).",
+      "source": {
+        "title": "Dorman et al. 2021, Four-Month Rifapentine Regimens with or without Moxifloxacin for Tuberculosis, N Engl J Med 384:1705-18",
+        "url": "https://doi.org/10.1056/NEJMoa2033400",
+        "retrieved": "2026-11-04",
+        "quote": "Rifapentine with moxifloxacin was noninferior to the control in the microbiologically eligible population (15.5% vs. 14.6% had an unfavorable outcome"
+      }
     },
     {
       "id": "tb_years_until_death",
@@ -1228,8 +1240,14 @@
         "best": 0.85,
         "high": 0.95
       },
-      "kind": "judgment",
-      "explainer": "Direct-acting antivirals cure over 95% of patients; liver damage already done isn't all reversed. Our judgment, 85%."
+      "kind": "estimate",
+      "explainer": "Direct-acting antivirals cure 99% in a placebo-controlled trial (ASTRAL-1); cure cuts liver-related death or transplant by 94% and all-cause death by 74% in patients with advanced fibrosis (van der Meer et al. 2012, JAMA, https://doi.org/10.1001/jama.2012.144878: hazard ratios 0.06 and 0.26). Liver damage already done isn't all reversed, so 85% of the liver deaths averted (70-95%).",
+      "source": {
+        "title": "Feld et al. 2015, Sofosbuvir and Velpatasvir for HCV Genotype 1, 2, 4, 5, and 6 Infection (ASTRAL-1), N Engl J Med 373:2599-607; van der Meer et al. 2012, JAMA 308:2584-93",
+        "url": "https://doi.org/10.1056/NEJMoa1512610",
+        "retrieved": "2026-11-04",
+        "quote": "The rate of sustained virologic response among patients receiving sofosbuvir-velpatasvir was 99% (95% confidence interval, 98 to >99)."
+      }
     },
     {
       "id": "hcv_years_until_death",
@@ -2469,15 +2487,15 @@
       "label": "Missing data: outcome-weighted average of the branches, for reading only",
       "format": "percent",
       "formula": "(malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death + smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + drtb_deaths_averted * drtb_value_per_death + wash_deaths_averted * wash_value_per_death) / (malaria_deaths_averted * malaria_value_per_death / malaria_missing_data_adj + measles_deaths_averted * measles_value_per_death / measles_missing_data_adj + sam_in_deaths_averted * sam_in_value_per_death / sam_in_missing_data_adj + sam_out_deaths_averted * sam_out_value_per_death / sam_out_missing_data_adj + maternal_deaths_averted * maternal_value_per_death / births_missing_data_adj + neonatal_deaths_averted * neonatal_value_per_death / births_missing_data_adj + cholera_deaths_averted * cholera_value_per_death / cholera_missing_data_adj + hiv_deaths_averted * hiv_value_per_death / hiv_missing_data_adj + tb_deaths_averted * tb_value_per_death / tb_missing_data_adj + hcv_deaths_averted * hcv_value_per_death / hcv_missing_data_adj + vhf_deaths_averted * vhf_value_per_death / vhf_missing_data_adj + inpatient_deaths_averted * inpatient_value_per_death / inpatient_missing_data_adj + outpatient_deaths_averted * outpatient_value_per_death / outpatient_missing_data_adj + surgery_deaths_averted * surgery_value_per_death / surgery_missing_data_adj + smc_deaths_averted * smc_value_per_death / smc_missing_data_adj + ovacc_deaths_averted * ovacc_value_per_death / ovacc_missing_data_adj + drtb_deaths_averted * drtb_value_per_death / drtb_missing_data_adj + wash_deaths_averted * wash_value_per_death / wash_missing_data_adj)",
-      "explainer": "Every branch reads its own marker below; this is their average weighted by the value of the deaths each averts, for reading only. Every branch is thin: MSF counts its patients but no branch's effect is measured for MSF's own care against a comparison, and four branches' reach is our judgment."
+      "explainer": "Every branch reads its own marker below; this is their average weighted by the value of the deaths each averts, for reading only. Malaria, HIV, TB and hepatitis C treatment are measured (MSF counts its patients; the effect is the trials' of the same treatments); every other branch is thin (its effect or reach is a judgment) and reads the shared slider."
     },
     {
       "id": "malaria_missing_data_adj",
       "section": "adjustments",
       "label": "Missing data: malaria treated",
       "format": "percent",
-      "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated case fatality is a judgment from an expert survey (Thwing et al.'s Delphi), not a controlled comparison of MSF's patients, so the branch reads the shared missing-data slider."
+      "formula": "1",
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the 3.6 million malaria patients it treated, and the share of deaths treatment averts is the trials' efficacy of the same artemisinin combination treatment it gives (Thwing et al.'s review: 97-99%). The untreated case fatality is the baseline risk, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
     },
     {
       "id": "malaria_total_adj",
@@ -2572,8 +2590,8 @@
       "section": "adjustments",
       "label": "Missing data: HIV treatment",
       "format": "percent",
-      "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated death rate and the share averted are judgments, so the branch reads the shared missing-data slider."
+      "formula": "1",
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the people on antiretroviral treatment in its care, and the share of deaths treatment averts is a randomised trial's (Severe et al. 2010: 75%). The untreated risk is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
     },
     {
       "id": "hiv_total_adj",
@@ -2588,8 +2606,8 @@
       "section": "adjustments",
       "label": "Missing data: TB treatment",
       "format": "percent",
-      "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the share treatment averts is a judgment; the untreated risk comes from pre-treatment cohorts, not MSF's patients, so the branch reads the shared missing-data slider."
+      "formula": "1",
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the patients it started on standard TB treatment, and the share of deaths averted rests on randomised trials of the same regimen (about 85% cured). The untreated risk (pre-treatment cohorts) is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
     },
     {
       "id": "tb_total_adj",
@@ -2604,8 +2622,8 @@
       "section": "adjustments",
       "label": "Missing data: hepatitis C",
       "format": "percent",
-      "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the risk and the share averted are judgments, so the branch reads the shared missing-data slider."
+      "formula": "1",
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the people it treated with direct-acting antivirals, and the cure is the placebo-controlled trials' of the same drugs (99%), its effect on liver deaths from cohorts of cured patients. The untreated risk is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
     },
     {
       "id": "hcv_total_adj",

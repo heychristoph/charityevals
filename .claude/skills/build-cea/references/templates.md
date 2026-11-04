@@ -35,18 +35,21 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 - **`total_adj`**: the product of the adjustment multipliers.
 - **Invariant (INV-n)**: a site-wide rule over every model (docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model. **Convention n**: the rules below.
 - **Measured / thin** (a branch's outcome for this charity): *measured* when the charity's own count of
-  who got the intervention meets an effect with a credible counterfactual (its own controlled
-  evaluation, or trials of the same intervention delivered the same way: doses delivered and an RCT's
-  effect); *thin* when its reach or effect is a judgment, the effect is from other delivery than the
-  charity's, or the programme has no outcome data. Thin takes `$missing_data_discount`.
-- **Combined range**: audit-model's, every input's range as independent errors in log space (90% if each range is). Joint low–high, every input at an end at once, is the extreme.
+  who got the intervention meets an effect from its own controlled evaluation or trials of the same
+  intervention delivered the same way: doses or nets counted and the RCTs' effect; a clinic's counted
+  malaria or HIV patients and the trials of the drugs it gives (an untreated risk is a baseline, not the
+  effect). *Thin*: reach a judgment (spending over an assumed cost, a projection), an effect judged (care
+  with no trial against none: feeding centres, surgery) or from other delivery (household trials for
+  emergency water), or no outcome data. Thin takes `$missing_data_discount`; a judged baseline,
+  counterfactual or attribution has its own row and never makes a branch thin.
+- **Combined range**: audit-model's, every input's range as independent log-space errors. Joint low–high (every input at an end) is the extreme.
 
 ## What each shared row means
 
 | Row | Meaning | Typical source |
 |---|---|---|
 | `program_spend` | spending on the modelled programme, same year as reach | the audited accounts |
-| `overhead_ratio` | total ÷ programme expenses: spreads management and fundraising | the same |
+| `overhead_ratio` | total ÷ programme expenses: management and fundraising spread over every programme by cost | the same |
 | `evidence_adj` | trust in the effect size here: internal × external validity; 1 = face value | judgment, anchored on another model of the intervention |
 | `counterfactual_adj` | share of the outcome that wouldn't have happened anyway | coverage, trend, other providers |
 | `attribution_share_shared` / `attribution_share` | the charity's share of all resources behind the outcome | co-funders, partners, volunteers (Convention 2) |
@@ -70,16 +73,18 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    local wage. `salary_sacrifice` is only the charity's own staff's forgone pay.
 3. **Flows, not stocks.** Reach is per year. Multiply by persistence only what was *added* in the period
    (new commitments, institutions, pledges): for a won reform, `$win_years_counted`. An ongoing
-   programme's yearly flow counts one year, against one year's cost. Count everything the period's wins
-   cover, delivery in `implementation_adj`: never a delivered-only count with the fulfilment rate
-   (delivery would count twice). A stock reported as a total becomes a flow by the recipes below.
+   programme's yearly flow counts one year, against one year's cost. Count everything the wins cover,
+   delivery only in `implementation_adj` (a delivered-only count × the fulfilment rate counts it twice);
+   a stock becomes a flow by the recipes below.
 4. **Several branches in one family** (new and pressed commitments; two countries): prefixed rows
    (`new_…`, `acc_…`) summed into `outcome_total`. Branch adjustments are `<branch>_<canonical id>`
    (`acc_evidence_adj`, `acc_years_until_effect`, …), each applied in its branch; the canonical rows
    are their outcome-weighted averages, labelled "outcome-weighted average of the branches, for reading only".
    No row upstream of `outcome_total` may read those averages (a formula cycle): rows multiplying by
    `total_adj` take each branch's `<branch>_total_adj` and are summed; `<branch>_outcome` reads the
-   bridges' result, never a conversion slider (INV-2b).
+   bridges' result, never a conversion slider (INV-2b). A small grant portfolio across families
+   (overseas grants to sister organisations for livelihoods, schools, health, relief) may be one model,
+   a branch per sector, each on its family's chain and shared figures (bridges for units).
 5. **One question per adjustment**, so no doubt is counted twice. Years brought forward and the
    counterfactual are one question: a change that would have come anyway gets zero years or a zero
    counterfactual, not both. Completion and dosage lower `implementation_adj` only where the evidence
@@ -102,11 +107,11 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
     average_spend_vs_year`, the average real spending over the wins' years (Convention 8) ÷ the
     modelled year's. Years without published accounts: a ranged judgment anchored on the nearest one.
 12. **Every programme is modelled; missing data is discounted.** Thin or no outcome data: the family's
-    chain from the research on that kind of work (research.md), the programme's own spending and
-    reported reach, wide ranges; other models only as a cross-check named in the explainer, never the
-    value. Each branch's `total_adj` has `missing_data_adj` (`<branch>_missing_data_adj`):
-    `$missing_data_discount` when thin (glossary), else 1 with what was measured; the lint enforces it
-    where reach or effect is judgment only. The summary names the discounted branches.
+    chain from the research on that kind of work (research.md), own spending and reported reach, wide
+    ranges; other models only as a named cross-check. Each branch's `total_adj` has `missing_data_adj`
+    (`<branch>_missing_data_adj`): `$missing_data_discount` when thin, 1 when measured (glossary, both
+    ways: not every judged row makes a branch thin), naming the count and the trial. The summary names
+    the discounted branches.
 13. **Several outcome units** (the new families): each outcome in its own unit, entering the output
     unit only through the template's bridge rows (`uov_bridged` → `dalys_from_uov`; normalization.md
     2.6), never a rate typed between them.
@@ -201,22 +206,10 @@ rate); × `marginal_vs_past_average`; then the species step.
 
 - Count animals per year, not commitments; cite the tracker and the conversion (eggs per hen, birds per
   tonne). `years_until_effect` from the commitments' deadlines.
-- A fulfilment rate the charity reports from the same tracker the shared rate is built from never
-  replaces the shared rate (it is the same evidence, and every model must keep pledges at one rate).
-  Pig, fish and shrimp pledges have no shared record: a ranged judgment.
-- **Accountability on a stock of existing pledges** (`acc_`): one year's pressure gets one year's share
-  of the compliance it causes, anchored on the observed pace:
-  - `acc_switched_per_year`: animals that came out of cages in the year under the pledges pressed (published
-    by the charity or a tracker). Observed switches are delivered already: no
-    `implementation_adj`, no division by years of pressure. Without a count: the pressed stock (all
-    animals under the pledges) × `implementation_adj` ÷ `acc_years_pressed` (start of the pressure to
-    the deadlines, a judgment).
-  - `acc_counterfactual_adj`: the share of those switches that wouldn't have come *yet* without the
-    pressure (anchored on pressed against unpressed pledges in the tracker). Each counts
-    `$win_years_counted` years, so never "would it ever have come" (Convention 5).
-  - `acc_years_until_effect`: the lag from pressure to switch (0–2 years), not the time to every deadline.
-  - New pledges of the year (`new_`) take `1 − share later pressed × acc_counterfactual_adj`, since
-    later pressure is credited to later years' accountability.
+- A charity's fulfilment rate from the tracker behind the shared rate never replaces it (one rate for
+  every model). Pig, fish and shrimp pledges: a ranged judgment.
+- **Accountability on a stock of existing pledges** (`acc_`) and new pledges later pressed: the
+  recipe in [families/corporate-campaign.md](families/corporate-campaign.md).
 - **Two SAD versions in one species** (battery and enriched cages): `sads_per_animal_year` mixes the
   2024 and 2025 figures by a ranged share; a row `<s>_sads_share_2024` (the 2024 figure's share of the
   SADs) splits `sads_per_donor_dollar` into `sads_<s>` (`ced_<s>`, 2024) and `sads_<s>_2025`
