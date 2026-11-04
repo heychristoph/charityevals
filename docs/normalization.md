@@ -255,7 +255,7 @@ V_heat        = Σ_band @death_ages.heat_share_<band> × @moral_weights.<band>  
 V_air         = Σ_band @death_ages.air_pollution_share_<band> × @moral_weights.<band>  (47.6 UoV)
 healthy years = tonnes × [ $deaths_per_tco2e × $climate_heat_share × heat factor × (1 + @climate.nondeath_damages_vs_deaths) × V_heat
                          + ($deaths_per_tco2e × (1 − $climate_heat_share) × air_pollution_weight + extra_deaths_per_tco2e) × V_air ]
-                × $life_value_multiplier / $uov_per_daly
+                × $life_value_multiplier / $uov_per_daly     (= $daly_per_child_death / 116.25: no $uov_per_daly left)
 ```
 
 **Deaths by age (late October 2026).** Each death is valued by the age it comes at, like every death on the
@@ -382,9 +382,10 @@ Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 
   `tco2e`, with `air_pollution_weight` and its inputs in the same section; the write-up says what the
   weight rests on. `deaths_per_tco2e`, `climate_heat_share` and `climate_heat_death_delay` are
   cross-cause rates (INV-2b): no model row reads them. INV-10: climate models move in proportion to
-  `$deaths_per_tco2e` and `$life_value_multiplier`; every other model is independent of the climate
-  rates. INV-9 counts the levers the unit's conversion applies (`$life_value_multiplier`) as on the
-  path.
+  `$deaths_per_tco2e` and `$daly_per_child_death` and are independent of `$uov_per_daly` (a tonne is
+  worth its deaths, in healthy years); every other model is independent of the climate rates. INV-9
+  counts the levers the unit's conversion applies (`$life_value_multiplier`, so the life slider) as on
+  the path.
 
 ### 2.6 Anything else, and outcomes in several units
 
@@ -421,9 +422,10 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 
 | Concept | Shared version | Value (range) | Source |
 |---|---|---|---|
-| Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned) | 2 (1–4) | judgment, assumptions |
+| Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned, or inside `$life_value_multiplier`) | 2 (1–4) | judgment, assumptions |
 | Income | `$uov_per_ln_consumption` | 1/ln 2 | GiveWell |
 | Life satisfaction | `$daly_per_wellby` (healthy years per WELLBY; unit conversion only, slider; deaths in WELLBY models enter through `wellbys_from_uov`, INV-17) | 0.0652815 (0.05–0.275; slider 0.025–1.5) | calibrated on depression: a PHQ-9 SD-year worth the same via WELLBYs and via GBD weights at any `$uov_per_daly` (2.3); evaluator view of HLI models 0.575 (GiveDirectly, Kenya) |
+| A young child's death in healthy years | `$daly_per_child_death` (slider, "Saving a young child's life is worth … years of healthy life"); `$life_value_multiplier` = `$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5`, worked out, no slider | 58.13 (34.9–81.4), GiveWell's 116.25 at 2 | GiveWell moral weights; judgment |
 | A death | `@moral_weights.<age band>` × `$life_value_multiplier`, the band of the death's age (an age mix from `@death_ages` where deaths of many ages are counted together: climate, GBD DALYs); `_over5` only for deaths of unknown age | 116.25 / 134 / 104 / 42 UoV | GiveWell moral weights |
 | A death in a GiveWell sheet by finer age | `@moral_weights.givewell_age_<group>` (early, late and post-neonatal, 1–4, then five-year groups to 85+) and `givewell_neonatal` (84), × `$life_value_multiplier`; a sheet's age-weighted figure for a programme's deaths (diarrhoeal deaths, Bangladesh's over-fives, alcohol deaths) is the band's value × a measured `*_age_mix` row | 83.6 … 134.3 … 12.4 UoV | GiveWell's 2020 moral weights by age, as its sheets carry them; INV-2d |
 | GiveWell's house constants | `@givewell_shared.*`: resource sharing (2), treatment costs averted (20%), investment of income gains (5%; nets 2.5%, vitamin A 3%, deworming 10%), years long-term gains last (40) and until they start, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception by country (deaths part × `$life_value_multiplier`), a stillbirth (21), indirect deaths per diarrhoea death, GiveWell's discount rate for figures it states discounted | as listed | facts/givewell_shared.json, GiveWell's current sheets; every GiveWell sheet, and every other evaluator's true copy (SoGive's deworming, Founders Pledge's LEEP, Ambitious Impact's LaBri and Lead Research for Action) reads them; INV-13 |
@@ -447,6 +449,25 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | A dollar a meta charity moves | `moved_dollar_value` / `moved_dollar_net_value` (2.8): destinations read live (`#model`), `@meta.*` | 0.0413 global health (units of value per $); livelihoods and The Life You Can Save's split live | GiveWell 2024 funding; the organisation's own split |
 | New money among money moved | `@meta.new_money_share` | 50% (35–80%) | Ambitious Impact, Effective Giving Incubation report |
 | A new meta organisation's chance of success | `@meta.success_chance_new_org` | 55.7% (50–63.5%) | Ambitious Impact, Better Futures Guide CEA |
+
+**The value of a life (November 2026).** A death is valued in units of value, GiveWell's moral weight
+for its age (`@moral_weights`) × `$life_value_multiplier`, everywhere. Until November 2026 the multiplier
+was a slider of its own, shown as doubled-income years (×116.25), so it overlapped with "One healthy year
+is worth … years of double income": moving the healthy-year rate also changed how many healthy years a
+death counted as. The reader now sets the value of a young child's life in healthy years,
+`$daly_per_child_death` (default 116.25262 / 2 = 58.13, GiveWell's value at the default rate; range 0.6–1.4×),
+and the multiplier is a **derived assumption**: an assumptions row with a `formula` over other assumptions
+and facts in place of a value, `$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5`
+(1 at the defaults, so no result moved). A death's value is then the slider's healthy years × the
+healthy-year rate × the age profile of GiveWell's weights relative to under five: the healthy-year rate
+moves only what is valued through income, the life slider only deaths. Formulas keep naming
+`$life_value_multiplier`; the engine reads any derived assumption as its formula wherever it is named
+(`expandDerived`: model rows and units' conversions), so the headline, the tree, sensitivity, uncertainty and
+the list of sliders a model reads all see the two sliders, and a derived assumption has no value of its own
+and no slider. An evaluator view never pins it (buildLibrary refuses): it pins `$daly_per_child_death` =
+116.25262 / the evaluator's healthy-year rate and that rate (`$uov_per_daly`, 2 where the evaluator states
+none), so the multiplier is exactly the evaluator's 1 whatever the reader sets. Links that set the old
+slider (`a.life_value_multiplier = x`) are read as `$daly_per_child_death` = x × 58.13.
 
 **Depression.** Evaluators that leave their own unit for health each turned depression into DALYs
 their own way: Founders Pledge spreads GBD's severe weight over the whole PHQ-9 (0.658 / 27 = 0.0244 a
@@ -1137,8 +1158,8 @@ shrinks).
 | INV-8 | One view, one set of numbers. | `headline(m, av, {}, "evaluator")` converts with `viewAssumptions(m, av, "evaluator")`, not `av` (fails today: see 4.2). |
 | INV-9b | Benefits over several years are discounted. | Each input on the path whose label counts years a benefit lasts (years of change/impact/benefit/funding, number of years, duration) is moved ×1.25 at a 0% and an 8% rate: if the headline rises by the same factor at both, the years are summed at face value. |
 | INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |
-| INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier`; declared multi-year → reads `$discount_rate`. |
-| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`. Every bridge's input (2.6) is held at 0 for the output unit's expectations, and the part it brings in moves as a model of its own unit would. |
+| INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier` (so `$daly_per_child_death`); declared multi-year → reads `$discount_rate`. |
+| INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults: every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`; climate (`tco2e`) models are linear in `$deaths_per_tco2e` and `$daly_per_child_death` and independent of `$uov_per_daly`. Every bridge's input (2.6) is held at 0 for the output unit's expectations, and the part it brings in moves as a model of its own unit would. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | Every evaluator's model (Ambitious Impact's only until 2026-11-02). Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death), a value of a stillbirth averted or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@givewell_shared.uov_per_stillbirth`, `@fx.*`), itself or through a row it is computed from. |
 | INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
 | INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |

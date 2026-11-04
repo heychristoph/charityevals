@@ -103,6 +103,26 @@
       "explainer": "How health compares with income. The default, 2, follows the charity evaluator GiveWell, whose values draw on surveys of how people in Ghana and Kenya trade income against health and survival."
     },
     {
+      "id": "daly_per_child_death",
+      "section": "people",
+      "label": "Saving a young child's life is worth … years of healthy life",
+      "technical": "Healthy years (DALYs) a death under five averted counts as; deaths at other ages in proportion to GiveWell's moral weights by age",
+      "unit": "years of healthy life",
+      "format": "number",
+      "value": {
+        "low": 34.875786,
+        "best": 58.12631,
+        "high": 81.376834
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "GiveWell moral weights",
+        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit",
+        "note": "GiveWell's 116.25 units of value for a death under five (@moral_weights.uov_per_death_under5) at the default 2 units of value per healthy year; range 0.6× to 1.4×."
+      },
+      "explainer": "How much saving a life counts. The default follows the charity evaluator GiveWell's values, from surveys of donors and of people in Ghana and Kenya; older people's lives count less in the same proportion."
+    },
+    {
       "id": "discount_rate",
       "section": "future",
       "label": "Good done a year later counts less by",
@@ -119,26 +139,12 @@
     },
     {
       "id": "life_value_multiplier",
-      "section": "people",
-      "label": "Saving a young child's life is worth … years of double income",
-      "technical": "Life value multiplier on GiveWell's moral weights",
-      "shown_as": {
-        "factor": 116.25262,
-        "format": "number"
-      },
+      "label": "Multiplier on GiveWell's values of a life",
+      "technical": "Life value multiplier on GiveWell's moral weights, worked out from the two sliders: $daly_per_child_death × $uov_per_daly over GiveWell's value of a death under five",
       "unit": "×",
       "format": "multiple",
-      "value": {
-        "low": 0.6,
-        "best": 1,
-        "high": 1.4
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "GiveWell moral weights",
-        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
-      },
-      "explainer": "How much saving a life counts. The default, 116, is the charity evaluator GiveWell's value, from surveys of donors and of people in Ghana and Kenya. Older people's lives count less, in the same proportion."
+      "formula": "$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5",
+      "explainer": "Not a slider. Models value a death as GiveWell's moral weight for its age (@moral_weights) times this, in units of value. It is the healthy years a young child's death counts as, times what a healthy year is worth, over GiveWell's value for that death: so a death counts as the same healthy years whatever a healthy year is worth, older people's lives count less in GiveWell's proportion, and it is 1 at the defaults. An evaluator view pins $daly_per_child_death (and, where the evaluator has its own, $uov_per_daly), never this."
     },
     {
       "id": "missing_data_discount",

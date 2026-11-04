@@ -3,7 +3,7 @@
 // (output.native, output.species, section kinds, the `ced` unit), so each check derives what it can
 // from what exists, and says where it can't. Used by src/engine/normalization.test.ts (with an
 // allowlist that only shrinks) and scripts/normalization-audit.ts (the full report).
-import { evaluate, refs, type Node } from "./expr";
+import { evaluate, parse, refs, type Node } from "./expr";
 import { ALLOWED_LITERALS, literals } from "./lint";
 import {
   AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, assumptionValues, missingDataFactor, bottomLine, compute, conversionLookup, estimateAge, headline, headlineConversion, inputValue, modelDepsOf, perHealthyYearPer1000,
@@ -162,7 +162,9 @@ export function inv2b(lib: Library): InvariantReport {
           violations.push({ inv: "INV-2b", model: m.id, where: `${WELLBY_FROM_UOV.input} $daly_per_wellby`, detail: `${WELLBY_FROM_UOV.input} must be in units of value, reading no WELLBY rate` });
         continue;
       }
-      for (const a of r.assumptionDeps) {
+      // What the row wrote: $uov_per_daly reached through $life_value_multiplier (a derived assumption)
+      // values a death at the life slider in healthy years, not a cross-cause conversion.
+      for (const a of r.formula !== undefined ? refs(parse(r.formula)).assumptions : r.assumptionDeps) {
         if (CROSS_CAUSE.includes(a))
           violations.push({ inv: "INV-2b", model: m.id, where: `${r.id} $${a}`, detail: `row reads cross-cause rate $${a}: ${r.formula}` });
         else if (a === "uov_per_daly" && !(a in pinned))
@@ -350,7 +352,7 @@ function sharedNumbers(lib: Library): Shared[] {
     out.push({ ref: `@${f.key}`, label: same ? f.source?.quote ?? f.label : f.label, values: same ? [pickValue(v)] : [...new Set(values)], best: pickValue(v), place: file === "household_size" ? f.key.split(".")[1].replace(/_(rural|high_coverage_districts)$/, "").replace(/_/g, " ") : PLACES.find((p) => file === p || file.endsWith(`_${p}`))?.replace("_", " "), sameLabelOnly: same || undefined });
   }
   for (const a of lib.assumptions.rows) {
-    if (a.format === "toggle") continue;
+    if (a.format === "toggle" || a.formula !== undefined) continue;
     out.push({ ref: `$${a.id}`, label: a.label, values: [pickValue(a.value)], best: pickValue(a.value) });
   }
   return out;
@@ -528,6 +530,9 @@ const MULTI_YEAR = /\b(discount(ing|ed)?[ _]?(rate|factor)|discounted|present va
 /** "Absorption discount factor" (iron fortification) is about bioavailability, not time. */
 const NOT_TIME = /absorption|bioavailab/i;
 
+/** The slider a value of a death rests on: $life_value_multiplier is worked out from it. */
+const LIFE_SLIDER = "daly_per_child_death";
+
 function readsOnPath(m: ResolvedModel, path: Set<string>, a: string, lib?: Library) {
   // The unit's conversion counts as on the path: climate's applies $life_value_multiplier itself.
   const conv = lib && m.output ? headlineConversion(lib, m.output.unit) : undefined;
@@ -543,7 +548,8 @@ export function inv9(lib: Library): InvariantReport {
     const path = rowsFeeding(m);
     const onPath = m.rows.filter((r) => path.has(r.id));
     const deaths = onPath.filter((r) => MORTALITY.test(text(r)) && !NOT_PEOPLE.test(text(r)));
-    if (deaths.length && !readsOnPath(m, path, "life_value_multiplier", lib))
+    // $life_value_multiplier is worked out from the life slider (derived assumptions): reading it reads that.
+    if (deaths.length && !readsOnPath(m, path, LIFE_SLIDER, lib))
       violations.push({ inv: "INV-9", model: m.id, where: "$life_value_multiplier", detail: `${deaths.length} rows on the path about deaths (e.g. ${deaths.slice(0, 3).map((r) => r.id).join(", ")}) but nothing on the path reads $life_value_multiplier` });
     const years = onPath.filter((r) => MULTI_YEAR.test(text(r)) && !NOT_TIME.test(text(r)));
     if (years.length && !readsOnPath(m, path, "discount_rate")) {
@@ -620,7 +626,8 @@ function expectations(unit: string, animal: boolean): [string, Shape][] {
     return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
   const base: [string, Shape][] = ANIMAL_ASSUMPTIONS.map((a) => [a, "independent"]);
   // Climate: a tonne is worth the deaths it causes, each valued like an adult's death.
-  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], ["life_value_multiplier", "linear"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
+  // A death counts the same healthy years whatever a healthy year is worth: independent of $uov_per_daly.
+  if (unit === "tco2e") return [...base, ["deaths_per_tco2e", "linear"], [LIFE_SLIDER, "linear"], ["uov_per_daly", "independent"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"]];
   base.push(["deaths_per_tco2e", "independent"], ["climate_heat_death_delay", "independent"]);
   // WELLBYs (without the deaths valued outside them, INV-17) convert in healthy years: proportional to
   // the WELLBY rate, independent of the healthy-year rate, like DALYs.
@@ -916,7 +923,8 @@ export function inv2d(lib: Library): InvariantReport {
     for (const r of ownRows(m)) {
       if (!path.has(r.id) || !r.node) continue;
       const found = new Set<string>();
-      for (const fs of chains(r.node as Node)) {
+      // The formula as written: a derived assumption ($life_value_multiplier) counts as the one lever.
+      for (const fs of chains(r.formula !== undefined ? parse(r.formula) : (r.node as Node))) {
         const levers = fs.filter((f) => f.type === "ref" && f.scope === "assumption" && !toggles.has(f.name)).map((f) => (f as { name: string }).name);
         const consts = fs.filter((f) => f.type === "num" && !ALLOWED_LITERALS.has(f.value)).map((f) => (f as { value: number }).value);
         for (const c of consts) for (const a of levers) found.add(`${fmt(c)} $${a}`);
@@ -1150,7 +1158,7 @@ export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     if (!close(d0, d1, 1e-9))
       violations.push({ inv: "INV-17", model: m.id, where: "$daly_per_wellby", detail: `the deaths' part of the headline moves with the WELLBY rate: ${fmt(d0)} → ${fmt(d1)} at ×1.5` });
     const held = Object.fromEntries(bridgesOf(lib, m).map((b) => [b.input, 0]));
-    const l0 = headline(lib, m, av, held), l1 = headline(lib, m, { ...av, life_value_multiplier: av.life_value_multiplier * 1.5 }, held);
+    const l0 = headline(lib, m, av, held), l1 = headline(lib, m, { ...av, [LIFE_SLIDER]: av[LIFE_SLIDER] * 1.5 }, held);
     if (!close(l0, l1, 1e-9))
       violations.push({ inv: "INV-17", model: m.id, where: "$life_value_multiplier", detail: `the WELLBYs without the deaths still move with the value of a life (${fmt(l0)} → ${fmt(l1)}): a death is valued inside the WELLBYs` });
   }

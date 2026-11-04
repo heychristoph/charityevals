@@ -92,10 +92,20 @@ export function buildLibrary(
   }
   const assumptions = assumptionsParsed.data;
   const assumptionIds = new Set(assumptions.rows.map((r) => r.id));
+  const derived = derivedAssumptions(assumptions);
+  for (const [id, formula] of derived) {
+    try {
+      const used = refs(parse(expandDerived(assumptions, formula)));
+      for (const a of used.assumptions) if (!assumptionIds.has(a)) errors.push(`assumptions: ${id} uses unknown $${a}`);
+      if (used.rows.size || used.models.size) errors.push(`assumptions: ${id} may read only $assumptions and @facts`);
+    } catch (e) {
+      errors.push(`assumptions: ${id}: ${(e as Error).message}`);
+    }
+  }
   for (const [id, u] of Object.entries(assumptions.units)) {
     if (!u.to_common) continue;
     try {
-      const used = refs(parse(u.to_common));
+      const used = refs(parse(expandDerived(assumptions, u.to_common)));
       for (const a of used.assumptions)
         if (!assumptionIds.has(a)) errors.push(`assumptions: unit ${id} uses unknown $${a}`);
 
@@ -116,6 +126,7 @@ export function buildLibrary(
     if (parsed.data.id === "history") errors.push(`${parsed.data.id}: id is taken by a site page`);
     for (const a of Object.keys(parsed.data.evaluator?.assumptions ?? {}))
       if (!assumptionIds.has(a)) errors.push(`${parsed.data.id}: evaluator pins unknown assumption $${a}`);
+      else if (derived.has(a)) errors.push(`${parsed.data.id}: evaluator pins $${a}, which is worked out from other assumptions: pin those instead`);
     files.set(parsed.data.id, parsed.data);
   }
 
@@ -165,11 +176,16 @@ export function buildLibrary(
       const row: ResolvedRow = { ...check.data, inheritedFrom, overridden, deps: [], assumptionDeps: [], factDeps: [], modelDeps: [] };
       if (row.formula !== undefined) {
         try {
-          row.node = parse(row.formula);
+          // A derived assumption reads as its formula, so every path sees the sliders it rests on;
+          // assumptionDeps keeps the name the row wrote as well. factDeps are the facts the row wrote
+          // (a derived assumption's own are the assumption's, checked below).
+          const written = refs(parse(row.formula));
+          row.node = parse(expandDerived(assumptions, row.formula));
           const used = refs(row.node);
           row.deps = [...used.rows];
-          row.assumptionDeps = [...used.assumptions];
-          row.factDeps = [...used.facts];
+          row.assumptionDeps = [...new Set([...written.assumptions, ...used.assumptions])];
+          row.factDeps = [...written.facts];
+          if (rawFacts.length) for (const f of used.facts) if (!written.facts.has(f) && !facts.has(f)) errors.push(`${id}.${row.id}: a derived assumption it reads uses unknown fact @${f}`);
           row.modelDeps = [...used.models];
         } catch (e) {
           errors.push(`${id}.${row.id}: ${(e as Error).message}`);
@@ -198,7 +214,7 @@ export function buildLibrary(
     for (const sp of output?.species ?? []) if (!byId.has(`ced_${sp}`)) errors.push(`${id}: species ${sp} has no ced_${sp} row`);
     const conversionRows = output ? unitRows(assumptions.units[output.unit]?.to_common) : [];
     if (output && rawFacts.length)
-      for (const f of unitFacts(assumptions.units[output.unit]?.to_common)) if (!facts.has(f)) errors.push(`${id}: unit ${output.unit} reads unknown fact @${f}`);
+      for (const f of unitFacts(unitFormula(assumptions, output.unit))) if (!facts.has(f)) errors.push(`${id}: unit ${output.unit} reads unknown fact @${f}`);
     for (const r of conversionRows) if (!byId.has(r)) errors.push(`${id}: unit ${output!.unit} reads row ${r}, which the model doesn't define (docs/normalization.md 2.5)`);
 
     const model: ResolvedModel = {
@@ -381,7 +397,41 @@ export function assumptionValues(a: Assumptions, user: Record<string, number> = 
     const low = r.slider?.low ?? r.value.low, high = r.slider?.high ?? r.value.high;
     return Math.min(high ?? Infinity, Math.max(low ?? -Infinity, v));
   };
-  return Object.fromEntries(a.rows.map((r) => [r.id, clamp(r, r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
+  // A derived assumption has no value of its own: formulas read it as its formula (expandDerived).
+  return Object.fromEntries(a.rows.filter((r) => r.formula === undefined).map((r) => [r.id, clamp(r, r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
+}
+
+// --- Derived assumptions ----------------------------------------------------------------------------
+
+const derivedCache = new WeakMap<Assumptions, Map<string, string>>();
+/** Shared assumptions worked out from others: rows of assumptions with a formula (over $assumptions
+ * and @facts) in place of a value. No slider of their own, no value in assumptionValues: wherever a
+ * formula names one (a model's rows, a unit's conversion), it reads the formula instead
+ * (expandDerived), so the result, its sensitivity, its uncertainty and its tree all move with the
+ * sliders it rests on, and an evaluator view pins those sliders, never the derived one. */
+export function derivedAssumptions(a: Assumptions): Map<string, string> {
+  let d = derivedCache.get(a);
+  if (!d) derivedCache.set(a, (d = new Map(a.rows.filter((r) => r.formula !== undefined).map((r) => [r.id, r.formula!]))));
+  return d;
+}
+
+/** A formula with every derived assumption it names replaced by its formula, in parentheses. */
+export function expandDerived(a: Assumptions, formula: string): string {
+  const d = derivedAssumptions(a);
+  if (!d.size) return formula;
+  let out = formula;
+  for (let depth = 0; depth < 8; depth++) {
+    const next = out.replace(/\$([a-z_][a-z0-9_]*)/gi, (ref, id: string) => (d.has(id) ? `(${d.get(id)})` : ref));
+    if (next === out) return out;
+    out = next;
+  }
+  throw new Error("derived assumptions refer to each other in a cycle");
+}
+
+/** A unit's conversion into the common unit as it is evaluated: derived assumptions expanded. */
+export function unitFormula(a: Assumptions, unit: string): string | undefined {
+  const to = a.units[unit]?.to_common;
+  return to === undefined ? undefined : expandDerived(a, to);
 }
 
 /** The assumption values a view computes with: the evaluator view pins what the evaluator used. */
@@ -443,8 +493,8 @@ export function comparable(lib: Library, m: ResolvedModel): boolean {
  * unit that declares one (climate's `air_pollution_weight`), a fixed row of the model it converts:
  * `rows` are that model's computed values. */
 export function toCommon(lib: Library, unit: string, av: Record<string, number>, rows: Record<string, number> = {}, inputs: Record<string, number> = {}): number {
-  const u = lib.assumptions.units[unit];
-  return u?.to_common ? evaluate(parse(u.to_common), conversionLookup(lib, av, rows, inputs)) : NaN;
+  const to = unitFormula(lib.assumptions, unit);
+  return to ? evaluate(parse(to), conversionLookup(lib, av, rows, inputs)) : NaN;
 }
 
 /** The lookup a unit's conversion evaluates with: assumptions, shared facts (a fixed figure such as
@@ -488,7 +538,7 @@ const conversions = new Map<string, Node>();
 /** What turns a model's result per dollar in `unit` into the headline: undefined for a unit with no
  * exchange rate. */
 export function headlineConversion(lib: Library, unit: string): Node | undefined {
-  const to = lib.assumptions.units[unit]?.to_common;
+  const to = unitFormula(lib.assumptions, unit);
   if (!to) return undefined;
   let n = conversions.get(to);
   if (!n) conversions.set(to, (n = headlineNode({ type: "num", value: 1 }, to)));
@@ -693,7 +743,7 @@ function withReaderFactors(lib: Library, m: ResolvedModel, n: Node, view: View):
  * headlineNode's conversion and, in our view, the age factor, the distance weight and the missing-data factor. Undefined for a unit with no exchange
  * rate. */
 export function headlineExprOf(lib: Library, m: ResolvedModel, result: Node, view: View = "charityevals"): Node | undefined {
-  const to = m.output && lib.assumptions.units[m.output.unit]?.to_common;
+  const to = m.output && unitFormula(lib.assumptions, m.output.unit);
   if (!to) return undefined;
   return withReaderFactors(lib, m, headlineNode(result, to), view);
 }
@@ -773,6 +823,8 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))
       if (lib.assumptions.rows.find((r) => r.id === id)?.format === "toggle") used.delete(id);
+  // A derived assumption is no slider: the ones it rests on are listed in its place.
+  for (const id of derivedAssumptions(lib.assumptions).keys()) used.delete(id);
   return [...used];
 }
 
@@ -800,6 +852,10 @@ export function usedFacts(m: ResolvedModel, lib?: Library): string[] {
   const used = new Set(m.rows.flatMap((r) => r.factDeps));
   const conv = lib && m.output && headlineConversion(lib, m.output.unit);
   if (conv) refs(conv).facts.forEach((f) => used.add(f));
+  // A derived assumption's own facts (GiveWell's value of a death under five) move the rows that read it.
+  const derived = lib ? derivedAssumptions(lib.assumptions) : new Map<string, string>();
+  for (const id of new Set(m.rows.flatMap((r) => r.assumptionDeps)))
+    if (derived.has(id)) refs(parse(expandDerived(lib!.assumptions, derived.get(id)!))).facts.forEach((f) => used.add(f));
   return [...used];
 }
 

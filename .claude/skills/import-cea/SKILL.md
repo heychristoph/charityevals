@@ -103,9 +103,9 @@ every `expected` (the sheet's cached values).
 ## 4. Shared levers (layer A), pinned in the evaluator view
 
 `evaluator: { name, assumptions }` pins every assumption layer E reads to the evaluator's own value
-(INV-5, INV-8: the evaluator view uses its own rates), so their sheet still reproduces:
-`resource_shares: 0`, their `discount_rate`, `life_value_multiplier: 1`, their
-`uov_per_ln_consumption` / `uov_per_daly` where the sheet uses its own, and for AIM (Ambitious
+(INV-5, INV-8), so their sheet still reproduces:
+`resource_shares: 0`, their `discount_rate`, `uov_per_daly` (else 2), `daly_per_child_death: 116.25262 / uov_per_daly`,
+their `uov_per_ln_consumption` where the sheet uses its own, and for AIM (Ambitious
 Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
 
 - **Deaths** read `$life_value_multiplier`: `@moral_weights.<age band> * $life_value_multiplier` in every
