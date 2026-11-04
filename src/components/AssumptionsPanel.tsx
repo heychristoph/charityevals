@@ -5,7 +5,6 @@ import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode, regionName } from "../engine/countries";
 import { formatAssumption, formatValue, parseTyped } from "../lib/format";
-import { assumptionComparable } from "../lib/comparables";
 import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides } from "../lib/assumption-state";
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
@@ -107,7 +106,6 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
   const { k, fmt } = shownAs(row);
   const changed = Math.abs(value - best) > Math.abs(best) * 1e-9;
   const av = useAssumptionValues();
-  const comparable = assumptionComparable(row.id, value, av);
   return (
     <div className={`assumption tip-host ${changed ? "changed" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
@@ -138,7 +136,6 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
         <span>{scale.zero ? formatValue(0, fmt) : formatValue(scale.low * k, fmt)}</span>
         <span>{formatValue(scale.high * k, fmt)}</span>
       </div>
-      {comparable && <p className="comparable" aria-live="polite">{comparable}</p>}
       {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
     </div>
   );
