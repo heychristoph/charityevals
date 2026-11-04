@@ -6,11 +6,13 @@ import { monogram } from "./CharityLogo";
 
 const repo = join(import.meta.dirname, "../..");
 const charityIds = new Set(readdirSync(join(repo, "charities")).map((f) => f.replace(/\.json$/, "")));
+// Evaluators have logos too, keyed "owner-<id>" (scripts/fetch-logos.ts).
+const ownerIds = new Set((JSON.parse(readFileSync(join(repo, "owners.json"), "utf8")) as { id: string }[]).map((o) => `owner-${o.id}`));
 
 describe("charity logos", () => {
   it("are small square WebP files for known charities, with their source recorded", () => {
     for (const [id, e] of Object.entries(logos)) {
-      expect(charityIds.has(id), id).toBe(true);
+      expect(charityIds.has(id) || ownerIds.has(id), id).toBe(true);
       expect(e.file).toBe(`/logos/${id}.webp`);
       expect(e.source).toMatch(/^https?:\/\//);
       const path = join(repo, "public", e.file);
