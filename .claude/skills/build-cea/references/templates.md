@@ -150,6 +150,9 @@ programme's fact, or a sourced input where the site has none:
 - **Waits**: `gift_to_grant_years` (unspent funds ÷ yearly spending), `delay_years` (to delivery) and
   `benefit_midpoint_years` (half the protection), discounted together; interest on waiting funds
   `× (1+interest_yield)^gift_to_grant_years`. The income gain's own wait counts from delivery.
+- **Survivors' remaining life**: a death averted where studies show survivors live shorter than their
+  age group (cardiac arrest, transfusion, childhood cancer) × its `@survival.*_remaining_life_ratio`;
+  elsewhere nothing.
 - Illness in one place only: `morbidity_value_ratio`, `unmodelled_benefits_adj` or, in DALYs,
   `dalys_illness_averted_per_person` (hospitals and hospices in rich countries: families/high-income-care.md).
 - A cost-share attribution uses the same unit basis as `implementation_adj` (partner cost per dose
@@ -164,7 +167,9 @@ person in PPP (`@<country>.ppp_factor_2017`); ln(1 + consumed share × transfer 
 in year 1, × (1 + later years' gains, discounted); × people × `$uov_per_ln_consumption`; plus
 spillovers and mortality as ratios.
 
-- Baseline consumption per person per year, in the transfer's PPP base.
+- Baseline consumption per person per year from a household survey of the people served
+  (`@survey_consumption.*`), in the transfer's PPP base; national accounts only × the shared
+  `survey_to_na_<iso3>` ratio (a shared conversion, not thin data).
 - Household size is the place's fact (rural where recipients are rural); the recipients' own
   size only with that reason stated.
 - A benefit stated as a multiple of cash is that multiple × `@cash.uov_per_dollar`; GiveDirectly as a

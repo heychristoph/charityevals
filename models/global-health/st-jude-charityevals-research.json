@@ -1094,12 +1094,20 @@
       "explainer": "Turns the branch's DALYs back into the deaths behind them, so each is valued by age at the site's value of a death, not at GBD's life expectancy."
     },
     {
+      "id": "ca_survivor_life_share",
+      "section": "effect",
+      "label": "A childhood-cancer survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "formula": "@survival.childhood_cancer_remaining_life_ratio",
+      "explainer": "Children saved from cancer live shorter than their age peers (late effects of treatment), so each death averted counts at this share of the value of a death at its age (the shared figure). Since 2026-11-04 the shared fact (docs/normalization.md, survivors' remaining life), one figure for every model that saves such survivors."
+    },
+    {
       "id": "ca_value_per_death",
       "section": "outcome",
       "label": "Cancer branch: value of a death averted",
       "format": "number",
-      "formula": "(@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier",
-      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths (GBD 2023), times your multiplier on the value of a life: the site's one value of a death.",
+      "formula": "((@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier) * ca_survivor_life_share",
+      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths (GBD 2023), times your multiplier on the value of a life: the site's one value of a death. Times the survivors' remaining-life share (ca_survivor_life_share).",
       "unit": "uov"
     },
     {

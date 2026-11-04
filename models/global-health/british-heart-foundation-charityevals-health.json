@@ -1192,13 +1192,21 @@
       "explainer": "GiveWell's moral weights by age band, the site's one value of a death, with the oldest survivors at the 75 to 79 weight, times the value-of-a-life slider."
     },
     {
+      "id": "ohca_survivor_life_share",
+      "section": "effect",
+      "label": "A cardiac-arrest survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "formula": "@survival.ohca_remaining_life_ratio",
+      "explainer": "Survivors of a cardiac arrest have heart disease and die sooner than their age peers, so a death averted counts at this share of the value of a death at the survivor's age (the shared figure, @survival.ohca_remaining_life_ratio). Since 2026-11-04 the shared fact (docs/normalization.md, survivors' remaining life), one figure for every model that saves such survivors."
+    },
+    {
       "id": "uov_deaths",
       "section": "outcome",
       "label": "Value of deaths averted",
       "format": "number",
-      "formula": "(revivr_deaths_unadj * revivr_total_adj + circuit_deaths_averted * circuit_total_adj) * value_per_death + info_deaths_averted * info_total_adj * info_value_per_death",
+      "formula": "(revivr_deaths_unadj * revivr_total_adj + circuit_deaths_averted * circuit_total_adj) * value_per_death * ohca_survivor_life_share + info_deaths_averted * info_total_adj * info_value_per_death",
       "unit": "UoV",
-      "explainer": "Cardiac-arrest survivors at their age mix (value_per_death), heart patients at theirs (info_value_per_death)."
+      "explainer": "Cardiac-arrest survivors at their age mix (value_per_death) and remaining-life share (ohca_survivor_life_share), heart patients at theirs (info_value_per_death)."
     },
     {
       "id": "uov_stillbirths",

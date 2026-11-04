@@ -3,7 +3,10 @@
   "name": "St. Jude Children's Research Hospital: patient care, St. Jude Global, training and community programmes (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"world":0.89,"USA":0.11},
+  "beneficiaries": {
+    "world": 0.89,
+    "USA": 0.11
+  },
   "beneficiaries_note": "Our build: St. Jude Global's partner hospitals in more than 70 countries and the graduate school's research (89% of the result at the defaults, spread by world population: a judgment, the build names no split), and patient care, clinical training and community programmes in the US (11%).",
   "template": "direct-health",
   "estimate_basis": "unit_cost",
@@ -1033,8 +1036,8 @@
       "section": "effect",
       "label": "Graduate school branch: value of a death averted",
       "format": "number",
-      "formula": "(@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier",
-      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths, times your multiplier on the value of a life.",
+      "formula": "((@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier) * survivor_life_share",
+      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths, times your multiplier on the value of a life. Times the survivors' remaining-life share (survivor_life_share).",
       "unit": "uov"
     },
     {
@@ -1411,8 +1414,8 @@
       "section": "effect",
       "label": "Consumption gain per family member in a treatment year, ln(consumption)",
       "format": "small",
-      "formula": "ln(1 + us_family_costs_per_year / (@household_size.united_states * @united_states.consumption_per_person_2024))",
-      "explainer": "The family's saving as a share of an average US household's consumption (2.4 people at $58,517 each, World Bank 2024): about 8%, on the site's one log scale. The saving is valued like cash (the cash-income family's chain)."
+      "formula": "ln(1 + us_family_costs_per_year / (@household_size.united_states * @united_states.ce_expenditure_per_person_2024))",
+      "explainer": "The family's saving as a share of an average US household's consumption by the household survey (2.4 people at the Consumer Expenditure Survey's $32,723 each, 2024), on the site's one log scale. The saving is valued like cash (the cash-income family's chain). Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending; A shared conversion, not thin data."
     },
     {
       "id": "us_evidence_adj",
@@ -2014,13 +2017,21 @@
       "explainer": "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to."
     },
     {
+      "id": "survivor_life_share",
+      "section": "effect",
+      "label": "A childhood-cancer survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "formula": "@survival.childhood_cancer_remaining_life_ratio",
+      "explainer": "Survivors of childhood cancer live shorter than their age peers (late effects of treatment), so each death averted counts at this share of the value of a death at its age (the shared figure). Since 2026-11-04 the shared fact (docs/normalization.md, survivors' remaining life), one figure for every model that saves such survivors."
+    },
+    {
       "id": "us_value_per_death",
       "section": "outcome",
       "label": "Value of a US death averted (units of value)",
       "format": "number",
       "unit": "units of value",
-      "formula": "(us_share_under5 * @moral_weights.uov_per_death_under5 + (1 - us_share_under5) * (us_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - us_share_5_14_of_over5) * (us_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - us_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
-      "explainer": "GiveWell's moral weights for the age band of each death, times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7), the same for a child in Memphis as anywhere."
+      "formula": "((us_share_under5 * @moral_weights.uov_per_death_under5 + (1 - us_share_under5) * (us_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - us_share_5_14_of_over5) * (us_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - us_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier) * survivor_life_share",
+      "explainer": "GiveWell's moral weights for the age band of each death, times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7), the same for a child in Memphis as anywhere. Times the survivors' remaining-life share (survivor_life_share)."
     },
     {
       "id": "gl_value_per_death",
@@ -2028,8 +2039,8 @@
       "label": "Value of a death averted at partner hospitals (units of value)",
       "format": "number",
       "unit": "units of value",
-      "formula": "(gl_share_under5 * @moral_weights.uov_per_death_under5 + (1 - gl_share_under5) * (gl_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - gl_share_5_14_of_over5) * @moral_weights.uov_per_death_age_15_49)) * $life_value_multiplier",
-      "explainer": "The same weights for the partner hospitals' age mix; no death averted there falls at 50 or over."
+      "formula": "((gl_share_under5 * @moral_weights.uov_per_death_under5 + (1 - gl_share_under5) * (gl_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - gl_share_5_14_of_over5) * @moral_weights.uov_per_death_age_15_49)) * $life_value_multiplier) * survivor_life_share",
+      "explainer": "The same weights for the partner hospitals' age mix; no death averted there falls at 50 or over. Times the survivors' remaining-life share (survivor_life_share)."
     },
     {
       "id": "cm_value_per_death",
