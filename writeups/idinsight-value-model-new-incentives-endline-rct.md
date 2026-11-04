@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from April 2018 to Au
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Value of the grant model for New Incentives Endline RCT](/idinsight) | GW | August 2019 | <span data-figure="headline" data-model="idinsight-value-model-new-incentives-endline-rct">6.8</span> | 73 |
-| [IDinsight rough estimate](/idinsight/idinsight-model) | GW | April 2018 | <span data-figure="headline" data-model="idinsight-model">5.3</span> | 226 |
+| [Value of the grant model for New Incentives Endline RCT](/idinsight) | [GW](/evaluators/givewell) | August 2019 | <span data-figure="headline" data-model="idinsight-value-model-new-incentives-endline-rct">6.8</span> | 73 |
+| [IDinsight rough estimate](/idinsight/idinsight-model) | [GW](/evaluators/givewell) | April 2018 | <span data-figure="headline" data-model="idinsight-model">5.3</span> | 226 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

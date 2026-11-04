@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in June 2023
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [ARMoR: advocacy for subscription models for new antimicrobials (Ambitious Impact, 2023 idea report)](/alliance-for-reducing-microbial-resistance) | AIM | June 2023 | <span data-figure="headline" data-model="alliance-for-reducing-microbial-resistance-aim">3.4</span> | 165 |
+| [ARMoR: advocacy for subscription models for new antimicrobials (Ambitious Impact, 2023 idea report)](/alliance-for-reducing-microbial-resistance) | [AIM](/evaluators/ambitious-impact) | June 2023 | <span data-figure="headline" data-model="alliance-for-reducing-microbial-resistance-aim">3.4</span> | 165 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before ARMoR (Alliance for Reducing Microbial Resistance) existed, not of the charity's own results. It is shown because ARMoR (Alliance for Reducing Microbial Resistance) runs the programme today ([checked October 2026](https://forum.effectivealtruism.org/posts/srjXGXhsecmZvpEdq/two-years-of-doing-advocacy-on-antimicrobial-resistance)) and no model of its actual work exists yet.
 

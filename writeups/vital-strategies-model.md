@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from December 2021 to
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Vital Strategies rough estimate Breakeven](/vital-strategies/vital-strategies-botec-breakeven) | GW | December 2021 | <span data-figure="headline" data-model="vital-strategies-botec-breakeven">8.4</span> | 447, 44 kept fixed |
-| [Vital Strategies rough estimate](/vital-strategies) | GW | December 2021 | <span data-figure="headline" data-model="vital-strategies-model">3.4</span> | 156, 40 kept fixed |
+| [Vital Strategies rough estimate Breakeven](/vital-strategies/vital-strategies-botec-breakeven) | [GW](/evaluators/givewell) | December 2021 | <span data-figure="headline" data-model="vital-strategies-botec-breakeven">8.4</span> | 447, 44 kept fixed |
+| [Vital Strategies rough estimate](/vital-strategies) | [GW](/evaluators/givewell) | December 2021 | <span data-figure="headline" data-model="vital-strategies-model">3.4</span> | 156, 40 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

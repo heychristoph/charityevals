@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from November 2023 to
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Optionality rough estimate for Dimagi Mother-Baby Wellness Coaching Comm Care Connect program design, November 2024](/dimagi/dimagi-optionality-mother-baby-wellness) | GW | November 2024 | <span data-figure="headline" data-model="dimagi-optionality-mother-baby-wellness">10</span> | 151, 1 kept fixed |
-| [Dimagi CommCare Connect rough estimate, 2023](/dimagi) | GW | November 2023 | <span data-figure="headline" data-model="dimagi-commcare-connect-2023">7.3</span> | 49 |
+| [Optionality rough estimate for Dimagi Mother-Baby Wellness Coaching Comm Care Connect program design, November 2024](/dimagi/dimagi-optionality-mother-baby-wellness) | [GW](/evaluators/givewell) | November 2024 | <span data-figure="headline" data-model="dimagi-optionality-mother-baby-wellness">10</span> | 151, 1 kept fixed |
+| [Dimagi CommCare Connect rough estimate, 2023](/dimagi) | [GW](/evaluators/givewell) | November 2023 | <span data-figure="headline" data-model="dimagi-commcare-connect-2023">7.3</span> | 49 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

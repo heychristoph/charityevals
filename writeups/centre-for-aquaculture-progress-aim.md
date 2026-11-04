@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in August 20
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Centre for Aquaculture Progress: electrical stunning for farmed fish in Greece (Ambitious Impact, 2023 idea report)](/centre-for-aquaculture-progress) | AIM | August 2023 | <span data-figure="headline" data-model="centre-for-aquaculture-progress-aim">6.2</span> | 158 |
+| [Centre for Aquaculture Progress: electrical stunning for farmed fish in Greece (Ambitious Impact, 2023 idea report)](/centre-for-aquaculture-progress) | [AIM](/evaluators/ambitious-impact) | August 2023 | <span data-figure="headline" data-model="centre-for-aquaculture-progress-aim">6.2</span> | 158 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Centre for Aquaculture Progress existed, not of the charity's own results. It is shown because Centre for Aquaculture Progress runs the programme today ([checked October 2026](https://centreforaquacultureprogress.org/news/stakeholder-report-electrical-stunning)) and no model of its actual work exists yet.
 

@@ -3,7 +3,7 @@ GiveWell and Founders Pledge published 2 public models of this charity's work, f
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [DMI rough estimate](/development-media-international) | GW | April 2020 | <span data-figure="headline" data-model="development-media-international-dmi">34</span> | 109 |
-| [Development Media International (Founders Pledge)](/development-media-international/development-media-international-founders-pledge) | FP | November 2022 | <span data-figure="headline" data-model="development-media-international-founders-pledge">4.1</span> | 31 |
+| [DMI rough estimate](/development-media-international) | [GW](/evaluators/givewell) | April 2020 | <span data-figure="headline" data-model="development-media-international-dmi">34</span> | 109 |
+| [Development Media International (Founders Pledge)](/development-media-international/development-media-international-founders-pledge) | [FP](/evaluators/founders-pledge) | November 2022 | <span data-figure="headline" data-model="development-media-international-founders-pledge">4.1</span> | 31 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

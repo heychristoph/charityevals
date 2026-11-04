@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in January 2026.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Family planning mobile outreach program rough estimate / cost-effectiveness analysis, 2026](/msi-reproductive-choices) | GW | January 2026 | <span data-figure="headline" data-model="msi-reproductive-choices-family-planning-mobile-outreach-2026">7.6</span> | 31 |
+| [Family planning mobile outreach program rough estimate / cost-effectiveness analysis, 2026](/msi-reproductive-choices) | [GW](/evaluators/givewell) | January 2026 | <span data-figure="headline" data-model="msi-reproductive-choices-family-planning-mobile-outreach-2026">7.6</span> | 31 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

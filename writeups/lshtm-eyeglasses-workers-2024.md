@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from May 2024 to May 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [EARN RCT VoI rough estimate, 2024](/lshtm/lshtm-earn-rct-voi-2024) | GW | May 2024 | <span data-figure="headline" data-model="lshtm-earn-rct-voi-2024">9.4</span> | 102 |
-| [Eyeglasses for workers cost-effectiveness analysis, 2024](/lshtm) | GW | May 2024 | <span data-figure="headline" data-model="lshtm-eyeglasses-workers-2024">11</span> | 26 |
+| [EARN RCT VoI rough estimate, 2024](/lshtm/lshtm-earn-rct-voi-2024) | [GW](/evaluators/givewell) | May 2024 | <span data-figure="headline" data-model="lshtm-earn-rct-voi-2024">9.4</span> | 102 |
+| [Eyeglasses for workers cost-effectiveness analysis, 2024](/lshtm) | [GW](/evaluators/givewell) | May 2024 | <span data-figure="headline" data-model="lshtm-eyeglasses-workers-2024">11</span> | 26 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

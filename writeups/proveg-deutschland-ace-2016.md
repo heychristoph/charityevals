@@ -3,6 +3,6 @@ Animal Charity Evaluators published one public model of this charity's work, in 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Vegetarierbund Deutschland (now ProVeg Deutschland): 2016 estimate (ACE)](/proveg-deutschland) | ACE | November 2016 | <span data-figure="headline" data-model="proveg-deutschland-ace-2016">0.27</span> | none: built from the published figures |
+| [Vegetarierbund Deutschland (now ProVeg Deutschland): 2016 estimate (ACE)](/proveg-deutschland) | [ACE](/evaluators/ace) | November 2016 | <span data-figure="headline" data-model="proveg-deutschland-ace-2016">0.27</span> | none: built from the published figures |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

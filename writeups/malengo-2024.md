@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in January 2024.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Malengo rough estimate, 2024](/malengo) | GW | January 2024 | <span data-figure="headline" data-model="malengo-2024">3.2</span> | 103 |
+| [Malengo rough estimate, 2024](/malengo) | [GW](/evaluators/givewell) | January 2024 | <span data-figure="headline" data-model="malengo-2024">3.2</span> | 103 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

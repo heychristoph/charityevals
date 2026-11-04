@@ -3,7 +3,7 @@ GiveWell and Founders Pledge published 2 public models of this charity's work, f
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | GW | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">4.5</span> | 207, 71 kept fixed |
-| [Clear Solutions (Founders Pledge)](/clear-solutions/clear-solutions-founders-pledge) | FP | May 2025 | <span data-figure="headline" data-model="clear-solutions-founders-pledge">5.0</span> | 1 |
+| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | [GW](/evaluators/givewell) | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">4.5</span> | 207, 71 kept fixed |
+| [Clear Solutions (Founders Pledge)](/clear-solutions/clear-solutions-founders-pledge) | [FP](/evaluators/founders-pledge) | May 2025 | <span data-figure="headline" data-model="clear-solutions-founders-pledge">5.0</span> | 1 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

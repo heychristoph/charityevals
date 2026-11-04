@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in October 2020.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CPSP Skeleton rough estimate](/centre-for-pesticide-suicide-prevention) | GW | October 2020 | <span data-figure="headline" data-model="centre-for-pesticide-suicide-prevention-cpsp-skeleton">20</span> | 186 |
+| [CPSP Skeleton rough estimate](/centre-for-pesticide-suicide-prevention) | [GW](/evaluators/givewell) | October 2020 | <span data-figure="headline" data-model="centre-for-pesticide-suicide-prevention-cpsp-skeleton">20</span> | 186 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

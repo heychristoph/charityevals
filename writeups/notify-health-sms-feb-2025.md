@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in March 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Notify Health - SMS Cost-Effectiveness Analysis (PUBLISHED, Feb 2025)](/notify-health) | GW | March 2025 | <span data-figure="headline" data-model="notify-health-sms-feb-2025">8.8</span> | 417, 12 kept fixed |
+| [Notify Health - SMS Cost-Effectiveness Analysis (PUBLISHED, Feb 2025)](/notify-health) | [GW](/evaluators/givewell) | March 2025 | <span data-figure="headline" data-model="notify-health-sms-feb-2025">8.8</span> | 417, 12 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

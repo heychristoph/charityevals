@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in September 2024.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Moxidectin MDA for onchocerciasis rough cost-effectiveness analysis, September 2024](/medicines-development-for-global-health) | GW | September 2024 | <span data-figure="headline" data-model="medicines-development-for-global-health-moxidectin-mda-onchocerciasis-ro">4.6</span> | 58 |
+| [Moxidectin MDA for onchocerciasis rough cost-effectiveness analysis, September 2024](/medicines-development-for-global-health) | [GW](/evaluators/givewell) | September 2024 | <span data-figure="headline" data-model="medicines-development-for-global-health-moxidectin-mda-onchocerciasis-ro">4.6</span> | 58 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

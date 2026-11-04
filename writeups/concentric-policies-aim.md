@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in January 2
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Concentric Policies: tobacco taxation advocacy (Ambitious Impact, 2022 idea report)](/concentric-policies) | AIM | January 2022 | <span data-figure="headline" data-model="concentric-policies-aim">5.9</span> | 115 |
+| [Concentric Policies: tobacco taxation advocacy (Ambitious Impact, 2022 idea report)](/concentric-policies) | [AIM](/evaluators/ambitious-impact) | January 2022 | <span data-figure="headline" data-model="concentric-policies-aim">5.9</span> | 115 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Concentric Policies existed, not of the charity's own results. It is shown because Concentric Policies runs the programme today ([checked October 2026](https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the)) and no model of its actual work exists yet.
 

@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in July 2024.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Desalination kiosks in Bangladesh rough estimate, 2024](/yale-research-initiative-on-innovation-and-scale) | GW | July 2024 | <span data-figure="headline" data-model="yale-research-initiative-on-innovation-and-scale-desalination-kiosks-in">11</span> | 64 |
+| [Desalination kiosks in Bangladesh rough estimate, 2024](/yale-research-initiative-on-innovation-and-scale) | [GW](/evaluators/givewell) | July 2024 | <span data-figure="headline" data-model="yale-research-initiative-on-innovation-and-scale-desalination-kiosks-in">11</span> | 64 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

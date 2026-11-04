@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from March 2025 to Au
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CA CODE VoI threshold rough estimate](/johns-hopkins-university) | GW | August 2025 | <span data-figure="headline" data-model="johns-hopkins-university-ca-code-voi-threshold">8.3</span> | 38 |
-| [CHoBI7 Bangladesh VOI cost-effectiveness analysis](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | GW | March 2025 | <span data-figure="headline" data-model="johns-hopkins-university-chobi7-bangladesh-voi">6.7</span> | 87 |
+| [CA CODE VoI threshold rough estimate](/johns-hopkins-university) | [GW](/evaluators/givewell) | August 2025 | <span data-figure="headline" data-model="johns-hopkins-university-ca-code-voi-threshold">8.3</span> | 38 |
+| [CHoBI7 Bangladesh VOI cost-effectiveness analysis](/johns-hopkins-university/johns-hopkins-university-chobi7-bangladesh-voi) | [GW](/evaluators/givewell) | March 2025 | <span data-figure="headline" data-model="johns-hopkins-university-chobi7-bangladesh-voi">6.7</span> | 87 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

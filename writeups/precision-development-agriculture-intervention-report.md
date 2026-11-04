@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in March 2022.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Precision Agriculture for Development cost-effectiveness analysis for Intervention Report](/precision-development) | GW | March 2022 | <span data-figure="headline" data-model="precision-development-agriculture-intervention-report">8.7</span> | 13 |
+| [Precision Agriculture for Development cost-effectiveness analysis for Intervention Report](/precision-development) | [GW](/evaluators/givewell) | March 2022 | <span data-figure="headline" data-model="precision-development-agriculture-intervention-report">8.7</span> | 13 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

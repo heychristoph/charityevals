@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in March 2026.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Rough estimate of Lafiya, 2026](/lafiya-nigeria) | GW | March 2026 | <span data-figure="headline" data-model="lafiya-nigeria-2026">11</span> | 29 |
+| [Rough estimate of Lafiya, 2026](/lafiya-nigeria) | [GW](/evaluators/givewell) | March 2026 | <span data-figure="headline" data-model="lafiya-nigeria-2026">11</span> | 29 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

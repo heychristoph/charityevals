@@ -3,9 +3,9 @@ GiveWell published 4 public models of this charity's work, from January 2022 to 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Threshold cost-effectiveness analysis: PATH Accelerator Grant for Malaria Vaccines, January 2025](/path/path-threshold-accelerator-malaria-vaccines) | GW | January 2025 | <span data-figure="headline" data-model="path-threshold-accelerator-malaria-vaccines">7.7</span> | 162, 1 kept fixed |
-| [PMC RTSS Threshold rough estimate, 2023](/path/path-pmc-rtss-threshold-2023) | GW | February 2023 | <span data-figure="headline" data-model="path-pmc-rtss-threshold-2023">9.0</span> | 103, 1 kept fixed |
-| [PMC DRC pilot grant cost-effectiveness analysis](/path) | GW | November 2022 | <span data-figure="headline" data-model="path-pmc-drc-pilot">19</span> | 148, 21 kept fixed |
-| [RTS,S for pilot comparison areas cost-effectiveness analysis - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | GW | January 2022 | <span data-figure="headline" data-model="path-rts-s-pilot-comparison-areas-based-on">10</span> | 266, 14 kept fixed |
+| [Threshold cost-effectiveness analysis: PATH Accelerator Grant for Malaria Vaccines, January 2025](/path/path-threshold-accelerator-malaria-vaccines) | [GW](/evaluators/givewell) | January 2025 | <span data-figure="headline" data-model="path-threshold-accelerator-malaria-vaccines">7.7</span> | 162, 1 kept fixed |
+| [PMC RTSS Threshold rough estimate, 2023](/path/path-pmc-rtss-threshold-2023) | [GW](/evaluators/givewell) | February 2023 | <span data-figure="headline" data-model="path-pmc-rtss-threshold-2023">9.0</span> | 103, 1 kept fixed |
+| [PMC DRC pilot grant cost-effectiveness analysis](/path) | [GW](/evaluators/givewell) | November 2022 | <span data-figure="headline" data-model="path-pmc-drc-pilot">19</span> | 148, 21 kept fixed |
+| [RTS,S for pilot comparison areas cost-effectiveness analysis - based on SMC model](/path/path-rts-s-pilot-comparison-areas-based-on) | [GW](/evaluators/givewell) | January 2022 | <span data-figure="headline" data-model="path-rts-s-pilot-comparison-areas-based-on">10</span> | 266, 14 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

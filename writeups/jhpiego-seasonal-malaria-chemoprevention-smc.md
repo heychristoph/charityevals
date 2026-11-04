@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in May 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of seasonal malaria chemoprevention (SMC) - Cameroon grant to Jhpiego (May 2025)](/jhpiego) | GW | May 2025 | <span data-figure="headline" data-model="jhpiego-seasonal-malaria-chemoprevention-smc">40</span> | 204, 2 kept fixed |
+| [Cost-effectiveness analysis of seasonal malaria chemoprevention (SMC) - Cameroon grant to Jhpiego (May 2025)](/jhpiego) | [GW](/evaluators/givewell) | May 2025 | <span data-figure="headline" data-model="jhpiego-seasonal-malaria-chemoprevention-smc">40</span> | 204, 2 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

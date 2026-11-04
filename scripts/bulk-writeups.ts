@@ -82,7 +82,7 @@ for (const c of lib.charities.values()) {
     "| --- | --- | --- | --- | --- |",
     ...models.map((m) => {
       const f = fidelity(m);
-      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | ${lib.owners.get(m.owner)!.short} | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced ? `${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""}` : "none: built from the published figures"} |`;
+      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | [${lib.owners.get(m.owner)!.short}](/evaluators/${m.owner}) | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced ? `${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""}` : "none: built from the published figures"} |`;
     }),
     "",
     ...(main.theoretical

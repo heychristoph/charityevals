@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in January 2
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Oxygen Access Project: oxygen for childhood pneumonia (Ambitious Impact, 2023 idea report, cost-effectiveness analysis updated 2024)](/oxygen-access-project) | AIM | January 2024 | <span data-figure="headline" data-model="oxygen-access-project-aim">2.8</span> | 311 |
+| [Oxygen Access Project: oxygen for childhood pneumonia (Ambitious Impact, 2023 idea report, cost-effectiveness analysis updated 2024)](/oxygen-access-project) | [AIM](/evaluators/ambitious-impact) | January 2024 | <span data-figure="headline" data-model="oxygen-access-project-aim">2.8</span> | 311 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Oxygen Access Project existed, not of the charity's own results. It is shown because Oxygen Access Project runs the programme today ([checked October 2026](https://www.oxygenaccessproject.org)) and no model of its actual work exists yet.
 

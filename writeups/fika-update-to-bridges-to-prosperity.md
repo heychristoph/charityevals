@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from May 2022 to Augu
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Update to Bridges to Prosperity cost-effectiveness analysis for Intervention Report (August 2022)](/fika) | GW | August 2022 | <span data-figure="headline" data-model="fika-update-to-bridges-to-prosperity">1.9</span> | 29, 1 kept fixed |
-| [Bridges to Prosperity Value of Information rough estimate (May 2022)](/fika/fika-bridges-to-prosperity-value-information) | GW | May 2022 | <span data-figure="headline" data-model="fika-bridges-to-prosperity-value-information">6.6</span> | 37 |
+| [Update to Bridges to Prosperity cost-effectiveness analysis for Intervention Report (August 2022)](/fika) | [GW](/evaluators/givewell) | August 2022 | <span data-figure="headline" data-model="fika-update-to-bridges-to-prosperity">1.9</span> | 29, 1 kept fixed |
+| [Bridges to Prosperity Value of Information rough estimate (May 2022)](/fika/fika-bridges-to-prosperity-value-information) | [GW](/evaluators/givewell) | May 2022 | <span data-figure="headline" data-model="fika-bridges-to-prosperity-value-information">6.6</span> | 37 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

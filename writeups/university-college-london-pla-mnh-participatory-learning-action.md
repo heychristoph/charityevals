@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in January 2023.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of PLA-MNH (Participatory Learning & Action - Maternal and Neonatal Health)](/university-college-london) | GW | January 2023 | <span data-figure="headline" data-model="university-college-london-pla-mnh-participatory-learning-action">9.0</span> | 79, 4 kept fixed |
+| [Cost-effectiveness analysis of PLA-MNH (Participatory Learning & Action - Maternal and Neonatal Health)](/university-college-london) | [GW](/evaluators/givewell) | January 2023 | <span data-figure="headline" data-model="university-college-london-pla-mnh-participatory-learning-action">9.0</span> | 79, 4 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

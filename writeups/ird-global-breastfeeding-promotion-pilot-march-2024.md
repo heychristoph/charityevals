@@ -3,11 +3,11 @@ GiveWell published 6 public models of this charity's work, from June 2021 to Mar
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of IRD breastfeeding promotion pilot - March 2024](/ird-global) | GW | March 2024 | <span data-figure="headline" data-model="ird-global-breastfeeding-promotion-pilot-march-2024">9.3</span> | 174, 2 kept fixed |
-| [IRD operational funding threshold analysis rough estimate, 2023](/ird-global/ird-global-operational-funding-threshold-2023) | GW | April 2023 | <span data-figure="headline" data-model="ird-global-operational-funding-threshold-2023">6.6</span> | 3, 1 kept fixed |
-| [2023 Cost-effectiveness analysis of IRD's ZM and mCCT program in Sindh](/ird-global/ird-global-2023-zm-mcct-in-sindh) | GW | February 2023 | <span data-figure="headline" data-model="ird-global-2023-zm-mcct-in-sindh">11</span> | 598, 1 kept fixed |
-| [IRD's ZM and mCCTs program value of information rough estimate](/ird-global/ird-global-zm-mccts-value-information) | GW | February 2023 | <span data-figure="headline" data-model="ird-global-zm-mccts-value-information">18</span> | 111, 2 kept fixed |
-| [IRD mCCT Value of information for evaluation rough estimate](/ird-global/ird-global-mcct-value-information-evaluation) | GW | November 2021 | <span data-figure="headline" data-model="ird-global-mcct-value-information-evaluation">10</span> | 86 |
-| [Cost-effectiveness analysis of IRD’s mCCT program in high-risk Sindh districts, 2021](/ird-global/ird-global-mcct-in-high-risk-sindh-districts-2021) | GW | June 2021 | <span data-figure="headline" data-model="ird-global-mcct-in-high-risk-sindh-districts-2021">6.8</span> | 401, 1 kept fixed |
+| [Cost-effectiveness analysis of IRD breastfeeding promotion pilot - March 2024](/ird-global) | [GW](/evaluators/givewell) | March 2024 | <span data-figure="headline" data-model="ird-global-breastfeeding-promotion-pilot-march-2024">9.3</span> | 174, 2 kept fixed |
+| [IRD operational funding threshold analysis rough estimate, 2023](/ird-global/ird-global-operational-funding-threshold-2023) | [GW](/evaluators/givewell) | April 2023 | <span data-figure="headline" data-model="ird-global-operational-funding-threshold-2023">6.6</span> | 3, 1 kept fixed |
+| [2023 Cost-effectiveness analysis of IRD's ZM and mCCT program in Sindh](/ird-global/ird-global-2023-zm-mcct-in-sindh) | [GW](/evaluators/givewell) | February 2023 | <span data-figure="headline" data-model="ird-global-2023-zm-mcct-in-sindh">11</span> | 598, 1 kept fixed |
+| [IRD's ZM and mCCTs program value of information rough estimate](/ird-global/ird-global-zm-mccts-value-information) | [GW](/evaluators/givewell) | February 2023 | <span data-figure="headline" data-model="ird-global-zm-mccts-value-information">18</span> | 111, 2 kept fixed |
+| [IRD mCCT Value of information for evaluation rough estimate](/ird-global/ird-global-mcct-value-information-evaluation) | [GW](/evaluators/givewell) | November 2021 | <span data-figure="headline" data-model="ird-global-mcct-value-information-evaluation">10</span> | 86 |
+| [Cost-effectiveness analysis of IRD’s mCCT program in high-risk Sindh districts, 2021](/ird-global/ird-global-mcct-in-high-risk-sindh-districts-2021) | [GW](/evaluators/givewell) | June 2021 | <span data-figure="headline" data-model="ird-global-mcct-in-high-risk-sindh-districts-2021">6.8</span> | 401, 1 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
