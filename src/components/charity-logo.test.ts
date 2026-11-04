@@ -14,7 +14,8 @@ describe("charity logos", () => {
     for (const [id, e] of Object.entries(logos)) {
       expect(charityIds.has(id) || ownerIds.has(id), id).toBe(true);
       expect(e.file).toBe(`/logos/${id}.webp`);
-      expect(e.source).toMatch(/^https?:\/\//);
+      // Our own mark is rendered from the site's favicon; every other logo was fetched.
+      expect(e.source).toMatch(id === "owner-charityevals" ? /^\/favicon\.svg$/ : /^https?:\/\//);
       const path = join(repo, "public", e.file);
       expect(statSync(path).size, id).toBeLessThanOrEqual(20 * 1024);
       const head = readFileSync(path).subarray(0, 12).toString("latin1");
