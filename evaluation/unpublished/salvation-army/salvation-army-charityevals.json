@@ -160,8 +160,8 @@
       "section": "cost",
       "label": "Overseas work paid through the US accounts (modelled separately)",
       "format": "usd",
-      "formula": "@salvation_army.sawso_mission_support + @salvation_army.sawso_livelihoods + @salvation_army.sawso_relief + @salvation_army.sawso_education + @salvation_army.sawso_business_development + @salvation_army.sawso_health + @salvation_army.sawso_anti_trafficking + (@salvation_army.sait_us_self_denial_gbp + @salvation_army.sait_us_ihq_support_gbp) * @fx.usd_per_gbp_2024",
-      "explainer": "The World Service Office's programmes (fiscal 2025, by sector) and the US territories' world-services money to International Headquarters (the Self-Denial Fund and headquarters support, from the International Trust's accounts, pounds at the 2024 rate: the Trust's year to March 2025 is mostly 2024). It is spent abroad on other kinds of work, so it has a model of its own (salvation-army-charityevals-international), weighted by this spending on the charity's page; it is left out of this model's cost and outcomes."
+      "formula": "@salvation_army.sawso_mission_support + @salvation_army.sawso_livelihoods + @salvation_army.sawso_relief + @salvation_army.sawso_education + @salvation_army.sawso_business_development + @salvation_army.sawso_health + @salvation_army.sawso_anti_trafficking + (@salvation_army.sait_us_self_denial_gbp + @salvation_army.sait_us_ihq_support_gbp + @salvation_army.sait_us_restricted_gbp) * @fx.usd_per_gbp_2024",
+      "explainer": "The World Service Office's programmes (fiscal 2025, by sector) and the US territories' world-services money to International Headquarters (the Self-Denial Fund, headquarters support and restricted gifts, mostly to the Officers' Support Endowment Fund, from the International Trust's accounts, pounds at the 2024 rate: the Trust's year to March 2025 is mostly 2024). It is spent abroad on other kinds of work, so it has a model of its own (salvation-army-charityevals-international), weighted by this spending on the charity's page; it is left out of this model's cost and outcomes."
     },
     {
       "id": "thrift_store_costs",
@@ -1151,11 +1151,11 @@
       "format": "small",
       "value": {
         "low": 0.005,
-        "best": 0.03,
-        "high": 0.1
+        "best": 0.015,
+        "high": 0.06
       },
       "kind": "judgment",
-      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate. A 1978 follow-up of 97 men in a Salvation Army alcoholism programme (Journal of Studies on Alcohol 39(7):1267-1275, doi:10.15288/jsa.1978.39.1267) found 42-77% abstinent six months after discharge, without a control group. Reviews of residential treatment with comparison groups rate the evidence moderate, with outcomes better than or no different from other treatment (Reif et al. 2014, Psychiatric Services, doi:10.1176/appi.ps.201300242; de Andrade et al. 2019, Drug and Alcohol Dependence, doi:10.1016/j.drugalcdep.2019.03.031); people with alcohol use disorder who get help are more likely to be in remission three years on than those who don't, and relapse less over 16 years (Moos & Moos 2006, Addiction, doi:10.1111/j.1360-0443.2006.01310.x), while most people who recover do so without treatment (Tucker et al. 2020, Alcohol Research: Current Reviews, doi:10.35946/arcr.v40.3.02), so the gain over no treatment is a minority of those treated. 30% extra remission for graduates and 3% for other admissions, over everyone counted: about 0.03, range 0.005-0.1."
+      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate (about 7% of those counted), and 20-24,000 leave early (about 14%). Among people with alcohol use disorder who sought help, those who got treatment were about 20 percentage points more likely to be in remission three years on than those who didn't, selection included (Moos & Moos 2006, Addiction, doi:10.1111/j.1360-0443.2006.01310.x); reviews of residential treatment rate the evidence moderate, with outcomes better than or no different from other treatment (Reif et al. 2014, Psychiatric Services, doi:10.1176/appi.ps.201300242; de Andrade et al. 2019, Drug and Alcohol Dependence, doi:10.1016/j.drugalcdep.2019.03.031); most people who recover do so without treatment (Tucker et al. 2020, Alcohol Research: Current Reviews, doi:10.35946/arcr.v40.3.02). A 1978 follow-up of a Salvation Army programme found 42-77% abstinent six months after discharge, without a control group (Journal of Studies on Alcohol 39(7):1267-1275). 15 points for graduates (20 less selection) and 3 for those who leave early, over everyone counted: 0.07 × 0.15 + 0.14 × 0.03 = 0.015, range 0.005-0.06."
     },
     {
       "id": "rehab_disability_weight",
@@ -1629,12 +1629,12 @@
       "label": "Delivery adjustment (fidelity, compliance, follow-through)",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
+        "low": 0.7,
+        "best": 0.9,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. Reference class: the site's other models of US service charities put delivery at 90% (Habitat for Humanity: homes built and repairs, counted per house), 95% (American Red Cross: casework and smoke alarms, counted per household) and 100% (United Way: dollars granted). The Salvation Army's counts are looser than all three (touchpoints, not people; meals derived from weight), so lower: 85% (60-100%) for every branch."
+      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. Cross-check of the largest count: the Western Territory recorded $109.3M of donated food and $5.7M of government food in fiscal 2023 (statements, note 7); scaled to the nation by its share of the households helped (wt_share_of_households, 24%), that is about $480M of food, or about 178M meals at the Thrifty Food Plan's $2.70 a meal, against 184M meals reported; donated food is valued below retail, so the food would make somewhat more meals, and some of it feeds shelter and centre residents counted as nights. The meal count holds up; the other counts are touchpoints with no such check. 90% (70-100%) for every branch."
     },
     {
       "id": "leverage_funging_adj",
