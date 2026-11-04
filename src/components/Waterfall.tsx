@@ -61,33 +61,39 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
     return { left: `${l}%`, width: `max(2px, ${r - l}%)` };
   };
   const owner = lib.owners.get(model.owner)?.name ?? "The evaluator";
-  const startLabel = w.start === "evaluator" ? `As ${owner} calculates it` : "This model at the site's defaults";
   const unitLabel = lib.assumptions.units[w.native.unit]?.label ?? w.native.unit;
   return (
     <details className="wf" open>
       <summary>
         <span className="wf-title">{w.start === "evaluator" ? `How ${possessive(owner)} figure becomes ours` : "How the model's figure becomes the one shown"}</span>
       </summary>
-      <p className="wf-native">
-        {w.start === "evaluator" ? `${possessive(owner)} result, in the model's own unit` : "The model's result, in its own unit"}: <strong className="num">{fmtNative(w.native.value)}</strong> {unitLabel} per dollar.
-        {w.native.unit !== "daly" && <> In years of healthy life per $1,000 {w.start === "evaluator" ? `at ${possessive(owner)} own rates` : "at the site's defaults"} that is{" "}
-          <strong className="num">{formatYears(w.startValue)}</strong>{" "}
-          (<a href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`}>how {unitLabel} become healthy years</a>).</>}
-      </p>
-      <p className="wf-lede small">
-        From there, each step below multiplies the figure. They are applied one at a time in this order, so together they give the figure shown. Open a step to see where it comes from.
-      </p>
-      <ol className="wf-steps">
-        <li className="wf-step wf-end">
-          <span className="wf-label">{startLabel}</span>
-          <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.startValue)} /></span>
-          <span className="wf-value num">{formatYears(w.startValue)}</span>
-        </li>
+      {/* Their result in its own unit, and the same figure in years of healthy life per $1,000. */}
+      <div className="wf-convert">
+        <div className="wf-unit">
+          <span className="wf-unit-num num">{fmtNative(w.native.value)}</span>
+          <span className="wf-unit-label">{unitLabel} per dollar</span>
+          <span className="wf-unit-by small">{w.start === "evaluator" ? possessive(owner) + " result" : "the model's result"}</span>
+        </div>
+        {w.native.unit !== "daly" && (
+          <>
+            <a className="wf-arrow small" href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`} title={`How ${unitLabel} become healthy years`}>
+              <span className="wf-arrow-mark" aria-hidden>→</span>
+              <span>in healthy years{w.start === "evaluator" ? `, at ${possessive(owner)} rates` : ""}</span>
+            </a>
+            <div className="wf-unit">
+              <span className="wf-unit-num num">{formatYears(w.startValue)}</span>
+              <span className="wf-unit-label">years of healthy life per $1,000</span>
+              <span className="wf-unit-by small">where the steps below start</span>
+            </div>
+          </>
+        )}
+      </div>
+      <ol className="wf-steps" style={{ paddingLeft: 0 }}>
         {w.steps.map((s, i) => {
           const href = hrefOf(s.target);
           const r = s.to / s.from;
           return (
-            <li key={i} className={`wf-step wf-k-${s.kind}`}>
+            <li key={i} className={`wf-step wf-k-${s.kind}`} style={{ marginTop: 0 }}>
               <span className="wf-label">
                 {href ? <a href={href} title={s.label}>{s.label}</a> : <span className="wf-text" title={s.label}>{s.label}</span>}
                 {KIND[s.kind] && <span className="wf-kind small">{KIND[s.kind]}</span>}
@@ -97,7 +103,7 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
             </li>
           );
         })}
-        <li className="wf-step wf-end">
+        <li className="wf-step wf-end" style={{ marginTop: 0 }}>
           <span className="wf-label">As shown on this page</span>
           <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.end)} /></span>
           <span className="wf-value num">{formatYears(w.end)}</span>
