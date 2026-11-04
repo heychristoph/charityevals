@@ -3,19 +3,19 @@
   "name": "Médecins Sans Frontières (Doctors Without Borders): medical care in crises",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"COD":0.125,"TCD":0.125,"SDN":0.125,"SSD":0.125,"NGA":0.125,"NER":0.125,"AFG":0.125,"SOM":0.125},
-  "beneficiaries_note": "Our build: medical care in about 70 countries; MSF publishes no split by country in the build, so the countries its rows name more than once share equally (DRC, Chad, Sudan, South Sudan, Nigeria, Niger, Afghanistan, Somalia; a judgment).",
+  "beneficiaries": {"COD":0.147336,"SDN":0.141066,"PSE":0.126437,"SSD":0.118077,"NGA":0.094044,"YEM":0.092999,"TCD":0.075235,"CAF":0.071055,"AFG":0.07001,"NER":0.063741},
+  "beneficiaries_note": "Our build: medical care in about 70 countries, weighted by programme spending in MSF's ten largest countries (Financial Report 2025, p. 10: the DRC 141, Sudan 135, Palestine 121, South Sudan 113, Nigeria 90, Yemen 89, Chad 72, the Central African Republic 68, Afghanistan 67 and Niger 61 million euros, 957 million of 1,580), the other 60 countries taken as like them (a judgment).",
   "template": "direct-health",
   "estimate_basis": "unit_cost",
   "charity": "doctors-without-borders",
   "owner": "charityevals",
-  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating against measles in outbreaks, plus illness averted by surgery and mental-health care. Its awareness-raising and MSF Access advocacy publish no outcome data and are valued by a proxy. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else.",
+  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating in outbreaks, plus illness averted by surgery and mental-health care; four branches MSF publishes no count for (seasonal malaria chemoprevention, other outbreak vaccination, drug-resistant TB, water and sanitation) are built from the research literature with our estimates of their reach. MSF counts its patients but measures no branch's effect against a comparison, so every branch is discounted by the shared missing-data slider. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else. Its awareness-raising, MSF Access and DNDi grant are a separate model.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Médecins Sans Frontières, medical care in crises (2025)",
     "url": "https://charityevals.org/doctors-without-borders-charityevals",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -78,7 +78,7 @@
     {
       "id": "adjustments",
       "title": "Adjustments",
-      "explainer": "Each branch has its own counterfactual (would the patient have been treated by someone else?); the rest apply to every branch: trust in the case-fatality evidence, MSF's share of the resources in the facilities it supports, how faithfully the counts describe care given, funging, and the wait until care is given."
+      "explainer": "Each branch has its own counterfactual (would the patient have been treated by someone else?) and its own missing-data marker; the rest apply to every branch: trust in the case-fatality evidence, MSF's share of the resources in the facilities it supports, how faithfully the counts describe care given, funging, and the wait until care is given."
     },
     {
       "id": "bridges",
@@ -90,12 +90,6 @@
       "id": "outcome",
       "title": "Outcome",
       "explainer": "The outcome in the family's shared unit, per dollar."
-    },
-    {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
     },
     {
       "id": "donor",
@@ -153,30 +147,17 @@
       "section": "reach",
       "label": "Families receiving relief item distributions, 2025",
       "format": "integer",
-      "value": 653300,
-      "kind": "observed",
-      "source": {
-        "title": "MSF International Activity Report 2025: 2025 figures",
-        "url": "https://www.msf.org/international-activity-report-2025/2025-figures",
-        "retrieved": "2026-11-03",
-        "page": "Activity highlights",
-        "quote": "Families receiving relief item distributions: 653,300"
-      },
-      "explainer": "Families who got MSF's relief items (shelter material, blankets, mats, jerrycans, cooking sets, hygiene kits, mosquito nets) in 2025, MSF's count."
+      "explainer": "The shared MSF figure (facts/msf.json), read by every MSF model that needs it.",
+      "formula": "@msf.relief_families"
     },
     {
       "id": "relief_cost_per_family_eur",
       "section": "cost",
       "label": "Cost of a family's relief-item distribution, items and delivery (euros)",
       "format": "number",
-      "value": {
-        "low": 25,
-        "best": 45,
-        "high": 90
-      },
-      "kind": "judgment",
       "unit": "EUR",
-      "explainer": "MSF doesn't split its spending by activity or publish kit prices, so the relief distributions' cost is the families reached times a cost per family, our judgment: 45 euros. The public anchor is UK for UNHCR's family emergency survival kit (mosquito nets, jerrycans, buckets, sanitary pads, blankets, solar lamps) at £65, about 76 euros (https://shop.unrefugees.org.uk/products/emergency-survival-kit), a donor gift price for a full kit; MSF's average is lower because many of its distributions are hygiene or water kits only and it buys in bulk through MSF Supply, though transport and staff in insecure areas add to it. Low end a hygiene kit only; high end the full UNHCR kit with delivery. About 2% of programme spending at the best guess."
+      "explainer": "The shared MSF figure (facts/msf.json), read by every MSF model that needs it.",
+      "formula": "@msf.relief_cost_per_family_eur"
     },
     {
       "id": "relief_program_spend_eur",
@@ -192,17 +173,52 @@
       "section": "cost",
       "label": "Search and rescue at sea, 2025 (euros)",
       "format": "number",
-      "value": 3152045,
+      "unit": "EUR",
+      "explainer": "The shared MSF figure (facts/msf.json), valued in MSF's relief model: MSF had no ship until mid-November 2025.",
+      "formula": "@msf.search_rescue_eur"
+    },
+    {
+      "id": "other_humanitarian_eur",
+      "section": "cost",
+      "label": "Other humanitarian activities, 2025 (euros)",
+      "format": "number",
+      "value": 15858000,
       "kind": "observed",
       "unit": "EUR",
       "source": {
         "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
         "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
         "retrieved": "2026-11-03",
-        "page": "p. 68, Finances by country: Search and rescue operations",
-        "quote": "Programmes 3,152,045"
+        "page": "p. 12, Combined Statement of Financial Activities",
+        "quote": "Other humanitarian activities 2.2.6 (15,858) - (15,858) (21,962)"
       },
-      "explainer": "The Mediterranean search and rescue programme. It is valued in the relief model's proxy section: in 2025 MSF had no rescue ship until November and publishes no count of people rescued for the year."
+      "explainer": "Mostly the cost of supplies and services MSF Supply and MSF Logistique provide to other organisations, plus MSF's 2 million euro contribution to the Drugs for Neglected Diseases initiative (DNDi, valued in MSF's advocacy and research model)."
+    },
+    {
+      "id": "goods_sold_eur",
+      "section": "cost",
+      "label": "Equipment and services sold to other organisations, 2025 (euros)",
+      "format": "number",
+      "unit": "EUR",
+      "explainer": "The shared MSF figure (facts/msf.json). Only what MSF spends beyond the sales is a cost of its own: the net is counted here with the medical programmes (supplies for other organisations' medical care; no outcome is counted for it, about 0.1% of the budget).",
+      "formula": "@msf.goods_sold_eur"
+    },
+    {
+      "id": "dndi_eur",
+      "section": "cost",
+      "label": "Contribution to DNDi, 2025 (euros)",
+      "format": "number",
+      "value": 2000000,
+      "kind": "observed",
+      "unit": "EUR",
+      "source": {
+        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
+        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 37, Note 5.1",
+        "quote": "The commitment has been reduced for 2024-2025 to 2 million EUR per year."
+      },
+      "explainer": "MSF's grant to the Drugs for Neglected Diseases initiative, part of other humanitarian activities; it is valued in MSF's advocacy and research model, so it is taken out here."
     },
     {
       "id": "total_expenses_eur",
@@ -259,16 +275,16 @@
       "section": "cost",
       "label": "Spending on MSF's medical programmes, 2025 (US$)",
       "format": "usd",
-      "formula": "(programmes_eur + programme_support_eur - relief_program_spend_eur - search_rescue_eur) * @fx.usd_per_eur_2025",
-      "explainer": "Field programmes and their support in 2025, less the relief distributions and search and rescue (MSF's other model), at the IRS's 2025 yearly average euro rate. MSF reports outputs for the movement as a whole, not costs per activity, so every medical branch below is counted against this one budget (they are produced together, in the same hospitals and clinics)."
+      "formula": "(programmes_eur + programme_support_eur - relief_program_spend_eur - search_rescue_eur + other_humanitarian_eur - dndi_eur - goods_sold_eur) * @fx.usd_per_eur_2025",
+      "explainer": "Field programmes and their support in 2025, less the relief distributions and search and rescue (MSF's relief model), plus the net cost of supplies provided to other organisations (other humanitarian activities less DNDi's grant and the sales), at the IRS's 2025 yearly average euro rate. Awareness-raising, MSF Access and the DNDi grant are MSF's advocacy and research model. MSF reports outputs for the movement as a whole, not costs per activity, so every medical branch below, the four built from the literature included, is counted against this one budget (they are produced together, in the same hospitals and clinics)."
     },
     {
       "id": "overhead_ratio",
       "section": "cost",
       "label": "Overhead multiplier (total ÷ programme expenses)",
       "format": "multiple",
-      "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads fundraising (16% of spending) and management (5%) over the programmes in proportion to their cost, as GiveWell and ACE do."
+      "formula": "(total_expenses_eur - goods_sold_eur) / (social_mission_eur - goods_sold_eur)",
+      "explainer": "Total over social-mission expenses, both less the goods sold to other organisations (the buyers pay for those and their share of overhead): spreads fundraising and administration over every programme alike, as in MSF's other models."
     },
     {
       "id": "cost_total",
@@ -282,8 +298,8 @@
       "section": "reach",
       "label": "Patients counted across all branches, 2025 (episodes, not unique people)",
       "format": "integer",
-      "formula": "malaria_patients + measles_doses + sam_in_patients + sam_out_patients + births + cholera_patients + hiv_patients + tb_patients + hcv_patients + vhf_patients + inpatient_patients + outpatient_patients + surgery_patients + mental_health_consultations + sexual_violence_patients + torture_patients",
-      "explainer": "The sum of the counts below, each service once (births once though it has a mothers' and a newborns' branch). A summary: each branch uses its own count."
+      "formula": "malaria_patients + measles_doses + sam_in_patients + sam_out_patients + births + cholera_patients + hiv_patients + tb_patients + hcv_patients + vhf_patients + inpatient_patients + outpatient_patients + surgery_patients + mental_health_consultations + sexual_violence_patients + torture_patients + smc_children + ovacc_doses + drtb_patients + wash_people",
+      "explainer": "The sum of the counts below, each service once (births once though it has a mothers' and a newborns' branch), the four branches built from the literature included at our estimates of their reach. A summary: each branch uses its own count."
     },
     {
       "id": "cost_per_person",
@@ -584,7 +600,7 @@
       "section": "effect",
       "label": "Chance of death without care, averaged over all patients (summary)",
       "format": "small",
-      "formula": "(malaria_patients * malaria_risk_untreated + measles_doses * measles_risk_untreated + sam_in_patients * sam_in_risk_untreated + sam_out_patients * sam_out_risk_untreated + births * maternal_risk_untreated + births * neonatal_risk_untreated + cholera_patients * cholera_risk_untreated + hiv_patients * hiv_risk_untreated + tb_patients * tb_risk_untreated + hcv_patients * hcv_risk_untreated + vhf_patients * vhf_risk_untreated + inpatient_patients * inpatient_risk_untreated + outpatient_patients * outpatient_risk_untreated + surgery_patients * surgery_risk_untreated) / people_reached",
+      "formula": "(malaria_patients * malaria_risk_untreated + measles_doses * measles_risk_untreated + sam_in_patients * sam_in_risk_untreated + sam_out_patients * sam_out_risk_untreated + births * maternal_risk_untreated + births * neonatal_risk_untreated + cholera_patients * cholera_risk_untreated + hiv_patients * hiv_risk_untreated + tb_patients * tb_risk_untreated + hcv_patients * hcv_risk_untreated + vhf_patients * vhf_risk_untreated + inpatient_patients * inpatient_risk_untreated + outpatient_patients * outpatient_risk_untreated + surgery_patients * surgery_risk_untreated + smc_children * smc_malaria_mortality * smc_season_share + ovacc_doses * ovacc_attack_rate * ovacc_cfr + drtb_patients * tb_risk_untreated + wash_people * wash_years * wash_diarrhoea_death_rate) / people_reached",
       "unit": "deaths / patient",
       "explainer": "Summary for reading: each branch's untreated risk, weighted by its patients."
     },
@@ -593,7 +609,7 @@
       "section": "effect",
       "label": "Share of that risk MSF's care averts, averaged (summary)",
       "format": "percent",
-      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction) / (malaria_patients * malaria_risk_untreated + measles_doses * measles_risk_untreated + sam_in_patients * sam_in_risk_untreated + sam_out_patients * sam_out_risk_untreated + births * maternal_risk_untreated + births * neonatal_risk_untreated + cholera_patients * cholera_risk_untreated + hiv_patients * hiv_risk_untreated + tb_patients * tb_risk_untreated + hcv_patients * hcv_risk_untreated + vhf_patients * vhf_risk_untreated + inpatient_patients * inpatient_risk_untreated + outpatient_patients * outpatient_risk_untreated + surgery_patients * surgery_risk_untreated)",
+      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction + smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction + ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted + drtb_patients * tb_risk_untreated * drtb_risk_reduction + wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction) / (malaria_patients * malaria_risk_untreated + measles_doses * measles_risk_untreated + sam_in_patients * sam_in_risk_untreated + sam_out_patients * sam_out_risk_untreated + births * maternal_risk_untreated + births * neonatal_risk_untreated + cholera_patients * cholera_risk_untreated + hiv_patients * hiv_risk_untreated + tb_patients * tb_risk_untreated + hcv_patients * hcv_risk_untreated + vhf_patients * vhf_risk_untreated + inpatient_patients * inpatient_risk_untreated + outpatient_patients * outpatient_risk_untreated + surgery_patients * surgery_risk_untreated + smc_children * smc_malaria_mortality * smc_season_share + ovacc_doses * ovacc_attack_rate * ovacc_cfr + drtb_patients * tb_risk_untreated + wash_people * wash_years * wash_diarrhoea_death_rate)",
       "explainer": "Summary for reading: each branch's reduction, weighted by its untreated deaths."
     },
     {
@@ -601,15 +617,15 @@
       "section": "effect",
       "label": "Share of the deaths averted that are indirect (outcome-weighted average of the branches, for reading only)",
       "format": "number",
-      "formula": "(malaria_deaths_averted * malaria_indirect_deaths_ratio * malaria_death_share_under5 / (1 + malaria_indirect_deaths_ratio * malaria_death_share_under5) + measles_deaths_averted * measles_indirect_deaths_ratio * measles_share_under5 / (1 + measles_indirect_deaths_ratio * measles_share_under5) + cholera_deaths_averted * cholera_indirect_deaths_ratio * cholera_share_under5 / (1 + cholera_indirect_deaths_ratio * cholera_share_under5)) / deaths_averted",
-      "explainer": "Malaria, measles and cholera carry indirect deaths (the after-effects GiveWell counts per direct death); the other branches' risks are all-cause case fatality of the episode treated. Summary: indirect deaths as a share of all deaths averted."
+      "formula": "(malaria_deaths_averted * malaria_indirect_deaths_ratio * malaria_death_share_under5 / (1 + malaria_indirect_deaths_ratio * malaria_death_share_under5) + measles_deaths_averted * measles_indirect_deaths_ratio * measles_share_under5 / (1 + measles_indirect_deaths_ratio * measles_share_under5) + cholera_deaths_averted * cholera_indirect_deaths_ratio * cholera_share_under5 / (1 + cholera_indirect_deaths_ratio * cholera_share_under5) + smc_deaths_averted * @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 / (1 + @givewell.indirect_malaria_deaths_per_direct_malaria_death_2) + wash_deaths_averted * @givewell_shared.indirect_deaths_per_direct_diarrhea_death * wash_share_under5 / (1 + @givewell_shared.indirect_deaths_per_direct_diarrhea_death * wash_share_under5)) / deaths_averted",
+      "explainer": "Malaria, measles, cholera, SMC and water and sanitation carry indirect deaths (the after-effects GiveWell counts per direct death); the other branches' risks are all-cause case fatality of the episode treated. Summary: indirect deaths as a share of all deaths averted."
     },
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
       "label": "Deaths averted per patient, before counterfactual and adjustments (summary)",
       "format": "small",
-      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction) / people_reached",
+      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction + smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction + ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted + drtb_patients * tb_risk_untreated * drtb_risk_reduction + wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction) / people_reached",
       "explainer": "Summary for reading across the branches."
     },
     {
@@ -893,6 +909,19 @@
       "explainer": "The ratio above is against well-nourished or treated children, so treatment removes most of the excess; deaths still happen among children who default or deteriorate. Our judgment, 85%."
     },
     {
+      "id": "sam_out_share_from_inpatient",
+      "section": "effect",
+      "label": "Outpatient malnutrition: share of admissions that are children discharged from inpatient care",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Children stabilised in inpatient feeding centres usually finish treatment in the outpatient programme and are admitted there again; their risk is counted in the inpatient branch. If about 70% of the 213,700 inpatients go on to outpatient care, that is 0.7 × 213,700 / 615,200 = 24% of outpatient admissions. Our judgment, 25%."
+    },
+    {
       "id": "maternal_risk_untreated",
       "section": "effect",
       "label": "Births: chance the mother would have died without MSF's care",
@@ -993,14 +1022,8 @@
         "best": 0.9,
         "high": 0.97
       },
-      "kind": "estimate",
-      "source": {
-        "title": "WHO, Cholera fact sheet",
-        "url": "https://www.who.int/news-room/fact-sheets/detail/cholera",
-        "retrieved": "2026-11-03",
-        "quote": "The case fatality rate in treatment centres should remain below 1%."
-      },
-      "explainer": "With rehydration in a treatment centre case fatality should stay below 1% (WHO): against 6% untreated, about 85-95% averted."
+      "kind": "judgment",
+      "explainer": "With rehydration in a treatment centre case fatality should stay below 1% (WHO): against 6% untreated, about 85-95% averted. Source: WHO, Cholera fact sheet, https://www.who.int/news-room/fact-sheets/detail/cholera."
     },
     {
       "id": "cholera_share_under5",
@@ -1109,14 +1132,8 @@
         "best": 0.45,
         "high": 0.6
       },
-      "kind": "estimate",
-      "source": {
-        "title": "Tiemersma et al. 2011, PLoS ONE 6(4):e17601",
-        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3070694/",
-        "retrieved": "2026-11-03",
-        "quote": "variously reported between 53% and 86%, with a weighted mean of 70%."
-      },
-      "explainer": "Before drugs, about 70% (53-86%) of smear-positive patients died within ten years and about 20% of smear-negative ones (Tiemersma et al. 2011). A mix of roughly half each gives 45%; more among people with HIV, who weren't in those studies."
+      "kind": "judgment",
+      "explainer": "Before drugs, about 70% (53-86%) of smear-positive patients died within ten years and about 20% of smear-negative ones (Tiemersma et al. 2011). A mix of roughly half each gives 45%; more among people with HIV, who weren't in those studies. Source: Tiemersma et al. 2011, PLoS ONE 6(4):e17601, https://pmc.ncbi.nlm.nih.gov/articles/PMC3070694/."
     },
     {
       "id": "tb_risk_reduction",
@@ -1377,12 +1394,25 @@
       "explainer": "MSF doesn't publish how many emergency patients are then admitted; our judgment, 60% treated and sent home (counted here like consultations), the rest admitted and counted as inpatients."
     },
     {
+      "id": "outpatient_share_other_branches",
+      "section": "effect",
+      "label": "Consultations: share that are other branches' follow-up visits",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.35,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "MSF's 17.1 million consultations include visits that belong to patients counted in other branches: the outpatient-feeding programme's weekly visits (615,200 children × about 6 visits, 3.7 million), monthly ART and TB visits (about 0.8 million), antenatal visits of the births counted (about 1.2 million). That is about 40% of the 13.5 million non-malaria consultations; our judgment, 35%, as some are counted apart."
+    },
+    {
       "id": "outpatient_patients",
       "section": "reach",
       "label": "Other consultations and emergency visits (not counted in a disease branch)",
       "format": "integer",
-      "formula": "outpatient_consultations - malaria_patients + er_admissions * er_share_not_admitted",
-      "explainer": "Outpatient consultations other than the malaria cases, plus emergency visits not admitted."
+      "formula": "(outpatient_consultations - malaria_patients) * (1 - outpatient_share_other_branches) + er_admissions * er_share_not_admitted",
+      "explainer": "Outpatient consultations other than the malaria cases and other branches' follow-up visits, plus emergency visits not admitted."
     },
     {
       "id": "outpatient_risk_untreated",
@@ -1497,18 +1527,269 @@
       "explainer": "Fractures set, limbs saved, wounds and burns healed: GBD's weights for untreated fractures and amputations are 0.1-0.3 for years. Gosselin et al.'s MSF trauma-centre analysis (about $170-220 per DALY averted, deaths included) is the anchor for the total; our judgment, 0.3 DALYs per operation for disability alone, discounted already."
     },
     {
+      "id": "smc_children",
+      "section": "reach",
+      "label": "Seasonal malaria chemoprevention: children reached, 2025 (our estimate)",
+      "format": "integer",
+      "value": {
+        "low": 100000,
+        "best": 300000,
+        "high": 800000
+      },
+      "kind": "judgment",
+      "explainer": "MSF gives seasonal malaria chemoprevention (monthly doses in the rainy season) to under-fives in the Sahel, but publishes no movement-wide count for 2025. Anchor: MSF reached 170,000 children in Chad and Mali in 2012 (https://doctorswithoutborders.org/latest/malaria-offering-children-chance, retrieved 2026-11-04), and about 735,000 in Niger, Chad and Mali in 2014; national programmes funded by the Global Fund and PMI have since taken over most SMC (more than 30 million children a year), so MSF's own share is smaller. Our judgment, 300,000."
+    },
+    {
+      "id": "smc_malaria_mortality",
+      "section": "effect",
+      "label": "SMC: yearly malaria death rate of children 1-59 months (Chad, GiveWell)",
+      "format": "percent",
+      "formula": "@givewell_shared.malaria_mortality_1_59m_chad_2024",
+      "explainer": "The site's shared figure for Chad, the Sahel country in the site's facts, where MSF's SMC is mostly given (Chad, Niger, Mali)."
+    },
+    {
+      "id": "smc_season_share",
+      "section": "effect",
+      "label": "SMC: share of the year's malaria deaths in the months covered",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "In the Sahel most malaria transmission falls in the three to five rainy-season months that SMC covers (WHO recommends SMC where more than 60% of cases fall within four months), and some deaths come after the last monthly dose. Our judgment, 70%."
+    },
+    {
+      "id": "smc_risk_reduction",
+      "section": "effect",
+      "label": "SMC: reduction in malaria among children given it",
+      "format": "percent",
+      "formula": "@givewell.reduction_in_malaria_incidence_among_the_smc_eligible_popula",
+      "explainer": "The site's shared effect of SMC (Cissé et al. 2016, a stepped-wedge cluster-randomised trial in Senegal: 60% fewer confirmed malaria cases, https://doi.org/10.1371/journal.pmed.1002175), applied to malaria deaths as GiveWell does. The meta-analysis of 12 randomised trials (Thwing et al. 2023, https://doi.org/10.4269/ajtmh.23-0481) finds a 73% reduction in clinical malaria and 47% in severe malaria; at scale, malaria deaths in hospital fell 42-57% during the season (Baba et al. 2020, https://doi.org/10.1016/s0140-6736(20)32227-3). Cissé et al.'s 60% is the trial's effect in the population offered SMC (coverage above 80% a month), so missed cycles are already in it."
+    },
+    {
+      "id": "smc_counterfactual_adj",
+      "section": "adjustments",
+      "label": "SMC: share of the children no one else would have covered",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "MSF runs SMC mostly where national campaigns don't reach (insecure districts, displaced people) or alongside them. Our judgment, 60%."
+    },
+    {
+      "id": "ovacc_doses",
+      "section": "reach",
+      "label": "Outbreak vaccination other than measles (meningitis, cholera, yellow fever): doses, 2025 (our estimate)",
+      "format": "integer",
+      "value": {
+        "low": 300000,
+        "best": 1000000,
+        "high": 3000000
+      },
+      "kind": "judgment",
+      "explainer": "MSF vaccinates in meningitis, cholera, yellow fever and diphtheria outbreaks but publishes a count only for measles (2.1 million doses in 2025). Our judgment, a million doses, about half the measles count."
+    },
+    {
+      "id": "ovacc_attack_rate",
+      "section": "effect",
+      "label": "Outbreak vaccination: share of the people targeted who would fall ill in the outbreak",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "Meningitis outbreaks in the meningitis belt after 2010 had attack rates of 37-203 per 100,000 (median 112; Fernandez et al. 2019, https://doi.org/10.1093/infdis/jiz355); cholera and yellow fever outbreaks run higher in camps. Our judgment, 0.3%."
+    },
+    {
+      "id": "ovacc_cfr",
+      "section": "effect",
+      "label": "Outbreak vaccination: chance a case dies",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.07,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Meningococcal meningitis kills about 10% of cases even with treatment, yellow fever 20-50% of severe cases, cholera about 1% with care. Mixed by the doses' diseases, our judgment, 7%."
+    },
+    {
+      "id": "ovacc_share_averted",
+      "section": "effect",
+      "label": "Outbreak vaccination: share of those cases a campaign dose averts",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.15,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Reactive campaigns come weeks into an outbreak: MSF's meningitis campaign in Katsina, Nigeria averted 4-12% of cases overall, up to 50% where it was early (Ferrari et al. 2014, https://doi.org/10.1093/inthealth/ihu062); across 210 outbreaks, outbreak response immunisation averted 21,300 meningitis, 283,000 cholera and 1.5 million yellow fever cases, and faster responses avert far more (Delport et al. 2025, https://doi.org/10.1136/bmjgh-2024-016887; Delport et al. 2026 on response times). Our judgment, 15%."
+    },
+    {
+      "id": "ovacc_share_under5",
+      "section": "effect",
+      "label": "Outbreak vaccination: share of the deaths averted under five",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Meningitis campaigns target ages 1-29, cholera everyone over one, yellow fever everyone over nine months. Our judgment, 30%."
+    },
+    {
+      "id": "ovacc_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Outbreak vaccination: share of the doses no one else would have given in time",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "As for measles: campaigns are joint with ministries and WHO's International Coordinating Group, MSF doing much of the delivery. Our judgment, 70%."
+    },
+    {
+      "id": "drtb_patients",
+      "section": "reach",
+      "label": "Drug-resistant TB: patients started on treatment, 2025 (our estimate)",
+      "format": "integer",
+      "value": {
+        "low": 1500,
+        "best": 3000,
+        "high": 5000
+      },
+      "kind": "judgment",
+      "explainer": "MSF's 2025 highlights count only first-line TB starts (30,400). It treated 2,840 people for MDR-TB in 2018 (of 19,400 TB patients) and 1,950 in 2013 (MSF International Activity Reports); with more TB patients now, our judgment, 3,000."
+    },
+    {
+      "id": "drtb_risk_reduction",
+      "section": "effect",
+      "label": "Drug-resistant TB: share of the risk of death treatment removes",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "WHO reports 68% treatment success for MDR/RR-TB worldwide; MSF's shorter all-oral regimens did better in its trial (TB-PRACTECAL, 89% favourable outcomes with BPaLM). Our judgment, 65%, below the first-line figure for the deaths that come anyway among people with advanced disease or HIV."
+    },
+    {
+      "id": "drtb_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Drug-resistant TB: share of patients who wouldn't have been treated elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Fewer than half of the people with MDR-TB are diagnosed and treated worldwide (WHO), and MSF's DR-TB projects are often the only ones in their area. Our judgment, 60%."
+    },
+    {
+      "id": "wash_people",
+      "section": "reach",
+      "label": "Water and sanitation: people served in camps and outbreaks, 2025 (our estimate)",
+      "format": "integer",
+      "value": {
+        "low": 300000,
+        "best": 1200000,
+        "high": 4000000
+      },
+      "kind": "judgment",
+      "explainer": "MSF supplies water, latrines and hygiene in displacement camps and cholera responses (Sudan, Chad, the DRC, South Sudan), with no movement-wide count. Our judgment, 1.2 million people, from the size of the camps it serves."
+    },
+    {
+      "id": "wash_years",
+      "section": "effect",
+      "label": "Water and sanitation: years of service per person",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Emergency water and sanitation run for the months of an emergency or outbreak response. Our judgment, half a year."
+    },
+    {
+      "id": "wash_diarrhoea_death_rate",
+      "section": "effect",
+      "label": "Water and sanitation: yearly diarrhoea death rate in the people served",
+      "format": "percent",
+      "value": {
+        "low": 0.0002,
+        "best": 0.0006,
+        "high": 0.002
+      },
+      "kind": "judgment",
+      "explainer": "Diarrhoea kills about 2-3 of every 1,000 children under five a year in sub-Saharan Africa and fewer adults; with under-fives about a fifth of a camp's people and crowding raising the risk, about 0.6 per 1,000 people a year. Our judgment."
+    },
+    {
+      "id": "wash_risk_reduction",
+      "section": "effect",
+      "label": "Water and sanitation: share of diarrhoea deaths averted",
+      "format": "percent",
+      "value": {
+        "low": 0.16,
+        "best": 0.45,
+        "high": 0.65
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Sharma Waddington et al. 2023, Impact on childhood mortality of interventions to improve drinking water, sanitation, and hygiene (WASH) to households: systematic review and meta-analysis (PLOS Medicine)",
+        "url": "https://doi.org/10.1371/journal.pmed.1004215",
+        "retrieved": "2026-11-04",
+        "quote": "a significant reduction in diarrhoea mortality of 45% (OR = 0.55, 95% CI = 0.35, 0.84; 10 interventions)"
+      },
+      "explainer": "Household WASH interventions cut diarrhoea mortality in childhood by 45% (16-65%) in 10 interventions (Sharma Waddington et al. 2023); diarrhoea itself falls 24-50% by type (Wolf et al. 2022, https://doi.org/10.1016/s0140-6736(22)00937-0). Emergency supply is basic, which the evidence and validity adjustments cover."
+    },
+    {
+      "id": "wash_share_under5",
+      "section": "effect",
+      "label": "Water and sanitation: share of diarrhoea deaths under five",
+      "format": "percent",
+      "formula": "@death_ages.diarrhoea_ssa_share_under5",
+      "explainer": "GBD 2023's share of diarrhoeal deaths under five in sub-Saharan Africa (the site's fact)."
+    },
+    {
+      "id": "wash_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Water and sanitation: share of the service no one else would have provided",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Camps' water is usually shared with UNICEF, UNHCR and WASH-cluster partners; MSF often fills a gap in the first weeks or where others can't go. Our judgment, 50%."
+    },
+    {
       "id": "mh_effect_sd",
       "section": "effect",
       "label": "Mental health: effect of MSF's counselling on depression and distress (standard deviations)",
       "format": "number",
       "value": {
         "low": 0.3,
-        "best": 0.5,
-        "high": 0.7
+        "best": 0.45,
+        "high": 0.6
       },
       "kind": "judgment",
       "unit": "SD",
-      "explainer": "Meta-analyses of psychological interventions in humanitarian settings find moderate reductions in depression and PTSD, about half a standard deviation, with wide heterogeneity; there is no trial of MSF's own counselling. Our judgment, 0.5."
+      "explainer": "WHO's low-intensity psychological interventions for people exposed to adversity (Problem Management Plus, Step-by-Step) reduce distress by 0.45 standard deviations (0.34-0.56) against controls across 23 trials (Schäfer et al. 2023, https://doi.org/10.1002/wps.21129); focused psychosocial support for children in humanitarian settings 0.33 for PTSD (Purgato et al. 2018, https://doi.org/10.1016/s2214-109x(18)30046-9). There is no trial of MSF's own counselling. Our judgment, 0.45."
     },
     {
       "id": "mh_effect_years",
@@ -1542,9 +1823,26 @@
       "section": "effect",
       "label": "Mental health: DALYs averted per consultation",
       "format": "number",
-      "formula": "mh_effect_sd * @depression.phq9_sd * @depression.dalys_per_phq9_point_year * mh_effect_years / mh_sessions_per_patient",
+      "formula": "mh_effect_sd * @depression.phq9_sd * @depression.dalys_per_phq9_point_year * mh_effect_years / mh_sessions_per_patient * (1 + $discount_rate) ^ -(mh_effect_years * 0.5)",
       "unit": "DALYs",
-      "explainer": "SD-years of depression in healthy years by the site's one conversion (PHQ-9 points per SD × DALYs per PHQ-9 point-year), per consultation."
+      "explainer": "SD-years of depression in healthy years by the site's one conversion (PHQ-9 points per SD × DALYs per PHQ-9 point-year), per consultation. The benefit comes over the effect's years, so it is discounted from their middle."
+    },
+    {
+      "id": "mh_household_size",
+      "section": "effect",
+      "label": "Mental health: people per household (stand-in, DRC)",
+      "format": "number",
+      "formula": "@household_size.drc",
+      "explainer": "The site's household size for the DRC, MSF's largest programme; the site has no figure for most of the other countries (Nigeria's is similar).",
+      "unit": "people"
+    },
+    {
+      "id": "mh_household_multiplier",
+      "section": "effect",
+      "label": "Mental health: household spillover multiplier",
+      "format": "multiple",
+      "formula": "1 + @wellby_factors.household_spillover_ratio_psychotherapy * (mh_household_size - 1)",
+      "explainer": "Therapy also helps the client's household: the site's one spillover share of psychotherapy (@wellby_factors.household_spillover_ratio_psychotherapy, as in every StrongMinds model) for each other member."
     },
     {
       "id": "violence_dalys_per_patient",
@@ -1565,7 +1863,7 @@
       "section": "effect",
       "label": "Share of the deaths averted that are under five (summary)",
       "format": "percent",
-      "formula": "(malaria_deaths_averted * malaria_death_share_under5 + measles_deaths_averted * measles_share_under5 + sam_in_deaths_averted * 1 + sam_out_deaths_averted * 1 + maternal_deaths_averted * 0 + neonatal_deaths_averted * 1 + cholera_deaths_averted * cholera_share_under5 + hiv_deaths_averted * 0 + tb_deaths_averted * tb_share_under5 + hcv_deaths_averted * 0 + vhf_deaths_averted * vhf_share_under5 + inpatient_deaths_averted * inpatient_share_under5 + outpatient_deaths_averted * outpatient_share_under5 + surgery_deaths_averted * surgery_share_under5) / deaths_averted",
+      "formula": "(malaria_deaths_averted * malaria_death_share_under5 + measles_deaths_averted * measles_share_under5 + sam_in_deaths_averted * 1 + sam_out_deaths_averted * 1 + maternal_deaths_averted * 0 + neonatal_deaths_averted * 1 + cholera_deaths_averted * cholera_share_under5 + hiv_deaths_averted * 0 + tb_deaths_averted * tb_share_under5 + hcv_deaths_averted * 0 + vhf_deaths_averted * vhf_share_under5 + inpatient_deaths_averted * inpatient_share_under5 + outpatient_deaths_averted * outpatient_share_under5 + surgery_deaths_averted * surgery_share_under5 + smc_deaths_averted * 1 + ovacc_deaths_averted * ovacc_share_under5 + drtb_deaths_averted * tb_share_under5 + wash_deaths_averted * wash_share_under5) / deaths_averted",
       "explainer": "Outcome-weighted summary of the branches' age splits, for reading only."
     },
     {
@@ -1595,7 +1893,7 @@
       "label": "Yearly ln(consumption) gain in adulthood per patient",
       "format": "number",
       "formula": "0",
-      "explainer": "0: there is no evidence that treating these episodes raises later earnings the way malaria prevention or deworming may; development effects of surviving severe malnutrition are in other_unmodelled_share."
+      "explainer": "0: there is no evidence that treating these episodes raises later earnings the way malaria prevention or deworming may; development effects of surviving severe malnutrition are in other_unmodelled_share. The prevention branches' later income (SMC's, as GiveWell counts it) is left out: they are about 1% of the value, so it would add well under 0.5%."
     },
     {
       "id": "years_until_income_gain",
@@ -1767,6 +2065,42 @@
       "explainer": "The site's one value of a death by age band (@moral_weights), times your value of a life."
     },
     {
+      "id": "smc_value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted: SMC (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "explainer": "Every death SMC averts is of a child under five, at the site's value of a death by age band, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "ovacc_value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted: outbreak vaccination (units of value)",
+      "format": "number",
+      "formula": "(ovacc_share_under5 * @moral_weights.uov_per_death_under5 + (1 - ovacc_share_under5) * (child_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - child_share_5_14_of_over5) * (adult_share_15_49 * @moral_weights.uov_per_death_age_15_49 + (1 - adult_share_15_49) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "explainer": "The site's one value of a death by age band (@moral_weights), times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "drtb_value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted: drug-resistant TB (units of value)",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "tb_value_per_death",
+      "explainer": "As for first-line TB: TB's deaths by age in sub-Saharan Africa (GBD 2023, the site's facts) at the site's value of a death by age band."
+    },
+    {
+      "id": "wash_value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted: water and sanitation (units of value)",
+      "format": "number",
+      "formula": "(wash_share_under5 * @moral_weights.uov_per_death_under5 + (1 - wash_share_under5) * (@death_ages.diarrhoea_ssa_share_5_14 / (1 - wash_share_under5) * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.diarrhoea_ssa_share_5_14 / (1 - wash_share_under5)) * (@death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus) * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus)) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "explainer": "Diarrhoeal deaths by age in sub-Saharan Africa (GBD 2023, the site's facts), at the site's value of a death by age band, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
       "id": "internal_validity_adj",
       "section": "adjustments",
       "label": "Internal validity: how far the case-fatality evidence measures what it claims",
@@ -1805,7 +2139,7 @@
       "section": "adjustments",
       "label": "Share of patients who wouldn't have been treated elsewhere (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction * malaria_counterfactual_adj + measles_doses * measles_risk_untreated * measles_share_averted * measles_counterfactual_adj + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction * sam_in_counterfactual_adj + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction * sam_out_counterfactual_adj + births * maternal_risk_untreated * maternal_risk_reduction * births_counterfactual_adj + births * neonatal_risk_untreated * neonatal_risk_reduction * births_counterfactual_adj + cholera_patients * cholera_risk_untreated * cholera_risk_reduction * cholera_counterfactual_adj + hiv_patients * hiv_risk_untreated * hiv_risk_reduction * hiv_counterfactual_adj + tb_patients * tb_risk_untreated * tb_risk_reduction * tb_counterfactual_adj + hcv_patients * hcv_risk_untreated * hcv_risk_reduction * hcv_counterfactual_adj + vhf_patients * vhf_risk_untreated * vhf_risk_reduction * vhf_counterfactual_adj + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction * inpatient_counterfactual_adj + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction * outpatient_counterfactual_adj + surgery_patients * surgery_risk_untreated * surgery_risk_reduction * surgery_counterfactual_adj) / (malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction)",
+      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction * malaria_counterfactual_adj + measles_doses * measles_risk_untreated * measles_share_averted * measles_counterfactual_adj + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction * sam_in_counterfactual_adj + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction * sam_out_counterfactual_adj + births * maternal_risk_untreated * maternal_risk_reduction * births_counterfactual_adj + births * neonatal_risk_untreated * neonatal_risk_reduction * births_counterfactual_adj + cholera_patients * cholera_risk_untreated * cholera_risk_reduction * cholera_counterfactual_adj + hiv_patients * hiv_risk_untreated * hiv_risk_reduction * hiv_counterfactual_adj + tb_patients * tb_risk_untreated * tb_risk_reduction * tb_counterfactual_adj + hcv_patients * hcv_risk_untreated * hcv_risk_reduction * hcv_counterfactual_adj + vhf_patients * vhf_risk_untreated * vhf_risk_reduction * vhf_counterfactual_adj + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction * inpatient_counterfactual_adj + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction * outpatient_counterfactual_adj + surgery_patients * surgery_risk_untreated * surgery_risk_reduction * surgery_counterfactual_adj + smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction * smc_counterfactual_adj + ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted * ovacc_counterfactual_adj + drtb_patients * tb_risk_untreated * drtb_risk_reduction * drtb_counterfactual_adj + wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction * wash_counterfactual_adj) / (malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction + smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction + ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted + drtb_patients * tb_risk_untreated * drtb_risk_reduction + wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction)",
       "explainer": "Each branch applies its own counterfactual (below); this is their weighted average across the branches, by deaths averted before it, for reading only."
     },
     {
@@ -1983,12 +2317,12 @@
       "label": "Mental health: share who wouldn't have had equivalent care elsewhere",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
+        "low": 0.9,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Mental-health services barely exist in MSF's settings. Our judgment, 80%."
+      "explainer": "The effect (about half a standard deviation) is from trials of psychological care in humanitarian settings against control arms, so care as usual is already netted out (templates.md: the counterfactual is 1 against a control arm). The low end for clients who would get other care that the trials' controls didn't."
     },
     {
       "id": "violence_counterfactual_adj",
@@ -2035,7 +2369,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "MSF counts episodes, not people (a patient can be admitted twice, a child in outpatient feeding after an inpatient stay), and some counts overlap across services beyond what the branches remove; some patients leave before completing care. Our judgment, 90%."
+      "explainer": "MSF counts episodes, not people (a patient can be admitted twice), and some counts overlap across services beyond what the branches remove; some patients leave before completing care. Our judgment, 90%."
     },
     {
       "id": "leverage_funging_adj",
@@ -2103,20 +2437,340 @@
       "explainer": "Every wait is discounted at the shared rate, like every future benefit."
     },
     {
-      "id": "total_adj",
+      "id": "shared_adj",
       "section": "adjustments",
-      "label": "Adjustments applied to every branch",
+      "label": "Adjustments every branch shares",
       "format": "multiple",
       "formula": "evidence_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount",
-      "explainer": "The product of the adjustments every branch shares; each branch multiplies in its own counterfactual."
+      "explainer": "The product of the adjustments every branch shares; each branch's total below multiplies in its own counterfactual and missing-data marker."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: outcome-weighted average of the branches, for reading only",
+      "format": "multiple",
+      "formula": "shared_adj * counterfactual_adj * missing_data_adj",
+      "explainer": "The shared adjustments × the outcome-weighted average of the branches' counterfactuals × their missing-data markers, for reading only; each branch applies its own total."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: outcome-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "(malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death + smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + drtb_deaths_averted * drtb_value_per_death + wash_deaths_averted * wash_value_per_death) / (malaria_deaths_averted * malaria_value_per_death / malaria_missing_data_adj + measles_deaths_averted * measles_value_per_death / measles_missing_data_adj + sam_in_deaths_averted * sam_in_value_per_death / sam_in_missing_data_adj + sam_out_deaths_averted * sam_out_value_per_death / sam_out_missing_data_adj + maternal_deaths_averted * maternal_value_per_death / births_missing_data_adj + neonatal_deaths_averted * neonatal_value_per_death / births_missing_data_adj + cholera_deaths_averted * cholera_value_per_death / cholera_missing_data_adj + hiv_deaths_averted * hiv_value_per_death / hiv_missing_data_adj + tb_deaths_averted * tb_value_per_death / tb_missing_data_adj + hcv_deaths_averted * hcv_value_per_death / hcv_missing_data_adj + vhf_deaths_averted * vhf_value_per_death / vhf_missing_data_adj + inpatient_deaths_averted * inpatient_value_per_death / inpatient_missing_data_adj + outpatient_deaths_averted * outpatient_value_per_death / outpatient_missing_data_adj + surgery_deaths_averted * surgery_value_per_death / surgery_missing_data_adj + smc_deaths_averted * smc_value_per_death / smc_missing_data_adj + ovacc_deaths_averted * ovacc_value_per_death / ovacc_missing_data_adj + drtb_deaths_averted * drtb_value_per_death / drtb_missing_data_adj + wash_deaths_averted * wash_value_per_death / wash_missing_data_adj)",
+      "explainer": "Every branch reads its own marker below; this is their average weighted by the value of the deaths each averts, for reading only. Every branch is thin: MSF counts its patients but no branch's effect is measured for MSF's own care against a comparison, and four branches' reach is our judgment."
+    },
+    {
+      "id": "malaria_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: malaria treated",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated case fatality is a judgment from an expert survey (Thwing et al.'s Delphi), not a controlled comparison of MSF's patients, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "malaria_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: malaria treated",
+      "format": "multiple",
+      "formula": "shared_adj * malaria_counterfactual_adj * malaria_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "measles_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: measles vaccination",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the attack rate and the share a late campaign averts are judgments; no evaluation of MSF's 2025 campaigns, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "measles_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: measles vaccination",
+      "format": "multiple",
+      "formula": "shared_adj * measles_counterfactual_adj * measles_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "sam_in_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: inpatient malnutrition",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated risk and the share averted are judgments from case-fatality series, not a controlled comparison, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "sam_in_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: inpatient malnutrition",
+      "format": "multiple",
+      "formula": "shared_adj * sam_in_counterfactual_adj * sam_in_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "sam_out_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: outpatient malnutrition",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated risk and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "sam_out_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: outpatient malnutrition",
+      "format": "multiple",
+      "formula": "shared_adj * sam_out_counterfactual_adj * sam_out_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "births_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: births assisted",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the risks of a birth without skilled care and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "births_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: births assisted",
+      "format": "multiple",
+      "formula": "shared_adj * births_counterfactual_adj * births_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "cholera_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: cholera treated",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated case fatality is a judgment (WHO's description, no series of MSF's patients), so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "cholera_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: cholera treated",
+      "format": "multiple",
+      "formula": "shared_adj * cholera_counterfactual_adj * cholera_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "hiv_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: HIV treatment",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the untreated death rate and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "hiv_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: HIV treatment",
+      "format": "multiple",
+      "formula": "shared_adj * hiv_counterfactual_adj * hiv_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "tb_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: TB treatment",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the share treatment averts is a judgment; the untreated risk comes from pre-treatment cohorts, not MSF's patients, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "tb_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: TB treatment",
+      "format": "multiple",
+      "formula": "shared_adj * tb_counterfactual_adj * tb_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "hcv_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: hepatitis C",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the risk and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "hcv_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: hepatitis C",
+      "format": "multiple",
+      "formula": "shared_adj * hcv_counterfactual_adj * hcv_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "vhf_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: haemorrhagic fevers",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the case fatality with and without care are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "vhf_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: haemorrhagic fevers",
+      "format": "multiple",
+      "formula": "shared_adj * vhf_counterfactual_adj * vhf_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "inpatient_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: other admissions",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the patients' diagnoses, risk and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "inpatient_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: other admissions",
+      "format": "multiple",
+      "formula": "shared_adj * inpatient_counterfactual_adj * inpatient_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "outpatient_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: other consultations",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the patients' risk and the share averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "outpatient_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: other consultations",
+      "format": "multiple",
+      "formula": "shared_adj * outpatient_counterfactual_adj * outpatient_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "surgery_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: surgery",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the risk without surgery, the share averted and the disability averted are judgments, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "surgery_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: surgery",
+      "format": "multiple",
+      "formula": "shared_adj * surgery_counterfactual_adj * surgery_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "mh_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: mental health care",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the effect is from trials of other humanitarian programmes, not MSF's own counselling, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "mh_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: mental health care",
+      "format": "multiple",
+      "formula": "shared_adj * mh_counterfactual_adj * mh_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "violence_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: care after violence",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but the health gain per patient is a judgment, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "violence_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: care after violence",
+      "format": "multiple",
+      "formula": "shared_adj * violence_counterfactual_adj * violence_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "smc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: seasonal malaria chemoprevention",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but MSF publishes no count of the children it reached in 2025 (the reach is our judgment) and the effect is from trials of other programmes, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "smc_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: seasonal malaria chemoprevention",
+      "format": "multiple",
+      "formula": "shared_adj * smc_counterfactual_adj * smc_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "ovacc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: outbreak vaccination",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but MSF publishes no count of these doses (the reach is our judgment) and the share averted is a judgment, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "ovacc_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: outbreak vaccination",
+      "format": "multiple",
+      "formula": "shared_adj * ovacc_counterfactual_adj * ovacc_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "drtb_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: drug-resistant TB",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but MSF publishes no 2025 count of drug-resistant TB patients (the reach is our judgment), so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "drtb_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: drug-resistant TB",
+      "format": "multiple",
+      "formula": "shared_adj * drtb_counterfactual_adj * drtb_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
+    },
+    {
+      "id": "wash_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing data: water and sanitation",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but MSF publishes no count of the people served (the reach is our judgment) and the effect is from household trials, not emergency supply, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "wash_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments: water and sanitation",
+      "format": "multiple",
+      "formula": "shared_adj * wash_counterfactual_adj * wash_missing_data_adj",
+      "explainer": "The shared adjustments × the branch's counterfactual × its missing-data marker."
     },
     {
       "id": "treatment_costs_share",
       "section": "adjustments",
-      "label": "Later treatment costs saved by prevention (none: a treatment programme)",
+      "label": "Later treatment costs saved by the prevention branches",
       "format": "percent",
-      "formula": "0",
-      "explainer": "0: this is a treatment programme, so there is no later treatment cost that prevention would save (GiveWell's 20% applies to prevention)."
+      "formula": "@givewell_shared.treatment_costs_averted * (smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + wash_deaths_averted * wash_value_per_death) / uov_deaths",
+      "explainer": "GiveWell's shared share of treatment costs a prevention programme saves (@givewell_shared.treatment_costs_averted), for the prevention branches (SMC, outbreak vaccination, water and sanitation) by their share of the deaths' value; the treatment branches save none."
     },
     {
       "id": "rebound_share",
@@ -2141,11 +2795,11 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.09,
-        "high": 0.3
+        "best": 0.02,
+        "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "MSF's activity highlights aren't exhaustive, and the same budget pays for work without a movement-wide count: seasonal malaria chemoprevention, outbreak vaccination against meningitis, yellow fever and cholera, drug-resistant TB, kala-azar, snakebite, non-communicable disease and palliative care, water and sanitation and health promotion. They are parts of projects that do report outcomes (so not the proxy branch, which would value them at the site's best charities' rates), perhaps a tenth of field spending; at roughly the modelled services' value per dollar they add about +8% (a tenth of the budget producing outputs not counted adds a ninth, +11%, less some overlap with what the counted services already include). Also: development of children who survive severe malnutrition (+2%, GiveWell counts about this much for malnutrition) and measles immunity lasting past the outbreak (+1%, the measles branch is small). Harms and risks: double counting not removed, hospital-acquired infection, programmes closed by insecurity before care is complete (-2%). Net +9%; the high end if the uncounted prevention (SMC, vaccines) is worth several times the average service."
+      "explainer": "The preventive and uncounted work now has branches of its own (seasonal malaria chemoprevention, outbreak vaccination other than measles, drug-resistant TB, water and sanitation). Left here: development of children who survive severe malnutrition (+2%, GiveWell counts about this much for malnutrition), measles immunity lasting past the outbreak (+0.5%), the smaller services with no count (kala-azar, snakebite, non-communicable disease and palliative care, health promotion; +1.5%), less harms and risks (double counting not removed, hospital-acquired infection, programmes closed by insecurity before care is complete; -2%). Net +2%."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -2160,21 +2814,21 @@
       "section": "outcome",
       "label": "Stillbirths averted: births assisted",
       "format": "number",
-      "formula": "births * stillbirth_risk_untreated * stillbirth_risk_reduction * births_counterfactual_adj * total_adj"
+      "formula": "births * stillbirth_risk_untreated * stillbirth_risk_reduction * births_total_adj"
     },
     {
       "id": "deaths_averted",
       "section": "outcome",
       "label": "Deaths averted, all branches",
       "format": "number",
-      "formula": "malaria_deaths_averted + measles_deaths_averted + sam_in_deaths_averted + sam_out_deaths_averted + maternal_deaths_averted + neonatal_deaths_averted + cholera_deaths_averted + hiv_deaths_averted + tb_deaths_averted + hcv_deaths_averted + vhf_deaths_averted + inpatient_deaths_averted + outpatient_deaths_averted + surgery_deaths_averted"
+      "formula": "malaria_deaths_averted + measles_deaths_averted + sam_in_deaths_averted + sam_out_deaths_averted + maternal_deaths_averted + neonatal_deaths_averted + cholera_deaths_averted + hiv_deaths_averted + tb_deaths_averted + hcv_deaths_averted + vhf_deaths_averted + inpatient_deaths_averted + outpatient_deaths_averted + surgery_deaths_averted + smc_deaths_averted + ovacc_deaths_averted + drtb_deaths_averted + wash_deaths_averted"
     },
     {
       "id": "uov_deaths",
       "section": "outcome",
       "label": "Value of the deaths averted (units of value)",
       "format": "number",
-      "formula": "malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death",
+      "formula": "malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death + smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + drtb_deaths_averted * drtb_value_per_death + wash_deaths_averted * wash_value_per_death",
       "unit": "units of value",
       "explainer": "Each branch's deaths at its own age bands' value."
     },
@@ -2201,7 +2855,7 @@
       "section": "outcome",
       "label": "Value of long-term income gains",
       "format": "number",
-      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * shared_adj * $uov_per_ln_consumption",
       "unit": "units of value",
       "explainer": "0: no income gain is modelled."
     },
@@ -2218,8 +2872,9 @@
       "section": "bridges",
       "label": "Illness averted in DALYs: surgery's disability, mental health, care after violence",
       "format": "number",
-      "formula": "(surgery_patients * surgery_dalys_disability_averted * surgery_counterfactual_adj + mental_health_consultations * mh_dalys_per_consultation * mh_counterfactual_adj + (sexual_violence_patients + torture_patients) * violence_dalys_per_patient * violence_counterfactual_adj) * total_adj",
-      "unit": "DALYs"
+      "formula": "surgery_patients * surgery_dalys_disability_averted * surgery_total_adj + mental_health_consultations * mh_dalys_per_consultation * mh_household_multiplier * mh_total_adj + (sexual_violence_patients + torture_patients) * violence_dalys_per_patient * violence_total_adj",
+      "unit": "DALYs",
+      "explainer": "Illness averted in DALYs: surgery's disability, mental-health care (with its household spillover) and care after violence, each with its own counterfactual and missing-data step, times the shared adjustments."
     },
     {
       "id": "uov_from_daly",
@@ -2237,7 +2892,7 @@
       "format": "number",
       "formula": "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
       "unit": "units of value",
-      "explainer": "Illness and the other supplementary shares add to the modelled value side by side; illness counted in DALYs comes in through its bridge."
+      "explainer": "Deaths, stillbirths and the remaining supplementary share; illness as a share of the deaths' value; illness counted in DALYs through its bridge."
     },
     {
       "id": "uov_per_dollar",
@@ -2252,7 +2907,7 @@
       "section": "outcome",
       "label": "Deaths averted: malaria treated",
       "format": "number",
-      "formula": "malaria_patients * malaria_risk_untreated * malaria_risk_reduction * malaria_counterfactual_adj * total_adj * (1 + malaria_indirect_deaths_ratio * malaria_death_share_under5)",
+      "formula": "malaria_patients * malaria_risk_untreated * malaria_risk_reduction * malaria_total_adj * (1 + malaria_indirect_deaths_ratio * malaria_death_share_under5)",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments × (1 + the indirect deaths the episode would have brought on, for the under-fives' share of the deaths: GiveWell's ratios are for young children)."
     },
     {
@@ -2260,7 +2915,7 @@
       "section": "outcome",
       "label": "Deaths averted: measles vaccination in outbreaks",
       "format": "number",
-      "formula": "measles_doses * measles_risk_untreated * measles_share_averted * measles_counterfactual_adj * total_adj * (1 + measles_indirect_deaths_ratio * measles_share_under5)",
+      "formula": "measles_doses * measles_risk_untreated * measles_share_averted * measles_total_adj * (1 + measles_indirect_deaths_ratio * measles_share_under5)",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments × (1 + the indirect deaths the episode would have brought on, for the under-fives' share of the deaths: GiveWell's ratios are for young children)."
     },
     {
@@ -2268,7 +2923,7 @@
       "section": "outcome",
       "label": "Deaths averted: severe malnutrition, inpatient",
       "format": "number",
-      "formula": "sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction * sam_in_counterfactual_adj * total_adj",
+      "formula": "sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction * sam_in_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2276,7 +2931,7 @@
       "section": "outcome",
       "label": "Deaths averted: malnutrition, outpatient",
       "format": "number",
-      "formula": "sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction * sam_out_counterfactual_adj * total_adj",
+      "formula": "sam_out_patients * (1 - sam_out_share_from_inpatient) * sam_out_risk_untreated * sam_out_risk_reduction * sam_out_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2284,7 +2939,7 @@
       "section": "outcome",
       "label": "Deaths averted: mothers, births assisted",
       "format": "number",
-      "formula": "births * maternal_risk_untreated * maternal_risk_reduction * births_counterfactual_adj * total_adj",
+      "formula": "births * maternal_risk_untreated * maternal_risk_reduction * births_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2292,7 +2947,7 @@
       "section": "outcome",
       "label": "Deaths averted: newborns, births assisted",
       "format": "number",
-      "formula": "births * neonatal_risk_untreated * neonatal_risk_reduction * births_counterfactual_adj * total_adj",
+      "formula": "births * neonatal_risk_untreated * neonatal_risk_reduction * births_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2300,7 +2955,7 @@
       "section": "outcome",
       "label": "Deaths averted: cholera treated",
       "format": "number",
-      "formula": "cholera_patients * cholera_risk_untreated * cholera_risk_reduction * cholera_counterfactual_adj * total_adj * (1 + cholera_indirect_deaths_ratio * cholera_share_under5)",
+      "formula": "cholera_patients * cholera_risk_untreated * cholera_risk_reduction * cholera_total_adj * (1 + cholera_indirect_deaths_ratio * cholera_share_under5)",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments × (1 + the indirect deaths the episode would have brought on, for the under-fives' share of the deaths: GiveWell's ratios are for young children)."
     },
     {
@@ -2308,7 +2963,7 @@
       "section": "outcome",
       "label": "Deaths averted: HIV treatment",
       "format": "number",
-      "formula": "hiv_patients * hiv_risk_untreated * hiv_risk_reduction * hiv_counterfactual_adj * total_adj",
+      "formula": "hiv_patients * hiv_risk_untreated * hiv_risk_reduction * hiv_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2316,7 +2971,7 @@
       "section": "outcome",
       "label": "Deaths averted: tuberculosis treated",
       "format": "number",
-      "formula": "tb_patients * tb_risk_untreated * tb_risk_reduction * tb_counterfactual_adj * total_adj * tb_wait_discount",
+      "formula": "tb_patients * tb_risk_untreated * tb_risk_reduction * tb_total_adj * tb_wait_discount",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments × the discounted wait until the deaths would have come."
     },
     {
@@ -2324,7 +2979,7 @@
       "section": "outcome",
       "label": "Deaths averted: hepatitis C cured",
       "format": "number",
-      "formula": "hcv_patients * hcv_risk_untreated * hcv_risk_reduction * hcv_counterfactual_adj * total_adj * hcv_wait_discount",
+      "formula": "hcv_patients * hcv_risk_untreated * hcv_risk_reduction * hcv_total_adj * hcv_wait_discount",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments × the discounted wait until the deaths would have come."
     },
     {
@@ -2332,7 +2987,7 @@
       "section": "outcome",
       "label": "Deaths averted: Ebola and other haemorrhagic fevers",
       "format": "number",
-      "formula": "vhf_patients * vhf_risk_untreated * vhf_risk_reduction * vhf_counterfactual_adj * total_adj",
+      "formula": "vhf_patients * vhf_risk_untreated * vhf_risk_reduction * vhf_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2340,7 +2995,7 @@
       "section": "outcome",
       "label": "Deaths averted: other hospital admissions",
       "format": "number",
-      "formula": "inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction * inpatient_counterfactual_adj * total_adj",
+      "formula": "inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction * inpatient_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2348,7 +3003,7 @@
       "section": "outcome",
       "label": "Deaths averted: other consultations and emergency visits",
       "format": "number",
-      "formula": "outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction * outpatient_counterfactual_adj * total_adj",
+      "formula": "outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction * outpatient_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
     },
     {
@@ -2356,8 +3011,40 @@
       "section": "outcome",
       "label": "Deaths averted: surgery",
       "format": "number",
-      "formula": "surgery_patients * surgery_risk_untreated * surgery_risk_reduction * surgery_counterfactual_adj * total_adj",
+      "formula": "surgery_patients * surgery_risk_untreated * surgery_risk_reduction * surgery_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
+    },
+    {
+      "id": "smc_deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted: seasonal malaria chemoprevention",
+      "format": "number",
+      "formula": "smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction * smc_total_adj * (1 + @givewell.indirect_malaria_deaths_per_direct_malaria_death_2)",
+      "explainer": "Children × their yearly malaria death rate × the share in the season covered × SMC's effect × the protection they get × the branch's adjustments (shared, counterfactual, missing data) × (1 + the indirect deaths GiveWell counts per malaria death of a young child, in full for prevention, as for measles vaccination)."
+    },
+    {
+      "id": "ovacc_deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted: outbreak vaccination other than measles",
+      "format": "number",
+      "formula": "ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted * ovacc_total_adj",
+      "explainer": "Doses × the outbreak's attack rate × case fatality × the share of cases a dose averts × the branch's adjustments (shared, counterfactual, missing data)."
+    },
+    {
+      "id": "drtb_deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted: drug-resistant TB treated",
+      "format": "number",
+      "formula": "drtb_patients * tb_risk_untreated * drtb_risk_reduction * drtb_total_adj * tb_wait_discount",
+      "explainer": "Patients × the untreated risk of TB (as for first-line TB) × the share treatment removes × the branch's counterfactual × the shared adjustments × the wait until the deaths would have come × missing data."
+    },
+    {
+      "id": "wash_deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted: water and sanitation",
+      "format": "number",
+      "formula": "wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction * wash_total_adj * (1 + @givewell_shared.indirect_deaths_per_direct_diarrhea_death * wash_share_under5)",
+      "explainer": "People × years served × the diarrhoea death rate × the share WASH averts × the branch's adjustments (shared, counterfactual, missing data) × (1 + the indirect deaths GiveWell counts per diarrhoea death of a young child, for the under-fives' share)."
     },
     {
       "id": "programme_personnel_eur",
@@ -2411,111 +3098,9 @@
       "section": "donor",
       "label": "Units of value per dollar you give",
       "format": "small",
-      "formula": "uov_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_per_donor_dollar",
+      "formula": "uov_per_dollar * donor_cost_share",
       "unit": "Units of value / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "awareness_eur",
-      "section": "proxy",
-      "label": "Awareness-raising, 2025 (euros)",
-      "format": "number",
-      "value": 57438000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 27, Note 2.2.5",
-        "quote": "Awareness-raising 57,438 49,828"
-      },
-      "explainer": "MSF's public communications and witnessing (témoignage) about the crises it works in, to alert, mobilise and press responsible parties. No outcome data."
-    },
-    {
-      "id": "access_eur",
-      "section": "proxy",
-      "label": "MSF Access, 2025 (euros)",
-      "format": "number",
-      "value": 5318000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 27, Note 2.2.5",
-        "quote": "MSF Access 5,318 6,108"
-      },
-      "explainer": "MSF Access (formerly the Access Campaign) presses for cheaper and better medicines, diagnostics and vaccines. It lists price cuts it pushed for but no measured health outcome."
-    },
-    {
-      "id": "other_humanitarian_eur",
-      "section": "proxy",
-      "label": "Other humanitarian activities, 2025 (euros)",
-      "format": "number",
-      "value": 15858000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 12, Combined Statement of Financial Activities",
-        "quote": "Other humanitarian activities 2.2.6 (15,858) - (15,858) (21,962)"
-      },
-      "explainer": "Mostly the cost of supplies and services MSF Supply and MSF Logistique sell to other organisations, plus MSF's 2 million euro contribution to the Drugs for Neglected Diseases initiative (DNDi)."
-    },
-    {
-      "id": "goods_sold_eur",
-      "section": "proxy",
-      "label": "Equipment and services sold to other organisations, 2025 (euros)",
-      "format": "number",
-      "value": 11764000,
-      "kind": "observed",
-      "unit": "EUR",
-      "source": {
-        "title": "MSF International Financial Report 2025 (combined, audited, year to 31 December 2025)",
-        "url": "https://www.msf.org/sites/default/files/2026-07/MSF_International_Financial_Report_2025.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 23, Note 2.1.3",
-        "quote": "Equipment and services sold to other organisations by MSF Supply and MSF Logistique 11,764"
-      },
-      "explainer": "The buyers pay for these supplies, so their cost isn't a programme donations fund: it is taken out of other humanitarian activities."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data, 2025 (US$)",
-      "format": "usd",
-      "formula": "(awareness_eur + access_eur + other_humanitarian_eur - goods_sold_eur) * @fx.usd_per_eur_2025",
-      "explainer": "Awareness-raising, MSF Access and the DNDi contribution (net of supplies sold at cost), at the 2025 euro rate. MSF Access lists price cuts it pressed for but no measured health outcome, and awareness-raising none."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "(awareness_eur * #development-media-international-founders-pledge + (access_eur + other_humanitarian_eur - goods_sold_eur) * median(#lead-exposure-elimination-project-founders-pledge, #innovation-in-government-initiative-founders-pledge, #pure-earth-founders-pledge)) / (awareness_eur + access_eur + other_humanitarian_eur - goods_sold_eur)",
-      "unit": "units of value / $",
-      "explainer": "Two kinds of work, weighted by spending, each read live: awareness-raising (public communications) at the site's one model of health mass media, Development Media International (Founders Pledge); MSF Access and the DNDi grant at the median of the site's global-health policy advocacy (LEEP, Innovation in Government Initiative, Pure Earth, Founders Pledge). Neither is a close match, which the missing-data slider covers."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+      "explainer": "The medical programmes' result per dollar, times your dollar's share of the full cost."
     }
   ]
 }
