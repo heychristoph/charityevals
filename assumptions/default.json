@@ -13,12 +13,7 @@
     {
       "id": "distance",
       "title": "Near and far",
-      "explainer": "Whether a life counts the same wherever it is. By default it does. Set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
-    },
-    {
-      "id": "future",
-      "title": "The future",
-      "explainer": "How much good done later, and people in the future, count."
+      "explainer": "Whether good counts the same wherever and whenever it happens."
     },
     {
       "id": "evidence",
@@ -35,7 +30,7 @@
     {
       "id": "resource_shares",
       "section": "accounting",
-      "label": "Share credit by who paid for what",
+      "label": "Give each funder credit for its share",
       "technical": "Pro-rata attribution instead of counterfactual credit",
       "format": "toggle",
       "value": {
@@ -60,7 +55,7 @@
     {
       "id": "distance_discount",
       "section": "distance",
-      "label": "Each step further away, a life counts less by",
+      "label": "Lives in other countries count … % less",
       "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
       "unit": "per step",
       "format": "percent",
@@ -75,7 +70,7 @@
     {
       "id": "estimate_age_discount",
       "section": "evidence",
-      "label": "An estimate counts less for each year of its age by",
+      "label": "An estimate counts … % less for each year since it was made",
       "technical": "Annual discount on a cost-effectiveness estimate's age",
       "unit": "per year",
       "format": "percent",
@@ -124,8 +119,8 @@
     },
     {
       "id": "discount_rate",
-      "section": "future",
-      "label": "Good done a year later counts less by",
+      "section": "distance",
+      "label": "Good done next year counts … % less than good done today",
       "technical": "Annual discount rate",
       "unit": "per year",
       "format": "percent",
@@ -149,7 +144,7 @@
     {
       "id": "missing_data_discount",
       "section": "evidence",
-      "label": "Results nobody measured count",
+      "label": "Results nobody measured count … % of what the research suggests",
       "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
       "format": "percent",
       "value": {
@@ -226,7 +221,7 @@
     {
       "id": "marginal_vs_past_average",
       "section": "evidence",
-      "label": "Your extra dollar, against the average dollar so far",
+      "label": "A new dollar achieves … % as much as past dollars did",
       "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
       "format": "percent",
       "value": {
@@ -240,7 +235,7 @@
     {
       "id": "win_years_counted",
       "section": "evidence",
-      "label": "Years a won reform counts",
+      "label": "A won reform would have happened anyway … years later",
       "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
       "unit": "years",
       "format": "number",
@@ -255,7 +250,7 @@
     {
       "id": "chicken_vs_person",
       "section": "animals",
-      "label": "A chicken's suffering against a person's",
+      "label": "One person's suffering counts as much as … chickens'",
       "technical": "Chicken's welfare range relative to a person's",
       "unit": "× a person",
       "format": "percent",
@@ -265,7 +260,7 @@
         "high": 0.869
       },
       "kind": "judgment",
-      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. Every animal charity's result moves with this (other animals are compared with chickens).\n\nThe default, 33%, is the middle estimate of a research group that has studied how much different animals can suffer; their range is 0.2% to 87%. Set 0 if animal suffering shouldn't count, 100% if it counts as much as a person's.",
+      "explainer": "How many chickens' suffering adds up to the same suffering in one person. Other animals count against a chicken: a pig, cow, dog or cat as 1.6 chickens, a fish as 0.2, a shrimp as 0.1, an insect as 0.04.\n\nThe default, 3, and those ratios are the middle estimates of Rethink Priorities, a research group that studies how much different animals can suffer; their range for chickens is 1.2 to 500. At the far right, animal suffering doesn't count.",
       "slider": {
         "low": 0.001,
         "high": 1,
@@ -274,12 +269,17 @@
       "source": {
         "title": "Rethink Priorities' welfare range estimates",
         "url": "https://www.rethinkpriorities.org/publications/welfare-range-estimates"
+      },
+      "shown_as": {
+        "factor": 1,
+        "format": "number",
+        "inverse": true
       }
     },
     {
       "id": "daly_per_sad",
       "section": "animals",
-      "label": "Healthy hours lost to a day of severe pain",
+      "label": "A day of severe pain is as bad as losing … hours of healthy life",
       "technical": "DALYs per suffering-adjusted day (SAD)",
       "shown_as": {
         "factor": 8760,
