@@ -4,20 +4,28 @@
   "kind": "template",
   "cause": "global-health",
   "template": "direct-health",
+  "estimate_basis": "unit_cost",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: direct health (deaths and illness averted)",
+    "url": "https://charityevals.org/template-direct-health",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
   "resources": [],
   "sections": [
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
     },
     {
       "id": "effect",
@@ -28,6 +36,12 @@
       "id": "adjustments",
       "title": "Adjustments",
       "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
     },
     {
       "id": "outcome",
@@ -45,7 +59,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on the modelled program(s) in the period",
+      "label": "Spending on the modelled program(s) in the year modelled",
       "format": "usd",
       "value": 1000000,
       "kind": "observed",
@@ -56,7 +70,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
     },
     {
       "id": "total_expenses",
@@ -108,7 +122,7 @@
     {
       "id": "people_reached",
       "section": "reach",
-      "label": "People reached in the period",
+      "label": "People reached in the year modelled",
       "format": "integer",
       "value": 100000,
       "kind": "observed",
@@ -165,7 +179,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: deaths per person-year from the causes the intervention affects, in the target age group and region, without the program. Use (or add) a country fact in facts/<country>.json (IHME GBD, UN IGME, DHS)."
+      "explainer": "TEMPLATE: deaths per person-year from the causes the intervention affects, in the target age group and region, today, without the program. Use (or add) a country fact in facts/<country>.json (IHME GBD, UN IGME, DHS)."
     },
     {
       "id": "mortality_reduction",
@@ -188,12 +202,20 @@
       "explainer": "TEMPLATE: relative risk reduction from the best meta-analysis (Cochrane or equivalent); the 95% CI as low/high."
     },
     {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Deaths malaria causes indirectly, per direct malaria death",
+      "format": "number",
+      "formula": "@givewell.indirect_malaria_deaths_per_direct_malaria_death_2",
+      "explainer": "TEMPLATE: where mortality_reduction is the fall in deaths from one cause, the deaths that cause brings on indirectly (through anaemia, low birth weight, other infections), per direct death: malaria @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 (0.75, what the site's ranked malaria models read), diarrhoea @givewell_shared.indirect_deaths_per_direct_diarrhea_death. 0, with that reason, where mortality_reduction is the all-cause effect from the trials (it already holds them)."
+    },
+    {
       "id": "deaths_averted_per_person",
       "section": "effect",
       "label": "Deaths averted per person reached (before adjustments)",
       "format": "small",
-      "formula": "baseline_mortality_rate * mortality_reduction * years_of_coverage",
-      "explainer": "If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here."
+      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
+      "explainer": "Direct and indirect deaths over the years of protection. If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here; check the result against the all-cause trial result per person-year, scaled to today's mortality."
     },
     {
       "id": "share_under5",
@@ -207,29 +229,77 @@
       },
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: IHME GBD",
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: the age split of the deaths averted, from the age split of cause-specific deaths in the target group."
+      "explainer": "TEMPLATE: the age split of the deaths averted: the split of deaths from the causes the intervention affects, in the countries it works in, weighted by its reach there. Source: WHO Global Health Estimates (deaths by cause, age, sex and country, the latest year) or IHME GBD. A split another model could reuse (one cause in one place) goes into facts/death_ages.json as `<cause>_<place>_share_<band>` (under5, 5_14, 15_49, 50plus) and is read here and below: share_5_14_of_over5 = @death_ages.<x>_share_5_14 / (1 - @death_ages.<x>_share_under5), and so on."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest of the age split, band by band, so every death is valued at its own age band (docs/normalization.md 2.7), from the same source as share_under5. 0 when only under-fives are reached."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / IHME GBD",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the rest at 50 to 74 (GiveWell's older weight also stands in above 74), from the same source."
     },
     {
       "id": "morbidity_value_ratio",
       "section": "effect",
-      "label": "Value of illness averted, as a share of the value of deaths averted",
+      "label": "Illness averted, as a share of the mortality and income benefits",
       "format": "percent",
+      "formula": "@givewell_common.malaria_morbidity",
+      "explainer": "TEMPLATE: illness averted, as a share of the value of the deaths averted and the income gains together, the base GiveWell's supplementary adjustments apply to (uov_morbidity below). The site's one figure where it has one: malaria (nets, SMC) @givewell_common.malaria_morbidity; incentivised vaccines @givewell_common.morbidity_effects_from_directly_incentivized_vaccines_a. For another program, an estimate input (GBD disability weights, @gbd_disability_weights where the site has the weight, × cases averted × duration, against the deaths' and income's value), with its source; never DALYs × an exchange rate inside the model (docs/normalization.md INV-2). 0 with an explanation when illness is in unmodelled_benefits_adj instead; never both."
+    },
+    {
+      "id": "stillbirths_averted_per_person",
+      "section": "effect",
+      "label": "Stillbirths averted per person reached (before adjustments)",
+      "format": "small",
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: IHME GBD disability weights / GiveWell",
+        "title": "TEMPLATE: meta-analysis",
         "url": "https://example.org/REPLACE",
         "page": "REPLACE: page/table",
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: illness averted (GBD disability weights × cases averted × duration) valued against the deaths averted, as GiveWell's supplementary adjustments do. A share, not DALYs × an exchange rate: no rate between outcomes may sit inside a model (docs/normalization.md INV-2). 0 with an explanation when illness is covered by unmodelled_benefits_adj instead; never both."
+      "explainer": "TEMPLATE: for maternal and newborn programs, and nets and SMC protecting pregnant women: stillbirths averted per person reached, from the trial or meta-analysis. 0 with an explanation for programs that can't avert stillbirths."
     },
     {
       "id": "ln_income_gain_per_year",
@@ -253,42 +323,18 @@
       "section": "effect",
       "label": "Years until the income gain starts",
       "format": "number",
-      "value": {
-        "low": 8,
-        "best": 10,
-        "high": 15
-      },
-      "kind": "estimate",
+      "formula": "@givewell_shared.years_until_income_benefits_malaria",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: study / GiveWell",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: years from the intervention to adult earnings (GiveWell uses about 10 for child-health programs)."
+      "explainer": "TEMPLATE: the site's one figure for the program (@givewell_shared.years_until_income_benefits_malaria, _smc, _iron or _deworming); for a program none fits, an estimate input from the study, with its source and range."
     },
     {
       "id": "years_income_gain_lasts",
       "section": "effect",
-      "label": "Years the income gain lasts",
+      "label": "Years the long-term income gain lasts",
       "format": "number",
-      "value": {
-        "low": 20,
-        "best": 40,
-        "high": 45
-      },
-      "kind": "estimate",
+      "formula": "@givewell_shared.long_term_benefit_years",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: study / GiveWell",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: working years over which the gain lasts (GiveWell uses 40)."
+      "explainer": "The site's one figure for how long a long-term income gain lasts (GiveWell's working years, 40), read by every model that counts one (INV-13)."
     },
     {
       "id": "ln_income_gain_per_person",
@@ -297,20 +343,44 @@
       "format": "small",
       "formula": "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
       "unit": "ln-years",
-      "explainer": "Discounted at the shared rate, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs."
+      "explainer": "Discounted at the shared rate, the wait included, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs."
+    },
+    {
+      "id": "resource_sharing_multiplier",
+      "section": "effect",
+      "label": "Resource sharing within households (multiplier on an earner's gain)",
+      "format": "multiple",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "explainer": "The site's one figure (GiveWell's): an earner's income gain is shared with the household, so it counts this many times. Read by every model that values a long-term income gain (INV-13)."
+    },
+    {
+      "id": "internal_validity_adj",
+      "section": "adjustments",
+      "label": "Internal validity of the trials, a multiplier",
+      "format": "multiple",
+      "formula": "@givewell_common.internal_validity_adjustment_malaria",
+      "explainer": "TEMPLATE: how far the trials measured the effect they report. The site's one figure where it has one for the intervention: malaria trials (nets, SMC) @givewell_common.internal_validity_adjustment_malaria; vitamin A and iron @givewell_common.internal_validity_adjustment_vas_iron; a single trial's own @givewell_common.internal_validity_adjustment_* fact where the site has one; water treatment @givewell_common.internal_validity_adjustment_for_morbidity. Otherwise a judgment input with a range, anchored on those."
+    },
+    {
+      "id": "external_validity_adj",
+      "section": "adjustments",
+      "label": "External validity: the trials' setting against this program's, a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the trials' effect carries to this program today: other countries, lower baseline mortality, resistance (insecticides, drugs), another delivery model. 1 = the same setting; name the anchor (another model of this intervention) and the reason."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity)",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 0.7,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+      "formula": "internal_validity_adj * external_validity_adj",
+      "explainer": "The product of its two parts."
     },
     {
       "id": "counterfactual_adj",
@@ -328,7 +398,7 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of credit, when shared with others",
+      "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -336,7 +406,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -357,7 +427,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
     },
     {
       "id": "leverage_funging_adj",
@@ -373,25 +443,124 @@
       "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
     },
     {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a donation waits before the charity spends it",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the charity's unspent funds at year end ÷ its yearly spending (balance sheet and statement of activities), for a charity that grants or buys ahead from reserves; 0 for one that spends as it raises. Where the accounts show interest earned on the waiting funds, the dollar grows meanwhile: add a row interest_yield (interest income ÷ average cash and deposits, from the accounts) and multiply wait_discount by (1 + interest_yield) ^ gift_to_grant_years."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from the charity's spending to the intervention reaching people",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: charity distribution reports",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: procurement, shipping and distribution: from the grant or purchase to the nets hung, the doses given (the charity's own distribution schedule, cited)."
+    },
+    {
+      "id": "benefit_midpoint_years",
+      "section": "adjustments",
+      "label": "Years from delivery to the middle of the protection",
+      "format": "number",
+      "formula": "years_of_coverage * 0.5",
+      "unit": "years",
+      "explainer": "The benefits come over the years of protection (a net's life, a season's doses), so they are discounted from its middle; 0 for a one-off effect such as a vaccine dose's."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait until the benefits come",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years + benefit_midpoint_years)",
+      "explainer": "Every wait is discounted at the shared rate, like every future benefit (the income gain's own wait is counted from delivery, in ln_income_gain_per_person)."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
       "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "treatment_costs_share",
+      "section": "adjustments",
+      "label": "Treatment costs averted, as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_shared.treatment_costs_averted",
+      "explainer": "The site's one figure (GiveWell's supplementary adjustment) for prevention programs: illness prevented saves its treatment. 0, with the reason, for a treatment program."
+    },
+    {
+      "id": "rebound_share",
+      "section": "adjustments",
+      "label": "Rebound malaria from lost immunity, as a share of value lost",
+      "format": "percent",
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development",
+      "explainer": "TEMPLATE: malaria prevention only (nets, SMC, malaria vaccines): children protected build less immunity and catch more malaria later, a negative share (the site's one figure). 0, with the reason, for other programs."
+    },
+    {
+      "id": "investment_of_income_share",
+      "section": "adjustments",
+      "label": "Investment of income increases, as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_shared.investment_of_income_increases_nets",
+      "explainer": "TEMPLATE: income gains partly invested and paying off later, the site's one figure per program: nets @givewell_shared.investment_of_income_increases_nets, vitamin A _vas, deworming _deworming, others @givewell_shared.investment_of_income_increases. 0, with the reason, when the model counts no income gain."
+    },
+    {
+      "id": "other_unmodelled_share",
+      "section": "adjustments",
+      "label": "Other benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: each effect not modelled above, with its sign and size: benefits positive (other diseases prevented), harms and risks (misuse, faster resistance, funging inside the organisation, monitoring errors) negative shares of value lost, added here, never a positive share subtracted elsewhere."
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Benefits and costs not modelled, as a share of modelled value",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: GiveWell-style supplementary adjustment: list each effect not modelled (morbidity, stillbirths, treatment costs averted, rebound effects) with its sign and size."
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+      "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
     },
     {
       "id": "deaths_averted",
@@ -405,9 +574,9 @@
       "section": "outcome",
       "label": "Value of a death averted (units of value)",
       "format": "number",
-      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * @moral_weights.uov_per_death_over5) * $life_value_multiplier",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "GiveWell's moral weights for the age mix of deaths averted, times your multiplier on the value of a life."
+      "explainer": "GiveWell's moral weights for the age band of each death averted (under five, 5–14, 15–49, 50 and over), times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7)."
     },
     {
       "id": "uov_deaths",
@@ -418,28 +587,73 @@
       "unit": "units of value"
     },
     {
-      "id": "uov_morbidity",
+      "id": "uov_stillbirths",
       "section": "outcome",
-      "label": "Units of value from illness averted",
+      "label": "Units of value from stillbirths averted",
       "format": "number",
-      "formula": "uov_deaths * morbidity_value_ratio",
-      "unit": "units of value"
+      "formula": "people_reached * stillbirths_averted_per_person * total_adj * @givewell_shared.uov_per_stillbirth * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "A stillbirth averted at the site's one value (@givewell_shared.uov_per_stillbirth, GiveWell's), times your multiplier on the value of a life."
     },
     {
       "id": "uov_income",
       "section": "outcome",
       "label": "Units of value from later-life income",
       "format": "number",
-      "formula": "people_reached * ln_income_gain_per_person * total_adj * $uov_per_ln_consumption",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption",
       "unit": "units of value"
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness averted",
+      "format": "number",
+      "formula": "(uov_deaths + uov_income) * morbidity_value_ratio",
+      "unit": "units of value",
+      "explainer": "A share of the deaths' and income's value, the base GiveWell's supplementary share has."
+    },
+    {
+      "id": "dalys_illness_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "DALYs",
+      "source": {
+        "title": "TEMPLATE: GBD 2019 disability weights / trial",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: illness counted directly as healthy years: cases averted (or treated) per person × the GBD disability weight of the condition (@gbd_disability_weights where the site has it; add the weight there from the GBD 2019 disability-weights table if not) × the years it lasts, discounted at $discount_rate where it lasts more than a year. The route for hospital, hospice and other care in rich countries, where illness, not deaths, is most of the good. 0 when illness is in morbidity_value_ratio (GiveWell's share) instead: never both."
+    },
+    {
+      "id": "dalys_bridged",
+      "section": "bridges",
+      "label": "Illness averted, in DALYs",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_averted_per_person * total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "uov_from_daly",
+      "section": "bridges",
+      "label": "Illness averted, in units of value",
+      "format": "number",
+      "formula": "dalys_bridged * ($uov_per_daly)",
+      "unit": "units of value",
+      "explainer": "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to."
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Total units of value",
       "format": "number",
-      "formula": "(uov_deaths + uov_morbidity + uov_income) * (1 + unmodelled_benefits_adj)",
-      "unit": "units of value"
+      "formula": "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
+      "unit": "units of value",
+      "explainer": "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge."
     },
     {
       "id": "uov_per_dollar",
@@ -452,35 +666,18 @@
     {
       "id": "staff_cost_share",
       "section": "donor",
-      "label": "Staff pay as a share of total cost",
+      "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: audited financial statements",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+      "formula": "@staff_pay.share_goods",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_goods; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
     },
     {
       "id": "salary_gap",
       "section": "donor",
-      "label": "Pay gap versus comparable for-profit jobs",
+      "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_local_delivery); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
     },
     {
       "id": "salary_sacrifice",

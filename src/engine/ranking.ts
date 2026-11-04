@@ -49,7 +49,9 @@ export function isSideSheet(m: ResolvedModel): boolean {
 /** The program a model belongs to: "" for a charity without programs, undefined when it matches none. */
 export function programOf(c: Charity, m: ResolvedModel): string | undefined {
   if (!c.programs) return "";
-  return c.programs.find((p) => new RegExp(p.models).test(m.id))?.id;
+  // A pattern that is exactly this model's id wins: `<id>-charityevals-relief` belongs to the program
+  // named for it, not to `<id>-charityevals`, whose pattern also matches it as a regex.
+  return (c.programs.find((p) => p.models === m.id) ?? c.programs.find((p) => new RegExp(p.models).test(m.id)))?.id;
 }
 
 const published = (m: ResolvedModel) => m.source?.published ?? "";
@@ -212,7 +214,11 @@ export function evaluatorFigureModels(lib: Library, owner: string, charity: stri
 
 /** The model a charity's main page shows: its first evaluator's first model that counts on the
  * rankings, so the page's model is the one behind its headline and homepage row. A charity off the
- * rankings: its first model in modelsOf order. */
+ * rankings: its first model in modelsOf order. charityevals' own models of several programmes
+ * (build-cea: `<charity>-charityevals` and `-<program>` siblings) show the programme with the most
+ * weight, the charity's main model, whatever order the files load in. */
 export function primaryModel(lib: Library, charity: string): ResolvedModel | undefined {
-  return rankingPlan(lib, charity)[0]?.parts[0]?.model ?? modelsOf(lib, charity)[0];
+  const parts = rankingPlan(lib, charity)[0]?.parts ?? [];
+  const main = parts[0]?.model.owner === "charityevals" ? [...parts].sort((a, b) => (b.weight ?? 0) - (a.weight ?? 0))[0] : parts[0];
+  return main?.model ?? modelsOf(lib, charity)[0];
 }

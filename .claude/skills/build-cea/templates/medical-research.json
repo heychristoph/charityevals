@@ -1,0 +1,504 @@
+{
+  "id": "template-medical-research",
+  "name": "Template: medical research and disease charities",
+  "kind": "template",
+  "cause": "global-health",
+  "template": "medical-research",
+  "estimate_basis": "past_average",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity funds, the disease and the chain from funding to practice, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: medical research and disease charities",
+    "url": "https://charityevals.org/template-medical-research",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "disease_dalys_per_year",
+      "section": "reach",
+      "label": "Disease burden the funded work addresses, DALYs per year",
+      "format": "integer",
+      "value": 1000000,
+      "kind": "observed",
+      "unit": "DALYs / year",
+      "source": {
+        "title": "TEMPLATE: IHME GBD Results",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: DALYs a year from the disease (or the stage, subtype or population the funded work is about) in the places its results would reach, from IHME GBD (GBD Results tool, the latest year), cited with the query."
+    },
+    {
+      "id": "share_burden_addressable",
+      "section": "effect",
+      "label": "Share of that burden the kind of advance funded could avert once adopted",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: if the research succeeds, how much of the burden the result (a drug, test, guideline, screening change) averts at the uptake such results reach, anchored on past advances in the field (the burden averted by a comparable earlier result). Name the anchor."
+    },
+    {
+      "id": "p_success",
+      "section": "effect",
+      "label": "Probability the funded portfolio changes practice",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the chance the work funded in the year leads to a change in practice, from a reference class (share of grants or trials in the field leading to a guideline change or approval; phase success rates for drug work). Name it."
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "effect",
+      "label": "Years the field's work brings the advance forward",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: how much sooner the advance arrives because the field is funded at its current level, the credit then split by attribution_share_shared (this charity's share of the field's funding). Anchored on published research-returns estimates (the reference class in references/families/medical-research.md); name it."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years from the funding until the result is in practice",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 10,
+        "high": 20
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: translation-lag study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: typical lag from funding to practice in the field (the 17 years often cited for translation; shorter for guideline and screening work), discounted at the shared rate."
+    },
+    {
+      "id": "wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait until the result is in practice",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -years_until_effect",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
+      "id": "discounted_years",
+      "section": "effect",
+      "label": "Discounted years brought forward",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_brought_forward) * wait_discount",
+      "unit": "years"
+    },
+    {
+      "id": "research_dalys",
+      "section": "effect",
+      "label": "Expected DALYs averted by the research (before adjustments)",
+      "format": "number",
+      "formula": "disease_dalys_per_year * share_burden_addressable * p_success * discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "adv_people_affected_per_year",
+      "section": "effect",
+      "label": "Advocacy: people per year the policy won or pressed would affect",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: government statistics / charity report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people covered by the screening, funding or prevention policy the charity's advocacy won or pressed in the year; 0, with the reason, without advocacy."
+    },
+    {
+      "id": "adv_dalys_per_person_year",
+      "section": "effect",
+      "label": "Advocacy: DALYs averted per person affected per year",
+      "format": "small",
+      "value": {
+        "low": 0.0001,
+        "best": 0.001,
+        "high": 0.005
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the policy's health effect per person-year, from the evidence on that policy."
+    },
+    {
+      "id": "adv_p_success",
+      "section": "effect",
+      "label": "Advocacy: probability the policy changes because of this work",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: from a reference class of similar campaigns; for a policy already won, the charity's share of the cause of the win."
+    },
+    {
+      "id": "adv_years_of_impact",
+      "section": "effect",
+      "label": "Advocacy: years a won reform counts",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer (docs/normalization.md 2.9)."
+    },
+    {
+      "id": "adv_years_until_effect",
+      "section": "effect",
+      "label": "Advocacy: years from the win until the policy takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the policy's own start date; discounted at the shared rate."
+    },
+    {
+      "id": "adv_discounted_years",
+      "section": "effect",
+      "label": "Advocacy: discounted years of impact",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, adv_years_of_impact) * (1 + $discount_rate) ^ -adv_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "advocacy_dalys",
+      "section": "effect",
+      "label": "Expected DALYs averted by advocacy (before adjustments)",
+      "format": "number",
+      "formula": "adv_people_affected_per_year * adv_dalys_per_person_year * adv_p_success * adv_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Value in units of value (none by default: the burden is counted in DALYs), in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "0",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Value in units of value (none by default: the burden is counted in DALYs), in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction (patients' wellbeing gains, where evidence is in WELLBYs), in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "0",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction (patients' wellbeing gains, where evidence is in WELLBYs), in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "research_dalys + advocacy_dalys",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_research_policy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_research_policy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_research_policy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_research_policy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "$marginal_vs_past_average",
+      "published": 1,
+      "explainer": "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

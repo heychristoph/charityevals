@@ -1,4 +1,5 @@
 import type { ResolvedRow } from "../engine/model";
+import { byCode } from "../engine/countries";
 
 /** Two significant figures: the inputs are rarely known better than that, and more digits only
  * suggest they are (48,715 reads as 49,000; 116.253 as 120). */
@@ -28,7 +29,9 @@ export function formatValue(x: number, format: ResolvedRow["format"] = "number")
 
 /** A shared assumption's value as it reads on screen: some are multipliers shown in the site's own
  * terms (`shown_as`), the same wherever they appear. */
-export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: { factor: number; format?: ResolvedRow["format"] } }, v: number): string {
+export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: { factor: number; format?: ResolvedRow["format"] }; control?: "country" }, v: number): string {
+  // A country is stored as its ISO numeric code.
+  if (row.control === "country") return byCode.get(v)?.name ?? "not set";
   return formatValue(v * (row.shown_as?.factor ?? 1), row.shown_as?.format ?? row.format);
 }
 

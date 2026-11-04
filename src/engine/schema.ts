@@ -47,6 +47,9 @@ const rowShape = {
    * uncertainty uses. `zero` adds a stop at 0 below a log scale, for a weight some readers set to
    * nothing at all. */
   slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional() }).strict().optional(),
+  /** Shared assumptions only: how the reader sets it, when not a slider. `country`: a list of countries,
+   * the value an ISO 3166 numeric code (facts/countries.json), 0 for none. */
+  control: z.enum(["country"]).optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -99,7 +102,7 @@ export const Cause = z.enum(["global-health", "animal-welfare", "ai-safety", "cl
 
 /** Intervention families for charityevals' own models (the build-cea skill). Each prescribes a row
  * structure, so models of the same family can be compared row by row. */
-export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta"]);
+export const TemplateFamily = z.enum(["direct-health", "cash-income", "wellbeing", "corporate-campaign", "diet-change", "policy-research-meta", "domestic-services", "humanitarian-relief", "medical-research", "companion-animals", "conservation", "rights-advocacy"]);
 
 /** `kind`: whose rows these are. evaluator (the default): rows that reproduce the evaluator's sheet.
  * ours: charityevals' steps after the evaluator's bottom line (credit, bridges, the species step), the
@@ -203,6 +206,23 @@ export const Model = z
      * reads the slider. Required on every charity model; variants inherit it. */
     estimate_basis: z.enum(["past_average", "marginal", "unit_cost"]).optional(),
     extends: z.string().optional(),
+    /** Where the people (or animals) a dollar helps are, for the reader's distance weight
+     * ($distance_discount, src/engine/model.ts distanceNode): each country's share by ISO 3166 alpha-3
+     * code, summing to 1, with a "world" share for a part spread by world population; "world" alone for
+     * a benefit spread so (climate, research with global reach); "destinations" for a charity whose good is the money it moves, where each
+     * destination read live (`#id`) brings its own. Variants inherit it. Filled by
+     * scripts/beneficiary-countries.ts. */
+    beneficiaries: z.union([z.record(z.string().regex(/^([A-Z]{3}|world)$/), z.number().positive().max(1)), z.enum(["world", "destinations"])]).optional(),
+    /** How `beneficiaries` was set: the data it was read from, or why it is a judgment. */
+    beneficiaries_note: z.string().optional(),
+    /** For an imported (evaluator's) model: the share of its result whose outcome isn't measured for this
+     * charity (reach or effect a judgment, or the effect from research on other delivery), which our view
+     * counts at $missing_data_discount: the result is (1 − thin_share) + thin_share × the slider
+     * (docs/normalization.md 2.12, src/engine/model.ts missingDataNode). `note` says why. Required on
+     * every imported model with a result in common units (INV-21); variants inherit it. charityevals'
+     * own models never carry it: their branches' `missing_data_adj` rows apply the slider. Filled by
+     * scripts/missing-data.ts. */
+    missing_data: z.object({ thin_share: z.number().min(0).max(1), note: z.string().min(1) }).strict().optional(),
     /** For charityevals' own models: the build-cea template family the model follows. */
     template: TemplateFamily.optional(),
     /** The charity this model is about (inherited by variants). */
@@ -296,7 +316,25 @@ export const Facts = z
   .object({
     id: z.string().regex(/^[a-z][a-z0-9_]*$/),
     label: z.string(),
+    /** Where a whole file's data comes from (facts/countries.json). */
+    source: Source.optional(),
     rows: z.array(Row),
+    /** facts/countries.json only: world regions (UN M49 codes) and every country in one, with its population. */
+    regions: z.array(z.object({ m49: z.number().int(), name: z.string() }).strict()).optional(),
+    countries: z
+      .array(
+        z
+          .object({
+            iso3: z.string().regex(/^[A-Z]{3}$/),
+            m49: z.number().int().positive(),
+            name: z.string(),
+            region: z.number().int(),
+            population: z.number().int().nonnegative(),
+            population_source: z.literal("wpp").optional(),
+          })
+          .strict(),
+      )
+      .optional(),
   })
   .strict();
 export type Facts = z.infer<typeof Facts>;

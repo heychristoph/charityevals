@@ -15,6 +15,8 @@
 //   compare    = <> < > <= >=   (1 when true, 0 when false; lowest precedence)
 //   functions  see FUNCTIONS below
 
+import { populationShare, regionOf, regionPopulationShare } from "./countries";
+
 export type Scope = "row" | "assumption" | "fact" | "model";
 type BinOp = "+" | "-" | "*" | "/" | "^" | "=" | "<>" | "<" | ">" | "<=" | ">=";
 
@@ -29,6 +31,9 @@ export type Node =
  * (fractional years allowed), discounted at `rate`. Matches ACE's cage-free sheet:
  * B + NPV(r, B × (years−1)) + B × frac(years) / (1+r)^years. */
 function pvAnnuityDue(amount: number, rate: number, years: number): number {
+  // Under a year: that fraction of the first payment, undiscounted (it falls in year one). Without
+  // this, 0.5 years counted the whole first year plus a discounted half (1.49 at 4%).
+  if (years < 1) return amount * Math.max(0, years);
   const whole = Math.max(0, Math.trunc(years - 1));
   let pv = amount;
   for (let t = 1; t <= whole; t++) pv += amount / (1 + rate) ** t;
@@ -83,6 +88,10 @@ export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: num
   rounddown: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.trunc), doc: "round towards zero" },
   pv: { arity: [3, 5], fn: pv, doc: "pv(rate, periods, payment, future, type): spreadsheet PV, payments as negatives" },
   npv: { arity: [2, 200], fn: npv, doc: "npv(rate, x1, x2, ...): spreadsheet NPV, x_i discounted by (1+rate)^i" },
+  // Countries by ISO 3166 numeric code (facts/countries.json), for the distance weight (model.ts distanceNode).
+  region_of: { arity: [1, 1], fn: regionOf, doc: "region_of(country): the UN M49 code of the country's world region, 0 for none" },
+  population_share: { arity: [1, 1], fn: populationShare, doc: "population_share(country): the country's share of the world's population" },
+  region_population_share: { arity: [1, 1], fn: regionPopulationShare, doc: "region_population_share(country): the share of the world's population in the country's region" },
 };
 
 export class ExprError extends Error {}

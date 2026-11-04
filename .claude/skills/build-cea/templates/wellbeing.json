@@ -4,20 +4,28 @@
   "kind": "template",
   "cause": "global-health",
   "template": "wellbeing",
+  "estimate_basis": "unit_cost",
   "charity": "template-charity",
   "owner": "charityevals",
-  "summary": "TEMPLATE: what the charity does, where, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty.",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: mental health and wellbeing",
+    "url": "https://charityevals.org/template-wellbeing",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
   "resources": [],
   "sections": [
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What the modelled program cost in the period the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "How many people, animals or meals the spending reached, as the charity reports it."
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
     },
     {
       "id": "effect",
@@ -28,6 +36,12 @@
       "id": "adjustments",
       "title": "Adjustments",
       "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "deaths",
+      "title": "Deaths averted, valued the site's way",
+      "kind": "ours",
+      "explainer": "Deaths a mental-health program averts (suicides) are valued like every death on the site, in units of value (GiveWell's moral weight for the age band × your value of a life), and enter the WELLBYs only through one fixed row, which the WELLBY unit's conversion cancels: so they don't move with the WELLBY slider (docs/normalization.md 2.3, INV-17)."
     },
     {
       "id": "outcome",
@@ -45,7 +59,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on the modelled program(s) in the period",
+      "label": "Spending on the modelled program(s) in the year modelled",
       "format": "usd",
       "value": 1000000,
       "kind": "observed",
@@ -56,7 +70,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: program expenses for the activities modelled below, for the same year as the reach numbers. Cite the audited statement of functional expenses (or the annual report) and the page."
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
     },
     {
       "id": "total_expenses",
@@ -108,7 +122,7 @@
     {
       "id": "people_reached",
       "section": "reach",
-      "label": "People treated in the period",
+      "label": "People treated in the year modelled",
       "format": "integer",
       "value": 10000,
       "kind": "observed",
@@ -148,7 +162,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range."
+      "explainer": "TEMPLATE: standardised mean difference on depression or wellbeing at end of treatment, from the best meta-analysis or RCTs of this intervention type; CI as range. A result in PHQ-9 points becomes SDs by dividing by the site's one spread, @depression.phq9_sd (a formula row: points / @depression.phq9_sd), never a study's own SD typed in; PHQ-8 points (the PHQ-9 without its self-harm item, on nearly the same scale) the same way, said in the explainer. With a trial of the charity's own delivery as well, make this a formula: the precision-weighted blend of the trial and the literature (templates.md, wellbeing)."
     },
     {
       "id": "effect_duration_years",
@@ -210,7 +224,8 @@
       "label": "WELLBYs per person treated",
       "format": "number",
       "formula": "sd_years_per_person * @wellby_factors.wellbys_per_sd_year",
-      "unit": "WELLBYs"
+      "unit": "WELLBYs",
+      "explainer": "SD-years into WELLBYs at the site's one rate (@wellby_factors). The WELLBY slider then puts WELLBYs into healthy years, calibrated so a year of depression is worth the same here as through the GBD weights (@depression); never convert depression into DALYs inside this model."
     },
     {
       "id": "household_size",
@@ -218,19 +233,20 @@
       "label": "Household size",
       "format": "number",
       "formula": "@household_size.uganda",
-      "explainer": "TEMPLATE: the fact for the country the charity works in (facts/household_size.json, the latest DHS survey); add one if it is missing."
+      "explainer": "TEMPLATE: the site's household size for the place the charity works (facts/household_size.json, the latest DHS survey); add the place's fact if it is missing."
     },
     {
       "id": "household_multiplier",
       "section": "effect",
       "label": "Household multiplier (recipient plus spillovers)",
       "format": "multiple",
-      "formula": "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy"
+      "formula": "1 + (household_size - 1) * @wellby_factors.household_spillover_ratio_psychotherapy",
+      "explainer": "Each other household member gains the site's one share of the recipient's effect (HLI's, @wellby_factors)."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity)",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -238,7 +254,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. 1 = take the studies at face value. Explain each component and give the range."
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
     },
     {
       "id": "counterfactual_adj",
@@ -246,17 +262,17 @@
       "label": "Share of the outcome that wouldn't have happened anyway",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
+        "low": 0.9,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+      "explainer": "TEMPLATE: 1 when the effect is a trial's against its control arm (an RCT's effect is already net of the care as usual its controls had, and of recovery without treatment). Below 1 only for what the control arms didn't have and these clients would: other treatment that has since become available to them (a government service now reaching the same people), or an effect taken from pre-post data with no control group (then the share of the change that wouldn't have come anyway, from the trials' control-arm change). Say which, and the source."
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of credit, when shared with others",
+      "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -264,7 +280,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), the share credited to this charity. 1 when it delivers alone."
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
     },
     {
       "id": "attribution_share",
@@ -285,22 +301,72 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported, companies honouring pledges."
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj",
       "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "deaths",
+      "label": "Deaths averted per person treated (before adjustments)",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: WHO Global Health Estimates / meta-analysis",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: suicides averted per person treated, by the site's one recipe (templates.md, wellbeing): the yearly suicide rate of the population treated (the clients' sex and age band, in their country: WHO Global Health Estimates) × (the relative risk of suicide with depression − 1) × the share of that excess the treatment removes, over the effect's years as it fades (× 0.5 × effect_duration_years × discount_factor, discounted like the WELLBYs). 0 with an explanation when the evidence shows none."
+    },
+    {
+      "id": "value_per_death",
+      "section": "deaths",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "TEMPLATE: GiveWell's moral weight for the age band of the people treated (15–49 for most adult programs; @moral_weights.uov_per_death_age_5_14 for school programs; a mix by the clients' ages where both), times your value of a life."
+    },
+    {
+      "id": "uov_valued_outside_wellbys",
+      "section": "deaths",
+      "label": "Deaths averted, in units of value",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * total_adj * value_per_death",
+      "unit": "units of value"
+    },
+    {
+      "id": "wellbys_from_uov",
+      "section": "deaths",
+      "label": "Deaths averted, in WELLBYs (cancelled by the unit's conversion)",
+      "format": "number",
+      "formula": "uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)",
+      "unit": "WELLBYs",
+      "explainer": "The one row that puts units of value into WELLBYs; the WELLBY unit's conversion multiplies it back, so the deaths count exactly their shared value at any WELLBY rate."
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "WELLBYs",
       "format": "number",
-      "formula": "people_reached * wellbys_per_person * household_multiplier * total_adj",
+      "formula": "people_reached * wellbys_per_person * household_multiplier * total_adj + wellbys_from_uov",
       "unit": "WELLBYs"
     },
     {
@@ -314,35 +380,18 @@
     {
       "id": "staff_cost_share",
       "section": "donor",
-      "label": "Staff pay as a share of total cost",
+      "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: audited financial statements",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: salaries and benefits ÷ total expenses, from the statement of functional expenses (or Form 990 Part IX lines 5–9)."
+      "formula": "@staff_pay.share_staff_delivered",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_staff_delivered; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
     },
     {
       "id": "salary_gap",
       "section": "donor",
-      "label": "Pay gap versus comparable for-profit jobs",
+      "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: how much less staff earn than in comparable for-profit roles. Anchor on the sector defaults in scripts/link-resource-shares.py (SECTORS: delivery 10%, services 15%, media 20%, research 30%) or, for animal advocacy, the 35% the ACE models use."
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_health_field); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
     },
     {
       "id": "salary_sacrifice",

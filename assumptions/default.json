@@ -11,6 +11,11 @@
       "explainer": "How much saving a life counts. A value judgment, not a fact."
     },
     {
+      "id": "distance",
+      "title": "Lives near and far",
+      "explainer": "Whether a life counts the same wherever it is. By default it does, and nothing here changes any figure. Some people give more weight to people (and animals) nearer to them: set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
+    },
+    {
       "id": "economics",
       "title": "Timing",
       "explainer": "How much less good done in the future counts than the same good done today, and how much less an old estimate counts than a new one."
@@ -18,7 +23,7 @@
     {
       "id": "accounting",
       "title": "How impact is counted",
-      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average."
+      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average, and how much a programme counts whose results aren't measured."
     }
   ],
   "rows": [
@@ -64,6 +69,20 @@
       },
       "kind": "judgment",
       "explainer": "Some estimates divide what an organisation spent in the past by everything that spending achieved: the pledges, laws and research results it won, the lives its service saved, or the money it moved. That is the average dollar. A dollar given now does less, because an organisation does its most promising work first and the easiest wins are taken. This sets how much the next dollar does, as a share of the average, for every model built that way: The Life You Can Save's money moved, the climate models built on past budgets and past wins, Animal Charity Evaluators' and Founders Pledge's campaign estimates, Founders Pledge's Innovation in Government Initiative, and SoGive's research and lifeboat estimates. Estimates that are already about the next dollar (GiveWell's, Ambitious Impact's and the Happier Lives Institute's, forward-looking budgets) and costs per item delivered (a net, a treatment, a course, a tree) don't take it, so nothing is counted twice; docs/normalization.md lists every model.\n\nThe few published comparisons: CEARCH puts Giving What We Can's marginal giving multiplier at about 13× against its 2020–22 average of 30× (0.43), and in another reading at 17.6% of the average; Giving What We Can expects its marginal figure to be much closer to the average (up to 1). Rethink Priorities' funding model assumes each doubling of a fund's budget cuts its cost-effectiveness by about 10% for GiveWell and 46% for a catastrophic-risk fund, which puts the next dollar at 85% and 11% of the average. Open Philanthropy treats returns to funding as roughly logarithmic, under which an organisation that has grown its spending tenfold does about 40% as much with its next dollar as with its average one. The default, 50%, is our judgment; the range, 18% to 100% (the next dollar as good as the average), covers these figures.\n\nThe evaluator's view keeps 100%: the evaluators publish the average."
+    },
+    {
+      "id": "missing_data_discount",
+      "section": "accounting",
+      "label": "How much we count a programme whose results aren't measured",
+      "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Every programme of every charity is counted, even one that publishes little or nothing about what it achieved. Where a charity doesn't measure a programme's results, we build its estimate from the research on that kind of work (meta-analyses and trials of the intervention: how much it does per person or per dollar, and for how long), applied to the programme's own spending and whatever reach it reports, with wide ranges; we never borrow another charity's result. The same goes for any part of a model whose reach or effect is our judgment rather than the charity's own data. A programme that doesn't measure its results is probably not the typical one in the research: programmes that measure tend to be the ones that work, and the literature carries none of this programme's own detail. So every such estimate counts less, by this share, the same way in every model.\n\nThe same goes for the evaluators' models: each says what share of its result rests on judgment, a projection or research on other delivery (Ambitious Impact's idea-stage estimates and most campaign and policy estimates entirely; GiveWell's top charities not at all), and that share counts less by this setting; their own checks of how well trials transfer stay, and a generic haircut of theirs for weak evidence is replaced by this one, so nothing counts twice. A part of a model counts in full only when the charity's own count of who got the intervention meets an effect measured with a credible comparison: its own controlled evaluation, or trials of the same intervention delivered the same way (treatments it counts and the trials of those treatments, for example). At 100% nothing is discounted. The default, 50%, is our judgment; the range runs from 10% (an unmeasured programme does little next to measured ones) to 100% (it does as well as the research says)."
     },
     {
       "id": "uov_per_daly",
@@ -233,6 +252,32 @@
       "explainer": "How many doubled-income years saving a young child's life is worth. GiveWell uses about 116, from donor surveys, a survey in Ghana and Kenya, and staff judgment; this scales its weights for every age. The 70–163 range is ours."
     },
     {
+      "id": "home_country",
+      "section": "distance",
+      "label": "Where you live",
+      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
+      "control": "country",
+      "format": "integer",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "The country the distance weight counts from. Not set (the default) means no distance weighting at all: every life counts the same wherever it is. Countries are grouped into world regions by the UN's standard list (M49: Northern America, Western Europe, Eastern Africa and so on; facts/countries.json)."
+    },
+    {
+      "id": "distance_discount",
+      "section": "distance",
+      "label": "Each step further from you, a life counts less by",
+      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
+      "unit": "per step",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "A value judgment, not a fact. With a country set under Where you live, a life (a person's or an animal's) in your own country counts in full, one elsewhere in your world region counts less by this much, and one in the rest of the world by this much again: at 50%, a life in your country counts 1, one in your region 0.5 and one further away 0.25. Each estimate is weighed by where the lives it helps are (each model's beneficiaries: the countries its programme works in, or the whole world by population for climate and research with global reach); a charity that moves money takes each destination's weight. 0% (the default) counts every life the same, which is what every evaluator on the site does; the evaluator's own view never applies it."
+    },
+    {
       "id": "discount_rate",
       "section": "economics",
       "label": "Next year's good counts less by",
@@ -240,12 +285,12 @@
       "unit": "per year",
       "format": "percent",
       "value": {
-        "low": 0.0,
+        "low": 0.001,
         "best": 0.04,
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\")."
+      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\"). It is also how much future generations count: a catastrophe that costs the future loses every later year of healthy life, each discounted at this rate, so the loss is the yearly loss ÷ the rate (25 years' worth at 4%, 1,000 at the lowest setting, 0.1%: the slider stops there because at 0 an endless future would count infinitely)."
     },
     {
       "id": "estimate_age_discount",

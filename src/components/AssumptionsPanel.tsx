@@ -3,6 +3,7 @@ import { RotateCcw, Link2, Check, ChevronRight } from "lucide-react";
 import MiniRanking from "./MiniRanking";
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
+import { COUNTRIES, byCode, regionName } from "../engine/countries";
 import { formatAssumption, formatValue, parseTyped } from "../lib/format";
 import { assumptionComparable } from "../lib/comparables";
 import { useAssumptionValues } from "../lib/use-results";
@@ -186,6 +187,39 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
   );
 }
 
+const BY_NAME = [...COUNTRIES].sort((a, b) => a.name.localeCompare(b.name));
+
+/** A country, stored as its ISO numeric code (0 for none): a list rather than a slider. */
+function CountrySelect({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
+  const id = useId();
+  const best = pickValue(row.value);
+  const country = byCode.get(value);
+  return (
+    <div className={`assumption country-row tip-host ${value !== best ? "changed" : ""}`} id={`a-${row.id}`}>
+      <div className="assumption-head">
+        {compact && row.explainer ? (
+          <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="What this means"><Markdown text={row.explainer} /><Technical row={row} /></InfoTip></LabelWithTip>
+        ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
+      </div>
+      <select
+        id={id}
+        className="country-select"
+        value={country ? value : 0}
+        onChange={(e) => {
+          const v = Number(e.target.value);
+          setAssumption(row.id, v, best);
+          trackAssumption(row.id, v, best, true);
+        }}
+      >
+        <option value={0}>Not set (no distance weighting)</option>
+        {BY_NAME.map((c) => <option key={c.m49} value={c.m49}>{c.name}</option>)}
+      </select>
+      {country && <p className="comparable small">Your region: {regionName.get(country.region)}.</p>}
+      {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
+    </div>
+  );
+}
+
 /** A fixed rate (evidence-based, or a judgment kept fixed, which says so): its value, source and range, with nothing to drag. */
 function Fixed({ row }: { row: Row }) {
   const v = typeof row.value === "object" ? row.value : undefined;
@@ -309,6 +343,8 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             {!shut && rows.map((r) => (
               r.fixed
                 ? <Fixed key={r.id} row={r} />
+                : r.control === "country"
+                ? <CountrySelect key={r.id} row={r} value={overrides[r.id] ?? pickValue(r.value)} compact={compact} />
                 : r.format === "toggle"
                 ? <Toggle key={r.id} row={r} value={overrides[r.id] ?? pickValue(r.value)} compact={compact} />
                 : <Slider key={r.id} row={r} value={overrides[r.id] ?? pickValue(r.value)} compact={compact} />
