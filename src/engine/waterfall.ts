@@ -20,6 +20,7 @@ import {
   MISSING_DATA_DISCOUNT,
   assumptionValues,
   bottomLine,
+  compute,
   headline,
   pickValue,
   usedAssumptions,
@@ -53,6 +54,9 @@ export type Waterfall = {
   /** Where the start comes from: the model's own result in its own unit (per dollar), before it is put
    * in years of healthy life per $1,000. */
   native: { value: number; unit: string };
+  /** The evaluator's own final figure, in the unit they report (output.native: "animals spared",
+   * "multiples of cash transfers"), from the evaluator view; absent when it is the same as `native`. */
+  reported?: { value: number; unit: string; row: string };
 };
 
 /** The site-wide adjustments: their slider, the value that turns them off, and their label. */
@@ -147,7 +151,11 @@ export function waterfall(lib: Library, m: ResolvedModel, av: Record<string, num
   // Whatever is left (none, as every value is now the reader's): kept so the chain always ends at the figure.
   if (rel(end, value) > 1e-9) steps.push({ kind: "other", label: "Everything else", from: value, to: end });
   const native = { value: bottomLine(lib, m, { ...defaults, ...off }, {}, start === "evaluator" ? "evaluator" : "charityevals").native, unit: m.output.unit };
-  return { start, startValue, steps, end, native };
+  const n = m.output.native;
+  const reported = n && n.row !== m.output.row
+    ? { value: compute(lib, m, { ...defaults, ...off }, {}, start === "evaluator" ? "evaluator" : "charityevals")[n.row], unit: n.unit, row: n.row }
+    : undefined;
+  return { start, startValue, steps, end, native, ...(reported && Number.isFinite(reported.value) ? { reported } : {}) };
 }
 
 const rel = (a: number, b: number) => (Number.isFinite(a) && Number.isFinite(b) ? Math.abs(a - b) / Math.max(Math.abs(a), Math.abs(b), 1e-300) : Infinity);

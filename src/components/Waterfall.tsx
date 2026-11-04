@@ -130,10 +130,20 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
       {/* Their result in its own unit, times each factor that turns it into healthy years, equals the
           figure the steps start from. */}
       <div className="wf-eq" role="group" aria-label="How the result becomes years of healthy life">
+        {w.reported && (
+          <>
+            <div className="wf-term">
+              <span className="wf-term-num num">{fmtNative(w.reported.value)}</span>
+              <span className="wf-term-label">{w.reported.unit}</span>
+              <span className="wf-term-by">{w.start === "evaluator" ? `${possessive(owner)} final figure` : "the model's final figure"}</span>
+            </div>
+            <a className="wf-op wf-op-link" href={`#row-${model.output!.row}`} title="The model's own steps from their figure to this unit, in the tree above">→</a>
+          </>
+        )}
         <div className="wf-term">
           <span className="wf-term-num num">{fmtNative(w.native.value)}</span>
           <span className="wf-term-label">{unitLabel} per dollar</span>
-          <span className="wf-term-by">{w.start === "evaluator" ? `${possessive(owner)} result` : "the model's result"}</span>
+          <span className="wf-term-by">{w.reported ? <a href={`#row-${model.output!.row}`}>our conversion of it (in the model above)</a> : w.start === "evaluator" ? `${possessive(owner)} result` : "the model's result"}</span>
         </div>
         {factors.map((f, i) => (
           <Fragment key={i}>
