@@ -3,6 +3,6 @@ GiveWell published 2 public models of this charity's work, from June 2022 to Apr
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Suvita cost-effectiveness analysis, March 2023](/suvita) | GW | April 2023 | <span data-figure="headline" data-model="suvita-march-2023">32</span> | 186, 20 kept fixed |
+| [Suvita cost-effectiveness analysis, March 2023](/suvita) | [GW](/evaluators/givewell) | April 2023 | <span data-figure="headline" data-model="suvita-march-2023">32</span> | 186, 20 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

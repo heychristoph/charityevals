@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in January 2
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Better Season Project: asset-collateralised loans for smallholder farmers (Ambitious Impact, 2026 idea report)](/better-season-project) | AIM | January 2025 | <span data-figure="headline" data-model="better-season-project-aim">30</span> | 6066, 2 kept fixed |
+| [Better Season Project: asset-collateralised loans for smallholder farmers (Ambitious Impact, 2026 idea report)](/better-season-project) | [AIM](/evaluators/ambitious-impact) | January 2025 | <span data-figure="headline" data-model="better-season-project-aim">30</span> | 6066, 2 kept fixed |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Better Season Project existed, not of the charity's own results. It is shown because Better Season Project runs the programme today ([checked October 2026](https://www.betterseasonproject.org/)) and no model of its actual work exists yet.
 

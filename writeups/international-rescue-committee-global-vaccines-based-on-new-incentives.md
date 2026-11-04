@@ -3,8 +3,8 @@ GiveWell published 4 public models of this charity's work, from January 2024 to 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Global Vaccines cost-effectiveness analysis [Based on New Incentives]](/international-rescue-committee) | GW | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-global-vaccines-based-on-new-incentives">20</span> | 909, 13 kept fixed |
-| [VoI rough estimate for IRC mini incubator, June 27, 2024](/international-rescue-committee/international-rescue-committee-voi-irc-mini-incubator-june-27-2024) | GW | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-voi-irc-mini-incubator-june-27-2024">7.5</span> | 35 |
-| [Malnutrition treatment cost-effectiveness analysis (IRC standard protocol), 2023](/international-rescue-committee/international-rescue-committee-malnutrition-treatment-irc-standard) | GW | January 2024 | <span data-figure="headline" data-model="international-rescue-committee-malnutrition-treatment-irc-standard">5.6</span> | 723 |
+| [Global Vaccines cost-effectiveness analysis [Based on New Incentives]](/international-rescue-committee) | [GW](/evaluators/givewell) | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-global-vaccines-based-on-new-incentives">20</span> | 909, 13 kept fixed |
+| [VoI rough estimate for IRC mini incubator, June 27, 2024](/international-rescue-committee/international-rescue-committee-voi-irc-mini-incubator-june-27-2024) | [GW](/evaluators/givewell) | September 2024 | <span data-figure="headline" data-model="international-rescue-committee-voi-irc-mini-incubator-june-27-2024">7.5</span> | 35 |
+| [Malnutrition treatment cost-effectiveness analysis (IRC standard protocol), 2023](/international-rescue-committee/international-rescue-committee-malnutrition-treatment-irc-standard) | [GW](/evaluators/givewell) | January 2024 | <span data-figure="headline" data-model="international-rescue-committee-malnutrition-treatment-irc-standard">5.6</span> | 723 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

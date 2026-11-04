@@ -3,9 +3,9 @@ GiveWell and SoGive published 4 public models of this charity's work, from Decem
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness of April 2023 Sightsavers DRC grant](/sightsavers) | GW | April 2023 | <span data-figure="headline" data-model="sightsavers-cost-effectiveness-april-2023-drc">21</span> | 9 |
-| [Cost-effectiveness of January 2023 Sightsavers grant](/sightsavers/sightsavers-cost-effectiveness-january-2023) | GW | January 2023 | <span data-figure="headline" data-model="sightsavers-cost-effectiveness-january-2023">26</span> | 2 |
-| [Sightsavers Cameroon and Nigeria cost-effectiveness, December 2021](/sightsavers/sightsavers-cameroon-nigeria-cost-effectiveness) | GW | December 2021 | <span data-figure="headline" data-model="sightsavers-cameroon-nigeria-cost-effectiveness">18</span> | 1 |
-| [Deworming: Sightsavers (SoGive, 2022)](/sightsavers/sightsavers-deworming-sogive-2022) | SG | September 2022 | <span data-figure="headline" data-model="sightsavers-deworming-sogive-2022">13</span> | 1683, 242 kept fixed |
+| [Cost-effectiveness of April 2023 Sightsavers DRC grant](/sightsavers) | [GW](/evaluators/givewell) | April 2023 | <span data-figure="headline" data-model="sightsavers-cost-effectiveness-april-2023-drc">21</span> | 9 |
+| [Cost-effectiveness of January 2023 Sightsavers grant](/sightsavers/sightsavers-cost-effectiveness-january-2023) | [GW](/evaluators/givewell) | January 2023 | <span data-figure="headline" data-model="sightsavers-cost-effectiveness-january-2023">26</span> | 2 |
+| [Sightsavers Cameroon and Nigeria cost-effectiveness, December 2021](/sightsavers/sightsavers-cameroon-nigeria-cost-effectiveness) | [GW](/evaluators/givewell) | December 2021 | <span data-figure="headline" data-model="sightsavers-cameroon-nigeria-cost-effectiveness">18</span> | 1 |
+| [Deworming: Sightsavers (SoGive, 2022)](/sightsavers/sightsavers-deworming-sogive-2022) | [SG](/evaluators/sogive) | September 2022 | <span data-figure="headline" data-model="sightsavers-deworming-sogive-2022">13</span> | 1683, 242 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

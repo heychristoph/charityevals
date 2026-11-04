@@ -3,7 +3,7 @@ GiveWell, Happier Lives Institute published 3 public models of this charity's wo
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Taimaka malnutrition treatment cost-effectiveness analysis, 2024](/taimaka) | GW | November 2024 | <span data-figure="headline" data-model="taimaka-malnutrition-treatment-2024">6.7</span> | 212 |
-| [Taimaka (HLI, 2024)](/taimaka/taimaka-hli) | HLI | November 2024 | <span data-figure="headline" data-model="taimaka-hli">8.0</span> | 1 |
+| [Taimaka malnutrition treatment cost-effectiveness analysis, 2024](/taimaka) | [GW](/evaluators/givewell) | November 2024 | <span data-figure="headline" data-model="taimaka-malnutrition-treatment-2024">6.7</span> | 212 |
+| [Taimaka (HLI, 2024)](/taimaka/taimaka-hli) | [HLI](/evaluators/hli) | November 2024 | <span data-figure="headline" data-model="taimaka-hli">8.0</span> | 1 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in March 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Rough WHO GDG rough estimate, March 2025](/world-health-organization) | GW | March 2025 | <span data-figure="headline" data-model="world-health-organization-rough-who-gdg-march-2025">23</span> | 6 |
+| [Rough WHO GDG rough estimate, March 2025](/world-health-organization) | [GW](/evaluators/givewell) | March 2025 | <span data-figure="headline" data-model="world-health-organization-rough-who-gdg-march-2025">23</span> | 6 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

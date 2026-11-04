@@ -3,6 +3,6 @@ GiveWell published 2 public models of this charity's work, from May 2024 to May 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | GW | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">4.5</span> | 207, 71 kept fixed |
+| [ORS/Zinc cost-effectiveness analysis](/clear-solutions) | [GW](/evaluators/givewell) | May 2024 | <span data-figure="headline" data-model="clear-solutions-ors-zinc">4.5</span> | 207, 71 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

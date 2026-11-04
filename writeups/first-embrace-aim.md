@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in February 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [First Embrace: kangaroo care for low birth weight babies (Ambitious Impact, 2025 idea report)](/first-embrace) | AIM | February 2025 | <span data-figure="headline" data-model="first-embrace-aim">11</span> | 486 |
+| [First Embrace: kangaroo care for low birth weight babies (Ambitious Impact, 2025 idea report)](/first-embrace) | [AIM](/evaluators/ambitious-impact) | February 2025 | <span data-figure="headline" data-model="first-embrace-aim">11</span> | 486 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before First Embrace existed, not of the charity's own results. It is shown because First Embrace runs the programme today ([checked October 2026](https://forum.effectivealtruism.org/posts/wGXCuedzsubqNDAca/introducing-first-embrace-an-ambitious-impact-incubated)) and no model of its actual work exists yet.
 

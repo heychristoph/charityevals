@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in January 2019.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Phase II R4D cost-effectiveness analysis, December 2018 - Amoxicillin procurement (Best guess counterfactual) (External)](/results-for-development) | GW | January 2019 | <span data-figure="headline" data-model="results-for-development-phase-ii-r4d-december-2018-amoxicillin">8.8</span> | 20, 1 kept fixed |
+| [Phase II R4D cost-effectiveness analysis, December 2018 - Amoxicillin procurement (Best guess counterfactual) (External)](/results-for-development) | [GW](/evaluators/givewell) | January 2019 | <span data-figure="headline" data-model="results-for-development-phase-ii-r4d-december-2018-amoxicillin">8.8</span> | 20, 1 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

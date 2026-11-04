@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from January 2023 to 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Updated value of information analysis of One Acre Fund's Rwanda seedlings RCT grant, 2024](/one-acre-fund/one-acre-fund-updated-value-information-rwanda) | GW | January 2024 | <span data-figure="headline" data-model="one-acre-fund-updated-value-information-rwanda">7.5</span> | 656, 32 kept fixed |
-| [One Acre Fund seedlings rough estimate, 2022](/one-acre-fund) | GW | January 2023 | <span data-figure="headline" data-model="one-acre-fund-seedlings-2022">7.0</span> | 656, 32 kept fixed |
+| [Updated value of information analysis of One Acre Fund's Rwanda seedlings RCT grant, 2024](/one-acre-fund/one-acre-fund-updated-value-information-rwanda) | [GW](/evaluators/givewell) | January 2024 | <span data-figure="headline" data-model="one-acre-fund-updated-value-information-rwanda">7.5</span> | 656, 32 kept fixed |
+| [One Acre Fund seedlings rough estimate, 2022](/one-acre-fund) | [GW](/evaluators/givewell) | January 2023 | <span data-figure="headline" data-model="one-acre-fund-seedlings-2022">7.0</span> | 656, 32 kept fixed |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

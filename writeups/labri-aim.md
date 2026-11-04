@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in February 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [LABRI: advocacy for used lead-acid battery recycling regulation (Ambitious Impact, 2025 idea report)](/labri) | AIM | February 2025 | <span data-figure="headline" data-model="labri-aim">19</span> | 478, 1 kept fixed |
+| [LABRI: advocacy for used lead-acid battery recycling regulation (Ambitious Impact, 2025 idea report)](/labri) | [AIM](/evaluators/ambitious-impact) | February 2025 | <span data-figure="headline" data-model="labri-aim">19</span> | 478, 1 kept fixed |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before LABRI (Lead-Acid Battery Recycling Initiative) existed, not of the charity's own results. It is shown because LABRI (Lead-Acid Battery Recycling Initiative) runs the programme today ([checked October 2026](https://www.labrecyclinginitiative.com/post/q1-2026-newsletter)) and no model of its actual work exists yet.
 

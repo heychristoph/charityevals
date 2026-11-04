@@ -3,6 +3,6 @@ GiveWell published 2 public models of this charity's work, from April 2020 to No
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [DMI rough estimate](/development-media-international) | GW | April 2020 | <span data-figure="headline" data-model="development-media-international-dmi">34</span> | 109 |
+| [DMI rough estimate](/development-media-international) | [GW](/evaluators/givewell) | April 2020 | <span data-figure="headline" data-model="development-media-international-dmi">34</span> | 109 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

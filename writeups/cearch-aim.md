@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in January 2
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [CEARCH: exploratory cause-prioritisation research (Ambitious Impact, 2021 idea report)](/cearch) | AIM | January 2021 | <span data-figure="headline" data-model="cearch-aim">44</span> | 27 |
+| [CEARCH: exploratory cause-prioritisation research (Ambitious Impact, 2021 idea report)](/cearch) | [AIM](/evaluators/ambitious-impact) | January 2021 | <span data-figure="headline" data-model="cearch-aim">44</span> | 27 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before CEARCH existed, not of the charity's own results. It is shown because CEARCH runs the programme today ([checked October 2026](https://exploratory-altruism.org/)) and no model of its actual work exists yet.
 

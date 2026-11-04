@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in February 2026.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [F35 milk trial rough estimate, 2026](/sickkids) | GW | February 2026 | <span data-figure="headline" data-model="sickkids-f35-milk-trial-2026">34</span> | 10 |
+| [F35 milk trial rough estimate, 2026](/sickkids) | [GW](/evaluators/givewell) | February 2026 | <span data-figure="headline" data-model="sickkids-f35-milk-trial-2026">34</span> | 10 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

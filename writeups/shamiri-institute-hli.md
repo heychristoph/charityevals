@@ -3,6 +3,6 @@ Happier Lives Institute published one public model of this charity's work, in Fe
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Shamiri Institute: group interventions for adolescent mental health in Kenya (HLI)](/shamiri-institute) | HLI | February 2026 | <span data-figure="headline" data-model="shamiri-institute-hli">2.0</span> | 10 |
+| [Shamiri Institute: group interventions for adolescent mental health in Kenya (HLI)](/shamiri-institute) | [HLI](/evaluators/hli) | February 2026 | <span data-figure="headline" data-model="shamiri-institute-hli">2.0</span> | 10 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in December 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [IPA M&E of MSI's Family Planning Outreach Program rough estimate, 2025](/innovations-for-poverty-action) | GW | December 2025 | <span data-figure="headline" data-model="innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach">5.1</span> | 8 |
+| [IPA M&E of MSI's Family Planning Outreach Program rough estimate, 2025](/innovations-for-poverty-action) | [GW](/evaluators/givewell) | December 2025 | <span data-figure="headline" data-model="innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach">5.1</span> | 8 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

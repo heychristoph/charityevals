@@ -3,8 +3,8 @@ GiveWell, Happier Lives Institute published 4 public models of this charity's wo
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Pure Earth rough estimate](/pure-earth) | GW | July 2021 | <span data-figure="headline" data-model="pure-earth-model">11</span> | 77, 2 kept fixed |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | HLI | July 2025 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics">1.1</span> | 27 |
-| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | HLI | November 2024 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics-before-correction">1.1</span> | 25 |
+| [Pure Earth rough estimate](/pure-earth) | [GW](/evaluators/givewell) | July 2021 | <span data-figure="headline" data-model="pure-earth-model">11</span> | 77, 2 kept fixed |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics) | [HLI](/evaluators/hli) | July 2025 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics">1.1</span> | 27 |
+| [Pure Earth: leaded cosmetics advocacy in Ghana (HLI, before the July 2025 correction)](/pure-earth/pure-earth-hli-ghana-cosmetics-before-correction) | [HLI](/evaluators/hli) | November 2024 | <span data-figure="headline" data-model="pure-earth-hli-ghana-cosmetics-before-correction">1.1</span> | 25 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

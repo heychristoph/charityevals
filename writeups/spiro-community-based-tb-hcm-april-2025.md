@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in April 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Cost-effectiveness analysis of Spiro - community-based TB HCM (April 2025)](/spiro) | GW | April 2025 | <span data-figure="headline" data-model="spiro-community-based-tb-hcm-april-2025">5.3</span> | 155 |
+| [Cost-effectiveness analysis of Spiro - community-based TB HCM (April 2025)](/spiro) | [GW](/evaluators/givewell) | April 2025 | <span data-figure="headline" data-model="spiro-community-based-tb-hcm-april-2025">5.3</span> | 155 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

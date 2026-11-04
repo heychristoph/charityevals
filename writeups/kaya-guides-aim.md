@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in August 20
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Kaya Guides: guided self-help for depression (Ambitious Impact, 2020 idea report)](/kaya-guides) | AIM | August 2020 | <span data-figure="headline" data-model="kaya-guides-aim">0.40</span> | 22 |
+| [Kaya Guides: guided self-help for depression (Ambitious Impact, 2020 idea report)](/kaya-guides) | [AIM](/evaluators/ambitious-impact) | August 2020 | <span data-figure="headline" data-model="kaya-guides-aim">0.40</span> | 22 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Kaya Guides existed, not of the charity's own results. It is shown because Kaya Guides runs the programme today ([checked October 2026](https://www.kayaguides.com/)) and no model of its actual work exists yet.
 

@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in October 2024.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [J-PAL vouchers option value cost-effectiveness analysis, 2024](/j-pal) | GW | October 2024 | <span data-figure="headline" data-model="j-pal-vouchers-option-value-2024">14</span> | 82 |
+| [J-PAL vouchers option value cost-effectiveness analysis, 2024](/j-pal) | [GW](/evaluators/givewell) | October 2024 | <span data-figure="headline" data-model="j-pal-vouchers-option-value-2024">14</span> | 82 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

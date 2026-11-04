@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in July 2025.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [VoI rough estimate for Walter and Eliza Hall Iron Repletion RCT, July 2025](/wehi) | GW | July 2025 | <span data-figure="headline" data-model="wehi-voi-walter-eliza-hall-iron-repletion">19</span> | 129 |
+| [VoI rough estimate for Walter and Eliza Hall Iron Repletion RCT, July 2025](/wehi) | [GW](/evaluators/givewell) | July 2025 | <span data-figure="headline" data-model="wehi-voi-walter-eliza-hall-iron-repletion">19</span> | 129 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

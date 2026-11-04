@@ -3,7 +3,7 @@ GiveWell published 2 public models of this charity's work, from November 2022 to
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [KMC with r.i.c.e. in Uttar Pradesh rough estimate, 2023](/rice-institute) | GW | January 2023 | <span data-figure="headline" data-model="rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023">8.7</span> | 24, 1 kept fixed |
-| [Kangaroo Mother Care rough estimate](/rice-institute/rice-institute-kangaroo-mother-care) | GW | November 2022 | <span data-figure="headline" data-model="rice-institute-kangaroo-mother-care">17</span> | 14 |
+| [KMC with r.i.c.e. in Uttar Pradesh rough estimate, 2023](/rice-institute) | [GW](/evaluators/givewell) | January 2023 | <span data-figure="headline" data-model="rice-institute-kmc-with-r-i-c-e-in-uttar-pradesh-2023">8.7</span> | 24, 1 kept fixed |
+| [Kangaroo Mother Care rough estimate](/rice-institute/rice-institute-kangaroo-mother-care) | [GW](/evaluators/givewell) | November 2022 | <span data-figure="headline" data-model="rice-institute-kangaroo-mother-care">17</span> | 14 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
