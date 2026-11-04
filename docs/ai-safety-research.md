@@ -285,3 +285,15 @@ families/catastrophic-risk.md. The family is then reusable for biosecurity and n
 - **Lobbying arms** that can't take tax-deductible gifts are shown, labelled as such.
 - **One family, `catastrophic-risk`,** reusing the conservation template's catastrophe rows, for AI,
   biosecurity and nuclear risk.
+- **No scoring against a field average.** Like every other family, each charity's figure comes from its
+  own outputs × a shared effect per unit × the four standard adjustments × the missing-data marker.
+  The shared effect per unit is the field's risk cut per researcher-year (or per policy win), from the
+  field's total spending (labs and governments included) and staff. Outputs: researcher-years and
+  their uptake (research, evaluations); researchers trained × years they stay (field-building); won
+  policies by the won-reform method (policy); money moved with destinations read live (regrantors).
+  Every branch is thin: the effect per unit comes from a model of the field, not a trial.
+- **Slider default:** 3% (the forecasting tournament's domain experts), unless the owner says otherwise.
+
+**Next, after the top-charity rebuild:** the `catastrophic-risk` skeleton and family file,
+`facts/ai_risk.json`, the `$ai_catastrophe_chance` slider, then METR, CAIS, MATS, MIRI and Longview's
+Emerging Challenges Fund (all take small gifts).
