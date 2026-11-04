@@ -107,6 +107,9 @@ export function editsFor(m: ResolvedModel, edits: Edits, lib?: Library): Edits {
       if (current !== edits) return;
       const kept: Edits = { ...out };
       keys.forEach((k, i) => { if (!where[i] && elsewhere(k)) kept[k] = edits[k]; });
+      // Nothing dropped or moved (every key kept as it was): no new snapshot, so no re-render loop.
+      const same = Object.keys(kept).length === keys.length && keys.every((k) => kept[k] === edits[k]);
+      if (same) return;
       current = kept;
       persist();
     });

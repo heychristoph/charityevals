@@ -133,7 +133,10 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
     () => (combined ? (a: Record<string, number>) => figureOf(model.charity, model.owner, a) : (a: Record<string, number>) => headline(lib, model, a, edits)),
     [combined, model, edits],
   );
-  const partModels = useMemo(() => (combined && combined.what === "program" ? combined.ev.programs.map((p) => p.result.model) : [model]), [combined, model]);
+  const partModels = useMemo(
+    () => (combined && combined.what === "program" ? combined.ev.programs.map((p) => ({ m: p.result.model, weight: p.weight })) : [{ m: model, weight: undefined }]),
+    [combined, model],
+  );
   // A whole-charity page edits each programme's own model; their edits stay in the URL (edit-state).
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
   if (!Number.isFinite(figure)) return null;
@@ -198,7 +201,8 @@ const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
 /** "Helps lives in Kenya: × 0.25 at your settings (you live in the United States, 50% less per step)":
  * where the model's beneficiaries are and what the reader's distance weight (docs/normalization.md 2.13)
  * does to the figure above. For a charity that moves money, the weight its destinations bring together. */
-function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ResolvedModel[] }) {
+type ProgramPart = { m: ResolvedModel; weight?: number };
+function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
   const b = parts.length > 1 ? mergedBeneficiaries(parts, av) : model.beneficiaries;
   if (!b) return null;
   const home = byCode.get(av[HOME_COUNTRY]);
@@ -218,15 +222,17 @@ function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: R
 }
 
 /** Several programs' beneficiaries as one, each weighted by its share of the combined figure at the
- * reader's values without the distance weight; a program that moves money keeps that label. */
-function mergedBeneficiaries(parts: ResolvedModel[], av: Record<string, number>): Record<string, number> | "world" | "destinations" | undefined {
+ * reader's values without the distance weight (its funding weight × its figure, as the combination
+ * adds them); a program that moves money keeps that label. */
+function mergedBeneficiaries(parts: ProgramPart[], av: Record<string, number>): Record<string, number> | "world" | "destinations" | undefined {
   const plain = { ...av, [DISTANCE_DISCOUNT]: 0 };
   const out: Record<string, number> = {};
   let total = 0;
-  for (const m of parts) {
+  const weighted = parts.every((p) => p.weight !== undefined);
+  for (const { m, weight } of parts) {
     const b = m.beneficiaries;
     if (!b || b === "destinations") return b;
-    const v = Math.max(0, headline(lib, m, plain));
+    const v = Math.max(0, headline(lib, m, plain)) * (weighted ? weight! : 1);
     total += v;
     for (const [iso, s] of Object.entries(b === "world" ? { world: 1 } : b)) out[iso] = (out[iso] ?? 0) + s * v;
   }
@@ -251,7 +257,7 @@ function where(b: Record<string, number> | "world"): string {
  * slider (docs/normalization.md 2.12) does to the figure above. An imported model's share is its
  * `missing_data`; a charityevals model's comes from its branches' own missing_data_adj rows; a charity that
  * moves money takes its destinations'. */
-function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ResolvedModel[] }) {
+function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
   if (!(MISSING_DATA_DISCOUNT in av)) return null;
   const d = av[MISSING_DATA_DISCOUNT];
   // The whole effect on the figure shown, destinations, branches and programs included.
@@ -261,7 +267,7 @@ function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Reco
   // move the figure (at 100% nothing moves, but the unmeasured parts are still unmeasured).
   const thin = (m: ResolvedModel) => (m.missing_data ? m.missing_data.thin_share > 0 : usedAssumptions(lib, m).includes(MISSING_DATA_DISCOUNT));
   const share = parts.length === 1 ? model.missing_data?.thin_share : undefined;
-  const anyThin = parts.some(thin);
+  const anyThin = parts.some((p) => thin(p.m));
   const what = share !== undefined
     ? share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`
     : anyThin ? "Parts not measured for this charity" : "Measured for this charity";
