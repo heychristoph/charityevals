@@ -15,6 +15,8 @@
 //   compare    = <> < > <= >=   (1 when true, 0 when false; lowest precedence)
 //   functions  see FUNCTIONS below
 
+import { populationShare, regionOf, regionPopulationShare } from "./countries";
+
 export type Scope = "row" | "assumption" | "fact" | "model";
 type BinOp = "+" | "-" | "*" | "/" | "^" | "=" | "<>" | "<" | ">" | "<=" | ">=";
 
@@ -86,6 +88,10 @@ export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: num
   rounddown: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.trunc), doc: "round towards zero" },
   pv: { arity: [3, 5], fn: pv, doc: "pv(rate, periods, payment, future, type): spreadsheet PV, payments as negatives" },
   npv: { arity: [2, 200], fn: npv, doc: "npv(rate, x1, x2, ...): spreadsheet NPV, x_i discounted by (1+rate)^i" },
+  // Countries by ISO 3166 numeric code (facts/countries.json), for the distance weight (model.ts distanceNode).
+  region_of: { arity: [1, 1], fn: regionOf, doc: "region_of(country): the UN M49 code of the country's world region, 0 for none" },
+  population_share: { arity: [1, 1], fn: populationShare, doc: "population_share(country): the country's share of the world's population" },
+  region_population_share: { arity: [1, 1], fn: regionPopulationShare, doc: "region_population_share(country): the share of the world's population in the country's region" },
 };
 
 export class ExprError extends Error {}

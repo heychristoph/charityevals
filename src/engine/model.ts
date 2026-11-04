@@ -1,6 +1,7 @@
 import { parse, refs, evaluate, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
 import { evaluatorFigure, evaluatorFigureModels } from "./ranking";
+import { byIso3 } from "./countries";
 
 export type ResolvedRow = Row & {
   /** Id of the model this row was first defined in, when that isn't this model. */
@@ -206,6 +207,8 @@ export function buildLibrary(
       resources: [...(parent?.resources ?? []), ...file.resources].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i),
       source: file.source ?? parent?.source,
       estimate_basis: file.estimate_basis ?? parent?.estimate_basis,
+      beneficiaries: file.beneficiaries ?? parent?.beneficiaries,
+      beneficiaries_note: file.beneficiaries ? file.beneficiaries_note : parent?.beneficiaries_note,
       charity: file.charity ?? parent?.charity ?? "",
       owner: file.owner ?? parent?.owner ?? "",
       sections,
@@ -405,11 +408,12 @@ export function compute(
   // Another model's result is stored as "#id" beside the rows, so every later lookup over these values
   // (the tree, uncertainty) reads the same number. It is always our view at the reader's values: the
   // evaluator view of this model doesn't pin another model's rates, but it never discounts an estimate
-  // for its age (readerValues).
+  // for its age or weighs it by distance (readerValues). A model read as a stand-in for this one's own
+  // work is read without its distance weight: this model's beneficiaries apply (refValues).
   const lookup = (scope: Scope, n: string) =>
     scope === "row" ? vals[n] ?? NaN
     : scope === "assumption" ? a[n] ?? NaN
-    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, readerValues(av, view)))
+    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view)))
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   for (const id of m.order) {
     const r = m.byId.get(id)!;
@@ -542,6 +546,74 @@ export function ageFactor(lib: Library, m: ResolvedModel, a: Record<string, numb
   return n ? 1 / evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
 }
 
+// --- Lives near and far (docs/normalization.md 2.13) ------------------------------------------------
+
+/** Where the reader lives: an ISO 3166 numeric code (facts/countries.json), 0 for not set. */
+export const HOME_COUNTRY = "home_country";
+/** How much less a life counts for each step further from the reader: their country, the rest of
+ * their world region, the rest of the world. */
+export const DISTANCE_DISCOUNT = "distance_discount";
+
+const distanceLabels = new WeakMap<Node, string>();
+/** A name for a node of the distance weight, so the tree can show it. */
+export const distanceLabel = (n: Node) => distanceLabels.get(n);
+const distanceNodes = new WeakMap<ResolvedModel, Node | null>();
+
+const num = (value: number): Node => ({ type: "num", value });
+const assumption = (name: string): Node => ({ type: "ref", scope: "assumption", name });
+const bin = (op: "+" | "-" | "*" | "=", left: Node, right: Node): Node => ({ type: "bin", op, left, right });
+const sumOf = (parts: Node[]): Node => (parts.length === 0 ? num(0) : parts.length === 1 ? parts[0] : { type: "call", fn: "sum", args: parts });
+const times = (share: number, n: Node): Node => (share === 1 ? n : bin("*", num(share), n));
+
+/** The weight a model's result takes for where the lives it helps are, in our view: each country's
+ * share of them times (1 − d)^steps, 0 steps for the reader's country, 1 for the rest of its world
+ * region, 2 for the rest of the world. Written out,
+ *   if($home_country = 0, 1, (1 − d)² + d × s + d × (1 − d) × S)
+ * with s the share in the reader's country and S the share in their region (their country included),
+ * so it is exactly 1 with no country set or at d = 0. Undefined in the evaluator view, in a library
+ * without the sliders (an old commit's), for a model with no beneficiaries, and for a charity that moves
+ * money ("destinations"): each destination it reads live brings its own weight (refValues). */
+export function distanceNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
+  if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === DISTANCE_DISCOUNT) || !lib.assumptions.rows.some((r) => r.id === HOME_COUNTRY)) return undefined;
+  const cached = distanceNodes.get(m);
+  if (cached !== undefined) return cached ?? undefined;
+  const b = m.beneficiaries;
+  let n: Node | undefined;
+  if (b && b !== "destinations") {
+    const home = assumption(HOME_COUNTRY), d = assumption(DISTANCE_DISCOUNT);
+    // A "world" share is spread by population: its share in the reader's country is that country's
+    // share of the world's people, in their region the region's.
+    const shares: Record<string, number> = b === "world" ? { world: 1 } : b;
+    const entries = Object.entries(shares).filter(([iso]) => byIso3.has(iso));
+    const world = shares.world ?? 0;
+    const regions = new Map<number, number>();
+    for (const [iso, share] of entries) regions.set(byIso3.get(iso)!.region, (regions.get(byIso3.get(iso)!.region) ?? 0) + share);
+    const call = (fn: string): Node => ({ type: "call", fn, args: [home] });
+    const here = sumOf([
+      ...entries.map(([iso, share]) => times(share, bin("=", home, num(byIso3.get(iso)!.m49)))),
+      ...(world ? [times(world, call("population_share"))] : []),
+    ]);
+    const region = sumOf([
+      ...[...regions].map(([code, share]) => times(Number(share.toPrecision(12)), bin("=", call("region_of"), num(code)))),
+      ...(world ? [times(world, call("region_population_share"))] : []),
+    ]);
+    const oneMinus = bin("-", num(1), d);
+    const weighed = bin("+", bin("+", { type: "bin", op: "^", left: oneMinus, right: num(2) }, bin("*", d, here)), bin("*", bin("*", d, oneMinus), region));
+    n = { type: "call", fn: "if", args: [bin("=", home, num(0)), num(1), weighed] };
+    distanceLabels.set(n, "For where the lives it helps are");
+    distanceLabels.set(here, "Share of the lives it helps in your country");
+    distanceLabels.set(region, "Share in your world region (your country included)");
+  }
+  distanceNodes.set(m, n ?? null);
+  return n;
+}
+
+/** The distance weight at assumption values `a` (the view's own): 1 where none applies. */
+export function distanceFactor(lib: Library, m: ResolvedModel, a: Record<string, number>, view: View = "charityevals"): number {
+  const n = distanceNode(lib, m, view);
+  return n ? evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
+}
+
 const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, Node | undefined>>>();
 
 /** What turns a model's result per dollar into its headline in a view: the unit's conversion
@@ -554,19 +626,25 @@ export function modelConversion(lib: Library, m: ResolvedModel, view: View = "ch
   if (!byView) modelConversions.set(m, (byView = {}));
   if (view in byView) return byView[view];
   const conv = m.output ? headlineConversion(lib, m.output.unit) : undefined;
-  const age = conv && ageDivisorNode(lib, m, view);
-  return (byView[view] = conv && age ? { type: "bin", op: "/", left: conv, right: age } : conv);
+  return (byView[view] = conv && withAgeAndDistance(lib, m, conv, view));
+}
+
+/** A conversion (or a headline formula) divided by the age divisor and times the distance weight, where
+ * they apply. */
+function withAgeAndDistance(lib: Library, m: ResolvedModel, n: Node, view: View): Node {
+  const age = ageDivisorNode(lib, m, view);
+  const dist = distanceNode(lib, m, view);
+  const aged: Node = age ? { type: "bin", op: "/", left: n, right: age } : n;
+  return dist ? { type: "bin", op: "*", left: aged, right: dist } : aged;
 }
 
 /** The headline as a formula over `result` (a model's own result per dollar, e.g. its output row):
- * headlineNode's conversion and, in our view, the age factor. Undefined for a unit with no exchange
+ * headlineNode's conversion and, in our view, the age factor and the distance weight. Undefined for a unit with no exchange
  * rate. */
 export function headlineExprOf(lib: Library, m: ResolvedModel, result: Node, view: View = "charityevals"): Node | undefined {
   const to = m.output && lib.assumptions.units[m.output.unit]?.to_common;
   if (!to) return undefined;
-  const conv = headlineNode(result, to);
-  const age = ageDivisorNode(lib, m, view);
-  return age ? { type: "bin", op: "/", left: conv, right: age } : conv;
+  return withAgeAndDistance(lib, m, headlineNode(result, to), view);
 }
 
 const readers = new WeakMap<Record<string, number>, Record<string, number>>();
@@ -574,10 +652,23 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
  * view the same with no discount for age, so that view never applies it, however deep. One object per
  * `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
-  if (view !== "evaluator" || !av[AGE_DISCOUNT]) return av;
+  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT])) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0 }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0 }));
   return r;
+}
+
+const neutral = new WeakMap<Record<string, number>, Record<string, number>>();
+/** The values a model reads another (`#id`) at. A charity that moves money ("destinations") reads each
+ * destination with its distance weight: the good is done where the destination works. Any other model
+ * reads a model as a stand-in for its own work (a comparable programme's result per dollar), so without
+ * the stand-in's weight: its own beneficiaries' weight applies once, to the whole. */
+export function refValues(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
+  const r = readerValues(av, view);
+  if (m.beneficiaries === "destinations" || !r[DISTANCE_DISCOUNT]) return r;
+  let n = neutral.get(r);
+  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0 }));
+  return n;
 }
 
 /** The model's bottom line per dollar, in its own unit and in the common unit. */
@@ -592,7 +683,7 @@ export function bottomLine(
   const vals = compute(lib, m, av, inputs, view);
   const native = vals[m.output.row];
   const a = viewAssumptions(m, av, view);
-  return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) };
+  return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) * distanceFactor(lib, m, a, view) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -621,8 +712,9 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // A model read live (`#id`) moves with every assumption it reads, in our view.
   for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
-  // The evaluator view never discounts an estimate for its age, its own or a model's it reads.
-  if (view === "evaluator") used.delete(AGE_DISCOUNT);
+  // The evaluator view never discounts an estimate for its age, its own or a model's it reads, and never
+  // weighs it by distance.
+  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY].forEach((x) => used.delete(x));
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))
