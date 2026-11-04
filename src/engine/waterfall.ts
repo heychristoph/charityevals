@@ -63,7 +63,7 @@ export type Waterfall = {
 const SITE: { id: string; off: number; label: string; anchor: string }[] = [
   { id: AGE_DISCOUNT, off: 0, label: "How old the estimate is", anchor: "estimate-age" },
   { id: DISTANCE_DISCOUNT, off: 0, label: "Where the lives it helps are, from where you live", anchor: "near-and-far" },
-  { id: MISSING_DATA_DISCOUNT, off: 1, label: "The part of the result that isn't measured", anchor: "our-models" },
+  { id: MISSING_DATA_DISCOUNT, off: 1, label: "The part of the result that isn't measured", anchor: "missing-data" },
 ];
 const SITE_IDS = new Set([...SITE.map((s) => s.id), HOME_COUNTRY]);
 /** Under this change (|ratio − 1|) a changed row joins the "other changes" step. */

@@ -1,145 +1,272 @@
 ---
 import Prose from "../layouts/Prose.astro";
+import Setting from "../components/Setting.tsx";
 import { repo } from "../lib/site";
 ---
 
 <Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked in years of healthy life per $1,000 under values you set.">
-  <h2>Models are files you can read</h2>
-  <p>
-    Each charity is one file in a public git repository. A model is a list of rows, like a spreadsheet: inputs with a value, and calculated rows with a formula over other rows. Every input says what kind of number it is (<strong>observed</strong> in data, an <strong>estimate</strong> made elsewhere, or a <strong>judgment</strong>), where it comes from and why it has the value it has. The file's history is the model's changelog.
-  </p>
-  <p>
-    Models imported from an evaluator have to reproduce that evaluator's own numbers: every calculated row records the value the original spreadsheet shows, and the build fails if the model drifts from it. Where we disagree with a source, we say so rather than quietly changing its numbers.
+  <p class="lede">
+    Every charity is a model: a public file of numbers and formulas that ends in <strong>years of healthy life per $1,000 donated</strong>. Most come from charity evaluators; the rest we build. Then every model counts the same things the same way, at values you set.
   </p>
 
-  <h2 id="views">Two views of every model</h2>
-  <p>
-    Every model can be read two ways. <strong>The evaluator's view</strong> is their analysis as they published it, with their own conversions and value judgments, so you can check we reproduced it. <strong>Our view</strong>, the one the rankings use, swaps every conversion and value judgment for the site's one shared version and your settings, so two charities differ only where their work differs, not because their evaluators counted differently. Each model page tags every row where they part "changed for consistency", with the evaluator's own number beside it.
-  </p>
+  <ol class="flow" aria-label="From an evaluator's analysis to the rankings">
+    <li><span class="flow-n">1</span><strong>An evaluator's analysis</strong><span>imported whole, and it must reproduce their numbers</span></li>
+    <li><span class="flow-n">2</span><strong>One way to count</strong><span>shared figures replace each evaluator's own conversions</span></li>
+    <li><span class="flow-n">3</span><strong>Years of healthy life</strong><span>every unit converted at your rates</span></li>
+    <li><span class="flow-n">4</span><strong>Adjustments</strong><span>old, unmeasured or average estimates count less</span></li>
+    <li><span class="flow-n">5</span><strong>The rankings</strong><span>per $1,000 given today</span></li>
+  </ol>
 
   <h2 id="sources">Where models come from</h2>
   <p>
-    Most models are <a href="#imported-models">imported</a> from charity evaluators: <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/founders-pledge">Founders Pledge</a>, <a href="/evaluators/sogive">SoGive</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a> and <a href="/evaluators">others</a>. For a charity no evaluator has analysed, we <a href="#our-models">build our own model</a> from the charity's reports and accounts and the research on what its work does, then have it checked independently. A charity with several analyses shows each as its own dot; the row's number is its main one (the newest analysis from its lead evaluator, or ours where there is none).
+    Most are <a href="#imported-models">imported</a> from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/founders-pledge">Founders Pledge</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a> and <a href="/evaluators">others</a>. Each input says what it is (<strong>observed</strong>, an <strong>estimate</strong> or a <strong>judgment</strong>) and where it comes from; the file's history is the changelog.
   </p>
-
-  <h2 id="what-it-means">What a figure means</h2>
-  <p>
-    A figure is our best estimate of the good an extra $1,000 given to the charity today does, after counting what would have happened anyway, others' share of the credit and the evidence's weak spots. It is an expected value, not a guarantee: some gifts do much more, some nothing. The bar around it shows how far it could plausibly be off. It says nothing about whether a charity is well run in other respects.
+  <p id="views">
+    Every model has two views. <strong>The evaluator's view</strong> is their analysis as published. <strong>Our view</strong>, the one ranked, uses the site's shared figures and your values; each row where the two part is marked "changed for consistency", with the evaluator's number beside it.
   </p>
 
   <h2 id="healthy-years">One unit: years of healthy life</h2>
   <p>
-    Every result is in <strong>years of healthy life per $1,000 donated</strong>. A year of healthy life is one person living one more year in full health; researchers call it a DALY averted. Evaluators count good in different units (GiveWell in years of doubled income, animal analyses in days of pain, the Happier Lives Institute in life satisfaction), so we convert each into healthy years at exchange rates you can change under Your values, beside the rankings. GiveDirectly's cash transfers come to about 4.
+    A year of healthy life is one person living one more year in full health (a DALY averted). Evaluators count in other units, so each is converted at a rate you set:
   </p>
+  <div class="units">
+    <div class="unit"><span class="unit-from">Doubled income for a year</span><span class="unit-by">GiveWell</span></div>
+    <div class="unit"><span class="unit-from">A point of life satisfaction for a year</span><span class="unit-by">Happier Lives Institute</span></div>
+    <div class="unit"><span class="unit-from">A day of severe pain, in chickens</span><span class="unit-by">Animal evaluators</span></div>
+    <div class="unit"><span class="unit-from">A tonne of CO₂ kept out of the air</span><span class="unit-by">Climate evaluators</span></div>
+    <div class="unit-to">→ years of healthy life</div>
+  </div>
+  <Setting client:load ids={["uov_per_daly", "daly_per_child_death"]} />
+  <p class="small muted">
+    Deaths at other ages count less, in GiveWell's proportions by age. Cash transfers from GiveDirectly come to about 4 healthy years per $1,000; the Against Malaria Foundation to about 24.
+  </p>
+
+  <h3 id="wellbeing">Life satisfaction</h3>
+  <p>
+    The default makes a year of depression one step lighter count the same through life satisfaction as through the disability weights health researchers use, so both routes agree.
+  </p>
+  <Setting client:load ids={["daly_per_wellby"]} />
+
   <h3 id="animals">Animals</h3>
   <p>
-    Every animal model takes the same steps after the evaluator's own result. Its days of pain, with milder pain counted as a fraction of a day, are split by species. Each species is counted in chickens, by Rethink Priorities' estimates of how much it can suffer relative to a chicken: a pig about 1.6 chickens, a farmed fish about 0.2, a shrimp about 0.1. Dogs and cats, which Rethink Priorities hasn't estimated, are counted at a judgment anchored on its figure for pigs, the nearest mammal it covers, with a wide range. That gives <strong>chicken-equivalent pain days</strong>, which become healthy years through two of your values: how a chicken's suffering compares with a person's (33% by default), and how much healthy life a day of disabling pain costs (about 10 hours). ACE's figures in suffering-adjusted days already carry Ambitious Impact's own species weights; we take those out first, so the evaluator's view still reproduces ACE.
+    Days of pain are counted in chickens, other species against a chicken by Rethink Priorities' estimates of how much each can suffer: a pig, cow, dog or cat as 1.6 chickens, a fish 0.2, a shrimp 0.1. Then two values: how many chickens' suffering equals a person's, and what a day of severe pain costs in healthy time.
   </p>
-  <p>
-    Where ACE's models use different numbers for the same change, such as a hen moved out of a cage or a meal replaced, ours use one shared figure, and the row says so: "changed for consistency", with ACE's own number beside it.
+  <Setting client:load ids={["chicken_vs_person", "daly_per_sad"]} />
+  <p class="small muted">
+    The default of 10,000 chickens is what people's own spending on chicken welfare implies; researchers who rate how much a chicken can suffer put it at 3. Where animal evaluators use different numbers for the same change (a hen out of a cage, a meal replaced), every model uses one shared figure.
   </p>
+
   <h3 id="climate">Climate</h3>
   <p>
-    Climate charities count the tonnes of CO₂ they keep out of the air. We value a tonne by the deaths it would cause: Rethink Priorities estimates about 1.9 deaths per 10,000 tonnes, from extra heat and from the air pollution that comes with burning coal, oil and gas. Each death is valued by the age it comes at, like every death on the site (most heat and air-pollution deaths are of older people), so the value of saving a life under Your values moves climate too. Air-pollution deaths are saved the year the fuel isn't burned; heat deaths come late in the century, so like any future good they are discounted (by default as if 60 years away), and so is the wait until a charity's tonnes are actually avoided. At the defaults a tonne from burning less fossil fuel is worth about a day and a quarter of healthy life, and a charity that cuts one for $1 does about 3.6 years of healthy life per $1,000. Tonnes that come without fuel smoke, such as forests kept standing, count only for their discounted heat deaths, about an hour of healthy life each. The deaths per tonne and when they come are fixed figures with their sources and ranges (they concern only climate models); damage that isn't death, such as lost harvests, is counted as zero, a judgment that makes the default probably low.
-  </p>
-  <h3 id="wellbeing">Life satisfaction and depression</h3>
-  <p>
-    The Happier Lives Institute counts good in points of life satisfaction for a year (WELLBYs). Most of those are psychotherapy results, and the same therapy is modelled elsewhere in healthy years through the disability weights of the Global Burden of Disease. We anchor on the disability weights: by default a WELLBY is worth 0.065 healthy years, the rate at which a year of depression one standard deviation lighter counts the same through either route (0.13 healthy years). That rate is one of your values, stated in healthy years, so the two routes agree whatever a healthy year is worth to you. In the Happier Lives Institute's own view we keep its comparison with cash transfers in Kenya (0.575 healthy years a WELLBY), so its numbers still reproduce. Deaths in these models are valued the site's way, by age, not through life satisfaction, and don't move with the WELLBY rate.
+    A tonne of CO₂ is valued by the deaths it causes: about 1.9 per 10,000 tonnes (Rethink Priorities), three quarters from the air pollution of burning fuel, which come at once, and a quarter from heat, which come about 60 years later and are discounted. Damage that isn't death, such as lost harvests, counts as zero, so climate figures are probably low.
   </p>
 
-  <h2 id="one-way">One way to count the same thing</h2>
+  <h2 id="one-way">Adjustments every model gets</h2>
   <p>
-    Evaluators each convert between outcomes their own way: what a death is worth, how depression becomes lost health, what a dollar of cash does, exchange rates between currencies, how much the future counts. In our view every model uses the site's one version, a shared figure or one of your values, and the row is tagged "changed for consistency" with the evaluator's own number beside it; the evaluator's view keeps their number, so their spreadsheet still reproduces. In particular:
-  </p>
-  <ul>
-    <li><strong>Deaths</strong> are valued by age band (under five, 5–14, 15–49, 50 and over): a young child's death at your "child's life" value in years of healthy life, older people's less in proportion to GiveWell's moral weights. What a healthy year is worth in income doesn't change it.</li>
-    <li><strong>Every future benefit</strong> is discounted at your discount rate, including a wait before it starts.</li>
-    <li><strong>Future generations</strong> count through the same discount rate. Where a charity lowers the risk of a catastrophe, the model counts the deaths it would cause and, if it would shrink or end humanity's future, every later year of healthy life it would take, each discounted at your rate. The lowest rate is 0.1% a year, not zero, because at zero an endless future would count infinitely: at 0.1% a year lost for ever counts about 1,000 times a single year, at the default 4% about 25 times.</li>
-    <li><strong>An older estimate counts less.</strong> See <a href="#estimate-age">old estimates</a> below.</li>
-    <li><strong>A won reform</strong> (a corporate pledge, a law, a regulation) counts for the years under Your values before it would have come anyway (5 by default), with the wait until it takes effect discounted and one shared rate of pledges kept.</li>
-    <li><strong>Charities that move money</strong> (fundraisers, evaluators, effective-giving organisations) are worth what their money does where it goes: those destinations' own results, read live, so every slider moves them too, with one shared share of new money and one chance of success for an organisation not yet proven.</li>
-    <li><strong>Results that aren't measured count less, in every model.</strong> Every model, ours and the evaluators', says how much of its result rests on the charity's own measured results: its own count of who got the intervention, and an effect from a controlled evaluation of the charity or from trials of the same intervention delivered the same way. The rest (reach or effect a judgment, a projection for work not yet done, an effect from research on other delivery) counts at "how much we count a programme whose results aren't measured" under Your values (50% by default, from 10% to 100%). For an evaluator's model that is one step after its result, shown on its page and in its tree, with the reason; GiveWell's top charities, for example, are measured, Ambitious Impact's idea-stage estimates and most policy and campaign estimates are not. Our own models apply it branch by branch. An evaluator's checks of how well trials transfer (internal and external validity) stay; a generic haircut of theirs for weak evidence is replaced by this step, so nothing is discounted twice. At 100% nothing changes, and the evaluator's own view never applies it.</li>
-    <li><strong>A past average isn't the next dollar.</strong> Where a model's cost-effectiveness is an organisation's past spending over everything it achieved (campaign wins, research, money moved, a service's lives saved), it is multiplied by how much the next dollar does compared with that average, a value under Your values (50% by default, from 18% to 100%). Every model says which kind of estimate it is; estimates that are already about the next grant (GiveWell's, Ambitious Impact's, the Happier Lives Institute's) and costs per item delivered don't take it, so nothing is counted twice.</li>
-    <li><strong>Best guesses, not conservative cases.</strong> Where an evaluator gives a conservative figure and a best guess, we use the best guess; a model more than ten times its peers says why on its page.</li>
-  </ul>
-
-  <h2 id="judgments">Judgments: yours and fixed ones</h2>
-  <p>
-    The judgments that move many models are yours to set under Your values: what a healthy year, a life saved, a point of life satisfaction and good done later are worth; how much animals' suffering counts; how much to trust the estimates (results nobody measured, old estimates, an organisation's past average, reforms that would have come anyway); and how credit is shared. A setting that concerns only a few models, such as the deaths a tonne of CO₂ causes, is a fixed figure instead, with its source and range. Rates that rest on evidence, such as how a doubling of income is valued, are fixed and listed with sources under <a href="/data">shared data</a>.
-  </p>
-  <p>
-    Some fixed figures are judgments too, not measurements: species Rethink Priorities doesn't cover (fish, cattle, insects, dogs, cats) counted as stand-ins, how much of the future a given catastrophe would take, how Ambitious Impact's welfare points become days of pain, longtermist causes valued at zero in money-moved models, where shifted money would have gone, the share of broiler pledges kept, damage from CO₂ other than deaths at zero, Founders Pledge's education constants and the default share of staff pay below market. They are fixed rather than sliders because each concerns only a few models or sits inside a range set by evidence, and the site keeps one slider per concept. Each is marked "judgment" wherever a model reads it, with its range, which the uncertainty bars use.
+    The same steps apply to every model, ours and the evaluators'. The evaluator's view never applies them.
   </p>
 
-  <h2 id="estimate-age">Old estimates count less</h2>
+  <h3 id="estimate-age">Old estimates count less</h3>
   <p>
-    Each charity is ranked by its evaluator's newest estimate, however old. Some are a decade old: the Humane Society of the United States is ranked on Animal Charity Evaluators' 2016 review; HSUS isn't among ACE's current recommended charities. Evaluators re-check what they recommend every year or two (GiveWell revises its top charities' models several times a year; Animal Charity Evaluators and Founders Pledge re-evaluate about every two years), and some recommendations are withdrawn rather than renewed.
+    Evaluators re-check what they recommend every year or two; an estimate nobody renewed is less likely to hold. At 5% a year a 2-year-old estimate counts 91%, a 10-year-old one 61%. Age runs to the date the data was last refreshed, so figures don't drift by themselves.
   </p>
+  <Setting client:load ids={["estimate_age_discount"]} />
+
+  <h3 id="missing-data">Results nobody measured</h3>
   <p>
-    So under Your values → How much to trust the estimates you set how much less an estimate counts for each year since it was published, compounding like the discount rate: <strong>5% a year by default</strong>, from 0% to 15%. At 5% a 2-year-old estimate counts 91% and a 10-year-old one 61%. Every model page says how old its estimate is and what that does to its figure at your settings. A charity that moves money to others takes it twice over, as it should: each destination's figure is discounted for that destination's own estimate, and the result for its own.
+    A result counts in full where the charity's own count of who it reached meets an effect measured in trials or its own controlled evaluation. Anything resting on judgment, projections or research on other delivery counts less. GiveWell's top charities are measured; idea-stage and most campaign estimates are not.
   </p>
+  <Setting client:load ids={["missing_data_discount"]} />
+
+  <h3>Past averages and reforms</h3>
   <p>
-    The default is a judgment, not a measurement. GiveWell's successive estimates of the same programme, which the site keeps (41 pairs, about a year apart), move a lot, typically two-thirds up or 40% down, but they don't mostly move down, so revisions alone would justify no discount. What they can't show is the estimates nobody renewed. An estimate's age is counted from its publication date to the date the site's data was last refreshed (2 November 2026), not the day you read it, so a figure doesn't change by itself. The evaluator's own view never applies this.
+    An organisation's past spending over everything it achieved is an average; the next dollar usually does less. A won reform counts only for the years before it would have come anyway, after the wait until it takes effect.
+  </p>
+  <Setting client:load ids={["marginal_vs_past_average", "win_years_counted"]} />
+
+  <h3 id="near-and-far">The future, and lives far away</h3>
+  <p>
+    Future good is discounted, a wait before it starts included. Future generations count through the same rate: at its floor of 0.1% a year lost for ever counts about 1,000 years, at 4% about 25. By default a life counts the same wherever it is; set where you live to count lives further away less.
+  </p>
+  <Setting client:load ids={["discount_rate", "home_country", "distance_discount"]} />
+
+  <h3>Credit</h3>
+  <p>
+    By default each model keeps its evaluator's counterfactual logic. Switch this on and every outcome is shared out by everything that went into it, every funder's money and staff's pay below market included, so shares add to 100%.
+  </p>
+  <Setting client:load ids={["resource_shares"]} />
+
+  <h2 id="charity-figure">A charity's figure</h2>
+  <p>
+    A charity with several programmes, or one programme in several countries, gets the funding-weighted average of them. The Against Malaria Foundation, for example:
+  </p>
+  <div class="eq" aria-label="Against Malaria Foundation: 80% of 24 plus 12% of 22 plus 6% of 8 plus 2% of 12 is about 23">
+    <span class="eq-term"><b>80%</b> × 24<small>DRC</small></span><span class="eq-op">+</span>
+    <span class="eq-term"><b>12%</b> × 22<small>Nigeria</small></span><span class="eq-op">+</span>
+    <span class="eq-term"><b>6%</b> × 8<small>Chad</small></span><span class="eq-op">+</span>
+    <span class="eq-term"><b>2%</b> × 12<small>South Sudan</small></span><span class="eq-op">=</span>
+    <span class="eq-term eq-result"><b>23</b><small>the charity</small></span>
+  </div>
+  <p>
+    A charity with analyses from several evaluators shows each as its own dot; its number is the newest analysis from its lead evaluator. Charities that move money to others (fundraisers, effective-giving groups) are worth what that money does where it goes, read live from those charities' models. Ambitious Impact estimates made before a charity existed are shown only if it runs that programme today, marked <a href="#theoretical">purely theoretical</a>.
   </p>
 
-  <h2 id="near-and-far">Lives near and far</h2>
-  <p>
-    By default a life counts the same wherever it is, as it does for every evaluator on the site. Under Your values → Lives near and far you can say otherwise: pick where you live and how much less a life counts for each step further from you. Your country counts in full, the rest of your world region (the UN's standard regions: Northern America, Western Europe, Eastern Africa and so on) less by that much, and the rest of the world less by that much again: at 50%, 1, 0.5 and 0.25. Animals count where the animals are.
-  </p>
-  <p>
-    Every model says where the lives it helps are: the countries its programme works in, from the model itself (a sheet's location, the countries it names, our own builds' branches), or, for climate and research whose results reach everyone, the whole world by population. A charity that moves money takes each destination's weight; a programme valued at a similar programme's result takes its own. Each model page says where its beneficiaries are and what your setting does to its figure. With no country set, or at 0%, nothing changes. The evaluator's own view never applies it.
-  </p>
-
-  <h2 id="theoretical">Purely theoretical models</h2>
-  <p>
-    Some Ambitious Impact models estimate an idea before the charity existed. We show one only if the charity runs the modelled programme today and no model of its actual work exists; it is flagged "purely theoretical" on its pages and on the rankings. A charity that runs several programmes is weighted by funding.
-  </p>
-
-  <h2 id="charity-figure">How a charity's figure is put together</h2>
-  <p>
-    A charity that runs several programmes, or the same programme in several countries, is the funding-weighted average of them: each programme's or location's result, weighted by the money it gets, from the charity's own accounts where it publishes them and otherwise from the evaluator's sheet. Where an evaluator models only one location of many, the row says so.
+  <h2 id="ranges">Ranges and warning signs</h2>
+  <figure class="range-fig">
+    <svg viewBox="0 0 440 64" role="img" aria-labelledby="range-title">
+      <title id="range-title">A result's dot on its bar: the dot uses every best guess, the bar runs from every input at its low end to every input at its high end</title>
+      <rect x="70" y="24" width="300" height="10" rx="5" class="rf-bar" />
+      <circle cx="190" cy="29" r="8" class="rf-dot" />
+      <text x="70" y="56" class="rf-t">every input low</text>
+      <text x="370" y="56" text-anchor="end" class="rf-t">every input high</text>
+      <text x="190" y="14" text-anchor="middle" class="rf-t">best guesses</text>
+    </svg>
+  </figure>
+  <p id="theoretical">
+    Rankings use the dot. The bar is deliberately wide, not a 90% interval. A warning sign marks a charity whose range spans over 100×, whose uncertainty is mostly judgment, whose analysis is over 18 months old, or whose model is purely theoretical. Each charity's page shows which inputs move it most.
   </p>
 
-  <h2>Credit for shared outcomes</h2>
+  <h2 id="imported-models">Imported and our own models</h2>
   <p>
-    Most outcomes are paid for by more than one funder. By default each model uses its evaluator's counterfactual logic, such as GiveWell's adjustments for money a grant pulls in from governments or pushes elsewhere. Switch to <strong>credit by share of resources</strong> and an outcome is shared out by everything that went into it: every funder's money, in-kind costs, and staff's pay below what they could earn elsewhere. Shares add up to 100%, so nothing is counted twice.
+    <strong>Imported:</strong> every public model GiveWell links from its grant pages, plus the other evaluators' (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists what we found and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails.
+  </p>
+  <p id="our-models">
+    <strong>Ours:</strong> where no evaluator has looked, an AI agent builds the model by a fixed, published method, from the charity's accounts and reports and the research on its kind of work, never another charity's result. It covers every programme the money pays for, weighted by spending, with every number traced to a source or stated as a judgment with a range. A separate AI reviewer then checks it against its sources, for up to three rounds; a model with a serious finding left isn't published. Built blind for seven charities evaluators have analysed, four landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
   </p>
 
-  <h2>Ranges</h2>
+  <h2 id="judgments">Fixed judgments</h2>
   <p>
-    Inputs carry a low, best and high value, taken from the source wherever it gives one. The dot on each bar uses every best guess. The bar runs from every input at the end that lowers the result to every input at the end that raises it, so it is deliberately wide, not a 90% interval. Rankings use the dot.
-  </p>
-  <p>
-    Each charity's page shows where the uncertainty comes from: which inputs move the result most, and how loosely each is known.
-  </p>
-
-  <h2>Caveats</h2>
-  <p>
-    A warning sign marks a charity when its range is very wide (over 100×), when most of its uncertainty comes from judgment calls, or when the analysis it rests on is more than 18 months old.
-  </p>
-
-  <h2 id="imported-models">Imported models</h2>
-  <p>
-    Most models are evaluators' spreadsheets imported whole: every public model GiveWell links from its grant pages, plus HLI's, ACE's and Founders Pledge's (the <a href="https://github.com/heychristoph/charityevals/tree/main/inventory">inventory</a> lists what we found and why anything was left out). Each sheet is traced from its bottom line, every cell it depends on becomes a row, and each calculated row must reproduce the sheet's value. Shared values such as the value of a life and the discount rate are then tied to your values, and statistics several sheets share live once as shared data.
-  </p>
-
-  <h2 id="our-models">Our own models</h2>
-  <p>
-    Where no evaluator has analysed a charity, we build a model from public evidence. The model is drafted by an AI agent following a fixed, written method (published in the repository), and every number in it links to its source: the charity's audited accounts and reports for its latest year, the research on what its kind of work achieves, and data such as mortality rates and household sizes. Each starts from a template for its kind of work, so any two models of the same kind can be read side by side: health programmes, cash and livelihoods, mental health, social services in rich countries, humanitarian relief, medical research, campaigns for farmed animals, diet change, companion animals, conservation, rights advocacy, and policy, research and fundraising. Every template ends in years of healthy life by the same steps as the imported models, and reads the same shared figures and your values.
-  </p>
-  <ul>
-    <li><strong>The whole charity.</strong> Every programme the money pays for is modelled, weighted by its spending, not a single flagship project or case study (those are usually picked because they went well).</li>
-    <li><strong>Several kinds of good in one model.</strong> A conservation charity can cut emissions, protect health and support livelihoods at once. Each part is counted in its own unit and converted with its own rate, so each still moves only with the values that concern it.</li>
-    <li><strong>Programmes with little or no outcome data.</strong> Where a charity doesn't measure what a programme achieves, we build its estimate from the research on that kind of work (meta-analyses and trials: how much it does per person or per dollar, and for how long), applied to the programme's own spending and reach, with wide ranges; we never borrow another charity's result. Any part of a model whose reach or effect rests on that research or on our judgment, rather than on the charity's own data, is discounted by how much you count a programme whose results aren't measured (50% by default, from 10% to 100%), the same way as every evaluator's model. A part counts in full where the charity's own count of who it reached meets an effect measured against a credible comparison: doses or treatments it counts and trials of the same treatment (a hospital's malaria patients and the trials of the drugs it gives), or its own controlled evaluation.</li>
-    <li><strong>Every number traced.</strong> Each input is an observed figure with its source and page, a shared figure, or a judgment with a stated reason, an anchor and a range. Thin evidence gets a wide range and a plain sentence, not a cautious number.</li>
-    <li><strong>Checked independently.</strong> Each model is reviewed by a separate AI reviewer that starts fresh, sees only the model and its sources, checks the key numbers against them and looks for double counting, missing adjustments and unit errors. The model is fixed and reviewed again, up to three rounds; a model with a serious finding left isn't published.</li>
-  </ul>
-  <p>
-    We tested the method by building models blind for eleven charities that evaluators have analysed, without reading those analyses, and comparing the results in the same view. Seven of the eleven landed within three times of the evaluator; health charities tended to come out somewhat above their evaluators and animal charities below. The full write-up, including where and why the models differ, is in the <a href={`${repo}/blob/main/docs/eval-skills.md`}>repository</a>. These models are drafts that improve as charities and evaluators point out errors.
+    A judgment that concerns only a few models is a fixed figure rather than a slider, such as deaths per tonne of CO₂, species Rethink Priorities doesn't cover, or how much of the future a catastrophe would take. Each is marked "judgment" wherever it is used, with a range the bars use. Evidence-based rates are listed with sources under <a href="/data">shared data</a>.
   </p>
 
   <h2>What this is not</h2>
   <p>
-    Not an evaluator's recommendation, and not endorsed by GiveWell, Animal Charity Evaluators or any charity listed. Where a model is ours, it is our estimate, not the charity's. Cost-effectiveness is one input to a giving decision; room for more funding, organisational strength and track record matter too and aren't modelled here yet.
+    Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision; room for more funding and how well a charity is run matter too, and aren't modelled yet.
   </p>
 </Prose>
+
+<style>
+  :global(.wrap h3) {
+    margin: var(--s5) 0 var(--s2);
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--ink-2);
+  }
+  .flow {
+    list-style: none;
+    padding: 0 !important;
+    margin: var(--s5) 0 !important;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--s2);
+  }
+  .flow li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    padding: var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    font-size: 13px;
+    line-height: 1.35;
+    margin: 0 !important;
+  }
+  .flow li strong {
+    font-size: 14px;
+  }
+  .flow li span:last-child {
+    color: var(--ink-2);
+  }
+  .flow-n {
+    font: 650 13px/1 var(--sans);
+    color: var(--blue);
+  }
+  @media (max-width: 700px) {
+    .flow {
+      grid-template-columns: 1fr;
+    }
+  }
+  .units {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s2);
+    margin: var(--s4) 0;
+  }
+  .unit {
+    display: grid;
+    gap: 2px;
+    padding: var(--s2) var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .unit-from {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .unit-by {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .unit-to {
+    grid-column: 1 / -1;
+    font: 650 17px/1.3 var(--serif);
+    color: var(--cause-global-health);
+  }
+  @media (max-width: 560px) {
+    .units {
+      grid-template-columns: 1fr;
+    }
+  }
+  .eq {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s2);
+    margin: var(--s4) 0;
+  }
+  .eq-term {
+    display: grid;
+    gap: 2px;
+    padding: var(--s2) var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    font-variant-numeric: tabular-nums;
+  }
+  .eq-term small {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .eq-result {
+    border-color: var(--cause-global-health);
+  }
+  .eq-result b {
+    color: var(--cause-global-health);
+  }
+  .eq-op {
+    font: 400 20px/1 var(--serif);
+    color: var(--ink-3);
+  }
+  .range-fig {
+    margin: var(--s4) 0;
+    max-width: 440px;
+  }
+  .range-fig svg {
+    width: 100%;
+    height: auto;
+  }
+  .rf-bar {
+    fill: var(--rule);
+  }
+  .rf-dot {
+    fill: var(--cause-global-health);
+    stroke: var(--paper);
+    stroke-width: 2;
+  }
+  .rf-t {
+    font: 12px var(--sans);
+    fill: var(--ink-2);
+  }
+</style>
