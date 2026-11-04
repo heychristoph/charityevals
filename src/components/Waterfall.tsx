@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
 import { headline, type ResolvedModel } from "../engine/model";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
@@ -60,14 +61,12 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
     return { left: `${l}%`, width: `max(2px, ${r - l}%)` };
   };
   const owner = lib.owners.get(model.owner)?.name ?? "The evaluator";
-  const startLabel = w.start === "evaluator" ? `${possessive(owner)} own figure` : "This model at the site's defaults";
-  const total = w.end / w.startValue;
+  const startLabel = w.start === "evaluator" ? `As ${owner} calculates it` : "This model at the site's defaults";
   const unitLabel = lib.assumptions.units[w.native.unit]?.label ?? w.native.unit;
   return (
     <details className="wf" open>
       <summary>
-        <span className="wf-title">{w.start === "evaluator" ? `From ${possessive(owner)} figure to the one shown` : "From the model to the figure shown"}</span>{" "}
-        <span className="wf-sum num">{formatYears(w.startValue)} → {formatYears(w.end)} ({times(total)})</span>
+        <span className="wf-title">{w.start === "evaluator" ? `How ${possessive(owner)} figure becomes ours` : "How the model's figure becomes the one shown"}</span>
       </summary>
       <p className="wf-native">
         {w.start === "evaluator" ? `${possessive(owner)} result, in the model's own unit` : "The model's result, in its own unit"}: <strong className="num">{fmtNative(w.native.value)}</strong> {unitLabel} per dollar.
@@ -99,11 +98,19 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
           );
         })}
         <li className="wf-step wf-end">
-          <span className="wf-label">The figure shown</span>
+          <span className="wf-label">As shown on this page</span>
           <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.end)} /></span>
           <span className="wf-value num">{formatYears(w.end)}</span>
         </li>
       </ol>
     </details>
   );
+}
+
+/** The waterfall in the page's evaluation section (the `[data-waterfall="<model id>"]` slot the page
+ * renders there), from the model's island, which has the model, the reader's values and their edits. */
+export function WaterfallInSlot(props: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number> }) {
+  const [slot, setSlot] = useState<Element | null>(null);
+  useEffect(() => setSlot(document.querySelector(`[data-waterfall="${CSS.escape(props.model.id)}"]`)), [props.model.id]);
+  return slot ? createPortal(<Waterfall {...props} />, slot) : null;
 }

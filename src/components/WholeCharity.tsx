@@ -6,6 +6,7 @@ import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib
 import { useAssumptionValues, useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
+import { WaterfallInSlot } from "./Waterfall";
 
 const pct = (x: number) => `${x >= 0.995 ? 100 : x < 0.01 ? (x * 100).toPrecision(1) : Math.round(x * 100)}%`;
 
@@ -68,6 +69,10 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
   if (!ev || ev.programs.length < 2) return <ModelView id={id} bulk={!!model.bulk}>{children}</ModelView>;
   const charity = lib.charities.get(model.charity)!;
+  const mainRaw = model.bulk ? bulkRaw(id) : undefined;
+  const mainModel: ResolvedModel | undefined = model.bulk
+    ? mainRaw ? buildLibrary([mainRaw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id) : undefined
+    : model;
   const weighted = ev.basis === "weighted";
   const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
   const by = ev.owner === "charityevals" ? "the charity's spending" : `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
@@ -125,6 +130,8 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
         })}
       </ul>
       {children}
+      {/* The main model's waterfall fills the evaluation section; its own branch does it while open. */}
+      {open !== id && mainModel && <WaterfallInSlot model={mainModel} av={av} edits={{}} />}
     </div>
   );
 }
