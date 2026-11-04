@@ -29,16 +29,17 @@ function hrefOf(t?: StepTarget): string | undefined {
 /** Plain words for the factors of a unit's conversion: what the number is, in a reader's terms. */
 const PLAIN: Record<string, string> = {
   chicken_vs_person: "how much a chicken's day of pain counts against a person's",
-  daly_per_sad: "healthy time a day of disabling pain costs, out of the 8,760 hours in a year",
-  daly_per_wellby: "healthy time one point of life satisfaction for a year is worth, out of the 365 days in a year",
+  daly_per_sad: "healthy time a day of disabling pain costs",
+  daly_per_wellby: "healthy time one point of life satisfaction for a year is worth",
   uov_per_daly: "doubled-income years one year of healthy life is worth",
 };
 type Factor = { value: string; label: string; by?: string; inv: boolean; href?: string };
 
-/** A shared value as the factor it is: hours or days for a fraction of a year, a percent, or a number. */
+/** A shared value as the factor it is: hours or days over a year's for a fraction of a year, a percent, or a number. */
 function show(row: { format?: string; shown_as?: { factor: number; format?: string; inverse?: boolean } } | undefined, v: number): string {
   const s = row?.shown_as;
-  if (s && !s.inverse) return `${Number((v * s.factor).toPrecision(3))} ${s.factor === 365 ? "days" : "hours"}`;
+  // A fraction of a year, shown as its hours or days over the year's, so the equation multiplies out.
+  if (s && !s.inverse) return `${Number((v * s.factor).toPrecision(3))} / ${s.factor.toLocaleString("en")} ${s.factor === 365 ? "days" : "hours"}`;
   return row?.format === "percent" ? `${Number((v * 100).toPrecision(3))}%` : `${Number(v.toPrecision(3))}`;
 }
 
