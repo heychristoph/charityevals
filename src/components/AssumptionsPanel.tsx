@@ -4,7 +4,7 @@ import MiniRanking from "./MiniRanking";
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
-import { formatAssumption, formatValue, parseTyped } from "../lib/format";
+import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides } from "../lib/assumption-state";
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
@@ -49,21 +49,28 @@ function scaleFor(r: Row) {
 
 /** How a shared assumption reads on screen: some are multipliers shown in the site's own terms. */
 function shownAs(row: Row) {
-  return { k: row.shown_as?.factor ?? 1, fmt: row.shown_as?.format ?? row.format };
+  const k = row.shown_as?.factor ?? 1;
+  const inv = !!row.shown_as?.inverse;
+  return {
+    fmt: row.shown_as?.format ?? row.format,
+    show: (v: number) => formatShown(row, v),
+    /** A typed on-screen number back to the stored value. */
+    fromShown: (x: number) => (inv ? (x === 0 ? undefined : k / x) : x / k),
+  };
 }
 
 /** The value beside a slider; click it to type one in. */
 function ValueField({ row, value, best, log }: { row: Row; value: number; best: number; log: boolean }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState("");
-  const { k, fmt } = shownAs(row);
-  const shown = formatValue(value * k, fmt);
+  const { fmt, show, fromShown } = shownAs(row);
+  const shown = show(value);
   const seed = shown.replace(/[%×,]/g, "");
   const commit = () => {
     // Left as shown (rounded), the value keeps its full precision.
     if (text.trim() === seed) return setEditing(false);
     const typed = parseTyped(text, fmt, log);
-    const v = typed === undefined ? undefined : typed / k;
+    const v = typed === undefined ? undefined : fromShown(typed);
     if (v !== undefined) {
       setAssumption(row.id, v, best);
       trackAssumption(row.id, v, best);
@@ -102,8 +109,13 @@ function ValueField({ row, value, best, log }: { row: Row; value: number; best: 
 function Slider({ row, value, compact }: { row: Row; value: number; compact: boolean }) {
   const id = useId();
   const best = pickValue(row.value);
-  const scale = scaleFor(row);
-  const { k, fmt } = shownAs(row);
+  const base = scaleFor(row);
+  // An inverse one (chickens per person) runs the other way, so the number shown grows to the right.
+  const rev = !!row.shown_as?.inverse;
+  const scale = rev ? { ...base, toStep: (v: number) => STEPS - base.toStep(v), fromStep: (s: number) => base.fromStep(STEPS - s) } : base;
+  const ends = [base.zero ? 0 : base.low, base.high];
+  if (rev) ends.reverse();
+  const { show } = shownAs(row);
   const changed = Math.abs(value - best) > Math.abs(best) * 1e-9;
   const av = useAssumptionValues();
   return (
@@ -129,12 +141,12 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
             setAssumption(row.id, v, best);
             trackAssumption(row.id, v, best);
           }}
-          aria-valuetext={formatValue(value * k, fmt)}
+          aria-valuetext={show(value)}
         />
       </div>
       <div className="assumption-scale small num">
-        <span>{scale.zero ? formatValue(0, fmt) : formatValue(scale.low * k, fmt)}</span>
-        <span>{formatValue(scale.high * k, fmt)}</span>
+        <span>{show(ends[0])}</span>
+        <span>{show(ends[1])}</span>
       </div>
       {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
     </div>
