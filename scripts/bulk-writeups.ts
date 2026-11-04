@@ -73,16 +73,16 @@ for (const c of lib.charities.values()) {
   const owners = [...new Set(models.map((m) => lib.owners.get(m.owner)!.name))];
   const sheets = models.filter((m) => !m.source?.sheet?.includes("guesstimate"));
   const guess = models.filter((m) => m.source?.sheet?.includes("guesstimate"));
+  const dates = models.map((m) => m.source?.published).filter((d): d is string => !!d).sort();
   const lines = [
     MARK,
-    `${c.summary ?? c.name} ${owners.length > 2 ? `${owners.slice(0, -1).join(", ")} and ${owners.at(-1)}` : owners.join(" and ")} ${models.length === 1 ? "published one public model" : `published ${models.length} public models`} of its work; ` +
-      `the most recent, from ${month(main.source?.published)}, puts it at **${result(main)}**.`,
+    `${owners.length > 2 ? `${owners.slice(0, -1).join(", ")} and ${owners.at(-1)}` : owners.join(" and ")} ${models.length === 1 ? `published one public model of this charity's work, in ${month(main.source?.published)}.` : `published ${models.length} public models of this charity's work, from ${month(dates[0])} to ${month(dates.at(-1))}; the page shows the most recent.`}`,
     "",
     "| Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |",
     "| --- | --- | --- | --- | --- |",
     ...models.map((m) => {
       const f = fidelity(m);
-      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | ${lib.owners.get(m.owner)!.short} | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""} |`;
+      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | [${lib.owners.get(m.owner)!.short}](/evaluators/${m.owner}) | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced ? `${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""}` : "none: built from the published figures"} |`;
     }),
     "",
     ...(main.theoretical

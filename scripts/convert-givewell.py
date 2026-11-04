@@ -363,7 +363,8 @@ model = {
     "rows": ordered(base) + extra,
     "output": {"row": final_id, "unit": "uov", "label": "Units of value per dollar"},
     "evaluator": {"name": "GiveWell", "assumptions": {"resource_shares": 0,
-                                                      "life_value_multiplier": 1, "uov_per_ln_consumption": 1.4426950408889634}},
+                                                      # GiveWell's value of a life: 116.25 UoV for a death under five at its 2 UoV per healthy year.
+                                                      "daly_per_child_death": 58.12631, "uov_per_daly": 2, "uov_per_ln_consumption": 1.4426950408889634}},
 }
 # Shared rule, also applied by convert-givewell.py: a sheet's explicit discount-rate input moves in
 # proportion to the shared $discount_rate (GiveWell's general rate is 4%), so a 0.5% rate for future

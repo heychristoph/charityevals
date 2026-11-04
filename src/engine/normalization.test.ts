@@ -189,10 +189,13 @@ describe("invariant checks", () => {
   });
 
   it("INV-5b flags an evaluator pin that no row reads", () => {
-    const pinned = (id: string, formula: string) => ({ ...base, id, rows: [base.rows[0], { id: "out", label: "out", formula }], evaluator: { name: "HLI", assumptions: { life_value_multiplier: 1 } } });
+    const pinned = (id: string, formula: string) => ({ ...base, id, rows: [base.rows[0], { id: "out", label: "out", formula }], evaluator: { name: "HLI", assumptions: { daly_per_child_death: 58.12631 } } });
     const l = buildLibrary([base, pinned("unread", "x"), pinned("read", "x * $life_value_multiplier")], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
-    expect(inv5b(l).violations.map(keyOf)).toEqual(["unread evaluator.assumptions.life_value_multiplier"]);
+    expect(inv5b(l).violations.map(keyOf)).toEqual(["unread evaluator.assumptions.daly_per_child_death"]);
+    // The multiplier is worked out from the sliders: an evaluator view pins those, never it.
+    const derived = buildLibrary([base, { ...pinned("bad", "x"), evaluator: { name: "HLI", assumptions: { life_value_multiplier: 1 } } }], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(derived.errors).toEqual(["bad: evaluator pins $life_value_multiplier, which is worked out from other assumptions: pin those instead"]);
   });
 
   it("INV-2b flags a row reading a cross-cause rate", () => {
@@ -311,7 +314,9 @@ describe("climate conversion", () => {
     const l = { ...buildLibrary([], assumptions), facts: lib.facts };
     const av = assumptionValues(assumptions);
     const H = heatDeathValue(), AP = airPollutionDeathValue();
-    const one = (w: number, a = av, extra = 0) => toCommon(l, "tco2e", a, { air_pollution_weight: w, extra_deaths_per_tco2e: extra }) / (a.deaths_per_tco2e * a.life_value_multiplier);
+    // The value of a life: the life slider in healthy years, over GiveWell's value of a death under five, in units of value.
+    const life = (a: Record<string, number>) => (a.daly_per_child_death * a.uov_per_daly) / (fact("moral_weights.uov_per_death_under5") as number);
+    const one = (w: number, a = av, extra = 0) => toCommon(l, "tco2e", a, { air_pollution_weight: w, extra_deaths_per_tco2e: extra }) / (a.deaths_per_tco2e * life(a));
     const share = av.climate_heat_share, df = (1 + av.discount_rate) ** -av.climate_heat_death_delay;
     expect(one(1)).toBeCloseTo((1 - share) * AP + share * df * H, 9);
     expect(one(0)).toBeCloseTo(share * df * H, 9);
@@ -320,6 +325,10 @@ describe("climate conversion", () => {
     // Deaths an evaluator counts itself are added per tonne at the air-pollution value, not scaled by the climate rate.
     expect(one(0, av, 1e-4) - one(0)).toBeCloseTo((1e-4 * AP) / av.deaths_per_tco2e, 9);
     expect(toCommon(l, "tco2e", av)).toBeNaN();
+    // A tonne's deaths count the same healthy years whatever a healthy year is worth.
+    const years = (a: Record<string, number>) => toCommon(l, "tco2e", a, { air_pollution_weight: 1, extra_deaths_per_tco2e: 0 }) / a.uov_per_daly;
+    expect(years({ ...av, uov_per_daly: 3 })).toBeCloseTo(years(av), 12);
+    expect(years({ ...av, daly_per_child_death: av.daly_per_child_death * 1.5 })).toBeCloseTo(1.5 * years(av), 12);
   });
 
   it("a tco2e model must define air_pollution_weight in an ours section, reading no shared assumption", () => {
@@ -339,7 +348,7 @@ describe("climate conversion", () => {
     expect(inv2b(l).violations.map(keyOf).sort()).toEqual(["outside air_pollution_weight section", "reads air_pollution_weight $discount_rate"]);
     const av = assumptionValues(assumptions);
     const df = (1 + av.discount_rate) ** -av.climate_heat_death_delay, h = av.climate_heat_share;
-    expect(headline(l, l.models.get("base")!, av)).toBeCloseTo(2 * av.deaths_per_tco2e * (h * df * heatDeathValue() + (1 - h) * 0.5 * airPollutionDeathValue()) * av.life_value_multiplier / av.uov_per_daly * 1000, 9);
+    expect(headline(l, l.models.get("base")!, av)).toBeCloseTo(2 * av.deaths_per_tco2e * (h * df * heatDeathValue() + (1 - h) * 0.5 * airPollutionDeathValue()) * av.daly_per_child_death / (fact("moral_weights.uov_per_death_under5") as number) * 1000, 9);
   });
 
   it("INV-10 flags a non-climate model that moves with the climate rate, and passes a climate model", () => {
@@ -368,7 +377,7 @@ describe("INV-11: evaluator-internal exchange rates", () => {
       { id: "out", label: "DALYs per $", formula: "doublings * to_dalys + deaths * per_death" },
     ],
     output: { row: "out", unit: "daly", label: "DALYs per $" },
-    evaluator: { name: "Ambitious Impact", assumptions: { uov_per_daly: 2.3, uov_per_ln_consumption: 1 / Math.LN2, life_value_multiplier: 1 } },
+    evaluator: { name: "Ambitious Impact", assumptions: { uov_per_daly: 2.3, uov_per_ln_consumption: 1 / Math.LN2, daly_per_child_death: 116.25262 / 2.3 } },
   });
   const ours = aim("ours", { formula: "ln(2) * $uov_per_ln_consumption / $uov_per_daly" },
     { formula: "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly", published: 33.07, explainer: "Changed for consistency: AIM's own figure is 33.07." });
@@ -385,7 +394,7 @@ describe("INV-11: evaluator-internal exchange rates", () => {
     const m = l.models.get("ours")!;
     const h = headline(l, m, av);
     expect(headline(l, m, { ...av, uov_per_ln_consumption: av.uov_per_ln_consumption * 1.5 })).toBeGreaterThan(h);
-    expect(headline(l, m, { ...av, life_value_multiplier: 1.5 })).toBeGreaterThan(h);
+    expect(headline(l, m, { ...av, daly_per_child_death: av.daly_per_child_death * 1.5 })).toBeGreaterThan(h);
     // Evaluator view: 10 / 2.3 + 0.1 * 33.07 DALYs per dollar.
     expect(headline(l, m, av, {}, "evaluator")).toBeCloseTo((10 / 2.3 + 0.1 * 33.07) * 1000, 6);
   });

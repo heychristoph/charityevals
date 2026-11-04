@@ -1,0 +1,57 @@
+---
+// A hub: the rankings filtered to one cause or one evaluator's charities, with the values panel, laid out
+// like the main page.
+import Base from "../layouts/Base.astro";
+import Rankings from "./Rankings.tsx";
+import AssumptionsPanel from "./AssumptionsPanel.tsx";
+
+interface Props {
+  title: string;
+  description: string;
+  cause?: string;
+  owner?: string;
+}
+const { title, description, cause, owner } = Astro.props;
+---
+
+<Base title={`${title} · charityevals`} description={description} active="rankings">
+  <div class="page layout">
+    <div class="main">
+      <header class="intro">
+        <h1><slot name="logo" /> {title}</h1>
+        <slot />
+      </header>
+      <Rankings client:load cause={cause} owner={owner} />
+    </div>
+    <aside class="side" aria-label="Assumptions">
+      <AssumptionsPanel client:load />
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--s7);
+    align-items: start;
+    padding-top: var(--s6);
+  }
+  .intro {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .intro :global(p) {
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0;
+  }
+  @media (max-width: 1000px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: var(--s6);
+    }
+  }
+</style>

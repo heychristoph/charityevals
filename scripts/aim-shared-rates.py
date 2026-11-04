@@ -98,7 +98,8 @@ def deaths(m, rows):
         changed = True
     if changed:
         pins.setdefault("uov_per_daly", AIM_RATE.get(m["id"], 2.3))
-        pins.setdefault("life_value_multiplier", 1)
+        # $life_value_multiplier is worked out from these two: 1 at AIM's own healthy-year rate.
+        pins.setdefault("daly_per_child_death", 116.25262 / pins["uov_per_daly"])
     return changed
 
 

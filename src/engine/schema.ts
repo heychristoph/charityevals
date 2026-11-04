@@ -39,7 +39,7 @@ const rowShape = {
   technical: z.string().optional(),
   /** Shared assumptions only: show the value times `factor`, in `format`, without changing what the
    * models read. Lets a multiplier on an evaluator's weights read in the site's own terms. */
-  shown_as: z.object({ factor: z.number().positive(), format: Format.optional() }).strict().optional(),
+  shown_as: z.object({ factor: z.number().positive(), format: Format.optional(), inverse: z.boolean().optional() }).strict().optional(),
   /** Shared assumptions only: a number taken from evidence rather than a judgment call. Listed with
    * its source and range on the assumptions page, but not offered as a slider. */
   fixed: z.boolean().optional(),

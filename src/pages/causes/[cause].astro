@@ -1,0 +1,14 @@
+---
+// One cause's hub: the rankings filtered to its charities.
+import HubPage from "../../components/HubPage.astro";
+import { CAUSE_LABEL } from "../../components/Rankings.tsx";
+import { rankedCharities } from "../../lib/data";
+
+export function getStaticPaths() {
+  return [...new Set(rankedCharities.map((c) => c.cause))].map((cause) => ({ params: { cause } }));
+}
+const cause = Astro.params.cause!;
+const title = CAUSE_LABEL[cause] ?? cause;
+---
+
+<HubPage title={title} description={`${title} charities, ranked on your values.`} cause={cause} />
