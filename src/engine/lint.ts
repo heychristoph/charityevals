@@ -172,17 +172,22 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     if (f !== "1") continue;
     if ((mk.explainer ?? "").length < MIN_EXPLAINER)
       add("high", "missing-data", `${mk.id} is 1 without a reason`, "Say in the explainer what this charity measured: its own count of who got the intervention, and the effect's counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way).", mk.id);
-    // The branch: the row downstream of the marker that reads the fewest reach and effect rows (its outcome).
+    // The branch: the row downstream of the marker that reads the fewest reach and effect rows (its
+    // outcome), preferring one that reads both a reach and an effect input (a branch's total_adj can read a
+    // shared reach row through its wait discount without being the outcome).
     const seen = new Set<string>();
     const queue = [...(down.get(mk.id) ?? [])];
     let best: string[] | undefined;
+    let bestBoth = false;
     while (queue.length) {
       const id = queue.shift()!;
       if (seen.has(id)) continue;
       seen.add(id);
       queue.push(...(down.get(id) ?? []));
       const xs = [...upstream(m, id)].filter((x) => ["reach", "effect"].includes(m.byId.get(x)?.section ?? ""));
-      if (xs.some(isInput) && (!best || xs.length < best.length)) best = xs;
+      if (!xs.some(isInput)) continue;
+      const both = ["reach", "effect"].every((sec) => xs.some((x) => isInput(x) && m.byId.get(x)!.section === sec));
+      if (!best || (both && !bestBoth) || (both === bestBoth && xs.length < best.length)) { best = xs; bestBoth = both; }
     }
     if (!best) continue;
     // Evidence in a section: an input that isn't a judgment, or a shared fact that isn't one (another

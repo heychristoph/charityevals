@@ -54,7 +54,7 @@ const BY_ID: Record<string, Rule> = {
   "pure-earth-hli-ghana-cosmetics-before-correction": T("leaded-cosmetics advocacy: the people protected and the reduction are judgments."),
   "shamiri-institute-hli": M("Shamiri counts the students in its groups, and the effect is from randomised trials of its own intervention."),
   "strongminds": M("StrongMinds counts the people treated, and the effect blends its own trial and monitoring with trials of the same group therapy."),
-  "taimaka-hli": M("Taimaka counts the children treated, and the treatment's effect is from trials and cohorts of the same community protocol."),
+  "taimaka-hli": T("the children treated for acute malnutrition are counted, but no trial measures the treatment against none: the deaths it averts rest on case series of untreated wasting and a judged share averted, as in our own builds."),
   "world-spine-care-hli": T("the patients reached by the expansion are projected and the effect is from studies of other spine-care programmes."),
   // SoGive
   "breast-cancer-now-sogive": T("research funding: what the research achieves is a judgment from the returns-to-research literature."),
@@ -69,7 +69,7 @@ const BY_ID: Record<string, Rule> = {
   "sightsavers-deworming-sogive-2022": M("the treatments are counted, and the effect is from randomised trials of school-based deworming."),
   "unlimit-health-deworming-sogive-2022": M("the treatments are counted, and the effect is from randomised trials of school-based deworming."),
   // GiveWell exceptions to the rules below
-  "alima-primary-healthcare-malnutrition": P(0.5, "the malnutrition treatment counts its children and takes its effect from trials and cohorts of the same protocol; the primary health care part is a judgment."),
+  "alima-primary-healthcare-malnutrition": T("primary health care and malnutrition treatment: the deaths either averts rest on judgment and case series, not on trials against no treatment."),
   "new-incentives-expected-cost-effectiveness-2017-rct": T("a forecast made before the randomised trial of the programme reported: the effect on vaccination was a judgment."),
   "new-incentives-june-2019": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),
   "new-incentives-june-2019-endline-updated-ni-early-2018": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),
@@ -95,7 +95,7 @@ const GIVEWELL: [RegExp, Rule][] = [
   [/^new-incentives/, M("New Incentives counts the infants enrolled, and the effect on vaccination is from a randomised trial of its own programme.")],
   [/^givedirectly/, M("GiveDirectly counts its recipients, and the effect is from randomised trials of its own transfers.")],
   [/deworm|^sightsavers/, M("the treatments are counted, and the effect is from randomised trials of school-based deworming.")],
-  [/malnutrition|^alima-mirriah/, M("the children treated for acute malnutrition are counted, and the treatment's effect is from trials and cohorts of the same protocol.")],
+  [/malnutrition|^alima-mirriah/, T("the children treated for acute malnutrition are counted, but no trial measures the treatment against none: the deaths it averts rest on case series of untreated wasting and a judged share averted, as in our own builds.")],
   [/^evidence-action-(dispensers|in-line-chlorination|water-quality)/, M("the dispensers and chlorinators are counted with their monitored use, and the effect is from randomised trials of water chlorination.")],
 ];
 const GIVEWELL_DEFAULT = T("a grant estimate for a new, scaled-up or partner-delivered programme: its reach is a projection, or its effect comes from research on other delivery (market or policy work, technical assistance to governments, new organisations).");
