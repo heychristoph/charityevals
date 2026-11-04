@@ -317,8 +317,18 @@ await Promise.all(
     }
   }),
 );
+// Our own models' evaluator page shows the site's own mark, rendered from its favicon.
+const OWN = "owner-charityevals";
+{
+  const dec = await decode(readFileSync(join(root, "public/favicon.svg")), "image/svg+xml", "/favicon.svg");
+  if (dec) {
+    const data = await encode(dec.img);
+    writeFileSync(join(outDir, `${OWN}.webp`), data);
+    manifest[OWN] = { file: `/logos/${OWN}.webp`, source: "/favicon.svg", kind: "site mark", sourcePx: "svg", bleed: await fillsCorners(data), fetched: new Date().toISOString().slice(0, 10) };
+  }
+}
 // Charities that no longer exist, or whose logo was rejected, lose it.
-const ids = new Set(charities.map((c) => c.id));
+const ids = new Set([...charities.map((c) => c.id), OWN]);
 for (const id of Object.keys(manifest)) {
   if (ids.has(id) && !REJECTED[id]) continue;
   delete manifest[id];

@@ -9,7 +9,8 @@ export function getStaticPaths() {
   return [...lib.owners.values()].filter((o) => owners.has(o.id)).map((o) => ({ params: { owner: o.id } }));
 }
 const owner = lib.owners.get(Astro.params.owner!)!;
-const host = owner.url?.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+// Our own page doesn't link the site it is on.
+const host = owner.id === "charityevals" ? undefined : owner.url?.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 ---
 
 <HubPage title={owner.name} description={`Every charity ${owner.name} has a model of, ranked on your values.`} owner={owner.id}>
