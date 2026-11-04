@@ -27,8 +27,11 @@ scale does it.
 
 - `@household_size.united_states`, `@household_size.united_kingdom` (add another country's from its
   statistics office); 1 for a service to one person, said.
-- `@united_states.consumption_per_person_2024`, `@united_kingdom.consumption_per_person_2024`
-  (World Bank, current US$; pounds × `@fx.usd_per_gbp_<year>` are on the same footing).
+- Survey consumption of the people served: `@united_states.ce_expenditure_per_person_2024` (Consumer
+  Expenditure Survey); where only national accounts exist, the national figure × the shared
+  `@survey_consumption.survey_to_na_<iso3>` (UK: `@united_kingdom.consumption_per_person_2024 *
+  @survey_consumption.survey_to_na_gbr`; pounds × `@fx.usd_per_gbp_<year>`). A shared conversion,
+  never a reason for `$missing_data_discount`.
 - `@united_states.ce_lowest_quintile_vs_all_2024`: the anchor for `recipients_consumption_share`
   (per household; per person the share is higher, since poorer households are smaller).
 - `@wellby_factors.wellbys_per_sd_year` for an effect in SDs; `@depression.phq9_sd` for PHQ points.

@@ -3,7 +3,14 @@
   "name": "American Red Cross: international disaster relief (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"LBN":0.16,"UKR":0.16,"MOZ":0.51,"BGD":0.07,"MMR":0.09,"BRA":0.01},
+  "beneficiaries": {
+    "LBN": 0.16,
+    "UKR": 0.16,
+    "MOZ": 0.51,
+    "BGD": 0.07,
+    "MMR": 0.09,
+    "BRA": 0.01
+  },
   "beneficiaries_note": "Our build: disaster-response grants to Red Cross and Red Crescent societies, weighted by region from the Form 990's Schedule F (Middle East 45%, Europe 25%, Sub-Saharan Africa 15%, South Asia 7%, East Asia 5%, the Americas 3.5%), each region valued at a stand-in country (Lebanon, Ukraine, Mozambique, Bangladesh, Myanmar, Brazil): shares of the result at the defaults (the poorest, Mozambique, 51%).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
@@ -475,48 +482,48 @@
       "section": "effect",
       "label": "Consumption per person of the people helped, Lebanon (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @lebanon.consumption_per_person_2024 * @lebanon.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @lebanon.consumption_per_person_2024 * @lebanon.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_world_median), a shared conversion, not thin data."
     },
     {
       "id": "baseline_ukraine",
       "section": "effect",
       "label": "Consumption per person of the people helped, Ukraine (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @ukraine.consumption_per_person_2024 * @ukraine.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_ukr * @ukraine.consumption_per_person_2024 * @ukraine.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_ukr), a shared conversion, not thin data."
     },
     {
       "id": "baseline_mozambique",
       "section": "effect",
       "label": "Consumption per person of the people helped, Mozambique (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @mozambique.consumption_per_person_2024 * @mozambique.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_moz * @mozambique.consumption_per_person_2024 * @mozambique.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_moz), a shared conversion, not thin data."
     },
     {
       "id": "baseline_bangladesh",
       "section": "effect",
       "label": "Consumption per person of the people helped, Bangladesh (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @bangladesh.consumption_per_person_2024 * @bangladesh.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_bgd * @bangladesh.consumption_per_person_2024 * @bangladesh.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_bgd), a shared conversion, not thin data."
     },
     {
       "id": "baseline_myanmar",
       "section": "effect",
       "label": "Consumption per person of the people helped, Myanmar (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @myanmar.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below. Both conversions apply to the relief and the baseline alike, so they cancel in the log gain: a dollar of relief and a dollar of local consumption buy the same local goods. They are kept so the baseline reads in the site's PPP units."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @myanmar.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below. Both conversions apply to the relief and the baseline alike, so they cancel in the log gain: a dollar of relief and a dollar of local consumption buy the same local goods. They are kept so the baseline reads in the site's PPP units. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_world_median), a shared conversion, not thin data."
     },
     {
       "id": "baseline_brazil",
       "section": "effect",
       "label": "Consumption per person of the people helped, Brazil (about 2017 international $)",
       "format": "usd",
-      "formula": "affected_consumption_share * @brazil.consumption_per_person_2024 * @brazil.ppp_factor_2017 * cpi_2017_vs_2024",
-      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain."
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_bra * @brazil.consumption_per_person_2024 * @brazil.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_bra), a shared conversion, not thin data."
     },
     {
       "id": "ln_gain_lebanon",
@@ -574,12 +581,12 @@
       "label": "Disaster-affected households' consumption per person, as a share of their country's mean",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.3,
-        "high": 0.5
+        "low": 0.28,
+        "best": 0.42,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Disaster-affected households' consumption per person over the year, as a share of their country's national-accounts mean (the baseline rows below). Anchors from the World Bank's Poverty and Inequality Platform (api.worldbank.org/pip, retrieved 4 November 2026) and WDI household consumption in 2021 PPP (NE.CON.PRVT.PP.KD over population): the household-survey mean is 0.82 of the national-accounts mean in Mozambique (2022), 0.52 in Bangladesh (2022) and 0.81 in Brazil (2024, income); the poorest 40%'s mean is 0.33 of the survey mean in Mozambique, 0.54 in Bangladesh, 0.30 in Brazil and 0.55 in Myanmar (2017). Relief targets the worst-affected and poorest, about the poorest 40%: 0.27, 0.28 and 0.24 of the national-accounts mean in the three countries with both figures. About 0.3, from 0.2 to 0.5 (relief spread across the affected population). A year's consumption is the base, not the short dip right after the disaster, since the relief is counted against a year. The same share is applied to Lebanon and Ukraine (no comparable split there; displaced households' consumption falls far below their country's mean), within the range."
+      "explainer": "Disaster-affected households' consumption per person over the year, as a share of their country's household-survey mean (the baseline rows put the national accounts on the survey scale with the shared ratios). Anchors from the World Bank's Poverty and Inequality Platform (api.worldbank.org/pip, retrieved 4 November 2026) and WDI household consumption in 2021 PPP (NE.CON.PRVT.PP.KD over population): the household-survey mean is 0.82 of the national-accounts mean in Mozambique (2022), 0.52 in Bangladesh (2022) and 0.81 in Brazil (2024, income); the poorest 40%'s mean is 0.33 of the survey mean in Mozambique, 0.54 in Bangladesh, 0.30 in Brazil and 0.55 in Myanmar (2017). Relief targets the worst-affected and poorest, about the poorest 40%: 0.27, 0.28 and 0.24 of the national-accounts mean in the three countries with both figures. About 0.3, from 0.2 to 0.5 (relief spread across the affected population). A year's consumption is the base, not the short dip right after the disaster, since the relief is counted against a year. The same share is applied to Lebanon and Ukraine (no comparable split there; displaced households' consumption falls far below their country's mean), within the range. Re-expressed on 4 November 2026 from a share of the national-accounts mean (0.3, 0.2–0.5) by the three countries' survey-to-national-accounts ratios this explainer names (mean 0.72), so the baseline is unchanged; the poorest 40%'s 0.30–0.55 of the survey mean anchors it directly."
     },
     {
       "id": "mmr_consumption_share_of_gdp",

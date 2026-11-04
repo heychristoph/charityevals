@@ -1087,6 +1087,37 @@ Habitat for Humanity, the American Red Cross) keeps its figure and every African
 so a US charity rises about 4× against AMF; Clean Air Task Force (world) takes 0.28, The Life You Can Save
 0.25 (its destinations are almost all in Africa).
 
+### 2.14 Consumption baselines and survivors' remaining life: one rule each (November 2026)
+
+Owner decisions 2026-11-04, applied mechanically by script with the lint and invariants as the check (no
+new audit rounds):
+
+- **Consumption baselines** are the survey consumption of the people served wherever a survey exists: in
+  the US the Consumer Expenditure Survey per person (`@united_states.ce_expenditure_per_person_2024`,
+  $32,723, whose income-fifth ratios already scale it to the clients), in poor countries the World Bank's
+  household-survey means (`@survey_consumption.*`). Where only national-accounts consumption exists, it is
+  multiplied by the country's shared survey-to-national-accounts ratio (`@survey_consumption.survey_to_na_<iso3>`:
+  the World Bank's survey mean over household final consumption per person in the same 2021 PPP dollars,
+  ±15%; United Kingdom 0.84, Brazil 0.81, Mozambique 0.82, Ukraine 0.62, Bangladesh 0.52, and the median
+  0.68 (0.52–0.82) for a country with no survey, Lebanon and Myanmar). A shared conversion, never thin data:
+  it doesn't take `$missing_data_discount`. Templates (domestic-services, cash-income, humanitarian-relief)
+  and our models: the American Red Cross (disaster relief: 0.00261 → 0.00454 years per $1,000, ×1.74),
+  Habitat for Humanity US (×1.75), the Salvation Army US (×1.54), United Way (×1.16), and the drafts (St.
+  Jude ×1.01, Habitat's awareness ×1.30, which no longer adds a share of the gap to the national accounts;
+  the Red Cross's and Salvation Army's international work, whose shares were re-expressed on the survey
+  scale, ×1.00). The national accounts stay where everyone's consumption is meant (the taxpayers who fund
+  public money).
+- **Survivors' remaining life.** A death averted is valued at its age band; where studies show survivors
+  live shorter than their age group, × the condition's shared remaining-life ratio (facts/survival.json),
+  elsewhere nothing: out-of-hospital cardiac arrest 0.8 (0.65–0.95; 84% relative ten-year survival),
+  acute bleeding saved by transfusion 0.65 and transfusion-dependent patients 0.4 (Kamper-Jørgensen et al.
+  2008), childhood cancer 0.86 (0.75–0.92; Yeh et al. 2020, 14% shorter life for 1990s diagnoses). Read
+  by the Red Cross's blood and CPR branches (which had the same figures as their own judgments: no
+  change), the British Heart Foundation's CPR and defibrillator branches (×0.98 for the model), St. Jude's
+  care, global and graduate branches (draft ×0.86) and its cancer research branch (×0.91).
+
+No model moved by more than 2×.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them

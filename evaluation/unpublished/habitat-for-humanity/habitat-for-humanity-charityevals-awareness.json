@@ -3,7 +3,22 @@
   "name": "Habitat for Humanity International: public awareness, education and housing advocacy (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":0.02,"HND":0.0116,"DOM":0.0282,"PER":0.0314,"ARM":0.0494,"MKD":0.0245,"ROU":0.0123,"EGY":0.0993,"KEN":0.1268,"UGA":0.063,"MWI":0.1408,"ZMB":0.1528,"PHL":0.0995,"BGD":0.1404},
+  "beneficiaries": {
+    "USA": 0.02,
+    "HND": 0.0116,
+    "DOM": 0.0282,
+    "PER": 0.0314,
+    "ARM": 0.0494,
+    "MKD": 0.0245,
+    "ROU": 0.0123,
+    "EGY": 0.0993,
+    "KEN": 0.1268,
+    "UGA": 0.063,
+    "MWI": 0.1408,
+    "ZMB": 0.1528,
+    "PHL": 0.0995,
+    "BGD": 0.1404
+  },
   "beneficiaries_note": "Our build: the global Home Equals campaign (98% of the result at the defaults), valued country by country over the 13 stand-in countries of the international build, each region a quarter of the people (Home Equals publishes no split, a judgment), so the shares follow each country's net value per person; US housing advocacy 2%.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
@@ -386,8 +401,8 @@
       "section": "effect",
       "label": "US: consumption per person of the people reached (US$, household survey)",
       "format": "usd",
-      "formula": "us_recipient_share * (@united_states.ce_expenditure_per_person_2024 + (1 - gap_top_share) * (@united_states.consumption_per_person_2024 - @united_states.ce_expenditure_per_person_2024))",
-      "explainer": "The households' survey spending (us_recipient_share × the Consumer Expenditure Survey's $32,723 a person) plus their share of the gap to the national accounts' $58,517 that is spread over everyone (1 − gap_top_share): about $32,000 a person at the best guesses; at gap_top_share 0 it is the US model's own convention."
+      "formula": "us_recipient_share * @united_states.ce_expenditure_per_person_2024",
+      "explainer": "The households' consumption by the household survey: us_recipient_share × the Consumer Expenditure Survey's $32,723 a person (2024). Changed 2026-11-04 (one rule for every model): a consumption baseline is the survey consumption of the people served, so the share of the gap to the national accounts' $58,517 that was spread over everyone is no longer added. A shared conversion, not thin data."
     },
     {
       "id": "us_inkind_value",
