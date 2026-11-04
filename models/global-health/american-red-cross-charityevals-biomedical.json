@@ -9,13 +9,13 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 3 November 2026) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; training fees $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. The result is far below the site's global-health median because the patients and trainees are in the US, where other providers would step in, and the Red Cross's product is a minority of the resources behind each transfusion; it is mostly uncertainty (the judgments behind deaths averted per product span a wide range).",
+  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; programme-materials (mainly course) revenue $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. Both branches are discounted for missing data: the deaths averted per blood product rest on judgments anchored on studies of patients who refused transfusion, and the training on registry studies of bystander CPR. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. The result is far below the site's global-health median because other providers would step in (only 15% of the outcome counted), the Red Cross's product is under a quarter of the resources behind each transfusion, both branches take the missing-data step, and a transfusion survivor lives about three-fifths of an average remaining life. Together the adjustments leave about 1% of the raw outcome; before them a death averted costs about $25,000 of blood, several times what one costs in the site's global-health programmes; it is mostly uncertainty (the judgments behind deaths averted per product span a wide range).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross Biomedical and Training Services (FY2025)",
     "url": "https://charityevals.org/american-red-cross-charityevals-biomedical",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -32,6 +32,41 @@
       "type": "study",
       "title": "Hasselqvist-Ax et al. (2015), Early cardiopulmonary resuscitation in out-of-hospital cardiac arrest, NEJM 372:2307-15",
       "url": "https://doi.org/10.1056/NEJMoa1405796"
+    },
+    {
+      "type": "study",
+      "title": "Carson et al. (2002), Mortality and morbidity in patients with very low postoperative Hb levels who decline blood transfusion, Transfusion 42:812-8",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12375651/"
+    },
+    {
+      "type": "study",
+      "title": "Shander et al. (2010), Activity-based costs of blood transfusions in surgical patients at four hospitals, Transfusion 50:753-65",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20003061/"
+    },
+    {
+      "type": "study",
+      "title": "Kamper-Jørgensen et al. (2008), Survival after blood transfusion, Transfusion 48:2577-84",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18673342/"
+    },
+    {
+      "type": "study",
+      "title": "Jensen et al. (2023), Training in basic life support and bystander CPR and survival in Denmark, 2005-2019, JAMA Network Open",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2023.3338"
+    },
+    {
+      "type": "study",
+      "title": "Toy et al. (2026), Evaluating the effect of a regional training initiative on bystander CPR rates, Resuscitation",
+      "url": "https://doi.org/10.1016/j.resuscitation.2026.111262"
+    },
+    {
+      "type": "study",
+      "title": "Pan et al. (2026), Population-level association of layperson CPR training with survival after OHCA: a meta-analysis, Frontiers in Public Health",
+      "url": "https://doi.org/10.3389/fpubh.2026.1913160"
+    },
+    {
+      "type": "study",
+      "title": "McDavid et al. (2025), National Blood Collection and Utilization Survey, 2023, Transfusion",
+      "url": "https://doi.org/10.1111/trf.18187"
     }
   ],
   "sections": [
@@ -67,12 +102,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -95,6 +124,22 @@
         "quote": "Biomedical Services 2,119,409 — 2,119,409 1,998,821"
       },
       "explainer": "Collecting, testing, processing and distributing blood products at 35 regional operations."
+    },
+    {
+      "id": "bio_revenue",
+      "section": "cost",
+      "label": "Biomedical Services revenue from hospitals, FY2025 (US$)",
+      "format": "usd",
+      "value": 2305215000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands), Products and services",
+        "quote": "Biomedical Services 2,305,215 — 2,305,215 2,158,876"
+      },
+      "explainer": "What hospitals paid for the products: the purchase price the hospital-side costs below are a multiple of."
     },
     {
       "id": "trn_spend",
@@ -231,8 +276,8 @@
       "section": "effect",
       "label": "Risk of death without blood, per product's recipient",
       "format": "small",
-      "unit": "deaths / person-year",
-      "explainer": "Acutely bleeding share × their risk of dying with no blood.",
+      "unit": "deaths per recipient episode",
+      "explainer": "Acutely bleeding share × their risk of dying with no blood (acute deaths only; transfusion-dependent patients' deaths are added in deaths_averted_per_person).",
       "formula": "bld_acute_share * bld_death_risk_without"
     },
     {
@@ -242,11 +287,11 @@
       "format": "number",
       "value": {
         "low": 3,
-        "best": 6,
-        "high": 10
+        "best": 4.5,
+        "high": 8
       },
       "kind": "judgment",
-      "explainer": "One product is a share of a life saved: a bleeding patient typically gets several units of red cells, plasma and platelets (massive transfusion is 10+ units in 24 hours; most acute transfusions are 2-4)."
+      "explainer": "Deaths per product are the mean risk over the mean products per acutely bleeding patient, red cells, plasma and platelets together. Most acute transfusions are 2-4 units, with a tail of massive transfusions (10 or more units in 24 hours) that raises the mean: about 4.5, from 3 to 8. A judgment; no US survey of components per acutely bleeding patient was found."
     },
     {
       "id": "mortality_reduction",
@@ -255,6 +300,14 @@
       "format": "percent",
       "explainer": "Each product's share of the patient's survival.",
       "formula": "1 / bld_products_per_acute_patient"
+    },
+    {
+      "id": "bld_acute_deaths_per_product",
+      "section": "effect",
+      "label": "Acute-bleeding deaths averted per product (before adjustments)",
+      "format": "small",
+      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
+      "explainer": "Risk without blood × each product's share of a patient's survival."
     },
     {
       "id": "indirect_deaths_ratio",
@@ -269,8 +322,8 @@
       "section": "effect",
       "label": "Deaths averted per person reached (before adjustments)",
       "format": "small",
-      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
-      "explainer": "Direct and indirect deaths over the years of protection. If the intervention protects several age groups with different risks, replace this formula with one row per group and sum them here; check the result against the all-cause trial result per person-year, scaled to today's mortality."
+      "formula": "bld_acute_deaths_per_product + bld_chronic_deaths_per_product",
+      "explainer": "Deaths averted per product: acutely bleeding recipients (risk × each product's share × years) plus transfusion-dependent chronic patients (bld_chronic_deaths_per_product). Both are valued at the blood recipients' age mix: haematology-oncology patients are about as old as other recipients."
     },
     {
       "id": "share_under5",
@@ -423,13 +476,56 @@
       "section": "adjustments",
       "label": "Blood: this charity's share of the resources behind the outcome",
       "format": "percent",
+      "explainer": "The Red Cross's full cost (overhead included, as in cost_total) against all the resources behind the transfusions: its own cost, the hospitals' costs of transfusing beyond the purchase price, and the donors' time at the US value of an hour: about a quarter.",
+      "formula": "bio_spend * overhead_ratio / (bio_spend * overhead_ratio + (bld_abc_cost_multiple - 1) * bio_revenue + bld_donations * bld_hours_per_donation * trn_hour_value)"
+    },
+    {
+      "id": "bld_abc_cost_multiple",
+      "section": "adjustments",
+      "label": "Full cost of transfusing a unit, as a multiple of its purchase price",
+      "format": "multiple",
       "value": {
-        "low": 0.2,
-        "best": 0.3,
-        "high": 0.5
+        "low": 3.2,
+        "best": 4,
+        "high": 4.8
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Shander et al. (2010), Activity-based costs of blood transfusions in surgical patients at four hospitals, Transfusion 50:753-65 (abstract)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20003061/",
+        "retrieved": "2026-11-04",
+        "quote": "3.2- to 4.8-fold higher than blood product acquisition costs"
+      },
+      "explainer": "Activity-based costing at four hospitals: testing, storage, administration and monitoring make the full cost several times the purchase price. Midpoint 4."
+    },
+    {
+      "id": "bld_donations",
+      "section": "adjustments",
+      "label": "Blood and platelet donations collected, FY2025",
+      "format": "integer",
+      "value": 5700000,
+      "kind": "observed",
+      "source": {
+        "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 11, Biomedical Services highlights",
+        "quote": "MORE THAN 4.6 million blood donations and 1.1 million platelet donations collected."
+      },
+      "explainer": "4.6 million blood plus 1.1 million platelet donations."
+    },
+    {
+      "id": "bld_hours_per_donation",
+      "section": "adjustments",
+      "label": "Donor's hours per donation, travel included",
+      "format": "number",
+      "value": {
+        "low": 1.3,
+        "best": 1.8,
+        "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "The product is one input: the hospital's transfusion service, clinicians and the donors' own time are the others. Activity-based costing puts the full cost of transfusing a unit at 3-5 times its purchase price (Shander et al. 2010, Transfusion), and 2.5 million donors give about an hour each per donation; so the Red Cross's product is about 30% of the resources behind each transfusion."
+      "explainer": "Whole blood takes about an hour at the drive plus travel (about 1.5 hours); platelet apheresis two to three hours plus travel (about 3.3). Weighted by 4.6 and 1.1 million donations: about 1.8, from 1.3 to 2.5."
     },
     {
       "id": "bld_implementation_adj",
@@ -472,6 +568,14 @@
       "explainer": "Blood is collected and used within weeks; there are no donations waiting to be spent."
     },
     {
+      "id": "bld_missing_data_adj",
+      "section": "adjustments",
+      "label": "Blood: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the products are the Red Cross's own count, but the deaths averted per product rest on judgments (the share given for acute bleeding, the risk of dying without blood, products per patient) anchored on studies of patients who refused transfusion, not on a measurement of what the Red Cross's supply changes. So the shared missing-data step applies."
+    },
+    {
       "id": "delay_years",
       "section": "adjustments",
       "label": "Years from the charity's spending to the intervention reaching people",
@@ -507,8 +611,8 @@
       "section": "adjustments",
       "label": "Blood: all adjustments combined",
       "format": "multiple",
-      "formula": "bld_evidence_adj * bld_counterfactual_adj * bld_attribution_share * bld_implementation_adj * bld_leverage_funging_adj * wait_discount",
-      "explainer": "The product of the adjustments above."
+      "formula": "bld_evidence_adj * bld_counterfactual_adj * bld_attribution_share * bld_implementation_adj * bld_leverage_funging_adj * wait_discount * bld_missing_data_adj",
+      "explainer": "The product of the adjustments above, the missing-data step included."
     },
     {
       "id": "treatment_costs_share",
@@ -545,7 +649,7 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Health screening for donors (the Red Cross notifies donors with high blood pressure and other findings) (+), the national disaster reserve (+), transfusion reactions and infections (-, very rare)."
+      "explainer": "Health screening for donors (the Red Cross notifies donors with high blood pressure and other findings) (+), the national disaster reserve (+), drownings averted by water safety and first aid beyond CPR (+); transfusion reactions and infections (−, very rare) and CPR survivors left with brain injury (−)."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -577,12 +681,12 @@
       "label": "Share of trainees taught CPR",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.7,
-        "high": 0.9
+        "low": 0.7,
+        "best": 0.85,
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "First Aid/CPR/AED and Basic Life Support are the core courses; water safety, babysitting and lifeguarding are the rest (lifeguarding includes CPR)."
+      "explainer": "First Aid/CPR/AED and Basic Life Support are the core courses; water safety and lifeguarding trained only 'more than 30,000' of the 6 million (annual report p. 14), and babysitting and other courses are a minority. About 85%, from 70 to 95%."
     },
     {
       "id": "trn_ohca_per_year",
@@ -601,7 +705,7 @@
         "retrieved": "2026-11-03",
         "quote": "More than 350,000 cardiac arrests occur outside of the hospital each year."
       },
-      "explainer": "EMS-assessed non-traumatic arrests; the low end is the newer count of those EMS treats (over 250,000)."
+      "explainer": "EMS-assessed non-traumatic arrests; the low end is the newer count of those EMS treats (over 250,000). (The AHA page blocks automated fetches; the same figure is in the AHA's Heart Disease and Stroke Statistics updates.)"
     },
     {
       "id": "trn_us_population",
@@ -635,7 +739,7 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "About 40% of US arrests get bystander CPR (CARES); people trained in the past two years are much more willing and able to start, but many trained bystanders are not the one who acts. A rise of about 25 points for the trained person."
+      "explainer": "About 40% of US arrests get bystander CPR (CARES); people trained in the past two years are much more willing and able to start, but many trained bystanders are not the one who acts. Population studies of training: in Denmark, each 5-point rise in the share of people taking a course went with 14% higher odds of survival, about 40% of it through more bystander CPR (Jensen et al. 2023, JAMA Network Open 6:e233338); a year-long US county training drive raised bystander CPR by 3 points overall (not significant) and 9 points in public places, with no significant change in survival to discharge (Toy et al. 2026, Resuscitation); a meta-analysis of 19 observational studies finds layperson training associated with higher survival to discharge (CPR training odds ratio 1.74, 1.39-2.19: Pan et al. 2026, Frontiers in Public Health). Those are population averages over everyone; for a trained person who is present, a rise of about 25 points, from 10 to 40."
     },
     {
       "id": "trn_survival_gain",
@@ -643,18 +747,18 @@
       "label": "Extra survival when a bystander gives CPR",
       "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.05,
-        "high": 0.07
+        "low": 0.036,
+        "best": 0.042,
+        "high": 0.048
       },
       "kind": "estimate",
       "source": {
-        "title": "Hasselqvist-Ax et al. (2015), NEJM, summarised by Karolinska Institutet",
-        "url": "https://news.ki.se/swift-intervention-doubles-survival-rate-from-cardiac-arrest",
-        "retrieved": "2026-11-03",
-        "quote": "CPR before the arrival of EMS was associated with an increased 30-d survival rate (odds ratio 2.15; 95% CI 1.88-2.45)"
+        "title": "Hasselqvist-Ax et al. (2015), Early cardiopulmonary resuscitation in out-of-hospital cardiac arrest, N Engl J Med 372:2307-15 (abstract)",
+        "url": "https://doi.org/10.1056/NEJMoa1405796",
+        "retrieved": "2026-11-04",
+        "quote": "The 30-day survival rate was 10.5% when CPR was performed before EMS arrival versus 4.0% when CPR was not performed before EMS arrival (P<0.001)."
       },
-      "explainer": "Survival roughly doubles (odds ratio 2.15) from about 5% without bystander CPR: about 5 percentage points. Observational, adjusted for known confounders."
+      "explainer": "In 30,381 witnessed arrests in Sweden, 30-day survival was 4.0% without CPR before the ambulance; the adjusted odds ratio 2.15 (1.88-2.45) on 4.0% gives 8.2% (7.3-9.3%), a gain of 4.2 points (3.6-4.8). A trained bystander who is present is close to the witnessed case. Observational, adjusted for known confounders (the evidence adjustment carries the rest)."
     },
     {
       "id": "trn_skill_years",
@@ -723,27 +827,16 @@
       "section": "adjustments",
       "label": "Value of an hour of a trainee's time (US$)",
       "format": "usd",
-      "value": {
-        "low": 20,
-        "best": 34.79,
-        "high": 36.14
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Independent Sector and the Do Good Institute, Value of Volunteer Time",
-        "url": "https://independentsector.org/volunteer_time",
-        "retrieved": "2026-11-03",
-        "quote": "the estimate for the value of a volunteer hour was $36.14 in 2025, a 3.9% increase from 2024"
-      },
-      "explainer": "Independent Sector's value of an hour of unpaid time ($36.14 in 2025, 3.9% above 2024, so $34.79), as for the Red Cross's volunteers in the disaster model; low end the pay of the jobs most trainees hold."
+      "explainer": "The site's US value of an hour of unpaid time, 2024 (@united_states.volunteer_hour_value_2024, Independent Sector: the BLS wage plus fringe benefits), as for the Red Cross's volunteers in the disaster model; also prices the blood donors' time.",
+      "formula": "@united_states.volunteer_hour_value_2024"
     },
     {
       "id": "trn_attribution_share",
       "section": "adjustments",
       "label": "Training: the Red Cross's share of the resources behind it",
       "format": "percent",
-      "formula": "trn_spend / (trn_spend + trn_people_trained * trn_course_hours * trn_hour_value)",
-      "explainer": "Course costs against the trainees' (or their employers') own hours on the course, which are most of the resources: about 0.15. Licensed partner instructors teaching Red Cross courses are counted at zero (their cost isn't published), so this errs high."
+      "formula": "trn_spend * overhead_ratio / (trn_spend * overhead_ratio + trn_people_trained * trn_course_hours * trn_hour_value)",
+      "explainer": "Course costs (overhead included) against the trainees' (or their employers') own hours on the course, which are most of the resources: about 0.15. Licensed partner instructors teaching Red Cross courses are counted at zero (their cost isn't published), so this errs high."
     },
     {
       "id": "trn_implementation_adj",
@@ -772,6 +865,14 @@
       "explainer": "Course fees pay for the training, so no donor money is funged (1); the ends allow for employers shifting course spending between providers (below) or Red Cross courses drawing in workplace programmes that would not otherwise run (above)."
     },
     {
+      "id": "trn_missing_data_adj",
+      "section": "adjustments",
+      "label": "Training: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: trainees are the Red Cross's own count, but whether they are at an arrest and act because of the course are judgments, and the survival effect comes from registry studies of bystander CPR in general (Hasselqvist-Ax et al. 2015), not an evaluation of Red Cross trainees. So the shared missing-data step applies."
+    },
+    {
       "id": "bld_raw_deaths",
       "section": "adjustments",
       "label": "Blood: deaths averted before adjustments (weights only)",
@@ -792,8 +893,8 @@
       "section": "adjustments",
       "label": "Training: all adjustments combined",
       "format": "multiple",
-      "formula": "trn_evidence_adj * trn_counterfactual_adj * trn_attribution_share * trn_implementation_adj * trn_leverage_funging_adj",
-      "explainer": "The training branch's own adjustments; its effect is immediate (no wait)."
+      "formula": "trn_evidence_adj * trn_counterfactual_adj * trn_attribution_share * trn_implementation_adj * trn_leverage_funging_adj * trn_missing_data_adj",
+      "explainer": "The training branch's own adjustments, the missing-data step included; its effect is immediate (no wait)."
     },
     {
       "id": "internal_validity_adj",
@@ -860,6 +961,14 @@
       "explainer": "This is the outcome-weighted average of the branches (blood and training, weighted by deaths averted before adjustments), for reading only: each branch applies its own row."
     },
     {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (branch average, for reading only)",
+      "format": "percent",
+      "formula": "bld_weight * bld_missing_data_adj + (1 - bld_weight) * trn_missing_data_adj",
+      "explainer": "This is the outcome-weighted average of the branches (blood and training, weighted by deaths averted before adjustments), for reading only: each branch applies its own row, and both are thin."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
       "label": "Total adj (branch average, for reading only)",
@@ -896,7 +1005,20 @@
       "explainer": "Cardiac-arrest victims are mostly over 50, valued by five-year weights; drownings averted by water safety are younger and in unmodelled benefits."
     },
     {
-      "id": "deaths_averted",
+      "id": "trn_survivor_life_share",
+      "section": "effect",
+      "label": "Training: a cardiac-arrest survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "value": {
+        "low": 0.65,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Survivors of out-of-hospital cardiac arrest discharged alive have heart disease and some excess long-term mortality against their age peers, though most live for years: about 0.8, from 0.65 to 0.95, the same step as the blood survivors' (a judgment: no study of US survivors' remaining life against age peers was read)."
+    },
+    {
+      "id": "bld_deaths_averted",
       "section": "outcome",
       "label": "Blood: deaths averted (after adjustments)",
       "format": "number",
@@ -927,6 +1049,32 @@
       },
       "kind": "judgment",
       "explainer": "The same anchor; the rest are 75 or older. The range runs from an older to a younger mix."
+    },
+    {
+      "id": "bld_survivor_life_share",
+      "section": "effect",
+      "label": "Blood: a survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.65,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Transfusion recipients are sicker than their age peers and die sooner: in 1.1 million Scandinavian recipients, survival was 73.7% at one year, 53.4% at five and 27.0% at twenty, with mortality still 1.3 times the general population's after 17 years (Kamper-Jørgensen et al. 2008, Transfusion 48:2577-84, PMID 18673342). Applied to the acute-bleeding deaths; transfusion-dependent patients take their own share (bld_dependent_survivor_life_share). The value of a death averted assumes an average remaining life for the age, so a blood survivor's counts at a share of it. Acute-bleeding survivors (trauma, obstetric, surgical) do better than the all-recipient cohort, whose internal-medicine patients do worst: about 0.65, from 0.45 to 0.85."
+    },
+    {
+      "id": "bld_dependent_survivor_life_share",
+      "section": "effect",
+      "label": "Blood: a transfusion-dependent survivor's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Haematology-oncology patients do worst among transfusion recipients (in Kamper-Jørgensen et al. 2008, survival was lowest for those transfused in internal medicine), and five-year survival after acute leukaemia, myelodysplasia or transplant is well under half: about 0.4, from 0.25 to 0.6."
     },
     {
       "id": "bld_value_50_plus",
@@ -971,22 +1119,38 @@
       "explainer": "GiveWell's five-year moral weights mixed by the deaths' ages, as rich-country care requires (families/high-income-care.md), instead of the 50-74 band."
     },
     {
-      "id": "value_per_death",
+      "id": "bld_value_per_death",
       "section": "outcome",
-      "label": "Blood: value of a death averted (units of value)",
+      "label": "Blood: value of a death averted at the recipients' age mix (units of value)",
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * bld_value_50_plus))) * $life_value_multiplier",
       "unit": "units of value",
       "explainer": "The site's one value of a death, by age band (the over-50s by five-year weights), times your value of a life."
     },
     {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted (blood and training, after adjustments)",
+      "format": "number",
+      "formula": "bld_deaths_averted + trn_deaths_averted",
+      "explainer": "Both branches' deaths averted."
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted, both branches (units of value)",
+      "format": "number",
+      "formula": "(people_reached * bld_total_adj * (bld_acute_deaths_per_product * bld_survivor_life_share + bld_chronic_deaths_per_product * bld_dependent_survivor_life_share) * bld_value_per_death + trn_deaths_averted * trn_value_per_death * trn_survivor_life_share) / deaths_averted",
+      "explainer": "The death-weighted value across the branches, each death at its own age mix times its survivors' remaining-life share (acute bleeding, transfusion-dependent, cardiac arrest), so uov_deaths = deaths_averted × value_per_death as in the template."
+    },
+    {
       "id": "uov_deaths",
       "section": "outcome",
       "label": "Units of value from deaths averted",
       "format": "number",
-      "formula": "deaths_averted * value_per_death + trn_deaths_averted * trn_value_per_death",
+      "formula": "deaths_averted * value_per_death",
       "unit": "units of value",
-      "explainer": "Blood deaths averted at the blood recipients' age mix, plus training's at the cardiac-arrest victims'."
+      "explainer": "Deaths averted at their death-weighted value (value_per_death)."
     },
     {
       "id": "uov_stillbirths",
@@ -1017,10 +1181,57 @@
     {
       "id": "bld_chronic_share",
       "section": "effect",
-      "label": "Share of blood products given for chronic anaemia",
+      "label": "Share of blood products given for chronic and medical use",
       "format": "percent",
       "formula": "1 - bld_acute_share",
-      "explainer": "The products not given for acute bleeding (cancer, blood disorders, kidney disease)."
+      "explainer": "The products not given for acute bleeding: haematology-oncology support (counted as deaths of transfusion-dependent patients below) and chronic anaemia (cancer, blood disorders, kidney disease)."
+    },
+    {
+      "id": "bld_dependent_share",
+      "section": "effect",
+      "label": "Of the products for chronic use, share going to patients whose survival over the year depends on transfusion",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Haematology and oncology patients through chemotherapy and stem-cell transplant, severe aplastic anaemia, thalassaemia major and sickle-cell crises: without platelet and red-cell support their treatment can't be given and many would die. Reference: of the 14.4 million components transfused in the US in 2023 (10.3 million red cells, 2.2 million platelets, 1.9 million plasma: McDavid et al. 2025, Transfusion, NBCUS 2023), platelets, about 15%, go mostly to haematology-oncology patients, who also take a large share of medical red-cell use. So about 40% of the non-acute products (about a quarter of all), from 20 to 60%. No US survey splits use by diagnosis."
+    },
+    {
+      "id": "bld_dependent_death_risk",
+      "section": "effect",
+      "label": "Risk a transfusion-dependent patient would die within the year without blood",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The share of a year's transfusion-dependent patients whose death a year without blood would bring forward, and that later years' products don't also claim: most dependent use is one-off chemotherapy or transplant episodes, and lifelong-dependent patients' (thalassaemia, myelodysplasia) later years are credited only to later products. Without transfusion intensive chemotherapy and transplant can't go ahead and severe aplastic anaemia is often fatal within months; but many would get less intensive treatment or fewer transfusions. About 30%, from 10 to 50%."
+    },
+    {
+      "id": "bld_products_per_dependent_patient_year",
+      "section": "effect",
+      "label": "Blood products a transfusion-dependent patient gets in a year",
+      "format": "number",
+      "value": {
+        "low": 15,
+        "best": 30,
+        "high": 60
+      },
+      "kind": "judgment",
+      "explainer": "A leukaemia induction or a stem-cell transplant takes tens of red-cell and platelet units; a thalassaemia patient gets one to two red-cell units every three to four weeks (15-25 a year). About 30, from 15 to 60."
+    },
+    {
+      "id": "bld_chronic_deaths_per_product",
+      "section": "effect",
+      "label": "Deaths of transfusion-dependent patients averted per product (before adjustments)",
+      "format": "small",
+      "formula": "bld_chronic_share * bld_dependent_share * bld_dependent_death_risk / bld_products_per_dependent_patient_year",
+      "explainer": "Products for chronic use × the dependent share × their risk without blood ÷ products per patient-year: each product's share of a dependent patient's survival over the year."
     },
     {
       "id": "bld_weeks_relieved",
@@ -1042,8 +1253,8 @@
       "label": "Illness averted per blood product, in DALYs (before adjustments)",
       "format": "small",
       "unit": "DALYs",
-      "explainer": "Products for chronic anaemia × the gain from severe to moderate anaemia (GBD 2019 disability weights) × the weeks relieved. Deaths of chronically transfused patients (thalassaemia, leukaemia) are not counted, which errs low.",
-      "formula": "bld_chronic_share * (@gbd_disability_weights.anaemia_severe - @gbd_disability_weights.anaemia_moderate) * bld_weeks_relieved / 52"
+      "explainer": "Products for chronic anaemia not counted as deaths above × the gain from severe to moderate anaemia (GBD 2019 disability weights) × the weeks relieved.",
+      "formula": "bld_chronic_share * (1 - bld_dependent_share) * (@gbd_disability_weights.anaemia_severe - @gbd_disability_weights.anaemia_moderate) * bld_weeks_relieved / 52"
     },
     {
       "id": "dalys_bridged",
@@ -1130,51 +1341,9 @@
       "section": "donor",
       "label": "Units of value per dollar you give",
       "format": "small",
-      "formula": "uov_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_per_donor_dollar",
+      "formula": "uov_per_dollar * donor_cost_share",
       "unit": "Units of value / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data at all, in the year modelled",
-      "format": "usd",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
-        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
-        "retrieved": "2026-11-03",
-        "page": "pp. 4-5: both programmes report reach",
-        "quote": "Total program services 3,032,359"
-      },
-      "explainer": "0: both programmes publish what they delivered, so both are in the chain above."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "#givedirectly",
-      "unit": "units of value / $",
-      "explainer": "Not used (no spending without outcome data); the skeleton's placeholder peer stays only so the row exists."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
+      "explainer": "The result per dollar, for the share of the full cost that cash donations pay (here: per dollar spent; donations fund none of it, so it has weight 0 in the charity's mix)."
     }
   ],
   "output": {

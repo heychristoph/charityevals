@@ -615,13 +615,21 @@
       "section": "effect",
       "label": "The people served's consumption per person, as a share of the average",
       "format": "percent",
+      "explainer": "The shared poorest-fifth anchor times the clients' judged position relative to it (clients_vs_poorest_fifth).",
+      "formula": "poorest_fifth_consumption_share * clients_vs_poorest_fifth"
+    },
+    {
+      "id": "clients_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Clients' consumption per person relative to the poorest fifth's",
+      "format": "multiple",
       "value": {
-        "low": 0.55,
-        "best": 0.7,
-        "high": 0.85
+        "low": 0.82,
+        "best": 1.05,
+        "high": 1.27
       },
       "kind": "judgment",
-      "explainer": "Our judgment: what the people helped consume per person, as a share of the US average. United Way's grants, 211 and tax help go mostly to households below or near the poverty line ('ALICE' and below, about the poorest 40%). Per person the poorest fifth consume 0.67 of the average (poorest_fifth_consumption_share), the second fifth more. 0.7, from 0.55 (mostly well below the poverty line) to 0.85 (many near-poor and middle-income users of child care, youth and tax programmes)."
+      "explainer": "United Way's grants, 211 and tax help go mostly to households below or near the poverty line ('ALICE' and below, about the poorest 40%): a little above the poorest fifth's 0.67 of the average per person (poorest_fifth_consumption_share), so 1.05 of it (0.7 of the average), from 0.82 (mostly well below the poverty line) to 1.27 (many near-poor and middle-income users of child care, youth and tax programmes)."
     },
     {
       "id": "baseline_consumption",
@@ -847,15 +855,8 @@
       "section": "adjustments",
       "label": "Value of a volunteer hour, US, 2025",
       "format": "usd",
-      "value": 36.14,
-      "kind": "observed",
-      "source": {
-        "title": "Independent Sector, Value of Volunteer Time",
-        "url": "https://independentsector.org/resource/value-of-volunteer-time/",
-        "quote": "$36.14 in 2025",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The standard US value of a volunteer hour (average private non-farm wage plus benefits), for tax volunteers' unpaid hours (Convention 2)."
+      "explainer": "The site's US value of a volunteer hour for 2025 (@united_states.volunteer_hour_value_2025, Independent Sector: the average private non-farm wage plus benefits), for tax volunteers' unpaid hours (Convention 2).",
+      "formula": "@united_states.volunteer_hour_value_2025"
     },
     {
       "id": "bn_attribution_share",
