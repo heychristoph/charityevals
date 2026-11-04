@@ -3,7 +3,7 @@ import { RotateCcw, Link2, Check, ChevronRight } from "lucide-react";
 import MiniRanking from "./MiniRanking";
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
-import { COUNTRIES, byCode, regionName } from "../engine/countries";
+import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatValue, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
 import { setAssumption, resetAssumptions, useOverrides } from "../lib/assumption-state";
@@ -211,7 +211,6 @@ function CountrySelect({ row, value, compact }: { row: Row; value: number; compa
         <option value={0}>Not set (no distance weighting)</option>
         {BY_NAME.map((c) => <option key={c.m49} value={c.m49}>{c.name}</option>)}
       </select>
-      {country && <p className="comparable small">Your region: {regionName.get(country.region)}.</p>}
       {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
     </div>
   );
