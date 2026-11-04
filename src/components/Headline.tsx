@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, buildLibrary, comparable, estimateAge, headline, usedAssumptions, type ResolvedModel } from "../engine/model";
 import { byCode, byIso3, inSentence } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
-import { useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
+import { figureOf, useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
 import { editsFor, useEdits } from "../lib/edit-state";
 import { formatYears } from "../lib/format";
 import InfoTip, { WithTip } from "./InfoTip";
@@ -127,6 +127,13 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   }, [value, av, id, model.id]);
 
   const figure = combined ? combined.ev.central : value;
+  // The notes below the figure describe the number shown: the charity's combined figure where it
+  // combines several programs or locations, compared with one slider at its neutral setting.
+  const fig = useMemo(
+    () => (combined ? (a: Record<string, number>) => figureOf(model.charity, model.owner, a) : (a: Record<string, number>) => headline(lib, model, a, edits)),
+    [combined, model, edits],
+  );
+  const partModels = useMemo(() => (combined && combined.what === "program" ? combined.ev.programs.map((p) => p.result.model) : [model]), [combined, model]);
   if (!Number.isFinite(figure)) return null;
   const unit = years ? "years of healthy life per $1,000" : `${lib.assumptions.units[model.output!.unit]?.label ?? "per dollar"} per dollar`;
   // With edits the figure is this one model's, so its place is just the location, not "the median of …".
@@ -150,9 +157,9 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
           </InfoTip>
         </WithTip>
       </span>
-      {years && <EstimateAge model={model} av={av} />}
-      {years && <DistanceWeight model={model} av={av} />}
-      {years && <MissingData model={model} av={av} />}
+      {years && <EstimateAge model={model} av={av} fig={fig} />}
+      {years && <DistanceWeight model={model} av={av} fig={fig} parts={partModels} />}
+      {years && <MissingData model={model} av={av} fig={fig} parts={partModels} />}
     </div>
   );
 }
@@ -163,11 +170,17 @@ const monthYear = (d: string) => (d.length >= 7 ? `${MONTHS[Number(d.slice(5, 7)
 
 /** "Estimate from November 2016, 10 years old: × 0.61 at your settings": how old the estimate is and
  * what the reader's discount for its age (docs/normalization.md 2.11) does to the figure above. */
-function EstimateAge({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+type Fig = (a: Record<string, number>) => number;
+const ratio = (fig: Fig, av: Record<string, number>, neutral: Record<string, number>) => {
+  const r = fig(av) / fig({ ...av, ...neutral });
+  return Number.isFinite(r) ? r : 1;
+};
+
+function EstimateAge({ model, av, fig }: { model: ResolvedModel; av: Record<string, number>; fig: Fig }) {
   const age = estimateAge(lib, model);
   const made = model.source?.published;
   if (age === undefined || !made) return null;
-  const factor = ageFactor(lib, model, av);
+  const factor = ratio(fig, av, { [AGE_DISCOUNT]: 0 });
   const old = age < 1 ? "under a year old" : `${Math.round(age)} ${Math.round(age) === 1 ? "year" : "years"} old`;
   const effect = factor < 1 ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
   return (
@@ -183,8 +196,8 @@ const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
 /** "Helps lives in Kenya: × 0.25 at your settings (you live in the United States, 50% less per step)":
  * where the model's beneficiaries are and what the reader's distance weight (docs/normalization.md 2.13)
  * does to the figure above. For a charity that moves money, the weight its destinations bring together. */
-function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
-  const b = model.beneficiaries;
+function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ResolvedModel[] }) {
+  const b = parts.length > 1 ? mergedBeneficiaries(parts, av) : model.beneficiaries;
   if (!b) return null;
   const home = byCode.get(av[HOME_COUNTRY]);
   const d = av[DISTANCE_DISCOUNT] ?? 0;
@@ -192,7 +205,7 @@ function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string
     ? "Moves money to other charities, each weighed by where it works"
     : `Helps lives ${where(b)}`;
   // The whole effect on the headline, destinations included.
-  const factor = home && d > 0 ? headline(lib, model, av) / headline(lib, model, { ...av, [DISTANCE_DISCOUNT]: 0 }) : 1;
+  const factor = home && d > 0 ? ratio(fig, av, { [DISTANCE_DISCOUNT]: 0 }) : 1;
   const effect = !home || d <= 0 || !Number.isFinite(factor) || Math.abs(factor - 1) < 5e-4 ? "counted in full" : `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}`;
   return (
     <p className="m-age m-distance">
@@ -200,6 +213,24 @@ function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string
       {home && d > 0 ? <> (you live in {inSentence(home.name)}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
     </p>
   );
+}
+
+/** Several programs' beneficiaries as one, each weighted by its share of the combined figure at the
+ * reader's values without the distance weight; a program that moves money keeps that label. */
+function mergedBeneficiaries(parts: ResolvedModel[], av: Record<string, number>): Record<string, number> | "world" | "destinations" | undefined {
+  const plain = { ...av, [DISTANCE_DISCOUNT]: 0 };
+  const out: Record<string, number> = {};
+  let total = 0;
+  for (const m of parts) {
+    const b = m.beneficiaries;
+    if (!b || b === "destinations") return b;
+    const v = Math.max(0, headline(lib, m, plain));
+    total += v;
+    for (const [iso, s] of Object.entries(b === "world" ? { world: 1 } : b)) out[iso] = (out[iso] ?? 0) + s * v;
+  }
+  if (!(total > 0)) return undefined;
+  for (const iso in out) out[iso] /= total;
+  return Object.keys(out).length === 1 && out.world ? "world" : out;
 }
 
 /** "in Kenya", "in Nigeria and Niger", "across the world", "in the UK (6%) and across the world (94%)". */
@@ -218,22 +249,25 @@ function where(b: Record<string, number> | "world"): string {
  * slider (docs/normalization.md 2.12) does to the figure above. An imported model's share is its
  * `missing_data`; a charityevals model's comes from its branches' own missing_data_adj rows; a charity that
  * moves money takes its destinations'. */
-function MissingData({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ResolvedModel[] }) {
   if (!(MISSING_DATA_DISCOUNT in av)) return null;
   const d = av[MISSING_DATA_DISCOUNT];
-  const full = headline(lib, model, { ...av, [MISSING_DATA_DISCOUNT]: 1 });
-  const factor = headline(lib, model, av) / full;
-  const share = model.missing_data?.thin_share;
-  // The whole effect on the headline, destinations and branches included.
-  const moved = Number.isFinite(factor) && Math.abs(factor - 1) >= 5e-4;
-  const what = share === undefined
-    ? moved ? "Parts not measured for this charity" : "Measured for this charity"
-    : share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`;
+  // The whole effect on the figure shown, destinations, branches and programs included.
+  const factor = ratio(fig, av, { [MISSING_DATA_DISCOUNT]: 1 });
+  const moved = Math.abs(factor - 1) >= 5e-4;
+  // Whether a part isn't measured is the models' own classification, not whether the slider happens to
+  // move the figure (at 100% nothing moves, but the unmeasured parts are still unmeasured).
+  const thin = (m: ResolvedModel) => (m.missing_data ? m.missing_data.thin_share > 0 : usedAssumptions(lib, m).includes(MISSING_DATA_DISCOUNT));
+  const share = parts.length === 1 ? model.missing_data?.thin_share : undefined;
+  const anyThin = parts.some(thin);
+  const what = share !== undefined
+    ? share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`
+    : anyThin ? "Parts not measured for this charity" : "Measured for this charity";
   const effect = moved ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
   return (
     <p className="m-age m-missing" title={model.missing_data?.note}>
       {what}: {effect} at <a href={`/assumptions#a-${MISSING_DATA_DISCOUNT}`}>your settings</a>
-      {moved || (share ?? 0) > 0 ? <> (counted at {formatPercent(d)})</> : null}.
+      {moved || anyThin ? <> (counted at {formatPercent(d)})</> : null}.
     </p>
   );
 }
