@@ -4,6 +4,11 @@ import { headline, type ResolvedModel } from "../engine/model";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
 
+/** "1,700", "0.052", "3.2e-5": a native result per dollar. */
+const fmtNative = (x: number) => (Math.abs(x) >= 1000 ? Math.round(x).toLocaleString("en-US") : Math.abs(x) >= 0.01 ? String(Number(x.toPrecision(2))) : x.toPrecision(2));
+/** Where the method page explains each unit's way into healthy years. */
+const UNIT_SECTION: Record<string, string> = { sad: "animals", ced: "animals", wellby: "wellbeing", tco2e: "climate" };
+
 /** "× 1.4", "× 0.52", "× 0.004". */
 const times = (r: number) => `× ${r >= 10 ? Math.round(r) : Math.abs(r - 1) < 0.01 ? r.toFixed(3) : r >= 0.1 ? Number(r.toPrecision(2)) : Number(r.toPrecision(1))}`;
 /** "GiveWell's", "Animal Charity Evaluators'". */
@@ -57,14 +62,21 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
   const owner = lib.owners.get(model.owner)?.name ?? "The evaluator";
   const startLabel = w.start === "evaluator" ? `${possessive(owner)} own figure` : "This model at the site's defaults";
   const total = w.end / w.startValue;
+  const unitLabel = lib.assumptions.units[w.native.unit]?.label ?? w.native.unit;
   return (
-    <details className="wf">
+    <details className="wf" open>
       <summary>
         <span className="wf-title">{w.start === "evaluator" ? `From ${possessive(owner)} figure to the one shown` : "From the model to the figure shown"}</span>{" "}
         <span className="wf-sum num">{formatYears(w.startValue)} → {formatYears(w.end)} ({times(total)})</span>
       </summary>
+      <p className="wf-native">
+        {w.start === "evaluator" ? `${possessive(owner)} result, in the model's own unit` : "The model's result, in its own unit"}: <strong className="num">{fmtNative(w.native.value)}</strong> {unitLabel} per dollar.
+        {w.native.unit !== "daly" && <> In years of healthy life per $1,000 {w.start === "evaluator" ? `at ${possessive(owner)} own rates` : "at the site's defaults"} that is{" "}
+          <strong className="num">{formatYears(w.startValue)}</strong>{" "}
+          (<a href={`/method#${UNIT_SECTION[w.native.unit] ?? "healthy-years"}`}>how {unitLabel} become healthy years</a>).</>}
+      </p>
       <p className="wf-lede small">
-        Each step multiplies the figure, applied one at a time in this order, so the steps multiply to the figure shown. Open a step to see where it comes from.
+        From there, each step below multiplies the figure. They are applied one at a time in this order, so together they give the figure shown. Open a step to see where it comes from.
       </p>
       <ol className="wf-steps">
         <li className="wf-step wf-end">

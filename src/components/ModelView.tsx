@@ -35,8 +35,8 @@ export default function ModelView({ id, bulk = false, place, about, children }: 
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      <Waterfall model={model} av={av} edits={edits} />
       <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats}>{about}</ModelTree>
+      <Waterfall model={model} av={av} edits={edits} />
 
       {children}
     </div>
