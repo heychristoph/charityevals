@@ -77,6 +77,12 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    (`new_…`, `acc_…`) summed into `outcome_total`. Branch adjustments are `<branch>_<canonical id>`
    (`acc_evidence_adj`, `acc_years_until_effect`, …), each applied in its branch; the canonical rows
    are their outcome-weighted averages, labelled "outcome-weighted average of the branches, for reading only".
+   Since those averages are weighted by the outcome, no row upstream of `outcome_total` may read
+   them (a formula cycle, which stops the model loading): the template rows that multiply by
+   `total_adj` (`deaths_averted`, `uov_stillbirths`, `uov_income`, `dalys_bridged`, a zero advocacy
+   branch, the bridges) take each branch's `<branch>_total_adj` and are summed; the branch outcomes
+   that weight the averages (`<branch>_outcome`) read the bridges' result (`uov_from_daly` × the
+   branch's share of `dalys_bridged`), never a conversion slider themselves (INV-2b).
 5. **One question per adjustment**, so no doubt is counted twice. Years brought forward and the
    counterfactual are one question: a change that would have come anyway gets zero years or a zero
    counterfactual, not both. Completion and dosage lower `implementation_adj` only where the evidence

@@ -4,18 +4,18 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": "world",
-  "beneficiaries_note": "Our build: research valued as a share of the world's childhood cancer burden.",
+  "beneficiaries_note": "Our build: research valued as a share of the world's childhood cancer, sickle cell and children's influenza burden.",
   "template": "medical-research",
   "estimate_basis": "past_average",
   "charity": "st-jude",
   "owner": "charityevals",
-  "summary": "St. Jude spends about $880 million a year on research into childhood cancer and other catastrophic childhood diseases, $720 million of it from its own funds; its cancer research is about a fifth of all childhood cancer research worldwide. For its fiscal year to June 2025 this model credits the cancer research with that share of what a year of the field's research does to the world's childhood cancer burden (11.5 million DALYs a year), anchored on published returns to medical research, and values the non-cancer research (about 30%), which has no outcome measure, at comparable research elsewhere on the site, discounted. The result, about 0.01 years of healthy life per $1,000, is far below the site's global-health median (under a tenth of it) because research pays off only after a long lag, through uptake by others, and the field's progress is shared among all its funders. It is dominated by judgment (the chance a year's research yields an advance and the share of the burden it averts) and its plausible range spans about seventyfold (about 0.0016 to 0.11 years of healthy life per $1,000).",
+  "summary": "St. Jude spends about $880 million a year on research into childhood cancer and other catastrophic childhood diseases, $720 million of it from its own funds; its cancer research is about a fifth of all childhood cancer research worldwide. For its fiscal year to June 2025 this model credits each of its two branches, cancer (about 70% of the research spending) and the other diseases (sickle cell disease, influenza and basic science, about 30%), with St. Jude's share of what a year of the field's research does to the world's burden of those diseases (the deaths in it valued by age at the site's value of a death, the illness as healthy years), anchored on published returns to medical research. The result, about 0.005 years of healthy life per $1,000, is far below the site's global-health median (about a thousandth of it) because research pays off only after a long lag, through uptake by others, and the field's progress is shared among all its funders. Both branches are discounted for missing data, since St. Jude's research has no outcome measure of its own; the result is mostly uncertainty, dominated by judgment (the chance a year's research yields an advance and the share of the burden it averts), and its plausible range spans about two-hundredfold (0.0004 to 0.07).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: St. Jude Children's Research Hospital, research (FY2025)",
     "url": "https://charityevals.org/st-jude-charityevals-research",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -30,13 +30,38 @@
     },
     {
       "title": "Glover et al., the economic and health returns of UK cancer research (BMC Medicine 2014)",
-      "url": "https://doi.org/10.1186/s12916-014-0099-y",
+      "url": "https://doi.org/10.1186/1741-7015-12-99",
       "type": "study"
     },
     {
       "title": "Morris, Wooding and Grant, the answer is 17 years (J R Soc Med 2011)",
       "url": "https://doi.org/10.1258/jrsm.2011.110180",
       "type": "study"
+    },
+    {
+      "title": "Thomson et al., global prevalence and mortality burden of sickle cell disease (Lancet Haematology 2023)",
+      "url": "https://doi.org/10.1016/s2352-3026(23)00118-7",
+      "type": "data"
+    },
+    {
+      "title": "Sahu et al., sickle cell disease DALYs from GBD 2021 (Blood 2025)",
+      "url": "https://doi.org/10.1182/blood-2025-2601",
+      "type": "data"
+    },
+    {
+      "title": "Zhang et al., influenza lower respiratory infections in children under five, GBD 2021 (J Thorac Dis 2026)",
+      "url": "https://doi.org/10.21037/jtd-2025-aw-2363",
+      "type": "data"
+    },
+    {
+      "title": "Piel et al., Lancet Haematology Commission on sickle cell disease (2023)",
+      "url": "https://doi.org/10.1016/s2352-3026(23)00096-0",
+      "type": "study"
+    },
+    {
+      "title": "Force et al., global burden of cancer in children and adolescents 1990-2023, GBD 2023 (Lancet 2026)",
+      "url": "https://doi.org/10.1016/s0140-6736(26)00200-x",
+      "type": "data"
     }
   ],
   "sections": [
@@ -70,12 +95,6 @@
       "id": "outcome",
       "title": "Outcome",
       "explainer": "The outcome in the family's shared unit, per dollar."
-    },
-    {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
     },
     {
       "id": "donor",
@@ -267,7 +286,7 @@
       "label": "Research paid from St. Jude's own funds, FY2025",
       "format": "usd",
       "formula": "research_expenses - research_grants_revenue",
-      "explainer": "Research less the grants that paid for part of it: $720.8 million. Patient care and St. Jude Global are the other model (st-jude-charityevals)."
+      "explainer": "Research less the grants that paid for part of it: $720.8 million, all of it modelled here in two branches (cancer, ca_, and the other catastrophic childhood diseases, nc_). Patient care, St. Jude Global, training and community programmes are the other model (st-jude-charityevals)."
     },
     {
       "id": "cancer_share_of_research",
@@ -280,48 +299,183 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "Judgment: cancer is 61% of new patients and the largest set of departments (oncology, solid tumours, neuro-oncology, haematological malignancies, cancer biology, the Comprehensive Cancer Center); the rest is blood disorders (sickle cell gene therapy), infectious diseases (the WHO collaborating centre for influenza), neurobiology and structural biology."
+      "explainer": "Judgment: cancer is 61% of new patients and the largest set of departments (oncology, solid tumours, neuro-oncology, haematological malignancies, cancer biology, the Comprehensive Cancer Center); the rest is blood disorders (sickle cell gene therapy), infectious diseases (the WHO collaborating centre for influenza), neurobiology and structural biology. It splits the own-funded research into the two branches."
+    },
+    {
+      "id": "ca_program_spend",
+      "section": "cost",
+      "label": "Cancer research from St. Jude's own funds",
+      "format": "usd",
+      "formula": "own_research_spend * cancer_share_of_research",
+      "explainer": "The cancer branch, modelled through the world's childhood cancer burden."
+    },
+    {
+      "id": "nc_program_spend",
+      "section": "cost",
+      "label": "Non-cancer research from St. Jude's own funds",
+      "format": "usd",
+      "formula": "own_research_spend * (1 - cancer_share_of_research)",
+      "explainer": "The non-cancer branch (about $216 million): blood disorders including sickle cell disease and its gene therapy, infectious diseases including the WHO collaborating centre for influenza, neurobiology, structural and developmental biology, immunology. Built from the research literature on returns to medical research (Convention 12), never from another model's result."
     },
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Cancer research paid from St. Jude's own funds, FY2025 (the modelled programme)",
+      "label": "Research spending from St. Jude's own funds, both branches",
       "format": "usd",
-      "formula": "own_research_spend * cancer_share_of_research",
-      "explainer": "The cancer research, modelled through the childhood cancer burden below. The non-cancer research is in the proxy section."
+      "formula": "ca_program_spend + nc_program_spend",
+      "explainer": "All of St. Jude's own-funded research: the two branches below."
     },
     {
       "id": "cost_total",
       "section": "cost",
       "label": "Cost of the modelled program, including overhead",
       "format": "usd",
-      "formula": "program_spend * overhead_ratio"
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "The research with its share of fundraising and administration."
+    },
+    {
+      "id": "ca_cost_total",
+      "section": "cost",
+      "label": "Cancer branch: cost with overhead",
+      "format": "usd",
+      "formula": "ca_program_spend * overhead_ratio",
+      "explainer": "The cancer branch's share of cost_total."
+    },
+    {
+      "id": "nc_cost_total",
+      "section": "cost",
+      "label": "Non-cancer branch: cost with overhead",
+      "format": "usd",
+      "formula": "nc_program_spend * overhead_ratio",
+      "explainer": "The non-cancer branch's share of cost_total."
+    },
+    {
+      "id": "ca_disease_dalys_per_year",
+      "section": "reach",
+      "label": "Cancer branch: childhood and adolescent cancer, DALYs a year worldwide (ages 0-19, GBD 2023)",
+      "format": "integer",
+      "unit": "DALYs / year",
+      "value": {
+        "low": 10700000,
+        "best": 11700000,
+        "high": 13200000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Force et al. (GBD 2023 Childhood Cancer Collaborators), Global burden of cancer in children and adolescents aged 0-19 years, 1990-2023, The Lancet 2026",
+        "url": "https://doi.org/10.1016/s0140-6736(26)00200-x",
+        "retrieved": "2026-11-04",
+        "page": "summary, findings",
+        "quote": "144 000 deaths (131 000-162 000), and 11·7 million (10·7-13·2) DALYs due to childhood cancer"
+      },
+      "explainer": "The burden St. Jude's cancer research addresses, worldwide, since its protocols and drugs travel; GBD 2023, the latest round (GBD 2017 gave 11.5 million, 82.2% of it in low, low-middle and middle Socio-demographic Index countries, where access, not knowledge, limits survival: ca_share_burden_addressable takes that into account). Nearly all of it is years of life lost to 144,000 deaths a year, valued below by age at the site's value of a death (ca_deaths_per_daly); the rest is illness (ca_yld_share). The study's 95% uncertainty interval is the range."
+    },
+    {
+      "id": "nc_scd_dalys_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: sickle cell disease, DALYs a year worldwide (for reading and weighting)",
+      "format": "integer",
+      "value": {
+        "low": 5000000.0,
+        "best": 11000000.0,
+        "high": 25000000.0
+      },
+      "kind": "judgment",
+      "explainer": "Context, for the reading averages only (not on the result's path). Judgment built from two GBD 2021 analyses, since the papers give no global DALY total. Thomson et al. (GBD 2021 Sickle Cell Disease Collaborators, Lancet Haematology 2023, https://doi.org/10.1016/s2352-3026(23)00118-7): 515,000 babies born with sickle cell disease a year and 376,000 deaths a year (303,000-467,000) once deaths sickle cell disease causes through infections and other conditions are counted, 34,400 assigned to it as the single underlying cause; 81,100 of them under five. Sahu et al. (Blood 2025, GBD 2021 DALYs, https://doi.org/10.1182/blood-2025-2601): Nigeria alone 'an estimated 2.1 million SCD-attributable DALYs' with about 100,000 of the births, a fifth of the world's, so about 11 million DALYs worldwide if the rest of the world carries it alike. 5 million if only part of the total-mortality burden counts (the cause-specific deaths alone would give about 2.5 million), 25 million at the high end of the total-mortality estimate with India's and the Americas' longer-lived patients. Read only to weight the branch's reading averages and its two diseases' shares: the outcome is built from the deaths (nc_scd_deaths_per_year, valued by age) and the illness (nc_scd_yld_per_year), since 376,000 deaths at their ages would by themselves carry more than 11 million years of life lost.",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "nc_scd_deaths_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: deaths from sickle cell disease a year worldwide (total mortality)",
+      "format": "integer",
+      "value": {
+        "low": 303000,
+        "best": 376000,
+        "high": 467000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Thomson et al. (GBD 2021 Sickle Cell Disease Collaborators), Global, regional, and national prevalence and mortality burden of sickle cell disease, 2000-2021, Lancet Haematology 2023",
+        "url": "https://doi.org/10.1016/s2352-3026(23)00118-7",
+        "retrieved": "2026-11-04",
+        "page": "summary, findings",
+        "quote": "total sickle cell disease mortality burden was nearly 11-times higher at 376 000 (303 000-467 000)"
+      },
+      "explainer": "Deaths sickle cell disease causes, directly or through infections and other conditions it makes deadly; 34,400 are assigned to it as the single underlying cause. Valued by age (nc_scd_value_per_death)."
+    },
+    {
+      "id": "nc_scd_yld_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: years lived with disability from sickle cell disease a year worldwide",
+      "format": "integer",
+      "value": {
+        "low": 300000,
+        "best": 600000,
+        "high": 1200000
+      },
+      "kind": "judgment",
+      "explainer": "Judgment: 7.74 million people live with sickle cell disease (Thomson et al. 2023) at an average disability weight of about 0.08 across chronic anaemia (GBD 2019 weights: moderate 0.052, severe 0.149), pain crises and stroke, about 0.6 million years a year; 0.3-1.2 million."
+    },
+    {
+      "id": "nc_flu_dalys_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: influenza lower respiratory infections in children under five, DALYs a year worldwide",
+      "format": "integer",
+      "value": {
+        "low": 1796287,
+        "best": 2460833,
+        "high": 3280725
+      },
+      "kind": "estimate",
+      "explainer": "St. Jude's influenza work (a WHO collaborating centre for the ecology of animal influenza, surveillance, vaccine and antiviral research) bears on influenza at every age; this branch counts the under-fives, the paediatric burden the hospital's mission names, so it is low if the work also cuts adult influenza deaths (about 85% of the GBD influenza death toll). 2021 was a low influenza year after the pandemic; the GBD interval is the range.",
+      "unit": "DALYs / year",
+      "source": {
+        "title": "Zhang et al., Global burden of influenza lower respiratory tract infections in children younger than 5 years from 1990 to 2021, Journal of Thoracic Disease 2026 (GBD 2021)",
+        "url": "https://doi.org/10.21037/jtd-2025-aw-2363",
+        "retrieved": "2026-11-04",
+        "page": "abstract, results",
+        "quote": "influenza LRTIs caused 27,615 [95% uncertainty interval (UI): 20,128-36,852] deaths and 2,460,833 (95% UI: 1,796,287-3,280,725) DALYs in children under five in 2021"
+      }
+    },
+    {
+      "id": "nc_flu_deaths_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: deaths from influenza lower respiratory infections under five a year",
+      "format": "integer",
+      "formula": "nc_flu_dalys_per_year * @death_ages.influenza_lri_under5_deaths_per_daly_world",
+      "explainer": "27,615 (GBD 2021), from the DALYs and the shared deaths-per-DALY figure."
+    },
+    {
+      "id": "nc_flu_yld_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: years lived with disability from children's influenza a year",
+      "format": "integer",
+      "formula": "nc_flu_dalys_per_year * @death_ages.influenza_lri_under5_yld_share_world",
+      "explainer": ""
+    },
+    {
+      "id": "nc_disease_dalys_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: burden of the diseases the targeted research addresses, DALYs a year",
+      "format": "integer",
+      "formula": "nc_scd_dalys_per_year + nc_flu_dalys_per_year",
+      "explainer": "Sickle cell disease and children's influenza. HIV, neurological and immune disorders, which St. Jude also studies, have no burden counted here; their research enters through nc_other_research_ratio below.",
+      "unit": "DALYs / year"
     },
     {
       "id": "disease_dalys_per_year",
       "section": "reach",
-      "label": "Childhood and adolescent cancer, DALYs a year worldwide (ages 0-19)",
+      "label": "Burden addressed, both branches (for reading)",
       "format": "integer",
-      "unit": "DALYs / year",
-      "value": {
-        "low": 10600000,
-        "best": 11500000,
-        "high": 12300000
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Force et al. (GBD 2017 Childhood Cancer Collaborators), The global burden of childhood and adolescent cancer in 2017, Lancet Oncology 2019",
-        "url": "https://doi.org/10.1016/S1470-2045(19)30339-0",
-        "retrieved": "2026-11-03",
-        "page": "abstract, findings",
-        "quote": "there were 11.5 million (95% UI 10.6–12.3) DALYs due to childhood cancer"
-      },
-      "explainer": "The burden St. Jude's cancer research addresses, worldwide, since its protocols and drugs travel (82.2% of it in low, low-middle and middle Socio-demographic Index countries, where access, not knowledge, limits survival: share_burden_addressable takes that into account). 97% of it is years of life lost. The study's 95% uncertainty interval is the range; GBD's later rounds put it at about the same."
+      "formula": "ca_disease_dalys_per_year + nc_disease_dalys_per_year",
+      "explainer": "The two branches' burdens together, for reading; each branch uses its own.",
+      "unit": "DALYs / year"
     },
     {
-      "id": "share_burden_addressable",
+      "id": "ca_share_burden_addressable",
       "section": "effect",
-      "label": "Share of the world's childhood cancer burden one successful year's advance averts once adopted",
+      "label": "Cancer branch: share of the world's childhood cancer burden one successful year's advance averts once adopted",
       "format": "percent",
       "value": {
         "low": 0.008,
@@ -329,12 +483,12 @@
         "high": 0.06
       },
       "kind": "judgment",
-      "explainer": "Judgment. A typical advance of the kind St. Jude produces (a risk-adapted leukaemia protocol, a targeted drug for one subtype, a better brain-tumour regimen) raises survival by several points for one cancer: in the high-income countries that adopt it at once (18% of the burden) that is a few per cent of their childhood cancer burden, and in middle-income countries, where much of the rest is, it spreads more slowly with the protocols partners adapt. 2% of the world's burden; 0.8% for an advance in a rare cancer, 6% for one in leukaemia or brain tumours that middle-income units take up."
+      "explainer": "Judgment. A typical advance of the kind St. Jude produces (a risk-adapted leukaemia protocol, a targeted drug for one subtype, a better brain-tumour regimen) raises survival by several points for one cancer: in the high-income countries that adopt it at once (only about 6% of the world's childhood cancer burden in GBD 2023) that is a few per cent of their burden; in upper-middle-income countries (China, much of Latin America, a large part of the burden) referral centres adopt such protocols within years, and in poorer countries it spreads more slowly with the protocols partners adapt. 2% of the world's burden; 0.8% for an advance in a rare cancer, 6% for one in leukaemia or brain tumours that middle-income units take up. Partner units' adoption of new advances is credited here; St. Jude Global's survival gain (the patient care model) counts better delivery of existing care, so it isn't credited twice."
     },
     {
-      "id": "p_success",
+      "id": "ca_p_success",
       "section": "effect",
-      "label": "Chance that a year of the field's research yields such an advance",
+      "label": "Cancer branch: chance a year of the field's research yields such an advance",
       "format": "percent",
       "value": {
         "low": 0.08,
@@ -342,12 +496,12 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Judgment, so that share_burden_addressable × p_success (0.5% of the world's burden a year at the best guess) matches the research-returns reference class: US childhood cancer mortality fell by about half between 1975 and 2010, about 2% a year, most of it from treatment advances, and the world's falls more slowly; UK cancer research earned a health-gain return of about 10% a year with a lag of about 15 years (Glover et al., BMC Medicine 2014). field_dalys_per_dollar shows the check. A quarter of years bring such an advance; low if most of the year's work is basic science that never reaches practice, high if the year's clinical trials change protocols."
+      "explainer": "Judgment, calibrated jointly with ca_share_burden_addressable and ca_years_brought_forward so that the field's result per dollar (field_dalys_per_dollar) matches the research-returns reference class; the split between the three is a judgment. US childhood cancer mortality fell by more than half from 1975 to 2022, about 1.8% a year (National Cancer Institute, https://www.cancer.gov/types/childhood-cancers/child-adolescent-cancers-fact-sheet), most of it from treatment advances, and the world's falls more slowly; UK cancer research earned a health-gain return of about 10% a year with a lag of about 15 years (Glover et al., BMC Medicine 2014, https://doi.org/10.1186/1741-7015-12-99). ca_share_burden_addressable × ca_p_success is 0.5% of the world's burden a year at the best guesses. A quarter of years bring such an advance; low if most of the year's work is basic science that never reaches practice, high if the year's clinical trials change protocols."
     },
     {
-      "id": "years_brought_forward",
+      "id": "ca_years_brought_forward",
       "section": "effect",
-      "label": "Years the field's research brings the advance forward",
+      "label": "Cancer branch: years the advance comes earlier because of this year's research",
       "format": "number",
       "unit": "years",
       "value": {
@@ -356,12 +510,12 @@
         "high": 10
       },
       "kind": "judgment",
-      "explainer": "Judgment: how much later the advance would come if this year's research weren't done, with others' work going on (Convention 5: the counterfactual question is answered here, so counterfactual_adj is 1). The medical-research reference class (HERG, Office of Health Economics and RAND Europe 2008; Glover 2014) implies a few years; 2 for crowded fields (leukaemia), 10 for rare tumours St. Jude almost alone studies."
+      "explainer": "Judgment: how much later the advance would come if this year's research weren't done, with others' work going on (Convention 5: the counterfactual question is answered here, so ca_counterfactual_adj is 1). No published study estimates years brought forward (the returns-to-research studies estimate lags and rates of return), so it is calibrated jointly with ca_p_success and ca_share_burden_addressable through the check rows (ca_burden_fall_per_year, field_dalys_per_dollar); the split between the three is a judgment. 5, above the medical-research template's default of 3 (1-10), because childhood cancer is a small field in which St. Jude is about a fifth of the funding and advances come through long trial series (St. Jude's Total Therapy XV ran 2000-07, XVI 2007-17), so a year's work is a larger part of the next generation of protocols than in a broad field; 2 for crowded fields (leukaemia), 10 for rare tumours St. Jude almost alone studies."
     },
     {
-      "id": "years_until_effect",
+      "id": "ca_years_until_effect",
       "section": "effect",
-      "label": "Years from the funding until the result is in practice",
+      "label": "Cancer branch: years from the research to the advance being in practice",
       "format": "number",
       "unit": "years",
       "value": {
@@ -373,27 +527,208 @@
       "explainer": "Judgment on the reference class: about 17 years from research to practice (Morris, Wooding and Grant, J R Soc Med 2011), about 15 for UK cancer research (Glover et al. 2014); St. Jude's spending includes many clinical trials, whose results change protocols within a few years, beside basic science with the long lag. 12 (6-17)."
     },
     {
+      "id": "ca_wait_discount",
+      "section": "effect",
+      "label": "Cancer branch: the wait, discounted",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ -ca_years_until_effect",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
+      "id": "ca_discounted_years",
+      "section": "effect",
+      "label": "Cancer branch: years brought forward, discounted",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, ca_years_brought_forward) * ca_wait_discount",
+      "explainer": "Each year brought forward and the wait before it, discounted at the shared rate."
+    },
+    {
+      "id": "ca_research_dalys",
+      "section": "effect",
+      "label": "Cancer branch: DALYs averted by a year of the field's research",
+      "format": "integer",
+      "formula": "ca_disease_dalys_per_year * ca_share_burden_addressable * ca_p_success * ca_discounted_years",
+      "explainer": "Before St. Jude's share and the adjustments.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nc_share_burden_addressable",
+      "section": "effect",
+      "label": "Non-cancer branch: share of the burden one successful year's advance averts once adopted",
+      "format": "percent",
+      "value": {
+        "low": 0.004,
+        "best": 0.015,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Judgment, on the same reference class as the cancer branch (ca_share_burden_addressable, 2%), lower because the burden sits where access, not knowledge, limits care: sickle cell deaths are mostly in sub-Saharan Africa, where newborn screening, penicillin and hydroxyurea, all decades old, reach few children (Piel et al., Lancet Haematology Commission 2023, https://doi.org/10.1016/s2352-3026(23)00096-0), and the curative gene therapies St. Jude helped develop cost millions per patient; influenza advances (vaccine strain selection, antivirals) spread through existing programmes. 1.5% of the burden; 0.4% for an advance only rich countries can use, 5% for one in cheap supportive care or vaccines that middle-income countries take up."
+    },
+    {
+      "id": "nc_p_success",
+      "section": "effect",
+      "label": "Non-cancer branch: chance a year of the field's research yields such an advance",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment on the reference class of the cancer branch (ca_p_success, 25%) and the published returns to medical research (UK cardiovascular and mental-health research earned health-gain returns of about 9% and 7% a year, Health Economics Research Group, Office of Health Economics and RAND Europe, Medical Research: What's it worth?, 2008). Sickle cell care moved slowly for decades before hydroxyurea and gene therapy, so lower than cancer's: 20%, 5% if most of the year's work is basic science, 50% if its trials change practice."
+    },
+    {
+      "id": "nc_years_brought_forward",
+      "section": "effect",
+      "label": "Non-cancer branch: years the advance comes earlier because of this year's research",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "Judgment, the medical-research template's default (3, 1-10), since no published study estimates years brought forward: influenza research is a crowded field (1-2 years), sickle cell disease a neglected one where St. Jude is among few large funders (up to 10). It answers the counterfactual question (Convention 5), so nc_counterfactual_adj is 1.",
+      "unit": "years"
+    },
+    {
+      "id": "nc_years_until_effect",
+      "section": "effect",
+      "label": "Non-cancer branch: years from the research to the advance being in practice",
+      "format": "number",
+      "value": {
+        "low": 6,
+        "best": 12,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "Judgment on the translation lag of about 17 years (Morris, Wooding and Grant, J R Soc Med 2011, https://doi.org/10.1258/jrsm.2011.110180), shorter for clinical trials of existing drugs (hydroxyurea dosing in children) than for gene therapy or new vaccines: 12 (6-20), as the cancer branch.",
+      "unit": "years"
+    },
+    {
+      "id": "nc_wait_discount",
+      "section": "effect",
+      "label": "Non-cancer branch: the wait, discounted",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ -nc_years_until_effect",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
+      "id": "nc_discounted_years",
+      "section": "effect",
+      "label": "Non-cancer branch: years brought forward, discounted",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, nc_years_brought_forward) * nc_wait_discount",
+      "explainer": "Each year brought forward and the wait before it, discounted at the shared rate."
+    },
+    {
+      "id": "nc_research_dalys",
+      "section": "effect",
+      "label": "Non-cancer branch: DALYs averted by a year of the field's research on these diseases",
+      "format": "integer",
+      "formula": "nc_disease_dalys_per_year * nc_share_burden_addressable * nc_p_success * nc_discounted_years",
+      "explainer": "Before St. Jude's share and the adjustments.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nc_research_fraction",
+      "section": "effect",
+      "label": "Non-cancer branch: share of the diseases' deaths and illness a year of the field's research averts, over the years brought forward",
+      "format": "small",
+      "formula": "nc_share_burden_addressable * nc_p_success * nc_discounted_years * nc_research_extension",
+      "explainer": "The chain's fraction, applied to the deaths and to the illness separately."
+    },
+    {
+      "id": "nc_targeted_share",
+      "section": "effect",
+      "label": "Non-cancer branch: share of the non-cancer research on sickle cell disease and influenza",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Judgment from St. Jude's departments outside oncology: haematology (sickle cell disease, gene therapy, bone-marrow failure) and infectious diseases (influenza, the WHO collaborating centre) are the two largest; the rest is neurobiology, developmental neurobiology, structural biology, immunology and HIV. Half (30-70%)."
+    },
+    {
+      "id": "nc_other_research_ratio",
+      "section": "effect",
+      "label": "Non-cancer branch: what a dollar of the rest of the non-cancer research does, relative to the targeted research",
+      "format": "multiple",
+      "value": {
+        "low": 0.1,
+        "best": 0.5,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Judgment. The rest (neurobiology, structural and developmental biology, immunology, HIV) is mostly basic science with no single burden to count: its results reach patients through the cancer, blood-disorder and infection work, and some (structural biology of viral proteins, immunology) are part of them. Half the targeted research's value per dollar; a tenth if little of it reaches practice, as much if it does as well."
+    },
+    {
+      "id": "nc_research_extension",
+      "section": "effect",
+      "label": "Non-cancer branch: the rest of the non-cancer research, as a multiple of the targeted research's DALYs",
+      "format": "multiple",
+      "formula": "1 + nc_other_research_ratio * (1 - nc_targeted_share) / nc_targeted_share",
+      "explainer": "The targeted research counts once; the rest of the branch's spending counts at nc_other_research_ratio of its value per dollar."
+    },
+    {
+      "id": "share_burden_addressable",
+      "section": "effect",
+      "label": "Share of the burden one successful year's advance averts, burden-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "(ca_disease_dalys_per_year * ca_share_burden_addressable + nc_disease_dalys_per_year * nc_share_burden_addressable) / disease_dalys_per_year",
+      "explainer": "Weighted by each branch's burden; each branch uses its own."
+    },
+    {
+      "id": "p_success",
+      "section": "effect",
+      "label": "Chance a year's research yields an advance, weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "(ca_disease_dalys_per_year * ca_share_burden_addressable * ca_p_success + nc_disease_dalys_per_year * nc_share_burden_addressable * nc_p_success) / (disease_dalys_per_year * share_burden_addressable)",
+      "explainer": "Weighted by each branch's burden addressable; each branch uses its own."
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "effect",
+      "label": "Years brought forward, outcome-weighted average of the branches, for reading only",
+      "format": "number",
+      "formula": "ca_outcome_share * ca_years_brought_forward + (1 - ca_outcome_share) * nc_years_brought_forward",
+      "explainer": "Each branch uses its own.",
+      "unit": "years"
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years until the advance is in practice, outcome-weighted average of the branches, for reading only",
+      "format": "number",
+      "formula": "ca_outcome_share * ca_years_until_effect + (1 - ca_outcome_share) * nc_years_until_effect",
+      "explainer": "Each branch uses its own.",
+      "unit": "years"
+    },
+    {
       "id": "wait_discount",
       "section": "effect",
-      "label": "Discount for the wait until the result is in practice",
-      "format": "percent",
+      "label": "The wait, discounted (reading row at the average wait)",
+      "format": "number",
       "formula": "(1 + $discount_rate) ^ -years_until_effect",
-      "explainer": "The wait discounted at the shared rate."
+      "explainer": "The average wait discounted at the shared rate, for reading; each branch discounts its own (ca_wait_discount, nc_wait_discount)."
     },
     {
       "id": "discounted_years",
       "section": "effect",
-      "label": "Discounted years brought forward",
+      "label": "Years brought forward, discounted (reading row at the averages)",
       "format": "number",
       "formula": "pv_annuity_due(1, $discount_rate, years_brought_forward) * wait_discount",
-      "unit": "years"
+      "explainer": "For reading; each branch discounts its own (ca_discounted_years, nc_discounted_years)."
     },
     {
       "id": "research_dalys",
       "section": "effect",
-      "label": "Expected DALYs averted by the research (before adjustments)",
-      "format": "number",
-      "formula": "disease_dalys_per_year * share_burden_addressable * p_success * discounted_years",
+      "label": "DALYs averted by a year of the fields' research, both branches (for reading)",
+      "format": "integer",
+      "formula": "ca_research_dalys + nc_research_dalys * nc_research_extension",
+      "explainer": "Each branch's DALYs before St. Jude's share and the adjustments, at GBD's DALYs (for reading; the non-cancer outcome is built from its deaths and illness).",
       "unit": "DALYs"
     },
     {
@@ -455,9 +790,9 @@
       "unit": "DALYs"
     },
     {
-      "id": "evidence_adj",
+      "id": "ca_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "label": "Cancer branch: trust in the effect (internal and external validity)",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -465,20 +800,20 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment, the family's default (0.7): the chain is built from reference-class returns to research, not from St. Jude's own record traced to practice; St. Jude's record is strong (Total Therapy trials took leukaemia survival from under 10% to over 90%), which is why the discount isn't larger."
+      "explainer": "Judgment, the family's default (0.7), on the validity of the chain's reference class: the UK's return is one country's record over one period, with its own attribution assumptions (17% of gains to UK research), transferred to childhood cancer worldwide. St. Jude's record (Total Therapy trials took leukaemia survival from under 10% to over 90%) is why the discount isn't larger. The absence of an outcome measure of St. Jude's own is the missing-data discount, not this."
     },
     {
-      "id": "counterfactual_adj",
+      "id": "ca_counterfactual_adj",
       "section": "adjustments",
-      "label": "Share of the outcome that wouldn't have happened anyway",
+      "label": "Cancer branch: share that wouldn't have happened anyway",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: what would have happened without this year's research is in years_brought_forward (Convention 5), so it isn't discounted again."
+      "explainer": "1: what would have happened without this year's research is in ca_years_brought_forward (Convention 5), so it isn't discounted again."
     },
     {
-      "id": "field_research_funding",
+      "id": "ca_field_research_funding",
       "section": "adjustments",
-      "label": "All funders' spending on childhood cancer research a year, worldwide",
+      "label": "Cancer branch: all funders' spending on childhood cancer research a year, worldwide",
       "format": "usd",
       "value": {
         "low": 1800000000,
@@ -489,20 +824,20 @@
       "explainer": "Judgment built up from its parts: the US National Cancer Institute 'spent more than $600 million on childhood cancer' in FY2023 (St. Baldrick's, https://blog.stbaldricks.org/?p=36179), St. Jude's own cancer research about $500 million, other US children's hospitals' and charities' own funds (St. Baldrick's, Alex's Lemonade Stand, Dana-Farber, CHOP and others) a few hundred million, Europe and the rest of the world (national research councils, Children with Cancer UK, the Princess Máxima Centre, EU programmes) about $500 million, and drug companies' paediatric trials (required by US and EU paediatric rules) several hundred million."
     },
     {
-      "id": "attribution_share_shared",
+      "id": "ca_attribution_share",
       "section": "adjustments",
-      "label": "St. Jude's share of the field's research funding",
+      "label": "Cancer branch: St. Jude's share of the field's funding",
       "format": "percent",
-      "formula": "program_spend / field_research_funding",
+      "formula": "ca_program_spend / ca_field_research_funding",
       "explainer": "St. Jude's own cancer research ÷ all funders' childhood cancer research (Convention 2): about a fifth. The NIH grants St. Jude receives are counted in the field, not in St. Jude's share."
     },
     {
-      "id": "attribution_share",
+      "id": "ca_missing_data_adj",
       "section": "adjustments",
-      "label": "Share of credit used",
+      "label": "Cancer branch: discount for an outcome not measured for this charity",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): the effect of a year's research is a judgment on the research-returns literature, not St. Jude's own record traced to practice."
     },
     {
       "id": "cash_and_investments",
@@ -572,12 +907,118 @@
       "explainer": "The same wait as in the patient care model: a donation joins the reserves and is spent about 3.7 years later, earning the real return meanwhile."
     },
     {
+      "id": "ca_total_adj",
+      "section": "adjustments",
+      "label": "Cancer branch: all adjustments combined",
+      "format": "multiple",
+      "formula": "ca_evidence_adj * ca_counterfactual_adj * ca_attribution_share * reserve_wait_discount * ca_missing_data_adj",
+      "explainer": "The product of the cancer branch's adjustments, with the reserves' wait."
+    },
+    {
+      "id": "nc_evidence_adj",
+      "section": "adjustments",
+      "label": "Non-cancer branch: trust in the effect (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Judgment, below the cancer branch's 0.7 (ca_evidence_adj): the same reference-class transfer, with the sickle cell burden built from two analyses rather than one published total, and the returns literature has no study of haematology or infectious-disease research."
+    },
+    {
+      "id": "nc_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Non-cancer branch: share that wouldn't have happened anyway",
+      "format": "multiple",
+      "formula": "1",
+      "explainer": "1: what would have happened without this year's research is in nc_years_brought_forward (Convention 5)."
+    },
+    {
+      "id": "nc_field_research_funding",
+      "section": "adjustments",
+      "label": "Non-cancer branch: all funders' spending a year on sickle cell disease and influenza research, worldwide",
+      "format": "usd",
+      "value": {
+        "low": 800000000.0,
+        "best": 1500000000.0,
+        "high": 3000000000.0
+      },
+      "kind": "judgment",
+      "explainer": "Judgment built up from its parts: the US National Institutes of Health, by far the largest public funder of both, spends on the order of $100-150 million a year on sickle cell disease and several hundred million on influenza (NIH RePORT, research, condition and disease categories); drug companies' sickle cell gene therapies and drugs (Vertex and CRISPR Therapeutics, bluebird bio, Novartis, Pfizer) a few hundred million; influenza vaccine and antiviral development by industry several hundred million; the CDC, WHO, Gates Foundation, European and other public funders the rest. $1.5 billion; $0.8 billion if industry's influenza work is mostly adult and out of scope, $3 billion with it."
+    },
+    {
+      "id": "nc_attribution_share",
+      "section": "adjustments",
+      "label": "Non-cancer branch: St. Jude's share of the field's funding",
+      "format": "percent",
+      "formula": "nc_program_spend * nc_targeted_share / nc_field_research_funding",
+      "explainer": "St. Jude's own sickle cell and influenza research ÷ all funders' (Convention 2): about 7%."
+    },
+    {
+      "id": "nc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Non-cancer branch: discount for an outcome not measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): St. Jude publishes no outcome measure for this research; the branch is built from the research-returns literature and the diseases' burden."
+    },
+    {
+      "id": "nc_total_adj",
+      "section": "adjustments",
+      "label": "Non-cancer branch: all adjustments combined",
+      "format": "multiple",
+      "formula": "nc_evidence_adj * nc_counterfactual_adj * nc_attribution_share * reserve_wait_discount * nc_missing_data_adj",
+      "explainer": "The product of the non-cancer branch's adjustments, with the reserves' wait."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Trust in the effect, outcome-weighted average of the branches, for reading only",
+      "format": "multiple",
+      "formula": "ca_outcome_share * ca_evidence_adj + (1 - ca_outcome_share) * nc_evidence_adj",
+      "explainer": "Each branch applies its own."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share that wouldn't have happened anyway, outcome-weighted average of the branches, for reading only",
+      "format": "multiple",
+      "formula": "ca_outcome_share * ca_counterfactual_adj + (1 - ca_outcome_share) * nc_counterfactual_adj",
+      "explainer": "Each branch applies its own."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "St. Jude's share of the fields' funding, outcome-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "ca_outcome_share * ca_attribution_share + (1 - ca_outcome_share) * nc_attribution_share",
+      "explainer": "Each branch applies its own."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The outcome-weighted average of the branches' shares, for reading only; each branch applies its own (ca_attribution_share, nc_attribution_share)."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Discount for outcomes not measured, outcome-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "ca_outcome_share * ca_missing_data_adj + (1 - ca_outcome_share) * nc_missing_data_adj",
+      "explainer": "Both branches are thin and take the shared discount."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined",
+      "label": "All adjustments combined, outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * reserve_wait_discount",
-      "explainer": "The product of the adjustments above, with the reserves' wait."
+      "formula": "ca_outcome_share * ca_total_adj + (1 - ca_outcome_share) * nc_total_adj",
+      "explainer": "Each branch applies its own. No outcome row reads this average (it is weighted by the outcome, so reading it there would be a formula cycle)."
     },
     {
       "id": "other_unmodelled_share",
@@ -603,16 +1044,16 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Value in units of value (none by default: the burden is counted in DALYs), in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted in both branches, in GiveWell units of value (with each branch's adjustments)",
       "format": "number",
-      "formula": "0",
+      "formula": "ca_uov_credited + nc_uov_credited",
       "unit": "UoV",
-      "explainer": "0: the burden is counted in DALYs (GBD), deaths included, so nothing is in units of value."
+      "explainer": "The deaths inside both branches' DALYs, valued by age at the site's one value of a death in units of value (decision 2026-10-31 #4), with each branch's adjustments; into healthy years by the bridge below."
     },
     {
       "id": "dalys_from_uov",
       "section": "bridges",
-      "label": "Value in units of value (none by default: the burden is counted in DALYs), in healthy years",
+      "label": "Deaths averted in both branches, in healthy years",
       "format": "number",
       "formula": "uov_bridged / ($uov_per_daly)",
       "unit": "DALYs",
@@ -637,21 +1078,136 @@
       "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "ca_yld_share",
+      "section": "outcome",
+      "label": "Cancer branch: share of the burden that is illness",
+      "format": "percent",
+      "formula": "@death_ages.childhood_cancer_yld_share_world",
+      "explainer": "The years lived with disability, kept as DALYs (decision 2026-10-31 #4)."
+    },
+    {
+      "id": "ca_deaths_per_daly",
+      "section": "outcome",
+      "label": "Cancer branch: deaths per DALY",
+      "format": "small",
+      "formula": "@death_ages.childhood_cancer_deaths_per_daly_world",
+      "explainer": "Turns the branch's DALYs back into the deaths behind them, so each is valued by age at the site's value of a death, not at GBD's life expectancy."
+    },
+    {
+      "id": "ca_value_per_death",
+      "section": "outcome",
+      "label": "Cancer branch: value of a death averted",
+      "format": "number",
+      "formula": "(@death_ages.childhood_cancer_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.childhood_cancer_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.childhood_cancer_share_15_19_world * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights for the ages of childhood cancer deaths (GBD 2023), times your multiplier on the value of a life: the site's one value of a death.",
+      "unit": "uov"
+    },
+    {
+      "id": "ca_illness_credited",
+      "section": "outcome",
+      "label": "Cancer branch: illness averted credited to St. Jude",
+      "format": "integer",
+      "formula": "ca_research_dalys * ca_yld_share * ca_total_adj",
+      "explainer": "",
+      "unit": "DALYs"
+    },
+    {
+      "id": "ca_uov_credited",
+      "section": "outcome",
+      "label": "Cancer branch: deaths averted credited to St. Jude, in units of value",
+      "format": "integer",
+      "formula": "ca_research_dalys * ca_deaths_per_daly * ca_value_per_death * ca_total_adj",
+      "explainer": "Into healthy years through the bridge (uov_bridged).",
+      "unit": "uov"
+    },
+    {
+      "id": "nc_scd_value_per_death",
+      "section": "outcome",
+      "label": "Non-cancer branch: value of a sickle cell death averted",
+      "format": "number",
+      "formula": "(@death_ages.sickle_cell_share_under5_world * @moral_weights.uov_per_death_under5 + (1 - @death_ages.sickle_cell_share_under5_world) * (@death_ages.sickle_cell_share_5_14_of_over5_world * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.sickle_cell_share_5_14_of_over5_world) * ((1 - @death_ages.sickle_cell_share_50plus_of_over15_world) * @moral_weights.uov_per_death_age_15_49 + @death_ages.sickle_cell_share_50plus_of_over15_world * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights for the ages of sickle cell deaths, times your multiplier on the value of a life.",
+      "unit": "uov"
+    },
+    {
+      "id": "nc_flu_value_per_death",
+      "section": "outcome",
+      "label": "Non-cancer branch: value of an influenza death under five averted",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier",
+      "explainer": "Every death in this burden is under five.",
+      "unit": "uov"
+    },
+    {
+      "id": "nc_value_per_death",
+      "section": "outcome",
+      "label": "Non-cancer branch: value of a death averted",
+      "format": "number",
+      "formula": "(nc_scd_deaths_per_year * nc_scd_value_per_death + nc_flu_deaths_per_year * nc_flu_value_per_death) / (nc_scd_deaths_per_year + nc_flu_deaths_per_year)",
+      "explainer": "Deaths-weighted.",
+      "unit": "uov"
+    },
+    {
+      "id": "nc_illness_credited",
+      "section": "outcome",
+      "label": "Non-cancer branch: illness averted credited to St. Jude",
+      "format": "integer",
+      "formula": "nc_research_fraction * (nc_scd_yld_per_year + nc_flu_yld_per_year) * nc_total_adj",
+      "explainer": "",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nc_uov_credited",
+      "section": "outcome",
+      "label": "Non-cancer branch: deaths averted credited to St. Jude, in units of value",
+      "format": "integer",
+      "formula": "nc_research_fraction * (nc_scd_deaths_per_year + nc_flu_deaths_per_year) * nc_value_per_death * nc_total_adj",
+      "explainer": "Into healthy years through the bridge (uov_bridged).",
+      "unit": "uov"
+    },
+    {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (before adjustments)",
-      "format": "number",
-      "formula": "research_dalys + advocacy_dalys",
+      "label": "Illness averted, in DALYs, before St. Jude's share and the adjustments (for reading)",
+      "format": "integer",
+      "formula": "ca_research_dalys * ca_yld_share + nc_research_fraction * (nc_scd_yld_per_year + nc_flu_yld_per_year) + advocacy_dalys",
+      "explainer": "The illness part of both branches' DALYs (the deaths are in uov_bridged) and the advocacy branch (0).",
+      "unit": "DALYs"
+    },
+    {
+      "id": "ca_outcome",
+      "section": "outcome",
+      "label": "Cancer branch: DALYs averted credited to St. Jude",
+      "format": "integer",
+      "formula": "(ca_illness_credited + dalys_from_uov * ca_uov_credited / uov_bridged) * (1 + unmodelled_benefits_adj)",
+      "explainer": "Its illness averted and its share of the bridged deaths.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nc_outcome",
+      "section": "outcome",
+      "label": "Non-cancer branch: DALYs averted credited to St. Jude",
+      "format": "integer",
+      "formula": "(nc_illness_credited + dalys_from_uov * nc_uov_credited / uov_bridged) * (1 + unmodelled_benefits_adj)",
+      "explainer": "Its illness averted and its share of the bridged deaths.",
       "unit": "DALYs"
     },
     {
       "id": "outcome_total",
       "section": "outcome",
-      "label": "Years of healthy life",
-      "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
-      "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+      "label": "Every outcome, in healthy years",
+      "format": "integer",
+      "formula": "(ca_illness_credited + nc_illness_credited + dalys_from_uov + (advocacy_dalys + dalys_from_wellby) * ca_total_adj) * (1 + unmodelled_benefits_adj)",
+      "explainer": "Both branches' illness averted, in DALYs, and their deaths averted, valued by age and bridged from units of value, each with its own branch's adjustments; plus the advocacy branch and the WELLBY bridge (both 0) at the cancer branch's adjustments, never at the reading average total_adj, which would make a cycle.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "ca_outcome_share",
+      "section": "outcome",
+      "label": "Cancer branch's share of the outcome",
+      "format": "percent",
+      "formula": "ca_outcome / outcome_total",
+      "explainer": "Weights the reading averages."
     },
     {
       "id": "dalys_per_dollar",
@@ -662,55 +1218,36 @@
       "unit": "DALYs / $"
     },
     {
+      "id": "ca_dalys_per_dollar",
+      "section": "outcome",
+      "label": "Cancer branch: DALYs per dollar of its cost",
+      "format": "small",
+      "formula": "ca_outcome / ca_cost_total",
+      "explainer": "For comparing the branches."
+    },
+    {
+      "id": "nc_dalys_per_dollar",
+      "section": "outcome",
+      "label": "Non-cancer branch: DALYs per dollar of its cost",
+      "format": "small",
+      "formula": "nc_outcome / nc_cost_total",
+      "explainer": "For comparing the branches."
+    },
+    {
       "id": "field_dalys_per_dollar",
       "section": "outcome",
       "label": "The whole field's research: healthy years per dollar, before St. Jude's share and the donor steps (for reading)",
       "format": "small",
-      "unit": "DALYs / $",
-      "formula": "research_dalys * evidence_adj * counterfactual_adj / field_research_funding",
-      "explainer": "A check against the reference class: what a dollar of all funders' childhood cancer research does in this chain, about what UK cancer research's return implies: Glover et al. (2014) attribute about 1 million QALYs (17% of the 5.9 million gained 1991-2010) to roughly £5 billion of UK cancer research done about 15 years earlier, some 2e-4 QALYs a pound undiscounted, about 4-6e-5 a dollar in today's dollars once the 15-year wait is discounted at the shared rate; this row is about 5e-5."
+      "formula": "ca_research_dalys * ca_evidence_adj * ca_counterfactual_adj / ca_field_research_funding",
+      "explainer": "A check against the reference class: what a dollar of all funders' childhood cancer research does in this chain, discounted. Glover et al. (BMC Medicine 2014, https://doi.org/10.1186/1741-7015-12-99) put UK public and charity cancer research at £15 billion over 1970-2009 (2011/12 prices) and the QALYs gained from cancer care 1991-2010 at 5.9 million, 17% of their net value attributable to UK research, with a lag of about 15 years: about 1 million QALYs from the research of roughly 1976-1995, about a third of the £15 billion if spending grew steadily (about £5 billion, our reading, not the paper's figure), some 2e-4 QALYs per 2011/12 pound, about 1e-4 per 2024 dollar undiscounted, about 5-6e-5 once the 15-year wait is discounted at the shared rate; this row is about 5e-5. The two measure different things, so the match is a sanity bound, not a validation: Glover counts the UK's health gains only and credits research (17% of them) with the gains as they happened, while this chain counts the world's burden and credits a year's research only with the years it brings an advance forward; it is in DALYs before the deaths are valued by age."
     },
     {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data: St. Jude's non-cancer research, FY2025",
-      "format": "usd",
-      "formula": "own_research_spend * (1 - cancer_share_of_research)",
-      "explainer": "The non-cancer research paid from St. Jude's own funds (blood disorders including sickle cell gene therapy, infectious diseases including the WHO collaborating centre for influenza, neurobiology, structural biology): about $216 million. St. Jude publishes no outcome measure for it that the chain above could use, so it is valued at comparable research elsewhere on the site, discounted (Convention 12). Not part of program_spend."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "unit": "units of value / $",
-      "formula": "#breast-cancer-now-sogive",
-      "explainer": "The nearest evaluated research programme on the site: Breast Cancer Now's research (SoGive's model, read live), the one ranked medical-research charity model; the motor neurone disease and arthritis models are upper bounds, not estimates. Not St. Jude's own cancer research model, which would value the non-cancer research by the same judgments it was meant to test."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
+      "id": "ca_burden_fall_per_year",
+      "section": "outcome",
+      "label": "Check: share of the world's childhood cancer burden a year of the field's research removes once in practice",
       "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "formula": "ca_share_burden_addressable * ca_p_success",
+      "explainer": "A check against the observed trend, which fits the chain better than the returns studies: US childhood cancer mortality fell by more than half from 1975 to 2022, about 1.8% a year (National Cancer Institute), most of it from treatment advances, but high-income countries carry only about 6% of the world's childhood cancer burden (GBD 2023), so that alone is about 0.1% of the world's burden a year. Worldwide, childhood cancer deaths fell 27% from 1990 to 2023 (Force et al., Lancet 2026), about 1% a year with population growth, from advances and from better access together. If about half of that is the field's new knowledge, a year's advances remove roughly 0.3-0.7% of the burden; this row is 0.5%."
     },
     {
       "id": "research_salaries",
@@ -772,9 +1309,9 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average * (1 - proxy_share) + proxy_in_dalys",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
       "unit": "Years of healthy life / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
+      "explainer": "Both branches' result per dollar, at the next dollar's share of the past average."
     }
   ],
   "output": {
