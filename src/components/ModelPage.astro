@@ -153,21 +153,21 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       {whole ? (
         model.bulk ? (
           <WholeCharity client:model={model.id} id={model.id}>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </WholeCharity>
         ) : (
           <WholeCharity client:load id={model.id}>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </WholeCharity>
         )
       ) : model.bulk ? (
@@ -184,12 +184,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
             </p>
           </Fragment>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </ModelView>
       ) : (
         <ModelView client:load id={model.id} place={place}>
@@ -205,12 +205,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
             </p>
           </Fragment>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </ModelView>
       )}
       {resources.length > 0 && (
@@ -295,7 +295,6 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   .writeup :global(ul),
   .writeup :global(ol) {
     margin: 0 0 var(--s3);
-    max-width: var(--measure);
   }
   .writeup :global(table) {
     width: 100%;
