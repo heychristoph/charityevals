@@ -120,6 +120,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
                       <p>
                         <strong>{plainModelName(p.result.model.name)}</strong> by <a href={`/evaluators/${p.result.model.owner}`}>{lib.owners.get(p.result.model.owner)?.name ?? p.result.model.owner}</a>
                         {p.result.model.source?.published && <>, {new Date(p.result.model.source.published).toLocaleDateString("en-GB", { year: "numeric", month: "long" })}</>}.{" "}
+                        {p.result.model.owner === "charityevals" && <>Built and checked by AI agents, by our <a href="/method#our-models">published method</a>.{" "}</>}
                         {modelUrl(lib, p.result.model) !== `/${charity.id}` && <><a href={modelUrl(lib, p.result.model)}>Its own page</a>, with the model file and history.</>}
                       </p>
                     }

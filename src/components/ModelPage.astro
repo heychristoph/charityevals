@@ -178,7 +178,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <Fragment slot="about">
             <p>
               {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
-              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.{owner.id === "charityevals" && <> Built and checked by AI agents, by our <a href="/method#our-models">published method</a>.</>}
               {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
             </p>
             <p class="m-links">
@@ -202,7 +202,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <Fragment slot="about">
             <p>
               {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
-              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.{owner.id === "charityevals" && <> Built and checked by AI agents, by our <a href="/method#our-models">published method</a>.</>}
               {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
             </p>
             <p class="m-links">
