@@ -54,5 +54,5 @@ export function filled(raw: Record<string, unknown>): Record<string, unknown> {
     ...r,
     explainer: typeof r.explainer === "string" ? r.explainer.replace(/TEMPLATE: ?/g, "") + " Filled in for the test with a rationale long enough to pass." : r.explainer,
   }));
-  return { ...raw, kind: "charity", summary: "A test charity. It does one thing in one place in 2025 and the model says how much good a dollar does, with the biggest uncertainty named.", rows };
+  return { ...raw, kind: "charity", summary: "A test charity. It does one thing in one place in 2025 and the model says how much good a dollar does, with the biggest uncertainty named.", beneficiaries: raw.beneficiaries ?? { KEN: 1 }, beneficiaries_note: "Filled in for the test.", rows };
 }

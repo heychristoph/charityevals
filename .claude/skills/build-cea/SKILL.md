@@ -90,6 +90,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   the result in years of healthy life per $1,000, the biggest uncertainty, branches discounted for missing data),
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
+- `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts, run it.
 - **Keep every canonical row id, `output` and the section kinds**, so the model compares row by row
   with its family. Replace every `TEMPLATE:` explainer and example value; each says which shared figure
   the row reads and when to change it. A branch that doesn't apply stays at 0 with an explainer saying
