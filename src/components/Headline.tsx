@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
 import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
-import { byCode, byIso3 } from "../engine/countries";
+import { byCode, byIso3, inSentence } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
 import { useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
@@ -196,7 +196,7 @@ function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string
   return (
     <p className="m-age m-distance">
       {place}: {effect} at <a href={`/assumptions#a-${DISTANCE_DISCOUNT}`}>your settings</a>
-      {home && d > 0 ? <> (you live in {home.name}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
+      {home && d > 0 ? <> (you live in {inSentence(home.name)}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
     </p>
   );
 }
@@ -205,7 +205,7 @@ function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string
 function where(b: Record<string, number> | "world"): string {
   if (b === "world") return "across the world";
   const parts = Object.entries(b).sort((x, y) => y[1] - x[1]);
-  const named = (iso: string) => (iso === "world" ? "across the world" : `in ${byIso3.get(iso)?.name ?? iso}`);
+  const named = (iso: string) => (iso === "world" ? "across the world" : `in ${inSentence(byIso3.get(iso)?.name ?? iso)}`);
   const even = parts.every(([, s]) => Math.abs(s - parts[0][1]) < 1e-3);
   if (parts.length > 4) return `in ${parts.length} countries${even ? "" : `, most ${named(parts[0][0])}`}`;
   const list = parts.map(([iso, s]) => `${named(iso)}${even ? "" : ` (${Math.round(s * 100)}%)`}`);
