@@ -2,6 +2,7 @@ import type React from "react";
 import { useMemo, useState } from "react";
 import { bulkRaw, lib, modelUrl, rawFacts } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
+import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
 import { useAssumptionValues, useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
@@ -132,6 +133,61 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
       {children}
       {/* The main model's waterfall fills the evaluation section; its own branch does it while open. */}
       {open !== id && mainModel && <WaterfallInSlot model={mainModel} av={av} edits={{}} />}
+    </div>
+  );
+}
+
+/** A programme's funded locations, each with its share of the funding and its own figure, the way the
+ * rankings weigh them (use-results.ts: programResult). */
+function locationParts(m: ResolvedModel, av: Record<string, number>): { label: string; share?: number; central: number }[] | undefined {
+  const family = locationsOf(lib, m);
+  const figure = (x: ResolvedModel) => headline(lib, x, av);
+  const declared = declaredLocations(lib.charities.get(m.charity), family);
+  const named = (x: ResolvedModel) => x.name.replace(lib.charities.get(m.charity)?.name ?? "", "").trim().replace(/^\((.*)\)$/, "$1") || x.name;
+  const parts = declared
+    ? declared.map((d) => ({ label: d.label, weight: d.weight, central: combine(d.models.map((x) => { const v = figure(x); return { central: v, low: v, high: v }; })).central }))
+    : (() => {
+        const ws = locationWeights(lib, family);
+        return ws ? family.map((x, i) => ({ label: named(x), weight: ws[i], central: figure(x) })) : undefined;
+      })();
+  if (!parts) return undefined;
+  const total = parts.reduce((t, x) => t + x.weight, 0);
+  return parts
+    .filter((x) => x.weight > 0)
+    .map((x) => ({ label: x.label, share: total > 0 ? x.weight / total : undefined, central: x.central }))
+    .sort((a, b) => (b.share ?? 0) - (a.share ?? 0));
+}
+
+/** On the main page of a charity whose one programme is funded in several locations: the
+ * funding-weighted figure the rankings show for the whole charity, and each location's share and
+ * figure, above the model of the location the page is about. */
+export function Locations({ id }: { id: string }) {
+  const model = lib.models.get(id)!;
+  const { results } = useResults();
+  const av = useAssumptionValues();
+  const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  const p = ev?.programs.length === 1 ? ev.programs[0] : undefined;
+  const locations = useMemo(() => (p?.locationBasis === "weighted" ? locationParts(p.result.model, av) : undefined), [p, av]);
+  if (!ev || !locations) return null;
+  return (
+    <div className="whole whole-locations" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
+      <div className="whole-root">
+        <span className="whole-root-label">Years of healthy life per $1,000, the whole charity</span>
+        <span className="whole-root-value num">{formatYears(ev.central)}</span>
+      </div>
+      <ul className="whole-parts">
+        {locations.map((l) => (
+          <li key={l.label}>
+            <div className="whole-part">
+              <span className="whole-part-label">{l.label}</span>
+              <span className="whole-part-math num">
+                {l.share !== undefined && <>{pct(l.share)} × </>}
+                {formatYears(l.central)}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
