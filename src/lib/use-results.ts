@@ -105,6 +105,24 @@ export function useResults() {
 
 const plans = new Map(rankedCharities.map((c) => [c.id, rankingPlan(lib, c.id)]));
 
+/** A charity's figure for one evaluator at any values, by the same plan and combination as the rankings
+ * (programs by weight, locations by funding), from each model's headline only: for the notes under a
+ * page's headline, which compare the figure with one slider at its neutral setting. */
+export function figureOf(charity: string, owner: string, av: Record<string, number>): number {
+  const c = lib.charities.get(charity);
+  const plan = plans.get(charity)?.find((e) => e.owner === owner);
+  if (!c || !plan) return NaN;
+  const point = (m: ResolvedModel) => { const v = headline(lib, m, av); return { central: v, low: v, high: v }; };
+  return combine(plan.parts.map((p) => {
+    const family = locationsOf(lib, p.model);
+    const declared = declaredLocations(c, family);
+    if (declared) return { ...combineLocations(declared, point), weight: p.weight };
+    const weights = locationWeights(lib, family);
+    if (!weights) return { ...point(p.model), weight: p.weight };
+    return { ...combine(family.map((x, i) => ({ ...point(x), weight: weights[i] }))), weight: p.weight };
+  })).central;
+}
+
 function programResult(c: Charity, program: string, m: ResolvedModel, weight: number | undefined, av: Record<string, number>): ProgramResult {
   const result = resultOf(m, av);
   const family = locationsOf(lib, m);

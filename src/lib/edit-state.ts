@@ -43,6 +43,13 @@ export function clearEdits() {
 
 const EMPTY: Edits = {};
 
+/** Every model a page shows editable (a charity's programmes on its whole-charity page): an edit that
+ * lands in any of them stays in the URL, whichever model's island filters it first. */
+let pageModels: { m: ResolvedModel; lib?: Library }[] = [];
+export function setPageModels(models: ResolvedModel[], lib?: Library) {
+  pageModels = models.map((m) => ({ m, lib }));
+}
+
 /** The edits in the URL now, outside React. */
 export function readEdits(): Edits {
   ensureLoaded();
@@ -92,8 +99,19 @@ export function editsFor(m: ResolvedModel, edits: Edits, lib?: Library): Edits {
   if (keys.every((k, i) => where[i] === k)) return edits;
   const out: Edits = {};
   keys.forEach((k, i) => { const t = where[i]; if (t && (t === k || !(t in edits))) out[t] = edits[k]; });
-  // Only the page's own model rewrites the URL, and only once it has the model's real rows.
+  // Only the page's own model rewrites the URL, and only once it has the model's real rows. A key
+  // that lands in another model the page shows (a sibling programme) is that model's, so it stays.
+  const elsewhere = (k: string) => pageModels.some((p) => p.m !== m && target(p.m, new Set(usedFacts(p.m, p.lib)), k) !== undefined);
   if (edits === current && typeof window !== "undefined" && !isSummary(m))
-    queueMicrotask(() => { if (current === edits) { current = out; persist(); } });
+    queueMicrotask(() => {
+      if (current !== edits) return;
+      const kept: Edits = { ...out };
+      keys.forEach((k, i) => { if (!where[i] && elsewhere(k)) kept[k] = edits[k]; });
+      // Nothing dropped or moved (every key kept as it was): no new snapshot, so no re-render loop.
+      const same = Object.keys(kept).length === keys.length && keys.every((k) => kept[k] === edits[k]);
+      if (same) return;
+      current = kept;
+      persist();
+    });
   return out;
 }

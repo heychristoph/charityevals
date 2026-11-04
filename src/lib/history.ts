@@ -4,7 +4,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { AGE_DISCOUNT, buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, MISSING_DATA_DISCOUNT, buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
 import { formatValue } from "./format";
 
 /** One row that changed: its value before and after, and whether its calculation changed too. */
@@ -70,11 +70,26 @@ type RawAssumptions = { rows?: { id: string }[]; common?: Record<string, unknown
  * (docs/normalization.md 2.11): the age is how old an estimate is now, not when the commit was made, so
  * every version is aged to today's date and the line runs on into the page's headline. */
 function withAgeDiscount(a: RawAssumptions, root: string): RawAssumptions {
-  if (a.rows?.some((r) => r.id === AGE_DISCOUNT)) return a;
   const today: RawAssumptions = JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8"));
+  // Likewise the missing-data slider (2.12), so an imported model's line doesn't jump where it arrived.
+  const missing = today.rows?.find((r) => r.id === MISSING_DATA_DISCOUNT);
+  if (missing && a.rows && !a.rows.some((r) => r.id === MISSING_DATA_DISCOUNT)) a = { ...a, rows: [...a.rows, missing] };
+  if (a.rows?.some((r) => r.id === AGE_DISCOUNT)) return a;
   const row = today.rows?.find((r) => r.id === AGE_DISCOUNT);
   if (!row || !a.rows || !a.common) return a;
   return { ...a, rows: [...a.rows, row], common: { ...a.common, estimate_age_as_of: today.common?.estimate_age_as_of } };
+}
+
+let classified: Map<string, unknown> | undefined;
+/** A past commit's imported models with today's missing-data classification where that commit had none
+ * (docs/normalization.md 2.12): which share of an evaluator's result isn't measured is a reading of its
+ * model, so every version is read today's way and the line doesn't jump at the commit that added it. */
+function withMissingData(models: unknown[], root: string): unknown[] {
+  classified ??= new Map(
+    (jsonFilesWorking(root, "models") as { id: string; missing_data?: unknown }[]).filter((m) => m.missing_data).map((m) => [m.id, m.missing_data]),
+  );
+  return (models as { id?: string; missing_data?: unknown }[]).map((m) =>
+    m && typeof m === "object" && !m.missing_data && m.id && classified!.has(m.id) ? { ...m, missing_data: classified!.get(m.id) } : m);
 }
 
 /** The library as it was at a commit, or in the working copy when sha is null. Never cached: a library
@@ -92,7 +107,7 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
         existsSync(join(root, "owners.json")) ? JSON.parse(readFileSync(join(root, "owners.json"), "utf8")) : [],
       );
     return buildLibrary(
-      jsonFilesAt(root, sha, "models"),
+      withMissingData(jsonFilesAt(root, sha, "models"), root),
       withAgeDiscount(JSON.parse(git(root, ["show", `${sha}:assumptions/default.json`])), root),
       jsonFilesAt(root, sha, "facts"),
       jsonFilesAt(root, sha, "charities"),

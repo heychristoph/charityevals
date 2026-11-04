@@ -1,10 +1,11 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { AGE_DISCOUNT, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, buildLibrary, comparable, estimateAge, headline, usedAssumptions, type ResolvedModel } from "../engine/model";
+import { byCode, byIso3, inSentence } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
-import { useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
-import { editsFor, useEdits } from "../lib/edit-state";
+import { figureOf, useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
+import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
 import { formatYears } from "../lib/format";
 import InfoTip, { WithTip } from "./InfoTip";
 
@@ -44,7 +45,8 @@ const share = (s: number) => (s < 0.005 ? "<1%" : `${Math.round(s * 100)}%`);
  * more than this one model's own figure: several locations by funding, or several programs. */
 function combinedOf(ev: EvaluatorResult | undefined, model: ResolvedModel, av: Record<string, number>): Combined | undefined {
   if (!ev) return undefined;
-  const funder = `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
+  // Our own models weigh a charity's programs by its spending; an evaluator's, by its funding.
+  const funder = ev.owner === "charityevals" ? "the charity's spending" : `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
   const charity = lib.charities.get(model.charity)!;
   if (ev.programs.length > 1) {
     const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
@@ -125,6 +127,18 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
   }, [value, av, id, model.id]);
 
   const figure = combined ? combined.ev.central : value;
+  // The notes below the figure describe the number shown: the charity's combined figure where it
+  // combines several programs or locations, compared with one slider at its neutral setting.
+  const fig = useMemo(
+    () => (combined ? (a: Record<string, number>) => figureOf(model.charity, model.owner, a) : (a: Record<string, number>) => headline(lib, model, a, edits)),
+    [combined, model, edits],
+  );
+  const partModels = useMemo(
+    () => (combined && combined.what === "program" ? combined.ev.programs.map((p) => ({ m: p.result.model, weight: p.weight })) : [{ m: model, weight: undefined }]),
+    [combined, model],
+  );
+  // A whole-charity page edits each programme's own model; their edits stay in the URL (edit-state).
+  if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
   if (!Number.isFinite(figure)) return null;
   const unit = years ? "years of healthy life per $1,000" : `${lib.assumptions.units[model.output!.unit]?.label ?? "per dollar"} per dollar`;
   // With edits the figure is this one model's, so its place is just the location, not "the median of …".
@@ -148,7 +162,9 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
           </InfoTip>
         </WithTip>
       </span>
-      {years && <EstimateAge model={model} av={av} />}
+      {years && <EstimateAge model={model} av={av} fig={fig} />}
+      {years && <DistanceWeight model={model} av={av} fig={fig} parts={partModels} />}
+      {years && <MissingData model={model} av={av} fig={fig} parts={partModels} />}
     </div>
   );
 }
@@ -159,11 +175,17 @@ const monthYear = (d: string) => (d.length >= 7 ? `${MONTHS[Number(d.slice(5, 7)
 
 /** "Estimate from November 2016, 10 years old: × 0.61 at your settings": how old the estimate is and
  * what the reader's discount for its age (docs/normalization.md 2.11) does to the figure above. */
-function EstimateAge({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+type Fig = (a: Record<string, number>) => number;
+const ratio = (fig: Fig, av: Record<string, number>, neutral: Record<string, number>) => {
+  const r = fig(av) / fig({ ...av, ...neutral });
+  return Number.isFinite(r) ? r : 1;
+};
+
+function EstimateAge({ model, av, fig }: { model: ResolvedModel; av: Record<string, number>; fig: Fig }) {
   const age = estimateAge(lib, model);
   const made = model.source?.published;
   if (age === undefined || !made) return null;
-  const factor = ageFactor(lib, model, av);
+  const factor = ratio(fig, av, { [AGE_DISCOUNT]: 0 });
   const old = age < 1 ? "under a year old" : `${Math.round(age)} ${Math.round(age) === 1 ? "year" : "years"} old`;
   const effect = factor < 1 ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
   return (
@@ -175,3 +197,85 @@ function EstimateAge({ model, av }: { model: ResolvedModel; av: Record<string, n
 }
 
 const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
+
+/** "Helps lives in Kenya: × 0.25 at your settings (you live in the United States, 50% less per step)":
+ * where the model's beneficiaries are and what the reader's distance weight (docs/normalization.md 2.13)
+ * does to the figure above. For a charity that moves money, the weight its destinations bring together. */
+type ProgramPart = { m: ResolvedModel; weight?: number };
+function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
+  const b = parts.length > 1 ? mergedBeneficiaries(parts, av) : model.beneficiaries;
+  if (!b) return null;
+  const home = byCode.get(av[HOME_COUNTRY]);
+  const d = av[DISTANCE_DISCOUNT] ?? 0;
+  const place = b === "destinations"
+    ? "Moves money to other charities, each weighed by where it works"
+    : `Helps lives ${where(b)}`;
+  // The whole effect on the headline, destinations included.
+  const factor = home && d > 0 ? ratio(fig, av, { [DISTANCE_DISCOUNT]: 0 }) : 1;
+  const effect = !home || d <= 0 || !Number.isFinite(factor) || Math.abs(factor - 1) < 5e-4 ? "counted in full" : `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}`;
+  return (
+    <p className="m-age m-distance">
+      {place}: {effect} at <a href={`/assumptions#a-${DISTANCE_DISCOUNT}`}>your settings</a>
+      {home && d > 0 ? <> (you live in {inSentence(home.name)}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
+    </p>
+  );
+}
+
+/** Several programs' beneficiaries as one, each weighted by its share of the combined figure at the
+ * reader's values without the distance weight (its funding weight × its figure, as the combination
+ * adds them); a program that moves money keeps that label. */
+function mergedBeneficiaries(parts: ProgramPart[], av: Record<string, number>): Record<string, number> | "world" | "destinations" | undefined {
+  const plain = { ...av, [DISTANCE_DISCOUNT]: 0 };
+  const out: Record<string, number> = {};
+  let total = 0;
+  const weighted = parts.every((p) => p.weight !== undefined);
+  for (const { m, weight } of parts) {
+    const b = m.beneficiaries;
+    if (!b || b === "destinations") return b;
+    const v = Math.max(0, headline(lib, m, plain)) * (weighted ? weight! : 1);
+    total += v;
+    for (const [iso, s] of Object.entries(b === "world" ? { world: 1 } : b)) out[iso] = (out[iso] ?? 0) + s * v;
+  }
+  if (!(total > 0)) return undefined;
+  for (const iso in out) out[iso] /= total;
+  return Object.keys(out).length === 1 && out.world ? "world" : out;
+}
+
+/** "in Kenya", "in Nigeria and Niger", "across the world", "in the UK (6%) and across the world (94%)". */
+function where(b: Record<string, number> | "world"): string {
+  if (b === "world") return "across the world";
+  const parts = Object.entries(b).sort((x, y) => y[1] - x[1]);
+  const named = (iso: string) => (iso === "world" ? "across the world" : `in ${inSentence(byIso3.get(iso)?.name ?? iso)}`);
+  const even = parts.every(([, s]) => Math.abs(s - parts[0][1]) < 1e-3);
+  if (parts.length > 4) return `in ${parts.length} countries${even ? "" : `, most ${named(parts[0][0])}`}`;
+  const list = parts.map(([iso, s]) => `${named(iso)}${even ? "" : ` (${Math.round(s * 100)}%)`}`);
+  return list.length === 1 ? list[0] : `${list.slice(0, -1).join(", ")} and ${list.at(-1)}`;
+}
+
+/** "Not measured for this charity (all of the result): × 0.50 at your settings (counted at 50%)": how much
+ * of the result rests on judgment or on research about other delivery, and what the reader's missing-data
+ * slider (docs/normalization.md 2.12) does to the figure above. An imported model's share is its
+ * `missing_data`; a charityevals model's comes from its branches' own missing_data_adj rows; a charity that
+ * moves money takes its destinations'. */
+function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
+  if (!(MISSING_DATA_DISCOUNT in av)) return null;
+  const d = av[MISSING_DATA_DISCOUNT];
+  // The whole effect on the figure shown, destinations, branches and programs included.
+  const factor = ratio(fig, av, { [MISSING_DATA_DISCOUNT]: 1 });
+  const moved = Math.abs(factor - 1) >= 5e-4;
+  // Whether a part isn't measured is the models' own classification, not whether the slider happens to
+  // move the figure (at 100% nothing moves, but the unmeasured parts are still unmeasured).
+  const thin = (m: ResolvedModel) => (m.missing_data ? m.missing_data.thin_share > 0 : usedAssumptions(lib, m).includes(MISSING_DATA_DISCOUNT));
+  const share = parts.length === 1 ? model.missing_data?.thin_share : undefined;
+  const anyThin = parts.some((p) => thin(p.m));
+  const what = share !== undefined
+    ? share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`
+    : anyThin ? "Parts not measured for this charity" : "Measured for this charity";
+  const effect = moved ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
+  return (
+    <p className="m-age m-missing" title={model.missing_data?.note}>
+      {what}: {effect} at <a href={`/assumptions#a-${MISSING_DATA_DISCOUNT}`}>your settings</a>
+      {moved || anyThin ? <> (counted at {formatPercent(d)})</> : null}.
+    </p>
+  );
+}

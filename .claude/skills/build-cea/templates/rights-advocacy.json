@@ -1,0 +1,525 @@
+{
+  "id": "template-rights-advocacy",
+  "name": "Template: rights and advocacy",
+  "kind": "template",
+  "cause": "global-health",
+  "template": "rights-advocacy",
+  "estimate_basis": "past_average",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, its theory of change from the wins to people's lives, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: rights and advocacy",
+    "url": "https://charityevals.org/template-rights-advocacy",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_affected_per_year",
+      "section": "reach",
+      "label": "People per year the laws, rulings or policies won or pressed affect",
+      "format": "integer",
+      "value": 100000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: ruling / government statistics",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people covered by the year's wins (a ruling's class, a law's population, a policy's caseload), from the ruling or official statistics; count everyone covered, the chance of the win in p_success."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Wellbeing gained per person affected per year (points, 0-10)",
+      "format": "number",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.08
+      },
+      "kind": "estimate",
+      "unit": "points",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: life-satisfaction points (0-10) gained per person per year while it lasts: a WELLBY per point-year. A result in standard deviations of a wellbeing or depression scale is SDs × @wellby_factors.wellbys_per_sd_year (a formula row); PHQ-9 points ÷ @depression.phq9_sd first. Never converted into DALYs here (the bridge does it). From studies of the right's effect on those it covers (discrimination, detention, legal status)."
+    },
+    {
+      "id": "dalys_per_person_year",
+      "section": "effect",
+      "label": "Health gained per person affected per year (DALYs)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0.0005,
+        "high": 0.002
+      },
+      "kind": "estimate",
+      "unit": "DALYs",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: illness averted (GBD disability weights, @gbd_disability_weights) where the right changes health (access to care, violence, detention conditions); 0 with the reason otherwise."
+    },
+    {
+      "id": "ln_gain_per_person_year",
+      "section": "effect",
+      "label": "Income gained per person affected per year, ln(consumption)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.04
+      },
+      "kind": "estimate",
+      "unit": "ln / year",
+      "source": {
+        "title": "TEMPLATE: study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: ln(1 + income gain / consumption) where the right changes income (work permits, benefits, wages); 0 otherwise."
+    },
+    {
+      "id": "p_success",
+      "section": "effect",
+      "label": "Probability the win happens because of this work",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: for pending cases and campaigns, the chance of winning from a reference class (the organisation's or the court's win rate in similar cases); for wins already in the year, the charity's share of the cause of the win (it led the case, joined, filed a brief). Name the reference class."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a won reform counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer (docs/normalization.md 2.9)."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years from the win until it takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the ruling's or law's own dates; discounted at the shared rate."
+    },
+    {
+      "id": "wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait until the win takes effect",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -years_until_effect",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
+      "id": "discounted_years",
+      "section": "effect",
+      "label": "Discounted years of impact",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount",
+      "unit": "years"
+    },
+    {
+      "id": "released_people",
+      "section": "reach",
+      "label": "People released, cleared or kept out of detention in the year",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity case records",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people the charity's casework freed or kept free in the year (0, with the reason, without casework), from its case records."
+    },
+    {
+      "id": "released_years",
+      "section": "effect",
+      "label": "Years of freedom gained per person released",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 2,
+        "high": 8
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: case records / sentencing data",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the sentence or detention avoided (time left to serve, expected detention), against what would have happened with other counsel (the counterfactual in counterfactual_adj)."
+    },
+    {
+      "id": "released_ls_gain_per_year",
+      "section": "effect",
+      "label": "Wellbeing gained per year of freedom (points, 0-10)",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "estimate",
+      "unit": "points",
+      "source": {
+        "title": "TEMPLATE: wellbeing study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the life-satisfaction gap between detention and release, from surveys of prisoners or detainees and the released."
+    },
+    {
+      "id": "released_value",
+      "section": "effect",
+      "label": "WELLBYs per person released, discounted",
+      "format": "number",
+      "formula": "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, released_years)",
+      "unit": "WELLBYs",
+      "explainer": "The person's own years, discounted at the shared rate (a release isn't a won reform)."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the win that is enforced",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much of a law or ruling is applied in practice (compliance, enforcement), from studies of similar wins."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a supplementary adjustment: list each effect not modelled with its sign and size. Benefits are positive shares, harms and risks (funging inside the organisation, bottlenecks, monitoring errors) negative shares of value lost, added here: never a positive share subtracted elsewhere."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Wellbeing gained, in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "people_affected_per_year * ls_gain_per_person_year * p_success * discounted_years + released_people * released_value",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Wellbeing gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "people_affected_per_year * dalys_per_person_year * p_success * discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_advocacy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_advocacy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_advocacy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_advocacy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "$marginal_vs_past_average",
+      "published": 1,
+      "explainer": "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

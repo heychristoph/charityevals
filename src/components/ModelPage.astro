@@ -7,11 +7,13 @@ import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
 import Headline from "./Headline.tsx";
+import WholeCharity from "./WholeCharity.tsx";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
+import { rankingPlan } from "../engine/ranking";
 
 interface Props {
   modelId: string;
@@ -74,6 +76,11 @@ const placeText = place && (model.kind === "variant" ? `in ${place}` : `in ${pla
 // The charity's other models and its locations, in one list: both are "other versions of this number".
 const others = model.kind !== "variant" && siblings.length > current.length ? siblings : [];
 const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map((m) => m.id)).size;
+// A charity whose figure combines several programs shows them as one tree on its main page
+// (WholeCharity): the whole charity at the top, each program's model a branch, bulk imports included
+// (their file loads when their branch opens; the island waits for the main one's, client:model).
+const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
+const whole = parts.length > 1;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
@@ -124,7 +131,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             })}
           </nav>
         )}
-        {modelCount > 1 && (
+        {modelCount > 1 && !(whole && others.every((m) => parts.some((p) => p.model.id === m.id))) && (
           <details class="m-disclosure small" open={modelCount <= 8}>
             <summary>{model.kind === "variant" ? `${family.length} locations in ${owner.name}'s model` : `All ${modelCount} models of ${charity.name}`}</summary>
             {family.length > 1 && (
@@ -143,7 +150,27 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         )}
       </div>
       {/* A bulk model hydrates once its full file has loaded (client:model), rather than carrying it as a prop. */}
-      {model.bulk ? (
+      {whole ? (
+        model.bulk ? (
+          <WholeCharity client:model={model.id} id={model.id}>
+          {Writeup && (
+            <section class="writeup" aria-labelledby="writeup-title">
+              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+              <div class="writeup-body" data-gloss><Writeup /></div>
+            </section>
+          )}
+        </WholeCharity>
+        ) : (
+          <WholeCharity client:load id={model.id}>
+          {Writeup && (
+            <section class="writeup" aria-labelledby="writeup-title">
+              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+              <div class="writeup-body" data-gloss><Writeup /></div>
+            </section>
+          )}
+        </WholeCharity>
+        )
+      ) : model.bulk ? (
         <ModelView client:model={model.id} id={model.id} bulk place={place}>
           <Fragment slot="about">
             <p>
@@ -330,6 +357,65 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .m-title :global(.m-parts tr + tr > *) {
     border-top: 1px solid var(--rule);
+  }
+  /* The whole charity: its programmes' models as branches of one tree (WholeCharity) */
+  :global(.whole-root) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s3);
+    padding: var(--s2) 0;
+    border-bottom: 2px solid var(--ink);
+    font: 600 18px/1.3 var(--serif);
+  }
+  :global(.whole-root-value) {
+    color: var(--cause);
+  }
+  :global(.whole-lede) {
+    color: var(--ink-2);
+    margin: var(--s2) 0 var(--s3);
+  }
+  :global(.whole-parts) {
+    list-style: none;
+    margin: 0 0 var(--s6);
+    padding: 0;
+  }
+  :global(.whole-parts > li) {
+    border-bottom: 1px solid var(--rule);
+  }
+  :global(.whole-part) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px var(--s2);
+    align-items: baseline;
+    width: 100%;
+    padding: var(--s2) 0;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  :global(.whole-part:hover .whole-part-label) {
+    text-decoration: underline 1.5px color-mix(in srgb, var(--blue) 55%, transparent);
+    text-underline-offset: 4px;
+  }
+  :global(.whole-chev) {
+    width: 1em;
+    color: var(--ink-2);
+  }
+  :global(.whole-part-label) {
+    flex: 1 1 12em;
+  }
+  :global(.whole-part-math) {
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  :global(.whole-model) {
+    padding: 0 0 var(--s4) var(--s4);
+    border-left: 2px solid var(--rule);
+    margin-left: 0.4em;
   }
   .m-list + .m-list {
     margin-top: var(--s4);

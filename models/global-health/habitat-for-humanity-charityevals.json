@@ -1,0 +1,1165 @@
+{
+  "id": "habitat-for-humanity-charityevals",
+  "name": "Habitat for Humanity International: US affiliates (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"USA":1},
+  "beneficiaries_note": "Our build: HFHI's US affiliates.",
+  "template": "domestic-services",
+  "estimate_basis": "unit_cost",
+  "charity": "habitat-for-humanity",
+  "owner": "charityevals",
+  "summary": "Habitat for Humanity International (HFHI) funds and supports about 984 independent US affiliates that build homes with volunteers and sell them at appraised value to low-income families, on zero-interest mortgages with down-payment help and forgivable second mortgages, and that repair low-income owners' homes; in the year to June 2025 that was about 3,400 homes and 12,370 repairs, plus disaster recovery after Hurricanes Helene and Milton, and HFHI spent $185 million on it ($183 million without the US advocacy booked in the same line, which is counted in the awareness model). Counting only the net subsidy each family receives (the home's value less the market value of what it repays and its sweat equity) on the site's log-income scale, and HFHI's share of all the resources behind the homes (the affiliates raise most of the money, spend about twice the sale price per home, and volunteers give their time), a dollar to HFHI does about 0.003 years of healthy life per $1,000. That is far below the global-health median because the families are in the US, where the same dollar of housing adds much less to consumption than in a poor country, and because a dollar of the network's resources delivers under half a dollar of subsidy to a family. All three branches (homes, repairs, disaster help) are discounted for missing data: Habitat counts what it builds, but no controlled study measures what its homes or repairs do. The biggest uncertainties are the affiliates' full cost per home (which sets HFHI's share) and how much a housing subsidy is worth to a family against cash. HFHI's international programme and its public awareness, education and advocacy are modelled separately.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Habitat for Humanity International, US affiliates programme (FY2025)",
+    "url": "https://charityevals.org/habitat-for-humanity-charityevals",
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "Habitat for Humanity International, audited consolidated financial statements FY2025",
+      "url": "https://www.habitat.org/media/36766/download"
+    },
+    {
+      "type": "charity",
+      "title": "Habitat for Humanity, FY2025 annual report",
+      "url": "https://www.habitat.org/multimedia/annual-report-2025/"
+    },
+    {
+      "type": "data",
+      "title": "Habitat for Humanity International, Form 990 FY2025",
+      "url": "https://www.habitat.org/media/36761/view"
+    },
+    {
+      "type": "study",
+      "title": "Wilder Research (2015), Habitat for Humanity homeownership: survey of Minnesota homeowners",
+      "url": "https://www.tchabitat.org/hubfs/Impact_2020/Full%20Wilder%20Report.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "us_affiliates_line",
+      "section": "cost",
+      "label": "HFHI's U.S. affiliates programme services, FY2025 (audited line)",
+      "format": "usd",
+      "value": 184691000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-04",
+        "page": "p. 6, Consolidated statements of activities, Program services",
+        "quote": "U.S. affiliates 184,691"
+      },
+      "explainer": "Habitat for Humanity International's (HFHI) programme spending on its US affiliates in the year to 30 June 2025, in US dollars (audited, in thousands in the statement): cash grants and house-building transfers to affiliates ($88.5 million), donated products such as appliances and building materials passed on to them ($32.3 million), and the staff, training, lending (Habitat Capital) and services that support the about 984 US affiliates ($63.9 million). The affiliates are independent charities with their own budgets; what HFHI's dollar buys is a share of what they build and repair (attribution below). The international programme and public awareness are modelled separately (habitat-for-humanity-charityevals-international and -awareness)."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on Habitat's U.S. affiliates programme, FY2025 (year to 30 June 2025), less the advocacy booked in it",
+      "format": "usd",
+      "formula": "us_affiliates_line - @habitat_for_humanity.us_advocacy_cost_fy2025",
+      "explainer": "The audited line less the US advocacy (Habitat Voices in Action, advocacy grants to affiliates) booked in it (@habitat_for_humanity.us_advocacy_cost_fy2025, a judgment shared with the awareness model, which counts it in its own cost), so each model counts that cost once."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising), FY2025",
+      "format": "usd",
+      "value": 377478000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-03",
+        "page": "p. 6, Consolidated statements of activities",
+        "quote": "Total expenses 377,478"
+      },
+      "explainer": "HFHI's total expenses in the year to 30 June 2025, from the same audited statement."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs), FY2025",
+      "format": "usd",
+      "value": 284497000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-03",
+        "page": "p. 6, Consolidated statements of activities",
+        "quote": "Total program services 284,497"
+      },
+      "explainer": "HFHI's programme-service expenses (US affiliates, international affiliates, public awareness and education) in the same year."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads HFHI's fundraising ($65.6 million) and management ($27.4 million) over its programmes in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the U.S. affiliates programme, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "new_people",
+      "section": "reach",
+      "label": "People in the homes Habitat sold in the US, FY2025",
+      "format": "integer",
+      "formula": "new_households * new_household_size",
+      "explainer": "The homes times the people per home, so both describe the same homes. Habitat's own count of people in new and rehabilitated homes, 15,952 for the US and Canada by fiscal year (FY2025 annual report: 'New and rehab construction 15,952'), is the high end of the size below."
+    },
+    {
+      "id": "new_second_fifth_weight",
+      "section": "reach",
+      "label": "Share of Habitat buyers in the second-poorest fifth of incomes (the rest in the poorest)",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Habitat buyers earn about 30% to 80% of the area median income (Wilder 2015: 'between 30 and 60 percent' in Minnesota) and must carry a mortgage, so most are working families in the second fifth of incomes, some in the poorest. 0.7, range 0.4 to 0.95."
+    },
+    {
+      "id": "new_household_size",
+      "section": "reach",
+      "label": "People per Habitat home",
+      "format": "number",
+      "unit": "people",
+      "explainer": "Habitat buyers are mostly families with children. Anchors: Habitat's own count, 15,952 people in new and rehab homes for the US and Canada over the year, against Builder magazine's 3,370 US closings is 4.7 (high, since it mixes Canada and a fiscal year with calendar closings); HUD's 1998 survey of Habitat homeowners found about 4.1 people a home; US family households with children under 18 average about 3.8. Best 4.0, range 3.3 to 4.7.",
+      "value": {
+        "low": 3.3,
+        "best": 4.0,
+        "high": 4.7
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "new_family_size_vs_us",
+      "section": "reach",
+      "label": "Habitat buyers' families relative to the average US household (people)",
+      "format": "multiple",
+      "formula": "new_household_size / @household_size.united_states",
+      "explainer": "For the per-person consumption below."
+    },
+    {
+      "id": "new_households",
+      "section": "reach",
+      "label": "Homes built or rehabilitated and sold to families, FY2025",
+      "format": "integer",
+      "value": {
+        "low": 3370,
+        "best": 3370,
+        "high": 4200
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Builder magazine, Builder 100 (2026): Habitat for Humanity International",
+        "url": "https://www.builderonline.com/?p=111661",
+        "quote": "Closings 2025 3,370 Revenue 2025 $607 M",
+        "retrieved": "2026-11-03",
+        "note": "Seen in the search listing of the page; the page itself and web.archive.org's copy refused our fetch (HTTP 403)."
+      },
+      "explainer": "Builder magazine's count of Habitat's US closings in calendar 2025, the same source as the price, so homes × price matches its $607 million of sales. The high end allows for rehabs not sold through a closing, Canada (in Habitat's people count) and the fiscal year running July to June."
+    },
+    {
+      "id": "rep_households",
+      "section": "reach",
+      "label": "Homes repaired in the US, FY2025",
+      "format": "integer",
+      "value": 12370,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity, FY2025 annual report: Individuals served",
+        "url": "https://www.habitat.org/multimedia/annual-report-2025/",
+        "retrieved": "2026-11-03",
+        "page": "Habitat helps repair homes throughout the U.S.",
+        "quote": "This past fiscal year, Habitat completed 12,370 repairs in the U.S., serving more than 24,740 people."
+      },
+      "explainer": "Critical repairs, accessibility and weatherisation work on low-income homeowners' houses by US affiliates in the year, as Habitat counts them (one repair per home)."
+    },
+    {
+      "id": "rep_people",
+      "section": "reach",
+      "label": "People living in the repaired homes",
+      "format": "integer",
+      "value": 24740,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity, FY2025 annual report: Individuals served",
+        "url": "https://www.habitat.org/multimedia/annual-report-2025/",
+        "retrieved": "2026-11-03",
+        "page": "Impact: Individuals served, United States and Canada",
+        "quote": "Repairs 24,740"
+      },
+      "explainer": "Habitat's count of the people in the repaired homes: exactly two per repair, a counting convention that matches the mostly older, small households repair programmes serve (below the US average of 2.4)."
+    },
+    {
+      "id": "households_reached",
+      "section": "reach",
+      "label": "Households served in the year (homes sold, homes repaired, disaster help)",
+      "format": "integer",
+      "formula": "new_households + rep_households + dis_households"
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "new_people + rep_people + dis_people"
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "People per household served (both branches)",
+      "format": "number",
+      "unit": "people",
+      "formula": "people_reached / households_reached",
+      "explainer": "For reading: the average over new homes (the site's US household size times Habitat buyers' larger families), repairs (Habitat's two per repair) and disaster help (the site's US household size)."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "HFHI's cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context only: HFHI pays for a minority of what the affiliates spend (attribution below), so this isn't the cost of a home."
+    },
+    {
+      "id": "dis_spend_share",
+      "section": "reach",
+      "label": "Share of the US programme spent on disaster recovery (Hurricanes Helene and Milton and others), FY2025",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "HFHI doesn't split its US spending by activity. FY2025 began just before Hurricane Helene (September 2024) and Milton (October 2024); HFHI reports over 53,000 early-recovery interventions in 30 states and over 500 long-term ones (Form 990, Schedule O), and its US affiliates line rose by $22.6 million over FY2024 ($162.1 million to $184.7 million, audited statement p. 6), much of it plausibly disaster appeals passed to affiliates. Best guess 10% of the line, range 4% (the rise is ordinary growth) to 20%."
+    },
+    {
+      "id": "dis_reach_share",
+      "section": "reach",
+      "label": "Share of the disaster spending that reaches households as help (materials, kits, labour)",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Disaster money mostly goes to affiliates and partners as grants for clean-up kits, roof tarps, muck-outs and repair materials; the rest is HFHI's staff and logistics. Anchored on the US programme's own mix: transfers and donated products are 65% of it (audited statement p. 7). 0.6, range 0.4 to 0.8."
+    },
+    {
+      "id": "dis_value_per_household",
+      "section": "reach",
+      "label": "Value of disaster help per household (US$)",
+      "format": "usd",
+      "value": {
+        "low": 300,
+        "best": 1000,
+        "high": 3000
+      },
+      "kind": "judgment",
+      "explainer": "Most of Habitat's 53,500 US disaster interventions in FY2025 were early recovery: clean-up kits, debris and mould removal, tarps on damaged roofs (a few hundred dollars of materials and a crew's day); the 500 long-term ones are repairs or rebuilds of $10,000 and more. Best $1,000 a household, range $300 to $3,000."
+    },
+    {
+      "id": "dis_households",
+      "section": "reach",
+      "label": "Households HFHI's disaster spending helped",
+      "format": "integer",
+      "formula": "program_spend * dis_spend_share * dis_reach_share / dis_value_per_household",
+      "explainer": "HFHI's own programme dollars only (a cost-based count, before overhead, as the reach share is a share of programme spending), fewer than the network's 53,500 interventions, which affiliates' own money and volunteers also paid for."
+    },
+    {
+      "id": "dis_people",
+      "section": "reach",
+      "label": "People in the households HFHI's disaster spending helped",
+      "format": "integer",
+      "formula": "dis_households * @household_size.united_states",
+      "explainer": "The site's US household size: disaster-hit households are a cross-section of their towns."
+    },
+    {
+      "id": "new_home_price",
+      "section": "effect",
+      "label": "Price of a Habitat home (what the buyer's mortgage covers)",
+      "format": "usd",
+      "value": {
+        "low": 130000,
+        "best": 180000,
+        "high": 230000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Builder magazine, Builder 100 (2026): Habitat for Humanity International",
+        "url": "https://www.builderonline.com/?p=111661",
+        "quote": "Closings 2025 3,370 Revenue 2025 $607 M",
+        "retrieved": "2026-11-03",
+        "note": "Seen in the search listing of the page; the page itself and web.archive.org's copy refused our fetch (HTTP 403)."
+      },
+      "explainer": "Builder magazine's 2025 figures for Habitat's US home sales, $607 million over 3,370 closings, are $180,000 a home. Affiliates record a sale at the home's appraised value (Houston Habitat: 'Homes are sold at the appraised value or fair market value'; Greater Sacramento: 'Sales price is determined by appraisal'), so this is the home's value. Low end: San Antonio's 'approximately $145,000' (KSAT, September 2026) and cheaper rural affiliates; high end: coastal affiliates."
+    },
+    {
+      "id": "new_repaid_share",
+      "section": "effect",
+      "label": "Share of the home's value the family's own mortgage repays",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Homes are sold at appraised value; the part the family doesn't repay is down-payment help and forgivable or deferred 'silent' second mortgages, forgiven over time if they stay. Houston Habitat's statements: down-payment assistance $587,915 on $7,420,311 of sales in 2025 (7.9%; 8.7% in 2024) plus forgivable mortgages, so the family repays about 86% to 91%; Greater Sacramento's FY2025 statements: the family's own first mortgage covers about half the appraised value, the rest silent seconds and the state's CalHome deferred loans. Costly markets lean to Sacramento's model, cheap ones to Houston's: best 0.75, range 0.5 to 0.95."
+    },
+    {
+      "id": "new_mortgage_rate",
+      "section": "effect",
+      "label": "Interest rate on the buyer's mortgage",
+      "format": "percent",
+      "value": {
+        "low": 0.0,
+        "best": 0.005,
+        "high": 0.04
+      },
+      "kind": "judgment",
+      "explainer": "Habitat's traditional mortgage carries no interest (Houston: 'zero-interest equivalent mortgages'; Sacramento: 'non-interest-bearing mortgage loans'); some affiliates now place buyers in bank or state housing-agency first mortgages at below-market rates instead. Best 0.5% on average, range 0 to 4%."
+    },
+    {
+      "id": "new_mortgage_years",
+      "section": "effect",
+      "label": "Mortgage term",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 20,
+        "best": 30,
+        "high": 30
+      },
+      "kind": "judgment",
+      "explainer": "Habitat mortgages run 20 to 30 years (terms vary by affiliate and the family's income); 30 is the most common for new homes."
+    },
+    {
+      "id": "new_market_mortgage_rate",
+      "section": "effect",
+      "label": "Market interest rate the buyers would pay on a mortgage (to price the loan)",
+      "format": "percent",
+      "value": {
+        "low": 0.055,
+        "best": 0.068,
+        "high": 0.085
+      },
+      "kind": "judgment",
+      "explainer": "What the interest-free loan is worth is the payments' value at the rate the family would otherwise pay for a 30-year mortgage. The 30-year fixed rate averaged about 6.6% to 6.9% over July 2024 to June 2025 (Freddie Mac's weekly survey), and low-income buyers with thin credit pay more; best 6.8%, range 5.5% to 8.5%. Affiliates' own accounting rates differ and are a convention, not a market price: Greater Sacramento discounted FY2025's loans at 8.02% (Note F, rates 'determined by Habitat for Humanity International'), Houston at 3.50% to 8.38%, San Diego at 1.50%."
+    },
+    {
+      "id": "new_pv_payments",
+      "section": "effect",
+      "label": "Present value of the buyer's mortgage payments",
+      "format": "usd",
+      "formula": "new_home_price * new_repaid_share * pv_annuity_due(1, new_market_mortgage_rate, new_mortgage_years) / pv_annuity_due(1, new_mortgage_rate, new_mortgage_years)",
+      "explainer": "Yearly payments that repay the family's mortgage at its own rate, valued at the market rate for such loans. A zero-interest loan repaid over 30 years is worth about 40% of its face value at 8%: the rest is a gift (Sacramento's FY2025 mortgage discount, $2.62 million on $4.43 million of homes transferred, is the same order)."
+    },
+    {
+      "id": "new_sweat_equity_hours",
+      "section": "effect",
+      "label": "Sweat-equity hours a buying family puts in",
+      "format": "number",
+      "unit": "hours",
+      "value": {
+        "low": 200,
+        "best": 300,
+        "high": 500
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Wilder Research (2015), Habitat for Humanity homeownership: survey of Minnesota homeowners",
+        "url": "https://www.tchabitat.org/hubfs/Impact_2020/Full%20Wilder%20Report.pdf",
+        "page": "Summary (report p. 1)",
+        "quote": "between 200 and 500 sweat equity hours to help build their homes",
+        "retrieved": "2026-11-03"
+      },
+      "explainer": "Buyers work on their own and others' homes and attend classes before closing, typically 200 to 500 hours (Wilder 2015 for Minnesota affiliates; most affiliates ask 200 to 300). Their own contribution, like their payments."
+    },
+    {
+      "id": "new_sweat_equity_value",
+      "section": "effect",
+      "label": "Value of the buyers' sweat equity (US$)",
+      "format": "usd",
+      "formula": "new_sweat_equity_hours * volunteer_hour_value * (new_second_fifth_weight * @united_states.ce_second_quintile_vs_all_2024 + (1 - new_second_fifth_weight) * @united_states.ce_lowest_quintile_vs_all_2024)",
+      "explainer": "The hours at the average US hourly earnings (the volunteer-time value) scaled to the buyers' household spending relative to the average: about $20 an hour."
+    },
+    {
+      "id": "new_subsidy_per_home",
+      "section": "effect",
+      "label": "Net subsidy a buying family receives (value of the home minus what they pay, present value)",
+      "format": "usd",
+      "formula": "new_home_price - new_pv_payments - new_sweat_equity_value",
+      "explainer": "What the family gets that it doesn't pay for, in money or work: the home's appraised value less the market value of its mortgage payments and the value of its sweat-equity hours. Their payments and hours are their own, so only this net subsidy counts as the benefit (and, in the attribution below, only the affiliates' net cost counts as a resource). Property taxes, insurance and upkeep they would pay as rent anyway. The benefit is then spread over the years in the home and discounted at the site's rate."
+    },
+    {
+      "id": "new_home_years",
+      "section": "effect",
+      "label": "Years the family lives in and benefits from the home",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 15,
+        "best": 30,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "The subsidy is spread over the years the family lives in the home, as cheaper or better housing. Habitat families mostly stay: Wilder Research's 2015 survey of Minnesota Habitat homeowners interviewed families who had bought from 1989 to 2014, and early resale triggers repayment of the forgiven second mortgage. The result barely moves with it: the yearly value is spread over the same years it is discounted over."
+    },
+    {
+      "id": "new_value_per_person_year",
+      "section": "effect",
+      "label": "Value of the subsidy per person per year (US$)",
+      "format": "usd",
+      "formula": "new_subsidy_per_home / pv_annuity_due(1, $discount_rate, new_home_years) / new_household_size",
+      "explainer": "The net subsidy as an even yearly flow over the years in the home (its present value equals the subsidy at the shared discount rate), per person."
+    },
+    {
+      "id": "new_consumption_share",
+      "section": "effect",
+      "label": "Habitat buyers' consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "(new_second_fifth_weight * @united_states.ce_second_quintile_vs_all_2024 + (1 - new_second_fifth_weight) * @united_states.ce_lowest_quintile_vs_all_2024) / new_family_size_vs_us",
+      "explainer": "Household spending of the income group Habitat sells to, relative to the average household (BLS Consumer Expenditures 2024: the poorest fifth 0.446, the second fifth 0.637), divided by Habitat buyers' larger households relative to the US average (2.4) to put it per person. About 0.36."
+    },
+    {
+      "id": "new_baseline_consumption",
+      "section": "effect",
+      "label": "Habitat buyers' consumption per person (US$)",
+      "format": "usd",
+      "formula": "consumption_mean * new_consumption_share"
+    },
+    {
+      "id": "new_ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person in a new home, discounted",
+      "format": "number",
+      "formula": "ln(1 + new_value_per_person_year / new_baseline_consumption) * pv_annuity_due(1, $discount_rate, new_home_years)",
+      "explainer": "The site's one log-income scale at the families' own consumption."
+    },
+    {
+      "id": "rep_subsidy_per_repair",
+      "section": "effect",
+      "label": "Net subsidy per repair (cost of the work less what the homeowner pays)",
+      "format": "usd",
+      "value": {
+        "low": 3500,
+        "best": 8000,
+        "high": 20000
+      },
+      "kind": "judgment",
+      "explainer": "No national average is published. Anchors: Rockford's Habitat programme about $7,000 a project (cap $15,000); Delaware's needs assessment $15,000 for a substandard home's repairs, organisations giving $3,000 to $20,000; Charlotte's critical repairs about $30,000 (2019). Homeowners pay part on a sliding scale or a small affordable loan, and Habitat's 12,370 'repairs' include small exterior and accessibility jobs, so the best guess net of homeowner payments is $8,000."
+    },
+    {
+      "id": "rep_years",
+      "section": "effect",
+      "label": "Years a repair keeps its value",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 7,
+        "best": 15,
+        "high": 25
+      },
+      "kind": "judgment",
+      "explainer": "Roofs, furnaces, ramps and plumbing last 10 to 25 years; many recipients are older and stay for part of that. The result barely moves with it (the value is spread over the same years it is discounted over)."
+    },
+    {
+      "id": "rep_household_size",
+      "section": "effect",
+      "label": "People per repaired home",
+      "format": "number",
+      "unit": "people",
+      "formula": "rep_people / rep_households",
+      "explainer": "Habitat's count, two per repair."
+    },
+    {
+      "id": "rep_value_per_person_year",
+      "section": "effect",
+      "label": "Value of a repair per person per year (US$)",
+      "format": "usd",
+      "formula": "rep_subsidy_per_repair / pv_annuity_due(1, $discount_rate, rep_years) / rep_household_size"
+    },
+    {
+      "id": "rep_consumption_share",
+      "section": "effect",
+      "label": "Repair recipients' consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "@united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / rep_household_size",
+      "explainer": "Repair programmes serve low-income owners, mostly older people, at or below 80% of area median income (Habitat Sarasota: half 'extremely low-income'): the poorest fifth's household spending (0.446 of the average, BLS 2024), put per person in a two-person household against the US average of 2.4. About 0.54."
+    },
+    {
+      "id": "rep_baseline_consumption",
+      "section": "effect",
+      "label": "Repair recipients' consumption per person (US$)",
+      "format": "usd",
+      "formula": "consumption_mean * rep_consumption_share"
+    },
+    {
+      "id": "rep_ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person in a repaired home, discounted",
+      "format": "number",
+      "formula": "ln(1 + rep_value_per_person_year / rep_baseline_consumption) * pv_annuity_due(1, $discount_rate, rep_years)"
+    },
+    {
+      "id": "dis_years",
+      "section": "effect",
+      "label": "Years disaster help keeps its value",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "A tarp or a mucked-out house lets a family stay or return until permanent repairs (a year or two); repaired roofs and walls last longer. Best 3. The result barely moves with it."
+    },
+    {
+      "id": "dis_consumption_share",
+      "section": "effect",
+      "label": "Disaster-hit households' consumption per person, as a share of the US average",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.67,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Per person, relative to the average, on the same relative scale as the other branches and the family's models (spending ratios from the survey, applied to the site's mean): the poorest fifth of US households spends about 0.67 of the average per person (BLS 2024: 0.446 of the average household's spending, for 1.6 people against 2.4), the second fifth about 0.73 (0.637 for 2.1 people). Habitat's disaster help goes to hard-hit, often rural and lower-income areas of the South-East (western North Carolina, Florida's Gulf coast), prioritising the uninsured and underinsured, with family households among them: 0.67, range 0.5 to 0.9."
+    },
+    {
+      "id": "dis_ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person helped after a disaster, discounted",
+      "format": "number",
+      "formula": "ln(1 + dis_value_per_household / pv_annuity_due(1, $discount_rate, dis_years) / @household_size.united_states / (consumption_mean * dis_consumption_share)) * pv_annuity_due(1, $discount_rate, dis_years)"
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per person per year beyond the money value (points, 0-10)",
+      "format": "number",
+      "unit": "points",
+      "formula": "0",
+      "explainer": "0: no controlled study measures Habitat homeowners' life satisfaction. The home's value to the family is counted once, as consumption (the net subsidy on the log-income scale); counting relief from housing stress on top would count the same change twice. Stability and children's schooling, for which there are only uncontrolled surveys (Wilder 2015), are in unmodelled_benefits_adj."
+    },
+    {
+      "id": "ls_effect_years",
+      "section": "effect",
+      "label": "Years the wellbeing effect lasts",
+      "format": "number",
+      "unit": "years",
+      "formula": "1",
+      "explainer": "Unused while the wellbeing gain is 0."
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person reached, discounted",
+      "format": "number",
+      "unit": "WELLBYs",
+      "formula": "ls_gain_per_person_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+      "explainer": "0 here (above)."
+    },
+    {
+      "id": "consumption_mean",
+      "section": "effect",
+      "label": "Average consumption per person in the US (US$)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The site's figure for the US , the base every rich-country model of the family reads (docs/normalization.md), scaled to each branch's households by the Bureau of Labor Statistics' spending ratios by income fifth, as the template does. Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending; the quintile ratios that scale it to the clients are the same survey's. A shared conversion, not thin data."
+    },
+    {
+      "id": "recipients_consumption_share",
+      "section": "effect",
+      "label": "Consumption per person of the people served, as a share of the average (both branches)",
+      "format": "percent",
+      "formula": "(new_people * new_consumption_share + rep_people * rep_consumption_share + dis_people * dis_consumption_share) / people_reached",
+      "explainer": "For reading: the people-weighted average of the three branches' shares, which each branch uses."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Consumption per person of the people served (US$, both branches)",
+      "format": "usd",
+      "formula": "consumption_mean * recipients_consumption_share",
+      "explainer": "For reading; each branch uses its own."
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, discounted (both branches)",
+      "format": "number",
+      "formula": "(new_people * new_ln_gain_per_person + rep_people * rep_ln_gain_per_person + dis_people * dis_ln_gain_per_person) / people_reached",
+      "explainer": "For reading: the people-weighted average of the three branches before their own adjustments."
+    },
+    {
+      "id": "value_per_person",
+      "section": "effect",
+      "label": "Value received per person in the year (US$, people-weighted over the branches, for reading only)",
+      "format": "usd",
+      "formula": "(new_people * new_value_per_person_year + rep_people * rep_value_per_person_year + dis_people * dis_value_per_household / pv_annuity_due(1, $discount_rate, dis_years) / @household_size.united_states) / people_reached",
+      "explainer": "For reading: each branch's yearly value per person, weighted by people."
+    },
+    {
+      "id": "income_years",
+      "section": "effect",
+      "label": "Years the help keeps its money value (people-weighted over the branches, for reading only)",
+      "format": "number",
+      "unit": "years",
+      "formula": "(new_people * new_home_years + rep_people * rep_years + dis_people * dis_years) / people_reached"
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "unit": "DALYs",
+      "formula": "0",
+      "explainer": "0 in the chain: Wilder Research's survey of Habitat homeowners found 'no strong relationship' between Habitat homeownership and health, and no study measures health after Habitat repairs. Falls prevented by accessibility repairs for older owners (home-modification trials find fewer falls among people at high risk) are a small positive share of unmodelled_benefits_adj."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "0: no evidence that Habitat homes or repairs change death rates."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "No deaths are counted (deaths_averted_per_person is 0), so the age split has no effect; set to the share of under-fives among the people served if deaths were counted (children in buying families, none in most repaired homes)."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "No deaths are counted, so this has no effect; set low because deaths at 5 to 14 are rare in the US."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "No deaths are counted, so this has no effect; most hypothetical deaths would be of the older repair clients."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights by the age band of each death, times your value of a life: the site's one value of a death (unused while no deaths are counted)."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment",
+      "format": "multiple",
+      "explainer": "1: the effect is an accounting of what each family gets (the subsidy), not an estimated effect size, so there is no study's effect to discount; what a housing dollar is worth against cash is in cash_equivalent_share, and the lack of any measured outcome in the missing-data step.",
+      "formula": "1"
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(hr_uov_raw * hr_counterfactual_adj + dis_uov_raw * dis_counterfactual_adj) / (hr_uov_raw + dis_uov_raw)",
+      "explainer": "The outcome-weighted average of the branch adjustments, for reading only; each branch applies its own."
+    },
+    {
+      "id": "hr_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Homes and repairs: share that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Without Habitat, most of these families would keep renting at market rents: the Center on Budget and Policy Priorities finds about three in four low-income renter households eligible for federal rental assistance get none (cbpp.org, 'Three Out of Four Low-Income At-Risk Renters Do Not Receive Federal Rental Assistance'), and few other programmes sell homes this far below their value. Some would have bought later with other down-payment help, and some repair clients would have got weatherisation or USDA repair grants. The same share for both, for want of separate evidence."
+    },
+    {
+      "id": "dis_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Disaster help: share that wouldn't have come anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "After Helene and Milton, FEMA, insurers, churches and other charities (the SBP, Samaritan's Purse, Team Rubicon) also cleaned and repaired homes; some households Habitat helped would have been reached by them, or done it themselves. 0.6."
+    },
+    {
+      "id": "hfhi_transfers_us",
+      "section": "adjustments",
+      "label": "HFHI's grants and donated products passed to US affiliates, FY2025",
+      "format": "usd",
+      "value": 120758000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-03",
+        "page": "p. 7, Consolidated statements of functional expenses, U.S. Affiliates column",
+        "quote": "Program and house building transfers 88,472 ... Donated products and advertising distributed 32,286"
+      },
+      "explainer": "$88.5 million of cash transfers and $32.3 million of donated products: the part of HFHI's spending that shows up again in the affiliates' own costs, so it is taken out of the affiliates' resources below to avoid counting it twice. The line is headed 'donated products and advertising', but the donated media services ($1.9 million, note on contributed nonfinancial assets) match the public awareness column's figure exactly, so the US figure is products (construction materials, cars sold for homes, ReStore goods). Some donated products go to ReStores to be sold rather than into homes; they are left in, a small understatement of the network's resources behind homes (about 0.5% of the result)."
+    },
+    {
+      "id": "affiliate_cost_ratio",
+      "section": "adjustments",
+      "label": "Affiliates' full cost of a home or repair, relative to its sale price or subsidy",
+      "format": "multiple",
+      "value": {
+        "low": 1.5,
+        "best": 2.1,
+        "high": 3.2
+      },
+      "kind": "judgment",
+      "explainer": "What it costs an affiliate, all in, to deliver a home sold at $1 of appraised price: land, construction, infrastructure, staff, family services, fundraising and administration. From three affiliates' audited statements, cash costs net of non-cash mortgage discounts, ReStore, tithes and repair or disaster programmes, over home sales: Houston Habitat about 2.4 (2024), 2.0 (2023) and 2.4 (2025: $14.95 million of housing programme costs less $0.49 million of mortgage discounts, $0.40 million of disaster repairs and $0.34 million of tithes, plus its share of management and fundraising, over $7.42 million of sales of 32 homes); Greater Sacramento about 1.93 (FY2025) and 1.23 (FY2024); San Diego Habitat 2.65 in FY2024 before its ReStore costs ($12.48 million of expenses less an $0.81 million mortgage discount subsidy over $4.40 million of home sales), about 2.2 after them (its three ReStores' costs sit inside programme expenses; their net retail income was $1.86 million), and far higher in FY2023, a one-home year ($5.75 million over $0.52 million), so about 2.7 over the two years after ReStore costs. Over the three affiliates' seven years: weighted by home sales 2.04 ($76.8 million of cost over $37.6 million of sales), each affiliate weighted equally 2.16, the median affiliate-year 2.2. Greater New Haven's 2024 statements can't be used: it sells 'below cost and market value'. All three are large urban affiliates; rural ones (not in the sample) probably build cheaper but at smaller scale. A top-down check: Habitat's US network sold $607 million of homes in 2025 (Builder magazine), so 2.1 times that is about $1.3 billion of home-building cost, within the network's reported $3.1 billion of revenue worldwide alongside ReStores, repairs and the international work (a check of scale, not of the exact ratio). Best 2.1, between the sales-weighted and equal-weighted figures, range 1.5 to 3.2. HFHI's own total-to-programme ratio, 1.33, is a floor. Used for homes only; repairs have their own ratio.",
+      "source": {
+        "title": "Houston Habitat for Humanity, audited consolidated financial statements, year ended December 31, 2025",
+        "url": "https://www.houstonhabitat.org/wp-content/uploads/sites/2/2026/06/Houston-Habitat-2025-FS-with-Supplementary-Information.pdf",
+        "retrieved": "2026-11-04",
+        "page": "Consolidated statements of activities and functional expenses, 2025; note on revenue recognition",
+        "quote": "During the years ended December 31, 2025 and 2024, 32 and 23 homes were",
+        "note": "Home and lot sales $7,420,311; low-cost housing programme $14,952,656; total expenses $20,562,597 (2025). Earlier years: Houston 2024 statements (https://www.houstonhabitat.org/wp-content/uploads/sites/2/2025/09/Houston-Habitat-for-Humanity-2024-FS-with-graphs.pdf) and Greater Sacramento FY2025 audit (https://habitatgreatersac.org/wp-content/uploads/HfHGS-2025-Audit-Report.pdf). San Diego Habitat for Humanity, consolidated financial statements, year ended June 30, 2024 (https://sandiegohabitat.s3.us-west-1.amazonaws.com/wp-content/uploads/2025/08/28125657/FY24-Audited-Financial-Statements.pdf, retrieved 2026-11-04): 'Sales of homes 4,402,502'; 'Mortgage discount subsidy 807,225'; 'Total expenses 12,484,483'. FY2023 from the same document's comparative statements: 'Sales of homes 516,250'; 'Total expenses 5,752,305'."
+      }
+    },
+    {
+      "id": "rep_cost_ratio",
+      "section": "adjustments",
+      "label": "Affiliates' full cost of a repair, relative to the cost of the work",
+      "format": "multiple",
+      "value": {
+        "low": 1.15,
+        "best": 1.35,
+        "high": 1.6
+      },
+      "kind": "judgment",
+      "explainer": "The repair subsidy is already the cost of the work (Rockford about $7,000 a project), so only the affiliates' staff, family services, management and fundraising come on top, not the homes' building above appraised value. Houston 2025: housing staff, management and fundraising ($2.38 million, $2.45 million and $1.82 million, the last two in part) against $9.36 million of direct home costs, about 1.3 to 1.4; Sacramento similar. 1.35, range 1.15 to 1.6."
+    },
+    {
+      "id": "new_network_cost_per_home",
+      "section": "adjustments",
+      "label": "Affiliates' net cost of a home (full cost less the present value of the buyer's payments)",
+      "format": "usd",
+      "formula": "new_home_price * affiliate_cost_ratio - new_pv_payments",
+      "explainer": "The resources behind a home other than the family's own: only the net subsidy, since the buyer's payments are the buyer's money."
+    },
+    {
+      "id": "network_volunteers",
+      "section": "adjustments",
+      "label": "Volunteers across the Habitat network, FY2025",
+      "format": "integer",
+      "value": 828000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, Form 990 for the fiscal year ended June 30, 2025, Schedule O",
+        "url": "https://www.habitat.org/media/36761/view",
+        "retrieved": "2026-11-03",
+        "page": "Schedule O, Part III",
+        "quote": "THE NUMBER OF VOLUNTEERS REPORTED BY ALL HABITAT FOR HUMANITY INTERNATIONAL, INC. (HFHI) ENTITIES IN FY25 WAS 828,000."
+      },
+      "explainer": "Everyone who volunteered with HFHI or an affiliate in the year, worldwide. Their time isn't in any financial statement (the audited statements say so), so it is added as a resource here."
+    },
+    {
+      "id": "us_volunteer_share",
+      "section": "adjustments",
+      "label": "Share of the volunteers who worked with US affiliates",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "No split of Habitat's volunteers by country or activity is published. Most Habitat volunteering is on US build and repair sites (corporate, church and student build days); Global Village trips and national organisations' volunteers abroad are a minority, and a share of US volunteers work in the 863 ReStores, which sell donated goods to fund the affiliates and are not part of the homes' resources (like the donated goods themselves). 0.5 of the network's volunteers on US homes and repairs, range 0.3 to 0.75."
+    },
+    {
+      "id": "hours_per_volunteer",
+      "section": "adjustments",
+      "label": "Hours given per volunteer in the year",
+      "format": "number",
+      "unit": "hours",
+      "value": {
+        "low": 4,
+        "best": 8,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "No network figure is published. Most Habitat volunteers give one build day (6 to 8 hours); a minority are regulars who give hundreds. Best 8 hours on average, range 4 to 20. Cross-check: 828,000 × 0.5 × 8 is about 800 hours per home or home-equivalent, against Houston Habitat's 'approximately 25,000 hours' for 23 homes in 2024 (about 1,090)."
+    },
+    {
+      "id": "volunteer_hour_value",
+      "section": "adjustments",
+      "label": "Value of a volunteer hour in the US, 2024",
+      "format": "usd",
+      "explainer": "The site's US value of a volunteer hour for 2024 (@united_states.volunteer_hour_value_2024: the average hourly earnings of US private-sector workers plus benefits), the convention for valuing volunteers' unpaid hours at the local wage (Convention 2). Most of FY2025 falls in 2024.",
+      "formula": "@united_states.volunteer_hour_value_2024"
+    },
+    {
+      "id": "us_volunteer_value",
+      "section": "adjustments",
+      "label": "Value of volunteers' time with US affiliates",
+      "format": "usd",
+      "formula": "network_volunteers * us_volunteer_share * hours_per_volunteer * volunteer_hour_value"
+    },
+    {
+      "id": "us_network_resources",
+      "section": "adjustments",
+      "label": "All resources behind the year's US homes and repairs",
+      "format": "usd",
+      "formula": "new_households * new_network_cost_per_home + rep_households * rep_subsidy_per_repair * rep_cost_ratio + us_volunteer_value - hfhi_transfers_us * (1 - dis_spend_share) + cost_total * (1 - dis_spend_share)",
+      "explainer": "The affiliates' net cost of the homes and repairs (their own money, government grants and HFHI's transfers, less the buyers' payments), plus volunteers' time, less HFHI's transfers already inside the affiliates' costs, plus HFHI's own cost of the programme with its overhead; HFHI's disaster spending is left out on both sides (it is its own branch)."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "HFHI's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(hr_uov_raw * hr_attribution_share + dis_uov_raw * dis_attribution_share) / (hr_uov_raw + dis_uov_raw)",
+      "explainer": "The outcome-weighted average of the branch shares, for reading only; each branch applies its own."
+    },
+    {
+      "id": "hr_attribution_share",
+      "section": "adjustments",
+      "label": "Homes and repairs: HFHI's share of the resources behind them",
+      "format": "percent",
+      "formula": "cost_total * (1 - dis_spend_share) / us_network_resources",
+      "explainer": "HFHI's cost of the homes-and-repairs work over all the resources behind the year's homes and repairs. The affiliates raise most of their money themselves (Habitat reported 'an estimated US$3.1 billion in total revenue' across its federated network, in its FY2025 annual report release; combined and unaudited), so HFHI's dollar buys a small share of what they deliver."
+    },
+    {
+      "id": "dis_attribution_share",
+      "section": "adjustments",
+      "label": "Disaster help: HFHI's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The disaster branch counts only the help HFHI's own dollars pay for (households = HFHI's disaster cost × share reaching households ÷ value per household), so affiliates' money isn't in it; volunteers' clean-up labour on the same homes is, which lowers HFHI's share. 0.8, range 0.5 (labour-heavy muck-outs) to 1."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared. Each branch applies its own."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (help delivered as reported, and kept)",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Habitat's counts are its own administrative totals from about 984 affiliates, not independently checked; homes are closings, hard to miscount, while 'repairs' mixes large and small jobs (the subsidy per repair allows for that). Some buyers default or sell early and repay the forgiven second mortgage, losing part of the subsidy (Habitat publishes no national foreclosure rate; a few percent over the years in the home). 0.9, range 0.8 to 1."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1,
+        "high": 1.1
+      },
+      "kind": "judgment",
+      "explainer": "1: money that passes through HFHI and would reach affiliates anyway is already handled by crediting HFHI only its share of all the resources. The range allows for leverage (HFHI's national grants and Habitat Capital's loans, including its $82.5 million property acquisition fund, help affiliates draw local and state money; high end) and for HFHI's fundraising crowding out affiliates' own (low end)."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * implementation_adj * leverage_funging_adj",
+      "explainer": "The adjustments common to every branch; each branch's counterfactual, attribution and missing-data step are applied in uov_bridged."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.08,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Not modelled, as a share of the modelled value: (+) children's stability and schooling (Wilder 2015: families report better grades and less moving, uncontrolled), +5%; (+) falls averted by accessibility repairs for older owners (home-safety modifications cut falls among older people at high risk: Gillespie et al. 2012, Cochrane review, rate ratio 0.81), +3%; (−) families who default or sell early lose part of the subsidy (in implementation_adj already, so not here). HFHI's US advocacy is no longer here: it is modelled with the public awareness and education programme (habitat-for-humanity-charityevals-awareness). The high end allows for larger child effects."
+    },
+    {
+      "id": "cash_equivalent_share",
+      "section": "effect",
+      "label": "What a housing dollar is worth to the family against a cash dollar",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "One question: how much a dollar of subsidised housing is worth to the family against a dollar of cash. A home is an in-kind, illiquid transfer of a fixed size, often more housing than the family would have bought with the cash; studies of US housing assistance summarised by Olsen (2003, 'Housing programs for low-income households', in Moffitt ed., Means-Tested Transfer Programs in the United States) find recipients value subsidised housing at less than its cost, though Habitat buyers chose to buy, which narrows the gap. 0.8, range 0.6 to 0.95. Defaults and early sales are in implementation_adj. Applied to every branch's value in hr_uov_raw and dis_uov_raw."
+    },
+    {
+      "id": "hr_uov_raw",
+      "section": "adjustments",
+      "label": "Homes and repairs: units of value before adjustments",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "(new_people * new_ln_gain_per_person + rep_people * rep_ln_gain_per_person) * cash_equivalent_share * $uov_per_ln_consumption",
+      "explainer": "For the branch weights and the bridge below."
+    },
+    {
+      "id": "dis_uov_raw",
+      "section": "adjustments",
+      "label": "Disaster help: units of value before adjustments",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "dis_people * dis_ln_gain_per_person * cash_equivalent_share * $uov_per_ln_consumption"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in GiveWell units of value (after each branch's counterfactual and attribution)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "hr_uov_raw * hr_counterfactual_adj * hr_attribution_share * hr_missing_data_adj + dis_uov_raw * dis_counterfactual_adj * dis_attribution_share * dis_missing_data_adj + people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "Each branch's income gain times its own counterfactual, attribution and missing-data step (Convention 4); the common adjustments follow in outcome_total. Deaths are 0."
+    },
+    {
+      "id": "hr_missing_data_adj",
+      "section": "adjustments",
+      "label": "Homes and repairs: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): Habitat counts its closings and repairs, but the value each family gets rests on judgments (the share of the home's value the family repays, the subsidy per repair, the affiliates' cost) and on research about housing assistance in general, not on a controlled evaluation of Habitat's homes or repairs. So the branch takes the shared missing-data discount."
+    },
+    {
+      "id": "dis_missing_data_adj",
+      "section": "adjustments",
+      "label": "Disaster help: counted less where the outcome isn't measured for Habitat",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the households reached are HFHI's spending over a judged value per household (Habitat reports 53,000 interventions, not what HFHI's own money paid for), and the value is a judgment, with no evaluation of the help. The shared missing-data discount."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(hr_uov_raw * hr_missing_data_adj + dis_uov_raw * dis_missing_data_adj) / (hr_uov_raw + dis_uov_raw)",
+      "explainer": "The outcome-weighted average of the branches' missing-data steps, for reading only; each branch applies its own in uov_bridged. Both are thin, so this is the shared discount."
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in healthy years",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "unit": "WELLBYs",
+      "formula": "people_reached * wellbys_per_person"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "people_reached * dalys_averted_per_person"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "unit": "DALYs / $",
+      "formula": "outcome_total / cost_total"
+    },
+    {
+      "id": "staff_pay_total",
+      "section": "donor",
+      "label": "HFHI's salaries and benefits, FY2025",
+      "format": "usd",
+      "value": 120366000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-03",
+        "page": "p. 7, Consolidated statements of functional expenses, Total column",
+        "quote": "Salaries and benefits ... 120,366"
+      },
+      "explainer": "All of HFHI's staff pay in the year, programmes and overhead together, from the audited statement."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of HFHI's cost",
+      "format": "percent",
+      "formula": "staff_pay_total / total_expenses",
+      "explainer": "HFHI's own salaries over its total expenses (32%), its own figure in place of the shared default. Affiliates' staff are their own and are inside the attribution above."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared gap for delivery and support staff hired in their own labour market (@staff_pay.gap_local_delivery, 10%): HFHI's staff are mostly in Atlanta and Americus, Georgia, in programme, finance and communications jobs with ordinary market alternatives."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "unit": "Years of healthy life / $",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "explainer": "The modelled programme's result per dollar, times the share of its full cost paid by cash donations."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

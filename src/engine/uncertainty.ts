@@ -10,7 +10,7 @@
 // high on the rankings use published ranges alone.
 
 import { evaluate, refs, type Node, type Scope } from "./expr";
-import { AGE_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, readerValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, refValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
 import { rowsFeeding } from "./sensitivity";
 
 /** Where a number comes from, for grouping: your shared assumptions, the evaluator's judgment calls,
@@ -153,7 +153,9 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   for (const id of feeding) m.byId.get(id)?.modelDeps.forEach((x) => refModels.add(x));
   if (refModels.size) for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((x) => assumptionIds.add(x));
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads.
-  if (view === "evaluator") assumptionIds.delete(AGE_DISCOUNT);
+  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY].forEach((x) => assumptionIds.delete(x));
+  // Nor for missing data, unless the model's own rows read the slider (charityevals' builds have no evaluator view).
+  if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) assumptionIds.delete(MISSING_DATA_DISCOUNT);
   for (const id of assumptionIds) {
     const row = lib.assumptions.rows.find((r) => r.id === id);
     if (!row || row.format === "toggle" || !hasRange(row.value)) continue;
@@ -222,8 +224,10 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   // A referenced model's result's derivative with respect to each shared assumption it reads, at the
   // reader's values (`#id` is always our view), by nudging the assumption 1%.
   const modelDerivs = new Map<string, { name: string; d: number }[]>();
-  // The values compute read the model at (readerValues: the evaluator view reads it undiscounted for age).
-  const rv = readerValues(av, view);
+  // The values compute read the model at (refValues: the evaluator view reads it undiscounted for age, and a
+  // model read as a stand-in for this one's work is read without its distance weight and missing-data
+  // step, so neither slider moves it).
+  const rv = refValues(m, av, view);
   const modelEdges = (ref: string) => {
     let es = modelDerivs.get(ref);
     if (es) return es;
@@ -233,6 +237,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
       for (const key of leaves.keys()) {
         if (!key.startsWith("assumption:")) continue;
         const name = key.slice("assumption:".length);
+        if ((name === DISTANCE_DISCOUNT || name === MISSING_DATA_DISCOUNT) && m.beneficiaries !== "destinations") continue;
         const v = rv[name];
         if (!Number.isFinite(v)) continue;
         const leaf = leaves.get(key)!;

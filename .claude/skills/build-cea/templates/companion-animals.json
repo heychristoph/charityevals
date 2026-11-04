@@ -1,0 +1,450 @@
+{
+  "id": "template-companion-animals",
+  "name": "Template: companion animals",
+  "kind": "template",
+  "cause": "animal-welfare",
+  "template": "companion-animals",
+  "estimate_basis": "unit_cost",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does, where, the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\").",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: companion animals",
+    "url": "https://charityevals.org/template-companion-animals",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for every animal model. The shared SAD figures are Ambitious Impact's, which count each species' pain as a share of a person's with its own species weights. Here those weights come out and Rethink Priorities' go in, so every species is counted in days of a chicken's disabling pain. How a chicken compares with a person is the one animal slider."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "animals_helped",
+      "section": "reach",
+      "label": "Animals rehomed, rescued or treated in the year modelled",
+      "format": "integer",
+      "value": 10000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity annual report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: dogs and cats whose lives the care changes in the year the spending covers: rehomed, taken in from cruelty or the street, treated. Unique animals, from the charity's annual report."
+    },
+    {
+      "id": "suffering_share_avoided",
+      "section": "effect",
+      "label": "Suffering averted per day of the animal's better life, in days of disabling pain",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.04,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much less the animal suffers each day after the care than it would have (on the street, in a cruel home, untreated), in disabling-pain-equivalent days per day: Ambitious Impact's pain scale (disabling 1, hurtful about 0.1, annoying about 0.01 of a day of disabling pain) applied to the hours of each pain the care removes, anchored on veterinary welfare assessments. Name the anchor. A death the care averts or causes counts only through the days of suffering, as in every animal model."
+    },
+    {
+      "id": "years_better_life",
+      "section": "effect",
+      "label": "Years the animal's better life lasts",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 4,
+        "high": 8
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: veterinary cohort study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the animal's remaining years under the better conditions: remaining life expectancy at the age helped (dogs about 12 years in all, cats about 14; veterinary cohort studies), times the share that stays in the home."
+    },
+    {
+      "id": "pain_days_per_animal",
+      "section": "effect",
+      "label": "Days of disabling pain spared per animal helped, discounted",
+      "format": "number",
+      "formula": "suffering_share_avoided * 365 * pv_annuity_due(1, $discount_rate, years_better_life)",
+      "unit": "days",
+      "explainer": "Every future year discounted at the shared rate."
+    },
+    {
+      "id": "neuters",
+      "section": "reach",
+      "label": "Neuterings of owned or free-roaming animals in the year",
+      "format": "integer",
+      "value": 5000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity annual report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: neuterings the charity paid for or performed in the year; 0, with the reason, without a neutering programme."
+    },
+    {
+      "id": "births_averted_per_neuter",
+      "section": "effect",
+      "label": "Unowned animals' births averted per neutering",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 2,
+        "high": 5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: population model study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: litters averted over the animal's breeding years × kittens or puppies per litter × the share that would be born unowned, net of population rebound (free-roaming population models). 0 for animals that would not have bred."
+    },
+    {
+      "id": "pain_days_per_unowned_life",
+      "section": "effect",
+      "label": "Days of disabling pain in the life of an unowned animal that isn't born",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 40,
+        "high": 120
+      },
+      "kind": "judgment",
+      "unit": "days",
+      "explainer": "TEMPLATE: suffering in a typical unowned dog's or cat's life (disease, injury, starvation, early death), on the same pain scale, net of its good days only where the evidence measures them; anchored on free-roaming welfare studies. Name the anchor."
+    },
+    {
+      "id": "neuter_pain_days",
+      "section": "effect",
+      "label": "Days of pain spared by neutering (before adjustments)",
+      "format": "number",
+      "formula": "neuters * births_averted_per_neuter * pain_days_per_unowned_life * (1 + $discount_rate) ^ -1",
+      "unit": "days",
+      "explainer": "The births come about a year later, discounted at the shared rate."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the animals that would not have found a home or care anyway (other shelters, owners, councils): from local intake and rehoming rates. Name the source."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Days of disabling pain spared",
+      "format": "number",
+      "formula": "(animals_helped * pain_days_per_animal + neuter_pain_days) * total_adj",
+      "unit": "days"
+    },
+    {
+      "id": "pain_days_per_dollar",
+      "section": "outcome",
+      "label": "Days of pain spared per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "days / $"
+    },
+    {
+      "id": "share_dog",
+      "section": "species",
+      "label": "Share of the days spared that are dogs'",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: charity annual report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: dogs' share of the animals helped, weighted by days spared, from the charity's intake figures; the rest are cats."
+    },
+    {
+      "id": "share_cat",
+      "section": "species",
+      "label": "Share of the days spared that are cats'",
+      "format": "percent",
+      "formula": "1 - share_dog"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_staff_delivered",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_staff_delivered; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_health_field); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "pain_days_per_donor_dollar",
+      "section": "donor",
+      "label": "Days of pain spared per dollar you give",
+      "format": "small",
+      "formula": "pain_days_per_dollar * donor_cost_share",
+      "unit": "Days of pain spared / $"
+    },
+    {
+      "id": "pain_days_dog",
+      "section": "species",
+      "label": "Days of pain spared per dollar you give: dogs",
+      "format": "number",
+      "formula": "pain_days_per_donor_dollar * share_dog"
+    },
+    {
+      "id": "ced_dog",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: dogs",
+      "format": "number",
+      "formula": "pain_days_dog * @welfare_ranges.dog_vs_chicken",
+      "explainer": "Rethink Priorities' welfare range for the species relative to a chicken (@welfare_ranges.dog_vs_chicken). The formula is the standard one; don't edit it."
+    },
+    {
+      "id": "pain_days_cat",
+      "section": "species",
+      "label": "Days of pain spared per dollar you give: cats",
+      "format": "number",
+      "formula": "pain_days_per_donor_dollar * share_cat"
+    },
+    {
+      "id": "ced_cat",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: cats",
+      "format": "number",
+      "formula": "pain_days_cat * @welfare_ranges.cat_vs_chicken",
+      "explainer": "Rethink Priorities' welfare range for the species relative to a chicken (@welfare_ranges.cat_vs_chicken). The formula is the standard one; don't edit it."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "small",
+      "formula": "ced_dog + ced_cat",
+      "unit": "chicken pain days / $",
+      "explainer": "Every species, already in chicken pain days."
+    }
+  ],
+  "output": {
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "pain_days_per_dollar",
+      "unit": "pain days"
+    },
+    "species": [
+      "dog",
+      "cat"
+    ]
+  }
+}

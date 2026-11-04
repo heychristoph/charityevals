@@ -1,0 +1,961 @@
+{
+  "id": "american-red-cross-charityevals-international",
+  "name": "American Red Cross: international disaster relief (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"LBN":0.16,"UKR":0.16,"MOZ":0.51,"BGD":0.07,"MMR":0.09,"BRA":0.01},
+  "beneficiaries_note": "Our build: disaster-response grants to Red Cross and Red Crescent societies, weighted by region from the Form 990's Schedule F (Middle East 45%, Europe 25%, Sub-Saharan Africa 15%, South Asia 7%, East Asia 5%, the Americas 3.5%), each region valued at a stand-in country (Lebanon, Ukraine, Mozambique, Bangladesh, Myanmar, Brazil): shares of the result at the defaults (the poorest, Mozambique, 51%).",
+  "template": "humanitarian-relief",
+  "estimate_basis": "unit_cost",
+  "charity": "american-red-cross",
+  "owner": "charityevals",
+  "summary": "The American Red Cross's international services ($48.8 million in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) fund other Red Cross and Red Crescent societies' disaster responses, preparedness and the Measles & Rubella Partnership. By its Form 990's list of grants abroad, the response money went first to the Middle East (Lebanon, Gaza, Syria: 45%) and Europe (Ukraine: 25%), then Africa, South and East Asia and the Americas; a third of the non-measles grants were for preparedness. This model covers the relief and preparedness, about nine-tenths of the spending (the measles visits have a model of their own): the relief's value to the people reached on the site's one log-income scale, a few disaster deaths averted and preparedness as a share of that, built from the research on cash and relief in crises, in years of healthy life per $1,000. The Red Cross publishes no count of people its grants reached, so reach and the counterfactual are wide judgments, the result is mostly uncertainty and the whole model is discounted for missing data. It is far below the site's global-health median because relief goods and cash are valued at cost on the log scale, mostly in middle-income countries, with no large mortality effect.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: American Red Cross International Relief and Development Services (FY2025)",
+    "url": "https://charityevals.org/american-red-cross-charityevals-international",
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+      "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
+      "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "intl_spend",
+      "section": "cost",
+      "label": "International Relief and Development Services expenses, FY2025",
+      "format": "usd",
+      "value": 48839000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "International Relief and Development Services 48,839 — 48,839 82,217"
+      },
+      "explainer": "Grants to sister Red Cross and Red Crescent societies and the IFRC for disaster response and preparedness, the Measles & Rubella Partnership, humanitarian law and family tracing."
+    },
+    {
+      "id": "msl_spend_share",
+      "section": "cost",
+      "label": "Share of international spending on the Measles & Rubella Partnership",
+      "format": "percent",
+      "explainer": "The shared split (facts/american_red_cross.json), read by both the relief and the measles model so the two always add up to the programme.",
+      "formula": "@american_red_cross.msl_spend_share"
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on international disaster relief, FY2025",
+      "format": "usd",
+      "explainer": "International services less the measles partnership's estimated share. Grants count as the activities they fund; preparedness, family-tracing and humanitarian-law work stay here (unmodelled benefits).",
+      "formula": "intl_spend * (1 - msl_spend_share)"
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total operating expenses, FY2025",
+      "format": "usd",
+      "value": 3333107000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Total operating expenses 3,333,107 — 3,333,107 3,571,538"
+      },
+      "explainer": "All programmes plus fundraising and management."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Total program services expenses, FY2025",
+      "format": "usd",
+      "value": 3032359000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Total program services 3,032,359 — 3,032,359 3,260,239"
+      },
+      "explainer": "All six programmes, same statement."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "intl_assistance",
+      "section": "reach",
+      "label": "Financial and material assistance, international, FY2025",
+      "format": "usd",
+      "value": 27457000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (in thousands; International column)",
+        "quote": "Financial and material assistance 14,629 2,321 2,905 264,677 1,063 27,457 313,052"
+      },
+      "explainer": "Grants and goods passed to Movement partners (relief, measles mobilisation, preparedness); the measles share is taken out below. Schedule F lists $21.6 million of grants abroad over $5,000 (disaster response, preparedness, measles); the rest of the line is material assistance and smaller grants. The rest of the programme's cost is staff and contracts that support them."
+    },
+    {
+      "id": "intl_relief_share",
+      "section": "reach",
+      "label": "Share of the non-measles grants abroad for disaster response (applied to the relief programme's assistance line)",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.639,
+        "high": 0.7
+      },
+      "kind": "observed",
+      "explainer": "Of the grants abroad other than measles, the share for disaster response: the rest, a third, is disaster preparedness (early warning, anticipatory cash, risk reduction), valued in unmodelled benefits.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response 12,759,181 and disaster preparedness 7,220,510 of the non-measles grants (19,979,691): 0.639",
+        "note": "Disaster response 12,759,181; disaster preparedness 7,220,510; 12,759,181 / 19,979,691 = 0.639 of the grants abroad other than measles."
+      }
+    },
+    {
+      "id": "intl_value_share",
+      "section": "reach",
+      "label": "Share of the relief grants that reaches people as goods or cash",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "estimate",
+      "explainer": "Share of the relief grants that reaches people as goods, cash, shelter or services. The IFRC appeals the Red Cross funded that year spent most on the sectors that reach people: Myanmar earthquake 80% (41% as cash), Typhoon Yagi 78%, Bangladesh flash floods 68%, Cyclone Remal 97% (final and one-year reports, MDRMM023, MDRMM021, MDRBD036, MDRBD035); the Brazil floods appeal planned 52%, with 29% for strengthening the national society. Weighted by the Red Cross's contributions about 0.73 of what was spent, and the sector lines still carry their own staff and logistics: about 0.65, from 0.45 to 0.8.",
+      "source": {
+        "title": "IFRC, Myanmar earthquake emergency appeal MDRMM023, one-year report (operating budget implementation)",
+        "url": "https://go-api.ifrc.org/api/DownloadFile/91014/MDRMM023_One-Year-Report",
+        "retrieved": "2026-11-04",
+        "page": "IFRC Operating Budget Implementation",
+        "quote": "planned operations 9,870,911 of 12,363,366 spent (multi-purpose cash 5,115,459; shelter and household items 3,654,441)"
+      }
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached by the relief the Red Cross funded (estimated)",
+      "format": "integer",
+      "explainer": "The relief money that reaches people, divided by what each gets: about 150,000 people at the best guesses. A wide estimate, since neither number is published.",
+      "formula": "intl_assistance * (1 - msl_spend_share) * intl_relief_share * intl_value_share / value_delivered_per_person"
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: the relief programme's full cost per person reached, including preparedness work."
+    },
+    {
+      "id": "crisis_mortality_rate",
+      "section": "effect",
+      "label": "Death rate among the people reached in the months after the disaster, without the response",
+      "format": "small",
+      "value": {
+        "low": 0.008,
+        "best": 0.012,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "unit": "deaths / person-year",
+      "explainer": "Most of the response money went to conflicts (Lebanon, Gaza and Syria, Ukraine) and sudden-onset disasters in middle-income countries, where death rates after the first days rise only modestly above normal for the people reached by cash and relief items; Gaza is far above the emergency threshold of 1 per 10,000 a day (0.0365 a year), the high end. About 0.012, from 0.008 to 0.03."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Death rate in the same population before the disaster",
+      "format": "small",
+      "value": {
+        "low": 0.006,
+        "best": 0.0075,
+        "high": 0.009
+      },
+      "kind": "judgment",
+      "unit": "deaths / person-year",
+      "explainer": "Crude death rates of 6-9 per 1,000 a year in low- and middle-income countries (UN World Population Prospects; the world's is about 7.6)."
+    },
+    {
+      "id": "share_excess_averted",
+      "section": "effect",
+      "label": "Share of the excess deaths the response averts among the people reached",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Cash and relief items (not therapeutic feeding or health care) do little to prevent deaths after a sudden-onset disaster; most of their value is the goods themselves. The research: the Cochrane review of unconditional cash in humanitarian disasters (Pega et al. 2015, CD011247) found one drought study in Niger with far fewer child deaths (hazard ratio 0.26, 95% CI 0.10-0.66) but rated all its evidence very low certainty, and found no difference between cash and a high-calorie food transfer (HR 2.27, 0.69-7.44); large government cash programmes running for years cut under-five deaths by about 8% (risk ratio 0.92, 0.85-0.99) and adult women's by 20% (0.80, 0.67-0.95: Richterman et al. 2023, Nature); a mixed-methods review of cash in humanitarian settings finds mostly positive but weak and inconsistent health effects (van Daalen et al. 2022, BMJ Global Health). The share applies to the excess deaths only, since the relief is aimed at the crisis and lasts its months, not to the population's normal mortality, which long-running programmes act on. A one-off distribution of about $70 a person is much smaller than those programmes, so about 3% of the excess deaths, from 0 to 10%."
+    },
+    {
+      "id": "years_exposed",
+      "section": "effect",
+      "label": "Years of the crisis the response covers per person",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Relief covers the first weeks to months after a disaster, when excess deaths happen: about three months, from one month (a single distribution) to six (a protracted response)."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
+      "explainer": "Excess deaths over the years covered, times the share the response averts."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Excess deaths after disasters fall most on young children and the old; in middle-income settings fewer are under five than in famines (often 40-60%)."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Older children have the lowest death rates of any age, so about 10% of deaths over five, from 5% (deaths mostly among the old) to 20% (young populations, epidemics after floods)."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Working-age adults die less than the old after disasters but are a large share of the population: about 35%, from 25% (ageing middle-income countries) to 50% (young low-income populations, injuries in clean-up). The rest are older adults, valued at the 50-74 band."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "The site's one value of a death, by age band, times your value of a life."
+    },
+    {
+      "id": "dalys_illness_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "unit": "DALYs",
+      "explainer": "0: the relief funded (cash, kits, shelter) has no measured effect on illness; water and sanitation and health care in some responses are in unmodelled benefits.",
+      "formula": "0"
+    },
+    {
+      "id": "value_delivered_per_person",
+      "section": "effect",
+      "label": "Relief delivered per person reached (US$)",
+      "format": "usd",
+      "value": {
+        "low": 30,
+        "best": 70,
+        "high": 150
+      },
+      "kind": "judgment",
+      "explainer": "Cash grants, food, shelter kits and hygiene items per person in a sudden-onset disaster response, in FY2025 US dollars. Anchors: the IFRC's Brazil floods appeal paid a multi-purpose cash transfer of R$1,400 (US$260) a household, about $90 a person, and planned CHF 8 million for 63,412 people, about $140 a person in all costs (MDRBR011 updates 3 and 4, https://go-api.ifrc.org/api/DownloadFile/87944/MDRBR011ou3); many responses funded are smaller one-off distributions of kits and food. About $70, from $30 (a hygiene kit and a food parcel) to $150. Reach follows from the money over this figure, so on the log scale a higher value per person mostly trades against fewer people reached. No count of people reached by the Red Cross's grants is published. The appeals' transfers per person differed (Bangladesh about $11, Myanmar about $50, Mozambique $33-65, Brazil $90); conflict responses in Lebanon and Ukraine pay more; one value with a wide range stands for them."
+    },
+    {
+      "id": "w_lebanon_of_rest",
+      "section": "effect",
+      "label": "Of the response grants not yet assigned, weight of Middle East and North Africa (stand-in Lebanon)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.447,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Middle East and North Africa 5,697,155 of 12,759,181 (44.7%). A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Lebanon stands for the region: the grants most likely went to the Lebanon escalation, Gaza and Syria responses; Lebanon, a middle-income economy, is the stand-in (Gaza's incomes and mortality are far worse, which the range of the deaths rows allows for).",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Middle East and North Africa 5,697,155 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
+    },
+    {
+      "id": "w_ukraine_of_rest",
+      "section": "effect",
+      "label": "Of the response grants not yet assigned, weight of Europe and Russia (stand-in Ukraine)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.457,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Europe and Russia Europe 3,131,204 + Russia and neighbouring states 100,000 = 3,231,204 (25.3%), 45.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Ukraine stands for the region: the war in Ukraine is the main European response.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Europe 3,131,204 and Russia and neighbouring states 100,000 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
+    },
+    {
+      "id": "w_mozambique_of_rest",
+      "section": "effect",
+      "label": "Of the response grants not yet assigned, weight of Sub-Saharan Africa (stand-in Mozambique)",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.497,
+        "high": 0.65
+      },
+      "kind": "judgment",
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: Sub-Saharan Africa 1,905,000 (14.9%), 49.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Mozambique stands for the region: drought and storms in southern Africa (the annual report names Mozambique's drought).",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: Sub-Saharan Africa 1,905,000 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
+    },
+    {
+      "id": "w_bangladesh_of_rest",
+      "section": "effect",
+      "label": "Of the response grants not yet assigned, weight of South Asia (stand-in Bangladesh)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.437,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: South Asia 839,566 (6.6%), 43.7% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Bangladesh stands for the region: the 2024 floods and Cyclone Remal.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: South Asia 839,566 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
+    },
+    {
+      "id": "w_myanmar_of_rest",
+      "section": "effect",
+      "label": "Of the response grants not yet assigned, weight of East Asia and the Pacific (stand-in Myanmar)",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.588,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Schedule F of the Form 990 lists the year's disaster-response grants abroad by region: East Asia and the Pacific 638,080 (5.0%), 58.8% of what remains. A judgment around the observed share (part of the Europe line may be passed through the IFRC in Geneva to other appeals), as a share of what remains so the weights always add to 1. Myanmar stands for the region: the March 2025 earthquakes and Typhoon Yagi.",
+      "source": {
+        "title": "American National Red Cross, Form 990 for the year to June 2025 (filed 23 March 2026), Schedule F, Part II (grants to organisations outside the US), via ProPublica Nonprofit Explorer",
+        "url": "https://projects.propublica.org/nonprofits/organizations/530196605/202640829349300109/IRS990ScheduleF",
+        "retrieved": "2026-11-04",
+        "quote": "Disaster response grants by region: East Asia and the Pacific 638,080 of 12,759,181",
+        "note": "Sums of the 49 grant lines by region and purpose (disaster response 12,759,181; preparedness 7,220,510; measles and rubella 1,655,057; total 21,634,748)."
+      }
+    },
+    {
+      "id": "w_lebanon",
+      "section": "effect",
+      "label": "Weight of Lebanon (Middle East and North Africa) in the response grants",
+      "format": "percent",
+      "formula": "w_lebanon_of_rest",
+      "explainer": "Its share of all the response grants, from the chained shares above."
+    },
+    {
+      "id": "w_ukraine",
+      "section": "effect",
+      "label": "Weight of Ukraine (Europe and Russia) in the response grants",
+      "format": "percent",
+      "formula": "(1 - w_lebanon_of_rest) * w_ukraine_of_rest",
+      "explainer": "Its share of all the response grants, from the chained shares above."
+    },
+    {
+      "id": "w_mozambique",
+      "section": "effect",
+      "label": "Weight of Mozambique (Sub-Saharan Africa) in the response grants",
+      "format": "percent",
+      "formula": "(1 - w_lebanon_of_rest) * (1 - w_ukraine_of_rest) * w_mozambique_of_rest",
+      "explainer": "Its share of all the response grants, from the chained shares above."
+    },
+    {
+      "id": "w_bangladesh",
+      "section": "effect",
+      "label": "Weight of Bangladesh (South Asia) in the response grants",
+      "format": "percent",
+      "formula": "(1 - w_lebanon_of_rest) * (1 - w_ukraine_of_rest) * (1 - w_mozambique_of_rest) * w_bangladesh_of_rest",
+      "explainer": "Its share of all the response grants, from the chained shares above."
+    },
+    {
+      "id": "w_myanmar",
+      "section": "effect",
+      "label": "Weight of Myanmar (East Asia and the Pacific) in the response grants",
+      "format": "percent",
+      "formula": "(1 - w_lebanon_of_rest) * (1 - w_ukraine_of_rest) * (1 - w_mozambique_of_rest) * (1 - w_bangladesh_of_rest) * w_myanmar_of_rest",
+      "explainer": "Its share of all the response grants, from the chained shares above."
+    },
+    {
+      "id": "w_brazil",
+      "section": "effect",
+      "label": "Weight of Brazil (the Americas) in the response grants",
+      "format": "percent",
+      "formula": "(1 - w_lebanon_of_rest) * (1 - w_ukraine_of_rest) * (1 - w_mozambique_of_rest) * (1 - w_bangladesh_of_rest) * (1 - w_myanmar_of_rest)",
+      "explainer": "The rest: the Americas, 3.5% of the response grants in Schedule F (South America 199,178, matching the CHF 179,028 recorded in the IFRC Brazil appeal; Central America and the Caribbean 248,998)."
+    },
+    {
+      "id": "cpi_2017_vs_2024",
+      "section": "effect",
+      "label": "US prices in 2017 relative to 2024",
+      "format": "number",
+      "formula": "@cpi.usa_2017 / @cpi.usa_2024",
+      "explainer": "Puts 2024-25 dollars into 2017 prices, the year of the PPP factors; it applies to the relief and the baselines alike, so it cancels in the log gains."
+    },
+    {
+      "id": "baseline_lebanon",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Lebanon (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @lebanon.consumption_per_person_2024 * @lebanon.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_world_median), a shared conversion, not thin data."
+    },
+    {
+      "id": "baseline_ukraine",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Ukraine (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_ukr * @ukraine.consumption_per_person_2024 * @ukraine.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_ukr), a shared conversion, not thin data."
+    },
+    {
+      "id": "baseline_mozambique",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Mozambique (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_moz * @mozambique.consumption_per_person_2024 * @mozambique.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_moz), a shared conversion, not thin data."
+    },
+    {
+      "id": "baseline_bangladesh",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Bangladesh (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_bgd * @bangladesh.consumption_per_person_2024 * @bangladesh.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_bgd), a shared conversion, not thin data."
+    },
+    {
+      "id": "baseline_myanmar",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Myanmar (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @myanmar.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below. Both conversions apply to the relief and the baseline alike, so they cancel in the log gain: a dollar of relief and a dollar of local consumption buy the same local goods. They are kept so the baseline reads in the site's PPP units. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_world_median), a shared conversion, not thin data."
+    },
+    {
+      "id": "baseline_brazil",
+      "section": "effect",
+      "label": "Consumption per person of the people helped, Brazil (about 2017 international $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_bra * @brazil.consumption_per_person_2024 * @brazil.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The country's consumption per person (World Bank, 2024 US$ at market rates) at the affected households' share, put into 2017 prices and the 2017 PPP base like the relief below; both conversions cancel in the log gain. On the household survey's scale since 2026-11-04: the national-accounts figure × the shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_bra), a shared conversion, not thin data."
+    },
+    {
+      "id": "ln_gain_lebanon",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Lebanon",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / baseline_lebanon)"
+    },
+    {
+      "id": "ln_gain_ukraine",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Ukraine",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / baseline_ukraine)"
+    },
+    {
+      "id": "ln_gain_mozambique",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Mozambique",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @mozambique.ppp_factor_2017 / baseline_mozambique)"
+    },
+    {
+      "id": "ln_gain_bangladesh",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Bangladesh",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @bangladesh.ppp_factor_2017 / baseline_bangladesh)"
+    },
+    {
+      "id": "ln_gain_myanmar",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Myanmar",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / baseline_myanmar)"
+    },
+    {
+      "id": "ln_gain_brazil",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, Brazil",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @brazil.ppp_factor_2017 / baseline_brazil)"
+    },
+    {
+      "id": "ppp_factor",
+      "section": "effect",
+      "label": "PPP conversion (2017 international $ per US $), weighted average, for reading",
+      "format": "number",
+      "explainer": "The shared PPP facts of the six stand-in countries, weighted by the response grants' regions; the log gains use each country's own.",
+      "formula": "w_lebanon * @lebanon.ppp_factor_2017 + w_ukraine * @ukraine.ppp_factor_2017 + w_mozambique * @mozambique.ppp_factor_2017 + w_bangladesh * @bangladesh.ppp_factor_2017 + w_myanmar * @myanmar.ppp_factor_2017 + w_brazil * @brazil.ppp_factor_2017"
+    },
+    {
+      "id": "affected_consumption_share",
+      "section": "effect",
+      "label": "Disaster-affected households' consumption per person, as a share of their country's mean",
+      "format": "percent",
+      "value": {
+        "low": 0.28,
+        "best": 0.42,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Disaster-affected households' consumption per person over the year, as a share of their country's household-survey mean (the baseline rows put the national accounts on the survey scale with the shared ratios). Anchors from the World Bank's Poverty and Inequality Platform (api.worldbank.org/pip, retrieved 4 November 2026) and WDI household consumption in 2021 PPP (NE.CON.PRVT.PP.KD over population): the household-survey mean is 0.82 of the national-accounts mean in Mozambique (2022), 0.52 in Bangladesh (2022) and 0.81 in Brazil (2024, income); the poorest 40%'s mean is 0.33 of the survey mean in Mozambique, 0.54 in Bangladesh, 0.30 in Brazil and 0.55 in Myanmar (2017). Relief targets the worst-affected and poorest, about the poorest 40%: 0.27, 0.28 and 0.24 of the national-accounts mean in the three countries with both figures.  A year's consumption is the base, not the short dip right after the disaster, since the relief is counted against a year. The same share is applied to Lebanon and Ukraine (no comparable split there; displaced households' consumption falls far below their country's mean), within the range. Re-expressed on 4 November 2026 from a share of the national-accounts mean (0.3, 0.2–0.5) by the three countries' survey-to-national-accounts ratios this explainer names (mean 0.72), so the baseline is unchanged; the poorest 40%'s 0.30–0.55 of the survey mean anchors it directly."
+    },
+    {
+      "id": "mmr_consumption_share_of_gdp",
+      "section": "effect",
+      "label": "Myanmar: household consumption as a share of GDP",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.7,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "The World Bank has no consumption series for Myanmar; neighbouring Bangladesh's households consume 70% of GDP (NE.CON.PRVT.ZS, 2024)."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Consumption per person of the people reached (2017 international $, weighted average, for reading)",
+      "format": "usd",
+      "explainer": "The six baselines weighted like the PPP factor, for reading; the log gain is taken country by country.",
+      "formula": "w_lebanon * baseline_lebanon + w_ukraine * baseline_ukraine + w_mozambique * baseline_mozambique + w_bangladesh * baseline_bangladesh + w_myanmar * baseline_myanmar + w_brazil * baseline_brazil"
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person",
+      "format": "number",
+      "formula": "w_lebanon * ln_gain_lebanon + w_ukraine * ln_gain_ukraine + w_mozambique * ln_gain_mozambique + w_bangladesh * ln_gain_bangladesh + w_myanmar * ln_gain_myanmar + w_brazil * ln_gain_brazil",
+      "explainer": "Each stand-in country's log gain at its own consumption, weighted by its region's share of the response grants."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The relief's value is its goods and cash at their cost, which needs no effect study (the site's cash models take transfers at face value, 1, and the Red Cross's domestic model takes its money and goods at 0.95). Reach follows from the money, and what fails to reach people is in the value-share and delivery rows, so only a little doubt is left here: the small deaths branch and the value spread."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome other responders wouldn't have delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "The Red Cross's grants go into IFRC emergency appeals and national society responses that other donors fund too. UN-coordinated humanitarian appeals were 45.5% funded in 2024 at OCHA's November-December update ($22.58 billion of $49.60 billion, Global Humanitarian Overview, https://humanitarianaction.info) and about 47% by its January 2025 update; the IFRC's own appeals are the closer reference class (the appeals the Red Cross funded were 17-52% covered: Cyclone Remal 17%, Myanmar earthquake 26% after 14 months, Typhoon Yagi 44%, Bangladesh flash floods 52%; its Brazil floods appeal, which the American Red Cross funded, was 23% funded five weeks in, 43% after seven months and 49% after thirteen: MDRBR011 operation updates 1, 3 and 4, https://go-api.ifrc.org/api/downloadfile/90869/MDRBR011ou4), so most money given doesn't displace someone else's; but appeals for sudden-onset disasters in middle-income countries (Brazil) are better funded than the average and national governments respond too. About 0.6, from 0.4 (well-funded responses) to 0.85 (neglected ones)."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The Red Cross's grant against all the resources behind the relief it funds. National society and IFRC staff paid from the grant are the grant's own cost, already taken out of the value in intl_value_share; what the grant doesn't pay for is the national societies' unpaid volunteers (at local wages, low in these countries) and their own and other donors' funds in pooled logistics. No published split: about 0.85, from 0.7 (volunteer-heavy responses) to 0.95."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Relief bought but not distributed, misdirected or lost in difficult settings."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.95,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Other funders' fill-in is in the counterfactual and funging inside the Red Cross in unmodelled benefits, so only the outside effects are here: the Red Cross's grants sometimes draw matching government or IFRC money (above 1) or let another donor give less to the same appeal (below 1). 1, from 0.95 to 1.05."
+    },
+    {
+      "id": "restricted_intl_assets",
+      "section": "adjustments",
+      "label": "Net assets restricted to international services, 30 June 2025 (US$)",
+      "format": "usd",
+      "value": 45431000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 24, note 7, Net assets with donor restrictions (in thousands)",
+        "quote": "International Relief and Development Services 45,431 64,279"
+      },
+      "explainer": "International gifts given and not yet spent at year end."
+    },
+    {
+      "id": "restricted_intl_assets_prior",
+      "section": "adjustments",
+      "label": "Net assets restricted to international services, 30 June 2024 (US$)",
+      "format": "usd",
+      "value": 64279000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 24, note 7, Net assets with donor restrictions (in thousands)",
+        "quote": "International Relief and Development Services 45,431 64,279"
+      },
+      "explainer": "The same balance a year earlier, so the wait uses the average stock over the year."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it is spent",
+      "format": "number",
+      "formula": "avg(restricted_intl_assets, restricted_intl_assets_prior) / intl_spend",
+      "unit": "years",
+      "explainer": "Funds held (the average of the year-start and year-end balances) over a year's international spending: about a year."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from the grant to the relief reaching people",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.4,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Emergency items go out in weeks, cash and recovery activities over the operation's 12-16 months: the Brazil appeal was 23.5% implemented after 13 months and extended to 16 (MDRBR011 update 4). About 0.4 years on average, from 0.1 to 1."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait before the gift is spent",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years)",
+      "explainer": "The wait while gifts are held and the grant is spent by the partner, discounted at the shared rate."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the Red Cross publishes no count of the people its international grants reached, so reach follows from the money over a judged value per person, and the deaths averted rest on the research on cash and relief in crises (Pega et al. 2015; Richterman et al. 2023; van Daalen et al. 2022), not on a measurement of these responses. So the shared missing-data step applies."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The product of the adjustments above, the wait and the missing-data step included."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "explainer": "Preparedness and the other benefits and harms not modelled, summed as shares of the modelled value.",
+      "formula": "prep_unmodelled_share + other_unmodelled_share"
+    },
+    {
+      "id": "prep_unmodelled_share",
+      "section": "adjustments",
+      "label": "Disaster preparedness grants, as a share of the modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.28,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "A third of the grants abroad other than measles ($7.2 million) went to preparedness: early warning, anticipatory cash, cash readiness and coastal risk reduction (Schedule F; the IFRC Bangladesh appeals name the American Red Cross's coastal programme). Its cost is in the model and its value isn't modelled; at about half of relief's value per dollar it adds about 0.36 / 0.64 × 0.5 ≈ 28%, from 0 to 50%. The thin evidence on forecast-based and anticipatory action is not cut here: the model's missing-data step already discounts it (one step, not two)."
+    },
+    {
+      "id": "other_unmodelled_share",
+      "section": "adjustments",
+      "label": "Other benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.12,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "The national societies' lasting response capacity from the strengthening part of the appeals (5-29% of their budgets) (+), health and water services in some responses beyond the goods valued (+), restoring family links (225 families) and international humanitarian law work (+); against them, funging inside the Red Cross (restricted international gifts may let it move its own unrestricted funds to domestic work, where a dollar does less: about −3%, 0 to −5%) and relief that crowds out local markets (−). About +12% net."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "0",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_per_person",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "intl_staff_pay",
+      "section": "donor",
+      "label": "Salaries and benefits in International services, FY2025 (US$)",
+      "format": "usd",
+      "value": 15663000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-03",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (salaries, wages and benefits subtotal, in thousands; International 15,663)",
+        "quote": "Subtotal 52,350 1,156,315 8,242 209,846 83,087 15,663 1,525,503"
+      },
+      "explainer": "The programme's own staff; partners' staff are in their own costs (attribution)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "intl_staff_pay / intl_spend",
+      "explainer": "The charity's own share from its audited functional expenses (about 32%)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "The shared pay gap for health and field staff at nonprofits (@staff_pay.gap_health_field): international delegates and programme staff."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $",
+      "explainer": "The result per dollar, for the share of the full cost that cash donations pay."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

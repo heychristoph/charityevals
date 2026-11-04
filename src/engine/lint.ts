@@ -6,14 +6,35 @@
 import type { Node } from "./expr";
 import { assumptionValues, compute, hasRange, type Library, type ResolvedModel } from "./model";
 import { rowsFeeding } from "./sensitivity";
-import { TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
+import { bridgesOf } from "./bridges";
+import { CLIMATE_REQUIRED, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
+
+/** Does a row read `ref` ($assumption, or @fact; a trailing `.` or `_` is a prefix), itself or
+ * through the rows it is computed from? */
+function readsRef(m: ResolvedModel, row: string, ref: string): boolean {
+  const name = ref.slice(1);
+  const prefix = /[._]$/.test(name);
+  const hit = (xs: string[]) => xs.some((x) => (prefix ? x.startsWith(name) : x === name));
+  return [...upstream(m, row)].some((id) => {
+    const r = m.byId.get(id);
+    return !!r && (ref.startsWith("$") ? hit(r.assumptionDeps) : hit(r.factDeps));
+  });
+}
+
+const MARGINAL = "marginal_vs_past_average";
+const MISSING = "missing_data_discount";
+/** Models built before the missing-data rule of docs/normalization.md 2.12 (published before this date)
+ * keep their proxy rows until rebuilt: their missing-data findings are medium, not high. */
+export const MISSING_DATA_RULE_DATE = "2026-11-04";
+const squash = (f: string) => f.replace(/\s+/g, "");
 
 export type Severity = "high" | "medium" | "low";
 export type Finding = { severity: Severity; code: string; row?: string; message: string; fix: string };
 
 /** Constants a formula may contain without a row of their own: identities, halves (triangle areas),
- * percent/thousand/million scaling, and calendar conversions. Everything else is a magic number. */
-export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e6, 12, 52, 365, 365.25, 1e-6]);
+ * percent/thousand/hundred-thousand (rates per 100,000)/million scaling, and calendar conversions.
+ * Everything else is a magic number. */
+export const ALLOWED_LITERALS = new Set([0, 1, 0.5, 100, 1000, 1e5, 1e6, 12, 52, 365, 365.25, 1e-6]);
 
 const MIN_EXPLAINER = 60;
 const STALE_MONTHS = 18;
@@ -86,20 +107,24 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
 
   // Required canonical rows.
   const required = [...new Set([...spec.required.filter((r) => r !== spec.perDollar && r !== spec.donor && r !== spec.output), ids.perDollar, ids.donor, ids.output])];
-  for (const r of required) if (!m.byId.has(r)) add("high", "required-row", `missing canonical row ${r}`, `Add ${r} as in the ${family} template, or (for an outcome branch that doesn't apply) a row with value 0 and an explainer saying why.`, r);
+  const legacy = (m.source?.published ?? "") < MISSING_DATA_RULE_DATE;
+  for (const r of required) if (!m.byId.has(r)) add(r === "missing_data_adj" && legacy ? "medium" : "high", "required-row", `missing canonical row ${r}`, `Add ${r} as in the ${family} template, or (for an outcome branch that doesn't apply) a row with value 0 and an explainer saying why.`, r);
 
   const path = rowsFeeding(m);
   const output = m.output?.row;
   if (output && m.byId.has(output)) {
     // The adjustments and the cost must actually reach the bottom line.
-    for (const r of ["cost_total", "evidence_adj", "counterfactual_adj", "attribution_share", "total_adj", "donor_cost_share", ...(m.byId.has("implementation_adj") ? ["implementation_adj"] : []), ...(m.byId.has("leverage_funging_adj") ? ["leverage_funging_adj"] : []), ...(m.byId.has("unmodelled_benefits_adj") ? ["unmodelled_benefits_adj"] : [])])
+    for (const r of ["cost_total", "evidence_adj", "counterfactual_adj", "attribution_share", "total_adj", "donor_cost_share", "missing_data_adj", ...(m.byId.has("implementation_adj") ? ["implementation_adj"] : []), ...(m.byId.has("leverage_funging_adj") ? ["leverage_funging_adj"] : []), ...(m.byId.has("unmodelled_benefits_adj") ? ["unmodelled_benefits_adj"] : [])])
       if (m.byId.has(r) && !path.has(r)) {
         // Multi-branch models (templates.md convention 4) apply branch-level adjustments
         // (`<branch>_counterfactual_adj`) and keep the canonical row as a weighted average for
         // reading only. That is fine as long as every branch's own adjustment reaches the result.
         const branches = m.rows.filter((x) => x.id.endsWith(`_${r}`) && x.id !== r);
-        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id)))
-          add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches.", r);
+        if (r !== "cost_total" && r !== "donor_cost_share" && branches.length && branches.every((b) => path.has(b.id))) {
+          // Said in its explainer already: nothing to fix.
+          if (!/\b(average|summary|weighted)\b[^.]*\bbranch/i.test(`${m.byId.get(r)?.label ?? ""}. ${m.byId.get(r)?.explainer ?? ""}`))
+            add("low", "diagnostic", `${r} is a summary of the branch adjustments (${branches.map((b) => b.id).join(", ")}), not applied itself`, "Say in its explainer that it is the outcome-weighted average of the branches, for reading only.", r);
+        }
         else add("high", "unapplied", `${r} is computed but never reaches the bottom line`, `Use ${r} in the chain that leads to ${output}, or (multi-branch models) apply a <branch>_${r} row in every branch.`, r);
       }
     const perDollar = m.byId.get(ids.perDollar);
@@ -115,6 +140,118 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   const dcs = m.byId.get("donor_cost_share");
   if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
     add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
+
+  // Bridges (docs/normalization.md 2.6): a row named as one is the exact bridge formula, so each outcome
+  // reaches the headline through its own unit's shared conversion.
+  const bridges = new Set(bridgesOf(lib, m).map((b) => b.row));
+  for (const r of m.rows)
+    if (/^(uov|dalys|wellbys|ced|tco2e)_from_(uov|daly|wellby|ced|tco2e)$/.test(r.id) && r.id !== "wellbys_from_uov" && !bridges.has(r.id))
+      add("high", "bridge", `${r.id} is named as a bridge but isn't one`, "Write it as <input> * (<to_common of the input's unit>) / (<to_common of the output unit>), the template's row word for word, in an ours section.", r.id);
+
+  // Missing data (2.12): no programme is valued at other models' result; every branch carries the
+  // marker missing_data_adj / <branch>_missing_data_adj, the shared slider or 1 with its reason; a branch
+  // whose reach or effect inputs are all judgments reads the slider.
+  const ruleSev: Severity = legacy ? "medium" : "high";
+  const literature = "Build the programme's chain from the research on its kind of work (meta-analyses and trials: effect per person or per dollar, persistence), with its own spending and reach, wide ranges, and <branch>_missing_data_adj = $missing_data_discount (templates.md Convention 12); other models only as a cross-check named in the explainer.";
+  for (const r of m.rows) {
+    if (/^proxy_/.test(r.id)) add(ruleSev, "proxy", `${r.id}: the proxy rows are retired (a programme is no longer valued at other models' result)`, literature, r.id);
+    else if (r.formula && /median\([^)]*#/.test(r.formula) && path.has(r.id))
+      add(ruleSev, "borrowed", `${r.id} takes its value from other models' results (median of #…)`, literature, r.id);
+  }
+  if (m.missing_data) add("high", "missing-data", "a charityevals model carries missing_data", "Remove the field: an own build's branches carry the step in their missing_data_adj rows (the field is for imported models, INV-21).");
+  const down = new Map<string, string[]>();
+  for (const r of m.rows) for (const d of r.deps) down.set(d, [...(down.get(d) ?? []), r.id]);
+  const isInput = (id: string) => { const r = m.byId.get(id); return !!r && r.formula === undefined && r.value !== undefined; };
+  for (const mk of m.rows.filter((r) => /(^|_)missing_data_adj$/.test(r.id))) {
+    const f = squash(mk.formula ?? "");
+    const branchAverage = mk.id === "missing_data_adj" && mk.deps.some((d) => d.endsWith("_missing_data_adj"));
+    if (f !== `$${MISSING}` && f !== "1" && !branchAverage) {
+      add("high", "missing-data", `${mk.id} is ${mk.formula ?? "a typed number"}, not $${MISSING} or 1`, `Set ${mk.id} = $${MISSING} where the outcome isn't measured for this charity, or 1 where it is (say why): missing data is discounted one way, by the shared slider.`, mk.id);
+      continue;
+    }
+    if (f !== "1") continue;
+    if ((mk.explainer ?? "").length < MIN_EXPLAINER)
+      add("high", "missing-data", `${mk.id} is 1 without a reason`, "Say in the explainer what this charity measured: its own count of who got the intervention, and the effect's counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way).", mk.id);
+    // The branch: the row downstream of the marker that reads the fewest reach and effect rows (its
+    // outcome), preferring one that reads both a reach and an effect input (a branch's total_adj can read a
+    // shared reach row through its wait discount without being the outcome).
+    const seen = new Set<string>();
+    const queue = [...(down.get(mk.id) ?? [])];
+    let best: string[] | undefined;
+    let bestBoth = false;
+    while (queue.length) {
+      const id = queue.shift()!;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      queue.push(...(down.get(id) ?? []));
+      const xs = [...upstream(m, id)].filter((x) => ["reach", "effect"].includes(m.byId.get(x)?.section ?? ""));
+      if (!xs.some(isInput)) continue;
+      const both = ["reach", "effect"].every((sec) => xs.some((x) => isInput(x) && m.byId.get(x)!.section === sec));
+      if (!best || (both && !bestBoth) || (both === bestBoth && xs.length < best.length)) { best = xs; bestBoth = both; }
+    }
+    if (!best) continue;
+    // Evidence in a section: an input that isn't a judgment, or a shared fact that isn't one (another
+    // model's result read live is no evidence about this charity).
+    for (const sec of ["reach", "effect"]) {
+      const xs = best.filter((x) => m.byId.get(x)!.section === sec);
+      const judged = xs.filter((x) => isInput(x) && m.byId.get(x)!.kind === "judgment");
+      const evidence = xs.some((x) => {
+        const r = m.byId.get(x)!;
+        return (isInput(x) && r.kind !== "judgment") || r.factDeps.some((k) => lib.facts.get(k)?.kind !== "judgment");
+      });
+      if (judged.length && !evidence)
+        add(ruleSev, "missing-data", `${mk.id} is 1 but its branch's ${sec} rests on judgment only (${judged.join(", ")})`, `Set ${mk.id} = $${MISSING}: an outcome resting on judgment, not on this charity's own data, is counted less by the shared slider (docs/normalization.md 2.12).`, mk.id);
+    }
+  }
+
+  // When the estimate was made: the estimate-age slider counts from it (docs/normalization.md 2.11).
+  const s = m.source;
+  if (!s?.published || Number.isNaN(new Date(s.published).getTime()))
+    add("high", "published", "no source.published date", 'Set "source": { "publisher": "charityevals", "title": …, "url": "https://charityevals.org/<id>", "published": "<the date the model was built, YYYY-MM-DD>", "retrieved": … }: the estimate-age discount counts from it.');
+  else if (s.publisher !== "charityevals") add("medium", "published", `source.publisher is ${s.publisher}`, 'A charityevals model is published by "charityevals".');
+  if (m.theoretical) add("high", "theoretical", "a charityevals model is flagged theoretical", "build-cea models are built from the charity's own work; remove the flag (an idea-stage model is an import, docs/normalization.md decision 2026-10-31 #1).");
+
+  // What the model's dollar is (INV-18): past averages, and only past averages, read the next-dollar slider.
+  const basis = m.estimate_basis;
+  const marginalReaders = m.rows.filter((r) => r.assumptionDeps.includes(MARGINAL));
+  if (!basis) add("high", "estimate-basis", "no estimate_basis", `Set "estimate_basis": past_average (past spending over past wins: campaigns, policy, research, money moved), marginal (a forecast of planned work) or unit_cost (a price per item delivered). The ${family} template's is ${spec.basis}.`);
+  else {
+    if (basis === "past_average" && !marginalReaders.some((r) => path.has(r.id)))
+      add("high", "estimate-basis", "a past average whose result doesn't read $marginal_vs_past_average", 'Add the row marginal_vs_past_average = $marginal_vs_past_average (`published` 1) in the donor section and multiply the per-donor-dollar row by it.');
+    if (basis !== "past_average")
+      for (const r of marginalReaders) add("high", "estimate-basis", `reads $${MARGINAL} but estimate_basis is ${basis}`, "Only a past average takes the next-dollar slider: remove the row, or set estimate_basis to past_average if the cost is past spending over past wins.", r.id);
+    if (basis !== spec.basis && !spec.altBasis?.includes(basis))
+      add("low", "estimate-basis", `estimate_basis ${basis}; ${family} models are usually ${spec.basis}`, "Say in the summary or the cost explainer why this charity's dollar is different.");
+  }
+
+  // The site's one way for each shared concept the family needs (docs/normalization.md 2.7-2.10).
+  for (const rd of spec.reads)
+    if (m.byId.has(rd.row) && !readsRef(m, rd.row, rd.ref))
+      add(rd.severity ?? "high", "shared", `${rd.row} doesn't read ${rd.ref}`, `Read ${rd.ref}…: ${rd.why}.`, rd.row);
+  if (unit === "tco2e")
+    for (const r of CLIMATE_REQUIRED) if (!m.byId.has(r) || (r === "years_until_avoided" && !path.has(r)))
+      add("high", "required-row", `a climate model needs ${r} on its path`, "Start from the policy-research-meta-climate template (docs/normalization.md 2.5).", r);
+
+  // Deaths by age band, never the all-ages figure where the ages are known; depression stays in WELLBYs.
+  for (const r of m.rows) {
+    if (r.factDeps.includes("moral_weights.uov_per_death_over5"))
+      add("medium", "age-band", "values deaths at the all-ages over-five figure", "Use the band of the deaths' ages (@moral_weights.uov_per_death_age_5_14, _15_49, _50_74), or say in the explainer that the ages are unknown.", r.id);
+    if (unit === "wellby" && r.factDeps.includes("depression.dalys_per_phq9_point_year"))
+      add("high", "exchange-rate", "a WELLBY model converts depression into DALYs", "Stay in WELLBYs (@wellby_factors.wellbys_per_sd_year; PHQ-9 points ÷ @depression.phq9_sd for SDs): the WELLBY unit's conversion is calibrated on depression.", r.id);
+    // A currency rate is the site's (@fx), never typed in.
+    if (r.formula === undefined && r.value !== undefined && (/^fx_/.test(r.id) || /\b[Ee]xchange rate\b|\b[Cc]urrency (rate|conversion)\b|\b[A-Z]{3} per (US ?)?(\$|USD|dollar)\b|\b(US ?)?(\$|USD|dollars?) per [A-Z]{3}\b/.test(r.label)))
+      add("high", "fx", "a currency rate typed in", "Multiply the local-currency row by @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; scripts/link-fx.py adds a missing one).", r.id);
+  }
+
+  // The species step: the ced row's SAD version is the version of the shared figure it divides.
+  for (const r of m.rows) {
+    const mm = /^ced_([a-z]+?)(?:_(2024|2025))?$/.exec(r.id);
+    if (!mm || !r.formula) continue;
+    const v = new RegExp(`@aim_sads\\.${mm[1]}_(\\d{4})`).exec(r.formula)?.[1];
+    const versions = new Set([...upstream(m, r.id)].flatMap((id) => m.byId.get(id)?.factDeps ?? []).map((f) => SAD_FACT_VERSION[f]).filter(Boolean));
+    if (v && versions.size && !versions.has(v))
+      add("high", "sad-version", `${r.id} divides by Ambitious Impact's ${v} weight, but the SADs figure it converts is ${[...versions].join(" and ")} SADs`, `Use @aim_sads.${mm[1]}_${[...versions][0]} in ${r.id} (and, with figures of both versions, a second pair sads_${mm[1]}_<v> / ced_${mm[1]}_<v>).`, r.id);
+  }
 
   // Rows: sourcing, ranges, magic numbers, placeholders.
   for (const r of m.rows) {
@@ -149,7 +286,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   // Facts used: they need sources too.
   for (const key of new Set(m.rows.flatMap((r) => r.factDeps))) {
     const f = lib.facts.get(key);
-    if (f && !f.source?.url) add("medium", "fact-source", `fact @${key} has no source URL`, "Add the source to the facts file.", `@${key}`);
+    if (f && !f.source?.url && f.kind !== "judgment") add("medium", "fact-source", `fact @${key} has no source URL`, "Add the source to the facts file.", `@${key}`);
     const months = f?.source?.retrieved ? monthsSince(f.source.retrieved, today) : undefined;
     if (months !== undefined && months > STALE_MONTHS) add("low", "stale", `fact @${key} was retrieved ${months} months ago`, "Check it is still current.", `@${key}`);
   }
@@ -163,7 +300,9 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   for (const [id, [lo, hi]] of Object.entries(spec.bounds)) {
     if (!m.byId.has(id)) continue;
     const v = vals[id];
-    if (Number.isFinite(v) && (v < lo || v > hi)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
+    // A relative tolerance: a weighted average of branches at 1 can sum to 1 + 2e-16.
+    const eps = 1e-9 * Math.max(1, Math.abs(lo), Math.abs(hi));
+    if (Number.isFinite(v) && (v < lo - eps || v > hi + eps)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
   }
   if (output && Number.isFinite(vals[output]) && vals[output] <= 0) add("high", "non-positive", `bottom line is ${vals[output]}`, "Check signs and the outcome chain.", output);
   return out;
