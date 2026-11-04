@@ -9,13 +9,13 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross responds to home fires and large disasters across the US (shelter, meals, relief items, cash and recovery grants), installs free smoke alarms through its Home Fire Campaign, and relays emergency messages and gives financial help to military families. This model covers that donor-funded work in its fiscal year to June 2025 ($721 million, the domestic disaster, community and armed-forces programmes; the latest audited year, as the FY2026 accounts weren't on the Red Cross's financials page on 3 November 2026) and comes to under 0.004 years of healthy life per $1,000, far below the site's global-health median because almost all the value is money and goods for US households, which the site's one log-income scale values at a small fraction of the same dollar for a household living on a few dollars a day, plus a few dozen fire deaths averted by smoke alarms. The biggest uncertainties are what FEMA, insurers and other charities would have provided anyway and how many fire deaths the alarms really avert (the charity's own count of lives saved is about seventeen times our estimate).",
+  "summary": "The American Red Cross responds to home fires and large disasters across the US (shelter, meals, relief items, cash and recovery grants), installs free smoke alarms through its Home Fire Campaign, and relays emergency messages and gives financial help to military families. This model covers that donor-funded work in its fiscal year to June 2025 ($721 million, the domestic disaster, community and armed-forces programmes; the latest audited year, as the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) and comes to under 0.003 years of healthy life per $1,000, far below the site's global-health median because almost all the value is money and goods for US households, which the site's one log-income scale values at a small fraction of the same dollar for a household living on a few dollars a day, plus about ten fire deaths averted by smoke alarms. The audited money and goods are measured; the meals and shelter nights (valued by judgment), the smoke alarms and the emotional support, about a fifth of the value before the missing-data step, rest on research on other programmes and on judgment and are discounted for missing data. The biggest uncertainties are what FEMA, insurers and other charities would have provided anyway and how many fire deaths the alarms really avert (the charity's own count of lives saved is nearly thirty times our estimate).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross domestic disaster relief, Home Fire Campaign and Service to the Armed Forces (FY2025)",
     "url": "https://charityevals.org/american-red-cross-charityevals",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -75,12 +75,6 @@
       "id": "outcome",
       "title": "Outcome",
       "explainer": "The outcome in the family's shared unit, per dollar."
-    },
-    {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
     },
     {
       "id": "donor",
@@ -143,7 +137,7 @@
       "section": "cost",
       "label": "Spending on the donor-funded domestic programmes, FY2025 (disaster, armed forces, community)",
       "format": "usd",
-      "explainer": "The programmes donations pay for. Biomedical Services (blood, $2.12 billion) and Training Services ($143 million) earn more from hospitals and course fees than they cost (biomedical revenue $2.31 billion, programme materials $175 million), so no donated dollar funds them; they are modelled in american-red-cross-charityevals-biomedical at weight 0 in the charity's programme mix. International services ($48.8 million) are a humanitarian-relief model of their own (american-red-cross-charityevals-international).",
+      "explainer": "The programmes donations pay for. Biomedical Services (blood, $2.12 billion) and Training Services ($143 million) earn more from hospitals and course fees than they cost (biomedical revenue $2.31 billion, programme materials $175 million), so no donated dollar funds them; they are modelled in american-red-cross-charityevals-biomedical at weight 0 in the charity's programme mix. International services ($48.8 million) are modelled separately: the measles visits in american-red-cross-charityevals-measles, the relief abroad in a humanitarian-relief draft not yet published.",
       "formula": "dds_spend + saf_spend + cs_spend"
     },
     {
@@ -263,7 +257,7 @@
       "label": "Cost per person reached",
       "format": "usd",
       "formula": "cost_total / people_reached",
-      "explainer": "Context: a few hundred dollars of full cost per person reached (about $740), most of it going to the households with severe losses."
+      "explainer": "Context: about $740 of full cost per person reached, most of it going to the households with severe losses."
     },
     {
       "id": "ls_gain_per_person_year",
@@ -444,6 +438,14 @@
       "explainer": "Everything the people reached received, at what it would cost them. The staff time that delivers it (casework, logistics) is cost, not value."
     },
     {
+      "id": "mc_value_share",
+      "section": "effect",
+      "label": "Meals and shelter nights' share of the value delivered",
+      "format": "percent",
+      "formula": "(meals_served * value_per_meal + shelter_stays * value_per_stay) / value_delivered",
+      "explainer": "The part of the value that is counted meals and nights at a judged value per unit, not audited money and goods: about a tenth. It weights the branch's missing-data step (the gains are under 2% of a year's consumption, so the log gain splits by value to well under a percent)."
+    },
+    {
       "id": "value_per_person",
       "section": "effect",
       "label": "Value received per person in the year (US$)",
@@ -460,17 +462,68 @@
       "explainer": "The site's US consumption per person, 2024 (World Bank). FY2025 runs July 2024 to June 2025, so its dollars are about half a year later than the baseline's; US prices rose under 3% in that time, small against the share's range."
     },
     {
+      "id": "poorest_fifth_consumption_share",
+      "section": "effect",
+      "label": "Anchor: consumption per person of the poorest fifth of US households, as a share of the average person's",
+      "format": "percent",
+      "formula": "@united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
+      "explainer": "The site's shared anchor for a US social service's clients (as in United Way's model): the poorest fifth spend 45% of the average household's (BLS 2024), in households of 1.6 people against 2.4, so per person 0.67 of the average."
+    },
+    {
+      "id": "local_consumption_share",
+      "section": "effect",
+      "label": "Home-fire and other local-disaster households: consumption per person, as a share of the average",
+      "format": "percent",
+      "explainer": "The shared poorest-fifth anchor (0.67 per person) times home-fire households' position relative to it.",
+      "formula": "poorest_fifth_consumption_share * local_vs_poorest_fifth"
+    },
+    {
+      "id": "large_consumption_share",
+      "section": "effect",
+      "label": "Large-disaster survivors: consumption per person, as a share of the average",
+      "format": "percent",
+      "explainer": "The shared poorest-fifth anchor times large-disaster survivors' position relative to it.",
+      "formula": "poorest_fifth_consumption_share * large_vs_poorest_fifth"
+    },
+    {
+      "id": "local_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Home-fire households' consumption per person relative to the poorest fifth's",
+      "format": "multiple",
+      "value": {
+        "low": 0.75,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Home fires fall most on poorer, renting households, and the campaign and casework target high-risk neighbourhoods: about the poorest fifth (1), from 0.75 (mostly well below the poverty line) to 1.2 (more owners)."
+    },
+    {
+      "id": "large_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Large-disaster survivors given help: consumption per person relative to the poorest fifth's",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1.1,
+        "high": 1.4
+      },
+      "kind": "judgment",
+      "explainer": "Those who seek and get disaster financial help skew poor: of FEMA's Individuals and Households Program award recipients in 2002-2024, 64.6% reported household income of $30,000 or less, $0 included, and 85% of $60,000 or less (Congressional Research Service, R48310, Table 7: 'more than half made less than or equal to $30,000'), against a US median household income near $80,000. Consumption is less unequal than income and the Los Angeles fires reached richer neighbourhoods, so a little above the poorest fifth: 1.1, from 0.9 to 1.4 (about 0.74 of the average, 0.6 to 0.94). The incomes are nominal over 2002-2024, so somewhat below today's dollars, which the range allows for.",
+      "source": {
+        "title": "Congressional Research Service, FEMA Individual Assistance Grants for Disaster Survivors: Summary of Data and Analysis (R48310, November 2024), Table 7",
+        "url": "https://www.everycrsreport.com/reports/R48310.html",
+        "retrieved": "2026-11-04",
+        "quote": "more than half made less than or equal to $30,000"
+      }
+    },
+    {
       "id": "recipients_consumption_share",
       "section": "effect",
       "label": "The people served's consumption per person, as a share of the average",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Disaster survivors are a broad slice of Americans (the Los Angeles fires hit wealthy neighbourhoods too), but home-fire households, who are most of the caseload, are poorer than average, and right after a loss a household's consumption is far below its usual level. Anchor: the poorest fifth's spending is 45% of the average per household (@united_states.ce_lowest_quintile_vs_all_2024), more per person; we take 0.5, from 0.3 (the poorest fifth, right after the loss) to 0.8 (average households)."
+      "explainer": "Home-fire households and large-disaster survivors at their own shares, weighted by their shares of the money and goods (inc_local_share), so one baseline serves the branch. A year's consumption is the base: the help is counted against a year (income_years), so the short dip right after a loss isn't used.",
+      "formula": "inc_local_share * local_consumption_share + (1 - inc_local_share) * large_consumption_share"
     },
     {
       "id": "baseline_consumption",
@@ -511,7 +564,7 @@
       "label": "Homes fitted with free smoke alarms per year (Home Fire Campaign)",
       "format": "integer",
       "value": {
-        "low": 90000,
+        "low": 80000,
         "best": 117000,
         "high": 150000
       },
@@ -522,7 +575,7 @@
         "retrieved": "2026-11-03",
         "quote": "Over the past decade, The Red Cross Home Fire Campaign has saved more than 2,000 lives, installed nearly 3 million smoke alarms, made over 1.2 million households safer"
       },
-      "explainer": "1.2 million homes over the campaign's first 10.25 years (October 2014 to January 2025) is about 117,000 a year. The FY2025 count isn't published, and the FY2024 annual report gives no running total to difference against the FY2025 one ('more than 3 million alarms'), so the campaign average stands, ranged for a slower or faster year."
+      "explainer": "1.2 million homes over the campaign's first 10.25 years (October 2014 to January 2025) is about 117,000 a year. The FY2025 count isn't published, and the FY2024 annual report gives no running total to difference against the FY2025 one ('more than 3 million alarms'), so the campaign average stands, ranged for a slower or faster year. 'Households made safer' may include visits that gave fire-safety education without fitting an alarm, so the low end is 80,000."
     },
     {
       "id": "us_residential_fire_deaths",
@@ -603,11 +656,11 @@
       "source": {
         "title": "Ahrens (NFPA, January 2019), Smoke Alarms in U.S. Home Fires",
         "url": "https://www1.maine.gov/dps/fmo/sites/maine.gov.dps.fmo/files/inline-files/nfpa_smoke_alarms_in_u.s._home_fires.pdf",
-        "retrieved": "2026-11-03",
+        "retrieved": "2026-11-04",
         "page": "p. 1, Key findings",
         "quote": "The risk of dying in reported home structure fires is 54% lower in homes with working smoke alarms than in homes with no alarms or none that worked."
       },
-      "explainer": "Observational (homes with working alarms differ in other ways), hence the evidence adjustment. Range from the same report's 42% for alarms of any power source present to 63% for hardwired ones. The 23% it gives for battery alarms present isn't the low end: it includes alarms with dead or missing batteries, which the campaign's sealed 10-year units avoid, and the question here is a working alarm."
+      "explainer": "NFPA's national analysis of 2012-2016 home fires: 54% lower; range from the same report's 42% for alarms of any power source present to 63% for hardwired ones. A meta-analysis of the four studies comparing death rates in homes with and without working alarms agrees: the rate is halved (Rohde et al. 2016, Fire Safety Journal, doi:10.1016/j.firesaf.2016.01.008). Both are observational (homes with working alarms differ in other ways), hence the evidence adjustment. The 23% NFPA gives for battery alarms present isn't the low end: it includes alarms with dead or missing batteries, which the campaign's sealed units avoid, and the question here is a working alarm."
     },
     {
       "id": "hf_alarm_years",
@@ -615,13 +668,20 @@
       "label": "Years an installed alarm keeps working in the home",
       "format": "number",
       "value": {
-        "low": 5,
-        "best": 8,
-        "high": 10
+        "low": 3.5,
+        "best": 4.6,
+        "high": 6
       },
-      "kind": "judgment",
+      "kind": "estimate",
       "unit": "years",
-      "explainer": "The campaign's sealed 10-year alarms last a decade if left in place; removal (nuisance alarms), moves and failures cut that. The first year counts in full, later years discounted."
+      "explainer": "Working alarm-years per home over the alarm's life. Dallas Fire-Rescue's follow-up visits to homes fitted with long-life lithium alarms by its door-to-door programme found 84% working in year 2, 55% in year 4, 27% in year 6, 20% in year 8 and 22% in year 10 (NFPA 2019, p. 6): summed year by year over ten years, about 4.6 working years. The programme's own evaluation agrees: its effect on fire deaths and injuries held for about five years and faded after the sixth (Istre et al. 2014, Injury Prevention, doi:10.1136/injuryprev-2013-040823). Range 3.5 to 6: the Red Cross's sealed units can't have their lithium battery swapped for a shorter-lived one, the failure NFPA names on p. 6, so they may last longer than Dallas's. The first year counts in full, later years discounted.",
+      "source": {
+        "title": "Ahrens (NFPA, January 2019), Smoke Alarms in U.S. Home Fires",
+        "url": "https://www1.maine.gov/dps/fmo/sites/maine.gov.dps.fmo/files/inline-files/nfpa_smoke_alarms_in_u.s._home_fires.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 6, Dallas Fire-Rescue follow-up of lithium-battery alarms installed 2001-2010",
+        "quote": "In the sixth year group, 71% were present and 27% were working."
+      }
     },
     {
       "id": "hf_deaths_averted",
@@ -629,7 +689,7 @@
       "label": "Home fire deaths averted by a year's smoke-alarm installations (over the alarms' life)",
       "format": "number",
       "formula": "hf_households_per_year * household_size * us_residential_fire_deaths / us_population * hf_served_share_no_working_alarm * hf_deaths_share_no_working_alarm / hf_homes_share_no_working_alarm * hf_risk_reduction * pv_annuity_due(1, $discount_rate, hf_alarm_years)",
-      "explainer": "Homes served × people per home × the national fire death rate × the share that lacked a working alarm × those homes' higher risk × the alarm's reduction × its discounted years. About 17 deaths, against the Red Cross's own count of 295 lives saved in FY2025 (disaster relief report, p. 4), about seventeen times more: that count is of people who escaped a fire in a home the campaign reached, most of whom would have escaped anyway, and covers alarms installed in earlier years too."
+      "explainer": "Homes served × people per home × the national fire death rate × the share that lacked a working alarm × those homes' higher risk × the alarm's reduction × its discounted years. About 10 deaths, against the Red Cross's own count of 295 lives saved in FY2025 (disaster relief report, p. 4), nearly thirty times more: that count is of people who escaped a fire in a home the campaign reached, most of whom would have escaped anyway, and covers alarms installed in earlier years too."
     },
     {
       "id": "deaths_averted_per_person",
@@ -645,12 +705,18 @@
       "label": "Share of the fire deaths averted that are of children under five",
       "format": "percent",
       "value": {
-        "low": 0.04,
-        "best": 0.07,
-        "high": 0.12
+        "low": 0.025,
+        "best": 0.04,
+        "high": 0.07
       },
-      "kind": "judgment",
-      "explainer": "Children under five die in home fires at about the general population's rate (U.S. Fire Administration, fire risk reports) and are 6% of the population; the campaign targets families with children (the Red Cross says 775 of its 2,462 'lives saved' were children), so a little above 6%."
+      "kind": "estimate",
+      "explainer": "Children under five die in home fires at about half the general population's rate (USFA) and are about 6% of the population, so about 3% of deaths; the campaign targets families with children (the Red Cross says 775 of its 2,462 'lives saved' were children), so a little more: 4%, from 2.5 to 7%.",
+      "source": {
+        "title": "U.S. Fire Administration, Fire risk to children (2019-2023)",
+        "url": "https://www.usfa.fema.gov/statistics/deaths-injuries/children.html",
+        "retrieved": "2026-11-04",
+        "quote": "the relative risk of dying in a fire for the youngest children was 50% lower than that of the general population"
+      }
     },
     {
       "id": "share_5_14_of_over5",
@@ -658,12 +724,12 @@
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.06,
-        "high": 0.12
+        "low": 0.02,
+        "best": 0.04,
+        "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Older children die in fires at well below the average rate (about 13% of the population, a third or less of the average risk), so about 6% of deaths over five."
+      "explainer": "Children 5-9 die in fires at 0.4 and 10-14 at 0.2 times the general rate (USFA, https://www.usfa.fema.gov/statistics/deaths-injuries/children.html), and are about 13% of the population: about 4% of deaths over five (0.13 × 0.3 ≈ 0.04), from 2 to 8%."
     },
     {
       "id": "share_15_49_of_over15",
@@ -676,7 +742,7 @@
         "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "Adults 15-49 are nearly half the population at below-average risk; adults 65+ die at 2.3 times the general rate (USFA), so most deaths are over 50, valued by their own ages below."
+      "explainer": "Adults 15-49 are nearly half the population at below-average risk; adults 65+ die at 2.5 times the general rate (USFA 2023, https://www.usfa.fema.gov/statistics/deaths-injuries/older-adults.html), so most deaths are over 50, valued by their own ages below."
     },
     {
       "id": "hf_share_50_64_of_50plus",
@@ -689,7 +755,7 @@
         "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "Population shares over 50 (about 19% of Americans are 50-64, 10% 65-74, 8% 75+) weighted by fire death risk, which rises with age (USFA: adults 65+ die at 2.3 times the general rate, the oldest at more): about 37% / 31% / 32%."
+      "explainer": "Population shares over 50 (about 19% of Americans are 50-64, 10% 65-74, 8% 75+) weighted by fire death risk, which rises with age (USFA 2023: 65-74 at 2.2, 75-84 at 2.9 and 85+ at 3.4 times the general rate, https://www.usfa.fema.gov/statistics/deaths-injuries/older-adults.html): about 37% / 31% / 32%."
     },
     {
       "id": "hf_share_65_74_of_50plus",
@@ -760,12 +826,12 @@
       "label": "Money and goods: evidence adjustment",
       "format": "multiple",
       "value": {
-        "low": 0.85,
-        "best": 0.95,
+        "low": 0.9,
+        "best": 0.975,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Money and goods are counted at their cost, which needs no effect study: the site's cash models take transfers at face value (1). A little below 1 for the estimated meal and shelter values and the reach behind the spread."
+      "explainer": "Money and goods are counted at their cost, which needs no effect study: the site's cash models take transfers at face value (1). A little below 1 only for the reach behind the spread (households are the Red Cross's estimate, not verified unique households); the judged meal and shelter values are discounted by their own missing-data marker (mc_missing_data_adj), not here."
     },
     {
       "id": "hf_evidence_adj",
@@ -778,7 +844,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "NFPA's comparison of homes with and without working alarms is observational (homes without them are poorer, with more smokers and older wiring), so the alarm's own effect is smaller than the 54%. Anchor: observational health effects on the site at 0.5-0.8."
+      "explainer": "NFPA's comparison of homes with and without working alarms, and the meta-analysis of such comparisons (Rohde et al. 2016), are observational: homes without them are poorer, with more smokers and older wiring, so the alarm's own effect is smaller than the halving. Against that, installation programmes evaluated against neighbouring homes find effects as large or larger (Dallas, Istre et al. 2014: deaths and injuries combined 63% lower after adjustment, rate ratio 0.32 unadjusted; the Cochrane-style review of controlled trials, DiGuiseppi and Higgins 2000, finds giveaway programmes reduced injuries in two non-randomised trials but no randomised trial measuring deaths). Anchor: observational health effects on the site at 0.5-0.8; 0.7."
     },
     {
       "id": "ls_evidence_adj",
@@ -830,7 +896,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "In declared disasters FEMA's Individual Assistance pays its own awards by its own rules (in North Carolina after Helene, $404.5 million to 157,567 households, about $2,600 each: FEMA fact sheet DR-4827, March 2025), several times the Red Cross's roughly $1,200 per household given financial assistance; insurers, state and local governments and other charities (Salvation Army, church feeding networks, local funds) add more. FEMA wouldn't pay more without the Red Cross, but others would partly fill the mass-care gap (shelters are often joint with local government), and some Red Cross cash for the same need is deducted from FEMA awards as a duplication of benefits. About half, from 0.3 (others fill most of it) to 0.7.",
+      "explainer": "In declared disasters FEMA's Individual Assistance pays its own awards by its own rules (in North Carolina after Helene, $404.5 million to 157,567 households, about $2,600 each: FEMA fact sheet DR-4827, March 2025), several times the Red Cross's roughly $1,200 per household given financial assistance; insurers, state and local governments and other charities (Salvation Army, church feeding networks, local funds) add more. FEMA's awards follow its own rules and wouldn't be larger without the Red Cross, but others would partly fill the mass-care gap (shelters are often joint with local government). About half, from 0.3 (others fill most of it) to 0.7.",
       "source": {
         "title": "FEMA, DR-4827-NC disaster fact sheet (Hurricane Helene, North Carolina), 17 March 2025",
         "url": "https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/2330/2025/03/18121006/dr-4827-nc-disaster-fact-sheet-dfs092-march-17-2025-002.pdf",
@@ -872,6 +938,38 @@
       "explainer": "Family, clergy and local mental-health services comfort disaster survivors too, and without the Red Cross the military would verify emergencies through its own chain of command, more slowly."
     },
     {
+      "id": "inc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Money and goods: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "Measured (1), for the audited part: the financial and material assistance (cash, relief items and grants, the KPMG-audited functional expenses) given to the households the Red Cross counted; money and goods are worth what they cost to the people who get them, which needs no effect study (the site values cash at face value on its one log-income scale), so the outcome rests on the charity's own data. What survivors would have had anyway (the counterfactual) and their consumption are judgments, carried by their own ranged rows. The meals and shelter nights, valued by judgment, take their own marker (mc_missing_data_adj)."
+    },
+    {
+      "id": "mc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Meals and shelter: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the meals and nights are the Red Cross's own counts, but their value to the people fed and sheltered ($4 a meal, $40 a night) is a judgment, not a measured cost or price. So the shared missing-data step applies to that part of the money and goods."
+    },
+    {
+      "id": "hf_missing_data_adj",
+      "section": "adjustments",
+      "label": "Smoke alarms: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the homes fitted a year are a campaign average, not the year's count; whether those homes lacked a working alarm is a judgment (no audit of homes' alarm status before installation); and the effect comes from observational studies of other programmes and of homes in general (NFPA 2019; Rohde et al. 2016; Istre et al. 2014), not from an evaluation of the Red Cross campaign. So the shared missing-data step applies."
+    },
+    {
+      "id": "ls_missing_data_adj",
+      "section": "adjustments",
+      "label": "Emotional support and emergency messages: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: both effects are judgments (no trial of the Red Cross's disaster mental-health support or of emergency messages; reviews of psychological first aid find no good evidence of an effect), so the shared missing-data step applies."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, a multiplier (the branches' value-weighted average)",
@@ -886,6 +984,14 @@
       "format": "percent",
       "explainer": "Each branch's counterfactual, weighted by its share of the evidence-adjusted value, so evidence_adj × counterfactual_adj equals the branches' own products summed: home fires and large disasters for the money and goods, other alarm programmes for the alarms, other comfort for the wellbeing.",
       "formula": "(uov_share * (inc_share_of_uov * inc_evidence_adj * inc_counterfactual_adj + (1 - inc_share_of_uov) * hf_evidence_adj * hf_counterfactual_adj) + (1 - uov_share) * ls_evidence_adj * ls_counterfactual_adj) / evidence_adj"
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured (the branches' weighted average)",
+      "format": "percent",
+      "formula": "(uov_share * (inc_share_of_uov * inc_evidence_adj * inc_counterfactual_adj * ((1 - mc_value_share) * inc_missing_data_adj + mc_value_share * mc_missing_data_adj) + (1 - inc_share_of_uov) * hf_evidence_adj * hf_counterfactual_adj * hf_missing_data_adj) + (1 - uov_share) * ls_evidence_adj * ls_counterfactual_adj * ls_missing_data_adj) / (evidence_adj * counterfactual_adj)",
+      "explainer": "Each part's missing-data marker, weighted by its share of the evidence- and counterfactual-adjusted value, so evidence_adj × counterfactual_adj × missing_data_adj equals the branches' own products summed: the audited money and goods are measured (1); the meals and shelter (by their share of the value delivered), the smoke alarms and the emotional support are thin (the shared missing-data slider). It moves with the slider only as far as the thin parts' share of the value."
     },
     {
       "id": "volunteer_hours",
@@ -920,19 +1026,8 @@
       "section": "adjustments",
       "label": "Value of a volunteer hour in the US, 2024 (US$)",
       "format": "usd",
-      "value": {
-        "low": 20,
-        "best": 34.79,
-        "high": 36.14
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Independent Sector and the Do Good Institute, Value of Volunteer Time",
-        "url": "https://independentsector.org/volunteer_time",
-        "retrieved": "2026-11-03",
-        "quote": "the estimate for the value of a volunteer hour was $36.14 in 2025, a 3.9% increase from 2024"
-      },
-      "explainer": "Average hourly earnings of US production and non-supervisory workers (BLS), Independent Sector's value of a volunteer hour: $36.14 in 2025, 3.9% above 2024, so $34.79 for 2024, the local wage the site values volunteers at (Convention 2). Range: about $20, the pay of the shelter, logistics and casework jobs most disaster volunteers do, to $36.14."
+      "explainer": "The site's US value of a volunteer hour, 2024 (@united_states.volunteer_hour_value_2024, Independent Sector: the BLS production and non-supervisory wage plus fringe benefits), the local wage the site values volunteers at (Convention 2).",
+      "formula": "@united_states.volunteer_hour_value_2024"
     },
     {
       "id": "contributed_services_recorded",
@@ -998,12 +1093,12 @@
       "label": "Leverage and funging",
       "format": "multiple",
       "value": {
-        "low": 0.85,
-        "best": 0.95,
+        "low": 0.95,
+        "best": 1,
         "high": 1.05
       },
       "kind": "judgment",
-      "explainer": "Donations for a named disaster are restricted to it, but the Red Cross spends to the need; a donation may let it hold reserves or delay other appeals (below 1), and its responses draw in government reimbursement and in-kind gifts (above 1). Anchor: GiveWell's typical 0.85-0.95."
+      "explainer": "Outside effects only (funging inside the Red Cross is in unmodelled benefits): its responses draw in government reimbursement and in-kind gifts (above 1), and its presence may let local governments and other charities do less (below 1, mostly already in the counterfactual). 1, from 0.95 to 1.05."
     },
     {
       "id": "restricted_disaster_assets",
@@ -1022,13 +1117,29 @@
       "explainer": "Gifts given for disasters and not yet spent at year end, up from $107 million a year earlier after the Helene, Milton and Los Angeles appeals."
     },
     {
+      "id": "restricted_disaster_assets_prior",
+      "section": "adjustments",
+      "label": "Net assets restricted to disaster and humanitarian services, 30 June 2024 (US$)",
+      "format": "usd",
+      "value": 107022000,
+      "kind": "observed",
+      "source": {
+        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
+        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 24, note 7, Net assets with donor restrictions (in thousands)",
+        "quote": "Disaster and Humanitarian Services $ 358,494 107,022"
+      },
+      "explainer": "The same balance a year earlier, so the wait uses the average stock over the year, as the international models do."
+    },
+    {
       "id": "gift_to_grant_years",
       "section": "adjustments",
       "label": "Years a gift waits before it is spent",
       "format": "number",
-      "formula": "restricted_disaster_assets / dds_spend",
+      "formula": "avg(restricted_disaster_assets, restricted_disaster_assets_prior) / dds_spend",
       "unit": "years",
-      "explainer": "Funds held for disasters over a year's disaster spending: a little over half a year. Unrestricted gifts are spent sooner, recovery money for the big 2024-25 disasters later."
+      "explainer": "Funds held for disasters (the average of the year-start and year-end balances) over a year's disaster spending: under half a year. Unrestricted gifts are spent sooner, recovery money for the big 2024-25 disasters later."
     },
     {
       "id": "wait_discount",
@@ -1042,8 +1153,8 @@
       "section": "adjustments",
       "label": "All adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount",
-      "explainer": "The product of the adjustments above, the wait included."
+      "formula": "evidence_adj * counterfactual_adj * missing_data_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount",
+      "explainer": "The product of the adjustments above, the wait and the missing-data step included."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -1051,12 +1162,12 @@
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.05,
-        "best": 0.1,
-        "high": 0.3
+        "low": -0.08,
+        "best": 0.08,
+        "high": 0.28
       },
       "kind": "judgment",
-      "explainer": "Not modelled: deaths and injuries averted by evacuation shelters before hurricanes and floods (+), burns averted by smoke alarms (+), durable value of repairs and furniture beyond the year (+), preparedness apps and education (+), the 'whole health' and respite programmes for military families (+); against them, money spent in a heavy disaster year on logistics that went unused (-). About +10%."
+      "explainer": "Not modelled: deaths and injuries averted by evacuation shelters before hurricanes and floods (+), burns averted by smoke alarms (+), durable value of repairs and furniture beyond the year (+), preparedness apps and education (+), the 'whole health' and respite programmes for military families (+); against them, money spent in a heavy disaster year on logistics that went unused (-) and funging inside the Red Cross (a gift for a named disaster may let it hold reserves or delay other appeals: about -2%, 0 to -5%). About +8%."
     },
     {
       "id": "uov_bridged",
@@ -1168,59 +1279,9 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "formula": "dalys_per_dollar * donor_cost_share",
       "unit": "Years of healthy life / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data at all, in the year modelled",
-      "format": "usd",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "The American National Red Cross, Consolidated Financial Statements, June 30, 2025 (audited by KPMG)",
-        "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/2025-Consolidated-Financial-Statement.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 4 and p. 5: every programme has reach or outcome data",
-        "quote": "Total program services 3,032,359"
-      },
-      "explainer": "0: every programme here publishes reach and what it delivered, so all are modelled in the chain above (thin parts with wide ranges)."
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "#givedirectly",
-      "unit": "units of value / $",
-      "explainer": "Not used (no spending without outcome data); the skeleton's placeholder peer stays only so the row exists."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "explainer": "The result per dollar, for the share of the full cost that cash donations pay."
     }
   ],
   "output": {
