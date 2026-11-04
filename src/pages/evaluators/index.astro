@@ -1,0 +1,49 @@
+---
+// Every evaluator whose models are on the site, with how many charities and models each has here.
+import Prose from "../../layouts/Prose.astro";
+import { lib } from "../../lib/data";
+import CharityLogo from "../../components/CharityLogo.tsx";
+
+const counts = new Map<string, { charities: Set<string>; models: number }>();
+for (const m of lib.models.values()) {
+  if (m.kind !== "charity" || !m.output) continue;
+  const c = counts.get(m.owner) ?? { charities: new Set(), models: 0 };
+  c.charities.add(m.charity);
+  c.models++;
+  counts.set(m.owner, c);
+}
+const owners = [...lib.owners.values()].filter((o) => counts.has(o.id)).sort((a, b) => counts.get(b.id)!.charities.size - counts.get(a.id)!.charities.size);
+---
+
+<Prose title="Evaluators" description="The evaluators whose analyses the site re-implements, and our own models.">
+  <p>Every model on the site comes from one of these: an evaluator's published analysis, re-implemented so it reproduces their numbers, or one we built ourselves. <a href="/method#sources">Where models come from</a>.</p>
+  <ul class="ev-list">
+    {owners.map((o) => {
+      const c = counts.get(o.id)!;
+      return (
+        <li>
+          <span class="ev-name"><CharityLogo id={`owner-${o.id}`} name={o.name} size={32} /><a href={`/evaluators/${o.id}`}>{o.name}</a></span> <span class="muted small">{c.charities.size} {c.charities.size === 1 ? "charity" : "charities"}, {c.models} {c.models === 1 ? "model" : "models"}</span>
+          {o.about && <p class="small muted">{o.about}</p>}
+        </li>
+      );
+    })}
+  </ul>
+</Prose>
+
+<style>
+  .ev-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--s4);
+  }
+  .ev-name {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    font-size: 18px;
+  }
+  .ev-list p {
+    margin: var(--s1) 0 0;
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+// One evaluator's hub: the rankings filtered to the charities it has a model of, with its site linked.
+import HubPage from "../../components/HubPage.astro";
+import CharityLogo from "../../components/CharityLogo.tsx";
+import { lib } from "../../lib/data";
+
+export function getStaticPaths() {
+  const owners = new Set([...lib.models.values()].filter((m) => m.kind !== "template" && m.output).map((m) => m.owner));
+  return [...lib.owners.values()].filter((o) => owners.has(o.id)).map((o) => ({ params: { owner: o.id } }));
+}
+const owner = lib.owners.get(Astro.params.owner!)!;
+const host = owner.url?.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+---
+
+<HubPage title={owner.name} description={`Every charity ${owner.name} has a model of, ranked on your values.`} owner={owner.id}>
+  <CharityLogo slot="logo" id={`owner-${owner.id}`} name={owner.name} size={40} lazy={false} className="m-logo" />
+  {owner.about && <p>{owner.about}{host && <> <a href={owner.url} rel="noopener">{host}</a></>}</p>}
+</HubPage>

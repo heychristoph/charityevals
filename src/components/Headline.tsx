@@ -1,13 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, buildLibrary, comparable, estimateAge, headline, usedAssumptions, type ResolvedModel } from "../engine/model";
-import { byCode, byIso3, inSentence } from "../engine/countries";
-import { combine, declaredLocations, locationsOf } from "../engine/ranking";
-import { sensitivity } from "../engine/sensitivity";
-import { figureOf, useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
+import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
+import { useAssumptionValues, useResults } from "../lib/use-results";
 import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
 import { formatYears } from "../lib/format";
-import InfoTip, { WithTip } from "./InfoTip";
 
 const built = new Map<string, ResolvedModel>();
 /** A bulk model in full (its page loads the file before hydrating); any other model as the library has it. */
@@ -20,102 +16,19 @@ function modelOf(id: string, bulk: boolean): ResolvedModel {
   return m;
 }
 
-const rangeNote = (low: number, high: number) => (
-  <p>
-    Plausible range <span className="num">{formatYears(low)} to {formatYears(high)}</span>: every uncertain input at
-    the end that lowers the result, then at the end that raises it. Deliberately wide.
-  </p>
-);
-
-/** The plausible range, computed only when the tip is opened: it varies every input in turn. */
-function Range({ model, av, edits }: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number> }) {
-  const s = useMemo(() => sensitivity(lib, model, av, "charityevals", edits), [model, av, edits]);
-  return rangeNote(s.jointLow, s.jointHigh);
-}
-
-type Part = { label: string; central: number; share?: number };
-/** How an evaluator's figure is made: its parts (funded locations or programs), and the words for it. */
-type Combined = { ev: EvaluatorResult; parts: Part[]; what: string; qualifier: string };
-
-const point = (v: number) => ({ central: v, low: v, high: v });
-const placeName = (m: ResolvedModel, charity: string) => m.name.replace(charity, "").trim().replace(/^\((.*)\)$/, "$1") || m.name;
-const share = (s: number) => (s < 0.005 ? "<1%" : `${Math.round(s * 100)}%`);
-
-/** The evaluator's figure as the rankings combine it (src/engine/ranking.ts, via useResults), when it is
- * more than this one model's own figure: several locations by funding, or several programs. */
-function combinedOf(ev: EvaluatorResult | undefined, model: ResolvedModel, av: Record<string, number>): Combined | undefined {
-  if (!ev) return undefined;
-  // Our own models weigh a charity's programs by its spending; an evaluator's, by its funding.
-  const funder = ev.owner === "charityevals" ? "the charity's spending" : `${lib.owners.get(ev.owner)?.name ?? "the evaluator"}'s funding`;
-  const charity = lib.charities.get(model.charity)!;
-  if (ev.programs.length > 1) {
-    const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);
-    const parts = ev.programs
-      .filter((p) => ev.basis !== "weighted" || p.weight! > 0)
-      .map((p) => ({
-        label: charity.programs?.find((x) => x.id === p.program)?.label ?? p.program,
-        central: p.central,
-        share: ev.basis === "weighted" ? p.weight! / total : undefined,
-      }));
-    const n = `${parts.length} programs`;
-    return { ev, parts, what: "program", qualifier: ev.basis === "weighted" ? `weighted by ${funder} across ${n}` : `the median of ${n}` };
-  }
-  const [p] = ev.programs;
-  if (p.locationBasis !== "weighted") return undefined;
-  const family = locationsOf(lib, p.result.model);
-  const declared = declaredLocations(charity, family);
-  const headlineOf = (m: ResolvedModel) => point(headline(lib, m, av));
-  let parts: Part[];
-  let by = funder;
-  if (declared) {
-    const total = declared.reduce((s, d) => s + d.weight, 0);
-    parts = declared.filter((d) => d.weight > 0).map((d) => ({ label: d.label, central: combine(d.models.map(headlineOf)).central, share: d.weight / total }));
-  } else {
-    // The sheet's own grant sizes per location (ranking.ts: locationWeights): every location counts.
-    by = "grant size";
-    parts = family.map((m) => ({ label: placeName(m, charity.name), central: headline(lib, m, av) }));
-  }
-  return { ev, parts, what: "location", qualifier: `weighted by ${by} across ${parts.length} locations` };
-}
-
-function Breakdown({ parts, what }: { parts: Part[]; what: string }) {
-  const rows = [...parts].sort((a, b) => (b.share ?? 0) - (a.share ?? 0) || b.central - a.central);
-  return (
-    <>
-      <p>Each {what}{rows.some((r) => r.share !== undefined) ? ", its share of the funding," : ""} and its figure:</p>
-      <table className="m-parts">
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.label}>
-              <th scope="row">{r.label}</th>
-              {r.share !== undefined && <td className="num">{share(r.share)}</td>}
-              <td className="num">{formatYears(r.central)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  );
-}
-
-/** The result under the page title: "24 years of healthy life per $1,000", on the reader's values and
- * edits, with its range in a tip. On a charity's main page (`main`), the evaluator's figure exactly as
- * the rankings show it, where that combines several funded locations or programs; their breakdown is
- * in the tip. It also keeps any figure a write-up quotes (<span data-figure="headline"
- * data-model="id">) in step with the model's own numbers. */
-export default function Headline({ id, bulk = false, place, main = false }: { id: string; bulk?: boolean; place?: string; main?: boolean }) {
+/** The page's figures outside the model: it keeps any figure a write-up quotes (<span
+ * data-figure="headline" data-model="id">) in step with the model's own numbers, and on a charity
+ * whose figure combines several programs it tells the edit store which models the page shows. The
+ * figure itself is the model's bottom line, the first row of its tree just below, so it isn't repeated
+ * under the title. */
+export default function Headline({ id, bulk = false, main = false }: { id: string; bulk?: boolean; place?: string; main?: boolean }) {
   const model = useMemo(() => modelOf(id, bulk), [id, bulk]);
   const av = useAssumptionValues();
   const urlEdits = useEdits();
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
-  const years = comparable(lib, model);
   const { results } = useResults();
   const ev = main ? results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner) : undefined;
-  // The rankings never see page edits, so with any edit the headline switches to this model's own
-  // edited figure (and its edit-aware range) rather than show a combined figure the edit can't move.
-  const edited = Object.keys(edits).length > 0;
-  const combined = useMemo(() => (edited ? undefined : combinedOf(ev, model, av)), [edited, ev, model, av]);
 
   useEffect(() => {
     for (const el of document.querySelectorAll<HTMLElement>("[data-figure=headline]")) {
@@ -126,156 +39,7 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
     }
   }, [value, av, id, model.id]);
 
-  const figure = combined ? combined.ev.central : value;
-  // The notes below the figure describe the number shown: the charity's combined figure where it
-  // combines several programs or locations, compared with one slider at its neutral setting.
-  const fig = useMemo(
-    () => (combined ? (a: Record<string, number>) => figureOf(model.charity, model.owner, a) : (a: Record<string, number>) => headline(lib, model, a, edits)),
-    [combined, model, edits],
-  );
-  const partModels = useMemo(
-    () => (combined && combined.what === "program" ? combined.ev.programs.map((p) => ({ m: p.result.model, weight: p.weight })) : [{ m: model, weight: undefined }]),
-    [combined, model],
-  );
   // A whole-charity page edits each programme's own model; their edits stay in the URL (edit-state).
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
-  if (!Number.isFinite(figure)) return null;
-  const unit = years ? "years of healthy life per $1,000" : `${lib.assumptions.units[model.output!.unit]?.label ?? "per dollar"} per dollar`;
-  // With edits the figure is this one model's, so its place is just the location, not "the median of …".
-  const where = edited ? place?.replace(/, the median of .*$/, "") : place;
-  const text = combined ? `${unit}, ${combined.qualifier}` : `${where ? `${unit}, ${where}` : unit}${edited ? ", with your edits" : ""}`;
-  return (
-    <div className="m-headline tip-host">
-      <span className="m-figure num">{formatYears(figure)}</span>{" "}
-      <span className="m-unit">
-        <WithTip text={text}>
-          <InfoTip label={combined ? "How this figure is made" : "How sure is this"}>
-            {combined ? (
-              <>
-                {rangeNote(combined.ev.low, combined.ev.high)}
-                <Breakdown parts={combined.parts} what={combined.what} />
-              </>
-            ) : (
-              <Range model={model} av={av} edits={edits} />
-            )}
-            {!years && <p>This unit has no exchange rate yet, so it isn't in the rankings.</p>}
-          </InfoTip>
-        </WithTip>
-      </span>
-      {years && <EstimateAge model={model} av={av} fig={fig} />}
-      {years && <DistanceWeight model={model} av={av} fig={fig} parts={partModels} />}
-      {years && <MissingData model={model} av={av} fig={fig} parts={partModels} />}
-    </div>
-  );
-}
-
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-/** "November 2016" from "2016-11-01"; a year alone as itself. */
-const monthYear = (d: string) => (d.length >= 7 ? `${MONTHS[Number(d.slice(5, 7)) - 1]} ${d.slice(0, 4)}` : d.slice(0, 4));
-
-/** "Estimate from November 2016, 10 years old: × 0.61 at your settings": how old the estimate is and
- * what the reader's discount for its age (docs/normalization.md 2.11) does to the figure above. */
-type Fig = (a: Record<string, number>) => number;
-const ratio = (fig: Fig, av: Record<string, number>, neutral: Record<string, number>) => {
-  const r = fig(av) / fig({ ...av, ...neutral });
-  return Number.isFinite(r) ? r : 1;
-};
-
-function EstimateAge({ model, av, fig }: { model: ResolvedModel; av: Record<string, number>; fig: Fig }) {
-  const age = estimateAge(lib, model);
-  const made = model.source?.published;
-  if (age === undefined || !made) return null;
-  const factor = ratio(fig, av, { [AGE_DISCOUNT]: 0 });
-  const old = age < 1 ? "under a year old" : `${Math.round(age)} ${Math.round(age) === 1 ? "year" : "years"} old`;
-  const effect = factor < 1 ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
-  return (
-    <p className="m-age">
-      Estimate from {monthYear(made)}, {old}: {effect} at <a href={`/assumptions#a-${AGE_DISCOUNT}`}>your settings</a>
-      {age > 0 && <> ({formatPercent(av[AGE_DISCOUNT])} less for each year)</>}.
-    </p>
-  );
-}
-
-const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
-
-/** "Helps lives in Kenya: × 0.25 at your settings (you live in the United States, 50% less per step)":
- * where the model's beneficiaries are and what the reader's distance weight (docs/normalization.md 2.13)
- * does to the figure above. For a charity that moves money, the weight its destinations bring together. */
-type ProgramPart = { m: ResolvedModel; weight?: number };
-function DistanceWeight({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
-  const b = parts.length > 1 ? mergedBeneficiaries(parts, av) : model.beneficiaries;
-  if (!b) return null;
-  const home = byCode.get(av[HOME_COUNTRY]);
-  const d = av[DISTANCE_DISCOUNT] ?? 0;
-  const place = b === "destinations"
-    ? "Moves money to other charities, each weighed by where it works"
-    : `Helps lives ${where(b)}`;
-  // The whole effect on the headline, destinations included.
-  const factor = home && d > 0 ? ratio(fig, av, { [DISTANCE_DISCOUNT]: 0 }) : 1;
-  const effect = !home || d <= 0 || !Number.isFinite(factor) || Math.abs(factor - 1) < 5e-4 ? "counted in full" : `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}`;
-  return (
-    <p className="m-age m-distance">
-      {place}: {effect} at <a href={`/assumptions#a-${DISTANCE_DISCOUNT}`}>your settings</a>
-      {home && d > 0 ? <> (you live in {inSentence(home.name)}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
-    </p>
-  );
-}
-
-/** Several programs' beneficiaries as one, each weighted by its share of the combined figure at the
- * reader's values without the distance weight (its funding weight × its figure, as the combination
- * adds them); a program that moves money keeps that label. */
-function mergedBeneficiaries(parts: ProgramPart[], av: Record<string, number>): Record<string, number> | "world" | "destinations" | undefined {
-  const plain = { ...av, [DISTANCE_DISCOUNT]: 0 };
-  const out: Record<string, number> = {};
-  let total = 0;
-  const weighted = parts.every((p) => p.weight !== undefined);
-  for (const { m, weight } of parts) {
-    const b = m.beneficiaries;
-    if (!b || b === "destinations") return b;
-    const v = Math.max(0, headline(lib, m, plain)) * (weighted ? weight! : 1);
-    total += v;
-    for (const [iso, s] of Object.entries(b === "world" ? { world: 1 } : b)) out[iso] = (out[iso] ?? 0) + s * v;
-  }
-  if (!(total > 0)) return undefined;
-  for (const iso in out) out[iso] /= total;
-  return Object.keys(out).length === 1 && out.world ? "world" : out;
-}
-
-/** "in Kenya", "in Nigeria and Niger", "across the world", "in the UK (6%) and across the world (94%)". */
-function where(b: Record<string, number> | "world"): string {
-  if (b === "world") return "across the world";
-  const parts = Object.entries(b).sort((x, y) => y[1] - x[1]);
-  const named = (iso: string) => (iso === "world" ? "across the world" : `in ${inSentence(byIso3.get(iso)?.name ?? iso)}`);
-  const even = parts.every(([, s]) => Math.abs(s - parts[0][1]) < 1e-3);
-  if (parts.length > 4) return `in ${parts.length} countries${even ? "" : `, most ${named(parts[0][0])}`}`;
-  const list = parts.map(([iso, s]) => `${named(iso)}${even ? "" : ` (${Math.round(s * 100)}%)`}`);
-  return list.length === 1 ? list[0] : `${list.slice(0, -1).join(", ")} and ${list.at(-1)}`;
-}
-
-/** "Not measured for this charity (all of the result): × 0.50 at your settings (counted at 50%)": how much
- * of the result rests on judgment or on research about other delivery, and what the reader's missing-data
- * slider (docs/normalization.md 2.12) does to the figure above. An imported model's share is its
- * `missing_data`; a charityevals model's comes from its branches' own missing_data_adj rows; a charity that
- * moves money takes its destinations'. */
-function MissingData({ model, av, fig, parts }: { model: ResolvedModel; av: Record<string, number>; fig: Fig; parts: ProgramPart[] }) {
-  if (!(MISSING_DATA_DISCOUNT in av)) return null;
-  const d = av[MISSING_DATA_DISCOUNT];
-  // The whole effect on the figure shown, destinations, branches and programs included.
-  const factor = ratio(fig, av, { [MISSING_DATA_DISCOUNT]: 1 });
-  const moved = Math.abs(factor - 1) >= 5e-4;
-  // Whether a part isn't measured is the models' own classification, not whether the slider happens to
-  // move the figure (at 100% nothing moves, but the unmeasured parts are still unmeasured).
-  const thin = (m: ResolvedModel) => (m.missing_data ? m.missing_data.thin_share > 0 : usedAssumptions(lib, m).includes(MISSING_DATA_DISCOUNT));
-  const share = parts.length === 1 ? model.missing_data?.thin_share : undefined;
-  const anyThin = parts.some((p) => thin(p.m));
-  const what = share !== undefined
-    ? share === 0 ? "Measured for this charity" : `Not measured for this charity (${share === 1 ? "all" : formatPercent(share)} of the result)`
-    : anyThin ? "Parts not measured for this charity" : "Measured for this charity";
-  const effect = moved ? `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}` : "counted in full";
-  return (
-    <p className="m-age m-missing" title={model.missing_data?.note}>
-      {what}: {effect} at <a href={`/assumptions#a-${MISSING_DATA_DISCOUNT}`}>your settings</a>
-      {moved || anyThin ? <> (counted at {formatPercent(d)})</> : null}.
-    </p>
-  );
+  return null;
 }

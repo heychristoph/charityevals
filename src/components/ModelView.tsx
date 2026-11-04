@@ -5,13 +5,14 @@ import { buildLibrary, compute } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
 import { editsFor, useEdits } from "../lib/edit-state";
 import ModelTree from "./ModelTree";
+import { WaterfallInSlot } from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
 import { flags, sensitivity } from "../engine/sensitivity";
 import "./model.css";
 
 /** `place`: the location the model covers, when it is one of several. `about`: who made the model and links to its spreadsheet, file and history, shown under the model.
  * `children`: the evaluation's write-up. Both come from the page as Astro slots. */
-export default function ModelView({ id, bulk = false, place, about, children }: { id: string; bulk?: boolean; place?: string; about?: React.ReactNode; children?: React.ReactNode }) {
+export default function ModelView({ id, bulk = false, place, about, children, waterfall = true }: { id: string; bulk?: boolean; place?: string; about?: React.ReactNode; children?: React.ReactNode; waterfall?: boolean }) {
   // Bulk models reach the browser as one-row summaries; their page loads the full file before
   // hydrating (client:model, lib/model-directive.ts).
   const raw = bulk ? bulkRaw(id) : undefined;
@@ -35,6 +36,7 @@ export default function ModelView({ id, bulk = false, place, about, children }: 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
       <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats}>{about}</ModelTree>
+      {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} />}
 
       {children}
     </div>

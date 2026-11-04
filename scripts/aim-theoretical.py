@@ -52,8 +52,6 @@ KEEP = {
         "Better Season Project partners with Kenyan savings cooperatives to lend smallholders money for rainwater tanks secured on the tank (piloting)."),
     "cearch-aim": ("https://exploratory-altruism.org/",
         "CEARCH researches causes and recommends interventions (800 causes long-listed, 20 in depth), with grantmaking and advisory work built on that research."),
-    "centre-for-aquaculture-progress-aim": ("https://centreforaquacultureprogress.org/news/stakeholder-report-electrical-stunning",
-        "The Centre for Aquaculture Progress works on electrical stunning of sea bream and sea bass, now through certifiers (GLOBALG.A.P., ASC) and producers rather than Greek legislation, which AIM modelled."),
     "concentric-policies-aim": ("https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the",
         "Concentric Policies advocates for tobacco taxes in Liberia and Guinea-Bissau (November 2024, with plans through 2025); AIM modelled Mongolia."),
     "first-embrace-aim": ("https://forum.effectivealtruism.org/posts/wGXCuedzsubqNDAca/introducing-first-embrace-an-ambitious-impact-incubated",

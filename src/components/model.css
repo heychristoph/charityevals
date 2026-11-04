@@ -43,3 +43,141 @@
     padding-top: var(--s2);
   }
 }
+
+/* From the evaluator's figure to the one shown (Waterfall): one row per step on a shared log axis. */
+.wf-title {
+  font: 600 20px/1.3 var(--serif);
+  margin: var(--s5) 0 var(--s2);
+}
+.wf-sum {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.wf-h {
+  font: 600 15px/1.3 var(--sans);
+  color: var(--ink-2);
+  margin: var(--s4) 0 var(--s2);
+}
+.wf-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--s2);
+  margin: var(--s3) 0 var(--s5);
+}
+.wf-term {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: var(--s2) var(--s3);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  flex: 1 1 8.5em;
+  max-width: 14em;
+  color: var(--ink);
+  text-decoration: none;
+}
+a.wf-term-link:hover {
+  border-color: var(--blue);
+}
+.wf-term-num {
+  font: 650 20px/1.15 var(--serif);
+}
+.wf-term-result .wf-term-num,
+.wf-term:first-child .wf-term-num {
+  color: var(--cause);
+}
+.wf-term-label {
+  font-size: 13px;
+  line-height: 1.35;
+}
+.wf-term-by {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.wf-op-link {
+  text-decoration: none;
+}
+.wf-op {
+  align-self: center;
+  font: 400 20px/1 var(--serif);
+  color: var(--ink-3);
+}
+.wf-lede {
+  color: var(--ink-2);
+  margin: var(--s2) 0 var(--s3);
+  max-width: var(--measure);
+}
+.wf-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.wf-step {
+  display: grid;
+  grid-template-columns: minmax(12em, 3fr) minmax(5em, 2fr) 4.5em;
+  gap: var(--s3);
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+}
+.wf-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* Long row labels keep to two lines; the full label is the link's title. */
+.wf-label > a,
+.wf-label > .wf-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wf-kind {
+  color: var(--ink-3);
+}
+.wf-track {
+  position: relative;
+  height: 14px;
+}
+.wf-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
+}
+.wf-bar-total {
+  background: var(--cause);
+}
+.wf-up {
+  background: color-mix(in srgb, var(--cause) 55%, transparent);
+}
+.wf-down {
+  background: color-mix(in srgb, var(--ink-3) 70%, transparent);
+}
+.wf-value {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.wf-end {
+  font-weight: 600;
+}
+.wf-end .wf-value {
+  color: var(--ink);
+}
+@media (max-width: 560px) {
+  .wf-step {
+    grid-template-columns: 1fr 4.5em;
+  }
+  .wf-track {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+}

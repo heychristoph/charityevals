@@ -20,3 +20,14 @@ describe("the WELLBY rate", () => {
     expect(upgrade({ daly_per_wellby: 0.1 })).toEqual({ daly_per_wellby: 0.1 });
   });
 });
+
+describe("the value of a life", () => {
+  it("was a multiplier on GiveWell's values; an old link's value is restated in healthy years at the default rate", () => {
+    expect(upgrade({ life_value_multiplier: 1.2 })).toEqual({ daly_per_child_death: 1.2 * 116.25262 / 2 });
+    expect(upgrade({ life_value_multiplier: 1.2, daly_per_child_death: 40 })).toEqual({ daly_per_child_death: 40 });
+  });
+
+  it("is worked out from the sliders, never set by a link", () => {
+    expect(assumptionValues(assumptions as never, { life_value_multiplier: 3 }).life_value_multiplier).toBeUndefined();
+  });
+});

@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { evaluate, parse, type Node } from "./expr";
-import { assumptionValues, buildLibrary, comparable, compute, headlineExprOf, headlineNode } from "./model";
+import { assumptionValues, buildLibrary, comparable, compute, headlineExprOf, headlineNode, unitFormula } from "./model";
 import { childrenOf, headlineFormula, identityOf, lookupFor, pathTo, pathToRef, rootOf, shapeOf, spreadShare } from "./tree";
 import { rowsFeeding, sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
@@ -110,12 +110,15 @@ describe("the headline", () => {
     expect(headlineFormula(m, "2 * ($a + $b)")).toBe("out * 2 * ($a + $b) / $uov_per_daly * 1000");
   });
   it("equals the common value over a healthy year's value per $1,000 for every unit", () => {
-    const av: Record<string, number> = { ...assumptionValues(buildLibrary([], assumptions).assumptions), uov_per_daly: 3.1, chicken_vs_person: 0.37 };
-    for (const [id, u] of Object.entries(assumptions.units as Record<string, { to_common?: string }>)) {
-      if (!u.to_common) continue;
+    const l0 = buildLibrary([], assumptions);
+    const av: Record<string, number> = { ...assumptionValues(l0.assumptions), uov_per_daly: 3.1, chicken_vs_person: 0.37 };
+    for (const id of Object.keys(assumptions.units)) {
+      // As evaluated: a derived assumption ($life_value_multiplier) read as its formula.
+      const to = unitFormula(l0.assumptions, id);
+      if (!to) continue;
       const look = (s: string, n: string) => (s === "row" ? 0.25 : s === "fact" ? 2 : av[n]);
-      const common = 0.25 * evaluate(parse(u.to_common!), look);
-      expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, u.to_common!), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
+      const common = 0.25 * evaluate(parse(to), look);
+      expect(evaluate(headlineNode({ type: "ref", scope: "row", name: "out" }, to), look), id).toBeCloseTo(common / (av.uov_per_daly / 1000), 9);
     }
   });
 });

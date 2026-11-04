@@ -7,13 +7,13 @@ import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
 import Headline from "./Headline.tsx";
-import WholeCharity from "./WholeCharity.tsx";
+import WholeCharity, { Locations } from "./WholeCharity.tsx";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
-import { rankingPlan } from "../engine/ranking";
+import { locationsOf, rankingPlan } from "../engine/ranking";
 
 interface Props {
   modelId: string;
@@ -81,13 +81,15 @@ const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map
 // (their file loads when their branch opens; the island waits for the main one's, client:model).
 const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
 const whole = parts.length > 1;
+// One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
+const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
 <Base title={meta.title} description={meta.description} schema={modelSchema(model, meta.description)} active="rankings">
   <div class="page layout" style={`--cause: var(--cause-${model.cause})`} data-track-charity={charity.id} data-track-model={model.id}>
     <div class="main">
-      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / {CAUSE[charity.cause]}{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
+      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={`/causes/${charity.cause}`}>{CAUSE[charity.cause]}</a>{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
         <div class="m-title">
           <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
@@ -104,7 +106,6 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         {charity.donate && (
           <div class="donate">
             <a class="donate-button" href={charity.donate} rel="noopener" data-track="donate" data-charity={charity.id}>Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
-            <span class="small muted">{charity.donate_via ? `Through ${charity.donate_via}'s form. ` : ""}We earn nothing from donations or listings.</span>
           </div>
         )}
       </header>
@@ -153,29 +154,31 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       {whole ? (
         model.bulk ? (
           <WholeCharity client:model={model.id} id={model.id}>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </WholeCharity>
         ) : (
           <WholeCharity client:load id={model.id}>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </WholeCharity>
         )
       ) : model.bulk ? (
+        <>
+        {located && <Locations client:load id={model.id} />}
         <ModelView client:model={model.id} id={model.id} bulk place={place}>
           <Fragment slot="about">
             <p>
               {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
-              {" "}by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
               {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
             </p>
             <p class="m-links">
@@ -184,19 +187,22 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
             </p>
           </Fragment>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </ModelView>
+        </>
       ) : (
+        <>
+        {located && <Locations client:load id={model.id} />}
         <ModelView client:load id={model.id} place={place}>
           <Fragment slot="about">
             <p>
               {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
-              {" "}by <a href={owner.url}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
+              {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.
               {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
             </p>
             <p class="m-links">
@@ -205,13 +211,14 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               {model.source?.license && <span class="muted"> · {model.source.license.startsWith("©") ? model.source.license : `Licence: ${model.source.license}`}</span>}
             </p>
           </Fragment>
-          {Writeup && (
-            <section class="writeup" aria-labelledby="writeup-title">
-              <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
-              <div class="writeup-body" data-gloss><Writeup /></div>
-            </section>
-          )}
+          <section class="writeup" aria-labelledby="writeup-title">
+            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+            {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+            {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
+            <div class="wf-slot" data-waterfall={model.id}></div>
+          </section>
         </ModelView>
+        </>
       )}
       {resources.length > 0 && (
         <details class="resources">
@@ -281,7 +288,6 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     padding-top: var(--s5);
   }
   .writeup {
-    max-width: var(--measure);
     padding: var(--s5) 0 var(--s2);
     border-top: 1px solid var(--rule);
   }
@@ -296,6 +302,28 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   .writeup :global(ul),
   .writeup :global(ol) {
     margin: 0 0 var(--s3);
+  }
+  .writeup :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .writeup :global(th),
+  .writeup :global(td) {
+    padding: var(--s2) var(--s3);
+    text-align: left;
+    vertical-align: top;
+  }
+  .writeup :global(th:first-child),
+  .writeup :global(td:first-child) {
+    padding-left: 0;
+  }
+  .writeup :global(th) {
+    font: 600 14px/1.3 var(--sans);
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--rule);
+  }
+  .writeup :global(tbody tr + tr > *) {
+    border-top: 1px solid var(--rule);
   }
   .writeup :global(ul),
   .writeup :global(ol) {
@@ -437,9 +465,17 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     display: grid;
     gap: var(--s4);
   }
+  /* A <details> doesn't lay its content out as a grid, so the groups space themselves: more room
+     above a group's heading than between the heading and its list. */
+  .resources > p {
+    margin: var(--s2) 0 var(--s4);
+  }
+  .res-group + .res-group {
+    margin-top: var(--s5);
+  }
   .res-group h3 {
     font-size: 17px;
-    margin-bottom: var(--s2);
+    margin: 0 0 var(--s2);
   }
   .res-group ul {
     margin: 0;

@@ -1,36 +1,36 @@
 {
   "groups": [
     {
-      "id": "cross-cause",
-      "title": "Exchange rates",
-      "explainer": "Charities do different kinds of good: raising incomes, adding years of healthy life, sparing animals pain, making people more satisfied with their lives. To rank them on one list, results are shown in years of healthy life, and the rates below say what the other kinds of good are worth against each other. Animal analyses are first put into days of a chicken's pain, each species weighed against a chicken. Change them and the ranking changes; that is the point."
+      "id": "people",
+      "title": "People",
+      "explainer": "What different kinds of good are worth to you. Results are shown in years of healthy life; these say what a year of extra income, a life saved, a happier year and good done later are worth in those. Value judgments: there is no right answer, and changing them changes the ranking."
     },
     {
-      "id": "moral-weights",
-      "title": "Lives",
-      "explainer": "How much saving a life counts. A value judgment, not a fact."
+      "id": "animals",
+      "title": "Animals",
+      "explainer": "How much animals' suffering counts next to people's. Animal results are counted in days of a chicken's pain; these say what such a day is worth in a person's healthy time."
     },
     {
       "id": "distance",
-      "title": "Lives near and far",
-      "explainer": "Whether a life counts the same wherever it is. By default it does, and nothing here changes any figure. Some people give more weight to people (and animals) nearer to them: set where you live and how much less each step further away counts, and every estimate is weighed by where the lives it helps are."
+      "title": "Near and far",
+      "explainer": "Whether good counts the same wherever and whenever it happens."
     },
     {
-      "id": "economics",
-      "title": "Timing",
-      "explainer": "How much less good done in the future counts than the same good done today, and how much less an old estimate counts than a new one."
+      "id": "evidence",
+      "title": "How much to trust the estimates",
+      "explainer": "Estimates are often more optimistic than what a donation achieves today. These say how much to discount results nobody measured, estimates that are years old, an organisation's past average, and reforms that would have come anyway."
     },
     {
       "id": "accounting",
-      "title": "How impact is counted",
-      "explainer": "How credit for an outcome is shared between everyone who paid for it, for how long a won reform counts, and how much the next dollar does compared with an organisation's past average, and how much a programme counts whose results aren't measured."
+      "title": "How credit is shared",
+      "explainer": "Most good is paid for by more than one funder. By default each evaluator's own way of crediting a charity is kept; switch it to share credit by who paid for what."
     }
   ],
   "rows": [
     {
       "id": "resource_shares",
       "section": "accounting",
-      "label": "Credit by share of resources",
+      "label": "Give each funder credit for its share",
       "technical": "Pro-rata attribution instead of counterfactual credit",
       "format": "toggle",
       "value": {
@@ -39,41 +39,112 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Off: each evaluator's counterfactual logic, as published, such as GiveWell's adjustments for money a grant pulls in or pushes elsewhere.\n\nOn: an outcome is shared out by everything that went into it: every funder's money, governments' in-kind costs, and staff's pay below what they could earn elsewhere. Each gets the share it paid for, so shares add up to 100% and nothing is counted twice.\n\nWhere we don't know a charity's staff costs or pay, we use a default for its kind of work: low for programs that hand out nets or medicines, high for research and advocacy."
+      "explainer": "Most good is paid for by several funders: donors, governments, other charities. Off (the default), each charity evaluator's own way of crediting a charity is kept. On, credit is shared by who paid for what, so the shares add up to the whole and nothing is counted twice."
     },
     {
-      "id": "win_years_counted",
-      "section": "accounting",
-      "label": "Years a won reform counts before it would have come anyway",
-      "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
-      "unit": "years",
+      "id": "home_country",
+      "section": "distance",
+      "label": "Where you live",
+      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
+      "control": "country",
+      "format": "integer",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "Choose your country if you want lives near you to count more. Leave it unset and every life counts the same wherever it is."
+    },
+    {
+      "id": "distance_discount",
+      "section": "distance",
+      "label": "Lives in other countries count … % less",
+      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
+      "unit": "per step",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "With your country set, a life in your country counts fully, a life elsewhere in your part of the world counts less by this much, and one in the rest of the world less again. At 50%: your country 1, your region 0.5, the rest of the world 0.25.\n\nThe default, 0%, counts every life the same, as every charity evaluator does."
+    },
+    {
+      "id": "estimate_age_discount",
+      "section": "evidence",
+      "label": "An estimate counts … % less for each year since it was made",
+      "technical": "Annual discount on a cost-effectiveness estimate's age",
+      "unit": "per year",
+      "format": "percent",
+      "value": {
+        "low": 0.0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Some charities' estimates are years old, and the charity may do less today. This says how much less an estimate counts for each year since it was made.\n\nThe default, 5% a year, counts a 10-year-old estimate at 61%. Set 0% to count every estimate in full."
+    },
+    {
+      "id": "uov_per_daly",
+      "section": "people",
+      "label": "One healthy year is worth … years of double income",
+      "technical": "Units of value per DALY (disability-adjusted life year) averted",
+      "unit": "units of value / DALY",
       "format": "number",
       "value": {
         "low": 1,
-        "best": 5,
-        "high": 20
+        "best": 2,
+        "high": 4
       },
       "kind": "judgment",
-      "explainer": "When a campaign wins a reform (a company's cage-free pledge, a ban on low-welfare imports, a climate rule), the change would probably have come some day anyway: other campaigners, the market or the law would have got there. The campaign gets credit only for the years it brought the change forward. This sets how many years that is, for every model that credits a won reform.\n\nEvaluators answer it very differently for the same kind of win: Founders Pledge credits The Humane League 0.5 to 1.5 years per policy, Animal Charity Evaluators 3.9 to 20.5 years (and Rethink Priorities' 15 for cage-free pledges), Ambitious Impact counts 35 to 55 years. The default, 5, is about the middle of the evaluators' own figures; the range, 1 to 20, covers nearly all of them. Our judgment.\n\nThe years are counted from when the reform takes effect (a pledge's deadline, a law's start) and, like every future benefit, discounted at \"Next year's good counts less by\", the wait included. Each evaluator's own figure is shown on its model as the evaluator's, and used in the evaluator view."
+      "explainer": "How health compares with income. The default, 2, follows the charity evaluator GiveWell, whose values draw on surveys of how people in Ghana and Kenya trade income against health and survival."
     },
     {
-      "id": "marginal_vs_past_average",
-      "section": "accounting",
-      "label": "How much the next dollar does compared with the average dollar so far",
-      "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
-      "format": "percent",
+      "id": "daly_per_child_death",
+      "section": "people",
+      "label": "Saving a young child's life is worth … years of healthy life",
+      "technical": "Healthy years (DALYs) a death under five averted counts as; deaths at other ages in proportion to GiveWell's moral weights by age",
+      "unit": "years of healthy life",
+      "format": "number",
       "value": {
-        "low": 0.18,
-        "best": 0.5,
-        "high": 1
+        "low": 34.875786,
+        "best": 58.12631,
+        "high": 81.376834
       },
       "kind": "judgment",
-      "explainer": "Some estimates divide what an organisation spent in the past by everything that spending achieved: the pledges, laws and research results it won, the lives its service saved, or the money it moved. That is the average dollar. A dollar given now does less, because an organisation does its most promising work first and the easiest wins are taken. This sets how much the next dollar does, as a share of the average, for every model built that way: The Life You Can Save's money moved, the climate models built on past budgets and past wins, Animal Charity Evaluators' and Founders Pledge's campaign estimates, Founders Pledge's Innovation in Government Initiative, and SoGive's research and lifeboat estimates. Estimates that are already about the next dollar (GiveWell's, Ambitious Impact's and the Happier Lives Institute's, forward-looking budgets) and costs per item delivered (a net, a treatment, a course, a tree) don't take it, so nothing is counted twice; docs/normalization.md lists every model.\n\nThe few published comparisons: CEARCH puts Giving What We Can's marginal giving multiplier at about 13× against its 2020–22 average of 30× (0.43), and in another reading at 17.6% of the average; Giving What We Can expects its marginal figure to be much closer to the average (up to 1). Rethink Priorities' funding model assumes each doubling of a fund's budget cuts its cost-effectiveness by about 10% for GiveWell and 46% for a catastrophic-risk fund, which puts the next dollar at 85% and 11% of the average. Open Philanthropy treats returns to funding as roughly logarithmic, under which an organisation that has grown its spending tenfold does about 40% as much with its next dollar as with its average one. The default, 50%, is our judgment; the range, 18% to 100% (the next dollar as good as the average), covers these figures.\n\nThe evaluator's view keeps 100%: the evaluators publish the average."
+      "source": {
+        "title": "GiveWell moral weights",
+        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit",
+        "note": "GiveWell's 116.25 units of value for a death under five (@moral_weights.uov_per_death_under5) at the default 2 units of value per healthy year; range 0.6× to 1.4×."
+      },
+      "explainer": "How much saving a life counts. The default follows the charity evaluator GiveWell's values, from surveys of donors and of people in Ghana and Kenya; older people's lives count less in the same proportion."
+    },
+    {
+      "id": "discount_rate",
+      "section": "distance",
+      "label": "Good done next year counts … % less than good done today",
+      "technical": "Annual discount rate",
+      "unit": "per year",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.04,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "How much less good done a year from now counts than the same good today, compounding each year. It is also how much future generations count: the lower it is, the more the future counts.\n\nThe default, 4%, is what most charity evaluators use. At 0.1%, the lowest, people centuries from now count almost as much as people today."
+    },
+    {
+      "id": "life_value_multiplier",
+      "label": "Multiplier on GiveWell's values of a life",
+      "technical": "Life value multiplier on GiveWell's moral weights, worked out from the two sliders: $daly_per_child_death × $uov_per_daly over GiveWell's value of a death under five",
+      "unit": "×",
+      "format": "multiple",
+      "formula": "$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5",
+      "explainer": "Not a slider. Models value a death as GiveWell's moral weight for its age (@moral_weights) times this, in units of value. It is the healthy years a young child's death counts as, times what a healthy year is worth, over GiveWell's value for that death: so a death counts as the same healthy years whatever a healthy year is worth, older people's lives count less in GiveWell's proportion, and it is 1 at the defaults. An evaluator view pins $daly_per_child_death (and, where the evaluator has its own, $uov_per_daly), never this."
     },
     {
       "id": "missing_data_discount",
-      "section": "accounting",
-      "label": "How much we count a programme whose results aren't measured",
+      "section": "evidence",
+      "label": "Results nobody measured count … % of what the research suggests",
       "technical": "Discount on every part of every model whose outcome isn't measured for this charity (its reach or effect rests on the research literature or on judgment), the same everywhere: charityevals' own models in the row missing_data_adj, evaluators' models by their missing_data.thin_share, 1 − share × (1 − this) (docs/normalization.md 2.12)",
       "format": "percent",
       "value": {
@@ -82,89 +153,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Every programme of every charity is counted, even one that publishes little or nothing about what it achieved. Where a charity doesn't measure a programme's results, we build its estimate from the research on that kind of work (meta-analyses and trials of the intervention: how much it does per person or per dollar, and for how long), applied to the programme's own spending and whatever reach it reports, with wide ranges; we never borrow another charity's result. The same goes for any part of a model whose reach or effect is our judgment rather than the charity's own data. A programme that doesn't measure its results is probably not the typical one in the research: programmes that measure tend to be the ones that work, and the literature carries none of this programme's own detail. So every such estimate counts less, by this share, the same way in every model.\n\nThe same goes for the evaluators' models: each says what share of its result rests on judgment, a projection or research on other delivery (Ambitious Impact's idea-stage estimates and most campaign and policy estimates entirely; GiveWell's top charities not at all), and that share counts less by this setting; their own checks of how well trials transfer stay, and a generic haircut of theirs for weak evidence is replaced by this one, so nothing counts twice. A part of a model counts in full only when the charity's own count of who got the intervention meets an effect measured with a credible comparison: its own controlled evaluation, or trials of the same intervention delivered the same way (treatments it counts and the trials of those treatments, for example). At 100% nothing is discounted. The default, 50%, is our judgment; the range runs from 10% (an unmeasured programme does little next to measured ones) to 100% (it does as well as the research says)."
-    },
-    {
-      "id": "uov_per_daly",
-      "section": "cross-cause",
-      "label": "Healthy year vs doubled-income year",
-      "technical": "Units of value per DALY (disability-adjusted life year) averted",
-      "unit": "units of value / DALY",
-      "format": "multiple",
-      "value": {
-        "low": 1,
-        "best": 2,
-        "high": 4
-      },
-      "kind": "judgment",
-      "explainer": "A doubled-income year is one person's income doubled for one year, the measure GiveWell uses. This says how many of those a year of healthy life is worth.\n\nOur rough default: GiveWell values saving a young child at about 116 doubled-income years, and that adds about 60 years of life, so about 2 each. The 1–4 range is ours."
-    },
-    {
-      "id": "daly_per_sad",
-      "section": "cross-cause",
-      "label": "Healthy hours lost per day of disabling pain",
-      "technical": "DALYs per suffering-adjusted day (SAD)",
-      "shown_as": {
-        "factor": 8760,
-        "format": "number"
-      },
-      "unit": "DALY / SAD",
-      "format": "percent",
-      "value": {
-        "low": 0.00027,
-        "best": 0.0011,
-        "high": 0.0027
-      },
-      "kind": "judgment",
-      "explainer": "Animal models count days of disabling pain, with milder pain as a fraction of a day, in chickens; the chicken slider says what a chicken's day is worth in a person's. This says how much healthy life a person's day of disabling pain costs: about 10 hours by default, 2 to 24 in the range.\n\nNobody publishes this rate, so it's the least grounded number on the site, and it often decides whether animal charities rank above global health."
-    },
-    {
-      "id": "daly_per_wellby",
-      "section": "cross-cause",
-      "label": "1 point more life satisfaction for a year vs a year of healthy life",
-      "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
-      "unit": "healthy years / WELLBY",
-      "format": "multiple",
-      "value": {
-        "low": 0.05,
-        "best": 0.0652815,
-        "high": 0.275
-      },
-      "slider": {
-        "low": 0.025,
-        "high": 1.5
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
-        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
-        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year ÷ 2 WELLBYs per SD-year = 0.0652815 healthy years per WELLBY (src/engine/wellby-calibration.test.ts keeps it in step with the facts). Stated in healthy years, so the calibration holds whatever \"Healthy year vs doubled-income year\" is set to."
-      },
-      "explainer": "The Happier Lives Institute counts good in life satisfaction (0–10) for a year, its WELLBY, and doesn't convert it to health or income. This says what one such point is worth in healthy years, so its analyses can be ranked with the rest.\n\nThe default makes depression count the same whichever way it is measured. Most of HLI's analyses are of therapy for depression, and the site counts a fall in depression as health: the Global Burden of Disease weights for mild, moderate and severe depression on the PHQ-9 questionnaire, 0.031 healthy years per point for a year, which Founders Pledge's and SoGive's StrongMinds analyses also go through. One standard deviation of depression for a year is about 4.2 PHQ-9 points, so 0.13 healthy years; HLI counts it as 2 WELLBYs. So a WELLBY is worth 0.065 healthy years. Because the rate is in healthy years, the two routes agree whatever \"Healthy year vs doubled-income year\" is set to: WELLBY models, like DALY models, don't move with that slider. Every HLI model, depression or not, converts at this rate; deaths in HLI models are valued the site's way and don't move with it.\n\nOther views: HLI's own 2021 moral-weights work implies about 0.275 (0.55 doubled-income years at 2 a healthy year); matching GiveDirectly's cash transfers, the one programme HLI and GiveWell both measured (HLI 7.55 WELLBYs per $1,000, GiveWell's Kenya estimate 4.36 healthy years per $1,000), gives 0.575, which is where HLI's own results sit relative to cash. At 0.575 HLI's therapy charities count about 9 times more than at the default, and Founders Pledge's and SoGive's analyses of the same therapy don't move. The evaluator view converts HLI's models at 0.575, so they keep their place relative to GiveDirectly as HLI sees it."
-    },
-    {
-      "id": "chicken_vs_person",
-      "section": "cross-cause",
-      "label": "A chicken's suffering vs a person's",
-      "technical": "Chicken's welfare range relative to a person's",
-      "unit": "× a person",
-      "format": "percent",
-      "value": {
-        "low": 0.002,
-        "best": 0.332,
-        "high": 0.869
-      },
-      "kind": "judgment",
-      "explainer": "How much a chicken's suffering counts next to the same suffering in a person. The default, 33%, is Rethink Priorities' median welfare range for chickens; their 90% range is 0.2% to 87%. In an informal survey, most people answered about 0.2% (500 chickens to one person).\n\nEvery animal model counts its result in chicken-equivalent pain days: each species weighed against a chicken by Rethink Priorities' estimates, with Ambitious Impact's own species weights taken out of ACE's figures first. So this one value sets how all animals compare with people.\n\nSet it to 0 if a chicken's suffering shouldn't count; raise it, up to 100%, if it counts as much as a person's.",
-      "slider": {
-        "low": 0.001,
-        "high": 1,
-        "zero": true
-      },
-      "source": {
-        "title": "Rethink Priorities' welfare range estimates",
-        "url": "https://www.rethinkpriorities.org/publications/welfare-range-estimates"
-      }
+      "explainer": "Some charities don't measure what their work achieves. We still estimate it, from research on that kind of work, but such programmes tend to do less than the research shows. This says how much those unmeasured results count.\n\nThe default, 50%, counts them at half. 100% trusts them fully."
     },
     {
       "id": "rp_species_weights",
@@ -202,7 +191,7 @@
     },
     {
       "id": "deaths_per_tco2e",
-      "section": "cross-cause",
+      "section": "evidence",
       "label": "Deaths caused by one more tonne of CO₂",
       "technical": "Mortality cost of carbon: deaths per tonne of CO₂e, from heat and fossil-fuel air pollution",
       "shown_as": {
@@ -226,90 +215,117 @@
         "title": "Rethink Priorities, Cross-cause cost-effectiveness: climate change versus global health (Clare & Vargas, 2026)",
         "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/"
       },
-      "explainer": "Climate charities count the tonnes of CO₂ (and other greenhouse gases, as CO₂-equivalents) they keep out of the air. To compare them with everything else, we ask how many deaths one more tonne causes, and value each death like any other adult's death on the site.\n\nThe default, 1.9 deaths per 10,000 tonnes, is Rethink Priorities' estimate (facts: climate.deaths_per_tco2e): 0.43 from heat and 1.46 from the fine-particle air pollution that comes with burning fossil fuels. Rethink counts the heat deaths until 2300 without discounting; we discount them at \"Next year's good counts less by\" over the years until they come (\"Years until the heat deaths from a tonne of CO₂\", 60 by default), as every model discounts future good. Air-pollution deaths come the same year and aren't discounted. The range runs from heat alone (0.43) to the tops of Rethink's intervals (5.1), which is also about what Rethink's estimate of all climate damage, crops and sea level included, comes to in lives.\n\nEach death is valued by the age it happens at, like every other death on the site: GiveWell's moral weights by age (facts: moral_weights) over the ages of today's heat deaths (60 doubled-income years on average) and air-pollution deaths (48: nine in ten are of people over 50; facts: death_ages, GBD 2023), times \"A child's life vs doubled-income year\", so climate moves with the same weight on lives as health charities. At the defaults a tonne kept out of the air some other way than burning less fuel (a forest, a methane leak) cuts only the discounted heat deaths, about 1 hour of healthy life (a charity that cuts one for $1 does about 0.12 years of healthy life per $1,000); a tonne from burning less fossil fuel, with the world-average smoke behind Rethink's figure, is worth about 1.3 days (3.6 years per $1,000 at $1 a tonne). Most tonnes sit in between: coal smoke per tonne is far above gas's, and a US plant with scrubbers far below the world average.\n\nFor comparison, the US government's social cost of carbon of $185 a tonne (Rennert et al. 2022) rests on the same heat-death count but values deaths in poor countries and in the future less; Giving What We Can's 2016 estimate is about 50 times lower than our default, mainly because it leaves out air pollution. Climate damage that isn't deaths (lost crops, income, migration) and tail risks are not counted: our judgment, stated as a fact set to 0 (climate.nondeath_damages_vs_deaths) so it shows, and the reason the default is likely low. Tonnes that come without fuel smoke (a forest left standing, a methane leak stopped) count only for their heat deaths; each climate model has its own row for how much air pollution its tonnes cut, relative to an average fossil-fuel tonne, from the share of its tonnes that come from burning less fuel and the smoke that fuel makes."
+      "explainer": "Climate charities count the tonnes of CO₂ (and other greenhouse gases, as CO₂-equivalents) they keep out of the air. To compare them with everything else, we ask how many deaths one more tonne causes, and value each death like any other adult's death on the site.\n\nThe default, 1.9 deaths per 10,000 tonnes, is Rethink Priorities' estimate (facts: climate.deaths_per_tco2e): 0.43 from heat and 1.46 from the fine-particle air pollution that comes with burning fossil fuels. Rethink counts the heat deaths until 2300 without discounting; we discount them at \"Next year's good counts less by\" over the years until they come (\"Years until the heat deaths from a tonne of CO₂\", 60 by default), as every model discounts future good. Air-pollution deaths come the same year and aren't discounted. The range runs from heat alone (0.43) to the tops of Rethink's intervals (5.1), which is also about what Rethink's estimate of all climate damage, crops and sea level included, comes to in lives.\n\nEach death is valued by the age it happens at, like every other death on the site: GiveWell's moral weights by age (facts: moral_weights) over the ages of today's heat deaths (60 doubled-income years on average) and air-pollution deaths (48: nine in ten are of people over 50; facts: death_ages, GBD 2023), times \"A child's life vs doubled-income year\", so climate moves with the same weight on lives as health charities. At the defaults a tonne kept out of the air some other way than burning less fuel (a forest, a methane leak) cuts only the discounted heat deaths, about 1 hour of healthy life (a charity that cuts one for $1 does about 0.12 years of healthy life per $1,000); a tonne from burning less fossil fuel, with the world-average smoke behind Rethink's figure, is worth about 1.3 days (3.6 years per $1,000 at $1 a tonne). Most tonnes sit in between: coal smoke per tonne is far above gas's, and a US plant with scrubbers far below the world average.\n\nFor comparison, the US government's social cost of carbon of $185 a tonne (Rennert et al. 2022) rests on the same heat-death count but values deaths in poor countries and in the future less; Giving What We Can's 2016 estimate is about 50 times lower than our default, mainly because it leaves out air pollution. Climate damage that isn't deaths (lost crops, income, migration) and tail risks are not counted: our judgment, stated as a fact set to 0 (climate.nondeath_damages_vs_deaths) so it shows, and the reason the default is likely low. Tonnes that come without fuel smoke (a forest left standing, a methane leak stopped) count only for their heat deaths; each climate model has its own row for how much air pollution its tonnes cut, relative to an average fossil-fuel tonne, from the share of its tonnes that come from burning less fuel and the smoke that fuel makes.",
+      "fixed": true
     },
     {
-      "id": "life_value_multiplier",
-      "section": "moral-weights",
-      "label": "A child's life vs doubled-income year",
-      "technical": "Life value multiplier on GiveWell's moral weights",
-      "shown_as": {
-        "factor": 116.25262,
-        "format": "multiple"
+      "id": "marginal_vs_past_average",
+      "section": "evidence",
+      "label": "A new dollar achieves … % as much as past dollars did",
+      "technical": "A marginal dollar's result as a share of the organisation's past average result (marginal ÷ average cost-effectiveness)",
+      "format": "percent",
+      "value": {
+        "low": 0.18,
+        "best": 0.5,
+        "high": 1
       },
-      "unit": "×",
+      "kind": "judgment",
+      "explainer": "Some estimates divide everything an organisation achieved by everything it spent. Your donation probably does less than that average, because the easiest wins come first. This says how much your extra dollar does compared with the average one.\n\nThe default, 50%, counts it at half. 100% means your dollar does as much as the average."
+    },
+    {
+      "id": "win_years_counted",
+      "section": "evidence",
+      "label": "A won reform would have happened anyway … years later",
+      "technical": "Years of a corporate commitment's or policy's effect credited to the campaign that won it (years brought forward)",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 5,
+        "high": 20
+      },
+      "kind": "judgment",
+      "explainer": "When a campaign wins a change, such as a company promising better conditions for its hens or a new law, the change might have come anyway a few years later. This says how many years of the change the campaign gets credit for.\n\nThe default is 5 years. Charity evaluators use anything from under a year to over 50."
+    },
+    {
+      "id": "chicken_vs_person",
+      "section": "animals",
+      "label": "One person's suffering counts as much as … chickens'",
+      "technical": "Chicken's welfare range relative to a person's",
+      "unit": "× a person",
+      "format": "percent",
+      "value": {
+        "low": 8.3333e-06,
+        "best": 0.0001,
+        "high": 0.00071429
+      },
+      "kind": "judgment",
+      "explainer": "How many chickens' suffering adds up to the same suffering in one person. Other animals count against a chicken: a pig, cow, dog or cat as 1.6 chickens, a fish as 0.2, a shrimp as 0.1, an insect as 0.04 (Rethink Priorities).\n\nThe default, 10,000, is what people's own spending implies: the extra they pay for higher-welfare eggs and chicken, set against the value of a healthy year of a person ([the evidence](https://consensus.app/search/how-much-do-people-actually-value-a-chickens-suffe/oDz0S0etQuGQE5lGEEOg4w/)). Those studies range from 1,400 to 120,000. Researchers who rate how much a chicken can suffer put it far lower, at 3 (Rethink Priorities). At the far right, animal suffering doesn't count.",
+      "slider": {
+        "low": 1e-06,
+        "high": 1,
+        "zero": true
+      },
+      "source": {
+        "title": "Consensus: what people's spending on chicken welfare implies (willingness-to-pay studies against the value of a healthy human year)",
+        "url": "https://consensus.app/search/how-much-do-people-actually-value-a-chickens-suffe/oDz0S0etQuGQE5lGEEOg4w/"
+      },
+      "shown_as": {
+        "factor": 1,
+        "format": "number",
+        "inverse": true
+      }
+    },
+    {
+      "id": "daly_per_sad",
+      "section": "animals",
+      "label": "A day of severe pain is as bad as losing … hours of healthy life",
+      "technical": "DALYs per suffering-adjusted day (SAD)",
+      "shown_as": {
+        "factor": 8760,
+        "format": "number"
+      },
+      "unit": "DALY / SAD",
+      "format": "percent",
+      "value": {
+        "low": 0.00027,
+        "best": 0.0011,
+        "high": 0.0027
+      },
+      "kind": "judgment",
+      "explainer": "How much healthy life a day of severe pain costs a person, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time.\n\nThe default is about 10 hours. Nobody has measured this, so it's one of the least certain numbers on the site and often decides whether animal charities rank above health charities."
+    },
+    {
+      "id": "daly_per_wellby",
+      "section": "people",
+      "label": "One point more life satisfaction for a year is worth … days of healthy life",
+      "technical": "Healthy years (DALYs averted) per WELLBY (wellbeing-adjusted life year)",
+      "unit": "healthy years / WELLBY",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 1,
-        "high": 1.4
+        "low": 0.05,
+        "best": 0.0652815,
+        "high": 0.275
+      },
+      "slider": {
+        "low": 0.025,
+        "high": 1.5
       },
       "kind": "judgment",
       "source": {
-        "title": "GiveWell moral weights",
-        "url": "https://docs.google.com/spreadsheets/d/1IXCpVlrAggTdt94ETR4KbQxcKkDYC13bFgEHbBBilb8/edit"
+        "title": "Calibrated on depression: GBD 2019 disability weights on the PHQ-9 (facts: depression.dalys_per_phq9_point_year, depression.phq9_sd) and HLI's 2 WELLBYs per standard-deviation-year (facts: wellby_factors.wellbys_per_sd_year)",
+        "url": "https://ghdx.healthdata.org/record/ihme-data/gbd-2019-disability-weights",
+        "note": "Default = PHQ-9 SD 4.2117 × 0.031 healthy years per point-year ÷ 2 WELLBYs per SD-year = 0.0652815 healthy years per WELLBY (src/engine/wellby-calibration.test.ts keeps it in step with the facts). Stated in healthy years, so the calibration holds whatever \"Healthy year vs doubled-income year\" is set to."
       },
-      "explainer": "How many doubled-income years saving a young child's life is worth. GiveWell uses about 116, from donor surveys, a survey in Ghana and Kenya, and staff judgment; this scales its weights for every age. The 70–163 range is ours."
-    },
-    {
-      "id": "home_country",
-      "section": "distance",
-      "label": "Where you live",
-      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
-      "control": "country",
-      "format": "integer",
-      "value": 0,
-      "kind": "judgment",
-      "explainer": "The country the distance weight counts from. Not set (the default) means no distance weighting at all: every life counts the same wherever it is. Countries are grouped into world regions by the UN's standard list (M49: Northern America, Western Europe, Eastern Africa and so on; facts/countries.json)."
-    },
-    {
-      "id": "distance_discount",
-      "section": "distance",
-      "label": "Each step further from you, a life counts less by",
-      "technical": "Discount per step of distance: your country, the rest of your world region, the rest of the world",
-      "unit": "per step",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "A value judgment, not a fact. With a country set under Where you live, a life (a person's or an animal's) in your own country counts in full, one elsewhere in your world region counts less by this much, and one in the rest of the world by this much again: at 50%, a life in your country counts 1, one in your region 0.5 and one further away 0.25. Each estimate is weighed by where the lives it helps are (each model's beneficiaries: the countries its programme works in, or the whole world by population for climate and research with global reach); a charity that moves money takes each destination's weight. 0% (the default) counts every life the same, which is what every evaluator on the site does; the evaluator's own view never applies it."
-    },
-    {
-      "id": "discount_rate",
-      "section": "economics",
-      "label": "Next year's good counts less by",
-      "technical": "Annual discount rate",
-      "unit": "per year",
-      "format": "percent",
-      "value": {
-        "low": 0.001,
-        "best": 0.04,
-        "high": 0.08
-      },
-      "kind": "judgment",
-      "explainer": "How much less good done a year from now counts, compounding each year. GiveWell uses 4%; ACE uses 4% in some reviews and 1.4% in others. It moves only models that discount explicitly, such as ACE's cage-free and shrimp campaigns and the long-term income gains in GiveWell's bed net and seasonal malaria models; GiveDirectly's and Helen Keller's have 4% built in. It also discounts the heat deaths a tonne of CO₂ causes decades from now (\"Years until the heat deaths from a tonne of CO₂\"). It is also how much future generations count: a catastrophe that costs the future loses every later year of healthy life, each discounted at this rate, so the loss is the yearly loss ÷ the rate (25 years' worth at 4%, 1,000 at the lowest setting, 0.1%: the slider stops there because at 0 an endless future would count infinitely)."
-    },
-    {
-      "id": "estimate_age_discount",
-      "section": "economics",
-      "label": "Each year since an estimate was made, it counts less by",
-      "technical": "Annual discount on a cost-effectiveness estimate's age",
-      "unit": "per year",
-      "format": "percent",
-      "value": {
-        "low": 0.0,
-        "best": 0.05,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "How much less to trust a cost-effectiveness estimate for each year since its evaluator published it, compounding like the discount rate: at 5% a 2-year-old estimate counts 91% and a 10-year-old one 61%. Evaluators re-check what they recommend every year or two (GiveWell updates its top charities' models several times a year; Animal Charity Evaluators re-evaluates its recommended charities every two years, and Founders Pledge about every two years) and withdraw some recommendations, so an estimate nobody has renewed for years may no longer stand. The site's own data can't set the rate: GiveWell's successive estimates of the same programme (41 pairs, about a year apart) move a lot, typically two-thirds up or 40% down, but not mostly down (39% of them fell, and on average they rose a few percent a year). So 5% is a judgment, between 0% (what the revisions alone support) and 15%. An estimate's age counts from its publication date to the date the site's data was last refreshed (2 November 2026), so results don't change with the day you look. Every model on the rankings takes it; a charity that moves money takes it on its own estimate and on each destination's. The evaluator's own view never applies it."
+      "explainer": "Some charities report how much happier people are, in points of life satisfaction on a 0–10 scale. This says how many years of healthy life one point more for a year is worth.\n\nThe default, 0.065, is set so that treating depression counts the same whether it's measured as better health or as more life satisfaction. Raise it if feeling better matters more to you than that.",
+      "shown_as": {
+        "factor": 365,
+        "format": "number"
+      }
     },
     {
       "id": "climate_heat_death_delay",
-      "section": "economics",
+      "section": "evidence",
       "label": "Years until the heat deaths from a tonne of CO₂",
       "technical": "Discount-weighted delay between emitting a tonne of CO₂e and the extra heat deaths it causes",
       "unit": "years",
@@ -326,7 +342,8 @@
         "page": "footnote 28, p. 21",
         "quote": "These [deaths] are concentrated at the end of the century when global average temperatures are highest and marginal changes to temperatures are most damaging."
       },
-      "explainer": "A tonne of CO₂ emitted now warms the planet for centuries, but the deaths that warming causes come late: both Bressler (2021) and Rennert et al. (2022), whose model Rethink Priorities re-ran, find them concentrated at the end of the century, when it is hottest and each extra bit of warming does most harm. Rethink counts them to 2300 without discounting. We discount them like any other future good, as if they all came this many years after the tonne: 60 by default (about 2085 for a tonne cut today), 30 to 100 in the range. Our judgment; no source gives the year-by-year profile. At 4% a year, a death 60 years away counts about a tenth of one today.\n\nAir-pollution deaths are not delayed: fuel that isn't burned saves them the same year, so they aren't discounted."
+      "explainer": "A tonne of CO₂ emitted now warms the planet for centuries, but the deaths that warming causes come late: both Bressler (2021) and Rennert et al. (2022), whose model Rethink Priorities re-ran, find them concentrated at the end of the century, when it is hottest and each extra bit of warming does most harm. Rethink counts them to 2300 without discounting. We discount them like any other future good, as if they all came this many years after the tonne: 60 by default (about 2085 for a tonne cut today), 30 to 100 in the range. Our judgment; no source gives the year-by-year profile. At 4% a year, a death 60 years away counts about a tenth of one today.\n\nAir-pollution deaths are not delayed: fuel that isn't burned saves them the same year, so they aren't discounted.",
+      "fixed": true
     },
     {
       "id": "climate_heat_share",

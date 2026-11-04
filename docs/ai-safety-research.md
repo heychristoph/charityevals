@@ -184,7 +184,7 @@ top, `$discount_rate` and the risk slider, and the summary must say so.
 | `@ai_risk.years_until_risk` | fact | 5–30, from the Grace survey (50% HLMI by 2047) and Metaculus AGI dates |
 | `@ai_risk.world_population_now` | fact | UN WPP 2024, 8.2bn |
 | `p_good`, `intensity_bad` | facts, shared | RP CCM 0.7 / 0.3; per charity only with reason |
-| `$discount_rate`, `$life_value_multiplier`, `$missing_data_discount`, `$uov_per_daly` | existing sliders | unchanged |
+| `$discount_rate`, `$life_value_multiplier` (worked out from `$daly_per_child_death`), `$missing_data_discount`, `$uov_per_daly` | existing sliders | unchanged |
 | `charity_vs_field` | per charity | see 3.4 |
 | `leverage_funging_adj`, `counterfactual_adj` | per charity | the funder bulletin: Coefficient Giving funds most of these orgs and is scaling to $1B, so the next small-donor dollar is partly funged (0.3–1) |
 
