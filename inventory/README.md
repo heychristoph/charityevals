@@ -92,7 +92,7 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - First pass, 21 sheets, via `scripts/convert-sheet.py` and `scripts/link-aim.py` (`scripts/aim-links.json`).
   - Second pass, 19 models: 15 more sheets (Concentric Policies, ARMoR, Notify Health, Center for Alcohol Policy
     Solutions, Foundations First, Neev, Fortify Health, Centre for Effective Aid Policy 2020, Family Empowerment
-    Media, Animal Policy International 2022 and 2020, Scale Welfare, Centre for Aquaculture Progress, CEARCH, High
+    Media, Animal Policy International 2022 and 2020, Scale Welfare, CEARCH, High
     Impact Professionals) and minimal models from report text where AIM published no sheet (Fish Welfare Initiative,
     Shrimp Welfare Project, Healthier Hens 2018 and 2020).
   - Animal models from before 2024 are in AIM's welfare points. They reach the scale through one bridge of ours,

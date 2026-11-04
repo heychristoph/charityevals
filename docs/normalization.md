@@ -783,7 +783,6 @@ Initiative, whose bridge is ours in both):
 | Animal Welfare Observatory | 22.5 → 26.3 | the same |
 | Sociedade Vegetariana Brasileira | 32.9 → 23.5 | years 5.5 → 5; production response |
 | Çiftlik Hayvanlarını Koruma Derneği | 42.5 → 17.3 | years 20.5 → 5, a 4-year wait; fulfilment 0.63 → 0.92 |
-| Centre for Aquaculture Progress (AIM) | 106 → 14.6 | 55 years → 5 |
 | Animal Policy International (AIM) | 55.3 → 13.2 | 35 years → 5 |
 | Vegan Outreach (ACE 2016) | 9.41 → 10.7 | production response 0.76 × US meal 1.5 |
 | Aquatic Life Institute | 3.83 → 1.88 | 15 years from 2023 → 5 from the stunning date |
