@@ -94,7 +94,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
         </div>
         <div className="r-track" aria-hidden>
           {TICKS.map((t, k) => (
-            <span key={t} className={`r-tick num ${k % 2 ? "r-tick-minor" : ""}`} style={{ left: pct(t) }}>{tickLabel(t)}</span>
+            <span key={t} className={`r-tick num ${(TICKS.length - 1 - k) % 3 ? "r-tick-minor" : ""}`} style={{ left: pct(t) }}>{tickLabel(t)}</span>
           ))}
         </div>
         <div />
