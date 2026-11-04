@@ -19,6 +19,7 @@ import {
   HOME_COUNTRY,
   MISSING_DATA_DISCOUNT,
   assumptionValues,
+  bottomLine,
   headline,
   pickValue,
   usedAssumptions,
@@ -49,6 +50,9 @@ export type Waterfall = {
   steps: Step[];
   /** The figure the page shows: our view at the reader's values. */
   end: number;
+  /** Where the start comes from: the model's own result in its own unit (per dollar), before it is put
+   * in years of healthy life per $1,000. */
+  native: { value: number; unit: string };
 };
 
 /** The site-wide adjustments: their slider, the value that turns them off, and their label. */
@@ -142,7 +146,8 @@ export function waterfall(lib: Library, m: ResolvedModel, av: Record<string, num
   }
   // Whatever is left (none, as every value is now the reader's): kept so the chain always ends at the figure.
   if (rel(end, value) > 1e-9) steps.push({ kind: "other", label: "Everything else", from: value, to: end });
-  return { start, startValue, steps, end };
+  const native = { value: bottomLine(lib, m, { ...defaults, ...off }, {}, start === "evaluator" ? "evaluator" : "charityevals").native, unit: m.output.unit };
+  return { start, startValue, steps, end, native };
 }
 
 const rel = (a: number, b: number) => (Number.isFinite(a) && Number.isFinite(b) ? Math.abs(a - b) / Math.max(Math.abs(a), Math.abs(b), 1e-300) : Infinity);
