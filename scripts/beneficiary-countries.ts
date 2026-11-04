@@ -44,8 +44,8 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "doctors-without-borders-charityevals": { b: { COD: 0.125, TCD: 0.125, SDN: 0.125, SSD: 0.125, NGA: 0.125, NER: 0.125, AFG: 0.125, SOM: 0.125 }, note: "Our build: medical care in about 70 countries; MSF publishes no split by country in the build, so the countries its rows name more than once share equally (DRC, Chad, Sudan, South Sudan, Nigeria, Niger, Afghanistan, Somalia; a judgment)." },
   "doctors-without-borders-charityevals-relief": { b: { COD: 1 / 3, SDN: 1 / 3, SSD: 1 / 3 }, note: "Our build: relief distributions to displaced families; the countries the build's rows name (DRC, Sudan, South Sudan) share equally (a judgment)." },
   "habitat-for-humanity-charityevals": { b: { USA: 1 }, note: "Our build: HFHI's US affiliates." },
-  "st-jude-charityevals": { b: { world: 0.937, USA: 0.063 }, note: "Our build: St. Jude Global's partner hospitals in more than 90 countries (94% of the result at the defaults, spread by world population: a judgment, the build names no split) and patient care in Memphis (6%)." },
-  "st-jude-charityevals-research": { b: "world", note: "Our build: research valued as a share of the world's childhood cancer burden." },
+  "st-jude-charityevals": { b: { world: 0.89, USA: 0.11 }, note: "Our build: St. Jude Global's partner hospitals in more than 70 countries and the graduate school's research (89% of the result at the defaults, spread by world population: a judgment, the build names no split), and patient care, clinical training and community programmes in the US (11%)." },
+  "st-jude-charityevals-research": { b: "world", note: "Our build: research valued as a share of the world's childhood cancer, sickle cell and children's influenza burden." },
   "united-way-charityevals": { b: { USA: 1 }, note: "Our build: the US United Way network." },
   "the-nature-conservancy-charityevals": { b: "world", note: "Our build: valued almost entirely through climate and land-policy peers (forest carbon and emissions), whose good is spread by world population." },
   "the-life-you-can-save-founders-pledge": { b: "destinations", note: "Moves money: each recommended charity it reads live brings its own countries." },
@@ -255,7 +255,11 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
   if (process.argv.includes("--table")) console.log(`${m.id} | ${d.method} | ${"b" in d ? JSON.stringify(d.b) : "-"}`);
   const path = raws.get(m.id)!;
   const text = readFileSync(path, "utf8");
-  let next = text.replace(/^[ \t]+"beneficiaries(_note)?": .*\n/gm, "");
+  // The fields as this script writes them (one line each), or an object spread over lines by a JSON
+  // pretty-printer (`"beneficiaries": {` … `},`), which a one-line match would cut in half.
+  let next = text
+    .replace(/^[ \t]+"beneficiaries": \{\n(?:[ \t]+"[A-Za-z]+": [0-9.e-]+,?\n)*[ \t]+\},\n/m, "")
+    .replace(/^[ \t]+"beneficiaries(_note)?": .*\n/gm, "");
   if ("b" in d) {
     const b = typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b;
     next = next.replace(/^([ \t]+)"cause": "[a-z-]+",\n/m, (line, indent: string) => `${line}${indent}"beneficiaries": ${JSON.stringify(b)},\n${indent}"beneficiaries_note": ${JSON.stringify(d.note)},\n`);
