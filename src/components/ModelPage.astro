@@ -7,6 +7,7 @@ import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
 import Headline from "./Headline.tsx";
+import WholeCharity from "./WholeCharity.tsx";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
 import { repo } from "../lib/site";
@@ -111,6 +112,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </p>
         </aside>
       )}
+      {main && <WholeCharity client:load id={model.id} />}
       <div class="m-model">
         {current.length > 1 && (
           <nav class="owners" aria-label="Evaluators' models of this charity">
@@ -330,6 +332,59 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .m-title :global(.m-parts tr + tr > *) {
     border-top: 1px solid var(--rule);
+  }
+  /* The whole charity: its programmes' models as weighted parts of the total (WholeCharity) */
+  :global(.whole) {
+    margin: 0 0 var(--s6);
+    max-width: var(--measure);
+  }
+  :global(.whole-title) {
+    font-size: 20px;
+    margin: 0 0 var(--s2);
+  }
+  :global(.whole-lede) {
+    color: var(--ink-2);
+    margin: 0 0 var(--s3);
+  }
+  :global(.whole-table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  :global(.whole-table th),
+  :global(.whole-table td) {
+    padding: 6px 0;
+    vertical-align: top;
+  }
+  :global(.whole-table thead th) {
+    font: 600 13px/1.3 var(--sans);
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--rule);
+  }
+  :global(.whole-table thead th:first-child),
+  :global(.whole-table th[scope="row"]) {
+    text-align: left;
+    font-weight: 400;
+    padding-right: var(--s3);
+  }
+  :global(.whole-table td),
+  :global(.whole-table thead th.num) {
+    text-align: right;
+    padding-left: var(--s3);
+    white-space: nowrap;
+  }
+  :global(.whole-table tbody tr + tr > *) {
+    border-top: 1px solid var(--rule);
+  }
+  :global(.whole-table tfoot > tr > *) {
+    border-top: 2px solid var(--ink-2);
+    font-weight: 600;
+  }
+  @media (max-width: 560px) {
+    :global(.whole-table td:last-child),
+    :global(.whole-table thead th:last-child) {
+      display: none;
+    }
   }
   .m-list + .m-list {
     margin-top: var(--s4);
