@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { AGE_DISCOUNT, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, ageFactor, buildLibrary, comparable, estimateAge, headline, type ResolvedModel } from "../engine/model";
+import { byCode, byIso3 } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
 import { useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
@@ -150,6 +151,7 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
         </WithTip>
       </span>
       {years && <EstimateAge model={model} av={av} />}
+      {years && <DistanceWeight model={model} av={av} />}
     </div>
   );
 }
@@ -176,3 +178,36 @@ function EstimateAge({ model, av }: { model: ResolvedModel; av: Record<string, n
 }
 
 const formatPercent = (x: number) => `${Number((x * 100).toPrecision(3))}%`;
+
+/** "Helps lives in Kenya: × 0.25 at your settings (you live in the United States, 50% less per step)":
+ * where the model's beneficiaries are and what the reader's distance weight (docs/normalization.md 2.13)
+ * does to the figure above. For a charity that moves money, the weight its destinations bring together. */
+function DistanceWeight({ model, av }: { model: ResolvedModel; av: Record<string, number> }) {
+  const b = model.beneficiaries;
+  if (!b) return null;
+  const home = byCode.get(av[HOME_COUNTRY]);
+  const d = av[DISTANCE_DISCOUNT] ?? 0;
+  const place = b === "destinations"
+    ? "Moves money to other charities, each weighed by where it works"
+    : `Helps lives ${where(b)}`;
+  // The whole effect on the headline, destinations included.
+  const factor = home && d > 0 ? headline(lib, model, av) / headline(lib, model, { ...av, [DISTANCE_DISCOUNT]: 0 }) : 1;
+  const effect = !home || d <= 0 || !Number.isFinite(factor) || Math.abs(factor - 1) < 5e-4 ? "counted in full" : `× ${factor >= 0.1 ? factor.toFixed(2) : factor.toPrecision(1)}`;
+  return (
+    <p className="m-age m-distance">
+      {place}: {effect} at <a href={`/assumptions#a-${DISTANCE_DISCOUNT}`}>your settings</a>
+      {home && d > 0 ? <> (you live in {home.name}, {formatPercent(d)} less for each step further away)</> : !home ? <> (no home country set)</> : <> (no discount for distance)</>}.
+    </p>
+  );
+}
+
+/** "in Kenya", "in Nigeria and Niger", "across the world", "in the UK (6%) and across the world (94%)". */
+function where(b: Record<string, number> | "world"): string {
+  if (b === "world") return "across the world";
+  const parts = Object.entries(b).sort((x, y) => y[1] - x[1]);
+  const named = (iso: string) => (iso === "world" ? "across the world" : `in ${byIso3.get(iso)?.name ?? iso}`);
+  const even = parts.every(([, s]) => Math.abs(s - parts[0][1]) < 1e-3);
+  if (parts.length > 4) return `in ${parts.length} countries${even ? "" : `, most ${named(parts[0][0])}`}`;
+  const list = parts.map(([iso, s]) => `${named(iso)}${even ? "" : ` (${Math.round(s * 100)}%)`}`);
+  return list.length === 1 ? list[0] : `${list.slice(0, -1).join(", ")} and ${list.at(-1)}`;
+}
