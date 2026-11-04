@@ -118,6 +118,8 @@ Mechanical checks run on both models (scripts/audit-model.ts, scripts/normalizat
   - the lows: labels, the ranges of two new shared facts, the UK-only caveat on the research return, a stale figure.
   - The research result is now 11% below the first rebuild's, the patient-care result 24% below.
 
+- **4 November 2026**: two site rules applied by script (docs/normalization.md 2.14): the families' savings are measured against the Consumer Expenditure Survey's consumption, and every death averted counts at the shared remaining-life share of childhood-cancer survivors (0.86, Yeh et al. 2020). A verification round of these and round 3's fixes found no high finding (four lows, fixed), so the model is published.
+
 ### Sources
 
 - [St. Jude and ALSAC, combined audited financial statements FY2025](https://www.stjude.org/content/dam/en_US/shared/www/about-st-jude/financial-information/2025%20St.%20Jude%20-%20ALSAC%20combined%20FS%20-%20ADA%20compliant.pdf)
