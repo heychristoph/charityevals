@@ -35,6 +35,12 @@ const PLAIN: Record<string, string> = {
 };
 type Factor = { value: string; label: string; by?: string; inv: boolean; href?: string };
 
+/** A shared value as its slider shows it: hours for a fraction of a year, a percent, or a number. */
+function show(row: { format?: string; shown_as?: { factor: number; format?: string } } | undefined, v: number): string {
+  if (row?.shown_as) return `${Number((v * row.shown_as.factor).toPrecision(3))} hours`;
+  return row?.format === "percent" ? `${Number((v * 100).toPrecision(3))}%` : `${Number(v.toPrecision(3))}`;
+}
+
 /** The factors that turn a result in `unit` into years of healthy life per $1,000 (model.ts headlineNode,
  * read for people): each shared value with its plain meaning and a link to its slider; a conversion that
  * isn't a plain product (climate's) as one factor. */
@@ -65,11 +71,11 @@ function conversionFactors(unit: string, model: ResolvedModel, evaluator: boolea
     }
     const row = lib.assumptions.rows.find((r) => r.id === node.name);
     const v = at(node.name);
-    const shown = row?.shown_as ? v * row.shown_as.factor : v;
-    const fmt = row?.shown_as?.format ?? row?.format;
-    const value = row?.shown_as ? `${Number(shown.toPrecision(3))} hours` : fmt === "percent" ? `${Number((shown * 100).toPrecision(3))}%` : `${Number(shown.toPrecision(3))}`;
+    const value = show(row, v);
     const pinned = evaluator && model.evaluator?.assumptions[node.name] !== undefined;
-    out.push({ value, label: PLAIN[node.name] ?? row?.label ?? node.name, by: pinned ? `${possessive(owner)} value` : "your value", inv, href: `#a-${node.name}` });
+    // The start is the evaluator's own figure, so it uses their value; ours replaces it in a step below.
+    const ours = pinned ? show(row, defaults[node.name]) : undefined;
+    out.push({ value, label: PLAIN[node.name] ?? row?.label ?? node.name, by: pinned ? `${possessive(owner)} value; we use ${ours} (a step below)` : "your value", inv, href: `#a-${node.name}` });
   }
   out.push({ value: "1,000", label: "per $1,000 instead of per dollar", inv: false });
   return out;
