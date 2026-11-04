@@ -5,7 +5,7 @@ import { byCode, byIso3, inSentence } from "../engine/countries";
 import { combine, declaredLocations, locationsOf } from "../engine/ranking";
 import { sensitivity } from "../engine/sensitivity";
 import { figureOf, useAssumptionValues, useResults, type EvaluatorResult } from "../lib/use-results";
-import { editsFor, useEdits } from "../lib/edit-state";
+import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
 import { formatYears } from "../lib/format";
 import InfoTip, { WithTip } from "./InfoTip";
 
@@ -134,6 +134,8 @@ export default function Headline({ id, bulk = false, place, main = false }: { id
     [combined, model, edits],
   );
   const partModels = useMemo(() => (combined && combined.what === "program" ? combined.ev.programs.map((p) => p.result.model) : [model]), [combined, model]);
+  // A whole-charity page edits each programme's own model; their edits stay in the URL (edit-state).
+  if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
   if (!Number.isFinite(figure)) return null;
   const unit = years ? "years of healthy life per $1,000" : `${lib.assumptions.units[model.output!.unit]?.label ?? "per dollar"} per dollar`;
   // With edits the figure is this one model's, so its place is just the location, not "the median of …".
