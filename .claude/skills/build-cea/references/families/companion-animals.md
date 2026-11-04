@@ -12,7 +12,7 @@ care        animals_helped × suffering_share_avoided × 365 × pv(years_better_
 neutering   neuters × births_averted_per_neuter × pain_days_per_unowned_life (a year later, discounted)
 (sum) × total_adj = outcome_total (days of disabling pain); ÷ cost_total × donor share
 species     pain_days_dog = … × share_dog → ced_dog = pain_days_dog × @welfare_ranges.dog_vs_chicken
-            (cats the same) → ced_per_donor_dollar (+ the proxy's bridge)
+            (cats the same) → ced_per_donor_dollar
 ```
 
 Days are counted on Ambitious Impact's pain scale (disabling 1, hurtful about a tenth, annoying about

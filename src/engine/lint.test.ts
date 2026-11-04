@@ -102,4 +102,36 @@ describe("lint", () => {
     expect(codes(withRow(d, "value_per_death", { formula: "@moral_weights.uov_per_death_over5 * $life_value_multiplier" }))).toContain("age-band:value_per_death");
     expect(codes(withRow(d, "value_per_death", typed("value_per_death", 100)))).toContain("shared:uov_deaths");
   });
+
+  // Missing data (docs/normalization.md 2.12): one marker per branch, the slider or 1 with a reason.
+  const sev = (raw: Raw) => {
+    const { lib, m } = load(raw);
+    return lintModel(lib, m).filter((f) => f.severity !== "low").map((f) => `${f.severity} ${f.code}:${f.row ?? ""}`);
+  };
+  const measured = { formula: "1", explainer: "The charity's own count of doses delivered, monitored by an independent survey, meets the effect of trials of the same intervention delivered the same way." };
+  it("missing data: a measured branch may be 1, with its reason", () => {
+    const d = filled(files["direct-health"]);
+    expect(codes(withRow(d, "missing_data_adj", measured)).filter((c) => c.startsWith("missing-data"))).toEqual([]);
+    expect(codes(withRow(d, "missing_data_adj", { formula: "1", explainer: "Measured." }))).toContain("missing-data:missing_data_adj");
+  });
+  it("missing data: a branch whose reach or effect is all judgment reads the slider", () => {
+    const d = withRow(filled(files["direct-health"]), "missing_data_adj", measured);
+    const guessed = withRow(withRow(d, "people_reached", typed("people_reached", { low: 50000, best: 100000, high: 200000 })), "years_of_coverage", typed("years_of_coverage", { low: 1, best: 2, high: 3 }));
+    expect(codes(guessed)).toContain("missing-data:missing_data_adj");
+    const c = withRow(filled(files["corporate-campaign"]), "missing_data_adj", measured);
+    expect(codes(c).filter((x) => x.startsWith("missing-data"))).toEqual([]);
+  });
+  it("missing data: the marker is the shared slider or 1, nothing else", () => {
+    expect(codes(withRow(base(), "missing_data_adj", typed("missing_data_adj", { low: 0.3, best: 0.5, high: 0.8 })))).toContain("missing-data:missing_data_adj");
+  });
+  it("missing data: the proxy rows and borrowed medians are retired, medium only for models built before the rule", () => {
+    const raw = base();
+    const rows = [...(raw.rows as Row[]), { id: "proxy_peer_result", section: "adjustments", label: "Peers' result", formula: "#givedirectly", explainer: "The old proxy row." }];
+    const borrowed = withRow(raw, "evidence_adj", { formula: "median(#givedirectly, #givedirectly)", value: undefined });
+    expect(sev({ ...raw, rows })).toContain("high proxy:proxy_peer_result");
+    expect(sev(borrowed)).toContain("high borrowed:evidence_adj");
+    const old = { ...without(raw, "missing_data_adj"), source: { ...(raw.source as Row), published: "2026-11-01" } };
+    expect(sev(withRow(old, "total_adj", { formula: "evidence_adj * counterfactual_adj * attribution_share * implementation_adj" }))).toContain("medium required-row:missing_data_adj");
+    expect(sev(withRow(without(raw, "missing_data_adj"), "total_adj", { formula: "evidence_adj * counterfactual_adj * attribution_share * implementation_adj" }))).toContain("high required-row:missing_data_adj");
+  });
 });

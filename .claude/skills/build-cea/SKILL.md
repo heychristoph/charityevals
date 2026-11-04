@@ -46,9 +46,9 @@ enforce the mechanical rules (audit-model runs them, step 3).
   (Convention 4), else one model per family (`<charity>-charityevals-<program>`), weighted by spending
   in `charities/<id>.json` `programs` with `weight_source` (import-cea section 6). Grants to sister
   organisations count as the activities they fund. Never a case study, pilot or other year in place
-  of the programme: a donor funds the whole programme as it runs now. Thin outcome data: the closest
-  family's chain with wide ranged judgments. No outcome data at all: the proxy branch (Convention 12).
-  Nothing is left out.
+  of the programme: a donor funds the whole programme as it runs now. Thin or no outcome data: its
+  family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
+  (Convention 12), never another model's result. Nothing is left out.
 - An Ambitious Impact (AIM) idea-stage model of this charity marked `theoretical` (made before the
   charity ran the work) is shown only while no model of its actual work exists: once yours is in
   models/, remove it and record it in inventory/ambitious-impact-models.json
@@ -87,7 +87,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
 
 - `id` `<charity>-charityevals`, `kind: "charity"`, `charity`, `owner: "charityevals"`, `template`,
   `cause`, `estimate_basis`, `summary` (2–4 plain sentences: what the charity does, where, the year,
-  the result in years of healthy life per $1,000, the biggest uncertainty, any programme proxied),
+  the result in years of healthy life per $1,000, the biggest uncertainty, branches discounted for missing data),
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
 - **Keep every canonical row id, `output` and the section kinds**, so the model compares row by row
@@ -126,7 +126,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
     (`python3 scripts/moved-money.py <model> <destination set> net`), destinations live (`#model-id`);
     career changes through `career_change_value` (INV-12);
   - deaths outside a uov model enter only through its bridge from uov (`wellbys_from_uov`, INV-17);
-  - a programme with no outcome data: the proxy rows (Convention 12, `$missing_data_discount`);
+  - every branch's `missing_data_adj`: `$missing_data_discount` unless measured (Convention 12);
   - no exchange rate between outcomes inside the model (INV-2): the output unit's conversion does
     that once; another unit's outcome enters only through the template's bridge rows (2.6);
   - animal families, the species step: SADs → `sads_<s>` → `ced_<s>` with the SAD version of the
@@ -173,7 +173,7 @@ don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`).
 
 Report: the result (native unit; years of healthy life per $1,000 with audit-model's `Combined range`
 (glossary), the joint low–high only as the extreme case), the year and
-programmes (with weights; which are proxied), the top 3 swings, the share of judgment, audit
+programmes (with weights; which are discounted for missing data), the top 3 swings, the share of judgment, audit
 rounds with counts, every fact or assumption added.
 
 To change the templates: edit `scripts/gen-templates.py`, run it, keep src/engine/templates.ts in step,

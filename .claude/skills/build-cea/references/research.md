@@ -1,11 +1,10 @@
 # Research checklist
 
-Every number in the model must trace to a source a reader can open, so the log below is what the
-model's `source` fields and the auditor's checks are built from. Terms: [templates.md](templates.md#glossary).
+Every number must trace to a source a reader can open: the log below feeds the model's `source`
+fields and the auditor's checks. Terms: [templates.md](templates.md#glossary).
 
-Read sources with WebFetch/WebSearch. WebFetch doesn't parse most PDFs: download them into your
-scratch directory (its own empty folder) and read them with the Read tool, page by page (`pages`);
-`pdftotext` is usually not installed. Many publishers (PubMed, ScienceDirect,
+WebFetch doesn't parse most PDFs: download them into your scratch directory (its own empty folder)
+and read them with the Read tool, page by page (`pages`). Many publishers (PubMed, ScienceDirect,
 Cochrane) show bot checks: use the PMC or Europe PMC copy, the authors' preprint, or the abstract,
 and say which you used. Never bypass a bot check. For every number you take, log: URL, retrieval date,
 page/table, a verbatim quote of at most one sentence, and the number as you'll enter it (unit,
@@ -26,23 +25,25 @@ currency, year).
   missing year), never a typed rate or a constant in a formula.
 - Programmes: list every programme with its spending for the year (the statement of functional
   expenses or the annual report's breakdown); you model every one, weighted by
-  spending (SKILL.md step 0); note which have no outcome data at all (the proxy rows).
+  spending (SKILL.md step 0); note which have thin or no outcome data (templates.md Convention 12).
 
 ## Reach (reach section)
 
 - Annual report / impact page / monitoring reports for the same year. Prefer independent
-  measurement (coverage surveys, third-party trackers such as the Cage-Free Tracker or
-  ChickenWatch, external M&E) over administrative counts; when you only have the charity's own
-  count, say so and widen `implementation_adj`.
+  measurement (coverage surveys, third-party trackers, external M&E) over administrative counts;
+  when you only have the charity's own count, say so and widen `implementation_adj`.
 
 ## Effect (effect section)
 
-- Systematic reviews first (Cochrane, Campbell, 3ie), then the large RCTs, then implementation-
-  specific evidence. Record the point estimate and the 95% CI; use the CI as the low/high range.
+- Meta-analyses and systematic reviews first (Cochrane, Campbell, 3ie), then the large RCTs, then
+  implementation-specific evidence. Search with the Consensus research MCP (its `search` tool) where
+  connected, else PubMed, Europe PMC or web search; cite the paper itself, never Consensus. Record
+  the point estimate and the 95% CI as the range. A programme with thin or no outcome data is built
+  from this: effect per person or per dollar, and persistence.
 - Check whether the trial population resembles the charity's (age, baseline risk, country) and
   put the gap into `evidence_adj` (external validity) with a reason.
 - Evaluator intervention reports (GiveWell, ACE, HLI, Founders Pledge, Rethink Priorities)
-  summarise the literature; cite the underlying study where you can. In a blind run, the blind
+  summarise the literature; cite the underlying study. In a blind run, the blind
   list says which of these you must not read.
 
 ## Baselines and shared facts

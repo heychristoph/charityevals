@@ -5,11 +5,11 @@ description: Independently audit a charityevals cost-effectiveness model (models
 
 # Audit a CEA
 
-This skill checks one cost-effectiveness model, whose result is in **years of healthy life per $1,000
-donated** (the site's one scale), and produces a findings list, each finding with a severity and a
-concrete fix. It is the middle of build-cea's loop (build → independent audit → fix, until no
-high-severity finding remains), run in a fresh subagent, and also audits any imported model. Terms
-such as uov, SAD or INV-n: [glossary](../build-cea/references/templates.md#glossary).
+This skill checks one cost-effectiveness model (result in **years of healthy life per $1,000
+donated**) and produces a findings list, each finding with a severity and a concrete fix. It is the
+middle of build-cea's loop (build → independent audit → fix, until no high-severity finding remains),
+run in a fresh subagent, and also audits any imported model. Terms:
+[glossary](../build-cea/references/templates.md#glossary).
 
 You are the independent reviewer: check the explainers, don't trust them. You **don't edit the
 model**; you write findings its builder can act on. Work only from the model, its write-up, the blind
@@ -57,9 +57,8 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
 - **Scope** (high when it moves the result >25% or the model is of something else): build-cea step 0
   (every programme, weighted by spending, none left out; grants to sister organisations split by what
   they fund; the latest year with audited financials and reach, stated in the summary; no case study
-  or pilot standing in; a programme with thin data on its family's chain with wide ranges; one with no
-  outcome data at all in the proxy rows, comparable models read live, × `$missing_data_discount`;
-  Convention 12). Check the charity's spending breakdown yourself; a programme missing is high.
+  or pilot standing in; a programme with thin or no outcome data on its family's chain from the
+  research literature with wide ranges, never another model's result as its value; Convention 12). Check the charity's spending breakdown yourself; a programme missing is high.
 - **Every model** (docs/normalization.md is the rule; these are the usual breaches):
   - output in uov, daly, wellby, ced or tco2e; `output.native` set; rows after it in `ours` sections;
     `source.published` the estimate's date;
@@ -87,6 +86,8 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     effect already net of care as usual (`counterfactual_adj` 1);
   - climate, money moved and careers: the shared rows (normalization.md 2.5, 2.8; INV-12, valued one way);
   - signs and one question per adjustment (Convention 5);
+  - missing data (Convention 12, glossary "measured / thin"): every thin branch's `missing_data_adj`
+    reads `$missing_data_discount`, a 1 names what was measured; a thin branch at 1 is high;
   - best guesses, every subjective choice a ranged `judgment` naming its anchor; a blend of a charity
     trial and the literature by precision weights;
   - an idea-stage model shown only while no model of the charity's actual work exists, flagged
@@ -120,8 +121,8 @@ so the severity rests on a number.
   on the model's own ranges (audit-model's joint low–high with shared assumptions and facts at their
   best): the shared ones are the site's, not the builder's.
 - Peers: where the result sits among models in the same unit, intervention and cause (audit-model
-  prints the median), and which row explains the gap with the nearest peer. More than 10× the cause's median needs a
-  stated reason in the `summary` (INV-15), sourced where it can be; without one it is high. Under a
+  prints the median), and which row explains the gap. More than 10× the cause's median needs a
+  stated, sourced reason in the `summary` (INV-15); without one it is high. Under a
   tenth of it: find the row that explains the gap and check scope, reach and persistence first; a gap that comes from a different programme, year
   or counting rule than the site's is a finding with its fix, a gap the evidence supports is stated in
   the summary. Never tune toward a peer's or an evaluator's number: the fix is the rule, not the result.

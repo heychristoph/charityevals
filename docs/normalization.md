@@ -413,7 +413,7 @@ several units report in `daly` (domestic-services, humanitarian-relief, medical-
 conservation, rights-advocacy); direct-health bridges illness in DALYs into uov (`uov_from_daly`), the
 sanctioned route for illness averted in a charityevals model, which INV-2b used to block by forbidding
 `$uov_per_daly` in any row. INV-2b, INV-10 and INV-17 check bridges (section 3); the lint refuses a
-row named like a bridge (`dalys_from_<unit>`, `proxy_in_<unit>`) that isn't the exact formula.
+row named like a bridge (`dalys_from_<unit>`) that isn't the exact formula.
 
 ### 2.7 Shared conversions: one consistent way (October 2026)
 
@@ -925,28 +925,43 @@ across the slider's range (at 15%: 157 against Sinergia's 132); it drops below S
 a year. The slider alone doesn't settle HSUS: whether ACE's 2016 projection should rank at all is a separate
 question, left to the owner.
 
-### 2.12 A programme with no outcome data: comparable programmes, discounted (November 2026)
+### 2.12 Missing outcome data: built from the literature, always discounted (November 2026)
 
-Owner decision 2026-11-03: every programme of every charity is modelled; there is no partial coverage
-and no "no comparable measure". A programme with some outcome data, however thin, gets its family's
-chain with wide ranged judgments. A programme with **no outcome data at all** is valued at the result
-per dollar of the same kind of work elsewhere on the site, read live (`proxy_peer_result =
-median(#a, #b, #c)` of the family's or intervention's models, or the one nearest evaluated
-programme), applied to its share of the spending, and always discounted by one shared slider:
+Owner decisions 2026-11-03 and 2026-11-04: every programme of every charity is modelled; there is no
+partial coverage and no "no comparable measure". A programme with thin or no outcome data is **not**
+valued at other models' result (the proxy rows `proxy_peer_result = median(#a, #b, #c)` of the first
+version are retired): its family's chain is built from the research literature on that kind of work
+(meta-analyses and trials of the intervention: effect per person or per dollar, persistence), with the
+charity's own spending and whatever reach it reports, and wide ranges. Other site models may appear only
+as a cross-check named in the explainer, never as the value.
 
-- `$missing_data_discount`, "How much we count a programme we could only estimate from similar ones"
-  (accounting; default 50%, range 10%–100%, our judgment): a programme that measures nothing is
-  probably not the typical one, and the comparison carries none of its own detail.
+Missing data is always discounted, thin data included, one way: by one shared slider,
 
-Every build-cea skeleton has the same proxy rows (an `ours` section "Programmes with no outcome
-data"): `proxy_program_spend` (not part of `program_spend`), `proxy_peer_result`, `proxy_share =
-proxy_program_spend / (program_spend + proxy_program_spend)`, `proxy_per_donor_dollar = proxy_share ×
-proxy_peer_result × $missing_data_discount` (units of value per dollar you give, the peers' own donor
-steps already in), bridged into the model's unit where it isn't uov (`proxy_in_<unit>`, 2.6), and added
-to the per-donor-dollar result, whose modelled part is multiplied by `1 − proxy_share`. The lint makes
-`proxy_per_donor_dollar` read the slider and `proxy_peer_result` read models live (src/engine/
-templates.ts, lint.ts); src/engine/templates.test.ts checks every skeleton's proxy part is
-proportional to the slider.
+- `$missing_data_discount`, "How much we count a programme whose results aren't measured" (accounting;
+  default 50%, range 10%–100%, our judgment): an outcome resting on the literature or on judgment
+  rather than on the charity's own data is probably not the typical one (programmes that measure their
+  results tend to be the ones that work), and carries none of the programme's own detail.
+
+**Measured or thin.** A branch's outcome is *measured* when the charity's own count of who got the
+intervention (its reports, monitoring, a tracker) meets an effect with a credible counterfactual: its own
+controlled evaluation, or trials of the same intervention delivered the same way (doses delivered and an
+RCT's effect: measured). It is *thin* when its reach is a judgment (spending over an assumed cost per
+person, no count of its own), its effect is a judgment, or the effect comes from research on other
+delivery than the charity's; always for a programme with no outcome data. Money moved is measured
+dollars valued at the destinations' live results (2.8) and takes no step.
+
+**Rows.** Every build-cea skeleton has the canonical row `missing_data_adj` in `adjustments`, a factor
+of `total_adj`; a model with several branches (build-cea Convention 4) has one per branch,
+`<branch>_missing_data_adj` in that branch's adjustments (the policy skeleton's career changes:
+`careers_missing_data_adj`), the canonical row then their outcome-weighted average for reading only.
+Each marker is exactly `$missing_data_discount` (thin) or `1` (measured, the measurement named in its
+explainer); nothing else. The lint (src/engine/lint.ts) makes the marker required, keeps it on the path
+to the result, refuses any other formula and a 1 without a reason, flags a 1 whose branch's reach or
+effect rests on judgment inputs alone (no sourced input, no shared fact), and flags any `proxy_*` row or
+a value taken from a median of other models (`median(#…)`); models published before 2026-11-04 get
+these as medium until rebuilt (`MISSING_DATA_RULE_DATE`). src/engine/templates.test.ts checks every
+skeleton's result moves with the slider. The auditor (audit-cea) checks the cases the lint can't see: a
+thin branch at 1 under sourced-looking inputs, and a branch reading a peer model's result as its value.
 
 ## 3. Invariants
 
@@ -1251,7 +1266,7 @@ Every programme of every charity is modelled to the one scale: no partial covera
 "no comparable measure". The build-cea skills gained six families (domestic-services, humanitarian-relief,
 medical-research, companion-animals, conservation, rights-advocacy; hospitals and hospices are direct-health
 with illness in DALYs, or wellbeing, at the country's values), the bridges of 2.6 that let them count in
-several units, and the proxy rows of 2.12 for programmes with no outcome data. Shared facts added for them:
+several units, and the missing-data step of 2.12 (first proxy rows, replaced on 2026-11-04 by a chain from the literature × the slider). Shared facts added for them:
 `@united_states.consumption_per_person_2024` ($58,517) and `@united_kingdom.consumption_per_person_2024`
 ($32,412), household final consumption ÷ population, World Bank 2024, the base of a rich-country model's
 ln(consumption) gain; `@united_states.ce_lowest_quintile_vs_all_2024` (0.446, BLS Consumer Expenditure

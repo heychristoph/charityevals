@@ -1,26 +1,21 @@
 # Template families
 
-A charityevals model says what a year of the charity's work bought, in **years of healthy life per
-$1,000 donated** (the site's one scale). Every family has the same sections and shared rows, so
-any two models read side by side:
+Every family has the same sections and shared rows, so any two models read side by side:
 
 ```
 cost         program_spend, total_expenses, program_expenses → overhead_ratio → cost_total
 reach        how many units (people, households, animals, meals) the spending reached
 effect       what one unit gets, from the evidence, before adjustments
 adjustments  evidence_adj × counterfactual_adj × attribution_share [× implementation_adj]
-             [× leverage_funging_adj] [× wait_discount] = total_adj   (+ unmodelled_benefits_adj)
+             [× leverage_funging_adj] [× wait_discount] × missing_data_adj = total_adj
+             (+ unmodelled_benefits_adj)
 outcome      outcome_total (native unit) → <prefix>_per_dollar = outcome_total / cost_total  (output.native)
 donor        (ours) staff_cost_share, salary_gap (@staff_pay) → salary_sacrifice → donor_cost_share
              [marginal_vs_past_average, past averages only] → <prefix>_per_donor_dollar
 species      (ours, animal families) sads_<s> → ced_<s> → ced_per_donor_dollar (the output, unit ced)
 bridges      (ours) other units' outcomes into the output unit, fixed rows (normalization.md 2.6)
-proxy        (ours) programmes with no outcome data: peers' result × $missing_data_discount
 extras       deaths (wellbeing), moved_money and careers (policy-research-meta), conversion (climate)
 ```
-
-The newer families (domestic-services, humanitarian-relief, medical-research, companion-animals,
-conservation, rights-advocacy, and high-income care) each have a file in [families/](families/).
 
 Skeletons: `../templates/<family>.json` (from `../scripts/gen-templates.py`); src/engine/templates.ts
 lists each family's required rows, bounds, basis and shared reads, which the lint enforces.
@@ -39,6 +34,11 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 - **Canonical row**: a row id every model of a family has, meaning the same (`program_spend`, `total_adj`); listed in src/engine/templates.ts.
 - **`total_adj`**: the product of the adjustment multipliers.
 - **Invariant (INV-n)**: a site-wide rule computed over every model (listed with reasons in docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model's sources, ranges, constants and required rows. **Convention n**: the numbered rules below.
+- **Measured / thin** (a branch's outcome for this charity): *measured* when the charity's own count of
+  who got the intervention meets an effect with a credible counterfactual (its own controlled
+  evaluation, or trials of the same intervention delivered the same way: doses delivered and an RCT's
+  effect); *thin* when its reach or effect is a judgment, the effect is from other delivery than the
+  charity's, or the programme has no outcome data. Thin takes `$missing_data_discount`.
 - **Combined range**: audit-model's `Combined range`, every input's range combined as independent errors in log space (a 90% interval if each range is one). Joint low–high, every input at its worst or best at once, is the extreme case.
 
 ## What each shared row means
@@ -54,7 +54,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 | `leverage_funging_adj` | others would have paid anyway (<1), or the money pulls others in (>1) | funding-gap data; judgment |
 | `unmodelled_benefits_adj` | effects not modelled, as a share of modelled value, each with its sign | list each |
 | `staff_cost_share`, `salary_gap` | staff's forgone pay, counted with credit by share of resources | salaries ÷ expenses from the financials, else `@staff_pay.share_<kind>`; the gap always `@staff_pay.gap_<kind>` |
-| `marginal_vs_past_average` | past averages only: `$marginal_vs_past_average` (`published` 1), since the next dollar usually does less than the past average one (the easiest wins come first) | the shared slider (normalization.md 2.10) |
+| `marginal_vs_past_average` | past averages only: `$marginal_vs_past_average` (`published` 1): the easiest wins come first | the shared slider (normalization.md 2.10) |
 | `years_of_impact`, `years_until_effect`, `wait_discount` | won reforms: `$win_years_counted` (years the win brought the change forward) and the discounted wait | the shared slider; the commitments' deadlines |
 
 ## Conventions (all families)
@@ -65,9 +65,8 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    total_expenses` when the financials give staff pay (contractors who work like staff count).
 2. **Cost is the charity's own spending.** Money or in-kind work by co-funders, governments, partners or
    volunteers never goes into `cost_total`; it lowers `attribution_share_shared` to the charity's share
-   of all resources, with `$resource_shares` on or off, so nobody's input counts as the
-   charity's. Value government staff time and partners' delivery at their
-   cost, and volunteers' unpaid hours (beyond stipends the charity pays, already in its cost) at the
+   of all resources, with `$resource_shares` on or off. Value government staff time and partners'
+   delivery at their cost, and volunteers' unpaid hours (beyond stipends the charity pays) at the
    local wage. `salary_sacrifice` is only the charity's own staff's forgone pay.
 3. **Flows, not stocks.** Reach is per year. Multiply by persistence only what was *added* in the period
    (new commitments, institutions, pledges): for a won reform, `$win_years_counted`. An ongoing
@@ -87,7 +86,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 6. **Optional rows** (`implementation_adj`, `leverage_funging_adj`, `unmodelled_benefits_adj`, discounted
    waits, branch or country splits) always feed `total_adj` or `outcome_total`.
 7. **Formulas**: weighted blends with a weight row (a judgment with a range), never a literal that
-   hides a choice (the lint's magic-number check).
+   hides a choice.
 8. **Money over time**: local currency as an input × `@fx.usd_per_<cur>_<year>` (`scripts/link-fx.py`).
    Several years' spending in one year's prices: × `@cpi.<iso3>_<Y> / @cpi.<iso3>_<year>`
    (`python3 scripts/link-cpi.py <ISO3>` adds a country), then the year-Y rate.
@@ -99,10 +98,12 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
     `past_average`). A past average's cost and wins come from the *same period*: `program_spend ×
     average_spend_vs_year`, the average real spending over the wins' years (Convention 8) ÷ the
     modelled year's. Years without published accounts: a ranged judgment anchored on the nearest one.
-12. **Every programme is modelled.** Thin outcome data: the closest family's chain with wide ranged
-    judgments. No outcome data at all: the proxy rows, its spending in `proxy_program_spend` (out of
-    `program_spend`), `proxy_peer_result = median(#a, #b, #c)` of the same kind of work on the site (or
-    the nearest evaluated programme), × `$missing_data_discount`; the summary names it.
+12. **Every programme is modelled; missing data is discounted.** Thin or no outcome data: the family's
+    chain from the research on that kind of work (research.md), the programme's own spending and
+    reported reach, wide ranges; other models only as a cross-check named in the explainer, never the
+    value. Each branch's `total_adj` has `missing_data_adj` (`<branch>_missing_data_adj`):
+    `$missing_data_discount` when thin (glossary), else 1 with what was measured; the lint enforces it
+    where reach or effect is judgment only. The summary names the discounted branches.
 13. **Several outcome units** (the new families): each outcome in its own unit, entering the output
     unit only through the template's bridge rows (`uov_bridged` → `dalys_from_uov`; normalization.md
     2.6), never a rate typed between them.
@@ -136,8 +137,7 @@ programme's fact, or a sourced input where the site has none:
   review (then `indirect_deaths_ratio` is 0); with a cause-specific effect keep it, and check deaths
   averted per person-year against the all-cause trial result scaled to today's mortality.
 - **Ages**: deaths by age band (research.md), weighted by the programme's reach by country. A split another model
-  could reuse goes into facts/death_ages.json as `<cause>_<place>_share_<band>`, read by the rows
-  (`share_5_14_of_over5 = @death_ages.<x>_share_5_14/(1-@death_ages.<x>_share_under5)`). Several
+  could reuse goes into facts/death_ages.json as `<cause>_<place>_share_<band>`, read by the rows. Several
   age groups at different risk: a row per group, summed into `deaths_averted_per_person`.
 - **Waits**: `gift_to_grant_years` (unspent funds ÷ yearly spending), `delay_years` (to delivery) and
   `benefit_midpoint_years` (half the protection), discounted together; interest on waiting funds
@@ -160,7 +160,7 @@ spillovers and mortality as ratios.
 - Household size is the place's fact (rural where recipients are rural); the recipients' own
   size only with that reason stated.
 - A benefit stated as a multiple of cash is that multiple × `@cash.uov_per_dollar`; GiveDirectly as a
-  destination or comparison is `#givedirectly` (read live, so it moves when that model does).
+  destination or comparison is `#givedirectly` (read live).
 - Recurring income gains: `ln(1+gain/baseline) × pv_annuity_due(1,$discount_rate,persistence_years)`,
   persistence from follow-up studies.
 
@@ -232,7 +232,7 @@ split by `@sad_factors.meal_sads_share_<s>`.
 
 - `meal_mix_vs_reference` is 1 (0.5–2) unless one published estimate compares this country's meal with
   the reference meal the same way; never a per-meal figure from a meat mix of your own, nor a ratio of
-  two studies (so diet models differ only where published evidence says the meals do).
+  two studies.
 - **Basis**: Convention 11 (estimate basis); a year's trainings, events or pledges against that year's
   spending are `unit_cost`.
 - **A stock of running wins.** When the charity reports only the meals a year still served under all
@@ -253,7 +253,8 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
 - **Money moved or raised**: `money_moved × moved_dollar_net_value`, the shared rows word for word
   (`python3 scripts/moved-money.py` for another destination set); a not-yet-proven organisation takes
   `@meta.success_chance_new_org` and the shared success step.
-- **Career changes**: `careers_changed × career_change_value`.
+- **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`. Money
+  moved is measured dollars: no missing-data step.
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species
   section. Climate (`tco2e`, tonnes of CO₂-equivalent averted): the climate skeleton (normalization.md 2.5).
 - Usually dominated by judgment; say so in the summary.
