@@ -9,13 +9,13 @@
   "estimate_basis": "unit_cost",
   "charity": "united-way",
   "owner": "charityevals",
-  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to some 29,000 local agencies (about 58% of its programme spending: food, shelter, rent and utility help, child care, youth and health services), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash, other grants and United Way's own services valued at what they are worth to the people who get them with a wide discount for thin evidence, 211 by the help callers find that they wouldn't have found otherwise, and tax help by fees saved and credits that would have gone unclaimed. The result, about 0.004 years of healthy life per $1,000, is under a thousandth of the median global-health charity on the site because the help goes to people in the US who consume around $41,000 a year: on the site's log-income scale a dollar does about a sixtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. The rate between healthy years and income, what the services are worth to the people who get them, and how poor they are drive the result.",
+  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring and early learning valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about 0.010 years of healthy life per $1,000 (0.0007 to 0.14), is under a three-hundredth of the median global-health charity on the site because the help goes to people in the US who consume around $41,000 a year: on the site's log-income scale a dollar does about a sixtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About four-fifths of the result is the children's and youth programmes' lifelong earnings, so the discount rate, what a child's place in such a programme costs and how much it raises later earnings drive it, with the missing-data and income-to-health sliders.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: United Way (US network)",
     "url": "https://charityevals.org/united-way-charityevals",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -52,6 +52,36 @@
       "type": "charity",
       "title": "United Way: MyFreeTaxes and VITA fact sheet",
       "url": "https://uwcf.org/wp-content/uploads/2025/01/MFT_and_VITA_One-Pager_1.pdf"
+    },
+    {
+      "type": "data",
+      "title": "Kraft and others 2026, tutoring at scale (Review of Educational Research)",
+      "url": "https://doi.org/10.3102/00346543261446660"
+    },
+    {
+      "type": "data",
+      "title": "Chetty, Friedman and Rockoff 2014, teacher value-added and adult outcomes (NBER w19424)",
+      "url": "https://www.nber.org/papers/w19424"
+    },
+    {
+      "type": "data",
+      "title": "Finkelstein, Hendren and Luttmer 2019, the value of Medicaid (NBER w21308)",
+      "url": "https://www.nber.org/papers/w21308"
+    },
+    {
+      "type": "data",
+      "title": "Raposa and others 2019, youth mentoring meta-analysis",
+      "url": "https://doi.org/10.1007/s10964-019-00982-8"
+    },
+    {
+      "type": "data",
+      "title": "Card, Kluve and Weber 2018, active labour market programmes meta-analysis",
+      "url": "https://doi.org/10.1093/jeea/jvx028"
+    },
+    {
+      "type": "data",
+      "title": "United Way of Abilene 2025 annual report (impact areas)",
+      "url": "https://unitedwayabilene.org/wp-content/uploads/2025/09/13913_UW_2025_Annual_Report_FNL.pdf"
     }
   ],
   "sections": [
@@ -87,12 +117,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -122,7 +146,11 @@
       "section": "cost",
       "label": "Total expenses of the US United Way network, fiscal year to June 2025",
       "format": "usd",
-      "value": 3500000000.0,
+      "value": {
+        "low": 3400000000.0,
+        "best": 3500000000.0,
+        "high": 3600000000.0
+      },
       "kind": "estimate",
       "source": {
         "title": "Forbes, America's Top Charities: United Way Worldwide (data as of December 2025, fiscal year ending 30 June 2025)",
@@ -131,7 +159,7 @@
         "quote": "Total Expenses: $3.5B",
         "page": "Financials panel"
       },
-      "explainer": "The network's total spending, as Forbes compiles it for 'the umbrella for more than 1,100 independent units' (each local United Way files its own audited accounts; United Way Worldwide's audited statements, $77.4 million in 2024, cover only the national office, funded by the locals' dues). Forbes warns its results 'may be skewed due to unconsolidated data'; the uncertainty is carried by the programme share (program_expenses), since the result is per dollar and the total enters only through the overhead ratio."
+      "explainer": "The network's total spending, as Forbes compiles it for 'the umbrella for more than 1,100 independent units' (each local United Way files its own audited accounts; United Way Worldwide's audited statements, $77.4 million in 2024, cover only the national office, funded by the locals' dues). Forbes warns its results 'may be skewed due to unconsolidated data'; the uncertainty is carried by the programme share (program_expenses), since the result is per dollar and the total enters only through the overhead ratio. The range, $3.4 to $3.6 billion, is Forbes's rounding to the nearest $0.1 billion."
     },
     {
       "id": "program_expenses",
@@ -237,7 +265,7 @@
         "page": "Consolidated statement of activities, p. 6",
         "quote": "Total expenses 77,350 (in thousands)"
       },
-      "explainer": "Context: the national office (brand, network support, donor-advised giving, training), funded largely by the locals' membership dues ($28.8 million in 2024). About 2% of the network's spending and part of its cost through those dues; a gift to United Way Worldwide itself is valued here as the network's average dollar."
+      "explainer": "Context only, not used in the result: the national office (brand, network support, donor-advised giving, training), funded largely by the locals' membership dues ($28.8 million in 2024). About 2% of the network's spending and part of its cost through those dues; a gift to United Way Worldwide itself is valued here as the network's average dollar."
     },
     {
       "id": "people_served_network",
@@ -480,12 +508,12 @@
       "label": "Share of that spending that is services delivered to people",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "Our judgment: United Way's own programme spending also pays for running its grantmaking (community-impact staff who choose, monitor and convene grantees) and its campaigns' community work, which deliver nothing to clients themselves: their value is in the grants, so they are cost here, not value. Neither statement splits it: Greater Twin Cities' $17.5 million of 'services provided by' itself (against $15.4 million of grants) is $11.4 million staff, who both run programmes and manage grants; Greater Houston's $16.4 million of programme spending beyond grants includes its 211 centre. With no split published, 60% is the midpoint of our range, from 40% (mostly grantmaking and convening) to 80% (mostly direct programmes)."
+      "explainer": "Our judgment, anchored on the one published split. Greater Twin Cities United Way's note 15 (Financial Statements 2024, https://www.gtcuw.org/wp-content/uploads/2025/10/GTCUW-Financial-Statements-2024.pdf) splits its $17.5 million of services provided directly: community impact strategy and grants management $4.24 million, 211 $3.84 million (a branch of its own here), the 988 suicide line $2.88 million, Volunteer United $0.58 million, goal-area programmes $5.42 million, capacity building and other $0.54 million. Of the goal-area lines, Generation Next ($1.34 million, a collective-impact partnership) and the Start Early Funders Coalition ($0.16 million) are convening, not services. Without 211, direct services to people (988 and the other goal-area programmes: food, housing, Action Day, career academies, early childhood; $6.80 million) are 50% of $13.66 million; grants management, convening, volunteering and capacity building, whose value is in the grants, are cost here. 50%, from 35% (more grantmaking and convening elsewhere; Greater Houston doesn't split its own) to 75%."
     },
     {
       "id": "own_direct_spend",
@@ -537,7 +565,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Our judgment: a grant pays for the agency's overhead too. Programme ratios of US human-service charities are typically 75% to 90% (United Way's own network: 84%); 82%. Applied to grants only: United Way's own programmes' overhead is already in overhead_ratio."
+      "explainer": "Our judgment: a grant pays for the agency's overhead too. Programme ratios of US human-service charities are typically 75% to 90% (United Way's own network: 84%); 82%. It reduces the basic-needs grants to what reaches clients, and grosses United Way's own programme-only spending up to the full-cost basis of the trialled programmes' costs (own_uov_raw), since United Way's own overhead is already in overhead_ratio."
     },
     {
       "id": "bn_inkind_factor",
@@ -553,19 +581,6 @@
       "explainer": "Our judgment: food, rent and utility help frees money the household would spend on the same things, so it is close to cash; the gap is for help that isn't the household's own top need. Food aid within what a household buys anyway is valued near cash (the usual finding for SNAP); 0.9, from 0.7 to 1."
     },
     {
-      "id": "svc_inkind_factor",
-      "section": "effect",
-      "label": "Other services: what a dollar of them is worth to the people who get them, against cash",
-      "format": "number",
-      "value": {
-        "low": 0.3,
-        "best": 0.7,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, for child care, youth, education, health and coaching services: worth less than their cost to recipients who would not have bought them. Finkelstein, Hendren and Luttmer ('The Value of Medicaid', JPE 2019) find low-income recipients value a dollar of Medicaid spending at $0.20 to $0.40 (more, $0.5 to $1.2, per dollar of the care's resource cost); child care and tax help that let parents work or bring in benefits can be worth their full cost. 0.7, from 0.3 to 1."
-    },
-    {
       "id": "bn_value_per_person",
       "section": "effect",
       "label": "Basic needs: value per person reached",
@@ -573,26 +588,12 @@
       "formula": "bn_spend * agency_programme_share * bn_inkind_factor / people_reached"
     },
     {
-      "id": "og_value_per_person",
-      "section": "effect",
-      "label": "Other grants: value per person reached",
-      "format": "usd",
-      "formula": "og_spend * agency_programme_share * svc_inkind_factor / people_reached"
-    },
-    {
-      "id": "own_value_per_person",
-      "section": "effect",
-      "label": "United Way's own services: value per person reached",
-      "format": "usd",
-      "formula": "own_direct_spend * svc_inkind_factor / people_reached"
-    },
-    {
       "id": "value_per_person",
       "section": "effect",
-      "label": "Value of grants and own services per person reached (all three branches)",
+      "label": "Value per person reached (basic-needs grants; the other branches are valued per participant)",
       "format": "usd",
-      "explainer": "The three branches' value spread over the people reached: about $55 a person a year. Each branch's ln gain is computed separately so each takes its own adjustments; at gains this small the logs add up to the joint one.",
-      "formula": "bn_value_per_person + og_value_per_person + own_value_per_person"
+      "explainer": "The basic-needs grants' cash-equivalent value spread over the people reached, for reading against other domestic-services models; the other grants and own services are valued per participant from the literature, 211 and tax help per contact and per return.",
+      "formula": "bn_value_per_person"
     },
     {
       "id": "consumption_mean",
@@ -642,10 +643,10 @@
     {
       "id": "ln_gain_per_person",
       "section": "effect",
-      "label": "ln(consumption) gain per person, all three branches (context)",
+      "label": "ln(consumption) gain per person reached, all branches (context)",
       "format": "number",
-      "formula": "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
-      "explainer": "Context: the joint gain of the three branches; each branch's own gain is below."
+      "formula": "(bn_uov_raw + og_uov_raw + own_uov_raw + h211_uov_raw + tax_uov_raw) / $uov_per_ln_consumption / people_reached",
+      "explainer": "Context only: every branch's gain before adjustments, over the people reached by grants and own programmes."
     },
     {
       "id": "bn_ln_gain_per_person",
@@ -655,18 +656,216 @@
       "formula": "ln(1 + bn_value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)"
     },
     {
-      "id": "og_ln_gain_per_person",
+      "id": "svc_edu_share",
       "section": "effect",
-      "label": "Other grants: ln(consumption) gain per person",
-      "format": "small",
-      "formula": "ln(1 + og_value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)"
+      "label": "Other grants and own services: share for children and youth (early learning, reading, tutoring, mentoring, after-school)",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way sorts its non-emergency work into education (early learning, grade-level reading, youth), financial stability and health, and publishes no national split. Anchor: United Way of Abilene's 2025 annual report puts its three impact areas at Health $413,000 (26%), Education & Youth Services $544,500 (34%) and Financial Stability $624,835 (40%), the last including the basic-needs help that is a branch of its own here, so education's share of what is left is higher; Greater Houston describes its work as financial stability 'coupled with early childhood and youth development programs and health care programs', and Greater Twin Cities' restricted funds are mostly for 'educational success' and early childhood. 40%, from 25% to 55%."
     },
     {
-      "id": "own_ln_gain_per_person",
+      "id": "svc_fin_share",
       "section": "effect",
-      "label": "United Way's own services: ln(consumption) gain per person",
-      "format": "small",
-      "formula": "ln(1 + own_value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)"
+      "label": "Other grants and own services: share for financial stability (financial coaching, job training, work supports)",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, from the same anchors as the children's share (Abilene's Financial Stability 40% including basic needs; United Way of Puerto Rico puts 22% of the funds it raises into financial stability; Greater Houston's THRIVE financial-stability network is its largest restricted fund). 30%, from 15% to 45%. The rest, 1 minus the two shares (30% at the defaults), is health and other services."
+    },
+    {
+      "id": "edu_cost_per_child",
+      "section": "effect",
+      "label": "Children and youth: cost per child of a year of a programme as trialled",
+      "format": "usd",
+      "value": {
+        "low": 1200,
+        "best": 3000,
+        "high": 8000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the full cost (the agency's overhead included, so grants are not reduced by agency_programme_share here) of one child's year in a programme of the kind the trials below test, since the trials' effects come with their dose. Anchors: Big Brothers Big Sisters community mentoring about $1,500 to $3,300 per youth (Alfonso and others 2019; the Washington State Institute for Public Policy uses $4,399 per participant a year), high-dosage tutoring about $3,000 to $4,000 per student-year (the Chicago Saga math tutoring trials, about $3,800), state pre-kindergarten several times that. $3,000, from $1,200 to $8,000: lighter-touch programmes cost less but would do less than the trials."
+    },
+    {
+      "id": "edu_effect_sd",
+      "section": "effect",
+      "label": "Children and youth: effect of a programme year, in standard deviations of the outcomes",
+      "format": "number",
+      "value": {
+        "low": 0.05,
+        "best": 0.16,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Kraft and others, 'What Impacts Should We Expect From Tutoring at Scale? Exploring Meta-Analytic Generalizability', Review of Educational Research 2026 (published abstract)",
+        "url": "https://doi.org/10.3102/00346543261446660",
+        "retrieved": "2026-11-04",
+        "page": "Abstract (the publisher's page blocks automated readers; the abstract is in the Crossref record for the DOI)",
+        "quote": "Pooled effect sizes from studies with stronger target-equivalence are .16 to .22 standard deviations, relative to .40 standard deviations in our full sample."
+      },
+      "explainer": "The research on programmes of this kind at the scale United Way funds them, weighted by a judged quarter each of its children's spending. Tutoring and reading at scale, 0.19 SD: the midpoint of 0.16 to 0.22 on standardised tests in the published article's large, policy-relevant RCTs (263 trials), against 0.40 in its full sample of mostly small efficacy trials; the earlier working paper (EdWorkingPaper ai24-1031, https://edworkingpapers.com/ai24-1031) puts the at-scale effects at 'only a third to a half as large' as the full sample, 0.13 to 0.20, the same range. Youth mentoring, 0.21: Raposa and others (Journal of Youth and Adolescence 2019), g = 0.21 across outcomes in 70 studies, mean age 12; the Big Brothers Big Sisters community-mentoring RCT finds small positive effects on emotional and conduct outcomes at 13 months (Herrera and others 2023) and, in its four-year report, less violent delinquency and substance use but no significant effect on arrests (DuBois and others, June 2025, https://youthrex.com/wp-content/uploads/2025/10/YRS-4-Year-Report_062025.pdf). Early learning, 0.15: Head Start's end-of-programme gains in its national RCT, about 0.1 to 0.2 SD on cognitive outcomes, fading on tests later (Puma and others, Head Start Impact Study final report, US HHS 2010). After-school programmes, 0.09: the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005), while Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010) finds 0.12 on grades and 0.17 on tests (Table 3), with the effects in the programmes using sequenced, active, focused and explicit (SAFE) practices and the rest near zero; 0.09 is between them. (0.19 + 0.21 + 0.15 + 0.09) ÷ 4 = 0.16. The low end, 0.05, is programmes with little effect, 0.30 the high end. Whether United Way's grantees run at the trials' dose is the missing-data step's question, not this row's."
+    },
+    {
+      "id": "edu_earnings_per_sd",
+      "section": "effect",
+      "label": "Children and youth: adult earnings gain per standard deviation of the childhood gain",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.13
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Chetty, Friedman and Rockoff, 'Measuring the Impacts of Teachers II: Teacher Value-Added and Student Outcomes in Adulthood', American Economic Review 2014 (NBER Working Paper 19424, revision 2)",
+        "url": "https://www.nber.org/system/files/working_papers/w19424/revisions/w19424.rev2.pdf",
+        "retrieved": "2026-11-04",
+        "quote": "On average, a one standard deviation improvement in teacher VA in a single grade raises earnings by 1.3% at age 28.",
+        "page": "Abstract"
+      },
+      "explainer": "A teacher one standard deviation better in value-added raises a year's test scores by about 0.12 SD in maths and 0.08 SD in English (the same authors' summary, 'Great Teaching: Measuring Its Effects on Students' Future Earnings', Education Next 2012, https://www.educationnext.org/great-teaching/) and earnings at 28 by 1.3%: 1.3% ÷ 0.10 SD (the average of maths and English) = about 13% per SD of a one-year test gain, measured in adulthood, so the fade-out of test scores is already in it (in Project STAR too, classroom-quality effects fade on tests and re-emerge in earnings: Chetty and others, Quarterly Journal of Economics 2011). 10%, from 5% to 13%: below CFR's 13% because much of the youth programmes' gain is in social-emotional or self-reported outcomes, which predict earnings less than test gains; this is the only place that doubt is counted."
+    },
+    {
+      "id": "edu_years_until_work",
+      "section": "effect",
+      "label": "Children and youth: years from the programme to working age",
+      "format": "number",
+      "value": {
+        "low": 8,
+        "best": 13,
+        "high": 18
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way's youth work runs from early learning (age 3 to 5, 17 to 19 years before work at about 22) to mentoring and after-school programmes (average age about 12 in the mentoring trials, about 10 years). 13 years, from 8 to 18; every year is discounted at the shared rate."
+    },
+    {
+      "id": "edu_working_years",
+      "section": "effect",
+      "label": "Children and youth: years the earnings gain lasts",
+      "format": "number",
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "explainer": "The site's shared figure for how long a childhood programme's earnings gain lasts (GiveWell's, 40 years, from 30), the same as for deworming and malaria prevention."
+    },
+    {
+      "id": "edu_resource_sharing",
+      "section": "effect",
+      "label": "Children and youth: household sharing of the adult's earnings gain",
+      "format": "number",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "explainer": "The site's shared figure for a later-life earnings gain shared with the earner's household (GiveWell's 2, from 1 to 3), as in every model that values a childhood programme's adult income."
+    },
+    {
+      "id": "edu_ln_gain_per_child",
+      "section": "effect",
+      "label": "Children and youth: ln(consumption) gain per child, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + edu_effect_sd * edu_earnings_per_sd) * pv_annuity_due(1, $discount_rate, edu_working_years) / (1 + $discount_rate) ^ edu_years_until_work * edu_resource_sharing",
+      "explainer": "The proportional earnings gain on the log scale for each working year, discounted to the programme year at the shared rate, shared with the household. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
+    },
+    {
+      "id": "fin_cost_per_participant",
+      "section": "effect",
+      "label": "Financial stability: cost per participant",
+      "format": "usd",
+      "value": {
+        "low": 700,
+        "best": 2000,
+        "high": 5000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: financial coaching runs several sessions over months (a few hundred to about $1,500 a client), job training and work-readiness programmes $2,000 to several thousand a participant (WIA intensive services and training, sector programmes more). $2,000, from $700 to $5,000."
+    },
+    {
+      "id": "fin_earnings_gain",
+      "section": "effect",
+      "label": "Financial stability: yearly earnings or savings gain per participant's household",
+      "format": "usd",
+      "value": {
+        "low": 0,
+        "best": 500,
+        "high": 2500
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment from the trials. Job training and job-search help: average impacts close to zero in the short run, larger 2 to 3 years on and for human-capital programmes (Card, Kluve and Weber, Journal of the European Economic Association 2018, over 200 evaluations); the national WIA Gold Standard RCT found intensive services raised earnings by about $3,300 to $7,100 over 30 months ($1,300 to $2,800 a year) and training added nothing measurable (Fortson and others, Mathematica 2017). Financial coaching: one RCT found higher savings and credit scores at one site and less debt at the other (Theodos and others, Journal of Economic Behavior & Organization 2018), but a systematic review of 11 studies (Birkenmaier and others, Research on Social Work Practice 2026) finds the financial effects mostly small and mixed. Most of United Way's financial-stability money is coaching, benefits access and work supports rather than intensive training: $500 a year, from 0 to $2,500."
+    },
+    {
+      "id": "fin_years",
+      "section": "effect",
+      "label": "Financial stability: years the gain lasts",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the training trials' follow-ups run 2 to 5 years with gains persisting or growing (Card, Kluve and Weber 2018); coaching follow-ups are 1 to 2 years. 3 years, from 1 to 5, discounted at the shared rate."
+    },
+    {
+      "id": "fin_ln_gain_per_participant",
+      "section": "effect",
+      "label": "Financial stability: ln(consumption) gain per participant, summed over the household",
+      "format": "number",
+      "formula": "household_size * ln(1 + fin_earnings_gain / (household_size * baseline_consumption)) * pv_annuity_due(1, $discount_rate, fin_years)",
+      "explainer": "The household's yearly gain spread over its members at the clients' consumption, for the years it lasts, discounted at the shared rate."
+    },
+    {
+      "id": "hlth_cost_per_participant",
+      "section": "effect",
+      "label": "Health and other services: cost per person served",
+      "format": "usd",
+      "value": {
+        "low": 200,
+        "best": 800,
+        "high": 3000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: community clinics, mental-health and substance-use counselling, home care for older people and disability services, from a few visits to a year's care. $800, from $200 to $3,000. On the log scale this matters little: the value per dollar below carries the result."
+    },
+    {
+      "id": "hlth_value_per_dollar",
+      "section": "effect",
+      "label": "Health and other services: what a dollar of them is worth to low-income recipients, against cash",
+      "format": "number",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Finkelstein, Hendren and Luttmer, 'The Value of Medicaid: Interpreting Results from the Oregon Health Insurance Experiment', Journal of Political Economy 2019 (NBER Working Paper 21308)",
+        "url": "https://www.nber.org/papers/w21308",
+        "retrieved": "2026-11-04",
+        "quote": "Our baseline estimates of Medicaid's welfare benefit to recipients per dollar of government spending range from about $0.2 to $0.4, depending on the framework.",
+        "page": "Abstract"
+      },
+      "explainer": "The one randomised measure of what US low-income adults are willing to pay for health care bought for them: $0.20 to $0.40 per dollar of public spending on Medicaid in the Oregon experiment, net of the free care they would otherwise get (more per dollar of net cost, government spending less the roughly $0.6 a dollar that is a transfer to the providers of uncompensated care: the gap is care that would have been given anyway). So this is already net of what would have come anyway. 0.3, from 0.15 to 0.6 (services that substitute for paid help, such as home care or counselling the client would otherwise pay for)."
+    },
+    {
+      "id": "hlth_ln_gain_per_participant",
+      "section": "effect",
+      "label": "Health and other services: ln(consumption) gain per person served, summed over the household",
+      "format": "number",
+      "formula": "household_size * ln(1 + hlth_cost_per_participant * hlth_value_per_dollar / (household_size * baseline_consumption))",
+      "explainer": "The service's cash-equivalent value spread over the household at the clients' consumption, in the year it is given."
+    },
+    {
+      "id": "svc_ln_gain_per_dollar",
+      "section": "effect",
+      "label": "Other grants and own services: ln(consumption) gain per dollar of services",
+      "format": "number",
+      "formula": "svc_edu_share * edu_ln_gain_per_child / edu_cost_per_child + svc_fin_share * fin_ln_gain_per_participant / fin_cost_per_participant + (1 - svc_edu_share - svc_fin_share) * hlth_ln_gain_per_participant / hlth_cost_per_participant",
+      "explainer": "Each kind of service's gain per participant over its cost per participant, weighted by its share of the spending. The reach is the spending divided by what the trialled programmes cost: United Way's count of people served doesn't say who got which service."
     },
     {
       "id": "h211_help_obtained_share",
@@ -679,7 +878,7 @@
         "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "Our judgment from follow-up surveys of 211 callers, all self-reported. The national 211 network's 2022 Impact Survey (https://nj211.org/sites/default/files/documents/2023-02/Impact%20Survey%202022.pdf, p. 20): in a six-month follow-up in five markets, mostly of utility requests (51%), '63% were unable to obtain needed help', 37% got it: the low end, since utility funds run out. A Missouri United Way 211's report filed with the Missouri Public Service Commission (2020-21, https://efis.psc.mo.gov/Document/Display/76673) found 83% of the callers it reached had contacted the referral point; if most of those got some help, the high end is about 65%. Half, from 37% to 65%."
+      "explainer": "Our judgment from follow-up surveys of 211 callers, all self-reported. The national 211 network's 2022 Impact Survey (https://nj211.org/sites/default/files/documents/2023-02/Impact%20Survey%202022.pdf, p. 20): in a six-month follow-up in five markets, mostly of utility requests (51%), '63% were unable to obtain needed help', 37% got it: the low end, since utility funds run out. Requests for food, health and other services, which run out less, do better; the high end, 65%, is our judgment (no published follow-up we could open gives a higher figure). Half, from 37% to 65%."
     },
     {
       "id": "h211_value_of_help",
@@ -819,14 +1018,16 @@
       "section": "effect",
       "label": "Other grants: units of value before adjustments",
       "format": "number",
-      "formula": "people_reached * og_ln_gain_per_person * $uov_per_ln_consumption"
+      "formula": "og_spend * svc_ln_gain_per_dollar * $uov_per_ln_consumption",
+      "explainer": "The other grants' spending (their agencies' overhead included, as in the trialled programmes' costs) times the literature's gain per dollar, in units of value."
     },
     {
       "id": "own_uov_raw",
       "section": "effect",
       "label": "United Way's own services: units of value before adjustments",
       "format": "number",
-      "formula": "people_reached * own_ln_gain_per_person * $uov_per_ln_consumption"
+      "formula": "own_direct_spend / agency_programme_share * svc_ln_gain_per_dollar * $uov_per_ln_consumption",
+      "explainer": "United Way's own direct services valued at the same literature gain per dollar as the services it funds. The trialled programmes' costs include their providers' overhead, while United Way's own overhead is already in the cost (overhead_ratio): so its programme-only spending is grossed up by the agencies' programme share to the same full-cost basis, not counting its overhead twice."
     },
     {
       "id": "h211_uov_raw",
@@ -882,44 +1083,33 @@
       "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211 and tax help."
     },
     {
-      "id": "svc_counterfactual_adj",
-      "section": "adjustments",
-      "label": "Basic needs: share of the help that wouldn't have come anyway",
-      "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.7,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, the one place funging is counted (leverage_funging_adj counts leverage only). Without United Way's money some help would come from government programmes, other charities or family, and agencies replace part of a lost grant from other donors (crowd-out between funders is partial, well under one for one). Against that, emergency help is rationed: in Evans, Sullivan and Wallskog (Science 2016), Chicago callers who asked for rent help when funds had run out were much more likely to enter a homeless shelter than those helped, so turned-away people often find nothing. 70%, from 50% to 90%."
-    },
-    {
       "id": "bn_counterfactual_adj",
       "section": "adjustments",
-      "label": "Basic needs: share that wouldn't have come anyway",
+      "label": "Basic needs: share of the help that wouldn't have come anyway from government or family",
       "format": "percent",
-      "formula": "svc_counterfactual_adj"
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: without the help some households would get the same from government programmes, other charities or family. Emergency help is rationed: in Evans, Sullivan and Wallskog (Science 2016), Chicago callers who asked for rent help when funds had run out were much more likely to enter a homeless shelter than those helped, so turned-away people often find nothing. 80%, from 60% to 95%. Whether the agency would have given the help anyway with other donors' money is bn_leverage_funging_adj."
     },
     {
       "id": "og_counterfactual_adj",
       "section": "adjustments",
-      "label": "Other grants and own services: share that wouldn't have come anyway",
+      "label": "Other grants: share of the outcome that wouldn't have come anyway",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.85
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: child care, pre-kindergarten, tutoring, health and coaching services have more public and private substitutes than emergency help (public pre-K and child-care subsidies, school programmes, health insurance), and public pre-K partly replaces care families would have used anyway (Bassok, Fitzpatrick and Loeb, Journal of Urban Economics 2014, on Georgia's and Oklahoma's universal pre-K). 60%, from 40% to 85%."
+      "explainer": "1: the trials' effects are already net of what their control groups got elsewhere (public pre-K, school programmes, other charities), and the health value is net of the free care recipients would get anyway (Finkelstein, Hendren and Luttmer). Whether the agency would have run the service with other money is og_leverage_funging_adj.",
+      "formula": "1"
     },
     {
       "id": "own_counterfactual_adj",
       "section": "adjustments",
-      "label": "Own services: share that wouldn't have come anyway",
+      "label": "Own services: share of the outcome that wouldn't have come anyway",
       "format": "percent",
-      "formula": "og_counterfactual_adj"
+      "explainer": "1, as for the other grants: the trial effects are net of the control groups' other services. Whether partners would run the programmes without United Way is own_leverage_funging_adj.",
+      "formula": "1"
     },
     {
       "id": "bn_evidence_adj",
@@ -937,28 +1127,23 @@
     {
       "id": "og_evidence_adj",
       "section": "adjustments",
-      "label": "Other grants: evidence adjustment (thin data)",
+      "label": "Other grants: evidence adjustment (validity of the literature chain)",
       "format": "multiple",
       "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.65,
+        "best": 0.85,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment, wide because the data are thin: United Way publishes no outcomes for its other grants, which fund education, early learning and child care, youth, health and financial-stability services. For such services the literature has trials with real effects (child-care subsidies and pre-K raising mothers' work and children's school readiness, mentoring and tutoring trials, financial coaching) and many null results, and the grantees' quality is unmeasured; the services are valued at what they cost, not at measured effects. 0.6, from 0.3 (most funded services do little against their cost) to 0.9 (they work like the trials). The site's slider for programmes with no data at all ($missing_data_discount, default 50%) is the reference: these sit a little above it because their kind of work has evidence."
+      "explainer": "Our judgment on the internal validity of the literature chain only. Publication bias and self-report in the mentoring evidence (Raposa and others 2019 find larger effects where evaluations rely on youth self-report); tutoring at scale is taken near face value, since Kraft and others' at-scale figure comes from large RCTs on independent tests, where publication bias is small. Two other doubts are counted elsewhere, once each: that social-emotional gains predict earnings less than test gains (edu_earnings_per_sd), and whether United Way's grantees run programmes like the trialled ones, at their dose (the missing-data step, og_missing_data_adj). 0.85, from 0.65 to 1."
     },
     {
       "id": "own_evidence_adj",
       "section": "adjustments",
-      "label": "United Way's own services: evidence adjustment (thin data)",
+      "label": "Own services: evidence adjustment (as the other grants)",
       "format": "multiple",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as for the other grants: United Way's own early-learning, reading, coaching and community-school programmes publish outputs (children enrolled, families coached) but no network-wide outcomes, and the evidence for their kind of work is mixed. 0.6, from 0.3 to 0.9."
+      "formula": "og_evidence_adj",
+      "explainer": "The same literature chain as the other grants, so the same adjustment."
     },
     {
       "id": "h211_evidence_adj",
@@ -971,7 +1156,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the help-obtained share comes from self-reported follow-ups with low response rates (the Missouri United Way 211 above follows up about 15% of its calls with referrals), and those who answer are likelier to have been helped. 0.8, from 0.6 to 1."
+      "explainer": "Our judgment: the help-obtained share comes from self-reported follow-ups that reach only some callers, and those who answer are likelier to have been helped. 0.8, from 0.6 to 1."
     },
     {
       "id": "h211_counterfactual_adj",
@@ -1000,12 +1185,12 @@
       "label": "Tax help: evidence adjustment",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
+        "low": 0.8,
+        "best": 1,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment: returns and refunds are United Way's counts and the fee is its figure; the counterfactual shares are our judgments. 0.8, from 0.6 to 1."
+      "explainer": "Our judgment on the figures' validity: returns and refunds are United Way's counts and the fee is its figure. The counterfactual shares are judgments, which the missing-data step (tax_missing_data_adj) counts, so they aren't discounted here again. 1, down to 0.8 for preparation errors and refunds counted twice across VITA and MyFreeTaxes."
     },
     {
       "id": "tax_volunteer_hours_per_return",
@@ -1060,12 +1245,12 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "1: the value counted comes from the spending, not from United Way's count of people, so duplicated or over-counted people don't inflate it; delivery shortfalls are in the agency share and the in-kind factors. The low end, 0.9, allows for money reported as spent that reached clients late or not at all."
+      "explainer": "1: the value counted comes from the spending, not from United Way's count of people, so duplicated or over-counted people don't inflate it; delivery shortfalls are in the agency share, the in-kind factor and the trialled programmes' cost per participant. The low end, 0.9, allows for money reported as spent that reached clients late or not at all."
     },
     {
-      "id": "leverage_funging_adj",
+      "id": "grant_leverage_adj",
       "section": "adjustments",
-      "label": "Leverage and funging",
+      "label": "Leverage: grants matched by other funders or that unlock public money",
       "format": "multiple",
       "value": {
         "low": 1,
@@ -1073,42 +1258,174 @@
         "high": 1.05
       },
       "kind": "judgment",
-      "explainer": "Leverage only (funging is in the counterfactual rows, Convention 5): grants matched by other funders or that unlock public money. 1, up to 1.05."
+      "explainer": "Our judgment, leverage only (funging is in each branch's leverage-and-funging row): some grants are matched by other funders or unlock public money. 1, up to 1.05."
+    },
+    {
+      "id": "bn_funging_adj",
+      "section": "adjustments",
+      "label": "Basic needs: share of the grant-funded help the agency wouldn't have given anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: agencies replace part of a lost United Way grant from other donors. United Way is usually one funder among several and below the template's 0.95, since its grants are general operating money that other donors can more easily make up. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 60%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85; the American Red Cross model has 0.95 and GiveWell's top charities typically 0.85 to 0.95. 85%, from 60% to 100%."
+    },
+    {
+      "id": "og_funging_adj",
+      "section": "adjustments",
+      "label": "Other grants: share of the services the agency wouldn't have run anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as for basic needs: United Way is one funder of the agency's programme among several, and agencies make up part of a lost grant. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 50%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85; the American Red Cross model has 0.95 and GiveWell's top charities typically 0.85 to 0.95. 85%, from 50% to 100%."
+    },
+    {
+      "id": "own_funging_adj",
+      "section": "adjustments",
+      "label": "Own services: share that wouldn't have run without United Way",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way's own programmes (early-learning and reading initiatives, the 988 line, coaching) are its own, but partners and public money would take over some of them; nearer the template's default than the grants. 90%, from 70% to 100%."
+    },
+    {
+      "id": "bn_leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Basic needs: leverage and funging",
+      "format": "multiple",
+      "formula": "bn_funging_adj * grant_leverage_adj"
+    },
+    {
+      "id": "og_leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Other grants: leverage and funging",
+      "format": "multiple",
+      "formula": "og_funging_adj * grant_leverage_adj"
+    },
+    {
+      "id": "own_leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Own services: leverage and funging",
+      "format": "multiple",
+      "formula": "own_funging_adj * grant_leverage_adj"
+    },
+    {
+      "id": "h211_leverage_funging_adj",
+      "section": "adjustments",
+      "label": "211: leverage and funging",
+      "format": "multiple",
+      "formula": "grant_leverage_adj",
+      "explainer": "Leverage only: funging is already in 211's attribution, which credits United Way only its share of the cost of finding help."
+    },
+    {
+      "id": "tax_leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Tax help: leverage and funging",
+      "format": "multiple",
+      "formula": "grant_leverage_adj",
+      "explainer": "Leverage only: the volunteers' and IRS's shares are in the attribution, and filers' alternatives in the counterfactual shares."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(bn_uov_raw * bn_leverage_funging_adj + og_uov_raw * og_leverage_funging_adj + own_uov_raw * own_leverage_funging_adj + tax_uov_raw * tax_leverage_funging_adj + h211_uov_raw * h211_leverage_funging_adj) / (bn_uov_raw + og_uov_raw + own_uov_raw + tax_uov_raw + h211_uov_raw)",
+      "explainer": "Outcome-weighted average of the branches, for reading only (Convention 4); each branch applies its own."
+    },
+    {
+      "id": "bn_missing_data_adj",
+      "section": "adjustments",
+      "label": "Basic-needs grants: missing-data step",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Basic-needs grants: thin. United Way publishes neither who got the help nor how much (the basic-needs share of grants and the people reached are judgments), and the value is the help's cost against cash, not a measured effect. So it counts at the shared slider (templates.md Convention 12)."
+    },
+    {
+      "id": "og_missing_data_adj",
+      "section": "adjustments",
+      "label": "Other grants: missing-data step",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Other grants: thin. The effect is the research literature's on programmes of the same kind (tutoring, mentoring, pre-K, job training, coaching, Medicaid), not a measurement of the agencies United Way funds, and who got which service is a judgment. So it counts at the shared slider (templates.md Convention 12)."
+    },
+    {
+      "id": "own_missing_data_adj",
+      "section": "adjustments",
+      "label": "Own services: missing-data step",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Own services: thin, as the other grants: the literature's effects, not United Way's own evaluation of its programmes. So it counts at the shared slider (templates.md Convention 12)."
+    },
+    {
+      "id": "h211_missing_data_adj",
+      "section": "adjustments",
+      "label": "211: missing-data step",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "211: thin. The contacts are counted, but whether callers got help comes from self-reported follow-ups without a comparison group, and what 211 added is a judgment. So it counts at the shared slider (templates.md Convention 12)."
+    },
+    {
+      "id": "tax_missing_data_adj",
+      "section": "adjustments",
+      "label": "Tax help: missing-data step",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Tax help: thin. The returns and refunds are United Way's counts, but whether filers would have paid a preparer or missed credits is a judgment, not a measured counterfactual. So it counts at the shared slider (templates.md Convention 12)."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(bn_uov_raw * bn_missing_data_adj + og_uov_raw * og_missing_data_adj + own_uov_raw * own_missing_data_adj + tax_uov_raw * tax_missing_data_adj + h211_uov_raw * h211_missing_data_adj) / (bn_uov_raw + og_uov_raw + own_uov_raw + tax_uov_raw + h211_uov_raw)",
+      "explainer": "Outcome-weighted average of the branches, for reading only (Convention 4); every branch is thin, so each applies the shared slider."
     },
     {
       "id": "bn_total_adj",
       "section": "adjustments",
       "label": "Basic needs: all adjustments",
       "format": "percent",
-      "formula": "bn_evidence_adj * bn_counterfactual_adj * bn_attribution_share * implementation_adj * leverage_funging_adj"
+      "formula": "bn_evidence_adj * bn_counterfactual_adj * bn_attribution_share * implementation_adj * bn_leverage_funging_adj * bn_missing_data_adj"
     },
     {
       "id": "og_total_adj",
       "section": "adjustments",
       "label": "Other grants: all adjustments",
       "format": "percent",
-      "formula": "og_evidence_adj * og_counterfactual_adj * og_attribution_share * implementation_adj * leverage_funging_adj"
+      "formula": "og_evidence_adj * og_counterfactual_adj * og_attribution_share * implementation_adj * og_leverage_funging_adj * og_missing_data_adj"
     },
     {
       "id": "own_total_adj",
       "section": "adjustments",
       "label": "Own services: all adjustments",
       "format": "percent",
-      "formula": "own_evidence_adj * own_counterfactual_adj * own_attribution_share * implementation_adj * leverage_funging_adj"
+      "formula": "own_evidence_adj * own_counterfactual_adj * own_attribution_share * implementation_adj * own_leverage_funging_adj * own_missing_data_adj"
     },
     {
       "id": "tax_total_adj",
       "section": "adjustments",
       "label": "Tax help: all adjustments",
       "format": "percent",
-      "formula": "tax_evidence_adj * tax_counterfactual_adj * tax_attribution_share * implementation_adj * leverage_funging_adj"
+      "formula": "tax_evidence_adj * tax_counterfactual_adj * tax_attribution_share * implementation_adj * tax_leverage_funging_adj * tax_missing_data_adj"
     },
     {
       "id": "h211_total_adj",
       "section": "adjustments",
       "label": "211: all adjustments",
       "format": "percent",
-      "formula": "h211_evidence_adj * h211_counterfactual_adj * h211_attribution_share * implementation_adj * leverage_funging_adj"
+      "formula": "h211_evidence_adj * h211_counterfactual_adj * h211_attribution_share * implementation_adj * h211_leverage_funging_adj * h211_missing_data_adj"
     },
     {
       "id": "evidence_adj",
@@ -1157,11 +1474,11 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.1,
-        "high": 0.3
+        "best": 0.05,
+        "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Our judgment, effects not modelled, each with its sign: homelessness averted by rent help beyond the money (Evans et al. 2016) and any deaths it averts; lasting gains from early-learning, reading and youth programmes (counted only as a year's services; +); public-policy work for tax credits and 211 (+); the national office's administration of FEMA's Emergency Food and Shelter Program as fiscal agent (+, small); grants that keep weak agencies going out of habit (−). +10%, from −5% to +30%."
+      "explainer": "Our judgment, effects not modelled, each with its sign: homelessness averted by rent help beyond the money (Evans, Sullivan and Wallskog, Science 2016) and any deaths it averts (+); youth programmes' effects on crime and teen births beyond earnings (+; the earnings are modelled); public-policy work for tax credits and 211 (+); the national office's administration of FEMA's Emergency Food and Shelter Program as fiscal agent (+, small); grants that keep weak agencies going out of habit (−). +5%, from −5% to +20%."
     },
     {
       "id": "uov_bridged",
@@ -1270,51 +1587,9 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "formula": "dalys_per_dollar * donor_cost_share",
       "unit": "Years of healthy life / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on programmes with no outcome data at all, in the year modelled",
-      "format": "usd",
-      "explainer": "0: every programme's spending is in the chain above. The other grants and United Way's own services publish outputs but no network-wide outcomes, and their kind of work has an evidence base, so they are thin-data programmes on the chain with wide ranged evidence adjustments (og_evidence_adj, own_evidence_adj), not programmes with no data at all. These rows would also need comparable models of US social services to read live, which the site doesn't have yet.",
-      "formula": "0"
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "#givedirectly",
-      "unit": "units of value / $",
-      "explainer": "Not used (proxy_program_spend is 0, so it counts nothing): the skeleton's placeholder, since the site has no model of US social services to read yet."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "explainer": "The five branches' result per dollar of total cost, times the share of the full cost your dollar is credited with (donor_cost_share)."
     }
   ]
 }
