@@ -3,6 +3,7 @@
 // the evaluator's own site. Charity pages link here for "by <evaluator>".
 import Prose from "../../layouts/Prose.astro";
 import Headline from "../../components/Headline.tsx";
+import CharityLogo from "../../components/CharityLogo.tsx";
 import { lib, modelUrl } from "../../lib/data";
 import { assumptionValues, comparable, headline, modelsOf } from "../../engine/model";
 import { formatYears, plainModelName } from "../../lib/format";
@@ -30,6 +31,7 @@ const total = charities.reduce((s, x) => s + x.models.length, 0);
 ---
 
 <Prose title={owner.name} description={`Every charity ${owner.name} has a model of on charityevals, with its models.`}>
+  <CharityLogo slot="before-title" id={`owner-${owner.id}`} name={owner.name} size={40} lazy={false} className="ev-logo" />
   {owner.about && <p class="lede">{owner.about}</p>}
   <p>
     {charities.length} {charities.length === 1 ? "charity" : "charities"} and {total} {total === 1 ? "model" : "models"} on this site{owner.id === "charityevals" ? ", built by us" : ", re-implemented from its published analyses"}.
@@ -48,7 +50,7 @@ const total = charities.reduce((s, x) => s + x.models.length, 0);
         <tbody>
           {g.rows.map(({ c, models, lead }) => (
             <tr>
-              <th scope="row"><a href={`/${c.id}`}>{c.name}</a></th>
+              <th scope="row"><span class="ev-charity"><CharityLogo id={c.id} name={c.name} size={24} /><a href={`/${c.id}`}>{c.name}</a></span></th>
               <td><a href={modelUrl(lib, lead)}>{plainModelName(lead.name)}</a><span class="muted small"> · {date(lead.source?.published)}</span></td>
               <td class="num">{comparable(lib, lead) ? <span data-figure="headline" data-model={lead.id}>{formatYears(headline(lib, lead, av))}</span> : "–"}</td>
               <td>
@@ -66,6 +68,14 @@ const total = charities.reduce((s, x) => s + x.models.length, 0);
 </Prose>
 
 <style>
+  :global(.ev-logo) {
+    margin-bottom: var(--s3);
+  }
+  .ev-charity {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+  }
   .lede {
     font-size: 18px;
     color: var(--ink-2);

@@ -2,6 +2,7 @@
 // Every evaluator whose models are on the site, with how many charities and models each has here.
 import Prose from "../../layouts/Prose.astro";
 import { lib } from "../../lib/data";
+import CharityLogo from "../../components/CharityLogo.tsx";
 
 const counts = new Map<string, { charities: Set<string>; models: number }>();
 for (const m of lib.models.values()) {
@@ -21,7 +22,7 @@ const owners = [...lib.owners.values()].filter((o) => counts.has(o.id)).sort((a,
       const c = counts.get(o.id)!;
       return (
         <li>
-          <a href={`/evaluators/${o.id}`}>{o.name}</a> <span class="muted small">{c.charities.size} {c.charities.size === 1 ? "charity" : "charities"}, {c.models} {c.models === 1 ? "model" : "models"}</span>
+          <span class="ev-name"><CharityLogo id={`owner-${o.id}`} name={o.name} size={32} /><a href={`/evaluators/${o.id}`}>{o.name}</a></span> <span class="muted small">{c.charities.size} {c.charities.size === 1 ? "charity" : "charities"}, {c.models} {c.models === 1 ? "model" : "models"}</span>
           {o.about && <p class="small muted">{o.about}</p>}
         </li>
       );
@@ -35,6 +36,12 @@ const owners = [...lib.owners.values()].filter((o) => counts.has(o.id)).sort((a,
     padding: 0;
     display: grid;
     gap: var(--s4);
+  }
+  .ev-name {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    font-size: 18px;
   }
   .ev-list p {
     margin: var(--s1) 0 0;
